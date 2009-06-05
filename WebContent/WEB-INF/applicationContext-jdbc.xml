@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+    	<property name="dataSource" ref="dataSource"/>
+    </bean>
+    
+    <!-- Transaction manager for JDBC -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager" lazy-init="default" autowire="default" dependency-check="default">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    
+	<bean id="baseTransaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" abstract="true" lazy-init="true"> 
+        <property name="transactionManager" ref="transactionManager"/> 
+        <property name="proxyTargetClass" value="true"/> 
+        <property name="transactionAttributes"> 
+            <props> 
+                <prop key="get*">PROPAGATION_REQUIRED,readOnly</prop> 
+                <prop key="find*">PROPAGATION_REQUIRED,readOnly</prop> 
+                <prop key="load*">PROPAGATION_REQUIRED,readOnly</prop> 
+                <prop key="save*">PROPAGATION_REQUIRED</prop> 
+                <prop key="add*">PROPAGATION_REQUIRED</prop> 
+                <prop key="update*">PROPAGATION_REQUIRED</prop> 
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="del*">PROPAGATION_REQUIRED</prop>
+            </props> 
+        </property> 
+    </bean>
+    
+    <!-- 产品分类 -->
+    <bean id="productKindDao"  class="com.sw.cms.dao.ProductKindDAO">
+    	<property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+    
+    <!-- 产品 -->
+    <bean id="productDao"  class="com.sw.cms.dao.ProductDAO">
+    	<property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+    
+    <!-- 进货单 -->
+    <bean id="jhdDao" class="com.sw.cms.dao.JhdDAO">
+		<property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>    
+    
+    <!-- 用户管理 -->
+    <bean id="userDao"  class="com.sw.cms.dao.UserDAO">
+    	<property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>        
+    
+    <!-- 采购付款 -->
+    <bean id="cgfkDao"  class="com.sw.cms.dao.CgfkDAO">
+    	<property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>       
+    
+    <!-- 入库单 -->
+    <bean id="rkdDao"  class="com.sw.cms.dao.RkdDAO">
+    	<property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>           
+    
+    <!-- 库存 -->
+    <bean id="productKcDao"  class="com.sw.cms.dao.ProductKcDAO">
+    	<property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>  
+    
+    <!-- 仓库 -->
+    <bean id="storeDao"  class="com.sw.cms.dao.StoreDAO">
+    	<property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean> 
+    
+    <!-- 库库盘点 -->
+    <bean id="kcpdDao"  class="com.sw.cms.dao.KcpdDAO">
+    	<property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>     
+    
+    <!-- 出库单 -->
+    <bean id="ckdDao"  class="com.sw.cms.dao.CkdDAO">
+    	<property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>    
+    
+    <!-- 客户 -->
+    <bean id="clientsDao"  class="com.sw.cms.dao.ClientsDAO">
+    	<property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean> 
+    
+    <!-- 销收收款 -->
+    <bean id="xsskDao"  class="com.sw.cms.dao.XsskDAO">
+    	<property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>  
+    
+    <!-- 销售单 -->
+    <bean id="xsdDao"  class="com.sw.cms.dao.XsdDAO">
+    	<property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>      
+    
+    <!-- 零售单 -->
+    <bean id="lsdDao"  class="com.sw.cms.dao.LsdDAO">
+    	<property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>    
+    
+    <!-- 部门 -->
+    <bean id="deptDao"  class="com.sw.cms.dao.DeptDAO">
+    	<property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+    
+    <!-- 职业 -->
+    <bean id="positionDao"  class="com.sw.cms.dao.PositionDAO">
+    	<property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+    
+    <!-- 角色 -->
+    <bean id="roleDao"  class="com.sw.cms.dao.RoleDAO">
+    	<property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+    
+    <!-- 功能 -->
+    <bean id="funcDao"  class="com.sw.cms.dao.FuncDAO">
+    	<property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+    
+    <!-- 菜单 -->
+    <bean id="menuDao"  class="com.sw.cms.dao.MenuDAO">
+    	<property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+    
+    <!-- 退货单 -->
+    <bean id="thdDao"  class="com.sw.cms.dao.ThdDAO">
+    	<property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+    
+    <!-- 对账单 -->
+    <bean id="dzdDao"  class="com.sw.cms.dao.DzdDAO">
+    	<property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>   
+    
+    <!-- 账户信息 -->
+    <bean id="accountsDao"  class="com.sw.cms.dao.AccountsDAO">
+    	<property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>    
+    
+    <!-- 调拨申请 -->
+    <bean id="dbsqDao"  class="com.sw.cms.dao.DbsqDAO">
+    	<property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>   
+    
+    <!-- 库房调拨 -->
+    <bean id="kfdbDao"  class="com.sw.cms.dao.KfdbDAO">
+    	<property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>   
+    
+    <!-- 存货调价 -->
+    <bean id="chtjDao"  class="com.sw.cms.dao.ChtjDAO">
+    	<property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>  
+    
+    <!-- 其它收入 -->
+    <bean id="qtsrDao"  class="com.sw.cms.dao.QtsrDAO">
+    	<property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>    
+    
+    <!-- 其它支入 -->
+    <bean id="qtzcDao"  class="com.sw.cms.dao.QtzcDAO">
+    	<property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+    
+    <!-- 内部转账 -->
+    <bean id="nbzzDao"  class="com.sw.cms.dao.NbzzDAO">
+    	<property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+    
+    <!-- 首页所需查询 -->
+    <bean id="firstIndexDao"  class="com.sw.cms.dao.FirstIndexDAO">
+    	<property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+    
+    <!-- 应收统计 -->
+    <bean id="ystjDao"  class="com.sw.cms.dao.YstjDAO">
+    	<property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+    
+    <!-- 应付统计 -->
+    <bean id="yftjDao"  class="com.sw.cms.dao.YftjDAO">
+    	<property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+    
+    <!-- 平账 -->
+    <bean id="pzDao"  class="com.sw.cms.dao.PzDAO">
+    	<property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+    
+    <!-- 采购退货单 -->
+    <bean id="cgthdDao"  class="com.sw.cms.dao.CgthdDAO">
+    	<property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean> 
+    
+    <!-- 零售预收款 -->
+    <bean id="lsyskDao"  class="com.sw.cms.dao.LsyskDAO">
+    	<property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+    
+    <!-- 初始参数 -->
+    <bean id="initParamDao"  class="com.sw.cms.dao.InitParamDAO">
+    	<property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+    
+    <!-- 账户流水明细 -->
+    <bean id="accountDzdDao"  class="com.sw.cms.dao.AccountDzdDAO">
+    	<property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean> 
+    
+    <!-- 现金银行统计报表 -->
+    <bean id="cashBankDao"  class="com.sw.cms.dao.CashBankDAO">
+    	<property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+    
+    <!-- 销售明细报表 -->
+    <bean id="xsmxReportDao"  class="com.sw.cms.dao.XsmxReportDAO">
+    	<property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+    
+    <!-- 销售统计（按销售人员） -->
+    <bean id="xstjXsryDao"  class="com.sw.cms.dao.XstjXsryDAO">
+    	<property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+    
+    <!-- 销售统计（按客户） -->
+    <bean id="xstjClientDao"  class="com.sw.cms.dao.XstjClientDAO">
+    	<property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+    
+    <!-- 库存出入明细表 -->
+    <bean id="kcMxReportDao"  class="com.sw.cms.dao.KcMxReportDAO">
+    	<property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+    
+    <!-- 应收汇总、明细 -->
+    <bean id="ysmxReprotDao"  class="com.sw.cms.dao.YsmxReportDAO">
+    	<property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+    
+    <!-- 销售收款汇总统计 -->
+    <bean id="xsskHzReportDao"  class="com.sw.cms.dao.XsskHzReportDAO">
+    	<property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+    
+    <!-- 客户往来初始 -->
+    <bean id="clientWlInitDao"  class="com.sw.cms.dao.ClientWlInitDAO">
+    	<property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+    
+    <!-- 应付汇总、明细 -->
+    <bean id="yfHzMxDao"  class="com.sw.cms.dao.YfHzMxDAO">
+    	<property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+    
+    <!-- 采购付款汇总 -->
+    <bean id="cgfkHzReportDao"  class="com.sw.cms.dao.CgfkHzReportDAO">
+    	<property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+    
+    <!-- 销售订单汇总 -->
+    <bean id="xsdHzDao"  class="com.sw.cms.dao.XsdHzDAO">
+    	<property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+    
+    <!-- 货品销售汇总 -->
+    <bean id="hpxsHzDao"  class="com.sw.cms.dao.HpxsHzDAO">
+    	<property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+    
+    <!-- 客户往来对账单 -->
+    <bean id="clientWlDzdDao"  class="com.sw.cms.dao.ClientWlDzdDAO">
+    	<property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+    
+    <!-- 货品销售毛利汇总 -->
+    <bean id="hpxsMlHzDao"  class="com.sw.cms.dao.HpxsMlHzDAO">
+    	<property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+    
+    <!-- 货品采购汇总 -->
+    <bean id="cghzDao"  class="com.sw.cms.dao.CghzDAO">
+    	<property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+    
+    <!-- 员工管理 -->
+    <bean id="employeeDao"  class="com.sw.cms.dao.EmployeeDAO">
+    	<property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+    
+    <!-- 序列号管理 -->
+    <bean id="serialNumDao"  class="com.sw.cms.dao.SerialNumDAO">
+    	<property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+    
+    <!-- 内部公告 -->
+    <bean id="xxfbNbggDao" class="com.sw.cms.dao.XxfbNbggDAO">
+    	<property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+    
+    <!-- 代理商对账单 -->
+    <bean id="dlsDzdDao" class="com.sw.cms.dao.DlsDzdDAO">
+    	<property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+    
+    <!-- 系统初始设置 -->
+    <bean id="sysInitSetDao" class="com.sw.cms.dao.SysInitSetDAO">
+    	<property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+    
+    <!-- 数据字典设置 -->
+    <bean id="sjzdDao" class="com.sw.cms.dao.SjzdDAO">
+    	<property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+    
+    <!-- 库存初始化列表 -->
+    <bean id="productKcInitDao" class="com.sw.cms.dao.ProductKcInitDAO">
+    	<property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+    
+    <!-- 预收款处理 -->
+    <bean id="yushoukDao" class="com.sw.cms.dao.YushoukDAO">
+    	<property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+    
+    <!-- 预收冲应收 -->
+    <bean id="yushouToYingshouDao" class="com.sw.cms.dao.YushouToYingshouDAO">
+    	<property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>    
+    
+    <!-- 预付款处理 -->
+    <bean id="yufukDao" class="com.sw.cms.dao.YufukDAO">
+    	<property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+    
+    <!-- 预付冲应付 -->
+    <bean id="yufuToYingfuDao" class="com.sw.cms.dao.YufuToYingfuDAO">
+    	<property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+    
+    <!-- 商品序列号销售列表 -->
+    <bean id="productSerialNumXsHzDAO" class="com.sw.cms.dao.ProductSerialNumXsHzDAO">
+    	<property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+    
+    <!-- 费用申请 -->
+    <bean id="fysqDao" class="com.sw.cms.dao.FysqDAO">
+    	<property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>                                           
+     
+    <!-- 费用汇总 -->
+    <bean id="fytjReportDao" class="com.sw.cms.dao.FytjReportDAO">
+    	<property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+    
+    <!-- 系统消息 -->
+    <bean id="sysMsgDao" class="com.sw.cms.dao.SysMsgDAO">
+    	<property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+    <!-- 系统消息 -->
+    
+    <!-- 摊销付款 -->
+    <bean id="txfkDao" class="com.sw.cms.dao.TxfkDAO">
+    	<property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+    <!-- 摊销付款 -->
+    
+    <!-- 工分统计 -->
+    <bean id="gfReportDao" class="com.sw.cms.dao.GfReportDAO">
+    	<property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+    <!-- 工分统计 -->
+    
+    <!-- 字典解析 -->
+    <bean id="dataDisParseDao" class="com.sw.cms.dao.DataDisParseDAO" autowire="byName"/>
+    <!-- 字典解析 -->  
+    
+    <!-- 刷卡POS机设定 -->
+    <bean id="posTypeDao" class="com.sw.cms.dao.PosTypeDAO" autowire="byName"/>
+    <!-- 刷卡POS机设定 -->
+    
+    <!-- 盘点损溢处理 -->
+    <bean id="kcpdYkTblDao" class="com.sw.cms.dao.KcpdYkTblDAO" autowire="byName"/>
+    <!-- 盘点损溢处理 -->
+    
+    <!-- 月度利润表 -->
+    <bean id="monthlyGainDao" class="com.sw.cms.dao.MonthlyGainDAO" autowire="byName"/>
+    <!-- 月度利润表 -->    
+    
+	<!-- 发送短信 -->
+	<bean id="fsdxDao" class="com.sw.cms.dao.FsdxDAO">
+		<property name="jdbcTemplate" ref="jdbcTemplate"/>
+	</bean>   
+	
+    <!-- 货品销售分类汇总 -->
+    <bean id="hpflxsHzDao" class="com.sw.cms.dao.HpflxsHzDAO" autowire="byName"/>
+    <!-- 货品销售分类汇总 -->   
+    
+    <!-- 部门销售汇总 -->
+    <bean id="deptXshzDao" class="com.sw.cms.dao.DeptXshzDAO" autowire="byName"/>
+    <!-- 部门销售汇总 -->       	 
+                               
+</beans>
+
+
+
+

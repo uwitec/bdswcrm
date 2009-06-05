@@ -1,0 +1,314 @@
+body
+{
+	font-size: 12px;
+	color: #000000;
+	background:#FFFFFF;
+	left: 0px;
+	top: 0px;	
+	margin-top:2px;
+	margin-right:2px;
+	margin-bottom: 2px;
+	margin-left: 2px;
+	text-indent: 2pt;
+	text-decoration: blink;
+	SCROLLBAR-HIGHLIGHT-COLOR: #f5f9ff;
+	SCROLLBAR-SHADOW-COLOR: #828282;
+	SCROLLBAR-3DLIGHT-COLOR: #828282; 
+	SCROLLBAR-ARROW-COLOR: #797979; 
+	SCROLLBAR-TRACK-COLOR: #ececec; 
+}
+input
+{
+    font-size: 12px; 
+	text-indent:0px;
+	border:1 solid #B8B8B8;
+	margin-left:6px;
+	margin-right:6px;
+}
+span.a1
+{
+font-size: 12px;
+}
+select
+{
+	margin-left:6px;
+	margin-right:6px;
+}
+textarea
+{
+    font-size: 12px; 
+	text-indent:0px;
+	border:1 solid #B8B8B8;
+	margin-top:8px;
+	margin-left:6px;
+	margin-bottom:8px;
+}
+A.xxlb:link
+{
+    color:#000000;
+    TEXT-DECORATION: none;
+}
+A.xxlb:active                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+{
+    COLOR:#696969;
+    FONT-SIZE: 9pt;
+    TEXT-DECORATION:none;
+}
+A.xxlb:visited
+{
+	color:#696969;
+	TEXT-DECORATION: none;
+
+}
+A.xxlb:hover
+{
+    COLOR:#000000;
+    FONT-SIZE: 9pt; 
+    TEXT-DECORATION: underline
+}
+.css_button
+{
+	background-image: url(../images/button-l.gif);
+	width: 45px;
+	CURSOR: hand;
+	height:20px;
+	border:0px;
+}
+.css_button2
+{
+    background-image: url(../images/button-m.gif);
+	width: 70px; 
+    CURSOR: hand;
+    height:20px;
+	border:0px;
+}
+.css_button3
+{
+    background-image: url(../images/button-c.gif);
+	width: 100px; 
+    CURSOR: hand;
+    height:20px;
+	border:0px;
+}
+.css_button4
+{
+    background-image: url(../images/button-130.gif);
+	width: 130px; 
+    CURSOR: hand;
+    height:20px;
+	border:0px;
+}
+
+
+/***********************************/
+/* 样式类型：详细信息页面样式              */
+/* 适用范围：添加、编辑、查看页面             */
+/***********************************/
+table.chart_info
+{
+	 background-color: #FFFFFF; 
+	 border-collapse:collapse; 
+	 font-size: 12px;
+	 border-left:1 solid #D6D7D6;
+	 border-right:1 solid #D6D7D6;
+	 border-bottom:1 solid #D6D7D6;
+}
+table.chart_info thead td
+{
+	background-image:url(../images/light-bg.png);
+	height:35px;
+	text-align: center;
+	vertical-align:middle;
+	font-size: 12px;
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-right-color: #D8D8D8;
+	border-bottom:1 solid #D8D8D8;
+}
+table.chart_info td.a1
+{
+	background-color: #f6f6f6;
+	height:30px;	
+	text-align: center ;
+	font-size: 12px;
+	border-bottom:1 solid #D8D8D8;
+	border-right:1 solid #D8D8D8;
+}
+table.chart_info td.a2
+{
+	background-color: #FFFFFF;
+	height:30px;	
+	text-align: left ;
+	font-size: 12px;
+	margin-left: 10px;
+	text-indent: 3pt;
+	border-bottom:1 solid #D8D8D8;
+	border-right:1 solid #D8D8D8;
+}
+table.chart_info td.a3
+{
+	background-color: #FFFFFF;
+	height:30px;	
+	text-align: center ;
+	font-size: 12px;
+	border-bottom:1 solid #D8D8D8;
+	border-right:1 solid #D8D8D8;
+}
+/***********************************/
+/* 样式类型：详细信息页面样式              */
+/* 适用范围：添加、编辑、查看页面             */
+/***********************************/
+table.chart_index
+{
+	 background-color: #FFFFFF; 
+	 border-collapse:collapse; 
+	 font-size: 12px;
+	 border-left:1 solid #D6D7D6;
+	 border-right:1 solid #D6D7D6;
+	 border-bottom:1 solid #D6D7D6;
+}
+table.chart_index td.a1
+{
+	background-color: #f6f6f6;
+	height:30px;	
+	text-align: center ;
+	font-size: 12px;
+}
+table.chart_index td.a2
+{
+	background-color: #f6f6f6;
+	height:30px;	
+	text-align: left ;
+	font-size: 12px;
+	margin-left: 10px;
+	text-indent: 3pt;
+}
+table.chart_index td.a3
+{
+	background-color: #f6f6f6;
+	height:15px;	
+	text-align: left ;
+	font-size: 12px;
+	margin-left: 10px;
+	text-indent: 3pt;
+}
+
+/***********************************/
+/* 样式类型：详细信息页面样式              */
+/* 适用范围：添加、编辑、查看页面             */
+/***********************************/
+
+table.chart_list
+{
+	 background-color: #FFFFFF; 
+	 border-collapse:collapse; 
+	 font-size: 12px;
+	 border-left:1 solid #D6D7D6;
+	 border-right:1 solid #D6D7D6;
+	 border-bottom:1 solid #D6D7D6;
+}
+table.chart_list thead td
+{
+	background-image:url(../images/mailSubHeaderBg-grey.gif);
+	height:25px;
+	text-align: center;
+	vertical-align:middle;
+	font-size: 12px;
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-right-color: #D8D8D8;
+	border-bottom:1 solid #D8D8D8;
+	cursor: hand;
+}
+table.chart_list td.csstitle
+{
+	background-image:url(../images/head_top2bg.gif);
+	height:30px;	
+	border-top:1 solid #D6D7D6;
+	font-size: 12px;
+}
+table.chart_list td.search
+{
+	background-image:url(../images/layerPopupBg.gif);
+	height:35px;
+	font-size: 12px;
+}
+table.chart_list td.a1
+{
+	background-color: #FBFBFB;
+	height:25px;	
+	text-align: center ;
+	font-size: 12px;
+	border-bottom:1 solid #D8D8D8;
+	border-right:1 solid #D8D8D8;
+}
+table.chart_list td.a3
+{
+	background-color: #FBFBFB;
+	height:25px;	
+	text-align: right ;
+	font-size: 12px;
+	border-bottom:1 solid #D8D8D8;
+	border-right:1 solid #D8D8D8;
+}
+table.chart_list td.a4
+{
+	background-color: #FBFBFB;
+	height:25px;	
+	text-align: left ;
+	font-size: 12px;
+	text-indent: 2pt;
+	border-bottom:1 solid #D8D8D8;
+	border-right:1 solid #D8D8D8;
+}
+table.chart_list td.a2
+{
+	background-color: #FFFFFF;
+	height:25px;	
+	text-align: center ;
+	font-size: 12px;
+	border-bottom:1 solid #D8D8D8;
+	border-right:1 solid #D8D8D8;
+}
+table.chart_list tr.a1
+{
+	background-color: #FBFBFB;
+	height:25px;	
+	text-align: center ;
+	font-size: 12px;
+	cursor:hand;
+}
+table.chart_list tr.a2
+{
+	background-color: #EEEEEE;
+	height:25px;	
+	text-align: center ;
+	font-size: 12px;
+	cursor:hand;
+}
+table.chart_list td.page
+{
+	background-color: #E8E8E8;
+	height:25px;	
+	text-align: right;
+	font-size: 12px;
+	border-bottom:1 solid #D8D8D8;
+	border-right:1 solid #D8D8D8;
+}
+table.chart_list td.tree
+{
+	background-color: #FFFFFF;
+	height:25px;	
+	text-align: left ;
+	font-size: 12px;
+	border-bottom:1 solid #D8D8D8;
+	border-right:1 solid #D8D8D8;
+}
+.bjd_input {
+    font-size: 10pt;
+    height: 20px;
+    border: 0px solid #88C1DC;
+}
+table{
+	word-break:break-all;
+}

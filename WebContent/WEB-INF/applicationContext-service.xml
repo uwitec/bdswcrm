@@ -1,0 +1,527 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+
+    <!-- 进货单 -->
+    <bean id="jhdService"  parent="baseTransaction">
+        <property name="target">
+    		<bean class="com.sw.cms.service.JhdService" autowire="byName"/>
+    	</property>
+    </bean> 
+    
+    <!-- 采购付款 -->
+    <bean id="cgfkService"  parent="baseTransaction">
+        <property name="target">
+    		<bean class="com.sw.cms.service.CgfkService" autowire="byName"/>
+    	</property>
+    </bean>
+    
+    <!-- 用户管理 -->
+    <bean id="userService"  parent="baseTransaction">
+        <property name="target">
+    		<bean class="com.sw.cms.service.UserService" autowire="byName"/>
+    	</property>
+    </bean>    
+    
+    
+    <!-- 产品分类管理 -->
+    <bean id="productKindService"  parent="baseTransaction">
+        <property name="target">
+    		<bean class="com.sw.cms.service.ProductKindService" autowire="byName"/>
+    	</property>
+    </bean>       
+         
+    
+    <!-- 产品管理 -->     
+    <bean id="productService"  parent="baseTransaction">
+        <property name="target">
+    		<bean class="com.sw.cms.service.ProductService" autowire="byName"/>
+    	</property>
+    </bean>       
+    
+    
+    <!-- 入库单 -->
+    <bean id="rkdService" parent="baseTransaction">
+        <property name="target">
+    		<bean class="com.sw.cms.service.RkdService" autowire="byName"/>
+    	</property>
+    </bean>     
+    
+    
+    <!-- 库存管理 -->     
+    <bean id="productKcService"  parent="baseTransaction">
+        <property name="target">
+    		<bean class="com.sw.cms.service.ProductKcService" autowire="byName"/>
+    	</property>
+    </bean>  
+    
+    
+    <!-- 库存盘点 -->     
+    <bean id="kcpdService"  parent="baseTransaction">
+        <property name="target">
+    		<bean class="com.sw.cms.service.KcpdService" autowire="byName"/>
+    	</property>
+    </bean>   
+    
+    
+    <!-- 仓库管理-->     
+    <bean id="storeService"  parent="baseTransaction">
+        <property name="target">
+    		<bean class="com.sw.cms.service.StoreService" autowire="byName"/>
+    	</property>
+    </bean>         
+    
+    
+    <!-- 出库单管理-->     
+    <bean id="ckdService"  parent="baseTransaction">
+        <property name="target">
+    		<bean class="com.sw.cms.service.CkdService" autowire="byName"/>
+    	</property>
+    </bean>
+    
+    <!-- 客户管理-->     
+    <bean id="clientsService"  parent="baseTransaction">
+        <property name="target">
+    		<bean class="com.sw.cms.service.ClientsService" autowire="byName"/>
+    	</property>
+    </bean>                       
+    
+    
+    <!-- 销售单-->     
+    <bean id="xsdService"  parent="baseTransaction">
+        <property name="target">
+    		<bean class="com.sw.cms.service.XsdService" autowire="byName"/>
+    	</property>
+    </bean>      
+    
+    
+    <!-- 零售单-->     
+    <bean id="lsdService"  parent="baseTransaction">
+        <property name="target">
+    		<bean class="com.sw.cms.service.LsdService" autowire="byName"/>
+    	</property>
+    </bean> 
+    
+    
+    <!-- 角色-->     
+    <bean id="roleService"  parent="baseTransaction">
+        <property name="target">
+    		<bean class="com.sw.cms.service.RoleService" autowire="byName"/>
+    	</property>
+    </bean>   
+    
+    
+    <!-- 菜单-->     
+    <bean id="menuService"  parent="baseTransaction">
+        <property name="target">
+    		<bean class="com.sw.cms.service.MenuService" autowire="byName"/>
+    	</property>
+    </bean>  
+    
+    
+    <!-- 退货单 -->     
+    <bean id="thdService"  parent="baseTransaction">
+        <property name="target">
+    		<bean class="com.sw.cms.service.ThdService" autowire="byName"/>
+    	</property>
+    </bean>     
+    
+    
+    <!-- 对账单 -->     
+    <bean id="dzdService"  parent="baseTransaction">
+        <property name="target">
+    		<bean class="com.sw.cms.service.DzdService" autowire="byName"/>
+    	</property>
+    </bean>      
+    
+    
+    <!-- 账户 -->     
+    <bean id="accountsService"  parent="baseTransaction">
+        <property name="target">
+    		<bean class="com.sw.cms.service.AccountsService" autowire="byName"/>
+    	</property>
+    </bean> 
+    
+    <!-- 销售收款 -->     
+    <bean id="xsskService"  parent="baseTransaction">
+        <property name="target">
+    		<bean class="com.sw.cms.service.XsskService" autowire="byName"/>
+    	</property>
+    </bean>         
+    
+    <!-- 调拨申请 -->     
+    <bean id="dbsqService"  parent="baseTransaction">
+        <property name="target">
+    		<bean class="com.sw.cms.service.DbsqService" autowire="byName"/>
+    	</property>
+    </bean> 
+    
+    <!-- 库房调拨 -->     
+    <bean id="kfdbService"  parent="baseTransaction">
+        <property name="target">
+    		<bean class="com.sw.cms.service.KfdbService" autowire="byName"/>
+    	</property>
+    </bean>  
+    
+    <!-- 存货调价 -->     
+    <bean id="chtjService"  parent="baseTransaction">
+        <property name="target">
+    		<bean class="com.sw.cms.service.ChtjService" autowire="byName"/>
+    	</property>
+    </bean>
+    
+    <!-- 其它收入 -->     
+    <bean id="qtsrService"  parent="baseTransaction">
+        <property name="target">
+    		<bean class="com.sw.cms.service.QtsrService" autowire="byName"/>
+    	</property>
+    </bean>   
+    
+    <!-- 其它支入 -->     
+    <bean id="qtzcService"  parent="baseTransaction">
+        <property name="target">
+    		<bean class="com.sw.cms.service.QtzcService" autowire="byName"/>
+    	</property>
+    </bean>  
+    
+    <!-- 内部转账 -->     
+    <bean id="nbzzService"  parent="baseTransaction">
+        <property name="target">
+    		<bean class="com.sw.cms.service.NbzzService" autowire="byName"/>
+    	</property>
+    </bean>
+    
+    <!-- 首页查询 -->     
+    <bean id="firstIndexService"  parent="baseTransaction">
+        <property name="target">
+    		<bean class="com.sw.cms.service.FirstIndexService" autowire="byName"/>
+    	</property>
+    </bean>
+    
+    <!-- 应收统计 -->     
+    <bean id="ystjService"  parent="baseTransaction">
+        <property name="target">
+    		<bean class="com.sw.cms.service.YstjService" autowire="byName"/>
+    	</property>
+    </bean>
+    
+    <!-- 应付统计 -->     
+    <bean id="yftjService"  parent="baseTransaction">
+        <property name="target">
+    		<bean class="com.sw.cms.service.YftjService" autowire="byName"/>
+    	</property>
+    </bean>
+    
+    <!-- 平账 -->     
+    <bean id="pzService"  parent="baseTransaction">
+        <property name="target">
+    		<bean class="com.sw.cms.service.PzService" autowire="byName"/>
+    	</property>
+    </bean>
+    
+    <!-- 采购退货单 -->     
+    <bean id="cgthdService"  parent="baseTransaction">
+        <property name="target">
+    		<bean class="com.sw.cms.service.CgthdService" autowire="byName"/>
+    	</property>
+    </bean> 
+    
+    <!-- 零售预收款 -->     
+    <bean id="lsyskService"  parent="baseTransaction">
+        <property name="target">
+    		<bean class="com.sw.cms.service.LsyskService" autowire="byName"/>
+    	</property>
+    </bean> 
+    
+    <!-- 初始化参数 -->     
+    <bean id="initParamService"  parent="baseTransaction">
+        <property name="target">
+    		<bean class="com.sw.cms.service.InitParamService" autowire="byName"/>
+    	</property>
+    </bean>
+    
+    <!-- 现金银行统计报表 -->     
+    <bean id="cashBankService"  parent="baseTransaction">
+        <property name="target">
+    		<bean class="com.sw.cms.service.CashBankService" autowire="byName"/>
+    	</property>
+    </bean>
+    
+    <!-- 销售明细统计报表 -->     
+    <bean id="xsmxReportService"  parent="baseTransaction">
+        <property name="target">
+    		<bean class="com.sw.cms.service.XsmxReportService" autowire="byName"/>
+    	</property>
+    </bean>
+    
+    <!-- 销售统计（按销售人员） -->     
+    <bean id="xstjXsryService"  parent="baseTransaction">
+        <property name="target">
+    		<bean class="com.sw.cms.service.XstjXsryService" autowire="byName"/>
+    	</property>
+    </bean>
+    
+    <!-- 销售统计（按客户） -->     
+    <bean id="xstjClientService"  parent="baseTransaction">
+        <property name="target">
+    		<bean class="com.sw.cms.service.XstjClientService" autowire="byName"/>
+    	</property>
+    </bean>
+    
+    <!-- 库存出入明细表 -->     
+    <bean id="kcMxReportService"  parent="baseTransaction">
+        <property name="target">
+    		<bean class="com.sw.cms.service.KcMxReportService" autowire="byName"/>
+    	</property>
+    </bean>
+    
+    <!-- 应收汇总、明细统计表 -->     
+    <bean id="ysmxReportService"  parent="baseTransaction">
+        <property name="target">
+    		<bean class="com.sw.cms.service.YsmxReportService" autowire="byName"/>
+    	</property>
+    </bean>
+    
+    <!-- 应收明细统计表 -->     
+    <bean id="xsskHzReportService"  parent="baseTransaction">
+        <property name="target">
+    		<bean class="com.sw.cms.service.XsskHzReportService" autowire="byName"/>
+    	</property>
+    </bean>
+    
+    <!-- 客户往来初始 -->     
+    <bean id="clientWlInitService"  parent="baseTransaction">
+        <property name="target">
+    		<bean class="com.sw.cms.service.ClientWlInitService" autowire="byName"/>
+    	</property>
+    </bean>
+    
+    <!-- 应付汇总、明细 -->     
+    <bean id="yfHzMxService"  parent="baseTransaction">
+        <property name="target">
+    		<bean class="com.sw.cms.service.YfHzMxService" autowire="byName"/>
+    	</property>
+    </bean>
+    
+    <!-- 采购付款汇总 -->     
+    <bean id="cgfkHzReportService"  parent="baseTransaction">
+        <property name="target">
+    		<bean class="com.sw.cms.service.CgfkHzReportService" autowire="byName"/>
+    	</property>
+    </bean>
+    
+    <!-- 销售订单汇总 -->     
+    <bean id="xsdHzService"  parent="baseTransaction">
+        <property name="target">
+    		<bean class="com.sw.cms.service.XsdHzService" autowire="byName"/>
+    	</property>
+    </bean>
+    
+    <!-- 货品销售汇总 -->     
+    <bean id="hpxsHzService"  parent="baseTransaction">
+        <property name="target">
+    		<bean class="com.sw.cms.service.HpxsHzService" autowire="byName"/>
+    	</property>
+    </bean>
+    
+    <!-- 客户往来对账单 -->     
+    <bean id="clientWlDzdService"  parent="baseTransaction">
+        <property name="target">
+    		<bean class="com.sw.cms.service.ClientWlDzdService" autowire="byName"/>
+    	</property>
+    </bean>
+    
+    <!-- 货品销售毛利汇总 -->     
+    <bean id="hpxsMlHzService"  parent="baseTransaction">
+        <property name="target">
+    		<bean class="com.sw.cms.service.HpxsMlHzService" autowire="byName"/>
+    	</property>
+    </bean>
+    
+    <!-- 采购汇总 -->     
+    <bean id="cghzService"  parent="baseTransaction">
+        <property name="target">
+    		<bean class="com.sw.cms.service.CghzService" autowire="byName"/>
+    	</property>
+    </bean>
+    
+    <!-- 员工管理 -->     
+    <bean id="employeeService"  parent="baseTransaction">
+        <property name="target">
+    		<bean class="com.sw.cms.service.EmployeeService" autowire="byName"/>
+    	</property>
+    </bean>
+    
+    <!-- 序列号管理 -->     
+    <bean id="serialNumService"  parent="baseTransaction">
+        <property name="target">
+    		<bean class="com.sw.cms.service.SerialNumService" autowire="byName"/>
+    	</property>
+    </bean>
+    
+    <!-- Ajax Dwr 服务 -->     
+    <bean id="dwrService"  parent="baseTransaction">
+        <property name="target">
+    		<bean class="com.sw.cms.service.DwrService" autowire="byName"/>
+    	</property>
+    </bean>
+    <!-- Ajax Dwr 服务 -->
+    
+    <!-- 内部公告 -->     
+    <bean id="xxfbNbggService"  parent="baseTransaction">
+        <property name="target">
+    		<bean class="com.sw.cms.service.XxfbNbggService" autowire="byName"/>
+    	</property>
+    </bean>
+    <!-- 内部公告 -->
+    
+    <!-- 代理商对账单 -->     
+    <bean id="dlsDzdService"  parent="baseTransaction">
+        <property name="target">
+    		<bean class="com.sw.cms.service.DlsDzdService" autowire="byName"/>
+    	</property>
+    </bean>
+    <!-- 代理商对账单 -->
+    
+    <!-- 系统初始设置 -->     
+    <bean id="sysInitSetService"  parent="baseTransaction">
+        <property name="target">
+    		<bean class="com.sw.cms.service.SysInitSetService" autowire="byName"/>
+    	</property>
+    </bean>
+    <!-- 系统初始设置 -->
+    
+    <!-- 数据字典 -->     
+    <bean id="sjzdService"  parent="baseTransaction">
+        <property name="target">
+    		<bean class="com.sw.cms.service.SjzdService" autowire="byName"/>
+    	</property>
+    </bean>
+    <!-- 数据字典 -->
+    
+    <!-- 部门管理 -->     
+    <bean id="deptService"  parent="baseTransaction">
+        <property name="target">
+    		<bean class="com.sw.cms.service.DeptService" autowire="byName"/>
+    	</property>
+    </bean>
+    <!-- 部门管理 -->
+    
+    <!-- 库存初始列表 -->     
+    <bean id="productKcInitService"  parent="baseTransaction">
+        <property name="target">
+    		<bean class="com.sw.cms.service.ProductKcInitService" autowire="byName"/>
+    	</property>
+    </bean>
+    <!-- 库存初始列表 -->
+    
+    <!-- 预收冲应收 -->     
+    <bean id="yushouToYingshouService"  parent="baseTransaction">
+        <property name="target">
+    		<bean class="com.sw.cms.service.YushouToYingshouService" autowire="byName"/>
+    	</property>
+    </bean>
+    <!-- 预收冲应收 -->    
+    
+    <!-- 预付冲应付 -->     
+    <bean id="yufuToYingfuService"  parent="baseTransaction">
+        <property name="target">
+    		<bean class="com.sw.cms.service.YufuToYingfuService" autowire="byName"/>
+    	</property>
+    </bean>
+    <!-- 预付冲应付 -->
+    
+    <!-- 商品序列号销售列表 -->     
+    <bean id="productSerialNumXsHzService"  parent="baseTransaction">
+        <property name="target">
+    		<bean class="com.sw.cms.service.ProductSerialNumXsHzService" autowire="byName"/>
+    	</property>
+    </bean>
+    <!-- 商品序列号销售列表 -->
+    
+    <!-- 费用申请 -->     
+    <bean id="fysqService"  parent="baseTransaction">
+        <property name="target">
+    		<bean class="com.sw.cms.service.FysqService" autowire="byName"/>
+    	</property>
+    </bean>
+    <!-- 费用申请 -->
+    
+    <!-- 费用统计 -->     
+    <bean id="fytjReportService"  parent="baseTransaction">
+        <property name="target">
+    		<bean class="com.sw.cms.service.FytjReportService" autowire="byName"/>
+    	</property>
+    </bean>
+    <!-- 费用统计 -->
+    
+    <!-- 系统消息 -->     
+    <bean id="sysMsgService"  parent="baseTransaction">
+        <property name="target">
+    		<bean class="com.sw.cms.service.SysMsgService" autowire="byName"/>
+    	</property>
+    </bean>
+    <!-- 系统消息 -->                            
+    
+    <!-- 摊销付款 -->     
+    <bean id="txfkService"  parent="baseTransaction">
+        <property name="target">
+    		<bean class="com.sw.cms.service.TxfkService" autowire="byName"/>
+    	</property>
+    </bean>
+    <!-- 摊销付款 -->
+    
+    <!-- 工分统计 -->     
+    <bean id="gfReportService"  parent="baseTransaction">
+        <property name="target">
+    		<bean class="com.sw.cms.service.GfReportService" autowire="byName"/>
+    	</property>
+    </bean>
+    <!-- 工分统计 --> 
+    
+    <!-- 刷卡POS机设定 -->     
+    <bean id="posTypeService"  parent="baseTransaction">
+        <property name="target">
+    		<bean class="com.sw.cms.service.PosTypeService" autowire="byName"/>
+    	</property>
+    </bean>
+    <!-- 刷卡POS机设定 -->
+    
+    <!-- 月度利润 -->     
+    <bean id="monthlyGainService"  parent="baseTransaction">
+        <property name="target">
+    		<bean class="com.sw.cms.service.MonthlyGainService" autowire="byName"/>
+    	</property>
+    </bean>
+    <!-- 月度利润 -->     
+    
+    <!-- 发送短信 -->
+    <bean id="engine"  class="com.sw.cms.sendsms.SMSEngine" factory-method="getSMSEngine" autowire="byName"/>  
+    
+    <!-- 发送短信 -->
+    <bean id="fsdxService" parent="baseTransaction">
+      <property name="target">
+          <bean class="com.sw.cms.service.FsdxService" autowire="byName"/>
+      </property>
+    </bean>
+    
+    <!-- 货品销售分类汇总 -->
+    <bean id="hpflxsHzService" parent="baseTransaction">
+      <property name="target">
+          <bean class="com.sw.cms.service.HpflxsHzService" autowire="byName"/>
+      </property>
+    </bean> 
+    
+    <!-- 部门销售类汇总 -->
+    <bean id="deptXshzService" parent="baseTransaction">
+      <property name="target">
+          <bean class="com.sw.cms.service.DeptXshzService" autowire="byName"/>
+      </property>
+    </bean>                           
+               
+</beans>
+
+
+
+

@@ -1,0 +1,30 @@
+.menu_down{
+position:absolute;
+top: 0;
+border-left: 1px solid black;
+border-top: 1px solid black; /*Top border width. Should match height of .ddcolortabsline above*/
+border-bottom: 1px solid black;
+font:normal 12px Arial;
+line-height:18px;
+z-index:100;
+background-color: white;
+width: 258px;
+visibility: hidden;
+}
+.menu_down a{
+width:80px;
+text-indent: 5px;
+border-top: 0 solid #678b3f;
+border-right: 1px solid black; /*THEME CHANGE HERE*/
+padding: 2px 0;
+}
+.msg_back{
+border-left: 1px solid #918d8d;
+border-top: 1px solid #918d8d;
+border-right: 1px solid #918d8d; 
+border-bottom: 1px solid #918d8d;
+font:normal 12px Arial;
+line-height:18px;
+background-color: white;
+width: 350px;
+}

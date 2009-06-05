@@ -1,0 +1,833 @@
+/* ================================
+    CSS STYLES FOR DotNetNuke
+   ================================
+*/   
+
+
+/* background color for the content part of the pages */
+.Body
+{
+    background-color:#F4FAFA;
+}
+
+
+.ContentPane  
+{
+	background-color:White;
+}
+
+
+/* GENERAL */
+/* style for module titles */
+.Head   {
+    font-family: Tahoma, Arial, Helvetica;
+    font-size:  15px;
+    font-weight:    normal;
+    color: #003366;
+}
+
+/* style of item titles on edit and admin pages */
+.SubHead    {
+    font-family: Tahoma, Arial, Helvetica;
+    font-size:  12px;
+    font-weight:    bold;
+    color: #003366;
+}
+
+.Title
+{  
+   font-size:16px;
+   font-weight:bold;
+   font-family:"宋体";
+   color:#000;
+}
+
+/* text style used for most text rendered by modules */
+.Normal
+{
+    font-family: Tahoma, Arial, Helvetica;
+    font-size: 11px;
+    font-weight: normal;
+    line-height:1.5;     
+}
+
+/* text style used for textboxes in the admin and edit pages, for Nav compatibility */
+.NormalTextBox
+{
+    font-family: Tahoma, Arial, Helvetica;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.NormalRed
+{
+    font-family: Tahoma, Arial, Helvetica;
+    font-size: 12px;
+    font-weight: bold;
+    color: #ff0000;
+}
+
+.NormalGreen
+{
+    font-family: Tahoma, Arial, Helvetica;
+    font-size: 12px;
+    font-weight: bold;
+    color: Green;
+}
+
+.NormalWhite
+{
+    font-family: Tahoma, Arial, Helvetica;
+    font-size: 12px;   
+    color: #FFFFFF
+}
+    
+/* hyperlink style for buttons and link buttons used in the portal admin pages */
+A.NormalWhite:link {
+    text-decoration:    underline;
+    color: #FFFFFF;
+}
+
+A.NormalWhite:visited  {
+    text-decoration:    underline;
+    color: #FFFFFF;
+}
+
+A.NormalWhite:active   {
+    text-decoration:    underline;
+    color: #FFFFFF;
+}
+
+A.NormalWhite:hover    {
+    text-decoration:    underline;
+    color: #FFFFFF;
+}
+
+.NormalBold
+{
+    font-family: Tahoma, Arial, Helvetica;
+    font-size: 12px;
+    font-weight: bold
+}
+
+.NormalTitle
+{
+	color: #E45D04;
+	font-size: 14px;
+}
+
+/* style of alternatingitem */
+.NormalGridHeader	
+{
+	color: #A3A3A3;	
+	font-size:12px;
+}
+
+
+.DesktopPane  
+{
+	background-color:#E4E3E3;
+}
+
+
+.ModuleBackGround
+{
+	background-color:#F6F5F5;
+}
+
+/* text style for buttons and link buttons used in the portal admin pages */
+.CommandButton     {
+    font-family: Tahoma, Arial, Helvetica;
+    font-size: 11px;
+    font-weight: normal;
+    color:#003366;
+}
+
+
+    
+/* hyperlink style for buttons and link buttons used in the portal admin pages */
+A.CommandButton:link {
+    text-decoration:    underline;
+    color: #003366;
+}
+
+A.CommandButton:visited  {
+    text-decoration:    underline;
+    color: #003366;
+}
+
+A.CommandButton:active   {
+    text-decoration:    underline;
+    color: #003366;
+}
+
+A.CommandButton:hover    {
+    text-decoration:    underline;
+    color: #ff0000;
+}
+    
+/* GENERIC */
+H1  {
+    font-family: Tahoma, Arial, Helvetica;
+    font-size:  20px;
+    font-weight:    normal;
+    color: #666644;
+}
+
+H2  {
+    font-family: Tahoma, Arial, Helvetica;
+    font-size:  20px;
+    font-weight:    normal;
+    color: #666644;
+}
+
+H3  {
+    font-family: Tahoma, Arial, Helvetica;
+    font-size:  12px;
+    font-weight:    normal;
+    color: #003366;
+}
+
+H4  {
+    font-family: Tahoma, Arial, Helvetica;
+    font-size:  12px;
+    font-weight:    normal;
+    color: #003366;
+}
+
+H5, DT  {
+    font-family: Tahoma, Arial, Helvetica;
+    font-size:  11px;
+    font-weight:    bold;
+    color: #003366;
+}
+
+H6  {
+    font-family: Tahoma, Arial, Helvetica;
+    font-size:  11px;
+    font-weight:    bold;
+    color: #003366;
+}
+
+TFOOT, THEAD    {
+    font-family: Tahoma, Arial, Helvetica;
+    font-size:  12px;
+    color: #003366;
+}
+
+TH  {
+    vertical-align: baseline;
+    font-family: Tahoma, Arial, Helvetica;
+    font-size:  12px;
+    font-weight:    bold;
+    color: #003366;
+}
+select 
+{ 
+	background:#FFF5EE; 
+	position:relative;left:-2px;top:-3px;font-size:12px;width:183px;line-height:14px;border:0px; 
+
+} 
+
+A:link  {
+    text-decoration:    none;
+    color:  #003366;
+}
+
+A:visited   {
+    text-decoration:    none;
+    color:  #003366;
+}
+
+A:active    {
+    text-decoration:    none;
+    color:  #003366;
+}
+
+A:hover {
+    text-decoration:    underline;
+    color:  #ff0000;
+}
+
+SMALL   {
+    font-size:  8px;
+}
+
+BIG {
+    font-size:  14px;
+}
+
+BLOCKQUOTE, PRE {
+    font-family:    Lucida Console, monospace;
+}
+
+
+UL LI   {
+    list-style-type:    square ;
+}
+
+UL LI LI    {
+    list-style-type:    disc;
+}
+
+UL LI LI LI {
+    list-style-type:    circle;
+}
+
+OL LI   {
+    list-style-type:    decimal;
+}
+
+OL OL LI    {
+    list-style-type:    lower-alpha;
+}
+
+OL OL OL LI {
+    list-style-type:    lower-roman;
+}
+
+HR {
+    color: dimgrey;
+    height:1px;
+    text-align:left
+}
+
+
+/* MODULE-SPECIFIC */
+/* text style for reading messages in Discussion */    
+.Message    {
+    font-family: Tahoma, Arial, Helvetica;
+    font-size: 11px;
+    font-weight: normal;
+    font-size: 11px;
+    background-color: #eeeeee
+}   
+/* style of toolbarline */
+.Line	
+{
+	background-color:Red;
+	border-color:#E4E3E3;	
+	border-bottom-style:solid;	
+}
+
+/* style of alternatingitem */
+.DataAlternatingItemStyle	
+{
+	/*background-color:#fff7f0;*/
+	background-color:#F9F7F8;
+	font-size:12px;
+}
+
+/* style of datagridItem */
+.GridItemStyle	
+{	
+	font-size:12px;
+}
+
+/* style of datagrid header */
+.DataGridHeader	
+{
+	/*background-color:#FEE5D6;*/
+	/*background-color:#BFCAE6;*/
+	background-image: url(../images/GridHeader_Background.GIF);
+	background-repeat: repeat-x;
+	font-size:13px;
+	font-weight:bold;
+	border-bottom:1px solid #b1c3ed;
+	border-right:1px solid #b1c3ed;
+	border-color:black;	
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#FEE5D6, endColorstr=#ebf0fa);	
+	
+}
+
+
+/* style of editpane */
+.Editpane	
+{
+	width:113px;
+	height:8px;
+	text-align:left;
+	color: #003366;
+	
+}
+
+/* text style used for most text rendered by modules */
+.PopMenu
+{
+    font-family: Tahoma, Arial, Helvetica;
+    font-size: 12px;
+    font-weight: normal;
+	color:#157E08;
+}
+
+
+
+.ToolBarCss
+{
+   /* background-color:#FEE5D6;*/
+   background-image: url(../images/GridHeader_Background.GIF);
+   background-repeat: repeat-x;
+    
+}
+
+.ctlMenubackcolor	
+{
+	background-color:#CC0000;
+}
+
+.UnderLineTable
+{
+	font-size:12px;
+	border-bottom: #D0D0CF 1px solid;
+}
+
+.CompanyTitle
+{
+	font-weight: bold;
+	color: #FFFFFF;
+	font-size: 30px;
+}
+
+.DesktopService
+{   
+	font-size: 18px;
+	font-weight:bold;
+	color: #000000;
+}
+
+.MainTitle
+{
+	font-size:30px;
+	font-weight:bold;
+	color: #0B3951;
+}
+
+
+.TitleMenu
+{ 
+  font-family:"宋体";
+  font-size:12px;
+  color:#FFFFFF;
+  padding-top:5px;
+}
+
+A.TitleMenu:link {
+   text-decoration:none;
+   color:#FFFFFF;
+   padding-top:5px;
+    
+}
+
+A.TitleMenu:visited  {
+   text-decoration:none;
+   color:#FFFFFF;
+   padding-top:5px;
+
+}
+
+A.TitleMenu:active   {
+   text-decoration:none;
+   color:#FFFFFF;
+   padding-top:5px;
+}
+
+A.TitleMenu:hover    {
+   text-decoration:underline ;
+   color:#F5A70A;
+   padding-top:5px;
+}
+
+
+.LoginOut
+{ 
+  font-family:"宋体";
+  font-size:13px;
+  font-weight:bold;
+  color:#000000;
+  padding-top:8px;
+}
+
+A.LoginOut:link {
+   text-decoration:none;
+   color:#000000;
+   padding-top:8px;
+    
+}
+
+A.LoginOut:visited  {
+   text-decoration:none;
+   color:#000000;
+   padding-top:8px;
+
+}
+
+A.LoginOut:active   {
+   text-decoration:none;
+   color:#000000;
+   padding-top:8px;
+}
+
+A.LoginOut:hover    {
+   text-decoration:none;
+   color:#666666;
+   padding-top:8px;
+}
+
+
+
+.MoreLink
+{ 
+  font-family:"宋体";
+  font-size:12px;
+  color:#E62A05;
+  padding-top:8px;
+}
+
+A.MoreLink:link {
+   text-decoration:none;
+   color:#E62A05;
+   padding-top:8px;
+    
+}
+
+A.MoreLink:visited  {
+   text-decoration:none;
+   color:#E62A05;
+   padding-top:8px;
+
+}
+
+A.MoreLink:active   {
+   text-decoration:none;
+   color:#E62A05;
+   padding-top:8px;
+}
+
+A.MoreLink:hover    {
+   text-decoration:none;
+   color:#FF7459;
+   padding-top:8px;
+}
+
+.PathTitle
+{ 
+    text-decoration:none;
+    font-family:"宋体";
+    font-size:14px;
+	font-weight:bold;
+	line-height:20px;
+	color:#FF6600;
+}
+
+A.PathTitle:link {
+   text-decoration:none;
+   color:#FF6600;
+}
+
+A.PathTitle:visited  {
+   text-decoration:none;
+   color:#FF6600;
+}
+
+A.PathTitle:active   {
+  text-decoration:none;
+   color:#BFBEBD;
+}
+
+A.PathTitle:hover    {
+    color:#BFBEBD;
+   border-bottom: #FF6600 1px dotted;
+}
+
+
+.Admin_MenuBox{
+	font-size:14px;
+	float:left;
+	display:block;
+	cursor:pointer;
+	color:#949694;
+	font-weight:bold;
+}
+
+.Admin_MenuBox.hover{
+	font-size:14px;
+	color:#739242;
+	font-weight:bold;
+}
+
+.Admin_ContentBox{
+	font-size:14px;
+	clear:both;
+	margin-top:5px;
+	padding-top:5px;
+}
+
+
+.Admin_Background
+{
+ FILTER: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr=#F8F8F8, EndColorStr=#E1E1E1); 
+}
+
+.Admin_Title
+{
+	font-family: Tahoma, Arial, Helvetica;
+   font-size:24px;
+   color:#48669F;
+   font-weight:bold;
+   padding-left:5px;
+   padding-right:5px;
+   line-height:24px;
+}
+
+.Admin_SubTitle
+{
+   font-family: Tahoma, Arial, Helvetica;
+   font-size:14px;   
+   color:#48669F;
+   font-weight:bold;
+   padding-left:8px;
+   padding-right:8px;
+   line-height:16px;
+}
+
+.Admin_SubLine
+{
+   font-size:14px;
+   font-family:"宋体";
+   color:#3C5077;
+   font-weight:bold;
+   padding-left:8px;
+   padding-right:8px;
+   line-height:18px;
+}
+
+.Admin_Text
+{  
+   font-size:12px;
+   color:#3C5077;
+   padding-left:8px;
+   padding-right:8px;
+   line-height:16px;
+}
+
+
+.Login_leftBackground
+{
+	background:url(../images/login_bg_left.gif);
+}
+
+
+
+.Login_rightBackground
+{
+	background:url(../images/login_bg_right.gif);
+}
+
+
+.Module_Head
+{
+	background-color:#FEE5D6;
+	background-position:top left;
+	background-repeat:repeat-y;
+	border-bottom:1px solid #FEE5D6;
+	border-right:1px solid #FEE5D6;	
+	font-size:12px;
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#FEE5D6, endColorstr=#FBB481);
+}
+
+.RequireCss
+{	
+	background-color:#FFF5EE;
+	border-color:Gainsboro;
+	border-width:1px;
+	border-style:Solid;
+	font-family: Tahoma, Arial, Helvetica;
+    font-size: 12px;
+    font-weight: normal;
+}
+.ReadOnlyCss
+{
+	border-color:Gainsboro;
+	border-width:1px;
+	border-style:Solid;
+	background-color:WhiteSmoke;
+	color:Gray;
+    font-family: Tahoma, Arial, Helvetica;
+    font-size: 12px;
+    font-weight: normal;	
+	
+}
+
+.EnabledCss
+{
+	border-color:Gainsboro;
+	border-width:1px;
+	border-style:Solid;
+	font-family: Tahoma, Arial, Helvetica;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+
+.contextShield
+{
+	width:100%;
+	height:100%;
+	z-index:1000;
+	position:absolute;
+	top:0;
+	left:0;
+	display:block; 
+	background-color:#fff;
+	filter:progid:DXImageTransform.Microsoft.Alpha(style=0,opacity=10);
+}
+.ul li
+{
+	list-style-type:none;
+}
+
+.divbox
+{
+	padding:1px 5px;
+	border:solid 1px #949DBC;	
+	background-color:#949DBC;
+
+}
+
+p.NormalRedThin
+{
+	padding:0 10px;
+	font-family: Tahoma, Arial, Helvetica;
+    font-size: 12px;
+    font-weight:lighter;
+    color: #ff0000;
+	width:90%;
+
+}
+
+.msgInfo_Off
+{
+	display:none;
+}
+
+
+.msgInfo_On
+{
+	padding:10px;
+	font-size:11px;
+	display: block;
+	border: solid 2px #EE660E;	
+	width:80%;
+	z-index:100;
+	position:absolute;
+	top:expression((this.parentElement.offsetHeight-this.offsetHeight)/2);
+	left:expression((this.parentElement.offsetWidth-this.offsetWidth)/2);
+	background-color:#fff;
+}
+.msg_On
+{
+	display:block;
+	padding:10px;
+	font-size:11px;
+	border: solid 2px #EE660E;	
+	width:30%;
+	z-index:1001;
+	position:absolute;
+	top:expression((this.parentElement.offsetHeight-this.offsetHeight)/2);
+	left:expression((this.parentElement.offsetWidth-this.offsetWidth)/2);
+	background-color:#fff;
+}
+
+p.NormalRedThin
+{
+	padding:0 10px;
+	font-family: Tahoma, Arial, Helvetica;
+    font-size: 12px;
+    font-weight:lighter;
+    color: #ff0000;
+	width:90%;
+
+}
+
+.cInput
+{
+    BORDER-LEFT-STYLE:none;
+	BORDER-RIGHT-STYLE: none;
+	BORDER-TOP-STYLE: none;
+	 border-bottom: 1px solid #F96406;
+    font-family:"宋体";
+    font-size:12px;
+	color:#3F3F3F;
+	padding-top:3px;
+}
+
+.ServerTable
+{
+	font-size: 12px;
+	padding-bottom: 3px;
+	color: black;
+	vertical-align:text-top;
+	padding-top: 3px;
+	font-family: 宋体;
+	border-collapse:collapse;
+    border:0;	
+}
+.NormalBold
+{
+    font-family:"宋体";
+    font-size:12px;
+	font-weight:bold;
+	line-height:24px;
+	color:#5B5B5B;
+}
+
+.NormalService
+{
+   font-size:12px;
+   font-family:"宋体";
+   color:#353842;
+   padding-left:15px;
+   line-height:20px;
+}
+
+
+.S_TableLR
+{
+    border-right: 1px solid #A0CCF6;
+    border-left: 1px solid #A0CCF6;
+}
+
+.S_TableLL
+{
+    border-left: 1px solid #FFA200;
+}
+
+.S_TableTitle
+{
+   font-size:12px;
+   font-family:"宋体";
+   color:#000000;
+   width:115px;
+   padding-left:5px;
+}
+
+.C_TableLLR
+{
+    border-left: 1px solid #FFA200;
+	border-right: 1px solid #FFA200;
+}
+.Route_line
+{
+   font-size:12px;
+   font-family:"宋体";
+   color:#E4E8E8;
+}
+.css_button2
+{
+    background-image: url(../images/button-m.gif);
+	width: 70px; 
+    CURSOR: hand;
+    height:20px;
+	border:0px;
+}
+

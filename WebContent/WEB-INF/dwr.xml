@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dwr PUBLIC "-//GetAhead Limited//DTD Direct Web Remoting 2.0//EN" "http://getahead.ltd.uk/dwr/dwr20.dtd">
+
+<dwr>
+	<allow>	
+		<create creator="spring" javascript="dwrService">  
+			<param name="beanName" value="dwrService"/>
+			<include method="getProductObjBySerialNum"/>
+			<include method="productIsExist"/>
+			<include method="serialNumIsExist"/>
+			<include method="updateProductKc"/>
+			<include method="getProudctKcNums"/>
+			<include method="genKcqc"/>
+			<include method="chkSerialNumIsExist"/>
+		</create>
+		<convert converter="bean" match="com.sw.cms.model.Product">
+			<param name="include" value="productId,productName,productXh,price,lsbj,qz_serial_num,khcbj,gf" />
+		</convert>
+		
+		<create javascript="msgService" creator="spring">
+			<param name="beanName" value="sysMsgService"/>
+			<include method="isHasMsgByUser"/>
+			<include method="saveFwMsg"/>
+		</create>		
+	</allow>
+</dwr>

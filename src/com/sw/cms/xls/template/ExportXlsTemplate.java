@@ -1,0 +1,190 @@
+package com.sw.cms.xls.template;
+
+import java.io.File;
+
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+
+import jxl.Workbook;
+import jxl.format.Alignment;
+import jxl.format.VerticalAlignment;
+import jxl.write.WritableCellFormat;
+import jxl.write.WritableFont;
+import jxl.write.WritableSheet;
+import jxl.write.WritableWorkbook;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+public abstract class ExportXlsTemplate {
+	
+	protected transient final Log log = LogFactory.getLog(getClass());
+	
+	private WritableCellFormat ft_title = null;              //表头单元格格式
+	
+	private WritableCellFormat ft_item_center = null;        //单元格居中
+	private WritableCellFormat ft_item_center_bold = null;   //单元格居中黑体
+	
+	private WritableCellFormat ft_item_left = null;        //单元格左对齐
+	private WritableCellFormat ft_item_left_bold = null;   //单元格左对齐黑体
+	
+	private WritableCellFormat ft_item_right = null;       //单元格右对齐
+	private WritableCellFormat ft_item_right_bold = null;  //单元格右对齐黑体
+	
+	/**
+	 * 根据查询结果写excel文件
+	 * @param request
+	 * @param sheet
+	 */
+	public abstract void writeExcelFile(HttpServletRequest request,WritableSheet sheet);
+	
+	/**
+	 * 创建excel文件，用当前时间戳做为文件名
+	 * @param request
+	 * @param servletContext
+	 * @return
+	 */
+	public String getXlsFile(HttpServletRequest request,ServletContext servletContext){
+		
+		try{
+			String rootPath = servletContext.getRealPath("/");
+			
+			long curTime = System.currentTimeMillis();
+			String fileName = rootPath + "xls/" + (curTime+"") + ".xls";
+			
+			//打开文件 
+	        WritableWorkbook book = Workbook.createWorkbook(new File(fileName));
+	        //生成名为“统计结果”的工作表，参数0表示这是第一页 
+	        WritableSheet sheet  =  book.createSheet( "统计结果" ,  0 );			
+	        
+	        //写excel文件
+	        this.writeExcelFile(request,sheet);
+	        
+	        book.write();
+            book.close();
+	        return fileName;
+		}catch(Exception ex){
+			log.info("生成excel出错：" + ex);
+		}
+		return null;
+	}
+
+	/**
+	 * 取报表标题单元格格式
+	 * @return
+	 */
+	public WritableCellFormat getFt_title() {
+		try{
+			ft_title = new WritableCellFormat();
+			ft_title.setFont(new WritableFont(WritableFont.TIMES, 16 ,WritableFont.BOLD));
+			ft_title.setAlignment(Alignment.CENTRE);
+			ft_title.setVerticalAlignment(VerticalAlignment.CENTRE);
+		}catch(Exception e){
+			log.info(e);
+		}
+		return ft_title;
+	}
+
+
+	/**
+	 * 单元格居中
+	 * @return
+	 */
+	public WritableCellFormat getFt_item_center() {
+		try{
+			ft_item_center = new WritableCellFormat();
+			ft_item_center.setFont(new WritableFont(WritableFont.TIMES, 10 ,WritableFont.NO_BOLD));
+			ft_item_center.setAlignment(Alignment.CENTRE);
+			ft_item_center.setVerticalAlignment(VerticalAlignment.CENTRE);
+		}catch(Exception e){
+			
+		}
+		return ft_item_center;
+	}
+	
+	
+	/**
+	 * 单元格居中且黑体
+	 * @param ft_item_bold
+	 */
+	public WritableCellFormat getFt_item_center_bold() {
+		try{
+			ft_item_center_bold = new WritableCellFormat();
+			ft_item_center_bold.setFont(new WritableFont(WritableFont.TIMES, 10 ,WritableFont.BOLD));
+			ft_item_center_bold.setAlignment(Alignment.CENTRE);
+			ft_item_center_bold.setVerticalAlignment(VerticalAlignment.CENTRE);
+		}catch(Exception e){
+			log.info(e);
+		}
+		return ft_item_center_bold;
+	}
+
+
+	/**
+	 * 单元格左对齐
+	 * @return
+	 */
+	public WritableCellFormat getFt_item_left() {
+		try{
+			ft_item_left = new WritableCellFormat();
+			ft_item_left.setFont(new WritableFont(WritableFont.TIMES, 10 ,WritableFont.NO_BOLD));
+			ft_item_left.setAlignment(Alignment.LEFT);
+			ft_item_left.setVerticalAlignment(VerticalAlignment.CENTRE);
+		}catch(Exception e){
+			log.info(e);
+		}
+		return ft_item_left;
+	}
+	
+	
+	/**
+	 * 单元格左对齐且黑体
+	 * @return
+	 */
+	public WritableCellFormat getFt_item_left_bold() {
+		try{
+			ft_item_left_bold = new WritableCellFormat();
+			ft_item_left_bold.setFont(new WritableFont(WritableFont.TIMES, 10 ,WritableFont.BOLD));
+			ft_item_left_bold.setAlignment(Alignment.LEFT);
+			ft_item_left_bold.setVerticalAlignment(VerticalAlignment.CENTRE);
+		}catch(Exception e){
+			log.info(e);
+		}
+		return ft_item_left_bold;
+	}
+
+
+	/**
+	 * 单元格右对齐
+	 * @return
+	 */
+	public WritableCellFormat getFt_item_right() {
+		try{
+			ft_item_right = new WritableCellFormat();
+			ft_item_right.setFont(new WritableFont(WritableFont.TIMES, 10 ,WritableFont.NO_BOLD));
+			ft_item_right.setAlignment(Alignment.RIGHT);
+			ft_item_right.setVerticalAlignment(VerticalAlignment.CENTRE);
+		}catch(Exception e){
+			log.info(e);
+		}
+		return ft_item_right;
+	}
+
+	
+	/**
+	 * 单元格右对齐且黑体
+	 * @return
+	 */
+	public WritableCellFormat getFt_item_right_bold() {
+		try{
+			ft_item_right_bold = new WritableCellFormat();
+			ft_item_right_bold.setFont(new WritableFont(WritableFont.TIMES, 10 ,WritableFont.BOLD));
+			ft_item_right_bold.setAlignment(Alignment.RIGHT);
+			ft_item_right_bold.setVerticalAlignment(VerticalAlignment.CENTRE);
+		}catch(Exception e){
+			log.info(e);
+		}
+		return ft_item_right_bold;
+	}
+
+}

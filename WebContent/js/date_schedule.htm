@@ -1,0 +1,30 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0046)file://F:\hrl\newdownload\ioffice\日期选择.htm -->
+<!-- saved from url=(0054)http://www.eustc.com/ioffice/masterref/CalendarDlg.htm --><HTML><HEAD><TITLE>日期选择</TITLE>
+<META content="text/html; charset=GBK" http-equiv=Content-Type>
+<META content="MSHTML 5.00.3315.2870" name=GENERATOR><style type="text/css"><!--
+-->
+</style>
+<LINK rel="stylesheet" href="css/style-main.css" type="text/css"></head>
+<BODY bgColor=color7 onload=fload()>
+<SCRIPT src="datejsschedule/calendar.script">
+</SCRIPT>
+
+<SCRIPT>
+function fload()
+{
+	fPopCalendar(document.all.txt1, document.all.txt1);
+}
+
+function fkeydown()
+{
+	if(event.keyCode==27){
+		event.returnValue = null;
+		window.returnValue = null;
+		window.close();
+	}
+}
+
+document.onkeydown=fkeydown;
+</SCRIPT>
+<INPUT id=txt1 style="DISPLAY: none"> </BODY></HTML>

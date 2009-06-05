@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+ 
+    <bean id="securityInterceptor" class="com.sw.cms.interceptor.SecurityInterceptor" scope="prototype" autowire="byName"/>
+    
+    <bean id="productKindAction" class="com.sw.cms.action.ProductKindAction" scope="prototype" autowire="byName"/>
+    
+    <bean id="productAction" class="com.sw.cms.action.ProductAction" scope="prototype" autowire="byName"/>
+    
+    <bean id="jhdAction" class="com.sw.cms.action.JhdAction" scope="prototype" autowire="byName"/>
+    
+    <bean id="userAction" class="com.sw.cms.action.UserAction" scope="prototype" autowire="byName"/>
+    
+    <bean id="cgfkAction" class="com.sw.cms.action.CgfkAction" scope="prototype" autowire="byName"/>
+    
+    <bean id="rkdAction" class="com.sw.cms.action.RkdAction" scope="prototype" autowire="byName"/>
+    
+    <bean id="productKcAction" class="com.sw.cms.action.ProductKcAction" scope="prototype" autowire="byName"/>
+    
+    <bean id="kcpdAction" class="com.sw.cms.action.KcpdAction" scope="prototype" autowire="byName"/>
+    
+    <bean id="storeAction" class="com.sw.cms.action.StoreAction" scope="prototype" autowire="byName"/>    
+    
+	<bean id="ckdAction" class="com.sw.cms.action.CkdAction" scope="prototype" autowire="byName"/>    
+    
+	<bean id="clientsAction" class="com.sw.cms.action.ClientsAction" scope="prototype" autowire="byName"/>
+
+	<bean id="xsdAction" class="com.sw.cms.action.XsdAction" scope="prototype" autowire="byName"/>
+    
+	<bean id="lsdAction" class="com.sw.cms.action.LsdAction" scope="prototype"  autowire="byName"/>    
+    
+	<bean id="roleAction" class="com.sw.cms.action.RoleAction" scope="prototype" autowire="byName"/>    
+    
+	<bean id="menuAction" class="com.sw.cms.action.MenuAction" scope="prototype" autowire="byName"/>
+    
+	<bean id="thdAction" class="com.sw.cms.action.ThdAction" scope="prototype" autowire="byName"/>    
+    
+	<bean id="dzdAction" class="com.sw.cms.action.DzdAction" scope="prototype" autowire="byName"/>    
+    
+	<bean id="accountsAction" class="com.sw.cms.action.AccountsAction" scope="prototype" autowire="byName"/>
+	
+	<bean id="xsskAction" class="com.sw.cms.action.XsskAction" scope="prototype" autowire="byName"/>
+	
+	<bean id="dbsqAction" class="com.sw.cms.action.DbsqAction" scope="prototype" autowire="byName"/>
+	
+	<bean id="kfdbAction" class="com.sw.cms.action.KfdbAction" scope="prototype" autowire="byName"/>
+	
+	<bean id="chtjAction" class="com.sw.cms.action.ChtjAction" scope="prototype" autowire="byName"/>
+	
+	<bean id="qtsrAction" class="com.sw.cms.action.QtsrAction" scope="prototype" autowire="byName"/>
+	
+	<bean id="qtzcAction" class="com.sw.cms.action.QtzcAction" scope="prototype" autowire="byName"/>
+	
+	<bean id="nbzzAction" class="com.sw.cms.action.NbzzAction" scope="prototype" autowire="byName"/>
+	
+	<bean id="firstIndexAction" class="com.sw.cms.action.FirstIndexAction" scope="prototype" autowire="byName"/>
+	
+	<bean id="ystjAction" class="com.sw.cms.action.YstjAction" scope="prototype" autowire="byName"/>
+	
+	<bean id="yftjAction" class="com.sw.cms.action.YftjAction" scope="prototype" autowire="byName"/>
+	
+	<bean id="pzAction" class="com.sw.cms.action.PzAction" scope="prototype" autowire="byName"/>
+	
+	<bean id="cgthdAction" class="com.sw.cms.action.CgthdAction" scope="prototype" autowire="byName"/>
+	
+	<bean id="lsyskAction" class="com.sw.cms.action.LsyskAction" scope="prototype" autowire="byName"/>
+	
+	<bean id="cashBankAction" class="com.sw.cms.action.CashBankAction" scope="prototype" autowire="byName"/>
+	
+	<bean id="xsmxReportAction" class="com.sw.cms.action.XsmxReportAction" scope="prototype" autowire="byName"/>
+	
+	<bean id="xstjXsryAction" class="com.sw.cms.action.XstjXsryAction" scope="prototype" autowire="byName"/>
+	
+	<bean id="xstjClientAction" class="com.sw.cms.action.XstjClientAction" scope="prototype" autowire="byName"/>
+	
+	<bean id="kcMxReportAction" class="com.sw.cms.action.KcMxReportAction" scope="prototype" autowire="byName"/>	
+	
+	<bean id="ysmxReportAction" class="com.sw.cms.action.YsmxReportAction" scope="prototype" autowire="byName"/>
+	
+	<bean id="xsskHzReportAction" class="com.sw.cms.action.XsskHzReportAction" scope="prototype" autowire="byName"/>
+	
+	<bean id="clientWlInitAction" class="com.sw.cms.action.ClientWlInitAction" scope="prototype" autowire="byName"/>
+	
+	<bean id="yfHzMxAction" class="com.sw.cms.action.YfHzMxAction" scope="prototype" autowire="byName"/>
+	
+	<bean id="cgfkHzReportAction" class="com.sw.cms.action.CgfkHzReportAction" scope="prototype" autowire="byName"/>
+	
+	<bean id="xsdHzAction" class="com.sw.cms.action.XsdHzAction" scope="prototype" autowire="byName"/>
+	
+	<bean id="hpxsHzAction" class="com.sw.cms.action.HpxsHzAction" scope="prototype" autowire="byName"/>
+	
+	<bean id="clientWlDzdAction" class="com.sw.cms.action.ClientWlDzAction" scope="prototype" autowire="byName"/>
+	
+	<bean id="cghzAction" class="com.sw.cms.action.CghzAction" scope="prototype" autowire="byName"/>
+	
+	<bean id="employeeAction" class="com.sw.cms.action.EmployeeAction" scope="prototype" autowire="byName"/>
+	
+	<bean id="serialNumAction" class="com.sw.cms.action.SerialNumAction" scope="prototype" autowire="byName"/>	
+	
+	<bean id="xxfbNbggAction" class="com.sw.cms.action.XxfbNbggAction" scope="prototype" autowire="byName"/>
+	
+	<bean id="dlsDzdAction" class="com.sw.cms.action.DlsDzdAction" scope="prototype" autowire="byName"/>
+	
+	<bean id="sysInitSetAction" class="com.sw.cms.action.SysInitSetAction" scope="prototype" autowire="byName"/>
+	
+	<bean id="sjzdAction" class="com.sw.cms.action.SjzdAction" scope="prototype" autowire="byName"/>
+	
+	<bean id="deptAction" class="com.sw.cms.action.DeptAction" scope="prototype" autowire="byName"/>
+
+	<bean id="productKcInitAction" class="com.sw.cms.action.ProductKcInitAction" scope="prototype" autowire="byName"/>	
+	
+	<bean id="yushouToYingshouAction" class="com.sw.cms.action.YushouToYingshouAction" scope="prototype" autowire="byName"/>
+	
+	<bean id="yufuToYingfuAction" class="com.sw.cms.action.YufuToYingfuAction" scope="prototype" autowire="byName"/>
+	
+	<bean id="productSerialNumXsHzAction" class="com.sw.cms.action.ProductSerialNumXsHzAction" scope="prototype" autowire="byName"/>
+	
+	<bean id="fysqAction" class="com.sw.cms.action.FysqAction" scope="prototype" autowire="byName"/>	
+	
+	<bean id="fytjReportAction" class="com.sw.cms.action.FytjReportAction" scope="prototype" autowire="byName"/>
+	
+	<bean id="sysMsgAction" class="com.sw.cms.action.SysMsgAction" scope="prototype" autowire="byName"/>
+	
+	<bean id="txfkAction" class="com.sw.cms.action.TxfkAction" scope="prototype" autowire="byName"/>	
+	
+	<bean id="gfReportAction" class="com.sw.cms.action.GfReportAction" scope="prototype" autowire="byName"/>	
+	
+	<bean id="posTypeAction" class="com.sw.cms.action.PosTypeAction" scope="prototype" autowire="byName"/>	
+	
+	<bean id="monthlyGainAction" class="com.sw.cms.action.MonthlyGainAction" scope="prototype" autowire="byName"/>
+	
+	<bean id="fsdxAction" class="com.sw.cms.action.FsdxAction" scope="prototype" autowire="byName"/>
+	
+	<bean id="hpflxsHzAction" class="com.sw.cms.action.HpflxsHzAction" scope="prototype" autowire="byName"/>
+	
+	<bean id="deptXshzAction" class="com.sw.cms.action.DeptXshzAction" scope="prototype" autowire="byName"/>
+	
+</beans>

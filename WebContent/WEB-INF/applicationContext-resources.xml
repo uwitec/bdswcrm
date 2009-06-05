@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jee="http://www.springframework.org/schema/jee"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+            http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.0.xsd">
+            
+            
+    <!-- Properties files -->
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:init.properties</value>
+            </list>
+        </property>
+    </bean>            
+
+    <!-- JNDI DataSource for J2EE environments -->
+    <!--<jee:jndi-lookup id="dataSource" jndi-name="java:comp/env/jdbc/mydb"/>-->
+
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="${database.driver}"/>
+        <property name="url" value="${database.url}"/>
+        <property name="username" value="${database.username}"/>
+        <property name="password" value="${database.password}"/>
+        <property name="maxActive" value="100"/>
+        <property name="maxIdle" value="30"/>
+        <property name="maxWait" value="1000"/>
+        <property name="defaultAutoCommit" value="true"/>
+        <property name="removeAbandoned" value="true"/>
+        <property name="removeAbandonedTimeout" value="60"/>
+    </bean>
+    
+    
+    <!-- e-mail -->
+    <bean id="sendMail" class="com.sw.cms.sendmail.SendMail">
+    	<property name="stmpHost" value="${mail.hostname}"/>
+    	<property name="name" value="${mail.username}"/>
+    	<property name="password" value="${mail.password}"/>
+    	<property name="from" value="${mail.from}"/>
+    </bean>
+    
+    
+     <!-- system source -->
+    <bean id="sysSource" class="com.sw.cms.source.SysSource">
+    	<property name="page_size" value="${page.size}"/>
+    	<property name="page_size2" value="${page.size2}"/>
+    	<property name="expireDay" value="${msg.expireday}"/>
+    </bean>
+    
+    <!-- 利用quartz调度任务 -->
+    
+    <!-- 生成期初JOB -->
+    <bean id="initJob" class="org.springframework.scheduling.quartz.JobDetailBean">
+    	<property name="jobClass">
+    		<value>com.sw.cms.quartz.InitParamJob</value>
+    	</property>
+    	<property name="jobDataAsMap">
+    		<map>
+    			<entry key="initParamService">
+    				<ref bean="initParamService"/>
+    			</entry>
+    		</map>
+    	</property>
+    </bean>
+    <!-- 期初调度计划触发器 -->
+    <bean id="cronInitTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+    	<property name="jobDetail">
+    		<ref bean="initJob"/>
+    	</property>
+    	<property name="cronExpression">
+    		<value>30 0 0 * * ?</value>
+    	</property>
+    </bean>
+    
+    
+    <!-- 运行任务计划 -->
+    <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+    	<property name="triggers">
+    		<list>
+    			<ref bean="cronInitTrigger"/>
+    		</list>
+    	</property>
+    </bean>
+    
+    
+    
+    <!-- 导出Excel文件处理类 -->
+    
+    <!-- 出入库汇总 -->
+    <bean id="exportProductKcOutInResult" class="com.sw.cms.xls.ExportProductKcOutInResult" autowire="byName"/>
+    <!-- 库存数量汇总 -->
+    <bean id="exportProductKcNumsResult" class="com.sw.cms.xls.ExportProductKcNumsResult" autowire="byName"/>
+    <!-- 零售库存数量汇总 -->
+    <bean id="exportProductLsKcNumsResult" class="com.sw.cms.xls.ExportProductLsKcNumsResult" autowire="byName"/>    
+    <!-- 库存金额汇总 -->
+    <bean id="exportProductKcjeResult" class="com.sw.cms.xls.ExportProductKcjeResult" autowire="byName"/>
+    <!-- 客户往来对账单 -->
+    <bean id="exportClientWlDzdResult" class="com.sw.cms.xls.ExportClientWlDzdResult" autowire="byName"/>
+    <!-- 货品销售汇总 -->
+    <bean id="exportHpxsHzResult" class="com.sw.cms.xls.ExportHpxsHzResult" autowire="byName"/>
+    <!-- 货品销售毛利汇总 -->
+    <bean id="exportHpxsMlHzResult" class="com.sw.cms.xls.ExportHpxsMlHzResult" autowire="byName"/>      
+
+</beans>

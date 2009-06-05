@@ -1,0 +1,88 @@
+body
+{
+	margin:0;
+	padding:0;
+	font-size:12px;
+}
+.InitNav li
+{
+	list-style: none;
+	width: 15%;
+	margin:0;
+	padding: 0;	
+	float:left;
+	border: solid 1px Teal;
+	text-align:center;
+}
+.InitNav li a 
+{
+	width:100%;
+	text-decoration:none;
+	color:Yellow!important;		
+}
+.InitNav li a:hover
+{
+	color:White!important;
+	filter:blur(strength=5);
+}
+.InitNavSel
+{
+	background-color:#1d5609;
+	border: solid 1px #1d5609!important;
+}
+.InitNavUlSel
+{
+	background-color:Teal;
+}
+
+.Transparent
+{
+	position:absolute;   
+	visibility:inherit;   
+	top:0px;   
+	left:0px;   
+	width:100%;   
+	height:100%;   
+	background-color:#000; 
+	filter:progid:DXImageTransform.Microsoft.Alpha(style=0,opacity=60);
+}
+
+.Transparentdiv
+{
+	position:absolute;
+	z-index:100;
+	width:50%;
+	height:60%;
+	top:20%;
+	left:25%;
+	background-color:White;
+}
+
+.unTranspanrent
+{
+	display:none;
+}
+
+
+.UpdateTransparent
+{
+	position:absolute;   
+	visibility:inherit;   
+	top:0px;   
+	left:0px;   
+	width:100%;   
+	height:100%;   
+	background-color:#000; 
+	filter:progid:DXImageTransform.Microsoft.Alpha(style=0,opacity=40);
+}
+
+.UpdateTransparentdiv
+{
+	position:absolute;
+	z-index:100;
+	width:20%;
+	height:80px;
+	top:40%;
+	left:40%;		
+	background:url(../images/Update_loading.gif) #fff no-repeat 50% 50%; 	
+}

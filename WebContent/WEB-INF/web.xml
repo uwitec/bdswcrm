@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID" version="2.4"
+	xmlns="http://java.sun.com/xml/ns/j2ee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+	<display-name>crm_big</display-name>
+
+    <!-- Context Configuration locations for Spring XML files -->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>
+            /WEB-INF/applicationContext-*.xml
+            /WEB-INF/action-servlet.xml
+        </param-value>
+    </context-param>
+
+    <filter>
+        <filter-name>encodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+        <init-param>
+            <param-name>forceEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+
+    <filter>
+        <filter-name>webwork</filter-name>
+        <filter-class>com.opensymphony.webwork.dispatcher.FilterDispatcher</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>encodingFilter</filter-name>
+        <url-pattern>*.html</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>encodingFilter</filter-name>
+        <url-pattern>*.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>encodingFilter</filter-name>
+        <url-pattern>/DownLoadXlsServlet</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>encodingFilter</filter-name>
+        <url-pattern>/UploadFile</url-pattern>
+    </filter-mapping>        
+
+ 
+    <filter-mapping>
+        <filter-name>webwork</filter-name>
+        <url-pattern>*.html</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>webwork</filter-name>
+        <url-pattern>*.jsp</url-pattern>
+    </filter-mapping> 
+    <filter-mapping>
+        <filter-name>webwork</filter-name>
+        <url-pattern>/webwork/*</url-pattern>
+    </filter-mapping>        
+
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener> 
+    
+    <servlet>
+        <servlet-name>action</servlet-name>
+        <servlet-class>com.opensymphony.webwork.dispatcher.ServletDispatcher</servlet-class>
+        <load-on-startup>2</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>action</servlet-name>
+        <url-pattern>*.html</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+    	<servlet-name>initContext</servlet-name>
+    	<servlet-class>com.sw.cms.servlet.ServletContextInit</servlet-class>
+    	<load-on-startup>5</load-on-startup>
+    </servlet>
+    
+	<servlet>
+        <servlet-name>img</servlet-name>
+        <servlet-class>com.sw.cms.servlet.AuthImage</servlet-class>
+    </servlet> 
+    <servlet-mapping>
+        <servlet-name>img</servlet-name>
+		<url-pattern>/showImage</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>dwr</servlet-name>
+        <servlet-class>uk.ltd.getahead.dwr.DWRServlet</servlet-class>
+        <init-param>
+            <param-name>debug</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <load-on-startup>2</load-on-startup>
+    </servlet>
+    <servlet>
+    	<description>DownLoadXlsServlet</description>
+    	<display-name>DownLoadXlsServlet</display-name>
+    	<servlet-name>DownLoadXlsServlet</servlet-name>
+    	<servlet-class>com.sw.cms.xls.down.DownLoadXlsServlet</servlet-class>
+    </servlet>
+    <servlet>
+    	<display-name>UploadFile</display-name>
+    	<servlet-name>UploadFile</servlet-name>
+    	<servlet-class>com.sw.cms.servlet.UploadFile</servlet-class>
+    </servlet>
+	<servlet-mapping>
+		<servlet-name>dwr</servlet-name>
+		<url-pattern>/dwr/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>DownLoadXlsServlet</servlet-name>
+		<url-pattern>/DownLoadXlsServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>UploadFile</servlet-name>
+		<url-pattern>/UploadFile</url-pattern>
+	</servlet-mapping>
+
+    <session-config>
+        <session-timeout>60</session-timeout>
+    </session-config>
+    
+	<jsp-config>
+	  <taglib>
+	    <taglib-uri>/WEB-INF/crm-taglib.tld</taglib-uri>
+	    <taglib-location>/WEB-INF/crm-taglib.tld</taglib-location>
+	  </taglib>
+	</jsp-config>    
+
+    <welcome-file-list>
+        <welcome-file>login.jsp</welcome-file>
+    </welcome-file-list>
+
+    <error-page>
+        <error-code>500</error-code>
+        <location>/error.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>400</error-code>
+        <location>/error.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>403</error-code>
+        <location>/error.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/error.jsp</location>
+    </error-page>
+</web-app>
