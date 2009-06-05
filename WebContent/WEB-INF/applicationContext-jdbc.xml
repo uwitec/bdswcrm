@@ -398,7 +398,16 @@
     
     <!-- 部门销售汇总 -->
     <bean id="deptXshzDao" class="com.sw.cms.dao.DeptXshzDAO" autowire="byName"/>
-    <!-- 部门销售汇总 -->       	 
+    <!-- 部门销售汇总 -->
+    
+     <!-- 客户联系人 -->
+     <bean id="clientsLinkmanDao" class="com.sw.cms.dao.ClientsLinkmanDAO">
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+     </bean>
+     <!-- 客户跟进记录 -->
+     <bean id="clientsFollowDao" class="com.sw.cms.dao.ClientsFollowDAO">
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+     </bean>        	 
                                
 </beans>
 

@@ -486,6 +486,47 @@
         <action name="selectClient" class="clientsAction" method="listSel">
             <result name="success">/WEB-INF/pages/client/selClient.jsp</result>
         </action>
+        <action name="descClient" class="clientsAction" method="descClient">
+            <result name="success">/WEB-INF/pages/client/client_desc.jsp</result>
+        </action> 
+        <action name="viewClient" class="clientsAction" method="listView">
+            <result name="success">/WEB-INF/pages/client/client_view.jsp</result>
+        </action>
+        <action name="addLinkman" class="clientsAction" method="addLinkman">
+            <result name="success">/WEB-INF/pages/client/linkman_add.jsp</result>
+        </action>
+        <action name="saveLinkman" class="clientsAction" method="saveLinkman">
+            <result name="success">/WEB-INF/pages/msg.jsp</result>
+            <result name="input">/WEB-INF/pages/client/linkman_add.jsp</result>
+             <result name="cancel" type="redirect">addLinkman.html</result>
+        </action>
+        <action name="editLinkman" class="clientsAction" method="editLinkman">
+            <result name="success">/WEB-INF/pages/client/linkman_edit.jsp</result>
+        </action>
+        <action name="updateLinkman" class="clientsAction" method="updateLinkman">
+             <result name="success">/WEB-INF/pages/msg.jsp</result>
+             <result name="input">/WEB-INF/pages/client/linkman_edit.jsp</result>
+             <result name="cancel" type="redirect">editLinkman.html</result>
+        </action>
+        <action name="deleteLinkman" class="clientsAction" method="deleteLinkman">
+              <result name="success" type="redirect">viewClient.html?id=${clients_id}</result>
+        </action>
+        <action name="addFollow" class="clientsAction" method="addFollow">
+            <result name="success">/WEB-INF/pages/client/follow_add.jsp</result>
+        </action>
+        <action name="saveFollow" class="clientsAction" method="saveFollow">
+            <result name="success">/WEB-INF/pages/msg.jsp</result>
+            <result name="input">/WEB-INF/pages/client/follow_add.jsp</result>
+            <result name="cancel" type="redirect">addFollow.html</result>
+        </action>
+        <action name="editFollow" class="clientsAction" method="editFollow">
+            <result name="success">/WEB-INF/pages/client/follow_edit.jsp</result>
+        </action>
+        <action name="updateFollow" class="clientsAction" method="updateFollow">
+            <result name="success">/WEB-INF/pages/msg.jsp</result>
+             <result name="input">/WEB-INF/pages/client/follow_edit.jsp</result>
+             <result name="cancel" type="redirect">editFollow.html</result>
+        </action>                               
         <!-- 往来客户 -->
         
         <!-- 销售订单 -->
