@@ -206,6 +206,19 @@ public class ClientsDAO extends JdbcBaseDAO {
 	
 	
 	/**
+	 * 取客户往来交易记录
+	 * @param client_id
+	 * @return
+	 */
+	public List getClientWlyw(String client_id){
+		List list = null;
+		
+		return list;
+	}
+	
+	
+	
+	/**
 	 * 取当前可用的序列号
 	 * @return
 	 */

@@ -244,8 +244,6 @@ public class ClientsAction extends BaseAction {
 	 */
 	public String listView() throws Exception {
 		try {
-			String id = ParameterUtility.getStringParameter(getRequest(), "id",
-					"");
 			client = (Clients) clientsService.getClient(id);// 客户实体
 			descClientLinkman = clientsService.getClientsLinkman(id);// 联系人
 			clientsFollow = clientsService.getClientsFollow(id);// 跟进记录
