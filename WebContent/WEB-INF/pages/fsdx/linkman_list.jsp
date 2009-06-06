@@ -2,14 +2,12 @@
 <%@ page import="com.opensymphony.xwork.util.OgnlValueStack" %>
 <%@ page import="com.sw.cms.model.Page" %>
 <%@ page import="com.sw.cms.util.*" %>
-<%@ page import="com.sw.cms.model.*" %>
 <%@ page import="java.util.*" %>
 
 <%
 OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
 
 Page linkmanPage = (Page)VS.findValue("linkmanPage");
-List lxlist=(List)VS.findValue("lxlist");
 String[] lxrlx=(String[])VS.findValue("lxrlx");
 
 String linkmanyddh = (String)VS.findValue("linkmanyddh");
@@ -23,7 +21,7 @@ String orderType = (String)VS.findValue("orderType");
 
 <html>
 <head>
-<title>联系人列表</title>
+<title>发送短信</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language='JavaScript' src="js/date.js"></script>
@@ -39,14 +37,14 @@ String orderType = (String)VS.findValue("orderType");
 	
 	function add(){
 		var destination = "addlinkman.html";
-		var fea = 'width=400,height=300,left=' + (screen.availWidth-650)/2 + ',top=' + (screen.availHeight-500)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		var fea = 'width=400,height=300,left=' + (screen.availWidth-450)/2 + ',top=' + (screen.availHeight-300)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
 		window.open(destination,'添加联系人',fea);	
 	}
 	
 	function edit(id){
 		var destination = "editlinkman.html?id=" + id;
-		var fea = 'width=400,height=300,left=' + (screen.availWidth-650)/2 + ',top=' + (screen.availHeight-500)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		var fea = 'width=400,height=300,left=' + (screen.availWidth-450)/2 + ',top=' + (screen.availHeight-300)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
 		window.open(destination,'修改联系人',fea);		
 	}		
@@ -110,15 +108,15 @@ String orderType = (String)VS.findValue("orderType");
 		
 </script>
 </head>
-<body oncontextmenu="return false;" >
+<body>
 <form name="myform" action="listlinkman.html" method="post">
 <input type="hidden" name="orderType" value="<%=orderType %>">
 <input type="hidden" name="orderName" value="<%=orderName %>">
 <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0">
 	<tr>
-		<td class="csstitle" align="left" width="75%">&nbsp;&nbsp;&nbsp;&nbsp;<b>联系人</b></td>
+		<td class="csstitle" align="left" width="75%">&nbsp;&nbsp;&nbsp;&nbsp;<b>发送短信</b></td>
 		<td class="csstitle" width="25%">
-			<img src="images/create.gif" align="absmiddle" border="0">&nbsp;<a href="#" onclick="add();" class="xxlb"> 添 加 </a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<img src="images/create.gif" align="absmiddle" border="0">&nbsp;<a href="#" onclick="add();" class="xxlb"> 添加联系人 </a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<img src="images/import.gif" align="absmiddle" border="0">&nbsp;<a href="#" class="xxlb" onclick="refreshPage();"> 刷 新 </a>	</td>			
 	</tr>
 	<tr>
@@ -127,16 +125,15 @@ String orderType = (String)VS.findValue("orderType");
 		   手机：  <input type="text" name="linkmanyddh" value="<%=linkmanyddh %>"/>&nbsp;&nbsp;&nbsp;&nbsp;
 		   联系人类型:<select name="lxid">
 		   <option value=""></option>
-		      <%
-	    if(lxrlx.length!=0) 
-	    { 
-       for(int i=0;i<lxrlx.length;i++)
-	   {
-	      
-		  
-	%>
+	 	<%
+	    if(lxrlx != null && lxrlx.length > 0) { 
+			for(int i=0;i<lxrlx.length;i++){
+		%>
 	    <option value="<%=lxrlx[i]%>" <%if(lxrlx[i].equals(lxid)) out.print("selected");%>><%=lxrlx[i] %></option>
-	<%}} %>
+		<%
+			}
+		} 
+		%>
 		   </select>
 			<input type="submit" name="buttonCx" value=" 查询 " class="css_button2">&nbsp;&nbsp;&nbsp;&nbsp;	
 			<input type="button" name="buttonQk" value=" 清空 " class="css_button2" onclick="clearAll();">

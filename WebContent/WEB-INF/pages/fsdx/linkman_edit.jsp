@@ -21,21 +21,16 @@ Map maplinkman=(Map)VS.findValue("mapLinkman");
 <script language="JavaScript" src="js/Check.js"></script>
 <script language='JavaScript' src="js/date.js"></script>
 <script type="text/javascript">
-	function saveInfo(){
-	
-		
-			if(document.getElementById("name").value == "")
-			{
-				alert("联系人姓名不能为空，请填写！");
-				return;
-			}
-			if(document.getElementById("yddh").value == ""){
-				alert("联系人手机不能为空，请填写！");
-				return;
-			}
-		
-		
-		
+	function saveInfo(){		
+		if(document.getElementById("name").value == "")
+		{
+			alert("联系人姓名不能为空，请填写！");
+			return;
+		}
+		if(document.getElementById("yddh").value == ""){
+			alert("联系人手机不能为空，请填写！");
+			return;
+		}		
 		document.accountForm.submit();
 	}
 
@@ -77,13 +72,8 @@ Map maplinkman=(Map)VS.findValue("mapLinkman");
 			</select>
 		</td>		
 	</tr>
-</table>
-<br>
-<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
-	 
-	
 	<tr height="35">
-		<td class="a1" >
+		<td class="a1" colspan="2">
 			<input type="button" name="button1" value="确 定" class="css_button2" onclick="saveInfo();">&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="reset" name="button2" value="重 置" class="css_button2">&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="button" name="button3" value="关 闭" class="css_button2" onclick="window.close();">
