@@ -67,13 +67,13 @@ Jhd jhd = (Jhd)VS.findValue("Jhd");
 <table width="100%"  align="center" id="jhtable"  class="chart_list" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td>产品名称</td>
-		<td>规格</td>
-		<td>进货价格</td>
-		<td>数量</td>
-		<td>小计</td>
-		<td>强制序列号</td>		
-		<td>备注</td>
+		<td width="20%">产品名称</td>
+		<td width="20%">规格</td>
+		<td width="10%">进货价格</td>
+		<td width="5%">数量</td>
+		<td width="10%">小计</td>
+		<td width="20%">强制序列号</td>		
+		<td width="15%">备注</td>
 	</tr>
 	</thead>
 <%

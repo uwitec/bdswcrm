@@ -92,31 +92,22 @@ ClientsLinkman  linkman = (ClientsLinkman)VS.findValue("linkman");
 	<tr> 
 		<td class="a1" width="15%">地址</td>
 		<td class="a2" width="35%" colspan="3"><input type="text" name="linkman.address" id="address"size="83" value="<%=StringUtils.nullToStr(linkman.getAddress()) %>" >  	</td>
-	</tr>		
-</table>
-<br>
-<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
-	<thead>
-	<tr>
-		<td colspan="4">备 注</td>
 	</tr>
-	</thead>
 	<tr height="50">
-		<td class="a1" width="20%">备注</td>
-		<td class="a2" width="80%">
+		<td class="a1">备注</td>
+		<td class="a2" colspan="3">
 			<textarea rows="3" cols="50" name="linkman.remark" id="remark" style="width:80%" maxlength="500" ><%=StringUtils.nullToStr(linkman.getRemark()) %></textarea>
 		</td>
 	</tr>
 	
 	<tr height="35">
-		<td class="a1" colspan="2">
+		<td class="a1" colspan="4">
 			<input type="button" name="button1" value="提 交" class="css_button2" onclick="saveInfo();">&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="reset" name="button2" value="重 置" class="css_button2">&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="button" name="button3" value="关 闭" class="css_button2" onclick="window.close();">
 		</td>
-	</tr>
+	</tr>			
 </table>
-
 </form>
 </body>
 </html>

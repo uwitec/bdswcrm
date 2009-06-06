@@ -830,4 +830,12 @@ p.NormalRedThin
     height:20px;
 	border:0px;
 }
+.css_button
+{
+	background-image: url(../images/button-l.gif);
+	width: 45px;
+	CURSOR: hand;
+	height:20px;
+	border:0px;
+}
 

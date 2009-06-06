@@ -114,9 +114,9 @@ List userList = (List)VS.findValue("userList");
 	<tr>
 		<td onclick="doSort('id');">编号<%if(orderName.equals("id")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
 		<td onclick="doSort('name');">单位名称<%if(orderName.equals("name")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('lxr');">联系人<%if(orderName.equals("lxr")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td onclick="doSort('address');">地址<%if(orderName.equals("address")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
 		<td onclick="doSort('lxdh');">联系电话<%if(orderName.equals("lxdh")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('mobile');">手机<%if(orderName.equals("mobile")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td onclick="doSort('khjl');">客户经理<%if(orderName.equals("khjl")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
 		<td>操作</td>
 	</tr>
 	</thead>
@@ -130,9 +130,9 @@ List userList = (List)VS.findValue("userList");
 	<tr class="a1"  title="双击查看详情" onDblClick="openWin('<%=StringUtils.nullToStr(clients.getId()) %>');">
 		<td class="a1"><%=StringUtils.nullToStr(clients.getId()) %></td>
 		<td class="a1"><%=StringUtils.nullToStr(clients.getName()) %></td>
-		<td class="a1"><%=StringUtils.nullToStr(clients.getLxr()) %></td>
+		<td class="a1"><%=StringUtils.nullToStr(clients.getAddress()) %></td>
 		<td class="a1"><%=StringUtils.nullToStr(clients.getLxdh()) %></td>
-		<td class="a1"><%=StringUtils.nullToStr(clients.getMobile()) %></td>
+		<td class="a1"><%=StaticParamDo.getRealNameById(clients.getKhjl()) %></td>
 		<td class="a1">
 			<a href="#" onclick="edit('<%=StringUtils.nullToStr(clients.getId()) %>');"><img src="images/modify.gif" align="absmiddle" title="修改" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
 			<a href="#" onclick="openWin('<%=StringUtils.nullToStr(clients.getId()) %>');"><img src="images/view.gif" align="absmiddle" title="查看" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;

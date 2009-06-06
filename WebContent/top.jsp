@@ -67,11 +67,13 @@ String user_id = info.getUser_id();
 	}
     
     //查询库存
-	function openWin(){
-		var destination = "top.htm";
-		var fea ='width=800,height=600,left=' + (screen.availWidth-800)/2 + ',top=' + (screen.availHeight-600)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
-		
-		window.open(destination,'详细信息',fea);	
+	function openWin(flag){
+		if(flag == "1"){
+			document.myform.action = "queryKcMx.html";
+		}else{
+			document.myform.action = "queryClients.html";
+		}
+		document.myform.submit();
 	}
 	
 	//触发点击回车事件
@@ -163,7 +165,7 @@ String user_id = info.getUser_id();
 <TABLE cellSpacing=0 cellPadding=0 width=100% height=100% align=center border=0 bgColor=#FBFBFB>
 	<TBODY>
 	<tr>
-		<td width="30%">
+		<td width="200">
 			<TABLE cellSpacing=0 cellPadding=0 border=0>
 				<TBODY>
            				<TR>
@@ -172,13 +174,14 @@ String user_id = info.getUser_id();
 				</TBODY>
 			</TABLE>					
 		</td>
-		<td width="300" width="40%" height=100%  vAlign=bottom  align=right><BR>
-			<form name="myForm" method="post" action="queryKcMx.html">
-			<font style="font-size: 12px;">库存查询：</font><input type="text" name="kc_con"  onkeypress="f_enter();"  size="15">
-			<input type="button" name="button1" value=" 查询 " class="css_button2" onclick="openWin();">
-			</form>
+		<td height=100%  vAlign=middle  align=center>
+			<font style="font-size: 12px;">库存查询：</font><input type="text" name="kc_con"  onkeypress="f_enter();"  size="12">
+			<input type="button" name="button1" value=" 查询 " class="css_button" onclick="openWin('1');">
+			&nbsp;&nbsp;&nbsp;
+			<font style="font-size: 12px;">客户查询：</font><input type="text" name="client_con"  onkeypress="f_enter();"  size="12">
+			<input type="button" name="button1" value=" 查询 " class="css_button" onclick="openWin('2');">			
 		</td>
-		<td vAlign=top align=right width="30%">
+		<td vAlign=top align=right >
 			<TABLE cellSpacing=0 cellPadding=0 border=0>
 				<TBODY>
            		<TR>

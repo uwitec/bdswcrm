@@ -7,6 +7,7 @@
 <%
 OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
 Clients client = (Clients)VS.findValue("client");
+Page clientWlywPage = (Page)VS.findValue("clientWlywPage");
 List  linkmanList=(List)VS.findValue("descClientLinkman");
 List  clinetsFollowList=(List)VS.findValue("clientsFollow");		 
 %>
@@ -103,11 +104,16 @@ List  clinetsFollowList=(List)VS.findValue("clientsFollow");
 		}
 	}
     
+	function vieYwdj(url){
+		var fea = 'width=850,height=700,left=' + (screen.availWidth-850)/2 + ',top=' + (screen.availHeight-700)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		
+		window.open(url,'修改单位',fea);		
+	}    
     
 </script>
 </head>
 <body oncontextmenu="return false;">
-<form name="myform" action="viewClient.html">
+<form name="myform" action="viewClient.html" method="post">
 <input type="hidden" name="id" value="<%=client.getId() %>">
 <!-- 客户信息 -->
 <table width="100%"  align="center"   cellpadding="0" cellspacing="0">
@@ -159,11 +165,26 @@ List  clinetsFollowList=(List)VS.findValue("clientsFollow");
 		         <tr>
 			       <td width="100%" style="text-align: center;">最近历史交易</td>
 		        </tr>
-		      </thead>
-				<tr><td height="3">&nbsp;</td></tr>
+		      </thead>				
+				<%
+				List results = clientWlywPage.getResults();
+				Iterator itHis = results.iterator();				
+				while(itHis.hasNext()){
+					Map map = (Map)itHis.next();
+					
+					String xwtype = StringUtils.nullToStr(map.get("xwtype"));
+					String dj_id = StringUtils.nullToStr(map.get("dj_id"));
+					String jsr = StaticParamDo.getRealNameById((String)map.get("jsr"));
+					String url = StringUtils.nullToStr(map.get("url"));
+				%>
 				<tr>
-					<td width="100%" height="23">&nbsp;<A class=xxlb href="#" onclick="openNbggWin('464');" title="关于维修服务费">关于维修服务费【2009-05-30】</A></td>
-				</tr>							
+					<td width="100%" height="25">&nbsp;
+						<A class=xxlb href="#" onclick="vieYwdj('<%=url+dj_id %>');" title="点击查看明细">[<%=xwtype %>]&nbsp;&nbsp;<%=dj_id %> &nbsp;&nbsp;(<%=jsr %>)</A>
+					</td>
+				</tr>	
+				<%
+				}
+				%>					
 			</table>
 	    </div>
 	  </td>
