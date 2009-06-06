@@ -116,7 +116,7 @@ table.chart_info
 table.chart_info thead td
 {
 	background-image:url(../images/light-bg.png);
-	height:35px;
+	height:30px;
 	text-align: center;
 	vertical-align:middle;
 	font-size: 12px;
@@ -128,7 +128,7 @@ table.chart_info thead td
 table.chart_info td.a1
 {
 	background-color: #f6f6f6;
-	height:30px;	
+	height:28px;	
 	text-align: center ;
 	font-size: 12px;
 	border-bottom:1 solid #D8D8D8;
@@ -137,7 +137,7 @@ table.chart_info td.a1
 table.chart_info td.a2
 {
 	background-color: #FFFFFF;
-	height:30px;	
+	height:28px;	
 	text-align: left ;
 	font-size: 12px;
 	margin-left: 10px;
@@ -148,7 +148,7 @@ table.chart_info td.a2
 table.chart_info td.a3
 {
 	background-color: #FFFFFF;
-	height:30px;	
+	height:28px;	
 	text-align: center ;
 	font-size: 12px;
 	border-bottom:1 solid #D8D8D8;

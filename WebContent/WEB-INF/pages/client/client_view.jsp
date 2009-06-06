@@ -13,6 +13,7 @@ List  clinetsFollowList=(List)VS.findValue("clientsFollow");
 
 <html>
 <head>
+<title>客户视图</title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language='JavaScript' src="js/date.js"></script>
@@ -118,109 +119,57 @@ List  clinetsFollowList=(List)VS.findValue("clientsFollow");
 		       <td colspan="4" width="100%" style="text-align: center;">客户信息</td>
 	        </tr>
 	      </thead>
-	       <tr>
-	         <td class="a1" width="20%">单位名称</td>
-	          <td class="a2" width="80%" colspan="3"></td>
-           </tr>
 	        <tr>
-	          <td class="a1" width="20%"></td>
-	           <td class="a2" width="30%"></td>
-	           <td class="a1" width="20%"></td>
-	          <td class="a2" width="30%"></td>
+	          <td class="a1" width="15%">客户名称</td>
+	           <td class="a2" width="35%"><%=StringUtils.nullToStr(client.getName()) %></td>
+	           <td class="a1" width="15%">客户类型</td>
+	          <td class="a2" width="35%"><%=StringUtils.nullToStr(client.getClient_type()) %></td>
 	        </tr>
 	        <tr>
-	           <td class="a1" width="20%"></td>
-	           <td class="a2" width="30%"></td>
-	           <td class="a1" width="20%"></td>
-	           <td class="a2" width="30%"></td>
+	          <td class="a1" width="15%">地址</td>
+	           <td class="a2" width="35%"><%=StringUtils.nullToStr(client.getAddress()) %></td>
+	           <td class="a1" width="15%">联系电话</td>
+	          <td class="a2" width="35%"><%=StringUtils.nullToStr(client.getLxdh()) %></td>
 	        </tr>
-	         <tr>
-	          <td class="a1" width="20%"></td>
-	           <td class="a2" width="30%"></td>
-	           <td class="a1" width="20%"></td>
-	          <td class="a2" width="30%"></td>
+	        <tr>
+	           <td class="a1" width="15%">账期</td>
+	          <td class="a2" width="35%"><%=StringUtils.nullToStr(client.getZq()) %></td>
+	          <td class="a1" width="15%">限额</td>
+	           <td class="a2" width="35%"><%=StringUtils.nullToStr(client.getXe()) %></td>	          
 	        </tr>
-	         <tr>
-	          <td class="a1" width="20%"></td>
-	           <td class="a2" width="30%"></td>
-	           <td class="a1" width="20%"></td>
-	          <td class="a2" width="30%"></td>
+	        <tr>
+	          <td class="a1" width="15%">客户经理</td>
+	           <td class="a2" width="35%"><%=StaticParamDo.getRealNameById(client.getKhjl()) %></td>
+	          <td class="a1" width="15%"></td>
+	           <td class="a2" width="35%"></td>	           
 	        </tr>
+	        <tr>
+	          <td class="a1" width="15%">备注</td>
+	           <td class="a2" colspan="3">
+	           <textarea rows="3" cols="50" name="client.remark" id="remark" style="width:80%" maxlength="500" readonly><%=StringUtils.nullToStr(client.getRemark()) %></textarea>
+	           </td>          
+	        </tr>	        	        	        	        
 	     </table>
-	  </td>
-	  
-	  
-	  
-	  <td width="30%">
+	  </td>	  
+	  <td width="10">&nbsp;</td>	  
+	  <td width="30%" valign="top">
 	    <div>
-	       <table class="chart_info" cellpadding="0" cellspacing="0">
-	        <thead>
-	         <tr>
-		       <td    colspan="2">跟进摘要</td>
-	        </tr>
-	      </thead>
-	          <tr>
-	            <td class="a1" width="10%">&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;</td>
-		        <td class="a2" width="20%"> &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;</td> 
-	          </tr>
-	          <tr>
-	              <td class="a1" width="10%">&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; </td>
-		        <td class="a2" width="20%">&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; </td> 
-	          </tr>
-	          <tr>
-	             <td class="a1" width="10%"> &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;</td>
-		        <td class="a2" width="20%">&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; </td> 
-	          </tr>
-	          <tr>
-	             <td class="a1" width="10%"> &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;</td>
-		        <td class="a2" width="20%">&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;</td> 
-	          </tr>
-	          <tr>
-	             <td class="a1" width="10%"> &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;</td>
-		        <td class="a2" width="20%">&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; </td> 
-	          </tr>
-	          <tr>
-	            <td class="a1" width="10%">&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; </td>
-		        <td class="a2" width="20%">&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;</td> 
-	          </tr>
-	       </table>
-	    </div>
-	    <div>
-	      <table class="chart_info" cellpadding="0" cellspacing="0">
-	        <thead>
-	         <tr>
-		       <td   colspan="2">系统信息</td>
-	        </tr>
-	      </thead>
-	          <tr>
-	            <td class="a1" width="10%">&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; </td>
-		        <td class="a2" width="20%">&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; </td> 
-	          </tr>
-	          <tr>
-	              <td class="a1" width="10%">&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; </td>
-		        <td class="a2" width="20%"> &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;</td> 
-	          </tr>
-	          <tr>
-	             <td class="a1" width="10%">&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;</td>
-		        <td class="a2" width="20%"> &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;</td> 
-	          </tr>
-	          <tr>
-	             <td class="a1" width="10%">&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;</td>
-		        <td class="a2" width="20%"> &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;</td> 
-	          </tr>
-	          <tr>
-	             <td class="a1" width="10%">&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; </td>
-		        <td class="a2" width="20%"> &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;</td> 
-	          </tr>
-	          <tr>
-	            <td class="a1" width="10%"> &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;</td>
-		        <td class="a2" width="20%"> &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;</td> 
-	          </tr>
-	      </table>
+			<table width="100%" align="left" valign="top" class="chart_info" cellpadding="0" cellspacing="0">
+		      <thead>
+		         <tr>
+			       <td width="100%" style="text-align: center;">最近历史交易</td>
+		        </tr>
+		      </thead>
+				<tr><td height="3">&nbsp;</td></tr>
+				<tr>
+					<td width="100%" height="23">&nbsp;<A class=xxlb href="#" onclick="openNbggWin('464');" title="关于维修服务费">关于维修服务费【2009-05-30】</A></td>
+				</tr>							
+			</table>
 	    </div>
 	  </td>
 	</tr>
 </table>
+<br>
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	    <tr>
@@ -257,7 +206,7 @@ List  clinetsFollowList=(List)VS.findValue("clientsFollow");
 	        {
 	            ClientsLinkman linkman=(ClientsLinkman)it.next();
 	         %>
-	        <tr class="a1"  onmousedown="trSelectChangeCss('selTable1')" onmouseover="this.className='a2';" onmouseout="this.className='a1';">
+	        <tr class="a1"  onmousedown="trSelectChangeCss('selTable1')" onDblClick="linkmanedit('<%=linkman.getId()%>');" onmouseover="this.className='a2';" onmouseout="this.className='a1';">
 		      <td>
 			      <a href="#" onclick="linkmanedit('<%=linkman.getId()%>');"><img src="images/modify.gif" align="absmiddle" title="修改" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
 			      <a href="#" onclick="deletelinkman('<%=linkman.getId()%>');"><img src="images/del.gif" align="absmiddle" title="删除" border="0" style="cursor:hand"></a>
@@ -278,7 +227,7 @@ List  clinetsFollowList=(List)VS.findValue("clientsFollow");
 	  </td>
 	</tr>
 </table>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<BR>
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	    <tr>
@@ -316,7 +265,7 @@ List  clinetsFollowList=(List)VS.findValue("clientsFollow");
 	           if(i==0)
 	           {
 	         %>
-	        <tr class="a1"   onmouseover="this.className='a2';" onmouseout="this.className='a1';">
+	        <tr class="a1"   onmouseover="this.className='a2';" onmouseout="this.className='a1';" onDblClick="followedit('<%=follow.getId()%>','<%=StringUtils.nullToStr(client.getId())%>');">
 		      <td width="5%">
 			      <a href="#" onclick="followedit('<%=follow.getId()%>','<%=StringUtils.nullToStr(client.getId())%>');"><img src="images/modify.gif" align="absmiddle" title="修改" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
 		      </td>
@@ -347,7 +296,7 @@ List  clinetsFollowList=(List)VS.findValue("clientsFollow");
 	    </div>
 	  </td>
 	</tr>
-</table>
+</table><BR>
 </form>
 </body>
 </html>
