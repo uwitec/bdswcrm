@@ -15,7 +15,7 @@ String user_id = info.getUser_id();
 <script type="text/javascript" src="js/dropdowntabs.js"></script>
 <script type='text/javascript' src='dwr/interface/msgService.js'></script>
 <script type='text/javascript' src='dwr/engine.js'></script>
-<script type='text/javascript' src='/dwr/util.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script>
 
 <script>
 
