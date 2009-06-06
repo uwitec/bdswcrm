@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.smslib.GatewayException;
 import org.smslib.OutboundMessage;
 import org.smslib.SMSLibException;
@@ -25,6 +26,8 @@ import com.sw.cms.util.DateComFunc;
  * 
  */
 public class SMSEngine {
+	private Logger log = Logger.getLogger(this.getClass());
+	
 	private FsdxDAO fsdxDao;
 
 	private static SMSEngine engine = null; // 采用单例模式设置
@@ -42,7 +45,6 @@ public class SMSEngine {
 		return engine;
 	}
 
-	
 	/**
 	 * 初始化服务
 	 * 
@@ -61,82 +63,76 @@ public class SMSEngine {
 			service.addGateway(gateway);// 添加一个GSM调制解调器
 			service.startService(); // 开始服务
 		} catch (TimeoutException e) {
-
-			e.printStackTrace();
+			log.error(e.getMessage());
 		} catch (GatewayException e) {
-
-			e.printStackTrace();
+			log.error(e.getMessage());
 		} catch (SMSLibException e) {
-
-			e.printStackTrace();
+			log.error(e.getMessage());
 		} catch (IOException e) {
-
-			e.printStackTrace();
+			log.error(e.getMessage());
 		} catch (InterruptedException e) {
-
-			e.printStackTrace();
+			log.error(e.getMessage());
 		}
 	}
 
-	
 	/**
 	 * 发关信息
-	 * @param receptMobiles  手机号组
-	 * @param msg   消息体
+	 * 
+	 * @param receptMobiles
+	 *            手机号组
+	 * @param msg
+	 *            消息体
 	 */
-	public List sendMsg(String sendLinkman, String msg,String user_id) {
-		
-		List<SendMsgLog> sendMsgLogs = new ArrayList<SendMsgLog>();  //日志列表
-		List sendList=fsdxDao.getLinkmanById(sendLinkman);
-		
-		if(sendList != null && sendList.size() > 0){
-			
-			for(int i=0;i<sendList.size();i++){
-				Map map=(Map)sendList.get(i);
-				OutboundMessage obmsg = new OutboundMessage(map.get("yddh").toString(),msg);
-				obmsg.setEncoding(MessageEncodings.ENCUCS2);// 设置字符集	
+	public List sendMsg(String sendLinkman, String msg, String user_id) {
+
+		List<SendMsgLog> sendMsgLogs = new ArrayList<SendMsgLog>(); // 日志列表
+		List sendList = fsdxDao.getLinkmanById(sendLinkman);
+
+		if (sendList != null && sendList.size() > 0) {
+
+			for (int i = 0; i < sendList.size(); i++) {
+				Map map = (Map) sendList.get(i);
+				OutboundMessage obmsg = new OutboundMessage(map.get("yddh")
+						.toString(), msg);
+				obmsg.setEncoding(MessageEncodings.ENCUCS2);// 设置字符集
 				SendMsgLog sendMsgLog = new SendMsgLog();
 				sendMsgLog.setUser_name(map.get("name").toString());
-				
+
 				sendMsgLog.setMobile_num(map.get("yddh").toString());
-			
-				sendMsgLog.setCz_date(DateComFunc.formatDate(new Date(), "yyyy-MM-dd HH:mm:ss"));
-			
+
+				sendMsgLog.setCz_date(DateComFunc.formatDate(new Date(),
+						"yyyy-MM-dd HH:mm:ss"));
+
 				sendMsgLog.setCzr(user_id);
-			
-				sendMsgLog.setSend_time(DateComFunc.formatDate(new Date(), "yyyy-MM-dd HH:mm:ss"));
-		
-				try{
-					if(service.sendMessage(obmsg)==true)
-					{
+
+				sendMsgLog.setSend_time(DateComFunc.formatDate(new Date(),
+						"yyyy-MM-dd HH:mm:ss"));
+
+				try {
+					if (service.sendMessage(obmsg) == true) {
 						sendMsgLog.setFlag("1");
-					
-					}
-					else
-					{
+
+					} else {
 						sendMsgLog.setFlag("0");
-					
+
 					}
-					
-					
-				}catch(TimeoutException timeoutException){
+
+				} catch (TimeoutException timeoutException) {
 					sendMsgLog.setError_log("传送中超时");
-				}catch(GatewayException gatewayException){
+				} catch (GatewayException gatewayException) {
 					sendMsgLog.setError_log("网关连接错误");
-				}catch(IOException ioException){
+				} catch (IOException ioException) {
 					sendMsgLog.setError_log("传送错误");
-				}catch(InterruptedException interruptedException){
+				} catch (InterruptedException interruptedException) {
 					sendMsgLog.setError_log("线程中断错误");
 				}
 				sendMsgLogs.add(sendMsgLog);
 			}
 			fsdxDao.insertSendMsgLog(sendMsgLogs);
 		}
-		
+
 		return sendMsgLogs;
 	}
-
-
 
 	public FsdxDAO getFsdxDao() {
 		return fsdxDao;

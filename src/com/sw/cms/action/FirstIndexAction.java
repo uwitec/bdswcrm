@@ -24,6 +24,7 @@ public class FirstIndexAction extends BaseAction {
 	private UserService userService;
 	
 	private List dckList = new ArrayList();
+	private List drkList = new ArrayList();
 	private List cqysList = new ArrayList();
 	private List cqyfList = new ArrayList();
 	private List kcxxList = new ArrayList();
@@ -49,12 +50,15 @@ public class FirstIndexAction extends BaseAction {
 		ywgnList = menuService.getUserYwgnFunc(user_id);
 
 		//内部公告
-		Page page = xxfbNbggService.getNbggList(1, 5);
+		Page page = xxfbNbggService.getNbggList(1, 10);
 		nbggList = page.getResults();
 		
 		
 		//待出库出库单
 		dckList = firstIndexService.getDckdList();
+		
+		//待入库入库单
+		drkList = firstIndexService.getDrkdList();
 		
 		
 		//待审批零售单
@@ -263,5 +267,15 @@ public class FirstIndexAction extends BaseAction {
 	}
 	public void setXsdService(XsdService xsdService) {
 		this.xsdService = xsdService;
+	}
+
+
+	public List getDrkList() {
+		return drkList;
+	}
+
+
+	public void setDrkList(List drkList) {
+		this.drkList = drkList;
 	}
 }

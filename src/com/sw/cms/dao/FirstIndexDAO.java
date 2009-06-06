@@ -17,6 +17,16 @@ public class FirstIndexDAO extends JdbcBaseDAO {
 	
 	
 	/**
+	 * 返回待入库单据列表
+	 * @return
+	 */
+	public List getDrkdList(){
+		String sql = "select * from rkd where state='已保存'";
+		return this.getResultList(sql);
+	}
+	
+	
+	/**
 	 * 取超期应收款列表
 	 * @return
 	 */

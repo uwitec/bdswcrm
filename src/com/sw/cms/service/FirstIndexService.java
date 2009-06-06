@@ -16,6 +16,14 @@ public class FirstIndexService {
 		return firstIndexDao.getDckdList();
 	}
 	
+	/**
+	 * 返回待入库单据列表
+	 * @return
+	 */
+	public List getDrkdList(){
+		return firstIndexDao.getDrkdList();
+	}
+	
 	
 	/**
 	 * 取超期应收款列表
