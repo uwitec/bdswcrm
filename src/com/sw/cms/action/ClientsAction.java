@@ -24,6 +24,8 @@ public class ClientsAction extends BaseAction {
 	private UserService userService;
 
 	private Page clientsPage;
+	
+	private Page clientWlywPage;
 
 	private Clients client = new Clients();
 
@@ -56,6 +58,16 @@ public class ClientsAction extends BaseAction {
 	private ClientsFollow follow = new ClientsFollow();
 
 	private String clients_id;
+	
+	private String client_con = "";
+
+	public String getClient_con() {
+		return client_con;
+	}
+
+	public void setClient_con(String client_con) {
+		this.client_con = client_con;
+	}
 
 	public String getClients_id() {
 		return clients_id;
@@ -220,6 +232,28 @@ public class ClientsAction extends BaseAction {
 
 		return "success";
 	}
+	
+	
+	/**
+	 * 客户查询,首面顶端
+	 * @return
+	 * @throws Exception
+	 */
+	public String queryClients() throws Exception{
+		try{
+			int rowsPerPage = Constant.PAGE_SIZE2;
+			String con = "";
+			if(!client_con.equals("")){
+				con = " and (name like '%" + client_con + "%' or address like '%" + client_con + "%' or lxdh='" + client_con + "' or mobile='" + client_con + "' or lxr like '%" + client_con + "%')";
+			}
+			clientsPage = clientsService.getClientIncludYsk(con, curPage,rowsPerPage);
+			return "success";
+		}catch(Exception e){
+			log.error("客户查询出错,错误原因:" + e.getMessage());
+			return ERROR;
+		}
+	}
+	
 
 	/**
 	 * desc 联系人
@@ -245,6 +279,7 @@ public class ClientsAction extends BaseAction {
 	public String listView() throws Exception {
 		try {
 			client = (Clients) clientsService.getClient(id);// 客户实体
+			clientWlywPage = clientsService.getClientWlyw(id);
 			descClientLinkman = clientsService.getClientsLinkman(id);// 联系人
 			clientsFollow = clientsService.getClientsFollow(id);// 跟进记录
 			return "success";
@@ -520,6 +555,14 @@ public class ClientsAction extends BaseAction {
 
 	public void setLxr(String lxr) {
 		this.lxr = lxr;
+	}
+
+	public Page getClientWlywPage() {
+		return clientWlywPage;
+	}
+
+	public void setClientWlywPage(Page clientWlywPage) {
+		this.clientWlywPage = clientWlywPage;
 	}
 
 }

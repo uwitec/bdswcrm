@@ -204,6 +204,15 @@ public class ClientsService {
 	public void updateFollow(ClientsFollow follow) {
 		clientsFollowDao.updateFollow(follow);
 	}
+	
+	/**
+	 * 取客户往来交易记录(前5条)
+	 * @param client_id
+	 * @return
+	 */
+	public Page getClientWlyw(String client_id){
+		return clientsDao.getClientWlyw(client_id);
+	}
 
 	public InitParamDAO getInitParamDao() {
 		return initParamDao;

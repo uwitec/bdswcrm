@@ -526,7 +526,10 @@
             <result name="success">/WEB-INF/pages/msg.jsp</result>
              <result name="input">/WEB-INF/pages/client/follow_edit.jsp</result>
              <result name="cancel" type="redirect">editFollow.html</result>
-        </action>                               
+        </action>
+        <action name="queryClients" class="clientsAction" method="queryClients">
+            <result name="success">/WEB-INF/pages/client/query_client.jsp</result>
+        </action>                                      
         <!-- 往来客户 -->
         
         <!-- 销售订单 -->

@@ -206,14 +206,27 @@ public class ClientsDAO extends JdbcBaseDAO {
 	
 	
 	/**
-	 * 取客户往来交易记录
+	 * 取客户往来交易记录(前5条)
 	 * @param client_id
 	 * @return
 	 */
-	public List getClientWlyw(String client_id){
-		List list = null;
+	public Page getClientWlyw(String client_id){
 		
-		return list;
+		//销售单列表
+		String xsd_sql = "select DATE_FORMAT(cz_date,'%Y-%m-%d') as creatdate,'销售' as xwtype,id as dj_id,sjcjje as je,fzr as jsr,cz_date,'viewXsd.html?id=' as url from xsd where state='已出库' and client_name='" + client_id + "'";
+
+		//销售退货
+		String thd_sql = "select DATE_FORMAT(cz_date,'%Y-%m-%d') as creatdate,'销售退货' as xwtype,thd_id as dj_id,(0-thdje) as je,th_fzr as jsr,cz_date ,'viewThd.html?thd_id=' as url from thd where state='已入库' and client_name='" + client_id + "'";
+		
+		//采购进货单
+		String jhd_sql = "select DATE_FORMAT(cz_date,'%Y-%m-%d') as creatdate,'采购' as xwtype,id as dj_id,total as je,fzr as jsr,cz_date,'viewJhd.html?id=' as url from jhd where state='已入库' and gysbh='" + client_id + "'";
+		
+		//采购退货单
+		String cgthd_sql = "select DATE_FORMAT(cz_date,'%Y-%m-%d') as creatdate,'采购退货' as xwtype,id as dj_id,(0-tkzje) as je,jsr,cz_date,'viewCgthd.html?id=' as url from cgthd where state='已出库' and provider_name='" + client_id + "'";
+
+		String sql = "select * from ((" + xsd_sql + ") union (" + thd_sql + ") union (" + jhd_sql + ") union(" + cgthd_sql + ")) x order by cz_date desc";
+		
+		return this.getResultByPage(sql, 1, 7);
 	}
 	
 	
