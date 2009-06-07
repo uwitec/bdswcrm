@@ -10,6 +10,9 @@ OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
 Lsd lsd = (Lsd)VS.findValue("lsd");
 List lsdProducts = (List)VS.findValue("lsdProducts");
 
+List msg = (List)session.getAttribute("messages");
+session.removeAttribute("messages");
+
 %>
 <html>
 <head>
@@ -99,6 +102,17 @@ List lsdProducts = (List)VS.findValue("lsdProducts");
 		<td colspan="4">零售单信息</td>
 	</tr>
 	</thead>
+	<%
+	if(msg != null && msg.size() > 0){
+		for(int i=0;i<msg.size();i++){
+	%>
+	<tr>
+		<td colspan="4" class="a2"><font color="red"><%=StringUtils.nullToStr(msg.get(i)) %></font></td>
+	</tr>
+	<%
+		}
+	}
+	%>	
 	<tr>
 		<td class="a1" width="15%">编  号</td>
 		<td class="a2" width="35%"><%=StringUtils.nullToStr(lsd.getId()) %></td>	

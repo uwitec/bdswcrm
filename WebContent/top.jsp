@@ -77,9 +77,9 @@ String user_id = info.getUser_id();
 	}
 	
 	//触发点击回车事件
-	function f_enter(){
+	function f_enter(flag){
 	    if (window.event.keyCode==13){
-	        openWin();
+	        openWin(flag);
 	        event.returnValue = false;
 	    }
 	}
@@ -175,10 +175,10 @@ String user_id = info.getUser_id();
 			</TABLE>					
 		</td>
 		<td height=100%  vAlign=middle  align=center>
-			<font style="font-size: 12px;">库存查询：</font><input type="text" name="kc_con"  onkeypress="f_enter();"  size="12">
+			<font style="font-size: 12px;">库存查询：</font><input type="text" name="kc_con"  onkeypress="f_enter('1');"  size="12">
 			<input type="button" name="button1" value=" 查询 " class="css_button" onclick="openWin('1');">
 			&nbsp;&nbsp;&nbsp;
-			<font style="font-size: 12px;">客户查询：</font><input type="text" name="client_con"  onkeypress="f_enter();"  size="12">
+			<font style="font-size: 12px;">客户查询：</font><input type="text" name="client_con"  onkeypress="f_enter('2');"  size="12">
 			<input type="button" name="button1" value=" 查询 " class="css_button" onclick="openWin('2');">			
 		</td>
 		<td vAlign=top align=right >

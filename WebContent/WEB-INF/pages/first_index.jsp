@@ -240,16 +240,16 @@ List dspXsdList = (List)VS.findValue("dspXsdList");
 						String id = StringUtils.nullToStr(info.getId());
 						String title = StringUtils.nullToStr(info.getTitle());
 						String subTitle = title;
-						if(title.length()>=15){
-							subTitle = title.substring(0,15) + "...";
+						if(title.length()>=30){
+							subTitle = title.substring(0,30) + "...";
 						}
 						String pub_date = StringUtils.nullToStr(info.getPub_date());
 						String jsr = StaticParamDo.getRealNameById(info.getCzr());
 					%>				
 					<tr>
-						<td width="50% height="23">&nbsp;<A class=xxlb href="#" onclick="openNbggWin('<%=id %>');" title="<%=title %>"><%=subTitle %></A></td>
-						<td width="20%" height="23"><%=jsr %></td>
-						<td width="30%" height="23">【<%=pub_date %>】</td>
+						<td width="70% height="23">&nbsp;<A class=xxlb href="#" onclick="openNbggWin('<%=id %>');" title="<%=title %>"><%=subTitle %></A></td>
+						<td width="15%" height="23"><%=jsr %></td>
+						<td width="15%" height="23" colspan="2">【<%=pub_date %>】</td>
 					</tr>
 					<%
 					}
