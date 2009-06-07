@@ -614,6 +614,7 @@
             <result name="success">/WEB-INF/pages/lsd/lsd_sp.jsp</result>
         </action>
         <action name="doSpLsd" class="lsdAction" method="doSp">
+        	<result name="input" type="redirect">spLsd.html?id=${id}</result>
             <result name="success">/WEB-INF/pages/lsd/msg.jsp</result>
         </action>                 
         <action name="updateLsd" class="lsdAction" method="update">

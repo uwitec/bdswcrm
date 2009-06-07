@@ -379,6 +379,18 @@ public class LsdAction extends BaseAction {
 		LoginInfo info = (LoginInfo)getSession().getAttribute("LOGINUSER");
 		String user_id = info.getUser_id();
 		
+		lsd = (Lsd)lsdService.getLsd(id); //零售单
+		lsdProducts = lsdService.getLsdProducts(id);
+		
+		if(sp_state.equals("3")){
+			//审批通过,需要判断库存是否满足			
+			String msg = lsdService.checkKc(lsd, lsdProducts);
+			if(!msg.equals("")){
+				this.saveMessage(msg);
+				return "input";
+			}
+		}
+		
 		//保存审批结果
 		lsdService.saveSp(id, sp_state, user_id);
 		

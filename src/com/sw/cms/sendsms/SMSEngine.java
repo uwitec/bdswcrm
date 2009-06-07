@@ -9,7 +9,6 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 import org.smslib.GatewayException;
 import org.smslib.OutboundMessage;
-import org.smslib.SMSLibException;
 import org.smslib.Service;
 import org.smslib.TimeoutException;
 import org.smslib.Message.MessageEncodings;
@@ -49,7 +48,7 @@ public class SMSEngine {
 	 * 初始化服务
 	 * 
 	 */
-	public void initService() {
+	public void initService() throws Exception{
 		service = new Service();// NEW 一个服务
 		// NEW 一个GSM调制解调器 ↓(网关) ↓(端口) ↓(波特率)
 		SerialModemGateway gateway = new SerialModemGateway("modem.com1",
@@ -58,25 +57,12 @@ public class SMSEngine {
 		gateway.setOutbound(true);// 是否可以发送短信
 		gateway.setSimPin("0000");// 设置SIM卡的个人识别号码
 
-		try {
-
-			service.addGateway(gateway);// 添加一个GSM调制解调器
-			service.startService(); // 开始服务
-		} catch (TimeoutException e) {
-			log.error(e.getMessage());
-		} catch (GatewayException e) {
-			log.error(e.getMessage());
-		} catch (SMSLibException e) {
-			log.error(e.getMessage());
-		} catch (IOException e) {
-			log.error(e.getMessage());
-		} catch (InterruptedException e) {
-			log.error(e.getMessage());
-		}
+		service.addGateway(gateway);// 添加一个GSM调制解调器
+		service.startService(); // 开始服务
 	}
 
 	/**
-	 * 发关信息
+	 * 发送信息
 	 * 
 	 * @param receptMobiles
 	 *            手机号组
