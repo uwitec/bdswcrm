@@ -51,14 +51,25 @@ public class SMSEngine {
 	public void initService() throws Exception{
 		service = new Service();// NEW 一个服务
 		// NEW 一个GSM调制解调器 ↓(网关) ↓(端口) ↓(波特率)
-		SerialModemGateway gateway = new SerialModemGateway("modem.com1",
-				"COM1", 9600, "Nokia", "6310i");
+		
+		//windows下处理
+		//SerialModemGateway gateway = new SerialModemGateway("modem.com1","COM1", 9600, "Nokia", "6310i");
+		
+		//linux下处理
+		SerialModemGateway gateway = new SerialModemGateway("SWSMS","/dev/ttyS0", 9600, "wavecom", "M1306B");
+		
 		gateway.setInbound(true); // 是否可以接受短信
 		gateway.setOutbound(true);// 是否可以发送短信
 		gateway.setSimPin("0000");// 设置SIM卡的个人识别号码
 
 		service.addGateway(gateway);// 添加一个GSM调制解调器
-		service.startService(); // 开始服务
+		
+		try{
+			service.startService(); // 开始服务
+		}catch(Exception e){
+			log.error("短信猫启动失败,失败原因:" + e.getMessage());
+			service.stopService();
+		}
 	}
 
 	/**
