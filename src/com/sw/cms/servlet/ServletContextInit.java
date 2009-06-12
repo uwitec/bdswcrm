@@ -20,6 +20,13 @@ public class ServletContextInit extends HttpServlet {
 			ServletContext servletContext = getServletContext();
 			ApplicationContext ctx = WebApplicationContextUtils.getRequiredWebApplicationContext(servletContext);
 			StaticParamDo.setCtx(ctx);
+			
+//			//生成期初调试
+//			InitParamDAO dao = (InitParamDAO)ctx.getBean("initParamDao");
+//			
+//			//期初日期,昨日
+//			dao.genCleintWlqc("2009-06-10","2009-06-09"); 
+			
 		}catch(Exception e){
 			log.error("初始化spring context失败，失败原因" + e.getMessage());
 		}

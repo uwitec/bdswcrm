@@ -82,6 +82,31 @@ public class InitParamDAO extends JdbcBaseDAO {
 	}
 	
 	
+	/**
+	 * 生成某一天期初值
+	 * @param cdate  期初日期
+	 * @param cdat_1 期初前一天
+	 */
+	public void genCleintWlqc(String cdate,String cdat_1){
+		List clientList = getClientList();
+		if(clientList != null && clientList.size()>0){
+			for(int i=0;i<clientList.size();i++){
+				Map map = (Map)clientList.get(i);
+				String client_name = StringUtils.nullToStr(map.get("id"));
+							
+				//今日期初应收 = 昨日期初应收 + 昨日发生应收 - 昨日已收
+				double qcys = this.getClientYsqc(client_name, cdat_1) + this.getSjysje(client_name, cdat_1) - this.getSjyishouje(client_name, cdat_1);
+				
+				//今日期初应付 = 昨日期初应付 + 昨日发生应付 - 昨日已付
+				double qcyf = this.getClientYfqc(client_name, cdat_1) + this.getSjyfje(client_name, cdat_1) - this.getSjyifuje(client_name, cdat_1);
+				
+				this.insertQc(client_name, qcys, qcyf, cdate);
+			}
+		}
+		log.info("生成" + cdate + "往来期初成功");
+	}
+	
+	
 	private void insertQc(String client_name,double ysqc,double yfqc,String cdate){
 		this.delQc(client_name, cdate);
 		String sql = "insert into client_qc(client_name,ysqc,yfqc,cdate) values(?,?,?,?)";

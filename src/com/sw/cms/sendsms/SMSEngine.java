@@ -56,7 +56,7 @@ public class SMSEngine {
 		//SerialModemGateway gateway = new SerialModemGateway("modem.com1","COM1", 9600, "Nokia", "6310i");
 		
 		//linux下处理
-		SerialModemGateway gateway = new SerialModemGateway("SWSMS","/dev/ttyS0", 9600, "wavecom", "M1306B");
+		SerialModemGateway gateway = new SerialModemGateway("SWSMS","ttyS0", 9600, "Nokia", "6310i");
 		
 		gateway.setInbound(true); // 是否可以接受短信
 		gateway.setOutbound(true);// 是否可以发送短信
