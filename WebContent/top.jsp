@@ -69,11 +69,18 @@ String user_id = info.getUser_id();
     //查询库存
 	function openWin(flag){
 		if(flag == "1"){
-			document.myform.action = "queryKcMx.html";
+			var destination = "top.htm";
+			var fea ='width=800,height=600,left=' + (screen.availWidth-800)/2 + ',top=' + (screen.availHeight-600)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+			
+			window.open(destination,'库存查询',fea);
 		}else{
+			//var destination = "client.htm";
+			//var fea ='width=800,height=600,left=' + (screen.availWidth-800)/2 + ',top=' + (screen.availHeight-600)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+			
+			//window.open(destination,'客户查询',fea);	
 			document.myform.action = "queryClients.html";
-		}
-		document.myform.submit();
+			document.myform.submit();
+		}		
 	}
 	
 	//触发点击回车事件

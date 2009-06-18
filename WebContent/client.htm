@@ -1,0 +1,18 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title></title>
+<script>
+  function to_Login()
+  {
+  	  var obj = window.opener.document.myform;
+      document.myForm.client_con.value = obj.client_con.value;
+	  document.myForm.submit();
+  }
+</script>  
+<body onLoad="to_Login()">  
+   <form name="myForm" method="post" action="queryClients.html">
+      <input type="hidden" name="client_con" />
+   </form>
+</body>
+</html>
