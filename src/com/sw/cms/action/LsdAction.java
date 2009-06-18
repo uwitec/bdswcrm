@@ -382,7 +382,8 @@ public class LsdAction extends BaseAction {
 		lsd = (Lsd)lsdService.getLsd(id); //零售单
 		lsdProducts = lsdService.getLsdProducts(id);
 		
-		if(sp_state.equals("3")){
+		//只有在审批通过并且完成初始化后再判断库存是否满足
+		if(sp_state.equals("3") && iscs_flag.equals("1")){	
 			//审批通过,需要判断库存是否满足			
 			String msg = lsdService.checkKc(lsd, lsdProducts);
 			if(!msg.equals("")){
