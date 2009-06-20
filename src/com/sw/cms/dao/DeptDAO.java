@@ -76,12 +76,17 @@ public class DeptDAO extends JdbcBaseDAO {
 			String sql = "insert into dept(dept_id,dept_name,fzr,phone,xh,parent_id) values(?,?,?,?,?,?)";
 			Object[] param = new Object[6];
 			
+			String parent_id = dept.getParent_id();
+			if(parent_id==null || parent_id.equals("")){
+				parent_id = "0";
+			}
+			
 			param[0] = this.getDeptId(dept.getParent_id());
 			param[1] = dept.getDept_name();
 			param[2] = dept.getFzr();
 			param[3] = dept.getPhone();
 			param[4] = dept.getXh();
-			param[5] = dept.getParent_id();
+			param[5] = parent_id;
 			
 			this.getJdbcTemplate().update(sql,param);
 		}else{
@@ -90,11 +95,16 @@ public class DeptDAO extends JdbcBaseDAO {
 			
 			Object[] param = new Object[6];
 			
+			String parent_id = dept.getParent_id();
+			if(parent_id==null || parent_id.equals("")){
+				parent_id = "0";
+			}
+			
 			param[0] = dept.getDept_name();
 			param[1] = dept.getFzr();
 			param[2] = dept.getPhone();
 			param[3] = dept.getXh();
-			param[4] = dept.getParent_id();
+			param[4] = parent_id;
 			param[5] = dept.getDept_id();
 			
 			this.getJdbcTemplate().update(sql,param);
