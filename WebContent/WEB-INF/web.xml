@@ -84,6 +84,15 @@
     	<load-on-startup>5</load-on-startup>
     </servlet>
     
+    <servlet>
+        <servlet-name>getBrands</servlet-name>
+        <servlet-class>com.sw.cms.servlet.GetUserAllServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>getBrands</servlet-name>
+        <url-pattern>/getBrands.do</url-pattern>
+    </servlet-mapping>
+    
 	<servlet>
         <servlet-name>img</servlet-name>
         <servlet-class>com.sw.cms.servlet.AuthImage</servlet-class>

@@ -12,6 +12,9 @@ String[] positions = (String[])VS.findValue("positions");
 
 Map userMap = (Map)VS.findValue("userMap");
 
+String msg = StringUtils.nullToStr(session.getAttribute("MSG"));
+session.removeAttribute("MSG");
+
 %>
 
 <html>
@@ -51,6 +54,9 @@ Map userMap = (Map)VS.findValue("userMap");
 </head>
 <body>
 <form name="userForm" action="updateEmployee.html" method="post">
+<center>
+<font color="red" style="font-size:16px;"><%=msg %></font>
+</center>
 <input type="hidden" name="user.user_id" id="user_id" value="<%=StringUtils.nullToStr(userMap.get("user_id")) %>">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>

@@ -23,6 +23,7 @@ String user_id = info.getUser_id();
 <script language="JavaScript" src="js/Check.js"></script>
 <script language='JavaScript' src="js/date.js"></script>
 <script language='JavaScript' src="js/nums.js"></script>
+
 <script type="text/javascript">
 
 	var allCount = 2;

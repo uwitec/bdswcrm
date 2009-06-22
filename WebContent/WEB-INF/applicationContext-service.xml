@@ -518,7 +518,14 @@
       <property name="target">
           <bean class="com.sw.cms.service.DeptXshzService" autowire="byName"/>
       </property>
-    </bean>                           
+    </bean>  
+    
+     <!-- 联系人 -->
+    <bean id="lxrService" parent="baseTransaction">
+       <property name="target">
+          <bean class="com.sw.cms.service.LxrService" autowire="byName"/>
+       </property>
+    </bean>
                
 </beans>
 

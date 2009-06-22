@@ -11,6 +11,8 @@ List depts = (List)VS.findValue("depts");
 String dept_id = (String)VS.findValue("dept_id");
 String[] positions = (String[])VS.findValue("positions");
 
+String msg = StringUtils.nullToStr(session.getAttribute("MSG"));
+session.removeAttribute("MSG");
 %>
 
 <html>
@@ -47,6 +49,9 @@ String[] positions = (String[])VS.findValue("positions");
 </head>
 <body>
 <form name="userForm" action="saveEmployee.html" method="post">
+<center>
+<font color="red" style="font-size:16px;"><%=msg %></font>
+</center>
 <input type="hidden" name="user.dept" id="dept" value="<%=dept_id %>">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>

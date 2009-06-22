@@ -8,7 +8,6 @@
 OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
 
 Page results = (Page)VS.findValue("lsyskPage");
-
 String orderName = (String)VS.findValue("orderName");
 String orderType = (String)VS.findValue("orderType");
 

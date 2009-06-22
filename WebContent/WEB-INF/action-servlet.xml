@@ -136,4 +136,6 @@
 	
 	<bean id="deptXshzAction" class="com.sw.cms.action.DeptXshzAction" scope="prototype" autowire="byName"/>
 	
+	<bean id="lxrAction" class="com.sw.cms.action.LxrAction" scope="prototype" autowire="byName"/>
+	
 </beans>

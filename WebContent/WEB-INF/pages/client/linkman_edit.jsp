@@ -22,7 +22,7 @@ ClientsLinkman  linkman = (ClientsLinkman)VS.findValue("linkman");
 	{
 		if(document.getElementById("name").value == "")
 		{
-			alert("姓名不能为空，请选择！");
+			alert("姓名不能为空，请选择!");
 			return;
 		}		
 		
