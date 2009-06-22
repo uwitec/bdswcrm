@@ -625,7 +625,7 @@ if(sp_state.equals("1")){
             <!--修改 --------------------------------------------------------------------------------------  -->
 		 <input  id="brand"    type="text"   length="20"  onblur="setValue()" value="<%for(int i=0;i<userList.size();i++){Map map=(Map)userList.get(i); if(map.get("user_id").toString().equals(xsd.getFzr())) out.print(map.get("real_name"));} %>"/> 
          <img src="images/select.gif" align="absmiddle" title="选择经手人" border="0" onclick="openywyWin();" style="cursor:hand">
-          <div   id="brandTip"  style="height:12px;position:absolute;left:610px; top:55px; width:132px;border:1px solid menu;background-Color:#fff;display:none;" >
+          <div   id="brandTip"  style="height:12px;position:absolute;left:610px; top:55px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
           </div>
 		    <input type="hidden" name="xsd.fzr" id="fzr" value="<%=xsd.getFzr()%>"/> 
 		<!--修改 --------------------------------------------------------------------------------------  --><font color="red">*</font>		

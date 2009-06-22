@@ -62,8 +62,6 @@
 	      <font color="red">*</font>
 	    </td>
 	</tr>
-		 
-	</tr>
 	<tr> 
 	     
 		<td class="a1" width="15%">姓名</td>

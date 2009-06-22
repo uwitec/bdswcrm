@@ -190,7 +190,7 @@ if(xsskDescs != null && xsskDescs.size()>0){
 			    <!--修改 --------------------------------------------------------------------------------------  -->
 		 <input  id="brand"    type="text"   length="20"  onblur="setValue()" /> 
          <img src="images/select.gif" align="absmiddle" title="选择经手人" border="0" onclick="openywyWin();" style="cursor:hand">
-          <div   id="brandTip"  style="height:12px;position:absolute;left:132px; top:113px;width:132px;border:1px solid menu;background-Color:#fff;display:none;" >
+          <div   id="brandTip"  style="height:12px;position:absolute;left:132px; top:113px;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
           </div>
 		    <input type="hidden" name="xssk.jsr" id="jsr"  /> 
 		<!--修改 --------------------------------------------------------------------------------------  --><font color="red">*</font>	

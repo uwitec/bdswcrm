@@ -318,7 +318,7 @@ if(jhdProducts != null && jhdProducts.size()>0){
 			  <!--修改 --------------------------------------------------------------------------------------  -->
 		 <input  id="brand"    type="text"   length="20"  onblur="setValue()" value="<%for(int i=0;i<userList.size();i++){Map map=(Map)userList.get(i); if(map.get("user_id").toString().equals(jhd.getFzr())) out.print(map.get("real_name"));} %>"/> 
          <img src="images/select.gif" align="absmiddle" title="选择经手人" border="0" onclick="openywyWin();" style="cursor:hand">
-          <div   id="brandTip"  style="height:12px;position:absolute;left:612px; top:85px; width:132px;border:1px solid menu;background-Color:#fff;display:none;" >
+          <div   id="brandTip"  style="height:12px;position:absolute;left:612px; top:85px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
           </div>
 		    <input type="hidden" name="jhd.fzr" id="fzr" value="<%=jhd.getFzr()%>"/> 
 		<!--修改 --------------------------------------------------------------------------------------  --><font color="red">*</font>	

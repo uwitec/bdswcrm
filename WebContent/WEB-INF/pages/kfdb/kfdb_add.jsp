@@ -334,7 +334,7 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 			   <!--修改 --------------------------------------------------------------------------------------  -->
 		 <input  id="bian"  type="text"   length="20"  onblur="setvalues()" /> 
          <img src="images/select.gif" align="absmiddle" title="选择经手人" border="0" onclick="opensqrWin();" style="cursor:hand">
-          <div   id="bianTip"  style="height:12px;position:absolute;left:610px; top:110px; width:132px;border:1px solid menu;background-Color:#fff;display:none;" >
+          <div   id="bianTip"  style="height:12px;position:absolute;left:610px; top:110px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
           </div>
 		    <input type="hidden" name="kfdb.sqr" id="sqr"  /> 
 		<!--修改 --------------------------------------------------------------------------------------  --> 	
@@ -347,7 +347,7 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 			   <!--修改 --------------------------------------------------------------------------------------  -->
 		 <input  id="brand"    type="text"   length="20"  onblur="setValue()" /> 
          <img src="images/select.gif" align="absmiddle" title="选择经手人" border="0" onclick="openywyWin();" style="cursor:hand">
-          <div   id="brandTip"  style="height:12px;position:absolute;left:146px; top:141px; width:132px;border:1px solid menu;background-Color:#fff;display:none;" >
+          <div   id="brandTip"  style="height:12px;position:absolute;left:146px; top:141px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
           </div>
 		    <input type="hidden" name="kfdb.jsr" id="jsr"  /> 
 		<!--修改 --------------------------------------------------------------------------------------  --> 

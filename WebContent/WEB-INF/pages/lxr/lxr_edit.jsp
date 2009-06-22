@@ -68,8 +68,6 @@ ClientsLinkman linkman=(ClientsLinkman)VS.findValue("linkman");
 	      <input type="text"   id="client_name"   size="37" maxlength="50" readonly="readonly" value="<%=linkman.getClients_id() %>"/>
 	    </td>
 	</tr>
-		 
-	</tr>
 	<tr> 
 	     
 		<td class="a1" width="15%">姓名</td>

@@ -90,7 +90,7 @@ function submits()
 					 <!--修改 --------------------------------------------------------------------------------------  -->
 		 <input  id="brand" type="text"   length="20"  onblur="setValue()"  /> 
          <img src="images/select.gif" align="absmiddle" title="选择经手人" border="0" onclick="openywyWin();" style="cursor:hand">
-          <div   id="brandTip"  style="height:12px;position:absolute;left:660px; top:85px; width:132px;border:1px solid menu;background-Color:#fff;display:none;" >
+          <div   id="brandTip"  style="height:12px;position:absolute;left:660px; top:85px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
           </div>
 		    <input type="hidden" name="ywy" id="ywy"  /> 
 		<!--修改 --------------------------------------------------------------------------------------  -->
