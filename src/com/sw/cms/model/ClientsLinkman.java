@@ -8,7 +8,7 @@ package com.sw.cms.model;
  */
 public class ClientsLinkman
 {
-	private int id; // 流水号
+	private String id;  
 
 	private String name; //联系人姓名
 
@@ -80,11 +80,13 @@ public class ClientsLinkman
 		this.gzdh = gzdh;
 	}
 
-	public int getId() {
+ 
+
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

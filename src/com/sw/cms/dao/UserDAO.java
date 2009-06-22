@@ -56,9 +56,10 @@ public class UserDAO extends JdbcBaseDAO {
 	 */
 	public List getAllUserList(){		
 		//所有为业务员的员工信息
-		String sql = "select user_id,real_name from sys_user where is_sys_user='0' and is_ywy='是'";
+		String sql = "select   user_id,real_name from sys_user where is_sys_user='0' and is_ywy='是'";
 		return this.getJdbcTemplate().queryForList(sql);
 	}
+	 
 	
 	
 	/**

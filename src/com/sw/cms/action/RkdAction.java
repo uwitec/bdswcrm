@@ -8,7 +8,10 @@ import com.sw.cms.model.LoginInfo;
 import com.sw.cms.model.Page;
 import com.sw.cms.model.Rkd;
 import com.sw.cms.model.RkdProduct;
+import com.sw.cms.service.DeptService;
+import com.sw.cms.service.EmployeeService;
 import com.sw.cms.service.RkdService;
+import com.sw.cms.service.SjzdService;
 import com.sw.cms.service.UserService;
 import com.sw.cms.util.Constant;
 import com.sw.cms.util.DateComFunc;
@@ -18,9 +21,15 @@ public class RkdAction extends BaseAction {
 	
 	private RkdService rkdService;
 	private UserService userService;
+	private DeptService deptService;
+	private SjzdService sjzdService;
+	private EmployeeService employeeService;
 	private Rkd rkd = new Rkd();
+	private List depts = new ArrayList();
+	private String[] positions;
 	
 	private Page rkdPage;
+	private Page ywyEmployeePage;//修改
 	private List storeList = new ArrayList();
 	private List userList = new ArrayList();
 	
@@ -78,6 +87,41 @@ public class RkdAction extends BaseAction {
 		
 		storeList = rkdService.getAllStoreList();
 		return "success";
+	}
+	
+	public String selCgfzr()
+	{
+		try
+		{
+			int curPage = ParameterUtility.getIntParameter(getRequest(), "curPage",1);
+			String ywyname=ParameterUtility.getStringParameter(getRequest(), "name","");
+			String ywydept=ParameterUtility.getStringParameter(getRequest(), "dept","");
+			String ywyposition=ParameterUtility.getStringParameter(getRequest(),"position","");
+			int rowsPerPage = 15;
+			String con="";
+			if(!ywyname.equals(""))
+			{
+				con+=" and a.real_name like '%"+ywyname+"%'";
+			}
+			if(!ywydept.equals(""))
+			{
+				con+=" and b.dept_id='"+ywydept+"'";
+			}
+			if(!ywyposition.equals(""))
+			{
+				con+=" and a.position='"+ywyposition+"'";
+			}
+			ywyEmployeePage=employeeService.getYwyEmployee(con, curPage, rowsPerPage);
+			positions = sjzdService.getSjzdXmxxByZdId("SJZD_ZWXX");
+			depts = deptService.getDepts();
+			return "success";
+		}
+		catch(Exception e)
+		{
+			log.error("获取业务员列表  失败原因"+e.getMessage());
+			return "error";
+		}
+		
 	}
 	
 	
@@ -329,6 +373,54 @@ public class RkdAction extends BaseAction {
 
 	public void setCreatdate2(String creatdate2) {
 		this.creatdate2 = creatdate2;
+	}
+
+	public List getDepts() {
+		return depts;
+	}
+
+	public void setDepts(List depts) {
+		this.depts = depts;
+	}
+
+	public DeptService getDeptService() {
+		return deptService;
+	}
+
+	public void setDeptService(DeptService deptService) {
+		this.deptService = deptService;
+	}
+
+	public EmployeeService getEmployeeService() {
+		return employeeService;
+	}
+
+	public void setEmployeeService(EmployeeService employeeService) {
+		this.employeeService = employeeService;
+	}
+
+	public String[] getPositions() {
+		return positions;
+	}
+
+	public void setPositions(String[] positions) {
+		this.positions = positions;
+	}
+
+	public SjzdService getSjzdService() {
+		return sjzdService;
+	}
+
+	public void setSjzdService(SjzdService sjzdService) {
+		this.sjzdService = sjzdService;
+	}
+
+	public Page getYwyEmployeePage() {
+		return ywyEmployeePage;
+	}
+
+	public void setYwyEmployeePage(Page ywyEmployeePage) {
+		this.ywyEmployeePage = ywyEmployeePage;
 	}
 
 }

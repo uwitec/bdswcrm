@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.RowMapper;
 
 import com.sw.cms.dao.base.JdbcBaseDAO;
 import com.sw.cms.model.ClientsLinkman;
+import com.sw.cms.model.Page;
 import com.sw.cms.util.StringUtils;
 
 /**
@@ -19,14 +20,28 @@ import com.sw.cms.util.StringUtils;
 public class ClientsLinkmanDAO  extends  JdbcBaseDAO 
 {
 	/**
-	 * 获取联系人列表
+	 * 获取联系人列表(不翻页)
 	 * @param id
 	 * @return
 	 */
     public List getClientsLinkman(String id)
     {
-    	String sql="select l.id,l.name,l.sex,l.lx,l.zw,l.dept,l.gzdh,l.yddh,l.mail,l.jtdh,l.qtlx,l.address,l.sr,l.ah,l.remark,c.name as clients_id from clients_linkman  l left join clients c on c.id=l.clients_id where c.id='"+id+"' ";
+    	String sql="select l.id,l.name,l.sex,l.lx,l.zw,l.dept,c.gzdh,l.yddh,l.mail,l.jtdh,l.qtlx,l.address,l.sr,l.ah,l.remark,c.name as clients_id from clients_linkman  l left join clients c on c.id=l.clients_id where c.id='"+id+"' ";
     	return this.getJdbcTemplate().query(sql, new ClientsLinkmanRowMapper());
+    }
+    
+    /**
+     * 获取联系人列表（翻页）
+     * @return
+     */
+    public Page getClinetsLinkman(String con,int curPage,int rowsPerPage)
+    {
+    	String sql="select l.id,l.name,l.sex,l.lx,l.zw,l.dept,l.yddh,l.mail,l.jtdh,l.gzdh,l.qtlx,l.address,l.sr,l.ah,l.remark,c.name as clients_name, c.id as clients_id,c.cz from clients_linkman  l left join clients c on c.id=l.clients_id where 1=1 ";
+    	if(!con.equals(""))
+    	{
+    		sql=sql+con;
+    	}
+    	return this.getResultByPage(sql, curPage, rowsPerPage);
     }
     /**
      * 根据联系人ID 获取联系人
@@ -45,23 +60,24 @@ public class ClientsLinkmanDAO  extends  JdbcBaseDAO
      */
     public void insertLinkman(ClientsLinkman linkman)
     {
-    	String sql="insert into clients_linkman(name,sex,lx,zw,dept,gzdh,yddh,mail,jtdh,qtlx,address,sr,ah,remark,clients_id)values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ";
-    	Object []obj=new Object[15];   	
-    	obj[0]=linkman.getName();
-    	obj[1]=linkman.getSex();
-    	obj[2]=linkman.getLx();
-    	obj[3]=linkman.getZw();
-    	obj[4]=linkman.getDept();
-    	obj[5]=linkman.getGzdh();
-    	obj[6]=linkman.getYddh();
-    	obj[7]=linkman.getMail();
-    	obj[8]=linkman.getJtdh();
-    	obj[9]=linkman.getQtlx();
-    	obj[10]=linkman.getAddress();
-    	obj[11]=StringUtils.strToNull(linkman.getSr());
-    	obj[12]=linkman.getAh();
-    	obj[13]=linkman.getRemark();
-    	obj[14]=linkman.getClients_id();
+    	String sql="insert into clients_linkman(id,name,sex,lx,zw,dept,gzdh,yddh,mail,jtdh,qtlx,address,sr,ah,remark,clients_id)values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    	Object []obj=new Object[16];
+    	obj[0]=getClientLinkmanId();
+    	obj[1]=linkman.getName();
+    	obj[2]=linkman.getSex();
+    	obj[3]=linkman.getLx();
+    	obj[4]=linkman.getZw();
+    	obj[5]=linkman.getDept();
+    	obj[6]=linkman.getGzdh();
+    	obj[7]=linkman.getYddh();
+    	obj[8]=linkman.getMail();
+    	obj[9]=linkman.getJtdh();
+    	obj[10]=linkman.getQtlx();
+    	obj[11]=linkman.getAddress();
+    	obj[12]=StringUtils.strToNull(linkman.getSr());
+    	obj[13]=linkman.getAh();
+    	obj[14]=linkman.getRemark();
+    	obj[15]=linkman.getClients_id();
     	this.getJdbcTemplate().update(sql,obj);
     	
     }
@@ -104,6 +120,29 @@ public class ClientsLinkmanDAO  extends  JdbcBaseDAO
     	
     	return  (String)obj.get("clients_id");
     }
+    
+    /**
+     * 
+     * @return
+     */
+    private String getClientLinkmanId() 
+    {
+		String sql = "select linkman_id from cms_all_seq";
+
+		// 取当前序列号
+		String curId = this.getJdbcTemplate().queryForInt(sql) + "";
+
+		// 将序列号加1
+		sql = "update cms_all_seq set linkman_id=linkman_id+1";
+		this.getJdbcTemplate().update(sql);
+
+		for (int i = curId.length(); i < 8; i++) {
+			curId = "0" + curId;
+		}
+
+		return "LXR" + curId;
+	}
+	
     	
     
     /**
@@ -113,7 +152,7 @@ public class ClientsLinkmanDAO  extends  JdbcBaseDAO
     class ClientsLinkmanRowMapper implements RowMapper {
 		public Object mapRow(ResultSet rs, int index) throws SQLException {
 			ClientsLinkman clientslinkman = new ClientsLinkman();
-			clientslinkman.setId(rs.getInt("id"));
+			clientslinkman.setId(rs.getString("id"));
 			clientslinkman.setName(rs.getString("name"));
 			clientslinkman.setSex(rs.getString("sex"));
 			clientslinkman.setLx(rs.getString("lx"));

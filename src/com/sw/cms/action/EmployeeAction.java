@@ -26,9 +26,11 @@ public class EmployeeAction extends BaseAction {
 	private UserService userService;
 	private DeptService deptService;
 	private SjzdService sjzdService;
+	 
 	
 	private SysUser user = new SysUser();
 	private Page employeePage;
+	private Page ywyEmployeePage;//修改
 	
 	private Map userMap;
 	
@@ -40,7 +42,7 @@ public class EmployeeAction extends BaseAction {
 	private String employee_id = "";
 	
 	private String[] positions;
-	
+ 
 	
 	/**
 	 * 打开员工管理框架
@@ -75,6 +77,44 @@ public class EmployeeAction extends BaseAction {
 		return "success";
 	}
 	
+	/** 取业务员列表 
+	 * 
+	 */
+	public String selYwyEmployee()
+	{
+		 
+		try
+		{
+			int curPage = ParameterUtility.getIntParameter(getRequest(), "curPage",1);
+			String ywyname=ParameterUtility.getStringParameter(getRequest(), "name","");
+			String ywydept=ParameterUtility.getStringParameter(getRequest(), "dept","");
+			String ywyposition=ParameterUtility.getStringParameter(getRequest(),"position","");
+			int rowsPerPage = 15;
+			String con="";
+			if(!ywyname.equals(""))
+			{
+				con+=" and a.real_name like '%"+ywyname+"%'";
+			}
+			if(!ywydept.equals(""))
+			{
+				con+=" and b.dept_id='"+ywydept+"'";
+			}
+			if(!ywyposition.equals(""))
+			{
+				con+=" and a.position='"+ywyposition+"'";
+			}
+			ywyEmployeePage=employeeService.getYwyEmployee(con, curPage, rowsPerPage);
+			positions = sjzdService.getSjzdXmxxByZdId("SJZD_ZWXX");
+			depts = deptService.getDepts();
+			return "success";
+		}
+		catch(Exception e)
+		{
+			log.error("获取业务员列表  失败原因"+e.getMessage());
+			return "error";
+		}
+	}
+	
 	
 	/**
 	 * 打开添加页面
@@ -91,6 +131,18 @@ public class EmployeeAction extends BaseAction {
 	 * @return
 	 */
 	public String save(){
+		if(user.getIs_ywy().equals("是"))
+		{
+			int count=employeeService.getEmployeeByNameIsExist(user.getReal_name());
+			if(count>0)
+			{
+			   getSession().setAttribute("MSG", "员工姓名已存在，请选用其它姓名！");
+			   positions = sjzdService.getSjzdXmxxByZdId("SJZD_ZWXX");
+			   dept_id=user.getDept();
+			   return "input";
+			}
+		}
+		
 		employeeService.saveUser(user);
 		return "success";
 	}
@@ -112,6 +164,24 @@ public class EmployeeAction extends BaseAction {
 	 * @return
 	 */
 	public String update(){	
+		
+		if(user.getIs_ywy().equals("是"))
+		{
+			 userMap=employeeService.getUser(user.getUser_id());
+			 if(!userMap.get("real_name").toString().equals(user.getReal_name()))
+			 {
+			
+			     int count=employeeService.getEmployeeByNameIsExist(user.getReal_name());
+			     if(count>0)
+			     {
+			        getSession().setAttribute("MSG", "员工姓名已存在，请选用其它姓名！");
+			        userMap=employeeService.getUser(user.getUser_id());
+			        depts = deptService.getDepts();
+			        positions = sjzdService.getSjzdXmxxByZdId("SJZD_ZWXX");
+			        return "input";
+			    }
+			 }
+		}
 		employeeService.updateUser(user);
 		return "success";
 	}
@@ -216,6 +286,14 @@ public class EmployeeAction extends BaseAction {
 
 	public void setPositions(String[] positions) {
 		this.positions = positions;
+	}
+
+	public Page getYwyEmployeePage() {
+		return ywyEmployeePage;
+	}
+
+	public void setYwyEmployeePage(Page ywyEmployeePage) {
+		this.ywyEmployeePage = ywyEmployeePage;
 	}
 
 }

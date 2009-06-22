@@ -253,6 +253,7 @@ public class UserAction extends BaseAction {
 		int i = userService.getUserByName(user.getUser_name());
 		if(i>0){
 			getSession().setAttribute("MSG", "用户名已存在，请选用其它用户名！");
+			employList = userService.getAllEmployeeList();
 			return "input";
 		}
 		userService.saveUser(user);

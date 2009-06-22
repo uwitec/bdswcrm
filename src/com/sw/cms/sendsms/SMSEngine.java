@@ -58,6 +58,7 @@ public class SMSEngine {
 		//linux下处理
 		SerialModemGateway gateway = new SerialModemGateway("SWSMS","ttyS0", 9600, "Nokia", "6310i");
 		
+
 		gateway.setInbound(true); // 是否可以接受短信
 		gateway.setOutbound(true);// 是否可以发送短信
 		gateway.setSimPin("0000");// 设置SIM卡的个人识别号码

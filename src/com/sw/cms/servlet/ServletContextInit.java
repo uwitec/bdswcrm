@@ -31,12 +31,12 @@ public class ServletContextInit extends HttpServlet {
 			log.error("初始化spring context失败，失败原因" + e.getMessage());
 		}
 		
-		try{
-			SMSEngine eng=SMSEngine.getSMSEngine();
-			eng.initService();
-		}catch(Exception e){
-			log.error("短信服务注册失败，失败原因：" + e.getMessage());
-		}
+//		try{
+//			SMSEngine eng=SMSEngine.getSMSEngine();
+//			eng.initService();
+//		}catch(Exception e){
+//			log.error("短信服务注册失败，失败原因：" + e.getMessage());
+//		}
 	}
 	
 	public void destroy() {

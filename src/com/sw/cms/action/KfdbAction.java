@@ -7,11 +7,15 @@ import com.sw.cms.action.base.BaseAction;
 import com.sw.cms.model.Kfdb;
 import com.sw.cms.model.LoginInfo;
 import com.sw.cms.model.Page;
+import com.sw.cms.service.DeptService;
+import com.sw.cms.service.EmployeeService;
 import com.sw.cms.service.KfdbService;
+import com.sw.cms.service.SjzdService;
 import com.sw.cms.service.StoreService;
 import com.sw.cms.service.SysInitSetService;
 import com.sw.cms.service.UserService;
 import com.sw.cms.util.Constant;
+import com.sw.cms.util.ParameterUtility;
 
 public class KfdbAction extends BaseAction {
 	
@@ -20,11 +24,20 @@ public class KfdbAction extends BaseAction {
 	private StoreService storeService;
 	private SysInitSetService sysInitSetService;
 	
+	private DeptService deptService;
+	private SjzdService sjzdService;
+	private EmployeeService employeeService;
+	
+	private String[] positions;
+	
+	private Page ywyEmployeePage;//修改
+	
 	private Page pageKfdb;
 	private Kfdb kfdb = new Kfdb();
 	private List kfdbProducts = new ArrayList();	
 	private List storeList = new ArrayList();
 	private List userList = new ArrayList();
+	private List depts = new ArrayList();
 	
 	private String id = "";
 	private String ck_date1 = "";
@@ -65,6 +78,39 @@ public class KfdbAction extends BaseAction {
 		
 		pageKfdb = kfdbService.getKfdbList(con, curPage, rowsPerPage);
 		return "success";
+	}
+	public String selSqr()
+	{
+		try
+		{
+			int curPage = ParameterUtility.getIntParameter(getRequest(), "curPage",1);
+			String ywyname=ParameterUtility.getStringParameter(getRequest(), "name","");
+			String ywydept=ParameterUtility.getStringParameter(getRequest(), "dept","");
+			String ywyposition=ParameterUtility.getStringParameter(getRequest(),"position","");
+			int rowsPerPage = 15;
+			String con="";
+			if(!ywyname.equals(""))
+			{
+				con+=" and a.real_name like '%"+ywyname+"%'";
+			}
+			if(!ywydept.equals(""))
+			{
+				con+=" and b.dept_id='"+ywydept+"'";
+			}
+			if(!ywyposition.equals(""))
+			{
+				con+=" and a.position='"+ywyposition+"'";
+			}
+			ywyEmployeePage=employeeService.getYwyEmployee(con, curPage, rowsPerPage);
+			positions = sjzdService.getSjzdXmxxByZdId("SJZD_ZWXX");
+			depts = deptService.getDepts();
+			return "success";
+		}
+		catch(Exception e)
+		{
+			log.error("获取业务员列表  失败原因"+e.getMessage());
+			return "error";
+		}
 	}
 	
 	
@@ -275,6 +321,48 @@ public class KfdbAction extends BaseAction {
 
 	public void setSysInitSetService(SysInitSetService sysInitSetService) {
 		this.sysInitSetService = sysInitSetService;
+	}
+	public List getDepts() {
+		return depts;
+	}
+	public void setDepts(List depts) {
+		this.depts = depts;
+	}
+	public DeptService getDeptService() {
+		return deptService;
+	}
+	public void setDeptService(DeptService deptService) {
+		this.deptService = deptService;
+	}
+	public EmployeeService getEmployeeService() {
+		return employeeService;
+	}
+	public void setEmployeeService(EmployeeService employeeService) {
+		this.employeeService = employeeService;
+	}
+	public String getIscs_flag() {
+		return iscs_flag;
+	}
+	public void setIscs_flag(String iscs_flag) {
+		this.iscs_flag = iscs_flag;
+	}
+	public String[] getPositions() {
+		return positions;
+	}
+	public void setPositions(String[] positions) {
+		this.positions = positions;
+	}
+	public SjzdService getSjzdService() {
+		return sjzdService;
+	}
+	public void setSjzdService(SjzdService sjzdService) {
+		this.sjzdService = sjzdService;
+	}
+	public Page getYwyEmployeePage() {
+		return ywyEmployeePage;
+	}
+	public void setYwyEmployeePage(Page ywyEmployeePage) {
+		this.ywyEmployeePage = ywyEmployeePage;
 	}
 
 }

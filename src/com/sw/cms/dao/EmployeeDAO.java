@@ -32,6 +32,24 @@ public class EmployeeDAO extends JdbcBaseDAO {
 		return this.getResultByPage(sql, curPage, rowsPerPage);
 	}
 	
+	//修改-------------------------------------------------
+	/**
+	 * 取业务员列表（带分页）
+	 * @param con
+	 * @param curPage
+	 * @param rowPerPage
+	 * @return
+	 */
+	public Page getYwyEmployee(String con,int curPage,int rowPerPage)
+	{	
+		String sql="select a.*,b.dept_name from sys_user a left join dept b on b.dept_id=a.dept where a.is_sys_user=0 and a.is_ywy='是'";
+	    if(!con.equals(""))
+	    {
+	    	sql=sql+con;
+	    }
+	    return getResultByPage(sql,curPage,rowPerPage);
+	}
+   //	修改-------------------------------------------------
 	
 	/**
 	 * 保存用户信息
@@ -148,6 +166,17 @@ public class EmployeeDAO extends JdbcBaseDAO {
 		}
 
 		return "YH" + curId;
+	}
+	
+	/**
+	 * 判断员工姓名是否相同
+	 * @param employeeName
+	 * @return
+	 */
+	public int getEmployeeByNameIsExist(String employeeName)
+	{
+		String sql="select count(*) as name from sys_user where is_sys_user=0 and is_ywy='是' and real_name='"+employeeName+"'";
+		return  this.getJdbcTemplate().queryForInt(sql);
 	}
 	
 }

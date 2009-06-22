@@ -1,12 +1,18 @@
 package com.sw.cms.service;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.sw.cms.dao.ProductDAO;
 import com.sw.cms.dao.ProductKcDAO;
 import com.sw.cms.dao.SerialNumDAO;
 import com.sw.cms.dao.StoreDAO;
 import com.sw.cms.dao.SysInitSetDAO;
+import com.sw.cms.dao.UserDAO;
 import com.sw.cms.model.Product;
 import com.sw.cms.model.SysInitSet;
 import com.sw.cms.util.DateComFunc;
@@ -18,6 +24,7 @@ public class DwrService {
 	private SysInitSetDAO sysInitSetDao;
 	private StoreDAO storeDao;
 	private SerialNumDAO serialNumDao;
+	private UserDAO     userDao;
 
 	/**
 	 * 根据序列号查询产品对象
@@ -122,6 +129,48 @@ public class DwrService {
 		return serialNumDao.chkSerialNum(serial_num);
 	}
 	
+	/**
+	 * 比对业务员姓名填充(Ajax)
+	 * @param con
+	 * @return
+	 */
+    //修改了	-----------------------------------------------------------------------
+	public List getAllUserList(String con)
+	{  
+		List allUsersList= userDao.getAllUserList();
+		List<String> result=new ArrayList<String>();
+		List<String> userIdList=new ArrayList<String>();
+		List<List> list=new ArrayList<List>();	
+		if(!con.trim().equals(""))
+		{
+			String regEx=con;   
+			Pattern p=Pattern.compile(regEx);
+		    Matcher m=null;
+		for(int i=0;i<allUsersList.size();i++)
+		{   
+			   Map map=(Map)allUsersList.get(i);
+			   m=p.matcher(map.get("real_name").toString()); 
+			   if(m.find())
+			   {
+				  result.add(map.get("real_name").toString());
+			   }
+		}
+		for(int i=0;i<allUsersList.size();i++)
+		{
+			  Map map=(Map)allUsersList.get(i);
+			  m=p.matcher(map.get("real_name").toString()); 
+			 if(m.find())
+			 {
+			    userIdList.add(map.get("user_id").toString());	
+			 }
+		}
+		}
+		list.add(result);
+		list.add(userIdList);
+		return list;
+	}
+   //修改了	-----------------------------------------------------------------------
+	
 	
 	public ProductDAO getProductDao() {
 		return productDao;
@@ -169,6 +218,16 @@ public class DwrService {
 
 	public void setSerialNumDao(SerialNumDAO serialNumDao) {
 		this.serialNumDao = serialNumDao;
+	}
+
+
+	public UserDAO getUserDao() {
+		return userDao;
+	}
+
+
+	public void setUserDao(UserDAO userDao) {
+		this.userDao = userDao;
 	}
 	
 }

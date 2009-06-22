@@ -7,6 +7,8 @@ import com.sw.cms.action.base.BaseAction;
 import com.sw.cms.model.LoginInfo;
 import com.sw.cms.model.Lsd;
 import com.sw.cms.model.Page;
+import com.sw.cms.service.DeptService;
+import com.sw.cms.service.EmployeeService;
 import com.sw.cms.service.LsdService;
 import com.sw.cms.service.PosTypeService;
 import com.sw.cms.service.ProductKcService;
@@ -32,12 +34,16 @@ public class LsdAction extends BaseAction {
 	private SysInitSetService sysInitSetService;
 	private SjzdService sjzdService;
 	private PosTypeService posTypeService;
+ 
 	
 	private List userList = new ArrayList();
 	private List storeList = new ArrayList();
 	private List posTypeList = new ArrayList();
+ 
 	private Page productPage;
+ 
 	private String[] ysfs;
+ 
 	
 	private Page pageLsd;
 	private Lsd lsd = new Lsd();
@@ -352,6 +358,8 @@ public class LsdAction extends BaseAction {
 		return "success";
 	}
 	
+	
+	
 	/**
 	 * 打开输入序列号窗口
 	 * @return
@@ -613,5 +621,8 @@ public class LsdAction extends BaseAction {
 	public void setPosTypeService(PosTypeService posTypeService) {
 		this.posTypeService = posTypeService;
 	}
+
+
+
 	
 }

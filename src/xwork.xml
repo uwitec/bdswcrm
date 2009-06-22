@@ -319,6 +319,9 @@
         <action name="descRkd" class="rkdAction" method="descRkd">
             <result name="success">/WEB-INF/pages/rkd/rkd_desc.jsp</result>
         </action>
+        <action name="selCgfzr" class="rkdAction" method="selCgfzr">
+            <result name="success">/WEB-INF/pages/rkd/selCgfzr.jsp</result>
+        </action>
         <action name="importRkSerial" class="rkdAction" method="importSerial">
             <result name="success">/WEB-INF/pages/rkd/importSerial.jsp</result>
         </action>         
@@ -635,10 +638,11 @@
         </action>
         <action name="descLsd" class="lsdAction" method="descLsd">
             <result name="success">/WEB-INF/pages/lsd/lsd_desc.jsp</result>
-        </action>
+        </action>        
         <action name="selLsProcCkd" class="lsdAction" method="selKcProc">
             <result name="success">/WEB-INF/pages/lsd/selectKcProc.jsp</result>
         </action>
+<!--  -->        
         <action name="importSerial" class="lsdAction" method="importSerial">
             <result name="success">/WEB-INF/pages/lsd/importSerial.jsp</result>
         </action>
@@ -834,6 +838,9 @@
         </action>
         <action name="descKfdb" class="kfdbAction" method="descKfdb">
             <result name="success">/WEB-INF/pages/kfdb/kfdb_desc.jsp</result>
+        </action>
+        <action name="selSqr" class="kfdbAction" method="selSqr">
+            <result name="success">/WEB-INF/pages/kfdb/selSqr.jsp</result>
         </action>
         <!-- 库房调拨 -->
         
@@ -1381,7 +1388,12 @@
         </action>
         <action name="delEmployee" class="employeeAction" method="del">
             <result name="success" type="redirect">listEmployee.html</result>
-        </action>       
+        </action> 
+                                <!-- 修改 业务员列表 修改-->
+        <action name="selLsEmployee" class="employeeAction" method="selYwyEmployee">
+           <result name="success">/WEB-INF/pages/employee/selectYwyEmployee.jsp</result>
+        </action>
+                                <!-- 修改 业务员列表 修改-->      
         <!-- 员工管理 -->
         
 		<!-- 序列号跟踪 -->
@@ -1789,6 +1801,26 @@
         <action name="getDeptxsProductMxResult" class="deptXshzAction" method="getProductMxResults">
             <result name="success">/WEB-INF/pages/report/deptxs_hz/result_product_mx.jsp</result>
         </action>             
-        <!-- 部门销售汇总 -->                                                                                                           
+        <!-- 部门销售汇总 -->    
+        
+        <!-- 联系人 -->
+        <action name="listLxr" class="lxrAction" method="list">
+             <result name="success">/WEB-INF/pages/lxr/lxr_list.jsp</result>
+        </action>
+        <action name="addLxr" class="lxrAction" method="add">
+             <result name="success">/WEB-INF/pages/lxr/lxr_add.jsp</result>
+        </action>
+        <action name="saveLxr" class="lxrAction" method="save">
+             <result name="success">/WEB-INF/pages/msg.jsp</result>
+             <result name="input">/WEB-INF/pages/lxr/lxr_add.jsp</result>
+             <result name="cancel" type="redirect">addLxr.html</result>
+        </action>
+        <action name="viewLxr" class="lxrAction" method="edit">
+             <result name="success">/WEB-INF/pages/lxr/lxr_view.jsp</result>
+        </action>
+        <action name="editLxr" class="lxrAction" method="edit">
+             <result name="success">/WEB-INF/pages/lxr/lxr_edit.jsp</result>
+        </action>
+        <!-- 联系人 -->                                                                                                       
     </package>
 </xwork>
