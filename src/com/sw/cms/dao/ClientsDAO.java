@@ -74,10 +74,10 @@ public class ClientsDAO extends JdbcBaseDAO {
 	 * 保存客户信息
 	 * @param clients
 	 */
-	public void saveClient(Clients clients){
-		String sql = "insert into clients(name,lxr,lxdh,mobile,address,p_code,mail,msn,qq,zq,xe,remark,ygs,gsxz,client_type,khjl,id) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+	public Object saveClient(Clients clients){
+		String sql = "insert into clients(name,lxr,lxdh,mobile,address,p_code,mail,msn,qq,zq,xe,remark,ygs,gsxz,client_type,khjl,id,gzdh,cz,comaddress) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		
-		Object[] param = new Object[17];
+		Object[] param = new Object[20];
 		
 		
 		param[0] = clients.getName();
@@ -97,8 +97,12 @@ public class ClientsDAO extends JdbcBaseDAO {
 		param[14] = clients.getClient_type();
 		param[15] = clients.getKhjl();
 		param[16] = getClientId();
+		param[17]=  clients.getGzdh();
+		param[18]=  clients.getCz();
+		param[19]= clients.getComaddress();
 		
 		this.getJdbcTemplate().update(sql,param);
+		return param[16];
 		
 	}
 	
@@ -110,9 +114,9 @@ public class ClientsDAO extends JdbcBaseDAO {
 	 */
 	public void updateClient(Clients clients){
 		
-		String sql = "update clients set name=?,lxr=?,lxdh=?,mobile=?,address=?,p_code=?,mail=?,msn=?,qq=?,zq=?,xe=?,remark=?,ygs=?,gsxz=?,client_type=?,khjl=? where id=?";
+		String sql = "update clients set name=?,lxr=?,lxdh=?,mobile=?,address=?,p_code=?,mail=?,msn=?,qq=?,zq=?,xe=?,remark=?,ygs=?,gsxz=?,client_type=?,khjl=?,gzdh=?,cz=?,comaddress=? where id=?";
 		
-		Object[] param = new Object[17];
+		Object[] param = new Object[20];
 		
 		
 		param[0] = clients.getName();
@@ -131,7 +135,11 @@ public class ClientsDAO extends JdbcBaseDAO {
 		param[13] = clients.getGsxz();
 		param[14] = clients.getClient_type();
 		param[15] = clients.getKhjl();
-		param[16] = clients.getId();
+		
+		param[16]=  clients.getGzdh();
+		param[17]=  clients.getCz();
+		param[18]=  clients.getComaddress();
+		param[19] = clients.getId();
 		
 		this.getJdbcTemplate().update(sql,param);
 		
@@ -282,6 +290,9 @@ public class ClientsDAO extends JdbcBaseDAO {
 			clients.setGsxz(rs.getString("gsxz"));
 			clients.setClient_type(rs.getString("client_type"));
 			clients.setKhjl(rs.getString("khjl"));
+			clients.setGzdh(rs.getString("gzdh"));
+			clients.setCz(rs.getString("cz"));
+			clients.setComaddress(rs.getString("comaddress"));
 			
 			return clients;
 		}

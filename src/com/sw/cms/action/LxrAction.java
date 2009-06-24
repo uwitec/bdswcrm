@@ -76,8 +76,8 @@ public class LxrAction extends BaseAction
    * 打开添加联系人页面
    * @return
    */
-  public String add()
-  {
+  public String add()throws Exception {
+   
 	  try 
 	  {
 		  return "success";
@@ -94,8 +94,8 @@ public class LxrAction extends BaseAction
    * 保存联系人
    * @return
    */
-  public String save()
-  {
+  public String save()throws Exception {
+  
 	  try 
 	  {
 		lxrService.insertLinkman(linkman);
@@ -113,8 +113,8 @@ public class LxrAction extends BaseAction
    * 打开修改联系人页面
    * @return
    */
-  public String edit()
-  {
+  public String edit()throws Exception {
+   
 	  try 
 	  {
 		 linkman=(ClientsLinkman)lxrService.getLinkmanById(id); 
@@ -124,6 +124,42 @@ public class LxrAction extends BaseAction
 	  {
 		log.error("打开修改联系人  错误原因"+e.getMessage());
 		return "error";
+      }
+  }
+  
+  /**
+   * 修改联系人
+   * @return
+   */
+  public String update()throws Exception {
+   
+	  try 
+	  {
+		lxrService.updateLinkman(linkman); 
+		 return "success";
+	  }
+	  catch (Exception e)
+	  {
+		 log.error("保存修改联系人  错误原因："+e.getMessage());
+	     return "error";
+	  }
+  }
+  
+  /**
+   * 删除联系人
+   *
+   */
+  public String del()throws Exception {
+   
+	  try 
+	  {
+		  lxrService.deleteLinkman(id);
+		  return "success";
+	  }
+	  catch (Exception e)
+	  {
+		 log.error("删除联系人   错误原因:"+e.getMessage());
+		 return "error";
       }
   }
   

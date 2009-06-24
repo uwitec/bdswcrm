@@ -264,7 +264,8 @@ public class MailMessage{
 	 * ·¢ËÍÓÊ¼ş
 	 * @return
 	 */
-	public boolean sendout(){
+	public boolean sendout()
+	{
 		try{
 
 			mimeMsg.setContent(mp);

@@ -17,6 +17,9 @@ public class Clients {
 	private String remark;
 	private String ygs;
 	private String gsxz;
+	private String gzdh;//座机
+	private String cz; //传真
+	private String comaddress;//网址
 	
 	private String client_type;  //客户类型
 	private String khjl;         //客户经理
@@ -122,6 +125,24 @@ public class Clients {
 	}
 	public void setKhjl(String khjl) {
 		this.khjl = khjl;
+	}
+	public String getComaddress() {
+		return comaddress;
+	}
+	public void setComaddress(String comaddress) {
+		this.comaddress = comaddress;
+	}
+	public String getCz() {
+		return cz;
+	}
+	public void setCz(String cz) {
+		this.cz = cz;
+	}
+	public String getGzdh() {
+		return gzdh;
+	}
+	public void setGzdh(String gzdh) {
+		this.gzdh = gzdh;
 	}
 	
 }

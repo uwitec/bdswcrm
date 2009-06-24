@@ -8,7 +8,7 @@ import com.sw.cms.model.Page;
 public class LxrService 
 {
 	private ClientsLinkmanDAO clientsLinkmanDao;
-	private ClientsDAO clientsDao;
+	 
 	
 	
 	
@@ -27,20 +27,24 @@ public class LxrService
 	{
 		return clientsLinkmanDao.getLinkmanById(id);
 	}
-
 	
+	public void updateLinkman(ClientsLinkman linkman)
+	{
+		 clientsLinkmanDao.updateLinkman(linkman);
+	}
 	
-	
-	
-	
-	public ClientsDAO getClientsDao() {
-		return clientsDao;
+	public String deleteLinkman(String id)
+	{
+		    
+	     return clientsLinkmanDao.deleteLinkman(id);	 
 	}
 
-	public void setClientsDao(ClientsDAO clientsDao) {
-		this.clientsDao = clientsDao;
-	}
-
+	
+	
+	
+	
+	
+	 
 	public ClientsLinkmanDAO getClientsLinkmanDao() {
 		return clientsLinkmanDao;
 	}

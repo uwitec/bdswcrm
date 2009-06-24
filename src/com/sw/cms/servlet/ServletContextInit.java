@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
+import com.sw.cms.sendmail.SendMail;
 import com.sw.cms.sendsms.SMSEngine;
 import com.sw.cms.util.StaticParamDo;
 
@@ -20,7 +21,7 @@ public class ServletContextInit extends HttpServlet {
 			ServletContext servletContext = getServletContext();
 			ApplicationContext ctx = WebApplicationContextUtils.getRequiredWebApplicationContext(servletContext);
 			StaticParamDo.setCtx(ctx);
-			
+			 
 //			//生成期初调试
 //			InitParamDAO dao = (InitParamDAO)ctx.getBean("initParamDao");
 //			

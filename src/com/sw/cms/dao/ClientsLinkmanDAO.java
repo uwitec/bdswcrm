@@ -26,7 +26,7 @@ public class ClientsLinkmanDAO  extends  JdbcBaseDAO
 	 */
     public List getClientsLinkman(String id)
     {
-    	String sql="select l.id,l.name,l.sex,l.lx,l.zw,l.dept,c.gzdh,l.yddh,l.mail,l.jtdh,l.qtlx,l.address,l.sr,l.ah,l.remark,c.name as clients_id from clients_linkman  l left join clients c on c.id=l.clients_id where c.id='"+id+"' ";
+    	String sql="select l.id,l.name,l.sex,l.lx,l.zw,l.dept,l.gzdh,l.yddh,l.mail,l.jtdh,l.qtlx,l.address,l.sr,l.ah,l.remark,c.name as clients_id from clients_linkman  l left join clients c on c.id=l.clients_id where c.id='"+id+"' ";
     	return this.getJdbcTemplate().query(sql, new ClientsLinkmanRowMapper());
     }
     
@@ -87,8 +87,8 @@ public class ClientsLinkmanDAO  extends  JdbcBaseDAO
      */
     public void updateLinkman(ClientsLinkman linkman)
     {
-    	String sql="update clients_linkman set name=?,sex=?,lx=?,zw=?,dept=?,gzdh=?,yddh=?,mail=?,jtdh=?,qtlx=?,address=?,sr=?,ah=?,remark=?  where id=?";
-    	Object [] obj=new Object[15];
+    	String sql="update clients_linkman set name=?,sex=?,lx=?,zw=?,dept=?,gzdh=?,yddh=?,mail=?,jtdh=?,qtlx=?,sr=?,ah=?,remark=?where id=?";
+    	Object [] obj=new Object[14];
     	obj[0]=linkman.getName();
     	obj[1]=linkman.getSex();
     	obj[2]=linkman.getLx();
@@ -99,12 +99,10 @@ public class ClientsLinkmanDAO  extends  JdbcBaseDAO
     	obj[7]=linkman.getMail();
     	obj[8]=linkman.getJtdh();
     	obj[9]=linkman.getQtlx();
-    	obj[10]=linkman.getAddress();
-    	obj[11]=StringUtils.strToNull(linkman.getSr());
-    	obj[12]=linkman.getAh();
-    	obj[13]=linkman.getRemark();
-    	 
-    	obj[14]=linkman.getId();
+    	obj[10]=StringUtils.strToNull(linkman.getSr());
+    	obj[11]=linkman.getAh();
+    	obj[12]=linkman.getRemark();
+    	obj[13]=linkman.getId();
     	this.getJdbcTemplate().update(sql,obj);
     }
     /**
@@ -113,16 +111,33 @@ public class ClientsLinkmanDAO  extends  JdbcBaseDAO
      */
     public String deleteLinkman(String id)
     {
-    	String sql="select clients_id from clients_linkman where id="+id+"";
+    	String sql="select clients_id from clients_linkman where id='"+id+"'";
     	Map obj=this.getResultMap(sql);
-    	 sql="delete from clients_linkman where id="+id+"";
+    	 sql="delete from clients_linkman where id='"+id+"'";
     	this.getJdbcTemplate().update(sql);
     	
-    	return  (String)obj.get("clients_id");
+    	String objs=(String)obj.get("clients_id");
+    	if(null!=objs)
+    	{
+    		return objs;
+    	}
+    	else
+    	{
+    		return null;
+    	}
+    }
+    /**
+     * 根据单位名称删除联系人
+     * @param id
+     */
+    public void deleteLinkmanByClentsId(String id)
+    {
+    	String sql="delete from clients_linkman where clients_id='"+id+"'";
+    	this.getJdbcTemplate().update(sql);
     }
     
     /**
-     * 
+     * 获取联系人ID
      * @return
      */
     private String getClientLinkmanId() 

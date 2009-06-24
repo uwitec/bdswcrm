@@ -1,5 +1,18 @@
 package com.sw.cms.sendmail;
 
+import java.util.Properties;
+
+import javax.mail.Address;
+import javax.mail.Message;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+
+ 
+
+ 
+ 
 public class SendMail {
 	
 	private String stmpHost;
@@ -10,19 +23,19 @@ public class SendMail {
 
 	
 	public void send(String subject,String body,String to){
-		MailMessage msg = new MailMessage();
-		
+		 
+		MailMessage msg = new MailMessage();		
 		msg.setSmtpHost(stmpHost);
 		msg.createMimeMessage();
 		msg.setNeedAuth(true);
 		msg.setNamePass(name, password);
 		msg.setSubject(subject);
 		msg.setBody(body);
-		msg.setTo(to);		
-		
+		msg.setTo(to);				
 		msg.sendout();
 	}
-
+	
+	 
 
 
 	public String getFrom() {

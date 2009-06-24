@@ -18,31 +18,24 @@ import com.sw.cms.util.ParameterUtility;
 public class ClientsAction extends BaseAction {
 
 	private ClientsService clientsService;
-
 	private SjzdService sjzdService;
-
 	private UserService userService;
 
 	private Page clientsPage;
-	
 	private Page clientWlywPage;
 
 	private Clients client = new Clients();
-
+	
 	private List userList = new ArrayList();
 
 	private String name = "";
-
 	private String type = "";
-
 	private String lxr = "";
-
 	private String khjl = "";
-
+	
 	private String[] wldwlx;
 
 	private String orderName = "";
-
 	private String orderType = "";
 
 	private int curPage = 1;
@@ -50,15 +43,12 @@ public class ClientsAction extends BaseAction {
 	private String id = "";
 
 	private List descClientLinkman = new ArrayList();
-
 	private List clientsFollow = new ArrayList();
 
 	private ClientsLinkman linkman = new ClientsLinkman();
-
 	private ClientsFollow follow = new ClientsFollow();
 
 	private String clients_id;
-	
 	private String client_con = "";
 
 	public String getClient_con() {
@@ -127,7 +117,7 @@ public class ClientsAction extends BaseAction {
 		int rowsPerPage = Constant.PAGE_SIZE2;
 
 		String con = "";
-
+      
 		if (!name.equals("")) {
 			con += " and name like'%" + name + "%'";
 		}
@@ -170,7 +160,7 @@ public class ClientsAction extends BaseAction {
 	 * @return
 	 */
 	public String save() {
-		clientsService.saveClient(client);
+		clientsService.saveClient(client,linkman);
 		return "success";
 	}
 
@@ -180,6 +170,7 @@ public class ClientsAction extends BaseAction {
 	 * @return
 	 */
 	public String edit() {
+		 
 		String id = ParameterUtility.getStringParameter(getRequest(), "id", "");
 		client = (Clients) clientsService.getClient(id);
 		wldwlx = sjzdService.getSjzdXmxxByZdId("SJZD_WLDWLX");
@@ -277,6 +268,7 @@ public class ClientsAction extends BaseAction {
 	 * @return
 	 */
 	public String listView() throws Exception {
+		 
 		try {
 			client = (Clients) clientsService.getClient(id);// 客户实体
 			clientWlywPage = clientsService.getClientWlyw(id);
@@ -367,7 +359,7 @@ public class ClientsAction extends BaseAction {
 	public String deleteLinkman() throws Exception {
 		try {
 			clients_id = clientsService.deleteLinkman(id);
-			System.out.println(clients_id);
+			
 			return "success";
 		} catch (Exception e) {
 			log.error("删除联系人 错误原因" + e.getMessage());

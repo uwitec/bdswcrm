@@ -1821,6 +1821,14 @@
         <action name="editLxr" class="lxrAction" method="edit">
              <result name="success">/WEB-INF/pages/lxr/lxr_edit.jsp</result>
         </action>
+        <action name="updateLxr" class="lxrAction" method="update">
+             <result name="success">/WEB-INF/pages/msg.jsp</result>
+              <result name="input">/WEB-INF/pages/lxr/lxr_edit.jsp</result>
+             <result name="cancel" type="redirect">editLxr.html</result>
+        </action>
+        <action name="delLxr" class="lxrAction" method="del">
+             <result name="success">listLxr.html</result>
+        </action>
         <!-- 联系人 -->                                                                                                       
     </package>
 </xwork>

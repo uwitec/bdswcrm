@@ -64,9 +64,16 @@ public class ClientsService {
 	 * 
 	 * @param clients
 	 */
-	public void saveClient(Clients client) {
-		clientsDao.saveClient(client);
-
+	public void saveClient(Clients client,ClientsLinkman linkman) 
+	{
+		 String clients_id=(String)clientsDao.saveClient(client);
+		 if(null!=clientsDao.getClient(clients_id))
+		 {
+			 linkman.setClients_id(clients_id);
+			 clientsLinkmanDao.insertLinkman(linkman);
+		 }
+		 
+          
 	}
 
 	/**
@@ -97,6 +104,11 @@ public class ClientsService {
 	 */
 	public void delClient(String id) {
 		clientsDao.delClient(id);
+		if(null==clientsDao.getClient(id))
+		{
+			clientsLinkmanDao.deleteLinkmanByClentsId(id);
+			
+		}
 	}
 
 	/**
