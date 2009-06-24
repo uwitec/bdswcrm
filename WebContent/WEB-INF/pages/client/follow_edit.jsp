@@ -82,7 +82,7 @@ List   linkmanlist=(List)VS.findValue("descClientLinkman");
 	                   {
 	                       ClientsLinkman linkman=(ClientsLinkman)it.next();
 	                    %>
-	                     <option value="<%=linkman.getId()%>" <%if(new Integer(follow.getLinkman_id())==linkman.getId()) out.print("selected"); %>><%=linkman.getName()%></option>
+	                     <option value="<%=linkman.getId()%>" <%if(follow.getLinkman_id().equals(linkman.getId())) out.print("selected"); %>><%=linkman.getName()%></option>
 	                     
 	                  <%} %>
 			</select><font color="red">*</font>
