@@ -39,15 +39,15 @@ List userList = (List)VS.findValue("userList");
 	}
 	
 	function del(id){
-		if(confirm("确定要删除该条记录吗！")){
+		if(confirm("确定要删除该单位及联系人吗！")){
 			location.href = "delClient.html?id=" + id;
 		}
 	}
 	
 	function add(){
 		var destination = "addClient.html";
-		var fea = 'width=650,height=500,left=' + (screen.availWidth-650)/2 + ',top=' + (screen.availHeight-500)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
-		
+		var fea ='width=800,height=700,left=' + (screen.availWidth-800)/2 + ',top=' + (screen.availHeight-700)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+			
 		window.open(destination,'添加单位',fea);	
 	}
 	
@@ -130,7 +130,7 @@ List userList = (List)VS.findValue("userList");
 		<td onclick="doSort('id');">编号<%if(orderName.equals("id")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
 		<td onclick="doSort('name');">单位名称<%if(orderName.equals("name")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
 		<td onclick="doSort('address');">地址<%if(orderName.equals("address")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('lxdh');">联系电话<%if(orderName.equals("lxdh")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td onclick="doSort('gzdh');">座机<%if(orderName.equals("gzdh")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
 		<td onclick="doSort('khjl');">客户经理<%if(orderName.equals("khjl")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
 		<td>操作</td>
 	</tr>
@@ -146,7 +146,7 @@ List userList = (List)VS.findValue("userList");
 		<td class="a1"><%=StringUtils.nullToStr(clients.getId()) %></td>
 		<td class="a1"><%=StringUtils.nullToStr(clients.getName()) %></td>
 		<td class="a1"><%=StringUtils.nullToStr(clients.getAddress()) %></td>
-		<td class="a1"><%=StringUtils.nullToStr(clients.getLxdh()) %></td>
+		<td class="a1"><%=StringUtils.nullToStr(clients.getGzdh()) %></td>
 		<td class="a1"><%=StaticParamDo.getRealNameById(clients.getKhjl()) %></td>
 		<td class="a1">
 			<a href="#" onclick="edit('<%=StringUtils.nullToStr(clients.getId()) %>');"><img src="images/modify.gif" align="absmiddle" title="修改" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;

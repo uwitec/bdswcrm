@@ -41,7 +41,7 @@ List userList = (List)VS.findValue("userList");
 	
 	function del(id){
 		if(confirm("确定要删除该条记录吗！")){
-			location.href = "delClient.html?id=" + id;
+			location.href = "delLxr.html?id=" + id;
 		}
 	}
 	

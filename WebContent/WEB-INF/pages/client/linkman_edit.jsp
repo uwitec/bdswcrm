@@ -24,7 +24,16 @@ ClientsLinkman  linkman = (ClientsLinkman)VS.findValue("linkman");
 		{
 			alert("姓名不能为空，请选择!");
 			return;
-		}		
+		}
+		if(document.getElementById("mail").value!="")
+	    {
+	      var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/;
+          if(reg.test(document.getElementById("mail").value)==false)
+          {
+             alert("邮箱格式不正确！");
+             return ;
+          }
+	    }		
 		
 		document.clientForm.submit();
 	}	
@@ -89,10 +98,7 @@ ClientsLinkman  linkman = (ClientsLinkman)VS.findValue("linkman");
 		<td class="a2" width="35%"><input type="text" name="linkman.qtlx" id="qtlx" value="<%=StringUtils.nullToStr(linkman.getQtlx()) %>"  ></td>		
 	</tr>		
 	
-	<tr> 
-		<td class="a1" width="15%">地址</td>
-		<td class="a2" width="35%" colspan="3"><input type="text" name="linkman.address" id="address"size="83" value="<%=StringUtils.nullToStr(linkman.getAddress()) %>" >  	</td>
-	</tr>
+	 
 	<tr height="50">
 		<td class="a1">备注</td>
 		<td class="a2" colspan="3">

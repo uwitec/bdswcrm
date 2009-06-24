@@ -87,7 +87,7 @@ ClientsLinkman linkman=(ClientsLinkman)VS.findValue("linkman");
 	<tr>
 		<td class="a1" width="15%">部门</td>
 		<td class="a2" width="35%"><%=linkman.getDept()%></td>
-		<td class="a1" width="15%">工作电话</td>
+		<td class="a1" width="15%">座机</td>
 		<td class="a2" width="35%"><%=linkman.getGzdh()%></td>		
 	</tr>
 	<tr>

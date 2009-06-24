@@ -88,7 +88,7 @@
 	<tr>
 		<td class="a1" width="15%">部门</td>
 		<td class="a2" width="35%"><input type="text" name="linkman.dept" id="dept" value=""  ></td>
-		<td class="a1" width="15%">工作电话</td>
+		<td class="a1" width="15%">座机</td>
 		<td class="a2" width="35%"><input type="text" name="linkman.gzdh" id="gzdh" value=""  ></td>		
 	</tr>
 	<tr>

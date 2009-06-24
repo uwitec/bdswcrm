@@ -19,11 +19,7 @@ ClientsLinkman linkman=(ClientsLinkman)VS.findValue("linkman");
      function saveInfo()
      {
 	    
-	    if(document.getElementById("client_id").value=="")
-	    {
-	        alert("往来单位不能为空！");
-	        return;
-	    }
+	   
 		if(document.getElementById("name").value == "")
 		{
 			alert("联系人姓名不能为空 ！");
@@ -38,7 +34,7 @@ ClientsLinkman linkman=(ClientsLinkman)VS.findValue("linkman");
              return ;
           }
 	    }
-	    document.myform.action="saveLxr.html";
+	    document.myform.action="updateLxr.html";
 		document.myform.submit(); 
 	   
 	   
@@ -94,14 +90,14 @@ ClientsLinkman linkman=(ClientsLinkman)VS.findValue("linkman");
 	<tr>
 		<td class="a1" width="15%">部门</td>
 		<td class="a2" width="35%"><input type="text" name="linkman.dept" id="dept" value="<%=linkman.getDept() %>"  ></td>
-		<td class="a1" width="15%">工作电话</td>
+		<td class="a1" width="15%">座机</td>
 		<td class="a2" width="35%"><input type="text" name="linkman.gzdh" id="gzdh" value="<%=linkman.getGzdh()%>"  ></td>		
 	</tr>
 	<tr>
 		<td class="a1" width="15%">爱好</td>
 		<td class="a2" width="35%"><input type="text" name="linkman.ah" id="ah" value="<%=linkman.getAh()%>"></td>	
 		<td class="a1" width="15%">生日</td>
-		<td class="a2" width="35%"><input type="text" name="linkman.sr" id="sr" readonly="readonly" value="<%=linkman.getSr()%>">
+		<td class="a2" width="35%"><input type="text" name="linkman.sr" id="sr" readonly="readonly" value="<%if(null!=linkman.getSr()) out.print(linkman.getSr().substring(0,11)); %>">
 		  <img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.getElementById('sr')); return false;">
 		</td>
 	</tr>		

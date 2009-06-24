@@ -146,8 +146,14 @@ List  clinetsFollowList=(List)VS.findValue("clientsFollow");
 	        <tr>
 	          <td class="a1" width="15%">客户经理</td>
 	           <td class="a2" width="35%"><%=StaticParamDo.getRealNameById(client.getKhjl()) %></td>
-	          <td class="a1" width="15%"></td>
-	           <td class="a2" width="35%"></td>	           
+	          <td class="a1" width="15%">联系人</td>
+	           <td class="a2" width="35%"><%=StringUtils.nullToStr(client.getLxr()) %></td>	           
+	        </tr>
+	         <tr>
+	          <td class="a1" width="15%">手机</td>
+	           <td class="a2" width="35%"><%=StringUtils.nullToStr(client.getMobile()) %></td>
+	          <td class="a1" width="15%">邮箱</td>
+	           <td class="a2" width="35%"><%=StringUtils.nullToStr(client.getMail()) %></td>	           
 	        </tr>
 	        <tr>
 	          <td class="a1" width="15%">备注</td>
@@ -226,6 +232,7 @@ List  clinetsFollowList=(List)VS.findValue("clientsFollow");
 	        while(it.hasNext())
 	        {
 	            ClientsLinkman linkman=(ClientsLinkman)it.next();
+	              
 	         %>
 	        <tr class="a1"  onmousedown="trSelectChangeCss('selTable1')" onDblClick="linkmanedit('<%=linkman.getId()%>');" onmouseover="this.className='a2';" onmouseout="this.className='a1';">
 		      <td>
