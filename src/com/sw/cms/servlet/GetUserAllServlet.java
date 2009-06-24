@@ -20,19 +20,6 @@ public class GetUserAllServlet extends HttpServlet
 	   DwrService dwrService=(DwrService) WebApplicationContextUtils.getWebApplicationContext(getServletContext()).getBean("dwrService");
 	   request.setCharacterEncoding("utf-8");
 	   String param=request.getParameter("prefix");
-	
-//	   List list=dwrService.getAllUserList(param);
-//	   String result="";
-//	   if(list.size()>0)
-//	   {
-//	   for(int i=0;i<list.size();i++)
-//	   {
-//		   result+=list.get(i)+"$";
-//	   }
-//	   }
-//	   response.setContentType("text/html;charset=GBK");
-//	   PrintWriter out=response.getWriter();
-//	   out.println(result);
 	    
 	   List list=dwrService.getAllUserList(param);
 	   List list1=(List)list.get(0);
