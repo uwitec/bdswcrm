@@ -83,35 +83,36 @@ List userList = (List)VS.findValue("userList");
 		</td>		
 	</tr>
 	<tr>
-		<td class="a1" width="15%">联系人</td>
-		<td class="a2" width="35%"><input type="text" name="client.lxr" id="lxr" value="<%=StringUtils.nullToStr(client.getLxr()) %>" maxlength="10"></td>
-		<td class="a1" width="15%">联系电话</td>
-		<td class="a2" width="35%"><input type="text" name="client.lxdh" id="lxdh" value="<%=StringUtils.nullToStr(client.getLxdh()) %>" maxlength="20"></td>		
+		<td class="a1" width="15%">座机</td>
+		<td class="a2" width="35%"><input type="text" name="client.gzdh" id="gzdh" value="<%=StringUtils.nullToStr(client.getGzdh()) %>" maxlength="10"></td>
+		<td class="a1" width="15%">传真</td>
+		<td class="a2" width="35%"><input type="text" name="client.cz" id="cz" value="<%=StringUtils.nullToStr(client.getCz()) %>" maxlength="20"></td>		
+	</tr>
+	 
+	<tr>
+		<td class="a1" width="15%">网址</td>
+		<td class="a2" width="35%"><input type="text" name="client.comaddress" id="comaddress" value="<%=StringUtils.nullToStr(client.getComaddress()) %>" maxlength="50"></td>
+		<td class="a1" width="15%">地址</td>
+		<td class="a2" width="35%"><input type="text" name="client.address" id="address" value="<%=StringUtils.nullToStr(client.getAddress()) %>" maxlength="50"></td>		
 	</tr>
 	<tr>
-		<td class="a1" width="15%">移动电话</td>
-		<td class="a2" width="35%"><input type="text" name="client.mobile" id="mobile" value="<%=StringUtils.nullToStr(client.getMobile()) %>" maxlength="20"></td>
-		<td class="a1" width="15%">地址</td>
-		<td class="a2" width="35%"><input type="text" name="client.address" id="address" value="<%=StringUtils.nullToStr(client.getAddress()) %>" size="45" maxlength="50"></td>		
-	</tr>	
-	<tr>
+	     <td class="a1" width="15%">邮编</td>
+		<td class="a2" width="35%"><input type="text" name="client.p_code" id="p_code" value="<%=StringUtils.nullToStr(client.getP_code()) %>" maxlength="50"></td>	
 		<td class="a1" width="15%">客户经理</td>
 		<td class="a2" width="35%">
 		 <input  id="brand"    type="text"   length="20"  onblur="setValue()" value="<%for(int i=0;i<userList.size();i++){Map map=(Map)userList.get(i); if(map.get("user_id").toString().equals(client.getKhjl())) out.print(map.get("real_name"));} %>"/>
          <img src="images/select.gif" align="absmiddle" title="选择经手人" border="0" onclick="openywyWin();" style="cursor:hand">
+<<<<<<< .mine
+          <div   id="brandTip"  style="height:12px;position:absolute;left:417px; top:141px; width:132px;border:1px solid menu;background-Color:#fff;display:none;" >
+=======
           <div   id="brandTip"  style="height:12px;position:absolute;left:87px; top:141px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
+>>>>>>> .r26
           </div>
 		    <input type="hidden" name="client.khjl" id="khjl"  value="<%=client.getKhjl()%>"/> 
 		</td>
-		<td class="a1" width="15%">E-Mail</td>
-		<td class="a2" width="35%"><input type="text" name="client.mail" id="mail" value="<%=StringUtils.nullToStr(client.getMail()) %>" size="45" maxlength="50"></td>		
+		
 	</tr>	
-	<tr>
-		<td class="a1" width="15%">MSN</td>
-		<td class="a2" width="35%"><input type="text" name="client.msn" id="msn" value="<%=StringUtils.nullToStr(client.getMsn()) %>" maxlength="20"></td>
-		<td class="a1" width="15%">QQ</td>
-		<td class="a2" width="35%"><input type="text" name="client.qq" id="qq" value="<%=StringUtils.nullToStr(client.getQq()) %>" maxlength="20"></td>		
-	</tr>				
+	 				
 	<tr>
 		<td class="a1" width="15%">账期</td>
 		<td class="a2" width="35%"><input type="text" name="client.zq" id="zq" value="<%=StringUtils.nullToStr(client.getZq()) %>" size="5"> 天<font color="red">*</font></td>	
@@ -359,4 +360,6 @@ Event.observe("brandTip","mousedown",down,true);
 
 </script>
 <!-- 修改 ----------------------------------------------------------------------------------------------------------------------->
+
+
 
