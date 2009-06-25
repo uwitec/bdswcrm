@@ -40,6 +40,7 @@ public class XsdAction extends BaseAction {
 	private ProductService productService;
 	private ClientsService clientsService;
 	private PosTypeService posTypeService;
+	 
 	
 	private SysSource sysSource;
 	
@@ -56,6 +57,8 @@ public class XsdAction extends BaseAction {
 	private List fxddProducts = new ArrayList();
 	private List storeList = new ArrayList();
 	private List posTypeList = new ArrayList();
+	private List clientsList= new ArrayList();//---
+	
 	private List userList;
 	private String[] ysfs;
 	private String[] fkfs;
@@ -217,6 +220,7 @@ public class XsdAction extends BaseAction {
 		ysfs = sjzdService.getSjzdXmxxByZdId("SJZD_YSFS");
 		fkfs = sjzdService.getSjzdXmxxByZdId("SJZD_FKFS");
 		posTypeList = posTypeService.getPosTypeList();
+		clientsList=clientsService.getClientList("");
 		return "success";
 	}
 	
@@ -892,6 +896,18 @@ public class XsdAction extends BaseAction {
 
 	public void setFkfs(String[] fkfs) {
 		this.fkfs = fkfs;
+	}
+
+
+
+	public List getClientsList() {
+		return clientsList;
+	}
+
+
+
+	public void setClientsList(List clientsList) {
+		this.clientsList = clientsList;
 	}
 	
 }

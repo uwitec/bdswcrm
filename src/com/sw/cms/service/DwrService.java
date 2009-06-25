@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.sw.cms.dao.ClientsDAO;
 import com.sw.cms.dao.ProductDAO;
 import com.sw.cms.dao.ProductKcDAO;
 import com.sw.cms.dao.SerialNumDAO;
@@ -25,6 +26,7 @@ public class DwrService {
 	private StoreDAO storeDao;
 	private SerialNumDAO serialNumDao;
 	private UserDAO     userDao;
+	private ClientsDAO clientsDao;
 
 	/**
 	 * 根据序列号查询产品对象
@@ -134,7 +136,7 @@ public class DwrService {
 	 * @param con
 	 * @return
 	 */
-    //修改了	-----------------------------------------------------------------------
+   
 	public List getAllUserList(String con)
 	{  
 		List allUsersList= userDao.getAllUserList();
@@ -144,7 +146,7 @@ public class DwrService {
 		if(!con.trim().equals(""))
 		{
 			String regEx=con;   
-			Pattern p=Pattern.compile(regEx);
+			Pattern p=Pattern.compile(regEx,Pattern.LITERAL);
 		    Matcher m=null;
 		for(int i=0;i<allUsersList.size();i++)
 		{   
@@ -169,9 +171,60 @@ public class DwrService {
 		list.add(userIdList);
 		return list;
 	}
-   //修改了	-----------------------------------------------------------------------
+	
+	/**
+	 * 比对客户填充（Ajax）
+	 * @param con
+	 * @return
+	 */
+	public List getAllClientsList(String con)
+	{
+		List allClientsList=clientsDao.getClientList("");
+		List<String>clientName=new ArrayList<String>();
+		List<String>clinetId  =new ArrayList<String>();
+		List<List>list=new ArrayList<List>();
+		if(!con.trim().equals(""))
+		{
+			String regEx=con;
+			Pattern p=Pattern.compile(regEx,Pattern.LITERAL);
+			Matcher m=null;
+			for(int i=0;i<allClientsList.size();i++)
+			{
+				Map map=(Map)allClientsList.get(i);
+				m=p.matcher(map.get("name").toString());
+				if(m.find())
+				{
+					clientName.add(map.get("name").toString());
+				}
+			}
+			for(int i=0;i<allClientsList.size();i++)
+			{
+				Map map=(Map)allClientsList.get(i);
+				m=p.matcher(map.get("name").toString());
+				if(m.find())
+				{
+					clinetId.add(map.get("id").toString());
+				}
+			}
+		}
+		list.add(clientName);
+		list.add(clinetId);
+		return list;
+	}
 	
 	
+   
+	
+	public ClientsDAO getClientsDao() {
+		return clientsDao;
+	}
+
+
+	public void setClientsDao(ClientsDAO clientsDao) {
+		this.clientsDao = clientsDao;
+	}
+
+
 	public ProductDAO getProductDao() {
 		return productDao;
 	}
