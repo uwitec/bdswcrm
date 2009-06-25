@@ -30,8 +30,15 @@ String position = ParameterUtility.getStringParameter(request,"position", "");
       var cgfzr  =window.opener.document.getElementById("sqr");
     
       
-      bian.value=name;
-      cgfzr.value=id;
+      if(bian!=null)
+      {
+       bian.value=name;
+      }
+      if(cgfzr!=null)
+      {
+         cgfzr.value=id;
+      }
+      
       
        bian.focus();
       
@@ -45,7 +52,7 @@ String position = ParameterUtility.getStringParameter(request,"position", "");
 </script>
 </head>
 <body >
-<form name="myform" action="selLsEmployee.html" method="post">
+<form name="myform" action="selSqr.html" method="post">
  
 <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0">
 	<tr>
