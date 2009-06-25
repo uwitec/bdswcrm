@@ -644,7 +644,7 @@ if(sp_state.equals("1")){
 		<%
 		}
 		%>
-		<div id="clientsTip" style="height:12px;position:absolute;left:150px; top:84px; width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+		<div id="clientsTip" style="height:12px;position:absolute;left:150px; top:85px; width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		<font color="red">*</font>
 		</td>
 		<td class="a1">地址</td>
@@ -1316,7 +1316,7 @@ function setvalues()
     }
     else
     {
-      alert("您所输入的经手人不在列表里!!");
+      alert("您所输入客户名称不在列表里!!");
       document.getElementById("client_name").value="";
       document.getElementById("client_id").value="";
       document.getElementById("client_name").focus();
