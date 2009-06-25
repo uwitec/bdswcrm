@@ -28,6 +28,7 @@ String name = ParameterUtility.getStringParameter(request,"name", "");
 		
 		c_id.value = id;
 		c_name.value = name;
+		 
 		
 		var address = window.opener.document.getElementById("kh_address");
 		if(address != null){

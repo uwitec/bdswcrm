@@ -8,6 +8,7 @@
 OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
 List userList = (List)VS.findValue("userList");
 List storeList = (List)VS.findValue("storeList");
+List clientsList=(List)VS.findValue("clientsList");
 List posTypeList = (List)VS.findValue("posTypeList");
 
 String[] ysfsArry = (String[])VS.findValue("ysfs");
@@ -348,7 +349,7 @@ if(sp_state.equals("1")){
 			var tr = i.parentNode.parentNode;
 			tr.removeNode(true);
 			
-	}     
+	}    
 	
 	
 	function openWin(){
@@ -629,12 +630,12 @@ if(sp_state.equals("1")){
           </div>
 		    <input type="hidden" name="xsd.fzr" id="fzr" value="<%=xsd.getFzr()%>"/> 
 		<!--修改 --------------------------------------------------------------------------------------  --><font color="red">*</font>		
-		</td>				
+		</td>				 
 	</tr>
 	<tr>	
 		<td class="a1" width="15%">客户名称</td>
 		<td class="a2">
-		<input type="text" name="xsd.client_id" id="client_name" value="<%=StaticParamDo.getClientNameById(StringUtils.nullToStr(xsd.getClient_name())) %>" size="30" maxlength="50" readonly>
+		<input type="text" name="xsd.client_id" onblur="setvalues()" id="client_name" value="<%=StaticParamDo.getClientNameById(StringUtils.nullToStr(xsd.getClient_name())) %>" size="30" maxlength="50" >
 		<input type="hidden" name="xsd.client_name" id="client_id" value="<%=StringUtils.nullToStr(xsd.getClient_name()) %>">
 		<%
 		if(!sp_state.equals("3")){
@@ -643,6 +644,7 @@ if(sp_state.equals("1")){
 		<%
 		}
 		%>
+		<div id="clientsTip" style="height:12px;position:absolute;left:150px; top:84px; width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		<font color="red">*</font>
 		</td>
 		<td class="a1">地址</td>
@@ -1125,7 +1127,214 @@ String.prototype.trim = function()
 new Form.Element.Observer("brand",1, searchBrand);
 Event.observe("brand", "keydown", move, false);
 Event.observe("brandTip","mousedown",down,true);
+
+
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
+</script>
+
+
+
+<script type="text/javascript">
+var tips = "";
+function a()
+{
+    
+	var url = 'getClients.do';
+	var params = "clientsName=" + $F('client_name');
+	var myAjax = new Ajax.Request(
+	url,
+	{
+		method:'post',
+		parameters: params,
+		onComplete: showResponses,
+		asynchronous:true
+	});
+}
+var lista;
+function showResponses(originalRequest)
+{   
+	var brandLists = originalRequest.responseText.split("%");
+	lista=brandLists;
+     
+	var brandList=brandLists[0].split("$");
+	 
+	if ( brandList.length > 1)
+	{
+		var bt = $("clientsTip");
+		var s="";
+		var flog=0;
+		for(var i = 0 ; i <  brandList.length; i++)  
+		{
+		   if(flog==10)
+		   {
+		     break;
+		   }
+		    s += "<div onmouseover=\"this.className='selectTip';style.cursor='default'\"  onmouseout=\"this.className=null; style.cursor='default'\">" + brandList[i] + "</div>";
+		   flog++;
+		}
+		 bt.innerHTML=s;
+		 
+		if( tips != $("client_name").value)
+		{
+			Element.show('clientsTip');
+		}
+	}
+	else
+	{
+		var bt = $("clientsTip");
+		bt.innerHTML = "";
+		Element.hide('clientsTip');
+	}
+}
+function b(event)
+{
+	  var srcEl = Event.element(event);
+	// var tipEl = $(srcEl.id + "Tip");
+	  var tipEl = $('clientsTip');
+     var a = tipEl.childNodes;
+	 if (tipEl.style.display == "" )
+	 {
+		if(event.keyCode == 40 )
+		{            
+			if (tipEl.childNodes.length >= 1)
+			{
+				var bList = tipEl.childNodes;
+				 
+				if(tipEl.lastChild.className=="selectTip")
+				{
+				    tipEl.firstChild.className = "selectTip";
+					tipEl.lastChild.className = "null";
+					return ;
+				}
+				var s=0;
+				for (var i = 0 ; i < bList.length; i++)
+				{
+					if (bList[i].className == "selectTip")
+					{
+					    s++;
+						bList[i + 1].className = "selectTip";
+						bList[i].className = "null";
+						return ;
+					}
+					 
+				}
+				if(s==0)
+				{
+				  tipEl.firstChild.className = "selectTip";
+				}
+				 
+			}
+
+		}
+		else if(event.keyCode == 38)
+		{
+		   
+			if (tipEl.childNodes.length >= 1)
+			{
+			   
+			   	if(tipEl.firstChild.className == "selectTip")
+				{
+					tipEl.lastChild.className = "selectTip";
+					tipEl.firstChild.className = "null";
+					return ;
+				}
+				var s=0;
+				var bList = tipEl.childNodes;
+				for (var i = 0 ; i < bList.length ; i ++)
+				{
+					if (bList[i].className == "selectTip")
+					{
+					   s++;
+						bList[i - 1].className = "selectTip";
+						bList[i].className = "null";
+						return ;
+					}
+					 
+				}
+				if(s==0)
+				{
+				   tipEl.lastChild.className = "selectTip";
+				}
+			}
+		}
+		else if(event.keyCode == 13)
+		{
+			var bList = tipEl.childNodes;
+			for (var i = 0 ; i < bList.length ; i ++)
+			{
+				if (bList[i].className == "selectTip")
+				{
+					tip = srcEl.value = bList[i].innerHTML;		
+					//var useridlist=list[1].split("$");	
+					//document.getElementById("xsry").value=useridlist[i];				 
+					 Element.hide(tipEl);
+					 return ;
+				}
+			}
+		}
+		
+	}
+}
+function  c(event)
+{
+      var srcEl = Event.element(event);
+	  var tipEl = $("clientsTip");
+      var bList = tipEl.childNodes;
+			for (var i = 0 ; i < bList.length ; i ++)
+			{   
+				if (bList[i].className == "selectTip")
+				{
+					tip = srcEl.value = bList[i].innerHTML;	
+					document.getElementById("client_name").value=bList[i].innerHTML;				 
+					//var useridlist=list[1].split("$");	
+					//document.getElementById("xsry").value=useridlist[i];						
+					 Element.hide(tipEl);
+					 return;
+				}
+			}
+}
+
+var listss=new Array();
+<%
+  for(int i=0;i<clientsList.size();i++)
+  {   
+     Map map=(Map)clientsList.get(i); 
+%>
+   listss["<%=map.get("name")%>"]="<%=map.get("id")%>";
+<%}%>
+function setvalues()
+{
+    
+  if(document.getElementById("client_name").value!="")
+  {
+    var brand =document.getElementById("client_name").value;
+    
+    brand=brand.trim();
+    if(brand in listss)
+    {
+      document.getElementById("client_id").value=listss[brand];     
+    }
+    else
+    {
+      alert("您所输入的经手人不在列表里!!");
+      document.getElementById("client_name").value="";
+      document.getElementById("client_id").value="";
+      document.getElementById("client_name").focus();
+    }
+  }
+  if(document.getElementById("client_name").value.length==0)
+  {
+      document.getElementById("client_id").value="";
+  }
  
+  Element.hide('clientsTip')
+}
+String.prototype.trims = function()
+{
+   return this.replace(/(^\s+)|\s+$/g,"");
+}
+new Form.Element.Observer("client_name",1, a);
+Event.observe("client_name", "keydown", b, false);
+Event.observe("clientsTip","mousedown",c,true);
 
 </script>
-<!-- 修改 ----------------------------------------------------------------------------------------------------------------------->

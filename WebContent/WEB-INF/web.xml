@@ -93,6 +93,15 @@
         <url-pattern>/getBrands.do</url-pattern>
     </servlet-mapping>
     
+    <servlet>
+        <servlet-name>getClients</servlet-name>
+        <servlet-class>com.sw.cms.servlet.GetClientAllServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>getClients</servlet-name>
+        <url-pattern>/getClients.do</url-pattern>
+    </servlet-mapping>
+    
 	<servlet>
         <servlet-name>img</servlet-name>
         <servlet-class>com.sw.cms.servlet.AuthImage</servlet-class>
