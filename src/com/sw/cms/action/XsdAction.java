@@ -237,7 +237,7 @@ public class XsdAction extends BaseAction {
 		ysfs = sjzdService.getSjzdXmxxByZdId("SJZD_YSFS");
 		posTypeList = posTypeService.getPosTypeList();
 		fkfs = sjzdService.getSjzdXmxxByZdId("SJZD_FKFS");
-		
+		clientsList=clientsService.getClientList("");
 		boolean hasLowFxxj = xsdService.checkFxxj(xsdProducts); //是否存在低于分销限价的
 		boolean hasCeysk = xsdService.isCeysk(xsd.getClient_name(), xsd.getXsdje()-xsd.getSkje());
 		

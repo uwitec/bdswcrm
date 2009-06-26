@@ -7,6 +7,7 @@ import com.sw.cms.action.base.BaseAction;
 import com.sw.cms.model.LoginInfo;
 import com.sw.cms.model.Page;
 import com.sw.cms.model.Thd;
+import com.sw.cms.service.ClientsService;
 import com.sw.cms.service.StoreService;
 import com.sw.cms.service.ThdService;
 import com.sw.cms.service.UserService;
@@ -15,29 +16,23 @@ import com.sw.cms.util.Constant;
 public class ThdAction extends BaseAction {
 
 	private ThdService thdService;
-
 	private StoreService storeService;
-	
 	private UserService userService;
+	private ClientsService clientsService;
 
 	private Page pageThd;
 
 	private Thd thd = new Thd();
 
 	private List thdProducts = new ArrayList();
-
 	private List storeList = new ArrayList();
-	
 	private List userList = new ArrayList();
+	private List clientsList= new ArrayList();
 
 	private String client_name = "";
-
 	private String th_date = "";
-
 	private String orderName = "";
-
 	private String orderType = "";
-
 	private String thd_id = "";
 
 	private int curPage = 1;
@@ -81,6 +76,7 @@ public class ThdAction extends BaseAction {
 		thd_id = thdService.updateThdId();
 		userList = userService.getAllEmployeeList();
 		storeList = storeService.getAllStoreList();
+		clientsList=clientsService.getClientList("");
 		return "success";
 	}
 
@@ -108,6 +104,7 @@ public class ThdAction extends BaseAction {
 		thdProducts = thdService.getThdProducts(thd_id);
 		userList = userService.getAllEmployeeList();
 		storeList = storeService.getAllStoreList();
+		clientsList=clientsService.getClientList("");
 		return "success";
 	}
 	
@@ -256,6 +253,22 @@ public class ThdAction extends BaseAction {
 
 	public void setUserList(List userList) {
 		this.userList = userList;
+	}
+
+	public List getClientsList() {
+		return clientsList;
+	}
+
+	public void setClientsList(List clientsList) {
+		this.clientsList = clientsList;
+	}
+
+	public ClientsService getClientsService() {
+		return clientsService;
+	}
+
+	public void setClientsService(ClientsService clientsService) {
+		this.clientsService = clientsService;
 	}
 
 }

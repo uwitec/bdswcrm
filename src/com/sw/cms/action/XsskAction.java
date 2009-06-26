@@ -7,6 +7,7 @@ import com.sw.cms.action.base.BaseAction;
 import com.sw.cms.model.LoginInfo;
 import com.sw.cms.model.Page;
 import com.sw.cms.model.Xssk;
+import com.sw.cms.service.ClientsService;
 import com.sw.cms.service.UserService;
 import com.sw.cms.service.XsskService;
 import com.sw.cms.util.Constant;
@@ -15,11 +16,13 @@ public class XsskAction extends BaseAction {
 	
 	private XsskService xsskService;
 	private UserService userService;
+	private ClientsService clientsService;
 	
 	private Page pageXssk;
 	private Xssk xssk = new Xssk();
 	private List xsskDescs = new ArrayList();
 	private List userList = new ArrayList();
+	private List clientsList= new ArrayList();
 	
 	private String id;
 	private String sk_date1 = "";
@@ -79,7 +82,7 @@ public class XsskAction extends BaseAction {
 		}
 		
 		userList = userService.getAllEmployeeList();
-
+		clientsList=clientsService.getClientList("");
 		return "success";
 	}
 	
@@ -226,6 +229,26 @@ public class XsskAction extends BaseAction {
 
 	public void setClient_name(String client_name) {
 		this.client_name = client_name;
+	}
+
+
+	public ClientsService getClientsService() {
+		return clientsService;
+	}
+
+
+	public void setClientsService(ClientsService clientsService) {
+		this.clientsService = clientsService;
+	}
+
+
+	public List getClientsList() {
+		return clientsList;
+	}
+
+
+	public void setClientsList(List clientsList) {
+		this.clientsList = clientsList;
 	}
 
 }
