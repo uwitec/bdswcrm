@@ -1296,11 +1296,13 @@ function  c(event)
 
 var listss=new Array();
 <%
+    
   for(int i=0;i<clientsList.size();i++)
   {   
      Map map=(Map)clientsList.get(i); 
 %>
    listss["<%=map.get("name")%>"]="<%=map.get("id")%>";
+   
 <%}%>
 function setvalues()
 {
@@ -1309,7 +1311,7 @@ function setvalues()
   {
     var brand =document.getElementById("client_name").value;
     
-    brand=brand.trim();
+    brand=brand.trims();
     if(brand in listss)
     {
       document.getElementById("client_id").value=listss[brand];     
@@ -1322,12 +1324,13 @@ function setvalues()
       document.getElementById("client_name").focus();
     }
   }
+  
   if(document.getElementById("client_name").value.length==0)
   {
       document.getElementById("client_id").value="";
   }
- 
-  Element.hide('clientsTip')
+ Element.hide('clientsTip');
+  
 }
 String.prototype.trims = function()
 {

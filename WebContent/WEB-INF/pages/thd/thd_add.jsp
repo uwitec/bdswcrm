@@ -11,6 +11,7 @@ List userList = (List)VS.findValue("userList");
 List storeList = (List)VS.findValue("storeList");
 
 String thd_id = (String)VS.findValue("thd_id");
+List clientsList=(List)VS.findValue("clientsList");
 
 LoginInfo info = (LoginInfo)session.getAttribute("LOGINUSER");
 String user_id = info.getUser_id();
@@ -296,9 +297,10 @@ String user_id = info.getUser_id();
 	<tr>			
 		<td class="a1" width="15%">客户名称</td>
 		<td class="a2">
-		<input type="text" name="thd.client_id" id="client_name" value="" size="30" maxlength="50" readonly>
-		<input type="hidden" name="thd.client_name" id="client_id" value="">
+		<input type="text" name="thd.client_id" id="client_name" value="" size="30" maxlength="50" onblur="onblurValue()" >
+		<input type="hidden" name="thd.client_name" id="client_id" value="" >
 		<img src="images/select.gif" align="absmiddle" title="选择客户" border="0" onclick="openClientWin();" style="cursor:hand"><span style="color:red">*</span>
+		<div id="clientsTip" style="height:12px;position:absolute;left:147px; top:85px; width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		</td>	
 		<td class="a1" width="15%">经手人</td>
 		<td class="a2" width="35%">
@@ -657,4 +659,220 @@ Event.observe("brandTip","mousedown",down,true);
 </script>
 <!-- 修改 ----------------------------------------------------------------------------------------------------------------------->
  
+<script language='JavaScript'  >
 
+var tips = "";
+ 
+function a()
+{
+    
+	var url = 'getClients.do';
+	var params = "clientsName=" + $F('client_name');
+	var myAjax = new Ajax.Request(
+	url,
+	{
+		method:'post',
+		parameters: params,
+		onComplete: showResponses,
+		asynchronous:true
+	});
+}
+var lista;
+function showResponses(originalRequest)
+{   
+	var brandLists = originalRequest.responseText.split("%");
+	lista=brandLists;
+     
+	var brandList=brandLists[0].split("$");
+	 
+	if ( brandList.length > 1)
+	{
+		var bt = $("clientsTip");
+		var s="";
+		var flog=0;
+		for(var i = 0 ; i <  brandList.length; i++)  
+		{
+		   if(flog==10)
+		   {
+		     break;
+		   }
+		    s += "<div onmouseover=\"this.className='selectTip';style.cursor='default'\"  onmouseout=\"this.className=null; style.cursor='default'\">" + brandList[i] + "</div>";
+		   flog++;
+		}
+		 bt.innerHTML=s;
+		 
+		if( tips != $("client_name").value)
+		{
+			Element.show('clientsTip');
+		}
+	}
+	else
+	{
+		var bt = $("clientsTip");
+		bt.innerHTML = "";
+		Element.hide('clientsTip');
+	}
+}
+function b(event)
+{
+	  var srcEl = Event.element(event);
+	// var tipEl = $(srcEl.id + "Tip");
+	  var tipEl = $('clientsTip');
+     var a = tipEl.childNodes;
+	 if (tipEl.style.display == "" )
+	 {
+		if(event.keyCode == 40 )
+		{            
+			if (tipEl.childNodes.length >= 1)
+			{
+				var bList = tipEl.childNodes;
+				 
+				if(tipEl.lastChild.className=="selectTip")
+				{
+				    tipEl.firstChild.className = "selectTip";
+					tipEl.lastChild.className = "null";
+					return ;
+				}
+				var s=0;
+				for (var i = 0 ; i < bList.length; i++)
+				{
+					if (bList[i].className == "selectTip")
+					{
+					    s++;
+						bList[i + 1].className = "selectTip";
+						bList[i].className = "null";
+						return ;
+					}
+					 
+				}
+				if(s==0)
+				{
+				  tipEl.firstChild.className = "selectTip";
+				}
+				 
+			}
+
+		}
+		else if(event.keyCode == 38)
+		{
+		   
+			if (tipEl.childNodes.length >= 1)
+			{
+			   
+			   	if(tipEl.firstChild.className == "selectTip")
+				{
+					tipEl.lastChild.className = "selectTip";
+					tipEl.firstChild.className = "null";
+					return ;
+				}
+				var s=0;
+				var bList = tipEl.childNodes;
+				for (var i = 0 ; i < bList.length ; i ++)
+				{
+					if (bList[i].className == "selectTip")
+					{
+					   s++;
+						bList[i - 1].className = "selectTip";
+						bList[i].className = "null";
+						return ;
+					}
+					 
+				}
+				if(s==0)
+				{
+				   tipEl.lastChild.className = "selectTip";
+				}
+			}
+		}
+		else if(event.keyCode == 13)
+		{
+			var bList = tipEl.childNodes;
+			for (var i = 0 ; i < bList.length ; i ++)
+			{
+				if (bList[i].className == "selectTip")
+				{
+					tip = srcEl.value = bList[i].innerHTML;		
+					//var useridlist=list[1].split("$");	
+					//document.getElementById("xsry").value=useridlist[i];				 
+					 Element.hide(tipEl);
+					 return ;
+				}
+			}
+		}
+		
+	}
+}
+function  c(event)
+{
+      var srcEl = Event.element(event);
+	  var tipEl = $("clientsTip");
+      var bList = tipEl.childNodes;
+			for (var i = 0 ; i < bList.length ; i ++)
+			{   
+				if (bList[i].className == "selectTip")
+				{
+					tip = srcEl.value = bList[i].innerHTML;	
+					document.getElementById("client_name").value=bList[i].innerHTML;				 
+					//var useridlist=list[1].split("$");	
+					//document.getElementById("xsry").value=useridlist[i];						
+					 Element.hide(tipEl);
+					 return;
+				}
+			}
+			
+			
+}
+
+
+var listss=new Array();
+<%
+    
+  for(int i=0;i<clientsList.size();i++)
+  {   
+     Map map=(Map)clientsList.get(i); 
+%>
+   listss["<%=map.get("name")%>"]="<%=map.get("id")%>";
+   
+<%}%>
+
+function onblurValue()
+{
+      
+  if(document.getElementById("client_name").value!="")
+  {
+     
+    var brand =document.getElementById("client_name").value;
+    
+    brand=brand.trims();
+    if(brand in listss)
+    {  
+        
+      document.getElementById("client_id").value=listss[brand]; 
+         
+    }
+    else
+    {
+      alert("您选择的客户不在列表里");
+      document.getElementById("client_name").value="";
+      document.getElementById("client_id").value="";
+      document.getElementById("client_name").focus();
+    }
+  }
+  
+  if(document.getElementById("client_name").value.length==0)
+  {
+      document.getElementById("client_id").value="";
+  }
+     Element.hide('clientsTip');
+  
+}
+ 
+String.prototype.trims = function()
+{
+   return this.replace(/(^\s+)|\s+$/g,"");
+}
+
+new Form.Element.Observer("client_name",1, a);
+Event.observe("client_name", "keydown", b, false);
+Event.observe("clientsTip","mousedown",c,true);
+</script>

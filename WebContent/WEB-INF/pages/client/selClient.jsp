@@ -29,7 +29,7 @@ String name = ParameterUtility.getStringParameter(request,"name", "");
 		c_id.value = id;
 		c_name.value = name;
 		 
-		
+		c_name.focus();
 		var address = window.opener.document.getElementById("kh_address");
 		if(address != null){
 			address.value = kh_address;
