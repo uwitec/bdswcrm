@@ -112,7 +112,7 @@ public class SysInitSetDAO extends JdbcBaseDAO {
 	 * 清空系统数据
 	 */
 	public void updateSys_ClearData(){
-		String[] sqls = new String[64];
+		String[] sqls = new String[77];
 		
 		sqls[0] = "delete from xxfb_nbgg";   //内部公告
 		sqls[1] = "delete from account_dzd"; //对账单
@@ -134,7 +134,7 @@ public class SysInitSetDAO extends JdbcBaseDAO {
 		sqls[17] = "update cms_all_seq set jhdid=1,gysid=1,cgyfkid=1,rkdid=1,kcid=1," +
 				   "kcpdid=1,kfid=1,ckdid=1,clientid=1,xsdid=1,yskid=1,lsdid=1,userid=2," +
 				   "roleid=2,pzid=1,thdid=1,dbsqid=1,kfdbid=1,chtjid=1,accountid=1," +
-				   "qtsrid=1,qtzcid=1,nbzzid=1,cgthdid=1,lsyskid=1,lsthdid=1,yushoutoyingshouid=1,yufutoyingfuid=1,fysqid=1,txfkid=1,txfkdescid=1"; //更新系统所有序列
+				   "qtsrid=1,qtzcid=1,nbzzid=1,cgthdid=1,lsyskid=1,lsthdid=1,yushoutoyingshouid=1,yufutoyingfuid=1,fysqid=1,txfkid=1,txfkdescid=1,kcpdyk_id=1,linkman_id=1"; //更新系统所有序列
 		sqls[18] = "delete from dbsq";  //调拨申请
 		sqls[19] = "delete from dbsq_product"; //调拨申请相关产品
 		sqls[20] = "delete from fxdd";  //分销订单
@@ -181,6 +181,20 @@ public class SysInitSetDAO extends JdbcBaseDAO {
 		sqls[61] = "delete from yushou_to_yingshou_desc"; //预收冲应收明细
 		sqls[62] = "delete from txfk";  //摊销付款
 		sqls[63] = "delete from txfk_desc"; //摊销付款明细
+		sqls[64] = "delete from cesp_right_roles";  //超额审批权限
+		sqls[65] = "delete from clients_follow";    //客户跟进计划
+		sqls[66] = "delete from clients_linkman";   //客户联系人
+		sqls[67] = "delete from cqsp_right_roles";  //超期审批权限
+		sqls[68] = "delete from jgsp_right_roles";  //低价审批权限
+		sqls[69] = "delete from kcpd_yk_tbl";       //库存盘点盈余
+		sqls[70] = "delete from linkman";           //短信联系人
+		sqls[71] = "delete from lssd";              //零售税点
+		sqls[72] = "delete from pos_type";          //POS机设置
+		sqls[73] = "delete from product_kc_init";   //库存期初设置
+		sqls[74] = "delete from send_msg_log";      //短信发送日志
+		sqls[75] = "delete from sendsms";           //短信发送列表
+		sqls[76] = "delete from sys_msg";           //系统消息
+		
 		
 		this.getJdbcTemplate().batchUpdate(sqls);
 	}

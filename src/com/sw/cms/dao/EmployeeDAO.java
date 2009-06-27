@@ -5,6 +5,7 @@ import java.util.Map;
 import com.sw.cms.dao.base.JdbcBaseDAO;
 import com.sw.cms.model.Page;
 import com.sw.cms.model.SysUser;
+import com.sw.cms.util.GB2Alpha;
 
 /**
  * <p>员工管理</p>
@@ -56,12 +57,12 @@ public class EmployeeDAO extends JdbcBaseDAO {
 	 * @param user
 	 */
 	public void saveUser(SysUser user){
-		String sql = "insert into sys_user(real_name,csny,sex,gs_phone,mobile,jt_phone,fax,mail,msn,qq,address,p_code,dept,position,szkf,state,xh,is_ywy,gh,nl,user_id) " +
-				"values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		String sql = "insert into sys_user(real_name,csny,sex,gs_phone,mobile,jt_phone,fax,mail,msn,qq,address,p_code,dept,position,szkf,state,xh,is_ywy,gh,nl,china_py,user_id) " +
+				"values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		
 		String user_id = getUserID();
 		
-		Object[] param = new Object[21];
+		Object[] param = new Object[22];
 		
 		param[0] = user.getReal_name();
 		param[1] = user.getCsny();
@@ -83,7 +84,11 @@ public class EmployeeDAO extends JdbcBaseDAO {
 		param[17] = user.getIs_ywy();
 		param[18] = user.getGh();
 		param[19] = user.getNl();
-		param[20] = user_id;
+		
+		GB2Alpha gb2Alpha = new GB2Alpha();
+		param[20] = gb2Alpha.String2Alpha(user.getReal_name());
+			
+		param[21] = user_id;
 		
 		this.getJdbcTemplate().update(sql,param);
 		
@@ -96,9 +101,9 @@ public class EmployeeDAO extends JdbcBaseDAO {
 	 */
 	public void updateUser(SysUser user){
 		String sql = "update sys_user set real_name=?,csny=?,sex=?,gs_phone=?,mobile=?,jt_phone=?,fax=?,mail=?,msn=?,qq=?,address=?," +
-				"p_code=?,dept=?,position=?,szkf=?,state=?,xh=?,is_ywy=?,gh=?,nl=? where user_id=?";
+				"p_code=?,dept=?,position=?,szkf=?,state=?,xh=?,is_ywy=?,gh=?,nl=?,china_py=? where user_id=?";
 		
-		Object[] param = new Object[21];
+		Object[] param = new Object[22];
 		
 		param[0] = user.getReal_name();
 		param[1] = user.getCsny();
@@ -120,7 +125,11 @@ public class EmployeeDAO extends JdbcBaseDAO {
 		param[17] = user.getIs_ywy();
 		param[18] = user.getGh();
 		param[19] = user.getNl();
-		param[20] = user.getUser_id();
+		
+		GB2Alpha gb2Alpha = new GB2Alpha();
+		param[20] = gb2Alpha.String2Alpha(user.getReal_name());
+		
+		param[21] = user.getUser_id();
 		
 		this.getJdbcTemplate().update(sql,param);
 	}

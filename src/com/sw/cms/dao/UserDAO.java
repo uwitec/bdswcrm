@@ -19,6 +19,7 @@ import com.sw.cms.dao.base.JdbcBaseDAO;
 import com.sw.cms.dao.base.SqlUtil;
 import com.sw.cms.model.Page;
 import com.sw.cms.model.SysUser;
+import com.sw.cms.util.GB2Alpha;
 
 public class UserDAO extends JdbcBaseDAO {
 
@@ -146,11 +147,11 @@ public class UserDAO extends JdbcBaseDAO {
 	 * @param user
 	 */
 	public void saveUser(SysUser user){
-		String sql = "insert into sys_user(user_name,password,real_name,csny,gs_phone,mobile,jt_phone,fax,mail,msn,qq,address,p_code,dept,position,szkf,state,xh,is_sys_user,is_dls,client_name,user_id) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		String sql = "insert into sys_user(user_name,password,real_name,csny,gs_phone,mobile,jt_phone,fax,mail,msn,qq,address,p_code,dept,position,szkf,state,xh,is_sys_user,is_dls,client_name,china_py,user_id) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		
 		String user_id = getUserID();
 		
-		Object[] param = new Object[22];
+		Object[] param = new Object[23];
 		
 		param[0] = user.getUser_name();
 		param[1] = user.getPassword();
@@ -173,7 +174,11 @@ public class UserDAO extends JdbcBaseDAO {
 		param[18] = "1";
 		param[19] = user.getIs_dls();
 		param[20] = user.getClient_name();
-		param[21] = user_id;
+		
+		GB2Alpha gb2Alpha = new GB2Alpha();
+		param[21] = gb2Alpha.String2Alpha(user.getReal_name());
+		
+		param[22] = user_id;
 		
 		this.getJdbcTemplate().update(sql,param);
 		
@@ -185,9 +190,9 @@ public class UserDAO extends JdbcBaseDAO {
 	 * @param user
 	 */
 	public void updateUser(SysUser user){
-		String sql = "update sys_user set user_name=?,real_name=?,csny=?,gs_phone=?,mobile=?,jt_phone=?,fax=?,mail=?,msn=?,qq=?,address=?,p_code=?,dept=?,position=?,szkf=?,state=?,xh=?,is_dls=?,client_name=? where user_id=?";
+		String sql = "update sys_user set user_name=?,real_name=?,csny=?,gs_phone=?,mobile=?,jt_phone=?,fax=?,mail=?,msn=?,qq=?,address=?,p_code=?,dept=?,position=?,szkf=?,state=?,xh=?,is_dls=?,client_name=?,china_py=? where user_id=?";
 		
-		Object[] param = new Object[20];
+		Object[] param = new Object[21];
 		
 		param[0] = user.getUser_name();
 		param[1] = user.getReal_name();
@@ -208,7 +213,11 @@ public class UserDAO extends JdbcBaseDAO {
 		param[16] = new Integer(user.getXh());
 		param[17] = user.getIs_dls();
 		param[18] = user.getClient_name();
-		param[19] = user.getUser_id();
+		
+		GB2Alpha gb2Alpha = new GB2Alpha();
+		param[19] = gb2Alpha.String2Alpha(user.getReal_name());
+		
+		param[20] = user.getUser_id();
 		
 		this.getJdbcTemplate().update(sql,param);
 	}
@@ -485,6 +494,7 @@ public class UserDAO extends JdbcBaseDAO {
 			
 			if(SqlUtil.columnIsExist(rs,"is_dls")) user.setIs_dls(rs.getString("is_dls"));
 			if(SqlUtil.columnIsExist(rs,"client_name")) user.setClient_name(rs.getString("client_name"));
+			if(SqlUtil.columnIsExist(rs,"china_py")) user.setChina_py(rs.getString("china_py"));
 			
 			return user;
 		}

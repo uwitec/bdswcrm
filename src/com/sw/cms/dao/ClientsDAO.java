@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.RowMapper;
 import com.sw.cms.dao.base.JdbcBaseDAO;
 import com.sw.cms.model.Clients;
 import com.sw.cms.model.Page;
+import com.sw.cms.util.GB2Alpha;
 
 public class ClientsDAO extends JdbcBaseDAO {
 	
@@ -75,9 +76,9 @@ public class ClientsDAO extends JdbcBaseDAO {
 	 * @param clients
 	 */
 	public Object saveClient(Clients clients){
-		String sql = "insert into clients(name,lxr,lxdh,mobile,address,p_code,mail,msn,qq,zq,xe,remark,ygs,gsxz,client_type,khjl,id,gzdh,cz,comaddress) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		String sql = "insert into clients(name,lxr,lxdh,mobile,address,p_code,mail,msn,qq,zq,xe,remark,ygs,gsxz,client_type,khjl,id,gzdh,cz,comaddress,china_py) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		
-		Object[] param = new Object[20];
+		Object[] param = new Object[21];
 		
 		
 		param[0] = clients.getName();
@@ -101,6 +102,9 @@ public class ClientsDAO extends JdbcBaseDAO {
 		param[18]=  clients.getCz();
 		param[19]= clients.getComaddress();
 		
+		GB2Alpha gb2Alpha = new GB2Alpha();
+		param[20] = gb2Alpha.String2Alpha(clients.getName());
+		
 		this.getJdbcTemplate().update(sql,param);
 		return param[16];
 		
@@ -114,9 +118,9 @@ public class ClientsDAO extends JdbcBaseDAO {
 	 */
 	public void updateClient(Clients clients){
 		
-		String sql = "update clients set name=?,lxr=?,lxdh=?,mobile=?,address=?,p_code=?,mail=?,msn=?,qq=?,zq=?,xe=?,remark=?,ygs=?,gsxz=?,client_type=?,khjl=?,gzdh=?,cz=?,comaddress=? where id=?";
+		String sql = "update clients set name=?,lxr=?,lxdh=?,mobile=?,address=?,p_code=?,mail=?,msn=?,qq=?,zq=?,xe=?,remark=?,ygs=?,gsxz=?,client_type=?,khjl=?,gzdh=?,cz=?,comaddress=?,china_py=? where id=?";
 		
-		Object[] param = new Object[20];
+		Object[] param = new Object[21];
 		
 		
 		param[0] = clients.getName();
@@ -139,7 +143,11 @@ public class ClientsDAO extends JdbcBaseDAO {
 		param[16]=  clients.getGzdh();
 		param[17]=  clients.getCz();
 		param[18]=  clients.getComaddress();
-		param[19] = clients.getId();
+		
+		GB2Alpha gb2Alpha = new GB2Alpha();
+		param[19] = gb2Alpha.String2Alpha(clients.getName());
+		
+		param[20] = clients.getId();
 		
 		this.getJdbcTemplate().update(sql,param);
 		
@@ -293,6 +301,7 @@ public class ClientsDAO extends JdbcBaseDAO {
 			clients.setGzdh(rs.getString("gzdh"));
 			clients.setCz(rs.getString("cz"));
 			clients.setComaddress(rs.getString("comaddress"));
+			clients.setChina_py(rs.getString("china_py"));
 			
 			return clients;
 		}

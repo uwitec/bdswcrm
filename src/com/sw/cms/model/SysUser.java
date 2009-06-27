@@ -42,6 +42,8 @@ public class SysUser {
 	
 	private String isOnline = "0"; //是否在线；0：不在线；1：在线
 	
+	private String china_py;   //汉语拼音缩写
+	
 	public String getAddress() {
 		return address;
 	}
@@ -227,6 +229,12 @@ public class SysUser {
 	}
 	public void setIsOnline(String isOnline) {
 		this.isOnline = isOnline;
+	}
+	public String getChina_py() {
+		return china_py;
+	}
+	public void setChina_py(String china_py) {
+		this.china_py = china_py;
 	}
 
 }

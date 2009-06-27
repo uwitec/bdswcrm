@@ -24,6 +24,14 @@ public class Clients {
 	private String client_type;  //客户类型
 	private String khjl;         //客户经理
 	
+	private String china_py;     //汉语拼音缩写
+	
+	public String getChina_py() {
+		return china_py;
+	}
+	public void setChina_py(String china_py) {
+		this.china_py = china_py;
+	}
 	public String getAddress() {
 		return address;
 	}
