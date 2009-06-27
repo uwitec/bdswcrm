@@ -1,6 +1,6 @@
 package com.sw.cms.util;
 
-import java.util.* ;
+import java.util.StringTokenizer;
 
 public final class StringFilter {
 
