@@ -10,6 +10,8 @@ OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
 Clients client = (Clients)VS.findValue("client");
 String[] wldwlx = (String[])VS.findValue("wldwlx");
 List userList = (List)VS.findValue("userList");
+String msg = StringUtils.nullToStr(session.getAttribute("MSG"));
+session.removeAttribute("MSG");
 %>
 
 <html>
@@ -56,6 +58,9 @@ List userList = (List)VS.findValue("userList");
 <body oncontextmenu="return false;" >
 <form name="clientForm" action="updateClient.html" method="post">
 <input type="hidden" name="client.id" id="id" value="<%=StringUtils.nullToStr(client.getId()) %>">
+<center>
+<font color="red" style="font-size:16px;"><%=msg %></font>
+</center>
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>

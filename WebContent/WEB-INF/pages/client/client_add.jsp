@@ -7,6 +7,8 @@ OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
 
 String[] wldwlx = (String[])VS.findValue("wldwlx");
 List userList = (List)VS.findValue("userList");
+String msg = StringUtils.nullToStr(session.getAttribute("MSG"));
+session.removeAttribute("MSG");
 %>
 <html>
 <head>
@@ -72,6 +74,9 @@ List userList = (List)VS.findValue("userList");
 </head>
 <body oncontextmenu="return false;" >
 <form name="clientForm" action="saveClient.html" method="post">
+<center>
+<font color="red" style="font-size:16px;"><%=msg %></font>
+</center>
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>

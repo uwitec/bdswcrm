@@ -12,6 +12,7 @@ XsdHzService xsdHzService = (XsdHzService)VS.findValue("xsdHzService");
 String start_date = StringUtils.nullToStr(request.getParameter("start_date"));
 String end_date = StringUtils.nullToStr(request.getParameter("end_date"));
 String client_name = StringUtils.nullToStr(request.getParameter("client_name"));
+ 
 String xsry_id = StringUtils.nullToStr(request.getParameter("xsry_id"));
 String dj_id = StringUtils.nullToStr(request.getParameter("dj_id"));
 

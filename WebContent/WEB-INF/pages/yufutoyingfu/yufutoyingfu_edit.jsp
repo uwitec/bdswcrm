@@ -13,6 +13,7 @@ List userList = (List)VS.findValue("userList");
 double clientHjYufuK = (Double)VS.findValue("clientHjYufuK");
 
 List yufuToYingfuDescs = (List)VS.findValue("yufuToYingfuDescs");
+ 
 
 int allCount = 3;
 if(yufuToYingfuDescs != null && yufuToYingfuDescs.size()>0){

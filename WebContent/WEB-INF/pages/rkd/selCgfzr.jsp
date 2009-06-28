@@ -45,7 +45,7 @@ String position = ParameterUtility.getStringParameter(request,"position", "");
 </script>
 </head>
 <body >
-<form name="myform" action="selLsEmployee.html" method="post">
+<form name="myform" action="selCgfzr.html" method="post">
  
 <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0">
 	<tr>
