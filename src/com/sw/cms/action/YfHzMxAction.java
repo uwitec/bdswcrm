@@ -26,6 +26,7 @@ public class YfHzMxAction extends BaseAction {
 	 */
 	public String showCondition(){
 		user_list = userService.getAllEmployeeList();
+		clientList=clientsService.getClientList("");
 		return "success";
 	}
 	

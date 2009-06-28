@@ -2,6 +2,7 @@ package com.sw.cms.action;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.sw.cms.action.base.BaseAction;
 import com.sw.cms.model.Clients;
@@ -160,6 +161,14 @@ public class ClientsAction extends BaseAction {
 	 * @return
 	 */
 	public String save() {
+		
+		if(clientsService.getClientsIsExist(client.getName())>0)
+		{
+			 getSession().setAttribute("MSG", "单位名称已存在，请选用其它名称！");
+			 wldwlx = sjzdService.getSjzdXmxxByZdId("SJZD_WLDWLX");
+			userList = userService.getAllEmployeeList();
+			return "input";
+		}
 		clientsService.saveClient(client,linkman);
 		return "success";
 	}
@@ -183,7 +192,24 @@ public class ClientsAction extends BaseAction {
 	 * 
 	 * @return
 	 */
-	public String update() {
+	public String update()
+	{
+		
+		Clients map=(Clients)clientsService.getClient(client.getId());
+		if(!map.getName().equals(client.getName()))
+		{
+			if(clientsService.getClientsIsExist(client.getName())>0)
+			{
+			   String flogname=	client.getName();
+				 getSession().setAttribute("MSG", "单位名称已存在，请选用其它名称！");
+				client = (Clients) clientsService.getClient(map.getId());
+				client.setName(flogname);
+				wldwlx = sjzdService.getSjzdXmxxByZdId("SJZD_WLDWLX");
+				userList = userService.getAllEmployeeList();
+				return "input";
+			}
+			
+		}
 		clientsService.updateClient(client);
 		return "success";
 	}

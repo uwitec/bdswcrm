@@ -174,8 +174,10 @@ public class EmployeeAction extends BaseAction {
 			     int count=employeeService.getEmployeeByNameIsExist(user.getReal_name());
 			     if(count>0)
 			     {
+			    	  
 			        getSession().setAttribute("MSG", "员工姓名已存在，请选用其它姓名！");
 			        userMap=employeeService.getUser(user.getUser_id());
+			         
 			        depts = deptService.getDepts();
 			        positions = sjzdService.getSjzdXmxxByZdId("SJZD_ZWXX");
 			        return "input";

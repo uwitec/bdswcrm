@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.sw.cms.action.base.BaseAction;
+import com.sw.cms.service.ClientsService;
 import com.sw.cms.service.HpflxsHzService;
 import com.sw.cms.service.UserService;
 
@@ -16,9 +17,12 @@ public class HpflxsHzAction extends BaseAction {
 	
 	private HpflxsHzService hpflxsHzService;
 	private UserService userService;
+	private ClientsService clientsService;
 	
 	private List resultList = new ArrayList();
 	private List user_list = new ArrayList();
+	private List clientsList= new ArrayList();
+	 
 	
 	private String start_date = "";
 	private String end_date = "";
@@ -103,6 +107,7 @@ public class HpflxsHzAction extends BaseAction {
 	 * @throws Exception
 	 */
 	public String showCondition()throws Exception{
+		clientsList=clientsService.getClientList("");
 		user_list = userService.getAllEmployeeList();
 		return SUCCESS;
 	}
@@ -167,6 +172,26 @@ public class HpflxsHzAction extends BaseAction {
 
 	public void setUserService(UserService userService) {
 		this.userService = userService;
+	}
+
+
+	public List getClientsList() {
+		return clientsList;
+	}
+
+
+	public void setClientsList(List clientsList) {
+		this.clientsList = clientsList;
+	}
+
+
+	public ClientsService getClientsService() {
+		return clientsService;
+	}
+
+
+	public void setClientsService(ClientsService clientsService) {
+		this.clientsService = clientsService;
 	}
 	
 

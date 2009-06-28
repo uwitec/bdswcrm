@@ -220,6 +220,17 @@ public class ClientsDAO extends JdbcBaseDAO {
 		return name;
 	}
 	
+	/**
+	 * 判断往来单位是否可用
+	 * @param name
+	 * @return
+	 */
+	public int getClientsIsExist(String name)
+	{
+	    String sql="select count(*) from clients  where name='"+name+"'";
+	    return this.getJdbcTemplate().queryForInt(sql);
+	}
+	
 	
 	/**
 	 * 取客户往来交易记录(前5条)
@@ -267,6 +278,8 @@ public class ClientsDAO extends JdbcBaseDAO {
 
 		return "CL" + curId;
 	}
+	
+	
 	
 	
 	

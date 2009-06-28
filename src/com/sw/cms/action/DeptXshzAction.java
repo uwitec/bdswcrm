@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.sw.cms.action.base.BaseAction;
+import com.sw.cms.service.ClientsService;
 import com.sw.cms.service.DeptXshzService;
 
 /**
@@ -14,8 +15,10 @@ import com.sw.cms.service.DeptXshzService;
 public class DeptXshzAction extends BaseAction {
 	
 	private DeptXshzService deptXshzService;
+	private ClientsService clientsService;
 	
 	private List resultList = new ArrayList();
+	private List clientsList= new ArrayList();
 	
 	private String start_date = "";
 	private String end_date = "";
@@ -30,6 +33,7 @@ public class DeptXshzAction extends BaseAction {
 	 * @return
 	 */
 	public String showCondition(){
+		clientsList=clientsService.getClientList("");
 		return SUCCESS;
 	}
 	
@@ -126,6 +130,26 @@ public class DeptXshzAction extends BaseAction {
 	}
 	public void setXsry(String xsry) {
 		this.xsry = xsry;
+	}
+
+
+	public List getClientsList() {
+		return clientsList;
+	}
+
+
+	public void setClientsList(List clientsList) {
+		this.clientsList = clientsList;
+	}
+
+
+	public ClientsService getClientsService() {
+		return clientsService;
+	}
+
+
+	public void setClientsService(ClientsService clientsService) {
+		this.clientsService = clientsService;
 	}
 
 }

@@ -7,6 +7,7 @@ import com.sw.cms.action.base.BaseAction;
 import com.sw.cms.model.LoginInfo;
 import com.sw.cms.model.Page;
 import com.sw.cms.model.YufuToYingfu;
+import com.sw.cms.service.ClientsService;
 import com.sw.cms.service.UserService;
 import com.sw.cms.service.YufuToYingfuService;
 import com.sw.cms.util.Constant;
@@ -15,11 +16,13 @@ public class YufuToYingfuAction extends BaseAction {
 	
 	private YufuToYingfuService yufuToYingfuService;
 	private UserService userService;
+	private ClientsService clientsService;
 	
 	private Page yufuToYingfuPage;
 	private YufuToYingfu yufuToYingfu = new YufuToYingfu();
 	private List yufuToYingfuDescs =  new ArrayList();
 	private List userList = new ArrayList();
+	private List clientsList= new ArrayList();
 	private double clientHjYufuK = 0;   //客户合计预付款
 	
 	private String id;
@@ -86,6 +89,7 @@ public class YufuToYingfuAction extends BaseAction {
 		}
 		
 		userList = userService.getAllEmployeeList();
+		clientsList=clientsService.getClientList("");
 		return "success";
 	}
 	
@@ -117,6 +121,7 @@ public class YufuToYingfuAction extends BaseAction {
 		clientHjYufuK = yufuToYingfuService.getYufukjeByClientId(yufuToYingfu.getClient_name());
 		
 		userList = userService.getAllEmployeeList();
+		 
 		
 		return "success";
 	}
@@ -231,6 +236,26 @@ public class YufuToYingfuAction extends BaseAction {
 	}
 	public void setYufuToYingfuService(YufuToYingfuService yufuToYingfuService) {
 		this.yufuToYingfuService = yufuToYingfuService;
+	}
+
+
+	public List getClientsList() {
+		return clientsList;
+	}
+
+
+	public void setClientsList(List clientsList) {
+		this.clientsList = clientsList;
+	}
+
+
+	public ClientsService getClientsService() {
+		return clientsService;
+	}
+
+
+	public void setClientsService(ClientsService clientsService) {
+		this.clientsService = clientsService;
 	}
 
 }

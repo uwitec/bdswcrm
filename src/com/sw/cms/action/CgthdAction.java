@@ -8,6 +8,7 @@ import com.sw.cms.model.Cgthd;
 import com.sw.cms.model.LoginInfo;
 import com.sw.cms.model.Page;
 import com.sw.cms.service.CgthdService;
+import com.sw.cms.service.ClientsService;
 import com.sw.cms.service.StoreService;
 import com.sw.cms.service.SysInitSetService;
 import com.sw.cms.service.UserService;
@@ -19,12 +20,14 @@ public class CgthdAction extends BaseAction {
 	private UserService userService;
 	private SysInitSetService sysInitSetService;
 	private StoreService storeService;
+	private ClientsService clientsService;
 	
 	private Page cgthdPage;
 	private Cgthd cgthd = new Cgthd();
 	private List cgthdProducts = new ArrayList();
 	private List userList = new ArrayList();
 	private List storeList = new ArrayList();
+	private List clientsList= new ArrayList();
 	
 	private String id = "";
 	private String th_date1 = "";
@@ -80,6 +83,7 @@ public class CgthdAction extends BaseAction {
 		userList = userService.getAllEmployeeList();
 		storeList = storeService.getAllStoreList();
 		iscs_flag = sysInitSetService.getQyFlag();
+		clientsList=clientsService.getClientList("");
 		return "success";
 	}
 
@@ -107,6 +111,7 @@ public class CgthdAction extends BaseAction {
 		userList = userService.getAllEmployeeList();
 		storeList = storeService.getAllStoreList();
 		iscs_flag = sysInitSetService.getQyFlag();
+		clientsList=clientsService.getClientList("");
 		return "success";
 	}
 	
@@ -256,6 +261,22 @@ public class CgthdAction extends BaseAction {
 
 	public void setStoreService(StoreService storeService) {
 		this.storeService = storeService;
+	}
+
+	public List getClientsList() {
+		return clientsList;
+	}
+
+	public void setClientsList(List clientsList) {
+		this.clientsList = clientsList;
+	}
+
+	public ClientsService getClientsService() {
+		return clientsService;
+	}
+
+	public void setClientsService(ClientsService clientsService) {
+		this.clientsService = clientsService;
 	}
 
 }

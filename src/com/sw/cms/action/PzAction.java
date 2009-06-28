@@ -7,6 +7,7 @@ import com.sw.cms.action.base.BaseAction;
 import com.sw.cms.model.LoginInfo;
 import com.sw.cms.model.Page;
 import com.sw.cms.model.Pz;
+import com.sw.cms.service.ClientsService;
 import com.sw.cms.service.PzService;
 import com.sw.cms.service.SjzdService;
 import com.sw.cms.service.UserService;
@@ -17,10 +18,12 @@ public class PzAction extends BaseAction {
 	private PzService pzService;
 	private UserService userService;
 	private SjzdService sjzdService;
+	private ClientsService clientsService;
 	
 	private Page pzPage;
 	private Pz pz = new Pz();
 	private List userList = new ArrayList();
+	private List clientsList= new ArrayList();
 	private String[] pzlx;
 	
 	private String pz_date1 = "";
@@ -76,6 +79,7 @@ public class PzAction extends BaseAction {
 		userList = userService.getAllEmployeeList();
 		id = pzService.updatePzID();
 		pzlx = sjzdService.getSjzdXmxxByZdId("SJZD_PZLX");
+		clientsList=clientsService.getClientList("");
 		return "success";
 	}
 	
@@ -101,6 +105,7 @@ public class PzAction extends BaseAction {
 		pz = (Pz)pzService.getPz(id);
 		userList = userService.getAllEmployeeList();
 		pzlx = sjzdService.getSjzdXmxxByZdId("SJZD_PZLX");
+		clientsList=clientsService.getClientList("");
 		return "success";
 	}
 	
@@ -238,6 +243,26 @@ public class PzAction extends BaseAction {
 
 	public void setSjzdService(SjzdService sjzdService) {
 		this.sjzdService = sjzdService;
+	}
+
+
+	public List getClientsList() {
+		return clientsList;
+	}
+
+
+	public void setClientsList(List clientsList) {
+		this.clientsList = clientsList;
+	}
+
+
+	public ClientsService getClientsService() {
+		return clientsService;
+	}
+
+
+	public void setClientsService(ClientsService clientsService) {
+		this.clientsService = clientsService;
 	}
 
 }

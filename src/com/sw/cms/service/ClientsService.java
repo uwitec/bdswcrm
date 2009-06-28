@@ -207,6 +207,7 @@ public class ClientsService {
 	public Object getClientsFollowById(String id) {
 		return clientsFollowDao.getClientsFollowById(id);
 	}
+	
 
 	/**
 	 * 保存修改跟进记录
@@ -224,6 +225,16 @@ public class ClientsService {
 	 */
 	public Page getClientWlyw(String client_id){
 		return clientsDao.getClientWlyw(client_id);
+	}
+	
+	/**
+	 * 判断往来单位是否可用
+	 * @param name
+	 * @return
+	 */
+	public int getClientsIsExist(String name)
+	{
+		return clientsDao.getClientsIsExist(name);
 	}
 
 	public InitParamDAO getInitParamDao() {

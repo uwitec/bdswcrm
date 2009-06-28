@@ -15,12 +15,14 @@ public class XstjClientAction {
 	
 	private List userList = new ArrayList();
 	private List clientList = new ArrayList();
+	 
 	
 	private String client_name = "";
 	
 	
 	public String showCondition(){
 		userList = userService.getAllEmployeeList();
+		clientList=clientsService.getClientList("");
 		return "success";
 	}
 	

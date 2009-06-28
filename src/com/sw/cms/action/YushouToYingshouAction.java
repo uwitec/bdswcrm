@@ -7,6 +7,7 @@ import com.sw.cms.action.base.BaseAction;
 import com.sw.cms.model.LoginInfo;
 import com.sw.cms.model.Page;
 import com.sw.cms.model.YushouToYingshou;
+import com.sw.cms.service.ClientsService;
 import com.sw.cms.service.UserService;
 import com.sw.cms.service.YushouToYingshouService;
 import com.sw.cms.util.Constant;
@@ -15,11 +16,13 @@ public class YushouToYingshouAction extends BaseAction {
 	
 	private YushouToYingshouService yushouToYingshouService;
 	private UserService userService;
+	private ClientsService clientsService;
 	
 	private Page yushouToYingshouPage;
 	private YushouToYingshou yushouToYingshou = new YushouToYingshou();
 	private List yushouToYingshouDescs = new ArrayList();
 	private List userList = new ArrayList();
+	private List clientsList= new ArrayList();
 	private double clientHjYushouK = 0;   //客户合计预收款
 	
 	private String id;
@@ -85,7 +88,7 @@ public class YushouToYingshouAction extends BaseAction {
 		}
 		
 		userList = userService.getAllEmployeeList();
-		
+		clientsList=clientsService.getClientList("");
 		return "success";
 	}
 	
@@ -235,6 +238,26 @@ public class YushouToYingshouAction extends BaseAction {
 
 	public void setClientHjYushouK(double clientHjYushouK) {
 		this.clientHjYushouK = clientHjYushouK;
+	}
+
+
+	public List getClientsList() {
+		return clientsList;
+	}
+
+
+	public void setClientsList(List clientsList) {
+		this.clientsList = clientsList;
+	}
+
+
+	public ClientsService getClientsService() {
+		return clientsService;
+	}
+
+
+	public void setClientsService(ClientsService clientsService) {
+		this.clientsService = clientsService;
 	}
 
 }

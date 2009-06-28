@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.sw.cms.action.base.BaseAction;
 import com.sw.cms.model.LoginInfo;
+import com.sw.cms.service.ClientsService;
 import com.sw.cms.service.HpxsHzService;
 import com.sw.cms.service.UserService;
 
@@ -17,35 +18,24 @@ import com.sw.cms.service.UserService;
 public class HpxsHzAction extends BaseAction {
 
 	private UserService userService;
-
 	private HpxsHzService hpxsHzService;
-
+	private ClientsService clientsService;
+	
 	private List user_list = new ArrayList();
-
 	private List productKindList = new ArrayList();
-
 	private List resultList = new ArrayList();
-
 	private List xsdList = new ArrayList();
-
 	private List thdList = new ArrayList();
-
 	private List lsdList = new ArrayList();
+	private List clientsList= new ArrayList();
 
 	private String product_kind = "";
-
 	private String product_name = "";
-
 	private String product_xh = "";
-
 	private String start_date = "";
-
 	private String end_date = "";
-
 	private String clientName = "";
-
 	private String xsry_id = "";
-
 	private String product_id = "";
 
 	/**
@@ -54,6 +44,7 @@ public class HpxsHzAction extends BaseAction {
 	 * @return
 	 */
 	public String showCondition() {
+		clientsList=clientsService.getClientList("");
 		user_list = userService.getAllEmployeeList();
 		return "success";
 	}
@@ -247,6 +238,22 @@ public class HpxsHzAction extends BaseAction {
 
 	public void setProduct_id(String product_id) {
 		this.product_id = product_id;
+	}
+
+	public List getClientsList() {
+		return clientsList;
+	}
+
+	public void setClientsList(List clientsList) {
+		this.clientsList = clientsList;
+	}
+
+	public ClientsService getClientsService() {
+		return clientsService;
+	}
+
+	public void setClientsService(ClientsService clientsService) {
+		this.clientsService = clientsService;
 	}
 
 }

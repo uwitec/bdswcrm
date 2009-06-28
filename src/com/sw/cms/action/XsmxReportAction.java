@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.sw.cms.action.base.BaseAction;
+import com.sw.cms.service.ClientsService;
 import com.sw.cms.service.DeptService;
 import com.sw.cms.service.UserService;
 import com.sw.cms.service.XsmxReportService;
@@ -13,9 +14,27 @@ public class XsmxReportAction extends BaseAction {
 	private XsmxReportService xsmxReportService;
 	private UserService userService;
 	private DeptService deptService;
+	private ClientsService clientsService;
 	
 	private List userList = new ArrayList();
 	private List deptList = new ArrayList();
+	private List clientsList= new ArrayList();
+
+	public List getClientsList() {
+		return clientsList;
+	}
+
+	public void setClientsList(List clientsList) {
+		this.clientsList = clientsList;
+	}
+
+	public ClientsService getClientsService() {
+		return clientsService;
+	}
+
+	public void setClientsService(ClientsService clientsService) {
+		this.clientsService = clientsService;
+	}
 
 	public XsmxReportService getXsmxReportService() {
 		return xsmxReportService;
@@ -24,6 +43,7 @@ public class XsmxReportAction extends BaseAction {
 	public String showCondition(){
 		userList = userService.getAllEmployeeList();
 		deptList = deptService.getDepts();
+		clientsList=clientsService.getClientList("");
 		return "success";
 	}
 	

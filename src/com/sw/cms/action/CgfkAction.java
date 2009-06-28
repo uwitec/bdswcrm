@@ -9,6 +9,7 @@ import com.sw.cms.model.LoginInfo;
 import com.sw.cms.model.Page;
 import com.sw.cms.service.AccountsService;
 import com.sw.cms.service.CgfkService;
+import com.sw.cms.service.ClientsService;
 import com.sw.cms.service.UserService;
 import com.sw.cms.util.Constant;
 
@@ -17,6 +18,7 @@ public class CgfkAction extends BaseAction {
 	private CgfkService cgfkService;
 	private UserService userService;
 	private AccountsService accountsService;
+	private ClientsService clientsService;
 	
 	private List userList;
 	private List accountList;
@@ -25,6 +27,7 @@ public class CgfkAction extends BaseAction {
 	private Cgfk cgfk = new Cgfk();
 	private List cgfkDescs = new ArrayList();
 	private List providerList;
+	private List clientsList= new ArrayList();
 	
 	private String gysmc = "";
 	private String fk_date1 = "";
@@ -85,7 +88,7 @@ public class CgfkAction extends BaseAction {
 			id = cgfkService.updateCgfkID();
 			cgfk.setId(id);
 		}
-		
+		clientsList=clientsService.getClientList("");
 		return "success";
 	}
 	
@@ -333,6 +336,30 @@ public class CgfkAction extends BaseAction {
 
 	public void setAccountList(List accountList) {
 		this.accountList = accountList;
+	}
+
+
+
+	public List getClientsList() {
+		return clientsList;
+	}
+
+
+
+	public void setClientsList(List clientsList) {
+		this.clientsList = clientsList;
+	}
+
+
+
+	public ClientsService getClientsService() {
+		return clientsService;
+	}
+
+
+
+	public void setClientsService(ClientsService clientsService) {
+		this.clientsService = clientsService;
 	}
 	
 	

@@ -8,6 +8,7 @@ import com.sw.cms.model.Jhd;
 import com.sw.cms.model.JhdProduct;
 import com.sw.cms.model.LoginInfo;
 import com.sw.cms.model.Page;
+import com.sw.cms.service.ClientsService;
 import com.sw.cms.service.JhdService;
 import com.sw.cms.service.StoreService;
 import com.sw.cms.service.UserService;
@@ -21,6 +22,7 @@ public class JhdAction extends BaseAction {
 	private JhdService jhdService;
 	private UserService userService;
 	private StoreService storeService;
+	private ClientsService clientsService;
 
 	private Page jhdPage;
 
@@ -32,6 +34,7 @@ public class JhdAction extends BaseAction {
 	private List providers = new ArrayList();	
 	private List userList = new ArrayList();
 	private List storeList = new ArrayList();
+	private List clientsList= new ArrayList();
 	
 	
 	private String gysbh ="";
@@ -90,6 +93,7 @@ public class JhdAction extends BaseAction {
 		userList = userService.getAllEmployeeList();
 		storeList = storeService.getAllStoreList();
 		id = jhdService.updateJhdID();
+		clientsList=clientsService.getClientList("");
 		return "success";
 	}
 
@@ -117,6 +121,7 @@ public class JhdAction extends BaseAction {
 		jhd = (Jhd) jhdService.getJhd(id);
 		userList = userService.getAllEmployeeList();
 		storeList = storeService.getAllStoreList();
+		clientsList=clientsService.getClientList("");
 		return "success";
 	}
 
@@ -300,6 +305,22 @@ public class JhdAction extends BaseAction {
 
 	public void setCg_date2(String cg_date2) {
 		this.cg_date2 = cg_date2;
+	}
+
+	public List getClientsList() {
+		return clientsList;
+	}
+
+	public void setClientsList(List clientsList) {
+		this.clientsList = clientsList;
+	}
+
+	public ClientsService getClientsService() {
+		return clientsService;
+	}
+
+	public void setClientsService(ClientsService clientsService) {
+		this.clientsService = clientsService;
 	}
 
 }
