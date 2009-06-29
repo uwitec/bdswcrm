@@ -231,6 +231,17 @@ public class ClientsDAO extends JdbcBaseDAO {
 	    return this.getJdbcTemplate().queryForInt(sql);
 	}
 	
+	/**
+	 * 根据往来单位名称返回往来单位ID
+	 * @param client_name
+	 * @return
+	 */
+	public Map getClientByClientName(String client_name)
+	{
+		String sql="select id from clients where name='"+client_name+"'";
+		return this.getJdbcTemplate().queryForMap(sql);
+	}
+	
 	
 	/**
 	 * 取客户往来交易记录(前5条)

@@ -123,7 +123,7 @@ public class CkdAction extends BaseAction {
 	 * @return
 	 */
 	public String save(){
-		
+		 
 		LoginInfo info = (LoginInfo)getSession().getAttribute("LOGINUSER");
 		String user_id = info.getUser_id();
 		ckd.setCzr(user_id);
@@ -197,6 +197,7 @@ public class CkdAction extends BaseAction {
 	 * @return
 	 */
 	public String update(){
+		 
 		LoginInfo info = (LoginInfo)getSession().getAttribute("LOGINUSER");
 		String user_id = info.getUser_id();
 		ckd.setCzr(user_id);
@@ -228,7 +229,9 @@ public class CkdAction extends BaseAction {
 		iscs_flag = sysInitSetService.getQyFlag();  //系统是否完成标志
 		//只有在系统正式启用后才去判断库存是否满足需求
 		if(iscs_flag.equals("1")){
+			 
 			if(ckd.getState().equals("已出库")){
+				 
 				msg = ckdService.checkKc(ckd, ckdProducts);
 				if(!msg.equals("")){
 					ckd.setState("待出库");

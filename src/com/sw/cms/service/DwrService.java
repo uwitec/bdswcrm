@@ -219,7 +219,20 @@ public class DwrService {
 		list.add(clinetId);
 		return list;
 	}
+	
+	/**
+	 * 根据往来单位名称返回往来单位
+	 * @param clients_name
+	 * @return
+	 */
+	public Map getClientByClientName(String clients_name)
+	{
+		return  clientsDao.getClientByClientName(clients_name);
+	}
 
+	
+	
+	
 	public ClientsDAO getClientsDao() {
 		return clientsDao;
 	}

@@ -21,7 +21,7 @@ public class EmployeeService {
 	public Page getUserList(String con,int curPage, int rowsPerPage){
 		return employeeDao.getUserList(con, curPage, rowsPerPage);
 	}
-    //修改----------------------------------------------------------------	
+     
 	/**
 	 * 取业务员列表（带分页）
 	 * @param con
@@ -33,8 +33,7 @@ public class EmployeeService {
 	{
 	    return employeeDao.getYwyEmployee(con, curPage, rowPerPage);
 	}
-	//修改--------------------------------------------------------------
-	
+	 
 	/**
 	 * 保存用户信息
 	 * @param user
