@@ -46,7 +46,7 @@ ClientsService clientsService = (ClientsService)VS.findValue("clientsService");
 	while(it.hasNext()){
 		Map map = (Map)it.next();
 		double xe = map.get("xe")==null?0:((Double)map.get("xe")).doubleValue();
-		
+		 
 		double yinshouje = clientsService.getClientYinshou(StringUtils.nullToStr(map.get("id")));
 		double yinfuje = clientsService.getClientYinfu(StringUtils.nullToStr(map.get("id")));
 	%>

@@ -102,6 +102,15 @@
         <url-pattern>/getClients.do</url-pattern>
     </servlet-mapping>
     
+    <servlet>
+        <servlet-name>getClientsIsExist</servlet-name>
+        <servlet-class>com.sw.cms.servlet.GetClientIsExist</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>getClientsIsExist</servlet-name>
+        <url-pattern>/getClientIsExist.do</url-pattern>
+    </servlet-mapping>
+    
 	<servlet>
         <servlet-name>img</servlet-name>
         <servlet-class>com.sw.cms.servlet.AuthImage</servlet-class>
