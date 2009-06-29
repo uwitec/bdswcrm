@@ -82,31 +82,6 @@ public class InitParamDAO extends JdbcBaseDAO {
 	}
 	
 	
-	/**
-	 * 生成某一天期初值
-	 * @param cdate  期初日期
-	 * @param cdat_1 期初前一天
-	 */
-	public void genCleintWlqc(String cdate,String cdat_1){
-		List clientList = getClientList();
-		if(clientList != null && clientList.size()>0){
-			for(int i=0;i<clientList.size();i++){
-				Map map = (Map)clientList.get(i);
-				String client_name = StringUtils.nullToStr(map.get("id"));
-							
-				//今日期初应收 = 昨日期初应收 + 昨日发生应收 - 昨日已收
-				double qcys = this.getClientYsqc(client_name, cdat_1) + this.getSjysje(client_name, cdat_1) - this.getSjyishouje(client_name, cdat_1);
-				
-				//今日期初应付 = 昨日期初应付 + 昨日发生应付 - 昨日已付
-				double qcyf = this.getClientYfqc(client_name, cdat_1) + this.getSjyfje(client_name, cdat_1) - this.getSjyifuje(client_name, cdat_1);
-				
-				this.insertQc(client_name, qcys, qcyf, cdate);
-			}
-		}
-		log.info("生成" + cdate + "往来期初成功");
-	}
-	
-	
 	private void insertQc(String client_name,double ysqc,double yfqc,String cdate){
 		this.delQc(client_name, cdate);
 		String sql = "insert into client_qc(client_name,ysqc,yfqc,cdate) values(?,?,?,?)";
@@ -403,6 +378,95 @@ public class InitParamDAO extends JdbcBaseDAO {
 	public void delExpireMsg(){
 		String sql = "delete FROM sys_msg WHERE TO_DAYS(NOW())-TO_DAYS(read_time) > " + Constant.MSG_EXPIRE_DAY;
 		this.getJdbcTemplate().update(sql);
+	}
+	
+	
+	/**
+	 * 返回当前所有账户
+	 * @return
+	 */
+	public List getAllAccounts(){
+		String sql = "select * from accounts";
+		return this.getResultList(sql);
+	}
+	
+	
+	//以下为系统生成期初失败后调用调整期初时用到的函数
+	
+	/**
+	 * 根据前一天客户应收应付期初值 生成某一天的期初值<BR>
+	 * 使用在某一天客户期初出现问题时，从前一天的基础上来调整的情况<BR>
+	 * 例如：2008-09-09的期初有问题，需2008-09-08的值是对，那应该是cdate=2008-09-09,cdat_1=2008-09-08<BR>
+	 * @param cdate  期初日期
+	 * @param cdat_1 期初前一天
+	 */
+	public void genCleintWlqc(String cdate,String cdat_1){
+		List clientList = getClientList();
+		if(clientList != null && clientList.size()>0){
+			for(int i=0;i<clientList.size();i++){
+				Map map = (Map)clientList.get(i);
+				String client_name = StringUtils.nullToStr(map.get("id"));
+							
+				//今日期初应收 = 昨日期初应收 + 昨日发生应收 - 昨日已收
+				double qcys = this.getClientYsqc(client_name, cdat_1) + this.getSjysje(client_name, cdat_1) - this.getSjyishouje(client_name, cdat_1);
+				
+				//今日期初应付 = 昨日期初应付 + 昨日发生应付 - 昨日已付
+				double qcyf = this.getClientYfqc(client_name, cdat_1) + this.getSjyfje(client_name, cdat_1) - this.getSjyifuje(client_name, cdat_1);
+				
+				this.insertQc(client_name, qcys, qcyf, cdate);
+			}
+		}
+		log.info("生成" + cdate + "往来期初成功");
+	}
+	
+	
+	
+	/**
+	 * 根据前一天账户的期初值，生成当前天的期初值
+	 * @param cdate  要生成期初的日期
+	 * @param cdat_1  期初前一天
+	 */
+	public void genAccountQc(String cdate,String cdat_1){
+		
+		List accountList = getAllAccounts();
+		
+		if(accountList != null && accountList.size() > 0){
+			for(int i=0;i<accountList.size();i++){
+				Map map = (Map)accountList.get(i);
+				
+				String account_id = StringUtils.nullToStr(map.get("id"));
+				
+				//取前一天账户的期初值
+				double pre_qc_je = 0;
+				String sql = "select * from account_qc where qc_date='" + cdat_1 + "' and account_id='" + account_id + "'";				
+				Map qcMap = this.getResultMap(sql);
+				if(qcMap != null){
+					pre_qc_je = qcMap.get("qcje")==null?0:((Double)qcMap.get("qcje")).doubleValue();
+				}
+				
+				
+				//取交易金额合计
+				double cur_day_jyje = 0;
+				sql = "select * from account_dzd where account_id='" + account_id + "' and jy_date>='" + cdat_1 + "' and jy_date<='" + (cdat_1+" 23:59:59") + "'";
+				List mxList = this.getResultList(sql);
+				if(mxList != null && mxList.size()>0){
+					for(int k=0;k<mxList.size();k++){
+						Map mxMap = (Map)mxList.get(k);
+						double jyje = mxMap.get("jyje")==null?0:((Double)mxMap.get("jyje")).doubleValue(); //交易金额						
+						cur_day_jyje += jyje;
+					}
+				}
+				
+				//账户当天期初值
+				double cur_qc_je = pre_qc_je + cur_day_jyje;
+				
+				sql = "insert into account_qc(account_id,qc_date,qcje) values('" + account_id + "','" + cdate + "'," + cur_qc_je + ")";
+				this.getJdbcTemplate().update(sql);
+				
+				
+			}
+		}
+		log.info("生成账户 "+ cdate + " 期初成功");
 	}
 
 }
