@@ -437,7 +437,7 @@
             <result name="success">/WEB-INF/pages/ckd/ckd_edit.jsp</result>
         </action>
         <action name="updateCkd" class="ckdAction" method="update">
-            <result name="cancel" type="redirect">editCkd.html</result>
+            <result name="cancel" type="redirect">editCkd.html?ckd_id=${ckd.ckd_id}</result>
             <result name="input">/WEB-INF/pages/ckd/ckd_edit.jsp</result>
             <result name="success">/WEB-INF/pages/ckd/msg.jsp</result>
         </action>
@@ -641,8 +641,7 @@
         </action>        
         <action name="selLsProcCkd" class="lsdAction" method="selKcProc">
             <result name="success">/WEB-INF/pages/lsd/selectKcProc.jsp</result>
-        </action>
-<!--  -->        
+        </action>   
         <action name="importSerial" class="lsdAction" method="importSerial">
             <result name="success">/WEB-INF/pages/lsd/importSerial.jsp</result>
         </action>
