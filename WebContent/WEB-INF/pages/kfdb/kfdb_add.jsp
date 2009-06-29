@@ -608,12 +608,14 @@ function  down(event)
 
 var lists=new Array();
 <%
+  if(userList!=null)
+  {
   for(int i=0;i<userList.size();i++)
   {   
      Map map=(Map)userList.get(i); 
 %>
    lists["<%=map.get("real_name")%>"]="<%=map.get("user_id")%>";
-<%}%>
+<%}}%>
 function setValue()
 {
   if(document.getElementById("brand").value!="")
@@ -814,12 +816,14 @@ function  c(event)
 
 var listss=new Array();
 <%
+ if(userList!=null)
+ {
   for(int i=0;i<userList.size();i++)
   {   
      Map map=(Map)userList.get(i); 
 %>
    listss["<%=map.get("real_name")%>"]="<%=map.get("user_id")%>";
-<%}%>
+<%}}%>
 function setvalues()
 {
     

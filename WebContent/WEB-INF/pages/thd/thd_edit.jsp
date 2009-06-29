@@ -239,7 +239,7 @@ if(thdProducts != null && thdProducts.size() > 0){
 		<td class="a1" width="15%">经手人</td>
 		<td class="a2" width="35%">
 				<!--修改 --------------------------------------------------------------------------------------  -->
-		 <input  id="brand"  type="text"   length="20"  onblur="setValue()" value="<%for(int i=0;i<userList.size();i++) {Map map=(Map)userList.get(i); if(map.get("user_id").toString().equals(thd.getTh_fzr())) out.print(map.get("real_name"));}%>"/> 
+		 <input  id="brand"  type="text"   length="20"  onblur="setValue()" value="<%=StaticParamDo.getRealNameById(thd.getTh_fzr() )%>"/> 
          <img id="Loadingimg" src="images/indicator.gif" style="display:none"/>
        
          <img src="images/select.gif" align="absmiddle" title="选择经手人" border="0" onclick="openywyWin();" style="cursor:hand">
@@ -576,12 +576,14 @@ function  down(event)
 
 var lists=new Array();
 <%
+  if(userList!=null)
+  {
   for(int i=0;i<userList.size();i++)
   {   
      Map map=(Map)userList.get(i); 
 %>
    lists["<%=map.get("real_name")%>"]="<%=map.get("user_id")%>";
-<%}%>
+<%}}%>
 function setValue()
 {
   if(document.getElementById("brand").value!="")
@@ -790,14 +792,15 @@ function  c(event)
 
 var listss=new Array();
 <%
-    
+   if(clientsList!=null)
+   { 
   for(int i=0;i<clientsList.size();i++)
   {   
      Map map=(Map)clientsList.get(i); 
 %>
    listss["<%=map.get("name")%>"]="<%=map.get("id")%>";
    
-<%}%>
+<%}}%>
 
 function onblurValue()
 {

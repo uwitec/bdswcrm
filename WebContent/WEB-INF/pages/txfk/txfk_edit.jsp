@@ -132,7 +132,7 @@ Txfk txfk=(Txfk)VS.findValue("txfk");
 		<td class="a2" width="35%">
 			 
 			  <!--修改 --------------------------------------------------------------------------------------  -->
-		 <input  id="brand"    type="text"   length="20"  onblur="setValue()" value="<%for(int i=0;i<userList.size();i++){Map map=(Map)userList.get(i); if(map.get("user_id").toString().equals(txfk.getJsr())) out.print(map.get("real_name"));} %>"/> 
+		 <input  id="brand"    type="text"   length="20"  onblur="setValue()" value="<%=StaticParamDo.getRealNameById(txfk.getJsr()) %>"/> 
          <img src="images/select.gif" align="absmiddle" title="选择经手人" border="0" onclick="openywyWin();" style="cursor:hand">
           <div   id="brandTip"  style="height:12px;position:absolute;left:548px; top:85px;  width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
           </div>
@@ -393,12 +393,14 @@ function  down(event)
 
 var lists=new Array();
 <%
+  if(userList!=null)
+  {
   for(int i=0;i<userList.size();i++)
   {   
      Map map=(Map)userList.get(i); 
 %>
    lists["<%=map.get("real_name")%>"]="<%=map.get("user_id")%>";
-<%}%>
+<%}}%>
 function setValue()
 {
   if(document.getElementById("brand").value!="")

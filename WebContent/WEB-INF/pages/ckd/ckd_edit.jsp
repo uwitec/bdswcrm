@@ -15,6 +15,7 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 	<%
 	if(!msg.equals("")){ 
 	%>
+	   
 		alert("<%=msg%>");
 		window.close();
 		opener.document.myform.submit();

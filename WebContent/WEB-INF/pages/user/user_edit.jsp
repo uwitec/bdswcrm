@@ -148,7 +148,7 @@ List employList = (List)VS.findValue("employList");
 		<td class="a1" width="15%" id="selName">业务员</td>
 		<td class="a2" width="35%" id="selUserType">
 			 <!--修改 --------------------------------------------------------------------------------------  -->
-		 <input  id="brand"  type="text"   length="20"  onblur="setValue()" value="<%for(int i=0;i<employList.size();i++){Map map=(Map)employList.get(i); if(map.get("user_id").toString().equals(user.getClient_name())) out.print(map.get("real_name"));} %>"/> 
+		 <input  id="brand"  type="text"   length="20"  onblur="setValue()" value="<%=StaticParamDo.getRealNameById(user.getClient_name() ) %>"/> 
          <img src="images/select.gif" align="absmiddle" title="选择经手人" border="0" onclick="openywyWin();" style="cursor:hand">
           <div   id="brandTip"  style="height:12px;position:absolute;left:385px; top:110px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
           </div>
@@ -167,7 +167,7 @@ List employList = (List)VS.findValue("employList");
 </form>
 <div id="div_ywy" style="display:none">
 	 <!--修改 --------------------------------------------------------------------------------------  -->
-		 <input  id="brand"  type="text"   length="20"  onblur="setValue()" value="<%for(int i=0;i<employList.size();i++){Map map=(Map)employList.get(i); if(map.get("user_id").toString().equals(user.getClient_name())) out.print(map.get("real_name"));} %>"/> 
+		 <input  id="brand"  type="text"   length="20"  onblur="setValue()" value="<%=StaticParamDo.getRealNameById(user.getClient_name() ) %> %>"/> 
          <img src="images/select.gif" align="absmiddle" title="选择经手人" border="0" onclick="openywyWin();" style="cursor:hand">
           <div   id="brandTip"  style="height:12px;position:absolute;left:385px; top:110px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
           </div>
@@ -372,12 +372,14 @@ function  down(event)
 
 var lists=new Array();
 <%
+  if(employList!=null)
+  {
   for(int i=0;i<employList.size();i++)
   {   
      Map map=(Map)employList.get(i); 
 %>
    lists["<%=map.get("real_name")%>"]="<%=map.get("user_id")%>";
-<%}%>
+<%}}%>
 function setValue()
 {
   if(document.getElementById("brand").value!="")
