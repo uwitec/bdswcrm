@@ -9,23 +9,6 @@ OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
 
 String msg = StringUtils.nullToStr(VS.findValue("msg"));
 
-%>
-
-<script type="text/javascript">
-	<%
-	if(!msg.equals("")){ 
-	%>
-	   
-		alert("<%=msg%>");
-		window.close();
-		opener.document.myform.submit();
-		
-	<%
-	 }
-	%>
-</script>
-
-<%
 Clients client = (Clients)VS.findValue("client");
 
 List storeList = (List)VS.findValue("storeList");
@@ -247,6 +230,15 @@ if(client != null){
 		<td colspan="4">出库单基本信息</td>
 	</tr>
 	</thead>
+	<%
+	if(!msg.equals("")){ 
+	%>
+	<tr>
+		<td class="a2" colspan="4"><font color="red"><%=msg %></font></td>
+	</tr>	
+	<%
+	}
+	%>
 	<tr>
 		<td class="a1" width="15%">出库单编号</td>
 		<td class="a2" width="35%"><input type="text" name="ckd.ckd_id" id="ckd_id" value="<%=StringUtils.nullToStr(ckd.getCkd_id()) %>" readonly size="30">
@@ -603,7 +595,7 @@ function  down(event)
 
 var lists=new Array();
 <%
-  if(userList!=null)
+  if(userList!=null && userList.size()>0)
   {
   for(int i=0;i<userList.size();i++)
   {   
