@@ -90,7 +90,7 @@ String[] jldw = (String[])VS.findValue("jldw");
 	</tr>
 	<tr>
 		<td class="a1" width="15%">移动加权价</td>
-		<td class="a2" width="35%"><input type="text" name="price" value="<%=JMath.round(product.getPrice()) %>" readonly size="20"></td>
+		<td class="a2" width="35%"><input type="text" name="price" value="<%=JMath.round(product.getPrice()) %>" size="20"></td>
 		<td class="a1" width="15%">考核成本价</td>
 		<td class="a2" width="35%"><input type="text" name="khcbj" value="<%=JMath.round(product.getKhcbj()) %>" size="20"></td>		
 
