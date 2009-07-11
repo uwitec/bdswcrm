@@ -31,6 +31,7 @@ public class SerialNumAction extends BaseAction {
 	private Page pageProduct;
 	private SerialNumMng serialNumMng = new SerialNumMng();
 	private String msg = "";
+	private String store_id = "";
 	
 	
 	/**
@@ -49,8 +50,11 @@ public class SerialNumAction extends BaseAction {
 		if(!product_name.equals("")){
 			con += " and product_name like'%" + product_name + "%'";
 		}
+		if(!store_id.equals("")){
+			con += " and store_id='" + store_id + "'";
+		}
 		pageSerialNum = serialNumService.getSerialNumPage(con, curPage, rowsPerPage);
-		
+		storeList = storeService.getAllStoreList();
 		return "success";
 	}
 	
@@ -248,6 +252,14 @@ public class SerialNumAction extends BaseAction {
 
 	public void setStoreList(List storeList) {
 		this.storeList = storeList;
+	}
+
+	public String getStore_id() {
+		return store_id;
+	}
+
+	public void setStore_id(String store_id) {
+		this.store_id = store_id;
 	}
 
 }
