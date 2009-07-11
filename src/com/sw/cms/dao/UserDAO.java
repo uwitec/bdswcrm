@@ -60,6 +60,23 @@ public class UserDAO extends JdbcBaseDAO {
 		String sql = "select   user_id,real_name,china_py from sys_user where is_sys_user='0' and is_ywy='是'";
 		return this.getJdbcTemplate().queryForList(sql);
 	}
+	
+	
+	
+	/**
+	 * 根据条件获取经手人提示信息
+	 * @param paramValue
+	 * @return
+	 */
+	public List getUserListAjaxTip(String paramValue){
+		if(paramValue.equals("")){
+			return null;
+		}
+		//所有为业务员的员工信息
+		String sql = "select user_id,real_name,china_py from sys_user where is_sys_user='0' and is_ywy='是' and (real_name like '%" + paramValue + "%' or china_py like '%" + paramValue.toUpperCase() + "%')";
+		
+		return this.getJdbcTemplate().queryForList(sql);
+	}
 	 
 	
 	

@@ -114,6 +114,15 @@ public class UserService {
 	}
 	
 	/**
+	 * 根据条件获取经手人提示信息
+	 * @param paramValue
+	 * @return
+	 */
+	public List getUserListAjaxTip(String paramValue){
+		return userDao.getUserListAjaxTip(paramValue);
+	}
+	
+	/**
 	 * 取系统所有用户列表，返回结果中为USER对象
 	 * @return
 	 */

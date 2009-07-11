@@ -27,9 +27,9 @@ public class ServletContextInit extends HttpServlet {
 			//生成客户往来期初
 			// dao.genCleintWlqc("2009-06-29","2009-06-28"); 
 			//生成账户期初
-			//dao.genAccountQc("2009-06-29","2009-06-28"); 
+			//dao.genAccountQc("2009-07-06","2009-07-05"); 
 			
-			
+			//Thread.sleep(100*1000);
 			
 		}catch(Exception e){
 			log.error("初始化spring context失败，失败原因" + e.getMessage());

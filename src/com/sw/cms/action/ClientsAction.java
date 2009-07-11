@@ -15,6 +15,7 @@ import com.sw.cms.service.SjzdService;
 import com.sw.cms.service.UserService;
 import com.sw.cms.util.Constant;
 import com.sw.cms.util.ParameterUtility;
+import com.sw.cms.util.StringUtils;
 
 public class ClientsAction extends BaseAction {
 
@@ -51,6 +52,16 @@ public class ClientsAction extends BaseAction {
 
 	private String clients_id;
 	private String client_con = "";
+	private String clientsName = "";
+	private String clientsTips = "";
+
+	public String getClientsTips() {
+		return clientsTips;
+	}
+
+	public void setClientsTips(String clientsTips) {
+		this.clientsTips = clientsTips;
+	}
 
 	public String getClient_con() {
 		return client_con;
@@ -462,6 +473,33 @@ public class ClientsAction extends BaseAction {
 			return "error";
 		}
 	}
+	
+	
+	/**
+	 * 根据提示框输入信息查询客户列表信息
+	 * @return
+	 * @throws Exception
+	 */
+	public String getLikeClientInfo() throws Exception {
+		try{
+			List clients = clientsService.getClientListByAjaxParam(clientsName); //相似客户信息列表
+			
+			if(clients != null && clients.size() > 0){
+				for(int i=0;i<clients.size();i++){
+					Map clientMap = (Map)clients.get(i);
+					if(clientsTips.equals("")){
+						clientsTips = StringUtils.nullToStr(clientMap.get("id")) + "$" + StringUtils.nullToStr(clientMap.get("name"));
+					}else{
+						clientsTips += "%" + StringUtils.nullToStr(clientMap.get("id")) + "$" + StringUtils.nullToStr(clientMap.get("name"));
+					}
+				}
+			}
+			return "success";
+		}catch(Exception e){
+			log.error("填充AJAX提示，查询客户信息失败,失败原因：" + e.getMessage());
+			return "error";
+		}
+	}
 
 	public Clients getClient() {
 		return client;
@@ -581,6 +619,14 @@ public class ClientsAction extends BaseAction {
 
 	public void setClientWlywPage(Page clientWlywPage) {
 		this.clientWlywPage = clientWlywPage;
+	}
+
+	public String getClientsName() {
+		return clientsName;
+	}
+
+	public void setClientsName(String clientsName) {
+		this.clientsName = clientsName;
 	}
 
 }

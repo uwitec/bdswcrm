@@ -49,6 +49,24 @@ public class ClientsDAO extends JdbcBaseDAO {
 	}
 	
 	
+	/**
+	 * 根据客户提示框输入的提示信息查询相关客户信息
+	 * @param clientsName
+	 * @return
+	 */
+	public List getClientListByAjaxParam(String clientsName){
+		if(clientsName.equals("")){
+			return null;
+		}
+		String sql = "select * from clients";
+		
+		if(!clientsName.equals("")){
+			sql = sql + " where name like '%" + clientsName + "%' or china_py like '%" + clientsName.toUpperCase() + "%'";
+		}
+		return this.getResultList(sql);
+	}
+	
+	
 	
 	/**
 	 * 返回客户列表包括应付款、预付款、预收款(带分页)

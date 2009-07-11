@@ -3,6 +3,7 @@ package com.sw.cms.action;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -18,6 +19,7 @@ import com.sw.cms.service.XsdService;
 import com.sw.cms.servlet.OnlineSessionAndApplication;
 import com.sw.cms.util.Constant;
 import com.sw.cms.util.ParameterUtility;
+import com.sw.cms.util.StringUtils;
 
 /**
  * <br>用户管理包括系统登陆
@@ -70,6 +72,19 @@ public class UserAction extends BaseAction {
 	
 	private int curPage = 1;
 	
+	private String paramValue = "";
+	private String jsrTips = "";
+	
+	public String getJsrTips() {
+		return jsrTips;
+	}
+
+
+	public void setJsrTips(String jsrTips) {
+		this.jsrTips = jsrTips;
+	}
+
+
 	/**
 	 * 用户登录
 	 * @return
@@ -417,6 +432,31 @@ public class UserAction extends BaseAction {
 	}
 	
 	
+	/**
+	 * 查询ajax经手人提示信息
+	 * @return
+	 */
+	public String getLikeJsrInfo(){
+		try{
+			List jsrs = userService.getUserListAjaxTip(paramValue);
+			if(jsrs != null && jsrs.size() > 0){
+				for(int i=0;i<jsrs.size();i++){
+					Map jsrMap = (Map)jsrs.get(i);
+					if(jsrTips.equals("")){
+						jsrTips = StringUtils.nullToStr(jsrMap.get("user_id")) + "$" + StringUtils.nullToStr(jsrMap.get("real_name"));
+					}else{
+						jsrTips +=  "%" + StringUtils.nullToStr(jsrMap.get("user_id")) + "$" + StringUtils.nullToStr(jsrMap.get("real_name"));
+					}
+				}
+			}
+			return "success";
+		}catch(Exception e){
+			log.error("Ajax查询经手人信息出错，错误原因：" + e.getMessage());
+			return "error";
+		}
+	}
+	
+	
 	public SysUser getUser() {
 		return user;
 	}
@@ -647,6 +687,16 @@ public class UserAction extends BaseAction {
 
 	public void setEmployList(List employList) {
 		this.employList = employList;
+	}
+
+
+	public String getParamValue() {
+		return paramValue;
+	}
+
+
+	public void setParamValue(String paramValue) {
+		this.paramValue = paramValue;
 	}
 	
 }

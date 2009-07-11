@@ -236,6 +236,16 @@ public class ClientsService {
 	{
 		return clientsDao.getClientsIsExist(name);
 	}
+	
+	
+	/**
+	 * 根据客户提示框输入的提示信息查询相关客户信息
+	 * @param clientsName
+	 * @return
+	 */
+	public List getClientListByAjaxParam(String clientsName){
+		return clientsDao.getClientListByAjaxParam(clientsName);
+	}
 
 	public InitParamDAO getInitParamDao() {
 		return initParamDao;

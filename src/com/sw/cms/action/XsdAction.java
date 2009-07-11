@@ -213,14 +213,12 @@ public class XsdAction extends BaseAction {
 	 * @return
 	 */
 	public String add(){
-		userList = userService.getAllEmployeeList();
 		storeList = storeService.getAllStoreList();
 		xsd.setId(xsdService.updateXsdId()); //生成销售单ID
 		iscs_flag = sysInitSetService.getQyFlag();
 		ysfs = sjzdService.getSjzdXmxxByZdId("SJZD_YSFS");
 		fkfs = sjzdService.getSjzdXmxxByZdId("SJZD_FKFS");
 		posTypeList = posTypeService.getPosTypeList();
-		clientsList=clientsService.getClientList("");
 		return "success";
 	}
 	
@@ -232,12 +230,10 @@ public class XsdAction extends BaseAction {
 		xsd = (Xsd)xsdService.getXsd(id);
 		xsdProducts = xsdService.getXsdProducts(id);
 		storeList = storeService.getAllStoreList();
-		userList = userService.getAllEmployeeList();
 		iscs_flag = sysInitSetService.getQyFlag();
 		ysfs = sjzdService.getSjzdXmxxByZdId("SJZD_YSFS");
 		posTypeList = posTypeService.getPosTypeList();
 		fkfs = sjzdService.getSjzdXmxxByZdId("SJZD_FKFS");
-		clientsList=clientsService.getClientList("");
 		boolean hasLowFxxj = xsdService.checkFxxj(xsdProducts); //是否存在低于分销限价的
 		boolean hasCeysk = xsdService.isCeysk(xsd.getClient_name(), xsd.getXsdje()-xsd.getSkje());
 		
@@ -315,7 +311,6 @@ public class XsdAction extends BaseAction {
 			xsd.setSp_state("1");
 			xsd.setState("已保存");
 			
-			userList = userService.getAllEmployeeList();
 			ysfs = sjzdService.getSjzdXmxxByZdId("SJZD_YSFS");
 			fkfs = sjzdService.getSjzdXmxxByZdId("SJZD_FKFS");
 			storeList = storeService.getAllStoreList();
@@ -339,7 +334,6 @@ public class XsdAction extends BaseAction {
 					xsd.setState("已保存");
 					xsdService.updateXsd(xsd, xsdProducts);
 					
-					userList = userService.getAllEmployeeList();
 					ysfs = sjzdService.getSjzdXmxxByZdId("SJZD_YSFS");
 					fkfs = sjzdService.getSjzdXmxxByZdId("SJZD_FKFS");
 					storeList = storeService.getAllStoreList();

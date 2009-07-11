@@ -228,7 +228,10 @@
         </action>
         <action name="showOnlineUser" class="userAction" method="showOnlineUser">
             <result name="success" type="dispatcher">/WEB-INF/pages/user/onlineUser.jsp</result>
-        </action>        
+        </action> 
+        <action name="queryJsrTipInfo" class="userAction" method="getLikeJsrInfo">
+            <result name="success" type="dispatcher">/WEB-INF/pages/user/jsr_tip.jsp</result>
+        </action>               
         <!-- 用户管理 -->
         
         <!-- 修改密码 -->
@@ -532,7 +535,10 @@
         </action>
         <action name="queryClients" class="clientsAction" method="queryClients">
             <result name="success">/WEB-INF/pages/client/query_client.jsp</result>
-        </action>                                      
+        </action>
+        <action name="queryClientsTipInfo" class="clientsAction" method="getLikeClientInfo">
+            <result name="success">/WEB-INF/pages/client/client_tip.jsp</result>
+        </action>                                              
         <!-- 往来客户 -->
         
         <!-- 销售订单 -->
