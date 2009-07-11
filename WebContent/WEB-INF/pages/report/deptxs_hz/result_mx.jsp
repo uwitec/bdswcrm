@@ -12,6 +12,9 @@ String start_date = StringUtils.nullToStr(request.getParameter("start_date"));
 String end_date = StringUtils.nullToStr(request.getParameter("end_date"));
 String client_name = StringUtils.nullToStr(request.getParameter("client_name"));
 String dept = StringUtils.nullToStr(request.getParameter("dept"));
+String kind_name = StringUtils.nullToStr(request.getParameter("kind_name"));
+String product_kind = StringUtils.nullToStr(request.getParameter("product_kind"));
+String product_name = StringUtils.nullToStr(request.getParameter("product_name"));
 
 String con = "";
 con = "日期：" + start_date + "至" + end_date;
@@ -20,6 +23,12 @@ if(!client_name.equals("")){
 }
 if(!dept.equals("")){
 	con += "&nbsp; 部门名称：" + StaticParamDo.getDeptNameById(dept);
+}
+if(!kind_name.equals("")){
+	con += "&nbsp;商品类别：" + kind_name;
+}
+if(!product_name.equals("")){
+	con += "&nbsp;商品名称：" + product_name;
 }
 %>
 
@@ -34,11 +43,21 @@ if(!dept.equals("")){
 <script language='JavaScript' src="js/date.js"></script>
 <script type="text/javascript">
 	function openWin(xsry){
-		location.href="getDeptxsProductMxResult.html?xsry=" + xsry + "&start_date=<%=start_date %>&end_date=<%=end_date %>&client_name=<%=client_name %>";
+		document.refreshForm.xsry.value = xsry;
+		document.refreshForm.submit();
 	}
 </script>
 </head>
 <body align="center" >
+<form name="refreshForm" action="getDeptxsProductMxResult.html" method="post">
+<input type="hidden" name="xsry" value="">
+<input type="hidden" name="client_name" value="<%=client_name %>">
+<input type="hidden" name="start_date" value="<%=start_date %>">
+<input type="hidden" name="end_date" value="<%=end_date %>">
+<input type="hidden" name="kind_name" value="<%=kind_name %>">
+<input type="hidden" name="product_kind" value="<%=product_kind %>">
+<input type="hidden" name="product_name" value="<%=product_name %>">
+</form>
 <TABLE  align="center" cellSpacing=0 cellPadding=0 width="99%" border=0>
 	<TBODY>
 		<TR style="BACKGROUND-COLOR: #dcdcdc;height:45;">

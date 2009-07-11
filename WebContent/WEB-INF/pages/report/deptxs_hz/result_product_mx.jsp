@@ -12,6 +12,8 @@ String start_date = StringUtils.nullToStr(request.getParameter("start_date"));
 String end_date = StringUtils.nullToStr(request.getParameter("end_date"));
 String xsry = StringUtils.nullToStr(request.getParameter("xsry"));
 String client_name = StringUtils.nullToStr(request.getParameter("client_name"));
+String kind_name = StringUtils.nullToStr(request.getParameter("kind_name"));
+String product_name = StringUtils.nullToStr(request.getParameter("product_name"));
 
 String con = "";
 con = "日期：" + start_date + "至" + end_date;
@@ -20,6 +22,12 @@ if(!client_name.equals("")){
 }
 if(!xsry.equals("")){
 	con += "&nbsp; 销售人员：" + StaticParamDo.getRealNameById(xsry);
+}
+if(!kind_name.equals("")){
+	con += "&nbsp;商品类别：" + kind_name;
+}
+if(!product_name.equals("")){
+	con += "&nbsp;商品名称：" + product_name;
 }
 %>
 

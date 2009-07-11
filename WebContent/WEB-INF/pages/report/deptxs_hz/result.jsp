@@ -13,10 +13,20 @@ String end_date = StringUtils.nullToStr(request.getParameter("end_date"));
 String dj = StringUtils.nullToStr(request.getParameter("dj"));
 String client_name = StringUtils.nullToStr(request.getParameter("client_name"));
 
+String kind_name = StringUtils.nullToStr(request.getParameter("kind_name"));
+String product_kind = StringUtils.nullToStr(request.getParameter("product_kind"));
+String product_name = StringUtils.nullToStr(request.getParameter("product_name"));
+
 String con = "日期：" + start_date + "至" + end_date;
 
 if(!client_name.equals("")){
 	con += "&nbsp; 客户名称：" + StaticParamDo.getClientNameById(client_name);
+}
+if(!kind_name.equals("")){
+	con += "&nbsp;商品类别：" + kind_name;
+}
+if(!product_name.equals("")){
+	con += "&nbsp;商品名称：" + product_name;
 }
 %>
 
@@ -34,8 +44,9 @@ if(!client_name.equals("")){
 		document.refreshForm.submit();
 	}
 	
-	function openMx(dept,start_date,end_date,client_name,xsry){
-		location.href="getDeptxsMxResult.html?dept=" + dept + "&start_date=" + start_date + "&end_date=" + end_date + "&client_name=" + client_name + "&xsry=" + xsry;
+	function openMx(dept){
+		document.refreshForm.action = "getDeptxsMxResult.html?dept=" + dept;
+		document.refreshForm.submit();
 	}
 </script>
 </head>
@@ -45,6 +56,9 @@ if(!client_name.equals("")){
 <input type="hidden" name="start_date" value="<%=start_date %>">
 <input type="hidden" name="end_date" value="<%=end_date %>">
 <input type="hidden" name="dj" value="<%=dj %>">
+<input type="hidden" name="kind_name" value="<%=kind_name %>">
+<input type="hidden" name="product_kind" value="<%=product_kind %>">
+<input type="hidden" name="product_name" value="<%=product_name %>">
 </form>
 <TABLE  align="center" cellSpacing=0 cellPadding=0 width="99%" border=0>
 	<TBODY>
@@ -105,7 +119,7 @@ if(resultList != null && resultList.size()>0){
 		if(nums != 0 || je != 0){
 %>
 		<TR style="<%=stl %>">
-			<TD class=ReportItem><%=strBlank %><a href="javascript:openMx('<%=dept_id %>','<%=start_date %>','<%=end_date %>','<%=client_name %>');"><%=dept_name %></a>&nbsp;</TD>
+			<TD class=ReportItem><%=strBlank %><a href="javascript:openMx('<%=dept_id %>');"><%=dept_name %></a>&nbsp;</TD>
 			<TD class=ReportItemMoney><%=nums %>&nbsp;</TD>
 			<TD class=ReportItemMoney><%=JMath.round(je,2) %>&nbsp;</TD>
 		</TR>
