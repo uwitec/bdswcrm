@@ -121,13 +121,16 @@ if(sp_state.equals("1")){
 		<td class="a2" width="35%">
 			<input type="text" name="xsd.id" id="id" value="<%=StringUtils.nullToStr(xsd.getId()) %>" size="30" readonly><font color="red">*</font>
 		</td>
-		<td class="a1"  width="15%">经手人</td>
-		<td class="a2">
-			<input  id="brand" type="text" length="20" onblur="setValue()" value="<%=StaticParamDo.getRealNameById(xsd.getFzr()) %>"/> 
-			<!--<img src="images/select.gif" align="absmiddle" title="选择经手人" border="0" onclick="openywyWin();" style="cursor:hand">
-			--><div id="brandTip"  style="height:12px;position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
-			<input type="hidden" name="xsd.fzr" id="fzr" value="<%=xsd.getFzr()%>"/><font color="red">*</font>		
-		</td>				 
+		<%
+		String creatDate = StringUtils.nullToStr(xsd.getCreatdate());
+		if(creatDate.equals("")){
+			creatDate = DateComFunc.getToday();
+		}
+		%>		
+		<td class="a1">创建时间</td>
+		<td class="a2"><input type="text" name="xsd.creatdate" id="creatdate" value="<%=creatDate %>" readonly>
+		<img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.getElementById('creatdate')); return false;"><font color="red">*</font>
+		</td>						 
 	</tr>
 	<tr>	
 		<td class="a1" width="15%">客户名称</td>
@@ -170,20 +173,6 @@ if(sp_state.equals("1")){
 			<input type="text" name="xsd.xjd" id="xjd" value="<%=xsd.getXjd() %>" size="5" style="<%if(StringUtils.nullToStr(xsd.getSklx()).equals("现结")) out.print(""); else out.print("display:none"); %>">
 			<font color="red">*</font>
 		</td>
-		<%
-		String creatDate = StringUtils.nullToStr(xsd.getCreatdate());
-		if(creatDate.equals("")){
-			creatDate = DateComFunc.getToday();
-		}
-		%>
-		<td class="a1">创建时间</td>
-		<td class="a2"><input type="text" name="xsd.creatdate" id="creatdate" value="<%=creatDate %>" readonly>
-		<img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.getElementById('creatdate')); return false;"><font color="red">*</font>
-		</td>
-	
-		
-	</tr>
-	<tr>
 		<td class="a1" width="15%">运输方式</td>
 		<td class="a2" width="35%"> 
 			<%
@@ -203,7 +192,15 @@ if(sp_state.equals("1")){
 				
 			</select>	
 		</td>	
-		
+	</tr>
+	<tr>
+		<td class="a1"  width="15%">经手人</td>
+		<td class="a2">
+			<input  id="brand" type="text" length="20" onblur="setValue()" value="<%=StaticParamDo.getRealNameById(xsd.getFzr()) %>"/> 
+			<!--<img src="images/select.gif" align="absmiddle" title="选择经手人" border="0" onclick="openywyWin();" style="cursor:hand">
+			--><div id="brandTip"  style="height:12px;position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+			<input type="hidden" name="xsd.fzr" id="fzr" value="<%=xsd.getFzr()%>"/><font color="red">*</font>		
+		</td>			
 		<td class="a1" width="15%">订单状态</td>
 		<td class="a2">
 			<select name="xsd.state" id="state" onchange="chgState(this.value);">

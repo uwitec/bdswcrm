@@ -6,11 +6,7 @@
 
 <%
 OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
-
-List userList = (List)VS.findValue("userList");
 List storeList = (List)VS.findValue("storeList");
-List clientsList=(List)VS.findValue("clientsList");
-
 Cgthd cgthd = (Cgthd)VS.findValue("cgthd");
 List cgthdProducts = (List)VS.findValue("cgthdProducts");
 
@@ -19,7 +15,6 @@ if(cgthdProducts != null && cgthdProducts.size()>0){
 	counts = cgthdProducts.size();
 }
 		
-
 //是否完成初始标志
 //0：未完成；1：已完成
 String iscs_flag = StringUtils.nullToStr(VS.findValue("iscs_flag"));
@@ -34,6 +29,9 @@ String iscs_flag = StringUtils.nullToStr(VS.findValue("iscs_flag"));
 <script language="JavaScript" src="js/Check.js"></script>
 <script language='JavaScript' src="js/date.js"></script>
 <script language='JavaScript' src="js/nums.js"></script>
+<script language='JavaScript' src="js/selClient.js"></script>
+<script language='JavaScript' src="js/selJsr.js"></script>
+<script type="text/javascript" src="js/prototype-1.4.0.js"></script>
 <style>
 	.selectTip{
 		background-color:#009;
@@ -115,8 +113,6 @@ String iscs_flag = StringUtils.nullToStr(VS.findValue("iscs_flag"));
 		}
 	}
 	
-	function $(id) {return document.getElementById(id);}
-	function $F(name){return document.getElementsByTagName(name);}
       	
     function addTr(){
         var otr = document.getElementById("thtable").insertRow(-1);
@@ -228,7 +224,7 @@ String iscs_flag = StringUtils.nullToStr(VS.findValue("iscs_flag"));
 
 	
 	function hj(){
-		var length = ($('thtable').rows.length-2);
+		var length = (document.getElementById('thtable').rows.length-2);
 		
 		var hjz = 0;
 		for(var i=0;i<=allCount;i++){			
@@ -263,9 +259,19 @@ String iscs_flag = StringUtils.nullToStr(VS.findValue("iscs_flag"));
 		
 	}	
 	
+	function selTkfs(vl){
+		if(vl == "冲抵往来"){
+			document.getElementById("trSkzh").style.display = "none";	
+			document.getElementById("zhname").value = "";	
+			document.getElementById("skzh").value = "";
+		}else{
+			document.getElementById("trSkzh").style.display = "";	
+		}
+	}	
+	
 </script>
 </head>
-<body >
+<body onload="initFzrTip();initClientTip();selTkfs('<%=StringUtils.nullToStr(cgthd.getTkfs()) %>');">
 <form name="cgthdForm" action="updateCgthd.html" method="post">
 <input type="hidden" name="cgthd.jhd_id" id="jhd_id" value="<%=StringUtils.nullToStr(cgthd.getJhd_id()) %>">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
@@ -287,26 +293,24 @@ String iscs_flag = StringUtils.nullToStr(VS.findValue("iscs_flag"));
 	<tr>			
 		<td class="a1" width="15%">供货单位</td>
 		<td class="a2">
-		<input type="text" name="cgthd.provider_id" id="client_name" value="<%=StaticParamDo.getClientNameById(StringUtils.nullToStr(cgthd.getProvider_name())) %>" size="30" maxlength="50" onblur="setvalues()">
+		<input type="text" name="cgthd.provider_id" id="client_name" value="<%=StaticParamDo.getClientNameById(StringUtils.nullToStr(cgthd.getProvider_name())) %>" size="30" maxlength="50" onblur="setClientValue();">
 		<input type="hidden" name="cgthd.provider_name" id="client_id" value="<%=StringUtils.nullToStr(cgthd.getProvider_name()) %>">
-		<img src="images/select.gif" align="absmiddle" title="选择客户" border="0" onclick="openProvider();" style="cursor:hand">
-		<div id="clientsTip" style="height:12px;position:absolute;left:150px; top:85px; width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+		<!--<img src="images/select.gif" align="absmiddle" title="选择客户" border="0" onclick="openProvider();" style="cursor:hand">
+		--><div id="clientsTip" style="height:12px;position:absolute;left:150px; top:85px; width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		</td>	
 		<td class="a1" width="15%">经手人</td>
 		<td class="a2" width="35%">
-            <!--修改 --------------------------------------------------------------------------------------  -->
 		 <input  id="brand"    type="text"   length="20"  onblur="setValue()" value="<%=StaticParamDo.getRealNameById(cgthd.getJsr()) %>"/> 
-         <img src="images/select.gif" align="absmiddle" title="选择经手人" border="0" onclick="openywyWin();" style="cursor:hand">
-          <div   id="brandTip"  style="height:12px;position:absolute;left:610px; top:85px;  width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
-          </div>
-		    <input type="hidden" name="cgthd.jsr" id="jsr" value="<%=cgthd.getJsr()%>"/> 
-		<!--修改 --------------------------------------------------------------------------------------  --><font color="red">*</font>	
+         <!--<img src="images/select.gif" align="absmiddle" title="选择经手人" border="0" onclick="openywyWin();" style="cursor:hand">
+         --><div   id="brandTip"  style="height:12px;position:absolute;left:610px; top:85px;  width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
+         </div>
+		 <input type="hidden" name="cgthd.jsr" id="fzr" value="<%=cgthd.getJsr()%>"/> <font color="red">*</font>	
 		</td>
 	</tr>
 	<tr>
 		<td class="a1">退款方式</td>
 		<td class="a2">
-			<select name="cgthd.tkfs" id="tkfs">
+			<select name="cgthd.tkfs" id="tkfs" onchange="selTkfs(this.value);">
 				<option value="现金" <%if(StringUtils.nullToStr(cgthd.getTkfs()).equals("现金")) out.print("selected"); %>>现金</option>
 				<option value="冲抵往来" <%if(StringUtils.nullToStr(cgthd.getTkfs()).equals("冲抵往来")) out.print("selected"); %>>冲抵往来</option>
 			</select>			
@@ -419,19 +423,21 @@ if(cgthdProducts != null && cgthdProducts.size()>0){
 </table>
 <table width="100%"  align="center" class="chart_info" cellpadding="0" cellspacing="0">
 	<tr height="35">
-		<td class="a2" colspan="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<td class="a2" colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="button" name="button1" value="添加一行" class="css_button2" onclick="addTr();">
 		</td>
 	</tr>
 	<tr>
+		<td class="a1">合计金额</td>
+		<td class="a2"><input type="text" id="tkzje"  name="cgthd.tkzje" value="<%=JMath.round(cgthd.getTkzje()) %>" readonly></td>
+	</tr>
+	<tr id="trSkzh">
 		<td class="a1" widht="20%">账户名称</td>
 		<td class="a2"><input type="text" id="zhname"  name="zhname" value="<%=StaticParamDo.getAccountNameById(StringUtils.nullToStr(cgthd.getZhmc())) %>" readonly>
 		<input type="hidden" id="skzh"  name="cgthd.zhmc" value="<%=StringUtils.nullToStr(cgthd.getZhmc()) %>">
 		<img src="images/select.gif" align="absmiddle" title="选择账户" border="0" onclick="openAccount();" style="cursor:hand">
 		</td>
-		<td class="a1">合计金额</td>
-		<td class="a2"><input type="text" id="tkzje"  name="cgthd.tkzje" value="<%=JMath.round(cgthd.getTkzje()) %>" readonly></td>
-	</tr>		
+	</tr>			
 </table>
 <br>
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
@@ -454,429 +460,6 @@ if(cgthdProducts != null && cgthdProducts.size()>0){
 		</td>
 	</tr>
 </table>
-
 </form>
 </body>
 </html>
-<!-- 修改 ----------------------------------------------------------------------------------------------------------------------->
-<!-- searchBrand  查询相近的经手人-->
-<!-- showResponse 展示-->
-<!-- move 上下事件-->
-<!-- down 鼠标按下事件-->
-<!-- setValue 鼠标离开事件-->
-<script type="text/javascript" src="js/prototype-1.4.0.js"></script>
-<script type="text/javascript">
-var tip = "";
-function searchBrand()
-{
-    
-	var url = 'getBrands.do';
-	var params = "prefix=" + $F('brand');
-	var myAjax = new Ajax.Request(
-	url,
-	{
-		method:'post',
-		parameters: params,
-		onComplete: showResponse,
-		asynchronous:true
-	});
-}
-var list;
-function showResponse(originalRequest)
-{   
-	var brandLists = originalRequest.responseText.split("%");
-	list=brandLists;
-     
-	var brandList=brandLists[0].split("$");
-	 
-	if ( brandList.length > 1)
-	{
-		var bt = $("brandTip");
-		var s="";
-		var flog=0;
-		for(var i = 0 ; i <  brandList.length; i++)  
-		{
-		   if(flog==10)
-		   {
-		     break;
-		   }
-		    s += "<div onmouseover=\"this.className='selectTip';style.cursor='default'\"  onmouseout=\"this.className=null; style.cursor='default'\">" + brandList[i] + "</div>";
-		   flog++;
-		}
-		 bt.innerHTML=s;
-		 
-		if( tip != $("brand").value)
-		{
-			Element.show('brandTip');
-		}
-	}
-	else
-	{
-		var bt = $("brandTip");
-		bt.innerHTML = "";
-		Element.hide('brandTip');
-	}
-}
-function move(event)
-{
-	 var srcEl = Event.element(event);
-	 var tipEl = $(srcEl.id + "Tip");
-     var a = tipEl.childNodes;
-	 if (tipEl.style.display == "" )
-	 {
-		if(event.keyCode == 40 )
-		{            
-			if (tipEl.childNodes.length >= 1)
-			{
-				var bList = tipEl.childNodes;
-				 
-				if(tipEl.lastChild.className=="selectTip")
-				{
-				    tipEl.firstChild.className = "selectTip";
-					tipEl.lastChild.className = "null";
-					return ;
-				}
-				var s=0;
-				for (var i = 0 ; i < bList.length; i++)
-				{
-					if (bList[i].className == "selectTip")
-					{
-					    s++;
-						bList[i + 1].className = "selectTip";
-						bList[i].className = "null";
-						return ;
-					}
-					 
-				}
-				if(s==0)
-				{
-				  tipEl.firstChild.className = "selectTip";
-				}
-				 
-			}
-
-		}
-		else if(event.keyCode == 38)
-		{
-		   
-			if (tipEl.childNodes.length >= 1)
-			{
-			   
-			   	if(tipEl.firstChild.className == "selectTip")
-				{
-					tipEl.lastChild.className = "selectTip";
-					tipEl.firstChild.className = "null";
-					return ;
-				}
-				var s=0;
-				var bList = tipEl.childNodes;
-				for (var i = 0 ; i < bList.length ; i ++)
-				{
-					if (bList[i].className == "selectTip")
-					{
-					   s++;
-						bList[i - 1].className = "selectTip";
-						bList[i].className = "null";
-						return ;
-					}
-					 
-				}
-				if(s==0)
-				{
-				   tipEl.lastChild.className = "selectTip";
-				}
-			}
-		}
-		else if(event.keyCode == 13)
-		{
-			var bList = tipEl.childNodes;
-			for (var i = 0 ; i < bList.length ; i ++)
-			{
-				if (bList[i].className == "selectTip")
-				{
-					tip = srcEl.value = bList[i].innerHTML;		
-					//var useridlist=list[1].split("$");	
-					//document.getElementById("xsry").value=useridlist[i];				 
-					 Element.hide(tipEl);
-					 return ;
-				}
-			}
-		}
-		
-	}
-}
-function  down(event)
-{
-      var srcEl = Event.element(event);
-	  var tipEl = $("brandTip");
-      var bList = tipEl.childNodes;
-			for (var i = 0 ; i < bList.length ; i ++)
-			{   
-				if (bList[i].className == "selectTip")
-				{
-					tip = srcEl.value = bList[i].innerHTML;	
-					document.getElementById("brand").value=bList[i].innerHTML;				 
-					//var useridlist=list[1].split("$");	
-					//document.getElementById("xsry").value=useridlist[i];						
-					 Element.hide(tipEl);
-					 return;
-				}
-			}
-}
-
-var lists=new Array();
-<%
-   if(userList!=null)
-   {
-  for(int i=0;i<userList.size();i++)
-  {   
-     Map map=(Map)userList.get(i); 
-%>
-   lists["<%=map.get("real_name")%>"]="<%=map.get("user_id")%>";
-<%}}%>
-function setValue()
-{
-  if(document.getElementById("brand").value!="")
-  {
-    var brand =document.getElementById("brand").value;
-    brand=brand.trim();
-    if(brand in lists)
-    {
-      document.getElementById("jsr").value=lists[brand];
-     
-    }
-    else
-    {
-      alert("您所输入的经手人不在列表里!");
-      document.getElementById("brand").value="";
-      document.getElementById("jsr").value="";
-      document.getElementById("brand").focus();
-    }
-  }
-  if(document.getElementById("brand").value.length==0)
-  {
-      document.getElementById("jsr").value="";
-  }
- 
-  Element.hide('brandTip')
-}
-String.prototype.trim = function()
-{
-   return this.replace(/(^\s+)|\s+$/g,"");
-}
- 
-
-new Form.Element.Observer("brand",1, searchBrand);
-Event.observe("brand", "keydown", move, false);
-Event.observe("brandTip","mousedown",down,true);
- 
-
-</script>
-<script type="text/javascript">
-var tips = "";
-function a()
-{
-    
-	var url = 'getClients.do';
-	var params = "clientsName=" + $F('client_name');
-	var myAjax = new Ajax.Request(
-	url,
-	{
-		method:'post',
-		parameters: params,
-		onComplete: showResponses,
-		asynchronous:true
-	});
-}
-var lista;
-function showResponses(originalRequest)
-{   
-	var brandLists = originalRequest.responseText.split("%");
-	lista=brandLists;
-     
-	var brandList=brandLists[0].split("$");
-	 
-	if ( brandList.length > 1)
-	{
-		var bt = $("clientsTip");
-		var s="";
-		var flog=0;
-		for(var i = 0 ; i <  brandList.length; i++)  
-		{
-		   if(flog==10)
-		   {
-		     break;
-		   }
-		    s += "<div onmouseover=\"this.className='selectTip';style.cursor='default'\"  onmouseout=\"this.className=null; style.cursor='default'\">" + brandList[i] + "</div>";
-		   flog++;
-		}
-		 bt.innerHTML=s;
-		 
-		if( tips != $("client_name").value)
-		{
-			Element.show('clientsTip');
-		}
-	}
-	else
-	{
-		var bt = $("clientsTip");
-		bt.innerHTML = "";
-		Element.hide('clientsTip');
-	}
-}
-function b(event)
-{
-	  var srcEl = Event.element(event);
-	// var tipEl = $(srcEl.id + "Tip");
-	  var tipEl = $('clientsTip');
-     var a = tipEl.childNodes;
-	 if (tipEl.style.display == "" )
-	 {
-		if(event.keyCode == 40 )
-		{            
-			if (tipEl.childNodes.length >= 1)
-			{
-				var bList = tipEl.childNodes;
-				 
-				if(tipEl.lastChild.className=="selectTip")
-				{
-				    tipEl.firstChild.className = "selectTip";
-					tipEl.lastChild.className = "null";
-					return ;
-				}
-				var s=0;
-				for (var i = 0 ; i < bList.length; i++)
-				{
-					if (bList[i].className == "selectTip")
-					{
-					    s++;
-						bList[i + 1].className = "selectTip";
-						bList[i].className = "null";
-						return ;
-					}
-					 
-				}
-				if(s==0)
-				{
-				  tipEl.firstChild.className = "selectTip";
-				}
-				 
-			}
-
-		}
-		else if(event.keyCode == 38)
-		{
-		   
-			if (tipEl.childNodes.length >= 1)
-			{
-			   
-			   	if(tipEl.firstChild.className == "selectTip")
-				{
-					tipEl.lastChild.className = "selectTip";
-					tipEl.firstChild.className = "null";
-					return ;
-				}
-				var s=0;
-				var bList = tipEl.childNodes;
-				for (var i = 0 ; i < bList.length ; i ++)
-				{
-					if (bList[i].className == "selectTip")
-					{
-					   s++;
-						bList[i - 1].className = "selectTip";
-						bList[i].className = "null";
-						return ;
-					}
-					 
-				}
-				if(s==0)
-				{
-				   tipEl.lastChild.className = "selectTip";
-				}
-			}
-		}
-		else if(event.keyCode == 13)
-		{
-			var bList = tipEl.childNodes;
-			for (var i = 0 ; i < bList.length ; i ++)
-			{
-				if (bList[i].className == "selectTip")
-				{
-					tip = srcEl.value = bList[i].innerHTML;		
-					//var useridlist=list[1].split("$");	
-					//document.getElementById("xsry").value=useridlist[i];				 
-					 Element.hide(tipEl);
-					 return ;
-				}
-			}
-		}
-		
-	}
-}
-function  c(event)
-{
-      var srcEl = Event.element(event);
-	  var tipEl = $("clientsTip");
-      var bList = tipEl.childNodes;
-			for (var i = 0 ; i < bList.length ; i ++)
-			{   
-				if (bList[i].className == "selectTip")
-				{
-					tip = srcEl.value = bList[i].innerHTML;	
-					document.getElementById("client_name").value=bList[i].innerHTML;				 
-					//var useridlist=list[1].split("$");	
-					//document.getElementById("xsry").value=useridlist[i];						
-					 Element.hide(tipEl);
-					 return;
-				}
-			}
-}
-
-var listss=new Array();
-<%
-   if(clientsList!=null)
-   { 
-  for(int i=0;i<clientsList.size();i++)
-  {   
-     Map map=(Map)clientsList.get(i); 
-%>
-   listss["<%=map.get("name")%>"]="<%=map.get("id")%>";
-   
-<%}}%>
-function setvalues()
-{
-    
-  if(document.getElementById("client_name").value!="")
-  {
-    var brand =document.getElementById("client_name").value;
-    
-    brand=brand.trims();
-    if(brand in listss)
-    {
-      document.getElementById("client_id").value=listss[brand];     
-    }
-    else
-    {
-      alert("您所输入客户名称不在列表里!!");
-      document.getElementById("client_name").value="";
-      document.getElementById("client_id").value="";
-      document.getElementById("client_name").focus();
-    }
-  }
-  
-  if(document.getElementById("client_name").value.length==0)
-  {
-      document.getElementById("client_id").value="";
-  }
- Element.hide('clientsTip');
-  
-}
-String.prototype.trims = function()
-{
-   return this.replace(/(^\s+)|\s+$/g,"");
-}
-new Form.Element.Observer("client_name",1, a);
-Event.observe("client_name", "keydown", b, false);
-Event.observe("clientsTip","mousedown",c,true);
-
-</script>
