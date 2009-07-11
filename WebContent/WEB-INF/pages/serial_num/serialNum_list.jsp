@@ -30,6 +30,7 @@
 		document.myform.serial_num.value = "";
 		document.myform.product_name.value = "";
 		document.myform.state.value = "";
+		document.myform.store_id.value = "";
 	}
 	
 	function refreshPage(){
@@ -58,6 +59,9 @@
 			&nbsp;&nbsp;
 			状态：
 			<ww:select name="state" id="state" theme="simple" list="#{'在库':'在库','已售':'已售','已退货':'已退货'}"  emptyOption="true" ></ww:select>
+			&nbsp;&nbsp;
+			库房：
+			<ww:select name="store_id" id="store_id" theme="simple" list="%{storeList}" listKey="id" listValue="name" emptyOption="true" ></ww:select>			
 			<input type="submit" name="buttonCx" value=" 查询 " class="css_button">
 			<input type="button" name="buttonQk" value=" 清空 " class="css_button" onclick="clearAll();">			
 		</td>				

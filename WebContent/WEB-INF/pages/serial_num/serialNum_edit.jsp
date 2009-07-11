@@ -78,27 +78,27 @@
 	<tr>
 		<td class="a1" width="25%">状态</td>
 		<td class="a2" width="75%">
-			<ww:select name="serialNumMng.state" id="state" theme="simple" list="#{'在库':'在库','已售':'已售','已退货':'已退货'}" headerValue="%{serialNumMng.state}" headerKey="%{serialNumMng.state}"></ww:select>		
+			<ww:select name="serialNumMng.state" id="state" theme="simple" list="#{'在库':'在库','已售':'已售','已退货':'已退货'}"></ww:select>		
 		</td>		
 	</tr>
 	<tr>
 		<td class="a1" width="25%">所在库房</td>
 		<td class="a2" width="75%">
-			<ww:select name="serialNumMng.store_id" id="store_id" theme="simple" list="%{storeList}" listValue="name" listKey="id" headerKey="%{serialNumMng.store_id}"></ww:select>		
+			<ww:select name="serialNumMng.store_id" id="store_id" theme="simple" list="%{storeList}" listValue="name" listKey="id" emptyOption="true"></ww:select>		
 		</td>		
 	</tr>
 	<tr>
 		<td class="a1" width="25%">是否样机</td>
 		<td class="a2" width="75%">
-			<ww:select name="serialNumMng.yj_flag" id="yj_flag" theme="simple" list="#{'0':'0','1':'1'}" headerValue="%{serialNumMng.yj_flag}" headerKey="%{serialNumMng.yj_flag}"></ww:select>0：代表不是；1：代表是
+			<ww:select name="serialNumMng.yj_flag" id="yj_flag" theme="simple" list="#{0:'否',1:'是'}"></ww:select>
 		</td>		
 	</tr>			
 	
 	<tr height="35">
 		<td class="a1" colspan="2">
-			<input type="button" name="button1" value="提 交" class="css_button" onclick="saveInfo();">&nbsp;
-			<input type="reset" name="button2" value="重 置" class="css_button">&nbsp;&nbsp;
-			<input type="button" name="button1" value="关 闭" class="css_button" onclick="window.close();">
+			<input type="button" name="button1" value="提交" class="css_button" onclick="saveInfo();">&nbsp;
+			<input type="reset" name="button2" value="重置" class="css_button">&nbsp;&nbsp;
+			<input type="button" name="button1" value="关闭" class="css_button" onclick="window.close();">
 		</td>
 	</tr>
 </table>
