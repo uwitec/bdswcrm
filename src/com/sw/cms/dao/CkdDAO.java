@@ -189,6 +189,38 @@ public class CkdDAO extends JdbcBaseDAO {
 	}
 	
 	
+	/**
+	 * 根据对应销售单编号查看是否存在相应的出库单
+	 * @param xsd_id
+	 * @return
+	 */
+	public boolean isCkdExist(String xsd_id){
+		boolean is = false;
+		String sql = "select count(*) from ckd where xsd_id='" + xsd_id + "'";
+		int counts = this.getJdbcTemplate().queryForInt(sql);
+		if(counts > 0){
+			is = true;
+		}
+		return is;
+	}
+	
+	
+	/**
+	 * 查看出库单是否已经提交
+	 * @param ckd_id
+	 * @return
+	 */
+	public boolean isCkdSubmit(String ckd_id){
+		boolean is = false;
+		String sql = "select count(*) from ckd where ckd_id='" + ckd_id + "' and state='已出库'";
+		int counts = this.getJdbcTemplate().queryForInt(sql);
+		if(counts > 0){
+			is = true;
+		}
+		return is;
+	}
+	
+	
 	
 	/**
 	 * 删除出库单关联产品

@@ -562,6 +562,7 @@
             <result name="success">/WEB-INF/pages/xsd/xsd_sp.jsp</result>
         </action>
         <action name="doSpXsd" class="xsdAction" method="doSp">
+        	<result name="input">/WEB-INF/pages/xsd/xsd_sp.jsp</result>
             <result name="success">/WEB-INF/pages/xsd/msg.jsp</result>
         </action>                         
         <action name="editXsd" class="xsdAction" method="edit">

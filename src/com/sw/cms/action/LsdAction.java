@@ -7,8 +7,6 @@ import com.sw.cms.action.base.BaseAction;
 import com.sw.cms.model.LoginInfo;
 import com.sw.cms.model.Lsd;
 import com.sw.cms.model.Page;
-import com.sw.cms.service.DeptService;
-import com.sw.cms.service.EmployeeService;
 import com.sw.cms.service.LsdService;
 import com.sw.cms.service.PosTypeService;
 import com.sw.cms.service.ProductKcService;
@@ -291,6 +289,20 @@ public class LsdAction extends BaseAction {
 			}
 		}
 		
+		//判断零售单是否提交
+		if(lsdService.isLsdSubmit(lsd.getId())){
+			this.saveMessage("零售单已提交，不能重复提交，请检查！");
+			
+			//页面初始数据
+			userList = userService.getAllEmployeeList();
+			storeList = storeService.getAllStoreList();
+			iscs_flag = sysInitSetService.getQyFlag();  //是否完成初始标志
+			ysfs = sjzdService.getSjzdXmxxByZdId("SJZD_FKFS");
+			posTypeList = posTypeService.getPosTypeList();
+			
+			return "input";
+		}
+		
 		lsdService.updateLsd(lsd, lsdProducts);
 		return "success";
 	}
@@ -398,6 +410,22 @@ public class LsdAction extends BaseAction {
 				this.saveMessage(msg);
 				return "input";
 			}
+		}
+		
+		//判断零售单是否提交
+		if(lsdService.isLsdSubmit(id)){
+			this.saveMessage("零售单审批完成，不能重复审批，请检查！");
+			
+			//页面初始数据
+			lsd = (Lsd)lsdService.getLsd(id);
+			lsdProducts = lsdService.getLsdProducts(id);
+			storeList = storeService.getAllStoreList();
+			userList = userService.getAllEmployeeList();
+			iscs_flag = sysInitSetService.getQyFlag();
+			ysfs = sjzdService.getSjzdXmxxByZdId("SJZD_FKFS");
+			posTypeList = posTypeService.getPosTypeList();
+			
+			return "input";
 		}
 		
 		//保存审批结果

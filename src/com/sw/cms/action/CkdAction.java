@@ -216,6 +216,8 @@ public class CkdAction extends BaseAction {
 					client = (Clients)clientsService.getClient(ckd.getClient_name());
 				}
 				
+				this.saveMessage(msg);
+				
 				return "input";
 			}else{
 				if(!xsdService.isHasXsdByID(ckd.getXsd_id())){  //用户添写的销售单不存在
@@ -230,6 +232,8 @@ public class CkdAction extends BaseAction {
 					if(clientsService.getClient(ckd.getClient_name()) != null){
 						client = (Clients)clientsService.getClient(ckd.getClient_name());
 					}
+					
+					this.saveMessage(msg);
 					
 					return "input";
 				}else{  //如果存在则去判断产品是否存在
@@ -250,6 +254,7 @@ public class CkdAction extends BaseAction {
 										client = (Clients)clientsService.getClient(ckd.getClient_name());
 									}
 									
+									this.saveMessage(msg);
 									return "input";
 								}
 							}
@@ -280,9 +285,28 @@ public class CkdAction extends BaseAction {
 						client = (Clients)clientsService.getClient(ckd.getClient_name());
 					}
 					
+					this.saveMessage(msg);
+					
 					return "input";
 				}
 			}
+		}
+		
+		//判断出库单是否已经提交
+		if(ckdService.isCkdSubmit(ckd.getCkd_id())){
+			this.saveMessage("出库单已经出库，无法重复出库！");
+			
+			ckdProducts = ckdService.getCkdProducts(ckd.getCkd_id());
+			iscs_flag = sysInitSetService.getQyFlag();
+			userList = userService.getAllEmployeeList();
+			storeList = ckdService.getStoreList();
+			ysfs = sjzdService.getSjzdXmxxByZdId("SJZD_YSFS");
+			
+			if(clientsService.getClient(ckd.getClient_name()) != null){
+				client = (Clients)clientsService.getClient(ckd.getClient_name());
+			}
+			
+			return "input";
 		}
 		
 		ckdService.updateCkd(ckd, ckdProducts);		

@@ -438,6 +438,9 @@ public class UserAction extends BaseAction {
 	 */
 	public String getLikeJsrInfo(){
 		try{
+			if(paramValue.equals("")){
+				return "success";
+			}
 			List jsrs = userService.getUserListAjaxTip(paramValue);
 			if(jsrs != null && jsrs.size() > 0){
 				for(int i=0;i<jsrs.size();i++){

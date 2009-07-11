@@ -569,6 +569,16 @@ public class LsdService {
 	}
 	
 	
+	/**
+	 * 查看零售单是否已经提交
+	 * @param ckd_id
+	 * @return
+	 */
+	public boolean isLsdSubmit(String lsd_id){
+		return lsdDao.isLsdSubmit(lsd_id);
+	}
+	
+	
 	public void setLsdDao(LsdDAO lsdDao) {
 		this.lsdDao = lsdDao;
 	}

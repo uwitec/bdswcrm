@@ -9,6 +9,7 @@ import com.sw.cms.model.Fxdd;
 import com.sw.cms.model.LoginInfo;
 import com.sw.cms.model.Page;
 import com.sw.cms.model.Xsd;
+import com.sw.cms.service.CkdService;
 import com.sw.cms.service.ClientsService;
 import com.sw.cms.service.PosTypeService;
 import com.sw.cms.service.ProductKcService;
@@ -40,6 +41,7 @@ public class XsdAction extends BaseAction {
 	private ProductService productService;
 	private ClientsService clientsService;
 	private PosTypeService posTypeService;
+	private CkdService ckdService;
 	 
 	
 	private SysSource sysSource;
@@ -277,6 +279,10 @@ public class XsdAction extends BaseAction {
 		boolean hasCeysk = xsdService.isCeysk(xsd.getClient_name(), xsd.getXsdje()-xsd.getSkje()); //是否存在超额应收款
 		boolean hasCqysk = xsdService.isCqysk(xsd.getClient_name());  //是否存在超期应收款
 		
+		ysfs = sjzdService.getSjzdXmxxByZdId("SJZD_YSFS");
+		fkfs = sjzdService.getSjzdXmxxByZdId("SJZD_FKFS");
+		storeList = storeService.getAllStoreList();
+		
 		iscs_flag = sysInitSetService.getQyFlag();  //是否完成系统初始化
 		
 		boolean needSp = false; //单据是否需要审批
@@ -311,10 +317,6 @@ public class XsdAction extends BaseAction {
 			xsd.setSp_state("1");
 			xsd.setState("已保存");
 			
-			ysfs = sjzdService.getSjzdXmxxByZdId("SJZD_YSFS");
-			fkfs = sjzdService.getSjzdXmxxByZdId("SJZD_FKFS");
-			storeList = storeService.getAllStoreList();
-			
 			xsdService.updateXsd(xsd, xsdProducts);
 			return "input";
 		}else{
@@ -334,13 +336,15 @@ public class XsdAction extends BaseAction {
 					xsd.setState("已保存");
 					xsdService.updateXsd(xsd, xsdProducts);
 					
-					ysfs = sjzdService.getSjzdXmxxByZdId("SJZD_YSFS");
-					fkfs = sjzdService.getSjzdXmxxByZdId("SJZD_FKFS");
-					storeList = storeService.getAllStoreList();
-					
 					return "input";
 				}
 			}
+		}
+		
+		//判断销售单是否已经提交
+		if(ckdService.isCkdExist(xsd.getId())){
+			this.saveMessage("销售单已经提交，并生成相应出库单，无法重复提交！");
+			return "input";
 		}
 		
 		xsdService.updateXsd(xsd, xsdProducts);
@@ -374,6 +378,21 @@ public class XsdAction extends BaseAction {
 	public String doSp(){
 		LoginInfo info = (LoginInfo)getSession().getAttribute("LOGINUSER");
 		String user_id = info.getUser_id();
+		
+		//判断销售单是否已经审批通过
+		if(ckdService.isCkdExist(id)){
+			this.saveMessage("销售单已经提交，并生成相应出库单，无法重复提交！");
+			
+			xsd = (Xsd)xsdService.getXsd(id);
+			xsdProducts = xsdService.getXsdProducts(id);
+			storeList = storeService.getAllStoreList();
+			iscs_flag = sysInitSetService.getQyFlag();
+			ysfs = sjzdService.getSjzdXmxxByZdId("SJZD_YSFS");
+			posTypeList = posTypeService.getPosTypeList();
+			fkfs = sjzdService.getSjzdXmxxByZdId("SJZD_FKFS");	
+			
+			return "input";
+		}
 		
 		//保存审批结果
 		xsdService.saveSp(id, sp_state, user_id);
@@ -902,6 +921,18 @@ public class XsdAction extends BaseAction {
 
 	public void setClientsList(List clientsList) {
 		this.clientsList = clientsList;
+	}
+
+
+
+	public CkdService getCkdService() {
+		return ckdService;
+	}
+
+
+
+	public void setCkdService(CkdService ckdService) {
+		this.ckdService = ckdService;
 	}
 	
 }

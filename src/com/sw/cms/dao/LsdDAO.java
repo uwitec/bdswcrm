@@ -330,6 +330,22 @@ public class LsdDAO extends JdbcBaseDAO {
 	
 	
 	/**
+	 * 查看零售单是否已经提交
+	 * @param ckd_id
+	 * @return
+	 */
+	public boolean isLsdSubmit(String lsd_id){
+		boolean is = false;
+		String sql = "select count(*) from lsd where id='" + lsd_id + "' and state='已提交'";
+		int counts = this.getJdbcTemplate().queryForInt(sql);
+		if(counts > 0){
+			is = true;
+		}
+		return is;
+	}
+	
+	
+	/**
 	 * 包装对象(零售单)
 	 * 
 	 * @author liyt

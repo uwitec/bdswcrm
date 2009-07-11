@@ -35,7 +35,7 @@ public class ProductAction extends BaseAction implements ModelDriven{
 	private int rowsPerPage = Constant.PAGE_SIZE2;
 	private String product_name = "";
 	private String product_xh = "";
-
+	private String product_state = "";
 
 	public Page getProductPage() {
 		return productPage;
@@ -69,6 +69,9 @@ public class ProductAction extends BaseAction implements ModelDriven{
 		}
 		if(!product_xh.equals("")){
 			con += " and product_xh like '%" + product_xh + "%'";
+		}
+		if(!product_state.equals("")){
+			con += " and state='" + product_state + "'";
 		}
 		productPage = productService.getProductList(con, curPage, rowsPerPage);
 		
@@ -183,7 +186,7 @@ public class ProductAction extends BaseAction implements ModelDriven{
 	}	
 	
 	/**
-	 * 编辑或查看产品信息
+	 * 删除产品信息
 	 * @return
 	 */
 	public String delProduct(){
@@ -312,5 +315,13 @@ public class ProductAction extends BaseAction implements ModelDriven{
 	}
 
 
+	public String getProduct_state() {
+		return product_state;
+	}
+
+
+	public void setProduct_state(String product_state) {
+		this.product_state = product_state;
+	}
 	
 }

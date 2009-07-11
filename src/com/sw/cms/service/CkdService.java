@@ -253,6 +253,25 @@ public class CkdService {
 	
 	
 	/**
+	 * 根据对应销售单编号查看是否存在相应的出库单
+	 * @param xsd_id
+	 * @return
+	 */
+	public boolean isCkdExist(String xsd_id){
+		return ckdDao.isCkdExist(xsd_id);
+	}
+	
+	
+	/**
+	 * 查看出库单是否已经提交
+	 * @param ckd_id
+	 * @return
+	 */
+	public boolean isCkdSubmit(String ckd_id){
+		return ckdDao.isCkdSubmit(ckd_id);
+	}
+	
+	/**
 	 * 取所有库房列表
 	 * @return
 	 */
