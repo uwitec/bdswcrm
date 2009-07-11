@@ -28,3 +28,12 @@ line-height:18px;
 background-color: white;
 width: 350px;
 }
+.msg_div_style{
+border-left: 1px solid #918d8d;
+border-top: 1px solid #918d8d;
+border-right: 1px solid #918d8d; 
+border-bottom: 1px solid #918d8d;
+font:normal 12px Arial;
+line-height:18px;
+background-color: #EFEFEF;
+}
