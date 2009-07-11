@@ -20,7 +20,7 @@ public class DeptXshzDAO extends JdbcBaseDAO {
 	 * @return
 	 * @throws Exception
 	 */
-	public List getResults(String start_date,String end_date,String client_name,int dj) throws Exception{
+	public List getResults(String start_date,String end_date,String client_name,int dj,String product_kind,String product_name) throws Exception{
 	
 		String con = "";
 		if(!start_date.equals("")){
@@ -31,6 +31,26 @@ public class DeptXshzDAO extends JdbcBaseDAO {
 		}
 		if(!client_name.equals("")){
 			con += " and b.client_name='" + client_name + "'"; 
+		}
+		//处理商品类别
+		if(!product_kind.equals("")){
+			String[] arryItems = product_kind.split(",");			
+			if(arryItems != null && arryItems.length >0){
+				con += " and (";
+				for(int i=0;i<arryItems.length;i++){
+					if(i == 0){
+						con += " b.product_id like '" + arryItems[i] + "%'";
+					}else{
+						con += " or b.product_id like '" + arryItems[i] + "%'";
+					}
+				}
+				con += ")";
+			}
+		}
+		
+		//商品名称
+		if(!product_name.equals("")){
+			con += " and b.product_name like '%" + product_name + "%'";
 		}
 		
 		String sql = "select a.dept_id,a.dept_name," +
@@ -52,7 +72,7 @@ public class DeptXshzDAO extends JdbcBaseDAO {
 	 * @return
 	 * @throws Exception
 	 */
-	public List getMxResults(String dept,String start_date,String end_date,String client_name) throws Exception{
+	public List getMxResults(String dept,String start_date,String end_date,String client_name,String product_kind,String product_name) throws Exception{
 		String sql = "select xsry,real_name,sum(nums) as nums,sum(hjje) as hjje FROM view_hpxshz_tj where 1=1";
 		
 		if(!dept.equals("")){
@@ -66,6 +86,27 @@ public class DeptXshzDAO extends JdbcBaseDAO {
 		}
 		if(!client_name.equals("")){
 			sql += " and client_name='" + client_name + "'";
+		}
+		
+		//处理商品类别
+		if(!product_kind.equals("")){
+			String[] arryItems = product_kind.split(",");			
+			if(arryItems != null && arryItems.length >0){
+				sql += " and (";
+				for(int i=0;i<arryItems.length;i++){
+					if(i == 0){
+						sql += " product_id like '" + arryItems[i] + "%'";
+					}else{
+						sql += " or product_id like '" + arryItems[i] + "%'";
+					}
+				}
+				sql += ")";
+			}
+		}
+		
+		//商品名称
+		if(!product_name.equals("")){
+			sql += " and product_name like '%" + product_name + "%'";
 		}
 		
 		sql += " group by xsry,real_name";
@@ -83,7 +124,7 @@ public class DeptXshzDAO extends JdbcBaseDAO {
 	 * @return
 	 * @throws Exception
 	 */
-	public List getProductMxResults(String xsry,String start_date,String end_date,String client_name) throws Exception{
+	public List getProductMxResults(String xsry,String start_date,String end_date,String client_name,String product_kind,String product_name) throws Exception{
 		String sql = "select product_id,product_name,product_xh,sum(nums) as nums,sum(hjje) as hjje from view_hpxshz_tj where 1=1";
 		
 		if(!xsry.equals("")){
@@ -97,6 +138,27 @@ public class DeptXshzDAO extends JdbcBaseDAO {
 		}
 		if(!client_name.equals("")){
 			sql += " client_name='" + client_name + "'";
+		}
+		
+		//处理商品类别
+		if(!product_kind.equals("")){
+			String[] arryItems = product_kind.split(",");			
+			if(arryItems != null && arryItems.length >0){
+				sql += " and (";
+				for(int i=0;i<arryItems.length;i++){
+					if(i == 0){
+						sql += " product_id like '" + arryItems[i] + "%'";
+					}else{
+						sql += " or product_id like '" + arryItems[i] + "%'";
+					}
+				}
+				sql += ")";
+			}
+		}
+		
+		//商品名称
+		if(!product_name.equals("")){
+			sql += " and product_name like '%" + product_name + "%'";
 		}
 		
 		sql += " group by product_id,product_name,product_xh";

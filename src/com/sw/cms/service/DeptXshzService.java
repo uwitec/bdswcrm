@@ -23,8 +23,8 @@ public class DeptXshzService {
 	 * @return
 	 * @throws Exception
 	 */
-	public List getResults(String start_date,String end_date,String client_name,int dj) throws Exception{
-		return deptXshzDao.getResults(start_date, end_date, client_name, dj);
+	public List getResults(String start_date,String end_date,String client_name,int dj,String product_kind,String product_name) throws Exception{
+		return deptXshzDao.getResults(start_date, end_date, client_name, dj,product_kind,product_name);
 	}
 	
 	
@@ -37,8 +37,8 @@ public class DeptXshzService {
 	 * @return
 	 * @throws Exception
 	 */
-	public List getMxResults(String dept,String start_date,String end_date,String client_name) throws Exception{
-		return deptXshzDao.getMxResults(dept, start_date, end_date, client_name);
+	public List getMxResults(String dept,String start_date,String end_date,String client_name,String product_kind,String product_name) throws Exception{
+		return deptXshzDao.getMxResults(dept, start_date, end_date, client_name, product_kind, product_name);
 	}
 	
 	
@@ -51,8 +51,8 @@ public class DeptXshzService {
 	 * @return
 	 * @throws Exception
 	 */
-	public List getProductMxResults(String xsry,String start_date,String end_date,String client_name) throws Exception{
-		return deptXshzDao.getProductMxResults(xsry, start_date, end_date, client_name);
+	public List getProductMxResults(String xsry,String start_date,String end_date,String client_name,String product_kind,String product_name) throws Exception{
+		return deptXshzDao.getProductMxResults(xsry, start_date, end_date, client_name, product_kind, product_name);
 	}
 	
 

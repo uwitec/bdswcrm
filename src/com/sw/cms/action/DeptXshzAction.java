@@ -26,6 +26,8 @@ public class DeptXshzAction extends BaseAction {
 	private String dept = "";
 	private int dj = 1;
 	private String xsry = "";
+	String product_kind = "";
+	String product_name = "";
 
 
 	/**
@@ -44,7 +46,7 @@ public class DeptXshzAction extends BaseAction {
 	 */
 	public String getResults(){
 		try{
-			resultList = deptXshzService.getResults(start_date, end_date, client_name, dj);
+			resultList = deptXshzService.getResults(start_date, end_date, client_name, dj, product_kind, product_name);
 			return SUCCESS;
 		}catch(Exception e){
 			log.error("部门销售汇总出错，错误原因：" + e.getMessage());
@@ -59,7 +61,7 @@ public class DeptXshzAction extends BaseAction {
 	 */
 	public String getMxResults(){
 		try{
-			resultList = deptXshzService.getMxResults(dept, start_date, end_date, client_name);
+			resultList = deptXshzService.getMxResults(dept, start_date, end_date, client_name, product_kind, product_name);
 			return SUCCESS;
 		}catch(Exception e){
 			log.error("部门销售汇总--销售人员汇总出错，错误原因：" + e.getMessage());
@@ -74,7 +76,7 @@ public class DeptXshzAction extends BaseAction {
 	 */
 	public String getProductMxResults(){
 		try{
-			resultList = deptXshzService.getProductMxResults(xsry, start_date, end_date, client_name);
+			resultList = deptXshzService.getProductMxResults(xsry, start_date, end_date, client_name, product_kind, product_name);
 			return SUCCESS;
 		}catch(Exception e){
 			log.error("部门销售汇总--产品汇总出错，错误原因：" + e.getMessage());
@@ -150,6 +152,26 @@ public class DeptXshzAction extends BaseAction {
 
 	public void setClientsService(ClientsService clientsService) {
 		this.clientsService = clientsService;
+	}
+
+
+	public String getProduct_kind() {
+		return product_kind;
+	}
+
+
+	public void setProduct_kind(String product_kind) {
+		this.product_kind = product_kind;
+	}
+
+
+	public String getProduct_name() {
+		return product_name;
+	}
+
+
+	public void setProduct_name(String product_name) {
+		this.product_name = product_name;
 	}
 
 }
