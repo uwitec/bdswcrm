@@ -26,6 +26,9 @@ var clientlists = new Array();
 
 function showClientsTip(originalRequest){   
 	if(originalRequest.responseText.trims() == ""){
+		var bt = $("clientsTip");
+		bt.innerHTML = "";
+		Element.hide('clientsTip');	
 		return false;
 	}
 	var brandList = originalRequest.responseText.split("%");
@@ -39,9 +42,9 @@ function showClientsTip(originalRequest){
 		   }
 		   var curBrand = brandList[i].split("$");
 		   
-		   clientlists[curBrand[1]] = curBrand[0];
+		   clientlists[curBrand[1].trims()] = curBrand[0].trims();
 		   
-		   s += "<div onmouseover=\"this.className='selectTip';style.cursor='default'\"  onmouseout=\"this.className=null; style.cursor='default'\">" + curBrand[1] + "</div>";
+		   s += "<div onmouseover=\"this.className='selectTip';style.cursor='default'\"  onmouseout=\"this.className=null; style.cursor='default'\">" + curBrand[1].trims() + "</div>";
 		   flog++;
 		}
 		bt.innerHTML=s;
@@ -162,4 +165,9 @@ function initClientTip(){
 	new Form.Element.Observer("client_name",1, searchClients);
 	Event.observe("client_name", "keydown", clientTipMove, false);
 	Event.observe("clientsTip","mousedown",clientTipDown,true);
+	
+	//初始提示层的位置
+	var pos = GetObjPos(document.getElementById("client_name"))
+	document.getElementById("clientsTip").style.left = pos.x;
+	document.getElementById("clientsTip").style.top = pos.y + 22;
 }

@@ -21,6 +21,10 @@ if(sp_type.equals("1")){
 }else if(sp_type.equals("4")){
 	sp_type = "订单商品价格低于最低限价";
 }
+
+List msg = (List)session.getAttribute("messages");
+session.removeAttribute("messages");
+
 %>
 
 <html>
@@ -28,19 +32,49 @@ if(sp_type.equals("1")){
 <title>审批销售订单</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
+<LINK href="css/ddcolortabs.css" type=text/css rel=stylesheet>
 <script type="text/javascript">
 	//提交审批
 	function doSp(vl){
 		document.xsdForm.sp_state.value = vl;
 		document.xsdForm.submit();
 	}
+	
+	//显示消息DIV
+	function divInit(){	
+		<%if((msg != null && msg.size() > 0)){ %>
+		document.getElementById("msg_div").style.visibility = "visible";
+		<%}%>
+	}
+	
+	//隐藏消息DIV
+	function hiddenDiv(){
+		document.getElementById("msg_div").style.visibility = "hidden";
+	}	
 </script>
 </head>
-<body >
+<body onload="divInit();">
 <form name="xsdForm" action="doSpXsd.html" method="post">
 	<input type="hidden" name="id" value="<%=StringUtils.nullToStr(xsd.getId()) %>">
 	<input type="hidden" name="sp_state" value="">
 </form>
+<div name="msg_div" id="msg_div" class="msg_div_style" onclick="hiddenDiv();" title="点击隐藏提示信息" style="position:absolute;left:2px;top:1px;width:828px;visibility:hidden">
+	<table width="100%" style="font-size: 12px;" border="0"  cellspacing="5" height="100%">
+		<tr><td align="right"><img src="index_images/tabClose.gif" border="0" style="cursor:hand" onclick="hiddenDiv();" title="关闭"></td></tr>
+		<tr>
+			<td width="100%" align="left"><font color="red">
+			<%
+			if(msg != null && msg.size() > 0){
+				for(int i=0;i<msg.size();i++){
+					out.print(StringUtils.nullToStr(msg.get(i)) + "<BR>");
+				}
+			}
+			%>	
+			<BR></font>		
+			</td>
+		</tr>
+	</table>
+</div>
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>

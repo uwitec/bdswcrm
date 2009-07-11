@@ -12,6 +12,7 @@ Page results = (Page)VS.findValue("productPage");
 String curId = StringUtils.nullToStr(VS.findValue("curId"));
 String product_name = StringUtils.nullToStr(VS.findValue("product_name"));
 String product_xh = StringUtils.nullToStr(VS.findValue("product_xh"));
+String product_state = StringUtils.nullToStr(VS.findValue("product_state"));
 %>
 
 <html>
@@ -35,6 +36,7 @@ String product_xh = StringUtils.nullToStr(VS.findValue("product_xh"));
 	function clearAll(){
 		document.myform.product_name.value = "";
 		document.myform.product_xh.value = "";
+		document.myform.product_state.value = "";
 	}	
 	
 	function openWin(id){
@@ -88,10 +90,17 @@ String product_xh = StringUtils.nullToStr(VS.findValue("product_xh"));
 	<tr>
 		<td class="search" align="left" colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;
 			产品名称：<input type="text" name="product_name" value="<%=product_name %>">
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;
 			产品规格：<input type="text" name="product_xh" value="<%=product_xh %>">
-			<input type="submit" name="buttonCx" value=" 查询 " class="css_button2">&nbsp;&nbsp;&nbsp;&nbsp;	
-			<input type="button" name="buttonQk" value=" 清空 " class="css_button2" onclick="clearAll();">
+			&nbsp;&nbsp;
+			状态：
+			<select name="product_state">
+				<option value=""></option>
+				<option value="正常" <%if(product_state.equals("正常")) out.print("selected"); %>>正常</option>
+				<option value="停售" <%if(product_state.equals("停售")) out.print("selected"); %>>停售</option>
+			</select>
+			<input type="submit" name="buttonCx" value=" 查询 " class="css_button">&nbsp;&nbsp;&nbsp;&nbsp;	
+			<input type="button" name="buttonQk" value=" 清空 " class="css_button" onclick="clearAll();">
 		</td>				
 	</tr>	
 </table>

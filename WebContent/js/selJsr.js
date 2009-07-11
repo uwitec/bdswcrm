@@ -24,7 +24,10 @@ function searchBrand(){
 var jsrlists = new Array();
 
 function showResponse(originalRequest){   
-	if(originalRequest.responseText.trims() == ""){
+	if(originalRequest.responseText.trim() == ""){
+		var bt = $("brandTip");
+		bt.innerHTML = "";
+		Element.hide('brandTip');	
 		return false;
 	}
 	var brandList = originalRequest.responseText.split("%");
@@ -37,9 +40,9 @@ function showResponse(originalRequest){
 		     break;
 		   }
 		   var curBrand = brandList[i].split("$");
-		   jsrlists[curBrand[1]] = curBrand[0];
+		   jsrlists[curBrand[1].trim()] = curBrand[0].trim();
 		   
-		   s += "<div onmouseover=\"this.className='selectTip';style.cursor='default'\"  onmouseout=\"this.className=null; style.cursor='default'\">" + curBrand[1] + "</div>";
+		   s += "<div onmouseover=\"this.className='selectTip';style.cursor='default'\"  onmouseout=\"this.className=null; style.cursor='default'\">" + curBrand[1].trim() + "</div>";
 		   flog++;
 		}
 		bt.innerHTML=s;
@@ -160,4 +163,9 @@ function initFzrTip(){
 	new Form.Element.Observer("brand",1, searchBrand);
 	Event.observe("brand", "keydown", move, false);
 	Event.observe("brandTip","mousedown",down,true);
+	
+	//初始提示层的位置
+	var pos = GetObjPos(document.getElementById("brand"))
+	document.getElementById("brandTip").style.left = pos.x;
+	document.getElementById("brandTip").style.top = pos.y + 22;
 }

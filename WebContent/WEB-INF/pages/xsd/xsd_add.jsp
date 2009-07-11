@@ -88,7 +88,7 @@ if(sp_state.equals("1")){
 </head>
 <body onload="initFzrTip();initClientTip();divInit();" onclick="hiddenDiv();" >
 <form name="xsdForm" action="updateXsd.html" method="post">
-<div name="msg_div" id="msg_div" class="msg_div_style" onclick="hiddenDiv();" title="点击隐藏提示信息" style="position: absolute;left:2px;top:1px;width:928px;visibility:hidden">
+<div name="msg_div" id="msg_div" class="msg_div_style" onclick="hiddenDiv();" title="点击隐藏提示信息" style="position:absolute;left:2px;top:1px;width:928px;visibility:hidden">
 	<table width="100%" style="font-size: 12px;" border="0"  cellspacing="5" height="100%">
 		<tr><td align="right"><img src="index_images/tabClose.gif" border="0" style="cursor:hand" onclick="hiddenDiv();" title="关闭"></td></tr>
 		<tr>
@@ -124,8 +124,8 @@ if(sp_state.equals("1")){
 		<td class="a1"  width="15%">经手人</td>
 		<td class="a2">
 			<input  id="brand" type="text" length="20" onblur="setValue()" value="<%=StaticParamDo.getRealNameById(xsd.getFzr()) %>"/> 
-			<img src="images/select.gif" align="absmiddle" title="选择经手人" border="0" onclick="openywyWin();" style="cursor:hand">
-			<div id="brandTip"  style="height:12px;position:absolute;left:613px; top:58px; width:131px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+			<!--<img src="images/select.gif" align="absmiddle" title="选择经手人" border="0" onclick="openywyWin();" style="cursor:hand">
+			--><div id="brandTip"  style="height:12px;position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 			<input type="hidden" name="xsd.fzr" id="fzr" value="<%=xsd.getFzr()%>"/><font color="red">*</font>		
 		</td>				 
 	</tr>
@@ -133,7 +133,7 @@ if(sp_state.equals("1")){
 		<td class="a1" width="15%">客户名称</td>
 		<td class="a2">
 		<input type="text" name="xsd.client_id" onblur="setClientValue()" id="client_name" value="<%=StaticParamDo.getClientNameById(StringUtils.nullToStr(xsd.getClient_name())) %>" size="30" maxlength="50" >
-		<input type="hidden" name="xsd.client_name" id="client_id" value="<%=StringUtils.nullToStr(xsd.getClient_name()) %>">
+		<input type="hidden" name="xsd.client_name" id="client_id" value="<%=StringUtils.nullToStr(xsd.getClient_name()) %>"><!--
 		<%
 		if(!sp_state.equals("3")){
 		%>
@@ -141,7 +141,7 @@ if(sp_state.equals("1")){
 		<%
 		}
 		%>
-		<div id="clientsTip" style="height:12px;position:absolute;left:150px; top:85px; width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+		--><div id="clientsTip" style="height:12px;position:absolute;width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		<font color="red">*</font>
 		</td>
 		<td class="a1">地址</td>
