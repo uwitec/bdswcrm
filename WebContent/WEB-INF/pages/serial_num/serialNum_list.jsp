@@ -90,7 +90,7 @@
 			<td>
 				<a href="#" onclick="edit('<ww:property value="%{serial_num}" />');"><img src="images/modify.gif" align="absmiddle" title="修改" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;			
 				<a href="#" onclick="view('<ww:property value="%{serial_num}" />');"><img src="images/view.gif" align="absmiddle" title="查看" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
-				<a href="#" onclick="del('<ww:property value="%{serial_num}" />');"><img src="images/del.gif" align="absmiddle" title="删除该" border="0" style="cursor:hand"></a>			
+				<a href="#" onclick="del('<ww:property value="%{serial_num}" />');"><img src="images/del.gif" align="absmiddle" title="删除该行数据" border="0" style="cursor:hand"></a>			
 			</td>
 		</tr>
 	</ww:iterator>
