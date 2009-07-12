@@ -1,16 +1,13 @@
 package com.sw.cms.action;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.util.Calendar;
+import java.util.ArrayList;
 import java.util.List;
 
-import com.opensymphony.webwork.ServletActionContext;
 import com.opensymphony.xwork.ModelDriven;
 import com.sw.cms.action.base.BaseAction;
 import com.sw.cms.model.Page;
 import com.sw.cms.model.Product;
+import com.sw.cms.service.ProductKindService;
 import com.sw.cms.service.ProductService;
 import com.sw.cms.service.SjzdService;
 import com.sw.cms.util.Constant;
@@ -19,15 +16,14 @@ import com.sw.cms.util.StringUtils;
 public class ProductAction extends BaseAction implements ModelDriven{
 	
 	private ProductService productService;
+	private ProductKindService productKindService;
 
 	private Page productPage;  //带分页对象列表	
 	private Product product = new Product();
 	private List providerList;
 	private SjzdService sjzdService;
 	private String[] jldw;
-	
-	private File imgFile ;
-	private String imgFileFileName;
+	private List productKindList = new ArrayList();
 	
 	//查询条件
 	private String curId = "";
@@ -93,36 +89,7 @@ public class ProductAction extends BaseAction implements ModelDriven{
 	 * @return
 	 */
 	public String saveProduct()throws Exception {
-		
-		
-		if(imgFileFileName != null && !imgFileFileName.equals("")){
-			//获取当前的绝对路径
-			String filePath = ServletActionContext.getServletContext().getRealPath("\\");			
-			int i = imgFileFileName.lastIndexOf(".");
-			String pix = imgFileFileName.substring(i,imgFileFileName.length());
-			
-			Calendar cl = Calendar.getInstance();
-			String saveFileName = cl.getTimeInMillis() + pix;  //数据库中保存的文件名
-			String imgPath = filePath + "upload\\" + saveFileName;
-			
-			//上传产品图片文件
-			FileOutputStream outputStream = new FileOutputStream(imgPath);
-			FileInputStream fileIn = new FileInputStream(imgFile);
-			byte[] buffer = new byte[1024];
-	
-			int len;
-			while ((len = fileIn.read(buffer)) > 0) {
-				outputStream.write(buffer, 0, len);
-			}
-			outputStream.flush();
-			outputStream.close();
-			fileIn.close();		
-			
-			product.setImg(saveFileName);
-		}
-		
-		productService.saveProductInfo(product);
-		
+		productService.saveProductInfo(product);		
 		return "success";
 	}
 	
@@ -142,6 +109,8 @@ public class ProductAction extends BaseAction implements ModelDriven{
 		}
 
 		jldw = sjzdService.getSjzdXmxxByZdId("SJZD_JLDW");
+		productKindList = productKindService.getAllProductKindList();
+		
 		return "success";
 	}
 	
@@ -150,37 +119,6 @@ public class ProductAction extends BaseAction implements ModelDriven{
 	 * @return
 	 */
 	public String updateProduct()throws Exception{
-		
-				
-		if(imgFileFileName != null && !imgFileFileName.equals("")){
-			//获取当前的绝对路径
-			String filePath = ServletActionContext.getServletContext().getRealPath("\\");
-			
-			int i = imgFileFileName.lastIndexOf(".");
-			String pix = imgFileFileName.substring(i,imgFileFileName.length());
-			
-			Calendar cl = Calendar.getInstance();
-			String saveFileName = cl.getTimeInMillis() + pix;  //数据库中保存的文件名
-			String imgPath = filePath + "upload\\" + saveFileName;
-			
-			//上传产品图片文件
-			FileOutputStream outputStream = new FileOutputStream(imgPath);
-			FileInputStream fileIn = new FileInputStream(imgFile);
-			byte[] buffer = new byte[1024];
-	
-			int len;
-			while ((len = fileIn.read(buffer)) > 0) {
-				outputStream.write(buffer, 0, len);
-			}
-			outputStream.flush();
-			outputStream.close();
-			fileIn.close();		
-			
-			product.setImg(saveFileName);
-		}	
-		
-		setImgFileFileName("");
-		
 		productService.updateProductInfo(product);
 		return "success";
 	}	
@@ -230,14 +168,6 @@ public class ProductAction extends BaseAction implements ModelDriven{
 		return providerList;
 	}
 
-	public void setImgFile(File imgFile) {
-		this.imgFile = imgFile;
-	}
-
-	public void setImgFileFileName(String imgFileFileName) {
-		this.imgFileFileName = imgFileFileName;
-	}
-
 	public Product getProduct() {
 		return product;
 	}
@@ -263,17 +193,6 @@ public class ProductAction extends BaseAction implements ModelDriven{
 	public ProductService getProductService() {
 		return productService;
 	}
-
-
-	public File getImgFile() {
-		return imgFile;
-	}
-
-
-	public String getImgFileFileName() {
-		return imgFileFileName;
-	}
-
 
 	public String[] getJldw() {
 		return jldw;
@@ -322,6 +241,26 @@ public class ProductAction extends BaseAction implements ModelDriven{
 
 	public void setProduct_state(String product_state) {
 		this.product_state = product_state;
+	}
+
+
+	public List getProductKindList() {
+		return productKindList;
+	}
+
+
+	public void setProductKindList(List productKindList) {
+		this.productKindList = productKindList;
+	}
+
+
+	public ProductKindService getProductKindService() {
+		return productKindService;
+	}
+
+
+	public void setProductKindService(ProductKindService productKindService) {
+		this.productKindService = productKindService;
 	}
 	
 }

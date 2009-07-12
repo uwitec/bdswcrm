@@ -18,7 +18,7 @@ public class ProductKindDAO extends JdbcBaseDAO{
 	 */
 	public List getAllProductKindList(){		
 		String sql = "select * from product_kind";		
-		return this.getJdbcTemplate().queryForList(sql);		
+		return this.getJdbcTemplate().queryForList(sql);
 	}
 	
 	/**
