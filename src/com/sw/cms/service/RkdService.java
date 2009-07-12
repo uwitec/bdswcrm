@@ -145,6 +145,16 @@ public class RkdService{
 	
 	
 	/**
+	 * 根据入库单编号查看入库单是否已经入库
+	 * @param xsd_id
+	 * @return
+	 */
+	public boolean isJhdSubmit(String rkd_id){
+		return rkdDao.isJhdSubmit(rkd_id);
+	}
+	
+	
+	/**
 	 * 处理入库序列号
 	 * <p>包括两种情况</p>
 	 * <p>一、采购；二、销售退货</p>

@@ -143,6 +143,24 @@ public class RkdDAO extends JdbcBaseDAO {
 	
 	
 	/**
+	 * 根据入库单编号查看入库单是否已经入库
+	 * @param xsd_id
+	 * @return
+	 */
+	public boolean isJhdSubmit(String rkd_id){
+		boolean is = false;
+		String sql = "select count(*) from rkd where rkd_id='" + rkd_id + "' and state='已入库'";
+		
+		int counts = this.getJdbcTemplate().queryForInt(sql);
+		
+		if(counts > 0){
+			is = true;
+		}
+		return is;
+	}
+	
+	
+	/**
 	 * 添加入库单关联产品
 	 * @param rkdProducts  产品List
 	 * @param rkd_id    入库单ID

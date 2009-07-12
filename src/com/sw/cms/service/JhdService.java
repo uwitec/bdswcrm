@@ -187,6 +187,17 @@ public class JhdService {
 	}
 	
 	
+	
+	/**
+	 * 根据进货单编号查看进货单是否已经提交
+	 * @param xsd_id
+	 * @return
+	 */
+	public boolean isJhdSubmit(String jhd_id){
+		return jhdDao.isJhdSubmit(jhd_id);
+	}
+	
+	
 	/**
 	 * 添加进货单相关采购付款信息
 	 * @param jhd

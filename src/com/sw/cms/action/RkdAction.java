@@ -162,7 +162,6 @@ public class RkdAction extends BaseAction {
 		rkd = (Rkd)rkdService.getRkd(rkd_id);
 		
 		storeList = rkdService.getAllStoreList();
-		userList = userService.getAllEmployeeList();
 		return "success";
 	}
 	
@@ -172,6 +171,14 @@ public class RkdAction extends BaseAction {
 	 * @return
 	 */
 	public String update(){
+		
+		if(rkdService.isJhdSubmit(rkd.getRkd_id())){
+			this.saveMessage("入库单已提交，不能重复提交，请检查！");
+			rkdProducts = rkdService.getRkdProducts(rkd.getRkd_id());
+			storeList = rkdService.getAllStoreList();
+			return "input";
+		}
+		
 		LoginInfo info = (LoginInfo)getSession().getAttribute("LOGINUSER");
 		String user_id = info.getUser_id();
 		rkd.setCzr(user_id); //添加操作人员
@@ -216,12 +223,19 @@ public class RkdAction extends BaseAction {
 	 * @return
 	 */
 	public String doTh(){
+		
+		if(rkdService.isJhdSubmit(rkd.getRkd_id())){
+			this.saveMessage("入库单已入库，不能退回，请检查！");
+			rkdProducts = rkdService.getRkdProducts(rkd.getRkd_id());
+			storeList = rkdService.getAllStoreList();
+			return "input";
+		}
+		
 		rkdService.doTh(rkd);
 		return "success";
 	}
 	
 	
-	//setter/getter区
 	public Rkd getRkd() {
 		return rkd;
 	}

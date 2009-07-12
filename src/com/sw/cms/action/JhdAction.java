@@ -119,9 +119,7 @@ public class JhdAction extends BaseAction {
 		String id = ParameterUtility.getStringParameter(getRequest(), "id", "");
 		jhdProducts = jhdService.getJhdProducts(id);
 		jhd = (Jhd) jhdService.getJhd(id);
-		userList = userService.getAllEmployeeList();
 		storeList = storeService.getAllStoreList();
-		clientsList=clientsService.getClientList("");
 		return "success";
 	}
 
@@ -131,6 +129,15 @@ public class JhdAction extends BaseAction {
 	 * @return
 	 */
 	public String update() {
+		
+		//防止重复提交进货单，如果进货单状态为提交，则提示用户
+		if(jhdService.isJhdSubmit(jhd.getId())){
+			this.saveMessage("采购订单已提交，不能重复提交，请检查！");
+			storeList = storeService.getAllStoreList();
+			return "input";
+		}
+		
+		
 		LoginInfo info = (LoginInfo)getSession().getAttribute("LOGINUSER");
 		String user_id = info.getUser_id();
 		jhd.setCzr(user_id); //添加操作人员

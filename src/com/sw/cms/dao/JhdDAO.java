@@ -306,6 +306,24 @@ public class JhdDAO extends JdbcBaseDAO {
 	}
 	
 	
+	/**
+	 * 根据进货单编号查看进货单是否已经提交
+	 * @param xsd_id
+	 * @return
+	 */
+	public boolean isJhdSubmit(String jhd_id){
+		boolean is = false;
+		String sql = "select count(*) from jhd where id='" + jhd_id + "' and state<>'已保存'";
+		
+		int counts = this.getJdbcTemplate().queryForInt(sql);
+		
+		if(counts > 0){
+			is = true;
+		}
+		return is;
+	}
+	
+	
 	
 	/**
 	 * 包装对象(进货单)

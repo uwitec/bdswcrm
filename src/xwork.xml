@@ -176,7 +176,7 @@
         <action name="saveJhd" class="jhdAction" method="save">
             <result name="cancel" type="redirect">addJhd.html</result>
             <result name="input">/WEB-INF/pages/jhd/jhd_add.jsp</result>
-            <result name="success">/WEB-INF/pages/jhd/msg.jsp</result>
+            <result name="success">/WEB-INF/pages/msg.jsp</result>
         </action>
         <action name="editJhd" class="jhdAction" method="edit">
             <result name="success">/WEB-INF/pages/jhd/jhd_edit.jsp</result>
@@ -187,7 +187,7 @@
         <action name="updateJhd" class="jhdAction" method="update">
             <result name="cancel" type="redirect">editJhd.html</result>
             <result name="input">/WEB-INF/pages/jhd/jhd_edit.jsp</result>
-            <result name="success">/WEB-INF/pages/jhd/msg.jsp</result>
+            <result name="success">/WEB-INF/pages/msg.jsp</result>
         </action>
         <action name="delJhd" class="jhdAction" method="del">
             <result name="success" type="redirect">listJhd.html</result>

@@ -79,8 +79,9 @@ public class KfdbAction extends BaseAction {
 		pageKfdb = kfdbService.getKfdbList(con, curPage, rowsPerPage);
 		return "success";
 	}
-	public String selSqr()
-	{
+	
+	
+	public String selSqr(){
 		try
 		{
 			int curPage = ParameterUtility.getIntParameter(getRequest(), "curPage",1);
