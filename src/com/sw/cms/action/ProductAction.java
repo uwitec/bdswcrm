@@ -31,7 +31,7 @@ public class ProductAction extends BaseAction implements ModelDriven{
 	private int rowsPerPage = Constant.PAGE_SIZE2;
 	private String product_name = "";
 	private String product_xh = "";
-	private String product_state = "";
+	private String product_state = "Õý³£";
 
 	public Page getProductPage() {
 		return productPage;

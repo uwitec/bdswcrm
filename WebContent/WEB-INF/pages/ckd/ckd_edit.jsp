@@ -394,11 +394,11 @@ if(client != null){
 <table width="100%"  align="center" id="cktable"  class="chart_list" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td>产品名称</td>
-		<td>规格</td>
-		<td>数量</td>
-		<td>强制序列号</td>
-		<td>备注</td>
+		<td width="33%">产品名称</td>
+		<td width="33%">规格</td>
+		<td width="7%">数量</td>
+		<td width="15%">强制序列号</td>
+		<td width="12%">备注</td>
 	</tr>
 	</thead>
 <%
@@ -408,16 +408,16 @@ if(ckdProducts!=null && ckdProducts.size()>0){
 %>
 	<tr>
 		<td class="a2">
-			<input type="text" id="product_name_<%=i %>" size="20" name="ckdProducts[<%=i %>].product_name" value="<%=StringUtils.nullToStr(ckdProduct.get("product_name")) %>" readonly>
+			<input type="text" id="product_name_<%=i %>" style="width:100%" name="ckdProducts[<%=i %>].product_name" value="<%=StringUtils.nullToStr(ckdProduct.get("product_name")) %>" readonly>
 			<input type="hidden" id="product_id_<%=i %>" name="ckdProducts[<%=i %>].product_id" value="<%=StringUtils.nullToStr(ckdProduct.get("product_id")) %>">
 		</td>
-		<td class="a2"><input type="text" id="product_xh_<%=i %>" size="20" name="ckdProducts[<%=i %>].product_xh" size="10" value="<%=StringUtils.nullToStr(ckdProduct.get("product_xh")) %>" readonly></td>	
-		<td class="a2"><input type="text" id="nums_<%=i %>" name="ckdProducts[<%=i %>].nums" value="<%=StringUtils.nullToStr(ckdProduct.get("nums")) %>" readonly size="10"></td>
+		<td class="a2"><input type="text" id="product_xh_<%=i %>"  style="width:100%" name="ckdProducts[<%=i %>].product_xh" size="10" value="<%=StringUtils.nullToStr(ckdProduct.get("product_xh")) %>" readonly></td>	
+		<td class="a2"><input type="text" id="nums_<%=i %>" name="ckdProducts[<%=i %>].nums" value="<%=StringUtils.nullToStr(ckdProduct.get("nums")) %>" readonly  style="width:100%"></td>
 		<td class="a2">
-			<input type="text" id="qz_serial_num_<%=i %>" name="ckdProducts[<%=i %>].qz_serial_num" value="<%=StringUtils.nullToStr(ckdProduct.get("qz_serial_num")) %>" size="15" readonly>
+			<input type="text" id="qz_serial_num_<%=i %>" name="ckdProducts[<%=i %>].qz_serial_num" value="<%=StringUtils.nullToStr(ckdProduct.get("qz_serial_num")) %>"  style="width:80%" readonly>
 			<input type="hidden" id="qz_flag_<%=i %>" name="ckdProducts[<%=i %>].qz_flag" value="<%=StringUtils.nullToStr(ckdProduct.get("qz_flag")) %>"><a style="cursor:hand" title="左键点击输入输列号" onclick="openSerialWin('<%=i %>');"><b>...</b></a>&nbsp;
 		</td>		
-		<td class="a2"><input type="text" id="remark_<%=i %>" size="20" name="ckdProducts[<%=i %>].remark" value="<%=StringUtils.nullToStr(ckdProduct.get("remark")) %>"></td>
+		<td class="a2"><input type="text" id="remark_<%=i %>"  style="width:100%" name="ckdProducts[<%=i %>].remark" value="<%=StringUtils.nullToStr(ckdProduct.get("remark")) %>"></td>
 	</tr>
 <%
 	}

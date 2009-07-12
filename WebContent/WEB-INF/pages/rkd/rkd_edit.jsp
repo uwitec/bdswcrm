@@ -267,12 +267,11 @@ session.removeAttribute("messages");
 <table width="100%"  align="center" id="rktable"  class="chart_list" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td>产品名称</td>
-		<td>产品规格</td>
-		<td>进货价</td>
-		<td>数量</td>
-		<td>强制序列号</td>
-		<td>备注</td>
+		<td width="31%">产品名称</td>
+		<td width="31%">产品规格</td>
+		<td width="8%">数量</td>
+		<td width="15%">强制序列号</td>
+		<td width="15%">备注</td>
 	</tr>
 	</thead>
 <%
@@ -284,17 +283,17 @@ if(rkdProducts != null && rkdProducts.size()>0){
 %>
 	<tr>
 		<td class="a2">
-			<input type="text" id="product_name_<%=i %>" name="rkdProducts[<%=i %>].product_name" readonly value="<%=StringUtils.nullToStr(rkdProduct.get("product_name")) %>">
+			<input type="text" id="product_name_<%=i %>" name="rkdProducts[<%=i %>].product_name" style="width:100%" readonly value="<%=StringUtils.nullToStr(rkdProduct.get("product_name")) %>">
 			<input type="hidden" id="product_id_<%=i %>" name="rkdProducts[<%=i %>].product_id" value="<%=StringUtils.nullToStr(rkdProduct.get("product_id")) %>">
+			<input type="hidden" id="price_<%=i %>"  name="rkdProducts[<%=i %>].price" value="<%=JMath.round(price) %>" readonly>
 		</td>
-		<td class="a2"><input type="text" size="10" id="product_xh_<%=i %>" name="rkdProducts[<%=i %>].product_xh" value="<%=StringUtils.nullToStr(rkdProduct.get("product_xh")) %>" readonly></td>
-		<td class="a2"><input type="text" size="10" id="price_<%=i %>" name="rkdProducts[<%=i %>].price" value="<%=JMath.round(price) %>" readonly></td>
-		<td class="a2"><input type="text" size="5" id="nums_<%=i %>" name="rkdProducts[<%=i %>].nums"  value="<%=StringUtils.nullToStr(rkdProduct.get("nums")) %>" readonly><input type="hidden" id="xj_<%=i %>" name="rkdProducts[<%=i %>].xj" readonly></td>
+		<td class="a2"><input type="text" size="10" id="product_xh_<%=i %>" style="width:100%" name="rkdProducts[<%=i %>].product_xh" value="<%=StringUtils.nullToStr(rkdProduct.get("product_xh")) %>" readonly></td>
+		<td class="a2"><input type="text" size="5" id="nums_<%=i %>" style="width:100%" name="rkdProducts[<%=i %>].nums"  value="<%=StringUtils.nullToStr(rkdProduct.get("nums")) %>" readonly><input type="hidden" id="xj_<%=i %>" name="rkdProducts[<%=i %>].xj" readonly></td>
 		<td class="a2">
-			<input type="text" id="qz_serial_num_<%=i %>" name="rkdProducts[<%=i %>].qz_serial_num"  value="<%=StringUtils.nullToStr(rkdProduct.get("qz_serial_num")) %>" size="15" readonly>
+			<input type="text" id="qz_serial_num_<%=i %>" name="rkdProducts[<%=i %>].qz_serial_num" style="width:85%"  value="<%=StringUtils.nullToStr(rkdProduct.get("qz_serial_num")) %>" readonly>
 			<input type="hidden" id="qz_flag_<%=i %>" name="rkdProducts[<%=i %>].qz_flag"  value="<%=StringUtils.nullToStr(rkdProduct.get("qz_flag")) %>"><a style="cursor:hand" title="左键点击输入输列号" onclick="openSerialWin('<%=i %>');"><b>...</b></a>&nbsp;
 		</td>		
-		<td class="a2"><input type="text" size="10" id="remark_<%=i %>" name="rkdProducts[<%=i %>].remark" value="<%=StringUtils.nullToStr(rkdProduct.get("remark")) %>"></td>
+		<td class="a2"><input type="text" size="10" id="remark_<%=i %>" style="width:100%" name="rkdProducts[<%=i %>].remark" value="<%=StringUtils.nullToStr(rkdProduct.get("remark")) %>"></td>
 	</tr>
 <%
 	}
