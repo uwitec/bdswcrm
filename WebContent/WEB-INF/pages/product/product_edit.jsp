@@ -11,6 +11,8 @@ Product product = (Product)VS.findValue("product");
 String curId = StringUtils.nullToStr(VS.findValue("curId"));
 
 String[] jldw = (String[])VS.findValue("jldw");
+
+List productKindList= (List)VS.findValue("productKindList");
 %>
 
 <html>
@@ -52,7 +54,6 @@ String[] jldw = (String[])VS.findValue("jldw");
 <body>
 <form name="productForm" action="updateProduct.html" method="post">
 <input type="hidden" name="productId" value="<%=StringUtils.nullToStr(product.getProductId()) %>">
-<input type="hidden" name="productKind" value="<%=StringUtils.nullToStr(product.getProductKind()) %>">
 <input type="hidden" name="curId" value="<%=curId %>">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
@@ -138,8 +139,29 @@ String[] jldw = (String[])VS.findValue("jldw");
 	<tr>
 		<td class="a1" width="15%">商品条形码</td>
 		<td class="a2"><input type="text" name="sp_txm" value="<%=StringUtils.nullToStr(product.getSp_txm()) %>" size="25"></td>
-		<td class="a1" width="15%"></td>
-		<td class="a2"></td>		
+		<td class="a1" width="15%">商品类别</td>
+		<td class="a2">
+			<select name="productKind">
+				<option value=""></option>
+		<%
+		if(productKindList != null && productKindList.size() > 0){
+			for(int i=0;i<productKindList.size();i++){
+				Map map = (Map)productKindList.get(i);
+				
+				String id = StringUtils.nullToStr(map.get("id"));
+				String name = StringUtils.nullToStr(map.get("name"));	
+				
+				for(int k=0;k<id.length()-2;k++){
+					name = "　" + name;
+				}
+		%>
+				<option value="<%=id %>" <%if(StringUtils.nullToStr(product.getProductKind()).equals(id)) out.print("selected"); %>><%=name %></option>
+		<%
+			}
+		}
+		%>
+			</select>
+		</td>		
 	</tr>
 	<tr height="50">
 		<td class="a1">产品描述</td>
