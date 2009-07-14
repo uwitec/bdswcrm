@@ -29,7 +29,7 @@ public class RkdAction extends BaseAction {
 	private String[] positions;
 	
 	private Page rkdPage;
-	private Page ywyEmployeePage;//ÐÞ¸Ä
+	private Page ywyEmployeePage;
 	private List storeList = new ArrayList();
 	private List userList = new ArrayList();
 	

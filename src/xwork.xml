@@ -1835,6 +1835,51 @@
         <action name="delLxr" class="lxrAction" method="del">
              <result name="success">listLxr.html</result>
         </action>
-        <!-- 联系人 -->                                                                                                       
+        <!-- 联系人 -->
+        
+        <!-- 报修单 -->
+        <action name="listBxd" class="bxdAction" method="list">
+             <result name="success">/WEB-INF/pages/bxd/bxd_list.jsp</result>
+        </action>
+        <action name="addBxd" class="bxdAction" method="add">
+             <result name="success">/WEB-INF/pages/bxd/bxd_add.jsp</result>
+        </action>
+        <action name="selGcs" class="bxdAction" method="selGcs">
+             <result name="success" >/WEB-INF/pages/bxd/selGcs.jsp</result>
+        </action>
+        <action name="selBxProcCkd" class="bxdAction" method="selKcProc">
+             <result name="success">/WEB-INF/pages/bxd/selectKcProc.jsp</result>
+        </action>
+        <action name="saveBxd" class="bxdAction" method="save">
+             <result name="success">/WEB-INF/pages/msg.jsp</result>
+             <result name="input">/WEB-INF/pages/bxd/bxd_add.jsp</result>
+              <result name="cancel" type="redirect">addBxd.html</result>
+        </action>
+        <action name="editBxd" class="bxdAction" method="edit">
+             <result name="success">/WEB-INF/pages/bxd/bxd_edit.jsp</result>
+        </action>
+         <action name="updateBxd" class="bxdAction" method="update">
+             <result name="success">/WEB-INF/pages/msg.jsp</result>
+             <result name="input">/WEB-INF/pages/bxd/bxd_edit.jsp</result>
+             <result name="cancel" type="redirect">editBxd.html</result>
+        </action>
+        <action name="viewBxd" class="bxdAction" method="edit">
+             <result name="success">/WEB-INF/pages/bxd/bxd_view.jsp</result>
+        </action>
+        <action name="delBxd" class="bxdAction" method="del">
+             <result name="success">listBxd.html</result>
+        </action>
+         <!-- 报修单 -->
+         
+         <!--货品报修汇总 -->
+         <action name="showHpbxHzCondition" class="bxhzAction" method="showCondition">
+             <result name="success">/WEB-INF/pages/report/bxhz/condition_hp.jsp </result>
+         </action>
+          <action name="getHpbxHzCondition" class="bxhzAction" method="getResult">
+            <result name="success">/WEB-INF/pages/report/bxhz/result_hp.jsp</result>
+        </action>
+         
+         <!--货品报修汇总 -->
+                                                                                                               
     </package>
 </xwork>

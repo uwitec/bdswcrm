@@ -23,12 +23,13 @@ public class LsdDAO extends JdbcBaseDAO {
 	 * @param rowsPerPage
 	 * @return
 	 */
-	public Page getLsdList(String con,int curPage, int rowsPerPage){
+	public Page getLsdList(String con,int curPage, int rowsPerPage)
+	{
 		String sql = "select a.id,a.client_name,a.lsdje,a.creatdate,a.state,b.real_name as xsry,a.czr,a.lxr,a.lxdh,a.sp_state from lsd a left join sys_user b on b.user_id=a.xsry where 1=1";
-		if(!con.equals("")){
+		if(!con.equals(""))
+		{
 			sql = sql + con;
-		}
-			
+		}	
 		return this.getResultByPage(sql, curPage, rowsPerPage);
 	}
 	
@@ -176,6 +177,18 @@ public class LsdDAO extends JdbcBaseDAO {
 		String sql = "select * from lsd where id='" + id + "'";
 		
 		return this.queryForObject(sql, new LsdRowMapper());
+	}
+	
+	/**
+	 * 根据零售单ID和零售单销售货品的序列号查询销售货品记录以及购买人的记录
+	 * @param id
+	 * @param num
+	 * @return
+	 */
+	public Object getLsdByIdBySerailNum(String id,String num)
+	{
+		String sql="select l.client_name,l.lxr,l.lxdh,l.mobile,l.mail,l.address,p.product_id,p.product_xh,product_name,p.qz_serial_num from lsd l left join lsd_product p on l.id=p.lsd_id where l.id='"+id+"'and p.qz_serial_num like '%"+num+"%'";
+		return this.getResultMap(sql);
 	}
 	
 	

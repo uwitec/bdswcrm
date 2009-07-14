@@ -141,6 +141,18 @@ public class SerialNumDAO extends JdbcBaseDAO {
 		
 		this.getJdbcTemplate().update(sql,params);		
 	}
+	/**
+	 * 根据序列号查询购买记录
+	 * @param num
+	 * @return
+	 */
+	public Object getXsRecord(String num)
+	{
+		String sql="select seq_id,serial_num,ywtype,yw_dj_id from serial_num_flow where seq_id=(select max(seq_id) from serial_num_flow where serial_num='"+num+"' group by serial_num)";
+		return this.getResultMap(sql);
+	}
+	
+	
 	
 	
 	/**

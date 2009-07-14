@@ -27,6 +27,17 @@ public class DeptDAO extends JdbcBaseDAO {
 		return this.getJdbcTemplate().queryForList(sql);
 	}
 	
+	/**
+	 * 根据部门名称获取部门ID
+	 * @param name
+	 * @return
+	 */
+	public List getDeptsByName(String name)
+	{
+		String sql="select *from dept where dept_name='"+name+"'";
+		return this.getJdbcTemplate().queryForList(sql);
+	}
+	
 	
 	/**
 	 * 编辑部门信息

@@ -602,6 +602,14 @@ public class XsdDAO extends JdbcBaseDAO {
 		
 		return roles;
 	}
+	/**
+	 *  根据销售单ID和销售单销售货品的序列号查询销售货品记录以及购买人的记录
+	 */
+	public Object getXsdByIdBySerailNum(String id,String num)
+	{
+		String sql="select x.client_name,x.kh_lxr,x.kh_address,x.kh_lxdh,p.product_id,p.product_xh,p.product_name,p.qz_serial_num from xsd x left join xsd_product p on x.id=p.xsd_id where x.id='"+id+"' and p.qz_serial_num like '%"+num+"%'";
+		return this.getResultMap(sql);
+	}
 	
 	
 	/**

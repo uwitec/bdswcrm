@@ -22,7 +22,7 @@ public class InitParamDAO extends JdbcBaseDAO {
 	 *
 	 */
 	public void updateParam(){
-		String sql = "update cms_all_seq set jhdid=1,cgyfkid=1,rkdid=1,kcpdid=1,ckdid=1,xsdid=1,yskid=1,lsdid=1," +
+		String sql = "update cms_all_seq set bxdid=1, jhdid=1,cgyfkid=1,rkdid=1,kcpdid=1,ckdid=1,xsdid=1,yskid=1,lsdid=1," +
 				"pzid=1,thdid=1,dbsqid=1,kfdbid=1,cgthdid=1,lsyskid=1,chtjid=1,qtsrid=1,qtzcid=1,nbzzid=1,lsthdid=1,yushoutoyingshouid=1,yufutoyingfuid=1,fysqid=1,txfkid=1,txfkdescid=1";
 		this.getJdbcTemplate().update(sql);
 		log.info("初始化业务参数成功！");

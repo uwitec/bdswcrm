@@ -156,9 +156,14 @@ public class CkdAction extends BaseAction {
 		
 		//只有在系统正式启用后才去判断库存是否满足需求
 		if(iscs_flag.equals("1")){
-			if(ckd.getState().equals("已出库")){
+			
+			if(ckd.getState().equals("已出库"))
+			{
+				 
 				msg = ckdService.checkKc(ckd, ckdProducts);
-				if(!msg.equals("")){
+				if(!msg.equals(""))
+				{
+					
 					ckd.setState("待出库");
 					ckdService.saveCkd(ckd,ckdProducts);
 					return "input";
@@ -272,6 +277,7 @@ public class CkdAction extends BaseAction {
 				 
 				msg = ckdService.checkKc(ckd, ckdProducts);
 				if(!msg.equals("")){
+					 
 					ckd.setState("待出库");
 					ckdService.updateCkd(ckd, ckdProducts);
 					

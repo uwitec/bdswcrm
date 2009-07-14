@@ -18,6 +18,16 @@ public class DeptService {
 	}
 	
 	/**
+	 * 根据部门名称获取部门ID
+	 * @param name
+	 * @return
+	 */
+	public List getDeptsByName(String name)
+	{
+		return deptDao.getDeptsByName(name);
+	}
+	
+	/**
 	 * 编辑部门信息
 	 * @param dept_id
 	 * @return

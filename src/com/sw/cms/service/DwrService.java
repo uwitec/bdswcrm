@@ -7,33 +7,53 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.sw.cms.dao.BxdDAO;
+import com.sw.cms.dao.CkdDAO;
 import com.sw.cms.dao.ClientsDAO;
+import com.sw.cms.dao.LsdDAO;
 import com.sw.cms.dao.ProductDAO;
 import com.sw.cms.dao.ProductKcDAO;
 import com.sw.cms.dao.SerialNumDAO;
 import com.sw.cms.dao.StoreDAO;
 import com.sw.cms.dao.SysInitSetDAO;
 import com.sw.cms.dao.UserDAO;
+import com.sw.cms.dao.XsdDAO;
 import com.sw.cms.model.Product;
 import com.sw.cms.model.SysInitSet;
+import com.sw.cms.model.Xsd;
 import com.sw.cms.util.DateComFunc;
+import com.sw.cms.util.StaticParamDo;
 import com.sw.cms.util.StringUtils;
 
 public class DwrService {
 
 	private ProductDAO productDao;
-
 	private ProductKcDAO productKcDao;
-
 	private SysInitSetDAO sysInitSetDao;
-
 	private StoreDAO storeDao;
-
 	private SerialNumDAO serialNumDao;
-
 	private UserDAO userDao;
-
 	private ClientsDAO clientsDao;
+	private BxdDAO   bxdDao;
+	private LsdDAO lsdDao;
+	private XsdDAO xsdDao;
+	private CkdDAO ckdDao;
+
+	public LsdDAO getLsdDao() {
+		return lsdDao;
+	}
+
+	public void setLsdDao(LsdDAO lsdDao) {
+		this.lsdDao = lsdDao;
+	}
+
+	public XsdDAO getXsdDao() {
+		return xsdDao;
+	}
+
+	public void setXsdDao(XsdDAO xsdDao) {
+		this.xsdDao = xsdDao;
+	}
 
 	/**
 	 * 根据序列号查询产品对象
@@ -229,6 +249,211 @@ public class DwrService {
 	{
 		return  clientsDao.getClientByClientName(clients_name);
 	}
+	
+	/**
+	 * 查询维修记录或购买记录
+	 * @return
+	 */
+	public String getBxdRecordorBuyRecord(String num)
+	{
+		
+		String str="";
+		String []xx=new String[15];
+		Map map=(Map)bxdDao.getBxdRecord(num);	
+		String flog="";
+		//如果所输入的序列号在维修记录里提取最近一次维修记录
+		
+		if(null!=map)
+		{
+			flog="1";
+			xx[0]=StringUtils.nullToStr(map.get("product_name"));
+			xx[1]=StringUtils.nullToStr(map.get("product_xh"));
+			xx[2]=StringUtils.nullToStr(map.get("product_gg"));
+			xx[3]=StringUtils.nullToStr(map.get("product_serial_num"));
+			xx[4]=StringUtils.nullToStr(map.get("product_remark"));
+			xx[5]=StringUtils.nullToStr(map.get("gzfx"));
+			xx[6]=StringUtils.nullToStr(map.get("pcgc"));
+			xx[7]=StringUtils.nullToStr(map.get("client_name"));
+			xx[8]=StringUtils.nullToStr(map.get("lxr"));
+			xx[9]=StringUtils.nullToStr(map.get("lxdh"));
+			xx[10]=StringUtils.nullToStr(map.get("email"));
+			xx[11]=StringUtils.nullToStr(map.get("address"));
+			xx[12]=StringUtils.nullToStr(map.get("remark"));
+			if(null!=StaticParamDo.getClientNameById((String)map.get("client_name")))
+			{
+				xx[13]=StaticParamDo.getClientNameById((String)map.get("client_name"));
+			}
+			else
+			{
+				xx[13]="";
+			}
+			xx[14]=StringUtils.nullToStr(map.get("product_id"));
+			 
+		}
+		else 
+		{
+			 
+			//查询销售记录里有没有该销售序列号
+			Map xsmap=(Map)serialNumDao.getXsRecord(num);
+			//如果输入的序列号在购买记录里
+			if(null!=xsmap)
+			{
+				
+				xx=new String[9];
+				String type=(String)xsmap.get("ywtype");
+				//如果记录的类型是“零售单”
+				if(type.equals("零售"))
+				{		
+					flog="2"; 
+					Map lsmap=(Map)lsdDao.getLsdByIdBySerailNum((String)xsmap.get("yw_dj_id"),(String)xsmap.get("serial_num"));
+					 
+					  
+					 
+					  xx[0]=StringUtils.nullToStr(lsmap.get("product_id"));
+					  xx[1]=StringUtils.nullToStr(lsmap.get("product_name"));
+					  xx[2]=StringUtils.nullToStr(lsmap.get("product_xh"));
+					  String shuzu[]=((String)lsmap.get("qz_serial_num")).split(",");
+					  int s=0;
+					  for(int i=0;i<shuzu.length;i++)
+					  {
+						  if(shuzu[i].equals((String)xsmap.get("serial_num")))
+						  {
+							  s=s+1;
+							  xx[3]=StringUtils.nullToStr(shuzu[i]);
+							  break;
+						  }
+					  }
+					  if(s==0)
+					  {
+						  xx[3]="";
+					  } 
+					  xx[4]=StringUtils.nullToStr(lsmap.get("client_name"));
+					  xx[5]=StringUtils.nullToStr(lsmap.get("lxdh"));
+					  xx[6]=StringUtils.nullToStr(lsmap.get("mail"));
+					  xx[7]=StringUtils.nullToStr(lsmap.get("address"));
+					  xx[8]="";
+					
+					 
+				}
+                //如果记录的类型是“销售单”
+				else if(type.equals("销售"))
+				{
+					
+					//查询”销售单“里的销售产品有没有序列号
+					Map xsdmap=(Map)xsdDao.getXsdByIdBySerailNum((String)xsmap.get("yw_dj_id"), (String)xsmap.get("serial_num"));
+					//如果“销售单”里的销售产品中没有记录该序列号
+					if(null!=xsdmap)
+					{
+						flog="4"; 
+						  xx[0]=StringUtils.nullToStr(xsdmap.get("product_id"));
+						  xx[1]=StringUtils.nullToStr(xsdmap.get("product_name"));
+						  xx[2]=StringUtils.nullToStr(xsdmap.get("product_xh"));
+						  String shuzu[]=((String)xsdmap.get("qz_serial_num")).split(",");
+						  int s=0;
+						  for(int i=0;i<shuzu.length;i++)
+						  {
+							  if(shuzu[i].equals((String)xsmap.get("serial_num")))
+							  {
+								  s=s+1;
+								  xx[3]=StringUtils.nullToStr(shuzu[i]);
+								  break;
+							  }
+						  }
+						  if(s==0)
+						  {
+							  xx[3]="";
+						  }
+						  xx[4]=StringUtils.nullToStr(xsdmap.get("client_name"));
+						  xx[5]=StringUtils.nullToStr(xsdmap.get("kh_lxr"));
+						  xx[6]=StringUtils.nullToStr(xsdmap.get("kh_address"));
+						  xx[7]=StringUtils.nullToStr(xsdmap.get("kh_lxdh"));
+						  xx[8]=StringUtils.nullToStr(StaticParamDo.getClientNameById((String)xsdmap.get("client_name")));
+						  
+						 
+						
+					}
+					//在“出库单”里的销售产品查询该序列号
+					else
+					{
+						
+						  Map maps=(Map)ckdDao.getCkdByXsdId((String)xsmap.get("yw_dj_id"));
+						 
+					      Map ckdmap=(Map)ckdDao.getCkdByIdBySerailNum((String)maps.get("ckd_id"), (String)xsmap.get("serial_num"));
+					     if(null!=ckdmap)
+					     {
+						 				 
+					    	 flog="4"; 
+						       xx[0]=StringUtils.nullToStr(ckdmap.get("product_id"));
+						       xx[1]=StringUtils.nullToStr(ckdmap.get("product_name"));
+						       xx[2]=StringUtils.nullToStr(ckdmap.get("product_xh"));
+						       String shuzu[]=((String)ckdmap.get("qz_serial_num")).split(",");
+						       int s=0;
+						       for(int i=0;i<shuzu.length;i++)
+						       {
+							     if(shuzu[i].equals((String)xsmap.get("serial_num")))
+							     {
+								  s=s+1;
+								  xx[3]=StringUtils.nullToStr(shuzu[i]);
+								  break;
+							     }
+						       }
+						       if(s==0)
+						       {
+						       xx[3]="";
+						       }
+						       Xsd xsdClientXx=(Xsd)xsdDao.getXsd((String)xsmap.get("yw_dj_id"));
+						       if(null!=xsdClientXx)
+						       {
+							      xx[4]=StringUtils.nullToStr(xsdClientXx.getClient_name());
+							      xx[5]=StringUtils.nullToStr(xsdClientXx.getKh_lxr());
+							      xx[6]=StringUtils.nullToStr(xsdClientXx.getKh_address());
+							      xx[7]=StringUtils.nullToStr(xsdClientXx.getKh_lxdh());
+							      xx[8]=StringUtils.nullToStr(StaticParamDo.getClientNameById(xsdClientXx.getClient_name()));
+						       }
+						       else
+						       {
+						    	   xx[4]= "";
+								   xx[5]= "";
+								   xx[6]= "";
+								   xx[7]= "";
+								   xx[8]= "";
+						       }
+						  
+					     }
+					     else
+					     {
+					    	 flog="3";
+							 str="";
+					     }
+					}
+					 
+				}
+				//如果销售类型是其他类型
+				else
+				{
+					flog="3";
+					str="";
+				}
+				
+			}
+			//如果输入的序列号不存在销售记录里
+			else
+			{
+				flog="3";
+				str="";
+			}
+		  
+		}
+		for(int i=0;i<xx.length;i++)
+		{
+			 
+			str+=xx[i]+"$";
+		}
+		 
+		return flog+"$"+str;
+		
+	}
+
 
 	
 	
@@ -287,6 +512,22 @@ public class DwrService {
 
 	public void setUserDao(UserDAO userDao) {
 		this.userDao = userDao;
+	}
+
+	public BxdDAO getBxdDao() {
+		return bxdDao;
+	}
+
+	public void setBxdDao(BxdDAO bxdDao) {
+		this.bxdDao = bxdDao;
+	}
+
+	public CkdDAO getCkdDao() {
+		return ckdDao;
+	}
+
+	public void setCkdDao(CkdDAO ckdDao) {
+		this.ckdDao = ckdDao;
 	}
 
 }

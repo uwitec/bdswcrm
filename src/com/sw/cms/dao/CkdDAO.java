@@ -131,6 +131,30 @@ public class CkdDAO extends JdbcBaseDAO {
 		return this.queryForObject(sql, new CkdRowMapper());
 	}
 	
+	/**
+	 * 根据销售订单ID获取出库单ID
+	 * @param xsdid
+	 * @return
+	 */
+	public Object getCkdByXsdId(String xsdid)
+	{
+		String sql="select ckd_id from ckd where xsd_id='"+xsdid+"'";
+		List list=this.getResultList(sql);
+		return list.get(0);
+	}
+	/**
+	 * 根据出库单ID和出库单销售货品的序列号查询销售货品记录以及购买人的记录
+	 * @param id
+	 * @param num
+	 * @return
+	 */
+	public Object getCkdByIdBySerailNum(String id,String num)
+	{
+		String sql="select c.client_name,p.product_id,p.product_xh,p.product_name,p.qz_serial_num from ckd c left join ckd_product p on c.ckd_id=p.ckd_id where c.ckd_id='"+id+"' and p.qz_serial_num like '%"+num+"%'";
+		
+		return this.getResultMap(sql);
+	}
+	
 	
 	/**
 	 * 删除出库单信息
