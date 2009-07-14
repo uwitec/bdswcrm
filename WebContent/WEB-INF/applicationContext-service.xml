@@ -526,6 +526,20 @@
           <bean class="com.sw.cms.service.LxrService" autowire="byName"/>
        </property>
     </bean>
+    
+    <!-- 报修单 -->
+    <bean id="bxdService" parent="baseTransaction">
+        <property name="target">
+          <bean class="com.sw.cms.service.BxdService" autowire="byName"/>  
+        </property>
+    </bean>
+    
+    <!-- 报修汇总 -->
+    <bean id="bxhzService" parent="baseTransaction">
+        <property name="target">
+          <bean class="com.sw.cms.service.BxhzService" autowire="byName"/>  
+        </property>
+    </bean>
                
 </beans>
 

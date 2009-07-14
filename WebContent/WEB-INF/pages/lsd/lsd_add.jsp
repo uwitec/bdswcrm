@@ -7,6 +7,7 @@
 OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
 
 List storeList = (List)VS.findValue("storeList");
+
 List posTypeList = (List)VS.findValue("posTypeList");
 String[] ysfsArry = (String[])VS.findValue("ysfs");
 

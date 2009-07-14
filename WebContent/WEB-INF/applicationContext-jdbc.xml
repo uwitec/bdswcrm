@@ -408,6 +408,14 @@
      <bean id="clientsFollowDao" class="com.sw.cms.dao.ClientsFollowDAO">
         <property name="jdbcTemplate" ref="jdbcTemplate"/>
      </bean>        	 
+       
+     <!-- 报修单 -->        
+     <bean id="bxdDao" class="com.sw.cms.dao.BxdDAO" autowire="byName"/>
+     
+     <!-- 报修汇总 -->
+     <bean id="bxhzDao" class="com.sw.cms.dao.BxhzDAO">
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+     </bean>
                                
 </beans>
 

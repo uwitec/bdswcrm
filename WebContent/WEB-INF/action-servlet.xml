@@ -138,4 +138,8 @@
 	
 	<bean id="lxrAction" class="com.sw.cms.action.LxrAction" scope="prototype" autowire="byName"/>
 	
+	<bean id="bxdAction" class="com.sw.cms.action.BxdAction" scope="prototype" autowire="byName"/> 
+	
+	<bean id="bxhzAction" class="com.sw.cms.action.BxhzAction" scope="prototype" autowire="byName"/>
+	
 </beans>
