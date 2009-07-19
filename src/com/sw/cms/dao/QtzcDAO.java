@@ -129,6 +129,27 @@ public class QtzcDAO extends JdbcBaseDAO {
 		return "ZC" + day + "-" + curId;
 	}
 	
+	
+	/**
+	 * 判断费用是否已经支出
+	 * @param id
+	 * @return
+	 */
+	public boolean isFinishZc(String id){
+		boolean is = false;
+		
+		String sql = "select count(*) from qtzc where id='" + id + "' and state='已提交'";
+		
+		int count = this.getJdbcTemplate().queryForInt(sql);
+		
+		if(count > 0){
+			is = true;
+		}
+		
+		return is;
+	}
+	
+	
 	/**
 	 * 包装对象(其它支出)
 	 * 

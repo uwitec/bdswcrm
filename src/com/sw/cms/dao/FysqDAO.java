@@ -144,6 +144,26 @@ public class FysqDAO extends JdbcBaseDAO {
 	
 	
 	/**
+	 * 费用申请是否审批完成
+	 * @param id
+	 * @return
+	 */
+	public boolean isFinishSp(String id){
+		boolean is = false;
+		
+		String sql = "select count(*) from fysq where id='" + id + "' and (state='审批通过' or state='审批不通过' or state='已支付')";
+		
+		int count = this.getJdbcTemplate().queryForInt(sql);
+		
+		if(count > 0){
+			is = true;
+		}
+		
+		return is;
+	}
+	
+	
+	/**
 	 * 包装对象(费用申请)
 	 * 
 	 * @author liyt

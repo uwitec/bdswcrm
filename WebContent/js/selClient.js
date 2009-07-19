@@ -4,7 +4,7 @@
 //clientTipMove 上下事件
 //clientTipDown 鼠标按下事件
 //setClientValue 鼠标离开事件
-//显示框的ID为 client_name
+//显示框的ID为 client_name onblur="setClientValue()"
 //隐藏框的ID为 client_id
 
 var tips = "";
@@ -25,7 +25,7 @@ function searchClients(){
 var clientlists = new Array();
 
 function showClientsTip(originalRequest){   
-	if(originalRequest.responseText.trims() == ""){
+	if(originalRequest.responseText.trim() == ""){
 		var bt = $("clientsTip");
 		bt.innerHTML = "";
 		Element.hide('clientsTip');	
@@ -42,9 +42,9 @@ function showClientsTip(originalRequest){
 		   }
 		   var curBrand = brandList[i].split("$");
 		   
-		   clientlists[curBrand[1].trims()] = curBrand[0].trims();
+		   clientlists[curBrand[1].trim()] = curBrand[0].trim();
 		   
-		   s += "<div onmouseover=\"this.className='selectTip';style.cursor='default'\"  onmouseout=\"this.className=null; style.cursor='default'\">" + curBrand[1].trims() + "</div>";
+		   s += "<div onmouseover=\"this.className='selectTip';style.cursor='default'\"  onmouseout=\"this.className=null; style.cursor='default'\">" + curBrand[1].trim() + "</div>";
 		   flog++;
 		}
 		bt.innerHTML=s;
@@ -138,7 +138,7 @@ function setClientValue(){
 	if(document.getElementById("client_name").value!=""){
 	    var brand =document.getElementById("client_name").value;
 	    
-	    brand=brand.trims();
+	    brand=brand.trim();
 	    if(brand in clientlists){
 			document.getElementById("client_id").value=clientlists[brand];
 			
@@ -155,10 +155,6 @@ function setClientValue(){
 	}
 	
 	Element.hide('clientsTip');
-}
-
-String.prototype.trims = function(){
-   return this.replace(/(^\s+)|\s+$/g,"");
 }
 
 function initClientTip(){

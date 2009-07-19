@@ -115,6 +115,15 @@ public class QtzcAction extends BaseAction {
 	 * @return
 	 */
 	public String update(){
+		
+		//判断支出费用是否已经提交
+		if(qtzcService.isFinishZc(qtzc.getId())){
+			this.saveMessage("费用已支出，不能重复支出，请检查！");
+			zclx = sjzdService.getSjzdXmxxByZdId("SJZD_ZCLX");
+			fkfs = sjzdService.getSjzdXmxxByZdId("SJZD_FKFS");   //付款方式
+			return "input";
+		}
+		
 		LoginInfo info = (LoginInfo)getSession().getAttribute("LOGINUSER");
 		String user_id = info.getUser_id();
 		qtzc.setCzr(user_id);

@@ -141,6 +141,16 @@ public class FysqService {
 		return fysqDao.getFysqID();
 	}
 	
+	
+	/**
+	 * 费用申请是否审批完成
+	 * @param id
+	 * @return
+	 */
+	public boolean isFinishSp(String id){
+		return fysqDao.isFinishSp(id);
+	}
+	
 
 	public FysqDAO getFysqDao() {
 		return fysqDao;

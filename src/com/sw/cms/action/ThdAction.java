@@ -74,9 +74,7 @@ public class ThdAction extends BaseAction {
 	 */
 	public String add() {
 		thd_id = thdService.updateThdId();
-		userList = userService.getAllEmployeeList();
 		storeList = storeService.getAllStoreList();
-		clientsList=clientsService.getClientList("");
 		return "success";
 	}
 
@@ -102,9 +100,7 @@ public class ThdAction extends BaseAction {
 	public String edit() {
 		thd = (Thd) thdService.getThd(thd_id);
 		thdProducts = thdService.getThdProducts(thd_id);
-		userList = userService.getAllEmployeeList();
 		storeList = storeService.getAllStoreList();
-		clientsList=clientsService.getClientList("");
 		return "success";
 	}
 	

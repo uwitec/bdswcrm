@@ -35,47 +35,7 @@ function saveInfo(){
 			document.getElementById("zq").focus();
 			return;
 		}		
-	}
-	
-	//判断是否存在强制输入序列号的产品没有输入序列号
-	if(document.getElementById("state").value == "已出库"){
-		
-		if(document.getElementById("store_id").value == ""){
-			alert("请选择出货库房！");
-			return;
-		}
-
-		//强制序列号校验
-		for(var i=0;i<=allCount;i++){
-			var qzflag = document.getElementById("qz_flag_" + i);            //标志是否强制输入
-			var qzserialnum = document.getElementById("qz_serial_num_" + i); //序列号
-			var pn = document.getElementById("product_name_" + i);           //产品名称
-			
-			if(qzflag != null){
-				if(qzflag.value == "是"){
-					if(qzserialnum.value == ""){
-						//如果没有输入序列号提示用户输入序列号
-						alert("产品" + pn.value + "强制序列号，请先输入序列号！");
-						qzserialnum.focus();
-						return;
-					}else{
-						//校验输入数量与产品数是否相同
-						var serial = document.getElementById("qz_serial_num_" + i).value;
-						var arrySerial = serial.split(",");
-						
-						var nms = document.getElementById("nums_" + i).value;
-						
-						if(parseInt(nms) != arrySerial.length){
-							alert("产品" + pn.value + "输入序列号数量与产品数量不符，请检查！");
-							qzserialnum.focus();
-							return;
-						}
-					
-					}
-				}
-			}
-		}
-	}		
+	}	
 				
 	hj();
 
@@ -128,47 +88,7 @@ function submitInfo(){
 			return;
 		}		
 	}
-	
-	//判断是否存在强制输入序列号的产品没有输入序列号
-	if(document.getElementById("state").value == "已出库"){
 		
-		if(document.getElementById("store_id").value == ""){
-			alert("请选择出货库房！");
-			return;
-		}
-
-		//强制序列号校验
-		for(var i=0;i<=allCount;i++){
-			var qzflag = document.getElementById("qz_flag_" + i);            //标志是否强制输入
-			var qzserialnum = document.getElementById("qz_serial_num_" + i); //序列号
-			var pn = document.getElementById("product_name_" + i);           //产品名称
-			
-			if(qzflag != null){
-				if(qzflag.value == "是"){
-					if(qzserialnum.value == ""){
-						//如果没有输入序列号提示用户输入序列号
-						alert("产品" + pn.value + "强制序列号，请先输入序列号！");
-						qzserialnum.focus();
-						return;
-					}else{
-						//校验输入数量与产品数是否相同
-						var serial = document.getElementById("qz_serial_num_" + i).value;
-						var arrySerial = serial.split(",");
-						
-						var nms = document.getElementById("nums_" + i).value;
-						
-						if(parseInt(nms) != arrySerial.length){
-							alert("产品" + pn.value + "输入序列号数量与产品数量不符，请检查！");
-							qzserialnum.focus();
-							return;
-						}
-					
-					}
-				}
-			}
-		}
-	}		
-				
 	hj();
 	
 		if(document.getElementById("skfs").value == "刷卡"){
@@ -178,66 +98,57 @@ function submitInfo(){
 		}
 	}
 			
-		document.xsdForm.action = "submitXsd.html";
+	document.xsdForm.action = "submitXsd.html";
 	document.xsdForm.btnTjsp.disabled = true;
 	
 	document.xsdForm.submit();	
 }
 
-function $(id) {return document.getElementById(id);}
-function $F(name){return document.getElementsByTagName(name);}
-     	
-   function addTr(){
-       var otr = document.getElementById("xsdtable").insertRow(-1);
-       
-       var curId = allCount + 1;   //curId一直加下去，防止重复
-       allCount = allCount + 1;
-       
-       
-       var otd9=document.createElement("td");
-       otd9.className = "a2";
-       otd9.innerHTML = '<td class="a2"><input type="checkbox" name="proc_id" id="proc_id" value="' + curId + '"></td>';
-       
-       var otd0=document.createElement("td");
-       otd0.className = "a2";
-       otd0.innerHTML = '<input type="text" id="product_name_'+curId+'" name="xsdProducts['+curId+'].product_name" readonly><input type="hidden" id="product_id_'+curId+'" name="xsdProducts['+curId+'].product_id">';
-       
-       var otd1 = document.createElement("td");
-       otd1.className = "a2";
-       otd1.innerHTML = '<input type="text" id="product_xh_'+curId+'"  name="xsdProducts['+curId+'].product_xh" size="10" readonly>';
-      
-       var otd3 = document.createElement("td");
-       otd3.className = "a2";
-       otd3.innerHTML = '<input type="text" id="price_'+curId+'" name="xsdProducts['+curId+'].price" value="0.00" size="10" onblur="hj();"><input type="hidden" id="cbj_'+curId+'" name="xsdProducts['+curId+'].cbj" value="0.00"><input type="hidden" id="kh_cbj_'+curId+'" name="xsdProducts['+curId+'].kh_cbj" value="0.00"><input type="hidden" id="jgtz_'+curId+'" name="xsdProducts['+curId+'].jgtz" value="0.00" size="10" onblur="hj();">';
-
-       
-       var otd5 = document.createElement("td");
-       otd5.className = "a2";
-       otd5.innerHTML = '<input type="text" id="nums_'+curId+'" name="xsdProducts['+curId+'].nums" value="0" size="5" onblur="hj();">';
-       
-       var otd8 = document.createElement("td");
-       otd8.className = "a2";
-       otd8.innerHTML = '<input type="text" id="xj_'+curId+'" name="xsdProducts['+curId+'].xj" value="0.00" size="10" readonly>';        
-       
-       var otd11 = document.createElement("td");
-       otd11.className = "a2";
-       otd11.innerHTML = '<input type="text" id="qz_serial_num_'+curId+'" name="xsdProducts['+curId+'].qz_serial_num" size="15" readonly><input type="hidden" id="qz_flag_'+curId+'" name="xsdProducts['+curId+'].qz_flag"><a style="cursor:hand" title="点击输入序列号" onclick="openSerialWin('+ curId +');"><b>...</b></a>&nbsp;';   
-       
-       
-       var otd6 = document.createElement("td");
-       otd6.className = "a2";
-       otd6.innerHTML = '<input type="text" id="remark_'+curId+'" name="xsdProducts['+curId+'].remark">';                       
+function addTr(){
+	var otr = document.getElementById("xsdtable").insertRow(-1);
+	
+	var curId = allCount + 1;   //curId一直加下去，防止重复
+	allCount = allCount + 1;
+	
+	
+	var otd9=document.createElement("td");
+	otd9.className = "a2";
+	otd9.innerHTML = '<td class="a2"><input type="checkbox" name="proc_id" id="proc_id" value="' + curId + '"></td>';
+	
+	var otd0=document.createElement("td");
+	otd0.className = "a2";
+	otd0.innerHTML = '<input type="text" id="product_name_'+curId+'"  style="width:100%" name="xsdProducts['+curId+'].product_name" readonly><input type="hidden" id="product_id_'+curId+'" name="xsdProducts['+curId+'].product_id">';
+	
+	var otd1 = document.createElement("td");
+	otd1.className = "a2";
+	otd1.innerHTML = '<input type="text" id="product_xh_'+curId+'"  style="width:100%"  name="xsdProducts['+curId+'].product_xh" size="10" readonly>';
+	
+	var otd3 = document.createElement("td");
+	otd3.className = "a2";
+	otd3.innerHTML = '<input type="text" id="price_'+curId+'" name="xsdProducts['+curId+'].price" value="0.00" size="10" onblur="hj();"><input type="hidden" id="cbj_'+curId+'" name="xsdProducts['+curId+'].cbj" value="0.00"><input type="hidden" id="kh_cbj_'+curId+'" name="xsdProducts['+curId+'].kh_cbj" value="0.00"><input type="hidden" id="jgtz_'+curId+'" name="xsdProducts['+curId+'].jgtz" value="0.00" size="10" onblur="hj();">';
+	
+	
+	var otd5 = document.createElement("td");
+	otd5.className = "a2";
+	otd5.innerHTML = '<input type="text" id="nums_'+curId+'" name="xsdProducts['+curId+'].nums" value="0" size="5" onblur="hj();">';
+	
+	var otd8 = document.createElement("td");
+	otd8.className = "a2";
+	otd8.innerHTML = '<input type="text" id="xj_'+curId+'" name="xsdProducts['+curId+'].xj" value="0.00" size="10" readonly><input type="hidden" id="qz_serial_num_'+curId+'" name="xsdProducts['+curId+'].qz_serial_num" size="15" readonly>';        
+	
+	var otd6 = document.createElement("td");
+	otd6.className = "a2";
+	otd6.innerHTML = '<input type="text" id="remark_'+curId+'" name="xsdProducts['+curId+'].remark">';                       
 
 	otr.appendChild(otd9); 
-       otr.appendChild(otd0); 
-       otr.appendChild(otd1); 
-       otr.appendChild(otd3);
-       otr.appendChild(otd5);
-       otr.appendChild(otd8); 
-       otr.appendChild(otd11); 
-       otr.appendChild(otd6);  
-                
-   }	
+	otr.appendChild(otd0); 
+	otr.appendChild(otd1); 
+	otr.appendChild(otd3);
+	otr.appendChild(otd5);
+	otr.appendChild(otd8); 
+	otr.appendChild(otd6);  
+               
+}	
    
 
 function openSerialWin(vl){
@@ -313,7 +224,7 @@ function chgState(vl){
 }
 
 function hj(){
-	var length = ($('xsdtable').rows.length-2);
+	var length = (document.getElementById('xsdtable').rows.length-2);
 	
 	var hjz = 0;
 	var cbjhj = 0;
@@ -395,16 +306,18 @@ function delDesc(){
 }
 
 function changeSklx(vl){
-	if(vl == "现结"){
-		document.getElementById("lb_xjd").style.display = "";
-		document.getElementById("tr_skxx").style.display = "";
-		document.getElementById("xjd").style.display = "";
-		document.getElementById("xjd").value = "0.00";
+	//if(vl == "现结"){
+	//	document.getElementById("lb_xjd").style.display = "";
+	//	document.getElementById("tr_skxx").style.display = "";
+	//	document.getElementById("xjd").style.display = "";
+	//	document.getElementById("xjd").value = "0.00";
 		
-		document.getElementById("lb_zq").style.display = "none";
-		document.getElementById("zq").style.display = "none";
-		document.getElementById("zq").value = "0";		
-	}else if(vl == "账期"){
+	//	document.getElementById("lb_zq").style.display = "none";
+	//	document.getElementById("zq").style.display = "none";
+	//	document.getElementById("zq").value = "0";		
+	//}else 
+	
+	if(vl == "账期"){
 		document.getElementById("lb_xjd").style.display = "none";
 		document.getElementById("tr_skxx").style.display = "none";
 		document.getElementById("xjd").style.display = "none";
@@ -413,6 +326,12 @@ function changeSklx(vl){
 		document.getElementById("lb_zq").style.display = "";
 		document.getElementById("zq").style.display = "";
 		document.getElementById("zq").value = "0";			
+		
+		document.getElementById("td_skzh_label").style.display = "none";
+		document.getElementById("td_skzh_value").style.display = "none";
+		document.getElementById("zhname").value = "";
+		document.getElementById("skzh").value = "";
+		
 	}else{
 		document.getElementById("tr_skxx").style.display = "";
 		document.getElementById("lb_xjd").style.display = "none";
@@ -421,7 +340,10 @@ function changeSklx(vl){
 		
 		document.getElementById("lb_zq").style.display = "none";
 		document.getElementById("zq").style.display = "none";
-		document.getElementById("zq").value = "0";			
+		document.getElementById("zq").value = "0";	
+		
+		document.getElementById("td_skzh_label").style.display = "";
+		document.getElementById("td_skzh_value").style.display = "";				
 	}
 }
 

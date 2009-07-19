@@ -1803,3 +1803,9 @@ function GetObjPos(ATarget)
     
     return pos;
 }
+
+
+
+String.prototype.trim = function(){
+   return this.replace(/(^\s+)|\s+$/g,"");
+}

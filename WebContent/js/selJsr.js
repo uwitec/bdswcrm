@@ -155,9 +155,6 @@ function setValue(){
 	Element.hide('brandTip')
 }
 
-String.prototype.trim = function(){
-   return this.replace(/(^\s+)|\s+$/g,"");
-}
 
 function initFzrTip(){ 
 	new Form.Element.Observer("brand",1, searchBrand);

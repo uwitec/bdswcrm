@@ -538,7 +538,10 @@
         </action>
         <action name="queryClientsTipInfo" class="clientsAction" method="getLikeClientInfo">
             <result name="success">/WEB-INF/pages/client/client_tip.jsp</result>
-        </action>                                              
+        </action> 
+        <action name="queryClientsRegInfo" class="clientsAction" method="getClientsRegInfo">
+            <result name="success">/WEB-INF/pages/client/client_reg_info.jsp</result>
+        </action>                                                     
         <!-- 往来客户 -->
         
         <!-- 销售订单 -->

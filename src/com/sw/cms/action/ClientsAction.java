@@ -54,6 +54,7 @@ public class ClientsAction extends BaseAction {
 	private String client_con = "";
 	private String clientsName = "";
 	private String clientsTips = "";
+	private String clientRegInfoText = "";
 
 	public String getClientsTips() {
 		return clientsTips;
@@ -500,6 +501,40 @@ public class ClientsAction extends BaseAction {
 			return "error";
 		}
 	}
+	
+	
+	/**
+	 * 根据客户ID取客户相关信息(地址，联系人列表信息)
+	 * @return
+	 * @throws Exception
+	 */
+	public String getClientsRegInfo() throws Exception {
+		try{
+			
+			//客户地址
+			Clients client = (Clients)clientsService.getClient(clients_id);
+			clientRegInfoText = StringUtils.nullToStr(client.getAddress()) +  "%";
+			
+			//联系人信息
+			List linkManList = clientsService.getClientsLinkman(clients_id);
+			if(linkManList != null && linkManList.size() > 0){
+				for(int i=0;i<linkManList.size();i++){
+					ClientsLinkman clientslinkman = (ClientsLinkman)linkManList.get(i);
+					if(i == 0){
+						clientRegInfoText += StringUtils.nullToStr(clientslinkman.getId()) + "#" + StringUtils.nullToStr(clientslinkman.getName()) + "#" + StringUtils.nullToStr(clientslinkman.getGzdh());
+					}else{
+						clientRegInfoText += "$" + StringUtils.nullToStr(clientslinkman.getId()) + "#" + StringUtils.nullToStr(clientslinkman.getName()) + "#" + StringUtils.nullToStr(clientslinkman.getGzdh());
+					}
+
+				}
+			}
+			return "success";
+		}catch(Exception e){
+			log.error("根据客户编号查询客户相关信息出错，错误原因：" + e.getMessage());
+			return "error";
+		}
+	}
+	
 
 	public Clients getClient() {
 		return client;
@@ -627,6 +662,14 @@ public class ClientsAction extends BaseAction {
 
 	public void setClientsName(String clientsName) {
 		this.clientsName = clientsName;
+	}
+
+	public String getClientRegInfoText() {
+		return clientRegInfoText;
+	}
+
+	public void setClientRegInfoText(String clientRegInfoText) {
+		this.clientRegInfoText = clientRegInfoText;
 	}
 
 }

@@ -14,37 +14,36 @@ import com.sw.cms.model.Page;
 import com.sw.cms.util.DateComFunc;
 
 public class CkdDAO extends JdbcBaseDAO {
-	
-	
+
 	/**
 	 * 取列表（包括分页）
+	 * 
 	 * @param con
 	 * @param curPage
 	 * @param rowsPerPage
 	 * @return
 	 */
-	public Page getCkdList(String con,int curPage, int rowsPerPage){
-		
+	public Page getCkdList(String con, int curPage, int rowsPerPage) {
+
 		String sql = "select * from ckd where 1=1";
-		
-		if(!con.equals("")){
+
+		if (!con.equals("")) {
 			sql = sql + con;
 		}
-		
+
 		return this.getResultByPage(sql, curPage, rowsPerPage);
 	}
-	
-	
-	
+
 	/**
 	 * 保存出库单信息
+	 * 
 	 * @param ckd
 	 * @param ckdProducts
 	 */
-	public void saveCkd(Ckd ckd,List ckdProducts){
+	public void saveCkd(Ckd ckd, List ckdProducts) {
 		String sql = "insert into ckd(fzr,xsd_id,creatdate,ck_date,state,ms,client_name,xsry,store_id,czr,cz_date,skzt,ckd_id,tel,ysfs,cx_tel,job_no,send_time,client_lxr,client_lxr_address,client_lxr_tel) values(?,?,?,?,?,?,?,?,?,?,now(),?,?,?,?,?,?,?,?,?,?)";
 		Object[] param = new Object[20];
-		
+
 		param[0] = ckd.getFzr();
 		param[1] = ckd.getXsd_id();
 		param[2] = ckd.getCreatdate();
@@ -65,25 +64,23 @@ public class CkdDAO extends JdbcBaseDAO {
 		param[17] = ckd.getClient_lxr();
 		param[18] = ckd.getClient_lxr_address();
 		param[19] = ckd.getClient_lxr_tel();
-		
-		this.getJdbcTemplate().update(sql,param);  //更新出库单信息
-		
-		addCkdProducts(ckdProducts,ckd.getCkd_id());//添加出库单相关产品
+
+		this.getJdbcTemplate().update(sql, param); // 更新出库单信息
+
+		addCkdProducts(ckdProducts, ckd.getCkd_id());// 添加出库单相关产品
 	}
-	
-	
-	
-	
+
 	/**
 	 * 更新出库单信息
+	 * 
 	 * @param ckd
 	 * @param ckdProducts
 	 */
-	public void updateCkd(Ckd ckd,List ckdProducts){
+	public void updateCkd(Ckd ckd, List ckdProducts) {
 		String sql = "update ckd set fzr=?,xsd_id=?,creatdate=?,ck_date=?,state=?,ms=?,client_name=?,xsry=?,store_id=?,czr=?,cz_date=now(),skzt=?,tel=?,ysfs=?,cx_tel=?,job_no=?,send_time=?,client_lxr=?,client_lxr_address=?,client_lxr_tel=? where ckd_id=?";
-		
+
 		Object[] param = new Object[20];
-		
+
 		param[0] = ckd.getFzr();
 		param[1] = ckd.getXsd_id();
 		param[2] = ckd.getCreatdate();
@@ -99,74 +96,75 @@ public class CkdDAO extends JdbcBaseDAO {
 		param[12] = ckd.getYsfs();
 		param[13] = ckd.getCx_tel();
 		param[14] = ckd.getJob_no();
-		param[15] = ckd.getSend_time();			
+		param[15] = ckd.getSend_time();
 		param[16] = ckd.getClient_lxr();
 		param[17] = ckd.getClient_lxr_address();
-		param[18] = ckd.getClient_lxr_tel();		
+		param[18] = ckd.getClient_lxr_tel();
 		param[19] = ckd.getCkd_id();
-		
-		this.getJdbcTemplate().update(sql,param);  //更新出库单信息		
-		
-		this.delCkdProducts(ckd.getCkd_id());      //删除关联产品
-		
-		this.addCkdProducts(ckdProducts, ckd.getCkd_id());   //重新添加关联产品
+
+		this.getJdbcTemplate().update(sql, param); // 更新出库单信息
+
+		this.delCkdProducts(ckd.getCkd_id()); // 删除关联产品
+
+		this.addCkdProducts(ckdProducts, ckd.getCkd_id()); // 重新添加关联产品
 
 	}
-	
-	
+
 	/**
 	 * 根据出库单ID获取产品列表
+	 * 
 	 * @param ckd_id
 	 * @return
 	 */
-	public List getCkdProducts(String ckd_id){
-		String sql = "select a.*,b.qz_serial_num as qz_flag from ckd_product a left join product b on b.product_id=a.product_id where a.ckd_id='" + ckd_id + "'";
-		
+	public List getCkdProducts(String ckd_id) {
+		String sql = "select a.*,b.qz_serial_num as qz_flag from ckd_product a left join product b on b.product_id=a.product_id where a.ckd_id='"
+				+ ckd_id + "'";
+
 		return this.getResultList(sql);
 	}
-	
-	
+
 	/**
 	 * 根据出库单ID获取出库单信息
+	 * 
 	 * @param ckd_id
 	 * @return
 	 */
-	public Object getCkd(String ckd_id){
+	public Object getCkd(String ckd_id) {
 		String sql = "select * from ckd where ckd_id='" + ckd_id + "'";
-		
+
 		return this.queryForObject(sql, new CkdRowMapper());
 	}
-	
-	
+
 	/**
 	 * 删除出库单信息
+	 * 
 	 * @param ckd_id
 	 */
-	public void delCkd(String ckd_id){
+	public void delCkd(String ckd_id) {
 		String sql = "delete from ckd where ckd_id='" + ckd_id + "'";
 		this.getJdbcTemplate().update(sql);
-		
+
 		sql = "delete from ckd_product where ckd_id='" + ckd_id + "'";
 		this.getJdbcTemplate().update(sql);
 	}
-	
-	
+
 	/**
 	 * 添加出库单相关联产品
+	 * 
 	 * @param ckdProducts
 	 * @param ckd_id
 	 */
-	private void addCkdProducts(List ckdProducts,String ckd_id){
+	private void addCkdProducts(List ckdProducts, String ckd_id) {
 		String sql = "";
 		double zje = 0;
 		Object[] param = new Object[10];
-		if(ckdProducts != null && ckdProducts.size()>0){
-			for(int i=0;i<ckdProducts.size();i++){
-				CkdProduct cdkProduct = (CkdProduct)ckdProducts.get(i);
-				if(cdkProduct != null){
-					if(!cdkProduct.getProduct_id().equals("")){
+		if (ckdProducts != null && ckdProducts.size() > 0) {
+			for (int i = 0; i < ckdProducts.size(); i++) {
+				CkdProduct cdkProduct = (CkdProduct) ckdProducts.get(i);
+				if (cdkProduct != null) {
+					if (!cdkProduct.getProduct_id().equals("")) {
 						sql = "insert into ckd_product(ckd_id,product_id,product_xh,product_name,nums,remark,price,jgtz,cbj,qz_serial_num) values(?,?,?,?,?,?,?,?,?,?)";
-						
+
 						param[0] = ckd_id;
 						param[1] = cdkProduct.getProduct_id();
 						param[2] = cdkProduct.getProduct_xh();
@@ -177,70 +175,70 @@ public class CkdDAO extends JdbcBaseDAO {
 						param[7] = cdkProduct.getJgtz();
 						param[8] = cdkProduct.getCbj();
 						param[9] = cdkProduct.getQz_serial_num();
-						
-						this.getJdbcTemplate().update(sql,param);
-						
-						zje +=  (cdkProduct.getPrice()+cdkProduct.getJgtz()) * cdkProduct.getNums();
+
+						this.getJdbcTemplate().update(sql, param);
+
+						zje += (cdkProduct.getPrice() + cdkProduct.getJgtz())
+								* cdkProduct.getNums();
 					}
 				}
 			}
 		}
-		
+
 		Object[] param2 = new Object[2];
 		sql = "update ckd set hjje=? where ckd_id=?";
 		param2[0] = zje;
 		param2[1] = ckd_id;
-		
-		this.getJdbcTemplate().update(sql,param2);
+
+		this.getJdbcTemplate().update(sql, param2);
 	}
-	
-	
+
 	/**
 	 * 根据对应销售单编号查看是否存在相应的出库单
+	 * 
 	 * @param xsd_id
 	 * @return
 	 */
-	public boolean isCkdExist(String xsd_id){
+	public boolean isCkdExist(String xsd_id) {
 		boolean is = false;
 		String sql = "select count(*) from ckd where xsd_id='" + xsd_id + "'";
 		int counts = this.getJdbcTemplate().queryForInt(sql);
-		if(counts > 0){
+		if (counts > 0) {
 			is = true;
 		}
 		return is;
 	}
-	
-	
+
 	/**
 	 * 查看出库单是否已经提交
+	 * 
 	 * @param ckd_id
 	 * @return
 	 */
-	public boolean isCkdSubmit(String ckd_id){
+	public boolean isCkdSubmit(String ckd_id) {
 		boolean is = false;
-		String sql = "select count(*) from ckd where ckd_id='" + ckd_id + "' and state='已出库'";
+		String sql = "select count(*) from ckd where ckd_id='" + ckd_id
+				+ "' and state='已出库'";
 		int counts = this.getJdbcTemplate().queryForInt(sql);
-		if(counts > 0){
+		if (counts > 0) {
 			is = true;
 		}
 		return is;
 	}
-	
-	
-	
+
 	/**
 	 * 删除出库单关联产品
+	 * 
 	 * @param ckd_id
 	 */
-	private void delCkdProducts(String ckd_id){
+	private void delCkdProducts(String ckd_id) {
 		String sql = "delete from ckd_product where ckd_id='" + ckd_id + "'";
 		this.getJdbcTemplate().update(sql);
 	}
-	
-	
-	
+
 	/**
 	 * 取当前可用的序列号
+	 * 
 	 * @return
 	 */
 	public String getCkdID() {
@@ -256,14 +254,26 @@ public class CkdDAO extends JdbcBaseDAO {
 		for (int i = curId.length(); i < 3; i++) {
 			curId = "0" + curId;
 		}
-		
+
 		String day = DateComFunc.getCurDay();
 
-		return "CK" + day + "-" +curId;
+		return "CK" + day + "-" + curId;
 	}
+
 	
+	public Object getCkdByXsdId(String xsdid) {
+		String sql = "select ckd_id from ckd where xsd_id='" + xsdid + "'";
+		List list = this.getResultList(sql);
+		return list.get(0);
+	}
+
 	
-	
+	public Object getCkdByIdBySerailNum(String id, String num) {
+		String sql = "select c.client_name,p.product_id,p.product_xh,p.product_name,p.qz_serial_num from ckd c left join ckd_product p on c.ckd_id=p.ckd_id where c.ckd_id='"
+				+ id + "' and p.qz_serial_num like '%" + num + "%'";
+		return this.getResultMap(sql);
+	}
+
 	/**
 	 * 包装对象(出库单)
 	 * 
@@ -274,35 +284,53 @@ public class CkdDAO extends JdbcBaseDAO {
 		public Object mapRow(ResultSet rs, int index) throws SQLException {
 			Ckd ckd = new Ckd();
 
-			if(SqlUtil.columnIsExist(rs,"ckd_id")) ckd.setCkd_id(rs.getString("ckd_id"));
-			if(SqlUtil.columnIsExist(rs,"xsd_id")) ckd.setXsd_id(rs.getString("xsd_id"));
-			if(SqlUtil.columnIsExist(rs,"fzr")) ckd.setFzr(rs.getString("fzr"));
-			if(SqlUtil.columnIsExist(rs,"creatdate")) ckd.setCreatdate(rs.getString("creatdate"));
-			if(SqlUtil.columnIsExist(rs,"ck_date")) ckd.setCk_date(rs.getString("ck_date"));
-			if(SqlUtil.columnIsExist(rs,"state")) ckd.setState(rs.getString("state")); //物流状态
-			if(SqlUtil.columnIsExist(rs,"ms")) ckd.setMs(rs.getString("ms"));
-			if(SqlUtil.columnIsExist(rs,"client_name")) ckd.setClient_name(rs.getString("client_name"));
-			if(SqlUtil.columnIsExist(rs,"xsry")) ckd.setXsry(rs.getString("xsry"));  //销售人员
-			if(SqlUtil.columnIsExist(rs,"store_id")) ckd.setStore_id(rs.getString("store_id"));
-			if(SqlUtil.columnIsExist(rs,"czr")) ckd.setCzr(rs.getString("czr"));
-			if(SqlUtil.columnIsExist(rs,"skzt")) ckd.setSkzt(rs.getString("skzt"));//收款状态
-			if(SqlUtil.columnIsExist(rs,"tel")) ckd.setTel(rs.getString("tel"));  //客户联系电话
-			
-			if(SqlUtil.columnIsExist(rs,"ysfs")) ckd.setYsfs(rs.getString("ysfs"));       //运输方式
-			if(SqlUtil.columnIsExist(rs,"cx_tel")) ckd.setCx_tel(rs.getString("cx_tel"));   //但询电话
-			if(SqlUtil.columnIsExist(rs,"send_time")) ckd.setSend_time(rs.getString("send_time"));   //发货时间
-			if(SqlUtil.columnIsExist(rs,"job_no")) ckd.setJob_no(rs.getString("job_no"));         //货单号
-			
-			if(SqlUtil.columnIsExist(rs,"client_lxr")) ckd.setClient_lxr(rs.getString("client_lxr"));
-			if(SqlUtil.columnIsExist(rs,"client_lxr_address")) ckd.setClient_lxr_address(rs.getString("client_lxr_address"));
-			if(SqlUtil.columnIsExist(rs,"client_lxr_tel")) ckd.setClient_lxr_tel(rs.getString("client_lxr_tel"));
-			
+			if (SqlUtil.columnIsExist(rs, "ckd_id"))
+				ckd.setCkd_id(rs.getString("ckd_id"));
+			if (SqlUtil.columnIsExist(rs, "xsd_id"))
+				ckd.setXsd_id(rs.getString("xsd_id"));
+			if (SqlUtil.columnIsExist(rs, "fzr"))
+				ckd.setFzr(rs.getString("fzr"));
+			if (SqlUtil.columnIsExist(rs, "creatdate"))
+				ckd.setCreatdate(rs.getString("creatdate"));
+			if (SqlUtil.columnIsExist(rs, "ck_date"))
+				ckd.setCk_date(rs.getString("ck_date"));
+			if (SqlUtil.columnIsExist(rs, "state"))
+				ckd.setState(rs.getString("state")); // 物流状态
+			if (SqlUtil.columnIsExist(rs, "ms"))
+				ckd.setMs(rs.getString("ms"));
+			if (SqlUtil.columnIsExist(rs, "client_name"))
+				ckd.setClient_name(rs.getString("client_name"));
+			if (SqlUtil.columnIsExist(rs, "xsry"))
+				ckd.setXsry(rs.getString("xsry")); // 销售人员
+			if (SqlUtil.columnIsExist(rs, "store_id"))
+				ckd.setStore_id(rs.getString("store_id"));
+			if (SqlUtil.columnIsExist(rs, "czr"))
+				ckd.setCzr(rs.getString("czr"));
+			if (SqlUtil.columnIsExist(rs, "skzt"))
+				ckd.setSkzt(rs.getString("skzt"));// 收款状态
+			if (SqlUtil.columnIsExist(rs, "tel"))
+				ckd.setTel(rs.getString("tel")); // 客户联系电话
+
+			if (SqlUtil.columnIsExist(rs, "ysfs"))
+				ckd.setYsfs(rs.getString("ysfs")); // 运输方式
+			if (SqlUtil.columnIsExist(rs, "cx_tel"))
+				ckd.setCx_tel(rs.getString("cx_tel")); // 但询电话
+			if (SqlUtil.columnIsExist(rs, "send_time"))
+				ckd.setSend_time(rs.getString("send_time")); // 发货时间
+			if (SqlUtil.columnIsExist(rs, "job_no"))
+				ckd.setJob_no(rs.getString("job_no")); // 货单号
+
+			if (SqlUtil.columnIsExist(rs, "client_lxr"))
+				ckd.setClient_lxr(rs.getString("client_lxr"));
+			if (SqlUtil.columnIsExist(rs, "client_lxr_address"))
+				ckd.setClient_lxr_address(rs.getString("client_lxr_address"));
+			if (SqlUtil.columnIsExist(rs, "client_lxr_tel"))
+				ckd.setClient_lxr_tel(rs.getString("client_lxr_tel"));
+
 			return ckd;
 		}
 	}
-	
 
-	
 	/**
 	 * 包装对象(出库单产品)
 	 * 
@@ -313,20 +341,31 @@ public class CkdDAO extends JdbcBaseDAO {
 		public Object mapRow(ResultSet rs, int index) throws SQLException {
 			CkdProduct ckdProduct = new CkdProduct();
 
-			if(SqlUtil.columnIsExist(rs,"id")) ckdProduct.setId(rs.getInt("id"));
-			if(SqlUtil.columnIsExist(rs,"ckd_id")) ckdProduct.setCkd_id(rs.getString("ckd_id"));
-			if(SqlUtil.columnIsExist(rs,"product_id")) ckdProduct.setProduct_id(rs.getString("product_id"));
-			if(SqlUtil.columnIsExist(rs,"product_xh")) ckdProduct.setProduct_xh(rs.getString("product_xh"));
-			if(SqlUtil.columnIsExist(rs,"product_name")) ckdProduct.setProduct_name(rs.getString("product_name"));
-			if(SqlUtil.columnIsExist(rs,"nums")) ckdProduct.setNums(rs.getInt("nums"));
-			if(SqlUtil.columnIsExist(rs,"remark")) ckdProduct.setRemark(rs.getString("remark"));
-			if(SqlUtil.columnIsExist(rs,"price")) ckdProduct.setPrice(rs.getDouble("price"));
-			if(SqlUtil.columnIsExist(rs,"cbj")) ckdProduct.setCbj(rs.getDouble("cbj"));
-			if(SqlUtil.columnIsExist(rs,"jgtz")) ckdProduct.setJgtz(rs.getDouble("jgtz"));
-			if(SqlUtil.columnIsExist(rs,"qz_serial_num")) ckdProduct.setQz_serial_num(rs.getString("qz_serial_num"));
-			
+			if (SqlUtil.columnIsExist(rs, "id"))
+				ckdProduct.setId(rs.getInt("id"));
+			if (SqlUtil.columnIsExist(rs, "ckd_id"))
+				ckdProduct.setCkd_id(rs.getString("ckd_id"));
+			if (SqlUtil.columnIsExist(rs, "product_id"))
+				ckdProduct.setProduct_id(rs.getString("product_id"));
+			if (SqlUtil.columnIsExist(rs, "product_xh"))
+				ckdProduct.setProduct_xh(rs.getString("product_xh"));
+			if (SqlUtil.columnIsExist(rs, "product_name"))
+				ckdProduct.setProduct_name(rs.getString("product_name"));
+			if (SqlUtil.columnIsExist(rs, "nums"))
+				ckdProduct.setNums(rs.getInt("nums"));
+			if (SqlUtil.columnIsExist(rs, "remark"))
+				ckdProduct.setRemark(rs.getString("remark"));
+			if (SqlUtil.columnIsExist(rs, "price"))
+				ckdProduct.setPrice(rs.getDouble("price"));
+			if (SqlUtil.columnIsExist(rs, "cbj"))
+				ckdProduct.setCbj(rs.getDouble("cbj"));
+			if (SqlUtil.columnIsExist(rs, "jgtz"))
+				ckdProduct.setJgtz(rs.getDouble("jgtz"));
+			if (SqlUtil.columnIsExist(rs, "qz_serial_num"))
+				ckdProduct.setQz_serial_num(rs.getString("qz_serial_num"));
+
 			return ckdProduct;
 		}
-	}		
+	}
 
 }

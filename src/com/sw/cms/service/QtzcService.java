@@ -90,6 +90,15 @@ public class QtzcService {
 		return qtzcDao.getQtzcID();
 	}
 	
+	/**
+	 * 判断费用是否已经支出
+	 * @param id
+	 * @return
+	 */
+	public boolean isFinishZc(String id){
+		return qtzcDao.isFinishZc(id);
+	}
+	
 	
 	/**
 	 * 将支出金额减去

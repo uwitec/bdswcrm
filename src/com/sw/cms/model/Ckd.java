@@ -21,6 +21,10 @@ public class Ckd {
 	private String cx_tel;     //查询电话
 	private String job_no;     //货单号
 	private String send_time;  //发货时间
+	
+	private String client_lxr;
+	private String client_lxr_address;
+	private String client_lxr_tel;
 
 	
 	public String getCk_date() {
@@ -124,6 +128,24 @@ public class Ckd {
 	}
 	public void setYsfs(String ysfs) {
 		this.ysfs = ysfs;
+	}
+	public String getClient_lxr() {
+		return client_lxr;
+	}
+	public void setClient_lxr(String client_lxr) {
+		this.client_lxr = client_lxr;
+	}
+	public String getClient_lxr_address() {
+		return client_lxr_address;
+	}
+	public void setClient_lxr_address(String client_lxr_address) {
+		this.client_lxr_address = client_lxr_address;
+	}
+	public String getClient_lxr_tel() {
+		return client_lxr_tel;
+	}
+	public void setClient_lxr_tel(String client_lxr_tel) {
+		this.client_lxr_tel = client_lxr_tel;
 	}
 
 }

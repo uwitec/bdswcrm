@@ -23,10 +23,6 @@ if(ckdProducts!=null && ckdProducts.size()>0){
 	count = ckdProducts.size();
 }
 
-//是否完成初始标志
-//0：未完成；1：已完成
-String iscs_flag = StringUtils.nullToStr(VS.findValue("iscs_flag"));
-
 String lxr = "",address = "";
 if(client != null){
 	lxr = StringUtils.nullToStr(client.getLxr());
@@ -52,7 +48,6 @@ if(client != null){
 <script type="text/javascript">
 
 	var allCount = <%=count %>;
-	var iscs_flag = '<%=iscs_flag %>';
 	
 	function saveInfo(){	
 		if(document.getElementById("ckd_id").value == ""){
@@ -68,8 +63,7 @@ if(client != null){
 			alert("出货库房不能为空，请选择！");
 			return;
 		}	
-		
-		if(document.getElementById("fzr").value == ""){
+		if(document.getElementById("brand").value == ""){
 			alert("出库经手人不能为空，请选择！");
 			return;
 		}								
@@ -88,18 +82,18 @@ if(client != null){
 			alert("运输方式不能为空，请选择！");
 			return;
 		}
-		if(document.getElementById("job_no").value == ""){
-			alert("货单号不能为空，请填写！");
-			return;
-		}
-		if(document.getElementById("cx_tel").value == ""){
-			alert("查询电话不能为空，请填写！");
-			return;
-		}		
-		if(document.getElementById("send_time").value == ""){
-			alert("发货时间不能为空，请填写！");
-			return;
-		}						
+		//if(document.getElementById("job_no").value == ""){
+		//	alert("货单号不能为空，请填写！");
+		//	return;
+		//}
+		//if(document.getElementById("cx_tel").value == ""){
+		//	alert("查询电话不能为空，请填写！");
+		//	return;
+		//}		
+		//if(document.getElementById("send_time").value == ""){
+		//	alert("发货时间不能为空，请填写！");
+		//	return;
+		//}						
 
 		//判断是否存在强制输入序列号的产品没有输入序列号
 		for(var i=0;i<allCount;i++){
@@ -155,29 +149,6 @@ if(client != null){
 		
 		window.open(url,'详细信息',fea);	
 	}     
-     
-     
-	function delTr(i){
-			var tr = i.parentNode.parentNode;
-			tr.removeNode(true);
-			
-	}     
-	
-	
-	function openWin(){
-		var destination = "selCkdProc.html";
-		var fea ='width=800,height=500,left=100,top=50,directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
-		
-		window.open(destination,'详细信息',fea);	
-	}	
-	
-	
-	function openClientWin(){
-		var destination = "selectClient.html";
-		var fea ='width=800,height=500,left=' + (screen.availWidth-800)/2 + ',top=' + (screen.availHeight-500)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
-		
-		window.open(destination,'详细信息',fea);		
-	}
 	
 	function openywyWin()
 	{
@@ -188,29 +159,6 @@ if(client != null){
 	}	
 
 	
-	
-	function delDesc(){
-		var k = 0;
-		var sel = "0"; 
-		for(var i=0;i<document.ckdForm.proc_id.length;i++){
-			var o = document.ckdForm.proc_id[i];
-			if(o.checked){
-				k = k + 1;
-				sel = document.ckdForm.proc_id[i].value;
-			}
-		}
-		if(k != 1){
-			alert("请选择产品明细，且只能选择一条信息！");
-			return;
-		}
-		
-		document.getElementById("product_name_" + sel).value = "";
-		document.getElementById("product_id_" + sel).value = "";
-		document.getElementById("product_xh_" + sel).value = "";
-		document.getElementById("nums_" + sel).value = "0";
-		document.getElementById("remark_" + sel).value = "";
-	}
-	
 	//退回订单
 	function doTh(){
 		if(window.confirm("确认要退回订单吗？")){
@@ -219,45 +167,28 @@ if(client != null){
 			document.ckdForm.submit();
 		}
 	}
-	
-	//显示消息DIV
-	function divInit(){	
-		<%if((msg != null && msg.size() > 0)){ %>
-		document.getElementById("msg_div").style.visibility = "visible";
-		<%}%>
-	}
-	
-	//隐藏消息DIV
-	function hiddenDiv(){
-		document.getElementById("msg_div").style.visibility = "hidden";
-	}	
 </script>
 </head>
-<body onload="divInit();initFzrTip();">
+<body onload="initFzrTip();">
 <form name="ckdForm" action="updateCkd.html" method="post">
-<div name="msg_div" id="msg_div" class="msg_div_style" onclick="hiddenDiv();" title="点击隐藏提示信息" style="position:absolute;left:2px;top:1px;width:778px;visibility:hidden">
-	<table width="100%" style="font-size: 12px;" border="0"  cellspacing="5" height="100%">
-		<tr><td align="right"><img src="index_images/tabClose.gif" border="0" style="cursor:hand" onclick="hiddenDiv();" title="关闭"></td></tr>
-		<tr>
-			<td width="100%" align="left"><font color="red">
-			<%
-			if(msg != null && msg.size() > 0){
-				for(int i=0;i<msg.size();i++){
-					out.print(StringUtils.nullToStr(msg.get(i)) + "<BR>");
-				}
-			}
-			%>	
-			<BR></font>		
-			</td>
-		</tr>
-	</table>
-</div>
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
 		<td colspan="4">出库单基本信息</td>
 	</tr>
 	</thead>
+<%
+//如果有信息则显示
+if(msg != null && msg.size() > 0){
+	for(int i=0;i<msg.size();i++){
+%>
+	<tr>
+		<td colspan="4" class="a2"><font color="red"><%=StringUtils.nullToStr(msg.get(i)) %></font></td>
+	</tr>	
+<%
+	}
+}
+%>
 	<tr>
 		<td class="a1" width="15%">出库单编号</td>
 		<td class="a2" width="35%"><input type="text" name="ckd.ckd_id" id="ckd_id" value="<%=StringUtils.nullToStr(ckd.getCkd_id()) %>" readonly size="30">
@@ -280,13 +211,13 @@ if(client != null){
 		<input type="hidden" name="ckd.client_name" id="client_id" value="<%=StringUtils.nullToStr(ckd.getClient_name()) %>">
 		</td>
 		<td class="a1">联系人</td>
-		<td class="a2"><input type="text" name="client_lxr" id="client_lxr" value="<%=lxr %>" readonly>				
+		<td class="a2"><input type="text" name="client_lxr" id="client_lxr" value="<%=StringUtils.nullToStr(ckd.getClient_lxr()) %>" readonly>				
 	</tr>
 	<tr>
 		<td class="a1">联系电话</td>
-		<td class="a2"><input type="text" name="ckd.tel" id="tel" value="<%=StringUtils.nullToStr(ckd.getTel()) %>" readonly>	
+		<td class="a2"><input type="text" name="ckd.tel" id="tel" value="<%=StringUtils.nullToStr(ckd.getClient_lxr_tel()) %>" readonly>	
 		<td class="a1">地址</td>
-		<td class="a2"><input type="text" name="client_address" id="client_address" value="<%=address %>" readonly>			
+		<td class="a2"><input type="text" name="client_address" id="client_address" value="<%=StringUtils.nullToStr(ckd.getClient_lxr_address()) %>" readonly>			
 	</tr>
 	<tr>	
 		<td class="a1" width="15%">销售订单编号</td>
@@ -372,13 +303,13 @@ if(client != null){
 			</select>	<font color="red">*</font>	
 		</td>
 		<td class="a1" width="15%">货单号</td>
-		<td class="a2"><input type="text" name="ckd.job_no" id="job_no" value="<%=StringUtils.nullToStr(ckd.getJob_no()) %>" size="30"  maxlength="20"><font color="red">*</font>	</td>										
+		<td class="a2"><input type="text" name="ckd.job_no" id="job_no" value="<%=StringUtils.nullToStr(ckd.getJob_no()) %>" size="30"  maxlength="20"></td>										
 	</tr>
 	<tr>
 		<td class="a1" width="15%">查询电话</td>
-		<td class="a2"><input type="text" name="ckd.cx_tel" id="cx_tel" value="<%=StringUtils.nullToStr(ckd.getCx_tel()) %>" size="30"  maxlength="20"><font color="red">*</font>	</td>						
+		<td class="a2"><input type="text" name="ckd.cx_tel" id="cx_tel" value="<%=StringUtils.nullToStr(ckd.getCx_tel()) %>" size="30"  maxlength="20"></td>						
 		<td class="a1" width="15%">发货时间</td>
-		<td class="a2"><input type="text" name="ckd.send_time" id="send_time" value="<%=StringUtils.nullToStr(ckd.getSend_time()) %>" size="30" maxlength="20"><font color="red">*</font>	</td>										
+		<td class="a2"><input type="text" name="ckd.send_time" id="send_time" value="<%=StringUtils.nullToStr(ckd.getSend_time()) %>" size="30" maxlength="20"></td>										
 	</tr>
 	
 		
@@ -436,7 +367,7 @@ if(ckdProducts!=null && ckdProducts.size()>0){
 			<input type="button" name="btnSub" value="确 定" class="css_button2" onclick="saveInfo();">&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="button" name="btnTh" value="退回订单" class="css_button3" onclick="doTh();">&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="reset" name="button2" value="重 置" class="css_button2">&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="reset" name="button2" value="关 闭" class="css_button2" onclick="window.close();">
+			<input type="reset" name="button2" value="关 闭" class="css_button2" onclick="window.opener.document.myform.submit();window.close();">
 		</td>
 	</tr>
 </table>

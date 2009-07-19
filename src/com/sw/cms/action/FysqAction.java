@@ -145,7 +145,22 @@ public class FysqAction extends BaseAction {
 	}
 	
 	
+	/**
+	 * 费用审批
+	 * @return
+	 */
 	public String doSp(){
+		
+		//判断费用是否审批
+		if(fysqService.isFinishSp(fysq.getId())){
+			this.saveMessage("费用申请已经审批完成，不能重复审批，请检查！");
+			
+			fkfs = sjzdService.getSjzdXmxxByZdId("SJZD_FKFS");   //付款方式
+			fyzclx = sjzdService.getSjzdXmxxByZdId("SJZD_ZCLX");  //费用支出类型
+			
+			return "input";
+		}
+		
 		LoginInfo info = (LoginInfo)getSession().getAttribute("LOGINUSER");
 		String user_id = info.getUser_id();
 		

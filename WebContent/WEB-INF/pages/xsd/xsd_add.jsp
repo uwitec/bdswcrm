@@ -72,42 +72,94 @@ if(sp_state.equals("1")){
 <script type="text/javascript">
 	var allCount = <%=allCount %>;
 	var iscs_flag = '<%=iscs_flag %>';	
-
-	//显示消息DIV
-	function divInit(){	
-		<%if((msg != null && msg.size() > 0) || !spMsg.equals("")){ %>
-		document.getElementById("msg_div").style.visibility = "visible";
-		<%}%>
+	
+	//客户对应联系人信息
+	var arryLxrObj = new Array();
+	
+	//客户联系人对象
+	function LinkMan(id,name,tel){
+	    this.id = id;
+	    this.name = name;
+	    this.tel = tel;
+	}	
+	
+	//查询客户相关信息
+	function setClientRegInfo(){		
+		//填充值
+		setClientValue(); 
+		
+		if($F('client_id') == ""){
+			return;
+		}
+		
+		//根据填充后的值选择客户地址联系人等信息
+		var url = 'queryClientsRegInfo.html';
+		var params = "clients_id=" + $F('client_id');
+		var myAjax = new Ajax.Request(
+		url,
+		{
+			method:'post',
+			parameters: params,
+			onComplete: fillClientRegInfo,
+			asynchronous:true
+		});
 	}
 	
-	//隐藏消息DIV
-	function hiddenDiv(){
-		document.getElementById("msg_div").style.visibility = "hidden";
+	//处理客户地址联系人等信息
+	function fillClientRegInfo(originalRequest){  
+
+		var resText = originalRequest.responseText.trim(); 
+		if(resText == ""){
+			return false;
+		}
+
+		var arryText = resText.split("%");
+		
+		
+		//客户地址填充
+		if(arryText != null && arryText.length>0)
+			document.getElementById("kh_address").value = arryText[0];
+		
+		if(arryText != null && arryText.length>1){
+			var linkMantext = arryText[1];
+			
+			//联系人填充
+			var objLxr = document.getElementById("kh_lxr"); 
+			objLxr.options.length = 0;
+			
+			var arryLinkMan = linkMantext.split("$");
+			if(arryLinkMan.length > 0){
+				for(var i=0;i<arryLinkMan.length;i++){
+					var arryInfo = arryLinkMan[i].split("#");		
+					var manObj = new LinkMan(arryInfo[0],arryInfo[1],arryInfo[2]);
+					arryLxrObj[i] = manObj;
+					objLxr.add(new Option(arryInfo[1],arryInfo[1]));
+				}
+				document.getElementById("kh_lxdh").value = arryLxrObj[0].tel;
+			}		
+		}
 	}
-</script>
-</head>
-<body onload="initFzrTip();initClientTip();divInit();" onclick="hiddenDiv();" >
-<form name="xsdForm" action="updateXsd.html" method="post">
-<div name="msg_div" id="msg_div" class="msg_div_style" onclick="hiddenDiv();" title="点击隐藏提示信息" style="position:absolute;left:2px;top:1px;width:928px;visibility:hidden">
-	<table width="100%" style="font-size: 12px;" border="0"  cellspacing="5" height="100%">
-		<tr><td align="right"><img src="index_images/tabClose.gif" border="0" style="cursor:hand" onclick="hiddenDiv();" title="关闭"></td></tr>
-		<tr>
-			<td width="100%" align="left"><font color="red">
-			<%
-			if(msg != null && msg.size() > 0){
-				for(int i=0;i<msg.size();i++){
-					out.print(StringUtils.nullToStr(msg.get(i)) + "<BR>");
+	
+	
+	//联系人与电话联动
+	function chgLxr(vl){
+		if(vl == ""){
+			return;
+		}
+		if(arryLxrObj != null && arryLxrObj.length > 0){
+			for(var i=0;i<arryLxrObj.length;i++){
+				if(vl == arryLxrObj[i].name){
+					document.getElementById("kh_lxdh").value = arryLxrObj[i].tel;
+					break;
 				}
 			}
-			if(!spMsg.equals("")){
-				out.print(spMsg + "<BR>");
-			}
-			%>	
-			<BR></font>		
-			</td>
-		</tr>
-	</table>
-</div>
+		}
+	}
+	
+</script>
+</head>
+<body onload="initFzrTip();initClientTip();">
+<form name="xsdForm" action="updateXsd.html" method="post">
 <input type="hidden" name="xsd.sp_type" id="sp_type" value="<%=StringUtils.nullToStr(xsd.getSp_type()) %>">
 <input type="hidden" name="xsd.sp_state" id="sp_state" value="<%=StringUtils.nullToStr(xsd.getSp_state()) %>">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
@@ -116,6 +168,24 @@ if(sp_state.equals("1")){
 		<td colspan="4">销售订单信息</td>
 	</tr>
 	</thead>
+<%
+if(msg != null && msg.size() > 0){
+	for(int i=0;i<msg.size();i++){
+%>
+	<tr>
+		<td colspan="4" class="a2"><font color="red"><%=StringUtils.nullToStr(msg.get(i)) %></font></td>
+	</tr>	
+<%
+	}
+}
+if(!spMsg.equals("")){
+%>	
+	<tr>
+		<td colspan="4" class="a2"><font color="red"><%=spMsg %></font></td>
+	</tr>
+<%				
+}
+%>		
 	<tr>
 		<td class="a1" width="15%">销售订单编号</td>
 		<td class="a2" width="35%">
@@ -135,7 +205,7 @@ if(sp_state.equals("1")){
 	<tr>	
 		<td class="a1" width="15%">客户名称</td>
 		<td class="a2">
-		<input type="text" name="xsd.client_id" onblur="setClientValue()" id="client_name" value="<%=StaticParamDo.getClientNameById(StringUtils.nullToStr(xsd.getClient_name())) %>" size="30" maxlength="50" >
+		<input type="text" name="xsd.client_id" onblur="setClientRegInfo();" id="client_name" value="<%=StaticParamDo.getClientNameById(StringUtils.nullToStr(xsd.getClient_name())) %>" size="30" maxlength="50" >
 		<input type="hidden" name="xsd.client_name" id="client_id" value="<%=StringUtils.nullToStr(xsd.getClient_name()) %>"><!--
 		<%
 		if(!sp_state.equals("3")){
@@ -153,7 +223,17 @@ if(sp_state.equals("1")){
 	
 	<tr>
 		<td class="a1">客户联系人</td>
-		<td class="a2"><input type="text" name="xsd.kh_lxr" id="kh_lxr" value="<%=StringUtils.nullToStr(xsd.getKh_lxr()) %>"></td>	
+		<td class="a2">
+			<select name="xsd.kh_lxr" id="kh_lxr" onchange="chgLxr(this.value);" style="width:90px">
+				<%
+				if(!StringUtils.nullToStr(xsd.getKh_lxr()).equals("")){
+				%>
+					<option value="<%=StringUtils.nullToStr(xsd.getKh_lxr()) %>" selected><%=StringUtils.nullToStr(xsd.getKh_lxr()) %></option>
+				<%
+				} 
+				%>
+			</select>
+		</td>	
 		<td class="a1">联系电话</td>
 		<td class="a2"><input type="text" name="xsd.kh_lxdh" id="kh_lxdh" value="<%=StringUtils.nullToStr(xsd.getKh_lxdh()) %>"></td>
 	</tr>
@@ -169,8 +249,8 @@ if(sp_state.equals("1")){
 			</select>&nbsp;&nbsp;
 			<b id="lb_zq" style="<%if(StringUtils.nullToStr(xsd.getSklx()).equals("账期")) out.print(""); else out.print("display:none"); %>">设置账期(天)：</b>
 			<input type="text" name="xsd.zq" id="zq" value="<%=xsd.getZq() %>" size="5" style="<%if(StringUtils.nullToStr(xsd.getSklx()).equals("账期")) out.print(""); else out.print("display:none"); %>" <%=sptg_flag %>>
-			<b id="lb_xjd" style="<%if(StringUtils.nullToStr(xsd.getSklx()).equals("现结")) out.print(""); else out.print("display:none"); %>">现金点：</b>
-			<input type="text" name="xsd.xjd" id="xjd" value="<%=xsd.getXjd() %>" size="5" style="<%if(StringUtils.nullToStr(xsd.getSklx()).equals("现结")) out.print(""); else out.print("display:none"); %>">
+			<b id="lb_xjd" style="display:none">现金点：</b>
+			<input type="text" name="xsd.xjd" id="xjd" value="<%=xsd.getXjd() %>" size="5" style="display:none">
 			<font color="red">*</font>
 		</td>
 		<td class="a1" width="15%">运输方式</td>
@@ -245,14 +325,13 @@ if(sp_state.equals("1")){
 <table width="100%"  align="center" id="xsdtable"  class="chart_list" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td>选择</td>
-		<td>产品名称</td>
-		<td>规格</td>
-		<td>销售价格</td>
-		<td>数量</td>
-		<td>小计</td>
-		<td>强制序列号</td>
-		<td>备注</td>
+		<td width="5%">选择</td>
+		<td width="25%">产品名称</td>
+		<td width="25%">规格</td>
+		<td width="10%">销售价格</td>
+		<td width="10%">数量</td>
+		<td width="10%">小计</td>
+		<td width="15%">备注</td>
 	</tr>
 	</thead>
 <%
@@ -263,10 +342,10 @@ if(xsdProducts!=null && xsdProducts.size()>0){
 	<tr>
 		<td class="a2"><input type="checkbox" name="proc_id" id="proc_id" value="<%=i %>"></td>
 		<td class="a2">
-			<input type="text" id="product_name_<%=i %>" name="xsdProducts[<%=i %>].product_name" value="<%=StringUtils.nullToStr(xsdProduct.getProduct_name()) %>" readonly>
+			<input type="text" id="product_name_<%=i %>" name="xsdProducts[<%=i %>].product_name" style="width:100%" value="<%=StringUtils.nullToStr(xsdProduct.getProduct_name()) %>" readonly>
 			<input type="hidden" id="product_id_<%=i %>" name="xsdProducts[<%=i %>].product_id" value="<%=StringUtils.nullToStr(xsdProduct.getProduct_id()) %>">
 		</td>
-		<td class="a2"><input type="text" id="product_xh_<%=i %>" name="xsdProducts[<%=i %>].product_xh" size="10" value="<%=StringUtils.nullToStr(xsdProduct.getProduct_xh()) %>" readonly></td>
+		<td class="a2"><input type="text" id="product_xh_<%=i %>" name="xsdProducts[<%=i %>].product_xh" style="width:100%" size="10" value="<%=StringUtils.nullToStr(xsdProduct.getProduct_xh()) %>" readonly></td>
 		<td class="a2">
 			<input type="text" id="price_<%=i %>" name="xsdProducts[<%=i %>].price" value="<%=JMath.round(xsdProduct.getPrice()) %>" size="10" onblur="hj();" <%=sptg_flag %>>
 			<input type="hidden" id="cbj_<%=i %>" name="xsdProducts[<%=i %>].cbj" value="<%=JMath.round(xsdProduct.getCbj()) %>">
@@ -274,10 +353,9 @@ if(xsdProducts!=null && xsdProducts.size()>0){
 			<input type="hidden" id="jgtz_<%=i %>" name="xsdProducts[<%=i %>].jgtz" value="<%=JMath.round(xsdProduct.getJgtz()) %>" size="10" onblur="hj();">
 		</td>
 		<td class="a2"><input type="text" id="nums_<%=i %>" name="xsdProducts[<%=i %>].nums" value="<%=xsdProduct.getNums() %>" <%=sptg_flag %> size="5" onblur="hj();"></td>
-		<td class="a2"><input type="text" id="xj_<%=i %>" name="xsdProducts[<%=i %>].xj" value="<%=JMath.round(xsdProduct.getXj()) %>" size="10" readonly></td>
 		<td class="a2">
-			<input type="text" id="qz_serial_num_<%=i %>" name="xsdProducts[<%=i %>].qz_serial_num" value="<%=StringUtils.nullToStr(xsdProduct.getQz_serial_num()) %>" size="15" readonly>
-			<input type="hidden" id="qz_flag_<%=i %>" name="xsdProducts[<%=i %>].qz_flag" value="<%=StringUtils.nullToStr(xsdProduct.getQz_flag()) %>"><a style="cursor:hand" title="左键点击输入输列号" onclick="openSerialWin('<%=i %>');"><b>...</b></a>&nbsp;
+			<input type="text" id="xj_<%=i %>" name="xsdProducts[<%=i %>].xj" value="<%=JMath.round(xsdProduct.getXj()) %>" size="10" readonly>
+			<input type="hidden" id="qz_serial_num_<%=i %>" name="xsdProducts[<%=i %>].qz_serial_num" value="<%=StringUtils.nullToStr(xsdProduct.getQz_serial_num()) %>" size="15" readonly>	
 		</td>		
 		<td class="a2"><input type="text" id="remark_<%=i %>" name="xsdProducts[<%=i %>].remark" value="<%=StringUtils.nullToStr(xsdProduct.getRemark()) %>"></td>
 	</tr>
@@ -289,10 +367,10 @@ if(xsdProducts!=null && xsdProducts.size()>0){
 	<tr>
 		<td class="a2"><input type="checkbox" name="proc_id" id="proc_id" value="<%=i %>"></td>
 		<td class="a2">
-			<input type="text" id="product_name_<%=i %>" name="xsdProducts[<%=i %>].product_name" readonly>
+			<input type="text" id="product_name_<%=i %>" style="width:100%" name="xsdProducts[<%=i %>].product_name" readonly>
 			<input type="hidden" id="product_id_<%=i %>" name="xsdProducts[<%=i %>].product_id">
 		</td>
-		<td class="a2"><input type="text" id="product_xh_<%=i %>" name="xsdProducts[<%=i %>].product_xh" size="10" readonly></td>
+		<td class="a2"><input type="text" id="product_xh_<%=i %>" style="width:100%" name="xsdProducts[<%=i %>].product_xh" size="10" readonly></td>
 		<td class="a2">
 			<input type="text" id="price_<%=i %>" name="xsdProducts[<%=i %>].price" value="0.00" size="10" onblur="hj();">
 			<input type="hidden" id="cbj_<%=i %>" name="xsdProducts[<%=i %>].cbj" value="0.00">
@@ -300,10 +378,9 @@ if(xsdProducts!=null && xsdProducts.size()>0){
 			<input type="hidden" id="jgtz_<%=i %>" name="xsdProducts[<%=i %>].jgtz" value="0.00" size="10" onblur="hj();">
 		</td>
 		<td class="a2"><input type="text" id="nums_<%=i %>" name="xsdProducts[<%=i %>].nums" value="0" size="5" onblur="hj();"></td>
-		<td class="a2"><input type="text" id="xj_<%=i %>" name="xsdProducts[<%=i %>].xj" value="0.00" size="10" readonly></td>
 		<td class="a2">
-			<input type="text" id="qz_serial_num_<%=i %>" name="xsdProducts[<%=i %>].qz_serial_num" value="" size="15" readonly>
-			<input type="hidden" id="qz_flag_<%=i %>" name="xsdProducts[<%=i %>].qz_flag" value=""><a style="cursor:hand" title="左键点击输入输列号" onclick="openSerialWin('<%=i %>');"><b>...</b></a>&nbsp;
+			<input type="text" id="xj_<%=i %>" name="xsdProducts[<%=i %>].xj" value="0.00" size="10" readonly>
+			<input type="hidden" id="qz_serial_num_<%=i %>" name="xsdProducts[<%=i %>].qz_serial_num" value="" size="15" readonly>	
 		</td>		
 		<td class="a2"><input type="text" id="remark_<%=i %>" name="xsdProducts[<%=i %>].remark"></td>
 	</tr>
@@ -319,16 +396,24 @@ if(xsdProducts!=null && xsdProducts.size()>0){
 	<tr height="35">
 		<td class="a2" colspan="4" width="100%">&nbsp;
 			<input type="button" name="button1" value="添加产品" class="css_button3" onclick="openWin();">
-			<input type="button" name="button8" value="清除产品" class="css_button3" onclick="delDesc();">
+			<input type="button" name="button8" value="清除产品" class="css_button3" onclick="delDesc();"><!--
 			&nbsp;&nbsp;&nbsp;输入序列号：<input type="text" name="s_nums" value="" onkeypress="javascript:f_enter()">
 			<font color="red">注：输入产品序列号回车，自动提取产品信息。</font>
-		</td>
+		--></td>
 	</tr>
 	<%
 	}
 	%>
+</table>
+<table width="100%"  align="center" class="chart_info" cellpadding="0" cellspacing="0">	
+	<%
+	String skxxStyle = "";
+	if(StringUtils.nullToStr(xsd.getSklx()).equals("账期")){
+		skxxStyle = "display:none";
+	}
+	%>	
 	<tr height="35">	
-		<td class="a1">订单合计金额</td>
+		<td class="a1" width="15%">订单合计金额</td>
 		<td class="a2">
 			<input type="text" name="xsd.xsdje" id="xsdje" value="<%=JMath.round(xsd.getXsdje()) %>" size="7" readonly>
 			<input type="hidden" name="xsd.xsdcbj" id="xsdcbj" value="<%=JMath.round(xsd.getXsdcbj()) %>">
@@ -336,18 +421,12 @@ if(xsdProducts!=null && xsdProducts.size()>0){
 			<input type="hidden" name="xsd.yhje" id="yhje" value="0.00">
 			<input type="hidden" id="ysje"  name="xsd.ysje" value="0.00">元
 		</td>
-		<td class="a1" widht="20%">收款账户</td>				
-		<td class="a2"><input type="text" id="zhname"  name="zhname" value="<%=StaticParamDo.getAccountNameById(StringUtils.nullToStr(xsd.getSkzh())) %>" readonly>
+		<td class="a1" widht="20%" id="td_skzh_label" style="<%=skxxStyle %>">收款账户</td>				
+		<td class="a2" id="td_skzh_value" style="<%=skxxStyle %>"><input type="text" id="zhname"  name="zhname" value="<%=StaticParamDo.getAccountNameById(StringUtils.nullToStr(xsd.getSkzh())) %>" readonly>
 		<input type="hidden" id="skzh"  name="xsd.skzh" value="<%=StringUtils.nullToStr(xsd.getSkzh()) %>">
 		<img src="images/select.gif" align="absmiddle" title="选择账户" border="0" onclick="openAccount();" style="cursor:hand">
 		</td>		
 	</tr>
-	<%
-	String skxxStyle = "";
-	if(StringUtils.nullToStr(xsd.getSklx()).equals("账期")){
-		skxxStyle = "display:none";
-	}
-	%>
 	<tr id="tr_skxx" style="<%=skxxStyle %>">
 		<td class="a1">本次收款金额</td>
 		<td class="a2"><input type="text" id="skje"  name="xsd.skje" value="<%=JMath.round(xsd.getSkje()) %>" size="7">元</td>
@@ -388,6 +467,8 @@ if(xsdProducts!=null && xsdProducts.size()>0){
 			</select><font color="red">*</font>				
 		</td>		
 	</tr>
+</table>
+<table width="100%"  align="center" class="chart_info" cellpadding="0" cellspacing="0">	
 	<tr>
 		<td class="a1" width="15%">备&nbsp;&nbsp;注</td>
 		<td class="a2" width="85%" colspan="3">
@@ -405,7 +486,7 @@ if(xsdProducts!=null && xsdProducts.size()>0){
 			}
 			%>
 			<input type="reset" name="btnCz" value="重 置" class="css_button2">&nbsp;&nbsp;
-			<input type="reset" name="btnClose" value="关 闭" class="css_button2" onclick="window.close();;">
+			<input type="reset" name="btnClose" value="关 闭" class="css_button2" onclick="window.opener.document.myform.submit();window.close();;">
 		</td>
 	</tr>
 </table>
