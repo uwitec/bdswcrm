@@ -42,8 +42,8 @@ public class CkdDAO extends JdbcBaseDAO {
 	 * @param ckdProducts
 	 */
 	public void saveCkd(Ckd ckd,List ckdProducts){
-		String sql = "insert into ckd(fzr,xsd_id,creatdate,ck_date,state,ms,client_name,xsry,store_id,czr,cz_date,skzt,ckd_id,tel,ysfs,cx_tel,job_no,send_time) values(?,?,?,?,?,?,?,?,?,?,now(),?,?,?,?,?,?,?)";
-		Object[] param = new Object[17];
+		String sql = "insert into ckd(fzr,xsd_id,creatdate,ck_date,state,ms,client_name,xsry,store_id,czr,cz_date,skzt,ckd_id,tel,ysfs,cx_tel,job_no,send_time,client_lxr,client_lxr_address,client_lxr_tel) values(?,?,?,?,?,?,?,?,?,?,now(),?,?,?,?,?,?,?,?,?,?)";
+		Object[] param = new Object[20];
 		
 		param[0] = ckd.getFzr();
 		param[1] = ckd.getXsd_id();
@@ -62,6 +62,9 @@ public class CkdDAO extends JdbcBaseDAO {
 		param[14] = ckd.getCx_tel();
 		param[15] = ckd.getJob_no();
 		param[16] = ckd.getSend_time();
+		param[17] = ckd.getClient_lxr();
+		param[18] = ckd.getClient_lxr_address();
+		param[19] = ckd.getClient_lxr_tel();
 		
 		this.getJdbcTemplate().update(sql,param);  //更新出库单信息
 		
@@ -77,9 +80,9 @@ public class CkdDAO extends JdbcBaseDAO {
 	 * @param ckdProducts
 	 */
 	public void updateCkd(Ckd ckd,List ckdProducts){
-		String sql = "update ckd set fzr=?,xsd_id=?,creatdate=?,ck_date=?,state=?,ms=?,client_name=?,xsry=?,store_id=?,czr=?,cz_date=now(),skzt=?,tel=?,ysfs=?,cx_tel=?,job_no=?,send_time=? where ckd_id=?";
+		String sql = "update ckd set fzr=?,xsd_id=?,creatdate=?,ck_date=?,state=?,ms=?,client_name=?,xsry=?,store_id=?,czr=?,cz_date=now(),skzt=?,tel=?,ysfs=?,cx_tel=?,job_no=?,send_time=?,client_lxr=?,client_lxr_address=?,client_lxr_tel=? where ckd_id=?";
 		
-		Object[] param = new Object[17];
+		Object[] param = new Object[20];
 		
 		param[0] = ckd.getFzr();
 		param[1] = ckd.getXsd_id();
@@ -96,8 +99,11 @@ public class CkdDAO extends JdbcBaseDAO {
 		param[12] = ckd.getYsfs();
 		param[13] = ckd.getCx_tel();
 		param[14] = ckd.getJob_no();
-		param[15] = ckd.getSend_time();		
-		param[16] = ckd.getCkd_id();
+		param[15] = ckd.getSend_time();			
+		param[16] = ckd.getClient_lxr();
+		param[17] = ckd.getClient_lxr_address();
+		param[18] = ckd.getClient_lxr_tel();		
+		param[19] = ckd.getCkd_id();
 		
 		this.getJdbcTemplate().update(sql,param);  //更新出库单信息		
 		
@@ -129,30 +135,6 @@ public class CkdDAO extends JdbcBaseDAO {
 		String sql = "select * from ckd where ckd_id='" + ckd_id + "'";
 		
 		return this.queryForObject(sql, new CkdRowMapper());
-	}
-	
-	/**
-	 * 根据销售订单ID获取出库单ID
-	 * @param xsdid
-	 * @return
-	 */
-	public Object getCkdByXsdId(String xsdid)
-	{
-		String sql="select ckd_id from ckd where xsd_id='"+xsdid+"'";
-		List list=this.getResultList(sql);
-		return list.get(0);
-	}
-	/**
-	 * 根据出库单ID和出库单销售货品的序列号查询销售货品记录以及购买人的记录
-	 * @param id
-	 * @param num
-	 * @return
-	 */
-	public Object getCkdByIdBySerailNum(String id,String num)
-	{
-		String sql="select c.client_name,p.product_id,p.product_xh,p.product_name,p.qz_serial_num from ckd c left join ckd_product p on c.ckd_id=p.ckd_id where c.ckd_id='"+id+"' and p.qz_serial_num like '%"+num+"%'";
-		
-		return this.getResultMap(sql);
 	}
 	
 	
@@ -310,6 +292,10 @@ public class CkdDAO extends JdbcBaseDAO {
 			if(SqlUtil.columnIsExist(rs,"cx_tel")) ckd.setCx_tel(rs.getString("cx_tel"));   //但询电话
 			if(SqlUtil.columnIsExist(rs,"send_time")) ckd.setSend_time(rs.getString("send_time"));   //发货时间
 			if(SqlUtil.columnIsExist(rs,"job_no")) ckd.setJob_no(rs.getString("job_no"));         //货单号
+			
+			if(SqlUtil.columnIsExist(rs,"client_lxr")) ckd.setClient_lxr(rs.getString("client_lxr"));
+			if(SqlUtil.columnIsExist(rs,"client_lxr_address")) ckd.setClient_lxr_address(rs.getString("client_lxr_address"));
+			if(SqlUtil.columnIsExist(rs,"client_lxr_tel")) ckd.setClient_lxr_tel(rs.getString("client_lxr_tel"));
 			
 			return ckd;
 		}
