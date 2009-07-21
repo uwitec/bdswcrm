@@ -42,6 +42,9 @@ if(client != null){
 <script language='JavaScript' src="js/nums.js"></script>
 <script language='JavaScript' src="js/selJsr.js"></script>
 <script type="text/javascript" src="js/prototype-1.4.0.js"></script>
+<script type='text/javascript' src='dwr/interface/dwrService.js'></script>
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script>
 <style>
 	.selectTip{background-color:#009;color:#fff;}
 </style>
@@ -81,25 +84,19 @@ if(client != null){
 		if(document.getElementById("ysfs").value == ""){
 			alert("运输方式不能为空，请选择！");
 			return;
-		}
-		//if(document.getElementById("job_no").value == ""){
-		//	alert("货单号不能为空，请填写！");
-		//	return;
-		//}
-		//if(document.getElementById("cx_tel").value == ""){
-		//	alert("查询电话不能为空，请填写！");
-		//	return;
-		//}		
-		//if(document.getElementById("send_time").value == ""){
-		//	alert("发货时间不能为空，请填写！");
-		//	return;
-		//}						
+		}					
 
 		//判断是否存在强制输入序列号的产品没有输入序列号
 		for(var i=0;i<allCount;i++){
 			var qzflag = document.getElementById("qz_flag_" + i);            //标志是否强制输入
 			var qzserialnum = document.getElementById("qz_serial_num_" + i); //序列号
 			var pn = document.getElementById("product_name_" + i);           //产品名称
+			
+			//判断输入数量与订单数量是否一致
+			if(document.getElementById("ck_nums_" + i).value != document.getElementById("nums_" + i).value){
+				alert("订单数量与出库数量不一致，无法出库，请检查！");
+				return;
+			}
 			
 			if(qzflag != null){
 				if(qzflag.value == "是"){
@@ -167,6 +164,66 @@ if(client != null){
 			document.ckdForm.submit();
 		}
 	}
+	
+	//点击回车后执行
+	function f_enter(){
+	    if (window.event.keyCode==13){
+	        sendSerialNum();
+	    }
+	}	
+	
+	//发送序列号
+	function sendSerialNum(){
+		var serialNum = dwr.util.getValue("s_nums");
+		if(serialNum == ""){
+			return;
+		}
+		dwrService.getProductObjBySerialNum(serialNum,setProductInfo);		
+	}
+	
+	//处理返回产品对象
+	function setProductInfo(product){
+		if(product != null && product.productId != null){
+			var flag = false;
+			for(var i=0;i<=allCount;i++){
+				var obj = document.getElementById("product_id_" + i);
+								
+				if(obj != null){
+					if(obj.value==product.productId){  //如果当前行商品与返回商品相同
+					
+						var vl = dwr.util.getValue("qz_serial_num_" + i); //已有的序列号
+						var vl2 = dwr.util.getValue("s_nums");    //输入的序列号
+						if(vl.indexOf(vl2) != -1){
+							alert("产品列表中已存在该序列号，请检查！");
+							break;
+						}
+						
+						if(vl == ""){
+							vl = vl2;
+						}else{
+							vl += "," + vl2;
+						}
+						
+						var nums = dwr.util.getValue("ck_nums_" + i);
+						if(nums == "" || isNaN(nums)) nums="0"; 
+						
+						if((parseInt(nums)+1) > parseInt(dwr.util.getValue("nums_" + i))){
+							alert("出库数量不能大于订单数量，请检查！");
+							break;
+						}
+						
+						dwr.util.setValue("ck_nums_" + i,parseInt(nums)+1);	
+						
+						dwr.util.setValue("qz_serial_num_" + i,vl);
+						
+						break;
+					}
+				}
+			}
+		}else{
+			alert("该序列号不存在，请检查!");
+		}
+	}		
 </script>
 </head>
 <body onload="initFzrTip();">
@@ -321,34 +378,46 @@ if(msg != null && msg.size() > 0){
 		<td colspan="2">产品详细信息</td>
 	</tr>
 	</thead>
+	<tr height="35">
+		<td class="a2" colspan="2">&nbsp;&nbsp;&nbsp;输入序列号：<input type="text" size="30" name="s_nums" value="" onkeypress="javascript:f_enter()">
+			注：输入产品序列号回车，可自动提取产品信息到列表。
+		</td>
+	</tr>
 </table>
 <table width="100%"  align="center" id="cktable"  class="chart_list" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td width="33%">产品名称</td>
-		<td width="33%">规格</td>
-		<td width="7%">数量</td>
-		<td width="15%">强制序列号</td>
-		<td width="12%">备注</td>
+		<td width="31%">产品名称</td>
+		<td width="29%">规格</td>
+		<td width="7%">订单数量</td>
+		<td width="7%">出库数量</td>
+		<td width="16%">强制序列号</td>
+		<td width="10%">备注</td>
 	</tr>
 	</thead>
 <%
 if(ckdProducts!=null && ckdProducts.size()>0){
 	for(int i=0;i<ckdProducts.size();i++){
 		Map ckdProduct = (Map)ckdProducts.get(i);
+		
+		String cssStyle = "";
+		if(StringUtils.nullToStr(ckdProduct.get("qz_flag")).equals("是")){
+			cssStyle = "color:red";
+		}
 %>
 	<tr>
 		<td class="a2">
-			<input type="text" id="product_name_<%=i %>" style="width:100%" name="ckdProducts[<%=i %>].product_name" value="<%=StringUtils.nullToStr(ckdProduct.get("product_name")) %>" readonly>
+			<input type="text" id="product_name_<%=i %>" style="width:100%;<%=cssStyle %>" name="ckdProducts[<%=i %>].product_name" value="<%=StringUtils.nullToStr(ckdProduct.get("product_name")) %>" readonly>
 			<input type="hidden" id="product_id_<%=i %>" name="ckdProducts[<%=i %>].product_id" value="<%=StringUtils.nullToStr(ckdProduct.get("product_id")) %>">
 		</td>
-		<td class="a2"><input type="text" id="product_xh_<%=i %>"  style="width:100%" name="ckdProducts[<%=i %>].product_xh" size="10" value="<%=StringUtils.nullToStr(ckdProduct.get("product_xh")) %>" readonly></td>	
-		<td class="a2"><input type="text" id="nums_<%=i %>" name="ckdProducts[<%=i %>].nums" value="<%=StringUtils.nullToStr(ckdProduct.get("nums")) %>" readonly  style="width:100%"></td>
+		<td class="a2"><input type="text" id="product_xh_<%=i %>"  style="width:100%;<%=cssStyle %>" name="ckdProducts[<%=i %>].product_xh" size="10" value="<%=StringUtils.nullToStr(ckdProduct.get("product_xh")) %>" readonly></td>	
+		<td class="a2"><input type="text" id="nums_<%=i %>" name="ckdProducts[<%=i %>].nums" value="<%=StringUtils.nullToStr(ckdProduct.get("nums")) %>" readonly  style="width:100%;<%=cssStyle %>"></td>
+		<td class="a2"><input type="text" id="ck_nums_<%=i %>" name="ckdProducts[<%=i %>].ck_nums" value="<%=StringUtils.nullToStr(ckdProduct.get("ck_nums")) %>"  style="width:100%;<%=cssStyle %>"></td>
 		<td class="a2">
-			<input type="text" id="qz_serial_num_<%=i %>" name="ckdProducts[<%=i %>].qz_serial_num" value="<%=StringUtils.nullToStr(ckdProduct.get("qz_serial_num")) %>"  style="width:80%" readonly>
+			<input type="text" id="qz_serial_num_<%=i %>" name="ckdProducts[<%=i %>].qz_serial_num" value="<%=StringUtils.nullToStr(ckdProduct.get("qz_serial_num")) %>"  style="width:80%;<%=cssStyle %>" readonly>
 			<input type="hidden" id="qz_flag_<%=i %>" name="ckdProducts[<%=i %>].qz_flag" value="<%=StringUtils.nullToStr(ckdProduct.get("qz_flag")) %>"><a style="cursor:hand" title="左键点击输入输列号" onclick="openSerialWin('<%=i %>');"><b>...</b></a>&nbsp;
 		</td>		
-		<td class="a2"><input type="text" id="remark_<%=i %>"  style="width:100%" name="ckdProducts[<%=i %>].remark" value="<%=StringUtils.nullToStr(ckdProduct.get("remark")) %>"></td>
+		<td class="a2"><input type="text" id="remark_<%=i %>"  style="width:100%;<%=cssStyle %>" name="ckdProducts[<%=i %>].remark" value="<%=StringUtils.nullToStr(ckdProduct.get("remark")) %>"></td>
 	</tr>
 <%
 	}
@@ -356,6 +425,9 @@ if(ckdProducts!=null && ckdProducts.size()>0){
 %>	
 </table>
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
+	<tr>
+		<td class="a2" colspan="2">注：列表中红色字体显示商品为强制序列号商品，必须输入序列号。</td>
+	</tr>
 	<tr>
 		<td class="a1" width="15%">备注</td>
 		<td class="a2" width="85%">

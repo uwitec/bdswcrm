@@ -9,6 +9,8 @@ OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
 List xsdList = (List)VS.findValue("xsdList");
 List thdList = (List)VS.findValue("thdList");
 List lsdList = (List)VS.findValue("lsdList");
+
+String client_type = StringUtils.nullToStr(request.getParameter("client_type"));
 %>
 
 <html>
@@ -105,17 +107,18 @@ if(thdList != null && thdList.size()>0){
 
 
 <%
-//零售单
-if(lsdList != null && lsdList.size()>0){
-	for(int i=0;i<lsdList.size();i++){
-		Map map = (Map)lsdList.get(i);
-		
-		
-		
-		String id = StringUtils.nullToStr(map.get("id"));
-		String name = StringUtils.nullToStr(map.get("client_name"));
-		String creatdate = StringUtils.nullToStr(map.get("creatdate"));
-		String xsry = StringUtils.nullToStr(map.get("xsry"));
+if(client_type.equals("")){
+	//零售单
+	if(lsdList != null && lsdList.size()>0){
+		for(int i=0;i<lsdList.size();i++){
+			Map map = (Map)lsdList.get(i);
+			
+			
+			
+			String id = StringUtils.nullToStr(map.get("id"));
+			String name = StringUtils.nullToStr(map.get("client_name"));
+			String creatdate = StringUtils.nullToStr(map.get("creatdate"));
+			String xsry = StringUtils.nullToStr(map.get("xsry"));
 		
 %>
 		<TR>
@@ -127,6 +130,7 @@ if(lsdList != null && lsdList.size()>0){
 		</TR>
 	
 <%
+		}
 	}
 }
 %>

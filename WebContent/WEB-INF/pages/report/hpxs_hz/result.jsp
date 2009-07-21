@@ -14,6 +14,7 @@ String xsry_id = StringUtils.nullToStr(request.getParameter("xsry_id"));
 
 String clientId = StringUtils.nullToStr(request.getParameter("clientId"));
 String clientName = StringUtils.nullToStr(request.getParameter("clientName"));
+String client_type = StringUtils.nullToStr(request.getParameter("client_type"));
 
 String kind_name = StringUtils.nullToStr(request.getParameter("kind_name"));
 String product_kind = StringUtils.nullToStr(request.getParameter("product_kind"));
@@ -24,6 +25,9 @@ String con = "";
 con = "日期：" + start_date + "至" + end_date;
 if(!clientId.equals("")){
 	con += "&nbsp; 客户名称：" + clientId;
+}
+if(!client_type.equals("")){
+	con += "&nbsp; 客户类型：" + client_type;
 }
 if(!xsry_id.equals("")){
 	con += "&nbsp; 销售人员：" + StaticParamDo.getRealNameById(xsry_id);
@@ -49,7 +53,7 @@ if(!product_xh.equals("")){
 </style> 
 <script language='JavaScript' src="js/date.js"></script>
 <script type="text/javascript">
-	function openWin(product_id,client_name,xsry_id){
+	function openWin(product_id){
 		document.myform.product_id.value = product_id;
 		document.myform.submit();
 	}
@@ -64,6 +68,7 @@ if(!product_xh.equals("")){
 <input type="hidden" name="start_date" value="<%=start_date %>">
 <input type="hidden" name="end_date" value="<%=end_date %>">
 <input type="hidden" name="clientName" value="<%=clientName %>">
+<input type="hidden" name="client_type" value="<%=client_type %>">
 <input type="hidden" name="xsry_id" value="<%=xsry_id %>">
 </form>
 <form name="refreshForm" action="getHpxsHzResult.html" method="post">

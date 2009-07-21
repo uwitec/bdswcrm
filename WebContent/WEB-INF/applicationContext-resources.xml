@@ -68,7 +68,7 @@
     		<ref bean="initJob"/>
     	</property>
     	<property name="cronExpression">
-    		<value>30 0 0 * * ?</value>
+    		<value>5 0 0 * * ?</value>
     	</property>
     </bean>
     
