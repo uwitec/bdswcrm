@@ -33,6 +33,7 @@ public class ExportHpxsHzResult extends ExportXlsTemplate {
 			String product_kind = StringUtils.nullToStr(request.getParameter("product_kind"));
 			String product_name = StringUtils.nullToStr(request.getParameter("product_name"));
 			String product_xh = StringUtils.nullToStr(request.getParameter("product_xh"));
+			String client_type = StringUtils.nullToStr(request.getParameter("client_type"));
 
 			String con = "";
 			con = "日期：" + start_date + "至" + end_date;
@@ -77,7 +78,7 @@ public class ExportHpxsHzResult extends ExportXlsTemplate {
 			label = new Label(4,2,"金额",this.getFt_item_center_bold());
 			sheet.addCell(label);
 			
-			List resultList = hpxsHzService.getHpxshzTjResult(product_kind, product_name, product_xh, start_date, end_date, clientName, xsry_id);
+			List resultList = hpxsHzService.getHpxshzTjResult(product_kind, product_name, product_xh, start_date, end_date, clientName, xsry_id,client_type);
 			
 			int hj_nums = 0;
 			double hj_je = 0;

@@ -8,6 +8,7 @@ public class CkdProduct {
 	private String product_xh;
 	private String product_name;
 	private int nums = 0;
+	private int ck_nums = 0;
 	private String remark;
 	private double price = 0;
 	private double jgtz = 0;
@@ -79,6 +80,12 @@ public class CkdProduct {
 	}
 	public void setQz_serial_num(String qz_serial_num) {
 		this.qz_serial_num = qz_serial_num;
+	}
+	public int getCk_nums() {
+		return ck_nums;
+	}
+	public void setCk_nums(int ck_nums) {
+		this.ck_nums = ck_nums;
 	}
 	
 }

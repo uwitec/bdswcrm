@@ -157,13 +157,13 @@ public class CkdDAO extends JdbcBaseDAO {
 	private void addCkdProducts(List ckdProducts, String ckd_id) {
 		String sql = "";
 		double zje = 0;
-		Object[] param = new Object[10];
+		Object[] param = new Object[11];
 		if (ckdProducts != null && ckdProducts.size() > 0) {
 			for (int i = 0; i < ckdProducts.size(); i++) {
 				CkdProduct cdkProduct = (CkdProduct) ckdProducts.get(i);
 				if (cdkProduct != null) {
 					if (!cdkProduct.getProduct_id().equals("")) {
-						sql = "insert into ckd_product(ckd_id,product_id,product_xh,product_name,nums,remark,price,jgtz,cbj,qz_serial_num) values(?,?,?,?,?,?,?,?,?,?)";
+						sql = "insert into ckd_product(ckd_id,product_id,product_xh,product_name,nums,remark,price,jgtz,cbj,qz_serial_num,ck_nums) values(?,?,?,?,?,?,?,?,?,?,?)";
 
 						param[0] = ckd_id;
 						param[1] = cdkProduct.getProduct_id();
@@ -175,6 +175,7 @@ public class CkdDAO extends JdbcBaseDAO {
 						param[7] = cdkProduct.getJgtz();
 						param[8] = cdkProduct.getCbj();
 						param[9] = cdkProduct.getQz_serial_num();
+						param[10] = cdkProduct.getCk_nums();
 
 						this.getJdbcTemplate().update(sql, param);
 
@@ -363,6 +364,8 @@ public class CkdDAO extends JdbcBaseDAO {
 				ckdProduct.setJgtz(rs.getDouble("jgtz"));
 			if (SqlUtil.columnIsExist(rs, "qz_serial_num"))
 				ckdProduct.setQz_serial_num(rs.getString("qz_serial_num"));
+			if (SqlUtil.columnIsExist(rs, "ck_nums"))
+				ckdProduct.setCk_nums(rs.getInt("ck_nums"));
 
 			return ckdProduct;
 		}

@@ -19,7 +19,7 @@ public class HpxsHzDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public List getHpxshzTjResult(String product_kind,String product_name,String product_xh,
-			String start_date,String end_date,String client_name,String xsry_id){
+			String start_date,String end_date,String client_name,String xsry_id,String client_type){
 		
 		String sql = "select product_id,product_name,product_xh,sum(nums) as nums,sum(hjje) as hjje from view_hpxshz_tj where 1=1";
 		
@@ -62,6 +62,11 @@ public class HpxsHzDAO extends JdbcBaseDAO {
 		//客户编号
 		if(!client_name.equals("")){
 			sql += " and client_name='" + client_name + "'";
+		}
+		
+		//客户类型
+		if(!client_type.equals("")){
+			sql += " and client_type='" + client_type + "'";
 		}
 		
 		//销售人员
@@ -200,9 +205,9 @@ public class HpxsHzDAO extends JdbcBaseDAO {
 	 * @param xsry_id
 	 * @return
 	 */
-	public List getXsdList(String product_id,String start_date,String end_date,String client_name,String xsry_id){
+	public List getXsdList(String product_id,String start_date,String end_date,String client_name,String xsry_id,String client_type){
 		
-		String sql = "select distinct a.id,DATE_FORMAT(cz_date,'%Y-%m-%d') as creatdate,a.client_name,a.fzr from xsd a join xsd_product b on b.xsd_id=a.id where a.state='已出库'";
+		String sql = "select distinct a.id,DATE_FORMAT(cz_date,'%Y-%m-%d') as creatdate,a.client_name,a.fzr from xsd a join xsd_product b on b.xsd_id=a.id left join clients c on c.id=a.client_name where a.state='已出库'";
 		if(!start_date.equals("")){
 			sql = sql + " and DATE_FORMAT(a.cz_date,'%Y-%m-%d')>='" + start_date + "'";
 		}
@@ -218,6 +223,9 @@ public class HpxsHzDAO extends JdbcBaseDAO {
 		if(!product_id.equals("")){
 			sql = sql + " and b.product_id='" + product_id + "'";
 		}
+		if(!client_type.equals("")){
+			sql = sql + " and c.client_type='" + client_type + "'";
+		}
 
 		return this.getResultList(sql);
 	}
@@ -232,8 +240,8 @@ public class HpxsHzDAO extends JdbcBaseDAO {
 	 * @param xsry_id
 	 * @return
 	 */
-	public List getThdList(String product_id,String start_date,String end_date,String client_name,String xsry_id){
-		String sql = "select distinct a.thd_id,a.client_name,DATE_FORMAT(a.cz_date,'%Y-%m-%d') as th_date,a.th_fzr from thd a join thd_product b on b.thd_id=a.thd_id where a.state='已入库'";
+	public List getThdList(String product_id,String start_date,String end_date,String client_name,String xsry_id,String client_type){
+		String sql = "select distinct a.thd_id,a.client_name,DATE_FORMAT(a.cz_date,'%Y-%m-%d') as th_date,a.th_fzr from thd a join thd_product b on b.thd_id=a.thd_id left join clients c on c.id=a.client_name where a.state='已入库'";
 		if(!start_date.equals("")){
 			sql = sql + " and DATE_FORMAT(a.cz_date,'%Y-%m-%d')>='" + start_date + "'";
 		}
@@ -248,6 +256,9 @@ public class HpxsHzDAO extends JdbcBaseDAO {
 		}
 		if(!product_id.equals("")){
 			sql = sql + " and b.product_id='" + product_id + "'";
+		}
+		if(!client_type.equals("")){
+			sql = sql + " and c.client_type='" + client_type + "'";
 		}
 		return this.getResultList(sql);
 	}

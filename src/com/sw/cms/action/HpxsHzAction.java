@@ -7,6 +7,7 @@ import com.sw.cms.action.base.BaseAction;
 import com.sw.cms.model.LoginInfo;
 import com.sw.cms.service.ClientsService;
 import com.sw.cms.service.HpxsHzService;
+import com.sw.cms.service.SjzdService;
 import com.sw.cms.service.UserService;
 
 /**
@@ -20,6 +21,7 @@ public class HpxsHzAction extends BaseAction {
 	private UserService userService;
 	private HpxsHzService hpxsHzService;
 	private ClientsService clientsService;
+	private SjzdService sjzdService;
 	
 	private List user_list = new ArrayList();
 	private List productKindList = new ArrayList();
@@ -37,6 +39,8 @@ public class HpxsHzAction extends BaseAction {
 	private String clientName = "";
 	private String xsry_id = "";
 	private String product_id = "";
+	private String client_type = "";
+	private String[] arryClientType;
 
 	/**
 	 * 显示货品销售汇总条件
@@ -44,8 +48,7 @@ public class HpxsHzAction extends BaseAction {
 	 * @return
 	 */
 	public String showCondition() {
-		clientsList=clientsService.getClientList("");
-		user_list = userService.getAllEmployeeList();
+		arryClientType = sjzdService.getSjzdXmxxByZdId("SJZD_WLDWLX");
 		return "success";
 	}
 
@@ -57,7 +60,7 @@ public class HpxsHzAction extends BaseAction {
 	public String getHpxshzTjResult() {
 		resultList = hpxsHzService.getHpxshzTjResult(product_kind,
 				product_name, product_xh, start_date, end_date, clientName,
-				xsry_id);
+				xsry_id,client_type);
 		return "success";
 	}
 	
@@ -103,12 +106,9 @@ public class HpxsHzAction extends BaseAction {
 	 * @return
 	 */
 	public String getResultMx() {
-		xsdList = hpxsHzService.getXsdList(product_id, start_date, end_date,
-				clientName, xsry_id);
-		thdList = hpxsHzService.getThdList(product_id, start_date, end_date,
-				clientName, xsry_id);
-		lsdList = hpxsHzService.getLsdList(product_id, start_date, end_date,
-				clientName, xsry_id);
+		xsdList = hpxsHzService.getXsdList(product_id, start_date, end_date,clientName, xsry_id, client_type);
+		thdList = hpxsHzService.getThdList(product_id, start_date, end_date,clientName, xsry_id, client_type);
+		lsdList = hpxsHzService.getLsdList(product_id, start_date, end_date,clientName, xsry_id);
 		return "success";
 	}
 
@@ -254,6 +254,30 @@ public class HpxsHzAction extends BaseAction {
 
 	public void setClientsService(ClientsService clientsService) {
 		this.clientsService = clientsService;
+	}
+
+	public String[] getArryClientType() {
+		return arryClientType;
+	}
+
+	public void setArryClientType(String[] arryClientType) {
+		this.arryClientType = arryClientType;
+	}
+
+	public String getClient_type() {
+		return client_type;
+	}
+
+	public void setClient_type(String client_type) {
+		this.client_type = client_type;
+	}
+
+	public SjzdService getSjzdService() {
+		return sjzdService;
+	}
+
+	public void setSjzdService(SjzdService sjzdService) {
+		this.sjzdService = sjzdService;
 	}
 
 }

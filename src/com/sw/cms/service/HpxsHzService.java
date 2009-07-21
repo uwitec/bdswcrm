@@ -22,8 +22,8 @@ public class HpxsHzService {
 	 * @return
 	 */
 	public List getHpxshzTjResult(String product_kind,String product_name,String product_xh,
-			String start_date,String end_date,String client_name,String xsry_id){
-		return hpxsHzDao.getHpxshzTjResult(product_kind, product_name, product_xh, start_date, end_date, client_name, xsry_id);
+			String start_date,String end_date,String client_name,String xsry_id,String client_type){
+		return hpxsHzDao.getHpxshzTjResult(product_kind, product_name, product_xh, start_date, end_date, client_name, xsry_id,client_type);
 	}
 	
 	
@@ -69,8 +69,8 @@ public class HpxsHzService {
 	 * @param xsry_id
 	 * @return
 	 */
-	public List getXsdList(String product_id,String start_date,String end_date,String client_name,String xsry_id){
-		return hpxsHzDao.getXsdList(product_id, start_date, end_date, client_name, xsry_id);
+	public List getXsdList(String product_id,String start_date,String end_date,String client_name,String xsry_id,String client_type){
+		return hpxsHzDao.getXsdList(product_id, start_date, end_date, client_name, xsry_id,client_type);
 	}
 	
 	
@@ -83,8 +83,8 @@ public class HpxsHzService {
 	 * @param xsry_id
 	 * @return
 	 */
-	public List getThdList(String product_id,String start_date,String end_date,String client_name,String xsry_id){
-		return hpxsHzDao.getThdList(product_id, start_date, end_date, client_name, xsry_id);
+	public List getThdList(String product_id,String start_date,String end_date,String client_name,String xsry_id,String client_type){
+		return hpxsHzDao.getThdList(product_id, start_date, end_date, client_name, xsry_id,client_type);
 	}
 	
 	
