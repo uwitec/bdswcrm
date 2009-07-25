@@ -22,6 +22,19 @@ function searchClients(){
 }
 
 
+function searchAllClients(){
+	var url = 'queryAllClientsTipInfo.html';
+	var myAjax = new Ajax.Request(
+	url,
+	{
+		method:'post',
+		parameters: '',
+		onComplete: showInitAllClients,
+		asynchronous:true
+	});
+}
+
+
 var clientlists = new Array();
 
 function showClientsTip(originalRequest){   
@@ -49,6 +62,9 @@ function showClientsTip(originalRequest){
 		}
 		bt.innerHTML=s;
 		if( tips != $("client_name").value){
+			var pos = GetObjPos(document.getElementById("client_name"))
+			document.getElementById("clientsTip").style.left = pos.x;
+			document.getElementById("clientsTip").style.top = pos.y + 22;		
 			Element.show('clientsTip');
 		}
 	}else{
@@ -57,6 +73,22 @@ function showClientsTip(originalRequest){
 		Element.hide('clientsTip');
 	}
 }
+
+
+
+function showInitAllClients(originalRequest){   
+	if(originalRequest.responseText.trim() == ""){	
+		return false;
+	}
+	var brandList = originalRequest.responseText.split("%");
+	if (brandList != null && brandList.length > 0){
+		for(var i = 0 ; i <  brandList.length; i++) {
+		   var curBrand = brandList[i].split("$");		   
+		   clientlists[curBrand[1].trim()] = curBrand[0].trim();
+		}
+	}
+}
+
 
 function clientTipMove(event){
 	  var srcEl = Event.element(event);
@@ -143,7 +175,7 @@ function setClientValue(){
 			document.getElementById("client_id").value=clientlists[brand];
 			
 	    }else{
-			alert("您所输入客户名称不在列表里，请检查!");
+			//alert("您所输入客户名称不在列表里，请检查!");
 			document.getElementById("client_name").value="";
 			document.getElementById("client_id").value="";
 			document.getElementById("client_name").focus();
@@ -166,4 +198,7 @@ function initClientTip(){
 	var pos = GetObjPos(document.getElementById("client_name"))
 	document.getElementById("clientsTip").style.left = pos.x;
 	document.getElementById("clientsTip").style.top = pos.y + 22;
+	
+	//初始客户列表
+	searchAllClients();
 }

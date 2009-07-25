@@ -216,6 +216,8 @@ if(client != null){
 						
 						dwr.util.setValue("qz_serial_num_" + i,vl);
 						
+						dwr.util.setValue("s_nums","");
+						
 						break;
 					}
 				}

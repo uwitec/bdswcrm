@@ -614,6 +614,11 @@ String sp_state = StringUtils.nullToStr(lsd.getSp_state());
 		<td colspan="2">产品详细信息</td>
 	</tr>
 	</thead>
+	<tr height="35">
+		<td class="a2" colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;输入序列号：<input type="text" name="s_nums" value="" onkeypress="javascript:f_enter()">
+			注：输入产品序列号回车，可自动提取产品信息到产品列表中
+		</td>
+	</tr>	
 </table>
 <table width="100%"  align="center" id="lsdtable"  class="chart_list" cellpadding="0" cellspacing="0">	
 	<thead>
@@ -701,8 +706,6 @@ if(lsdProducts != null && lsdProducts.size()>0){
 	<tr height="35">
 		<td class="a2" colspan="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="button" name="button1" value="添加一行" class="css_button2" onclick="addTr();">
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;输入序列号：<input type="text" name="s_nums" value="" onkeypress="javascript:f_enter()">
-			<font color="red">注：输入产品序列号回车，可自动提取产品信息到产品列表中。</font>
 		</td>
 	</tr>
 	<tr height="35">	

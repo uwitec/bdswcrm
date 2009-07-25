@@ -87,10 +87,11 @@
 			<ww:select name="serialNumMng.store_id" id="store_id" theme="simple" list="%{storeList}" listValue="name" listKey="id" emptyOption="true"></ww:select>		
 		</td>		
 	</tr>
+	<ww:set name="set_yj_flag" value="serialNumMng.yj_flag"/>
 	<tr>
 		<td class="a1" width="25%">是否样机</td>
 		<td class="a2" width="75%">
-			<ww:select name="serialNumMng.yj_flag" id="yj_flag" theme="simple" list="#{0:'否',1:'是'}"></ww:select>
+			<ww:select name="serialNumMng.yj_flag" id="yj_flag" theme="simple" list="#{'0':'否','1':'是'}"></ww:select> 
 		</td>		
 	</tr>			
 	

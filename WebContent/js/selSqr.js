@@ -1,50 +1,53 @@
-//在body的onload事件中调用 initFzrTip();
-//earchBrand  查询相近的经手人
-//showResponse 展示
-//move 上下事件
-//down 鼠标按下事件
-//setValue 鼠标离开事件
-//显示框的ID为 brand
-//隐藏框的ID为 fzr
+//在body的onload事件中调用 initSqrTip();
+//searchLikeSqr  查询相近的申请人
+//showSrqTip 展示
+//sqrMove 上下事件
+//sqrDown 鼠标按下事件
+//setSqrValue 鼠标离开事件
+//显示框的ID为 sqr_text
+//隐藏框的ID为 sqr
+//在显示框后添加：<div d="sqr_tips"  style="height:12px;position:absolute;left:610px; top:110px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 
-var tip = "";
-function searchBrand(){    
+
+var SqrTip = "";
+function searchLikeSqr(){    
 	var url = 'queryJsrTipInfo.html';
-	var params = "paramValue=" + $F('brand');
+	var params = "paramValue=" + $F('sqr_text');
 	var myAjax = new Ajax.Request(
 	url,
 	{
 		method:'post',
 		parameters: params,
-		onComplete: showResponse,
+		onComplete: showSrqTip,
 		asynchronous:true
 	});
 }
 
-function searchAllJsr(){   
+function searchAllSqr(){    
 	var url = 'queryAllJsrTipInfo.html';
+	var params = "paramValue=" + $F('sqr_text');
 	var myAjax = new Ajax.Request(
 	url,
 	{
 		method:'post',
-		parameters:'',
-		onComplete: showInitAllJsr,
+		parameters: params,
+		onComplete: showInitAllSqr,
 		asynchronous:true
 	});
 }
 
-var jsrlists = new Array();
+var sqrlists = new Array();
 
-function showResponse(originalRequest){   
+function showSrqTip(originalRequest){   
 	if(originalRequest.responseText.trim() == ""){
-		var bt = $("brandTip");
+		var bt = $("sqr_tips");
 		bt.innerHTML = "";
-		Element.hide('brandTip');	
+		Element.hide('sqr_tips');	
 		return false;
 	}
 	var brandList = originalRequest.responseText.split("%");
 	if (brandList != null && brandList.length > 0){
-		var bt = $("brandTip");
+		var bt = $("sqr_tips");
 		var s="";
 		var flog=0;
 		for(var i = 0 ; i <  brandList.length; i++){
@@ -52,27 +55,27 @@ function showResponse(originalRequest){
 		     break;
 		   }
 		   var curBrand = brandList[i].split("$");
-		   jsrlists[curBrand[1].trim()] = curBrand[0].trim();
+		   sqrlists[curBrand[1].trim()] = curBrand[0].trim();
 		   
 		   s += "<div onmouseover=\"this.className='selectTip';style.cursor='default'\"  onmouseout=\"this.className=null; style.cursor='default'\">" + curBrand[1].trim() + "</div>";
 		   flog++;
 		}
 		bt.innerHTML=s;
 		 
-		if( tip != $("brand").value) {
-			var pos = GetObjPos(document.getElementById("brand"))
-			document.getElementById("brandTip").style.left = pos.x;
-			document.getElementById("brandTip").style.top = pos.y + 22;		
-			Element.show('brandTip');
+		if(SqrTip != $("sqr_text").value) {
+			var pos = GetObjPos(document.getElementById("sqr_text"))
+			document.getElementById("sqr_tips").style.left = pos.x;
+			document.getElementById("sqr_tips").style.top = pos.y + 22;		
+			Element.show('sqr_tips');
 		}
 	} else {
-		var bt = $("brandTip");
+		var bt = $("sqr_tips");
 		bt.innerHTML = "";
-		Element.hide('brandTip');
+		Element.hide('sqr_tips');
 	}
 }
 
-function showInitAllJsr(originalRequest){   
+function showInitAllSqr(originalRequest){   
 	if(originalRequest.responseText.trim() == ""){
 		return false;
 	}
@@ -80,15 +83,15 @@ function showInitAllJsr(originalRequest){
 	if (brandList != null && brandList.length > 0){
 		for(var i = 0 ; i <  brandList.length; i++){
 		   var curBrand = brandList[i].split("$");
-		   jsrlists[curBrand[1].trim()] = curBrand[0].trim();
+		   sqrlists[curBrand[1].trim()] = curBrand[0].trim();
 		   
 		}
 	}
 }
 
-function move(event) {
+function sqrMove(event) {
 	 var srcEl = Event.element(event);
-	 var tipEl = $(srcEl.id + "Tip");
+	 var tipEl = $("sqr_tips");
      var a = tipEl.childNodes;
 	 if (tipEl.style.display == "" ) {
 		if(event.keyCode == 40 ) {            
@@ -142,7 +145,7 @@ function move(event) {
 			var bList = tipEl.childNodes;
 			for (var i = 0 ; i < bList.length ; i ++) {
 				if (bList[i].className == "selectTip") {
-					tip = srcEl.value = bList[i].innerHTML;				 
+					SqrTip = srcEl.value = bList[i].innerHTML;				 
 					Element.hide(tipEl);
 					return ;
 				}
@@ -150,56 +153,52 @@ function move(event) {
 		}
 	}
 }
-function  down(event)
+function  sqrDown(event)
 {
       var srcEl = Event.element(event);
-	  var tipEl = $("brandTip");
+	  var tipEl = $("sqr_tips");
       var bList = tipEl.childNodes;
 			for (var i = 0 ; i < bList.length ; i ++) {   
 				if (bList[i].className == "selectTip") {
-					tip = srcEl.value = bList[i].innerHTML;	
-					document.getElementById("brand").value=bList[i].innerHTML;					
+					SqrTip = srcEl.value = bList[i].innerHTML;	
+					document.getElementById("sqr_text").value=bList[i].innerHTML;					
 					Element.hide(tipEl);
 					return;
 				}
 			}
 }
 
-function setValue(){
-	if(document.getElementById("brand").value!="") {
-	    var brand =document.getElementById("brand").value;
-	    brand=brand.trim();
-
-	    
-	    if(brand in jsrlists) {
-      		document.getElementById("fzr").value=jsrlists[brand];
+function setSqrValue(){
+	if(document.getElementById("sqr_text").value!="") {
+	    var brand =document.getElementById("sqr_text").value;
+	    brand = brand.trim();
+	    if(brand in sqrlists) {
+      		document.getElementById("fzr").value=sqrlists[brand];
     	} else {
-			//alert("您所输入的经手人不在列表里!");
-			document.getElementById("brand").value="";
-			document.getElementById("fzr").value="";
-			document.getElementById("brand").focus();
+			//alert("您所输入的申请人不在列表里!");
+			document.getElementById("sqr_text").value="";
+			document.getElementById("sqr").value="";
+			document.getElementById("sqr_text").focus();
 		}
 	}
 	
-	if(document.getElementById("brand").value.length==0){
-		document.getElementById("fzr").value="";
+	if(document.getElementById("sqr_text").value.length==0){
+		document.getElementById("sqr").value="";
 	} 
-	Element.hide('brandTip')
+	Element.hide('sqr_tips');
 }
 
 
-function initFzrTip(){
-	
-	//设置事件处理方法
-	new Form.Element.Observer("brand",1, searchBrand);
-	Event.observe("brand", "keydown", move, false);
-	Event.observe("brandTip","mousedown",down,true);
+function initSqrTip(){ 
+	new Form.Element.Observer("sqr_text",1, searchLikeSqr);
+	Event.observe("sqr_text", "keydown", sqrMove, false);
+	Event.observe("sqr_tips","mousedown",sqrDown,true);
 	
 	//初始提示层的位置
-	var pos = GetObjPos(document.getElementById("brand"))
-	document.getElementById("brandTip").style.left = pos.x;
-	document.getElementById("brandTip").style.top = pos.y + 22;
+	var pos = GetObjPos(document.getElementById("sqr_text"))
+	document.getElementById("sqr_tips").style.left = pos.x;
+	document.getElementById("sqr_tips").style.top = pos.y + 22;
 	
-	//初始经手人列表为系统所有经手人
-	searchAllJsr();
+	//初始申请人列表
+	searchAllSqr();
 }
