@@ -55,9 +55,6 @@ public class ClientsDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public List getClientListByAjaxParam(String clientsName){
-		if(clientsName.equals("")){
-			return null;
-		}
 		String sql = "select * from clients";
 		
 		if(!clientsName.equals("")){

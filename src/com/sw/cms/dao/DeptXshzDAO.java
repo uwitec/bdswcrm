@@ -39,9 +39,9 @@ public class DeptXshzDAO extends JdbcBaseDAO {
 				con += " and (";
 				for(int i=0;i<arryItems.length;i++){
 					if(i == 0){
-						con += " b.product_id like '" + arryItems[i] + "%'";
+						con += " b.product_kind like '" + arryItems[i] + "%'";
 					}else{
-						con += " or b.product_id like '" + arryItems[i] + "%'";
+						con += " or b.product_kind like '" + arryItems[i] + "%'";
 					}
 				}
 				con += ")";

@@ -30,9 +30,9 @@ public class HpxsHzDAO extends JdbcBaseDAO {
 				sql += " and (";
 				for(int i=0;i<arryItems.length;i++){
 					if(i == 0){
-						sql += " product_id like '" + arryItems[i] + "%'";
+						sql += " product_kind like '" + arryItems[i] + "%'";
 					}else{
-						sql += " or product_id like '" + arryItems[i] + "%'";
+						sql += " or product_kind like '" + arryItems[i] + "%'";
 					}
 				}
 				sql += ")";
@@ -102,9 +102,9 @@ public class HpxsHzDAO extends JdbcBaseDAO {
 				sql += " and (";
 				for(int i=0;i<arryItems.length;i++){
 					if(i == 0){
-						sql += " product_id like '" + arryItems[i] + "%'";
+						sql += " product_kind like '" + arryItems[i] + "%'";
 					}else{
-						sql += " or product_id like '" + arryItems[i] + "%'";
+						sql += " or product_kind like '" + arryItems[i] + "%'";
 					}
 				}
 				sql += ")";
@@ -150,9 +150,9 @@ public class HpxsHzDAO extends JdbcBaseDAO {
 				sql += " and (";
 				for(int i=0;i<arryItems.length;i++){
 					if(i == 0){
-						sql += " product_id like '" + arryItems[i] + "%'";
+						sql += " product_kind like '" + arryItems[i] + "%'";
 					}else{
-						sql += " or product_id like '" + arryItems[i] + "%'";
+						sql += " or product_kind like '" + arryItems[i] + "%'";
 					}
 				}
 				sql += ")";

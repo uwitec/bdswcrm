@@ -188,10 +188,21 @@ public class KfdbAction extends BaseAction {
 				if(!msg.equals("")){
 					kfdb.setState("已保存");
 					kfdbService.updateKfdb(kfdb, kfdbProducts);
-					
+					storeList = storeService.getAllStoreList();
+					kfdbProducts = kfdbService.getKfdbProducts(kfdb.getId());
 					return "input";
 				}
 			}
+		}
+		
+		//判断调拨单是否已经提交
+		if(kfdbService.isDbFinish(kfdb.getId())){
+			msg = "调拨单已经出库，不能重复出库，请检查！";
+			
+			storeList = storeService.getAllStoreList();
+			kfdbProducts = kfdbService.getKfdbProducts(kfdb.getId());
+			
+			return "input";
 		}
 		
 		kfdbService.updateKfdb(kfdb, kfdbProducts);

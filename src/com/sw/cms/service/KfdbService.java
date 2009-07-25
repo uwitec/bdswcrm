@@ -95,6 +95,16 @@ public class KfdbService {
 	public String updateKfdbID() {
 		return kfdbDao.getKfdbID();
 	}
+	
+	
+	/**
+	 * 判断调拨单是否已经提交
+	 * @param id
+	 * @return
+	 */
+	public boolean isDbFinish(String id) {
+		return kfdbDao.isDbFinish(id);
+	}
 
 	
 	/**

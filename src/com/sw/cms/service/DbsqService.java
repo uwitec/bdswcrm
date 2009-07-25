@@ -95,6 +95,16 @@ public class DbsqService {
 	
 	
 	/**
+	 * 判断调拨申请是否已经提交
+	 * @param id
+	 * @return
+	 */
+	public boolean isDbsqFinish(String id){
+		return dbsqDao.isDbsqFinish(id);
+	}
+	
+	
+	/**
 	 * 根据调拨申请生成库房调拨相关信息并保存
 	 * @param dbsq
 	 * @param dbsqProducts

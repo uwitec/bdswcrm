@@ -36,8 +36,8 @@ public class HpflxsHzDAO extends JdbcBaseDAO {
 		}
 		
 		String sql = "select a.id,a.name," +
-				"(select sum(nums) from view_hpxshz_tj b where b.product_id like concat(a.id,'%') " + con + ") as nums," +
-				"(select sum(hjje) from view_hpxshz_tj b where b.product_id like concat(a.id,'%') " + con + ") as hjje" +
+				"(select sum(nums) from view_hpxshz_tj b where b.product_kind like concat(a.id,'%') " + con + ") as nums," +
+				"(select sum(hjje) from view_hpxshz_tj b where b.product_kind like concat(a.id,'%') " + con + ") as hjje" +
 				" from product_kind a where LENGTH(id)<=" + (dj*2);
 		
 		List list = this.getResultList(sql);
@@ -62,7 +62,7 @@ public class HpflxsHzDAO extends JdbcBaseDAO {
 		
 		//处理商品类别
 		if(!product_kind.equals("")){
-			sql += " and product_id like '" + product_kind + "%'";
+			sql += " and product_kind like '" + product_kind + "%'";
 		}
 		
 		//开始时间

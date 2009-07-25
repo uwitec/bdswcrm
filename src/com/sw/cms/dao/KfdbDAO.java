@@ -148,6 +148,22 @@ public class KfdbDAO extends JdbcBaseDAO {
 	}
 	
 	
+	/**
+	 * 判断调拨单是否已经提交
+	 * @param id
+	 * @return
+	 */
+	public boolean isDbFinish(String id) {
+		boolean is = false;
+		String sql = "select count(*) from kfdb where id='" + id + "' and state='已出库'";
+		int counts = this.getJdbcTemplate().queryForInt(sql);
+		if(counts > 0){
+			is = true;
+		}
+		return is;
+	}
+	
+	
 	
 	/**
 	 * 添加库房调拨相关联产品

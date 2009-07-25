@@ -141,6 +141,22 @@ public class DbsqDAO extends JdbcBaseDAO {
 	}
 	
 	
+	/**
+	 * 判断调拨申请是否已经提交
+	 * @param id
+	 * @return
+	 */
+	public boolean isDbsqFinish(String id){
+		boolean is = false;
+		String sql = "select count(*) from dbsq where id='" + id + "' and state='已提交'";
+		int counts = this.getJdbcTemplate().queryForInt(sql);
+		if(counts > 0){
+			is = true;
+		}
+		return is;
+	}
+	
+	
 	
 	/**
 	 * 添加调拨申请相关联产品

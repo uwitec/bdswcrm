@@ -231,6 +231,9 @@
         </action> 
         <action name="queryJsrTipInfo" class="userAction" method="getLikeJsrInfo">
             <result name="success" type="dispatcher">/WEB-INF/pages/user/jsr_tip.jsp</result>
+        </action> 
+        <action name="queryAllJsrTipInfo" class="userAction" method="getAllJsrInfo">
+            <result name="success" type="dispatcher">/WEB-INF/pages/user/jsr_tip.jsp</result>
         </action>               
         <!-- 用户管理 -->
         
@@ -539,6 +542,9 @@
         <action name="queryClientsTipInfo" class="clientsAction" method="getLikeClientInfo">
             <result name="success">/WEB-INF/pages/client/client_tip.jsp</result>
         </action> 
+        <action name="queryAllClientsTipInfo" class="clientsAction" method="getAllClientInfo">
+            <result name="success">/WEB-INF/pages/client/client_tip.jsp</result>
+        </action>         
         <action name="queryClientsRegInfo" class="clientsAction" method="getClientsRegInfo">
             <result name="success">/WEB-INF/pages/client/client_reg_info.jsp</result>
         </action>                                                     

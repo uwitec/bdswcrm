@@ -460,6 +460,28 @@ public class UserAction extends BaseAction {
 	}
 	
 	
+	
+	public String getAllJsrInfo(){
+		try{
+			List jsrs = userService.getUserListAjaxTip("");
+			if(jsrs != null && jsrs.size() > 0){
+				for(int i=0;i<jsrs.size();i++){
+					Map jsrMap = (Map)jsrs.get(i);
+					if(jsrTips.equals("")){
+						jsrTips = StringUtils.nullToStr(jsrMap.get("user_id")) + "$" + StringUtils.nullToStr(jsrMap.get("real_name"));
+					}else{
+						jsrTips +=  "%" + StringUtils.nullToStr(jsrMap.get("user_id")) + "$" + StringUtils.nullToStr(jsrMap.get("real_name"));
+					}
+				}
+			}
+			return "success";
+		}catch(Exception e){
+			log.error("Ajax查询经手人信息出错，错误原因：" + e.getMessage());
+			return "error";
+		}
+	}
+	
+	
 	public SysUser getUser() {
 		return user;
 	}

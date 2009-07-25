@@ -113,6 +113,13 @@ public class DbsqAction extends BaseAction {
 		String user_id = info.getUser_id();
 		dbsq.setCzr(user_id);
 		
+		//判断调拨申请是否已经提交
+		if(dbsqService.isDbsqFinish(dbsq.getId())){
+			this.saveMessage("调拨申请已经提交，不能重复提交，请检查！");
+			storeList = storeService.getAllStoreList();
+			return "input";
+		}
+		
 		dbsqService.updateDbsq(dbsq, dbsqProducts);
 		return "success";
 	}

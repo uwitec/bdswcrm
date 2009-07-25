@@ -483,6 +483,9 @@ public class ClientsAction extends BaseAction {
 	 */
 	public String getLikeClientInfo() throws Exception {
 		try{
+			if(clientsName.equals("")){
+				return "success";
+			}			
 			List clients = clientsService.getClientListByAjaxParam(clientsName); //相似客户信息列表
 			
 			if(clients != null && clients.size() > 0){
@@ -501,6 +504,32 @@ public class ClientsAction extends BaseAction {
 			return "error";
 		}
 	}
+	
+	/**
+	 * 初始页面取所有客户往来信息
+	 * @return
+	 * @throws Exception
+	 */
+	public String getAllClientInfo() throws Exception {
+		try{
+			List clients = clientsService.getClientListByAjaxParam(clientsName); //相似客户信息列表
+			
+			if(clients != null && clients.size() > 0){
+				for(int i=0;i<clients.size();i++){
+					Map clientMap = (Map)clients.get(i);
+					if(clientsTips.equals("")){
+						clientsTips = StringUtils.nullToStr(clientMap.get("id")) + "$" + StringUtils.nullToStr(clientMap.get("name"));
+					}else{
+						clientsTips += "%" + StringUtils.nullToStr(clientMap.get("id")) + "$" + StringUtils.nullToStr(clientMap.get("name"));
+					}
+				}
+			}
+			return "success";
+		}catch(Exception e){
+			log.error("填充AJAX提示，查询客户信息失败,失败原因：" + e.getMessage());
+			return "error";
+		}
+	}	
 	
 	
 	/**
