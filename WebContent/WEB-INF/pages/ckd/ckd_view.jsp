@@ -34,9 +34,15 @@ List ckdProducts = (List)VS.findValue("ckdProducts");
 	<tr>		
 		<td class="a1" width="15%">客户名称</td>
 		<td class="a2"><%=StaticParamDo.getClientNameById(StringUtils.nullToStr(ckd.getClient_name())) %></td>	
-		<td class="a1">联系电话</td>
-		<td class="a2"><%=StringUtils.nullToStr(ckd.getTel()) %></td>
+		<td class="a1">联系人</td>
+		<td class="a2"><%=StringUtils.nullToStr(ckd.getClient_lxr()) %></td>
 	</tr>
+	<tr>		
+		<td class="a1" width="15%">联系电话</td>
+		<td class="a2"><%=StringUtils.nullToStr(ckd.getClient_lxr_tel()) %></td>	
+		<td class="a1">地址</td>
+		<td class="a2"><%=StringUtils.nullToStr(ckd.getClient_lxr_address()) %></td>
+	</tr>	
 	<tr>
 		<td class="a1" width="15%">销售单编号</td>
 		<td class="a2"><%=StringUtils.nullToStr(ckd.getXsd_id()) %></td>

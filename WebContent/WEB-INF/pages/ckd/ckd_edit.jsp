@@ -270,13 +270,13 @@ if(msg != null && msg.size() > 0){
 		<input type="hidden" name="ckd.client_name" id="client_id" value="<%=StringUtils.nullToStr(ckd.getClient_name()) %>">
 		</td>
 		<td class="a1">联系人</td>
-		<td class="a2"><input type="text" name="client_lxr" id="client_lxr" value="<%=StringUtils.nullToStr(ckd.getClient_lxr()) %>" readonly>				
+		<td class="a2"><input type="text" name="ckd.client_lxr" id="client_lxr" value="<%=StringUtils.nullToStr(ckd.getClient_lxr()) %>" readonly>				
 	</tr>
 	<tr>
 		<td class="a1">联系电话</td>
-		<td class="a2"><input type="text" name="ckd.tel" id="tel" value="<%=StringUtils.nullToStr(ckd.getClient_lxr_tel()) %>" readonly>	
+		<td class="a2"><input type="text" name="ckd.client_lxr_tel" id="client_lxr_tel" value="<%=StringUtils.nullToStr(ckd.getClient_lxr_tel()) %>" readonly>	
 		<td class="a1">地址</td>
-		<td class="a2"><input type="text" name="client_address" id="client_address" value="<%=StringUtils.nullToStr(ckd.getClient_lxr_address()) %>" readonly>			
+		<td class="a2"><input type="text" name="ckd.client_lxr_address" id="client_address" value="<%=StringUtils.nullToStr(ckd.getClient_lxr_address()) %>" readonly>			
 	</tr>
 	<tr>	
 		<td class="a1" width="15%">销售订单编号</td>

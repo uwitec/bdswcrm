@@ -32,7 +32,7 @@ ClientsService clientsService = (ClientsService)VS.findValue("clientsService");
 	<tr>
 		<td>客户编号</td>
 		<td>客户名称</td>
-		<td>联系电话</td>
+		<td>客户类型</td>
 		<td>限额</td>
 		<td>应收款</td>
 		<td>应付款</td>
@@ -53,7 +53,7 @@ ClientsService clientsService = (ClientsService)VS.findValue("clientsService");
 	<tr class="a1" onmouseover="this.className='a2';" onmouseout="this.className='a1';" title="双击查看详情"  onDblClick="openWin('<%=StringUtils.nullToStr(map.get("id")) %>');">
 		<td><%=StringUtils.nullToStr(map.get("id")) %></td>
 		<td><%=StringUtils.nullToStr(map.get("name")) %></td>
-		<td><%=StringUtils.nullToStr(map.get("lxdh")) %></td>
+		<td><%=StringUtils.nullToStr(map.get("client_type")) %></td>
 		<td><%=JMath.round(xe,2) %></td>
 		<td><%=JMath.round(yinshouje,2) %></td>
 		<td><%=JMath.round(yinfuje,2) %></td>

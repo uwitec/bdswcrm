@@ -460,7 +460,10 @@ public class UserAction extends BaseAction {
 	}
 	
 	
-	
+	/**
+	 * 取所有经手人信息
+	 * @return
+	 */
 	public String getAllJsrInfo(){
 		try{
 			List jsrs = userService.getUserListAjaxTip("");

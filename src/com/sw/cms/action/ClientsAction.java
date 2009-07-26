@@ -549,10 +549,20 @@ public class ClientsAction extends BaseAction {
 			if(linkManList != null && linkManList.size() > 0){
 				for(int i=0;i<linkManList.size();i++){
 					ClientsLinkman clientslinkman = (ClientsLinkman)linkManList.get(i);
-					if(i == 0){
-						clientRegInfoText += StringUtils.nullToStr(clientslinkman.getId()) + "#" + StringUtils.nullToStr(clientslinkman.getName()) + "#" + StringUtils.nullToStr(clientslinkman.getGzdh());
+					
+					String gzdh = StringUtils.nullToStr(clientslinkman.getGzdh());
+					String mobile = StringUtils.nullToStr(clientslinkman.getYddh());
+					
+					if(gzdh.equals("")){
+						gzdh = mobile;
 					}else{
-						clientRegInfoText += "$" + StringUtils.nullToStr(clientslinkman.getId()) + "#" + StringUtils.nullToStr(clientslinkman.getName()) + "#" + StringUtils.nullToStr(clientslinkman.getGzdh());
+						gzdh += "/" + mobile;
+					}
+					
+					if(i == 0){
+						clientRegInfoText += StringUtils.nullToStr(clientslinkman.getId()) + "#" + StringUtils.nullToStr(clientslinkman.getName()) + "#" + gzdh;
+					}else{
+						clientRegInfoText += "$" + StringUtils.nullToStr(clientslinkman.getId()) + "#" + StringUtils.nullToStr(clientslinkman.getName()) + "#" + gzdh;
 					}
 
 				}
