@@ -98,7 +98,7 @@ public class CkdService {
 			this.updateSerialNum(ckd, ckdProducts); //处理序列号
 			//}
 			
-			this.updateXsdState(ckd.getXsd_id(), "已出库",ckd.getYsfs(),ckd.getCx_tel(),ckd.getJob_no(),ckd.getSend_time());
+			this.updateXsdState(ckd.getXsd_id(), "已出库",ckd.getYsfs(),ckd.getCx_tel(),ckd.getJob_no(),ckd.getSend_time(),ckd.getStore_id(),ckd.getFzr(),ckd.getCk_date());
 		}
 	}
 		
@@ -137,7 +137,7 @@ public class CkdService {
 			
 			this.updateProductKc(ckd, ckdProducts); //修改库存
 			
-			//修改相应销售单实际成交信息
+			//修改相应销售单实际成交信息及物流相关信息
 			this.updateXsdSjcjInfo(ckd, ckdProducts);
 			
 
@@ -146,7 +146,7 @@ public class CkdService {
 			
 			//如果是销售单，处理销售单状态
 			if(ckd.getXsd_id().indexOf("XS") != -1){
-				this.updateXsdState(ckd.getXsd_id(), "已出库",ckd.getYsfs(),ckd.getCx_tel(),ckd.getJob_no(),ckd.getSend_time());
+				this.updateXsdState(ckd.getXsd_id(), "已出库",ckd.getYsfs(),ckd.getCx_tel(),ckd.getJob_no(),ckd.getSend_time(),ckd.getStore_id(),ckd.getFzr(),ckd.getCk_date());
 			}
 			
 			//更新相应分销订单的物流状态
@@ -376,11 +376,17 @@ public class CkdService {
 	
 	/**
 	 * 更新相应销售单状态
-	 * @param xsd_id
-	 * @param state
+	 * @param xsd_id     销售单编号
+	 * @param state      状态
+	 * @param ysfs       运输方式
+	 * @param cx_tel     查询电话
+	 * @param job_no     货单号
+	 * @param store_id   出货库房
+	 * @param ck_jsr     出库经手人
+	 * @param send_time  发货时间
 	 */
-	private void updateXsdState(String xsd_id,String state,String ysfs,String cx_tel,String job_no,String send_time){
-		xsdDao.updateXsdState(xsd_id, state,ysfs,cx_tel,job_no,send_time);
+	private void updateXsdState(String xsd_id,String state,String ysfs,String cx_tel,String job_no,String send_time,String store_id,String ck_jsr,String ck_date){
+		xsdDao.updateXsdState(xsd_id, state,ysfs,cx_tel,job_no,send_time, store_id, ck_jsr,ck_date);
 	}
 	
 	

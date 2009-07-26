@@ -114,11 +114,19 @@ if(sp_state.equals("1")){
 		}
 
 		var arryText = resText.split("%");
-		
-		
+
 		//客户地址填充
-		if(arryText != null && arryText.length>0)
-			document.getElementById("kh_address").value = arryText[0];
+		if(arryText != null && arryText.length>0){
+		
+			var arryClientInfo = arryText[0].split("#");			
+			document.getElementById("kh_address").value = arryClientInfo[0];
+
+			if(document.getElementById("kp_mc").value == "") document.getElementById("kp_mc").value = arryClientInfo[1];
+			if(document.getElementById("kp_address").value == "") document.getElementById("kp_address").value = arryClientInfo[2];
+			if(document.getElementById("kp_dh").value == "") document.getElementById("kp_dh").value = arryClientInfo[3];
+			if(document.getElementById("khhzh").value == "") document.getElementById("khhzh").value = arryClientInfo[4];
+			if(document.getElementById("sh").value == "") document.getElementById("sh").value = arryClientInfo[5];
+		}
 		
 		if(arryText != null && arryText.length>1){
 			var linkMantext = arryText[1];
@@ -155,10 +163,9 @@ if(sp_state.equals("1")){
 			}
 		}
 	}
-	
 </script>
 </head>
-<body onload="initFzrTip();initClientTip();">
+<body onload="initFzrTip();initClientTip();chgKpTyle('<%=StringUtils.nullToStr(xsd.getFplx()) %>');">
 <form name="xsdForm" action="updateXsd.html" method="post">
 <input type="hidden" name="xsd.sp_type" id="sp_type" value="<%=StringUtils.nullToStr(xsd.getSp_type()) %>">
 <input type="hidden" name="xsd.sp_state" id="sp_state" value="<%=StringUtils.nullToStr(xsd.getSp_state()) %>">
@@ -396,10 +403,8 @@ if(xsdProducts!=null && xsdProducts.size()>0){
 	<tr height="35">
 		<td class="a2" colspan="4" width="100%">&nbsp;
 			<input type="button" name="button1" value="添加产品" class="css_button3" onclick="openWin();">
-			<input type="button" name="button8" value="清除产品" class="css_button3" onclick="delDesc();"><!--
-			&nbsp;&nbsp;&nbsp;输入序列号：<input type="text" name="s_nums" value="" onkeypress="javascript:f_enter()">
-			<font color="red">注：输入产品序列号回车，自动提取产品信息。</font>
-		--></td>
+			<input type="button" name="button8" value="清除产品" class="css_button3" onclick="delDesc();">
+		</td>
 	</tr>
 	<%
 	}
@@ -468,7 +473,45 @@ if(xsdProducts!=null && xsdProducts.size()>0){
 		</td>		
 	</tr>
 </table>
-<table width="100%"  align="center" class="chart_info" cellpadding="0" cellspacing="0">	
+<BR>
+<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
+	<thead>
+	<tr>
+		<td colspan="4">开票信息</td>
+	</tr>
+	</thead>
+	<tr>
+		<td class="a1" width="15%">发票类型</td>
+		<td class="a2">
+			<select name="xsd.fplx" id="fplx" onchange="chgKpTyle(this.value);">
+				<option value="出库单" <%if(StringUtils.nullToStr(xsd.getFplx()).equals("出库单")) out.print("selected"); %>>出库单</option>
+				<option value="普通发票" <%if(StringUtils.nullToStr(xsd.getFplx()).equals("普通发票")) out.print("selected"); %>>普通发票</option>
+				<option value="增值发票" <%if(StringUtils.nullToStr(xsd.getFplx()).equals("增值发票")) out.print("selected"); %>>增值发票</option>
+			</select>
+		</td>
+		<td class="a1" width="15%" id="mc1">名称</td>
+		<td class="a2" id="mc2"><input type="text" name="xsd.kp_mc" id="kp_mc" value="<%=StringUtils.nullToStr(xsd.getKp_mc()) %>" maxlength="50"></td>				
+	</tr>									
+	<tr>
+		<td class="a1" width="15%" id="dz1" style="display:none">地址</td>
+		<td class="a2" id="dz2" style="display:none"><input type="text" name="xsd.kp_address" id="kp_address" value="<%=StringUtils.nullToStr(xsd.getKp_address()) %>" maxlength="50"></td>	
+		<td class="a1" width="15%" id="dh1" style="display:none">电话</td>
+		<td class="a2" id="dh2" style="display:none"><input type="text" name="xsd.kp_dh" id="kp_dh" value="<%=StringUtils.nullToStr(xsd.getKp_dh()) %>" maxlength="20"></td>		
+	</tr>	
+	<tr>
+		<td class="a1" width="15%" id="zh1" style="display:none">开户行账号</td>
+		<td class="a2"  id="zh2" style="display:none"><input type="text" name="xsd.khhzh" id="khhzh" value="<%=StringUtils.nullToStr(xsd.getKhhzh()) %>" maxlength="50"></td>	
+		<td class="a1" width="15%" id="sh1" style="display:none">税号</td>
+		<td class="a2" id="sh2" style="display:none"><input type="text" name="xsd.sh" id="sh" value="<%=StringUtils.nullToStr(xsd.getSh()) %>" maxlength="50"></td>		
+	</tr>	
+	
+	<tr>
+		<td class="a1" width="15%">发票信息摘要</td>
+		<td class="a2" colspan="3">
+			<textarea rows="2" name="xsd.fpxx" id="fpxx" style="width:75%"><%=StringUtils.nullToStr(xsd.getFpxx()) %></textarea>
+		</td>	
+				
+	</tr>
 	<tr>
 		<td class="a1" width="15%">备&nbsp;&nbsp;注</td>
 		<td class="a2" width="85%" colspan="3">

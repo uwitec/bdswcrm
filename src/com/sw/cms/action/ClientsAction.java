@@ -542,7 +542,12 @@ public class ClientsAction extends BaseAction {
 			
 			//客户地址
 			Clients client = (Clients)clientsService.getClient(clients_id);
-			clientRegInfoText = StringUtils.nullToStr(client.getAddress()) +  "%";
+			clientRegInfoText = StringUtils.nullToStr(client.getAddress()) + "#" + 
+								StringUtils.nullToStr(client.getKp_name())+ "#" + 
+								StringUtils.nullToStr(client.getKp_address())+ "#" + 
+								StringUtils.nullToStr(client.getKp_tel())+ "#" + 
+								StringUtils.nullToStr(client.getKp_khhzh())+ "#" + 
+								StringUtils.nullToStr(client.getKp_sh()) + "%";
 			
 			//联系人信息
 			List linkManList = clientsService.getClientsLinkman(clients_id);

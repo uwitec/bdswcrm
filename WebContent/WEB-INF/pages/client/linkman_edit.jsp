@@ -61,6 +61,25 @@ ClientsLinkman  linkman = (ClientsLinkman)VS.findValue("linkman");
 		</td>		
 	</tr>
 	<tr>
+		<td class="a1" width="15%">工作电话</td>
+		<td class="a2" width="35%"><input type="text" name="linkman.gzdh" id="gzdh" value="<%=StringUtils.nullToStr(linkman.getGzdh()) %>"  ></td>	
+		<td class="a1" width="15%">移动电话</td>
+		<td class="a2" width="35%"><input type="text" name="linkman.yddh" id="yddh" value="<%=StringUtils.nullToStr(linkman.getYddh()) %>"  ></td>			
+	</tr>
+	<tr>
+		<td class="a1" width="15%">家庭电话</td>
+		<td class="a2" width="35%"><input type="text" name="linkman.jtdh" id="jtdh" value="<%=StringUtils.nullToStr(linkman.getJtdh())%>" ></td>
+		<td class="a1" width="15%">其他联系方式</td>
+		<td class="a2" width="35%"><input type="text" name="linkman.qtlx" id="qtlx" value="<%=StringUtils.nullToStr(linkman.getQtlx()) %>"  ></td>		
+	</tr>	
+	<tr>
+		<td class="a1" width="15%">E-Mail</td>
+		<td class="a2" width="35%"><input type="text" name="linkman.mail" id="mail" value="<%=StringUtils.nullToStr(linkman.getMail()) %>"  ></td>	
+		<td class="a1" width="15%">部门</td>
+		<td class="a2" width="35%"><input type="text" name="linkman.dept" id="dept" value="<%=StringUtils.nullToStr(linkman.getDept()) %>"  ></td>
+		
+	</tr>
+	<tr>
 		<td class="a1" width="15%">性别</td>
 		<td class="a2" width="35%">
           <select name="linkman.sex" id="sex">
@@ -69,36 +88,17 @@ ClientsLinkman  linkman = (ClientsLinkman)VS.findValue("linkman");
 			</select>
         </td>
 		<td class="a1" width="15%">职务</td>
-		<td class="a2" width="35%"><input type="text" name="linkman.zw" id="zw" value="<%=StringUtils.nullToStr(linkman.getZw()) %>"  ></td>		
-	</tr>
+		<td class="a2" width="35%"><input type="text" name="linkman.zw" id="zw" value="<%=StringUtils.nullToStr(linkman.getZw()) %>"  ></td>			
+	</tr>		
 	<tr>
-		<td class="a1" width="15%">部门</td>
-		<td class="a2" width="35%"><input type="text" name="linkman.dept" id="dept" value="<%=StringUtils.nullToStr(linkman.getDept()) %>"  ></td>
-		<td class="a1" width="15%">工作电话</td>
-		<td class="a2" width="35%"><input type="text" name="linkman.gzdh" id="gzdh" value="<%=StringUtils.nullToStr(linkman.getGzdh()) %>"  ></td>		
-	</tr>
-	<tr>
-		<td class="a1" width="15%">爱好</td>
-		<td class="a2" width="35%"><input type="text" name="linkman.ah" id="ah" value="<%=StringUtils.nullToStr(linkman.getAh()) %>"></td>	
 		<td class="a1" width="15%">生日</td>
 		<td class="a2" width="35%"><input type="text" name="linkman.sr" id="sr" value="<%if(null!=linkman.getSr()) out.print(linkman.getSr().substring(0,11)); %>" readonly="readonly">
 		  <img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.getElementById('sr')); return false;">
-		</td>
+		</td>	
+		<td class="a1" width="15%">爱好</td>
+		<td class="a2" width="35%"><input type="text" name="linkman.ah" id="ah" value="<%=StringUtils.nullToStr(linkman.getAh()) %>"></td>
 	</tr>		
-	<tr>
-		<td class="a1" width="15%">移动电话</td>
-		<td class="a2" width="35%"><input type="text" name="linkman.yddh" id="yddh" value="<%=StringUtils.nullToStr(linkman.getYddh()) %>"  ></td>	
-		<td class="a1" width="15%">E-Mail</td>
-		<td class="a2" width="35%"><input type="text" name="linkman.mail" id="mail" value="<%=StringUtils.nullToStr(linkman.getMail()) %>"  ></td>		
-	</tr>	
-	<tr>
-		<td class="a1" width="15%">家庭电话</td>
-		<td class="a2" width="35%"><input type="text" name="linkman.jtdh" id="jtdh" value="<%=StringUtils.nullToStr(linkman.getJtdh())%>" ></td>
-		<td class="a1" width="15%">其他联系方式</td>
-		<td class="a2" width="35%"><input type="text" name="linkman.qtlx" id="qtlx" value="<%=StringUtils.nullToStr(linkman.getQtlx()) %>"  ></td>		
-	</tr>		
-	
-	 
+
 	<tr height="50">
 		<td class="a1">备注</td>
 		<td class="a2" colspan="3">

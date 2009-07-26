@@ -12,7 +12,7 @@ session.removeAttribute("MSG");
 %>
 <html>
 <head>
-<title>客户管理</title>
+<title>往来单位</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript" src="js/Check.js"></script>
@@ -119,6 +119,31 @@ session.removeAttribute("MSG");
 			<textarea rows="3" cols="50" name="client.remark" id="remark" style="width:80%" maxlength="500"></textarea>
 		</td>
 	</tr>	
+</table>
+<br>
+<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
+	<thead>
+	<tr>
+		<td colspan="4">开票信息</td>
+	</tr>
+	</thead>
+	<tr> 
+	     
+		<td class="a1" width="15%">单位全称</td>
+		<td class="a2" width="35%"><input type="text" name="client.kp_name" id="kp_name" value="" size="30" maxlength="100"></td>
+		<td class="a1" width="15%">地址</td>
+		<td class="a2" width="35%"><input type="text" name="client.kp_address" id="kp_address" value="" size="30" maxlength="100"></td>		
+	</tr>
+	<tr>
+		<td class="a1" width="15%">电话</td>
+		<td class="a2" width="35%"><input type="text" name="client.kp_tel" id="kp_tel" value="" maxlength="20"></td>
+		<td class="a1" width="15%">税号</td>
+		<td class="a2" width="35%"><input type="text" name="client.kp_sh" id="kp_sh" value="" maxlength="50"></td>	
+	</tr>
+	<tr>
+		<td class="a1" width="15%">开户行帐号</td>
+		<td class="a2" colspan="3"><input type="text" name="client.kp_khhzh" id="kp_khhzh" value="" maxlength="50"></td>		
+	</tr>
 </table>
 <br>
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">

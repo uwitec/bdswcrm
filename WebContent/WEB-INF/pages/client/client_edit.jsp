@@ -16,7 +16,7 @@ session.removeAttribute("MSG");
 
 <html>
 <head>
-<title>客户管理</title>
+<title>往来单位</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript" src="js/Check.js"></script>
@@ -38,7 +38,7 @@ session.removeAttribute("MSG");
 			return;
 		}
 		
-		if(document.getElementById("khjl").value == ""){
+		if(document.getElementById("fzr").value == ""){
 			alert("客户经理不能为空，请选择！");
 			return;
 		}		
@@ -57,7 +57,7 @@ session.removeAttribute("MSG");
 	}		
 </script>
 </head>
-<body oncontextmenu="return false;" >
+<body onload="initFzrTip();">
 <form name="clientForm" action="updateClient.html" method="post">
 <input type="hidden" name="client.id" id="id" value="<%=StringUtils.nullToStr(client.getId()) %>">
 <center>
@@ -93,7 +93,7 @@ session.removeAttribute("MSG");
 		<td class="a1" width="15%">地址</td>
 		<td class="a2" width="35%"><input type="text" name="client.address" id="address" value="<%=StringUtils.nullToStr(client.getAddress()) %>" maxlength="50"></td>			
 		<td class="a1" width="15%">固定电话</td>
-		<td class="a2" width="35%"><input type="text" name="client.gzdh" id="gzdh" value="<%=StringUtils.nullToStr(client.getGzdh()) %>" maxlength="10"></td>
+		<td class="a2" width="35%"><input type="text" name="client.gzdh" id="gzdh" value="<%=StringUtils.nullToStr(client.getGzdh()) %>" maxlength="20"></td>
 	</tr>
 	 
 	<tr>
@@ -103,7 +103,7 @@ session.removeAttribute("MSG");
 		<td class="a2" width="35%">
 		    <input  id="brand"    type="text"   length="20"  onblur="setValue()" value="<%=StaticParamDo.getRealNameById(client.getKhjl()) %>"/>
             <div   id="brandTip"  style="height:12px;position:absolute;left:417px; top:141px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
-		    <input type="hidden" name="client.khjl" id="khjl"  value="<%=client.getKhjl()%>"/> 
+		    <input type="hidden" name="client.khjl" id="fzr"  value="<%=client.getKhjl()%>"/> 
 		</td>		
 	</tr>	 				
 	<tr>
@@ -117,13 +117,38 @@ session.removeAttribute("MSG");
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
+		<td colspan="4">开票信息</td>
+	</tr>
+	</thead>
+	<tr> 
+	     
+		<td class="a1" width="15%">单位全称</td>
+		<td class="a2" width="35%"><input type="text" name="client.kp_name" id="kp_name" value="<%=StringUtils.nullToStr(client.getKp_name()) %>" size="30" maxlength="100"></td>
+		<td class="a1" width="15%">地址</td>
+		<td class="a2" width="35%"><input type="text" name="client.kp_address" id="kp_address" value="<%=StringUtils.nullToStr(client.getKp_address()) %>" size="30" maxlength="100"></td>		
+	</tr>
+	<tr>
+		<td class="a1" width="15%">电话</td>
+		<td class="a2" width="35%"><input type="text" name="client.kp_tel" id="kp_tel" value="<%=StringUtils.nullToStr(client.getKp_tel()) %>" maxlength="20"></td>
+		<td class="a1" width="15%">税号</td>
+		<td class="a2" width="35%"><input type="text" name="client.kp_sh" id="kp_sh" value="<%=StringUtils.nullToStr(client.getKp_sh()) %>" maxlength="50"></td>	
+	</tr>
+	<tr>
+		<td class="a1" width="15%">开户行帐号</td>
+		<td class="a2" colspan="3"><input type="text" name="client.kp_khhzh" id="kp_khhzh" value="<%=StringUtils.nullToStr(client.getKp_khhzh()) %>" maxlength="50"></td>		
+	</tr>
+</table>
+<br>
+<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
+	<thead>
+	<tr>
 		<td colspan="4">备 注</td>
 	</tr>
 	</thead>
 	<tr height="50">
 		<td class="a1" width="20%">备注</td>
 		<td class="a2" width="80%">
-			<textarea rows="6" cols="50" name="client.remark" id="remark" style="width:80%" maxlength="500"><%=StringUtils.nullToStr(client.getRemark()) %></textarea>
+			<textarea rows="5" cols="50" name="client.remark" id="remark" style="width:80%" maxlength="500"><%=StringUtils.nullToStr(client.getRemark()) %></textarea>
 		</td>
 	</tr>
 	

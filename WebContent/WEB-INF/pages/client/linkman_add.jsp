@@ -22,11 +22,9 @@ String clinetsid = (String)VS.findValue("id");
 			alert("姓名不能为空，请选择！");
 			return;
 		}
-		if(document.getElementById("mail").value!="")
-	    {
+		if(document.getElementById("mail").value!=""){
 	      var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/;
-          if(reg.test(document.getElementById("mail").value)==false)
-          {
+          if(reg.test(document.getElementById("mail").value)==false){
              alert("邮箱格式不正确！");
              return ;
           }
@@ -57,6 +55,25 @@ String clinetsid = (String)VS.findValue("id");
 		</td>		
 	</tr>
 	<tr>
+		<td class="a1" width="15%">固定电话</td>
+		<td class="a2" width="35%"><input type="text" name="linkman.gzdh" id="gzdh" value=""  ></td>
+		<td class="a1" width="15%">移动电话</td>
+		<td class="a2" width="35%"><input type="text" name="linkman.yddh" id="yddh" value=""  ></td>				
+	</tr>
+	<tr>
+		<td class="a1" width="15%">家庭电话</td>
+		<td class="a2" width="35%"><input type="text" name="linkman.jtdh" id="jtdh" value="" ></td>
+		<td class="a1" width="15%">其他联系方式</td>
+		<td class="a2" width="35%"><input type="text" name="linkman.qtlx" id="qtlx" value=""  ></td>		
+	</tr>	
+	<tr>
+		<td class="a1" width="15%">E-Mail</td>
+		<td class="a2" width="35%"><input type="text" name="linkman.mail" id="mail" value=""  ></td>		
+		<td class="a1" width="15%">部门</td>
+		<td class="a2" width="35%"><input type="text" name="linkman.dept" id="dept" value=""  ></td>
+		
+	</tr>
+	<tr>
 		<td class="a1" width="15%">性别</td>
 		<td class="a2" width="35%">
           <select name="linkman.sex" id="sex">
@@ -65,36 +82,16 @@ String clinetsid = (String)VS.findValue("id");
 			</select>
         </td>
 		<td class="a1" width="15%">职务</td>
-		<td class="a2" width="35%"><input type="text" name="linkman.zw" id="zw" value=""  ></td>		
-	</tr>
+		<td class="a2" width="35%"><input type="text" name="linkman.zw" id="zw" value=""  ></td>
+	</tr>	
 	<tr>
-		<td class="a1" width="15%">部门</td>
-		<td class="a2" width="35%"><input type="text" name="linkman.dept" id="dept" value=""  ></td>
-		<td class="a1" width="15%">工作电话</td>
-		<td class="a2" width="35%"><input type="text" name="linkman.gzdh" id="gzdh" value=""  ></td>		
-	</tr>
-	<tr>
-		<td class="a1" width="15%">爱好</td>
-		<td class="a2" width="35%"><input type="text" name="linkman.ah" id="ah"></td>	
 		<td class="a1" width="15%">生日</td>
 		<td class="a2" width="35%"><input type="text" name="linkman.sr" id="sr" readonly="readonly">
 		  <img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.getElementById('sr')); return false;">
-		</td>
-	</tr>		
-	<tr>
-		<td class="a1" width="15%">移动电话</td>
-		<td class="a2" width="35%"><input type="text" name="linkman.yddh" id="yddh" value=""  ></td>	
-		<td class="a1" width="15%">E-Mail</td>
-		<td class="a2" width="35%"><input type="text" name="linkman.mail" id="mail" value=""  ></td>		
-	</tr>	
-	<tr>
-		<td class="a1" width="15%">家庭电话</td>
-		<td class="a2" width="35%"><input type="text" name="linkman.jtdh" id="jtdh" value="" ></td>
-		<td class="a1" width="15%">其他联系方式</td>
-		<td class="a2" width="35%"><input type="text" name="linkman.qtlx" id="qtlx" value=""  ></td>		
-	</tr>		
-	
-	 
+		</td>	
+		<td class="a1" width="15%">爱好</td>
+		<td class="a2" width="35%"><input type="text" name="linkman.ah" id="ah"></td>	
+	</tr>			
 	<tr height="50">
 		<td class="a1">备注</td>
 		<td class="a2" colspan="3">

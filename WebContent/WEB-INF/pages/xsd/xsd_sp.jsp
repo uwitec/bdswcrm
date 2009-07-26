@@ -40,47 +40,93 @@ session.removeAttribute("messages");
 		document.xsdForm.submit();
 	}
 	
-	//显示消息DIV
-	function divInit(){	
-		<%if((msg != null && msg.size() > 0)){ %>
-		document.getElementById("msg_div").style.visibility = "visible";
-		<%}%>
-	}
-	
-	//隐藏消息DIV
-	function hiddenDiv(){
-		document.getElementById("msg_div").style.visibility = "hidden";
-	}	
+	function chgKpTyle(vD){
+		var obj_mc1 = document.getElementById("mc1");
+		var obj_mc2 = document.getElementById("mc2");
+		
+		var obj_dz1 = document.getElementById("dz1");
+		var obj_dz2 = document.getElementById("dz2");
+		
+		var obj_dh1 = document.getElementById("dh1");
+		var obj_dh2 = document.getElementById("dh2");
+		
+		var obj_zh1 = document.getElementById("zh1");
+		var obj_zh2 = document.getElementById("zh2");
+		
+		var obj_sh1 = document.getElementById("sh1");
+		var obj_sh2 = document.getElementById("sh2");
+		
+		if(vD == "出库单"){
+			obj_mc1.style.display = "";
+			obj_mc2.style.display = "";
+			
+			obj_dz1.style.display = "none";
+			obj_dz2.style.display = "none";
+			
+			obj_dh1.style.display = "none";
+			obj_dh2.style.display = "none";
+			
+			obj_zh1.style.display = "none";
+			obj_zh2.style.display = "none";
+			
+			obj_sh1.style.display = "none";
+			obj_sh2.style.display = "none";			
+		}else if(vD == "普通发票"){
+			obj_mc1.style.display = "";
+			obj_mc2.style.display = "";
+			
+			obj_dz1.style.display = "";
+			obj_dz2.style.display = "";
+			
+			obj_dh1.style.display = "";
+			obj_dh2.style.display = "";
+			
+			obj_zh1.style.display = "none";
+			obj_zh2.style.display = "none";
+			
+			obj_sh1.style.display = "none";
+			obj_sh2.style.display = "none";			
+		}else if(vD == "增值发票"){
+			obj_mc1.style.display = "";
+			obj_mc2.style.display = "";
+			
+			obj_dz1.style.display = "";
+			obj_dz2.style.display = "";
+			
+			obj_dh1.style.display = "";
+			obj_dh2.style.display = "";
+			
+			obj_zh1.style.display = "";
+			obj_zh2.style.display = "";
+			
+			obj_sh1.style.display = "";
+			obj_sh2.style.display = "";			
+		}		
+	}			
 </script>
 </head>
-<body onload="divInit();">
+<body onload="chgKpTyle('<%=StringUtils.nullToStr(xsd.getFplx()) %>');">
 <form name="xsdForm" action="doSpXsd.html" method="post">
 	<input type="hidden" name="id" value="<%=StringUtils.nullToStr(xsd.getId()) %>">
 	<input type="hidden" name="sp_state" value="">
 </form>
-<div name="msg_div" id="msg_div" class="msg_div_style" onclick="hiddenDiv();" title="点击隐藏提示信息" style="position:absolute;left:2px;top:1px;width:828px;visibility:hidden">
-	<table width="100%" style="font-size: 12px;" border="0"  cellspacing="5" height="100%">
-		<tr><td align="right"><img src="index_images/tabClose.gif" border="0" style="cursor:hand" onclick="hiddenDiv();" title="关闭"></td></tr>
-		<tr>
-			<td width="100%" align="left"><font color="red">
-			<%
-			if(msg != null && msg.size() > 0){
-				for(int i=0;i<msg.size();i++){
-					out.print(StringUtils.nullToStr(msg.get(i)) + "<BR>");
-				}
-			}
-			%>	
-			<BR></font>		
-			</td>
-		</tr>
-	</table>
-</div>
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
 		<td colspan="4">销售订单信息</td>
 	</tr>
 	</thead>
+<%
+if(msg != null && msg.size() > 0){
+	for(int i=0;i<msg.size();i++){
+%>
+	<tr>
+		<td colspan="4" class="a2"><font color="red"><%=StringUtils.nullToStr(msg.get(i)) %></font></td>
+	</tr>	
+<%
+	}
+}
+%>	
 	<tr>
 		<td class="a1" width="15%">销售订单编号</td>
 		<td class="a2" width="35%"><%=StringUtils.nullToStr(xsd.getId()) %></td>
@@ -183,17 +229,43 @@ if(xsdProducts!=null && xsdProducts.size()>0){
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td colspan="2">描述信息</td>
+		<td colspan="4">开票信息</td>
 	</tr>
 	</thead>
 	<tr>
+		<td class="a1" width="15%">发票类型</td>
+		<td class="a2" width="35%"><%=StringUtils.nullToStr(xsd.getFplx()) %></td>
+		<td class="a1" width="15%" id="mc1">名称</td>
+		<td class="a2" id="mc2"><%=StringUtils.nullToStr(xsd.getKp_mc()) %></td>				
+	</tr>									
+	<tr>
+		<td class="a1" width="15%" id="dz1" style="display:none">地址</td>
+		<td class="a2" id="dz2" style="display:none"><%=StringUtils.nullToStr(xsd.getKp_address()) %></td>	
+		<td class="a1" width="15%" id="dh1" style="display:none">电话</td>
+		<td class="a2" id="dh2" style="display:none"><%=StringUtils.nullToStr(xsd.getKp_dh()) %></td>		
+	</tr>	
+	<tr>
+		<td class="a1" width="15%" id="zh1" style="display:none">开户行账号</td>
+		<td class="a2"  id="zh2" style="display:none"><%=StringUtils.nullToStr(xsd.getKhhzh()) %></td>	
+		<td class="a1" width="15%" id="sh1" style="display:none">税号</td>
+		<td class="a2" id="sh2" style="display:none"><%=StringUtils.nullToStr(xsd.getSh()) %></td>		
+	</tr>	
+	
+	<tr>
+		<td class="a1" width="15%">发票信息摘要</td>
+		<td class="a2" colspan="3">
+			<textarea rows="2" name="xsd.fpxx" id="fpxx" style="width:75%" readonly><%=StringUtils.nullToStr(xsd.getFpxx()) %></textarea>
+		</td>	
+				
+	</tr>
+	<tr>
 		<td class="a1" width="15%">描述信息</td>
-		<td class="a2" width="85%">
+		<td class="a2" width="85%" colspan="3">
 			<textarea rows="3" name="xsd.ms" id="ms" style="width:75%" readonly><%=StringUtils.nullToStr(xsd.getMs()) %></textarea>
 		</td>
 	</tr>		
 	<tr height="35">
-		<td class="a1" colspan="2">
+		<td class="a1" colspan="4">
 			<input type="reset" name="button2" value="审批通过" class="css_button3" onclick="doSp('3');">&nbsp;&nbsp;
 			<input type="reset" name="button2" value="审批不通过" class="css_button3" onclick="doSp('4');">&nbsp;&nbsp;		
 			<input type="reset" name="button2" value="关 闭" class="css_button2" onclick="window.close();;">

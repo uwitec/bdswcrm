@@ -23,7 +23,12 @@ public class Xsd {
 	private String kh_address; //客户地址
 	private String kh_lxr;     //客户联系人
 	private String kh_lxdh;    //客户联系电话	
+	
 	private String store_id;   //出货库房
+	private String ck_jsr;     //出库经手人
+	private String ck_date;
+	
+	
 	private String ysfs;       //运输方式	
 	private double xjd = 0;       //现金点
 	private double ysje = 0;      //预收金额
@@ -43,6 +48,15 @@ public class Xsd {
 	private String cx_tel;      //查询电话
 	private String job_no;      //货单号
 	private String send_time;   //发货时间
+	
+	//开票信息
+	private String fplx;         //发票类型
+	private String kp_mc;         //开票名称
+	private String kp_address;   //开票地址
+	private String kp_dh;        //开票电话
+	private String khhzh;        //开户行账号
+	private String sh;           //税号
+	private String fpxx;         //发票信息
 	
 	public String getClient_name() {
 		return client_name;
@@ -271,6 +285,60 @@ public class Xsd {
 	}
 	public void setSkfs(String skfs) {
 		this.skfs = skfs;
+	}
+	public String getFplx() {
+		return fplx;
+	}
+	public void setFplx(String fplx) {
+		this.fplx = fplx;
+	}
+	public String getFpxx() {
+		return fpxx;
+	}
+	public void setFpxx(String fpxx) {
+		this.fpxx = fpxx;
+	}
+	public String getKhhzh() {
+		return khhzh;
+	}
+	public void setKhhzh(String khhzh) {
+		this.khhzh = khhzh;
+	}
+	public String getKp_address() {
+		return kp_address;
+	}
+	public void setKp_address(String kp_address) {
+		this.kp_address = kp_address;
+	}
+	public String getKp_dh() {
+		return kp_dh;
+	}
+	public void setKp_dh(String kp_dh) {
+		this.kp_dh = kp_dh;
+	}
+	public String getSh() {
+		return sh;
+	}
+	public void setSh(String sh) {
+		this.sh = sh;
+	}
+	public String getKp_mc() {
+		return kp_mc;
+	}
+	public void setKp_mc(String kp_mc) {
+		this.kp_mc = kp_mc;
+	}
+	public String getCk_jsr() {
+		return ck_jsr;
+	}
+	public void setCk_jsr(String ck_jsr) {
+		this.ck_jsr = ck_jsr;
+	}
+	public String getCk_date() {
+		return ck_date;
+	}
+	public void setCk_date(String ck_date) {
+		this.ck_date = ck_date;
 	}
 
 }

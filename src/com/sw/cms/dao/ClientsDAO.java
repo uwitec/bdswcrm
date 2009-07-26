@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.jdbc.core.RowMapper;
 
 import com.sw.cms.dao.base.JdbcBaseDAO;
+import com.sw.cms.dao.base.SqlUtil;
 import com.sw.cms.model.Clients;
 import com.sw.cms.model.Page;
 import com.sw.cms.util.GB2Alpha;
@@ -91,9 +92,12 @@ public class ClientsDAO extends JdbcBaseDAO {
 	 * @param clients
 	 */
 	public Object saveClient(Clients clients){
-		String sql = "insert into clients(name,lxr,lxdh,mobile,address,p_code,mail,msn,qq,zq,xe,remark,ygs,gsxz,client_type,khjl,id,gzdh,cz,comaddress,china_py) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		String sql = "insert into clients(name,lxr,lxdh,mobile,address,p_code,mail,msn,qq,zq,xe," +
+				"remark,ygs,gsxz,client_type,khjl,id,gzdh,cz,comaddress,china_py," +
+				"kp_name,kp_address,kp_tel,kp_khhzh,kp_sh) " +
+				"values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		
-		Object[] param = new Object[21];
+		Object[] param = new Object[26];
 		
 		
 		param[0] = clients.getName();
@@ -120,6 +124,12 @@ public class ClientsDAO extends JdbcBaseDAO {
 		GB2Alpha gb2Alpha = new GB2Alpha();
 		param[20] = gb2Alpha.String2Alpha(clients.getName());
 		
+		param[21]= clients.getKp_name();
+		param[22]= clients.getKp_address();
+		param[23]= clients.getKp_tel();
+		param[24]= clients.getKp_khhzh();
+		param[25]= clients.getKp_sh();
+		
 		this.getJdbcTemplate().update(sql,param);
 		return param[16];
 		
@@ -133,9 +143,11 @@ public class ClientsDAO extends JdbcBaseDAO {
 	 */
 	public void updateClient(Clients clients){
 		
-		String sql = "update clients set name=?,lxr=?,lxdh=?,mobile=?,address=?,p_code=?,mail=?,msn=?,qq=?,zq=?,xe=?,remark=?,ygs=?,gsxz=?,client_type=?,khjl=?,gzdh=?,cz=?,comaddress=?,china_py=? where id=?";
+		String sql = "update clients set name=?,lxr=?,lxdh=?,mobile=?,address=?,p_code=?,mail=?," +
+				"msn=?,qq=?,zq=?,xe=?,remark=?,ygs=?,gsxz=?,client_type=?,khjl=?,gzdh=?,cz=?," +
+				"comaddress=?,china_py=?,kp_name=?,kp_address=?,kp_tel=?,kp_khhzh=?,kp_sh=? where id=?";
 		
-		Object[] param = new Object[21];
+		Object[] param = new Object[26];
 		
 		
 		param[0] = clients.getName();
@@ -162,7 +174,13 @@ public class ClientsDAO extends JdbcBaseDAO {
 		GB2Alpha gb2Alpha = new GB2Alpha();
 		param[19] = gb2Alpha.String2Alpha(clients.getName());
 		
-		param[20] = clients.getId();
+		param[20]= clients.getKp_name();
+		param[21]= clients.getKp_address();
+		param[22]= clients.getKp_tel();
+		param[23]= clients.getKp_khhzh();
+		param[24]= clients.getKp_sh();
+		
+		param[25] = clients.getId();
 		
 		this.getJdbcTemplate().update(sql,param);
 		
@@ -320,27 +338,33 @@ public class ClientsDAO extends JdbcBaseDAO {
 		public Object mapRow(ResultSet rs, int index) throws SQLException {
 			Clients clients = new Clients();
 
-			clients.setId(rs.getString("id"));
-			clients.setName(rs.getString("name"));
-			clients.setLxr(rs.getString("lxr"));
-			clients.setLxdh(rs.getString("lxdh"));
-			clients.setMobile(rs.getString("mobile"));
-			clients.setAddress(rs.getString("address"));
-			clients.setP_code(rs.getString("p_code"));
-			clients.setMail(rs.getString("mail"));
-			clients.setMsn(rs.getString("msn"));
-			clients.setQq(rs.getString("qq"));
-			clients.setZq(rs.getString("zq"));
-			clients.setXe(rs.getDouble("xe"));
-			clients.setRemark(rs.getString("remark"));
-			clients.setYgs(rs.getString("ygs"));
-			clients.setGsxz(rs.getString("gsxz"));
-			clients.setClient_type(rs.getString("client_type"));
-			clients.setKhjl(rs.getString("khjl"));
-			clients.setGzdh(rs.getString("gzdh"));
-			clients.setCz(rs.getString("cz"));
-			clients.setComaddress(rs.getString("comaddress"));
-			clients.setChina_py(rs.getString("china_py"));
+			if(SqlUtil.columnIsExist(rs,"id")) clients.setId(rs.getString("id"));
+			if(SqlUtil.columnIsExist(rs,"name")) clients.setName(rs.getString("name"));
+			if(SqlUtil.columnIsExist(rs,"lxr")) clients.setLxr(rs.getString("lxr"));
+			if(SqlUtil.columnIsExist(rs,"lxdh")) clients.setLxdh(rs.getString("lxdh"));
+			if(SqlUtil.columnIsExist(rs,"mobile")) clients.setMobile(rs.getString("mobile"));
+			if(SqlUtil.columnIsExist(rs,"address")) clients.setAddress(rs.getString("address"));
+			if(SqlUtil.columnIsExist(rs,"p_code")) clients.setP_code(rs.getString("p_code"));
+			if(SqlUtil.columnIsExist(rs,"mail")) clients.setMail(rs.getString("mail"));
+			if(SqlUtil.columnIsExist(rs,"msn")) clients.setMsn(rs.getString("msn"));
+			if(SqlUtil.columnIsExist(rs,"qq")) clients.setQq(rs.getString("qq"));
+			if(SqlUtil.columnIsExist(rs,"zq")) clients.setZq(rs.getString("zq"));
+			if(SqlUtil.columnIsExist(rs,"xe")) clients.setXe(rs.getDouble("xe"));
+			if(SqlUtil.columnIsExist(rs,"remark")) clients.setRemark(rs.getString("remark"));
+			if(SqlUtil.columnIsExist(rs,"ygs")) clients.setYgs(rs.getString("ygs"));
+			if(SqlUtil.columnIsExist(rs,"gsxz")) clients.setGsxz(rs.getString("gsxz"));
+			if(SqlUtil.columnIsExist(rs,"client_type")) clients.setClient_type(rs.getString("client_type"));
+			if(SqlUtil.columnIsExist(rs,"khjl")) clients.setKhjl(rs.getString("khjl"));
+			if(SqlUtil.columnIsExist(rs,"gzdh")) clients.setGzdh(rs.getString("gzdh"));
+			if(SqlUtil.columnIsExist(rs,"cz")) clients.setCz(rs.getString("cz"));
+			if(SqlUtil.columnIsExist(rs,"comaddress")) clients.setComaddress(rs.getString("comaddress"));
+			if(SqlUtil.columnIsExist(rs,"china_py")) clients.setChina_py(rs.getString("china_py"));
+			
+			if(SqlUtil.columnIsExist(rs,"kp_name")) clients.setKp_name(rs.getString("kp_name"));
+			if(SqlUtil.columnIsExist(rs,"kp_address")) clients.setKp_address(rs.getString("kp_address"));
+			if(SqlUtil.columnIsExist(rs,"kp_tel")) clients.setKp_tel(rs.getString("kp_tel"));
+			if(SqlUtil.columnIsExist(rs,"kp_khhzh")) clients.setKp_khhzh(rs.getString("kp_khhzh"));
+			if(SqlUtil.columnIsExist(rs,"kp_sh")) clients.setKp_sh(rs.getString("kp_sh"));
 			
 			return clients;
 		}

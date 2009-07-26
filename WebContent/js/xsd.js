@@ -422,3 +422,68 @@ function selSkfs(vl){
 		document.getElementById("pos_id").value = "";
 	}
 }
+
+
+function chgKpTyle(vD){
+	var obj_mc1 = document.getElementById("mc1");
+	var obj_mc2 = document.getElementById("mc2");
+	
+	var obj_dz1 = document.getElementById("dz1");
+	var obj_dz2 = document.getElementById("dz2");
+	
+	var obj_dh1 = document.getElementById("dh1");
+	var obj_dh2 = document.getElementById("dh2");
+	
+	var obj_zh1 = document.getElementById("zh1");
+	var obj_zh2 = document.getElementById("zh2");
+	
+	var obj_sh1 = document.getElementById("sh1");
+	var obj_sh2 = document.getElementById("sh2");
+	
+	if(vD == "出库单"){
+		obj_mc1.style.display = "";
+		obj_mc2.style.display = "";
+		
+		obj_dz1.style.display = "none";
+		obj_dz2.style.display = "none";
+		
+		obj_dh1.style.display = "none";
+		obj_dh2.style.display = "none";
+		
+		obj_zh1.style.display = "none";
+		obj_zh2.style.display = "none";
+		
+		obj_sh1.style.display = "none";
+		obj_sh2.style.display = "none";			
+	}else if(vD == "普通发票"){
+		obj_mc1.style.display = "";
+		obj_mc2.style.display = "";
+		
+		obj_dz1.style.display = "";
+		obj_dz2.style.display = "";
+		
+		obj_dh1.style.display = "";
+		obj_dh2.style.display = "";
+		
+		obj_zh1.style.display = "none";
+		obj_zh2.style.display = "none";
+		
+		obj_sh1.style.display = "none";
+		obj_sh2.style.display = "none";			
+	}else if(vD == "增值发票"){
+		obj_mc1.style.display = "";
+		obj_mc2.style.display = "";
+		
+		obj_dz1.style.display = "";
+		obj_dz2.style.display = "";
+		
+		obj_dh1.style.display = "";
+		obj_dh2.style.display = "";
+		
+		obj_zh1.style.display = "";
+		obj_zh2.style.display = "";
+		
+		obj_sh1.style.display = "";
+		obj_sh2.style.display = "";			
+	}		
+}	

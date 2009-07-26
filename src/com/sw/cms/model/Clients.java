@@ -26,6 +26,12 @@ public class Clients {
 	
 	private String china_py;     //汉语拼音缩写
 	
+	private String kp_name;     //开票信息--单位全称
+	private String kp_address;  //开票信息--地址
+	private String kp_tel;      //开票信息--电话
+	private String kp_khhzh;    //开票信息--开户行账号
+	private String kp_sh;       //开票信息--税号
+	
 	public String getChina_py() {
 		return china_py;
 	}
@@ -151,6 +157,36 @@ public class Clients {
 	}
 	public void setGzdh(String gzdh) {
 		this.gzdh = gzdh;
+	}
+	public String getKp_address() {
+		return kp_address;
+	}
+	public void setKp_address(String kp_address) {
+		this.kp_address = kp_address;
+	}
+	public String getKp_khhzh() {
+		return kp_khhzh;
+	}
+	public void setKp_khhzh(String kp_khhzh) {
+		this.kp_khhzh = kp_khhzh;
+	}
+	public String getKp_name() {
+		return kp_name;
+	}
+	public void setKp_name(String kp_name) {
+		this.kp_name = kp_name;
+	}
+	public String getKp_sh() {
+		return kp_sh;
+	}
+	public void setKp_sh(String kp_sh) {
+		this.kp_sh = kp_sh;
+	}
+	public String getKp_tel() {
+		return kp_tel;
+	}
+	public void setKp_tel(String kp_tel) {
+		this.kp_tel = kp_tel;
 	}
 	
 }

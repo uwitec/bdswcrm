@@ -50,7 +50,7 @@
 			<td class="a2"><b>第二步</b>、维护产品基础数据，包括产品分类及产品资料，要维护产品基础数请点击“产品维护”链接。&nbsp;<a href="javascript:void(0);" onclick="parent.addtabFmMenu('产品维护','product.html','');">产品维护</a></td>			
 		</tr>
 		<tr>
-			<td class="a2"><b>第三步</b>、维护往来单位信息，要维护往来单位信息请点击“往来单位”链接。&nbsp;<a href="javascript:void(0);" onclick="parent.addtabFmMenu('往来单位','listClient.html','');">往来单位</a></td>			
+			<td class="a2"><b>第三步</b>、录入员工信息，要录入员工信息请点击“员工管理”链接。&nbsp;<a href="javascript:void(0);" onclick="parent.addtabFmMenu('员工管理','showEmployeeFrame.html','');">员工管理</a></td>			
 		</tr>
 
 		<tr>
@@ -61,7 +61,7 @@
 		</tr>
 
 		<tr>
-			<td class="a2"><b>第六步</b>、录入员工信息，要录入员工信息请点击“员工管理”链接。&nbsp;<a href="javascript:void(0);" onclick="parent.addtabFmMenu('员工管理','showEmployeeFrame.html','');">员工管理</a></td>			
+			<td class="a2"><b>第六步</b>、维护往来单位及相应联系人信息，要维护往来单位信息请点击“往来单位”链接。&nbsp;<a href="javascript:void(0);" onclick="parent.addtabFmMenu('往来单位','listClient.html','');">往来单位</a></td>			
 		</tr>
 		<tr>
 			<td class="a2"><b>第七步</b>、初始账户金额，初始账号金额请点击“账户初始”链接。&nbsp;<a href="javascript:void(0);" onclick="parent.addtabFmMenu('账号初始','initAccount.html','');">账户初始</a></td>			

@@ -206,7 +206,7 @@ public class SysInitSetDAO extends JdbcBaseDAO {
 	 */
 	public boolean isExistFkc(){
 		boolean is = false;
-		String sql = "SELECT * FROM product_kc where nums<0";
+		String sql = "SELECT a.*,b.prop FROM product_kc a JOIN product b on b.product_id=a.product_id where b.prop='¿â´æÉÌÆ·' and a.nums<0";
 		
 		List list = this.getResultList(sql);
 		

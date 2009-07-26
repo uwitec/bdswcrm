@@ -174,16 +174,16 @@ public class XsdDAO extends JdbcBaseDAO {
 			//存在更新
 			sql = "update xsd set creatdate=?,fzr=?,client_name=?,sklx=?,state=?,yhje=?,xsdje=?,xsdcbj=?,skje=?,skzh=?,ms=?,czr=?,skxs=?," +
 					"skrq=?,ysrq=?,cz_date=now(),kh_address=?,kh_lxr=?,kh_lxdh=?,ysfs=?,store_id=?,xjd=?,ysje=?,zq=?," +
-					"sjcjje=?,xsdkhcb=?,sp_state=?,sp_type=?,skfs=?,pos_id=? where id=?";
+					"sjcjje=?,xsdkhcb=?,sp_state=?,sp_type=?,skfs=?,pos_id=?,fplx=?,kp_mc=?,kp_address=?,kp_dh=?,khhzh=?,sh=?,fpxx=? where id=?";
 		}else{
 			//不存在添加
 			sql = "insert into xsd(creatdate,fzr,client_name,sklx,state,yhje,xsdje,xsdcbj,skje,skzh,ms,czr,skxs,skrq,ysrq,cz_date," +
-					"kh_address,kh_lxr,kh_lxdh,ysfs,store_id,xjd,ysje,zq,sjcjje,xsdkhcb,sp_state,sp_type,skfs,pos_id,id) " +
-					"values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,now(),?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+					"kh_address,kh_lxr,kh_lxdh,ysfs,store_id,xjd,ysje,zq,sjcjje,xsdkhcb,sp_state,sp_type,skfs,pos_id,fplx,kp_mc,kp_address,kp_dh,khhzh,sh,fpxx,id) " +
+					"values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,now(),?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		}
 		
 		
-		Object[] param = new Object[30];
+		Object[] param = new Object[37];
 		
 		param[0] = xsd.getCreatdate();
 		param[1] = xsd.getFzr();
@@ -213,8 +213,15 @@ public class XsdDAO extends JdbcBaseDAO {
 		param[25] = xsd.getSp_state();
 		param[26] = xsd.getSp_type();
 		param[27] = xsd.getSkfs();
-		param[28] = xsd.getPos_id();
-		param[29] = xsd_id;
+		param[28] = xsd.getPos_id();		
+		param[29] = xsd.getFplx();
+		param[30] = xsd.getKp_mc();
+		param[31] = xsd.getKp_address();
+		param[32] = xsd.getKp_dh();
+		param[33] = xsd.getKhhzh();
+		param[34] = xsd.getSh();
+		param[35] = xsd.getFpxx();		
+		param[36] = xsd_id;
 		
 		
 		this.getJdbcTemplate().update(sql,param);  //更新销售单信息
@@ -447,13 +454,19 @@ public class XsdDAO extends JdbcBaseDAO {
 	
 	/**
 	 * 根据销售单出库信息更新相应销售订单物流信息
-	 * add by liyt 2008-05-11
-	 * @param xsd_id
-	 * @param state
+	 * @param xsd_id    销售单编号
+	 * @param state     状态
+	 * @param ysfs      运输方式
+	 * @param cx_tel    查询电话
+	 * @param job_no    货单号
+	 * @param send_time 发货时间
+	 * @param store_id  库房编号
+	 * @param ck_jsr    出库经手人
+	 * @param ck_date   出库时间
 	 */
-	public void updateXsdState(String xsd_id,String state,String ysfs,String cx_tel,String job_no,String send_time){
+	public void updateXsdState(String xsd_id,String state,String ysfs,String cx_tel,String job_no,String send_time,String store_id,String ck_jsr,String ck_date){
 		String sql = "update xsd set state='" + state + "',ysfs='" + ysfs + "',cx_tel='" + cx_tel + "'," +
-				"job_no='" + job_no + "',send_time='" + send_time + "',cz_date=now() where id='" + xsd_id + "'";
+				"job_no='" + job_no + "',send_time='" + send_time + "',cz_date=now(),store_id='" + store_id + "',ck_jsr='" + ck_jsr + "',ck_date='" + ck_date + "' where id='" + xsd_id + "'";
 		this.getJdbcTemplate().update(sql);
 	}
 	
@@ -605,8 +618,7 @@ public class XsdDAO extends JdbcBaseDAO {
 	/**
 	 *  根据销售单ID和销售单销售货品的序列号查询销售货品记录以及购买人的记录
 	 */
-	public Object getXsdByIdBySerailNum(String id,String num)
-	{
+	public Object getXsdByIdBySerailNum(String id,String num){
 		String sql="select x.client_name,x.kh_lxr,x.kh_address,x.kh_lxdh,p.product_id,p.product_xh,p.product_name,p.qz_serial_num from xsd x left join xsd_product p on x.id=p.xsd_id where x.id='"+id+"' and p.qz_serial_num like '%"+num+"%'";
 		return this.getResultMap(sql);
 	}
@@ -647,6 +659,8 @@ public class XsdDAO extends JdbcBaseDAO {
 			if(SqlUtil.columnIsExist(rs,"kh_lxdh")) xsd.setKh_lxdh(rs.getString("kh_lxdh"));
 			if(SqlUtil.columnIsExist(rs,"ysfs")) xsd.setYsfs(rs.getString("ysfs"));
 			if(SqlUtil.columnIsExist(rs,"store_id")) xsd.setStore_id(rs.getString("store_id"));
+			if(SqlUtil.columnIsExist(rs,"ck_jsr")) xsd.setCk_jsr(rs.getString("ck_jsr"));
+			if(SqlUtil.columnIsExist(rs,"ck_date")) xsd.setCk_date(rs.getString("ck_date"));
 			if(SqlUtil.columnIsExist(rs,"xjd")) xsd.setXjd(rs.getDouble("xjd"));
 			if(SqlUtil.columnIsExist(rs,"ysje")) xsd.setYsje(rs.getDouble("ysje"));
 			if(SqlUtil.columnIsExist(rs,"zq")) xsd.setZq(rs.getInt("zq"));
@@ -668,6 +682,20 @@ public class XsdDAO extends JdbcBaseDAO {
 			
 			if(SqlUtil.columnIsExist(rs,"skfs")) xsd.setSkfs(rs.getString("skfs"));
 			if(SqlUtil.columnIsExist(rs,"pos_id")) xsd.setPos_id(rs.getString("pos_id"));
+			
+			if(SqlUtil.columnIsExist(rs,"fplx")) xsd.setFplx(rs.getString("fplx"));
+			if(SqlUtil.columnIsExist(rs,"kp_mc")) xsd.setKp_mc(rs.getString("kp_mc"));
+			if(SqlUtil.columnIsExist(rs,"kp_address")) xsd.setKp_address(rs.getString("kp_address"));
+			if(SqlUtil.columnIsExist(rs,"kp_dh")) xsd.setKp_dh(rs.getString("kp_dh"));
+			if(SqlUtil.columnIsExist(rs,"khhzh")) xsd.setKhhzh(rs.getString("khhzh"));
+			if(SqlUtil.columnIsExist(rs,"sh")) xsd.setSh(rs.getString("sh"));
+			if(SqlUtil.columnIsExist(rs,"fpxx")) xsd.setFpxx(rs.getString("fpxx"));
+			
+			if(SqlUtil.columnIsExist(rs,"ysks")) xsd.setYsfs(rs.getString("ysfs"));
+			if(SqlUtil.columnIsExist(rs,"job_no")) xsd.setJob_no(rs.getString("job_no"));
+			if(SqlUtil.columnIsExist(rs,"cx_tel")) xsd.setCx_tel(rs.getString("cx_tel"));
+			if(SqlUtil.columnIsExist(rs,"send_time")) xsd.setSend_time(rs.getString("send_time"));
+			
 			
 			return xsd;
 		}

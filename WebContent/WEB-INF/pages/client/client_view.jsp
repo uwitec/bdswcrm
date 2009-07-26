@@ -134,8 +134,8 @@ List  clinetsFollowList=(List)VS.findValue("clientsFollow");
 	        <tr>
 	          <td class="a1" width="15%">地址</td>
 	           <td class="a2" width="35%"><%=StringUtils.nullToStr(client.getAddress()) %></td>
-	           <td class="a1" width="15%">联系电话</td>
-	          <td class="a2" width="35%"><%=StringUtils.nullToStr(client.getLxdh()) %></td>
+	           <td class="a1" width="15%">固定电话</td>
+	          <td class="a2" width="35%"><%=StringUtils.nullToStr(client.getGzdh()) %></td>
 	        </tr>
 	        <tr>
 	           <td class="a1" width="15%">账期</td>
@@ -144,24 +144,45 @@ List  clinetsFollowList=(List)VS.findValue("clientsFollow");
 	           <td class="a2" width="35%"><%=StringUtils.nullToStr(client.getXe()) %></td>	          
 	        </tr>
 	        <tr>
-	          <td class="a1" width="15%">客户经理</td>
+	           <td class="a1" width="15%">传真</td>
+	           <td class="a2" width="35%"><%=StringUtils.nullToStr(client.getCz()) %></td>		        
+	           <td class="a1" width="15%">客户经理</td>
 	           <td class="a2" width="35%"><%=StaticParamDo.getRealNameById(client.getKhjl()) %></td>
-	          <td class="a1" width="15%">联系人</td>
-	           <td class="a2" width="35%"><%=StringUtils.nullToStr(client.getLxr()) %></td>	           
-	        </tr>
-	         <tr>
-	          <td class="a1" width="15%">手机</td>
-	           <td class="a2" width="35%"><%=StringUtils.nullToStr(client.getMobile()) %></td>
-	          <td class="a1" width="15%">邮箱</td>
-	           <td class="a2" width="35%"><%=StringUtils.nullToStr(client.getMail()) %></td>	           
-	        </tr>
+	        </tr>        	        	        	        
+	     </table>
+	     
+		<br>
+		<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
+			<thead>
+			<tr>
+				<td colspan="4">开票信息</td>
+			</tr>
+			</thead>
+			<tr> 
+			     
+				<td class="a1" width="15%">单位全称</td>
+				<td class="a2" width="35%"><%=StringUtils.nullToStr(client.getKp_name()) %></td>
+				<td class="a1" width="15%">地址</td>
+				<td class="a2" width="35%"><%=StringUtils.nullToStr(client.getKp_address()) %></td>		
+			</tr>
+			<tr>
+				<td class="a1" width="15%">电话</td>
+				<td class="a2" width="35%"><%=StringUtils.nullToStr(client.getKp_tel()) %></td>
+				<td class="a1" width="15%">税号</td>
+				<td class="a2" width="35%"><%=StringUtils.nullToStr(client.getKp_sh()) %></td>	
+			</tr>
+			<tr>
+				<td class="a1" width="15%">开户行帐号</td>
+				<td class="a2" colspan="3"><%=StringUtils.nullToStr(client.getKp_khhzh()) %></td>		
+			</tr>
 	        <tr>
 	          <td class="a1" width="15%">备注</td>
 	           <td class="a2" colspan="3">
 	           <textarea rows="3" cols="50" name="client.remark" id="remark" style="width:80%" maxlength="500" readonly><%=StringUtils.nullToStr(client.getRemark()) %></textarea>
 	           </td>          
-	        </tr>	        	        	        	        
-	     </table>
+	        </tr>				
+		</table>
+			     
 	  </td>	  
 	  <td width="10">&nbsp;</td>	  
 	  <td width="30%" valign="top">
