@@ -194,13 +194,13 @@ if(thdProducts != null && thdProducts.size() > 0){
 			var xj = document.getElementById("xj_" + i);			
 			
 			if(xj != null){
-				xj.value = parseFloat(price.value)  * parseFloat(nums.value);				
+				xj.value = (parseFloat(price.value)  * parseFloat(nums.value)).toFixed(4);				
 				hjz = parseFloat(hjz) + parseFloat(xj.value);
 			}
 		}	
 		
 		var thdje = document.getElementById("thdje");
-		thdje.value = hjz;
+		thdje.value = hjz.toFixed(4);
 		
 	}	
 	
@@ -368,12 +368,12 @@ if(thdProducts!=null && thdProducts.size()>0){
 		</td>
 		<td class="a2"><input type="text" id="product_xh_<%=i %>" name="thdProducts[<%=i %>].product_xh" size="10" readonly></td>
 		<td class="a2">
-			<input type="text" id="th_price_<%=i %>" name="thdProducts[<%=i %>].th_price" size="10" value="0.00" onblur="hj();">
-			<input type="hidden" id="cbj_<%=i %>" name="thdProducts[<%=i %>].cbj"  value="0.00">
-			<input type="hidden" id="kh_cbj_<%=i %>" name="thdProducts[<%=i %>].kh_cbj"  value="0.00">
+			<input type="text" id="th_price_<%=i %>" name="thdProducts[<%=i %>].th_price" size="10" value="0.0000" onblur="hj();">
+			<input type="hidden" id="cbj_<%=i %>" name="thdProducts[<%=i %>].cbj"  value="0.0000">
+			<input type="hidden" id="kh_cbj_<%=i %>" name="thdProducts[<%=i %>].kh_cbj"  value="0.0000">
 		</td>
 		<td class="a2"><input type="text" id="nums_<%=i %>" name="thdProducts[<%=i %>].nums" value="0" size="5" onblur="hj();"></td>
-		<td class="a2"><input type="text" id="xj_<%=i %>" name="thdProducts[<%=i %>].xj" value="0.00" size="10" readonly></td>
+		<td class="a2"><input type="text" id="xj_<%=i %>" name="thdProducts[<%=i %>].xj" value="0.0000" size="10" readonly></td>
 		<td class="a2"><input type="text" id="remark_<%=i %>" name="thdProducts[<%=i %>].remark" maxlength="50"></td>
 		<%if (i>0){ %>		
 		<td class="a2"><input type="button" name="delButton" value="删除" class="css_button" onclick="delTr(this);"></td>

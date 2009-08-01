@@ -136,6 +136,24 @@ public class ProductKcDAO extends JdbcBaseDAO {
 	
 	
 	/**
+	 * 取所有库存产品列表（包括零库存商品）<BR>
+	 * 库存盘点时调用，其它调用会有问题
+	 * @param con
+	 * @param curPage
+	 * @param rowsPerPage
+	 * @return
+	 */
+	public Page getAllProductKcIncludeZero(String con,int curPage, int rowsPerPage){
+		String sql = "select a.product_id,a.product_name,a.product_xh,a.product_kind,a.price,a.fxxj,a.lsxj,b.store_id,b.nums,a.state from product a left join product_kc b on b.product_id=a.product_id where 1=1";
+		if(!con.equals("")){
+			sql = sql + con;
+		}
+		
+		return this.getResultByPage(sql, curPage, rowsPerPage);
+	}
+	
+	
+	/**
 	 * 初始化库存
 	 * @param product_id
 	 * @param store_id

@@ -203,7 +203,8 @@ public class ProductDAO extends JdbcBaseDAO {
 	private String getProductID(String productKind) {
 		String rtId = "";
 		
-		String sql = "select max(product_id) as id from product where product_kind='" + productKind + "'";
+		String sql = "select max(right(product_id,4)) as id from product where product_id like '%" + productKind + "%' or product_kind='" + productKind + "'";
+		log.debug(sql);
 		List list = this.getResultList(sql);
 		
 		if(list!=null && list.size()>0){
@@ -214,7 +215,6 @@ public class ProductDAO extends JdbcBaseDAO {
 				rtId = productKind + "0001";
 				return rtId;
 			}
-			curMaxId = curMaxId.substring(curMaxId.length()-3, curMaxId.length());
 			
 			curMaxId = ((new Integer(curMaxId).intValue())+1) + "";
 			

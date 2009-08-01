@@ -171,7 +171,7 @@ public class KcpdAction extends BaseAction {
 			con += " and product_name like '%" + product_name + "%'";
 		}
 		
-		productPage = kcpdService.getAllProductKc(con, curPage, rowsPerPage);
+		productPage = kcpdService.getAllProductKcIncludeZero(con, curPage, rowsPerPage);
 		
 		return "success";
 	}

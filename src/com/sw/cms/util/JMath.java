@@ -6,32 +6,32 @@ import java.text.NumberFormat;
 public class JMath {
 
 	public static String round(float v) {
-		String temp = "#0.00";
+		String temp = "#0.0000";
 		DecimalFormat df = new DecimalFormat(temp);
 		return (df.format(v));
 	}
 	
 	public static String round(float v, int scale) {
-		String temp = "#,##0.";
-		for (int i = 0; i < scale; i++) {
-			temp += "0";
-		}
+		String temp = "#,##0.0000";
+//		for (int i = 0; i < scale; i++) {
+//			temp += "0";
+//		}
 		DecimalFormat df = new DecimalFormat(temp);
 		return (df.format(v));
 	}
 	
 	
 	public static String round(double v) {
-		String temp = "#0.00";
+		String temp = "#0.0000";
 		DecimalFormat df = new DecimalFormat(temp);
 		return (df.format(v));
 	}
 	
 	public static String round(double v, int scale) {
-		String temp = "#,##0.";
-		for (int i = 0; i < scale; i++) {
-			temp += "0";
-		}
+		String temp = "#,##0.0000";
+//		for (int i = 0; i < scale; i++) {
+//			temp += "0";
+//		}
 		DecimalFormat df = new DecimalFormat(temp);
 		return (df.format(v));
 	}		

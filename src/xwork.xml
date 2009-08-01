@@ -397,7 +397,7 @@
         <action name="descKcpd" class="kcpdAction" method="descKcpd">
             <result name="success">/WEB-INF/pages/kcpd/kcpd_desc.jsp</result>
         </action>
-        <!-- 库房管理 -->
+        <!-- 库房盘点 -->
         
         <!-- 库房管理 -->
         <action name="listStore" class="storeAction" method="list">

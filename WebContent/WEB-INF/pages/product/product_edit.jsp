@@ -29,14 +29,14 @@ List productKindList= (List)VS.findValue("productKindList");
 			alert("产品属性为必选项！");
 			return;
 		}
-		if(!InputValid(document.productForm.price,0,"float",0,1,9999999,"移动加权价")){	 return; }
-		if(!InputValid(document.productForm.khcbj,1,"float",1,1,9999999,"考核成本价")){	 return; }	
-		if(!InputValid(document.productForm.lsbj,0,"float",0,1,9999999,"零售报价")){	 return; }
-		if(!InputValid(document.productForm.fxbj,0,"float",0,1,9999999,"代理价")){	 return; }
-		if(!InputValid(document.productForm.lsxj,0,"float",0,1,9999999,"零售限价")){	 return; }					
-		if(!InputValid(document.productForm.fxxj,0,"float",0,1,9999999,"分销限价")){	 return; }
-		if(!InputValid(document.productForm.gf,0,"float",0,1,9999999,"工分")){	 return; }
-		if(!InputValid(document.productForm.dss,0,"float",0,1,9999999,"点杀数")){	 return; }
+		if(!InputValid(document.productForm.price,0,"float",0,0,9999999,"移动加权价")){	 return; }
+		if(!InputValid(document.productForm.khcbj,1,"float",1,0,9999999,"考核成本价")){	 return; }	
+		if(!InputValid(document.productForm.lsbj,0,"float",0,0,9999999,"零售报价")){	 return; }
+		if(!InputValid(document.productForm.fxbj,0,"float",0,0,9999999,"代理价")){	 return; }
+		if(!InputValid(document.productForm.lsxj,0,"float",0,0,9999999,"零售限价")){	 return; }					
+		if(!InputValid(document.productForm.fxxj,0,"float",0,0,9999999,"分销限价")){	 return; }
+		if(!InputValid(document.productForm.gf,0,"float",0,0,9999999,"工分")){	 return; }
+		if(!InputValid(document.productForm.dss,0,"float",0,0,9999999,"点杀数")){	 return; }
 		if(!InputValid(document.productForm.sp_txm,0,"string",0,1,50,"商品条形码")){	 return; }
 		if(!InputValid(document.productForm.ms,0,"string",0,1,500,"产品描述")){	 return; }
 		

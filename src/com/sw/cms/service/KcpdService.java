@@ -115,6 +115,19 @@ public class KcpdService {
 	
 	
 	/**
+	 * 取所有库存产品列表（包括零库存商品）<BR>
+	 * 库存盘点时调用，其它调用会有问题
+	 * @param con
+	 * @param curPage
+	 * @param rowsPerPage
+	 * @return
+	 */
+	public Page getAllProductKcIncludeZero(String con,int curPage, int rowsPerPage){
+		return productKcDao.getAllProductKcIncludeZero(con, curPage, rowsPerPage);
+	}
+	
+	
+	/**
 	 * 返回当前可用的序列号
 	 * @return
 	 */

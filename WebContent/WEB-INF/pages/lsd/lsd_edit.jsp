@@ -217,7 +217,7 @@ if(sp_state.equals("3")){
 
         var otd3 = document.createElement("td");
         otd3.className = "a2";
-        otd3.innerHTML = '<input type="text" id="price_'+curId+'" name="lsdProducts['+curId+'].price" value="0.00" size="7" onblur="hj();"><input type="hidden" id="cbj_'+curId+'" name="lsdProducts['+curId+'].cbj" value="0.00"><input type="hidden" id="kh_cbj_'+curId+'" name="lsdProducts['+curId+'].kh_cbj" value="0.00"><input type="hidden" id="gf_'+curId+'" name="lsdProducts['+curId+'].gf" value="0">';      
+        otd3.innerHTML = '<input type="text" id="price_'+curId+'" name="lsdProducts['+curId+'].price" value="0.0000" size="7" onblur="hj();"><input type="hidden" id="cbj_'+curId+'" name="lsdProducts['+curId+'].cbj" value="0.0000"><input type="hidden" id="kh_cbj_'+curId+'" name="lsdProducts['+curId+'].kh_cbj" value="0.0000"><input type="hidden" id="gf_'+curId+'" name="lsdProducts['+curId+'].gf" value="0">';      
         
         
         var otd5 = document.createElement("td");
@@ -226,7 +226,7 @@ if(sp_state.equals("3")){
         
         var otd8 = document.createElement("td");
         otd8.className = "a2";
-        otd8.innerHTML = '<input type="text" id="xj_'+curId+'" name="lsdProducts['+curId+'].xj" value="0.00" size="7" readonly>';        
+        otd8.innerHTML = '<input type="text" id="xj_'+curId+'" name="lsdProducts['+curId+'].xj" value="0.0000" size="7" readonly>';        
         
         var otd9 = document.createElement("td");
         otd9.className = "a2";
@@ -326,7 +326,7 @@ if(sp_state.equals("3")){
 			var xj = document.getElementById("xj_" + i);			
 			
 			if(xj != null){
-				xj.value = parseFloat(price.value) * parseFloat(nums.value);				
+				xj.value = (parseFloat(price.value) * parseFloat(nums.value)).toFixed(4);
 				hjz = parseFloat(hjz) + parseFloat(xj.value);
 				
 				cbjhj = parseFloat(cbjhj) + parseFloat(cbjz.value) * parseFloat(nums.value);
@@ -347,11 +347,11 @@ if(sp_state.equals("3")){
 
 		var yushkje = document.getElementById("yushkje");
 
-		lsdje.value = parseFloat(hjz) - parseFloat(yhje.value);
+		lsdje.value = (parseFloat(hjz) - parseFloat(yhje.value)).toFixed(4);
 
-		lsdcbj.value = cbjhj;
-		lsdkhcbj.value = khcbjhj;
-		skje.value = parseFloat(hjz) - parseFloat(yhje.value) - parseFloat(yushkje.value);
+		lsdcbj.value = cbjhj.toFixed(4);
+		lsdkhcbj.value = khcbjhj.toFixed(4);
+		skje.value = (parseFloat(hjz) - parseFloat(yhje.value) - parseFloat(yushkje.value)).toFixed(4);
 
 		
 	}

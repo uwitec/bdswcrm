@@ -157,7 +157,7 @@ session.removeAttribute("messages");
         
         var otd2 = document.createElement("td");
         otd2.className = "a2";
-        otd2.innerHTML = '<input type="text" size="10" id="price_'+curId+'" name="jhdProducts['+curId+'].price" value="0.00" onblur="hj();">';
+        otd2.innerHTML = '<input type="text" size="10" id="price_'+curId+'" name="jhdProducts['+curId+'].price" value="0.0000" onblur="hj();">';
         
         var otd3 = document.createElement("td");
         otd3.className = "a2";
@@ -169,7 +169,7 @@ session.removeAttribute("messages");
          
         var otd4 = document.createElement("td");
         otd4.className = "a2";
-        otd4.innerHTML = '<input type="text" size="10" id="xj_'+curId+'" name="jhdProducts['+curId+'].xj" value="0.00" readonly>';  
+        otd4.innerHTML = '<input type="text" size="10" id="xj_'+curId+'" name="jhdProducts['+curId+'].xj" value="0.0000" readonly>';  
         
         var otd5 = document.createElement("td");
         otd5.className = "a2";
@@ -253,14 +253,14 @@ session.removeAttribute("messages");
 			var xj = document.getElementById("xj_" + i);			
 			
 			if(xj != null){
-				xj.value = parseFloat(price.value) * parseFloat(nums.value);				
+				xj.value = (parseFloat(price.value) * parseFloat(nums.value)).toFixed(4);				
 				hjz = parseFloat(hjz) + parseFloat(xj.value);
 			}
 		}		
 		
 		var total = document.getElementById("total");
 		
-		total.value = hjz;
+		total.value = hjz.toFixed(4);
 		
 	}
 	
@@ -273,6 +273,7 @@ session.removeAttribute("messages");
 			obj.value = "0";
 		}
 	}
+	
 
 	function chkState(vl){
 		var obj = document.getElementById("store_id");
