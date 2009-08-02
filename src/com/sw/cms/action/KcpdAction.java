@@ -162,16 +162,15 @@ public class KcpdAction extends BaseAction {
 		String product_xh = ParameterUtility.getStringParameter(getRequest(),"product_xh", "");
 		String product_name = ParameterUtility.getStringParameter(getRequest(),"product_name", "");
 		
-		String con = " and store_id='" + store_id + "'";
-		
+		String con = "";
 		if(!product_xh.equals("")){
-			con += " and product_xh like '%" + product_xh + "%'";
+			con += " and a.product_xh like '%" + product_xh + "%'";
 		}
 		if(!product_name.equals("")){
-			con += " and product_name like '%" + product_name + "%'";
+			con += " and a.product_name like '%" + product_name + "%'";
 		}
 		
-		productPage = kcpdService.getAllProductKcIncludeZero(con, curPage, rowsPerPage);
+		productPage = kcpdService.getAllProductKcIncludeZero(con,store_id,curPage, rowsPerPage);
 		
 		return "success";
 	}

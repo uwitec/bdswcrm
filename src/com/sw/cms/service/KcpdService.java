@@ -122,8 +122,8 @@ public class KcpdService {
 	 * @param rowsPerPage
 	 * @return
 	 */
-	public Page getAllProductKcIncludeZero(String con,int curPage, int rowsPerPage){
-		return productKcDao.getAllProductKcIncludeZero(con, curPage, rowsPerPage);
+	public Page getAllProductKcIncludeZero(String con,String store_id,int curPage, int rowsPerPage){
+		return productKcDao.getAllProductKcIncludeZero(con, store_id, curPage, rowsPerPage);
 	}
 	
 	

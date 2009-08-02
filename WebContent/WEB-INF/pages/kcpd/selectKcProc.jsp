@@ -162,13 +162,16 @@ String product_name = ParameterUtility.getStringParameter(request,"product_name"
 			double fxxj = map.get("fxxj")==null?0:((Double)map.get("fxxj")).doubleValue();
 			double lsxj = map.get("lsxj")==null?0:((Double)map.get("lsxj")).doubleValue();
 			
-			String vl = StringUtils.nullToStr(map.get("product_id")) + "|" + StringUtils.nullToStr(map.get("product_xh")) + "|" + StringUtils.nullToStr(map.get("product_name")) + "|" + StringUtils.nullToStr(map.get("nums"));
+			String nums = StringUtils.nullToStr(map.get("nums"));
+			if(nums.equals("")) nums="0";
+			
+			String vl = StringUtils.nullToStr(map.get("product_id")) + "|" + StringUtils.nullToStr(map.get("product_xh")) + "|" + StringUtils.nullToStr(map.get("product_name")) + "|" + nums;
 	%>
 		<tr class="a1" onmouseover="this.className='a2';" onmouseout="this.className='a1';">
 			<td><input type="checkbox" name="chk_id" value="<%=vl %>"></td>
 			<td><%=StringUtils.nullToStr(map.get("product_name")) %></td>
 			<td><%=StringUtils.nullToStr(map.get("product_xh")) %></td>
-			<td><%=StringUtils.nullToStr(map.get("nums")) %></td>
+			<td><%=nums %></td>
 			<td><%=JMath.round(price,2) %></td>
 			<td><%=JMath.round(fxxj,2) %></td>
 			<td><%=JMath.round(lsxj,2) %></td>

@@ -143,8 +143,8 @@ public class ProductKcDAO extends JdbcBaseDAO {
 	 * @param rowsPerPage
 	 * @return
 	 */
-	public Page getAllProductKcIncludeZero(String con,int curPage, int rowsPerPage){
-		String sql = "select a.product_id,a.product_name,a.product_xh,a.product_kind,a.price,a.fxxj,a.lsxj,b.store_id,b.nums,a.state from product a left join product_kc b on b.product_id=a.product_id where 1=1";
+	public Page getAllProductKcIncludeZero(String con,String store_id,int curPage, int rowsPerPage){
+		String sql = "select a.product_id,a.product_name,a.product_xh,a.product_kind,a.price,a.fxxj,a.lsxj,a.state,(select nums from product_kc b where b.product_id=a.product_id and b.store_id='" + store_id + "') as nums from product a where 1=1";
 		if(!con.equals("")){
 			sql = sql + con;
 		}
