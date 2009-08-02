@@ -540,6 +540,13 @@
           <bean class="com.sw.cms.service.BxhzService" autowire="byName"/>  
         </property>
     </bean>
+    
+    <!-- 利润表 -->
+    <bean id="gainTblService" parent="baseTransaction">
+        <property name="target">
+          <bean class="com.sw.cms.service.GainTblService" autowire="byName"/>  
+        </property>
+    </bean>    
                
 </beans>
 

@@ -144,7 +144,7 @@ String thd_id = (String)VS.findValue("thd_id");
         
         var otd2 = document.createElement("td");
         otd2.className = "a2";
-        otd2.innerHTML = '<input type="text" id="th_price_'+curId+'" name="thdProducts['+curId+'].th_price" size="10" value="0.0000" onblur="hj();"><input type="hidden" id="cbj_'+curId+'" name="thdProducts['+curId+'].cbj" value="0.0000"><input type="hidden" id="kh_cbj_'+curId+'" name="thdProducts['+curId+'].kh_cbj" value="0.0000">';
+        otd2.innerHTML = '<input type="text" id="th_price_'+curId+'" name="thdProducts['+curId+'].th_price" size="10" value="0.00" onblur="hj();"><input type="hidden" id="cbj_'+curId+'" name="thdProducts['+curId+'].cbj" value="0.00"><input type="hidden" id="kh_cbj_'+curId+'" name="thdProducts['+curId+'].kh_cbj" value="0.00">';
         
         var otd3 = document.createElement("td");
         otd3.className = "a2";
@@ -156,7 +156,7 @@ String thd_id = (String)VS.findValue("thd_id");
         
         var otd4 = document.createElement("td");
         otd4.className = "a2";
-        otd4.innerHTML = '<input type="text" id="xj_'+curId+'" name="thdProducts['+curId+'].xj" size="10" value="0.0000" readonly>';  
+        otd4.innerHTML = '<input type="text" id="xj_'+curId+'" name="thdProducts['+curId+'].xj" size="10" value="0.00" readonly>';  
         
         var otd5 = document.createElement("td");
         otd5.className = "a2";
@@ -253,13 +253,13 @@ String thd_id = (String)VS.findValue("thd_id");
 			var xj = document.getElementById("xj_" + i);			
 			
 			if(xj != null){
-				xj.value = (parseFloat(price.value)  * parseFloat(nums.value)).toFixed(4);				
+				xj.value = (parseFloat(price.value)  * parseFloat(nums.value)).toFixed(2);				
 				hjz = parseFloat(hjz) + parseFloat(xj.value);
 			}
 		}	
 		
 		var thdje = document.getElementById("thdje");
-		thdje.value = hjz.toFixed(4);
+		thdje.value = hjz.toFixed(2);
 		
 	}
 	
@@ -379,16 +379,16 @@ for(int i=0;i<3;i++){
 		</td>
 		<td class="a2"><input type="text" id="product_xh_<%=i %>" name="thdProducts[<%=i %>].product_xh" size="10" readonly></td>
 		<td class="a2">
-			<input type="text" id="th_price_<%=i %>" name="thdProducts[<%=i %>].th_price" size="10" value="0.0000" onblur="hj();">
-			<input type="hidden" id="cbj_<%=i %>" name="thdProducts[<%=i %>].cbj"  value="0.0000">
-			<input type="hidden" id="kh_cbj_<%=i %>" name="thdProducts[<%=i %>].kh_cbj"  value="0.0000">
+			<input type="text" id="th_price_<%=i %>" name="thdProducts[<%=i %>].th_price" size="10" value="0.00" onblur="hj();">
+			<input type="hidden" id="cbj_<%=i %>" name="thdProducts[<%=i %>].cbj"  value="0.00">
+			<input type="hidden" id="kh_cbj_<%=i %>" name="thdProducts[<%=i %>].kh_cbj"  value="0.00">
 		</td>
 		<td class="a2"><input type="text" id="nums_<%=i %>" name="thdProducts[<%=i %>].nums" value="0" size="5" onblur="hj();"></td>
 		<td class="a2">
 			<input type="text" id="qz_serial_num_<%=i %>" name="thdProducts[<%=i %>].qz_serial_num" size="15" readonly>
 			<input type="hidden" id="qz_flag_<%=i %>" name="thdProducts[<%=i %>].qz_flag"><a style="cursor:hand" title="左键点击输入输列号" onclick="openSerialWin('<%=i %>');"><b>...</b></a>&nbsp;
 		</td>		
-		<td class="a2"><input type="text" id="xj_<%=i %>" name="thdProducts[<%=i %>].xj" value="0.0000" size="10" readonly></td>
+		<td class="a2"><input type="text" id="xj_<%=i %>" name="thdProducts[<%=i %>].xj" value="0.00" size="10" readonly></td>
 		<td class="a2"><input type="text" id="remark_<%=i %>" name="thdProducts[<%=i %>].remark" maxlength="50"></td>
 		<%if (i>0){ %>		
 		<td class="a2"><input type="button" name="delButton" value="删除" class="css_button" onclick="delTr(this);"></td>
@@ -412,7 +412,7 @@ for(int i=0;i<3;i++){
 <table width="100%"  align="center" class="chart_info" cellpadding="0" cellspacing="0">	
 	<tr>
 		<td class="a1" widht="20%">合计退款金额</td>
-		<td class="a2"><input type="text" id="thdje"  name="thd.thdje" value="0.0000" readonly></td>	
+		<td class="a2"><input type="text" id="thdje"  name="thd.thdje" value="0.00" readonly></td>	
 		
 		<td class="a1" id="td_zh_label">退款账户</td>
 		<td class="a2" id="td_zh_value"><input type="text" id="zhname"  name="zhname" value="" readonly>

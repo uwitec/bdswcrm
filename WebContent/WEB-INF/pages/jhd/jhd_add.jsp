@@ -150,7 +150,7 @@ String id = (String)VS.findValue("id");
         
         var otd2 = document.createElement("td");
         otd2.className = "a2";
-        otd2.innerHTML = '<input type="text" size="10"  id="price_'+curId+'" name="jhdProducts['+curId+'].price" value="0.0000" onblur="hj();">';
+        otd2.innerHTML = '<input type="text" size="10"  id="price_'+curId+'" name="jhdProducts['+curId+'].price" value="0.00" onblur="hj();">';
         
         var otd3 = document.createElement("td");
         otd3.className = "a2";
@@ -163,7 +163,7 @@ String id = (String)VS.findValue("id");
         
         var otd4 = document.createElement("td");
         otd4.className = "a2";
-        otd4.innerHTML = '<input type="text" size="10"  id="xj_'+curId+'" name="jhdProducts['+curId+'].xj" value="0.0000" readonly>';  
+        otd4.innerHTML = '<input type="text" size="10"  id="xj_'+curId+'" name="jhdProducts['+curId+'].xj" value="0.00" readonly>';  
         
         var otd5 = document.createElement("td");
         otd5.className = "a2";
@@ -247,14 +247,14 @@ String id = (String)VS.findValue("id");
 			var xj = document.getElementById("xj_" + i);			
 			
 			if(xj != null){
-				xj.value = (parseFloat(price.value) * parseFloat(nums.value)).toFixed(4);				
+				xj.value = (parseFloat(price.value) * parseFloat(nums.value)).toFixed(2);				
 				hjz = parseFloat(hjz) + parseFloat(xj.value);
 			}
 		}		
 		
 		var total = document.getElementById("total");
 		
-		total.value = hjz.toFixed(4);
+		total.value = hjz.toFixed(2);
 		
 	}	
 
@@ -382,13 +382,13 @@ for(int i=0;i<3;i++){
 			<input type="hidden" id="product_id_<%=i %>" name="jhdProducts[<%=i %>].product_id">
 		</td>
 		<td class="a2"><input type="text" size="10" id="product_xh_<%=i %>" name="jhdProducts[<%=i %>].product_xh" readonly></td>
-		<td class="a2"><input type="text" size="10"  id="price_<%=i %>" name="jhdProducts[<%=i %>].price" value="0.0000" onblur="hj();"></td>
+		<td class="a2"><input type="text" size="10"  id="price_<%=i %>" name="jhdProducts[<%=i %>].price" value="0.00" onblur="hj();"></td>
 		<td class="a2"><input type="text" size="5"  id="nums_<%=i %>" name="jhdProducts[<%=i %>].nums" value="0" onblur="hj();"></td>
 		<td class="a2">
 			<input type="text" id="qz_serial_num_<%=i %>" name="jhdProducts[<%=i %>].qz_serial_num" size="15" readonly>
 			<input type="hidden" id="qz_flag_<%=i %>" name="jhdProducts[<%=i %>].qz_flag"><a style="cursor:hand" title="左键点击输入输列号" onclick="openSerialWin('<%=i %>');"><b>...</b></a>&nbsp;
 		</td>		
-		<td class="a2"><input type="text" size="10"  id="xj_<%=i %>" name="jhdProducts[<%=i %>].xj" value="0.0000" readonly></td>
+		<td class="a2"><input type="text" size="10"  id="xj_<%=i %>" name="jhdProducts[<%=i %>].xj" value="0.00" readonly></td>
 		<td class="a2"><input type="text" id="remark_<%=i %>" name="jhdProducts[<%=i %>].remark"></td>
 		<%if (i>0){ %>		
 		<td class="a2"><input type="button" name="delButton" value="删除" class="css_button" onclick="delTr(this);"></td>
@@ -410,11 +410,11 @@ for(int i=0;i<3;i++){
 	<tr>
 		<td class="a1">合计金额</td>
 		<td class="a2">
-			<input type="text" id="total"  name="jhd.total" value="0.0000" readonly>
-			<input type="hidden" id="yfje"  name="jhd.yfje" value="0.0000">	
+			<input type="text" id="total"  name="jhd.total" value="0.00" readonly>
+			<input type="hidden" id="yfje"  name="jhd.yfje" value="0.00">	
 		</td>
 		<td class="a1">本次付款金额</td>
-		<td class="a2"><input type="text" id="fkje"  name="jhd.fkje" value="0.0000"></td>		
+		<td class="a2"><input type="text" id="fkje"  name="jhd.fkje" value="0.00"></td>		
 	</tr>
 	<tr>
 		<td class="a1" widht="20%">本次付款账户</td>

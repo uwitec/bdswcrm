@@ -131,7 +131,7 @@ String iscs_flag = StringUtils.nullToStr(VS.findValue("iscs_flag"));
         
         var otd2 = document.createElement("td");
         otd2.className = "a2";
-        otd2.innerHTML = '<input type="text" id="th_price_'+curId+'" name="cgthdProducts['+curId+'].th_price" size="10" value="0.0000" onblur="hj();;">';
+        otd2.innerHTML = '<input type="text" id="th_price_'+curId+'" name="cgthdProducts['+curId+'].th_price" size="10" value="0.00" onblur="hj();;">';
         
         var otd3 = document.createElement("td");
         otd3.className = "a2";
@@ -143,7 +143,7 @@ String iscs_flag = StringUtils.nullToStr(VS.findValue("iscs_flag"));
         
         var otd4 = document.createElement("td");
         otd4.className = "a2";
-        otd4.innerHTML = '<input type="text" id="xj_'+curId+'" name="cgthdProducts['+curId+'].xj" size="10" value="0.0000" readonly>';  
+        otd4.innerHTML = '<input type="text" id="xj_'+curId+'" name="cgthdProducts['+curId+'].xj" size="10" value="0.00" readonly>';  
         
         var otd5 = document.createElement("td");
         otd5.className = "a2";
@@ -249,13 +249,13 @@ String iscs_flag = StringUtils.nullToStr(VS.findValue("iscs_flag"));
 			var xj = document.getElementById("xj_" + i);
 			
 			if(xj != null){
-				xj.value = (parseFloat(price.value)  * parseFloat(nums.value)).toFixed(4);				
+				xj.value = (parseFloat(price.value)  * parseFloat(nums.value)).toFixed(2);				
 				hjz = parseFloat(hjz) + parseFloat(xj.value);
 			}
 		}	
 		
 		var tkzje = document.getElementById("tkzje");
-		tkzje.value = hjz.toFixed(4);
+		tkzje.value = hjz.toFixed(2);
 		
 	}	
 	

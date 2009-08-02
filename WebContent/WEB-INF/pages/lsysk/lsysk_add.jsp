@@ -130,7 +130,7 @@ List posTypeList = (List)VS.findValue("posTypeList");
 		    <input type="hidden" name="lsysk.jsr" id="fzr"/> <font color="red">*</font>		
 		</td>	
 		<td class="a1" width="15%">预收金额</td>
-		<td class="a2" width="35%"><input type="text" name="lsysk.ysje" id="ysje" value="0.0000"><font color="red">*</font></td>		
+		<td class="a2" width="35%"><input type="text" name="lsysk.ysje" id="ysje" value="0.00"><font color="red">*</font></td>		
 	</tr>	
 	<tr>
 		<td class="a1" width="15%">收款账户</td>

@@ -125,7 +125,7 @@ function addTr(){
 	
 	var otd3 = document.createElement("td");
 	otd3.className = "a2";
-	otd3.innerHTML = '<input type="text" id="price_'+curId+'" name="xsdProducts['+curId+'].price" value="0.0000" size="10" onblur="hj();"><input type="hidden" id="cbj_'+curId+'" name="xsdProducts['+curId+'].cbj" value="0.0000"><input type="hidden" id="kh_cbj_'+curId+'" name="xsdProducts['+curId+'].kh_cbj" value="0.0000"><input type="hidden" id="jgtz_'+curId+'" name="xsdProducts['+curId+'].jgtz" value="0.0000" size="10" onblur="hj();">';
+	otd3.innerHTML = '<input type="text" id="price_'+curId+'" name="xsdProducts['+curId+'].price" value="0.00" size="10" onblur="hj();"><input type="hidden" id="cbj_'+curId+'" name="xsdProducts['+curId+'].cbj" value="0.00"><input type="hidden" id="kh_cbj_'+curId+'" name="xsdProducts['+curId+'].kh_cbj" value="0.00"><input type="hidden" id="jgtz_'+curId+'" name="xsdProducts['+curId+'].jgtz" value="0.00" size="10" onblur="hj();">';
 	
 	
 	var otd5 = document.createElement("td");
@@ -134,7 +134,7 @@ function addTr(){
 	
 	var otd8 = document.createElement("td");
 	otd8.className = "a2";
-	otd8.innerHTML = '<input type="text" id="xj_'+curId+'" name="xsdProducts['+curId+'].xj" value="0.0000" size="10" readonly><input type="hidden" id="qz_serial_num_'+curId+'" name="xsdProducts['+curId+'].qz_serial_num" size="15" readonly>';        
+	otd8.innerHTML = '<input type="text" id="xj_'+curId+'" name="xsdProducts['+curId+'].xj" value="0.00" size="10" readonly><input type="hidden" id="qz_serial_num_'+curId+'" name="xsdProducts['+curId+'].qz_serial_num" size="15" readonly>';        
 	
 	var otd6 = document.createElement("td");
 	otd6.className = "a2";
@@ -261,7 +261,7 @@ function hj(){
 		var xj = document.getElementById("xj_" + i);			
 		
 		if(xj != null){
-			xj.value = ((parseFloat(price.value) + parseFloat(jgtz.value)) * parseFloat(nums.value)).toFixed(4);				
+			xj.value = ((parseFloat(price.value) + parseFloat(jgtz.value)) * parseFloat(nums.value)).toFixed(2);				
 			hjz = parseFloat(hjz) + parseFloat(xj.value);
 			
 			cbjhj = parseFloat(cbjhj) + parseFloat(cbjz.value) * parseFloat(nums.value);
@@ -273,9 +273,9 @@ function hj(){
 	var xsdcbj = document.getElementById("xsdcbj");
 	var xsdkhcb = document.getElementById("xsdkhcb");
 	
-	xsdje.value = hjz.toFixed(4);
-	xsdcbj.value = cbjhj.toFixed(4);
-	xsdkhcb.value = khcbjhj.toFixed(4);
+	xsdje.value = hjz.toFixed(2);
+	xsdcbj.value = cbjhj.toFixed(2);
+	xsdkhcb.value = khcbjhj.toFixed(2);
 
 }
 

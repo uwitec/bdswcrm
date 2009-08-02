@@ -1,7 +1,10 @@
 package com.sw.cms.action;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.sw.cms.action.base.BaseAction;
-import com.sw.cms.service.MonthlyGainService;
+import com.sw.cms.service.GainTblService;
 import com.sw.cms.util.DateComFunc;
 
 /**
@@ -11,25 +14,48 @@ import com.sw.cms.util.DateComFunc;
  */
 public class MonthlyGainAction extends BaseAction {
 
-	private MonthlyGainService monthlyGainService;
-	
-	private double gross = 0;
-	private double income = 0;
-	private double cost = 0;
-	private double deferredPayment = 0;
-	private double goodbysr = 0;
-	private double goodbszc = 0;
+	private GainTblService gainTblService;
 	
 	private String year = "";
 	private String month = "";
+	
+	private Map zyywsrMap = new HashMap();  //主营业务收入
+	private Map zyywcbMap = new HashMap();  //主营业务成本
+	private Map qtywsrMap = new HashMap();  //其它业务收入
+	private Map qtywcbMap = new HashMap();  //其它业务成本
+	private Map yywsrMap = new HashMap();   //营业外收入
+	private Map yywzcMap = new HashMap();   //营业外支出
+	private Map spbysrMap = new HashMap();  //商品报溢收入
+	private Map spbszcMap = new HashMap();  //商品报损支出
+	private Map wltzsrMap = new HashMap();  //往来调帐收入
+	private Map wltzzcMap = new HashMap();  //往来调账支出
+	private Map dtfyMap = new HashMap();    //待摊费用
+	
+	
+	
+	/**
+	 * 显示查询条件
+	 * @return
+	 */
+	public String showCondition(){
+		//默认当前月
+		if(year.equals("") || month.equals("")){
+			year = DateComFunc.getYear() + "";
+			if(DateComFunc.getMonth()<10){
+				month = "0" + DateComFunc.getMonth();
+			}else{
+				month =  "" + DateComFunc.getMonth();
+			}
+		}
+		
+		return "success";
+	}
 	
 	/**
 	 * 统计结果
 	 * @return
 	 */
 	public String getResults(){
-		
-		String ny = "";
 		
 		//默认当前月
 		if(year.equals("") || month.equals("")){
@@ -41,72 +67,133 @@ public class MonthlyGainAction extends BaseAction {
 			}
 		}
 		
-		ny = year + "-" + month;
+		String ny = year + "-" + month;
 		
-		gross = monthlyGainService.getGrossProfit(ny);
-		income = monthlyGainService.getOtherIncome(ny);
-		cost = monthlyGainService.getCost(ny);
-		deferredPayment = monthlyGainService.getDeferredPayment(ny);
-		goodbysr = monthlyGainService.getGoodBysr(ny);
-		goodbszc = monthlyGainService.getGoodBszc(ny);
+		zyywsrMap = gainTblService.statZyywSr(ny);  //主营业务收入
+		zyywcbMap = gainTblService.statZyywCb(ny);  //主营业务成本
+		qtywsrMap = gainTblService.statQtywSr(ny);  //其它业务收入
+		qtywcbMap = gainTblService.statQtywCb(ny);  //其它业务成本
+		yywsrMap = gainTblService.statYywSr(ny);   //营业外收入
+		yywzcMap = gainTblService.statYywZc(ny);   //营业外支出
+		spbysrMap = gainTblService.statSpbySr(ny);  //商品报溢收入
+		spbszcMap = gainTblService.statSpbsZc(ny);  //商品报损支出
+		wltzsrMap = gainTblService.statWltzSr(ny);  //往来调帐收入
+		wltzzcMap = gainTblService.statWltzZc(ny);  //往来调账支出
+		dtfyMap = gainTblService.statDtfy(ny);    //待摊费用
 		
 		return "success";
 	}
-	
-	
-	public double getCost() {
-		return cost;
+
+	public GainTblService getGainTblService() {
+		return gainTblService;
 	}
-	public void setCost(double cost) {
-		this.cost = cost;
+
+	public void setGainTblService(GainTblService gainTblService) {
+		this.gainTblService = gainTblService;
 	}
-	public double getDeferredPayment() {
-		return deferredPayment;
-	}
-	public void setDeferredPayment(double deferredPayment) {
-		this.deferredPayment = deferredPayment;
-	}
-	public double getGoodbszc() {
-		return goodbszc;
-	}
-	public void setGoodbszc(double goodbszc) {
-		this.goodbszc = goodbszc;
-	}
-	public double getGoodbysr() {
-		return goodbysr;
-	}
-	public void setGoodbysr(double goodbysr) {
-		this.goodbysr = goodbysr;
-	}
-	public double getGross() {
-		return gross;
-	}
-	public void setGross(double gross) {
-		this.gross = gross;
-	}
-	public double getIncome() {
-		return income;
-	}
-	public void setIncome(double income) {
-		this.income = income;
-	}
+
 	public String getMonth() {
 		return month;
 	}
+
 	public void setMonth(String month) {
 		this.month = month;
 	}
-	public MonthlyGainService getMonthlyGainService() {
-		return monthlyGainService;
-	}
-	public void setMonthlyGainService(MonthlyGainService monthlyGainService) {
-		this.monthlyGainService = monthlyGainService;
-	}
+
 	public String getYear() {
 		return year;
 	}
+
 	public void setYear(String year) {
 		this.year = year;
+	}
+
+	public Map getDtfyMap() {
+		return dtfyMap;
+	}
+
+	public void setDtfyMap(Map dtfyMap) {
+		this.dtfyMap = dtfyMap;
+	}
+
+	public Map getQtywcbMap() {
+		return qtywcbMap;
+	}
+
+	public void setQtywcbMap(Map qtywcbMap) {
+		this.qtywcbMap = qtywcbMap;
+	}
+
+	public Map getQtywsrMap() {
+		return qtywsrMap;
+	}
+
+	public void setQtywsrMap(Map qtywsrMap) {
+		this.qtywsrMap = qtywsrMap;
+	}
+
+	public Map getSpbszcMap() {
+		return spbszcMap;
+	}
+
+	public void setSpbszcMap(Map spbszcMap) {
+		this.spbszcMap = spbszcMap;
+	}
+
+	public Map getSpbysrMap() {
+		return spbysrMap;
+	}
+
+	public void setSpbysrMap(Map spbysrMap) {
+		this.spbysrMap = spbysrMap;
+	}
+
+	public Map getWltzsrMap() {
+		return wltzsrMap;
+	}
+
+	public void setWltzsrMap(Map wltzsrMap) {
+		this.wltzsrMap = wltzsrMap;
+	}
+
+	public Map getWltzzcMap() {
+		return wltzzcMap;
+	}
+
+	public void setWltzzcMap(Map wltzzcMap) {
+		this.wltzzcMap = wltzzcMap;
+	}
+
+	public Map getYywsrMap() {
+		return yywsrMap;
+	}
+
+	public void setYywsrMap(Map yywsrMap) {
+		this.yywsrMap = yywsrMap;
+	}
+
+	public Map getYywzcMap() {
+		return yywzcMap;
+	}
+
+	public void setYywzcMap(Map yywzcMap) {
+		this.yywzcMap = yywzcMap;
+	}
+
+	public Map getZyywcbMap() {
+		return zyywcbMap;
+	}
+
+	public void setZyywcbMap(Map zyywcbMap) {
+		this.zyywcbMap = zyywcbMap;
+	}
+
+	public Map getZyywsrMap() {
+		return zyywsrMap;
+	}
+
+	public void setZyywsrMap(Map zyywsrMap) {
+		this.zyywsrMap = zyywsrMap;
 	}
 	
 }

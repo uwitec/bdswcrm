@@ -416,6 +416,11 @@
      <bean id="bxhzDao" class="com.sw.cms.dao.BxhzDAO">
         <property name="jdbcTemplate" ref="jdbcTemplate"/>
      </bean>
+     
+     <!-- 利润表 -->
+     <bean id="gainTblDao" class="com.sw.cms.dao.GainTblDAO">
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+     </bean>     
                                
 </beans>
 

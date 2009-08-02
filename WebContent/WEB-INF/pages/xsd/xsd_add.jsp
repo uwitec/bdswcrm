@@ -379,14 +379,14 @@ if(xsdProducts!=null && xsdProducts.size()>0){
 		</td>
 		<td class="a2"><input type="text" id="product_xh_<%=i %>" style="width:100%" name="xsdProducts[<%=i %>].product_xh" size="10" readonly></td>
 		<td class="a2">
-			<input type="text" id="price_<%=i %>" name="xsdProducts[<%=i %>].price" value="0.0000" size="10" onblur="hj();">
-			<input type="hidden" id="cbj_<%=i %>" name="xsdProducts[<%=i %>].cbj" value="0.0000">
-			<input type="hidden" id="kh_cbj_<%=i %>" name="xsdProducts[<%=i %>].kh_cbj" value="0.0000">
-			<input type="hidden" id="jgtz_<%=i %>" name="xsdProducts[<%=i %>].jgtz" value="0.0000" size="10" onblur="hj();">
+			<input type="text" id="price_<%=i %>" name="xsdProducts[<%=i %>].price" value="0.00" size="10" onblur="hj();">
+			<input type="hidden" id="cbj_<%=i %>" name="xsdProducts[<%=i %>].cbj" value="0.00">
+			<input type="hidden" id="kh_cbj_<%=i %>" name="xsdProducts[<%=i %>].kh_cbj" value="0.00">
+			<input type="hidden" id="jgtz_<%=i %>" name="xsdProducts[<%=i %>].jgtz" value="0.00" size="10" onblur="hj();">
 		</td>
 		<td class="a2"><input type="text" id="nums_<%=i %>" name="xsdProducts[<%=i %>].nums" value="0" size="5" onblur="hj();"></td>
 		<td class="a2">
-			<input type="text" id="xj_<%=i %>" name="xsdProducts[<%=i %>].xj" value="0.0000" size="10" readonly>
+			<input type="text" id="xj_<%=i %>" name="xsdProducts[<%=i %>].xj" value="0.00" size="10" readonly>
 			<input type="hidden" id="qz_serial_num_<%=i %>" name="xsdProducts[<%=i %>].qz_serial_num" value="" size="15" readonly>	
 		</td>		
 		<td class="a2"><input type="text" id="remark_<%=i %>" name="xsdProducts[<%=i %>].remark"></td>

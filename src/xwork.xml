@@ -1732,12 +1732,6 @@
         </action>
         <!-- POS机设定 -->
         
-        <!-- 月度利润表 -->
-        <action name="getMothlyGainList" class="monthlyGainAction" method="getResults">
-            <result name="success">/WEB-INF/pages/report/monthly_gain/list.jsp</result>
-        </action>
-        <!-- 月度利润表 -->
-        
         <!-- 发送短信 -->            
         <action name="listlx" class="fsdxAction" method="listlx">
             <result name="success">/WEB-INF/pages/fsdx/lx_list.jsp</result>
@@ -1802,6 +1796,12 @@
             <result name="success">/WEB-INF/pages/report/hpflhz/result_mx.jsp</result>
         </action>      
         <!-- 货品销售分类汇总 -->  
+        
+        <!-- 月度利润表 -->      
+        <action name="getMothlyGainList" class="monthlyGainAction" method="getResults">
+            <result name="success">/WEB-INF/pages/report/monthly_gain/list.jsp</result>
+        </action>
+        <!-- 月度利润表 -->        
         
         <!-- 部门销售汇总 -->
         <action name="showDeptxsHzCon" class="deptXshzAction" method="showCondition">

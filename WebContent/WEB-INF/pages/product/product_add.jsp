@@ -87,28 +87,28 @@ String[] jldw = (String[])VS.findValue("jldw");
 	</tr>	
 	<tr>
 		<td class="a1" width="15%">移动加权价</td>
-		<td class="a2" width="35%"><input type="text" name="price" value="0.0000" size="20"></td>
+		<td class="a2" width="35%"><input type="text" name="price" value="0.00" size="20"></td>
 		<td class="a1" width="15%">考核成本价</td>
-		<td class="a2" width="35%"><input type="text" name="khcbj" value="0.0000" size="20"></td>		
+		<td class="a2" width="35%"><input type="text" name="khcbj" value="0.00" size="20"></td>		
 	
 	</tr>	
 	<tr>		
 		<td class="a1" width="15%">零售报价</td>
-		<td class="a2" width="35%"><input type="text" name="lsbj" value="0.0000" size="20"></td>	
+		<td class="a2" width="35%"><input type="text" name="lsbj" value="0.00" size="20"></td>	
 		<td class="a1" width="15%">代理价</td>
-		<td class="a2" width="35%"><input type="text" name="fxbj" value="0.0000" size="20"></td>				
+		<td class="a2" width="35%"><input type="text" name="fxbj" value="0.00" size="20"></td>				
 	</tr>
 	<tr>
 		<td class="a1" width="15%">零售限价</td>
-		<td class="a2" width="35%"><input type="text" name="lsxj" value="0.0000" size="20"></td>			
+		<td class="a2" width="35%"><input type="text" name="lsxj" value="0.00" size="20"></td>			
 		<td class="a1" width="15%">分销限价</td>
-		<td class="a2" width="35%"><input type="text" name="fxxj" value="0.0000" size="20"></td>		
+		<td class="a2" width="35%"><input type="text" name="fxxj" value="0.00" size="20"></td>		
 	</tr>		
 	<tr>		
 		<td class="a1" width="15%">工分</td>
-		<td class="a2" width="35%"><input type="text" name="gf" value="0.0000" size="20"></td>		
+		<td class="a2" width="35%"><input type="text" name="gf" value="0.00" size="20"></td>		
 		<td class="a1" width="15%">点杀数</td>
-		<td class="a2" width="35%"><input type="text" name="dss" value="0.0000" size="20"></td>
+		<td class="a2" width="35%"><input type="text" name="dss" value="0.00" size="20"></td>
 	</tr>	
 	<tr>		
 		<td class="a1" width="15%">库存下限</td>

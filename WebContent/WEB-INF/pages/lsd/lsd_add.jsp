@@ -209,7 +209,7 @@ String sp_state = StringUtils.nullToStr(lsd.getSp_state());
 
         var otd3 = document.createElement("td");
         otd3.className = "a2";
-        otd3.innerHTML = '<input type="text" id="price_'+curId+'" name="lsdProducts['+curId+'].price" value="0.0000" size="7" onblur="hj();"><input type="hidden" id="cbj_'+curId+'" name="lsdProducts['+curId+'].cbj" value="0.0000"><input type="hidden" id="kh_cbj_'+curId+'" name="lsdProducts['+curId+'].kh_cbj" value="0.0000"><input type="hidden" id="gf_'+curId+'" name="lsdProducts['+curId+'].gf" value="0">';      
+        otd3.innerHTML = '<input type="text" id="price_'+curId+'" name="lsdProducts['+curId+'].price" value="0.00" size="7" onblur="hj();"><input type="hidden" id="cbj_'+curId+'" name="lsdProducts['+curId+'].cbj" value="0.00"><input type="hidden" id="kh_cbj_'+curId+'" name="lsdProducts['+curId+'].kh_cbj" value="0.00"><input type="hidden" id="gf_'+curId+'" name="lsdProducts['+curId+'].gf" value="0">';      
         
         
         var otd5 = document.createElement("td");
@@ -218,7 +218,7 @@ String sp_state = StringUtils.nullToStr(lsd.getSp_state());
         
         var otd8 = document.createElement("td");
         otd8.className = "a2";
-        otd8.innerHTML = '<input type="text" id="xj_'+curId+'" name="lsdProducts['+curId+'].xj" value="0.0000" size="7" readonly>';        
+        otd8.innerHTML = '<input type="text" id="xj_'+curId+'" name="lsdProducts['+curId+'].xj" value="0.00" size="7" readonly>';        
         
         var otd9 = document.createElement("td");
         otd9.className = "a2";
@@ -319,7 +319,7 @@ String sp_state = StringUtils.nullToStr(lsd.getSp_state());
 			var xj = document.getElementById("xj_" + i);			
 			
 			if(xj != null){
-				xj.value = (parseFloat(price.value) * parseFloat(nums.value)).toFixed(4);				
+				xj.value = (parseFloat(price.value) * parseFloat(nums.value)).toFixed(2);				
 				hjz = parseFloat(hjz) + parseFloat(xj.value);
 				
 				cbjhj = parseFloat(cbjhj) + parseFloat(cbjz.value) * parseFloat(nums.value);
@@ -340,11 +340,11 @@ String sp_state = StringUtils.nullToStr(lsd.getSp_state());
 
 		var yushkje = document.getElementById("yushkje");
 
-		lsdje.value = (parseFloat(hjz) - parseFloat(yhje.value)).toFixed(4);
+		lsdje.value = (parseFloat(hjz) - parseFloat(yhje.value)).toFixed(2);
 
-		lsdcbj.value = cbjhj.toFixed(4);
-		lsdkhcbj.value = khcbjhj.toFixed(4);
-		skje.value = (parseFloat(hjz) - parseFloat(yhje.value) - parseFloat(yushkje.value)).toFixed(4);
+		lsdcbj.value = cbjhj.toFixed(2);
+		lsdkhcbj.value = khcbjhj.toFixed(2);
+		skje.value = (parseFloat(hjz) - parseFloat(yhje.value) - parseFloat(yushkje.value)).toFixed(2);
 
 		
 	}
@@ -679,13 +679,13 @@ if(lsdProducts != null && lsdProducts.size()>0){
 				</td>
 				<td class="a2"><input type="text" id="product_xh_<%=i %>" name="lsdProducts[<%=i %>].product_xh" size="15" readonly></td>	
 				<td class="a2">
-					<input type="text" id="price_<%=i %>" name="lsdProducts[<%=i %>].price" value="0.0000" size="7" onblur="hj();">
-					<input type="hidden" id="cbj_<%=i %>" name="lsdProducts[<%=i %>].cbj" value="0.0000">
-					<input type="hidden" id="kh_cbj_<%=i %>" name="lsdProducts[<%=i %>].kh_cbj" value="0.0000">
+					<input type="text" id="price_<%=i %>" name="lsdProducts[<%=i %>].price" value="0.00" size="7" onblur="hj();">
+					<input type="hidden" id="cbj_<%=i %>" name="lsdProducts[<%=i %>].cbj" value="0.00">
+					<input type="hidden" id="kh_cbj_<%=i %>" name="lsdProducts[<%=i %>].kh_cbj" value="0.00">
 					<input type="hidden" id="gf_<%=i %>" name="lsdProducts[<%=i %>].gf" value="0">
 				</td>
 				<td class="a2"><input type="text" id="nums_<%=i %>" name="lsdProducts[<%=i %>].nums" value="0" size="5" onblur="hj();"></td>
-				<td class="a2"><input type="text" id="xj_<%=i %>" name="lsdProducts[<%=i %>].xj" value="0.0000" size="7" readonly></td>
+				<td class="a2"><input type="text" id="xj_<%=i %>" name="lsdProducts[<%=i %>].xj" value="0.00" size="7" readonly></td>
 				<td class="a2">
 					<input type="text" id="qz_serial_num_<%=i %>" name="lsdProducts[<%=i %>].qz_serial_num" size="15" readonly>
 					<input type="hidden" id="qz_flag_<%=i %>" name="lsdProducts[<%=i %>].qz_flag"><a style="cursor:hand" title="左键点击输入输列号" onclick="openSerialWin('<%=i %>');"><b>...</b></a>&nbsp;
@@ -714,7 +714,7 @@ if(lsdProducts != null && lsdProducts.size()>0){
 			<input type="text" name="lsd.lsdje" id="lsdje" value="<%=JMath.round(lsd.getLsdje()) %>" readonly>
 			<input type="hidden" name="lsd.lsdcbj" id="lsdcbj" value="<%=JMath.round(lsd.getLsdcbj()) %>" readonly>
 			<input type="hidden" name="lsd.lsdkhcb" id="lsdkhcb" value="<%=JMath.round(lsd.getLsdkhcb()) %>" readonly>
-			<input type="hidden" name="lsd.yhje" id="yhje" value="0.0000">
+			<input type="hidden" name="lsd.yhje" id="yhje" value="0.00">
 		</td>
 	</tr>
 	<%

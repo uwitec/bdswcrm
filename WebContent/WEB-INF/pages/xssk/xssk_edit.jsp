@@ -118,8 +118,8 @@ if(xsskDescs != null && xsskDescs.size()>0){
 		
 		var skje = document.getElementById("skje");
 		var hj_bcsk = document.getElementById("hj_bcsk");
-		hj_bcsk.value = hjz.toFixed(4);
-		skje.value = hjz.toFixed(4);
+		hj_bcsk.value = hjz.toFixed(2);
+		skje.value = hjz.toFixed(2);
 		
 	}	
 	
@@ -253,9 +253,9 @@ if(xsskDescs != null && xsskDescs.size()>0){
 	<tr>
 		<td class="a2"><input type="text" id="xsd_id_<%=i %>" name="xsskDescs[<%=i %>].xsd_id" value="" readonly></td>
 		<td class="a2"><input type="text" size="10" id="fsrq_<%=i %>" name="xsskDescs[<%=i %>].fsrq" value="" readonly></td>
-		<td class="a2"><input type="text" size="10" id="fsje_<%=i %>" name="xsskDescs[<%=i %>].fsje" value="0.0000" readonly></td>
-		<td class="a2"><input type="text" size="10" id="ysk_<%=i %>" name="xsskDescs[<%=i %>].yfje"  value="0.0000" readonly></td>
-		<td class="a2"><input type="text" size="10" id="bcsk_<%=i %>" name="xsskDescs[<%=i %>].bcsk" value="0.0000" onblur="hj();" <%if(StringUtils.nullToStr(xssk.getIs_ysk()).equals("是")) out.print("readonly"); %>></td>
+		<td class="a2"><input type="text" size="10" id="fsje_<%=i %>" name="xsskDescs[<%=i %>].fsje" value="0.00" readonly></td>
+		<td class="a2"><input type="text" size="10" id="ysk_<%=i %>" name="xsskDescs[<%=i %>].yfje"  value="0.00" readonly></td>
+		<td class="a2"><input type="text" size="10" id="bcsk_<%=i %>" name="xsskDescs[<%=i %>].bcsk" value="0.00" onblur="hj();" <%if(StringUtils.nullToStr(xssk.getIs_ysk()).equals("是")) out.print("readonly"); %>></td>
 		<td class="a2"><input type="text" id="remark_<%=i %>" name="xsskDescs[<%=i %>].remark" value=""></td>	
 	</tr>
 <%
