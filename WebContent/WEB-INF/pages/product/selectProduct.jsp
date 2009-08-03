@@ -10,14 +10,15 @@ OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
 Page results = (Page)VS.findValue("productPage");
 String openerId = ParameterUtility.getStringParameter(request, "openerId","");
 
-String product_xh = ParameterUtility.getStringParameter(request,"product_xh", "");
-String product_name = ParameterUtility.getStringParameter(request,"product_name", "");
-String prop = ParameterUtility.getStringParameter(request,"prop", "");
+String product_name = StringUtils.nullToStr((String)VS.findValue("product_name"));
+String product_kind = StringUtils.nullToStr((String)VS.findValue("product_kind"));
+List kindList = (List)VS.findValue("kindList");
+String prop = StringUtils.nullToStr((String)VS.findValue("prop"));
 %>
 
 <html>
 <head>
-<title>选择产品</title>
+<title>选择商品</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <link href="tree/menu.css" rel="stylesheet" type="text/css">
@@ -45,7 +46,7 @@ function sel(product_id,product_xh,product_name,price,qz_serial_num){
 }
 
 function clearAll(){
-	document.myform.product_xh.value = "";
+	document.myform.product_kind.value = "";
 	document.myform.product_name.value = "";
 	document.myform.prop.value = "";
 }
@@ -58,19 +59,37 @@ function clearAll(){
 <input type="hidden" name="openerId" id="openerId" value="<%=openerId %>">	
 <table width="100%" border="0" align="center" class="chart_list" cellpadding="0" cellspacing="0">
 	<tr>
-		<td class="csstitle">&nbsp;&nbsp;&nbsp;&nbsp;<b>选择产品</b></td>
+		<td class="csstitle">&nbsp;&nbsp;&nbsp;&nbsp;<b>选择商品</b></td>
 	</tr>
 	<tr>
 		<td class="search" align="left" colspan="2">&nbsp;&nbsp;
-			产品名称：<input type="text" name="product_name" value="<%=product_name %>" size="20">&nbsp;&nbsp;
-			规格：<input type="text" name="product_xh" value="<%=product_xh %>" size="20">&nbsp;&nbsp;
-			产品属性：<select name="prop">
+			商品：<input type="text" name="product_name" value="<%=product_name %>" size="20">&nbsp;&nbsp;
+			类别：
+			<select name="product_kind">
+				<option value=""></option>
+				<%
+				if(kindList != null &&  kindList.size()>0){
+					for(int i=0;i<kindList.size();i++){
+						Map map = (Map)kindList.get(i);
+						String id = StringUtils.nullToStr(map.get("id"));
+						String name = StringUtils.nullToStr(map.get("name"));
+						for(int k=0;k<id.length()-3;k++){
+							name = "　" + name;
+						}
+				%>
+				<option value="<%=id %>" <%if(product_kind.equals(id)) out.print("selected"); %>><%=name %></option>
+				<%
+					}
+				}
+				%>
+			</select>&nbsp;&nbsp;
+			属性：<select name="prop">
 				<option value=""></option>
 				<option value="库存商品" <%if(prop.equals("库存商品")) out.print("selected"); %>>库存商品</option>
 				<option value="服务/劳务" <%if(prop.equals("服务/劳务")) out.print("selected"); %>>服务/劳务</option>
-			</select>&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="submit" name="buttonCx" value=" 查询 " class="css_button">
-			<input type="button" name="buttonQk" value=" 清空 " class="css_button" onclick="clearAll();">
+			</select>&nbsp;&nbsp;
+			<input type="submit" name="buttonCx" value="查询" class="css_button">
+			<input type="button" name="buttonQk" value="清空" class="css_button" onclick="clearAll();">
 		</td>				
 	</tr>	
 </table>
@@ -81,10 +100,10 @@ function clearAll(){
 		<table width="100%"  align="center"  class="chart_list" border="1" cellpadding="0" cellspacing="0">
 			<thead>
 			<tr>
-				<td>产品名称</td>
-				<td>产品规格</td>
+				<td>商品名称</td>
+				<td>商品规格</td>
 				<td>成本价</td>
-				<td>产品属性</td>
+				<td>商品属性</td>
 			</tr>
 			</thead>
 			<%

@@ -30,6 +30,7 @@ public class MonthlyGainAction extends BaseAction {
 	private Map wltzsrMap = new HashMap();  //往来调帐收入
 	private Map wltzzcMap = new HashMap();  //往来调账支出
 	private Map dtfyMap = new HashMap();    //待摊费用
+	private Map tjlrMap = new HashMap();    //调价利润
 	
 	
 	
@@ -80,6 +81,7 @@ public class MonthlyGainAction extends BaseAction {
 		wltzsrMap = gainTblService.statWltzSr(ny);  //往来调帐收入
 		wltzzcMap = gainTblService.statWltzZc(ny);  //往来调账支出
 		dtfyMap = gainTblService.statDtfy(ny);    //待摊费用
+		tjlrMap = gainTblService.statTjlr(ny);    //调价利润
 		
 		return "success";
 	}
@@ -194,6 +196,14 @@ public class MonthlyGainAction extends BaseAction {
 
 	public void setZyywsrMap(Map zyywsrMap) {
 		this.zyywsrMap = zyywsrMap;
+	}
+
+	public Map getTjlrMap() {
+		return tjlrMap;
+	}
+
+	public void setTjlrMap(Map tjlrMap) {
+		this.tjlrMap = tjlrMap;
 	}
 	
 }

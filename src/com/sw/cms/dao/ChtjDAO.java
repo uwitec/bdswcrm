@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.jdbc.core.RowMapper;
 
 import com.sw.cms.dao.base.JdbcBaseDAO;
+import com.sw.cms.dao.base.SqlUtil;
 import com.sw.cms.model.Chtj;
 import com.sw.cms.model.ChtjDesc;
 import com.sw.cms.model.Page;
@@ -147,14 +148,14 @@ public class ChtjDAO extends JdbcBaseDAO {
 	 */
 	private void addChtjDesc(List chtjDescs,String chtj_id){
 		String sql = "";
-		Object[] param = new Object[7];
+		Object[] param = new Object[8];
 		
 		if(chtjDescs != null && chtjDescs.size()>0){
 			for(int i=0;i<chtjDescs.size();i++){
 				ChtjDesc chtjDesc = (ChtjDesc)chtjDescs.get(i);
 				if(chtjDesc != null){
 					if(!chtjDesc.getProduct_id().equals("") && !chtjDesc.getProduct_name().equals("")){
-						sql = "insert into chtj_desc(chtj_id,product_id,product_xh,product_name,ysjg,tzjg,remark) values(?,?,?,?,?,?,?)";
+						sql = "insert into chtj_desc(chtj_id,product_id,product_xh,product_name,ysjg,tzjg,remark,nums) values(?,?,?,?,?,?,?,?)";
 						
 						param[0] = chtj_id;
 						param[1] = chtjDesc.getProduct_id();
@@ -163,6 +164,7 @@ public class ChtjDAO extends JdbcBaseDAO {
 						param[4] = new Double(chtjDesc.getYsjg());
 						param[5] = new Double(chtjDesc.getTzjg());
 						param[6] = chtjDesc.getRemark();
+						param[7] = chtjDesc.getNums();
 						
 						this.getJdbcTemplate().update(sql,param);
 					}
@@ -192,13 +194,13 @@ public class ChtjDAO extends JdbcBaseDAO {
 	class ChtjRowMapper implements RowMapper {
 		public Object mapRow(ResultSet rs, int index) throws SQLException {
 			Chtj chtj = new Chtj();
-
-			chtj.setId(rs.getString("id"));
-			chtj.setTj_date(rs.getString("tj_date"));
-			chtj.setJsr(rs.getString("jsr"));
-			chtj.setState(rs.getString("state"));
-			chtj.setCzr(rs.getString("czr"));
-			chtj.setRemark(rs.getString("remark"));
+			
+			if (SqlUtil.columnIsExist(rs, "id")) chtj.setId(rs.getString("id"));
+			if (SqlUtil.columnIsExist(rs, "tj_date")) chtj.setTj_date(rs.getString("tj_date"));
+			if (SqlUtil.columnIsExist(rs, "jsr")) chtj.setJsr(rs.getString("jsr"));
+			if (SqlUtil.columnIsExist(rs, "state")) chtj.setState(rs.getString("state"));
+			if (SqlUtil.columnIsExist(rs, "czr")) chtj.setCzr(rs.getString("czr"));
+			if (SqlUtil.columnIsExist(rs, "remark")) chtj.setRemark(rs.getString("remark"));
 			
 			return chtj;
 		}
@@ -215,13 +217,14 @@ public class ChtjDAO extends JdbcBaseDAO {
 		public Object mapRow(ResultSet rs, int index) throws SQLException {
 			ChtjDesc chtjDesc = new ChtjDesc();
 
-			chtjDesc.setChtj_id(rs.getString("chtj_id"));
-			chtjDesc.setProduct_id(rs.getString("product_id"));
-			chtjDesc.setProduct_name(rs.getString("product_name"));
-			chtjDesc.setProduct_xh(rs.getString("product_xh"));
-			chtjDesc.setTzjg(rs.getDouble("tzjg"));
-			chtjDesc.setYsjg(rs.getDouble("ysjg"));
-			chtjDesc.setRemark(rs.getString("remark"));
+			if (SqlUtil.columnIsExist(rs, "chtj_id")) chtjDesc.setChtj_id(rs.getString("chtj_id"));
+			if (SqlUtil.columnIsExist(rs, "product_id")) chtjDesc.setProduct_id(rs.getString("product_id"));
+			if (SqlUtil.columnIsExist(rs, "product_name")) chtjDesc.setProduct_name(rs.getString("product_name"));
+			if (SqlUtil.columnIsExist(rs, "product_xh")) chtjDesc.setProduct_xh(rs.getString("product_xh"));
+			if (SqlUtil.columnIsExist(rs, "tzjg")) chtjDesc.setTzjg(rs.getDouble("tzjg"));
+			if (SqlUtil.columnIsExist(rs, "ysjg")) chtjDesc.setYsjg(rs.getDouble("ysjg"));
+			if (SqlUtil.columnIsExist(rs, "remark")) chtjDesc.setRemark(rs.getString("remark"));
+			if (SqlUtil.columnIsExist(rs, "nums")) chtjDesc.setNums(rs.getInt("nums"));
 			
 			return chtjDesc;
 		}

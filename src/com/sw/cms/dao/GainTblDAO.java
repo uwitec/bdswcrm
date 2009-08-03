@@ -475,6 +475,43 @@ public class GainTblDAO extends JdbcBaseDAO {
 	
 	
 	/**
+	 * 统计调价利润<BR>
+	 * 调高利润增加<BR>
+	 * 调低利润减少<BR>
+	 * 此处只计算库存商品，服务/劳务类商品不计；
+	 * @param ny
+	 * @return  Map(key,value)  <BR>
+	 * key=curMonth 当月结果； <BR>
+	 * key=allMonth  本年度累积
+	 */
+	public Map statTjlr(String ny){
+		Map<String,Double> map = new HashMap<String,Double>();
+		
+		double cost = 0;
+		
+		//本月数
+		String sql = "select sum((a.tzjg-a.ysjg)*a.nums) as tjlr from chtj_desc a join chtj b on b.id=a.chtj_id join product c on c.product_id=a.product_id where b.state='已提交' and c.prop='库存商品' and DATE_FORMAT(b.cz_date,'%Y-%m-%d')>='" + ny + "-01" + "' and DATE_FORMAT(b.cz_date,'%Y-%m-%d')<='" + ny + "-31" + "'";
+		Map mapMonth = this.getResultMap(sql);		
+		if(mapMonth != null){
+			cost = mapMonth.get("tjlr")==null?0:((Double)mapMonth.get("tjlr")).doubleValue();
+		}
+		map.put("curMonth", cost);
+		
+		cost = 0;
+		
+		//本年累积
+		sql = "select sum((a.tzjg-a.ysjg)*a.nums) as tjlr from chtj_desc a join chtj b on b.id=a.chtj_id join product c on c.product_id=a.product_id where b.state='已提交' and c.prop='库存商品' and DATE_FORMAT(b.cz_date,'%Y-%m-%d')>='" + this.getNdqs(ny) + "' and DATE_FORMAT(b.cz_date,'%Y-%m-%d')<='" + ny + "-31" + "'";
+		Map mapAllMonth = this.getResultMap(sql);		
+		if(mapAllMonth != null){
+			cost = mapAllMonth.get("tjlr")==null?0:((Double)mapAllMonth.get("tjlr")).doubleValue();
+		}
+		map.put("allMonth", cost);
+		
+		return map;
+	}
+	
+	
+	/**
 	 * 由年月取出年度起始
 	 * @param ny
 	 * @return

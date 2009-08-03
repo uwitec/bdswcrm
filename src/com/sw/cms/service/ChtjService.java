@@ -1,9 +1,11 @@
 package com.sw.cms.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.sw.cms.dao.ChtjDAO;
 import com.sw.cms.dao.ProductDAO;
+import com.sw.cms.dao.ProductKcDAO;
 import com.sw.cms.model.Chtj;
 import com.sw.cms.model.ChtjDesc;
 import com.sw.cms.model.Page;
@@ -12,6 +14,7 @@ public class ChtjService {
 	
 	private ChtjDAO chtjDao;
 	private ProductDAO productDao;
+	private ProductKcDAO productKcDao;
 	
 	/**
 	 * 根据查询条件取调价列表
@@ -31,7 +34,7 @@ public class ChtjService {
 	 * @param chtjDescs
 	 */
 	public void saveChtj(Chtj chtj,List chtjDescs){
-		chtjDao.saveChtj(chtj, chtjDescs);
+		chtjDao.saveChtj(chtj, this.setChNums(chtjDescs));
 		
 		if(chtj.getState().equals("已提交")){
 			this.updateProductPrice(chtjDescs);
@@ -45,7 +48,7 @@ public class ChtjService {
 	 * @param chtjDescs
 	 */
 	public void updateChtj(Chtj chtj,List chtjDescs){
-		chtjDao.updateChtj(chtj, chtjDescs);
+		chtjDao.updateChtj(chtj, this.setChNums(chtjDescs));
 		
 		if(chtj.getState().equals("已提交")){
 			this.updateProductPrice(chtjDescs);
@@ -107,6 +110,26 @@ public class ChtjService {
 			}
 		}
 	}
+	
+
+	/**
+	 * 设置调价时商品的数量
+	 * @param chtjDescs
+	 * @return
+	 */
+	private List setChNums(List chtjDescs){
+		List chtjDescs2 = new ArrayList();
+		if(chtjDescs != null && chtjDescs.size()>0){
+			for(int i=0;i<chtjDescs.size();i++){
+				ChtjDesc chtjDesc = (ChtjDesc)chtjDescs.get(i);
+				if(chtjDesc != null){
+					chtjDesc.setNums(productKcDao.getKcNums(chtjDesc.getProduct_id(), ""));
+					chtjDescs2.add(chtjDesc);
+				}
+			}
+		}
+		return chtjDescs2;
+	}
 
 
 	public ChtjDAO getChtjDao() {
@@ -126,6 +149,16 @@ public class ChtjService {
 
 	public void setProductDao(ProductDAO productDao) {
 		this.productDao = productDao;
+	}
+
+
+	public ProductKcDAO getProductKcDao() {
+		return productKcDao;
+	}
+
+
+	public void setProductKcDao(ProductKcDAO productKcDao) {
+		this.productKcDao = productKcDao;
 	}
 
 }

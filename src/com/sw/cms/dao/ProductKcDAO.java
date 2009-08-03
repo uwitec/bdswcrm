@@ -358,7 +358,13 @@ public class ProductKcDAO extends JdbcBaseDAO {
 	 */
 	public int getKcNums(String product_id,String store_id){
 		int nums = 0;
-		String sql = "select nums from product_kc where product_id='" + product_id + "' and store_id='" + store_id + "'";
+		String sql = "select sum(nums) as nums from product_kc where 1=1";
+		if(!product_id.equals("")){
+			sql += " and product_id='" + product_id + "'";
+		}
+		if(!store_id.equals("")){
+			sql += " and store_id='" + store_id + "'";
+		}
 		
 		List list = this.getResultList(sql);
 		if(list != null && list.size() > 0){

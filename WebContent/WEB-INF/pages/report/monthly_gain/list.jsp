@@ -89,8 +89,8 @@
 	<TR>
 		<TD class=ReportItem>　　　　加：营业外收入</TD>
 		<TD class=ReportItemXH>9</TD>
-		<TD class=ReportItemMoney><ww:property value="%{getText('global.format.money',{yywsrMap['curMonth']+spbysrMap['curMonth']+wltzsrMap['curMonth']})}" />&nbsp;</TD>
-		<TD class=ReportItemMoney><ww:property value="%{getText('global.format.money',{yywsrMap['allMonth']+spbysrMap['allMonth']+wltzsrMap['allMonth']})}" />&nbsp;</TD>
+		<TD class=ReportItemMoney><ww:property value="%{getText('global.format.money',{yywsrMap['curMonth']+spbysrMap['curMonth']+wltzsrMap['curMonth']+tjlrMap['curMonth']})}" />&nbsp;</TD>
+		<TD class=ReportItemMoney><ww:property value="%{getText('global.format.money',{yywsrMap['allMonth']+spbysrMap['allMonth']+wltzsrMap['allMonth']+tjlrMap['allMonth']})}" />&nbsp;</TD>
 	</TR>
 	<TR>
 		<TD class=ReportItem>　　　　减：营业外支出</TD>
@@ -98,8 +98,8 @@
 		<TD class=ReportItemMoney><ww:property value="%{getText('global.format.money',{spbszcMap['curMonth']+wltzzcMap['curMonth']})}" />&nbsp;</TD>
 		<TD class=ReportItemMoney><ww:property value="%{getText('global.format.money',{spbszcMap['allMonth']+wltzzcMap['allMonth']})}" />&nbsp;</TD>
 	</TR>
-	<ww:set name="lrzeCur" value="#yylrCur+yywsrMap['curMonth']+spbysrMap['curMonth']+wltzsrMap['curMonth']-spbszcMap['curMonth']-wltzzcMap['curMonth']"/>
-	<ww:set name="lrzeAll" value="#yylrAll+yywsrMap['allMonth']+spbysrMap['allMonth']+wltzsrMap['allMonth']-spbszcMap['allMonth']-wltzzcMap['allMonth']"/>		
+	<ww:set name="lrzeCur" value="#yylrCur+yywsrMap['curMonth']+spbysrMap['curMonth']+wltzsrMap['curMonth']+tjlrMap['curMonth']-spbszcMap['curMonth']-wltzzcMap['curMonth']"/>
+	<ww:set name="lrzeAll" value="#yylrAll+yywsrMap['allMonth']+spbysrMap['allMonth']+wltzsrMap['allMonth']+tjlrMap['allMonth']-spbszcMap['allMonth']-wltzzcMap['allMonth']"/>		
 	<TR>
 		<TD class=ReportItem>　　<B>四、利润总额（亏损总额以"-"号填列）</B></TD>
 		<TD class=ReportItemXH><B>11</B></TD>
@@ -131,7 +131,7 @@
 　二、主营业务成本 ＝ 销售所有库存商品合计采购成本（销售 － 退货） <BR>
 　三、其它业务利润 ＝ 服务类商品销售 － 服务类商品采购<BR>
 　四、营业费用 ＝ 一般费用 ＋ 摊销付款<BR>
-　五、营业外收入 ＝ 其它收入 ＋ 商品报溢收入 ＋ 往来调账收入<BR>
+　五、营业外收入 ＝ 其它收入 ＋ 商品报溢收入 ＋ 往来调账收入 ＋ 存货调价收入<BR>
 　六、营业外支出 ＝ 商品报损支出 ＋ 往来调账支出<BR>
 </body>
 </html>

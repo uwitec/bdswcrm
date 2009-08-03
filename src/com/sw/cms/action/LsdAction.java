@@ -10,6 +10,7 @@ import com.sw.cms.model.Page;
 import com.sw.cms.service.LsdService;
 import com.sw.cms.service.PosTypeService;
 import com.sw.cms.service.ProductKcService;
+import com.sw.cms.service.ProductKindService;
 import com.sw.cms.service.SjzdService;
 import com.sw.cms.service.StoreService;
 import com.sw.cms.service.SysInitSetService;
@@ -32,6 +33,7 @@ public class LsdAction extends BaseAction {
 	private SysInitSetService sysInitSetService;
 	private SjzdService sjzdService;
 	private PosTypeService posTypeService;
+	private ProductKindService productKindService;
  
 	
 	private List userList = new ArrayList();
@@ -64,6 +66,11 @@ public class LsdAction extends BaseAction {
 	private String sp_state = "";
 	
 	private String sd = "0";
+	
+	private String product_name = "";
+	private String product_kind = "";
+	private String prop = "";
+	private List kindList = new ArrayList();
 	
 	/**
 	 * 零售单列表
@@ -347,25 +354,24 @@ public class LsdAction extends BaseAction {
 	 * @return
 	 */
 	public String selKcProc(){
-		String product_xh = ParameterUtility.getStringParameter(getRequest(),"product_xh", "");
-		String product_name = ParameterUtility.getStringParameter(getRequest(),"product_name", "");
-		String prop = ParameterUtility.getStringParameter(getRequest(),"prop", "");	
-		
+
 		int rowsPerPage = 15;
 		
-		String con = " and state='正常'";
-		if(!product_xh.equals("")){
-			con += " and product_xh like '%" + product_xh + "%'";
-		}
+		String con = " and a.state='正常'";
 		if(!product_name.equals("")){
-			con += " and product_name like '%" + product_name + "%'";
+			con += " and (a.product_name like '%" + product_name + "%' or a.product_xh like '%" + product_name + "%')";
+		}
+		if(!product_kind.equals("")){
+			con += " and a.product_kind like '" + product_kind + "%'";
 		}
 		if(!prop.equals("")){
 			con += " and prop='" + prop + "'";
 		}
 		
 		productPage = productKcService.getProductKcList(con, curPage, rowsPerPage);
+		
 		storeList = storeService.getAllStoreList();
+		kindList = productKindService.getAllProductKindList();
 		
 		return "success";
 	}
@@ -648,6 +654,56 @@ public class LsdAction extends BaseAction {
 
 	public void setPosTypeService(PosTypeService posTypeService) {
 		this.posTypeService = posTypeService;
+	}
+
+
+	public String getProduct_kind() {
+		return product_kind;
+	}
+
+
+	public void setProduct_kind(String product_kind) {
+		this.product_kind = product_kind;
+	}
+
+
+	public String getProduct_name() {
+		return product_name;
+	}
+
+
+	public void setProduct_name(String product_name) {
+		this.product_name = product_name;
+	}
+
+
+	public List getKindList() {
+		return kindList;
+	}
+
+
+	public void setKindList(List kindList) {
+		this.kindList = kindList;
+	}
+
+
+	public ProductKindService getProductKindService() {
+		return productKindService;
+	}
+
+
+	public void setProductKindService(ProductKindService productKindService) {
+		this.productKindService = productKindService;
+	}
+
+
+	public String getProp() {
+		return prop;
+	}
+
+
+	public void setProp(String prop) {
+		this.prop = prop;
 	}
 
 

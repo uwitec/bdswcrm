@@ -13,6 +13,7 @@ import com.sw.cms.service.CkdService;
 import com.sw.cms.service.ClientsService;
 import com.sw.cms.service.PosTypeService;
 import com.sw.cms.service.ProductKcService;
+import com.sw.cms.service.ProductKindService;
 import com.sw.cms.service.ProductService;
 import com.sw.cms.service.SjzdService;
 import com.sw.cms.service.StoreService;
@@ -42,6 +43,7 @@ public class XsdAction extends BaseAction {
 	private ClientsService clientsService;
 	private PosTypeService posTypeService;
 	private CkdService ckdService;
+	private ProductKindService productKindService;
 	 
 	
 	private SysSource sysSource;
@@ -58,6 +60,7 @@ public class XsdAction extends BaseAction {
 	private List xsdProducts = new ArrayList();
 	private List fxddProducts = new ArrayList();
 	private List storeList = new ArrayList();
+	private List kindList = new ArrayList();
 	private List posTypeList = new ArrayList();
 	private List clientsList= new ArrayList();//---
 	
@@ -75,6 +78,7 @@ public class XsdAction extends BaseAction {
 	private String state = "";
 	private String product_xh = "";
 	private String product_name = "";
+	private String product_kind = "";
 	private String wlzt = "";
 	private String iscs_flag = "";  //系统是否初始完成标志
 	private String sp_state = "";
@@ -430,25 +434,20 @@ public class XsdAction extends BaseAction {
 	 * @return
 	 */
 	public String selXsdProc(){
-		String product_xh = ParameterUtility.getStringParameter(getRequest(),"product_xh", "");
-		String product_name = ParameterUtility.getStringParameter(getRequest(),"product_name", "");
-		String prop = ParameterUtility.getStringParameter(getRequest(),"prop", "");	
 		
 		int rowsPerPage = 15;
 		
-		String con = " and state='正常'";
-		if(!product_xh.equals("")){
-			con += " and product_xh like '%" + product_xh + "%'";
-		}
+		String con = " and a.state='正常'";
 		if(!product_name.equals("")){
-			con += " and product_name like '%" + product_name + "%'";
+			con += " and (a.product_name like '%" + product_name + "%' or a.product_xh like '%" + product_name + "%')";
 		}
-		if(!prop.equals("")){
-			con += " and prop='" + prop + "'";
+		if(!product_kind.equals("")){
+			con += " and a.product_kind like '" + product_kind + "%'";
 		}
 		
 		productPage = productKcService.getProductKcList(con, curPage, rowsPerPage);
 		storeList = storeService.getAllStoreList();
+		kindList = productKindService.getAllProductKindList();
 		
 		return "success";
 	}
@@ -933,6 +932,42 @@ public class XsdAction extends BaseAction {
 
 	public void setCkdService(CkdService ckdService) {
 		this.ckdService = ckdService;
+	}
+
+
+
+	public String getProduct_kind() {
+		return product_kind;
+	}
+
+
+
+	public void setProduct_kind(String product_kind) {
+		this.product_kind = product_kind;
+	}
+
+
+
+	public List getKindList() {
+		return kindList;
+	}
+
+
+
+	public void setKindList(List kindList) {
+		this.kindList = kindList;
+	}
+
+
+
+	public ProductKindService getProductKindService() {
+		return productKindService;
+	}
+
+
+
+	public void setProductKindService(ProductKindService productKindService) {
+		this.productKindService = productKindService;
 	}
 	
 }

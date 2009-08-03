@@ -9,9 +9,9 @@ OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
 
 Page productPage = (Page)VS.findValue("productPage");
 
-String product_xh = ParameterUtility.getStringParameter(request,"product_xh", "");
-String product_name = ParameterUtility.getStringParameter(request,"product_name", "");
-String prop = ParameterUtility.getStringParameter(request,"prop", "");
+String product_name = StringUtils.nullToStr((String)VS.findValue("product_name"));
+String product_kind = StringUtils.nullToStr((String)VS.findValue("product_kind"));
+List kindList = (List)VS.findValue("kindList");
 %>
 
 <html>
@@ -24,7 +24,7 @@ String prop = ParameterUtility.getStringParameter(request,"prop", "");
 	
 	function clearAll(){
 		document.myform.product_name.value = "";
-		document.myform.product_xh.value = "";
+		document.myform.product_kind.value = "";
 	}
 	
 	function selectAll(){
@@ -135,8 +135,26 @@ String prop = ParameterUtility.getStringParameter(request,"prop", "");
 	</tr>
 	<tr>
 		<td class="search" align="left" colspan="2">&nbsp;&nbsp;
-			商品名称：<input type="text" name="product_name" value="<%=product_name %>" size="20">&nbsp;&nbsp;
-			规格：<input type="text" name="product_xh" value="<%=product_xh %>" size="20">&nbsp;&nbsp;&nbsp;&nbsp;
+			商品：<input type="text" name="product_name" value="<%=product_name %>" size="20">&nbsp;&nbsp;
+			类别：
+			<select name="product_kind">
+				<option value=""></option>
+				<%
+				if(kindList != null &&  kindList.size()>0){
+					for(int i=0;i<kindList.size();i++){
+						Map map = (Map)kindList.get(i);
+						String id = StringUtils.nullToStr(map.get("id"));
+						String name = StringUtils.nullToStr(map.get("name"));
+						for(int k=0;k<id.length()-3;k++){
+							name = "　" + name;
+						}
+				%>
+				<option value="<%=id %>" <%if(product_kind.equals(id)) out.print("selected"); %>><%=name %></option>
+				<%
+					}
+				}
+				%>
+			</select>&nbsp;&nbsp;
 			<input type="submit" name="buttonCx" value=" 查询 " class="css_button">
 			<input type="button" name="buttonQk" value=" 清空 " class="css_button" onclick="clearAll();">
 		</td>				

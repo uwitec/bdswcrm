@@ -168,7 +168,7 @@ String product_name = ParameterUtility.getStringParameter(request,"product_name"
 			<td><input type="checkbox" name="chk_id" value="<%=vl %>"></td>
 			<td><%=StringUtils.nullToStr(map.get("product_name")) %></td>
 			<td><%=StringUtils.nullToStr(map.get("product_xh")) %></td>
-			<td><%=StringUtils.nullToStr(map.get("nums")) %></td>
+			<td><%=StringUtils.nullToStr(map.get("kc_nums")) %></td>
 			<td><%=JMath.round(price,2) %></td>
 			<td><%=JMath.round(fxxj,2) %></td>
 			<td><%=JMath.round(lsxj,2) %></td>

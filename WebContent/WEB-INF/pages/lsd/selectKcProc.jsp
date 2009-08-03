@@ -10,10 +10,9 @@ OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
 
 Page productPage = (Page)VS.findValue("productPage");
 
-String product_xh = ParameterUtility.getStringParameter(request,"product_xh", "");
-String product_name = ParameterUtility.getStringParameter(request,"product_name", "");
-String prop = ParameterUtility.getStringParameter(request,"prop", "");
-
+String product_name = StringUtils.nullToStr((String)VS.findValue("product_name"));
+String product_kind = StringUtils.nullToStr((String)VS.findValue("product_kind"));
+List kindList = (List)VS.findValue("kindList");
 
 String openerId = ParameterUtility.getStringParameter(request, "openerId","");
 %>
@@ -27,7 +26,7 @@ String openerId = ParameterUtility.getStringParameter(request, "openerId","");
 <script type="text/javascript">
 	
 	function clearAll(){
-		document.myform.product_xh.value = "";
+		document.myform.product_kind.value = "";
 		document.myform.product_name.value = "";
 	}
 
@@ -68,12 +67,30 @@ String openerId = ParameterUtility.getStringParameter(request, "openerId","");
 <input type="hidden" name="openerId" value="<%=openerId %>">
 <table width="100%"  align="center"class="chart_list" cellpadding="0" cellspacing="0">
 	<tr>
-		<td class="csstitle" align="left" width="100%">&nbsp;&nbsp;&nbsp;&nbsp;<b>选择库存产品</b></td>			
+		<td class="csstitle" align="left" width="100%">&nbsp;&nbsp;&nbsp;&nbsp;<b>选择库存商品</b></td>			
 	</tr>
 	<tr>
 		<td class="search" align="left" colspan="2">&nbsp;&nbsp;
-			产品名称：<input type="text" name="product_name" value="<%=product_name %>" size="20">&nbsp;&nbsp;
-			规格：<input type="text" name="product_xh" value="<%=product_xh %>" size="20">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			商品：<input type="text" name="product_name" value="<%=product_name %>" size="20">&nbsp;&nbsp;&nbsp;&nbsp;
+			类别：
+			<select name="product_kind">
+				<option value=""></option>
+				<%
+				if(kindList != null &&  kindList.size()>0){
+					for(int i=0;i<kindList.size();i++){
+						Map map = (Map)kindList.get(i);
+						String id = StringUtils.nullToStr(map.get("id"));
+						String name = StringUtils.nullToStr(map.get("name"));
+						for(int k=0;k<id.length()-3;k++){
+							name = "　" + name;
+						}
+				%>
+				<option value="<%=id %>" <%if(product_kind.equals(id)) out.print("selected"); %>><%=name %></option>
+				<%
+					}
+				}
+				%>
+			</select>			
 			<input type="submit" name="buttonCx" value=" 查询 " class="css_button">
 			<input type="button" name="buttonQk" value=" 清空 " class="css_button" onclick="clearAll();">
 		</td>				
@@ -82,7 +99,7 @@ String openerId = ParameterUtility.getStringParameter(request, "openerId","");
 <table width="100%"  align="center"  border="1"   class="chart_list" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
-		<td>产品名称</td>
+		<td>商品名称</td>
 		<td>规格</td>
 		<td>库存数量</td>
 		<td>考核成本</td>

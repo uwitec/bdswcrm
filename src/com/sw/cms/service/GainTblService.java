@@ -143,6 +143,21 @@ public class GainTblService {
 	public Map statDtfy(String ny){
 		return gainTblDao.statDtfy(ny);
 	}
+	
+	
+	/**
+	 * 统计调价利润<BR>
+	 * 调高利润增加<BR>
+	 * 调低利润减少<BR>
+	 * 此处只计算库存商品，服务/劳务类商品不计；
+	 * @param ny
+	 * @return  Map(key,value)  <BR>
+	 * key=curMonth 当月结果； <BR>
+	 * key=allMonth  本年度累积
+	 */
+	public Map statTjlr(String ny){
+		return gainTblDao.statTjlr(ny);
+	}
 
 
 	public GainTblDAO getGainTblDao() {
