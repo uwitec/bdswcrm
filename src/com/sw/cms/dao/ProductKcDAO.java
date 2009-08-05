@@ -230,47 +230,50 @@ public class ProductKcDAO extends JdbcBaseDAO {
 					
 					//只有库存商品才更新成本价及库存数量
 					if(prop.equals("库存商品")){
-
-						String store_id = rkd.getStore_id(); //入库仓库
 						
+						//当前商品总库存数
+						int nums = 0;
+						sql = "select sum(nums) as nums from product_kc where product_id='" + product_id + "'";	
+						Map map = this.getResultMap(sql);
+						String strNums = StringUtils.nullToStr(map.get("nums"));
+						if(!strNums.equals("")){
+							nums = (new Integer(strNums)).intValue();
+						}
+						
+						//当前库存成本价
+						double price = 0; 
+						sql = "select price from product where product_id='" + product_id + "'";
+						Map priceMap = this.getResultMap(sql);
+						if(priceMap != null){
+							price = priceMap.get("price")==null?0:((Double)priceMap.get("price")).doubleValue();
+						}
+						
+						double dqkczz = price * nums;  //当前库存总值
+						
+						int rk_product_nums = rkdProduct.getNums();        //入库产品数量
+						double rk_product_price = rkdProduct.getPrice();   //入库产品价格
+						
+						double rkzz = rk_product_nums * rk_product_price;  //入库商品总值
+						
+						//采用加权平均后的成本价
+						double cbj = price;						
+						if(nums + rk_product_nums != 0){   //只有在入库数+库存数不为0的情况下，计算成本价
+							cbj = (dqkczz + rkzz)/(nums + rk_product_nums);
+						}
+						
+						String store_id = rkd.getStore_id();   //入库仓库
+						
+						//判断要入库的仓库中是否有该商品
 						sql = "select  count(*) as allcount from product_kc where product_id='" + product_id + "' and store_id='" + store_id + "'";				
 						int counts = this.getJdbcTemplate().queryForInt(sql);
 						
-						if(counts > 0){ //该仓库中有该产品，需更新库存数量
-							
-							//更新产品成本价
-							sql = "select sum(nums) as nums from product_kc where product_id='" + product_id + "'";						
-							int nums = this.getJdbcTemplate().queryForInt(sql);  //当前产品总数量
-							double price = 0; //产品当前成本价
-							sql = "select price from product where product_id='" + product_id + "'";
-							List list = this.getResultList(sql);
-							if(list != null && list.size()>0){
-								Map map = (Map)list.get(0);
-								price = map.get("price")==null?0:((Double)map.get("price")).doubleValue();
-							}
-							
-							double dqkczz = price * nums;  //当前库存总值
-							
-							int rk_product_nums = rkdProduct.getNums();//入库产品数量
-							double rk_product_price = rkdProduct.getPrice();//入库产品价格
-							double rkzz = rk_product_nums * rk_product_price;
-							
-							//采用加权平均后的成本价
-							double cbj = price;
-							
-							if(nums + rk_product_nums != 0){
-								cbj = (dqkczz + rkzz)/(nums + rk_product_nums);
-							}
-							
-							
-							sql = "update product set price=" + cbj + " where product_id='" + product_id + "'";
-							
-							this.getJdbcTemplate().update(sql);	
-							
+						if(counts > 0){ 
+							// 该仓库中有该产品，需更新库存数量
 							sql = "update product_kc set nums=nums+" + rkdProduct.getNums() + " where product_id='" + product_id + "' and store_id='" + store_id + "'";
 							this.getJdbcTemplate().update(sql);
 							
-						}else{   //库存中没有该产品，添加即可
+						}else{   
+							//库存中没有该产品，添加即可
 							sql = "insert into product_kc(store_id,product_id,nums) values(?,?,?)";
 							Object[] param = new Object[3];
 						
@@ -279,16 +282,36 @@ public class ProductKcDAO extends JdbcBaseDAO {
 							param[2] = new Integer(rkdProduct.getNums());
 							
 							this.getJdbcTemplate().update(sql,param);
-							
-							//更新产品成本价
-							sql = "update product set price=" + rkdProduct.getPrice() + " where product_id='" + product_id + "'";
-	
-							this.getJdbcTemplate().update(sql);
 						}
+						
+						//更新商品成本价
+						sql = "update product set price=" + cbj + " where product_id='" + product_id + "'";						
+						this.getJdbcTemplate().update(sql);	
 					}
 				}
 			}
 		}
+	}
+	
+	
+	/**
+	 * 取商品最后一次入库时的成本价
+	 * @param product_id
+	 * @return
+	 */
+	public double getLastProductRkCbj(String product_id){
+		double cbj = 0;
+		
+		String sql = "select a.price from rkd_product a  left join rkd b on b.rkd_id=a.rkd_id where a.product_id='" + product_id + "' order by b.cz_date desc";
+		
+		List list = this.getResultList(sql);
+		if(list != null && list.size() > 0){
+			Map map = (Map)list.get(0);
+			
+			cbj = map.get("price")==null?0:((Double)map.get("price")).doubleValue();
+		}
+		
+		return cbj;
 	}
 	
 	

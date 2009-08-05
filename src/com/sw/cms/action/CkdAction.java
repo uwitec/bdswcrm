@@ -207,68 +207,6 @@ public class CkdAction extends BaseAction {
 		String user_id = info.getUser_id();
 		ckd.setCzr(user_id);
 		
-		if(ckd.getXsd_id().indexOf("CGTH") == -1){ //不是采购退货出库时需要判断		
-			if(ckd.getXsd_id().equals("")){
-				msg = "对应销售单不存在，或销售单编号为空，出库单无法保存！";
-				
-				ckdProducts = ckdService.getCkdProducts(ckd.getCkd_id());
-				iscs_flag = sysInitSetService.getQyFlag();
-				userList = userService.getAllEmployeeList();
-				storeList = ckdService.getStoreList();
-				ysfs = sjzdService.getSjzdXmxxByZdId("SJZD_YSFS");
-				
-				if(clientsService.getClient(ckd.getClient_name()) != null){
-					client = (Clients)clientsService.getClient(ckd.getClient_name());
-				}
-				
-				this.saveMessage(msg);
-				
-				return "input";
-			}else{
-				if(!xsdService.isHasXsdByID(ckd.getXsd_id())){  //用户添写的销售单不存在
-					msg = "对应销售单不存在，出库单无法保存，请检查！";
-					
-					ckdProducts = ckdService.getCkdProducts(ckd.getCkd_id());
-					iscs_flag = sysInitSetService.getQyFlag();
-					userList = userService.getAllEmployeeList();
-					storeList = ckdService.getStoreList();
-					ysfs = sjzdService.getSjzdXmxxByZdId("SJZD_YSFS");
-					
-					if(clientsService.getClient(ckd.getClient_name()) != null){
-						client = (Clients)clientsService.getClient(ckd.getClient_name());
-					}
-					
-					this.saveMessage(msg);
-					
-					return "input";
-				}else{  //如果存在则去判断产品是否存在
-					if(ckdProducts != null && ckdProducts.size()>0){
-						for(int i=0;i<ckdProducts.size();i++){
-							CkdProduct ckdProduct = (CkdProduct)ckdProducts.get(i);
-							if(ckdProduct.getProduct_id() != null && !ckdProduct.getProduct_id().equals("")){
-								if(!xsdService.isHasXsdProduct(ckd.getXsd_id(), ckdProduct.getProduct_id())){
-									msg = "出库单产品类别与对应销售单不同，出库单无法保存，请检查！";
-									
-									ckdProducts = ckdService.getCkdProducts(ckd.getCkd_id());
-									iscs_flag = sysInitSetService.getQyFlag();
-									userList = userService.getAllEmployeeList();
-									storeList = ckdService.getStoreList();
-									ysfs = sjzdService.getSjzdXmxxByZdId("SJZD_YSFS");
-									
-									if(clientsService.getClient(ckd.getClient_name()) != null){
-										client = (Clients)clientsService.getClient(ckd.getClient_name());
-									}
-									
-									this.saveMessage(msg);
-									return "input";
-								}
-							}
-						}
-					}				
-				}
-			}
-		}
-		
 		iscs_flag = sysInitSetService.getQyFlag();  //系统是否完成标志
 		//只有在系统正式启用后才去判断库存是否满足需求
 		if(iscs_flag.equals("1")){

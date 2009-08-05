@@ -76,6 +76,15 @@ String orderType = (String)VS.findValue("orderType");
 		document.myform.action = "listThd.html";
 		document.myform.submit();
 	}	
+	
+	function trSelectChangeCss(){
+		if (event.srcElement.tagName=='TD'){
+			for(i=0;i<selTable.rows.length;i++){
+				selTable.rows[i].className="a1";
+			}
+			event.srcElement.parentElement.className='a2';
+		}
+	}	
 </script>
 </head>
 <body>
@@ -100,7 +109,7 @@ String orderType = (String)VS.findValue("orderType");
 		</td>				
 	</tr>		
 </table>
-<table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0">
+<table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0"  border="1" id="selTable">
 	<thead>
 	<tr>
 		<td onclick="doSort('thd_id');">退货单编号<%if(orderName.equals("thd_id")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
@@ -121,15 +130,15 @@ String orderType = (String)VS.findValue("orderType");
 		Map thd = (Map)it.next();
 		double thdje = thd.get("thdje")==null?0:((Double)thd.get("thdje")).doubleValue();
 	%>
-	<tr class="a1"  title="双击查看详情" <%if(StringUtils.nullToStr(thd.get("th_flag")).equals("1")){ %>style="color:red"<%} %>  onclick="descMx('<%=StringUtils.nullToStr(thd.get("thd_id")) %>');" onDblClick="openWin('<%=StringUtils.nullToStr(thd.get("thd_id")) %>');">
-		<td class="a1"><%=StringUtils.nullToStr(thd.get("thd_id")) %></td>
-		<td class="a1"><%=StaticParamDo.getClientNameById(StringUtils.nullToStr(thd.get("client_name"))) %></td>
-		<td class="a1"><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(thd.get("th_fzr"))) %></td>
-		<td class="a3"><%=JMath.round(thdje,2) %>&nbsp;&nbsp;&nbsp;</td>
-		<td class="a1"><%=StringUtils.nullToStr(thd.get("th_date")) %></td>
-		<td class="a1"><%=StringUtils.nullToStr(thd.get("state")) %></td>
-		<td class="a1"><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(thd.get("czr"))) %></td>
-		<td class="a1">
+	<tr class="a1"  title="双击查看详情" <%if(StringUtils.nullToStr(thd.get("th_flag")).equals("1")){ %>style="color:red"<%} %>  onmousedown="trSelectChangeCss();"  onclick="descMx('<%=StringUtils.nullToStr(thd.get("thd_id")) %>');" onDblClick="openWin('<%=StringUtils.nullToStr(thd.get("thd_id")) %>');">
+		<td><%=StringUtils.nullToStr(thd.get("thd_id")) %></td>
+		<td><%=StaticParamDo.getClientNameById(StringUtils.nullToStr(thd.get("client_name"))) %></td>
+		<td><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(thd.get("th_fzr"))) %></td>
+		<td align="right"><%=JMath.round(thdje,2) %>&nbsp;&nbsp;&nbsp;</td>
+		<td><%=StringUtils.nullToStr(thd.get("th_date")) %></td>
+		<td><%=StringUtils.nullToStr(thd.get("state")) %></td>
+		<td><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(thd.get("czr"))) %></td>
+		<td>
 		<%
 		if(!StringUtils.nullToStr(thd.get("state")).equals("已保存")){
 		%>

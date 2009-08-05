@@ -168,7 +168,28 @@ public class ThdService {
 						rkdProduct.setProduct_id(thdProduct.getProduct_id());
 						rkdProduct.setProduct_name(thdProduct.getProduct_name());
 						rkdProduct.setProduct_xh(thdProduct.getProduct_xh());
-						rkdProduct.setPrice(thdProduct.getTh_price());
+						
+						//设置入库商品的价格
+						//一、如果销售退货与原单关联时，退货成本取原销售出库时成本
+						//二、取销售退回前的结余平均成本价
+						//三、如结余价为0，则取其前最后一次入库成本
+						//四、还为0，则取退回价
+						
+						double price = thdProduct.getCbj(); //取退货成本价，如果是关联销售单或零售单则取当时销售时的成本价，如果不关联则取退货时库存成本价
+						
+						//如果价格还为0，则取最后一次入库时的价格
+						if(price == 0){
+							price = productKcDao.getLastProductRkCbj(thdProduct.getProduct_id());
+						}
+						
+						//如果还为0，则取退回价
+						if(price == 0){
+							price = thdProduct.getTh_price();
+						}
+						
+						
+						rkdProduct.setPrice(price);
+						
 						rkdProduct.setNums(thdProduct.getNums());
 						rkdProduct.setRkd_id(rkd_id);
 						rkdProduct.setRemark(thdProduct.getRemark());
