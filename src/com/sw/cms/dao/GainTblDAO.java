@@ -264,8 +264,9 @@ public class GainTblDAO extends JdbcBaseDAO {
 	
 	
 	/**
-	 * 营业外支出<BR>
+	 * 营业费用<BR>
 	 * 取自一般费用表<BR>
+	 * 为了兼容历史做如下处理
 	 * @param ny  当前年月
 	 * @return  Map(key,value)  <BR>
 	 * key=curMonth 当月结果； <BR>
@@ -277,7 +278,7 @@ public class GainTblDAO extends JdbcBaseDAO {
 		double cost = 0;
 		
 		//当月
-		String sql = "select sum(zcje) as cost from qtzc where state='已提交' and DATE_FORMAT(cz_date,'%Y-%m-%d')>='" + ny + "-01" + "' and DATE_FORMAT(cz_date,'%Y-%m-%d')<='" + ny + "-31" + "'";
+		String sql = "select sum(zcje) as cost from qtzc where state='已提交' and (type not like '02%' and type not like '03%' and type not like '04%' and type not like '05%') and DATE_FORMAT(cz_date,'%Y-%m-%d')>='" + ny + "-01" + "' and DATE_FORMAT(cz_date,'%Y-%m-%d')<='" + ny + "-31" + "'";
 		Map mapMonth = this.getResultMap(sql);
 		if(mapMonth != null){
 			cost = mapMonth.get("cost")==null?0:((Double)mapMonth.get("cost")).doubleValue();
@@ -287,7 +288,7 @@ public class GainTblDAO extends JdbcBaseDAO {
 		cost = 0;
 		
 		//本年累积
-		sql = "select sum(zcje) as cost from qtzc where state='已提交' and DATE_FORMAT(cz_date,'%Y-%m-%d')>='" + this.getNdqs(ny) + "' and DATE_FORMAT(cz_date,'%Y-%m-%d')<='" + ny + "-31" + "'";
+		sql = "select sum(zcje) as cost from qtzc where state='已提交' and (type not like '02%' and type not like '03%' and type not like '04%' and type not like '05%')  and DATE_FORMAT(cz_date,'%Y-%m-%d')>='" + this.getNdqs(ny) + "' and DATE_FORMAT(cz_date,'%Y-%m-%d')<='" + ny + "-31" + "'";
 		Map mapAllMonth = this.getResultMap(sql);
 		if(mapAllMonth != null){
 			cost = mapAllMonth.get("cost")==null?0:((Double)mapAllMonth.get("cost")).doubleValue();
@@ -296,6 +297,143 @@ public class GainTblDAO extends JdbcBaseDAO {
 		
 		return map;
 	}
+	
+	
+	/**
+	 * 财务费用<BR>
+	 * 数据来源，一般费用表（qtzc)<BR>
+	 * type=02
+	 * @param ny
+	 * @return
+	 */
+	public Map statCwfy(String ny){
+		Map<String,Double> map = new HashMap<String,Double>();
+		
+		double cost = 0;
+		
+		//当月
+		String sql = "select sum(zcje) as cost from qtzc where state='已提交' and type like '02%' and DATE_FORMAT(cz_date,'%Y-%m-%d')>='" + ny + "-01" + "' and DATE_FORMAT(cz_date,'%Y-%m-%d')<='" + ny + "-31" + "'";
+		Map mapMonth = this.getResultMap(sql);
+		if(mapMonth != null){
+			cost = mapMonth.get("cost")==null?0:((Double)mapMonth.get("cost")).doubleValue();
+		}
+		map.put("curMonth", cost);
+		
+		cost = 0;
+		
+		//本年累积
+		sql = "select sum(zcje) as cost from qtzc where state='已提交'  and type like '02%' and DATE_FORMAT(cz_date,'%Y-%m-%d')>='" + this.getNdqs(ny) + "' and DATE_FORMAT(cz_date,'%Y-%m-%d')<='" + ny + "-31" + "'";
+		Map mapAllMonth = this.getResultMap(sql);
+		if(mapAllMonth != null){
+			cost = mapAllMonth.get("cost")==null?0:((Double)mapAllMonth.get("cost")).doubleValue();
+		}
+		map.put("allMonth", cost);
+		
+		return map;
+	}
+	
+	
+	/**
+	 * 管理费用<BR>
+	 * 数据来源，一般费用表（qtzc)<BR>
+	 * type 以03开头
+	 * @param ny
+	 * @return
+	 */
+	public Map statGlfy(String ny){
+		Map<String,Double> map = new HashMap<String,Double>();
+		
+		double cost = 0;
+		
+		//当月
+		String sql = "select sum(zcje) as cost from qtzc where state='已提交' and type like '03%' and DATE_FORMAT(cz_date,'%Y-%m-%d')>='" + ny + "-01" + "' and DATE_FORMAT(cz_date,'%Y-%m-%d')<='" + ny + "-31" + "'";
+		Map mapMonth = this.getResultMap(sql);
+		if(mapMonth != null){
+			cost = mapMonth.get("cost")==null?0:((Double)mapMonth.get("cost")).doubleValue();
+		}
+		map.put("curMonth", cost);
+		
+		cost = 0;
+		
+		//本年累积
+		sql = "select sum(zcje) as cost from qtzc where state='已提交'  and type like '03%' and DATE_FORMAT(cz_date,'%Y-%m-%d')>='" + this.getNdqs(ny) + "' and DATE_FORMAT(cz_date,'%Y-%m-%d')<='" + ny + "-31" + "'";
+		Map mapAllMonth = this.getResultMap(sql);
+		if(mapAllMonth != null){
+			cost = mapAllMonth.get("cost")==null?0:((Double)mapAllMonth.get("cost")).doubleValue();
+		}
+		map.put("allMonth", cost);
+		
+		return map;
+	}
+	
+	
+	/**
+	 * 主营业务税金及附加<BR>
+	 * 数据来源，一般费用表（qtzc)<BR>
+	 * type 以04开头
+	 * @param ny
+	 * @return
+	 */
+	public Map statZyywsjjfj(String ny){
+		Map<String,Double> map = new HashMap<String,Double>();
+		
+		double cost = 0;
+		
+		//当月
+		String sql = "select sum(zcje) as cost from qtzc where state='已提交' and type like '04%' and DATE_FORMAT(cz_date,'%Y-%m-%d')>='" + ny + "-01" + "' and DATE_FORMAT(cz_date,'%Y-%m-%d')<='" + ny + "-31" + "'";
+		Map mapMonth = this.getResultMap(sql);
+		if(mapMonth != null){
+			cost = mapMonth.get("cost")==null?0:((Double)mapMonth.get("cost")).doubleValue();
+		}
+		map.put("curMonth", cost);
+		
+		cost = 0;
+		
+		//本年累积
+		sql = "select sum(zcje) as cost from qtzc where state='已提交'  and type like '04%' and DATE_FORMAT(cz_date,'%Y-%m-%d')>='" + this.getNdqs(ny) + "' and DATE_FORMAT(cz_date,'%Y-%m-%d')<='" + ny + "-31" + "'";
+		Map mapAllMonth = this.getResultMap(sql);
+		if(mapAllMonth != null){
+			cost = mapAllMonth.get("cost")==null?0:((Double)mapAllMonth.get("cost")).doubleValue();
+		}
+		map.put("allMonth", cost);
+		
+		return map;
+	}	
+	
+	
+	/**
+	 * 所得税<BR>
+	 * 数据来源，一般费用表（qtzc)<BR>
+	 * type 以045开头
+	 * @param ny
+	 * @return
+	 */
+	public Map statSds(String ny){
+		Map<String,Double> map = new HashMap<String,Double>();
+		
+		double cost = 0;
+		
+		//当月
+		String sql = "select sum(zcje) as cost from qtzc where state='已提交' and type like '05%' and DATE_FORMAT(cz_date,'%Y-%m-%d')>='" + ny + "-01" + "' and DATE_FORMAT(cz_date,'%Y-%m-%d')<='" + ny + "-31" + "'";
+		Map mapMonth = this.getResultMap(sql);
+		if(mapMonth != null){
+			cost = mapMonth.get("cost")==null?0:((Double)mapMonth.get("cost")).doubleValue();
+		}
+		map.put("curMonth", cost);
+		
+		cost = 0;
+		
+		//本年累积
+		sql = "select sum(zcje) as cost from qtzc where state='已提交'  and type like '05%' and DATE_FORMAT(cz_date,'%Y-%m-%d')>='" + this.getNdqs(ny) + "' and DATE_FORMAT(cz_date,'%Y-%m-%d')<='" + ny + "-31" + "'";
+		Map mapAllMonth = this.getResultMap(sql);
+		if(mapAllMonth != null){
+			cost = mapAllMonth.get("cost")==null?0:((Double)mapAllMonth.get("cost")).doubleValue();
+		}
+		map.put("allMonth", cost);
+		
+		return map;
+	}	
+	
 	
 	
 	/**

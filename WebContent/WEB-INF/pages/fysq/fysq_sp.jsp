@@ -70,6 +70,13 @@ session.removeAttribute("messages");
 			document.frsqForm.submit();
 		}
 	}
+	
+	function openFyType(){
+		var destination = "selFyType.html";
+		var fea ='width=400,height=400,left=' + (screen.availWidth-400)/2 + ',top=' + (screen.availHeight-400)/2 + ',directories=no,localtion=no,menubar=no,status=yes,toolbar=no,scrollbars=yes,resizeable=no';
+		
+		window.open(destination,'费用类别',fea);	
+	}	
 </script>
 </head>
 <body onload="initFzrTip();">
@@ -106,10 +113,10 @@ session.removeAttribute("messages");
 	<tr>
 		<td class="a1" width="15%">业务员</td>
 		<td class="a2" width="35%">
-		    <input  id="brand"    type="text"   length="20"  onblur="setValue()" value="<%for(int i=0;i<userList.size();i++){Map map=(Map)userList.get(i); if(map.get("user_id").toString().equals(fysq.getYwy_id())) out.print(map.get("real_name"));} %>"/> 
-            <div   id="brandTip"  style="height:12px;position:absolute;left:89px; top:82px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
-            </div>
-		    <input type="hidden" name="fysq.ywy_id" id="fzr"  value="<%=fysq.getYwy_id() %>"/> <font color="red">*</font>	
+			 <ww:textfield name="brand" id="brand" theme="simple" onblur="setValue()" value="%{getUserRealName(fysq.ywy_id)}"/>
+	         <div id="brandTip" style="height:12px;position:absolute;left:89px; top:82px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
+	         </div>
+	         <ww:hidden name="fysq.ywy_id" id="fzr" theme="simple" value="%{fysq.ywy_id}"/><font color="red">*</font>	
 		</td>
 		<td class="a1" width="15%">相关客户</td>
 		<td class="a2" width="35%">
@@ -119,7 +126,10 @@ session.removeAttribute("messages");
 	<tr>
 		<td class="a1" width="15%">费用类型</td>
 		<td class="a2" width="35%">
-			<ww:select name="fysq.fy_type" id="fy_type" theme="simple" list="%{fyzclx}" emptyOption="true" /><span style="color:red">*</span>
+			<ww:textfield name="fy_type_show" id="fy_type_show" theme="simple" value="%{getFyTypeName(fysq.fy_type)}" readonly="true"/>
+			<ww:hidden name="fysq.fy_type" id="fy_type" theme="simple" value="%{fysq.fy_type}"/>
+			<img src="images/select.gif" align="absmiddle" title="选择费用类型" border="0" onclick="openFyType();" style="cursor:hand">
+			<span style="color:red">*</span>
 		</td>
 		<td class="a1" width="15%">付款方式</td>
 		<td class="a2" width="35%">

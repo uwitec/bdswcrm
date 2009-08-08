@@ -27,7 +27,7 @@
 	</tr>
 	<tr>
 		<td class="a1" width="15%">费用类型</td>
-		<td class="a2" width="35%"><ww:property value="%{fysq.fy_type}"/></td>
+		<td class="a2" width="35%"><ww:property value="%{getFyTypeName(fysq.fy_type)}"/></td>
 		<td class="a1" width="15%">付款方式</td>
 		<td class="a2" width="35%"><ww:property value="%{fysq.fklx}"/></td>						
 	</tr>

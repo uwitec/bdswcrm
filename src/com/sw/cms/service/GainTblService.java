@@ -71,7 +71,7 @@ public class GainTblService {
 	
 	
 	/**
-	 * 营业外支出<BR>
+	 * 营业费用<BR>
 	 * 取自一般费用表<BR>
 	 * @param ny  当前年月
 	 * @return  Map(key,value)  <BR>
@@ -80,6 +80,55 @@ public class GainTblService {
 	 */
 	public Map statYywZc(String ny){
 		return gainTblDao.statYywZc(ny);
+	}
+	
+	
+	
+	/**
+	 * 财务费用<BR>
+	 * 数据来源，一般费用表（qtzc)<BR>
+	 * type=02
+	 * @param ny
+	 * @return
+	 */
+	public Map statCwfy(String ny){
+		return gainTblDao.statCwfy(ny);
+	}
+	
+	
+	/**
+	 * 管理费用<BR>
+	 * 数据来源，一般费用表（qtzc)<BR>
+	 * type=02
+	 * @param ny
+	 * @return
+	 */
+	public Map statGlfy(String ny){
+		return gainTblDao.statGlfy(ny);
+	}
+	
+	
+	/**
+	 * 主营业务税金及附加<BR>
+	 * 数据来源，一般费用表（qtzc)<BR>
+	 * type 以04开头
+	 * @param ny
+	 * @return
+	 */
+	public Map statZyywsjjfj(String ny){
+		return gainTblDao.statZyywsjjfj(ny);
+	}
+	
+	
+	/**
+	 * 所得税<BR>
+	 * 数据来源，一般费用表（qtzc)<BR>
+	 * type 以045开头
+	 * @param ny
+	 * @return
+	 */
+	public Map statSds(String ny){
+		return gainTblDao.statSds(ny);
 	}
 	
 	

@@ -89,6 +89,19 @@ public class DataDisParseBaseAction extends BaseAction {
 		return dataDisParseDao.getAccountNameById(id);
 	}
 	
+	
+	/**
+	 * 根据费用类型编号取费用类型名称
+	 * @param id
+	 * @return
+	 */
+	public String getFyTypeName(String id){
+		if(id == null || id.equals("")){
+			return "";
+		}
+		return dataDisParseDao.getFyTypeNameById(id);
+	}
+	
 
 	public DataDisParseDAO getDataDisParseDao() {
 		return dataDisParseDao;

@@ -3,7 +3,7 @@ package com.sw.cms.action;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.sw.cms.action.base.BaseAction;
+import com.sw.cms.action.base.DataDisParseBaseAction;
 import com.sw.cms.model.Fysq;
 import com.sw.cms.model.LoginInfo;
 import com.sw.cms.model.Page;
@@ -18,7 +18,7 @@ import com.sw.cms.util.DateComFunc;
  * @author liyt
  *
  */
-public class FysqAction extends BaseAction {
+public class FysqAction extends DataDisParseBaseAction {
 	
 	private FysqService fysqService;
 	private UserService userService;

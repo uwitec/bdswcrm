@@ -142,4 +142,6 @@
 	
 	<bean id="bxhzAction" class="com.sw.cms.action.BxhzAction" scope="prototype" autowire="byName"/>
 	
+	<bean id="fyTypeAction" class="com.sw.cms.action.FyTypeAction" scope="prototype" autowire="byName"/>
+	
 </beans>

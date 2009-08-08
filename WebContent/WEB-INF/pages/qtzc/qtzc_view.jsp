@@ -33,7 +33,7 @@ List userList = (List)VS.findValue("userList");
 	</tr>
 	<tr>
 		<td class="a1" width="15%">费用类型</td>
-		<td class="a2" width="35%"><%=StringUtils.nullToStr(qtzc.getType()) %></td>
+		<td class="a2" width="35%"><%=StaticParamDo.getFyTypeNameById(qtzc.getType()) %></td>
 		<td class="a1" width="15%">金额</td>
 		<td class="a2" width="35%"><%=JMath.round(qtzc.getZcje(),2) %></td>		
 	</tr>	
@@ -68,7 +68,7 @@ List userList = (List)VS.findValue("userList");
 	<tr height="50">
 		<td class="a1">详细说明</td>
 		<td class="a2" colspan="3">
-			<textarea rows="2" cols="50" name="qtzc.remark" id="remark" style="width:80%" maxlength="500" readonly><%=StringUtils.nullToStr(qtzc.getRemark()) %>
+			<textarea rows="4" cols="50" name="qtzc.remark" id="remark" style="width:80%" maxlength="500" readonly><%=StringUtils.nullToStr(qtzc.getRemark()) %>
 			</textarea>
 		</td>
 	</tr>

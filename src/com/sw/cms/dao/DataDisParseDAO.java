@@ -18,7 +18,7 @@ public class DataDisParseDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public String getRealNameById(String user_id){
-		String name = "";
+		String name = user_id;
 		String sql = "select real_name from sys_user where user_id='" + user_id + "'";
 		
 		Map map = this.getResultMap(sql);
@@ -56,7 +56,7 @@ public class DataDisParseDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public String getStoreNameById(String id){
-		String name = "";
+		String name = id;
 		String sql = "select * from storehouse where id='" + id + "'";
 		List list = this.getJdbcTemplate().queryForList(sql);
 		if(list != null && list.size()>0){
@@ -73,7 +73,7 @@ public class DataDisParseDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public String getKindNameByKindId(String kind_id){
-		String name = "";
+		String name = kind_id;
 		String sql = "select * from product_kind where id='" + kind_id + "'";
 		List list = this.getJdbcTemplate().queryForList(sql);
 		if(list != null && list.size()>0){
@@ -91,7 +91,7 @@ public class DataDisParseDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public String getDeptNameById(String dept_id){
-		String name = "";
+		String name = dept_id;
 		String sql = "select * from dept where dept_id='" + dept_id + "'";
 		
 		List list = this.getJdbcTemplate().queryForList(sql);
@@ -110,9 +110,25 @@ public class DataDisParseDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public String getAccountNameById(String id){
-		String name = "";
+		String name = id;
 		String sql = "select * from accounts where id='" + id + "'";
-		Map map = this.getJdbcTemplate().queryForMap(sql);
+		Map map = this.getResultMap(sql);
+		if(map != null){
+			name = (String)map.get("name");
+		}
+		return name;
+	}
+	
+	
+	/**
+	 * 根据费用类型编号取费用类型名称
+	 * @param id
+	 * @return
+	 */
+	public String getFyTypeNameById(String id){
+		String name = id;
+		String sql = "select * from fy_type where id='" + id + "'";
+		Map map = this.getResultMap(sql);
 		if(map != null){
 			name = (String)map.get("name");
 		}

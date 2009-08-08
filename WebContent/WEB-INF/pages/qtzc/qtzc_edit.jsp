@@ -58,7 +58,7 @@ session.removeAttribute("messages");
 	
 	function openAccount(){
 		var destination = "selSkAccount.html";
-		var fea ='width=400,height=200,left=' + (screen.availWidth-400)/2 + ',top=' + (screen.availHeight-200)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		var fea ='width=400,height=200,left=' + (screen.availWidth-400)/2 + ',top=' + (screen.availHeight-200)/2 + ',directories=no,localtion=no,menubar=no,status=yes,toolbar=no,scrollbars=yes,resizeable=no';
 		
 		window.open(destination,'选择账户',fea);
 	}
@@ -103,7 +103,10 @@ session.removeAttribute("messages");
 	</tr>
 	<tr>
 		<td class="a1" width="15%">费用类型</td>
-		<td class="a2" width="35%"><input type="text" name="qtzc.type" id="type" value="<%=StringUtils.nullToStr(qtzc.getType()) %>" readonly></td>
+		<td class="a2" width="35%">
+			<input type="text" name="type_show" id="type_show" value="<%=StaticParamDo.getFyTypeNameById(qtzc.getType()) %>" readonly>
+			<input type="hidden" name="qtzc.type" id="type" value="<%=StringUtils.nullToStr(qtzc.getType()) %>">
+		</td>
 		<td class="a1" width="15%">金额</td>
 		<td class="a2" width="35%"><input type="text" name="qtzc.zcje" id="zcje" value="<%=JMath.round(qtzc.getZcje()) %>" readonly></td>		
 	</tr>	
@@ -135,7 +138,7 @@ session.removeAttribute("messages");
 		    <input  id="brand"    type="text"   length="20"  onblur="setValue()" value="<%=StaticParamDo.getRealNameById(qtzc.getJsr()) %>"/> 
             <div   id="brandTip"  style="height:12px;position:absolute;left:95px; top:141px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
             </div>
-		    <input type="hidden" name="qtzc.jsr" id="fzr" value="<%=qtzc.getJsr()%>"/><font color="red">*</font>	
+		    <input type="hidden" name="qtzc.jsr" id="fzr" value="<%=StringUtils.nullToStr(qtzc.getJsr())%>"/><font color="red">*</font>	
 		</td>	
 		<td class="a1" width="15%">业务员</td>
 		<td class="a2">
@@ -146,7 +149,7 @@ session.removeAttribute("messages");
 	<tr>
 		<td class="a1" width="15%">相关客户</td>
 		<td class="a2" width="35%">
-			<input type="text" id="zcxm"  name="qtzc.zcxm" value="<%=StringUtils.nullToStr(qtzc.getZcxm()) %>" size="15" readonly maxlength="100">
+			<input type="text" id="zcxm"  name="qtzc.zcxm" value="<%=StringUtils.nullToStr(qtzc.getZcxm()) %>" readonly maxlength="100">
 		</td>	
 		<td class="a1" width="15%">状态</td>
 		<td class="a2" width="35%">
@@ -169,7 +172,7 @@ session.removeAttribute("messages");
 	<tr height="50">
 		<td class="a1">详细说明</td>
 		<td class="a2" colspan="3">
-			<textarea rows="2" cols="50" name="qtzc.remark" id="remark" style="width:80%" maxlength="500"><%=StringUtils.nullToStr(qtzc.getRemark()) %>
+			<textarea rows="4" cols="50" name="qtzc.remark" id="remark" style="width:80%" maxlength="500"><%=StringUtils.nullToStr(qtzc.getRemark()) %>
 			</textarea><span style="color:red">*</span>
 		</td>
 	</tr>

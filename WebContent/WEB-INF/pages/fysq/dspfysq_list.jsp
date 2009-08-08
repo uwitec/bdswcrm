@@ -63,7 +63,7 @@
 			<td><ww:property value="%{id}" /></td>
 			<td><ww:property value="%{creatdate}" /></td>
 			<td><ww:property value="%{ywy_name}" /></td>
-			<td><ww:property value="%{fy_type}" /></td>
+			<td><ww:property value="%{getFyTypeName(fy_type)}" /></td>
 			<td><ww:property value="%{strJe}" /></td>
 			<td><ww:property value="%{czr_name}" /></td>
 			<td>

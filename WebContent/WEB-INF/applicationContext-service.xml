@@ -546,7 +546,14 @@
         <property name="target">
           <bean class="com.sw.cms.service.GainTblService" autowire="byName"/>  
         </property>
-    </bean>    
+    </bean>
+    
+    <!-- 费用类别 -->
+    <bean id="fyTypeService" parent="baseTransaction">
+        <property name="target">
+          <bean class="com.sw.cms.service.FyTypeService" autowire="byName"/>  
+        </property>
+    </bean>        
                
 </beans>
 

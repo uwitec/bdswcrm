@@ -132,7 +132,7 @@ String zc_date2 = (String)VS.findValue("zc_date2");
 	<tr class="a1"  title="双击查看详情"  onmousedown="trSelectChangeCss()"  onDblClick="openWin('<%=StringUtils.nullToStr(qtzc.getId()) %>');">
 		<td><%=StringUtils.nullToStr(qtzc.getId()) %></td>
 		<td><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(qtzc.getYwy())) %></td>
-		<td><%=StringUtils.nullToStr(qtzc.getType()) %></td>
+		<td><%=StaticParamDo.getFyTypeNameById(qtzc.getType()) %></td>
 		<td><%=StringUtils.nullToStr(qtzc.getFysq_id()) %></td>
 		<td align="right"><%=JMath.round(qtzc.getZcje(),2) %>&nbsp;&nbsp;</td>
 		<td><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(qtzc.getJsr())) %></td>

@@ -21,10 +21,18 @@ public class MonthlyGainAction extends BaseAction {
 	
 	private Map zyywsrMap = new HashMap();  //主营业务收入
 	private Map zyywcbMap = new HashMap();  //主营业务成本
+	
 	private Map qtywsrMap = new HashMap();  //其它业务收入
 	private Map qtywcbMap = new HashMap();  //其它业务成本
+	
 	private Map yywsrMap = new HashMap();   //营业外收入
-	private Map yywzcMap = new HashMap();   //营业外支出
+	
+	private Map yywzcMap = new HashMap();   //营业费用
+	private Map cwfyMap = new HashMap();    //财务费用
+	private Map glfyMap = new HashMap();    //管理费用
+	private Map zyywsjjfjMap = new HashMap(); //主营业务税金及附加
+	private Map sdsMap = new HashMap();     //所得税
+	
 	private Map spbysrMap = new HashMap();  //商品报溢收入
 	private Map spbszcMap = new HashMap();  //商品报损支出
 	private Map wltzsrMap = new HashMap();  //往来调帐收入
@@ -72,15 +80,28 @@ public class MonthlyGainAction extends BaseAction {
 		
 		zyywsrMap = gainTblService.statZyywSr(ny);  //主营业务收入
 		zyywcbMap = gainTblService.statZyywCb(ny);  //主营业务成本
+		
 		qtywsrMap = gainTblService.statQtywSr(ny);  //其它业务收入
 		qtywcbMap = gainTblService.statQtywCb(ny);  //其它业务成本
+		
 		yywsrMap = gainTblService.statYywSr(ny);   //营业外收入
-		yywzcMap = gainTblService.statYywZc(ny);   //营业外支出
+		
+		yywzcMap = gainTblService.statYywZc(ny);   //营业费用
+		dtfyMap = gainTblService.statDtfy(ny);    //待摊费用
+		
+		cwfyMap = gainTblService.statCwfy(ny);     //财务费用
+		glfyMap = gainTblService.statGlfy(ny);     //管理费用
+		zyywsjjfjMap = gainTblService.statZyywsjjfj(ny);  //主营业务税金及附加
+		sdsMap = gainTblService.statSds(ny);       //所得税
+		
+		
 		spbysrMap = gainTblService.statSpbySr(ny);  //商品报溢收入
 		spbszcMap = gainTblService.statSpbsZc(ny);  //商品报损支出
 		wltzsrMap = gainTblService.statWltzSr(ny);  //往来调帐收入
 		wltzzcMap = gainTblService.statWltzZc(ny);  //往来调账支出
-		dtfyMap = gainTblService.statDtfy(ny);    //待摊费用
+		
+		
+		
 		tjlrMap = gainTblService.statTjlr(ny);    //调价利润
 		
 		return "success";
@@ -204,6 +225,38 @@ public class MonthlyGainAction extends BaseAction {
 
 	public void setTjlrMap(Map tjlrMap) {
 		this.tjlrMap = tjlrMap;
+	}
+
+	public Map getCwfyMap() {
+		return cwfyMap;
+	}
+
+	public void setCwfyMap(Map cwfyMap) {
+		this.cwfyMap = cwfyMap;
+	}
+
+	public Map getGlfyMap() {
+		return glfyMap;
+	}
+
+	public void setGlfyMap(Map glfyMap) {
+		this.glfyMap = glfyMap;
+	}
+
+	public Map getSdsMap() {
+		return sdsMap;
+	}
+
+	public void setSdsMap(Map sdsMap) {
+		this.sdsMap = sdsMap;
+	}
+
+	public Map getZyywsjjfjMap() {
+		return zyywsjjfjMap;
+	}
+
+	public void setZyywsjjfjMap(Map zyywsjjfjMap) {
+		this.zyywsjjfjMap = zyywsjjfjMap;
 	}
 	
 }

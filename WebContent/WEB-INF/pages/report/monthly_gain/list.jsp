@@ -49,11 +49,11 @@
 	<TR>
 		<TD class=ReportItem>　　　　减：主营业务税金及附加</TD>
 		<TD class=ReportItemXH>3</TD>
-		<TD class=ReportItemMoney>0.00&nbsp;</TD>
-		<TD class=ReportItemMoney>0.00&nbsp;</TD>
+		<TD class=ReportItemMoney><ww:property value="%{getText('global.format.money',{zyywsjjfjMap['curMonth']})}" />&nbsp;</TD>
+		<TD class=ReportItemMoney><ww:property value="%{getText('global.format.money',{zyywsjjfjMap['allMonth']})}" />&nbsp;</TD>
 	</TR>
-	<ww:set name="zyxwlrCur" value="zyywsrMap['curMonth']-zyywcbMap['curMonth']"/>
-	<ww:set name="zyxwlrAll" value="zyywsrMap['allMonth']-zyywcbMap['allMonth']"/>
+	<ww:set name="zyxwlrCur" value="zyywsrMap['curMonth']-zyywcbMap['curMonth']-zyywsjjfjMap['curMonth']"/>
+	<ww:set name="zyxwlrAll" value="zyywsrMap['allMonth']-zyywcbMap['allMonth']-zyywsjjfjMap['allMonth']"/>
 	<TR>
 		<TD class=ReportItem>　　<B>二、主营业务利润(亏损以"-"号填列)</B></TD>
 		<TD class=ReportItemXH><B>4</B></TD>
@@ -75,26 +75,32 @@
 	<TR>
 		<TD class=ReportItem>　　　　减：财务费用</TD>
 		<TD class=ReportItemXH>7</TD>
-		<TD class=ReportItemMoney>0.00&nbsp;</TD>
-		<TD class=ReportItemMoney>0.00&nbsp;</TD>
-	</TR>	
-	<ww:set name="yylrCur" value="#zyxwlrCur+qtywsrMap['curMonth']-qtywcbMap['curMonth']-yywzcMap['curMonth']-dtfyMap['curMonth']"/>
-	<ww:set name="yylrAll" value="#zyxwlrAll+qtywsrMap['allMonth']-qtywcbMap['allMonth']-yywzcMap['allMonth']-dtfyMap['allMonth']"/>			
+		<TD class=ReportItemMoney><ww:property value="%{getText('global.format.money',{cwfyMap['curMonth']})}" />&nbsp;</TD>
+		<TD class=ReportItemMoney><ww:property value="%{getText('global.format.money',{cwfyMap['allMonth']})}" />&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD class=ReportItem>　　　　减：管理费用</TD>
+		<TD class=ReportItemXH>8</TD>
+		<TD class=ReportItemMoney><ww:property value="%{getText('global.format.money',{glfyMap['curMonth']})}" />&nbsp;</TD>
+		<TD class=ReportItemMoney><ww:property value="%{getText('global.format.money',{glfyMap['allMonth']})}" />&nbsp;</TD>
+	</TR>		
+	<ww:set name="yylrCur" value="#zyxwlrCur+qtywsrMap['curMonth']-qtywcbMap['curMonth']-yywzcMap['curMonth']-dtfyMap['curMonth']-cwfyMap['curMonth']-glfyMap['curMonth']"/>
+	<ww:set name="yylrAll" value="#zyxwlrAll+qtywsrMap['allMonth']-qtywcbMap['allMonth']-yywzcMap['allMonth']-dtfyMap['allMonth']-cwfyMap['allMonth']-glfyMap['allMonth']"/>			
 	<TR>
 		<TD class=ReportItem>　　<B>三、营业利润（亏损以"-"号填列）</B></TD>
-		<TD class=ReportItemXH><B>8</B></TD>
+		<TD class=ReportItemXH><B>9</B></TD>
 		<TD class=ReportItemMoney><B><ww:property value="%{getText('global.format.money',{#yylrCur})}" /></B>&nbsp;</TD>
 		<TD class=ReportItemMoney><B><ww:property value="%{getText('global.format.money',{#yylrAll})}" /></B>&nbsp;</TD>
 	</TR>
 	<TR>
 		<TD class=ReportItem>　　　　加：营业外收入</TD>
-		<TD class=ReportItemXH>9</TD>
+		<TD class=ReportItemXH>10</TD>
 		<TD class=ReportItemMoney><ww:property value="%{getText('global.format.money',{yywsrMap['curMonth']+spbysrMap['curMonth']+wltzsrMap['curMonth']+tjlrMap['curMonth']})}" />&nbsp;</TD>
 		<TD class=ReportItemMoney><ww:property value="%{getText('global.format.money',{yywsrMap['allMonth']+spbysrMap['allMonth']+wltzsrMap['allMonth']+tjlrMap['allMonth']})}" />&nbsp;</TD>
 	</TR>
 	<TR>
 		<TD class=ReportItem>　　　　减：营业外支出</TD>
-		<TD class=ReportItemXH>10</TD>
+		<TD class=ReportItemXH>11</TD>
 		<TD class=ReportItemMoney><ww:property value="%{getText('global.format.money',{spbszcMap['curMonth']+wltzzcMap['curMonth']})}" />&nbsp;</TD>
 		<TD class=ReportItemMoney><ww:property value="%{getText('global.format.money',{spbszcMap['allMonth']+wltzzcMap['allMonth']})}" />&nbsp;</TD>
 	</TR>
@@ -102,21 +108,21 @@
 	<ww:set name="lrzeAll" value="#yylrAll+yywsrMap['allMonth']+spbysrMap['allMonth']+wltzsrMap['allMonth']+tjlrMap['allMonth']-spbszcMap['allMonth']-wltzzcMap['allMonth']"/>		
 	<TR>
 		<TD class=ReportItem>　　<B>四、利润总额（亏损总额以"-"号填列）</B></TD>
-		<TD class=ReportItemXH><B>11</B></TD>
+		<TD class=ReportItemXH><B>12</B></TD>
 		<TD class=ReportItemMoney><B><ww:property value="%{getText('global.format.money',{#lrzeCur})}" /></B>&nbsp;</TD>
 		<TD class=ReportItemMoney><B><ww:property value="%{getText('global.format.money',{#lrzeAll})}" /></B>&nbsp;</TD>
 	</TR>
 	<TR>
 		<TD class=ReportItem>　　　　减：所得税</TD>
-		<TD class=ReportItemXH>12</TD>
-		<TD class=ReportItemMoney>0.00&nbsp;</TD>
-		<TD class=ReportItemMoney>0.00&nbsp;</TD>
+		<TD class=ReportItemXH>13</TD>
+		<TD class=ReportItemMoney><ww:property value="%{getText('global.format.money',{sdsMap['curMonth']})}" />&nbsp;</TD>
+		<TD class=ReportItemMoney><ww:property value="%{getText('global.format.money',{sdsMap['allMonth']})}" />&nbsp;</TD>
 	</TR>
-	<ww:set name="jlrCur" value="#lrzeCur"/>
-	<ww:set name="jlrAll" value="#lrzeAll"/>			
+	<ww:set name="jlrCur" value="#lrzeCur-sdsMap['curMonth']"/>
+	<ww:set name="jlrAll" value="#lrzeAll-sdsMap['allMonth']"/>			
 	<TR>
 		<TD class=ReportItem>　　<B>五、净利润（亏损以"-"号填列）</B></TD>
-		<TD class=ReportItemXH><B>13</B></TD>
+		<TD class=ReportItemXH><B>14</B></TD>
 		<TD class=ReportItemMoney><B><ww:property value="%{getText('global.format.money',{#jlrCur})}" /></B>&nbsp;</TD>
 		<TD class=ReportItemMoney><B><ww:property value="%{getText('global.format.money',{#jlrAll})}" /></B>&nbsp;</TD>
 	</TR>		
@@ -130,7 +136,7 @@
 　一、主营业务收入 ＝ 库存商品销售收入 － 库存商品退货金额<BR>
 　二、主营业务成本 ＝ 销售所有库存商品合计采购成本（销售 － 退货） <BR>
 　三、其它业务利润 ＝ 服务类商品销售 － 服务类商品采购<BR>
-　四、营业费用 ＝ 一般费用 ＋ 摊销付款<BR>
+　四、营业费用 ＝ 营业费用 ＋ 摊销付款<BR>
 　五、营业外收入 ＝ 其它收入 ＋ 商品报溢收入 ＋ 往来调账收入 ＋ 存货调价收入<BR>
 　六、营业外支出 ＝ 商品报损支出 ＋ 往来调账支出<BR>
 </body>

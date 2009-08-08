@@ -1887,8 +1887,27 @@
           <action name="getHpbxHzCondition" class="bxhzAction" method="getResult">
             <result name="success">/WEB-INF/pages/report/bxhz/result_hp.jsp</result>
         </action>
-         
          <!--货品报修汇总 -->
+         
+        <!-- 费用类别 -->
+        <action name="listFyType" class="fyTypeAction" method="list">
+             <result name="success">/WEB-INF/pages/fy_type/type_list.jsp</result>
+        </action>
+        <action name="editFyType" class="fyTypeAction" method="edit">
+             <result name="success">/WEB-INF/pages/fy_type/type_edit.jsp</result>
+        </action>
+        <action name="updateFyType" class="fyTypeAction" method="update">
+             <result name="success">/WEB-INF/pages/msg.jsp</result>
+              <result name="input">/WEB-INF/pages/fy_type/type_edit.jsp</result>
+             <result name="cancel" type="redirect">editFyType.html</result>
+        </action>
+        <action name="delFyType" class="fyTypeAction" method="del">
+             <result name="success">listFyType.html</result>
+        </action>
+        <action name="selFyType" class="fyTypeAction" method="list">
+             <result name="success">/WEB-INF/pages/fy_type/sel_fy_type.jsp</result>
+        </action>        
+        <!-- 费用类别 -->         
                                                                                                                
     </package>
 </xwork>

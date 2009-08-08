@@ -4,6 +4,7 @@ import org.springframework.context.ApplicationContext;
 
 import com.sw.cms.dao.AccountsDAO;
 import com.sw.cms.dao.ClientsDAO;
+import com.sw.cms.dao.DataDisParseDAO;
 import com.sw.cms.dao.DeptDAO;
 import com.sw.cms.dao.PosTypeDAO;
 import com.sw.cms.dao.ProductKindDAO;
@@ -125,6 +126,21 @@ public class StaticParamDo{
 			return "";
 		}else{
 			return dao.getPosNameById(id);
+		}
+	}
+	
+	
+	/**
+	 * 根据费用类别编号取费用类别名称
+	 * @param id
+	 * @return
+	 */
+	public static String getFyTypeNameById(String id){
+		DataDisParseDAO dao = (DataDisParseDAO)ctx.getBean("dataDisParseDao");
+		if(id == null || id.equals("")){
+			return "";
+		}else{
+			return dao.getFyTypeNameById(id);
 		}
 	}
 	

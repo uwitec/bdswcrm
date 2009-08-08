@@ -420,7 +420,12 @@
      <!-- 利润表 -->
      <bean id="gainTblDao" class="com.sw.cms.dao.GainTblDAO">
         <property name="jdbcTemplate" ref="jdbcTemplate"/>
-     </bean>     
+     </bean>  
+     
+     <!-- 费用类别 -->
+     <bean id="fyTypeDao" class="com.sw.cms.dao.FyTypeDAO">
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+     </bean>         
                                
 </beans>
 

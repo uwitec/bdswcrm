@@ -143,7 +143,8 @@ if(sp_state.equals("1")){
 					arryLxrObj[i] = manObj;
 					objLxr.add(new Option(arryInfo[1],arryInfo[1]));
 				}
-				document.getElementById("kh_lxdh").value = arryLxrObj[0].tel;
+				if(arryLxrObj[0].tel != undefined)
+					document.getElementById("kh_lxdh").value = arryLxrObj[0].tel;
 			}		
 		}
 	}

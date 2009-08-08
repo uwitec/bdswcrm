@@ -17,6 +17,7 @@ import com.opensymphony.xwork.ActionSupport;
 public class BaseAction extends ActionSupport {
 	
 	protected transient final Log log = LogFactory.getLog(getClass());
+	protected String msg = "";
 
     protected HttpServletRequest getRequest() {
         return ServletActionContext.getRequest();  
@@ -41,6 +42,14 @@ public class BaseAction extends ActionSupport {
         }
         messages.add(msg);
         getRequest().getSession().setAttribute("messages", messages);
+	}
+
+	public String getMsg() {
+		return msg;
+	}
+
+	public void setMsg(String msg) {
+		this.msg = msg;
 	}  
 
 }
