@@ -82,7 +82,7 @@ if(reustls != null && reustls.size()>0){
 		String id = StringUtils.nullToStr(map.get("id"));
 		String ywy_name = StaticParamDo.getRealNameById(StringUtils.nullToStr(map.get("ywy")));
 		String zc_date = StringUtils.nullToStr(map.get("zc_date"));
-		String type = StringUtils.nullToStr(map.get("type"));
+		String type = StaticParamDo.getFyTypeNameById((String)map.get("type"));
 		double je = map.get("zcje")==null?0:((Double)map.get("zcje")).doubleValue();
 		
 		hj_je += je;

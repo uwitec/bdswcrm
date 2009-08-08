@@ -534,7 +534,7 @@ public class LsdService {
 		
 		qtzc.setId(id);
 		qtzc.setZc_date(lsd.getCreatdate());
-		qtzc.setType("财务费用-刷卡手续费");
+		qtzc.setType("02");
 		qtzc.setZcje(posTypeDao.getBrushCardfy(lsd.getPos_id(), lsd.getSkje()));
 		qtzc.setZczh(lsd.getSkzh());
 		qtzc.setJsr(lsd.getXsry());

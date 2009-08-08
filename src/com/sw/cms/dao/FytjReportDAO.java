@@ -36,7 +36,7 @@ public class FytjReportDAO extends JdbcBaseDAO {
 			sql += " and b.dept like '" + dept + "%'";
 		}
 		if(!fy_type.equals("")){
-			sql += " and a.type='" + fy_type + "'";
+			sql += " and a.type like'" + fy_type + "%'";
 		}
 		return this.getResultList(sql);
 	}

@@ -855,7 +855,7 @@ public class XsdService {
 		
 		qtzc.setId(id);
 		qtzc.setZc_date(xsd.getCreatdate());
-		qtzc.setType("财务费用-刷卡手续费");
+		qtzc.setType("02");
 		qtzc.setZcje(posTypeDao.getBrushCardfy(xsd.getPos_id(), xsd.getSkje()));
 		qtzc.setZczh(xsd.getSkzh());
 		qtzc.setJsr(xsd.getFzr());

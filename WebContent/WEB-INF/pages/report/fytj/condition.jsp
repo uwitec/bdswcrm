@@ -26,16 +26,23 @@ String[] fy_types = (String[])VS.findValue("fy_types");
 	}
 </style>
 <script type="text/javascript">
-function openywyWin()
-	{
-	   var destination = "selLsEmployee.html";
-		var fea ='width=800,height=500,left=' + (screen.availWidth-800)/2 + ',top=' + (screen.availHeight-500)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
-		
-		window.open(destination,'选择经手人',fea);	
-	}
+function openywyWin(){
+	var destination = "selLsEmployee.html";
+	var fea ='width=800,height=500,left=' + (screen.availWidth-800)/2 + ',top=' + (screen.availHeight-500)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+	
+	window.open(destination,'选择经手人',fea);	
+}
+
 function submits(){
-  document.reportForm.submit();
+	document.reportForm.submit();
 }	
+
+function openFyType(){
+	var destination = "selFyType.html";
+	var fea ='width=400,height=400,left=' + (screen.availWidth-400)/2 + ',top=' + (screen.availHeight-400)/2 + ',directories=no,localtion=no,menubar=no,status=yes,toolbar=no,scrollbars=yes,resizeable=no';
+	
+	window.open(destination,'费用类别',fea);	
+}
 </script>
 </head>
 <body  onload="initFzrTip();">
@@ -90,21 +97,11 @@ function submits(){
 		</td>					
 	</tr>
 	<tr>
-		<td class="a1">费用类别</td>
-		<td class="a4" colspan="3">
-			<select name="fy_type">
-				<option value=""></option>
-			<%
-			if(fy_types != null && fy_types.length > 0){
-				for(int i=0;i<fy_types.length;i++){
-			%>
-				<option value="<%=fy_types[i] %>"><%=fy_types[i] %></option>
-			<%
-				}
-			}
-			%>
-				
-			</select>
+		<td class="a1">费用类型</td>
+		<td class="a2" colspan="3">
+			<input type="text" name="fy_type_show" id="fy_type_show" theme="simple" value="" readonly="true"/>
+			<input type="hidden" name="fy_type" id="fy_type" theme="simple" value=""/>
+			<img src="images/select.gif" align="absmiddle" title="选择费用类型" border="0" onclick="openFyType();" style="cursor:hand">
 		</td>
 	</tr>	
 	<tr height="35">
