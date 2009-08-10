@@ -17,8 +17,8 @@ public class CghzService {
 	 * @param xsry_id
 	 * @return
 	 */
-	public List getHpcgList(String product_kind,String start_date,String end_date,String client_name){
-		return cghzDao.getHpcgList(product_kind, start_date, end_date, client_name);
+	public List getHpcgList(String product_kind,String start_date,String end_date,String client_name,String product_name,String product_xh){
+		return cghzDao.getHpcgList(product_kind, start_date, end_date, client_name, product_name, product_xh);
 	}
 	
 	/**

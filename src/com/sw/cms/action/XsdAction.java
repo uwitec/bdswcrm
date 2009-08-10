@@ -286,7 +286,7 @@ public class XsdAction extends BaseAction {
 		ysfs = sjzdService.getSjzdXmxxByZdId("SJZD_YSFS");
 		fkfs = sjzdService.getSjzdXmxxByZdId("SJZD_FKFS");
 		storeList = storeService.getAllStoreList();
-		
+		posTypeList = posTypeService.getPosTypeList();		
 		iscs_flag = sysInitSetService.getQyFlag();  //是否完成系统初始化
 		
 		boolean needSp = false; //单据是否需要审批

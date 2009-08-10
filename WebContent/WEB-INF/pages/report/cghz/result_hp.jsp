@@ -15,6 +15,9 @@ String client_name = StringUtils.nullToStr(request.getParameter("clientName"));
 String clientId = StringUtils.nullToStr(request.getParameter("clientId"));
 String productKind = StringUtils.nullToStr(request.getParameter("productKind"));
 String kind_name = StringUtils.nullToStr(request.getParameter("kind_name"));
+
+String product_name = StringUtils.nullToStr(request.getParameter("product_name"));
+String product_xh = StringUtils.nullToStr(request.getParameter("product_xh"));
 String con = "";
 con = "日期：" + start_date + "至" + end_date;
 if(!clientId.equals("")){
@@ -22,6 +25,12 @@ if(!clientId.equals("")){
 }
 if(!kind_name.equals("")){
 	con += "&nbsp; 商品类别：" + kind_name;
+}
+if(!product_name.equals("")){
+	con += "&nbsp; 商品名称：" + product_name;
+}
+if(!product_xh.equals("")){
+	con += "&nbsp; 商品规格：" + product_xh;
 }
 %>
 
@@ -64,7 +73,7 @@ if(!kind_name.equals("")){
 	</THEAD>
 	<TBODY>
 <%
-List list = cghzService.getHpcgList(productKind, start_date, end_date, client_name);
+List list = cghzService.getHpcgList(productKind, start_date, end_date, client_name, product_name, product_xh);
 if(list != null && list.size()>0){
 	
 	int hj_nums = 0;
@@ -73,8 +82,6 @@ if(list != null && list.size()>0){
 	for(int i=0;i<list.size();i++){
 		Map map = (Map)list.get(i);
 		String product_id = StringUtils.nullToStr(map.get("product_id"));
-		String product_name = StringUtils.nullToStr(map.get("product_name"));
-		String product_xh = StringUtils.nullToStr(map.get("product_xh"));
 		double je = map.get("je")==null?0:((Double)map.get("je")).doubleValue();
 		String strNums = StringUtils.nullToStr(map.get("nums"));
 		
@@ -88,8 +95,8 @@ if(list != null && list.size()>0){
 %>
 		<TR>
 			<TD class=ReportItem><%=product_id %>&nbsp;</TD>
-			<TD class=ReportItem><a href="#" onclick="openWin('<%=product_id %>','<%=start_date %>','<%=end_date %>','<%=client_name %>');"><%=product_name %></a>&nbsp;</TD>			
-			<TD class=ReportItem><%=product_xh %>&nbsp;</TD>
+			<TD class=ReportItem><a href="#" onclick="openWin('<%=product_id %>','<%=start_date %>','<%=end_date %>','<%=client_name %>');"><%=StringUtils.nullToStr(map.get("product_name")) %></a>&nbsp;</TD>			
+			<TD class=ReportItem><%=StringUtils.nullToStr(map.get("product_xh")) %>&nbsp;</TD>
 			<TD class=ReportItemMoney><%=nums %>&nbsp;</TD>
 			<TD class=ReportItemMoney><%=JMath.round(je,2) %>&nbsp;</TD>
 		</TR>

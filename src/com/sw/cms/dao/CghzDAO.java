@@ -22,7 +22,7 @@ public class CghzDAO extends JdbcBaseDAO {
 	 * @param xsry_id
 	 * @return
 	 */
-	public List getHpcgList(String product_kind,String start_date,String end_date,String client_name){
+	public List getHpcgList(String product_kind,String start_date,String end_date,String client_name,String product_name,String product_xh){
 		
 		//进货单
 		String jhd_sql = "select a.product_id,c.product_name,c.product_xh,sum(nums) as nums,sum(a.price*a.nums) as je from jhd_product a join jhd b on b.id=a.jhd_id left join product c on c.product_id=a.product_id where b.state='已入库' and c.prop='库存商品'";
@@ -51,7 +51,13 @@ public class CghzDAO extends JdbcBaseDAO {
 		}
 		if(!client_name.equals("")){
 			jhd_sql += " and b.gysbh ='" + client_name + "'";
-		}	
+		}
+		if(!product_name.equals("")){
+			jhd_sql += " and a.product_name like '%" + product_name + "%'";
+		}
+		if(!product_xh.equals("")){
+			jhd_sql += " and a.product_xh like '%" + product_xh + "%'";
+		}
 		jhd_sql += " group by a.product_id,c.product_name,c.product_xh";
 		
 		//采购退货单
@@ -81,6 +87,12 @@ public class CghzDAO extends JdbcBaseDAO {
 		}
 		if(!client_name.equals("")){
 			cgthd_sql += " and b.provider_name='" + client_name + "'";
+		}
+		if(!product_name.equals("")){
+			cgthd_sql += " and a.product_name like '%" + product_name + "%'";
+		}
+		if(!product_xh.equals("")){
+			cgthd_sql += " and a.product_xh like '%" + product_xh + "%'";
 		}		
 		cgthd_sql += " group by a.product_id,c.product_name,c.product_xh";
 		

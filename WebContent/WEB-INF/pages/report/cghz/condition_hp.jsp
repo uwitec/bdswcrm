@@ -1,13 +1,5 @@
 <%@ page language="java" errorPage="/error.jsp" pageEncoding="UTF-8" contentType="text/html;charset=utf-8" %>
-<%@ page import="com.opensymphony.xwork.util.OgnlValueStack" %>
 <%@ page import="com.sw.cms.util.*" %>
-<%@ page import="java.util.*" %>
-
-<%
-OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
-
-List clientsList=(List)VS.findValue("clientsList");
-%>
 <html>
 <head>
 <title>货品采购汇总</title>
@@ -17,10 +9,7 @@ List clientsList=(List)VS.findValue("clientsList");
 <script language='JavaScript' src="js/selClient.js"></script>
 <script type="text/javascript" src="js/prototype-1.4.0.js"></script>
 <style>
-	.selectTip{
-		background-color:#009;
-		 color:#fff;
-	}
+	.selectTip{background-color:#009;color:#fff;}
 </style>
 <script type="text/javascript">
 	function openClientWin(){
@@ -36,8 +25,8 @@ List clientsList=(List)VS.findValue("clientsList");
 		
 		window.open(destination,'选择商品类别',fea);
 	}
-	function submits()
-	{
+	
+	function subForm(){
 	  document.reportForm.submit();
 	}		
 </script>
@@ -75,10 +64,20 @@ List clientsList=(List)VS.findValue("clientsList");
 			<input type="hidden" name="productKind" id="product_kind" value="">
 			<img src="images/select.gif" align="absmiddle" title="点击选择类别" border="0" onclick="openWin();" style="cursor:hand">
 		</td>			
-	</tr>	
+	</tr>
+	<tr>
+		<td class="a1">商品名称</td>
+		<td class="a4">
+			<input type="text" name="product_name" id="product_name" value="" size="30">
+		</td>
+		<td class="a1">商品规格</td>
+		<td class="a4">
+			<input type="text" name="product_xh" id="product_xh" value="" size="30">	
+		</td>
+	</tr>		
 	<tr height="35">
 		<td class="a1" colspan="4">
-			<input type="button" name="button1"  onclick="submits()" value="提 交" class="css_button2">&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="button" name="button1"  onclick="subForm();" value="提 交" class="css_button2">&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="reset" name="button2" value="重 置" class="css_button2">
 		</td>
 	</tr>
