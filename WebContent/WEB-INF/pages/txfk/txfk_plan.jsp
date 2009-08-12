@@ -36,10 +36,10 @@
 		if(!InputValid(document.getElementById("txyf"),1,"int",1,1,9999,"摊销月份数")){
 			document.getElementById("txyf").focus();
 			return; 
-		}		
+		}
 		
 		var strYear = parseInt(tx_start_date.substring(0,4));
-		var strMonth = parseInt(tx_start_date.substring(5,7));
+		var strMonth = parseInt(tx_start_date.substring(5,7),10);
 		var strDay = tx_start_date.substring(8,10);
 		
 		for(var i=0;i<counts;i++){
