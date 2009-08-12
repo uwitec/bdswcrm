@@ -69,7 +69,8 @@
 	<tr>
 		<td>编号</td>
 		<td>申请日期</td>	
-		<td>业务员</td>
+		<td>申请人</td>
+		<td>使用部门</td>
 		<td>费用类型</td>
 		<td>金额</td>
 		<td>状态</td>
@@ -80,7 +81,8 @@
 		<tr class="a1" onmouseover="this.className='a2';" onmouseout="this.className='a1';" onDblClick="view('<ww:property value="%{id}" />');";>
 			<td><ww:property value="%{id}" /></td>
 			<td><ww:property value="%{creatdate}" /></td>
-			<td><ww:property value="%{ywy_name}" /></td>
+			<td><ww:property value="%{getUserRealName(sqr)}" /></td>
+			<td><ww:property value="%{getDeptName(ywy_dept)}" /></td>
 			<td><ww:property value="%{getFyTypeName(fy_type)}" /></td>
 			<td align="right"><ww:property value="%{strJe}" />&nbsp;</td>
 			<td><ww:property value="%{state}" /></td>		

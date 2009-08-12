@@ -31,8 +31,8 @@ session.removeAttribute("messages");
 </style>
 <script type="text/javascript">
 	function saveInfo(){
-		if(document.getElementById("type").value == ""){
-			alert("支出类型不能为空，请选择！");
+		if(document.getElementById("fzr").value == ""){
+			alert("出纳不能为空，请选择！");
 			return;
 		}		
 		if(document.getElementById("skzh").value == ""){
@@ -43,10 +43,7 @@ session.removeAttribute("messages");
 			alert("付款方式不能为空，请选择！");
 			return;
 		}			
-		if(document.getElementById("fzr").value == ""){
-			alert("出纳不能为空，请选择！");
-			return;
-		}
+
 		if(document.getElementById("remark").value == ""){
 			alert("详细说明不能为空，请填写！");
 			return;
@@ -79,7 +76,7 @@ session.removeAttribute("messages");
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
-		<td colspan="4">一般费用</td>
+		<td colspan="4">费用申请信息</td>
 	</tr>
 	</thead>
 	<%
@@ -92,9 +89,41 @@ session.removeAttribute("messages");
 	<%
 		}
 	}
-	%>		
+	%>	
 	<tr>
-		<td class="a1" width="15%">编号</td>
+		<td class="a1" width="15%">费用申请单编号</td>
+		<td class="a2"><%=StringUtils.nullToStr(qtzc.getFysq_id()) %></td>
+		<td class="a1" width="15%">费用类型</td>
+		<td class="a2" width="35%"><%=StaticParamDo.getFyTypeNameById(qtzc.getType()) %></td>		
+	</tr>
+	<tr>
+		<td class="a1" width="15%">费用申请人</td>
+		<td class="a2"><%=StaticParamDo.getRealNameById(qtzc.getSqr()) %></td>	
+		<td class="a1" width="15%">费用使用人</td>
+		<td class="a2"><%=StaticParamDo.getRealNameById(qtzc.getYwy()) %></td>						
+	</tr>
+	<tr>
+		<td class="a1" width="15%">费用使用部门</td>
+		<td class="a2"><%=StaticParamDo.getDeptNameById(qtzc.getYwy_dept()) %></td>				
+		<td class="a1" width="15%">对应客户</td>
+		<td class="a2" width="35%"><%=StringUtils.nullToStr(qtzc.getZcxm()) %></td>		
+	</tr>
+	<tr>
+		<td class="a1" width="15%">审批人</td>
+		<td class="a2"><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(qtzc.getSpr())) %></td>
+		<td class="a1" width="15%">审批时间</td>
+		<td class="a2" width="35%"><%=StringUtils.nullToStr(qtzc.getSp_date()) %></td>
+	</tr>
+</table>
+<BR>
+<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
+	<thead>
+	<tr>
+		<td colspan="4">费用支出信息</td>
+	</tr>
+	</thead>					
+	<tr>
+		<td class="a1" width="15%">支出编号</td>
 		<td class="a2" width="35%"><input type="text" name="qtzc.id" id="id" value="<%=StringUtils.nullToStr(qtzc.getId()) %>" readonly></td>
 		<td class="a1" width="15%">支出日期</td>
 		<td class="a2">
@@ -102,17 +131,19 @@ session.removeAttribute("messages");
 		</td>		
 	</tr>
 	<tr>
-		<td class="a1" width="15%">费用类型</td>
-		<td class="a2" width="35%">
-			<input type="text" name="type_show" id="type_show" value="<%=StaticParamDo.getFyTypeNameById(qtzc.getType()) %>" readonly>
-			<input type="hidden" name="qtzc.type" id="type" value="<%=StringUtils.nullToStr(qtzc.getType()) %>">
-		</td>
+		<td class="a1" width="15%">出纳</td>
+		<td class="a2">
+		    <input  id="brand"    type="text"   length="20"  onblur="setValue()" value="<%=StaticParamDo.getRealNameById(qtzc.getJsr()) %>"/> 
+            <div   id="brandTip"  style="height:12px;position:absolute;left:95px; top:141px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
+            </div>
+		    <input type="hidden" name="qtzc.jsr" id="fzr" value="<%=StringUtils.nullToStr(qtzc.getJsr())%>"/><font color="red">*</font>	
+		</td>	
 		<td class="a1" width="15%">金额</td>
 		<td class="a2" width="35%"><input type="text" name="qtzc.zcje" id="zcje" value="<%=JMath.round(qtzc.getZcje()) %>" readonly></td>		
 	</tr>	
 	<tr>
 		<td class="a1" width="15%">支出账号</td>
-		<td class="a2" width="35%"><input type="text" id="zhname"  name="zhname" value="<%=StaticParamDo.getAccountNameById(StringUtils.nullToStr(qtzc.getZczh())) %>" readonly>
+		<td class="a2" width="35%"><input type="text" id="zhname"  name="zhname" value="<%=StaticParamDo.getAccountNameById(StringUtils.nullToStr(qtzc.getZczh())) %>" size="30" readonly>
 		<input type="hidden" id="skzh"  name="qtzc.zczh" value="<%=StringUtils.nullToStr(qtzc.getZczh()) %>"><span style="color:red">*</span>
 		<img src="images/select.gif" align="absmiddle" title="选择账户" border="0" onclick="openAccount();" style="cursor:hand">
 		</td>	
@@ -133,42 +164,22 @@ session.removeAttribute("messages");
 		</td>	
 	</tr>
 	<tr>
-		<td class="a1" width="15%">出纳</td>
-		<td class="a2">
-		    <input  id="brand"    type="text"   length="20"  onblur="setValue()" value="<%=StaticParamDo.getRealNameById(qtzc.getJsr()) %>"/> 
-            <div   id="brandTip"  style="height:12px;position:absolute;left:95px; top:141px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
-            </div>
-		    <input type="hidden" name="qtzc.jsr" id="fzr" value="<%=StringUtils.nullToStr(qtzc.getJsr())%>"/><font color="red">*</font>	
-		</td>	
-		<td class="a1" width="15%">业务员</td>
-		<td class="a2">
-			<input type="hidden" name="qtzc.ywy" id="ywy" value="<%=StringUtils.nullToStr(qtzc.getYwy()) %>" readonly>
-			<input type="text" name="ywy_name" id="ywy_name" value="<%=StaticParamDo.getRealNameById(StringUtils.nullToStr(qtzc.getYwy())) %>" readonly>
-		</td>
-	</tr>
-	<tr>
-		<td class="a1" width="15%">相关客户</td>
-		<td class="a2" width="35%">
-			<input type="text" id="zcxm"  name="qtzc.zcxm" value="<%=StringUtils.nullToStr(qtzc.getZcxm()) %>" readonly maxlength="100">
-		</td>	
 		<td class="a1" width="15%">状态</td>
-		<td class="a2" width="35%">
+		<td class="a2" width="35%" colspan="3">
 			<select name="qtzc.state" id="state">
 				<option value="已保存" <%if(StringUtils.nullToStr(qtzc.getState()).equals("已保存")) out.print("selected"); %>>已保存</option>
 				<option value="已提交" <%if(StringUtils.nullToStr(qtzc.getState()).equals("已提交")) out.print("selected"); %>>已提交</option>
 			</select>		
 		</td>		
-	</tr>	
-	<tr>
-		<td class="a1" width="15%">审批人</td>
-		<td class="a2"><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(qtzc.getSpr())) %></td>
-		<td class="a1" width="15%">审批时间</td>
-		<td class="a2" width="35%"><%=StringUtils.nullToStr(qtzc.getSp_date()) %></td>
 	</tr>
+</table>
+<BR>
+<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
+	<thead>
 	<tr>
-		<td class="a1" width="15%">费用申请单编号</td>
-		<td class="a2" colspan="3"><%=StringUtils.nullToStr(qtzc.getFysq_id()) %></td>
-	</tr>	
+		<td colspan="4">备注</td>
+	</tr>
+	</thead>	
 	<tr height="50">
 		<td class="a1">详细说明</td>
 		<td class="a2" colspan="3">

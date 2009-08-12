@@ -18,6 +18,9 @@ public class Qtzc {
 	private String sp_date; //审批时间
 	private String fysq_id; //对应费用申请单编号
 	
+	private String sqr;      //申请人
+	private String ywy_dept; //业务员部门
+	
 	private String state;
 	
 	public String getId() {
@@ -109,6 +112,18 @@ public class Qtzc {
 	}
 	public void setFysq_id(String fysq_id) {
 		this.fysq_id = fysq_id;
+	}
+	public String getSqr() {
+		return sqr;
+	}
+	public void setSqr(String sqr) {
+		this.sqr = sqr;
+	}
+	public String getYwy_dept() {
+		return ywy_dept;
+	}
+	public void setYwy_dept(String ywy_dept) {
+		this.ywy_dept = ywy_dept;
 	}
 
 }

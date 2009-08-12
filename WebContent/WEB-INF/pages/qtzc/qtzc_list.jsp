@@ -27,7 +27,7 @@ String zc_date2 = (String)VS.findValue("zc_date2");
 	
 	function openWin(id){
 		var destination = "viewQtzc.html?id="+id;
-		var fea ='width=750,height=400,left=' + (screen.availWidth-750)/2 + ',top=' + (screen.availHeight-400)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		var fea ='width=750,height=600,left=' + (screen.availWidth-750)/2 + ',top=' + (screen.availHeight-600)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
 		window.open(destination,'详细信息',fea);	
 	}
@@ -52,7 +52,7 @@ String zc_date2 = (String)VS.findValue("zc_date2");
 	
 	function edit(id){
 		var destination = "editQtzc.html?id=" + id;
-		var fea ='width=750,height=400,left=' + (screen.availWidth-750)/2 + ',top=' + (screen.availHeight-400)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		var fea ='width=750,height=600,left=' + (screen.availWidth-750)/2 + ',top=' + (screen.availHeight-600)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
 		window.open(destination,'其他支出',fea);		
 	}	
@@ -111,7 +111,7 @@ String zc_date2 = (String)VS.findValue("zc_date2");
 	<thead>
 	<tr>
 		<td onclick="doSort('id');">编号<%if(orderName.equals("id")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('ywy');">业务员<%if(orderName.equals("ywy")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td onclick="doSort('ywy');">申请人<%if(orderName.equals("ywy")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
 		<td onclick="doSort('type');">费用类型<%if(orderName.equals("type")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
 		<td onclick="doSort('fysq_id');">费用申请单编号<%if(orderName.equals("fysq_id")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>		
 		<td onclick="doSort('zcje');">金额<%if(orderName.equals("zcje")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>	
@@ -131,7 +131,7 @@ String zc_date2 = (String)VS.findValue("zc_date2");
 	%>
 	<tr class="a1"  title="双击查看详情"  onmousedown="trSelectChangeCss()"  onDblClick="openWin('<%=StringUtils.nullToStr(qtzc.getId()) %>');">
 		<td><%=StringUtils.nullToStr(qtzc.getId()) %></td>
-		<td><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(qtzc.getYwy())) %></td>
+		<td><%=StaticParamDo.getRealNameById(qtzc.getSqr()) %></td>
 		<td><%=StaticParamDo.getFyTypeNameById(qtzc.getType()) %></td>
 		<td><%=StringUtils.nullToStr(qtzc.getFysq_id()) %></td>
 		<td align="right"><%=JMath.round(qtzc.getZcje(),2) %>&nbsp;&nbsp;</td>

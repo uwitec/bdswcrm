@@ -63,13 +63,13 @@ public class FysqDAO extends JdbcBaseDAO {
 		List list = this.getResultList(sql);
 		if(list != null && list.size() > 0){
 			//数据存在，更新
-			sql = "update fysq set creatdate=?,ywy_id=?,xgkh=?,fy_type=?,je=?,fklx=?,zfzh=?,remark=?,state=?,czr=?,spr=?,sp_date=now(),cz_date=now() where id=?";
+			sql = "update fysq set creatdate=?,ywy_id=?,xgkh=?,fy_type=?,je=?,fklx=?,zfzh=?,remark=?,state=?,czr=?,spr=?,sp_date=now(),cz_date=now(),sqr=?,ywy_dept=? where id=?";
 		}else{
 			//数据不存在，插入
-			sql = "insert into fysq(creatdate,ywy_id,xgkh,fy_type,je,fklx,zfzh,remark,state,czr,spr,sp_date,cz_date,id) values(?,?,?,?,?,?,?,?,?,?,?,now(),now(),?)";
+			sql = "insert into fysq(creatdate,ywy_id,xgkh,fy_type,je,fklx,zfzh,remark,state,czr,spr,sp_date,cz_date,sqr,ywy_dept,id) values(?,?,?,?,?,?,?,?,?,?,?,now(),now(),?,?,?)";
 		}
 		
-		Object[] param = new Object[12];
+		Object[] param = new Object[14];
 		param[0] = fysq.getCreatdate();
 		param[1] = fysq.getYwy_id();
 		param[2] = fysq.getXgkh();
@@ -81,7 +81,9 @@ public class FysqDAO extends JdbcBaseDAO {
 		param[8] = fysq.getState();
 		param[9] = fysq.getCzr();
 		param[10] = fysq.getSpr();
-		param[11] = fysq.getId();
+		param[11] = fysq.getSqr();
+		param[12] = fysq.getYwy_dept();
+		param[13] = fysq.getId();
 		
 		this.getJdbcTemplate().update(sql,param);
 	}
@@ -207,6 +209,9 @@ public class FysqDAO extends JdbcBaseDAO {
 			if(SqlUtil.columnIsExist(rs,"sp_date") && rs.getTimestamp("sp_date") != null){				
 				fysq.setSp_date(rs.getTimestamp("sp_date").toString());
 			}
+			
+			if(SqlUtil.columnIsExist(rs,"sqr")) fysq.setSqr(rs.getString("sqr"));
+			if(SqlUtil.columnIsExist(rs,"ywy_dept")) fysq.setYwy_dept(rs.getString("ywy_dept"));
 			
 			return fysq;
 		}

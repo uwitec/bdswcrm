@@ -173,7 +173,7 @@ function setSqrValue(){
 	    var brand =document.getElementById("sqr_text").value;
 	    brand = brand.trim();
 	    if(brand in sqrlists) {
-      		document.getElementById("fzr").value=sqrlists[brand];
+      		document.getElementById("sqr").value=sqrlists[brand];
     	} else {
 			//alert("您所输入的申请人不在列表里!");
 			document.getElementById("sqr_text").value="";

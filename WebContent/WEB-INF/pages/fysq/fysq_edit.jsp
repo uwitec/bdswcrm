@@ -1,13 +1,13 @@
 <%@ page language="java" errorPage="/error.jsp" pageEncoding="UTF-8" contentType="text/html;charset=utf-8" %>
 <%@taglib uri="/webwork" prefix="ww"%>
 <%@ page import="com.opensymphony.xwork.util.OgnlValueStack" %>
-<%@ page import="com.sw.cms.util.*" %>
 <%@ page import="com.sw.cms.model.*" %>
+<%@ page import="com.sw.cms.util.*" %>
 <%@ page import="java.util.*" %>
-
 <%
 OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
-Fysq  fysq=(Fysq)VS.findValue("fysq");
+List deptList = (List)VS.findValue("deptList");
+Fysq fysq = (Fysq)VS.findValue("fysq");
 %>
 <html>
 <head>
@@ -17,6 +17,7 @@ Fysq  fysq=(Fysq)VS.findValue("fysq");
 <script language="JavaScript" src="js/Check.js"></script>
 <script language='JavaScript' src="js/date.js"></script>
 <script language='JavaScript' src="js/selJsr.js"></script>
+<script language='JavaScript' src="js/selSqr.js"></script>
 <script type="text/javascript" src="js/prototype-1.4.0.js"></script>
 <style>
 	.selectTip{background-color:#009;color:#fff;}
@@ -24,10 +25,14 @@ Fysq  fysq=(Fysq)VS.findValue("fysq");
 <script type="text/javascript">
 	//保存费用申请单
 	function saveInfo(){
-		if(document.getElementById("fzr").value == ""){
-			alert("业务员不能为空，请选择");
+		if(document.getElementById("sqr").value == ""){
+			alert("费用申请人不能为空，请选择");
 			return;
 		}
+		if(document.getElementById("ywy_dept").value == ""){
+			alert("费用使用部门不能为空，请选择");
+			return;
+		}		
 		if(document.getElementById("fy_type").value == ""){
 			alert("费用类型不能为空，请选择");
 			return;
@@ -55,7 +60,7 @@ Fysq  fysq=(Fysq)VS.findValue("fysq");
 	}
 </script>
 </head>
-<body onload="initFzrTip();">
+<body onload="initFzrTip();initSqrTip();">
 <form name="frsqForm" action="updateFysq.html" method="post">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
@@ -74,18 +79,50 @@ Fysq  fysq=(Fysq)VS.findValue("fysq");
 		</td>				
 	</tr>
 	<tr>
-		<td class="a1" width="15%">业务员</td>
+		<td class="a1" width="15%">费用申请人</td>
+		<td class="a2" width="35%">
+		 <ww:textfield name="sqr_text" id="sqr_text" theme="simple" onblur="setSqrValue();" value="%{getUserRealName(fysq.sqr)}"/>
+         <div id="sqr_tips" style="height:12px;position:absolute;left:89px; top:82px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
+         </div>
+         <ww:hidden name="fysq.sqr" id="sqr" theme="simple" value="%{fysq.sqr}"/><font color="red">*</font>	
+		</td>
+		<td class="a1" width="15%">状态</td>
+		<td class="a2">
+			<ww:select name="fysq.state" id="state" theme="simple" list="#{'保存':'保存','提交':'提交'}"  emptyOption="no"></ww:select>		
+		</td>
+	</tr>
+	<tr>
+		<td class="a1" width="15%">费用使用部门</td>
+		<td class="a2">
+			<select name="fysq.ywy_dept" id="ywy_dept">
+				<option value=""></option>
+				<%
+				if(deptList != null &&  deptList.size()>0){
+					for(int i=0;i<deptList.size();i++){
+						Dept dept = (Dept)deptList.get(i);
+						
+						String dept_id = dept.getDept_id();
+						String dept_name = dept.getDept_name();
+						
+						for(int k=0;k<dept_id.length()-2;k++){
+							dept_name = "　" + dept_name;
+						}
+				%>
+				<option value="<%=dept_id %>" <%if(dept_id.equals(StringUtils.nullToStr(fysq.getYwy_dept()))) out.print("selected"); %>><%=dept_name %></option>
+				<%
+					}
+				}
+				%>
+			</select><font color="red">*</font>	
+		</td>		
+		<td class="a1" width="15%">费用使用人</td>
 		<td class="a2" width="35%">
 		 <ww:textfield name="brand" id="brand" theme="simple" onblur="setValue()" value="%{getUserRealName(fysq.ywy_id)}"/>
          <div id="brandTip" style="height:12px;position:absolute;left:89px; top:82px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
          </div>
-         <ww:hidden name="fysq.ywy_id" id="fzr" theme="simple" value="%{fysq.ywy_id}"/><font color="red">*</font>	
-		</td>
-		<td class="a1" width="15%">相关客户</td>
-		<td class="a2" width="35%">
-			<ww:textfield name="fysq.xgkh" id="xgkh" value="%{fysq.xgkh}" theme="simple" maxLength="100"/>
-		</td>						
-	</tr>
+         <ww:hidden name="fysq.ywy_id" id="fzr" theme="simple" value="%{fysq.ywy_id}"/>	
+		</td>		
+	</tr>	
 	<tr>
 		<td class="a1" width="15%">费用类型</td>
 		<td class="a2" width="35%">
@@ -93,29 +130,32 @@ Fysq  fysq=(Fysq)VS.findValue("fysq");
 			<ww:hidden name="fysq.fy_type" id="fy_type" theme="simple" value="%{fysq.fy_type}"/>
 			<img src="images/select.gif" align="absmiddle" title="选择费用类型" border="0" onclick="openFyType();" style="cursor:hand">
 			<span style="color:red">*</span>
-		</td>
-		<td class="a1" width="15%">付款方式</td>
-		<td class="a2" width="35%">
-			<ww:select name="fysq.fklx" id="fklx" theme="simple" list="%{fkfs}"   emptyOption="true" />
-		</td>						
-	</tr>
-	<tr>
+		</td>	
 		<td class="a1" width="15%">金额</td>
 		<td class="a2" width="35%">
 			<ww:textfield name="fysq.je" id="je" value="%{fysq.strJe2}" theme="simple"/><span style="color:red">*</span>
 		</td>
-		<td class="a1" width="15%">支付账户</td>
+	</tr>
+	<tr>
+		<td class="a1" width="15%">对应客户</td>
 		<td class="a2" width="35%">
+			<ww:textfield name="fysq.xgkh" id="xgkh" value="%{fysq.xgkh}" theme="simple" size="30" maxLength="100"/>
+		</td>		
+		<td class="a1" width="15%">支付方式</td>
+		<td class="a2" width="35%">
+			<ww:select name="fysq.fklx" id="fklx" theme="simple" list="%{fkfs}" emptyOption="true" />
+		</td>								
+	</tr>
+	<tr>
+		<td class="a1" width="15%">支付账户</td>
+		<td class="a2" colspan="3">
 			<ww:textfield id="zhname"  name="zhname" value="%{fysq.zfzh_name}" theme="simple" readonly="true"/>
 			<ww:hidden name="fysq.zfzh" id="fkzh" value="%{fysq.zfzh}" theme="simple"/>
 			<img src="images/select.gif" align="absmiddle" title="选择账户" border="0" onclick="openAccount();" style="cursor:hand">
-		</td>						
+		</td>					
 	</tr>
 	<tr>
-		<td class="a1" width="15%">状态</td>
-		<td class="a2" colspan="3">
-			<ww:select name="fysq.state" id="state" theme="simple" list="#{'保存':'保存','提交':'提交'}"  emptyOption="no"></ww:select>		
-		</td>		
+		
 	</tr>	
 	<tr>
 		<td class="a1" width="15%">详细说明</td>

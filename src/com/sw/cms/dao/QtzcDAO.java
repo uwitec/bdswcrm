@@ -36,9 +36,9 @@ public class QtzcDAO extends JdbcBaseDAO {
 	 * @param qtsr
 	 */
 	public void saveQtzc(Qtzc qtzc){
-		String sql = "insert into qtzc(zc_date,type,zcje,zczh,jsr,remark,czr,cz_date,state,ywy,zcxm,spr,fklx,sp_date,fysq_id,id) values(?,?,?,?,?,?,?,now(),?,?,?,?,?,now(),?,?)";
+		String sql = "insert into qtzc(zc_date,type,zcje,zczh,jsr,remark,czr,cz_date,state,ywy,zcxm,spr,fklx,sp_date,sqr,ywy_dept,fysq_id,id) values(?,?,?,?,?,?,?,now(),?,?,?,?,?,now(),?,?,?,?)";
 		
-		Object[] param = new Object[14];
+		Object[] param = new Object[16];
 		
 		param[0] = qtzc.getZc_date();
 		param[1] = qtzc.getType();
@@ -52,8 +52,12 @@ public class QtzcDAO extends JdbcBaseDAO {
 		param[9] = qtzc.getZcxm();
 		param[10] = qtzc.getSpr();
 		param[11] = qtzc.getFklx();
-		param[12] = qtzc.getFysq_id();
-		param[13] = qtzc.getId();
+		
+		param[12] = qtzc.getSqr();
+		param[13] = qtzc.getYwy_dept();
+		
+		param[14] = qtzc.getFysq_id();
+		param[15] = qtzc.getId();
 		
 		this.getJdbcTemplate().update(sql,param);
 	}
@@ -64,22 +68,18 @@ public class QtzcDAO extends JdbcBaseDAO {
 	 * @param qtsr
 	 */
 	public void updateQtzc(Qtzc qtzc){
-		String sql = "update qtzc set zc_date=?,type=?,zcje=?,zczh=?,jsr=?,remark=?,czr=?,cz_date=now(),state=?,ywy=?,zcxm=?,fklx=? where id=?";
+		String sql = "update qtzc set zc_date=?,zczh=?,jsr=?,remark=?,czr=?,cz_date=now(),state=?,fklx=? where id=?";
 		
-		Object[] param = new Object[12];
+		Object[] param = new Object[8];
 		
 		param[0] = qtzc.getZc_date();
-		param[1] = qtzc.getType();
-		param[2] = new Double(qtzc.getZcje());
-		param[3] = qtzc.getZczh();
-		param[4] = qtzc.getJsr();
-		param[5] = qtzc.getRemark();
-		param[6] = qtzc.getCzr();
-		param[7] = qtzc.getState();
-		param[8] = qtzc.getYwy();
-		param[9] = qtzc.getZcxm();
-		param[10] = qtzc.getFklx();
-		param[11] = qtzc.getId();
+		param[1] = qtzc.getZczh();
+		param[2] = qtzc.getJsr();
+		param[3] = qtzc.getRemark();
+		param[4] = qtzc.getCzr();
+		param[5] = qtzc.getState();
+		param[6] = qtzc.getFklx();
+		param[7] = qtzc.getId();
 		
 		this.getJdbcTemplate().update(sql,param);
 	}
@@ -176,6 +176,9 @@ public class QtzcDAO extends JdbcBaseDAO {
 				qtzc.setSp_date(rs.getTimestamp("sp_date").toString());
 			if(SqlUtil.columnIsExist(rs,"fklx")) qtzc.setFklx(rs.getString("fklx"));
 			if(SqlUtil.columnIsExist(rs,"fysq_id")) qtzc.setFysq_id(rs.getString("fysq_id"));
+			
+			if(SqlUtil.columnIsExist(rs,"sqr")) qtzc.setSqr(rs.getString("sqr"));
+			if(SqlUtil.columnIsExist(rs,"ywy_dept")) qtzc.setYwy_dept(rs.getString("ywy_dept"));
 			return qtzc;
 		}
 	}	

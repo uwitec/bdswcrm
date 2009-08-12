@@ -23,7 +23,7 @@ String[] jldw = (String[])VS.findValue("jldw");
 			alert("产品属性为必选项！");
 			return;
 		}
-		if(!InputValid(document.productForm.price,0,"float",0,0,9999999,"移动加权价")){	 return; }
+		if(!InputValid(document.productForm.price,0,"float",1,0,9999999,"移动加权价")){	 return; }
 		if(!InputValid(document.productForm.khcbj,1,"float",1,0,9999999,"考核成本价")){	 return; }	
 		if(!InputValid(document.productForm.lsbj,0,"float",0,0,9999999,"零售报价")){	 return; }
 		if(!InputValid(document.productForm.fxbj,0,"float",0,0,9999999,"代理价")){	 return; }

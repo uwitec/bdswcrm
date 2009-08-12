@@ -7,6 +7,8 @@ public class Fysq {
 	
 	private String ywy_id;     //业务员编号
 	private String ywy_name;   //业务员姓名
+	private String sqr;        //申请人
+	private String ywy_dept;   //业务员所在部门
 	
 	private String xgkh;       //相关客户
 	private String fy_type;    //费用类型
@@ -150,6 +152,18 @@ public class Fysq {
 	}
 	public void setSp_date(String sp_date) {
 		this.sp_date = sp_date;
+	}
+	public String getSqr() {
+		return sqr;
+	}
+	public void setSqr(String sqr) {
+		this.sqr = sqr;
+	}
+	public String getYwy_dept() {
+		return ywy_dept;
+	}
+	public void setYwy_dept(String ywy_dept) {
+		this.ywy_dept = ywy_dept;
 	}
 	
 }

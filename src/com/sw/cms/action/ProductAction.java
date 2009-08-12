@@ -10,6 +10,7 @@ import com.sw.cms.model.Product;
 import com.sw.cms.service.ProductKindService;
 import com.sw.cms.service.ProductService;
 import com.sw.cms.service.SjzdService;
+import com.sw.cms.service.SysInitSetService;
 import com.sw.cms.util.Constant;
 import com.sw.cms.util.StringUtils;
 
@@ -17,6 +18,7 @@ public class ProductAction extends BaseAction implements ModelDriven{
 	
 	private ProductService productService;
 	private ProductKindService productKindService;
+	private SysInitSetService sysInitSetService;
 
 	private Page productPage;  //带分页对象列表	
 	private Product product = new Product();
@@ -32,6 +34,7 @@ public class ProductAction extends BaseAction implements ModelDriven{
 	private String product_name = "";
 	private String product_xh = "";
 	private String product_state = "正常";
+	private String iscs_flag = "";  //系统是否初始完成标志
 
 	public Page getProductPage() {
 		return productPage;
@@ -110,6 +113,8 @@ public class ProductAction extends BaseAction implements ModelDriven{
 
 		jldw = sjzdService.getSjzdXmxxByZdId("SJZD_JLDW");
 		productKindList = productKindService.getAllProductKindList();
+		iscs_flag = sysInitSetService.getQyFlag();  //是否完成系统初始化
+		
 		
 		return "success";
 	}
@@ -261,6 +266,26 @@ public class ProductAction extends BaseAction implements ModelDriven{
 
 	public void setProductKindService(ProductKindService productKindService) {
 		this.productKindService = productKindService;
+	}
+
+
+	public String getIscs_flag() {
+		return iscs_flag;
+	}
+
+
+	public void setIscs_flag(String iscs_flag) {
+		this.iscs_flag = iscs_flag;
+	}
+
+
+	public SysInitSetService getSysInitSetService() {
+		return sysInitSetService;
+	}
+
+
+	public void setSysInitSetService(SysInitSetService sysInitSetService) {
+		this.sysInitSetService = sysInitSetService;
 	}
 	
 }

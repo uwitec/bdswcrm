@@ -20,31 +20,37 @@
 		<td class="a2" width="35%"><ww:property value="%{fysq.creatdate}"/></td>				
 	</tr>
 	<tr>
-		<td class="a1" width="15%">业务员</td>
-		<td class="a2" width="35%"><ww:property value="%{fysq.ywy_name}"/></td>
-		<td class="a1" width="15%">相关客户</td>
-		<td class="a2" width="35%"><ww:property value="%{fysq.xgkh}"/></td>						
+		<td class="a1" width="15%">费用申请人</td>
+		<td class="a2" width="35%"><ww:property value="%{getUserRealName(fysq.sqr)}"/></td>
+		<td class="a1" width="15%">状态</td>
+		<td class="a2"><ww:property value="%{fysq.state}"/></td>		
+	</tr>	
+	<tr>
+		<td class="a1" width="15%">费用使用部门</td>
+		<td class="a2" width="35%"><ww:property value="%{getDeptName(fysq.ywy_dept)}"/></td>	
+		<td class="a1" width="15%">费用使用人</td>
+		<td class="a2" width="35%"><ww:property value="%{fysq.ywy_name}"/></td>		
 	</tr>
 	<tr>
 		<td class="a1" width="15%">费用类型</td>
 		<td class="a2" width="35%"><ww:property value="%{getFyTypeName(fysq.fy_type)}"/></td>
-		<td class="a1" width="15%">付款方式</td>
-		<td class="a2" width="35%"><ww:property value="%{fysq.fklx}"/></td>						
-	</tr>
-	<tr>
 		<td class="a1" width="15%">金额</td>
-		<td class="a2" width="35%"><ww:property value="%{fysq.strJe}"/></td>
-		<td class="a1" width="15%">支付账户</td>
-		<td class="a2" width="35%"><ww:property value="%{fysq.zfzh_name}"/></td>						
+		<td class="a2" width="35%"><ww:property value="%{fysq.strJe}"/></td>		
 	</tr>
 	<tr>
-		<td class="a1" width="15%">状态</td>
-		<td class="a2" colspan="3"><ww:property value="%{fysq.state}"/></td>		
+		<td class="a1" width="15%">对应客户</td>
+		<td class="a2" width="35%"><ww:property value="%{fysq.xgkh}"/></td>			
+		<td class="a1" width="15%">支付方式</td>
+		<td class="a2" width="35%"><ww:property value="%{fysq.fklx}"/></td>	
+	</tr>
+	<tr>
+		<td class="a1" width="15%">支付账户</td>
+		<td class="a2" colspan="3"><ww:property value="%{fysq.zfzh_name}"/></td>		
 	</tr>	
 	<tr>
 		<td class="a1" width="15%">详细说明</td>
 		<td class="a2" colspan="3">
-			<ww:textarea name="fysq.remark" id="remark"  theme="simple" cssStyle="width:70%" readonly="true"/>
+			<ww:textarea name="fysq.remark" id="remark"  theme="simple" cssStyle="width:85%;height:70px" readonly="true"/>
 		</td>
 	</tr>				
 	<tr height="35">

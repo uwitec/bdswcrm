@@ -87,6 +87,8 @@ public class FysqService {
 			qtzc.setSpr(fysq.getSpr());     //审批人
 			qtzc.setRemark(fysq.getRemark()); //费用详情
 			qtzc.setFysq_id(fysq.getId());   //相应费用申请单编号
+			qtzc.setSqr(fysq.getSqr());      //申请人
+			qtzc.setYwy_dept(fysq.getYwy_dept());  //业务员部门
 			
 			qtzcDao.saveQtzc(qtzc);
 			

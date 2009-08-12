@@ -7,6 +7,7 @@ import com.sw.cms.action.base.DataDisParseBaseAction;
 import com.sw.cms.model.Fysq;
 import com.sw.cms.model.LoginInfo;
 import com.sw.cms.model.Page;
+import com.sw.cms.service.DeptService;
 import com.sw.cms.service.FysqService;
 import com.sw.cms.service.SjzdService;
 import com.sw.cms.service.UserService;
@@ -23,6 +24,7 @@ public class FysqAction extends DataDisParseBaseAction {
 	private FysqService fysqService;
 	private UserService userService;
 	private SjzdService sjzdService;
+	private DeptService deptService;
 	
 	private Page fysqPage;
 	private Fysq fysq = new Fysq();
@@ -30,6 +32,7 @@ public class FysqAction extends DataDisParseBaseAction {
 	
 	private String[] fkfs;
 	private List userList = new ArrayList();
+	private List deptList = new ArrayList();
 	private String[] fyzclx;
 	
 	private String creatdate1 = "";
@@ -115,9 +118,8 @@ public class FysqAction extends DataDisParseBaseAction {
 	 * @return
 	 */
 	public String edit(){
-		userList = userService.getAllEmployeeList();    //业务员列表
 		fkfs = sjzdService.getSjzdXmxxByZdId("SJZD_FKFS");   //付款方式
-		fyzclx = sjzdService.getSjzdXmxxByZdId("SJZD_ZCLX");  //费用支出类型
+		deptList = deptService.getDepts();
 		
 		if(!id.equals("")){
 			fysq = fysqService.getFysq(id);
@@ -298,6 +300,26 @@ public class FysqAction extends DataDisParseBaseAction {
 
 	public void setUserService(UserService userService) {
 		this.userService = userService;
+	}
+
+
+	public List getDeptList() {
+		return deptList;
+	}
+
+
+	public void setDeptList(List deptList) {
+		this.deptList = deptList;
+	}
+
+
+	public DeptService getDeptService() {
+		return deptService;
+	}
+
+
+	public void setDeptService(DeptService deptService) {
+		this.deptService = deptService;
 	}
 
 }

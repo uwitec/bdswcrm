@@ -13,6 +13,8 @@ String curId = StringUtils.nullToStr(VS.findValue("curId"));
 String[] jldw = (String[])VS.findValue("jldw");
 
 List productKindList= (List)VS.findValue("productKindList");
+
+String iscs_flag = StringUtils.nullToStr(VS.findValue("iscs_flag"));
 %>
 
 <html>
@@ -29,7 +31,7 @@ List productKindList= (List)VS.findValue("productKindList");
 			alert("产品属性为必选项！");
 			return;
 		}
-		if(!InputValid(document.productForm.price,0,"float",0,0,9999999,"移动加权价")){	 return; }
+		if(!InputValid(document.productForm.price,0,"float",1,0,9999999,"移动加权价")){	 return; }
 		if(!InputValid(document.productForm.khcbj,1,"float",1,0,9999999,"考核成本价")){	 return; }	
 		if(!InputValid(document.productForm.lsbj,0,"float",0,0,9999999,"零售报价")){	 return; }
 		if(!InputValid(document.productForm.fxbj,0,"float",0,0,9999999,"代理价")){	 return; }
@@ -91,7 +93,7 @@ List productKindList= (List)VS.findValue("productKindList");
 	</tr>
 	<tr>
 		<td class="a1" width="15%">移动加权价</td>
-		<td class="a2" width="35%"><input type="text" name="price" value="<%=JMath.round(product.getPrice()) %>" size="20"></td>
+		<td class="a2" width="35%"><input type="text" name="price" value="<%=JMath.round(product.getPrice()) %>" size="20" <%if(iscs_flag.equals("1")) out.print("readonly"); %>></td>
 		<td class="a1" width="15%">考核成本价</td>
 		<td class="a2" width="35%"><input type="text" name="khcbj" value="<%=JMath.round(product.getKhcbj()) %>" size="20"></td>		
 
