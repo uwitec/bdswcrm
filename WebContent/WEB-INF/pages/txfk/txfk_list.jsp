@@ -51,6 +51,15 @@
 	function descMx(id){
 		document.descForm.id.value = id;
 		document.descForm.submit();			
+	}	
+	
+	function trSelectChangeCss(){
+		if (event.srcElement.tagName=='TD'){
+			for(i=0;i<selTable.rows.length;i++){
+				selTable.rows[i].className="a1";
+			}
+			event.srcElement.parentElement.className='a2';
+		}
 	}		
 </script>
 </head>
@@ -82,7 +91,7 @@
 		</td>				
 	</tr>		
 </table>
-<table width="100%"  align="center"  border="1"   class="chart_list" cellpadding="0" cellspacing="0">
+<table width="100%"  align="center"  border="1"   class="chart_list" cellpadding="0" cellspacing="0" id="selTable">
 	<thead>
 	<tr>
 		<td onclick="doSort('id');">编号<ww:if test="orderName=='id'"><img src='images/<ww:property value="%{orderType}" />.gif'></ww:if></td>
@@ -96,7 +105,7 @@
 	</tr>
 	</thead>
 	<ww:iterator value="%{txfkPage.results}">
-		<tr class="a1" onmouseover="this.className='a2';" onmouseout="this.className='a1';" onclick="descMx('<ww:property value="%{id}" />');" onDblClick="view('<ww:property value="%{id}" />');";>
+		<tr class="a1" onmousedown="trSelectChangeCss()" onclick="descMx('<ww:property value="%{id}" />');" onDblClick="view('<ww:property value="%{id}" />');";>
 			<td><ww:property value="%{id}" /></td>
 			<td><ww:property value="%{fk_date}" /></td>
 			<td><ww:property value="%{client_name}" /></td>
