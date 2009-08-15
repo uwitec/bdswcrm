@@ -1,5 +1,6 @@
 package com.sw.cms.jfreechar.common;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.RenderingHints;
 import java.io.PrintWriter;
@@ -18,6 +19,7 @@ import org.jfree.chart.entity.StandardEntityCollection;
 import org.jfree.chart.labels.StandardPieSectionLabelGenerator;
 import org.jfree.chart.plot.PiePlot;
 import org.jfree.chart.servlet.ServletUtilities;
+import org.jfree.chart.title.LegendTitle;
 import org.jfree.chart.title.TextTitle;
 import org.jfree.data.general.DefaultPieDataset;
 
@@ -42,12 +44,25 @@ public class GenerateWebPieChart3D {
 		}
 		
 		try {
-			JFreeChart chart = ChartFactory.createPieChart3D(title, data, false, false, false);
+			JFreeChart chart = ChartFactory.createPieChart3D(title, data, true, true, false);
 			PiePlot plot = (PiePlot) chart.getPlot();
 			plot.setNoDataMessage("查询数据为空!");
-			plot.setLabelGenerator(new StandardPieSectionLabelGenerator("{0}={1}({2})", NumberFormat.getNumberInstance(), new DecimalFormat("0.00%")));
-			plot.setForegroundAlpha(0.5f);
-			plot.setCircular(false);
+			plot.setLabelGenerator(new StandardPieSectionLabelGenerator("{0}={1}({2})", NumberFormat.getNumberInstance(), new DecimalFormat("0%")));
+			plot.setCircular(true);
+					
+			//设定背景透明度（0-1.0之间）
+			plot.setBackgroundAlpha(0.9f);			
+			//设定前景透明度（0-1.0之间）
+			plot.setForegroundAlpha(0.50f);
+			
+			// 图例显示百分比:自定义方式， {0} 表示选项， {1} 表示数值， {2} 表示所占比例                      
+			plot.setLegendLabelGenerator(new StandardPieSectionLabelGenerator("{0}={1}({2})"));
+					
+			//取得统计图标的第一个图例
+			LegendTitle legend = chart.getLegend(0);
+			//修改图例的字体
+			legend.setItemFont(new Font("宋体", Font.PLAIN, 12)); 
+
 
 			font = new Font("simsun", Font.PLAIN, 12);// 这个地方是设置统计图标题的字体和大小
 			plot.setLabelFont(font);
@@ -55,11 +70,11 @@ public class GenerateWebPieChart3D {
 			chart.getRenderingHints().put(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_OFF);
 
 			TextTitle tt = new TextTitle(title);
-			font = new Font("黑体", Font.CENTER_BASELINE, 20);// 这个地方是设置统计图标题的字体和大小
+			font = new Font("宋体", Font.PLAIN, 14);// 这个地方是设置统计图标题的字体和大小
 			tt.setFont(font);
 			chart.setTitle(tt);
 
-			chart.setBackgroundPaint(new java.awt.Color(244, 247, 251)); // 统计图片的底色
+			chart.setBackgroundPaint(Color.white); // 统计图片的底色
 
 			ChartRenderingInfo info = new ChartRenderingInfo(new StandardEntityCollection());
 			filename = ServletUtilities.saveChartAsPNG(chart, width, height, info, session);
@@ -69,9 +84,7 @@ public class GenerateWebPieChart3D {
 			pw.flush();
 			
 		} catch (Exception e) {
-			System.out.println("Exception - " + e.toString());
 			e.printStackTrace(System.out);
-			filename = "public_error_500x300.png";
 		}
 		return filename;
 	}

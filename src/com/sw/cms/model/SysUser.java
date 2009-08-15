@@ -44,6 +44,8 @@ public class SysUser {
 	
 	private String china_py;   //ººÓïÆ´ÒôËõĞ´
 	
+	private String is_del;    //ÊÇ·ñÉ¾³ı£¨0£ºÎ´É¾³ı£»1£ºÒÑÉ¾³ı£©
+	
 	public String getAddress() {
 		return address;
 	}
@@ -235,6 +237,12 @@ public class SysUser {
 	}
 	public void setChina_py(String china_py) {
 		this.china_py = china_py;
+	}
+	public String getIs_del() {
+		return is_del;
+	}
+	public void setIs_del(String is_del) {
+		this.is_del = is_del;
 	}
 
 }

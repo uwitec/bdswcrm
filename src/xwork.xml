@@ -1404,11 +1404,13 @@
         <action name="delEmployee" class="employeeAction" method="del">
             <result name="success" type="redirect">listEmployee.html</result>
         </action> 
-                                <!-- 修改 业务员列表 修改-->
+        
+        <!-- 修改 业务员列表 修改-->
         <action name="selLsEmployee" class="employeeAction" method="selYwyEmployee">
            <result name="success">/WEB-INF/pages/employee/selectYwyEmployee.jsp</result>
         </action>
-                                <!-- 修改 业务员列表 修改-->      
+        <!-- 修改 业务员列表 修改--> 
+             
         <!-- 员工管理 -->
         
 		<!-- 序列号跟踪 -->

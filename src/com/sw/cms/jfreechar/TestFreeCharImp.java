@@ -25,34 +25,47 @@ public class TestFreeCharImp implements IFreeChar {
 	
 	
 	public TestFreeCharImp(){
-		if(width == 0 ){ width = 550;}   
-		if(height == 0){ height = 400;} 
+		if(width == 0 ){ width = 380;}   
+		if(height == 0){ height = 270;} 
 	}
 
 	public String getBarChart3D(String title, String xName, String yName, HttpSession session, PrintWriter pw) throws Exception {
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-		dataset.addValue(20, "zzzzzzz", "xxxxxxxxx");
-		dataset.addValue(70, "fffffff", "ccccccccc");
-		dataset.addValue(20, "zzzzzzz", "ffmmmmmm");
-		dataset.addValue(70, "hhhhhhh", "2222mmm");
 		
+		/*
+		添加数据时
+		参数1 － 值。
+		参数2 － 行key
+		参数3 － 列key
+		*/
+		dataset.addValue(60, "上海", "苹果");
+		dataset.addValue(100, "广州", "苹果");
 		
-		dataset.addValue(50, "zzzzzzz", "ttttttttt");
-		dataset.addValue(10, "fffffff", "mmmmmmmm");
-		dataset.addValue(50, "zzzzzzz", "ssmmmmm");
-		dataset.addValue(10, "hhhhhhh", "jjmmmmm");
+		dataset.addValue(279, "北京", "梨子");
+		dataset.addValue(478, "上海", "梨子");
+		dataset.addValue(221, "广州", "梨子");
+		
+		dataset.addValue(568, "北京", "葡萄");
+		dataset.addValue(12, "上海", "葡萄");
+		dataset.addValue(234, "广州", "葡萄");
+		
+		dataset.addValue(543, "北京", "香蕉");
+		dataset.addValue(890, "上海", "香蕉");
+		dataset.addValue(32, "广州", "香蕉");
+		
+		dataset.addValue(453, "北京", "荔枝");
+		dataset.addValue(36, "上海", "荔枝");
+		dataset.addValue(132, "广州", "荔枝");
 		
 		return GenerateWebBarChart3D.getBarChart3D(dataset, title, xName, yName, width, height, session, pw);
 	}
 
 	public String getPieChart3D(String title, HttpSession session, PrintWriter pw) throws Exception {
 		 Map map = new HashMap();
-		 map.put("test1", "30");
-		 map.put("test2", "20");
-		 map.put("test3", "10");
-		 map.put("test4", "80");
-		 map.put("test5", "90");
-		 map.put("test6", "70");
+		 map.put("北京", "30");
+		 map.put("上海", "20");
+		 map.put("广州", "10");
+		 map.put("石家庄", "80");
 		 
 		return GenerateWebPieChart3D.getPieChart3D(map, title, width, height, session, pw);
 	}
