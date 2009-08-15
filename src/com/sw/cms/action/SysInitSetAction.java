@@ -1,10 +1,18 @@
 package com.sw.cms.action;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.util.Calendar;
+import java.util.Map;
+
+import com.opensymphony.webwork.ServletActionContext;
 import com.sw.cms.action.base.BaseAction;
 import com.sw.cms.model.LoginInfo;
 import com.sw.cms.model.SysInitSet;
 import com.sw.cms.service.SysInitSetService;
 import com.sw.cms.util.DateComFunc;
+import com.sw.cms.util.StringUtils;
 
 public class SysInitSetAction extends BaseAction {
 
@@ -16,6 +24,12 @@ public class SysInitSetAction extends BaseAction {
 	private String flag;
 	private String msg;
 	
+	private String cpy_name = "";
+	private String logo_url = "";
+	
+	private File logoFile ;
+	private String logoFileFileName;
+	
 	
 	/**
 	 * 获取系统启用状态
@@ -25,7 +39,7 @@ public class SysInitSetAction extends BaseAction {
 	public String getXgqyFlag(){
 		sysInitSet = sysInitSetService.getSysInitSet();		
 		flag = sysInitSetService.getQyFlag();
-		return "success";
+		return SUCCESS;
 	}
 	
 	
@@ -44,7 +58,7 @@ public class SysInitSetAction extends BaseAction {
 		sysInitSetService.setQyrq(sysInitSet);
 		
 		msg = "系统启用日期设置成功！";		
-		return "success";
+		return SUCCESS;
 	}
 	
 	
@@ -76,7 +90,7 @@ public class SysInitSetAction extends BaseAction {
 		
 		msg = "系统初始化完成！";
 		
-		return "success";
+		return SUCCESS;
 	}
 	
 	/**
@@ -86,8 +100,66 @@ public class SysInitSetAction extends BaseAction {
 	public String clearSysData(){
 		sysInitSetService.updateSys_ClearData();
 		msg = "清空系统数据成功！";
-		return "success";
+		return SUCCESS;
 	}
+	
+	
+	/**
+	 * 编辑系统LOGO
+	 * @return
+	 */
+	public String editLogo(){
+		try{
+			Map map = sysInitSetService.getSysLogo();
+			
+			if(map != null){
+				cpy_name = StringUtils.nullToStr(map.get("cpy_name"));
+				logo_url = StringUtils.nullToStr(map.get("logo_url"));
+			}
+			
+			return SUCCESS;
+		}catch(Exception e){
+			log.error("取系统初始LOGO失败，原因：" + e.getMessage());
+			return ERROR;
+		}
+	}
+	
+	
+	/**
+	 * 保存系统LOGO信息
+	 * @return
+	 */
+	public String saveLogo(){
+		try{
+			
+			if(logoFileFileName != null && !logoFileFileName.equals("")){
+				//获取当前的绝对路径
+				String filePath = ServletActionContext.getServletContext().getRealPath("\\");
+				String imgPath = filePath + "logo\\" + logoFileFileName;
+				
+				//上传产品图片文件
+				FileOutputStream outputStream = new FileOutputStream(imgPath);
+				FileInputStream fileIn = new FileInputStream(logoFile);
+				byte[] buffer = new byte[1024];
+		
+				int len;
+				while ((len = fileIn.read(buffer)) > 0) {
+					outputStream.write(buffer, 0, len);
+				}
+				outputStream.flush();
+				outputStream.close();
+				fileIn.close();		
+			}
+			
+			sysInitSetService.saveSysLogo(cpy_name, logoFileFileName);
+			
+			return SUCCESS;
+		}catch(Exception e){
+			log.error("保存系统LOGO失败，原因：" + e.getMessage());
+			return ERROR;
+		}
+	}
+	
 	
 	public SysInitSetService getSysInitSetService() {
 		return sysInitSetService;
@@ -112,6 +184,46 @@ public class SysInitSetAction extends BaseAction {
 	}
 	public void setMsg(String msg) {
 		this.msg = msg;
+	}
+
+
+	public String getCpy_name() {
+		return cpy_name;
+	}
+
+
+	public void setCpy_name(String cpy_name) {
+		this.cpy_name = cpy_name;
+	}
+
+
+	public String getLogo_url() {
+		return logo_url;
+	}
+
+
+	public void setLogo_url(String logo_url) {
+		this.logo_url = logo_url;
+	}
+
+
+	public File getLogoFile() {
+		return logoFile;
+	}
+
+
+	public void setLogoFile(File logoFile) {
+		this.logoFile = logoFile;
+	}
+
+
+	public String getLogoFileFileName() {
+		return logoFileFileName;
+	}
+
+
+	public void setLogoFileFileName(String logoFileFileName) {
+		this.logoFileFileName = logoFileFileName;
 	}
 
 }

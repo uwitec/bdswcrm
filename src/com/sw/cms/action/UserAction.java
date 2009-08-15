@@ -14,6 +14,7 @@ import com.sw.cms.model.SysUser;
 import com.sw.cms.service.MenuService;
 import com.sw.cms.service.SjzdService;
 import com.sw.cms.service.StoreService;
+import com.sw.cms.service.SysInitSetService;
 import com.sw.cms.service.UserService;
 import com.sw.cms.service.XsdService;
 import com.sw.cms.servlet.OnlineSessionAndApplication;
@@ -37,6 +38,7 @@ public class UserAction extends BaseAction {
 	private MenuService menuService;
 	private XsdService xsdService;
 	private SjzdService sjzdService;
+	private SysInitSetService sysInitSetService;
 	
 	private SysUser user = new SysUser();
 	private Page userPage;
@@ -69,6 +71,9 @@ public class UserAction extends BaseAction {
 	private String cespRoles = "";
 	private String jgspRoles = "";
 	private String cqspRoles = "";
+	
+	private String cpy_name = "";
+	private String logo_url = "";
 	
 	private int curPage = 1;
 	
@@ -182,6 +187,13 @@ public class UserAction extends BaseAction {
 		
 		LoginInfo info = (LoginInfo)getSession().getAttribute("LOGINUSER"); //登陆用户信息
 		
+		Map map = sysInitSetService.getSysLogo();
+		
+		if(map != null){
+			cpy_name = StringUtils.nullToStr(map.get("cpy_name"));
+			logo_url = StringUtils.nullToStr(map.get("logo_url"));
+		}
+		
 		//如果是代理商调用系统内部用户首页，提示错误
 		if(info.getIs_dls().equals("1") || info.getIs_dls().equals("2")){
 			return "error";
@@ -190,11 +202,33 @@ public class UserAction extends BaseAction {
 		return "success";
 	}
 	
+	
+	/**
+	 * 显示TOP
+	 * @return
+	 */
+	public String showTop(){
+		Map map = sysInitSetService.getSysLogo();
+		
+		if(map != null){
+			cpy_name = StringUtils.nullToStr(map.get("cpy_name"));
+			logo_url = StringUtils.nullToStr(map.get("logo_url"));
+		}
+		return "success";
+	}
+	
+	
 	/**
 	 * 分销商登陆成功
 	 * @return
 	 */
 	public String fxlogined(){
+		Map map = sysInitSetService.getSysLogo();
+		
+		if(map != null){
+			cpy_name = StringUtils.nullToStr(map.get("cpy_name"));
+			logo_url = StringUtils.nullToStr(map.get("logo_url"));
+		}
 		return "success";
 	}
 	
@@ -204,6 +238,12 @@ public class UserAction extends BaseAction {
 	 * @return
 	 */
 	public String gyslogined(){
+		Map map = sysInitSetService.getSysLogo();
+		
+		if(map != null){
+			cpy_name = StringUtils.nullToStr(map.get("cpy_name"));
+			logo_url = StringUtils.nullToStr(map.get("logo_url"));
+		}
 		return "success";
 	}	
 	
@@ -725,6 +765,36 @@ public class UserAction extends BaseAction {
 
 	public void setParamValue(String paramValue) {
 		this.paramValue = paramValue;
+	}
+
+
+	public String getCpy_name() {
+		return cpy_name;
+	}
+
+
+	public void setCpy_name(String cpy_name) {
+		this.cpy_name = cpy_name;
+	}
+
+
+	public String getLogo_url() {
+		return logo_url;
+	}
+
+
+	public void setLogo_url(String logo_url) {
+		this.logo_url = logo_url;
+	}
+
+
+	public SysInitSetService getSysInitSetService() {
+		return sysInitSetService;
+	}
+
+
+	public void setSysInitSetService(SysInitSetService sysInitSetService) {
+		this.sysInitSetService = sysInitSetService;
 	}
 	
 }

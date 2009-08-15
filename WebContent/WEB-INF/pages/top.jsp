@@ -1,9 +1,13 @@
 <%@ page language="java" errorPage="/error.jsp" pageEncoding="UTF-8" contentType="text/html;charset=utf-8" %>
 <%@ page import="com.sw.cms.model.*" %>
+<%@ page import="com.opensymphony.xwork.util.OgnlValueStack" %>
 <%
 LoginInfo info = (LoginInfo)session.getAttribute("LOGINUSER");
 String real_name = info.getReal_name();
 String user_id = info.getUser_id();
+
+OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
+String logo_url = (String)VS.findValue("logo_url");
 %>
 <html>
 <head>
@@ -176,7 +180,7 @@ String user_id = info.getUser_id();
 			<TABLE cellSpacing=0 cellPadding=0 border=0>
 				<TBODY>
            				<TR>
-					<TD>&nbsp;&nbsp;<IMG src="index_images/logo.png"></TD>
+					<TD>&nbsp;&nbsp;<IMG src="logo/<%=logo_url %>"></TD>
 				</TR>						
 				</TBODY>
 			</TABLE>					

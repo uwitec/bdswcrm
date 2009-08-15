@@ -1,7 +1,13 @@
 <%@ page language="java" errorPage="/error.jsp" pageEncoding="UTF-8" contentType="text/html;charset=UTF-8" %>
+<%@ page import="com.opensymphony.xwork.util.OgnlValueStack" %>
+
+<%
+OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
+String cpy_name = (String)VS.findValue("cpy_name");
+%>
 <HTML>
 <HEAD>
-<TITLE>Thinking Soft</TITLE>
+<TITLE><%=cpy_name %></TITLE>
 <META content="text/html; charset=UTF-8" http-equiv=Content-Type>
 <LINK href="css/InitNav.css" type=text/css rel=stylesheet>
 <LINK href="css/Portal.css" type=text/css rel=stylesheet>
@@ -29,7 +35,7 @@
 	<TBODY>
 	<!-- 头开始 -->
 	<TR vAlign=top height="60">
-		<TD colspan=3><IFRAME id=ifrIndex2 style="WIDTH: 100%; height:100%; POSITION: relative" border=0  src="gystop.jsp" frameBorder=0 scrolling=no></IFRAME></TD>
+		<TD colspan=3><IFRAME id=ifrIndex2 style="WIDTH: 100%; height:100%; POSITION: relative" border=0  src="gys_index_top.html" frameBorder=0 scrolling=no></IFRAME></TD>
 	<TR>
 	<!-- 头结束 -->	
 	

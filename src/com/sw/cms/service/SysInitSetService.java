@@ -1,5 +1,7 @@
 package com.sw.cms.service;
 
+import java.util.Map;
+
 import com.sw.cms.dao.SysInitSetDAO;
 import com.sw.cms.model.SysInitSet;
 
@@ -58,6 +60,24 @@ public class SysInitSetService {
 		return sysInitSetDao.isExistFkc();
 	}
 
+	
+	/**
+	 * 返回系统LOGO设置
+	 * @return
+	 */
+	public Map getSysLogo(){
+		return sysInitSetDao.getSysLogo();
+	}
+	
+	
+	/**
+	 * 保存系统LOGO设置
+	 * @param cpy_name
+	 * @param logo_url
+	 */
+	public void saveSysLogo(String cpy_name,String logo_url){
+		sysInitSetDao.saveSysLogo(cpy_name, logo_url);
+	}
 
 	public SysInitSetDAO getSysInitSetDao() {
 		return sysInitSetDao;

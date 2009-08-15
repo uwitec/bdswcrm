@@ -50,14 +50,23 @@
         <action name="thk_main" class="userAction" method="logined">
             <result name="success" type="dispatcher">/WEB-INF/pages/index.jsp</result>
         </action>
+        <action name="thk_main_top" class="userAction" method="showTop">
+            <result name="success" type="dispatcher">/WEB-INF/pages/top.jsp</result>
+        </action>        
         <!-- 代理商首页 -->
         <action name="dls_index" class="userAction" method="fxlogined">
             <result name="success" type="dispatcher">/WEB-INF/pages/fxindex.jsp</result>
         </action>
+        <action name="dls_index_top" class="userAction" method="showTop">
+            <result name="success" type="dispatcher">/WEB-INF/pages/fxtop.jsp</result>
+        </action>        
         <!-- 供应商首页 -->
         <action name="gys_index" class="userAction" method="gyslogined">
             <result name="success" type="dispatcher">/WEB-INF/pages/gysindex.jsp</result>
         </action>
+        <action name="gys_index_top" class="userAction" method="showTop">
+            <result name="success" type="dispatcher">/WEB-INF/pages/gystop.jsp</result>
+        </action>        
         
         <action name="top" class="menuAction" method="topMenu">
             <result name="success">/WEB-INF/pages/top.jsp</result>
@@ -1909,7 +1918,14 @@
         <action name="selFyType" class="fyTypeAction" method="list">
              <result name="success">/WEB-INF/pages/fy_type/sel_fy_type.jsp</result>
         </action>        
-        <!-- 费用类别 -->         
-                                                                                                               
+        <!-- 费用类别 --> 
+        
+        <!-- 系统LOGO设置 -->
+        <action name="editLogo" class="sysInitSetAction" method="editLogo">
+             <result name="success">/WEB-INF/pages/init/set_sys_logo.jsp</result>
+        </action>           
+        <action name="setSysLogo" class="sysInitSetAction" method="saveLogo">
+             <result name="success" type="redirect-action">editLogo</result>
+        </action>                                                                                                               
     </package>
 </xwork>

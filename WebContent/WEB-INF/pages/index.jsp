@@ -11,11 +11,13 @@ MenuService menuService = (MenuService)VS.findValue("menuService");
 LoginInfo info = (LoginInfo)session.getAttribute("LOGINUSER");
 String user_id = info.getUser_id();
 
+String cpy_name = (String)VS.findValue("cpy_name");
+
 int menu_index = 0;
 %>
 <HTML>
 <HEAD>
-<TITLE>Thinking Soft</TITLE>
+<TITLE><%=cpy_name %></TITLE>
 <META content="text/html; charset=UTF-8" http-equiv=Content-Type>
 <LINK href="css/InitNav.css" type=text/css rel=stylesheet>
 <LINK href="css/Portal.css" type=text/css rel=stylesheet>
@@ -43,7 +45,7 @@ int menu_index = 0;
 	<TBODY>
 	<!-- 头开始 -->
 	<TR vAlign=top height="60">
-		<TD colspan=3><IFRAME id=ifrIndex2 style="WIDTH: 100%; height:100%; POSITION: relative" border=0  src="top.jsp" frameBorder=0 scrolling=no></IFRAME></TD>
+		<TD colspan=3><IFRAME id=ifrIndex2 style="WIDTH: 100%; height:100%; POSITION: relative" border=0  src="thk_main_top.html" frameBorder=0 scrolling=no></IFRAME></TD>
 	<TR>
 	<!-- 头结束 -->	
 	

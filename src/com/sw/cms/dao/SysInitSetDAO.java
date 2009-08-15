@@ -218,6 +218,27 @@ public class SysInitSetDAO extends JdbcBaseDAO {
 	
 	
 	/**
+	 * 返回系统LOGO设置
+	 * @return
+	 */
+	public Map getSysLogo(){
+		String sql = "select * from logo_set";
+		return this.getResultMap(sql);
+	}
+	
+	
+	/**
+	 * 保存系统LOGO设置
+	 * @param cpy_name
+	 * @param logo_url
+	 */
+	public void saveSysLogo(String cpy_name,String logo_url){
+		String sql = "update logo_set set cpy_name='" + cpy_name + "',logo_url='" + logo_url + "'";
+		this.getJdbcTemplate().update(sql);
+	}
+	
+	
+	/**
 	 * 包装对象
 	 * 
 	 * @author liyt
