@@ -793,6 +793,7 @@
             <result name="success">/WEB-INF/pages/account/account_view.jsp</result>
         </action>
         <action name="delAccount" class="accountsAction" method="del">
+        	<result name="notDel">/WEB-INF/pages/msg_info.jsp</result>
             <result name="success" type="redirect">listAccount.html</result>
         </action>
         <action name="initAccount" class="accountsAction" method="list">

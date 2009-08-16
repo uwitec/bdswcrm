@@ -68,6 +68,17 @@ public class AccountsService {
 	}
 	
 	
+	/**
+	 * 判断账户是否可以删除，发生业务往来的账户不能删除<BR>
+	 * 往来业务包括：对账单、账户期初
+	 * @param account_id
+	 * @return
+	 */
+	public boolean isCanDel(String account_id){
+		return accountsDao.isCanDel(account_id);
+	}
+	
+	
 	public void initAccountJe(String account_id,double qcje){
 		accountsDao.initAccountJe(account_id, qcje);
 	}

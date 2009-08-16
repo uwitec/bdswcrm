@@ -73,7 +73,17 @@ public class AccountsAction extends BaseAction {
 	}
 	
 	
+	/**
+	 * 删除账号信息
+	 * @return
+	 */
 	public String del(){
+		
+		if(!accountsService.isCanDel(id)){
+			this.setMsg("已产生往来，账号不能删除！");
+			return "notDel";
+		}
+		
 		accountsService.delAccounts(id);
 		return "success";
 	}
