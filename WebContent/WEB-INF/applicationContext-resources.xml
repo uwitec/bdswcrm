@@ -99,6 +99,8 @@
     <!-- 货品销售汇总 -->
     <bean id="exportHpxsHzResult" class="com.sw.cms.xls.ExportHpxsHzResult" autowire="byName"/>
     <!-- 货品销售毛利汇总 -->
-    <bean id="exportHpxsMlHzResult" class="com.sw.cms.xls.ExportHpxsMlHzResult" autowire="byName"/>      
+    <bean id="exportHpxsMlHzResult" class="com.sw.cms.xls.ExportHpxsMlHzResult" autowire="byName"/> 
+    <!-- 分仓库存汇总 -->
+    <bean id="exportFckcResult" class="com.sw.cms.xls.ExportFckcResult" autowire="byName"/>         
 
 </beans>

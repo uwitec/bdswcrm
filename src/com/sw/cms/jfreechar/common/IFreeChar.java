@@ -32,6 +32,20 @@ public interface IFreeChar {
 	 * @return
 	 * @throws Exception
 	 */
-	public String getBarChart3D(String title, String xName ,String yName, HttpSession session,PrintWriter pw) throws Exception; 
+	public String getBarChart3D(String title, String xName ,String yName, HttpSession session,PrintWriter pw) throws Exception;
+	
+	
+	/**
+	 * 取得折线图
+	 * @param title    标题
+	 * @param xName    X轴名称
+	 * @param yName    Y轴名称
+	 * @param session  HttpSession 
+	 * @param pw       PrintWriter
+	 * @return
+	 * @throws Exception
+	 */
+	public String getLineChart(String title, String xName ,String yName, HttpSession session,PrintWriter pw) throws Exception; 
+
 	
 }

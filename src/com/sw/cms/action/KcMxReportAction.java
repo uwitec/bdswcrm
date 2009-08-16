@@ -1,7 +1,9 @@
 package com.sw.cms.action;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.sw.cms.action.base.BaseAction;
 import com.sw.cms.model.LoginInfo;
@@ -22,6 +24,7 @@ public class KcMxReportAction extends BaseAction {
 	private List productKindList = new ArrayList();
 	private Product product = new Product();
 	private List productList = new ArrayList();
+	private Map fckcStatResult = new HashMap();
 	
 	private String product_id = "";
 	
@@ -79,6 +82,22 @@ public class KcMxReportAction extends BaseAction {
 		productList = kcMxReportService.getGysKcNumsResults(productKind);
 		
 		return "success";
+	}
+	
+	
+	/**
+	 * 分仓库存数量汇总结果
+	 */
+	public String getFckcStatResultList(){
+		try{
+			productList = kcMxReportService.getProductList(product_kind, product_name, state);
+			store_list = kcMxReportService.getStoreList(store_id);
+			fckcStatResult = kcMxReportService.getKcStatResult(product_kind, product_name, state, store_id);
+			return SUCCESS;
+		}catch(Exception e){
+			log.error("统计分仓库存数量出错，原因：" + e.getMessage());
+			return ERROR;
+		}
 	}
 	
 	
@@ -193,6 +212,14 @@ public class KcMxReportAction extends BaseAction {
 
 	public void setState(String state) {
 		this.state = state;
+	}
+
+	public void setFckcStatResult(Map fckcStatResult) {
+		this.fckcStatResult = fckcStatResult;
+	}
+
+	public Map getFckcStatResult() {
+		return fckcStatResult;
 	}
 	
 }

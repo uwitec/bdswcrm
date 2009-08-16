@@ -36,13 +36,13 @@
 	<tr>
 		<td class="a1">公司名称</td>
 		<td class="a2">
-			<ww:textfield name="cpy_name" id="cpy_name" theme="simple" size="50" value="%{cpy_name}"></ww:textfield>
+			<ww:textfield name="cpy_name" id="cpy_name" theme="simple" size="50" value="%{cpy_name}" maxlength="100"></ww:textfield>
 		</td>
 	</tr>
 	<tr>
 		<td class="a1" widht="20%">公司LOGO</td>
 		<td class="a2" colspan="3">
-			<input type="file" id="logoFile" name="logoFile" size="65"> 注：系统最佳图片大小140px*40px.
+			<input type="file" id="logoFile" name="logoFile" size="65"> 注：系统最佳图片大小140px*49px.
 		</td>
 	</tr>
 	<tr>

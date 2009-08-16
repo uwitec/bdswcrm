@@ -171,6 +171,7 @@
             <result name="success">/WEB-INF/pages/product/product_veiw.jsp</result>
         </action>
         <action name="delProduct" class="productAction" method="delProduct">
+        	<result name="notDel">/WEB-INF/pages/msg_info.jsp</result>
             <result name="success" type="redirect">product_list.html</result>
         </action>
         <!-- 产品及产品类别 -->
@@ -429,6 +430,7 @@
             <result name="success" type="redirect">listStore.html</result>
         </action>
         <action name="delStore" class="storeAction" method="del">
+        	<result name="notDel">/WEB-INF/pages/msg_info.jsp</result>
             <result name="success" type="redirect">listStore.html</result>
         </action>
         <action name="viewStore" class="storeAction" method="edit">
@@ -496,6 +498,7 @@
             <result name="success">/WEB-INF/pages/msg.jsp</result>
         </action>
         <action name="delClient" class="clientsAction" method="del">
+        	<result name="notDel">/WEB-INF/pages/msg_info.jsp</result>
             <result name="success" type="redirect">listClient.html</result>
         </action>
         <action name="viewClient" class="clientsAction" method="edit">
@@ -1205,6 +1208,15 @@
             <result name="success">/WEB-INF/pages/report/kcmx/gys_kc_result.jsp</result>
         </action>             
         <!-- 库存数量汇总 -->
+        
+        <!-- 分仓库存数量汇总 -->
+        <action name="showFckcCondition" class="kcMxReportAction" method="showCondition">
+            <result name="success">/WEB-INF/pages/report/kcmx/fc_condition.jsp</result>
+        </action>
+        <action name="getFckcResult" class="kcMxReportAction" method="getFckcStatResultList">
+            <result name="success">/WEB-INF/pages/report/kcmx/fc_result.jsp</result>
+        </action>
+        <!-- 分仓库存数量汇总 -->        
         
         <!-- 零售库存数量汇总 -->
         <action name="showLsKcNumsCondition" class="kcMxReportAction" method="showCondition">

@@ -354,6 +354,69 @@ public class ProductDAO extends JdbcBaseDAO {
 		
 		return this.getResultList(sql, new ProductRowMapper());
 	}
+	
+	
+	/**
+	 * 判断商品是否可以删除<BR>
+	 * 发生业务数据的商品不能删除<BR>
+	 * 业务数据包括：零售、销售、退货、采购、采购退货、调拨申请、调拨、调价<BR>
+	 * 因为出库入库，不能添加，只能有相应单据生成，所以不在考虑范围内
+	 * @param product_id  商品编号
+	 * @return boolean true:可以；false:不可以
+	 */
+	public boolean isCanDel(String product_id){
+		
+		//判断是否发生零售，如果发生零售则返回false
+		String sql = "select count(*) as counts from lsd_product where product_id='" + product_id + "'";		
+		if(this.getJdbcTemplate().queryForInt(sql) > 0){
+			return false;
+		}
+		
+		//判断是否发生销售，如果发生销售则返回false
+		sql = "select count(*) as counts from xsd_product where product_id='" + product_id + "'";
+		if(this.getJdbcTemplate().queryForInt(sql) > 0){
+			return false;
+		}
+		
+		//判断是否发生销售退货，如果发生销售退货则返回false
+		sql = "select count(*) as counts from thd_product where product_id='" + product_id + "'";
+		if(this.getJdbcTemplate().queryForInt(sql) > 0){
+			return false;
+		}
+		
+		//判断是否发生采购，如果发生采购则返回false
+		sql = "select count(*) as counts from jhd_product where product_id='" + product_id + "'";
+		if(this.getJdbcTemplate().queryForInt(sql) > 0){
+			return false;
+		}
+		
+		//判断是否发生采购退货，如果发生采购退货则返回false
+		sql = "select count(*) as counts from cgthd_product where product_id='" + product_id + "'";
+		if(this.getJdbcTemplate().queryForInt(sql) > 0){
+			return false;
+		}	
+		
+		//判断是否发生调拨申请，如果发生调拨申请则返回false
+		sql = "select count(*) as counts from dbsq_product where product_id='" + product_id + "'";
+		if(this.getJdbcTemplate().queryForInt(sql) > 0){
+			return false;
+		}
+		
+		//判断是否发生调拨，如果发生调拨则返回false
+		sql = "select count(*) as counts from kfdb_product where product_id='" + product_id + "'";
+		if(this.getJdbcTemplate().queryForInt(sql) > 0){
+			return false;
+		}	
+		
+		//判断是否发生存货调价，如果发生存货调价则返回false
+		sql = "select count(*) as counts from chtj_desc where product_id='" + product_id + "'";
+		if(this.getJdbcTemplate().queryForInt(sql) > 0){
+			return false;
+		}			
+		
+		return true;
+	}
+	
 
 	/**
 	 * 包装对象

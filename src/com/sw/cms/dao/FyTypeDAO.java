@@ -101,6 +101,25 @@ public class FyTypeDAO extends JdbcBaseDAO {
 	}
 	
 	
+	/**
+	 * 判断费用类型是否可以删除<BR>
+	 * 发生业务往来的费用不能删除
+	 * @param id
+	 * @return boolean true:可以；false:不可以
+	 */
+	public boolean isCanDel(String id){
+		boolean is = true;
+		
+		String sql = "select count(*) as counts from qtzc where type='" + id + "'";
+		
+		if(this.getJdbcTemplate().queryForInt(sql) > 0){
+			is = false;
+		}
+		
+		return is;
+	}
+	
+	
 	
 	/**
 	 * 取下一个可用的类别ID

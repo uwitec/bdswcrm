@@ -143,6 +143,41 @@ public class KcMxReportService {
 	public List getHisKcjeResults(String product_kind,String product_name,String product_xh,String store_id,String cdate){
 		return kcMxReportDao.getHisKcjeResults(product_kind, product_name, product_xh, store_id, cdate);
 	}
+	
+	
+	/**
+	 * 分仓库存数量汇总，商品列表
+	 * @param product_kind
+	 * @param product_name
+	 * @param state
+	 * @return
+	 */
+	public List getProductList(String product_kind,String product_name,String state){
+		return kcMxReportDao.getProductList(product_kind, product_name, state);		
+	}
+	
+	
+	/**
+	 * 分仓库存数量汇总，取库房列表
+	 * @param store_id
+	 * @return
+	 */
+	public List getStoreList(String store_id){
+		return kcMxReportDao.getStoreList(store_id);
+	}
+	
+	
+	/**
+	 * 统计结果写入HashMap中，前台从Map中取
+	 * @param product_kind
+	 * @param product_name
+	 * @param state
+	 * @param store_id
+	 * @return Map(key,value)  key=product_id+store_id,value=库存数量
+	 */
+	public Map getKcStatResult(String product_kind,String product_name,String state,String store_id){
+		return kcMxReportDao.getKcStatResult(product_kind, product_name, state, store_id);
+	}
 
 	
 	public KcMxReportDAO getKcMxReportDao() {

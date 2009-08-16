@@ -233,6 +233,12 @@ public class ClientsAction extends BaseAction {
 	 */
 	public String del() {
 		String id = ParameterUtility.getStringParameter(getRequest(), "id", "");
+		
+		if(!clientsService.isCanDel(id)){
+			this.setMsg("已发生往来业务，客户信息不能删除！");
+			return "notDel";
+		}
+		
 		clientsService.delClient(id);
 		return "success";
 	}

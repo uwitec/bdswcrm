@@ -57,7 +57,7 @@ function menu(id){
 			onmouseup	= "";
 		}
 
-		menuname	= "<a oncontextmenu='document.getElementById(\"parent_id\").value=\"" + currdata[i][0] + "\";mlay.style.display=\"\";mlay.style.pixelTop=event.clientY; mlay.style.pixelLeft=event.clientX; return false;'>" + currdata[i][2] + "</a>";
+		menuname	= "<a oncontextmenu='document.getElementById(\"parent_id\").value=\"" + currdata[i][0] + "\";mlay.style.display=\"\";mlay.style.pixelTop=event.clientY+document.body.scrollTop; mlay.style.pixelLeft=event.clientX; return false;'>" + currdata[i][2] + "</a>";
 
 		ico			= "<img src='"+path+currdata[i][4]+"' id='ico"+currdata[i][0]+"' align=middle border=0>";
 		printstr	+= "<tr><td id='pr"+currdata[i][0]+"' valign=middle class="+menutype+" onclick="+onmouseup+">"+ico+"<span onMouseOver='over_str(this)' valign='bottom' onMouseOut='out_str(this)' class='item'> "+menuname+" </span> </td></tr>\n";

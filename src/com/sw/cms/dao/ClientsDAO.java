@@ -301,6 +301,49 @@ public class ClientsDAO extends JdbcBaseDAO {
 	}
 	
 	
+	/**
+	 * 判断客户信息是否可以删除<BR>
+	 * 发生往来业务关系的客户信息不能删除<BR>
+	 * 往来业务关系包括：销售、销售退货、采购、采购退货、往来调账
+	 * @param client_id
+	 * @return boolean true:可以；false:不可以
+	 */
+	public boolean isCanDel(String client_id){
+		
+		//判断是否存在销售记录
+		String sql = "select count(*) from xsd where client_name='" + client_id + "'";
+		if(this.getJdbcTemplate().queryForInt(sql) > 0){
+			return false;
+		}
+		
+		//判断是否存在销售退货记录
+		sql = "select count(*) from thd where client_name='" + client_id + "'";
+		if(this.getJdbcTemplate().queryForInt(sql) > 0){
+			return false;
+		}
+		
+		//判断是否存在采购记录
+		sql = "select count(*) from jhd where gysbh='" + client_id + "'";
+		if(this.getJdbcTemplate().queryForInt(sql) > 0){
+			return false;
+		}
+		
+		//判断是否存在采购退货记录
+		sql = "select count(*) from cgthd where provider_name='" + client_id + "'";
+		if(this.getJdbcTemplate().queryForInt(sql) > 0){
+			return false;
+		}
+		
+		//判断是否存在往来调账记录
+		sql = "select count(*) from pz where client_name='" + client_id + "'";
+		if(this.getJdbcTemplate().queryForInt(sql) > 0){
+			return false;
+		}	
+		
+		return true;
+	}
+	
+	
 	
 	/**
 	 * 取当前可用的序列号
@@ -322,10 +365,6 @@ public class ClientsDAO extends JdbcBaseDAO {
 
 		return "CL" + curId;
 	}
-	
-	
-	
-	
 	
 	
 	/**

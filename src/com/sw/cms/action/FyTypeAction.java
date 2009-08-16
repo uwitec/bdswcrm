@@ -92,6 +92,11 @@ public class FyTypeAction extends BaseAction {
 				this.setMsg("该类别下有子类别，不能删除！");
 				return SUCCESS;
 			}
+			if(!fyTypeService.isCanDel(id)){
+				this.setMsg("已发生业务往业，不能删除！");
+				return SUCCESS;
+			}
+			
 			fyTypeService.delFyType(id);
 			
 			return SUCCESS;

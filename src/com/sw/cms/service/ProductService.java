@@ -135,6 +135,19 @@ public class ProductService {
 		return productDao.getProductByCon(product_kind, product_name, product_xh, state);
 	}
 	
+	
+	/**
+	 * 判断商品是否可以删除<BR>
+	 * 发生业务数据的商品不能删除<BR>
+	 * 业务数据包括：零售、销售、退货、采购、采购退货、调拨申请、调拨、调价<BR>
+	 * 因为出库入库，不能添加，只能有相应单据生成，所以不在考虑范围内
+	 * @param product_id  商品编号
+	 * @return boolean true:可以；false:不可以
+	 */
+	public boolean isCanDel(String product_id){
+		return productDao.isCanDel(product_id);
+	}
+	
 
 	public ProductDAO getProductDao() {
 		return productDao;

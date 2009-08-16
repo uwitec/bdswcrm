@@ -44,7 +44,11 @@
 <FONT color="red"><ww:property value="%{msg}"/></FONT>
 <table width="100%"  align="center"  border="1"   class="chart_info" cellpadding="0" cellspacing="0">
 		<tr>
-			<td class="a2"><b>第一步</b>、首先清空系统历史数据，清空历史数据请点击“清空系统数据”链接。&nbsp;<a href='#' onclick="clearData();">清空系统数据</a></td>			
+			<td class="a2"><b>第一步</b>、首先清空系统历史数据，清空历史数据请点击“清空系统数据”链接。&nbsp;
+				<ww:if test="flag == 0">
+				<a href='#' onclick="clearData();">清空系统数据</a>
+				</ww:if>
+			</td>			
 		</tr>
 		<tr>
 			<td class="a2"><b>第二步</b>、维护产品基础数据，包括产品分类及产品资料，要维护产品基础数请点击“产品维护”链接。&nbsp;<a href="javascript:void(0);" onclick="parent.addtabFmMenu('产品维护','product.html','');">产品维护</a></td>			

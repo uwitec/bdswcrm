@@ -14,7 +14,7 @@ String end_date = StringUtils.nullToStr(request.getParameter("end_date"));      
 String dept_id = StringUtils.nullToStr(request.getParameter("dept_id"));        //部门
 String xsry_id = StringUtils.nullToStr(request.getParameter("xsry_id"));        //销售人员
 String client_name = StringUtils.nullToStr(request.getParameter("client_id"));        //客户编号
-
+String cq_flag = StringUtils.nullToStr(request.getParameter("cq_flag"));        //客户编号
 
 String strCon = "";
 
@@ -68,7 +68,7 @@ if(!dept_id.equals("")){
 	
 	<TBODY>
 <%
-List results = xsmxReportService.getWsdjList(start_date,end_date,dept_id,xsry_id,client_name);
+List results = xsmxReportService.getWsdjList(start_date,end_date,dept_id,xsry_id,client_name,cq_flag);
 if(results != null && results.size()>0){
 	
 	double hj_je = 0;
@@ -116,7 +116,7 @@ if(results != null && results.size()>0){
 <BR>
 <center class="Noprint">
 	<input type="button" name="button_print" value=" 打 印 " onclick="window.print();"> &nbsp;&nbsp;
-    <input type="button" name="button_fh" value=" 返 回 " onclick="history.go(-1);"> 
+    <input type="button" name="button_fh" value=" 返 回 " onclick="location.href='showWsdjCondition.html';"> 
 </center>
 </body>
 </html>

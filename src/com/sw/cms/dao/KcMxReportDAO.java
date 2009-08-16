@@ -1,5 +1,7 @@
 package com.sw.cms.dao;
 
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -510,6 +512,122 @@ public class KcMxReportDAO extends JdbcBaseDAO {
 		sql += " and state='正常' having kc_nums>0";
 
 		return this.getResultList(sql);
+	}
+	
+	
+	
+	/**
+	 * 分仓库存数量汇总，商品列表
+	 * @param product_kind
+	 * @param product_name
+	 * @param state
+	 * @return
+	 */
+	public List getProductList(String product_kind,String product_name,String state){
+		
+		String sql = "select product_id,product_name,product_xh,dw from product where 1=1";
+		
+		//处理商品类别
+		if(!product_kind.equals("")){
+			String[] arryItems = product_kind.split(",");
+			
+			if(arryItems != null && arryItems.length >0){
+				sql += " and (";
+				for(int i=0;i<arryItems.length;i++){
+					if(i == 0){
+						sql += " product_kind like '" + arryItems[i] + "%'";
+					}else{
+						sql += " or product_kind like '" + arryItems[i] + "%'";
+					}
+				}
+				sql += ")";
+			}
+			
+		}
+		
+		if(!product_name.equals("")){
+			sql = sql + " and (product_name like '%" + product_name + "%' or product_xh like '%" + product_name + "%')";
+		}
+		
+		if(state.equals("否")){
+			sql = sql + " and state='正常'";
+		}
+		
+		return this.getResultList(sql);
+		
+	}
+	
+	
+	/**
+	 * 分仓库存数量汇总，取库房列表
+	 * @param store_id
+	 * @return
+	 */
+	public List getStoreList(String store_id){
+		String sql = "select * from storehouse where 1=1";
+		
+		if(!store_id.equals("")){
+			sql += " and id='" + store_id + "'";
+		}
+		
+		return this.getResultList(sql);
+	}
+	
+	
+	/**
+	 * 统计结果写入HashMap中，前台从Map中取
+	 * @param product_kind
+	 * @param product_name
+	 * @param state
+	 * @param store_id
+	 * @return Map(key,value)  key=product_id+store_id,value=库存数量
+	 */
+	public Map getKcStatResult(String product_kind,String product_name,String state,String store_id){
+		Map map = new HashMap();
+		
+		String sql = "select a.product_id,a.store_id,a.nums from product_kc a inner join product b on b.product_id=a.product_id where 1=1";
+		
+		//处理商品类别
+		if(!product_kind.equals("")){
+			String[] arryItems = product_kind.split(",");
+			
+			if(arryItems != null && arryItems.length >0){
+				sql += " and (";
+				for(int i=0;i<arryItems.length;i++){
+					if(i == 0){
+						sql += " b.product_kind like '" + arryItems[i] + "%'";
+					}else{
+						sql += " or b.product_kind like '" + arryItems[i] + "%'";
+					}
+				}
+				sql += ")";
+			}
+			
+		}
+		
+		if(!product_name.equals("")){
+			sql = sql + " and (b.product_name like '%" + product_name + "%' or b.product_xh like '%" + product_name + "%')";
+		}
+		
+		if(state.equals("否")){
+			sql = sql + " and b.state='正常'";
+		}
+		
+		if(!store_id.equals("")){
+			sql += " and a.store_id ='" + store_id + "'";
+		}
+		
+		List list = this.getResultList(sql);
+		
+		if(list != null && list.size() > 0){
+			Iterator it = list.iterator();
+			while(it.hasNext()){
+				Map tempMap = (Map)it.next();				
+				map.put(StringUtils.nullToStr(tempMap.get("product_id")) + StringUtils.nullToStr(tempMap.get("store_id")), tempMap.get("nums"));
+			}
+		}
+		
+		return map;
 	}
 	
 }

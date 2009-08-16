@@ -4,9 +4,11 @@ package com.sw.cms.dao;
  * 销售明细统计
  */
 
+import java.util.Date;
 import java.util.List;
 
 import com.sw.cms.dao.base.JdbcBaseDAO;
+import com.sw.cms.util.DateComFunc;
 
 public class XsmxReportDAO extends JdbcBaseDAO {
 	
@@ -153,7 +155,7 @@ public class XsmxReportDAO extends JdbcBaseDAO {
 	 * @param xsry_id
 	 * @return
 	 */
-	public List getWsdjList(String start_date,String end_date,String dept_id,String xsry_id,String client_name){
+	public List getWsdjList(String start_date,String end_date,String dept_id,String xsry_id,String client_name,String cq_flag){
 		String sql = "select a.creatdate,a.ysrq,a.id,a.client_name,a.kh_lxr,a.kh_lxdh,a.fzr,a.xsdje,(a.xsdje-a.skje) as je from xsd a left join sys_user b on b.user_id=a.fzr where a.state='已出库' and a.skxs<>'已收'";
 		if(!start_date.equals("")){
 			sql += " and DATE_FORMAT(a.cz_date,'%Y-%m-%d')>='" + start_date + "'";
@@ -169,6 +171,9 @@ public class XsmxReportDAO extends JdbcBaseDAO {
 		}
 		if(!client_name.equals("")){
 			sql += " and a.client_name='"+ client_name +"'";
+		}
+		if(cq_flag.equals("是")){  //如果是只显示超期单据
+			sql += " and a.ysrq<'" + DateComFunc.formatDate(new Date(),"yyyy-MM-dd") + "'";
 		}
 		
 		return this.getResultList(sql);

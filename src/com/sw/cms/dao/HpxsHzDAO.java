@@ -274,7 +274,7 @@ public class HpxsHzDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public List getLsdList(String product_id,String start_date,String end_date,String client_name,String xsry_id){
-		String sql = "select distinct a.id,a.client_name,DATE_FORMAT(a.cz_date,'%Y-%m-%d') as creatdate,a.xsry from lsd a join lsd_product b on b.lsd_id=a.id";
+		String sql = "select distinct a.id,a.client_name,DATE_FORMAT(a.cz_date,'%Y-%m-%d') as creatdate,a.xsry from lsd a join lsd_product b on b.lsd_id=a.id where a.state='ÒÑÌá½»'";
 		if(!start_date.equals("")){
 			sql = sql + " and DATE_FORMAT(a.cz_date,'%Y-%m-%d')>='" + start_date + "'";
 		}

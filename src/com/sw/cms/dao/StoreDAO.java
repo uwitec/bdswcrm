@@ -130,6 +130,46 @@ public class StoreDAO extends JdbcBaseDAO {
 	}
 	
 	
+	/**
+	 * 判断库房资料是否可以删除<BR>
+	 * 如果发生业务关系不可以删除<BR>
+	 * 业务关系包括：入库单、出库单、调拨申请、库房调拨、存在库存值<BR>
+	 * @param id boolean true:可以；false:不可以
+	 */
+	public boolean isCanDel(String id){
+		
+		//判断是否存在入库单
+		String sql = "select count(*) as counts from ckd where store_id='" + id + "'";
+		if(this.getJdbcTemplate().queryForInt(sql) > 0){
+			return false;
+		}
+		
+		//判断是否存在出库单
+		sql = "select count(*) as counts from rkd where store_id='" + id + "'";
+		if(this.getJdbcTemplate().queryForInt(sql) > 0){
+			return false;
+		}
+		
+		//判断是否存在调拨申请
+		sql = "select count(*) as counts from dbsq where store_id='" + id + "'";
+		if(this.getJdbcTemplate().queryForInt(sql) > 0){
+			return false;
+		}
+		
+		//判断是否存在库房调拨
+		sql = "select count(*) as counts from kfdb where ck_store_id='" + id + "' or rk_store_id='" + id + "'";
+		if(this.getJdbcTemplate().queryForInt(sql) > 0){
+			return false;
+		}	
+		
+		//判断是否存在库存值
+		sql = "select count(*) as counts from product_kc where store_id='" + id + "'";
+		if(this.getJdbcTemplate().queryForInt(sql) > 0){
+			return false;
+		}		
+		
+		return true;
+	}
 	
 	
 	/**

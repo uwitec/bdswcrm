@@ -135,7 +135,7 @@ public class SysInitSetAction extends BaseAction {
 			if(logoFileFileName != null && !logoFileFileName.equals("")){
 				//获取当前的绝对路径
 				String filePath = ServletActionContext.getServletContext().getRealPath("\\");
-				String imgPath = filePath + "logo\\" + logoFileFileName;
+				String imgPath = filePath + "logo/" + logoFileFileName;
 				
 				//上传产品图片文件
 				FileOutputStream outputStream = new FileOutputStream(imgPath);

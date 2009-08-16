@@ -601,7 +601,7 @@ if(sp_state.equals("3")){
 		<td class="a2">
 		 <input  id="brand"  type="text"  onblur="setValue()" value="<%=StaticParamDo.getRealNameById(lsd.getXsry()) %>"/> 
 		 <div  id="brandTip" style=" height:12px; position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;"></div>
-		    <input type="hidden" name="lsd.xsry" id="fzr" value="<%=lsd.getXsry() %>"/> <font color="red">*</font>
+		    <input type="hidden" name="lsd.xsry" id="fzr" value="<%=StringUtils.nullToStr(lsd.getXsry()) %>"/> <font color="red">*</font>
 		</td>					
 	</tr>
 	<tr>

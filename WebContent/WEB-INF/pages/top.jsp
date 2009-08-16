@@ -180,7 +180,7 @@ String logo_url = (String)VS.findValue("logo_url");
 			<TABLE cellSpacing=0 cellPadding=0 border=0>
 				<TBODY>
            				<TR>
-					<TD>&nbsp;&nbsp;<IMG src="logo/<%=logo_url %>"></TD>
+					<TD>&nbsp;&nbsp;<IMG src="logo/<%=logo_url %>" width="140" height="49"></TD>
 				</TR>						
 				</TBODY>
 			</TABLE>					

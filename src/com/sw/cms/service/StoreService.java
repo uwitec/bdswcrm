@@ -71,6 +71,17 @@ public class StoreService {
 		storeDao.delStore(id);
 	}
 	
+	
+	/**
+	 * 判断库房资料是否可以删除<BR>
+	 * 如果发生业务关系不可以删除<BR>
+	 * 业务关系包括：入库单、出库单、调拨申请、库房调拨、存在库存值<BR>
+	 * @param id boolean true:可以；false:不可以
+	 */
+	public boolean isCanDel(String id){
+		return storeDao.isCanDel(id);
+	}
+	
 
 	public void setStoreDao(StoreDAO storeDao) {
 		this.storeDao = storeDao;

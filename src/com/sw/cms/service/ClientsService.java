@@ -246,6 +246,18 @@ public class ClientsService {
 	public List getClientListByAjaxParam(String clientsName){
 		return clientsDao.getClientListByAjaxParam(clientsName);
 	}
+	
+	
+	/**
+	 * 判断客户信息是否可以删除<BR>
+	 * 发生往来业务关系的客户信息不能删除<BR>
+	 * 往来业务关系包括：销售、销售退货、采购、采购退货、往来调账
+	 * @param client_id
+	 * @return boolean true:可以；false:不可以
+	 */
+	public boolean isCanDel(String client_id){
+		return clientsDao.isCanDel(client_id);
+	}
 
 	public InitParamDAO getInitParamDao() {
 		return initParamDao;

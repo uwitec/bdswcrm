@@ -46,3 +46,6 @@ A.noline:hover {
 A.noline:active {
 	FONT-SIZE: 9pt; COLOR: #0066b3; TEXT-DECORATION: none
 }
+table{
+	word-break:break-all;
+}

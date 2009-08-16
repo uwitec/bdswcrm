@@ -73,7 +73,7 @@ if(!dept_id.equals("")){
 	
 	<TBODY>
 <%
-List results = xsmxReportService.getWsdjList(start_date,end_date,dept_id,xsry_id,client_name);
+List results = xsmxReportService.getWsdjList(start_date,end_date,dept_id,xsry_id,client_name,"");
 if(results != null && results.size()>0){
 	
 	double hj_je = 0;
