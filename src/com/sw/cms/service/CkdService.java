@@ -1,5 +1,6 @@
 package com.sw.cms.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.sw.cms.dao.AccountDzdDAO;
@@ -26,6 +27,11 @@ import com.sw.cms.model.XsdProduct;
 import com.sw.cms.model.Xssk;
 import com.sw.cms.util.StaticParamDo;
 
+/**
+ * 出库单操作
+ * @author jinyanni
+ *
+ */
 public class CkdService {
 	
 	private CkdDAO ckdDao;
@@ -111,18 +117,26 @@ public class CkdService {
 	 */
 	public void updateCkd(Ckd ckd,List ckdProducts){
 		
+		//设置出库单对应商品的成本价
+		List xsdProducts = new ArrayList();
+		
 		if(ckdProducts != null && ckdProducts.size()>0){
 			for(int i=0;i<ckdProducts.size();i++){
 				CkdProduct cdkProduct = (CkdProduct)ckdProducts.get(i);
 				if(cdkProduct != null){
 					if(!cdkProduct.getProduct_id().equals("")){
 						XsdProduct xsdProduct = (XsdProduct)xsdDao.getXsdProductInfo(ckd.getXsd_id(), cdkProduct.getProduct_id());
+						Product product = (Product)productDao.getProductById(cdkProduct.getProduct_id());
+						
+						xsdProduct.setCbj(product.getPrice());
+						xsdProduct.setKh_cbj(product.getKhcbj());
+						xsdProducts.add(xsdProduct);
+						
+						cdkProduct.setCbj(product.getPrice());  //成本价取当前库存的成本价
 						if(xsdProduct != null){
-							cdkProduct.setCbj(xsdProduct.getCbj());
-							cdkProduct.setPrice(xsdProduct.getPrice());
+							cdkProduct.setPrice(xsdProduct.getPrice());  //销售价格取销售订单相当价格
 							cdkProduct.setJgtz(xsdProduct.getJgtz());
 						}else{
-							cdkProduct.setCbj(0);
 							cdkProduct.setPrice(0);
 							cdkProduct.setJgtz(0);
 						}
@@ -131,6 +145,7 @@ public class CkdService {
 			}
 		}
 		
+		//更新出库单
 		ckdDao.updateCkd(ckd, ckdProducts);
 		
 		if(ckd.getState().equals("已出库")){
@@ -147,6 +162,11 @@ public class CkdService {
 			//如果是销售单，处理销售单状态
 			if(ckd.getXsd_id().indexOf("XS") != -1){
 				this.updateXsdState(ckd.getXsd_id(), "已出库",ckd.getYsfs(),ckd.getCx_tel(),ckd.getJob_no(),ckd.getSend_time(),ckd.getStore_id(),ckd.getFzr(),ckd.getCk_date());
+				
+				//修改销售单对应的成本价及考核成本价
+				if(xsdProducts != null && xsdProducts.size() > 0){
+					xsdDao.updateXsdProducts(xsdProducts);
+				}
 			}
 			
 			//更新相应分销订单的物流状态
@@ -156,6 +176,8 @@ public class CkdService {
 			if(ckd.getXsd_id().indexOf("CGTH") != -1){
 				cgthdDao.updateCgthdState(ckd.getXsd_id(), "已出库");
 			}
+			
+
 		}
 	}
 

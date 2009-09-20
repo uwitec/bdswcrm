@@ -78,6 +78,26 @@ public class SysInitSetService {
 	public void saveSysLogo(String cpy_name,String logo_url){
 		sysInitSetDao.saveSysLogo(cpy_name, logo_url);
 	}
+	
+	
+	/**
+	 * 返回报表相关设置
+	 * @return
+	 */
+	public Map getReportSet(){
+		return sysInitSetDao.getReportSet();
+	}
+	
+	
+	/**
+	 * 保存报表相关设置
+	 * @param title_name
+	 * @param foot_name
+	 */
+	public void saveReportSet(String title_name,String foot_name){
+		sysInitSetDao.saveReportSet(title_name, foot_name);
+	}
+	
 
 	public SysInitSetDAO getSysInitSetDao() {
 		return sysInitSetDao;

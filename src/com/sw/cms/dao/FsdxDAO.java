@@ -2,17 +2,13 @@ package com.sw.cms.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import org.smslib.InboundMessage;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
-import com.sw.cms.dao.FysqDAO.FysqRowMapper;
 import com.sw.cms.dao.base.JdbcBaseDAO;
-import com.sw.cms.dao.base.SqlUtil;
 import com.sw.cms.model.Flinkman;
 import com.sw.cms.model.Flx;
 import com.sw.cms.model.Fsendsms;

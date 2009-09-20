@@ -22,15 +22,15 @@ public class ServletContextInit extends HttpServlet {
 			StaticParamDo.setCtx(ctx);
 			 
 			
-			//生成期初调试
-			// InitParamDAO dao = (InitParamDAO)ctx.getBean("initParamDao");			
-			//生成客户往来期初
-			// dao.genCleintWlqc("2009-07-23","2009-06-22"); 
-			//生成账户期初
-			// dao.genAccountQc("2009-07-23","2009-07-22"); 
-			
-			// System.out.println("ddddddddddddddddddd");
-			//Thread.sleep(100*1000);
+//			//生成期初调试
+//			InitParamDAO dao = (InitParamDAO)ctx.getBean("initParamDao");			
+//			//生成客户往来期初
+//			dao.genCleintWlqc("2009-09-12","2009-09-11"); 
+//			//生成账户期初
+//			dao.genAccountQc("2009-09-12","2009-09-11"); 
+//			
+//			System.out.println("ddddddddddddddddddd");
+//			Thread.sleep(100*1000);
 			
 		}catch(Exception e){
 			log.error("初始化spring context失败，失败原因" + e.getMessage());

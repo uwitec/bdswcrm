@@ -10,6 +10,7 @@ import java.util.regex.Pattern;
 import com.sw.cms.dao.BxdDAO;
 import com.sw.cms.dao.CkdDAO;
 import com.sw.cms.dao.ClientsDAO;
+import com.sw.cms.dao.ClientsLinkmanDAO;
 import com.sw.cms.dao.LsdDAO;
 import com.sw.cms.dao.ProductDAO;
 import com.sw.cms.dao.ProductKcDAO;
@@ -48,6 +49,8 @@ public class DwrService {
 	private XsdDAO xsdDao;
 
 	private CkdDAO ckdDao;
+
+	private ClientsLinkmanDAO clientsLinkmanDao;
 
 	public LsdDAO getLsdDao() {
 		return lsdDao;
@@ -456,6 +459,15 @@ public class DwrService {
 
 	}
 
+	/**
+	 * 根据单位类型查询联系人邮箱地址
+	 * 
+	 * @return
+	 */
+	public String getLxrMailByClientType(String clientType) {
+		return clientsLinkmanDao.getLxrMailByClientType(clientType);
+	}
+
 	public ClientsDAO getClientsDao() {
 		return clientsDao;
 	}
@@ -526,6 +538,14 @@ public class DwrService {
 
 	public void setCkdDao(CkdDAO ckdDao) {
 		this.ckdDao = ckdDao;
+	}
+
+	public ClientsLinkmanDAO getClientsLinkmanDao() {
+		return clientsLinkmanDao;
+	}
+
+	public void setClientsLinkmanDao(ClientsLinkmanDAO clientsLinkmanDao) {
+		this.clientsLinkmanDao = clientsLinkmanDao;
 	}
 
 }

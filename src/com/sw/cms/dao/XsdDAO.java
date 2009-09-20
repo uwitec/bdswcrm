@@ -32,7 +32,7 @@ public class XsdDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public Page getXsdList(String con,int curPage, int rowsPerPage){
-		String sql = "select a.* from xsd a left join clients b on b.id=a.client_name left join sys_user c on c.user_id=a.fzr where 1=1";
+		String sql = "select id,client_name,state,xsdje,creatdate,fzr,czr,skxs,sp_state,sklx from xsd where 1=1";
 		
 		if(!con.equals("")){
 			sql = sql + con;
@@ -333,7 +333,7 @@ public class XsdDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public List getXsdProducts(String id){
-		String sql = "select a.*,b.qz_serial_num as qz_flag from xsd_product a left join product b on b.product_id=a.product_id where xsd_id='" + id + "'";
+		String sql = "select a.*,b.qz_serial_num as qz_flag,b.dw from xsd_product a left join product b on b.product_id=a.product_id where xsd_id='" + id + "'";
 		
 		return this.getResultList(sql, new XsdProductRowMapper());
 	}
@@ -428,6 +428,23 @@ public class XsdDAO extends JdbcBaseDAO {
 			}
 		}
 	}
+	
+	
+	/**
+	 * 更新销售单商品信息
+	 * @param xsdProducts
+	 */
+	public void updateXsdProducts(List xsdProducts){
+		if(xsdProducts != null && xsdProducts.size() > 0){
+			for(int i= 0; i<xsdProducts.size(); i++){
+				XsdProduct xsdProduct = (XsdProduct)xsdProducts.get(i);
+				String sql = "update xsd_product set cbj=" + xsdProduct.getCbj() + ",kh_cbj=" + xsdProduct.getKh_cbj() + " where id=" + xsdProduct.getId();
+				
+				this.getJdbcTemplate().update(sql);
+			}
+		}
+	}
+	
 	
 	
 	/**
@@ -771,6 +788,8 @@ public class XsdDAO extends JdbcBaseDAO {
 			if(SqlUtil.columnIsExist(rs,"sjcj_xj")) xsdProduct.setSjcj_xj(rs.getDouble("sjcj_xj"));
 			if(SqlUtil.columnIsExist(rs,"kh_cbj")) xsdProduct.setKh_cbj(rs.getDouble("kh_cbj"));
 			if(SqlUtil.columnIsExist(rs,"gf")) xsdProduct.setGf(rs.getDouble("gf"));
+			
+			if(SqlUtil.columnIsExist(rs,"dw")) xsdProduct.setDw(rs.getString("dw"));
 			
 			return xsdProduct;
 		}

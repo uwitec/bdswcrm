@@ -2,12 +2,14 @@ package com.sw.cms.action;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.sw.cms.action.base.BaseAction;
 import com.sw.cms.model.Clients;
 import com.sw.cms.model.Fxdd;
 import com.sw.cms.model.LoginInfo;
 import com.sw.cms.model.Page;
+import com.sw.cms.model.SysUser;
 import com.sw.cms.model.Xsd;
 import com.sw.cms.service.CkdService;
 import com.sw.cms.service.ClientsService;
@@ -23,7 +25,9 @@ import com.sw.cms.service.XsdService;
 import com.sw.cms.source.SysSource;
 import com.sw.cms.util.Constant;
 import com.sw.cms.util.DateComFunc;
-import com.sw.cms.util.ParameterUtility;
+import com.sw.cms.util.MoneyUtil;
+import com.sw.cms.util.StaticParamDo;
+import com.sw.cms.util.StringUtils;
 
 /**
  * 销售订单及分销采购单
@@ -97,6 +101,20 @@ public class XsdAction extends BaseAction {
 	private int rowsPerPage = Constant.PAGE_SIZE;
 	
 	
+	//打印所需参数
+	private String creatdate = "";
+	private String client_tel = "";
+	private String dept_name = "";
+	private String skfs = "";
+	private String skzh_name = "";
+	private String title_name = "";
+	private String foot_name = "";
+	private String xsry_name = "";
+	private String address = "";
+	private String remark = "";
+	private String jexj_dx = "";
+	
+	
 	/**
 	 * 取销售订单列表
 	 * @return
@@ -108,22 +126,22 @@ public class XsdAction extends BaseAction {
 			con += " and id='" + id + "'";
 		}
 		if(!client_name.equals("")){
-			con += " and b.name like'%" + client_name + "%'";
-		}
-		if(!creatdate1.equals("")){
-			con += " and a.creatdate>='" + creatdate1 + "'";
-		}
-		if(!creatdate2.equals("")){
-			con += " and a.creatdate<='" + (creatdate2+ " 23:59:59") + "'";
+			con += " and client_name='" + client_name + "'";
 		}
 		if(!fzr.equals("")){
-			con += " and c.real_name like '%" + fzr + "%'";
+			con += " and fzr='" + fzr + "'";
+		}		
+		if(!creatdate1.equals("")){
+			con += " and creatdate>='" + creatdate1 + "'";
+		}
+		if(!creatdate2.equals("")){
+			con += " and creatdate<='" + (creatdate2+ " 23:59:59") + "'";
 		}
 		if(!skxs.equals("")){
-			con += " and a.skxs='" + skxs + "'";
+			con += " and skxs='" + skxs + "'";
 		}
 		if(!state.equals("")){
-			con += " and a.state='" + state + "'";
+			con += " and state='" + state + "'";
 		}
 		
 		if(orderName.equals("")){
@@ -143,15 +161,15 @@ public class XsdAction extends BaseAction {
 	
 	public String listCjXsd(){
 		
-		String con = " and a.state<>'已保存'";
+		String con = " and state<>'已保存'";
 		if(!client_name.equals("")){
-			con += " and b.name like'%" + client_name + "%'";
+			con += " and name like'%" + client_name + "%'";
 		}
 		if(!creatdate1.equals("")){
-			con += " and a.creatdate>='" + creatdate1 + "'";
+			con += " and creatdate>='" + creatdate1 + "'";
 		}
 		if(!creatdate2.equals("")){
-			con += " and a.creatdate<='" + (creatdate2+ " 23:59:59") + "'";
+			con += " and creatdate<='" + (creatdate2+ " 23:59:59") + "'";
 		}
 		if(orderName.equals("")){
 			orderName = "id";
@@ -484,6 +502,41 @@ public class XsdAction extends BaseAction {
 
 		fxddProductPage = productKcService.getFxddProductKcList(con, curPage, rowsPerPage);
 		return "success";
+	}
+	
+	
+	/**
+	 * 销售订单打印
+	 * @return
+	 */
+	public String printXsd(){
+		try{
+			xsd = (Xsd)xsdService.getXsd(id);
+			xsdProducts = xsdService.getXsdProducts(id);
+			
+			client_name = StaticParamDo.getClientNameById(xsd.getClient_name()) + "  " + StringUtils.nullToStr(xsd.getKh_lxr());
+			client_tel = StringUtils.nullToStr(xsd.getKh_lxdh());
+			dept_name = StaticParamDo.getDeptNameById(((SysUser)userService.getUser(xsd.getFzr())).getDept());
+			xsry_name = StaticParamDo.getRealNameById(xsd.getFzr());
+			skfs = StringUtils.nullToStr(xsd.getSkfs());
+			skzh_name = StaticParamDo.getAccountNameById(xsd.getSkzh());
+			creatdate = StringUtils.nullToStr(xsd.getCreatdate());
+			address = StringUtils.nullToStr(xsd.getKh_address());
+			remark = StringUtils.nullToStr(xsd.getMs());
+			jexj_dx = MoneyUtil.toChinese(xsd.getXsdje()+"");
+			
+			Map map = sysInitSetService.getReportSet();
+			
+			if(map != null){
+				title_name = StringUtils.nullToStr(map.get("title_name")) + "销售订单";
+				foot_name = StringUtils.nullToStr(map.get("foot_name"));	
+			}
+			
+			return "success";
+		}catch(Exception e){
+			log.error("打印销售订单出错，原因：" + e.getMessage());
+			return "error";
+		}		
 	}
 	
 	
@@ -968,6 +1021,138 @@ public class XsdAction extends BaseAction {
 
 	public void setProductKindService(ProductKindService productKindService) {
 		this.productKindService = productKindService;
+	}
+
+
+
+	public String getClient_tel() {
+		return client_tel;
+	}
+
+
+
+	public void setClient_tel(String client_tel) {
+		this.client_tel = client_tel;
+	}
+
+
+
+	public String getCreatdate() {
+		return creatdate;
+	}
+
+
+
+	public void setCreatdate(String creatdate) {
+		this.creatdate = creatdate;
+	}
+
+
+
+	public String getDept_name() {
+		return dept_name;
+	}
+
+
+
+	public void setDept_name(String dept_name) {
+		this.dept_name = dept_name;
+	}
+
+
+
+	public String getFoot_name() {
+		return foot_name;
+	}
+
+
+
+	public void setFoot_name(String foot_name) {
+		this.foot_name = foot_name;
+	}
+
+
+
+	public String getSkfs() {
+		return skfs;
+	}
+
+
+
+	public void setSkfs(String skfs) {
+		this.skfs = skfs;
+	}
+
+
+
+	public String getSkzh_name() {
+		return skzh_name;
+	}
+
+
+
+	public void setSkzh_name(String skzh_name) {
+		this.skzh_name = skzh_name;
+	}
+
+
+
+	public String getTitle_name() {
+		return title_name;
+	}
+
+
+
+	public void setTitle_name(String title_name) {
+		this.title_name = title_name;
+	}
+
+
+
+	public String getXsry_name() {
+		return xsry_name;
+	}
+
+
+
+	public void setXsry_name(String xsry_name) {
+		this.xsry_name = xsry_name;
+	}
+
+
+
+	public String getAddress() {
+		return address;
+	}
+
+
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+
+
+	public String getRemark() {
+		return remark;
+	}
+
+
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
+
+
+	public String getJexj_dx() {
+		return jexj_dx;
+	}
+
+
+
+	public void setJexj_dx(String jexj_dx) {
+		this.jexj_dx = jexj_dx;
 	}
 	
 }

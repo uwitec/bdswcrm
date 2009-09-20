@@ -17,6 +17,9 @@ public class MoneyUtil {
 	 * 得到大写金额。
 	 */
 	public static String toChinese(String str) {
+		if(str == null || str.equals("") || str.equals("null")){
+			return "";
+		}
 		str = str.replaceAll(",", "");// 去掉","
 		String integerStr;// 整数部分数字
 		String decimalStr;// 小数部分数字
@@ -48,8 +51,15 @@ public class MoneyUtil {
 		int[] integers = toArray(integerStr);// 整数部分数字
 		boolean isMust5 = isMust5(integerStr);// 设置万单位
 		int[] decimals = toArray(decimalStr);// 小数部分数字
-		return getChineseInteger(integers, isMust5)
-				+ getChineseDecimal(decimals);
+		
+		String returnStr = getChineseInteger(integers, isMust5) + getChineseDecimal(decimals);
+		
+		String lastStr = returnStr.substring(returnStr.length()-1, returnStr.length());
+		
+		if(!lastStr.equals("分") && !lastStr.equals("厘"))
+			returnStr += "整";
+		
+		return returnStr;
 	}
 
 	/**
@@ -127,7 +137,9 @@ public class MoneyUtil {
 	}
 
 	public static void main(String[] args) {
-		String number = "230";
+		String number = "10";
+		System.out.println(number + " " + MoneyUtil.toChinese(number));
+		number = "2351.1";
 		System.out.println(number + " " + MoneyUtil.toChinese(number));
 		number = "1234567890123456.12366";
 		System.out.println(number + " " + MoneyUtil.toChinese(number));

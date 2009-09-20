@@ -24,7 +24,7 @@ public class JhdDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public Page getJhdList(String con,int curPage, int rowsPerPage){
-		String sql = "select * from jhd where 1=1";
+		String sql = "select id,gysmc,state,fzr,total,fklx,cg_date,czr from jhd where 1=1";
 		
 		if(!con.equals("")){
 			sql = sql + con;		

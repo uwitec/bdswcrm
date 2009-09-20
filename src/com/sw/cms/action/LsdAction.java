@@ -2,11 +2,13 @@ package com.sw.cms.action;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.sw.cms.action.base.BaseAction;
 import com.sw.cms.model.LoginInfo;
 import com.sw.cms.model.Lsd;
 import com.sw.cms.model.Page;
+import com.sw.cms.model.SysUser;
 import com.sw.cms.service.LsdService;
 import com.sw.cms.service.PosTypeService;
 import com.sw.cms.service.ProductKcService;
@@ -17,7 +19,10 @@ import com.sw.cms.service.SysInitSetService;
 import com.sw.cms.service.UserService;
 import com.sw.cms.util.Constant;
 import com.sw.cms.util.DateComFunc;
+import com.sw.cms.util.MoneyUtil;
 import com.sw.cms.util.ParameterUtility;
+import com.sw.cms.util.StaticParamDo;
+import com.sw.cms.util.StringUtils;
 
 /**
  * 零售单处理
@@ -71,6 +76,19 @@ public class LsdAction extends BaseAction {
 	private String product_kind = "";
 	private String prop = "";
 	private List kindList = new ArrayList();
+	
+	
+	//打印所需参数
+	private String client_tel = "";
+	private String dept_name = "";
+	private String skfs = "";
+	private String skzh_name = "";
+	private String title_name = "";
+	private String foot_name = "";
+	private String address = "";
+	private String remark = "";
+	private String jexj_dx = "";
+
 	
 	/**
 	 * 零售单列表
@@ -464,6 +482,42 @@ public class LsdAction extends BaseAction {
 	}
 	
 	
+	/**
+	 * 打开打印零售单页面 pdf
+	 * @return
+	 */
+	public String printLsd(){
+		try{
+			lsd = (Lsd)lsdService.getLsd(id);
+			
+			client_name = StringUtils.nullToStr(lsd.getClient_name()) + "  " + StringUtils.nullToStr(lsd.getLxr());
+			client_tel = StringUtils.nullToStr(lsd.getLxdh()) + "  " + StringUtils.nullToStr(lsd.getMobile()) + "  " + StringUtils.nullToStr(lsd.getMail());
+			dept_name = StaticParamDo.getDeptNameById(((SysUser)userService.getUser(lsd.getXsry())).getDept());
+			xsry_name = StaticParamDo.getRealNameById(lsd.getXsry());
+			skfs = StringUtils.nullToStr(lsd.getFkfs());
+			skzh_name = StaticParamDo.getAccountNameById(lsd.getSkzh());
+			address = StringUtils.nullToStr(lsd.getAddress());
+			remark = StringUtils.nullToStr(lsd.getMs());
+			jexj_dx = MoneyUtil.toChinese(lsd.getLsdje()+"");
+			creatdate = StringUtils.nullToStr(lsd.getCreatdate());
+			
+			Map map = sysInitSetService.getReportSet();
+			
+			if(map != null){
+				title_name = StringUtils.nullToStr(map.get("title_name")) + "零售单";
+				foot_name = StringUtils.nullToStr(map.get("foot_name"));	
+			}
+
+			
+			lsdProducts = lsdService.getLsdProducts(id);
+		}catch(Exception e){
+			log.error("打印零售单出错，原因：" + e.getMessage());
+			return ERROR;
+		}
+		return "success";
+	}
+	
+	
 	public Lsd getLsd() {
 		return lsd;
 	}
@@ -705,6 +759,96 @@ public class LsdAction extends BaseAction {
 
 	public void setProp(String prop) {
 		this.prop = prop;
+	}
+
+
+	public String getClient_tel() {
+		return client_tel;
+	}
+
+
+	public void setClient_tel(String client_tel) {
+		this.client_tel = client_tel;
+	}
+
+
+	public String getDept_name() {
+		return dept_name;
+	}
+
+
+	public void setDept_name(String dept_name) {
+		this.dept_name = dept_name;
+	}
+
+
+	public String getSkfs() {
+		return skfs;
+	}
+
+
+	public void setSkfs(String skfs) {
+		this.skfs = skfs;
+	}
+
+
+	public String getSkzh_name() {
+		return skzh_name;
+	}
+
+
+	public void setSkzh_name(String skzh_name) {
+		this.skzh_name = skzh_name;
+	}
+
+
+	public String getFoot_name() {
+		return foot_name;
+	}
+
+
+	public void setFoot_name(String foot_name) {
+		this.foot_name = foot_name;
+	}
+
+
+	public String getTitle_name() {
+		return title_name;
+	}
+
+
+	public void setTitle_name(String title_name) {
+		this.title_name = title_name;
+	}
+
+
+	public String getAddress() {
+		return address;
+	}
+
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+
+	public String getRemark() {
+		return remark;
+	}
+
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
+
+	public String getJexj_dx() {
+		return jexj_dx;
+	}
+
+
+	public void setJexj_dx(String jexj_dx) {
+		this.jexj_dx = jexj_dx;
 	}
 
 

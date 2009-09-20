@@ -557,7 +557,14 @@ public class ProductKcDAO extends JdbcBaseDAO {
 	 * @param nums
 	 */
 	public void updateProductKcNums(String product_id,String store_id,int nums){
-		String sql = "update product_kc set nums=" + nums + " where product_id='" + product_id + "' and store_id='" + store_id + "'";
+		
+		String sql = "select count(*) from product_kc where product_id='" + product_id + "' and store_id='" + store_id + "'";
+		
+		if(this.getJdbcTemplate().queryForInt(sql) > 0){
+			sql = "update product_kc set nums=" + nums + " where product_id='" + product_id + "' and store_id='" + store_id + "'";
+		}else{
+			sql = "insert into product_kc(product_id,store_id,nums) values('" + product_id + "','" + store_id + "'," + nums + ")";
+		}
 		this.getJdbcTemplate().update(sql);
 	}
 	

@@ -30,7 +30,7 @@ public class SerialNumDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public Page getSerialNumPage(String con, int curPage, int rowsPerPage){
-		String sql = "select * from serial_num_mng where 1=1";
+		String sql = "select seq_id,serial_num,product_id,product_name,product_xh,state,store_id,yj_flag from serial_num_mng where 1=1";
 		if(!con.equals("")){
 			sql = sql + con;
 		}

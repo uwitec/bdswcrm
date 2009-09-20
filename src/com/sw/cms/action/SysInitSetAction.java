@@ -30,6 +30,9 @@ public class SysInitSetAction extends BaseAction {
 	private File logoFile ;
 	private String logoFileFileName;
 	
+	private String title_name = "";
+	private String foot_name = "";
+	
 	
 	/**
 	 * 获取系统启用状态
@@ -134,7 +137,7 @@ public class SysInitSetAction extends BaseAction {
 			
 			if(logoFileFileName != null && !logoFileFileName.equals("")){
 				//获取当前的绝对路径
-				String filePath = ServletActionContext.getServletContext().getRealPath("\\");
+				String filePath = ServletActionContext.getServletContext().getRealPath("/");
 				String imgPath = filePath + "logo/" + logoFileFileName;
 				
 				//上传产品图片文件
@@ -156,6 +159,43 @@ public class SysInitSetAction extends BaseAction {
 			return SUCCESS;
 		}catch(Exception e){
 			log.error("保存系统LOGO失败，原因：" + e.getMessage());
+			return ERROR;
+		}
+	}
+	
+	
+	/**
+	 * 取打印设置内容
+	 * @return
+	 */
+	public String editReportSet(){
+		try{
+			Map map = sysInitSetService.getReportSet();
+			
+			if(map != null){
+				title_name = StringUtils.nullToStr(map.get("title_name"));
+				foot_name = StringUtils.nullToStr(map.get("foot_name"));
+			}
+
+			return SUCCESS;
+		}catch(Exception e){
+			log.error("编辑打印设置失败，原因：" + e.getMessage());
+			return ERROR;
+		}
+	}
+	
+	
+	/**
+	 * 保存打印设置
+	 * @return
+	 */
+	public String saveReportSet(){
+		try{
+			sysInitSetService.saveReportSet(title_name, foot_name);
+			this.setMsg("单据打印设置保存成功！");
+			return SUCCESS;
+		}catch(Exception e){
+			log.error("保存打印设置失败，原因：" + e.getMessage());
 			return ERROR;
 		}
 	}
@@ -224,6 +264,26 @@ public class SysInitSetAction extends BaseAction {
 
 	public void setLogoFileFileName(String logoFileFileName) {
 		this.logoFileFileName = logoFileFileName;
+	}
+
+
+	public String getFoot_name() {
+		return foot_name;
+	}
+
+
+	public void setFoot_name(String foot_name) {
+		this.foot_name = foot_name;
+	}
+
+
+	public String getTitle_name() {
+		return title_name;
+	}
+
+
+	public void setTitle_name(String title_name) {
+		this.title_name = title_name;
 	}
 
 }

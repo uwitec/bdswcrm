@@ -239,6 +239,27 @@ public class SysInitSetDAO extends JdbcBaseDAO {
 	
 	
 	/**
+	 * 返回报表相关设置
+	 * @return
+	 */
+	public Map getReportSet(){
+		String sql = "select * from report_set";
+		return this.getResultMap(sql);
+	}
+	
+	
+	/**
+	 * 保存报表相关设置
+	 * @param title_name
+	 * @param foot_name
+	 */
+	public void saveReportSet(String title_name,String foot_name){
+		String sql = "update report_set set title_name='" + title_name + "',foot_name='" + foot_name + "'";
+		this.getJdbcTemplate().update(sql);
+	}
+	
+	
+	/**
 	 * 包装对象
 	 * 
 	 * @author liyt

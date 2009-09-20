@@ -198,7 +198,7 @@ public class LsdDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public List getLsdProducts(String id){
-		String sql = "select a.*,b.qz_serial_num as qz_flag from lsd_product a left join product b on b.product_id=a.product_id where lsd_id='" + id + "'";		
+		String sql = "select a.*,b.qz_serial_num as qz_flag,b.dw from lsd_product a left join product b on b.product_id=a.product_id where lsd_id='" + id + "'";		
 		return this.getJdbcTemplate().query(sql, new LsdProductRowMapper());
 	}
 	
@@ -444,6 +444,7 @@ public class LsdDAO extends JdbcBaseDAO {
 			if(SqlUtil.columnIsExist(rs,"kh_cbj")) lsdProduct.setKh_cbj(rs.getDouble("kh_cbj"));
 			if(SqlUtil.columnIsExist(rs,"qz_flag")) lsdProduct.setQz_flag(rs.getString("qz_flag"));
 			if(SqlUtil.columnIsExist(rs,"gf")) lsdProduct.setGf(rs.getDouble("gf"));
+			if(SqlUtil.columnIsExist(rs,"dw")) lsdProduct.setDw(rs.getString("dw"));
 			
 			return lsdProduct;
 		}

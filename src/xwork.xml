@@ -1867,7 +1867,7 @@
         </action>
         <action name="delLxr" class="lxrAction" method="del">
              <result name="success">listLxr.html</result>
-        </action>
+        </action>       
         <!-- 联系人 -->
         
         <!-- 报修单 -->
@@ -1939,6 +1939,68 @@
         </action>           
         <action name="setSysLogo" class="sysInitSetAction" method="saveLogo">
              <result name="success" type="redirect-action">editLogo</result>
-        </action>                                                                                                               
+        </action>  
+        
+        <!-- 报表打印设置 -->
+        <action name="editReportSet" class="sysInitSetAction" method="editReportSet">
+             <result name="success">/WEB-INF/pages/init/report_set.jsp</result>
+        </action>           
+        <action name="saveReportSet" class="sysInitSetAction" method="saveReportSet">
+             <result name="success" type="redirect-action">editReportSet</result>
+        </action>
+        
+        <!-- 零售单打印 -->                                                                                                             
+        <action name="printLsd" class="lsdAction" method="printLsd">
+            <result name="success" type="jasper">
+				<param name="location">/WEB-INF/report/lsdTemplate.jasper</param>
+				<param name="dataSource">lsdProducts</param>
+				<param name="documentName">零售单[${id}]</param>
+				<param name="format">PDF</param>
+			</result>
+        </action>
+        
+        <!-- 销售订单打印 -->                                                                                                             
+        <action name="printXsd" class="xsdAction" method="printXsd">
+            <result name="success" type="jasper">
+				<param name="location">/WEB-INF/report/xsdTemplate.jasper</param>
+				<param name="dataSource">xsdProducts</param>
+				<param name="documentName">销售订单[${id}]</param>
+				<param name="format">PDF</param>
+			</result>
+        </action>    
+        
+        <!-- 成本调整，查询结果 -->
+        <action name="queryProduct" class="cbtzAction" method="getResults">
+             <result name="success">/WEB-INF/pages/cbtz/cbtz_list.jsp</result>
+        </action> 
+        <action name="editKhcb" class="cbtzAction" method="edit">
+             <result name="success">/WEB-INF/pages/cbtz/cbtz.jsp</result>
+        </action>
+        <action name="updateKhcb" class="cbtzAction" method="update">
+             <result name="success">/WEB-INF/pages/msg.jsp</result>
+              <result name="input">/WEB-INF/pages/cbtz/cbtz.jsp</result>
+             <result name="cancel" type="redirect">editKhcb.html</result>
+        </action> 
+        
+        <!-- 发送邮件 -->
+        <action name="addMail" class="mailAction" method="add">
+             <result name="success">/WEB-INF/pages/mail/mail_add.jsp</result>
+        </action>
+        <action name="sendMail" class="mailAction" method="send">
+             <result name="input">/WEB-INF/pages/mail/mail_add.jsp</result>
+              <result name="success">/WEB-INF/pages/msg_info.jsp</result>
+        </action>
+        <action name="selMail" class="mailAction" method="selLxr">
+              <result name="success">/WEB-INF/pages/mail/sel_mail.jsp</result>
+        </action>
+        <action name="editMailSet" class="mailAction" method="editMailSet">
+             <result name="success">/WEB-INF/pages/mail/mail_set.jsp</result>
+        </action>
+        <action name="updateMailSet" class="mailAction" method="updateMailSet">
+             <result name="success">/WEB-INF/pages/mail/msg.jsp</result>
+              <result name="input">/WEB-INF/pages/mail/mail_set.jsp</result>
+             <result name="cancel" type="redirect">updateMailSet.html</result>
+        </action>                
+                
     </package>
 </xwork>

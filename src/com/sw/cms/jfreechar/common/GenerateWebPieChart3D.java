@@ -47,7 +47,7 @@ public class GenerateWebPieChart3D {
 			JFreeChart chart = ChartFactory.createPieChart(title, data, true, true, false);
 			PiePlot plot = (PiePlot) chart.getPlot();
 			plot.setNoDataMessage("查询数据为空!");
-			plot.setLabelGenerator(new StandardPieSectionLabelGenerator("{0}={1}({2})", NumberFormat.getNumberInstance(), new DecimalFormat("0%")));
+			plot.setLabelGenerator(new StandardPieSectionLabelGenerator("{0}:{1}({2})", NumberFormat.getNumberInstance(), new DecimalFormat("0%")));
 			plot.setCircular(true);
 					
 			//设定背景透明度（0-1.0之间）

@@ -16,6 +16,7 @@ public class LsdProduct {
 	private double kh_cbj;             //考核成本单价
 	private String qz_flag;            //强制序列号
 	private double gf = 0;                 //工分
+	private String dw = "";
 	
 	public double getCbj() {
 		return cbj;
@@ -100,6 +101,12 @@ public class LsdProduct {
 	}
 	public void setGf(double gf) {
 		this.gf = gf;
+	}
+	public String getDw() {
+		return dw;
+	}
+	public void setDw(String dw) {
+		this.dw = dw;
 	}
 	
 }

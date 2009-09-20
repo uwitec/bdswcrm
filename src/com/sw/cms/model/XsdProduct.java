@@ -17,6 +17,7 @@ public class XsdProduct {
 	private double sjcj_xj;          //实际成交小计
 	private double kh_cbj;           //考核成本价
 	private double gf;               //工分
+	private String dw;               //单位
 	
 	private String qz_serial_num;
 	private String qz_flag;
@@ -122,6 +123,12 @@ public class XsdProduct {
 	}
 	public void setGf(double gf) {
 		this.gf = gf;
+	}
+	public String getDw() {
+		return dw;
+	}
+	public void setDw(String dw) {
+		this.dw = dw;
 	}
 
 }
