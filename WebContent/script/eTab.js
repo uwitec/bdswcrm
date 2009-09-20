@@ -1,6 +1,6 @@
 ﻿/**
  * @author CC
- */
+ */ 
 
 var bba =null;
 var framesName=new Array();
@@ -263,8 +263,9 @@ eTab = function()
 			var tabSpan = document.createElement("span");
 			tabSpan.className = "right";
 			tabSpan.appendChild(tabSpanContent);
-			addobj.appendChild(tabSpan);
 			
+			addobj.appendChild(tabSpan);
+			addobj.onDblClick = closeCurrentTab;
 				
 			menuNav.appendChild(addobj);
 			
@@ -285,19 +286,19 @@ eTab = function()
 			ifm.frameBorder = 0; 			
 			ifm.id=tabTitle;
 			ifm.style.display='none';
-			ifm.attachEvent("onload",autoChange)
+			ifm.attachEvent("onload",autoChange);
 
 		
 			addobj.appendChild(ifm);			
 			framesName.push(tabTitle);			
 			
 			var strUrl = url;
-			if(strUrl.indexOf('?')>0)		
-			{
-				strUrl=strUrl+"&tmp="+Math.random();
-			}else{
-				strUrl=strUrl+"?tmp="+Math.random();
-			}
+			//if(strUrl.indexOf('?')>0)		
+			//{
+			//	strUrl=strUrl+"&tmp="+Math.random();
+			//}else{
+			//	strUrl=strUrl+"?tmp="+Math.random();
+			//}
 			ifm.src = strUrl;
 			this.index = this.total;
 		}
@@ -414,7 +415,6 @@ function tabGetCookie(name)
 }
 
 function autoChange(){
-	
 	var LeftMenu=document.getElementById('tdService');
 	var LeftWidth=172;		
 	if(LeftMenu.style.display=='none')
