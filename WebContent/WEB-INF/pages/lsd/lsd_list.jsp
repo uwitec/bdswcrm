@@ -89,6 +89,13 @@ String orderType = (String)VS.findValue("orderType");
 		document.myform.action = "listLsd.html";
 		document.myform.submit();
 	}
+	
+	function print(id){
+		var destination = "printLsd.html?id=" + id;
+		var fea ='width=850,height=600,left=' + (screen.availWidth-850)/2 + ',top=' + (screen.availHeight-600)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		
+		window.open(destination,'零售单打印',fea);				
+	}	
 			
 </script>
 </head>
@@ -104,22 +111,37 @@ String orderType = (String)VS.findValue("orderType");
 			<img src="images/import.gif" align="absmiddle" border="0">&nbsp;<a href="#" class="xxlb" onclick="refreshPage();"> 刷 新 </a>	</td>			
 	</tr>
 	<tr>
-		<td class="search" align="left" colspan="2">&nbsp;&nbsp;
-			客户名称：<input type="text" name="client_name" value="<%=client_name %>">&nbsp;&nbsp;
-			时间：<input type="text" name="creatdate" value="<%=creatdate %>" size="8" readonly>
-			<img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.myform.creatdate); return false;">&nbsp;至&nbsp;
-			<input type="text" name="creatdate2" value="<%=creatdate2 %>" size="8" readonly>
-			<img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.myform.creatdate2); return false;">			
-			&nbsp;&nbsp;
-			零售单状态：<select name="state">
-				<option value=""></option>
-				<option value="已保存" <%if(state.equals("已保存")) out.print("selected"); %>>已保存</option>
-				<option value="已提交" <%if(state.equals("已提交")) out.print("selected"); %>>已成交</option>
-			</select>&nbsp;&nbsp;
-			销售员：<input type="text" name="xsry_name" value="<%=xsry_name %>" size="10">
-			<input type="submit" name="buttonCx" value=" 查询 " class="css_button">
-			<input type="button" name="buttonQk" value=" 清空 " class="css_button" onclick="clearAll();">
-		</td>				
+		<td class="search" align="left" colspan="2">
+			<table width="100%" border="0" style="font-size: 12px">
+				<tr>
+					<td align="center">客户名称：</td>
+					<td><input type="text" name="client_name" value="<%=client_name %>" size="25"></td>
+					<td align="center">时　间：</td>
+					<td>
+						<input type="text" name="creatdate" value="<%=creatdate %>" size="10" readonly>
+						<img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.myform.creatdate); return false;">&nbsp;至&nbsp;
+						<input type="text" name="creatdate2" value="<%=creatdate2 %>" size="10" readonly>
+						<img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.myform.creatdate2); return false;">								
+					</td>
+					<td rowspan="2">
+						<input type="submit" name="buttonCx" value=" 查询 " class="css_button">
+						<input type="button" name="buttonQk" value=" 清空 " class="css_button" onclick="clearAll();">					
+					</td>
+				</tr>			
+				<tr>
+					<td align="center">状　　态：</td>
+					<td>
+						<select name="state">
+							<option value=""></option>
+							<option value="已保存" <%if(state.equals("已保存")) out.print("selected"); %>>已保存</option>
+							<option value="已提交" <%if(state.equals("已提交")) out.print("selected"); %>>已成交</option>
+						</select>
+					</td>
+					<td align="center">销售员：</td>
+					<td><input type="text" name="xsry_name" value="<%=xsry_name %>" size="15"></td>
+				</tr>
+			</table>
+		</td>
 	</tr>		
 </table>
 <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0" border="1" id="selTable">
@@ -189,6 +211,8 @@ String orderType = (String)VS.findValue("orderType");
 		<%	
 		}		
 		%>
+		&nbsp;&nbsp;&nbsp;&nbsp;	
+		<a href="#" onclick="print('<%=StringUtils.nullToStr(lsd.get("id")) %>');"><img src="images/print.png" align="absmiddle" title="打印零售单" border="0" style="cursor:hand"></a>	
 		</td>
 	</tr>
 	

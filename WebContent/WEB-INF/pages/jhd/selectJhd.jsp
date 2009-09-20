@@ -104,7 +104,7 @@ function sel(jhd_id,gysbh,yfje){
 		<td><%=StringUtils.nullToStr(jhd.getId()) %></td>
 		<td><%=StringUtils.nullToStr(jhd.getGysmc()) %></td>
 		<td><%=StringUtils.nullToStr(jhd.getState()) %></td>
-		<td><%=StringUtils.nullToStr(jhd.getFzr()) %></td>
+		<td><%=StaticParamDo.getRealNameById(jhd.getFzr()) %></td>
 		<td><%=JMath.round(jhd.getTotal(),2) %></td>
 		<td><%=StringUtils.nullToStr(jhd.getCg_date()) %></td>
 	</tr>

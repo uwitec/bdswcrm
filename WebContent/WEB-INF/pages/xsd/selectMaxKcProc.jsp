@@ -45,7 +45,7 @@ List kindList = (List)VS.findValue("kindList");
 	}	
 
 
-	function sel(){
+	function sel(sel_flag){
 		var k = 0;
 		var allCount = window.opener.allCount;  //当前存在的最大行序号
 		//alert("当前存在的最大行序号" + allCount);
@@ -121,7 +121,9 @@ List kindList = (List)VS.findValue("kindList");
 
 		}
 		
-		window.close();
+		if(sel_flag == "2"){
+			window.close();
+		}
 	}
 	
 </script>
@@ -131,11 +133,8 @@ List kindList = (List)VS.findValue("kindList");
 <input type="hidden" name="chk_id" value="">
 <table width="100%"  align="center"class="chart_list" cellpadding="0" cellspacing="0">
 	<tr>
-		<td class="csstitle" align="left" width="100%">&nbsp;&nbsp;&nbsp;&nbsp;<b>选择库存商品</b></td>			
-	</tr>
-	<tr>
-		<td class="search" align="left" colspan="2">&nbsp;&nbsp;
-			商品：<input type="text" name="product_name" value="<%=product_name %>" size="20">&nbsp;&nbsp;
+		<td class="csstitle" align="left" width="100%">
+			&nbsp;&nbsp;&nbsp;&nbsp;商品：<input type="text" name="product_name" value="<%=product_name %>" size="20">&nbsp;&nbsp;
 			类别：
 			<select name="product_kind">
 				<option value=""></option>
@@ -156,23 +155,23 @@ List kindList = (List)VS.findValue("kindList");
 				%>
 			</select>&nbsp;&nbsp;
 			<input type="submit" name="buttonCx" value=" 查询 " class="css_button">
-			<input type="button" name="buttonQk" value=" 清空 " class="css_button" onclick="clearAll();">
-		</td>				
-	</tr>	
+			<input type="button" name="buttonQk" value=" 清空 " class="css_button" onclick="clearAll();">		
+		</td>			
+	</tr>
 </table>
 <table width="100%"  align="center"  border="1"   class="chart_list" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
 		<td><input type="checkbox" name="allCheck" onclick="selectAll();"></td>	
-		<td>商品名称</td>
-		<td>规格</td>		
-		<td>库存数量</td>
-		<td>考核成本</td>
-		<td>零售报价</td>
-		<td>零售限价</td>
-		<td>代理价</td>
-		<td>分销限价</td>
-		<td>强制序列号</td>
+		<td nowrap>商品名称</td>
+		<td nowrap>规格</td>		
+		<td nowrap>库存数量</td>
+		<td nowrap>考核成本</td>
+		<td nowrap>零售报价</td>
+		<td nowrap>零售限价</td>
+		<td nowrap>代理价</td>
+		<td nowrap>分销限价</td>
+		<td nowrap>强制序列号</td>
 	</tr>
 	</thead>
 	<%
@@ -194,28 +193,30 @@ List kindList = (List)VS.findValue("kindList");
 	%>
 		<tr class="a1" onmouseover="this.className='a2';" onmouseout="this.className='a1';">
 			<td><input type="checkbox" name="chk_id" value="<%=vl %>"></td>
-			<td><%=StringUtils.nullToStr(map.get("product_name")) %></td>
-			<td><%=StringUtils.nullToStr(map.get("product_xh")) %></td>			
-			<td><%=StringUtils.nullToStr(map.get("kc_nums")) %></td>
-			<td><%=JMath.round(khcbj,2) %></td>
-			<td><%=JMath.round(lsbj,2) %></td>
-			<td><%=JMath.round(lsxj,2) %></td>
-			<td><%=JMath.round(fxbj,2) %></td>
-			<td><%=JMath.round(fxxj,2) %></td>
+			<td align="left"><%=StringUtils.nullToStr(map.get("product_name")) %></td>
+			<td align="left"><%=StringUtils.nullToStr(map.get("product_xh")) %></td>			
+			<td nowrap><%=StringUtils.nullToStr(map.get("kc_nums")) %></td>
+			<td nowrap align="right"><%=JMath.round(khcbj,2) %></td>
+			<td nowrap align="right"><%=JMath.round(lsbj,2) %></td>
+			<td nowrap align="right"><%=JMath.round(lsxj,2) %></td>
+			<td nowrap align="right"><%=JMath.round(fxbj,2) %></td>
+			<td nowrap align="right"><%=JMath.round(fxxj,2) %></td>
 			<td><%=StringUtils.nullToStr(map.get("qz_serial_num")) %></td>
 		</tr>
 	
 	<%
 		}
 	}
-	%>
+	%>	
 		<tr>
 			<td colspan="10" class="page"><%=productPage.getPageScript() %></td>
 		</tr>	
-		<tr>
-			<td colspan="10"><input type="button" name="buttonQd" value=" 确定 " onclick="sel();" class="css_button2"></td>
-		</tr>
 </table>
+<center><BR>
+	<input type="button" name="buttonQd" value="确认并继续选择" onclick="sel('1');" class="css_button4">
+	<input type="button" name="buttonQd" value="确认选择并关闭" onclick="sel('2');" class="css_button4">
+	<input type="button" name="buttonQd" value=" 关闭 " onclick="window.close();" class="css_button2">
+</center>
 </form>
 </body>
 </html>

@@ -553,7 +553,21 @@
         <property name="target">
           <bean class="com.sw.cms.service.FyTypeService" autowire="byName"/>  
         </property>
-    </bean>        
+    </bean> 
+    
+    <!-- 成本调整 -->
+    <bean id="cbtzService" parent="baseTransaction">
+        <property name="target">
+          <bean class="com.sw.cms.service.CbtzService" autowire="byName"/>  
+        </property>
+    </bean>
+    
+    <!-- 邮件管理 -->
+    <bean id="mailService" parent="baseTransaction">
+        <property name="target">
+          <bean class="com.sw.cms.service.MailService" autowire="byName"/>  
+        </property>
+    </bean>               
                
 </beans>
 

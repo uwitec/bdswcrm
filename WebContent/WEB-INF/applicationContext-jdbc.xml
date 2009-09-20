@@ -425,7 +425,17 @@
      <!-- 费用类别 -->
      <bean id="fyTypeDao" class="com.sw.cms.dao.FyTypeDAO">
         <property name="jdbcTemplate" ref="jdbcTemplate"/>
-     </bean>         
+     </bean>  
+     
+     <!-- 成本调整 -->
+     <bean id="cbtzDao" class="com.sw.cms.dao.CbtzDAO">
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+     </bean> 
+     
+     <!-- 邮件管理 -->
+     <bean id="mailDao" class="com.sw.cms.dao.MailDAO">
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+     </bean>                  
                                
 </beans>
 

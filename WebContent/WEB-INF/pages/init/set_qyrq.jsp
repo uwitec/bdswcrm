@@ -45,9 +45,9 @@
 <table width="100%"  align="center"  border="1"   class="chart_info" cellpadding="0" cellspacing="0">
 		<tr>
 			<td class="a2"><b>第一步</b>、首先清空系统历史数据，清空历史数据请点击“清空系统数据”链接。&nbsp;
-				<ww:if test="flag == 0">
+				
 				<a href='#' onclick="clearData();">清空系统数据</a>
-				</ww:if>
+			
 			</td>			
 		</tr>
 		<tr>

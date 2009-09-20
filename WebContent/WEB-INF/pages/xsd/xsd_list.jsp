@@ -27,7 +27,13 @@ String orderType = (String)VS.findValue("orderType");
 <title>销售出库单管理</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
+<style>
+	.selectTip{background-color:#009;color:#fff;}
+</style>
 <script language='JavaScript' src="js/date.js"></script>
+<script language='JavaScript' src="js/selClient.js"></script>
+<script language='JavaScript' src="js/selJsr.js"></script>
+<script type="text/javascript" src="js/prototype-1.4.0.js"></script>
 <script type="text/javascript">
 	
 	function openWin(id){
@@ -44,10 +50,12 @@ String orderType = (String)VS.findValue("orderType");
 	}
 	
 	function clearAll(){
-		document.myform.client_name.value = "";
+		document.getElementById("client_name").value = "";
+		document.getElementById("client_id").value = "";
+		document.getElementById("brand").value = "";
+		document.getElementById("fzr").value = "";			
 		document.myform.creatdate1.value = "";
 		document.myform.creatdate2.value = "";
-		document.myform.fzr.value = "";
 		document.myform.state.value = "";
 		document.myform.skxs.value = "";
 	}
@@ -94,9 +102,20 @@ String orderType = (String)VS.findValue("orderType");
 		document.myform.action = "listXsd.html";
 		document.myform.submit();
 	}
+	
+	function print(id){
+		var destination = "printXsd.html?id=" + id;
+		var fea ='width=850,height=600,left=' + (screen.availWidth-850)/2 + ',top=' + (screen.availHeight-600)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		
+		window.open(destination,'销售订单打印',fea);				
+	}	
+	
+	function subForm(){
+		document.myform.submit();
+	}	
 </script>
 </head>
-<body>
+<body onload="initFzrTip();initClientTip();">
 <form name="myform" action="listXsd.html" method="post">
 <input type="hidden" name="orderType" value="<%=orderType %>">
 <input type="hidden" name="orderName" value="<%=orderName %>">
@@ -108,28 +127,55 @@ String orderType = (String)VS.findValue("orderType");
 			<img src="images/import.gif" align="absmiddle" border="0">&nbsp;<a href="#" onclick="refreshPage();" class="xxlb"> 刷 新 </a>	</td>			
 	</tr>
 	<tr>
-		<td class="search" align="left" colspan="2">&nbsp;
-			客户名称：<input type="text" name="client_name" value="<%=client_name %>" size="10">&nbsp;
-			日期：<input type="text" name="creatdate1" value="<%=creatdate1 %>" size="8" readonly>	
-			<img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.myform.creatdate1); return false;">
-			&nbsp;至&nbsp;
-			<input type="text" name="creatdate2" value="<%=creatdate2 %>" size="8" readonly>	
-			<img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.myform.creatdate2); return false;">
-			&nbsp;
-			销售员：<input type="text" name="fzr" value="<%=fzr %>" size="10">&nbsp;&nbsp;
-			订单状态：<select name="state">
-				<option value=""></option>
-				<option value="已保存" <%if(state.equals("已保存")) out.print("selected"); %>>已保存</option>
-				<option value="已提交" <%if(state.equals("已提交")) out.print("selected"); %>>已提交</option>
-				<option value="已出库" <%if(state.equals("已出库")) out.print("selected"); %>>已出库</option>
-			</select>&nbsp;&nbsp;
-			回款状态：<select name="skxs">
-				<option value=""></option>
-				<option value="未收" <%if(skxs.equals("未收")) out.print("selected"); %>>未收</option>
-				<option value="部分已收" <%if(skxs.equals("部分已收")) out.print("selected"); %>>部分已收</option>
-				<option value="已收" <%if(skxs.equals("已收")) out.print("selected"); %>>已收</option>
-			</select>
-			<input type="submit" name="buttonCx" value="查询" class="css_button"><input type="button" name="buttonQk" value="清空" class="css_button" onclick="clearAll();">
+		<td class="search" align="left" colspan="2" width="100%">
+			<table width="100%" border="0" style="font-size: 12px">
+				<tr>
+					<td align="center">客户名称：</td>
+					<td>
+						<input type="text" name="client_brand" onblur="setClientValue();" id="client_name" value="<%=StaticParamDo.getClientNameById(client_name) %>" size="30" maxlength="50" >
+						<input type="hidden" name="client_name" id="client_id" value="<%=client_name %>">
+						<div id="clientsTip" style="height:12px;position:absolute;width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>				
+					</td>
+					<td align="center">日　　期：</td>
+					<td colspan="3">
+						<input type="text" name="creatdate1" value="<%=creatdate1 %>" size="10" readonly>	
+						<img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.myform.creatdate1); return false;">
+						&nbsp;至&nbsp;
+						<input type="text" name="creatdate2" value="<%=creatdate2 %>" size="10" readonly>	
+						<img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.myform.creatdate2); return false;">					
+					</td>
+					<td rowspan="2" width="15%" align="center">
+						<input type="button" name="buttonCx" value=" 查询 " class="css_button" onclick="subForm();">
+						<input type="button" name="buttonQk" value=" 清空 " class="css_button" onclick="clearAll();">		
+					</td>
+				</tr>			
+				<tr>
+					<td width="10%" align="center">销 售 员：</td>
+					<td width="20%">
+						<input  id="brand" name="xsry_brand" type="text" length="20" onblur="setValue();" value="<%=StaticParamDo.getRealNameById(fzr) %>"/> 
+						<div id="brandTip"  style="height:12px;position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+						<input type="hidden" name="fzr" id="fzr" value="<%=fzr%>"/>
+					</td>
+					<td width="10%" align="center">订单状态：</td>
+					<td width="20%">
+						<select name="state">
+							<option value=""></option>
+							<option value="已保存" <%if(state.equals("已保存")) out.print("selected"); %>>已保存</option>
+							<option value="已提交" <%if(state.equals("已提交")) out.print("selected"); %>>已提交</option>
+							<option value="已出库" <%if(state.equals("已出库")) out.print("selected"); %>>已出库</option>
+						</select>					
+					</td>
+					<td width="10%" align="center">回款状态：</td>										
+					<td width="15%">
+						<select name="skxs">
+							<option value=""></option>
+							<option value="未收" <%if(skxs.equals("未收")) out.print("selected"); %>>未收</option>
+							<option value="部分已收" <%if(skxs.equals("部分已收")) out.print("selected"); %>>部分已收</option>
+							<option value="已收" <%if(skxs.equals("已收")) out.print("selected"); %>>已收</option>
+						</select>					
+					</td>
+				</tr>
+			</table>
 		</td>				
 	</tr>		
 </table>
@@ -185,16 +231,18 @@ String orderType = (String)VS.findValue("orderType");
 		<%
 		if(!StringUtils.nullToStr(xsd.get("state")).equals("已保存") || sp_state.equals("2")){
 		%>
-			<a href="#" onclick="openWin('<%=StringUtils.nullToStr(xsd.get("id")) %>');"><img src="images/view.gif" align="absmiddle" title="查看销售单信息" border="0" style="cursor:hand"></a>
+			<a href="#" onclick="openWin('<%=StringUtils.nullToStr(xsd.get("id")) %>');"><img src="images/view.gif" align="absmiddle" title="查看销售订单信息" border="0" style="cursor:hand"></a>
 		<%	
 		}else{
 		%>
-			<a href="#" onclick="edit('<%=StringUtils.nullToStr(xsd.get("id")) %>');"><img src="images/modify.gif" align="absmiddle" title="修改销售单信息" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
-			<a href="#" onclick="openWin('<%=StringUtils.nullToStr(xsd.get("id")) %>');"><img src="images/view.gif" align="absmiddle" title="查看销售单信息" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
-			<a href="#" onclick="del('<%=StringUtils.nullToStr(xsd.get("id")) %>');"><img src="images/del.gif" align="absmiddle" title="删除该销售单" border="0" style="cursor:hand"></a>		
+			<a href="#" onclick="edit('<%=StringUtils.nullToStr(xsd.get("id")) %>');"><img src="images/modify.gif" align="absmiddle" title="修改销售订单信息" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
+			<a href="#" onclick="openWin('<%=StringUtils.nullToStr(xsd.get("id")) %>');"><img src="images/view.gif" align="absmiddle" title="查看销售订单信息" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
+			<a href="#" onclick="del('<%=StringUtils.nullToStr(xsd.get("id")) %>');"><img src="images/del.gif" align="absmiddle" title="删除该销售订单" border="0" style="cursor:hand"></a>		
 		<%
 		}		
 		%>
+		&nbsp;&nbsp;&nbsp;&nbsp;	
+		<a href="#" onclick="print('<%=StringUtils.nullToStr(xsd.get("id")) %>');"><img src="images/print.png" align="absmiddle" title="打印销售订单" border="0" style="cursor:hand"></a>			
 		</td>
 	</tr>
 	

@@ -247,9 +247,9 @@ List dspXsdList = (List)VS.findValue("dspXsdList");
 						String jsr = StaticParamDo.getRealNameById(info.getCzr());
 					%>				
 					<tr>
-						<td width="70% height="23">&nbsp;<A class=xxlb href="#" onclick="openNbggWin('<%=id %>');" title="<%=title %>"><%=subTitle %></A></td>
-						<td width="15%" height="23"><%=jsr %></td>
-						<td width="15%" height="23" colspan="2">【<%=pub_date %>】</td>
+						<td width="60% height="23">&nbsp;<A class=xxlb href="#" onclick="openNbggWin('<%=id %>');" title="<%=title %>"><%=subTitle %></A></td>
+						<td width="20%" height="23"><%=jsr %></td>
+						<td width="20%" height="23" colspan="2">【<%=pub_date %>】</td>
 					</tr>
 					<%
 					}

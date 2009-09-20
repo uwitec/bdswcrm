@@ -36,7 +36,7 @@ int menu_index = 0;
 			tdService.style.display='none';
 			tdService2.style.display='none';
 			splitImg.src = "index_images/p_2.gif";
-		}	
+		}
 	}
 </script>
 </HEAD>
@@ -56,7 +56,7 @@ int menu_index = 0;
 		</td>
 		<td class=HeadTab_Bottom  vAlign=center align=left></td>
 		<td class=HeadTab_Bottom  vAlign=center align=left>
-			<table id="tabTable" summary="" border="0" width="812" cellpadding="0" cellspacing="0">
+			<table id="tabTable" summary="" border="0" cellpadding="0" cellspacing="0">
 				<tr>
 					<td nowrap>
 						<div class="tabHeader_div">

@@ -144,4 +144,8 @@
 	
 	<bean id="fyTypeAction" class="com.sw.cms.action.FyTypeAction" scope="prototype" autowire="byName"/>
 	
+	<bean id="cbtzAction" class="com.sw.cms.action.CbtzAction" scope="prototype" autowire="byName"/>
+	
+	<bean id="mailAction" class="com.sw.cms.action.MailAction" scope="prototype" autowire="byName"/>
+	
 </beans>

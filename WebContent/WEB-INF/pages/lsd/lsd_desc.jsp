@@ -56,12 +56,12 @@ List results = (List)VS.findValue("lsdProducts");
 		LsdProduct lsdProduct = (LsdProduct)it.next();
 	%>
 	<tr class="a1" onmousedown="trSelectChangeCss()">
-		<td><%=StringUtils.nullToStr(lsdProduct.getProduct_name()) %></td>
-		<td><%=StringUtils.nullToStr(lsdProduct.getProduct_xh()) %></td>
-		<td><%=JMath.round(lsdProduct.getPrice(),2) %></td>
+		<td align="left">&nbsp;<%=StringUtils.nullToStr(lsdProduct.getProduct_name()) %></td>
+		<td align="left">&nbsp;<%=StringUtils.nullToStr(lsdProduct.getProduct_xh()) %></td>
+		<td align="right"><%=JMath.round(lsdProduct.getPrice(),2) %>&nbsp;</td>
 		<td><%=StringUtils.nullToStr(lsdProduct.getNums()) %></td>
-		<td><%=JMath.round(lsdProduct.getXj(),2) %></td>
-		<td><%=StringUtils.nullToStr(lsdProduct.getQz_serial_num()) %></td>
+		<td align="right"><%=JMath.round(lsdProduct.getXj(),2) %>&nbsp;</td>
+		<td align="left">&nbsp;<%=StringUtils.nullToStr(lsdProduct.getQz_serial_num()) %></td>
 		<td><%=StringUtils.nullToStr(lsdProduct.getRemark()) %></td>
 	</tr>
 	

@@ -32,14 +32,15 @@
     
     
     <!-- e-mail -->
-    <bean id="sendMail" class="com.sw.cms.sendmail.SendMail">
+    <bean id="sendMail" class="com.sw.cms.sendmail.SendMail" autowire="byName">
     	<property name="stmpHost" value="${mail.hostname}"/>
     	<property name="name" value="${mail.username}"/>
     	<property name="password" value="${mail.password}"/>
     	<property name="from" value="${mail.from}"/>
+    	<property name="ssl" value="${mail.need.ssl}"/>
+    	<property name="port" value="${mail.smtp.port}"/>
     </bean>
-    
-    
+     
      <!-- system source -->
     <bean id="sysSource" class="com.sw.cms.source.SysSource">
     	<property name="page_size" value="${page.size}"/>
@@ -62,6 +63,7 @@
     		</map>
     	</property>
     </bean>
+    
     <!-- 期初调度计划触发器 -->
     <bean id="cronInitTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
     	<property name="jobDetail">

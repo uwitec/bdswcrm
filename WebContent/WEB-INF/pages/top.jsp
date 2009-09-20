@@ -163,6 +163,13 @@ String logo_url = (String)VS.findValue("logo_url");
 				eval(sndObj+((sndAction=='stop')?'.stop()':'.play()')); 　
 			}
 		}
+	}	
+	
+	//打开未读消息窗口
+	function sendMail(){
+		var destination = "addMail.html";
+		var fea ='width=850,height=650,left=' + (screen.availWidth-850)/2 + ',top=' + (screen.availHeight-650)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		window.open(destination,'发送邮件',fea);			
 	}			
 </script>
 </head>
@@ -198,17 +205,17 @@ String logo_url = (String)VS.findValue("logo_url");
            		<TR>
 					<TD>&nbsp;</TD>
 					<TD align=middle width=10><IMG src="index_images/head_right.gif"></TD>
+					<TD noWrap align=middle width=85 bgColor=#bcc2d4><IMG  height=15  src="index_images/index_home.gif" width=15 align=absMiddle> <A class=TitleMenu  href="#" onclick="parent.location='thk_main.html';">首 页</A></TD>		
+					<TD class=NormalWhite vlign=middle width=10 bgColor=#bcc2d4>|</TD>
 					<TD noWrap align=middle vlign=middle width=85 bgColor=#bcc2d4><div id="colortab" class="ddcolortabs">
 						<IMG id="msgImage" src="images/msg_1.gif" align=absMiddle>
 						<A class=TitleMenu  href="#" rel="dropmenu1_a">系统消息</A></div>
 					</TD>
 					<TD class=NormalWhite vlign=middle width=10 bgColor=#bcc2d4>|</TD>
-					<TD noWrap align=middle width=85 bgColor=#bcc2d4><IMG  height=15  src="index_images/index_home.gif" width=15 align=absMiddle> <A class=TitleMenu  href="#" onclick="parent.location='thk_main.html';">首 页</A></TD>
+					<TD noWrap align=middle width=85 bgColor=#bcc2d4><IMG  height=15  src="index_images/stock.gif" width=15 align=absMiddle> <A class=TitleMenu  href="#" onclick="sendMail();">发送邮件</A></TD>			
 					<TD class=NormalWhite vlign=middle width=10 bgColor=#bcc2d4>|</TD>					
 					<TD class=NormalWhite noWrap align=middle width=85 bgColor=#bcc2d4><IMG height=15 src="index_images/index_clock.gif" width=15 align=absMiddle><A class=TitleMenu href="#" onclick="parent.addtabFmMenu('修改密码','changePass.html','');">修改密码</A></TD>
 					<TD class=NormalWhite vlign=middle width=10 bgColor=#bcc2d4>|</TD>
-					<TD class=NormalWhite noWrap align=middle width=85 bgColor=#bcc2d4><IMG height=15 src="index_images/stock.gif" width=15 align=absMiddle><A class=TitleMenu target="_blank" href="http://cid-d935f7492a1aebc8.skydrive.live.com/browse.aspx/.Public">资料下载</A></TD>
-					<TD class=NormalWhite vlign=middle width=10 bgColor=#bcc2d4>|</TD>					
 					<TD class=NormalWhite noWrap align=middle width=85 bgColor=#bcc2d4><IMG height=15 src="index_images/out_system.gif" width=15 align=absMiddle><A class=TitleMenu href="#" onclick="logout();">安全退出</A></TD>
 				</TR>
 				</TBODY>

@@ -41,13 +41,11 @@ List results = (List)VS.findValue("xsdProducts");
 <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0" border="1" id="selTable">
 	<thead>
 	<tr>
-		<td width="15%">产品名称</td>
-		<td width="15%">规格</td>
-		<td width="5%">价格</td>
-		<td width="5%">价格调整</td>
-		<td width="5%">数量</td>
-		<td width="5%">小计</td>
-		<td width="35%">序列号</td>
+		<td width="30%">产品名称</td>
+		<td width="25%">规格</td>
+		<td width="10%">价格</td>
+		<td width="10%">数量</td>
+		<td width="10%">小计</td>
 		<td width="15%">备注</td>
 	</tr>
 	</thead>
@@ -58,13 +56,11 @@ List results = (List)VS.findValue("xsdProducts");
 		XsdProduct xsdProduct = (XsdProduct)it.next();
 	%>
 	<tr class="a1" onmousedown="trSelectChangeCss()">
-		<td><%=StringUtils.nullToStr(xsdProduct.getProduct_name()) %></td>
-		<td><%=StringUtils.nullToStr(xsdProduct.getProduct_xh()) %></td>
-		<td><%=JMath.round(xsdProduct.getPrice(),2) %></td>
-		<td><%=JMath.round(xsdProduct.getJgtz(),2) %></td>
+		<td align="left"><%=StringUtils.nullToStr(xsdProduct.getProduct_name()) %></td>
+		<td align="left"><%=StringUtils.nullToStr(xsdProduct.getProduct_xh()) %></td>
+		<td align="right"><%=JMath.round(xsdProduct.getPrice(),2) %>&nbsp;</td>
 		<td><%=StringUtils.nullToStr(xsdProduct.getNums()) %></td>
-		<td><%=JMath.round(xsdProduct.getXj(),2) %></td>
-		<td><%=StringUtils.nullToStr(xsdProduct.getQz_serial_num()) %></td>
+		<td align="right"><%=JMath.round(xsdProduct.getXj(),2) %>&nbsp;</td>
 		<td><%=StringUtils.nullToStr(xsdProduct.getRemark()) %></td>
 	</tr>
 	
