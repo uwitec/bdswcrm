@@ -1955,9 +1955,8 @@
         <!-- 零售单打印 -->                                                                                                             
         <action name="printLsd" class="lsdAction" method="printLsd">
             <result name="success" type="jasper">
-				<param name="location">/WEB-INF/report/lsdTemplate.jasper</param>
+				<param name="location">/WEB-INF/report/xsdTemplate.jasper</param>
 				<param name="dataSource">lsdProducts</param>
-				<param name="documentName">零售单[${id}]</param>
 				<param name="format">PDF</param>
 			</result>
         </action>
@@ -1967,7 +1966,6 @@
             <result name="success" type="jasper">
 				<param name="location">/WEB-INF/report/xsdTemplate.jasper</param>
 				<param name="dataSource">xsdProducts</param>
-				<param name="documentName">销售订单[${id}]</param>
 				<param name="format">PDF</param>
 			</result>
         </action>    
