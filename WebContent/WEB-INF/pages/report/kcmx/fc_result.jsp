@@ -95,11 +95,12 @@ if(productList != null && productList.size()>0){
 					Map storeMap = (Map)store_list.get(k);
 					
 					String num = StringUtils.nullToStr(fckcStatResult.get(StringUtils.nullToStr(map.get("product_id")) + StringUtils.nullToStr(storeMap.get("id"))));
-					if(num.equals("")){
-						num = "0";
+					if(num.equals("0")){
+						num = "";
 					}
-					
-					total += new Integer(num);
+					if(!num.equals("")){
+						total += new Integer(num);
+					}
 			%>
 			<TD class=ReportItemXh><%=num %>&nbsp;</TD>
 			<%		

@@ -199,5 +199,71 @@ public class YsmxReportDAO extends JdbcBaseDAO {
 		
 		return yushouk;
 	}
+	
+	
+	/**
+	 * 客户应收对账单
+	 * @param client_name
+	 * @param start_date
+	 * @param end_date
+	 * @return
+	 */
+	public List getYsDzd(String client_name,String start_date,String end_date){
+		String sql = "";
+		
+		//销售单列表
+		String xsd_sql = "select DATE_FORMAT(cz_date,'%Y-%m-%d') as creatdate,'销售' as xwtype,id as dj_id,sjcjje as je,cz_date from xsd where state='已出库'";
+		if(!start_date.equals("")){
+			xsd_sql = xsd_sql + " and DATE_FORMAT(cz_date,'%Y-%m-%d')>='" + start_date + "'";
+		}
+		if(!end_date.equals("")){
+			xsd_sql = xsd_sql + " and DATE_FORMAT(cz_date,'%Y-%m-%d')<='" + (end_date + " 23:59:59") + "'";
+		}
+		if(!client_name.equals("")){
+			xsd_sql = xsd_sql + " and client_name = '" + client_name + "'";
+		}
+		
+		//销售退货
+		String thd_sql = "select DATE_FORMAT(cz_date,'%Y-%m-%d') as creatdate,'销售退货' as xwtype,thd_id as dj_id,(0-thdje) as je,cz_date from thd where state='已入库'";
+		if(!start_date.equals("")){
+			thd_sql = thd_sql + " and DATE_FORMAT(cz_date,'%Y-%m-%d')>='" + start_date + "'";
+		}
+		if(!end_date.equals("")){
+			thd_sql = thd_sql + " and DATE_FORMAT(cz_date,'%Y-%m-%d')<='" + (end_date + " 23:59:59") + "'";
+		}
+		if(!client_name.equals("")){
+			thd_sql = thd_sql + " and client_name = '" + client_name + "'";
+		}
+		
+		//销售收款
+		String xssk_sql = "select DATE_FORMAT(cz_date,'%Y-%m-%d') as creatdate,'收款' as xwtype,id as dj_id,skje as je,cz_date from xssk where state='已提交'";
+		if(!start_date.equals("")){
+			xssk_sql = xssk_sql + " and DATE_FORMAT(cz_date,'%Y-%m-%d')>='" + start_date + "'";
+		}
+		if(!end_date.equals("")){
+			xssk_sql = xssk_sql + " and DATE_FORMAT(cz_date,'%Y-%m-%d')<='" + (end_date + " 23:59:59") + "'";
+		}
+		if(!client_name.equals("")){
+			xssk_sql = xssk_sql + " and client_name = '" + client_name + "'";
+		}	
+		
+		//往来调账(应收)
+		String wltz_ys_sql = "select DATE_FORMAT(cz_date,'%Y-%m-%d') as creatdate,'往来调账(应收)' as xwtype,id as dj_id,pzje as je,cz_date from pz where state='已提交' and type='应收'";
+		if(!start_date.equals("")){
+			wltz_ys_sql = wltz_ys_sql + " and DATE_FORMAT(cz_date,'%Y-%m-%d')>='" + start_date + "'";
+		}
+		if(!end_date.equals("")){
+			wltz_ys_sql = wltz_ys_sql + " and DATE_FORMAT(cz_date,'%Y-%m-%d')<='" + (end_date + " 23:59:59") + "'";
+		}
+		if(!client_name.equals("")){
+			wltz_ys_sql = wltz_ys_sql + " and client_name = '" + client_name + "'";
+		}
+		
+		
+		
+		sql = "select * from ((" + xsd_sql + ") union (" + thd_sql + ") union (" + xssk_sql + ")  union (" + wltz_ys_sql + ")) m order by cz_date asc";
+		
+		return this.getResultList(sql);
+	}
 
 }

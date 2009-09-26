@@ -133,6 +133,12 @@ public class MailAction extends BaseAction {
 			
 			wldwlx.add(map);
 			
+			Map<String,String> map2 = new HashMap<String,String>();
+			map2.put("xm_id", "GSYG_TYPE");
+			map2.put("xm_name", "公司员工");
+			
+			wldwlx.add(map2);
+			
 			pageMail = mailService.getLxrList(client_type, curPage, rowsPerPage);
 			
 			return SUCCESS;

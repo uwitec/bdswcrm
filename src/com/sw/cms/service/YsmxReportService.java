@@ -92,6 +92,18 @@ public class YsmxReportService {
 		return ysmxReprotDao.getClientYushoukHj(client_name, start_date, end_date);
 	}
 	
+	
+	/**
+	 * 客户应收对账单
+	 * @param client_name
+	 * @param start_date
+	 * @param end_date
+	 * @return
+	 */
+	public List getYsDzd(String client_name,String start_date,String end_date){
+		return ysmxReprotDao.getYsDzd(client_name, start_date, end_date);
+	}
+	
 	public YsmxReportDAO getYsmxReprotDao() {
 		return ysmxReprotDao;
 	}

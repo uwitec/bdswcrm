@@ -207,7 +207,10 @@
         </action>
         <action name="descJhd" class="jhdAction" method="getJhdDesc">
             <result name="success">/WEB-INF/pages/jhd/jhd_desc.jsp</result>
-        </action>       
+        </action> 
+        <action name="selJhdProc" class="jhdAction" method="selJhdProc">
+            <result name="success">/WEB-INF/pages/jhd/selectMaxKcProc.jsp</result>
+        </action>              
         <!-- 进货单 -->
         
 		<!-- 用户管理 -->
@@ -1089,7 +1092,7 @@
         </action>
         <action name="descSelJhd" class="jhdAction" method="getJhdDesc">
             <result name="success">/WEB-INF/pages/cgthd/descSelJhd.jsp</result>
-        </action>
+        </action>        
         <!-- 采购退货单 -->
         
         <!-- 零售预收款 -->

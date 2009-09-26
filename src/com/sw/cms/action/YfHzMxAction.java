@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.sw.cms.action.base.BaseAction;
+import com.sw.cms.service.ClientWlDzdService;
 import com.sw.cms.service.ClientsService;
 import com.sw.cms.service.UserService;
 import com.sw.cms.service.YfHzMxService;
@@ -13,6 +14,7 @@ public class YfHzMxAction extends BaseAction {
 	private YfHzMxService yfHzMxService;
 	private UserService userService;
 	private ClientsService clientsService;
+	private ClientWlDzdService clientWlDzdService;
 	
 	private List user_list = new ArrayList();
 	private List clientList = new ArrayList();
@@ -94,5 +96,13 @@ public class YfHzMxAction extends BaseAction {
 
 	public void setYfHzMxService(YfHzMxService yfHzMxService) {
 		this.yfHzMxService = yfHzMxService;
+	}
+
+	public ClientWlDzdService getClientWlDzdService() {
+		return clientWlDzdService;
+	}
+
+	public void setClientWlDzdService(ClientWlDzdService clientWlDzdService) {
+		this.clientWlDzdService = clientWlDzdService;
 	}
 }

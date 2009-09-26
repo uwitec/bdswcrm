@@ -137,7 +137,8 @@ if(clientList != null && clientList.size() > 0){
 <br>
 <table width="99%">
 		<tr>
-			<td width="100%" align="right" height="30">生成报表时间：<%=DateComFunc.getToday() %>&nbsp;&nbsp;&nbsp;</td>
+		<td width="70%" height="30">&nbsp;说明：点击客户编号或客户名称打开应收对账单</td>
+		<td colspan="2" align="right" height="30">生成报表时间：<%=DateComFunc.getToday() %>&nbsp;&nbsp;&nbsp;</td>
 		</tr>
 </table>
 <center class="Noprint">

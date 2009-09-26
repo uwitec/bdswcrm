@@ -32,7 +32,7 @@
 	
 	function addTo(){
 		var destination = "selMail.html";
-		var fea ='width=850,height=450,left=' + (screen.availWidth-850)/2 + ',top=' + (screen.availHeight-450)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		var fea ='width=750,height=420,left=' + (screen.availWidth-750)/2 + ',top=' + (screen.availHeight-420)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
 		window.open(destination,'选择发送人',fea);		
 	}

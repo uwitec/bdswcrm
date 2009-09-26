@@ -25,9 +25,9 @@ public class ServletContextInit extends HttpServlet {
 //			//生成期初调试
 //			InitParamDAO dao = (InitParamDAO)ctx.getBean("initParamDao");			
 //			//生成客户往来期初
-//			dao.genCleintWlqc("2009-09-12","2009-09-11"); 
+//			dao.genCleintWlqc("2009-09-25","2009-09-24"); 
 //			//生成账户期初
-//			dao.genAccountQc("2009-09-12","2009-09-11"); 
+//			dao.genAccountQc("2009-09-25","2009-09-24"); 
 //			
 //			System.out.println("ddddddddddddddddddd");
 //			Thread.sleep(100*1000);

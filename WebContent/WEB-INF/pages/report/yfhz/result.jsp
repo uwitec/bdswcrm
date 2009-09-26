@@ -28,9 +28,7 @@ String flag2 = StringUtils.nullToStr(request.getParameter("flag2"));            
 <script language='JavaScript' src="js/date.js"></script>
 <script type="text/javascript">
 	function openWin(client_name){
-		var fea ='width=' + (screen.availWidth-4) + ',height=' + (screen.availHeight-30) + ',left=0,top=0,directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
-		var url = "getYfDzdResult.html?start_date=<%=start_date%>&end_date=<%=end_date%>&client_name=" + client_name;
-		window.open(url,"客户销售汇总",fea);	
+		location.href = "getYfDzdResult.html?start_date=<%=start_date%>&end_date=<%=end_date%>&client_name=" + client_name;
 	}	
 </script>
 </head>
@@ -142,7 +140,7 @@ if(clientList != null && clientList.size() > 0){
 <br>
 <table width="99%">
 	<tr>
-		<td width="70%" height="30">&nbsp;说明：客户编号或客户名称打开应付对账单</td>
+		<td width="70%" height="30">&nbsp;说明：点击客户编号或客户名称打开应付对账单</td>
 		<td colspan="2" align="right" height="30">生成报表时间：<%=DateComFunc.getToday() %>&nbsp;&nbsp;&nbsp;</td>
 	</tr>
 </table>

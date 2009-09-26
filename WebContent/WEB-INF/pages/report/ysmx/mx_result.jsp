@@ -7,17 +7,20 @@
 <%
 OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
 
+ClientWlDzdService clientWlDzdService = (ClientWlDzdService)VS.findValue("clientWlDzdService");
 YsmxReportService ysmxReportService = (YsmxReportService)VS.findValue("ysmxReportService");
 
-String client_name = StringUtils.nullToStr(request.getParameter("client_name"));  //客户编号
-String start_date = StringUtils.nullToStr(request.getParameter("start_date"));   //开始时间
-String end_date = StringUtils.nullToStr(request.getParameter("end_date"));       //结束时间
+String start_date = StringUtils.nullToStr(request.getParameter("start_date"));
+String end_date = StringUtils.nullToStr(request.getParameter("end_date"));
+String client_name = StringUtils.nullToStr(request.getParameter("client_name"));
+
+String con = "";
+con = "日期：" + start_date + "至" + end_date + "&nbsp;&nbsp; 客户名称：" + StaticParamDo.getClientNameById(client_name);
 
 %>
-
 <html>
 <head>
-<title>应收单据明细</title>
+<title>应收对账单</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/report.css" rel="stylesheet" type="text/css" />
 <style media=print>  
@@ -25,10 +28,10 @@ String end_date = StringUtils.nullToStr(request.getParameter("end_date"));      
 </style> 
 <script language='JavaScript' src="js/date.js"></script>
 <script type="text/javascript">
-	function openWin(url,winTitle){
-		var fea ='width=800,height=600,left=' + (screen.availWidth-800)/2 + ',top=' + (screen.availHeight-600)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+	function openWin(url){
+		var fea ='width=800,height=650,left=' + (screen.availWidth-800)/2 + ',top=' + (screen.availHeight-650)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
-		window.open(url,winTitle,fea);	
+		window.open(url,'详细信息',fea);	
 	}
 </script>
 </head>
@@ -36,11 +39,7 @@ String end_date = StringUtils.nullToStr(request.getParameter("end_date"));      
 <TABLE  align="center" cellSpacing=0 cellPadding=0 width="99%" border=0>
 	<TBODY>
 		<TR style="BACKGROUND-COLOR: #dcdcdc;height:45;">
-		    <TD align="center" width="100%"><font style="FONT-SIZE: 16px;line-height:30px"><B>应收单据明细</B></font><br>
-		    	<font style="FONT-SIZE: 12px;line-height:24px">客户编号：<%=client_name %></font>&nbsp;&nbsp;
-		    	<font style="FONT-SIZE: 12px;line-height:24px">客户名称：<%=StaticParamDo.getClientNameById(client_name) %></font>&nbsp;&nbsp;
-		    	<font style="FONT-SIZE: 12px;line-height:24px">时间：<%=start_date %> 至 <%=end_date %></font>
-		    </TD>
+		    <TD align="center" width="100%"><font style="FONT-SIZE: 16px"><B>客户应收对账单</B></font><br><%=con %></TD>
 		</TR>
 	</TBODY>
 </TABLE>
@@ -49,73 +48,126 @@ String end_date = StringUtils.nullToStr(request.getParameter("end_date"));      
 	<THEAD>
 		<TR>
 			<TD class=ReportHead>日期</TD>
-			<TD class=ReportHead>到期日期</TD>
-			<TD class=ReportHead>单据号</TD>
-			<TD class=ReportHead>客户名称</TD>	
-			<TD class=ReportHead>联系人</TD>	
-			<TD class=ReportHead>电话</TD>	
-			<TD class=ReportHead>销售员</TD>
-			<TD class=ReportHead>发生金额</TD>
-			<TD class=ReportHead>应收金额</TD>
+			<TD class=ReportHead>业务类型</TD>
+			<TD class=ReportHead>单据编号</TD>							
+			<TD class=ReportHead>应收款</TD>
+			<TD class=ReportHead>收款</TD>
+			<TD class=ReportHead>余额</TD>
 		</TR>
 	</THEAD>
-	
 	<TBODY>
 <%
-double hj_je = 0;
-double hj_xsdje = 0;
-List results = ysmxReportService.getWsdjList(start_date,end_date,"","",client_name);
-if(results != null && results.size()>0){
-	
-	for(int i=0;i<results.size();i++){
-		Map map = (Map)results.get(i);
+//处理期初
+Map qcMap = clientWlDzdService.getClientQcInfo(client_name,start_date);
+double ysqc = 0;
+if(qcMap != null){
+	ysqc = qcMap.get("ysqc")==null?0:((Double)qcMap.get("ysqc")).doubleValue();
+}
+%>
+		<tr>
+			<TD class=ReportItemXH>期初</TD>
+			<TD class=ReportItemXH>&nbsp;</TD>
+			<TD class=ReportItemXH>&nbsp;</TD>				
+			<TD class=ReportItemMoney><%=JMath.round(ysqc,2) %>&nbsp;</TD>
+			<TD class=ReportItemMoney>&nbsp;</TD>
+			<TD class=ReportItemMoney><%=JMath.round(ysqc,2) %>&nbsp;</TD>
+		</tr>
+<%
+
+double hj_ys = 0; //合计应收
+double hj_sk = 0; //合计收款
+
+double ys_ye = ysqc; //应收余额
+
+List list = ysmxReportService.getYsDzd(client_name,start_date,end_date);
+if(list != null && list.size()>0){
+	for(int i=0;i<list.size();i++){
+		Map map = (Map)list.get(i);
 		
-		double xsdje = map.get("xsdje")==null?0:((Double)map.get("xsdje")).doubleValue();
+		String creatdate = StringUtils.nullToStr(map.get("creatdate"));
+		String xwtype = StringUtils.nullToStr(map.get("xwtype"));
+		String dj_id = StringUtils.nullToStr(map.get("dj_id"));  //单据编号
+		
 		double je = map.get("je")==null?0:((Double)map.get("je")).doubleValue();
-		
-		hj_je += je;
-		hj_xsdje += xsdje;
-%>	
+%>
 		<TR>
-			<TD class=ReportItemXh><%=StringUtils.nullToStr(map.get("creatdate")) %>&nbsp;</TD>
-			<TD class=ReportItemXh><%=StringUtils.nullToStr(map.get("ysrq")) %>&nbsp;</TD>
-			<TD class=ReportItem><a href="javascript:openWin('viewXsd.html?id=<%=StringUtils.nullToStr(map.get("id")) %>');"><%=StringUtils.nullToStr(map.get("id")) %></a>&nbsp;</TD>
-			<TD class=ReportItem><%=StaticParamDo.getClientNameById(StringUtils.nullToStr(map.get("client_name"))) %>&nbsp;</TD>
-			<TD class=ReportItem><%=StringUtils.nullToStr(map.get("kh_lxr")) %>&nbsp;</TD>
-			<TD class=ReportItem><%=StringUtils.nullToStr(map.get("kh_lxdh")) %>&nbsp;</TD>
-			<TD class=ReportItem><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(map.get("fzr"))) %>&nbsp;</TD>
-			<TD class=ReportItemMoney><%=JMath.round(xsdje,2) %>&nbsp;</TD>
+			<TD class=ReportItemXH><%=creatdate %></TD>			
+<%			
+		String url = "";
+		if(xwtype.equals("销售") || xwtype.equals("销售退货")){
+			if(xwtype.equals("销售")){
+				url = "viewXsd.html?id=" + dj_id;
+			}
+			if(xwtype.equals("销售退货")){
+				url = "viewThd.html?thd_id=" + dj_id;
+			}
+			
+			hj_ys += je;
+			ys_ye += je;
+		%>
+			<TD class=ReportItemXH><%=xwtype %></TD>
+			<TD class=ReportItemXH><a href="#" onclick="openWin('<%=url %>');"><%=dj_id %></TD>
+					
 			<TD class=ReportItemMoney><%=JMath.round(je,2) %>&nbsp;</TD>
+			<TD class=ReportItemMoney>&nbsp;</TD>
+			<TD class=ReportItemMoney><%=JMath.round(ys_ye,2) %>&nbsp;</TD>
+		<%			
+		}else if(xwtype.equals("收款")){
+			url = "viewXssk.html?id=" + dj_id;
+			hj_sk += je;
+			ys_ye -= je;
+		%>
+			<TD class=ReportItemXH><%=xwtype %></TD>
+			<TD class=ReportItemXH><a href="#" onclick="openWin('<%=url %>');"><%=dj_id %></a></TD>
+	
+			<TD class=ReportItemMoney>&nbsp;</TD>
+			<TD class=ReportItemMoney><%=JMath.round(je,2) %>&nbsp;</TD>
+			<TD class=ReportItemMoney><%=JMath.round(ys_ye,2) %>&nbsp;</TD>
+					
+		<%			
+		}else if(xwtype.equals("往来调账(应收)")){
+			url = "viewPz.html?id=" + dj_id;
+			hj_ys += je;
+			ys_ye += je;
+		%>
+			<TD class=ReportItemXH><%=xwtype %></TD>
+			<TD class=ReportItemXH><a href="#" onclick="openWin('<%=url %>');"><%=dj_id %></TD>
+					
+			<TD class=ReportItemMoney><%=JMath.round(je,2) %>&nbsp;</TD>
+			<TD class=ReportItemMoney>&nbsp;</TD>
+			<TD class=ReportItemMoney><%=JMath.round(ys_ye,2) %>&nbsp;</TD>	
+		
+		<%
+		}
+%>
 		</TR>
 <%
 	}
 }
 %>
 		
-		<TR>
-			<TD class=ReportItemXh>合计</TD>		
-			<TD class=ReportItem>&nbsp;</TD>
-			<TD class=ReportItem>&nbsp;</TD>
-			<TD class=ReportItem>&nbsp;</TD>
-			<TD class=ReportItem>&nbsp;</TD>
-			<TD class=ReportItem>&nbsp;</TD>
-			<TD class=ReportItem>&nbsp;</TD>
-			<TD class=ReportItemMoney><%=JMath.round(hj_xsdje,2) %>&nbsp;</TD>				
-			<TD class=ReportItemMoney><%=JMath.round(hj_je,2) %>&nbsp;</TD>
-		</TR>		
+		
+		<tr>
+			<TD class=ReportItemXH style="font-weight:bold">合计：</TD>
+			<TD class=ReportItemXH style="font-weight:bold">&nbsp;</TD>
+			<TD class=ReportItemXH style="font-weight:bold">&nbsp;</TD>	
 
+			<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(hj_ys,2) %>&nbsp;</TD>
+			<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(hj_sk,2) %>&nbsp;</TD>
+			<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(ys_ye,2) %>&nbsp;</TD>	
+		</tr>		
 	</TBODY>
-	
 </TABLE>
+<br>
 <table width="99%">
 		<tr>
-			<td width="70%" height="30">注：点击产品编号可查看原始单据列表</td>
+			<td width="70%" height="30">注：点击产品编号可查看原始单据列表。</td>
 			<td colspan="2" align="right" height="30">生成报表时间：<%=DateComFunc.getToday() %>&nbsp;&nbsp;&nbsp;</td>
 		</tr>
 </table>
 <center class="Noprint">
-	<input type="button" name="button_print" value=" 打印 " onclick="window.print();"> &nbsp;&nbsp;
-    <input type="button" name="button_fh" value=" 返回 " onclick="history.go(-1);"> 
+	<input type="button" name="button_print" value=" 打 印 " onclick="window.print();"> &nbsp;&nbsp;
+    <input type="button" name="button_fh" value=" 返 回 " onclick="history.go(-1);"> 
 </center>
 </body>
 </html>

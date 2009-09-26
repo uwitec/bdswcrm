@@ -66,6 +66,18 @@ public class YfHzMxService {
 	public List getYfmxList(String client_name,String start_date,String end_date){
 		return yfHzMxDao.getYfmxList(client_name, start_date, end_date);
 	}
+	
+	
+	/**
+	 * ”¶∏∂∂‘’Àµ•
+	 * @param client_name
+	 * @param start_date
+	 * @param end_date
+	 * @return
+	 */
+	public List getYfDzd(String client_name,String start_date,String end_date){
+		return yfHzMxDao.getYfDzd(client_name, start_date, end_date);
+	}
 
 
 	public YfHzMxDAO getYfHzMxDao() {

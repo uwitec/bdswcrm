@@ -10,6 +10,8 @@ import com.sw.cms.model.LoginInfo;
 import com.sw.cms.model.Page;
 import com.sw.cms.service.ClientsService;
 import com.sw.cms.service.JhdService;
+import com.sw.cms.service.ProductKcService;
+import com.sw.cms.service.ProductKindService;
 import com.sw.cms.service.StoreService;
 import com.sw.cms.service.UserService;
 import com.sw.cms.util.Constant;
@@ -23,6 +25,8 @@ public class JhdAction extends BaseAction {
 	private UserService userService;
 	private StoreService storeService;
 	private ClientsService clientsService;
+	private ProductKcService productKcService;
+	private ProductKindService productKindService;
 
 	private Page jhdPage;
 
@@ -35,6 +39,8 @@ public class JhdAction extends BaseAction {
 	private List userList = new ArrayList();
 	private List storeList = new ArrayList();
 	private List clientsList= new ArrayList();
+	private List kindList = new ArrayList();
+	private Page productPage;
 	
 	
 	private String gysbh ="";
@@ -47,6 +53,9 @@ public class JhdAction extends BaseAction {
 	private int curPage = 1;
 	
 	private String id = "";
+	
+	private String product_name = "";
+	private String product_kind = "";
 
 	/**
 	 * 取进货单列表
@@ -166,6 +175,27 @@ public class JhdAction extends BaseAction {
 		if(!id.equals("")){
 			jhdProducts = jhdService.getJhdProducts(id);
 		}		
+		return "success";
+	}
+	
+	
+	
+	public String selJhdProc(){
+		
+		int rowsPerPage = 15;
+		
+		String con = " and a.state='正常'";
+		if(!product_name.equals("")){
+			con += " and (a.product_name like '%" + product_name + "%' or a.product_xh like '%" + product_name + "%')";
+		}
+		if(!product_kind.equals("")){
+			con += " and a.product_kind like '" + product_kind + "%'";
+		}
+		
+		productPage = productKcService.getProductKcList(con, curPage, rowsPerPage);
+		storeList = storeService.getAllStoreList();
+		kindList = productKindService.getAllProductKindList();
+		
 		return "success";
 	}
 
@@ -328,6 +358,54 @@ public class JhdAction extends BaseAction {
 
 	public void setClientsService(ClientsService clientsService) {
 		this.clientsService = clientsService;
+	}
+
+	public List getKindList() {
+		return kindList;
+	}
+
+	public void setKindList(List kindList) {
+		this.kindList = kindList;
+	}
+
+	public String getProduct_kind() {
+		return product_kind;
+	}
+
+	public void setProduct_kind(String product_kind) {
+		this.product_kind = product_kind;
+	}
+
+	public String getProduct_name() {
+		return product_name;
+	}
+
+	public void setProduct_name(String product_name) {
+		this.product_name = product_name;
+	}
+
+	public ProductKcService getProductKcService() {
+		return productKcService;
+	}
+
+	public void setProductKcService(ProductKcService productKcService) {
+		this.productKcService = productKcService;
+	}
+
+	public ProductKindService getProductKindService() {
+		return productKindService;
+	}
+
+	public void setProductKindService(ProductKindService productKindService) {
+		this.productKindService = productKindService;
+	}
+
+	public Page getProductPage() {
+		return productPage;
+	}
+
+	public void setProductPage(Page productPage) {
+		this.productPage = productPage;
 	}
 
 }

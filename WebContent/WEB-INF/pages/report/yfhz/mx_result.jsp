@@ -5,28 +5,22 @@
 <%@ page import="java.util.*" %>
 
 <%
-//应付对账单
-//应包括以下信息
-//进货单、采购退货单、采购付款
-
 OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
 
+ClientWlDzdService clientWlDzdService = (ClientWlDzdService)VS.findValue("clientWlDzdService");
 YfHzMxService yfHzMxService = (YfHzMxService)VS.findValue("yfHzMxService");
 
-String client_name = StringUtils.nullToStr(request.getParameter("client_name"));  //客户编号
-String start_date = StringUtils.nullToStr(request.getParameter("start_date"));   //开始时间
-String end_date = StringUtils.nullToStr(request.getParameter("end_date"));       //结束时间
+String start_date = StringUtils.nullToStr(request.getParameter("start_date"));
+String end_date = StringUtils.nullToStr(request.getParameter("end_date"));
+String client_name = StringUtils.nullToStr(request.getParameter("client_name"));
 
-double qc = 0l;
-Map qc_map = yfHzMxService.getYfQc(client_name,start_date);  //期初信息
-if(qc_map != null){
-	qc = qc_map.get("yfqc")==null?0:((Double)qc_map.get("yfqc")).doubleValue();
-}
+String con = "";
+con = "日期：" + start_date + "至" + end_date + "&nbsp;&nbsp; 客户名称：" + StaticParamDo.getClientNameById(client_name);
+
 %>
-
 <html>
 <head>
-<title>应付对账单</title>
+<title>客户应付对账单</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/report.css" rel="stylesheet" type="text/css" />
 <style media=print>  
@@ -34,10 +28,10 @@ if(qc_map != null){
 </style> 
 <script language='JavaScript' src="js/date.js"></script>
 <script type="text/javascript">
-	function openWin(url,winTitle){
-		var fea ='width=800,height=600,left=' + (screen.availWidth-800)/2 + ',top=' + (screen.availHeight-600)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+	function openWin(url){
+		var fea ='width=800,height=650,left=' + (screen.availWidth-800)/2 + ',top=' + (screen.availHeight-650)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
-		window.open(url,winTitle,fea);	
+		window.open(url,'详细信息',fea);	
 	}
 </script>
 </head>
@@ -45,11 +39,7 @@ if(qc_map != null){
 <TABLE  align="center" cellSpacing=0 cellPadding=0 width="99%" border=0>
 	<TBODY>
 		<TR style="BACKGROUND-COLOR: #dcdcdc;height:45;">
-		    <TD align="center" width="100%"><font style="FONT-SIZE: 16px;line-height:30px"><B>应付对账单</B></font><br>
-		    	<font style="FONT-SIZE: 12px;line-height:24px">客户编号：<%=client_name %></font>&nbsp;&nbsp;
-		    	<font style="FONT-SIZE: 12px;line-height:24px">客户名称：<%=StaticParamDo.getClientNameById(client_name) %></font>&nbsp;&nbsp;
-		    	<font style="FONT-SIZE: 12px;line-height:24px">时间：<%=start_date %> 至 <%=end_date %></font>
-		    </TD>
+		    <TD align="center" width="100%"><font style="FONT-SIZE: 16px"><B>客户应付对账单</B></font><br><%=con %></TD>
 		</TR>
 	</TBODY>
 </TABLE>
@@ -57,68 +47,116 @@ if(qc_map != null){
 <TABLE align="center" cellSpacing=0 cellPadding=0 width="99%" border=0 style="BORDER-TOP: #000000 2px solid;BORDER-LEFT:#000000 1px solid">
 	<THEAD>
 		<TR>
-			<TD class=ReportHead>单据号</TD>
+			<TD class=ReportHead>日期</TD>
 			<TD class=ReportHead>业务类型</TD>
-			<TD class=ReportHead>交易日期</TD>
-			<TD class=ReportHead>经手人</TD>
-			<TD class=ReportHead>金额</TD>
-		</TR>
+			<TD class=ReportHead>单据编号</TD>
+			<TD class=ReportHead>应付款</TD>
+			<TD class=ReportHead>付款</TD>
+			<TD class=ReportHead>余额</TD>
+		</TR>		
 	</THEAD>
-	
 	<TBODY>
-		<TR>
-			<TD class=ReportItem style="font-weight:bold">期初应付</TD>		
-			<TD class=ReportItem>&nbsp;</TD>
-			<TD class=ReportItem>&nbsp;</TD>
-			<TD class=ReportItem>&nbsp;</TD>				
-			<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(qc,2) %>&nbsp;</TD>
-		</TR>	
 <%
+//处理期初
+Map qcMap = clientWlDzdService.getClientQcInfo(client_name,start_date);
+double yfqc = 0;
+if(qcMap != null){
+	yfqc = qcMap.get("yfqc")==null?0:((Double)qcMap.get("yfqc")).doubleValue();
+}
+%>
+		<tr>
+			<TD class=ReportItemXH>期初</TD>
+			<TD class=ReportItemXH>&nbsp;</TD>
+			<TD class=ReportItemXH>&nbsp;</TD>	
+			
+			<TD class=ReportItemMoney><%=JMath.round(yfqc,2) %>&nbsp;</TD>
+			<TD class=ReportItemMoney>&nbsp;</TD>
+			<TD class=ReportItemMoney><%=JMath.round(yfqc,2) %>&nbsp;</TD>		
+		</tr>
+<%
+double hj_yf = 0; //合计应付
+double hj_fk = 0; //合计付款
 
-double hj = qc;
+double yf_ye = yfqc; //应付余额
 
-//进货单部分
-List mxList = yfHzMxService.getYfmxList(client_name,start_date,end_date);
-
-if(mxList != null && mxList.size() > 0){
-	for(int i=0;i<mxList.size();i++){
-		Map ysMap = (Map)mxList.get(i);
+List list = yfHzMxService.getYfDzd(client_name,start_date,end_date);
+if(list != null && list.size()>0){
+	for(int i=0;i<list.size();i++){
+		Map map = (Map)list.get(i);
 		
-		String dj_id = StringUtils.nullToStr(ysMap.get("dj_id"));
-		String url = StringUtils.nullToStr(ysMap.get("url"));
-		String ywtype = StringUtils.nullToStr(ysMap.get("ywtype"));
-		String jsr = StaticParamDo.getRealNameById(StringUtils.nullToStr(ysMap.get("jsr")));
-		String creatdate = StringUtils.nullToStr(ysMap.get("creatdate"));
-		double je = ysMap.get("je")==null?0:((Double)ysMap.get("je")).doubleValue();
 		
-		hj += je;
-
-%>	
+		
+		String creatdate = StringUtils.nullToStr(map.get("creatdate"));
+		String xwtype = StringUtils.nullToStr(map.get("xwtype"));
+		String dj_id = StringUtils.nullToStr(map.get("dj_id"));  //单据编号
+		
+		double je = map.get("je")==null?0:((Double)map.get("je")).doubleValue();
+%>
 		<TR>
-			<TD class=ReportItem>
-				<a  href="#" onclick="openWin('<%=url+dj_id %>','原始单据');" title="点击查看原始单据"><%=dj_id %></a>			
-			</TD>
-			<TD class=ReportItem><%=ywtype %>&nbsp;</TD>
-			<TD class=ReportItem><%=creatdate %>&nbsp;</TD>
-			<TD class=ReportItem><%=jsr %>&nbsp;</TD>
+			<TD class=ReportItemXH><%=creatdate %></TD>			
+<%			
+		String url = "";
+		if(xwtype.equals("采购") || xwtype.equals("采购退货")){
+			if(xwtype.equals("采购")){
+				url = "viewJhd.html?id=" + dj_id;
+			}
+			if(xwtype.equals("采购退货")){
+				url = "viewCgthd.html?id=" + dj_id;
+			}
+			hj_yf += je;
+			yf_ye += je;
+		%>
+			<TD class=ReportItemXH><%=xwtype %></TD>
+			<TD class=ReportItemXH><a href="#" onclick="openWin('<%=url %>');"><%=dj_id %></a></TD>
+			
 			<TD class=ReportItemMoney><%=JMath.round(je,2) %>&nbsp;</TD>
-		</TR>
+			<TD class=ReportItemMoney>&nbsp;</TD>
+			<TD class=ReportItemMoney><%=JMath.round(yf_ye,2) %>&nbsp;</TD>			
+		<%			
+		}else if(xwtype.equals("付款")){
+			url = "viewCgfk.html?id=" + dj_id;
+			hj_fk += je;
+			yf_ye -= je;
+		%>
+			<TD class=ReportItemXH><%=xwtype %></TD>
+			<TD class=ReportItemXH><a href="#" onclick="openWin('<%=url %>');"><%=dj_id %></a></TD>
+			
+			<TD class=ReportItemMoney>&nbsp;</TD>
+			<TD class=ReportItemMoney><%=JMath.round(je,2) %>&nbsp;</TD>
+			<TD class=ReportItemMoney><%=JMath.round(yf_ye,2) %>&nbsp;</TD>
+		<%
+		}else if(xwtype.equals("往来调账(应付)")){
+			url = "viewPz.html?id=" + dj_id;
+			hj_yf += je;
+			yf_ye += je;
+		%>
+		
+			<TD class=ReportItemXH><%=xwtype %></TD>
+			<TD class=ReportItemXH><a href="#" onclick="openWin('<%=url %>');"><%=dj_id %></a></TD>
+			
+			
+			<TD class=ReportItemMoney><%=JMath.round(je,2) %>&nbsp;</TD>
+			<TD class=ReportItemMoney>&nbsp;</TD>
+			<TD class=ReportItemMoney><%=JMath.round(yf_ye,2) %>&nbsp;</TD>				
+		<%
+		}
 
+%>
+		</TR>
 <%
 	}
 }
 %>
-
-		<TR>
-			<TD class=ReportItem style="font-weight:bold">合计应付</TD>
-			<TD class=ReportItem>&nbsp;</TD>
-			<TD class=ReportItem>&nbsp;</TD>
-			<TD class=ReportItem>&nbsp;</TD>
-			<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(hj,2) %>&nbsp;</TD>
-		</TR>
-
+		<tr>
+			<TD class=ReportItemXH style="font-weight:bold">合计：</TD>
+			<TD class=ReportItem style="font-weight:bold">&nbsp;</TD>
+			<TD class=ReportItem style="font-weight:bold">&nbsp;</TD>
+			
+			<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(hj_yf,2) %>&nbsp;</TD>
+			<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(hj_fk,2) %>&nbsp;</TD>
+			<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(yf_ye,2) %>&nbsp;</TD>		
+		</tr>		
 	</TBODY>
-	
 </TABLE>
 <br>
 <table width="99%">
@@ -128,8 +166,8 @@ if(mxList != null && mxList.size() > 0){
 		</tr>
 </table>
 <center class="Noprint">
-	<input type="button" name="button_print" value=" 打印 " onclick="window.print();"> &nbsp;&nbsp;
-    <input type="button" name="button_fh" value=" 关闭 " onclick="window.close();"> 
+	<input type="button" name="button_print" value=" 打 印 " onclick="window.print();"> &nbsp;&nbsp;
+    <input type="button" name="button_fh" value=" 返 回 " onclick="history.go(-1);"> 
 </center>
 </body>
 </html>
