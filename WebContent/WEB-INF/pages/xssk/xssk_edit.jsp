@@ -25,7 +25,7 @@ if(xsskDescs != null && xsskDescs.size()>0){
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript" src="js/Check.js"></script>
-<script language='JavaScript' src="js/date.js"></script>
+<script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
 <script language='JavaScript' src="js/selJsr.js"></script>
 <script type="text/javascript" src="js/prototype-1.4.0.js"></script>
 <style>
@@ -169,11 +169,10 @@ if(xsskDescs != null && xsskDescs.size()>0){
 		<td class="a1" width="15%">往来单位</td>
 		<td class="a2" width="35%">
 		<input type="text" name="clientName" id="client_name" value="<%=StaticParamDo.getClientNameById(StringUtils.nullToStr(xssk.getClient_name())) %>" size="35" readonly>
-		<input type="hidden" name="xssk.client_name" id="client_id" value="<%=StringUtils.nullToStr(xssk.getClient_name()) %>">
+		<input type="hidden" name="xssk.client_name" id="client_id" value="<%=StringUtils.nullToStr(xssk.getClient_name()) %>"><font color="red">*</font>
 		</td>
 		<td class="a1" width="15%">收款日期</td>
-		<td class="a2" width="35%"><input type="text" name="xssk.sk_date" id="sk_date" value="<%=StringUtils.nullToStr(xssk.getSk_date()).equals("")?DateComFunc.getToday():StringUtils.nullToStr(xssk.getSk_date()) %>" readonly>
-		<img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.getElementById('fk_date')); return false;">
+		<td class="a2" width="35%"><input type="text" name="xssk.sk_date" id="sk_date" value="<%=StringUtils.nullToStr(xssk.getSk_date()).equals("")?DateComFunc.getToday():StringUtils.nullToStr(xssk.getSk_date()) %>"  class="Wdate" onFocus="WdatePicker()"><font color="red">*</font>
 		</td>				
 	</tr>
 	<tr>

@@ -30,7 +30,7 @@ String orderType = (String)VS.findValue("orderType");
 <style>
 	.selectTip{background-color:#009;color:#fff;}
 </style>
-<script language='JavaScript' src="js/date.js"></script>
+<script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
 <script language='JavaScript' src="js/selClient.js"></script>
 <script language='JavaScript' src="js/selJsr.js"></script>
 <script type="text/javascript" src="js/prototype-1.4.0.js"></script>
@@ -138,11 +138,9 @@ String orderType = (String)VS.findValue("orderType");
 					</td>
 					<td align="center">日　　期：</td>
 					<td colspan="3">
-						<input type="text" name="creatdate1" value="<%=creatdate1 %>" size="10" readonly>	
-						<img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.myform.creatdate1); return false;">
+						<input type="text" name="creatdate1" value="<%=creatdate1 %>" class="Wdate" onFocus="WdatePicker()">
 						&nbsp;至&nbsp;
-						<input type="text" name="creatdate2" value="<%=creatdate2 %>" size="10" readonly>	
-						<img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.myform.creatdate2); return false;">					
+						<input type="text" name="creatdate2" value="<%=creatdate2 %>" class="Wdate" onFocus="WdatePicker()">
 					</td>
 					<td rowspan="2" width="15%" align="center">
 						<input type="button" name="buttonCx" value=" 查询 " class="css_button" onclick="subForm();">

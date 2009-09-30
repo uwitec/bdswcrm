@@ -6,17 +6,8 @@
 
 <%
 OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
-
-List userList = (List)VS.findValue("userList");
 List storeList = (List)VS.findValue("storeList");
-
 Dbsq dbsq = (Dbsq)VS.findValue("dbsq");
-
-LoginInfo info = (LoginInfo)session.getAttribute("LOGINUSER");
-String user_id = info.getUser_id();
-
-
-
 %>
 
 <html>
@@ -25,7 +16,7 @@ String user_id = info.getUser_id();
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript" src="js/Check.js"></script>
-<script language='JavaScript' src="js/date.js"></script>
+<script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
 <script language='JavaScript' src="js/nums.js"></script>
 <script language='JavaScript' src="js/selJsr.js"></script>
 <script type="text/javascript" src="js/prototype-1.4.0.js"></script>
@@ -133,8 +124,7 @@ String user_id = info.getUser_id();
 		<input type="text" name="dbsq.id" id="id" value="<%=StringUtils.nullToStr(dbsq.getId()) %>" size="30" maxlength="50" readonly><font color="red">*</font>
 		</td>	
 		<td class="a1">日期</td>
-		<td class="a2"><input type="text" name="dbsq.creatdate" id="creatdate" value="<%=DateComFunc.getToday() %>" readonly>
-		<img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.getElementById('creatdate')); return false;">
+		<td class="a2"><input type="text" name="dbsq.creatdate" id="creatdate" value="<%=DateComFunc.getToday() %>" class="Wdate" onFocus="WdatePicker()">
 		<font color="red">*</font>
 		</td>	
 	</tr>

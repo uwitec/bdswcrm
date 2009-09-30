@@ -25,7 +25,7 @@ if(kcpdDescs!=null && kcpdDescs.size()>0){
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript" src="js/Check.js"></script>
-<script language='JavaScript' src="js/date.js"></script>
+<script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
 <script language='JavaScript' src="js/nums.js"></script>
 <script language='JavaScript' src="js/selJsr.js"></script>
 <script type="text/javascript" src="js/prototype-1.4.0.js"></script>
@@ -39,6 +39,14 @@ if(kcpdDescs!=null && kcpdDescs.size()>0){
 	var allCount = <%=count %>;
 	
 	function saveInfo(){
+		if(document.getElementById("store_id").value == ""){
+			alert("仓库名称不能为空，请选择！");
+			return;
+		}		
+		if(document.getElementById("pdrq").value == ""){
+			alert("盘点日期不能为空，请填写！");
+			return;
+		}	
 		if(document.getElementById("id").value == ""){
 			alert("名称不能为空，请填写！");
 			return;
@@ -196,8 +204,7 @@ if(kcpdDescs!=null && kcpdDescs.size()>0){
 		}
 		%>
 		<td class="a1">盘点日期</td>
-		<td class="a2"><input type="text" name="kcpd.pdrq" id="pdrq" value="<%=rq %>" readonly>
-		<img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.getElementById('pdrq')); return false;"><body onload="initFzrTip();">
+		<td class="a2"><input type="text" name="kcpd.pdrq" id="pdrq" value="<%=rq %>"  class="Wdate" onFocus="WdatePicker()"> <font color="red">*</font>	
 		</td>			
 	</tr>	
 	<tr>
@@ -218,7 +225,7 @@ if(kcpdDescs!=null && kcpdDescs.size()>0){
 				}
 			}
 			%>
-			</select><body onload="initFzrTip();">
+			</select> <font color="red">*</font>	
 		</td>		
 		<td class="a1" width="15%">盘点人</td>
 		<td class="a2" width="35%">

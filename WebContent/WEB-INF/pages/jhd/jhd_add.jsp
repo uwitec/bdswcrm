@@ -15,7 +15,7 @@ String id = (String)VS.findValue("id");
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript" src="js/Check.js"></script>
-<script language='JavaScript' src="js/date.js"></script>
+<script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
 <script language='JavaScript' src="js/nums.js"></script>
 <script language='JavaScript' src="js/selClient.js"></script>
 <script language='JavaScript' src="js/selJsr.js"></script>
@@ -28,6 +28,10 @@ String id = (String)VS.findValue("id");
 	var allCount = 2;
 	
 	function saveInfo(){
+		if(document.getElementById("cg_date").value == ""){
+			alert("采购日期不能为空，请选择！");
+			return;
+		}	
 		if(document.getElementById("client_id").value == ""){
 			alert("供货单位不能为空，请选择！");
 			return;
@@ -230,8 +234,7 @@ function delDesc(){
 		<input type="text" name="jhd.id" id="id" value="<%=id %>" readonly>
 		</td>	
 		<td class="a1" width="15%">采购日期</td>
-		<td class="a2" width="35%"><input type="text" name="jhd.cg_date" id="cg_date" value="<%=DateComFunc.getToday() %>" readonly>
-		<img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.getElementById('cg_date')); return false;">
+		<td class="a2" width="35%"><input type="text" name="jhd.cg_date" id="cg_date" value="<%=DateComFunc.getToday() %>"  class="Wdate" onFocus="WdatePicker()"><font color="red">*</font>	
 		</td>
 	</tr>
 	<tr>

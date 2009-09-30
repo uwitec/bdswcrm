@@ -24,7 +24,7 @@ if(thdProducts != null && thdProducts.size() > 0){
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript" src="js/Check.js"></script>
-<script language='JavaScript' src="js/date.js"></script>
+<script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
 <script language='JavaScript' src="js/nums.js"></script>
 <script language='JavaScript' src="js/selClient.js"></script>
 <script language='JavaScript' src="js/selJsr.js"></script>
@@ -243,8 +243,7 @@ if(thdProducts != null && thdProducts.size() > 0){
 		<input type="text" name="thd.thd_id" id="thd_id" value="<%=StringUtils.nullToStr(thd.getThd_id()) %>" size="30" maxlength="50" readonly>
 		</td>	
 		<td class="a1">退货日期</td>
-		<td class="a2"><input type="text" name="thd.th_date" id="th_date" value="<%=StringUtils.nullToStr(thd.getTh_date()) %>" readonly>
-		<img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.getElementById('th_date')); return false;">
+		<td class="a2"><input type="text" name="thd.th_date" id="th_date" value="<%=StringUtils.nullToStr(thd.getTh_date()) %>"  class="Wdate" onFocus="WdatePicker()">
 		</td>	
 	</tr>
 	<tr>			
@@ -252,17 +251,13 @@ if(thdProducts != null && thdProducts.size() > 0){
 		<td class="a2">
 		<input type="text" name="thd.client_id" id="client_name" value="<%=StaticParamDo.getClientNameById(StringUtils.nullToStr(thd.getClient_name())) %>" size="30" maxlength="50" onblur="setClientValue();">
 		<input type="hidden" name="thd.client_name" id="client_id" value="<%=StringUtils.nullToStr(thd.getClient_name()) %>">
-		<!--<img src="images/select.gif" align="absmiddle" title="选择客户" border="0" onclick="openClientWin();" style="cursor:hand">
-		--><div id="clientsTip" style="height:12px;position:absolute;left:147px; top:85px; width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+		<div id="clientsTip" style="height:12px;position:absolute;left:147px; top:85px; width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		<font color="red">*</font>
 		</td>	
 		<td class="a1" width="15%">经手人</td>
 		<td class="a2" width="35%">
 		 <input  id="brand"  type="text"   length="20"  onblur="setValue()" value="<%=StaticParamDo.getRealNameById(thd.getTh_fzr() )%>"/> 
-         <img id="Loadingimg" src="images/indicator.gif" style="display:none"/><!--
-         <img src="images/select.gif" align="absmiddle" title="选择经手人" border="0" onclick="openywyWin();" style="cursor:hand">
-          --><div  id="brandTip" style=" height:12px; position:absolute;left:612px;top:85px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;"  >
-          </div>
+         <div id="brandTip" style=" height:12px; position:absolute;left:612px;top:85px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;"  ></div>
 		    <input type="hidden" name="thd.th_fzr" id="fzr" value="<%=thd.getTh_fzr() %>"/><font color="red">*</font>	
 		</td>
 	</tr>

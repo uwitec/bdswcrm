@@ -23,7 +23,7 @@ String orderType = (String)VS.findValue("orderType");
 <title>关联销售单</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
-<script language='JavaScript' src="js/date.js"></script>
+<script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
 <script type="text/javascript">
 	
 	function openWin(id){
@@ -58,12 +58,13 @@ String orderType = (String)VS.findValue("orderType");
 		}
 	}
 	
-	function desc(id){
-		parent.desc.location.href='descSelXsd.html?id=' + id;
+	function descMx(id){
+		document.descForm.id.value = id;
+		document.descForm.submit();	
 	}
 </script>
 </head>
-<body oncontextmenu="return false;" >
+<body>
 <form name="myform" action="selXsd.html" method="post">
 <input type="hidden" name="orderType" value="<%=orderType %>">
 <input type="hidden" name="orderName" value="<%=orderName %>">
@@ -71,11 +72,9 @@ String orderType = (String)VS.findValue("orderType");
 	<tr>
 		<td class="search" align="left" colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;
 			客户名称：<input type="text" name="client_name" value="<%=client_name %>">&nbsp;&nbsp;&nbsp;
-			日期：<input type="text" name="creatdate1" value="<%=creatdate1 %>" size="8" readonly>	
-			<img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.myform.creatdate1); return false;">
+			日期：<input type="text" name="creatdate1" value="<%=creatdate1 %>" size="15"  class="Wdate" onFocus="WdatePicker()">	
 			&nbsp;&nbsp;至&nbsp;&nbsp;
-			<input type="text" name="creatdate2" value="<%=creatdate2 %>" size="8" readonly>	
-			<img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.myform.creatdate2); return false;">
+			<input type="text" name="creatdate2" value="<%=creatdate2 %>" size="15"  class="Wdate" onFocus="WdatePicker()">
 			&nbsp;&nbsp;&nbsp;
 			<input type="submit" name="buttonCx" value=" 查询 " class="css_button2">&nbsp;
 			<input type="button" name="buttonQk" value=" 清空 " class="css_button2" onclick="clearAll();">
@@ -100,7 +99,7 @@ String orderType = (String)VS.findValue("orderType");
 	while(it.hasNext()){
 		Map map = (Map)it.next();
 	%>
-	<tr class="a1" title="双击查看详情"  onmousedown="trSelectChangeCss()" onclick="desc('<%=StringUtils.nullToStr(map.get("id")) %>');" onDblClick="openWin('<%=StringUtils.nullToStr(map.get("id")) %>');">
+	<tr class="a1" title="双击查看详情"  onmousedown="trSelectChangeCss()" onclick="descMx('<%=StringUtils.nullToStr(map.get("id")) %>');" onDblClick="openWin('<%=StringUtils.nullToStr(map.get("id")) %>');">
 		<td><%=StringUtils.nullToStr(map.get("id")) %></td>
 		<td><%=StaticParamDo.getClientNameById(StringUtils.nullToStr(map.get("client_name"))) %></td>
 		<td><%=StringUtils.nullToStr(map.get("state")) %></td>
@@ -121,5 +120,13 @@ String orderType = (String)VS.findValue("orderType");
 </table>
 </div>
 </form>
+<form name="descForm" action="descSelXsd.html" method="post" target="desc">
+	<input type="hidden" name="id" value="">
+</form>
+<table width="100%"  align="center" cellpadding="0" cellspacing="0">
+	<tr>
+		<td><iframe id="desc" name="desc" width="100%" onload="dyniframesize('desc');" border="0" frameborder="0" SCROLLING="no"  src=''/></td>
+	</tr>
+</table>
 </body>
 </html>

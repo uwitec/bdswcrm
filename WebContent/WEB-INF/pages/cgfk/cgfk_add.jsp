@@ -26,7 +26,7 @@ if(cgfkDescs != null && cgfkDescs.size()>0){
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript" src="js/Check.js"></script>
-<script language='JavaScript' src="js/date.js"></script>
+<script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
 <script language='JavaScript' src="js/selClient.js"></script>
 <script language='JavaScript' src="js/selJsr.js"></script>
 <script type="text/javascript" src="js/prototype-1.4.0.js"></script>
@@ -187,8 +187,7 @@ if(cgfkDescs != null && cgfkDescs.size()>0){
 	</tr>
 	<tr>
 		<td class="a1" width="15%">付款日期</td>
-		<td class="a2" width="35%"><input type="text" name="cgfk.fk_date" id="fk_date" value="<%=StringUtils.nullToStr(cgfk.getFk_date()).equals("")?DateComFunc.getToday():StringUtils.nullToStr(cgfk.getFk_date()) %>" readonly>
-		<img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.getElementById('fk_date')); return false;">
+		<td class="a2" width="35%"><input type="text" name="cgfk.fk_date" id="fk_date" value="<%=StringUtils.nullToStr(cgfk.getFk_date()).equals("")?DateComFunc.getToday():StringUtils.nullToStr(cgfk.getFk_date()) %>"  class="Wdate" onFocus="WdatePicker()">
 		</td>		
 		<td class="a1" width="15%">往来单位</td>
 		<td class="a2" width="35%">

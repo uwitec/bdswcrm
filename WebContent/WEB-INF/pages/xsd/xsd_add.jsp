@@ -57,7 +57,7 @@ if(sp_state.equals("1")){
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <LINK href="css/ddcolortabs.css" type=text/css rel=stylesheet>
 <script language="JavaScript" src="js/Check.js"></script>
-<script language='JavaScript' src="js/date.js"></script>
+<script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
 <script language='JavaScript' src="js/nums.js"></script>
 <script language='JavaScript' src="js/xsd.js"></script>
 <script language='JavaScript' src="js/selClient.js"></script>
@@ -206,8 +206,7 @@ if(!spMsg.equals("")){
 		}
 		%>		
 		<td class="a1">创建时间</td>
-		<td class="a2"><input type="text" name="xsd.creatdate" id="creatdate" value="<%=creatDate %>" readonly>
-		<img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.getElementById('creatdate')); return false;"><font color="red">*</font>
+		<td class="a2"><input type="text" name="xsd.creatdate" id="creatdate" value="<%=creatDate %>"  class="Wdate" onFocus="WdatePicker()">
 		</td>						 
 	</tr>
 	<tr>	

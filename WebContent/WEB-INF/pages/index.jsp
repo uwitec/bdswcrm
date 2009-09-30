@@ -338,7 +338,7 @@ int menu_index = 0;
 		</TD>
 		<!-- 左侧菜单区结束 -->
 		
-		<TD class=Admin_BackGround vAlign=center align=middle width=5 onclick="hidMenu();"><IMG id="splitImg" src="index_images/p_1.gif"></TD>
+		<TD class=Admin_BackGround vAlign=center align=middle width=5><IMG id="splitImg" src="index_images/p_1.gif"></TD>
 		
 		<!-- 右侧主工作区 -->
 		<TD  valign="top" align="left" width="100%" id="tdContent" height="100%" >

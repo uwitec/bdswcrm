@@ -55,15 +55,15 @@ if(!product_kind.equals("")){
 <TABLE align="center" cellSpacing=0 cellPadding=0 width="99%" border=0 style="BORDER-TOP: #000000 2px solid;BORDER-LEFT:#000000 1px solid">
 	<THEAD>
 		<TR>
-			<TD class=ReportHead>序号</TD>
-			<TD class=ReportHead>日期</TD>
-			<TD class=ReportHead>序列号</TD>
-			<TD class=ReportHead>商品名称</TD>
-			<TD class=ReportHead>商品规格</TD>
-			<TD class=ReportHead>客户名称</TD>	
-			<TD class=ReportHead>客户电话</TD>	
-			<TD class=ReportHead>销售员</TD>
-			<TD class=ReportHead>销售价格</TD>
+			<TD class=ReportHead width="4%">序号</TD>
+			<TD class=ReportHead width="7%">日期</TD>
+			<TD class=ReportHead width="10%">序列号</TD>
+			<TD class=ReportHead width="20%">商品名称</TD>
+			<TD class=ReportHead width="20%">商品规格</TD>
+			<TD class=ReportHead width="13%">客户名称</TD>	
+			<TD class=ReportHead width="12%">客户电话</TD>	
+			<TD class=ReportHead width="7%">销售员</TD>
+			<TD class=ReportHead width="7%">销售价格</TD>
 		</TR>
 	</THEAD>
 	

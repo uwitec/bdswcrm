@@ -21,7 +21,7 @@ String user_id = info.getUser_id();
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript" src="js/Check.js"></script>
-<script language='JavaScript' src="js/date.js"></script>
+<script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
 <script language='JavaScript' src="js/nums.js"></script>
 <script language='JavaScript' src="js/selJsr.js"></script>
 <script type="text/javascript" src="js/prototype-1.4.0.js"></script>
@@ -35,6 +35,14 @@ String user_id = info.getUser_id();
 	var allCount = 2;
 	
 	function saveInfo(){
+		if(document.getElementById("store_id").value == ""){
+			alert("仓库名称不能为空，请选择！");
+			return;
+		}			
+		if(document.getElementById("pdrq").value == ""){
+			alert("盘点日期不能为空，请填写！");
+			return;
+		}	
 		if(document.getElementById("id").value == ""){
 			alert("名称不能为空，请填写！");
 			return;
@@ -185,8 +193,7 @@ String user_id = info.getUser_id();
 		<td class="a2" width="35%"><input type="text" name="kcpd.id" id="id" value="<%=id %>" maxlength="25"><font color="red">*</font>	
 		</td>	
 		<td class="a1">盘点日期</td>
-		<td class="a2"><input type="text" name="kcpd.pdrq" id="pdrq" value="<%=DateComFunc.getToday() %>" readonly>
-		<img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.getElementById('pdrq')); return false;"><font color="red">*</font>	
+		<td class="a2"><input type="text" name="kcpd.pdrq" id="pdrq" value="<%=DateComFunc.getToday() %>"  class="Wdate" onFocus="WdatePicker()"><font color="red">*</font>	
 		</td>			
 	</tr>	
 	<tr>

@@ -22,7 +22,7 @@ String cg_date = ParameterUtility.getStringParameter(request, "cg_date","");
 <title>进货单列表</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
-<script language='JavaScript' src="js/date.js"></script>
+<script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
 <script language="JavaScript">
 
 function sel(jhd_id,gysbh,yfje){
@@ -74,8 +74,7 @@ function sel(jhd_id,gysbh,yfje){
 				<option value="已入库" <%if(state.equals("已入库")) out.print("selected"); %>>已入库</option>
 				<option value="已取消" <%if(state.equals("已取消")) out.print("selected"); %>>已取消</option>	
 			</select>&nbsp;&nbsp;
-			采购日期：<input type="text" name="cg_date" value="<%=cg_date %>" size="10" readonly>	
-			<img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.myform.cg_date); return false;">
+			采购日期：<input type="text" name="cg_date" value="<%=cg_date %>" size="10"  class="Wdate" onFocus="WdatePicker()">	
 			&nbsp;&nbsp;
 			<input type="submit" name="buttonCx" value=" 查询 " class="css_button2">&nbsp;&nbsp;
 			<input type="button" name="buttonQk" value=" 清空 " class="css_button2" onclick="clearAll();">

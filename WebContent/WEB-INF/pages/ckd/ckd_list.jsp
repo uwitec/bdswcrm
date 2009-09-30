@@ -24,7 +24,7 @@ String orderType = StringUtils.nullToStr(VS.findValue("orderType"));
 <title>出库单管理</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
-<script language='JavaScript' src="js/date.js"></script>
+<script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
 <script type="text/javascript">
 	
 	function openWin(id){
@@ -105,10 +105,8 @@ String orderType = StringUtils.nullToStr(VS.findValue("orderType"));
 	<tr>
 		<td class="search" align="left" colspan="2">&nbsp;&nbsp;
 			出库单编号：<input type="text" name="ckd_id" value="<%=ckd_id %>">&nbsp;&nbsp;
-			创建时间：<input type="text" name="creatdate" value="<%=creatdate %>" size="8" readonly>	
-			<img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.myform.creatdate); return false;">&nbsp;至&nbsp;
-			<input type="text" name="creatdate2" value="<%=creatdate2 %>" size="8" readonly>	
-			<img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.myform.creatdate2); return false;">
+			创建时间：<input type="text" name="creatdate" value="<%=creatdate %>" size="15"  class="Wdate" onFocus="WdatePicker()">	&nbsp;至&nbsp;
+			<input type="text" name="creatdate2" value="<%=creatdate2 %>" size="15"  class="Wdate" onFocus="WdatePicker()">
 			&nbsp;&nbsp;
 			物流状态：<select name="state">
 				<option value=""></option>

@@ -24,7 +24,7 @@ String orderType = (String)VS.findValue("orderType");
 <title>库存盘点</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
-<script language='JavaScript' src="js/date.js"></script>
+<script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
 <script type="text/javascript">
 	
 	function openWin(id){
@@ -104,11 +104,9 @@ String orderType = (String)VS.findValue("orderType");
 	</tr>
 	<tr>
 		<td class="search" align="left" colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;			
-			盘点日期：<input type="text" name="pdrq1" value="<%=pdrq1 %>" size="10" readonly>	
-			<img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.myform.pdrq1); return false;">
+			盘点日期：<input type="text" name="pdrq1" value="<%=pdrq1 %>" size="15"  class="Wdate" onFocus="WdatePicker()">	
 			&nbsp;&nbsp;&nbsp;至&nbsp;&nbsp;&nbsp;
-			<input type="text" name="pdrq2" value="<%=pdrq2 %>" size="10" readonly>	
-			<img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.myform.pdrq2); return false;">			
+			<input type="text" name="pdrq2" value="<%=pdrq2 %>" size="15"  class="Wdate" onFocus="WdatePicker()">			
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			仓库名称：
 			<select name="store_id">

@@ -38,7 +38,7 @@ if(client != null){
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <LINK href="css/ddcolortabs.css" type=text/css rel=stylesheet>
 <script language="JavaScript" src="js/Check.js"></script>
-<script language='JavaScript' src="js/date.js"></script>
+<script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
 <script language='JavaScript' src="js/nums.js"></script>
 <script language='JavaScript' src="js/selJsr.js"></script>
 <script type="text/javascript" src="js/prototype-1.4.0.js"></script>
@@ -259,8 +259,7 @@ if(msg != null && msg.size() > 0){
 		}
 		%>
 		<td class="a1">创建日期</td>
-		<td class="a2"><input type="text" name="ckd.creatdate" id="creatdate" value="<%=cjsj %>" readonly>
-		<img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.getElementById('creatdate')); return false;">
+		<td class="a2"><input type="text" name="ckd.creatdate" id="creatdate" value="<%=cjsj %>"  readonly>
 		</td>	
 	</tr>
 	<tr>		
@@ -340,8 +339,7 @@ if(msg != null && msg.size() > 0){
 		}
 		%>	
 		<td class="a1">出库日期</td>
-		<td class="a2"><input type="text" name="ckd.ck_date" id="ck_date" value="<%=cksj %>" readonly>
-		<img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.getElementById('ck_date')); return false;">
+		<td class="a2"><input type="text" name="ckd.ck_date" id="ck_date" value="<%=cksj %>"  class="Wdate" onFocus="WdatePicker()">
 		</td>		
 	</tr>	
 	<tr>	

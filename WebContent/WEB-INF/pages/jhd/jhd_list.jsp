@@ -24,8 +24,7 @@ String orderType = (String)VS.findValue("orderType");
 <head>
 <title>采购订单</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link href="css/css.css" rel="stylesheet" type="text/css" />
-<script language='JavaScript' src="js/date.js"></script>
+<link href="css/css.css" rel="stylesheet" type="text/css" /><script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
 <script type="text/javascript">
 	
 	function openWin(id){
@@ -121,10 +120,8 @@ String orderType = (String)VS.findValue("orderType");
 				<option value="已提交" <%if(state.equals("已提交")) out.print("selected"); %>>已提交</option>
 				<option value="已入库" <%if(state.equals("已入库")) out.print("selected"); %>>已入库</option>
 			</select>&nbsp;&nbsp;&nbsp;&nbsp;
-			采购日期：<input type="text" name="cg_date" value="<%=cg_date %>" size="10" readonly>	
-			<img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.myform.cg_date); return false;">&nbsp;至&nbsp;
-			<input type="text" name="cg_date2" value="<%=cg_date2 %>" size="10" readonly>	
-			<img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.myform.cg_date2); return false;">
+			采购日期：<input type="text" name="cg_date" value="<%=cg_date %>" size="15"  class="Wdate" onFocus="WdatePicker()">	&nbsp;至&nbsp;
+			<input type="text" name="cg_date2" value="<%=cg_date2 %>" size="15"  class="Wdate" onFocus="WdatePicker()">
 			&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="submit" name="buttonCx" value=" 查询 " class="css_button">&nbsp;&nbsp;
 			<input type="button" name="buttonQk" value=" 清空 " class="css_button" onclick="clearAll();">

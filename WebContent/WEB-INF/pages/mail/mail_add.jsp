@@ -82,7 +82,6 @@
 		<td class="a1">邮件内容</td>
 		<td class="a2">
 			<textarea name="content" id="content" rows="20" style="width:90%"></textarea>
-            </iframe>
 		</td>
 	</tr>
 	<tr>	

@@ -21,7 +21,7 @@ String iscs_flag = StringUtils.nullToStr(VS.findValue("iscs_flag"));
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript" src="js/Check.js"></script>
-<script language='JavaScript' src="js/date.js"></script>
+<script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
 <script language='JavaScript' src="js/nums.js"></script>
 <script language='JavaScript' src="js/selClient.js"></script>
 <script language='JavaScript' src="js/selJsr.js"></script>
@@ -42,7 +42,12 @@ String iscs_flag = StringUtils.nullToStr(VS.findValue("iscs_flag"));
 			alert("编号不能为空！");
 			return;
 		}
-			
+
+		if(document.getElementById("th_date").value == ""){
+			alert("退货日期不能为空！");
+			return;
+		}
+					
 		if(document.getElementById("client_id").value == ""){
 			alert("供货单位不能为空，请选择！");
 			return;
@@ -213,8 +218,8 @@ String iscs_flag = StringUtils.nullToStr(VS.findValue("iscs_flag"));
 	}
 	
 	function selJhd(){
-		var destination = "selJhd.htm";
-		var fea ='width=800,height=500,left=' + (screen.availWidth-800)/2 + ',top=' + (screen.availHeight-500)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		var destination = "selJhd.html";
+		var fea ='width=800,height=600,left=' + (screen.availWidth-800)/2 + ',top=' + (screen.availHeight-600)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
 		window.open(destination,'关联进货单',fea);		
 	}	
@@ -292,8 +297,7 @@ String iscs_flag = StringUtils.nullToStr(VS.findValue("iscs_flag"));
 		<input type="text" name="cgthd.id" id="id" value="<%=id %>" size="30" maxlength="50" readonly>
 		</td>	
 		<td class="a1">退货日期</td>
-		<td class="a2"><input type="text" name="cgthd.th_date" id="th_date" value="<%=DateComFunc.getToday() %>" readonly>
-		<img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.getElementById('th_date')); return false;">
+		<td class="a2"><input type="text" name="cgthd.th_date" id="th_date" value="<%=DateComFunc.getToday() %>"  class="Wdate" onFocus="WdatePicker()"><font color="red">*</font>
 		</td>	
 	</tr>
 	<tr>			

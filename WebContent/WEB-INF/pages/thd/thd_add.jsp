@@ -16,7 +16,7 @@ String thd_id = (String)VS.findValue("thd_id");
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript" src="js/Check.js"></script>
-<script language='JavaScript' src="js/date.js"></script>
+<script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
 <script language='JavaScript' src="js/nums.js"></script>
 <script language='JavaScript' src="js/selClient.js"></script>
 <script language='JavaScript' src="js/selJsr.js"></script>
@@ -214,15 +214,15 @@ String thd_id = (String)VS.findValue("thd_id");
 	}			
 
 	function selXsd(){
-		var destination = "selXsd.htm";
-		var fea ='width=800,height=500,left=' + (screen.availWidth-800)/2 + ',top=' + (screen.availHeight-500)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		var destination = "selXsd.html";
+		var fea ='width=850,height=600,left=' + (screen.availWidth-850)/2 + ',top=' + (screen.availHeight-600)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
 		window.open(destination,'关联销售单',fea);			
 	}
 	
 	function selLsd(){
-		var destination = "selLsd.htm";
-		var fea ='width=800,height=500,left=' + (screen.availWidth-800)/2 + ',top=' + (screen.availHeight-500)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		var destination = "selLsd.html";
+		var fea ='width=850,height=600,left=' + (screen.availWidth-850)/2 + ',top=' + (screen.availHeight-600)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
 		window.open(destination,'关联销售单',fea);		
 	}
@@ -292,8 +292,8 @@ String thd_id = (String)VS.findValue("thd_id");
 		<input type="text" name="thd.thd_id" id="thd_id" value="<%=thd_id %>" size="30" maxlength="50" readonly><span style="color:red">*</span>
 		</td>	
 		<td class="a1">退货日期</td>
-		<td class="a2"><input type="text" name="thd.th_date" id="th_date" value="<%=DateComFunc.getToday() %>" readonly>
-		<img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.getElementById('th_date')); return false;"><span style="color:red">*</span>
+		<td class="a2">
+			<input type="text" name="thd.th_date" id="th_date" value="<%=DateComFunc.getToday() %>" class="Wdate" onFocus="WdatePicker()"><span style="color:red">*</span>
 		</td>	
 	</tr>
 	<tr>			
@@ -301,18 +301,14 @@ String thd_id = (String)VS.findValue("thd_id");
 		<td class="a2">
 		<input type="text" name="thd.client_id" id="client_name" value="" size="30" maxlength="50" onblur="setClientValue();" >
 		<input type="hidden" name="thd.client_name" id="client_id" value="" >
-		<!--<img src="images/select.gif" align="absmiddle" title="选择客户" border="0" onclick="openClientWin();" style="cursor:hand"><span style="color:red">*</span>
-		--><div id="clientsTip" style="height:12px;position:absolute;left:147px; top:85px; width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+		<div id="clientsTip" style="height:12px;position:absolute;left:147px; top:85px; width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		<font color="red">*</font>
 		</td>	
 		<td class="a1" width="15%">经手人</td>
 		<td class="a2" width="35%">
-		 <input  id="brand"  type="text"   length="20"  onblur="setValue()"/><!-- 
-         <img id="Loadingimg" src="images/indicator.gif" style="display:none"/>       
-         <img src="images/select.gif" align="absmiddle" title="选择经手人" border="0" onclick="openywyWin();" style="cursor:hand">
-          --><div  id="brandTip" style=" height:12px; position:absolute;left:612px;top:85px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;"  >
-          </div>
-		    <input type="hidden" name="thd.th_fzr" id="fzr" value=""/><font color="red">*</font>	
+		 <input id="brand"  type="text"   length="20"  onblur="setValue()"/>
+		 <div id="brandTip" style=" height:12px; position:absolute;left:612px;top:85px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;"></div>
+		 <input type="hidden" name="thd.th_fzr" id="fzr" value=""/><font color="red">*</font>	
 		</td>
 	</tr>
 	<tr>

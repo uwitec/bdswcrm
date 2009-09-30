@@ -23,7 +23,7 @@ String ys_date2 = (String)VS.findValue("ys_date2");
 <title>零售预收款</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
-<script language='JavaScript' src="js/date.js"></script>
+<script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
 <script type="text/javascript">
 	
 	function openWin(id){
@@ -109,11 +109,9 @@ String ys_date2 = (String)VS.findValue("ys_date2");
 		<td class="search" align="left" colspan="2">&nbsp;&nbsp;
 			编号：<input type="text" name="id" value="<%=id %>">&nbsp;&nbsp;
 			客户名称：<input type="text" name="client_name" value="<%=client_name %>">&nbsp;&nbsp;
-			预收时间：<input type="text" name="ys_date1" value="<%=ys_date1 %>" size="10" readonly>
-			<img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.myform.ys_date1); return false;">
+			预收时间：<input type="text" name="ys_date1" value="<%=ys_date1 %>" class="Wdate" onFocus="WdatePicker()">
 			&nbsp;至&nbsp;
-			<input type="text" name="ys_date2" value="<%=ys_date2 %>" size="10" readonly>
-			<img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.myform.ys_date2); return false;">
+			<input type="text" name="ys_date2" value="<%=ys_date2 %>" class="Wdate" onFocus="WdatePicker()">
 			&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="submit" name="buttonCx" value=" 查询 " class="css_button2">&nbsp;&nbsp;&nbsp;&nbsp;	
 			<input type="button" name="buttonQk" value=" 清空 " class="css_button2" onclick="clearAll();">

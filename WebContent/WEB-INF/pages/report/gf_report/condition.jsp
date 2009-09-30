@@ -6,8 +6,6 @@
 
 <%
 OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
-
-List userList = (List)VS.findValue("userList");
 List deptList = (List)VS.findValue("deptList");
 %>
 
@@ -16,26 +14,14 @@ List deptList = (List)VS.findValue("deptList");
 <title>零售工分统计</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
-<script language='JavaScript' src="js/date.js"></script>
+<script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
 <script language='JavaScript' src="js/selJsr.js"></script>
 <script type="text/javascript" src="js/prototype-1.4.0.js"></script>
 <style>
-	.selectTip{
-		background-color:#009;
-		 color:#fff;
-	}
+	.selectTip{background-color:#009; color:#fff;}
 </style>
 <script type="text/javascript">
-
-	function openywyWin()
-	{
-	   var destination = "selLsEmployee.html";
-		var fea ='width=800,height=500,left=' + (screen.availWidth-800)/2 + ',top=' + (screen.availHeight-500)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
-		
-		window.open(destination,'选择经手人',fea);	
-	}
-	function submits()
-	{
+	function submits(){
 	   document.reportForm.submit();
 	}	
 	
@@ -54,12 +40,10 @@ List deptList = (List)VS.findValue("deptList");
 	<tr>
 		<td class="a1">开始日期</td>
 		<td class="a4">
-			<input type="text" name="start_date" id="start_date" value="<%=DateComFunc.getToday() %>" readonly>
-			<img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.getElementById('start_date')); return false;"></td>
+			<input type="text" name="start_date" id="start_date" value="<%=DateComFunc.getToday() %>"  class="Wdate" onFocus="WdatePicker()"></td>
 		<td class="a1">结束日期</td>
 		<td class="a4">
-			<input type="text" name="end_date" id="end_date" value="<%=DateComFunc.getToday() %>" readonly>
-			<img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.getElementById('end_date')); return false;"></td>
+			<input type="text" name="end_date" id="end_date" value="<%=DateComFunc.getToday() %>"  class="Wdate" onFocus="WdatePicker()"></td>
 	</tr>
 	<tr>
 		<td class="a1">部门</td>

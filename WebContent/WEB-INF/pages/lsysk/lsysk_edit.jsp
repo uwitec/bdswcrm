@@ -22,7 +22,7 @@ List posTypeList = (List)VS.findValue("posTypeList");
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript" src="js/Check.js"></script>
-<script language='JavaScript' src="js/date.js"></script>
+<script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
 <script language='JavaScript' src="js/selJsr.js"></script>
 <script type="text/javascript" src="js/prototype-1.4.0.js"></script>
 <style>
@@ -103,8 +103,7 @@ List posTypeList = (List)VS.findValue("posTypeList");
 		<td class="a2" width="35%"><input type="text" name="lsysk.id" id="id" value="<%=StringUtils.nullToStr(lsysk.getId()) %>" readonly><font color="red">*</font></td>
 		<td class="a1" width="15%">预收日期</td>
 		<td class="a2">
-			<input type="text" name="lsysk.ys_date" id="ys_date" value="<%=StringUtils.nullToStr(lsysk.getYs_date()) %>" readonly>
-			<img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.getElementById('ys_date')); return false;">
+			<input type="text" name="lsysk.ys_date" id="ys_date" value="<%=StringUtils.nullToStr(lsysk.getYs_date()) %>" class="Wdate" onFocus="WdatePicker()">
 		</td>		
 	</tr>
 	<tr>
