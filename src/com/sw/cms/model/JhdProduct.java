@@ -14,6 +14,8 @@ public class JhdProduct{
 	private String qz_serial_num;
 	private String qz_flag;
 	private int sjcj_nums;  //实际成交商品数量
+	private String dw;
+	private double xj;
 	
 	public int getId() {
 		return id;
@@ -80,6 +82,15 @@ public class JhdProduct{
 	}
 	public void setSjcj_nums(int sjcj_nums) {
 		this.sjcj_nums = sjcj_nums;
+	}
+	public String getDw() {
+		return dw;
+	}
+	public void setDw(String dw) {
+		this.dw = dw;
+	}
+	public double getXj() {
+		return price * nums;
 	}
 
 }

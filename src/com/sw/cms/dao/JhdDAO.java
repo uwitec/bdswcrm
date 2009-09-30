@@ -144,7 +144,7 @@ public class JhdDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public List getJhdProducts(String jhd_id){
-		String sql = "select a.*,b.qz_serial_num as qz_flag from jhd_product a left join product b on b.product_id=a.product_id where jhd_id='" + jhd_id + "'";
+		String sql = "select a.*,b.qz_serial_num as qz_flag,b.dw from jhd_product a left join product b on b.product_id=a.product_id where jhd_id='" + jhd_id + "'";
 		
 		return this.getJdbcTemplate().query(sql, new JhdProductRowMapper());
 	}
@@ -386,6 +386,7 @@ public class JhdDAO extends JdbcBaseDAO {
 			if(SqlUtil.columnIsExist(rs,"qz_serial_num")) jhdProduct.setQz_serial_num(rs.getString("qz_serial_num"));
 			if(SqlUtil.columnIsExist(rs,"qz_flag")) jhdProduct.setQz_flag(rs.getString("qz_flag"));
 			if(SqlUtil.columnIsExist(rs,"sjcj_nums")) jhdProduct.setSjcj_nums(rs.getInt("sjcj_nums"));
+			if(SqlUtil.columnIsExist(rs,"dw")) jhdProduct.setDw(rs.getString("dw"));
 			
 			return jhdProduct;
 		}

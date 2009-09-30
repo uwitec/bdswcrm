@@ -29,6 +29,7 @@ public class Jhd {
 	private double sjcjje; //采购订单实际成交金额
 	
 	
+	
 	public String getCg_date() {
 		return cg_date;
 	}
@@ -162,6 +163,7 @@ public class Jhd {
 	public void setSjcjje(double sjcjje) {
 		this.sjcjje = sjcjje;
 	}
+
 
 
 }

@@ -89,7 +89,14 @@ String orderType = (String)VS.findValue("orderType");
 	function refreshPage(){
 		document.myform.action = "listJhd.html";
 		document.myform.submit();
-	}	
+	}
+	
+	function print(id){
+		var destination = "printJhd.html?id=" + id;
+		var fea ='width=850,height=600,left=' + (screen.availWidth-850)/2 + ',top=' + (screen.availHeight-600)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		
+		window.open(destination,'销售订单打印',fea);				
+	}		
 </script>
 </head>
 <body>
@@ -156,12 +163,14 @@ String orderType = (String)VS.findValue("orderType");
 		<td><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(jhd.getCzr())) %></td>
 		<td>
 		<%if(!StringUtils.nullToStr(jhd.getState()).equals("已保存")){ %>
-			<a href="#" onclick="openWin('<%=StringUtils.nullToStr(jhd.getId()) %>');"><img src="images/view.gif" align="absmiddle" title="查看进货单信息" border="0" style="cursor:hand"></a>
+			<a href="#" onclick="openWin('<%=StringUtils.nullToStr(jhd.getId()) %>');"><img src="images/view.gif" align="absmiddle" title="查看订单" border="0" style="cursor:hand"></a>
 		<%}else{ %>
-			<a href="#" onclick="edit('<%=StringUtils.nullToStr(jhd.getId()) %>');"><img src="images/modify.gif" align="absmiddle" title="修改进货单信息" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
-			<a href="#" onclick="openWin('<%=StringUtils.nullToStr(jhd.getId()) %>');"><img src="images/view.gif" align="absmiddle" title="查看进货单信息" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
-			<a href="#" onclick="del('<%=StringUtils.nullToStr(jhd.getId()) %>');"><img src="images/del.gif" align="absmiddle" title="删除该进货单" border="0" style="cursor:hand"></a>
+			<a href="#" onclick="edit('<%=StringUtils.nullToStr(jhd.getId()) %>');"><img src="images/modify.gif" align="absmiddle" title="修改订单" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
+			<a href="#" onclick="openWin('<%=StringUtils.nullToStr(jhd.getId()) %>');"><img src="images/view.gif" align="absmiddle" title="查看订单" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
+			<a href="#" onclick="del('<%=StringUtils.nullToStr(jhd.getId()) %>');"><img src="images/del.gif" align="absmiddle" title="删除订单" border="0" style="cursor:hand"></a>
 		<%} %>
+		&nbsp;&nbsp;&nbsp;&nbsp;
+		<a href="#" onclick="print('<%=StringUtils.nullToStr(jhd.getId()) %>');"><img src="images/print.png" align="absmiddle" title="打印订单" border="0" style="cursor:hand"></a>			
 		</td>
 	</tr>
 	

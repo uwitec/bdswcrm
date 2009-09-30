@@ -199,26 +199,30 @@ String sp_state = StringUtils.nullToStr(lsd.getSp_state());
         var curId = allCount + 1;   //curId一直加下去，防止重复
         allCount = allCount + 1;
         
+        var otd=document.createElement("td");
+		otd.className = "a2";
+		otd.innerHTML = '<td class="a2"><input type="checkbox" name="proc_id" id="proc_id" value="' + curId + '"></td>';
+        
         var otd0=document.createElement("td");
         otd0.className = "a2";
-        otd0.innerHTML = '<input type="text" id="product_name_'+curId+'" name="lsdProducts['+curId+'].product_name" readonly><input type="button" name="selectButton" value="选择" class="css_button" onclick="openWin('+curId+');"><input type="hidden" id="product_id_'+curId+'" name="lsdProducts['+curId+'].product_id">';
+        otd0.innerHTML = '<input type="text" id="product_name_'+curId+'" name="lsdProducts['+curId+'].product_name" style="width:100%" readonly><input type="hidden" id="product_id_'+curId+'" name="lsdProducts['+curId+'].product_id">';
         
         var otd1 = document.createElement("td");
         otd1.className = "a2";
-        otd1.innerHTML = '<input type="text" id="product_xh_'+curId+'"  name="lsdProducts['+curId+'].product_xh" size="15" readonly>';
+        otd1.innerHTML = '<input type="text" id="product_xh_'+curId+'"  name="lsdProducts['+curId+'].product_xh" size="15" style="width:100%" readonly>';
 
         var otd3 = document.createElement("td");
         otd3.className = "a2";
-        otd3.innerHTML = '<input type="text" id="price_'+curId+'" name="lsdProducts['+curId+'].price" value="0.00" size="7" onblur="hj();"><input type="hidden" id="cbj_'+curId+'" name="lsdProducts['+curId+'].cbj" value="0.00"><input type="hidden" id="kh_cbj_'+curId+'" name="lsdProducts['+curId+'].kh_cbj" value="0.00"><input type="hidden" id="gf_'+curId+'" name="lsdProducts['+curId+'].gf" value="0">';      
+        otd3.innerHTML = '<input type="text" id="price_'+curId+'" name="lsdProducts['+curId+'].price" value="0.00" size="7" style="width:100%" onblur="hj();"><input type="hidden" id="cbj_'+curId+'" name="lsdProducts['+curId+'].cbj" value="0.00"><input type="hidden" id="kh_cbj_'+curId+'" name="lsdProducts['+curId+'].kh_cbj" value="0.00"><input type="hidden" id="gf_'+curId+'" name="lsdProducts['+curId+'].gf" value="0">';      
         
         
         var otd5 = document.createElement("td");
         otd5.className = "a2";
-        otd5.innerHTML = '<input type="text" id="nums_'+curId+'" name="lsdProducts['+curId+'].nums" value="0" size="5" onblur="hj();">';
+        otd5.innerHTML = '<input type="text" id="nums_'+curId+'" name="lsdProducts['+curId+'].nums" value="0" size="5" style="width:100%" onblur="hj();">';
         
         var otd8 = document.createElement("td");
         otd8.className = "a2";
-        otd8.innerHTML = '<input type="text" id="xj_'+curId+'" name="lsdProducts['+curId+'].xj" value="0.00" size="7" readonly>';        
+        otd8.innerHTML = '<input type="text" id="xj_'+curId+'" name="lsdProducts['+curId+'].xj" value="0.00" size="7" style="width:100%" readonly>';        
         
         var otd9 = document.createElement("td");
         otd9.className = "a2";
@@ -226,20 +230,16 @@ String sp_state = StringUtils.nullToStr(lsd.getSp_state());
         
         var otd6 = document.createElement("td");
         otd6.className = "a2";
-        otd6.innerHTML = '<input type="text" id="remark_'+curId+'" name="lsdProducts['+curId+'].remark">';                       
-
-		var otd7 = document.createElement("td");
-		otd7.className = "a2";
-		otd7.innerHTML = '<input type="button" name="delButton" value="删除" class="css_button" onclick="delTr(this);">';
-		
+        otd6.innerHTML = '<input type="text" id="remark_'+curId+'" name="lsdProducts['+curId+'].remark" style="width:100%">';                       
+	
+	    otr.appendChild(otd); 
         otr.appendChild(otd0); 
         otr.appendChild(otd1); 
         otr.appendChild(otd3); 
         otr.appendChild(otd5);
         otr.appendChild(otd8); 
         otr.appendChild(otd9);
-        otr.appendChild(otd6);
-        otr.appendChild(otd7);        
+        otr.appendChild(otd6);  
                  
      }	
      
@@ -258,21 +258,6 @@ String sp_state = StringUtils.nullToStr(lsd.getSp_state());
 		window.open(destination,'详细信息',fea);	
 	}
 	
-	function openywyWin()
-	{
-	   var destination = "selLsEmployee.html";
-		var fea ='width=800,height=500,left=' + (screen.availWidth-800)/2 + ',top=' + (screen.availHeight-500)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
-		
-		window.open(destination,'选择经手人',fea);	
-	}	
-	
-	
-	function openClientWin(){
-		var destination = "selectClient.html";
-		var fea ='width=800,height=500,left=100,top=50,directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
-		
-		window.open(destination,'详细信息',fea);		
-	}
 
 	function openAccount(){
 		var destination = "selSkAccount.html";
@@ -525,7 +510,42 @@ String sp_state = StringUtils.nullToStr(lsd.getSp_state());
 			document.getElementById("pos_id").style.display = "none";
 			document.getElementById("pos_id").value = "";
 		}
+	}
+	
+	function openWin(){
+		var destination = "selLsProcCkd.html";
+		var fea ='width=800,height=550,left=' + (screen.availWidth-800)/2 + ',top=' + (screen.availHeight-550)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		
+		window.open(destination,'详细信息',fea);	
 	}	
+	
+	
+	function delDesc(){
+		var k = 0;
+		var sel = "0"; 
+		for(var i=0;i<document.lsdForm.proc_id.length;i++){
+			var o = document.lsdForm.proc_id[i];
+			if(o.checked){
+				k = k + 1;
+				sel = document.lsdForm.proc_id[i].value;
+			}
+		}
+		if(k != 1){
+			alert("请选择产品明细，且只能选择一条信息！");
+			return;
+		}
+		
+		document.getElementById("product_name_" + sel).value = "";
+		document.getElementById("product_id_" + sel).value = "";
+		document.getElementById("product_xh_" + sel).value = "";
+		document.getElementById("price_" + sel).value = "0.00";
+		document.getElementById("cbj_" + sel).value = "0.00";
+		document.getElementById("kh_cbj_" + sel).value = "0.00";
+		document.getElementById("gf_" + sel).value = "0.00";
+		document.getElementById("nums_" + sel).value = "0";
+		document.getElementById("xj_" + sel).value = "0.00";
+		document.getElementById("remark_" + sel).value = "";
+	}		
 </script>
 
 </head>
@@ -623,14 +643,14 @@ String sp_state = StringUtils.nullToStr(lsd.getSp_state());
 <table width="100%"  align="center" id="lsdtable"  class="chart_list" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td>产品名称</td>
-		<td>规格</td>
-		<td>销售价格</td>
-		<td>数量</td>
-		<td>小计</td>
-		<td>强制序列号</td>
-		<td>备注</td>
-		<td></td>
+		<td width="5%">选择</td>
+		<td width="20%">产品名称</td>
+		<td width="20%">规格</td>
+		<td width="10%">销售价格</td>
+		<td width="5%">数量</td>
+		<td width="10%">小计</td>
+		<td width="15%">强制序列号</td>
+		<td width="15%">备注</td>
 	</tr>
 	</thead>
 <%
@@ -643,29 +663,25 @@ if(lsdProducts != null && lsdProducts.size()>0){
 		}
 %>
 	<tr>
+		<td class="a2"><input type="checkbox" name="proc_id" id="proc_id" value="<%=i %>"></td>
 		<td class="a2">
-			<input type="text" id="product_name_<%=i %>" name="lsdProducts[<%=i %>].product_name" value="<%=StringUtils.nullToStr(lsdProduct.getProduct_name()) %>" readonly><input type="button" name="selectButton" value="选择" class="css_button" onclick="openWin(<%=i %>);">
+			<input type="text" id="product_name_<%=i %>" name="lsdProducts[<%=i %>].product_name" value="<%=StringUtils.nullToStr(lsdProduct.getProduct_name()) %>" style="width:100%" readonly>
 			<input type="hidden" id="product_id_<%=i %>" name="lsdProducts[<%=i %>].product_id" value="<%=StringUtils.nullToStr(lsdProduct.getProduct_id()) %>">
 		</td>
-		<td class="a2"><input type="text" id="product_xh_<%=i %>" name="lsdProducts[<%=i %>].product_xh" size="15" value="<%=StringUtils.nullToStr(lsdProduct.getProduct_xh()) %>" readonly></td>	
+		<td class="a2"><input type="text" id="product_xh_<%=i %>" name="lsdProducts[<%=i %>].product_xh" size="15" value="<%=StringUtils.nullToStr(lsdProduct.getProduct_xh()) %>" style="width:100%" readonly></td>	
 		<td class="a2">
-			<input type="text" id="price_<%=i %>" name="lsdProducts[<%=i %>].price" value="<%=JMath.round(lsdProduct.getPrice()) %>" size="7" onblur="hj();">
+			<input type="text" id="price_<%=i %>" name="lsdProducts[<%=i %>].price" value="<%=JMath.round(lsdProduct.getPrice()) %>" size="7" style="width:100%" onblur="hj();">
 			<input type="hidden" id="cbj_<%=i %>" name="lsdProducts[<%=i %>].cbj" value="<%=JMath.round(lsdProduct.getCbj()) %>">
 			<input type="hidden" id="kh_cbj_<%=i %>" name="lsdProducts[<%=i %>].kh_cbj" value="<%=JMath.round(lsdProduct.getKh_cbj()) %>">
 			<input type="hidden" id="gf_<%=i %>" name="lsdProducts[<%=i %>].gf" value="<%=lsdProduct.getGf() %>">
 		</td>
-		<td class="a2"><input type="text" id="nums_<%=i %>" name="lsdProducts[<%=i %>].nums" value="<%=lsdProduct.getNums() %>" size="5" onblur="hj();"></td>
-		<td class="a2"><input type="text" id="xj_<%=i %>" name="lsdProducts[<%=i %>].xj" value="<%=JMath.round(lsdProduct.getXj()) %>" size="7" readonly></td>
+		<td class="a2"><input type="text" id="nums_<%=i %>" name="lsdProducts[<%=i %>].nums" value="<%=lsdProduct.getNums() %>" size="5" style="width:100%" onblur="hj();"></td>
+		<td class="a2"><input type="text" id="xj_<%=i %>" name="lsdProducts[<%=i %>].xj" value="<%=JMath.round(lsdProduct.getXj()) %>" size="7" style="width:100%" readonly></td>
 		<td class="a2">
 			<input type="text" id="qz_serial_num_<%=i %>" name="lsdProducts[<%=i %>].qz_serial_num" value="<%=StringUtils.nullToStr(lsdProduct.getQz_serial_num()) %>" size="15" readonly>
 			<input type="hidden" id="qz_flag_<%=i %>" name="lsdProducts[<%=i %>].qz_flag" value="<%=flag2 %>"><a style="cursor:hand" title="左键点击输入输列号" onclick="openSerialWin('<%=i %>');"><b>...</b></a>&nbsp;
 		</td>		
-		<td class="a2"><input type="text" id="remark_<%=i %>" name="lsdProducts[<%=i %>].remark" value="<%=StringUtils.nullToStr(lsdProduct.getRemark()) %>"></td>
-		<%if (i>0){ %>		
-		<td class="a2"><input type="button" name="delButton" value="删除" class="css_button" onclick="delTr(this);"></td>
-		<%}else{ %>
-		<td class="a2">&nbsp;</td>
-		<%} %>
+		<td class="a2"><input type="text" id="remark_<%=i %>" name="lsdProducts[<%=i %>].remark" value="<%=StringUtils.nullToStr(lsdProduct.getRemark()) %>" style="width:100%"></td>
 	</tr>
 <%
 	}
@@ -673,29 +689,25 @@ if(lsdProducts != null && lsdProducts.size()>0){
 	for(int i=0;i<3;i++){
 		%>
 			<tr>
+				<td class="a2"><input type="checkbox" name="proc_id" id="proc_id" value="<%=i %>"></td>
 				<td class="a2">
-					<input type="text" id="product_name_<%=i %>" name="lsdProducts[<%=i %>].product_name" readonly><input type="button" name="selectButton" value="选择" class="css_button" onclick="openWin(<%=i %>);">
+					<input type="text" id="product_name_<%=i %>" name="lsdProducts[<%=i %>].product_name" style="width:100%" readonly>
 					<input type="hidden" id="product_id_<%=i %>" name="lsdProducts[<%=i %>].product_id">
 				</td>
-				<td class="a2"><input type="text" id="product_xh_<%=i %>" name="lsdProducts[<%=i %>].product_xh" size="15" readonly></td>	
+				<td class="a2"><input type="text" id="product_xh_<%=i %>" name="lsdProducts[<%=i %>].product_xh" size="15" style="width:100%" readonly></td>	
 				<td class="a2">
-					<input type="text" id="price_<%=i %>" name="lsdProducts[<%=i %>].price" value="0.00" size="7" onblur="hj();">
+					<input type="text" id="price_<%=i %>" name="lsdProducts[<%=i %>].price" value="0.00" size="7" style="width:100%" onblur="hj();">
 					<input type="hidden" id="cbj_<%=i %>" name="lsdProducts[<%=i %>].cbj" value="0.00">
 					<input type="hidden" id="kh_cbj_<%=i %>" name="lsdProducts[<%=i %>].kh_cbj" value="0.00">
 					<input type="hidden" id="gf_<%=i %>" name="lsdProducts[<%=i %>].gf" value="0">
 				</td>
-				<td class="a2"><input type="text" id="nums_<%=i %>" name="lsdProducts[<%=i %>].nums" value="0" size="5" onblur="hj();"></td>
-				<td class="a2"><input type="text" id="xj_<%=i %>" name="lsdProducts[<%=i %>].xj" value="0.00" size="7" readonly></td>
+				<td class="a2"><input type="text" id="nums_<%=i %>" name="lsdProducts[<%=i %>].nums" value="0" size="5" style="width:100%" onblur="hj();"></td>
+				<td class="a2"><input type="text" id="xj_<%=i %>" name="lsdProducts[<%=i %>].xj" value="0.00" size="7" style="width:100%" readonly></td>
 				<td class="a2">
 					<input type="text" id="qz_serial_num_<%=i %>" name="lsdProducts[<%=i %>].qz_serial_num" size="15" readonly>
 					<input type="hidden" id="qz_flag_<%=i %>" name="lsdProducts[<%=i %>].qz_flag"><a style="cursor:hand" title="左键点击输入输列号" onclick="openSerialWin('<%=i %>');"><b>...</b></a>&nbsp;
 				</td>				
-				<td class="a2"><input type="text" id="remark_<%=i %>" name="lsdProducts[<%=i %>].remark"></td>
-				<%if (i>0){ %>		
-				<td class="a2"><input type="button" name="delButton" value="删除" class="css_button" onclick="delTr(this);"></td>
-				<%}else{ %>
-				<td class="a2">&nbsp;</td>
-				<%} %>
+				<td class="a2"><input type="text" id="remark_<%=i %>" name="lsdProducts[<%=i %>].remark" style="width:100%"></td>
 			</tr>
 		<%
 	}
@@ -705,7 +717,8 @@ if(lsdProducts != null && lsdProducts.size()>0){
 <table width="100%"  align="center" class="chart_info" cellpadding="0" cellspacing="0">
 	<tr height="35">
 		<td class="a2" colspan="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="button" name="button1" value="添加一行" class="css_button2" onclick="addTr();">
+			<input type="button" name="button1" value="添加产品" class="css_button3" onclick="openWin();">
+			<input type="button" name="button8" value="清除产品" class="css_button3" onclick="delDesc();">
 		</td>
 	</tr>
 	<tr height="35">	

@@ -1968,7 +1968,16 @@
 				<param name="dataSource">xsdProducts</param>
 				<param name="format">PDF</param>
 			</result>
-        </action>    
+        </action>
+        
+        <!-- 采购订单打印 -->                                                                                                             
+        <action name="printJhd" class="jhdAction" method="printJhd">
+            <result name="success" type="jasper">
+				<param name="location">/WEB-INF/report/jhdTemplate.jasper</param>
+				<param name="dataSource">jhdProducts</param>
+				<param name="format">PDF</param>
+			</result>
+        </action>            
         
         <!-- 成本调整，查询结果 -->
         <action name="queryProduct" class="cbtzAction" method="getResults">

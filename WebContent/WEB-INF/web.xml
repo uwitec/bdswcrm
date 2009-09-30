@@ -149,6 +149,7 @@
     	<servlet-name>UploadFile</servlet-name>
     	<servlet-class>com.sw.cms.servlet.UploadFile</servlet-class>
     </servlet>
+
 	<servlet-mapping>
 		<servlet-name>dwr</servlet-name>
 		<url-pattern>/dwr/*</url-pattern>

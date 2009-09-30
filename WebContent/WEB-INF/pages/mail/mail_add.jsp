@@ -4,7 +4,13 @@
 <title>邮件添加</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="xhEditor/jquery/jquery-1.3.2.min.js"></script>
+<script type="text/javascript" src="xhEditor/xheditor.js"></script>
 <script type="text/javascript">
+	$(pageInit);
+	function pageInit(){
+		$('#content').xheditor(true,{tools:'full',upLinkUrl:"<%=request.getContextPath() %>/UploadFile",upLinkExt:"zip,rar,txt",upImgUrl:"<%=request.getContextPath() %>/UploadFile",upImgExt:"jpg,jpeg,gif,png",upFlashUrl:"<%=request.getContextPath() %>/UploadFile",upFlashExt:"swf",upMediaUrl:"<%=request.getContextPath() %>/UploadFile",upMediaExt:"avi"});
+	}
 	function saveInfo(){
 		document.myform.content.value = eWebEditor1.eWebEditor.document.body.innerHTML;
 
@@ -75,8 +81,7 @@
 	<tr>
 		<td class="a1">邮件内容</td>
 		<td class="a2">
-			<textarea name="content" id="content" rows="1" style="width:90%" style="display:none"></textarea>
-            <iframe ID="eWebEditor1" src="<%=request.getContextPath() %>/xxfb/eWebEditor.jsp?id=content&style=standard&color=Office" width="100%" height="350px" frameborder="0" scrolling="no"> 
+			<textarea name="content" id="content" rows="20" style="width:90%"></textarea>
             </iframe>
 		</td>
 	</tr>

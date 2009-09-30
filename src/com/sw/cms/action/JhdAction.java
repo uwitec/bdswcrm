@@ -2,21 +2,27 @@ package com.sw.cms.action;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.sw.cms.action.base.BaseAction;
 import com.sw.cms.model.Jhd;
 import com.sw.cms.model.JhdProduct;
 import com.sw.cms.model.LoginInfo;
 import com.sw.cms.model.Page;
+import com.sw.cms.model.SysUser;
 import com.sw.cms.service.ClientsService;
 import com.sw.cms.service.JhdService;
 import com.sw.cms.service.ProductKcService;
 import com.sw.cms.service.ProductKindService;
 import com.sw.cms.service.StoreService;
+import com.sw.cms.service.SysInitSetService;
 import com.sw.cms.service.UserService;
 import com.sw.cms.util.Constant;
 import com.sw.cms.util.DateComFunc;
+import com.sw.cms.util.MoneyUtil;
 import com.sw.cms.util.ParameterUtility;
+import com.sw.cms.util.StaticParamDo;
+import com.sw.cms.util.StringUtils;
 
 public class JhdAction extends BaseAction {
 
@@ -27,6 +33,8 @@ public class JhdAction extends BaseAction {
 	private ClientsService clientsService;
 	private ProductKcService productKcService;
 	private ProductKindService productKindService;
+	private SysInitSetService sysInitSetService;
+	
 
 	private Page jhdPage;
 
@@ -56,6 +64,19 @@ public class JhdAction extends BaseAction {
 	
 	private String product_name = "";
 	private String product_kind = "";
+	
+	
+	//打印所需参数
+	private String creatdate = "";
+	private String tel = "";
+	private String dept_name = "";
+	private String title_name = "";
+	private String foot_name = "";
+	private String jsr = "";
+	private String address = "";
+	private String remark = "";
+	private String jexj_dx = "";
+	private String provider = "";
 
 	/**
 	 * 取进货单列表
@@ -197,6 +218,37 @@ public class JhdAction extends BaseAction {
 		kindList = productKindService.getAllProductKindList();
 		
 		return "success";
+	}
+	
+	
+	/**
+	 * 打印采购订单
+	 * @return
+	 */
+	public String printJhd(){
+		try{
+			jhd = (Jhd)jhdService.getJhd(id);
+			jhdProducts = jhdService.getJhdProducts(id);
+			
+			creatdate = StringUtils.nullToStr(jhd.getCg_date());
+			provider = StaticParamDo.getClientNameById(jhd.getGysbh());
+			jexj_dx = MoneyUtil.toChinese(jhd.getTotal()+"");
+			dept_name = StaticParamDo.getDeptNameById(((SysUser)userService.getUser(jhd.getFzr())).getDept());
+			remark = StringUtils.nullToStr(jhd.getMs());
+			jsr = StaticParamDo.getRealNameById(jhd.getFzr());
+			
+			Map map = sysInitSetService.getReportSet();
+			
+			if(map != null){
+				title_name = StringUtils.nullToStr(map.get("title_name")) + "采购订单";
+				foot_name = StringUtils.nullToStr(map.get("foot_name"));	
+			}
+			
+			return "success";
+		}catch(Exception e){
+			log.error("打印采购计单出错，原因：" + e);
+			return "error";
+		}
 	}
 
 
@@ -406,6 +458,94 @@ public class JhdAction extends BaseAction {
 
 	public void setProductPage(Page productPage) {
 		this.productPage = productPage;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getCreatdate() {
+		return creatdate;
+	}
+
+	public void setCreatdate(String creatdate) {
+		this.creatdate = creatdate;
+	}
+
+	public String getDept_name() {
+		return dept_name;
+	}
+
+	public void setDept_name(String dept_name) {
+		this.dept_name = dept_name;
+	}
+
+	public String getFoot_name() {
+		return foot_name;
+	}
+
+	public void setFoot_name(String foot_name) {
+		this.foot_name = foot_name;
+	}
+
+	public String getJexj_dx() {
+		return jexj_dx;
+	}
+
+	public void setJexj_dx(String jexj_dx) {
+		this.jexj_dx = jexj_dx;
+	}
+
+	public String getJsr() {
+		return jsr;
+	}
+
+	public void setJsr(String jsr) {
+		this.jsr = jsr;
+	}
+
+	public String getProvider() {
+		return provider;
+	}
+
+	public void setProvider(String provider) {
+		this.provider = provider;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
+	public String getTel() {
+		return tel;
+	}
+
+	public void setTel(String tel) {
+		this.tel = tel;
+	}
+
+	public String getTitle_name() {
+		return title_name;
+	}
+
+	public void setTitle_name(String title_name) {
+		this.title_name = title_name;
+	}
+
+	public SysInitSetService getSysInitSetService() {
+		return sysInitSetService;
+	}
+
+	public void setSysInitSetService(SysInitSetService sysInitSetService) {
+		this.sysInitSetService = sysInitSetService;
 	}
 
 }

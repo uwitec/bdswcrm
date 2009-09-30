@@ -15,9 +15,14 @@ XxfbNbgg xxfbNbgg = (XxfbNbgg)VS.findValue("xxfbNbgg");
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript" src="js/Check.js"></script>
 <script language='JavaScript' src="js/date.js"></script>
+<script type="text/javascript" src="xhEditor/jquery/jquery-1.3.2.min.js"></script>
+<script type="text/javascript" src="xhEditor/xheditor.js"></script>
 <script type="text/javascript">
+	$(pageInit);
+	function pageInit(){
+		$('#content').xheditor(true,{tools:'full',upLinkUrl:"<%=request.getContextPath() %>/UploadFile",upLinkExt:"zip,rar,txt",upImgUrl:"<%=request.getContextPath() %>/UploadFile",upImgExt:"jpg,jpeg,gif,png",upFlashUrl:"<%=request.getContextPath() %>/UploadFile",upFlashExt:"swf",upMediaUrl:"<%=request.getContextPath() %>/UploadFile",upMediaExt:"avi"});
+	}
 	function saveInfo(){
-		document.getElementById("content").value = eWebEditor1.eWebEditor.document.body.innerHTML;
 		if(!InputValid(document.getElementById("title"),1,"string",1,1,100,"标题")){	 return; }		
 		if(!InputValid(document.getElementById("pub_date"),1,"string",1,1,20,"发布时间")){	 return; }
 		document.myform.submit();
@@ -34,15 +39,15 @@ XxfbNbgg xxfbNbgg = (XxfbNbgg)VS.findValue("xxfbNbgg");
 	</tr>
 	</thead>
 	<tr>
-		<td class="a1" width="20%">标题</td>
+		<td class="a1" width="15%">标题</td>
 		<td class="a2" width="80%" colspan="3"><input type="text" name="xxfbNbgg.title" id="title" value="<%=StringUtils.nullToStr(xxfbNbgg.getTitle()) %>" size="45"><font color="red">*</font></td>
 	</tr>
 	<tr>
-		<td class="a1" width="20%">发布时间</td>
+		<td class="a1" width="15%">发布时间</td>
 		<td class="a2" width="30%"><input type="text" name="xxfbNbgg.pub_date" id="pub_date" value="<%=StringUtils.nullToStr(xxfbNbgg.getPub_date()) %>" readonly>
 		<img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.getElementById('pub_date')); return false;">
 		</td>
-		<td class="a1" width="20%">分销商是否可见</td>
+		<td class="a1" width="15%">分销商是否可见</td>
 		<td class="a2" width="30%">
 			<select name="xxfbNbgg.type" id="type">
 				<option value="0" <%if(xxfbNbgg.getType().equals("0")) out.print("selected"); %>>否</option>
@@ -51,11 +56,9 @@ XxfbNbgg xxfbNbgg = (XxfbNbgg)VS.findValue("xxfbNbgg");
 		</td>		
 	</tr>
 	<tr>
-		<td class="a1" width="20%">公告内容</td>
+		<td class="a1" width="15%">公告内容</td>
 		<td class="a2" colspan="3">
-			<textarea name="xxfbNbgg.content" id="content" rows="1" style="width:90%" style="display:none"><%=StringUtils.nullToStr(xxfbNbgg.getContent()) %></textarea>
-			<iframe ID="eWebEditor1" src="<%=request.getContextPath() %>/xxfb/eWebEditor.jsp?id=content&style=standard&color=Office" width="100%" height="450px" frameborder="0" scrolling="no">   
-			</iframe>
+			<textarea id="content" name="xxfbNbgg.content" rows="25" style="width:99%"><%=StringUtils.nullToStr(xxfbNbgg.getContent()) %></textarea>
 		</td>
 	</tr>	
 	<tr height="35">
