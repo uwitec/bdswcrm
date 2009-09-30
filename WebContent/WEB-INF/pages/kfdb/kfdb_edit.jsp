@@ -151,9 +151,9 @@ if(kfdbProducts!=null && kfdbProducts.size()>0){
 	}     
 
 	
-	//选择调拨产品,与零售单采用一个产品选择页面
+	//选择调拨产品
 	function openWin(id){
-		var destination = "selLsProcCkd.html?openerId="+id;
+		var destination = "selKfdbProc.html?openerId="+id;
 		var fea ='width=800,height=500,left=' + (screen.availWidth-800)/2 + ',top=' + (screen.availHeight-500)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
 		window.open(destination,'详细信息',fea);	

@@ -873,6 +873,9 @@
         <action name="selSqr" class="kfdbAction" method="selSqr">
             <result name="success">/WEB-INF/pages/kfdb/selSqr.jsp</result>
         </action>
+        <action name="selKfdbProc" class="lsdAction" method="selKcProc">
+            <result name="success">/WEB-INF/pages/kfdb/selectKcProc.jsp</result>
+        </action>         
         <!-- 库房调拨 -->
         
         <!-- 调拨申请 -->
