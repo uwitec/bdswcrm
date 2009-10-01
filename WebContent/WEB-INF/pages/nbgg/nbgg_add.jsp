@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript" src="js/Check.js"></script>
-<script language='JavaScript' src="js/date.js"></script>
+<script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
 <script type="text/javascript" src="xhEditor/jquery/jquery-1.3.2.min.js"></script>
 <script type="text/javascript" src="xhEditor/xheditor.js"></script>
 <script type="text/javascript">
@@ -35,8 +35,7 @@
 	</tr>
 	<tr>
 		<td class="a1" width="15%">发布时间</td>
-		<td class="a2" width="30%"><input type="text" name="xxfbNbgg.pub_date" id="pub_date" value="<%=DateComFunc.getToday() %>" readonly>
-		<img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.getElementById('pub_date')); return false;">
+		<td class="a2" width="30%"><input type="text" name="xxfbNbgg.pub_date" id="pub_date" value="<%=DateComFunc.getToday() %>" class="Wdate" onFocus="WdatePicker()">
 		</td>
 		<td class="a1" width="15%">分销商是否可见</td>
 		<td class="a2" width="30%">

@@ -27,7 +27,9 @@ if(yufuToYingfuDescs != null && yufuToYingfuDescs.size()>0){
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript" src="js/Check.js"></script>
-<script language='JavaScript' src="js/date.js"></script>
+<script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
+<script language='JavaScript' src="js/selJsr.js"></script>
+<script type="text/javascript" src="js/prototype-1.4.0.js"></script>
 <style>
 	.selectTip{
 		background-color:#009;
@@ -42,7 +44,7 @@ if(yufuToYingfuDescs != null && yufuToYingfuDescs.size()>0){
 		if(!InputValid(document.getElementById("create_date"),1,"string",1,1,20,"日期")){	 return; }
 		if(!InputValid(document.getElementById("client_id"),1,"string",1,1,50,"往来单位")){	 return; }
 		
-		if(document.getElementById("jsr").value == ""){
+		if(document.getElementById("fzr").value == ""){
 			alert("经手人不能为空，请选择！");
 			return;
 		}
@@ -94,7 +96,7 @@ if(yufuToYingfuDescs != null && yufuToYingfuDescs.size()>0){
 	}			
 </script>
 </head>
-<body >
+<body  onload="initFzrTip();">
 <form name="XsskForm" action="updateYufuToYingfu.html" method="post">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
@@ -107,8 +109,7 @@ if(yufuToYingfuDescs != null && yufuToYingfuDescs.size()>0){
 		<td class="a2" width="35%"><input type="text" name="yufuToYingfu.id" id="id" value="<%=StringUtils.nullToStr(yufuToYingfu.getId()) %>" readonly>
 		</td>
 		<td class="a1" width="15%">结算日期</td>
-		<td class="a2" width="35%"><input type="text" name="yufuToYingfu.create_date" id="create_date" value="<%=StringUtils.nullToStr(yufuToYingfu.getCreate_date()).equals("")?DateComFunc.getToday():StringUtils.nullToStr(yufuToYingfu.getCreate_date()) %>" readonly>
-		<img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.getElementById('fk_date')); return false;">
+		<td class="a2" width="35%"><input type="text" name="yufuToYingfu.create_date" id="create_date" value="<%=StringUtils.nullToStr(yufuToYingfu.getCreate_date()).equals("")?DateComFunc.getToday():StringUtils.nullToStr(yufuToYingfu.getCreate_date()) %>" class="Wdate" onFocus="WdatePicker()">
 		</td>		
 	</tr>
 	<tr>		
@@ -119,13 +120,9 @@ if(yufuToYingfuDescs != null && yufuToYingfuDescs.size()>0){
 		</td>
 		<td class="a1" width="15%">经手人</td>
 		<td class="a2" width="35%">
-				 <!--修改 --------------------------------------------------------------------------------------  -->
-		 <input  id="brand"    type="text"   length="20"  onblur="setValue()" value="<%=StaticParamDo.getRealNameById(yufuToYingfu.getJsr())%>"/> 
-         <img src="images/select.gif" align="absmiddle" title="选择经手人" border="0" onclick="openywyWin();" style="cursor:hand">
-          <div   id="brandTip"  style="height:12px;position:absolute;left:612px; top:85px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
-          </div>
-		    <input type="hidden" name="yufuToYingfu.jsr" id="jsr"  value="<%=yufuToYingfu.getJsr()%>"/> 
-		<!--修改 --------------------------------------------------------------------------------------  -->	
+		    <input  id="brand"    type="text"   length="20"  onblur="setValue()" value="<%=StaticParamDo.getRealNameById(yufuToYingfu.getJsr())%>"/> 
+            <div   id="brandTip"  style="height:12px;position:absolute;left:612px; top:85px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+		    <input type="hidden" name="yufuToYingfu.jsr" id="fzr"  value="<%=yufuToYingfu.getJsr()%>"/> 
 		</td>				
 	</tr>
 	<tr>		
@@ -222,221 +219,3 @@ if(yufuToYingfuDescs != null && yufuToYingfuDescs.size()>0){
 </form>
 </body>
 </html>
-
-<!-- 修改 ----------------------------------------------------------------------------------------------------------------------->
-<!-- searchBrand  查询相近的经手人-->
-<!-- showResponse 展示-->
-<!-- move 上下事件-->
-<!-- down 鼠标按下事件-->
-<!-- setValue 鼠标离开事件-->
-<script type="text/javascript" src="js/prototype-1.4.0.js"></script>
-<script type="text/javascript">
-var tip = "";
-function searchBrand()
-{
-    
-	var url = 'getBrands.do';
-	var params = "prefix=" + $F('brand');
-	var myAjax = new Ajax.Request(
-	url,
-	{
-		method:'post',
-		parameters: params,
-		onComplete: showResponse,
-		asynchronous:true
-	});
-}
-var list;
-function showResponse(originalRequest)
-{   
-	var brandLists = originalRequest.responseText.split("%");
-	list=brandLists;
-     
-	var brandList=brandLists[0].split("$");
-	 
-	if ( brandList.length > 1)
-	{
-		var bt = $("brandTip");
-		var s="";
-		var flog=0;
-		for(var i = 0 ; i <  brandList.length; i++)  
-		{
-		   if(flog==10)
-		   {
-		     break;
-		   }
-		    s += "<div onmouseover=\"this.className='selectTip';style.cursor='default'\"  onmouseout=\"this.className=null; style.cursor='default'\">" + brandList[i] + "</div>";
-		   flog++;
-		}
-		 bt.innerHTML=s;
-		 
-		if( tip != $("brand").value)
-		{
-			Element.show('brandTip');
-		}
-	}
-	else
-	{
-		var bt = $("brandTip");
-		bt.innerHTML = "";
-		Element.hide('brandTip');
-	}
-}
-function move(event)
-{
-	 var srcEl = Event.element(event);
-	 var tipEl = $(srcEl.id + "Tip");
-     var a = tipEl.childNodes;
-	 if (tipEl.style.display == "" )
-	 {
-		if(event.keyCode == 40 )
-		{            
-			if (tipEl.childNodes.length >= 1)
-			{
-				var bList = tipEl.childNodes;
-				 
-				if(tipEl.lastChild.className=="selectTip")
-				{
-				    tipEl.firstChild.className = "selectTip";
-					tipEl.lastChild.className = "null";
-					return ;
-				}
-				var s=0;
-				for (var i = 0 ; i < bList.length; i++)
-				{
-					if (bList[i].className == "selectTip")
-					{
-					    s++;
-						bList[i + 1].className = "selectTip";
-						bList[i].className = "null";
-						return ;
-					}
-					 
-				}
-				if(s==0)
-				{
-				  tipEl.firstChild.className = "selectTip";
-				}
-				 
-			}
-
-		}
-		else if(event.keyCode == 38)
-		{
-		   
-			if (tipEl.childNodes.length >= 1)
-			{
-			   
-			   	if(tipEl.firstChild.className == "selectTip")
-				{
-					tipEl.lastChild.className = "selectTip";
-					tipEl.firstChild.className = "null";
-					return ;
-				}
-				var s=0;
-				var bList = tipEl.childNodes;
-				for (var i = 0 ; i < bList.length ; i ++)
-				{
-					if (bList[i].className == "selectTip")
-					{
-					   s++;
-						bList[i - 1].className = "selectTip";
-						bList[i].className = "null";
-						return ;
-					}
-					 
-				}
-				if(s==0)
-				{
-				   tipEl.lastChild.className = "selectTip";
-				}
-			}
-		}
-		else if(event.keyCode == 13)
-		{
-			var bList = tipEl.childNodes;
-			for (var i = 0 ; i < bList.length ; i ++)
-			{
-				if (bList[i].className == "selectTip")
-				{
-					tip = srcEl.value = bList[i].innerHTML;		
-					//var useridlist=list[1].split("$");	
-					//document.getElementById("xsry").value=useridlist[i];				 
-					 Element.hide(tipEl);
-					 return ;
-				}
-			}
-		}
-		
-	}
-}
-function  down(event)
-{
-      var srcEl = Event.element(event);
-	  var tipEl = $("brandTip");
-      var bList = tipEl.childNodes;
-			for (var i = 0 ; i < bList.length ; i ++)
-			{   
-				if (bList[i].className == "selectTip")
-				{
-					tip = srcEl.value = bList[i].innerHTML;	
-					document.getElementById("brand").value=bList[i].innerHTML;				 
-					//var useridlist=list[1].split("$");	
-					//document.getElementById("xsry").value=useridlist[i];						
-					 Element.hide(tipEl);
-					 return;
-				}
-			}
-}
-
-var lists=new Array();
-<%
-  if(userList!=null)
-  {
-  for(int i=0;i<userList.size();i++)
-  {   
-     Map map=(Map)userList.get(i); 
-%>
-   lists["<%=map.get("real_name")%>"]="<%=map.get("user_id")%>";
-<%}}%>
-function setValue()
-{
-  if(document.getElementById("brand").value!="")
-  {
-    var brand =document.getElementById("brand").value;
-    brand=brand.trim();
-    if(brand in lists)
-    {
-      document.getElementById("jsr").value=lists[brand];
-     
-    }
-    else
-    {
-      alert("您所输入的经手人不在列表里!");
-      document.getElementById("brand").value="";
-      document.getElementById("jsr").value="";
-      document.getElementById("brand").focus();
-    }
-  }
-  if(document.getElementById("brand").value.length==0)
-  {
-      document.getElementById("jsr").value="";
-  }
- 
-  Element.hide('brandTip')
-}
-String.prototype.trim = function()
-{
-   return this.replace(/(^\s+)|\s+$/g,"");
-}
- 
-
-new Form.Element.Observer("brand",1, searchBrand);
-Event.observe("brand", "keydown", move, false);
-Event.observe("brandTip","mousedown",down,true);
- 
-
-</script>
-<!-- 修改 ----------------------------------------------------------------------------------------------------------------------->
-
-

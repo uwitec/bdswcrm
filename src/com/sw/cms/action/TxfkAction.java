@@ -51,7 +51,7 @@ public class TxfkAction extends DataDisParseBaseAction {
 			con += " and fk_date>='" + fk_date1 + "'";
 		}
 		if(!fk_date2.equals("")){
-			con += " and fk_date<='" + (fk_date1 + " 23:59:59") + "'";
+			con += " and fk_date<='" + (fk_date2 + " 23:59:59") + "'";
 		}
 		if(!state.equals("")){
 			con += " and state='" + state + "'";

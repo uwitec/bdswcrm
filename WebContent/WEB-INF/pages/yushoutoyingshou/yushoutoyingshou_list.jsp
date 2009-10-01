@@ -25,7 +25,7 @@ String orderType = (String)VS.findValue("orderType");
 <title>预收冲应收</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
-<script language='JavaScript' src="js/date.js"></script>
+<script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
 <script type="text/javascript">
 	
 	function openWin(id){
@@ -106,11 +106,9 @@ String orderType = (String)VS.findValue("orderType");
 	<tr>
 		<td class="search" align="left" colspan="2">&nbsp;
 			客户名称：<input type="text" name="client_name" value="<%=client_name %>" size="10">&nbsp;
-			日期：<input type="text" name="create_date1" value="<%=create_date1 %>" size="8" readonly>	
-			<img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.myform.create_date1); return false;">
+			日期：<input type="text" name="create_date1" value="<%=create_date1 %>" size="15" class="Wdate" onFocus="WdatePicker()">
 			&nbsp;至&nbsp;
-			<input type="text" name="create_date2" value="<%=create_date2 %>" size="8" readonly>	
-			<img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.myform.create_date2); return false;">
+			<input type="text" name="create_date2" value="<%=create_date2 %>" size="15" class="Wdate" onFocus="WdatePicker()">
 			&nbsp;
 			经手人：<input type="text" name="jsr" value="<%=jsr %>" size="10">&nbsp;&nbsp;
 			<input type="submit" name="buttonCx" value="查询" class="css_button"><input type="button" name="buttonQk" value="清空" class="css_button" onclick="clearAll();">

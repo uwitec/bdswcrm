@@ -14,7 +14,7 @@ XxfbNbgg xxfbNbgg = (XxfbNbgg)VS.findValue("xxfbNbgg");
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript" src="js/Check.js"></script>
-<script language='JavaScript' src="js/date.js"></script>
+<script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
 <script type="text/javascript" src="xhEditor/jquery/jquery-1.3.2.min.js"></script>
 <script type="text/javascript" src="xhEditor/xheditor.js"></script>
 <script type="text/javascript">
@@ -44,8 +44,7 @@ XxfbNbgg xxfbNbgg = (XxfbNbgg)VS.findValue("xxfbNbgg");
 	</tr>
 	<tr>
 		<td class="a1" width="15%">发布时间</td>
-		<td class="a2" width="30%"><input type="text" name="xxfbNbgg.pub_date" id="pub_date" value="<%=StringUtils.nullToStr(xxfbNbgg.getPub_date()) %>" readonly>
-		<img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.getElementById('pub_date')); return false;">
+		<td class="a2" width="30%"><input type="text" name="xxfbNbgg.pub_date" id="pub_date" value="<%=StringUtils.nullToStr(xxfbNbgg.getPub_date()) %>" class="Wdate" onFocus="WdatePicker()">
 		</td>
 		<td class="a1" width="15%">分销商是否可见</td>
 		<td class="a2" width="30%">
@@ -62,7 +61,7 @@ XxfbNbgg xxfbNbgg = (XxfbNbgg)VS.findValue("xxfbNbgg");
 		</td>
 	</tr>	
 	<tr height="35">
-		<td class="a1" colspan="2">
+		<td class="a1" colspan="4">
 			<input type="button" name="button1" value="提 交" class="css_button2" onclick="saveInfo();">&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="reset" name="button2" value="重 置" class="css_button2">&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="button" name="button3" value="关 闭" class="css_button2" onclick="window.close();">

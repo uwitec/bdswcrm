@@ -19,7 +19,9 @@ List userList = (List)VS.findValue("userList");
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript" src="js/Check.js"></script>
-<script language='JavaScript' src="js/date.js"></script>
+<script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
+<script language='JavaScript' src="js/selJsr.js"></script>
+<script type="text/javascript" src="js/prototype-1.4.0.js"></script>
 <style>
 	.selectTip{
 		background-color:#009;
@@ -29,6 +31,7 @@ List userList = (List)VS.findValue("userList");
 <script type="text/javascript">
 	function saveInfo(){
 		if(!InputValid(document.getElementById("id"),1,"string",1,1,50,"编号")){	 return; }
+		if(!InputValid(document.getElementById("sr_date"),1,"string",1,1,50,"收入日期")){	 return; }
 		if(document.getElementById("type").value == ""){
 			alert("收入类型不能为空，请选择！");
 			return;
@@ -39,7 +42,7 @@ List userList = (List)VS.findValue("userList");
 			alert("收款账号不能为空，请选择！");
 			return;
 		}	
-		if(document.getElementById("jsr").value == ""){
+		if(document.getElementById("fzr").value == ""){
 			alert("经手人不能为空，请选择！");
 			return;
 		}			
@@ -65,7 +68,7 @@ List userList = (List)VS.findValue("userList");
 	
 </script>
 </head>
-<body oncontextmenu="return false;" >
+<body onload="initFzrTip();">
 <form name="qtsrForm" action="updateQtsr.html" method="post">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
@@ -75,11 +78,10 @@ List userList = (List)VS.findValue("userList");
 	</thead>
 	<tr>
 		<td class="a1" width="15%">编号</td>
-		<td class="a2" width="35%"><input type="text" name="qtsr.id" id="id" value="<%=StringUtils.nullToStr(qtsr.getId()) %>" readonly></td>
+		<td class="a2" width="35%"><input type="text" name="qtsr.id" id="id" value="<%=StringUtils.nullToStr(qtsr.getId()) %>" readonly><font color="red">*</font></td>
 		<td class="a1" width="15%">收入日期</td>
 		<td class="a2">
-			<input type="text" name="qtsr.sr_date" id="sr_date" value="<%=StringUtils.nullToStr(qtsr.getSr_date()) %>" readonly>
-			<img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.getElementById('sr_date')); return false;">
+			<input type="text" name="qtsr.sr_date" id="sr_date" value="<%=StringUtils.nullToStr(qtsr.getSr_date()) %>" class="Wdate" onFocus="WdatePicker()"><font color="red">*</font>
 		</td>		
 	</tr>
 	<tr>
@@ -96,26 +98,22 @@ List userList = (List)VS.findValue("userList");
 				}
 			}
 			%>
-			</select>			
+			</select>		<font color="red">*</font>	
 		</td>
 		<td class="a1" width="15%">金额</td>
-		<td class="a2" width="35%"><input type="text" name="qtsr.skje" id="skje" value="<%=JMath.round(qtsr.getSkje()) %>"></td>		
+		<td class="a2" width="35%"><input type="text" name="qtsr.skje" id="skje" value="<%=JMath.round(qtsr.getSkje()) %>"><font color="red">*</font></td>		
 	</tr>	
 	<tr>
 		<td class="a1" width="15%">收款账号</td>
 		<td class="a2" width="35%"><input type="text" id="zhname"  name="zhname" value="<%=StaticParamDo.getAccountNameById(StringUtils.nullToStr(qtsr.getSkzh())) %>" readonly>
-		<input type="hidden" id="skzh"  name="qtsr.skzh" value="<%=StringUtils.nullToStr(qtsr.getSkzh()) %>">
+		<input type="hidden" id="skzh"  name="qtsr.skzh" value="<%=StringUtils.nullToStr(qtsr.getSkzh()) %>"><font color="red">*</font>
 		<img src="images/select.gif" align="absmiddle" title="选择账户" border="0" onclick="openAccount();" style="cursor:hand">
 		</td>
 		<td class="a1" width="15%">经手人</td>
 		<td class="a2">		 
-			 <!--修改 --------------------------------------------------------------------------------------  -->
-		 <input  id="brand"    type="text"   length="20"  onblur="setValue()"  value="<%=StaticParamDo.getRealNameById(qtsr.getJsr()) %>"/> 
-         <img src="images/select.gif" align="absmiddle" title="选择经手人" border="0" onclick="openywyWin();" style="cursor:hand">
-          <div   id="brandTip"  style="height:12px;position:absolute;left:385px; top:110px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
-          </div>
-		    <input type="hidden" name="qtsr.jsr" id="jsr"  value="<%=qtsr.getJsr() %>" /> 
-		<!--修改 --------------------------------------------------------------------------------------  -->
+			 <input  id="brand"    type="text"   length="20"  onblur="setValue()"  value="<%=StaticParamDo.getRealNameById(qtsr.getJsr()) %>"/>
+			 <div   id="brandTip"  style="height:12px;position:absolute;left:385px; top:110px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+		     <input type="hidden" name="qtsr.jsr" id="fzr"  value="<%=qtsr.getJsr() %>" /> <font color="red">*</font>
 		</td>		
 	</tr>
 	<tr>

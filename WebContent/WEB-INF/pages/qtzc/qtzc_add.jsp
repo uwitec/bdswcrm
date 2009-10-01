@@ -21,10 +21,11 @@ List userList = (List)VS.findValue("userList");
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript" src="js/Check.js"></script>
-<script language='JavaScript' src="js/date.js"></script>
+<script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
 <script type="text/javascript">
 	function saveInfo(){
 		if(!InputValid(document.getElementById("id"),1,"string",1,1,50,"编号")){	 return; }
+		if(!InputValid(document.getElementById("zc_date"),1,"string",1,1,50,"支出日期")){	 return; }
 		if(document.getElementById("type").value == ""){
 			alert("支出类型不能为空，请选择！");
 			return;
@@ -67,11 +68,10 @@ List userList = (List)VS.findValue("userList");
 	</thead>
 	<tr>
 		<td class="a1" width="15%">编号</td>
-		<td class="a2" width="35%"><input type="text" name="qtzc.id" id="id" value="<%=id %>" readonly></td>
+		<td class="a2" width="35%"><input type="text" name="qtzc.id" id="id" value="<%=id %>" readonly><font color="red">*</font></td>
 		<td class="a1" width="15%">支出日期</td>
 		<td class="a2">
-			<input type="text" name="qtzc.zc_date" id="zc_date" value="<%=DateComFunc.getToday() %>" readonly>
-			<img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.getElementById('sr_date')); return false;">
+			<input type="text" name="qtzc.zc_date" id="zc_date" value="<%=DateComFunc.getToday() %>" class="Wdate" onFocus="WdatePicker()"><font color="red">*</font>
 		</td>		
 	</tr>
 	<tr>
@@ -88,15 +88,15 @@ List userList = (List)VS.findValue("userList");
 				}
 			}
 			%>
-			</select>			
+			</select><font color="red">*</font>
 		</td>
 		<td class="a1" width="15%">金额</td>
-		<td class="a2" width="35%"><input type="text" name="qtzc.zcje" id="zcje" value=""></td>		
+		<td class="a2" width="35%"><input type="text" name="qtzc.zcje" id="zcje" value=""><font color="red">*</font></td>		
 	</tr>	
 	<tr>
 		<td class="a1" width="15%">支出账号</td>
 		<td class="a2" width="35%"><input type="text" id="zhname"  name="zhname" value="" readonly>
-		<input type="hidden" id="skzh"  name="qtzc.zczh" value="">
+		<input type="hidden" id="skzh"  name="qtzc.zczh" value=""><font color="red">*</font>
 		<img src="images/select.gif" align="absmiddle" title="选择账户" border="0" onclick="openAccount();" style="cursor:hand">
 		</td>
 		<td class="a1" width="15%">出纳</td>
@@ -116,7 +116,7 @@ List userList = (List)VS.findValue("userList");
 				}
 			}
 			%>
-			</select>		
+			</select><font color="red">*</font>
 		</td>		
 	</tr>
 	<tr>
@@ -137,7 +137,7 @@ List userList = (List)VS.findValue("userList");
 				}
 			}
 			%>
-			</select>		
+			</select><font color="red">*</font>
 		</td>
 		<td class="a1" width="15%">客户或项目</td>
 		<td class="a2" width="35%"><input type="text" id="zcxm"  name="qtzc.zcxm" value="" size="15" maxlength="100">				

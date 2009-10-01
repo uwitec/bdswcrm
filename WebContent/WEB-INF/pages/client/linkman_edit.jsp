@@ -16,7 +16,7 @@ ClientsLinkman  linkman = (ClientsLinkman)VS.findValue("linkman");
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript" src="js/Check.js"></script>
-<script language='JavaScript' src="js/date.js"></script>
+<script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
 <script type="text/javascript">
 	function saveInfo()
 	{
@@ -92,8 +92,7 @@ ClientsLinkman  linkman = (ClientsLinkman)VS.findValue("linkman");
 	</tr>		
 	<tr>
 		<td class="a1" width="15%">生日</td>
-		<td class="a2" width="35%"><input type="text" name="linkman.sr" id="sr" value="<%if(null!=linkman.getSr()) out.print(linkman.getSr().substring(0,11)); %>" readonly="readonly">
-		  <img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.getElementById('sr')); return false;">
+		<td class="a2" width="35%"><input type="text" name="linkman.sr" id="sr" value="<%=StringUtils.nullToStr(linkman.getSr()) %>" class="Wdate" onFocus="WdatePicker()">
 		</td>	
 		<td class="a1" width="15%">爱好</td>
 		<td class="a2" width="35%"><input type="text" name="linkman.ah" id="ah" value="<%=StringUtils.nullToStr(linkman.getAh()) %>"></td>

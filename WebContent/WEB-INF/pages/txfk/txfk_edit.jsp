@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript" src="js/Check.js"></script>
-<script language='JavaScript' src="js/date.js"></script>
+<script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
 <script language='JavaScript' src="js/selJsr.js"></script>
 <script type="text/javascript" src="js/prototype-1.4.0.js"></script>
 <style>
@@ -105,8 +105,7 @@
 		</td>
 		<td class="a1" width="15%">付款日期</td>
 		<td class="a2" width="35%">
-			<ww:textfield name="txfk.fk_date" id="fk_date" value="%{txfk.fk_date}" theme="simple" readonly="true"/>
-			&nbsp;<img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.getElementById('fk_date')); return false;">&nbsp;	
+			<input type="text" name="txfk.fk_date" id="fk_date" value="<ww:property value="%{txfk.fk_date}"/>" class="Wdate" onFocus="WdatePicker()"/>&nbsp;	
 			<span style="color:red">*</span>
 		</td>				
 	</tr>

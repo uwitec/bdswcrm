@@ -16,7 +16,7 @@ List   linkmanlist=(List)VS.findValue("descClientLinkman");
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript" src="js/Check.js"></script>
-<script language='JavaScript' src="js/date.js"></script>
+<script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
 <script type="text/javascript">
 	function saveInfo()
 	{   
@@ -92,12 +92,10 @@ List   linkmanlist=(List)VS.findValue("descClientLinkman");
 	</tr>
 	<tr>
 		<td class="a1" width="15%">联系时间</td>
-		<td class="a2" width="35%"><input type="text" name="follow.lxdate" id="lxdate" readonly="readonly">
-		  <img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.getElementById('lxdate')); return false;">
+		<td class="a2" width="35%"><input type="text" name="follow.lxdate" id="lxdate" class="Wdate" onFocus="WdatePicker()">
 		<font color="red">*</font></td>
 		<td class="a1" width="15%">下次联系时间</td>
-		<td class="a2" width="35%"><input type="text" name="follow.nextdate" id="nextdate" readonly="readonly">
-		  <img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.getElementById('nextdate')); return false;">
+		<td class="a2" width="35%"><input type="text" name="follow.nextdate" id="nextdate" class="Wdate" onFocus="WdatePicker()">
 		</td>		
 	</tr>
 	<tr>

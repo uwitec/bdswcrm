@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript" src="js/Check.js"></script>
-<script language='JavaScript' src="js/date.js"></script>
+<script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
 <script type="text/javascript">
 	
 	function chkTxfs(){
@@ -97,8 +97,7 @@
 	<tr>
 		<td class="a1" width="35%">起始摊销日期</td>
 		<td class="a2" width="65%">
-			<ww:textfield name="start_date" id="start_date" value="" theme="simple" readonly="true"/>
-			&nbsp;<img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.myform.start_date); return false;">&nbsp;	
+			<input type="text" name="start_date" id="start_date" value="" class="Wdate" onFocus="WdatePicker()"/>	
 		</td>						
 	</tr>
 	<tr>

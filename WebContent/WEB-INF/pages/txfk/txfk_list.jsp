@@ -6,7 +6,7 @@
 <title>付摊销付款</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
-<script language='JavaScript' src="js/date.js"></script>
+<script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
 <script type="text/javascript">
 	function edit(id){
 		var destination = "editTxfk.html?id=" + id;
@@ -78,11 +78,9 @@
 	<tr>
 		<td class="search" align="left" colspan="2">&nbsp;&nbsp;
 			付款日期：
-			<ww:textfield theme="simple" name="fk_date1" id="fk_date1" value="%{fk_date1}" size="10" readonly="true"/> 
-			&nbsp;<img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.myform.fk_date1); return false;">&nbsp;
+			<input type="text" name="fk_date1" id="fk_date1" value="<ww:property value="%{fk_date1}" />" size="15" class="Wdate" onFocus="WdatePicker()"/> &nbsp;
 			&nbsp;&nbsp;至&nbsp;&nbsp;	
-			<ww:textfield theme="simple" name="fk_date2" id="fk_date2" value="%{fk_date1}" size="10" readonly="true"/> 
-			&nbsp;<img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.myform.fk_date2); return false;">&nbsp;	
+			<input type="text" name="fk_date2" id="fk_date2" value="<ww:property value="%{fk_date2}" />" size="15" class="Wdate" onFocus="WdatePicker()"/>&nbsp;	
 			&nbsp;&nbsp;
 			状态：
 			<ww:select name="state" id="state" theme="simple" list="#{'已保存':'已保存','已提交':'已提交'}"  emptyOption="true" ></ww:select>

@@ -6,7 +6,7 @@
 <title>系统初始化导航</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
-<script language='JavaScript' src="js/date.js"></script>
+<script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
 <script type="text/javascript">
 	function setQyrq(){
 		if(document.getElementById("qyrq").value == ""){
@@ -73,8 +73,7 @@
 		<tr>
 			<td class="a2">
 				<b>第八步</b>、设置系统启用日期，选择启用日期后点击“确定”按钮设置启用日期。启用日期设置后不能再修改。设置启用日期后系统即可正式启用。&nbsp;&nbsp;
-				<ww:textfield name="sysInitSet.qyrq" id="qyrq" theme="simple" value="%{sysInitSet.qyrq}" readonly="true" />
-				<img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.getElementById('qyrq')); return false;">
+				<input type="text" name="sysInitSet.qyrq" id="qyrq" value="<ww:property value="%{sysInitSet.qyrq}"/>" class="Wdate" onFocus="WdatePicker()"/>
 				&nbsp;&nbsp;&nbsp;
 				<ww:if test="sysInitSet.qyrq == null">
 				<input type="button" name="buttonQd" value=" 确定 " onclick="setQyrq();" class="css_button">
