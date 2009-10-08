@@ -185,8 +185,7 @@ public class LsdDAO extends JdbcBaseDAO {
 	 * @param num
 	 * @return
 	 */
-	public Object getLsdByIdBySerailNum(String id,String num)
-	{
+	public Object getLsdByIdBySerailNum(String id,String num){
 		String sql="select l.client_name,l.lxr,l.lxdh,l.mobile,l.mail,l.address,p.product_id,p.product_xh,product_name,p.qz_serial_num from lsd l left join lsd_product p on l.id=p.lsd_id where l.id='"+id+"'and p.qz_serial_num like '%"+num+"%'";
 		return this.getResultMap(sql);
 	}

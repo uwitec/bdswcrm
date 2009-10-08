@@ -78,6 +78,15 @@ public class KfdbService {
 		return kfdbDao.getKfdbProducts(id);
 	}
 	
+	/**
+	 * 取库房调拨相关产品明细
+	 * @param id
+	 * @return
+	 */
+	public List getKfdbProductsObj(String id){
+		return kfdbDao.getKfdbProductsObj(id);
+	}
+	
 	
 	/**
 	 * 删除库房调拨相关信息

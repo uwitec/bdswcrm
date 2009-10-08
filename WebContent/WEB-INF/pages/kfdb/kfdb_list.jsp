@@ -86,6 +86,13 @@ String orderType = (String)VS.findValue("orderType");
 		document.myform.action = "listKfdb.html";
 		document.myform.submit();
 	}		
+	
+	function print(id){
+		var destination = "printKfdb.html?id=" + id;
+		var fea ='width=850,height=600,left=' + (screen.availWidth-850)/2 + ',top=' + (screen.availHeight-600)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		
+		window.open(destination,'调拨单打印',fea);				
+	}	
 </script>
 </head>
 <body >
@@ -152,6 +159,8 @@ String orderType = (String)VS.findValue("orderType");
 		<%	
 		}		
 		%>
+			&nbsp;&nbsp;&nbsp;&nbsp;	
+			<a href="#" onclick="print('<%=StringUtils.nullToStr(kfdb.getId()) %>');"><img src="images/print.png" align="absmiddle" title="打印" border="0" style="cursor:hand"></a>	
 		</td>
 	</tr>
 	

@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.jdbc.core.RowMapper;
 
 import com.sw.cms.dao.base.JdbcBaseDAO;
+import com.sw.cms.dao.base.SqlUtil;
 import com.sw.cms.model.Kfdb;
 import com.sw.cms.model.KfdbProduct;
 import com.sw.cms.model.Page;
@@ -105,8 +106,19 @@ public class KfdbDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public List getKfdbProducts(String id){
-		String sql = "select a.*,b.qz_serial_num as qz_flag from kfdb_product a left join product b on b.product_id=a.product_id where a.kfdb_id='" + id + "'";
+		String sql = "select a.*,b.qz_serial_num as qz_flag,b.dw from kfdb_product a left join product b on b.product_id=a.product_id where a.kfdb_id='" + id + "'";
 		return this.getResultList(sql);
+	}
+	
+	
+	/**
+	 * 取库房调拨相关产品明细
+	 * @param id
+	 * @return
+	 */
+	public List getKfdbProductsObj(String id){
+		String sql = "select a.*,b.dw from kfdb_product a left join product b on b.product_id=a.product_id where a.kfdb_id='" + id + "'";
+		return this.getResultList(sql, new KfdbProductRowMapper());
 	}
 	
 	
@@ -245,11 +257,12 @@ public class KfdbDAO extends JdbcBaseDAO {
 		public Object mapRow(ResultSet rs, int index) throws SQLException {
 			KfdbProduct kfdbProduct = new KfdbProduct();
 
-			kfdbProduct.setKfdb_id(rs.getString("kfdb_id"));
-			kfdbProduct.setProduct_id(rs.getString("product_id"));
-			kfdbProduct.setProduct_name(rs.getString("product_name"));
-			kfdbProduct.setProduct_xh(rs.getString("product_xh"));
-			kfdbProduct.setNums(rs.getInt("nums"));
+			if(SqlUtil.columnIsExist(rs,"kfdb_id")) kfdbProduct.setKfdb_id(rs.getString("kfdb_id"));
+			if(SqlUtil.columnIsExist(rs,"product_id")) kfdbProduct.setProduct_id(rs.getString("product_id"));
+			if(SqlUtil.columnIsExist(rs,"product_name")) kfdbProduct.setProduct_name(rs.getString("product_name"));
+			if(SqlUtil.columnIsExist(rs,"product_xh")) kfdbProduct.setProduct_xh(rs.getString("product_xh"));
+			if(SqlUtil.columnIsExist(rs,"nums")) kfdbProduct.setNums(rs.getInt("nums"));
+			if(SqlUtil.columnIsExist(rs,"dw")) kfdbProduct.setDw(rs.getString("dw"));
 			
 			return kfdbProduct;
 		}

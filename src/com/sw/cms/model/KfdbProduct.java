@@ -12,8 +12,8 @@ public class KfdbProduct {
 	private String product_id;
 	private String product_name;
 	private String product_xh;
+	private String dw;
 	private int nums;
-	
 	private String remark;
 	private String qz_serial_num;
 
@@ -72,5 +72,13 @@ public class KfdbProduct {
 
 	public void setQz_serial_num(String qz_serial_num) {
 		this.qz_serial_num = qz_serial_num;
+	}
+
+	public String getDw() {
+		return dw;
+	}
+
+	public void setDw(String dw) {
+		this.dw = dw;
 	}
 }

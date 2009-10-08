@@ -1,9 +1,6 @@
 <%@ page language="java" errorPage="/error.jsp" pageEncoding="UTF-8" contentType="text/html;charset=UTF-8" %>
 <%@ page import="com.opensymphony.xwork.util.OgnlValueStack" %>
-<%@ page import="com.sw.cms.model.Page" %>
-<%@ page import="com.sw.cms.util.*" %>
 <%@ page import="com.sw.cms.model.*" %>
-<%@ page import="java.util.*" %>
 <%
 OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
 ClientsLinkman linkman=(ClientsLinkman)VS.findValue("linkman");
@@ -13,45 +10,6 @@ ClientsLinkman linkman=(ClientsLinkman)VS.findValue("linkman");
 <title>联系人视图 </title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
-<script language="JavaScript" src="js/Check.js"></script>
-<script language='JavaScript' src="js/date.js"></script>
-<script  type="text/javascript">
-     function saveInfo()
-     {
-	    
-	    if(document.getElementById("client_id").value=="")
-	    {
-	        alert("往来单位不能为空！");
-	        return;
-	    }
-		if(document.getElementById("name").value == "")
-		{
-			alert("联系人姓名不能为空 ！");
-			return;
-		}
-		if(document.getElementById("mail").value!="")
-	    {
-	      var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/;
-          if(reg.test(document.getElementById("mail").value)==false)
-          {
-             alert("邮箱格式不正确！");
-             return ;
-          }
-	    }
-	    document.myform.action="saveLxr.html";
-		document.myform.submit(); 
-	   
-	   
-    }
-		
-	function openClientWin()
-	{  
-		var destination = "selectClient.html";
-		var fea ='width=800,height=500,left=' + (screen.availWidth-800)/2 + ',top=' + (screen.availHeight-500)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
-		window.open(destination,'详细信息',fea);		 
-	}	
-</script>
- 
 </head>
 <body   oncontextmenu="return false;">
 <form name="myform" action="viewClient.html" method="post">
@@ -94,7 +52,7 @@ ClientsLinkman linkman=(ClientsLinkman)VS.findValue("linkman");
 		<td class="a1" width="15%">爱好</td>
 		<td class="a2" width="35%"><%=linkman.getAh() %></td>	
 		<td class="a1" width="15%">生日</td>
-		<td class="a2" width="35%"><%if(null!=linkman.getSr()) out.print(linkman.getSr().substring(0,11)); %>
+		<td class="a2" width="35%"><%=linkman.getSr() %>
 		   
 		</td>
 	</tr>		

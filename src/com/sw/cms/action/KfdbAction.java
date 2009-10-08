@@ -2,6 +2,7 @@ package com.sw.cms.action;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.sw.cms.action.base.BaseAction;
 import com.sw.cms.model.Kfdb;
@@ -16,6 +17,8 @@ import com.sw.cms.service.SysInitSetService;
 import com.sw.cms.service.UserService;
 import com.sw.cms.util.Constant;
 import com.sw.cms.util.ParameterUtility;
+import com.sw.cms.util.StaticParamDo;
+import com.sw.cms.util.StringUtils;
 
 public class KfdbAction extends BaseAction {
 	
@@ -48,6 +51,17 @@ public class KfdbAction extends BaseAction {
 	private String iscs_flag = "";  //系统是否初始完成标志
 	
 	private String msg = "";
+	
+	//打印内容
+	private String db_date = "";
+	private String ck_store = "";
+	private String rk_store = "";
+	private String foot_name = "";
+	private String remark = "";
+	private String sqr = "";
+	private String dbr = "";
+	private String title_name = "";
+	
 	
 	
 	/**
@@ -230,6 +244,38 @@ public class KfdbAction extends BaseAction {
 	}
 	
 	
+	/**
+	 * 打印库房调拨单
+	 * @return
+	 */
+	public String printKfdb(){
+		try{
+			kfdb = (Kfdb)kfdbService.getKfdb(id);
+			kfdbProducts = kfdbService.getKfdbProductsObj(id);
+			
+			db_date = StringUtils.nullToStr(kfdb.getCk_date());
+			ck_store = StaticParamDo.getStoreNameById(kfdb.getCk_store_id());
+			rk_store = StaticParamDo.getStoreNameById(kfdb.getRk_store_id());
+			remark = StringUtils.nullToStr(kfdb.getRemark());
+			sqr = StaticParamDo.getRealNameById(kfdb.getSqr());
+			dbr = StaticParamDo.getRealNameById(kfdb.getJsr());
+			
+			Map map = sysInitSetService.getReportSet();
+			
+			if(map != null){
+				title_name = StringUtils.nullToStr(map.get("title_name")) + "调拨单";
+				foot_name = StringUtils.nullToStr(map.get("foot_name"));	
+			}
+			
+			return SUCCESS;
+		}catch(Exception e){
+			log.error("打印库房调拨出错，原因：" + e);
+			e.printStackTrace();
+			return ERROR;
+		}
+	}
+	
+	
 	public String getCk_date1() {
 		return ck_date1;
 	}
@@ -375,6 +421,86 @@ public class KfdbAction extends BaseAction {
 	}
 	public void setYwyEmployeePage(Page ywyEmployeePage) {
 		this.ywyEmployeePage = ywyEmployeePage;
+	}
+
+
+	public String getCk_store() {
+		return ck_store;
+	}
+
+
+	public void setCk_store(String ck_store) {
+		this.ck_store = ck_store;
+	}
+
+
+	public String getDb_date() {
+		return db_date;
+	}
+
+
+	public void setDb_date(String db_date) {
+		this.db_date = db_date;
+	}
+
+
+	public String getDbr() {
+		return dbr;
+	}
+
+
+	public void setDbr(String dbr) {
+		this.dbr = dbr;
+	}
+
+
+	public String getFoot_name() {
+		return foot_name;
+	}
+
+
+	public void setFoot_name(String foot_name) {
+		this.foot_name = foot_name;
+	}
+
+
+	public String getRemark() {
+		return remark;
+	}
+
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
+
+	public String getRk_store() {
+		return rk_store;
+	}
+
+
+	public void setRk_store(String rk_store) {
+		this.rk_store = rk_store;
+	}
+
+
+	public String getSqr() {
+		return sqr;
+	}
+
+
+	public void setSqr(String sqr) {
+		this.sqr = sqr;
+	}
+
+
+	public String getTitle_name() {
+		return title_name;
+	}
+
+
+	public void setTitle_name(String title_name) {
+		this.title_name = title_name;
 	}
 
 }

@@ -504,9 +504,6 @@
         	<result name="notDel">/WEB-INF/pages/msg_info.jsp</result>
             <result name="success" type="redirect">listClient.html</result>
         </action>
-        <action name="viewClient" class="clientsAction" method="edit">
-            <result name="success">/WEB-INF/pages/client/client_view.jsp</result>
-        </action>
         <action name="selectClient" class="clientsAction" method="listSel">
             <result name="success">/WEB-INF/pages/client/selClient.jsp</result>
         </action>
@@ -1126,9 +1123,6 @@
         </action>        
         <action name="delLsysk" class="lsyskAction" method="del">
             <result name="success" type="redirect">listLsysk.html</result>
-        </action>
-        <action name="printLsysk" class="lsyskAction" method="edit">
-            <result name="success">/WEB-INF/pages/lsysk/lsysk_print.jsp</result>
         </action>
         <!-- 零售预收款 -->
         
@@ -1980,7 +1974,25 @@
 				<param name="dataSource">jhdProducts</param>
 				<param name="format">PDF</param>
 			</result>
-        </action>            
+        </action> 
+        
+        <!-- 调拨单打印 -->                                                                                                             
+        <action name="printKfdb" class="kfdbAction" method="printKfdb">
+            <result name="success" type="jasper">
+				<param name="location">/WEB-INF/report/kfdbTemplate.jasper</param>
+				<param name="dataSource">kfdbProducts</param>
+				<param name="format">PDF</param>
+			</result>
+        </action> 
+        
+        <!-- 零售预收单 -->                                                                                                             
+        <action name="printLsysk" class="lsyskAction" method="printLsysk">
+            <result name="success" type="jasper">
+				<param name="location">/WEB-INF/report/yssjTemplate.jasper</param>
+				<param name="dataSource">lsyskList</param>
+				<param name="format">PDF</param>
+			</result>
+        </action>                           
         
         <!-- 成本调整，查询结果 -->
         <action name="queryProduct" class="cbtzAction" method="getResults">

@@ -62,7 +62,7 @@ String ys_date2 = (String)VS.findValue("ys_date2");
 	
 	function print(id){
 		var destination = "printLsysk.html?id=" + id;
-		var fea ='width=700,height=600,left=' + (screen.availWidth-700)/2 + ',top=' + (screen.availHeight-600)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		var fea ='width=800,height=550,left=' + (screen.availWidth-800)/2 + ',top=' + (screen.availHeight-550)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
 		window.open(destination,'详细信息',fea);				
 	}

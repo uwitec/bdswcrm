@@ -321,8 +321,8 @@ List  clinetsFollowList=(List)VS.findValue("clientsFollow");
 		      <td><%=StringUtils.nullToStr(follow.getZt()) %></td>
 		      <td><%=StringUtils.nullToStr(follow.getLinkman_id()) %></td>
 		      <td><%=StringUtils.nullToStr(follow.getLxlx()) %></td>
-		      <td><% if(null!=follow.getLxdate()){out.print(StringUtils.nullToStr(follow.getLxdate().substring(0,10)));}%></td>
-		      <td><% if(null!=follow.getNextdate()){out.print(StringUtils.nullToStr(follow.getNextdate().substring(0,10)));}%></td>
+		      <td><%=StringUtils.nullToStr(follow.getNextdate()) %></td>
+		      <td><%=StringUtils.nullToStr(follow.getNextdate()) %></td>
 		      <td><%=StringUtils.nullToStr(follow.getRemark()) %></td>
 	        </tr>
 	        <%}
@@ -334,8 +334,8 @@ List  clinetsFollowList=(List)VS.findValue("clientsFollow");
 		      <td><%=StringUtils.nullToStr(follow.getZt()) %></td>
 		      <td><%=StringUtils.nullToStr(follow.getLinkman_id()) %></td>
 		      <td><%=StringUtils.nullToStr(follow.getLxlx()) %></td>
-		      <td><% if(null!=follow.getLxdate()){out.print(StringUtils.nullToStr(follow.getLxdate().substring(0,10)));}%></td>
-		      <td><% if(null!=follow.getNextdate()){out.print(StringUtils.nullToStr(follow.getNextdate().substring(0,10)));}%></td>
+		      <td><%=StringUtils.nullToStr(follow.getLxdate())%></td>
+		      <td><%=StringUtils.nullToStr(follow.getNextdate()) %></td>
 		      <td><%=StringUtils.nullToStr(follow.getRemark()) %></td>
 	        </tr>    
 	          <%
