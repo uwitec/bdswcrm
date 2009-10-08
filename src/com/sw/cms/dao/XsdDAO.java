@@ -125,7 +125,7 @@ public class XsdDAO extends JdbcBaseDAO {
 		
 		delXsdProducts(xsd_id);    //删除相应销售单产品
 		
-		addXsdProducts(xsdProducts,xsd_id);   //添加销售单相关产品		
+		addXsdProducts(xsdProducts,xsd);   //添加销售单相关产品		
 		
 	}
 	
@@ -155,7 +155,10 @@ public class XsdDAO extends JdbcBaseDAO {
 
 		this.getJdbcTemplate().update(sql,param);
 		
-		addXsdProducts(xsdProducts,fxdd.getFxdd_id());   //添加分销订单相关产品
+		Xsd xsd = new Xsd();
+		xsd.setId(fxdd.getFxdd_id());
+		
+		addXsdProducts(xsdProducts,xsd);   //添加分销订单相关产品
 	}
 	
 	
@@ -234,7 +237,7 @@ public class XsdDAO extends JdbcBaseDAO {
 		
 		delXsdProducts(xsd_id);    //删除相应销售单产品
 		
-		addXsdProducts(xsdProducts,xsd_id);   //添加销售单相关产品		
+		addXsdProducts(xsdProducts,xsd);   //添加销售单相关产品		
 	}
 	
 	
@@ -264,7 +267,10 @@ public class XsdDAO extends JdbcBaseDAO {
 		
 		delXsdProducts(fxdd.getFxdd_id());    //删除相应分销订单产品
 		
-		addXsdProducts(xsdProducts,fxdd.getFxdd_id());   //添加分销订单相关产品
+		Xsd xsd = new Xsd();
+		xsd.setId(fxdd.getFxdd_id());
+		
+		addXsdProducts(xsdProducts,xsd);   //添加分销订单相关产品
 	}
 	
 	
@@ -382,15 +388,24 @@ public class XsdDAO extends JdbcBaseDAO {
 	 * @param XsdProducts
 	 * @param xsd_id
 	 */
-	private void addXsdProducts(List xsdProducts,String xsd_id){
+	private void addXsdProducts(List xsdProducts,Xsd xsd){
 		String sql = "";
-		Object[] param = new Object[15];
+		Object[] param = new Object[17];
+		
+		double sd = 0;
+		
+		if(!xsd.getFplx().equals("出库单")){
+			sd = getLssd();
+		}
+		
+		String xsd_id = xsd.getId();
+		
 		if(xsdProducts != null && xsdProducts.size()>0){
 			for(int i=0;i<xsdProducts.size();i++){
 				XsdProduct xsdProduct = (XsdProduct)xsdProducts.get(i);
 				if(xsdProduct != null){
 					if(!xsdProduct.getProduct_id().equals("")){
-						sql = "insert into xsd_product(xsd_id,product_id,product_xh,product_name,price,jgtz,nums,remark,xj,cbj,qz_serial_num,sjcj_nums,sjcj_xj,kh_cbj,gf) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+						sql = "insert into xsd_product(xsd_id,product_id,product_xh,product_name,price,jgtz,nums,remark,xj,cbj,qz_serial_num,sjcj_nums,sjcj_xj,kh_cbj,gf,sd,bhsje) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 						
 						param[0] = xsd_id;
 						param[1] = xsdProduct.getProduct_id();
@@ -420,6 +435,8 @@ public class XsdDAO extends JdbcBaseDAO {
 						}
 						
 						param[14] = gf;
+						param[15] = sd;    //税点
+						param[16] = xsdProduct.getXj() / (1 + sd/100);  //不含税金额
 						
 						this.getJdbcTemplate().update(sql,param);
 						
@@ -581,6 +598,21 @@ public class XsdDAO extends JdbcBaseDAO {
 	
 	
 	/**
+	 * 取零售税点
+	 * @return
+	 */
+	private double getLssd(){
+		double sd = 0;
+		String sql = "select sd from lssd";
+		Map map = this.getResultMap(sql);
+		if(map != null){
+			sd = ((Double)map.get("sd")).doubleValue();
+		}
+		return sd;
+	}
+	
+	
+	/**
 	 * 判断销售单中是否存在该产品
 	 * @param xsd_id
 	 * @param product_id
@@ -632,6 +664,8 @@ public class XsdDAO extends JdbcBaseDAO {
 		
 		return roles;
 	}
+	
+	
 	/**
 	 *  根据销售单ID和销售单销售货品的序列号查询销售货品记录以及购买人的记录
 	 */

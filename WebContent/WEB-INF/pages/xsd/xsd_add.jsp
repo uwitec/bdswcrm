@@ -508,14 +508,14 @@ if(xsdProducts!=null && xsdProducts.size()>0){
 	<tr>
 		<td class="a1" width="15%">发票信息摘要</td>
 		<td class="a2" colspan="3">
-			<textarea rows="2" name="xsd.fpxx" id="fpxx" style="width:75%"><%=StringUtils.nullToStr(xsd.getFpxx()) %></textarea>
+			<input type="text" name="xsd.fpxx" id="fpxx" value="<%=StringUtils.nullToStr(xsd.getFpxx()) %>" style="width:75%" maxlength="100">
 		</td>	
 				
 	</tr>
 	<tr>
 		<td class="a1" width="15%">备&nbsp;&nbsp;注</td>
 		<td class="a2" width="85%" colspan="3">
-			<textarea rows="2" name="xsd.ms" id="ms" style="width:75%"><%=StringUtils.nullToStr(xsd.getMs()) %></textarea>
+			<input type="text" name="xsd.ms" id="ms" value="<%=StringUtils.nullToStr(xsd.getMs()) %>" style="width:75%" maxlength="100">
 		</td>
 	</tr>		
 	<tr height="35">

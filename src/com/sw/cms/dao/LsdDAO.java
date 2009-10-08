@@ -92,7 +92,7 @@ public class LsdDAO extends JdbcBaseDAO {
 		
 		this.getJdbcTemplate().update(sql,param);
 		
-		this.addLsdProducts(lsdProducts,lsd.getId());
+		this.addLsdProducts(lsdProducts,lsd);
 		
 	}
 	
@@ -146,7 +146,7 @@ public class LsdDAO extends JdbcBaseDAO {
 		
 		this.delLsdProducts(lsd.getId());
 		
-		this.addLsdProducts(lsdProducts, lsd.getId());
+		this.addLsdProducts(lsdProducts, lsd);
 	} 
 	
 	
@@ -221,28 +221,36 @@ public class LsdDAO extends JdbcBaseDAO {
 	 * @param lsdProducts
 	 * @param lsd_id
 	 */
-	private void addLsdProducts(List lsdProducts,String lsd_id){
+	private void addLsdProducts(List lsdProducts,Lsd lsd){
 		String sql = "";
-		Object[] param = new Object[12];
+		Object[] param = new Object[14];
+		
+		String lsd_id = lsd.getId();
+		
+		double sd = 0;
+		
+		if(!lsd.getFplx().equals("出库单")){
+			sd = getLssd();
+		}
 		
 		if(lsdProducts != null && lsdProducts.size()>0){
 			for(int i=0;i<lsdProducts.size();i++){
 				LsdProduct lsdProduct = (LsdProduct)lsdProducts.get(i);
 				if(lsdProduct != null){
 					if(!lsdProduct.getProduct_id().equals("") && !lsdProduct.getProduct_name().equals("")){
-						sql = "insert into lsd_product(lsd_id,product_id,product_xh,product_name,price,nums,xj,remark,cbj,qz_serial_num,kh_cbj,gf) values(?,?,?,?,?,?,?,?,?,?,?,?)";
+						sql = "insert into lsd_product(lsd_id,product_id,product_xh,product_name,price,nums,xj,remark,cbj,qz_serial_num,kh_cbj,gf,sd,bhsje) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 						
 						param[0] = lsd_id;
 						param[1] = lsdProduct.getProduct_id();
 						param[2] = lsdProduct.getProduct_xh();
 						param[3] = lsdProduct.getProduct_name();
 						param[4] = new Double(lsdProduct.getPrice());
-						param[5] = new Integer(lsdProduct.getNums());
-						param[6] = new Double(lsdProduct.getXj());
-						param[7] = lsdProduct.getRemark();
-						param[8] = new Double(lsdProduct.getCbj());
-						param[9] = lsdProduct.getQz_serial_num();
-						param[10] = lsdProduct.getKh_cbj();
+						param[5] = new Integer(lsdProduct.getNums());//数量
+						param[6] = new Double(lsdProduct.getXj());   //含税金额
+						param[7] = lsdProduct.getRemark();           //备注
+						param[8] = new Double(lsdProduct.getCbj());  //成本价
+						param[9] = lsdProduct.getQz_serial_num();    //序列号
+						param[10] = lsdProduct.getKh_cbj();          //考核成本价
 						
 						//低于零售限价工分减半
 						double gf = 0l;
@@ -256,7 +264,9 @@ public class LsdDAO extends JdbcBaseDAO {
 							gf = gf / 2;
 						}
 						
-						param[11] = gf;
+						param[11] = gf;    //工分
+						param[12] = sd;    //税点
+						param[13] = lsdProduct.getXj() / (1 + sd/100);  //不含税金额
 						
 						this.getJdbcTemplate().update(sql,param);
 					}

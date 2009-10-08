@@ -226,9 +226,73 @@ if(thdProducts != null && thdProducts.size() > 0){
 		}
 	}	
 	
+	function chgKpTyle(vD){
+		var obj_mc1 = document.getElementById("mc1");
+		var obj_mc2 = document.getElementById("mc2");
+		
+		var obj_dz1 = document.getElementById("dz1");
+		var obj_dz2 = document.getElementById("dz2");
+		
+		var obj_dh1 = document.getElementById("dh1");
+		var obj_dh2 = document.getElementById("dh2");
+		
+		var obj_zh1 = document.getElementById("zh1");
+		var obj_zh2 = document.getElementById("zh2");
+		
+		var obj_sh1 = document.getElementById("sh1");
+		var obj_sh2 = document.getElementById("sh2");
+		
+		if(vD == "出库单"){
+			obj_mc1.style.display = "";
+			obj_mc2.style.display = "";
+			
+			obj_dz1.style.display = "none";
+			obj_dz2.style.display = "none";
+			
+			obj_dh1.style.display = "none";
+			obj_dh2.style.display = "none";
+			
+			obj_zh1.style.display = "none";
+			obj_zh2.style.display = "none";
+			
+			obj_sh1.style.display = "none";
+			obj_sh2.style.display = "none";			
+		}else if(vD == "普通发票"){
+			obj_mc1.style.display = "";
+			obj_mc2.style.display = "";
+			
+			obj_dz1.style.display = "";
+			obj_dz2.style.display = "";
+			
+			obj_dh1.style.display = "";
+			obj_dh2.style.display = "";
+			
+			obj_zh1.style.display = "none";
+			obj_zh2.style.display = "none";
+			
+			obj_sh1.style.display = "none";
+			obj_sh2.style.display = "none";			
+		}else if(vD == "增值发票"){
+			obj_mc1.style.display = "";
+			obj_mc2.style.display = "";
+			
+			obj_dz1.style.display = "";
+			obj_dz2.style.display = "";
+			
+			obj_dh1.style.display = "";
+			obj_dh2.style.display = "";
+			
+			obj_zh1.style.display = "";
+			obj_zh2.style.display = "";
+			
+			obj_sh1.style.display = "";
+			obj_sh2.style.display = "";			
+		}	
+	}		
+	
 </script>
 </head>
-<body onload="initFzrTip();initClientTip();initVis();">
+<body onload="initFzrTip();initClientTip();initVis();chgKpTyle('<%=StringUtils.nullToStr(thd.getFplx()) %>');">
 <form name="thdForm" action="updateThd.html" method="post">
 <input type="hidden" name="thd.xsd_id" id="xsd_id" value="<%=StringUtils.nullToStr(thd.getXsd_id()) %>">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
@@ -397,17 +461,47 @@ if(thdProducts!=null && thdProducts.size()>0){
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td colspan="2">备注</td>
+		<td colspan="4">开票信息</td>
 	</tr>
 	</thead>
 	<tr>
+		<td class="a1" width="15%">发票类型</td>
+		<td class="a2">
+			<select name="thd.fplx" id="fplx" onchange="chgKpTyle(this.value);">
+				<option value="出库单" <%if(StringUtils.nullToStr(thd.getFplx()).equals("出库单")) out.print("selected"); %>>出库单</option>
+				<option value="普通发票" <%if(StringUtils.nullToStr(thd.getFplx()).equals("普通发票")) out.print("selected"); %>>普通发票</option>
+				<option value="增值发票" <%if(StringUtils.nullToStr(thd.getFplx()).equals("增值发票")) out.print("selected"); %>>增值发票</option>
+			</select>
+		</td>
+		<td class="a1" width="15%" id="mc1">名称</td>
+		<td class="a2" id="mc2"><input type="text" name="lsd.kp_mc" id="kp_mc" value="<%=StringUtils.nullToStr(thd.getKp_mc()) %>" maxlength="50"></td>				
+	</tr>									
+	<tr>
+		<td class="a1" width="15%" id="dz1" style="display:none">地址</td>
+		<td class="a2" id="dz2" style="display:none"><input type="text" name="thd.kp_address" id="kp_address" value="<%=StringUtils.nullToStr(thd.getKp_address()) %>" maxlength="50"></td>	
+		<td class="a1" width="15%" id="dh1" style="display:none">电话</td>
+		<td class="a2" id="dh2" style="display:none"><input type="text" name="thd.kp_dh" id="kp_dh" value="<%=StringUtils.nullToStr(thd.getKp_dh()) %>" maxlength="20"></td>		
+	</tr>
+	<tr>
+		<td class="a1" width="15%" id="zh1" style="display:none">开户行账号</td>
+		<td class="a2"  id="zh2" style="display:none"><input type="text" name="thd.khhzh" id="khhzh" value="<%=StringUtils.nullToStr(thd.getKhhzh()) %>" maxlength="50"></td>	
+		<td class="a1" width="15%" id="sh1" style="display:none">税号</td>
+		<td class="a2" id="sh2" style="display:none"><input type="text" name="thd.sh" id="sh" value="<%=StringUtils.nullToStr(thd.getSh()) %>" maxlength="50"></td>		
+	</tr>
+	<tr>
+		<td class="a1" width="15%">发票信息摘要</td>
+		<td class="a2" colspan="3">
+			<input type="text" name="thd.fpxx" id="fpxx" value="<%=StringUtils.nullToStr(thd.getFpxx()) %>" maxlength="100" style="width:75%">
+		</td>
+	</tr>
+	<tr>
 		<td class="a1" width="15%">备注</td>
-		<td class="a2" width="85%">
-			<textarea rows="3" name="thd.remark" id="remark" style="width:75%" maxlength="500"><%=StringUtils.nullToStr(thd.getRemark()) %></textarea>
+		<td class="a2" width="85%" colspan="3">
+			<input type="text" name="thd.remark" id="remark" value="<%=StringUtils.nullToStr(thd.getRemark()) %>" maxlength="100" style="width:75%">
 		</td>
 	</tr>	
 	<tr height="35">
-		<td class="a1" colspan="2">
+		<td class="a1" colspan="4">
 			<input type="button" name="button1" value="提 交" class="css_button2" onclick="saveInfo();">&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="reset" name="button2" value="重 置" class="css_button2">&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="button" name="button3" value="关 闭" class="css_button2" onclick="window.close();">

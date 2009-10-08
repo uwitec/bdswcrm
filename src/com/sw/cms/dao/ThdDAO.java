@@ -3,6 +3,7 @@ package com.sw.cms.dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.jdbc.core.RowMapper;
 
@@ -39,9 +40,9 @@ public class ThdDAO extends JdbcBaseDAO {
 	 */
 	public void saveThd(Thd thd,List thdProducts){
 		
-		String sql = "insert into thd(client_name,thdje,th_fzr,remark,th_date,state,tkzh,czr,cz_date,type,xsd_id,thd_id,store_id) values(?,?,?,?,?,?,?,?,now(),?,?,?,?)";
+		String sql = "insert into thd(client_name,thdje,th_fzr,remark,th_date,state,tkzh,czr,cz_date,type,xsd_id,thd_id,store_id,fplx,kp_mc,kp_address,kp_dh,khhzh,sh,fpxx) values(?,?,?,?,?,?,?,?,now(),?,?,?,?,?,?,?,?,?,?,?)";
 		
-		Object[] param = new Object[12];
+		Object[] param = new Object[19];
 		
 		param[0] = thd.getClient_name();
 		param[1] = new Double(thd.getThdje());
@@ -54,11 +55,18 @@ public class ThdDAO extends JdbcBaseDAO {
 		param[8] = thd.getType();
 		param[9] = thd.getXsd_id();
 		param[10] = thd.getThd_id();
-		param[11] = thd.getStore_id();
+		param[11] = thd.getStore_id();		
+		param[12] = thd.getFplx();
+		param[13] = thd.getKp_mc();
+		param[14] = thd.getKp_address();
+		param[15] = thd.getKp_dh();
+		param[16] = thd.getKhhzh();
+		param[17] = thd.getSh();
+		param[18] = thd.getFpxx();	
 		
 		this.getJdbcTemplate().update(sql,param);
 		
-		this.addThdProducts(thdProducts, thd.getThd_id());
+		this.addThdProducts(thdProducts, thd);
 
 	}
 	
@@ -70,9 +78,9 @@ public class ThdDAO extends JdbcBaseDAO {
 	 */
 	public void updateThd(Thd thd,List thdProducts){
 		
-		String sql = "update thd set client_name=?,thdje=?,th_fzr=?,remark=?,th_date=?,state=?,tkzh=?,czr=?,cz_date=now(),type=?,xsd_id=?,store_id=? where thd_id=?";
+		String sql = "update thd set client_name=?,thdje=?,th_fzr=?,remark=?,th_date=?,state=?,tkzh=?,czr=?,cz_date=now(),type=?,xsd_id=?,store_id=?,fplx=?,kp_mc=?,kp_address=?,kp_dh=?,khhzh=?,sh=?,fpxx=? where thd_id=?";
 		
-		Object[] param = new Object[12];
+		Object[] param = new Object[19];
 		
 		param[0] = thd.getClient_name();
 		param[1] = new Double(thd.getThdje());
@@ -85,7 +93,14 @@ public class ThdDAO extends JdbcBaseDAO {
 		param[8] = thd.getType();
 		param[9] = thd.getXsd_id();
 		param[10] = thd.getStore_id();
-		param[11] = thd.getThd_id();
+		param[11] = thd.getFplx();
+		param[12] = thd.getKp_mc();
+		param[13] = thd.getKp_address();
+		param[14] = thd.getKp_dh();
+		param[15] = thd.getKhhzh();
+		param[16] = thd.getSh();
+		param[17] = thd.getFpxx();
+		param[18] = thd.getThd_id();
 		
 		this.getJdbcTemplate().update(sql,param);
 		
@@ -97,7 +112,7 @@ public class ThdDAO extends JdbcBaseDAO {
 		
 		this.delThdProducts(thd.getThd_id());
 		
-		this.addThdProducts(thdProducts, thd.getThd_id());
+		this.addThdProducts(thdProducts, thd);
 		
 	}
 	
@@ -165,9 +180,17 @@ public class ThdDAO extends JdbcBaseDAO {
 	 * @param thdProducts
 	 * @param thd_id
 	 */
-	private void addThdProducts(List thdProducts,String thd_id){
+	private void addThdProducts(List thdProducts,Thd thd){
 		String sql = "";
-		Object[] param = new Object[11];
+		Object[] param = new Object[13];
+		
+		double sd = 0;
+		
+		if(!thd.getFplx().equals("出库单")){
+			sd = getLssd();
+		}
+		
+		String thd_id = thd.getThd_id();
 		
 		if(thdProducts != null && thdProducts.size()>0){
 			for(int i =0;i<thdProducts.size();i++){
@@ -175,7 +198,7 @@ public class ThdDAO extends JdbcBaseDAO {
 				
 				if(thdProduct != null){
 					if(!(thdProduct.getProduct_id()).equals("")){
-						sql = "insert into thd_product(thd_id,product_id,product_xh,product_name,th_price,nums,remark,xj,cbj,qz_serial_num,kh_cbj) values(?,?,?,?,?,?,?,?,?,?,?)";
+						sql = "insert into thd_product(thd_id,product_id,product_xh,product_name,th_price,nums,remark,xj,cbj,qz_serial_num,kh_cbj,sd,bhsje) values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
 						
 						param[0] = thd_id;
 						param[1] = thdProduct.getProduct_id();
@@ -187,13 +210,30 @@ public class ThdDAO extends JdbcBaseDAO {
 						param[7] = thdProduct.getXj();
 						param[8] = thdProduct.getCbj();
 						param[9] = thdProduct.getQz_serial_num();
-						param[10] = thdProduct.getKh_cbj();
+						param[10] = thdProduct.getKh_cbj();						
+						param[11] = sd;    //税点
+						param[12] = thdProduct.getXj() / (1 + sd/100);  //不含税金额
 						
 						this.getJdbcTemplate().update(sql,param);
 					}
 				}
 			}
 		}
+	}
+	
+	
+	/**
+	 * 取零售税点
+	 * @return
+	 */
+	private double getLssd(){
+		double sd = 0;
+		String sql = "select sd from lssd";
+		Map map = this.getResultMap(sql);
+		if(map != null){
+			sd = ((Double)map.get("sd")).doubleValue();
+		}
+		return sd;
 	}
 	
 	
@@ -255,6 +295,14 @@ public class ThdDAO extends JdbcBaseDAO {
 			if(SqlUtil.columnIsExist(rs,"xsd_id")) thd.setXsd_id(rs.getString("xsd_id"));
 			if(SqlUtil.columnIsExist(rs,"store_id")) thd.setStore_id(rs.getString("store_id"));
 			if(SqlUtil.columnIsExist(rs,"th_flag")) thd.setTh_flag(rs.getString("th_flag"));
+			
+			if(SqlUtil.columnIsExist(rs,"fplx")) thd.setFplx(rs.getString("fplx"));
+			if(SqlUtil.columnIsExist(rs,"kp_mc")) thd.setKp_mc(rs.getString("kp_mc"));
+			if(SqlUtil.columnIsExist(rs,"kp_address")) thd.setKp_address(rs.getString("kp_address"));
+			if(SqlUtil.columnIsExist(rs,"kp_dh")) thd.setKp_dh(rs.getString("kp_dh"));
+			if(SqlUtil.columnIsExist(rs,"khhzh")) thd.setKhhzh(rs.getString("khhzh"));
+			if(SqlUtil.columnIsExist(rs,"sh")) thd.setSh(rs.getString("sh"));
+			if(SqlUtil.columnIsExist(rs,"fpxx")) thd.setFpxx(rs.getString("fpxx"));
 			
 			return thd;
 		}

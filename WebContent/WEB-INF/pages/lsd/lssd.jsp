@@ -2,7 +2,7 @@
 <%@taglib uri="/webwork" prefix="ww"%>
 <html>
 <head>
-<title>设置零售税点</title>
+<title>设置销售税点</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript" src="js/Check.js"></script>
@@ -20,7 +20,7 @@
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
-		<td colspan="4">设置零售税点</td>
+		<td colspan="4">设置销售税点</td>
 	</tr>
 	</thead>
 	<tr>

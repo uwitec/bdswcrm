@@ -860,14 +860,14 @@ if(lsdProducts != null && lsdProducts.size()>0){
 	<tr>
 		<td class="a1" width="15%">发票信息摘要</td>
 		<td class="a2" colspan="3">
-			<textarea rows="2" name="lsd.fpxx" id="fpxx" style="width:75%"><%=StringUtils.nullToStr(lsd.getFpxx()) %></textarea>
+			<input type="text" name="lsd.fpxx" id="fpxx" value="<%=StringUtils.nullToStr(lsd.getFpxx()) %>" style="width:75%" maxlength="100">
 		</td>	
 				
 	</tr>
 	<tr>
 		<td class="a1" width="15%">备注</td>
 		<td class="a2" width="85%" colspan="3">
-			<textarea rows="2" name="lsd.ms" id="ms" style="width:75%"><%=StringUtils.nullToStr(lsd.getMs()) %></textarea>
+			<input type="text" name="lsd.ms" id="ms" value="<%=StringUtils.nullToStr(lsd.getMs()) %>" style="width:75%" maxlength="100">
 		</td>
 	</tr>			
 	<tr height="35">
