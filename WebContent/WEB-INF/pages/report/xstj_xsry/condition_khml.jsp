@@ -21,20 +21,7 @@ List deptList = (List)VS.findValue("deptList");
 </style>
 <script type="text/javascript">
 	function sbForm(){
-		if(document.reportForm.flag.value == "是"){
-			document.reportForm.action = "getXsryKhmlMxResult.html";
-		}else{
-			document.reportForm.action = "getXsryKhmlhzResult.html";
-		}
 		document.reportForm.submit();
-	}
-	
-	function openywyWin()
-	{
-	   var destination = "selLsEmployee.html";
-		var fea ='width=800,height=500,left=' + (screen.availWidth-800)/2 + ',top=' + (screen.availHeight-500)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
-		
-		window.open(destination,'选择经手人',fea);	
 	}
 </script>
 </head>
@@ -82,21 +69,11 @@ List deptList = (List)VS.findValue("deptList");
 		</td>	
 		<td class="a1">销售人员</td>
 		<td class="a4">
-		    <input  id="brand" type="text"   length="20"  onblur="setValue()"  /> 
-            <div   id="brandTip"  style="height:12px;position:absolute;left:680px; top:87px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
-            </div>
-		    <input type="hidden" name="user_id" id="fzr"  /> 
+		    <input id="brand" type="text" length="20" onblur="setValue()"/> 
+            <div id="brandTip"  style="height:12px;position:absolute;left:680px; top:87px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+		    <input type="hidden" name="user_id" id="fzr"/> 
 		</td>					
 	</tr>
-	<tr>
-		<td class="a1">是否显示明细</td>
-		<td class="a4" colspan="3">
-			<select name="flag">
-				<option value="否">否</option>
-				<option value="是">是</option>
-			</select>
-		</td>
-	</tr>	
 	<tr height="35">
 		<td class="a1" colspan="4">
 			<input type="button" name="button1" value="提 交" class="css_button2" onclick="sbForm();">&nbsp;&nbsp;&nbsp;&nbsp;

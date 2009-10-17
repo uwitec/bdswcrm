@@ -1,7 +1,6 @@
 <%@ page language="java" errorPage="/error.jsp" pageEncoding="UTF-8" contentType="text/html;charset=UTF-8" %>
 <%@ page import="com.opensymphony.xwork.util.OgnlValueStack" %>
 <%@ page import="com.sw.cms.util.*" %>
-<%@ page import="com.sw.cms.model.*" %>
 <%@ page import="com.sw.cms.service.*" %>
 <%@ page import="java.util.*" %>
 
@@ -15,8 +14,7 @@ String end_date = StringUtils.nullToStr(request.getParameter("end_date"));      
 String dept_id = StringUtils.nullToStr(request.getParameter("dept_id"));        //部门
 String user_id = StringUtils.nullToStr(request.getParameter("user_id"));        //业务员编号
 
-//业务员列表
-List userList = (List)VS.findValue("userList");
+List results = xstjXsryService.getYwymlHz(start_date,end_date,dept_id,user_id);
 
 
 String strCon = "";
@@ -39,14 +37,7 @@ if(!user_id.equals("")){
 <link href="css/report.css" rel="stylesheet" type="text/css" />
 <style media=print>  
 .Noprint{display:none;}<!--用本样式在打印时隐藏非打印项目-->
-</style> 
-<script language='JavaScript' src="js/date.js"></script>
-<script type="text/javascript">
-	function subForm(vl){
-		document.reportForm.xsry_id.value = vl;		
-		document.reportForm.submit();
-	}
-</script>
+</style>
 </head>
 <body align="center" >
 <TABLE  align="center" cellSpacing=0 cellPadding=0 width="99%" border=0>
@@ -62,47 +53,48 @@ if(!user_id.equals("")){
 		<TR>
 			<TD class=ReportHead>部门</TD>
 			<TD class=ReportHead>业务员姓名</TD>
-			<TD class=ReportHead>销售收入</TD>
-			<TD class=ReportHead>销售成本</TD>
-			<TD class=ReportHead>毛利</TD>	
-			<TD class=ReportHead>毛利率</TD>	
+			<TD class=ReportHead>销售金额</TD>
+			<TD class=ReportHead>不含税金额</TD>
+			<TD class=ReportHead>考核成本</TD>
+			<TD class=ReportHead>考核毛利</TD>	
+			<TD class=ReportHead>考核毛利率</TD>
 		</TR>
 	</THEAD>
 	
 	<TBODY>
 <%
-if(userList != null && userList.size()>0){
+
+if(results != null && results.size()>0){
 	
-	double hj_xssr = 0;
+	double hj_xsje = 0;
+	double hj_bhsje = 0;
 	double hj_khcb = 0;
-	double hj_ml = 0;
+	double hj_khml = 0;
 	
-	for(int i=0;i<userList.size();i++){
-		SysUser user = (SysUser)userList.get(i);
+	for(int i=0;i<results.size();i++){
+		Map map = (Map)results.get(i);
 		
-		String user_name = user.getReal_name();
-		String dept_name = StaticParamDo.getDeptNameById(user.getDept());
+		double xsje = map.get("xsje") == null?0:((Double)map.get("xsje")).doubleValue();
+		double bhsje = map.get("bhsje") == null?0:((Double)map.get("bhsje")).doubleValue();
+		double khcb = map.get("khcb") == null?0:((Double)map.get("khcb")).doubleValue();
+		double khml = bhsje - khcb;
 		
-		HashMap<String,Double> map = xstjXsryService.getMlHz(user.getUser_id(),start_date,end_date);
-		
-		double xssr = map.get("xssr");
-		double khcb = map.get("khcb");
-		
-		double ml = xssr - khcb;
-		
-		hj_xssr += xssr;
+		hj_xsje += xsje;
+		hj_bhsje += bhsje;
 		hj_khcb += khcb;
-		hj_ml += ml;
+		hj_khml += khml;
 		
-		String mll = JMath.percent(ml,xssr);
+		String mll = JMath.percent(khml,bhsje);
 
 %>	
 		<TR>
-			<TD class=ReportItem><%=dept_name %>&nbsp;</TD>
-			<TD class=ReportItem><a href="getXsryKhmlMxResult.html?start_date=<%=start_date %>&end_date=<%=end_date %>&user_id=<%=user.getUser_id() %>"><%=user_name %></a>&nbsp;</TD>
-			<TD class=ReportItemMoney><%=JMath.round(xssr,2) %>&nbsp;</TD>
+			<TD class=ReportItemXH><%=StaticParamDo.getDeptNameById((String)map.get("dept")) %>&nbsp;</TD>
+			<TD class=ReportItemXH>
+				<a href="getXsryKhmlMxResult.html?start_date=<%=start_date %>&end_date=<%=end_date %>&user_id=<%=StringUtils.nullToStr(map.get("xsry")) %>"><%=StringUtils.nullToStr(map.get("real_name")) %></a>&nbsp;</TD>
+			<TD class=ReportItemMoney><%=JMath.round(xsje,2) %>&nbsp;</TD>
+			<TD class=ReportItemMoney><%=JMath.round(bhsje,2) %>&nbsp;</TD>
 			<TD class=ReportItemMoney><%=JMath.round(khcb,2) %>&nbsp;</TD>
-			<TD class=ReportItemMoney><%=JMath.round(ml,2) %>&nbsp;</TD>
+			<TD class=ReportItemMoney><%=JMath.round(khml,2) %>&nbsp;</TD>
 			<TD class=ReportItemMoney><%=mll %>&nbsp;</TD>
 		</TR>
 <%
@@ -111,10 +103,11 @@ if(userList != null && userList.size()>0){
 		<TR>
 			<TD class=ReportItem style="font-weight:bold">合计</TD>
 			<TD class=ReportItem>&nbsp;</TD>
-			<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(hj_xssr,2) %>&nbsp;</TD>
+			<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(hj_xsje,2) %>&nbsp;</TD>
+			<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(hj_bhsje,2) %>&nbsp;</TD>
 			<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(hj_khcb,2) %>&nbsp;</TD>
-			<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(hj_ml,2) %>&nbsp;</TD>
-			<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.percent(hj_ml,hj_xssr) %>&nbsp;</TD>
+			<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(hj_khml,2) %>&nbsp;</TD>
+			<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.percent(hj_khml,hj_bhsje) %>&nbsp;</TD>
 		</TR>
 <%
 }
@@ -123,7 +116,7 @@ if(userList != null && userList.size()>0){
 </TABLE>
 <table width="99%">
 		<tr>
-			<td width="70%" height="30">注：点击业务员姓名可以查看明细。</td>
+			<td width="70%" height="30">注：考核毛利 = 不含税金额 - 考核成本；考核毛利率 = 考核毛利 / 不含税金额 * 100%；点击业务员姓名可以查看明细。</td>
 			<td align="right" height="30">生成报表时间：<%=DateComFunc.getToday() %>&nbsp;&nbsp;&nbsp;</td>
 		</tr>
 </table>

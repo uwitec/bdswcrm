@@ -218,5 +218,64 @@ public class XstjXsryDAO extends JdbcBaseDAO {
 		}
 		return khcb;
 	}
+	
+	
+	
+	//2009-10-10修改业务员考核毛利
+	
+	
+	/**
+	 * 业务员毛利汇总
+	 * @param start_date   开始时间
+	 * @param end_date     结束时间
+	 * @param dept_id      部门编号
+	 * @param user_id      销售人员
+	 * @return
+	 */
+	public List getYwymlHz(String start_date,String end_date,String dept_id,String user_id){
+		String sql = "select dept,xsry,real_name,sum(hjje) as xsje,sum(bhsje) as bhsje,sum(cb) as cb,sum(khcb) as khcb from view_hpxshz_tj where 1=1";
+		
+		if(!start_date.equals("")){
+			sql += " and cz_date>='" + start_date + "'";
+		}
+		if(!start_date.equals("")){
+			sql += " and cz_date<='" + end_date + "'";
+		}
+		if(!dept_id.equals("")){
+			sql += " and dept like '" + dept_id + "%'";
+		}
+		if(!user_id.equals("")){
+			sql += " and xsry='" + user_id + "'";
+		}
+		
+		sql += " group by dept,xsry,real_name";
+		return this.getResultList(sql);
+	}
+	
+	
+	/**
+	 * 业务员毛利汇总明细
+	 * @param start_date
+	 * @param end_date
+	 * @param user_id
+	 * @return
+	 */
+	public List getYwymlMx(String start_date,String end_date,String user_id){
+		String sql = "select cz_date,id,yw_type,client_name,product_name,product_id,product_xh,nums,price,hjje,bhsje,dwcb,cb,dwkhcb,khcb from view_hpxshz_tj where 1=1";
+		
+		if(!start_date.equals("")){
+			sql += " and cz_date>='" + start_date + "'";
+		}
+		if(!start_date.equals("")){
+			sql += " and cz_date<='" + end_date + "'";
+		}
+		if(!user_id.equals("")){
+			sql += " and xsry='" + user_id + "'";
+		}
+		
+		sql += " order by id";
+		
+		return this.getResultList(sql);
+	}
 
 }

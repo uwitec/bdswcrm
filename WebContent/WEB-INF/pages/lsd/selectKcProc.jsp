@@ -163,10 +163,10 @@ List kindList = (List)VS.findValue("kindList");
 		<td nowrap>商品名称</td>
 		<td nowrap>规格</td>		
 		<td nowrap>库存数量</td>
-		<td nowrap>考核成本</td>
-		<td nowrap>零售报价</td>
-		<td nowrap>零售限价</td>
-		<td nowrap>强制序列号</td>
+		<!--<td nowrap>考核成本</td>
+		--><td nowrap>零售报价</td>
+		<!--<td nowrap>零售限价</td>
+		--><td nowrap>强制序列号</td>
 	</tr>
 	</thead>
 	<%
@@ -190,10 +190,10 @@ List kindList = (List)VS.findValue("kindList");
 			<td align="left"><%=StringUtils.nullToStr(map.get("product_name")) %></td>
 			<td align="left"><%=StringUtils.nullToStr(map.get("product_xh")) %></td>			
 			<td nowrap><%=StringUtils.nullToStr(map.get("kc_nums")) %></td>
-			<td nowrap align="right"><%=JMath.round(khcbj,2) %></td>
-			<td nowrap align="right"><%=JMath.round(lsbj,2) %></td>
-			<td nowrap align="right"><%=JMath.round(lsxj,2) %></td>
-			<td><%=StringUtils.nullToStr(map.get("qz_serial_num")) %></td>
+			<!--<td nowrap align="right"><%=JMath.round(khcbj,2) %></td>
+			--><td nowrap align="right"><%=JMath.round(lsbj,2) %></td>
+			<!--<td nowrap align="right"><%=JMath.round(lsxj,2) %></td>
+			--><td><%=StringUtils.nullToStr(map.get("qz_serial_num")) %></td>
 		</tr>
 	
 	<%

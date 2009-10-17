@@ -630,6 +630,16 @@ public class StringUtils {
         }
 
     }
+    
+    public static final String nullToZero(Object oldData) {
+        if (oldData == null) {
+            return "0" ;
+        }
+        else {
+            return oldData.toString().trim() ;
+        }
+
+    }
 
     /**
      * 日期转化成字符串

@@ -84,6 +84,31 @@ public class XstjXsryService {
 	public HashMap<String,Double> getMlHz(String xsry_id,String start_date,String end_date){
 		return xstjXsryDao.getMlHz(xsry_id, start_date, end_date);
 	}
+	
+	
+	/**
+	 * 业务员考核毛利汇总
+	 * @param start_date   开始时间
+	 * @param end_date     结束时间
+	 * @param dept_id      部门编号
+	 * @param user_id      销售人员
+	 * @return
+	 */
+	public List getYwymlHz(String start_date,String end_date,String dept_id,String user_id){
+		return xstjXsryDao.getYwymlHz(start_date, end_date, dept_id, user_id);
+	}
+	
+	
+	/**
+	 * 业务员毛利汇总明细
+	 * @param start_date
+	 * @param end_date
+	 * @param user_id
+	 * @return
+	 */
+	public List getYwymlMx(String start_date,String end_date,String user_id){
+		return xstjXsryDao.getYwymlMx(start_date, end_date, user_id);
+	}
 
 	public XstjXsryDAO getXstjXsryDao() {
 		return xstjXsryDao;
@@ -92,7 +117,5 @@ public class XstjXsryService {
 	public void setXstjXsryDao(XstjXsryDAO xstjXsryDao) {
 		this.xstjXsryDao = xstjXsryDao;
 	}
-	
-	
 
 }
