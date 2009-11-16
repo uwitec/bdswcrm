@@ -77,7 +77,7 @@ if(results != null && results.size()>0){
 		double xsje = map.get("xsje") == null?0:((Double)map.get("xsje")).doubleValue();
 		double bhsje = map.get("bhsje") == null?0:((Double)map.get("bhsje")).doubleValue();
 		double cb = map.get("cb") == null?0:((Double)map.get("cb")).doubleValue();
-		double ml = bhsje - cb;
+		double ml = xsje - cb;
 		
 		hj_xsje += xsje;
 		hj_bhsje += bhsje;
@@ -107,7 +107,7 @@ if(results != null && results.size()>0){
 			<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(hj_bhsje,2) %>&nbsp;</TD>
 			<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(hj_cb,2) %>&nbsp;</TD>
 			<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(hj_ml,2) %>&nbsp;</TD>
-			<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.percent(hj_ml,hj_bhsje) %>&nbsp;</TD>
+			<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.percent(hj_ml,hj_xsje) %>&nbsp;</TD>
 		</TR>
 <%
 }
@@ -116,7 +116,7 @@ if(results != null && results.size()>0){
 </TABLE>
 <table width="99%">
 		<tr>
-			<td width="70%" height="30">注：毛利 = 不含税金额 - 成本；毛利率 = 毛利 / 不含税金额 * 100%；点击业务员姓名可以查看明细。</td>
+			<td width="70%" height="30">注：毛利 = 销售金额 - 成本；毛利率 = 毛利 / 销售金额 * 100%；点击业务员姓名可以查看明细。</td>
 			<td align="right" height="30">生成报表时间：<%=DateComFunc.getToday() %>&nbsp;&nbsp;&nbsp;</td>
 		</tr>
 </table>

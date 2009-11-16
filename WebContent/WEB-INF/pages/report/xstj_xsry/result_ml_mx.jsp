@@ -106,7 +106,7 @@ if(results != null && results.size()>0){
 		double bhsje = map.get("bhsje")==null?0:((Double)map.get("bhsje")).doubleValue(); //不含税金额
 		double dwcb = map.get("dwcb")==null?0:((Double)map.get("dwcb")).doubleValue(); //单位考核成本
 		double cb = map.get("cb")==null?0:((Double)map.get("cb")).doubleValue(); //考核成本
-		double ml = bhsje - cb;
+		double ml = xsje - cb;
 		
 		hj_nums += nums;
 		hj_xsje += xsje;
@@ -128,7 +128,7 @@ if(results != null && results.size()>0){
 			<TD class=ReportItemMoney nowrap><%=JMath.round(dwcb,2) %>&nbsp;</TD>
 			<TD class=ReportItemMoney nowrap><%=JMath.round(cb,2) %>&nbsp;</TD>
 			<TD class=ReportItemMoney nowrap><%=JMath.round(ml,2) %>&nbsp;</TD>
-			<TD class=ReportItemMoney nowrap><%=JMath.percent(ml,bhsje) %>&nbsp;</TD>
+			<TD class=ReportItemMoney nowrap><%=JMath.percent(ml,xsje) %>&nbsp;</TD>
 		</TR>
 <%								
 	}
@@ -147,7 +147,7 @@ if(results != null && results.size()>0){
 			<TD class=ReportItemMoney>&nbsp;</TD>
 			<TD class=ReportItemMoney nowrap><%=JMath.round(hj_cb,2) %>&nbsp;</TD>
 			<TD class=ReportItemMoney nowrap><%=JMath.round(hj_ml,2) %>&nbsp;</TD>
-			<TD class=ReportItemMoney nowrap><%=JMath.percent(hj_ml,hj_cb) %>&nbsp;</TD>
+			<TD class=ReportItemMoney nowrap><%=JMath.percent(hj_ml,hj_xsje) %>&nbsp;</TD>
 		</TR>
 <%
 }
@@ -158,7 +158,7 @@ if(results != null && results.size()>0){
 <br>
 <table width="99%">
 		<tr>
-			<td width="70%" height="30">注：毛利 = 不含税金额 - 成本；毛利率 = 毛利 / 不含税金额 * 100%；点击单据编号可以查看原始单据。</td>
+			<td width="70%" height="30">注：毛利 = 销售金额 - 成本；毛利率 = 毛利 / 销售金额 * 100%；点击单据编号可以查看原始单据。</td>
 			<td colspan="3" align="right" height="30">生成报表时间：<%=DateComFunc.getToday() %>&nbsp;&nbsp;&nbsp;</td>
 		</tr>
 </table>
