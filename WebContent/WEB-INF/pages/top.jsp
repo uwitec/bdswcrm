@@ -1,6 +1,8 @@
 <%@ page language="java" errorPage="/error.jsp" pageEncoding="UTF-8" contentType="text/html;charset=utf-8" %>
 <%@ page import="com.sw.cms.model.*" %>
+<%@ page import="java.util.*" %>
 <%@ page import="com.opensymphony.xwork.util.OgnlValueStack" %>
+<%@ page import="com.sw.cms.service.MenuService" %>
 <%
 LoginInfo info = (LoginInfo)session.getAttribute("LOGINUSER");
 String real_name = info.getReal_name();
@@ -8,6 +10,9 @@ String user_id = info.getUser_id();
 
 OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
 String logo_url = (String)VS.findValue("logo_url");
+
+MenuService menuService = (MenuService)VS.findValue("menuService");
+List funcList = menuService.getUserYwgnFunc(user_id);
 %>
 <html>
 <head>
@@ -193,11 +198,21 @@ String logo_url = (String)VS.findValue("logo_url");
 			</TABLE>					
 		</td>
 		<td height=100%  vAlign=middle  align=center>
+			<%
+			if(funcList.contains("FC9999")){
+			%>
 			<font style="font-size: 12px;">库存查询：</font><input type="text" name="kc_con"  onkeypress="f_enter('1');"  size="12">
 			<input type="button" name="button1" value=" 查询 " class="css_button" onclick="openWin('1');">
 			&nbsp;&nbsp;&nbsp;
+			<%
+			}
+			if(funcList.contains("FC9998")){
+			%>			
 			<font style="font-size: 12px;">客户查询：</font><input type="text" name="client_con"  onkeypress="f_enter('2');"  size="12">
-			<input type="button" name="button1" value=" 查询 " class="css_button" onclick="openWin('2');">			
+			<input type="button" name="button1" value=" 查询 " class="css_button" onclick="openWin('2');">	
+			<%
+			}
+			%>		
 		</td>
 		<td vAlign=top align=right >
 			<TABLE cellSpacing=0 cellPadding=0 border=0>
