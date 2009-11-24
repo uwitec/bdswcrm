@@ -14,6 +14,7 @@ import com.sw.cms.service.ClientsService;
 import com.sw.cms.service.DeptService;
 import com.sw.cms.service.EmployeeService;
 import com.sw.cms.service.ProductKcService;
+import com.sw.cms.service.ShkcService;
 import com.sw.cms.service.SjzdService;
 import com.sw.cms.service.UserService;
 import com.sw.cms.util.Constant;
@@ -21,61 +22,42 @@ import com.sw.cms.util.DateComFunc;
 import com.sw.cms.util.ParameterUtility;
 import com.sw.cms.util.StringUtils;
 
-public class BxdAction extends BaseAction {
+public class BxdAction extends BaseAction 
+{
 	private SjzdService sjzdService;
-
 	private BxdService bxdService;
-
 	private UserService userService;
-
 	private ClientsService clientsService;
-
 	private EmployeeService employeeService;
-
 	private DeptService deptService;
-
 	private ProductKcService productKcService;
+	private ShkcService      shkcService;
 
 	private Page ywyEmployeePage;
-
 	private Page bxdPage;
-
 	private Page productPage;
+	private Page shkcPage;
 
 	private String[] wxszd;
-
 	private String[] positions;
 
 	private List userList = new ArrayList();
-
 	private List clientsList = new ArrayList();
-
 	private List depts = new ArrayList();
 
 	private Bxd bxd = new Bxd();
-
 	private BxdProduct bxdProduct = new BxdProduct();
 
 	private String[] fj = new String[7];
-
 	private String product_serial_num = "";
-
 	private String lxr = "";
-
 	private String state = "";
-
 	private String gcs = "";
-
 	private String jx_date1 = DateComFunc.getToday();
-
 	private String jx_date2 = DateComFunc.getToday();
-
 	private String orderName = "";
-
 	private String orderType = "";
-
 	private int curPage = 1;
-
 	private String dept;
 
 	public String getDept() {
@@ -91,12 +73,13 @@ public class BxdAction extends BaseAction {
 	 * 
 	 * @return
 	 */
-	public String list() {
+	public String list()throws Exception
+	{
 		try {
 			int rowsPerPage = Constant.PAGE_SIZE2;
 			String con = "";
 			if (!lxr.trim().equals("")) {
-				con = " and b.lxr='" + lxr + "'";
+				con = " and b.lxr like '%" + lxr + "%'";
 			}
 			if (!product_serial_num.trim().equals("")) {
 				con += " and p.product_serial_num='" + product_serial_num + "'";
@@ -183,34 +166,25 @@ public class BxdAction extends BaseAction {
 	 * 
 	 * @return
 	 */
-	public String selKcProc() {
+	public String selKcProc()throws Exception
+	{
 		try {
-			String product_xh = ParameterUtility.getStringParameter(
-					getRequest(), "product_xh", "");
-			String product_name = ParameterUtility.getStringParameter(
-					getRequest(), "product_name", "");
-			String prop = ParameterUtility.getStringParameter(getRequest(),
-					"prop", "");
-
+			String product_serial_num = ParameterUtility.getStringParameter(
+					getRequest(), "product_serial_num", "");
+			            
 			int rowsPerPage = 15;
 
 			String con = "";
-			if (!product_xh.equals("")) {
-				con += " and product_xh like '%" + product_xh + "%'";
-			}
-			if (!product_name.equals("")) {
-				con += " and product_name like '%" + product_name + "%'";
-			}
-			if (!prop.equals("")) {
-				con += " and prop='" + prop + "'";
+		 
+			if (!product_serial_num.equals("")) {
+				con += " and qz_serial_num='" + product_serial_num + "'";
 			}
 
-			productPage = productKcService.getProductKcList(con, curPage,
-					rowsPerPage);
+			shkcPage = shkcService.getShkuIsBadProduct(con, curPage, rowsPerPage);
 
 			return "success";
 		} catch (Exception e) {
-			log.error("获取库存产品列表 错误原因" + e.getMessage());
+			log.error("获取坏件库列表 错误原因:" + e.getMessage());
 			return "error";
 		}
 
@@ -234,22 +208,37 @@ public class BxdAction extends BaseAction {
 	 * 
 	 * @return
 	 */
-	public String save() {
+	public String save() throws Exception
+	{
 		try {
 			LoginInfo info = (LoginInfo) getSession().getAttribute("LOGINUSER");
 			String user_id = info.getUser_id();
 			bxd.setCjr(user_id);
-			if (!bxd.getState().equals("") && bxd.getState().equals("报修完")) {
-				bxd.setJddate(DateComFunc.getToday());
-			}
-
 			String str = "";
 			for (int i = 0; i < fj.length; i++) {
 				str += fj[i] + ",";
 			}
 			bxdProduct.setFj(str);
-
-			bxdService.insertBxd(bxd, bxdProduct);
+			
+            if(bxd.getState().equals("已提交"))
+            {
+            	//判断提交的报修产品是否在坏件库里
+            	String msg=bxdService.isBadShkcExist(bxdProduct);
+            	if(!msg.equals(""))
+            	{
+            		this.saveMessage(msg);
+            		bxd.setState("已保存");
+            		wxszd = sjzdService.getSjzdXmxxByZdId("SJZD_WXSZD");
+            		return "input";
+            	} 
+            	//保存信息
+            	bxdService.saveBxd(bxd, bxdProduct);
+            }
+            if(bxd.getState().equals("已保存"))
+            {
+            	bxdService.saveBxd(bxd, bxdProduct);
+            }
+			
 			return "success";
 		} catch (Exception e) {
 			log.error("保存报修单  失败原因" + e.getMessage());
@@ -262,7 +251,8 @@ public class BxdAction extends BaseAction {
 	 * 
 	 * @return
 	 */
-	public String edit() {
+	public String edit()throws Exception
+	{
 		try {
 			wxszd = sjzdService.getSjzdXmxxByZdId("SJZD_WXSZD");
 			userList = userService.getAllEmployeeList();
@@ -271,7 +261,6 @@ public class BxdAction extends BaseAction {
 					"id", "");
 			bxd = (Bxd) bxdService.getBxd(bxd_id);
 			bxdProduct = (BxdProduct) bxdService.getBxdProduct(bxd_id);
-
 			return "success";
 		} catch (Exception e) {
 			log.error("加载修改报修单 失败原因" + e.getMessage());
@@ -285,20 +274,33 @@ public class BxdAction extends BaseAction {
 	 * 
 	 * @return
 	 */
-	public String update() {
-		try {
-
-			if (!bxd.getState().equals("") && bxd.getState().equals("报修完")) {
-				bxd.setJddate(DateComFunc.getToday());
-			}
-
+	public String update()throws Exception
+	{
+		try 
+		{
 			String str = "";
 			for (int i = 0; i < fj.length; i++) {
 				str += fj[i] + ",";
 			}
-			bxdProduct.setFj(str);
-
-			bxdService.updateBxd(bxd, bxdProduct);
+			 bxdProduct.setFj(str);
+			 if(bxd.getState().equals("已提交"))
+	            {
+	            	//判断提交的报修产品是否在坏件库里
+	            	String msg=bxdService.isBadShkcExist(bxdProduct);
+	            	if(!msg.equals(""))
+	            	{
+	            		this.saveMessage(msg);
+	            		bxd.setState("已保存");
+	            		wxszd = sjzdService.getSjzdXmxxByZdId("SJZD_WXSZD");
+	            		return "input";
+	            	} 
+	            	//保存信息
+	            	bxdService.updateBxd(bxd, bxdProduct);
+	            }
+	            if(bxd.getState().equals("已保存"))
+	            {
+	            	bxdService.updateBxd(bxd, bxdProduct);
+	            }		
 			return "success";
 		} catch (Exception e) {
 			log.error("保存更改报修单  失败原因" + e.getMessage());
@@ -320,6 +322,27 @@ public class BxdAction extends BaseAction {
 			return "success";
 		} catch (Exception e) {
 			log.error("删除报修单  失败原因" + e.getMessage());
+			return "error";
+		}
+	}
+	
+	/**
+	 * 单击报修单查看报修产品
+	 * @return
+	 * @throws Exception
+	 */
+	public String desc()throws Exception
+	{
+		try
+		{
+			String bxd_id = ParameterUtility.getStringParameter(getRequest(),
+					"id", "");
+			 bxdProduct=(BxdProduct)bxdService.getBxdProduct(bxd_id);
+		    return "success";
+		}
+		catch(Exception e)
+		{
+			log.error("单击报修单查看产品  失败原因："+e.getMessage());
 			return "error";
 		}
 	}
@@ -538,6 +561,22 @@ public class BxdAction extends BaseAction {
 
 	public void setFj(String[] fj) {
 		this.fj = fj;
+	}
+
+	public ShkcService getShkcService() {
+		return shkcService;
+	}
+
+	public void setShkcService(ShkcService shkcService) {
+		this.shkcService = shkcService;
+	}
+
+	public Page getShkcPage() {
+		return shkcPage;
+	}
+
+	public void setShkcPage(Page shkcPage) {
+		this.shkcPage = shkcPage;
 	}
 
 }

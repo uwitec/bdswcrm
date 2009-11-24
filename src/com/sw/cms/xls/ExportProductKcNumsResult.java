@@ -68,13 +68,14 @@ public class ExportProductKcNumsResult extends ExportXlsTemplate {
 			sheet.addCell(label);
 					
 			//写统计表头
+ 			 	
 			label = new Label(0,2,"商品编码",this.getFt_item_center_bold());
 			sheet.addCell(label);			
 			label = new Label(1,2,"商品名称",this.getFt_item_center_bold());
 			sheet.addCell(label);			
 			label = new Label(2,2,"规格",this.getFt_item_center_bold());
 			sheet.addCell(label);			
-			label = new Label(3,2,"库存数量",this.getFt_item_center_bold());
+			label = new Label(3,2,"库存",this.getFt_item_center_bold());
 			sheet.addCell(label);
 			label = new Label(4,2,"考核成本",this.getFt_item_center_bold());
 			sheet.addCell(label);
@@ -90,6 +91,7 @@ public class ExportProductKcNumsResult extends ExportXlsTemplate {
 			sheet.addCell(label);
 			label = new Label(10,2,"点杀",this.getFt_item_center_bold());
 			sheet.addCell(label);
+			 
 			
 			List productList = kcMxReportService.getKcNumsResults(product_kind, product_name, store_id,state, flag);
 			if(productList != null && productList.size()>0){
@@ -103,12 +105,16 @@ public class ExportProductKcNumsResult extends ExportXlsTemplate {
 					double fxxj = map.get("fxxj")==null?0:((Double)map.get("fxxj")).doubleValue();
 					double fxbj = map.get("fxbj")==null?0:((Double)map.get("fxbj")).doubleValue();
 					double dss = map.get("dss")==null?0:((Double)map.get("dss")).doubleValue();		
-					double gf = map.get("gf")==null?0:((Double)map.get("gf")).doubleValue();					
+					double gf = map.get("gf")==null?0:((Double)map.get("gf")).doubleValue();
 					String num = StringUtils.nullToStr(map.get("kc_nums"));
-					if(num.equals("")){
-						num = "0";
+					String ms=StringUtils.nullToStr(map.get("ms"));
+					if(num.equals(""))
+					{
+					    num="0";
 					}
-					
+					 
+					 
+					 
 					label = new Label(0,k,StringUtils.nullToStr(map.get("product_id")),this.getFt_item_center());
 					sheet.addCell(label);			
 					label = new Label(1,k,StringUtils.nullToStr(map.get("product_name")),this.getFt_item_left());
@@ -131,6 +137,7 @@ public class ExportProductKcNumsResult extends ExportXlsTemplate {
 					sheet.addCell(label);
 					label = new Label(10,k,JMath.round(dss),this.getFt_item_right());
 					sheet.addCell(label);
+					 
 					
 					k++;
 				}

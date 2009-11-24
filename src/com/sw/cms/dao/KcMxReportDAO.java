@@ -383,7 +383,7 @@ public class KcMxReportDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public List getKcNumsResults(String product_kind,String product_name,String store_id,String state,String flag){
-		String sql = "select a.product_id,a.product_name,a.product_xh,a.price,a.khcbj,a.lsbj,a.lsxj,a.fxbj,a.fxxj,a.gf,a.dss," +
+		String sql = "select a.ms, a.product_id,a.product_name,a.product_xh,a.price,a.khcbj,a.lsbj,a.lsxj,a.fxbj,a.fxxj,a.gf,a.dss," +
 				"(select sum(b.nums) as hj_nums from product_kc b where b.product_id=a.product_id";
 		
 		if(!store_id.equals("")){

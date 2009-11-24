@@ -22,7 +22,7 @@ public class BxdDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public Page getBxdList(String con, int curPage, int rowsPerPage) {
-		String sql = "select b.id,b.lxr,b.lxdh,p.product_name,p.product_serial_num,b.jxdate,s.real_name as gcs,b.jxr,b.cjr,b.state from bxd b left join bxd_product p on b.id=p.bxd_id left join sys_user s on b.gcs=s.user_id  where 1=1  ";
+		String sql = "select b.* from bxd b left join bxd_product p on b.id=p.bxd_id left join sys_user s on b.gcs=s.user_id  where 1=1  ";
 		if (!con.equals("")) {
 			sql = sql + con;
 		}
@@ -63,6 +63,16 @@ public class BxdDAO extends JdbcBaseDAO {
 		this.getJdbcTemplate().update(sql);
 
 		sql = "delete from bxd_product where bxd_id='" + bxd_id + "'";
+		this.getJdbcTemplate().update(sql);
+	}
+	
+	/**
+	 * 删除报修单商品
+	 * @param bxdProductId
+	 */
+	public void delBxdProductByBxdId(String bxd_id)
+	{
+		String sql="delete from bxd_product where bxd_id='"+bxd_id+"'";
 		this.getJdbcTemplate().update(sql);
 	}
 
@@ -108,7 +118,7 @@ public class BxdDAO extends JdbcBaseDAO {
 	 * 
 	 * @param bxd
 	 */
-	public void insertBxd(Bxd bxd, BxdProduct bxdProduct) {
+	public void saveBxd(Bxd bxd, BxdProduct bxdProduct) {
 		String sql = "insert into bxd(id,jxdate,cjdate,jddate,jxr,cjr,gcs,state,client_name,lxr,lxdh,email,address,remark)values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		Object[] param = new Object[14];
 		param[0] = bxd.getId();
@@ -126,7 +136,7 @@ public class BxdDAO extends JdbcBaseDAO {
 		param[12] = bxd.getAddress();
 		param[13] = bxd.getRemark();
 		getJdbcTemplate().update(sql, param);
-		insertBxdProduct(bxd.getId(), bxdProduct);
+		saveBxdProduct(bxd.getId(), bxdProduct);
 	}
 
 	/**
@@ -134,7 +144,7 @@ public class BxdDAO extends JdbcBaseDAO {
 	 * 
 	 * @param bxdProduct
 	 */
-	public void insertBxdProduct(String id, BxdProduct bxdProduct) {
+	public void saveBxdProduct(String id, BxdProduct bxdProduct) {
 		String sql = "insert into bxd_product(bxd_id,product_name,product_gg,product_id,product_serial_num,product_remark,bxaddress,bxstate,fj,qtfj,bj,gzfx,pcgc)values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		Object param[] = new Object[13];
 		param[0] = id;
@@ -175,6 +185,7 @@ public class BxdDAO extends JdbcBaseDAO {
 		param[9] = bxd.getRemark();
 		param[10] = bxd.getId();
 		this.getJdbcTemplate().update(sql, param);
+		delBxdProductByBxdId(bxd.getId());
 		updateBxdProduct(bxd.getId(), bxdProduct);
 	}
 
@@ -209,7 +220,8 @@ public class BxdDAO extends JdbcBaseDAO {
 	 * @author Administrator
 	 * 
 	 */
-	class BxdRowMapper implements RowMapper {
+	class BxdRowMapper implements RowMapper 
+	{
 		public Object mapRow(ResultSet rs, int index) throws SQLException {
 			Bxd bxd = new Bxd();
 			if (SqlUtil.columnIsExist(rs, "id"))

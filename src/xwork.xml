@@ -1199,6 +1199,12 @@
         <action name="getKcMxListResult" class="kcMxReportAction" method="getResultMx">
             <result name="success">/WEB-INF/pages/report/kcmx/result_mx.jsp</result>
         </action>
+        <action name="showDlKcNumsCondition" class="kcMxReportAction" method="showCondition">
+            <result name="success">/WEB-INF/pages/report/kcmx/dlkc_nums_condition.jsp</result>
+        </action>
+        <action name="getDlKcNumsResult" class="kcMxReportAction" method="getKcNumsResult">
+            <result name="success">/WEB-INF/pages/report/kcmx/dlkc_nums_result.jsp</result>
+        </action>
         <action name="showKcNumsCondition" class="kcMxReportAction" method="showCondition">
             <result name="success">/WEB-INF/pages/report/kcmx/kc_nums_condition.jsp</result>
         </action>
@@ -1870,39 +1876,7 @@
         </action>       
         <!-- 联系人 -->
         
-        <!-- 报修单 -->
-        <action name="listBxd" class="bxdAction" method="list">
-             <result name="success">/WEB-INF/pages/bxd/bxd_list.jsp</result>
-        </action>
-        <action name="addBxd" class="bxdAction" method="add">
-             <result name="success">/WEB-INF/pages/bxd/bxd_add.jsp</result>
-        </action>
-        <action name="selGcs" class="bxdAction" method="selGcs">
-             <result name="success" >/WEB-INF/pages/bxd/selGcs.jsp</result>
-        </action>
-        <action name="selBxProcCkd" class="bxdAction" method="selKcProc">
-             <result name="success">/WEB-INF/pages/bxd/selectKcProc.jsp</result>
-        </action>
-        <action name="saveBxd" class="bxdAction" method="save">
-             <result name="success">/WEB-INF/pages/msg.jsp</result>
-             <result name="input">/WEB-INF/pages/bxd/bxd_add.jsp</result>
-              <result name="cancel" type="redirect">addBxd.html</result>
-        </action>
-        <action name="editBxd" class="bxdAction" method="edit">
-             <result name="success">/WEB-INF/pages/bxd/bxd_edit.jsp</result>
-        </action>
-         <action name="updateBxd" class="bxdAction" method="update">
-             <result name="success">/WEB-INF/pages/msg.jsp</result>
-             <result name="input">/WEB-INF/pages/bxd/bxd_edit.jsp</result>
-             <result name="cancel" type="redirect">editBxd.html</result>
-        </action>
-        <action name="viewBxd" class="bxdAction" method="edit">
-             <result name="success">/WEB-INF/pages/bxd/bxd_view.jsp</result>
-        </action>
-        <action name="delBxd" class="bxdAction" method="del">
-             <result name="success">listBxd.html</result>
-        </action>
-         <!-- 报修单 -->
+         
          
          <!--货品报修汇总 -->
          <action name="showHpbxHzCondition" class="bxhzAction" method="showCondition">
@@ -2025,7 +1999,266 @@
              <result name="success">/WEB-INF/pages/mail/msg.jsp</result>
               <result name="input">/WEB-INF/pages/mail/mail_set.jsp</result>
              <result name="cancel" type="redirect">updateMailSet.html</result>
-        </action>                
+        </action>
+        
+        
+        <!-- 接件单 --> 
+        <action name="listJjd" class="jjdAction" method="list">
+             <result name="success">/WEB-INF/pages/jjd/jjd_list.jsp</result>
+        </action>
+        <action name="addJjd" class="jjdAction" method="add">
+             <result name="success">/WEB-INF/pages/jjd/jjd_add.jsp</result>
+        </action>
+        <action name="saveJjd" class="jjdAction" method="save"> 
+             <result name="cancel" type="redirect">listJjd.html</result>
+            <result name="input">/WEB-INF/pages/jjd/jjd_add.jsp</result>
+            <result name="success">/WEB-INF/pages/jjd/msg.jsp</result>
+        </action>
+        <action name="selJjProduct" class="jjdAction" method="selJjProduct">
+             <result name="success">/WEB-INF/pages/jjd/selectKcProduct.jsp</result>
+        </action>
+        <action name="jjimportSerial" class="jjdAction" method="importSerial">
+             <result name="success">/WEB-INF/pages/jjd/importSerial.jsp</result>
+        </action>
+        <action name="delJjd" class="jjdAction" method="delete">
+             <result name="success" type="redirect">listJjd.html</result>
+        </action>
+        <action name="descJjd" class="jjdAction" method="descJjd">
+             <result name="success">/WEB-INF/pages/jjd/jjd_desc.jsp</result>
+        </action>
+        <action name="viewJjd" class="jjdAction" method="edit">
+             <result name="success">/WEB-INF/pages/jjd/jjd_view.jsp</result>
+        </action>
+        <action name="editJjd" class="jjdAction" method="edit">
+             <result name="success">/WEB-INF/pages/jjd/jjd_edit.jsp</result>
+        </action>
+        <action name="updateJjd" class="jjdAction" method="update">
+             <result name="cancel" type="redirect">editJjd.html</result>
+            <result name="input">/WEB-INF/pages/jjd/jjd_edit.jsp</result>
+            <result name="success">/WEB-INF/pages/jjd/msg.jsp</result>
+        </action>
+        <!-- 接件单 -->  
+        
+        <!-- 报修返还单 -->  
+        <action name="listBxfhd" class="bxfhdAction" method="list">
+            <result name="success">/WEB-INF/pages/bxfhd/bxfhd_list.jsp</result>
+        </action>
+        <action name="editBxfhd" class="bxfhdAction"  method="edit">
+            <result name="success">/WEB-INF/pages/bxfhd/bxfhd_edit.jsp</result>
+        </action>
+        <action name="updateBxfhd" class="bxfhdAction" method="update">
+            <result name="input">/WEB-INF/pages/bxfhd/bxfhd_edit.jsp</result>
+            <result name="cancel" type="redirect">editBxfhd.html</result>
+            <result name="success">/WEB-INF/pages/msg.jsp</result>
+        </action>
+        <action name="descBxfhd" class="bxfhdAction" method="desc">
+            <result name="success">/WEB-INF/pages/bxfhd/bxfhd_desc.jsp</result>
+        </action>
+        <action name="viewBxfhd" class="bxfhdAction" method="edit">
+            <result name="success">/WEB-INF/pages/bxfhd/bxfhd_view.jsp</result>
+        </action>
+        <!-- 报修返还单 -->
+        
+        <!-- 返还客户单 --> 
+        <action name="listFhkhd" class="fhkhdAction" method="list">
+            <result name="success">/WEB-INF/pages/fhkhd/fhkhd_list.jsp</result>
+        </action>        
+        <action name="editFhkhd" class="fhkhdAction" method="edit">
+            <result name="success">/WEB-INF/pages/fhkhd/fhkhd_edit.jsp</result>
+        </action>
+        <action name="updateFhkhd" class="fhkhdAction" method="update">
+            <result name="success">/WEB-INF/pages/msg.jsp</result>
+            <result name="cancel" type="redirect">editFhkhd.html</result>
+            <result name="input">/WEB-INF/pages/fhkhd/fhkhd_edit.jsp</result>
+        </action>
+        <action name="viewFhkhd" class="fhkhdAction" method="edit">
+            <result name="success">/WEB-INF/pages/fhkhd/fhkhd_view.jsp</result>            
+        </action>
+        <action name="descFhkhd" class="fhkhdAction" method="desc">
+            <result name="success">/WEB-INF/pages/fhkhd/fhkhd_desc.jsp</result>            
+        </action>
+        <action name="delFhkhd" class="fhkhdAction" method="del">
+           <result name="success" type="redirect">listFhkhd.html</result>       
+        </action>
+        <action name="addFhkhd" class="fhkhdAction" method="add">
+            <result name="success">/WEB-INF/pages/fhkhd/fhkhd_add.jsp</result>            
+        </action>
+        <action name="saveFhkhd" class="fhkhdAction" method="save">
+            <result name="success">/WEB-INF/pages/msg.jsp</result>
+            <result name="cancel" type="redirect">addFhkhd.html</result>
+            <result name="input">/WEB-INF/pages/fhkhd/fhkhd_add.jsp</result>         
+        </action>
+         <action name="selFhkhdProcKc" class="fhkhdAction" method="selKcProc">
+             <result name="success">/WEB-INF/pages/fhkhd/selectKcProc.jsp</result>
+        </action>
+        <action name="descFhkhd" class="fhkhdAction" method="desc">
+             <result name="success">/WEB-INF/pages/fhkhd/fhkhd_desc.jsp</result>
+        </action>
+        <!-- 返还客户单 --> 
+         
+        <!-- 维修库存查询 --> 
+        <action name="listShkc" class="shkcAction" method="list">
+             <result name="success">/WEB-INF/pages/shkc/shkc_list.jsp</result>
+        </action>
+        <action name="viewShkc" class="shkcAction" method="edit">
+             <result name="success">/WEB-INF/pages/shkc/shkc_view.jsp</result>
+        </action>
+        <!-- 维修库存查询 --> 
+          
+        <!-- 维修序列号查询 -->
+        <action name="getShSerialFlow" class="shkcAction" method="getSerialFlow">
+            <result name="success" type="dispatcher">/WEB-INF/pages/shkc/serial_num_flow.jsp</result>
+        </action>
+        <!-- 维修序列号查询 --> 
+        
+        <!-- 维修入库单 -->  
+        <action name="listWxrkd" class="wxrkdAction" method="list">
+            <result name="success">/WEB-INF/pages/wxrkd/wxrkd_list.jsp</result>
+        </action>
+        <action name="addWxrkd" class="wxrkdAction" method="add">
+            <result name="success">/WEB-INF/pages/wxrkd/wxrkd_add.jsp</result>
+        </action>
+        <action name="saveWxrkd" class="wxrkdAction" method="save">
+            <result name="success">/WEB-INF/pages/msg.jsp</result>
+            <result name="cancel" type="redirect">addWxrkd.html</result>
+            <result name="input">/WEB-INF/pages/wxrkd/wxrkd_add.jsp</result>  
+        </action>
+         <action name="selWxrkProcCkd" class="wxrkdAction" method="selKcProc">
+             <result name="success">/WEB-INF/pages/wxrkd/selectKcProc.jsp</result>
+        </action>
+        <action name="viewWxrkd" class="wxrkdAction" method="edit">
+             <result name="success">/WEB-INF/pages/wxrkd/wxrkd_view.jsp</result>
+        </action>
+        <action name="editWxrkd" class="wxrkdAction" method="edit">
+             <result name="success">/WEB-INF/pages/wxrkd/wxrkd_edit.jsp</result>
+        </action>
+        <action name="updateWxrkd" class="wxrkdAction" method="update">
+            <result name="success">/WEB-INF/pages/msg.jsp</result>
+            <result name="cancel" type="redirect">editWxrkd.html</result>
+            <result name="input">/WEB-INF/pages/wxrkd/wxrkd_edit.jsp</result>
+        </action>
+        <action name="delWxrkd" class="wxrkdAction" method="del">
+            <result name="success" type="redirect">listWxrkd.html</result>  
+        </action>
+        <action name="descWxrkd" class="wxrkdAction" method="desc">
+             <result name="success">/WEB-INF/pages/wxrkd/wxrkd_desc.jsp</result>
+        </action>
+        <!-- 维修入库单 -->
+        
+         <!-- 报修单 -->
+        <action name="listBxd" class="bxdAction" method="list">
+             <result name="success">/WEB-INF/pages/bxd/bxd_list.jsp</result>
+        </action>
+        <action name="addBxd" class="bxdAction" method="add">
+             <result name="success">/WEB-INF/pages/bxd/bxd_add.jsp</result>
+        </action>
+        <action name="selGcs" class="bxdAction" method="selGcs">
+             <result name="success" >/WEB-INF/pages/bxd/selGcs.jsp</result>
+        </action>
+        <action name="selBxProcCkd" class="bxdAction" method="selKcProc">
+             <result name="success">/WEB-INF/pages/bxd/selectKcProc.jsp</result>
+        </action>
+        <action name="saveBxd" class="bxdAction" method="save">
+             <result name="success">/WEB-INF/pages/msg.jsp</result>
+             <result name="input">/WEB-INF/pages/bxd/bxd_add.jsp</result>
+              <result name="cancel" type="redirect">addBxd.html</result>
+        </action>
+        <action name="editBxd" class="bxdAction" method="edit">
+             <result name="success">/WEB-INF/pages/bxd/bxd_edit.jsp</result>
+        </action>
+         <action name="updateBxd" class="bxdAction" method="update">
+             <result name="success">/WEB-INF/pages/msg.jsp</result>
+             <result name="input">/WEB-INF/pages/bxd/bxd_edit.jsp</result>
+             <result name="cancel" type="redirect">editBxd.html</result>
+        </action>
+        <action name="viewBxd" class="bxdAction" method="edit">
+             <result name="success">/WEB-INF/pages/bxd/bxd_view.jsp</result>
+        </action>
+        <action name="delBxd" class="bxdAction" method="del">
+             <result name="success">listBxd.html</result>
+        </action>
+        <action name="descBxd" class="bxdAction" method="desc">
+             <result name="success">/WEB-INF/pages/bxd/bxd_desc.jsp</result>
+        </action>
+         <!-- 报修单 -->    
+           <!-- 售后服务单 --> 
+        <action name="listSfd" class="sfdAction" method="list">
+             <result name="success">/WEB-INF/pages/sfd/sfd_list.jsp</result>
+        </action>
+        <action name="addSfd" class="sfdAction" method="add">
+              <result name="success">/WEB-INF/pages/sfd/sfd_add.jsp</result>
+        </action>
+        <action name="saveSfd" class="sfdAction" method="save">
+             <result name="success">/WEB-INF/pages/msg.jsp</result>
+             <result name="input">/WEB-INF/pages/sfd/sfd_add.jsp</result>
+             <result name="cancel" type="redirect">addSfd.html</result>
+        </action>
+         <action name="editSfd" class="sfdAction" method="edit">
+              <result name="success">/WEB-INF/pages/sfd/sfd_edit.jsp</result>
+        </action>
+         <action name="updateSfd" class="sfdAction" method="update">
+             <result name="success">/WEB-INF/pages/msg.jsp</result>
+             <result name="input">/WEB-INF/pages/sfd/sfd_edit.jsp</result>
+             <result name="cancel" type="redirect">editSfd.html</result>
+        </action>
+          <action name="viewSfd" class="sfdAction" method="edit">
+             <result name="success">/WEB-INF/pages/sfd/sfd_view.jsp</result>
+        </action>
+        <action name="delSfd" class="sfdAction" method="del">
+             <result name="success">listSfd.html</result>
+        </action>
+         <!-- 售后服务单 -->
+         
+         <!-- 派工单 --> 
+        <action name="listPgd" class="pgdAction" method="list">
+             <result name="success">/WEB-INF/pages/pgd/pgd_list.jsp</result>
+        </action>
+      
+         <action name="editPgd" class="pgdAction" method="edit">
+              <result name="success">/WEB-INF/pages/pgd/pgd_edit.jsp</result>
+        </action>
+        <action name="updatePgd" class="pgdAction" method="update">
+             <result name="success">/WEB-INF/pages/msg.jsp</result>
+             <result name="input">/WEB-INF/pages/pgd/pgd_edit.jsp</result>
+             <result name="cancel" type="redirect">editPgd.html</result>
+        </action>
+          <action name="viewPgd" class="pgdAction" method="edit">
+             <result name="success">/WEB-INF/pages/pgd/pgd_view.jsp</result>
+        </action>
+         <!-- 派工单 -->  
+         
+          <!-- 维修处理单 --> 
+        <action name="listWxcld" class="wxcldAction" method="list">
+             <result name="success">/WEB-INF/pages/wxcld/wxcld_list.jsp</result>
+        </action>        
+         <action name="editWxcld" class="wxcldAction" method="edit">
+              <result name="success">/WEB-INF/pages/wxcld/wxcld_edit.jsp</result>
+        </action>
+         <action name="updateWxcld" class="wxcldAction" method="update">
+             <result name="success">/WEB-INF/pages/msg.jsp</result>
+             <result name="input">/WEB-INF/pages/wxcld/wxcld_edit.jsp</result>
+             <result name="cancel" type="redirect">editWxcld.html</result>
+        </action>
+          <action name="viewWxcld" class="wxcldAction" method="edit">
+             <result name="success">/WEB-INF/pages/wxcld/wxcld_view.jsp</result>
+        </action> 
+          <action name="selWxProduct" class="wxcldAction" method="selWxProduct">
+             <result name="success">/WEB-INF/pages/wxcld/selectKcProc.jsp</result>
+        </action>         
+         <action name="descWxcld" class="wxcldAction" method="desc">
+             <result name="success">/WEB-INF/pages/wxcld/wxcld_desc.jsp</result>
+        </action>  
+            
+        <!-- 维修处理单 -->  
+        
+        <!-- 库龄汇总 -->
+        <action name="showKlCondition" class="klHzReportAction" method="showCondition">
+            <result name="success">/WEB-INF/pages/report/kl_hz/condition.jsp</result>
+        </action>
+        <action name="getKlHzResult" class="klHzReportAction" method="getResult">
+            <result name="success">/WEB-INF/pages/report/kl_hz/result.jsp</result>
+        </action>      
+        <!-- 库龄汇总  -->
                 
     </package>
 </xwork>

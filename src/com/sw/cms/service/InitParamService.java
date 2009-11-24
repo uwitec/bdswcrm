@@ -50,6 +50,16 @@ public class InitParamService {
 		initParamDao.delExpireMsg();
 	}
 	
+	/**
+	 * 更改售后库存商品在库天数
+	 *
+	 */
+	
+	public void updateShkcProductDay()
+	{
+		initParamDao.updateShkcProductDay();
+	}
+	
 
 	public InitParamDAO getInitParamDao() {
 		return initParamDao;

@@ -276,45 +276,50 @@ public class DwrService {
 
 		String str = "";
 		String[] xx = new String[15];
-		Map map = (Map) bxdDao.getBxdRecord(num);
+//		Map map = (Map) bxdDao.getBxdRecord(num);
 		String flog = "";
 		// 如果所输入的序列号在维修记录里提取最近一次维修记录
 
-		if (null != map) {
-			flog = "1";
-			xx[0] = StringUtils.nullToStr(map.get("product_name"));
-			xx[1] = StringUtils.nullToStr(map.get("product_xh"));
-			xx[2] = StringUtils.nullToStr(map.get("product_gg"));
-			xx[3] = StringUtils.nullToStr(map.get("product_serial_num"));
-			xx[4] = StringUtils.nullToStr(map.get("product_remark"));
-			xx[5] = StringUtils.nullToStr(map.get("gzfx"));
-			xx[6] = StringUtils.nullToStr(map.get("pcgc"));
-			xx[7] = StringUtils.nullToStr(map.get("client_name"));
-			xx[8] = StringUtils.nullToStr(map.get("lxr"));
-			xx[9] = StringUtils.nullToStr(map.get("lxdh"));
-			xx[10] = StringUtils.nullToStr(map.get("email"));
-			xx[11] = StringUtils.nullToStr(map.get("address"));
-			xx[12] = StringUtils.nullToStr(map.get("remark"));
-			if (null != StaticParamDo.getClientNameById((String) map
-					.get("client_name"))) {
-				xx[13] = StaticParamDo.getClientNameById((String) map
-						.get("client_name"));
-			} else {
-				xx[13] = "";
-			}
-			xx[14] = StringUtils.nullToStr(map.get("product_id"));
-
-		} else {
+//		if (null != map) 
+//		{
+//			flog = "1";
+//			xx[0] = StringUtils.nullToStr(map.get("product_name"));
+//			xx[1] = StringUtils.nullToStr(map.get("product_xh"));
+//			xx[2] = StringUtils.nullToStr(map.get("product_gg"));
+//			xx[3] = StringUtils.nullToStr(map.get("product_serial_num"));
+//			xx[4] = StringUtils.nullToStr(map.get("product_remark"));
+//			xx[5] = StringUtils.nullToStr(map.get("gzfx"));
+//			xx[6] = StringUtils.nullToStr(map.get("pcgc"));
+//			xx[7] = StringUtils.nullToStr(map.get("client_name"));
+//			xx[8] = StringUtils.nullToStr(map.get("lxr"));
+//			xx[9] = StringUtils.nullToStr(map.get("lxdh"));
+//			xx[10] = StringUtils.nullToStr(map.get("email"));
+//			xx[11] = StringUtils.nullToStr(map.get("address"));
+//			xx[12] = StringUtils.nullToStr(map.get("remark"));
+//			if (null != StaticParamDo.getClientNameById((String) map
+//					.get("client_name"))) {
+//				xx[13] = StaticParamDo.getClientNameById((String) map
+//						.get("client_name"));
+//			} else {
+//				xx[13] = "";
+//			}
+//			xx[14] = StringUtils.nullToStr(map.get("product_id"));
+//
+//		} 
+//		else 
+//		{
 
 			// 查询销售记录里有没有该销售序列号
 			Map xsmap = (Map) serialNumDao.getXsRecord(num);
 			// 如果输入的序列号在购买记录里
-			if (null != xsmap) {
+			if (null != xsmap) 
+			{
 
-				xx = new String[9];
+				xx = new String[10];
 				String type = (String) xsmap.get("ywtype");
 				// 如果记录的类型是“零售单”
-				if (type.equals("零售")) {
+				if (type.equals("零售")) 
+				{
 					flog = "2";
 					Map lsmap = (Map) lsdDao.getLsdByIdBySerailNum(
 							(String) xsmap.get("yw_dj_id"), (String) xsmap
@@ -341,8 +346,11 @@ public class DwrService {
 					xx[6] = StringUtils.nullToStr(lsmap.get("mail"));
 					xx[7] = StringUtils.nullToStr(lsmap.get("address"));
 					xx[8] = "";
+					xx[9] = (String) xsmap.get("yw_dj_id");
 
-				} else if (type.equals("销售")) { // 如果记录的类型是“销售单”
+				}
+				else if (type.equals("销售")) 
+				{ // 如果记录的类型是“销售单”
 
 					// 查询”销售单“里的销售产品有没有序列号
 					Map xsdmap = (Map) xsdDao.getXsdByIdBySerailNum(
@@ -377,8 +385,11 @@ public class DwrService {
 						xx[8] = StringUtils.nullToStr(StaticParamDo
 								.getClientNameById((String) xsdmap
 										.get("client_name")));
+						xx[9]=(String) xsmap.get("yw_dj_id");
 
-					} else { // 在“出库单”里的销售产品查询该序列号
+					} 
+					else 
+					{ // 在“出库单”里的销售产品查询该序列号
 
 						Map maps = (Map) ckdDao.getCkdByXsdId((String) xsmap
 								.get("yw_dj_id"));
@@ -423,12 +434,14 @@ public class DwrService {
 								xx[8] = StringUtils.nullToStr(StaticParamDo
 										.getClientNameById(xsdClientXx
 												.getClient_name()));
+								xx[9]=(String) xsmap.get("yw_dj_id");
 							} else {
 								xx[4] = "";
 								xx[5] = "";
 								xx[6] = "";
 								xx[7] = "";
 								xx[8] = "";
+								xx[9]=(String) xsmap.get("yw_dj_id");
 							}
 
 						} else {
@@ -449,7 +462,7 @@ public class DwrService {
 				str = "";
 			}
 
-		}
+		
 		for (int i = 0; i < xx.length; i++) {
 
 			str += xx[i] + "$";

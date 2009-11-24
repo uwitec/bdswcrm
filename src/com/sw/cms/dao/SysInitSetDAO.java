@@ -194,6 +194,23 @@ public class SysInitSetDAO extends JdbcBaseDAO {
 		sqls[74] = "delete from send_msg_log";      //短信发送日志
 		sqls[75] = "delete from sendsms";           //短信发送列表
 		sqls[76] = "delete from sys_msg";           //系统消息
+		sqls[77] = "delete from bxd";               //报修单
+		sqls[78] = "delete from bxd_product";       //报修单商品
+		sqls[79] = "delete from  bxfhd";            //报修返还单
+		sqls[80] = "delete from  bxfhd_product";    //报修返还单商品
+		sqls[81] = "delete from  fhkhd";            //返还客户单
+		sqls[82] = "delete from  fhkhd_product";    //返还客户单商品
+		sqls[83] = "delete from  jjd";              //接件单
+		sqls[84] = "delete from  jjd_product";      //接件单商品
+		sqls[85] = "delete from  sh_serial_num_flow ";//售后库存序列号流转记录
+		sqls[86] = "delete from  shkc";               //售后库存
+		sqls[87] = "delete from  wxrkd";             //维修入库单
+		sqls[88] = "delete from  wxrkd_product";     //维修入库单商品
+		sqls[89] = "delete from  sfd";                //售后服务单
+		sqls[89] = "delete from  pgd";                //派工单	
+		sqls[89] = "delete from  wxcld";                //维修处理单
+		sqls[89] = "delete from  wxcld_product";        //维修处理单商品
+	    
 		
 		
 		this.getJdbcTemplate().batchUpdate(sqls);

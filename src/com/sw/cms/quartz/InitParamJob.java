@@ -17,6 +17,7 @@ public class InitParamJob extends QuartzJobBean {
 		initParamService.genKcQc();      //生成库存期初
 		initParamService.genYsQc();      //生成往来期初
 		initParamService.delExpireMsg(); //删除过期消息
+		initParamService.updateShkcProductDay();//更改售后库存商品在库天数
 	}
 
 	public InitParamService getInitParamService() {
