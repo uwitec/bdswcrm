@@ -437,6 +437,56 @@
         <property name="jdbcTemplate" ref="jdbcTemplate"/>
      </bean>                  
                                
+      <!-- 接件单 -->  
+     <bean id="jjdDao" class="com.sw.cms.dao.JjdDAO">
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+     </bean> 
+     
+     <!-- 售后库存 -->
+     <bean id="shkcDao" class="com.sw.cms.dao.ShkcDAO">
+        <property name="jdbcTemplate" ref="jdbcTemplate"/> 
+     </bean>
+     
+     <!-- 售后库存序列号流转记录 -->
+     <bean id="shSerialNumFlowDao" class="com.sw.cms.dao.ShSerialNumFlowDAO">
+        <property name="jdbcTemplate" ref="jdbcTemplate"/> 
+     </bean>
+     
+     <!-- 报修返还单 -->
+     <bean id="bxfhdDao" class="com.sw.cms.dao.BxfhdDAO">
+          <property name="jdbcTemplate" ref="jdbcTemplate"/> 
+     </bean>
+     
+     <!-- 返还客户单 -->
+     <bean id="fhkhdDao" class="com.sw.cms.dao.FhkhdDAO">
+          <property name="jdbcTemplate" ref="jdbcTemplate"/> 
+     </bean>
+     
+     <!-- 维修入库单 -->
+     <bean id="wxrkdDao" class="com.sw.cms.dao.WxrkdDAO">
+          <property name="jdbcTemplate" ref="jdbcTemplate"/>
+     </bean>
+     
+      <!-- 售后服务单 -->   
+     <bean id="sfdDao" class="com.sw.cms.dao.SfdDAO">
+        <property name="jdbcTemplate" ref="jdbcTemplate"/> 
+     </bean> 
+     
+      <!-- 派工单 -->
+     <bean id="pgdDao" class="com.sw.cms.dao.PgdDAO">
+          <property name="jdbcTemplate" ref="jdbcTemplate"/>
+     </bean>
+     
+       <!-- 维修处理单 -->
+     <bean id="wxcldDao" class="com.sw.cms.dao.WxcldDAO">
+          <property name="jdbcTemplate" ref="jdbcTemplate"/>
+     </bean>
+     
+     <!-- 库龄汇总 -->
+     <bean id="klHzReportDao" class="com.sw.cms.dao.KlHzReportDAO">
+          <property name="jdbcTemplate" ref="jdbcTemplate"/>
+     </bean>
+      
 </beans>
 
 

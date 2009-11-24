@@ -58,14 +58,16 @@ if(!store_id.equals("")){
 	<THEAD>
 		<TR>
 			<TD class=ReportHead>序号</TD>
-			<TD class=ReportHead>商品编码</TD>
+			<!--  <TD class=ReportHead>商品编码</TD>-->
 			<TD class=ReportHead>商品名称</TD>
 			<TD class=ReportHead>规格</TD>
 			<TD class=ReportHead>库存数量</TD>
 			<TD class=ReportHead>零售报价</TD>
 			<TD class=ReportHead>零售限价</TD>
+			<TD class=ReportHead>考核成本</TD>
 			<TD class=ReportHead>工分</TD>
-			<TD class=ReportHead>点杀</TD>
+			<TD class=ReportHead>产品卖点</TD>
+			<!-- <TD class=ReportHead>点杀</TD>-->
 		</TR>
 	</THEAD>
 	<TBODY>
@@ -74,26 +76,37 @@ if(productList != null && productList.size()>0){
 	for(int i=0;i<productList.size();i++){
 		Map map = (Map)productList.get(i);
 		
+		double khcbj = map.get("khcbj")==null?0:((Double)map.get("khcbj")).doubleValue();
 		double lsbj = map.get("lsbj")==null?0:((Double)map.get("lsbj")).doubleValue();
 		double lsxj = map.get("lsxj")==null?0:((Double)map.get("lsxj")).doubleValue();
 		double dss = map.get("dss")==null?0:((Double)map.get("dss")).doubleValue();		
 		double gf = map.get("gf")==null?0:((Double)map.get("gf")).doubleValue();
 		
 		String num = StringUtils.nullToStr(map.get("kc_nums"));
+		String ms=StringUtils.nullToStr(map.get("ms"));
+		if(!ms.equals(""))
+		{
+		   if(ms.length()>16)
+		   {
+		     ms=ms.substring(0,16)+"...";
+		   }
+		}
 		if(num.equals("")){
 			num = "0";
 		}
 %>
 		<TR>
 			<TD class=ReportItemXh><%=i+1 %>&nbsp;</TD>
-			<TD class=ReportItemXh><%=StringUtils.nullToStr(map.get("product_id")) %></TD>
+			<!--<TD class=ReportItemXh><%=StringUtils.nullToStr(map.get("product_id")) %></TD>-->
 			<TD class=ReportItem><%=StringUtils.nullToStr(map.get("product_name")) %>&nbsp;</TD>
 			<TD class=ReportItem><%=StringUtils.nullToStr(map.get("product_xh")) %>&nbsp;</TD>
 			<TD class=ReportItemXh><%=num %>&nbsp;</TD>
 			<td class=ReportItemMoney><%=JMath.round(lsbj,2) %>&nbsp;</td>
 			<td class=ReportItemMoney><%=JMath.round(lsxj,2) %>&nbsp;</td>
+			<td class=ReportItemMoney><%=JMath.round(khcbj,2) %>&nbsp;</td>
 			<td class=ReportItemMoney><%=JMath.round(gf) %>&nbsp;</td>
-			<td class=ReportItemMoney><%=JMath.round(dss) %>&nbsp;</td>
+			<!--  <td class=ReportItemMoney><%=JMath.round(dss) %>&nbsp;</td>-->
+			<td class=ReportItem title="<%=StringUtils.nullToStr(map.get("ms"))%>"><%=ms%>&nbsp;</td>
 		</TR>
 <%
 	}

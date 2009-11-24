@@ -63,7 +63,7 @@ String orderType = (String)VS.findValue("orderType");
 		var destination = "editBxd.html?id=" + id;
 		var fea ='width=950,height=700,left=' + (screen.availWidth-950)/2 + ',top=' + (screen.availHeight-750)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
-		window.open(destination,'修改销售单',fea);		
+		window.open(destination,'修改报修单',fea);		
 	}	
 	
 	function doSort(order_name){
@@ -119,8 +119,8 @@ String orderType = (String)VS.findValue("orderType");
 			&nbsp;&nbsp;
 			报修单状态：<select name="state">
 				<option value=""></option>
-				<option value="报修中"  <%if(state.equals("报修中")) out.print("selected"); %>>报修中</option>
-				<option value="报修完"  <%if(state.equals("报修完")) out.print("selected"); %>>报修完</option>
+				<option value="已保存"  <%if(state.equals("已保存")) out.print("selected"); %>>已保存</option>
+				<option value="已提交"  <%if(state.equals("已提交")) out.print("selected"); %>>已提交</option>
 			</select>&nbsp;&nbsp;
 			工程师：<input type="text" name="gcs" value="<%=gcs%>" size="10">
 			<input type="submit" name="buttonCx" value=" 查询 " class="css_button">
@@ -132,14 +132,14 @@ String orderType = (String)VS.findValue("orderType");
 	<thead>
 	<tr>
 		<td onclick="doSort('id');">报修单编号<%if(orderName.equals("id")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td onclick="doSort('client_name');">客户名称<%if(orderName.equals("client_name")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
 		<td onclick="doSort('lxr');">联系人<%if(orderName.equals("lxr")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
 		<td onclick="doSort('lxdh');">联系电话<%if(orderName.equals("lxdh")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('product_name');">产品名称<%if(orderName.equals("product_name")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('product_serial_num');">序列号<%if(orderName.equals("product_serial_num")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('jxdate');">接修时间<%if(orderName.equals("jxdate")) out.print("<img src='images/" + orderType + ".gif'>"); %> </td>			 
+		<td onclick="doSort('jxdate');">报修时间<%if(orderName.equals("jxdate")) out.print("<img src='images/" + orderType + ".gif'>"); %> </td>
+		<td onclick="doSort('state');">状态<%if(orderName.equals("state")) out.print("<img src='images/" + orderType + ".gif'>"); %> </td>	
+		<td onclick="doSort('jxr');">报修人<%if(orderName.equals("jxr")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>					 
 		<td onclick="doSort('gcs');">工程师<%if(orderName.equals("gcs")) out.print("<img src='images/" + orderType + ".gif'>"); %>  </td>	
-		<td onclick="doSort('jxr');">接修人<%if(orderName.equals("jxr")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>	
-		<td onclick="doSort('state');">状态<%if(orderName.equals("state")) out.print("<img src='images/" + orderType + ".gif'>"); %> </td>
+		<td onclick="doSort('cjr');">操作员<%if(orderName.equals("cjr")) out.print("<img src='images/" + orderType + ".gif'>"); %>  </td>		
 		<td>操作</td>
 	</tr>
 	</thead>
@@ -150,22 +150,31 @@ String orderType = (String)VS.findValue("orderType");
 	while(it.hasNext()){
 		Map bxd = (Map)it.next();
 		%> 
-	<tr class="a1" title="双击查看详情"  onmousedown="trSelectChangeCss()"  onDblClick="openWin('<%=StringUtils.nullToStr(bxd.get("id")) %>');">
+	<tr class="a1" title="双击查看详情"  onmousedown="trSelectChangeCss()" onclick="descMx('<%=StringUtils.nullToStr(bxd.get("id")) %>');"  onDblClick="openWin('<%=StringUtils.nullToStr(bxd.get("id")) %>');">
 		<td><%=StringUtils.nullToStr(bxd.get("id")) %></td>
-		 <td> <%=StringUtils.nullToStr(bxd.get("lxr")) %></td>
+		<td><%=StaticParamDo.getClientNameById(StringUtils.nullToStr(bxd.get("client_name")))%></td>
+		<td> <%=StringUtils.nullToStr(bxd.get("lxr")) %></td>
 		<td  ><%=StringUtils.nullToStr(bxd.get("lxdh")) %> </td>
-		<td> <%=StringUtils.nullToStr(bxd.get("product_name")) %></td>
-		<td> <%=StringUtils.nullToStr(bxd.get("product_serial_num")) %></td>
 		<td> <%=StringUtils.nullToStr(bxd.get("jxdate")) %></td>
-		<td><%=StringUtils.nullToStr(bxd.get("gcs")) %> </td>
-		<td> <%=StaticParamDo.getRealNameById(StringUtils.nullToStr(bxd.get("jxr"))) %></td>
-		
 		<td><%=StringUtils.nullToStr(bxd.get("state")) %></td>
+		<td> <%=StaticParamDo.getRealNameById(StringUtils.nullToStr(bxd.get("jxr")))%></td>
+		<td><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(bxd.get("gcs"))) %> </td>
+		<td> <%=StaticParamDo.getRealNameById(StringUtils.nullToStr(bxd.get("cjr"))) %></td>		
+	 
 		<td>
-	 <a href="#" onclick="edit('<%=StringUtils.nullToStr(bxd.get("id")) %>');"><img src="images/modify.gif" align="absmiddle" title="修改报修单信息" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
+		    <%
+		     if(bxd.get("state").equals("已保存"))
+		     {
+		     %>
+	        <a href="#" onclick="edit('<%=StringUtils.nullToStr(bxd.get("id")) %>');"><img src="images/modify.gif" align="absmiddle" title="修改报修单信息" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
 			<a href="#" onclick="openWin('<%=StringUtils.nullToStr(bxd.get("id")) %>');"><img src="images/view.gif" align="absmiddle" title="查看报修单信息" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
-			<a href="#" onclick="del('<%=StringUtils.nullToStr(bxd.get("id")) %>');"><img src="images/del.gif" align="absmiddle" title="删除该报修单" border="0" style="cursor:hand"></a>		
-		 
+			<a href="#" onclick="del('<%=StringUtils.nullToStr(bxd.get("id")) %>');"><img src="images/del.gif" align="absmiddle" title="删除该报修单" border="0" style="cursor:hand"></a>				 
+		    <%}
+		     else
+		     {
+		      %>
+		      	<a href="#" onclick="openWin('<%=StringUtils.nullToStr(bxd.get("id")) %>');"><img src="images/view.gif" align="absmiddle" title="查看报修单信息" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
+		    <%} %> 
 		</td>
 	</tr>
 	<%
@@ -180,6 +189,14 @@ String orderType = (String)VS.findValue("orderType");
 </table>
 </form>
 
+<form name="descForm" action="descBxd.html" method="post" target="desc">
+	<input type="hidden" name="id" value="">
+</form>
+<table width="100%"  align="center" cellpadding="0" cellspacing="0">
+	<tr>
+		<td><iframe id="desc" name="desc" onload="dyniframesize('desc');" width="100%" border="0" frameborder="0" SCROLLING="no"  src=''/></td>
+	</tr>
+</table>
  
 
 </body>

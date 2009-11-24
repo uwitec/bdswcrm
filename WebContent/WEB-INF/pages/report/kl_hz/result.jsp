@@ -11,8 +11,8 @@ List productList = (List)VS.findValue("productList");
 String product_kind = StringUtils.nullToStr(request.getParameter("product_kind"));
 String product_name = StringUtils.nullToStr(request.getParameter("product_name"));
 String store_id = StringUtils.nullToStr(request.getParameter("store_id"));
-String flag = StringUtils.nullToStr(request.getParameter("flag"));
-String state = StringUtils.nullToStr(request.getParameter("state"));
+String kl_day = StringUtils.nullToStr(request.getParameter("kl_day"));
+ 
 
 String conStr = "";
 if(!product_kind.equals("")){
@@ -37,7 +37,7 @@ if(!store_id.equals("")){
 
 <html>
 <head>
-<title>库存数量汇总——统计结果</title>
+<title>库龄汇总——统计结果</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/report.css" rel="stylesheet" type="text/css" />
 <style media=print>  
@@ -49,7 +49,7 @@ if(!store_id.equals("")){
 <TABLE  align="center" cellSpacing=0 cellPadding=0 width="99%" border=0>
 	<TBODY>
 		<TR style="BACKGROUND-COLOR: #dcdcdc;height:45;">
-		    <TD align="center" width="100%"><font style="FONT-SIZE: 16px"><B>库存数量汇总</B></font><br><%=conStr %></TD>
+		    <TD align="center" width="100%"><font style="FONT-SIZE: 16px"><B>库龄汇总</B></font><br><%=conStr %></TD>
 		</TR>
 	</TBODY>
 </TABLE>
@@ -58,18 +58,18 @@ if(!store_id.equals("")){
 	<THEAD>
 		<TR>
 			<TD class=ReportHead>序号</TD>
+			<TD class=ReportHead>序列号</TD>
 			<TD class=ReportHead>商品编码</TD>
 			<TD class=ReportHead>商品名称</TD>
 			<TD class=ReportHead>规格</TD>
-			<TD class=ReportHead>库存</TD>
-			<TD class=ReportHead>考核成本
+			<TD class=ReportHead>库龄</TD>
+			<TD class=ReportHead>考核成本</TD>
 			<TD class=ReportHead>零售报价</TD>
-			<TD class=ReportHead>零售限价</TD> 
+			<TD class=ReportHead>零售限价</TD>
 			<TD class=ReportHead>分销价</TD>
 			<TD class=ReportHead>分销限价</TD>
-			<TD class=ReportHead>工分</TD> 
+			<TD class=ReportHead>工分</TD>
 			<TD class=ReportHead>点杀</TD>
-			
 		</TR>
 	</THEAD>
 	<TBODY>
@@ -86,30 +86,22 @@ if(productList != null && productList.size()>0){
 		double dss = map.get("dss")==null?0:((Double)map.get("dss")).doubleValue();		
 		double gf = map.get("gf")==null?0:((Double)map.get("gf")).doubleValue();
 		
-		String num = StringUtils.nullToStr(map.get("kc_nums"));
-		String ms=StringUtils.nullToStr(map.get("ms"));
-		if(num.equals(""))
-		{
-		   num="0";
-		}
 		 
-		 
-		
 %>
 		<TR>
 			<TD class=ReportItemXh><%=i+1 %>&nbsp;</TD>
-			 <TD class=ReportItemXh><%=StringUtils.nullToStr(map.get("product_id")) %></TD> 
+			<TD class=ReportItemXh><%=StringUtils.nullToStr(map.get("serial_num"))%>&nbsp;</TD>
+			<TD class=ReportItemXh><%=StringUtils.nullToStr(map.get("product_id")) %></TD>
 			<TD class=ReportItem><%=StringUtils.nullToStr(map.get("product_name")) %>&nbsp;</TD>
 			<TD class=ReportItem><%=StringUtils.nullToStr(map.get("product_xh")) %>&nbsp;</TD>
-			<TD class=ReportItemXh><%=num %>&nbsp;</TD>
-			 <td class=ReportItemMoney><%=JMath.round(khcbj,2) %>&nbsp;</td> 
+			<TD class=ReportItemMoney><%=StringUtils.nullToStr(map.get("klday")) %>&nbsp;</TD>
+			<td class=ReportItemMoney><%=JMath.round(khcbj,2) %>&nbsp;</td>
 			<td class=ReportItemMoney><%=JMath.round(lsbj,2) %>&nbsp;</td>
-			 <td class=ReportItemMoney><%=JMath.round(lsxj,2) %>&nbsp;</td> 
-			 <td class=ReportItemMoney><%=JMath.round(fxbj,2) %>&nbsp;</td> 
+			<td class=ReportItemMoney><%=JMath.round(lsxj,2) %>&nbsp;</td>
+			<td class=ReportItemMoney><%=JMath.round(fxbj,2) %>&nbsp;</td>
 			<td class=ReportItemMoney><%=JMath.round(fxxj,2) %>&nbsp;</td>
-			 <td class=ReportItemMoney><%=JMath.round(gf) %>&nbsp;</td> 
-			 <td class=ReportItemMoney><%=JMath.round(dss) %>&nbsp;</td> 
-			 
+			<td class=ReportItemMoney><%=JMath.round(gf) %>&nbsp;</td>
+			<td class=ReportItemMoney><%=JMath.round(dss) %>&nbsp;</td>
 		</TR>
 <%
 	}
@@ -123,16 +115,15 @@ if(productList != null && productList.size()>0){
 </table>
 <center class="Noprint">
 	<input type="button" name="button_print" value=" 打 印 " onclick="window.print();"> &nbsp;&nbsp;
-	<input type="button" name="button_print" value=" 导 出 " onclick="document.reportForm.submit();"> &nbsp;&nbsp;
-    <input type="button" name="button_fh" value=" 返 回 " onclick="location.href='showKcNumsCondition.html';"> 
+	<!--  <input type="button" name="button_print" value=" 导 出 " onclick="document.reportForm.submit();">--> &nbsp;&nbsp;
+    <input type="button" name="button_fh" value=" 返 回 " onclick="location.href='showKlCondition.html';"> 
 </center>
 <form name="reportForm" action="DownLoadXlsServlet" method="post">
 <input type="hidden" name="action" value="exportProductKcNumsResult">
 <input type="hidden" name="product_kind" value="<%=product_kind %>">
 <input type="hidden" name="product_name" value="<%=product_name %>">
 <input type="hidden" name="store_id" value="<%=store_id %>">
-<input type="hidden" name="flag" value="<%=flag %>">
-<input type="hidden" name="state" value="<%=state %>">
+ 
 </form>
 </body>
 </html>

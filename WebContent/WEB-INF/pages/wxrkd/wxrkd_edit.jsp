@@ -5,15 +5,14 @@
 <%@ page import="java.util.*" %>
 <%
 OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
-Bxd bxd=(Bxd)VS.findValue("bxd");
-BxdProduct bxdProduct=(BxdProduct)VS.findValue("bxdProduct");
-String[] wxszd=(String[])VS.findValue("wxszd");
+Wxrkd wxrkd=(Wxrkd)VS.findValue("wxrkd");
+WxrkdProduct wxrkdProduct=(WxrkdProduct)VS.findValue("wxrkdProduct");
  List msg = (List)session.getAttribute("messages");
 session.removeAttribute("messages");
  %>
 <html>
 <head>
-<title>报修单添加</title>
+<title>维修入库单添加</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript" src="js/Check.js"></script>
@@ -34,14 +33,10 @@ session.removeAttribute("messages");
 	{
 	   if(document.getElementById("brand").value=="")
 	   {
-	      alert('报修人不能为空 请填写！');
+	      alert('维修人不能为空 请填写！');
 	      return;
 	   }
-	   if(document.getElementById("sqr_text").value=="")
-	   {
-	      alert('工程师不能为空 请填写！');
-	      return;
-	   }
+	    
 	   if(document.getElementById("product_name").value=="")
 	   {
 	      alert('产品名称不能为空 请填写！');
@@ -52,11 +47,7 @@ session.removeAttribute("messages");
 	      alert('产品序列号不能为空 请填写！');
 	      return ;
 	   }
-	   if(document.getElementById("bxszd").value=="")
-	   {
-	     alert('报修所在地不能为空，请填写！');
-	     return ;
-	   }
+	   
 	   if(document.getElementById("client_name").value=="")
 	   {
 	      alert("客户名称不能为空，请填写！");
@@ -68,16 +59,13 @@ session.removeAttribute("messages");
 	     return ;
 	   }
 	   	      
-	   document.bxdForm.action="saveBxd.html";
-	   document.bxdForm.submit();
-
+	   document.wxrkdForm.action="updateWxrkd.html";
+	   document.wxrkdForm.submit();
 	}	
 
     function clearVl(){       
        	  document.getElementById("product_name").value="";
-		  document.getElementById("product_id").value="";
-		  document.getElementById("product_xh").value="";
-		  document.getElementById("kf").value="";
+		  document.getElementById("product_gg").value="";
 		  document.getElementById("product_serial_num").value="";
 		  document.getElementById("product_remark").value="";      
     }	
@@ -224,12 +212,12 @@ session.removeAttribute("messages");
 </script>
 
 </head>
-<body onload="initFzrTip();initSqrTip();initClientTip()">
-<FORM  name="bxdForm" action="listBxd.html" method="post">
+<body onload="initFzrTip();initClientTip()">
+<FORM  name="wxrkdForm" action="listWxrkd.html" method="post">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0" id="tables">
 	<thead>
 	<tr>
-		<td colspan="4"> 报修单信息</td>
+		<td colspan="4"> 维修入库单信息</td>
 	</tr>
 	</thead>
 	 <%
@@ -246,11 +234,11 @@ session.removeAttribute("messages");
 	%>		
 	<tr>
 		<td class="a1" width="15%">编  号</td>
-		<td class="a2" width="35%"><input type="text" name="bxd.id" id="id" value="<%=StringUtils.nullToStr(bxd.getId()) %>" readonly></td>	
+		<td class="a2" width="35%"><input type="text" name="wxrkd.id" id="id" value="<%=StringUtils.nullToStr(wxrkd.getId()) %>" readonly></td>	
 		 
-		<td class="a1">报修时间</td>
+		<td class="a1">维修时间</td>
 		<%
-		  String bxdate= StringUtils.nullToStr(bxd.getJxdate());
+		  String bxdate= StringUtils.nullToStr(wxrkd.getWx_date());
 		  String rq="";
 		  if(!bxdate.equals(""))
 		  {
@@ -261,44 +249,34 @@ session.removeAttribute("messages");
 		    rq=DateComFunc.getToday();
 		  }
 		 %>
-		<td class="a2"><input type="text" name="bxd.jxdate" id="jxdate" value="<%=rq %>" readonly>
-		<img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.getElementById('jxdate')); return false;"><font color="red">*</font>
+		<td class="a2"><input type="text" name="wxrkd.wx_date" id="wx_date" value="<%=rq %>" readonly>
+		<img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.getElementById('wx_date')); return false;"><font color="red">*</font>
 		</td>
 	</tr>
 	<tr>
 		
-		<td class="a1" width="15%">报修人</td>
+		<td class="a1" width="15%">维修人</td>
 		<td class="a2">
-		   <input  id="brand"  type="text"   length="20"  onblur="setValue()" value="<%=StaticParamDo.getRealNameById(bxd.getJxr()) %>"/> <font color="red">*</font>
+		   <input  id="brand"  type="text"   length="20"  onblur="setValue()" value="<%=StaticParamDo.getRealNameById(wxrkd.getWxr()) %>"/> 
            <div  id="brandTip"  style="height:12px;position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
-		   <input type="hidden" name="bxd.jxr" id="fzr" value="<%=StringUtils.nullToStr(bxd.getJxr()) %>"/> 
+		   <input type="hidden" name="wxrkd.wxr" id="fzr" value="<%=StringUtils.nullToStr(wxrkd.getWxr()) %>"/> 
 		    
 		</td>	
-		<td class="a1" width="15%">工程师</td>
-    	<td class="a2">	  
-		 <input  name="sqr_text" id="sqr_text"   onblur="setSqrValue();" value="<%=StaticParamDo.getRealNameById(bxd.getGcs()) %>"/> <font color="red">*</font>
-         
-        <div id="sqr_tips" style="height:12px;position:absolute;left:89px; top:82px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
-         </div>
-		    <input type="hidden" name="bxd.gcs" id="sqr"  value="<%=StringUtils.nullToStr(bxd.getGcs()) %>"/> 
-		   
+		<td class="a1" width="15%">维修单状态</td>
+		<td class="a2" width="35%" colspan="3">
+			<select name="wxrkd.state" id="state">
+				<option value="已保存"<%if(StringUtils.nullToStr(wxrkd.getState()).equals("已保存"))out.print("selected"); %>>已保存</option>
+				<option value="已提交"<%if(StringUtils.nullToStr(wxrkd.getState()).equals("已提交"))out.print("selected"); %>>已提交</option>
+			</select>		
 		</td>						
 	</tr>
-	<tr>
-		<td class="a1" width="15%">报修单状态</td>
-		<td class="a2" width="35%" colspan="3">
-			<select name="bxd.state" id="state">
-				<option value="已保存"<%if(StringUtils.nullToStr(bxd.getState()).equals("已保存"))out.print("selected"); %>>已保存</option>
-				<option value="已提交"<%if(StringUtils.nullToStr(bxd.getState()).equals("已提交"))out.print("selected"); %>>已提交</option>
-			</select>		
-		</td>		
-	</tr>
+	 
 </table>
  <br>
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td colspan="2">报修产品信息</td>
+		<td colspan="2">维修产品信息</td>
 	</tr>
 	</thead>
 </table>
@@ -315,16 +293,16 @@ session.removeAttribute("messages");
  
 	<tr>
 		<td class="a2">
-			<input type="text" id="product_name" name="bxdProduct.product_name" value="<%=StringUtils.nullToStr(bxdProduct.getProduct_name()) %>" size="35" readonly="readonly">
-			<input type="hidden" id="product_id" name="bxdProduct.product_id" value="<%=StringUtils.nullToStr(bxdProduct.getProduct_id()) %>">
+			<input type="text" id="product_name" name="wxrkdProduct.product_name" value="<%=StringUtils.nullToStr(wxrkdProduct.getProduct_name()) %>" size="35" readonly="readonly">
+			<input type="hidden" id="product_id" name="wxrkdProduct.product_id" value="<%=StringUtils.nullToStr(wxrkdProduct.getProduct_id()) %>">
 			<input type="button" name="selectButton" value="选择" class="css_button" onclick="openWin();">
 		</td>
 		<td class="a2">
-			<input type="text" id="product_xh" name="bxdProduct.product_xh" value="<%=StringUtils.nullToStr(bxdProduct.getProduct_xh()) %>" readonly="readonly">
+			<input type="text" id="product_xh" name="wxrkdProduct.product_xh" value="<%=StringUtils.nullToStr(wxrkdProduct.getProduct_xh()) %>" readonly="readonly">
 		</td>
 	    
 	    <td class="a2">
-	    <% String productname=StringUtils.nullToStr(bxdProduct.getProduct_name());
+	    <% String productname=StringUtils.nullToStr(wxrkdProduct.getProduct_name());
 	      String kf="";
 	      if(productname.equals(""))
 	      {
@@ -332,89 +310,33 @@ session.removeAttribute("messages");
 	      }
 	      else
 	      {
-	        kf="在外库";
+	        kf="好件库";
 	      }
 	     %>
 	         <input type="text" id="kf" name="kf" value="<%=kf %>" size="7" readonly="readonly">
 	    </td>
 	    
 		<td class="a2">
-			<input type="text" id="product_serial_num" name="bxdProduct.product_serial_num" value="<%=StringUtils.nullToStr(bxdProduct.getProduct_serial_num()) %>" readonly="readonly">
+			<input type="text" id="product_serial_num" name="wxrkdProduct.qz_serial_num" value="<%=StringUtils.nullToStr(wxrkdProduct.getQz_serial_num()) %>" readonly="readonly">
 		</td>	
 			
 		<td class="a2">
-		    <input type="text" id="product_remark" name="bxdProduct.product_remark" value="<%=StringUtils.nullToStr(bxdProduct.getProduct_remark()) %>">
+		    <input type="text" id="product_remark" name="wxrkdProduct.remark" value="<%=StringUtils.nullToStr(wxrkdProduct.getRemark()) %>">
 		</td>
 	</tr>
 </table>
  
-<table width="100%"  align="center" class="chart_info" cellpadding="0" cellspacing="0">
-	<tr height="35">
-		<td class="a2" colspan="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="button" name="button1" value="清除" class="css_button2" onclick="clearVl();">
-			 
-		</td>
-	</tr>
-	<tr height="35">	
-		<td class="a1">报修所在地</td>
-		<td class="a2"  >
-			<select name="bxdProduct.bxaddress" id="bxszd">
-			 <option value=""></option>
-			<%
-			   if(wxszd != null && wxszd.length>0){
-			     for(int i=0;i<wxszd.length;i++){
-			       String szd=wxszd[i];
-			 %>
-			      <option value="<%=szd %>" <%if(!(StringUtils.nullToStr(bxdProduct.getBxaddress()).equals("")))out.print("selected"); %>><%=szd %></option>
-			 <%
-			      }
-			   }
-			  %>
-			</select>
-			
-		</td>
-		<td class="a1">产品状态</td>
-		<td class="a2"  >
-			<input type="text" name="bxdProduct.bxstate" id="bxstate" value="<%=StringUtils.nullToStr(bxdProduct.getBxstate()) %>" >
-		</td>
-	</tr>
-	
-	 
-	
-	<tr >
-	   <td class="a1" width="15%">随机附件</td>
-	   <td class="a2" >
-	   <%
-	       String fj[]=StringUtils.nullToStr(bxdProduct.getFj()).split(",");
-	    %>
-	      <input type="checkbox" name="fj" value="硒鼓" <%for(int i=0;i<fj.length;i++){if(fj[i].equals("硒鼓"))out.print("checked");} %>>硒鼓&nbsp;&nbsp; 
-	      <input type="checkbox" name="fj" value="墨盒" <%for(int i=0;i<fj.length;i++){if(fj[i].equals("墨盒"))out.print("checked");} %>>墨盒&nbsp;&nbsp; 
-	      <input type="checkbox" name="fj" value="电源线"<%for(int i=0;i<fj.length;i++){if(fj[i].equals("电源线"))out.print("checked");} %>>电源线&nbsp;&nbsp; 
-	      <input type="checkbox" name="fj" value="数据线"<%for(int i=0;i<fj.length;i++){if(fj[i].equals("数据线"))out.print("checked");} %>>数据线&nbsp;&nbsp; 
-	      <input type="checkbox" name="fj" value="适配器"<%for(int i=0;i<fj.length;i++){if(fj[i].equals("适配器"))out.print("checked");} %>>适配器&nbsp;&nbsp; 
-	      <input type="checkbox" name="fj" value="电池"<%for(int i=0;i<fj.length;i++){if(fj[i].equals("电池"))out.print("checked");} %>>电池&nbsp;&nbsp; 
-	       <input type="checkbox" name="fj" value="包"<%for(int i=0;i<fj.length;i++){if(fj[i].equals("包"))out.print("checked");} %>>包
-	   </td>
-	   
-	    <td class="a1" width="15%">其他附件</td>
-	    <td class="a2">
-	    <input type="hidden" name="bxdProduct.has_fj" value=""/>
-	    <input type="text" name="bxdProduct.qtfj" id="qtfj" value="<%=StringUtils.nullToStr(bxdProduct.getQtfj()) %>" >
-	   </td>
-	</tr>
-	 
-	<tr height="35">
-		 <td class="a1" width="15%">备件</td>
-		<td class="a2" colspan="3">
-			<textarea rows="2" name="bxdProduct.bj" id="bj" style="width:75%"><%=StringUtils.nullToStr(bxdProduct.getBj()) %> </textarea>
-		</td>	
-	</tr>
-		
-	
+<table width="100%"  align="center" class="chart_info" cellpadding="0" cellspacing="0">	
 	<tr height="35">
 		 <td class="a1" width="15%">故障及分析</td>
 		<td class="a2" colspan="3">
-			<textarea rows="2" name="bxdProduct.gzfx" id="gzfx" style="width:75%"><%=StringUtils.nullToStr(bxdProduct.getGzfx()) %> </textarea>
+			<textarea rows="2" name="wxrkdProduct.gzfx" id="gzfx" style="width:75%"><%=StringUtils.nullToStr(wxrkdProduct.getGzfx()) %> </textarea>
+		</td>	
+	</tr>	
+	<tr height="35">
+		 <td class="a1" width="15%">排除过程</td>
+		<td class="a2" colspan="3">
+			<textarea rows="2" name="wxrkdProduct.pcgc" id="pcgc" style="width:75%"><%=StringUtils.nullToStr(wxrkdProduct.getPcgc()) %> </textarea>
 		</td>	
 	</tr>	 
 </table>
@@ -427,18 +349,18 @@ session.removeAttribute("messages");
 	</thead>			
 	<tr>
 		<td class="a1" width="15%">客户名称</td>
-		<td class="a2" width="35%"><input type="text" name="jjd.client_id"   id="client_name" value="<%=StaticParamDo.getClientNameById(bxd.getClient_name()) %>" size="30" maxlength="50" onblur="setClientValue();" >
-		<input type="hidden" name="bxd.client_name" id="client_id" value="<%=StringUtils.nullToStr(bxd.getClient_name()) %>" ><div id="clientsTip" style="height:12px;position:absolute;width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+		<td class="a2" width="35%"><input type="text" name="wxrkd.client_id"   id="client_name" value="<%=StaticParamDo.getClientNameById(wxrkd.getClient_name()) %>" size="30" maxlength="50" onblur="setClientValue();" >
+		<input type="hidden" name="wxrkd.client_name" id="client_id" value="<%=StringUtils.nullToStr(wxrkd.getClient_name()) %>" ><div id="clientsTip" style="height:12px;position:absolute;width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		<font color="red">*</font>
 		</td>
 		<td class="a1" width="15%">联系人</td>
-		<td class="a2" width="35%"><input type="text" name="bxd.lxr" id="lxr" size="30" value="<%=StringUtils.nullToStr(bxd.getLxr()) %>"><font color="red">*</font></td>	
+		<td class="a2" width="35%"><input type="text" name="wxrkd.lxr" id="lxr" size="30" value="<%=StringUtils.nullToStr(wxrkd.getLxr()) %>"></td>	
 	</tr>
 	<tr>
 		<td class="a1" width="15%">联系电话</td>
-		<td class="a2"><input type="text" name="bxd.lxdh" id="lxdh" value="<%=StringUtils.nullToStr(bxd.getLxdh()) %>" size="30" maxlength="20"></td>	
+		<td class="a2"><input type="text" name="wxrkd.mobile" id="mobile" value="<%=StringUtils.nullToStr(wxrkd.getMobile()) %>" size="30" maxlength="20"></td>	
 		<td class="a1" width="15%">地址</td>
-		<td class="a2" colspan="3"><input type="text" name="bxd.address" id="address" value="<%=StringUtils.nullToStr(bxd.getAddress()) %>" size="30" maxlength="100"></td>					
+		<td class="a2" colspan="3"><input type="text" name="wxrkd.address" id="address" value="<%=StringUtils.nullToStr(wxrkd.getAddress()) %>" size="30" maxlength="100"></td>					
 	</tr>
 	 
 </table>
@@ -453,12 +375,12 @@ session.removeAttribute("messages");
 	<tr>
 		<td class="a1" width="15%">备注</td>
 		<td class="a2" width="85%" colspan="3">
-			<textarea rows="2" name="bxd.remark" id="remark" style="width:75%"><%=StringUtils.nullToStr(bxd.getRemark()) %> </textarea>
+			<textarea rows="2" name="wxrkd.ms" id="ms" style="width:75%"><%=StringUtils.nullToStr(wxrkd.getMs()) %> </textarea>
 		</td>
 	</tr>			
 	<tr height="35">
 		<td class="a1" colspan="4">
-			<input type="button" name="btnSub" value="确 定" class="css_button2" onclick="saveInfo();">&nbsp;&nbsp;&nbsp;&nbsp;	
+			<input type="button" name="btnSub" value="修 改" class="css_button2" onclick="saveInfo();">&nbsp;&nbsp;&nbsp;&nbsp;	
 			<input type="reset" name="button2" value="重 置" class="css_button2">&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="reset" name="button2" value="关 闭" class="css_button2" onclick="window.close();">
 		</td>

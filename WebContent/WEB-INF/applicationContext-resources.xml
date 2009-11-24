@@ -92,6 +92,8 @@
     <bean id="exportProductKcOutInResult" class="com.sw.cms.xls.ExportProductKcOutInResult" autowire="byName"/>
     <!-- 库存数量汇总 -->
     <bean id="exportProductKcNumsResult" class="com.sw.cms.xls.ExportProductKcNumsResult" autowire="byName"/>
+    <!-- 核心代理库存价格汇总 -->
+    <bean id="exportProductDlKcNumsResult" class="com.sw.cms.xls.ExportProductDlKcNumsResult" autowire="byName"/>
     <!-- 零售库存数量汇总 -->
     <bean id="exportProductLsKcNumsResult" class="com.sw.cms.xls.ExportProductLsKcNumsResult" autowire="byName"/>    
     <!-- 库存金额汇总 -->

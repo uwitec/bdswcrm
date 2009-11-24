@@ -146,6 +146,24 @@
 	
 	<bean id="cbtzAction" class="com.sw.cms.action.CbtzAction" scope="prototype" autowire="byName"/>
 	
-	<bean id="mailAction" class="com.sw.cms.action.MailAction" scope="prototype" autowire="byName"/>
+	<bean id="mailAction" class="com.sw.cms.action.MailAction" scope="prototype" autowire="byName"/>	 
 	
+	<bean id="jjdAction" class="com.sw.cms.action.JjdAction" autowire="byName" scope="prototype"/> 
+	
+	<bean id="bxfhdAction" class="com.sw.cms.action.BxfhdAction" autowire="byName" scope="prototype"/>
+	
+	<bean id="fhkhdAction" class="com.sw.cms.action.FhkhdAction" autowire="byName" scope="prototype"/>
+	
+	<bean id="shkcAction" class="com.sw.cms.action.ShkcAction"  autowire="byName" scope="prototype"/> 
+	
+	<bean id="wxrkdAction" class="com.sw.cms.action.WxrkdAction" autowire="byName" scope="prototype"/>
+	
+	 <bean id="sfdAction" class="com.sw.cms.action.SfdAction" scope="prototype" autowire="byName"/>
+	 
+	 <bean id="pgdAction" class="com.sw.cms.action.PgdAction" autowire="byName" scope="prototype"/>
+	 
+	 <bean id="wxcldAction" class="com.sw.cms.action.WxcldAction" autowire="byName" scope="prototype"/>
+
+     <bean id="klHzReportAction" class="com.sw.cms.action.KlHzReportAction" autowire="byName" scope="prototype"/>
+     
 </beans>

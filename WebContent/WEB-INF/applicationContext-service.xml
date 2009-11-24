@@ -567,8 +567,71 @@
         <property name="target">
           <bean class="com.sw.cms.service.MailService" autowire="byName"/>  
         </property>
-    </bean>               
-               
+    </bean>  
+    
+
+    <!--接件单  -->
+    <bean id="jjdService"  parent="baseTransaction">
+        <property name="target">
+    		<bean class="com.sw.cms.service.JjdService" autowire="byName"/>
+    	</property>
+    </bean>      
+     
+    <!-- 售后库存 -->
+     <bean id="shkcService"  parent="baseTransaction">
+        <property name="target">
+    		<bean class="com.sw.cms.service.ShkcService" autowire="byName"/>
+    	</property>
+    </bean>
+    
+    <!-- 报修返还单 --> 
+    <bean id="bxfhdService" parent="baseTransaction">
+        <property name="target">
+           <bean class="com.sw.cms.service.BxfhdService" autowire="byName"/>
+        </property>
+    </bean> 
+    
+    <!-- 返还客户单 -->
+    <bean id="fhkhdService" parent="baseTransaction">
+        <property name="target">
+           <bean class="com.sw.cms.service.FhkhdService" autowire="byName"/> 
+        </property>
+    </bean>
+    
+    <!-- 维修入库单 -->
+    <bean id="wxrkdService" parent="baseTransaction">
+        <property name="target">
+           <bean class="com.sw.cms.service.WxrkdService" autowire="byName"/> 
+        </property>
+    </bean>  
+    
+      <!-- 售后服务单 -->
+    <bean id="sfdService" parent="baseTransaction">
+        <property name="target">
+          <bean class="com.sw.cms.service.SfdService" autowire="byName"/> 
+        </property>
+    </bean>           
+     
+      <!-- 派工单 -->
+    <bean id="pgdService" parent="baseTransaction">
+        <property name="target">
+           <bean class="com.sw.cms.service.PgdService" autowire="byName"/> 
+        </property>
+    </bean>  
+    
+       <!-- 维修处理单 -->
+    <bean id="wxcldService" parent="baseTransaction">
+        <property name="target">
+           <bean class="com.sw.cms.service.WxcldService" autowire="byName"/> 
+        </property>
+    </bean> 
+    
+         <!-- 库龄汇总 -->
+    <bean id="klHzReportService" parent="baseTransaction">
+        <property name="target">
+           <bean class="com.sw.cms.service.KlHzReportService" autowire="byName"/> 
+        </property>
+    </bean>          
 </beans>
 
 
