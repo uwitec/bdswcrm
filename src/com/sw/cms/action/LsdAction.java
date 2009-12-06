@@ -340,6 +340,21 @@ public class LsdAction extends BaseAction {
 	public String submitInfo(){		
 		LoginInfo info = (LoginInfo)getSession().getAttribute("LOGINUSER");
 		String user_id = info.getUser_id();
+		
+		lsdProducts = lsdService.getLsdProducts(lsd.getId());
+
+		String msg = lsdService.checkKc(lsd, lsdProducts);
+		if(!msg.equals("")){
+			this.saveMessage(msg);
+			
+			userList = userService.getAllEmployeeList();
+			storeList = storeService.getAllStoreList();
+			ysfs = sjzdService.getSjzdXmxxByZdId("SJZD_FKFS");
+			posTypeList = posTypeService.getPosTypeList();
+			
+			return "input";
+		}
+		
 		lsd.setCzr(user_id);
 		
 		lsd.setSp_state("2");  //修改零售单为待审批状态
