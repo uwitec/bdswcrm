@@ -60,10 +60,10 @@ if(obj != null){
 		<td class="a2" width="35%"><%=JMath.round(product.getFxxj()) %></td>
 	</tr>
 	<tr>
-		<td class="a1" width="15%">工分</td>
-		<td class="a2" width="35%"><%=JMath.round(product.getGf()) %></td>
-		<td class="a1" width="15%">点杀数</td>
-		<td class="a2" width="35%"><%=JMath.round(product.getDss()) %></td>
+		<td class="a1" width="15%">比例点杀</td>
+		<td class="a2" width="35%"><%=JMath.round(product.getGf()) %>%</td>
+		<td class="a1" width="15%">金额点杀</td>
+		<td class="a2" width="35%"><%=JMath.round(product.getDss()) %>元</td>
 	</tr>
 	<tr>
 		<td class="a1" width="15%">库存下限</td>

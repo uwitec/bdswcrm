@@ -401,6 +401,12 @@ if(thdProducts!=null && thdProducts.size()>0){
 			<input type="text" id="th_price_<%=i %>" name="thdProducts[<%=i %>].th_price" size="10" value="<%=JMath.round(thdProduct.getTh_price()) %>" onblur="hj();">
 			<input type="hidden" id="cbj_<%=i %>" name="thdProducts[<%=i %>].cbj" value="<%=JMath.round(thdProduct.getCbj()) %>">
 			<input type="hidden" id="kh_cbj_<%=i %>" name="thdProducts[<%=i %>].kh_cbj" value="<%=JMath.round(thdProduct.getKh_cbj()) %>">
+			
+			<input type="hidden" id="sd_<%=i %>" name="thdProducts[<%=i %>].sd"  value="<%=JMath.round(thdProduct.getSd()) %>">
+			<input type="hidden" id="gf_<%=i %>" name="thdProducts[<%=i %>].gf"  value="<%=JMath.round(thdProduct.getGf()) %>">
+			<input type="hidden" id="ds_<%=i %>" name="thdProducts[<%=i %>].ds"  value="<%=JMath.round(thdProduct.getDs()) %>">
+			<input type="hidden" id="basic_ratio_<%=i %>" name="thdProducts[<%=i %>].basic_ratio"  value="<%=JMath.round(thdProduct.getBasic_ratio()) %>">
+			<input type="hidden" id="out_ratio_<%=i %>" name="thdProducts[<%=i %>].out_ratio"  value="<%=JMath.round(thdProduct.getOut_ratio()) %>">			
 		</td>
 		<td class="a2"><input type="text" id="nums_<%=i %>" name="thdProducts[<%=i %>].nums"  size="5" value="<%=StringUtils.nullToStr(thdProduct.getNums()) %>" onblur="hj();"></td>
 		<td class="a2">
@@ -430,6 +436,12 @@ if(thdProducts!=null && thdProducts.size()>0){
 			<input type="text" id="th_price_<%=i %>" name="thdProducts[<%=i %>].th_price" size="10" value="0.00" onblur="hj();">
 			<input type="hidden" id="cbj_<%=i %>" name="thdProducts[<%=i %>].cbj"  value="0.00">
 			<input type="hidden" id="kh_cbj_<%=i %>" name="thdProducts[<%=i %>].kh_cbj"  value="0.00">
+			
+			<input type="hidden" id="sd_<%=i %>" name="thdProducts[<%=i %>].sd"  value="0.00">
+			<input type="hidden" id="gf_<%=i %>" name="thdProducts[<%=i %>].gf"  value="0.00">
+			<input type="hidden" id="ds_<%=i %>" name="thdProducts[<%=i %>].ds"  value="0.00">
+			<input type="hidden" id="basic_ratio_<%=i %>" name="thdProducts[<%=i %>].basic_ratio"  value="0.00">
+			<input type="hidden" id="out_ratio_<%=i %>" name="thdProducts[<%=i %>].out_ratio"  value="0.00">			
 		</td>
 		<td class="a2"><input type="text" id="nums_<%=i %>" name="thdProducts[<%=i %>].nums" value="0" size="5" onblur="hj();"></td>
 		<td class="a2"><input type="text" id="xj_<%=i %>" name="thdProducts[<%=i %>].xj" value="0.00" size="10" readonly></td>

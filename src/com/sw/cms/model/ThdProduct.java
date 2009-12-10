@@ -17,6 +17,12 @@ public class ThdProduct {
 	private String qz_serial_num;
 	private String qz_flag;
 	
+	private double sd = 0;
+	private double gf = 0;
+	private double ds = 0;
+	private double basic_ratio = 0;
+	private double out_ratio = 0;
+	
 	public int getId() {
 		return id;
 	}
@@ -94,6 +100,36 @@ public class ThdProduct {
 	}
 	public void setKh_cbj(double kh_cbj) {
 		this.kh_cbj = kh_cbj;
+	}
+	public double getBasic_ratio() {
+		return basic_ratio;
+	}
+	public void setBasic_ratio(double basic_ratio) {
+		this.basic_ratio = basic_ratio;
+	}
+	public double getDs() {
+		return ds;
+	}
+	public void setDs(double ds) {
+		this.ds = ds;
+	}
+	public double getGf() {
+		return gf;
+	}
+	public void setGf(double gf) {
+		this.gf = gf;
+	}
+	public double getOut_ratio() {
+		return out_ratio;
+	}
+	public void setOut_ratio(double out_ratio) {
+		this.out_ratio = out_ratio;
+	}
+	public double getSd() {
+		return sd;
+	}
+	public void setSd(double sd) {
+		this.sd = sd;
 	}
 
 }

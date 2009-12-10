@@ -72,6 +72,10 @@ public class LsdAction extends BaseAction {
 	
 	private String sd = "0";
 	
+	private Map tcblMap;
+	private String basic_ratio = "0";
+	private String out_ratio = "0";
+	
 	private String product_name = "";
 	private String product_kind = "";
 	private String prop = "";
@@ -533,6 +537,38 @@ public class LsdAction extends BaseAction {
 	}
 	
 	
+	/**
+	 * 编辑提成比例
+	 * @return
+	 */
+	public String editTcbl(){
+		try{
+			tcblMap = lsdService.getTcbl();
+		}catch(Exception e){
+			log.error("编辑提成比例，原因：" + e.getMessage());
+			e.printStackTrace();
+			return ERROR;
+		}
+		return "success";
+	}
+	
+	
+	/**
+	 * 保存提成比例
+	 * @return
+	 */
+	public String saveTcbl(){
+		try{
+			lsdService.saveTcbl(basic_ratio, out_ratio);
+		}catch(Exception e){
+			log.error("保存提成比例，原因：" + e.getMessage());
+			e.printStackTrace();
+			return ERROR;
+		}
+		return "success";
+	}
+	
+	
 	public Lsd getLsd() {
 		return lsd;
 	}
@@ -864,6 +900,36 @@ public class LsdAction extends BaseAction {
 
 	public void setJexj_dx(String jexj_dx) {
 		this.jexj_dx = jexj_dx;
+	}
+
+
+	public String getBasic_ratio() {
+		return basic_ratio;
+	}
+
+
+	public void setBasic_ratio(String basic_ratio) {
+		this.basic_ratio = basic_ratio;
+	}
+
+
+	public String getOut_ratio() {
+		return out_ratio;
+	}
+
+
+	public void setOut_ratio(String out_ratio) {
+		this.out_ratio = out_ratio;
+	}
+
+
+	public Map getTcblMap() {
+		return tcblMap;
+	}
+
+
+	public void setTcblMap(Map tcblMap) {
+		this.tcblMap = tcblMap;
 	}
 
 

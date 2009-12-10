@@ -15,8 +15,13 @@ public class LsdProduct {
 	private String qz_serial_num;      //序列号
 	private double kh_cbj;             //考核成本单价
 	private String qz_flag;            //强制序列号
-	private double gf = 0;                 //工分
-	private String dw = "";
+	private double gf = 0;             //工分(比例点杀)
+	private String dw = "";            //单位
+	
+	private double sd = 0;             //税点
+	private double ds = 0;             //金额点杀
+	private double basic_ratio = 0;    //基本提成比例
+	private double out_ratio = 0;      //超限提成比例
 	
 	public double getCbj() {
 		return cbj;
@@ -107,6 +112,30 @@ public class LsdProduct {
 	}
 	public void setDw(String dw) {
 		this.dw = dw;
+	}
+	public double getBasic_ratio() {
+		return basic_ratio;
+	}
+	public void setBasic_ratio(double basic_ratio) {
+		this.basic_ratio = basic_ratio;
+	}
+	public double getDs() {
+		return ds;
+	}
+	public void setDs(double ds) {
+		this.ds = ds;
+	}
+	public double getOut_ratio() {
+		return out_ratio;
+	}
+	public void setOut_ratio(double out_ratio) {
+		this.out_ratio = out_ratio;
+	}
+	public double getSd() {
+		return sd;
+	}
+	public void setSd(double sd) {
+		this.sd = sd;
 	}
 	
 }

@@ -678,7 +678,13 @@
         </action>
         <action name="saveLssd" class="lsdAction" method="saveLssd">
             <result name="success" type="chain">editLssd</result>
-        </action>                      
+        </action> 
+        <action name="editTcbl" class="lsdAction" method="editTcbl">
+            <result name="success">/WEB-INF/pages/lsd/tcbl.jsp</result>
+        </action>
+        <action name="saveTcbl" class="lsdAction" method="saveTcbl">
+            <result name="success" type="chain">editTcbl</result>
+        </action>                              
         <!-- 零售单管理 -->
         
         <!-- 角色管理 -->      

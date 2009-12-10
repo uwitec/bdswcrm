@@ -103,6 +103,11 @@ String id = (String)VS.findValue("id");
 					var qz_flag =  parent.window.opener.document.getElementById("qz_flag_"+k);
 					var khcbj = parent.window.opener.document.getElementById("kh_cbj_"+k);
 				
+					var sd = parent.window.opener.document.getElementById("sd_"+k);
+					var gf = parent.window.opener.document.getElementById("gf_"+k);
+					var ds = parent.window.opener.document.getElementById("ds_"+k);
+					var basic_ratio = parent.window.opener.document.getElementById("basic_ratio_"+k);
+					var out_ratio = parent.window.opener.document.getElementById("out_ratio_"+k);
 				
 					id.value = arryStr[0];
 					name.value = arryStr[1];
@@ -115,6 +120,11 @@ String id = (String)VS.findValue("id");
 						qz_flag.value = arryStr[6];
 					}
 					if(khcbj != null) khcbj.value = arryStr[7];
+					if(sd != null) sd.value = arryStr[8];
+					if(gf != null) gf.value = arryStr[9];
+					if(ds != null) ds.value = arryStr[10];
+					if(basic_ratio != null) basic_ratio.value = arryStr[11];
+					if(out_ratio != null) out_ratio.value = arryStr[12];
 					
 					k++;	
 				}	
@@ -155,6 +165,12 @@ String id = (String)VS.findValue("id");
 	while(it.hasNext()){
 		LsdProduct lsdProduct = (LsdProduct)it.next();
 		String vl = StringUtils.nullToStr(lsdProduct.getProduct_id()) + "|" + StringUtils.nullToStr(lsdProduct.getProduct_name()) + "|" + StringUtils.nullToStr(lsdProduct.getProduct_xh()) + "|" + JMath.round(lsdProduct.getPrice()) + "|" + StringUtils.nullToStr(lsdProduct.getNums()) + "|" + JMath.round(lsdProduct.getCbj()) + "|" + StringUtils.nullToStr(lsdProduct.getQz_flag()) + "|" + JMath.round(lsdProduct.getKh_cbj());
+		
+		vl += "|" + StringUtils.nullToStr(lsdProduct.getSd());
+		vl += "|" + StringUtils.nullToStr(lsdProduct.getGf());
+		vl += "|" + StringUtils.nullToStr(lsdProduct.getDs());
+		vl += "|" + StringUtils.nullToStr(lsdProduct.getBasic_ratio());
+		vl += "|" + StringUtils.nullToStr(lsdProduct.getOut_ratio());
 	%>
 	<tr class="a1" onmousedown="trSelectChangeCss()">
 		<td><input type="checkbox" name="selOption" value="<%=vl %>"></td>

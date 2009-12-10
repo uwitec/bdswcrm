@@ -182,13 +182,7 @@ public class ThdDAO extends JdbcBaseDAO {
 	 */
 	private void addThdProducts(List thdProducts,Thd thd){
 		String sql = "";
-		Object[] param = new Object[13];
-		
-		double sd = 0;
-		
-		if(!thd.getFplx().equals("出库单")){
-			sd = getLssd();
-		}
+		Object[] param = new Object[17];
 		
 		String thd_id = thd.getThd_id();
 		
@@ -198,7 +192,7 @@ public class ThdDAO extends JdbcBaseDAO {
 				
 				if(thdProduct != null){
 					if(!(thdProduct.getProduct_id()).equals("")){
-						sql = "insert into thd_product(thd_id,product_id,product_xh,product_name,th_price,nums,remark,xj,cbj,qz_serial_num,kh_cbj,sd,bhsje) values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+						sql = "insert into thd_product(thd_id,product_id,product_xh,product_name,th_price,nums,remark,xj,cbj,qz_serial_num,kh_cbj,sd,bhsje,ds,gf,basic_ratio,out_ratio) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 						
 						param[0] = thd_id;
 						param[1] = thdProduct.getProduct_id();
@@ -211,8 +205,13 @@ public class ThdDAO extends JdbcBaseDAO {
 						param[8] = thdProduct.getCbj();
 						param[9] = thdProduct.getQz_serial_num();
 						param[10] = thdProduct.getKh_cbj();						
-						param[11] = sd;    //税点
-						param[12] = thdProduct.getXj() / (1 + sd/100);  //不含税金额
+						param[11] = thdProduct.getSd();    //税点
+						param[12] = thdProduct.getXj() / (1 + thdProduct.getSd()/100);  //不含税金额
+						param[13] = thdProduct.getDs();
+						param[14] = thdProduct.getGf();
+						param[15] = thdProduct.getBasic_ratio();
+						param[16] = thdProduct.getOut_ratio();
+						
 						
 						this.getJdbcTemplate().update(sql,param);
 					}
@@ -333,6 +332,12 @@ public class ThdDAO extends JdbcBaseDAO {
 			if(SqlUtil.columnIsExist(rs,"qz_serial_num")) thdProduct.setQz_serial_num(rs.getString("qz_serial_num"));
 			if(SqlUtil.columnIsExist(rs,"cbj")) thdProduct.setCbj(rs.getDouble("cbj"));
 			if(SqlUtil.columnIsExist(rs,"kh_cbj")) thdProduct.setKh_cbj(rs.getDouble("kh_cbj"));
+			
+			if(SqlUtil.columnIsExist(rs,"sd")) thdProduct.setSd(rs.getDouble("sd"));	
+			if(SqlUtil.columnIsExist(rs,"gf")) thdProduct.setGf(rs.getDouble("gf"));			
+			if(SqlUtil.columnIsExist(rs,"ds")) thdProduct.setDs(rs.getDouble("ds"));
+			if(SqlUtil.columnIsExist(rs,"basic_ratio")) thdProduct.setBasic_ratio(rs.getDouble("basic_ratio"));
+			if(SqlUtil.columnIsExist(rs,"out_ratio")) thdProduct.setOut_ratio(rs.getDouble("out_ratio"));
 			
 			return thdProduct;
 		}

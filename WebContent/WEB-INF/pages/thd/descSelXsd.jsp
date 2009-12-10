@@ -103,7 +103,12 @@ String id = (String)VS.findValue("id");
 					var qz_flag =  parent.window.opener.document.getElementById("qz_flag_"+k);
 					var khcbj = parent.window.opener.document.getElementById("kh_cbj_"+k);
 				
-				
+					var sd = parent.window.opener.document.getElementById("sd_"+k);
+					var gf = parent.window.opener.document.getElementById("gf_"+k);
+					var ds = parent.window.opener.document.getElementById("ds_"+k);
+					var basic_ratio = parent.window.opener.document.getElementById("basic_ratio_"+k);
+					var out_ratio = parent.window.opener.document.getElementById("out_ratio_"+k);
+									
 					id.value = arryStr[0];
 					name.value = arryStr[1];
 					xh.value = arryStr[2];
@@ -115,6 +120,12 @@ String id = (String)VS.findValue("id");
 						qz_flag.value = arryStr[6];
 					}
 					if(khcbj != null) khcbj.value = arryStr[7];
+					
+					if(sd != null) sd.value = arryStr[8];
+					if(gf != null) gf.value = arryStr[9];
+					if(ds != null) ds.value = arryStr[10];
+					if(basic_ratio != null) basic_ratio.value = arryStr[11];
+					if(out_ratio != null) out_ratio.value = arryStr[12];
 					
 					k++;	
 				}	
@@ -155,6 +166,12 @@ String id = (String)VS.findValue("id");
 	while(it.hasNext()){
 		XsdProduct xsdProduct = (XsdProduct)it.next();
 		String vl = StringUtils.nullToStr(xsdProduct.getProduct_id()) + "|" + StringUtils.nullToStr(xsdProduct.getProduct_name()) + "|" + StringUtils.nullToStr(xsdProduct.getProduct_xh()) + "|" + JMath.round(xsdProduct.getPrice()) + "|" + StringUtils.nullToStr(xsdProduct.getNums()) + "|" + JMath.round(xsdProduct.getCbj()) + "|" + StringUtils.nullToStr(xsdProduct.getQz_flag()) + "|" + JMath.round(xsdProduct.getKh_cbj());
+		
+		vl += "|" + StringUtils.nullToStr(xsdProduct.getSd());
+		vl += "|" + StringUtils.nullToStr(xsdProduct.getGf());
+		vl += "|" + StringUtils.nullToStr(xsdProduct.getDs());
+		vl += "|" + StringUtils.nullToStr(xsdProduct.getBasic_ratio());
+		vl += "|" + StringUtils.nullToStr(xsdProduct.getOut_ratio());		
 	%>
 	<tr class="a1" onmousedown="trSelectChangeCss()">
 		<td><input type="checkbox" name="selOption" value="<%=vl %>"></td>

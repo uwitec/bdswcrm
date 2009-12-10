@@ -390,12 +390,21 @@ public class XsdDAO extends JdbcBaseDAO {
 	 */
 	private void addXsdProducts(List xsdProducts,Xsd xsd){
 		String sql = "";
-		Object[] param = new Object[17];
+		Object[] param = new Object[20];
 		
 		double sd = 0;
 		
 		if(!xsd.getFplx().equals("出库单")){
 			sd = getLssd();
+		}
+		
+		//提成比例
+		Map tcblMap = getTcbl();
+		double basic_ratio = 0;
+		double out_ratio = 0;
+		if(tcblMap != null){
+			basic_ratio = tcblMap.get("basic_ratio")==null?0:((Double)tcblMap.get("basic_ratio")).doubleValue();
+			out_ratio = tcblMap.get("out_ratio")==null?0:((Double)tcblMap.get("out_ratio")).doubleValue();
 		}
 		
 		String xsd_id = xsd.getId();
@@ -405,7 +414,7 @@ public class XsdDAO extends JdbcBaseDAO {
 				XsdProduct xsdProduct = (XsdProduct)xsdProducts.get(i);
 				if(xsdProduct != null){
 					if(!xsdProduct.getProduct_id().equals("")){
-						sql = "insert into xsd_product(xsd_id,product_id,product_xh,product_name,price,jgtz,nums,remark,xj,cbj,qz_serial_num,sjcj_nums,sjcj_xj,kh_cbj,gf,sd,bhsje) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+						sql = "insert into xsd_product(xsd_id,product_id,product_xh,product_name,price,jgtz,nums,remark,xj,cbj,qz_serial_num,sjcj_nums,sjcj_xj,kh_cbj,gf,sd,bhsje,basic_ratio,out_ratio,ds) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 						
 						param[0] = xsd_id;
 						param[1] = xsdProduct.getProduct_id();
@@ -426,9 +435,11 @@ public class XsdDAO extends JdbcBaseDAO {
 						double gf = 0l;
 						Map map = this.getProductInfo(xsdProduct.getProduct_id());
 						double lsxj = 0l;
+						double ds = 0l;
 						if(map != null){
 							lsxj = map.get("lsxj")==null?0:((Double)map.get("lsxj")).doubleValue();
 							gf = map.get("gf")==null?0:((Double)map.get("gf")).doubleValue();
+							ds = map.get("dss")==null?0:((Double)map.get("dss")).doubleValue();
 						}
 						if(xsdProduct.getPrice() < lsxj){
 							gf = gf / 2;
@@ -437,6 +448,10 @@ public class XsdDAO extends JdbcBaseDAO {
 						param[14] = gf;
 						param[15] = sd;    //税点
 						param[16] = xsdProduct.getXj() / (1 + sd/100);  //不含税金额
+						
+						param[17] = basic_ratio;
+						param[18] = out_ratio;
+						param[19] = ds;
 						
 						this.getJdbcTemplate().update(sql,param);
 						
@@ -609,6 +624,15 @@ public class XsdDAO extends JdbcBaseDAO {
 			sd = ((Double)map.get("sd")).doubleValue();
 		}
 		return sd;
+	}
+	
+	/**
+	 * 取提成比例
+	 * @return
+	 */
+	private Map getTcbl(){
+		String sql = "select * from tcbl_set";
+		return this.getResultMap(sql);
 	}
 	
 	
@@ -824,6 +848,10 @@ public class XsdDAO extends JdbcBaseDAO {
 			if(SqlUtil.columnIsExist(rs,"gf")) xsdProduct.setGf(rs.getDouble("gf"));
 			
 			if(SqlUtil.columnIsExist(rs,"dw")) xsdProduct.setDw(rs.getString("dw"));
+			if(SqlUtil.columnIsExist(rs,"sd")) xsdProduct.setSd(rs.getDouble("sd"));
+			if(SqlUtil.columnIsExist(rs,"ds")) xsdProduct.setDs(rs.getDouble("ds"));
+			if(SqlUtil.columnIsExist(rs,"basic_ratio")) xsdProduct.setBasic_ratio(rs.getDouble("basic_ratio"));
+			if(SqlUtil.columnIsExist(rs,"out_ratio")) xsdProduct.setOut_ratio(rs.getDouble("out_ratio"));
 			
 			return xsdProduct;
 		}

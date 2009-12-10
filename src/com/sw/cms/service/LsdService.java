@@ -527,6 +527,25 @@ public class LsdService {
 	}
 	
 	
+	/**
+	 * 取提成比例
+	 * @return
+	 */
+	public Map getTcbl(){
+		return lsdDao.getTcbl();
+	}
+	
+	
+	/**
+	 * 保存提成比例
+	 * @param basic_ratio
+	 * @param out_ratio
+	 */
+	public void saveTcbl(String basic_ratio,String out_ratio){
+		lsdDao.saveTcbl(basic_ratio, out_ratio);
+	}
+	
+	
 	private void saveQtzc(Lsd lsd){
 		Qtzc qtzc = new Qtzc();
 		
