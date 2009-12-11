@@ -44,9 +44,17 @@ if(!store_id.equals("")){
 .Noprint{display:none;}<!--用本样式在打印时隐藏非打印项目-->
 </style> 
 <script language='JavaScript' src="js/date.js"></script>
+<script>
+
+function sendMail(){
+		var destination = "addDlMail.html";
+		var fea ='width=850,height=650,left=' + (screen.availWidth-850)/2 + ',top=' + (screen.availHeight-650)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		window.open(destination,'发送邮件',fea);			
+	}	
+</script>
 </head>
 <body align="center" >
-<TABLE  align="center" cellSpacing=0 cellPadding=0 width="99%" border=0>
+<TABLE id="t1"  align="center" cellSpacing=0 cellPadding=0 width="99%" border=0>
 	<TBODY>
 		<TR style="BACKGROUND-COLOR: #dcdcdc;height:45;">
 		    <TD align="center" width="100%"><font style="FONT-SIZE: 16px"><B>核心代理价格库存汇总</B></font><br><%=conStr %></TD>
@@ -54,21 +62,19 @@ if(!store_id.equals("")){
 	</TBODY>
 </TABLE>
 <BR>
-<TABLE align="center" cellSpacing=0 cellPadding=0 width="99%" border=0 style="BORDER-TOP: #000000 2px solid;BORDER-LEFT:#000000 1px solid">
+<TABLE id="t2" align="center" cellSpacing=0 cellPadding=0 width="99%" border=0 style="BORDER-TOP: #000000 2px solid;BORDER-LEFT:#000000 1px solid">
 	<THEAD>
 		<TR>
 			<TD class=ReportHead>序号</TD>
-			<!--<TD class=ReportHead>商品编码</TD>-->
+		 
 			<TD class=ReportHead>商品名称</TD>
 			<TD class=ReportHead>规格</TD>
 			<TD class=ReportHead>库存</TD>
-			<!--<TD class=ReportHead>考核成本</TD>-->
+			 
 			<TD class=ReportHead>零售报价</TD>
-			<!--<TD class=ReportHead>零售限价</TD>--> 
-			<!--<TD class=ReportHead>分销价</TD>--> 
+			 
 			<TD class=ReportHead>分销限价</TD>
-			<!--<TD class=ReportHead>工分</TD>--> 
-			<!--<TD class=ReportHead>点杀</TD>-->
+			 
 			 <TD class=ReportHead>主要卖点</TD>
 		</TR>
 	</THEAD>
@@ -90,14 +96,18 @@ if(productList != null && productList.size()>0){
 		String ms=StringUtils.nullToStr(map.get("ms"));
 		if(!ms.equals(""))
 		{
-		   if(ms.length()>16)
+		   if(ms.length()>20)
 		   {
-		     ms=ms.substring(0,16)+"...";
+		     ms=ms.substring(0,20)+"...";
 		   }
 		}
 		 
-		if(num.equals("")){
+		if(num.trim().equals("")){
 			num = "无";
+		}
+		else if(num.equals("0"))
+		{
+		  num = "无";
 		}
 		else{
 		    num="有";
@@ -106,17 +116,16 @@ if(productList != null && productList.size()>0){
 %>
 		<TR>
 			<TD class=ReportItemXh><%=i+1 %>&nbsp;</TD>
-			<!--<TD class=ReportItemXh><%=StringUtils.nullToStr(map.get("product_id")) %></TD>-->
+			 
 			<TD class=ReportItem><%=StringUtils.nullToStr(map.get("product_name")) %>&nbsp;</TD>
 			<TD class=ReportItem><%=StringUtils.nullToStr(map.get("product_xh")) %>&nbsp;</TD>
 			<TD class=ReportItemXh><%=num %>&nbsp;</TD>
-			<!--<td class=ReportItemMoney><%=JMath.round(khcbj,2) %>&nbsp;</td>-->
+			 
 			<td class=ReportItemMoney><%=JMath.round(lsbj,2) %>&nbsp;</td>
-			<!--<td class=ReportItemMoney><%=JMath.round(lsxj,2) %>&nbsp;</td>-->
-			<!--<td class=ReportItemMoney><%=JMath.round(fxbj,2) %>&nbsp;</td>-->
+			 
+		 
 			<td class=ReportItemMoney><%=JMath.round(fxxj,2) %>&nbsp;</td>
-			<!--<td class=ReportItemMoney><%=JMath.round(gf) %>&nbsp;</td>-->
-			<!--<td class=ReportItemMoney><%=JMath.round(dss) %>&nbsp;</td>-->
+			 
 			<td class=ReportItem title="<%=StringUtils.nullToStr(map.get("ms"))%>"><%=ms%>&nbsp;</td>
 		</TR>
 <%
@@ -124,7 +133,7 @@ if(productList != null && productList.size()>0){
 }
 %>
 </TABLE>
-<table width="99%">
+<table id="t3" width="99%">
 		<tr>
 			<td colspan="2" align="right" height="30" width="100%">生成报表时间：<%=DateComFunc.getCurTime() %>&nbsp;&nbsp;&nbsp;</td>
 		</tr>
@@ -133,6 +142,7 @@ if(productList != null && productList.size()>0){
 	<input type="button" name="button_print" value=" 打 印 " onclick="window.print();"> &nbsp;&nbsp;
 	<input type="button" name="button_print" value=" 导 出 " onclick="document.reportForm.submit();"> &nbsp;&nbsp;
     <input type="button" name="button_fh" value=" 返 回 " onclick="location.href='showDlKcNumsCondition.html';"> 
+    <input type="button" name="button_fh" value=" 发送邮件 " onclick="sendMail();">
 </center>
 <form name="reportForm" action="DownLoadXlsServlet" method="post">
 <input type="hidden" name="action" value="exportProductDlKcNumsResult">

@@ -86,9 +86,9 @@ if(productList != null && productList.size()>0){
 		String ms=StringUtils.nullToStr(map.get("ms"));
 		if(!ms.equals(""))
 		{
-		   if(ms.length()>16)
+		   if(ms.length()>20)
 		   {
-		     ms=ms.substring(0,16)+"...";
+		     ms=ms.substring(0,20)+"...";
 		   }
 		}
 		if(num.equals("")){

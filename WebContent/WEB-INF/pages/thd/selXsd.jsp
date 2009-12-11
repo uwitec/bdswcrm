@@ -20,10 +20,18 @@ String orderType = (String)VS.findValue("orderType");
 
 <html>
 <head>
-<title>关联销售单</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>添加退货单</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
+<script language="JavaScript" src="js/Check.js"></script>
 <script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
+<script language='JavaScript' src="js/nums.js"></script>
+<script language='JavaScript' src="js/selClient.js"></script>
+<script language='JavaScript' src="js/selJsr.js"></script>
+<script type="text/javascript" src="js/prototype-1.4.0.js"></script>
+<style>
+	.selectTip{background-color:#009;color:#fff;}
+</style>
 <script type="text/javascript">
 	
 	function openWin(id){
@@ -64,14 +72,21 @@ String orderType = (String)VS.findValue("orderType");
 	}
 </script>
 </head>
-<body>
+<body onload="initClientTip();">
 <form name="myform" action="selXsd.html" method="post">
 <input type="hidden" name="orderType" value="<%=orderType %>">
 <input type="hidden" name="orderName" value="<%=orderName %>">
 <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0">
 	<tr>
 		<td class="search" align="left" colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;
-			客户名称：<input type="text" name="client_name" value="<%=client_name %>">&nbsp;&nbsp;&nbsp;
+		
+		
+			 客户名称 
+	 
+		<input type="text" name="thd.client_id" id="client_name" value="" size="30" maxlength="50" onblur="setClientValue();" >
+		<input type="hidden" name="client_name" id="client_id" value="" >
+		<div id="clientsTip" style="height:12px;position:absolute;left:147px; top:85px; width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+ 	    &nbsp;&nbsp;&nbsp;&nbsp;
 			日期：<input type="text" name="creatdate1" value="<%=creatdate1 %>" size="15"  class="Wdate" onFocus="WdatePicker()">	
 			&nbsp;&nbsp;至&nbsp;&nbsp;
 			<input type="text" name="creatdate2" value="<%=creatdate2 %>" size="15"  class="Wdate" onFocus="WdatePicker()">

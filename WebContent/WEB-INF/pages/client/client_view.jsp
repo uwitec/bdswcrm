@@ -152,36 +152,7 @@ List  clinetsFollowList=(List)VS.findValue("clientsFollow");
 	     </table>
 	     
 		<br>
-		<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
-			<thead>
-			<tr>
-				<td colspan="4">开票信息</td>
-			</tr>
-			</thead>
-			<tr> 
-			     
-				<td class="a1" width="15%">单位全称</td>
-				<td class="a2" width="35%"><%=StringUtils.nullToStr(client.getKp_name()) %></td>
-				<td class="a1" width="15%">地址</td>
-				<td class="a2" width="35%"><%=StringUtils.nullToStr(client.getKp_address()) %></td>		
-			</tr>
-			<tr>
-				<td class="a1" width="15%">电话</td>
-				<td class="a2" width="35%"><%=StringUtils.nullToStr(client.getKp_tel()) %></td>
-				<td class="a1" width="15%">税号</td>
-				<td class="a2" width="35%"><%=StringUtils.nullToStr(client.getKp_sh()) %></td>	
-			</tr>
-			<tr>
-				<td class="a1" width="15%">开户行帐号</td>
-				<td class="a2" colspan="3"><%=StringUtils.nullToStr(client.getKp_khhzh()) %></td>		
-			</tr>
-	        <tr>
-	          <td class="a1" width="15%">备注</td>
-	           <td class="a2" colspan="3">
-	           <textarea rows="3" cols="50" name="client.remark" id="remark" style="width:80%" maxlength="500" readonly><%=StringUtils.nullToStr(client.getRemark()) %></textarea>
-	           </td>          
-	        </tr>				
-		</table>
+		<!--  -->
 			     
 	  </td>	  
 	  <td width="10">&nbsp;</td>	  
@@ -240,12 +211,12 @@ List  clinetsFollowList=(List)VS.findValue("clientsFollow");
 	          <tr>
 	           <td width="5%">操作</td>  
 		       <td width="15%">联系人</td>
-		       <td width="5%">类型</td>
+		       <td width="10%">类型</td>
 		       <td width="15%">手机</td>
 		       <td width="15%">座机</td>
 		       <td width="15%">邮箱</td>
 		       <td width="15%">其他联系方式</td>
-		       <td width="15%">备注</td>
+		       <td width="10%">备注</td>
 	          </tr>
 	        </thead>
 	        <%
@@ -346,6 +317,36 @@ List  clinetsFollowList=(List)VS.findValue("clientsFollow");
 	  </td>
 	</tr>
 </table><BR>
+<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
+			<thead>
+			<tr>
+				<td colspan="4">开票信息</td>
+			</tr>
+			</thead>
+			<tr> 
+			     
+				<td class="a1" width="15%">单位全称</td>
+				<td class="a2" width="35%"><%=StringUtils.nullToStr(client.getKp_name()) %></td>
+				<td class="a1" width="15%">地址</td>
+				<td class="a2" width="35%"><%=StringUtils.nullToStr(client.getKp_address()) %></td>		
+			</tr>
+			<tr>
+				<td class="a1" width="15%">电话</td>
+				<td class="a2" width="35%"><%=StringUtils.nullToStr(client.getKp_tel()) %></td>
+				<td class="a1" width="15%">税号</td>
+				<td class="a2" width="35%"><%=StringUtils.nullToStr(client.getKp_sh()) %></td>	
+			</tr>
+			<tr>
+				<td class="a1" width="15%">开户行帐号</td>
+				<td class="a2" colspan="3"><%=StringUtils.nullToStr(client.getKp_khhzh()) %></td>		
+			</tr>
+	        <tr>
+	          <td class="a1" width="15%">备注</td>
+	           <td class="a2" colspan="3">
+	           <textarea rows="3" cols="50" name="client.remark" id="remark" style="width:80%" maxlength="500" readonly><%=StringUtils.nullToStr(client.getRemark()) %></textarea>
+	           </td>          
+	        </tr>				
+		</table>
 </form>
 </body>
 </html>

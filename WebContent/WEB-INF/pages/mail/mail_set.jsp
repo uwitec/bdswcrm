@@ -77,6 +77,13 @@
 		<td class="a2">
 			<ww:textfield  name="mailSet.port_num" id="port_num" value="%{mailSet.port_num}" theme="simple"  size="35"/>		
 		</td>		
+	</tr>
+	
+	<tr>
+		<td class="a1">备注标签</td>
+		<td class="a2">
+			<ww:textarea  cols="30"  rows="5" name="mailSet.remark" id="remark" value="%{mailSet.remark}" theme="simple" ></ww:textarea> 		
+		</td>		
 	</tr>	
 	<tr height="35">
 		<td class="a1" colspan="2">

@@ -1,6 +1,33 @@
 <%@ page language="java" errorPage="/error.jsp" pageEncoding="UTF-8" contentType="text/html;charset=utf-8" %>
 <%@taglib uri="/webwork" prefix="ww"%>
 <%@taglib uri="/WEB-INF/crm-taglib.tld" prefix="crm"%>
+<%@ page import="com.opensymphony.xwork.util.OgnlValueStack" %>
+<%@ page import="com.sw.cms.model.Page" %>
+<%@ page import="com.sw.cms.util.*" %>
+<%@ page import="com.sw.cms.model.*" %>
+<%@ page import="java.util.*" %>
+
+<%
+OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
+
+List results = (List)VS.findValue("mailAll");
+String mailStr="";
+if(null!=results&&results.size()>0)
+{
+   for(int i=0;i<results.size();i++)
+   {
+     Map maps=(Map)results.get(i);
+     if(mailStr.equals(""))
+     {
+       mailStr=(String)maps.get("mail");
+     }
+     else
+     {
+        mailStr+=","+maps.get("mail");
+     }    
+   }
+}
+%>
 <html>
 <head>
 <title>选择发送人</title>
@@ -43,8 +70,7 @@
 					vl += "," + objs[i].value;
 				}
 			}
-		}
-		
+		}		
 		if(vl == ""){
 			alert("请选择发送人！");
 			return;
@@ -59,6 +85,17 @@
 		if(flag == "1"){
 			window.close();
 		}
+	}
+	function allValue(str)
+	{
+	  var parentTo = window.opener.document.getElementById("to");
+	  if(str=="")
+	  {
+	    alert("所选类型接收人为空！");
+		return;
+	  }
+	  parentTo.value = str;
+	  window.close(); 
 	}
 
 </script>
@@ -102,6 +139,7 @@
 		<td class="a1">
 			<input type="button" name="btnSub" value=" 确认选择并关闭 " class="css_button4" onclick="chkValue('1');">&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="button" name="btnSub" value=" 确认并继续选择 " class="css_button4" onclick="chkValue('2');">&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="button" name="btnSub" value=" 类型全选并关闭 " class="css_button4" onclick="allValue('<%=StringUtils.nullToStr(mailStr)%>');">&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="button" name="btnClose" value=" 关闭 " class="css_button2" onclick="window.close();">			
 		</td>
 	</tr>

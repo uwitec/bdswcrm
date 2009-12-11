@@ -17,12 +17,12 @@ OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
 <script type="text/javascript" src="xhEditor/jquery/jquery-1.3.2.min.js"></script>
 <script type="text/javascript" src="xhEditor/xheditor.js"></script>
 <script type="text/javascript">
-	 $(pageInit);
-	 function pageInit(){
-	 	$('#content').xheditor(true,{tools:'full',upLinkUrl:"<%=request.getContextPath() %>/UploadFile",upLinkExt:"zip,rar,txt",upImgUrl:"<%=request.getContextPath() %>/UploadFile",upImgExt:"jpg,jpeg,gif,png",upFlashUrl:"<%=request.getContextPath() %>/UploadFile",upFlashExt:"swf",upMediaUrl:"<%=request.getContextPath() %>/UploadFile",upMediaExt:"avi"});
-	 }
+	//$(pageInit);
+	//function pageInit(){
+	//	$('#content').xheditor(true,{tools:'full',upLinkUrl:"<%=request.getContextPath() %>/UploadFile",upLinkExt:"zip,rar,txt",upImgUrl:"<%=request.getContextPath() %>/UploadFile",upImgExt:"jpg,jpeg,gif,png",upFlashUrl:"<%=request.getContextPath() %>/UploadFile",upFlashExt:"swf",upMediaUrl:"<%=request.getContextPath() %>/UploadFile",upMediaExt:"avi"});
+	//}
 	function saveInfo(){
-		 //document.myform.content.value = eWebEditor1.eWebEditor.document.body.innerHTML;
+		//document.myform.content.value = eWebEditor1.eWebEditor.document.body.innerHTML;
 
 		if(document.getElementById("to").value == ""){
 		  alert("收件人不能为空，请填写！");
@@ -59,10 +59,18 @@ OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
 		
 		window.open(destination,'发件箱设置',fea);			
 	}
-	 
+	function setValue()
+	{	   
+	     var str= window.opener.document.getElementById("t1").outerHTML;
+	     str+=window.opener.document.getElementById("t2").outerHTML;
+	     str+=window.opener.document.getElementById("t3").outerHTML;
+	     document.getElementById("content").value=str; 
+	     document.getElementById("tsr").outerHTML=str; 
+	}
+	
 </script>
 </head>
-<body>
+<body onload="setValue();">
 
 <form name="myform" action="sendMail.html" method="post" enctype="multipart/form-data">
 <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0">
@@ -93,8 +101,8 @@ OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
 	<tr>
 		<td class="a1">邮件内容</td>
 		<td class="a2">
-			<textarea name="content"  id="content" rows="20" style="width:90%"></textarea>
-			 
+			<textarea name="tsr"  id="tsr" rows="20" style="width:90%"></textarea>
+			<input type="hidden" id="content" name="content" value=""/>
 		</td>
 	</tr>
 	<tr>	
@@ -105,7 +113,7 @@ OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
 		<td class="a2">
 			<table width="100%" border="0" id="objSuffix">
 				<tr>
-					<td><input name="suffix"  type="file"  size="80"/></td>
+					<td><input name="suffix" id="fj" type="file"  size="80"/></td>
 				</tr>
 				<tr>
 					<td><input name="suffix" type="file" value="" size="80"/></td>

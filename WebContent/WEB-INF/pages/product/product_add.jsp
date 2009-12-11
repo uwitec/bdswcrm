@@ -31,8 +31,11 @@ String[] jldw = (String[])VS.findValue("jldw");
 		if(!InputValid(document.productForm.fxxj,0,"float",0,0,9999999,"分销限价")){	 return; }
 		if(!InputValid(document.productForm.gf,0,"float",0,0,100,"比例点杀")){	 return; }
 		if(!InputValid(document.productForm.dss,0,"float",0,0,9999999,"金额点杀")){	 return; }
+		 
 		if(!InputValid(document.productForm.sp_txm,0,"string",0,1,50,"商品条形码")){	 return; }
 		if(!InputValid(document.productForm.ms,0,"string",0,1,500,"产品描述")){	 return; }
+		
+		 
 		
 		document.productForm.submit();
 	}
@@ -109,7 +112,8 @@ String[] jldw = (String[])VS.findValue("jldw");
 		<td class="a2" width="35%"><input type="text" name="gf" value="0.00" size="20">&nbsp;%</td>		
 		<td class="a1" width="15%">金额点杀</td>
 		<td class="a2" width="35%"><input type="text" name="dss" value="0.00" size="20"></td>
-	</tr>	
+	</tr>
+	 
 	<tr>		
 		<td class="a1" width="15%">库存下限</td>
 		<td class="a2" width="35%"><input type="text" name="kcxx" value="0" size="20"></td>		
