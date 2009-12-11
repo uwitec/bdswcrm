@@ -202,7 +202,7 @@ public class ExportClientWlDzdResult extends ExportXlsTemplate {
 									
 									label = new Label(3,k,StringUtils.nullToStr(mxMap.get("product_name")),this.getFt_item_left());
 									sheet.addCell(label);						
-									label = new Label(3,k,StringUtils.nullToStr(mxMap.get("product_xh")),this.getFt_item_left());
+									label = new Label(4,k,StringUtils.nullToStr(mxMap.get("product_xh")),this.getFt_item_left());
 									sheet.addCell(label);
 									label = new Label(5,k,StringUtils.nullToStr(mxMap.get("nums")),this.getFt_item_center());
 									sheet.addCell(label);

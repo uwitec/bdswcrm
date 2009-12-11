@@ -33,6 +33,7 @@ public class ExportProductDlKcNumsResult extends ExportXlsTemplate {
 			String store_id = StringUtils.nullToStr(request.getParameter("store_id"));
 			String flag = StringUtils.nullToStr(request.getParameter("flag"));
 			String state = StringUtils.nullToStr(request.getParameter("state"));
+			String px="";
 			
 			String conStr = "";
 			if(!store_id.equals("")){
@@ -95,7 +96,7 @@ public class ExportProductDlKcNumsResult extends ExportXlsTemplate {
 			label = new Label(6,2,"产品卖点",this.getFt_item_center_bold());
 			sheet.addCell(label);
 			
-			List productList = kcMxReportService.getKcNumsResults(product_kind, product_name, store_id,state, flag);
+			List productList = kcMxReportService.getKcNumsResults(product_kind, product_name, store_id,state, flag, px);
 			if(productList != null && productList.size()>0){
 				int k = 3;
 				for(int i=0;i<productList.size();i++){
@@ -118,8 +119,12 @@ public class ExportProductDlKcNumsResult extends ExportXlsTemplate {
 					   }
 					}
 					 
-					if(num.equals("")){
+					if(num.trim().equals("")){
 						num = "无";
+					}
+					else if(num.equals("0"))
+					{
+					  num = "无";
 					}
 					else{
 					    num="有";

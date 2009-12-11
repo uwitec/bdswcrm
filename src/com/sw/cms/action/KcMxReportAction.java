@@ -33,7 +33,16 @@ public class KcMxReportAction extends BaseAction {
 	private String store_id = "";
 	private String flag = "";
 	private String state = "";
+	private String px="";
 	
+	public String getPx() {
+		return px;
+	}
+
+	public void setPx(String px) {
+		this.px = px;
+	}
+
 	/**
 	 * 打开条件页面
 	 * @return
@@ -66,7 +75,7 @@ public class KcMxReportAction extends BaseAction {
 	 * @return
 	 */
 	public String getKcNumsResult(){
-		productList = kcMxReportService.getKcNumsResults(product_kind, product_name, store_id,state, flag);
+		productList = kcMxReportService.getKcNumsResults(product_kind, product_name, store_id,state, flag,px);
 		return "success";
 	}
 	

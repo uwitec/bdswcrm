@@ -33,7 +33,7 @@ public class ExportProductLsKcNumsResult extends ExportXlsTemplate {
 			String store_id = StringUtils.nullToStr(request.getParameter("store_id"));
 			String flag = StringUtils.nullToStr(request.getParameter("flag"));
 			String state = StringUtils.nullToStr(request.getParameter("state"));
-			
+			String px="";
 			String conStr = "";
 			if(!store_id.equals("")){
 				conStr += "　库房：" + StaticParamDo.getStoreNameById(store_id);
@@ -89,7 +89,7 @@ public class ExportProductLsKcNumsResult extends ExportXlsTemplate {
 			label = new Label(7,2,"产品卖点",this.getFt_item_center_bold());
 			sheet.addCell(label);
 			
-			List productList = kcMxReportService.getKcNumsResults(product_kind, product_name, store_id,state, flag);
+			List productList = kcMxReportService.getKcNumsResults(product_kind, product_name, store_id,state, flag,px);
 			if(productList != null && productList.size()>0){
 				int k = 3;
 				for(int i=0;i<productList.size();i++){

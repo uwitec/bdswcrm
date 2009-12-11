@@ -33,13 +33,14 @@ import com.sw.cms.xls.template.ExportXlsTemplate;
 	}   	
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-        	String action = request.getParameter("action");
+		 
+	
+		try {
+			String action = request.getParameter("action");
         	
         	if(action == null || action.equals("")){
         		return;
-        	}
-        	
+        	}        	 
     		ServletContext servletContext = getServletContext();
     		ApplicationContext ctx = StaticParamDo.getCtx();
     		
@@ -56,19 +57,21 @@ import com.sw.cms.xls.template.ExportXlsTemplate;
 			FileInputStream in = new FileInputStream(fileName);
             byte b[] = new byte[1024];
             while(in.read(b) != -1)
-                os.write(b); 
-            
+                os.write(b);            
             in.close();            
             os.flush();
-            os.close();
-            
+            os.close();          
             //删除文件
-            File file = new File(fileName);
-            file.delete();
+             
+            	File file = new File(fileName);
+                file.delete(); 
+            
+                       
         }catch (Exception ex) {
         	log.info("下载导出文件失败：" + ex);
         }
         return;
+        
 	}  	
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

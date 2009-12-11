@@ -382,7 +382,7 @@ public class KcMxReportDAO extends JdbcBaseDAO {
 	 * @param flag           是否显示0库存商品
 	 * @return
 	 */
-	public List getKcNumsResults(String product_kind,String product_name,String store_id,String state,String flag){
+	public List getKcNumsResults(String product_kind,String product_name,String store_id,String state,String flag,String px){
 		String sql = "select a.ms, a.product_id,a.product_name,a.product_xh,a.price,a.khcbj,a.lsbj,a.lsxj,a.fxbj,a.fxxj,a.gf,a.dss," +
 				"(select sum(b.nums) as hj_nums from product_kc b where b.product_id=a.product_id";
 		
@@ -420,6 +420,14 @@ public class KcMxReportDAO extends JdbcBaseDAO {
 		
 		if(flag.equals("否")){
 			sql += " having kc_nums>0";
+		}
+		if(px.equals("产品名称"))
+		{
+			sql+=" order by a.product_name";
+		}
+		if(px.equals("分销限价"))
+		{
+			sql+=" order by a.fxxj";
 		}
 		return this.getResultList(sql);
 	}

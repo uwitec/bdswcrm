@@ -163,7 +163,7 @@ public class XsdAction extends BaseAction {
 		
 		String con = " and state<>'ÒÑ±£´æ'";
 		if(!client_name.equals("")){
-			con += " and name like'%" + client_name + "%'";
+			con += " and client_name like'%" + client_name + "%'";
 		}
 		if(!creatdate1.equals("")){
 			con += " and creatdate>='" + creatdate1 + "'";

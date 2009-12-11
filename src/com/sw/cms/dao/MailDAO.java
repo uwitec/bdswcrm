@@ -2,6 +2,7 @@ package com.sw.cms.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import org.springframework.jdbc.core.RowMapper;
 
@@ -29,6 +30,20 @@ public class MailDAO extends JdbcBaseDAO {
 			sql += " and client_type='" + client_type + "'";
 		}
 		return this.getResultByPage(sql, curPage, rowsPerPage);
+	}
+	
+	/**
+	 * 获取邮件接收人（不分页）
+	 * @param client_type
+	 * @return
+	 */
+	public List getLxrAll(String client_type)
+	{
+		String sql = "select * from view_client_mail where 1=1";
+		if(!client_type.equals("")){
+			sql += " and client_type='" + client_type + "'";
+		}
+		return this.getResultList(sql);
 	}
 	
 	
@@ -59,12 +74,12 @@ public class MailDAO extends JdbcBaseDAO {
 		int counts = this.getJdbcTemplate().queryForInt(sql);
 		
 		if(counts > 0){
-			sql = "update mail_set set smtp=?,user_name=?,password=?,from_user=?,is_ssl=?,port_num=? where user_id=?";
+			sql = "update mail_set set smtp=?,user_name=?,password=?,from_user=?,is_ssl=?,port_num=?,remark=? where user_id=?";
 		}else{
-			sql = "insert into mail_set(smtp,user_name,password,from_user,is_ssl,port_num,user_id) values(?,?,?,?,?,?,?)";
+			sql = "insert into mail_set(smtp,user_name,password,from_user,is_ssl,port_num,remark,user_id) values(?,?,?,?,?,?,?,?)";
 		}
 		
-		Object[] params = new Object[7];
+		Object[] params = new Object[8];
 		
 		params[0] = mailSet.getSmtp();
 		params[1] = mailSet.getUser_name();
@@ -72,7 +87,9 @@ public class MailDAO extends JdbcBaseDAO {
 		params[3] = mailSet.getFrom_user();
 		params[4] = mailSet.getIs_ssl();
 		params[5] = mailSet.getPort_num();
-		params[6] = mailSet.getUser_id();
+		params[6] = mailSet.getRemark();
+		params[7] = mailSet.getUser_id();
+		
 		
 		this.getJdbcTemplate().update(sql,params);
 	}
@@ -94,6 +111,7 @@ public class MailDAO extends JdbcBaseDAO {
 			if (SqlUtil.columnIsExist(rs, "from_user")) mailSet.setFrom_user(rs.getString("from_user"));
 			if (SqlUtil.columnIsExist(rs, "is_ssl")) mailSet.setIs_ssl(rs.getString("is_ssl"));
 			if (SqlUtil.columnIsExist(rs, "port_num")) mailSet.setPort_num(rs.getString("port_num"));
+			if (SqlUtil.columnIsExist(rs, "remark")) mailSet.setRemark(rs.getString("remark"));
 
 			return mailSet;
 		}

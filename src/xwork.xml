@@ -1219,7 +1219,12 @@
         </action>
         <action name="getGysKcList" class="kcMxReportAction" method="getGysKcNumsResult">
             <result name="success">/WEB-INF/pages/report/kcmx/gys_kc_result.jsp</result>
-        </action>             
+        </action>
+         <action name="addDlMail" class="mailAction" method="add">
+            <result name="success">/WEB-INF/pages/report/kcmx/dlmail_add.jsp</result>
+        </action> 
+         
+                    
         <!-- 库存数量汇总 -->
         
         <!-- 分仓库存数量汇总 -->

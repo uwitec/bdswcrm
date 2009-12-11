@@ -17,6 +17,7 @@ import com.sw.cms.sendmail.SendMail;
 import com.sw.cms.service.MailService;
 import com.sw.cms.service.SjzdService;
 import com.sw.cms.util.Constant;
+import com.sw.cms.util.ParameterUtility;
 
 public class MailAction extends BaseAction {
 	
@@ -35,18 +36,32 @@ public class MailAction extends BaseAction {
 	
 	private Page pageMail;
 	
+	
 	private String client_type = "";
 	private int curPage = 1;
 	
 	private List wldwlx = new ArrayList();
-	
+	private List mailAll=new ArrayList();
+	 
+
+
+	public List getMailAll() {
+		return mailAll;
+	}
+
+
+	public void setMailAll(List mailAll) {
+		this.mailAll = mailAll;
+	}
+
+
 	/**
 	 * 打开添加邮件页面
 	 * @return
 	 */
 	public String add(){
 		try{
-			
+			 
 			return SUCCESS;
 		}catch(Exception e){
 			log.error("打开邮件发送页面出错，原因：" + e.getMessage());
@@ -140,6 +155,7 @@ public class MailAction extends BaseAction {
 			wldwlx.add(map2);
 			
 			pageMail = mailService.getLxrList(client_type, curPage, rowsPerPage);
+			mailAll=mailService.getLxrAll(client_type);
 			
 			return SUCCESS;
 		}catch(Exception e){

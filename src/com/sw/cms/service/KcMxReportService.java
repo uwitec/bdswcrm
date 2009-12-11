@@ -112,8 +112,8 @@ public class KcMxReportService {
 	 * @param flag           是否显示0库存商品
 	 * @return
 	 */
-	public List getKcNumsResults(String product_kind,String product_name,String store_id,String state,String flag){
-		return  kcMxReportDao.getKcNumsResults(product_kind, product_name, store_id,state, flag);
+	public List getKcNumsResults(String product_kind,String product_name,String store_id,String state,String flag,String px){
+		return  kcMxReportDao.getKcNumsResults(product_kind, product_name, store_id,state, flag,px);
 	}
 	
 	

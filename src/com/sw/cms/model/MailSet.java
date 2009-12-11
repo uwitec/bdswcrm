@@ -9,6 +9,7 @@ public class MailSet {
 	private String from_user;
 	private String is_ssl;
 	private String port_num;
+	private String remark;
 	
 	public String getFrom_user() {
 		return from_user;
@@ -51,6 +52,12 @@ public class MailSet {
 	}
 	public void setUser_name(String user_name) {
 		this.user_name = user_name;
+	}
+	public String getRemark() {
+		return remark;
+	}
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 	
 

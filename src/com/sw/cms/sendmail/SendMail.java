@@ -18,6 +18,10 @@ public class SendMail {
 	private String ssl;
 	
 	private String port;
+	
+	private String remark;
+
+
 
 	public void send(String user_id,String subject, String body, String[] files, String to) {
 		MailSet mailSet = mailDao.getMailSet(user_id);
@@ -28,6 +32,7 @@ public class SendMail {
 			from = mailSet.getFrom_user();
 			ssl = mailSet.getIs_ssl();
 			port = mailSet.getPort_num();
+			remark=mailSet.getRemark();
 		}
 
 		MailMessage msg = new MailMessage();
@@ -41,6 +46,10 @@ public class SendMail {
 		
 		if(ssl.equals("true")){
 			msg.setSsl();
+		}
+		if(!remark.equals(""))
+		{
+			body+=body+"<br>"+"-----<br>"+remark;
 		}
 		
 		msg.setBody(body);
@@ -109,6 +118,13 @@ public class SendMail {
 
 	public void setMailDao(MailDAO mailDao) {
 		this.mailDao = mailDao;
+	}
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 
 }
