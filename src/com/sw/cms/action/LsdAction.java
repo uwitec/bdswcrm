@@ -75,6 +75,7 @@ public class LsdAction extends BaseAction {
 	private Map tcblMap;
 	private String basic_ratio = "0";
 	private String out_ratio = "0";
+	private String ds_ratio = "0";
 	
 	private String product_name = "";
 	private String product_kind = "";
@@ -559,7 +560,7 @@ public class LsdAction extends BaseAction {
 	 */
 	public String saveTcbl(){
 		try{
-			lsdService.saveTcbl(basic_ratio, out_ratio);
+			lsdService.saveTcbl(basic_ratio, out_ratio, ds_ratio);
 		}catch(Exception e){
 			log.error("保存提成比例，原因：" + e.getMessage());
 			e.printStackTrace();
@@ -930,6 +931,16 @@ public class LsdAction extends BaseAction {
 
 	public void setTcblMap(Map tcblMap) {
 		this.tcblMap = tcblMap;
+	}
+
+
+	public String getDs_ratio() {
+		return ds_ratio;
+	}
+
+
+	public void setDs_ratio(String ds_ratio) {
+		this.ds_ratio = ds_ratio;
 	}
 
 
