@@ -237,9 +237,11 @@ public class LsdDAO extends JdbcBaseDAO {
 		Map tcblMap = getTcbl();
 		double basic_ratio = 0;
 		double out_ratio = 0;
+		double ds_ratio = 0;
 		if(tcblMap != null){
 			basic_ratio = tcblMap.get("basic_ratio")==null?0:((Double)tcblMap.get("basic_ratio")).doubleValue();
 			out_ratio = tcblMap.get("out_ratio")==null?0:((Double)tcblMap.get("out_ratio")).doubleValue();
+			ds_ratio = tcblMap.get("ds_ratio")==null?0:((Double)tcblMap.get("ds_ratio")).doubleValue();
 		}
 		
 		if(lsdProducts != null && lsdProducts.size()>0){
@@ -261,8 +263,7 @@ public class LsdDAO extends JdbcBaseDAO {
 						param[9] = lsdProduct.getQz_serial_num();    //序列号
 						param[10] = lsdProduct.getKh_cbj();          //考核成本价
 						
-						//低于零售限价工分减半
-						double gf = 0l;
+						double gf = 0l;  //比例点杀
 						Map map = this.getProductInfo(lsdProduct.getProduct_id());
 						double lsxj = 0l;
 						double ds = 0l;
@@ -271,8 +272,10 @@ public class LsdDAO extends JdbcBaseDAO {
 							gf = map.get("gf")==null?0:((Double)map.get("gf")).doubleValue();
 							ds = map.get("dss")==null?0:((Double)map.get("dss")).doubleValue();
 						}
+						
+						//低于零售限价时金额点杀需要乘以比例
 						if(lsdProduct.getPrice() < lsxj){
-							gf = gf / 2;
+							ds = ds * ds_ratio/100;
 						}
 						
 						param[11] = gf;    //工分
@@ -381,11 +384,11 @@ public class LsdDAO extends JdbcBaseDAO {
 	 * @param basic_ratio
 	 * @param out_ratio
 	 */
-	public void saveTcbl(String basic_ratio,String out_ratio){
+	public void saveTcbl(String basic_ratio,String out_ratio,String ds_ratio){
 		String sql = "delete from tcbl_set";
 		this.getJdbcTemplate().update(sql);
 		
-		sql = "insert into tcbl_set(basic_ratio,out_ratio) values('" + basic_ratio + "','" + out_ratio + "')";
+		sql = "insert into tcbl_set(basic_ratio,out_ratio,ds_ratio) values('" + basic_ratio + "','" + out_ratio + "','" + ds_ratio + "')";
 		this.getJdbcTemplate().update(sql);
 	}
 	

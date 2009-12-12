@@ -402,9 +402,11 @@ public class XsdDAO extends JdbcBaseDAO {
 		Map tcblMap = getTcbl();
 		double basic_ratio = 0;
 		double out_ratio = 0;
+		double ds_ratio = 0;
 		if(tcblMap != null){
 			basic_ratio = tcblMap.get("basic_ratio")==null?0:((Double)tcblMap.get("basic_ratio")).doubleValue();
 			out_ratio = tcblMap.get("out_ratio")==null?0:((Double)tcblMap.get("out_ratio")).doubleValue();
+			ds_ratio = tcblMap.get("ds_ratio")==null?0:((Double)tcblMap.get("ds_ratio")).doubleValue();
 		}
 		
 		String xsd_id = xsd.getId();
@@ -431,7 +433,6 @@ public class XsdDAO extends JdbcBaseDAO {
 						param[12] = xsdProduct.getSjcj_xj();
 						param[13] = xsdProduct.getKh_cbj(); 
 						
-						//低于零售限价工分减半
 						double gf = 0l;
 						Map map = this.getProductInfo(xsdProduct.getProduct_id());
 						double lsxj = 0l;
@@ -441,8 +442,10 @@ public class XsdDAO extends JdbcBaseDAO {
 							gf = map.get("gf")==null?0:((Double)map.get("gf")).doubleValue();
 							ds = map.get("dss")==null?0:((Double)map.get("dss")).doubleValue();
 						}
+						
+						//低于零售限价时金额点杀需要乘以比例
 						if(xsdProduct.getPrice() < lsxj){
-							gf = gf / 2;
+							ds = ds * ds_ratio/100;
 						}
 						
 						param[14] = gf;
