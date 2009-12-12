@@ -48,29 +48,29 @@ String user_type = info.getIs_dls();   //用户类别
 <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0" border="1" id="selTable">
 	<thead>
 	<tr>
-		<td>产品编号</td>
-		<td>产品名称</td>
-		<td>规格</td>	
-		<td>库存数量</td>
+		<td nowrap="nowrap">产品编号</td>
+		<td nowrap="nowrap">产品名称</td>
+		<td nowrap="nowrap">规格</td>	
+		<td nowrap="nowrap">库存数量</td>
 	<%
 	if(user_type.equals("0")){
 	%>
-		<td>考核成本</td>
+		<td nowrap="nowrap">考核成本</td>
 	<%
 	}
 	%>
-		<td>零售报价</td>
-		<td>零售限价</td>
+		<td nowrap="nowrap">零售报价</td>
+		<td nowrap="nowrap">零售限价</td>
 	<%
 	if(user_type.equals("0")){
 	%>		
-		<td>代理价</td>
-		<td>分销限价</td>
+		<td nowrap="nowrap">代理价</td>
+		<td nowrap="nowrap">分销限价</td>
 	<%
 	}
 	%>		
-		<td>工分</td>
-		<td>点杀</td>
+		<td nowrap="nowrap">比例点杀</td>
+		<td nowrap="nowrap">金额点杀</td>
 	</tr>
 	</thead>
 	<%
@@ -95,28 +95,28 @@ String user_type = info.getIs_dls();   //用户类别
 	%>
 	<tr class="a1" onmousedown="trSelectChangeCss()" title="点击查看分仓库存" onclick="desc('<%=StringUtils.nullToStr(map.get("product_id")) %>');">
 		<td><%=StringUtils.nullToStr(map.get("product_id")) %></td>
-		<td><%=StringUtils.nullToStr(map.get("product_name")) %></td>
-		<td><%=StringUtils.nullToStr(map.get("product_xh")) %></td>
-		<td><%=num %></td>
+		<td align="left"><%=StringUtils.nullToStr(map.get("product_name")) %></td>
+		<td align="left"><%=StringUtils.nullToStr(map.get("product_xh")) %></td>
+		<td nowrap="nowrap"><%=num %></td>
 	<%
 	if(user_type.equals("0")){
 	%>		
-		<td align="right"><%=JMath.round(khcbj,2) %>&nbsp;</td>
+		<td align="right" nowrap="nowrap"><%=JMath.round(khcbj,2) %>&nbsp;</td>
 	<%
 	}
 	%>		
-		<td align="right"><%=JMath.round(lsbj,2) %>&nbsp;</td>
-		<td align="right"><%=JMath.round(lsxj,2) %>&nbsp;</td>
+		<td align="right" nowrap="nowrap"><%=JMath.round(lsbj,2) %>&nbsp;</td>
+		<td align="right" nowrap="nowrap"><%=JMath.round(lsxj,2) %>&nbsp;</td>
 	<%
 	if(user_type.equals("0")){
 	%>			
-		<td align="right"><%=JMath.round(fxbj,2) %>&nbsp;</td>
-		<td align="right"><%=JMath.round(fxxj,2) %>&nbsp;</td>
+		<td align="right" nowrap="nowrap"><%=JMath.round(fxbj,2) %>&nbsp;</td>
+		<td align="right" nowrap="nowrap"><%=JMath.round(fxxj,2) %>&nbsp;</td>
 	<%
 	}
 	%>		
-		<td><%=JMath.round(gf) %></td>
-		<td><%=JMath.round(dss) %></td>
+		<td align="right" nowrap="nowrap"><%=JMath.round(gf) %></td>
+		<td align="right" nowrap="nowrap"><%=JMath.round(dss) %></td>
 	</tr>
 	
 	<%
