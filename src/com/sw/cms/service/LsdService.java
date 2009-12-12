@@ -541,8 +541,8 @@ public class LsdService {
 	 * @param basic_ratio
 	 * @param out_ratio
 	 */
-	public void saveTcbl(String basic_ratio,String out_ratio){
-		lsdDao.saveTcbl(basic_ratio, out_ratio);
+	public void saveTcbl(String basic_ratio,String out_ratio,String ds_ratio){
+		lsdDao.saveTcbl(basic_ratio, out_ratio, ds_ratio);
 	}
 	
 	
