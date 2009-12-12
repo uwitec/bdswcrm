@@ -2259,7 +2259,6 @@
          <action name="descWxcld" class="wxcldAction" method="desc">
              <result name="success">/WEB-INF/pages/wxcld/wxcld_desc.jsp</result>
         </action>  
-            
         <!-- 维修处理单 -->  
         
         <!-- 库龄汇总 -->
@@ -2270,6 +2269,17 @@
             <result name="success">/WEB-INF/pages/report/kl_hz/result.jsp</result>
         </action>      
         <!-- 库龄汇总  -->
+        
+        <!-- 业务员提成汇总 -->
+        <action name="showYwytcCondtion" class="xstjXsryAction" method="showCondition">
+            <result name="success">/WEB-INF/pages/report/ywytc_tj/condition.jsp</result>
+        </action>
+        <action name="getYwytcHzResult" class="xstjXsryAction" method="getYwytcHzResult">
+            <result name="success">/WEB-INF/pages/report/ywytc_tj/result_hz.jsp</result>
+        </action>
+        <action name="getYwytcMxResult" class="xstjXsryAction" method="getYwytcMxResult">
+            <result name="success">/WEB-INF/pages/report/ywytc_tj/result_mx.jsp</result>
+        </action>         
                 
     </package>
 </xwork>

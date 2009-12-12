@@ -60,6 +60,17 @@ public class XstjXsryAction extends BaseAction {
 		userList = userService.getYwryListByCon(con);
 		return "success";
 	}
+	
+	
+	public String getYwytcHzResult(){
+		return "success";
+	}
+	
+	
+	public String getYwytcMxResult(){
+		return "success";
+	}	
+	
 
 	public XstjXsryService getXstjXsryService() {
 		return xstjXsryService;

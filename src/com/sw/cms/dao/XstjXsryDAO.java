@@ -277,5 +277,64 @@ public class XstjXsryDAO extends JdbcBaseDAO {
 		
 		return this.getResultList(sql);
 	}
+	
+	
+	/**
+	 * 业务员提成统计--汇总
+	 * @param start_date
+	 * @param end_date
+	 * @param dept_id
+	 * @param user_id
+	 * @return
+	 */
+	public List getYwytcHz(String start_date,String end_date,String dept_id,String user_id){
+		String sql = "select dept,xsry,real_name,sum((bhsje-khcb)*basic_ratio/100) as jbtc," +
+				"sum((bhsje-khcb)*gf/100) as blds, sum(ds) as jeds," +
+				"sum((bhsje-khcb)*out_ratio/100) as cxjl from view_hpxshz_tj where real_name<>''";
+		
+		if(!start_date.equals("")){
+			sql += " and cz_date>='" + start_date + "'";
+		}
+		if(!start_date.equals("")){
+			sql += " and cz_date<='" + end_date + "'";
+		}
+		if(!dept_id.equals("")){
+			sql += " and dept like '" + dept_id + "%'";
+		}
+		if(!user_id.equals("")){
+			sql += " and xsry='" + user_id + "'";
+		}
+		
+		sql += " group by dept,xsry,real_name";
+		return this.getResultList(sql);
+	}
+	
+	
+	/**
+	 * 业务员提成统计--明细
+	 * @param start_date
+	 * @param end_date
+	 * @param dept_id
+	 * @param user_id
+	 * @return
+	 */
+	public List getYwytcMx(String start_date,String end_date,String user_id){
+		String sql = "select cz_date,id,yw_type,client_name,product_name,product_id,product_xh,nums," +
+				"(bhsje-khcb)*basic_ratio/100 as jbtc,(bhsje-khcb)*gf/100 as blds,ds as jeds,(bhsje-khcb)*out_ratio/100 as cxjl from view_hpxshz_tj where 1=1";
+		
+		if(!start_date.equals("")){
+			sql += " and cz_date>='" + start_date + "'";
+		}
+		if(!start_date.equals("")){
+			sql += " and cz_date<='" + end_date + "'";
+		}
+		if(!user_id.equals("")){
+			sql += " and xsry='" + user_id + "'";
+		}
+		
+		sql += " order by id";
+		
+		return this.getResultList(sql);
+	}	
 
 }

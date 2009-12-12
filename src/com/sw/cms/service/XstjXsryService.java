@@ -109,6 +109,32 @@ public class XstjXsryService {
 	public List getYwymlMx(String start_date,String end_date,String user_id){
 		return xstjXsryDao.getYwymlMx(start_date, end_date, user_id);
 	}
+	
+	
+	/**
+	 * 业务员提成统计
+	 * @param start_date
+	 * @param end_date
+	 * @param dept_id
+	 * @param user_id
+	 * @return
+	 */
+	public List getYwytcHz(String start_date,String end_date,String dept_id,String user_id){
+		return xstjXsryDao.getYwytcHz(start_date, end_date, dept_id, user_id);
+	}
+	
+	/**
+	 * 业务员提成统计--明细
+	 * @param start_date
+	 * @param end_date
+	 * @param dept_id
+	 * @param user_id
+	 * @return
+	 */
+	public List getYwytcMx(String start_date,String end_date,String user_id){
+		return xstjXsryDao.getYwytcMx(start_date, end_date, user_id);
+	}
+	
 
 	public XstjXsryDAO getXstjXsryDao() {
 		return xstjXsryDao;
