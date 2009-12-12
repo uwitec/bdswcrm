@@ -11,6 +11,7 @@
 	function subForm(){	
 		if(!InputValid(document.getElementById("basic_ratio"),1,"float",1,0,99,"基本提成比例")){ return false; }	
 		if(!InputValid(document.getElementById("out_ratio"),1,"float",1,0,99,"超限提成比例")){ return false; }	
+		if(!InputValid(document.getElementById("ds_ratio"),1,"float",1,0,99,"低于零售限价时点杀比例")){ return false; }	
 		document.lssdForm.submit();
 	}
 </script>
@@ -34,7 +35,13 @@
 		<td class="a2" width="35%">
 			<ww:textfield name="out_ratio" id="out_ratio" value="%{tcblMap.out_ratio}" theme="simple" />%<span style="color:red">*</span>
 		</td>			
-	</tr>				
+	</tr>
+	<tr>
+		<td class="a1" width="15%">低于零售限价时点杀比例</td>
+		<td class="a2" width="35%">
+			<ww:textfield name="ds_ratio" id="ds_ratio" value="%{tcblMap.ds_ratio}" theme="simple" />%<span style="color:red">*</span>
+		</td>			
+	</tr>					
 	<tr height="35">
 		<td class="a1" colspan="2">
 			<input type="button" name="btnTg" value="确 定" class="css_button2" onclick="subForm();">
