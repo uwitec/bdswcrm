@@ -119,7 +119,7 @@ if(results != null && results.size()>0){
 		<tr>
 			<td width="70%" height="30" valign="top">注：<BR>&nbsp;&nbsp;1、基本提成=考核毛利*基本提成比例；
                                            <BR>&nbsp;&nbsp;2、比例点杀=考核毛利*比例点杀;
-                                           <BR>&nbsp;&nbsp;3、超限奖励=考核毛利*超限提成比例;
+                                           <BR>&nbsp;&nbsp;3、超限奖励=(不含税金额-零售限价)*超限提成比例;
                                            <BR>点击业务员姓名可以查看明细。</td>
 			<td align="right" height="30" valign="top">生成报表时间：<%=DateComFunc.getToday() %>&nbsp;&nbsp;&nbsp;</td>
 		</tr>
