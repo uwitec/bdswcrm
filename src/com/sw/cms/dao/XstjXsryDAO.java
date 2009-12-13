@@ -320,7 +320,8 @@ public class XstjXsryDAO extends JdbcBaseDAO {
 	 */
 	public List getYwytcMx(String start_date,String end_date,String user_id){
 		String sql = "select cz_date,id,yw_type,client_name,product_name,product_id,product_xh,nums," +
-				"(bhsje-khcb)*basic_ratio/100 as jbtc,(bhsje-khcb)*gf/100 as blds,ds as jeds,(bhsje-khcb)*out_ratio/100 as cxjl from view_hpxshz_tj where 1=1";
+				"(bhsje-khcb)*basic_ratio/100 as jbtc,(bhsje-khcb)*gf/100 as blds,ds as jeds," +
+				"(bhsje-lsxj)*out_ratio/100 as cxjl from view_hpxshz_tj where 1=1";
 		
 		if(!start_date.equals("")){
 			sql += " and cz_date>='" + start_date + "'";

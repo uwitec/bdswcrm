@@ -390,7 +390,7 @@ public class XsdDAO extends JdbcBaseDAO {
 	 */
 	private void addXsdProducts(List xsdProducts,Xsd xsd){
 		String sql = "";
-		Object[] param = new Object[20];
+		Object[] param = new Object[21];
 		
 		double sd = 0;
 		
@@ -416,7 +416,7 @@ public class XsdDAO extends JdbcBaseDAO {
 				XsdProduct xsdProduct = (XsdProduct)xsdProducts.get(i);
 				if(xsdProduct != null){
 					if(!xsdProduct.getProduct_id().equals("")){
-						sql = "insert into xsd_product(xsd_id,product_id,product_xh,product_name,price,jgtz,nums,remark,xj,cbj,qz_serial_num,sjcj_nums,sjcj_xj,kh_cbj,gf,sd,bhsje,basic_ratio,out_ratio,ds) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+						sql = "insert into xsd_product(xsd_id,product_id,product_xh,product_name,price,jgtz,nums,remark,xj,cbj,qz_serial_num,sjcj_nums,sjcj_xj,kh_cbj,gf,sd,bhsje,basic_ratio,out_ratio,ds,lsxj) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 						
 						param[0] = xsd_id;
 						param[1] = xsdProduct.getProduct_id();
@@ -455,6 +455,7 @@ public class XsdDAO extends JdbcBaseDAO {
 						param[17] = basic_ratio;
 						param[18] = out_ratio;
 						param[19] = ds;
+						param[20] = lsxj;
 						
 						this.getJdbcTemplate().update(sql,param);
 						
@@ -855,6 +856,7 @@ public class XsdDAO extends JdbcBaseDAO {
 			if(SqlUtil.columnIsExist(rs,"ds")) xsdProduct.setDs(rs.getDouble("ds"));
 			if(SqlUtil.columnIsExist(rs,"basic_ratio")) xsdProduct.setBasic_ratio(rs.getDouble("basic_ratio"));
 			if(SqlUtil.columnIsExist(rs,"out_ratio")) xsdProduct.setOut_ratio(rs.getDouble("out_ratio"));
+			if(SqlUtil.columnIsExist(rs,"lsxj")) xsdProduct.setLsxj(rs.getDouble("lsxj"));
 			
 			return xsdProduct;
 		}

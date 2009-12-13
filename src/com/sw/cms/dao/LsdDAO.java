@@ -223,7 +223,7 @@ public class LsdDAO extends JdbcBaseDAO {
 	 */
 	private void addLsdProducts(List lsdProducts,Lsd lsd){
 		String sql = "";
-		Object[] param = new Object[17];
+		Object[] param = new Object[18];
 		
 		String lsd_id = lsd.getId();
 		
@@ -249,7 +249,7 @@ public class LsdDAO extends JdbcBaseDAO {
 				LsdProduct lsdProduct = (LsdProduct)lsdProducts.get(i);
 				if(lsdProduct != null){
 					if(!lsdProduct.getProduct_id().equals("") && !lsdProduct.getProduct_name().equals("")){
-						sql = "insert into lsd_product(lsd_id,product_id,product_xh,product_name,price,nums,xj,remark,cbj,qz_serial_num,kh_cbj,gf,sd,bhsje,basic_ratio,out_ratio,ds) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+						sql = "insert into lsd_product(lsd_id,product_id,product_xh,product_name,price,nums,xj,remark,cbj,qz_serial_num,kh_cbj,gf,sd,bhsje,basic_ratio,out_ratio,ds,lsxj) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 						
 						param[0] = lsd_id;
 						param[1] = lsdProduct.getProduct_id();
@@ -285,6 +285,7 @@ public class LsdDAO extends JdbcBaseDAO {
 						param[14] = basic_ratio;
 						param[15] = out_ratio;
 						param[16] = ds;
+						param[17] = lsxj;
 						
 						this.getJdbcTemplate().update(sql,param);
 					}
@@ -501,6 +502,7 @@ public class LsdDAO extends JdbcBaseDAO {
 			if(SqlUtil.columnIsExist(rs,"ds")) lsdProduct.setDs(rs.getDouble("ds"));
 			if(SqlUtil.columnIsExist(rs,"basic_ratio")) lsdProduct.setBasic_ratio(rs.getDouble("basic_ratio"));
 			if(SqlUtil.columnIsExist(rs,"out_ratio")) lsdProduct.setOut_ratio(rs.getDouble("out_ratio"));
+			if(SqlUtil.columnIsExist(rs,"lsxj")) lsdProduct.setLsxj(rs.getDouble("lsxj"));
 			
 			return lsdProduct;
 		}

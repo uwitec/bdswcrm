@@ -22,6 +22,7 @@ public class ThdProduct {
 	private double ds = 0;
 	private double basic_ratio = 0;
 	private double out_ratio = 0;
+	private double lsxj = 0;
 	
 	public int getId() {
 		return id;
@@ -130,6 +131,12 @@ public class ThdProduct {
 	}
 	public void setSd(double sd) {
 		this.sd = sd;
+	}
+	public double getLsxj() {
+		return lsxj;
+	}
+	public void setLsxj(double lsxj) {
+		this.lsxj = lsxj;
 	}
 
 }
