@@ -290,7 +290,7 @@ public class XstjXsryDAO extends JdbcBaseDAO {
 	public List getYwytcHz(String start_date,String end_date,String dept_id,String user_id){
 		String sql = "select dept,xsry,real_name,sum((bhsje-khcb)*basic_ratio/100) as jbtc," +
 				"sum((bhsje-khcb)*gf/100) as blds, sum(ds) as jeds," +
-				"sum((bhsje-khcb)*out_ratio/100) as cxjl from view_hpxshz_tj where real_name<>''";
+				"sum((bhsje-lsxj)*out_ratio/100) as cxjl from view_hpxshz_tj where real_name<>''";
 		
 		if(!start_date.equals("")){
 			sql += " and cz_date>='" + start_date + "'";
