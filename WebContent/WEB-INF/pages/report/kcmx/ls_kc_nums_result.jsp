@@ -57,17 +57,17 @@ if(!store_id.equals("")){
 <TABLE align="center" cellSpacing=0 cellPadding=0 width="99%" border=0 style="BORDER-TOP: #000000 2px solid;BORDER-LEFT:#000000 1px solid">
 	<THEAD>
 		<TR>
-			<TD class=ReportHead>序号</TD>
+			<TD class=ReportHead nowrap="nowrap">序号</TD>
 			<!--  <TD class=ReportHead>商品编码</TD>-->
-			<TD class=ReportHead>商品名称</TD>
-			<TD class=ReportHead>规格</TD>
-			<TD class=ReportHead>库存数量</TD>
-			<TD class=ReportHead>零售报价</TD>
-			<TD class=ReportHead>零售限价</TD>
-			<TD class=ReportHead>考核成本</TD>
-			<TD class=ReportHead>工分</TD>
-			<TD class=ReportHead>产品卖点</TD>
-			<!-- <TD class=ReportHead>点杀</TD>-->
+			<TD class=ReportHead nowrap="nowrap">商品名称</TD>
+			<TD class=ReportHead nowrap="nowrap">规格</TD>
+			<TD class=ReportHead nowrap="nowrap">库存数量</TD>
+			<TD class=ReportHead nowrap="nowrap">零售报价</TD>
+			<TD class=ReportHead nowrap="nowrap">零售限价</TD>
+			<TD class=ReportHead nowrap="nowrap">考核成本</TD>
+			<TD class=ReportHead nowrap="nowrap">比例点杀</TD>
+			<TD class=ReportHead nowrap="nowrap">金额点杀</TD>
+			<TD class=ReportHead nowrap="nowrap">产品卖点</TD>
 		</TR>
 	</THEAD>
 	<TBODY>
@@ -96,7 +96,7 @@ if(productList != null && productList.size()>0){
 		}
 %>
 		<TR>
-			<TD class=ReportItemXh><%=i+1 %>&nbsp;</TD>
+			<TD class=ReportItemXh nowrap="nowrap"><%=i+1 %>&nbsp;</TD>
 			<!--<TD class=ReportItemXh><%=StringUtils.nullToStr(map.get("product_id")) %></TD>-->
 			<TD class=ReportItem><%=StringUtils.nullToStr(map.get("product_name")) %>&nbsp;</TD>
 			<TD class=ReportItem><%=StringUtils.nullToStr(map.get("product_xh")) %>&nbsp;</TD>
@@ -105,7 +105,7 @@ if(productList != null && productList.size()>0){
 			<td class=ReportItemMoney><%=JMath.round(lsxj,2) %>&nbsp;</td>
 			<td class=ReportItemMoney><%=JMath.round(khcbj,2) %>&nbsp;</td>
 			<td class=ReportItemMoney><%=JMath.round(gf) %>&nbsp;</td>
-			<!--  <td class=ReportItemMoney><%=JMath.round(dss) %>&nbsp;</td>-->
+			<td class=ReportItemMoney><%=JMath.round(dss) %>&nbsp;</td>
 			<td class=ReportItem title="<%=StringUtils.nullToStr(map.get("ms"))%>"><%=ms%>&nbsp;</td>
 		</TR>
 <%
