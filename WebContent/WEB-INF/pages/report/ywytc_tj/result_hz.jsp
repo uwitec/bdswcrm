@@ -79,6 +79,8 @@ if(results != null && results.size()>0){
 		double blds = map.get("blds") == null?0:((Double)map.get("blds")).doubleValue();
 		double jeds = map.get("jeds") == null?0:((Double)map.get("jeds")).doubleValue();
 		double cxjl = map.get("cxjl") == null?0:((Double)map.get("cxjl")).doubleValue();
+		
+		if(cxjl < 0) cxjl = 0;
 		double total = jbtc + blds + jeds + cxjl;
 		
 		hj_jbtc += jbtc;
