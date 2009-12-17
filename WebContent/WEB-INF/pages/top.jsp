@@ -178,7 +178,7 @@ List funcList = menuService.getUserYwgnFunc(user_id);
 	}			
 </script>
 </head>
-<body onload="document.myform.kc_con.focus();init();getHasMsg();">
+<body onload="init();getHasMsg();">
 <form name="myform" action="queryKcMx.html" method="post" target="_blank">
 <div id="dropmenu1_a" class="menu_down">
 <a href="javascript:showWdMsg();"><span id="wdMsgTxt">未读消息</span></a>
