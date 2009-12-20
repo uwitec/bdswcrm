@@ -25,14 +25,14 @@ public class UserDAO extends JdbcBaseDAO {
 
 	
 	/**
-	 * 根据用户名及密码取用户信息
+	 * 根据用户名及密码取用户信息（当前有效的用户）
 	 * 用于登陆验证
 	 * @param user_name
 	 * @param password
 	 * @return
 	 */
 	public Object getUserByNameAndPass(String user_name,String password){
-		String sql = "select * from sys_user where is_sys_user='1' and user_name=? and password=?";
+		String sql = "select * from sys_user where is_sys_user='1' and is_del='0' and user_name=? and password=?";
 		
 		Object[] param = {user_name,password};
 		
@@ -57,7 +57,7 @@ public class UserDAO extends JdbcBaseDAO {
 	 */
 	public List getAllUserList(){		
 		//所有为业务员的员工信息
-		String sql = "select   user_id,real_name,china_py from sys_user where is_sys_user='0' and is_ywy='是'";
+		String sql = "select   user_id,real_name,china_py from sys_user where is_sys_user='0' and is_ywy='是' and is_del='0'";
 		return this.getJdbcTemplate().queryForList(sql);
 	}
 	
@@ -86,7 +86,7 @@ public class UserDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public List getYwryListByCon(String con){
-		String sql = "select * from sys_user where is_sys_user='0' and is_ywy='是'";
+		String sql = "select * from sys_user where is_sys_user='0' and is_ywy='是' and is_del='0'";
 		
 		if(!con.equals("")){
 			sql += con;
@@ -101,7 +101,7 @@ public class UserDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public List getAllEmployeeList(){
-		String sql = "select user_id,real_name from sys_user where is_sys_user='0'";
+		String sql = "select user_id,real_name from sys_user where is_sys_user='0' and is_del='0'";
 		return this.getResultList(sql);
 	}
 	
@@ -111,7 +111,7 @@ public class UserDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public List getAllSysUserList(){
-		String sql = "select * from sys_user where is_sys_user='1'";
+		String sql = "select * from sys_user where is_sys_user='1' and is_del='0'";
 		return this.getResultList(sql);
 	}
 	
@@ -120,7 +120,7 @@ public class UserDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public List getAllSysUserListObj(){
-		String sql = "select * from sys_user where is_sys_user='1'";
+		String sql = "select * from sys_user where is_sys_user='1' and is_del='0'";
 		return this.getResultList(sql,new SysUserRowMapper());
 	}
 	
@@ -131,7 +131,7 @@ public class UserDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public List getUserListByStr(String condition){
-		String sql = "select user_id,real_name from sys_user where is_sys_user='0' and is_ywy='是'";
+		String sql = "select user_id,real_name from sys_user where is_sys_user='0' and is_ywy='是' and is_del='0'";
 		
 		if(!condition.equals("") && !condition.equals("''")){
 			sql = sql + " and user_id in (" + condition + ")";
@@ -149,7 +149,7 @@ public class UserDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public Page getUserList(String con,int curPage, int rowsPerPage){
-		String sql = "select a.*,b.dept_name from sys_user a left join dept b on b.dept_id=a.dept where a.is_sys_user='1'";
+		String sql = "select a.*,b.dept_name from sys_user a left join dept b on b.dept_id=a.dept where a.is_sys_user='1' and a.is_del='0'";
 		
 		if(!con.equals("")){
 			sql = sql + con;
@@ -254,11 +254,12 @@ public class UserDAO extends JdbcBaseDAO {
 	
 	/**
 	 * 删除用户信息
+	 * 用户删除采用假删除方式实现
 	 * @param user_id
 	 */
 	public void delUser(String user_id){
-		String sql = "delete from sys_user where user_id='" + user_id + "'";
-		
+		//String sql = "delete from sys_user where user_id='" + user_id + "'";
+		String sql = "update sys_user set is_del='1' where user_id='" + user_id + "'";
 		this.getJdbcTemplate().update(sql);
 	}
 	
