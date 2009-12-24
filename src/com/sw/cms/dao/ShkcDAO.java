@@ -80,6 +80,16 @@ public class ShkcDAO extends JdbcBaseDAO
 		}
 		return this.getResultByPage(sql, curPage, rowsPerPage);
 	}
+	
+	public Page getShkcIsWaiProduct(String con,int curPage,int rowsPerPage)
+	{
+		String sql="select * from shkc where state='1'";
+		if(!con.equals(""))
+		{
+			sql=sql+con;
+		}
+		return this.getResultByPage(sql, curPage, rowsPerPage);
+	}
 	/**
 	 * 根据序列号查询维修库存
 	 * @param serialNum
@@ -112,6 +122,11 @@ public class ShkcDAO extends JdbcBaseDAO
 	   String sql="select count(*) from shkc where state='2' and qz_serial_num='"+serialNum+"'";
 	   return this.getJdbcTemplate().queryForInt(sql);
    }
+   public int getWeiShkcBySerialNum(String serialNum)
+   {
+	   String sql="select count(*) from shkc where state='1' and qz_serial_num='"+serialNum+"'";
+	   return this.getJdbcTemplate().queryForInt(sql);
+   }
    
    /**
     * 添加售后库存
@@ -142,6 +157,11 @@ public class ShkcDAO extends JdbcBaseDAO
    public void deleteShkcById(String serial_num)
    {
 	   String sql="delete from shkc where state='2' and qz_serial_num='"+serial_num+"'";
+	   this.getJdbcTemplate().update(sql);
+   }
+   public void deleteShkcWaiById(String serial_num)
+   {
+	   String sql="delete from shkc where state='1' and qz_serial_num='"+serial_num+"'";
 	   this.getJdbcTemplate().update(sql);
    }
    /**

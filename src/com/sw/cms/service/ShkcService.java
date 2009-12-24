@@ -36,6 +36,11 @@ public class ShkcService
     	return shkcDao.getShkcIsHaoProduct(con, curPage, rowsPerPage);
     }
     
+    public Page getShkcIsWaiProduct(String con,int curPage,int rowsPerPage)
+    {
+    	return shkcDao.getShkcIsWaiProduct(con, curPage, rowsPerPage);
+    }
+    
     public Page getShkcProduct(String con,int curPage,int rowsPerPage)
     {
     	return shkcDao.getShkcProduct(con, curPage, rowsPerPage);

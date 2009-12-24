@@ -2280,6 +2280,80 @@
         <action name="getYwytcMxResult" class="xstjXsryAction" method="getYwytcMxResult">
             <result name="success">/WEB-INF/pages/report/ywytc_tj/result_mx.jsp</result>
         </action>         
-                
+          <!-- 业务员提成汇总 -->  
+          
+         <!-- 移库出库 -->
+        <action name="listYkck" class="ykckAction" method="list">
+            <result name="success">/WEB-INF/pages/ykck/ykck_list.jsp</result>
+        </action>
+        <action name="addYkck" class="ykckAction" method="add">
+            <result name="success">/WEB-INF/pages/ykck/ykck_add.jsp</result>
+        </action>
+        <action name="saveYkck" class="ykckAction" method="save">
+            <result name="cancel" type="redirect">listYkck.html</result>
+            <result name="input">/WEB-INF/pages/ykck/ykck_add.jsp</result>
+            <result name="success">/WEB-INF/pages/ykck/msg.jsp</result>
+        </action>
+        <action name="editYkck" class="ykckAction" method="edit">
+            <result name="success">/WEB-INF/pages/ykck/ykck_edit.jsp</result>
+        </action>
+        <action name="updateYkck" class="ykckAction" method="update">
+            <result name="cancel" type="redirect">editYkck.html</result>
+            <result name="input">/WEB-INF/pages/ykck/ykck_edit.jsp</result>
+            <result name="success">/WEB-INF/pages/ykck/msg.jsp</result>
+        </action>
+        <action name="viewYkck" class="ykckAction" method="edit">
+            <result name="success">/WEB-INF/pages/ykck/ykck_view.jsp</result>
+        </action>
+        <action name="delYkck" class="ykckAction" method="del">
+            <result name="success" type="redirect">listYkck.html</result>
+        </action>
+        <action name="descYkck" class="ykckAction" method="descYkck">
+            <result name="success">/WEB-INF/pages/ykck/ykck_desc.jsp</result>
+        </action>
+        <action name="selSqr" class="kfdbAction" method="selSqr">
+            <result name="success">/WEB-INF/pages/kfdb/selSqr.jsp</result>
+        </action>
+        <action name="selYkckProc" class="lsdAction" method="selKcProc">
+            <result name="success">/WEB-INF/pages/ykck/selectKcProc.jsp</result>
+        </action>         
+        <!-- 移库出库 --> 
+          
+         <!-- 移库入库 -->
+        <action name="listYkrk" class="ykrkAction" method="list">
+            <result name="success">/WEB-INF/pages/ykrk/ykrk_list.jsp</result>
+        </action>
+        <action name="addYkrk" class="ykrkAction" method="add">
+            <result name="success">/WEB-INF/pages/ykrk/ykrk_add.jsp</result>
+        </action>
+        <action name="saveYkrk" class="ykrkAction" method="save">
+            <result name="cancel" type="redirect">listYkrk.html</result>
+            <result name="input">/WEB-INF/pages/ykrk/ykrk_add.jsp</result>
+            <result name="success">/WEB-INF/pages/ykrk/msg.jsp</result>
+        </action>
+        <action name="editYkrk" class="ykrkAction" method="edit">
+            <result name="success">/WEB-INF/pages/ykrk/ykrk_edit.jsp</result>
+        </action>
+        <action name="updateYkrk" class="ykrkAction" method="update">
+            <result name="cancel" type="redirect">editYkrk.html</result>
+            <result name="input">/WEB-INF/pages/ykrk/ykrk_edit.jsp</result>
+            <result name="success">/WEB-INF/pages/ykrk/msg.jsp</result>
+        </action>
+        <action name="viewYkrk" class="ykrkAction" method="edit">
+            <result name="success">/WEB-INF/pages/ykrk/ykrk_view.jsp</result>
+        </action>
+        <action name="delYkrk" class="ykrkAction" method="del">
+            <result name="success" type="redirect">listYkrk.html</result>
+        </action>
+        <action name="descYkrk" class="ykrkAction" method="descYkrk">
+            <result name="success">/WEB-INF/pages/ykrk/ykrk_desc.jsp</result>
+        </action>  
+         <action name="selShkcByzy" class="ykrkAction" method="selShkcByzy">
+            <result name="success">/WEB-INF/pages/ykrk/selectKcProc.jsp</result>
+        </action>
+        <action name="importYkrkSerial" class="lsdAction" method="importSerial">
+            <result name="success">/WEB-INF/pages/ykrk/importSerial.jsp</result>
+        </action>             
+        <!-- 移库入库 -->
     </package>
 </xwork>

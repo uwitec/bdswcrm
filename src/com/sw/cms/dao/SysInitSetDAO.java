@@ -210,6 +210,10 @@ public class SysInitSetDAO extends JdbcBaseDAO {
 		sqls[89] = "delete from  pgd";                //派工单	
 		sqls[89] = "delete from  wxcld";                //维修处理单
 		sqls[89] = "delete from  wxcld_product";        //维修处理单商品
+		sqls[90] = "delete from  ykrk";
+		sqls[91] = "delete from  ykrk_product";
+		sqls[92] = "delete from  ykck";
+		sqls[93] = "delete from  ykck_product";
 	    
 		
 		
