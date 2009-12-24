@@ -486,6 +486,16 @@
      <bean id="klHzReportDao" class="com.sw.cms.dao.KlHzReportDAO">
           <property name="jdbcTemplate" ref="jdbcTemplate"/>
      </bean>
+     
+     <!-- 移库出库 -->
+     <bean id="ykckDao" class="com.sw.cms.dao.YkckDAO">
+          <property name="jdbcTemplate" ref="jdbcTemplate"/>
+     </bean>
+     
+       <!-- 移库入库 -->
+     <bean id="ykrkDao" class="com.sw.cms.dao.YkrkDAO">
+          <property name="jdbcTemplate" ref="jdbcTemplate"/>
+     </bean>
       
 </beans>
 

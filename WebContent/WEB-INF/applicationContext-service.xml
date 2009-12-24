@@ -631,7 +631,20 @@
         <property name="target">
            <bean class="com.sw.cms.service.KlHzReportService" autowire="byName"/> 
         </property>
-    </bean>          
+    </bean>  
+    
+         <!-- 移库出库 -->
+    <bean id="ykckService" parent="baseTransaction">
+        <property name="target">
+           <bean class="com.sw.cms.service.YkckService" autowire="byName"/> 
+        </property>
+    </bean> 
+          <!-- 移库入库 -->
+    <bean id="ykrkService" parent="baseTransaction">
+        <property name="target">
+           <bean class="com.sw.cms.service.YkrkService" autowire="byName"/> 
+        </property>
+    </bean>             
 </beans>
 
 

@@ -166,4 +166,7 @@
 
      <bean id="klHzReportAction" class="com.sw.cms.action.KlHzReportAction" autowire="byName" scope="prototype"/>
      
+     <bean id="ykckAction" class="com.sw.cms.action.YkckAction" autowire="byName" scope="prototype"/>
+    
+     <bean id="ykrkAction" class="com.sw.cms.action.YkrkAction" autowire="byName" scope="prototype"/>
 </beans>
