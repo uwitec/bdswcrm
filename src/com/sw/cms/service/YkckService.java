@@ -92,13 +92,13 @@ public Page getYkckList(String con,int curPage, int rowsPerPage){
 									    shSerialNumFlow.setRk_date(DateComFunc.getToday());
 									    shSerialNumFlow.setYw_dj_id(ykck.getId());
 									    shSerialNumFlow.setYw_url("viewYkck.html?id=");
-									    shSerialNumFlow.setYwtype("换件");
+									    shSerialNumFlow.setYwtype("移库出库");
 									    shSerialNumFlowDao.saveShSerialNumFlow(shSerialNumFlow);
 									  }
 								   }
 								   else
 								   {
-									   shkc=new Shkc();//售后库存
+									    shkc=new Shkc();//售后库存
 									    shkc.setProduct_id(ykckProduct.getProduct_id());
 									    shkc.setProduct_name(ykckProduct.getProduct_name());
 									    shkc.setProduct_xh(ykckProduct.getProduct_xh());
@@ -117,7 +117,7 @@ public Page getYkckList(String con,int curPage, int rowsPerPage){
 									    shSerialNumFlow.setRk_date(DateComFunc.getToday());
 									    shSerialNumFlow.setYw_dj_id(ykck.getId());
 									    shSerialNumFlow.setYw_url("viewYkck.html?id=");
-									    shSerialNumFlow.setYwtype("换件");
+									    shSerialNumFlow.setYwtype("移库出库");
 									    shSerialNumFlowDao.saveShSerialNumFlow(shSerialNumFlow);
 								   }
 							   }
@@ -142,7 +142,7 @@ public Page getYkckList(String con,int curPage, int rowsPerPage){
 			   int count=shkcDao.getShkcBySerialNum(serialNumStr[i]);
 			   if(count>0)
 			   {
-				   message="提交的接件单产品序列号已在售后库存中拥有，请检查！";
+				   message="提交的移库出库单产品序列号已在售后库存中拥有，请检查！";
 				   break;
 			   }
 			}
