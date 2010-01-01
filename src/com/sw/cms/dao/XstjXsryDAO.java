@@ -288,9 +288,9 @@ public class XstjXsryDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public List getYwytcHz(String start_date,String end_date,String dept_id,String user_id){
-		String sql = "select dept,xsry,real_name,sum((bhsje-khcb)*basic_ratio/100) as jbtc," +
-				"sum((bhsje-khcb)*gf/100) as blds, sum(ds) as jeds," +
-				"sum((bhsje-lsxj)*out_ratio/100) as cxjl from view_hpxshz_tj where real_name<>''";
+		String sql = "select yw_type,product_id,dept,xsry,real_name," +
+		"(bhsje-khcb)*basic_ratio/100 as jbtc,(bhsje-khcb)*gf/100 as blds,ds as jeds," +
+		"(bhsje-lsxj)*out_ratio/100 as cxjl from view_hpxshz_tj where 1=1";
 		
 		if(!start_date.equals("")){
 			sql += " and cz_date>='" + start_date + "'";
@@ -305,7 +305,8 @@ public class XstjXsryDAO extends JdbcBaseDAO {
 			sql += " and xsry='" + user_id + "'";
 		}
 		
-		sql += " group by dept,xsry,real_name";
+		sql += " order by dept,xsry";
+		
 		return this.getResultList(sql);
 	}
 	

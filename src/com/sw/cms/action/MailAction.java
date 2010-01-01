@@ -82,7 +82,7 @@ public class MailAction extends BaseAction {
 			String[] files = null;   //附件组，已上传到服务器
 			
 			//获取当前的绝对路径
-			String filePath = ServletActionContext.getServletContext().getRealPath("\\");			
+			String filePath = ServletActionContext.getServletContext().getRealPath("/");			
 			if(suffixFileName != null && suffixFileName.length>0){
 				files = new String[suffixFileName.length];
 				for(int i=0;i<suffixFileName.length;i++){
