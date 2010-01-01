@@ -98,7 +98,21 @@ if(results != null && results.size()>0){
 		double blds = map.get("blds") == null?0:((Double)map.get("blds")).doubleValue();
 		double jeds = map.get("jeds") == null?0:((Double)map.get("jeds")).doubleValue();
 		double cxjl = map.get("cxjl") == null?0:((Double)map.get("cxjl")).doubleValue();
-		if(cxjl < 0) cxjl = 0;
+		
+		
+		//如果是退货单    超限奖励大于时取0，比例点杀大于0时取0
+		//其它单据零售单、销售订单，   超限奖励小于0时取0，比例点杀小于0时取0
+		
+		if(strYwtype.equals("退货单")){
+			if(cxjl > 0) cxjl = 0;
+			if(blds > 0) blds = 0;
+		}else{
+			if(cxjl < 0) cxjl = 0;
+			if(blds < 0) blds = 0;
+		}
+		
+		
+		
 		double total = jbtc + blds + jeds + cxjl;
 		
 		hj_nums += nums;

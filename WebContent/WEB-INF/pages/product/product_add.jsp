@@ -134,7 +134,7 @@ String[] jldw = (String[])VS.findValue("jldw");
 				<option value="否">否</option>
 				<option value="是">是</option>
 			</select>
-		</td>				
+		</td>
 	</tr>
 	<tr>
 		<td class="a1" width="15%">商品条形码</td>

@@ -50,7 +50,7 @@ String sp_state = StringUtils.nullToStr(lsd.getSp_state());
 	var allCount = <%=counts %>;
 	var iscs_flag = '<%=iscs_flag %>';
 		
-	function saveInfo(){
+	function saveInfo(){ 
 	 
 		if(document.getElementById("fzr").value == ""){
 			alert("经手人不能为空，请选择！");

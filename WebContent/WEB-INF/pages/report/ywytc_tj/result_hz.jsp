@@ -72,15 +72,40 @@ if(results != null && results.size()>0){
 	double hj_cxjl = 0;
 	double hj_total = 0;
 	
+	double temp_jbtc = 0;
+	double temp_blds = 0;
+	double temp_jeds = 0;
+	double temp_cxjl = 0;
+	double temp_total = 0;
+	
+	Map tempMap = (Map)results.get(0);
+	String temp_xsry = StringUtils.nullToStr(tempMap.get("xsry"));  //默认第一个销售人员
+	String temp_real_name = StringUtils.nullToStr(tempMap.get("real_name"));  //默认第一个销售人员
+	String temp_dept = StringUtils.nullToStr(tempMap.get("dept"));
+	
 	for(int i=0;i<results.size();i++){
 		Map map = (Map)results.get(i);
 		
-		double jbtc = map.get("jbtc") == null?0:((Double)map.get("jbtc")).doubleValue();
-		double blds = map.get("blds") == null?0:((Double)map.get("blds")).doubleValue();
-		double jeds = map.get("jeds") == null?0:((Double)map.get("jeds")).doubleValue();
-		double cxjl = map.get("cxjl") == null?0:((Double)map.get("cxjl")).doubleValue();
+		String xsry = StringUtils.nullToStr(map.get("xsry"));
+		String real_name = StringUtils.nullToStr(map.get("real_name"));
+		String dept = StringUtils.nullToStr(map.get("dept"));
 		
-		if(cxjl < 0) cxjl = 0;
+		double jbtc = map.get("jbtc") == null?0:((Double)map.get("jbtc")).doubleValue();   //基本提成
+		double blds = map.get("blds") == null?0:((Double)map.get("blds")).doubleValue();   //比例点杀
+		double jeds = map.get("jeds") == null?0:((Double)map.get("jeds")).doubleValue();   //金额点杀
+		double cxjl = map.get("cxjl") == null?0:((Double)map.get("cxjl")).doubleValue();   //超限奖励
+		String strYwtype = StringUtils.nullToStr(map.get("yw_type"));
+		
+		//如果是退货单    超限奖励大于时取0，比例点杀大于0时取0
+		//其它单据零售单、销售订单，   超限奖励小于0时取0，比例点杀小于0时取0
+		if(strYwtype.equals("退货单")){
+			if(cxjl > 0) cxjl = 0;
+			if(blds > 0) blds = 0;
+		}else{
+			if(cxjl < 0) cxjl = 0;
+			if(blds < 0) blds = 0;
+		}
+		
 		double total = jbtc + blds + jeds + cxjl;
 		
 		hj_jbtc += jbtc;
@@ -88,19 +113,38 @@ if(results != null && results.size()>0){
 		hj_jeds += jeds;
 		hj_cxjl += cxjl;
 		hj_total += total;
-
-%>	
+		
+		
+		temp_jbtc += jbtc;
+		temp_blds += blds;
+		temp_jeds += jeds;
+		temp_cxjl += cxjl;
+		temp_total += total;
+		
+		if(xsry.equals(temp_xsry) && i != results.size()-1){			
+			continue;
+		}
+%>
 		<TR>
-			<TD class=ReportItemXH><%=StaticParamDo.getDeptNameById((String)map.get("dept")) %>&nbsp;</TD>
+			<TD class=ReportItemXH><%=StaticParamDo.getDeptNameById(temp_dept) %>&nbsp;</TD>
 			<TD class=ReportItemXH>
-				<a href="getYwytcMxResult.html?start_date=<%=start_date %>&end_date=<%=end_date %>&user_id=<%=StringUtils.nullToStr(map.get("xsry")) %>"><%=StringUtils.nullToStr(map.get("real_name")) %></a>&nbsp;</TD>
-			<TD class=ReportItemMoney><%=JMath.round(jbtc,2) %>&nbsp;</TD>
-			<TD class=ReportItemMoney><%=JMath.round(blds,2) %>&nbsp;</TD>
-			<TD class=ReportItemMoney><%=JMath.round(jeds,2) %>&nbsp;</TD>
-			<TD class=ReportItemMoney><%=JMath.round(cxjl,2) %>&nbsp;</TD>
-			<TD class=ReportItemMoney><%=JMath.round(total,2) %>&nbsp;</TD>
+				<a href="getYwytcMxResult.html?start_date=<%=start_date %>&end_date=<%=end_date %>&user_id=<%=temp_xsry %>"><%=temp_real_name %></a>&nbsp;</TD>
+			<TD class=ReportItemMoney><%=JMath.round(temp_jbtc-jbtc,2) %>&nbsp;</TD>
+			<TD class=ReportItemMoney><%=JMath.round(temp_blds-blds,2) %>&nbsp;</TD>
+			<TD class=ReportItemMoney><%=JMath.round(temp_jeds-jeds,2) %>&nbsp;</TD>
+			<TD class=ReportItemMoney><%=JMath.round(temp_cxjl-cxjl,2) %>&nbsp;</TD>
+			<TD class=ReportItemMoney><%=JMath.round(temp_total-total,2) %>&nbsp;</TD>
 		</TR>
-<%
+<%	
+		temp_jbtc = jbtc;
+		temp_blds = blds;
+		temp_jeds = jeds;
+		temp_cxjl = cxjl;
+		temp_total = total;
+		temp_xsry = xsry;
+		temp_real_name = real_name;
+		temp_dept = dept;
+
 	}
 %>
 		<TR>
