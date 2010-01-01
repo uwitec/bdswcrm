@@ -12,6 +12,8 @@ import com.sw.cms.dao.base.SqlUtil;
 import com.sw.cms.model.Page;
 import com.sw.cms.model.SerialNumFlow;
 import com.sw.cms.model.SerialNumMng;
+import com.sw.cms.model.Ykrk;
+import com.sw.cms.model.YkrkProduct;
 import com.sw.cms.util.StaticParamDo;
 
 /**
@@ -82,6 +84,17 @@ public class SerialNumDAO extends JdbcBaseDAO {
 		params[6] = serialNumMng.getSerial_num();
 
 		
+		this.getJdbcTemplate().update(sql,params);
+	}
+	
+	public void updateSerialNumStateDOA(Ykrk ykrk,YkrkProduct ykrkProduct)
+	{
+		String sql="update serial_num_mng set state=?,store_id=?,serial_num=? where serial_num=?";
+		Object[] params = new Object[4];
+		params[0] = "ÔÚ¿â";
+		params[1] = ykrk.getRk_store_id();
+		params[2] = ykrkProduct.getNqz_serial_num();
+		params[3] = ykrkProduct.getOqz_serial_num();
 		this.getJdbcTemplate().update(sql,params);
 	}
 	

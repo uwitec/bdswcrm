@@ -3,12 +3,15 @@ package com.sw.cms.service;
 import java.util.List;
 
 import com.sw.cms.dao.ProductKcDAO;
+import com.sw.cms.dao.SerialNumDAO;
 import com.sw.cms.dao.ShSerialNumFlowDAO;
 import com.sw.cms.dao.ShkcDAO;
 import com.sw.cms.dao.YkckDAO;
 import com.sw.cms.dao.YkrkDAO;
 import com.sw.cms.model.FhkhdProduct;
 import com.sw.cms.model.Page;
+import com.sw.cms.model.SerialNumFlow;
+import com.sw.cms.model.SerialNumMng;
 import com.sw.cms.model.ShSerialNumFlow;
 import com.sw.cms.model.Shkc;
 import com.sw.cms.model.Ykck;
@@ -16,6 +19,7 @@ import com.sw.cms.model.YkckProduct;
 import com.sw.cms.model.Ykrk;
 import com.sw.cms.model.YkrkProduct;
 import com.sw.cms.util.DateComFunc;
+import com.sw.cms.util.StaticParamDo;
 
 public class YkrkService 
 {
@@ -23,6 +27,7 @@ public class YkrkService
 	  private ProductKcDAO productKcDao;
 	  private ShSerialNumFlowDAO shSerialNumFlowDao;
 	  private ShkcDAO shkcDao;
+	  private SerialNumDAO serialNumDao;
 	  
 	  public ProductKcDAO getProductKcDao() {
 		return productKcDao;
@@ -50,8 +55,7 @@ public class YkrkService
 			ykrkDao.saveYkrk(ykrk, ykrkProducts);
 			
 			if(ykrk.getState().equals("已提交")){ //改变库存值
-				//this.updateKc(ykck, ykckProducts);
-				//this.updateSerialNum(ykck, ykckProducts); //处理序列号
+				 
 				 
 				 	if(ykrkProducts!=null&&ykrkProducts.size()>0)
 					   {
@@ -63,7 +67,9 @@ public class YkrkService
 								   if(!ykrkProduct.getProduct_name().equals(""))
 								   {									   
 									        shkcDao.deleteShkcWaiById(ykrkProduct.getOqz_serial_num());
-									        ShSerialNumFlow shSerialNumFlow=new ShSerialNumFlow();																		  										 										    
+									        ShSerialNumFlow shSerialNumFlow=new ShSerialNumFlow();	
+									        SerialNumMng serialNumMng = new SerialNumMng();
+											SerialNumFlow serialNumFlow = new SerialNumFlow();
 										    shSerialNumFlow=new ShSerialNumFlow();//序列号流转记录										     
 										    shSerialNumFlow.setCj_date(DateComFunc.getToday());
 										    shSerialNumFlow.setFs_date(ykrk.getRk_date());
@@ -73,7 +79,23 @@ public class YkrkService
 										    shSerialNumFlow.setYw_dj_id(ykrk.getId());
 										    shSerialNumFlow.setYw_url("viewYkrk.html?id=");
 										    shSerialNumFlow.setYwtype("移库入库");
-										    shSerialNumFlowDao.saveShSerialNumFlow(shSerialNumFlow);									   
+										    shSerialNumFlowDao.saveShSerialNumFlow(shSerialNumFlow);	
+										    
+								 										
+											serialNumDao.updateSerialNumStateDOA(ykrk,ykrkProduct); //更新序列号状态
+											productKcDao.updateProductKcDOA(ykrk,ykrkProduct);
+											 
+											serialNumFlow.setCzr(ykrk.getCzr());											
+											serialNumFlow.setYwtype("移库入库");											
+											serialNumFlow.setFs_date(ykrk.getRk_date());
+											serialNumFlow.setJsr(StaticParamDo.getRealNameById(ykrk.getJsr()));
+											serialNumFlow.setKf_dj_id(ykrk.getRk_store_id());
+											serialNumFlow.setSerial_num(ykrkProduct.getNqz_serial_num());
+											serialNumFlow.setYw_dj_id(ykrk.getId());
+											serialNumFlow.setYw_url("viewYkrk.html?id=");								
+											serialNumDao.saveSerialFlow(serialNumFlow);  //保存序列号流转过程
+											
+											 
 								   }
 								   
 							   }
@@ -134,6 +156,8 @@ public class YkrkService
 							   if(!ykrkProduct.getProduct_name().equals(""))
 							   {									   
 								        shkcDao.deleteShkcWaiById(ykrkProduct.getOqz_serial_num());
+								        SerialNumMng serialNumMng = new SerialNumMng();
+										SerialNumFlow serialNumFlow = new SerialNumFlow();
 								        ShSerialNumFlow shSerialNumFlow=new ShSerialNumFlow();																		  										 										    
 									    shSerialNumFlow=new ShSerialNumFlow();//序列号流转记录										     
 									    shSerialNumFlow.setCj_date(DateComFunc.getToday());
@@ -144,7 +168,20 @@ public class YkrkService
 									    shSerialNumFlow.setYw_dj_id(ykrk.getId());
 									    shSerialNumFlow.setYw_url("viewYkrk.html?id=");
 									    shSerialNumFlow.setYwtype("移库入库");
-									    shSerialNumFlowDao.saveShSerialNumFlow(shSerialNumFlow);									   
+									    shSerialNumFlowDao.saveShSerialNumFlow(shSerialNumFlow);	
+									    
+										serialNumDao.updateSerialNumStateDOA(ykrk,ykrkProduct); //更新序列号状态
+										productKcDao.updateProductKcDOA(ykrk,ykrkProduct);
+										 
+										serialNumFlow.setCzr(ykrk.getCzr());											
+										serialNumFlow.setYwtype("移库入库");											
+										serialNumFlow.setFs_date(ykrk.getRk_date());
+										serialNumFlow.setJsr(StaticParamDo.getRealNameById(ykrk.getJsr()));
+										serialNumFlow.setKf_dj_id(ykrk.getRk_store_id());
+										serialNumFlow.setSerial_num(ykrkProduct.getNqz_serial_num());
+										serialNumFlow.setYw_dj_id(ykrk.getId());
+										serialNumFlow.setYw_url("viewYkrk.html?id=");								
+										serialNumDao.saveSerialFlow(serialNumFlow);  //保存序列号流转过程
 							   }
 							   
 						   }
@@ -193,5 +230,13 @@ public class YkrkService
 
 	public void setShkcDao(ShkcDAO shkcDao) {
 		this.shkcDao = shkcDao;
+	}
+
+	public SerialNumDAO getSerialNumDao() {
+		return serialNumDao;
+	}
+
+	public void setSerialNumDao(SerialNumDAO serialNumDao) {
+		this.serialNumDao = serialNumDao;
 	}
 }

@@ -15,6 +15,8 @@ import com.sw.cms.model.Product;
 import com.sw.cms.model.ProductKc;
 import com.sw.cms.model.Rkd;
 import com.sw.cms.model.RkdProduct;
+import com.sw.cms.model.Ykrk;
+import com.sw.cms.model.YkrkProduct;
 import com.sw.cms.util.StringUtils;
 
 public class ProductKcDAO extends JdbcBaseDAO {
@@ -293,6 +295,29 @@ public class ProductKcDAO extends JdbcBaseDAO {
 		}
 	}
 	
+	
+	public void updateProductKcDOA(Ykrk ykrk,YkrkProduct ykrkProduct)
+	{
+	    String	sql = "select  count(*) as allcount from product_kc where product_id='" +ykrkProduct.getProduct_id()  + "' and store_id='" + ykrk.getRk_store_id() + "'";				
+		int counts = this.getJdbcTemplate().queryForInt(sql);
+		
+		if(counts > 0){ 
+			// 该仓库中有该产品，需更新库存数量
+			sql = "update product_kc set nums=nums+1 where product_id='" + ykrkProduct.getProduct_id() + "' and store_id='" + ykrk.getRk_store_id() + "'";
+			this.getJdbcTemplate().update(sql);
+			
+		}else{   
+			//库存中没有该产品，添加即可
+			sql = "insert into product_kc(store_id,product_id,nums) values(?,?,?)";
+			Object[] param = new Object[3];
+		
+			param[0] =ykrk.getRk_store_id();
+			param[1] = ykrkProduct.getProduct_id();
+			param[2] = new Integer(1);
+			
+			this.getJdbcTemplate().update(sql,param);
+		}
+	}
 	
 	/**
 	 * 取商品最后一次入库时的成本价

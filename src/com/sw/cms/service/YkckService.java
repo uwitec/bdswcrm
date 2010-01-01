@@ -3,6 +3,7 @@ package com.sw.cms.service;
 import java.util.List;
 
 import com.sw.cms.dao.ProductKcDAO;
+import com.sw.cms.dao.SerialNumDAO;
 import com.sw.cms.dao.ShSerialNumFlowDAO;
 import com.sw.cms.dao.ShkcDAO;
 import com.sw.cms.dao.YkckDAO;
@@ -10,12 +11,16 @@ import com.sw.cms.model.Jjd;
 import com.sw.cms.model.JjdProduct;
 import com.sw.cms.model.Kfdb;
 import com.sw.cms.model.KfdbProduct;
+import com.sw.cms.model.LsdProduct;
 import com.sw.cms.model.Page;
+import com.sw.cms.model.SerialNumFlow;
+import com.sw.cms.model.SerialNumMng;
 import com.sw.cms.model.ShSerialNumFlow;
 import com.sw.cms.model.Shkc;
 import com.sw.cms.model.Ykck;
 import com.sw.cms.model.YkckProduct;
 import com.sw.cms.util.DateComFunc;
+import com.sw.cms.util.StaticParamDo;
 
 public class YkckService 
 {
@@ -23,6 +28,7 @@ public class YkckService
   private ProductKcDAO productKcDao;
   private ShSerialNumFlowDAO shSerialNumFlowDao;
   private ShkcDAO shkcDao;
+  private SerialNumDAO serialNumDao;
   
   public ProductKcDAO getProductKcDao() {
 	return productKcDao;
@@ -67,23 +73,45 @@ public Page getYkckList(String con,int curPage, int rowsPerPage){
 								  
 								   Shkc shkc=new Shkc();
 								   ShSerialNumFlow shSerialNumFlow=new ShSerialNumFlow();
+								   SerialNumMng serialNumMng = new SerialNumMng();
+								   SerialNumFlow serialNumFlow = new SerialNumFlow();
 								   if(count>0)
 								   {
 									  String serialStr[]=ykckProduct.getQz_serial_num().split(",");
 									  
 									  for(int j=0;j<count;j++)
 									  {
+										serialNumMng=new  SerialNumMng();
+									    serialNumMng.setProduct_id(ykckProduct.getProduct_id());
+										serialNumMng.setProduct_name(ykckProduct.getProduct_name());
+										serialNumMng.setProduct_xh(ykckProduct.getProduct_xh());
+										serialNumMng.setSerial_num(serialStr[j]);
+										serialNumMng.setState("DOA");
+										serialNumMng.setStore_id("");
+										serialNumMng.setYj_flag("0");
+										serialNumDao.updateSerialNumState(serialNumMng); //更新序列号状态
+										
+										serialNumFlow=new  SerialNumFlow();
+										serialNumFlow.setCzr(ykck.getCzr());
+										serialNumFlow.setYwtype("移库出库");
+										serialNumFlow.setFs_date(ykck.getCk_date());
+										serialNumFlow.setJsr(StaticParamDo.getRealNameById(ykck.getJsr()));
+										serialNumFlow.setKf_dj_id(ykck.getCk_store_id());
+										serialNumFlow.setSerial_num(serialStr[j]);										 
+										serialNumFlow.setYw_dj_id(ykck.getId());
+										serialNumFlow.setYw_url("viewYkck.html?id=");										
+										serialNumDao.saveSerialFlow(serialNumFlow);//序列号流转
+										
 										shkc=new Shkc();//售后库存
 									    shkc.setProduct_id(ykckProduct.getProduct_id());
 									    shkc.setProduct_name(ykckProduct.getProduct_name());
 									    shkc.setProduct_xh(ykckProduct.getProduct_xh());
 									    shkc.setQz_serial_num(serialStr[j]);
 									    shkc.setRemark(ykckProduct.getProduct_remark());
-									    shkc.setState("1");
-									    
+									    shkc.setState("1");									    
 									    shkcDao.saveShkc(shkc);
-									    shSerialNumFlow=new ShSerialNumFlow();//序列号流转记录
-									     
+									    
+									    shSerialNumFlow=new ShSerialNumFlow();//序列号流转记录									     
 									    shSerialNumFlow.setCj_date(DateComFunc.getToday());
 									    shSerialNumFlow.setFs_date(ykck.getCk_date());
 									    shSerialNumFlow.setJsr(ykck.getJsr());
@@ -98,6 +126,27 @@ public Page getYkckList(String con,int curPage, int rowsPerPage){
 								   }
 								   else
 								   {
+									    serialNumMng=new  SerialNumMng();
+									    serialNumMng.setProduct_id(ykckProduct.getProduct_id());
+										serialNumMng.setProduct_name(ykckProduct.getProduct_name());
+										serialNumMng.setProduct_xh(ykckProduct.getProduct_xh());
+										serialNumMng.setSerial_num(ykckProduct.getQz_serial_num());
+										serialNumMng.setState("DOA");
+										serialNumMng.setStore_id("");
+										serialNumMng.setYj_flag("0");
+										serialNumDao.updateSerialNumState(serialNumMng); //更新序列号状态
+										
+										serialNumFlow=new  SerialNumFlow();
+										serialNumFlow.setCzr(ykck.getCzr());
+										serialNumFlow.setYwtype("移库出库");
+										serialNumFlow.setFs_date(ykck.getCk_date());
+										serialNumFlow.setJsr(StaticParamDo.getRealNameById(ykck.getJsr()));
+										serialNumFlow.setKf_dj_id(ykck.getCk_store_id());
+										serialNumFlow.setSerial_num(ykckProduct.getQz_serial_num());										 
+										serialNumFlow.setYw_dj_id(ykck.getId());
+										serialNumFlow.setYw_url("viewYkck.html?id=");										
+										serialNumDao.saveSerialFlow(serialNumFlow);
+									   
 									    shkc=new Shkc();//售后库存
 									    shkc.setProduct_id(ykckProduct.getProduct_id());
 									    shkc.setProduct_name(ykckProduct.getProduct_name());
@@ -107,8 +156,7 @@ public Page getYkckList(String con,int curPage, int rowsPerPage){
 									    shkc.setState("1");
 									    
 									    shkcDao.saveShkc(shkc);
-									    shSerialNumFlow=new ShSerialNumFlow();//序列号流转记录
-									     
+									    shSerialNumFlow=new ShSerialNumFlow();//序列号流转记录									     
 									    shSerialNumFlow.setCj_date(DateComFunc.getToday());
 									    shSerialNumFlow.setFs_date(ykck.getCk_date());
 									    shSerialNumFlow.setJsr(ykck.getJsr());
@@ -124,9 +172,22 @@ public Page getYkckList(String con,int curPage, int rowsPerPage){
 							   
 						   }
 					   }
+					   this.updateProductKc(ykck,ykckProducts);   
 				   }
 			}
 		 
+	}
+	
+	public void updateProductKc(Ykck ykck,List ykckProducts)
+	{
+		for(int i=0;i<ykckProducts.size();i++){
+			YkckProduct ykckProduct = (YkckProduct)ykckProducts.get(i);
+			if(ykckProduct != null){
+				if(!ykckProduct.getProduct_id().equals("") && !ykckProduct.getProduct_name().equals("")){
+					productKcDao.updateProductKc(ykck.getCk_store_id(), ykckProduct.getProduct_id(), ykckProduct.getNums());
+				}
+			}
+		}
 	}
 	
 	public String isSerialNumInKcExist(List ykckProduct)
@@ -238,12 +299,34 @@ public Page getYkckList(String con,int curPage, int rowsPerPage){
 									  
 									   Shkc shkc=new Shkc();
 									   ShSerialNumFlow shSerialNumFlow=new ShSerialNumFlow();
+									   SerialNumMng serialNumMng = new SerialNumMng();
+									   SerialNumFlow serialNumFlow = new SerialNumFlow();
 									   if(count>0)
 									   {
 										  String serialStr[]=ykckProduct.getQz_serial_num().split(",");
 										  
 										  for(int j=0;j<count;j++)
 										  {
+											  serialNumMng=new  SerialNumMng();
+											    serialNumMng.setProduct_id(ykckProduct.getProduct_id());
+												serialNumMng.setProduct_name(ykckProduct.getProduct_name());
+												serialNumMng.setProduct_xh(ykckProduct.getProduct_xh());
+												serialNumMng.setSerial_num(serialStr[j]);
+												serialNumMng.setState("DOA");
+												serialNumMng.setStore_id("");
+												serialNumMng.setYj_flag("0");
+												serialNumDao.updateSerialNumState(serialNumMng); //更新序列号状态
+												
+												serialNumFlow=new  SerialNumFlow();
+												serialNumFlow.setCzr(ykck.getCzr());
+												serialNumFlow.setYwtype("移库出库");
+												serialNumFlow.setFs_date(ykck.getCk_date());
+												serialNumFlow.setJsr(StaticParamDo.getRealNameById(ykck.getJsr()));
+												serialNumFlow.setKf_dj_id(ykck.getCk_store_id());
+												serialNumFlow.setSerial_num(serialStr[j]);										 
+												serialNumFlow.setYw_dj_id(ykck.getId());
+												serialNumFlow.setYw_url("viewYkck.html?id=");										
+												serialNumDao.saveSerialFlow(serialNumFlow);//序列号流转
 											shkc=new Shkc();//售后库存
 										    shkc.setProduct_id(ykckProduct.getProduct_id());
 										    shkc.setProduct_name(ykckProduct.getProduct_name());
@@ -269,6 +352,26 @@ public Page getYkckList(String con,int curPage, int rowsPerPage){
 									   }
 									   else
 									   {
+										   serialNumMng=new  SerialNumMng();
+										    serialNumMng.setProduct_id(ykckProduct.getProduct_id());
+											serialNumMng.setProduct_name(ykckProduct.getProduct_name());
+											serialNumMng.setProduct_xh(ykckProduct.getProduct_xh());
+											serialNumMng.setSerial_num(ykckProduct.getQz_serial_num());
+											serialNumMng.setState("DOA");
+											serialNumMng.setStore_id("");
+											serialNumMng.setYj_flag("0");
+											serialNumDao.updateSerialNumState(serialNumMng); //更新序列号状态
+											
+											serialNumFlow=new  SerialNumFlow();
+											serialNumFlow.setCzr(ykck.getCzr());
+											serialNumFlow.setYwtype("移库出库");
+											serialNumFlow.setFs_date(ykck.getCk_date());
+											serialNumFlow.setJsr(StaticParamDo.getRealNameById(ykck.getJsr()));
+											serialNumFlow.setKf_dj_id(ykck.getCk_store_id());
+											serialNumFlow.setSerial_num(ykckProduct.getQz_serial_num());										 
+											serialNumFlow.setYw_dj_id(ykck.getId());
+											serialNumFlow.setYw_url("viewYkck.html?id=");										
+											serialNumDao.saveSerialFlow(serialNumFlow);
 										   shkc=new Shkc();//售后库存
 										    shkc.setProduct_id(ykckProduct.getProduct_id());
 										    shkc.setProduct_name(ykckProduct.getProduct_name());
@@ -345,5 +448,13 @@ public ShkcDAO getShkcDao() {
 
 public void setShkcDao(ShkcDAO shkcDao) {
 	this.shkcDao = shkcDao;
+}
+
+public SerialNumDAO getSerialNumDao() {
+	return serialNumDao;
+}
+
+public void setSerialNumDao(SerialNumDAO serialNumDao) {
+	this.serialNumDao = serialNumDao;
 }
 }
