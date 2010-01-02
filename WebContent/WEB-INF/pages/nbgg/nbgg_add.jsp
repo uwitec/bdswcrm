@@ -8,7 +8,7 @@
 <script language="JavaScript" src="js/Check.js"></script>
 <script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
 <script type="text/javascript" src="xhEditor/jquery/jquery-1.3.2.min.js"></script>
-<script type="text/javascript" src="xhEditor/xheditor.js"></script>
+<script type="text/javascript" charset="UTF-8"  src="xhEditor/xheditor.js"></script>
 <script type="text/javascript">
 	$(pageInit);
 	function pageInit(){

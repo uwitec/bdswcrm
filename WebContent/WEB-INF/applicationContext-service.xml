@@ -644,7 +644,14 @@
         <property name="target">
            <bean class="com.sw.cms.service.YkrkService" autowire="byName"/> 
         </property>
-    </bean>             
+    </bean>
+    
+    <!-- 拆卸单 -->
+    <bean id="cxdService" parent="baseTransaction">
+        <property name="target">
+           <bean class="com.sw.cms.service.CxdService" autowire="byName"/> 
+        </property>
+    </bean>
 </beans>
 
 

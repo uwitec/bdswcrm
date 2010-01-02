@@ -129,11 +129,11 @@ if(results != null && results.size()>0){
 			<TD class=ReportItemXH><%=StaticParamDo.getDeptNameById(temp_dept) %>&nbsp;</TD>
 			<TD class=ReportItemXH>
 				<a href="getYwytcMxResult.html?start_date=<%=start_date %>&end_date=<%=end_date %>&user_id=<%=temp_xsry %>"><%=temp_real_name %></a>&nbsp;</TD>
-			<TD class=ReportItemMoney><%=JMath.round(temp_jbtc-jbtc,2) %>&nbsp;</TD>
-			<TD class=ReportItemMoney><%=JMath.round(temp_blds-blds,2) %>&nbsp;</TD>
-			<TD class=ReportItemMoney><%=JMath.round(temp_jeds-jeds,2) %>&nbsp;</TD>
-			<TD class=ReportItemMoney><%=JMath.round(temp_cxjl-cxjl,2) %>&nbsp;</TD>
-			<TD class=ReportItemMoney><%=JMath.round(temp_total-total,2) %>&nbsp;</TD>
+			<TD class=ReportItemMoney><%=i == results.size()-1?JMath.round(temp_jbtc,2):JMath.round(temp_jbtc-jbtc,2) %>&nbsp;</TD>
+			<TD class=ReportItemMoney><%=i == results.size()-1?JMath.round(temp_blds,2):JMath.round(temp_blds-blds,2) %>&nbsp;</TD>
+			<TD class=ReportItemMoney><%=i == results.size()-1?JMath.round(temp_jeds,2):JMath.round(temp_jeds-jeds,2) %>&nbsp;</TD>
+			<TD class=ReportItemMoney><%=i == results.size()-1?JMath.round(temp_cxjl,2):JMath.round(temp_cxjl-cxjl,2) %>&nbsp;</TD>
+			<TD class=ReportItemMoney><%=i == results.size()-1?JMath.round(temp_total,2):JMath.round(temp_total-total,2) %>&nbsp;</TD>
 		</TR>
 <%	
 		temp_jbtc = jbtc;
