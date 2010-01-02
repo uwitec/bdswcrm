@@ -3,7 +3,7 @@ package com.sw.cms.action;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.sw.cms.action.base.DataDisParseBaseAction;
+import com.sw.cms.action.base.BaseAction;
 import com.sw.cms.model.LoginInfo;
 import com.sw.cms.model.Page;
 import com.sw.cms.model.Txfk;
@@ -13,7 +13,7 @@ import com.sw.cms.service.UserService;
 import com.sw.cms.util.Constant;
 import com.sw.cms.util.DateComFunc;
 
-public class TxfkAction extends DataDisParseBaseAction {
+public class TxfkAction extends BaseAction {
 	
 	private TxfkService txfkService;
 	private UserService userService;

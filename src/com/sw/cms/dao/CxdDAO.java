@@ -25,19 +25,12 @@ public class CxdDAO extends JdbcBaseDAO {
 	 * @param rowsPerPage
 	 * @return
 	 */
-	public Page getCxdList(String start_date,String end_date,String state,int curPage, int rowsPerPage){
+	public Page getCxdList(String con,int curPage, int rowsPerPage){
 		String sql = "select * from cxd where 1=1";
 		
-		if(!start_date.equals("")){
-			sql += " and cdate>='" + start_date + "'";
+		if(!con.equals("")){
+			sql += con;
 		}
-		if(!end_date.equals("")){
-			sql += " and cdate<='" + end_date + "'";
-		}
-		if(!state.equals("")){
-			sql += " and state='" + state + "'";
-		}
-		sql += " order by id desc";
 		
 		return this.getResultByPage(sql, curPage, rowsPerPage, new BeanRowMapper(Cxd.class));
 	}
@@ -55,6 +48,34 @@ public class CxdDAO extends JdbcBaseDAO {
 	
 	
 	/**
+	 * 根据编号取拆卸单商品明细信息
+	 * @param cxd_id
+	 * @return
+	 */
+	public List editCxdProducts(String cxd_id){
+		String sql = "select * from cxd_product where cxd_id='" + cxd_id + "'";
+		return this.getResultList(sql, new BeanRowMapper(CxdProduct.class));
+	}
+	
+	
+	/**
+	 * 根据编与判断拆卸单是否已提交
+	 * @param cxd_id
+	 * @return
+	 */
+	public boolean isCxdSubmit(String cxd_id){
+		boolean is = false;
+		String sql = "select count(*) as counts from cxd where id='" + cxd_id + "' and state='已提交'";
+		int counts = this.getJdbcTemplate().queryForInt(sql);
+		
+		if(counts > 0){
+			is = true;
+		}
+		return is;
+	}
+	
+	
+	/**
 	 * 保存拆卸单信息
 	 * @param cxd
 	 * @param cxdProduct
@@ -66,14 +87,14 @@ public class CxdDAO extends JdbcBaseDAO {
 		if(counts > 0){
 			//记录存在更新
 			sql = "update cxd set cdate=?,store_id=?,product_id=?,product_name=?,product_xh=?,product_dw=?,nums=?," +
-					"price=?,hjje=?,jsr=?,remark=?,czr=?,cz_date=now() where id=?";
+					"price=?,hjje=?,jsr=?,remark=?,czr=?,cz_date=now(),serial_nums=?,qz_flag=?,state=? where id=?";
 		}else{
 			//记录不存在插入
-			sql = "insert into cxd(cdate,store_id,product_id,product_name,product_xh,product_dw,nums,price,hjje,jsr,remark,czr,cz_date,id) " +
-					"values(?,?,?,?,?,?,?,?,?,?,?,?,now(),?)";
+			sql = "insert into cxd(cdate,store_id,product_id,product_name,product_xh,product_dw,nums,price,hjje,jsr,remark,czr,cz_date,serial_nums,qz_flag,state,id) " +
+					"values(?,?,?,?,?,?,?,?,?,?,?,?,now(),?,?,?)";
 		}
 		
-		Object[] param = new Object[13];
+		Object[] param = new Object[16];
 		param[0] = cxd.getCdate();
 		param[1] = cxd.getStore_id();
 		param[2] = cxd.getProduct_id();
@@ -86,13 +107,29 @@ public class CxdDAO extends JdbcBaseDAO {
 		param[9] = cxd.getJsr();
 		param[10] = cxd.getRemark();
 		param[11] = cxd.getCzr();
-		param[12] = cxd.getId();
+		param[12] = cxd.getSerial_nums();
+		param[13] = cxd.getQz_flag();
+		param[14] = cxd.getState();
+		param[15] = cxd.getId();
 		
 		this.getJdbcTemplate().update(sql, param);
 		
 		this.delCxdProducts(cxd.getId());
 		
 		this.addCxdProducts(cxd, cxdProducts);
+	}
+	
+	
+	/**
+	 * 删除拆卸单
+	 * @param id
+	 */
+	public void delCxd(String id){
+		String sql = "delete from cxd where id='" + id + "'";
+		this.getJdbcTemplate().update(sql);
+		
+		sql = "delete from cxd_product where cxd_id='" + id + "'";
+		this.getJdbcTemplate().update(sql);
 	}
 	
 	
@@ -118,20 +155,7 @@ public class CxdDAO extends JdbcBaseDAO {
 
 		return "CX" + day + "-" + curId;
 	}
-	
-	
-	/**
-	 * 删除拆卸单
-	 * @param id
-	 */
-	public void delCxd(String id){
-		String sql = "delete from cxd where id='" + id + "'";
-		this.getJdbcTemplate().update(sql);
-		
-		sql = "delete from cxd_product where cxd_id='" + id + "'";
-		this.getJdbcTemplate().update(sql);
-	}
-	
+
 	
 	/**
 	 * 删除拆卸单相关商品
@@ -151,15 +175,15 @@ public class CxdDAO extends JdbcBaseDAO {
 	private void addCxdProducts(Cxd cxd,List cxdProducts){		
 		String cxd_id = cxd.getId();
 		String sql = "";
-		Object[] param = new Object[9];
+		Object[] param = new Object[11];
 		
 		if(cxdProducts != null && cxdProducts.size() > 0){
 			for(int i=0;i<cxdProducts.size();i++){
 				
 				CxdProduct cxdProduct = (CxdProduct)cxdProducts.get(i);
 				if(cxdProduct != null && cxdProduct.getProduct_id() != null){
-					sql = "insert into cxd_product(cxd_id,product_id,product_name,product_xh,product_dw,price,nums,hj,remark) " +
-							"values(?,?,?,?,?,?,?,?,?)";
+					sql = "insert into cxd_product(cxd_id,product_id,product_name,product_xh,product_dw,price,nums,hj,remark,qz_serial_num,qz_flag) " +
+							"values(?,?,?,?,?,?,?,?,?,?,?)";
 					
 					param[0] = cxd_id;
 					param[1] = cxdProduct.getProduct_id();
@@ -170,6 +194,8 @@ public class CxdDAO extends JdbcBaseDAO {
 					param[6] = cxdProduct.getNums();
 					param[7] = cxdProduct.getHj();
 					param[8] = cxdProduct.getRemark();
+					param[9] = cxdProduct.getQz_serial_num();
+					param[10] = cxdProduct.getQz_flag();
 					
 					this.getJdbcTemplate().update(sql, param);
 				}

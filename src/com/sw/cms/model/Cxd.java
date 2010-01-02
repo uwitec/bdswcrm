@@ -1,5 +1,7 @@
 package com.sw.cms.model;
 
+import java.util.Date;
+
 /**
  * ²ðÐ¶µ¥
  * @author jinyanni
@@ -20,7 +22,23 @@ public class Cxd {
 	private String jsr;
 	private String remark;
 	private String czr;
+	private String state;
+	private String serial_nums;
+	private String qz_flag;
+	private Date cz_date;
 	
+	public Date getCz_date() {
+		return cz_date;
+	}
+	public void setCz_date(Date czDate) {
+		cz_date = czDate;
+	}
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
+	}
 	public String getId() {
 		return id;
 	}
@@ -98,6 +116,18 @@ public class Cxd {
 	}
 	public void setCzr(String czr) {
 		this.czr = czr;
+	}
+	public String getSerial_nums() {
+		return serial_nums;
+	}
+	public void setSerial_nums(String serialNums) {
+		serial_nums = serialNums;
+	}
+	public String getQz_flag() {
+		return qz_flag;
+	}
+	public void setQz_flag(String qzFlag) {
+		qz_flag = qzFlag;
 	}
 
 	

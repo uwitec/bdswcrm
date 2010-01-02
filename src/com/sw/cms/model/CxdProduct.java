@@ -17,7 +17,15 @@ public class CxdProduct {
 	private int nums;
 	private double hj;
 	private String remark;
+	private String qz_serial_num;
+	private String qz_flag;
 	
+	public String getQz_serial_num() {
+		return qz_serial_num;
+	}
+	public void setQz_serial_num(String qzSerialNum) {
+		qz_serial_num = qzSerialNum;
+	}
 	public int getId() {
 		return id;
 	}
@@ -77,6 +85,12 @@ public class CxdProduct {
 	}
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+	public String getQz_flag() {
+		return qz_flag;
+	}
+	public void setQz_flag(String qzFlag) {
+		qz_flag = qzFlag;
 	}
 
 }

@@ -3,12 +3,12 @@ package com.sw.cms.action;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.sw.cms.action.base.DataDisParseBaseAction;
+import com.sw.cms.action.base.BaseAction;
 import com.sw.cms.model.LoginInfo;
 import com.sw.cms.model.PosType;
 import com.sw.cms.service.PosTypeService;
 
-public class PosTypeAction extends DataDisParseBaseAction {
+public class PosTypeAction extends BaseAction {
 	
 	private PosTypeService posTypeService;
 	

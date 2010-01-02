@@ -273,8 +273,8 @@ public class LsdDAO extends JdbcBaseDAO {
 							ds = map.get("dss")==null?0:((Double)map.get("dss")).doubleValue();
 						}
 						
-						//低于零售限价时金额点杀需要乘以比例
-						if(lsdProduct.getPrice() < lsxj){
+						//不含税单价低于零售限价时 点杀需要乘以比例
+						if((lsdProduct.getPrice()/ (1 + sd/100)) < lsxj){
 							ds = ds * ds_ratio/100;
 						}
 						
