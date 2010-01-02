@@ -2279,8 +2279,40 @@
         </action>
         <action name="getYwytcMxResult" class="xstjXsryAction" method="getYwytcMxResult">
             <result name="success">/WEB-INF/pages/report/ywytc_tj/result_mx.jsp</result>
-        </action>         
-          <!-- 业务员提成汇总 -->  
+        </action>   
+        <!-- 业务员提成汇总 --> 
+        
+		<!--拆卸单 -->
+        <action name="listCxd" class="cxdAction" method="list">
+            <result name="success">/WEB-INF/pages/cxd/cxd_list.jsp</result>
+        </action>
+        <action name="descCxd" class="cxdAction" method="desc">
+            <result name="success">/WEB-INF/pages/cxd/cxd_desc.jsp</result>
+        </action>
+        <action name="editCxd" class="cxdAction" method="edit">
+            <result name="success">/WEB-INF/pages/cxd/cxd_edit.jsp</result>
+        </action>
+        <action name="updateCxd" class="cxdAction" method="update">
+            <result name="cancel" type="redirect">editCxd.html</result>
+            <result name="input">/WEB-INF/pages/cxd/cxd_edit.jsp</result>
+            <result name="success">/WEB-INF/pages/msg.jsp</result>
+        </action>
+        <action name="delCxd" class="cxdAction" method="del">
+            <result name="success" type="redirect">listCxd.html</result>
+        </action>
+        <action name="viewCxd" class="cxdAction" method="edit">
+            <result name="success">/WEB-INF/pages/cxd/cxd_view.jsp</result>
+        </action>
+        <action name="selCxProduct" class="cxdAction" method="selProduct">
+            <result name="success">/WEB-INF/pages/cxd/cxd_product.jsp</result>
+        </action>
+		<action name="selCxProductMx" class="cxdAction" method="selProduct">
+            <result name="success">/WEB-INF/pages/cxd/cxd_product_mx.jsp</result>
+        </action>
+        <action name="importSerialNums" class="cxdAction" method="importSerialNums">
+            <result name="success">/WEB-INF/pages/cxd/import_serial_nums.jsp</result>
+        </action>
+        <!-- 拆卸单 -->  
           
          <!-- 移库出库 -->
         <action name="listYkck" class="ykckAction" method="list">
