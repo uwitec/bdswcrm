@@ -91,7 +91,7 @@ public class CxdDAO extends JdbcBaseDAO {
 		}else{
 			//记录不存在插入
 			sql = "insert into cxd(cdate,store_id,product_id,product_name,product_xh,product_dw,nums,price,hjje,jsr,remark,czr,cz_date,serial_nums,qz_flag,state,id) " +
-					"values(?,?,?,?,?,?,?,?,?,?,?,?,now(),?,?,?)";
+					"values(?,?,?,?,?,?,?,?,?,?,?,?,now(),?,?,?,?)";
 		}
 		
 		Object[] param = new Object[16];

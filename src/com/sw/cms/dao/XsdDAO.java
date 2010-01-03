@@ -83,12 +83,12 @@ public class XsdDAO extends JdbcBaseDAO {
 	public void saveXsd(Xsd xsd,List xsdProducts){
 		
 		String sql = "insert into xsd(creatdate,fzr,client_name,sklx,state,yhje,xsdje,xsdcbj,skje,skzh,ms,czr,cz_date," +
-				"skxs,skrq,ysrq,kh_address,kh_lxr,kh_lxdh,ysfs,id,store_id,xjd,ysje,zq,sjcjje,xsdkhcb,sp_state,sp_type,skfs,pos_id) " +
-					"values(?,?,?,?,?,?,?,?,?,?,?,?,now(),?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+				"skxs,skrq,ysrq,kh_address,kh_lxr,kh_lxdh,ysfs,id,store_id,xjd,ysje,zq,sjcjje,xsdkhcb,sp_state,sp_type,skfs,pos_id,yfzf_type) " +
+					"values(?,?,?,?,?,?,?,?,?,?,?,?,now(),?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		
 		String xsd_id = xsd.getId();
 		
-		Object[] param = new Object[30];
+		Object[] param = new Object[31];
 		
 		param[0] = xsd.getCreatdate();
 		param[1] = xsd.getFzr();
@@ -120,6 +120,7 @@ public class XsdDAO extends JdbcBaseDAO {
 		param[27] = xsd.getSp_type();
 		param[28] = xsd.getSkfs();
 		param[29] = xsd.getPos_id();
+		param[30] = xsd.getYfzf_type();
 		
 		this.getJdbcTemplate().update(sql,param);  //保存销售单信息
 		
@@ -177,16 +178,16 @@ public class XsdDAO extends JdbcBaseDAO {
 			//存在更新
 			sql = "update xsd set creatdate=?,fzr=?,client_name=?,sklx=?,state=?,yhje=?,xsdje=?,xsdcbj=?,skje=?,skzh=?,ms=?,czr=?,skxs=?," +
 					"skrq=?,ysrq=?,cz_date=now(),kh_address=?,kh_lxr=?,kh_lxdh=?,ysfs=?,store_id=?,xjd=?,ysje=?,zq=?," +
-					"sjcjje=?,xsdkhcb=?,sp_state=?,sp_type=?,skfs=?,pos_id=?,fplx=?,kp_mc=?,kp_address=?,kp_dh=?,khhzh=?,sh=?,fpxx=? where id=?";
+					"sjcjje=?,xsdkhcb=?,sp_state=?,sp_type=?,skfs=?,pos_id=?,fplx=?,kp_mc=?,kp_address=?,kp_dh=?,khhzh=?,sh=?,fpxx=?,yfzf_type=? where id=?";
 		}else{
 			//不存在添加
 			sql = "insert into xsd(creatdate,fzr,client_name,sklx,state,yhje,xsdje,xsdcbj,skje,skzh,ms,czr,skxs,skrq,ysrq,cz_date," +
-					"kh_address,kh_lxr,kh_lxdh,ysfs,store_id,xjd,ysje,zq,sjcjje,xsdkhcb,sp_state,sp_type,skfs,pos_id,fplx,kp_mc,kp_address,kp_dh,khhzh,sh,fpxx,id) " +
-					"values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,now(),?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+					"kh_address,kh_lxr,kh_lxdh,ysfs,store_id,xjd,ysje,zq,sjcjje,xsdkhcb,sp_state,sp_type,skfs,pos_id,fplx,kp_mc,kp_address,kp_dh,khhzh,sh,fpxx,yfzf_type,id) " +
+					"values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,now(),?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		}
 		
 		
-		Object[] param = new Object[37];
+		Object[] param = new Object[38];
 		
 		param[0] = xsd.getCreatdate();
 		param[1] = xsd.getFzr();
@@ -223,8 +224,9 @@ public class XsdDAO extends JdbcBaseDAO {
 		param[32] = xsd.getKp_dh();
 		param[33] = xsd.getKhhzh();
 		param[34] = xsd.getSh();
-		param[35] = xsd.getFpxx();		
-		param[36] = xsd_id;
+		param[35] = xsd.getFpxx();	
+		param[36] = xsd.getYfzf_type();
+		param[37] = xsd_id;
 		
 		
 		this.getJdbcTemplate().update(sql,param);  //更新销售单信息
@@ -774,6 +776,7 @@ public class XsdDAO extends JdbcBaseDAO {
 			if(SqlUtil.columnIsExist(rs,"job_no")) xsd.setJob_no(rs.getString("job_no"));
 			if(SqlUtil.columnIsExist(rs,"cx_tel")) xsd.setCx_tel(rs.getString("cx_tel"));
 			if(SqlUtil.columnIsExist(rs,"send_time")) xsd.setSend_time(rs.getString("send_time"));
+			if(SqlUtil.columnIsExist(rs,"yfzf_type")) xsd.setYfzf_type(rs.getString("yfzf_type"));
 			
 			
 			return xsd;

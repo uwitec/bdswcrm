@@ -41,8 +41,8 @@ public class CkdDAO extends JdbcBaseDAO {
 	 * @param ckdProducts
 	 */
 	public void saveCkd(Ckd ckd, List ckdProducts) {
-		String sql = "insert into ckd(fzr,xsd_id,creatdate,ck_date,state,ms,client_name,xsry,store_id,czr,cz_date,skzt,ckd_id,tel,ysfs,cx_tel,job_no,send_time,client_lxr,client_lxr_address,client_lxr_tel) values(?,?,?,?,?,?,?,?,?,?,now(),?,?,?,?,?,?,?,?,?,?)";
-		Object[] param = new Object[20];
+		String sql = "insert into ckd(fzr,xsd_id,creatdate,ck_date,state,ms,client_name,xsry,store_id,czr,cz_date,skzt,ckd_id,tel,ysfs,cx_tel,job_no,send_time,client_lxr,client_lxr_address,client_lxr_tel,yfzf_type) values(?,?,?,?,?,?,?,?,?,?,now(),?,?,?,?,?,?,?,?,?,?,?)";
+		Object[] param = new Object[21];
 
 		param[0] = ckd.getFzr();
 		param[1] = ckd.getXsd_id();
@@ -64,6 +64,7 @@ public class CkdDAO extends JdbcBaseDAO {
 		param[17] = ckd.getClient_lxr();
 		param[18] = ckd.getClient_lxr_address();
 		param[19] = ckd.getClient_lxr_tel();
+		param[20] = ckd.getYfzf_type();
 
 		this.getJdbcTemplate().update(sql, param); // 更新出库单信息
 
@@ -77,9 +78,9 @@ public class CkdDAO extends JdbcBaseDAO {
 	 * @param ckdProducts
 	 */
 	public void updateCkd(Ckd ckd, List ckdProducts) {
-		String sql = "update ckd set fzr=?,xsd_id=?,creatdate=?,ck_date=?,state=?,ms=?,client_name=?,xsry=?,store_id=?,czr=?,cz_date=now(),skzt=?,tel=?,ysfs=?,cx_tel=?,job_no=?,send_time=?,client_lxr=?,client_lxr_address=?,client_lxr_tel=? where ckd_id=?";
+		String sql = "update ckd set fzr=?,xsd_id=?,creatdate=?,ck_date=?,state=?,ms=?,client_name=?,xsry=?,store_id=?,czr=?,cz_date=now(),skzt=?,tel=?,ysfs=?,cx_tel=?,job_no=?,send_time=?,client_lxr=?,client_lxr_address=?,client_lxr_tel=?,yfzf_type=? where ckd_id=?";
 
-		Object[] param = new Object[20];
+		Object[] param = new Object[21];
 
 		param[0] = ckd.getFzr();
 		param[1] = ckd.getXsd_id();
@@ -100,7 +101,8 @@ public class CkdDAO extends JdbcBaseDAO {
 		param[16] = ckd.getClient_lxr();
 		param[17] = ckd.getClient_lxr_address();
 		param[18] = ckd.getClient_lxr_tel();
-		param[19] = ckd.getCkd_id();
+		param[19] = ckd.getYfzf_type();
+		param[20] = ckd.getCkd_id();
 
 		this.getJdbcTemplate().update(sql, param); // 更新出库单信息
 
@@ -327,6 +329,8 @@ public class CkdDAO extends JdbcBaseDAO {
 				ckd.setClient_lxr_address(rs.getString("client_lxr_address"));
 			if (SqlUtil.columnIsExist(rs, "client_lxr_tel"))
 				ckd.setClient_lxr_tel(rs.getString("client_lxr_tel"));
+			if (SqlUtil.columnIsExist(rs, "yfzf_type"))
+				ckd.setYfzf_type(rs.getString("yfzf_type"));
 
 			return ckd;
 		}

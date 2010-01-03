@@ -58,18 +58,16 @@ public class ExportProductLsKcNumsResult extends ExportXlsTemplate {
 			Label label = null;
 			
 			//写统计表标题
-			sheet.mergeCells(0, 0, 7, 0);
+			sheet.mergeCells(0, 0, 8, 0);
 			label = new Label(0,0,"库存数量汇总",this.getFt_title());
 			sheet.addCell(label);
 			
 			//写统计条件
-			sheet.mergeCells(0, 1, 7, 1);
+			sheet.mergeCells(0, 1, 8, 1);
 			label = new Label(0,1,conStr,this.getFt_item_center());
 			sheet.addCell(label);
 					
-			//写统计表头
-			//label = new Label(0,2,"商品编码",this.getFt_item_center_bold());
-			//sheet.addCell(label);			
+			//写统计表头		
 			label = new Label(0,2,"商品名称",this.getFt_item_center_bold());
 			sheet.addCell(label);			
 			label = new Label(1,2,"规格",this.getFt_item_center_bold());
@@ -82,11 +80,11 @@ public class ExportProductLsKcNumsResult extends ExportXlsTemplate {
 			sheet.addCell(label);
 			label = new Label(5,2,"考核成本",this.getFt_item_center_bold());
 			sheet.addCell(label);
-			label = new Label(6,2,"工分",this.getFt_item_center_bold());
+			label = new Label(6,2,"比例点杀",this.getFt_item_center_bold());
 			sheet.addCell(label);
-			//label = new Label(7,2,"点杀",this.getFt_item_center_bold());
-			//sheet.addCell(label);
-			label = new Label(7,2,"产品卖点",this.getFt_item_center_bold());
+			label = new Label(7,2,"金额点杀",this.getFt_item_center_bold());
+			sheet.addCell(label);
+			label = new Label(8,2,"产品卖点",this.getFt_item_center_bold());
 			sheet.addCell(label);
 			
 			List productList = kcMxReportService.getKcNumsResults(product_kind, product_name, store_id,state, flag,px);
@@ -112,9 +110,7 @@ public class ExportProductLsKcNumsResult extends ExportXlsTemplate {
 					if(num.equals("")){
 						num = "0";
 					}
-					
-					//label = new Label(0,k,StringUtils.nullToStr(map.get("product_id")),this.getFt_item_center());
-					//sheet.addCell(label);			
+							
 					label = new Label(0,k,StringUtils.nullToStr(map.get("product_name")),this.getFt_item_left());
 					sheet.addCell(label);			
 					label = new Label(1,k,StringUtils.nullToStr(map.get("product_xh")),this.getFt_item_left());
@@ -129,9 +125,9 @@ public class ExportProductLsKcNumsResult extends ExportXlsTemplate {
 					sheet.addCell(label);
 					label = new Label(6,k,JMath.round(gf),this.getFt_item_right());
 					sheet.addCell(label);
-					//label = new Label(7,k,JMath.round(dss),this.getFt_item_right());
-					//sheet.addCell(label);
-					label = new Label(7,k,ms,this.getFt_item_center());
+					label = new Label(7,k,JMath.round(dss),this.getFt_item_right());
+					sheet.addCell(label);
+					label = new Label(8,k,ms,this.getFt_item_left());
 					sheet.addCell(label);
 					
 					k++;

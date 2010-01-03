@@ -288,7 +288,7 @@ public class XstjXsryDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public List getYwytcHz(String start_date,String end_date,String dept_id,String user_id){
-		String sql = "select yw_type,product_id,dept,xsry,real_name," +
+		String sql = "select yw_type,product_id,dept,xsry,real_name,(bhsje-khcb) as khml," +
 		"(bhsje-khcb)*basic_ratio/100 as jbtc,(bhsje-khcb)*gf/100 as blds,ds as jeds," +
 		"(bhsje-lsxj)*out_ratio/100 as cxjl from view_hpxshz_tj where 1=1";
 		
@@ -320,7 +320,7 @@ public class XstjXsryDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public List getYwytcMx(String start_date,String end_date,String user_id){
-		String sql = "select cz_date,id,yw_type,client_name,product_name,product_id,product_xh,nums," +
+		String sql = "select cz_date,id,yw_type,client_name,product_name,product_id,product_xh,nums,(bhsje-khcb) as khml," +
 				"(bhsje-khcb)*basic_ratio/100 as jbtc,(bhsje-khcb)*gf/100 as blds,ds as jeds," +
 				"(bhsje-lsxj)*out_ratio/100 as cxjl from view_hpxshz_tj where 1=1";
 		

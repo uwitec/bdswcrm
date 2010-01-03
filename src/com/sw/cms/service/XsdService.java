@@ -471,11 +471,13 @@ public class XsdService {
 		ckd.setCkd_id(ckd_id);
 		ckd.setCzr(xsd.getCzr());
 		ckd.setSkzt(xsd.getSkxs());
-		ckd.setMs("销售出库，销售单编号 ["  + xsd.getId() + "]");
+		ckd.setMs("销售出库，销售单编号 ["  + xsd.getId() + "]。" + xsd.getMs());
 		
 		ckd.setClient_lxr(xsd.getKh_lxr());
 		ckd.setClient_lxr_address(xsd.getKh_address());
 		ckd.setClient_lxr_tel(xsd.getKh_lxdh());
+		
+		ckd.setYfzf_type(xsd.getYfzf_type());
 		
 		//更新分销订单物流状态
 		xsdDao.updateFxddWlzt(fxdd_id, wlzt);

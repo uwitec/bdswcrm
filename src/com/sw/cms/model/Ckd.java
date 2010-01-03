@@ -25,8 +25,16 @@ public class Ckd {
 	private String client_lxr;
 	private String client_lxr_address;
 	private String client_lxr_tel;
+	
+	private String yfzf_type;
 
 	
+	public String getYfzf_type() {
+		return yfzf_type;
+	}
+	public void setYfzf_type(String yfzfType) {
+		yfzf_type = yfzfType;
+	}
 	public String getCk_date() {
 		return ck_date;
 	}

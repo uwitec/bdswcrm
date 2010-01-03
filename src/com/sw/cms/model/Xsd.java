@@ -58,6 +58,8 @@ public class Xsd {
 	private String sh;           //税号
 	private String fpxx;         //发票信息
 	
+	private String yfzf_type;    //运费支付类型
+	
 	public String getClient_name() {
 		return client_name;
 	}
@@ -339,6 +341,12 @@ public class Xsd {
 	}
 	public void setCk_date(String ck_date) {
 		this.ck_date = ck_date;
+	}
+	public String getYfzf_type() {
+		return yfzf_type;
+	}
+	public void setYfzf_type(String yfzfType) {
+		yfzf_type = yfzfType;
 	}
 
 }

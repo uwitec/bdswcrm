@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import jxl.Workbook;
 import jxl.format.Alignment;
+import jxl.format.Border;
+import jxl.format.BorderLineStyle;
 import jxl.format.VerticalAlignment;
 import jxl.write.WritableCellFormat;
 import jxl.write.WritableFont;
@@ -79,6 +81,7 @@ public abstract class ExportXlsTemplate {
 			ft_title.setFont(new WritableFont(WritableFont.TIMES, 16 ,WritableFont.BOLD));
 			ft_title.setAlignment(Alignment.CENTRE);
 			ft_title.setVerticalAlignment(VerticalAlignment.CENTRE);
+			ft_title.setBorder(Border.ALL,BorderLineStyle.THIN);
 		}catch(Exception e){
 			log.info(e);
 		}
@@ -96,6 +99,7 @@ public abstract class ExportXlsTemplate {
 			ft_item_center.setFont(new WritableFont(WritableFont.TIMES, 10 ,WritableFont.NO_BOLD));
 			ft_item_center.setAlignment(Alignment.CENTRE);
 			ft_item_center.setVerticalAlignment(VerticalAlignment.CENTRE);
+			ft_item_center.setBorder(Border.ALL,BorderLineStyle.THIN);
 		}catch(Exception e){
 			
 		}
@@ -113,6 +117,7 @@ public abstract class ExportXlsTemplate {
 			ft_item_center_bold.setFont(new WritableFont(WritableFont.TIMES, 10 ,WritableFont.BOLD));
 			ft_item_center_bold.setAlignment(Alignment.CENTRE);
 			ft_item_center_bold.setVerticalAlignment(VerticalAlignment.CENTRE);
+			ft_item_center_bold.setBorder(Border.ALL,BorderLineStyle.THIN);
 		}catch(Exception e){
 			log.info(e);
 		}
@@ -130,6 +135,7 @@ public abstract class ExportXlsTemplate {
 			ft_item_left.setFont(new WritableFont(WritableFont.TIMES, 10 ,WritableFont.NO_BOLD));
 			ft_item_left.setAlignment(Alignment.LEFT);
 			ft_item_left.setVerticalAlignment(VerticalAlignment.CENTRE);
+			ft_item_left.setBorder(Border.ALL,BorderLineStyle.THIN);
 		}catch(Exception e){
 			log.info(e);
 		}
@@ -147,6 +153,7 @@ public abstract class ExportXlsTemplate {
 			ft_item_left_bold.setFont(new WritableFont(WritableFont.TIMES, 10 ,WritableFont.BOLD));
 			ft_item_left_bold.setAlignment(Alignment.LEFT);
 			ft_item_left_bold.setVerticalAlignment(VerticalAlignment.CENTRE);
+			ft_item_left_bold.setBorder(Border.ALL,BorderLineStyle.THIN);
 		}catch(Exception e){
 			log.info(e);
 		}
@@ -164,6 +171,7 @@ public abstract class ExportXlsTemplate {
 			ft_item_right.setFont(new WritableFont(WritableFont.TIMES, 10 ,WritableFont.NO_BOLD));
 			ft_item_right.setAlignment(Alignment.RIGHT);
 			ft_item_right.setVerticalAlignment(VerticalAlignment.CENTRE);
+			ft_item_right.setBorder(Border.ALL,BorderLineStyle.THIN);
 		}catch(Exception e){
 			log.info(e);
 		}
@@ -181,6 +189,7 @@ public abstract class ExportXlsTemplate {
 			ft_item_right_bold.setFont(new WritableFont(WritableFont.TIMES, 10 ,WritableFont.BOLD));
 			ft_item_right_bold.setAlignment(Alignment.RIGHT);
 			ft_item_right_bold.setVerticalAlignment(VerticalAlignment.CENTRE);
+			ft_item_right_bold.setBorder(Border.ALL,BorderLineStyle.THIN);
 		}catch(Exception e){
 			log.info(e);
 		}

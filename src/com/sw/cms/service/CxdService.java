@@ -219,8 +219,12 @@ public class CxdService {
 		}
 
 		ckdProducts.add(ckdProduct);
-
+		
+		//±£´æ³ö¿âµ¥
 		ckdDao.saveCkd(ckd, ckdProducts);
+		
+		//¼õ¿â´æ
+		productKcDao.updateProductKc(cxd.getStore_id(),cxd.getProduct_id(), cxd.getNums());
 	}
 	
 	
