@@ -135,10 +135,6 @@ function addTr(){
 	var otd8 = document.createElement("td");
 	otd8.className = "a2";
 	otd8.innerHTML = '<input type="text" id="xj_'+curId+'" name="xsdProducts['+curId+'].xj" value="0.00" size="10" readonly><input type="hidden" id="qz_serial_num_'+curId+'" name="xsdProducts['+curId+'].qz_serial_num" size="15" readonly>';        
-	
-	var otd6 = document.createElement("td");
-	otd6.className = "a2";
-	otd6.innerHTML = '<input type="text" id="remark_'+curId+'" name="xsdProducts['+curId+'].remark">';                       
 
 	otr.appendChild(otd9); 
 	otr.appendChild(otd0); 
@@ -146,7 +142,6 @@ function addTr(){
 	otr.appendChild(otd3);
 	otr.appendChild(otd5);
 	otr.appendChild(otd8); 
-	otr.appendChild(otd6);  
                
 }	
    
@@ -302,21 +297,9 @@ function delDesc(){
 	document.getElementById("jgtz_" + sel).value = "0.00";
 	document.getElementById("nums_" + sel).value = "0";
 	document.getElementById("xj_" + sel).value = "0.00";
-	document.getElementById("remark_" + sel).value = "";
 }
 
 function changeSklx(vl){
-	//if(vl == "现结"){
-	//	document.getElementById("lb_xjd").style.display = "";
-	//	document.getElementById("tr_skxx").style.display = "";
-	//	document.getElementById("xjd").style.display = "";
-	//	document.getElementById("xjd").value = "0.00";
-		
-	//	document.getElementById("lb_zq").style.display = "none";
-	//	document.getElementById("zq").style.display = "none";
-	//	document.getElementById("zq").value = "0";		
-	//}else 
-	
 	if(vl == "账期"){
 		document.getElementById("lb_xjd").style.display = "none";
 		document.getElementById("tr_skxx").style.display = "none";
@@ -425,6 +408,7 @@ function selSkfs(vl){
 
 
 function chgKpTyle(vD){
+	if(vD == "") vD = "出库单";
 	var obj_mc1 = document.getElementById("mc1");
 	var obj_mc2 = document.getElementById("mc2");
 	
@@ -440,9 +424,12 @@ function chgKpTyle(vD){
 	var obj_sh1 = document.getElementById("sh1");
 	var obj_sh2 = document.getElementById("sh2");
 	
+	var obj_fpxx1 = document.getElementById("fpxx1");
+	var obj_fpxx2 = document.getElementById("fpxx2");
+	
 	if(vD == "出库单"){
-		obj_mc1.style.display = "";
-		obj_mc2.style.display = "";
+		obj_mc1.style.display = "none";
+		obj_mc2.style.display = "none";
 		
 		obj_dz1.style.display = "none";
 		obj_dz2.style.display = "none";
@@ -454,7 +441,10 @@ function chgKpTyle(vD){
 		obj_zh2.style.display = "none";
 		
 		obj_sh1.style.display = "none";
-		obj_sh2.style.display = "none";			
+		obj_sh2.style.display = "none";	
+		
+		obj_fpxx1.style.display = "none";	
+		obj_fpxx2.style.display = "none";	
 	}else if(vD == "普通发票"){
 		obj_mc1.style.display = "";
 		obj_mc2.style.display = "";
@@ -469,7 +459,10 @@ function chgKpTyle(vD){
 		obj_zh2.style.display = "none";
 		
 		obj_sh1.style.display = "none";
-		obj_sh2.style.display = "none";			
+		obj_sh2.style.display = "none";	
+		
+		obj_fpxx1.style.display = "";	
+		obj_fpxx2.style.display = "";	
 	}else if(vD == "增值发票"){
 		obj_mc1.style.display = "";
 		obj_mc2.style.display = "";
@@ -484,6 +477,9 @@ function chgKpTyle(vD){
 		obj_zh2.style.display = "";
 		
 		obj_sh1.style.display = "";
-		obj_sh2.style.display = "";			
+		obj_sh2.style.display = "";		
+		
+		obj_fpxx1.style.display = "";	
+		obj_fpxx2.style.display = "";	
 	}		
 }	

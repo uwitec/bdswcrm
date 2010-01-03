@@ -51,7 +51,8 @@ if(!user_id.equals("")){
 			<TD class=ReportHead width="120">客户</TD>
 			<TD class=ReportHead>产品名称</TD>
 			<TD class=ReportHead>型号</TD>
-			<TD class=ReportHead>数量</TD>			
+			<TD class=ReportHead>数量</TD>		
+			<TD class=ReportHead>考核毛利</TD>	
 			<TD class=ReportHead>基本提成</TD>
 			<TD class=ReportHead>比例点杀</TD>
 			<TD class=ReportHead>金额点杀</TD>
@@ -67,6 +68,7 @@ if(results != null && results.size()>0){
 	String ywdj_id = "";
 	
 	int hj_nums = 0;
+	double hj_khml = 0;
 	double hj_jbtc = 0;
 	double hj_blds = 0;
 	double hj_jeds = 0;
@@ -94,6 +96,8 @@ if(results != null && results.size()>0){
 		ywdj_id = id;
 		
 		int nums = new Integer(StringUtils.nullToZero(map.get("nums"))).intValue(); //数量
+		
+		double khml = map.get("khml") == null?0:((Double)map.get("khml")).doubleValue();   //考核毛利
 		double jbtc = map.get("jbtc") == null?0:((Double)map.get("jbtc")).doubleValue();
 		double blds = map.get("blds") == null?0:((Double)map.get("blds")).doubleValue();
 		double jeds = map.get("jeds") == null?0:((Double)map.get("jeds")).doubleValue();
@@ -115,6 +119,7 @@ if(results != null && results.size()>0){
 		
 		double total = jbtc + blds + jeds + cxjl;
 		
+		hj_khml += khml;
 		hj_nums += nums;
 		hj_jbtc += jbtc;
 		hj_blds += blds;
@@ -130,6 +135,7 @@ if(results != null && results.size()>0){
 			<TD class=ReportItem><%=StringUtils.nullToStr(map.get("product_name")) %>&nbsp;</TD>
 			<TD class=ReportItem><%=StringUtils.nullToStr(map.get("product_xh")) %>&nbsp;</TD>								
 			<TD class=ReportItemXH nowrap><%=nums %>&nbsp;</TD>
+			<TD class=ReportItemMoney><%=JMath.round(khml,2) %>&nbsp;</TD>
 			<TD class=ReportItemMoney><%=JMath.round(jbtc,2) %>&nbsp;</TD>
 			<TD class=ReportItemMoney><%=JMath.round(blds,2) %>&nbsp;</TD>
 			<TD class=ReportItemMoney><%=JMath.round(jeds,2) %>&nbsp;</TD>
@@ -147,6 +153,7 @@ if(results != null && results.size()>0){
 			<TD class=ReportItem>&nbsp;</TD>
 			<TD class=ReportItem>&nbsp;</TD>								
 			<TD class=ReportItemXH nowrap><%=hj_nums %>&nbsp;</TD>
+			<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(hj_khml,2) %>&nbsp;</TD>
 			<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(hj_jbtc,2) %>&nbsp;</TD>
 			<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(hj_blds,2) %>&nbsp;</TD>
 			<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(hj_jeds,2) %>&nbsp;</TD>

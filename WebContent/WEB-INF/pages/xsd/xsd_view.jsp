@@ -184,11 +184,8 @@ Xsd xsd = (Xsd)VS.findValue("xsd");
 		<td>销售价格</td>
 		<td>价格调整</td>
 		<td>订单数量</td>
-		<!--<td>实际出库数</td>
-		--><td>订单金额</td>
-		<!--<td>实际成交金额</td>-->
+		<td>订单金额</td>
 		<td>工分</td>
-		<td>备注</td>
 	</tr>
 	</thead>
 <%
@@ -202,12 +199,8 @@ if(xsdProducts!=null && xsdProducts.size()>0){
 		<td class="a2"><%=JMath.round(xsdProduct.getPrice(),2) %></td>
 		<td class="a2"><%=JMath.round(xsdProduct.getJgtz(),2) %></td>
 		<td class="a2"><%=xsdProduct.getNums() %></td>
-		<!--<td class="a2"><%=xsdProduct.getSjcj_nums() %></td>
-		--><td class="a2"><%=JMath.round(xsdProduct.getXj(),2) %></td>
-		<!--<td class="a2"><%=JMath.round(xsdProduct.getSjcj_xj(),2) %></td>
-		-->
+		<td class="a2"><%=JMath.round(xsdProduct.getXj(),2) %></td>
 		<td class="a2"><%=JMath.round(xsdProduct.getGf(),2) %></td>
-		<td class="a2"><%=StringUtils.nullToStr(xsdProduct.getRemark()) %></td>
 	</tr>
 <%
 	}
@@ -242,16 +235,11 @@ if(xsdProducts!=null && xsdProducts.size()>0){
 	
 	<tr>
 		<td class="a1" width="15%">发票信息摘要</td>
-		<td class="a2" colspan="3">
-			<textarea rows="2" name="xsd.fpxx" id="fpxx" style="width:75%" readonly><%=StringUtils.nullToStr(xsd.getFpxx()) %></textarea>
-		</td>	
-				
+		<td class="a2" colspan="3"><%=StringUtils.nullToStr(xsd.getFpxx()) %></td>
 	</tr>
 	<tr>
 		<td class="a1" width="15%">备注</td>
-		<td class="a2" width="85%" colspan="3">
-			<textarea rows="3" name="xsd.ms" id="ms" style="width:75%" readonly><%=StringUtils.nullToStr(xsd.getMs()) %></textarea>
-		</td>
+		<td class="a2" width="85%" colspan="3"><%=StringUtils.nullToStr(xsd.getMs()) %></td>
 	</tr>		
 	<tr height="35">
 		<td class="a1" colspan="4">

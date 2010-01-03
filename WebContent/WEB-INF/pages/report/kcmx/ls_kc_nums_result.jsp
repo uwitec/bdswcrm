@@ -84,12 +84,8 @@ if(productList != null && productList.size()>0){
 		
 		String num = StringUtils.nullToStr(map.get("kc_nums"));
 		String ms=StringUtils.nullToStr(map.get("ms"));
-		if(!ms.equals(""))
-		{
-		   if(ms.length()>20)
-		   {
+		if(!ms.equals("") && ms.length()>20){
 		     ms=ms.substring(0,20)+"...";
-		   }
 		}
 		if(num.equals("")){
 			num = "0";
@@ -101,11 +97,11 @@ if(productList != null && productList.size()>0){
 			<TD class=ReportItem><%=StringUtils.nullToStr(map.get("product_name")) %>&nbsp;</TD>
 			<TD class=ReportItem><%=StringUtils.nullToStr(map.get("product_xh")) %>&nbsp;</TD>
 			<TD class=ReportItemXh><%=num %>&nbsp;</TD>
-			<td class=ReportItemMoney><%=JMath.round(lsbj,2) %>&nbsp;</td>
-			<td class=ReportItemMoney><%=JMath.round(lsxj,2) %>&nbsp;</td>
-			<td class=ReportItemMoney><%=JMath.round(khcbj,2) %>&nbsp;</td>
-			<td class=ReportItemMoney><%=JMath.round(gf) %>&nbsp;</td>
-			<td class=ReportItemMoney><%=JMath.round(dss) %>&nbsp;</td>
+			<td class=ReportItemMoney nowrap="nowrap"><%=JMath.round(lsbj,2) %>&nbsp;</td>
+			<td class=ReportItemMoney nowrap="nowrap"><%=JMath.round(lsxj,2) %>&nbsp;</td>
+			<td class=ReportItemMoney nowrap="nowrap"><%=JMath.round(khcbj,2) %>&nbsp;</td>
+			<td class=ReportItemMoney nowrap="nowrap"><%=JMath.round(gf) %>&nbsp;</td>
+			<td class=ReportItemMoney nowrap="nowrap"><%=JMath.round(dss) %>&nbsp;</td>
 			<td class=ReportItem title="<%=StringUtils.nullToStr(map.get("ms"))%>"><%=ms%>&nbsp;</td>
 		</TR>
 <%

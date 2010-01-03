@@ -98,9 +98,14 @@
 			<td><ww:property value="%{cdate}" /></td>		
 			<td><ww:property value="%{state}" /></td>		
 			<td>
-				<a href="#" onclick="edit('<ww:property value="%{id}" />');"><img src="images/modify.gif" title="修改" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;			
-				<a href="#" onclick="view('<ww:property value="%{id}" />');"><img src="images/view.gif" title="查看" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
-				<a href="#" onclick="del('<ww:property value="%{id}" />');"><img src="images/del.gif" title="删除该行数据" border="0" style="cursor:hand"></a>			
+				<ww:if test="%{state=='已保存'}">
+				<a href="#" onclick="edit('<ww:property value="%{id}" />');"><img src="images/modify.gif" title="修改" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
+				</ww:if>			
+				<a href="#" onclick="view('<ww:property value="%{id}" />');"><img src="images/view.gif" title="查看" border="0" style="cursor:hand"></a>
+				<ww:if test="%{state=='已保存'}">
+				&nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="#" onclick="del('<ww:property value="%{id}" />');"><img src="images/del.gif" title="删除该行数据" border="0" style="cursor:hand"></a>
+				</ww:if>			
 			</td>
 		</tr>
 	</ww:iterator>

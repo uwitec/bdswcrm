@@ -23,25 +23,25 @@ String iscs_flag = StringUtils.nullToStr(VS.findValue("iscs_flag"));
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript" src="js/Check.js"></script>
+<script language="JavaScript" src="js/keychange.js"></script>
 <script type="text/javascript">
 	function saveInfo(){
-		if(!InputValid(document.productForm.productName,1,"string",1,1,100,"产品名称")){	 return; }
-		if(!InputValid(document.productForm.productXh,0,"string",0,1,100,"规格")){	 return; }
+		if(!InputValid(document.productForm.productName,1,"string",1,1,100,"产品名称")){	 document.productForm.productName.focus();return; }
+		if(!InputValid(document.productForm.productXh,0,"string",0,1,100,"规格")){	document.productForm.productXh.focus(); return; }
 		if(document.productForm.prop.value == ""){
 			alert("产品属性为必选项！");
 			return;
 		}
-		if(!InputValid(document.productForm.price,0,"float",1,0,9999999,"移动加权价")){	 return; }
-		if(!InputValid(document.productForm.khcbj,1,"float",1,0,9999999,"考核成本价")){	 return; }	
-		if(!InputValid(document.productForm.lsbj,0,"float",0,0,9999999,"零售报价")){	 return; }
-		if(!InputValid(document.productForm.fxbj,0,"float",0,0,9999999,"代理价")){	 return; }
-		if(!InputValid(document.productForm.lsxj,0,"float",0,0,9999999,"零售限价")){	 return; }					
-		if(!InputValid(document.productForm.fxxj,0,"float",0,0,9999999,"分销限价")){	 return; }
-		if(!InputValid(document.productForm.gf,0,"float",0,0,100,"比例点杀")){	 return; }
-		if(!InputValid(document.productForm.dss,0,"float",0,0,9999999,"金额点杀")){	 return; }
-		 
-		if(!InputValid(document.productForm.sp_txm,0,"string",0,1,50,"商品条形码")){	 return; }
-		if(!InputValid(document.productForm.ms,0,"string",0,1,500,"产品描述")){	 return; }
+		if(!InputValid(document.productForm.price,0,"float",1,0,9999999,"移动加权价")){	 document.productForm.price.focus();return; }
+		if(!InputValid(document.productForm.khcbj,1,"float",1,0,9999999,"考核成本价")){	 document.productForm.khcbj.focus();return; }	
+		if(!InputValid(document.productForm.lsbj,0,"float",0,0,9999999,"零售报价")){	 document.productForm.lsbj.focus();return; }
+		if(!InputValid(document.productForm.lsxj,0,"float",0,0,9999999,"零售限价")){	 document.productForm.lsxj.focus();return; }			
+		if(!InputValid(document.productForm.fxbj,0,"float",0,0,9999999,"分销报价")){	 document.productForm.fxbj.focus();return; }
+		if(!InputValid(document.productForm.fxxj,0,"float",0,0,9999999,"分销限价")){	 document.productForm.fxxj.focus();return; }
+		if(!InputValid(document.productForm.gf,0,"float",0,0,100,"比例点杀")){	 document.productForm.gf.focus();return; }
+		if(!InputValid(document.productForm.dss,0,"float",0,0,9999999,"金额点杀")){	 document.productForm.dss.focus();return; }
+		if(!InputValid(document.productForm.sp_txm,0,"string",0,1,50,"商品条形码")){	 document.productForm.sp_txm.focus();return; }
+		if(!InputValid(document.productForm.ms,0,"string",0,1,500,"产品描述")){	 document.productForm.ms.focus();return; }
 		
 		document.productForm.submit();
 	}
@@ -54,10 +54,11 @@ String iscs_flag = StringUtils.nullToStr(VS.findValue("iscs_flag"));
 	}
 </script>
 </head>
-<body>
+<body onload="document.productForm.productName.focus();">
 <form name="productForm" action="updateProduct.html" method="post">
 <input type="hidden" name="productId" value="<%=StringUtils.nullToStr(product.getProductId()) %>">
 <input type="hidden" name="curId" value="<%=curId %>">
+<input type="hidden" name="kcsx" value="<%=product.getKcsx() %>">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
@@ -66,16 +67,16 @@ String iscs_flag = StringUtils.nullToStr(VS.findValue("iscs_flag"));
 	</thead>	
 	<tr>
 		<td class="a1" width="15%">产品名称</td>
-		<td class="a2" width="35%"><input type="text" name="productName" value="<%=StringUtils.nullToStr(product.getProductName()) %>" size="20"></td>	
+		<td class="a2" width="35%"><input type="text" name="productName" value="<%=StringUtils.nullToStr(product.getProductName()) %>" size="20" onkeyup="goNext(this.form,this.name);"></td>	
 		<td class="a1" width="15%">规格</td>
-		<td class="a2" width="35%"><input type="text" name="productXh" value="<%=StringUtils.nullToStr(product.getProductXh()) %>" size="20"></td>
+		<td class="a2" width="35%"><input type="text" name="productXh" value="<%=StringUtils.nullToStr(product.getProductXh()) %>" size="20" onkeyup="goNext(this.form,this.name);"></td>
 
 	</tr>
 	
 	<tr>
 		<td class="a1" width="15%">计量单位</td>
 		<td class="a2" width="35%">
-			<select name="dw">
+			<select name="dw" onkeyup="goNext(this.form,this.name);">
 				<option value=""></option>
 				<%
 				for(int i=0;i<jldw.length;i++){
@@ -87,65 +88,64 @@ String iscs_flag = StringUtils.nullToStr(VS.findValue("iscs_flag"));
 			</select></td>
 		<td class="a1" width="15%">属性</td>
 		<td class="a2" width="35%">
-			<select name="prop">
+			<select name="prop" onkeyup="goNext(this.form,this.name);">
 				<option value="库存商品" <%if("库存商品".equals(StringUtils.nullToStr(product.getProp()))) out.print("selected"); %>>库存商品</option>
 				<option value="服务/劳务" <%if("服务/劳务".equals(StringUtils.nullToStr(product.getProp()))) out.print("selected"); %>>服务/劳务</option>
 			</select></td>
 	</tr>
 	<tr>
 		<td class="a1" width="15%">移动加权价</td>
-		<td class="a2" width="35%"><input type="text" name="price" value="<%=JMath.round(product.getPrice()) %>" size="20" <%if(iscs_flag.equals("1")) out.print("readonly"); %>></td>
+		<td class="a2" width="35%"><input type="text" name="price" value="<%=JMath.round(product.getPrice()) %>" size="20" onkeyup="goNext(this.form,this.name);" <%if(iscs_flag.equals("1")) out.print("readonly"); %>></td>
 		<td class="a1" width="15%">考核成本价</td>
-		<td class="a2" width="35%"><input type="text" name="khcbj" value="<%=JMath.round(product.getKhcbj()) %>" size="20"></td>		
+		<td class="a2" width="35%"><input type="text" name="khcbj" value="<%=JMath.round(product.getKhcbj()) %>" size="20" onkeyup="goNext(this.form,this.name);"></td>		
 
 	</tr>	
 	<tr>	
 		<td class="a1" width="15%">零售报价</td>
-		<td class="a2" width="35%"><input type="text" name="lsbj" value="<%=JMath.round(product.getLsbj()) %>" size="20"></td>
-		<td class="a1" width="15%">代理价</td>
-		<td class="a2" width="35%"><input type="text" name="fxbj" value="<%=JMath.round(product.getFxbj()) %>" size="20"></td>						
+		<td class="a2" width="35%"><input type="text" name="lsbj" value="<%=JMath.round(product.getLsbj()) %>" size="20" onkeyup="goNext(this.form,this.name);"></td>
+		<td class="a1" width="15%">零售限价</td>
+		<td class="a2" width="35%"><input type="text" name="lsxj" value="<%=JMath.round(product.getLsxj()) %>" size="20" onkeyup="goNext(this.form,this.name);"></td>
+						
 	</tr>
 	<tr>
-		<td class="a1" width="15%">零售限价</td>
-		<td class="a2" width="35%"><input type="text" name="lsxj" value="<%=JMath.round(product.getLsxj()) %>" size="20"></td>		
+		<td class="a1" width="15%">分销报价</td>
+		<td class="a2" width="35%"><input type="text" name="fxbj" value="<%=JMath.round(product.getFxbj()) %>" size="20" onkeyup="goNext(this.form,this.name);"></td>				
 		<td class="a1" width="15%">分销限价</td>
-		<td class="a2" width="35%"><input type="text" name="fxxj" value="<%=JMath.round(product.getFxxj()) %>" size="20"></td>
+		<td class="a2" width="35%"><input type="text" name="fxxj" value="<%=JMath.round(product.getFxxj()) %>" size="20" onkeyup="goNext(this.form,this.name);"></td>
 	</tr>	
 	<tr>		
 		<td class="a1" width="15%">比例点杀</td>
-		<td class="a2" width="35%"><input type="text" name="gf" value="<%=JMath.round(product.getGf()) %>" size="20">&nbsp;%</td>		
+		<td class="a2" width="35%"><input type="text" name="gf" value="<%=JMath.round(product.getGf()) %>" size="20" onkeyup="goNext(this.form,this.name);">&nbsp;%</td>		
 		<td class="a1" width="15%">金额点杀</td>
-		<td class="a2" width="35%"><input type="text" name="dss" value="<%=JMath.round(product.getDss()) %>" size="20"></td>
+		<td class="a2" width="35%"><input type="text" name="dss" value="<%=JMath.round(product.getDss()) %>" size="20" onkeyup="goNext(this.form,this.name);"></td>
 	</tr>
 	 	
 	<tr>		
 		<td class="a1" width="15%">库存下限</td>
-		<td class="a2" width="35%"><input type="text" name="kcxx" value="<%=product.getKcxx() %>" size="20"></td>		
-		<td class="a1" width="15%">库存上限</td>
-		<td class="a2" width="35%"><input type="text" name="kcsx" value="<%=product.getKcsx() %>" size="20"></td>
+		<td class="a2" width="35%"><input type="text" name="kcxx" value="<%=product.getKcxx() %>" size="20" onkeyup="goNext(this.form,this.name);"></td>		
+		<td class="a1" width="15%">条形码</td>
+		<td class="a2"><input type="text" name="sp_txm" value="<%=StringUtils.nullToStr(product.getSp_txm()) %>" size="20" onkeyup="goNext(this.form,this.name);"></td>
 	</tr>	
 	<tr>		
 		<td class="a1" width="15%">状态</td>
 		<td class="a2" width="35%">
-			<select name="state">
+			<select name="state" onkeyup="goNext(this.form,this.name);">
 				<option value="正常" <%if(StringUtils.nullToStr(product.getState()).equals("正常")) out.print("selected"); %>>正常</option>
 				<option value="停售" <%if(StringUtils.nullToStr(product.getState()).equals("停售")) out.print("selected"); %>>停售</option>
 			</select>
 		</td>
 		<td class="a1" width="15%">强制序列号</td>
 		<td class="a2" width="35%">
-			<select name="qz_serial_num">				
+			<select name="qz_serial_num" onkeyup="goNext(this.form,this.name);">				
 				<option value="否" <%if(StringUtils.nullToStr(product.getQz_serial_num()).equals("否")) out.print("selected"); %>>否</option>
 				<option value="是" <%if(StringUtils.nullToStr(product.getQz_serial_num()).equals("是")) out.print("selected"); %>>是</option>
 			</select>
 		</td>			
 	</tr>
 	<tr>
-		<td class="a1" width="15%">商品条形码</td>
-		<td class="a2"><input type="text" name="sp_txm" value="<%=StringUtils.nullToStr(product.getSp_txm()) %>" size="25"></td>
 		<td class="a1" width="15%">商品类别</td>
-		<td class="a2">
-			<select name="productKind">
+		<td class="a2" colspan="3">
+			<select name="productKind" onkeyup="goNext(this.form,this.name);">
 				<option value=""></option>
 		<%
 		if(productKindList != null && productKindList.size() > 0){
@@ -169,9 +169,7 @@ String iscs_flag = StringUtils.nullToStr(VS.findValue("iscs_flag"));
 	</tr>
 	<tr height="50">
 		<td class="a1">产品描述</td>
-		<td class="a2" colspan="3">
-			<textarea rows="2" cols="50" name="ms" style="width:80%"><%=StringUtils.nullToStr(product.getMs()) %></textarea>
-		</td>
+		<td class="a2" colspan="3"><input type="text" name="ms" value="<%=StringUtils.nullToStr(product.getMs()) %>"  style="width:80%" onkeyup="goNext(this.form,this.name);"></td>
 	</tr>
 	
 	<tr height="35">

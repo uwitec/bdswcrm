@@ -259,7 +259,7 @@ if(msg != null && msg.size() > 0){
 		}
 		%>
 		<td class="a1">创建日期</td>
-		<td class="a2"><input type="text" name="ckd.creatdate" id="creatdate" value="<%=cjsj %>"  readonly>
+		<td class="a2"><input type="text" name="ckd.creatdate" id="creatdate" value="<%=cjsj %>"  size="30" readonly>
 		</td>	
 	</tr>
 	<tr>		
@@ -269,24 +269,30 @@ if(msg != null && msg.size() > 0){
 		<input type="hidden" name="ckd.client_name" id="client_id" value="<%=StringUtils.nullToStr(ckd.getClient_name()) %>">
 		</td>
 		<td class="a1">联系人</td>
-		<td class="a2"><input type="text" name="ckd.client_lxr" id="client_lxr" value="<%=StringUtils.nullToStr(ckd.getClient_lxr()) %>" readonly>				
+		<td class="a2"><input type="text" name="ckd.client_lxr" id="client_lxr" size="30" value="<%=StringUtils.nullToStr(ckd.getClient_lxr()) %>" readonly>				
 	</tr>
 	<tr>
 		<td class="a1">联系电话</td>
-		<td class="a2"><input type="text" name="ckd.client_lxr_tel" id="client_lxr_tel" value="<%=StringUtils.nullToStr(ckd.getClient_lxr_tel()) %>" readonly>	
+		<td class="a2"><input type="text" name="ckd.client_lxr_tel" id="client_lxr_tel" size="30" value="<%=StringUtils.nullToStr(ckd.getClient_lxr_tel()) %>" readonly>	
 		<td class="a1">地址</td>
-		<td class="a2"><input type="text" name="ckd.client_lxr_address" id="client_address" value="<%=StringUtils.nullToStr(ckd.getClient_lxr_address()) %>" readonly>			
+		<td class="a2"><input type="text" name="ckd.client_lxr_address" id="client_address" size="30" value="<%=StringUtils.nullToStr(ckd.getClient_lxr_address()) %>" readonly>			
 	</tr>
 	<tr>	
 		<td class="a1" width="15%">销售订单编号</td>
 		<td class="a2"><input type="text" name="ckd.xsd_id" id="xsd_id" value="<%=StringUtils.nullToStr(ckd.getXsd_id()) %>" size="30" readonly maxlength="20"></td>				
 		<td class="a1" width="15%">销售负责人</td>
 		<td class="a2">
-			<input type="text" name="xsry_name" id="xsry_name" value="<%=StaticParamDo.getRealNameById(ckd.getXsry()) %>" readonly maxlength="20">
+			<input type="text" name="xsry_name" id="xsry_name" value="<%=StaticParamDo.getRealNameById(ckd.getXsry()) %>" size="30" readonly maxlength="20">
 			<input type="hidden" name="ckd.xsry" id="xsry" value="<%=StringUtils.nullToStr(ckd.getXsry()) %>" size="30" readonly maxlength="20">	
 			<input type="hidden" name="ckd.skzt" id="skzt" value="<%=StringUtils.nullToStr(ckd.getSkzt()) %>">	
 		</td>			
-	</tr>	
+	</tr>
+	<tr>	
+		<td class="a1" width="15%">运费支付</td>
+		<td class="a2" colspan="3">
+			<input type="text" name="ckd.yfzf_type" value="<%=StringUtils.nullToStr(ckd.getYfzf_type()) %>" size="30" readonly>
+		</td>							
+	</tr>		
 </table>	
 <br>
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
@@ -387,12 +393,11 @@ if(msg != null && msg.size() > 0){
 <table width="100%"  align="center" id="cktable"  class="chart_list" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td width="31%">产品名称</td>
-		<td width="29%">规格</td>
+		<td width="35%">产品名称</td>
+		<td width="35%">规格</td>
 		<td width="7%">订单数量</td>
 		<td width="7%">出库数量</td>
 		<td width="16%">强制序列号</td>
-		<td width="10%">备注</td>
 	</tr>
 	</thead>
 <%
@@ -416,8 +421,7 @@ if(ckdProducts!=null && ckdProducts.size()>0){
 		<td class="a2">
 			<input type="text" id="qz_serial_num_<%=i %>" name="ckdProducts[<%=i %>].qz_serial_num" value="<%=StringUtils.nullToStr(ckdProduct.get("qz_serial_num")) %>"  style="width:80%;<%=cssStyle %>" readonly>
 			<input type="hidden" id="qz_flag_<%=i %>" name="ckdProducts[<%=i %>].qz_flag" value="<%=StringUtils.nullToStr(ckdProduct.get("qz_flag")) %>"><a style="cursor:hand" title="左键点击输入输列号" onclick="openSerialWin('<%=i %>');"><b>...</b></a>&nbsp;
-		</td>		
-		<td class="a2"><input type="text" id="remark_<%=i %>"  style="width:100%;<%=cssStyle %>" name="ckdProducts[<%=i %>].remark" value="<%=StringUtils.nullToStr(ckdProduct.get("remark")) %>"></td>
+		</td>
 	</tr>
 <%
 	}

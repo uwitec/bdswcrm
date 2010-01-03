@@ -53,6 +53,7 @@ if(!user_id.equals("")){
 		<TR>
 			<TD class=ReportHead>部门</TD>
 			<TD class=ReportHead>业务员姓名</TD>
+			<TD class=ReportHead>考核毛利</TD>
 			<TD class=ReportHead>基本提成</TD>
 			<TD class=ReportHead>比例点杀</TD>
 			<TD class=ReportHead>金额点杀</TD>
@@ -66,12 +67,14 @@ if(!user_id.equals("")){
 
 if(results != null && results.size()>0){
 	
+	double hj_khml = 0;
 	double hj_jbtc = 0;
 	double hj_blds = 0;
 	double hj_jeds = 0;
 	double hj_cxjl = 0;
 	double hj_total = 0;
 	
+	double temp_khml = 0;
 	double temp_jbtc = 0;
 	double temp_blds = 0;
 	double temp_jeds = 0;
@@ -90,6 +93,7 @@ if(results != null && results.size()>0){
 		String real_name = StringUtils.nullToStr(map.get("real_name"));
 		String dept = StringUtils.nullToStr(map.get("dept"));
 		
+		double khml = map.get("khml") == null?0:((Double)map.get("khml")).doubleValue();   //考核毛利
 		double jbtc = map.get("jbtc") == null?0:((Double)map.get("jbtc")).doubleValue();   //基本提成
 		double blds = map.get("blds") == null?0:((Double)map.get("blds")).doubleValue();   //比例点杀
 		double jeds = map.get("jeds") == null?0:((Double)map.get("jeds")).doubleValue();   //金额点杀
@@ -108,13 +112,14 @@ if(results != null && results.size()>0){
 		
 		double total = jbtc + blds + jeds + cxjl;
 		
+		hj_khml += khml;
 		hj_jbtc += jbtc;
 		hj_blds += blds;
 		hj_jeds += jeds;
 		hj_cxjl += cxjl;
 		hj_total += total;
 		
-		
+		temp_khml += khml;
 		temp_jbtc += jbtc;
 		temp_blds += blds;
 		temp_jeds += jeds;
@@ -129,6 +134,7 @@ if(results != null && results.size()>0){
 			<TD class=ReportItemXH><%=StaticParamDo.getDeptNameById(temp_dept) %>&nbsp;</TD>
 			<TD class=ReportItemXH>
 				<a href="getYwytcMxResult.html?start_date=<%=start_date %>&end_date=<%=end_date %>&user_id=<%=temp_xsry %>"><%=temp_real_name %></a>&nbsp;</TD>
+			<TD class=ReportItemMoney><%=i == results.size()-1?JMath.round(temp_khml,2):JMath.round(temp_khml-khml,2) %>&nbsp;</TD>
 			<TD class=ReportItemMoney><%=i == results.size()-1?JMath.round(temp_jbtc,2):JMath.round(temp_jbtc-jbtc,2) %>&nbsp;</TD>
 			<TD class=ReportItemMoney><%=i == results.size()-1?JMath.round(temp_blds,2):JMath.round(temp_blds-blds,2) %>&nbsp;</TD>
 			<TD class=ReportItemMoney><%=i == results.size()-1?JMath.round(temp_jeds,2):JMath.round(temp_jeds-jeds,2) %>&nbsp;</TD>
@@ -136,6 +142,7 @@ if(results != null && results.size()>0){
 			<TD class=ReportItemMoney><%=i == results.size()-1?JMath.round(temp_total,2):JMath.round(temp_total-total,2) %>&nbsp;</TD>
 		</TR>
 <%	
+		temp_khml = khml;
 		temp_jbtc = jbtc;
 		temp_blds = blds;
 		temp_jeds = jeds;
@@ -150,6 +157,7 @@ if(results != null && results.size()>0){
 		<TR>
 			<TD class=ReportItem style="font-weight:bold">合计</TD>
 			<TD class=ReportItem>&nbsp;</TD>
+			<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(hj_khml,2) %>&nbsp;</TD>
 			<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(hj_jbtc,2) %>&nbsp;</TD>
 			<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(hj_blds,2) %>&nbsp;</TD>
 			<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(hj_jeds,2) %>&nbsp;</TD>

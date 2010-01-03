@@ -55,7 +55,11 @@ if(thdProducts != null && thdProducts.size() > 0){
 		if(document.getElementById("fzr").value == ""){
 			alert("经手人不能为空，请选择！");
 			return;
-		}		
+		}	
+		if(document.getElementById("remark").value == ""){
+			alert("退货原因不能为空！");
+			return;
+		}				
 		if(document.getElementById("type").value == "现金"){
 			if(document.getElementById("skzh").value == ""){
 				alert("退款账号不能为空，请选择！");
@@ -363,6 +367,12 @@ if(thdProducts != null && thdProducts.size() > 0){
 			</select>						
 		</td>
 	</tr>
+	<tr>
+		<td class="a1" width="15%">退货原因</td>
+		<td class="a2" colspan="3">
+			<input type="text" name="thd.remark" id="remark" value="<%=StringUtils.nullToStr(thd.getRemark()) %>" maxlength="100" style="width:75%"><font color="red">*</font>
+		</td>
+	</tr>	
 </table>
 <br>
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
@@ -506,12 +516,6 @@ if(thdProducts!=null && thdProducts.size()>0){
 		<td class="a1" width="15%">发票信息摘要</td>
 		<td class="a2" colspan="3">
 			<input type="text" name="thd.fpxx" id="fpxx" value="<%=StringUtils.nullToStr(thd.getFpxx()) %>" maxlength="100" style="width:75%">
-		</td>
-	</tr>
-	<tr>
-		<td class="a1" width="15%">备注</td>
-		<td class="a2" width="85%" colspan="3">
-			<input type="text" name="thd.remark" id="remark" value="<%=StringUtils.nullToStr(thd.getRemark()) %>" maxlength="100" style="width:75%">
 		</td>
 	</tr>	
 	<tr height="35">

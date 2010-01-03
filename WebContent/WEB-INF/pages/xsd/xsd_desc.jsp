@@ -41,12 +41,11 @@ List results = (List)VS.findValue("xsdProducts");
 <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0" border="1" id="selTable">
 	<thead>
 	<tr>
-		<td width="30%">产品名称</td>
-		<td width="25%">规格</td>
+		<td width="35%">产品名称</td>
+		<td width="35%">规格</td>
 		<td width="10%">价格</td>
 		<td width="10%">数量</td>
 		<td width="10%">小计</td>
-		<td width="15%">备注</td>
 	</tr>
 	</thead>
 	<%
@@ -61,7 +60,6 @@ List results = (List)VS.findValue("xsdProducts");
 		<td align="right"><%=JMath.round(xsdProduct.getPrice(),2) %>&nbsp;</td>
 		<td><%=StringUtils.nullToStr(xsdProduct.getNums()) %></td>
 		<td align="right"><%=JMath.round(xsdProduct.getXj(),2) %>&nbsp;</td>
-		<td><%=StringUtils.nullToStr(xsdProduct.getRemark()) %></td>
 	</tr>
 	
 	<%

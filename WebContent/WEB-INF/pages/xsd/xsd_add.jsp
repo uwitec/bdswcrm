@@ -287,9 +287,22 @@ if(!spMsg.equals("")){
 			<!--<img src="images/select.gif" align="absmiddle" title="选择经手人" border="0" onclick="openywyWin();" style="cursor:hand">
 			--><div id="brandTip"  style="height:12px;position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 			<input type="hidden" name="xsd.fzr" id="fzr" value="<%=xsd.getFzr()%>"/><font color="red">*</font>		
-		</td>			
-		<td class="a1" width="15%">订单状态</td>
+		</td>
+		<%
+		String yfzfType = StringUtils.nullToStr(xsd.getYfzf_type());
+		if(yfzfType.equals("")){
+			yfzfType = "寄方付";
+		}
+		%>
+		<td class="a1"  width="15%">运费支付</td>
 		<td class="a2">
+			<input type="radio" name="xsd.yfzf_type" value="寄方付" <%if(yfzfType.equals("寄方付")) out.print("checked"); %>>	寄方付
+			<input type="radio" name="xsd.yfzf_type" value="收方付" <%if(yfzfType.equals("收方付")) out.print("checked"); %>>	收方付
+		</td>							
+	</tr>
+	<tr>
+		<td class="a1" width="15%">订单状态</td>
+		<td class="a2" colspan="3">
 			<select name="xsd.state" id="state" onchange="chgState(this.value);">
 				<option value="已保存" <%if(StringUtils.nullToStr(xsd.getState()).equals("已保存")) out.print("selected"); %>>保存</option>
 				<option value="已提交" <%if(StringUtils.nullToStr(xsd.getState()).equals("已提交")) out.print("selected"); %>>提交</option>
@@ -317,7 +330,7 @@ if(!spMsg.equals("")){
 			}
 			%>
 			</select>
-		</td>			
+		</td>		
 	</tr>
 	
 </table>
@@ -333,12 +346,11 @@ if(!spMsg.equals("")){
 	<thead>
 	<tr>
 		<td width="5%">选择</td>
-		<td width="25%">产品名称</td>
-		<td width="25%">规格</td>
+		<td width="35%">产品名称</td>
+		<td width="30%">规格</td>
 		<td width="10%">销售价格</td>
 		<td width="10%">数量</td>
 		<td width="10%">小计</td>
-		<td width="15%">备注</td>
 	</tr>
 	</thead>
 <%
@@ -363,8 +375,7 @@ if(xsdProducts!=null && xsdProducts.size()>0){
 		<td class="a2">
 			<input type="text" id="xj_<%=i %>" name="xsdProducts[<%=i %>].xj" value="<%=JMath.round(xsdProduct.getXj()) %>" size="10" readonly>
 			<input type="hidden" id="qz_serial_num_<%=i %>" name="xsdProducts[<%=i %>].qz_serial_num" value="<%=StringUtils.nullToStr(xsdProduct.getQz_serial_num()) %>" size="15" readonly>	
-		</td>		
-		<td class="a2"><input type="text" id="remark_<%=i %>" name="xsdProducts[<%=i %>].remark" value="<%=StringUtils.nullToStr(xsdProduct.getRemark()) %>"></td>
+		</td>
 	</tr>
 <%
 	}
@@ -389,7 +400,6 @@ if(xsdProducts!=null && xsdProducts.size()>0){
 			<input type="text" id="xj_<%=i %>" name="xsdProducts[<%=i %>].xj" value="0.00" size="10" readonly>
 			<input type="hidden" id="qz_serial_num_<%=i %>" name="xsdProducts[<%=i %>].qz_serial_num" value="" size="15" readonly>	
 		</td>		
-		<td class="a2"><input type="text" id="remark_<%=i %>" name="xsdProducts[<%=i %>].remark"></td>
 	</tr>
 <%
 	}
@@ -506,8 +516,8 @@ if(xsdProducts!=null && xsdProducts.size()>0){
 	</tr>	
 	
 	<tr>
-		<td class="a1" width="15%">发票信息摘要</td>
-		<td class="a2" colspan="3">
+		<td class="a1" width="15%" id="fpxx1">发票信息摘要</td>
+		<td class="a2" colspan="3" id="fpxx2">
 			<input type="text" name="xsd.fpxx" id="fpxx" value="<%=StringUtils.nullToStr(xsd.getFpxx()) %>" style="width:75%" maxlength="100">
 		</td>	
 				

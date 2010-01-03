@@ -52,7 +52,11 @@ List thdProducts = (List)VS.findValue("thdProducts");
 	<tr>
 		<td class="a1">入库库房</td>
 		<td class="a2" colspan="3"><%=StaticParamDo.getStoreNameById(thd.getStore_id()) %></td>			
-	</tr>			
+	</tr>
+	<tr>
+		<td class="a1" width="15%">退货原因</td>
+		<td class="a2"colspan="3"><%=StringUtils.nullToStr(thd.getRemark()) %></td>
+	</tr>				
 </table>
 <br>
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
@@ -91,19 +95,7 @@ if(thdProducts!=null && thdProducts.size()>0){
 }
 %>	
 </table>
-<br>
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
-	<thead>
-	<tr>
-		<td colspan="2">备注</td>
-	</tr>
-	</thead>
-	<tr>
-		<td class="a1" width="15%">备注</td>
-		<td class="a2" width="85%">
-			<textarea rows="3" name="thd.remark" id="remark" style="width:75%" maxlength="500" readonly><%=StringUtils.nullToStr(thd.getRemark()) %></textarea>
-		</td>
-	</tr>	
 	<tr height="35">
 		<td class="a1" colspan="2">
 			<input type="button" name="button3" value="关闭" class="css_button2" onclick="window.close();">

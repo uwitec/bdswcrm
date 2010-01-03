@@ -213,11 +213,30 @@ session.removeAttribute("messages");
 	
 	function chkFkfs(vl){
 		var obj = document.getElementById("zq");
+
+		var obj_bcfkje1 = document.getElementById("bcfkje1");
+		var obj_bcfkje2 = document.getElementById("bcfkje2");
+		var obj_bcfkzh1 = document.getElementById("bcfkzh1");
+		var obj_bcfkzh2 = document.getElementById("bcfkzh2");
 		if(vl == "账期"){
 			obj.style.display = "";
+
+			obj_bcfkje1.style.display = "none";
+			obj_bcfkje2.style.display = "none";
+			obj_bcfkzh1.style.display = "none";
+			obj_bcfkzh2.style.display = "none";
+
+			document.getElementById("fkje").value = "0.00";
+			document.getElementById("zhname").value = "";
+			document.getElementById("fkzh").value = "";
 		}else{
 			obj.style.display = "none";
 			obj.value = "0";
+
+			obj_bcfkje1.style.display = "";
+			obj_bcfkje2.style.display = "";
+			obj_bcfkzh1.style.display = "";
+			obj_bcfkzh2.style.display = "";
 		}
 	}
 	
@@ -247,7 +266,7 @@ session.removeAttribute("messages");
 	
 </script>
 </head>
-<body onload="initFzrTip();initClientTip();">
+<body onload="initFzrTip();initClientTip();chkFkfs('<%=StringUtils.nullToStr(jhd.getFkfs()) %>');">
 <form name="jhdForm" action="updateJhd.html" method="post">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
@@ -295,18 +314,13 @@ session.removeAttribute("messages");
 		<td class="a2">
 		<%
 		String fkfs = StringUtils.nullToStr(jhd.getFkfs());
-		
-		String fkfsStyle = "display:none";
-		if(fkfs.equals("账期")){
-			fkfsStyle = "";
-		}
 		%>		
 			<select name="jhd.fkfs" id="fkfs" onchange="chkFkfs(this.value);">
 				<option value=""></option>
 				<option value="现金" <%if(fkfs.equals("现金")) out.print("selected"); %>>现金</option>
 				<option value="账期" <%if(fkfs.equals("账期")) out.print("selected"); %>>账期</option>
 			</select>
-			<input type="text" name="jhd.zq" id="zq" value="<%=StringUtils.nullToStr(jhd.getZq()) %>" size="3" style="<%=fkfsStyle %>" title="账期天数"> <font color="red">*</font>注：选择账期，请输入账期天数
+			<input type="text" name="jhd.zq" id="zq" value="<%=StringUtils.nullToStr(jhd.getZq()) %>" size="3" title="账期天数"> <font color="red">*</font>注：选择账期，请输入账期天数
 		</td>
 			
 		<td class="a1" width="15%">进货单状态</td>
@@ -370,31 +384,34 @@ if(jhdProducts != null && jhdProducts.size()>0){
 			<input type="button" name="button8" value="清除产品" class="css_button3" onclick="delDesc();">
 		</td>
 	</tr>
-	
+</table>
+<table width="100%"  align="center" id="jhtable"  class="chart_info" cellpadding="0" cellspacing="0">	
 	<tr>
-		<td class="a1">合计金额</td>
-		<td class="a2">
+		<td class="a1" widht="15%">合计金额</td>
+		<td class="a2" widht="35%">
 			<input type="text" id="total"  name="jhd.total" value="<%=JMath.round(jhd.getTotal()) %>" readonly>
 			<input type="hidden" id="yfje"  name="jhd.yfje" value="0.00">
 		</td>
-		<td class="a1">付款金额</td>
-		<td class="a2"><input type="text" id="fkje"  name="jhd.fkje" value="<%=JMath.round(jhd.getFkje()) %>"></td>	
+		<td class="a1" widht="15%" id="bcfkje1">本次付款金额</td>
+		<td class="a2" widht="35%" id="bcfkje2"><input type="text" id="fkje"  name="jhd.fkje" value="<%=JMath.round(jhd.getFkje()) %>"></td>	
 	</tr>
 	<tr>
-		<td class="a1" widht="20%">付款账户</td>
-		<td class="a2" colspan="3"><input type="text" id="zhname"  name="zhname" value="<%=StaticParamDo.getAccountNameById(jhd.getFkzh()) %>" readonly>
+		<td class="a1" widht="15%" id="bcfkzh1">本次付款账户</td>
+		<td class="a2" colspan="3" id="bcfkzh2"><input type="text" id="zhname"  name="zhname" value="<%=StaticParamDo.getAccountNameById(jhd.getFkzh()) %>" readonly>
 		<input type="hidden" id="fkzh"  name="jhd.fkzh" value="<%=StringUtils.nullToStr(jhd.getFkzh()) %>" >
 		<img src="images/select.gif" align="absmiddle" title="选择账户" border="0" onclick="openAccount();" style="cursor:hand">
 		</td>
-	</tr>		
+	</tr>	
+</table>
+<table width="100%"  align="center" id="jhtable"  class="chart_info" cellpadding="0" cellspacing="0">		
 	<tr>
-		<td class="a1" width="20%">描述信息</td>
-		<td class="a2" width="80%" colspan="3">
+		<td class="a1" width="15%">描述信息</td>
+		<td class="a2" width="85%">
 			<textarea rows="3" name="jhd.ms" id="ms" style="width:75%"><%=StringUtils.nullToStr(jhd.getMs()) %></textarea>
 		</td>
 	</tr>	
 	<tr height="35">
-		<td class="a1" colspan="4">
+		<td class="a1" colspan="2">
 			<input type="button" name="button1" value="提 交" class="css_button2" onclick="saveInfo();">&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="reset" name="button2" value="重 置" class="css_button2">&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="button" name="button3" value="关 闭" class="css_button2" onclick="window.opener.document.myform.submit();window.close();">

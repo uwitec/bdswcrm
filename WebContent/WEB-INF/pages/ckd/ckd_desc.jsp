@@ -41,11 +41,10 @@ List results = (List)VS.findValue("ckdProducts");
 <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0" border="1" id="selTable">
 	<thead>
 	<tr>
-		<td width="20%">产品名称</td>
-		<td width="10%">规格</td>
+		<td width="30%">产品名称</td>
+		<td width="25%">规格</td>
 		<td width="10%">数量</td>
 		<td width="35%">序列号</td>
-		<td width="15%">备注</td>
 	</tr>
 	</thead>
 	<%
@@ -55,11 +54,10 @@ List results = (List)VS.findValue("ckdProducts");
 		Map ckdProduct = (Map)it.next();
 	%>
 	<tr class="a1" onmousedown="trSelectChangeCss()">
-		<td><%=StringUtils.nullToStr(ckdProduct.get("product_name")) %></td>
-		<td><%=StringUtils.nullToStr(ckdProduct.get("product_xh")) %></td>
+		<td align="left"><%=StringUtils.nullToStr(ckdProduct.get("product_name")) %></td>
+		<td align="left"><%=StringUtils.nullToStr(ckdProduct.get("product_xh")) %></td>
 		<td><%=StringUtils.nullToStr(ckdProduct.get("nums")) %></td>
-		<td><%=StringUtils.nullToStr(ckdProduct.get("qz_serial_num")) %></td>
-		<td><%=StringUtils.nullToStr(ckdProduct.get("remark")) %></td>
+		<td align="left"><%=StringUtils.nullToStr(ckdProduct.get("qz_serial_num")) %></td>
 	</tr>
 	
 	<%

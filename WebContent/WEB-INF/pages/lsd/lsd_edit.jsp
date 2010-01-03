@@ -427,6 +427,8 @@ if(sp_state.equals("3")){
 	}	
 	
 	function chgKpTyle(vl){
+		if(vl == "") vl = "出库单";
+		
 		var obj_mc1 = document.getElementById("mc1");
 		var obj_mc2 = document.getElementById("mc2");
 		
@@ -441,10 +443,13 @@ if(sp_state.equals("3")){
 		
 		var obj_sh1 = document.getElementById("sh1");
 		var obj_sh2 = document.getElementById("sh2");
+
+		var obj_fpxx1 = document.getElementById("fpxx1");
+		var obj_fpxx2 = document.getElementById("fpxx2");
 		
 		if(vl == "出库单"){
-			obj_mc1.style.display = "";
-			obj_mc2.style.display = "";
+			obj_mc1.style.display = "none";
+			obj_mc2.style.display = "none";
 			
 			obj_dz1.style.display = "none";
 			obj_dz2.style.display = "none";
@@ -456,7 +461,10 @@ if(sp_state.equals("3")){
 			obj_zh2.style.display = "none";
 			
 			obj_sh1.style.display = "none";
-			obj_sh2.style.display = "none";			
+			obj_sh2.style.display = "none";		
+
+			obj_fpxx1.style.display = "none";	
+			obj_fpxx2.style.display = "none";	
 		}else if(vl == "普通发票"){
 			obj_mc1.style.display = "";
 			obj_mc2.style.display = "";
@@ -471,7 +479,10 @@ if(sp_state.equals("3")){
 			obj_zh2.style.display = "none";
 			
 			obj_sh1.style.display = "none";
-			obj_sh2.style.display = "none";			
+			obj_sh2.style.display = "none";	
+
+			obj_fpxx1.style.display = "";	
+			obj_fpxx2.style.display = "";			
 		}else if(vl == "增值发票"){
 			obj_mc1.style.display = "";
 			obj_mc2.style.display = "";
@@ -486,7 +497,10 @@ if(sp_state.equals("3")){
 			obj_zh2.style.display = "";
 			
 			obj_sh1.style.display = "";
-			obj_sh2.style.display = "";			
+			obj_sh2.style.display = "";		
+
+			obj_fpxx1.style.display = "";	
+			obj_fpxx2.style.display = "";		
 		}
 		
 		if(document.getElementById("fkfs").value == "刷卡"){
@@ -777,8 +791,8 @@ if(lsdProducts != null && lsdProducts.size()>0){
 	</tr>	
 	
 	<tr>
-		<td class="a1" width="15%">发票信息摘要</td>
-		<td class="a2" colspan="3">
+		<td class="a1" width="15%" id="fpxx1">发票信息摘要</td>
+		<td class="a2" colspan="3" id="fpxx2">
 			<input type="text" name="lsd.fpxx" id="fpxx" value="<%=StringUtils.nullToStr(lsd.getFpxx()) %>" style="width:75%" maxlength="100">
 		</td>	
 				

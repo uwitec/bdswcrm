@@ -155,6 +155,9 @@ if(!store_id.equals("")){
 					fs_nums = 0 - fs_nums;
 				}
 				url = "viewKcpd.html?id=";
+			}else if(dj_id.indexOf("CX") != -1){
+				type = "拆卸单";
+				url = "viewCxd.html?id=";
 			}
 			
 %>

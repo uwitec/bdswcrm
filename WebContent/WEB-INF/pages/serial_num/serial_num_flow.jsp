@@ -119,7 +119,7 @@ if(serialFlowList!=null && serialFlowList.size()>0){
 	</tbody>
 </table>
 <BR>
-&nbsp;&nbsp;说明：货品状态分为：在库，已售，已退货（采购退货）三种状态；点击单据编号可以查看原始单据。
+&nbsp;&nbsp;说明：货品状态分为：在库，已售，已退货（采购退货），已拆卸四种状态；点击单据编号可以查看原始单据。
 <%
 }
 %>
