@@ -50,12 +50,12 @@ public class CbtzDAO extends JdbcBaseDAO {
 	 * @param dj_type
 	 * @param kh_cbj
 	 */
-	public void updateProduct(String id,String dj_type,double kh_cbj){
+	public void updateProduct(String id,String dj_type,double kh_cbj,double lsxj,double basic_ratio,double ds){
 		String sql = "";
 		if(dj_type.equals("xs")){
-			sql = "update xsd_product set kh_cbj=" + kh_cbj + " where id='" + id + "'";
+			sql = "update xsd_product set kh_cbj=" + kh_cbj + ",lsxj=" + lsxj + ",basic_ratio=" + basic_ratio + ",ds=" + ds + " where id='" + id + "'";
 		}else{
-			sql = "update lsd_product set kh_cbj=" + kh_cbj + " where id='" + id + "'";
+			sql = "update lsd_product set kh_cbj=" + kh_cbj + ",lsxj=" + lsxj + ",basic_ratio=" + basic_ratio + ",ds=" + ds + " where id='" + id + "'";
 		}
 		
 		this.getJdbcTemplate().update(sql);
