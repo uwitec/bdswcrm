@@ -112,7 +112,7 @@ public class SysInitSetDAO extends JdbcBaseDAO {
 	 * 清空系统数据
 	 */
 	public void updateSys_ClearData(){
-		String[] sqls = new String[77];
+		String[] sqls = new String[94];
 		
 		sqls[0] = "delete from xxfb_nbgg";   //内部公告
 		sqls[1] = "delete from account_dzd"; //对账单
@@ -132,7 +132,7 @@ public class SysInitSetDAO extends JdbcBaseDAO {
 		sqls[15] = "delete from client_wl_init";  //客户往来初始
 		sqls[16] = "delete from clients";  //往来客户
 		sqls[17] = "update cms_all_seq set jhdid=1,gysid=1,cgyfkid=1,rkdid=1,kcid=1," +
-				   "kcpdid=1,kfid=1,ckdid=1,clientid=1,xsdid=1,yskid=1,lsdid=1,userid=2," +
+				   "kcpdid=1,kfid=1,ckdid=1,clientid=1,xsdid=1,yskid=1,lsdid=1,userid=10," +
 				   "roleid=2,pzid=1,thdid=1,dbsqid=1,kfdbid=1,chtjid=1,accountid=1," +
 				   "qtsrid=1,qtzcid=1,nbzzid=1,cgthdid=1,lsyskid=1,lsthdid=1,yushoutoyingshouid=1,yufutoyingfuid=1,fysqid=1,txfkid=1,txfkdescid=1,kcpdyk_id=1,linkman_id=1,bxdid=1"; //更新系统所有序列
 		sqls[18] = "delete from dbsq";  //调拨申请
