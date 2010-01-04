@@ -2,7 +2,7 @@
 <%@taglib uri="/webwork" prefix="ww"%>
 <html>
 <head>
-<title>考核成本价调整</title>
+<title>考核指标调整</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript">
@@ -26,7 +26,7 @@
 			dj_type = "xs";
 		}
 		var destination = "editKhcb.html?dj_type=" + dj_type + "&id=" + id;
-		var fea ='width=400,height=400,left=' + (screen.availWidth-400)/2 + ',top=' + (screen.availHeight-400)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		var fea ='width=600,height=400,left=' + (screen.availWidth-600)/2 + ',top=' + (screen.availHeight-400)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		window.open(destination,'考核成本调整',fea);		
 	}
 	
@@ -40,7 +40,7 @@
 <form name="myform" action="queryProduct.html" method="post">
 <table width="100%"  align="center"class="chart_list" cellpadding="0" cellspacing="0">
 	<tr>
-		<td class="csstitle" align="left" width="100%">&nbsp;&nbsp;&nbsp;&nbsp;<b>考核成本价调整</b></td>				
+		<td class="csstitle" align="left" width="100%">&nbsp;&nbsp;&nbsp;&nbsp;<b>考核指标调整</b></td>				
 	</tr>
 	<tr>
 		<td class="search" align="left" colspan="2">&nbsp;&nbsp;
@@ -61,8 +61,11 @@
 		<td>商品编号</td>
 		<td>商品名称</td>	
 		<td>商品规格</td>
-		<td>销售价格</td>
-		<td>考核成本</td>
+		<td>销售价格(元)</td>
+		<td>考核成本(元)</td>
+		<td>零售限价(元)</td>
+		<td>比例点杀(%)</td>
+		<td>金额点杀(元)</td>
 		<td>操作</td>
 	</tr>
 	</thead>
@@ -71,8 +74,11 @@
 			<td><ww:property value="%{product_id}" /></td>
 			<td align="left">&nbsp;<ww:property value="%{product_name}" /></td>
 			<td align="left">&nbsp;<ww:property value="%{product_xh}" /></td>
-			<td align="right"><ww:property value="%{price}" />&nbsp;</td>
-			<td align="right"><ww:property value="%{kh_cbj}" />&nbsp;</td>		
+			<td align="right"><ww:property value="%{getText('global.format.money',{price})}" />&nbsp;</td>
+			<td align="right"><ww:property value="%{getText('global.format.money',{kh_cbj})}" />&nbsp;</td>
+			<td align="right"><ww:property value="%{getText('global.format.money',{lsxj})}" />&nbsp;</td>
+			<td align="right"><ww:property value="%{getText('global.format.money',{basic_ratio})}" />&nbsp;</td>
+			<td align="right"><ww:property value="%{getText('global.format.money',{ds})}" />&nbsp;</td>				
 			<td><a href="javascript:edit('<ww:property value="%{dj_type}" />','<ww:property value="%{id}" />');">调整</a></td>
 		</tr>
 	</ww:iterator>

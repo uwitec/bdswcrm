@@ -2,7 +2,7 @@
 <%@taglib uri="/webwork" prefix="ww"%>
 <html>
 <head>
-<title>考核成本价调整</title>
+<title>考核指标调整</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript" src="js/Check.js"></script>
@@ -13,7 +13,10 @@
 <script type="text/javascript">
 	//更新成本
 	function saveInfo(){
-		if(!InputValid(document.myform.kh_cbj,0,"float",1,0,9999999,"修改后考核成本")){return; }
+		if(!InputValid(document.myform.kh_cbj,1,"float",1,0,9999999,"修改后考核成本")){return; }
+		if(!InputValid(document.myform.lsxj,1,"float",1,0,9999999,"修改后零售限价")){return; }
+		if(!InputValid(document.myform.basic_ratio,1,"float",1,0,9999999,"修改后比例点杀")){return; }
+		if(!InputValid(document.myform.ds,1,"float",1,0,9999999,"修改后金额点杀")){return; }
 		document.myform.submit();
 	}
 </script>
@@ -25,7 +28,7 @@
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
-		<td colspan="4">考核成本价调整</td>
+		<td colspan="4">商品信息</td>
 	</tr>
 	</thead>
 	<tr>
@@ -41,18 +44,39 @@
 		<td class="a1" width="25%">产品规格</td>
 		<td class="a2" width="75%"><ww:property value="%{productMap.product_xh}"/></td>
 	</tr>
+</table><BR>
+<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
+	<thead>
 	<tr>
-		<td class="a1" width="25%">原考核成本</td>
-		<td class="a2" width="75%"><ww:property value="%{productMap.kh_cbj}"/></td>		
+		<td colspan="4">调节指标</td>
+	</tr>
+	</thead>
+	<tr>
+		<td class="a1" width="20%">原考核成本</td>
+		<td class="a2" width="30%"><ww:property value="%{productMap.kh_cbj}"/></td>
+		<td class="a1" width="20%">修改后考核成本</td>
+		<td class="a2" width="30%"><ww:textfield theme="simple" name="kh_cbj" id="kh_cbj" value="0.00"/></td>		
 	</tr>
 	<tr>
-		<td class="a1" width="25%">修改后考核成本</td>
-		<td class="a2" width="75%">
-			<ww:textfield theme="simple" name="kh_cbj" id="kh_cbj" value="0.00"/> 
-		</td>		
+		<td class="a1" width="20%">原零售限价</td>
+		<td class="a2" width="30%"><ww:property value="%{productMap.lsxj}"/></td>
+		<td class="a1" width="20%">修改后零售限价</td>
+		<td class="a2" width="30%"><ww:textfield theme="simple" name="lsxj" id="lsxj" value="0.00"/></td>		
 	</tr>
+	<tr>
+		<td class="a1" width="20%">原比例点杀</td>
+		<td class="a2" width="30%"><ww:property value="%{productMap.basic_ratio}"/></td>
+		<td class="a1" width="20%">修改后比例点杀</td>
+		<td class="a2" width="30%"><ww:textfield theme="simple" name="basic_ratio" id="basic_ratio" value="0.00"/></td>		
+	</tr>	
+	<tr>
+		<td class="a1" width="20%">原金额点杀</td>
+		<td class="a2" width="30%"><ww:property value="%{productMap.ds}"/></td>
+		<td class="a1" width="20%">修改后金额点杀</td>
+		<td class="a2" width="30%"><ww:textfield theme="simple" name="ds" id="ds" value="0.00"/></td>		
+	</tr>		
 	<tr height="35">
-		<td class="a1" colspan="2">
+		<td class="a1" colspan="4">
 			<input type="button" name="button1" value="提交" class="css_button" onclick="saveInfo();">&nbsp;
 			<input type="reset" name="button2" value="重置" class="css_button">&nbsp;&nbsp;
 			<input type="button" name="button1" value="关闭" class="css_button" onclick="window.close();">
