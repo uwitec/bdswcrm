@@ -357,6 +357,22 @@ public class ProductDAO extends JdbcBaseDAO {
 	
 	
 	/**
+	 * 根据查询条件取所有产品列表
+	 * @param con
+	 * @return
+	 */
+	public List getProducts(String con){
+		String sql = "select * from product where 1=1";
+		
+		if(!con.equals("")){
+			sql += con;
+		}
+		
+		return this.getResultList(sql);
+	}
+	
+	
+	/**
 	 * 判断商品是否可以删除<BR>
 	 * 发生业务数据的商品不能删除<BR>
 	 * 业务数据包括：零售、销售、退货、采购、采购退货、调拨申请、调拨、调价<BR>

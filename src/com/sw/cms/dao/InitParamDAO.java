@@ -1,5 +1,6 @@
 package com.sw.cms.dao;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -469,15 +470,89 @@ public class InitParamDAO extends JdbcBaseDAO {
 		log.info("生成账户 "+ cdate + " 期初成功");
 	}
 	
+	
 	/**
 	 * 更改售后库存商品在库天数
 	 *
 	 */
-	public void updateShkcProductDay()
-	{
+	public void updateShkcProductDay(){
 		String sql = "update shkc set day_num=day_num+1";
         this.getJdbcTemplate().update(sql);
         log.info("更改售后库存商品在库天数成功！");
+	}
+	
+	
+	/**
+	 * 批量生成客户期初信息，从开始日期到结束日期<BR>
+	 * 必须保存开始日期前一天的期初信息是正确的，否则生成的所有期初期都是错误的<BR>
+	 * 例如：要批量重新生成2009-09-01到2009-10-01的期初<BR>
+	 * 则参数start_date=2009-09-01<BR>
+	 * 参数end_date=2009-10-01<BR>
+	 * 同时要保证2009-08-31的期初值是正确的<BR><BR>
+	 * 2010-01-05添加
+	 * @param start_date 开始日期
+	 * @param end_date   结束日期
+	 */
+	public void updateBatchGenClientWlQc(String start_date,String end_date){
+		//清除现有的期初值
+		String sql = "delete from client_qc where cdate>='" + start_date + "'";
+		this.getJdbcTemplate().update(sql);
+		
+		//插入新的期初值
+		
+		Date curDate = DateComFunc.strToDate(start_date,"yyyy-MM-dd");		
+		while(DateComFunc.formatDate(curDate, "yyyy-MM-dd").compareToIgnoreCase(end_date) <= 0){
+			
+			String cdate = DateComFunc.formatDate(curDate, "yyyy-MM-dd");
+			String cdat_1 =  DateComFunc.formatDate((DateComFunc.addDay(curDate,-1)),"yyyy-MM-dd");
+			this.genCleintWlqc(cdate, cdat_1);
+			log.debug("生成" + cdate + "客户往来期初成功");
+			curDate = DateComFunc.addDay(curDate, 1);  //当前天数加1
+		}
+	}
+	
+	
+	/**
+	 * 批量生成账户期初信息，从开始日期到结束日期<BR>
+	 * 必须保存开始日期前一天的期初信息是正确的，否则生成的所有期初期都是错误的<BR>
+	 * 例如：要批量重新生成2009-09-01到2009-10-01的期初<BR>
+	 * 则参数start_date=2009-09-01<BR>
+	 * 参数end_date=2009-10-01<BR>
+	 * 同时要保证2009-08-31的期初值是正确的<BR><BR>
+	 * 2010-01-05添加
+	 * @param start_date 开始日期
+	 * @param end_date   结束日期
+	 */
+	public void updateBatchGenAccountQc(String start_date,String end_date){
+		//清除现有的期初值
+		String sql = "delete from account_qc where qc_date>='" + start_date + "'";
+		this.getJdbcTemplate().update(sql);
+		
+		//插入新的期初值
+		
+		Date curDate = DateComFunc.strToDate(start_date,"yyyy-MM-dd");		
+		while(DateComFunc.formatDate(curDate, "yyyy-MM-dd").compareToIgnoreCase(end_date) <= 0){
+			
+			String cdate = DateComFunc.formatDate(curDate, "yyyy-MM-dd");
+			String cdat_1 =  DateComFunc.formatDate((DateComFunc.addDay(curDate,-1)),"yyyy-MM-dd");
+			this.genAccountQc(cdate, cdat_1);
+			log.debug("生成" + cdate + "账户期初成功");
+			curDate = DateComFunc.addDay(curDate, 1);  //当前天数加1
+		}
+	}
+	
+	
+	/**
+	 * 插入库存期初值
+	 * @param product_id
+	 * @param store_id
+	 * @param nums
+	 * @param cdate
+	 * @param price
+	 */
+	public void inserProductKcQc(String product_id,String store_id,int nums,String cdate,double price){
+		String sql = "insert into product_kc_qc(product_id,store_id,nums,cdate,price) values('" + product_id + "','" + store_id + "'," + nums + ",'" + cdate + "'," + price + ")";
+		this.getJdbcTemplate().update(sql);
 	}
 
 }
