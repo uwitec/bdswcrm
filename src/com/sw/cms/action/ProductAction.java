@@ -35,7 +35,7 @@ public class ProductAction extends BaseAction implements ModelDriven{
 	private int rowsPerPage = Constant.PAGE_SIZE2;
 	private String product_name = "";
 	private String product_kind = "";
-	private String prop = "";
+	private String product_prop = "";
 	private String state = "";
 	private String product_xh = "";
 	private String product_state = "正常";
@@ -165,7 +165,7 @@ public class ProductAction extends BaseAction implements ModelDriven{
 	 */
 	public String queryProduct(){
 		try{
-			String con = "";
+			String con = " and state='正常'";
 			//处理商品类别
 			if(!product_kind.equals("")){
 				String[] arryItems = product_kind.split(",");
@@ -186,11 +186,8 @@ public class ProductAction extends BaseAction implements ModelDriven{
 			if(!product_name.equals("")){
 				con += " and product_name like '%" + product_name + "%'";
 			}
-			if(!prop.equals("")){
-				con += " and prop='" + prop + "'";
-			}
-			if(!state.equals("")){
-				con += " and state='" + state + "'";
+			if(!product_prop.equals("")){
+				con += " and prop='" + product_prop + "'";
 			}
 			
 			products = productService.getProductKcList(con);
@@ -387,16 +384,6 @@ public class ProductAction extends BaseAction implements ModelDriven{
 	}
 
 
-	public String getProp() {
-		return prop;
-	}
-
-
-	public void setProp(String prop) {
-		this.prop = prop;
-	}
-
-
 	public String getState() {
 		return state;
 	}
@@ -404,6 +391,16 @@ public class ProductAction extends BaseAction implements ModelDriven{
 
 	public void setState(String state) {
 		this.state = state;
+	}
+
+
+	public String getProduct_prop() {
+		return product_prop;
+	}
+
+
+	public void setProduct_prop(String productProp) {
+		product_prop = productProp;
 	}
 	
 }
