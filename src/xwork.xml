@@ -174,6 +174,15 @@
         	<result name="notDel">/WEB-INF/pages/msg_info.jsp</result>
             <result name="success" type="redirect">product_list.html</result>
         </action>
+        <action name="batchUpdateProductCon" class="productAction" method="queryProductCon">
+            <result name="success">/WEB-INF/pages/product/batch_update_product_con.jsp</result>
+        </action>
+        <action name="batchUpdateProductList" class="productAction" method="queryProduct">
+            <result name="success">/WEB-INF/pages/product/batch_update_product_list.jsp</result>
+        </action>
+        <action name="batchUpdateProduct" class="productAction" method="batchUpdateProduct">
+            <result name="success">/WEB-INF/pages/product/msg.jsp</result>
+        </action>        
         <!-- 产品及产品类别 -->
         
         <!-- 进货单 -->
