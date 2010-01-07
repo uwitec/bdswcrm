@@ -102,9 +102,9 @@ function menu(id){						//画菜单
 			menuname	= currdata[i][2];
 		}//end if
 
-		ico			= "<img src='"+path+currdata[i][4]+"' id='ico"+currdata[i][0]+"' align=middle border=0 onclick="+onmouseup+">";
-		printstr	+= "<tr><td id='pr"+currdata[i][0]+"' valign=middle class="+menutype+">"+ico + menuname+"</td></tr>\n";
-		printstr	+= "<tr id='item"+currdata[i][0]+"' style='display:none'><td class="+listtype+">"+menu(currdata[i][0])+"</td></tr>\n";
+		ico			= "<img src='"+path+currdata[i][4]+"' id='ico"+currdata[i][0]+"' align=middle border=0 onclick=\""+onmouseup+"\">";
+		printstr	+= "<tr><td id='pr"+currdata[i][0]+"' class="+menutype+" onclick=\""+onmouseup+"\"></td><td valign=middle class=textItem>"+ico + menuname+"</td></tr>\n";
+		printstr	+= "<tr id='item"+currdata[i][0]+"' style='display:none'><td class="+listtype+" onclick=\""+onmouseup+"\"></td><td class=textItem>"+menu(currdata[i][0])+"</td></tr>\n";
 
 	}//end for
 	printstr	+= "</table>\n";

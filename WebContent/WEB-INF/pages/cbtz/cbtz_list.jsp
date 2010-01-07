@@ -77,7 +77,7 @@
 			<td align="right"><ww:property value="%{getText('global.format.money',{price})}" />&nbsp;</td>
 			<td align="right"><ww:property value="%{getText('global.format.money',{kh_cbj})}" />&nbsp;</td>
 			<td align="right"><ww:property value="%{getText('global.format.money',{lsxj})}" />&nbsp;</td>
-			<td align="right"><ww:property value="%{getText('global.format.money',{basic_ratio})}" />&nbsp;</td>
+			<td align="right"><ww:property value="%{getText('global.format.money',{gf})}" />&nbsp;</td>
 			<td align="right"><ww:property value="%{getText('global.format.money',{ds})}" />&nbsp;</td>				
 			<td><a href="javascript:edit('<ww:property value="%{dj_type}" />','<ww:property value="%{id}" />');">调整</a></td>
 		</tr>

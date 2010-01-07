@@ -15,7 +15,7 @@
 	function saveInfo(){
 		if(!InputValid(document.myform.kh_cbj,1,"float",1,0,9999999,"修改后考核成本")){return; }
 		if(!InputValid(document.myform.lsxj,1,"float",1,0,9999999,"修改后零售限价")){return; }
-		if(!InputValid(document.myform.basic_ratio,1,"float",1,0,9999999,"修改后比例点杀")){return; }
+		if(!InputValid(document.myform.gf,1,"float",1,0,9999999,"修改后比例点杀")){return; }
 		if(!InputValid(document.myform.ds,1,"float",1,0,9999999,"修改后金额点杀")){return; }
 		document.myform.submit();
 	}
@@ -53,27 +53,27 @@
 	</thead>
 	<tr>
 		<td class="a1" width="20%">原考核成本</td>
-		<td class="a2" width="30%"><ww:property value="%{productMap.kh_cbj}"/></td>
+		<td class="a2" width="30%"><ww:property value="%{getText('global.format.money',{productMap.kh_cbj})}" /></td>
 		<td class="a1" width="20%">修改后考核成本</td>
-		<td class="a2" width="30%"><ww:textfield theme="simple" name="kh_cbj" id="kh_cbj" value="0.00"/></td>		
+		<td class="a2" width="30%"><ww:textfield theme="simple" name="kh_cbj" id="kh_cbj" value="%{getText('global.format.double',{productMap.kh_cbj})}"/></td>		
 	</tr>
 	<tr>
 		<td class="a1" width="20%">原零售限价</td>
-		<td class="a2" width="30%"><ww:property value="%{productMap.lsxj}"/></td>
+		<td class="a2" width="30%"><ww:property value="%{getText('global.format.money',{productMap.lsxj})}" /></td>
 		<td class="a1" width="20%">修改后零售限价</td>
-		<td class="a2" width="30%"><ww:textfield theme="simple" name="lsxj" id="lsxj" value="0.00"/></td>		
+		<td class="a2" width="30%"><ww:textfield theme="simple" name="lsxj" id="lsxj" value="%{getText('global.format.double',{productMap.lsxj})}"/></td>		
 	</tr>
 	<tr>
 		<td class="a1" width="20%">原比例点杀</td>
-		<td class="a2" width="30%"><ww:property value="%{productMap.basic_ratio}"/></td>
+		<td class="a2" width="30%"><ww:property value="%{getText('global.format.money',{productMap.gf})}" /></td>
 		<td class="a1" width="20%">修改后比例点杀</td>
-		<td class="a2" width="30%"><ww:textfield theme="simple" name="basic_ratio" id="basic_ratio" value="0.00"/></td>		
+		<td class="a2" width="30%"><ww:textfield theme="simple" name="gf" id="gf" value="%{getText('global.format.double',{productMap.gf})}"/></td>		
 	</tr>	
 	<tr>
 		<td class="a1" width="20%">原金额点杀</td>
-		<td class="a2" width="30%"><ww:property value="%{productMap.ds}"/></td>
+		<td class="a2" width="30%"><ww:property value="%{getText('global.format.money',{productMap.ds})}" /></td>
 		<td class="a1" width="20%">修改后金额点杀</td>
-		<td class="a2" width="30%"><ww:textfield theme="simple" name="ds" id="ds" value="0.00"/></td>		
+		<td class="a2" width="30%"><ww:textfield theme="simple" name="ds" id="ds" value="%{getText('global.format.double',{productMap.ds})}"/></td>		
 	</tr>		
 	<tr height="35">
 		<td class="a1" colspan="4">

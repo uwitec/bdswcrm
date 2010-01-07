@@ -87,3 +87,10 @@ a:active {
 	border:1px solid #FFFFFF;
 	padding-top:1px;
 }
+.textItem {
+	font-size: 9pt;
+	background-repeat: no-repeat;
+	height: 17px;
+	cursor: hand;
+	padding-left: 0px;
+}
