@@ -27,11 +27,16 @@ public class ProductAction extends BaseAction implements ModelDriven{
 	private String[] jldw;
 	private List productKindList = new ArrayList();
 	
+	private List products = new ArrayList();
+	
 	//查询条件
 	private String curId = "";
 	private int curPage = 1;
 	private int rowsPerPage = Constant.PAGE_SIZE2;
 	private String product_name = "";
+	private String product_kind = "";
+	private String prop = "";
+	private String state = "";
 	private String product_xh = "";
 	private String product_state = "正常";
 	private String iscs_flag = "";  //系统是否初始完成标志
@@ -143,6 +148,76 @@ public class ProductAction extends BaseAction implements ModelDriven{
 		productService.delProductById(productId);
 		return "success";
 	}	
+	
+	
+	/**
+	 * 批量修改商品信息，查询条件页面
+	 * @return
+	 */
+	public String queryProductCon(){
+		return SUCCESS;
+	}
+	
+	
+	/**
+	 * 查询商品信息
+	 * @return
+	 */
+	public String queryProduct(){
+		try{
+			String con = "";
+			//处理商品类别
+			if(!product_kind.equals("")){
+				String[] arryItems = product_kind.split(",");
+				
+				if(arryItems != null && arryItems.length >0){
+					con += " and (";
+					for(int i=0;i<arryItems.length;i++){
+						if(i == 0){
+							con += " product_kind like '" + arryItems[i] + "%'";
+						}else{
+							con += " or product_kind like '" + arryItems[i] + "%'";
+						}
+					}
+					con += ")";
+				}
+				
+			}
+			if(!product_name.equals("")){
+				con += " and product_name like '%" + product_name + "%'";
+			}
+			if(!prop.equals("")){
+				con += " and prop='" + prop + "'";
+			}
+			if(!state.equals("")){
+				con += " and state='" + state + "'";
+			}
+			
+			products = productService.getProductKcList(con);
+			
+			return SUCCESS;
+		}catch(Exception e){
+			log.error("查询商品信息出错，原因：" + e.getMessage());
+			e.printStackTrace();
+			return ERROR;
+		}
+	}
+	
+	
+	/**
+	 * 批量更新商品信息
+	 * @return
+	 */
+	public String batchUpdateProduct(){
+		try{
+			productService.updateProducts(products);
+			return SUCCESS;
+		}catch(Exception e){
+			log.error("查询商品信息出错，原因：" + e.getMessage());
+			e.printStackTrace();
+			return ERROR;
+		}
+	}
 
 	
 	public String getCurId() {
@@ -290,6 +365,45 @@ public class ProductAction extends BaseAction implements ModelDriven{
 
 	public void setSysInitSetService(SysInitSetService sysInitSetService) {
 		this.sysInitSetService = sysInitSetService;
+	}
+
+	public String getProduct_kind() {
+		return product_kind;
+	}
+
+
+	public void setProduct_kind(String productKind) {
+		product_kind = productKind;
+	}
+
+
+	public List getProducts() {
+		return products;
+	}
+
+
+	public void setProducts(List products) {
+		this.products = products;
+	}
+
+
+	public String getProp() {
+		return prop;
+	}
+
+
+	public void setProp(String prop) {
+		this.prop = prop;
+	}
+
+
+	public String getState() {
+		return state;
+	}
+
+
+	public void setState(String state) {
+		this.state = state;
 	}
 	
 }

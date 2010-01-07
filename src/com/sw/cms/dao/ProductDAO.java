@@ -433,6 +433,53 @@ public class ProductDAO extends JdbcBaseDAO {
 		return true;
 	}
 	
+	
+	/**
+	 * 根据商品类别及名称查询商品列表信息
+	 * @param product_kind
+	 * @param product_name
+	 * @param store_id
+	 * @return
+	 */
+	public List getProductList(String con){
+		String sql = "select * from product where 1=1";
+		
+		//处理商品类别
+		if(!con.equals("")){
+			sql += con;
+		}
+		
+		return this.getResultList(sql, new ProductRowMapper());
+	}
+	
+	
+	/**
+	 * 批量更新商品信息
+	 * @param products
+	 */
+	public void updateProducts(List products){
+		String sql = "";
+		Object[] param = new Object[10];
+		if(products != null && products.size() > 0){
+			for(int i=0;i<products.size();i++){
+				Product product = (Product)products.get(i);
+				sql = "update product set product_name=?,product_xh=?,khcbj=?,lsbj=?,lsxj=?,fxbj=?,fxxj=?,gf=?,dss=? where product_id=?";
+				param[0] = product.getProductName();
+				param[1] = product.getProductXh();
+				param[2] = product.getKhcbj();
+				param[3] = product.getLsbj();
+				param[4] = product.getLsxj();
+				param[5] = product.getFxbj();
+				param[6] = product.getFxxj();
+				param[7] = product.getGf();
+				param[8] = product.getDss();
+				param[9] = product.getProductId();
+				
+				this.getJdbcTemplate().update(sql, param);
+			}
+		}
+	}
+	
 
 	/**
 	 * 包装对象

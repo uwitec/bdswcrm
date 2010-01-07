@@ -19,7 +19,7 @@ public class CbtzAction extends BaseAction {
 	
 	private double kh_cbj = 0;
 	private double lsxj = 0;
-	private double basic_ratio = 0;
+	private double gf = 0;
 	private double ds = 0;
 	
 	
@@ -62,7 +62,7 @@ public class CbtzAction extends BaseAction {
 	 */
 	public String update(){
 		try{
-			cbtzService.updateProduct(id, dj_type, kh_cbj,lsxj,basic_ratio,ds);
+			cbtzService.updateProduct(id, dj_type, kh_cbj,lsxj,gf,ds);
 			return SUCCESS;
 		}catch(Exception e){
 			log.error("更新商品考核成本价，原因：" + e.getMessage());
@@ -144,15 +144,6 @@ public class CbtzAction extends BaseAction {
 	}
 
 
-	public double getBasic_ratio() {
-		return basic_ratio;
-	}
-
-
-	public void setBasic_ratio(double basicRatio) {
-		basic_ratio = basicRatio;
-	}
-
 
 	public double getDs() {
 		return ds;
@@ -161,6 +152,16 @@ public class CbtzAction extends BaseAction {
 
 	public void setDs(double ds) {
 		this.ds = ds;
+	}
+
+
+	public double getGf() {
+		return gf;
+	}
+
+
+	public void setGf(double gf) {
+		this.gf = gf;
 	}
 
 }

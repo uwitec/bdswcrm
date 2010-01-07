@@ -148,6 +148,26 @@ public class ProductService {
 		return productDao.isCanDel(product_id);
 	}
 	
+	
+	/**
+	 * 根据商品类别及名称查询商品列表信息
+	 * @param product_kind
+	 * @param product_name
+	 * @param store_id
+	 * @return
+	 */
+	public List getProductKcList(String con){
+		return productDao.getProductList(con);
+	}
+	
+	
+	/**
+	 * 批量更新商品信息
+	 * @param products
+	 */
+	public void updateProducts(List products){
+		productDao.updateProducts(products);
+	}
 
 	public ProductDAO getProductDao() {
 		return productDao;
