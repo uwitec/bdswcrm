@@ -47,20 +47,10 @@
 	<tr>				
 		<td class="a1">商品属性</td>
 		<td class="a4">
-			<select name="prop" id="prop">
+			<select name="product_prop" id="product_prop">
 				<option value=""></option>
 				<option value="库存商品">库存商品</option>
 				<option value="服务/劳务">服务/劳务</option>
-			</select>
-		</td>					
-	</tr>
-	<tr>				
-		<td class="a1">商品状态</td>
-		<td class="a4">
-			<select name="state" id="state">
-				<option value=""></option>
-				<option value="正常">正常</option>
-				<option value="停售">停售</option>
 			</select>
 		</td>					
 	</tr>		
