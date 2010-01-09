@@ -14,7 +14,7 @@ String end_date = StringUtils.nullToStr(request.getParameter("end_date"));      
 String dept_id = StringUtils.nullToStr(request.getParameter("dept_id"));        //部门
 String user_id = StringUtils.nullToStr(request.getParameter("user_id"));        //业务员编号
 
-List results = xstjXsryService.getYwytcHz(start_date,end_date,dept_id,user_id);
+Map results = xstjXsryService.getYwytcHz(start_date,end_date,dept_id,user_id);
 
 
 String strCon = "";
@@ -64,7 +64,6 @@ if(!user_id.equals("")){
 	
 	<TBODY>
 <%
-
 if(results != null && results.size()>0){
 	
 	double hj_khml = 0;
@@ -74,20 +73,10 @@ if(results != null && results.size()>0){
 	double hj_cxjl = 0;
 	double hj_total = 0;
 	
-	double temp_khml = 0;
-	double temp_jbtc = 0;
-	double temp_blds = 0;
-	double temp_jeds = 0;
-	double temp_cxjl = 0;
-	double temp_total = 0;
-	
-	Map tempMap = (Map)results.get(0);
-	String temp_xsry = StringUtils.nullToStr(tempMap.get("xsry"));  //默认第一个销售人员
-	String temp_real_name = StringUtils.nullToStr(tempMap.get("real_name"));  //默认第一个销售人员
-	String temp_dept = StringUtils.nullToStr(tempMap.get("dept"));
-	
-	for(int i=0;i<results.size();i++){
-		Map map = (Map)results.get(i);
+	Iterator iter = results.entrySet().iterator(); 
+	while (iter.hasNext()) { 
+		Map.Entry entry = (Map.Entry) iter.next(); 
+		Map map = (Map)entry.getValue(); 
 		
 		String xsry = StringUtils.nullToStr(map.get("xsry"));
 		String real_name = StringUtils.nullToStr(map.get("real_name"));
@@ -118,40 +107,19 @@ if(results != null && results.size()>0){
 		hj_jeds += jeds;
 		hj_cxjl += cxjl;
 		hj_total += total;
-		
-		temp_khml += khml;
-		temp_jbtc += jbtc;
-		temp_blds += blds;
-		temp_jeds += jeds;
-		temp_cxjl += cxjl;
-		temp_total += total;
-		
-		if(xsry.equals(temp_xsry) && i != results.size()-1){			
-			continue;
-		}
 %>
 		<TR>
-			<TD class=ReportItemXH><%=StaticParamDo.getDeptNameById(temp_dept) %>&nbsp;</TD>
+			<TD class=ReportItemXH><%=StaticParamDo.getDeptNameById(dept) %>&nbsp;</TD>
 			<TD class=ReportItemXH>
-				<a href="getYwytcMxResult.html?start_date=<%=start_date %>&end_date=<%=end_date %>&user_id=<%=temp_xsry %>"><%=temp_real_name %></a>&nbsp;</TD>
-			<TD class=ReportItemMoney><%=i == results.size()-1?JMath.round(temp_khml,2):JMath.round(temp_khml-khml,2) %>&nbsp;</TD>
-			<TD class=ReportItemMoney><%=i == results.size()-1?JMath.round(temp_jbtc,2):JMath.round(temp_jbtc-jbtc,2) %>&nbsp;</TD>
-			<TD class=ReportItemMoney><%=i == results.size()-1?JMath.round(temp_blds,2):JMath.round(temp_blds-blds,2) %>&nbsp;</TD>
-			<TD class=ReportItemMoney><%=i == results.size()-1?JMath.round(temp_jeds,2):JMath.round(temp_jeds-jeds,2) %>&nbsp;</TD>
-			<TD class=ReportItemMoney><%=i == results.size()-1?JMath.round(temp_cxjl,2):JMath.round(temp_cxjl-cxjl,2) %>&nbsp;</TD>
-			<TD class=ReportItemMoney><%=i == results.size()-1?JMath.round(temp_total,2):JMath.round(temp_total-total,2) %>&nbsp;</TD>
+				<a href="getYwytcMxResult.html?start_date=<%=start_date %>&end_date=<%=end_date %>&user_id=<%=xsry %>"><%=real_name %></a>&nbsp;</TD>
+			<TD class=ReportItemMoney><%=JMath.round(khml,2) %>&nbsp;</TD>
+			<TD class=ReportItemMoney><%=JMath.round(jbtc,2) %>&nbsp;</TD>
+			<TD class=ReportItemMoney><%=JMath.round(blds,2) %>&nbsp;</TD>
+			<TD class=ReportItemMoney><%=JMath.round(jeds,2) %>&nbsp;</TD>
+			<TD class=ReportItemMoney><%=JMath.round(cxjl,2) %>&nbsp;</TD>
+			<TD class=ReportItemMoney><%=JMath.round(total,2) %>&nbsp;</TD>
 		</TR>
-<%	
-		temp_khml = khml;
-		temp_jbtc = jbtc;
-		temp_blds = blds;
-		temp_jeds = jeds;
-		temp_cxjl = cxjl;
-		temp_total = total;
-		temp_xsry = xsry;
-		temp_real_name = real_name;
-		temp_dept = dept;
-
+<%
 	}
 %>
 		<TR>
@@ -163,10 +131,11 @@ if(results != null && results.size()>0){
 			<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(hj_jeds,2) %>&nbsp;</TD>
 			<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(hj_cxjl,2) %>&nbsp;</TD>
 			<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(hj_total,2) %>&nbsp;</TD>
-		</TR>
+		</TR>	
 <%
 }
 %>
+
 	</TBODY>
 </TABLE>
 <table width="99%">

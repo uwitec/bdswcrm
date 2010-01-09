@@ -7,11 +7,12 @@ function goNext(obj,element){
             }
         }
         if(id+1<obj.length){
-        	obj[id+1].focus();
-
-        	try{
+        	try{        		
+        		obj[id+1].focus();
         		obj[id+1].select();
-        	}catch(ex){}
+        	}catch(ex){
+        		//goNext(obj[id+2],element);
+        	}
         }
 	}
 }
