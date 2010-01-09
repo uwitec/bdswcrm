@@ -2,8 +2,10 @@ package com.sw.cms.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.sw.cms.dao.XstjXsryDAO;
+import com.sw.cms.util.StringUtils;
 
 public class XstjXsryService {
 	
@@ -119,8 +121,77 @@ public class XstjXsryService {
 	 * @param user_id
 	 * @return
 	 */
-	public List getYwytcHz(String start_date,String end_date,String dept_id,String user_id){
-		return xstjXsryDao.getYwytcHz(start_date, end_date, dept_id, user_id);
+	public Map getYwytcHz(String start_date,String end_date,String dept_id,String user_id){
+		
+		List list = xstjXsryDao.getYwytcHz(start_date, end_date, dept_id, user_id);
+		Map map = new HashMap();
+		
+		try{
+			double temp_khml = 0;
+			double temp_jbtc = 0;
+			double temp_blds = 0;
+			double temp_jeds = 0;
+			double temp_cxjl = 0;
+			
+			
+			
+			if(list != null && list.size() > 0){
+				for(int i=0;i<list.size();i++){
+					Map resultMap = (Map)list.get(i);				
+					String xsry = StringUtils.nullToStr(resultMap.get("xsry"));
+					String real_name = StringUtils.nullToStr(resultMap.get("real_name"));
+					String dept = StringUtils.nullToStr(resultMap.get("dept"));		
+					String yw_type = StringUtils.nullToStr(resultMap.get("yw_type"));
+					
+					double khml = resultMap.get("khml") == null?0:((Double)resultMap.get("khml")).doubleValue();   //考核毛利
+					double jbtc = resultMap.get("jbtc") == null?0:((Double)resultMap.get("jbtc")).doubleValue();   //基本提成
+					double blds = resultMap.get("blds") == null?0:((Double)resultMap.get("blds")).doubleValue();   //比例点杀
+					double jeds = resultMap.get("jeds") == null?0:((Double)resultMap.get("jeds")).doubleValue();   //金额点杀
+					double cxjl = resultMap.get("cxjl") == null?0:((Double)resultMap.get("cxjl")).doubleValue();   //超限奖励
+					
+					//如果是退货单    超限奖励大于时取0，比例点杀大于0时取0
+					//其它单据零售单、销售订单，   超限奖励小于0时取0，比例点杀小于0时取0
+					if(yw_type.equals("退货单")){
+						if(cxjl > 0) cxjl = 0;
+						if(blds > 0) blds = 0;
+					}else{
+						if(cxjl < 0) cxjl = 0;
+						if(blds < 0) blds = 0;
+					}
+					
+					Map mp = (Map)map.get(xsry);
+					if(mp!=null && mp.size()>0){		
+						temp_khml = (mp.get("khml") == null?0:((Double)mp.get("khml")).doubleValue()) + khml;   //考核毛利
+						temp_jbtc = (mp.get("jbtc") == null?0:((Double)mp.get("jbtc")).doubleValue()) + jbtc;   //基本提成
+						temp_blds = (mp.get("blds") == null?0:((Double)mp.get("blds")).doubleValue()) + blds;   //比例点杀
+						temp_jeds = (mp.get("jeds") == null?0:((Double)mp.get("jeds")).doubleValue()) + jeds;   //金额点杀
+						temp_cxjl = (mp.get("cxjl") == null?0:((Double)mp.get("cxjl")).doubleValue()) + cxjl;   //超限奖励
+					}else{
+						temp_khml = khml;
+						temp_jbtc = jbtc;
+						temp_blds = blds;
+						temp_jeds = jeds;
+						temp_cxjl = cxjl;
+					}
+					
+					Map tempMap = new HashMap();
+					tempMap.put("xsry", xsry);
+					tempMap.put("real_name", real_name);
+					tempMap.put("dept", dept);
+					tempMap.put("yw_type", yw_type);
+					tempMap.put("khml", temp_khml);
+					tempMap.put("jbtc", temp_jbtc);
+					tempMap.put("blds", temp_blds);
+					tempMap.put("jeds", temp_jeds);
+					tempMap.put("cxjl", temp_cxjl);
+					
+					map.put(xsry, tempMap);
+				}
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return map;
 	}
 	
 	/**
