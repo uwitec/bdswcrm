@@ -1,13 +1,10 @@
 package com.sw.cms.dao;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
-import org.springframework.jdbc.core.RowMapper;
-
+import com.sw.cms.dao.base.BeanRowMapper;
 import com.sw.cms.dao.base.JdbcBaseDAO;
 import com.sw.cms.model.Page;
 import com.sw.cms.model.XxfbNbgg;
+import com.sw.cms.util.UUIDGenerator;
 
 /**
  * 信息发布内部公告
@@ -24,8 +21,8 @@ public class XxfbNbggDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public Page getNbggList(int curPage, int rowsPerPage){
-		String sql = "select * from xxfb_nbgg order by id desc";
-		return this.getResultByPage(sql, curPage, rowsPerPage,new XxfbNbggRowMapper());
+		String sql = "select * from xxfb_nbgg order by cz_date desc";
+		return this.getResultByPage(sql, curPage, rowsPerPage,new BeanRowMapper(XxfbNbgg.class));
 	}
 	
 	
@@ -37,8 +34,8 @@ public class XxfbNbggDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public Page getNbggList(int curPage,int rowsPerPage,String type){
-		String sql = "select * from xxfb_nbgg where type='" + type + "' order by id desc";
-		return this.getResultByPage(sql, curPage, rowsPerPage,new XxfbNbggRowMapper());
+		String sql = "select * from xxfb_nbgg where type='" + type + "' order by cz_date desc";
+		return this.getResultByPage(sql, curPage, rowsPerPage,new BeanRowMapper(XxfbNbgg.class));
 	}
 	
 	
@@ -47,14 +44,15 @@ public class XxfbNbggDAO extends JdbcBaseDAO {
 	 * @param info
 	 */
 	public void saveNbgg(XxfbNbgg info){
-		String sql = "insert into xxfb_nbgg(title,content,pub_date,czr,cz_date,type) values(?,?,?,?,now(),?)";
-		Object[] param = new Object[5];
+		String sql = "insert into xxfb_nbgg(title,content,pub_date,czr,cz_date,type,id) values(?,?,?,?,now(),?,?)";
+		Object[] param = new Object[6];
 		
 		param[0] = info.getTitle();
 		param[1] = info.getContent();
 		param[2] = info.getPub_date();
 		param[3] = info.getCzr();
 		param[4] = info.getType();
+		param[5] = UUIDGenerator.getUUID();
 		
 		this.getJdbcTemplate().update(sql,param);
 	}
@@ -87,7 +85,7 @@ public class XxfbNbggDAO extends JdbcBaseDAO {
 	public XxfbNbgg getNbgg(String id){
 		XxfbNbgg info = new XxfbNbgg();
 		String sql = "select * from xxfb_nbgg where id='" + id + "'";		
-		Object obj =this.queryForObject(sql, new XxfbNbggRowMapper());
+		Object obj =this.queryForObject(sql, new BeanRowMapper(XxfbNbgg.class));
 		if(obj != null){
 			info = (XxfbNbgg)obj;
 		}
@@ -102,28 +100,6 @@ public class XxfbNbggDAO extends JdbcBaseDAO {
 	public void delNbgg(String id){
 		String sql = "delete from xxfb_nbgg where id='" + id + "'";
 		this.getJdbcTemplate().update(sql);
-	}
-	
-	
-	/**
-	 * 包装对象(销售收款明细)
-	 * 
-	 * @author liyt
-	 * 
-	 */
-	class XxfbNbggRowMapper implements RowMapper {
-		public Object mapRow(ResultSet rs, int index) throws SQLException {
-			XxfbNbgg info = new XxfbNbgg();
-
-			info.setId(rs.getInt("id"));
-			info.setTitle(rs.getString("title"));
-			info.setContent(rs.getString("content"));
-			info.setPub_date(rs.getString("pub_date"));
-			info.setCzr(rs.getString("czr"));
-			info.setType(rs.getString("type"));
-			
-			return info;
-		}
 	}
 
 }

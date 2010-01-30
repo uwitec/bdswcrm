@@ -435,7 +435,7 @@ public class ProductKcDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public Page getProductKcMx(String kc_con,int curPage,int rowsPerPage){
-		String sql = "SELECT a.*,(select sum(nums) from product_kc b where b.product_id=a.product_id) as nums from product a  where a.state='正常'";
+		String sql = "SELECT a.*,(select sum(nums) from product_kc b where b.product_id=a.product_id) as nums from product a  where a.state='正常' and a.prop='库存商品'";
 		
 		if(!kc_con.equals("")){
 			sql = sql + " and( a.product_id like '%" + kc_con + "%' or a.product_name like '%" + kc_con + "%' or a.product_xh like '%" + kc_con + "%')";

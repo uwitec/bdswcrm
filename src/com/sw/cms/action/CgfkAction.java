@@ -166,6 +166,42 @@ public class CgfkAction extends BaseAction {
 	
 	
 	/**
+	 * 取待审批付款申请单列表
+	 * @return
+	 */
+	public String listDspCgfk(){
+		try{
+			int rowsPerPage = Constant.PAGE_SIZE2;
+			
+			String con = "";
+			if(!fk_date1.equals("")){
+				con += " and a.fk_date>='" + fk_date1 + "'";
+			}
+			if(!fk_date2.equals("")){
+				con += " and a.fk_date<='" + fk_date2 + "'";
+			}
+			
+			con += " and state='待审批'";
+			
+			if(orderName.equals("")){
+				orderName = "id";
+			}
+			if(orderType.equals("")){
+				orderType = "desc";
+			}
+			
+			con += " order by " + orderName + " " + orderType;
+			cgfkPage = cgfkService.getCgfks(con, curPage, rowsPerPage);
+			
+			return SUCCESS;
+		}catch(Exception e){
+			
+			return ERROR;
+		}
+	}
+	
+	
+	/**
 	 * 付款申请单审批
 	 * @return
 	 */

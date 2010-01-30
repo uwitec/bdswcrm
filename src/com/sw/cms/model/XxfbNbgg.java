@@ -9,7 +9,7 @@ package com.sw.cms.model;
 
 public class XxfbNbgg {
 	
-	private int id;
+	private String id;
 	private String title;
 	private String content;
 	private String pub_date;
@@ -35,12 +35,6 @@ public class XxfbNbgg {
 	public void setCzr(String czr) {
 		this.czr = czr;
 	}
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
 	public String getPub_date() {
 		return pub_date;
 	}
@@ -58,6 +52,12 @@ public class XxfbNbgg {
 	}
 	public void setType(String type) {
 		this.type = type;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
 	}
 	
 }
