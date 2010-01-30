@@ -179,13 +179,11 @@ Xsd xsd = (Xsd)VS.findValue("xsd");
 <table width="100%"  align="center" id="xsdtable"  class="chart_list" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td>产品名称</td>
-		<td>规格</td>
-		<td>销售价格</td>
-		<td>价格调整</td>
-		<td>订单数量</td>
-		<td>订单金额</td>
-		<td>工分</td>
+		<td width="35%">产品名称</td>
+		<td width="35%">规格</td>
+		<td width="10%">销售价格</td>
+		<td width="10%">订单数量</td>
+		<td width="10%">订单金额</td>
 	</tr>
 	</thead>
 <%
@@ -197,10 +195,8 @@ if(xsdProducts!=null && xsdProducts.size()>0){
 		<td class="a2"><%=StringUtils.nullToStr(xsdProduct.getProduct_name()) %></td>
 		<td class="a2"><%=StringUtils.nullToStr(xsdProduct.getProduct_xh()) %></td>
 		<td class="a2"><%=JMath.round(xsdProduct.getPrice(),2) %></td>
-		<td class="a2"><%=JMath.round(xsdProduct.getJgtz(),2) %></td>
 		<td class="a2"><%=xsdProduct.getNums() %></td>
 		<td class="a2"><%=JMath.round(xsdProduct.getXj(),2) %></td>
-		<td class="a2"><%=JMath.round(xsdProduct.getGf(),2) %></td>
 	</tr>
 <%
 	}
