@@ -55,7 +55,6 @@ Clients clients = (Clients)VS.findValue("clients");
 			alert("经手人不能为空，请选择！");
 			return;
 		}
-		if(!InputValid(document.getElementById("fkzh"),1,"string",1,1,50,"付款账户")){	 return; }
 		
 		hj();
 		
@@ -255,7 +254,6 @@ Clients clients = (Clients)VS.findValue("clients");
 		<td class="a2" colspan="3"><input type="text" id="zhname"  name="zhname" value="<%=StaticParamDo.getAccountNameById(StringUtils.nullToStr(cgfk.getFkzh())) %>" size="35" readonly>
 			<input type="hidden" id="fkzh"  name="cgfk.fkzh" value="<%=StringUtils.nullToStr(cgfk.getFkzh()) %>">
 			<img src="images/select.gif" align="absmiddle" title="选择账户" border="0" onclick="openAccount();" style="cursor:hand">
-			<font color="red">*</font>
 		</td>
 	</tr>
 	<tr>

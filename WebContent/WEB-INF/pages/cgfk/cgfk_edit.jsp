@@ -49,7 +49,6 @@ if(cgfkDescs != null && cgfkDescs.size()>0){
 			alert("经手人不能为空，请选择！");
 			return;
 		}
-		if(!InputValid(document.getElementById("fkzh"),1,"string",1,1,50,"付款账户")){	 return; }
 		
 		hj();
 		
