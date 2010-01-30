@@ -9,6 +9,7 @@ public class CgfkDesc {
 	private int id;
 	private String fsrq;
 	private double fsje;
+	private double yfje;
 	
 	public double getBcfk() {
 		return bcfk;
@@ -51,6 +52,12 @@ public class CgfkDesc {
 	}
 	public void setFsrq(String fsrq) {
 		this.fsrq = fsrq;
+	}
+	public double getYfje() {
+		return yfje;
+	}
+	public void setYfje(double yfje) {
+		this.yfje = yfje;
 	}
 
 }

@@ -379,6 +379,25 @@ public class UserDAO extends JdbcBaseDAO {
 		String sql = "select d.user_id,d.real_name,d.mobile from cesp_right_roles a inner join jgsp_right_roles b on b.role_id=a.role_id inner join user_role c on c.role_id=a.role_id inner join sys_user d on d.user_id=c.user_id";
 		return this.getResultList(sql);		
 	}
+	
+	
+	/**
+	 * 当前用户是否有采购付款审批权限
+	 * @param con
+	 * @return
+	 */
+	public boolean isUserInRole(String con){
+		boolean is = false;
+		String sql = "select a.user_id,a.user_name from sys_user a inner join user_role b on b.user_id=a.user_id  where a.is_sys_user='1'";
+		if(!con.equals("")){
+			sql += con;
+		}
+		List list = this.getResultList(sql);
+		if(list != null && list.size() > 0){
+			is = true;
+		}
+		return is;
+	}
 
 	
 	

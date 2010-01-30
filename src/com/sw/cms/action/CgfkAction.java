@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.sw.cms.action.base.BaseAction;
 import com.sw.cms.model.Cgfk;
+import com.sw.cms.model.Clients;
 import com.sw.cms.model.LoginInfo;
 import com.sw.cms.model.Page;
 import com.sw.cms.service.AccountsService;
@@ -12,7 +13,13 @@ import com.sw.cms.service.CgfkService;
 import com.sw.cms.service.ClientsService;
 import com.sw.cms.service.UserService;
 import com.sw.cms.util.Constant;
+import com.sw.cms.util.DateComFunc;
 
+/**
+ * 采购付款
+ * @author jinyanni
+ *
+ */
 public class CgfkAction extends BaseAction {
 
 	private CgfkService cgfkService;
@@ -29,9 +36,15 @@ public class CgfkAction extends BaseAction {
 	private List providerList;
 	private List clientsList= new ArrayList();
 	
+	private Clients clients;
+	private List clientsPayInfos;
+	private List clientsLinkMans;
+	
 	private String gysmc = "";
-	private String fk_date1 = "";
-	private String fk_date2 = "";
+	private String fk_date1 = DateComFunc.getToday();
+	private String fk_date2 = DateComFunc.getToday();
+	private String state = "";
+	private String remark = "";
 	
 	private String id;
 	
@@ -59,6 +72,9 @@ public class CgfkAction extends BaseAction {
 		if(!gysmc.equals("")){
 			con += " and b.name like'%" + gysmc + "%'";
 		}
+		if(!state.equals("")){
+			con += " and a.state='" + state + "'";
+		}
 		
 		if(orderName.equals("")){
 			orderName = "id";
@@ -82,6 +98,7 @@ public class CgfkAction extends BaseAction {
 	public String add(){
 		if(cgfk.getGysbh()!=null && !cgfk.getGysbh().equals("")){
 			cgfkDescs = cgfkService.getDfkDesc(cgfk.getGysbh());
+			clients = (Clients)clientsService.getClient(cgfk.getGysbh());
 		}
 		userList = userService.getAllEmployeeList();
 		if(cgfk.getId()==null || cgfk.getId().equals("")){
@@ -146,8 +163,23 @@ public class CgfkAction extends BaseAction {
 		cgfkService.delCgfk(id);
 		return "success";
 	}
-
-
+	
+	
+	/**
+	 * 付款申请单审批
+	 * @return
+	 */
+	public String doSp(){
+		try{
+			cgfkService.doSp(id, state, remark);
+			return SUCCESS;
+		}catch(Exception e){
+			log.error("审批付款申请单出错，原因：" + e.getMessage());
+			e.printStackTrace();
+			return ERROR;
+		}
+	}
+	
 
 	public Cgfk getCgfk() {
 		return cgfk;
@@ -360,6 +392,66 @@ public class CgfkAction extends BaseAction {
 
 	public void setClientsService(ClientsService clientsService) {
 		this.clientsService = clientsService;
+	}
+
+
+
+	public String getState() {
+		return state;
+	}
+
+
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+
+
+	public Clients getClients() {
+		return clients;
+	}
+
+
+
+	public void setClients(Clients clients) {
+		this.clients = clients;
+	}
+
+
+
+	public List getClientsPayInfos() {
+		return clientsPayInfos;
+	}
+
+
+
+	public void setClientsPayInfos(List clientsPayInfos) {
+		this.clientsPayInfos = clientsPayInfos;
+	}
+
+
+
+	public List getClientsLinkMans() {
+		return clientsLinkMans;
+	}
+
+
+
+	public void setClientsLinkMans(List clientsLinkMans) {
+		this.clientsLinkMans = clientsLinkMans;
+	}
+
+
+
+	public String getRemark() {
+		return remark;
+	}
+
+
+
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 	
 	

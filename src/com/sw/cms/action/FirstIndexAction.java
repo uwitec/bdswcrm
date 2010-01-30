@@ -7,12 +7,14 @@ import java.util.Map;
 import com.sw.cms.action.base.BaseAction;
 import com.sw.cms.model.LoginInfo;
 import com.sw.cms.model.Page;
+import com.sw.cms.service.CgfkService;
 import com.sw.cms.service.FirstIndexService;
 import com.sw.cms.service.LsdService;
 import com.sw.cms.service.MenuService;
 import com.sw.cms.service.UserService;
 import com.sw.cms.service.XsdService;
 import com.sw.cms.service.XxfbNbggService;
+import com.sw.cms.util.StringUtils;
 
 public class FirstIndexAction extends BaseAction {
 	
@@ -22,6 +24,7 @@ public class FirstIndexAction extends BaseAction {
 	private LsdService lsdService;
 	private XsdService xsdService;
 	private UserService userService;
+	private CgfkService cgfkService;
 	
 	private List dckList = new ArrayList();
 	private List drkList = new ArrayList();
@@ -29,11 +32,14 @@ public class FirstIndexAction extends BaseAction {
 	private List cqyfList = new ArrayList();
 	private List kcxxList = new ArrayList();
 	private List nbggList = new ArrayList();
+	
 	private String isLsdSpRight = "0"; 
 	private String isXsdSpRight = "0";
+	private String isCgfkSpRight = "0";
 	
 	private List dspLsdList = new ArrayList();
 	private List dspXsdList = new ArrayList();
+	private List dspCgfkList = new ArrayList();
 	
 	List ywgnList = new ArrayList();
 	
@@ -146,6 +152,27 @@ public class FirstIndexAction extends BaseAction {
 		//待审批销售订单
 		if(isXsdSpRight.equals("1")){
 			dspXsdList = xsdService.getDspXsdList(con);
+		}
+		
+		
+		//采购付款审批权限设置
+		Map map = userService.getSpRight("采购付款");
+		String sp_flag = "";
+		String role_id = "";
+		if(map != null){
+			sp_flag = StringUtils.nullToStr(map.get("sp_flag"));
+			role_id = StringUtils.nullToStr(map.get("role_id"));
+		}
+		String[] roles = role_id.split(",");
+		
+		//采购付款需要审批
+		if(sp_flag.equals("01") && !role_id.equals("")){
+			
+			//当前用户有审批的权限
+			if(userService.isUserInRole(user_id, roles)){
+				isCgfkSpRight = "1";
+				dspCgfkList = cgfkService.getCgfks(" and state='待审批'");
+			}
 		}
 		
 		return "success";
@@ -277,5 +304,35 @@ public class FirstIndexAction extends BaseAction {
 
 	public void setDrkList(List drkList) {
 		this.drkList = drkList;
+	}
+
+
+	public String getIsCgfkSpRight() {
+		return isCgfkSpRight;
+	}
+
+
+	public void setIsCgfkSpRight(String isCgfkSpRight) {
+		this.isCgfkSpRight = isCgfkSpRight;
+	}
+
+
+	public List getDspCgfkList() {
+		return dspCgfkList;
+	}
+
+
+	public void setDspCgfkList(List dspCgfkList) {
+		this.dspCgfkList = dspCgfkList;
+	}
+
+
+	public CgfkService getCgfkService() {
+		return cgfkService;
+	}
+
+
+	public void setCgfkService(CgfkService cgfkService) {
+		this.cgfkService = cgfkService;
 	}
 }

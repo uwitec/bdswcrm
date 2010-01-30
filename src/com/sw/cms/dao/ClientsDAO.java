@@ -1,15 +1,12 @@
 package com.sw.cms.dao;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.jdbc.core.RowMapper;
-
+import com.sw.cms.dao.base.BeanRowMapper;
 import com.sw.cms.dao.base.JdbcBaseDAO;
-import com.sw.cms.dao.base.SqlUtil;
 import com.sw.cms.model.Clients;
+import com.sw.cms.model.ClientsPayInfo;
 import com.sw.cms.model.Page;
 import com.sw.cms.util.GB2Alpha;
 
@@ -30,7 +27,7 @@ public class ClientsDAO extends JdbcBaseDAO {
 			sql = sql + con;
 		}
 		
-		return this.getResultByPage(sql, curPage, rowsPerPage, new ClientsRowMapper());
+		return this.getResultByPage(sql, curPage, rowsPerPage, new BeanRowMapper(Clients.class));
 	}
 	
 	
@@ -91,15 +88,14 @@ public class ClientsDAO extends JdbcBaseDAO {
 	 * 保存客户信息
 	 * @param clients
 	 */
-	public Object saveClient(Clients clients){
+	public Object saveClient(Clients clients,List clientsPayInfos){
 		String sql = "insert into clients(name,lxr,lxdh,mobile,address,p_code,mail,msn,qq,zq,xe," +
 				"remark,ygs,gsxz,client_type,khjl,id,gzdh,cz,comaddress,china_py," +
-				"kp_name,kp_address,kp_tel,kp_khhzh,kp_sh) " +
-				"values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+				"kp_name,kp_address,kp_tel,kp_khhzh,kp_sh,cg_zq,cg_xe) " +
+				"values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		
-		Object[] param = new Object[26];
-		
-		
+		Object[] param = new Object[28];
+
 		param[0] = clients.getName();
 		param[1] = clients.getLxr();
 		param[2] = clients.getLxdh();
@@ -117,20 +113,25 @@ public class ClientsDAO extends JdbcBaseDAO {
 		param[14] = clients.getClient_type();
 		param[15] = clients.getKhjl();
 		param[16] = getClientId();
-		param[17]=  clients.getGzdh();
-		param[18]=  clients.getCz();
-		param[19]= clients.getComaddress();
+		param[17] =  clients.getGzdh();
+		param[18] =  clients.getCz();
+		param[19] = clients.getComaddress();
 		
 		GB2Alpha gb2Alpha = new GB2Alpha();
 		param[20] = gb2Alpha.String2Alpha(clients.getName());
 		
-		param[21]= clients.getKp_name();
-		param[22]= clients.getKp_address();
-		param[23]= clients.getKp_tel();
-		param[24]= clients.getKp_khhzh();
-		param[25]= clients.getKp_sh();
+		param[21] = clients.getKp_name();
+		param[22] = clients.getKp_address();
+		param[23] = clients.getKp_tel();
+		param[24] = clients.getKp_khhzh();
+		param[25] = clients.getKp_sh();
+		param[26] = clients.getCg_zq();
+		param[27] = clients.getCg_xe();
 		
 		this.getJdbcTemplate().update(sql,param);
+		
+		this.addClientsPayInfos(param[16].toString(), clientsPayInfos);
+		
 		return param[16];
 		
 	}
@@ -141,13 +142,13 @@ public class ClientsDAO extends JdbcBaseDAO {
 	 * 更新客户信息
 	 * @param clients
 	 */
-	public void updateClient(Clients clients){
+	public void updateClient(Clients clients,List clientsPayInfos){
 		
 		String sql = "update clients set name=?,lxr=?,lxdh=?,mobile=?,address=?,p_code=?,mail=?," +
 				"msn=?,qq=?,zq=?,xe=?,remark=?,ygs=?,gsxz=?,client_type=?,khjl=?,gzdh=?,cz=?," +
-				"comaddress=?,china_py=?,kp_name=?,kp_address=?,kp_tel=?,kp_khhzh=?,kp_sh=? where id=?";
+				"comaddress=?,china_py=?,kp_name=?,kp_address=?,kp_tel=?,kp_khhzh=?,kp_sh=?,cg_zq=?,cg_xe=? where id=?";
 		
-		Object[] param = new Object[26];
+		Object[] param = new Object[28];
 		
 		
 		param[0] = clients.getName();
@@ -167,25 +168,39 @@ public class ClientsDAO extends JdbcBaseDAO {
 		param[14] = clients.getClient_type();
 		param[15] = clients.getKhjl();
 		
-		param[16]=  clients.getGzdh();
-		param[17]=  clients.getCz();
-		param[18]=  clients.getComaddress();
+		param[16] =  clients.getGzdh();
+		param[17] =  clients.getCz();
+		param[18] =  clients.getComaddress();
 		
 		GB2Alpha gb2Alpha = new GB2Alpha();
 		param[19] = gb2Alpha.String2Alpha(clients.getName());
 		
-		param[20]= clients.getKp_name();
-		param[21]= clients.getKp_address();
-		param[22]= clients.getKp_tel();
-		param[23]= clients.getKp_khhzh();
-		param[24]= clients.getKp_sh();
+		param[20] = clients.getKp_name();
+		param[21] = clients.getKp_address();
+		param[22] = clients.getKp_tel();
+		param[23] = clients.getKp_khhzh();
+		param[24] = clients.getKp_sh();
+		param[25] = clients.getCg_zq();
+		param[26] = clients.getCg_xe();
+		param[27] = clients.getId();
 		
-		param[25] = clients.getId();
+		this.delClientsPayInfos(clients.getId());
+		this.addClientsPayInfos(clients.getId(), clientsPayInfos);
 		
 		this.getJdbcTemplate().update(sql,param);
 		
 	}
 	
+	
+	/**
+	 * 根据客户编号取
+	 * @param client_id
+	 * @return
+	 */
+	public List getClientsPayInfos(String client_id){
+		String sql = "select * from clients_pay_info where client_id='" + client_id + "'";
+		return this.getResultList(sql, new BeanRowMapper(ClientsPayInfo.class));
+	}
 	
 	
 	/**
@@ -196,7 +211,7 @@ public class ClientsDAO extends JdbcBaseDAO {
 	public Object getClient(String id){
 		String sql = "select * from clients where id='" + id + "'";
 		
-		return this.queryForObject(sql, new ClientsRowMapper());
+		return this.queryForObject(sql, new BeanRowMapper(Clients.class));
 	}
 	
 	
@@ -297,7 +312,7 @@ public class ClientsDAO extends JdbcBaseDAO {
 
 		String sql = "select * from ((" + xsd_sql + ") union (" + thd_sql + ") union (" + jhd_sql + ") union(" + cgthd_sql + ")) x order by cz_date desc";
 		
-		return this.getResultByPage(sql, 1, 7);
+		return this.getResultByPage(sql, 1, 6);
 	}
 	
 	
@@ -368,45 +383,32 @@ public class ClientsDAO extends JdbcBaseDAO {
 	
 	
 	/**
-	 * 包装对象(客户)
-	 * 
-	 * @author liyt
-	 * 
+	 * 保存往来单付款相关信息
+	 * @param client_id
+	 * @param clietsPayInfos
 	 */
-	class ClientsRowMapper implements RowMapper {
-		public Object mapRow(ResultSet rs, int index) throws SQLException {
-			Clients clients = new Clients();
-
-			if(SqlUtil.columnIsExist(rs,"id")) clients.setId(rs.getString("id"));
-			if(SqlUtil.columnIsExist(rs,"name")) clients.setName(rs.getString("name"));
-			if(SqlUtil.columnIsExist(rs,"lxr")) clients.setLxr(rs.getString("lxr"));
-			if(SqlUtil.columnIsExist(rs,"lxdh")) clients.setLxdh(rs.getString("lxdh"));
-			if(SqlUtil.columnIsExist(rs,"mobile")) clients.setMobile(rs.getString("mobile"));
-			if(SqlUtil.columnIsExist(rs,"address")) clients.setAddress(rs.getString("address"));
-			if(SqlUtil.columnIsExist(rs,"p_code")) clients.setP_code(rs.getString("p_code"));
-			if(SqlUtil.columnIsExist(rs,"mail")) clients.setMail(rs.getString("mail"));
-			if(SqlUtil.columnIsExist(rs,"msn")) clients.setMsn(rs.getString("msn"));
-			if(SqlUtil.columnIsExist(rs,"qq")) clients.setQq(rs.getString("qq"));
-			if(SqlUtil.columnIsExist(rs,"zq")) clients.setZq(rs.getString("zq"));
-			if(SqlUtil.columnIsExist(rs,"xe")) clients.setXe(rs.getDouble("xe"));
-			if(SqlUtil.columnIsExist(rs,"remark")) clients.setRemark(rs.getString("remark"));
-			if(SqlUtil.columnIsExist(rs,"ygs")) clients.setYgs(rs.getString("ygs"));
-			if(SqlUtil.columnIsExist(rs,"gsxz")) clients.setGsxz(rs.getString("gsxz"));
-			if(SqlUtil.columnIsExist(rs,"client_type")) clients.setClient_type(rs.getString("client_type"));
-			if(SqlUtil.columnIsExist(rs,"khjl")) clients.setKhjl(rs.getString("khjl"));
-			if(SqlUtil.columnIsExist(rs,"gzdh")) clients.setGzdh(rs.getString("gzdh"));
-			if(SqlUtil.columnIsExist(rs,"cz")) clients.setCz(rs.getString("cz"));
-			if(SqlUtil.columnIsExist(rs,"comaddress")) clients.setComaddress(rs.getString("comaddress"));
-			if(SqlUtil.columnIsExist(rs,"china_py")) clients.setChina_py(rs.getString("china_py"));
-			
-			if(SqlUtil.columnIsExist(rs,"kp_name")) clients.setKp_name(rs.getString("kp_name"));
-			if(SqlUtil.columnIsExist(rs,"kp_address")) clients.setKp_address(rs.getString("kp_address"));
-			if(SqlUtil.columnIsExist(rs,"kp_tel")) clients.setKp_tel(rs.getString("kp_tel"));
-			if(SqlUtil.columnIsExist(rs,"kp_khhzh")) clients.setKp_khhzh(rs.getString("kp_khhzh"));
-			if(SqlUtil.columnIsExist(rs,"kp_sh")) clients.setKp_sh(rs.getString("kp_sh"));
-			
-			return clients;
+	private void addClientsPayInfos(String client_id,List clietsPayInfos){
+		if(clietsPayInfos != null && clietsPayInfos.size() > 0){
+			for(int i=0;i<clietsPayInfos.size();i++){
+				ClientsPayInfo info = (ClientsPayInfo)clietsPayInfos.get(i);
+				if(info != null){
+					if(info.getClient_all_name() != null && !info.getClient_all_name().equals("") && info.getBank_no() != null && !info.getBank_no().equals("")){
+						String sql = "insert into clients_pay_info(client_id,client_all_name,bank_no) values('" + client_id + "','" + info.getClient_all_name() + "','" + info.getBank_no() + "')";
+						this.getJdbcTemplate().update(sql);
+					}
+				}
+			}
 		}
-	}	
+	}
+	
+	
+	/**
+	 * 删除往来单位付款信息
+	 * @param client_id
+	 */
+	private void delClientsPayInfos(String client_id){
+		String sql = "delete from clients_pay_info where client_id='" + client_id + "'";
+		this.getJdbcTemplate().update(sql);
+	}
 
 }

@@ -1,13 +1,9 @@
 package com.sw.cms.dao;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
-import org.springframework.jdbc.core.RowMapper;
-
+import com.sw.cms.dao.base.BeanRowMapper;
 import com.sw.cms.dao.base.JdbcBaseDAO;
-import com.sw.cms.dao.base.SqlUtil;
 import com.sw.cms.model.Jhd;
 import com.sw.cms.model.JhdProduct;
 import com.sw.cms.model.Page;
@@ -24,13 +20,13 @@ public class JhdDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public Page getJhdList(String con,int curPage, int rowsPerPage){
-		String sql = "select id,gysmc,state,fzr,total,fklx,cg_date,czr from jhd where 1=1";
+		String sql = "select * from jhd where 1=1";
 		
 		if(!con.equals("")){
 			sql = sql + con;		
 		}
 				
-		return this.getResultByPage(sql, curPage, rowsPerPage,new JhdRowMapper());
+		return this.getResultByPage(sql, curPage, rowsPerPage,new BeanRowMapper(Jhd.class));
 	}
 	
 	
@@ -42,7 +38,7 @@ public class JhdDAO extends JdbcBaseDAO {
 	public Object getJhd(String id){
 		String sql = "select * from jhd where id='" + id + "'";
 		
-		return this.queryForObject(sql, new JhdRowMapper());
+		return this.queryForObject(sql,new BeanRowMapper(Jhd.class));
 	}
 	
 	
@@ -52,10 +48,10 @@ public class JhdDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public void saveJhd(Jhd jhd,List jhdProducts){
-		String sql = "insert into jhd(id,gysbh,cg_date,state,fzr,ms,shuil,tzje,total,gysmc,czr,cz_date,fkje,fklx,yfrq,fkfs,yfje,store_id,zq,fkzh,sjcjje) " +
-				"values(?,?,?,?,?,?,?,?,?,?,?,now(),?,?,?,?,?,?,?,?,?)";
+		String sql = "insert into jhd(id,gysbh,cg_date,state,fzr,ms,shuil,tzje,total,gysmc,czr,cz_date,fkje,fklx,yfrq,fkfs,yfje,store_id,zq,fkzh,sjcjje,yjdhsj) " +
+				"values(?,?,?,?,?,?,?,?,?,?,?,now(),?,?,?,?,?,?,?,?,?,?)";
 		
-		Object[] param = new Object[20];
+		Object[] param = new Object[21];
 		
 		double total = jhd.getTotal();
 		double fkje = jhd.getFkje();
@@ -80,6 +76,7 @@ public class JhdDAO extends JdbcBaseDAO {
 		param[17] = jhd.getZq();
 		param[18] = jhd.getFkzh();
 		param[19] = jhd.getTotal();
+		param[20] = jhd.getYjdhsj();
 		
 		this.getJdbcTemplate().update(sql, param); //添加进货单信息		
 		this.addJhdProduct(jhdProducts,jhd.getId());           //添加进货单关联的产品
@@ -146,7 +143,7 @@ public class JhdDAO extends JdbcBaseDAO {
 	public List getJhdProducts(String jhd_id){
 		String sql = "select a.*,b.qz_serial_num as qz_flag,b.dw from jhd_product a left join product b on b.product_id=a.product_id where jhd_id='" + jhd_id + "'";
 		
-		return this.getJdbcTemplate().query(sql, new JhdProductRowMapper());
+		return this.getJdbcTemplate().query(sql, new BeanRowMapper(JhdProduct.class));
 	}
 	
 	
@@ -322,74 +319,5 @@ public class JhdDAO extends JdbcBaseDAO {
 		}
 		return is;
 	}
-	
-	
-	
-	/**
-	 * 包装对象(进货单)
-	 * 
-	 * @author liyt
-	 * 
-	 */
-	class JhdRowMapper implements RowMapper {
-		public Object mapRow(ResultSet rs, int index) throws SQLException {
-			Jhd jhd = new Jhd();
-
-			if(SqlUtil.columnIsExist(rs,"id")) jhd.setId(rs.getString("id"));
-			if(SqlUtil.columnIsExist(rs,"gysbh")) jhd.setGysbh(rs.getString("gysbh"));
-			if(SqlUtil.columnIsExist(rs,"cg_date")) jhd.setCg_date(rs.getString("cg_date"));
-			if(SqlUtil.columnIsExist(rs,"state")) jhd.setState(rs.getString("state"));
-			if(SqlUtil.columnIsExist(rs,"fzr")) jhd.setFzr(rs.getString("fzr"));
-			if(SqlUtil.columnIsExist(rs,"con")) jhd.setCon(rs.getString("con"));
-			if(SqlUtil.columnIsExist(rs,"ms")) jhd.setMs(rs.getString("ms"));
-			if(SqlUtil.columnIsExist(rs,"shuil")) jhd.setShuil(rs.getDouble("shuil"));
-			if(SqlUtil.columnIsExist(rs,"tzje")) jhd.setTzje(rs.getDouble("tzje"));
-			if(SqlUtil.columnIsExist(rs,"total")) jhd.setTotal(rs.getDouble("total"));
-			
-			if(SqlUtil.columnIsExist(rs,"gysmc")) jhd.setGysmc(rs.getString("gysmc"));
-			if(SqlUtil.columnIsExist(rs,"czr")) jhd.setCzr(rs.getString("czr"));
-			if(SqlUtil.columnIsExist(rs,"fkje")) jhd.setFkje(rs.getDouble("fkje"));
-			if(SqlUtil.columnIsExist(rs,"fklx")) jhd.setFklx(rs.getString("fklx"));
-			if(SqlUtil.columnIsExist(rs,"yfrq")) jhd.setYfrq(rs.getString("yfrq"));
-			if(SqlUtil.columnIsExist(rs,"fkfs")) jhd.setFkfs(rs.getString("fkfs"));
-			if(SqlUtil.columnIsExist(rs,"yfje")) jhd.setYfje(rs.getDouble("yfje"));
-			if(SqlUtil.columnIsExist(rs,"store_id")) jhd.setStore_id(rs.getString("store_id"));
-			if(SqlUtil.columnIsExist(rs,"zq")) jhd.setZq(rs.getInt("zq"));
-			if(SqlUtil.columnIsExist(rs,"fkzh")) jhd.setFkzh(rs.getString("fkzh"));
-			if(SqlUtil.columnIsExist(rs,"th_flag")) jhd.setTh_flag(rs.getString("th_flag"));
-			if(SqlUtil.columnIsExist(rs,"sjcjje")) jhd.setSjcjje(rs.getDouble("sjcjje"));
-			
-			return jhd;
-		}
-	}
-	
-
-	
-	/**
-	 * 包装对象(进货单产品)
-	 * 
-	 * @author liyt
-	 * 
-	 */
-	class JhdProductRowMapper implements RowMapper {
-		public Object mapRow(ResultSet rs, int index) throws SQLException {
-			JhdProduct jhdProduct = new JhdProduct();
-
-			if(SqlUtil.columnIsExist(rs,"id")) jhdProduct.setId(rs.getInt("id"));
-			if(SqlUtil.columnIsExist(rs,"jhd_id")) jhdProduct.setJhd_id(rs.getString("jhd_id"));
-			if(SqlUtil.columnIsExist(rs,"product_id")) jhdProduct.setProduct_id(rs.getString("product_id"));
-			if(SqlUtil.columnIsExist(rs,"product_xh")) jhdProduct.setProduct_xh(rs.getString("product_xh"));
-			if(SqlUtil.columnIsExist(rs,"product_name")) jhdProduct.setProduct_name(rs.getString("product_name"));
-			if(SqlUtil.columnIsExist(rs,"nums")) jhdProduct.setNums(rs.getInt("nums"));
-			if(SqlUtil.columnIsExist(rs,"price")) jhdProduct.setPrice(rs.getDouble("price"));
-			if(SqlUtil.columnIsExist(rs,"remark")) jhdProduct.setRemark(rs.getString("remark"));
-			if(SqlUtil.columnIsExist(rs,"qz_serial_num")) jhdProduct.setQz_serial_num(rs.getString("qz_serial_num"));
-			if(SqlUtil.columnIsExist(rs,"qz_flag")) jhdProduct.setQz_flag(rs.getString("qz_flag"));
-			if(SqlUtil.columnIsExist(rs,"sjcj_nums")) jhdProduct.setSjcj_nums(rs.getInt("sjcj_nums"));
-			if(SqlUtil.columnIsExist(rs,"dw")) jhdProduct.setDw(rs.getString("dw"));
-			
-			return jhdProduct;
-		}
-	}	
 	
 }

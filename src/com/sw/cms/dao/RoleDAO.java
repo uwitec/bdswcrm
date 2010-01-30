@@ -219,6 +219,30 @@ public class RoleDAO extends JdbcBaseDAO {
 	
 	
 	/**
+	 * 获取审批相关信息
+	 * @return
+	 */
+	public Map getSpRight(String yw_type){
+		String sql = "select * from sp_right where yw_type='" + yw_type + "'";
+		return this.getResultMap(sql);
+	}
+	
+	
+	/**
+	 * 保存审批相关信息
+	 * @param sp_flag
+	 * @param role_id
+	 */
+	public void saveSpRight(String sp_flag,String role_id,String yw_type){
+		String sql = "delete from sp_right where yw_type='" + yw_type + "'";
+		this.getJdbcTemplate().execute(sql);
+		
+		sql = "insert into sp_right(sp_flag,role_id,yw_type) values('" + sp_flag + "','" + role_id + "','" + yw_type + "')";
+		this.getJdbcTemplate().execute(sql);
+	}
+	
+	
+	/**
 	 * 取当前可用的序列号
 	 * @return
 	 */

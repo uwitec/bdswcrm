@@ -47,6 +47,7 @@ public class UserAction extends BaseAction {
 	private String[] positions;
 	private List userList = new ArrayList();
 	private List employList = new ArrayList();
+	private Map cfgkSpRightMap;
 	
 	private String user_name;
 	private String curPass;
@@ -59,6 +60,8 @@ public class UserAction extends BaseAction {
 	private List storeList = new ArrayList();
 	
 	private String user_id;
+	
+	private String sp_flag;
 	private String[] role_id;
 	
 	private String real_name = "";
@@ -473,6 +476,42 @@ public class UserAction extends BaseAction {
 	
 	
 	/**
+	 * 打开采购付款审批权限设置页面
+	 * @return
+	 */
+	public String openCgfkSpRight(){
+		try{
+			roleList = userService.getAllRoles();
+			cfgkSpRightMap = userService.getSpRight("采购付款");
+			sp_flag = StringUtils.nullToStr(cfgkSpRightMap.get("sp_flag"));
+			role_id = (StringUtils.nullToStr(cfgkSpRightMap.get("role_id"))).split(",");
+			return SUCCESS;
+		}catch(Exception e){
+			log.error("打开采购付款审批权限设置页面错误码，错误原因：" + e.getMessage());
+			e.printStackTrace();
+			return ERROR;
+		}
+	}
+	
+	
+	/**
+	 * 保存采购付款审批相关信息
+	 * @return
+	 */
+	public String saveCgfkSpRight(){
+		try{
+			userService.saveCgfSpRight(sp_flag, role_id,"采购付款");
+			this.setMsg("保存采购付款审批设置成功！");
+			return SUCCESS;
+		}catch(Exception e){
+			log.error("保存采购付款审批相关信息错误，错误原因：" + e.getMessage());
+			e.printStackTrace();
+			return ERROR;
+		}
+	}
+	
+	
+	/**
 	 * 查询ajax经手人提示信息
 	 * @return
 	 */
@@ -795,6 +834,26 @@ public class UserAction extends BaseAction {
 
 	public void setSysInitSetService(SysInitSetService sysInitSetService) {
 		this.sysInitSetService = sysInitSetService;
+	}
+
+
+	public Map getCfgkSpRightMap() {
+		return cfgkSpRightMap;
+	}
+
+
+	public void setCfgkSpRightMap(Map cfgkSpRightMap) {
+		this.cfgkSpRightMap = cfgkSpRightMap;
+	}
+
+
+	public String getSp_flag() {
+		return sp_flag;
+	}
+
+
+	public void setSp_flag(String spFlag) {
+		sp_flag = spFlag;
 	}
 	
 }

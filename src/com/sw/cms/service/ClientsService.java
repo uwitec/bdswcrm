@@ -64,16 +64,13 @@ public class ClientsService {
 	 * 
 	 * @param clients
 	 */
-	public void saveClient(Clients client,ClientsLinkman linkman) 
+	public void saveClient(Clients client,ClientsLinkman linkman, List clientsPayInfos) 
 	{
-		 String clients_id=(String)clientsDao.saveClient(client);
-		 if(null!=clientsDao.getClient(clients_id))
-		 {
+		 String clients_id=(String)clientsDao.saveClient(client,clientsPayInfos);
+		 if(null!=clientsDao.getClient(clients_id)){
 			 linkman.setClients_id(clients_id);
 			 clientsLinkmanDao.insertLinkman(linkman);
 		 }
-		 
-          
 	}
 
 	/**
@@ -81,9 +78,9 @@ public class ClientsService {
 	 * 
 	 * @param clients
 	 */
-	public void updateClient(Clients client) {
+	public void updateClient(Clients client, List clientsPayInfos) {
 
-		clientsDao.updateClient(client);
+		clientsDao.updateClient(client,clientsPayInfos);
 
 	}
 
@@ -95,6 +92,15 @@ public class ClientsService {
 	 */
 	public Object getClient(String id) {
 		return clientsDao.getClient(id);
+	}
+	
+	/**
+	 * 根据客户编号取
+	 * @param client_id
+	 * @return
+	 */
+	public List getClientsPayInfos(String client_id){
+		return clientsDao.getClientsPayInfos(client_id);
 	}
 
 	/**

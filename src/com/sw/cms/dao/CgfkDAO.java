@@ -6,14 +6,10 @@ package com.sw.cms.dao;
  * 2008-03-27
  */
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
-import org.springframework.jdbc.core.RowMapper;
-
+import com.sw.cms.dao.base.BeanRowMapper;
 import com.sw.cms.dao.base.JdbcBaseDAO;
-import com.sw.cms.dao.base.SqlUtil;
 import com.sw.cms.model.Cgfk;
 import com.sw.cms.model.CgfkDesc;
 import com.sw.cms.model.Page;
@@ -42,13 +38,27 @@ public class CgfkDAO extends JdbcBaseDAO {
 	
 	
 	/**
+	 * 根据查询条件取所有满足条件的采购付款信息
+	 * @param con
+	 * @return
+	 */
+	public List getCgfks(String con){
+		String sql = "select * from cgfk where 1=1";
+		if(!con.equals("")){
+			sql += con;
+		}
+		return this.getResultList(sql, new BeanRowMapper(Cgfk.class));
+	}
+	
+	
+	/**
 	 * 根据采购付款ID取相关信息
 	 * @param yfk_id
 	 * @return
 	 */
 	public Object getCgfk(String id){
 		String sql = "select * from cgfk where id='" + id + "'";
-		return this.queryForObject(sql, new CgfkRowMapper());
+		return this.queryForObject(sql, new BeanRowMapper(Cgfk.class));
 	}
 	
 	
@@ -58,8 +68,19 @@ public class CgfkDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public List getCgfkDesc(String id){
-		String sql = "select jhd_id,fsrq,fsje,(fsje-bcfk) as yfje,bcfk,remark from cgfk_desc where cgfk_id='" + id + "'";
+		String sql = "select jhd_id,fsrq,fsje,yfje,bcfk,remark from cgfk_desc where cgfk_id='" + id + "'";
 		return this.getResultList(sql);
+	}
+	
+	
+	/**
+	 * 根据采购付款ID取明细信息
+	 * @param id
+	 * @return
+	 */
+	public List getCgfkDescObj(String id){
+		String sql = "select * from cgfk_desc where cgfk_id='" + id + "'";
+		return this.getResultList(sql,  new BeanRowMapper(CgfkDesc.class));
 	}
 	
 	
@@ -102,7 +123,7 @@ public class CgfkDAO extends JdbcBaseDAO {
 	 * @param cgfkDescs
 	 */
 	public void saveCgfk(Cgfk cgfk,List cgfkDescs){
-		String sql = "insert into cgfk(id,fk_date,gysbh,fkzh,jsr,fkje,remark,state,is_yfk,yfk_ye,czr,cz_date,delete_key) values(?,?,?,?,?,?,?,?,?,?,?,now(),?)";
+		String sql = "insert into cgfk(id,fk_date,gysbh,fkzh,jsr,fkje,remark,state,is_yfk,yfk_ye,czr,cz_date,delete_key,client_all_name,bank_no,kh_lxr,fax,tel) values(?,?,?,?,?,?,?,?,?,?,?,now(),?,?,?,?,?,?)";
 		
 		String is_yfk = StringUtils.nullToStr(cgfk.getIs_yfk());
 		if(is_yfk.equals("")){
@@ -114,7 +135,7 @@ public class CgfkDAO extends JdbcBaseDAO {
 			yfk_ye = cgfk.getFkje();
 		}
 		
-		Object[] param = new Object[12];
+		Object[] param = new Object[17];
 		
 		param[0] = cgfk.getId();
 		param[1] = cgfk.getFk_date();
@@ -128,6 +149,11 @@ public class CgfkDAO extends JdbcBaseDAO {
 		param[9] = new Double(yfk_ye);
 		param[10] = cgfk.getCzr();
 		param[11] = cgfk.getDelete_key();
+		param[12] = cgfk.getClient_all_name();
+		param[13] = cgfk.getBank_no();
+		param[14] = cgfk.getKh_lxr();
+		param[15] = cgfk.getFax();
+		param[16] = cgfk.getTel();
 		
 		this.getJdbcTemplate().update(sql,param);
 		
@@ -141,7 +167,7 @@ public class CgfkDAO extends JdbcBaseDAO {
 	 * @param cgfkDescs
 	 */
 	public void updateCgfk(Cgfk cgfk,List cgfkDescs){
-		String sql = "update cgfk set fk_date=?,gysbh=?,fkzh=?,jsr=?,fkje=?,remark=?,state=?,is_yfk=?,yfk_ye=?,czr=?,cz_date=now() where id=?";
+		String sql = "update cgfk set fk_date=?,gysbh=?,fkzh=?,jsr=?,fkje=?,remark=?,state=?,is_yfk=?,yfk_ye=?,czr=?,cz_date=now(),client_all_name=?,bank_no=?,kh_lxr=?,fax=?,tel=? where id=?";
 		
 		String is_yfk = StringUtils.nullToStr(cgfk.getIs_yfk());
 		if(is_yfk.equals("")){
@@ -153,7 +179,7 @@ public class CgfkDAO extends JdbcBaseDAO {
 			yfk_ye = cgfk.getFkje();
 		}
 		
-		Object[] param = new Object[11];		
+		Object[] param = new Object[16];		
 		
 		param[0] = cgfk.getFk_date();
 		param[1] = cgfk.getGysbh();
@@ -165,13 +191,33 @@ public class CgfkDAO extends JdbcBaseDAO {
 		param[7] = is_yfk;
 		param[8] = new Double(yfk_ye);
 		param[9] = cgfk.getCzr();
-		param[10] = cgfk.getId();
+		param[10] = cgfk.getClient_all_name();
+		param[11] = cgfk.getBank_no();
+		param[12] = cgfk.getKh_lxr();
+		param[13] = cgfk.getFax();
+		param[14] = cgfk.getTel();
+		param[15] = cgfk.getId();
 		
 		this.getJdbcTemplate().update(sql,param);
 		
 		this.delCgfkDesc(cgfk.getId());
 		
 		this.saveCgfkDesc(cgfkDescs, cgfk.getId());
+	}
+	
+	
+	/**
+	 * 更新采购付款申请单状态
+	 * @param cgfk
+	 */
+	public void updateCgfkStat(Cgfk cgfk){
+		String sql = "update cgfk set state=? where id=?";
+		
+		Object[] param = new Object[2];
+		param[0] = cgfk.getState();
+		param[1] = cgfk.getId();
+		
+		this.getJdbcTemplate().update(sql, param);
 	}
 	
 	
@@ -193,7 +239,7 @@ public class CgfkDAO extends JdbcBaseDAO {
 	 */
 	private void saveCgfkDesc(List cgfkDescs,String cgfk_id){
 		String sql = "";
-		Object[] param = new Object[6];
+		Object[] param = new Object[7];
 		
 		if(cgfkDescs != null && cgfkDescs.size()>0){
 			for(int i =0;i<cgfkDescs.size();i++){
@@ -201,7 +247,7 @@ public class CgfkDAO extends JdbcBaseDAO {
 				CgfkDesc cgfkDesc = (CgfkDesc)cgfkDescs.get(i);
 				if(cgfkDesc != null){
 					if(cgfkDesc.getBcfk() != 0){
-						sql = "insert into cgfk_desc(cgfk_id,jhd_id,bcfk,remark,fsrq,fsje) values(?,?,?,?,?,?)";
+						sql = "insert into cgfk_desc(cgfk_id,jhd_id,bcfk,remark,fsrq,fsje,yfje) values(?,?,?,?,?,?,?)";
 						
 						param[0] = cgfk_id;
 						param[1] = cgfkDesc.getJhd_id();
@@ -209,6 +255,7 @@ public class CgfkDAO extends JdbcBaseDAO {
 						param[3] = cgfkDesc.getRemark();
 						param[4] = cgfkDesc.getFsrq();
 						param[5] = cgfkDesc.getFsje();
+						param[6] = cgfkDesc.getYfje();
 						
 						this.getJdbcTemplate().update(sql,param); //添加付款明细
 						
@@ -316,7 +363,7 @@ public class CgfkDAO extends JdbcBaseDAO {
 		Cgfk cgfk = null;
 		
 		String sql = "select * from cgfk where delete_key='" + delete_key + "'";
-		Object obj = this.queryForObject(sql, new CgfkRowMapper());
+		Object obj = this.queryForObject(sql,  new BeanRowMapper(Cgfk.class));
 		
 		if(obj != null){
 			cgfk = (Cgfk)obj;
@@ -324,35 +371,5 @@ public class CgfkDAO extends JdbcBaseDAO {
 		
 		return cgfk;
 	}
-	
-	
-	/**
-	 * 包装对象(采购付款)
-	 * 
-	 * @author liyt
-	 * 
-	 */
-	class CgfkRowMapper implements RowMapper {
-		public Object mapRow(ResultSet rs, int index) throws SQLException {
-			Cgfk cgfk = new Cgfk();
-
-			if(SqlUtil.columnIsExist(rs,"id")) cgfk.setId(rs.getString("id"));
-			if(SqlUtil.columnIsExist(rs,"fk_date")) cgfk.setFk_date(rs.getString("fk_date"));
-			if(SqlUtil.columnIsExist(rs,"gysbh")) cgfk.setGysbh(rs.getString("gysbh"));
-			if(SqlUtil.columnIsExist(rs,"fkzh")) cgfk.setFkzh(rs.getString("fkzh"));
-			if(SqlUtil.columnIsExist(rs,"fkje")) cgfk.setFkje(rs.getDouble("fkje"));
-			if(SqlUtil.columnIsExist(rs,"jsr")) cgfk.setJsr(rs.getString("jsr"));
-			if(SqlUtil.columnIsExist(rs,"remark")) cgfk.setRemark(rs.getString("remark"));
-			if(SqlUtil.columnIsExist(rs,"state")) cgfk.setState(rs.getString("state"));
-			
-			if(SqlUtil.columnIsExist(rs,"is_yfk")) cgfk.setIs_yfk(rs.getString("is_yfk"));
-			if(SqlUtil.columnIsExist(rs,"yfk_ye")) cgfk.setYfk_ye(rs.getDouble("yfk_ye"));
-			if(SqlUtil.columnIsExist(rs,"czr")) cgfk.setCzr(rs.getString("czr"));
-			
-			if(SqlUtil.columnIsExist(rs,"delete_key")) cgfk.setDelete_key(rs.getString("delete_key"));
-			
-			return cgfk;
-		}
-	}	
 
 }

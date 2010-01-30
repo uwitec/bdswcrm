@@ -19,6 +19,7 @@ import com.sw.cms.dao.StoreDAO;
 import com.sw.cms.dao.SysInitSetDAO;
 import com.sw.cms.dao.UserDAO;
 import com.sw.cms.dao.XsdDAO;
+import com.sw.cms.model.Clients;
 import com.sw.cms.model.Product;
 import com.sw.cms.model.SysInitSet;
 import com.sw.cms.model.Xsd;
@@ -88,6 +89,28 @@ public class DwrService {
 	public String productIsExist(String serial_num, String product_id) {
 		return productDao.productIsExist(serial_num, product_id);
 	}
+	
+	
+	/**
+	 * 根据客户编号取客户采购账期
+	 * @param client_id
+	 * @return
+	 */
+	public String getClientCgzq(String client_id){
+		Clients client = (Clients)clientsDao.getClient(client_id);
+		return client.getCg_zq()+"";
+	}
+	
+	
+	/**
+	 * 根据客户编号取客户销售账期
+	 * @param client_id
+	 * @return
+	 */
+	public String getClientXszq(String client_id){
+		Clients client = (Clients)clientsDao.getClient(client_id);
+		return client.getZq();
+	}	
 
 	/**
 	 * 库存初始时执行更新库存及插入序列号操作

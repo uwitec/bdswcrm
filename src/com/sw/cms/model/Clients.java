@@ -32,6 +32,9 @@ public class Clients {
 	private String kp_khhzh;    //开票信息--开户行账号
 	private String kp_sh;       //开票信息--税号
 	
+	private int cg_zq;          //采购账期
+	private double cg_xe;       //采购限额
+	
 	public String getChina_py() {
 		return china_py;
 	}
@@ -187,6 +190,18 @@ public class Clients {
 	}
 	public void setKp_tel(String kp_tel) {
 		this.kp_tel = kp_tel;
+	}
+	public int getCg_zq() {
+		return cg_zq;
+	}
+	public void setCg_zq(int cgZq) {
+		cg_zq = cgZq;
+	}
+	public double getCg_xe() {
+		return cg_xe;
+	}
+	public void setCg_xe(double cgXe) {
+		cg_xe = cgXe;
 	}
 	
 }

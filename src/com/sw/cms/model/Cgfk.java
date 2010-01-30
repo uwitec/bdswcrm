@@ -1,5 +1,7 @@
 package com.sw.cms.model;
 
+import java.util.Date;
+
 public class Cgfk {
 	
 	private String id;   //采购付款编号
@@ -9,15 +11,22 @@ public class Cgfk {
 	private String jsr;  //经手人
 	private double fkje; //付款金额
 	private String remark; //备注
-	private String state;  //状态	
+	private String state;  //状态	已保存、已提交（待审批）、审批通过、审批不通过、已付款
 	private String is_yfk; //是否预付款
 	private double yfk_ye; //预付款余额
 	private String czr;    //操作人
+	private Date cz_date;
 	
 	//删除关键字
 	//在采购退货发生提交时如果是现金退货，需要将采购退货单ID写入
 	//在发生采购退货现金退货时，需要将采购退货单ID写入
 	private String delete_key = "";
+	
+	private String client_all_name;
+	private String bank_no;
+	private String kh_lxr;
+	private String fax;
+	private String tel;
 	
 	public String getFk_date() {
 		return fk_date;
@@ -90,6 +99,42 @@ public class Cgfk {
 	}
 	public void setDelete_key(String delete_key) {
 		this.delete_key = delete_key;
+	}
+	public Date getCz_date() {
+		return cz_date;
+	}
+	public void setCz_date(Date czDate) {
+		cz_date = czDate;
+	}
+	public String getClient_all_name() {
+		return client_all_name;
+	}
+	public void setClient_all_name(String clientAllName) {
+		client_all_name = clientAllName;
+	}
+	public String getBank_no() {
+		return bank_no;
+	}
+	public void setBank_no(String bankNo) {
+		bank_no = bankNo;
+	}
+	public String getKh_lxr() {
+		return kh_lxr;
+	}
+	public void setKh_lxr(String khLxr) {
+		kh_lxr = khLxr;
+	}
+	public String getFax() {
+		return fax;
+	}
+	public void setFax(String fax) {
+		this.fax = fax;
+	}
+	public String getTel() {
+		return tel;
+	}
+	public void setTel(String tel) {
+		this.tel = tel;
 	}
 
 }

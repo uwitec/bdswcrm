@@ -6,11 +6,13 @@ import java.util.Map;
 import com.sw.cms.dao.AccountDzdDAO;
 import com.sw.cms.dao.AccountsDAO;
 import com.sw.cms.dao.CgfkDAO;
+import com.sw.cms.dao.CnfkdDAO;
+import com.sw.cms.dao.RoleDAO;
 import com.sw.cms.dao.YufukDAO;
-import com.sw.cms.model.AccountDzd;
 import com.sw.cms.model.Cgfk;
+import com.sw.cms.model.Cnfkd;
 import com.sw.cms.model.Page;
-import com.sw.cms.model.Yufuk;
+import com.sw.cms.util.StringUtils;
 
 public class CgfkService {
 
@@ -18,6 +20,8 @@ public class CgfkService {
 	private AccountsDAO accountsDao;
 	private AccountDzdDAO accountDzdDao;
 	private YufukDAO yufukDao;
+	private RoleDAO roleDao;
+	private CnfkdDAO cnfkdDao;
 
 	/**
 	 * 取采购应付款列表
@@ -28,6 +32,16 @@ public class CgfkService {
 	 */
 	public Page getCgfks(String con,int curPage, int rowsPerPage){
 		return cgfkDao.getCgfks(con, curPage, rowsPerPage);
+	}
+	
+	
+	/**
+	 * 根据查询条件取所有满足条件的采购付款信息
+	 * @param con
+	 * @return
+	 */
+	public List getCgfks(String con){
+		return cgfkDao.getCgfks(con);
 	}
 	
 	
@@ -75,21 +89,34 @@ public class CgfkService {
 	 * @param cgfk
 	 * @param cgfkDescs
 	 */
-	public void saveCgfk(Cgfk cgfk,List cgfkDescs){
-		cgfkDao.saveCgfk(cgfk, cgfkDescs);
+	public void saveCgfk(Cgfk cgfk,List cgfkDescs){	
 		
-		if(cgfk.getState().equals("已提交")){
-			cgfkDao.updateJhdFkje(cgfk,cgfkDescs);
-			
-			//添加预付款信息
-			if(cgfk.getIs_yfk() != null && cgfk.getIs_yfk().equals("是")){
-				this.addYufuk(cgfk);
-			}
-			
-			this.saveAccountDzd(cgfk); //资金往来记录
-			
-			accountsDao.updateAccountJe(cgfk.getFkzh(), cgfk.getFkje()); //更新账户金额
+		Map map = roleDao.getSpRight("采购付款");
+		String sp_flag = "";
+		String role_id = "";
+		if(map != null){
+			sp_flag = StringUtils.nullToStr(map.get("sp_flag"));
+			role_id = StringUtils.nullToStr(map.get("role_id"));
 		}
+		
+		//采购付款各状态：已保存、待审批、审批不通过、待支付、已支付
+		if(cgfk.getState().equals("已提交")){
+			
+			if(sp_flag.equals("00") || sp_flag.equals("") || role_id.equals("")){
+				
+				//如果采购付款不需要审批，直接生成相应的出纳付款单	，同时采购付款的状态为待支付				
+				cgfk.setState("待支付");	
+				this.saveCnfkd(cgfk);
+
+			}else{
+				
+				//如果采购付款需要审批，直接将付款申请单的状态为待审批
+				cgfk.setState("待审批");
+			}
+		}
+		
+		//保存采购付款信息
+		cgfkDao.saveCgfk(cgfk, cgfkDescs);	
 	}
 	
 	
@@ -99,48 +126,59 @@ public class CgfkService {
 	 * @param cgfkDescs
 	 */
 	public void updateCgfk(Cgfk cgfk,List cgfkDescs){
-		cgfkDao.updateCgfk(cgfk, cgfkDescs);
 		
+		Map map = roleDao.getSpRight("采购付款");
+		String sp_flag = "";
+		String role_id = "";
+		if(map != null){
+			sp_flag = StringUtils.nullToStr(map.get("sp_flag"));
+			role_id = StringUtils.nullToStr(map.get("role_id"));
+		} 
+		
+		//采购付款各状态：已保存、待审批、审批不通过、待支付、已支付
 		if(cgfk.getState().equals("已提交")){
-			cgfkDao.updateJhdFkje(cgfk,cgfkDescs);
 			
-			//添加预付款信息
-			if(cgfk.getIs_yfk() != null && cgfk.getIs_yfk().equals("是")){
-				this.addYufuk(cgfk);
+			if(sp_flag.equals("00") || sp_flag.equals("") || role_id.equals("")){
+				//如果采购付款不需要审批，直接生成相应的出纳付款单	，同时采购付款的状态为待支付
+				
+				cgfk.setState("待支付");
+				this.saveCnfkd(cgfk);
+				
+			}else{
+				
+				//如果采购付款需要审批，直接将付款申请单的状态为待审批
+				cgfk.setState("待审批");
 			}
-			
-			this.saveAccountDzd(cgfk); //资金往来记录
-			
-			accountsDao.updateAccountJe(cgfk.getFkzh(), cgfk.getFkje()); //更新账户金额
 		}
+		
+		//保存采购付款信息
+		cgfkDao.updateCgfk(cgfk, cgfkDescs);
 	}
 	
 	
 	/**
-	 * 添加资金交易记录
-	 * @param cgfk
+	 * 采购付款审批
+	 * @param id
+	 * @param state
 	 */
-	private void saveAccountDzd(Cgfk cgfk){
-		AccountDzd accountDzd = new AccountDzd();
+	public void doSp(String id,String state,String remark){
+		Cgfk cgfk = (Cgfk)cgfkDao.getCgfk(id);
+		cgfk.setRemark(remark);
+		List cgfkDescs = cgfkDao.getCgfkDescObj(id);
 		
-		double zhye = 0;
-		Map map = accountsDao.getAccounts(cgfk.getFkzh());
-		if(map != null){
-			zhye = (map.get("dqje")==null?0:((Double)map.get("dqje")).doubleValue());
+		if(state.equals("通过")){
+			//如果审批结果为通过
+			cgfk.setState("待支付");
+			this.saveCnfkd(cgfk);
+		}else{
+			//如果审批结果为不通过
+			cgfk.setState("审批不通过");
 		}
 		
-		accountDzd.setAccount_id(cgfk.getFkzh());
-		accountDzd.setJyje(0-cgfk.getFkje());
-		accountDzd.setZhye(zhye - cgfk.getFkje());
-		accountDzd.setRemark("采购付款，编号[" + cgfk.getId() + "]");
-		accountDzd.setCzr(cgfk.getCzr());
-		accountDzd.setJsr(cgfk.getJsr());
-		accountDzd.setAction_url("viewCgfk.html?id=" + cgfk.getId());
-		
-		accountDzdDao.addDzd(accountDzd);
+		cgfkDao.updateCgfk(cgfk, cgfkDescs);
 	}
 	
-
+	
 	/**
 	 * 取当前可用的序列号
 	 * @return
@@ -151,23 +189,36 @@ public class CgfkService {
 	
 	
 	/**
-	 * 添加预付款信息
+	 * 根据采购付款申请单生成相应的出纳付款单
 	 * @param cgfk
 	 */
-	private void addYufuk(Cgfk cgfk){
-		Yufuk yfk = new Yufuk();
+	private void saveCnfkd(Cgfk cgfk){
+		Cnfkd cnfkd = new Cnfkd();
 		
-		yfk.setClient_name(cgfk.getGysbh());
-		yfk.setHjje(cgfk.getFkje());
-		yfk.setJsje(0);
-		yfk.setJs_date(cgfk.getFk_date());
-		yfk.setYwdj_id(cgfk.getId());
-		yfk.setYwdj_name("采购付款（预付款）");
-		yfk.setUrl("viewCgfk.html?id=");
-		yfk.setCzr(cgfk.getCzr());
-		yfk.setRemark("预付款");
+		cnfkd.setBank_no(cgfk.getBank_no());
+		cnfkd.setCgfk_id(cgfk.getId());
+		cnfkd.setClient_name(cgfk.getGysbh());
+		cnfkd.setClient_all_name(cgfk.getClient_all_name());
+		cnfkd.setCzr(cgfk.getCzr());
+		cnfkd.setFax(cgfk.getFax());
+		if(cgfk.getIs_yfk().equals("是")){
+			cnfkd.setFklx("预付款");
+		}else{
+			cnfkd.setFklx("应付款");
+		}
+		cnfkd.setFkje(cgfk.getFkje());
+		cnfkd.setFkzh(cgfk.getFkzh());
+		cnfkd.setLxr(cgfk.getKh_lxr());
+		cnfkd.setRemark(cgfk.getRemark());
+		cnfkd.setState("待支付");
+		cnfkd.setTel(cgfk.getTel());
 		
-		yufukDao.saveYufuk(yfk);
+		if(cnfkdDao.isExistCnfkdByCgfkId(cgfk.getId())){
+			cnfkdDao.updateCnfkd(cnfkd);
+		}else{
+			cnfkdDao.insertCnfkd(cnfkd);
+		}
+		
 	}
 
 
@@ -208,6 +259,26 @@ public class CgfkService {
 
 	public void setYufukDao(YufukDAO yufukDao) {
 		this.yufukDao = yufukDao;
+	}
+
+
+	public RoleDAO getRoleDao() {
+		return roleDao;
+	}
+
+
+	public void setRoleDao(RoleDAO roleDao) {
+		this.roleDao = roleDao;
+	}
+
+
+	public CnfkdDAO getCnfkdDao() {
+		return cnfkdDao;
+	}
+
+
+	public void setCnfkdDao(CnfkdDAO cnfkdDao) {
+		this.cnfkdDao = cnfkdDao;
 	}
 	
 }

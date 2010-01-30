@@ -1,5 +1,7 @@
 package com.sw.cms.model;
 
+import java.util.Date;
+
 
 public class Jhd {
 	
@@ -17,6 +19,7 @@ public class Jhd {
 	private String fklx;	
 	private String gysmc;
 	private String czr;	
+	private Date cz_date;
 	private String fkzh;	
 	private String yfrq;
 	
@@ -27,6 +30,7 @@ public class Jhd {
 	private String th_flag;
 	
 	private double sjcjje; //采购订单实际成交金额
+	private String yjdhsj; //预计到货时间
 	
 	
 	
@@ -163,7 +167,17 @@ public class Jhd {
 	public void setSjcjje(double sjcjje) {
 		this.sjcjje = sjcjje;
 	}
-
-
+	public String getYjdhsj() {
+		return yjdhsj;
+	}
+	public void setYjdhsj(String yjdhsj) {
+		this.yjdhsj = yjdhsj;
+	}
+	public Date getCz_date() {
+		return cz_date;
+	}
+	public void setCz_date(Date czDate) {
+		cz_date = czDate;
+	}
 
 }

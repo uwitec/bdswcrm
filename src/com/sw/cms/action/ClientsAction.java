@@ -46,6 +46,7 @@ public class ClientsAction extends BaseAction {
 
 	private List descClientLinkman = new ArrayList();
 	private List clientsFollow = new ArrayList();
+	private List clientsPayInfos = new ArrayList();
 
 	private ClientsLinkman linkman = new ClientsLinkman();
 	private ClientsFollow follow = new ClientsFollow();
@@ -56,69 +57,7 @@ public class ClientsAction extends BaseAction {
 	private String clientsTips = "";
 	private String clientRegInfoText = "";
 
-	public String getClientsTips() {
-		return clientsTips;
-	}
 
-	public void setClientsTips(String clientsTips) {
-		this.clientsTips = clientsTips;
-	}
-
-	public String getClient_con() {
-		return client_con;
-	}
-
-	public void setClient_con(String client_con) {
-		this.client_con = client_con;
-	}
-
-	public String getClients_id() {
-		return clients_id;
-	}
-
-	public void setClients_id(String clients_id) {
-		this.clients_id = clients_id;
-	}
-
-	public List getClientsFollow() {
-		return clientsFollow;
-	}
-
-	public void setClientsFollow(List clientsFollow) {
-		this.clientsFollow = clientsFollow;
-	}
-
-	public List getDescClientLinkman() {
-		return descClientLinkman;
-	}
-
-	public void setDescClientLinkman(List descClientLinkman) {
-		this.descClientLinkman = descClientLinkman;
-	}
-
-	public ClientsFollow getFollow() {
-		return follow;
-	}
-
-	public void setFollow(ClientsFollow follow) {
-		this.follow = follow;
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public ClientsLinkman getLinkman() {
-		return linkman;
-	}
-
-	public void setLinkman(ClientsLinkman linkman) {
-		this.linkman = linkman;
-	}
 
 	/**
 	 * 返回列表（带分页）
@@ -174,14 +113,13 @@ public class ClientsAction extends BaseAction {
 	 */
 	public String save() {
 		
-		if(clientsService.getClientsIsExist(client.getName())>0)
-		{
-			 getSession().setAttribute("MSG", "单位名称已存在，请选用其它名称！");
-			 wldwlx = sjzdService.getSjzdXmxxByZdId("SJZD_WLDWLX");
+		if(clientsService.getClientsIsExist(client.getName())>0){
+			getSession().setAttribute("MSG", "单位名称已存在，请选用其它名称！");
+			wldwlx = sjzdService.getSjzdXmxxByZdId("SJZD_WLDWLX");
 			userList = userService.getAllEmployeeList();
 			return "input";
 		}
-		clientsService.saveClient(client,linkman);
+		clientsService.saveClient(client,linkman,clientsPayInfos);
 		return "success";
 	}
 
@@ -196,6 +134,7 @@ public class ClientsAction extends BaseAction {
 		client = (Clients) clientsService.getClient(id);
 		wldwlx = sjzdService.getSjzdXmxxByZdId("SJZD_WLDWLX");
 		userList = userService.getAllEmployeeList();
+		clientsPayInfos = clientsService.getClientsPayInfos(id);
 		return "success";
 	}
 
@@ -204,8 +143,7 @@ public class ClientsAction extends BaseAction {
 	 * 
 	 * @return
 	 */
-	public String update()
-	{
+	public String update(){
 		
 		Clients map=(Clients)clientsService.getClient(client.getId());
 		if(!map.getName().equals(client.getName()))
@@ -222,7 +160,7 @@ public class ClientsAction extends BaseAction {
 			}
 			
 		}
-		clientsService.updateClient(client);
+		clientsService.updateClient(client,clientsPayInfos);
 		return "success";
 	}
 
@@ -585,6 +523,36 @@ public class ClientsAction extends BaseAction {
 		}
 	}
 	
+	
+	/**
+	 * 选择客户单位全称
+	 * @return
+	 */
+	public String selClientAllName(){
+		try{
+			clientsPayInfos = clientsService.getClientsPayInfos(id);
+			return SUCCESS;
+		}catch(Exception e){
+			log.error("选择客户单位全称出错，错误原因：" + e.getMessage());
+			return ERROR;
+		}
+	}
+	
+	
+	/**
+	 * 选择客户联系人
+	 * @return
+	 */
+	public String selClientLxr(){
+		try{
+			descClientLinkman = clientsService.getClientsLinkman(id);
+			return SUCCESS;
+		}catch(Exception e){
+			log.error("选择客户联系人出错，错误原因：" + e.getMessage());
+			return ERROR;
+		}
+	}
+	
 
 	public Clients getClient() {
 		return client;
@@ -721,5 +689,76 @@ public class ClientsAction extends BaseAction {
 	public void setClientRegInfoText(String clientRegInfoText) {
 		this.clientRegInfoText = clientRegInfoText;
 	}
+	
+	public String getClientsTips() {
+		return clientsTips;
+	}
 
+	public void setClientsTips(String clientsTips) {
+		this.clientsTips = clientsTips;
+	}
+
+	public String getClient_con() {
+		return client_con;
+	}
+
+	public void setClient_con(String client_con) {
+		this.client_con = client_con;
+	}
+
+	public String getClients_id() {
+		return clients_id;
+	}
+
+	public void setClients_id(String clients_id) {
+		this.clients_id = clients_id;
+	}
+
+	public List getClientsFollow() {
+		return clientsFollow;
+	}
+
+	public void setClientsFollow(List clientsFollow) {
+		this.clientsFollow = clientsFollow;
+	}
+
+	public List getDescClientLinkman() {
+		return descClientLinkman;
+	}
+
+	public void setDescClientLinkman(List descClientLinkman) {
+		this.descClientLinkman = descClientLinkman;
+	}
+
+	public ClientsFollow getFollow() {
+		return follow;
+	}
+
+	public void setFollow(ClientsFollow follow) {
+		this.follow = follow;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public ClientsLinkman getLinkman() {
+		return linkman;
+	}
+
+	public void setLinkman(ClientsLinkman linkman) {
+		this.linkman = linkman;
+	}
+
+	public List getClientsPayInfos() {
+		return clientsPayInfos;
+	}
+
+	public void setClientsPayInfos(List clientsPayInfos) {
+		this.clientsPayInfos = clientsPayInfos;
+	}
 }
