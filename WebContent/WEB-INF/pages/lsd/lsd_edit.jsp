@@ -427,7 +427,7 @@ if(sp_state.equals("3")){
 	}	
 	
 	function chgKpTyle(vl){
-		if(vl == "") vl = "出库单";
+		if(vl == "") vl = "普通发票";
 		
 		var obj_mc1 = document.getElementById("mc1");
 		var obj_mc2 = document.getElementById("mc2");
@@ -769,8 +769,8 @@ if(lsdProducts != null && lsdProducts.size()>0){
 		<td class="a1" width="15%">发票类型</td>
 		<td class="a2">
 			<select name="lsd.fplx" id="fplx" onchange="chgKpTyle(this.value);">
-				<option value="出库单" <%if(StringUtils.nullToStr(lsd.getFplx()).equals("出库单")) out.print("selected"); %>>出库单</option>
 				<option value="普通发票" <%if(StringUtils.nullToStr(lsd.getFplx()).equals("普通发票")) out.print("selected"); %>>普通发票</option>
+				<option value="出库单" <%if(StringUtils.nullToStr(lsd.getFplx()).equals("出库单")) out.print("selected"); %>>出库单</option>				
 				<option value="增值发票" <%if(StringUtils.nullToStr(lsd.getFplx()).equals("增值发票")) out.print("selected"); %>>增值发票</option>
 			</select>
 		</td>

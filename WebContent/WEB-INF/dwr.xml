@@ -14,7 +14,9 @@
 			<include method="chkSerialNumIsExist"/>
 			<include method="getAllUserList"/>
 			<include method="getBxdRecordorBuyRecord"/>
-			<include method="getLxrMailByClientType" /> 
+			<include method="getLxrMailByClientType" />
+			<include method="getClientCgzq" /> 
+			<include method="getClientXszq" />  
 		</create>
 		<convert converter="bean" match="com.sw.cms.model.Product">
 			<param name="include" value="productId,productName,productXh,price,lsbj,qz_serial_num,khcbj,gf" />

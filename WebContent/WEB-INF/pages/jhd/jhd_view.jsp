@@ -40,21 +40,21 @@ Jhd jhd = (Jhd)VS.findValue("Jhd");
 		<td class="a2" width="35%"><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(jhd.getFzr())) %>	</td>
 	</tr>
 	<tr>
-		<td class="a1" width="15%">付款方式</td>
-		<td class="a2" width="35%"><%=StringUtils.nullToStr(jhd.getFkfs()) %></td>	
+		<td class="a1" width="15%">账期</td>
+		<td class="a2" width="35%"><%=StringUtils.nullToStr(jhd.getZq()) %>天</td>	
 		<td class="a1" width="15%">进货单状态</td>
 		<td class="a2"><%=StringUtils.nullToStr(jhd.getState()) %></td>	
 	</tr>
 	<tr>
-		<td class="a1">合计金额</td>
-		<td class="a2"><%=JMath.round(jhd.getTotal(),2) %></td>	
-		<td class="a1">付款金额</td>
-		<td class="a2"><%=JMath.round(jhd.getFkje(),2) %></td>		
+		<td class="a1" width="15%">预计到货时间</td>
+		<td class="a2" width="35%"><%=StringUtils.nullToStr(jhd.getYjdhsj()) %></td>	
+		<td class="a1" width="15%">到货库房</td>
+		<td class="a2" width="35%"><%=StaticParamDo.getStoreNameById(jhd.getStore_id()) %></td>
 	</tr>	
 	<tr>
-		<td class="a1">付款类型</td>
-		<td class="a2" colspan="3"><%=StringUtils.nullToStr(jhd.getFklx()) %></td>
-	</tr>		
+		<td class="a1">合计金额</td>
+		<td class="a2" colspan="3"><%=JMath.round(jhd.getTotal(),2) %></td>	
+	</tr>	
 </table>
 <br>
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
@@ -83,9 +83,9 @@ if(jhdProducts != null && jhdProducts.size()>0){
 	<tr>
 		<td class="a2"><%=StringUtils.nullToStr(jhdProduct.getProduct_name()) %></td>
 		<td class="a2"><%=StringUtils.nullToStr(jhdProduct.getProduct_xh()) %></td>
-		<td class="a2"><%=JMath.round(jhdProduct.getPrice(),2) %></td>
+		<td class="a2" align="right"><%=JMath.round(jhdProduct.getPrice(),2) %></td>
 		<td class="a2"><%=StringUtils.nullToStr(jhdProduct.getNums()) %></td>
-		<td class="a2"><%=JMath.round(jhdProduct.getPrice() * jhdProduct.getNums(),2) %></td>
+		<td class="a2" align="right"><%=JMath.round(jhdProduct.getPrice() * jhdProduct.getNums(),2) %></td>
 		<td class="a2"><%=StringUtils.nullToStr(jhdProduct.getRemark()) %></td>	
 	</tr>
 <%
@@ -96,9 +96,7 @@ if(jhdProducts != null && jhdProducts.size()>0){
 <table width="100%"  align="center" class="chart_info" cellpadding="0" cellspacing="0">	
 	<tr>
 		<td class="a1" width="15%">备注</td>
-		<td class="a2" width="85%">
-			<textarea rows="3" name="jhd.ms" id="ms" style="width:75%" readonly><%=StringUtils.nullToStr(jhd.getMs()) %></textarea>
-		</td>
+		<td class="a2" width="85%"><%=StringUtils.nullToStr(jhd.getMs()) %></td>
 	</tr>		
 	<tr height="35">
 		<td class="a1" colspan="6">

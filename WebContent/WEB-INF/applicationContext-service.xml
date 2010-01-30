@@ -652,6 +652,13 @@
            <bean class="com.sw.cms.service.CxdService" autowire="byName"/> 
         </property>
     </bean>
+    
+    <!-- 出纳付款单 -->
+    <bean id="cnfkdService" parent="baseTransaction">
+        <property name="target">
+           <bean class="com.sw.cms.service.CnfkdService" autowire="byName"/> 
+        </property>
+    </bean>    
 </beans>
 
 

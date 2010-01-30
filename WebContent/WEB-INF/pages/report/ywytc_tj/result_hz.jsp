@@ -123,7 +123,7 @@ if(results != null && results.size()>0){
 	}
 %>
 		<TR>
-			<TD class=ReportItem style="font-weight:bold">合计</TD>
+			<TD class=ReportItemXH style="font-weight:bold">合计</TD>
 			<TD class=ReportItem>&nbsp;</TD>
 			<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(hj_khml,2) %>&nbsp;</TD>
 			<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(hj_jbtc,2) %>&nbsp;</TD>

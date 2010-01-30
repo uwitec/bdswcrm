@@ -500,7 +500,12 @@
        <!-- 拆卸单-->
      <bean id="cxdDao" class="com.sw.cms.dao.CxdDAO">
           <property name="jdbcTemplate" ref="jdbcTemplate"/>
-     </bean>     
+     </bean>  
+     
+       <!-- 出纳付款单-->
+     <bean id="cnfkdDao" class="com.sw.cms.dao.CnfkdDAO">
+          <property name="jdbcTemplate" ref="jdbcTemplate"/>
+     </bean>        
       
 </beans>
 

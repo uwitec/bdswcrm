@@ -7,6 +7,7 @@
 <%
 OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
 String id = (String)VS.findValue("id");
+List storeList = (List)VS.findValue("storeList");
 %>
 
 <html>
@@ -20,6 +21,9 @@ String id = (String)VS.findValue("id");
 <script language='JavaScript' src="js/selClient.js"></script>
 <script language='JavaScript' src="js/selJsr.js"></script>
 <script type="text/javascript" src="js/prototype-1.4.0.js"></script>
+<script type='text/javascript' src='dwr/interface/dwrService.js'></script>
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script>
 <style>
 	.selectTip{background-color:#009;color:#fff;}
 </style>
@@ -42,34 +46,8 @@ String id = (String)VS.findValue("id");
 			return;
 		}
 
-		if(document.getElementById("fkfs").value == ""){
-			alert("付款方式不能为空，请选择！");
+		if(!InputValid(document.getElementById("zq"),1,"int",1,0,999,"账期限天数")){
 			return;
-		}else if(document.getElementById("fkfs").value == "账期"){
-			if(!InputValid(document.getElementById("zq"),1,"int",1,1,999,"账期限天数")){
-				return;
-			}
-		}
-		
-		if(!InputValid(document.getElementById("fkje"),0,"float",0,1,99999999,"本次付款金额")){
-			return;
-		}
-		
-		if(document.getElementById("fkfs").value == "现金"){
-			if(parseFloat(document.getElementById("fkje").value) != parseFloat(document.getElementById("total").value)){
-				alert("付款金额与订单金额不符，请检查！");
-				return;
-			}	
-		
-			if(document.getElementById("fkzh").value == ""){
-				alert("付款账户不能为空！");
-				return;
-			}
-		}else{
-			if(parseFloat(document.getElementById("fkje").value) > parseFloat(document.getElementById("total").value)){
-				alert("本次付款金额大于订单金额，请检查!");
-				return;
-			}
 		}
 		
 		hj();
@@ -102,7 +80,7 @@ String id = (String)VS.findValue("id");
         
         var otd3 = document.createElement("td");
         otd3.className = "a2";
-        otd3.innerHTML = '<input type="text" size="5"  id="nums_'+curId+'" name="jhdProducts['+curId+'].nums" value="0" style="width:100%" onblur="hj();">';
+        otd3.innerHTML = '<input type="text" size="5"  id="nums_'+curId+'" name="jhdProducts['+curId+'].nums" value="1" style="width:100%" onblur="hj();">';
 
         
         var otd4 = document.createElement("td");
@@ -181,62 +159,43 @@ String id = (String)VS.findValue("id");
 		total.value = hjz.toFixed(2);
 		
 	}	
-
-
-	function chkFkfs(vl){
+	
+	function delDesc(){
+		var k = 0;
+		var sel = "0"; 
+		for(var i=0;i<document.jhdForm.proc_id.length;i++){
+			var o = document.jhdForm.proc_id[i];
+			if(o.checked){
+				k = k + 1;
+				sel = document.jhdForm.proc_id[i].value;
+			}
+		}
+		if(k != 1){
+			alert("请选择产品明细，且只能选择一条信息！");
+			return;
+		}
 		
-		var obj = document.getElementById("zq");
+		document.getElementById("product_name_" + sel).value = "";
+		document.getElementById("product_id_" + sel).value = "";
+		document.getElementById("product_xh_" + sel).value = "";
+		document.getElementById("price_" + sel).value = "0.00";
+		document.getElementById("nums_" + sel).value = "0";
+		document.getElementById("xj_" + sel).value = "0.00";
+		document.getElementById("remark_" + sel).value = "";
+	}	
 
-		var obj_bcfkje1 = document.getElementById("bcfkje1");
-		var obj_bcfkje2 = document.getElementById("bcfkje2");
-		var obj_bcfkzh1 = document.getElementById("bcfkzh1");
-		var obj_bcfkzh2 = document.getElementById("bcfkzh2");
-		
-		if(vl == "账期"){
-			obj.style.display = "";
-			obj_bcfkje1.style.display = "none";
-			obj_bcfkje2.style.display = "none";
-			obj_bcfkzh1.style.display = "none";
-			obj_bcfkzh2.style.display = "none";
+	//选择供货单位
+	function selClient(){
+		setClientValue();
+		dwrService.getClientCgzq(dwr.util.getValue("client_id"),setCgzq);
+	}
 
-			document.getElementById("fkje").value = "0.00";
-			document.getElementById("zhname").value = "";
-			document.getElementById("fkzh").value = "";
-			
-		}else{
-			obj.style.display = "none";
-			obj_bcfkje1.style.display = "";
-			obj_bcfkje2.style.display = "";
-			obj_bcfkzh1.style.display = "";
-			obj_bcfkzh2.style.display = "";
-			obj.value = "0";
+	//自动根据DWR返回值填充账期
+	function setCgzq(cgzq){
+		if(cgzq != null){
+			dwr.util.setValue("zq",cgzq);
 		}
 	}
-	
-	
-function delDesc(){
-	var k = 0;
-	var sel = "0"; 
-	for(var i=0;i<document.jhdForm.proc_id.length;i++){
-		var o = document.jhdForm.proc_id[i];
-		if(o.checked){
-			k = k + 1;
-			sel = document.jhdForm.proc_id[i].value;
-		}
-	}
-	if(k != 1){
-		alert("请选择产品明细，且只能选择一条信息！");
-		return;
-	}
-	
-	document.getElementById("product_name_" + sel).value = "";
-	document.getElementById("product_id_" + sel).value = "";
-	document.getElementById("product_xh_" + sel).value = "";
-	document.getElementById("price_" + sel).value = "0.00";
-	document.getElementById("nums_" + sel).value = "0";
-	document.getElementById("xj_" + sel).value = "0.00";
-	document.getElementById("remark_" + sel).value = "";
-}	
 	
 </script>
 </head>
@@ -260,7 +219,7 @@ function delDesc(){
 	<tr>
 		<td class="a1" width="15%">供货单位</td>
 		<td class="a2" width="35%">
-		<input type="text" name="jhd.gysmc" id="client_name" value="" size="35"  onblur="setClientValue();">
+		<input type="text" name="jhd.gysmc" id="client_name" value="" size="35" onblur="selClient();">
 		<input type="hidden" name="jhd.gysbh" id="client_id" value="">
 		<div id="clientsTip" style="height:12px;position:absolute;left:150px; top:85px; width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		<font color="red">*</font>	
@@ -274,14 +233,10 @@ function delDesc(){
 		</td>
 	</tr>
 	<tr>
-		<td class="a1" width="15%">付款方式</td>
+		<td class="a1" width="15%">账期</td>
 		<td class="a2">
-			<select name="jhd.fkfs" id="fkfs" onchange="chkFkfs(this.value);">
-				<option value=""></option>
-				<option value="现金">现金</option>
-				<option value="账期">账期</option>
-			</select>
-			<input type="text" name="jhd.zq" id="zq" value="0" size="3" style="display:none" title="账期天数"> <font color="red">*</font>注：选择账期，请输入账期天数
+			<input type="text" name="jhd.zq" id="zq" value="0" size="3" title="账期">天<font color="red">*</font>
+			<input type="hidden" name="jhd.fkfs" id="fkfs" value="账期">
 		</td>	
 		<td class="a1" width="15%">进货单状态</td>
 		<td class="a2">
@@ -291,6 +246,28 @@ function delDesc(){
 			</select>	
 		</td>	
 	</tr>
+	<tr>
+		<td class="a1" width="15%">预计到货时间</td>
+		<td class="a2" width="35%">
+		<input type="text" name="jhd.yjdhsj" id="yjdhsj" value="<%=DateComFunc.getToday() %>"  class="Wdate" onFocus="WdatePicker()">
+		</td>	
+		<td class="a1" width="15%">到货库房</td>
+		<td class="a2" width="35%">
+			<select name="jhd.store_id" id="store_id">
+				<option value=""></option>
+				<%
+				if(storeList != null && storeList.size()>0){
+					for(int i=0;i<storeList.size();i++){
+						StoreHouse storeHouse = (StoreHouse)storeList.get(i);
+				%>
+				<option value="<%=StringUtils.nullToStr(storeHouse.getId()) %>"><%=StringUtils.nullToStr(storeHouse.getName()) %></option>
+				<%
+					}
+				}
+				%>
+			</select>
+		</td>
+	</tr>	
 </table>
 <br>
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
@@ -323,7 +300,7 @@ for(int i=0;i<3;i++){
 		</td>
 		<td class="a2"><input type="text" size="10" id="product_xh_<%=i %>" name="jhdProducts[<%=i %>].product_xh" style="width:100%" readonly></td>
 		<td class="a2"><input type="text" size="10"  id="price_<%=i %>" name="jhdProducts[<%=i %>].price" value="0.00" style="width:100%" onblur="hj();"></td>
-		<td class="a2"><input type="text" size="5"  id="nums_<%=i %>" name="jhdProducts[<%=i %>].nums" value="0" style="width:100%" onblur="hj();"></td>		
+		<td class="a2"><input type="text" size="5"  id="nums_<%=i %>" name="jhdProducts[<%=i %>].nums" value="1" style="width:100%" onblur="hj();"></td>		
 		<td class="a2"><input type="text" size="10"  id="xj_<%=i %>" name="jhdProducts[<%=i %>].xj" value="0.00" style="width:100%" readonly></td>
 		<td class="a2"><input type="text" id="remark_<%=i %>" name="jhdProducts[<%=i %>].remark" style="width:100%"></td>
 	</tr>
@@ -342,26 +319,14 @@ for(int i=0;i<3;i++){
 <table width="100%"  align="center" class="chart_info" cellpadding="0" cellspacing="0">	
 	<tr>
 		<td class="a1" width="15%">合计金额</td>
-		<td class="a2" width="35%">
+		<td class="a2" width="85%">
 			<input type="text" id="total"  name="jhd.total" value="0.00" readonly>
 			<input type="hidden" id="yfje"  name="jhd.yfje" value="0.00">	
-		</td>
-		<td class="a1" width="15%" id="bcfkje1">本次付款金额</td>
-		<td class="a2" width="35%" id="bcfkje2"><input type="text" id="fkje"  name="jhd.fkje" value="0.00"></td>		
+		</td>	
 	</tr>
-	<tr>
-		<td class="a1" widht="15%" id="bcfkzh1">本次付款账户</td>
-		<td class="a2" colspan="3" id="bcfkzh2"><input type="text" id="zhname"  name="zhname" value="" readonly>
-		<input type="hidden" id="fkzh"  name="jhd.fkzh" value="">
-		<img src="images/select.gif" align="absmiddle" title="选择账户" border="0" onclick="openAccount();" style="cursor:hand">
-		</td>
-	</tr>
-</table>
-<table width="100%"  align="center" class="chart_info" cellpadding="0" cellspacing="0">		
 	<tr>
 		<td class="a1" width="15%">备注</td>
-		<td class="a2" width="85%">
-			<textarea rows="2" name="jhd.ms" id="ms" style="width:75%"></textarea>
+		<td class="a2" width="85%"><input type="text" name="jhd.ms" id="ms" style="width:80%">
 		</td>
 	</tr>		
 	<tr height="35">

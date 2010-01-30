@@ -17,6 +17,9 @@ List dspLsdList = (List)VS.findValue("dspLsdList");
 String isXsdSpRight = (String)VS.findValue("isXsdSpRight");
 List dspXsdList = (List)VS.findValue("dspXsdList");
 
+String isCgfkSpRight = (String)VS.findValue("isCgfkSpRight");
+List dspCgfkList = (List)VS.findValue("dspCgfkList");
+
 %>
 <html>
 <head>
@@ -43,6 +46,13 @@ List dspXsdList = (List)VS.findValue("dspXsdList");
 		
 		window.open(destination,'审批销售订单',fea);
 	}	
+
+	function doSpCgfk(id){
+		var destination = "spCgfk.html?id=" + id;
+		var fea ='width=850,height=700,left=' + (screen.availWidth-850)/2 + ',top=' + (screen.availHeight-750)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		
+		window.open(destination,'审批付款申请单',fea);
+	}		
 	
 	function refreshPage(){
 		document.myform.action = "listMain.html";
@@ -68,7 +78,7 @@ List dspXsdList = (List)VS.findValue("dspXsdList");
 <form name="myform" action="listMain.html" method="post">
 <table width="100%">
 	<tr>
-		<td valign="top" width="40%">
+		<td valign="top" width="50%">
 			<table width="100%" border="0" cellpadding="0" cellspacing="0">
 				<tr>
 					<td valign="top" width="100%">
@@ -219,17 +229,57 @@ List dspXsdList = (List)VS.findValue("dspXsdList");
 				</tr>
 				<%
 				}
-				%>							
+				%>		
+				
+				
+				<%
+				if(isCgfkSpRight.equals("1")){
+				%>				
+				<tr><td>&nbsp;</td></tr>
+				
+				<tr>
+					<td width="100%">
+
+						<table width="100%" align="left"  class="chart_list" cellpadding="0" cellspacing="0">
+							<tr>
+								<td class="csstitle" align="left" width="100%">&nbsp;&nbsp;&nbsp;&nbsp;<b>待审批付款申请单</b></td>
+							</tr>
+							<tr><td height="3">&nbsp;</td></tr>
+							<%
+							if(dspCgfkList != null && dspCgfkList.size() > 0){
+								for(int i=0;i<dspCgfkList.size();i++){
+									Cgfk cgfk = (Cgfk)dspCgfkList.get(i);
+							%>			
+							<tr>
+								<td width="100%" height="23">&nbsp;<A class=xxlb title="点击打开审批页面" href="javascript:doSpCgfk('<%=StringUtils.nullToStr(cgfk.getId()) %>');">
+								<%=StringUtils.nullToStr(cgfk.getId()) %>&nbsp;&nbsp;<%=StaticParamDo.getClientNameById(cgfk.getGysbh()) %>&nbsp;&nbsp;【<%=StringUtils.nullToStr(cgfk.getFk_date()) %>】</A></td>
+							</tr>
+							<%
+								}
+							}else{
+							%>
+							<tr>
+								<td width="100%" height="23" align="left">&nbsp;无待审批付款申请单！</td>
+							</tr>					
+							<%
+							}
+							%>															
+						</table>
+					</td>
+				</tr>
+				<%
+				}
+				%>											
 			</table>		
 		</td>
 		<td width="20"></td>
-		<td valign="top" width="60%">
+		<td valign="top" width="50%">
 			<table width="100%" border="0" cellpadding="0" cellspacing="0">
 				<tr><td>
 				<table width="100%" align="left"  class="chart_list" cellpadding="0" cellspacing="0">
 					<tr>
-						<td class="csstitle" align="left" colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;<b>内部公告</b></td>
-						 <td class="csstitle" align="right"><img src="images/import.gif" align="absmiddle" border="0">&nbsp;<a href="#" onclick="refreshPage();" class="xxlb"> 刷新首页</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+						<td class="csstitle" align="left">&nbsp;&nbsp;&nbsp;&nbsp;<b>内部公告</b></td>
+						 <td class="csstitle" align="right" colspan="2"><img src="images/import.gif" align="absmiddle" border="0">&nbsp;<a href="#" onclick="refreshPage();" class="xxlb"> 刷新首页</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 					</tr>
 					<tr><td height="3" colspan="3">&nbsp;</td></tr>
 					<%
@@ -240,16 +290,16 @@ List dspXsdList = (List)VS.findValue("dspXsdList");
 						String id = StringUtils.nullToStr(info.getId());
 						String title = StringUtils.nullToStr(info.getTitle());
 						String subTitle = title;
-						if(title.length()>=30){
-							subTitle = title.substring(0,30) + "...";
+						if(title.length()>22){
+							subTitle = title.substring(0,22) + "...";
 						}
 						String pub_date = StringUtils.nullToStr(info.getPub_date());
 						String jsr = StaticParamDo.getRealNameById(info.getCzr());
 					%>				
 					<tr>
 						<td width="60% height="23">&nbsp;<A class=xxlb href="#" onclick="openNbggWin('<%=id %>');" title="<%=title %>"><%=subTitle %></A></td>
-						<td width="20%" height="23"><%=jsr %></td>
-						<td width="20%" height="23" colspan="2">【<%=pub_date %>】</td>
+						<td width="20%" nowrap="nowrap" height="23"><%=jsr %></td>
+						<td width="20%" nowrap="nowrap" height="23" colspan="2">【<%=pub_date %>】</td>
 					</tr>
 					<%
 					}

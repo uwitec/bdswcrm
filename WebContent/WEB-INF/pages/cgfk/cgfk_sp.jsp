@@ -5,19 +5,35 @@
 <%@ page import="java.util.*" %>
 <%
 OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
-
 Cgfk cgfk = (Cgfk)VS.findValue("cgfk");
-
 List cgfkDescs = (List)VS.findValue("cgfkDescs");
 %>
 
 <html>
 <head>
-<title>付款申请单</title>
+<title>审批付款申请单</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+function doSp(vl){
+	var msg = "";
+	if(vl == "1"){
+		document.getElementById("state").value = "通过";
+		msg = "确认审批通过吗？";
+	}else{
+		document.getElementById("state").value = "不通过";
+		msg = "确认审批不通过吗？";
+	}
+	if(window.confirm(msg)){
+		document.cgfkForm.submit();
+	}
+}
+</script>
 </head>
 <body>
+<form name="cgfkForm" action="doSpCgfk.html" method="post">
+<input type="hidden" name="state" id="state" value="">
+<input type="hidden" name="id" id="id" value="<%=StringUtils.nullToStr(cgfk.getId()) %>">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
@@ -53,17 +69,7 @@ List cgfkDescs = (List)VS.findValue("cgfkDescs");
 		<td class="a2"><%=StringUtils.nullToStr(cgfk.getFax()) %></td>	
 		<td class="a1" width="15%">经手人</td>
 		<td class="a2" width="35%"><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(cgfk.getJsr())) %></td>	
-	</tr>	
-	<tr>			
-		<td class="a1">本次付款总额</td>
-		<td class="a2"><%=JMath.round(cgfk.getFkje(),2) %></td>	
-		<td class="a1">付款账户</td>
-		<td class="a2"><%=StaticParamDo.getAccountNameById(StringUtils.nullToStr(cgfk.getFkzh())) %></td>
-	</tr>
-	<tr>
-		<td class="a1">备注</td>
-		<td class="a2" colspan="3"><%=StringUtils.nullToStr(cgfk.getRemark()) %></td>
-	</tr>		
+	</tr>			
 </table>
 <br>
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
@@ -107,11 +113,24 @@ if(cgfkDescs != null && cgfkDescs.size()>0){
 %>	
 </table>
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
+	<tr>			
+		<td class="a1" width="15%">本次付款总额</td>
+		<td class="a2" width="35%"><%=JMath.round(cgfk.getFkje(),2) %></td>	
+		<td class="a1" width="15%">付款账户</td>
+		<td class="a2" width="35%"><%=StaticParamDo.getAccountNameById(StringUtils.nullToStr(cgfk.getFkzh())) %></td>
+	</tr>
+	<tr>
+		<td class="a1">备注</td>
+		<td class="a2" colspan="3"><input type="text" name="remark" id="remark" style="width:100%" value="<%=StringUtils.nullToStr(cgfk.getRemark()) %>" maxlength="500"></td>
+	</tr>
 	<tr height="35">
-		<td class="a1" colspan="2">
-			<input type="button" name="button1" value="关闭" class="css_button2" onclick="window.close();">
+		<td class="a1" colspan="4">
+			<input type="button" name="button1" value="审批通过" class="css_button3" onclick="doSp('1');">&nbsp;&nbsp;
+			<input type="button" name="button1" value="审批不通过" class="css_button3" onclick="doSp('2');">&nbsp;&nbsp;
+			<input type="button" name="button1" value=" 关 闭 " class="css_button2" onclick="window.close();">
 		</td>
 	</tr>
 </table>
+</form>
 </body>
 </html>

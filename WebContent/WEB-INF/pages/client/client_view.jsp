@@ -138,22 +138,24 @@ List  clinetsFollowList=(List)VS.findValue("clientsFollow");
 	          <td class="a2" width="35%"><%=StringUtils.nullToStr(client.getGzdh()) %></td>
 	        </tr>
 	        <tr>
-	           <td class="a1" width="15%">账期</td>
+	           <td class="a1" width="15%">销售账期</td>
 	          <td class="a2" width="35%"><%=StringUtils.nullToStr(client.getZq()) %></td>
-	          <td class="a1" width="15%">限额</td>
-	           <td class="a2" width="35%"><%=StringUtils.nullToStr(client.getXe()) %></td>	          
+	          <td class="a1" width="15%">销售限额</td>
+	           <td class="a2" width="35%"><%=JMath.round(client.getXe(),2) %></td>	          
 	        </tr>
+	        <tr>
+	           <td class="a1" width="15%">采购账期</td>
+	          <td class="a2" width="35%"><%=StringUtils.nullToStr(client.getCg_zq()) %></td>
+	          <td class="a1" width="15%">采购限额</td>
+	           <td class="a2" width="35%"><%=JMath.round(client.getCg_xe(),2) %></td>	          
+	        </tr>	        
 	        <tr>
 	           <td class="a1" width="15%">传真</td>
 	           <td class="a2" width="35%"><%=StringUtils.nullToStr(client.getCz()) %></td>		        
 	           <td class="a1" width="15%">客户经理</td>
 	           <td class="a2" width="35%"><%=StaticParamDo.getRealNameById(client.getKhjl()) %></td>
 	        </tr>        	        	        	        
-	     </table>
-	     
-		<br>
-		<!--  -->
-			     
+	     </table>			     
 	  </td>	  
 	  <td width="10">&nbsp;</td>	  
 	  <td width="30%" valign="top">
@@ -176,7 +178,7 @@ List  clinetsFollowList=(List)VS.findValue("clientsFollow");
 					String url = StringUtils.nullToStr(map.get("url"));
 				%>
 				<tr>
-					<td width="100%" height="25">&nbsp;
+					<td width="100%" height="23">&nbsp;
 						<A class=xxlb href="#" onclick="vieYwdj('<%=url+dj_id %>');" title="点击查看明细">[<%=xwtype %>]&nbsp;&nbsp;<%=dj_id %> &nbsp;&nbsp;(<%=jsr %>)</A>
 					</td>
 				</tr>	
@@ -342,9 +344,7 @@ List  clinetsFollowList=(List)VS.findValue("clientsFollow");
 			</tr>
 	        <tr>
 	          <td class="a1" width="15%">备注</td>
-	           <td class="a2" colspan="3">
-	           <textarea rows="3" cols="50" name="client.remark" id="remark" style="width:80%" maxlength="500" readonly><%=StringUtils.nullToStr(client.getRemark()) %></textarea>
-	           </td>          
+	           <td class="a2" colspan="3"><%=StringUtils.nullToStr(client.getRemark()) %></td>          
 	        </tr>				
 		</table>
 </form>

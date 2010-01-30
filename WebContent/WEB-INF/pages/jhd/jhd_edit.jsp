@@ -44,44 +44,14 @@ session.removeAttribute("messages");
 			alert("供货单位不能为空，请选择！");
 			return;
 		}
-
 		if(document.getElementById("fzr").value == ""){
 			alert("采购负责人不能为空，请选择！");
 			return;
 		}
-
-		if(document.getElementById("fkfs").value == ""){
-			alert("付款方式不能为空，请选择！");
-			return;
-		}else if(document.getElementById("fkfs").value == "账期"){
-			if(!InputValid(document.getElementById("zq"),1,"int",1,1,999,"账期限天数")){
-				return;
-			}
-		}
-		
-		if(!InputValid(document.getElementById("fkje"),0,"float",0,1,99999999,"本次付款金额")){
+		if(!InputValid(document.getElementById("zq"),1,"int",1,0,999,"账期限天数")){
 			return;
 		}
-		
-		if(document.getElementById("fkfs").value == "现金"){
-			if(parseFloat(document.getElementById("fkje").value) != parseFloat(document.getElementById("total").value)){
-				alert("本次付款金额不等于订单总金额，请检查！");
-				return;
-			}	
-		
-			if(document.getElementById("fkzh").value == ""){
-				alert("付款账户不能为空！");
-				return;
-			}
-		}else{
-			if(parseFloat(document.getElementById("fkje").value) > parseFloat(document.getElementById("total").value)){
-				alert("本次付款金额大于订单金额，请检查!");
-				return;
-			}
-		}	
-		
 		hj();
-		
 		document.jhdForm.submit();
 	}
 	
@@ -157,22 +127,7 @@ session.removeAttribute("messages");
 		
 		window.open(destination,'详细信息',fea);	
 	}
-	
-	function openProvider(){
-		var destination = "selectClient.html";
-		var fea ='width=800,height=500,left=' + (screen.availWidth-800)/2 + ',top=' + (screen.availHeight-500)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
-		
-		window.open(destination,'选择往来单位',fea);	
-	}
-	
-	function openAccount(){
-		var destination = "selAccount.html";
-		var fea ='width=400,height=200,left=' + (screen.availWidth-400)/2 + ',top=' + (screen.availHeight-200)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
-		
-		window.open(destination,'选择账户',fea);		
-	}		
 
-	
 	function hj(){
 		var length = (document.getElementById('jhtable').rows.length-2);
 		
@@ -211,35 +166,6 @@ session.removeAttribute("messages");
 		
 	}
 	
-	function chkFkfs(vl){
-		var obj = document.getElementById("zq");
-
-		var obj_bcfkje1 = document.getElementById("bcfkje1");
-		var obj_bcfkje2 = document.getElementById("bcfkje2");
-		var obj_bcfkzh1 = document.getElementById("bcfkzh1");
-		var obj_bcfkzh2 = document.getElementById("bcfkzh2");
-		if(vl == "账期"){
-			obj.style.display = "";
-
-			obj_bcfkje1.style.display = "none";
-			obj_bcfkje2.style.display = "none";
-			obj_bcfkzh1.style.display = "none";
-			obj_bcfkzh2.style.display = "none";
-
-			document.getElementById("fkje").value = "0.00";
-			document.getElementById("zhname").value = "";
-			document.getElementById("fkzh").value = "";
-		}else{
-			obj.style.display = "none";
-			obj.value = "0";
-
-			obj_bcfkje1.style.display = "";
-			obj_bcfkje2.style.display = "";
-			obj_bcfkzh1.style.display = "";
-			obj_bcfkzh2.style.display = "";
-		}
-	}
-	
 	function delDesc(){
 		var k = 0;
 		var sel = "0"; 
@@ -266,7 +192,7 @@ session.removeAttribute("messages");
 	
 </script>
 </head>
-<body onload="initFzrTip();initClientTip();chkFkfs('<%=StringUtils.nullToStr(jhd.getFkfs()) %>');">
+<body onload="initFzrTip();initClientTip();">
 <form name="jhdForm" action="updateJhd.html" method="post">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
@@ -289,6 +215,7 @@ session.removeAttribute("messages");
 		<td class="a1" width="15%">编号</td>
 		<td class="a2" width="35%">
 		<input type="text" name="jhd.id" id="id" value="<%=StringUtils.nullToStr(jhd.getId()) %>" readonly>	
+		</td>
 		<td class="a1" width="15%">采购日期</td>
 		<td class="a2" width="35%"><input type="text" name="jhd.cg_date" id="cg_date" value="<%=StringUtils.nullToStr(jhd.getCg_date()) %>"  class="Wdate" onFocus="WdatePicker()"><font color="red">*</font>
 		</td>
@@ -298,29 +225,21 @@ session.removeAttribute("messages");
 		<td class="a2" width="35%">
 			<input type="text" name="jhd.gysmc" id="client_name" value="<%=StringUtils.nullToStr(jhd.getGysmc()) %>" size="35"  onblur="setClientValue();">
 			<input type="hidden" name="jhd.gysbh" id="client_id" value="<%=StringUtils.nullToStr(jhd.getGysbh()) %>">
-			<!--<img src="images/select.gif" align="absmiddle" title="选择客户" border="0" onclick="openProvider();" style="cursor:hand">
-			--><div id="clientsTip" style="height:12px;position:absolute;left:150px; top:85px; width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+			<div id="clientsTip" style="height:12px;position:absolute;left:150px; top:85px; width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 			<font color="red">*</font>	
 		</td>	
 		<td class="a1" width="15%">采购负责人</td>
 		<td class="a2" width="35%">
-			 <input  id="brand"    type="text"   length="20"  onblur="setValue()" value="<%=StaticParamDo.getRealNameById(jhd.getFzr()) %>"/> 
-	         <div id="brandTip"  style="height:12px;position:absolute;left:612px; top:85px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+			 <input id="brand" type="text" length="20" onblur="setValue()" value="<%=StaticParamDo.getRealNameById(jhd.getFzr()) %>"/> 
+	         <div id="brandTip" style="height:12px;position:absolute;left:612px; top:85px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		     <input type="hidden" name="jhd.fzr" id="fzr" value="<%=jhd.getFzr()%>"/> <font color="red">*</font>	
 		</td>
 	</tr>
 	<tr>
-		<td class="a1" width="15%">付款方式</td>
+		<td class="a1" width="15%">账期</td>
 		<td class="a2">
-		<%
-		String fkfs = StringUtils.nullToStr(jhd.getFkfs());
-		%>		
-			<select name="jhd.fkfs" id="fkfs" onchange="chkFkfs(this.value);">
-				<option value=""></option>
-				<option value="现金" <%if(fkfs.equals("现金")) out.print("selected"); %>>现金</option>
-				<option value="账期" <%if(fkfs.equals("账期")) out.print("selected"); %>>账期</option>
-			</select>
-			<input type="text" name="jhd.zq" id="zq" value="<%=StringUtils.nullToStr(jhd.getZq()) %>" size="3" title="账期天数"> <font color="red">*</font>注：选择账期，请输入账期天数
+			<input type="text" name="jhd.zq" id="zq" value="<%=StringUtils.nullToStr(jhd.getZq()) %>" size="3" title="账期">天<font color="red">*</font>
+			<input type="hidden" name="jhd.fkfs" id="fkfs" value="账期">
 		</td>
 			
 		<td class="a1" width="15%">进货单状态</td>
@@ -334,6 +253,28 @@ session.removeAttribute("messages");
 			</select>
 		</td>			
 	</tr>	
+	<tr>
+		<td class="a1" width="15%">预计到货时间</td>
+		<td class="a2" width="35%">
+		<input type="text" name="jhd.yjdhsj" id="yjdhsj" value="<%=StringUtils.nullToStr(jhd.getYjdhsj()) %>"  class="Wdate" onFocus="WdatePicker()">
+		</td>	
+		<td class="a1" width="15%">到货库房</td>
+		<td class="a2" width="35%">
+			<select name="jhd.store_id" id="store_id">
+				<option value=""></option>
+				<%
+				if(storeList != null && storeList.size()>0){
+					for(int i=0;i<storeList.size();i++){
+						StoreHouse storeHouse = (StoreHouse)storeList.get(i);
+				%>
+				<option value="<%=StringUtils.nullToStr(storeHouse.getId()) %>" <%if(storeHouse.getId().equals(jhd.getStore_id())) out.print("selected"); %>><%=StringUtils.nullToStr(storeHouse.getName()) %></option>
+				<%
+					}
+				}
+				%>
+			</select>
+		</td>
+	</tr>		
 </table>
 <br>
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
@@ -388,26 +329,14 @@ if(jhdProducts != null && jhdProducts.size()>0){
 <table width="100%"  align="center" id="jhtable"  class="chart_info" cellpadding="0" cellspacing="0">	
 	<tr>
 		<td class="a1" widht="15%">合计金额</td>
-		<td class="a2" widht="35%">
+		<td class="a2" widht="85%">
 			<input type="text" id="total"  name="jhd.total" value="<%=JMath.round(jhd.getTotal()) %>" readonly>
 			<input type="hidden" id="yfje"  name="jhd.yfje" value="0.00">
-		</td>
-		<td class="a1" widht="15%" id="bcfkje1">本次付款金额</td>
-		<td class="a2" widht="35%" id="bcfkje2"><input type="text" id="fkje"  name="jhd.fkje" value="<%=JMath.round(jhd.getFkje()) %>"></td>	
+		</td>	
 	</tr>
 	<tr>
-		<td class="a1" widht="15%" id="bcfkzh1">本次付款账户</td>
-		<td class="a2" colspan="3" id="bcfkzh2"><input type="text" id="zhname"  name="zhname" value="<%=StaticParamDo.getAccountNameById(jhd.getFkzh()) %>" readonly>
-		<input type="hidden" id="fkzh"  name="jhd.fkzh" value="<%=StringUtils.nullToStr(jhd.getFkzh()) %>" >
-		<img src="images/select.gif" align="absmiddle" title="选择账户" border="0" onclick="openAccount();" style="cursor:hand">
-		</td>
-	</tr>	
-</table>
-<table width="100%"  align="center" id="jhtable"  class="chart_info" cellpadding="0" cellspacing="0">		
-	<tr>
 		<td class="a1" width="15%">描述信息</td>
-		<td class="a2" width="85%">
-			<textarea rows="3" name="jhd.ms" id="ms" style="width:75%"><%=StringUtils.nullToStr(jhd.getMs()) %></textarea>
+		<td class="a2" width="85%"><input type="text" name="jhd.ms" id="ms" style="width:75%" value="<%=StringUtils.nullToStr(jhd.getMs()) %>">
 		</td>
 	</tr>	
 	<tr height="35">

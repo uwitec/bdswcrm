@@ -154,7 +154,7 @@ String orderType = (String)VS.findValue("orderType");
 		<td><%=StringUtils.nullToStr(jhd.getGysmc()) %></td>
 		<td><%=StringUtils.nullToStr(jhd.getState()) %></td>
 		<td><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(jhd.getFzr())) %></td>
-		<td><%=JMath.round(jhd.getTotal(),2) %></td>
+		<td align="right"><%=JMath.round(jhd.getTotal(),2) %>&nbsp;</td>
 		<td><%=StringUtils.nullToStr(jhd.getFklx()) %></td>
 		<td><%=StringUtils.nullToStr(jhd.getCg_date()) %></td>
 		<td><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(jhd.getCzr())) %></td>
