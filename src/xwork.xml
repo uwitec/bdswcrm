@@ -114,6 +114,12 @@
         <action name="delCgfk" class="cgfkAction" method="del">
             <result name="success" type="redirect">listCgfk.html</result>
         </action>
+        <action name="spCgfk" class="cgfkAction" method="edit">
+            <result name="success">/WEB-INF/pages/cgfk/cgfk_sp.jsp</result>
+        </action>   
+        <action name="doSpCgfk" class="cgfkAction" method="doSp">
+            <result name="success">/WEB-INF/pages/msg.jsp</result>
+        </action>             
         <!-- 采购付款 -->
                 
         <!-- 产品及产品类别 -->
@@ -312,6 +318,17 @@
             <result name="success" type="chain">openCqSpRightRoles</result>
         </action>        
         <!-- 超期审批角色设定 -->
+        
+        <!-- 采购付款审批权限设定 -->
+        <action name="openCgfkSpRight" class="userAction" method="openCgfkSpRight">
+            <result name="success">/WEB-INF/pages/sp_right/cgfk_right_set.jsp</result>
+        </action>
+        <action name="saveCgfkSpRight" class="userAction" method="saveCgfkSpRight">
+            <result name="cancel" type="redirect">openCgfkSpRight</result>
+            <result name="input" type="dispatcher">/WEB-INF/pages/sp_right/cgfk_right_set.jsp</result>
+            <result name="success" type="chain">openCgfkSpRight</result>
+        </action>        
+        <!-- 采购付款审批权限设定 -->        
         
         <!-- 入库单 -->
         <action name="listRkd" class="rkdAction" method="list">
@@ -568,7 +585,13 @@
         </action>         
         <action name="queryClientsRegInfo" class="clientsAction" method="getClientsRegInfo">
             <result name="success">/WEB-INF/pages/client/client_reg_info.jsp</result>
-        </action>                                                     
+        </action>
+        <action name="selClientAllName" class="clientsAction" method="selClientAllName">
+            <result name="success">/WEB-INF/pages/client/sel_client_all_name.jsp</result>
+        </action>
+        <action name="selClientLxr" class="clientsAction" method="selClientLxr">
+            <result name="success">/WEB-INF/pages/client/sel_client_lxr.jsp</result>
+        </action>                                                                     
         <!-- 往来客户 -->
         
         <!-- 销售订单 -->
@@ -2396,5 +2419,22 @@
             <result name="success">/WEB-INF/pages/ykrk/importSerial.jsp</result>
         </action>             
         <!-- 移库入库 -->
+        
+		<!--出纳付款单 -->
+        <action name="listCnfkd" class="cnfkdAction" method="list">
+            <result name="success">/WEB-INF/pages/cnfkd/cnfkd_list.jsp</result>
+        </action>
+        <action name="editCnfkd" class="cnfkdAction" method="edit">
+            <result name="success">/WEB-INF/pages/cnfkd/cnfkd_edit.jsp</result>
+        </action>
+        <action name="updateCnfkd" class="cnfkdAction" method="update">
+            <result name="cancel" type="redirect">editCnfkd.html</result>
+            <result name="input">/WEB-INF/pages/cnfkd/cnfkd_edit.jsp</result>
+            <result name="success">/WEB-INF/pages/msg.jsp</result>
+        </action>
+        <action name="viewCnfkd" class="cnfkdAction" method="edit">
+            <result name="success">/WEB-INF/pages/cnfkd/cnfkd_view.jsp</result>
+        </action>
+        <!-- 出纳付款单 -->          
     </package>
 </xwork>
