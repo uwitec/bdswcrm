@@ -114,6 +114,9 @@
         <action name="delCgfk" class="cgfkAction" method="del">
             <result name="success" type="redirect">listCgfk.html</result>
         </action>
+        <action name="listDspCgfk" class="cgfkAction" method="listDspCgfk">
+            <result name="success">/WEB-INF/pages/cgfk/cgfk_dsp.jsp</result>
+        </action>        
         <action name="spCgfk" class="cgfkAction" method="edit">
             <result name="success">/WEB-INF/pages/cgfk/cgfk_sp.jsp</result>
         </action>   
@@ -2435,6 +2438,6 @@
         <action name="viewCnfkd" class="cnfkdAction" method="edit">
             <result name="success">/WEB-INF/pages/cnfkd/cnfkd_view.jsp</result>
         </action>
-        <!-- 出纳付款单 -->          
+        <!-- 出纳付款单 -->
     </package>
 </xwork>
