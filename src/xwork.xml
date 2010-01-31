@@ -331,7 +331,19 @@
             <result name="input" type="dispatcher">/WEB-INF/pages/sp_right/cgfk_right_set.jsp</result>
             <result name="success" type="chain">openCgfkSpRight</result>
         </action>        
-        <!-- 采购付款审批权限设定 -->        
+        <!-- 采购付款审批权限设定 --> 
+        
+        <!-- 费用申请审批权限设定 -->
+        <action name="openFysqSpRight" class="userAction" method="openFysqSpRight">
+            <result name="success">/WEB-INF/pages/sp_right/fysq_right_set.jsp</result>
+        </action>
+        <action name="saveFysqSpRight" class="userAction" method="saveFysqSpRight">
+            <result name="cancel" type="redirect">openFysqSpRight</result>
+            <result name="input" type="dispatcher">/WEB-INF/pages/sp_right/fysq_right_set.jsp</result>
+            <result name="success" type="chain">openFysqSpRight</result>
+        </action>        
+        <!-- 费用申请审批权限设定 -->
+                    
         
         <!-- 入库单 -->
         <action name="listRkd" class="rkdAction" method="list">
