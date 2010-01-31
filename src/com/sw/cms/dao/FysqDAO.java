@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.jdbc.core.RowMapper;
 
+import com.sw.cms.dao.base.BeanRowMapper;
 import com.sw.cms.dao.base.JdbcBaseDAO;
 import com.sw.cms.dao.base.SqlUtil;
 import com.sw.cms.model.Fysq;
@@ -34,7 +35,23 @@ public class FysqDAO extends JdbcBaseDAO {
 		if(!con.equals("")){
 			sql += con;
 		}
-		return this.getResultByPage(sql, curPage, rowsPerPage, new FysqRowMapper());
+		return this.getResultByPage(sql, curPage, rowsPerPage, new BeanRowMapper(Fysq.class));
+	}
+	
+
+	/**
+	 * 根据查询条件取费用申请单列表
+	 * @param con
+	 * @param curPage
+	 * @param rowsPerPage
+	 * @return
+	 */
+	public List getFysqList(String con){
+		String sql = "select * from fysq where 1=1";
+		if(!con.equals("")){
+			sql += con;
+		}
+		return this.getResultList(sql, new BeanRowMapper(Fysq.class));
 	}
 	
 	
@@ -50,7 +67,7 @@ public class FysqDAO extends JdbcBaseDAO {
 		if(!con.equals("")){
 			sql += con;
 		}
-		return this.getResultByPage(sql, curPage, rowsPerPage, new FysqRowMapper());
+		return this.getResultByPage(sql, curPage, rowsPerPage, new BeanRowMapper(Fysq.class));
 	}
 	
 	
@@ -96,7 +113,7 @@ public class FysqDAO extends JdbcBaseDAO {
 	 */
 	public Fysq getFysq(String id){
 		String sql = "select * from fysq where id='" + id + "'";
-		return (Fysq)this.queryForObject(sql, new FysqRowMapper());
+		return (Fysq)this.queryForObject(sql, new BeanRowMapper(Fysq.class));
 	}
 	
 	
@@ -144,7 +161,6 @@ public class FysqDAO extends JdbcBaseDAO {
 		return "FYSQ" + day + "-" + curId;
 	}
 	
-	
 	/**
 	 * 费用申请是否审批完成
 	 * @param id
@@ -162,59 +178,6 @@ public class FysqDAO extends JdbcBaseDAO {
 		}
 		
 		return is;
-	}
-	
-	
-	/**
-	 * 包装对象(费用申请)
-	 * 
-	 * @author liyt
-	 * 
-	 */
-	class FysqRowMapper implements RowMapper {
-		public Object mapRow(ResultSet rs, int index) throws SQLException {
-			Fysq fysq = new Fysq();
-
-			if(SqlUtil.columnIsExist(rs,"id")) fysq.setId(rs.getString("id"));
-			if(SqlUtil.columnIsExist(rs,"creatdate")) fysq.setCreatdate(rs.getString("creatdate"));
-			if(SqlUtil.columnIsExist(rs,"fklx")) fysq.setFklx(rs.getString("fklx"));
-			if(SqlUtil.columnIsExist(rs,"fy_type")) fysq.setFy_type(rs.getString("fy_type"));
-			if(SqlUtil.columnIsExist(rs,"je")){
-				fysq.setJe(rs.getDouble("je"));
-				fysq.setStrJe(JMath.round(rs.getDouble("je"),2));
-				fysq.setStrJe2(JMath.round(rs.getDouble("je")));
-			}
-			if(SqlUtil.columnIsExist(rs,"remark")) fysq.setRemark(rs.getString("remark"));
-			if(SqlUtil.columnIsExist(rs,"state")) fysq.setState(rs.getString("state"));
-			if(SqlUtil.columnIsExist(rs,"xgkh")) fysq.setXgkh(rs.getString("xgkh"));
-			if(SqlUtil.columnIsExist(rs,"ywy_id")) {
-				fysq.setYwy_id(rs.getString("ywy_id"));
-				fysq.setYwy_name(StaticParamDo.getRealNameById(rs.getString("ywy_id")));
-			}
-			if(SqlUtil.columnIsExist(rs,"zfzh")){
-				fysq.setZfzh(rs.getString("zfzh"));
-				fysq.setZfzh_name(StaticParamDo.getAccountNameById(rs.getString("zfzh")));
-			}
-			if(SqlUtil.columnIsExist(rs,"czr")){
-				fysq.setCzr(rs.getString("czr"));
-				fysq.setCzr_name(StaticParamDo.getRealNameById(rs.getString("czr")));
-			}
-			if(SqlUtil.columnIsExist(rs,"spr")){
-				fysq.setSpr(rs.getString("spr"));
-				fysq.setSpr_name(StaticParamDo.getRealNameById(rs.getString("spr")));
-			}
-			if(SqlUtil.columnIsExist(rs,"cz_date") && rs.getTimestamp("cz_date") != null){
-				fysq.setCz_date(rs.getTimestamp("cz_date").toString());
-			}
-			if(SqlUtil.columnIsExist(rs,"sp_date") && rs.getTimestamp("sp_date") != null){				
-				fysq.setSp_date(rs.getTimestamp("sp_date").toString());
-			}
-			
-			if(SqlUtil.columnIsExist(rs,"sqr")) fysq.setSqr(rs.getString("sqr"));
-			if(SqlUtil.columnIsExist(rs,"ywy_dept")) fysq.setYwy_dept(rs.getString("ywy_dept"));
-			
-			return fysq;
-		}
 	}
 
 }

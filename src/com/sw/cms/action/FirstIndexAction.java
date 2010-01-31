@@ -9,6 +9,7 @@ import com.sw.cms.model.LoginInfo;
 import com.sw.cms.model.Page;
 import com.sw.cms.service.CgfkService;
 import com.sw.cms.service.FirstIndexService;
+import com.sw.cms.service.FysqService;
 import com.sw.cms.service.LsdService;
 import com.sw.cms.service.MenuService;
 import com.sw.cms.service.UserService;
@@ -25,6 +26,7 @@ public class FirstIndexAction extends BaseAction {
 	private XsdService xsdService;
 	private UserService userService;
 	private CgfkService cgfkService;
+	private FysqService fysqService;
 	
 	private List dckList = new ArrayList();
 	private List drkList = new ArrayList();
@@ -36,10 +38,12 @@ public class FirstIndexAction extends BaseAction {
 	private String isLsdSpRight = "0"; 
 	private String isXsdSpRight = "0";
 	private String isCgfkSpRight = "0";
+	private String isFysqSpRight = "0";
 	
 	private List dspLsdList = new ArrayList();
 	private List dspXsdList = new ArrayList();
 	private List dspCgfkList = new ArrayList();
+	private List dspFysqList = new ArrayList();
 	
 	List ywgnList = new ArrayList();
 	
@@ -156,12 +160,12 @@ public class FirstIndexAction extends BaseAction {
 		
 		
 		//采购付款审批权限设置
-		Map map = userService.getSpRight("采购付款");
+		Map cgfkMap = userService.getSpRight("采购付款");
 		String sp_flag = "";
 		String role_id = "";
-		if(map != null){
-			sp_flag = StringUtils.nullToStr(map.get("sp_flag"));
-			role_id = StringUtils.nullToStr(map.get("role_id"));
+		if(cgfkMap != null){
+			sp_flag = StringUtils.nullToStr(cgfkMap.get("sp_flag"));
+			role_id = StringUtils.nullToStr(cgfkMap.get("role_id"));
 		}
 		String[] roles = role_id.split(",");
 		
@@ -172,6 +176,27 @@ public class FirstIndexAction extends BaseAction {
 			if(userService.isUserInRole(user_id, roles)){
 				isCgfkSpRight = "1";
 				dspCgfkList = cgfkService.getCgfks(" and state='待审批'");
+			}
+		}
+		
+		
+		//费用申请审批权限设置
+		Map fysqMap = userService.getSpRight("费用申请");
+		sp_flag = "";
+		role_id = "";
+		if(fysqMap != null){
+			sp_flag = StringUtils.nullToStr(fysqMap.get("sp_flag"));
+			role_id = StringUtils.nullToStr(fysqMap.get("role_id"));
+		}
+		String[] fysqRoles = role_id.split(",");
+		
+		//费用申请需要审批
+		if(sp_flag.equals("01") && !role_id.equals("")){
+			
+			//当前用户有审批的权限
+			if(userService.isUserInRole(user_id, fysqRoles)){
+				isFysqSpRight = "1";
+				dspFysqList = fysqService.getFysqList(" and (state='提交' or state='待审批')");
 			}
 		}
 		
@@ -334,5 +359,35 @@ public class FirstIndexAction extends BaseAction {
 
 	public void setCgfkService(CgfkService cgfkService) {
 		this.cgfkService = cgfkService;
+	}
+
+
+	public FysqService getFysqService() {
+		return fysqService;
+	}
+
+
+	public void setFysqService(FysqService fysqService) {
+		this.fysqService = fysqService;
+	}
+
+
+	public String getIsFysqSpRight() {
+		return isFysqSpRight;
+	}
+
+
+	public void setIsFysqSpRight(String isFysqSpRight) {
+		this.isFysqSpRight = isFysqSpRight;
+	}
+
+
+	public List getDspFysqList() {
+		return dspFysqList;
+	}
+
+
+	public void setDspFysqList(List dspFysqList) {
+		this.dspFysqList = dspFysqList;
 	}
 }

@@ -317,11 +317,11 @@ public class UserService {
 	
 	
 	/**
-	 * 保存采购付款审批相关信息
+	 * 保存审批相关信息
 	 * @param sp_flag
 	 * @param role_id
 	 */
-	public void saveCgfSpRight(String sp_flag,String[] role_id,String yw_type){
+	public void saveSpRight(String sp_flag,String[] role_id,String yw_type){
 		String strRole = "";
 		if(role_id != null && role_id.length>0){
 			for(int i=0;i<role_id.length;i++){

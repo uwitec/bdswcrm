@@ -47,7 +47,7 @@ public class UserAction extends BaseAction {
 	private String[] positions;
 	private List userList = new ArrayList();
 	private List employList = new ArrayList();
-	private Map cfgkSpRightMap;
+	private Map spRightMap;
 	
 	private String user_name;
 	private String curPass;
@@ -482,9 +482,12 @@ public class UserAction extends BaseAction {
 	public String openCgfkSpRight(){
 		try{
 			roleList = userService.getAllRoles();
-			cfgkSpRightMap = userService.getSpRight("采购付款");
-			sp_flag = StringUtils.nullToStr(cfgkSpRightMap.get("sp_flag"));
-			role_id = (StringUtils.nullToStr(cfgkSpRightMap.get("role_id"))).split(",");
+			spRightMap = userService.getSpRight("采购付款");
+			
+			if(spRightMap != null){
+				sp_flag = StringUtils.nullToStr(spRightMap.get("sp_flag"));
+				role_id = (StringUtils.nullToStr(spRightMap.get("role_id"))).split(",");
+			}
 			return SUCCESS;
 		}catch(Exception e){
 			log.error("打开采购付款审批权限设置页面错误码，错误原因：" + e.getMessage());
@@ -500,7 +503,7 @@ public class UserAction extends BaseAction {
 	 */
 	public String saveCgfkSpRight(){
 		try{
-			userService.saveCgfSpRight(sp_flag, role_id,"采购付款");
+			userService.saveSpRight(sp_flag, role_id,"采购付款");
 			this.setMsg("保存采购付款审批设置成功！");
 			return SUCCESS;
 		}catch(Exception e){
@@ -509,6 +512,45 @@ public class UserAction extends BaseAction {
 			return ERROR;
 		}
 	}
+	
+	
+	/**
+	 * 打开费用申请审批权限设置页面
+	 * @return
+	 */
+	public String openFysqSpRight(){
+		try{
+			roleList = userService.getAllRoles();
+			spRightMap = userService.getSpRight("费用申请");
+			
+			if(spRightMap != null){
+				sp_flag = StringUtils.nullToStr(spRightMap.get("sp_flag"));
+				role_id = (StringUtils.nullToStr(spRightMap.get("role_id"))).split(",");
+			}
+			return SUCCESS;
+		}catch(Exception e){
+			log.error("打开费用申请审批权限设置页面错误码，错误原因：" + e.getMessage());
+			e.printStackTrace();
+			return ERROR;
+		}
+	}
+	
+	
+	/**
+	 * 保存费用申请审批相关信息
+	 * @return
+	 */
+	public String saveFysqSpRight(){
+		try{
+			userService.saveSpRight(sp_flag, role_id,"费用申请");
+			this.setMsg("保存费用申请审批设置成功！");
+			return SUCCESS;
+		}catch(Exception e){
+			log.error("保存费用申请审批相关信息错误，错误原因：" + e.getMessage());
+			e.printStackTrace();
+			return ERROR;
+		}
+	}	
 	
 	
 	/**
@@ -836,17 +878,6 @@ public class UserAction extends BaseAction {
 		this.sysInitSetService = sysInitSetService;
 	}
 
-
-	public Map getCfgkSpRightMap() {
-		return cfgkSpRightMap;
-	}
-
-
-	public void setCfgkSpRightMap(Map cfgkSpRightMap) {
-		this.cfgkSpRightMap = cfgkSpRightMap;
-	}
-
-
 	public String getSp_flag() {
 		return sp_flag;
 	}
@@ -854,6 +885,16 @@ public class UserAction extends BaseAction {
 
 	public void setSp_flag(String spFlag) {
 		sp_flag = spFlag;
+	}
+
+
+	public Map getSpRightMap() {
+		return spRightMap;
+	}
+
+
+	public void setSpRightMap(Map spRightMap) {
+		this.spRightMap = spRightMap;
 	}
 	
 }
