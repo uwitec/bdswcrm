@@ -321,7 +321,7 @@ if(cgfkDescs != null && cgfkDescs.size()>0){
 	</tr>
 </table>
 <BR>
-<font color="red">注：“保存”指采购付款单暂存，可修改，“提交”如果系统设置需审批则提交审批，如果不需要审批则直接结算。</font>
+<font color="red">注：“保存”指采购付款单暂存，可修改，“提交”如果系统设置需审批则提交审批，如果不需要审批则直接生成相应出纳付款单。</font>
 </form>
 </body>
 </html>

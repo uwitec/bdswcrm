@@ -128,8 +128,8 @@
 													</TR>													
 													<ww:iterator value="%{msgList}">
 					                                <TR height="30">
-					                                	<TD class=Bottom_no_dotted align=left width="30%">发送人：<ww:property value="%{sender_name}"/></TD>	
-					                                	<TD class=Bottom_no_dotted align=left width="50%">发送时间：<ww:property value="%{send_time}"/></TD>																			
+					                                	<TD class=Bottom_no_dotted align=left width="30%">发送人：<ww:property value="%{getUserRealName(sender_id)}"/></TD>	
+					                                	<TD class=Bottom_no_dotted align=left width="50%">发送时间：<ww:date name="%{send_time}" format="yyyy-MM-dd HH:mm:ss"/></TD>																			
 					                                	<TD class=Bottom_no_dotted align=right width="20%"><a href="javascript:showDiv('<ww:property value="%{sender_id}"/>');">回复</a></TD>
 													</TR>
 					                                <TR height="30">

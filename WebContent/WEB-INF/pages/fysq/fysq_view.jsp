@@ -35,7 +35,7 @@
 		<td class="a1" width="15%">费用类型</td>
 		<td class="a2" width="35%"><ww:property value="%{getFyTypeName(fysq.fy_type)}"/></td>
 		<td class="a1" width="15%">金额</td>
-		<td class="a2" width="35%"><ww:property value="%{fysq.strJe}"/></td>		
+		<td class="a2" width="35%"><ww:property value="%{getText('global.format.money',{fysq.je})}"/></td>		
 	</tr>
 	<tr>
 		<td class="a1" width="15%">对应客户</td>
@@ -45,7 +45,7 @@
 	</tr>
 	<tr>
 		<td class="a1" width="15%">支付账户</td>
-		<td class="a2" colspan="3"><ww:property value="%{fysq.zfzh_name}"/></td>		
+		<td class="a2" colspan="3"><ww:property value="%{getAccountName(fysq.zfzh)}"/></td>		
 	</tr>	
 	<tr>
 		<td class="a1" width="15%">详细说明</td>

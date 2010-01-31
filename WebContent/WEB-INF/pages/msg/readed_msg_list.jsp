@@ -132,16 +132,16 @@
 													</TR>													
 													<ww:iterator value="%{msgPage.results}">
 					                                <TR height="30">
-					                                	<TD class=Bottom_no_dotted align=left width="25%">发 送 人：<ww:property value="%{sender_name}"/></TD>	
+					                                	<TD class=Bottom_no_dotted align=left width="25%">发 送 人：<ww:property value="%{getUserRealName(sender_id)}"/></TD>	
 					                                	<TD class=Bottom_dotted align=left valign="top" rowspan="3">内　容：<ww:property value="%{msg_body}"/></TD>
 					                                	<TD class=Bottom_no_dotted align=center width="20%"></TD>																				
 													</TR>
 					                                <TR height="25">
-					                                	<TD class=Bottom_no_dotted align=left width="25%">发送时间：<ww:property value="%{send_time}"/></TD>
+					                                	<TD class=Bottom_no_dotted align=left width="25%">发送时间：<ww:date name="%{send_time}" format="yyyy-MM-dd HH:mm:ss"/></TD>
 					                                																		
 													</TR>
 					                                <TR height="25">
-					                                	<TD class=Bottom_dotted align=left width="25%">读取时间：<ww:property value="%{read_time}"/></TD>
+					                                	<TD class=Bottom_dotted align=left width="25%">读取时间：<ww:date name="%{read_time}" format="yyyy-MM-dd HH:mm:ss"/> </TD>
 					                                	<TD class=Bottom_dotted align=center width="20%">
 					                                		<a href="javascript:delMsg('<ww:property value="%{msg_id}"/>');">删除</a>&nbsp;&nbsp;
 					                                		<a href="javascript:showDiv('<ww:property value="%{sender_id}"/>');">回复</a>

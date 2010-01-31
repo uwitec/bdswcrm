@@ -56,7 +56,7 @@
 			<input type="text" name="creatdate2" id="creatdate2" value="<ww:property value="%{creatdate2}" />" class="Wdate" onFocus="WdatePicker()"/> 
 			&nbsp;&nbsp;		
 			状态：
-			<ww:select name="state" id="state" theme="simple" list="#{'保存':'保存','提交':'提交','审批通过':'审批通过','审批不通过':'审批不通过','已支付':'已支付'}"  emptyOption="true" ></ww:select>&nbsp;
+			<ww:select name="state" id="state" theme="simple" list="#{'保存':'保存','待审批':'待审批','审批不通过':'审批不通过','待支付':'待支付','已支付':'已支付'}"  emptyOption="true" ></ww:select>&nbsp;
 			<input type="submit" name="buttonCx" value=" 查询 " class="css_button">
 			<input type="button" name="buttonQk" value=" 清空 " class="css_button" onclick="clearAll();">			
 		</td>				
@@ -82,13 +82,13 @@
 			<td><ww:property value="%{getUserRealName(sqr)}" /></td>
 			<td><ww:property value="%{getDeptName(ywy_dept)}" /></td>
 			<td><ww:property value="%{getFyTypeName(fy_type)}" /></td>
-			<td align="right"><ww:property value="%{strJe}" />&nbsp;</td>
+			<td align="right"><ww:property value="%{getText('global.format.money',{je})}" />&nbsp;</td>
 			<td><ww:property value="%{state}" /></td>		
 			<td>
-				<ww:if test="state=='保存'">
+				<ww:if test="state=='保存' or state=='审批不通过'">
 					<a href="#" onclick="edit('<ww:property value="%{id}" />');"><img src="images/modify.gif" align="absmiddle" title="修改" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;			
 					<a href="#" onclick="view('<ww:property value="%{id}" />');"><img src="images/view.gif" align="absmiddle" title="查看" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
-					<a href="#" onclick="del('<ww:property value="%{id}" />');"><img src="images/del.gif" align="absmiddle" title="删除该" border="0" style="cursor:hand"></a>							
+					<a href="#" onclick="del('<ww:property value="%{id}" />');"><img src="images/del.gif" align="absmiddle" title="删除" border="0" style="cursor:hand"></a>							
 				</ww:if>
 				<ww:else>
 					<a href="#" onclick="view('<ww:property value="%{id}" />');"><img src="images/view.gif" align="absmiddle" title="查看" border="0" style="cursor:hand"></a>

@@ -24,7 +24,7 @@ Fysq fysq = (Fysq)VS.findValue("fysq");
 </style>
 <script type="text/javascript">
 	//保存费用申请单
-	function saveInfo(){
+	function saveInfo(vl){
 		if(document.getElementById("sqr").value == ""){
 			alert("费用申请人不能为空，请选择");
 			return;
@@ -40,9 +40,18 @@ Fysq fysq = (Fysq)VS.findValue("fysq");
 		if(!InputValid(document.getElementById("je"),1,"float",1,1,999999999,"金额")){	 return; }	
 		if(!InputValid(document.getElementById("remark"),1,"string",1,1,100,"详细说明")){	 return; }	
 		
-		document.frsqForm.btnSub.disabled = true;
+		if(vl == "1"){
+			document.getElementById("state").value = "保存";
+			document.frsqForm.submit();
+		}else{
+			document.getElementById("state").value = "提交";
+
+			if(window.confirm("确认提交申请吗，提交后将不可修改！")){
+				document.frsqForm.submit();
+			}
+		}
 		
-		document.frsqForm.submit();
+		document.frsqForm.btnSub.disabled = true;
 	}
 	
 	function openAccount(){
@@ -62,6 +71,7 @@ Fysq fysq = (Fysq)VS.findValue("fysq");
 </head>
 <body onload="initFzrTip();initSqrTip();">
 <form name="frsqForm" action="updateFysq.html" method="post">
+<ww:hidden name="fysq.state" id="state" theme="simple" value=""></ww:hidden>
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
@@ -86,9 +96,9 @@ Fysq fysq = (Fysq)VS.findValue("fysq");
          </div>
          <ww:hidden name="fysq.sqr" id="sqr" theme="simple" value="%{fysq.sqr}"/><font color="red">*</font>	
 		</td>
-		<td class="a1" width="15%">状态</td>
-		<td class="a2">
-			<ww:select name="fysq.state" id="state" theme="simple" list="#{'保存':'保存','提交':'提交'}"  emptyOption="no"></ww:select>		
+		<td class="a1" width="15%">对应客户</td>
+		<td class="a2" width="35%">
+			<ww:textfield name="fysq.xgkh" id="xgkh" value="%{fysq.xgkh}" theme="simple" size="30" maxLength="100"/>
 		</td>
 	</tr>
 	<tr>
@@ -133,29 +143,22 @@ Fysq fysq = (Fysq)VS.findValue("fysq");
 		</td>	
 		<td class="a1" width="15%">金额</td>
 		<td class="a2" width="35%">
-			<ww:textfield name="fysq.je" id="je" value="%{fysq.strJe2}" theme="simple"/><span style="color:red">*</span>
+			<ww:textfield name="fysq.je" id="je" value="%{getText('global.format.double',{fysq.je})}" theme="simple"/><span style="color:red">*</span>
 		</td>
 	</tr>
 	<tr>
-		<td class="a1" width="15%">对应客户</td>
-		<td class="a2" width="35%">
-			<ww:textfield name="fysq.xgkh" id="xgkh" value="%{fysq.xgkh}" theme="simple" size="30" maxLength="100"/>
-		</td>		
 		<td class="a1" width="15%">支付方式</td>
 		<td class="a2" width="35%">
 			<ww:select name="fysq.fklx" id="fklx" theme="simple" list="%{fkfs}" emptyOption="true" />
-		</td>								
-	</tr>
-	<tr>
+		</td>	
 		<td class="a1" width="15%">支付账户</td>
-		<td class="a2" colspan="3">
-			<ww:textfield id="zhname"  name="zhname" value="%{fysq.zfzh_name}" theme="simple" readonly="true"/>
+		<td class="a2">
+			<ww:textfield id="zhname"  name="zhname" value="%{getAccountName(fysq.zfzh)}" theme="simple" readonly="true"/>
 			<ww:hidden name="fysq.zfzh" id="fkzh" value="%{fysq.zfzh}" theme="simple"/>
 			<img src="images/select.gif" align="absmiddle" title="选择账户" border="0" onclick="openAccount();" style="cursor:hand">
-		</td>					
+		</td>									
 	</tr>
 	<tr>
-		
 	</tr>	
 	<tr>
 		<td class="a1" width="15%">详细说明</td>
@@ -165,12 +168,14 @@ Fysq fysq = (Fysq)VS.findValue("fysq");
 	</tr>				
 	<tr height="35">
 		<td class="a1" colspan="4">
-			<input type="button" name="btnSub" value="提 交" class="css_button2" onclick="saveInfo();">&nbsp;
-			<input type="reset" name="button2" value="重 置" class="css_button2">&nbsp;
+			<input type="button" name="btnSub" value="保存" class="css_button2" onclick="saveInfo('1');">&nbsp;
+			<input type="button" name="button2" value="提交" class="css_button2" onclick="saveInfo('2');">&nbsp;
 			<input type="button" name="button1" value="关 闭" class="css_button2" onclick="window.close();">
 		</td>
 	</tr>
 </table>
+<BR>
+<font color="red">注：“保存”指费用申请暂存，可修改，“提交”如果系统设置需审批则提交审批，如果不需要审批则直接生成待支付一般费用。</font>
 </form>
 </body>
 </html>

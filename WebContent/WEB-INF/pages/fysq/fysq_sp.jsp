@@ -118,7 +118,7 @@ session.removeAttribute("messages");
 		</td>
 		<td class="a1" width="15%">金额</td>
 		<td class="a2" width="35%">
-			<ww:textfield name="fysq.je" id="je" value="%{fysq.strJe2}" theme="simple"/><span style="color:red">*</span>
+			<ww:textfield name="fysq.je" id="je" value="%{getText('global.format.money',{fysq.je})}" theme="simple"/><span style="color:red">*</span>
 		</td>		
 	</tr>	
 	<tr>
@@ -173,7 +173,7 @@ session.removeAttribute("messages");
 		</td>	
 		<td class="a1" width="15%">支付账户</td>
 		<td class="a2" width="35%">
-			<ww:textfield id="zhname"  name="zhname" value="%{fysq.zfzh_name}" theme="simple" readonly="true"/>
+			<ww:textfield id="zhname"  name="zhname" value="%{getAccountName(fysq.zfzh)}" theme="simple" readonly="true"/>
 			<ww:hidden name="fysq.zfzh" id="fkzh" value="%{fysq.zfzh}" theme="simple"/>
 			<img src="images/select.gif" align="absmiddle" title="选择账户" border="0" onclick="openAccount();" style="cursor:hand">
 		</td>						
@@ -186,9 +186,9 @@ session.removeAttribute("messages");
 	</tr>				
 	<tr height="35">
 		<td class="a1" colspan="4">
-			<input type="button" name="btnTg" value="审批通过" class="css_button2" onclick="doSp('审批通过');this.disabled=true;">&nbsp;
-			<input type="reset" name="btnBtg" value="审批不通过" class="css_button2" onclick="doSp('审批不通过');this.disabled=true;">&nbsp;
-			<input type="button" name="button1" value="关 闭" class="css_button2" onclick="window.opener.document.myform.submit();window.close();">
+			<input type="button" name="btnTg" value="审批通过" class="css_button3" onclick="doSp('审批通过');this.disabled=true;">&nbsp;
+			<input type="reset" name="btnBtg" value="审批不通过" class="css_button3" onclick="doSp('审批不通过');this.disabled=true;">&nbsp;
+			<input type="button" name="button1" value=" 关 闭 " class="css_button3" onclick="window.opener.document.myform.submit();window.close();">
 		</td>
 	</tr>
 </table>

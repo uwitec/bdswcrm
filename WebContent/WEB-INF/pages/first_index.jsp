@@ -20,6 +20,9 @@ List dspXsdList = (List)VS.findValue("dspXsdList");
 String isCgfkSpRight = (String)VS.findValue("isCgfkSpRight");
 List dspCgfkList = (List)VS.findValue("dspCgfkList");
 
+String isFysqSpRight = (String)VS.findValue("isFysqSpRight");
+List dspFysqList = (List)VS.findValue("dspFysqList");
+
 %>
 <html>
 <head>
@@ -52,6 +55,12 @@ List dspCgfkList = (List)VS.findValue("dspCgfkList");
 		var fea ='width=850,height=700,left=' + (screen.availWidth-850)/2 + ',top=' + (screen.availHeight-750)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
 		window.open(destination,'审批付款申请单',fea);
+	}	
+
+	function doSpFysq(id){
+		var destination = "spFysq.html?id=" + id;
+		var fea ='width=750,height=400,left=' + (screen.availWidth-750)/2 + ',top=' + (screen.availHeight-400)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		window.open(destination,'待审批费用申请',fea);	
 	}		
 	
 	function refreshPage(){
@@ -242,7 +251,7 @@ List dspCgfkList = (List)VS.findValue("dspCgfkList");
 
 						<table width="100%" align="left"  class="chart_list" cellpadding="0" cellspacing="0">
 							<tr>
-								<td class="csstitle" align="left" width="100%">&nbsp;&nbsp;&nbsp;&nbsp;<b>待审批付款申请单</b></td>
+								<td class="csstitle" align="left" width="100%">&nbsp;&nbsp;&nbsp;&nbsp;<b>待审批付款申请</b></td>
 							</tr>
 							<tr><td height="3">&nbsp;</td></tr>
 							<%
@@ -259,7 +268,7 @@ List dspCgfkList = (List)VS.findValue("dspCgfkList");
 							}else{
 							%>
 							<tr>
-								<td width="100%" height="23" align="left">&nbsp;无待审批付款申请单！</td>
+								<td width="100%" height="23" align="left">&nbsp;无待审批付款申请！</td>
 							</tr>					
 							<%
 							}
@@ -269,7 +278,47 @@ List dspCgfkList = (List)VS.findValue("dspCgfkList");
 				</tr>
 				<%
 				}
-				%>											
+				%>	
+				
+				
+				<%
+				if(isFysqSpRight.equals("1")){
+				%>				
+				<tr><td>&nbsp;</td></tr>
+				
+				<tr>
+					<td width="100%">
+
+						<table width="100%" align="left"  class="chart_list" cellpadding="0" cellspacing="0">
+							<tr>
+								<td class="csstitle" align="left" width="100%">&nbsp;&nbsp;&nbsp;&nbsp;<b>待审批费用申请</b></td>
+							</tr>
+							<tr><td height="3">&nbsp;</td></tr>
+							<%
+							if(dspFysqList != null && dspFysqList.size() > 0){
+								for(int i=0;i<dspFysqList.size();i++){
+									Fysq fysq = (Fysq)dspFysqList.get(i);
+							%>			
+							<tr>
+								<td width="100%" height="23">&nbsp;<A class=xxlb title="点击打开审批页面" href="javascript:doSpFysq('<%=StringUtils.nullToStr(fysq.getId()) %>');">
+								<%=StringUtils.nullToStr(fysq.getId()) %>&nbsp;&nbsp;<%=StaticParamDo.getRealNameById(fysq.getSqr()) %>&nbsp;&nbsp;<%=StaticParamDo.getDeptNameById(fysq.getYwy_dept()) %>&nbsp;&nbsp;【<%=StringUtils.nullToStr(fysq.getCreatdate()) %>】</A></td>
+							</tr>
+							<%
+								}
+							}else{
+							%>
+							<tr>
+								<td width="100%" height="23" align="left">&nbsp;无待审批费用申请！</td>
+							</tr>					
+							<%
+							}
+							%>															
+						</table>
+					</td>
+				</tr>
+				<%
+				}
+				%>															
 			</table>		
 		</td>
 		<td width="20"></td>
