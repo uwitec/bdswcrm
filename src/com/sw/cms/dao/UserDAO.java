@@ -398,6 +398,36 @@ public class UserDAO extends JdbcBaseDAO {
 		}
 		return is;
 	}
+	
+	
+	/**
+	 * 返回角色组内所有的用户
+	 * @param arryRole
+	 * @return
+	 */
+	public List getUserByRoles(String[] arryRole){
+		List result = new ArrayList();
+		
+		String sql = "select a.user_id,a.user_name from sys_user a inner join user_role b on b.user_id=a.user_id  where a.is_sys_user='1'";
+		
+		String con = "";
+		if(arryRole != null && arryRole.length > 0){
+			con += " and(";
+			for(int i=0;i<arryRole.length;i++){
+				if(i == 0){
+					con += "b.role_id='" + arryRole[i] + "'";
+				}else{
+					con += " or b.role_id='" + arryRole[i] + "'";
+				}
+			}
+			con += ")";
+			
+			return this.getResultList(sql);
+		}else{
+			return null;
+		}
+		
+	}
 
 	
 	

@@ -101,10 +101,12 @@ public class FysqService {
 				//如果费用需要审批，则添加待审批的提醒
 				
 				String[] fysqRoles = role_id.split(",");
-				if(fysqRoles != null && fysqRoles.length >0){
-					for(int i=0;i<fysqRoles.length;i++){						
+				List userList = userDao.getUserByRoles(fysqRoles);
+				if(userList != null && userList.size() >0){
+					for(int i=0;i<userList.size();i++){	
+						Map tempMap =(Map)userList.get(i);
 						SysMsg msg = new SysMsg();
-						msg.setReciever_id(fysqRoles[i]);
+						msg.setReciever_id(StringUtils.nullToStr(tempMap.get("user_id")));
 						msg.setSender_id(fysq.getCzr());
 						msg.setMsg_body("有一条待审批费用，请及时审批，费用申请单编号为：" + fysq.getId());						
 						sysMsgDao.saveMsg(msg);

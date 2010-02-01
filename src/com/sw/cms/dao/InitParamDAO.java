@@ -360,7 +360,7 @@ public class InitParamDAO extends JdbcBaseDAO {
 	 */
 	private double getSjyifuje(String client_name,String cdate){
 		double sjyifuje = 0;
-		String sql = "select sum(fkje) as fkje from cgfk where state='已提交' and gysbh='" + client_name + "' and DATE_FORMAT(cz_date,'%Y-%m-%d')='" + cdate + "'";
+		String sql = "select sum(fkje) as fkje from cgfk where (state='已提交' or state='已支付') and gysbh='" + client_name + "' and DATE_FORMAT(cz_date,'%Y-%m-%d')='" + cdate + "'";
 		List list = this.getResultList(sql);
 		
 		if(list != null && list.size()>0){
