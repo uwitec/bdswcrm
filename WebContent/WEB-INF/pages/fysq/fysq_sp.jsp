@@ -118,7 +118,7 @@ session.removeAttribute("messages");
 		</td>
 		<td class="a1" width="15%">金额</td>
 		<td class="a2" width="35%">
-			<ww:textfield name="fysq.je" id="je" value="%{getText('global.format.money',{fysq.je})}" theme="simple"/><span style="color:red">*</span>
+			<ww:textfield name="fysq.je" id="je" value="%{getText('global.format.double',{fysq.je})}" theme="simple"/><span style="color:red">*</span>
 		</td>		
 	</tr>	
 	<tr>

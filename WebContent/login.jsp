@@ -34,9 +34,13 @@ function f_enter(){
         chklogin();
     }
 }
+
+function chgImage(){
+	document.getElementById("imgCheck").src = "<%=request.getContextPath() %>/showImage?" + Math.random();
+}
 </script>
 </head>
-<body oncontextmenu="return false;" style="margin-top:100px;">
+<body oncontextmenu="return false;" style="margin-top:100px;" onload="document.myform.user_name.focus();">
 <form name="myform" action="login.html" method="post">
 <table width="400" height="30"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
@@ -58,7 +62,7 @@ function f_enter(){
 	<tr>
 		<td class="a1" width="30%">验证码：</td>
 		<td class="a2" width="40%"><input type="text" name="authNums" value="" style="width:90%" onKeyPress="f_enter();"></td>
-		<td class="a2" width="30%"><img alt="验证码" src="<%=request.getContextPath() %>/showImage"></td>
+		<td class="a2" width="30%"><img alt="验证码" id="imgCheck" src="<%=request.getContextPath() %>/showImage" title="点击换一张" onclick="chgImage();" style="cursor: hand"></td>
 	</tr>
 	<tr>
 		<td colspan="3" class="a1"><BR><BR>
