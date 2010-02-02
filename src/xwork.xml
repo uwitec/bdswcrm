@@ -88,6 +88,12 @@
         </action>
         <!-- 首页 -->
         
+        <!-- 待办工作 -->
+        <action name="undoWork" class="firstIndexAction" method="listUndoWork">
+            <result name="success">/WEB-INF/pages/undo_work.jsp</result>
+        </action>
+        <!-- 待办工作 -->        
+        
         <!-- 采购付款 -->
         <action name="listCgfk" class="cgfkAction" method="list">
             <result name="success">/WEB-INF/pages/cgfk/cgfk_list.jsp</result>
