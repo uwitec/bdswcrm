@@ -419,7 +419,7 @@ if(ckdProducts!=null && ckdProducts.size()>0){
 		<td class="a2"><input type="text" id="nums_<%=i %>" name="ckdProducts[<%=i %>].nums" value="<%=StringUtils.nullToStr(ckdProduct.get("nums")) %>" readonly  style="width:100%;<%=cssStyle %>"></td>
 		<td class="a2"><input type="text" id="ck_nums_<%=i %>" name="ckdProducts[<%=i %>].ck_nums" value="<%=StringUtils.nullToStr(ckdProduct.get("ck_nums")) %>"  style="width:100%;<%=cssStyle %>"></td>
 		<td class="a2">
-			<input type="text" id="qz_serial_num_<%=i %>" name="ckdProducts[<%=i %>].qz_serial_num" value="<%=StringUtils.nullToStr(ckdProduct.get("qz_serial_num")) %>"  style="width:80%;<%=cssStyle %>" readonly>
+			<input type="text" id="qz_serial_num_<%=i %>" name="ckdProducts[<%=i %>].qz_serial_num" value="<%=StringUtils.nullToStr(ckdProduct.get("qz_serial_num")) %>"  style="<%=cssStyle %>" size="13" readonly>
 			<input type="hidden" id="qz_flag_<%=i %>" name="ckdProducts[<%=i %>].qz_flag" value="<%=StringUtils.nullToStr(ckdProduct.get("qz_flag")) %>"><a style="cursor:hand" title="左键点击输入输列号" onclick="openSerialWin('<%=i %>');"><b>...</b></a>&nbsp;
 		</td>
 	</tr>

@@ -61,8 +61,8 @@ int menu_index = 0;
 					<td nowrap>
 						<div class="tabHeader_div">
 						<ul id="tabHeader">	
-							<li id="second">首页</li>
-							<li></li>
+							<li id="first">首页</li>
+							<li id="second">待办工作</li>
 						</ul>
 						</div>
 					</td>
@@ -344,8 +344,8 @@ int menu_index = 0;
 		<TD  valign="top" align="left" width="100%" id="tdContent" height="100%" >
 			<div class="tabcontent_div">
 			<ul id="tabContent">							
-				<li><iframe id="ifrIndex2" src="listMain.html" scrolling="auto" border="0" style="width:100%;" onload="FrameChange('ifrIndex2');" frameborder="0"></iframe></li>
-				<li></li>
+				<li><iframe id="ifrIndex1" src="listMain.html" scrolling="auto" border="0" style="width:100%;" onload="FrameChange('ifrIndex1');" frameborder="0"></iframe></li>
+				<li><iframe id="ifrIndex2" src="undoWork.html" scrolling="auto" border="0" style="width:100%;" onload="FrameChange('ifrIndex2');" frameborder="0"></iframe></li>
 			</ul>
 			</div>
 		</TD>
