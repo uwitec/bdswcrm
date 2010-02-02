@@ -3,6 +3,7 @@ package com.sw.cms.service;
 import java.util.List;
 
 import com.sw.cms.dao.FirstIndexDAO;
+import com.sw.cms.model.Page;
 
 public class FirstIndexService {
 	
@@ -48,6 +49,18 @@ public class FirstIndexService {
 	 */
 	public List getKcxxList(){
 		return firstIndexDao.getKcxxList();
+	}
+	
+	
+	/**
+	 * 待办工作列表
+	 * @param con
+	 * @param curPage
+	 * @param rowsPerPage
+	 * @return
+	 */
+	public Page getUndoWorks(String con,int curPage,int rowsPerPage){
+		return firstIndexDao.getUndoWorks(con, curPage, rowsPerPage);
 	}
 
 

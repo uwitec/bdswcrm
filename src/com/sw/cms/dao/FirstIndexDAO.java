@@ -3,6 +3,7 @@ package com.sw.cms.dao;
 import java.util.List;
 
 import com.sw.cms.dao.base.JdbcBaseDAO;
+import com.sw.cms.model.Page;
 
 public class FirstIndexDAO extends JdbcBaseDAO {
 	
@@ -53,6 +54,25 @@ public class FirstIndexDAO extends JdbcBaseDAO {
 	public List getKcxxList(){
 		String sql = "SELECT * FROM view_query_kcxx where kc_nums<kcxx";
 		return this.getResultList(sql);
+	}
+	
+	
+	/**
+	 * 待办工作列表
+	 * @param con
+	 * @param curPage
+	 * @param rowsPerPage
+	 * @return
+	 */
+	public Page getUndoWorks(String con,int curPage,int rowsPerPage){
+		String sql = "select * from view_undo_work where 1<>1";
+		
+		if(!con.equals("")){
+			sql += con;
+		}
+		sql += " order by cz_date desc";
+		
+		return this.getResultByPage(sql, curPage, rowsPerPage);
 	}
 
 }

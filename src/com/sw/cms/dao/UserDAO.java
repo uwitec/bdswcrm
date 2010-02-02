@@ -350,6 +350,22 @@ public class UserDAO extends JdbcBaseDAO {
 		return this.getResultList(sql);
 	}
 	
+	/**
+	 * 判断用户是否有价格审批权限
+	 * @return
+	 */
+	public boolean isHasJgspRight(String user_id){
+		boolean is = false;
+		
+		String sql = "select count(*) as counts from jgsp_right_roles a inner join user_role b on b.role_id=a.role_id inner join sys_user c on c.user_id=b.user_id where b.user_id='" + user_id + "'";
+		int counts = this.getJdbcTemplate().queryForInt(sql);
+		if(counts > 0){
+			is = true;
+		}
+		
+		return is;
+	}
+	
 	
 	/**
 	 * 返回具有超期审批权限的用户列表
@@ -358,6 +374,23 @@ public class UserDAO extends JdbcBaseDAO {
 	public List getCqspUsers(){
 		String sql = "select c.user_id,c.real_name,c.mobile from cqsp_right_roles a inner join user_role b on b.role_id=a.role_id inner join sys_user c on c.user_id=b.user_id";
 		return this.getResultList(sql);
+	}
+	
+	
+	/**
+	 * 判断用户是否有超期审批权限
+	 * @return
+	 */
+	public boolean isHasCqspRight(String user_id){
+		boolean is = false;
+		
+		String sql = "select count(*) as counts from cqsp_right_roles a inner join user_role b on b.role_id=a.role_id inner join sys_user c on c.user_id=b.user_id where c.user_id='" + user_id + "'";
+		int counts = this.getJdbcTemplate().queryForInt(sql);
+		if(counts > 0){
+			is = true;
+		}
+		
+		return is;
 	}
 	
 	
@@ -372,12 +405,46 @@ public class UserDAO extends JdbcBaseDAO {
 	
 	
 	/**
+	 * 判断用户是否有超期审批权限
+	 * @return
+	 */
+	public boolean isHasCespRight(String user_id){
+		boolean is = false;
+		
+		String sql = "select count(*) as counts from cesp_right_roles a inner join user_role b on b.role_id=a.role_id inner join sys_user c on c.user_id=b.user_id where c.user_id='" + user_id + "'";
+		int counts = this.getJdbcTemplate().queryForInt(sql);
+		if(counts > 0){
+			is = true;
+		}
+		
+		return is;
+	}
+	
+	
+	/**
 	 * 返回具有超额审批及价格审批权限的用户列表
 	 * @return
 	 */
 	public List getCeAndJgSpUsers(){
 		String sql = "select d.user_id,d.real_name,d.mobile from cesp_right_roles a inner join jgsp_right_roles b on b.role_id=a.role_id inner join user_role c on c.role_id=a.role_id inner join sys_user d on d.user_id=c.user_id";
 		return this.getResultList(sql);		
+	}
+	
+	
+	/**
+	 * 判断用户是否有超期额及价格审批权限
+	 * @return
+	 */
+	public boolean isHasCeAndJgspRight(String user_id){
+		boolean is = false;
+		
+		String sql = "select count(*) as counts from cesp_right_roles a inner join jgsp_right_roles b on b.role_id=a.role_id inner join user_role c on c.role_id=a.role_id inner join sys_user d on d.user_id=c.user_id where d.user_id='" + user_id + "'";
+		int counts = this.getJdbcTemplate().queryForInt(sql);
+		if(counts > 0){
+			is = true;
+		}
+		
+		return is;
 	}
 	
 	
@@ -394,6 +461,23 @@ public class UserDAO extends JdbcBaseDAO {
 		}
 		List list = this.getResultList(sql);
 		if(list != null && list.size() > 0){
+			is = true;
+		}
+		return is;
+	}
+	
+	
+	/**
+	 * 判断用户是否有某功能操作权限
+	 * @param func_id
+	 * @param user_id
+	 * @return
+	 */
+	public boolean isHasRightFuncs(String func_id,String user_id){
+		boolean is = false;
+		String sql = "select count(*) as counts from user_role a join role_func b on b.role_id=a.role_id where b.func_id='" + func_id + "' and a.user_id='" + user_id + "'";
+		int counts = this.getJdbcTemplate().queryForInt(sql);
+		if(counts > 0){
 			is = true;
 		}
 		return is;

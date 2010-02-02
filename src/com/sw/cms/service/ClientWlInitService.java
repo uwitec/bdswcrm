@@ -39,7 +39,10 @@ public class ClientWlInitService {
 		
 		
 		SysInitSet sysInitSet = sysInitSetDao.getSysInitSet();		
-		String strQyrq = sysInitSet.getQyrq();		
+		String strQyrq = sysInitSet.getQyrq(); 
+		if(strQyrq == null || strQyrq.equals("")){
+			return;
+		}
 		Date qyrq = DateComFunc.strToDate(strQyrq,"yyyy-MM-dd"); //系统启用日期
 		
 		String client_name = clientWlInit.getClient_name();

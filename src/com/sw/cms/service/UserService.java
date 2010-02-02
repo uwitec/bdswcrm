@@ -335,6 +335,48 @@ public class UserService {
 		roleDao.saveSpRight(sp_flag, strRole, yw_type);
 	}
 	
+	/**
+	 * 判断用户是否有某功能操作权限
+	 * @param func_id
+	 * @param user_id
+	 * @return
+	 */
+	public boolean isHasRightFuncs(String func_id,String user_id){
+		return userDao.isHasRightFuncs(func_id, user_id);
+	}
+	
+	/**
+	 * 判断用户是否有价格审批权限
+	 * @return
+	 */
+	public boolean isHashJgspRight(String user_id){
+		return userDao.isHasJgspRight(user_id);
+	}
+	
+	/**
+	 * 判断用户是否有超期审批权限
+	 * @return
+	 */
+	public boolean isHasCqspRight(String user_id){
+		return userDao.isHasCqspRight(user_id);
+	}
+	
+	/**
+	 * 判断用户是否有超期审批权限
+	 * @return
+	 */
+	public boolean isHasCespRight(String user_id){
+		return userDao.isHasCespRight(user_id);
+	}
+	
+	/**
+	 * 判断用户是否有超期额及价格审批权限
+	 * @return
+	 */
+	public boolean isHasCeAndJgspRight(String user_id){
+		return userDao.isHasCeAndJgspRight(user_id);
+	}
+	
 	
 	/**
 	 * dwr test
