@@ -506,6 +506,7 @@ public class UserDAO extends JdbcBaseDAO {
 			}
 			con += ")";
 			
+			sql += con;
 			return this.getResultList(sql);
 		}else{
 			return null;
