@@ -45,7 +45,7 @@ int menu_index = 0;
 	<TBODY>
 	<!-- 头开始 -->
 	<TR vAlign=top height="60">
-		<TD colspan=3><IFRAME id=ifrIndex2 style="WIDTH: 100%; height:100%; POSITION: relative" border=0  src="thk_main_top.html" frameBorder=0 scrolling=no></IFRAME></TD>
+		<TD colspan=3><IFRAME id=FrameTop style="WIDTH: 100%; height:100%; POSITION: relative" border=0  src="thk_main_top.html" frameBorder=0 scrolling=no></IFRAME></TD>
 	<TR>
 	<!-- 头结束 -->	
 	
@@ -61,8 +61,8 @@ int menu_index = 0;
 					<td nowrap>
 						<div class="tabHeader_div">
 						<ul id="tabHeader">	
-							<li id="first">首页</li>
-							<li id="second">待办工作</li>
+							<a onclick="javascript:document.getElementById('ifrIndex1').src='listMain.html';"><li id="first">首页</li></a>
+							<a onclick="javascript:document.getElementById('ifrIndex2').src='undoWork.html';"><li id="second">待办工作</li></a>
 						</ul>
 						</div>
 					</td>
