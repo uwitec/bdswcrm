@@ -48,7 +48,7 @@ public class XsdDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public List getDspXsdList(String con){
-		String sql = "select a.id,b.real_name,c.dept_name from xsd a left join sys_user b on b.user_id=a.fzr left join dept c on c.dept_id=b.dept where a.sp_state='2'";
+		String sql = "select a.id,b.real_name,c.dept_name,a.creatdate from xsd a left join sys_user b on b.user_id=a.fzr left join dept c on c.dept_id=b.dept where a.sp_state='2'";
 		
 		if(!con.equals("")){
 			sql += " and (" + con + ")";
