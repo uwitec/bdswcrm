@@ -61,8 +61,8 @@ int menu_index = 0;
 					<td nowrap>
 						<div class="tabHeader_div">
 						<ul id="tabHeader">	
-							<a onclick="javascript:document.getElementById('ifrIndex1').src='listMain.html';"><li id="first">首页</li></a>
-							<a onclick="javascript:document.getElementById('ifrIndex2').src='undoWork.html';"><li id="second">待办工作</li></a>
+							<a onclick="javascript:document.getElementById('ifrIndex1').src='listMain.html';"><li id="first" title="点击刷新首页">首页</li></a>
+							<a onclick="javascript:document.getElementById('ifrIndex2').src='undoWork.html';"><li id="second" title="点击刷新待办工作">待办工作</li></a>
 						</ul>
 						</div>
 					</td>
@@ -272,7 +272,6 @@ int menu_index = 0;
 														<!-- 菜单项头结束 -->
 														
 													<%
-													
 														for(int l=0;l<funcList.size();l++){
 															Map funcMap = (Map)funcList.get(l);
 															String funcName = StringUtils.nullToStr(funcMap.get("func_name"));
