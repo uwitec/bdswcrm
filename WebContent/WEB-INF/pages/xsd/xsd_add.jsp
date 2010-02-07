@@ -25,30 +25,6 @@ if(xsdProducts != null && xsdProducts.size()>0){
 	allCount = xsdProducts.size() -1;
 }
 
-List msg = (List)session.getAttribute("messages");
-session.removeAttribute("messages");
-
-String sp_state = StringUtils.nullToStr(xsd.getSp_state());
-
-String sptg_flag = "";
-if(sp_state.equals("3")){
-	sptg_flag = "readonly";
-}
-
-String sp_type = StringUtils.nullToStr(xsd.getSp_type());
-
-String spMsg = "";
-if(sp_state.equals("1")){
-	if(sp_type.equals("1")){
-		spMsg = "客户存在超期应付款，需相关人员审批方可出库，提交审批请点击“提交审批”按钮。";
-	}else if(sp_type.equals("2")){
-		spMsg = "超出客户限额并且订单商品价格低于最低限价，需相关人员审批方可出库，提交审批请点击“提交审批”按钮。";	
-	}else if(sp_type.equals("3")){
-		spMsg = "超出客户限额，需相关人员审批方可出库，提交审批请点击“提交审批”按钮。";	
-	}else if(sp_type.equals("4")){
-		spMsg = "订单商品价格低于最低限价，需相关人员审批方可出库，提交审批请点击“提交审批”按钮，或修改价格后再次提交。";
-	}
-}
 %>
 <html>
 <head>
@@ -168,32 +144,13 @@ if(sp_state.equals("1")){
 </head>
 <body onload="initFzrTip();initClientTip();chgKpTyle('<%=StringUtils.nullToStr(xsd.getFplx()) %>');">
 <form name="xsdForm" action="updateXsd.html" method="post">
-<input type="hidden" name="xsd.sp_type" id="sp_type" value="<%=StringUtils.nullToStr(xsd.getSp_type()) %>">
-<input type="hidden" name="xsd.sp_state" id="sp_state" value="<%=StringUtils.nullToStr(xsd.getSp_state()) %>">
+<input type="hidden" name="xsd.state" id="state" value="">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
 		<td colspan="4">销售订单信息</td>
 	</tr>
 	</thead>
-<%
-if(msg != null && msg.size() > 0){
-	for(int i=0;i<msg.size();i++){
-%>
-	<tr>
-		<td colspan="4" class="a2"><font color="red"><%=StringUtils.nullToStr(msg.get(i)) %></font></td>
-	</tr>	
-<%
-	}
-}
-if(!spMsg.equals("")){
-%>	
-	<tr>
-		<td colspan="4" class="a2"><font color="red"><%=spMsg %></font></td>
-	</tr>
-<%				
-}
-%>		
 	<tr>
 		<td class="a1" width="15%">销售订单编号</td>
 		<td class="a2" width="35%">
@@ -213,15 +170,8 @@ if(!spMsg.equals("")){
 		<td class="a1" width="15%">客户名称</td>
 		<td class="a2">
 		<input type="text" name="xsd.client_id" onblur="setClientRegInfo();" id="client_name" value="<%=StaticParamDo.getClientNameById(StringUtils.nullToStr(xsd.getClient_name())) %>" size="30" maxlength="50" >
-		<input type="hidden" name="xsd.client_name" id="client_id" value="<%=StringUtils.nullToStr(xsd.getClient_name()) %>"><!--
-		<%
-		if(!sp_state.equals("3")){
-		%>
-		<img src="images/select.gif" align="absmiddle" title="选择客户" border="0" onclick="openClientWin();" style="cursor:hand">
-		<%
-		}
-		%>
-		--><div id="clientsTip" style="height:12px;position:absolute;width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+		<input type="hidden" name="xsd.client_name" id="client_id" value="<%=StringUtils.nullToStr(xsd.getClient_name()) %>">
+		<div id="clientsTip" style="height:12px;position:absolute;width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		<font color="red">*</font>
 		</td>
 		<td class="a1">地址</td>
@@ -255,7 +205,7 @@ if(!spMsg.equals("")){
 				<option value="账期" <%if(StringUtils.nullToStr(xsd.getSklx()).equals("账期")) out.print("selected"); %>>账期</option>
 			</select>&nbsp;&nbsp;
 			<b id="lb_zq" style="<%if(StringUtils.nullToStr(xsd.getSklx()).equals("账期")) out.print(""); else out.print("display:none"); %>">设置账期(天)：</b>
-			<input type="text" name="xsd.zq" id="zq" value="<%=xsd.getZq() %>" size="5" style="<%if(StringUtils.nullToStr(xsd.getSklx()).equals("账期")) out.print(""); else out.print("display:none"); %>" <%=sptg_flag %>>
+			<input type="text" name="xsd.zq" id="zq" value="<%=xsd.getZq() %>" size="5" style="<%if(StringUtils.nullToStr(xsd.getSklx()).equals("账期")) out.print(""); else out.print("display:none"); %>">
 			<b id="lb_xjd" style="display:none">现金点：</b>
 			<input type="text" name="xsd.xjd" id="xjd" value="<%=xsd.getXjd() %>" size="5" style="display:none">
 			<font color="red">*</font>
@@ -284,8 +234,7 @@ if(!spMsg.equals("")){
 		<td class="a1"  width="15%">经手人</td>
 		<td class="a2">
 			<input  id="brand" type="text" length="20" onblur="setValue()" value="<%=StaticParamDo.getRealNameById(xsd.getFzr()) %>"/> 
-			<!--<img src="images/select.gif" align="absmiddle" title="选择经手人" border="0" onclick="openywyWin();" style="cursor:hand">
-			--><div id="brandTip"  style="height:12px;position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+			<div id="brandTip"  style="height:12px;position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 			<input type="hidden" name="xsd.fzr" id="fzr" value="<%=xsd.getFzr()%>"/><font color="red">*</font>		
 		</td>
 		<%
@@ -300,39 +249,6 @@ if(!spMsg.equals("")){
 			<input type="radio" name="xsd.yfzf_type" value="收方付" <%if(yfzfType.equals("收方付")) out.print("checked"); %>>	收方付
 		</td>							
 	</tr>
-	<tr>
-		<td class="a1" width="15%">订单状态</td>
-		<td class="a2" colspan="3">
-			<select name="xsd.state" id="state" onchange="chgState(this.value);">
-				<option value="已保存" <%if(StringUtils.nullToStr(xsd.getState()).equals("已保存")) out.print("selected"); %>>保存</option>
-				<option value="已提交" <%if(StringUtils.nullToStr(xsd.getState()).equals("已提交")) out.print("selected"); %>>提交</option>
-				<!-- <option value="已出库" <%if(StringUtils.nullToStr(xsd.getState()).equals("已出库")) out.print("selected"); %>>出库</option> -->
-			</select>
-			
-			<%
-			String store_id = xsd.getStore_id();
-			String diplayFlag = "display:none";
-			if(StringUtils.nullToStr(xsd.getState()).equals("已出库")){
-				diplayFlag = "";
-			}
-			%>
-			<b id="lb_store_id" style="<%=diplayFlag %>">出货仓库：</b>
-			<select name="xsd.store_id" id="store_id" style="<%=diplayFlag %>">
-				<option value=""></option>
-			<%
-			if(storeList != null && storeList.size()>0){
-				for(int i=0;i<storeList.size();i++){
-					StoreHouse storeHouse = (StoreHouse)storeList.get(i);
-			%>
-				<option value="<%=storeHouse.getId() %>" <%if(storeHouse.getId().equals(store_id)) out.print("selected"); %>><%=storeHouse.getName() %></option>
-			<%
-				}
-			}
-			%>
-			</select>
-		</td>		
-	</tr>
-	
 </table>
 <br>
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
@@ -366,12 +282,12 @@ if(xsdProducts!=null && xsdProducts.size()>0){
 		</td>
 		<td class="a2"><input type="text" id="product_xh_<%=i %>" name="xsdProducts[<%=i %>].product_xh" style="width:100%" size="10" value="<%=StringUtils.nullToStr(xsdProduct.getProduct_xh()) %>" readonly></td>
 		<td class="a2">
-			<input type="text" id="price_<%=i %>" name="xsdProducts[<%=i %>].price" value="<%=JMath.round(xsdProduct.getPrice()) %>" size="10" onblur="hj();" <%=sptg_flag %>>
+			<input type="text" id="price_<%=i %>" name="xsdProducts[<%=i %>].price" value="<%=JMath.round(xsdProduct.getPrice()) %>" size="10" onblur="hj();">
 			<input type="hidden" id="cbj_<%=i %>" name="xsdProducts[<%=i %>].cbj" value="<%=JMath.round(xsdProduct.getCbj()) %>">
 			<input type="hidden" id="kh_cbj_<%=i %>" name="xsdProducts[<%=i %>].kh_cbj" value="<%=JMath.round(xsdProduct.getKh_cbj()) %>">
 			<input type="hidden" id="jgtz_<%=i %>" name="xsdProducts[<%=i %>].jgtz" value="<%=JMath.round(xsdProduct.getJgtz()) %>" size="10" onblur="hj();">
 		</td>
-		<td class="a2"><input type="text" id="nums_<%=i %>" name="xsdProducts[<%=i %>].nums" value="<%=xsdProduct.getNums() %>" <%=sptg_flag %> size="5" onblur="hj();"></td>
+		<td class="a2"><input type="text" id="nums_<%=i %>" name="xsdProducts[<%=i %>].nums" value="<%=xsdProduct.getNums() %>" size="5" onblur="hj();"></td>
 		<td class="a2">
 			<input type="text" id="xj_<%=i %>" name="xsdProducts[<%=i %>].xj" value="<%=JMath.round(xsdProduct.getXj()) %>" size="10" readonly>
 			<input type="hidden" id="qz_serial_num_<%=i %>" name="xsdProducts[<%=i %>].qz_serial_num" value="<%=StringUtils.nullToStr(xsdProduct.getQz_serial_num()) %>" size="15" readonly>	
@@ -407,18 +323,12 @@ if(xsdProducts!=null && xsdProducts.size()>0){
 %>	
 </table>
 <table width="100%"  align="center" class="chart_info" cellpadding="0" cellspacing="0">
-	<%
-	if(!sp_state.equals("3")){
-	%>
 	<tr height="35">
 		<td class="a2" colspan="4" width="100%">&nbsp;
 			<input type="button" name="button1" value="添加产品" class="css_button3" onclick="openWin();">
 			<input type="button" name="button8" value="清除产品" class="css_button3" onclick="delDesc();">
 		</td>
 	</tr>
-	<%
-	}
-	%>
 </table>
 <table width="100%"  align="center" class="chart_info" cellpadding="0" cellspacing="0">	
 	<%
@@ -530,19 +440,15 @@ if(xsdProducts!=null && xsdProducts.size()>0){
 	</tr>		
 	<tr height="35">
 		<td class="a1" colspan="4">
-			<input type="button" name="btnSub" value="确 定" class="css_button2" onclick="saveInfo();">&nbsp;&nbsp;
-			<%
-			if(!spMsg.equals("")){
-			%>
-			<input type="button" name="btnTjsp" value="提交审批" class="css_button3" onclick="submitInfo();">&nbsp;&nbsp;
-			<%
-			}
-			%>
-			<input type="reset" name="btnCz" value="重 置" class="css_button2">&nbsp;&nbsp;
+			<input type="button" name="btnSave" value="保 存" class="css_button2" onclick="saveInfo('1');">&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="button" name="btnSub" value="提 交" class="css_button2" onclick="saveInfo('2');">&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="reset" name="btnClose" value="关 闭" class="css_button2" onclick="window.opener.document.myform.submit();window.close();;">
 		</td>
 	</tr>
 </table>
+<BR>
+<font color="red">注：“保存”指销售订单暂存，可修改；“提交”后销售订单不可修改，如需审批则直接提交审批。</font>
+<BR><BR>
 </form>
 </body>
 </html>

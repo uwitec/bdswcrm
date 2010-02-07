@@ -34,11 +34,21 @@ session.removeAttribute("messages");
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <LINK href="css/ddcolortabs.css" type=text/css rel=stylesheet>
 <script type="text/javascript">
-	//提交审批
-	function doSp(vl){
-		document.xsdForm.sp_state.value = vl;
-		document.xsdForm.submit();
+	//审批通过
+	function doSpTg(){
+		if(window.confirm("确认审批通过吗？")){
+			document.xsdForm.sp_state.value = "3";
+			document.xsdForm.submit();
+		}
 	}
+
+	//审批不通过
+	function doSpBtg(){
+		if(window.confirm("确认审批不通过吗？")){
+			document.xsdForm.sp_state.value = "4";
+			document.xsdForm.submit();
+		}
+	}	
 	
 	function chgKpTyle(vD){
 		var obj_mc1 = document.getElementById("mc1");
@@ -266,8 +276,8 @@ if(xsdProducts!=null && xsdProducts.size()>0){
 	</tr>		
 	<tr height="35">
 		<td class="a1" colspan="4">
-			<input type="reset" name="button2" value="审批通过" class="css_button3" onclick="doSp('3');">&nbsp;&nbsp;
-			<input type="reset" name="button2" value="审批不通过" class="css_button3" onclick="doSp('4');">&nbsp;&nbsp;		
+			<input type="reset" name="button2" value="审批通过" class="css_button3" onclick="doSpTg();">&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="reset" name="button2" value="审批不通过" class="css_button3" onclick="doSpBtg();">&nbsp;&nbsp;&nbsp;&nbsp;	
 			<input type="reset" name="button2" value="关 闭" class="css_button2" onclick="window.close();;">
 		</td>
 	</tr>

@@ -10,8 +10,7 @@ OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
 Lsd lsd = (Lsd)VS.findValue("lsd");
 List lsdProducts = (List)VS.findValue("lsdProducts");
 
-List msg = (List)session.getAttribute("messages");
-session.removeAttribute("messages");
+String msg = StringUtils.nullToStr(VS.findValue("msg"));
 
 %>
 <html>
@@ -84,11 +83,21 @@ session.removeAttribute("messages");
 		}
 	}	
 	
-	//提交审批
-	function doSp(vl){
-		document.lsdForm.sp_state.value = vl;
-		document.lsdForm.submit();
+	//审批通过
+	function doSpTg(){
+		if(window.confirm("确认审批通过吗?")){
+			document.lsdForm.sp_state.value = '3';
+			document.lsdForm.submit();
+		}
 	}
+
+	//审批不通过
+	function doSpBtg(){
+		if(window.confirm("确认审批不通过吗?")){
+			document.lsdForm.sp_state.value = '4';
+			document.lsdForm.submit();
+		}
+	}	
 </script>
 </head>
 <body onload="chgKpTyle('<%=StringUtils.nullToStr(lsd.getFplx()) %>');">
@@ -102,17 +111,7 @@ session.removeAttribute("messages");
 		<td colspan="4">零售单信息</td>
 	</tr>
 	</thead>
-	<%
-	if(msg != null && msg.size() > 0){
-		for(int i=0;i<msg.size();i++){
-	%>
-	<tr>
-		<td colspan="4" class="a2"><font color="red"><%=StringUtils.nullToStr(msg.get(i)) %></font></td>
-	</tr>
-	<%
-		}
-	}
-	%>	
+	<%if(!msg.equals("")){%><tr><td colspan="4" class="a2"><font color="red"><%=msg %></font></td></tr><%}%>	
 	<tr>
 		<td class="a1" width="15%">编  号</td>
 		<td class="a2" width="35%"><%=StringUtils.nullToStr(lsd.getId()) %></td>	
@@ -244,8 +243,8 @@ if(lsdProducts != null && lsdProducts.size()>0){
 	</tr>			
 	<tr height="35">
 		<td class="a1" colspan="4">
-			<input type="reset" name="button2" value="审批通过" class="css_button3" onclick="doSp('3');">&nbsp;&nbsp;
-			<input type="reset" name="button2" value="审批不通过" class="css_button3" onclick="doSp('4');">&nbsp;&nbsp;
+			<input type="reset" name="button2" value="审批通过" class="css_button3" onclick="doSpTg();">&nbsp;&nbsp;
+			<input type="reset" name="button2" value="审批不通过" class="css_button3" onclick="doSpBtg();">&nbsp;&nbsp;
 			<input type="reset" name="button2" value="关闭" class="css_button2" onclick="window.close();">&nbsp;&nbsp;
 		</td>
 	</tr>

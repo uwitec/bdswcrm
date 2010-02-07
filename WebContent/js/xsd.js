@@ -1,4 +1,10 @@
-function saveInfo(){
+function saveInfo(vl){
+	
+	if(vl == '1'){
+		document.getElementById("state").value = "已保存";
+	}else{
+		document.getElementById("state").value = "已提交";
+	}	
     
 	if(document.getElementById("id").value == ""){
 		alert("销售单编号不能为空，请填写！");
@@ -39,69 +45,23 @@ function saveInfo(){
 				
 	hj();
 
-		if(document.getElementById("skfs").value == "刷卡"){
+	if(document.getElementById("skfs").value == "刷卡"){
 		if(document.getElementById("pos_id").value == ""){
 			alert("请选择刷卡POS机！");
 			return;
 		}
 	}	
-	
-	document.xsdForm.btnSub.disabled = true;					
-	document.xsdForm.submit();
-}
-
-
-function submitInfo(){
-	if(document.getElementById("id").value == ""){
-		alert("销售单编号不能为空，请填写！");
-		return;
-	}
-	if(document.getElementById("client_name").value == ""){
-		alert("客户名称不能为空，请选择！");
-		return;
-	}
-	if(document.getElementById("fzr").value == ""){
-		alert("经手人不能为空，请选择！");
-		return;
-	}		
-	if(document.getElementById("sklx").value == ""){
-		alert("客户付款类型不能为空，请选择！");
-		return;
-	}
-	
-	if(document.getElementById("sklx").value == "现结"){
-		if(!InputValid(document.getElementById("xjd"),1,"float",1,0,99,"现金点")){
-			document.getElementById("xjd").focus();
-			return;
-		}
-		if(parseFloat(document.getElementById("skje").value) != parseFloat(document.getElementById("xsdje").value)){
-			alert("本次收款金额与销售单金额不同，请检查！");
-			return;
-		}
-		if(document.getElementById("skzh").value == ""){
-			alert("收款账户不能为空，请选择！");
-			return;
-		}					
-	}else if(document.getElementById("sklx").value == "账期"){
-		if(!InputValid(document.getElementById("zq"),1,"int",1,1,99,"账期")){
-			document.getElementById("zq").focus();
-			return;
-		}		
-	}
 		
-	hj();
+	if(document.getElementById("state").value == "已提交"){
+		if(window.confirm("确认要提交销售订单吗，提交后将无法修改！")){
+			document.xsdForm.submit();		
+		}			
+	}else{
+		document.xsdForm.submit();	
+	}		
 	
-		if(document.getElementById("skfs").value == "刷卡"){
-		if(document.getElementById("pos_id").value == ""){
-			alert("请选择刷卡POS机！");
-			return;
-		}
-	}
-			
-	document.xsdForm.action = "submitXsd.html";
-	document.xsdForm.btnTjsp.disabled = true;
-	
-	document.xsdForm.submit();	
+	document.xsdForm.btnSub.disabled = true;
+	document.xsdForm.btnSave.disabled = true;
 }
 
 function addTr(){

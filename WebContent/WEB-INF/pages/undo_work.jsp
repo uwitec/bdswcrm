@@ -43,12 +43,8 @@ List dspFysqList = (List)VS.findValue("dspFysqList");
 	margin:5px; 
 	border:1px solid #B8B8B8;
 	text-align:left;
-}
-* html .inner {display:inline}/* for ie*/
-html>body #outer {display:table}/*for mozilla */
-html>body .inner {display:table;float:left}/*for mozilla */
-@media all and (min-width: 0px){/* opera 7 styles */
-html>body .inner {display:inline-block;float:none;}
+	display:inline ;
+	float:left;
 }
 </style>
 <script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>

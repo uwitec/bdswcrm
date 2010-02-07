@@ -23,11 +23,7 @@ if(lsdProducts != null && lsdProducts.size()>0){
 //0：未完成；1：已完成
 String iscs_flag = StringUtils.nullToStr(VS.findValue("iscs_flag"));
 
-List msg = (List)session.getAttribute("messages");
-session.removeAttribute("messages");
-
-
-String sp_state = StringUtils.nullToStr(lsd.getSp_state());
+String msg = StringUtils.nullToStr(VS.findValue("msg"));
 %>
 <html>
 <head>
@@ -50,7 +46,13 @@ String sp_state = StringUtils.nullToStr(lsd.getSp_state());
 	var allCount = <%=counts %>;
 	var iscs_flag = '<%=iscs_flag %>';
 		
-	function saveInfo(){ 
+	function saveInfo(vl){ 
+
+		if(vl == '1'){
+			document.getElementById("state").value = "已保存";
+		}else{
+			document.getElementById("state").value = "已提交";
+		}
 	 
 		if(document.getElementById("fzr").value == ""){
 			alert("经手人不能为空，请选择！");
@@ -113,86 +115,15 @@ String sp_state = StringUtils.nullToStr(lsd.getSp_state());
 		hj();
 		if(document.getElementById("state").value == "已提交"){
 			if(window.confirm("确认要提交零售单吗，提交后将无法修改！")){
-				document.lsdForm.btnSub.disabled = true;
 				document.lsdForm.submit();		
 			}			
 		}else{
-			document.lsdForm.btnSub.disabled = true;
 			document.lsdForm.submit();	
 		}
+		document.lsdForm.btnSave.disabled = true;
+		document.lsdForm.btnSub.disabled = true;
 	}
-	
-	function submitInfo(){
-		if(document.getElementById("fzr").value == ""){ 
-			alert("经手人不能为空，请选择！");
-			return;
-		}	
-		if(document.getElementById("store_id").value == ""){
-			alert("出货库房不能为空，请选择！");
-			return;
-		}
-		if(document.getElementById("state").value == "已提交"){
-			alert("零售单状态必须为已保存！");
-			return;
-		}					
-		if(document.getElementById("client_name").value == ""){
-			alert("客户姓名不能为空，请填写！");
-			return;
-		}
-		if(document.getElementById("has_yushk").value=="是"){
-			if(document.getElementById("yushk_id").value == ""){
-				alert("预收款编号不能为空，请选择！");
-				return;
-			}
-		}
-		
-		if(document.getElementById("fkfs").value == "刷卡"){
-			if(document.getElementById("pos_id").value == ""){
-				alert("请选择刷卡POS机！");
-				return;
-			}
-		}
-		
-		if(!InputValid(document.getElementById("skzh"),1,"string",0,1,100,"收款账户")){return;}	
-			
-		//判断是否存在强制输入序列号的产品没有输入序列号
-		for(var i=0;i<allCount;i++){
-			var qzflag = document.getElementById("qz_flag_" + i);            //标志是否强制输入
-			var qzserialnum = document.getElementById("qz_serial_num_" + i); //序列号
-			var pn = document.getElementById("product_name_" + i);           //产品名称
-			
-			if(qzflag != null){
-				if(qzflag.value == "是"){
-					if(qzserialnum.value == ""){
-						//如果没有输入序列号提示用户输入序列号
-						alert("产品" + pn.value + "强制序列号，请先输入序列号！");
-						qzserialnum.focus();
-						return;
-					}else{
-						//校验输入数量与产品数是否相同
-						var serial = document.getElementById("qz_serial_num_" + i).value;
-						var arrySerial = serial.split(",");
-						
-						var nms = document.getElementById("nums_" + i).value;
-						
-						if(parseInt(nms) != arrySerial.length){
-							alert("产品" + pn.value + "输入序列号数量与产品数量不符，请检查！");
-							qzserialnum.focus();
-							return;
-						}
-					}
-				}
-			}
-		}
 
-		hj();
-
-		document.lsdForm.action = "submitLsd.html";
-		document.lsdForm.btnSp.disabled = true;
-		document.lsdForm.submit();	
-
-	}	
-      	
     function addTr(){
         var otr = document.getElementById("lsdtable").insertRow(-1);
 
@@ -567,33 +498,14 @@ String sp_state = StringUtils.nullToStr(lsd.getSp_state());
 </head>
 <body onload="initFzrTip();chgKpTyle('<%=StringUtils.nullToStr(lsd.getFplx()) %>');">
 <form name="lsdForm" action="saveLsd.html" method="post">
+<input type="hidden" name="lsd.state" id="state" value="">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
 		<td colspan="4">零售单信息</td>
 	</tr>
 	</thead>
-	<%
-	if(msg != null && msg.size() > 0){
-		for(int i=0;i<msg.size();i++){
-	%>
-	<tr>
-		<td colspan="4" class="a2"><font color="red"><%=StringUtils.nullToStr(msg.get(i)) %></font></td>
-	</tr>
-	<%
-		}
-	}
-	%>
-	
-	<%
-	if(sp_state.equals("1")){
-	%>
-	<tr>
-		<td colspan="4" class="a2"><font color="red">零售单商品超出最低限价，需相关人员审批方可出库，提交审批请点击“提交审批”按钮，或修改价格后再次提交。</font></td>
-	</tr>	
-	<%	
-	}
-	%>		
+	<%if(!msg.equals("")){%><tr><td colspan="4" class="a2"><font color="red"><%=msg %></font></td></tr><%}%>	
 	<tr>
 		<td class="a1" width="15%">编  号</td>
 		<td class="a2" width="35%"><input type="text" name="lsd.id" id="id" value="<%=StringUtils.nullToStr(lsd.getId()) %>" readonly></td>	
@@ -632,15 +544,6 @@ String sp_state = StringUtils.nullToStr(lsd.getSp_state());
 			<div id="brandTip"  style="height:12px;position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 			<input type="hidden" name="lsd.xsry" id="fzr" value="<%=StringUtils.nullToStr(lsd.getXsry()) %>"/><font color="red">*</font>	          
 		</td>					
-	</tr>
-	<tr>
-		<td class="a1" width="15%">零售单状态</td>
-		<td class="a2" width="35%" colspan="3">
-			<select name="lsd.state" id="state">
-				<option value="已保存" <%if(StringUtils.nullToStr(lsd.getState()).equals("已保存")) out.print("selected"); %>>已保存</option>
-				<option value="已提交" <%if(StringUtils.nullToStr(lsd.getState()).equals("已提交")) out.print("selected"); %>>已成交</option>
-			</select><font color="red">*</font>		
-		</td>		
 	</tr>
 </table>
 <br>
@@ -888,19 +791,15 @@ if(lsdProducts != null && lsdProducts.size()>0){
 	</tr>			
 	<tr height="35">
 		<td class="a1" colspan="4">
-			<input type="button" name="btnSub" value="确 定" class="css_button2" onclick="saveInfo();">&nbsp;&nbsp;&nbsp;&nbsp;	
-			<%
-			if(sp_state.equals("1")){
-			%>	
-			<input type="button" name="btnSp" value="提交审批" class="css_button3" onclick="submitInfo();">&nbsp;&nbsp;&nbsp;&nbsp;
-			<%
-			}
-			%>
-			<input type="reset" name="button2" value="重 置" class="css_button2">&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="button" name="btnSave" value="保存" class="css_button2" onclick="saveInfo('1');">&nbsp;&nbsp;&nbsp;&nbsp;	
+			<input type="button" name="btnSub" value="提交" class="css_button2" onclick="saveInfo('2');">&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="reset" name="button2" value="关 闭" class="css_button2" onclick="window.opener.document.myform.submit();window.close();">
 		</td>
 	</tr>
 </table>
+<BR>
+<font color="red">注：“保存”指零售单暂存，可修改；“提交”后零售单不可修改，如需审批则直接提交审批。</font>
+<BR><BR>
 </form>
 </BODY>
 </HTML>
