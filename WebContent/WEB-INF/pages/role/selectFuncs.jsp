@@ -44,26 +44,216 @@ session.removeAttribute("MSG");
 		<td>功能描述</td>
 	</tr>
 	</thead>
+	 <tr>
+	      <td class="a1" colspan="3" style="text-align:left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>销售管理</b></td>
+	 </tr>
 	<%
 	Iterator it = funcList.iterator();
 	
 	while(it.hasNext()){
 		Map map = (Map)it.next();
 		String flag = "";
+	  if(StringUtils.nullToStr(map.get("funcflag")).equals("1"))
+	  {
 		if(roleFuncs.contains(StringUtils.nullToStr(map.get("func_id")))){
 			flag = "checked";
-		}
-	%>
+		}		
+	  %>
+	 
 	<tr>
 		<td class="a1"><input type="checkbox" name="func_id" value="<%=StringUtils.nullToStr(map.get("func_id")) %>" <%=flag %>></td>
 		<td class="a1"><%=StringUtils.nullToStr(map.get("func_name")) %></td>
 		<td class="a1"><%=StringUtils.nullToStr(map.get("func_ms")) %></td>
-
-	</tr>
-	
+	</tr>	
 	<%
 	}
+	}
 	%>
+	 <tr>
+	      <td class="a1" colspan="3" style="text-align:left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>采购管理</b></td>
+	 </tr>
+	
+	<%
+	Iterator it1 = funcList.iterator();
+	
+	while(it1.hasNext()){
+		Map map = (Map)it1.next();
+		String flag = "";
+	  if(StringUtils.nullToStr(map.get("funcflag")).equals("2"))
+	  {
+		if(roleFuncs.contains(StringUtils.nullToStr(map.get("func_id")))){
+			flag = "checked";
+		}		
+	  %>
+	 
+	<tr>
+		<td class="a1"><input type="checkbox" name="func_id" value="<%=StringUtils.nullToStr(map.get("func_id")) %>" <%=flag %>></td>
+		<td class="a1"><%=StringUtils.nullToStr(map.get("func_name")) %></td>
+		<td class="a1"><%=StringUtils.nullToStr(map.get("func_ms")) %></td>
+	</tr>	
+	<%
+	}
+	}
+	%>
+	 <tr>
+	      <td class="a1" colspan="3" style="text-align:left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>库存管理</b></td>
+	 </tr>
+	
+	<%
+	Iterator it2 = funcList.iterator();
+	
+	while(it2.hasNext()){
+		Map map = (Map)it2.next();
+		String flag = "";
+	  if(StringUtils.nullToStr(map.get("funcflag")).equals("3"))
+	  {
+		if(roleFuncs.contains(StringUtils.nullToStr(map.get("func_id")))){
+			flag = "checked";
+		}		
+	  %>
+	 
+	<tr>
+		<td class="a1"><input type="checkbox" name="func_id" value="<%=StringUtils.nullToStr(map.get("func_id")) %>" <%=flag %>></td>
+		<td class="a1"><%=StringUtils.nullToStr(map.get("func_name")) %></td>
+		<td class="a1"><%=StringUtils.nullToStr(map.get("func_ms")) %></td>
+	</tr>	
+	<%
+	}
+	}
+	%>
+	 <tr>
+	      <td class="a1" colspan="3" style="text-align:left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>资金管理</b></td>
+	 </tr>
+	
+	<%
+	Iterator it3 = funcList.iterator();
+	
+	while(it3.hasNext()){
+		Map map = (Map)it3.next();
+		String flag = "";
+	  if(StringUtils.nullToStr(map.get("funcflag")).equals("4"))
+	  {
+		if(roleFuncs.contains(StringUtils.nullToStr(map.get("func_id")))){
+			flag = "checked";
+		}		
+	  %>
+	 
+	<tr>
+		<td class="a1"><input type="checkbox" name="func_id" value="<%=StringUtils.nullToStr(map.get("func_id")) %>" <%=flag %>></td>
+		<td class="a1"><%=StringUtils.nullToStr(map.get("func_name")) %></td>
+		<td class="a1"><%=StringUtils.nullToStr(map.get("func_ms")) %></td>
+	</tr>	
+	<%
+	}
+	}
+	%>
+	  <tr>
+	      <td class="a1" colspan="3" style="text-align:left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>售后管理</b></td>
+	 </tr>
+	 
+	 
+	 <%
+	Iterator it4 = funcList.iterator();
+	
+	while(it4.hasNext()){
+		Map map = (Map)it4.next();
+		String flag = "";
+	  if(StringUtils.nullToStr(map.get("funcflag")).equals("5"))
+	  {
+		if(roleFuncs.contains(StringUtils.nullToStr(map.get("func_id")))){
+			flag = "checked";
+		}		
+	  %>
+	 
+	<tr>
+		<td class="a1"><input type="checkbox" name="func_id" value="<%=StringUtils.nullToStr(map.get("func_id")) %>" <%=flag %>></td>
+		<td class="a1"><%=StringUtils.nullToStr(map.get("func_name")) %></td>
+		<td class="a1"><%=StringUtils.nullToStr(map.get("func_ms")) %></td>
+	</tr>	
+	<%
+	}
+	}
+	%>
+	 <tr>
+	      <td class="a1" colspan="3" style="text-align:left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>OA办公</b></td>
+	 </tr>
+	
+	<%
+	Iterator it5 = funcList.iterator();
+	
+	while(it5.hasNext()){
+		Map map = (Map)it5.next();
+		String flag = "";
+	  if(StringUtils.nullToStr(map.get("funcflag")).equals("6"))
+	  {
+		if(roleFuncs.contains(StringUtils.nullToStr(map.get("func_id")))){
+			flag = "checked";
+		}		
+	  %>
+	 
+	<tr>
+		<td class="a1"><input type="checkbox" name="func_id" value="<%=StringUtils.nullToStr(map.get("func_id")) %>" <%=flag %>></td>
+		<td class="a1"><%=StringUtils.nullToStr(map.get("func_name")) %></td>
+		<td class="a1"><%=StringUtils.nullToStr(map.get("func_ms")) %></td>
+	</tr>	
+	<%
+	}
+	}
+	%>
+	 <tr>
+	      <td class="a1" colspan="3" style="text-align:left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>基础资料</b></td>
+	 </tr>
+	 
+	 <%
+	Iterator it6 = funcList.iterator();
+	
+	while(it6.hasNext()){
+		Map map = (Map)it6.next();
+		String flag = "";
+	  if(StringUtils.nullToStr(map.get("funcflag")).equals("7"))
+	  {
+		if(roleFuncs.contains(StringUtils.nullToStr(map.get("func_id")))){
+			flag = "checked";
+		}		
+	  %>
+	 
+	<tr>
+		<td class="a1"><input type="checkbox" name="func_id" value="<%=StringUtils.nullToStr(map.get("func_id")) %>" <%=flag %>></td>
+		<td class="a1"><%=StringUtils.nullToStr(map.get("func_name")) %></td>
+		<td class="a1"><%=StringUtils.nullToStr(map.get("func_ms")) %></td>
+	</tr>	
+	<%
+	}
+	}
+	%>
+	 <tr>
+	      <td class="a1" colspan="3" style="text-align:left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>系统管理</b></td>
+	 </tr>
+	
+	<%
+	Iterator it7 = funcList.iterator();
+	
+	while(it7.hasNext()){
+		Map map = (Map)it7.next();
+		String flag = "";
+	  if(StringUtils.nullToStr(map.get("funcflag")).equals("8"))
+	  {
+		if(roleFuncs.contains(StringUtils.nullToStr(map.get("func_id")))){
+			flag = "checked";
+		}		
+	  %>
+	 
+	<tr>
+		<td class="a1"><input type="checkbox" name="func_id" value="<%=StringUtils.nullToStr(map.get("func_id")) %>" <%=flag %>></td>
+		<td class="a1"><%=StringUtils.nullToStr(map.get("func_name")) %></td>
+		<td class="a1"><%=StringUtils.nullToStr(map.get("func_ms")) %></td>
+	</tr>	
+	<%
+	}
+	}
+	%>
+	 
+	
 	<tr height="40">
 		<td class="a1" colspan="3">
 			<input type="submit" name="button1" value="提 交" class="css_button2">&nbsp;&nbsp;&nbsp;&nbsp;
