@@ -87,6 +87,11 @@ public class LsdService {
 	 */
 	public void saveLsd(Lsd lsd,List lsdProducts){
 		
+		//如果零售单已提交，不做处理
+		if(lsdDao.isLsdSubmit(lsd.getId())){
+			return;
+		}
+		
 		lsdDao.saveLsd(lsd, lsdProducts);		
 		
 		if(lsd.getState().equals("已提交")){
@@ -110,6 +115,11 @@ public class LsdService {
 				this.saveQtzc(lsd);
 			}
 		}
+		
+		//如果审批状态为待审批，发送系统消息
+		if(lsd.getSp_state() != null && lsd.getSp_state().equals("2")){
+			this.saveMsg(lsd.getId(), lsd.getCzr());
+		}
 	}
 	
 	
@@ -119,6 +129,12 @@ public class LsdService {
 	 * @param lsdProducts
 	 */
 	public void updateLsd(Lsd lsd,List lsdProducts){
+		
+		//如果零售单已提交，不做处理
+		if(lsdDao.isLsdSubmit(lsd.getId())){
+			return;
+		}
+		
 		lsdDao.updateLsd(lsd, lsdProducts);
 		
 		if(lsd.getState().equals("已提交")){
@@ -141,8 +157,12 @@ public class LsdService {
 			if(lsd.getFkfs().equals("刷卡") && !lsd.getPos_id().equals("")){
 				this.saveQtzc(lsd);
 			}
-			
 		}	
+		
+		//如果审批状态为待审批，发送系统消息
+		if(lsd.getSp_state() != null && lsd.getSp_state().equals("2")){
+			this.saveMsg(lsd.getId(), lsd.getCzr());
+		}
 		
 	} 
 	
@@ -447,7 +467,7 @@ public class LsdService {
 	 * @param lsd_id
 	 * @param sender_id
 	 */
-	public void saveMsg(String lsd_id,String sender_id){
+	private void saveMsg(String lsd_id,String sender_id){
 		List list = userDao.getJgspUsers();
 		
 		if(list != null && list.size() > 0){
@@ -496,6 +516,12 @@ public class LsdService {
 	 * @param spr
 	 */
 	public void saveSp(String lsd_id,String sp_state,String spr){
+		
+		//如果零售单已提交，不做处理
+		if(lsdDao.isLsdSubmit(lsd_id)){
+			return;
+		}
+		
 		lsdDao.saveSp(lsd_id, sp_state, spr);
 		
 		Lsd lsd = (Lsd)lsdDao.getLsd(lsd_id); //零售单
@@ -506,6 +532,9 @@ public class LsdService {
 			lsd.setState("已提交");
 			updateLsd(lsd,lsdProducts);
 		}
+		
+		//发送审批消息
+		this.saveMsg(lsd.getCzr(), spr, lsd_id, sp_state);
 	}
 	
 	

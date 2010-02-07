@@ -297,21 +297,14 @@ public class XsdAction extends BaseAction {
 		String user_id = info.getUser_id();
 		xsd.setCzr(user_id);
 		
-		boolean hasLowFxxj = xsdService.checkFxxj(xsdProducts); //是否存在低于分销限价的
-		boolean hasCeysk = xsdService.isCeysk(xsd.getClient_name(), xsd.getXsdje()-xsd.getSkje()); //是否存在超额应收款
-		boolean hasCqysk = xsdService.isCqysk(xsd.getClient_name());  //是否存在超期应收款
-		
-		ysfs = sjzdService.getSjzdXmxxByZdId("SJZD_YSFS");
-		fkfs = sjzdService.getSjzdXmxxByZdId("SJZD_FKFS");
-		storeList = storeService.getAllStoreList();
-		posTypeList = posTypeService.getPosTypeList();		
-		iscs_flag = sysInitSetService.getQyFlag();  //是否完成系统初始化
-		
-		boolean needSp = false; //单据是否需要审批
-		
-		//当销售订单审批状态不等于审批通过时，需要去判断是否符有待审批内容
-		if(!xsd.getSp_state().equals("3")){
-		
+		//提交时需要判断是否需要审批，如果需要审批，订单状态设置为 已保存，审批状态设置为待审批
+		if(xsd.getState().equals("已提交")){
+			boolean hasLowFxxj = xsdService.checkFxxj(xsdProducts); //是否存在低于分销限价的
+			boolean hasCeysk = xsdService.isCeysk(xsd.getClient_name(), xsd.getXsdje()-xsd.getSkje()); //是否存在超额应收款
+			boolean hasCqysk = xsdService.isCqysk(xsd.getClient_name());  //是否存在超期应收款
+			
+			boolean needSp = false; //单据是否需要审批
+
 			//1：超期款审批；2：超额并且低于限价审批；3：超额审批；4：低于限价审批；	
 			if(hasCqysk){
 				//超期应收审批
@@ -333,44 +326,20 @@ public class XsdAction extends BaseAction {
 				needSp = false;
 				xsd.setSp_type("0");
 			}
-		}
-		
-		if(needSp){ //如果销售订单需要审批
-			xsd.setSp_state("1");
-			xsd.setState("已保存");
 			
-			xsdService.updateXsd(xsd, xsdProducts);
-			return "input";
-		}else{
-			if(!xsd.getSp_state().equals("3")){
+			if(needSp){ 
+				//如果销售订单需要审批
+				xsd.setSp_state("2");  //待审批
+				xsd.setState("已保存");
+			}else{
+				//如果不需要审批
 				xsd.setSp_state("0");
 			}
 		}
-		
-		
-		//只有在完成初始工作后再做库存是否满足需求判断
-		if(iscs_flag.equals("1")){
-			//如果销售单状态为已出库则需要判断库存是否满足出库需求
-			if(xsd.getState().equals("已出库")){
-				String msg = xsdService.checkKc(xsd, xsdProducts);
-				if(!msg.equals("")){
-					this.saveMessage(msg);
-					xsd.setState("已保存");
-					xsdService.updateXsd(xsd, xsdProducts);
-					
-					return "input";
-				}
-			}
-		}
-		
-		//判断销售单是否已经提交
-		if(ckdService.isCkdExist(xsd.getId())){
-			this.saveMessage("销售单已经提交，并生成相应出库单，无法重复提交！");
-			return "input";
-		}
+		xsd.setTh_flag("0");  //修改退回标志，退回的订单修改后不再显示红色
 		
 		xsdService.updateXsd(xsd, xsdProducts);
-		return "success";
+		return SUCCESS;
 	}
 	
 	
@@ -388,7 +357,6 @@ public class XsdAction extends BaseAction {
 		xsd.setState("已保存");
 		
 		xsdService.updateXsd(xsd, xsdProducts);
-		xsdService.saveMsg(xsd.getId(), user_id, xsd.getSp_type());
 		
 		return "success";
 	}
@@ -401,27 +369,8 @@ public class XsdAction extends BaseAction {
 		LoginInfo info = (LoginInfo)getSession().getAttribute("LOGINUSER");
 		String user_id = info.getUser_id();
 		
-		//判断销售单是否已经审批通过
-		if(ckdService.isCkdExist(id)){
-			this.saveMessage("销售单已经提交，并生成相应出库单，无法重复提交！");
-			
-			xsd = (Xsd)xsdService.getXsd(id);
-			xsdProducts = xsdService.getXsdProducts(id);
-			storeList = storeService.getAllStoreList();
-			iscs_flag = sysInitSetService.getQyFlag();
-			ysfs = sjzdService.getSjzdXmxxByZdId("SJZD_YSFS");
-			posTypeList = posTypeService.getPosTypeList();
-			fkfs = sjzdService.getSjzdXmxxByZdId("SJZD_FKFS");	
-			
-			return "input";
-		}
-		
 		//保存审批结果
 		xsdService.saveSp(id, sp_state, user_id);
-		
-		//发送系统消息
-		Xsd curXsd = (Xsd)xsdService.getXsd(id);
-		xsdService.saveMsg(curXsd.getCzr(), user_id, id,sp_state);
 		
 		return "success";
 	}

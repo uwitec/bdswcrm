@@ -199,26 +199,6 @@ public class LsdAction extends BaseAction {
 		String user_id = info.getUser_id();
 		lsd.setCzr(user_id);
 		
-		//判断是否存在超低价商品，如存在则需要审批
-		if(lsd.getState().equals("已提交")){
-			if(lsdService.isExistLowLsxj(lsd,lsdProducts)){
-				
-				//如果存在低于零售限价商品
-				lsd.setState("已保存");
-				lsd.setSp_state("1");  //需要审批
-				lsdService.saveLsd(lsd, lsdProducts);
-				
-				//页面初始数据
-				userList = userService.getAllEmployeeList();
-				storeList = storeService.getAllStoreList();
-				iscs_flag = sysInitSetService.getQyFlag();  //是否完成初始标志
-				ysfs = sjzdService.getSjzdXmxxByZdId("SJZD_FKFS");
-				posTypeList = posTypeService.getPosTypeList();
-				
-				return "input";
-			}
-		}
-		
 		//是否完成初始标志
 		iscs_flag = sysInitSetService.getQyFlag();
 		
@@ -230,17 +210,33 @@ public class LsdAction extends BaseAction {
 			if(lsd.getState().equals("已提交")){
 				String msg = lsdService.checkKc(lsd, lsdProducts);
 				if(!msg.equals("")){
-					this.saveMessage(msg);
+					this.setMsg(msg);
 					lsd.setState("已保存");
 					lsdService.saveLsd(lsd, lsdProducts);
-					return "input";
+					
+					//页面初始数据
+					storeList = storeService.getAllStoreList();
+					ysfs = sjzdService.getSjzdXmxxByZdId("SJZD_FKFS");
+					posTypeList = posTypeService.getPosTypeList();
+					userList = userService.getAllEmployeeList();
+					
+					return INPUT;
 				}
 			}
 			
 		}
 		
+		//判断是否存在超低价商品，如存在则审批状态修改为待审批
+		if(lsd.getState().equals("已提交")){
+			if(lsdService.isExistLowLsxj(lsd,lsdProducts)){
+				//如果存在低于零售限价商品
+				lsd.setState("已保存");
+				lsd.setSp_state("2");  //待审批
+			}
+		}
+		
 		lsdService.saveLsd(lsd, lsdProducts);
-		return "success";
+		return SUCCESS;
 	}
 	
 	
@@ -271,37 +267,6 @@ public class LsdAction extends BaseAction {
 		
 		iscs_flag = sysInitSetService.getQyFlag();
 		
-		id = lsd.getId();
-		userList = userService.getAllEmployeeList();
-		storeList = storeService.getAllStoreList();
-		ysfs = sjzdService.getSjzdXmxxByZdId("SJZD_FKFS");
-		
-		
-		if(lsd.getState().equals("已提交")){
-			
-			if(!lsd.getSp_state().equals("3")){
-				//如果零售单不是审批通过的，则需要判断是否存在超低价商品，如存在则需要审批		
-				if(lsdService.isExistLowLsxj(lsd,lsdProducts)){
-					
-					//如果存在低于零售限价商品
-					lsd.setState("已保存");
-					lsd.setSp_state("1");  //需要审批
-					lsdService.updateLsd(lsd, lsdProducts);
-					
-					//页面初始数据
-					userList = userService.getAllEmployeeList();
-					storeList = storeService.getAllStoreList();
-					iscs_flag = sysInitSetService.getQyFlag();  //是否完成初始标志
-					ysfs = sjzdService.getSjzdXmxxByZdId("SJZD_FKFS");
-					posTypeList = posTypeService.getPosTypeList();
-					
-					return "input";
-				}else{
-					lsd.setSp_state("0");
-				}
-			}
-		}
-		
 		//只有在完成初始工作后再做库存是否满足需求判断
 		if(iscs_flag.equals("1")){
 			
@@ -310,27 +275,29 @@ public class LsdAction extends BaseAction {
 			if(lsd.getState().equals("已提交")){
 				String msg = lsdService.checkKc(lsd, lsdProducts);
 				if(!msg.equals("")){
-					this.saveMessage(msg);
-					
+					this.setMsg(msg);
 					lsd.setState("已保存");
 					lsdService.updateLsd(lsd, lsdProducts);
-					return "input";
+					
+					userList = userService.getAllEmployeeList();
+					storeList = storeService.getAllStoreList();
+					iscs_flag = sysInitSetService.getQyFlag();  //是否完成初始标志
+					ysfs = sjzdService.getSjzdXmxxByZdId("SJZD_FKFS");
+					posTypeList = posTypeService.getPosTypeList();
+					
+					return INPUT;
 				}
 			}
 		}
 		
-		//判断零售单是否提交
-		if(lsdService.isLsdSubmit(lsd.getId())){
-			this.saveMessage("零售单已提交，不能重复提交，请检查！");
-			
-			//页面初始数据
-			userList = userService.getAllEmployeeList();
-			storeList = storeService.getAllStoreList();
-			iscs_flag = sysInitSetService.getQyFlag();  //是否完成初始标志
-			ysfs = sjzdService.getSjzdXmxxByZdId("SJZD_FKFS");
-			posTypeList = posTypeService.getPosTypeList();
-			
-			return "input";
+		
+		//判断是否存在超低价商品，如存在则审批状态修改为待审批
+		if(lsd.getState().equals("已提交")){	
+			if(lsdService.isExistLowLsxj(lsd,lsdProducts)){
+				//如果存在低于零售限价商品
+				lsd.setState("已保存");
+				lsd.setSp_state("2");  //待审批
+			}
 		}
 		
 		lsdService.updateLsd(lsd, lsdProducts);
@@ -366,9 +333,6 @@ public class LsdAction extends BaseAction {
 		lsd.setState("已保存");      //修改零售单状态为已保存
 		
 		lsdService.updateLsd(lsd, lsdProducts);
-		
-		//发送系统消息提醒审批人
-		lsdService.saveMsg(lsd.getId(), user_id);
 		
 		return "success";
 		
@@ -452,33 +416,13 @@ public class LsdAction extends BaseAction {
 			//审批通过,需要判断库存是否满足			
 			String msg = lsdService.checkKc(lsd, lsdProducts);
 			if(!msg.equals("")){
-				this.saveMessage(msg);
+				this.setMsg(msg);
 				return "input";
 			}
 		}
 		
-		//判断零售单是否提交
-		if(lsdService.isLsdSubmit(id)){
-			this.saveMessage("零售单审批完成，不能重复审批，请检查！");
-			
-			//页面初始数据
-			lsd = (Lsd)lsdService.getLsd(id);
-			lsdProducts = lsdService.getLsdProducts(id);
-			storeList = storeService.getAllStoreList();
-			userList = userService.getAllEmployeeList();
-			iscs_flag = sysInitSetService.getQyFlag();
-			ysfs = sjzdService.getSjzdXmxxByZdId("SJZD_FKFS");
-			posTypeList = posTypeService.getPosTypeList();
-			
-			return "input";
-		}
-		
 		//保存审批结果
 		lsdService.saveSp(id, sp_state, user_id);
-		
-		//发送系统消息
-		Lsd curLsd = (Lsd)lsdService.getLsd(id);
-		lsdService.saveMsg(curLsd.getCzr(), user_id, id,sp_state);
 		
 		return "success";
 	}
@@ -702,248 +646,149 @@ public class LsdAction extends BaseAction {
 	public void setFlag(String flag) {
 		this.flag = flag;
 	}
-
-
 	public String getCreatdate2() {
 		return creatdate2;
 	}
-
-
 	public void setCreatdate2(String creatdate2) {
 		this.creatdate2 = creatdate2;
 	}
-
-
 	public String getXsry_name() {
 		return xsry_name;
 	}
-
-
 	public void setXsry_name(String xsry_name) {
 		this.xsry_name = xsry_name;
 	}
-
-
 	public String getSp_state() {
 		return sp_state;
 	}
-
-
 	public void setSp_state(String sp_state) {
 		this.sp_state = sp_state;
 	}
-
-
 	public String getSd() {
 		return sd;
 	}
-
-
 	public void setSd(String sd) {
 		this.sd = sd;
 	}
-
-
 	public List getPosTypeList() {
 		return posTypeList;
 	}
-
-
 	public void setPosTypeList(List posTypeList) {
 		this.posTypeList = posTypeList;
 	}
-
-
 	public PosTypeService getPosTypeService() {
 		return posTypeService;
 	}
-
-
 	public void setPosTypeService(PosTypeService posTypeService) {
 		this.posTypeService = posTypeService;
 	}
-
-
 	public String getProduct_kind() {
 		return product_kind;
 	}
-
-
 	public void setProduct_kind(String product_kind) {
 		this.product_kind = product_kind;
 	}
-
-
 	public String getProduct_name() {
 		return product_name;
 	}
-
-
 	public void setProduct_name(String product_name) {
 		this.product_name = product_name;
 	}
-
-
 	public List getKindList() {
 		return kindList;
 	}
-
-
 	public void setKindList(List kindList) {
 		this.kindList = kindList;
 	}
-
-
 	public ProductKindService getProductKindService() {
 		return productKindService;
 	}
-
-
 	public void setProductKindService(ProductKindService productKindService) {
 		this.productKindService = productKindService;
 	}
-
-
 	public String getProp() {
 		return prop;
 	}
-
-
 	public void setProp(String prop) {
 		this.prop = prop;
 	}
-
-
 	public String getClient_tel() {
 		return client_tel;
 	}
-
-
 	public void setClient_tel(String client_tel) {
 		this.client_tel = client_tel;
 	}
-
-
 	public String getDept_name() {
 		return dept_name;
 	}
-
-
 	public void setDept_name(String dept_name) {
 		this.dept_name = dept_name;
 	}
-
-
 	public String getSkfs() {
 		return skfs;
 	}
-
-
 	public void setSkfs(String skfs) {
 		this.skfs = skfs;
 	}
-
-
 	public String getSkzh_name() {
 		return skzh_name;
 	}
-
-
 	public void setSkzh_name(String skzh_name) {
 		this.skzh_name = skzh_name;
 	}
-
-
 	public String getFoot_name() {
 		return foot_name;
 	}
-
-
 	public void setFoot_name(String foot_name) {
 		this.foot_name = foot_name;
 	}
-
-
 	public String getTitle_name() {
 		return title_name;
 	}
-
-
 	public void setTitle_name(String title_name) {
 		this.title_name = title_name;
 	}
-
-
 	public String getAddress() {
 		return address;
 	}
-
-
 	public void setAddress(String address) {
 		this.address = address;
 	}
-
-
 	public String getRemark() {
 		return remark;
 	}
-
-
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
-
-
 	public String getJexj_dx() {
 		return jexj_dx;
 	}
-
-
 	public void setJexj_dx(String jexj_dx) {
 		this.jexj_dx = jexj_dx;
 	}
-
-
 	public String getBasic_ratio() {
 		return basic_ratio;
 	}
-
-
 	public void setBasic_ratio(String basic_ratio) {
 		this.basic_ratio = basic_ratio;
 	}
-
-
 	public String getOut_ratio() {
 		return out_ratio;
 	}
-
-
 	public void setOut_ratio(String out_ratio) {
 		this.out_ratio = out_ratio;
 	}
-
-
 	public Map getTcblMap() {
 		return tcblMap;
 	}
-
-
 	public void setTcblMap(Map tcblMap) {
 		this.tcblMap = tcblMap;
 	}
-
-
 	public String getDs_ratio() {
 		return ds_ratio;
 	}
-
-
 	public void setDs_ratio(String ds_ratio) {
 		this.ds_ratio = ds_ratio;
 	}
-
-
-
 	
 }

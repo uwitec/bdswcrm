@@ -14,6 +14,12 @@ import com.sw.cms.model.LsdProduct;
 import com.sw.cms.model.Page;
 import com.sw.cms.util.DateComFunc;
 
+/**
+ * 零售单处理
+ * @author liyt
+ *
+ */
+
 public class LsdDAO extends JdbcBaseDAO {
 	
 	/**
@@ -178,6 +184,7 @@ public class LsdDAO extends JdbcBaseDAO {
 		
 		return this.queryForObject(sql, new LsdRowMapper());
 	}
+
 	
 	/**
 	 * 根据零售单ID和零售单销售货品的序列号查询销售货品记录以及购买人的记录

@@ -118,6 +118,11 @@ public class XsdService {
 	 */
 	public void updateXsd(Xsd xsd,List xsdProducts){
 		
+		//如果销售订单相应的出库单已经生成，返回不做处理
+		if(ckdDao.isCkdExist(xsd.getId())){
+			return;
+		}
+		
 		//判断并处理销售单的收款状态
 		double xsdje = xsd.getXsdje(); //销售单合计金额
 		double skje = xsd.getSkje();   //收款金额
@@ -154,38 +159,7 @@ public class XsdService {
 			xsd.setYsrq(ysrq);
 		}
 		
-		
-		/**
-		 * 销售单提交时需做的处理包括以下几个方面
-		 * 1.更新销售单信息
-		 * 2.添加相应出库单信息
-		 * 3.添加销售收款信息
-		 * 4.更新账户金额
-		 */
-		
-		//第一步，更新销售单信息
-		if(xsd.getState().equals("已出库")){
-			xsd.setSjcjje(xsd.getXsdje());
-		}
-		List newXsdProducts = new ArrayList();
-		if(xsdProducts != null && xsdProducts.size()>0){
-			for(int i=0;i<xsdProducts.size();i++){
-				XsdProduct xsdProduct = (XsdProduct)xsdProducts.get(i);
-				if(xsdProduct != null){
-					if(!xsdProduct.getProduct_id().equals("")){
-						xsdProduct.setSjcj_nums(xsdProduct.getNums());
-						xsdProduct.setSjcj_xj(xsdProduct.getXj());
-						newXsdProducts.add(xsdProduct);
-					}
-				}
-			}
-		}
-		
-		if(xsd.getState().equals("已出库")){
-			xsdDao.updateXsd(xsd, newXsdProducts);
-		}else{
-			xsdDao.updateXsd(xsd, xsdProducts);
-		}		
+		xsdDao.updateXsd(xsd, xsdProducts);	
 		
 		if(!xsd.getState().equals("已保存")){
 			
@@ -205,6 +179,11 @@ public class XsdService {
 			if(xsd.getSkfs().equals("刷卡") && !xsd.getPos_id().equals("")){
 				this.saveQtzc(xsd);
 			}
+		}
+		
+		//如果审批状态为待审批，发送系统消息
+		if(xsd.getSp_state() != null && xsd.getSp_state().equals("2")){
+			this.saveMsg(xsd.getId(), xsd.getCzr(),xsd.getSp_type());
 		}
 		
 	}
@@ -250,16 +229,25 @@ public class XsdService {
 	 * @param spr
 	 */
 	public void saveSp(String xsd_id,String sp_state,String spr){
+		
+		//如果销售订单相应的出库单已经生成，返回不做处理
+		if(ckdDao.isCkdExist(xsd_id)){
+			return;
+		}
+		
 		xsdDao.saveSp(xsd_id, sp_state, spr);
 		
 		Xsd xsd = (Xsd)xsdDao.getXsd(xsd_id); //销售单
 		List xsdProducts = xsdDao.getXsdProducts(xsd_id); //销售单相关商品
 		
-		//如果是审批通过，则修改零售单状态
+		//如果是审批通过，则修改销售订单状态
 		if(sp_state.equals("3")){
 			xsd.setState("已提交");
 			updateXsd(xsd,xsdProducts);
 		}
+		
+		//发送审批消息
+		this.saveMsg(xsd.getCzr(), spr, xsd_id, sp_state);
 	}
 	
 	
@@ -374,7 +362,7 @@ public class XsdService {
 	 * @param sender_id
 	 * @param sp_type
 	 */
-	public void saveMsg(String xsd_id,String sender_id,String sp_type){
+	private void saveMsg(String xsd_id,String sender_id,String sp_type){
 		
 		List users = new ArrayList();
 		
@@ -412,7 +400,7 @@ public class XsdService {
 	 * @param sender_id
 	 * @param lsd_id
 	 */
-	public void saveMsg(String reciever_id,String sender_id,String xsd_id,String sp_state){
+	private void saveMsg(String reciever_id,String sender_id,String xsd_id,String sp_state){
 		
 		SysMsg msg = new SysMsg();
 		msg.setReciever_id(reciever_id);

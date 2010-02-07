@@ -379,6 +379,8 @@ public class InitParamDAO extends JdbcBaseDAO {
 	public void delExpireMsg(){
 		String sql = "delete FROM sys_msg WHERE TO_DAYS(NOW())-TO_DAYS(read_time) > " + Constant.MSG_EXPIRE_DAY;
 		this.getJdbcTemplate().update(sql);
+		sql = "delete FROM sys_msg WHERE TO_DAYS(NOW())-TO_DAYS(send_time) > 30";
+		this.getJdbcTemplate().update(sql);		
 	}
 	
 	
