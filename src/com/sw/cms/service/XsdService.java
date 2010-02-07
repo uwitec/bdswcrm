@@ -31,8 +31,6 @@ import com.sw.cms.model.Fxdd;
 import com.sw.cms.model.Page;
 import com.sw.cms.model.Product;
 import com.sw.cms.model.Qtzc;
-import com.sw.cms.model.SerialNumFlow;
-import com.sw.cms.model.SerialNumMng;
 import com.sw.cms.model.SysMsg;
 import com.sw.cms.model.SysUser;
 import com.sw.cms.model.Xsd;
@@ -415,6 +413,27 @@ public class XsdService {
 		sysMsgDao.saveMsg(msg);
 	}
 	
+	/**
+	 * 根据出库单发送待出库消息
+	 * @param ckd
+	 */
+	private void saveMsg(Ckd ckd){
+		List userList = userDao.getUserListByFuncId("FC0005");
+		
+		if(userList != null && userList.size() > 0){
+			for(int i=0;i<userList.size();i++){
+				Map map = (Map)userList.get(i);
+				
+				SysMsg msg = new SysMsg();
+				msg.setReciever_id(StringUtils.nullToStr(map.get("user_id")));
+				msg.setSender_id(ckd.getCzr());
+				msg.setMsg_body("有新的待出库单，编号为：" + ckd.getCkd_id());
+				
+				sysMsgDao.saveMsg(msg);
+			}
+		}
+	}
+	
 	
 	/**
 	 * 取待审批销售单列表
@@ -444,16 +463,10 @@ public class XsdService {
 		ckd.setTel(xsd.getKh_lxdh());  //客户联系电话
 		ckd.setCreatdate(xsd.getCreatdate());
 		ckd.setXsry(xsd.getFzr());
-		if(xsd.getState().equals("已出库")){
-			ckd.setState("已出库");   //设为已出库
-			ckd.setFzr(xsd.getFzr());  //出库负责人
-			ckd.setStore_id(xsd.getStore_id());  //设置出货仓库
-			ckd.setCk_date(xsd.getCreatdate()); //设置出库时间
-			wlzt = "已出库";
-		}else{
-			ckd.setState("待出库");
-			wlzt = "待出库";
-		}
+
+		ckd.setState("待出库");
+		wlzt = "待出库";
+			
 		ckd.setYsfs(xsd.getYsfs());  //运输方式
 		ckd.setXsd_id(xsd.getId());
 		ckd.setCkd_id(ckd_id);
@@ -491,48 +504,6 @@ public class XsdService {
 						ckdProduct.setQz_serial_num(xsdProduct.getQz_serial_num());
 						
 						ckdProducts.add(ckdProduct);
-						
-						//只有在系统正式使用后才去修改产品的库存和处理序列号
-						//系统启用前也可输入产品序列号，但不硬性强制，对于输入的序列号系统做处理
-						//if(sysInitSetDao.getQyFlag().equals("1")){
-							
-						//如果出库单的状态为已出库，需要处理序列号
-						if(ckd.getState().equals("已出库")){
-							if((xsdProduct.getQz_serial_num() != null) && (!xsdProduct.getQz_serial_num().equals(""))){
-								String[] arryNums = (xsdProduct.getQz_serial_num()).split(",");
-								
-								SerialNumMng serialNumMng = new SerialNumMng();
-								SerialNumFlow serialNumFlow = new SerialNumFlow();
-								
-								for(int k=0;k<arryNums.length;k++){
-									serialNumMng.setProduct_id(xsdProduct.getProduct_id());
-									serialNumMng.setProduct_name(xsdProduct.getProduct_name());
-									serialNumMng.setProduct_xh(xsdProduct.getProduct_xh());
-									serialNumMng.setSerial_num(arryNums[k]);
-									serialNumMng.setState("已售");
-									serialNumMng.setStore_id("");
-									serialNumMng.setYj_flag("0");
-									serialNumDao.updateSerialNumState(serialNumMng); //更新序列号状态
-									
-									
-									serialNumFlow.setClient_name(StaticParamDo.getClientNameById(xsd.getClient_name()));
-									serialNumFlow.setTel(xsd.getKh_lxdh());
-									serialNumFlow.setCzr(xsd.getCzr());
-									serialNumFlow.setYwtype("销售");
-									serialNumFlow.setFs_date(xsd.getCreatdate());
-									serialNumFlow.setJsr(StaticParamDo.getRealNameById(xsd.getFzr()));
-									serialNumFlow.setKf_dj_id(ckd_id);
-									serialNumFlow.setSerial_num(arryNums[k]);
-									serialNumFlow.setKf_url("viewCkd.html?ckd_id=");
-									serialNumFlow.setYw_dj_id(xsd.getId());							
-									serialNumFlow.setYw_url("viewXsd.html?id=");		
-									serialNumFlow.setXsdj(xsdProduct.getPrice() + xsdProduct.getJgtz());
-									serialNumDao.saveSerialFlow(serialNumFlow);  //保存序列号流转过程
-								}
-							}
-						}
-							
-						//}
 					}
 				}
 			}
@@ -540,11 +511,8 @@ public class XsdService {
 		
 		ckdDao.saveCkd(ckd, ckdProducts);
 		
-		//减库存(在系统没有完成初始化之前可能出现负库存)
-		if(ckd.getState().equals("已出库")){
-			this.updateProductKc(ckd, ckdProducts);
-		}
-
+		//发送待出库单消息
+		this.saveMsg(ckd);
 	}
 	
 	

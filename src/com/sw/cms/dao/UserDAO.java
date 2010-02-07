@@ -485,6 +485,18 @@ public class UserDAO extends JdbcBaseDAO {
 	
 	
 	/**
+	 * 根据功能编号取用户列表
+	 * @param func_id
+	 * @param user_id
+	 * @return
+	 */
+	public List getUserListByFuncId(String func_id){
+		String sql = "select a.* from user_role a join role_func b on b.role_id=a.role_id where b.func_id='" + func_id + "'";
+		return this.getResultList(sql);
+	}
+	
+	
+	/**
 	 * 返回角色组内所有的用户
 	 * @param arryRole
 	 * @return
