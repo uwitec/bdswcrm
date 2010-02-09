@@ -7,7 +7,7 @@
 <%
 OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
 
-YfHzMxService yfHzMxService = (YfHzMxService)VS.findValue("yfHzMxService");
+ClientWlStatService clientWlStatService = (ClientWlStatService)VS.findValue("clientWlStatService");
 List clientList = (List)VS.findValue("clientList");
 
 String start_date = StringUtils.nullToStr(request.getParameter("start_date"));   //开始时间
@@ -65,6 +65,9 @@ double hj_bqfs = 0;
 double hj_ysje = 0;
 double hj_dqys = 0;
 
+Map qcMap = clientWlStatService.getClientQc(start_date);
+Map infoMap = clientWlStatService.getClientWlInfo(start_date,end_date,"");
+
 if(clientList != null && clientList.size() > 0){
 	for(int i=0;i<clientList.size();i++){
 		Map map = (Map)clientList.get(i);
@@ -72,14 +75,9 @@ if(clientList != null && clientList.size() > 0){
 		String client_id = StringUtils.nullToStr(map.get("id"));
 		String client_name = StringUtils.nullToStr(map.get("name"));
 		
-		Map qc_map = yfHzMxService.getYfQc(client_id,start_date);  //期初信息		
-		double bqfs = yfHzMxService.getBqfs(client_id,start_date,end_date); //本期发生
-		double yfje = yfHzMxService.getBqyf(client_id,start_date,end_date); //本期已付
-		
-		double qcs = 0l;  //期初数
-		if(qc_map != null){
-			qcs = qc_map.get("yfqc")==null?0:((Double)qc_map.get("yfqc")).doubleValue();
-		}
+		double qcs = qcMap.get(client_id+"应付")==null?0:((Double)qcMap.get(client_id+"应付")).doubleValue();  //期初数		
+		double bqfs = infoMap.get(client_id+"应付发生")==null?0:((Double)infoMap.get(client_id+"应付发生")).doubleValue();  //本期发生
+		double yfje = infoMap.get(client_id+"已付发生")==null?0:((Double)infoMap.get(client_id+"已付发生")).doubleValue();  //本期已收
 
 		double dqys = qcs + bqfs - yfje;  //当前应收=期初数+本期发生-本期已付
 		

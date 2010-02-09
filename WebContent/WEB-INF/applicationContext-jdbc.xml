@@ -505,7 +505,12 @@
        <!-- 出纳付款单-->
      <bean id="cnfkdDao" class="com.sw.cms.dao.CnfkdDAO">
           <property name="jdbcTemplate" ref="jdbcTemplate"/>
-     </bean>        
+     </bean> 
+     
+	 <!-- 客户往来统计包括：应收汇总、应付汇总-->
+     <bean id="clientWlStatDao" class="com.sw.cms.dao.ClientWlStatDAO">
+          <property name="jdbcTemplate" ref="jdbcTemplate"/>
+     </bean>  
       
 </beans>
 

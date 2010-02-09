@@ -658,7 +658,14 @@
         <property name="target">
            <bean class="com.sw.cms.service.CnfkdService" autowire="byName"/> 
         </property>
-    </bean>    
+    </bean>
+    
+    <!-- 客户往来统计包括：应收汇总、应付汇总 -->
+    <bean id="clientWlStatService" parent="baseTransaction">
+        <property name="target">
+           <bean class="com.sw.cms.service.ClientWlStatService" autowire="byName"/> 
+        </property>
+    </bean>        
 </beans>
 
 
