@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.sw.cms.action.base.BaseAction;
 import com.sw.cms.service.ClientWlDzdService;
+import com.sw.cms.service.ClientWlStatService;
 import com.sw.cms.service.ClientsService;
 import com.sw.cms.service.UserService;
 import com.sw.cms.service.YsmxReportService;
@@ -15,6 +16,7 @@ public class YsmxReportAction extends BaseAction {
 	private UserService userService;
 	private ClientsService clientsService;
 	private ClientWlDzdService clientWlDzdService;
+	private ClientWlStatService clientWlStatService;
 	
 	private List user_list = new ArrayList();
 	private List ckdList = new ArrayList();
@@ -110,6 +112,14 @@ public class YsmxReportAction extends BaseAction {
 
 	public void setClientWlDzdService(ClientWlDzdService clientWlDzdService) {
 		this.clientWlDzdService = clientWlDzdService;
+	}
+
+	public ClientWlStatService getClientWlStatService() {
+		return clientWlStatService;
+	}
+
+	public void setClientWlStatService(ClientWlStatService clientWlStatService) {
+		this.clientWlStatService = clientWlStatService;
 	}
 
 }
