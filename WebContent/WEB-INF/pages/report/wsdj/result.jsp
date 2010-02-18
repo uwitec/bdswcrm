@@ -27,7 +27,7 @@ if(!dept_id.equals("")){
 
 <html>
 <head>
-<title>销售未收单据</title>
+<title>销售未收单据汇总</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/report.css" rel="stylesheet" type="text/css" />
 <style media=print>  
@@ -46,7 +46,7 @@ if(!dept_id.equals("")){
 <TABLE  align="center" cellSpacing=0 cellPadding=0 width="99%" border=0>
 	<TBODY>
 		<TR style="BACKGROUND-COLOR: #dcdcdc;height:45;">
-		    <TD align="center" width="100%"><font style="FONT-SIZE: 16px"><B>销售未收单据</B></font><br><%=strCon %></TD>
+		    <TD align="center" width="100%"><font style="FONT-SIZE: 16px"><B>销售未收单据汇总</B></font><br><%=strCon %></TD>
 		</TR>
 	</TBODY>
 </TABLE>

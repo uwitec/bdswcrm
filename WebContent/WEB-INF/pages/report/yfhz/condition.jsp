@@ -13,7 +13,7 @@ List clientsList=(List)VS.findValue("clientList");
 %>
 <html>
 <head>
-<title>应付汇总</title>
+<title>供应商应付汇总表</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <style>
@@ -50,7 +50,7 @@ function openClientWin(){
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td colspan="2">应付汇总</td>
+		<td colspan="2">供应商应付汇总表</td>
 	</tr>
 	</thead>
 </table>

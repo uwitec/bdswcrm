@@ -11,7 +11,7 @@ List deptList = (List)VS.findValue("deptList");
 
 <html>
 <head>
-<title>销售未收单据</title>
+<title>销售未收单据汇总</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
@@ -51,7 +51,7 @@ List deptList = (List)VS.findValue("deptList");
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td colspan="2">销售未收单据</td>
+		<td colspan="2">销售未收单据汇总</td>
 	</tr>
 	</thead>
 </table>

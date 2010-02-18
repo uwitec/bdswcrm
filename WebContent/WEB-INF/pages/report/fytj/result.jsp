@@ -36,7 +36,7 @@ if(!fy_type.equals("")){
 
 <html>
 <head>
-<title>费用汇总</title>
+<title>一般费用汇总表</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/report.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript">
@@ -54,7 +54,7 @@ if(!fy_type.equals("")){
 <TABLE  align="center" cellSpacing=0 cellPadding=0 width="99%" border=0>
 	<TBODY>
 		<TR style="BACKGROUND-COLOR: #dcdcdc;height:45;">
-		    <TD align="center" width="100%"><font style="FONT-SIZE: 16px"><B>费用汇总</B></font><br><%=strCon %></TD>
+		    <TD align="center" width="100%"><font style="FONT-SIZE: 16px"><B>一般费用汇总表</B></font><br><%=strCon %></TD>
 		</TR>
 	</TBODY>
 </TABLE>

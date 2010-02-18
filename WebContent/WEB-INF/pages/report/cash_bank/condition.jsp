@@ -13,7 +13,7 @@ List accountList = (List)VS.findValue("accountList");
 
 <html>
 <head>
-<title>现金银行统计条件</title>
+<title>现金银行汇总表</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
@@ -23,7 +23,7 @@ List accountList = (List)VS.findValue("accountList");
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td colspan="2">现金银行</td>
+		<td colspan="2">现金银行汇总表</td>
 	</tr>
 	</thead>
 </table>

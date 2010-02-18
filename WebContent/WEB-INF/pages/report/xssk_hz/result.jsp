@@ -25,7 +25,7 @@ if(isYsk.equals("1")){
 
 <html>
 <head>
-<title>销售收款汇总</title>
+<title>销售收款统计</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/report.css" rel="stylesheet" type="text/css" />
 <style media=print>  
@@ -44,7 +44,7 @@ if(isYsk.equals("1")){
 <TABLE  align="center" cellSpacing=0 cellPadding=0 width="99%" border=0>
 	<TBODY>
 		<TR style="BACKGROUND-COLOR: #dcdcdc;height:45;">
-		    <TD align="center" width="100%"><font style="FONT-SIZE: 16px"><B>销售收款汇总</B></font><br>日期：<%=start_date %> 至 <%=end_date %></TD>
+		    <TD align="center" width="100%"><font style="FONT-SIZE: 16px"><B>销售收款统计</B></font><br>日期：<%=start_date %> 至 <%=end_date %></TD>
 		</TR>
 	</TBODY>
 </TABLE>

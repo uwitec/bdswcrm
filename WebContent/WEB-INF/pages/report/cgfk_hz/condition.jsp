@@ -11,7 +11,7 @@ List clientsList=(List)VS.findValue("clientList");
 %>
 <html>
 <head>
-<title>采购付款汇总统计</title>
+<title>采购付款统计</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
@@ -49,7 +49,7 @@ function openClientWin(){
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td colspan="2">采购付款汇总</td>
+		<td colspan="2">采购付款统计</td>
 	</tr>
 	</thead>
 </table>

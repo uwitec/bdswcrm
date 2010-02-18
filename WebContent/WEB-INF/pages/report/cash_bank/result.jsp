@@ -28,7 +28,7 @@ if(!account_type.equals("")){
 
 <html>
 <head>
-<title>现金银行</title>
+<title>现金银行汇总表</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/report.css" rel="stylesheet" type="text/css" />
 <style media=print>  
@@ -47,7 +47,7 @@ if(!account_type.equals("")){
 <TABLE  align="center" cellSpacing=0 cellPadding=0 width="99%" border=0>
 	<TBODY>
 		<TR style="BACKGROUND-COLOR: #dcdcdc;height:45;">
-		    <TD align="center" width="100%"><font style="FONT-SIZE: 16px"><B>现金银行</B></font><br><%=conStr %></TD>
+		    <TD align="center" width="100%"><font style="FONT-SIZE: 16px"><B>现金银行汇总表</B></font><br><%=conStr %></TD>
 		</TR>
 	</TBODY>
 </TABLE>

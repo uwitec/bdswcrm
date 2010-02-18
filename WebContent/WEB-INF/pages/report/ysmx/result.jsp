@@ -18,7 +18,7 @@ String flag2 = StringUtils.nullToStr(request.getParameter("flag2"));            
 
 <html>
 <head>
-<title>应收汇总</title>
+<title>客户应收汇总表</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/report.css" rel="stylesheet" type="text/css" />
 <style media=print>  
@@ -37,7 +37,7 @@ String flag2 = StringUtils.nullToStr(request.getParameter("flag2"));            
 <TABLE  align="center" cellSpacing=0 cellPadding=0 width="99%" border=0>
 	<TBODY>
 		<TR style="BACKGROUND-COLOR: #dcdcdc;height:45;">
-		    <TD align="center" width="100%"><font style="FONT-SIZE: 16px"><B>应收汇总</B></font><br>日期：<%=start_date %> 至 <%=end_date %></TD>
+		    <TD align="center" width="100%"><font style="FONT-SIZE: 16px"><B>客户应收汇总表</B></font><br>日期：<%=start_date %> 至 <%=end_date %></TD>
 		</TR>
 	</TBODY>
 </TABLE>

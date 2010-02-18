@@ -13,7 +13,7 @@ String[] fy_types = (String[])VS.findValue("fy_types");
 
 <html>
 <head>
-<title>费用汇总</title>
+<title>一般费用汇总表</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
@@ -50,7 +50,7 @@ function openFyType(){
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td colspan="2">费用汇总</td>
+		<td colspan="2">一般费用汇总表</td>
 	</tr>
 	</thead>
 </table>
