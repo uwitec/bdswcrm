@@ -158,6 +158,9 @@ if(!store_id.equals("")){
 			}else if(dj_id.indexOf("CX") != -1){
 				type = "拆卸单";
 				url = "viewCxd.html?id=";
+			}else if(dj_id.indexOf("ZZ") != -1){
+				type = "组装单";
+				url = "viewZzd.html?id=";
 			}
 			
 %>

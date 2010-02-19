@@ -665,7 +665,14 @@
         <property name="target">
            <bean class="com.sw.cms.service.ClientWlStatService" autowire="byName"/> 
         </property>
-    </bean>        
+    </bean>
+    
+    <!-- 组装单 -->
+    <bean id="zzdService" parent="baseTransaction">
+        <property name="target">
+           <bean class="com.sw.cms.service.ZzdService" autowire="byName"/> 
+        </property>
+    </bean>    
 </beans>
 
 

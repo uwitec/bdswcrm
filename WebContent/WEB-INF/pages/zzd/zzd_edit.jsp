@@ -2,7 +2,7 @@
 <%@taglib uri="/webwork" prefix="ww"%>
 <html>
 <head>
-<title>商品拆卸单</title>
+<title>商品组装单</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript" src="js/Check.js"></script>
@@ -14,9 +14,9 @@
 </style>
 <script type="text/javascript">
 
-	var strCount = '<ww:property value="%{cxdProducts.size}"/>';
+	var strCount = '<ww:property value="%{zzdProducts.size}"/>';
 	if(strCount == '0') strCount = '1';
-	var allCount = parseInt(strCount) - 1;
+	var allCount = parseInt(strCount)-1;
 
 	function saveInfo(vl){
 		if(vl == "1"){
@@ -37,7 +37,7 @@
 			return;
 		}
 		if(document.getElementById("qz_flag").value == "是" && document.getElementById("serial_nums").value == ""){
-			alert("待拆卸商品为强制序列号商品，请输入序列号！");
+			alert("组装商品为强制序列号商品，请输入序列号！");
 			return;
 		}
 
@@ -75,22 +75,22 @@
 		hj();
 
 		if(parseFloat(document.getElementById("hjje").value) != parseFloat(document.getElementById("hj_je").value)){
-			alert("拆卸明细金额合计必须等于，拆卸商品金额!");
+			alert("组装成的商品金额合计必须等于待组装明细商品金额合计!");
 			return;
 		}
 
 		if(document.getElementById("state").value == "已提交"){
 			if(window.confirm("确认要提交吗，提交后将不可修改！")){
-				document.cxdForm.submit();
+				document.zzdForm.submit();
 			}	
 		}else{
-			document.cxdForm.submit();
+			document.zzdForm.submit();
 		}
 		
 	}
 		
     function addTr(){
-        var otr = document.getElementById("cxdTable").insertRow(-1);
+        var otr = document.getElementById("zzdTable").insertRow(-1);
 
         var curId = allCount + 1;   //curId一直加下去，防止重复
         allCount = allCount + 1;
@@ -101,36 +101,36 @@
         
         var otd1 = document.createElement("td");
         otd1.className = "a2";
-        otd1.innerHTML = '<input type="text" name="cxdProducts[' + curId + '].product_name" value="" readonly="readonly" id="product_name_' + curId + '" style="width:100%"/><input type="hidden" name="cxdProducts[' + curId + '].product_id" value="" id="product_id_' + curId + '"/>';
+        otd1.innerHTML = '<input type="text" name="zzdProducts[' + curId + '].product_name" value="" readonly="readonly" id="product_name_' + curId + '" style="width:100%"/><input type="hidden" name="zzdProducts[' + curId + '].product_id" value="" id="product_id_' + curId + '"/>';
        
         var otd2 = document.createElement("td");
         otd2.className = "a2";
-        otd2.innerHTML = '<input type="text" name="cxdProducts[' + curId + '].product_xh" value="" readonly="readonly" id="product_xh_' + curId + '" style="width:100%"/>';
+        otd2.innerHTML = '<input type="text" name="zzdProducts[' + curId + '].product_xh" value="" readonly="readonly" id="product_xh_' + curId + '" style="width:100%"/>';
         
         
         var otd3 = document.createElement("td");
         otd3.className = "a2";
-        otd3.innerHTML = '<input type="text" name="cxdProducts[' + curId + '].product_dw" value="" readonly="readonly" id="product_dw_' + curId + '" style="width:100%"/>';    
+        otd3.innerHTML = '<input type="text" name="zzdProducts[' + curId + '].product_dw" value="" readonly="readonly" id="product_dw_' + curId + '" style="width:100%"/>';    
         
         var otd4 = document.createElement("td");
         otd4.className = "a2";
-        otd4.innerHTML = '<input type="text" name="cxdProducts[' + curId + '].price" value="0.00" onblur="hj();" id="price_' + curId + '" style="width:100%"/>';               
+        otd4.innerHTML = '<input type="text" name="zzdProducts[' + curId + '].price" value="0.00" onblur="hj();" id="price_' + curId + '" readonly="true" style="width:100%"/>';               
         
         var otd5 = document.createElement("td");
         otd5.className = "a2";
-        otd5.innerHTML = '<input type="text" name="cxdProducts[' + curId + '].nums" value="0" onblur="hj();" id="nums_' + curId + '" style="width:100%"/>';                       
+        otd5.innerHTML = '<input type="text" name="zzdProducts[' + curId + '].nums" value="0" onblur="hj();" id="nums_' + curId + '" style="width:100%"/>';                       
 
         var otd6 = document.createElement("td");
         otd6.className = "a2";
-        otd6.innerHTML = '<input type="text" name="cxdProducts[' + curId + '].hj" value="0.00" readonly="readonly" id="hj_' + curId + '" style="width:100%"/>';    
+        otd6.innerHTML = '<input type="text" name="zzdProducts[' + curId + '].hj" value="0.00" readonly="readonly" id="hj_' + curId + '" style="width:100%"/>';    
         
         var otd7 = document.createElement("td");
         otd7.className = "a2";
-        otd7.innerHTML = '<input type="text" name="cxdProducts[' + curId + '].qz_serial_num" value="" id="qz_serial_num_' + curId + '" style="width:85%"/><input type="hidden" id="qz_flag_' + curId + '" name="cxdProducts[' + curId + '].qz_flag" value=""><a style="cursor:hand" title="左键点击输入输列号" onclick="openSerialWin(' + curId + ');"><b>...</b></a>';            
+        otd7.innerHTML = '<input type="text" name="zzdProducts[' + curId + '].qz_serial_num" value="" id="qz_serial_num_' + curId + '" style="width:85%"/><input type="hidden" id="qz_flag_' + curId + '" name="zzdProducts[' + curId + '].qz_flag" value=""><a style="cursor:hand" title="左键点击输入输列号" onclick="openSerialWin(' + curId + ');"><b>...</b></a>';            
 
         var otd8 = document.createElement("td");
         otd8.className = "a2";
-        otd8.innerHTML = '<input type="text" name="cxdProducts[' + curId + '].remark" value="" id="remark_' + curId + '" style="width:100%"/>';
+        otd8.innerHTML = '<input type="text" name="zzdProducts[' + curId + '].remark" value="" id="remark_' + curId + '" style="width:100%"/>';
         
         otr.appendChild(otd0); 
         otr.appendChild(otd1); 
@@ -258,19 +258,16 @@
 
 		var objChk = document.getElementsByName("proc_id");
 		for(var i=0;i<objChk.length;i++){
-			var o = document.cxdForm.proc_id[i];
+			var o = document.zzdForm.proc_id[i];
 			if(o.checked){
 				k = k + 1;
-				sel = document.cxdForm.proc_id[i].value;
+				sel = document.zzdForm.proc_id[i].value;
 			}
 		}
 		if(k != 1){
 			alert("请选择产品明细，且只能选择一条信息！");
 			return;
-		}
-
-		alert(sel);
-		
+		}		
 		document.getElementById("product_name_" + sel).value = "";
 		document.getElementById("product_id_" + sel).value = "";
 		document.getElementById("product_xh_" + sel).value = "";
@@ -284,12 +281,12 @@
 </script>
 </head>
 <body onload="initFzrTip();hj();">
-<form name="cxdForm" action="updateCxd.html" method="post">
-<ww:hidden name="cxd.state" id="state" value=""  theme="simple"></ww:hidden>
+<form name="zzdForm" action="updateZzd.html" method="post">
+<ww:hidden name="zzd.state" id="state" value=""  theme="simple"></ww:hidden>
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
-		<td colspan="4">商品拆卸单</td>
+		<td colspan="4">商品组装单</td>
 	</tr>
 	</thead>
 	<ww:if test="%{msg != ''}">
@@ -300,73 +297,73 @@
 	<tr>
 		<td class="a1" width="15%">单据编号</td>
 		<td class="a2" width="35%">
-			<ww:textfield name="cxd.id" id="id" value="%{cxd.id}" theme="simple" readonly="true"/><span style="color:red">*</span>
+			<ww:textfield name="zzd.id" id="id" value="%{zzd.id}" theme="simple" readonly="true"/><span style="color:red">*</span>
 		</td>
 		<td class="a1" width="15%">单据日期</td>
 		<td class="a2" width="35%">
-			<input type="text" name="cxd.cdate" id="cdate" value="<ww:property value="%{cxd.cdate}"/>" class="Wdate" onFocus="WdatePicker()"/>&nbsp;	
+			<input type="text" name="zzd.cdate" id="cdate" value="<ww:property value="%{zzd.cdate}"/>" class="Wdate" onFocus="WdatePicker()"/>&nbsp;	
 			<span style="color:red">*</span>
 		</td>				
 	</tr>
 	<tr>
 		<td class="a1" width="15%">商品名称</td>
 		<td class="a2" width="35%">
-			<ww:textfield name="cxd.product_name" id="product_name" value="%{cxd.product_name}" theme="simple" maxLength="100"  size="30" readonly="true"/>
+			<ww:textfield name="zzd.product_name" id="product_name" value="%{zzd.product_name}" theme="simple" maxLength="100"  size="30" readonly="true"/>
 			<img src="images/select.gif" align="absmiddle" title="选择商品" border="0" onclick="selProduct();" style="cursor:hand"><font color="red">*</font>
 		</td>	
 		<td class="a1" width="15%">商品编号</td>
 		<td class="a2" width="35%">
-			<ww:textfield name="cxd.product_id" id="product_id" value="%{cxd.product_id}" theme="simple"  readonly="true"/>
-			<ww:hidden name="cxd.qz_flag" id="qz_flag" value="%{cxd.qz_flag}" theme="simple"/>
+			<ww:textfield name="zzd.product_id" id="product_id" value="%{zzd.product_id}" theme="simple"  readonly="true"/>
+			<ww:hidden name="zzd.qz_flag" id="qz_flag" value="%{zzd.qz_flag}" theme="simple"/>
 		</td>						
 	</tr>
 	<tr>
 		<td class="a1" width="15%">商品规格</td>
 		<td class="a2" width="35%">
-			<ww:textfield name="cxd.product_xh" id="product_xh" value="%{cxd.product_xh}" theme="simple"  size="30" readonly="true"/>
+			<ww:textfield name="zzd.product_xh" id="product_xh" value="%{zzd.product_xh}" theme="simple"  size="30" readonly="true"/>
 		</td>
 		<td class="a1" width="15%">单位</td>
 		<td class="a2" width="35%">
-			<ww:textfield name="cxd.product_dw" id="product_dw" value="%{cxd.product_dw}" theme="simple" readonly="true"/>
+			<ww:textfield name="zzd.product_dw" id="product_dw" value="%{zzd.product_dw}" theme="simple" readonly="true"/>
 		</td>						
 	</tr>
 	<tr>
 		<td class="a1" width="15%">单价</td>
 		<td class="a2" width="35%">
-			<ww:textfield id="price" name="cxd.price" value="%{getText('global.format.double',{cxd.price})}" theme="simple" readonly="true"/>
+			<ww:textfield id="price" name="zzd.price" value="%{getText('global.format.double',{zzd.price})}" theme="simple"/>
 		</td>
 		<td class="a1" width="15%">数量</td>
 		<td class="a2">
-			<ww:textfield id="nums"  name="cxd.nums" value="%{cxd.nums}" theme="simple" onblur="hjf();"/><span style="color:red">*</span>
+			<ww:textfield id="nums"  name="zzd.nums" value="%{zzd.nums}" theme="simple" onblur="hjf();"/><span style="color:red">*</span>
 		</td>						
 	</tr>
 	<tr>
 		<td class="a1" width="15%">金额</td>
 		<td class="a2" width="35%">
-			<ww:textfield id="hjje" name="cxd.hjje" value="%{getText('global.format.double',{cxd.hjje})}" theme="simple" readonly="true"/>
+			<ww:textfield id="hjje" name="zzd.hjje" value="%{getText('global.format.double',{zzd.hjje})}" theme="simple" readonly="true"/>
 		</td>
 		<td class="a1" width="15%">经手人</td>
 		<td class="a2">
-			<ww:textfield name="brand" id="brand" onblur="setValue()" value="%{getUserRealName(cxd.jsr)}" theme="simple"></ww:textfield>
+			<ww:textfield name="brand" id="brand" onblur="setValue()" value="%{getUserRealName(zzd.jsr)}" theme="simple"></ww:textfield>
             <div id="brandTip" style="height:12px;position:absolute;left:548px; top:85px;  width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
-		    <ww:hidden name="cxd.jsr" id="fzr" value="%{cxd.jsr}" theme="simple"></ww:hidden><font color="red">*</font>	
+		    <ww:hidden name="zzd.jsr" id="fzr" value="%{zzd.jsr}" theme="simple"></ww:hidden><font color="red">*</font>	
 		</td>						
 	</tr>
 	<tr>
 		<td class="a1" width="15%">所在库房</td>
 		<td class="a2">
-			<ww:select name="cxd.store_id" id="store_id" theme="simple" list="%{storeList}" listValue="name" listKey="id" emptyOption="true"></ww:select><span style="color:red">*</span>
+			<ww:select name="zzd.store_id" id="store_id" theme="simple" list="%{storeList}" listValue="name" listKey="id" emptyOption="true"></ww:select><span style="color:red">*</span>
 		</td>			
 		<td class="a1" width="15%">序列号</td>
 		<td class="a2">
-			<ww:textfield name="cxd.serial_nums" id="serial_nums" value="%{cxd.serial_nums}" theme="simple" readonly="true" onclick="importSerialNums();"/>
+			<ww:textfield name="zzd.serial_nums" id="serial_nums" value="%{zzd.serial_nums}" theme="simple" readonly="true" onclick="importSerialNums();"/>
 			<a style="cursor:hand" title="左键点击输入输列号" onclick="importSerialNums();"><b>...</b></a>
 		</td>	
 	</tr>
 	<tr>
 		<td class="a1" width="15%">备注</td>
 		<td class="a2" colspan="3">
-			<ww:textfield name="cxd.remark"  id="remark" value="%{cxd.remark}" theme="simple" cssStyle="width:85%"/>
+			<ww:textfield name="zzd.remark"  id="remark" value="%{zzd.remark}" theme="simple" cssStyle="width:85%"/>
 		</td>	
 	</tr>
 </table>
@@ -374,11 +371,11 @@
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
-		<td colspan="4">拆卸明细</td>
+		<td colspan="4">组装明细</td>
 	</tr>
 	</thead>
 </table>	
-<table width="100%"  align="center" id="cxdTable" class="chart_list" cellpadding="0" cellspacing="0">	
+<table width="100%"  align="center" id="zzdTable" class="chart_list" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
 		<td width="5%">选择</td>
@@ -393,24 +390,24 @@
 	</tr>
 	</thead>
 	
-	<ww:if test="cxdProducts.size>0">
-	<ww:iterator value="%{cxdProducts}" status="li">
+	<ww:if test="zzdProducts.size>0">
+	<ww:iterator value="%{zzdProducts}" status="li">
 	<tr>
 		<td class="a2"><input type="checkbox" name="proc_id" id="proc_id" value="<ww:property value="%{#li.count-1}"/>"></td>
 		<td class="a2">
-			<ww:textfield name='cxdProducts[%{#li.count-1}].product_name' id='product_name_%{#li.count-1}' value="%{product_name}" theme="simple" cssStyle="width:100%" readonly="true"/>
-			<ww:hidden name='cxdProducts[%{#li.count-1}].product_id' id='product_id_%{#li.count-1}' value="%{product_id}" theme="simple"/>
+			<ww:textfield name='zzdProducts[%{#li.count-1}].product_name' id='product_name_%{#li.count-1}' value="%{product_name}" theme="simple" cssStyle="width:100%" readonly="true"/>
+			<ww:hidden name='zzdProducts[%{#li.count-1}].product_id' id='product_id_%{#li.count-1}' value="%{product_id}" theme="simple"/>
 		</td>
-		<td class="a2"><ww:textfield name='cxdProducts[%{#li.count-1}].product_xh' id='product_xh_%{#li.count-1}' value="%{product_xh}" theme="simple" cssStyle="width:100%" readonly="true"/></td>
-		<td class="a2"><ww:textfield name='cxdProducts[%{#li.count-1}].product_dw' id='product_dw_%{#li.count-1}' value="%{product_dw}" theme="simple" cssStyle="width:100%" readonly="true"/></td>
-		<td class="a2"><ww:textfield name='cxdProducts[%{#li.count-1}].price' id='price_%{#li.count-1}' value="%{getText('global.format.double',{price})}" onblur="hj();" theme="simple" cssStyle="width:100%"/></td>
-		<td class="a2"><ww:textfield name='cxdProducts[%{#li.count-1}].nums' id='nums_%{#li.count-1}' value="%{nums}" onblur="hj();" theme="simple" cssStyle="width:100%"/></td>
-		<td class="a2"><ww:textfield name='cxdProducts[%{#li.count-1}].hj' id='hj_%{#li.count-1}' value="%{getText('global.format.double',{hj})}" theme="simple" cssStyle="width:100%" readonly="true"/></td>
+		<td class="a2"><ww:textfield name='zzdProducts[%{#li.count-1}].product_xh' id='product_xh_%{#li.count-1}' value="%{product_xh}" theme="simple" cssStyle="width:100%" readonly="true"/></td>
+		<td class="a2"><ww:textfield name='zzdProducts[%{#li.count-1}].product_dw' id='product_dw_%{#li.count-1}' value="%{product_dw}" theme="simple" cssStyle="width:100%" readonly="true"/></td>
+		<td class="a2"><ww:textfield name='zzdProducts[%{#li.count-1}].price' id='price_%{#li.count-1}' value="%{getText('global.format.double',{price})}" onblur="hj();" theme="simple" readonly="true" cssStyle="width:100%"/></td>
+		<td class="a2"><ww:textfield name='zzdProducts[%{#li.count-1}].nums' id='nums_%{#li.count-1}' value="%{nums}" onblur="hj();" theme="simple" cssStyle="width:100%"/></td>
+		<td class="a2"><ww:textfield name='zzdProducts[%{#li.count-1}].hj' id='hj_%{#li.count-1}' value="%{getText('global.format.double',{hj})}" theme="simple" cssStyle="width:100%" readonly="true"/></td>
 		<td class="a2">
-			<ww:textfield name='cxdProducts[%{#li.count-1}].qz_serial_num' id='qz_serial_num_%{#li.count-1}' value="%{qz_serial_num}" theme="simple" cssStyle="width:85%" readonly="true"/>
-			<ww:hidden id="qz_flag_%{#li.count-1}" name="cxdProducts[%{#li.count-1}].qz_flag" value="%{qz_flag}"/><a style="cursor:hand" title="左键点击输入输列号" onclick="openSerialWin('<ww:property value="%{#li.count-1}"/>');"><b>...</b></a>
+			<ww:textfield name='zzdProducts[%{#li.count-1}].qz_serial_num' id='qz_serial_num_%{#li.count-1}' value="%{qz_serial_num}" theme="simple" cssStyle="width:85%" readonly="true"/>
+			<ww:hidden id="qz_flag_%{#li.count-1}" name="zzdProducts[%{#li.count-1}].qz_flag" value="%{qz_flag}"/><a style="cursor:hand" title="左键点击输入输列号" onclick="openSerialWin('<ww:property value="%{#li.count-1}"/>');"><b>...</b></a>
 		</td>
-		<td class="a2"><ww:textfield name='cxdProducts[%{#li.count-1}].remark' id='remark_%{#li.count-1}' value="%{remark}" theme="simple" cssStyle="width:100%"/></td>
+		<td class="a2"><ww:textfield name='zzdProducts[%{#li.count-1}].remark' id='remark_%{#li.count-1}' value="%{remark}" theme="simple" cssStyle="width:100%"/></td>
 	</tr>	
 	</ww:iterator>
 	</ww:if>	
@@ -418,19 +415,19 @@
 	<tr>
 		<td class="a2"><input type="checkbox" name="proc_id" id="proc_id" value="0"></td>
 		<td class="a2">
-			<ww:textfield name='cxdProducts[0].product_name' id='product_name_0' value="" theme="simple" cssStyle="width:100%" readonly="true"/>
-			<ww:hidden name='cxdProducts[0].product_id' id='product_id_0' value="" theme="simple"/>
+			<ww:textfield name='zzdProducts[0].product_name' id='product_name_0' value="" theme="simple" cssStyle="width:100%" readonly="true"/>
+			<ww:hidden name='zzdProducts[0].product_id' id='product_id_0' value="" theme="simple"/>
 		</td>
-		<td class="a2"><ww:textfield name='cxdProducts[0].product_xh' id='product_xh_0' value="" theme="simple" cssStyle="width:100%" readonly="true"/></td>
-		<td class="a2"><ww:textfield name='cxdProducts[0].product_dw' id='product_dw_0' value="" theme="simple" cssStyle="width:100%" readonly="true"/></td>
-		<td class="a2"><ww:textfield name='cxdProducts[0].price' id='price_0' value="0.00" onblur="hj();" theme="simple" cssStyle="width:100%"/></td>
-		<td class="a2"><ww:textfield name='cxdProducts[0].nums' id='nums_0' value="0" onblur="hj();" theme="simple" cssStyle="width:100%"/></td>
-		<td class="a2"><ww:textfield name='cxdProducts[0].hj' id='hj_0' value="0.00" theme="simple" cssStyle="width:100%" readonly="true"/></td>
+		<td class="a2"><ww:textfield name='zzdProducts[0].product_xh' id='product_xh_0' value="" theme="simple" cssStyle="width:100%" readonly="true"/></td>
+		<td class="a2"><ww:textfield name='zzdProducts[0].product_dw' id='product_dw_0' value="" theme="simple" cssStyle="width:100%" readonly="true"/></td>
+		<td class="a2"><ww:textfield name='zzdProducts[0].price' id='price_0' value="0.00" onblur="hj();" theme="simple" readonly="true" cssStyle="width:100%"/></td>
+		<td class="a2"><ww:textfield name='zzdProducts[0].nums' id='nums_0' value="0" onblur="hj();" theme="simple" cssStyle="width:100%"/></td>
+		<td class="a2"><ww:textfield name='zzdProducts[0].hj' id='hj_0' value="0.00" theme="simple" cssStyle="width:100%" readonly="true"/></td>
 		<td class="a2">
-			<ww:textfield name='cxdProducts[0].qz_serial_num' id='qz_serial_num_0' value="" theme="simple" cssStyle="width:85%"/>
-			<input type="hidden" id="qz_flag_0" name="cxdProducts[0].qz_flag" value=""><a style="cursor:hand" title="左键点击输入输列号" onclick="openSerialWin('0');"><b>...</b></a>
+			<ww:textfield name='zzdProducts[0].qz_serial_num' id='qz_serial_num_0' value="" theme="simple" cssStyle="width:85%"/>
+			<input type="hidden" id="qz_flag_0" name="zzdProducts[0].qz_flag" value=""><a style="cursor:hand" title="左键点击输入输列号" onclick="openSerialWin('0');"><b>...</b></a>
 		</td>
-		<td class="a2"><ww:textfield name='cxdProducts[0].remark' id='remark_0' value="" theme="simple" cssStyle="width:100%"/></td>
+		<td class="a2"><ww:textfield name='zzdProducts[0].remark' id='remark_0' value="" theme="simple" cssStyle="width:100%"/></td>
 	</tr>	
 	</ww:else>	
 </table>
@@ -448,8 +445,8 @@
 	</tr>
 	<tr height="35">
 		<td class="a2" colspan="9" style="text-align: left">&nbsp;
-			<input type="button" name="button1" value="添加拆卸明细" class="css_button3" onclick="selProductMx();">
-			<input type="button" name="button1" value="删除拆卸明细" class="css_button3" onclick="delDesc();">
+			<input type="button" name="button1" value="添加组装明细" class="css_button3" onclick="selProductMx();">
+			<input type="button" name="button1" value="删除组装明细" class="css_button3" onclick="delDesc();">
 		</td>
 	</tr>			
 	<tr height="35">

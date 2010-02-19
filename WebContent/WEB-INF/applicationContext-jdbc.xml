@@ -467,12 +467,12 @@
           <property name="jdbcTemplate" ref="jdbcTemplate"/>
      </bean>
      
-      <!-- 售后服务单 -->   
+     <!-- 售后服务单 -->   
      <bean id="sfdDao" class="com.sw.cms.dao.SfdDAO">
         <property name="jdbcTemplate" ref="jdbcTemplate"/> 
      </bean> 
      
-      <!-- 派工单 -->
+     <!-- 派工单 -->
      <bean id="pgdDao" class="com.sw.cms.dao.PgdDAO">
           <property name="jdbcTemplate" ref="jdbcTemplate"/>
      </bean>
@@ -492,17 +492,17 @@
           <property name="jdbcTemplate" ref="jdbcTemplate"/>
      </bean>
      
-       <!-- 移库入库 -->
+     <!-- 移库入库 -->
      <bean id="ykrkDao" class="com.sw.cms.dao.YkrkDAO">
           <property name="jdbcTemplate" ref="jdbcTemplate"/>
      </bean>
      
-       <!-- 拆卸单-->
+     <!-- 拆卸单-->
      <bean id="cxdDao" class="com.sw.cms.dao.CxdDAO">
           <property name="jdbcTemplate" ref="jdbcTemplate"/>
      </bean>  
      
-       <!-- 出纳付款单-->
+     <!-- 出纳付款单-->
      <bean id="cnfkdDao" class="com.sw.cms.dao.CnfkdDAO">
           <property name="jdbcTemplate" ref="jdbcTemplate"/>
      </bean> 
@@ -510,7 +510,12 @@
 	 <!-- 客户往来统计包括：应收汇总、应付汇总-->
      <bean id="clientWlStatDao" class="com.sw.cms.dao.ClientWlStatDAO">
           <property name="jdbcTemplate" ref="jdbcTemplate"/>
-     </bean>  
+     </bean>
+     
+     <!-- 组装单-->
+     <bean id="zzdDao" class="com.sw.cms.dao.ZzdDAO">
+          <property name="jdbcTemplate" ref="jdbcTemplate"/>
+     </bean>
       
 </beans>
 

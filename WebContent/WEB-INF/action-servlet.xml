@@ -173,4 +173,6 @@
      <bean id="cxdAction" class="com.sw.cms.action.CxdAction" autowire="byName" scope="prototype"/>
      
      <bean id="cnfkdAction" class="com.sw.cms.action.CnfkdAction" autowire="byName" scope="prototype"/>
+     
+     <bean id="zzdAction" class="com.sw.cms.action.ZzdAction" autowire="byName" scope="prototype"/>
 </beans>

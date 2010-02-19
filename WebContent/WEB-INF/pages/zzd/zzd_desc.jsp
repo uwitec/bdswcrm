@@ -3,7 +3,7 @@
 <%@taglib uri="/WEB-INF/crm-taglib.tld" prefix="crm"%>
 <html>
 <head>
-<title>拆卸单明细</title>
+<title>组装单明细</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript">
@@ -21,7 +21,7 @@
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td colspan="2">拆卸单明细</td>
+		<td colspan="2">组装单明细</td>
 	</tr>
 	</thead>
 </table>
@@ -39,7 +39,7 @@
 		<td width="10%">备注</td>
 	</tr>
 	</thead>
-	<ww:iterator value="%{cxdProducts}" status="li">
+	<ww:iterator value="%{zzdProducts}" status="li">
 		<tr class="a1" onmousedown="trSelectChangeCss()">
 			<td><ww:property value="%{product_id}" /></td>
 			<td align="left"><ww:property value="%{product_name}" /></td>

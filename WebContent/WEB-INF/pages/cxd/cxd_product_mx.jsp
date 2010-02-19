@@ -62,7 +62,7 @@
 		k = startCount;  //从此位置开始添加
 		//alert("从此位置开始添加" + k);
 		
-		for(var i=1;i<document.myform.chk_id.length;i++){
+		for(var i=0;i<document.myform.chk_id.length;i++){
 					
 			var o = document.myform.chk_id[i];
 			if(o.checked){
@@ -96,8 +96,8 @@
 				
 				
 					id.value = arryStr[0];
-					xh.value = arryStr[1];
-					name.value = arryStr[2];
+					name.value = arryStr[1];
+					xh.value = arryStr[2];
 					dw.value = arryStr[3];
 					pc.value = arryStr[4];
 					qz_flag.value = arryStr[5];
