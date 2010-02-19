@@ -2366,6 +2366,29 @@
             <result name="success">/WEB-INF/pages/cxd/import_serial_nums.jsp</result>
         </action>
         <!-- 拆卸单 -->  
+        
+		<!--组装单 -->
+        <action name="listZzd" class="zzdAction" method="list">
+            <result name="success">/WEB-INF/pages/zzd/zzd_list.jsp</result>
+        </action>
+        <action name="descZzd" class="zzdAction" method="desc">
+            <result name="success">/WEB-INF/pages/zzd/zzd_desc.jsp</result>
+        </action>
+        <action name="editZzd" class="zzdAction" method="edit">
+            <result name="success">/WEB-INF/pages/zzd/zzd_edit.jsp</result>
+        </action>
+        <action name="updateZzd" class="zzdAction" method="update">
+            <result name="cancel" type="redirect">editZzd.html</result>
+            <result name="input">/WEB-INF/pages/zzd/zzd_edit.jsp</result>
+            <result name="success">/WEB-INF/pages/msg.jsp</result>
+        </action>
+        <action name="delZzd" class="zzdAction" method="del">
+            <result name="success" type="redirect">listZzd.html</result>
+        </action>
+        <action name="viewZzd" class="zzdAction" method="edit">
+            <result name="success">/WEB-INF/pages/zzd/zzd_view.jsp</result>
+        </action>
+        <!-- 组装单 -->
           
          <!-- 移库出库 -->
         <action name="listYkck" class="ykckAction" method="list">
