@@ -1,14 +1,10 @@
 package com.sw.cms.dao;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.jdbc.core.RowMapper;
-
+import com.sw.cms.dao.base.BeanRowMapper;
 import com.sw.cms.dao.base.JdbcBaseDAO;
-import com.sw.cms.dao.base.SqlUtil;
 import com.sw.cms.model.Page;
 import com.sw.cms.model.Xssk;
 import com.sw.cms.model.XsskDesc;
@@ -120,7 +116,23 @@ public class XsskDAO extends JdbcBaseDAO {
 	public Object getXssk(String id){
 		String sql = "select * from xssk where id='" + id + "'";
 		
-		return this.queryForObject(sql, new XsskRowMapper());
+		return this.queryForObject(sql, new BeanRowMapper(Xssk.class));
+	}
+	
+	
+	/**
+	 * 判断销售收款是否已经提交
+	 * @param id
+	 * @return
+	 */
+	public boolean isXsskSub(String id){
+		boolean is = false;
+		String sql = "select count(*) as counts from xssk where id='" + id + "' and state='已提交'";
+		int counts = this.getJdbcTemplate().queryForInt(sql);
+		if(counts > 0){
+			is = true;
+		}
+		return is;
 	}
 	
 	
@@ -130,7 +142,7 @@ public class XsskDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public List getXsskDescs(String id){
-		String sql = "select xsd_id,bcsk,xssk_id,remark,fsrq,fsje,(fsje-bcsk)as ysk from xssk_desc where xssk_id='" + id + "'";
+		String sql = "select xsd_id,bcsk,xssk_id,remark,fsrq,fsje,ysk from xssk_desc where xssk_id='" + id + "'";
 		
 		return this.getResultList(sql);
 	}
@@ -178,7 +190,7 @@ public class XsskDAO extends JdbcBaseDAO {
 		
 		String sql = "select * from xssk where delete_key='" + delete_key + "'";
 		
-		Object obj = this.queryForObject(sql, new XsskRowMapper());
+		Object obj = this.queryForObject(sql, new BeanRowMapper(Xssk.class));
 		if(obj != null){
 			xssk = (Xssk)obj;
 		}
@@ -309,7 +321,7 @@ public class XsskDAO extends JdbcBaseDAO {
 	 */
 	private void saveXsskDesc(List xsskDescs,String xssk_id){
 		String sql = "";
-		Object[] param = new Object[6];
+		Object[] param = new Object[7];
 		
 		if(xsskDescs != null && xsskDescs.size()>0){
 			for(int i =0;i<xsskDescs.size();i++){
@@ -317,7 +329,7 @@ public class XsskDAO extends JdbcBaseDAO {
 				XsskDesc xsskDesc = (XsskDesc)xsskDescs.get(i);
 				if(xsskDesc != null){
 					if(xsskDesc.getBcsk() > 0){
-						sql = "insert into xssk_desc(xssk_id,xsd_id,bcsk,remark,fsrq,fsje) values(?,?,?,?,?,?)";
+						sql = "insert into xssk_desc(xssk_id,xsd_id,bcsk,remark,fsrq,fsje,ysk) values(?,?,?,?,?,?,?)";
 						
 						param[0] = xssk_id;
 						param[1] = xsskDesc.getXsd_id();
@@ -325,6 +337,7 @@ public class XsskDAO extends JdbcBaseDAO {
 						param[3] = xsskDesc.getRemark();
 						param[4] = xsskDesc.getFsrq();
 						param[5] = xsskDesc.getFsje();
+						param[6] = xsskDesc.getYsk();
 						
 						this.getJdbcTemplate().update(sql,param); //添加付款明细
 						
@@ -344,54 +357,5 @@ public class XsskDAO extends JdbcBaseDAO {
 		String sql = "delete from xssk_desc where xssk_id='" + xssk_id + "'";
 		this.getJdbcTemplate().update(sql);
 	}
-	
-	
-	/**
-	 * 包装对象(销售收款)
-	 * 
-	 * @author liyt
-	 * 
-	 */
-	class XsskRowMapper implements RowMapper {
-		public Object mapRow(ResultSet rs, int index) throws SQLException {
-			Xssk xssk = new Xssk();
-
-			if(SqlUtil.columnIsExist(rs,"id")) xssk.setId(rs.getString("id"));
-			if(SqlUtil.columnIsExist(rs,"sk_date")) xssk.setSk_date(rs.getString("sk_date"));
-			if(SqlUtil.columnIsExist(rs,"client_name")) xssk.setClient_name(rs.getString("client_name"));
-			if(SqlUtil.columnIsExist(rs,"skzh")) xssk.setSkzh(rs.getString("skzh"));
-			if(SqlUtil.columnIsExist(rs,"jsr")) xssk.setJsr(rs.getString("jsr"));
-			if(SqlUtil.columnIsExist(rs,"skje")) xssk.setSkje(rs.getDouble("skje"));
-			if(SqlUtil.columnIsExist(rs,"state")) xssk.setState(rs.getString("state"));
-			if(SqlUtil.columnIsExist(rs,"remark")) xssk.setRemark(rs.getString("remark"));
-			if(SqlUtil.columnIsExist(rs,"is_ysk")) xssk.setIs_ysk(rs.getString("is_ysk"));
-			if(SqlUtil.columnIsExist(rs,"ysk_ye")) xssk.setYsk_ye(rs.getDouble("ysk_ye"));
-			if(SqlUtil.columnIsExist(rs,"czr")) xssk.setCzr(rs.getString("czr"));
-			if(SqlUtil.columnIsExist(rs,"delete_key")) xssk.setDelete_key(rs.getString("delete_key"));
-			
-			return xssk;
-		}
-	}
-	
-	
-	/**
-	 * 包装对象(销售收款明细)
-	 * 
-	 * @author liyt
-	 * 
-	 */
-	class XsskDescRowMapper implements RowMapper {
-		public Object mapRow(ResultSet rs, int index) throws SQLException {
-			XsskDesc xsskDesc = new XsskDesc();
-
-			if(SqlUtil.columnIsExist(rs,"id")) xsskDesc.setId(rs.getInt("id"));
-			if(SqlUtil.columnIsExist(rs,"xsd_id")) xsskDesc.setXsd_id(rs.getString("xsd_id"));
-			if(SqlUtil.columnIsExist(rs,"bcsk")) xsskDesc.setBcsk(rs.getDouble("bcsk"));
-			if(SqlUtil.columnIsExist(rs,"xssk_id")) xsskDesc.setXssk_id(rs.getString("xssk_id"));
-			if(SqlUtil.columnIsExist(rs,"remark")) xsskDesc.setRemark(rs.getString("remark"));
-			
-			return xsskDesc;
-		}
-	}	
 
 }

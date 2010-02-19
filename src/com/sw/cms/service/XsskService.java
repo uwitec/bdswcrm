@@ -38,6 +38,11 @@ public class XsskService {
 	 * @param ysk
 	 */
 	public void saveXssk(Xssk xssk,List xsskDescs){
+		
+		//如果销售收款已经提交，不做任何操作，直接返回
+		if(xsskDao.isXsskSub(xssk.getId())){
+			return;
+		}
 		xsskDao.saveXssk(xssk, xsskDescs);
 		
 		if(xssk.getState().equals("已提交")){
@@ -58,6 +63,12 @@ public class XsskService {
 	 * @param ysk
 	 */
 	public void updateXssk(Xssk xssk,List xsskDescs){
+		
+		//如果销售收款已经提交，不做任何操作，直接返回
+		if(xsskDao.isXsskSub(xssk.getId())){
+			return;
+		}
+		
 		xsskDao.updateXssk(xssk, xsskDescs);
 		
 		if(xssk.getState().equals("已提交")){

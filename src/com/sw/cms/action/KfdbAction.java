@@ -209,14 +209,9 @@ public class KfdbAction extends BaseAction {
 			}
 		}
 		
-		//判断调拨单是否已经提交
+		//判断调拨单是否已经提交，如果已经提交返回成功，不做任何操作
 		if(kfdbService.isDbFinish(kfdb.getId())){
-			msg = "调拨单已经出库，不能重复出库，请检查！";
-			
-			storeList = storeService.getAllStoreList();
-			kfdbProducts = kfdbService.getKfdbProducts(kfdb.getId());
-			
-			return "input";
+			return SUCCESS;
 		}
 		
 		kfdbService.updateKfdb(kfdb, kfdbProducts);

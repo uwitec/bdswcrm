@@ -11,6 +11,7 @@ import com.sw.cms.service.ClientsService;
 import com.sw.cms.service.UserService;
 import com.sw.cms.service.XsskService;
 import com.sw.cms.util.Constant;
+import com.sw.cms.util.DateComFunc;
 
 public class XsskAction extends BaseAction {
 	
@@ -25,8 +26,8 @@ public class XsskAction extends BaseAction {
 	private List clientsList= new ArrayList();
 	
 	private String id;
-	private String sk_date1 = "";
-	private String sk_date2 = "";
+	private String sk_date1 = DateComFunc.getToday();;
+	private String sk_date2 = DateComFunc.getToday();;
 	private String client_name = "";
 	
 	private String orderName ="";

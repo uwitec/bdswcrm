@@ -9,7 +9,14 @@ public class XsskDesc {
 	private String remark;
 	private String fsrq;
 	private double fsje;
-	
+	private double ysk;
+
+	public double getYsk() {
+		return ysk;
+	}
+	public void setYsk(double ysk) {
+		this.ysk = ysk;
+	}
 	public double getBcsk() {
 		return bcsk;
 	}

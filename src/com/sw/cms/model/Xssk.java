@@ -1,5 +1,7 @@
 package com.sw.cms.model;
 
+import java.util.Date;
+
 public class Xssk {
 	
 	private String id;     //编号
@@ -13,6 +15,7 @@ public class Xssk {
 	private String is_ysk;//是否预收款
 	private double ysk_ye = 0; //预收款余额
 	private String czr; //操作人
+	private Date cz_date;
 	
 	//删除关键字
 	//在销售单发生提交时如果发生了收款，需要将销售单ID写入
@@ -90,6 +93,12 @@ public class Xssk {
 	}
 	public void setDelete_key(String delete_key) {
 		this.delete_key = delete_key;
+	}
+	public Date getCz_date() {
+		return cz_date;
+	}
+	public void setCz_date(Date czDate) {
+		cz_date = czDate;
 	}
 
 }
