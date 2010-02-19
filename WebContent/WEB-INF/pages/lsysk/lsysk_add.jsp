@@ -34,7 +34,12 @@ List posTypeList = (List)VS.findValue("posTypeList");
 	}
 </style>
 <script type="text/javascript">
-	function saveInfo(){
+	function saveInfo(vl){
+		if(vl == "1"){
+			document.getElementById("state").value = "已保存";
+		}else{
+			document.getElementById("state").value = "已提交";
+		}
 		if(!InputValid(document.getElementById("id"),1,"string",1,1,20,"编号")){	 return; }
 		if(!InputValid(document.getElementById("client_name"),1,"string",1,1,50,"客户名称")){	 return; }
 		if(!InputValid(document.getElementById("lxdh"),1,"string",1,1,20,"联系电话")){	 return; }
@@ -55,9 +60,15 @@ List posTypeList = (List)VS.findValue("posTypeList");
 				return;
 			}
 		}		
-			
+
+		if(document.getElementById("state").value == "已提交"){
+			if(window.confirm("提交后将不能修改，确认提交吗？")){
+				document.lsyskForm.submit();
+			}
+		}else{
+			document.lsyskForm.submit();
+		}
 		
-		document.lsyskForm.submit();
 	}
 
 	
@@ -95,6 +106,7 @@ List posTypeList = (List)VS.findValue("posTypeList");
 </head>
 <body onload="initFzrTip();">
 <form name="lsyskForm" action="saveLsysk.html" method="post">
+<input type="hidden" name="lsysk.state" id="state" value="">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
@@ -167,16 +179,6 @@ List posTypeList = (List)VS.findValue("posTypeList");
 			</select>		<font color="red">*</font>				
 		</td>
 	</tr>
-	<tr>				
-		<td class="a1" width="15%">状态</td>
-		<td class="a2" width="35%">
-			<select name="lsysk.state" id="state">
-				<option value="已保存">已保存</option>
-				<option value="已提交">已提交</option>
-			</select>		
-		</td>		
-	</tr>
-	
 </table>
 <br>
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
@@ -191,16 +193,16 @@ List posTypeList = (List)VS.findValue("posTypeList");
 			<textarea rows="3" cols="50" name="lsysk.remark" id="remark" style="width:90%" maxlength="500"></textarea>
 		</td>
 	</tr>
-	
 	<tr height="35">
 		<td class="a1" colspan="2">
-			<input type="button" name="button1" value="提 交" class="css_button2" onclick="saveInfo();">&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="reset" name="button2" value="重 置" class="css_button2">&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="button" name="button1" value="保 存" class="css_button2" onclick="saveInfo('1');">&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="button" name="button2" value="提 交" class="css_button2" onclick="saveInfo('2');">&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="button" name="button3" value="关 闭" class="css_button2" onclick="window.close();">
 		</td>
 	</tr>
 </table>
-
+<BR>
+<font color="red">注：“保存”零售预收款暂存，可修改；“提交”后零售预收款完成结算，不可修改。</font>
 </form>
 </body>
 </html>

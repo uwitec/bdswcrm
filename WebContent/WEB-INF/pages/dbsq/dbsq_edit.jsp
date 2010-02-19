@@ -38,7 +38,13 @@ session.removeAttribute("messages");
 
 	var allCount = 2;
 	
-	function saveInfo(){
+	function saveInfo(vl){
+		if(vl == "1"){
+			document.getElementById("state").value = "已保存";
+		}else{
+			document.getElementById("state").value = "已提交";
+		}
+		
 		if(document.getElementById("id").value == ""){
 			alert("编号不能为空！");
 			return;
@@ -57,7 +63,14 @@ session.removeAttribute("messages");
 			return;
 		}					
 	
-		document.dbsqForm.submit();
+		if(document.getElementById("state").value == "已提交"){
+			if(window.confirm("提交后将不能修改，确认提交吗？")){
+				document.dbsqForm.submit();
+			}
+		}else{
+			document.dbsqForm.submit();
+		}
+		
 	}
       	
     function addTr(){
@@ -121,6 +134,7 @@ session.removeAttribute("messages");
 </head>
 <body onload="initFzrTip();">
 <form name="dbsqForm" action="updateDbsq.html" method="post">
+<input type="hidden" name="dbsq.state" id="state" value="">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
@@ -176,15 +190,6 @@ if(msg != null && msg.size() > 0){
             </div>
 		    <input type="hidden" name="dbsq.jsr" id="fzr" value="<%=dbsq.getJsr() %>"/><font color="red">*</font>	
 		</td>
-	</tr>
-	<tr>
-		<td class="a1">状态</td>
-		<td class="a2" colspan="3">
-			<select name="dbsq.state" id="state">
-				<option value="已保存" <%if(StringUtils.nullToStr(dbsq.getState()).equals("已保存")) out.print("selected"); %>>已保存</option>
-				<option value="已提交" <%if(StringUtils.nullToStr(dbsq.getState()).equals("已提交")) out.print("selected"); %>>已提交</option>
-			</select>			
-		</td>			
 	</tr>
 </table>
 <br>
@@ -266,18 +271,19 @@ if(dbsqProducts!=null && dbsqProducts.size()>0){
 	<tr>
 		<td class="a1" width="15%">备注</td>
 		<td class="a2" width="85%">
-			<textarea rows="6" name="dbsq.remark" id="remark" style="width:75%" maxlength="500"><%=StringUtils.nullToStr(dbsq.getRemark()) %></textarea>
+			<textarea rows="3" name="dbsq.remark" id="remark" style="width:75%" maxlength="500"><%=StringUtils.nullToStr(dbsq.getRemark()) %></textarea>
 		</td>
 	</tr>	
 	<tr height="35">
 		<td class="a1" colspan="2">
-			<input type="button" name="button1" value="提 交" class="css_button2" onclick="saveInfo();">&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="reset" name="button2" value="重 置" class="css_button2">&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="button" name="button1" value="保 存" class="css_button2" onclick="saveInfo('1');">&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="button" name="button2" value="提 交" class="css_button2" onclick="saveInfo('2');">&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="button" name="button3" value="关 闭" class="css_button2" onclick="window.close();">
 		</td>
 	</tr>
 </table>
-
+<BR>
+<font color="red">注：“保存”调拨申请暂存，可修改；“提交”后生成相应的调拨单，不可修改。</font>
 </form>
 </body>
 </html>

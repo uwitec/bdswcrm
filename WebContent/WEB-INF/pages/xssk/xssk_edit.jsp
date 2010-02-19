@@ -29,15 +29,17 @@ if(xsskDescs != null && xsskDescs.size()>0){
 <script language='JavaScript' src="js/selJsr.js"></script>
 <script type="text/javascript" src="js/prototype-1.4.0.js"></script>
 <style>
-	.selectTip{
-		background-color:#009;
-		 color:#fff;
-	}
+	.selectTip{background-color:#009;color:#fff;}
 </style>
 <script type="text/javascript">
 	var allCount = <%=allCount %>;
 
-	function saveInfo(){
+	function saveInfo(vl){
+		if(vl == "1"){
+			document.getElementById("state").value = "已保存";
+		}else{
+			document.getElementById("state").value = "已提交";
+		}
 		if(!InputValid(document.getElementById("id"),1,"string",1,1,20,"编号")){	 return; }
 		if(!InputValid(document.getElementById("sk_date"),1,"string",1,1,20,"收款日期")){	 return; }
 		if(!InputValid(document.getElementById("client_id"),1,"string",1,1,50,"往来单位")){	 return; }
@@ -55,8 +57,13 @@ if(xsskDescs != null && xsskDescs.size()>0){
 			return;
 		}
 
-		document.XsskForm.btnSub.disabled = true;
-		document.XsskForm.submit();
+		if(document.getElementById("state").value == "已提交"){
+			if(window.confirm("提交后将不能修改，确认提交吗？")){
+				document.XsskForm.submit();
+			}
+		}else{
+			document.XsskForm.submit();
+		}
 	}
 	
 	function openWin(){
@@ -152,6 +159,7 @@ if(xsskDescs != null && xsskDescs.size()>0){
 </head>
 <body onload="initFzrTip();">
 <form name="XsskForm" action="updateXssk.html" method="post">
+<input type="hidden"  name="xssk.state" id="state" value="">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
@@ -186,19 +194,10 @@ if(xsskDescs != null && xsskDescs.size()>0){
 		<td class="a1" widht="20%">收款账户</td>
 		<td class="a2"><input type="text" id="zhname"  name="zhname" value="<%=StaticParamDo.getAccountNameById(StringUtils.nullToStr(xssk.getSkzh())) %>" readonly>
 		<input type="hidden" id="fkzh"  name="xssk.skzh" value="<%=StringUtils.nullToStr(xssk.getSkzh()) %>">
-		<img src="images/select.gif" align="absmiddle" title="选择账户" border="0" onclick="openAccount();" style="cursor:hand">
+		<img src="images/select.gif" align="absmiddle" title="选择账户" border="0" onclick="openAccount();" style="cursor:hand"><font color="red">*</font>
 		</td>
 
 	</tr>
-	<tr>
-		<td class="a1" width="15%">状态</td>
-		<td class="a2">
-			<select name="xssk.state">
-				<option value="已保存" <%if(StringUtils.nullToStr(xssk.getState()).equals("已保存")) out.print("selected"); %>>已保存</option>
-				<option value="已提交" <%if(StringUtils.nullToStr(xssk.getState()).equals("已提交")) out.print("selected"); %>>已提交</option>
-			</select>		
-		</td>			
-	</tr>	
 </table>
 <br>
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
@@ -253,7 +252,7 @@ if(xsskDescs != null && xsskDescs.size()>0){
 		<td class="a2"><input type="text" id="xsd_id_<%=i %>" name="xsskDescs[<%=i %>].xsd_id" value="" readonly></td>
 		<td class="a2"><input type="text" size="10" id="fsrq_<%=i %>" name="xsskDescs[<%=i %>].fsrq" value="" readonly></td>
 		<td class="a2"><input type="text" size="10" id="fsje_<%=i %>" name="xsskDescs[<%=i %>].fsje" value="0.00" readonly></td>
-		<td class="a2"><input type="text" size="10" id="ysk_<%=i %>" name="xsskDescs[<%=i %>].yfje"  value="0.00" readonly></td>
+		<td class="a2"><input type="text" size="10" id="ysk_<%=i %>" name="xsskDescs[<%=i %>].ysk"  value="0.00" readonly></td>
 		<td class="a2"><input type="text" size="10" id="bcsk_<%=i %>" name="xsskDescs[<%=i %>].bcsk" value="0.00" onblur="hj();" <%if(StringUtils.nullToStr(xssk.getIs_ysk()).equals("是")) out.print("readonly"); %>></td>
 		<td class="a2"><input type="text" id="remark_<%=i %>" name="xsskDescs[<%=i %>].remark" value=""></td>	
 	</tr>
@@ -290,13 +289,14 @@ if(xsskDescs != null && xsskDescs.size()>0){
 	
 	<tr height="35">
 		<td class="a1" colspan="2">
-			<input type="button" name="btnSub" value="提 交" class="css_button2" onclick="saveInfo();">&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="reset" name="button2" value="重 置" class="css_button2">&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="button" name="btnSub" value="保 存" class="css_button2" onclick="saveInfo('1');">&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="button" name="button2" value="提 交" class="css_button2" onclick="saveInfo('2');">&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="button" name="button1" value="关 闭" class="css_button2" onclick="window.close();">
 		</td>
 	</tr>
 </table>
-
+<BR>
+<font color="red">注：“保存”销售收款暂存，可修改；“提交”后销售收款完成结算，不可修改。</font>
 </form>
 </body>
 </html>
