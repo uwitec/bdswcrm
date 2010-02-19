@@ -112,7 +112,7 @@ public class SysInitSetDAO extends JdbcBaseDAO {
 	 * 清空系统数据
 	 */
 	public void updateSys_ClearData(){
-		String[] sqls = new String[94];
+		String[] sqls = new String[101];
 		
 		sqls[0] = "delete from xxfb_nbgg";   //内部公告
 		sqls[1] = "delete from account_dzd"; //对账单
@@ -134,7 +134,7 @@ public class SysInitSetDAO extends JdbcBaseDAO {
 		sqls[17] = "update cms_all_seq set jhdid=1,gysid=1,cgyfkid=1,rkdid=1,kcid=1," +
 				   "kcpdid=1,kfid=1,ckdid=1,clientid=1,xsdid=1,yskid=1,lsdid=1,userid=10," +
 				   "roleid=2,pzid=1,thdid=1,dbsqid=1,kfdbid=1,chtjid=1,accountid=1," +
-				   "qtsrid=1,qtzcid=1,nbzzid=1,cgthdid=1,lsyskid=1,lsthdid=1,yushoutoyingshouid=1,yufutoyingfuid=1,fysqid=1,txfkid=1,txfkdescid=1,kcpdyk_id=1,linkman_id=1,bxdid=1,cxdid=1,cnfkdid=1"; //更新系统所有序列
+				   "qtsrid=1,qtzcid=1,nbzzid=1,cgthdid=1,lsyskid=1,lsthdid=1,yushoutoyingshouid=1,yufutoyingfuid=1,fysqid=1,txfkid=1,txfkdescid=1,kcpdyk_id=1,linkman_id=1,bxdid=1,cxdid=1,cnfkdid=1,zzdid=1"; //更新系统所有序列
 		sqls[18] = "delete from dbsq";  //调拨申请
 		sqls[19] = "delete from dbsq_product"; //调拨申请相关产品
 		sqls[20] = "delete from fxdd";  //分销订单
@@ -214,6 +214,13 @@ public class SysInitSetDAO extends JdbcBaseDAO {
 		sqls[91] = "delete from  ykrk_product";
 		sqls[92] = "delete from  ykck";
 		sqls[93] = "delete from  ykck_product";
+		sqls[94] = "delete from cxd";                  //拆卸单
+		sqls[95] = "delete from cxd_product";          //拆卸单明细
+		sqls[96] = "delete from zzd";                  //组装单
+		sqls[97] = "delete from zzd_product";          //组装单明细
+		sqls[98] = "delete from sp_right";
+		sqls[99] = "delete from cnfkd";
+		sqls[100] = "delete from clients_pay_info";
 	    
 		
 		

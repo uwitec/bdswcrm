@@ -118,8 +118,6 @@ public class CxdAction extends BaseAction {
 			cxd.setCzr(user_id);
 			
 			iscs_flag = sysInitSetService.getQyFlag();  //是否完成初始标志
-			storeList = storeService.getAllStoreList();   //库房列表
-			userList = userService.getAllEmployeeList();  //业务员列表
 			
 			//如果状态是已提交需判断库存是否满足
 			//只有在完成初始工作后再做库存是否满足需求判断
@@ -129,14 +127,17 @@ public class CxdAction extends BaseAction {
 				if(!msg.equals("")){
 					cxd.setState("已保存");
 					cxdService.updateCxd(cxd, cxdProducts);
+					
+					storeList = storeService.getAllStoreList();   //库房列表
+					userList = userService.getAllEmployeeList();  //业务员列表
+					
 					return INPUT;
 				}
 			}
 			
-			//如果数据库中存在该拆卸单，并且状态为已提交，提示用户拆卸单已提交
+			//如果数据库中存在该拆卸单，并且状态为已提交，不做任何处理直接返回成功
 			if(cxdService.isCxdSubmit(cxd.getId())){
-				msg = "拆卸单已提交，不能重复提交！";
-				return INPUT;
+				return SUCCESS;
 			}
 			
 			cxdService.updateCxd(cxd, cxdProducts);
