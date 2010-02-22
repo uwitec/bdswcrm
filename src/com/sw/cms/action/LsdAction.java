@@ -208,9 +208,8 @@ public class LsdAction extends BaseAction {
 			//如果零售单状态为已提交需要判断库存是否满足出库需求
 			//如果不满足出库需求，则保存零售单，同时返回输入页面，提示用户
 			if(lsd.getState().equals("已提交")){
-				String msg = lsdService.checkKc(lsd, lsdProducts);
-				if(!msg.equals("")){
-					this.setMsg(msg);
+				if(!(lsdService.checkKc(lsd, lsdProducts)).equals("")){
+					this.setMsg(lsdService.checkKc(lsd, lsdProducts));
 					lsd.setState("已保存");
 					lsdService.saveLsd(lsd, lsdProducts);
 					
@@ -273,9 +272,8 @@ public class LsdAction extends BaseAction {
 			//如果零售单状态为已提交需要判断库存是否满足出库需求
 			//如果不满足出库需求，则保存零售单，同时返回输入页面，提示用户
 			if(lsd.getState().equals("已提交")){
-				String msg = lsdService.checkKc(lsd, lsdProducts);
-				if(!msg.equals("")){
-					this.setMsg(msg);
+				if(!(lsdService.checkKc(lsd, lsdProducts)).equals("")){
+					this.setMsg(lsdService.checkKc(lsd, lsdProducts));
 					lsd.setState("已保存");
 					lsdService.updateLsd(lsd, lsdProducts);
 					
@@ -413,10 +411,9 @@ public class LsdAction extends BaseAction {
 		
 		//只有在审批通过并且完成初始化后再判断库存是否满足
 		if(sp_state.equals("3") && iscs_flag.equals("1")){	
-			//审批通过,需要判断库存是否满足			
-			String msg = lsdService.checkKc(lsd, lsdProducts);
-			if(!msg.equals("")){
-				this.setMsg(msg);
+			//审批通过,需要判断库存是否满足
+			if(!(lsdService.checkKc(lsd, lsdProducts)).equals("")){
+				this.setMsg(lsdService.checkKc(lsd, lsdProducts));
 				return "input";
 			}
 		}

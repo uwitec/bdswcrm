@@ -161,7 +161,7 @@ public class YfHzMxDAO extends JdbcBaseDAO {
 		}
 		
 		//采购付款
-		String cgfk_sql = "select DATE_FORMAT(cz_date,'%Y-%m-%d') as creatdate,'付款' as xwtype,id as dj_id,fkje as je,cz_date from cgfk where state='已提交'";
+		String cgfk_sql = "select DATE_FORMAT(cz_date,'%Y-%m-%d') as creatdate,'付款' as xwtype,id as dj_id,fkje as je,cz_date from cgfk where (state='已提交' or state='已支付')";   
 		if(!start_date.equals("")){
 			cgfk_sql = cgfk_sql + " and DATE_FORMAT(cz_date,'%Y-%m-%d')>='" + start_date + "'";
 		}
