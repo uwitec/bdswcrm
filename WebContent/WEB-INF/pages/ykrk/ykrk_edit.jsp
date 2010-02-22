@@ -23,7 +23,7 @@ if(ykrkProducts!=null && ykrkProducts.size()>0){
 
 <html>
 <head>
-<title>移库出库</title>
+<title>移库入库</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript" src="js/Check.js"></script>
@@ -52,7 +52,7 @@ if(ykrkProducts!=null && ykrkProducts.size()>0){
 			return;
 		}		
 		if(document.getElementById("rk_store_id").value == ""){
-			alert("调出仓库不能为空，请选择！");
+			alert("调入仓库不能为空，请选择！");
 			return;
 		}
 		  if(document.getElementById("fzr").value == ""){
@@ -65,51 +65,44 @@ if(ykrkProducts!=null && ykrkProducts.size()>0){
 		var oflag=true;
 		var nflag=true; 
 		//判断是否存在强制输入序列号的产品没有输入序列号
-		for(var i=0;i<allCount;i++){				  
-			var oqzserialnum = document.getElementById("oqz_serial_num_" + i); //序列号
-			var pn = document.getElementById("product_name_" + i);           //产品名称			 
-			var nqzserialnum= document.getElementById("nqz_serial_num_" + i); //序列号
-			if(pn!=null)
-			{
-			   if(oq=="")
-			   {
-			     oq=document.getElementById("oqz_serial_num_" + i);
-			   }
-			   else
-			   {
-			     oq+=","+document.getElementById("oqz_serial_num_" + i);
-			   }
-			   if(nq=="")
-			   {
-			     nq=document.getElementById("nqz_serial_num_" + i);
-			   }
-			   else
-			   {
-			     nq+=","+document.getElementById("nqz_serial_num_" + i);
-			   }
-			   				 
-			   if(nqzserialnum.value == ""){
+		for(var i=0;i<allCount;i++)
+		{
+			var qzflag = document.getElementById("qz_flag_" + i);            //标志是否强制输入
+			var qzserialnum = document.getElementById("qz_serial_num_" + i); //序列号
+			var pn = document.getElementById("product_name_" + i);           //产品名称
+			
+			if(qzflag != null){
+				if(qzflag.value == "是"){
+					if(qzserialnum.value == ""){
 						//如果没有输入序列号提示用户输入序列号
-				alert("产品" + pn.value + "强制序列号，请先输入序列号！");
-				oqzserialnum.focus();
-				return;
-				}					
-				else if(nqzserialnum.value ==oqzserialnum.value)  {											 
-				alert("产品" + pn.value + "输入新序列号重复 ，请检查！");
-				nqzserialnum.focus();
-				return;
-				}
+						alert("产品" + pn.value + "强制序列号，请先输入序列号！");
+						qzserialnum.focus();
+						return;
+					}else{
+						//校验输入数量与产品数是否相同
+						var serial = document.getElementById("qz_serial_num_" + i).value;
+						var arrySerial = serial.split(",");
+						
+						var nms = document.getElementById("nums_" + i).value;
+						
+						if(parseInt(nms) != arrySerial.length){
+							alert("产品" + pn.value + "输入序列号数量与产品数量不符，请检查！");
+							qzserialnum.focus();
+							return;
+						}
 					
+					}
+				}
 			}
 		}
 			 					
-			document.YkrkForm.submit(); 
+			document.ykrkForm.submit(); 
 		  
 		}
 	
 
   function addTr(){
-        var otr = document.getElementById("kfdbTable").insertRow(-1);
+        var otr = document.getElementById("ykrkTable").insertRow(-1);
 
        // var curId = ($('xsdtable').rows.length-2);
         var curId = allCount + 1;   //curId一直加下去，防止重复
@@ -125,11 +118,11 @@ if(ykrkProducts!=null && ykrkProducts.size()>0){
         
         var otd3 = document.createElement("td");
         otd3.className = "a2";
-        otd3.innerHTML = '<input type="text" id="oqz_serial_num_'+curId+'" name="ykrkProducts['+curId+'].oqz_serial_num" size="15" readonly>';
+        otd3.innerHTML = '<input type="text" id="nums_'+curId+'" name="ykrkProducts['+curId+'].nums" value="0">';
         
 		var otd7 = document.createElement("td");
 		otd7.className = "a2";
-		otd7.innerHTML = '<input type="text" id="nqz_serial_num_'+curId+'" name="ykrkProducts['+curId+'].nqz_serial_num" size="15" readonly><input type="hidden" id="qz_flag_'+curId+'" name="ykrkProducts['+curId+'].qz_flag"><a style="cursor:hand" title="点击输入序列号" onclick="openSerialWin('+ curId +');"><b>...</b></a>&nbsp;';           
+		otd7.innerHTML = '<input type="text" id="qz_serial_num_'+curId+'" name="ykrkProducts['+curId+'].qz_serial_num" size="15" readonly><input type="hidden" id="qz_flag_'+curId+'" name="ykrkProducts['+curId+'].qz_flag"><a style="cursor:hand" title="点击输入序列号" onclick="openSerialWin('+ curId +');"><b>...</b></a>&nbsp;';           
 		         
         
         var otd5 = document.createElement("td");
@@ -146,7 +139,7 @@ if(ykrkProducts!=null && ykrkProducts.size()>0){
         otr.appendChild(otd7);
         otr.appendChild(otd5);
         otr.appendChild(otd6);               
-     }		
+     }	
      
      
 	function delTr(i){
@@ -155,37 +148,12 @@ if(ykrkProducts!=null && ykrkProducts.size()>0){
 			
 	}     
 
-	
 	//选择调拨产品
 	function openWin(id){
-		var destination = "selShkcByzy.html?openerId="+id;
+		var destination = "selShkcByhao.html?openerId="+id;
 		var fea ='width=800,height=500,left=' + (screen.availWidth-800)/2 + ',top=' + (screen.availHeight-500)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
 		window.open(destination,'详细信息',fea);	
-	}
-	
-	
-	function openSerialWin(vl)
-	{	 		
-		
-		var pn = document.getElementById("product_name_"+ vl).value;
-		 
-		
-		if(pn == ""){
-			alert("请选择产品，再输入序列号！");
-			return;
-		} 		
-		var url = "importYkrkSerial.html?openerId="+vl;
-		var fea ='width=300,height=200,left=' + (screen.availWidth-300)/2 + ',top=' + (screen.availHeight-300)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
-		
-		window.open(url,'详细信息',fea);	
-	}  
-
-
-	function f_enter(){
-	    if (window.event.keyCode==13){
-	        sendSerialNum();
-	    }
 	}
 	
 	function openywyWin()
@@ -204,13 +172,43 @@ if(ykrkProducts!=null && ykrkProducts.size()>0){
 		window.open(destination,'选择经手人',fea);	
 	}	
 	
+	function openSerialWin(vl)
+	{	 		
+		
+		var pn = document.getElementById("product_id_" + vl).value;
+		var nm = document.getElementById("nums_" + vl).value;
+		
+		if(pn == ""){
+			alert("请选择产品，再输入序列号！");
+			return;
+		}
+		if(nm == "" || nm == "0"){
+			alert("请设置产品数量，再输入序列号！");
+			return;
+		}
+		
+		var qzserialnum = document.getElementById("qz_serial_num_" + vl).value;
+				
+		var url = "importSerial.html?openerId=" + vl + "&nums=" + nm + "&serialNum=" + qzserialnum + "&product_id=" + pn;
+		var fea ='width=300,height=200,left=' + (screen.availWidth-300)/2 + ',top=' + (screen.availHeight-300)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		
+		window.open(url,'详细信息',fea);	
+	}  
+	
+
+	function f_enter(){
+	    if (window.event.keyCode==13){
+	        sendSerialNum();
+	    }
+	}
+	
 	//发送序列号
 	function sendSerialNum(){
 		var serialNum = dwr.util.getValue("s_nums");
 		if(serialNum == ""){
 			return;
 		}
-		dwrService.getProductObjBySerialNum(serialNum,setProductInfo);		
+		dwrService.getGoodProductObjBySerialNum(serialNum,setProductInfo);		
 	}
 	
 	//处理返回产品对象
@@ -257,7 +255,7 @@ if(ykrkProducts!=null && ykrkProducts.size()>0){
 		}else{
 			alert("该序列号不存在，请检查!");
 		}
-	}
+	}	
 	
 </script>
 </head>
@@ -343,13 +341,13 @@ if(!msg.equals("")){
 	</thead>
 	 	
 </table>
-<table width="100%"  align="center" id="kfdbTable"  class="chart_list" cellpadding="0" cellspacing="0">	
+<table width="100%"  align="center" id="ykrkTable"  class="chart_list" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
 		<td>产品名称</td>
 		<td>规格</td>
-		<td>旧序列号</td>
-		<td>新序列号</td>
+		<td>数量</td>
+		<td>强制序列号</td>
 		<td>备注</td>
 		<td></td>
 	</tr>
@@ -366,9 +364,9 @@ if(ykrkProducts!=null && ykrkProducts.size()>0){
 			<input type="hidden" id="product_id_<%=i %>" name="ykrkProducts[<%=i %>].product_id" value="<%=StringUtils.nullToStr(ykrkProduct.get("product_id")) %>">
 		</td>
 		<td class="a2"><input type="text" id="product_xh_<%=i %>" name="ykrkProducts[<%=i %>].product_xh" value="<%=StringUtils.nullToStr(ykrkProduct.get("product_xh")) %>" readonly></td>
-		<td class="a2"><input type="text" id="oqz_serial_num_<%=i %>" name="ykrkProducts[<%=i %>].oqz_serial_num" value="<%=StringUtils.nullToStr(ykrkProduct.get("oqz_serial_num")) %>" size="15" readonly></td>
+		<td class="a2"><input type="text" id="nums_<%=i %>" name="ykrkProducts[<%=i %>].nums" value="<%=StringUtils.nullToStr(ykrkProduct.get("nums")) %>" size="15" readonly></td>
 		<td class="a2">
-			<input type="text" id="nqz_serial_num_<%=i %>" name="ykrkProducts[<%=i %>].nqz_serial_num" value="<%=StringUtils.nullToStr(ykrkProduct.get("nqz_serial_num")) %>" size="15" readonly>
+			<input type="text" id="qz_serial_num_<%=i %>" name="ykrkProducts[<%=i %>].qz_serial_num" value="<%=StringUtils.nullToStr(ykrkProduct.get("qz_serial_num")) %>" size="15" readonly>
 			<input type="hidden" id="qz_flag_<%=i %>" name="ykrkProducts[<%=i %>].qz_flag" value="<%=StringUtils.nullToStr(ykrkProduct.get("qz_flag")) %>"><a style="cursor:hand" title="左键点击输入输列号" onclick="openSerialWin('<%=i %>');"><b>...</b></a>&nbsp;
 		</td>		
 		<td class="a2"><input type="text" id="product_remark_<%=i %>" name="ykrkProducts[<%=i %>].product_remark" value="<%=StringUtils.nullToStr(ykrkProduct.get("product_remark")) %>" maxlength="50"></td>
@@ -389,9 +387,9 @@ if(ykrkProducts!=null && ykrkProducts.size()>0){
 			<input type="hidden" id="product_id_<%=i %>" name="ykrkProducts[<%=i %>].product_id">
 		</td>
 		<td class="a2"><input type="text" id="product_xh_<%=i %>" name="ykrkProducts[<%=i %>].product_xh" readonly></td>
-		<td class="a2"> <input type="text" id="oqz_serial_num_<%=i %>" name="ykrkProducts[<%=i %>].oqz_serial_num" value="" size="15" readonly></td>
+		<td class="a2"> <input type="text" id="nums_<%=i %>" name="ykrkProducts[<%=i %>].nums" value="" size="15" readonly></td>
 		<td class="a2">
-			<input type="text" id="nqz_serial_num_<%=i %>" name="ykrkProducts[<%=i %>].nqz_serial_num" value="" size="15" readonly>
+			<input type="text" id="qz_serial_num_<%=i %>" name="ykrkProducts[<%=i %>].qz_serial_num" value="" size="15" readonly>
 			<input type="hidden" id="qz_flag_<%=i %>" name="ykrkProducts[<%=i %>].qz_flag" value=""><a style="cursor:hand" title="左键点击输入输列号" onclick="openSerialWin('<%=i %>');"><b>...</b></a>&nbsp;
 		</td>		
 		<td class="a2"><input type="text" id="product_remark_<%=i %>" name="ykrkProducts[<%=i %>].product_remark" maxlength="50"></td>
@@ -423,7 +421,7 @@ if(ykrkProducts!=null && ykrkProducts.size()>0){
 	<tr>
 		<td class="a1" width="15%">备注</td>
 		<td class="a2" width="85%">
-			<textarea rows="6" name="ykck.remark" id="remark" style="width:75%" maxlength="500"></textarea>
+			<textarea rows="6" name="ykrk.remark" id="remark"  style="width:75%" maxlength="500"><%=StringUtils.nullToStr(ykrk.getRemark()) %></textarea>
 		</td>
 	</tr>	
 	<tr height="35">

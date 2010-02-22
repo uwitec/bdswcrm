@@ -35,52 +35,49 @@ session.removeAttribute("messages");
 <style>
 	.selectTip{background-color:#009;color:#fff;}
 </style>
-<script type="text/javascript">
-
-	  
-	var allCount = <%=counts %>;
+<script type="text/javascript">	  
+    var allCount = <%=counts %>;	
+	function saveInfo(){	
+	    if(document.getElementById("client_name").value == ""){
+			alert("客户名称不能为空，请填写！");
+			return;
+		}
 		
-	function saveInfo(){
-	      
 		if(document.getElementById("fzr").value == ""){
-			alert("返还人不能为空，请选择！");
+			alert("经手人不能为空，请填写！");
 			return;
-		}	
-		 	
-		if(document.getElementById("client_name").value == ""){
-			alert("客户姓名不能为空，请填写！");
-			return;
-		}
-		if(document.getElementById("lxr").value=="")
-		{
-		   alert("联系人不能为空,请填写!");
-		   return;
-		}
-		 var counts=0;
+		}			
+		
+		var counts=0;		 
 		for(var i=0;i<=allCount;i++)
-		{
-		   
-		   var product_name=document.getElementById("product_name_"+i).value;
-		   if(product_name!="")
-		   {
-		     
-		     counts=counts+1;
-		   }
+		{			 	
+		   var product_name=document.getElementById("product_name_"+i);
+		   if(product_name!=null)
+		   {		     
+		      if(product_name.value!="")
+		      {		     
+		        counts=counts+1;
+		      }
+		   }		   
 		}
 		if(counts==0)
 		{
-		  alert("接修产品不能为空，请填写！");
+		  alert("返还产品不能为空，请填写！");
 		  return;
 		}
+		
+		if(!InputValid(document.getElementById("skzh"),1,"string",0,1,100,"收款账户")){return;}
+
 		//判断是否存在强制输入序列号的产品没有输入序列号
 		for(var i=0;i<=allCount;i++){
-		  
-			var qzserialnum = document.getElementById("qz_serial_num_" + i); //序列号
+		 
+			var qzserialnum = document.getElementById("qz_serial_num_"+i); //序列号
 			var pn = document.getElementById("product_name_" + i);           //产品名称
 			
 			 
-				 if(pn.value!="")
+				 if(pn!=null&&pn.value!="")
 				 {
+				     
 					if(qzserialnum.value == "")
 					{
 						//如果没有输入序列号提示用户输入序列号
@@ -88,15 +85,35 @@ session.removeAttribute("messages");
 						qzserialnum.focus();
 						return;
 					}
-					
-			     }			 
+					else
+					{
+						//校验输入数量与产品数是否相同
+						var serial = document.getElementById("qz_serial_num_" + i).value;
+						var arrySerial = serial.split(",");
+						
+						var nms = document.getElementById("nums_" + i).value;
+						
+						if(parseInt(nms) != arrySerial.length){
+							alert("产品" + pn.value + "输入序列号数量与产品数量不符，请检查！");
+							qzserialnum.focus();
+							return;
+						}
+					}
+			     }
 		}
-
-		  
-		
-	    document.fhkhdForm.submit();	
+	  
+		if(document.getElementById("state").value == "已提交"){
+			if(window.confirm("确认要提交返还客户单吗，提交后将无法修改！"))
+			{				
+				document.fhkhdForm.submit();		
+			}
+ 	     }
+	     else
+	     { 	     
+	         document.fhkhdForm.submit();	
+	     }
 	     
-	 		
+	     document.fhkhdForm.btnSub.disabled = true;
 	}
 	
 	function setNum(i)
@@ -109,58 +126,70 @@ session.removeAttribute("messages");
 				}
 			}		
 	} 
-	
-	function showfy(fyidvalue)
-	{
-	  if(fyidvalue=='否')
-	  {
-	    document.getElementById("fyid").style.display="none";
-	  }
-	  else
-	  {
-	    document.getElementById("fyid").style.display=""; 
-	  }
-	}		
+   
       	
     function addTr(){
-        var otr = document.getElementById("lsdtable").insertRow(-1);
+        var otr = document.getElementById("fhkhdtable").insertRow(-1);
 
         var curId = allCount + 1;   //curId一直加下去，防止重复
         allCount = allCount + 1;
         
+        var otd=document.createElement("td");
+		otd.className = "a2";
+		otd.innerHTML = '<td class="a2"><input type="checkbox" name="proc_id" id="proc_id" value="' + curId + '"></td>';
+		
         var otd0=document.createElement("td");
         otd0.className = "a2";
-        otd0.innerHTML = '<input type="text" id="product_name_'+curId+'" name="jjdProducts['+curId+'].product_name" readonly><input type="button" name="selectButton" value="选择" class="css_button" onclick="openWin('+curId+');"><input type="hidden" id="product_id_'+curId+'" name="jjdProducts['+curId+'].product_id">';
+        otd0.innerHTML = '<input type="text" id="product_name_'+curId+'" name="fhkhdProducts['+curId+'].product_name" style="width:100%" readonly><input type="hidden" id="product_id_'+curId+'" name="lsdProducts['+curId+'].product_id">';
         
         var otd1 = document.createElement("td");
         otd1.className = "a2";
-        otd1.innerHTML = '<input type="text" id="product_xh_'+curId+'"  name="jjdProducts['+curId+'].product_xh" size="15" readonly>';
-      
-        var otd2 = document.createElement("td");
-        otd2.className = "a2";
-        otd2.innerHTML = '<input type="text" id="qz_serial_num_'+curId+'" name="jjdProducts['+curId+'].qz_serial_num" size="15" readonly>&nbsp;';   
-        
-        var otd3 = document.createElement("td");
-        otd3.className = "a2";
-        otd3.innerHTML = '<input type="text" id="remark_'+curId+'" name="jjdProducts['+curId+'].remark">';                       
+        otd1.innerHTML = '<input type="text" id="product_xh_'+curId+'"  name="fhkhdProducts['+curId+'].product_xh" size="15" style="width:100%" readonly>';
 
-		var otd4 = document.createElement("td");
-		otd4.className = "a2";
-		otd4.innerHTML = '<input type="button" name="delButton" value="删除" class="css_button" onclick="delTr(this);">';
-		
+        var otd4 = document.createElement("td");
+        otd4.className = "a2";
+        otd4.innerHTML = '<input type="text" id="store_id_'+curId+'" name="fhkhdProducts['+curId+'].store_id" value="坏件库" size="7" style="width:100%"  readonly>';
+        
+        var otd5 = document.createElement("td");
+        otd5.className = "a2";
+        otd5.innerHTML = '<input type="text" id="price_'+curId+'" name="fhkhdProducts['+curId+'].price" value="0.00" size="5" style="width:100%" readonly>';
+        
+        var otd7 = document.createElement("td");
+        otd7.className = "a2";
+        otd7.innerHTML = '<input type="text" id="nums_'+curId+'" name="fhkhdProducts['+curId+'].nums" value="0" size="5" style="width:100%" readonly onblur="setNum('+curId+')">';
+        
+        var otd8 = document.createElement("td");
+        otd8.className = "a2";
+        otd8.innerHTML = '<input type="text" id="xj_'+curId+'" name="fhkhdProducts['+curId+'].xj" value="0.00" size="5" style="width:100%" readonly>';
+               
+        var otd9 = document.createElement("td");
+        otd9.className = "a2";
+        otd9.innerHTML = '<input type="text" id="qz_serial_num_'+curId+'" name="fhkhdProducts['+curId+'].qz_serial_num" size="15" readonly><input type="hidden" id="qz_flag_'+curId+'" name="bxdProducts['+curId+'].qz_flag"><a style="cursor:hand" title="点击输入序列号" onclick="openSerialWin('+ curId +');"><b>...</b></a>&nbsp;';   
+        
+        var otd11 = document.createElement("td");
+        otd11.className = "a2";
+        otd11.innerHTML = '<input type="text" id="cpfj_'+curId+'"  name="fhkhdProducts['+curId+'].cpfj" size="15"  style="width:100%" readonly>';
+
+        var otd6 = document.createElement("td");
+        otd6.className = "a2";
+        otd6.innerHTML = '<input type="text" id="remark_'+curId+'" name="fhkhdProducts['+curId+'].remark" style="width:100%"  readonly>';                       
+	
+		otr.appendChild(otd); 
         otr.appendChild(otd0); 
-        otr.appendChild(otd1);           
-        otr.appendChild(otd2);
-        otr.appendChild(otd3); 
+        otr.appendChild(otd1); 
         otr.appendChild(otd4);
-                          
+        otr.appendChild(otd5); 
+        otr.appendChild(otd7);
+        otr.appendChild(otd8);
+        otr.appendChild(otd9); 
+        otr.appendChild(otd11);
+        otr.appendChild(otd6); 
      }	
      
      
 	function delTr(i){
 			var tr = i.parentNode.parentNode;
-			tr.removeNode(true);
-			
+			tr.removeNode(true);			
 	}     
 	
 	
@@ -187,33 +216,6 @@ session.removeAttribute("messages");
 		window.open(destination,'详细信息',fea);		
 	}
 
-	function openAccount(){
-		var destination = "selSkAccount.html";
-		var fea ='width=400,height=300,left=' + (screen.availWidth-400)/2 + ',top=' + (screen.availHeight-300)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
-		
-		window.open(destination,'选择账户',fea);		
-	}	
-	
-	function openYushk(){
-		var destination = "selLsysk.html";
-		var fea ='width=850,height=500,left=' + (screen.availWidth-850)/2 + ',top=' + (screen.availHeight-500)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
-		
-		window.open(destination,'选择零售预收款',fea);		
-	}		
-	
- 
-	
-	function chgSel(vl){
-		if(vl == "是"){
-			document.getElementById("ysStyle").style.display = "";
-		}else{
-			document.getElementById("ysStyle").style.display = "none";
-			document.getElementById("yushk_id").value = "";
-			document.getElementById("yushkje").value = "0.00";
-		}
-		hj();
-	}
-	
 	function openSerialWin(vl){
 		var pn = document.getElementById("product_name_" + vl).value;
 		var nm = document.getElementById("nums_" + vl).value;
@@ -229,7 +231,7 @@ session.removeAttribute("messages");
 		
 		var qzserialnum = document.getElementById("qz_serial_num_" + vl).value;
 		
-		var url = "jjimportSerial.html?openerId=" + vl + "&nums=" + nm + "&serialNum=" + qzserialnum + "&product_id=" + pn;
+		var url = "fhkhimportSerial.html?openerId=" + vl + "&nums=" + nm + "&serialNum=" + qzserialnum + "&product_id=" + pn;
 		var fea ='width=300,height=200,left=' + (screen.availWidth-300)/2 + ',top=' + (screen.availHeight-300)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
 		window.open(url,'详细信息',fea);	
@@ -248,19 +250,21 @@ session.removeAttribute("messages");
 		if(serialNum == ""){
 			return;
 		}
-		dwrService.getProductObjBySerialNum(serialNum,setProductInfo);		
+		dwrService.getGoodProductObjBySerialNum(serialNum,setProductInfo);		
 	}
 	
 	//处理返回产品对象
 	function setProductInfo(product){
-		if(product != null && product.productId != null){
+		if(product != null && product.productId != null)
+		{
 			var flag = false;
-			for(var i=0;i<=allCount;i++){
+			for(var i=0;i<=allCount;i++)
+			{
 				var obj = document.getElementById("product_id_" + i);
-								
-				if(obj != null){
-					if(obj.value == "" || obj.value==product.productId){
-					
+				if(obj != null)
+				{
+					if(obj.value == "" || obj.value==product.productId)
+					{
 						var vl = dwr.util.getValue("qz_serial_num_" + i); //已有的序列号
 						var vl2 = dwr.util.getValue("s_nums");    //输入的序列号
 						if(vl.indexOf(vl2) != -1){
@@ -268,9 +272,12 @@ session.removeAttribute("messages");
 							break;
 						}
 						
-						if(vl == ""){
+						if(vl == "")
+						{
 							vl = vl2;
-						}else{
+						}
+						else
+						{
 							vl += "," + vl2;
 						}
 						dwr.util.setValue("qz_serial_num_" + i,vl);
@@ -278,11 +285,7 @@ session.removeAttribute("messages");
 						dwr.util.setValue("product_id_" + i,product.productId);
 						dwr.util.setValue("product_name_" + i,product.productName);
 						dwr.util.setValue("product_xh_" + i,product.productXh);
-						dwr.util.setValue("cbj_" + i,product.price);
-						dwr.util.setValue("kh_cbj_" + i,product.khcbj);
-						dwr.util.setValue("gf_" + i,product.gf);
-						dwr.util.setValue("price_" + i,product.lsbj);	
-						
+												
 						var nums = dwr.util.getValue("nums_" + i);
 						dwr.util.setValue("nums_" + i,parseInt(nums)+1);					
 						
@@ -291,16 +294,90 @@ session.removeAttribute("messages");
 						dwr.util.setValue("s_nums","");
 						break;
 					}
-					if(i==allCount){
+					if(i==allCount)
+					{
 						addTr();				
 					}
 				}
 			}
-			hj();
-		}else{
+		}
+		else
+		{
 			alert("该序列号不存在，请检查!");
 		}
-	}		 
+	}	
+   function delDesc(){
+		var k = 0;
+		var sel = "0"; 
+		for(var i=0;i<document.bxfhdForm.proc_id.length;i++){
+			var o = document.bxfhdForm.proc_id[i];
+			if(o.checked){
+				k = k + 1;
+				sel = document.bxfhdForm.proc_id[i].value;
+			}
+		}
+		if(k != 1){
+			alert("请选择产品明细，且只能选择一条信息！");
+			return;
+		}
+		
+		document.getElementById("product_name_" + sel).value = "";
+		document.getElementById("product_id_" + sel).value = "";
+		document.getElementById("product_xh_" + sel).value = "";
+		document.getElementById("price_" + sel).value = "0.00";
+		document.getElementById("nums_" + sel).value = "0";
+		document.getElementById("xj_" + sel).value = "0.00";
+		document.getElementById("remark_" + sel).value = "";
+		document.getElementById("cpfj_" + sel).value = "";
+		document.getElementById("qz_serial_num_" + sel).value = "";
+		document.getElementById("qz_flag_" + sel).value = "";
+	}	
+	
+	function openAccount(){
+		var destination = "selSkAccount.html";
+		var fea ='width=400,height=300,left=' + (screen.availWidth-400)/2 + ',top=' + (screen.availHeight-300)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		
+		window.open(destination,'选择账户',fea);		
+	}	
+	
+	
+	function hj(){
+		var length = (document.getElementById('fhkhdtable').rows.length-2);
+		
+		var hjz = 0;
+		
+		
+		for(var i=0;i<=allCount;i++){			
+			var price = document.getElementById("price_" + i);
+			
+			if(price != null){
+				if(!InputValid(price,0,"float",0,1,99999999,"维修价格")){
+					price.focus();
+					return;
+				}
+			}
+			
+			var nums = document.getElementById("nums_" + i);
+			if(nums != null){
+				if(!InputValid(nums,0,"int",0,1,99999999,"数量")){
+					nums.focus();
+					return;
+				}
+			}		
+					
+			var xj = document.getElementById("xj_" + i);			
+			
+			if(xj != null){
+				xj.value = (parseFloat(price.value) * parseFloat(nums.value)).toFixed(2);				
+				hjz = parseFloat(hjz) + parseFloat(xj.value);				
+			}
+			
+			var skje = document.getElementById("skje");
+		
+		    skje.value = hjz.toFixed(2);
+		}	
+	}
+		 
 </script>
 
 </head>
@@ -336,19 +413,28 @@ session.removeAttribute("messages");
 		}
 		%>
 		<td class="a1">返还日期</td>
-		<td class="a2"><input type="text" name="fhkhd.fh_date" id="fh_date" value="<%= rq %>" readonly><img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.getElementById('fh_date')); return false;"><font color="red">*</font>
+		<td class="a2"><input type="text" name="fhkhd.fh_date" id="fh_date" value="<%= rq %>" readonly>
 		</td>		
 	</tr>
 	<tr>
-		
-		 
-		<td class="a1" width="15%">返还人</td>
-		<td class="a2">         
-			<input id="brand" type="text" length="20" onblur="setValue()" value="<%=StaticParamDo.getRealNameById(fhkhd.getFhr()) %>"/> 
-			<div id="brandTip"  style="height:12px;position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
-			<input type="hidden" name="fhkhd.fhr" id="fzr" value="<%=StringUtils.nullToStr(fhkhd.getFhr())%>"/><font color="red">*</font>	          
+		<td class="a1" width="15%">客户名称</td>
+		<td class="a2" width="35%"><input type="text" name="fhkhd.client_name"   id="client_name" value="<%=StaticParamDo.getClientNameById(StringUtils.nullToStr(fhkhd.getClient_id())) %>" size="30" maxlength="50" onblur="setClientValue();">
+		<input type="hidden" name="fhkhd.client_id" id="client_id" value="<%=StringUtils.nullToStr(fhkhd.getClient_id()) %>">
+		<div id="clientsTip" style="height:12px;position:absolute;width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+		<font color="red">*</font>
 		</td>
-		<td class="a1" width="15%">返还单状态</td>
+		<td class="a1" width="15%">联系人</td>
+		<td class="a2" width="35%"><input type="text" name="fhkhd.lxr" id="lxr" size="30" value="<%=StringUtils.nullToStr(fhkhd.getLxr()) %>"></td>	
+	</tr>
+	
+	<tr>
+		<td class="a1" width="15%">经手人</td>
+		<td class="a2">         
+			<input id="brand" type="text" length="20" onblur="setValue()" value="<%=StaticParamDo.getRealNameById(fhkhd.getJsr()) %>"/> 
+			<div id="brandTip"  style="height:12px;position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+			<input type="hidden" name="fhkhd.jsr" id="fzr" value="<%=StringUtils.nullToStr(fhkhd.getJsr())%>"/><font color="red">*</font>	          
+		</td>
+		<td class="a1" width="15%">返还客户单状态</td>
 		<td class="a2" width="35%" colspan="3">
 			<select name="fhkhd.state" id="state">
 				<option value="已保存" <%if(StringUtils.nullToStr(fhkhd.getState()).equals("已保存")) out.print("selected"); %>>已保存</option>
@@ -364,18 +450,20 @@ session.removeAttribute("messages");
 	<tr>
 		<td colspan="2">产品详细信息</td>
 	</tr>
-	</thead>
-	 
+	</thead>	
 </table>
-<table width="100%"  align="center" id="lsdtable"  class="chart_list" cellpadding="0" cellspacing="0">	
+<table width="100%"  align="center" id="fhkhdtable"  class="chart_list" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td>产品名称</td>
-		<td>规格</td>
-		 
-		<td>强制序列号</td>
-		<td>备注</td>
-		<td></td>
+	    <td width="15%">产品名称</td>	
+		<td width="15%">产品规格</td>
+		<td width="7%">仓库</td>
+		<td width="5%">单价</td>
+		<td width="6%">数量</td>	
+		<td width="8%">小计</td>
+		<td width="15%">强制序列号</td>
+		<td width="14%">产品附件</td>
+		<td width="15%">备注</td>		
 	</tr>
 	</thead>
 <%
@@ -384,92 +472,77 @@ session.removeAttribute("messages");
       for(int i=0;i<fhkhdProducts.size();i++)
       {
            FhkhdProduct fhkhdProduct= (FhkhdProduct)fhkhdProducts.get(i);
+           String flag2 = "否";
+		   if(!StringUtils.nullToStr(fhkhdProduct.getQz_serial_num()).equals("")){
+			 flag2 = "是";
+		   }
  %>
 	<tr>
-				<td class="a2" width="15%">
-					<input type="text" size="40" id="product_name_<%=i %>" name="fhkhdProducts[<%=i %>].product_name" value="<%=StringUtils.nullToStr(fhkhdProduct.getProduct_name()) %>">
-					 
+	           	<td class="a2">
+					<input type="text" id="product_name_<%=i %>" name="fhkhdProducts[<%=i %>].product_name" value="<%=StringUtils.nullToStr(fhkhdProduct.getProduct_name()) %>" style="width:100%" readonly>
 					<input type="hidden" id="product_id_<%=i %>" name="fhkhdProducts[<%=i %>].product_id" value="<%=StringUtils.nullToStr(fhkhdProduct.getProduct_id()) %>">
 				</td>
-				<td class="a2"><input type="text" size="40" id="product_xh_<%=i %>" name="fhkhdProducts[<%=i %>].product_xh" size="15" value="<%=StringUtils.nullToStr(fhkhdProduct.getProduct_xh()) %>"></td>												 
+				<td class="a2"><input type="text" id="product_xh_<%=i %>" name="fhkhdProducts[<%=i %>].product_xh"  value="<%=StringUtils.nullToStr(fhkhdProduct.getProduct_xh()) %>"  style="width:100%" readonly></td>	
+				<td class="a2">	
+				<% String productname=StringUtils.nullToStr(fhkhdProduct.getProduct_name());
+	               String kf="";
+	              if(productname.equals(""))
+	              {
+	                kf="";
+	              }
+	              else
+	              {
+	                kf="好件库";
+	               }
+	            %>			    
+					<input type="text" id="store_id" name="store_id" value="<%=kf %>" size="5"  style="width:100%" readonly>					 
+				</td>
+				<td class="a2"><input type="text" id="price_<%=i %>" name="fhkhdProducts[<%=i %>].price" value="<%=JMath.round(fhkhdProduct.getPrice()) %>" size="7" style="width:100%" onblur="hj();"  ></td>
+				<td class="a2"><input type="text" id="nums_<%=i %>" name="fhkhdProducts[<%=i %>].nums" value="<%=fhkhdProduct.getNums() %>" size="5" onblur="hj();"  style="width:100%"  ></td>		 
+				<td class="a2"><input type="text" id="xj_<%=i %>" name="fhkhdProducts[<%=i %>].totalmoney" value="<%=JMath.round(fhkhdProduct.getTotalmoney()) %>" size="7" style="width:100%" readonly></td>
 				<td class="a2">
-					<input type="text" id="qz_serial_num_<%=i %>" name="fhkhdProducts[<%=i %>].qz_serial_num" size="15" value="<%=StringUtils.nullToStr(fhkhdProduct.getQz_serial_num()) %>">
-					<a style="cursor:hand" title="左键点击输入输列号" onclick="openSerialWin('<%=i %>');"><b>...</b></a>&nbsp;
-				</td>	
-					<td class="a2"><input type="text" id="remark_<%=i %>" name="fhkhdProducts[<%=i %>].remark" value="<%=StringUtils.nullToStr(fhkhdProduct.getRemark()) %>"></td>							 
-				<td class="a2">&nbsp;</td>
-				 
-	</tr>
+			        <input type="text" id="qz_serial_num_<%=i %>" name="fhkhdProducts[<%=i %>].qz_serial_num" value="<%=StringUtils.nullToStr(fhkhdProduct.getQz_serial_num()) %>" size="10" readonly>
+			        <input type="hidden" id="qz_flag_<%=i %>" name="fhkhdProducts[<%=i %>].qz_flag" value="<%=flag2 %>"><a style="cursor:hand" title="左键点击输入输列号" onclick="openSerialWin('<%=i %>');"><b>...</b></a>&nbsp;
+				</td>				
+				
+				<td class="a2"><input type="text" id="cpfj_<%=i %>" name="fhkhdProducts[<%=i %>].cpfj"  value="<%=StringUtils.nullToStr(fhkhdProduct.getCpfj()) %>" style="width:100%"></td>	
+				<td class="a2"><input type="text" id="remark_<%=i %>" name="fhkhdProducts[<%=i %>].remark" value="<%=StringUtils.nullToStr(fhkhdProduct.getRemark()) %>" style="width:100%"></td>				
+			</tr>
 <%
 }
  }
 %>	
+
 </table>
-<%
-if(StringUtils.nullToStr(fhkhd.getIsfy()).equals("是"))
-{
- %>
-<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
-  <tr >	   
-	      <td  class="a1" width="15%" >报修费用</td>
-	      <td  class="a2"  colspan="3">
-	       <select name="fhkhd.isfy" id="isfy" onchange="showfy(this.value)">
-	         <option value="否" <%if(StringUtils.nullToStr(fhkhd.getIsfy()).equals("否"))out.print("selected"); %>>否</option>
-	         <option value="是" <%if(StringUtils.nullToStr(fhkhd.getIsfy()).equals("是"))out.print("selected"); %>>是</option>
-	       </select>
-	      </td>
-	</tr>	 
-	<tr id="fyid" >
-	    <td class="a1" width="15%"  >实收费用</td>
-		<td class="a2" width="35%"  ><input type="text"  name="fhkhd.skje" id="skje" value="<%=StringUtils.nullToStr(fhkhd.getSkje()) %>"/></td>
-		<td class="a1" width="15%"  >收款账户</td>
-		<td class="a2" width="35%"  ><input type="text" id="zhname"  name="zhname" value="<%=StaticParamDo.getAccountNameById(StringUtils.nullToStr(fhkhd.getSkzh())) %>" readonly>
+<table width="100%"  align="center" class="chart_info" cellpadding="0" cellspacing="0">
+   	<tr height="35">	
+		<td class="a1">收款金额</td>
+		<td class="a2">
+		<input type="text"  name="fhkhd.skje" id="skje" value="<%=JMath.round(fhkhd.getSkje()) %>" readonly></td>
+		<td class="a1" widht="20%">收款账户</td>
+		<td class="a2" ><input type="text" id="zhname"  name="zhname" value="<%=StaticParamDo.getAccountNameById(StringUtils.nullToStr(fhkhd.getSkzh())) %>" readonly>
 		<input type="hidden" id="skzh"  name="fhkhd.skzh" value="<%=StringUtils.nullToStr(fhkhd.getSkzh()) %>">
 		<img src="images/select.gif" align="absmiddle" title="选择账户" border="0" onclick="openAccount();" style="cursor:hand"><font color="red">*</font>
 	</tr>
 </table> 
-<%} %>
  <BR>
-<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
-	<thead>
-	<tr>
-		<td colspan="4">客户信息</td>
-	</tr>
-	</thead>			
-	<tr>
-		<td class="a1" width="15%">客户名称</td>
-		<td class="a2" width="35%"><input type="text" name="fhkhd.client_id"   id="client_name" value="<%=StaticParamDo.getClientNameById(StringUtils.nullToStr(fhkhd.getClient_name())) %>" size="30" maxlength="50" onblur="setClientValue();">
-		<input type="hidden" name="fhkhd.client_name" id="client_id" value="<%=StringUtils.nullToStr(fhkhd.getClient_name()) %>">
-		<div id="clientsTip" style="height:12px;position:absolute;width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
-		<font color="red">*</font>
-		</td>
-		<td class="a1" width="15%">联系人</td>
-		<td class="a2" width="35%"><input type="text" name="fhkhd.lxr" id="lxr" size="30" value="<%=StringUtils.nullToStr(fhkhd.getLxr()) %>"><font color="red">*</font></td>	
-	</tr>
-	<tr>
-		<td class="a1" width="15%">联系电话</td>
-		<td class="a2"><input type="text" name="fhkhd.lxdh" id="lxdh" size="30" value="<%=StringUtils.nullToStr(fhkhd.getLxdh()) %>"></td>	
-		<td class="a1" width="15%">地址</td>
-		<td class="a2"><input type="text" name="fhkhd.address" id="address" size="30" maxlength="100" value="<%= StringUtils.nullToStr(fhkhd.getAddress())%>"></td>			
-	</tr>
- 	
-</table>
  
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">		 
 	<tr>
 		<td class="a1" width="15%">备注</td>
 		<td class="a2" width="85%" colspan="3">
-			<textarea rows="4" name="fhkhd.ms" id="ms" style="width:75%"><%=StringUtils.nullToStr(fhkhd.getMs()) %> </textarea>
+			<textarea rows="4" name="fhkhd.remark" id="remark" style="width:75%"><%=StringUtils.nullToStr(fhkhd.getRemark()) %> </textarea>
 		</td>
 	</tr>			
 	<tr height="35">
 		<td class="a1" colspan="4">
-			<input type="button" name="btnSub" value="修 改" class="css_button2" onclick="saveInfo();">&nbsp;&nbsp;&nbsp;&nbsp;				 
+			<input type="button" name="btnSub" value="确 定" class="css_button2" onclick="saveInfo();">&nbsp;&nbsp;&nbsp;&nbsp;				 
 			<input type="reset" name="button2" value="重 置" class="css_button2">&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="reset" name="button2" value="关 闭" class="css_button2" onclick="window.opener.document.myform.submit();window.close();">
 		</td>
 	</tr>
 </table>
+
 </form>
 </BODY>
 </HTML>

@@ -9,11 +9,11 @@
 OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
 
 Page results = (Page)VS.findValue("bxdPage");
-String lxr=(String)VS.findValue("lxr");
-String product_serial_num=(String)VS.findValue("product_serial_num");
+
+String bxcs_name = (String)VS.findValue("bxcs_name");
 String jx_date1 = (String)VS.findValue("jx_date1");
 String jx_date2 = (String)VS.findValue("jx_date2");
-String gcs=(String)VS.findValue("gcs");
+
  
 String state = (String)VS.findValue("state");
  
@@ -28,7 +28,12 @@ String orderType = (String)VS.findValue("orderType");
 <title>报修单管理</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
-<script language='JavaScript' src="js/date.js"></script>
+<script type='text/javascript' src='dwr/interface/dwrService.js'></script>
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script>
+<script type="text/javascript" src="js/prototype-1.4.0.js"></script>
+<script language='JavaScript' src="js/selClient.js"></script>
+<script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
 <script type="text/javascript">
 	
 	function openWin(id){
@@ -45,12 +50,11 @@ String orderType = (String)VS.findValue("orderType");
 	}
 	
 	function clearAll(){
-		document.myform.lxr.value = "";
-		document.myform.product_serial_num.value = "";
+		document.myform.bxcs.value = "";		
 		document.myform.jx_date1.value = "";
 		document.myform.jx_date2.value = "";
 		document.myform.state.value = "";
-		document.myform.gcs.value="";
+		
 	}
 	
 	function add(){
@@ -109,20 +113,18 @@ String orderType = (String)VS.findValue("orderType");
 			<img src="images/import.gif" align="absmiddle" border="0">&nbsp;<a href="#" class="xxlb" onclick="refreshPage();"> 刷 新 </a>	</td>			
 	</tr>
 	<tr>
-		<td class="search" align="left" colspan="2">&nbsp;&nbsp;
-			联系人：<input type="text" name="lxr" value="<%=lxr%>"size="10">&nbsp;&nbsp;
-			序列号：<input type="text" name="product_serial_num" value="<%=product_serial_num%>" size="10">&nbsp;&nbsp;
-			时间：<input type="text" name="jx_date1" value="<%=jx_date1%> " size="8" readonly>
-			<img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.myform.jx_date1); return false;">&nbsp;至&nbsp;
-			<input type="text" name="jx_date2" value="<%=jx_date2%> " size="8" readonly>
-			<img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.myform.jx_date2); return false;">			
+		<td class="search" align="left" colspan="2">&nbsp;&nbsp;			
+			报修单位：<input type="text" name="bxcs" value="<%=bxcs_name %>" size="25" maxlength="50" >&nbsp;&nbsp;
+			时间：<input type="text" name="jx_date1" value="<%=jx_date1%> " size="15"  class="Wdate" onFocus="WdatePicker()">
+			&nbsp;&nbsp;至&nbsp;&nbsp;
+			<input type="text" name="jx_date2" value="<%=jx_date2%> " size="15"  class="Wdate" onFocus="WdatePicker()">
 			&nbsp;&nbsp;
 			报修单状态：<select name="state">
 				<option value=""></option>
 				<option value="已保存"  <%if(state.equals("已保存")) out.print("selected"); %>>已保存</option>
 				<option value="已提交"  <%if(state.equals("已提交")) out.print("selected"); %>>已提交</option>
 			</select>&nbsp;&nbsp;
-			工程师：<input type="text" name="gcs" value="<%=gcs%>" size="10">
+			
 			<input type="submit" name="buttonCx" value=" 查询 " class="css_button">
 			<input type="button" name="buttonQk" value=" 清空 " class="css_button" onclick="clearAll();">
 		</td>				
@@ -132,13 +134,11 @@ String orderType = (String)VS.findValue("orderType");
 	<thead>
 	<tr>
 		<td onclick="doSort('id');">报修单编号<%if(orderName.equals("id")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('client_name');">客户名称<%if(orderName.equals("client_name")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('lxr');">联系人<%if(orderName.equals("lxr")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('lxdh');">联系电话<%if(orderName.equals("lxdh")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('jxdate');">报修时间<%if(orderName.equals("jxdate")) out.print("<img src='images/" + orderType + ".gif'>"); %> </td>
+		<td onclick="doSort('bxcs_name');">报修单位<%if(orderName.equals("bxcs_name")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td onclick="doSort('productNums');">报修数量<%if(orderName.equals("productNums")) out.print("<img src='images/" + orderType + ".gif'>"); %> </td>
+		<td onclick="doSort('bxdate');">报修时间<%if(orderName.equals("bxdate")) out.print("<img src='images/" + orderType + ".gif'>"); %> </td>
+        <td onclick="doSort('jsr');">经手人<%if(orderName.equals("jsr")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
 		<td onclick="doSort('state');">状态<%if(orderName.equals("state")) out.print("<img src='images/" + orderType + ".gif'>"); %> </td>	
-		<td onclick="doSort('jxr');">报修人<%if(orderName.equals("jxr")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>					 
-		<td onclick="doSort('gcs');">工程师<%if(orderName.equals("gcs")) out.print("<img src='images/" + orderType + ".gif'>"); %>  </td>	
 		<td onclick="doSort('cjr');">操作员<%if(orderName.equals("cjr")) out.print("<img src='images/" + orderType + ".gif'>"); %>  </td>		
 		<td>操作</td>
 	</tr>
@@ -152,15 +152,12 @@ String orderType = (String)VS.findValue("orderType");
 		%> 
 	<tr class="a1" title="双击查看详情"  onmousedown="trSelectChangeCss()" onclick="descMx('<%=StringUtils.nullToStr(bxd.get("id")) %>');"  onDblClick="openWin('<%=StringUtils.nullToStr(bxd.get("id")) %>');">
 		<td><%=StringUtils.nullToStr(bxd.get("id")) %></td>
-		<td><%=StaticParamDo.getClientNameById(StringUtils.nullToStr(bxd.get("client_name")))%></td>
-		<td> <%=StringUtils.nullToStr(bxd.get("lxr")) %></td>
-		<td  ><%=StringUtils.nullToStr(bxd.get("lxdh")) %> </td>
-		<td> <%=StringUtils.nullToStr(bxd.get("jxdate")) %></td>
-		<td><%=StringUtils.nullToStr(bxd.get("state")) %></td>
-		<td> <%=StaticParamDo.getRealNameById(StringUtils.nullToStr(bxd.get("jxr")))%></td>
-		<td><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(bxd.get("gcs"))) %> </td>
-		<td> <%=StaticParamDo.getRealNameById(StringUtils.nullToStr(bxd.get("cjr"))) %></td>		
-	 
+		<td><%=StaticParamDo.getClientNameById(StringUtils.nullToStr(bxd.get("bxcs")))%></td>
+		<td> <%=StringUtils.nullToStr(bxd.get("productnums")) %></td>			
+		<td><%=StringUtils.nullToStr(bxd.get("bxdate")) %></td>
+		<td> <%=StaticParamDo.getRealNameById(StringUtils.nullToStr(bxd.get("jsr"))) %></td>			
+		<td><%=StringUtils.nullToStr(bxd.get("state")) %></td>		
+		<td> <%=StaticParamDo.getRealNameById(StringUtils.nullToStr(bxd.get("cjr"))) %></td>		 
 		<td>
 		    <%
 		     if(bxd.get("state").equals("已保存"))

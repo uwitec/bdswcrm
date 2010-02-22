@@ -9,10 +9,8 @@
 OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
 
 Page shkcPage = (Page)VS.findValue("shkcPage");
-String product_serial_num = ParameterUtility.getStringParameter(request,"product_serial_num", "");
- String openerId = ParameterUtility.getStringParameter(request, "openerId","");
+String product_name = StringUtils.nullToStr((String)VS.findValue("product_name"));
 
- 
 %>
 
 <html>
@@ -24,98 +22,150 @@ String product_serial_num = ParameterUtility.getStringParameter(request,"product
 <script type="text/javascript">
 	
 	function clearAll(){
-		document.myform.product_xh.value = "";
 		document.myform.product_name.value = "";
 	}
-
-	function openWin(id){
-		var destination = "viewKcye.html?product_id="+id;
-		var fea ='width=400,height=300,left=' + (screen.availWidth-400)/2 + ',top=' + (screen.availHeight-300)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
-		
-		window.open(destination,'设置库存数量',fea);	
+	
+	function selectAll(){
+		var flag = false;
+		if(document.myform.allCheck.checked){
+			flag = true;
+		}
+		for(var i=0;i<document.myform.elements.length;i++){
+			var o = document.myform.elements[i];
+			if(o.name == "chk_id"){
+				if(flag == true){
+					o.checked = true;
+				}else{
+					o.checked = false;
+				}
+			}
+		}
 	}	
+
+	function sel(sel_flag){
+		var k = 0;
+		var allCount = window.opener.allCount;  //当前存在的最大行序号
+		//alert("当前存在的最大行序号" + allCount);
+		var startCount = 0;
+		for(var x=0;x<=allCount;x++){
+			var id = window.opener.document.getElementById("product_id_"+x);
+			var name = window.opener.document.getElementById("product_name_"+x);
 	
-	
-	function sel(product_id,product_xh,product_name,qz_serial_num,remarks){
-	
-		var id = window.opener.document.getElementById("product_id_<%=openerId%>");
-		var xh = window.opener.document.getElementById("product_xh_<%=openerId%>");
-		var name = window.opener.document.getElementById("product_name_<%=openerId%>");
-		var serial_num = window.opener.document.getElementById("qz_serial_num_<%=openerId%>");
-		var remark = window.opener.document.getElementById("remark_<%=openerId%>");
-		 
+			startCount = x;
+			
+			if(id.value=="" && name.value==""){  //如果该行无值则跳出
+				break;
+			}
+			
+			if(startCount == allCount){
+				startCount = startCount + 1;
+			}			
+		}
 		
-		if(id != null) id.value = product_id;
-		if(xh != null) xh.value = product_xh;
-		if(name != null) name.value = product_name;		
-		if(qz_serial_num!=null)serial_num.value= qz_serial_num;
-		if(remark!=null)remark.value=remarks
-		 
-		 
+		k = startCount;  //从此位置开始添加
+		//alert("从此位置开始添加" + k);
 		
-		window.close();	
+		for(var i=1;i<document.myform.chk_id.length;i++){
+					
+			var o = document.myform.chk_id[i];
+			if(o.checked){
+			
+				var vl = document.myform.chk_id[i].value;
+				var arryStr = vl.split("|");
+				
+				var flag = false;
+				for(var y=0;y<=allCount;y++){
+					var s_id = window.opener.document.getElementById("product_id_"+y);
+					
+					if(s_id.value == arryStr[0]){  //该值已存在
+						flag = true;
+					}
+				}			
+			
+				if(flag == false){
+					var id = window.opener.document.getElementById("product_id_"+k);
+					
+					if(id == null){
+						window.opener.addTr();
+					}
+					
+					id = window.opener.document.getElementById("product_id_"+k);
+					
+					var xh = window.opener.document.getElementById("product_xh_"+k);
+					var name = window.opener.document.getElementById("product_name_"+k);
+					var qz_flag = window.opener.document.getElementById("qz_flag_" + k);
+
+					id.value = arryStr[0];
+					xh.value = arryStr[1];
+					name.value = arryStr[2];
+					qz_flag.value = arryStr[3];
+
+					k++;	
+				}	
+			}
+		}
+		
+		if(sel_flag == "2"){
+			window.close();
+		}
 	}
 	
 </script>
 </head>
-<body oncontextmenu="return false;" >
+<body>
 <form name="myform" action="selFhkhdProcKc.html" method="post">
-
+<input type="hidden" name="chk_id" value="">
 <table width="100%"  align="center"class="chart_list" cellpadding="0" cellspacing="0">
 	<tr>
-		<td class="csstitle" align="left" width="100%">&nbsp;&nbsp;&nbsp;&nbsp;<b>选择好件库商品列表</b></td>			
-	</tr>
-	<tr>
-		<td class="search" align="left" colspan="2">&nbsp;&nbsp;
-			序列号：<input type="text" name="product_serial_num" value="<%=product_serial_num %>" size="20">&nbsp;&nbsp;
-		 
+		<td class="csstitle" align="left" width="100%">
+			&nbsp;&nbsp;&nbsp;&nbsp;商品：<input type="text" name="product_name" value="<%=product_name %>" size="20">&nbsp;&nbsp;
+			&nbsp;&nbsp;
 			<input type="submit" name="buttonCx" value=" 查询 " class="css_button">
-			<input type="button" name="buttonQk" value=" 清空 " class="css_button" onclick="clearAll();">
-		</td>				
-	</tr>		
+			<input type="button" name="buttonQk" value=" 清空 " class="css_button" onclick="clearAll();">		
+		</td>			
+	</tr>
 </table>
 <table width="100%"  align="center"  border="1"   class="chart_list" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
-		<td>产品名称</td>
-		<td>规格</td>
-		<td>序列号</td>
-		<td>报修天数</td>
-		<td>客户名称</td>
-		<td>联系人</td>
-		<td>联系电话</td>
-		 
+		<td><input type="checkbox" name="allCheck" onclick="selectAll();"></td>	
+		<td nowrap>商品名称</td>
+		<td nowrap>规格</td>		
+		<td nowrap>好件数量</td>		
+		<td nowrap>强制序列号</td>
 	</tr>
 	</thead>
 	<%
-	List shkcProduct = shkcPage.getResults();
-	if(shkcProduct != null && shkcProduct.size()>0){
-		Iterator it = shkcProduct.iterator();
+	List shkcKcs = shkcPage.getResults();
+	if(shkcKcs != null && shkcKcs.size()>0){
+		Iterator it = shkcKcs.iterator();
 		
 		while(it.hasNext()){
-			Map map = (Map)it.next();
-			 
+			Map map = (Map)it.next();			
+						
+			String vl = StringUtils.nullToStr(map.get("product_id")) + "|" + StringUtils.nullToStr(map.get("product_xh")) + "|" + StringUtils.nullToStr(map.get("product_name")) + "|" +StringUtils.nullToStr(map.get("qz_serial_num")) ;
 	%>
-		<tr class="a1" onmouseover="this.className='a2';" onmouseout="this.className='a1';" title="左键单击选择产品" onclick="sel('<%=StringUtils.nullToStr(map.get("product_id")) %>','<%=StringUtils.nullToStr(map.get("product_xh")) %>','<%=StringUtils.nullToStr(map.get("product_name")) %>','<%=StringUtils.nullToStr(map.get("qz_serial_num")) %>','<%=StringUtils.nullToStr(map.get("remark")) %>');">		
-			<td><%=StringUtils.nullToStr(map.get("product_name")) %></td>
-			<td><%=StringUtils.nullToStr(map.get("product_xh")) %></td>
+		<tr class="a1" onmouseover="this.className='a2';" onmouseout="this.className='a1';">
+			<td><input type="checkbox" name="chk_id" value="<%=vl %>"></td>
+			<td align="left"><%=StringUtils.nullToStr(map.get("product_name")) %></td>
+			<td align="left"><%=StringUtils.nullToStr(map.get("product_xh")) %></td>			
+			<td nowrap><%=StringUtils.nullToStr(map.get("hj_nums")) %></td>
 			<td><%=StringUtils.nullToStr(map.get("qz_serial_num")) %></td>
-			<td><%=StringUtils.nullToStr(map.get("day_num")) %></td>
-			<td><%=StaticParamDo.getClientNameById(StringUtils.nullToStr(map.get("client_name"))) %></td>
-			<td><%=StringUtils.nullToStr(map.get("linkman")) %></td>		 
-			<td><%=StringUtils.nullToStr(map.get("mobile")) %></td>
 		</tr>
 	
 	<%
 		}
 	}
-	%>
+	%>	
+		<tr>
+			<td colspan="10" class="page"><%=shkcPage.getPageScript() %></td>
+		</tr>	
 </table>
-<table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0">
-	<tr>
-		<td class="page"><%=shkcPage.getPageScript() %></td>
-	</tr>
-</table>
+<center><BR>
+	<input type="button" name="buttonQd" value="确认并继续选择" onclick="sel('1');" class="css_button4">
+	<input type="button" name="buttonQd" value="确认选择并关闭" onclick="sel('2');" class="css_button4">
+	<input type="button" name="buttonQd" value=" 关闭 " onclick="window.close();" class="css_button2">
+</center>
 </form>
 </body>
 </html>

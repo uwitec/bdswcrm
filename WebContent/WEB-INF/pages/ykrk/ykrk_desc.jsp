@@ -42,8 +42,8 @@ List results = (List)VS.findValue("ykrkProducts");
 	<tr>
 		<td width="20%">产品名称</td>
 		<td width="15%">规格</td>
-		<td width="15%">旧序列号</td>
-		<td width="35%">新序列号</td>
+		<td width="15%">数量</td>
+		<td width="35%">序列号</td>
 		<td width="15%">备注</td>
 	</tr>
 	</thead>
@@ -56,8 +56,8 @@ List results = (List)VS.findValue("ykrkProducts");
 	<tr class="a1" onmousedown="trSelectChangeCss()">
 		<td><%=StringUtils.nullToStr(ykrkProduct.get("product_name")) %></td>
 		<td><%=StringUtils.nullToStr(ykrkProduct.get("product_xh")) %></td>
-		<td><%=StringUtils.nullToStr(ykrkProduct.get("oqz_serial_num")) %></td>
-		<td><%=StringUtils.nullToStr(ykrkProduct.get("nqz_serial_num")) %></td>
+		<td><%=StringUtils.nullToStr(ykrkProduct.get("nums")) %></td>
+		<td><%=StringUtils.nullToStr(ykrkProduct.get("qz_serial_num")) %></td>
 		<td><%=StringUtils.nullToStr(ykrkProduct.get("product_remark")) %></td>
 	</tr>
 	

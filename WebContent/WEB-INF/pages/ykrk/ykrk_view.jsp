@@ -19,7 +19,7 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 
 <html>
 <head>
-<title>库房调拨</title>
+<title>移库入库</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 </head>
@@ -27,7 +27,7 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
-		<td colspan="4">库房调拨</td>
+		<td colspan="4">移库入库</td>
 	</tr>
 	</thead>
 	<tr>
@@ -43,14 +43,12 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 		<td class="a2"><%=StringUtils.nullToStr(ykrk.getRk_date()) %></td>	
 	</tr>
 	<tr>			
-		<td class="a1" width="15%">调出仓库</td>
+		<td class="a1" width="15%">调入仓库</td>
 		<td class="a2"><%=StaticParamDo.getStoreNameById(StringUtils.nullToStr(ykrk.getRk_store_id())) %></td>
 	    <td class="a1" width="15%">经手人</td>
 		<td class="a2" width="35%"><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(ykrk.getJsr())) %></td>	    
-	</tr>
-	
-	<tr>			
-		
+	</tr>	
+	<tr>	
 		<td class="a1">状态</td>
 		<td class="a2" colspan="3"><%=StringUtils.nullToStr(ykrk.getState()) %></td>			
 	</tr>
@@ -80,7 +78,7 @@ if(ykrkProducts!=null && ykrkProducts.size()>0){
 	<tr>
 		<td class="a2"><%=StringUtils.nullToStr(ykrkProduct.get("product_name")) %></td>
 		<td class="a2"><%=StringUtils.nullToStr(ykrkProduct.get("product_xh")) %></td>
-		 
+		<td class="a2"><%=StringUtils.nullToStr(ykrkProduct.get("nums")) %></td> 
 		<td class="a2"><%=StringUtils.nullToStr(ykrkProduct.get("product_remark")) %></td>
 	</tr>
 <%
@@ -98,7 +96,7 @@ if(ykrkProducts!=null && ykrkProducts.size()>0){
 	<tr>
 		<td class="a1" width="15%">备注</td>
 		<td class="a2" width="85%">
-			<textarea rows="3" name="kfdb.remark" id="remark" style="width:75%" maxlength="500" readonly><%=StringUtils.nullToStr(ykrk.getRemark()) %></textarea>
+			<textarea rows="3" name="ykrk.remark" id="remark" style="width:75%" maxlength="500" readonly><%=StringUtils.nullToStr(ykrk.getRemark()) %></textarea>
 		</td>
 	</tr>	
 	<tr height="35">

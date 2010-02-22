@@ -5,12 +5,19 @@
 <%@ page import="java.util.*" %>
 <%
 OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
-Bxfhd bxfhd=(Bxfhd)VS.findValue("bxfhd");
-BxfhdProduct bxfhdProduct=(BxfhdProduct)VS.findValue("bxfhdProduct");
-String[] wxszd=(String[])VS.findValue("wxszd");
+Bxfhd bxfhd = (Bxfhd)VS.findValue("bxfhd");
+List bxfhdProducts = (List)VS.findValue("bxfhdProducts");
+ 
 
+int counts = 2;
+if(bxfhdProducts != null && bxfhdProducts.size()>0){
+	counts = bxfhdProducts.size() - 1;
+}
 
- %>
+ 
+ List msg = (List)session.getAttribute("messages");
+session.removeAttribute("messages");
+%>
 <html>
 <head>
 <title>报修返还单修改</title>
@@ -19,46 +26,184 @@ String[] wxszd=(String[])VS.findValue("wxszd");
 <script language="JavaScript" src="js/Check.js"></script>
 <script language='JavaScript' src="js/date.js"></script>
 <script language='JavaScript' src="js/nums.js"></script>
-<script type="text/javascript" src="js/prototype-1.4.0.js"></script>
-<script type="text/javascript" src="js/selSqr.js"></script>
-<script language='JavaScript' src="js/selJsr.js"></script>
-<script language='JavaScript' src="js/selClient.js"></script>
 <script type='text/javascript' src='dwr/interface/dwrService.js'></script>
 <script type='text/javascript' src='dwr/engine.js'></script>
 <script type='text/javascript' src='dwr/util.js'></script>
+<script type="text/javascript" src="js/prototype-1.4.0.js"></script>
+<script type='text/javascript' src="js/selJsr.js"></script>
+<script language='JavaScript' src="js/selClient.js"></script>
+<script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
 <style>
 	.selectTip{background-color:#009;color:#fff;}
 </style>
 <script type="text/javascript">
-	function saveInfo()
+
+	var allCount = <%=counts %>;
+	
+	function saveInfo(){	
+	    
+		if(document.getElementById("client_name").value == ""){
+			alert("报修单位不能为空，请填写！");
+			return;
+		}
+		
+		if(document.getElementById("fzr").value == ""){
+			alert("经手人不能为空，请选择！");
+			return;
+		}
+		
+					
+		var counts=0;	
+		
+		for(var i=0;i<=allCount;i++)
+		{			 	
+		   var product_name=document.getElementById("product_name_"+i);
+		   if(product_name!=null)
+		   {		     
+		      if(product_name.value!="")
+		      {		     
+		        counts=counts+1;
+		      }
+		   }		   
+		}
+		if(counts==0)
+		{
+		  alert("报修返还产品不能为空，请填写！");
+		  return;
+		}
+		
+		if(!InputValid(document.getElementById("skzh"),1,"string",0,1,100,"付款账户")){return;}
+		
+		//判断是否存在强制输入序列号的产品没有输入序列号
+		for(var i=0;i<=allCount;i++){
+		 
+			var qzserialnum = document.getElementById("qz_serial_num_"+i); //序列号
+			var pn = document.getElementById("product_name_" + i);           //产品名称
+			
+			 
+				 if(pn!=null&&pn.value!="")
+				 {
+				     
+					if(qzserialnum.value == "")
+					{
+						//如果没有输入序列号提示用户输入序列号
+						alert("产品" + pn.value + "强制序列号，请先输入序列号！");
+						qzserialnum.focus();
+						return;
+					}
+					else
+					{
+						//校验输入数量与产品数是否相同
+						var serial = document.getElementById("qz_serial_num_" + i).value;
+						var arrySerial = serial.split(",");
+						
+						var nms = document.getElementById("nums_" + i).value;
+						
+						if(parseInt(nms) != arrySerial.length){
+							alert("产品" + pn.value + "输入序列号数量与产品数量不符，请检查！");
+							qzserialnum.focus();
+							return;
+						}
+					}
+			     }
+		}
+	  
+		if(document.getElementById("state").value == "已提交"){
+			if(window.confirm("确认要提交报修单吗，提交后将无法修改！")){
+				
+				document.bxfhdForm.submit();		
+			}
+ 	     }
+	     else
+	     { 	         
+	         document.bxfhdForm.submit();	
+	     }
+	     document.bxfhdForm.btnSub.disabled = true;
+	}
+	
+	function setNum(i)
 	{
-	   if(document.getElementById("fzr").value=="")
-	   {
-	      alert("经手人不能为空，请填写！");
-	      return;
-	   }
-	   
-	   
-	   	      
-	   document.myform.action="updateBxfhd.html";
-	   document.myform.submit();
+	  var nums = document.getElementById("nums_" + i);
+			if(nums != null){
+				if(!InputValid(nums,0,"int",0,1,99999999,"数量")){
+					nums.focus();
+					return;
+				}
+			}		
+	} 
+   
+      	
+    function addTr(){
+        var otr = document.getElementById("bxfhdtable").insertRow(-1);
 
-	}	
+        var curId = allCount + 1;   //curId一直加下去，防止重复
+        allCount = allCount + 1;
+        
+        var otd=document.createElement("td");
+		otd.className = "a2";
+		otd.innerHTML = '<td class="a2"><input type="checkbox" name="proc_id" id="proc_id" value="' + curId + '"></td>';
+		
+        var otd0=document.createElement("td");
+        otd0.className = "a2";
+        otd0.innerHTML = '<input type="text" id="product_name_'+curId+'" name="bxfhdProducts['+curId+'].product_name" style="width:100%" readonly><input type="hidden" id="product_id_'+curId+'" name="lsdProducts['+curId+'].product_id">';
+        
+        var otd1 = document.createElement("td");
+        otd1.className = "a2";
+        otd1.innerHTML = '<input type="text" id="product_xh_'+curId+'"  name="bxfhdProducts['+curId+'].product_xh" size="15" style="width:100%" readonly>';
 
-    function clearVl(){       
-       	  document.getElementById("product_name").value="";
-		  document.getElementById("product_gg").value="";
-		  document.getElementById("product_serial_num").value="";
-		  document.getElementById("product_remark").value="";      
-    }	
+        var otd4 = document.createElement("td");
+        otd4.className = "a2";
+        otd4.innerHTML = '<input type="text" id="store_id_'+curId+'" name="bxfhdProducts['+curId+'].store_id" value="坏件库" size="7" style="width:100%"  readonly>';
+        
+        var otd5 = document.createElement("td");
+        otd5.className = "a2";
+        otd5.innerHTML = '<input type="text" id="price_'+curId+'" name="bxfhdProducts['+curId+'].price" value="0.00" size="5" style="width:100%" readonly>';
+        
+        var otd7 = document.createElement("td");
+        otd5.className = "a2";
+        otd5.innerHTML = '<input type="text" id="nums_'+curId+'" name="bxdProducts['+curId+'].nums" value="0" size="5" style="width:100%" readonly onblur="setNum('+curId+')">';
+        
+        var otd8 = document.createElement("td");
+        otd5.className = "a2";
+        otd5.innerHTML = '<input type="text" id="xj_'+curId+'" name="bxfhdProducts['+curId+'].xj" value="0.00" size="5" style="width:100%" readonly>';
+               
+        var otd9 = document.createElement("td");
+        otd9.className = "a2";
+        otd9.innerHTML = '<input type="text" id="qz_serial_num_'+curId+'" name="bxfhdProducts['+curId+'].qz_serial_num" size="15" readonly><input type="hidden" id="qz_flag_'+curId+'" name="bxdProducts['+curId+'].qz_flag"><a style="cursor:hand" title="点击输入序列号" onclick="openSerialWin('+ curId +');"><b>...</b></a>&nbsp;';   
+        
+        var otd11 = document.createElement("td");
+        otd11.className = "a2";
+        otd11.innerHTML = '<input type="text" id="cpfj_'+curId+'"  name="bxfhdProducts['+curId+'].cpfj" size="15"  style="width:100%" readonly>';
+
+        var otd6 = document.createElement("td");
+        otd6.className = "a2";
+        otd6.innerHTML = '<input type="text" id="remark_'+curId+'" name="bxfhdProducts['+curId+'].remark" style="width:100%"  readonly>';                       
+	
+		otr.appendChild(otd); 
+        otr.appendChild(otd0); 
+        otr.appendChild(otd1); 
+        otr.appendChild(otd4);
+        otr.appendChild(otd5); 
+        otr.appendChild(otd7);
+        otr.appendChild(otd8);
+        otr.appendChild(otd9); 
+        otr.appendChild(otd11);
+        otr.appendChild(otd6); 
+     }	
      
-	function openWin(){
-		var destination = "selBxProcCkd.html";
+     
+	function delTr(i){
+			var tr = i.parentNode.parentNode;
+			tr.removeNode(true);			
+	}     
+	
+	
+	function openWin(id){
+		var destination = "selBxfhProcCkd.html?openerId="+id;
 		var fea ='width=800,height=500,left=' + (screen.availWidth-800)/2 + ',top=' + (screen.availHeight-500)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
 		window.open(destination,'详细信息',fea);	
 	}
-	 
 	
 	function openywyWin()
 	{
@@ -66,30 +211,37 @@ String[] wxszd=(String[])VS.findValue("wxszd");
 		var fea ='width=800,height=500,left=' + (screen.availWidth-800)/2 + ',top=' + (screen.availHeight-500)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
 		window.open(destination,'选择经手人',fea);	
-	}
-	
-	 
-	function opengcsWin(){
-	    var destination = "selGcs.html";
-		var fea ='width=800,height=500,left=' + (screen.availWidth-800)/2 + ',top=' + (screen.availHeight-500)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
-		
-		window.open(destination,'工程师',fea);	
-	}		
+	}	
 	
 	
 	function openClientWin(){
 		var destination = "selectClient.html";
-		var fea ='width=800,height=500,left=' + (screen.availWidth-800)/2 + ',top=' + (screen.availHeight-500)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		var fea ='width=800,height=500,left=100,top=50,directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
 		window.open(destination,'详细信息',fea);		
 	}
 
-	function openAccount(){
-		var destination = "selSkAccount.html";
-		var fea ='width=400,height=300,left=' + (screen.availWidth-400)/2 + ',top=' + (screen.availHeight-300)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+	function openSerialWin(vl){
+		var pn = document.getElementById("product_name_" + vl).value;
+		var nm = document.getElementById("nums_" + vl).value;
 		
-		window.open(destination,'选择账户',fea);		
+		if(pn == ""){
+			alert("请选择产品，再输入序列号！");
+			return;
+		}
+		if(nm == "" || nm == "0"){
+			alert("请设置产品数量，再输入序列号！");
+			return;
+		}
+		
+		var qzserialnum = document.getElementById("qz_serial_num_" + vl).value;
+		
+		var url = "bxfhimportSerial.html?openerId=" + vl + "&nums=" + nm + "&serialNum=" + qzserialnum + "&product_id=" + pn;
+		var fea ='width=300,height=200,left=' + (screen.availWidth-300)/2 + ',top=' + (screen.availHeight-300)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		
+		window.open(url,'详细信息',fea);	
 	}	
+
 	
 	function f_enter(){
 	    if (window.event.keyCode==13){
@@ -101,281 +253,309 @@ String[] wxszd=(String[])VS.findValue("wxszd");
 	function sendSerialNum(){
 		var serialNum = dwr.util.getValue("s_nums");
 		if(serialNum == ""){
-		   
 			return;
 		}
-		dwrService.getBxdRecordorBuyRecord(serialNum,setProductInfo);		
+		dwrService.getZyProductObjBySerialNum(serialNum,setProductInfo);		
 	}
 	
-	function showfy(fyidvalue)
-	{
-	  if(fyidvalue=='否')
-	  {
-	    document.getElementById("fyid").style.display="none";
-	  }
-	  else
-	  {
-	    document.getElementById("fyid").style.display=""; 
-	  }
-	}		
+	//处理返回产品对象
+	function setProductInfo(product){
+		if(product != null && product.productId != null)
+		{
+			var flag = false;
+			for(var i=0;i<=allCount;i++)
+			{
+				var obj = document.getElementById("product_id_" + i);
+				if(obj != null)
+				{
+					if(obj.value == "" || obj.value==product.productId)
+					{
+						var vl = dwr.util.getValue("qz_serial_num_" + i); //已有的序列号
+						var vl2 = dwr.util.getValue("s_nums");    //输入的序列号
+						if(vl.indexOf(vl2) != -1){
+							alert("产品列表中已存在该序列号，请检查！");
+							break;
+						}
+						
+						if(vl == "")
+						{
+							vl = vl2;
+						}
+						else
+						{
+							vl += "," + vl2;
+						}
+						dwr.util.setValue("qz_serial_num_" + i,vl);
+											
+						dwr.util.setValue("product_id_" + i,product.productId);
+						dwr.util.setValue("product_name_" + i,product.productName);
+						dwr.util.setValue("product_xh_" + i,product.productXh);
+												
+						var nums = dwr.util.getValue("nums_" + i);
+						dwr.util.setValue("nums_" + i,parseInt(nums)+1);					
+						
+						dwr.util.setValue("qz_flag_" + i,product.qz_serial_num);
+						
+						dwr.util.setValue("s_nums","");
+						break;
+					}
+					if(i==allCount)
+					{
+						addTr();				
+					}
+				}
+			}
+		}
+		else
+		{
+			alert("该序列号不存在，请检查!");
+		}
+	}	
+   function delDesc(){
+		var k = 0;
+		var sel = "0"; 
+		for(var i=0;i<document.bxfhdForm.proc_id.length;i++){
+			var o = document.bxfhdForm.proc_id[i];
+			if(o.checked){
+				k = k + 1;
+				sel = document.bxfhdForm.proc_id[i].value;
+			}
+		}
+		if(k != 1){
+			alert("请选择产品明细，且只能选择一条信息！");
+			return;
+		}
+		
+		document.getElementById("product_name_" + sel).value = "";
+		document.getElementById("product_id_" + sel).value = "";
+		document.getElementById("product_xh_" + sel).value = "";
+		document.getElementById("price_" + sel).value = "0.00";
+		document.getElementById("nums_" + sel).value = "0";
+		document.getElementById("xj_" + sel).value = "0.00";
+		document.getElementById("remark_" + sel).value = "";
+		document.getElementById("cpfj_" + sel).value = "";
+		document.getElementById("qz_serial_num_" + sel).value = "";
+		document.getElementById("qz_flag_" + sel).value = "";
+	}	
+	
+	function openAccount(){
+		var destination = "selSkAccount.html";
+		var fea ='width=400,height=300,left=' + (screen.availWidth-400)/2 + ',top=' + (screen.availHeight-300)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		
+		window.open(destination,'选择账户',fea);		
+	}	
+	
+	
+	function hj(){
+		var length = (document.getElementById('bxfhdtable').rows.length-2);
+		
+		var hjz = 0;
+		
+		
+		for(var i=0;i<=allCount;i++)
+		{			
+			var price = document.getElementById("price_" + i);
+			
+			if(price != null)
+			{
+				if(!InputValid(price,0,"float",0,1,99999999,"维修价格")){
+					price.focus();
+					return;
+				}
+			}
+			
+			var nums = document.getElementById("nums_" + i);
+			if(nums != null)
+			{
+				if(!InputValid(nums,0,"int",0,1,99999999,"数量"))
+				{
+					nums.focus();
+					return;
+				}
+			}		
+					
+			var xj = document.getElementById("xj_" + i);			
+			
+			if(xj != null)
+			{
+				xj.value = (parseFloat(price.value) * parseFloat(nums.value)).toFixed(2);				
+				hjz = parseFloat(hjz) + parseFloat(xj.value);				
+			}
+		}
+		var hjje = document.getElementById("hjje");
+		var ssje = document.getElementById("ssje");
+		
+		hjje.value = hjz.toFixed(2);		
+		ssje.value = hjz.toFixed(2);	
+	}
 </script>
+
 </head>
-<body onload="initFzrTip();">
-<FORM  name="myform" action="updateBxfhd.html" method="post">
-<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0" id="tables">
+<body onload="initFzrTip();initClientTip();">
+<form name="bxfhdForm" action="updateBxfhd.html" method="post">
+<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
 		<td colspan="4">报修返还单信息</td>
 	</tr>
 	</thead>
-	 	
+	 
+	 <%
+	 
+	if(msg != null && msg.size() > 0){
+		for(int i=0;i<msg.size();i++){
+	%>
 	<tr>
-		<td class="a1" width="15%">报修返还单编号</td>
-		<td class="a2" width="35%"><input type="text" name="bxfhd.id" id="id" value="<%=StringUtils.nullToStr(bxfhd.getId())%>" readonly></td>	
+		<td colspan="4" class="a2"><font color="red"><%=StringUtils.nullToStr(msg.get(i)) %></font></td>
+	</tr>
+	<%
+		}
+	}
+	%>		
+	<tr>
+		<td class="a1" width="15%">编  号</td>
+		<td class="a2" width="35%"><input type="text" name="bxfhd.id" id="id" value="<%=StringUtils.nullToStr(bxfhd.getId()) %>" readonly></td>	
 		 
-		<td class="a1">创建时间</td>
-		 
-		<td class="a2"><input type="text" name="bxfhd.cj_date" id="cj_date" value="<%=StringUtils.nullToStr(bxfhd.getCj_date()) %>" readonly>
-		<!--  <img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.getElementById('cj_date')); return false;">-->
+		<td class="a1">报修返还日期</td>
+		<td class="a2"><input type="text" name="bxfhd.fh_date" id="fh_date" value="<%=DateComFunc.getToday() %>" readonly>
+		</td>		
+	</tr>
+	<tr>		 
+		<td class="a1" width="15%">报修单位</td>
+		<td class="a2">
+		<input type="text" name="bxfhd.bxcs_id" id="client_name" value="<%=StaticParamDo.getClientNameById(StringUtils.nullToStr(bxfhd.getBxcs())) %>" size="30" maxlength="50"  onblur="setClientValue();">
+		<input type="hidden" name="bxfhd.bxcs" id="client_id" value="<%=StringUtils.nullToStr(bxfhd.getBxcs()) %>">
+		<!--<img src="images/select.gif" align="absmiddle" title="选择客户" border="0" onclick="openProvider();" style="cursor:hand">
+			--><div id="clientsTip" style="height:12px;position:absolute;left:150px; top:85px; width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+			<font color="red">*</font>
+		</td>	
+		<td class="a1" width="15%">经手人</td>
+		<td class="a2" width="35%">
+		 <input id="brand" type="text" ength="20" onblur="setValue();" value="<%=StaticParamDo.getRealNameById(StringUtils.nullToStr(bxfhd.getJsr())) %>" /> 
+         <!--<img src="images/select.gif" align="absmiddle" title="选择经手人" border="0" onclick="openywyWin();" style="cursor:hand">
+          --><div   id="brandTip"  style="height:12px;position:absolute;left:610px; top:85px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
+          </div>
+		  <input type="hidden" name="bxfhd.jsr" id="fzr" value="<%=bxfhd.getJsr()%>"/> <font color="red">*</font>	
 		</td>
 	</tr>
 	<tr>
-		
-		<td class="a1" width="15%">客户名称</td>
-		<td class="a2">
-		   <input  id="client_name"  type="text"   length="20"  readonly="readonly"  value="<%=StaticParamDo.getClientNameById(StringUtils.nullToStr(bxfhd.getClient_name())) %>"/> 		    
-		   <input name="bxfhd.client_name" type="hidden" value="<%=StringUtils.nullToStr(bxfhd.getClient_name())%>"/>
-		</td>	
-		<td class="a1" width="15%">联系人</td>
-    	<td class="a2">	  
-		 <input  name="bxfhd.lxr" id="lxr"  readonly="readonly" value="<%=StringUtils.nullToStr(bxfhd.getLxr()) %>"/> 
-         	   
-		</td>						
-	</tr>
-	
-	<tr>
-		
-		<td class="a1" width="15%">电话</td>
-		<td class="a2">
-		   <input  name="bxfhd.lxdh" id="lxdh"  type="text"   length="20" readonly="readonly" value=""<%=StringUtils.nullToStr(bxfhd.getLxdh()) %>/> 
-              
-		</td>	
-		<td class="a1" width="15%">地址</td>
-    	<td class="a2">	  
-		 <input  name="bxfhd.address" id="address"  readonly="readonly"  value="<%=StringUtils.nullToStr(bxfhd.getAddress())%>"/> 
-	   
-		</td>						
-	</tr>
-	<tr>
-		
-		<td class="a1" width="15%">报修单编号</td>
-		<td class="a2">
-		   <input name="bxfhd.bxd_id"  id="bxd_id"  type="text"   length="20" readonly="readonly"   value="<%=StringUtils.nullToStr(bxfhd.getBxd_id())%>"/> 	    
-		</td>	
-		<td class="a1" width="15%">报修人</td>
-    	<td class="a2">	  
-		 <input  id="bxr" type="text"  readonly="readonly"  value="<%=StaticParamDo.getRealNameById(StringUtils.nullToStr(bxfhd.getBxr()))%>"/> 		   
-		 <input  name="bxfhd.bxr" type="hidden" value="<%=StringUtils.nullToStr(bxfhd.getBxr())%>">
-		</td>						
-	</tr>
-	<tr>
-		
-		<td class="a1" width="15%">工程师</td>
-		<td class="a2">
-		   <input  id="gcs"  type="text"   length="20"  readonly="readonly"  value="<%=StaticParamDo.getRealNameById(StringUtils.nullToStr(bxfhd.getGcs()))%>"/> 
-           <input name="bxfhd.gcs" type="hidden" value="<%=StringUtils.nullToStr(bxfhd.getGcs())%>">
-		</td>	
-		<td class="a1" width="15%">返还日期</td>
-    	<td class="a2">	  
-    	 <%
-    	    String rq;
-    	    if(StringUtils.nullToStr(bxfhd.getFh_date()).equals(""))
-    	    {
-    	       rq=DateComFunc.getToday();
-    	    }
-    	    else
-    	    {
-    	       rq=StringUtils.nullToStr(bxfhd.getFh_date());
-    	    }
-    	  %>
-		 <input type="text" name="bxfhd.fh_date" id="fh_date" value="<%=rq%>" readonly>
-		<img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.getElementById('fh_date')); return false;">		   
-		</td>						
-	</tr>
-	<tr>
-	    <td class="a1" width="15%">经手人</td>
-		<td class="a2">
-		   <input  id="brand"  type="text"   length="20"  onblur="setValue()" value="<%=StaticParamDo.getRealNameById(bxfhd.getJxr()) %>"/> 
-           <div  id="brandTip"  style="height:12px;position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
-		   <input type="hidden" name="bxfhd.jxr" id="fzr" value="<%=StringUtils.nullToStr(bxfhd.getJxr()) %>"/> 		    
-		</td>	
-		<td class="a1" width="15%">返还状态</td>
-		<td class="a2" width="35%">
+		<td class="a1" width="15%">报修返还单状态</td>
+		<td class="a2" width="35%" colspan="3">
 			<select name="bxfhd.state" id="state">
-				<option value="待返还" <%if(StringUtils.nullToStr(bxfhd.getState()).equals("待返还"))out.print("selected");%>>待返还</option>
-				<option value="已返还" <%if(StringUtils.nullToStr(bxfhd.getState()).equals("已返还"))out.print("selected");%>>已返还</option>
-			</select>		
-		</td>		
+				<option value="已保存" <%if(StringUtils.nullToStr(bxfhd.getState()).equals("已保存")) out.print("selected"); %>>已保存</option>
+				<option value="已提交" <%if(StringUtils.nullToStr(bxfhd.getState()).equals("已提交")) out.print("selected"); %>>已提交</option>
+			</select><font color="red">*</font>		
+		</td>						
 	</tr>
+	 
 </table>
- <br>
+<br>
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td colspan="2">报修返还产品信息</td>
+		<td colspan="2">产品详细信息</td>
 	</tr>
-	</thead>
+	</thead>	
 </table>
-  
-<table width="100%"  align="center" id="lsdtable"  class="chart_list" cellpadding="0" cellspacing="0">	
+<table width="100%"  align="center" id="bxfhdtable"  class="chart_list" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td>产品名称</td>
-		<td>产品规格</td> 
-		<td>目标库</td>
-		<td>序列号</td>
-		<td>备注</td>		 
+	    <td width="15%">产品名称</td>	
+		<td width="15%">产品规格</td>
+		<td width="6%">仓库</td>
+		<td width="5%">单价</td>
+		<td width="4%">数量</td>	
+		<td width="5%">小计</td>
+		<td width="12%">强制序列号</td>
+		<td width="15%">产品附件</td>
+		<td width="15%">备注</td>		
 	</tr>
 	</thead>
- 
+<%
+ if(bxfhdProducts!=null&&bxfhdProducts.size()>0)
+ {
+      for(int i=0;i<bxfhdProducts.size();i++)
+      {
+           BxfhdProduct bxfhdProduct= (BxfhdProduct)bxfhdProducts.get(i);
+           String flag2 = "否";
+		   if(!StringUtils.nullToStr(bxfhdProduct.getQz_serial_num()).equals("")){
+			 flag2 = "是";
+		   }
+ %>
 	<tr>
-		<td class="a2">
-			<input type="text" id="product_name" name="bxfhdProduct.product_name" value="<%=StringUtils.nullToStr(bxfhdProduct.getProduct_name()) %>" size="35" readonly="readonly">
-			<input type="hidden" id="product_id" name="bxfhdProduct.product_id" value="<%=StringUtils.nullToStr(bxfhdProduct.getProduct_id()) %>">
-			 
-		</td>
-		<td class="a2">
-			<input type="text" id="product_xh" name="bxfhdProduct.product_xh" value="<%=StringUtils.nullToStr(bxfhdProduct.getProduct_xh()) %>" readonly="readonly">
-		</td>
-	    
-	    <td class="a2">	   
-	         <input type="text" id="kf" name="kf" value="好件库" size="7" readonly="readonly">
-	    </td>
-	    
-		<td class="a2">
-			<input type="text" id="qz_serial_num" name="bxfhdProduct.qz_serial_num" value="<%=StringUtils.nullToStr(bxfhdProduct.getQz_serial_num()) %>" readonly="readonly">
-		</td>	
-			
-		<td class="a2">
-		    <input type="text" id="remark" name="bxfhdProduct.remark" value="<%=StringUtils.nullToStr(bxfhdProduct.getRemark()) %>" readonly="readonly">
-		</td>
-	</tr>
+	            
+				<td class="a2">
+					<input type="text" id="product_name_<%=i %>" name="bxfhdProducts[<%=i %>].product_name" value="<%=StringUtils.nullToStr(bxfhdProduct.getProduct_name()) %>" style="width:100%" readonly>
+					<input type="hidden" id="product_id_<%=i %>" name="bxfhdProducts[<%=i %>].product_id" value="<%=StringUtils.nullToStr(bxfhdProduct.getProduct_id()) %>">
+				</td>
+				<td class="a2"><input type="text" id="product_xh_<%=i %>" name="bxfhdProducts[<%=i %>].product_xh"  value="<%=StringUtils.nullToStr(bxfhdProduct.getProduct_xh()) %>"  style="width:100%" readonly></td>	
+				<td class="a2">	
+				<% String productname=StringUtils.nullToStr(bxfhdProduct.getProduct_name());
+	               String kf="";
+	              if(productname.equals(""))
+	              {
+	                kf="";
+	              }
+	              else
+	              {
+	                kf="好件库";
+	               }
+	            %>			    
+					<input type="text" id="store_id" name="store_id" value="<%=kf %>" size="7"  style="width:100%" readonly>					 
+				</td>
+				<td class="a2"><input type="text" id="price_<%=i %>" name="bxfhdProducts[<%=i %>].price" value="<%=JMath.round(bxfhdProduct.getPrice()) %>" size="7" style="width:100%" onblur="hj();">
+				<td class="a2"><input type="text" id="nums_<%=i %>" name="bxfhdProducts[<%=i %>].nums" value="<%=bxfhdProduct.getNums() %>" size="5" onblur="hj();"  style="width:100%" readonly></td>		 
+				<td class="a2"><input type="text" id="xj_<%=i %>" name="bxfhdProducts[<%=i %>].totalmoney" value="<%=JMath.round(bxfhdProduct.getTotalmoney()) %>" size="7" style="width:100%" readonly></td>
+				<td class="a2">
+			        <input type="text" id="qz_serial_num_<%=i %>" name="bxfhdProducts[<%=i %>].qz_serial_num" value="<%=StringUtils.nullToStr(bxfhdProduct.getQz_serial_num()) %>" size="10" readonly>
+			        <input type="hidden" id="qz_flag_<%=i %>" name="bxfhdProducts[<%=i %>].qz_flag" value="<%=flag2 %>"><a style="cursor:hand" title="左键点击输入输列号" onclick="openSerialWin('<%=i %>');"><b>...</b></a>&nbsp;
+				</td>				
+				
+				<td class="a2"><input type="text" id="cpfj_<%=i %>" name="bxfhdProducts[<%=i %>].cpfj"  value="<%=StringUtils.nullToStr(bxfhdProduct.getCpfj()) %>" style="width:100%"></td>	
+				<td class="a2"><input type="text" id="remark_<%=i %>" name="bxfhdProducts[<%=i %>].remark" value="<%=StringUtils.nullToStr(bxfhdProduct.getRemark()) %>" style="width:100%"></td>				
+			</tr>
+<%
+}
+ }
+%>	
+
 </table>
- 
-<table width="100%"  align="center" class="chart_info" cellpadding="0" cellspacing="0">	
-<!--  
-	<tr>    
-	    <td class="a1">报修费用</td>
-	     <td class="a2" colspan="3">
-	       <select name="bxfhd.isfy" id="isfy" onchange="showfy(this.value)">
-	         <option value="否" <%if(StringUtils.nullToStr(bxfhd.getIsfy()).equals("否"))out.print("selected"); %>>否</option>
-	         <option value="是" <%if(StringUtils.nullToStr(bxfhd.getIsfy()).equals("是"))out.print("selected"); %>>是</option>
-	       </select>
-	     </td>
+<table width="100%"  align="center" class="chart_info" cellpadding="0" cellspacing="0">
+    <tr height="35">	
+		<td class="a1">合计金额</td>
+		<td class="a2" colspan="3">
+			<input type="text" name="bxfhd.hjje" id="hjje" value="<%=JMath.round(bxfhd.getHjje()) %>" readonly>
+		</td>
+		<td class="a1">本次实付金额</td>
+		<td class="a2">
+			<input type="text" name="bxfhd.ssje" id="ssje" value="<%=JMath.round(bxfhd.getSsje()) %>" ><font color="red">*</font>
+		</td>		
 	</tr>
-	<tr id="fyid" style="display:none">
-	    <td class="a1">应付费用</td>
-		<td class="a2"><input type="text"  name="bxfhd.ssje" id="ssje" value=""/></td>
-		<td class="a1" widht="20%">付款账户</td>
+			
+	<tr>
+		<td class="a1" widht="20%">收款账户</td>
 		<td class="a2"><input type="text" id="zhname"  name="zhname" value="<%=StaticParamDo.getAccountNameById(StringUtils.nullToStr(bxfhd.getFkzh())) %>" readonly>
 		<input type="hidden" id="skzh"  name="bxfhd.fkzh" value="<%=StringUtils.nullToStr(bxfhd.getFkzh()) %>">
 		<img src="images/select.gif" align="absmiddle" title="选择账户" border="0" onclick="openAccount();" style="cursor:hand"><font color="red">*</font>
-	</tr>
--->		
-	  
-	<tr height="35">	
-		<td class="a1">报修所在地</td>
-		<td class="a2"  >
-			<select name="bxfhdProduct.bxaddress" id="bxszd">
-			 <option value=""></option>
-			<%
-			   if(wxszd != null && wxszd.length>0){
-			     for(int i=0;i<wxszd.length;i++){
-			       String szd=wxszd[i];
-			 %>
-			      <option value="<%=szd %>" <%if(!(StringUtils.nullToStr(bxfhdProduct.getBxaddress()).equals("")))out.print("selected"); %>><%=szd %></option>
-			 <%
-			      }
-			   }
-			  %>
-			</select>
-			
 		</td>
-		<td class="a1">产品状态</td>
-		<td class="a2"  >
-			<input type="text" name="bxfhdProduct.bxstate" id="bxstate" value="<%=StringUtils.nullToStr(bxfhdProduct.getBxstate())%>" >
-		</td>
-	</tr>
-
-	 
-	
-	<tr >
-	   <td class="a1" width="15%">随机附件</td>
-	   <td class="a2" >
-	      <% String fj[]=StringUtils.nullToStr(bxfhdProduct.getFj()).split(","); %>
-	      <input type="checkbox" name="fj" value="硒鼓" <%for(int i=0;i<fj.length;i++){if(fj[i].equals("硒鼓"))out.print("checked");} %>>硒鼓&nbsp;&nbsp; 
-	      <input type="checkbox" name="fj" value="墨盒" <%for(int i=0;i<fj.length;i++){if(fj[i].equals("墨盒"))out.print("checked");} %>>墨盒&nbsp;&nbsp; 
-	      <input type="checkbox" name="fj"   value="电源线"<%for(int i=0;i<fj.length;i++){if(fj[i].equals("电源线"))out.print("checked");} %>>电源线&nbsp;&nbsp; 
-	      <input type="checkbox" name="fj"  value="数据线"<%for(int i=0;i<fj.length;i++){if(fj[i].equals("数据线"))out.print("checked");} %>>数据线&nbsp;&nbsp; 
-	      <input type="checkbox" name="fj"   value="适配器"<%for(int i=0;i<fj.length;i++){if(fj[i].equals("适配器"))out.print("checked");} %>>适配器&nbsp;&nbsp; 
-	      <input type="checkbox" name="fj"   value="电池"<%for(int i=0;i<fj.length;i++){if(fj[i].equals("电池"))out.print("checked");} %>>电池&nbsp;&nbsp; 
-	       <input type="checkbox" name="fj"   value="包"<%for(int i=0;i<fj.length;i++){if(fj[i].equals("包"))out.print("checked");} %>>包
-	   </td>
-	   
-	    <td class="a1" width="15%">其他附件</td>
-	    <td class="a2">
-	   
-	    <input type="text" name="bxfhdProduct.qtfj" readonly="readonly" id="qtfj" value="<%=StringUtils.nullToStr(bxfhdProduct.getQtfj()) %>"  >
-	   </td>
-	</tr>
-	 
-	<tr height="35">
-		 <td class="a1" width="15%">备件</td>
-		<td class="a2" colspan="3">
-			<input type="text" name="bxfhdProduct.bj" id="bj" readonly="readonly" value="<%=StringUtils.nullToStr(bxfhdProduct.getBj()) %>">
-		</td>	
-	</tr>
-		
-	
-	<tr height="35">
-		 <td class="a1" width="15%">故障及分析</td>
-		<td class="a2" colspan="3">
-			<textarea rows="2" name="bxfhdProduct.gzfx" id="gzfx" style="width:75%"><%=StringUtils.nullToStr(bxfhdProduct.getGzfx()) %> </textarea>
-		</td>	
-	</tr>
-	<tr height="35">
-		 <td class="a1" width="15%">排除过程</td>
-		<td class="a2" colspan="3">
-			<textarea rows="2" name="bxfhdProduct.pcgc" id="pcgc" style="width:75%"><%=StringUtils.nullToStr(bxfhdProduct.getPcgc()) %> </textarea>
-		</td>	
-	</tr>	 	 
-</table>
-<br>
-
-
-<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
-	<thead>
-	<tr>
-		<td colspan="4">备注</td>
-	</tr>
-	</thead>
-	
+	</tr>	
+</table> 
+ 
+<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">		 
 	<tr>
 		<td class="a1" width="15%">备注</td>
 		<td class="a2" width="85%" colspan="3">
-			<textarea rows="2" name="bxfhd.ms" id="ms" style="width:75%"> <%=StringUtils.nullToStr(bxfhd.getMs()) %> </textarea>
+			<textarea rows="4" name="bxfhd.remark" id="remark" style="width:75%"><%=StringUtils.nullToStr(bxfhd.getRemark()) %> </textarea>
 		</td>
 	</tr>			
 	<tr height="35">
 		<td class="a1" colspan="4">
-			<input type="button" name="btnSub" value="确 定" class="css_button2" onclick="saveInfo();">&nbsp;&nbsp;&nbsp;&nbsp;	
+			<input type="button" name="btnSub" value="确 定" class="css_button2" onclick="saveInfo();">&nbsp;&nbsp;&nbsp;&nbsp;				 
 			<input type="reset" name="button2" value="重 置" class="css_button2">&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="reset" name="button2" value="关 闭" class="css_button2" onclick="window.close();">
 		</td>
 	</tr>
 </table>
-
-</FORM>
-
+</form>
 </BODY>
 </HTML>

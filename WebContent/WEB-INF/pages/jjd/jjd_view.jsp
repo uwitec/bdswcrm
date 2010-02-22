@@ -13,7 +13,7 @@ List jjdProducts = (List)VS.findValue("jjdProducts");
 %>
 <html>
 <head>
-<title>返还客户单管理</title>
+<title>接件单管理</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript">
@@ -24,7 +24,7 @@ List jjdProducts = (List)VS.findValue("jjdProducts");
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
-		<td colspan="4">返还客户单信息</td>
+		<td colspan="4">接件单信息</td>
 	</tr>
 	</thead>
 	<tr>
@@ -52,11 +52,14 @@ List jjdProducts = (List)VS.findValue("jjdProducts");
 <table width="100%"  align="center" id="lsdtable"  class="chart_list" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td>产品名称</td>
-		<td>产品规格</td> 		 
-		<td>数量</td>
-		<td>序列号</td>
-		<td>备注</td>
+		<td  >产品名称</td>
+		<td  >规格</td>
+		<td  >数量</td>	
+		<td  >目标库</td>
+		<td  >强制序列号</td>
+		<td  >附件</td>
+		<td  >返还天数</td>
+		<td  >备注</td>	
 	</tr>
 	</thead>
 <%
@@ -70,7 +73,10 @@ if(jjdProducts != null && jjdProducts.size()>0){
 		<td class="a2"><%=StringUtils.nullToStr(jjdProduct.getProduct_name()) %></td>
 		<td class="a2"><%=StringUtils.nullToStr(jjdProduct.getProduct_xh()) %></td>		 
 		<td class="a2"><%=jjdProduct.getNums() %></td>
-			<td class="a2"><%=StringUtils.nullToStr(jjdProduct.getQz_serial_num()) %></td>	
+		<td class="a2">坏件库</td>	
+		<td class="a2"><%=StringUtils.nullToStr(jjdProduct.getQz_serial_num()) %></td>	
+		<td class="a2"><%=StringUtils.nullToStr(jjdProduct.getCpfj()) %></td>	
+		<td class="a2"><%=StringUtils.nullToStr(jjdProduct.getFxts()) %></td>		
 		<td class="a2"><%=StringUtils.nullToStr(jjdProduct.getRemark()) %></td>
 	</tr>
 <%
@@ -94,8 +100,8 @@ if(jjdProducts != null && jjdProducts.size()>0){
 	<tr>
 		<td class="a1" width="15%">联系电话</td>
 		<td class="a2"><%=StringUtils.nullToStr(jjd.getMobile()) %></td>	
-		 <td class="a1" width="15%">地址</td>
-		<td class="a2"><%=StringUtils.nullToStr(jjd.getAddress()) %></td>			
+		 <td class="a1" width="15%">Email</td>
+		<td class="a2"><%=StringUtils.nullToStr(jjd.getMail()) %></td>			
 	</tr>
  
 </table>

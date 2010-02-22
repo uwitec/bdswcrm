@@ -24,7 +24,7 @@ String orderType = (String)VS.findValue("orderType");
 <title>接件单管理</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
-<script language='JavaScript' src="js/date.js"></script>
+<script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
 <script type="text/javascript">
 	
 	function openWin(id){
@@ -52,7 +52,7 @@ String orderType = (String)VS.findValue("orderType");
 	function add(){
 		var destination = "addJjd.html";
 		var fea ='width=950,height=700,left=' + (screen.availWidth-950)/2 + ',top=' + (screen.availHeight-750)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';	
-		window.open(destination,'添加接件单',fea );	
+		window.open(destination,'添加接件单',fea);	
 	}
 	
 	function edit(id){
@@ -106,18 +106,15 @@ String orderType = (String)VS.findValue("orderType");
 	</tr>
 	<tr>
 		<td class="search" align="left" colspan="2">&nbsp;&nbsp;
-			联系人：<input type="text" name="linkman" value="<%=linkman %>" size="10">&nbsp;&nbsp;
-			序列号：<input type="text" name="qz_serial_num" value="<%=qz_serial_num %>">&nbsp;&nbsp;
-			时间：<input type="text" name="jj_date1" value="<%=jj_date1 %>" size="8" readonly>
-			<img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.myform.jj_date1); return false;">&nbsp;至&nbsp;
-			<input type="text" name="jj_date2" value="<%=jj_date2 %>" size="8" readonly>
-			<img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.myform.jj_date2); return false;">			
-			&nbsp;&nbsp;
+			联系人：<input type="text" name="linkman" value="<%=linkman %>" size="10"> 
+			序列号：<input type="text" name="qz_serial_num" value="<%=qz_serial_num %>" size="10"> 
+			时间： <input type="text" name="jj_date1" id="creatdate" value="<%=jj_date1 %>" class="Wdate" onFocus="WdatePicker()"/> 至 
+				  <input type="text" name="jj_date2" id="creatdate2" value="<%=jj_date2 %>"  class="Wdate" onFocus="WdatePicker()"/>										 
 			接件单状态：<select name="state">
 				<option value=""></option>
 				<option value="已保存" <%if(state.equals("已保存")) out.print("selected"); %>>已保存</option>
 				<option value="已提交" <%if(state.equals("已提交")) out.print("selected"); %>>已提交</option>
-			</select>&nbsp;&nbsp;
+			</select> 
 			接件人：<input type="text" name="jjr" value="<%=jjr %>" size="10">
 			<input type="submit" name="buttonCx" value=" 查询 " class="css_button">
 			<input type="button" name="buttonQk" value=" 清空 " class="css_button" onclick="clearAll();">
@@ -193,6 +190,5 @@ String orderType = (String)VS.findValue("orderType");
 		<td><iframe id="desc" name="desc" onload="dyniframesize('desc');" width="100%" border="0" frameborder="0" SCROLLING="no"  src=''/></td>
 	</tr>
 </table>
-
 </body>
 </html>

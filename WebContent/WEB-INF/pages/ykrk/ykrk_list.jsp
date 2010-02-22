@@ -42,19 +42,19 @@ String orderType = (String)VS.findValue("orderType");
 		var destination = "addYkrk.html";
 		var fea ='width=950,height=700,left=' + (screen.availWidth-950)/2 + ',top=' + (screen.availHeight-700)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
-		window.open(destination,'移库出库',fea);	
+		window.open(destination,'移库入库',fea);	
 	}	
 	
 	function clearAll(){
-		document.myform.ck_date1.value = "";
-		document.myform.ck_date2.value = "";
+		document.myform.rk_date1.value = "";
+		document.myform.rk_date2.value = "";
 	}
 	
 	function edit(id){
 		var destination = "editYkrk.html?id=" + id;
 		var fea ='width=950,height=700,left=' + (screen.availWidth-950)/2 + ',top=' + (screen.availHeight-700)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
-		window.open(destination,'调拨申请',fea);		
+		window.open(destination,'移库入库');		
 	}		
 	
 	

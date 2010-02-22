@@ -8,12 +8,12 @@
 OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
 Page results = (Page)VS.findValue("fhkhdPage");
 
-String cj_date1 = (String)VS.findValue("cj_date1");
-String cj_date2 = (String)VS.findValue("cj_date2");
-String qz_serial_num = (String)VS.findValue("qz_serial_num");
+String fh_date1 = (String)VS.findValue("fh_date1");
+String fh_date2 = (String)VS.findValue("fh_date2");
+
 String state = (String)VS.findValue("state");
 String lxr = (String)VS.findValue("lxr");
-String fhr=(String)VS.findString("fhr");
+String fhkh=(String)VS.findString("client_name");
 String orderName = (String)VS.findValue("orderName");
 String orderType = (String)VS.findValue("orderType");
 %>
@@ -23,7 +23,13 @@ String orderType = (String)VS.findValue("orderType");
 <title>返还客户单管理</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
-<script language='JavaScript' src="js/date.js"></script>
+<script type='text/javascript' src='dwr/interface/dwrService.js'></script>
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script>
+<script type="text/javascript" src="js/prototype-1.4.0.js"></script>
+<script language='JavaScript' src="js/selClient.js"></script>
+<script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
+
 <script type="text/javascript">
 	
 	function openWin(id){
@@ -41,11 +47,11 @@ String orderType = (String)VS.findValue("orderType");
 	
 	function clearAll(){
 		document.myform.lxr.value = "";
-		document.myform.qz_serial_num.value = "";
-		document.myform.cj_date1.value = "";
-		document.myform.cj_date2.value = "";
+		
+		document.myform.fh_date1.value = "";
+		document.myform.fh_date2.value = "";
 		document.myform.state.value = "";
-		document.myform.fhr.value = "";
+		document.myform.client_name.value = "";
 	}
 	
 	function add(){
@@ -58,7 +64,7 @@ String orderType = (String)VS.findValue("orderType");
 		var destination = "editFhkhd.html?id=" + id;
 		var fea ='width=950,height=700,left=' + (screen.availWidth-950)/2 + ',top=' + (screen.availHeight-750)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
-		window.open(destination,'修改接件单',fea);		
+		window.open(destination,'修改返还客户单',fea);		
 	}	
 	
 	function doSort(order_name){
@@ -105,19 +111,16 @@ String orderType = (String)VS.findValue("orderType");
 	</tr>
 	<tr>
 		<td class="search" align="left" colspan="2">&nbsp;&nbsp;
-			联系人：<input type="text" name="lxr" value="<%=lxr %>" size="10">&nbsp;&nbsp;
-			序列号：<input type="text" name="qz_serial_num" value="<%=qz_serial_num %>">&nbsp;&nbsp;
-			时间：<input type="text" name="cj_date1" value="<%=cj_date1 %>" size="8" readonly>
-			<img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.myform.cj_date1); return false;">&nbsp;至&nbsp;
-			<input type="text" name="cj_date2" value="<%=cj_date2 %>" size="8" readonly>
-			<img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.myform.cj_date2); return false;">			
-			&nbsp;&nbsp;
+		    返还客户：<input type="text" name="client_name" value="<%=fhkh %>" size="30">&nbsp;&nbsp;
+			联系人：<input type="text" name="lxr" value="<%=lxr %>" size="10">&nbsp;&nbsp;			
+			返还时间：<input type="text" name="fh_date1" value="<%=fh_date1%> " size="15"  class="Wdate" onFocus="WdatePicker()">
+			&nbsp;至&nbsp;
+			<input type="text" name="fh_date2" value="<%=fh_date2 %>" size="15"  class="Wdate" onFocus="WdatePicker()">&nbsp;&nbsp;
 			状态：<select name="state">
 				<option value=""></option>
 				<option value="已提交" <%if(state.equals("已提交")) out.print("selected"); %>>已提交</option>
 				<option value="已保存" <%if(state.equals("已保存")) out.print("selected"); %>>已保存</option>
-			</select>&nbsp;&nbsp;
-			返还人：<input type="text" name="fhr" value="<%=fhr%>" size="10">
+			</select>&nbsp;&nbsp;			
 			<input type="submit" name="buttonCx" value=" 查询 " class="css_button">
 			<input type="button" name="buttonQk" value=" 清空 " class="css_button" onclick="clearAll();">
 		</td>				
@@ -127,12 +130,14 @@ String orderType = (String)VS.findValue("orderType");
 	<thead>
 	<tr>
 		<td onclick="doSort('id');">返还客户单编号<%if(orderName.equals("id")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('client_name');">单位名称<%if(orderName.equals("client_name")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td onclick="doSort('client_name');">返还客户<%if(orderName.equals("client_name")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
 		<td onclick="doSort('lxr');">联系人<%if(orderName.equals("lxr")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('lxdh');">联系电话<%if(orderName.equals("lxdh")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td onclick="doSort('productNums');">返还数量<%if(orderName.equals("productNums")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td onclick="doSort('skje');">维修金额<%if(orderName.equals("skje")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
 		<td onclick="doSort('fh_date');">返还时间<%if(orderName.equals("fh_date")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		
+		<td onclick="doSort('jsr');">经手人<%if(orderName.equals("jsr")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
 		<td onclick="doSort('state');">状态<%if(orderName.equals("state")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>		
-		<td onclick="doSort('fhr');">返还人<%if(orderName.equals("fhr")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
 		<td onclick="doSort('cjr');">操作员<%if(orderName.equals("cjr")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>		
 		<td>操作</td>
 	</tr>
@@ -143,17 +148,18 @@ String orderType = (String)VS.findValue("orderType");
 	
 	while(it.hasNext()){
 		Map fhkhd = (Map)it.next();
-		 
+		String totalmoney = JMath.round((fhkhd.get("skje")==null?0:((Double)fhkhd.get("skje")).doubleValue()),2); 
 	%>
 	<tr class="a1" title="双击查看详情"  onmousedown="trSelectChangeCss()" onclick="descMx('<%=StringUtils.nullToStr(fhkhd.get("id")) %>');" onDblClick="openWin('<%=StringUtils.nullToStr(fhkhd.get("id")) %>');">
 		<td><%=StringUtils.nullToStr(fhkhd.get("id")) %></td>
-		<td><%=StaticParamDo.getClientNameById(StringUtils.nullToStr(fhkhd.get("client_name"))) %></td>
+		<td><%=StaticParamDo.getClientNameById(StringUtils.nullToStr(fhkhd.get("client_id"))) %></td>
 		 
 		<td><%=StringUtils.nullToStr(fhkhd.get("lxr"))  %></td>
-		<td><%=StringUtils.nullToStr(fhkhd.get("lxdh")) %></td>
-		<td><%=StringUtils.nullToStr(fhkhd.get("fh_date")) %></td>
+		<td><%=StringUtils.nullToStr(fhkhd.get("productNums")) %></td>
+		<td align="right" nowrap="nowrap"><%=totalmoney %>&nbsp;&nbsp;</td>
+		<td><%=StringUtils.nullToStr(fhkhd.get("fh_date")) %></td>		
+		<td><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(fhkhd.get("jsr"))) %></td>
 		<td><%=StringUtils.nullToStr(fhkhd.get("state")) %></td>
-		<td><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(fhkhd.get("fhr"))) %></td>
 		<td><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(fhkhd.get("cjr"))) %></td> 
 		<td>
 		<%

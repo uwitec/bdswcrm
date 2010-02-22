@@ -367,7 +367,7 @@ session.removeAttribute("messages");
 		}
 		%>
 		<td class="a1">接件日期</td>
-		<td class="a2"><input type="text" name="jjd.jj_date" id="jjdate" value="<%= rq %>" readonly><img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.getElementById('jjdate')); return false;"><font color="red">*</font>
+		<td class="a2"><input type="text" name="jjd.jj_date" id="jjdate" value="<%= rq %>" readonly> 
 		</td>		
 	</tr>
 	<tr>
@@ -396,59 +396,63 @@ session.removeAttribute("messages");
 		<td colspan="2">产品详细信息</td>
 	</tr>
 	</thead>
-	<tr height="35">
-		<td class="a2" colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;输入序列号：<input type="text" name="s_nums" value="" onkeypress="javascript:f_enter()">
-			注：输入产品序列号回车，可自动提取产品信息到产品列表中（已售出的）
-		</td>
-	</tr>	
+	 
 </table>
 <table width="100%"  align="center" id="lsdtable"  class="chart_list" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td>产品名称</td>
-		<td>规格</td>
-		<td>数量</td>	
-		<td>目标库</td>
-		<td>强制序列号</td>
-		<td>备注</td>
-		<td></td>
+	    <td width="5%">选择</td>
+		<td width="15%">产品名称</td>
+		<td width="15%">规格</td>
+		<td width="5%">数量</td>	
+		<td width="10%">目标库</td>
+		<td width="15%">强制序列号</td>
+		<td width="15%">附件</td>
+		<td width="6%">返还天数</td>
+		<td width="15%">备注</td>		 
 	</tr>
 	</thead>
 <%
  if(jjdProducts!=null&&jjdProducts.size()>0)
  {
       for(int i=0;i<jjdProducts.size();i++)
-      {
+      {	
+		   String flag2 = "否";
            JjdProduct jjdProduct= (JjdProduct)jjdProducts.get(i);
+             if(!StringUtils.nullToStr(jjdProduct.getQz_serial_num()).equals("")){
+			 flag2 = "是";
+		}
+           
  %>
-	<tr>
+	      <tr>
+	            <td class="a2"><input type="checkbox" name="proc_id" id="proc_id" value="<%=i %>"></td>
 				<td class="a2">
-					<input type="text" id="product_name_<%=i %>" name="jjdProducts[<%=i %>].product_name" value="<%=StringUtils.nullToStr(jjdProduct.getProduct_name()) %>">
-					<input type="button" name="selectButton" value="选择" class="css_button" onclick="openWin(<%=i %>);">
+				   
+					<input type="text" id="product_name_<%=i %>" name="jjdProducts[<%=i %>].product_name" value="<%=StringUtils.nullToStr(jjdProduct.getProduct_name()) %>" style="width:100%" readonly>			 
 					<input type="hidden" id="product_id_<%=i %>" name="jjdProducts[<%=i %>].product_id" value="<%=StringUtils.nullToStr(jjdProduct.getProduct_id()) %>">
 				</td>
-				<td class="a2"><input type="text" id="product_xh_<%=i %>" name="jjdProducts[<%=i %>].product_xh" size="15" value="<%=StringUtils.nullToStr(jjdProduct.getProduct_xh()) %>"></td>	
+				<td class="a2"><input type="text" id="product_xh_<%=i %>" name="jjdProducts[<%=i %>].product_xh" size="15" value="<%=StringUtils.nullToStr(jjdProduct.getProduct_xh()) %>" size="15" style="width:100%" readonly  ></td>	
 				
-				<td class="a2"><input type="text" id="nums_<%=i %>" name="jjdProducts[<%=i %>].nums" value="<%=StringUtils.nullToStr(jjdProduct.getNums()) %>" size="5" onblur="setNum(<%=i %>)"  ></td>		 
+				<td class="a2"><input type="text" id="nums_<%=i %>" name="jjdProducts[<%=i %>].nums" value="<%=StringUtils.nullToStr(jjdProduct.getNums()) %>" size="5" style="width:100%" onblur="setNum(<%=i %>)"  ></td>		 
 				<td class="a2">
-					<input type="text" id="hjk" name="producthjk" value="坏件库" size="7">					 
+					<input type="text" id="hjk_<%=i %>" name="producthjk" value="坏件库" size="7">					 
 				</td>
 				<td class="a2">
 					<input type="text" id="qz_serial_num_<%=i %>" name="jjdProducts[<%=i %>].qz_serial_num" size="15" value="<%=StringUtils.nullToStr(jjdProduct.getQz_serial_num()) %>">
-					<a style="cursor:hand" title="左键点击输入输列号" onclick="openSerialWin('<%=i %>');"><b>...</b></a>&nbsp;
-				</td>				
-				<td class="a2"><input type="text" id="remark_<%=i %>" name="jjdProducts[<%=i %>].remark" value="<%=StringUtils.nullToStr(jjdProduct.getRemark()) %>"></td>
-				 
-				<td class="a2">&nbsp;</td>
-				 
+			         <input type="hidden" id="qz_flag_<%=i %>" name="jjdProducts[<%=i %>].qz_flag" value="<%=flag2 %>"><a style="cursor:hand" title="左键点击输入输列号" onclick="openSerialWin('<%=i %>');"><b>...</b></a>&nbsp;
+					</td>				
+				<td class="a2"><input type="text" id="cpfj_<%=i %>" name="jjdProducts[<%=i %>].cpfj" style="width:100%" value="<%=StringUtils.nullToStr(jjdProduct.getCpfj())%>"></td>
+				<td class="a2"><input type="text" id="fxts_<%=i %>" name="jjdProducts[<%=i %>].fxts" style="width:100%" value="<%=StringUtils.nullToStr(jjdProduct.getFxts())%>"></td>
+				
+				<td class="a2"><input type="text" id="remark_<%=i %>" name="jjdProducts[<%=i %>].remark" style="width:100%" value="<%=StringUtils.nullToStr(jjdProduct.getRemark())%>"></td>
 			</tr>
 <%
 }
-}
-%>	
+ 
+	}	%>
 
 </table>
- <br>
+ 
  
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
 	<thead>
@@ -468,8 +472,8 @@ session.removeAttribute("messages");
 	<tr>
 		<td class="a1" width="15%">联系电话</td>
 		<td class="a2"><input type="text" name="jjd.mobile" id="mobile" size="30" value="<%=StringUtils.nullToStr(jjd.getMobile()) %>"></td>	
-		<td class="a1" width="15%">地址</td>
-		<td class="a2"><input type="text" name="jjd.address" id="address" size="30" maxlength="100" value="<%= StringUtils.nullToStr(jjd.getAddress())%>"></td>			
+		<td class="a1" width="15%">Email</td>
+		<td class="a2"><input type="text" name="jjd.email" id="email" size="30" maxlength="100" value="<%= StringUtils.nullToStr(jjd.getMail())%>"></td>			
 	</tr>
  	
 </table>
