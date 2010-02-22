@@ -8,9 +8,20 @@ import com.sw.cms.model.Bxd;
 import com.sw.cms.model.BxdProduct;
 import com.sw.cms.model.Bxfhd;
 import com.sw.cms.model.BxfhdProduct;
+import com.sw.cms.model.Ckd;
+import com.sw.cms.model.CkdProduct;
+import com.sw.cms.model.Lsd;
+import com.sw.cms.model.LsdProduct;
 import com.sw.cms.model.Page;
+import com.sw.cms.model.SerialNumFlow;
+import com.sw.cms.model.SerialNumMng;
 import com.sw.cms.model.ShSerialNumFlow;
 import com.sw.cms.util.DateComFunc;
+import com.sw.cms.util.StaticParamDo;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class BxdService {
 	private BxdDAO bxdDao;
@@ -28,127 +39,88 @@ public class BxdService {
 	}
 	
 	
-	public void saveBxd(Bxd bxd,BxdProduct bxdProduct)
+	public void saveBxd(Bxd bxd,List bxdProducts)
 	{
-		bxdDao.saveBxd(bxd, bxdProduct);
+		bxdDao.saveBxd(bxd, bxdProducts);
 		if(bxd.getState().equals("已提交"))
 		{
-			if(!bxdProduct.getProduct_serial_num().equals(""))
-			{
-		       //修改库存状态为1：在外库
-			   shkcDao.updateShkcState(bxdProduct.getProduct_serial_num(), "1");
-			}
-			ShSerialNumFlow  shSerialNumFlow=new ShSerialNumFlow();
-			shSerialNumFlow.setCj_date(DateComFunc.getToday());
-			shSerialNumFlow.setClient_name(bxd.getClient_name());
-			shSerialNumFlow.setFs_date(bxd.getJxdate());
-			shSerialNumFlow.setJsr(bxd.getJxr());
-			shSerialNumFlow.setKf("在外库");
-			shSerialNumFlow.setLinkman(bxd.getLxr());
-			shSerialNumFlow.setQz_serial_num(bxdProduct.getProduct_serial_num());
-			shSerialNumFlow.setRk_date(DateComFunc.getToday());
-			shSerialNumFlow.setYw_dj_id(bxd.getId());
-			shSerialNumFlow.setYw_url("viewBxd.html?id=");
-			shSerialNumFlow.setYwtype("报修");
-			//添加序列号流转记录
-			shSerialNumFlowDao.saveShSerialNumFlow(shSerialNumFlow);
-			//生成报修返还单
-			Bxfhd bxfhd=new Bxfhd();
-			bxfhd.setId(bxfhdDao.updateBxfhId());
-			bxfhd.setAddress(bxd.getAddress());
-			bxfhd.setBxd_id(bxd.getId());
-			bxfhd.setBxr(bxd.getJxr());
-			bxfhd.setCj_date(DateComFunc.getToday());
-			bxfhd.setCjr(bxd.getCjr());
-			bxfhd.setClient_name(bxd.getClient_name());
-			bxfhd.setGcs(bxd.getGcs());
-			bxfhd.setLxdh(bxd.getLxdh());
-			bxfhd.setLxr(bxd.getLxr());
-			bxfhd.setMs("报修单编号["+bxd.getId()+"]");
-			bxfhd.setState("待返还");
-			
-			BxfhdProduct bxfhdProduct=new BxfhdProduct();
-			bxfhdProduct.setBj(bxdProduct.getBj());
-			bxfhdProduct.setBxaddress(bxdProduct.getBxaddress());
-			bxfhdProduct.setBxfhd_id(bxfhd.getId());
-			bxfhdProduct.setBxstate(bxdProduct.getBxstate());
-			bxfhdProduct.setFj(bxdProduct.getFj());
-			bxfhdProduct.setGzfx(bxdProduct.getGzfx());
-			bxfhdProduct.setProduct_id(bxdProduct.getProduct_id());
-			bxfhdProduct.setProduct_name(bxdProduct.getProduct_name());
-			bxfhdProduct.setProduct_xh(bxdProduct.getProduct_xh());
-			bxfhdProduct.setQtfj(bxdProduct.getQtfj());
-			bxfhdProduct.setQz_serial_num(bxdProduct.getProduct_serial_num());
-			bxfhdProduct.setRemark(bxdProduct.getProduct_remark());
-			
-			bxfhdDao.saveBxfhd(bxfhd, bxfhdProduct) ;
+			   //修改库存状态为2：在外库		
+			this.addBxd(bxd,bxdProducts);
+			shkcDao.updateShkcState(bxdProducts, "2");								
 		}
 	}
+	
+	/**
+	 * 
+	 * <p>如果是强制序列号添加相应序列号信息</p?
+	 * @param bxd
+	 * @param bxdProducts
+	 */
+	private void addBxd(Bxd bxd,List bxdProducts)
+	{
+		if(bxdProducts != null && bxdProducts.size()>0)
+		{
+			for(int i=0;i<bxdProducts.size();i++)
+			{
+				BxdProduct bxdProduct = (BxdProduct)bxdProducts.get(i);
+				if(bxdProduct != null)
+				{
+					if(!bxdProduct.getProduct_id().equals("") && !bxdProduct.getProduct_name().equals(""))
+					{				
+						//只有在系统正式使用后才去修改产品的库存和处理序列号
+						//系统启用前也可输入产品序列号，但不硬性强制，对于输入的序列号系统做处理
+						
+						//if(sysInitSetDao.getQyFlag().equals("1")){
+						//强制序列号处理
+						
+						if((bxdProduct.getQz_serial_num() != null) && (!bxdProduct.getQz_serial_num().equals("")))
+						{
+							String[] arryNums = (bxdProduct.getQz_serial_num()).split(",");
+							
+							ShSerialNumFlow  shSerialNumFlow=new ShSerialNumFlow();
+							
+							for(int k=0;k<arryNums.length;k++)
+							{
+								shSerialNumFlow.setCj_date(DateComFunc.getToday());			
+								shSerialNumFlow.setFs_date(bxd.getBxdate());
+								shSerialNumFlow.setJsr(bxd.getJsr());
+								shSerialNumFlow.setKf("在外库");
+								shSerialNumFlow.setQz_serial_num(bxdProduct.getQz_serial_num());
+								shSerialNumFlow.setRk_date(DateComFunc.getToday());
+								shSerialNumFlow.setYw_dj_id(bxd.getId());
+								shSerialNumFlow.setYw_url("viewBxd.html?id=");
+								shSerialNumFlow.setYwtype("报修");
+								shSerialNumFlow.setClient_name(bxd.getBxcs());
+								
+//								添加序列号流转记录
+								shSerialNumFlowDao.saveShSerialNumFlow(shSerialNumFlow);
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	
 	
 	public Object getBxd(String bxd_id)
 	{
 		return bxdDao.getBxd(bxd_id);
 	}
 	
-	public Object getBxdProduct(String bxd_id)
+	public List getBxdProducts(String bxd_id)
 	{
-		return bxdDao.getBxdProduct(bxd_id);
+		return bxdDao.getBxdProducts(bxd_id);
 	}
 	
-	public void updateBxd(Bxd bxd,BxdProduct bxdProduct)
+	public void updateBxd(Bxd bxd,List bxdProducts)
 	{
-		bxdDao.updateBxd(bxd, bxdProduct);
+		bxdDao.updateBxd(bxd, bxdProducts);
 		if(bxd.getState().equals("已提交"))
 		{
-			if(!bxdProduct.getProduct_serial_num().equals(""))
-			{
-		       //修改库存状态为1：在外库
-			   shkcDao.updateShkcState(bxdProduct.getProduct_serial_num(), "1");
-			}
-			ShSerialNumFlow  shSerialNumFlow=new ShSerialNumFlow();
-			shSerialNumFlow.setCj_date(DateComFunc.getToday());
-			shSerialNumFlow.setClient_name(bxd.getClient_name());
-			shSerialNumFlow.setFs_date(bxd.getJxdate());
-			shSerialNumFlow.setJsr(bxd.getJxr());
-			shSerialNumFlow.setKf("在外库");
-			shSerialNumFlow.setLinkman(bxd.getLxr());
-			shSerialNumFlow.setQz_serial_num(bxdProduct.getProduct_serial_num());
-			shSerialNumFlow.setRk_date(DateComFunc.getToday());
-			shSerialNumFlow.setYw_dj_id(bxd.getId());
-			shSerialNumFlow.setYw_url("viewBxd.html?id=");
-			shSerialNumFlow.setYwtype("报修");
-			//添加序列号流转记录
-			shSerialNumFlowDao.saveShSerialNumFlow(shSerialNumFlow);
-			//生成报修返还单
-			Bxfhd bxfhd=new Bxfhd();
-			bxfhd.setId(bxfhdDao.updateBxfhId());
-			bxfhd.setAddress(bxd.getAddress());
-			bxfhd.setBxd_id(bxd.getId());
-			bxfhd.setBxr(bxd.getJxr());
-			bxfhd.setCj_date(DateComFunc.getCurDay());
-			bxfhd.setCjr(bxd.getCjr());
-			bxfhd.setClient_name(bxd.getClient_name());
-			bxfhd.setGcs(bxd.getGcs());
-			bxfhd.setLxdh(bxd.getLxdh());
-			bxfhd.setLxr(bxd.getLxr());
-			bxfhd.setMs("报修单编号["+bxd.getId()+"]");
-			bxfhd.setState("待返还");
-			
-			BxfhdProduct bxfhdProduct=new BxfhdProduct();
-			bxfhdProduct.setBj(bxdProduct.getBj());
-			bxfhdProduct.setBxaddress(bxdProduct.getBxaddress());
-			bxfhdProduct.setBxfhd_id(bxd.getId());
-			bxfhdProduct.setBxstate(bxdProduct.getBxstate());
-			bxfhdProduct.setFj(bxdProduct.getFj());
-			bxfhdProduct.setGzfx(bxdProduct.getGzfx());
-			bxfhdProduct.setProduct_id(bxdProduct.getProduct_id());
-			bxfhdProduct.setProduct_name(bxdProduct.getProduct_name());
-			bxfhdProduct.setProduct_xh(bxdProduct.getProduct_xh());
-			bxfhdProduct.setQtfj(bxdProduct.getQtfj());
-			bxfhdProduct.setQz_serial_num(bxdProduct.getProduct_serial_num());
-			bxfhdProduct.setRemark(bxdProduct.getProduct_remark());
-			
-			bxfhdDao.saveBxfhd(bxfhd, bxfhdProduct) ;
+		       //修改库存状态为2：在外库
+			this.addBxd(bxd,bxdProducts);
+			shkcDao.updateShkcState(bxdProducts, "2");			
 		}
 	}
 	
@@ -158,29 +130,49 @@ public class BxdService {
 	}
 	
 	/**
-	 * 检查坏件库是否有该序列号
-	 * @param bxdProduct
+	 * 检查在外库是否有该序列号
+	 * @param bxdProducts
 	 * @return
 	 */
-	public String isBadShkcExist(BxdProduct bxdProduct)
+	public boolean isZyShkcExist(Bxd bxd,List bxdProducts)
 	{
+		boolean is = false;
 		String message="";
-		if(bxdProduct!=null)
+		if(bxdProducts != null && bxdProducts.size()>0)
 		{
-			if(!bxdProduct.getProduct_serial_num().equals(""))
+			for(int i=0;i<bxdProducts.size();i++)
 			{
-				int count=shkcDao.getBadShkcBySerialNum(bxdProduct.getProduct_serial_num());
-				if(count==0)
-				{
-					message="坏件库已无序列号:"+bxdProduct.getProduct_serial_num()+" 的商品,请检查！";
-				}
-			}
+				BxdProduct bxdProduct = (BxdProduct)bxdProducts.get(i);
+				if(!bxdProduct.getQz_serial_num().equals(""))
+			    {
+				  int count=shkcDao.getWeiShkcBySerialNum(bxdProduct.getQz_serial_num());
+				  if(count==0)
+			     {
+					message="坏件库已无序列号:"+bxdProduct.getQz_serial_num()+" 的商品,请检查！";
+				 }
+				  else
+				  {
+					  is = true;
+						break;
+				  }
+			    }
+		    }
 		}
 		
-		return message;
+		return is;
 	}
-	
-	 
+
+	/**
+	 * 坏件库列表（带分页）
+	 * @param con
+	 * @param curPage
+	 * @param rowsPerPage
+	 * @return
+	 */
+    public Page getShkuIsBadProduct(String con,int curPage,int rowsPerPage)
+    {
+    	return shkcDao.getShkuIsBadProduct(con,curPage,rowsPerPage);
+    }
 	
 	public ShSerialNumFlowDAO getShSerialNumFlowDao() {
 		return shSerialNumFlowDao;
@@ -189,17 +181,6 @@ public class BxdService {
 	public void setShSerialNumFlowDao(ShSerialNumFlowDAO shSerialNumFlowDao) {
 		this.shSerialNumFlowDao = shSerialNumFlowDao;
 	}
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 	public BxdDAO getBxdDao() {
 		return bxdDao;

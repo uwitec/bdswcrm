@@ -496,6 +496,37 @@ public class DwrService {
 	}
 
 	/**
+	 * 根据序列号查询坏件产品对象
+	 * 
+	 * @param serial_num
+	 * @return
+	 */
+	public Product getBadProductObjBySerialNum(String serial_num) {
+		return productDao.getBadProductBySerialNum(serial_num);
+	}
+	
+	
+	/**
+	 * 根据序列号查询在外产品对象
+	 * 
+	 * @param serial_num
+	 * @return
+	 */
+	public Product getZyProductObjBySerialNum(String serial_num) {
+		return productDao.getZyProductBySerialNum(serial_num);
+	}
+	
+	/**
+	 * 根据序列号查询好件产品对象
+	 * 
+	 * @param serial_num
+	 * @return
+	 */
+	public Product getGoodProductObjBySerialNum(String serial_num) {
+		return productDao.getGoodProductBySerialNum(serial_num);
+	}
+	
+	/**
 	 * 根据单位类型查询联系人邮箱地址
 	 * 
 	 * @return

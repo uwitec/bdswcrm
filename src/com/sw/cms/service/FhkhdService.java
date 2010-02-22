@@ -20,10 +20,7 @@ public class FhkhdService
    private QtsrDAO qtsrDao;
    private ShSerialNumFlowDAO shSerialNumFlowDao;
    private QtsrService qtsrService;
-   
-   
-
-
+ 
 public QtsrService getQtsrService() {
 	return qtsrService;
 }
@@ -37,6 +34,11 @@ public Page getFhkhdList(String con,int curPage,int rowsPerPage)
 	  return fhkhdDao.getFhkhdList(con,curPage,rowsPerPage);
    }
    
+public String updatefhkhdId()
+{
+	  return fhkhdDao.getfhkhdId();
+}
+
    public String updateFhkhdId()
    {
 	   return fhkhdDao.updateFhkhdId();
@@ -73,10 +75,10 @@ public Page getFhkhdList(String con,int curPage,int rowsPerPage)
 	   {
 		   updateShkc(fhkhd,fhkhdProducts);//删除售后库存
 		   saveSerialNumFlow(fhkhd,fhkhdProducts); //添加序列号流转记录
-		   if(fhkhd.getIsfy().equals("是"))//如果产生费用
-		   {
-			   saveQtsr(fhkhd);//添加资金流向
-		   }
+		   //if(fhkhd.getIsfy().equals("是"))//如果产生费用
+		   //{
+			//   saveQtsr(fhkhd);//添加资金流向
+		  // }
 		 
 	   }
    }
@@ -85,18 +87,18 @@ public Page getFhkhdList(String con,int curPage,int rowsPerPage)
 	   fhkhdDao.updateFhkhd(fhkhd, fhkhdProducts);
 	   if(fhkhd.getState().equals("已提交"))
 	   {
-		   updateShkc(fhkhd,fhkhdProducts);//删除售后库存
+		   updateShkc(fhkhd,fhkhdProducts);//更新售后库存
 		   saveSerialNumFlow(fhkhd,fhkhdProducts); //添加序列号流转记录
-		   if(fhkhd.getIsfy().equals("是"))//如果产生费用
-		   {
-			   saveQtsr(fhkhd);//添加资金流向
-		   }
+		 //  if(fhkhd.getIsfy().equals("是"))//如果产生费用
+		//   {
+		//	   saveQtsr(fhkhd);//添加资金流向
+		//   }
 		 
 	   }
    }
    
    /**
-    * 删除库存
+    * 删除库存中的仓库信息
     * @param fhkhd
     * @param fhkhdProducts
     */
@@ -109,7 +111,7 @@ public Page getFhkhdList(String con,int curPage,int rowsPerPage)
 			   FhkhdProduct fhkhdProduct=(FhkhdProduct)fhkhdProducts.get(i);
 			   if(!(fhkhdProduct.getProduct_name().equals(""))&&!(fhkhdProduct.getQz_serial_num().equals("")))
 			   {
-				   shkcDao.deleteShkcById(fhkhdProduct.getQz_serial_num());//删除库存序列号ID
+				   shkcDao.deleteShkcById(fhkhdProduct.getQz_serial_num());//删除库存中的仓库信息
 			   }
 		   }
 	   }	  
@@ -131,9 +133,9 @@ public Page getFhkhdList(String con,int curPage,int rowsPerPage)
 			   {
 				    shSerialNumFlow=new ShSerialNumFlow(); 
 				    shSerialNumFlow.setCj_date(DateComFunc.getToday());
-					shSerialNumFlow.setClient_name(fhkhd.getClient_name());
+					shSerialNumFlow.setClient_name(fhkhd.getClient_id());
 					shSerialNumFlow.setFs_date(fhkhd.getFh_date());
-					shSerialNumFlow.setJsr(fhkhd.getFhr());					 
+					shSerialNumFlow.setJsr(fhkhd.getJsr());					 
 					shSerialNumFlow.setLinkman(fhkhd.getLxr());
 					shSerialNumFlow.setQz_serial_num(fhkhdProduct.getQz_serial_num());					 
 					shSerialNumFlow.setYw_dj_id(fhkhd.getId());
@@ -154,7 +156,7 @@ public Page getFhkhdList(String con,int curPage,int rowsPerPage)
 	   Qtsr qtsr=new Qtsr();
 	   qtsr.setCzr(fhkhd.getCjr());
 	   qtsr.setId(qtsrDao.getQtsrID());
-	   qtsr.setJsr(fhkhd.getFhr());
+	   qtsr.setJsr(fhkhd.getJsr());
 	   qtsr.setRemark("返还客户单["+fhkhd.getId()+"] 收取费用:"+fhkhd.getSkje());
 	   qtsr.setSkje(fhkhd.getSkje());
 	   qtsr.setSkzh(fhkhd.getSkzh());
