@@ -480,7 +480,77 @@ public class ProductDAO extends JdbcBaseDAO {
 		}
 	}
 	
+	
+	/**
+	 * 根据序列号查询坏件库产品对象
+	 * @param serial_num
+	 * @return
+	 */
+	public Product getBadProductBySerialNum(String serial_num){
+		Product product = new Product();
+		String sqlStore=""; 
+		String storeId="";
+		sqlStore= "select id from storehouse where name='坏件库'";
+		 
+		Map map=getResultMap(sqlStore);
+	
+		storeId= (String)map.get("id") ; 
+		String sql = "select a.*,b.qz_serial_num as qz_flag from shkc a left join product b on b.product_id=a.product_id  where a.state='1' and a.qz_serial_num='" + serial_num + "' and a.store_id='"+storeId+"'";
+		
+		Object obj = this.queryForObject(sql, new ProductRowMapper());
+		if(obj != null){
+			product = (Product)obj;
+		}
+		return product;
+	}
 
+	
+	
+	/**
+	 * 根据序列号查询在外库产品对象
+	 * @param serial_num
+	 * @return
+	 */
+	public Product getZyProductBySerialNum(String serial_num){
+		Product product = new Product();
+		String sqlStore=""; 
+		String storeId="";
+		sqlStore= "select id from storehouse where name='坏件库'";
+		 
+		Map map=getResultMap(sqlStore);
+	
+		storeId= (String)map.get("id") ; 
+		String sql = "select a.*,b.qz_serial_num as qz_flag from shkc a left join product b on b.product_id=a.product_id  where a.state='2' and a.qz_serial_num='" + serial_num + "' and a.store_id='"+storeId+"'";
+				
+		Object obj = this.queryForObject(sql, new ProductRowMapper());
+		if(obj != null){
+			product = (Product)obj;
+		}
+		return product;
+	}
+	
+	/**
+	 * 根据序列号查询好件库产品对象
+	 * @param serial_num
+	 * @return
+	 */
+	public Product getGoodProductBySerialNum(String serial_num){
+		Product product = new Product();
+		String sqlStore=""; 
+		String storeId="";
+		sqlStore= "select id from storehouse where name='好件库'";
+		 
+		Map map=getResultMap(sqlStore);
+	
+		storeId= (String)map.get("id") ; 
+		String sql = "select a.*,b.qz_serial_num as qz_flag from shkc a left join product b on b.product_id=a.product_id  where a.state='' and a.qz_serial_num='" + serial_num + "' and a.store_id='"+storeId+"'";
+		
+		Object obj = this.queryForObject(sql, new ProductRowMapper());
+		if(obj != null){
+			product = (Product)obj;
+		}
+		return product;
+	}
 	/**
 	 * 包装对象
 	 * 
