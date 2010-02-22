@@ -2,13 +2,17 @@ package com.sw.cms.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.jdbc.core.RowMapper;
 
+import com.sw.cms.dao.LsdDAO.LsdProductRowMapper;
 import com.sw.cms.dao.base.JdbcBaseDAO;
 import com.sw.cms.dao.base.SqlUtil;
 import com.sw.cms.model.Bxd;
 import com.sw.cms.model.BxdProduct;
+import com.sw.cms.model.LsdProduct;
 import com.sw.cms.model.Page;
 import com.sw.cms.util.DateComFunc;
 
@@ -22,7 +26,7 @@ public class BxdDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public Page getBxdList(String con, int curPage, int rowsPerPage) {
-		String sql = "select b.* from bxd b left join bxd_product p on b.id=p.bxd_id left join sys_user s on b.gcs=s.user_id  where 1=1  ";
+		String sql = "select b.*,c.name as bxcs_name,(select sum(p.nums) as totalNums  from bxd_product p where b.id=p.bxd_id ) as productNums from bxd b left join clients c  on c.id=b.bxcs   where 1=1  ";
 		if (!con.equals("")) {
 			sql = sql + con;
 		}
@@ -36,7 +40,7 @@ public class BxdDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public Object getBxd(String bxd_id) {
-		String sql = "select *from bxd where id='" + bxd_id + "'";
+		String sql = "select *  from bxd where id='" + bxd_id + "'";
 		return this.getJdbcTemplate().queryForObject(sql, new BxdRowMapper());
 	}
 
@@ -46,10 +50,9 @@ public class BxdDAO extends JdbcBaseDAO {
 	 * @param bxd_id
 	 * @return
 	 */
-	public Object getBxdProduct(String bxd_id) {
-		String sql = "select *from bxd_product where bxd_id='" + bxd_id + "'";
-		return this.getJdbcTemplate().queryForObject(sql,
-				new BxdProductRowMapper());
+	public List getBxdProducts(String bxd_id) {
+		String sql = "select * from bxd_product where bxd_id='" + bxd_id + "'";
+		return this.getJdbcTemplate().query(sql, new BxdProductRowMapper());
 	}
 
 	/**
@@ -118,25 +121,21 @@ public class BxdDAO extends JdbcBaseDAO {
 	 * 
 	 * @param bxd
 	 */
-	public void saveBxd(Bxd bxd, BxdProduct bxdProduct) {
-		String sql = "insert into bxd(id,jxdate,cjdate,jddate,jxr,cjr,gcs,state,client_name,lxr,lxdh,email,address,remark)values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-		Object[] param = new Object[14];
+	public void saveBxd(Bxd bxd, List bxdProducts) {
+		Object[] param = new Object[8];
+		String sql = "insert into bxd(id,bxdate,cjdate,jsr,cjr,state,bxcs,remark) values(?,?,?,?,?,?,?,?)";
+		
 		param[0] = bxd.getId();
-		param[1] = bxd.getJxdate();
-		param[2] = DateComFunc.getToday();
-		param[3] = bxd.getJddate();
-		param[4] = bxd.getJxr();
-		param[5] = bxd.getCjr();
-		param[6] = bxd.getGcs();
-		param[7] = bxd.getState();
-		param[8] = bxd.getClient_name();
-		param[9] = bxd.getLxr();
-		param[10] = bxd.getLxdh();
-		param[11] = bxd.getEmail();
-		param[12] = bxd.getAddress();
-		param[13] = bxd.getRemark();
-		getJdbcTemplate().update(sql, param);
-		saveBxdProduct(bxd.getId(), bxdProduct);
+		param[1] = bxd.getBxdate();
+		param[2] = DateComFunc.getToday();		
+		param[3] = bxd.getJsr();
+		param[4] = bxd.getCjr();		
+		param[5] = bxd.getState();
+		param[6] = bxd.getBxcs();	
+		param[7] = bxd.getRemark();
+		this.getJdbcTemplate().update(sql, param);		
+		
+		this.saveBxdProduct(bxd, bxdProducts);
 	}
 
 	/**
@@ -144,24 +143,43 @@ public class BxdDAO extends JdbcBaseDAO {
 	 * 
 	 * @param bxdProduct
 	 */
-	public void saveBxdProduct(String id, BxdProduct bxdProduct) {
-		String sql = "insert into bxd_product(bxd_id,product_name,product_gg,product_id,product_serial_num,product_remark,bxaddress,bxstate,fj,qtfj,bj,gzfx,pcgc)values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
-		Object param[] = new Object[13];
-		param[0] = id;
-		param[1] = bxdProduct.getProduct_name();
-		param[2] = bxdProduct.getProduct_gg();
-		param[3] = bxdProduct.getProduct_id();
-		param[4] = bxdProduct.getProduct_serial_num();
-		param[5] = bxdProduct.getProduct_remark();
-		param[6] = bxdProduct.getBxaddress();
-		param[7] = bxdProduct.getBxstate();
-		param[8] = bxdProduct.getFj();
-		param[9] = bxdProduct.getQtfj();
-		param[10] = bxdProduct.getBj();
-		param[11] = bxdProduct.getGzfx();
-		param[12] = bxdProduct.getPcgc();
-		getJdbcTemplate().update(sql, param);
-
+	public void saveBxdProduct(Bxd bxd, List bxdProducts) 
+	{
+		 
+		String sql = "";
+		Object[] param = new Object[11];	
+		String bxd_id = bxd.getId();
+		String sqlStore=""; 
+		sqlStore= "select id from storehouse where name='坏件库'";		
+		Map map=getResultMap(sqlStore);		
+		String storeId= (String)map.get("id") ; 
+		
+		if(bxdProducts != null && bxdProducts.size()>0)
+		{
+			for(int i=0;i<bxdProducts.size();i++)
+			{
+				BxdProduct bxdProduct = (BxdProduct)bxdProducts.get(i);
+				if(bxdProduct != null){
+				  if(!bxdProduct.getProduct_id().equals("") && !bxdProduct.getProduct_name().equals(""))
+					{
+		               sql = "insert into bxd_product(bxd_id,product_name,product_xh,product_id,qz_serial_num,product_remark,store_id,storestate,nums,cpfj,sxts) values(?,?,?,?,?,?,?,?,?,?,?)";
+             		   param[0] = bxd_id;
+		               param[1] = bxdProduct.getProduct_name();
+		               param[2] = bxdProduct.getProduct_xh();
+		               param[3] = bxdProduct.getProduct_id();
+		               param[4] = bxdProduct.getQz_serial_num();
+		               param[5] = bxdProduct.getProduct_remark();
+		
+		               param[6] = storeId;
+		               param[7] = "2";
+		               param[8] = bxdProduct.getNums();
+		               param[9] = bxdProduct.getCpfj();
+		               param[10] = bxdProduct.getSxts();
+		               this.getJdbcTemplate().update(sql,param);
+					}
+				}	
+			}
+		}
 	}
 
 	/**
@@ -170,50 +188,24 @@ public class BxdDAO extends JdbcBaseDAO {
 	 * @param id
 	 * @param bxdProduct
 	 */
-	public void updateBxd(Bxd bxd, BxdProduct bxdProduct) {
-		String sql = "update bxd set jddate=?,jxr=?,gcs=?,state=?,client_name=?,lxr=?,lxdh=?,email=?,address=?,remark=? where id=? ";
-		Object param[] = new Object[11];
-		param[0] = bxd.getJddate();
-		param[1] = bxd.getJxr();
-		param[2] = bxd.getGcs();
-		param[3] = bxd.getState();
-		param[4] = bxd.getClient_name();
-		param[5] = bxd.getLxr();
-		param[6] = bxd.getLxdh();
-		param[7] = bxd.getEmail();
-		param[8] = bxd.getAddress();
-		param[9] = bxd.getRemark();
-		param[10] = bxd.getId();
+	public void updateBxd(Bxd bxd, List bxdProducts) 
+	{
+		Object param[] = new Object[6];
+				
+		String sql = "update bxd set bxdate=?,jsr=?,state=?,bxcs=?,remark=? where id=? ";
+        param[0] = bxd.getBxdate();
+		param[1] = bxd.getJsr();		
+		param[2] = bxd.getState();
+		param[3] = bxd.getBxcs();		
+		param[4] = bxd.getRemark();
+		param[5] = bxd.getId();
 		this.getJdbcTemplate().update(sql, param);
 		delBxdProductByBxdId(bxd.getId());
-		updateBxdProduct(bxd.getId(), bxdProduct);
+		
+		this.saveBxdProduct(bxd, bxdProducts);
 	}
 
-	/**
-	 * 更改报修单商品
-	 * 
-	 * @param id
-	 * @param bxdProduct
-	 */
-	public void updateBxdProduct(String id, BxdProduct bxdProduct) {
-		String sql = "update bxd_product set product_name=?,product_gg=?,product_id=?,product_serial_num=?,product_remark=?,bxaddress=?,bxstate=?,fj=?,qtfj=?,bj=?,gzfx=?,pcgc=? where bxd_id=?";
-		Object param[] = new Object[13];
-		param[0] = bxdProduct.getProduct_name();
-		param[1] = bxdProduct.getProduct_gg();
-		param[2] = bxdProduct.getProduct_id();
-		param[3] = bxdProduct.getProduct_serial_num();
-		param[4] = bxdProduct.getProduct_remark();
-		param[5] = bxdProduct.getBxaddress();
-		param[6] = bxdProduct.getBxstate();
-		param[7] = bxdProduct.getFj();
-		param[8] = bxdProduct.getQtfj();
-		param[9] = bxdProduct.getBj();
-		param[10] = bxdProduct.getGzfx();
-		param[11] = bxdProduct.getPcgc();
-		param[12] = id;
-		this.getJdbcTemplate().update(sql, param);
-	}
-
+	
 	/**
 	 * 报修单封装对象
 	 * 
@@ -226,34 +218,18 @@ public class BxdDAO extends JdbcBaseDAO {
 			Bxd bxd = new Bxd();
 			if (SqlUtil.columnIsExist(rs, "id"))
 				bxd.setId(rs.getString("id"));
-			if (SqlUtil.columnIsExist(rs, "jxdate"))
-				bxd.setJxdate(rs.getString("jxdate"));
+			if (SqlUtil.columnIsExist(rs, "bxdate"))
+				bxd.setBxdate(rs.getString("bxdate"));
 			if (SqlUtil.columnIsExist(rs, "cjdate"))
 				bxd.setCjdate(rs.getString("cjdate"));
-			if (SqlUtil.columnIsExist(rs, "jddate"))
-				bxd.setJddate(rs.getString("jddate"));
-			if (SqlUtil.columnIsExist(rs, "jxr"))
-				bxd.setJxr(rs.getString("jxr"));
+			if (SqlUtil.columnIsExist(rs, "jsr"))
+				bxd.setJsr(rs.getString("jsr"));
 			if (SqlUtil.columnIsExist(rs, "cjr"))
-				bxd.setCjr(rs.getString("cjr"));
-			if (SqlUtil.columnIsExist(rs, "gcs"))
-				bxd.setGcs(rs.getString("gcs"));
+				bxd.setCjr(rs.getString("cjr"));			
 			if (SqlUtil.columnIsExist(rs, "state"))
 				bxd.setState(rs.getString("state"));
-			if (SqlUtil.columnIsExist(rs, "client_name"))
-				bxd.setClient_name(rs.getString("client_name"));
-			if (SqlUtil.columnIsExist(rs, "lxr"))
-				bxd.setLxr(rs.getString("lxr"));
-			if (SqlUtil.columnIsExist(rs, "lxdh"))
-				bxd.setLxdh(rs.getString("lxdh"));
-			if (SqlUtil.columnIsExist(rs, "email"))
-				bxd.setEmail(rs.getString("email"));
-			if (SqlUtil.columnIsExist(rs, "address"))
-				bxd.setAddress(rs.getString("address"));
-			if (SqlUtil.columnIsExist(rs, "cz"))
-				bxd.setCz(rs.getString("cz"));
-			if (SqlUtil.columnIsExist(rs, "yb"))
-				bxd.setYb(rs.getString("yb"));
+			if (SqlUtil.columnIsExist(rs, "bxcs"))
+				bxd.setBxcs(rs.getString("bxcs"));			
 			if (SqlUtil.columnIsExist(rs, "remark"))
 				bxd.setRemark(rs.getString("remark"));
 			return bxd;
@@ -277,33 +253,23 @@ public class BxdDAO extends JdbcBaseDAO {
 				bxdProduct.setProduct_name(rs.getString("product_name"));
 			if (SqlUtil.columnIsExist(rs, "product_id"))
 				bxdProduct.setProduct_id(rs.getString("product_id"));
-			if (SqlUtil.columnIsExist(rs, "product_gg"))
-				bxdProduct.setProduct_gg(rs.getString("product_gg"));
 			if (SqlUtil.columnIsExist(rs, "product_xh"))
 				bxdProduct.setProduct_xh(rs.getString("product_xh"));
-			if (SqlUtil.columnIsExist(rs, "product_serial_num"))
-				bxdProduct.setProduct_serial_num(rs
-						.getString("product_serial_num"));
+			if (SqlUtil.columnIsExist(rs, "qz_serial_num"))
+				bxdProduct.setQz_serial_num(rs
+						.getString("qz_serial_num"));
 			if (SqlUtil.columnIsExist(rs, "product_remark"))
 				bxdProduct.setProduct_remark(rs.getString("product_remark"));
-			if (SqlUtil.columnIsExist(rs, "bxaddress"))
-				bxdProduct.setBxaddress(rs.getString("bxaddress"));
-			if (SqlUtil.columnIsExist(rs, "bxstate"))
-				bxdProduct.setBxstate(rs.getString("bxstate"));
-			if (SqlUtil.columnIsExist(rs, "has_fj"))
-				bxdProduct.setHas_fj(rs.getString("has_fj"));
-			if (SqlUtil.columnIsExist(rs, "fj"))
-				bxdProduct.setFj(rs.getString("fj"));
-			if (SqlUtil.columnIsExist(rs, "qtfj"))
-				bxdProduct.setQtfj(rs.getString("qtfj"));
-			if (SqlUtil.columnIsExist(rs, "bj"))
-				bxdProduct.setBj(rs.getString("bj"));
-			if (SqlUtil.columnIsExist(rs, "gzfx"))
-				bxdProduct.setGzfx(rs.getString("gzfx"));
-			if (SqlUtil.columnIsExist(rs, "pcgc"))
-				bxdProduct.setPcgc(rs.getString("pcgc"));
-			if (SqlUtil.columnIsExist(rs, "gf"))
-				bxdProduct.setGf(rs.getDouble("gf"));
+			if (SqlUtil.columnIsExist(rs, "store_id"))
+				bxdProduct.setStore_id(rs.getString("store_id"));
+			if (SqlUtil.columnIsExist(rs, "storestate"))
+				bxdProduct.setStorestate(rs.getString("storestate"));
+			if (SqlUtil.columnIsExist(rs, "nums"))
+				bxdProduct.setNums(rs.getInt("nums"));
+			if (SqlUtil.columnIsExist(rs, "cpfj"))
+				bxdProduct.setCpfj(rs.getString("cpfj"));
+			if (SqlUtil.columnIsExist(rs, "sxts"))
+				bxdProduct.setSxts(rs.getInt("sxts"));
 			return bxdProduct;
 		}
 	}

@@ -24,7 +24,7 @@ public class FhkhdDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public Page getFhkhdList(String con, int curPage, int rowsPerPage) {
-		String sql = "select f.id,f.client_name,f.lxr,f.lxdh,f.fh_date,f.state,f.fhr,f.cjr from fhkhd f left join sys_user s on f.fhr=s.user_id  where 1=1 ";
+		String sql = "select b.*,c.name as client_name,(select sum(p.nums) as totalNums  from fhkhd_product p where b.id=p.fhkhd_id ) as productNums from fhkhd b left join clients c  on c.id=b.client_id   where 1=1  ";
 		if (!con.equals("")) {
 			sql = sql + con;
 		}
@@ -49,51 +49,40 @@ public class FhkhdDAO extends JdbcBaseDAO {
 	}
 
 	public void saveFhkhd(Fhkhd fhkhd, List fhkhdProducts) {
-		String sql = "insert into fhkhd(id,fh_date,cj_date,fhr,cjr,state,client_name,lxr,lxdh,address,fkfs,pos_id,sfdje,skje,skzh,isfy,ms)  values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-		Object param[] = new Object[17];
+		String sql = "insert into fhkhd(id,fh_date,cj_date,jsr,cjr,state,client_id,lxr,skje,skzh,remark)  values(?,?,?,?,?,?,?,?,?,?,?)";
+		Object param[] = new Object[11];
 		param[0] = fhkhd.getId();
 		param[1] = fhkhd.getFh_date();
 		param[2] = DateComFunc.getToday();
-		param[3] = fhkhd.getFhr();
+		param[3] = fhkhd.getJsr();
 		param[4] = fhkhd.getCjr();
 		param[5] = fhkhd.getState();
-		param[6] = fhkhd.getClient_name();
+		param[6] = fhkhd.getClient_id();
 		param[7] = fhkhd.getLxr();
-		param[8] = fhkhd.getLxdh();
-		param[9] = fhkhd.getAddress();
-		param[10] = fhkhd.getFkfs();
-		param[11] = fhkhd.getPos_id();
-		param[12] = fhkhd.getSfdje();
-		param[13] = fhkhd.getSkje();
-		param[14] = fhkhd.getSkzh();
-		param[15] = fhkhd.getIsfy();
-		param[16] = fhkhd.getMs();
+		param[8] = fhkhd.getSkje();
+		param[9] = fhkhd.getSkzh();
+		param[10] = fhkhd.getRemark();
+		
 		this.getJdbcTemplate().update(sql, param);
 		saveFhkhdProduct(fhkhd.getId(), fhkhdProducts);
 	}
 
 	public void updateFhkhd(Fhkhd fhkhd, List fhkhdProducts) {
 
-		String sql = "update fhkhd set fh_date=?,cj_date=?,fhr=?,cjr=?,state=?,client_name=?,lxr=?,lxdh=?,address=?,fkfs=?,pos_id=?,sfdje=?,skje=?,skzh=?,isfy=?,ms=?  where id=? ";
-		Object param[] = new Object[17];
+		String sql = "update fhkhd set fh_date=?,cj_date=?,jsr=?,cjr=?,state=?,client_id=?,lxr=?,skje=?,skzh=?,remark=?  where id=? ";
+		Object param[] = new Object[11];
 		
 		param[0] = fhkhd.getFh_date();
 		param[1] = DateComFunc.getToday();
-		param[2] = fhkhd.getFhr();
+		param[2] = fhkhd.getJsr();
 		param[3] = fhkhd.getCjr();
 		param[4] = fhkhd.getState();
-		param[5] = fhkhd.getClient_name();
-		param[6] = fhkhd.getLxr();
-		param[7] = fhkhd.getLxdh();
-		param[8] = fhkhd.getAddress();
-		param[9] = fhkhd.getFkfs();
-		param[10] = fhkhd.getPos_id();
-		param[11] = fhkhd.getSfdje();
-		param[12] = fhkhd.getSkje();
-		param[13] = fhkhd.getSkzh();
-		param[14] = fhkhd.getIsfy();
-		param[15] = fhkhd.getMs();
-		param[16] = fhkhd.getId();
+		param[5] = fhkhd.getClient_id();
+		param[6] = fhkhd.getLxr();		
+		param[7] = fhkhd.getSkje();
+		param[8] = fhkhd.getSkzh();		
+		param[9] = fhkhd.getRemark();
+		param[10] = fhkhd.getId();
 		this.getJdbcTemplate().update(sql, param);
 		delFhkhdProduct(fhkhd.getId());
 		saveFhkhdProduct(fhkhd.getId(),fhkhdProducts);
@@ -105,22 +94,34 @@ public class FhkhdDAO extends JdbcBaseDAO {
 		this.getJdbcTemplate().update(sql);		
 	}
 
-	public void saveFhkhdProduct(String fhkhd_id, List fhkhdProducts) {
+	public void saveFhkhdProduct(String fhkhd_id, List fhkhdProducts) 
+	{
 		String sql = "";
-		Object[] param = new Object[6];
-		if (fhkhdProducts != null && fhkhdProducts.size() > 0) {
-			for (int i = 0; i < fhkhdProducts.size(); i++) {
+		Object[] param = new Object[12];
+		if (fhkhdProducts != null && fhkhdProducts.size() > 0) 
+		{
+			for (int i = 0; i < fhkhdProducts.size(); i++) 
+			{
 				FhkhdProduct fhkhdProduct = (FhkhdProduct) fhkhdProducts.get(i);
-				if ((!fhkhdProduct.getProduct_name().equals(""))
-						&& (!fhkhdProduct.getQz_serial_num().equals(""))) {
-					sql = "insert into fhkhd_product(fhkhd_id,product_id,product_name,product_xh,qz_serial_num,remark) values(?,?,?,?,?,?)";
-					param[0] = fhkhd_id;
-					param[1] = fhkhdProduct.getProduct_id();
-					param[2] = fhkhdProduct.getProduct_name();
-					param[3] = fhkhdProduct.getProduct_xh();
-					param[4] = fhkhdProduct.getQz_serial_num();
-					param[5] = fhkhdProduct.getRemark();
-					this.getJdbcTemplate().update(sql, param);
+				if(fhkhdProduct != null)
+		          {
+		        	if(!fhkhdProduct.getProduct_id().equals("") && !fhkhdProduct.getProduct_name().equals(""))
+		        	{
+					   sql = "insert into fhkhd_product(fhkhd_id,product_id,product_name,product_xh,qz_serial_num,remark,price,totalmoney,store_id,storestate,nums,cpfj) values(?,?,?,?,?,?,?,?,?,?,?,?)";
+					   param[0] = fhkhd_id;
+					   param[1] = fhkhdProduct.getProduct_id();
+					   param[2] = fhkhdProduct.getProduct_name();
+					   param[3] = fhkhdProduct.getProduct_xh();
+					   param[4] = fhkhdProduct.getQz_serial_num();
+					   param[5] = fhkhdProduct.getRemark();
+					   param[6] = new Double(fhkhdProduct.getPrice());
+					   param[7] = new Double(fhkhdProduct.getTotalmoney());
+					   param[8] = fhkhdProduct.getStore_id();
+					   param[9] = fhkhdProduct.getStorestate();
+					   param[10] = new Integer(fhkhdProduct.getNums());
+					   param[11] = fhkhdProduct.getCpfj();
+					   this.getJdbcTemplate().update(sql, param);
+		        	}
 				}
 			}
 		}
@@ -154,6 +155,34 @@ public class FhkhdDAO extends JdbcBaseDAO {
 		return this.getJdbcTemplate().queryForObject(sql, new FhkhdRowMapper());
 	}
 
+	
+	/**
+	 * 返回返还客户单可用ID
+	 * 
+	 * @return
+	 */
+	public String getfhkhdId() 
+	{
+		String sql = "select fhkhdid from cms_all_seq";
+
+		// 取当前序列号
+		String curId = this.getJdbcTemplate().queryForInt(sql) + "";
+
+		String day = DateComFunc.getCurDay();
+
+		// 将序列号加1
+		sql = "update cms_all_seq set fhkhdid=fhkhdid+1";
+		this.getJdbcTemplate().update(sql);
+
+		for (int i = curId.length(); i < 3; i++) {
+			curId = "0" + curId;
+		}
+
+		return "FHKH" + day + "-" + curId;
+
+	}
+   
+	
 	/**
 	 * 返还客户单包装类
 	 * 
@@ -169,34 +198,22 @@ public class FhkhdDAO extends JdbcBaseDAO {
 				fhkhd.setFh_date(rs.getString("fh_date"));
 			if (SqlUtil.columnIsExist(rs, "cj_date"))
 				fhkhd.setCj_date(rs.getString("cj_date"));
-			if (SqlUtil.columnIsExist(rs, "fhr"))
-				fhkhd.setFhr(rs.getString("fhr"));
+			if (SqlUtil.columnIsExist(rs, "jsr"))
+				fhkhd.setJsr(rs.getString("jsr"));
 			if (SqlUtil.columnIsExist(rs, "cjr"))
 				fhkhd.setCjr(rs.getString("cjr"));
 			if (SqlUtil.columnIsExist(rs, "state"))
 				fhkhd.setState(rs.getString("state"));
-			if (SqlUtil.columnIsExist(rs, "client_name"))
-				fhkhd.setClient_name(rs.getString("client_name"));
+			if (SqlUtil.columnIsExist(rs, "client_id"))
+				fhkhd.setClient_id(rs.getString("client_id"));
 			if (SqlUtil.columnIsExist(rs, "lxr"))
-				fhkhd.setLxr(rs.getString("lxr"));
-			if (SqlUtil.columnIsExist(rs, "lxdh"))
-				fhkhd.setLxdh(rs.getString("lxdh"));
-			if (SqlUtil.columnIsExist(rs, "address"))
-				fhkhd.setAddress(rs.getString("address"));
-			if (SqlUtil.columnIsExist(rs, "fkfs"))
-				fhkhd.setFkfs(rs.getString("fkfs"));
-			if (SqlUtil.columnIsExist(rs, "pos_id"))
-				fhkhd.setPos_id(rs.getString("pos_id"));
-			if (SqlUtil.columnIsExist(rs, "sfdje"))
-				fhkhd.setSfdje(rs.getDouble("sfdje"));
+				fhkhd.setLxr(rs.getString("lxr"));			
 			if (SqlUtil.columnIsExist(rs, "skje"))
 				fhkhd.setSkje(rs.getDouble("skje"));
 			if (SqlUtil.columnIsExist(rs, "skzh"))
-				fhkhd.setSkzh(rs.getString("skzh"));
-			if (SqlUtil.columnIsExist(rs, "isfy"))
-				fhkhd.setIsfy(rs.getString("isfy"));
-			if (SqlUtil.columnIsExist(rs, "ms"))
-				fhkhd.setMs(rs.getString("ms"));
+				fhkhd.setSkzh(rs.getString("skzh"));			
+			if (SqlUtil.columnIsExist(rs, "remark"))
+				fhkhd.setRemark(rs.getString("remark"));
 
 			return fhkhd;
 		}
@@ -225,6 +242,20 @@ public class FhkhdDAO extends JdbcBaseDAO {
 				fhkhdProduct.setQz_serial_num(rs.getString("qz_serial_num"));
 			if (SqlUtil.columnIsExist(rs, "remark"))
 				fhkhdProduct.setRemark(rs.getString("remark"));
+			
+			if (SqlUtil.columnIsExist(rs, "price"))
+				fhkhdProduct.setPrice(rs.getDouble("price"));
+			if (SqlUtil.columnIsExist(rs, "totalmoney"))
+				fhkhdProduct.setTotalmoney(rs.getDouble("totalmoney"));
+			if (SqlUtil.columnIsExist(rs, "store_id"))
+				fhkhdProduct.setStore_id(rs.getString("store_id"));
+			if (SqlUtil.columnIsExist(rs, "storestate"))
+				fhkhdProduct.setStorestate(rs.getString("storestate"));
+			if (SqlUtil.columnIsExist(rs, "nums"))
+				fhkhdProduct.setNums(rs.getInt("nums"));
+			if (SqlUtil.columnIsExist(rs, "cpfj"))
+				fhkhdProduct.setCpfj(rs.getString("cpfj"));
+			
 			return fhkhdProduct;
 		}
 	}

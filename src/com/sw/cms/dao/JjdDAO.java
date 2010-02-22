@@ -3,6 +3,7 @@ package com.sw.cms.dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.jdbc.core.RowMapper;
 
@@ -58,12 +59,12 @@ public class JjdDAO extends JdbcBaseDAO {
 	 */
 	public void saveJjd(Jjd jjd,List jjdProduct)
 	{
-		String sql="insert into jjd(id,sfd_id,client_name,address,mobile,linkman,jjr,cjr,jj_date,cj_date,state,ms)values(?,?,?,?,?,?,?,?,?,?,?,?)";
+		String sql="insert into jjd(id,sfd_id,client_name,mail,mobile,linkman,jjr,cjr,jj_date,cj_date,state,ms)values(?,?,?,?,?,?,?,?,?,?,?,?)";
 		Object param[]=new Object[12]; 
 		param[0]=jjd.getId();
 		param[1]=jjd.getSfd_id();
 		param[2]=jjd.getClient_name();
-		param[3]=jjd.getAddress();
+		param[3]=jjd.getMail();
 		param[4]=jjd.getMobile();
 		param[5]=jjd.getLinkman();
 		param[6]=jjd.getJjr();
@@ -85,8 +86,13 @@ public class JjdDAO extends JdbcBaseDAO {
 	public void addJjdProducts(List jjdProducts,String jjdid)
 	{
 		String sql="";
-		Object []param=new Object[7];
-		 
+		Object []param=new Object[11];
+		
+		String sqlStore=""; 
+		sqlStore= "select id from storehouse where name='坏件库'";		
+		Map map=getResultMap(sqlStore);		
+		String storeId= (String)map.get("id") ;
+		
 		if(jjdProducts!=null&&jjdProducts.size()>0)
 		{
 			for(int i=0;i<jjdProducts.size();i++)
@@ -95,34 +101,22 @@ public class JjdDAO extends JdbcBaseDAO {
 				 if(jjdProduct!=null)					
 				 {
 				   if(!jjdProduct.getProduct_name().equals("")&&!jjdProduct.getQz_serial_num().equals(""))
-				  {
-					 sql="insert into jjd_product(jjd_id,product_id,product_name,product_xh,qz_serial_num,remark,nums)values(?,?,?,?,?,?,?)";
-				     param[0]=jjdid;
+				   {
+					 sql="insert into jjd_product(jjd_id,product_id,product_name,product_xh,qz_serial_num,remark,nums,cpfj,store_id,storestate,fxts)values(?,?,?,?,?,?,?,?,?,?,?)";
+				     
+					 param[0]=jjdid;
 				     param[1]=jjdProduct.getProduct_id();
 				     param[2]=jjdProduct.getProduct_name();
 				     param[3]=jjdProduct.getProduct_xh();
 				     param[4]=jjdProduct.getQz_serial_num();
 				     param[5]=jjdProduct.getRemark();
 				     param[6]=jjdProduct.getNums();
-				     int count=Integer.parseInt(param[6].toString());
-				     
-				     if(count>1)//同一样的机器数量大于1
-				     {
-				    	String seriaNumCount[]=param[4].toString().split(",");
-				    	
-				        for(int j=0;j<count;j++)
-				        {
-				        	 
-				        	param[6]=1;
-				        	param[4]=seriaNumCount[j];
-				        	this.getJdbcTemplate().update(sql,param);
-				        }
-				     }
-				     else//如果数量等于1
-				     {
-					    this.getJdbcTemplate().update(sql,param);
-				     }
-				  }
+				     param[7]=jjdProduct.getCpfj();
+				     param[8]=storeId;
+				     param[9]="1";
+				     param[10]=jjdProduct.getFxts();
+					 this.getJdbcTemplate().update(sql,param);				   
+				   }
 				 }
 				   
 			}
@@ -157,7 +151,7 @@ public class JjdDAO extends JdbcBaseDAO {
 	 */
 	public List getJjdProducts(String id)
 	{
-		 String sql="select *from jjd_product where jjd_id='"+id+"'";
+		 String sql="select * from jjd_product where jjd_id='"+id+"'";
 		 
 		return  this.getJdbcTemplate().query(sql, new JjdProductRowMapper());
 	}
@@ -169,7 +163,7 @@ public class JjdDAO extends JdbcBaseDAO {
 	 */
 	public Object getJjd(String id)
 	{
-		String sql="select *from jjd where id='"+id+"'";
+		String sql="select * from jjd where id='"+id+"'";
 		return this.getJdbcTemplate().queryForObject(sql, new JjdRowMapper());
 	}
 	
@@ -180,10 +174,10 @@ public class JjdDAO extends JdbcBaseDAO {
 	 */
 	public void updateJjd(Jjd jjd,List jjdProduct)
 	{
-		String sql="update jjd set client_name=?,address=?,mobile=?,linkman=?,jjr=?,jj_date=?,state=?,ms=? where id=?";
+		String sql="update jjd set client_name=?,lxdh=?,mobile=?,linkman=?,jjr=?,jj_date=?,state=?,ms=? where id=?";
 		Object param[]=new Object[9];
 		param[0]=jjd.getClient_name();
-		param[1]=jjd.getAddress();
+		param[1]=jjd.getLxdh();
 		param[2]=jjd.getMobile();
 		param[3]=jjd.getLinkman();
 		param[4]=jjd.getJjr();
@@ -210,7 +204,7 @@ public class JjdDAO extends JdbcBaseDAO {
 			if (SqlUtil.columnIsExist(rs, "id"))jjd.setId(rs.getString("id"));
 			if (SqlUtil.columnIsExist(rs, "sfd_id"))jjd.setSfd_id(rs.getString("sfd_id"));
 			if (SqlUtil.columnIsExist(rs, "client_name"))jjd.setClient_name(rs.getString("client_name"));
-			if (SqlUtil.columnIsExist(rs, "address"))jjd.setAddress(rs.getString("address"));
+			//if (SqlUtil.columnIsExist(rs, "address"))jjd.setAddress(rs.getString("address"));
 			if (SqlUtil.columnIsExist(rs, "mobile"))jjd.setMobile(rs.getString("mobile"));
 			if (SqlUtil.columnIsExist(rs, "linkman"))jjd.setLinkman(rs.getString("linkman"));
 			if (SqlUtil.columnIsExist(rs, "jjr"))jjd.setJjr(rs.getString("jjr"));
@@ -219,6 +213,8 @@ public class JjdDAO extends JdbcBaseDAO {
 			if (SqlUtil.columnIsExist(rs, "cj_date"))jjd.setCj_date(rs.getString("cj_date"));
 			if (SqlUtil.columnIsExist(rs, "state"))jjd.setState(rs.getString("state"));
 			if (SqlUtil.columnIsExist(rs, "ms"))jjd.setMs(rs.getString("ms"));
+			if (SqlUtil.columnIsExist(rs, "lxdh"))jjd.setLxdh(rs.getString("lxdh"));
+			if (SqlUtil.columnIsExist(rs, "mail"))jjd.setMail(rs.getString("mail"));
 			return jjd;
 		}
 	}
@@ -240,6 +236,10 @@ public class JjdDAO extends JdbcBaseDAO {
 			if (SqlUtil.columnIsExist(rs, "qz_serial_num"))jjdProduct.setQz_serial_num(rs.getString("qz_serial_num"));
 			if (SqlUtil.columnIsExist(rs, "remark"))jjdProduct.setRemark(rs.getString("remark"));
 			if(SqlUtil.columnIsExist(rs, "nums"))jjdProduct.setNums(rs.getInt("nums"));
+			if (SqlUtil.columnIsExist(rs, "store_id"))jjdProduct.setStord_id(rs.getString("store_id"));
+			if (SqlUtil.columnIsExist(rs, "storestate"))jjdProduct.setStorestate(rs.getString("storestate"));
+			if (SqlUtil.columnIsExist(rs, "cpfj"))jjdProduct.setCpfj(rs.getString("cpfj"));
+			if(SqlUtil.columnIsExist(rs, "fxts"))jjdProduct.setFxts(rs.getInt("fxts"));
 	    	return jjdProduct;
 	    }  
 	}

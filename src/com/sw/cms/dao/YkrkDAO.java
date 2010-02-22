@@ -117,15 +117,15 @@ public class YkrkDAO extends JdbcBaseDAO
 				YkrkProduct ykrkProduct = (YkrkProduct)YkrkProducts.get(i);
 				if(ykrkProduct != null){
 					if( !ykrkProduct.getProduct_name().equals("")){
-						sql = "insert into ykrk_product(ykrk_id,product_id,product_xh,product_name,product_remark,oqz_serial_num,nqz_serial_num) values(?,?,?,?,?,?,?)";
+						sql = "insert into ykrk_product(ykrk_id,product_id,product_xh,product_name,product_remark,nums,qz_serial_num) values(?,?,?,?,?,?,?)";
 						
 						param[0] = ykrk_id;
 						param[1] = ykrkProduct.getProduct_id();
 						param[2] = ykrkProduct.getProduct_xh();
 						param[3] = ykrkProduct.getProduct_name();
 						param[4] = ykrkProduct.getProduct_remark();
-						param[5] = ykrkProduct.getOqz_serial_num();						
-						param[6] = ykrkProduct.getNqz_serial_num();						
+						param[5] = ykrkProduct.getNums();						
+						param[6] = ykrkProduct.getQz_serial_num();						
 						this.getJdbcTemplate().update(sql,param);
 					}
 				}
@@ -194,9 +194,9 @@ public class YkrkDAO extends JdbcBaseDAO
 			if(SqlUtil.columnIsExist(rs,"product_id")) ykrkProduct.setProduct_id(rs.getString("product_id"));
 			if(SqlUtil.columnIsExist(rs,"product_name")) ykrkProduct.setProduct_name(rs.getString("product_name"));
 			if(SqlUtil.columnIsExist(rs,"product_xh")) ykrkProduct.setProduct_xh(rs.getString("product_xh"));
-			if(SqlUtil.columnIsExist(rs,"oqz_serial_num")) ykrkProduct.setOqz_serial_num(rs.getString("oqz_serial_num"));
+			if(SqlUtil.columnIsExist(rs,"nums")) ykrkProduct.setNums(rs.getInt("nums"));
 			if(SqlUtil.columnIsExist(rs,"product_remark")) ykrkProduct.setProduct_remark(rs.getString("product_remark"));
-			if(SqlUtil.columnIsExist(rs,"nqz_serial_num")) ykrkProduct.setNqz_serial_num(rs.getString("nqz_serial_num"));
+			if(SqlUtil.columnIsExist(rs,"qz_serial_num")) ykrkProduct.setQz_serial_num(rs.getString("qz_serial_num"));
 			
 			return ykrkProduct;
 		}
