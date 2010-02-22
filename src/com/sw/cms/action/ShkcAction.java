@@ -35,17 +35,17 @@ public class ShkcAction extends BaseAction
     	{
     		int rowsPerPage = Constant.PAGE_SIZE2;
     		String con="";
-    		if(!qz_serial_num.equals(""))
+    		if(!qz_serial_num.trim().equals(""))
     		{
-    			con+=" and qz_serial_num='"+qz_serial_num+"'";
+    			con+=" and a.qz_serial_num='"+qz_serial_num+"'";
     		}
-    		if(!product_name.equals(""))
+    		if(!product_name.trim().equals(""))
     		{
-    			con+=" and product_name like '%"+product_name+"%'";
+    			con+=" and a.product_name like '%"+product_name+"%'";
     		}
-    		if(!state.equals(""))
+    		if(!state.trim().equals(""))
     		{
-    			con+=" and state='"+state+"'";
+    			con+=" and a.state='"+state+"'";
     		}
     		pageShkc=shkcService.getShkcProduct(con, curPage, rowsPerPage);
     		return "success";

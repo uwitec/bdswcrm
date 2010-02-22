@@ -10,6 +10,7 @@ import com.sw.cms.model.Page;
 import com.sw.cms.service.JjdService;
 import com.sw.cms.service.ProductKcService;
 import com.sw.cms.service.ProductKindService;
+import com.sw.cms.service.StoreService;
 import com.sw.cms.util.Constant;
 import com.sw.cms.util.DateComFunc;
 import com.sw.cms.util.ParameterUtility;
@@ -20,7 +21,7 @@ public class JjdAction extends BaseAction
    private JjdService jjdService;
    private ProductKcService productKcService;
    private ProductKindService productKindService;
-   
+   private StoreService storeService;
    private Page jjdPage;
    private Page productPage;
    
@@ -37,10 +38,12 @@ public class JjdAction extends BaseAction
    private Jjd  jjd=new Jjd();
    private List jjdProducts=new ArrayList();
    private List kindList=new ArrayList();
+   private List storeList = new ArrayList();
    
    private String product_name="";
    private String product_kind="";
    private String id;
+	private String prop = "";
    
    public String getId() {
 	return id;
@@ -58,27 +61,27 @@ public void setId(String id) {
 	   {
 		 int rowsPerPage = Constant.PAGE_SIZE2;
 		 String con="";
-		 if(!linkman.equals(""))
+		 if(!linkman.trim().equals(""))
 		 {
 			 con+=" and j.linkman like '%"+linkman+"%'";
 		 }	
-		 if(!qz_serial_num.equals(""))
+		 if(!qz_serial_num.trim().equals(""))
 		 {
 			 con+=" and j.id in (select jjd_id from jjd_product where qz_serial_num='"+qz_serial_num+"')";
 		 }
-		 if(!jj_date1.equals(""))
+		 if(!jj_date1.trim().equals(""))
 		 {
-			 con+=" and j.cj_date>='"+jj_date1+"'";
+			 con+=" and j.jj_date>='"+jj_date1+"'";
 		 }
-		 if(!jj_date2.equals(""))
+		 if(!jj_date2.trim().equals(""))
 		 {
-			 con+=" and j.cj_date<='"+jj_date2+"'";
+			 con+=" and j.jj_date<='"+jj_date2+"'";
 		 }
-		 if(!state.equals(""))
+		 if(!state.trim().equals(""))
 		 {
 			 con+=" and j.state='"+state+"'";
 		 }
-		 if(!jjr.equals(""))
+		 if(!jjr.trim().equals(""))
 		 {
 			 con+=" and s.real_name like '%"+jjr+"%'";
 		 }
@@ -258,27 +261,25 @@ public void setId(String id) {
     */
    public String selJjProduct()throws Exception
    {
-	   try
-	   {
-		   int rowsPerPage = 15;
-			
-			String con = "";
-			if(!product_name.equals("")){
-				con += " and (a.product_name like '%" + product_name + "%' or a.product_xh like '%" + product_name + "%')";
-			}
-			if(!product_kind.equals("")){
-				con += " and a.product_kind like '" + product_kind + "%'";
-			}			 			
-			productPage = productKcService.getProductKcList(con, curPage, rowsPerPage);		 
-			kindList = productKindService.getAllProductKindList();
-						 
-	       return "success";
-	   }
-	   catch(Exception e)
-	   {
-		   log.error("接件单选择库存商品 失败原因："+e.getMessage());
-		   return "error";
-	   }
+	   int rowsPerPage = 15;
+		
+		String con = " and a.state='正常'";
+		if(!product_name.equals("")){
+			con += " and (a.product_name like '%" + product_name + "%' or a.product_xh like '%" + product_name + "%')";
+		}
+		if(!product_kind.equals("")){
+			con += " and a.product_kind like '" + product_kind + "%'";
+		}
+		if(!prop.equals("")){
+			con += " and prop='" + prop + "'";
+		}
+		
+		productPage = productKcService.getProductKcList(con, curPage, rowsPerPage);
+		
+		storeList = storeService.getAllStoreList();
+		kindList = productKindService.getAllProductKindList();
+		
+		return "success";
    }
    
    /**
@@ -288,9 +289,7 @@ public void setId(String id) {
    public String importSerial()throws Exception
    {
 	   try 
-	   {		
-		   
-		   
+	   {				   
 		  return "success";
 	   }
 	   catch (Exception e) 
@@ -455,6 +454,24 @@ public ProductKindService getProductKindService() {
 }
 public void setProductKindService(ProductKindService productKindService) {
 	this.productKindService = productKindService;
+}
+public String getProp() {
+	return prop;
+}
+public void setProp(String prop) {
+	this.prop = prop;
+}
+public List getStoreList() {
+	return storeList;
+}
+public void setStoreList(List storeList) {
+	this.storeList = storeList;
+}
+public StoreService getStoreService() {
+	return storeService;
+}
+public void setStoreService(StoreService storeService) {
+	this.storeService = storeService;
 }
    
 }

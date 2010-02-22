@@ -1,3 +1,4 @@
+
 package com.sw.cms.action;
 
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ import com.sw.cms.service.ClientsService;
 import com.sw.cms.service.DeptService;
 import com.sw.cms.service.EmployeeService;
 import com.sw.cms.service.ProductKcService;
+import com.sw.cms.service.ProductKindService;
 import com.sw.cms.service.ShkcService;
 import com.sw.cms.service.SjzdService;
 import com.sw.cms.service.UserService;
@@ -32,7 +34,8 @@ public class BxdAction extends BaseAction
 	private DeptService deptService;
 	private ProductKcService productKcService;
 	private ShkcService      shkcService;
-
+	private ProductKindService productKindService;
+	
 	private Page ywyEmployeePage;
 	private Page bxdPage;
 	private Page productPage;
@@ -44,22 +47,28 @@ public class BxdAction extends BaseAction
 	private List userList = new ArrayList();
 	private List clientsList = new ArrayList();
 	private List depts = new ArrayList();
-
+	private List bxdProducts = new ArrayList();
+	
 	private Bxd bxd = new Bxd();
 	private BxdProduct bxdProduct = new BxdProduct();
 
 	private String[] fj = new String[7];
 	private String product_serial_num = "";
-	private String lxr = "";
+	private String bxcs_name = "";
 	private String state = "";
-	private String gcs = "";
-	private String jx_date1 = DateComFunc.getToday();
-	private String jx_date2 = DateComFunc.getToday();
+	private String jsr = "";
+	private String jx_date1 = "";
+	private String jx_date2 = "";
 	private String orderName = "";
 	private String orderType = "";
+	private String id = "";
 	private int curPage = 1;
 	private String dept;
-
+	
+	private String product_name = "";
+	private String product_kind = "";
+	private List kindList = new ArrayList();
+	
 	public String getDept() {
 		return dept;
 	}
@@ -78,23 +87,17 @@ public class BxdAction extends BaseAction
 		try {
 			int rowsPerPage = Constant.PAGE_SIZE2;
 			String con = "";
-			if (!lxr.trim().equals("")) {
-				con = " and b.lxr like '%" + lxr + "%'";
-			}
-			if (!product_serial_num.trim().equals("")) {
-				con += " and p.product_serial_num='" + product_serial_num + "'";
+			if (!bxcs_name.trim().equals("")) {
+				con = " and c.name like '%" + bxcs_name + "%'";
 			}
 			if (!jx_date1.trim().equals("")) {
-				con += " and b.jxdate>='" + jx_date1 + "'";
+				con += " and b.bxdate>='" + jx_date1 + "'";
 			}
 			if (!jx_date2.trim().equals("")) {
-				con += " and b.jxdate<='" + (jx_date2 + " 23:59:59") + "'";
+				con += " and b.bxdate<='" + (jx_date2 + " 23:59:59") + "'";
 			}
 			if (!state.equals("")) {
 				con += " and b.state='" + state + "'";
-			}
-			if (!gcs.trim().equals("")) {
-				con += " and s.real_name like '%" + gcs + "%'";
 			}
 			if (orderName.equals("")) {
 				orderName = "id";
@@ -112,55 +115,7 @@ public class BxdAction extends BaseAction
 
 	}
 
-	/**
-	 * 选择工程师
-	 * 
-	 * @return
-	 */
-	public String selGcs() {
-		try {
-			int curPage = ParameterUtility.getIntParameter(getRequest(),
-					"curPage", 1);
-			String ywyname = ParameterUtility.getStringParameter(getRequest(),
-					"name", "");
-
-			String ywyposition = ParameterUtility.getStringParameter(
-					getRequest(), "position", "");
-			String flog = ParameterUtility.getStringParameter(getRequest(),
-					"flog", "");
-			if (flog.equals("")) {
-				List deptList = deptService.getDeptsByName("客户服务部");
-				if (deptList != null && deptList.size() != 0) {
-					Map map = (Map) deptList.get(0);
-					dept = StringUtils.nullToStr((String) map.get("dept_id"));
-
-				}
-
-			}
-
-			int rowsPerPage = 15;
-			String con = "";
-			if (!ywyname.equals("")) {
-				con += " and a.real_name like '%" + ywyname + "%'";
-			}
-			if (!dept.equals("")) {
-				con += " and b.dept_id='" + dept + "'";
-			}
-			if (!ywyposition.equals("")) {
-				con += " and a.position='" + ywyposition + "'";
-			}
-			ywyEmployeePage = employeeService.getYwyEmployee(con, curPage,
-					rowsPerPage);
-			positions = sjzdService.getSjzdXmxxByZdId("SJZD_ZWXX");
-			depts = deptService.getDepts();
-			return "success";
-		} catch (Exception e) {
-			log.error("获取业务员列表  失败原因" + e.getMessage());
-			return "error";
-		}
-
-	}
-
+	
 	/**
 	 * 打开选择库存产品列表
 	 * 
@@ -169,19 +124,21 @@ public class BxdAction extends BaseAction
 	public String selKcProc()throws Exception
 	{
 		try {
-			String product_serial_num = ParameterUtility.getStringParameter(
-					getRequest(), "product_serial_num", "");
-			            
 			int rowsPerPage = 15;
-
+				
 			String con = "";
-		 
-			if (!product_serial_num.equals("")) {
-				con += " and qz_serial_num='" + product_serial_num + "'";
+			if(!product_name.equals("")){
+				con += " and (product_name like '%" + product_name + "%' or product_xh like '%" + product_name + "%')";
+			}	
+
+			if(!product_kind.equals("")){
+				con += " and product_kind like '" + product_kind + "%'";
 			}
-
-			shkcPage = shkcService.getShkuIsBadProduct(con, curPage, rowsPerPage);
-
+			
+			shkcPage = shkcService.getShkuIsBadProduct(con, curPage, rowsPerPage);	
+						
+			//kindList = productKindService.getAllProductKindList();
+			
 			return "success";
 		} catch (Exception e) {
 			log.error("获取坏件库列表 错误原因:" + e.getMessage());
@@ -214,29 +171,22 @@ public class BxdAction extends BaseAction
 			LoginInfo info = (LoginInfo) getSession().getAttribute("LOGINUSER");
 			String user_id = info.getUser_id();
 			bxd.setCjr(user_id);
-			String str = "";
-			for (int i = 0; i < fj.length; i++) {
-				str += fj[i] + ",";
-			}
-			bxdProduct.setFj(str);
-			
+						
             if(bxd.getState().equals("已提交"))
             {
-            	//判断提交的报修产品是否在坏件库里
-            	String msg=bxdService.isBadShkcExist(bxdProduct);
-            	if(!msg.equals(""))
+            	//判断提交的报修产品是否在在外库里            	
+            	if(bxdService.isZyShkcExist(bxd,bxdProducts))
             	{
-            		this.saveMessage(msg);
             		bxd.setState("已保存");
             		wxszd = sjzdService.getSjzdXmxxByZdId("SJZD_WXSZD");
             		return "input";
             	} 
             	//保存信息
-            	bxdService.saveBxd(bxd, bxdProduct);
+            	bxdService.saveBxd(bxd, bxdProducts);
             }
             if(bxd.getState().equals("已保存"))
             {
-            	bxdService.saveBxd(bxd, bxdProduct);
+            	bxdService.saveBxd(bxd, bxdProducts);
             }
 			
 			return "success";
@@ -257,10 +207,10 @@ public class BxdAction extends BaseAction
 			wxszd = sjzdService.getSjzdXmxxByZdId("SJZD_WXSZD");
 			userList = userService.getAllEmployeeList();
 			clientsList = clientsService.getClientList("");
-			String bxd_id = ParameterUtility.getStringParameter(getRequest(),
-					"id", "");
-			bxd = (Bxd) bxdService.getBxd(bxd_id);
-			bxdProduct = (BxdProduct) bxdService.getBxdProduct(bxd_id);
+			
+			
+			bxd = (Bxd) bxdService.getBxd(id);
+			bxdProducts = bxdService.getBxdProducts(id);
 			return "success";
 		} catch (Exception e) {
 			log.error("加载修改报修单 失败原因" + e.getMessage());
@@ -277,29 +227,26 @@ public class BxdAction extends BaseAction
 	public String update()throws Exception
 	{
 		try 
-		{
-			String str = "";
-			for (int i = 0; i < fj.length; i++) {
-				str += fj[i] + ",";
-			}
-			 bxdProduct.setFj(str);
-			 if(bxd.getState().equals("已提交"))
+		{   LoginInfo info = (LoginInfo)getSession().getAttribute("LOGINUSER");
+		    String user_id = info.getUser_id();
+		    bxd.setCjr(user_id);		
+		    userList = userService.getAllEmployeeList();
+				 
+			    if(bxd.getState().equals("已提交"))
 	            {
 	            	//判断提交的报修产品是否在坏件库里
-	            	String msg=bxdService.isBadShkcExist(bxdProduct);
-	            	if(!msg.equals(""))
+				 if(bxdService.isZyShkcExist(bxd,bxdProducts))
 	            	{
-	            		this.saveMessage(msg);
 	            		bxd.setState("已保存");
 	            		wxszd = sjzdService.getSjzdXmxxByZdId("SJZD_WXSZD");
 	            		return "input";
 	            	} 
 	            	//保存信息
-	            	bxdService.updateBxd(bxd, bxdProduct);
+	            	bxdService.updateBxd(bxd, bxdProducts);
 	            }
 	            if(bxd.getState().equals("已保存"))
 	            {
-	            	bxdService.updateBxd(bxd, bxdProduct);
+	            	bxdService.updateBxd(bxd, bxdProducts);
 	            }		
 			return "success";
 		} catch (Exception e) {
@@ -334,10 +281,8 @@ public class BxdAction extends BaseAction
 	public String desc()throws Exception
 	{
 		try
-		{
-			String bxd_id = ParameterUtility.getStringParameter(getRequest(),
-					"id", "");
-			 bxdProduct=(BxdProduct)bxdService.getBxdProduct(bxd_id);
+		{		
+			 bxdProducts=bxdService.getBxdProducts(id);
 		    return "success";
 		}
 		catch(Exception e)
@@ -347,6 +292,15 @@ public class BxdAction extends BaseAction
 		}
 	}
 
+	/**
+	 * 打开输入序列号窗口
+	 * @return
+	 */
+	public String importSerial(){
+		return "success";
+	}
+	
+	
 	public String getJx_date1() {
 		return jx_date1;
 	}
@@ -363,20 +317,20 @@ public class BxdAction extends BaseAction
 		this.jx_date2 = jx_date2;
 	}
 
-	public String getGcs() {
-		return gcs;
+	public String getJsr() {
+		return jsr;
 	}
 
-	public void setGcs(String gcs) {
-		this.gcs = gcs;
+	public void setJsr(String jsr) {
+		this.jsr = jsr;
 	}
 
-	public String getLxr() {
-		return lxr;
+	public String getBxcs_name() {
+		return bxcs_name;
 	}
 
-	public void setLxr(String lxr) {
-		this.lxr = lxr;
+	public void setBxcs_name(String bxcs_name) {
+		this.bxcs_name = bxcs_name;
 	}
 
 	public String getProduct_serial_num() {
@@ -578,5 +532,45 @@ public class BxdAction extends BaseAction
 	public void setShkcPage(Page shkcPage) {
 		this.shkcPage = shkcPage;
 	}
+	public String getProduct_kind() {
+		return product_kind;
+	}
 
+
+	public void setProduct_kind(String product_kind) {
+		this.product_kind = product_kind;
+	}
+
+
+	public String getProduct_name() {
+		return product_name;
+	}
+
+
+	public void setProduct_name(String product_name) {
+		this.product_name = product_name;
+	}
+	
+	public List getKindList() {
+		return kindList;
+	}
+
+
+	public void setKindList(List kindList) {
+		this.kindList = kindList;
+	}
+	
+	public List getBxdProducts() {
+		return bxdProducts;
+	}
+	public void setBxdProducts(List bxdProducts) {
+		this.bxdProducts = bxdProducts;
+	}
+	
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 }

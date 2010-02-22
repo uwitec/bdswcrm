@@ -4,14 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.sw.cms.action.base.BaseAction;
-import com.sw.cms.model.BxfhdProduct;
 import com.sw.cms.model.Fhkhd;
 import com.sw.cms.model.FhkhdProduct;
-import com.sw.cms.model.Jjd;
 import com.sw.cms.model.LoginInfo;
 import com.sw.cms.model.Page;
 import com.sw.cms.service.FhkhdService;
 import com.sw.cms.service.ShkcService;
+import com.sw.cms.service.ClientsService;
+import com.sw.cms.service.EmployeeService;
+import com.sw.cms.service.SjzdService;
+import com.sw.cms.service.UserService;
 import com.sw.cms.util.Constant;
 import com.sw.cms.util.DateComFunc;
 import com.sw.cms.util.ParameterUtility;
@@ -19,7 +21,11 @@ import com.sw.cms.util.ParameterUtility;
 public class FhkhdAction extends BaseAction
 {
    private FhkhdService fhkhdService;
-   private ShkcService  shkcService;
+   private SjzdService  sjzdService;
+   private ClientsService clientsService;   
+   private UserService userService;
+   private ShkcService      shkcService;
+   private EmployeeService      employeeService;
    
    private Page fhkhdPage;
    private Page shkcPage;
@@ -27,17 +33,20 @@ public class FhkhdAction extends BaseAction
    private String orderName="";
    private String orderType="";
    private String lxr="";
-   private String cj_date1=DateComFunc.getToday();
-   private String cj_date2=DateComFunc.getToday();
-   private String qz_serial_num="";
+   private String fh_date1="";
+   private String fh_date2="";
+   
    private String state="";
-   private String fhr="";
+   private String client_name="";
    private String id="";
    
    private Fhkhd fhkhd=new Fhkhd();
    
    private List fhkhdProducts=new ArrayList();
+   private String[] wxszd;     
    
+   private List userList = new ArrayList();
+   private List clientsList = new ArrayList();
    /**
     * 返还客户单列表
     * @return
@@ -49,29 +58,26 @@ public class FhkhdAction extends BaseAction
 	   {
 		   int rowsPerPage = Constant.PAGE_SIZE2;
 		   String con="";
-		   if(!lxr.equals(""))
+		   if(!lxr.trim().equals(""))
 		   {
-			   con+=" and f.lxr like '%"+lxr+"%'";
+			   con+=" and b.lxr like '%"+lxr+"%'";
 		   }
-		   if(!qz_serial_num.equals(""))
+		   
+		   if(!fh_date1.trim().equals(""))
 		   {
-			   con+=" and f.id in (select fhkhd_id from fhkhd_product where qz_serial_num='"+qz_serial_num+"')";
+			   con+=" and b.fh_date>='"+fh_date1+"'";
 		   }
-		   if(!cj_date1.equals(""))
+		   if(!fh_date2.trim().equals(""))
 		   {
-			   con+=" and f.cj_date>='"+cj_date1+"'";
+			   con+=" and b.fh_date<='"+fh_date2+"'";
 		   }
-		   if(!cj_date2.equals(""))
+		   if(!state.trim().equals(""))
 		   {
-			   con+=" and f.cj_date<='"+cj_date2+"'";
+			   con+=" and b.state='"+state+"'";
 		   }
-		   if(!state.equals(""))
+		   if(!client_name.trim().equals(""))
 		   {
-			   con+=" and f.state='"+state+"'";
-		   }
-		   if(!fhr.equals(""))
-		   {
-			   con+=" and s.real_name like '%"+fhr+"%'";
+			   con+=" and c.name like '%"+client_name+"%'";
 		   }
 		   if(orderName.equals(""))
 		   {
@@ -101,12 +107,15 @@ public class FhkhdAction extends BaseAction
    {
 	   try
 	   {
-		   fhkhd.setId(fhkhdService.updateFhkhdId());
-		  return "success"; 
+		    //wxszd = sjzdService.getSjzdXmxxByZdId("SJZD_WXSZD");
+			//userList = userService.getAllEmployeeList();
+			fhkhd.setId(fhkhdService.updatefhkhdId());
+			//clientsList = clientsService.getClientList("");
+			return "success";
 	   }
 	   catch(Exception e)
 	   {
-		   log.error("打开添加返还客户单 错误原因："+e.getMessage());
+		   log.error("打开添加返还客户单界面 错误原因："+e.getMessage());
 		   return "error";
 	   }
    }
@@ -119,15 +128,15 @@ public class FhkhdAction extends BaseAction
 	public String selKcProc()throws Exception
 	{
 		try {
-			String product_serial_num = ParameterUtility.getStringParameter(
-					getRequest(), "product_serial_num", "");
+			String product_name = ParameterUtility.getStringParameter(
+					getRequest(), "product_name", "");
 			            
 			int rowsPerPage = 15;
 
 			String con = "";
 		 
-			if (!product_serial_num.equals("")) {
-				con += " and qz_serial_num='" + product_serial_num + "'";
+			if(!product_name.equals("")){
+				con += " and (product_name like '%" + product_name + "%' or product_xh like '%" + product_name + "%')";
 			}
 
 			shkcPage = shkcService.getShkcIsHaoProduct(con, curPage, rowsPerPage);
@@ -153,21 +162,8 @@ public class FhkhdAction extends BaseAction
 		   String user_id = info.getUser_id();
 		   fhkhd.setCjr(user_id);
 		   
-		   if(fhkhd.getState().equals("已提交"))
-		   {
-			   String msg=fhkhdService.isHaoShkcExist(fhkhdProducts);
-			   if(!msg.equals(""))
-			   {
-				     this.saveMessage(msg);
-					 fhkhd.setState("已保存");
-					 return "input";
-			   }
-			  fhkhdService.savefhkhd(fhkhd, fhkhdProducts); 
-		   }
-		   if(fhkhd.getState().equals("已保存"))
-		   {
-              fhkhdService.savefhkhd(fhkhd, fhkhdProducts);
-		   }
+		   fhkhdService.savefhkhd(fhkhd, fhkhdProducts);
+		  
 		   return "success";
 	   }
 	   catch(Exception e)
@@ -274,32 +270,38 @@ public class FhkhdAction extends BaseAction
 	   }
    }
    
+   /**
+	 * 打开输入序列号窗口
+	 * @return
+	 */
+	public String importSerial(){
+		return "success";
+	}   
    
    
-   
 
-public String getCj_date1() {
-	return cj_date1;
+public String getFh_date1() {
+	return fh_date1;
 }
 
-public void setCj_date1(String cj_date1) {
-	this.cj_date1 = cj_date1;
+public void setFh_date1(String fh_date1) {
+	this.fh_date1 = fh_date1;
 }
 
-public String getCj_date2() {
-	return cj_date2;
+public String getFh_date2() {
+	return fh_date2;
 }
 
-public void setCj_date2(String cj_date2) {
-	this.cj_date2 = cj_date2;
+public void setFh_date2(String fh_date2) {
+	this.fh_date2 = fh_date2;
 }
 
-public String getFhr() {
-	return fhr;
+public String getClient_name() {
+	return client_name;
 }
 
-public void setFhr(String fhr) {
-	this.fhr = fhr;
+public void setClient_name(String client_name) {
+	this.client_name = client_name;
 }
 
 public String getLxr() {
@@ -324,14 +326,6 @@ public String getOrderType() {
 
 public void setOrderType(String orderType) {
 	this.orderType = orderType;
-}
-
-public String getQz_serial_num() {
-	return qz_serial_num;
-}
-
-public void setQz_serial_num(String qz_serial_num) {
-	this.qz_serial_num = qz_serial_num;
 }
 
 public String getState() {
@@ -374,6 +368,14 @@ public void setFhkhd(Fhkhd fhkhd) {
 	this.fhkhd = fhkhd;
 }
 
+public EmployeeService getEmployeeService() {
+	return employeeService;
+}
+
+public void setEmployeeService(EmployeeService employeeService) {
+	this.employeeService = employeeService;
+}
+
 public List getFhkhdProducts() {
 	return fhkhdProducts;
 }
@@ -397,8 +399,6 @@ public ShkcService getShkcService() {
 public void setShkcService(ShkcService shkcService) {
 	this.shkcService = shkcService;
 }
-
- 
 
 public String getId() {
 	return id;

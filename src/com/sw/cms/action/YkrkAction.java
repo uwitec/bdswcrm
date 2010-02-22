@@ -83,25 +83,25 @@ public class YkrkAction extends BaseAction
 			return "success";
 		}
 		
-		public String selShkcByzy()throws Exception
+		public String selShkcByhao()throws Exception
 		{
 			try {
-				String product_serial_num = ParameterUtility.getStringParameter(
-						getRequest(), "product_serial_num", "");
+				String product_name = ParameterUtility.getStringParameter(
+						getRequest(), "product_name", "");
 				            
 				int rowsPerPage = 15;
 
 				String con = "";
 			 
-				if (!product_serial_num.equals("")) {
-					con += " and qz_serial_num='" + product_serial_num + "'";
+				if(!product_name.equals("")){
+					con += " and (product_name like '%" + product_name + "%' or product_xh like '%" + product_name + "%')";
 				}
 
-				shkcPage = shkcService.getShkcIsWaiProduct(con, curPage, rowsPerPage);
+				shkcPage = shkcService.getShkcIsHaoProduct(con, curPage, rowsPerPage);
 
 				return "success";
 			} catch (Exception e) {
-				log.error("获取外件库列表 错误原因:" + e.getMessage());
+				log.error("获取好件库列表 错误原因:" + e.getMessage());
 				return "error";
 			}
 
@@ -109,7 +109,7 @@ public class YkrkAction extends BaseAction
 
 		
 		/**
-		 * 保存移库出库
+		 * 保存移库入库
 		 * @return
 		 */
 		public String save(){
@@ -119,20 +119,34 @@ public class YkrkAction extends BaseAction
 			
 			iscs_flag = sysInitSetService.getQyFlag();
 			//只有在系统正式启用后才去判断库存是否满足需求
-			if(iscs_flag.equals("1")){
-				if(ykrk.getState().equals("已提交")){
-					 
+			if(iscs_flag.equals("1"))
+			{
+				if(ykrk.getState().equals("已提交"))
+				{
+                    msg = ykrkService.checkHaoKc(ykrk, ykrkProducts);
+					
+					if(!msg.equals(""))
+					
+					{
+						ykrk.setState("已保存");
+						ykrkService.saveYkrk(ykrk, ykrkProducts);
+						
+						return "input";
+					}
 					 msg=ykrkService.isSerialNumInKcExist(ykrkProducts);
-					 if(!msg.equals("")){
+					 if(!msg.equals(""))
+					 {
 							ykrk.setState("已保存");
 							ykrkService.saveYkrk(ykrk, ykrkProducts);							
 							return "input";
-						}
+					 }
 				}
 			}
 			
-			
-			ykrkService.saveYkrk(ykrk, ykrkProducts);
+			if(ykrk.getState().equals("已保存"))
+			{
+			  ykrkService.saveYkrk(ykrk, ykrkProducts);
+			}
 			return "success";
 		}
 		
@@ -154,10 +168,21 @@ public class YkrkAction extends BaseAction
 			iscs_flag = sysInitSetService.getQyFlag();
 			//只有在系统正式启用后才去判断库存是否满足需求
 			if(iscs_flag.equals("1")){
-				if(ykrk.getState().equals("已提交")){
-					 
+				if(ykrk.getState().equals("已提交"))
+				{
+                    msg = ykrkService.checkHaoKc(ykrk, ykrkProducts);
+					
+					if(!msg.equals(""))
+					{
+						ykrk.setState("已保存");
+						ykrkService.saveYkrk(ykrk, ykrkProducts);
+						
+						return "input";
+					} 
+					
 					msg=ykrkService.isSerialNumInKcExist(ykrkProducts);
-					 if(!msg.equals("")){
+					 if(!msg.equals(""))
+					 {
 							ykrk.setState("已保存");
 							ykrkService.updateYkrk(ykrk, ykrkProducts);							
 							return "input";
@@ -194,47 +219,29 @@ public class YkrkAction extends BaseAction
 			return "success";
 		}
 		
-		
-		
-
-	 
-
-
-	 
-
 	public int getCurPage() {
 		return curPage;
 	}
-
 
 	public void setCurPage(int curPage) {
 		this.curPage = curPage;
 	}
 
-
 	public String getOrderName() {
 		return orderName;
 	}
-
 
 	public void setOrderName(String orderName) {
 		this.orderName = orderName;
 	}
 
-
 	public String getOrderType() {
 		return orderType;
 	}
 
-
 	public void setOrderType(String orderType) {
 		this.orderType = orderType;
 	}
-
-
-	 
-
-
 	 
 	public StoreService getStoreService() {
 		return storeService;
@@ -251,10 +258,6 @@ public class YkrkAction extends BaseAction
 	public void setUserService(UserService userService) {
 		this.userService = userService;
 	}
-
-	 
-
-	 
 
 	public List getStoreList() {
 		return storeList;
