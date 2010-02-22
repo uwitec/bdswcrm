@@ -81,7 +81,8 @@ List funcList = menuService.getUserYwgnFunc(user_id);
 			var destination = "top.htm";
 			var fea ='width=800,height=600,left=' + (screen.availWidth-800)/2 + ',top=' + (screen.availHeight-600)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 			
-			window.open(destination,'库存查询',fea);
+			var newWin =window.open(destination,'库存查询',fea);
+			newWin.focus();
 		}else{
 			//var destination = "client.htm";
 			//var fea ='width=800,height=600,left=' + (screen.availWidth-800)/2 + ',top=' + (screen.availHeight-600)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
