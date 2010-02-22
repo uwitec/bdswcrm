@@ -3,62 +3,51 @@ package com.sw.cms.model;
 /**
  * 报修返还单
  * @author Administrator
- *
+ * 2010-01-29修改，只剩下以下信息：报修返还单ID、报修返还时间、创建时间、经手人、创建人、状态、付款账户、实收金额、报修厂商、备注、合计金额
+ *                             id          fh_date    cj_date jsr    cjr   state fkzh   ssje    bxcs    remark hjje
  */
 public class Bxfhd
 {
 	  private String id ;        //报修返还单ID
       private String fh_date;    //报修返还时间       
       private String cj_date ;   //创建时间       	
-      private String jxr    ;    //经手人  
-      private String cjr    ;    //创建人
-      private String gcs    ;    //工程师
-      private String state  ;    //状态 (待返还 已返还) 		 
-      private String client_name ;//客户名称
-      private String lxr   ;     //联系人        
-      private String lxdh   ;	 //联系电话 
-      private String address ;   //地址  	        
-      private String ms ;        //备注
-      private String bxd_id ;     //报修单ID
-      private String bxr;         //报修人
+      private String jsr    ;    //经手人  
+      private String cjr    ;    //创建人     
+      private String state  ;    //状态 (已保存；已提交)              
+      private String remark ;     //备注      
       private String fkzh;        //付款账户
       private double ssje;        //实收金额
-      private String isfy;        //是否产生费用
-    
-     
-	public String getBxd_id() {
-		return bxd_id;
-	}
-	public void setBxd_id(String bxd_id) {
-		this.bxd_id = bxd_id;
-	}
-	public String getBxr() {
-		return bxr;
-	}
-	public void setBxr(String bxr) {
-		this.bxr = bxr;
-	}
-	public String getFkzh() {
+      private String bxcs;        //报修厂商
+      private double hjje;        //合计金额
+      
+  	public String getFkzh() {
 		return fkzh;
 	}
 	public void setFkzh(String fkzh) {
 		this.fkzh = fkzh;
 	}
  
-	 
 	public double getSsje() {
 		return ssje;
 	}
-
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
 	public void setSsje(double ssje) {
 		this.ssje = ssje;
 	}
 
-	public String getAddress() {
-		return address;
+	public double getHjje() {
+		return hjje;
 	}
-	public void setAddress(String address) {
-		this.address = address;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+	public void setHjje(double hjje) {
+		this.hjje = hjje;
+	}
+	
+	public String getBxcs() {
+		return bxcs;
+	}
+	public void setBxcs(String bxcs) {
+		this.bxcs = bxcs;
 	}
 	public String getCj_date() {
 		return cj_date;
@@ -72,53 +61,32 @@ public class Bxfhd
 	public void setCjr(String cjr) {
 		this.cjr = cjr;
 	}
-	public String getClient_name() {
-		return client_name;
-	}
-	public void setClient_name(String client_name) {
-		this.client_name = client_name;
-	}
+
 	public String getFh_date() {
 		return fh_date;
 	}
 	public void setFh_date(String fh_date) {
 		this.fh_date = fh_date;
 	}
-	public String getGcs() {
-		return gcs;
-	}
-	public void setGcs(String gcs) {
-		this.gcs = gcs;
-	}
+
 	public String getId() {
 		return id;
 	}
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getJxr() {
-		return jxr;
+	public String getJsr() {
+		return jsr;
 	}
-	public void setJxr(String jxr) {
-		this.jxr = jxr;
+	public void setJsr(String jsr) {
+		this.jsr = jsr;
 	}
-	public String getLxdh() {
-		return lxdh;
+
+	public String getRemark() {
+		return remark;
 	}
-	public void setLxdh(String lxdh) {
-		this.lxdh = lxdh;
-	}
-	public String getLxr() {
-		return lxr;
-	}
-	public void setLxr(String lxr) {
-		this.lxr = lxr;
-	}
-	public String getMs() {
-		return ms;
-	}
-	public void setMs(String ms) {
-		this.ms = ms;
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 	public String getState() {
 		return state;
@@ -126,10 +94,5 @@ public class Bxfhd
 	public void setState(String state) {
 		this.state = state;
 	}
-	public String getIsfy() {
-		return isfy;
-	}
-	public void setIsfy(String isfy) {
-		this.isfy = isfy;
-	}
+
 }

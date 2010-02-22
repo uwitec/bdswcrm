@@ -7,8 +7,8 @@ public class YkrkProduct
 	private String product_name;
 	private String product_xh;
 	private String product_remark;
-	private String oqz_serial_num;
-	private String nqz_serial_num;
+	private String qz_serial_num;
+	private int nums;
 	 
 	 
 	public String getProduct_id() {
@@ -36,17 +36,11 @@ public class YkrkProduct
 	public void setProduct_remark(String product_remark) {
 		this.product_remark = product_remark;
 	}
-	public String getNqz_serial_num() {
-		return nqz_serial_num;
+	public String getQz_serial_num() {
+		return qz_serial_num;
 	}
-	public void setNqz_serial_num(String nqz_serial_num) {
-		this.nqz_serial_num = nqz_serial_num;
-	}
-	public String getOqz_serial_num() {
-		return oqz_serial_num;
-	}
-	public void setOqz_serial_num(String oqz_serial_num) {
-		this.oqz_serial_num = oqz_serial_num;
+	public void setQz_serial_num(String qz_serial_num) {
+		this.qz_serial_num = qz_serial_num;
 	}
 	public String getYkrk_id() {
 		return ykrk_id;
@@ -55,4 +49,10 @@ public class YkrkProduct
 		this.ykrk_id = ykrk_id;
 	}
 	 
+	public int getNums() {
+		return nums;
+	}
+	public void setNums(int nums) {
+		this.nums = nums;
+	}
 }

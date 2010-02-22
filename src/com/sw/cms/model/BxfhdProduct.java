@@ -4,6 +4,8 @@ package com.sw.cms.model;
  * 报修返还单商品
  * 
  * @author Administrator
+ * 2010-02-04修改，有以下信息：流水号\报修返还单ID\产品ID\产品名称\产品型号\产品序列号\仓库编号\库存状态\数量\产品附件\单价\金额\产品备注
+ *         id\bxfhd_id\product_id\product_name\product_xh\qz_serial_num\store_id\storestate\nums\cpfj\price\totalmoney\remark
  * 
  */
 public class BxfhdProduct 
@@ -15,33 +17,28 @@ public class BxfhdProduct
 	private String product_xh; // 产品型号
 	private String qz_serial_num;// 产品序列号
 	private String remark;// 产品备注
-	private String bxaddress; // 报修所在地
-	private String bxstate; // 保修产品状态
-	private String has_fj; // 是否有附件
-	private String fj;// 附件
-	private String qtfj; // 其他附件
-	private String bj; // 备件
-	private String gzfx; // 故障分析
-	private String pcgc; // 排除过程	
-	private double wxf;//维修费
-	
-
+	private String store_id; // 仓库编号
+	private String storeState; // 仓库标识：仓库编号为坏件库编号时使用，1：在坏件库中  2：在外库中
+	private int nums; // 产品数量
+	private String cpfj;// 产品附件
+	private double price; // 产品价格
+	private double totalMoney; // 产品总金额
 	 
 
-	public String getBj() {
-		return bj;
+	public String getStord_id() {
+		return store_id;
 	}
 
-	public void setBj(String bj) {
-		this.bj = bj;
+	public void setStord_id(String store_id) {
+		this.store_id = store_id;
 	}
 
-	public String getBxaddress() {
-		return bxaddress;
+	public String getStorestate() {
+		return storeState;
 	}
 
-	public void setBxaddress(String bxaddress) {
-		this.bxaddress = bxaddress;
+	public void setStorestate(String storeState) {
+		this.storeState = storeState;
 	}
 
 	public String getBxfhd_id() {
@@ -52,36 +49,36 @@ public class BxfhdProduct
 		this.bxfhd_id = bxfhd_id;
 	}
 
-	public String getBxstate() {
-		return bxstate;
+	public String getCpfj() {
+		return cpfj;
 	}
 
-	public void setBxstate(String bxstate) {
-		this.bxstate = bxstate;
+	public void setCpfj(String cpfj) {
+		this.cpfj = cpfj;
 	}
 
-	public String getFj() {
-		return fj;
+	public int getNums() {
+		return nums;
 	}
 
-	public void setFj(String fj) {
-		this.fj = fj;
+	public void setNums(int nums) {
+		this.nums = nums;
 	}
 
-	public String getGzfx() {
-		return gzfx;
+	public double getPrice() {
+		return price;
 	}
 
-	public void setGzfx(String gzfx) {
-		this.gzfx = gzfx;
+	public void setPrice(double price) {
+		this.price = price;
 	}
 
-	public String getHas_fj() {
-		return has_fj;
+	public double getTotalmoney() {
+		return totalMoney;
 	}
 
-	public void setHas_fj(String has_fj) {
-		this.has_fj = has_fj;
+	public void setTotalmoney(double totalMoney) {
+		this.totalMoney = totalMoney;
 	}
 
 	public int getId() {
@@ -90,14 +87,6 @@ public class BxfhdProduct
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public String getPcgc() {
-		return pcgc;
-	}
-
-	public void setPcgc(String pcgc) {
-		this.pcgc = pcgc;
 	}
 
 	public String getProduct_id() {
@@ -124,14 +113,6 @@ public class BxfhdProduct
 		this.product_xh = product_xh;
 	}
 
-	public String getQtfj() {
-		return qtfj;
-	}
-
-	public void setQtfj(String qtfj) {
-		this.qtfj = qtfj;
-	}
-
 	public String getQz_serial_num() {
 		return qz_serial_num;
 	}
@@ -146,13 +127,5 @@ public class BxfhdProduct
 
 	public void setRemark(String remark) {
 		this.remark = remark;
-	}
-
-	public double getWxf() {
-		return wxf;
-	}
-
-	public void setWxf(double wxf) {
-		this.wxf = wxf;
 	}
 }

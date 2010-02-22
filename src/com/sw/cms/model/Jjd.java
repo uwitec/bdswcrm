@@ -6,28 +6,21 @@ package com.sw.cms.model;
  *
  */
 public class Jjd 
-{
-	   private String  id       ;    //接件单ID
-	   private String  sfd_id   ;//售后服务单ID
+{	   
+	   private String  id ;
+	   private String  sfd_id;
+	   private String  client_name;
+	   private String  lxdh ;
+	   private String   mobile;
+	   private String  linkman;
+	   private String  jjr;
+	   private String  cjr;
+	   private String  jj_date;
+	   private String  cj_date;
+	   private String  state;
+	   private String  ms;
+	   private String  mail;
 	   
-	   private String  client_name ;//客户名称（如果是零售客户就不用填写，直接填写联系人）
-	   private String  address     ;//地址
-	   private String  mobile     ;//电话
-	   private String  linkman    ;//联系人
-
-	   private String  jjr        ;//接件人
-	   private String  cjr         ;//创建人
-	   private String  jj_date     ;//接件时间
-	   private String  cj_date    ;//创建时间
-
-	   private  String state     ;//接件单状态（已保存，已提交：坏件库）
-	   private  String ms        ;//描述   
-	public String getAddress() {
-		return address;
-	}
-	public void setAddress(String address) {
-		this.address = address;
-	}
 	public String getCj_date() {
 		return cj_date;
 	}
@@ -70,6 +63,18 @@ public class Jjd
 	public void setLinkman(String linkman) {
 		this.linkman = linkman;
 	}
+	public String getLxdh() {
+		return lxdh;
+	}
+	public void setLxdh(String lxdh) {
+		this.lxdh = lxdh;
+	}
+	public String getMail() {
+		return mail;
+	}
+	public void setMail(String mail) {
+		this.mail = mail;
+	}
 	public String getMobile() {
 		return mobile;
 	}
@@ -94,4 +99,5 @@ public class Jjd
 	public void setState(String state) {
 		this.state = state;
 	}
+	 
 }

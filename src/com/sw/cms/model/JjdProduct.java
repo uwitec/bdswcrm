@@ -7,14 +7,31 @@ package com.sw.cms.model;
  */
 public class JjdProduct 
 {
-	  private int      id       ;    //流水号
-	  private String   jjd_id      ;//接件单ID
-	  private String   product_id  ;//接件单产品ID
-	  private String   product_name ;//接件单产品名称
-	  private String   product_xh  ;//接件单产品规格
-	  private String   qz_serial_num ;//接件单产品序列号
-	  private int      nums;          //数量
-	  private String   remark       ;//备注
+	  private int  id  ;
+	  private String  jjd_id ;
+	  private String  product_id ;
+	  private String  product_name ;
+	  private String  product_xh ;
+	  private String  qz_serial_num ;
+	  private String  remark ;
+	  private int     nums ;
+	  private String  stord_id ;
+	  private String  storestate ;
+	  private String  cpfj ;
+	  private int     fxts ;
+	  private String  qz_flag;
+	public String getCpfj() {
+		return cpfj;
+	}
+	public void setCpfj(String cpfj) {
+		this.cpfj = cpfj;
+	}
+	public int getFxts() {
+		return fxts;
+	}
+	public void setFxts(int fxts) {
+		this.fxts = fxts;
+	}
 	public int getId() {
 		return id;
 	}
@@ -26,6 +43,12 @@ public class JjdProduct
 	}
 	public void setJjd_id(String jjd_id) {
 		this.jjd_id = jjd_id;
+	}
+	public int getNums() {
+		return nums;
+	}
+	public void setNums(int nums) {
+		this.nums = nums;
 	}
 	public String getProduct_id() {
 		return product_id;
@@ -45,6 +68,12 @@ public class JjdProduct
 	public void setProduct_xh(String product_xh) {
 		this.product_xh = product_xh;
 	}
+	public String getQz_flag() {
+		return qz_flag;
+	}
+	public void setQz_flag(String qz_flag) {
+		this.qz_flag = qz_flag;
+	}
 	public String getQz_serial_num() {
 		return qz_serial_num;
 	}
@@ -57,11 +86,17 @@ public class JjdProduct
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
-	public int getNums() {
-		return nums;
+	public String getStord_id() {
+		return stord_id;
 	}
-	public void setNums(int nums) {
-		this.nums = nums;
+	public void setStord_id(String stord_id) {
+		this.stord_id = stord_id;
 	}
- 
+	public String getStorestate() {
+		return storestate;
+	}
+	public void setStorestate(String storestate) {
+		this.storestate = storestate;
+	}
+	 
 }

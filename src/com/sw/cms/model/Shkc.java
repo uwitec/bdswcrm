@@ -3,7 +3,7 @@ package com.sw.cms.model;
 /**
  * 库存信息
  * @author Administrator
- *
+ * 2010-01-29 增加仓库编号、仓库标识
  */
 public class Shkc 
 {
@@ -12,14 +12,20 @@ public class Shkc
 	  private  String product_xh;                  //产品型号
 	  private  String product_name;                //产品名称
 	  private  String qz_serial_num;               //序列号    
-	  private  String state;                       //库存状态(0:坏 1：外 2：好)
+	  private  String state;                       //库存状态(1:坏 2：外)
 	  private  String day_num;                     //已送修天数
 	  private  String remark;                      //备注
 	  private  String client_name ;                //所属客户
 	  private  String linkman ;                    //联系人
-	  private  String mobile ;                     //电话
+	  private  String mobile ;                     //手机
+	  private  String lxdh ;                     //联系电话
 	  private  String address ;                    //地址
 	  private   double  wxf;                       //维修费
+	  
+	  
+	  private  String store_id ;                  //仓库编号
+	  
+	  
 	public double getWxf() {
 		return wxf;
 	}
@@ -98,6 +104,21 @@ public class Shkc
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
 	}
-	   
-	    
+	
+	//add 2010-01-29
+	
+	public String getStore_id() {
+		return store_id;
+	}
+	public void setStore_id(String store_id) {
+		this.store_id = store_id;
+	}
+	
+	public String getLxdh() {
+		return lxdh;
+	}
+	public void setLxdh(String lxdh) {
+		this.lxdh = lxdh;
+	}
+	//add end
 }

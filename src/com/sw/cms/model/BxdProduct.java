@@ -1,5 +1,10 @@
 package com.sw.cms.model;
 
+/**
+ * 报修单产品信息
+ * 2010-01-29 修改，只剩下以下信息：编号、报修单ID、产品ID、产品名称、产品型号、产品序列号、产品备注、仓库编号、库存状态、数量、产品附件、送修天数
+ * id    bxd_id    product_id  product_name product_xh product_serial_num product_remark store_id storestate nums cpfj sxts
+ */
 public class BxdProduct {
 	private int id; // 流水号
 
@@ -7,48 +12,40 @@ public class BxdProduct {
 
 	private String product_id; // 产品ID
 
-	private String product_name; // 产品名称
-
-	private String product_gg; // 产品规格
+	private String product_name; // 产品名称	
 
 	private String product_xh; // 产品型号
 
-	private String product_serial_num; // 产品序号
+	private String qz_serial_num; // 产品序列号
 
 	private String product_remark; // 产品备注
 
-	private String bxaddress; // 产品所在地
+	private String store_id; // 仓库编号
 
-	private String bxstate; // 产品状态
+	private String storestate; // 仓库标识：1-坏件库中 2-在外库中，只对坏件库进行标识
 
-	private String has_fj; // 是否有附件
+	private String cpfj; // 产品附件
 
-	private String fj; // 附件
+	private int nums; // 产品数量
 
-	private String qtfj; // 其他附件
+	private int sxts; // 送修天数
 
-	private String bj; // 备件
+	
 
-	private String gzfx; // 故障及分析
-
-	private String pcgc; // 排除过程
-
-	private double gf; // 工分
-
-	public String getBj() {
-		return bj;
+	public int getSxts() {
+		return sxts;
 	}
 
-	public void setBj(String bj) {
-		this.bj = bj;
+	public void setSxts(int sxts) {
+		this.sxts = sxts;
 	}
 
-	public String getBxaddress() {
-		return bxaddress;
+	public int getNums() {
+		return nums;
 	}
 
-	public void setBxaddress(String bxaddress) {
-		this.bxaddress = bxaddress;
+	public void setNums(int nums) {
+		this.nums = nums;
 	}
 
 	public String getBxd_id() {
@@ -59,44 +56,28 @@ public class BxdProduct {
 		this.bxd_id = bxd_id;
 	}
 
-	public String getBxstate() {
-		return bxstate;
+	public String getCpfj() {
+		return cpfj;
 	}
 
-	public void setBxstate(String bxstate) {
-		this.bxstate = bxstate;
+	public void setCpfj(String cpfj) {
+		this.cpfj = cpfj;
 	}
 
-	public String getFj() {
-		return fj;
+	public String getStore_id() {
+		return store_id;
 	}
 
-	public void setFj(String fj) {
-		this.fj = fj;
+	public void setStore_id(String store_id) {
+		this.store_id = store_id;
 	}
 
-	public double getGf() {
-		return gf;
+	public String getStorestate() {
+		return storestate;
 	}
 
-	public void setGf(double gf) {
-		this.gf = gf;
-	}
-
-	public String getGzfx() {
-		return gzfx;
-	}
-
-	public void setGzfx(String gzfx) {
-		this.gzfx = gzfx;
-	}
-
-	public String getHas_fj() {
-		return has_fj;
-	}
-
-	public void setHas_fj(String has_fj) {
-		this.has_fj = has_fj;
+	public void setStorestate(String storestate) {
+		this.storestate = storestate;
 	}
 
 	public int getId() {
@@ -105,22 +86,6 @@ public class BxdProduct {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public String getPcgc() {
-		return pcgc;
-	}
-
-	public void setPcgc(String pcgc) {
-		this.pcgc = pcgc;
-	}
-
-	public String getProduct_gg() {
-		return product_gg;
-	}
-
-	public void setProduct_gg(String product_gg) {
-		this.product_gg = product_gg;
 	}
 
 	public String getProduct_id() {
@@ -147,12 +112,12 @@ public class BxdProduct {
 		this.product_remark = product_remark;
 	}
 
-	public String getProduct_serial_num() {
-		return product_serial_num;
+	public String getQz_serial_num() {
+		return qz_serial_num;
 	}
 
-	public void setProduct_serial_num(String product_serial_num) {
-		this.product_serial_num = product_serial_num;
+	public void setQz_serial_num(String qz_serial_num) {
+		this.qz_serial_num = qz_serial_num;
 	}
 
 	public String getProduct_xh() {
@@ -163,11 +128,4 @@ public class BxdProduct {
 		this.product_xh = product_xh;
 	}
 
-	public String getQtfj() {
-		return qtfj;
-	}
-
-	public void setQtfj(String qtfj) {
-		this.qtfj = qtfj;
-	}
 }

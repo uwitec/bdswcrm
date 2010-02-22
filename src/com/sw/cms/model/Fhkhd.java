@@ -1,8 +1,10 @@
 package com.sw.cms.model;
 
 /**
- * 发还客户单
+ * 返还客户单
  * @author Administrator
+ * 2010-02-05修改，有以下信息：返还客户单编号、返还客户日期、创建日期、经手人、创建人、状态、客户编号、      收款金额、收款账户、备注、    联系人
+ *                          id           fh_date    cj_date  jsr   cjr   state  client_id  skje    skzh    remark  lxr
  *
  */
 public class Fhkhd 
@@ -10,35 +12,18 @@ public class Fhkhd
 	 private String  id  ;       //返还单ID
 	 private String fh_date ;//返还时间       
 	 private String cj_date ;//创建时间       	
-	 private String fhr   ; //返还人  
+	 private String jsr   ; //经手人  
 	 private String cjr   ; //创建人
 	 private String state  ;// 状态  		 
-	 private String client_name ;//客户名称
-	 private String lxr   ; //联系人        
-	 private String lxdh   ;	//联系电话 
-	 private String address ;//地址  
-
-	 private String fkfs       ;//付款方式
-	 private String pos_id     ;//POS机ID
-     private double sfdje       ;   //合计金额
-     private double skje       ;   //实收金额
+	 private String client_id ;//客户编号
+	 private String lxr   ; //联系人   
+	 private double skje       ;   //实收金额
      private String skzh       ;//收款账号
-     private String isfy;
-      
-     private String  ms ;//备注
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
+     private String  remark ;//备注	
 
 	public String getCj_date() {
 		return cj_date;
 	}
-
 	public void setCj_date(String cj_date) {
 		this.cj_date = cj_date;
 	}
@@ -51,12 +36,12 @@ public class Fhkhd
 		this.cjr = cjr;
 	}
 
-	public String getClient_name() {
-		return client_name;
+	public String getClient_id() {
+		return client_id;
 	}
 
-	public void setClient_name(String client_name) {
-		this.client_name = client_name;
+	public void setClient_id(String client_id) {
+		this.client_id = client_id;
 	}
 
 	public String getFh_date() {
@@ -67,20 +52,12 @@ public class Fhkhd
 		this.fh_date = fh_date;
 	}
 
-	public String getFhr() {
-		return fhr;
+	public String getJsr() {
+		return jsr;
 	}
 
-	public void setFhr(String fhr) {
-		this.fhr = fhr;
-	}
-
-	public String getFkfs() {
-		return fkfs;
-	}
-
-	public void setFkfs(String fkfs) {
-		this.fkfs = fkfs;
+	public void setJsr(String jsr) {
+		this.jsr = jsr;
 	}
 
 	public String getId() {
@@ -91,14 +68,6 @@ public class Fhkhd
 		this.id = id;
 	}
 
-	public String getLxdh() {
-		return lxdh;
-	}
-
-	public void setLxdh(String lxdh) {
-		this.lxdh = lxdh;
-	}
-
 	public String getLxr() {
 		return lxr;
 	}
@@ -107,28 +76,12 @@ public class Fhkhd
 		this.lxr = lxr;
 	}
 
-	public String getMs() {
-		return ms;
+	public String getRemark() {
+		return remark;
 	}
 
-	public void setMs(String ms) {
-		this.ms = ms;
-	}
-
-	public String getPos_id() {
-		return pos_id;
-	}
-
-	public void setPos_id(String pos_id) {
-		this.pos_id = pos_id;
-	}
-
-	public double getSfdje() {
-		return sfdje;
-	}
-
-	public void setSfdje(double sfdje) {
-		this.sfdje = sfdje;
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 
 	public double getSkje() {
@@ -153,13 +106,5 @@ public class Fhkhd
 
 	public void setState(String state) {
 		this.state = state;
-	}
-
-	public String getIsfy() {
-		return isfy;
-	}
-
-	public void setIsfy(String isfy) {
-		this.isfy = isfy;
 	}
 }

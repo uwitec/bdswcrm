@@ -1,9 +1,12 @@
 package com.sw.cms.model;
 
 /**
- * 发还客户单商品
+ * 返还客户单商品
  * @author Administrator
- *
+ *2010-02-05修改，有以下信息：编号、返还客户单编号、产品编号、   产品名称、      产品规格、     产品附件
+ *                         id   fhkhd_id    product_id  product_name  product_xh   cpfj
+ *                      强制序列号、     备注、    单价、   金额、        仓库编号、    库存状态、     数量
+ *                      qz_serial_num  remark   price   totalmoney   store_id    storestate   nums
  */
 public class FhkhdProduct
 {
@@ -14,6 +17,14 @@ public class FhkhdProduct
 	   private String product_xh   ;//返还客户单产品规格
 	   private String qz_serial_num ;//返还客户单产品序列号
 	   private String remark       ;//备注
+	   
+	   private double price;       //单价
+	   private double totalmoney;   //金额
+	   private String store_id;    //仓库编号
+	   private String storestate;  //库存状态
+	   private int nums;           //数量
+	   private String cpfj;  //产品附件
+	   
 	public String getFhkhd_id() {
 		return fhkhd_id;
 	}
@@ -57,4 +68,41 @@ public class FhkhdProduct
 		this.remark = remark;
 	}
 
+	public String getStore_id() {
+		return store_id;
+	}
+	public void setStore_id(String store_id) {
+		this.store_id = store_id;
+	}
+	public String getStorestate() {
+		return storestate;
+	}
+	public void setStorestate(String storestate) {
+		this.storestate = storestate;
+	}
+	public String getCpfj() {
+		return cpfj;
+	}
+	public void setCpfj(String cpfj) {
+		this.cpfj = cpfj;
+	}
+	public double getPrice() {
+		return price;
+	}
+	public void setPrice(double price) {
+		this.price = price;
+	}
+	public double getTotalmoney() {
+		return totalmoney;
+	}
+	public void setTotalmoney(double totalmoney) {
+		this.totalmoney = totalmoney;
+	}
+	
+	public int getNums() {
+		return nums;
+	}
+	public void setNums(int nums) {
+		this.nums = nums;
+	}
 }
