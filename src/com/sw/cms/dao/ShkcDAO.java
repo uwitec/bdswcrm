@@ -13,6 +13,8 @@ import com.sw.cms.model.BxdProduct;
 import com.sw.cms.model.BxfhdProduct;
 import com.sw.cms.model.FhkhdProduct;
 import com.sw.cms.model.JjdProduct;
+import com.sw.cms.model.BfdProduct;
+import com.sw.cms.model.HjdProduct;
 import com.sw.cms.model.Page;
 import com.sw.cms.model.Shkc;
 
@@ -33,7 +35,7 @@ public class ShkcDAO extends JdbcBaseDAO
 	 */
 	public Page getShkcProduct(String con,int curPage,int rowsPerPage)
 	{
-		String sql="select a.*,b.client_name,b.linkman,b.lxdh,b.mobile from shkc a left join jjd_product c on a.qz_serial_num=c.qz_serial_num left join jjd b on b.id=c.jjd_id  where 1=1 and a.store_id<>'' ";
+		String sql="select a.*,b.client_name,b.linkman,b.lxdh,b.mobile from shkc a left join jjd_product c on a.qz_serial_num=c.qz_serial_num left join jjd b on b.id=c.jjd_id  where 1=1 and (a.store_id<>'' and a.state<>'4') ";
 		if(!con.equals(""))
 		{
 			sql=sql+con;
@@ -179,6 +181,23 @@ public class ShkcDAO extends JdbcBaseDAO
    }
    
    /**
+    * 根据序列号查询报废中是否有该商品
+    * @param serialNum
+    * @return
+    */
+   public int getBfShkcBySerialNum(String serialNum)
+   {
+	   String sqlStore=""; 
+	   String storeId="";
+	   sqlStore= "select id from storehouse where name='坏件库'";		
+	   Map map=getResultMap(sqlStore);		
+	   storeId= (String)map.get("id"); 
+	   
+	   String sql="select count(*) from shkc where state='4' and qz_serial_num='"+serialNum+"' and store_id='"+storeId+"'";
+	   return this.getJdbcTemplate().queryForInt(sql);
+   }
+   
+   /**
     * 添加售后库存
     * @param jjdProducts
     */
@@ -289,7 +308,7 @@ public class ShkcDAO extends JdbcBaseDAO
     * 修改售后库存（1：坏件库 2：在外库 3：好件库）
     *
     */
-   public void updateShkcState(List bxdProducts,String state)
+   public void updateShkcState(BxdProduct bxdProduct,String state)
    {
 	   String sqlStore="";
 	   String state1="1";
@@ -309,28 +328,8 @@ public class ShkcDAO extends JdbcBaseDAO
 	   }
 	   Map map=getResultMap(sqlStore);		
 	   String storeId= (String)map.get("id") ; 
-		
-		if(bxdProducts != null && bxdProducts.size()>0)
-		{
-			for(int i=0;i<bxdProducts.size();i++)
-			{
-				BxdProduct bxdProduct = (BxdProduct)bxdProducts.get(i);
-				if(bxdProduct != null)
-				{
-					if(!bxdProduct.getProduct_id().equals("") && !bxdProduct.getProduct_name().equals(""))
-					{ if(!state.equals(""))
-					 {
-	                  sql="update shkc set state='"+state+"',store_id='"+storeId+"' where qz_serial_num='"+bxdProduct.getQz_serial_num()+"'";
-					 }
-					else
-					{
-						sql="update shkc set state='',store_id='"+storeId+"' where qz_serial_num='"+bxdProduct.getQz_serial_num()+"'";
-					}
-	                  this.getJdbcTemplate().update(sql);
-					}
-				}
-			}
-		}
+       sql="update shkc set state='"+state+"',store_id='"+storeId+"' where qz_serial_num='"+bxdProduct.getQz_serial_num()+"'";
+       this.getJdbcTemplate().update(sql);
    }
    
    /**
@@ -376,6 +375,47 @@ public class ShkcDAO extends JdbcBaseDAO
 			}
 		}
    }
+   
+   /**
+    * 修改报废售后库存（1：坏件库 2：在外库 3：好件库）
+    *
+    */
+   public void updateBfShkcState(BfdProduct bfdProduct,String state)
+   {
+	   String sqlStore="";	   
+	   String  sql="";
+	   if (state.equals("3"))
+	   {
+		   sqlStore= "select id from storehouse where name='好件库'";		
+	   }
+	   else 
+	   {
+		   sqlStore= "select id from storehouse where name='坏件库'";	   
+	   }
+	   
+	   Map map=getResultMap(sqlStore);		
+	   String storeId= (String)map.get("id") ; 
+       sql="update shkc set state='"+state+"',store_id='"+storeId+"' where qz_serial_num='"+bfdProduct.getQz_serial_num()+"'";
+       this.getJdbcTemplate().update(sql);
+   }
+   
+   /**
+    * 修改换件售后库存（1：坏件库 2：在外库 3：好件库）
+    *
+    */
+   public void updateHjShkcState(HjdProduct hjdProduct)
+   {
+	   String sqlStore="";
+	   String  sql="";
+	   sqlStore= "select id from storehouse where name='好件库'";		
+	   
+	   Map map=getResultMap(sqlStore);		
+	   String storeId= (String)map.get("id") ; 
+       sql="update shkc set qz_serial_num='"+hjdProduct.getNqz_serial_num()+"' where qz_serial_num='"+hjdProduct.getOqz_serial_num()+"' and store_id='"+storeId+"'";
+       this.getJdbcTemplate().update(sql);
+   }
+   
+   
    /**
     * 售后库存封装类
     * @author Administrator

@@ -88,13 +88,24 @@ public class SerialNumDAO extends JdbcBaseDAO {
 	}
 	
 	public void updateSerialNumStateDOA(Ykrk ykrk,YkrkProduct ykrkProduct)
-	{
-		String sql="update serial_num_mng set state=?,store_id=?,serial_num=? where serial_num=?";
-		Object[] params = new Object[4];
-		params[0] = "在库";
-		params[1] = ykrk.getRk_store_id();
-		params[2] = ykrkProduct.getNqz_serial_num();
-		params[3] = ykrkProduct.getOqz_serial_num();
+	{   String sql = "select * from serial_num_mng where serial_num='" + ykrkProduct.getQz_serial_num() + "'";
+	    List list = this.getJdbcTemplate().queryForList(sql);
+	
+	    if(list != null && list.size() > 0){
+		//序列号存在,更新
+		    sql="update serial_num_mng set product_name=?,product_xh=?,state=?,product_id=?,store_id=? where serial_num=?";
+	    }else{
+			//序列号不存在,插入
+			sql = "insert into serial_num_mng(product_name,product_xh,state,product_id,store_id,serial_num) values(?,?,?,?,?,?)";
+		}  
+		Object[] params = new Object[6];
+		params[0] = ykrkProduct.getProduct_name();
+		params[1] = ykrkProduct.getProduct_xh();		
+		params[2] = "在库";
+		params[3] = ykrkProduct.getProduct_id();
+		params[4] = ykrk.getRk_store_id();
+		params[5] = ykrkProduct.getQz_serial_num();
+		
 		this.getJdbcTemplate().update(sql,params);
 	}
 	

@@ -426,7 +426,39 @@ public class ProductKcDAO extends JdbcBaseDAO {
 		return nums;
 	}
 	
-	
+	/**
+	 * 返回某一产品在好件库的库存数
+	 * @param product_id
+	 * 
+	 * @return
+	 */
+	public int getHaoKcNums(String product_id){
+		int nums = 0;
+		
+		String sqlStore=""; 
+		sqlStore= "select id from storehouse where name='好件库'";		
+		Map mapStore=getResultMap(sqlStore);		
+		String storeId= (String)mapStore.get("id") ;
+		  
+		String sql = "select sum(nums) as nums from shkc where 1=1";
+		if(!product_id.equals("")){
+			sql += " and product_id='" + product_id + "'";
+		}
+		if(!storeId.trim().equals("")){
+			sql += " and store_id='" + storeId + "' and state='3'";
+		}
+		
+		List list = this.getResultList(sql);
+		if(list != null && list.size() > 0){
+			Map map = (Map)list.get(0);
+			String strNum = StringUtils.nullToStr(map.get("nums"));
+			
+			if(!strNum.equals("")){
+				nums = Integer.parseInt(strNum);
+			}
+		}
+		return nums;
+	}
 	/**
 	 * 返回库存查询明细结果
 	 * @param product_id
