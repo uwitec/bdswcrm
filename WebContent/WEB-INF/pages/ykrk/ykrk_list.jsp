@@ -54,7 +54,7 @@ String orderType = (String)VS.findValue("orderType");
 		var destination = "editYkrk.html?id=" + id;
 		var fea ='width=950,height=700,left=' + (screen.availWidth-950)/2 + ',top=' + (screen.availHeight-700)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
-		window.open(destination,'移库入库');		
+		window.open(destination,'移库入库',fea);		
 	}		
 	
 	
