@@ -1276,8 +1276,6 @@
          <action name="addDlMail" class="mailAction" method="add">
             <result name="success">/WEB-INF/pages/report/kcmx/dlmail_add.jsp</result>
         </action> 
-         
-                    
         <!-- 库存数量汇总 -->
         
         <!-- 分仓库存数量汇总 -->
@@ -2265,6 +2263,80 @@
             <result name="success">/WEB-INF/pages/bxd/importSerial.jsp</result>
         </action>        
          <!-- 报修单 -->    
+          <!-- 报废单 -->
+        <action name="listBfd" class="bfdAction" method="list">
+             <result name="success">/WEB-INF/pages/bfd/bfd_list.jsp</result>
+        </action>
+        <action name="addBfd" class="bfdAction" method="add">
+             <result name="success">/WEB-INF/pages/bfd/bfd_add.jsp</result>
+        </action>        
+        <action name="selBfProc" class="bfdAction" method="selKcProc">
+             <result name="success">/WEB-INF/pages/bfd/selectKcProc.jsp</result>
+        </action>
+        <action name="saveBfd" class="bfdAction" method="save">
+             <result name="success">/WEB-INF/pages/msg.jsp</result>
+             <result name="input">/WEB-INF/pages/bfd/bfd_add.jsp</result>
+             <result name="cancel" type="redirect">addBfd.html</result>
+        </action>
+        <action name="editBfd" class="bfdAction" method="edit">
+             <result name="success">/WEB-INF/pages/bfd/bfd_edit.jsp</result>
+        </action>
+         <action name="updateBfd" class="bfdAction" method="update">
+             <result name="success">/WEB-INF/pages/msg.jsp</result>
+             <result name="input">/WEB-INF/pages/bfd/bfd_edit.jsp</result>
+             <result name="cancel" type="redirect">editBfd.html</result>
+        </action>
+        <action name="viewBfd" class="bfdAction" method="edit">
+             <result name="success">/WEB-INF/pages/bfd/bfd_view.jsp</result>
+        </action>
+        <action name="delBfd" class="bfdAction" method="del">
+             <result name="success">listBfd.html</result>
+        </action>
+        <action name="descBfd" class="bfdAction" method="desc">
+             <result name="success">/WEB-INF/pages/bfd/bfd_desc.jsp</result>
+        </action>
+        <action name="bfimportSerial" class="bfdAction" method="importSerial">
+            <result name="success">/WEB-INF/pages/bfd/importSerial.jsp</result>
+        </action>        
+         <!-- 报废单 -->    
+         
+           <!-- 换件单 -->
+        <action name="listHjd" class="hjdAction" method="list">
+             <result name="success">/WEB-INF/pages/hjd/hjd_list.jsp</result>
+        </action>
+        <action name="addHjd" class="hjdAction" method="add">
+             <result name="success">/WEB-INF/pages/hjd/hjd_add.jsp</result>
+        </action>        
+        <action name="selHjdProcKc" class="hjdAction" method="selKcProc">
+             <result name="success">/WEB-INF/pages/hjd/selectKcProc.jsp</result>
+        </action>
+        <action name="saveHjd" class="hjdAction" method="save">
+             <result name="success">/WEB-INF/pages/msg.jsp</result>
+             <result name="input">/WEB-INF/pages/hjd/hjd_add.jsp</result>
+             <result name="cancel" type="redirect">addHjd.html</result>
+        </action>
+        <action name="editHjd" class="hjdAction" method="edit">
+             <result name="success">/WEB-INF/pages/hjd/hjd_edit.jsp</result>
+        </action>
+         <action name="updateHjd" class="hjdAction" method="update">
+             <result name="success">/WEB-INF/pages/msg.jsp</result>
+             <result name="input">/WEB-INF/pages/hjd/hjd_edit.jsp</result>
+             <result name="cancel" type="redirect">editHjd.html</result>
+        </action>
+        <action name="viewHjd" class="hjdAction" method="edit">
+             <result name="success">/WEB-INF/pages/hjd/hjd_view.jsp</result>
+        </action>
+        <action name="delHjd" class="hjdAction" method="del">
+             <result name="success">listHjd.html</result>
+        </action>
+        <action name="descHjd" class="hjdAction" method="desc">
+             <result name="success">/WEB-INF/pages/hjd/hjd_desc.jsp</result>
+        </action>
+        <action name="importHjSerial" class="hjdAction" method="importSerial">
+            <result name="success">/WEB-INF/pages/hjd/importSerial.jsp</result>
+        </action>        
+         <!-- 换件单 --> 
+         
            <!-- 售后服务单 --> 
         <action name="listSfd" class="sfdAction" method="list">
              <result name="success">/WEB-INF/pages/sfd/sfd_list.jsp</result>
