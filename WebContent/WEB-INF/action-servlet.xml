@@ -158,6 +158,10 @@
 	
 	<bean id="wxrkdAction" class="com.sw.cms.action.WxrkdAction" autowire="byName" scope="prototype"/>
 	
+	<bean id="bfdAction" class="com.sw.cms.action.BfdAction" autowire="byName" scope="prototype"/>
+	
+	<bean id="hjdAction" class="com.sw.cms.action.HjdAction" autowire="byName" scope="prototype"/>
+	
 	 <bean id="sfdAction" class="com.sw.cms.action.SfdAction" scope="prototype" autowire="byName"/>
 	 
 	 <bean id="pgdAction" class="com.sw.cms.action.PgdAction" autowire="byName" scope="prototype"/>
