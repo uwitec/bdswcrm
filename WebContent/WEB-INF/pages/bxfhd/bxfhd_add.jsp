@@ -14,30 +14,29 @@ if(bxfhdProducts != null && bxfhdProducts.size()>0){
 	counts = bxfhdProducts.size() - 1;
 }
 
- 
  List msg = (List)session.getAttribute("messages");
 session.removeAttribute("messages");
 %>
 <html>
 <head>
-<title>报修返还单修改</title>
+<title>报修返还单管理</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
-<script language="JavaScript" src="js/Check.js"></script>
-<script language='JavaScript' src="js/date.js"></script>
-<script language='JavaScript' src="js/nums.js"></script>
+<script language='JavaScript' src='js/Check.js'></script>
+<script language='JavaScript' src='js/date.js'></script>
+<script language='JavaScript' src='js/nums.js'></script>
 <script type='text/javascript' src='dwr/interface/dwrService.js'></script>
 <script type='text/javascript' src='dwr/engine.js'></script>
 <script type='text/javascript' src='dwr/util.js'></script>
-<script type="text/javascript" src="js/prototype-1.4.0.js"></script>
-<script type='text/javascript' src="js/selJsr.js"></script>
-<script language='JavaScript' src="js/selClient.js"></script>
-<script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
+<script type='text/javascript' src='js/prototype-1.4.0.js'></script>
+<script type='text/javascript' src='js/selJsr.js'></script>
+<script language='JavaScript' src='js/selClient.js'></script>
+
 <style>
 	.selectTip{background-color:#009;color:#fff;}
 </style>
 <script type="text/javascript">
-
+  
 	var allCount = <%=counts %>;
 	
 	function saveInfo(vl){ 
@@ -151,7 +150,7 @@ session.removeAttribute("messages");
 		
         var otd0=document.createElement("td");
         otd0.className = "a2";
-        otd0.innerHTML = '<input type="text" id="product_name_'+curId+'" name="bxfhdProducts['+curId+'].product_name" style="width:100%" readonly><input type="hidden" id="product_id_'+curId+'" name="lsdProducts['+curId+'].product_id">';
+        otd0.innerHTML = '<input type="text" id="product_name_'+curId+'" name="bxfhdProducts['+curId+'].product_name" style="width:100%" readonly><input type="hidden" id="product_id_'+curId+'" name="bxfhdProducts['+curId+'].product_id">';
         
         var otd1 = document.createElement("td");
         otd1.className = "a2";
@@ -159,31 +158,31 @@ session.removeAttribute("messages");
 
         var otd4 = document.createElement("td");
         otd4.className = "a2";
-        otd4.innerHTML = '<input type="text" id="store_id_'+curId+'" name="bxfhdProducts['+curId+'].store_id" value="坏件库" size="7" style="width:100%"  readonly>';
+        otd4.innerHTML = '<input type="text" id="store_id_'+curId+'" name="bxfhdProducts['+curId+'].store_id" value="好件库" size="7" style="width:100%"  readonly>';
         
         var otd5 = document.createElement("td");
         otd5.className = "a2";
-        otd5.innerHTML = '<input type="text" id="price_'+curId+'" name="bxfhdProducts['+curId+'].price" value="0.00" size="5" style="width:100%" readonly>';
+        otd5.innerHTML = '<input type="text" id="price_'+curId+'" name="bxfhdProducts['+curId+'].price" value="0.00" size="5" style="width:100%" onblur="hj()">';
         
         var otd7 = document.createElement("td");
-        otd5.className = "a2";
-        otd5.innerHTML = '<input type="text" id="nums_'+curId+'" name="bxdProducts['+curId+'].nums" value="0" size="5" style="width:100%" readonly onblur="setNum('+curId+')">';
+        otd7.className = "a2";
+        otd7.innerHTML = '<input type="text" id="nums_'+curId+'" name="bxfhdProducts['+curId+'].nums" value="0" size="5" style="width:100%"  onblur="hj()">';
         
         var otd8 = document.createElement("td");
-        otd5.className = "a2";
-        otd5.innerHTML = '<input type="text" id="xj_'+curId+'" name="bxfhdProducts['+curId+'].xj" value="0.00" size="5" style="width:100%" readonly>';
+        otd8.className = "a2";
+        otd8.innerHTML = '<input type="text" id="xj_'+curId+'" name="bxfhdProducts['+curId+'].totalmoney" value="0.00" size="5" style="width:100%" readonly>';
                
         var otd9 = document.createElement("td");
         otd9.className = "a2";
-        otd9.innerHTML = '<input type="text" id="qz_serial_num_'+curId+'" name="bxfhdProducts['+curId+'].qz_serial_num" size="15" readonly><input type="hidden" id="qz_flag_'+curId+'" name="bxdProducts['+curId+'].qz_flag"><a style="cursor:hand" title="点击输入序列号" onclick="openSerialWin('+ curId +');"><b>...</b></a>&nbsp;';   
+        otd9.innerHTML = '<input type="text" id="qz_serial_num_'+curId+'" name="bxfhdProducts['+curId+'].qz_serial_num" size="11" readonly><input type="hidden" id="qz_flag_'+curId+'" name="bxfhdProducts['+curId+'].qz_flag"><a style="cursor:hand" title="点击输入序列号" onclick="openSerialWin('+ curId +');"><b>...</b></a>&nbsp;';   
         
         var otd11 = document.createElement("td");
         otd11.className = "a2";
-        otd11.innerHTML = '<input type="text" id="cpfj_'+curId+'"  name="bxfhdProducts['+curId+'].cpfj" size="15"  style="width:100%" readonly>';
+        otd11.innerHTML = '<input type="text" id="cpfj_'+curId+'"  name="bxfhdProducts['+curId+'].cpfj" size="15"  style="width:100%" >';
 
         var otd6 = document.createElement("td");
         otd6.className = "a2";
-        otd6.innerHTML = '<input type="text" id="remark_'+curId+'" name="bxfhdProducts['+curId+'].remark" style="width:100%"  readonly>';                       
+        otd6.innerHTML = '<input type="text" id="remark_'+curId+'" name="bxfhdProducts['+curId+'].remark" style="width:100%"  >';                       
 	
 		otr.appendChild(otd); 
         otr.appendChild(otd0); 
@@ -394,11 +393,13 @@ session.removeAttribute("messages");
 		hjje.value = hjz.toFixed(2);		
 		ssje.value = hjz.toFixed(2);	
 	}
+	
+
 </script>
 
 </head>
 <body onload="initFzrTip();initClientTip();">
-<form name="bxfhdForm" action="updateBxfhd.html" method="post">
+<form name="bxfhdForm" action="savebxfhd.html" method="post">
 <input type="hidden" name="bxfhd.state" id="state" value="">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
@@ -428,23 +429,23 @@ session.removeAttribute("messages");
 		</td>		
 	</tr>
 	<tr>		 
-		<td class="a1" width="15%">报修单位</td>
+		<td class="a1" width="20%">报修单位</td>
 		<td class="a2">
-		<input type="text" name="bxfhd.bxcs_id" id="client_name" value="<%=StaticParamDo.getClientNameById(StringUtils.nullToStr(bxfhd.getBxcs())) %>" size="30" maxlength="50"  onblur="setClientValue();">
-		<input type="hidden" name="bxfhd.bxcs" id="client_id" value="<%=StringUtils.nullToStr(bxfhd.getBxcs()) %>">
+		<input type="text" name="bxfhd.bxcs_id" id="client_name" value="" size="40" maxlength="60"  onblur="setClientValue();">
+		<input type="hidden" name="bxfhd.bxcs" id="client_id" value="">
 		<!--<img src="images/select.gif" align="absmiddle" title="选择客户" border="0" onclick="openProvider();" style="cursor:hand">
 			--><div id="clientsTip" style="height:12px;position:absolute;left:150px; top:85px; width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 			<font color="red">*</font>
 		</td>	
 		<td class="a1" width="15%">经手人</td>
 		<td class="a2" width="35%">
-		 <input id="brand" type="text" ength="20" onblur="setValue();" value="<%=StaticParamDo.getRealNameById(StringUtils.nullToStr(bxfhd.getJsr())) %>" /> 
+		 <input id="brand" type="text" ength="20" onblur="setValue();" /> 
          <!--<img src="images/select.gif" align="absmiddle" title="选择经手人" border="0" onclick="openywyWin();" style="cursor:hand">
           --><div   id="brandTip"  style="height:12px;position:absolute;left:610px; top:85px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
           </div>
-		  <input type="hidden" name="bxfhd.jsr" id="fzr" value="<%=bxfhd.getJsr()%>"/> <font color="red">*</font>	
+		  <input type="hidden" name="bxfhd.jsr" id="fzr"/> <font color="red">*</font>	
 		</td>
-	</tr>	
+	</tr>
 </table>
 <br>
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
@@ -452,19 +453,25 @@ session.removeAttribute("messages");
 	<tr>
 		<td colspan="2">产品详细信息</td>
 	</tr>
-	</thead>	
+	</thead>
+	<tr height="35">
+		<td class="a2" colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;输入序列号：<input type="text" name="s_nums" value="" onkeypress="javascript:f_enter()">
+			注：输入产品序列号回车，可自动提取产品信息到产品列表中
+		</td>
+	</tr>	
 </table>
 <table width="100%"  align="center" id="bxfhdtable"  class="chart_list" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-	    <td width="15%">产品名称</td>	
-		<td width="15%">产品规格</td>
-		<td width="6%">仓库</td>
-		<td width="5%">单价</td>
-		<td width="4%">数量</td>	
-		<td width="5%">小计</td>
-		<td width="12%">强制序列号</td>
-		<td width="15%">产品附件</td>
+	    <td width="2%">选择</td>
+	    <td width="17%">产品名称</td>	
+		<td width="13%">产品规格</td>
+		<td width="3%">仓库</td>
+		<td width="7%">单价</td>
+		<td width="6%">数量</td>	
+		<td width="8%">小计</td>
+		<td width="15%">强制序列号</td>
+		<td width="14%">产品附件</td>
 		<td width="15%">备注</td>		
 	</tr>
 	</thead>
@@ -480,7 +487,7 @@ session.removeAttribute("messages");
 		   }
  %>
 	<tr>
-	            
+	            <td class="a2"><input type="checkbox" name="proc_id" id="proc_id" value="<%=i %>"></td>
 				<td class="a2">
 					<input type="text" id="product_name_<%=i %>" name="bxfhdProducts[<%=i %>].product_name" value="<%=StringUtils.nullToStr(bxfhdProduct.getProduct_name()) %>" style="width:100%" readonly>
 					<input type="hidden" id="product_id_<%=i %>" name="bxfhdProducts[<%=i %>].product_id" value="<%=StringUtils.nullToStr(bxfhdProduct.getProduct_id()) %>">
@@ -498,10 +505,10 @@ session.removeAttribute("messages");
 	                kf="好件库";
 	               }
 	            %>			    
-					<input type="text" id="store_id" name="store_id" value="<%=kf %>" size="7"  style="width:100%" readonly>					 
+					<input type="text" id="store_id" name="store_id" value="<%=kf %>" size="5"  style="width:100%" readonly>					 
 				</td>
-				<td class="a2"><input type="text" id="price_<%=i %>" name="bxfhdProducts[<%=i %>].price" value="<%=JMath.round(bxfhdProduct.getPrice()) %>" size="7" style="width:100%" onblur="hj();">
-				<td class="a2"><input type="text" id="nums_<%=i %>" name="bxfhdProducts[<%=i %>].nums" value="<%=bxfhdProduct.getNums() %>" size="5" onblur="hj();"  style="width:100%" readonly></td>		 
+				<td class="a2"><input type="text" id="price_<%=i %>" name="bxfhdProducts[<%=i %>].price" value="<%=JMath.round(bxfhdProduct.getPrice()) %>" size="10" style="width:100%" onblur="hj();"  ></td>
+				<td class="a2"><input type="text" id="nums_<%=i %>" name="bxfhdProducts[<%=i %>].nums" value="<%=bxfhdProduct.getNums() %>" size="5" onblur="hj();"  style="width:100%"  ></td>		 
 				<td class="a2"><input type="text" id="xj_<%=i %>" name="bxfhdProducts[<%=i %>].totalmoney" value="<%=JMath.round(bxfhdProduct.getTotalmoney()) %>" size="7" style="width:100%" readonly></td>
 				<td class="a2">
 			        <input type="text" id="qz_serial_num_<%=i %>" name="bxfhdProducts[<%=i %>].qz_serial_num" value="<%=StringUtils.nullToStr(bxfhdProduct.getQz_serial_num()) %>" size="10" readonly>
@@ -514,24 +521,60 @@ session.removeAttribute("messages");
 <%
 }
  }
+else
+{ 
+	for(int i=0;i<3;i++)
+	{
+		%>
+			<tr>
+			    <td class="a2"><input type="checkbox" name="proc_id" id="proc_id" value="<%=i %>"></td>
+				<td class="a2">
+					<input type="text" id="product_name_<%=i %>" name="bxfhdProducts[<%=i %>].product_name"  >
+					<input type="hidden" id="product_id_<%=i %>" name="bxfhdProducts[<%=i %>].product_id">
+				</td>
+				<td class="a2"><input type="text" id="product_xh_<%=i %>" name="bxfhdProducts[<%=i %>].product_xh" size="15"  ></td>	
+				<td class="a2">					
+					<input type="text" id="store_id" name="store_id" value="好件库" size="7" readonly>				 
+				</td>
+				<td class="a2"><input type="text" id="price_<%=i %>" name="bxfhdProducts[<%=i %>].price" value="0.00" size="7" style="width:100% " onblur="hj();">
+				<td class="a2"><input type="text" id="nums_<%=i %>" name="bxfhdProducts[<%=i %>].nums" value="0" size="5" onblur="hj();"  style="width:100%" ></td>		 
+				<td class="a2"><input type="text" id="xj_<%=i %>" name="bxfhdProducts[<%=i %>].totalmoney" value="0.00" size="7" style="width:100%" readonly></td>	 
+				
+				<td class="a2">
+			        <input type="text" id="qz_serial_num_<%=i %>" name="bxfhdProducts[<%=i %>].qz_serial_num"  size="10" readonly>
+			        <input type="hidden" id="qz_flag_<%=i %>" name="bxfhdProducts[<%=i %>].qz_flag"> <a style="cursor:hand" title="左键点击输入输列号" onclick="openSerialWin('<%=i %>');"><b>...</b></a>&nbsp;
+				</td>				
+				
+				<td class="a2"><input type="text" id="cpfj_<%=i %>" name="bxfhdProducts[<%=i %>].cpfj" size="15"  style="width:100%"></td>	
+				<td class="a2"><input type="text" id="remark_<%=i %>" name="bxfhdProducts[<%=i %>].remark"  style="width:100%"></td>				
+			</tr>
+		<%
+	}
+}
 %>	
 
 </table>
 <table width="100%"  align="center" class="chart_info" cellpadding="0" cellspacing="0">
+  <tr height="35">
+		<td class="a2" colspan="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="button" name="button1" value="添加产品" class="css_button3" onclick="openWin();">
+			<input type="button" name="button8" value="清除产品" class="css_button3" onclick="delDesc();">
+		</td>	 
+	</tr>
     <tr height="35">	
 		<td class="a1">合计金额</td>
-		<td class="a2" colspan="3">
+		<td class="a2">
 			<input type="text" name="bxfhd.hjje" id="hjje" value="<%=JMath.round(bxfhd.getHjje()) %>" readonly>
 		</td>
 		<td class="a1">本次实付金额</td>
 		<td class="a2">
-			<input type="text" name="bxfhd.ssje" id="ssje" value="<%=JMath.round(bxfhd.getSsje()) %>" ><font color="red">*</font>
+			<input type="text" name="bxfhd.ssje" id="ssje" value="<%=JMath.round(bxfhd.getSsje()) %>" >
 		</td>		
 	</tr>
 			
 	<tr>
-		<td class="a1" widht="20%">收款账户</td>
-		<td class="a2"><input type="text" id="zhname"  name="zhname" value="<%=StaticParamDo.getAccountNameById(StringUtils.nullToStr(bxfhd.getFkzh())) %>" readonly>
+		<td class="a1" widht="20%">付款账户</td>
+		<td class="a2" ><input type="text" id="zhname"  name="zhname" value="<%=StaticParamDo.getAccountNameById(StringUtils.nullToStr(bxfhd.getFkzh())) %>" readonly>
 		<input type="hidden" id="skzh"  name="bxfhd.fkzh" value="<%=StringUtils.nullToStr(bxfhd.getFkzh()) %>">
 		<img src="images/select.gif" align="absmiddle" title="选择账户" border="0" onclick="openAccount();" style="cursor:hand"><font color="red">*</font>
 		</td>
