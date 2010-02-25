@@ -46,7 +46,20 @@ public class BxdService {
 		{
 			   //修改库存状态为2：在外库		
 			this.addBxd(bxd,bxdProducts);
-			shkcDao.updateShkcState(bxdProducts, "2");								
+			if(bxdProducts != null && bxdProducts.size()>0)
+			{
+				for(int i=0;i<bxdProducts.size();i++)
+				{
+					BxdProduct bxdProduct = (BxdProduct)bxdProducts.get(i);
+					if(bxdProduct != null)
+					{
+						if(!bxdProduct.getProduct_id().equals("") && !bxdProduct.getProduct_name().equals(""))
+						{
+                          shkcDao.updateShkcState(bxdProduct, "2");
+						}
+					}
+				}
+			}
 		}
 	}
 	
@@ -120,7 +133,20 @@ public class BxdService {
 		{
 		       //修改库存状态为2：在外库
 			this.addBxd(bxd,bxdProducts);
-			shkcDao.updateShkcState(bxdProducts, "2");			
+			if(bxdProducts != null && bxdProducts.size()>0)
+			{
+				for(int i=0;i<bxdProducts.size();i++)
+				{
+					BxdProduct bxdProduct = (BxdProduct)bxdProducts.get(i);
+					if(bxdProduct != null)
+					{
+						if(!bxdProduct.getProduct_id().equals("") && !bxdProduct.getProduct_name().equals(""))
+						{
+                          shkcDao.updateShkcState(bxdProduct, "2");
+						}
+					}
+				}
+			}			
 		}
 	}
 	

@@ -7,6 +7,8 @@ import com.sw.cms.dao.ShSerialNumFlowDAO;
 import com.sw.cms.dao.ShkcDAO;
 import com.sw.cms.model.Jjd;
 import com.sw.cms.model.JjdProduct;
+import com.sw.cms.model.Kfdb;
+import com.sw.cms.model.KfdbProduct;
 import com.sw.cms.model.Page;
 import com.sw.cms.model.ShSerialNumFlow;
 import com.sw.cms.model.Shkc;
@@ -58,9 +60,10 @@ public class JjdService {
 		if(jjd.getState().equals("已提交"))
 		{
 			saveShkc(jjd,jjdProducts);//把接件单商品保存到售后库存并且保存售后序列号流转记录
-			shkcDao.insertJjShkcState(jjdProducts, "1");
+			shkcDao.insertJjShkcState(jjdProducts, "1");			
 		}
 	}
+	
 	/**
 	 * 修改接件单信息
 	 * @param jjd
