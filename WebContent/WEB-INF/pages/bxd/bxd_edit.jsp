@@ -39,7 +39,14 @@ session.removeAttribute("messages");
 <script type="text/javascript">
 var allCount = <%=counts %>;
 	
-	function saveInfo(){	
+	function saveInfo(vl){ 
+
+		if(vl == '1'){
+			document.getElementById("state").value = "已保存";
+		}else{
+			document.getElementById("state").value = "已提交";
+		}	
+			
 	   if(document.getElementById("client_name").value == ""){
 			alert("报修单位不能为空，请填写！");
 			return;
@@ -339,6 +346,7 @@ var allCount = <%=counts %>;
 </head>
 <body onload="initFzrTip();initClientTip();">
 <form name="bxdForm" action="updateBxd.html" method="post">
+<input type="hidden" name="bxd.state" id="state" value="">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
@@ -384,16 +392,7 @@ var allCount = <%=counts %>;
 		  <input type="hidden" name="bxd.jsr" id="fzr" value="<%=bxd.getJsr()%>"/> <font color="red">*</font>	
 		</td>
 	</tr>
-	<tr>
-		<td class="a1" width="15%">报修单状态</td>
-		<td class="a2" width="35%" colspan="3">
-			<select name="bxd.state" id="state" >
-				<option value="已保存" <%if(StringUtils.nullToStr(bxd.getState()).equals("已保存")) out.print("selected"); %>>已保存</option>
-				<option value="已提交" <%if(StringUtils.nullToStr(bxd.getState()).equals("已提交")) out.print("selected"); %>>已提交</option>
-			</select><font color="red">*</font>		
-		</td>						
-	</tr>
-	 
+	
 </table>
 <br>
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
@@ -473,12 +472,15 @@ var allCount = <%=counts %>;
 	</tr>			
 	<tr height="35">
 		<td class="a1" colspan="4">
-			<input type="button" name="btnSub" value="确 定" class="css_button2" onclick="saveInfo();">&nbsp;&nbsp;&nbsp;&nbsp;				 
-			<input type="reset" name="button2" value="重 置" class="css_button2">&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="button" name="btnSave" value="草稿" class="css_button2" onclick="saveInfo('1');">&nbsp;&nbsp;&nbsp;&nbsp;	
+			<input type="button" name="btnSub" value="提交" class="css_button2" onclick="saveInfo('2');">&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="reset" name="button2" value="关 闭" class="css_button2" onclick="window.opener.document.myform.submit();window.close();">
 		</td>
 	</tr>
 </table>
+<BR>
+<font color="red">注：“草稿”指报修单暂存，可修改；“提交”后报修单不可修改，如需审批则直接提交审批。</font>
+<BR><BR>
 </form>
 </BODY>
 </HTML>
