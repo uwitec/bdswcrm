@@ -49,7 +49,14 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 
 	var allCount = 2;
 	
-	function saveInfo(){
+	function saveInfo(vl){ 
+
+		if(vl == '1'){
+			document.getElementById("state").value = "已保存";
+		}else{
+			document.getElementById("state").value = "已提交";
+		}	
+		
 		if(document.getElementById("id").value == ""){
 			alert("编号不能为空！");
 			return;
@@ -104,7 +111,7 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 
       	
     function addTr(){
-        var otr = document.getElementById("kfdbTable").insertRow(-1);
+        var otr = document.getElementById("ykckTable").insertRow(-1);
 
        // var curId = ($('xsdtable').rows.length-2);
         var curId = allCount + 1;   //curId一直加下去，防止重复
@@ -262,6 +269,7 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 </head>
 <body onload="initFzrTip();">
 <form name="YkckForm" action="saveYkck.html" method="post">
+<input type="hidden" name="ykck.state" id="state" value="">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
@@ -306,17 +314,6 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 		</td>
 		 
 	</tr>
-	 
-	<tr>			
-		
-		<td class="a1">状态</td>
-		<td class="a2" colspan="3">
-			<select name="ykck.state" id="state">
-				<option value="已保存">已保存</option>
-				<option value="已提交">已提交</option>
-			</select>			
-		</td>			
-	</tr>
 </table>
 <br>
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
@@ -332,7 +329,7 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 		</td>
 	</tr>		
 </table>
-<table width="100%"  align="center" id="kfdbTable"  class="chart_list" cellpadding="0" cellspacing="0">	
+<table width="100%"  align="center" id="ykckTable"  class="chart_list" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
 		<td>产品名称</td>
@@ -389,14 +386,16 @@ for(int i=0;i<3;i++){
 		</td>
 	</tr>	
 	<tr height="35">
-		<td class="a1" colspan="2">
-			<input type="button" name="button1" value="提 交" class="css_button2" onclick="saveInfo();">&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="reset" name="button2" value="重 置" class="css_button2">&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="button" name="button3" value="关 闭" class="css_button2" onclick="window.close();">
+		<td class="a1" colspan="4">
+			<input type="button" name="btnSave" value="草稿" class="css_button2" onclick="saveInfo('1');">&nbsp;&nbsp;&nbsp;&nbsp;	
+			<input type="button" name="btnSub" value="提交" class="css_button2" onclick="saveInfo('2');">&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="reset" name="button2" value="关 闭" class="css_button2" onclick="window.opener.document.myform.submit();window.close();">
 		</td>
 	</tr>
 </table>
-
+<BR>
+<font color="red">注：“草稿”指移库出库单暂存，可修改；“提交”后移库出库单不可修改，如需审批则直接提交审批。</font>
+<BR><BR>
 </form>
 </body>
 </html>

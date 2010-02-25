@@ -41,7 +41,14 @@ if(ykckProducts!=null && ykckProducts.size()>0){
 <script type="text/javascript">
 	var allCount = <%=count %>;
 	
-	function saveInfo(){
+	function saveInfo(vl){ 
+
+		if(vl == '1'){
+			document.getElementById("state").value = "已保存";
+		}else{
+			document.getElementById("state").value = "已提交";
+		}
+		
 		if(document.getElementById("id").value == ""){
 			alert("编号不能为空！");
 			return;
@@ -255,6 +262,7 @@ if(ykckProducts!=null && ykckProducts.size()>0){
 </head>
 <body onload="initFzrTip();">
 <form name="ykckForm" action="updateYkck.html" method="post">
+<input type="hidden" name="ykck.state" id="state" value="">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
@@ -313,17 +321,6 @@ if(!msg.equals("")){
             <div   id="brandTip"  style="height:12px;position:absolute;left:146px; top:141px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		    <input type="hidden" name="ykck.jsr" id="fzr" value="<%=ykck.getJsr()%>"/> <font color="red">*</font>	
 		</td>
-	</tr>
-	 
-	<tr>			
-		
-		<td class="a1">状态</td>
-		<td class="a2" colspan="3">
-			<select name="ykck.state" id="state">
-				<option value="已保存"  <%if(StringUtils.nullToStr(ykck.getState()).equals("已保存")) out.print("selected"); %>>已保存</option>
-				<option value="已提交" <%if(StringUtils.nullToStr(ykck.getState()).equals("已提交")) out.print("selected"); %>>已提交</option>
-			</select>			
-		</td>			
 	</tr>
 </table>
 <br>
@@ -419,18 +416,20 @@ if(ykckProducts!=null && ykckProducts.size()>0){
 	<tr>
 		<td class="a1" width="15%">备注</td>
 		<td class="a2" width="85%">
-			<textarea rows="6" name="ykck.remark" id="remark" style="width:75%" maxlength="500"></textarea>
+			<textarea rows="6" name="ykck.remark" id="remark" style="width:75%" maxlength="500"><%=StringUtils.nullToStr(ykck.getRemark()) %></textarea>
 		</td>
 	</tr>	
 	<tr height="35">
-		<td class="a1" colspan="2">
-			<input type="button" name="button1" value="提 交" class="css_button2" onclick="saveInfo();">&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="reset" name="button2" value="重 置" class="css_button2">&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="button" name="button3" value="关 闭" class="css_button2" onclick="opener.document.myform.submit();window.close();">
+		<td class="a1" colspan="4">
+			<input type="button" name="btnSave" value="草稿" class="css_button2" onclick="saveInfo('1');">&nbsp;&nbsp;&nbsp;&nbsp;	
+			<input type="button" name="btnSub" value="提交" class="css_button2" onclick="saveInfo('2');">&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="reset" name="button2" value="关 闭" class="css_button2" onclick="window.opener.document.myform.submit();window.close();">
 		</td>
 	</tr>
 </table>
-
+<BR>
+<font color="red">注：“草稿”指移库出库单暂存，可修改；“提交”后移库出库单不可修改，如需审批则直接提交审批。</font>
+<BR><BR>
 </form>
 </body>
 </html>
