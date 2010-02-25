@@ -37,7 +37,14 @@ session.removeAttribute("messages");
 </style>
 <script type="text/javascript">	  
     var allCount = <%=counts %>;	
-	function saveInfo(){	
+	function saveInfo(vl){ 
+
+		if(vl == '1'){
+			document.getElementById("state").value = "已保存";
+		}else{
+			document.getElementById("state").value = "已提交";
+		}		
+			
 	    if(document.getElementById("client_name").value == ""){
 			alert("客户名称不能为空，请填写！");
 			return;
@@ -161,7 +168,7 @@ session.removeAttribute("messages");
         
         var otd8 = document.createElement("td");
         otd8.className = "a2";
-        otd8.innerHTML = '<input type="text" id="totalmoney_'+curId+'" name="fhkhdProducts['+curId+'].totalmoney" value="0.00" size="5" style="width:100%" readonly>';
+        otd8.innerHTML = '<input type="text" id="xj_'+curId+'" name="fhkhdProducts['+curId+'].totalmoney" value="0.00" size="5" style="width:100%" readonly>';
                
         var otd9 = document.createElement("td");
         otd9.className = "a2";
@@ -384,6 +391,7 @@ session.removeAttribute("messages");
 </head>
 <body onload="initFzrTip();initClientTip();">
 <form name="fhkhdForm" action="saveFhkhd.html" method="post">
+<input type="hidden" name="fhkhd.state" id="state" value="">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
@@ -434,14 +442,7 @@ session.removeAttribute("messages");
 			<input id="brand" type="text" length="20" onblur="setValue()" value="<%=StaticParamDo.getRealNameById(fhkhd.getJsr()) %>"/> 
 			<div id="brandTip"  style="height:12px;position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 			<input type="hidden" name="fhkhd.jsr" id="fzr" value="<%=StringUtils.nullToStr(fhkhd.getJsr())%>"/><font color="red">*</font>	          
-		</td>
-		<td class="a1" width="15%">返还客户单状态</td>
-		<td class="a2" width="35%" colspan="3">
-			<select name="fhkhd.state" id="state">
-				<option value="已保存" <%if(StringUtils.nullToStr(fhkhd.getState()).equals("已保存")) out.print("selected"); %>>已保存</option>
-				<option value="已提交" <%if(StringUtils.nullToStr(fhkhd.getState()).equals("已提交")) out.print("selected"); %>>已提交</option>
-			</select><font color="red">*</font>		
-		</td>						
+		</td>			
 	</tr>
 	 
 </table>
@@ -580,12 +581,15 @@ else
 	</tr>			
 	<tr height="35">
 		<td class="a1" colspan="4">
-			<input type="button" name="btnSub" value="确 定" class="css_button2" onclick="saveInfo();">&nbsp;&nbsp;&nbsp;&nbsp;				 
-			<input type="reset" name="button2" value="重 置" class="css_button2">&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="button" name="btnSave" value="草稿" class="css_button2" onclick="saveInfo('1');">&nbsp;&nbsp;&nbsp;&nbsp;	
+			<input type="button" name="btnSub" value="提交" class="css_button2" onclick="saveInfo('2');">&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="reset" name="button2" value="关 闭" class="css_button2" onclick="window.opener.document.myform.submit();window.close();">
 		</td>
 	</tr>
 </table>
+<BR>
+<font color="red">注：“草稿”指返还客户单暂存，可修改；“提交”后返还客户单不可修改，如需审批则直接提交审批。</font>
+<BR><BR>
 
 </form>
 </BODY>
