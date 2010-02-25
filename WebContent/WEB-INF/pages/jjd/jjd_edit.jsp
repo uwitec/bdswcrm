@@ -40,7 +40,13 @@ session.removeAttribute("messages");
 	  
 	var allCount = <%=counts %>;
 		
-	function saveInfo(){
+	function saveInfo(vl){ 
+
+		if(vl == '1'){
+			document.getElementById("state").value = "已保存";
+		}else{
+			document.getElementById("state").value = "已提交";
+		}	
 	     
 		if(document.getElementById("fzr").value == ""){
 			alert("接件人不能为空，请选择！");
@@ -326,17 +332,12 @@ session.removeAttribute("messages");
 			alert("该序列号不存在，请检查!");
 		}
 	}	
-	
-	 
-		 
- 
-	
-	 
 </script>
 
 </head>
 <body onload="initFzrTip();initClientTip();">
 <form name="jjdForm" action="updateJjd.html" method="post">
+<input type="hidden" name="jjd.state" id="state" value="">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
@@ -378,16 +379,8 @@ session.removeAttribute("messages");
 			<input id="brand" type="text" length="20" onblur="setValue()" value="<%=StaticParamDo.getRealNameById(jjd.getJjr()) %>"/> 
 			<div id="brandTip"  style="height:12px;position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 			<input type="hidden" name="jjd.jjr" id="fzr" value="<%=StringUtils.nullToStr(jjd.getJjr())%>"/><font color="red">*</font>	          
-		</td>
-		<td class="a1" width="15%">接件单状态</td>
-		<td class="a2" width="35%" colspan="3">
-			<select name="jjd.state" id="state">
-				<option value="已保存" <%if(StringUtils.nullToStr(jjd.getState()).equals("已保存")) out.print("selected"); %>>已保存</option>
-				<option value="已提交" <%if(StringUtils.nullToStr(jjd.getState()).equals("已提交")) out.print("selected"); %>>已提交</option>
-			</select><font color="red">*</font>		
-		</td>						
+		</td>			
 	</tr>
-	 
 </table>
 <br>
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
@@ -487,12 +480,15 @@ session.removeAttribute("messages");
 	</tr>			
 	<tr height="35">
 		<td class="a1" colspan="4">
-			<input type="button" name="btnSub" value="确 定" class="css_button2" onclick="saveInfo();">&nbsp;&nbsp;&nbsp;&nbsp;				 
-			<input type="reset" name="button2" value="重 置" class="css_button2">&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="button" name="btnSave" value="草稿" class="css_button2" onclick="saveInfo('1');">&nbsp;&nbsp;&nbsp;&nbsp;	
+			<input type="button" name="btnSub" value="提交" class="css_button2" onclick="saveInfo('2');">&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="reset" name="button2" value="关 闭" class="css_button2" onclick="window.opener.document.myform.submit();window.close();">
 		</td>
 	</tr>
 </table>
+<BR>
+<font color="red">注：“草稿”指接件单暂存，可修改；“提交”后接件单不可修改，如需审批则直接提交审批。</font>
+<BR><BR>
 </form>
 </BODY>
 </HTML>
