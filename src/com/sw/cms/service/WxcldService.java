@@ -71,7 +71,7 @@ public class WxcldService
 			   jjd.setCjr(wxcld.getW_cjr());
 			   jjd.setJjr(wxcld.getW_wxr());
 			   jjd.setState("ÒÑ±£´æ");
-			   jjd.setAddress(wxcld.getW_address());
+			   
 			   jjd.setClient_name(wxcld.getW_client_name());
 			   jjd.setLinkman(wxcld.getW_linkman());
 			   jjd.setMobile(wxcld.getW_mobile());

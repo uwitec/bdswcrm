@@ -24,6 +24,10 @@ public class SfdService
    public void  saveSfd(Sfd sfd)
    {
 	   sfdDao.saveSfd(sfd);
+	   if(sfd.getState().equals("已提交")&&sfd.getWx_state().equals("已处理"))
+	   {
+		sfdDao.updateSfdJddate(sfd);
+	   }
 	   if(sfd.getState().equals("已提交")&&sfd.getWx_state().equals("待处理"))
 	   {
 		   Pgd pgd=new Pgd();
@@ -50,6 +54,10 @@ public class SfdService
    public void updateSfd(Sfd sfd)
    {
 	   sfdDao.updateSfd(sfd);
+	   if(sfd.getState().equals("已提交")&&sfd.getWx_state().equals("已处理"))
+	   {
+		sfdDao.updateSfdJddate(sfd);
+	   }
 	   if(sfd.getState().equals("已提交")&&sfd.getWx_state().equals("待处理"))
 	   {
 		   Pgd pgd=new Pgd();
