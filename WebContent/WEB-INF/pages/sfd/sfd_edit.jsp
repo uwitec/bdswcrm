@@ -14,7 +14,7 @@ String user_id = info.getUser_id();
 
 <html>
 <head>
-<title>售后服务单添加</title>
+<title>售后服务单编辑</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript" src="js/Check.js"></script>
@@ -27,6 +27,7 @@ String user_id = info.getUser_id();
 <script type='text/javascript' src='dwr/interface/dwrService.js'></script>
 <script type='text/javascript' src='dwr/engine.js'></script>
 <script type='text/javascript' src='dwr/util.js'></script>
+<script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
 <style>
 	.selectTip{background-color:#009;color:#fff;}
 </style>
@@ -34,7 +35,14 @@ String user_id = info.getUser_id();
 
 	var allCount = 2;
 	
-	function saveInfo(){
+	function saveInfo(vl){ 
+
+		if(vl == '1'){
+			document.getElementById("state").value = "已保存";
+		}else{
+			document.getElementById("state").value = "已提交";
+		}	
+	      
 		if(document.getElementById("id").value == ""){
 			alert("编号不能为空！");
 			return;
@@ -61,10 +69,7 @@ String user_id = info.getUser_id();
 			alert("求助方式不能为空，请选择！");
 			return;
 		}
-		if(document.getElementById("state").value == ""){
-			alert("状态不能为空，请选择！");
-			return;
-		}	
+		
 		if(document.getElementById("wx_state").value == ""){
 			alert("维修状态不能为空，请选择！");
 			return;
@@ -74,20 +79,24 @@ String user_id = info.getUser_id();
 			return;
 		}	
 		
-		 					
-	
-		document.sfdForm.submit();
+		if(document.getElementById("state").value == "已提交"){
+			if(window.confirm("确认要提交售后服务单吗，提交后将无法修改！")){				
+				document.sfdForm.submit();		
+			}
+ 	     }
+	     else
+	     { 
+	         document.sfdForm.submit();	
+	     }
+	     document.sfdForm.btnSave.disabled = true;
+		 document.sfdForm.btnSub.disabled = true;
 	}
-      	
-   
-     
+      
 	function delTr(i){
 			var tr = i.parentNode.parentNode;
 			tr.removeNode(true);
 			
 	}     
-
-	
 	function openWin(id){  //与退货单使用一个产品选择
 		var destination = "selThdProc.html?openerId="+id;
 		var fea ='width=800,height=500,left=' + (screen.availWidth-800)/2 + ',top=' + (screen.availHeight-500)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
@@ -102,13 +111,12 @@ String user_id = info.getUser_id();
 		
 		window.open(destination,'选择经手人',fea);	
 	}	
-		
 
-	
 </script>
 </head>
 <body onload="initFzrTip();initClientTip()">
 <form name="sfdForm" action="updateSfd.html" method="post">
+<input type="hidden" name="sfd.state" id="state" value="">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
@@ -120,17 +128,10 @@ String user_id = info.getUser_id();
 		<td class="a2" width="35%">
 		<input type="text" name="sfd.id" id="id" value="<%=StringUtils.nullToStr(sfd.getId())%>"  maxlength="50" readonly><font color="red">*</font>
 		</td>
-		 <%
-		String rq = StringUtils.nullToStr(sfd.getJx_date()) ;
-		if(rq.equals("")){
-			rq = DateComFunc.getToday();
-		}
-		%>
 		<td class="a1" width="15%">接待日期</td>
 		<td class="a2" width="35%">
-		 <input type="text" name="sfd.jx_date" id="jx_date" value="<%=rq %>" readonly>
-		<img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.getElementById('jx_date')); return false;">
-		<font color="red">*</font>
+		 <input type="text" name="sfd.jx_date" id="jx_date" value="<%=StringUtils.nullToStr(sfd.getJx_date()) %>" size="15"  class="Wdate" onFocus="WdatePicker()">
+		 <font color="red">*</font>
 		</td>				
 	</tr>
 	<tr>			
@@ -161,7 +162,7 @@ String user_id = info.getUser_id();
 		<td class="a2">
 		   <input  id="brand"  type="text"   length="20"  onblur="setValue()" value="<%=StringUtils.nullToStr(StaticParamDo.getRealNameById(sfd.getJxr())) %>"/> <font color="red">*</font>
            <div  id="brandTip"  style="height:12px;position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
-		   <input type="hidden" name="sfd.jxr" id="fzr" value="<%=StringUtils.nullToStr(sfd.getJxr())%>"/> 		    
+		   <input type="hidden" name="sfd.jxr" id="fzr" value="<%=StringUtils.nullToStr(sfd.getJxr())%>"/> 		      
 		</td>	
 	    <td class="a1" width="15%">求助方式</td>
 		<td class="a2">
@@ -169,17 +170,11 @@ String user_id = info.getUser_id();
 			    <option value=""></option>
 				<option value="电话" <%if(StringUtils.nullToStr(sfd.getQzfs()).equals("电话"))out.print("selected"); %>>电话</option>
 				<option value="带机" <%if(StringUtils.nullToStr(sfd.getQzfs()).equals("带机"))out.print("selected"); %>>带机</option>
-			</select>		  		
+			</select>	
+			<font color="red">*</font> 	  		
 		</td>
 	</tr>
 	<tr>
-		<td class="a1">状态</td>
-		<td class="a2" >
-			<select name="sfd.state" id="state">
-				<option value="已保存" <%if(StringUtils.nullToStr(sfd.getState()).equals("已保存"))out.print("selected"); %>>已保存</option>
-				<option value="已提交" <%if(StringUtils.nullToStr(sfd.getState()).equals("已提交"))out.print("selected"); %>>已提交</option>
-			</select>			
-		</td>
 		<td class="a1">维修状态</td>
 		<td class="a2">
 			<select name="sfd.wx_state" id="wx_state">
@@ -198,12 +193,15 @@ String user_id = info.getUser_id();
 	</tr>				
 	<tr height="35">
 		<td class="a1" colspan="4">
-			<input type="button" name="btnSub" value="提 交" class="css_button2" onclick="saveInfo();">&nbsp;
-			<input type="reset" name="button2" value="重 置" class="css_button2">&nbsp;
-			<input type="button" name="button1" value="关 闭" class="css_button2" onclick="window.close();">
+			<input type="button" name="btnSave" value="草稿" class="css_button2" onclick="saveInfo('1');">&nbsp;&nbsp;&nbsp;&nbsp;	
+			<input type="button" name="btnSub" value="提交" class="css_button2" onclick="saveInfo('2');">&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="reset" name="button2" value="关 闭" class="css_button2" onclick="window.opener.document.myform.submit();window.close();">
 		</td>
 	</tr>
 </table>
+<BR>
+<font color="red">注：“草稿”指售后服务单暂存，可修改；“提交”后售后服务单不可修改，如需审批则直接提交审批。</font>
+<BR><BR>
 </form>
 </body>
 </html>

@@ -26,6 +26,7 @@ String user_id = info.getUser_id();
 <script type='text/javascript' src='dwr/interface/dwrService.js'></script>
 <script type='text/javascript' src='dwr/engine.js'></script>
 <script type='text/javascript' src='dwr/util.js'></script>
+<script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
 <style>
 	.selectTip{background-color:#009;color:#fff;}
 </style>
@@ -33,7 +34,14 @@ String user_id = info.getUser_id();
 
 	var allCount = 2;
 	
-	function saveInfo(){
+	function saveInfo(vl){ 
+
+		if(vl == '1'){
+			document.getElementById("state").value = "已保存";
+		}else{
+			document.getElementById("state").value = "已提交";
+		}	
+	      
 		if(document.getElementById("id").value == ""){
 			alert("编号不能为空！");
 			return;
@@ -60,10 +68,7 @@ String user_id = info.getUser_id();
 			alert("求助方式不能为空，请选择！");
 			return;
 		}
-		if(document.getElementById("state").value == ""){
-			alert("状态不能为空，请选择！");
-			return;
-		}	
+			
 		if(document.getElementById("wx_state").value == ""){
 			alert("维修状态不能为空，请选择！");
 			return;
@@ -72,21 +77,23 @@ String user_id = info.getUser_id();
 			alert("说明不能为空，请选择！");
 			return;
 		}	
-		
-		 					
-	
-		document.sfdForm.submit();
+		if(document.getElementById("state").value == "已提交"){
+			if(window.confirm("确认要提交售后服务单吗，提交后将无法修改！")){				
+				document.sfdForm.submit();		
+			}
+ 	     }
+	     else
+	     { 
+	         document.sfdForm.submit();	
+	     }
+	     document.sfdForm.btnSave.disabled = true;
+		 document.sfdForm.btnSub.disabled = true;
 	}
-      	
-   
-     
      
 	function delTr(i){
 			var tr = i.parentNode.parentNode;
 			tr.removeNode(true);
-			
 	}     
-
 	
 	function openWin(id){  //与退货单使用一个产品选择
 		var destination = "selThdProc.html?openerId="+id;
@@ -188,6 +195,7 @@ String user_id = info.getUser_id();
 </head>
 <body onload="initFzrTip();initClientTip()">
 <form name="sfdForm" action="saveSfd.html" method="post">
+<input type="hidden" name="sfd.state" id="state" value="">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
@@ -207,8 +215,7 @@ String user_id = info.getUser_id();
 		%>
 		<td class="a1" width="15%">接待日期</td>
 		<td class="a2" width="35%">
-		 <input type="text" name="sfd.jx_date" id="jx_date" value="<%=rq%>" readonly>
-		<img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.getElementById('jx_date')); return false;">
+		 <input type="text" name="sfd.jx_date" id="jx_date" value="<%=rq%>" size="15"  class="Wdate" onFocus="WdatePicker()" >		
 		<font color="red">*</font>
 		</td>				
 	</tr>
@@ -228,7 +235,6 @@ String user_id = info.getUser_id();
 		<td class="a1" width="15%">联系电话</td>
 		<td class="a2">
 			<input type="text" name="sfd.mobile" id="mobile" value=""></input>
-				  		
 		</td>	
 		<td class="a1" width="15%">地址</td>
 		<td class="a2" width="35%">
@@ -248,17 +254,11 @@ String user_id = info.getUser_id();
 			    <option value=""></option>
 				<option value="电话" >电话</option>
 				<option value="带机" >带机</option>
-			</select>		  		
+			</select>
+			<font color="red">*</font> 		  		
 		</td>
 	</tr>
 	<tr>
-		<td class="a1">状态</td>
-		<td class="a2" >
-			<select name="sfd.state" id="state">
-				<option value="已保存" >已保存</option>
-				<option value="已提交" >已提交</option>
-			</select>			
-		</td>
 		<td class="a1">维修状态</td>
 		<td class="a2">
 			<select name="sfd.wx_state" id="wx_state">			     
@@ -283,12 +283,15 @@ String user_id = info.getUser_id();
 			
 	<tr height="35">
 		<td class="a1" colspan="4">
-			<input type="button" name="btnSub" value="提 交" class="css_button2" onclick="saveInfo();">&nbsp;
-			<input type="reset" name="button2" value="重 置" class="css_button2">&nbsp;
-			<input type="button" name="button1" value="关 闭" class="css_button2" onclick="window.close();">
+			<input type="button" name="btnSave" value="草稿" class="css_button2" onclick="saveInfo('1');">&nbsp;&nbsp;&nbsp;&nbsp;	
+			<input type="button" name="btnSub" value="提交" class="css_button2" onclick="saveInfo('2');">&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="reset" name="button2" value="关 闭" class="css_button2" onclick="window.opener.document.myform.submit();window.close();">
 		</td>
 	</tr>
 </table>
+<BR>
+<font color="red">注：“草稿”指售后服务单暂存，可修改；“提交”后售后服务单不可修改，如需审批则直接提交审批。</font>
+<BR><BR>
 </form>
 </body>
 </html>

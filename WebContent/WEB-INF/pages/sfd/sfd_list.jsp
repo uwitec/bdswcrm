@@ -9,8 +9,8 @@ OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
 
 Page results = (Page)VS.findValue("sfdPage");
 
-String cj_date1 = (String)VS.findValue("cj_date1");
-String cj_date2 = (String)VS.findValue("cj_date2");
+String jx_date1 = (String)VS.findValue("jx_date1");
+String jx_date2 = (String)VS.findValue("jx_date2");
  
 String state = (String)VS.findValue("state");
 String linkman = (String)VS.findValue("linkman");
@@ -27,6 +27,7 @@ String orderType = (String)VS.findValue("orderType");
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language='JavaScript' src="js/date.js"></script>
+<script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
 <script type="text/javascript">
 	
 	function openWin(id){
@@ -43,8 +44,8 @@ String orderType = (String)VS.findValue("orderType");
 	
 	function clearAll(){
 		document.myform.linkman.value = "";
-		document.myform.cj_date1.value = "";
-		document.myform.cj_date2.value = "";
+		document.myform.jx_date1.value = "";
+		document.myform.jx_date2.value = "";
 		document.myform.wx_state.value = "";
 		document.myform.state.value = "";
 		document.myform.jxr.value = "";
@@ -106,10 +107,9 @@ String orderType = (String)VS.findValue("orderType");
 	<tr>
 		<td class="search" align="left" colspan="2">&nbsp;&nbsp;
 			联系人：<input type="text" name="linkman" value="<%=linkman %>">&nbsp;&nbsp;
-			时间：<input type="text" name="cj_date1" value="<%=cj_date1 %>" size="8" readonly>
-			<img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.myform.cj_date1); return false;">&nbsp;至&nbsp;
-			<input type="text" name="cj_date2" value="<%=cj_date2 %>" size="8" readonly>
-			<img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.myform.cj_date2); return false;">			
+			时间：<input type="text" name="jx_date1" value="<%=jx_date1 %>" size="15" class="Wdate" onFocus="WdatePicker()">
+			&nbsp;&nbsp;至&nbsp;&nbsp;
+			<input type="text" name="jx_date2" value="<%=jx_date2 %>" size="15" class="Wdate" onFocus="WdatePicker()">
 			&nbsp;&nbsp;
 			状态：<select name="state">
 				<option value=""></option>
@@ -191,15 +191,5 @@ String orderType = (String)VS.findValue("orderType");
 	</tr>
 </table>
 </form>
-<!--  
-<form name="descForm" action="descLsd.html" method="post" target="desc">
-	<input type="hidden" name="id" value="">
-</form>
-<table width="100%"  align="center" cellpadding="0" cellspacing="0">
-	<tr>
-		<td><iframe id="desc" name="desc" onload="dyniframesize('desc');" width="100%" border="0" frameborder="0" SCROLLING="no"  src=''/></td>
-	</tr>
-</table>
--->
 </body>
 </html>
