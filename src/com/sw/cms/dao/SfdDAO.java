@@ -81,6 +81,22 @@ public class SfdDAO extends JdbcBaseDAO
 	}
 	 
 	/**
+	    * 根据售服单ID更新结单日期
+	    * @param id
+	    * @return
+	    */
+	   public void updateSfdJddate(Sfd sfd)
+	   {
+		   String sql="update sfd set jd_date=? where id=?";
+		   Object[] param=new Object[2];
+		   param[0]=DateComFunc.getToday();
+		   param[1]=sfd.getId();
+		   getJdbcTemplate().update(sql, param); 
+		   
+	   }
+	
+	
+	/**
 	 * 修改售服单
 	 * @param sfd
 	 */
