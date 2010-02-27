@@ -605,6 +605,20 @@
         </property>
     </bean>  
     
+    <!-- 报废单 --> 
+    <bean id="bfdService" parent="baseTransaction">
+        <property name="target">
+           <bean class="com.sw.cms.service.BfdService" autowire="byName"/>
+        </property>
+    </bean> 
+    
+    <!-- 换件单 -->
+    <bean id="hjdService" parent="baseTransaction">
+        <property name="target">
+           <bean class="com.sw.cms.service.HjdService" autowire="byName"/> 
+        </property>
+    </bean>    
+    
       <!-- 售后服务单 -->
     <bean id="sfdService" parent="baseTransaction">
         <property name="target">

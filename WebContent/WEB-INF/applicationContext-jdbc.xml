@@ -410,7 +410,9 @@
      </bean>        	 
        
      <!-- 报修单 -->        
-     <bean id="bxdDao" class="com.sw.cms.dao.BxdDAO" autowire="byName"/>
+     <bean id="bxdDao" class="com.sw.cms.dao.BxdDAO">
+          <property name="jdbcTemplate" ref="jdbcTemplate"/>
+     </bean>     
      
      <!-- 报修汇总 -->
      <bean id="bxhzDao" class="com.sw.cms.dao.BxhzDAO">
@@ -461,6 +463,16 @@
      <bean id="fhkhdDao" class="com.sw.cms.dao.FhkhdDAO">
           <property name="jdbcTemplate" ref="jdbcTemplate"/> 
      </bean>
+     
+     <!-- 报废单 -->
+     <bean id="bfdDao" class="com.sw.cms.dao.BfdDAO">
+          <property name="jdbcTemplate" ref="jdbcTemplate"/> 
+     </bean>
+     
+     <!-- 换件单 -->
+     <bean id="hjdDao" class="com.sw.cms.dao.HjdDAO">
+          <property name="jdbcTemplate" ref="jdbcTemplate"/> 
+     </bean>     
      
      <!-- 维修入库单 -->
      <bean id="wxrkdDao" class="com.sw.cms.dao.WxrkdDAO">
