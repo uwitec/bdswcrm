@@ -17,16 +17,13 @@ public class SfdAction extends BaseAction
    private String orderName="";
    private String orderType="";
    private int curPage = 1;
-   private String cj_date1 = DateComFunc.getToday();
-   private String cj_date2 = DateComFunc.getToday();
+   private String jx_date1 = DateComFunc.getToday();
+   private String jx_date2 = DateComFunc.getToday();
    private String linkman="";
    private String wx_state="";
    private String state="";
    private String jxr="";
    private Sfd  sfd=new  Sfd();
-   
-   
-
 
 /**
     * 售后服务单列表
@@ -43,11 +40,11 @@ public class SfdAction extends BaseAction
 			{
 				con += " and f.linkman like '%" +linkman +"%'";
 			}			
-			if (!cj_date1.trim().equals("")) {
-				con += " and f.cj_date>='" + cj_date1 + "'";
+			if (!jx_date1.trim().equals("")) {
+				con += " and f.jx_date>='" + jx_date1 + "'";
 			}
-			if (!cj_date2.trim().equals("")) {
-				con += " and f.cj_date<='" + (cj_date2 + " 23:59:59") + "'";
+			if (!jx_date2.trim().equals("")) {
+				con += " and f.cj_date<='" + (jx_date2 + " 23:59:59") + "'";
 			}
 			if (!state.equals("")) {
 				con += " and f.state='" + state + "'";
@@ -207,17 +204,17 @@ public void setCurPage(int curPage) {
 	this.curPage = curPage;
 }
  
-public String getCj_date1() {
-	return cj_date1;
+public String getJx_date1() {
+	return jx_date1;
 }
-public void setCj_date1(String cj_date1) {
-	this.cj_date1 = cj_date1;
+public void setJx_date1(String jx_date1) {
+	this.jx_date1 = jx_date1;
 }
-public String getCj_date2() {
-	return cj_date2;
+public String getJx_date2() {
+	return jx_date2;
 }
-public void setCj_date2(String cj_date2) {
-	this.cj_date2 = cj_date2;
+public void setJx_date2(String jx_date2) {
+	this.jx_date2 = jx_date2;
 }
 public String getOrderName() {
 	return orderName;

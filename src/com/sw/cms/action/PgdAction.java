@@ -139,9 +139,6 @@ public class PgdAction extends BaseAction
 		   }
 	   }
 	   
-	  
-
-	 
 	public int getCurPage() {
 		return curPage;
 	}
@@ -174,8 +171,6 @@ public class PgdAction extends BaseAction
 		this.orderType = orderType;
 	}
 
- 
-
 	public Map getPgd() {
 		return pgd;
 	}
@@ -202,78 +197,59 @@ public class PgdAction extends BaseAction
 		this.pgdService = pgdService;
 	}
  
-
-	 
-
 	public SjzdService getSjzdService() {
 		return sjzdService;
 	}
-
 
 	public void setSjzdService(SjzdService sjzdService) {
 		this.sjzdService = sjzdService;
 	}
 
-
 	public String[] getWxlx() {
 		return wxlx;
 	}
-
 
 	public void setWxlx(String[] wxlx) {
 		this.wxlx = wxlx;
 	}
 
-
 	public String getP_cj_date1() {
 		return p_cj_date1;
 	}
-
 
 	public void setP_cj_date1(String p_cj_date1) {
 		this.p_cj_date1 = p_cj_date1;
 	}
 
-
 	public String getP_cj_date2() {
 		return p_cj_date2;
 	}
-
 
 	public void setP_cj_date2(String p_cj_date2) {
 		this.p_cj_date2 = p_cj_date2;
 	}
 
-
 	public String getP_state() {
 		return p_state;
 	}
-
 
 	public void setP_state(String p_state) {
 		this.p_state = p_state;
 	}
 
-
 	public String getP_wx_state() {
 		return p_wx_state;
 	}
-
 
 	public void setP_wx_state(String p_wx_state) {
 		this.p_wx_state = p_wx_state;
 	}
 
-
 	public Pgd getPgds() {
 		return pgds;
 	}
 
-
 	public void setPgds(Pgd pgds) {
 		this.pgds = pgds;
 	}
-
-
- 
 }
