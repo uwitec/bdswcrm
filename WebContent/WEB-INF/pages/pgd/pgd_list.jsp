@@ -27,6 +27,7 @@ String orderType = (String)VS.findValue("orderType");
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language='JavaScript' src="js/date.js"></script>
+<script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
 <script type="text/javascript">
 	
 	function openWin(id){
@@ -60,7 +61,7 @@ String orderType = (String)VS.findValue("orderType");
 		var destination ="editPgd.html?id="+id;
 		var fea ='width=950,height=700,left=' + (screen.availWidth-950)/2 + ',top=' + (screen.availHeight-750)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
-		window.open(destination,'详细信息',fea);			
+		window.open(destination,'详细信息');			
 	}	
 	
 	function doSort(order_name){
@@ -108,10 +109,9 @@ String orderType = (String)VS.findValue("orderType");
 	<tr>
 		<td class="search" align="left" colspan="2">&nbsp;&nbsp;
 			联系人：<input type="text" name="linkman" value="<%=linkman %>">&nbsp;&nbsp;
-			时间：<input type="text" name="p_cj_date1" value="<%=p_cj_date1 %>" size="8" readonly>
-			<img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.myform.cj_date1); return false;">&nbsp;至&nbsp;
-			<input type="text" name="p_cj_date2" value="<%=p_cj_date2 %>" size="8" readonly>
-			<img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.myform.cj_date2); return false;">			
+			时间：<input type="text" name="p_cj_date1" value="<%=p_cj_date1 %>" size="15"  class="Wdate" onFocus="WdatePicker()" >
+			&nbsp;&nbsp;至&nbsp;&nbsp;
+			<input type="text" name="p_cj_date2" value="<%=p_cj_date2 %>" size="15"  class="Wdate" onFocus="WdatePicker()" >
 			&nbsp;&nbsp;
 			状态：<select name="p_state">
 				<option value=""></option>

@@ -23,12 +23,19 @@ String[] wxlx=(String[])VS.findValue("wxlx");
 <script type='text/javascript' src='dwr/interface/dwrService.js'></script>
 <script type='text/javascript' src='dwr/engine.js'></script>
 <script type='text/javascript' src='dwr/util.js'></script>
+<script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
 <style>
 	.selectTip{background-color:#009;color:#fff;}
 </style>
 <script type="text/javascript">
-	function saveInfo()
-	{
+	function saveInfo(vl)
+	{ 
+		if(vl == '1'){
+			document.getElementById("p_state").value = "已保存";
+		}else{
+			document.getElementById("p_state").value = "已提交";
+		}	
+	      
 	   if(document.getElementById("fzr").value=="")
 	   {
 	      alert("经手人不能为空，请填写！");
@@ -65,7 +72,18 @@ String[] wxlx=(String[])VS.findValue("wxlx");
 	      return;
 	   }			   	      
 	   document.myform.action="updatePgd.html";
-	   document.myform.submit();
+	   if(document.getElementById("p_state").value == "已提交")
+	   {
+			if(window.confirm("确认要提交派工单吗，提交后将无法修改！")){				
+				document.myform.submit();		
+			}
+ 	     }
+	     else
+	     { 
+	         document.myform.submit();	
+	     }
+	     document.sfdForm.btnSave.disabled = true;
+		 document.sfdForm.btnSub.disabled = true;
 	}	
 
     function clearVl(){       
@@ -145,6 +163,7 @@ String[] wxlx=(String[])VS.findValue("wxlx");
 </head>
 <body onload="initFzrTip();initSqrTip();">
 <FORM  name="myform" action="updatePgd.html" method="post">
+<input type="hidden" name="pgds.p_state" id="p_state" value="">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0" id="tables">
 	<thead>
 	<tr>
@@ -169,8 +188,8 @@ String[] wxlx=(String[])VS.findValue("wxlx");
 		    rq=DateComFunc.getToday();
 		  }
 		 %>
-		<td class="a2"><input type="text" name="pgds.p_yy_date" id="p_yy_date" value="<%=rq %>" readonly>
-		<img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.getElementById('p_yy_date')); return false;"><font color="red">*</font>
+		<td class="a2"><input type="text" name="pgds.p_yy_date" id="p_yy_date" value="<%=rq %>" size="15"  class="Wdate" onFocus="WdatePicker()">
+		<font color="red">*</font>
 		</td>
 	</tr>
 	<tr>
@@ -193,13 +212,6 @@ String[] wxlx=(String[])VS.findValue("wxlx");
 		</td>						
 	</tr>
 	<tr>
-		<td class="a1" width="15%">状态</td>
-		<td class="a2" width="35%"  >
-			<select name="pgds.p_state" id="p_state">
-				<option value="已保存" <%if(StringUtils.nullToStr(pgd.get("p_state")).equals("已保存"))out.print("selected"); %> >已保存</option>
-				<option value="已提交" <%if(StringUtils.nullToStr(pgd.get("p_state")).equals("已提交"))out.print("selected"); %> >已提交</option>
-			</select>		
-		</td>
 		<td class="a1" width="15%">维修状态</td>
 		<td class="a2" width="35%"  >
 			<select name="pgds.p_wx_state" id="p_wx_state">
@@ -209,10 +221,8 @@ String[] wxlx=(String[])VS.findValue("wxlx");
 		</td>			
 	</tr>
 	 
-</table>
- 
+</table> 
  <br>
-
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
@@ -230,7 +240,7 @@ String[] wxlx=(String[])VS.findValue("wxlx");
 	<tr>			
 		<td class="a1" width="15%">往来单位</td>
 		<td class="a2">
-		<input type="text" id="client_name" value="<%=StaticParamDo.getClientNameById(StringUtils.nullToStr(pgd.get("client_name")))%>"  maxlength="50" readonly>
+		<input type="text" id="client_name" value="<%=StaticParamDo.getClientNameById(StringUtils.nullToStr(pgd.get("client_name")))%>"  maxlength="70" readonly>
 		 </td>
 		<td class="a1" width="15%">经手人</td>
 		<td class="a2">
@@ -254,7 +264,7 @@ String[] wxlx=(String[])VS.findValue("wxlx");
 	<tr>
 	   <td class="a1" width="15%">地址</td>
 		<td class="a2">
-		 	<input  id="address" type="text" length="20" value="<%=StringUtils.nullToStr(pgd.get("address")) %>" readonly/> 
+		 	<input  id="address" type="text" length="60" value="<%=StringUtils.nullToStr(pgd.get("address")) %>" readonly/> 
 		 </td>
 		<td class="a1" width="15%">求助方式</td>
 		<td class="a2">
@@ -267,10 +277,8 @@ String[] wxlx=(String[])VS.findValue("wxlx");
 			<textarea rows="2"  id="ms" style="width:75%"> <%=StringUtils.nullToStr(pgd.get("ms")) %> </textarea>
 	</td> 
 	</tr>			
-</table>
- 
- <br>
- 
+</table> 
+ <br> 
 <table width="100%"  align="center" class="chart_info" cellpadding="0" cellspacing="0">		  
 	<thead>
 	<tr>
@@ -350,12 +358,15 @@ String[] wxlx=(String[])VS.findValue("wxlx");
 	</tr>			
 	<tr height="35">
 		<td class="a1" colspan="4">
-			<input type="button" name="btnSub" value="确 定" class="css_button2" onclick="saveInfo();">&nbsp;&nbsp;&nbsp;&nbsp;	
-			<input type="reset" name="button2" value="重 置" class="css_button2">&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="reset" name="button2" value="关 闭" class="css_button2" onclick="window.close();">
+			<input type="button" name="btnSave" value="草稿" class="css_button2" onclick="saveInfo('1');">&nbsp;&nbsp;&nbsp;&nbsp;	
+			<input type="button" name="btnSub" value="提交" class="css_button2" onclick="saveInfo('2');">&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="reset" name="button2" value="关 闭" class="css_button2" onclick="window.opener.document.myform.submit();window.close();">
 		</td>
 	</tr>
 </table>
+<BR>
+<font color="red">注：“草稿”指派工单暂存，可修改；“提交”后派工单不可修改，如需审批则直接提交审批。</font>
+<BR><BR>
 </FORM>
 </BODY>
 </HTML>
