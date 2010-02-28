@@ -10,6 +10,8 @@ OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
 ClientWlStatService clientWlStatService = (ClientWlStatService)VS.findValue("clientWlStatService");
 List clientList = (List)VS.findValue("clientList");
 
+String q_client_name = StringUtils.nullToStr(request.getParameter("client_name"));   //开始时间
+
 String start_date = StringUtils.nullToStr(request.getParameter("start_date"));   //开始时间
 String end_date = StringUtils.nullToStr(request.getParameter("end_date"));       //结束时间
 String flag = StringUtils.nullToStr(request.getParameter("flag"));               //不显示0往来单位
@@ -49,12 +51,15 @@ String flag2 = StringUtils.nullToStr(request.getParameter("flag2"));            
 <TABLE align="center" cellSpacing=0 cellPadding=0 width="99%" border=0 style="BORDER-TOP: #000000 2px solid;BORDER-LEFT:#000000 1px solid">
 	<THEAD>
 		<TR>
-			<TD class=ReportHead width="15%">客户编号</TD>
-			<TD class=ReportHead width="25%">客户名称</TD>
-			<TD class=ReportHead width="15%">期初数</TD>
-			<TD class=ReportHead width="15%">本期发生数</TD>
-			<TD class=ReportHead width="15%">本期收款</TD>
-			<TD class=ReportHead width="15%">当前应收款</TD>
+			<TD class=ReportHead width="10%">客户编号</TD>
+			<TD class=ReportHead width="20%">客户名称</TD>
+			<TD class=ReportHead width="10%">期初数</TD>
+			<TD class=ReportHead width="10%">本期发生数</TD>
+			<TD class=ReportHead width="10%">本期收款</TD>
+			<TD class=ReportHead width="10%">当前应收款</TD>
+			<TD class=ReportHead width="10%">未到期应收款</TD>
+			<TD class=ReportHead width="10%">超期应收款</TD>
+			<TD class=ReportHead width="10%">最长超期天数</TD>
 		</TR>
 	</THEAD>
 	
@@ -65,9 +70,15 @@ double hj_qcs = 0;
 double hj_bqfs = 0;
 double hj_ysje = 0;
 double hj_dqys = 0;
+double hj_wdqysk = 0;
+double hj_cqysk = 0;
 
 Map qcMap = clientWlStatService.getClientQc(start_date);
-Map infoMap = clientWlStatService.getClientWlInfo(start_date,end_date,"");
+Map infoMap = clientWlStatService.getClientWlInfo(start_date,end_date,q_client_name);
+
+Map maxCqtsMap = clientWlStatService.getClientMaxCqts(q_client_name);
+Map wdqyskMap = clientWlStatService.getClientWdqysk(q_client_name);
+Map cqyskMap = clientWlStatService.getClientCqysk(q_client_name);
 
 if(clientList != null && clientList.size() > 0){
 	for(int i=0;i<clientList.size();i++){
@@ -79,6 +90,14 @@ if(clientList != null && clientList.size() > 0){
 		double qcs = qcMap.get(client_id+"应收")==null?0:((Double)qcMap.get(client_id+"应收")).doubleValue();  //期初数		
 		double bqfs = infoMap.get(client_id+"应收发生")==null?0:((Double)infoMap.get(client_id+"应收发生")).doubleValue();  //本期发生
 		double ysje = infoMap.get(client_id+"已收发生")==null?0:((Double)infoMap.get(client_id+"已收发生")).doubleValue();  //本期已收
+		
+		String strCqts = StringUtils.nullToStr(maxCqtsMap.get(client_id));
+		int cqts = 0; //最长超期天数
+		if(!strCqts.equals("")){
+			cqts = new Integer(strCqts).intValue();
+		}
+		double wdqysk = wdqyskMap.get(client_id)==null?0:((Double)wdqyskMap.get(client_id)).doubleValue();  //未到期应收款 
+		double cqysk = cqyskMap.get(client_id)==null?0:((Double)cqyskMap.get(client_id)).doubleValue();  //超期应收款
 
 		double dqys = qcs + bqfs - ysje;  //当前应收
 		
@@ -108,6 +127,8 @@ if(clientList != null && clientList.size() > 0){
 			hj_bqfs += bqfs;
 			hj_ysje += ysje;
 			hj_dqys += dqys;
+			hj_wdqysk += wdqysk;
+			hj_cqysk += cqysk;
 			
 %>	
 		<TR>
@@ -117,6 +138,9 @@ if(clientList != null && clientList.size() > 0){
 			<TD class=ReportItemMoney><%=JMath.round(bqfs,2) %></TD>
 			<TD class=ReportItemMoney><%=JMath.round(ysje,2) %></TD>
 			<TD class=ReportItemMoney><%=JMath.round(dqys,2) %></TD>
+			<TD class=ReportItemMoney><%=JMath.round(wdqysk,2) %></TD>
+			<TD class=ReportItemMoney><%=JMath.round(cqysk,2) %></TD>
+			<TD class=ReportItemMoney><%=cqts %></TD>
 		</TR>
 
 <%		
@@ -133,6 +157,9 @@ if(clientList != null && clientList.size() > 0){
 		<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(hj_bqfs,2) %></TD>
 		<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(hj_ysje,2) %></TD>
 		<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(hj_dqys,2) %></TD>
+		<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(hj_wdqysk,2) %></TD>
+		<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(hj_cqysk,2) %></TD>
+		<TD class=ReportItemMoney style="font-weight:bold">--</TD>
 	</TR>
 	</TBODY>
 	
