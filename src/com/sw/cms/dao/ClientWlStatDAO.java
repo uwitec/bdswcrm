@@ -7,7 +7,7 @@ import java.util.Map;
 import com.sw.cms.dao.base.JdbcBaseDAO;
 
 /**
- * 客户往来汇总，包括应收汇总、应付汇总
+ * 应收汇总、应付汇总
  * @author jinyanni
  *
  */
@@ -79,6 +79,98 @@ public class ClientWlStatDAO extends JdbcBaseDAO {
 		}
 		
 		return map;
+	}
+	
+	
+	/**
+	 * 最长超期天数
+	 * @param client_id
+	 * @return
+	 */
+	public Map getClientMaxCqts(String client_id){
+		
+		Map map = new HashMap();
+		
+		String sql = "select client_name,max(TO_DAYS(now()) - TO_DAYS(ysrq)) as cqts from xsd where state='已出库' and skxs<>'已收'";
+		if(!client_id.equals("")){
+			sql += " and client_name='" + client_id + "'";
+		}
+		sql += " group by client_name having cqts>0";
+		
+		List list = this.getResultList(sql);
+
+		if(list != null && list.size() > 0){
+			for(int i=0;i<list.size();i++){
+				Map tempMap = (Map)list.get(i);
+				client_id = (String)tempMap.get("client_name");
+				map.put(client_id, tempMap.get("cqts"));
+			}
+		}
+		
+		return map;
+		
+	}
+	
+	
+	/**
+	 * 客户未到期应收款
+	 * @param client_id
+	 * @return
+	 */
+	public Map getClientWdqysk(String client_id){
+		Map map = new HashMap();
+		
+		String sql = "select client_name,sum(sjcjje-skje) as wdqysk from xsd where state='已出库' and skxs<>'已收' and (TO_DAYS(now()) - TO_DAYS(ysrq))<=0";
+		
+		if(!client_id.equals("")){
+			sql += " and client_name='" + client_id + "'";
+		}
+		
+		sql += " group by client_name";
+		
+		List list = this.getResultList(sql);
+
+		if(list != null && list.size() > 0){
+			for(int i=0;i<list.size();i++){
+				Map tempMap = (Map)list.get(i);
+				client_id = (String)tempMap.get("client_name");
+				map.put(client_id, tempMap.get("wdqysk"));
+			}
+		}
+		
+		return map;
+	}
+	
+	
+	/**
+	 * 客户超期应收款
+	 * @param client_id
+	 * @return
+	 */
+	public Map getClientCqysk(String client_id){
+		
+		Map map = new HashMap();
+		
+		String sql = "select client_name,sum(sjcjje-skje) as cqysk from xsd where state='已出库' and skxs<>'已收' and (TO_DAYS(now()) - TO_DAYS(ysrq))>0";
+		
+		if(!client_id.equals("")){
+			sql += " and client_name='" + client_id + "'";
+		}
+		
+		sql += " group by client_name";
+		
+		List list = this.getResultList(sql);
+
+		if(list != null && list.size() > 0){
+			for(int i=0;i<list.size();i++){
+				Map tempMap = (Map)list.get(i);
+				client_id = (String)tempMap.get("client_name");
+				map.put(client_id, tempMap.get("cqysk"));
+			}
+		}
+		
+		return map;
+		
 	}
 
 }

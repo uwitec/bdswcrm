@@ -48,6 +48,22 @@ public class ClientsDAO extends JdbcBaseDAO {
 	
 	
 	/**
+	 * 客户列表
+	 * @param client_id
+	 * @return
+	 */
+	public List getClietsById(String client_id){
+		String sql = "select * from clients where 1=1";
+		
+		if(!client_id.equals("")){
+			sql = sql + " and id='" + client_id + "'";
+		}
+		
+		return this.getResultList(sql);
+	}
+	
+	
+	/**
 	 * 根据客户提示框输入的提示信息查询相关客户信息
 	 * @param clientsName
 	 * @return

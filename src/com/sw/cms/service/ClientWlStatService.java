@@ -28,6 +28,35 @@ public class ClientWlStatService {
 	public Map getClientWlInfo(String start_date,String end_date,String client_id){
 		return clientWlStatDao.getClientWlInfo(start_date, end_date, client_id);
 	}
+	
+	/**
+	 * 最长超期天数
+	 * @param client_id
+	 * @return
+	 */
+	public Map getClientMaxCqts(String client_id){
+		return clientWlStatDao.getClientMaxCqts(client_id);
+	}
+	
+	
+	/**
+	 * 客户未到期应收款
+	 * @param client_id
+	 * @return
+	 */
+	public Map getClientWdqysk(String client_id){
+		return clientWlStatDao.getClientWdqysk(client_id);
+	}
+	
+	
+	/**
+	 * 客户超期应收款
+	 * @param client_id
+	 * @return
+	 */
+	public Map getClientCqysk(String client_id){
+		return clientWlStatDao.getClientCqysk(client_id);
+	}
 
 	public ClientWlStatDAO getClientWlStatDao() {
 		return clientWlStatDao;

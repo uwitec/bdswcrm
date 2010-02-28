@@ -47,6 +47,17 @@ public class ClientsService {
 		return clientsDao.getClientList(client_name);
 	}
 
+	
+	/**
+	 * 客户列表
+	 * @param client_id
+	 * @return
+	 */
+	public List getClietsById(String client_id){
+		return clientsDao.getClietsById(client_id);
+	}
+	
+	
 	/**
 	 * 返回客户列表包括应付款信息(带分页)
 	 * 

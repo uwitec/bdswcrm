@@ -33,7 +33,7 @@ public class YsmxReportAction extends BaseAction {
 	}
 	
 	public String getResult(){
-		clientList = clientsService.getClientList(client_name);
+		clientList = clientsService.getClietsById(client_name);
 		return "success";
 	}
 	
