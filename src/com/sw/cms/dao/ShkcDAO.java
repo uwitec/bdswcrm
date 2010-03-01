@@ -302,7 +302,21 @@ public class ShkcDAO extends JdbcBaseDAO
 	                  
 }
 
-   
+   /**
+    * 维修入库单修改售后库存（0：坏件库1：在外库2：好件库）
+    *
+    */
+   public void updateWxShkcState(String serialNum,String state)
+   {
+	   String sqlStore="";
+	  
+	   sqlStore= "select id from storehouse where name='好件库'";	  
+	   
+	   Map map=getResultMap(sqlStore);		
+	   String storeId= (String)map.get("id") ; 
+	   String sql="update shkc set state='"+state+"',store_id='"+storeId+"' where qz_serial_num='"+serialNum+"'";
+	   this.getJdbcTemplate().update(sql);
+   }
    
    /**
     * 修改售后库存（1：坏件库 2：在外库 3：好件库）
