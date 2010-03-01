@@ -2195,36 +2195,36 @@
         <!-- 维修序列号查询 --> 
         
         <!-- 维修移库单 -->  
-        <action name="listWxykd" class="wxykdAction" method="list">
-            <result name="success">/WEB-INF/pages/wxykd/wxykd_list.jsp</result>
+        <action name="listWxrkd" class="wxrkdAction" method="list">
+            <result name="success">/WEB-INF/pages/wxrkd/wxrkd_list.jsp</result>
         </action>
-        <action name="addWxykd" class="wxykdAction" method="add">
-            <result name="success">/WEB-INF/pages/wxykd/wxykd_add.jsp</result>
+        <action name="addWxrkd" class="wxrkdAction" method="add">
+            <result name="success">/WEB-INF/pages/wxrkd/wxrkd_add.jsp</result>
         </action>
-        <action name="saveWxykd" class="wxykdAction" method="save">
+        <action name="saveWxrkd" class="wxrkdAction" method="save">
             <result name="success">/WEB-INF/pages/msg.jsp</result>
-            <result name="cancel" type="redirect">addWxykd.html</result>
-            <result name="input">/WEB-INF/pages/wxrkd/wxykd_add.jsp</result>  
+            <result name="cancel" type="redirect">addWxrkd.html</result>
+            <result name="input">/WEB-INF/pages/wxrkd/wxrkd_add.jsp</result>  
         </action>
-         <action name="selWxykProcCkd" class="wxykdAction" method="selKcProc">
-             <result name="success">/WEB-INF/pages/wxykd/selectKcProc.jsp</result>
+         <action name="selWxrkProcCkd" class="wxrkdAction" method="selKcProc">
+             <result name="success">/WEB-INF/pages/wxrkd/selectKcProc.jsp</result>
         </action>
-        <action name="viewWxykd" class="wxykdAction" method="edit">
-             <result name="success">/WEB-INF/pages/wxykd/wxykd_view.jsp</result>
+        <action name="viewWxrkd" class="wxrkdAction" method="edit">
+             <result name="success">/WEB-INF/pages/wxrkd/wxrkd_view.jsp</result>
         </action>
-        <action name="editWxykd" class="wxykdAction" method="edit">
-             <result name="success">/WEB-INF/pages/wxykd/wxykd_edit.jsp</result>
+        <action name="editWxrkd" class="wxrkdAction" method="edit">
+             <result name="success">/WEB-INF/pages/wxrkd/wxrkd_edit.jsp</result>
         </action>
-        <action name="updateWxykd" class="wxykdAction" method="update">
+        <action name="updateWxrkd" class="wxrkdAction" method="update">
             <result name="success">/WEB-INF/pages/msg.jsp</result>
-            <result name="cancel" type="redirect">editWxykd.html</result>
-            <result name="input">/WEB-INF/pages/wxykd/wxykd_edit.jsp</result>
+            <result name="cancel" type="redirect">editWxrkd.html</result>
+            <result name="input">/WEB-INF/pages/wxykd/wxrkd_edit.jsp</result>
         </action>
-        <action name="delWxykd" class="wxykdAction" method="del">
-            <result name="success" type="redirect">listWxykd.html</result>  
+        <action name="delWxrkd" class="wxrkdAction" method="del">
+            <result name="success" type="redirect">listWxrkd.html</result>  
         </action>
-        <action name="descWxykd" class="wxykdAction" method="desc">
-             <result name="success">/WEB-INF/pages/wxykd/wxykd_desc.jsp</result>
+        <action name="descWxrkd" class="wxrkdAction" method="desc">
+             <result name="success">/WEB-INF/pages/wxrkd/wxrkd_desc.jsp</result>
         </action>
         <!-- 维修移库单 -->
         
