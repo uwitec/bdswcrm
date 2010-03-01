@@ -108,8 +108,8 @@ String orderType = (String)VS.findValue("orderType");
 		<td class="search" align="left" colspan="2">&nbsp;&nbsp;
 			联系人：<input type="text" name="linkman" value="<%=linkman %>" size="10"> 
 			序列号：<input type="text" name="qz_serial_num" value="<%=qz_serial_num %>" size="10"> 
-			时间： <input type="text" name="jj_date1" id="creatdate" value="<%=jj_date1 %>" class="Wdate" onFocus="WdatePicker()"/> 至 
-				  <input type="text" name="jj_date2" id="creatdate2" value="<%=jj_date2 %>"  class="Wdate" onFocus="WdatePicker()"/>										 
+			时间： <input type="text" name="jj_date1" id="creatdate" value="<%=jj_date1 %>" class="Wdate" onFocus="WdatePicker()"> 至 
+				  <input type="text" name="jj_date2" id="creatdate2" value="<%=jj_date2 %>"  class="Wdate" onFocus="WdatePicker()">										 
 			接件单状态：<select name="state">
 				<option value=""></option>
 				<option value="已保存" <%if(state.equals("已保存")) out.print("selected"); %>>已保存</option>
