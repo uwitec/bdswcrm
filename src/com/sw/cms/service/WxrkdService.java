@@ -63,7 +63,7 @@ public class WxrkdService
 			if(!wxrkdProduct.getQz_serial_num().equals(""))
 			{
 		       //修改库存状态为1：好件库
-			   shkcDao.updateShkcState(wxrkdProduct.getQz_serial_num(), "2");
+			   shkcDao.updateWxShkcState(wxrkdProduct.getQz_serial_num(), "3");
 			}
 			ShSerialNumFlow  shSerialNumFlow=new ShSerialNumFlow();
 			shSerialNumFlow.setCj_date(DateComFunc.getToday());
@@ -90,7 +90,7 @@ public class WxrkdService
 			if(!wxrkdProduct.getQz_serial_num().equals(""))
 			{
 		       //修改库存状态为1：好件库
-			   shkcDao.updateShkcState(wxrkdProduct.getQz_serial_num(), "2");
+			   shkcDao.updateWxShkcState(wxrkdProduct.getQz_serial_num(), "3");
 			}
 			ShSerialNumFlow  shSerialNumFlow=new ShSerialNumFlow();
 			shSerialNumFlow.setCj_date(DateComFunc.getToday());
