@@ -28,6 +28,7 @@ String orderType = (String)VS.findValue("orderType");
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language='JavaScript' src="js/date.js"></script>
+<script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
 <script type="text/javascript">
 	
 	function openWin(id,wxcld_id){
@@ -109,10 +110,9 @@ String orderType = (String)VS.findValue("orderType");
 	<tr>
 		<td class="search" align="left" colspan="2">&nbsp;&nbsp;
 			联系人：<input type="text" name="w_linkman" value="<%=w_linkman%>">&nbsp;&nbsp;
-			时间：<input type="text" name="w_cj_date1" value="<%=w_cj_date1%>" size="8" readonly>
-			<img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.myform.cj_date1); return false;">&nbsp;至&nbsp;
-			<input type="text" name="w_cj_date2" value="<%=w_cj_date2%>" size="8" readonly>
-			<img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.myform.cj_date2); return false;">			
+			时间：<input type="text" name="w_cj_date1" value="<%=w_cj_date1%>" size="15" class="Wdate" onFocus="WdatePicker()">
+			&nbsp;&nbsp;至&nbsp;&nbsp;
+			<input type="text" name="w_cj_date2" value="<%=w_cj_date2%>" size="15" class="Wdate" onFocus="WdatePicker()">						
 			&nbsp;&nbsp;
 			状态：<select name="w_state">
 				<option value=""></option>

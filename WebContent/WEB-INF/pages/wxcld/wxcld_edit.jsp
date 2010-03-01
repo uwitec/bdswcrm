@@ -28,6 +28,7 @@ if(null==wxcldProducts)
 <script language='JavaScript' src="js/selClient.js"></script>
 <script type='text/javascript' src='dwr/interface/dwrService.js'></script>
 <script type='text/javascript' src='dwr/engine.js'></script>
+<script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
 <script type='text/javascript' src='dwr/util.js'></script>
 <style>
 	.selectTip{background-color:#009;color:#fff;}
@@ -52,8 +53,14 @@ if(null==wxcldProducts)
 	}	
 			
       	
-	function saveInfo()
-	{
+	function saveInfo(vl){ 
+
+		if(vl == '1'){
+			document.getElementById("w_state").value = "已保存";
+		}else{
+			document.getElementById("w_state").value = "已提交";
+		}	
+		
 		if(document.getElementById("product_name").value=="")
 	   {
 	      alert("产品名称不能为空，请填写！");
@@ -98,7 +105,17 @@ if(null==wxcldProducts)
 	   }
 	    	   	    
 	   document.myform.action="updateWxcld.html";
-	   document.myform.submit();
+	   if(document.getElementById("w_state").value == "已提交"){
+			if(window.confirm("确认要提交维修处理单吗，提交后将无法修改！")){				
+				document.myform.submit();		
+			}
+ 	     }
+	     else
+	     { 
+	         document.myform.submit();	
+	     }
+	     document.myform.btnSave.disabled = true;
+		 document.myform.btnSub.disabled = true;
 	}	
 
     function clearVl(){       
@@ -189,6 +206,7 @@ if(null==wxcldProducts)
 </head>
 <body onload="getfy()">
 <FORM  name="myform" action="updateWxcld.html" method="post">
+<input type="hidden" name="wxcld.w_state" id="w_state" value="">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0" id="tables">
 	<thead>
 	<tr>
@@ -227,14 +245,7 @@ if(null==wxcldProducts)
         
 		    <input type="hidden" name="wxcld.w_wxr" id="w_wxr"  value="<%=StringUtils.nullToStr(wxclds.get("w_wxr")) %>"/> 
 		   
-		</td>	
-		<td class="a1" width="15%">状态</td>
-		<td class="a2" width="35%"  >
-			<select name="wxcld.w_state" id="w_state">
-				<option value="已保存" <%if(StringUtils.nullToStr(wxclds.get("w_state")).equals("已保存"))out.print("selected"); %> >已保存</option>
-				<option value="已提交" <%if(StringUtils.nullToStr(wxclds.get("w_state")).equals("已提交"))out.print("selected"); %> >已提交</option>
-			</select>		
-		</td>					
+		</td>							
 	</tr>	 
 </table> 
  <br>
@@ -456,13 +467,15 @@ if(null==wxcldProducts)
 	</tr>			
 	<tr height="35">
 		<td class="a1" colspan="4">
-			<input type="button" name="btnSub" value="确 定" class="css_button2" onclick="saveInfo();">&nbsp;&nbsp;&nbsp;&nbsp;	
-			<input type="reset" name="button2" value="重 置" class="css_button2">&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="reset" name="button2" value="关 闭" class="css_button2" onclick="window.close();">
+			<input type="button" name="btnSave" value="草稿" class="css_button2" onclick="saveInfo('1');">&nbsp;&nbsp;&nbsp;&nbsp;	
+			<input type="button" name="btnSub" value="提交" class="css_button2" onclick="saveInfo('2');">&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="reset" name="button2" value="关 闭" class="css_button2" onclick="window.opener.document.myform.submit();window.close();">
 		</td>
 	</tr>
 </table>
+<BR>
+<font color="red">注：“草稿”指维修处理单暂存，可修改；“提交”后维修处理单不可修改，如需审批则直接提交审批。</font>
+<BR><BR>
 </FORM>
-
 </BODY>
 </HTML>
