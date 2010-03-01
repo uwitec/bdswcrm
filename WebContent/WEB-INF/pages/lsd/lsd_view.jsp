@@ -226,9 +226,7 @@ if(lsdProducts != null && lsdProducts.size()>0){
 	</tr>
 	<tr>
 		<td class="a1" width="15%">描述信息</td>
-		<td class="a2" width="85%" colspan="3">
-			<textarea rows="2" name="lsd.ms" id="ms" style="width:75%" readonly><%=StringUtils.nullToStr(lsd.getMs()) %></textarea>
-		</td>
+		<td class="a2" width="85%" colspan="3" name="lsd.ms" id="ms" readonly><%=StringUtils.nullToStr(lsd.getMs()) %></td>
 	</tr>			
 	<tr height="35">
 		<td class="a1" colspan="4">
