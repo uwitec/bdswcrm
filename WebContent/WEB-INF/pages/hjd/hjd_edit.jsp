@@ -401,6 +401,6 @@ session.removeAttribute("messages");
 <BR>
 <font color="red">注：“草稿”指换件单暂存，可修改；“提交”后换件单不可修改，如需审批则直接提交审批。</font>
 <BR><BR>
-</form>
+
 </body>
 </html>
