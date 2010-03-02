@@ -1,5 +1,18 @@
 package com.sw.cms.model;
-
+/**
+ * 维修入库单_产品
+ * @author Administrator
+ * 2010-03-01修改，有以下信息：id  流水号
+ * wxrkd_id        维修入库单编号
+ * product_id      产品编号
+ * product_name    产品名称
+ * product_xh      产品规格
+ * qz_serial_num   强制序列号
+ * remark          备注
+ * nums            数量
+ * store_id       目标库——好件库
+ * storestate     目标库状态——3
+ */
 public class WxrkdProduct 
 {
 	 private int id  ;//流水号
@@ -10,61 +23,22 @@ public class WxrkdProduct
      private String product_xh   ;   //产品型号 
      private String qz_serial_num  ;//产品序列号
      private String remark ;//产品备注    
-     private String bxaddress       ;//报修所在地
-     private String bxstate         ; //保修产品状态
-     private String has_fj          ;//是否有附件
-     private String  fj     ;//附件  
-     private String qtfj     ;  //其他附件  
-     private String bj     ; //备件   
-     private String gzfx   ;  //故障分析   
-     private String pcgc   ;  //排除过程    
-	public String getBj() {
-		return bj;
-	}
-	public void setBj(String bj) {
-		this.bj = bj;
-	}
-	public String getBxaddress() {
-		return bxaddress;
-	}
-	public void setBxaddress(String bxaddress) {
-		this.bxaddress = bxaddress;
-	}
-	public String getBxstate() {
-		return bxstate;
-	}
-	public void setBxstate(String bxstate) {
-		this.bxstate = bxstate;
-	}
-	public String getFj() {
-		return fj;
-	}
-	public void setFj(String fj) {
-		this.fj = fj;
-	}
-	public String getGzfx() {
-		return gzfx;
-	}
-	public void setGzfx(String gzfx) {
-		this.gzfx = gzfx;
-	}
-	public String getHas_fj() {
-		return has_fj;
-	}
-	public void setHas_fj(String has_fj) {
-		this.has_fj = has_fj;
-	}
+     private int nums       ;//数量
+     private String store_id         ; //目标库
+     private String storestate          ;//目标库状态
+          
+	
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getPcgc() {
-		return pcgc;
+	public int getNums() {
+		return nums;
 	}
-	public void setPcgc(String pcgc) {
-		this.pcgc = pcgc;
+	public void setNums(int nums) {
+		this.nums = nums;
 	}
 	public String getProduct_id() {
 		return product_id;
@@ -84,11 +58,11 @@ public class WxrkdProduct
 	public void setProduct_xh(String product_xh) {
 		this.product_xh = product_xh;
 	}
-	public String getQtfj() {
-		return qtfj;
+	public String getStorestate() {
+		return storestate;
 	}
-	public void setQtfj(String qtfj) {
-		this.qtfj = qtfj;
+	public void setStorestate(String storestate) {
+		this.storestate =storestate;
 	}
 	public String getQz_serial_num() {
 		return qz_serial_num;
@@ -107,5 +81,12 @@ public class WxrkdProduct
 	}
 	public void setWxrkd_id(String wxrkd_id) {
 		this.wxrkd_id = wxrkd_id;
+	}
+	
+	public String getStore_id() {
+		return store_id;
+	}
+	public void setStore_id(String store_id) {
+		this.store_id = store_id;
 	}
 }
