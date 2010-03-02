@@ -64,29 +64,7 @@ public class WxrkdService
 	  wxrkdDao.updateWxrkd(wxrkd,wxrkdProducts);
 	  if(wxrkd.getState().equals("已提交"))
 		{
-<<<<<<< .mine
 		  saveStoreFlow(wxrkd,wxrkdProducts);				 
-=======
-			if(!wxrkdProduct.getQz_serial_num().equals(""))
-			{
-		       //修改库存状态为1：好件库
-			   shkcDao.updateWxShkcState(wxrkdProduct.getQz_serial_num(), "3");
-			}
-			ShSerialNumFlow  shSerialNumFlow=new ShSerialNumFlow();
-			shSerialNumFlow.setCj_date(DateComFunc.getToday());
-			shSerialNumFlow.setClient_name(wxrkd.getClient_name());
-			shSerialNumFlow.setFs_date(wxrkd.getWx_date());
-			shSerialNumFlow.setJsr(wxrkd.getWxr());
-			shSerialNumFlow.setKf("好件库");
-			shSerialNumFlow.setLinkman(wxrkd.getLxr());
-			shSerialNumFlow.setQz_serial_num(wxrkdProduct.getQz_serial_num()); 
-			shSerialNumFlow.setRk_date(DateComFunc.getToday());
-			shSerialNumFlow.setYw_dj_id(wxrkd.getId());
-			shSerialNumFlow.setYw_url("viewWxrkd.html?id=");
-			shSerialNumFlow.setYwtype("维修");
-			//添加序列号流转记录
-			shSerialNumFlowDao.saveShSerialNumFlow(shSerialNumFlow);				 
->>>>>>> .r243
 		}
   }
     
@@ -105,7 +83,6 @@ public class WxrkdService
 		{
 			for(int i=0;i<wxrkdProducts.size();i++)
 			{
-<<<<<<< .mine
 				WxrkdProduct wxrkdProduct = (WxrkdProduct)wxrkdProducts.get(i);
 				if(wxrkdProduct != null)
 				{
@@ -127,10 +104,6 @@ public class WxrkdService
 		             //添加序列号流转记录
 		             shSerialNumFlowDao.saveShSerialNumFlow(shSerialNumFlow);	
 				}
-=======
-		       //修改库存状态为1：好件库
-			   shkcDao.updateWxShkcState(wxrkdProduct.getQz_serial_num(), "3");
->>>>>>> .r243
 			}
 		}
   }
