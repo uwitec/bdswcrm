@@ -100,7 +100,7 @@ public class WxrkdService
 		             shSerialNumFlow.setRk_date(DateComFunc.getToday());
 		             shSerialNumFlow.setYw_dj_id(wxrkd.getId());
 		             shSerialNumFlow.setYw_url("viewWxrkd.html?id=");
-		             shSerialNumFlow.setYwtype("维修");
+		             shSerialNumFlow.setYwtype("维修入库");
 		             //添加序列号流转记录
 		             shSerialNumFlowDao.saveShSerialNumFlow(shSerialNumFlow);	
 				}
