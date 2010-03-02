@@ -2,7 +2,7 @@
 <%@ page import="com.opensymphony.xwork.util.OgnlValueStack" %>
 <%@ page import="com.sw.cms.util.*" %>
 <%@ page import="java.util.*" %>
-
+<%@ page import="com.sw.cms.model.*" %>
 <%
 OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
 
@@ -93,8 +93,8 @@ if(serialFlowList!=null && serialFlowList.size()>0){
 		<TR>
 			<TD class=serialItme><%=i+1%>&nbsp;</TD>
 			<TD class=serialItme><%=StringUtils.nullToStr(map.get("ywtype")) %>&nbsp;</TD>
-			<TD class=serialItme><%=StringUtils.nullToStr(map.get("client_name")) %>&nbsp;</TD>
-			<TD class=serialItme><%=StringUtils.nullToStr(map.get("jsr")) %>&nbsp;</TD>
+			<TD class=serialItme><%=StaticParamDo.getClientNameById(StringUtils.nullToStr(map.get("client_name"))) %>&nbsp;</TD>
+			<TD class=serialItme><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(map.get("jsr"))) %>&nbsp;</TD>
 			<TD class=serialItme><a href="#" title="单击查看原始单据" onclick="openWin('<%=yw_url+StringUtils.nullToStr(map.get("yw_dj_id")) %>');"><%=StringUtils.nullToStr(map.get("yw_dj_id")) %>&nbsp;</a></TD>
 			<TD class=serialItme><%=StringUtils.nullToStr(map.get("kf")) %>&nbsp;</TD> 
 			<TD class=serialItme><%=StringUtils.nullToStr(map.get("fs_date")) %>&nbsp;</TD>
