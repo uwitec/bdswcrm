@@ -529,6 +529,10 @@
           <property name="jdbcTemplate" ref="jdbcTemplate"/>
      </bean>
       
+      <!-- 备忘录-->
+     <bean id="bwlDao" class="com.sw.cms.dao.BwlDAO">
+          <property name="jdbcTemplate" ref="jdbcTemplate"/>
+     </bean>
 </beans>
 
 
