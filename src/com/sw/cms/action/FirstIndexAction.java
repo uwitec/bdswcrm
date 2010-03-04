@@ -15,6 +15,7 @@ import com.sw.cms.service.MenuService;
 import com.sw.cms.service.UserService;
 import com.sw.cms.service.XsdService;
 import com.sw.cms.service.XxfbNbggService;
+import com.sw.cms.service.BwlService;
 import com.sw.cms.util.Constant;
 import com.sw.cms.util.StringUtils;
 
@@ -22,6 +23,7 @@ public class FirstIndexAction extends BaseAction {
 	
 	private FirstIndexService firstIndexService;
 	private XxfbNbggService xxfbNbggService;
+	private BwlService bwlService;
 	private MenuService menuService;
 	private UserService userService;
 	private LsdService lsdService;
@@ -30,7 +32,7 @@ public class FirstIndexAction extends BaseAction {
 	private FysqService fysqService;
 
 	private List nbggList = new ArrayList();
-	
+	private List bwlList = new ArrayList();
 	private List dckList = new ArrayList();
 	private List drkList = new ArrayList();
 	private List dspLsdList = new ArrayList();
@@ -44,7 +46,7 @@ public class FirstIndexAction extends BaseAction {
 	private String isXsdSpRight = "0";
 	private String isCgfkSpRight = "0";
 	private String isFysqSpRight = "0";
-	
+	private int curPage = 1;
 	/**
 	 * 首页显示项
 	 * @return
@@ -204,6 +206,21 @@ public class FirstIndexAction extends BaseAction {
 		}
 	}
 
+	/**
+	 * 显示备忘录
+	 * @return
+	 */
+	public String listUndoMyWork(){
+		int rowsPerPage = Constant.PAGE_SIZE2;
+		LoginInfo info = (LoginInfo)getSession().getAttribute("LOGINUSER");
+		String user_id = info.getUser_id();
+
+		//备忘录
+		Page page = bwlService.getBwlList(curPage, rowsPerPage,user_id);
+		bwlList = page.getResults();
+
+		return "success";
+	}
 
 	public FirstIndexService getFirstIndexService() {
 		return firstIndexService;
@@ -411,5 +428,23 @@ public class FirstIndexAction extends BaseAction {
 
 	public void setFysqService(FysqService fysqService) {
 		this.fysqService = fysqService;
+	}
+	
+	public List getBwlList() {
+		return bwlList;
+	}
+
+
+	public void setBwlList(List bwlList) {
+		this.bwlList = bwlList;
+	}
+	
+	public BwlService getBwlService() {
+		return bwlService;
+	}
+
+
+	public void setBwlService(BwlService bwlService) {
+		this.bwlService = bwlService;
 	}
 }
