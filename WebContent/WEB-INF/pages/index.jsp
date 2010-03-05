@@ -63,7 +63,6 @@ int menu_index = 0;
 						<ul id="tabHeader">	
 							<a onclick="javascript:document.getElementById('ifrIndex1').src='listMain.html';"><li id="first" title="点击刷新首页">首页</li></a>
 							<a onclick="javascript:document.getElementById('ifrIndex2').src='undoWork.html';"><li id="second" title="点击刷新待办工作">待办工作</li></a>
-							<a onclick="javascript:document.getElementById('ifrIndex3').src='undoMyWork.html';"><li id="third" title="点击刷新备忘录">备忘录</li></a>
 						</ul>
 						</div>
 					</td>
@@ -346,7 +345,6 @@ int menu_index = 0;
 			<ul id="tabContent">							
 				<li><iframe id="ifrIndex1" src="listMain.html" scrolling="auto" border="0" style="width:100%;" onload="FrameChange('ifrIndex1');" frameborder="0"></iframe></li>
 				<li><iframe id="ifrIndex2" src="undoWork.html" scrolling="auto" border="0" style="width:100%;" onload="FrameChange('ifrIndex2');" frameborder="0"></iframe></li>
-			    <li><iframe id="ifrIndex3" src="undoMyWork.html" scrolling="auto" border="0" style="width:100%;" onload="FrameChange('ifrIndex3');" frameborder="0"></iframe></li>
 			</ul>
 			</div>
 		</TD>
