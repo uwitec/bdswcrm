@@ -60,6 +60,11 @@ public class FirstIndexAction extends BaseAction {
 		Page page = xxfbNbggService.getNbggList(1, 10);
 		nbggList = page.getResults();
 
+		//±¸ÍüÂ¼
+		Page bwlpage = bwlService.getBwlList(curPage, 10,user_id);
+		bwlList = bwlpage.getResults();
+
+		
 		return "success";
 	}
 	
