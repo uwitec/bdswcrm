@@ -57,6 +57,36 @@ public class ClientWlStatService {
 	public Map getClientCqysk(String client_id){
 		return clientWlStatDao.getClientCqysk(client_id);
 	}
+	
+	
+	/**
+	 * 客户预收款
+	 * @param client_id
+	 * @return
+	 */
+	public Map getClientYushouk(String client_id){
+		return clientWlStatDao.getClientYushouk(client_id);
+	}
+	
+	
+	/**
+	 * 客户期初结算余额
+	 * @param client_id
+	 * @return
+	 */
+	public Map getClientQcjsye(String client_id){
+		return clientWlStatDao.getClientQcjsye(client_id);
+	}
+	
+	
+	/**
+	 * 往来调账（应收）结算余额
+	 * @param client_id
+	 * @return
+	 */
+	public Map getClientTzjsye(String client_id){
+		return clientWlStatDao.getClientTzjsye(client_id);
+	}
 
 	public ClientWlStatDAO getClientWlStatDao() {
 		return clientWlStatDao;

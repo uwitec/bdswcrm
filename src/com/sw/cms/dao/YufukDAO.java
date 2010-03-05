@@ -51,7 +51,7 @@ public class YufukDAO extends JdbcBaseDAO {
 	public double getYufukByClientId(String client_id){
 		double yfk = 0;
 		
-		String sql = "select sum(hjje-jsje) as yfk from yufuk_list where client_name='" + client_id + "' and hjje>jsje";
+		String sql = "select sum(hjje-jsje) as yfk from yufuk_list where client_name='" + client_id + "' and round(hjje,2)<>round(jsje,2)";
 		Map map = this.getResultMap(sql);
 		
 		if(map != null){
@@ -80,7 +80,20 @@ public class YufukDAO extends JdbcBaseDAO {
 		
 		double total = info.getTotal();  //本次结算总金额
 		
-		String sql = "select * from yufuk_list where client_name='" + info.getClient_name() + "' and hjje>jsje order by id";
+		if(total < 0){ 
+			//如果预付款结算金额小于0，添加新的待结算的预付款
+			String sql = "insert into yufuk_list(client_name,hjje,remark) values(?,?,?)";
+			Object[] param = new Object[3];
+			param[0] = info.getClient_name();
+			param[1] = info.getTotal();
+			param[2] = "预付冲应负，负值";
+			
+			this.getJdbcTemplate().update(sql, param);
+			
+			return;
+		}
+		
+		String sql = "select * from yufuk_list where client_name='" + info.getClient_name() + "' and round(hjje,2)<>round(jsje,2) order by id";
 		
 		//待结算预收款列表
 		List list = this.getResultList(sql, new YufukRowMapper());

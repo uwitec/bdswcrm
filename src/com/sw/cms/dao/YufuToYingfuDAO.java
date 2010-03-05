@@ -125,10 +125,14 @@ public class YufuToYingfuDAO extends JdbcBaseDAO {
 				
 				YufuToYingfuDesc desc = (YufuToYingfuDesc)descList.get(i);
 				if(desc != null){
-					if(desc.getBcjs() > 0){
+					if(desc.getBcjs() != 0){
 						if(desc.getJhd_id().equals("期初应付")){
 							//处理期初应收
 							sql = "update client_wl_init set yifuje=yifuje+" + desc.getBcjs() + "where client_name='" + info.getClient_name() + "'";
+							this.getJdbcTemplate().update(sql);
+						}else if(desc.getJhd_id().indexOf("PZ") != -1){
+							//处理往来调账
+							sql = "update pz set jsje=jsje+" + desc.getBcjs() + " where id='" + desc.getJhd_id() + "'";
 							this.getJdbcTemplate().update(sql);
 						}else{
 							sql = "update jhd set fkje=fkje+" + desc.getBcjs() + " where id='" + desc.getJhd_id() + "'";
@@ -198,7 +202,7 @@ public class YufuToYingfuDAO extends JdbcBaseDAO {
 				
 				YufuToYingfuDesc desc = (YufuToYingfuDesc)descList.get(i);
 				if(desc != null){
-					if(desc.getBcjs() > 0){
+					if(desc.getBcjs() != 0){
 						sql = "insert into yufu_to_yingfu_desc(yw_id,jhd_id,yingfuje,bcjs,remark) values(?,?,?,?,?)";
 						
 						param[0] = info.getId();

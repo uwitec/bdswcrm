@@ -86,6 +86,7 @@ public class CgfkDAO extends JdbcBaseDAO {
 	
 	/**
 	 * 根据供应商编号取所有应付款情况
+	 * 包括：采购订单、期初应付、往来调账(应付)
 	 * @param gysbh
 	 * @return
 	 */
@@ -93,10 +94,17 @@ public class CgfkDAO extends JdbcBaseDAO {
 		String sql = "select id as jhd_id,cg_date as fsrq,total as fsje,(total-fkje) as yfje,fkje as yifje from jhd where state<>'已保存' and fklx<>'已付' and gysbh='" + gysbh + "'";
 		
 		//处理应收期初信息,如果存在期初值，则需要UNION期初值
-		String init_sql = "select '期初应付' as jhd_id,DATE_FORMAT(cz_date,'%Y-%m-%d') as fsrq,yfqc as fsje,(yfqc-yifuje) as yfje,yifuje as yisk from client_wl_init where client_name='" + gysbh + "' and yfqc>yifuje";
+		String init_sql = "select '期初应付' as jhd_id,DATE_FORMAT(cz_date,'%Y-%m-%d') as fsrq,yfqc as fsje,(yfqc-yifuje) as yfje,yifuje as yisk from client_wl_init where client_name='" + gysbh + "' and round(yfqc,2)<>round(yifuje,2)";
 		List list = this.getResultList(init_sql);
 		if(list != null && list.size()>0){
 			sql = "(" + sql + ") union (" + init_sql + ")";
+		}
+		
+		//处理应收期初信息,如果存在期初值，则需要UNION期初值
+		String pz_sql = "select id as jhd_id,DATE_FORMAT(cz_date,'%Y-%m-%d') as fsrq,pzje as fsje,(pzje-jsje) as yfje,jsje as yisk from pz where state='已提交' and type='应付' and client_name='" + gysbh + "' and round(jsje,2)<>round(pzje,2)";
+		List pzList = this.getResultList(pz_sql);
+		if(pzList != null && pzList.size()>0){
+			sql = "(" + sql + ") union (" + pz_sql + ")";
 		}
 		
 		return this.getResultList(sql);
@@ -280,10 +288,14 @@ public class CgfkDAO extends JdbcBaseDAO {
 				
 				CgfkDesc cgfkDesc = (CgfkDesc)cgfkDescs.get(i);
 				if(cgfkDesc != null){
-					if(cgfkDesc.getBcfk() > 0){
+					if(cgfkDesc.getBcfk() != 0){
 						if(cgfkDesc.getJhd_id().equals("期初应付")){
 							//处理期初应收
 							sql = "update client_wl_init set yifuje=yifuje+" + cgfkDesc.getBcfk() + "where client_name='" + cgfk.getGysbh() + "'";
+							this.getJdbcTemplate().update(sql);
+						}else if(cgfkDesc.getJhd_id().indexOf("PZ") != -1){
+							//处理往来调账
+							sql = "update pz set jsje=jsje+" + cgfkDesc.getBcfk() + " where id='" + cgfkDesc.getJhd_id() + "'";
 							this.getJdbcTemplate().update(sql);
 						}else{
 							sql = "update jhd set fkje=fkje+" + cgfkDesc.getBcfk() + " where id='" + cgfkDesc.getJhd_id() + "'";

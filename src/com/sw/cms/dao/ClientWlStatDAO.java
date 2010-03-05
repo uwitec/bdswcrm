@@ -172,5 +172,95 @@ public class ClientWlStatDAO extends JdbcBaseDAO {
 		return map;
 		
 	}
+	
+	
+	/**
+	 * 客户预收款
+	 * @param client_id
+	 * @return
+	 */
+	public Map getClientYushouk(String client_id){
+		Map map = new HashMap();
+		
+		String sql = "select client_name,(sum(hjje)-sum(jsje)) as ysk from yushouk_list where round(hjje,2)<>round(jsje,2)";
+		
+		if(!client_id.equals("")){
+			sql += " and client_name='" + client_id + "'";
+		}
+		
+		sql += " group by client_name";
+		
+		List list = this.getResultList(sql);
+
+		if(list != null && list.size() > 0){
+			for(int i=0;i<list.size();i++){
+				Map tempMap = (Map)list.get(i);
+				client_id = (String)tempMap.get("client_name");
+				map.put(client_id, tempMap.get("ysk"));
+			}
+		}
+		
+		return map;
+	}
+	
+	
+	/**
+	 * 客户期初结算余额
+	 * @param client_id
+	 * @return
+	 */
+	public Map getClientQcjsye(String client_id){
+		Map map = new HashMap();
+		
+		String sql = "select client_name,sum(ysqc-yishouje) as qcjsye from client_wl_init where 1=1";
+		
+		if(!client_id.equals("")){
+			sql += " and client_name='" + client_id + "'";
+		}
+		
+		sql += " group by client_name";
+		
+		List list = this.getResultList(sql);
+
+		if(list != null && list.size() > 0){
+			for(int i=0;i<list.size();i++){
+				Map tempMap = (Map)list.get(i);
+				client_id = (String)tempMap.get("client_name");
+				map.put(client_id, tempMap.get("qcjsye"));
+			}
+		}
+		
+		return map;
+	}
+	
+	
+	/**
+	 * 往来调账（应收）结算余额
+	 * @param client_id
+	 * @return
+	 */
+	public Map getClientTzjsye(String client_id){
+		Map map = new HashMap();
+		
+		String sql = "select client_name,sum(pzje-jsje) as tzjsje from pz where state='已提交' and type='应收'";
+		
+		if(!client_id.equals("")){
+			sql += " and client_name='" + client_id + "'";
+		}
+		
+		sql += " group by client_name";
+		
+		List list = this.getResultList(sql);
+
+		if(list != null && list.size() > 0){
+			for(int i=0;i<list.size();i++){
+				Map tempMap = (Map)list.get(i);
+				client_id = (String)tempMap.get("client_name");
+				map.put(client_id, tempMap.get("tzjsje"));
+			}
+		}
+		
+		return map;
+	}
 
 }

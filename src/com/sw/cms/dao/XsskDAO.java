@@ -164,6 +164,7 @@ public class XsskDAO extends JdbcBaseDAO {
 	
 	/**
 	 * 返回客户当前所有应收款列表
+	 * 包括：销售订单、期初应收、往来调账（应收）
 	 * @param client_id
 	 * @return
 	 */
@@ -171,11 +172,19 @@ public class XsskDAO extends JdbcBaseDAO {
 		String sql = "select id as xsd_id,creatdate as fsrq,sjcjje as fsje,(sjcjje-skje) as ysk,skje as yisk from xsd where state='已出库' and skxs<>'已收' and client_name='" + client_id + "'";
 		
 		//处理应收期初信息,如果存在期初值，则需要UNION期初值
-		String init_sql = "select '期初应收' as xsd_id,DATE_FORMAT(cz_date,'%Y-%m-%d') as fsrq,ysqc as fsje,(ysqc-yishouje) as ysk,yishouje as yisk from client_wl_init where client_name='" + client_id + "' and ysqc>yishouje";
+		String init_sql = "select '期初应收' as xsd_id,DATE_FORMAT(cz_date,'%Y-%m-%d') as fsrq,ysqc as fsje,(ysqc-yishouje) as ysk,yishouje as yisk from client_wl_init where client_name='" + client_id + "' and round(ysqc,2)<>round(yishouje,2)";
 		List list = this.getResultList(init_sql);
 		if(list != null && list.size()>0){
 			sql = "(" + sql + ") union (" + init_sql + ")";
 		}
+		
+		//处理应收期初信息,如果存在期初值，则需要UNION期初值
+		String pz_sql = "select id as jhd_id,DATE_FORMAT(cz_date,'%Y-%m-%d') as fsrq,pzje as fsje,(pzje-jsje) as yfje,jsje as yisk from pz where state='已提交' and type='应收' and client_name='" + client_id + "' and round(jsje,2)<>round(pzje,2)";
+		List pzList = this.getResultList(pz_sql);
+		if(pzList != null && pzList.size()>0){
+			sql = "(" + sql + ") union (" + pz_sql + ")";
+		}
+		
 		return this.getResultList(sql);
 	}
 	
@@ -287,10 +296,14 @@ public class XsskDAO extends JdbcBaseDAO {
 				
 				XsskDesc xsskDesc = (XsskDesc)xsskDescs.get(i);
 				if(xsskDesc != null){
-					if(xsskDesc.getBcsk() > 0){
+					if(xsskDesc.getBcsk() != 0){
 						if(xsskDesc.getXsd_id().equals("期初应收")){
 							//处理期初应收
 							sql = "update client_wl_init set yishouje=yishouje+" + xsskDesc.getBcsk() + "where client_name='" + xssk.getClient_name() + "'";
+							this.getJdbcTemplate().update(sql);
+						}else if(xsskDesc.getXsd_id().indexOf("PZ") != -1){
+							//处理往来调账
+							sql = "update pz set jsje=jsje+" + xsskDesc.getBcsk() + " where id='" + xsskDesc.getXsd_id() + "'";
 							this.getJdbcTemplate().update(sql);
 						}else{
 							sql = "update xsd set skje=skje+" + xsskDesc.getBcsk() + ",skrq='" + xssk.getSk_date() + "' where id='" + xsskDesc.getXsd_id() + "'";
@@ -328,7 +341,7 @@ public class XsskDAO extends JdbcBaseDAO {
 				
 				XsskDesc xsskDesc = (XsskDesc)xsskDescs.get(i);
 				if(xsskDesc != null){
-					if(xsskDesc.getBcsk() > 0){
+					if(xsskDesc.getBcsk() != 0){
 						sql = "insert into xssk_desc(xssk_id,xsd_id,bcsk,remark,fsrq,fsje,ysk) values(?,?,?,?,?,?,?)";
 						
 						param[0] = xssk_id;

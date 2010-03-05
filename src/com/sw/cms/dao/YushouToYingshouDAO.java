@@ -131,10 +131,14 @@ public class YushouToYingshouDAO extends JdbcBaseDAO {
 				
 				YushouToYingshouDesc desc = (YushouToYingshouDesc)descList.get(i);
 				if(desc != null){
-					if(desc.getBcjs() > 0){
+					if(desc.getBcjs() != 0){
 						if(desc.getXsd_id().equals("期初应收")){
 							//处理期初应收
 							sql = "update client_wl_init set yishouje=yishouje+" + desc.getBcjs() + "where client_name='" + info.getClient_name() + "'";
+							this.getJdbcTemplate().update(sql);
+						}else if(desc.getXsd_id().indexOf("PZ") != -1){
+							//处理往来调账
+							sql = "update pz set jsje=jsje+" + desc.getBcjs() + " where id='" + desc.getXsd_id() + "'";
 							this.getJdbcTemplate().update(sql);
 						}else{
 							sql = "update xsd set skje=skje+" + desc.getBcjs() + ",skrq='" + info.getCreate_date() + "' where id='" + desc.getXsd_id() + "'";
@@ -204,7 +208,7 @@ public class YushouToYingshouDAO extends JdbcBaseDAO {
 				
 				YushouToYingshouDesc desc = (YushouToYingshouDesc)descList.get(i);
 				if(desc != null){
-					if(desc.getBcjs() > 0){
+					if(desc.getBcjs() != 0){
 						sql = "insert into yushou_to_yingshou_desc(yw_id,xsd_id,yingshouje,bcjs,remark) values(?,?,?,?,?)";
 						
 						param[0] = info.getId();
