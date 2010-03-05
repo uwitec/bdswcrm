@@ -77,25 +77,30 @@ if(yushouToYingshouDescs != null && yushouToYingshouDescs.size()>0){
 			var bcjs = document.getElementById("bcjs_" + i);  //本次结算金额
 			var xsdysje = document.getElementById("yingshouje_" + i);  //销售单应收金额
 			
-			if(!InputValid(bcjs,0,"float",0,1,99999999,"本次结算")){
+			if(!InputValid(bcjs,0,"float",0,-99999999,99999999,"本次结算")){
 				bcjs.focus();
 				return;
 			}
-			if(parseFloat(bcjs.value) > parseFloat(xsdysje.value)){
-				alert("本次结算金额大于，应付金额，请检查！");
-				bcjs.focus();
-				return;
+			if(parseFloat(xsdysje.value)>0){
+				if(parseFloat(bcjs.value) > parseFloat(xsdysje.value)){
+					alert("本次结算金额应小于或等于应付金额，请检查！");
+					bcjs.focus();
+					return;
+				}
+			}else{
+				if(parseFloat(bcjs.value) < parseFloat(xsdysje.value)){
+					alert("应收金额为负值时，本次结算金额应大于或等于应付金额，请检查！");
+					bcjs.focus();
+					return;
+				}
 			}
-			
 			bcjs_hj = parseFloat(bcjs_hj) + parseFloat(bcjs.value);
-			
-			if(parseFloat(bcjs_hj) > parseFloat(document.getElementById("yushouzje").value)){
-				alert("结算合计金额大于，客户预收总金额，请检查！");
-				bcjs.focus();
-				return;
-			}
 		}
-
+		if(parseFloat(bcjs_hj) > parseFloat(document.getElementById("yushouzje").value)){
+			alert("结算合计金额大于，客户预收总金额，请检查！");
+			bcjs.focus();
+			return;
+		}
 		
 		var hjjs = document.getElementById("total");
 		hjjs.value = bcjs_hj;
@@ -142,7 +147,7 @@ if(yushouToYingshouDescs != null && yushouToYingshouDescs.size()>0){
 			</select>		
 		</td>
 		<td class="a1" width="15%">客户预收总金额</td>
-		<td class="a2"><%=clientHjYushouK %><input type="hidden" name="yushouzje" id="yushouzje" value="<%=clientHjYushouK %>"></td>					
+		<td class="a2"><%=JMath.round(clientHjYushouK) %><input type="hidden" name="yushouzje" id="yushouzje" value="<%=JMath.round(clientHjYushouK) %>"></td>					
 	</tr>	
 </table>
 <br>

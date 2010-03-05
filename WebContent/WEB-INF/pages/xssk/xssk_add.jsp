@@ -111,14 +111,23 @@ if(xsskDescs != null && xsskDescs.size()>0){
 			var ysk = document.getElementById("ysk_" + i);
 			
 			if(sk != null){
-				if(!InputValid(sk,1,"float",1,0,99999999,"本次收款")){
+				if(!InputValid(sk,1,"float",1,-99999999,99999999,"本次收款")){
 					sk.focus();
 					return;
 				}
-				if(parseFloat(sk.value) > parseFloat(ysk.value)){
-					alert("本次收款金额大于应收金额，请检查！");
-					sk.focus();
-					return;
+
+				if(parseFloat(ysk.value)>0){
+					if(parseFloat(sk.value) > parseFloat(ysk.value)){
+						alert("本次收款金额应小于或等于应收金额，请检查！");
+						sk.focus();
+						return;
+					}
+				}else{
+					if(parseFloat(sk.value) < parseFloat(ysk.value)){
+						alert("应收金额为负值时，本次收款金额应大于应收金额，请检查！");
+						sk.focus();
+						return;
+					}
 				}
 			}				
 			

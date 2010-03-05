@@ -63,14 +63,22 @@ if(yufuToYingfuDescs != null && yufuToYingfuDescs.size()>0){
 			var bcjs = document.getElementById("bcjs_" + i);  //本次结算金额
 			var xsdysje = document.getElementById("yingfuje_" + i);  //销售单应付金额
 			
-			if(!InputValid(bcjs,0,"float",0,1,99999999,"本次结算")){
+			if(!InputValid(bcjs,0,"float",0,-999999999,99999999,"本次结算")){
 				bcjs.focus();
 				return;
 			}
-			if(parseFloat(bcjs.value) > parseFloat(xsdysje.value)){
-				alert("本次结算金额大于，应付金额，请检查！");
-				bcjs.focus();
-				return;
+			if(parseFloat(xsdysje.value) > 0){
+				if(parseFloat(bcjs.value) > parseFloat(xsdysje.value)){
+					alert("本次结算金额应小于或等于应付金额，请检查！");
+					bcjs.focus();
+					return;
+				}
+			}else{
+				if(parseFloat(bcjs.value) < parseFloat(xsdysje.value)){
+					alert("应付金额为负值时，本次结算金额应大于或等于应付金额，请检查！");
+					bcjs.focus();
+					return;
+				}
 			}
 			
 			bcjs_hj = parseFloat(bcjs_hj) + parseFloat(bcjs.value);

@@ -115,10 +115,23 @@ if(cgfkDescs != null && cgfkDescs.size()>0){
 			var yfk = document.getElementById("yfje_" + i);
 			
 			if(fk != null){
-				if(!InputValid(fk,0,"float",0,1,99999999,"本次付款")){
+				if(!InputValid(fk,0,"float",-99999999,1,99999999,"本次付款")){
 					fk.focus();
 					return;
-				}				
+				}
+				if(parseFloat(yfk.value) > 0){
+					if(parseFloat(fk.value) > parseFloat(yfk.value)){
+						alert("本次付款金额应小于或等于应付金额，请检查！");
+						fk.focus();
+						return;
+					}
+				}else{
+					if(parseFloat(fk.value) < parseFloat(yfk.value)){
+						alert("应付金额为负值时，本次付款金额应大于或等于应付金额，请检查！");
+						fk.focus();
+						return;
+					}
+				}			
 			}				
 			
 			hjz = parseFloat(hjz) + parseFloat(fk.value);

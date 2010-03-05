@@ -51,15 +51,17 @@ String flag2 = StringUtils.nullToStr(request.getParameter("flag2"));            
 <TABLE align="center" cellSpacing=0 cellPadding=0 width="99%" border=0 style="BORDER-TOP: #000000 2px solid;BORDER-LEFT:#000000 1px solid">
 	<THEAD>
 		<TR>
-			<TD class=ReportHead width="10%">客户编号</TD>
-			<TD class=ReportHead width="20%">客户名称</TD>
-			<TD class=ReportHead width="10%">期初数</TD>
-			<TD class=ReportHead width="10%">本期发生数</TD>
-			<TD class=ReportHead width="10%">本期收款</TD>
-			<TD class=ReportHead width="10%">当前应收款</TD>
-			<TD class=ReportHead width="10%">未到期应收款</TD>
-			<TD class=ReportHead width="10%">超期应收款</TD>
-			<TD class=ReportHead width="10%">最长超期天数</TD>
+			<TD class=ReportHead width="18%">客户名称</TD>
+			<TD class=ReportHead width="10%">客户经理</TD>
+			<TD class=ReportHead width="8%">期初数</TD>
+			<TD class=ReportHead width="8%">本期发生数</TD>
+			<TD class=ReportHead width="8%">本期收款</TD>
+			<TD class=ReportHead width="8%">当前应收款</TD>
+			<TD class=ReportHead width="8%">未到期应收款</TD>
+			<TD class=ReportHead width="8%">超期应收款</TD>
+			<TD class=ReportHead width="8%">其它应收</TD>
+			<TD class=ReportHead width="8%">预收款</TD>
+			<TD class=ReportHead width="8%">最长超期天数</TD>
 		</TR>
 	</THEAD>
 	
@@ -72,13 +74,19 @@ double hj_ysje = 0;
 double hj_dqys = 0;
 double hj_wdqysk = 0;
 double hj_cqysk = 0;
+double hj_ysk = 0;
+double hj_qtysk = 0;
 
 Map qcMap = clientWlStatService.getClientQc(start_date);
 Map infoMap = clientWlStatService.getClientWlInfo(start_date,end_date,q_client_name);
 
-Map maxCqtsMap = clientWlStatService.getClientMaxCqts(q_client_name);
-Map wdqyskMap = clientWlStatService.getClientWdqysk(q_client_name);
-Map cqyskMap = clientWlStatService.getClientCqysk(q_client_name);
+Map maxCqtsMap = clientWlStatService.getClientMaxCqts(q_client_name);  //最长超期天数
+Map wdqyskMap = clientWlStatService.getClientWdqysk(q_client_name);    //未到期应收款
+Map cqyskMap = clientWlStatService.getClientCqysk(q_client_name);      //超期应收款 
+
+Map yskMap = clientWlStatService.getClientYushouk(q_client_name);      //预收款
+Map qcjsMap = clientWlStatService.getClientQcjsye(q_client_name);      //期初结算
+Map tzjsMap = clientWlStatService.getClientTzjsye(q_client_name);      //调账（应收）结算
 
 if(clientList != null && clientList.size() > 0){
 	for(int i=0;i<clientList.size();i++){
@@ -86,6 +94,7 @@ if(clientList != null && clientList.size() > 0){
 		
 		String client_id = StringUtils.nullToStr(map.get("id"));
 		String client_name = StringUtils.nullToStr(map.get("name"));
+		String khjl = StringUtils.nullToStr(map.get("khjl"));
 		
 		double qcs = qcMap.get(client_id+"应收")==null?0:((Double)qcMap.get(client_id+"应收")).doubleValue();  //期初数		
 		double bqfs = infoMap.get(client_id+"应收发生")==null?0:((Double)infoMap.get(client_id+"应收发生")).doubleValue();  //本期发生
@@ -98,6 +107,9 @@ if(clientList != null && clientList.size() > 0){
 		}
 		double wdqysk = wdqyskMap.get(client_id)==null?0:((Double)wdqyskMap.get(client_id)).doubleValue();  //未到期应收款 
 		double cqysk = cqyskMap.get(client_id)==null?0:((Double)cqyskMap.get(client_id)).doubleValue();  //超期应收款
+		
+		double ysk = yskMap.get(client_id)==null?0:((Double)yskMap.get(client_id)).doubleValue();  //预收款
+		double qtysk = (qcjsMap.get(client_id)==null?0:((Double)qcjsMap.get(client_id)).doubleValue()) + (tzjsMap.get(client_id)==null?0:((Double)tzjsMap.get(client_id)).doubleValue()); //其它应收款 
 
 		double dqys = qcs + bqfs - ysje;  //当前应收
 		
@@ -129,18 +141,22 @@ if(clientList != null && clientList.size() > 0){
 			hj_dqys += dqys;
 			hj_wdqysk += wdqysk;
 			hj_cqysk += cqysk;
+			hj_ysk += ysk;
+			hj_qtysk += qtysk;
 			
 %>	
 		<TR>
-	 		<TD class=ReportItem><%=client_id %></TD>
 			<TD class=ReportItem><a href="getYsmxMxResult.html?start_date=<%=start_date%>&end_date=<%=end_date%>&client_name=<%=client_id %>"><%=client_name %></a></TD>
-			<TD class=ReportItemMoney><%=JMath.round(qcs,2) %></TD>
-			<TD class=ReportItemMoney><%=JMath.round(bqfs,2) %></TD>
-			<TD class=ReportItemMoney><%=JMath.round(ysje,2) %></TD>
-			<TD class=ReportItemMoney><%=JMath.round(dqys,2) %></TD>
-			<TD class=ReportItemMoney><%=JMath.round(wdqysk,2) %></TD>
-			<TD class=ReportItemMoney><%=JMath.round(cqysk,2) %></TD>
-			<TD class=ReportItemMoney><%=cqts %></TD>
+			<TD class=ReportItemXH><%=khjl %>&nbsp;</TD>
+			<TD class=ReportItemMoney nowrap="nowrap"><%=JMath.round(qcs,2) %></TD>
+			<TD class=ReportItemMoney nowrap="nowrap"><%=JMath.round(bqfs,2) %></TD>
+			<TD class=ReportItemMoney nowrap="nowrap"><%=JMath.round(ysje,2) %></TD>
+			<TD class=ReportItemMoney nowrap="nowrap"><%=JMath.round(dqys,2) %></TD>
+			<TD class=ReportItemMoney nowrap="nowrap"><%=JMath.round(wdqysk,2) %></TD>
+			<TD class=ReportItemMoney nowrap="nowrap"><%=JMath.round(cqysk,2) %></TD>
+			<TD class=ReportItemMoney nowrap="nowrap"><%=JMath.round(qtysk,2) %></TD>
+			<TD class=ReportItemMoney nowrap="nowrap"><%=JMath.round(ysk,2) %></TD>
+			<TD class=ReportItemMoney nowrap="nowrap"><%=cqts %></TD>
 		</TR>
 
 <%		
@@ -153,12 +169,14 @@ if(clientList != null && clientList.size() > 0){
 	<TR>
 		<TD class=ReportItem style="font-weight:bold">合计（金额）</TD>
 		<TD class=ReportItem style="font-weight:bold">&nbsp;</TD>
-		<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(hj_qcs,2) %></TD>
-		<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(hj_bqfs,2) %></TD>
-		<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(hj_ysje,2) %></TD>
-		<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(hj_dqys,2) %></TD>
-		<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(hj_wdqysk,2) %></TD>
-		<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(hj_cqysk,2) %></TD>
+		<TD class=ReportItemMoney style="font-weight:bold" nowrap="nowrap"><%=JMath.round(hj_qcs,2) %></TD>
+		<TD class=ReportItemMoney style="font-weight:bold" nowrap="nowrap"><%=JMath.round(hj_bqfs,2) %></TD>
+		<TD class=ReportItemMoney style="font-weight:bold" nowrap="nowrap"><%=JMath.round(hj_ysje,2) %></TD>
+		<TD class=ReportItemMoney style="font-weight:bold" nowrap="nowrap"><%=JMath.round(hj_dqys,2) %></TD>
+		<TD class=ReportItemMoney style="font-weight:bold" nowrap="nowrap"><%=JMath.round(hj_wdqysk,2) %></TD>
+		<TD class=ReportItemMoney style="font-weight:bold" nowrap="nowrap"><%=JMath.round(hj_cqysk,2) %></TD>
+		<TD class=ReportItemMoney style="font-weight:bold" nowrap="nowrap"><%=JMath.round(hj_qtysk,2) %></TD>
+		<TD class=ReportItemMoney style="font-weight:bold" nowrap="nowrap"><%=JMath.round(hj_ysk,2) %></TD>
 		<TD class=ReportItemMoney style="font-weight:bold">--</TD>
 	</TR>
 	</TBODY>
@@ -167,7 +185,8 @@ if(clientList != null && clientList.size() > 0){
 <br>
 <table width="99%">
 		<tr>
-		<td width="70%" height="30">&nbsp;说明：点击客户编号或客户名称打开应收对账单</td>
+		<td width="70%" height="30">&nbsp;说明：点击客户编号或客户名称打开应收对账单
+		</td>
 		<td colspan="2" align="right" height="30">生成报表时间：<%=DateComFunc.getToday() %>&nbsp;&nbsp;&nbsp;</td>
 		</tr>
 </table>
