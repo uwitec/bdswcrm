@@ -142,7 +142,7 @@ if(yufuToYingfuDescs != null && yufuToYingfuDescs.size()>0){
 			</select>		
 		</td>
 		<td class="a1" width="15%">预付总金额</td>
-		<td class="a2"><%=clientHjYufuK %><input type="hidden" name="yufuzje" id="yufuzje" value="<%=clientHjYufuK %>"></td>					
+		<td class="a2"><%=JMath.round(clientHjYufuK) %><input type="hidden" name="yufuzje" id="yufuzje" value="<%=JMath.round(clientHjYufuK) %>"></td>					
 	</tr>	
 </table>
 <br>
