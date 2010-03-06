@@ -153,7 +153,7 @@ if(clientList != null && clientList.size() > 0){
 			<TD class=ReportItemMoney nowrap="nowrap" title="本期收款"><%=JMath.round(ysje,2) %></TD>
 			<TD class=ReportItemMoney nowrap="nowrap" title="当前应收款"><%=JMath.round(dqys,2) %></TD>
 			<TD class=ReportItemMoney nowrap="nowrap" title="未到期应收款"><%=JMath.round(wdqysk,2) %></TD>
-			<TD class=ReportItemMoney nowrap="nowrap" title="超期应收款"><%=JMath.round(cqysk,2) %></TD>
+			<TD class=ReportItemMoney nowrap="nowrap" title="超期应收款"><font color="red"><%=JMath.round(cqysk,2) %></font></TD>
 			<TD class=ReportItemMoney nowrap="nowrap" title="其它应收"><%=JMath.round(qtysk,2) %></TD>
 			<TD class=ReportItemMoney nowrap="nowrap" title="预收款"><%=JMath.round(ysk,2) %></TD>
 			<TD class=ReportItemMoney nowrap="nowrap" title="最长超期天数"><%=cqts %></TD>
@@ -174,7 +174,7 @@ if(clientList != null && clientList.size() > 0){
 		<TD class=ReportItemMoney style="font-weight:bold" nowrap="nowrap"><%=JMath.round(hj_ysje,2) %></TD>
 		<TD class=ReportItemMoney style="font-weight:bold" nowrap="nowrap"><%=JMath.round(hj_dqys,2) %></TD>
 		<TD class=ReportItemMoney style="font-weight:bold" nowrap="nowrap"><%=JMath.round(hj_wdqysk,2) %></TD>
-		<TD class=ReportItemMoney style="font-weight:bold" nowrap="nowrap"><%=JMath.round(hj_cqysk,2) %></TD>
+		<TD class=ReportItemMoney style="font-weight:bold" nowrap="nowrap"><font color="red"><%=JMath.round(hj_cqysk,2) %></font></TD>
 		<TD class=ReportItemMoney style="font-weight:bold" nowrap="nowrap"><%=JMath.round(hj_qtysk,2) %></TD>
 		<TD class=ReportItemMoney style="font-weight:bold" nowrap="nowrap"><%=JMath.round(hj_ysk,2) %></TD>
 		<TD class=ReportItemMoney style="font-weight:bold">--</TD>
