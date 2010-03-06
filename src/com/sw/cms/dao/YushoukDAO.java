@@ -123,6 +123,17 @@ public class YushoukDAO extends JdbcBaseDAO {
 			}
 		}
 		
+		if(total > 0){
+			//预收款如果有剩余，保存，此种情况一般情况不会存在
+			sql = "insert into yushouk_list(client_name,hjje,remark) values(?,?,?)";
+			Object[] param = new Object[3];
+			param[0] = info.getClient_name();
+			param[1] = total;
+			param[2] = "预收冲应收剩余";
+			
+			this.getJdbcTemplate().update(sql, param);
+		}
+		
 	}
 
 	
