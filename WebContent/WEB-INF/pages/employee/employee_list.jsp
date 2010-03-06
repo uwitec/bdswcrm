@@ -76,8 +76,7 @@ String position = (String)VS.findValue("position");
 			<img src="images/import.gif" align="absmiddle" border="0">&nbsp;<a href="#" class="xxlb" onclick="refreshPage();"> 刷 新 </a>	</td>			
 	</tr>
 	<tr>
-		<td class="search" align="left" colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;
-			性名：<input type="text" name="real_name" value="<%=real_name %>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	
+		<td class="search" align="left" colspan="2">&nbsp;&nbsp;&nbsp;&nbsp; 姓名：<input type="text" name="real_name" value="<%=real_name %>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	
 			职位：
 			<select name="position">
 				<option value=""></option>
