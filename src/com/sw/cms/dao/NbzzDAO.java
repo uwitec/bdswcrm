@@ -120,6 +120,25 @@ public class NbzzDAO extends JdbcBaseDAO {
 		return "ZZ" + day + "-" + curId;
 	}
 	
+	
+	/**
+	 * 判断内部转账是否已经提交
+	 * @param id
+	 * @return
+	 */
+	public boolean isNbzzSubmit(String id){
+		boolean is = false;
+		
+		String sql = "select count(*) as counts from nbzz where id='" + id + "' and state='已提交'";
+		int counts = this.getJdbcTemplate().queryForInt(sql);
+		
+		if(counts > 0){
+			is = true;
+		}
+		
+		return is;
+	}
+	
 	/**
 	 * 包装对象(内部转账)
 	 * 

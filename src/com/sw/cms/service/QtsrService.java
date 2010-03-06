@@ -46,6 +46,11 @@ public class QtsrService {
 	 * @param qtsr
 	 */
 	public void updateQtsr(Qtsr qtsr){
+		
+		//如果其它收入已经提交，不做其它处理
+		if(qtsrDao.isQtsrSubmit(qtsr.getId())){
+			return;
+		}
 		qtsrDao.updateQtsr(qtsr);
 		
 		if(qtsr.getState().equals("已提交")){

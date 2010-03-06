@@ -24,6 +24,7 @@ public class YsmxReportAction extends BaseAction {
 	
 	private String xsd_id = "";
 	private String client_name = "";
+	private String khjl = "";
 	
 	
 	public String showCondition(){
@@ -33,7 +34,7 @@ public class YsmxReportAction extends BaseAction {
 	}
 	
 	public String getResult(){
-		clientList = clientsService.getClietsById(client_name);
+		clientList = clientsService.getClietsById(client_name,khjl);
 		return "success";
 	}
 	
@@ -120,6 +121,14 @@ public class YsmxReportAction extends BaseAction {
 
 	public void setClientWlStatService(ClientWlStatService clientWlStatService) {
 		this.clientWlStatService = clientWlStatService;
+	}
+
+	public String getKhjl() {
+		return khjl;
+	}
+
+	public void setKhjl(String khjl) {
+		this.khjl = khjl;
 	}
 
 }

@@ -52,11 +52,14 @@ public class ClientsDAO extends JdbcBaseDAO {
 	 * @param client_id
 	 * @return
 	 */
-	public List getClietsById(String client_id){
+	public List getClietsById(String client_id,String khjl){
 		String sql = "select a.id,a.name,b.real_name as khjl from clients a left join sys_user b on b.user_id=a.khjl where 1=1";
 		
 		if(!client_id.equals("")){
 			sql = sql + " and a.id='" + client_id + "'";
+		}
+		if(!khjl.equals("")){
+			sql = sql + " and a.khjl='" + khjl + "'";
 		}
 		
 		return this.getResultList(sql);

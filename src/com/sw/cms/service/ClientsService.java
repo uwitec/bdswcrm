@@ -53,8 +53,8 @@ public class ClientsService {
 	 * @param client_id
 	 * @return
 	 */
-	public List getClietsById(String client_id){
-		return clientsDao.getClietsById(client_id);
+	public List getClietsById(String client_id,String khjl){
+		return clientsDao.getClietsById(client_id,khjl);
 	}
 	
 	

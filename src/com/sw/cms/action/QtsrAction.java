@@ -25,6 +25,7 @@ public class QtsrAction extends BaseAction {
 	
 	private String sr_date1 = "";
 	private String sr_date2 = "";
+	private String state = "";
 	
 	private String id = "";
 	
@@ -47,6 +48,9 @@ public class QtsrAction extends BaseAction {
 		}
 		if(!sr_date2.equals("")){
 			con += " and sr_date<='" + sr_date2 + "'";
+		}
+		if(!state.equals("")){
+			con += " and state='" + state + "'";
 		}
 		
 		if(orderName.equals("")){
@@ -241,6 +245,16 @@ public class QtsrAction extends BaseAction {
 
 	public void setSrlx(String[] srlx) {
 		this.srlx = srlx;
+	}
+
+
+	public String getState() {
+		return state;
+	}
+
+
+	public void setState(String state) {
+		this.state = state;
 	}
 
 }

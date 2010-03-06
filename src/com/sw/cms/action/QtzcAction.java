@@ -27,6 +27,7 @@ public class QtzcAction extends BaseAction {
 	
 	private String zc_date1 = "";
 	private String zc_date2 = "";
+	private String state = "";
 	
 	private String id = "";
 	
@@ -50,6 +51,9 @@ public class QtzcAction extends BaseAction {
 		}
 		if(!zc_date2.equals("")){
 			con += " and zc_date<='" + zc_date2 + "'";
+		}
+		if(!state.equals("")){
+			con += " and state='" + state + "'";
 		}
 		
 		if(orderName.equals("")){
@@ -118,10 +122,8 @@ public class QtzcAction extends BaseAction {
 		
 		//判断支出费用是否已经提交
 		if(qtzcService.isFinishZc(qtzc.getId())){
-			this.saveMessage("费用已支出，不能重复支出，请检查！");
-			zclx = sjzdService.getSjzdXmxxByZdId("SJZD_ZCLX");
-			fkfs = sjzdService.getSjzdXmxxByZdId("SJZD_FKFS");   //付款方式
-			return "input";
+			//如果费用已经支付，直接不做其它处理，返回成功
+			return SUCCESS;
 		}
 		
 		LoginInfo info = (LoginInfo)getSession().getAttribute("LOGINUSER");
@@ -260,6 +262,16 @@ public class QtzcAction extends BaseAction {
 
 	public void setFkfs(String[] fkfs) {
 		this.fkfs = fkfs;
+	}
+
+
+	public String getState() {
+		return state;
+	}
+
+
+	public void setState(String state) {
+		this.state = state;
 	}
 
 }

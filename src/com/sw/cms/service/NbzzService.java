@@ -45,6 +45,11 @@ public class NbzzService {
 	 * @param nbzz
 	 */
 	public void updateNbzz(Nbzz nbzz){
+		
+		if(nbzzDao.isNbzzSubmit(nbzz.getId())){
+			return;
+		}
+		
 		nbzzDao.updateNbzz(nbzz);
 		
 		if(nbzz.getState().equals("“—Ã·Ωª")){

@@ -120,6 +120,25 @@ public class QtsrDAO extends JdbcBaseDAO {
 		return "SR" + day + "-" + curId;
 	}
 	
+	
+	/**
+	 * 其它收入是否已经提交
+	 * @param id
+	 * @return
+	 */
+	public boolean isQtsrSubmit(String id){
+		boolean is = false;
+		
+		String sql = "select count(*) as counts from qtsr where id='" + id + "' and state='已提交'";
+		int counts = this.getJdbcTemplate().queryForInt(sql);
+		
+		if(counts > 0){
+			is = true;
+		}
+		
+		return is;
+	}
+	
 	/**
 	 * 包装对象(其它收入)
 	 * 

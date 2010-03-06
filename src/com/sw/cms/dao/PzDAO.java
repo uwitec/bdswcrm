@@ -1,10 +1,6 @@
 package com.sw.cms.dao;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
-import org.springframework.jdbc.core.RowMapper;
-
+import com.sw.cms.dao.base.BeanRowMapper;
 import com.sw.cms.dao.base.JdbcBaseDAO;
 import com.sw.cms.model.Page;
 import com.sw.cms.model.Pz;
@@ -32,7 +28,7 @@ public class PzDAO extends JdbcBaseDAO {
 			sql = sql + con;
 		}
 		
-		return this.getResultByPage(sql, curPage, rowsPerPage, new PzRowMapper());
+		return this.getResultByPage(sql, curPage, rowsPerPage, new BeanRowMapper(Pz.class));
 	}
 	
 	
@@ -92,7 +88,7 @@ public class PzDAO extends JdbcBaseDAO {
 	 */
 	public Object getPz(String id){
 		String sql = "select * from pz where id='" + id + "'";
-		return this.queryForObject(sql, new PzRowMapper());
+		return this.queryForObject(sql, new BeanRowMapper(Pz.class));
 	}
 	
 	
@@ -127,30 +123,6 @@ public class PzDAO extends JdbcBaseDAO {
 		}
 
 		return "PZ" + day + "-" + curId;
-	}
-	
-	/**
-	 * 包装对象(平账)
-	 * 
-	 * @author liyt
-	 * 
-	 */
-	class PzRowMapper implements RowMapper {
-		public Object mapRow(ResultSet rs, int index) throws SQLException {
-			Pz pz = new Pz();
-
-			pz.setId(rs.getString("id"));
-			pz.setPz_date(rs.getString("pz_date"));
-			pz.setJsr(rs.getString("jsr"));
-			pz.setClient_name(rs.getString("client_name"));
-			pz.setPzje(rs.getDouble("pzje"));
-			pz.setState(rs.getString("state"));
-			pz.setType(rs.getString("type"));
-			pz.setRemark(rs.getString("remark"));
-			pz.setPzxm(rs.getString("pzxm"));
-			
-			return pz;
-		}
 	}	
 
 }

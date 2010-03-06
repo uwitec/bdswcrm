@@ -1,5 +1,7 @@
 package com.sw.cms.model;
 
+import java.util.Date;
+
 public class Pz {
 	
 	private String id;
@@ -7,12 +9,13 @@ public class Pz {
 	private String jsr;
 	private String client_name;
 	private double pzje;
-	private String skzh;
 	private String type;
 	private String state;
 	private String remark;
 	private String czr;
 	private String pzxm;
+	private Date cz_date;
+	private double jsje;
 	
 	public String getClient_name() {
 		return client_name;
@@ -50,12 +53,6 @@ public class Pz {
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
-	public String getSkzh() {
-		return skzh;
-	}
-	public void setSkzh(String skzh) {
-		this.skzh = skzh;
-	}
 	public String getState() {
 		return state;
 	}
@@ -79,6 +76,18 @@ public class Pz {
 	}
 	public void setPzxm(String pzxm) {
 		this.pzxm = pzxm;
+	}
+	public Date getCz_date() {
+		return cz_date;
+	}
+	public void setCz_date(Date czDate) {
+		cz_date = czDate;
+	}
+	public double getJsje() {
+		return jsje;
+	}
+	public void setJsje(double jsje) {
+		this.jsje = jsje;
 	}
 
 }
