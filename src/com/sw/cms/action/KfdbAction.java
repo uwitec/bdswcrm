@@ -16,6 +16,7 @@ import com.sw.cms.service.StoreService;
 import com.sw.cms.service.SysInitSetService;
 import com.sw.cms.service.UserService;
 import com.sw.cms.util.Constant;
+import com.sw.cms.util.DateComFunc;
 import com.sw.cms.util.ParameterUtility;
 import com.sw.cms.util.StaticParamDo;
 import com.sw.cms.util.StringUtils;
@@ -43,8 +44,8 @@ public class KfdbAction extends BaseAction {
 	private List depts = new ArrayList();
 	
 	private String id = "";
-	private String ck_date1 = "";
-	private String ck_date2 = "";
+	private String ck_date1 = DateComFunc.getToday();
+	private String ck_date2 = DateComFunc.getToday();
 	private String orderName ="";
 	private String orderType ="";	
 	private int curPage = 1;
