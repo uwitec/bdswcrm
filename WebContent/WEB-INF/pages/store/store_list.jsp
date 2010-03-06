@@ -78,11 +78,9 @@ String orderType = (String)VS.findValue("orderType");
 	<tr>
 		<td onclick="doSort('id');">仓库编号<%if(orderName.equals("id")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
 		<td onclick="doSort('name');">名称<%if(orderName.equals("name")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('lxr');">联系人<%if(orderName.equals("lxr")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td onclick="doSort('address');">地址<%if(orderName.equals("address")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td onclick="doSort('lxr');">负责人<%if(orderName.equals("lxr")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
 		<td onclick="doSort('lxdh');">联系电话<%if(orderName.equals("lxdh")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('mobile');">手机<%if(orderName.equals("mobile")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('msn');">MSN<%if(orderName.equals("msn")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('qq');">QQ<%if(orderName.equals("qq")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
 		<td>操作</td>
 	</tr>
 	</thead>
@@ -96,11 +94,9 @@ String orderType = (String)VS.findValue("orderType");
 	<tr>
 		<td class="a1"><%=StringUtils.nullToStr(map.get("id")) %></td>
 		<td class="a1"><%=StringUtils.nullToStr(map.get("name")) %></td>
+		<td class="a1"><%=StringUtils.nullToStr(map.get("address")) %></td>
 		<td class="a1"><%=StringUtils.nullToStr(map.get("lxr")) %></td>
 		<td class="a1"><%=StringUtils.nullToStr(map.get("lxdh")) %></td>
-		<td class="a1"><%=StringUtils.nullToStr(map.get("mobile")) %></td>
-		<td class="a1"><%=StringUtils.nullToStr(map.get("msn")) %></td>
-		<td class="a1"><%=StringUtils.nullToStr(map.get("qq")) %></td>
 		<td class="a1">
 			<a href="editStore.html?id=<%=StringUtils.nullToStr(map.get("id")) %>"><img src="images/modify.gif" align="absmiddle" title="修改仓库信息" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
 			<a href="#" onclick="openWin('<%=StringUtils.nullToStr(map.get("id")) %>');"><img src="images/view.gif" align="absmiddle" title="查看仓库信息" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
