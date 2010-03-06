@@ -35,26 +35,16 @@ StoreHouse storeHouse = (StoreHouse)VS.findValue("storeHouse");
 	</thead>
 	<tr>
 		<td class="a1" width="15%">仓库名称</td>
-		<td class="a2" width="35%"><input type="text" name="storeHouse.name" id="name" value="<%=StringUtils.nullToStr(storeHouse.getName()) %>" readonly maxlength="25"></td>
+		<td class="a2" width="35%"><input type="text" name="storeHouse.name" id="name" value="<%=StringUtils.nullToStr(storeHouse.getName()) %>" readonly size="30" maxlength="35"></td>
 		<td class="a1" width="15%">地址</td>
-		<td class="a2" width="35%"><input type="text" name="storeHouse.address" id="address" value="<%=StringUtils.nullToStr(storeHouse.getAddress()) %>" readonly maxlength="50"></td>
+		<td class="a2" width="35%"><input type="text" name="storeHouse.address" id="address" value="<%=StringUtils.nullToStr(storeHouse.getAddress()) %>" readonly size="40" maxlength="50"></td>
 	</tr>
 	<tr>
 		<td class="a1" width="15%">联系人</td>
-		<td class="a2" width="35%"><input type="text" name="storeHouse.lxr" id="lxr" value="<%=StringUtils.nullToStr(storeHouse.getLxr()) %>" readonly maxlength="10"></td>
+		<td class="a2" width="35%"><input type="text" name="storeHouse.lxr" id="lxr" value="<%=StringUtils.nullToStr(storeHouse.getLxr()) %>" readonly size="25" maxlength="32"></td>
 		<td class="a1" width="15%">联系电话</td>
-		<td class="a2" width="35%"><input type="text" name="storeHouse.lxdh" id="lxdh" value="<%=StringUtils.nullToStr(storeHouse.getLxdh()) %>" readonly maxlength="20"></td>
+		<td class="a2" width="35%"><input type="text" name="storeHouse.lxdh" id="lxdh" value="<%=StringUtils.nullToStr(storeHouse.getLxdh()) %>" readonly size="30" maxlength="50"></td>
 	</tr>	
-	<tr>
-		<td class="a1" width="15%">手机</td>
-		<td class="a2" width="35%"><input type="text" name="storeHouse.mobile" id="mobile" value="<%=StringUtils.nullToStr(storeHouse.getMobile()) %>" readonly maxlength="20"></td>
-		<td class="a1" width="15%">MSN</td>
-		<td class="a2" width="35%"><input type="text" name="storeHouse.msn" id="msn" value="<%=StringUtils.nullToStr(storeHouse.getMsn()) %>" readonly maxlength="50"></td>
-	</tr>	
-	<tr>
-		<td class="a1" width="15%">QQ</td>
-		<td class="a2" width="35%"><input type="text" name="storeHouse.qq" id="qq" value="<%=StringUtils.nullToStr(storeHouse.getQq()) %>" readonly maxlength="20"></td>
-	</tr>		
 </table>
 <br>
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
