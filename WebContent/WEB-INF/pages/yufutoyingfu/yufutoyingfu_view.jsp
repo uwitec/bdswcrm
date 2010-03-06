@@ -39,10 +39,8 @@ List yufuToYingfuDescs = (List)VS.findValue("yufuToYingfuDescs");
 		<td class="a2" width="35%"><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(yufuToYingfu.getJsr())) %></td>				
 	</tr>
 	<tr>		
-		<td class="a1" width="15%">状态</td>
-		<td class="a2"><%=StringUtils.nullToStr(yufuToYingfu.getState()) %></td>
 		<td class="a1" width="15%">预付总金额</td>
-		<td class="a2"><%=clientHjYufuK %></td>					
+		<td class="a2" colspan="3"><%=clientHjYufuK %></td>					
 	</tr>	
 </table>
 <br>

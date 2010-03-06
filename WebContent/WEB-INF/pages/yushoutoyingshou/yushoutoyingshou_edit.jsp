@@ -39,7 +39,14 @@ if(yushouToYingshouDescs != null && yushouToYingshouDescs.size()>0){
 <script type="text/javascript">
 	var allCount = <%=allCount %>;
 
-	function saveInfo(){
+	function saveInfo(vl){
+
+		if(vl == "1"){
+			document.getElementById("state").value = "已保存";
+		}else{
+			document.getElementById("state").value = "已提交";
+		}
+		
 		if(!InputValid(document.getElementById("id"),1,"string",1,1,20,"编号")){	 return; }
 		if(!InputValid(document.getElementById("create_date"),1,"string",1,1,20,"日期")){	 return; }
 		if(!InputValid(document.getElementById("client_id"),1,"string",1,1,50,"往来单位")){	 return; }
@@ -51,7 +58,18 @@ if(yushouToYingshouDescs != null && yushouToYingshouDescs.size()>0){
 		
 		hj();
 
-		document.XsskForm.submit();
+		if(vl == "1"){
+			document.XsskForm.submit();
+		}else{
+			if(window.confirm("确认提交吗？提交后将不可修改！")){
+				document.XsskForm.submit();
+			}else{
+				return;
+			}
+		}
+		
+		document.qtzcForm.btnSub.disabled = true;
+		document.qtzcForm.btnSave.disabled = true;
 	}	
 	
 	function openClientWin(){
@@ -110,6 +128,7 @@ if(yushouToYingshouDescs != null && yushouToYingshouDescs.size()>0){
 </head>
 <body  onload="initFzrTip();">
 <form name="XsskForm" action="updateYushouToYingshou.html" method="post">
+<input type="hidden" name="yushouToYingshou.state" id="state" value="">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
@@ -118,10 +137,10 @@ if(yushouToYingshouDescs != null && yushouToYingshouDescs.size()>0){
 	</thead>
 	<tr>
 		<td class="a1" width="15%">编号</td>
-		<td class="a2" width="35%"><input type="text" name="yushouToYingshou.id" id="id" value="<%=StringUtils.nullToStr(yushouToYingshou.getId()) %>" readonly>
+		<td class="a2" width="35%"><input type="text" name="yushouToYingshou.id" id="id" value="<%=StringUtils.nullToStr(yushouToYingshou.getId()) %>" readonly><font color="red">*</font>
 		</td>
 		<td class="a1" width="15%">结算日期</td>
-		<td class="a2" width="35%"><input type="text" name="yushouToYingshou.create_date" id="create_date" value="<%=StringUtils.nullToStr(yushouToYingshou.getCreate_date()).equals("")?DateComFunc.getToday():StringUtils.nullToStr(yushouToYingshou.getCreate_date()) %>" class="Wdate" onFocus="WdatePicker()">
+		<td class="a2" width="35%"><input type="text" name="yushouToYingshou.create_date" id="create_date" value="<%=StringUtils.nullToStr(yushouToYingshou.getCreate_date()).equals("")?DateComFunc.getToday():StringUtils.nullToStr(yushouToYingshou.getCreate_date()) %>" class="Wdate" onFocus="WdatePicker()"><font color="red">*</font>
 		</td>		
 	</tr>
 	<tr>		
@@ -129,25 +148,18 @@ if(yushouToYingshouDescs != null && yushouToYingshouDescs.size()>0){
 		<td class="a2" width="35%">
 		<input type="text" name="clientName" id="client_name" value="<%=StaticParamDo.getClientNameById(StringUtils.nullToStr(yushouToYingshou.getClient_name())) %>" size="35" readonly>
 		<input type="hidden" name="yushouToYingshou.client_name" id="client_id" value="<%=StringUtils.nullToStr(yushouToYingshou.getClient_name()) %>">
-		</td>
+		<font color="red">*</font></td>
 		<td class="a1" width="15%">经手人</td>
 		<td class="a2" width="35%">
 		 <input  id="brand"    type="text"   length="20"  onblur="setValue()"value="<%=StaticParamDo.getRealNameById(yushouToYingshou.getJsr()) %>"/>
           <div   id="brandTip"  style="height:12px;position:absolute;left:612px; top:85px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
           </div>
-		    <input type="hidden" name="yushouToYingshou.jsr" id="fzr" value="<%=yushouToYingshou.getJsr()%>" /> 
+		    <input type="hidden" name="yushouToYingshou.jsr" id="fzr" value="<%=yushouToYingshou.getJsr()%>" /> <font color="red">*</font>
 		</td>				
 	</tr>
 	<tr>		
-		<td class="a1" width="15%">状态</td>
-		<td class="a2">
-			<select name="yushouToYingshou.state">
-				<option value="已保存" <%if(StringUtils.nullToStr(yushouToYingshou.getState()).equals("已保存")) out.print("selected"); %>>已保存</option>
-				<option value="已提交" <%if(StringUtils.nullToStr(yushouToYingshou.getState()).equals("已提交")) out.print("selected"); %>>已提交</option>
-			</select>		
-		</td>
 		<td class="a1" width="15%">客户预收总金额</td>
-		<td class="a2"><%=JMath.round(clientHjYushouK) %><input type="hidden" name="yushouzje" id="yushouzje" value="<%=JMath.round(clientHjYushouK) %>"></td>					
+		<td class="a2" colspan="3"><%=JMath.round(clientHjYushouK) %><input type="hidden" name="yushouzje" id="yushouzje" value="<%=JMath.round(clientHjYushouK) %>"></td>					
 	</tr>	
 </table>
 <br>
@@ -222,13 +234,14 @@ if(yushouToYingshouDescs != null && yushouToYingshouDescs.size()>0){
 	
 	<tr height="35">
 		<td class="a1" colspan="2">
-			<input type="button" name="button1" value="提 交" class="css_button2" onclick="saveInfo();">&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="reset" name="button2" value="重 置" class="css_button2">&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="button" name="button1" value="关 闭" class="css_button2" onclick="window.close();">
+			<input type="button" name="btnSave" value="保 存" class="css_button2" onclick="saveInfo('1');">&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="button" name="btnSub" value="提 交" class="css_button2" onclick="saveInfo('2');">&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="button" name="button3" value="关 闭" class="css_button2" onclick="window.close();">
 		</td>
 	</tr>
 </table>
-
+<BR>
+<font color="red">注：保存后不结算可修改；提交后完成结算不可修改。</font>
 </form>
 </body>
 </html>

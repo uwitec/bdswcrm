@@ -65,7 +65,7 @@ function chgType(){
 }
 </script>
 </head>
-<body onload="initClientTip();">
+<body onload="initFzrTip();initClientTip();">
 <form name="reportForm" action="getYsmxResult.html" method="post">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
 	<thead>
@@ -90,15 +90,21 @@ function chgType(){
 		<input type="hidden" name="client_name" id="client_id" value="">
 		<div id="clientsTip" style="height:12px;position:absolute;left:276px; top:85px; width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		</td>	
+		<td class="a1">客户经理</td>
+		<td class="a4">
+		    <input  id="brand" type="text"   length="20"  onblur="setValue()"  /> 
+            <div id="brandTip" style="height:12px;position:absolute;left:720px; top:85px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+		    <input type="hidden" name="khjl" id="fzr"  /> 
+		</td>							
+	</tr>	
+	<tr>
 		<td class="a1">不显示0往来单位</td>
 		<td class="a4">	
 			<input type="radio" name="flag" id="flag" value="是"/>是&nbsp;&nbsp;
 			<input type="radio" name="flag" id="flag" value="否" checked/>否			
-		</td>					
-	</tr>	
-	<tr>
+		</td>	
 		<td class="a1">不显示余额为0往来单位</td>
-		<td class="a4" colspan="3">
+		<td class="a4">
 			<input type="radio" name="flag2" id="flag2" value="是" checked/>是&nbsp;&nbsp;
 			<input type="radio" name="flag2" id="flag2" value="否"/>否				
 		</td>	

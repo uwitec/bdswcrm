@@ -38,7 +38,12 @@ if(msg != null && msg.size() > 0){
 	}
 </style>
 <script type="text/javascript">
-	function saveInfo(){
+	function saveInfo(vl){
+		if(vl == "1"){
+			document.getElementById("state").value = "已保存";
+		}else{
+			document.getElementById("state").value = "已提交";
+		}
 		if(!InputValid(document.getElementById("id"),1,"string",1,1,50,"编号")){	 return; }
 				
 		if(document.getElementById("zczh").value == ""){
@@ -58,8 +63,18 @@ if(msg != null && msg.size() > 0){
 			alert("经手人不能为空，请选择！");
 			return;
 		}			
+		if(vl == "1"){
+			document.nbzzForm.submit();
+		}else{
+			if(window.confirm("确认提交吗？提交后将不可修改！")){
+				document.nbzzForm.submit();
+			}else{
+				return;
+			}
+		}
 		
-		document.nbzzForm.submit();
+		document.qtzcForm.btnSub.disabled = true;
+		document.qtzcForm.btnSave.disabled = true;
 	}
 
 	
@@ -90,6 +105,7 @@ if(msg != null && msg.size() > 0){
 </head>
 <body onload="initFzrTip();" >
 <form name="nbzzForm" action="saveNbzz.html" method="post">
+<input type="hidden" name="nbzz.state" id="state" value="">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
@@ -119,32 +135,23 @@ if(msg != null && msg.size() > 0){
 		<td class="a1" width="15%">转出账户</td>
 		<td class="a2" width="35%"><input type="text" id="zczh_name"  name="zczh_name" value="<%=StaticParamDo.getAccountNameById(StringUtils.nullToStr(nbzz.getZczh())) %>" readonly>
 		<input type="hidden" id="zczh"  name="nbzz.zczh" value="<%=StringUtils.nullToStr(nbzz.getZczh()) %>">
-		<img src="images/select.gif" align="absmiddle" title="选择账户" border="0" onclick="openZczh();" style="cursor:hand">
+		<img src="images/select.gif" align="absmiddle" title="选择账户" border="0" onclick="openZczh();" style="cursor:hand"><span style="color:red">*</span>
 		</td>
 		<td class="a1" width="15%">转入账户</td>
 		<td class="a2" width="35%"><input type="text" id="zrzh_name"  name="zrzh_name" value="<%=StaticParamDo.getAccountNameById(StringUtils.nullToStr(nbzz.getZrzh())) %>" readonly>
 		<input type="hidden" id="zrzh"  name="nbzz.zrzh" value="<%=StringUtils.nullToStr(nbzz.getZrzh()) %>">
-		<img src="images/select.gif" align="absmiddle" title="选择账户" border="0" onclick="openZrzh();" style="cursor:hand">
+		<img src="images/select.gif" align="absmiddle" title="选择账户" border="0" onclick="openZrzh();" style="cursor:hand"><span style="color:red">*</span>
 		</td>
 	</tr>	
 	<tr>					
 		<td class="a1" width="15%">转账金额</td>
-		<td class="a2" width="35%"><input type="text" name="nbzz.zzje" id="zzje" value="<%=JMath.round(nbzz.getZzje()) %>"></td>	
+		<td class="a2" width="35%"><input type="text" name="nbzz.zzje" id="zzje" value="<%=JMath.round(nbzz.getZzje()) %>"><span style="color:red">*</span></td>	
 		<td class="a1" width="15%">经手人</td>
 		<td class="a2"> 
 		 <input  id="brand"    type="text"   length="20"  onblur="setValue()" /> 
           <div   id="brandTip"  style="height:12px;position:absolute;left:383px; top:111px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
           </div>
-		    <input type="hidden" name="nbzz.jsr" id="fzr"  />
-		</td>		
-	</tr>
-	<tr>
-		<td class="a1" width="15%">状态</td>
-		<td class="a2" width="35%">
-			<select name="nbzz.state" id="state">
-				<option value="已保存" <%if(StringUtils.nullToStr(nbzz.getState()).equals("已保存")) out.print("selected"); %>>已保存</option>
-				<option value="已提交" <%if(StringUtils.nullToStr(nbzz.getState()).equals("已提交")) out.print("selected"); %>>已提交</option>
-			</select>		
+		    <input type="hidden" name="nbzz.jsr" id="fzr"  /><span style="color:red">*</span>
 		</td>		
 	</tr>
 </table>
@@ -164,13 +171,14 @@ if(msg != null && msg.size() > 0){
 	
 	<tr height="35">
 		<td class="a1" colspan="2">
-			<input type="button" name="button1" value="确 定" class="css_button2" onclick="saveInfo();">&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="reset" name="button2" value="重 置" class="css_button2">&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="button" name="btnSave" value="保 存" class="css_button2" onclick="saveInfo('1');">&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="button" name="btnSub" value="提 交" class="css_button2" onclick="saveInfo('2');">&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="button" name="button3" value="关 闭" class="css_button2" onclick="window.close();">
 		</td>
 	</tr>
 </table>
-
+<BR>
+<font color="red">注：保存后不结算可修改；提交后后完成结算不可修改。</font>
 </form>
 </body>
 </html>

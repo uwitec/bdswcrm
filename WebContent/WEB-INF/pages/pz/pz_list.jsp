@@ -120,6 +120,7 @@ String type = (String)VS.findValue("type");
 	<thead>
 	<tr>
 		<td onclick="doSort('id');">编号<%if(orderName.equals("id")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td onclick="doSort('client_name');">往来单位<%if(orderName.equals("client_name")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
 		<td onclick="doSort('jsr');">经手人<%if(orderName.equals("jsr")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
 		<td onclick="doSort('pz_date');">日期<%if(orderName.equals("pz_date")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
 		<td onclick="doSort('type');">类型<%if(orderName.equals("type")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
@@ -137,6 +138,7 @@ String type = (String)VS.findValue("type");
 	%>
 	<tr class="a1"  title="双击查看详情"  onmousedown="trSelectChangeCss()"  onDblClick="openWin('<%=StringUtils.nullToStr(pz.getId()) %>');">
 		<td><%=StringUtils.nullToStr(pz.getId()) %></td>
+		<td><%=StaticParamDo.getClientNameById(StringUtils.nullToStr(pz.getClient_name())) %></td>
 		<td><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(pz.getJsr())) %></td>
 		<td><%=StringUtils.nullToStr(pz.getPz_date()) %></td>
 		<td><%=StringUtils.nullToStr(pz.getType()) %></td>

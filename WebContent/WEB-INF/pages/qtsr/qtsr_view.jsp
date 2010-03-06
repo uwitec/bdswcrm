@@ -42,11 +42,6 @@ Qtsr qtsr = (Qtsr)VS.findValue("qtsr");
 		<td class="a1" width="15%">经手人</td>
 		<td class="a2"><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(qtsr.getJsr())) %></td>		
 	</tr>
-	<tr>
-		<td class="a1" width="15%">状态</td>
-		<td class="a2" width="35%"><%=StringUtils.nullToStr(qtsr.getState()) %></td>		
-	</tr>
-	
 </table>
 <br>
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
@@ -56,8 +51,8 @@ Qtsr qtsr = (Qtsr)VS.findValue("qtsr");
 	</tr>
 	</thead>
 	<tr height="50">
-		<td class="a1" width="20%">备注</td>
-		<td class="a2" width="80%">
+		<td class="a1" width="15%">备注</td>
+		<td class="a2" width="85%">
 			<textarea rows="3" cols="50" name="qtsr.remark" id="remark" style="width:80%" maxlength="500" readonly><%=StringUtils.nullToStr(qtsr.getRemark()) %></textarea>
 		</td>
 	</tr>

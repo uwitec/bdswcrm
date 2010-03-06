@@ -32,7 +32,14 @@ List userList = (List)VS.findValue("userList");
 </style>
 <script type="text/javascript">
 	//提交往来调账信息
-	function saveInfo(){
+	function saveInfo(vl){
+
+		if(vl == "1"){
+			document.getElementById("state").value = "已保存";
+		}else{
+			document.getElementById("state").value = "已提交";
+		}
+		
 		if(!InputValid(document.getElementById("id"),1,"string",1,1,50,"编号")){	 return; }
 		if(!InputValid(document.getElementById("pz_date"),1,"string",1,1,20,"日期")){	 return; }
 		
@@ -51,7 +58,18 @@ List userList = (List)VS.findValue("userList");
 		if(!InputValid(document.getElementById("client_name"),1,"string",1,1,100,"往来单位")){	 return; }	
 		if(!InputValid(document.getElementById("pzje"),1,"float",1,-999999999,999999999,"调账金额")){	 return; }			
 		
-		document.pzForm.submit();
+		if(vl == "1"){
+			document.pzForm.submit();
+		}else{
+			if(window.confirm("确认提交吗？提交后将不可修改！")){
+				document.pzForm.submit();
+			}else{
+				return;
+			}
+		}
+		
+		document.qtzcForm.btnSub.disabled = true;
+		document.qtzcForm.btnSave.disabled = true;
 	}
 
 	
@@ -81,6 +99,7 @@ List userList = (List)VS.findValue("userList");
 </head>
 <body  onload="initFzrTip();initClientTip();">
 <form name="pzForm" action="updatePz.html" method="post">
+<input type="hidden"  name="pz.state" id="state" value="">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
@@ -137,16 +156,8 @@ List userList = (List)VS.findValue("userList");
 	</tr>
 	<tr>
 		<td class="a1" width="15%">金额</td>
-		<td class="a2" width="35%"><input type="text" name="pz.pzje" id="pzje" value="<%=JMath.round(pz.getPzje()) %>"></td>		
-		<td class="a1" width="15%">状态</td>
-		<td class="a2" width="35%" colspan="3">
-			<select name="pz.state" id="state">
-				<option value="已保存" <%if(StringUtils.nullToStr(pz.getState()).equals("已保存")) out.print("selected"); %>>已保存</option>
-				<option value="已提交" <%if(StringUtils.nullToStr(pz.getState()).equals("已提交")) out.print("selected"); %>>已提交</option>
-			</select>		
-		</td>		
+		<td class="a2" width="35%" colspan="3"><input type="text" name="pz.pzje" id="pzje" value="<%=JMath.round(pz.getPzje()) %>"></td>		
 	</tr>
-	
 </table>
 <br>
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
@@ -164,13 +175,14 @@ List userList = (List)VS.findValue("userList");
 	
 	<tr height="35">
 		<td class="a1" colspan="2">
-			<input type="button" name="button1" value="提 交" class="css_button2" onclick="saveInfo();">&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="reset" name="button2" value="重 置" class="css_button2">&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="button" name="btnSave" value="保 存" class="css_button2" onclick="saveInfo('1');">&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="button" name="btnSub" value="提 交" class="css_button2" onclick="saveInfo('2');">&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="button" name="button3" value="关 闭" class="css_button2" onclick="window.close();">
 		</td>
 	</tr>
 </table>
-
+<BR>
+<font color="red">注：保存后不结算可修改；提交后完成结算不可修改。</font>
 </form>
 </body>
 </html>

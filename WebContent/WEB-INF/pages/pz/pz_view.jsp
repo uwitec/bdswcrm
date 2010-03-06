@@ -44,9 +44,7 @@ Pz pz = (Pz)VS.findValue("pz");
 	</tr>
 	<tr>
 		<td class="a1" width="15%">金额</td>
-		<td class="a2" width="35%"><%=JMath.round(pz.getPzje(),2) %></td>	
-		<td class="a1" width="15%">状态</td>
-		<td class="a2" width="35%" colspan="3"><%=StringUtils.nullToStr(pz.getState()) %></td>		
+		<td class="a2" width="35%" colspan="3"><%=JMath.round(pz.getPzje(),2) %></td>	
 	</tr>
 	
 </table>

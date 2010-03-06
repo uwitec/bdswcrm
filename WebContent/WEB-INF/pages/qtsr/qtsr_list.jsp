@@ -15,6 +15,7 @@ String orderType = (String)VS.findValue("orderType");
 
 String sr_date1 = (String)VS.findValue("sr_date1");
 String sr_date2 = (String)VS.findValue("sr_date2");
+String state = StringUtils.nullToStr(VS.findValue("state"));
 %>
 
 <html>
@@ -41,6 +42,7 @@ String sr_date2 = (String)VS.findValue("sr_date2");
 	function clearAll(){
 		document.myform.sr_date1.value = "";
 		document.myform.sr_date2.value = "";
+		document.myform.state.value = "";
 	}	
 	
 	function add(){
@@ -99,10 +101,16 @@ String sr_date2 = (String)VS.findValue("sr_date2");
 		<td class="search" align="left" colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;
 			时间：<input type="text" name="sr_date1" value="<%=sr_date1 %>" size="15" class="Wdate" onFocus="WdatePicker()">
 			&nbsp;&nbsp;&nbsp;至&nbsp;&nbsp;&nbsp;
-			<input type="text" name="sr_date2" value="<%=sr_date2 %>" size="15" class="Wdate" onFocus="WdatePicker()">
+			<input type="text" name="sr_date2" value="<%=sr_date2 %>" size="15" class="Wdate" onFocus="WdatePicker()">&nbsp;&nbsp;&nbsp;&nbsp;
+			状态：
+			<select name="state">
+				<option value=""></option>
+				<option value="已保存" <%if(state.equals("已保存")) out.print("selected"); %>>已保存</option>
+				<option value="已提交" <%if(state.equals("已提交")) out.print("selected"); %>>已提交</option>
+			</select>	
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="submit" name="buttonCx" value=" 查询 " class="css_button2">&nbsp;&nbsp;&nbsp;&nbsp;	
-			<input type="button" name="buttonQk" value=" 清空 " class="css_button2" onclick="clearAll();">
+			<input type="submit" name="buttonCx" value=" 查询 " class="css_button">&nbsp;&nbsp;&nbsp;&nbsp;	
+			<input type="button" name="buttonQk" value=" 清空 " class="css_button" onclick="clearAll();">
 		</td>				
 	</tr>				
 </table>

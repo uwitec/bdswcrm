@@ -30,7 +30,14 @@ session.removeAttribute("messages");
 	}
 </style>
 <script type="text/javascript">
-	function saveInfo(){
+	function saveInfo(vl){
+
+		if(vl == "1"){
+			document.getElementById("state").value = "已保存";
+		}else{
+			document.getElementById("state").value = "已提交";
+		}
+		
 		if(document.getElementById("fzr").value == ""){
 			alert("出纳不能为空，请选择！");
 			return;
@@ -48,8 +55,19 @@ session.removeAttribute("messages");
 			alert("详细说明不能为空，请填写！");
 			return;
 		}					
+
+		if(vl == "1"){
+			document.qtzcForm.submit();
+		}else{
+			if(window.confirm("确认支付吗？支付后将不可修改！")){
+				document.qtzcForm.submit();
+			}else{
+				return;
+			}
+		}
+		
 		document.qtzcForm.btnSub.disabled = true;
-		document.qtzcForm.submit();
+		document.qtzcForm.btnSave.disabled = true;
 	}
 
 	
@@ -72,6 +90,7 @@ session.removeAttribute("messages");
 </head>
 <body onload="initFzrTip();">
 <form name="qtzcForm" action="updateQtzc.html" method="post">
+<input type="hidden" name="qtzc.state" id="state" value="">
 <input type="hidden" name="qtzc.fysq_id" id="fysq_id" value="<%=StringUtils.nullToStr(qtzc.getFysq_id()) %>">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
@@ -163,39 +182,31 @@ session.removeAttribute("messages");
 			</select><span style="color:red">*</span>
 		</td>	
 	</tr>
-	<tr>
-		<td class="a1" width="15%">状态</td>
-		<td class="a2" width="35%" colspan="3">
-			<select name="qtzc.state" id="state">
-				<option value="已保存" <%if(StringUtils.nullToStr(qtzc.getState()).equals("已保存")) out.print("selected"); %>>已保存</option>
-				<option value="已提交" <%if(StringUtils.nullToStr(qtzc.getState()).equals("已提交")) out.print("selected"); %>>已提交</option>
-			</select>		
-		</td>		
-	</tr>
 </table>
 <BR>
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
-		<td colspan="4">备注</td>
+		<td colspan="2">备注</td>
 	</tr>
 	</thead>	
 	<tr height="50">
-		<td class="a1">详细说明</td>
-		<td class="a2" colspan="3">
-			<textarea rows="4" cols="50" name="qtzc.remark" id="remark" style="width:80%" maxlength="500"><%=StringUtils.nullToStr(qtzc.getRemark()) %>
+		<td class="a1" width="15%">详细说明</td>
+		<td class="a2" width="85%">
+			<textarea rows="3" cols="50" name="qtzc.remark" id="remark" style="width:80%" maxlength="500"><%=StringUtils.nullToStr(qtzc.getRemark()) %>
 			</textarea><span style="color:red">*</span>
 		</td>
 	</tr>
 	<tr height="35">
-		<td class="a1" colspan="4">
-			<input type="button" name="btnSub" value="提 交" class="css_button2" onclick="saveInfo();">&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="reset" name="button2" value="重 置" class="css_button2">&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="button" name="button3" value="关 闭" class="css_button2" onclick="window.opener.document.myform.submit();window.close();">
+		<td class="a1" colspan="2">
+			<input type="button" name="btnSave" value="保 存" class="css_button2" onclick="saveInfo('1');">&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="button" name="btnSub" value="确认支付" class="css_button2" onclick="saveInfo('2');">&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="button" name="button3" value="关 闭" class="css_button2" onclick="window.close();">
 		</td>
 	</tr>
 </table>
-
+<BR>
+<font color="red">注：保存后可修改；确认支付后完成结算不可修改。</font>
 </form>
 </body>
 </html>

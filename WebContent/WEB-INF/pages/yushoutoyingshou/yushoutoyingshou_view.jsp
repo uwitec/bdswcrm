@@ -41,10 +41,8 @@ List yushouToYingshouDescs = (List)VS.findValue("yushouToYingshouDescs");
 		<td class="a2" width="35%"><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(yushouToYingshou.getJsr())) %></td>				
 	</tr>
 	<tr>		
-		<td class="a1" width="15%">状态</td>
-		<td class="a2"><%=StringUtils.nullToStr(yushouToYingshou.getState()) %></td>
 		<td class="a1" width="15%">客户预收总金额</td>
-		<td class="a2"><%=clientHjYushouK %><input type="hidden" name="yushouzje" id="yushouzje" value="<%=clientHjYushouK %>"></td>					
+		<td class="a2" colspan="3"><%=clientHjYushouK %><input type="hidden" name="yushouzje" id="yushouzje" value="<%=clientHjYushouK %>"></td>					
 	</tr>	
 </table>
 <br>

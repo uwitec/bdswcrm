@@ -15,7 +15,14 @@
 <script type="text/javascript">
 
 	//保存付摊销付款
-	function saveInfo(){
+	function saveInfo(vl){
+
+		if(vl == "1"){
+			document.getElementById("state").value = "已保存";
+		}else{
+			document.getElementById("state").value = "已提交";
+		}
+		
 		if(!InputValid(document.getElementById("fk_date"),1,"string",1,1,20,"付款日期")){	 return; }
 		if(!InputValid(document.getElementById("client_name"),1,"string",1,1,100,"相关客户")){	 return; }
 		if(document.getElementById("fzr").value == ""){
@@ -31,7 +38,20 @@
 			alert("付款账户不能为空，请选择");
 			return;
 		}
-		document.txfkForm.submit();
+
+		if(vl == "1"){
+			document.txfkForm.submit();
+		}else{
+			if(window.confirm("确认提交吗？提交后将不可修改！")){
+				document.txfkForm.submit();
+			}else{
+				return;
+			}
+		}
+		
+		document.qtzcForm.btnSub.disabled = true;
+		document.qtzcForm.btnSave.disabled = true;
+		
 	}
 		
     function addTr(){
@@ -92,6 +112,7 @@
 </head>
 <body onload="initFzrTip();">
 <form name="txfkForm" action="updateTxfk.html" method="post">
+<input type="hidden" name="txfk.state" id="state" value="">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
@@ -133,15 +154,11 @@
 	</tr>
 	<tr>
 		<td class="a1" width="15%">支付账户</td>
-		<td class="a2" width="35%">
+		<td class="a2" colspan="3">
 			<ww:textfield id="zhname"  name="zhname" value="%{getAccountName(txfk.account_id)}" theme="simple" size="30" readonly="true"/>
 			<ww:hidden name="txfk.account_id" id="fkzh" value="%{txfk.account_id}" theme="simple"/>
 			<img src="images/select.gif" align="absmiddle" title="选择账户" border="0" onclick="openAccount();" style="cursor:hand"><span style="color:red">*</span>
 		</td>
-		<td class="a1" width="15%">状态</td>
-		<td class="a2">
-			<ww:select name="txfk.state" id="state" theme="simple" list="#{'已保存':'已保存','已提交':'已提交'}"  emptyOption="no"></ww:select>		
-		</td>						
 	</tr>
 </table>
 <br>
@@ -195,12 +212,14 @@
 	</tr>				
 	<tr height="35">
 		<td class="a1" colspan="4">
-			<input type="button" name="btnSub" value="提 交" class="css_button2" onclick="saveInfo();">&nbsp;
-			<input type="reset" name="button2" value="重 置" class="css_button2">&nbsp;
-			<input type="button" name="button1" value="关 闭" class="css_button2" onclick="window.close();">
+			<input type="button" name="btnSave" value="保 存" class="css_button2" onclick="saveInfo('1');">&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="button" name="btnSub" value="提 交" class="css_button2" onclick="saveInfo('2');">&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="button" name="button3" value="关 闭" class="css_button2" onclick="window.close();">
 		</td>
 	</tr>
 </table>
+<BR>
+<font color="red">注：保存后不结算可修改；提交后完成结算不可修改。</font>
 </form>
 </body>
 </html>
