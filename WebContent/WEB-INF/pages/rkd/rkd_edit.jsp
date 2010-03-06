@@ -35,7 +35,13 @@ session.removeAttribute("messages");
 
 	var allCount = <%=counts %>;
 	
-	function saveInfo(){
+	function saveInfo(vl){
+
+		if(vl == "1"){
+			document.getElementById("state").value = "已保存";
+		}else{
+			document.getElementById("state").value = "已入库";
+		}
 	    
 		if(document.getElementById("rk_date").value == ""){
 			alert("入库时间不能为空，选选择！");
@@ -86,9 +92,19 @@ session.removeAttribute("messages");
 				}
 			}
 		}			
-		
+
+		if(vl == "1"){
+			document.rkdForm.submit();
+		}else{
+			if(window.confirm("确认入库吗？")){
+				document.rkdForm.submit();
+			}else{
+				return;
+			}
+		}
+		document.rkdForm.btnSave.disabled = true;
 		document.rkdForm.btnSub.disabled = true;
-		document.rkdForm.submit();
+		document.rkdForm.btnTh.disabled = true;
 	}
 	
 	function openSerialWin(vl){
@@ -153,6 +169,7 @@ session.removeAttribute("messages");
 </head>
 <body onload="initFzrTip();">
 <form name="rkdForm" action="updateRkd.html" method="post">
+<input type="hidden"  name="rkd.state" id="state" value="">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
@@ -213,15 +230,6 @@ session.removeAttribute("messages");
           </div>
 		    <input type="hidden" name="rkd.fzr" id="fzr" value="<%=rkd.getFzr()%>"/><font color="red">*</font>	
 		</td>	
-	</tr>
-	<tr>		
-		<td class="a1" width="15%">状态</td>
-		<td class="a2" colspan="3">
-			<select name="rkd.state" id="state">
-				<option value="已保存" <%if(StringUtils.nullToStr(rkd.getState()).equals("已保存")) out.print("selected");%>>已保存</option>
-				<option value="已入库" <%if(StringUtils.nullToStr(rkd.getState()).equals("已入库")) out.print("selected");%>>已入库</option>
-			</select>		
-		</td>				
 	</tr>
 </table>
 <br>	
@@ -309,13 +317,15 @@ if(rkdProducts != null && rkdProducts.size()>0){
 	</tr>	
 	<tr height="35">
 		<td class="a1" colspan="2">
-			<input type="button" name="btnSub" value="提 交" class="css_button2" onclick="saveInfo();">&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="button" name="btnSave" value="保 存" class="css_button2" onclick="saveInfo('1');">&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="button" name="btnSub" value="入 库" class="css_button2" onclick="saveInfo('2');">&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="button" name="btnTh" value="退回订单" class="css_button3" onclick="doTh();">&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="reset" name="button2" value="重 置" class="css_button2">&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="reset" name="button2" value="关 闭" class="css_button2" onclick="window.opener.document.myform.submit();window.close();">
+			<input type="button" name="button2" value="关 闭" class="css_button2" onclick="window.opener.document.myform.submit();window.close();">
 		</td>
 	</tr>
 </table>
+<BR>
+<font color="red">注：点击保存后不入库可修改；点击入库后完成入库不可修改；如订单有问题请点击退回订单。</font>
 </form>
 </body>
 </html>

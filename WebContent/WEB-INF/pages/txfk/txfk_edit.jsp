@@ -49,8 +49,8 @@
 			}
 		}
 		
-		document.qtzcForm.btnSub.disabled = true;
-		document.qtzcForm.btnSave.disabled = true;
+		document.txfkForm.btnSub.disabled = true;
+		document.txfkForm.btnSave.disabled = true;
 		
 	}
 		

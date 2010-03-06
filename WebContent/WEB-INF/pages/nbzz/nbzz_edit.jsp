@@ -72,8 +72,8 @@ if(msg != null && msg.size() > 0){
 			}
 		}
 		
-		document.qtzcForm.btnSub.disabled = true;
-		document.qtzcForm.btnSave.disabled = true;
+		document.nbzzForm.btnSub.disabled = true;
+		document.nbzzForm.btnSave.disabled = true;
 	}
 
 	

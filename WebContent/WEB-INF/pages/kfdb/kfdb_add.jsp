@@ -49,7 +49,14 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 
 	var allCount = 2;
 	
-	function saveInfo(){
+	function saveInfo(vl){
+
+		if(vl == "1"){
+			document.getElementById("state").value = "已保存";
+		}else{
+			document.getElementById("state").value = "已出库";
+		}
+		
 		if(document.getElementById("id").value == ""){
 			alert("编号不能为空！");
 			return;
@@ -106,8 +113,19 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 				}
 			}
 		}							
-	
-		document.kfdbForm.submit();
+
+		if(vl == "1"){
+			document.kfdbForm.submit();
+		}else{
+			if(window.confirm("确认出库吗？！")){
+				document.kfdbForm.submit();
+			}else{
+				return;
+			}
+		}
+		
+		document.kfdbForm.btnSub.disabled = true;
+		document.kfdbForm.btnSave.disabled = true;
 	}
 
       	
@@ -270,6 +288,7 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 </head>
 <body onload="initFzrTip();initSqrTip();">
 <form name="kfdbForm" action="saveKfdb.html" method="post">
+<input type="hidden"  name="kfdb.state" id="state" value="">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
@@ -338,19 +357,12 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 	</tr>
 	<tr>			
 		<td class="a1" width="15%">经手人</td>
-		<td class="a2" width="35%">
+		<td class="a2" colspan="3">
 		    <input  id="brand"    type="text"length="20"  onblur="setValue();" />
             <div   id="brandTip"  style="height:12px;position:absolute;left:146px; top:141px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
             </div>
 		    <input type="hidden" name="kfdb.jsr" id="fzr" /><font color="red">*</font>
 		</td>
-		<td class="a1">状态</td>
-		<td class="a2" colspan="3">
-			<select name="kfdb.state" id="state">
-				<option value="已保存">已保存</option>
-				<option value="已出库">已出库</option>
-			</select>			
-		</td>			
 	</tr>
 </table>
 <br>
@@ -425,8 +437,8 @@ for(int i=0;i<3;i++){
 	</tr>	
 	<tr height="35">
 		<td class="a1" colspan="2">
-			<input type="button" name="button1" value="提 交" class="css_button2" onclick="saveInfo();">&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="reset" name="button2" value="重 置" class="css_button2">&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="button" name="btnSave" value="保 存" class="css_button2" onclick="saveInfo('1');">&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="button" name="btnSub" value="出 库" class="css_button2" onclick="saveInfo('2');">&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="button" name="button3" value="关 闭" class="css_button2" onclick="window.close();">
 		</td>
 	</tr>

@@ -33,7 +33,14 @@ String user_id = info.getUser_id();
 <script type="text/javascript">
 	var allCount = 2;
 	
-	function saveInfo(){
+	function saveInfo(vl){
+
+		if(vl == "1"){
+			document.getElementById("state").value = "已保存";
+		}else{
+			document.getElementById("state").value = "已提交";
+		}
+
 		if(document.getElementById("id").value == ""){
 			alert("编号不能为空，请填写！");
 			return;
@@ -46,8 +53,19 @@ String user_id = info.getUser_id();
 			alert("经手人不能为空，请填写！");
 			return;
 		}
+		if(vl == "1"){
+			document.chtjForm.submit();
+		}else{
+			if(window.confirm("确认提交吗？提交后将不可修改！")){
+				document.chtjForm.submit();
+			}else{
+				return;
+			}
+		}
 		
-		document.chtjForm.submit();
+		document.chtjForm.btnSub.disabled = true;
+		document.chtjForm.btnSave.disabled = true;
+		
 	}
       	
     function addTr(){
@@ -144,6 +162,7 @@ String user_id = info.getUser_id();
 </head>
 <body onload="initFzrTip();">
 <form name="chtjForm" action="saveChtj.html" method="post">
+<input type="hidden" name="chtj.state" id="state" value="">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
@@ -155,24 +174,16 @@ String user_id = info.getUser_id();
 		<td class="a2" width="35%"><input type="text" name="chtj.id" id="id" value="<%=id %>" maxlength="25">
 		</td>	
 		<td class="a1">日期</td>
-		<td class="a2"><input type="text" name="chtj.tj_date" id="tj_date" value="<%=DateComFunc.getToday() %>"  class="Wdate" onFocus="WdatePicker()"><font color="red">*</font>	
-		<font color="red">*</font>
+		<td class="a2"><input type="text" name="chtj.tj_date" id="tj_date" value="<%=DateComFunc.getToday() %>"  class="Wdate" onFocus="WdatePicker()"><font color="red">*</font>
 		</td>			
 	</tr>	
 	<tr>	
 		<td class="a1" width="15%">经手人</td>
-		<td class="a2" width="35%">
+		<td class="a2" colspan="3">
 		    <input  id="brand"    type="text"   length="20"  onblur="setValue()" /> 
             <div   id="brandTip"  style="height:12px;position:absolute;left:125px; top:85px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		    <input type="hidden" name="chtj.jsr" id="fzr"  /><font color="red">*</font>		
 		</td>	
-		<td class="a1" width="15%">状态</td>
-		<td class="a2" width="35%">
-			<select name="chtj.state" id="state">
-				<option value="已保存">已保存</option>
-				<option value="已提交">已提交</option>
-			</select>			
-		</td>			
 	</tr>
 </table>
 <br>
@@ -235,9 +246,9 @@ for(int i=0;i<3;i++){
 	</tr>	
 	<tr height="35">
 		<td class="a1" colspan="2">
-			<input type="button" name="button1" value="提 交" class="css_button2" onclick="saveInfo();">&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="reset" name="button2" value="重 置" class="css_button2">&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="reset" name="button2" value="关 闭" class="css_button2" onclick="window.close();">
+			<input type="button" name="btnSave" value="保 存" class="css_button2" onclick="saveInfo('1');">&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="button" name="btnSub" value="提 交" class="css_button2" onclick="saveInfo('2');">&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="button" name="button2" value="关 闭" class="css_button2" onclick="window.close();">
 		</td>
 	</tr>
 </table>

@@ -52,7 +52,14 @@ if(client != null){
 
 	var allCount = <%=count %>;
 	
-	function saveInfo(){	
+	function saveInfo(vl){
+
+		if(vl == "1"){
+			document.getElementById("state").value = "待出库";
+		}else{
+			document.getElementById("state").value = "已出库";
+		}
+			
 		if(document.getElementById("ckd_id").value == ""){
 			alert("出库单编号不能为空，请填写！");
 			return;
@@ -122,8 +129,19 @@ if(client != null){
 				}
 			}
 		}		
+
+		if(vl == "1"){
+			document.ckdForm.submit();
+		}else{
+			if(window.confirm("确认出库吗？")){
+				document.ckdForm.submit();
+			}else{
+				return;
+			}
+		}
+		document.ckdForm.btnSave.disabled = true;
 		document.ckdForm.btnSub.disabled = true;
-		document.ckdForm.submit();
+		document.ckdForm.btnTh.disabled = true;
 	}
      
 	function openSerialWin(vl){
@@ -230,6 +248,7 @@ if(client != null){
 </head>
 <body onload="initFzrTip();">
 <form name="ckdForm" action="updateCkd.html" method="post">
+<input type="hidden" name="ckd.state" id="state" value="">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
@@ -331,13 +350,6 @@ if(msg != null && msg.size() > 0){
 		</td>						
 	</tr>		
 	<tr>
-		<td class="a1" width="15%">物流状态</td>
-		<td class="a2" width="35%">
-			<select name="ckd.state" id="state">
-				<option value="待出库" <%if(StringUtils.nullToStr(ckd.getState()).equals("待出库")) out.print("selected"); %>>待出库</option>
-				<option value="已出库" <%if(StringUtils.nullToStr(ckd.getState()).equals("已出库")) out.print("selected"); %>>已出库</option>
-			</select>	<font color="red">*</font>		
-		</td>
 		<%
 		String cksj = StringUtils.nullToStr(ckd.getCk_date());
 		if(cksj.equals("")){
@@ -346,9 +358,7 @@ if(msg != null && msg.size() > 0){
 		%>	
 		<td class="a1">出库日期</td>
 		<td class="a2"><input type="text" name="ckd.ck_date" id="ck_date" value="<%=cksj %>"  class="Wdate" onFocus="WdatePicker()">
-		</td>		
-	</tr>	
-	<tr>	
+		</td>	
 		<td class="a1" width="15%">运输方式</td>
 		<td class="a2" width="35%">
 			<select name="ckd.ysfs" id="ysfs">
@@ -364,15 +374,17 @@ if(msg != null && msg.size() > 0){
 			%>
 				
 			</select>	<font color="red">*</font>	
-		</td>
+		</td>			
+	</tr>	
+	<tr>	
 		<td class="a1" width="15%">货单号</td>
-		<td class="a2"><input type="text" name="ckd.job_no" id="job_no" value="<%=StringUtils.nullToStr(ckd.getJob_no()) %>" size="30"  maxlength="20"></td>										
-	</tr>
-	<tr>
+		<td class="a2"><input type="text" name="ckd.job_no" id="job_no" value="<%=StringUtils.nullToStr(ckd.getJob_no()) %>" size="30"  maxlength="20"></td>
 		<td class="a1" width="15%">查询电话</td>
-		<td class="a2"><input type="text" name="ckd.cx_tel" id="cx_tel" value="<%=StringUtils.nullToStr(ckd.getCx_tel()) %>" size="30"  maxlength="20"></td>						
+		<td class="a2"><input type="text" name="ckd.cx_tel" id="cx_tel" value="<%=StringUtils.nullToStr(ckd.getCx_tel()) %>" size="30"  maxlength="20"></td>												
+	</tr>
+	<tr>	
 		<td class="a1" width="15%">发货时间</td>
-		<td class="a2"><input type="text" name="ckd.send_time" id="send_time" value="<%=StringUtils.nullToStr(ckd.getSend_time()) %>" size="30" maxlength="20"></td>										
+		<td class="a2" colspan="3"><input type="text" name="ckd.send_time" id="send_time" value="<%=StringUtils.nullToStr(ckd.getSend_time()) %>" size="30" maxlength="20"></td>										
 	</tr>
 	
 		
@@ -440,13 +452,15 @@ if(ckdProducts!=null && ckdProducts.size()>0){
 	</tr>
 	<tr height="35">
 		<td class="a1" colspan="2">
-			<input type="button" name="btnSub" value="确 定" class="css_button2" onclick="saveInfo();">&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="button" name="btnSave" value="保 存" class="css_button2" onclick="saveInfo('1');">&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="button" name="btnSub" value="出 库" class="css_button2" onclick="saveInfo('2');">&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="button" name="btnTh" value="退回订单" class="css_button3" onclick="doTh();">&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="reset" name="button2" value="重 置" class="css_button2">&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="reset" name="button2" value="关 闭" class="css_button2" onclick="window.opener.document.myform.submit();window.close();">
+			<input type="button" name="button2" value="关 闭" class="css_button2" onclick="window.opener.document.myform.submit();window.close();">
 		</td>
 	</tr>
 </table>
 </form>
+<BR>
+<font color="red">注：点击保存后不出库可修改；点击出库后完成出库不可修改；如订单有问题请点击退回订单。</font>
 </body>
 </html>

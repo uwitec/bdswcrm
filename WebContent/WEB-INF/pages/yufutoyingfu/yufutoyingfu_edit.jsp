@@ -68,8 +68,8 @@ if(yufuToYingfuDescs != null && yufuToYingfuDescs.size()>0){
 			}
 		}
 		
-		document.qtzcForm.btnSub.disabled = true;
-		document.qtzcForm.btnSave.disabled = true;
+		document.XsskForm.btnSub.disabled = true;
+		document.XsskForm.btnSave.disabled = true;
 	}
 	
 	

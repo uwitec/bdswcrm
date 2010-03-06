@@ -63,7 +63,7 @@ String openerId = ParameterUtility.getStringParameter(request, "openerId","");
 </script>
 </head>
 <body oncontextmenu="return false;" >
-<form name="myform" action="selLsProcCkd.html" method="post">
+<form name="myform" action="selKfdbProc.html" method="post">
 <input type="hidden" name="openerId" value="<%=openerId %>">
 <table width="100%"  align="center"class="chart_list" cellpadding="0" cellspacing="0">
 	<tr>

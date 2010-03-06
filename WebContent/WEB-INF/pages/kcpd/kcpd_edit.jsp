@@ -38,7 +38,14 @@ if(kcpdDescs!=null && kcpdDescs.size()>0){
 <script type="text/javascript">
 	var allCount = <%=count %>;
 	
-	function saveInfo(){
+	function saveInfo(vl){
+
+		if(vl == "1"){
+			document.getElementById("state").value = "已保存";
+		}else{
+			document.getElementById("state").value = "已提交";
+		}
+		
 		if(document.getElementById("store_id").value == ""){
 			alert("仓库名称不能为空，请选择！");
 			return;
@@ -58,7 +65,18 @@ if(kcpdDescs!=null && kcpdDescs.size()>0){
 		
 		pdAll();
 		
-		document.kcpdForm.submit();
+		if(vl == "1"){
+			document.kcpdForm.submit();
+		}else{
+			if(window.confirm("确认提交吗？提交后将不可修改！")){
+				document.kcpdForm.submit();
+			}else{
+				return;
+			}
+		}
+		
+		document.kcpdForm.btnSub.disabled = true;
+		document.kcpdForm.btnSave.disabled = true;
 	}
 	
 
@@ -187,6 +205,7 @@ if(kcpdDescs!=null && kcpdDescs.size()>0){
 </head>
 <body onload="initFzrTip();">
 <form name="kcpdForm" action="updateKcpd.html" method="post">
+<input type="hidden" name="kcpd.state" id="state" value="">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
@@ -233,15 +252,6 @@ if(kcpdDescs!=null && kcpdDescs.size()>0){
             <div   id="brandTip"  style="height:12px;position:absolute;left:515px; top:82px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		    <input type="hidden" name="kcpd.pdr" id="fzr" value="<%= kcpd.getPdr()%>" /> <font color="red">*</font>	
 		</td>		
-	</tr>
-	<tr>
-		<td class="a1" width="15%">状态</td>
-		<td class="a2" width="35%" colspan="3">
-			<select name="kcpd.state" id="state">
-				<option value="已保存" <%if(StringUtils.nullToStr(kcpd.getState()).equals("已保存")) out.print("selected"); %>>已保存</option>
-				<option value="已提交" <%if(StringUtils.nullToStr(kcpd.getState()).equals("已提交")) out.print("selected"); %>>已提交</option>
-			</select>			
-		</td>			
 	</tr>
 </table>
 <br>
@@ -326,9 +336,9 @@ if(kcpdDescs!=null && kcpdDescs.size()>0){
 	</tr>	
 	<tr height="35">
 		<td class="a1" colspan="2">
-			<input type="button" name="button1" value="提 交" class="css_button2" onclick="saveInfo();">&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="reset" name="button2" value="重 置" class="css_button2">&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="reset" name="button2" value="关 闭" class="css_button2" onclick="window.close();">
+			<input type="button" name="btnSave" value="保 存" class="css_button2" onclick="saveInfo('1');">&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="button" name="btnSub" value="提 交" class="css_button2" onclick="saveInfo('2');">&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="button" name="button2" value="关 闭" class="css_button2" onclick="window.close();">
 		</td>
 	</tr>
 </table>

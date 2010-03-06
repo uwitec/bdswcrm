@@ -68,8 +68,8 @@ List userList = (List)VS.findValue("userList");
 			}
 		}
 		
-		document.qtzcForm.btnSub.disabled = true;
-		document.qtzcForm.btnSave.disabled = true;
+		document.pzForm.btnSub.disabled = true;
+		document.pzForm.btnSave.disabled = true;
 	}
 
 	
