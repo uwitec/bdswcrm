@@ -36,15 +36,15 @@ List providers = (List)VS.findValue("providerList");
 	</thead>
 	<tr>
 		<td class="a1" width="15%">仓库名称</td>
-		<td class="a2" width="35%"><input type="text" name="storeHouse.name" id="name" value="" size="30" maxlength="35"></td>
+		<td class="a2" width="35%"><input type="text" name="storeHouse.name" id="name" value="" size="30" maxlength="50"></td>
 		<td class="a1" width="15%">地址</td>
-		<td class="a2" width="35%"><input type="text" name="storeHouse.address" id="address" value="" size="40" maxlength="50"></td>
+		<td class="a2" width="35%"><input type="text" name="storeHouse.address" id="address" value="" size="40" maxlength="100"></td>
 	</tr>
 	<tr>
 		<td class="a1" width="15%">联系人</td>
-		<td class="a2" width="35%"><input type="text" name="storeHouse.lxr" id="lxr" value="" size="25" maxlength="32"></td>
+		<td class="a2" width="35%"><input type="text" name="storeHouse.lxr" id="lxr" value="" size="25" maxlength="10"></td>
 		<td class="a1" width="15%">联系电话</td>
-		<td class="a2" width="35%"><input type="text" name="storeHouse.lxdh" id="lxdh" value="" size="30" maxlength="50"></td>
+		<td class="a2" width="35%"><input type="text" name="storeHouse.lxdh" id="lxdh" value="" size="30" maxlength="20"></td>
 	</tr>	
 </table>
 <br>
