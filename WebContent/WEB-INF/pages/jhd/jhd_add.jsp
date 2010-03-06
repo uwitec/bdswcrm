@@ -31,7 +31,14 @@ List storeList = (List)VS.findValue("storeList");
 	
 	var allCount = 2;
 	
-	function saveInfo(){
+	function saveInfo(vl){
+
+		if(vl == "1"){
+			document.getElementById("state").value = "已保存";
+		}else{
+			document.getElementById("state").value = "已提交";
+		}
+		
 		if(document.getElementById("cg_date").value == ""){
 			alert("采购日期不能为空，请选择！");
 			return;
@@ -51,8 +58,19 @@ List storeList = (List)VS.findValue("storeList");
 		}
 		
 		hj();
+
+		if(vl == "1"){
+			document.jhdForm.submit();
+		}else{
+			if(window.confirm("确认提交吗？提交后将不可修改！")){
+				document.jhdForm.submit();
+			}else{
+				return;
+			}
+		}
 		
-		document.jhdForm.submit();
+		document.jhdForm.btnSub.disabled = true;
+		document.jhdForm.btnSave.disabled = true;
 	}
 
       	
@@ -201,6 +219,7 @@ List storeList = (List)VS.findValue("storeList");
 </head>
 <body onload="initFzrTip();initClientTip();">
 <form name="jhdForm" action="saveJhd.html" method="post">
+<input type="hidden" name="jhd.state" id="state" value="">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
@@ -238,19 +257,6 @@ List storeList = (List)VS.findValue("storeList");
 			<input type="text" name="jhd.zq" id="zq" value="0" size="3" title="账期">天<font color="red">*</font>
 			<input type="hidden" name="jhd.fkfs" id="fkfs" value="账期">
 		</td>	
-		<td class="a1" width="15%">进货单状态</td>
-		<td class="a2">
-			<select name="jhd.state" id="state">
-				<option value="已保存">保存</option>
-				<option value="已提交">提交</option>
-			</select>	
-		</td>	
-	</tr>
-	<tr>
-		<td class="a1" width="15%">预计到货时间</td>
-		<td class="a2" width="35%">
-		<input type="text" name="jhd.yjdhsj" id="yjdhsj" value="<%=DateComFunc.getToday() %>"  class="Wdate" onFocus="WdatePicker()">
-		</td>	
 		<td class="a1" width="15%">到货库房</td>
 		<td class="a2" width="35%">
 			<select name="jhd.store_id" id="store_id">
@@ -266,7 +272,14 @@ List storeList = (List)VS.findValue("storeList");
 				}
 				%>
 			</select>
-		</td>
+		</td>		
+	</tr>
+	<tr>
+		<td class="a1" width="15%">预计到货时间</td>
+		<td class="a2" colspan="3">
+		<input type="text" name="jhd.yjdhsj" id="yjdhsj" value="<%=DateComFunc.getToday() %>"  class="Wdate" onFocus="WdatePicker()">
+		</td>	
+
 	</tr>	
 </table>
 <br>
@@ -331,12 +344,14 @@ for(int i=0;i<3;i++){
 	</tr>		
 	<tr height="35">
 		<td class="a1" colspan="2">
-			<input type="button" name="button1" value="提 交" class="css_button2" onclick="saveInfo();">&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="reset" name="button2" value="重 置" class="css_button2">&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="button" name="btnSave" value="保 存" class="css_button2" onclick="saveInfo('1');">&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="button" name="btnSub" value="提 交" class="css_button2" onclick="saveInfo('2');">&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="button" name="button3" value="关 闭" class="css_button2" onclick="window.close();">
 		</td>
 	</tr>
 </table>
+<BR>
+<font color="red">注：保存后可修改；提交后生成相应入库单,不可修改。</font>
 </form>
 </body>
 </html>

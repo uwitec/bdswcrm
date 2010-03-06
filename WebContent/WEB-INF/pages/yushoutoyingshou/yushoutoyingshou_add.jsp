@@ -119,7 +119,7 @@ if(yushouToYingshouDescs != null && yushouToYingshouDescs.size()>0){
 		}
 		
 		var hjjs = document.getElementById("total");
-		hjjs.value = bcjs_hj;
+		hjjs.value = bcjs_hj.toFixed(2);
 		
 	}
 	
