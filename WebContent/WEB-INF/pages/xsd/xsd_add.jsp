@@ -47,7 +47,10 @@ if(xsdProducts != null && xsdProducts.size()>0){
 </style>
 <script type="text/javascript">
 	var allCount = <%=allCount %>;
+	var temp_client_id = "";
 	var iscs_flag = '<%=iscs_flag %>';	
+
+	var xszq = 0;
 	
 	//客户对应联系人信息
 	var arryLxrObj = new Array();
@@ -58,12 +61,48 @@ if(xsdProducts != null && xsdProducts.size()>0){
 	    this.name = name;
 	    this.tel = tel;
 	}	
+
+	function onloadClientInfo(){
+		if($F('client_id') == ""){
+			return;
+		}
+		var url = 'queryClientsRegInfo.html';
+		var params = "clients_id=" + $F('client_id');
+		var myAjax = new Ajax.Request(
+		url,
+		{
+			method:'post',
+			parameters: params,
+			onComplete: initXszq,
+			asynchronous:true
+		});
+	}
+
+	function initXszq(originalRequest){
+		var resText = originalRequest.responseText.trim(); 
+		if(resText == ""){
+			return false;
+		}
+		var arryText = resText.split("%");
+
+		//客户地址填充
+		if(arryText != null && arryText.length>0){
+			var arryClientInfo = arryText[0].split("#");			
+			xszq = arryClientInfo[6];
+		}
+	}
+	
 	
 	//查询客户相关信息
 	function setClientRegInfo(){		
 		//填充值
 		setClientValue(); 
+
+		if(temp_client_id == $F('client_id')){
+			return;
+		}
 		
+		temp_client_id = $F('client_id');
 		if($F('client_id') == ""){
 			return;
 		}
@@ -97,11 +136,17 @@ if(xsdProducts != null && xsdProducts.size()>0){
 			var arryClientInfo = arryText[0].split("#");			
 			document.getElementById("kh_address").value = arryClientInfo[0];
 
-			if(document.getElementById("kp_mc").value == "") document.getElementById("kp_mc").value = arryClientInfo[1];
-			if(document.getElementById("kp_address").value == "") document.getElementById("kp_address").value = arryClientInfo[2];
-			if(document.getElementById("kp_dh").value == "") document.getElementById("kp_dh").value = arryClientInfo[3];
-			if(document.getElementById("khhzh").value == "") document.getElementById("khhzh").value = arryClientInfo[4];
-			if(document.getElementById("sh").value == "") document.getElementById("sh").value = arryClientInfo[5];
+			document.getElementById("kp_mc").value = arryClientInfo[1];
+			document.getElementById("kp_address").value = arryClientInfo[2];
+			document.getElementById("kp_dh").value = arryClientInfo[3];
+			document.getElementById("khhzh").value = arryClientInfo[4];
+			document.getElementById("sh").value = arryClientInfo[5];
+			if(document.getElementById("sklx").value == "账期") {
+				document.getElementById("zq").value = arryClientInfo[6];
+			}else{
+				document.getElementById("zq").value = '0';
+			}
+			xszq = arryClientInfo[6];
 		}
 		
 		if(arryText != null && arryText.length>1){
@@ -142,7 +187,7 @@ if(xsdProducts != null && xsdProducts.size()>0){
 	}
 </script>
 </head>
-<body onload="initFzrTip();initClientTip();chgKpTyle('<%=StringUtils.nullToStr(xsd.getFplx()) %>');">
+<body onload="initFzrTip();initClientTip();onloadClientInfo();chgKpTyle('<%=StringUtils.nullToStr(xsd.getFplx()) %>');">
 <form name="xsdForm" action="updateXsd.html" method="post">
 <input type="hidden" name="xsd.state" id="state" value="">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
@@ -205,7 +250,7 @@ if(xsdProducts != null && xsdProducts.size()>0){
 				<option value="账期" <%if(StringUtils.nullToStr(xsd.getSklx()).equals("账期")) out.print("selected"); %>>账期</option>
 			</select>&nbsp;&nbsp;
 			<b id="lb_zq" style="<%if(StringUtils.nullToStr(xsd.getSklx()).equals("账期")) out.print(""); else out.print("display:none"); %>">设置账期(天)：</b>
-			<input type="text" name="xsd.zq" id="zq" value="<%=xsd.getZq() %>" size="5" style="<%if(StringUtils.nullToStr(xsd.getSklx()).equals("账期")) out.print(""); else out.print("display:none"); %>">
+			<input type="text" name="xsd.zq" id="zq" value="<%=xsd.getZq() %>" size="5" maxlength="3" style="<%if(StringUtils.nullToStr(xsd.getSklx()).equals("账期")) out.print(""); else out.print("display:none"); %>">
 			<b id="lb_xjd" style="display:none">现金点：</b>
 			<input type="text" name="xsd.xjd" id="xjd" value="<%=xsd.getXjd() %>" size="5" style="display:none">
 			<font color="red">*</font>
@@ -235,7 +280,7 @@ if(xsdProducts != null && xsdProducts.size()>0){
 		<td class="a2">
 			<input  id="brand" type="text" length="20" onblur="setValue()" value="<%=StaticParamDo.getRealNameById(xsd.getFzr()) %>"/> 
 			<div id="brandTip"  style="height:12px;position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
-			<input type="hidden" name="xsd.fzr" id="fzr" value="<%=xsd.getFzr()%>"/><font color="red">*</font>		
+			<input type="hidden" name="xsd.fzr" id="fzr" value="<%=StringUtils.nullToStr(xsd.getFzr()) %>"/><font color="red">*</font>		
 		</td>
 		<%
 		String yfzfType = StringUtils.nullToStr(xsd.getYfzf_type());

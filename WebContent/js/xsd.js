@@ -37,10 +37,11 @@ function saveInfo(vl){
 			return;
 		}					
 	}else if(document.getElementById("sklx").value == "账期"){
-		if(!InputValid(document.getElementById("zq"),1,"int",1,1,99,"账期")){
-			document.getElementById("zq").focus();
+		if(isNaN(document.getElementById("zq").value) || document.getElementById("zq").value > xszq){
+			alert("账期必须为数字，并且不能大于客户默认期初！");
+			document.getElementById("zq").focus();	
 			return;
-		}		
+		}
 	}	
 				
 	hj();
@@ -55,6 +56,8 @@ function saveInfo(vl){
 	if(document.getElementById("state").value == "已提交"){
 		if(window.confirm("确认要提交销售订单吗，提交后将无法修改！")){
 			document.xsdForm.submit();		
+		}else{
+			return;
 		}			
 	}else{
 		document.xsdForm.submit();	
@@ -268,7 +271,7 @@ function changeSklx(vl){
 		
 		document.getElementById("lb_zq").style.display = "";
 		document.getElementById("zq").style.display = "";
-		document.getElementById("zq").value = "0";			
+		document.getElementById("zq").value = xszq;			
 		
 		document.getElementById("td_skzh_label").style.display = "none";
 		document.getElementById("td_skzh_value").style.display = "none";
