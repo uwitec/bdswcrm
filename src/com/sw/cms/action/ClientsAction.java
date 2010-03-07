@@ -491,7 +491,9 @@ public class ClientsAction extends BaseAction {
 								StringUtils.nullToStr(client.getKp_address())+ "#" + 
 								StringUtils.nullToStr(client.getKp_tel())+ "#" + 
 								StringUtils.nullToStr(client.getKp_khhzh())+ "#" + 
-								StringUtils.nullToStr(client.getKp_sh()) + "%";
+								StringUtils.nullToStr(client.getKp_sh()) + "#" + 
+								StringUtils.nullToStr(client.getZq()) + 
+								"%";
 			
 			//联系人信息
 			List linkManList = clientsService.getClientsLinkman(clients_id);
