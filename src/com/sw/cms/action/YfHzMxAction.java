@@ -22,6 +22,7 @@ public class YfHzMxAction extends BaseAction {
 	private List clientList = new ArrayList();
 	
 	private String client_name = "";
+	private String khjl = "";
 	
 	
 	/**
@@ -39,7 +40,7 @@ public class YfHzMxAction extends BaseAction {
 	 * @return
 	 */
 	public String getResult(){
-		clientList = clientsService.getClientList(client_name);
+		clientList = clientsService.getClietsById(client_name,khjl);
 		return "success";
 	}
 	
@@ -114,5 +115,13 @@ public class YfHzMxAction extends BaseAction {
 
 	public void setClientWlStatService(ClientWlStatService clientWlStatService) {
 		this.clientWlStatService = clientWlStatService;
+	}
+
+	public String getKhjl() {
+		return khjl;
+	}
+
+	public void setKhjl(String khjl) {
+		this.khjl = khjl;
 	}
 }
