@@ -10,6 +10,8 @@ OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
 ClientWlStatService clientWlStatService = (ClientWlStatService)VS.findValue("clientWlStatService");
 List clientList = (List)VS.findValue("clientList");
 
+String q_client_name = StringUtils.nullToStr(request.getParameter("client_name"));   //开始时间
+
 String start_date = StringUtils.nullToStr(request.getParameter("start_date"));   //开始时间
 String end_date = StringUtils.nullToStr(request.getParameter("end_date"));       //结束时间
 String flag = StringUtils.nullToStr(request.getParameter("flag"));               //不显示0往来单位
@@ -48,12 +50,17 @@ String flag2 = StringUtils.nullToStr(request.getParameter("flag2"));            
 <TABLE align="center" cellSpacing=0 cellPadding=0 width="99%" border=0 style="BORDER-TOP: #000000 2px solid;BORDER-LEFT:#000000 1px solid">
 	<THEAD>
 		<TR>
-			<TD class=ReportHead width="15%">客户编号</TD>
-			<TD class=ReportHead width="25%">客户名称</TD>
-			<TD class=ReportHead width="15%">期初数</TD>
-			<TD class=ReportHead width="15%">本期发生数</TD>
-			<TD class=ReportHead width="15%">本期付款</TD>
-			<TD class=ReportHead width="15%">当前应付款</TD>
+			<TD class=ReportHead width="18%">供应商名称</TD>
+			<TD class=ReportHead width="10%">客户经理</TD>
+			<TD class=ReportHead width="8%">期初数</TD>
+			<TD class=ReportHead width="8%">本期发生数</TD>
+			<TD class=ReportHead width="8%">本期付款</TD>
+			<TD class=ReportHead width="8%">当前应付款</TD>
+			<TD class=ReportHead width="8%">未到期应付款</TD>
+			<TD class=ReportHead width="8%">超期应付款</TD>
+			<TD class=ReportHead width="8%">其它应付</TD>
+			<TD class=ReportHead width="8%">预付款</TD>
+			<TD class=ReportHead width="8%">最长超期天数</TD>
 		</TR>
 	</THEAD>
 	
@@ -65,8 +72,22 @@ double hj_bqfs = 0;
 double hj_ysje = 0;
 double hj_dqys = 0;
 
+double hj_wdqyfk = 0;
+double hj_cqyfk = 0;
+double hj_yfk = 0;
+double hj_qtyfk = 0;
+
 Map qcMap = clientWlStatService.getClientQc(start_date);
-Map infoMap = clientWlStatService.getClientWlInfo(start_date,end_date,"");
+
+Map infoMap = clientWlStatService.getClientWlInfo(start_date,end_date,q_client_name);
+
+Map maxCqtsMap = clientWlStatService.getClientYfMaxCqts(q_client_name);  //最长超期天数
+Map wdqyfkMap = clientWlStatService.getClientWdqyfk(q_client_name);    //未到期应付款
+Map cqyfkMap = clientWlStatService.getClientCqyfk(q_client_name);      //超期应付款 
+
+Map yfkMap = clientWlStatService.getClientYufuk(q_client_name);      //预付款
+Map qcjsMap = clientWlStatService.getClientQcyfjsye(q_client_name);      //期初结算
+Map tzjsMap = clientWlStatService.getClientTzyfjsye(q_client_name);      //调账（应收）结算
 
 if(clientList != null && clientList.size() > 0){
 	for(int i=0;i<clientList.size();i++){
@@ -74,12 +95,25 @@ if(clientList != null && clientList.size() > 0){
 		
 		String client_id = StringUtils.nullToStr(map.get("id"));
 		String client_name = StringUtils.nullToStr(map.get("name"));
+		String khjl = StringUtils.nullToStr(map.get("khjl"));
 		
 		double qcs = qcMap.get(client_id+"应付")==null?0:((Double)qcMap.get(client_id+"应付")).doubleValue();  //期初数		
 		double bqfs = infoMap.get(client_id+"应付发生")==null?0:((Double)infoMap.get(client_id+"应付发生")).doubleValue();  //本期发生
 		double yfje = infoMap.get(client_id+"已付发生")==null?0:((Double)infoMap.get(client_id+"已付发生")).doubleValue();  //本期已收
 
 		double dqys = qcs + bqfs - yfje;  //当前应收=期初数+本期发生-本期已付
+		
+		String strCqts = StringUtils.nullToStr(maxCqtsMap.get(client_id));
+		int cqts = 0; //最长超期天数
+		if(!strCqts.equals("")){
+			cqts = new Integer(strCqts).intValue();
+		}
+		double wdqyfk = wdqyfkMap.get(client_id)==null?0:((Double)wdqyfkMap.get(client_id)).doubleValue();  //未到期应付款 
+		double cqyfk = cqyfkMap.get(client_id)==null?0:((Double)cqyfkMap.get(client_id)).doubleValue();  //超期应付款
+		
+		double yfk = yfkMap.get(client_id)==null?0:((Double)yfkMap.get(client_id)).doubleValue();  //预付款
+		double qtyfk = (qcjsMap.get(client_id)==null?0:((Double)qcjsMap.get(client_id)).doubleValue()) + (tzjsMap.get(client_id)==null?0:((Double)tzjsMap.get(client_id)).doubleValue()); //其它应付款 
+
 		
 		//不显示0往来单位
 		boolean bl = false;		
@@ -106,15 +140,23 @@ if(clientList != null && clientList.size() > 0){
 			hj_bqfs += bqfs;
 			hj_ysje += yfje;
 			hj_dqys += dqys;
-			
+			hj_wdqyfk += wdqyfk;
+			hj_cqyfk += cqyfk;
+			hj_yfk += yfk;
+			hj_qtyfk += qtyfk;
 %>	
 		<TR>
-	 		<TD class=ReportItem><a href="#" onclick="openWin('<%=client_id %>');"><%=client_id %></a>&nbsp;</TD>
 			<TD class=ReportItem><a href="#" onclick="openWin('<%=client_id %>');"><%=client_name %></a>&nbsp;</TD>
-			<TD class=ReportItemMoney><%=JMath.round(qcs,2) %>&nbsp;</TD>
-			<TD class=ReportItemMoney><%=JMath.round(bqfs,2) %>&nbsp;</TD>
-			<TD class=ReportItemMoney><%=JMath.round(yfje,2) %>&nbsp;</TD>
-			<TD class=ReportItemMoney><%=JMath.round(dqys,2) %>&nbsp;</TD>
+			<TD class=ReportItemXH><%=khjl %>&nbsp;</TD>
+			<TD class=ReportItemMoney nowrap="nowrap" title="期初数"><%=JMath.round(qcs,2) %>&nbsp;</TD>
+			<TD class=ReportItemMoney nowrap="nowrap" title="本期发生数"><%=JMath.round(bqfs,2) %>&nbsp;</TD>
+			<TD class=ReportItemMoney nowrap="nowrap" title="本期付款"><%=JMath.round(yfje,2) %>&nbsp;</TD>
+			<TD class=ReportItemMoney nowrap="nowrap" title="当前应付款"><%=JMath.round(dqys,2) %>&nbsp;</TD>
+			<TD class=ReportItemMoney nowrap="nowrap" title="未到期应付款"><%=JMath.round(wdqyfk,2) %></TD>
+			<TD class=ReportItemMoney nowrap="nowrap" title="超期应付款"><font color="red"><%=JMath.round(cqyfk,2) %></font></TD>
+			<TD class=ReportItemMoney nowrap="nowrap" title="其它应付"><%=JMath.round(qtyfk,2) %></TD>
+			<TD class=ReportItemMoney nowrap="nowrap" title="预付款"><%=JMath.round(yfk,2) %></TD>
+			<TD class=ReportItemMoney nowrap="nowrap" title="最长超期天数"><%=cqts %></TD>
 		</TR>
 
 <%		
@@ -131,6 +173,11 @@ if(clientList != null && clientList.size() > 0){
 		<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(hj_bqfs,2) %>&nbsp;</TD>
 		<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(hj_ysje,2) %>&nbsp;</TD>
 		<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(hj_dqys,2) %>&nbsp;</TD>
+		<TD class=ReportItemMoney style="font-weight:bold" nowrap="nowrap"><%=JMath.round(hj_wdqyfk,2) %></TD>
+		<TD class=ReportItemMoney style="font-weight:bold" nowrap="nowrap"><font color="red"><%=JMath.round(hj_cqyfk,2) %></font></TD>
+		<TD class=ReportItemMoney style="font-weight:bold" nowrap="nowrap"><%=JMath.round(hj_qtyfk,2) %></TD>
+		<TD class=ReportItemMoney style="font-weight:bold" nowrap="nowrap"><%=JMath.round(hj_yfk,2) %></TD>
+		<TD class=ReportItemMoney style="font-weight:bold">--</TD>	
 	</TR>	
 	</TBODY>
 	
