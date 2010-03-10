@@ -7,6 +7,9 @@ import com.sw.cms.dao.base.JdbcBaseDAO;
 import com.sw.cms.model.Jhd;
 import com.sw.cms.model.JhdProduct;
 import com.sw.cms.model.Page;
+import com.sw.cms.model.Clients;
+import com.sw.cms.model.ClientsLinkman;
+import com.sw.cms.model.StoreHouse;
 import com.sw.cms.util.DateComFunc;
 
 public class JhdDAO extends JdbcBaseDAO {
@@ -41,6 +44,38 @@ public class JhdDAO extends JdbcBaseDAO {
 		return this.queryForObject(sql,new BeanRowMapper(Jhd.class));
 	}
 	
+	/**
+	 * 根据进货单ID取供应商的详细信息
+	 * @param id
+	 * @return
+	 */
+	public Object getClient(String id){
+		String sql = "select a.* from clients a inner join jhd b on a.id=b.gysbh  where b.id='" + id + "'";
+		
+		return this.queryForObject(sql,new BeanRowMapper(Clients.class));
+	}
+	
+	/**
+	 * 根据进货单ID取供应商联系人的详细信息
+	 * @param id
+	 * @return
+	 */
+	public Object getClientsLinkman(String id){
+		String sql = "select c.* from  clients_linkman c inner join clients a on a.id=c.clients_id inner join jhd b on a.id=b.gysbh  where b.id='" + id + "' and c.lx='主联系人'";
+		
+		return this.queryForObject(sql,new BeanRowMapper(ClientsLinkman.class));
+	}
+	
+	/**
+	 * 根据进货单ID取仓库的详细信息
+	 * @param id
+	 * @return
+	 */
+	public Object getStoreHouse(String id){
+		String sql = "select a.* from  storehouse a inner join jhd b on a.id=b.store_id  where b.id='" + id + "'";
+		
+		return this.queryForObject(sql,new BeanRowMapper(StoreHouse.class));
+	}
 	
 	/**
 	 * 保存定货单信息
