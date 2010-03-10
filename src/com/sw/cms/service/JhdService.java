@@ -39,6 +39,33 @@ public class JhdService {
 	
 	
 	/**
+	 * 根据进货单ID取供应商的详细信息
+	 * @param id
+	 * @return
+	 */
+	public Object getClient(String id){
+		return jhdDao.getClient(id);
+	}
+	
+	/**
+	 * 根据进货单ID取供应商联系人的详细信息
+	 * @param id
+	 * @return
+	 */
+	public Object getClientsLinkman(String id){
+		return jhdDao.getClientsLinkman(id);
+	}
+	
+	/**
+	 * 根据进货单ID取仓库的详细信息
+	 * @param id
+	 * @return
+	 */
+	public Object getStoreHouse(String id){
+		return jhdDao.getStoreHouse(id);
+	}
+	
+	/**
 	 * 保存进货单信息
 	 * @param jhd
 	 * @return
