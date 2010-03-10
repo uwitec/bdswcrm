@@ -10,6 +10,9 @@ import com.sw.cms.model.JhdProduct;
 import com.sw.cms.model.LoginInfo;
 import com.sw.cms.model.Page;
 import com.sw.cms.model.SysUser;
+import com.sw.cms.model.Clients;
+import com.sw.cms.model.StoreHouse;
+import com.sw.cms.model.ClientsLinkman;
 import com.sw.cms.service.ClientsService;
 import com.sw.cms.service.JhdService;
 import com.sw.cms.service.ProductKcService;
@@ -41,7 +44,10 @@ public class JhdAction extends BaseAction {
 	private Jhd jhd = new Jhd();
 
 	private JhdProduct jhdProduct = new JhdProduct();
-
+	private Clients clients = new Clients();
+	private ClientsLinkman clientsLinkman= new ClientsLinkman();
+	private StoreHouse storeHouse= new StoreHouse();
+	
 	private List jhdProducts = new ArrayList();
 	private List providers = new ArrayList();	
 	private List userList = new ArrayList();
@@ -77,7 +83,11 @@ public class JhdAction extends BaseAction {
 	private String remark = "";
 	private String jexj_dx = "";
 	private String provider = "";
-
+	private String lxr_tel= "";//供应商的联系人及电话
+	private String cz= "";  //供应商的传真号
+	private String storedz= "";//收货地址
+	private String storelxr_tel= "";//收货人电话
+	private String fkrq= "";//付款日期
 	/**
 	 * 取进货单列表
 	 * 
@@ -229,6 +239,9 @@ public class JhdAction extends BaseAction {
 		try{
 			jhd = (Jhd)jhdService.getJhd(id);
 			jhdProducts = jhdService.getJhdProducts(id);
+			clients=(Clients)jhdService.getClient(id);			
+			clientsLinkman=(ClientsLinkman)jhdService.getClientsLinkman(id);
+			storeHouse=(StoreHouse)jhdService.getStoreHouse(id);
 			
 			creatdate = StringUtils.nullToStr(jhd.getCg_date());
 			provider = StaticParamDo.getClientNameById(jhd.getGysbh());
@@ -236,6 +249,22 @@ public class JhdAction extends BaseAction {
 			dept_name = StaticParamDo.getDeptNameById(((SysUser)userService.getUser(jhd.getFzr())).getDept());
 			remark = StringUtils.nullToStr(jhd.getMs());
 			jsr = StaticParamDo.getRealNameById(jhd.getFzr());
+			
+			//增加供应商的联系人电话、付款日期、传真号
+			if(clientsLinkman != null && !clientsLinkman.equals("")) 
+			{
+			  lxr_tel= StringUtils.nullToStr(clientsLinkman.getName()) + "  " +StringUtils.nullToStr(clientsLinkman.getGzdh())+ "  " +StringUtils.nullToStr(clientsLinkman.getYddh());
+			}
+			else
+			{
+			  lxr_tel="";
+			}
+			cz=StringUtils.nullToStr(clients.getCz());
+			fkrq=StringUtils.nullToStr(jhd.getYfrq());
+			
+			//增加收货地址及负责人电话
+			storedz=StringUtils.nullToStr(storeHouse.getAddress());
+			storelxr_tel=StringUtils.nullToStr(storeHouse.getLxr())+"  "+StringUtils.nullToStr(storeHouse.getLxdh());
 			
 			Map map = sysInitSetService.getReportSet();
 			
@@ -288,6 +317,22 @@ public class JhdAction extends BaseAction {
 		this.jhdProduct = jhdProduct;
 	}
 
+	public Clients getClients() {
+		return clients;
+	}
+
+	public void setClients(Clients clients) {
+		this.clients = clients;
+	}
+	
+	public ClientsLinkman getClientsLinkman() {
+		return clientsLinkman;
+	}
+
+	public void setClientsLinkman(ClientsLinkman clientsLinkman) {
+		this.clientsLinkman = clientsLinkman;
+	}
+	
 	public void setJhdService(JhdService jhdService) {
 		this.jhdService = jhdService;
 	}
@@ -548,4 +593,51 @@ public class JhdAction extends BaseAction {
 		this.sysInitSetService = sysInitSetService;
 	}
 
+	public String getLxr_tel() {
+		return lxr_tel;
+	}
+
+	public void setLxr_tel(String lxr_tel) {
+		this.lxr_tel = lxr_tel;
+	}
+
+	public String getCz() {
+		return cz;
+	}
+
+	public void setCz(String cz) {
+		this.cz = cz;
+	}
+	
+	public String getStoredz() {
+		return storedz;
+	}
+
+	public void setStoredz(String storedz) {
+		this.storedz = storedz;
+	}
+
+	public String getStorelxr_tel() {
+		return storelxr_tel;
+	}
+
+	public void setStorelxr_tel(String storelxr_tel) {
+		this.storelxr_tel = storelxr_tel;
+	}
+	
+	public StoreHouse getStoreHouse() {
+		return storeHouse;
+	}
+
+	public void setStoreHouse(StoreHouse storeHouse) {
+		this.storeHouse = storeHouse;
+	}
+	
+	public String getFkrq() {
+		return fkrq;
+	}
+
+	public void setFkrq(String fkrq) {
+		this.fkrq = fkrq;
+	}
 }
