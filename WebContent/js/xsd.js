@@ -38,7 +38,7 @@ function saveInfo(vl){
 		}					
 	}else if(document.getElementById("sklx").value == "账期"){
 		if(isNaN(document.getElementById("zq").value) || document.getElementById("zq").value > xszq){
-			alert("账期必须为数字，并且不能大于客户默认期初！");
+			alert("账期必须为数字，并且不能大于客户默认账期！");
 			document.getElementById("zq").focus();	
 			return;
 		}
