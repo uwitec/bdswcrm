@@ -1,6 +1,7 @@
 package com.sw.cms.dao;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -70,15 +71,7 @@ public class InitParamDAO extends JdbcBaseDAO {
 	 */
 	public void genYsQc(){
 		String today = DateComFunc.getToday();
-		
-		List clientList = getClientList();
-		if(clientList != null && clientList.size()>0){
-			for(int i=0;i<clientList.size();i++){
-				Map map = (Map)clientList.get(i);
-				String client_name = StringUtils.nullToStr(map.get("id"));
-				this.insertQc(client_name, this.getQcys(client_name), this.getQcyf(client_name), today);
-			}
-		}
+		this.genClientWlqc(today);
 		log.info("生成应收期初成功");
 	}
 	
@@ -396,32 +389,115 @@ public class InitParamDAO extends JdbcBaseDAO {
 	
 	//以下为系统生成期初失败后调用调整期初时用到的函数
 	
+
 	/**
-	 * 根据前一天客户应收应付期初值 生成某一天的期初值<BR>
-	 * 使用在某一天客户期初出现问题时，从前一天的基础上来调整的情况<BR>
-	 * 例如：2008-09-09的期初有问题，需2008-09-08的值是对，那应该是cdate=2008-09-09,cdat_1=2008-09-08<BR>
-	 * @param cdate  期初日期
-	 * @param cdat_1 期初前一天
+	 * 取用户期初，包括应收期初、应付期初
+	 * @param cdate
+	 * @return Map key:client_id+应收（应付） value:期初值
 	 */
-	public void genCleintWlqc(String cdate,String cdat_1){
-		List clientList = getClientList();
-		if(clientList != null && clientList.size()>0){
-			for(int i=0;i<clientList.size();i++){
-				Map map = (Map)clientList.get(i);
-				String client_name = StringUtils.nullToStr(map.get("id"));
-							
-				//今日期初应收 = 昨日期初应收 + 昨日发生应收 - 昨日已收
-				double qcys = this.getClientYsqc(client_name, cdat_1) + this.getSjysje(client_name, cdat_1) - this.getSjyishouje(client_name, cdat_1);
+	private Map getClientQc(String cdate){
+		Map<String,Object> qcMap = new HashMap<String,Object>();
+		
+		String sql = "select * from client_qc where cdate='" + cdate + "'";
+		
+		List list = this.getResultList(sql);
+		
+		String client_id = "";
+		if(list != null && list.size() > 0){
+			for(int i=0;i<list.size();i++){
+				Map tempMap = (Map)list.get(i);
+				client_id = (String)tempMap.get("client_name");
 				
-				//今日期初应付 = 昨日期初应付 + 昨日发生应付 - 昨日已付
-				double qcyf = this.getClientYfqc(client_name, cdat_1) + this.getSjyfje(client_name, cdat_1) - this.getSjyifuje(client_name, cdat_1);
-				
-				this.insertQc(client_name, qcys, qcyf, cdate);
+				qcMap.put(client_id+"应收", tempMap.get("ysqc"));
+				qcMap.put(client_id+"应付", tempMap.get("yfqc"));
 			}
 		}
-		log.info("生成" + cdate + "往来期初成功");
+		
+		return qcMap;
 	}
 	
+	
+	/**
+	 * 取用户往来所有情况
+	 * @param start_date
+	 * @param end_date
+	 * @param client_id
+	 * @return map key:client_id+je_type  value:发生金额
+	 */
+	private Map getClientWlInfo(String start_date,String end_date,String client_id){
+		Map<String,Object> map = new HashMap<String,Object>();
+		
+		String sql = "select client_id,je_type,sum(fsje) as fsje from view_client_wl_info where 1=1";
+		
+		if(!start_date.equals("")){
+			sql += " and cdate>='" + start_date + "'";
+		}
+		if(!end_date.equals("")){
+			sql += " and cdate<='" + end_date + "'";
+		}
+		if(!client_id.equals("")){
+			sql += " and client_id='" + client_id + "'";
+		}
+		
+		sql += " group by client_id,je_type";
+		
+		List list = this.getResultList(sql);
+		
+		String je_type = "";
+		if(list != null && list.size() > 0){
+			for(int i=0;i<list.size();i++){
+				Map tempMap = (Map)list.get(i);
+				client_id = (String)tempMap.get("client_id");
+				je_type = (String)tempMap.get("je_type");
+				
+				map.put(client_id+je_type, tempMap.get("fsje"));
+			}
+		}
+		
+		return map;
+	}
+	
+	
+	/**
+	 * 生成某一天的期初值
+	 * @param cdate
+	 */
+	private void genClientWlqc(String cdate){
+		
+		Date curDate = DateComFunc.strToDate(cdate,"yyyy-MM-dd");	 //生成期初的日期
+		String beforeDate =  DateComFunc.formatDate((DateComFunc.addDay(curDate,-1)),"yyyy-MM-dd");  //生成期初的前一天
+			
+		Map qcMap = this.getClientQc(beforeDate);  //前一天的期初值情况
+		Map wlMap = this.getClientWlInfo(beforeDate, beforeDate, "");  //前一天的往来情况
+		
+		
+		
+		List clientList = getClientList();
+		if(clientList != null && clientList.size()>0){
+			String[] sqls = new String[clientList.size()];
+			for(int i=0;i<clientList.size();i++){
+				Map map = (Map)clientList.get(i);
+				String client_id = StringUtils.nullToStr(map.get("id"));
+				
+				double qcys = qcMap.get(client_id+"应收")==null?0:((Double)qcMap.get(client_id+"应收")).doubleValue();  //昨日期初应收数		
+				double bqfs = wlMap.get(client_id+"应收发生")==null?0:((Double)wlMap.get(client_id+"应收发生")).doubleValue();  //昨日应收发生
+				double ysje = wlMap.get(client_id+"已收发生")==null?0:((Double)wlMap.get(client_id+"已收发生")).doubleValue();  //昨日已收发生
+				
+				double curYs = qcys + bqfs - ysje;  //今日期初应收数
+				
+				
+				double qcyf = qcMap.get(client_id+"应付")==null?0:((Double)qcMap.get(client_id+"应付")).doubleValue();  //昨日期初应付数		
+				double bqfsyf = wlMap.get(client_id+"应付发生")==null?0:((Double)wlMap.get(client_id+"应付发生")).doubleValue();  //本期发生
+				double yfje = wlMap.get(client_id+"已付发生")==null?0:((Double)wlMap.get(client_id+"已付发生")).doubleValue();  //本期已收
+				
+				double curYf = qcyf + bqfsyf - yfje;  //今日期初应付数
+				
+				sqls[i] = "insert into client_qc(client_name,ysqc,yfqc,cdate) values('" + client_id + "'," + curYs + "," + curYf + ",'" + cdate + "')";
+				
+			}
+			this.getJdbcTemplate().batchUpdate(sqls);
+		}
+	}
 	
 	
 	/**
@@ -429,7 +505,7 @@ public class InitParamDAO extends JdbcBaseDAO {
 	 * @param cdate  要生成期初的日期
 	 * @param cdat_1  期初前一天
 	 */
-	public void genAccountQc(String cdate,String cdat_1){
+	private void genAccountQc(String cdate,String cdat_1){
 		
 		List accountList = getAllAccounts();
 		
@@ -507,8 +583,11 @@ public class InitParamDAO extends JdbcBaseDAO {
 			
 			String cdate = DateComFunc.formatDate(curDate, "yyyy-MM-dd");
 			String cdat_1 =  DateComFunc.formatDate((DateComFunc.addDay(curDate,-1)),"yyyy-MM-dd");
-			this.genCleintWlqc(cdate, cdat_1);
-			log.debug("生成" + cdate + "客户往来期初成功");
+			
+			System.out.println("开始生成" + cdate + "客户往来期初");
+			this.genClientWlqc(cdate);
+			System.out.println("生成" + cdate + "客户往来期初成功");
+			
 			curDate = DateComFunc.addDay(curDate, 1);  //当前天数加1
 		}
 	}

@@ -32,7 +32,6 @@ public class ServletContextInit extends HttpServlet {
 			//批量生成客户期初值
 			//dao.updateBatchGenClientWlQc("2009-09-01", "2010-01-05");
 			
-			//System.out.println("ddddddddddddddddddd");
 			//Thread.sleep(100*1000);
 			
 			//调整期初等的操作放到线程中做2010-01-05

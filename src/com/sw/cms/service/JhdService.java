@@ -71,8 +71,14 @@ public class JhdService {
 	 * @return
 	 */
 	public void saveJhd(Jhd jhd,List jhdProducts){
+		
+		if(jhd.getTotal() == 0){
+			jhd.setFklx("已付");
+		}else{
+			jhd.setFklx("未付");
+		}
 
-		jhd.setFklx("未付");
+		
 		
 		//处理应付日期
 		jhd.setYfrq(DateComFunc.formatDate(DateComFunc.addDay((DateComFunc.strToDate(jhd.getCg_date(), "yyyy-MM-dd")),jhd.getZq()),"yyyy-MM-dd"));
@@ -96,7 +102,11 @@ public class JhdService {
 	 */
 	public void updateJhd(Jhd jhd,List jhdProducts){
 
-		jhd.setFklx("未付");
+		if(jhd.getTotal() == 0){
+			jhd.setFklx("已付");
+		}else{
+			jhd.setFklx("未付");
+		}
 		
 		jhd.setYfrq(DateComFunc.formatDate(DateComFunc.addDay((DateComFunc.strToDate(jhd.getCg_date(), "yyyy-MM-dd")),jhd.getZq()),"yyyy-MM-dd"));
 

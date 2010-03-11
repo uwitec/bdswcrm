@@ -251,20 +251,22 @@ public class JhdAction extends BaseAction {
 			jsr = StaticParamDo.getRealNameById(jhd.getFzr());
 			
 			//增加供应商的联系人电话、付款日期、传真号
-			if(clientsLinkman != null && !clientsLinkman.equals("")) 
-			{
+			if(clientsLinkman != null && !clientsLinkman.equals("")) {
 			  lxr_tel= StringUtils.nullToStr(clientsLinkman.getName()) + "  " +StringUtils.nullToStr(clientsLinkman.getGzdh())+ "  " +StringUtils.nullToStr(clientsLinkman.getYddh());
-			}
-			else
-			{
+			}else{
 			  lxr_tel="";
 			}
-			cz=StringUtils.nullToStr(clients.getCz());
-			fkrq=StringUtils.nullToStr(jhd.getYfrq());
+			
+			if(clients != null){
+				cz=StringUtils.nullToStr(clients.getCz());
+				fkrq=StringUtils.nullToStr(jhd.getYfrq());
+			}
 			
 			//增加收货地址及负责人电话
-			storedz=StringUtils.nullToStr(storeHouse.getAddress());
-			storelxr_tel=StringUtils.nullToStr(storeHouse.getLxr())+"  "+StringUtils.nullToStr(storeHouse.getLxdh());
+			if(storeHouse != null){
+				storedz=StringUtils.nullToStr(storeHouse.getAddress());
+				storelxr_tel=StringUtils.nullToStr(storeHouse.getLxr())+"  "+StringUtils.nullToStr(storeHouse.getLxdh());
+			}
 			
 			Map map = sysInitSetService.getReportSet();
 			

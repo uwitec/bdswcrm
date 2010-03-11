@@ -332,7 +332,7 @@ public class ClientWlStatDAO extends JdbcBaseDAO {
 		
 		Map map = new HashMap();
 		
-		String sql = "select gysbh,sum(total-fkje) as cqyfk from jhd where state='已出库' and fklx<>'已付' and (TO_DAYS(now()) - TO_DAYS(yfrq))>0";
+		String sql = "select gysbh,sum(total-fkje) as cqyfk from jhd where state='已入库' and fklx<>'已付' and (TO_DAYS(now()) - TO_DAYS(yfrq))>0";
 		
 		if(!client_id.equals("")){
 			sql += " and gysbh='" + client_id + "'";

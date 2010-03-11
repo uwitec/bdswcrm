@@ -17,9 +17,10 @@ public class MoneyUtil {
 	 * 得到大写金额。
 	 */
 	public static String toChinese(String str) {
-		if(str == null || str.equals("") || str.equals("null")){
+		if(str == null || str.equals("") || str.equals("null") || str.equals("0") || str.equals("0.0") || str.equals("0.00")){
 			return "";
 		}
+
 		str = str.replaceAll(",", "");// 去掉","
 		String integerStr;// 整数部分数字
 		String decimalStr;// 小数部分数字
