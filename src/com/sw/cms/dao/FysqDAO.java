@@ -31,7 +31,7 @@ public class FysqDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public Page getFysqList(String con,int curPage, int rowsPerPage){
-		String sql = "select * from fysq where 1=1";
+		String sql = "select a.*,b.real_name,c.role_id from fysq a left join sys_user b on a.sqr=b.user_id left join user_role c on b.user_id=c.user_id where 1=1  ";
 		if(!con.equals("")){
 			sql += con;
 		}
@@ -47,7 +47,7 @@ public class FysqDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public List getFysqList(String con){
-		String sql = "select * from fysq where 1=1";
+		String sql = "select a.*,b.real_name,c.role_id from fysq a left join sys_user b on a.sqr=b.user_id left join user_role c on b.user_id=c.user_id where 1=1  ";
 		if(!con.equals("")){
 			sql += con;
 		}
@@ -63,7 +63,7 @@ public class FysqDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public Page getDspFysqList(String con,int curPage, int rowsPerPage){
-		String sql = "select * from fysq where state='提交'";
+		String sql = "select a.*,b.real_name,c.role_id from fysq a left join sys_user b on a.sqr=b.user_id left join user_role c on b.user_id=c.user_id where state='提交'";
 		if(!con.equals("")){
 			sql += con;
 		}
