@@ -2,6 +2,7 @@ package com.sw.cms.action;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.sw.cms.action.base.BaseAction;
 import com.sw.cms.model.Fysq;
@@ -13,6 +14,7 @@ import com.sw.cms.service.SjzdService;
 import com.sw.cms.service.UserService;
 import com.sw.cms.util.Constant;
 import com.sw.cms.util.DateComFunc;
+import com.sw.cms.util.StringUtils;
 
 /**
  * 费用申请Action类 
@@ -51,17 +53,47 @@ public class FysqAction extends BaseAction {
 	 */
 	public String list(){
 		int rowsPerPage = Constant.PAGE_SIZE2;
-
+        //增加条件限制：费用申请的申请人为当前登录人，就申请人可以看到自己的记录，不能看到他人的记录
+		LoginInfo info = (LoginInfo)getSession().getAttribute("LOGINUSER");
+		String user_name = info.getReal_name();
+		String user_id=info.getUser_id();
+		
 		String con = "";
 		
 		if(!creatdate1.equals("")){
-			con += " and creatdate>='" + creatdate1 + "'";
+			con += " and a.creatdate>='" + creatdate1 + "'";
 		}
 		if(!creatdate2.equals("")){
-			con += " and creatdate<='" + creatdate2 + "'";
+			con += " and a.creatdate<='" + creatdate2 + "'";
 		}
 		if(!state.equals("")){
-			con += " and state='" + state + "'";
+			con += " and a.state='" + state + "'";
+		}
+				
+//		费用申请审批权限设置
+		Map fysqMap = userService.getSpRight("费用申请");
+		String sp_flag = "";
+		String role_id = "";
+		if(fysqMap != null){
+			sp_flag = StringUtils.nullToStr(fysqMap.get("sp_flag"));
+			role_id = StringUtils.nullToStr(fysqMap.get("role_id"));
+		}
+		String[] fysqRoles = role_id.split(",");
+		
+		//当前用户有费用申请审批权限
+		
+//		当前用户有费用申请审批权限
+		String isFysqSpRight="0";
+		if(userService.isUserInRole(user_id, fysqRoles)){
+		    	  isFysqSpRight="1";  
+		      }
+			
+		if(isFysqSpRight.equals("0"))
+		{
+			if(!user_name.equals(""))
+			{
+		  	con += " and b.real_name='" + user_name + "'";
+			}	
 		}
 		
 		if(orderName.equals("")){
@@ -85,18 +117,46 @@ public class FysqAction extends BaseAction {
 	 */
 	public String dspList(){
 		int rowsPerPage = Constant.PAGE_SIZE2;
-
+//		增加条件限制：费用申请的申请人为当前登录人，就申请人可以看到自己的记录，不能看到他人的记录
+		LoginInfo info = (LoginInfo)getSession().getAttribute("LOGINUSER");
+		String user_name = info.getReal_name();
+		String user_id=info.getUser_id();
+		
 		String con = "";
 		
+//		费用申请审批权限设置
+		Map fysqMap = userService.getSpRight("费用申请");
+		String sp_flag = "";
+		String role_id = "";
+		if(fysqMap != null){
+			sp_flag = StringUtils.nullToStr(fysqMap.get("sp_flag"));
+			role_id = StringUtils.nullToStr(fysqMap.get("role_id"));
+		}
+		String[] fysqRoles = role_id.split(",");
+	
 		if(!creatdate1.equals("")){
-			con += " and creatdate>='" + creatdate1 + "'";
+			con += " and a.creatdate>='" + creatdate1 + "'";
 		}
 		if(!creatdate2.equals("")){
-			con += " and creatdate<='" + creatdate2 + "'";
+			con += " and a.creatdate<='" + creatdate2 + "'";
 		}
 		if(!state.equals("")){
-			con += " and state='" + state + "'";
+			con += " and a.state='" + state + "'";
 		}
+		
+		//当前用户有费用申请审批权限
+		String isFysqSpRight="0";
+		if(userService.isUserInRole(user_id, fysqRoles)){
+		    	  isFysqSpRight="1";  
+		      }
+		if(isFysqSpRight.equals("0"))
+		{
+			if(!user_name.equals(""))
+			{
+		  	con += " and b.real_name='" + user_name + "'";
+			}	
+		}
+		
 		
 		if(orderName.equals("")){
 			orderName = "id";
@@ -105,9 +165,10 @@ public class FysqAction extends BaseAction {
 			orderType = "desc";
 		}
 		
+		
 		con += " order by " + orderName + " " + orderType;
 		
-		fysqPage = fysqService.getDspFysqList(con, curPage, rowsPerPage);
+		fysqPage = fysqService.getDspFysqList(con,curPage, rowsPerPage);
 		
 		return "success";
 	}
