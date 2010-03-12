@@ -31,7 +31,7 @@ public class FysqService {
 	 * @return
 	 */
 	public Page getFysqList(String con,int curPage, int rowsPerPage){
-		return fysqDao.getFysqList(con, curPage, rowsPerPage);
+		return fysqDao.getFysqList(con,curPage, rowsPerPage);
 	}
 	
 	/**
