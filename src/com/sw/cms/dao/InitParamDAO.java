@@ -67,12 +67,11 @@ public class InitParamDAO extends JdbcBaseDAO {
 	/**
 	 * 生成客户往来期初
 	 * 昨天的期初加昨天的往来等于今天的期初
-	 *
 	 */
 	public void genYsQc(){
 		String today = DateComFunc.getToday();
 		this.genClientWlqc(today);
-		log.info("生成应收期初成功");
+		log.info("生成客户往来期初成功");
 	}
 	
 	
