@@ -32,7 +32,7 @@ public class InitParamService {
 	 * 生成账户期初
 	 *
 	 */
-	public void genAccountQc(){
+	public void insertAccountQc(){
 		initParamDao.genAccountQc();
 	}
 	
@@ -41,7 +41,7 @@ public class InitParamService {
 	 * 生成库存期初
 	 *
 	 */
-	public void genKcQc(){
+	public void insertKcQc(){
 		initParamDao.genKcQc();
 	}
 	
@@ -51,7 +51,7 @@ public class InitParamService {
 	 * 昨天的期初加昨天的往来等于今天的期初
 	 *
 	 */
-	public void genYsQc(){
+	public void insertClientQc(){
 		initParamDao.genYsQc();
 	}
 	

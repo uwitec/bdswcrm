@@ -13,9 +13,9 @@ public class InitParamJob extends QuartzJobBean {
 	protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
 		
 		initParamService.updateParam();  //初始化参数
-		initParamService.genAccountQc(); //生成账户期初
-		initParamService.genKcQc();      //生成库存期初
-		initParamService.genYsQc();      //生成往来期初
+		initParamService.insertAccountQc(); //生成账户期初
+		initParamService.insertKcQc();      //生成库存期初
+		initParamService.insertClientQc();      //生成往来期初
 		initParamService.delExpireMsg(); //删除过期消息
 		initParamService.updateShkcProductDay();//更改售后库存商品在库天数
 	}
