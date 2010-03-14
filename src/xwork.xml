@@ -2579,5 +2579,33 @@
             <result name="success">/WEB-INF/pages/cnfkd/cnfkd_view.jsp</result>
         </action>
         <!-- 出纳付款单 -->
+        
+        <!-- 备忘录开始 -->
+        <action name="listBwl" class="bwlAction" method="list">
+            <result name="success" type="dispatcher">/WEB-INF/pages/bwl/bwl_list.jsp</result>
+        </action>
+        <action name="addBwl" class="bwlAction" method="add">
+            <result name="success">/WEB-INF/pages/bwl/bwl_add.jsp</result>
+        </action> 
+		<action name="saveBwl" class="bwlAction" method="save">
+            <result name="cancel" type="redirect">addBwl.html</result>
+            <result name="input" type="dispatcher">/WEB-INF/pages/bwl/bwl_add.jsp</result>
+            <result name="success">/WEB-INF/pages/msg.jsp</result>
+        </action>
+		<action name="editBwl" class="bwlAction" method="edit">
+            <result name="success">/WEB-INF/pages/bwl/bwl_edit.jsp</result>
+        </action>
+        <action name="viewBwl" class="bwlAction" method="edit">
+            <result name="success">/WEB-INF/pages/bwl/bwl_view.jsp</result>
+        </action>
+		<action name="updateBwl" class="bwlAction" method="update">
+            <result name="cancel" type="redirect">editBwl.html</result>
+            <result name="input">/WEB-INF/pages/bwl/bwl_edit.jsp</result>
+            <result name="success">/WEB-INF/pages/msg.jsp</result>
+        </action>
+		<action name="delBwl" class="bwlAction" method="del">
+            <result name="success" type="redirect">listBwl.html</result>
+        </action>
+        <!-- 备忘录结束 -->                             
     </package>
 </xwork>
