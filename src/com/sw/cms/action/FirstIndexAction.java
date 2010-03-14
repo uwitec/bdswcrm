@@ -47,6 +47,8 @@ public class FirstIndexAction extends BaseAction {
 	private String isCgfkSpRight = "0";
 	private String isFysqSpRight = "0";
 	private int curPage = 1;
+	
+	
 	/**
 	 * Ê×Ò³ÏÔÊ¾Ïî
 	 * @return

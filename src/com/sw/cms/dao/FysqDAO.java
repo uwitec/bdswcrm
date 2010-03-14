@@ -1,19 +1,12 @@
 package com.sw.cms.dao;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
-
-import org.springframework.jdbc.core.RowMapper;
 
 import com.sw.cms.dao.base.BeanRowMapper;
 import com.sw.cms.dao.base.JdbcBaseDAO;
-import com.sw.cms.dao.base.SqlUtil;
 import com.sw.cms.model.Fysq;
 import com.sw.cms.model.Page;
 import com.sw.cms.util.DateComFunc;
-import com.sw.cms.util.JMath;
-import com.sw.cms.util.StaticParamDo;
 
 /**
  * 费用申请
@@ -31,7 +24,7 @@ public class FysqDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public Page getFysqList(String con,int curPage, int rowsPerPage){
-		String sql = "select a.*,b.real_name,c.role_id from fysq a left join sys_user b on a.sqr=b.user_id left join user_role c on b.user_id=c.user_id where 1=1  ";
+		String sql = "select * from fysq where 1=1  ";
 		if(!con.equals("")){
 			sql += con;
 		}
@@ -47,27 +40,11 @@ public class FysqDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public List getFysqList(String con){
-		String sql = "select a.*,b.real_name,c.role_id from fysq a left join sys_user b on a.sqr=b.user_id left join user_role c on b.user_id=c.user_id where 1=1  ";
+		String sql = "select * from fysq where 1=1  ";
 		if(!con.equals("")){
 			sql += con;
 		}
 		return this.getResultList(sql, new BeanRowMapper(Fysq.class));
-	}
-	
-	
-	/**
-	 * 取待审批费用申请单列表
-	 * @param con
-	 * @param curPage
-	 * @param rowsPerPage
-	 * @return
-	 */
-	public Page getDspFysqList(String con,int curPage, int rowsPerPage){
-		String sql = "select a.*,b.real_name,c.role_id from fysq a left join sys_user b on a.sqr=b.user_id left join user_role c on b.user_id=c.user_id where state='提交'";
-		if(!con.equals("")){
-			sql += con;
-		}
-		return this.getResultByPage(sql, curPage, rowsPerPage, new BeanRowMapper(Fysq.class));
 	}
 	
 	

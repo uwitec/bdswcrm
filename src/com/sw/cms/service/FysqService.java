@@ -47,18 +47,6 @@ public class FysqService {
 	
 	
 	/**
-	 * 取待审批费用申请单列表
-	 * @param con
-	 * @param curPage
-	 * @param rowsPerPage
-	 * @return
-	 */
-	public Page getDspFysqList(String con,int curPage, int rowsPerPage){
-		return fysqDao.getDspFysqList(con, curPage, rowsPerPage);
-	}
-	
-	
-	/**
 	 * 更新费用申请信息
 	 * @param fysq
 	 */
