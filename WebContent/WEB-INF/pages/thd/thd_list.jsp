@@ -11,7 +11,8 @@ OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
 Page results = (Page)VS.findValue("pageThd");
 
 String client_name = (String)VS.findValue("client_name");
-String th_date = (String)VS.findValue("th_date");
+String th_date1 = (String)VS.findValue("th_date1");
+String th_date2 = (String)VS.findValue("th_date2");
 
 String orderName = (String)VS.findValue("orderName");
 String orderType = (String)VS.findValue("orderType");
@@ -54,7 +55,8 @@ String orderType = (String)VS.findValue("orderType");
 	
 	function clearAll(){
 		document.myform.client_name.value = "";
-		document.myform.th_date.value = "";
+		document.myform.th_date1.value = "";
+		document.myform.th_date2.value = "";
 	}
 	
 	function doSort(order_name){
@@ -101,10 +103,11 @@ String orderType = (String)VS.findValue("orderType");
 	<tr>
 		<td class="search" align="left" colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;
 			客户名称：<input type="text" name="client_name" size="25" value="<%=client_name %>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			退货日期：<input type="text" name="th_date" value="<%=th_date %>" size="15"  class="Wdate" onFocus="WdatePicker()">	
+			退货日期：<input type="text" name="th_date1" value="<%=th_date1 %>" size="15"  class="Wdate" onFocus="WdatePicker()">	&nbsp;&nbsp;至&nbsp;&nbsp;
+			<input type="text" name="th_date2" value="<%=th_date2 %>" size="15"  class="Wdate" onFocus="WdatePicker()">
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="submit" name="buttonCx" value=" 查询 " class="css_button2">&nbsp;&nbsp;&nbsp;&nbsp;	
-			<input type="button" name="buttonQk" value=" 清空 " class="css_button2" onclick="clearAll();">
+			<input type="submit" name="buttonCx" value="查询" class="css_button">&nbsp;&nbsp;&nbsp;&nbsp;	
+			<input type="button" name="buttonQk" value="清空" class="css_button" onclick="clearAll();">
 		</td>				
 	</tr>		
 </table>
