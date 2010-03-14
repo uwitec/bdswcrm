@@ -1530,9 +1530,12 @@
         <action name="editNbgg" class="xxfbNbggAction" method="edit">
             <result name="success">/WEB-INF/pages/nbgg/nbgg_edit.jsp</result>
         </action>
-        <action name="viewNbgg" class="xxfbNbggAction" method="edit">
+        <action name="viewNbgg" class="xxfbNbggAction" method="view">
             <result name="success">/WEB-INF/pages/nbgg/nbgg_view.jsp</result>
         </action>
+        <action name="saveNbggReplay" class="xxfbNbggAction" method="saveReplay">
+            <result name="success">viewNbgg.html?id=${parent_id}</result>
+        </action>        
         <action name="updateNbgg" class="xxfbNbggAction" method="update">
             <result name="cancel" type="redirect">editNbgg.html</result>
             <result name="input">/WEB-INF/pages/nbgg/nbgg_edit.jsp</result>
