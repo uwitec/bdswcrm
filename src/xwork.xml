@@ -1715,10 +1715,7 @@
         <!-- 费用申请单 -->
         <action name="listFysq" class="fysqAction" method="list">
             <result name="success" type="dispatcher">/WEB-INF/pages/fysq/fysq_list.jsp</result>
-        </action>
-        <action name="listDspFysq" class="fysqAction" method="dspList">
-            <result name="success" type="dispatcher">/WEB-INF/pages/fysq/dspfysq_list.jsp</result>
-        </action>               
+        </action>             
         <action name="editFysq" class="fysqAction" method="edit">
             <result name="success">/WEB-INF/pages/fysq/fysq_edit.jsp</result>
         </action>
