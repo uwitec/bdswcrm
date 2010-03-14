@@ -1,5 +1,7 @@
 package com.sw.cms.service;
 
+import java.util.List;
+
 import com.sw.cms.dao.XxfbNbggDAO;
 import com.sw.cms.model.Page;
 import com.sw.cms.model.XxfbNbgg;
@@ -56,6 +58,16 @@ public class XxfbNbggService {
 	 */
 	public XxfbNbgg getNbgg(String id){
 		return xxfbNbggDao.getNbgg(id);
+	}
+	
+	
+	/**
+	 * 取内部公告回复列表
+	 * @param parent_id
+	 * @return
+	 */
+	public List getNbggListByParentId(String parent_id){
+		return xxfbNbggDao.getNbggListByParentId(parent_id);
 	}
 	
 	

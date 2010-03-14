@@ -1,5 +1,8 @@
 package com.sw.cms.model;
 
+import java.sql.Timestamp;
+import java.util.Date;
+
 
 /**
  * 信息发布内部公告
@@ -14,20 +17,15 @@ public class XxfbNbgg {
 	private String content;
 	private String pub_date;
 	private String czr;
-	private String cz_date;
+	private Timestamp cz_date;
 	private String type;
+	private String parent_id;
 	
 	public String getContent() {
 		return content;
 	}
 	public void setContent(String content) {
 		this.content = content;
-	}
-	public String getCz_date() {
-		return cz_date;
-	}
-	public void setCz_date(String cz_date) {
-		this.cz_date = cz_date;
 	}
 	public String getCzr() {
 		return czr;
@@ -58,6 +56,18 @@ public class XxfbNbgg {
 	}
 	public void setId(String id) {
 		this.id = id;
+	}
+	public String getParent_id() {
+		return parent_id;
+	}
+	public void setParent_id(String parentId) {
+		parent_id = parentId;
+	}
+	public Timestamp getCz_date() {
+		return cz_date;
+	}
+	public void setCz_date(Timestamp czDate) {
+		cz_date = czDate;
 	}
 	
 }
