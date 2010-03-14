@@ -15,6 +15,7 @@ import com.sw.cms.model.FhkhdProduct;
 import com.sw.cms.model.JjdProduct;
 import com.sw.cms.model.BfdProduct;
 import com.sw.cms.model.HjdProduct;
+import com.sw.cms.model.WxrkdProduct;
 import com.sw.cms.model.Page;
 import com.sw.cms.model.Shkc;
 
@@ -70,6 +71,7 @@ public class ShkcDAO extends JdbcBaseDAO
 		Map map=getResultMap(sqlStore);
 	
 		storeId= (String)map.get("id") ; 
+		
 		String sql="select product_id, product_name,product_xh,qz_serial_num,(select sum(nums) from shkc b where b.product_id=a.product_id) as hj_nums from shkc a where  state='1' and store_id='"+storeId+"'";
 		
 		if(!con.equals(""))
