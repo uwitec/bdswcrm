@@ -208,7 +208,7 @@ public class FirstIndexAction extends BaseAction {
 			
 			return SUCCESS;
 		}catch(Exception e){
-			log.error("");
+			log.error("取待办列表信息出错，错误原因：" + e.getMessage());
 			return ERROR;
 		}
 	}
