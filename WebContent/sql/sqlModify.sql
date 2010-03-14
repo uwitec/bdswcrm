@@ -324,8 +324,3 @@ CREATE TABLE  `bwl` (
   `cz_date` varchar(20) default NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
----
----增加备忘录（OA办公）
----
----end
