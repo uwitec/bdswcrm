@@ -12,6 +12,7 @@ import com.sw.cms.service.StoreService;
 import com.sw.cms.service.ThdService;
 import com.sw.cms.service.UserService;
 import com.sw.cms.util.Constant;
+import com.sw.cms.util.DateComFunc;
 
 public class ThdAction extends BaseAction {
 
@@ -30,7 +31,8 @@ public class ThdAction extends BaseAction {
 	private List clientsList= new ArrayList();
 
 	private String client_name = "";
-	private String th_date = "";
+	private String th_date1 = DateComFunc.getToday();
+	private String th_date2 = DateComFunc.getToday();
 	private String orderName = "";
 	private String orderType = "";
 	private String thd_id = "";
@@ -50,8 +52,11 @@ public class ThdAction extends BaseAction {
 		if (!client_name.equals("")) {
 			con += " and client_name like'%" + client_name + "%'";
 		}
-		if (!th_date.equals("")) {
-			con += " and th_date='" + th_date + "'";
+		if (!th_date1.equals("")) {
+			con += " and th_date>='" + th_date1 + "'";
+		}
+		if (!th_date2.equals("")) {
+			con += " and th_date<='" + th_date2 + "'";
 		}
 
 		if (orderName.equals("")) {
@@ -153,14 +158,6 @@ public class ThdAction extends BaseAction {
 
 	public void setPageThd(Page pageThd) {
 		this.pageThd = pageThd;
-	}
-
-	public String getTh_date() {
-		return th_date;
-	}
-
-	public void setTh_date(String th_date) {
-		this.th_date = th_date;
 	}
 
 	public Thd getThd() {
@@ -265,6 +262,22 @@ public class ThdAction extends BaseAction {
 
 	public void setClientsService(ClientsService clientsService) {
 		this.clientsService = clientsService;
+	}
+
+	public String getTh_date1() {
+		return th_date1;
+	}
+
+	public void setTh_date1(String thDate1) {
+		th_date1 = thDate1;
+	}
+
+	public String getTh_date2() {
+		return th_date2;
+	}
+
+	public void setTh_date2(String thDate2) {
+		th_date2 = thDate2;
 	}
 
 }
