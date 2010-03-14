@@ -94,12 +94,6 @@
         </action>
         <!-- 待办工作 -->        
         
-        <!-- 备忘录 -->
-        <action name="undoMyWork" class="firstIndexAction" method="listUndoMyWork">
-            <result name="success">/WEB-INF/pages/undo_Mywork.jsp</result>
-        </action>
-        <!-- 备忘录 --> 
-        
         <!-- 采购付款 -->
         <action name="listCgfk" class="cgfkAction" method="list">
             <result name="success">/WEB-INF/pages/cgfk/cgfk_list.jsp</result>
@@ -1283,6 +1277,8 @@
          <action name="addDlMail" class="mailAction" method="add">
             <result name="success">/WEB-INF/pages/report/kcmx/dlmail_add.jsp</result>
         </action> 
+         
+                    
         <!-- 库存数量汇总 -->
         
         <!-- 分仓库存数量汇总 -->
@@ -1546,35 +1542,6 @@
             <result name="success" type="redirect">listNbgg.html</result>
         </action>
         <!-- 内部公告 -->
-        
-        <!-- 备忘录 -->
-        <action name="listBwl" class="bwlAction" method="list">
-            <result name="success" type="dispatcher">/WEB-INF/pages/bwl/bwl_list.jsp</result>
-        </action>
-                
-        <action name="addBwl" class="bwlAction" method="add">
-            <result name="success">/WEB-INF/pages/bwl/bwl_add.jsp</result>
-        </action>
-        <action name="saveBwl" class="bwlAction" method="save">
-            <result name="cancel" type="redirect">addBwl.html</result>
-            <result name="input" type="dispatcher">/WEB-INF/pages/bwl/bwl_add.jsp</result>
-            <result name="success">/WEB-INF/pages/msg.jsp</result>
-        </action>
-        <action name="editBwl" class="bwlAction" method="edit">
-            <result name="success">/WEB-INF/pages/bwl/bwl_edit.jsp</result>
-        </action>
-        <action name="viewBwl" class="bwlAction" method="edit">
-            <result name="success">/WEB-INF/pages/bwl/bwl_view.jsp</result>
-        </action>
-        <action name="updateBwl" class="bwlAction" method="update">
-            <result name="cancel" type="redirect">editBwl.html</result>
-            <result name="input">/WEB-INF/pages/bwl/bwl_edit.jsp</result>
-            <result name="success">/WEB-INF/pages/msg.jsp</result>
-        </action>
-        <action name="delBwl" class="bwlAction" method="del">
-            <result name="success" type="redirect">listBwl.html</result>
-        </action>
-        <!-- 备忘录 -->
         
         <!-- 设置系统启用，及初始化相关项 -->
         <action name="showSzXgqyrqPage" class="sysInitSetAction" method="getXgqyFlag">
@@ -2153,7 +2120,7 @@
              <result name="success">/WEB-INF/pages/msg.jsp</result>
              <result name="input">/WEB-INF/pages/bxfhd/bxfhd_add.jsp</result>
              <result name="cancel" type="redirect">addbxfhd.html</result>
-        </action>
+        </action>        
         <action name="descBxfhd" class="bxfhdAction" method="desc">
             <result name="success">/WEB-INF/pages/bxfhd/bxfhd_desc.jsp</result>
         </action>
@@ -2171,7 +2138,7 @@
         </action>
         <action name="selBxfhProcCkd" class="bxfhdAction" method="selKcProc">
              <result name="success">/WEB-INF/pages/bxfhd/selectKcProc.jsp</result>
-        </action>
+        </action>        
         <!-- 报修返还单 -->
         
         <!-- 返还客户单 --> 
@@ -2211,7 +2178,7 @@
         </action>
         <action name="fhkhimportSerial" class="fhkhdAction" method="importSerial">
             <result name="success">/WEB-INF/pages/fhkhd/importSerial.jsp</result>
-        </action>
+        </action>        
         <!-- 返还客户单 --> 
          
         <!-- 维修库存查询 --> 
@@ -2229,7 +2196,7 @@
         </action>
         <!-- 维修序列号查询 --> 
         
-        <!-- 维修移库单 -->  
+        <!-- 维修入库单 -->  
         <action name="listWxrkd" class="wxrkdAction" method="list">
             <result name="success">/WEB-INF/pages/wxrkd/wxrkd_list.jsp</result>
         </action>
@@ -2263,8 +2230,8 @@
         </action>
         <action name="wxrkimportSerial" class="wxrkdAction" method="importSerial">
             <result name="success">/WEB-INF/pages/wxrkd/importSerial.jsp</result>
-        </action> 
-        <!-- 维修移库单 -->
+        </action>         
+        <!-- 维修入库单 -->
         
          <!-- 报修单 -->
         <action name="listBxd" class="bxdAction" method="list">
@@ -2272,14 +2239,14 @@
         </action>
         <action name="addBxd" class="bxdAction" method="add">
              <result name="success">/WEB-INF/pages/bxd/bxd_add.jsp</result>
-        </action>        
+        </action>
         <action name="selBxProcCkd" class="bxdAction" method="selKcProc">
              <result name="success">/WEB-INF/pages/bxd/selectKcProc.jsp</result>
         </action>
         <action name="saveBxd" class="bxdAction" method="save">
              <result name="success">/WEB-INF/pages/msg.jsp</result>
              <result name="input">/WEB-INF/pages/bxd/bxd_add.jsp</result>
-             <result name="cancel" type="redirect">addBxd.html</result>
+              <result name="cancel" type="redirect">addBxd.html</result>
         </action>
         <action name="editBxd" class="bxdAction" method="edit">
              <result name="success">/WEB-INF/pages/bxd/bxd_edit.jsp</result>
@@ -2302,6 +2269,7 @@
             <result name="success">/WEB-INF/pages/bxd/importSerial.jsp</result>
         </action>        
          <!-- 报修单 -->    
+         
           <!-- 报废单 -->
         <action name="listBfd" class="bfdAction" method="list">
              <result name="success">/WEB-INF/pages/bfd/bfd_list.jsp</result>
@@ -2337,9 +2305,9 @@
         <action name="bfimportSerial" class="bfdAction" method="importSerial">
             <result name="success">/WEB-INF/pages/bfd/importSerial.jsp</result>
         </action>        
-         <!-- 报废单 -->    
+        <!-- 报废单 -->    
          
-           <!-- 换件单 -->
+        <!-- 换件单 -->
         <action name="listHjd" class="hjdAction" method="list">
              <result name="success">/WEB-INF/pages/hjd/hjd_list.jsp</result>
         </action>
@@ -2374,9 +2342,9 @@
         <action name="importHjSerial" class="hjdAction" method="importSerial">
             <result name="success">/WEB-INF/pages/hjd/importSerial.jsp</result>
         </action>        
-         <!-- 换件单 --> 
-         
-           <!-- 售后服务单 --> 
+        <!-- 换件单 --> 
+                  
+        <!-- 售后服务单 --> 
         <action name="listSfd" class="sfdAction" method="list">
              <result name="success">/WEB-INF/pages/sfd/sfd_list.jsp</result>
         </action>
