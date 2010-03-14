@@ -23,6 +23,7 @@
 </head>
 <body >
 <form name="myform" action="saveNbgg.html" method="post">
+<input type="hidden" name="xxfbNbgg.parent_id" id="parent_id" value="0">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>

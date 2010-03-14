@@ -1,4 +1,4 @@
-﻿2010-02-08增加
+2010-03-14 售后部分修改内容
 
 --往仓库资料表中插入维修库的信息（好件库、坏件库）
 INSERT INTO `storehouse`(id,name) VALUES ('WX00000001','好件库'),('WX00000002','坏件库');
@@ -159,7 +159,6 @@ CREATE TABLE  `fhkhd_product` (
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-2010-02-21增加
 --换件单，当产品序列号发生变化时，使用
 DROP TABLE IF EXISTS  `hjd`;
 CREATE TABLE   `hjd` (
@@ -272,17 +271,11 @@ CREATE TABLE   `ykrk_product` (
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-2010-02-23增加
 ALTER TABLE `cms_all_seq` ADD COLUMN `bfdid` INTEGER UNSIGNED DEFAULT 1 AFTER `zzdid`;
 ALTER TABLE `cms_all_seq` ADD COLUMN `hjdid` INTEGER UNSIGNED DEFAULT 1 AFTER `bfdid`;
 
-
-
---2010-02-26修改
 ALTER TABLE `wxcld_product` CHANGE COLUMN `product_serial_num` `qz_serial_num` VARCHAR(200) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL;
 
---2010-03-01修改
 --维修入库单
 DROP TABLE IF EXISTS `wxrkd`;
 CREATE TABLE  `wxrkd` (
@@ -295,7 +288,6 @@ CREATE TABLE  `wxrkd` (
   `remark` varchar(1000) default NULL,  
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 
 --维修入库单产品明细
 DROP TABLE IF EXISTS `wxrkd_product`;
@@ -313,8 +305,7 @@ CREATE TABLE  `wxrkd_product` (
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
 
-
---2010-03-04增加
+--备忘录
 DROP TABLE IF EXISTS `bwl`;
 CREATE TABLE  `bwl` (
   `id` varchar(50) NOT NULL default '',
@@ -324,3 +315,10 @@ CREATE TABLE  `bwl` (
   `cz_date` varchar(20) default NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--导入表 funcs column_funcs
+
+
+2010-03-14 信息发布修改内容
+--添加parent_id字段，支持查看状态下信息的回复
+ALTER TABLE `xxfb_nbgg` ADD COLUMN `parent_id` VARCHAR(50) NOT NULL DEFAULT 0 AFTER `type`;

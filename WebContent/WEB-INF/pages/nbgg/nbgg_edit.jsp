@@ -32,6 +32,7 @@ XxfbNbgg xxfbNbgg = (XxfbNbgg)VS.findValue("xxfbNbgg");
 <body >
 <form name="myform" action="updateNbgg.html" method="post">
 <input type="hidden" name="xxfbNbgg.id" id="id" value="<%=StringUtils.nullToStr(xxfbNbgg.getId()) %>">
+<input type="hidden" name="xxfbNbgg.parent_id" id="parent_id" value="<%=StringUtils.nullToStr(xxfbNbgg.getParent_id()) %>">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
