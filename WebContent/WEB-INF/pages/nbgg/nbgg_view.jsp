@@ -79,7 +79,7 @@ function saveInfo(){
 															</tr>
 															<ww:iterator value="%{xxfbNbggList}">
 															<tr>
-																<td width="100%" nowrap="nowrap" height="23" style="font-size: 12px">回复人：<ww:property value="%{getUserRealName(xxfbNbgg.czr)}"/>&nbsp;&nbsp;&nbsp;&nbsp;回复时间：<ww:date name="%{cz_date}" format="yyyy-MM-dd HH:mm:ss"/></td>
+																<td width="100%" nowrap="nowrap" height="23" style="font-size: 12px">回复人：<ww:property value="%{getUserRealName(czr)}"/>&nbsp;&nbsp;&nbsp;&nbsp;回复时间：<ww:date name="%{cz_date}" format="yyyy-MM-dd HH:mm:ss"/></td>
 															</tr>	
 															<tr>
 																<td width="100%" height="23" class=Bottom_dotted><ww:property value="%{content}" escape="false"/></td>
