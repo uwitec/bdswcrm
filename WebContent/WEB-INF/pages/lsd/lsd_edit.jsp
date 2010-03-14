@@ -115,13 +115,14 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 		hj();
 		if(document.getElementById("state").value == "已提交"){
 			if(window.confirm("确认要提交零售单吗，提交后将无法修改！")){
-				document.lsdForm.btnSub.disabled = true;
 				document.lsdForm.submit();		
 			}			
 		}else{
-			document.lsdForm.btnSub.disabled = true;
 			document.lsdForm.submit();	
 		}
+
+		document.lsdForm.btnSave.disabled = true;
+		document.lsdForm.btnSub.disabled = true;
 	}
       	
     function addTr(){
