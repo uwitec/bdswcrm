@@ -151,6 +151,25 @@ public class LsyskDAO extends JdbcBaseDAO {
 	
 	
 	/**
+	 * 判断零售预收款是否已经提交
+	 * @param id
+	 * @return
+	 */
+	public boolean isLsyskSubmit(String id){
+		boolean is = false;
+		
+		String sql = "select count(*) as nums from lsysk where id='" + id + "' and state='已提交'";
+		int counts = this.getJdbcTemplate().queryForInt(sql);
+		
+		if(counts > 0){
+			is = true;
+		}
+		
+		return is;
+	}
+	
+	
+	/**
 	 * 包装对象(零售预收款)
 	 * 
 	 * @author liyt

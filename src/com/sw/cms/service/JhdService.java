@@ -137,6 +137,12 @@ public class JhdService {
 	 * @return
 	 */
 	public void delJhd(String id){
+		
+		//如果进货单状态为已提交或已入库则不做任何操作
+		if(jhdDao.isJhdSubmit(id)){
+			return;
+		}
+		
 		jhdDao.delJhd(id);
 	}
 	

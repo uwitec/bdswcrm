@@ -284,6 +284,12 @@ public class XsdService {
 	 * @param id
 	 */
 	public void delXsd(String id){		
+		
+		//如果销售订单相应的出库单已经生成，返回不做处理
+		if(ckdDao.isCkdExist(id)){
+			return;
+		}
+		
 		xsdDao.delXsd(id);
 	}
 	

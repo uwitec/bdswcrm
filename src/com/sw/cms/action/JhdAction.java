@@ -170,11 +170,9 @@ public class JhdAction extends BaseAction {
 	 */
 	public String update() {
 		
-		//防止重复提交进货单，如果进货单状态为提交，则提示用户
+		//防止重复提交进货单，如果进货单状态为提交，则不做任何操作
 		if(jhdService.isJhdSubmit(jhd.getId())){
-			this.saveMessage("采购订单已提交，不能重复提交，请检查！");
-			storeList = storeService.getAllStoreList();
-			return "input";
+			return "success";
 		}
 		
 		

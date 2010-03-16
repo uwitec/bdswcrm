@@ -345,7 +345,7 @@ public class JhdDAO extends JdbcBaseDAO {
 	 */
 	public boolean isJhdSubmit(String jhd_id){
 		boolean is = false;
-		String sql = "select count(*) from jhd where id='" + jhd_id + "' and state<>'已保存'";
+		String sql = "select count(*) as counts from jhd where id='" + jhd_id + "' and state<>'已保存'";
 		
 		int counts = this.getJdbcTemplate().queryForInt(sql);
 		

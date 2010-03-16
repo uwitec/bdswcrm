@@ -177,6 +177,25 @@ public class CgthdDAO extends JdbcBaseDAO {
 	
 	
 	/**
+	 * 判断采购退货单是否已经提交
+	 * @param id
+	 * @return
+	 */
+	public boolean isCgthdSubmit(String id){
+		boolean is = false;
+		
+		String sql = "select count(*) as counts from cgthd where id='" + id + "' and state<>'已保存'";
+		int counts = this.getJdbcTemplate().queryForInt(sql);
+		
+		if(counts > 0){
+			is = true;
+		}
+		
+		return is;
+	}
+	
+	
+	/**
 	 * 添加采购退货单相关联产品
 	 * @param thdProducts
 	 * @param thd_id

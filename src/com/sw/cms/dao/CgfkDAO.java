@@ -316,6 +316,25 @@ public class CgfkDAO extends JdbcBaseDAO {
 			}
 		}
 	}
+	
+	
+	/**
+	 * 判断采购付款是否已经提交
+	 * @param id
+	 * @return
+	 */
+	public boolean isCgfkSubmit(String id){
+		boolean is = false;
+		
+		String sql = "select count(*) as nums from cgfk where id='" + id + "' and state<>'已保存' and state<>'审批不通过'";
+		int counts = this.getJdbcTemplate().queryForInt(sql);
+		
+		if(counts > 0){
+			is = true;
+		}
+		
+		return is;
+	}
 
 	
 

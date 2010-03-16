@@ -174,6 +174,25 @@ public class ThdDAO extends JdbcBaseDAO {
 	}
 	
 	
+	/**
+	 * 判断退货单是否已经提交(已出库)
+	 * @param id
+	 * @return
+	 */
+	public boolean isThdSubmit(String id){
+		boolean is = false;
+		
+		String sql = "select count(*) as nums from thd where thd_id='" + id + "' and state<>'已保存'";
+		int counts = this.getJdbcTemplate().queryForInt(sql);
+		
+		if(counts > 0){
+			is = true;
+		}
+		
+		return is;
+	}
+	
+	
 	
 	/**
 	 * 添加退货单相关联产品

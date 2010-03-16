@@ -78,6 +78,12 @@ public class CgthdService {
 	 * @param cgthdProducts
 	 */
 	public void updateCgthd(Cgthd cgthd,List cgthdProducts){
+		
+		//如果采购退货单已提交或已出库，不做任何操作
+		if(cgthdDao.isCgthdSubmit(cgthd.getId())){
+			return;
+		}
+		
 		cgthdDao.updateCgthd(cgthd, cgthdProducts);
 		if(!cgthd.getState().equals("已保存")){
 			this.saveCkd(cgthd, cgthdProducts); //生成并保存相应出库单
@@ -111,6 +117,12 @@ public class CgthdService {
 	 * @param id
 	 */
 	public void delCgthd(String id){
+		
+		//如果采购退货单已提交或已出库，不做任何操作
+		if(cgthdDao.isCgthdSubmit(id)){
+			return;
+		}
+		
 		cgthdDao.delCgthd(id);
 	}
 	

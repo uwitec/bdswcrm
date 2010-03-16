@@ -82,6 +82,12 @@ public class ThdService {
 	 * @param thdProducts
 	 */
 	public void updateThd(Thd thd,List thdProducts){
+		
+		//如果退货单已经提交或是已经入库，不做任何处理
+		if(thdDao.isThdSubmit(thd.getThd_id())){
+			return;
+		}
+		
 		thdDao.updateThd(thd, thdProducts);
 		
 		// 退货分为两种方式（现金、冲抵往来）
@@ -115,6 +121,12 @@ public class ThdService {
 	 * @param thd_id
 	 */
 	public void delThd(String thd_id){
+		
+		//如果退货单已经提交或是已经入库，不做任何处理
+		if(thdDao.isThdSubmit(thd_id)){
+			return;
+		}
+		
 		thdDao.delThd(thd_id);
 	}
 	

@@ -88,6 +88,12 @@ public class LsyskService {
 	 * @param lsysk
 	 */
 	public void updateLsysk(Lsysk lsysk){	
+		
+		//判断零售预收款是否已经提交，如果已经提交不做任何操作
+		if(lsyskDao.isLsyskSubmit(lsysk.getId())){
+			return;
+		}
+		
 		lsyskDao.updateLsysk(lsysk);
 		
 		if(lsysk.getState().equals("已提交")){
@@ -143,6 +149,12 @@ public class LsyskService {
 	 * @param id
 	 */
 	public void delLsysk(String id){
+		
+		//判断零售预收款是否已经提交，如果已经提交不做任何操作
+		if(lsyskDao.isLsyskSubmit(id)){
+			return;
+		}
+		
 		lsyskDao.delLsysk(id);
 	}
 	

@@ -192,6 +192,12 @@ public class LsdService {
 	 * @param id
 	 */
 	public void delLsd(String id){
+		
+		//如果零售单已提交，不做处理
+		if(lsdDao.isLsdSubmit(id)){
+			return;
+		}
+		
 		lsdDao.delLsd(id);
 	}	
 	

@@ -74,12 +74,19 @@ public class CgfkService {
 		return cgfkDao.getDfkDesc(gysbh);
 	}
 	
+	
 	/**
 	 * 删除采购付款信息根据采购付款ID
 	 * @param jhd_id
 	 * @return
 	 */
 	public void delCgfk(String id){
+		
+		//如果采购付款已提交，则不做任何操作
+		if(cgfkDao.isCgfkSubmit(id)){
+			return;
+		}
+		
 		cgfkDao.delCgfk(id);
 	}
 	
@@ -126,6 +133,11 @@ public class CgfkService {
 	 * @param cgfkDescs
 	 */
 	public void updateCgfk(Cgfk cgfk,List cgfkDescs){
+		
+		//如果采购付款已提交，则不做任何操作
+		if(cgfkDao.isCgfkSubmit(cgfk.getId())){
+			return;
+		}
 		
 		Map map = roleDao.getSpRight("采购付款");
 		String sp_flag = "";

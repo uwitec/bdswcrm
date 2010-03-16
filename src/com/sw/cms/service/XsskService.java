@@ -99,6 +99,12 @@ public class XsskService {
 	 * @param id
 	 */
 	public void delXssk(String id){
+		
+		//如果销售收款已经提交，不做任何操作，直接返回
+		if(xsskDao.isXsskSub(id)){
+			return;
+		}
+		
 		xsskDao.delXssk(id);
 	}
 	
