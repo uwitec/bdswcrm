@@ -1,4 +1,4 @@
-2010-03-14 售后部分修改内容
+﻿2010-03-14 售后部分修改内容
 
 --往仓库资料表中插入维修库的信息（好件库、坏件库）
 INSERT INTO `storehouse`(id,name) VALUES ('WX00000001','好件库'),('WX00000002','坏件库');
@@ -322,3 +322,7 @@ CREATE TABLE  `bwl` (
 2010-03-14 信息发布修改内容
 --添加parent_id字段，支持查看状态下信息的回复
 ALTER TABLE `xxfb_nbgg` ADD COLUMN `parent_id` VARCHAR(50) NOT NULL DEFAULT 0 AFTER `type`;
+
+2010-03-16 信息发布修改内容
+--修改qz_serial_num字段
+ALTER TABLE `wxcld_product` CHANGE COLUMN `qz_serial_num` `product_serial_num` VARCHAR(200) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL;
