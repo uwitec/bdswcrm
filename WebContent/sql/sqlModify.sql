@@ -274,7 +274,6 @@ CREATE TABLE   `ykrk_product` (
 ALTER TABLE `cms_all_seq` ADD COLUMN `bfdid` INTEGER UNSIGNED DEFAULT 1 AFTER `zzdid`;
 ALTER TABLE `cms_all_seq` ADD COLUMN `hjdid` INTEGER UNSIGNED DEFAULT 1 AFTER `bfdid`;
 
-ALTER TABLE `wxcld_product` CHANGE COLUMN `product_serial_num` `qz_serial_num` VARCHAR(200) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL;
 
 --维修入库单
 DROP TABLE IF EXISTS `wxrkd`;
@@ -322,7 +321,3 @@ CREATE TABLE  `bwl` (
 2010-03-14 信息发布修改内容
 --添加parent_id字段，支持查看状态下信息的回复
 ALTER TABLE `xxfb_nbgg` ADD COLUMN `parent_id` VARCHAR(50) NOT NULL DEFAULT 0 AFTER `type`;
-
-2010-03-16 信息发布修改内容
---修改qz_serial_num字段
-ALTER TABLE `wxcld_product` CHANGE COLUMN `qz_serial_num` `product_serial_num` VARCHAR(200) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL;
