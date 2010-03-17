@@ -202,6 +202,11 @@ public class CkdAction extends BaseAction {
 	 * @return
 	 */
 	public String update(){
+		
+		//判断出库单是否已经提交，如果已经提交不做任何操作
+		if(ckdService.isCkdSubmit(ckd.getCkd_id())){
+			return SUCCESS;
+		}
 		 
 		LoginInfo info = (LoginInfo)getSession().getAttribute("LOGINUSER");
 		String user_id = info.getUser_id();
@@ -236,25 +241,8 @@ public class CkdAction extends BaseAction {
 			}
 		}
 		
-		//判断出库单是否已经提交
-		if(ckdService.isCkdSubmit(ckd.getCkd_id())){
-			this.saveMessage("出库单已经出库，不能重复出库，请检查！");
-			
-			ckdProducts = ckdService.getCkdProducts(ckd.getCkd_id());
-			iscs_flag = sysInitSetService.getQyFlag();
-			userList = userService.getAllEmployeeList();
-			storeList = ckdService.getStoreList();
-			ysfs = sjzdService.getSjzdXmxxByZdId("SJZD_YSFS");
-			
-			if(clientsService.getClient(ckd.getClient_name()) != null){
-				client = (Clients)clientsService.getClient(ckd.getClient_name());
-			}
-			
-			return "input";
-		}
-		
 		ckdService.updateCkd(ckd, ckdProducts);		
-		return "success";
+		return SUCCESS;
 	}
 	
 	

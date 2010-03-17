@@ -58,6 +58,12 @@ public class XxfbNbggDAO extends JdbcBaseDAO {
 		param[6] = UUIDGenerator.getUUID();
 		
 		this.getJdbcTemplate().update(sql,param);
+		
+		//如果添加的是新的回复，则需要修改主题的操作时间
+		if(!info.getParent_id().equals("0")){
+			sql = "update xxfb_nbgg set cz_date=now() where id='" + info.getParent_id() + "'";
+			this.getJdbcTemplate().update(sql);
+		}
 	}
 	
 	

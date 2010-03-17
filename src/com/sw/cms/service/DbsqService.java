@@ -48,6 +48,12 @@ public class DbsqService {
 	 * @param dbsqProducts
 	 */
 	public void updateDbsq(Dbsq dbsq,List dbsqProducts){
+		
+		//调拨申请单如果已经提交，不做任何操作
+		if(dbsqDao.isDbsqFinish(dbsq.getId())){
+			return;
+		}
+		
 		dbsqDao.updateDbsq(dbsq, dbsqProducts);
 		
 		if(dbsq.getState().equals("已提交")){//添加库房调拨
@@ -81,6 +87,12 @@ public class DbsqService {
 	 * @param id
 	 */
 	public void delDbsq(String id){
+		
+		//调拨申请单如果已经提交，不做任何操作
+		if(dbsqDao.isDbsqFinish(id)){
+			return;
+		}
+		
 		dbsqDao.delDbsq(id);
 	}
 		
