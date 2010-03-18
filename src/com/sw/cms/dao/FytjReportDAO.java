@@ -44,7 +44,7 @@ public class FytjReportDAO extends JdbcBaseDAO {
 	 */
 	public List getFytjResult(String start_date,String end_date,String dept,int dj){
 		
-		String con = "";
+		String con = " and b.state='ÒÑÌá½»'";
 		if(!start_date.equals("")){
 			con += " and b.zc_date>='" + start_date + "'";
 		}
