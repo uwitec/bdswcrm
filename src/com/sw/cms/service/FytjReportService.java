@@ -17,9 +17,18 @@ public class FytjReportService {
 	 * @param fy_type    费用类别
 	 * @return
 	 */
-	public List getFytjList(String start_date,String end_date,String ywy,String dept,String fy_type){
-		return fytjReportDao.getFytjList(start_date, end_date, ywy, dept, fy_type);
+	public List getFytjList(String start_date,String end_date,String dept,String fy_type){
+		return fytjReportDao.getFytjList(start_date, end_date, dept, fy_type);
 	}
+	
+	
+	/**
+	 * 费用统计分类汇总
+	 */
+	public List getFytjResult(String start_date,String end_date,String dept,int dj){
+		return fytjReportDao.getFytjResult(start_date, end_date, dept, dj);
+	}
+	
 
 	public FytjReportDAO getFytjReportDao() {
 		return fytjReportDao;

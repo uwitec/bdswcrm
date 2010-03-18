@@ -24,9 +24,9 @@ public class FytjReportAction extends BaseAction {
 	
 	private String start_date = "";
 	private String end_date = "";
-	private String ywy = "";
 	private String dept = "";
 	private String fy_type = "";
+	private int dj;
 	
 	/**
 	 * 查询条件页面
@@ -44,8 +44,17 @@ public class FytjReportAction extends BaseAction {
 	 * @return
 	 */
 	public String getResutls(){
-		reustls = fytjReportService.getFytjList(start_date, end_date, ywy, dept, fy_type);
+		reustls = fytjReportService.getFytjResult(start_date, end_date, dept, dj);
 		return "success";
+	}
+	
+	/**
+	 * 统计结果明细
+	 * @return
+	 */
+	public String getResultMx(){
+		reustls = fytjReportService.getFytjList(start_date, end_date, dept, fy_type);
+		return SUCCESS;
 	}
 	
 	public List getDeptList() {
@@ -125,20 +134,20 @@ public class FytjReportAction extends BaseAction {
 		this.start_date = start_date;
 	}
 
-	public String getYwy() {
-		return ywy;
-	}
-
-	public void setYwy(String ywy) {
-		this.ywy = ywy;
-	}
-
 	public List getReustls() {
 		return reustls;
 	}
 
 	public void setReustls(List reustls) {
 		this.reustls = reustls;
+	}
+
+	public int getDj() {
+		return dj;
+	}
+
+	public void setDj(int dj) {
+		this.dj = dj;
 	}
 
 }
