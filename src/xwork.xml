@@ -1750,6 +1750,9 @@
         <action name="getFytjResult" class="fytjReportAction" method="getResutls">
             <result name="success" type="dispatcher">/WEB-INF/pages/report/fytj/result.jsp</result>
         </action>
+        <action name="getFytjResultMx" class="fytjReportAction" method="getResultMx">
+            <result name="success" type="dispatcher">/WEB-INF/pages/report/fytj/result_mx.jsp</result>
+        </action>
         <!-- 费用汇总 -->
         
         <!-- 系统消息 -->
