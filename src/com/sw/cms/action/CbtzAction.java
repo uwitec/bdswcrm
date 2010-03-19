@@ -18,6 +18,7 @@ public class CbtzAction extends BaseAction {
 	private String dj_type = "";
 	
 	private double kh_cbj = 0;
+	private double ygcbj = 0;
 	private double lsxj = 0;
 	private double gf = 0;
 	private double ds = 0;
@@ -62,7 +63,7 @@ public class CbtzAction extends BaseAction {
 	 */
 	public String update(){
 		try{
-			cbtzService.updateProduct(id, dj_type, kh_cbj,lsxj,gf,ds);
+			cbtzService.updateProduct(id, dj_type, kh_cbj,ygcbj,lsxj,gf,ds);
 			return SUCCESS;
 		}catch(Exception e){
 			log.error("更新商品考核成本价，原因：" + e.getMessage());
@@ -162,6 +163,16 @@ public class CbtzAction extends BaseAction {
 
 	public void setGf(double gf) {
 		this.gf = gf;
+	}
+
+
+	public double getYgcbj() {
+		return ygcbj;
+	}
+
+
+	public void setYgcbj(double ygcbj) {
+		this.ygcbj = ygcbj;
 	}
 
 }
