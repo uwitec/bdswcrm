@@ -1412,7 +1412,13 @@
         </action>          
         <action name="getHpxsMlMxResult" class="hpxsHzAction" method="getResultMx">
             <result name="success">/WEB-INF/pages/report/hpxs_hz/result_mx.jsp</result>
-        </action>        
+        </action>  
+        <action name="showHpYgmlHzCondition" class="hpxsHzAction" method="showCondition">
+            <result name="success">/WEB-INF/pages/report/hpxs_hz/condition_ygml.jsp</result>
+        </action>
+        <action name="getHpYgmlHzResult" class="hpxsHzAction" method="getHpxsMlHzResult">
+            <result name="success">/WEB-INF/pages/report/hpxs_hz/result_ygml_hz.jsp</result>
+        </action>                
         <!-- 货品销售毛利汇总 -->
         
         <!-- 客户往来对账单 -->
@@ -1750,6 +1756,12 @@
         <action name="getFytjResult" class="fytjReportAction" method="getResutls">
             <result name="success" type="dispatcher">/WEB-INF/pages/report/fytj/result.jsp</result>
         </action>
+        <action name="showDeptFytjCondition" class="fytjReportAction" method="showCondition">
+            <result name="success" type="dispatcher">/WEB-INF/pages/report/fytj/condition_dept.jsp</result>
+        </action>        
+        <action name="getDeptFytjResult" class="fytjReportAction" method="getDeptResults">
+            <result name="success" type="dispatcher">/WEB-INF/pages/report/fytj/result_dept.jsp</result>
+        </action>        
         <action name="getFytjResultMx" class="fytjReportAction" method="getResultMx">
             <result name="success" type="dispatcher">/WEB-INF/pages/report/fytj/result_mx.jsp</result>
         </action>
