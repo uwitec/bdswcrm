@@ -1,4 +1,28 @@
-﻿2010-03-14 售后部分修改内容
+2010-02-27更新
+--修改客户往来情况视图
+CREATE OR REPLACE VIEW view_client_wl_info AS
+(select id as dj_id,gysbh as client_id,total as fsje,DATE_FORMAT(cz_date,'%Y-%m-%d') as cdate,'应付发生' as je_type,'采购' as yw_type,'viewXsd.html?id=' as url,cz_date,fzr as jsr from jhd where state='已入库')
+union all
+(select id as dj_id, provider_name as client_id,(0-tkzje) as fsje,DATE_FORMAT(cz_date,'%Y-%m-%d') as cdate,'应付发生' as je_type,'采购退货' as yw_type,'viewCgthd.html?id=' as url,cz_date,jsr from cgthd where state='已出库')
+union all
+(select id as dj_id,client_name as client_id,pzje as fsje,DATE_FORMAT(cz_date,'%Y-%m-%d') as cdate,'应付发生' as je_type,'往来调账' as yw_type,'viewPz.html?id=' as url,cz_date,jsr from pz where state='已提交' and type='应付')
+union all
+(select id as dj_id,client_name as client_id,sjcjje as fsje,DATE_FORMAT(cz_date,'%Y-%m-%d') as cdate,'应收发生' as je_type,'销售' as yw_type,'viewXsd.html?id=' as url,cz_date,fzr as jsr from xsd where state='已出库')
+union all
+(select thd_id as dj_id,client_name as client_id,(0-thdje) as fsje,DATE_FORMAT(cz_date,'%Y-%m-%d') as cdate,'应收发生' as je_type,'销售退货' as yw_type,'viewThd.html?thd_id=' as url,cz_date,th_fzr as jsr from thd where state='已入库')
+union all
+(select id as dj_id,client_name as client_id,pzje as fsje,DATE_FORMAT(cz_date,'%Y-%m-%d') as cdate,'应收发生' as je_type,'往来调账' as yw_type,'viewPz.html?id=' as url,cz_date,jsr from pz where state='已提交' and type='应收')
+union all
+(select a.id as dj_id,a.gysbh as client_id,a.fkje as fsje,DATE_FORMAT(a.cz_date,'%Y-%m-%d') as cdate,'已付发生' as je_type,'采购付款' as yw_type,'viewCgfk.html?id=' as url,a.cz_date,jsr from cgfk a inner join clients b on b.id=a.gysbh where a.state='已提交' or a.state='已支付')
+union all
+(select a.id as dj_id,a.client_name as client_id,a.skje as fsje,DATE_FORMAT(a.cz_date,'%Y-%m-%d') as cdate,'已收发生' as je_type,'销售收款' as yw_type,'viewXssk.html?id=' as url,a.cz_date,jsr from xssk a inner join clients b on b.id=a.client_name where a.state='已提交')
+
+
+2010-03-05更新
+--往来调账添加结算金额
+ALTER TABLE `pz` ADD COLUMN `jsje` DOUBLE DEFAULT 0 AFTER `pzxm`;
+
+2010-03-14 售后部分修改内容
 
 --往仓库资料表中插入维修库的信息（好件库、坏件库）
 INSERT INTO `storehouse`(id,name) VALUES ('WX00000001','好件库'),('WX00000002','坏件库');
