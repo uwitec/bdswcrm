@@ -210,7 +210,7 @@ if(msg != null && msg.size() > 0){
 		<td>产品名称</td>
 		<td>规格</td>
 		<td>销售价格</td>
-		<td>价格调整</td>
+		<!--<td>价格调整</td>-->
 		<td>订单数量</td>
 		<td>订单金额</td>
 		<td>备注</td>
@@ -225,7 +225,7 @@ if(xsdProducts!=null && xsdProducts.size()>0){
 		<td class="a2"><%=StringUtils.nullToStr(xsdProduct.getProduct_name()) %></td>
 		<td class="a2"><%=StringUtils.nullToStr(xsdProduct.getProduct_xh()) %></td>
 		<td class="a2"><%=JMath.round(xsdProduct.getPrice(),2) %></td>
-		<td class="a2"><%=JMath.round(xsdProduct.getJgtz(),2) %></td>
+		<!--<td class="a2"><%=JMath.round(xsdProduct.getJgtz(),2) %></td> -->
 		<td class="a2"><%=xsdProduct.getNums() %></td>
 		<td class="a2"><%=JMath.round(xsdProduct.getXj(),2) %></td>
 		<td class="a2"><%=StringUtils.nullToStr(xsdProduct.getRemark()) %></td>
