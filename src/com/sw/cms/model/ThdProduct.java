@@ -23,6 +23,7 @@ public class ThdProduct {
 	private double basic_ratio = 0;
 	private double out_ratio = 0;
 	private double lsxj = 0;
+	private double ygcbj = 0;   //Ô¤¹À³É±¾¼Û
 	
 	public int getId() {
 		return id;
@@ -137,6 +138,12 @@ public class ThdProduct {
 	}
 	public void setLsxj(double lsxj) {
 		this.lsxj = lsxj;
+	}
+	public double getYgcbj() {
+		return ygcbj;
+	}
+	public void setYgcbj(double ygcbj) {
+		this.ygcbj = ygcbj;
 	}
 
 }

@@ -23,6 +23,7 @@ public class LsdProduct {
 	private double basic_ratio = 0;    //基本提成比例
 	private double out_ratio = 0;      //超限提成比例
 	private double lsxj = 0;           //零售限价
+	private double ygcbj = 0;          //预估成本价
 	
 	public double getCbj() {
 		return cbj;
@@ -143,6 +144,12 @@ public class LsdProduct {
 	}
 	public void setLsxj(double lsxj) {
 		this.lsxj = lsxj;
+	}
+	public double getYgcbj() {
+		return ygcbj;
+	}
+	public void setYgcbj(double ygcbj) {
+		this.ygcbj = ygcbj;
 	}
 	
 }

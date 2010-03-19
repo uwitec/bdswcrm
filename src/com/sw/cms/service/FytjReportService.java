@@ -29,6 +29,18 @@ public class FytjReportService {
 		return fytjReportDao.getFytjResult(start_date, end_date, dept, dj);
 	}
 	
+	
+	/**
+	 * 部门费用汇总
+	 * @param start_date  开始时间
+	 * @param end_date    结束时间
+	 * @param fy_type     费用类型
+	 * @param dj          部门等级
+	 * @return
+	 */
+	public List getDeptFytjResult(String start_date,String end_date,String fy_type,int dj){
+		return fytjReportDao.getDeptFytjResult(start_date, end_date, fy_type, dj);
+	}
 
 	public FytjReportDAO getFytjReportDao() {
 		return fytjReportDao;

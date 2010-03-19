@@ -392,7 +392,7 @@ public class XsdDAO extends JdbcBaseDAO {
 	 */
 	private void addXsdProducts(List xsdProducts,Xsd xsd){
 		String sql = "";
-		Object[] param = new Object[21];
+		Object[] param = new Object[22];
 		
 		double sd = 0;
 		
@@ -418,7 +418,7 @@ public class XsdDAO extends JdbcBaseDAO {
 				XsdProduct xsdProduct = (XsdProduct)xsdProducts.get(i);
 				if(xsdProduct != null){
 					if(!xsdProduct.getProduct_id().equals("")){
-						sql = "insert into xsd_product(xsd_id,product_id,product_xh,product_name,price,jgtz,nums,remark,xj,cbj,qz_serial_num,sjcj_nums,sjcj_xj,kh_cbj,gf,sd,bhsje,basic_ratio,out_ratio,ds,lsxj) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+						sql = "insert into xsd_product(xsd_id,product_id,product_xh,product_name,price,jgtz,nums,remark,xj,cbj,qz_serial_num,sjcj_nums,sjcj_xj,kh_cbj,gf,sd,bhsje,basic_ratio,out_ratio,ds,lsxj,ygcbj) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 						
 						param[0] = xsd_id;
 						param[1] = xsdProduct.getProduct_id();
@@ -439,10 +439,12 @@ public class XsdDAO extends JdbcBaseDAO {
 						Map map = this.getProductInfo(xsdProduct.getProduct_id());
 						double lsxj = 0l;
 						double ds = 0l;
+						double ygcbj = 0l;
 						if(map != null){
 							lsxj = map.get("lsxj")==null?0:((Double)map.get("lsxj")).doubleValue();
 							gf = map.get("gf")==null?0:((Double)map.get("gf")).doubleValue();
 							ds = map.get("dss")==null?0:((Double)map.get("dss")).doubleValue();
+							ygcbj = map.get("ygcbj")==null?0:((Double)map.get("ygcbj")).doubleValue();
 						}
 						
 						//不含税单价低于零售限价时 点杀需要乘以比例
@@ -458,6 +460,7 @@ public class XsdDAO extends JdbcBaseDAO {
 						param[18] = out_ratio;
 						param[19] = ds;
 						param[20] = lsxj;
+						param[21] = ygcbj;
 						
 						this.getJdbcTemplate().update(sql,param);
 						
@@ -860,6 +863,7 @@ public class XsdDAO extends JdbcBaseDAO {
 			if(SqlUtil.columnIsExist(rs,"basic_ratio")) xsdProduct.setBasic_ratio(rs.getDouble("basic_ratio"));
 			if(SqlUtil.columnIsExist(rs,"out_ratio")) xsdProduct.setOut_ratio(rs.getDouble("out_ratio"));
 			if(SqlUtil.columnIsExist(rs,"lsxj")) xsdProduct.setLsxj(rs.getDouble("lsxj"));
+			if(SqlUtil.columnIsExist(rs,"ygcbj")) xsdProduct.setYgcbj(rs.getDouble("ygcbj"));
 			
 			return xsdProduct;
 		}

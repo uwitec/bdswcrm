@@ -141,7 +141,7 @@ public class HpxsHzDAO extends JdbcBaseDAO {
 	public List getHpxsmlhzTjResult(String product_kind,String product_name,String product_xh,
 			String start_date,String end_date,String client_name,String xsry_id){
 		
-		String sql = "select product_id,product_name,product_xh,prop,sum(nums) as nums,sum(hjje) as hjje,sum(cb) as hjcb from view_hpxshz_tj where 1=1";
+		String sql = "select product_id,product_name,product_xh,prop,sum(nums) as nums,sum(hjje) as hjje,sum(cb) as hjcb,sum(ygcb) as hjygcb from view_hpxshz_tj where 1=1";
 		
 		//处理商品类别
 		if(!product_kind.equals("")){

@@ -817,6 +817,11 @@ public class XsdService {
 		
 		String id = qtzcDao.getQtzcID();
 		
+		String dept = "";
+		if(!StringUtils.nullToStr(xsd.getFzr()).equals("")){
+			dept = ((SysUser)userDao.getUser(xsd.getFzr())).getDept();
+		}
+		
 		qtzc.setId(id);
 		qtzc.setZc_date(xsd.getCreatdate());
 		qtzc.setType("02");
@@ -827,6 +832,8 @@ public class XsdService {
 		qtzc.setCzr(xsd.getCzr());
 		qtzc.setState("已提交");
 		qtzc.setYwy(xsd.getFzr());
+		qtzc.setSqr(xsd.getFzr());
+		qtzc.setYwy_dept(dept);
 		qtzc.setZcxm("刷卡手续费");
 		qtzc.setFklx("刷卡");
 		qtzc.setFysq_id("无");

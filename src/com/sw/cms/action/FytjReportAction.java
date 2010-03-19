@@ -40,7 +40,7 @@ public class FytjReportAction extends BaseAction {
 	}
 	
 	/**
-	 * 统计结果
+	 * 费用分类汇总统计结果
 	 * @return
 	 */
 	public String getResutls(){
@@ -49,7 +49,16 @@ public class FytjReportAction extends BaseAction {
 	}
 	
 	/**
-	 * 统计结果明细
+	 * 部门费用汇总统计结果
+	 * @return
+	 */
+	public String getDeptResults(){
+		reustls = fytjReportService.getDeptFytjResult(start_date, end_date, fy_type, dj);
+		return SUCCESS;
+	}
+	
+	/**
+	 * 费用统计结果明细
 	 * @return
 	 */
 	public String getResultMx(){

@@ -21,18 +21,23 @@ public class Product {
 	
 	private String dw;
 	
-	private double price;      //成本价
-	private double fxxj;       //分销限价
-	private double lsxj;       //零售限价
-	private double gf;         //工分
-	private double dss;        //点杀数
+	private double price;      //移动加权价
+	private double khcbj;      //考核成本价
+	private double ygcbj;      //预估成本价
+	
 	private double lsbj;       //零售报价
+	private double lsxj;       //零售限价
 	
 	private double fxbj;       //分销报价
-	private String sp_txm;      //商品条形码
-	private double khcbj;      //考核成本价
-
+	private double fxxj;       //分销限价
 	
+	private double gf;         //比例点杀
+	private double dss;        //金额点杀
+		
+	
+	
+	private String sp_txm;      //商品条形码
+
 	private int kcxx;          //库存下限
 	private int kcsx;          //库存上限
 	private String state;          //状态
@@ -176,6 +181,12 @@ public class Product {
 	}
 	public void setSp_txm(String sp_txm) {
 		this.sp_txm = sp_txm;
+	}
+	public double getYgcbj() {
+		return ygcbj;
+	}
+	public void setYgcbj(double ygcbj) {
+		this.ygcbj = ygcbj;
 	}
 	
 }

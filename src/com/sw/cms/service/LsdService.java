@@ -586,6 +586,11 @@ public class LsdService {
 		
 		String id = qtzcDao.getQtzcID();
 		
+		String dept = "";
+		if(!StringUtils.nullToStr(lsd.getXsry()).equals("")){
+			dept = ((SysUser)userDao.getUser(lsd.getXsry())).getDept();
+		}
+		
 		qtzc.setId(id);
 		qtzc.setZc_date(lsd.getCreatdate());
 		qtzc.setType("02");
@@ -596,6 +601,8 @@ public class LsdService {
 		qtzc.setCzr(lsd.getCzr());
 		qtzc.setState("已提交");
 		qtzc.setYwy(lsd.getXsry());
+		qtzc.setSqr(lsd.getXsry());
+		qtzc.setYwy_dept(dept);
 		qtzc.setZcxm("刷卡手续费");
 		qtzc.setFklx("刷卡");
 		qtzc.setFysq_id("无");
@@ -607,7 +614,7 @@ public class LsdService {
 		double jyje = 0 - posTypeDao.getBrushCardfy(lsd.getPos_id(), lsd.getSkje());
 		AccountDzd accountDzd = new AccountDzd();
 		accountDzd.setAccount_id(lsd.getSkzh());
-		accountDzd.setJyje(jyje);		
+		accountDzd.setJyje(jyje);
 		double zhye = 0;
 		Map map = accountsDao.getAccounts(lsd.getSkzh());
 		if(map != null){

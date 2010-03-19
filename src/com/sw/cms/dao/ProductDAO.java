@@ -89,10 +89,10 @@ public class ProductDAO extends JdbcBaseDAO {
 	 * @param product
 	 */
 	public void saveProductInfo(Product product) {
-		String sql = "insert into product(product_id,product_xh,product_name,product_kind,gysbh,gysmc,price,img,ms,prop,dw,fxxj,lsxj,gf,dss,kcxx,kcsx,state,lsbj,qz_serial_num,fxbj,khcbj,sp_txm) "
-				+ "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		String sql = "insert into product(product_id,product_xh,product_name,product_kind,gysbh,gysmc,price,img,ms,prop,dw,fxxj,lsxj,gf,dss,kcxx,kcsx,state,lsbj,qz_serial_num,fxbj,khcbj,sp_txm,ygcbj) "
+				+ "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
-		Object[] params = new Object[23];
+		Object[] params = new Object[24];
 		
 		String productKind = product.getProductKind();
 
@@ -119,6 +119,7 @@ public class ProductDAO extends JdbcBaseDAO {
 		params[20] = product.getFxbj();
 		params[21] = product.getKhcbj();
 		params[22] = product.getSp_txm();
+		params[23] = product.getYgcbj();
 
 		this.getJdbcTemplate().update(sql, params);
 	}
@@ -129,9 +130,9 @@ public class ProductDAO extends JdbcBaseDAO {
 	 * @param product
 	 */
 	public void updateProductInfo(Product product) {
-		String sql = "update product set product_xh=?,product_name=?,product_kind=?,gysbh=?,gysmc=?,price=?,img=?,ms=?,prop=?,dw=?,fxxj=?,lsxj=?,gf=?,dss=?,kcxx=?,kcsx=?,state=?,lsbj=?,qz_serial_num=?,fxbj=?,khcbj=?,sp_txm=? where product_id=?";
+		String sql = "update product set product_xh=?,product_name=?,product_kind=?,gysbh=?,gysmc=?,price=?,img=?,ms=?,prop=?,dw=?,fxxj=?,lsxj=?,gf=?,dss=?,kcxx=?,kcsx=?,state=?,lsbj=?,qz_serial_num=?,fxbj=?,khcbj=?,sp_txm=?,ygcbj=? where product_id=?";
 
-		Object[] params = new Object[23];
+		Object[] params = new Object[24];
 
 		params[0] = product.getProductXh();
 		params[1] = product.getProductName();
@@ -155,7 +156,8 @@ public class ProductDAO extends JdbcBaseDAO {
 		params[19] = product.getFxbj();
 		params[20] = product.getKhcbj();
 		params[21] = product.getSp_txm();
-		params[22] = product.getProductId();
+		params[22] = product.getYgcbj();
+		params[23] = product.getProductId();
 
 		this.getJdbcTemplate().update(sql, params);
 	}
@@ -459,11 +461,11 @@ public class ProductDAO extends JdbcBaseDAO {
 	 */
 	public void updateProducts(List products){
 		String sql = "";
-		Object[] param = new Object[10];
+		Object[] param = new Object[11];
 		if(products != null && products.size() > 0){
 			for(int i=0;i<products.size();i++){
 				Product product = (Product)products.get(i);
-				sql = "update product set product_name=?,product_xh=?,khcbj=?,lsbj=?,lsxj=?,fxbj=?,fxxj=?,gf=?,dss=? where product_id=?";
+				sql = "update product set product_name=?,product_xh=?,khcbj=?,lsbj=?,lsxj=?,fxbj=?,fxxj=?,gf=?,dss=?,ygcbj=? where product_id=?";
 				param[0] = product.getProductName();
 				param[1] = product.getProductXh();
 				param[2] = product.getKhcbj();
@@ -473,7 +475,8 @@ public class ProductDAO extends JdbcBaseDAO {
 				param[6] = product.getFxxj();
 				param[7] = product.getGf();
 				param[8] = product.getDss();
-				param[9] = product.getProductId();
+				param[9] = product.getYgcbj();
+				param[10] = product.getProductId();
 				
 				this.getJdbcTemplate().update(sql, param);
 			}
@@ -582,6 +585,7 @@ public class ProductDAO extends JdbcBaseDAO {
 			if(SqlUtil.columnIsExist(rs,"gf")) product.setGf(rs.getDouble("gf"));
 			if(SqlUtil.columnIsExist(rs,"dss")) product.setDss(rs.getDouble("dss"));
 			if(SqlUtil.columnIsExist(rs,"lsbj")) product.setLsbj(rs.getDouble("lsbj"));
+			if(SqlUtil.columnIsExist(rs,"ygcbj")) product.setYgcbj(rs.getDouble("ygcbj"));
 			
 			if(SqlUtil.columnIsExist(rs,"kcxx")) product.setKcxx(rs.getInt("kcxx"));
 			if(SqlUtil.columnIsExist(rs,"kcsx")) product.setKcsx(rs.getInt("kcsx"));
