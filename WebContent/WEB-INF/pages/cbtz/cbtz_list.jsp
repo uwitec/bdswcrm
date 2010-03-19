@@ -63,10 +63,11 @@
 		<td>商品规格</td>
 		<td>销售价格(元)</td>
 		<td>考核成本(元)</td>
+		<td>预估成本(元)</td>
 		<td>零售限价(元)</td>
 		<td>比例点杀(%)</td>
 		<td>金额点杀(元)</td>
-		<td>操作</td>
+		<td width="10%">操作</td>
 	</tr>
 	</thead>
 	<ww:iterator value="%{productList}">
@@ -76,6 +77,7 @@
 			<td align="left">&nbsp;<ww:property value="%{product_xh}" /></td>
 			<td align="right"><ww:property value="%{getText('global.format.money',{price})}" />&nbsp;</td>
 			<td align="right"><ww:property value="%{getText('global.format.money',{kh_cbj})}" />&nbsp;</td>
+			<td align="right"><ww:property value="%{getText('global.format.money',{ygcbj})}" />&nbsp;</td>
 			<td align="right"><ww:property value="%{getText('global.format.money',{lsxj})}" />&nbsp;</td>
 			<td align="right"><ww:property value="%{getText('global.format.money',{gf})}" />&nbsp;</td>
 			<td align="right"><ww:property value="%{getText('global.format.money',{ds})}" />&nbsp;</td>				

@@ -14,6 +14,7 @@
 	//更新成本
 	function saveInfo(){
 		if(!InputValid(document.myform.kh_cbj,1,"float",1,0,9999999,"修改后考核成本")){return; }
+		if(!InputValid(document.myform.ygcbj,1,"float",1,0,9999999,"修改后预估成本")){return; }
 		if(!InputValid(document.myform.lsxj,1,"float",1,0,9999999,"修改后零售限价")){return; }
 		if(!InputValid(document.myform.gf,1,"float",1,0,9999999,"修改后比例点杀")){return; }
 		if(!InputValid(document.myform.ds,1,"float",1,0,9999999,"修改后金额点杀")){return; }
@@ -57,6 +58,12 @@
 		<td class="a1" width="20%">修改后考核成本</td>
 		<td class="a2" width="30%"><ww:textfield theme="simple" name="kh_cbj" id="kh_cbj" value="%{getText('global.format.double',{productMap.kh_cbj})}"/></td>		
 	</tr>
+	<tr>
+		<td class="a1" width="20%">原预估成本</td>
+		<td class="a2" width="30%"><ww:property value="%{getText('global.format.money',{productMap.ygcbj})}" /></td>
+		<td class="a1" width="20%">修改后预估成本</td>
+		<td class="a2" width="30%"><ww:textfield theme="simple" name="ygcbj" id="ygcbj" value="%{getText('global.format.double',{productMap.ygcbj})}"/></td>		
+	</tr>	
 	<tr>
 		<td class="a1" width="20%">原零售限价</td>
 		<td class="a2" width="30%"><ww:property value="%{getText('global.format.money',{productMap.lsxj})}" /></td>
