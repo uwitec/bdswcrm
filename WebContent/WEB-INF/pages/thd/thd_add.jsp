@@ -96,6 +96,7 @@ String thd_id = (String)VS.findValue("thd_id");
 					
 		hj();
 		document.thdForm.submit();
+		document.thdForm.btnSave.disabled = true;
 	}
 	
 	
@@ -148,7 +149,7 @@ String thd_id = (String)VS.findValue("thd_id");
         
         var otd2 = document.createElement("td");
         otd2.className = "a2";
-        otd2.innerHTML = '<input type="text" id="th_price_'+curId+'" name="thdProducts['+curId+'].th_price" size="10" value="0.00" onblur="hj();"><input type="hidden" id="cbj_'+curId+'" name="thdProducts['+curId+'].cbj" value="0.00"><input type="hidden" id="kh_cbj_'+curId+'" name="thdProducts['+curId+'].kh_cbj" value="0.00"><input type="hidden" id="sd_'+curId+'" name="thdProducts['+curId+'].sd"  value="0.00"><input type="hidden" id="gf_'+curId+'" name="thdProducts['+curId+'].gf"  value="0.00"><input type="hidden" id="ds_'+curId+'" name="thdProducts['+curId+'].ds"  value="0.00"><input type="hidden" id="basic_ratio_'+curId+'" name="thdProducts['+curId+'].basic_ratio"  value="0.00"><input type="hidden" id="out_ratio_'+curId+'" name="thdProducts['+curId+'].out_ratio"  value="0.00"><input type="hidden" id="lsxj_'+curId+'" name="thdProducts['+curId+'].lsxj"  value="0.00">';
+        otd2.innerHTML = '<input type="text" id="th_price_'+curId+'" name="thdProducts['+curId+'].th_price" size="10" value="0.00" onblur="hj();"><input type="hidden" id="cbj_'+curId+'" name="thdProducts['+curId+'].cbj" value="0.00"><input type="hidden" id="kh_cbj_'+curId+'" name="thdProducts['+curId+'].kh_cbj" value="0.00"><input type="hidden" id="sd_'+curId+'" name="thdProducts['+curId+'].sd"  value="0.00"><input type="hidden" id="gf_'+curId+'" name="thdProducts['+curId+'].gf"  value="0.00"><input type="hidden" id="ds_'+curId+'" name="thdProducts['+curId+'].ds"  value="0.00"><input type="hidden" id="basic_ratio_'+curId+'" name="thdProducts['+curId+'].basic_ratio"  value="0.00"><input type="hidden" id="out_ratio_'+curId+'" name="thdProducts['+curId+'].out_ratio"  value="0.00"><input type="hidden" id="lsxj_'+curId+'" name="thdProducts['+curId+'].lsxj"  value="0.00"><input type="hidden" id="ygcbj_'+curId+'" name="thdProducts['+curId+'].ygcbj"  value="0.00">';
         
         var otd3 = document.createElement("td");
         otd3.className = "a2";
@@ -459,6 +460,7 @@ for(int i=0;i<3;i++){
 			<input type="hidden" id="basic_ratio_<%=i %>" name="thdProducts[<%=i %>].basic_ratio"  value="0.00">
 			<input type="hidden" id="out_ratio_<%=i %>" name="thdProducts[<%=i %>].out_ratio"  value="0.00">
 			<input type="hidden" id="lsxj_<%=i %>" name="thdProducts[<%=i %>].lsxj"  value="0.00">
+			<input type="hidden" id="ygcbj_<%=i %>" name="thdProducts[<%=i %>].ygcbj"  value="0.00">
 		</td>
 		<td class="a2"><input type="text" id="nums_<%=i %>" name="thdProducts[<%=i %>].nums" value="0" size="5" onblur="hj();"></td>
 		<td class="a2">
@@ -537,7 +539,7 @@ for(int i=0;i<3;i++){
 	</tr>	
 	<tr height="35">
 		<td class="a1" colspan="4">
-			<input type="button" name="button1" value="确 定" class="css_button2" onclick="saveInfo();">&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="button" name="btnSave" value="确 定" class="css_button2" onclick="saveInfo();">&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="reset" name="button2" value="重 置" class="css_button2">&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="button" name="button3" value="关 闭" class="css_button2" onclick="window.close();">
 		</td>

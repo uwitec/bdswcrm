@@ -40,6 +40,7 @@ String iscs_flag = StringUtils.nullToStr(VS.findValue("iscs_flag"));
 		if(!InputValid(document.productForm.fxxj,0,"float",0,0,9999999,"分销限价")){	 document.productForm.fxxj.focus();return; }
 		if(!InputValid(document.productForm.gf,0,"float",0,0,100,"比例点杀")){	 document.productForm.gf.focus();return; }
 		if(!InputValid(document.productForm.dss,0,"float",0,0,9999999,"金额点杀")){	 document.productForm.dss.focus();return; }
+		if(!InputValid(document.productForm.ygcbj,0,"float",0,0,9999999,"预估成本价")){	 document.productForm.ygcbj.focus();return; }
 		if(!InputValid(document.productForm.sp_txm,0,"string",0,1,50,"商品条形码")){	 document.productForm.sp_txm.focus();return; }
 		if(!InputValid(document.productForm.ms,0,"string",0,1,500,"产品描述")){	 document.productForm.ms.focus();return; }
 		
@@ -121,12 +122,14 @@ String iscs_flag = StringUtils.nullToStr(VS.findValue("iscs_flag"));
 	</tr>
 	 	
 	<tr>		
+		<td class="a1" width="15%">预估成本价</td>
+		<td class="a2" width="35%"><input type="text" name="ygcbj" value="<%=JMath.round(product.getYgcbj()) %>" size="20" onkeyup="goNext(this.form,this.name);"></td>			
 		<td class="a1" width="15%">库存下限</td>
 		<td class="a2" width="35%"><input type="text" name="kcxx" value="<%=product.getKcxx() %>" size="20" onkeyup="goNext(this.form,this.name);"></td>		
-		<td class="a1" width="15%">条形码</td>
-		<td class="a2"><input type="text" name="sp_txm" value="<%=StringUtils.nullToStr(product.getSp_txm()) %>" size="20" onkeyup="goNext(this.form,this.name);"></td>
 	</tr>	
-	<tr>		
+	<tr>
+		<td class="a1" width="15%">条形码</td>
+		<td class="a2"><input type="text" name="sp_txm" value="<%=StringUtils.nullToStr(product.getSp_txm()) %>" size="20" onkeyup="goNext(this.form,this.name);"></td>			
 		<td class="a1" width="15%">状态</td>
 		<td class="a2" width="35%">
 			<select name="state" onkeyup="goNext(this.form,this.name);">
@@ -134,17 +137,17 @@ String iscs_flag = StringUtils.nullToStr(VS.findValue("iscs_flag"));
 				<option value="停售" <%if(StringUtils.nullToStr(product.getState()).equals("停售")) out.print("selected"); %>>停售</option>
 			</select>
 		</td>
+	</tr>
+	<tr>
 		<td class="a1" width="15%">强制序列号</td>
 		<td class="a2" width="35%">
 			<select name="qz_serial_num" onkeyup="goNext(this.form,this.name);">				
 				<option value="否" <%if(StringUtils.nullToStr(product.getQz_serial_num()).equals("否")) out.print("selected"); %>>否</option>
 				<option value="是" <%if(StringUtils.nullToStr(product.getQz_serial_num()).equals("是")) out.print("selected"); %>>是</option>
 			</select>
-		</td>			
-	</tr>
-	<tr>
+		</td>	
 		<td class="a1" width="15%">商品类别</td>
-		<td class="a2" colspan="3">
+		<td class="a2">
 			<select name="productKind" onkeyup="goNext(this.form,this.name);">
 				<option value=""></option>
 		<%

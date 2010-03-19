@@ -11,18 +11,18 @@ List resultList = (List)VS.findValue("reustls");
 String start_date = StringUtils.nullToStr(request.getParameter("start_date"));
 String end_date = StringUtils.nullToStr(request.getParameter("end_date"));
 String dj = StringUtils.nullToStr(request.getParameter("dj"));
-String dept = StringUtils.nullToStr(request.getParameter("dept"));        //部门
+String fy_type = StringUtils.nullToStr(request.getParameter("fy_type"));        //费用类型
 
 String con = "日期：" + start_date + "至" + end_date;
-if(!dept.equals("")){
-	con += "&nbsp;&nbsp;<b>部门：</b>" + StaticParamDo.getDeptNameById(dept);
+if(!fy_type.equals("")){
+	con += "&nbsp;&nbsp;<b>费用类型：</b>" + StaticParamDo.getFyTypeNameById(fy_type);
 }
 
 %>
 
 <html>
 <head>
-<title>费用分类汇总表</title>
+<title>部门费用汇总表</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/report.css" rel="stylesheet" type="text/css" />
 <style media=print>  
@@ -30,29 +30,22 @@ if(!dept.equals("")){
 </style> 
 <script language='JavaScript' src="js/date.js"></script>
 <script type="text/javascript">
-	function openWin(product_id,client_name,xsry_id){
-		document.myform.product_id.value = product_id;
-		document.myform.submit();
-	}
 	function pageRefresh(){
 		document.refreshForm.submit();
-	}
-	function openMx(product_kind,start_date,end_date,client_name,xsry){
-		location.href="getHpflMxResult.html?product_kind=" + product_kind + "&start_date=" + start_date + "&end_date=" + end_date + "&client_name=" + client_name + "&xsry=" + xsry;
 	}
 </script>
 </head>
 <body align="center" >
-<form name="refreshForm" action="getFytjResult.html" method="post">
+<form name="refreshForm" action="getDeptFytjResult.html" method="post">
 <input type="hidden" name="start_date" value="<%=start_date %>">
 <input type="hidden" name="end_date" value="<%=end_date %>">
-<input type="hidden" name="dept" value="<%=dept %>">
+<input type="hidden" name="fy_type" value="<%=fy_type %>">
 <input type="hidden" name="dj" value="<%=dj %>">
 </form>
 <TABLE  align="center" cellSpacing=0 cellPadding=0 width="99%" border=0>
 	<TBODY>
 		<TR style="BACKGROUND-COLOR: #dcdcdc;height:45;">
-		    <TD align="center" width="100%"><font style="FONT-SIZE: 16px"><B>费用分类汇总表</B></font><br><%=con %></TD>
+		    <TD align="center" width="100%"><font style="FONT-SIZE: 16px"><B>部门费用汇总表</B></font><br><%=con %></TD>
 		    <TD align="center">
 		    	<input type="button" name="btnRes" value="刷新" onclick="pageRefresh();">
 		    </TD>		    
@@ -63,8 +56,8 @@ if(!dept.equals("")){
 <TABLE align="center" cellSpacing=0 cellPadding=0 width="99%" border=0 style="BORDER-TOP: #000000 2px solid;BORDER-LEFT:#000000 1px solid">
 	<THEAD>
 		<TR>
-			<TD class=ReportHead>费用类别名称</TD>
-			<TD class=ReportHead>金额</TD>		
+			<TD class=ReportHead>部门名称</TD>
+			<TD class=ReportHead>费用金额</TD>		
 		</TR>
 	</THEAD>
 	<TBODY>
@@ -75,8 +68,8 @@ if(resultList != null && resultList.size()>0){
 	for(int i=0;i<resultList.size();i++){
 		Map map = (Map)resultList.get(i);
 		
-		String id = StringUtils.nullToStr(map.get("id"));
-		String name = StringUtils.nullToStr(map.get("name"));
+		String id = StringUtils.nullToStr(map.get("dept_id"));
+		String name = StringUtils.nullToStr(map.get("dept_name"));
 		
 		String strBlank = "";
 		for(int k=0;k<id.length()/2;k++){
@@ -99,7 +92,7 @@ if(resultList != null && resultList.size()>0){
 		if(je != 0){
 %>
 		<TR style="<%=stl %>">
-			<TD class=ReportItem><%=strBlank %><a href="getFytjResultMx.html?start_date=<%=start_date %>&end_date=<%=end_date %>&fy_type=<%=id %>&dept=<%=dept %>"><%=name %></a>&nbsp;</TD>
+			<TD class=ReportItem><%=strBlank %><a href="getFytjResultMx.html?start_date=<%=start_date %>&end_date=<%=end_date %>&fy_type=<%=fy_type %>&dept=<%=id %>"><%=name %></a>&nbsp;</TD>
 			<TD class=ReportItemMoney><%=JMath.round(je,2) %>&nbsp;</TD>
 		</TR>
 	
@@ -124,7 +117,7 @@ if(resultList != null && resultList.size()>0){
 </table>
 <center class="Noprint">
 	<input type="button" name="button_print" value=" 打 印 " onclick="window.print();"> &nbsp;&nbsp;
-    <input type="button" name="button_fh" value=" 返 回 " onclick="location.href='showFytjCondition.html';"> 
+    <input type="button" name="button_fh" value=" 返 回 " onclick="location.href='showDeptFytjCondition.html';"> 
 </center>
 </body>
 </html>

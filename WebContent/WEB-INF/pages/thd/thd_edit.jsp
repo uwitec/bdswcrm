@@ -108,6 +108,8 @@ if(thdProducts != null && thdProducts.size() > 0){
 					
 		hj();
 		document.thdForm.submit();
+
+		document.thdForm.btnSave.disabled = true;
 	}
 	
 	
@@ -417,7 +419,8 @@ if(thdProducts!=null && thdProducts.size()>0){
 			<input type="hidden" id="ds_<%=i %>" name="thdProducts[<%=i %>].ds"  value="<%=JMath.round(thdProduct.getDs()) %>">
 			<input type="hidden" id="basic_ratio_<%=i %>" name="thdProducts[<%=i %>].basic_ratio"  value="<%=JMath.round(thdProduct.getBasic_ratio()) %>">
 			<input type="hidden" id="out_ratio_<%=i %>" name="thdProducts[<%=i %>].out_ratio"  value="<%=JMath.round(thdProduct.getOut_ratio()) %>">			
-			<input type="hidden" id="lsxj_<%=i %>" name="thdProducts[<%=i %>].lsxj"  value="<%=JMath.round(thdProduct.getLsxj()) %>">			
+			<input type="hidden" id="lsxj_<%=i %>" name="thdProducts[<%=i %>].lsxj"  value="<%=JMath.round(thdProduct.getLsxj()) %>">
+			<input type="hidden" id="ygcbj_<%=i %>" name="thdProducts[<%=i %>].ygcbj"  value="<%=JMath.round(thdProduct.getYgcbj()) %>">			
 		</td>
 		<td class="a2"><input type="text" id="nums_<%=i %>" name="thdProducts[<%=i %>].nums"  size="5" value="<%=StringUtils.nullToStr(thdProduct.getNums()) %>" onblur="hj();"></td>
 		<td class="a2">
@@ -520,7 +523,7 @@ if(thdProducts!=null && thdProducts.size()>0){
 	</tr>	
 	<tr height="35">
 		<td class="a1" colspan="4">
-			<input type="button" name="button1" value="确 定" class="css_button2" onclick="saveInfo();">&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="button" name="btnSave" value="确 定" class="css_button2" onclick="saveInfo();">&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="reset" name="button2" value="重 置" class="css_button2">&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="button" name="button3" value="关 闭" class="css_button2" onclick="window.close();">
 		</td>

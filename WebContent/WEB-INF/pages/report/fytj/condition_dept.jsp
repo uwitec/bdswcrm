@@ -13,22 +13,29 @@ String[] fy_types = (String[])VS.findValue("fy_types");
 
 <html>
 <head>
-<title>费用分类汇总表</title>
+<title>部门费用汇总表</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
 <script type="text/javascript">
-	function submits(){
-		document.reportForm.submit();
-	}	
+function submits(){
+	document.reportForm.submit();
+}	
+
+function openFyType(){
+	var destination = "selFyType.html";
+	var fea ='width=400,height=400,left=' + (screen.availWidth-400)/2 + ',top=' + (screen.availHeight-400)/2 + ',directories=no,localtion=no,menubar=no,status=yes,toolbar=no,scrollbars=yes,resizeable=no';
+	
+	window.open(destination,'费用类别',fea);	
+}
 </script>
 </head>
 <body>
-<form name="reportForm" action="getFytjResult.html" method="post">
+<form name="reportForm" action="getDeptFytjResult.html" method="post">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td colspan="2">费用分类汇总表</td>
+		<td colspan="2">部门费用汇总表</td>
 	</tr>
 	</thead>
 </table>
@@ -42,30 +49,13 @@ String[] fy_types = (String[])VS.findValue("fy_types");
 			<input type="text" name="end_date" id="end_date" value="<%=DateComFunc.getToday() %>" class="Wdate" onFocus="WdatePicker()"></td>
 	</tr>
 	<tr>
-		<td class="a1">费用使用部门</td>
-		<td class="a4">
-			<select name="dept">
-				<option value=""></option>
-				<%
-				if(deptList != null &&  deptList.size()>0){
-					for(int i=0;i<deptList.size();i++){
-						Dept dept = (Dept)deptList.get(i);
-						
-						String dept_id = dept.getDept_id();
-						String dept_name = dept.getDept_name();
-						
-						for(int k=0;k<dept_id.length()-2;k++){
-							dept_name = "　" + dept_name;
-						}
-				%>
-				<option value="<%=dept_id %>"><%=dept_name %></option>
-				<%
-					}
-				}
-				%>
-			</select>
-		</td>	
-		<td class="a1">费用类别等级</td>
+		<td class="a1">费用类型</td>
+		<td class="a2">
+			<input type="text" name="fy_type_show" id="fy_type_show" value="" readonly onclick="openFyType();"/>
+			<input type="hidden" name="fy_type" id="fy_type" value=""/>
+			<img src="images/select.gif" align="absmiddle" title="选择费用类型" border="0" onclick="openFyType();" style="cursor:hand">
+		</td>
+		<td class="a1">部门等级</td>
 		<td class="a4">
 			<select name="dj">
 				<option value="1">第一级</option>
@@ -73,8 +63,8 @@ String[] fy_types = (String[])VS.findValue("fy_types");
 				<option value="3">第三级</option>
 				<option value="4">第四级</option>
 			</select>
-		</td>				
-	</tr>
+		</td>		
+	</tr>	
 	<tr height="35">
 		<td class="a1" colspan="4">
 			<input type="button" onclick="submits()" name="button1" value="提 交" class="css_button2">&nbsp;&nbsp;&nbsp;&nbsp;

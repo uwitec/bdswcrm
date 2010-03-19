@@ -31,9 +31,10 @@
 		<TR>
 			<TD class=ReportHead width="3%" nowrap="nowrap">序号</TD>
 			<TD class=ReportHead width="8%" nowrap="nowrap">商品编码</TD>
-			<TD class=ReportHead width="24%">商品名称</TD>
-			<TD class=ReportHead width="16%">规格</TD>
+			<TD class=ReportHead width="20%">商品名称</TD>
+			<TD class=ReportHead width="13%">规格</TD>
 			<TD class=ReportHead width="7%" nowrap="nowrap">考核成本价</TD>
+			<TD class=ReportHead width="7%" nowrap="nowrap">预估成本价</TD>
 			<TD class=ReportHead width="7%" nowrap="nowrap">零售报价</TD>
 			<TD class=ReportHead width="7%" nowrap="nowrap">零售限价</TD>
 			<TD class=ReportHead width="7%" nowrap="nowrap">分销报价</TD>
@@ -50,6 +51,7 @@
 		<TD class=ReportItemXh><input type="text" name='products[<ww:property value="%{#li.count-1}"/>].productName' id='productName_<ww:property value="%{#li.count-1}"/>' value="<ww:property value="%{productName}"/>" class="cssTextLeft" maxlength="100" notNull='true' vtype='string' vdisp='商品名称' onfocus="this.style.backgroundColor='#DCDCDC'" onblur="this.style.backgroundColor='#FFFFFF'"></TD>
 		<TD class=ReportItemXh><input type="text" name='products[<ww:property value="%{#li.count-1}"/>].productXh' id='productXh_<ww:property value="%{#li.count-1}"/>' value="<ww:property value="%{productXh}"/>" class="cssTextLeft" maxlength="100" notNull='false' vtype='string' vdisp='商品规格' onfocus="this.style.backgroundColor='#DCDCDC'" onblur="this.style.backgroundColor='#FFFFFF'"></TD>
 		<TD class=ReportItemXh><input type="text" name='products[<ww:property value="%{#li.count-1}"/>].khcbj' id='khcbj_<ww:property value="%{#li.count-1}"/>' value="<ww:property value="%{getText('global.format.double',{khcbj})}"/>" class="cssTextRight" maxlength="10" notNull='true' vtype='float' vdisp='考核成本价' onfocus="this.style.backgroundColor='#DCDCDC'" onblur="this.style.backgroundColor='#FFFFFF'"></TD>
+		<TD class=ReportItemXh><input type="text" name='products[<ww:property value="%{#li.count-1}"/>].ygcbj' id='ygcbj_<ww:property value="%{#li.count-1}"/>' value="<ww:property value="%{getText('global.format.double',{ygcbj})}"/>" class="cssTextRight" maxlength="10" notNull='true' vtype='float' vdisp='预估成本价' onfocus="this.style.backgroundColor='#DCDCDC'" onblur="this.style.backgroundColor='#FFFFFF'"></TD>
 		<TD class=ReportItemXh><input type="text" name='products[<ww:property value="%{#li.count-1}"/>].lsbj' id='lsbj_<ww:property value="%{#li.count-1}"/>' value="<ww:property value="%{getText('global.format.double',{lsbj})}"/>" class="cssTextRight" maxlength="10" notNull='true' vtype='float' vdisp='零售报价' onfocus="this.style.backgroundColor='#DCDCDC'" onblur="this.style.backgroundColor='#FFFFFF'"></TD>
 		<TD class=ReportItemXh><input type="text" name='products[<ww:property value="%{#li.count-1}"/>].lsxj' id='lsxj_<ww:property value="%{#li.count-1}"/>' value="<ww:property value="%{getText('global.format.double',{lsxj})}"/>" class="cssTextRight" maxlength="10" notNull='true' vtype='float' vdisp='零售限价' onfocus="this.style.backgroundColor='#DCDCDC'" onblur="this.style.backgroundColor='#FFFFFF'"></TD>
 		<TD class=ReportItemXh><input type="text" name='products[<ww:property value="%{#li.count-1}"/>].fxbj' id='fxbj_<ww:property value="%{#li.count-1}"/>' value="<ww:property value="%{getText('global.format.double',{fxbj})}"/>" class="cssTextRight" maxlength="10" notNull='true' vtype='float' vdisp='分销报价' onfocus="this.style.backgroundColor='#DCDCDC'" onblur="this.style.backgroundColor='#FFFFFF'"></TD>

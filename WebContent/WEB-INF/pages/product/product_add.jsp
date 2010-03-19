@@ -32,6 +32,7 @@ String[] jldw = (String[])VS.findValue("jldw");
 		if(!InputValid(document.productForm.fxxj,0,"float",0,0,9999999,"分销限价")){	 document.productForm.fxxj.focus();return; }
 		if(!InputValid(document.productForm.gf,0,"float",0,0,100,"比例点杀")){	 document.productForm.gf.focus();return; }
 		if(!InputValid(document.productForm.dss,0,"float",0,0,9999999,"金额点杀")){	 document.productForm.dss.focus();return; }
+		if(!InputValid(document.productForm.ygcbj,0,"float",0,0,9999999,"预估成本价")){	 document.productForm.ygcbj.focus();return; }
 		if(!InputValid(document.productForm.sp_txm,0,"string",0,1,50,"商品条形码")){	 document.productForm.sp_txm.focus();return; }
 		if(!InputValid(document.productForm.ms,0,"string",0,1,500,"产品描述")){	 document.productForm.ms.focus();return; }
 		
@@ -114,12 +115,14 @@ String[] jldw = (String[])VS.findValue("jldw");
 	</tr>
 	 
 	<tr>		
+		<td class="a1" width="15%">预估成本价</td>
+		<td class="a2" width="35%"><input type="text" name="ygcbj" value="0.00" size="20" onkeyup="goNext(this.form,this.name);"></td>		
 		<td class="a1" width="15%">库存下限</td>
 		<td class="a2" width="35%"><input type="text" name="kcxx" value="0" size="20" onkeyup="goNext(this.form,this.name);"></td>	
-		<td class="a1" width="15%">条形码</td>
-		<td class="a2"><input type="text" name="sp_txm" value="" size="20" onkeyup="goNext(this.form,this.name);"></td>
 	</tr>		
-	<tr>		
+	<tr>	
+		<td class="a1" width="15%">条形码</td>
+		<td class="a2"><input type="text" name="sp_txm" value="" size="20" onkeyup="goNext(this.form,this.name);"></td>		
 		<td class="a1" width="15%">状态</td>
 		<td class="a2" width="35%">
 			<select name="state" onkeyup="goNext(this.form,this.name);">
@@ -127,17 +130,17 @@ String[] jldw = (String[])VS.findValue("jldw");
 				<option value="停售">停售</option>
 			</select>
 		</td>
+	</tr>		
+	<tr height="50">
 		<td class="a1" width="15%">强制序列号</td>
 		<td class="a2" width="35%">
 			<select name="qz_serial_num" onkeyup="goNext(this.form,this.name);">				
 				<option value="否">否</option>
 				<option value="是">是</option>
 			</select>
-		</td>
-	</tr>		
-	<tr height="50">
+		</td>	
 		<td class="a1">产品描述</td>
-		<td class="a2" colspan="3"><input type="text" name="ms" value=""  style="width:80%" onkeyup="goNext(this.form,this.name);"></td>
+		<td class="a2"><input type="text" name="ms" value=""  style="width:80%" onkeyup="goNext(this.form,this.name);"></td>
 	</tr>
 	<tr height="35">
 		<td class="a1" colspan="4">

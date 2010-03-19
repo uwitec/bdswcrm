@@ -44,32 +44,32 @@ if(obj != null){
 		<td class="a1" width="15%">移动加权价</td>
 		<td class="a2" width="35%"><%=JMath.round(product.getPrice(),2) %></td>
 		<td class="a1" width="15%">考核成本价</td>
-		<td class="a2" width="35%"><%=JMath.round(product.getKhcbj()) %></td>		
+		<td class="a2" width="35%"><%=JMath.round(product.getKhcbj(),2) %></td>		
 
 	</tr>	
 	<tr>	
 		<td class="a1" width="15%">零售报价</td>
 		<td class="a2" width="35%"><%=JMath.round(product.getLsbj(),2) %></td>	
 		<td class="a1" width="15%">分销报价</td>
-		<td class="a2" width="35%"><%=JMath.round(product.getFxbj()) %></td>					
+		<td class="a2" width="35%"><%=JMath.round(product.getFxbj(),2) %></td>					
 	</tr>
 	<tr>
 		<td class="a1" width="15%">零售限价</td>
-		<td class="a2" width="35%"><%=JMath.round(product.getLsxj()) %></td>	
+		<td class="a2" width="35%"><%=JMath.round(product.getLsxj(),2) %></td>	
 		<td class="a1" width="15%">分销限价</td>
-		<td class="a2" width="35%"><%=JMath.round(product.getFxxj()) %></td>
+		<td class="a2" width="35%"><%=JMath.round(product.getFxxj(),2) %></td>
 	</tr>
 	<tr>
 		<td class="a1" width="15%">比例点杀</td>
 		<td class="a2" width="35%"><%=JMath.round(product.getGf()) %>%</td>
 		<td class="a1" width="15%">金额点杀</td>
-		<td class="a2" width="35%"><%=JMath.round(product.getDss()) %>元</td>
+		<td class="a2" width="35%"><%=JMath.round(product.getDss(),2) %></td>
 	</tr>
 	<tr>
+		<td class="a1" width="15%">预估成本价</td>
+		<td class="a2" width="35%"><%=JMath.round(product.getYgcbj(),2) %></td>	
 		<td class="a1" width="15%">库存下限</td>
 		<td class="a2" width="35%"><%=product.getKcxx() %></td>
-		<td class="a1" width="15%">库存上限</td>
-		<td class="a2" width="35%"><%=product.getKcsx() %></td>
 	</tr>
 	<tr>
 		<td class="a1" width="15%">状态</td>

@@ -23,7 +23,7 @@ List kindList = (List)VS.findValue("kindList");
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript">
 
-	function sel(product_id,product_xh,product_name,qz_serial_num,cbj,khcbj){
+	function sel(product_id,product_xh,product_name,qz_serial_num,cbj,khcbj,ygcbj){
 		var id = window.opener.document.getElementById("product_id_<%=openerId%>");
 		var xh = window.opener.document.getElementById("product_xh_<%=openerId%>");
 		var name = window.opener.document.getElementById("product_name_<%=openerId%>");
@@ -31,7 +31,8 @@ List kindList = (List)VS.findValue("kindList");
 		var khcbj_obj = window.opener.document.getElementById("kh_cbj_<%=openerId%>");
 		
 		var qz_flag = window.opener.document.getElementById("qz_flag_<%=openerId%>");
-		
+		var ygcbj_obj = window.opener.document.getElementById("ygcbj_<%=openerId%>");
+
 		id.value = product_id;
 		xh.value = product_xh;
 		name.value = product_name;
@@ -39,6 +40,7 @@ List kindList = (List)VS.findValue("kindList");
 		if(qz_flag != null) qz_flag.value = qz_serial_num;
 		if(cbj_obj != null) cbj_obj.value = cbj;
 		if(khcbj_obj != null) khcbj_obj.value = khcbj;
+		if(ygcbj_obj != null) ygcbj_obj.value = ygcbj;
 		
 		window.close();	
 	}
@@ -119,8 +121,10 @@ List kindList = (List)VS.findValue("kindList");
 				
 				double khcbj = map.get("khcbj")==null?0:((Double)map.get("khcbj")).doubleValue();
 				
+				double ygcbj = map.get("ygcbj")==null?0:((Double)map.get("ygcbj")).doubleValue();
+				
 			%>
-			<tr class="a1" onmouseover="this.className='a2';" onmouseout="this.className='a1';" title="左键点击选择" onclick="sel('<%=StringUtils.nullToStr(map.get("product_id")) %>','<%=StringUtils.nullToStr(map.get("product_xh")) %>','<%=StringUtils.nullToStr(map.get("product_name")) %>','<%=StringUtils.nullToStr(map.get("qz_serial_num")) %>','<%=JMath.round(price) %>','<%=JMath.round(khcbj) %>');">
+			<tr class="a1" onmouseover="this.className='a2';" onmouseout="this.className='a1';" title="左键点击选择" onclick="sel('<%=StringUtils.nullToStr(map.get("product_id")) %>','<%=StringUtils.nullToStr(map.get("product_xh")) %>','<%=StringUtils.nullToStr(map.get("product_name")) %>','<%=StringUtils.nullToStr(map.get("qz_serial_num")) %>','<%=JMath.round(price) %>','<%=JMath.round(khcbj) %>','<%=JMath.round(ygcbj) %>');">
 				<td><%=StringUtils.nullToStr(map.get("product_id")) %></td>
 				<td><%=StringUtils.nullToStr(map.get("product_name")) %></td>
 				<td><%=StringUtils.nullToStr(map.get("product_xh")) %></td>
