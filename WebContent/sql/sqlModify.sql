@@ -389,3 +389,25 @@ a.sd,a.bhsje,a.gf,(a.ds*a.nums) as ds,a.basic_ratio,a.out_ratio,(a.lsxj*a.nums) 
 from (((lsd_product a left join lsd b on((b.id = a.lsd_id))) left join product c on((c.product_id = a.product_id))) left join sys_user d on((d.user_id = b.xsry)))
 where (b.state = '已提交'))
 
+
+2010-03-20 修改
+
+--客户往来期初表添加索引
+ALTER TABLE `client_qc` ADD INDEX `Index_client_qc_query`(`client_name`, `cdate`);
+
+--添加日程计划安排表
+CREATE TABLE `calendar_plan` (
+  `id` varchar(50) NOT NULL,
+  `cdate` varchar(20) default NULL,
+  `start_time` varchar(20) default NULL,
+  `end_time` varchar(20) default NULL,
+  `address` varchar(200) default NULL,
+  `content` varchar(1000) default NULL,
+  `is_remind` char(1) default NULL,
+  `grade` char(1) default NULL,
+  `czr` varchar(20) default NULL,
+  `cz_date` datetime default NULL,
+  `remind_time` int(10) unsigned default '0',
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+

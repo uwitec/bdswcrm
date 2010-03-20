@@ -533,6 +533,11 @@
      <bean id="bwlDao" class="com.sw.cms.dao.BwlDAO">
           <property name="jdbcTemplate" ref="jdbcTemplate"/>
      </bean>
+     
+      <!-- 日程安排-->
+     <bean id="calendarPlanDao" class="com.sw.cms.dao.CalendarPlanDAO">
+          <property name="jdbcTemplate" ref="jdbcTemplate"/>
+     </bean>     
 </beans>
 
 
