@@ -2621,6 +2621,26 @@
 		<action name="delBwl" class="bwlAction" method="del">
             <result name="success" type="redirect">listBwl.html</result>
         </action>
-        <!-- 备忘录结束 -->                             
+        <!-- 备忘录结束 -->    
+        
+        <!-- 日程安排开始 -->
+        <action name="showCalendar" class="calendarPlanAction" method="showCalendar">
+            <result name="success" type="dispatcher">/WEB-INF/pages/calendar/calendar.jsp</result>
+        </action>
+        <action name="editPlan" class="calendarPlanAction" method="edit">
+            <result name="success">/WEB-INF/pages/calendar/active_edit.jsp</result>
+        </action> 
+		<action name="updatePlan" class="calendarPlanAction" method="update">
+            <result name="cancel" type="redirect">editPlan.html</result>
+            <result name="input" type="dispatcher">/WEB-INF/pages/calendar/active_edit.jsp</result>
+            <result name="success">/WEB-INF/pages/calendar/msg.jsp</result>
+        </action>
+        <action name="listPlan" class="calendarPlanAction" method="listPlan">
+            <result name="success">/WEB-INF/pages/calendar/active_list.jsp</result>
+        </action>
+		<action name="delPlan" class="calendarPlanAction" method="del">
+            <result name="success" type="redirect">listPlan.html?cdate=${cdate}</result>
+        </action>                         
+        <!-- 日程安排结束-->                               
     </package>
 </xwork>
