@@ -13,14 +13,18 @@ String end_date = StringUtils.nullToStr(request.getParameter("end_date"));
 String dj = StringUtils.nullToStr(request.getParameter("dj"));
 String client_name = StringUtils.nullToStr(request.getParameter("client_name"));
 String xsry = StringUtils.nullToStr(request.getParameter("xsry"));
+String dept = StringUtils.nullToStr(request.getParameter("dept"));
 
 String con = "日期：" + start_date + "至" + end_date;
 
-if(!client_name.equals("")){
-	con += "&nbsp; 客户名称：" + StaticParamDo.getClientNameById(client_name);
+if(!dept.equals("")){
+	con += "&nbsp; 部门：" + StaticParamDo.getDeptNameById(dept);
 }
 if(!xsry.equals("")){
 	con += "&nbsp; 销售人员：" + StaticParamDo.getRealNameById(xsry);
+}
+if(!client_name.equals("")){
+	con += "&nbsp; 客户名称：" + StaticParamDo.getClientNameById(client_name);
 }
 %>
 
@@ -41,8 +45,8 @@ if(!xsry.equals("")){
 	function pageRefresh(){
 		document.refreshForm.submit();
 	}
-	function openMx(product_kind,start_date,end_date,client_name,xsry){
-		location.href="getHpflMxResult.html?product_kind=" + product_kind + "&start_date=" + start_date + "&end_date=" + end_date + "&client_name=" + client_name + "&xsry=" + xsry;
+	function openMx(product_kind,start_date,end_date,client_name,xsry,dept){
+		location.href="getHpflMxResult.html?product_kind=" + product_kind + "&start_date=" + start_date + "&end_date=" + end_date + "&client_name=" + client_name + "&xsry=" + xsry + "&dept=" + dept;
 	}
 </script>
 </head>
@@ -113,7 +117,7 @@ if(resultList != null && resultList.size()>0){
 		if(nums != 0 || je != 0){
 %>
 		<TR style="<%=stl %>">
-			<TD class=ReportItem><%=strBlank %><a href="javascript:openMx('<%=id %>','<%=start_date %>','<%=end_date %>','<%=client_name %>','<%=xsry %>');"><%=name %></a>&nbsp;</TD>
+			<TD class=ReportItem><%=strBlank %><a href="javascript:openMx('<%=id %>','<%=start_date %>','<%=end_date %>','<%=client_name %>','<%=xsry %>','<%=dept %>');"><%=name %></a>&nbsp;</TD>
 			<TD class=ReportItemMoney><%=nums %>&nbsp;</TD>
 			<TD class=ReportItemMoney><%=JMath.round(je,2) %>&nbsp;</TD>
 		</TR>

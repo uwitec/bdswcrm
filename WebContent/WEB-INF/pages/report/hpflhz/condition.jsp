@@ -1,5 +1,12 @@
 <%@ page language="java" errorPage="/error.jsp" pageEncoding="UTF-8" contentType="text/html;charset=utf-8" %>
+<%@ page import="com.opensymphony.xwork.util.OgnlValueStack" %>
 <%@ page import="com.sw.cms.util.*" %>
+<%@ page import="com.sw.cms.model.*" %>
+<%@ page import="java.util.*" %>
+<%
+OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
+List deptList = (List)VS.findValue("deptList");
+%>
 <html>
 <head>
 <title>货品销售分类汇总</title>
@@ -51,19 +58,50 @@
 			<input type="text" name="end_date" id="end_date" value="<%=DateComFunc.getToday() %>"  class="Wdate" onFocus="WdatePicker()"></td>
 	</tr>
 	<tr>
+		<td class="a1">部门</td>
+		<td class="a4">
+			<select name="dept">
+				<option value=""></option>
+				<%
+				if(deptList != null &&  deptList.size()>0){
+					for(int i=0;i<deptList.size();i++){
+						Dept dept = (Dept)deptList.get(i);
+						
+						String dept_id = dept.getDept_id();
+						String dept_name = dept.getDept_name();
+						
+						for(int k=0;k<dept_id.length()-2;k++){
+							dept_name = "　" + dept_name;
+						}
+				%>
+				<option value="<%=dept_id %>"><%=dept_name %></option>
+				<%
+					}
+				}
+				%>
+			</select>
+		</td>	
+		<td class="a1">销售人员</td>
+		<td class="a4">
+		    <input  id="brand" type="text" length="20" onblur="setValue()"  /> 
+            <div   id="brandTip"  style="height:12px;position:absolute;left:720px; top:85px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
+            </div>
+		    <input type="hidden" name="xsry" id="fzr"  /> 
+		</td>	
+	</tr>
+	<tr>
 		<td class="a1">客户名称</td>
 		<td class="a4">
 			<input type="text" name="clientId" id="client_name" value=""  onblur="setClientValue();" size="30"   maxlength="50">
 			<input type="hidden" name="client_name" id="client_id" value="">
 			<div id="clientsTip" style="height:12px;position:absolute;left:160px; top:85px; width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
-		</td>	
-		<td class="a1">销售人员</td>
+		</td>		
+		<td class="a1">业务类型</td>
 		<td class="a4">
-		    <input  id="brand" type="text"   length="20"  onblur="setValue()"  /> 
-            <div   id="brandTip"  style="height:12px;position:absolute;left:720px; top:85px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
-            </div>
-		    <input type="hidden" name="xsry" id="fzr"  /> 
-		</td>	
+			<input type="checkbox" name="xwType" id="xwType" value="销售单" checked> 销售单
+			<input type="checkbox" name="xwType" id="xwType" value="零售单" checked> 零售单
+			<input type="checkbox" name="xwType" id="xwType" value="退货单" checked> 退货单
+		</td>				
 	</tr>		
 	<tr>
 		<td class="a1">货品类别等级</td>
