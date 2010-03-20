@@ -19,7 +19,7 @@ public class HpflxsHzDAO extends JdbcBaseDAO {
 	 * @param dj
 	 * @return
 	 */
-	public List getHzResults(String start_date,String end_date,String xsry,String client_name,int dj){
+	public List getHzResults(String start_date,String end_date,String xsry,String client_name,String dept,String[] xwType,int dj){
 		
 		String con = "";
 		if(!start_date.equals("")){
@@ -33,6 +33,22 @@ public class HpflxsHzDAO extends JdbcBaseDAO {
 		}
 		if(!client_name.equals("")){
 			con += " and b.client_name='" + client_name + "'"; 
+		}
+		if(!dept.equals("")){
+			con += " and b.dept like '" + dept + "%'";
+		}
+		if(xwType == null || xwType.length == 0){
+			return null;
+		}else{
+			con += " and(";
+			for(int i=0;i<xwType.length;i++){
+				if(i==0){
+					con += "yw_type='" + xwType[i] + "'";
+				}else{
+					con += " or yw_type='" + xwType[i] + "'";
+				}
+			}
+			con += ")";
 		}
 		
 		String sql = "select a.id,a.name," +
@@ -56,7 +72,7 @@ public class HpflxsHzDAO extends JdbcBaseDAO {
 	 * @param xsry_id        销售人员
 	 * @return
 	 */
-	public List getMxResults(String product_kind,String start_date,String end_date,String client_name,String xsry){
+	public List getMxResults(String product_kind,String start_date,String end_date,String client_name,String dept,String xsry){
 		
 		String sql = "select product_id,product_name,product_xh,sum(nums) as nums,sum(hjje) as hjje from view_hpxshz_tj where 1=1";
 		
@@ -83,6 +99,10 @@ public class HpflxsHzDAO extends JdbcBaseDAO {
 		//销售人员
 		if(!xsry.equals("")){
 			sql += " and xsry='" + xsry + "'";
+		}
+		
+		if(!dept.equals("")){
+			sql += " and dept like '" + dept + "%'";
 		}
 		
 		sql += " group by product_id,product_name,product_xh";

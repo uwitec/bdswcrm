@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.sw.cms.action.base.BaseAction;
 import com.sw.cms.service.ClientsService;
+import com.sw.cms.service.DeptService;
 import com.sw.cms.service.HpflxsHzService;
 import com.sw.cms.service.UserService;
 
@@ -16,12 +17,10 @@ import com.sw.cms.service.UserService;
 public class HpflxsHzAction extends BaseAction {
 	
 	private HpflxsHzService hpflxsHzService;
-	private UserService userService;
-	private ClientsService clientsService;
+	private DeptService deptService;
 	
 	private List resultList = new ArrayList();
-	private List user_list = new ArrayList();
-	private List clientsList= new ArrayList();
+	private List deptList = new ArrayList();
 	 
 	
 	private String start_date = "";
@@ -30,76 +29,9 @@ public class HpflxsHzAction extends BaseAction {
 	private String client_name = "";
 	private String xsry = "";
 	private String product_kind = "";
+	private String dept = "";
+	private String[] xwType;
 	
-	public String getProduct_kind() {
-		return product_kind;
-	}
-
-
-	public void setProduct_kind(String product_kind) {
-		this.product_kind = product_kind;
-	}
-
-
-	public String getClient_name() {
-		return client_name;
-	}
-
-
-	public void setClient_name(String client_name) {
-		this.client_name = client_name;
-	}
-
-
-	public String getXsry() {
-		return xsry;
-	}
-
-
-	public void setXsry(String xsry) {
-		this.xsry = xsry;
-	}
-
-
-	public int getDj() {
-		return dj;
-	}
-
-
-	public void setDj(int dj) {
-		this.dj = dj;
-	}
-
-
-	public String getEnd_date() {
-		return end_date;
-	}
-
-
-	public void setEnd_date(String end_date) {
-		this.end_date = end_date;
-	}
-
-
-	public String getStart_date() {
-		return start_date;
-	}
-
-
-	public void setStart_date(String start_date) {
-		this.start_date = start_date;
-	}
-
-
-	public List getResultList() {
-		return resultList;
-	}
-
-
-	public void setResultList(List resultList) {
-		this.resultList = resultList;
-	}
-
 
 	/**
 	 * 显示条件
@@ -107,8 +39,7 @@ public class HpflxsHzAction extends BaseAction {
 	 * @throws Exception
 	 */
 	public String showCondition()throws Exception{
-		clientsList=clientsService.getClientList("");
-		user_list = userService.getAllEmployeeList();
+		deptList = deptService.getDepts();
 		return SUCCESS;
 	}
 	
@@ -120,7 +51,7 @@ public class HpflxsHzAction extends BaseAction {
 	 */
 	public String getResults() throws Exception{
 		try{
-			resultList = hpflxsHzService.getHzResults(start_date,end_date,xsry,client_name,dj);
+			resultList = hpflxsHzService.getHzResults(start_date,end_date,xsry,client_name,dept,xwType,dj);
 			return SUCCESS;
 		}catch(Exception e){
 			log.error("货品销售分类汇总出错，错误原因：" + e.getMessage());
@@ -136,7 +67,7 @@ public class HpflxsHzAction extends BaseAction {
 	 */
 	public String getMxResults() throws Exception{
 		try{
-			resultList = hpflxsHzService.getMxResults(product_kind, start_date, end_date, client_name, xsry);
+			resultList = hpflxsHzService.getMxResults(product_kind, start_date, end_date, client_name,dept, xsry);
 			return SUCCESS;
 		}catch(Exception e){
 			log.error("货品销售分类汇总明细信息出错，错误原因：" + e.getMessage());
@@ -155,44 +86,113 @@ public class HpflxsHzAction extends BaseAction {
 	}
 
 
-	public List getUser_list() {
-		return user_list;
+	public DeptService getDeptService() {
+		return deptService;
 	}
 
 
-	public void setUser_list(List user_list) {
-		this.user_list = user_list;
+	public void setDeptService(DeptService deptService) {
+		this.deptService = deptService;
 	}
 
 
-	public UserService getUserService() {
-		return userService;
+	public List getResultList() {
+		return resultList;
 	}
 
 
-	public void setUserService(UserService userService) {
-		this.userService = userService;
+	public void setResultList(List resultList) {
+		this.resultList = resultList;
 	}
 
 
-	public List getClientsList() {
-		return clientsList;
+	public List getDeptList() {
+		return deptList;
 	}
 
 
-	public void setClientsList(List clientsList) {
-		this.clientsList = clientsList;
+	public void setDeptList(List deptList) {
+		this.deptList = deptList;
 	}
 
 
-	public ClientsService getClientsService() {
-		return clientsService;
+	public String getStart_date() {
+		return start_date;
 	}
 
 
-	public void setClientsService(ClientsService clientsService) {
-		this.clientsService = clientsService;
+	public void setStart_date(String startDate) {
+		start_date = startDate;
 	}
-	
+
+
+	public String getEnd_date() {
+		return end_date;
+	}
+
+
+	public void setEnd_date(String endDate) {
+		end_date = endDate;
+	}
+
+
+	public int getDj() {
+		return dj;
+	}
+
+
+	public void setDj(int dj) {
+		this.dj = dj;
+	}
+
+
+	public String getClient_name() {
+		return client_name;
+	}
+
+
+	public void setClient_name(String clientName) {
+		client_name = clientName;
+	}
+
+
+	public String getXsry() {
+		return xsry;
+	}
+
+
+	public void setXsry(String xsry) {
+		this.xsry = xsry;
+	}
+
+
+	public String getProduct_kind() {
+		return product_kind;
+	}
+
+
+	public void setProduct_kind(String productKind) {
+		product_kind = productKind;
+	}
+
+
+	public String getDept() {
+		return dept;
+	}
+
+
+	public void setDept(String dept) {
+		this.dept = dept;
+	}
+
+
+	public String[] getXwType() {
+		return xwType;
+	}
+
+
+	public void setXwType(String[] xwType) {
+		this.xwType = xwType;
+	}
 
 }

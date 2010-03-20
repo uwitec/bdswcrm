@@ -20,8 +20,8 @@ public class HpflxsHzService {
 	 * @param dj
 	 * @return
 	 */
-	public List getHzResults(String start_date,String end_date,String xsry,String client_name,int dj){
-		return hpflxsHzDao.getHzResults(start_date, end_date,xsry,client_name ,dj);
+	public List getHzResults(String start_date,String end_date,String xsry,String client_name,String dept,String[] xwType,int dj){
+		return hpflxsHzDao.getHzResults(start_date, end_date,xsry,client_name,dept,xwType,dj);
 	}
 	
 	/**
@@ -33,8 +33,8 @@ public class HpflxsHzService {
 	 * @param xsry_id        销售人员
 	 * @return
 	 */
-	public List getMxResults(String product_kind,String start_date,String end_date,String client_name,String xsry){
-		return hpflxsHzDao.getMxResults(product_kind, start_date, end_date, client_name, xsry);
+	public List getMxResults(String product_kind,String start_date,String end_date,String client_name,String dept,String xsry){
+		return hpflxsHzDao.getMxResults(product_kind, start_date, end_date, client_name,dept, xsry);
 	}
 
 	public HpflxsHzDAO getHpflxsHzDao() {
