@@ -1,4 +1,4 @@
-<%@ page language="java" errorPage="/error.jsp" pageEncoding="UTF-8" contentType="text/html;charset=UTF-8" %>
+﻿<%@ page language="java" errorPage="/error.jsp" pageEncoding="UTF-8" contentType="text/html;charset=UTF-8" %>
 <%@ page import="com.opensymphony.xwork.util.OgnlValueStack" %>
 <%@ page import="com.sw.cms.util.*" %>
 <%@ page import="com.sw.cms.model.*" %>
@@ -77,7 +77,7 @@ String iscs_flag = StringUtils.nullToStr(VS.findValue("iscs_flag"));
 		<td class="a1" width="15%">计量单位</td>
 		<td class="a2" width="35%">
 			<select name="dw" onkeyup="goNext(this.form,this.name);">
-				
+				<option value=""></option>
 				<%
 				for(int i=0;i<jldw.length;i++){
 				%>
