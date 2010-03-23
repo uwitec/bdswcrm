@@ -68,91 +68,115 @@ String iscs_flag = StringUtils.nullToStr(VS.findValue("iscs_flag"));
 	</thead>	
 	<tr>
 		<td class="a1" width="15%">产品名称</td>
-		<td class="a2" width="35%"><input type="text" name="productName" value="" size="20" onkeyup="goNext(this.form,this.name);"></td>	
+		<td class="a2" width="35%"><input type="text" name="productName" value="<%=StringUtils.nullToStr(product.getProductName()) %>" size="20" onkeyup="goNext(this.form,this.name);"></td>	
 		<td class="a1" width="15%">规格</td>
-		<td class="a2" width="35%"><input type="text" name="productXh" value="" size="20" onkeyup="goNext(this.form,this.name);"></td>
+		<td class="a2" width="35%"><input type="text" name="productXh" value="<%=StringUtils.nullToStr(product.getProductXh()) %>" size="20" onkeyup="goNext(this.form,this.name);"></td>
 	</tr>
 	
 	<tr>
 		<td class="a1" width="15%">计量单位</td>
 		<td class="a2" width="35%">
 			<select name="dw" onkeyup="goNext(this.form,this.name);">
-				<option value=""></option>
+				
 				<%
 				for(int i=0;i<jldw.length;i++){
 				%>
-					<option value="<%=jldw[i] %>"><%=jldw[i] %></option>
+					<option value="<%=jldw[i] %>" <%if(jldw[i].equals(StringUtils.nullToStr(product.getDw()))) out.print("selected"); %>><%=jldw[i] %></option>
 				<%
 				}
 				%>
-			</select>
-		</td>
+			</select></td>
 		<td class="a1" width="15%">移动加权价</td>
-		<td class="a2" width="35%"><input type="text" name="price" value="0.00" size="20" onkeyup="goNext(this.form,this.name);"></td>		
+		<td class="a2" width="35%"><input type="text" name="price" value="<%=JMath.round(product.getPrice()) %>" size="20" onkeyup="goNext(this.form,this.name);"></td>		
 	</tr>	
 	<tr>
 		<td class="a1" width="15%">预估成本价</td>
-		<td class="a2" width="35%"><input type="text" name="ygcbj" value="0.00" size="20" onkeyup="goNext(this.form,this.name);"></td>	
+		<td class="a2" width="35%"><input type="text" name="ygcbj" value="<%=JMath.round(product.getYgcbj()) %>" size="20" onkeyup="goNext(this.form,this.name);"></td>	
 		<td class="a1" width="15%">考核成本价</td>
-		<td class="a2" width="35%"><input type="text" name="khcbj" value="0.00" size="20" onkeyup="goNext(this.form,this.name);"></td>		
+		<td class="a2" width="35%"><input type="text" name="khcbj" value="<%=JMath.round(product.getKhcbj()) %>" size="20" onkeyup="goNext(this.form,this.name);"></td>		
 	
 	</tr>	
 	<tr>		
 		<td class="a1" width="15%">零售报价</td>
-		<td class="a2" width="35%"><input type="text" name="lsbj" value="0.00" size="20" onkeyup="goNext(this.form,this.name);"></td>	
+		<td class="a2" width="35%"><input type="text" name="lsbj" value="<%=JMath.round(product.getLsbj()) %>" size="20" onkeyup="goNext(this.form,this.name);"></td>	
 		<td class="a1" width="15%">零售限价</td>
-		<td class="a2" width="35%"><input type="text" name="lsxj" value="0.00" size="20" onkeyup="goNext(this.form,this.name);"></td>							
+		<td class="a2" width="35%"><input type="text" name="lsxj" value="<%=JMath.round(product.getLsxj()) %>" size="20" onkeyup="goNext(this.form,this.name);"></td>							
 	</tr>
 	<tr>
 		<td class="a1" width="15%">分销报价</td>
-		<td class="a2" width="35%"><input type="text" name="fxbj" value="0.00" size="20" onkeyup="goNext(this.form,this.name);"></td>		
+		<td class="a2" width="35%"><input type="text" name="fxbj" value="<%=JMath.round(product.getFxbj()) %>" size="20" onkeyup="goNext(this.form,this.name);"></td>		
 		<td class="a1" width="15%">分销限价</td>
-		<td class="a2" width="35%"><input type="text" name="fxxj" value="0.00" size="20" onkeyup="goNext(this.form,this.name);"></td>		
+		<td class="a2" width="35%"><input type="text" name="fxxj" value="<%=JMath.round(product.getFxxj()) %>" size="20" onkeyup="goNext(this.form,this.name);"></td>		
 	</tr>		
 	<tr>		
 		<td class="a1" width="15%">比例点杀</td>
-		<td class="a2" width="35%"><input type="text" name="gf" value="0.00" size="20" onkeyup="goNext(this.form,this.name);">&nbsp;%</td>		
+		<td class="a2" width="35%"><input type="text" name="gf" value="<%=JMath.round(product.getGf()) %>" size="20" onkeyup="goNext(this.form,this.name);">&nbsp;%</td>		
 		<td class="a1" width="15%">金额点杀</td>
-		<td class="a2" width="35%"><input type="text" name="dss" value="0.00" size="20" onkeyup="goNext(this.form,this.name);"></td>
+		<td class="a2" width="35%"><input type="text" name="dss" value="<%=JMath.round(product.getDss()) %>" size="20" onkeyup="goNext(this.form,this.name);"></td>
 	</tr>
 	 
 	<tr>	
 		<td class="a1" width="15%">库存下限</td>
-		<td class="a2" width="35%"><input type="text" name="kcxx" value="0" size="20" onkeyup="goNext(this.form,this.name);"></td>	
+		<td class="a2" width="35%"><input type="text" name="kcxx" value="<%=product.getKcxx() %>" size="20" onkeyup="goNext(this.form,this.name);"></td>	
 		<td class="a1" width="15%">库存上限</td>
-		<td class="a2" width="35%"><input type="text" name="kcsx" value="0" size="20" onkeyup="goNext(this.form,this.name);"></td>	
+		<td class="a2" width="35%"><input type="text" name="kcsx" value="<%=product.getKcsx() %>" size="20" onkeyup="goNext(this.form,this.name);"></td>	
 	</tr>		
 	<tr>	
 		<td class="a1" width="15%">强制序列号</td>
 		<td class="a2" width="35%">
 			<select name="qz_serial_num" onkeyup="goNext(this.form,this.name);">				
-				<option value="否">否</option>
-				<option value="是">是</option>
+				<option value="否" <%if(StringUtils.nullToStr(product.getQz_serial_num()).equals("否")) out.print("selected"); %>>否</option>
+				<option value="是" <%if(StringUtils.nullToStr(product.getQz_serial_num()).equals("是")) out.print("selected"); %>>是</option>
 			</select>
 		</td>	
 		<td class="a1" width="15%">状态</td>
 		<td class="a2" width="35%">
 			<select name="state" onkeyup="goNext(this.form,this.name);">
-				<option value="正常">正常</option>
-				<option value="停售">停售</option>
+				<option value="正常" <%if(StringUtils.nullToStr(product.getState()).equals("正常")) out.print("selected"); %>>正常</option>
+				<option value="停售" <%if(StringUtils.nullToStr(product.getState()).equals("停售")) out.print("selected"); %>>停售</option>
 			</select>
 		</td>
 	</tr>		
 	<tr height="50">
 	    <td class="a1" width="15%">条形码</td>
-		<td class="a2"><input type="text" name="sp_txm" value="" size="20" onkeyup="goNext(this.form,this.name);"></td>	
+		<td class="a2"><input type="text" name="sp_txm" value="<%=product.getSp_txm() %>" size="20" onkeyup="goNext(this.form,this.name);"></td>	
 		
 		<td class="a1" width="15%">属性</td>
 		<td class="a2" width="35%">
 			<select name="prop" onkeyup="goNext(this.form,this.name);">
-				<option value="库存商品">库存商品</option>
-				<option value="服务/劳务">服务/劳务</option>
+				<option value="库存商品" <%if("库存商品".equals(StringUtils.nullToStr(product.getProp()))) out.print("selected"); %>>库存商品</option>
+				<option value="服务/劳务" <%if("服务/劳务".equals(StringUtils.nullToStr(product.getProp()))) out.print("selected"); %>>服务/劳务</option>
 			</select>
 		</td>			
 	</tr>
 	<tr>
+		<td class="a1" width="15%">商品类别</td>
+		<td class="a2" colspan="3">
+			<select name="productKind" onkeyup="goNext(this.form,this.name);">
+				<option value=""></option>
+		<%
+		if(productKindList != null && productKindList.size() > 0){
+			for(int i=0;i<productKindList.size();i++){
+				Map map = (Map)productKindList.get(i);
+				
+				String id = StringUtils.nullToStr(map.get("id"));
+				String name = StringUtils.nullToStr(map.get("name"));	
+				
+				for(int k=0;k<id.length()-2;k++){
+					name = "　" + name;
+				}
+		%>
+				<option value="<%=id %>" <%if(StringUtils.nullToStr(product.getProductKind()).equals(id)) out.print("selected"); %>><%=name %></option>
+		<%
+			}
+		}
+		%>
+			</select>
+		</td>		
+	</tr>
+	<tr>
 	    <td class="a1">产品描述</td>
-		<td class="a2" colspan="3"><input type="text"  name="ms" value=""  style="width:90%" onkeyup="goNext(this.form,this.name);"></td>
+		<td class="a2" colspan="3"><input type="text"  name="ms" value="<%=product.getMs() %>"  style="width:90%" onkeyup="goNext(this.form,this.name);"></td>
 	</tr>
 	<tr height="35">
 		<td class="a1" colspan="4">
