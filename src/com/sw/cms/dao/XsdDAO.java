@@ -479,7 +479,10 @@ public class XsdDAO extends JdbcBaseDAO {
 		if(xsdProducts != null && xsdProducts.size() > 0){
 			for(int i= 0; i<xsdProducts.size(); i++){
 				XsdProduct xsdProduct = (XsdProduct)xsdProducts.get(i);
-				String sql = "update xsd_product set cbj=" + xsdProduct.getCbj() + ",kh_cbj=" + xsdProduct.getKh_cbj() + " where id=" + xsdProduct.getId();
+				String sql = "update xsd_product set cbj=" + xsdProduct.getCbj() + 
+						",kh_cbj=" + xsdProduct.getKh_cbj() + ",ds=" + xsdProduct.getDs() + 
+						",ygcbj=" + xsdProduct.getYgcbj() + ",gf=" + xsdProduct.getGf() + 
+						" where id=" + xsdProduct.getId();
 				
 				this.getJdbcTemplate().update(sql);
 			}

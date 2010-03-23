@@ -155,12 +155,7 @@ public class ThdService {
 		rkd.setRkd_id(rkd_id); 
 		rkd.setJhd_id(thd.getThd_id());//将退货单编号做为进货单号
 		rkd.setCreatdate(thd.getTh_date());
-		if(thd.getState().equals("已入库")){
-			rkd.setState("已入库");
-		}else{
-			rkd.setState("已保存");
-		}
-		
+		rkd.setState("已入库");		
 		rkd.setMs("退货入库，退货日期：" + thd.getTh_date() + ",退货单编号 [" + thd.getThd_id() + "]");
 		rkd.setCgfzr(thd.getTh_fzr());
 		rkd.setCzr(thd.getCzr());
@@ -215,12 +210,10 @@ public class ThdService {
 		
 		rkdDao.saveRkd(rkd, rkdProducts);
 		
-		if(rkd.getState().equals("已入库")){
-			//更新库存数及成本价
-			productKcDao.updateProductKc(rkd, rkdProducts);			
-			//处理序列号
-			this.updateSerialNum(rkd, rkdProducts);		
-		}
+		//更新库存数及成本价
+		productKcDao.updateProductKc(rkd, rkdProducts);			
+		//处理序列号
+		this.updateSerialNum(rkd, rkdProducts);		
 	}
 	
 	

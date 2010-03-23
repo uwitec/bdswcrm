@@ -16,7 +16,6 @@ import com.sw.cms.dao.SysInitSetDAO;
 import com.sw.cms.dao.XsdDAO;
 import com.sw.cms.dao.XsskDAO;
 import com.sw.cms.dao.YufukDAO;
-import com.sw.cms.model.Cgfk;
 import com.sw.cms.model.Ckd;
 import com.sw.cms.model.CkdProduct;
 import com.sw.cms.model.Page;
@@ -107,7 +106,6 @@ public class CkdService {
 			this.updateXsdState(ckd.getXsd_id(), "已出库",ckd.getYsfs(),ckd.getCx_tel(),ckd.getJob_no(),ckd.getSend_time(),ckd.getStore_id(),ckd.getFzr(),ckd.getCk_date());
 		}
 	}
-		
 	
 	
 	/**
@@ -128,8 +126,13 @@ public class CkdService {
 						XsdProduct xsdProduct = (XsdProduct)xsdDao.getXsdProductInfo(ckd.getXsd_id(), cdkProduct.getProduct_id());
 						Product product = (Product)productDao.getProductById(cdkProduct.getProduct_id());
 						
-						xsdProduct.setCbj(product.getPrice());
-						xsdProduct.setKh_cbj(product.getKhcbj());
+						//回写出库时的成本价等信息
+						xsdProduct.setCbj(product.getPrice());     //成本价
+						xsdProduct.setKh_cbj(product.getKhcbj());  //考核成本价
+						xsdProduct.setYgcbj(product.getYgcbj());   //预估成本价
+						xsdProduct.setGf(product.getGf());         //工分(比例点杀)
+						xsdProduct.setDs(product.getDss());        //金额点杀
+						
 						xsdProducts.add(xsdProduct);
 						
 						cdkProduct.setCbj(product.getPrice());  //成本价取当前库存的成本价
@@ -171,13 +174,6 @@ public class CkdService {
 			
 			//更新相应分销订单的物流状态
 			this.updateFxddState(ckd.getXsd_id(), "已出库",ckd.getYsfs(),ckd.getCx_tel(),ckd.getJob_no(),ckd.getSend_time());
-			
-			//如果采购退货单,修改采购退货单状态及退回标记
-			if(ckd.getXsd_id().indexOf("CGTH") != -1){
-				cgthdDao.updateCgthdState(ckd.getXsd_id(), "已出库");
-			}
-			
-
 		}
 	}
 
@@ -214,8 +210,6 @@ public class CkdService {
 	
 	/**
 	 * 出库单退回订单操作
-	 * 两种情况：一、销售订单；二、采购退货单
-	 * 对两种情况分别进行处理
 	 * @param ckd
 	 */
 	public void doTh(Ckd ckd){
@@ -246,30 +240,6 @@ public class CkdService {
 				//减账户金额
 				accountsDao.updateAccountJe(xssk.getSkzh(), xssk.getSkje());
 			}
-		}
-		
-		//如果采购退货单,修改采购退货单状态及退回标记
-		if(xsd_id.indexOf("CGTH") != -1){
-			cgthdDao.updateCgthdAfterCkdTh(xsd_id, "已保存", "1");
-			
-			//查看采购退货单提交时，是否现金退货
-			//如果采购退货单是现金退货，需要删除相关付款信息
-			Cgfk cgfk = cgfkDao.getCgfkByDeleteKey(xsd_id);
-			
-			if(cgfk != null){
-				
-				//删除采购付款信息
-				cgfkDao.delCgfk(cgfk.getId());
-				
-				//删除账户流水信息
-				accountDzdDao.delDzd(cgfk.getId());
-				
-				//加账户金额(负值)
-				accountsDao.addAccountJe(cgfk.getFkzh(), cgfk.getFkje());
-			}
-			
-			//如果存应付转预款信息则清除
-			yufukDao.delYufuk(xsd_id);
 		}
 	}
 	

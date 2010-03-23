@@ -90,7 +90,6 @@ public class RkdService{
 			
 			//更新相关业务单据状态为已入库
 			jhdDao.updateJhdState(rkd.getJhd_id(), "已入库");
-			thdDao.updateThdState(rkd.getJhd_id(), "已入库");
 			
 			this.updateSerialNum(rkd, rkdProducts);
 		}
@@ -249,30 +248,6 @@ public class RkdService{
 				//更新账户金额
 				accountsDao.addAccountJe(cgfk.getFkzh(), cgfk.getFkje());
 			}
-		}
-		
-		//如果是销售退货单,修改销售退货单状态及退回标记
-		if(jhd_id.indexOf("TH") != -1){
-			thdDao.updateThdAfterRkdTh(jhd_id, "已保存", "1");
-			
-			//检查销售退货时，是否发生负收款信息
-			//如果发生，在退回订单时需要处理销售收款信息、现金流水、账户金额
-			Xssk xssk = xsskDao.getXsskByDeleteKey(jhd_id);
-			
-			if(xssk != null){
-				
-				//删除销售收款信息
-				xsskDao.delXssk(xssk.getId());
-				
-				//删除现金流水信息
-				accountDzdDao.delDzd(xssk.getId());
-				
-				//更新账户金额(减去负值)
-				accountsDao.updateAccountJe(xssk.getSkzh(), xssk.getSkje());
-			}
-			
-			//如果存在应收转预收款，则清除预收款信息
-			yushoukDao.delYushouk(jhd_id);
 		}
 	}
 	

@@ -213,12 +213,7 @@ public class CgthdService {
 		ckd.setCreatdate(cgthd.getTh_date());
 		ckd.setCzr(cgthd.getCzr());
 		ckd.setMs("采购退货出库，采购退货单编号[" + cgthd.getId() + "]");
-		if(cgthd.getState().equals("已出库")){
-			ckd.setState("已出库");
-		}else{
-			ckd.setState("已保存");
-		}
-		
+		ckd.setState("已出库");		
 		ckd.setXsd_id(cgthd.getId());
 		ckd.setXsry(cgthd.getJsr());
 		ckd.setCk_date(cgthd.getTh_date());
@@ -251,14 +246,9 @@ public class CgthdService {
 		
 		ckdDao.saveCkd(ckd, ckdProducts);
 		
-		if(ckd.getState().equals("已出库")){
-			this.updateProductKc(ckd, ckdProducts); //修改库存
-			
-			//只有在系统正式使用后才去处理序列号
-			//if(sysInitSetDao.getQyFlag().equals("1")){			
-			this.updateSerialNum(ckd, ckdProducts); //处理序列号
-			//}			
-		}
+		this.updateProductKc(ckd, ckdProducts); //修改库存
+		
+		this.updateSerialNum(ckd, ckdProducts); //处理序列号
 		
 	}
 	

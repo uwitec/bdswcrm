@@ -71,6 +71,8 @@ public class JhdAction extends BaseAction {
 	private String product_name = "";
 	private String product_kind = "";
 	
+	private String client_id = "";
+	
 	
 	//打印所需参数
 	private String creatdate = "";
@@ -280,6 +282,38 @@ public class JhdAction extends BaseAction {
 			log.error("打印采购计单出错，原因：" + e);
 			return "error";
 		}
+	}
+	
+	
+	public String selSubmitJhd(){
+		// 查询条件
+		int rowsPerPage = Constant.PAGE_SIZE;
+
+		String con = " and state='已入库'";
+		if(!id.equals("")){
+			con += " and id='" + id + "'";
+		}
+		if (!client_id.equals("")) {
+			con += " and gysbh='" + client_id + "'";
+		}
+		if (!cg_date.equals("")) {
+			con += " and cg_date>='" + cg_date + "'";
+		}
+		if (!cg_date2.equals("")) {
+			con += " and cg_date<='" + (cg_date2 + " 23:59:59") + "'";
+		}		
+		if(orderName.equals("")){
+			orderName = "id";
+		}
+		if(orderType.equals("")){
+			orderType = "desc";
+		}
+		
+		con += " order by " + orderName + " " + orderType;
+
+		jhdPage = jhdService.getJhdList(con, curPage, rowsPerPage);
+
+		return "success";
 	}
 
 
@@ -641,5 +675,13 @@ public class JhdAction extends BaseAction {
 
 	public void setFkrq(String fkrq) {
 		this.fkrq = fkrq;
+	}
+
+	public String getClient_id() {
+		return client_id;
+	}
+
+	public void setClient_id(String clientId) {
+		client_id = clientId;
 	}
 }
