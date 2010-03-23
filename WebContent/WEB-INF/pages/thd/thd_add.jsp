@@ -12,7 +12,7 @@ String thd_id = (String)VS.findValue("thd_id");
 
 <html>
 <head>
-<title>添加退货单</title>
+<title>销售退货单</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript" src="js/Check.js"></script>
@@ -27,7 +27,14 @@ String thd_id = (String)VS.findValue("thd_id");
 <script type="text/javascript">
 	var allCount = 2;
 	
-	function saveInfo(){
+	function saveInfo(vl){
+
+		if(vl == "1"){
+			document.getElementById("state").value = "已保存";
+		}else{
+			document.getElementById("state").value = "已入库";
+		}
+		
 		if(document.getElementById("thd_id").value == ""){
 			alert("退货单编号不能为空！");
 			return;
@@ -44,10 +51,14 @@ String thd_id = (String)VS.findValue("thd_id");
 			alert("经手人不能为空，请选择！");
 			return;
 		}
+		if(document.getElementById("store_id").value == ""){
+			alert("退货库房不能为空，请选择！");
+			return;
+		}
 		if(document.getElementById("remark").value == ""){
 			alert("退货原因不能为空！");
 			return;
-		}			
+		}	
 		if(document.getElementById("type").value == "现金"){
 			if(document.getElementById("skzh").value == ""){
 				alert("退款账号不能为空，请选择！");
@@ -56,60 +67,50 @@ String thd_id = (String)VS.findValue("thd_id");
 		}			
 		
 		//判断是否存在强制输入序列号的产品没有输入序列号
-		//只有在状态为已入库时才进行强制序列号及入库库房的判断
-		if(document.getElementById("state").value == "已入库"){
-		
-			if(document.getElementById("store_id").value == ""){
-				alert("入库库房不能为空，请选择！");
-				return;
-			}		
-		
-			for(var i=0;i<allCount;i++){
-				var qzflag = document.getElementById("qz_flag_" + i);            //标志是否强制输入
-				var qzserialnum = document.getElementById("qz_serial_num_" + i); //序列号
-				var pn = document.getElementById("product_name_" + i);           //产品名称
-				
-				if(qzflag != null){
-					if(qzflag.value == "是"){
-						if(qzserialnum.value == ""){
-							//如果没有输入序列号提示用户输入序列号
-							alert("产品" + pn.value + "强制序列号，请先输入序列号！");
+		for(var i=0;i<allCount;i++){
+			var qzflag = document.getElementById("qz_flag_" + i);            //标志是否强制输入
+			var qzserialnum = document.getElementById("qz_serial_num_" + i); //序列号
+			var pn = document.getElementById("product_name_" + i);           //产品名称
+			
+			if(qzflag != null){
+				if(qzflag.value == "是"){
+					if(qzserialnum.value == ""){
+						//如果没有输入序列号提示用户输入序列号
+						alert("产品" + pn.value + "强制序列号，请先输入序列号！");
+						qzserialnum.focus();
+						return;
+					}else{
+						//校验输入数量与产品数是否相同
+						var serial = document.getElementById("qz_serial_num_" + i).value;
+						var arrySerial = serial.split(",");
+						
+						var nms = document.getElementById("nums_" + i).value;
+						
+						if(parseInt(nms) != arrySerial.length){
+							alert("产品" + pn.value + "输入序列号数量与产品数量不符，请检查！");
 							qzserialnum.focus();
 							return;
-						}else{
-							//校验输入数量与产品数是否相同
-							var serial = document.getElementById("qz_serial_num_" + i).value;
-							var arrySerial = serial.split(",");
-							
-							var nms = document.getElementById("nums_" + i).value;
-							
-							if(parseInt(nms) != arrySerial.length){
-								alert("产品" + pn.value + "输入序列号数量与产品数量不符，请检查！");
-								qzserialnum.focus();
-								return;
-							}
 						}
 					}
 				}
-			}		
+			}
 		}		
 					
 		hj();
-		document.thdForm.submit();
-		document.thdForm.btnSave.disabled = true;
-	}
-	
-	
-	function chgState(vl){
-		var obj = document.getElementById("store_id");
-		if(vl == "已入库"){
-			obj.style.display = "";
+
+		if(document.getElementById("state").value == "已入库"){
+			if(window.confirm("确认要入库吗，入库后将无法修改！")){
+				document.thdForm.submit();		
+			}else{
+				return;
+			}			
 		}else{
-			obj.style.display = "none";
-			obj.style.value = "";
+			document.thdForm.submit();	
 		}
+		
+		document.thdForm.btnSave.disabled = true;
+		document.thdForm.btnSub.disabled = true;
 	}
-	
 	
 	function openSerialWin(vl){
 		var pn = document.getElementById("product_name_" + vl).value;
@@ -196,27 +197,12 @@ String thd_id = (String)VS.findValue("thd_id");
 		window.open(destination,'详细信息',fea);	
 	}
 	
-	function openClientWin(){
-		var destination = "selectClient.html";
-		var fea ='width=800,height=500,left=' + (screen.availWidth-800)/2 + ',top=' + (screen.availHeight-500)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
-		
-		window.open(destination,'详细信息',fea);		
-	}
-	
 	function openAccount(){
 		var destination = "selSkAccount.html";
 		var fea ='width=400,height=200,left=' + (screen.availWidth-400)/2 + ',top=' + (screen.availHeight-200)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
 		window.open(destination,'选择账户',fea);		
 	}
-	
-	function openywyWin()
-	{
-	   var destination = "selLsEmployee.html";
-		var fea ='width=800,height=500,left=' + (screen.availWidth-800)/2 + ',top=' + (screen.availHeight-500)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
-		
-		window.open(destination,'选择经手人',fea);	
-	}			
 
 	function selXsd(){
 		var destination = "selXsd.html";
@@ -349,10 +335,11 @@ String thd_id = (String)VS.findValue("thd_id");
 <body onload="initFzrTip();initClientTip();">
 <form name="thdForm" action="saveThd.html" method="post">
 <input type="hidden" name="thd.xsd_id" id="xsd_id" value="">
+<input type="hidden" name="thd.state" id="state" value="">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
-		<td colspan="4">退货单信息</td>
+		<td colspan="4">销售退货单</td>
 	</tr>
 	</thead>
 	<tr>
@@ -388,16 +375,9 @@ String thd_id = (String)VS.findValue("thd_id");
 				<option value="冲抵往来">冲抵往来</option>
 			</select><span style="color:red">*</span>
 		</td>
-		<td class="a1">状&nbsp;&nbsp;态</td>
+		<td class="a1">退货库房</td>
 		<td class="a2">
-			<select name="thd.state" id="state" onchange="chgState(this.value);">
-				<option value="已保存">保存</option>
-				<option value="已提交">提交</option>
-				<option value="已入库">入库</option>
-			</select>	
-			
-			<!-- 选择库房 -->
-			<select name="thd.store_id" id="store_id" title="入库库房" style="display:none">
+			<select name="thd.store_id" id="store_id" title="退货库房">
 				<option value=""></option>
 			<%
 			if(storeList != null && storeList.size()>0){
@@ -483,7 +463,7 @@ for(int i=0;i<3;i++){
 	<tr height="35">
 		<td class="a2" colspan="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="button" name="button1" value="添加一行" class="css_button2" onclick="addTr();">
-			<input type="button" name="button1" value="关联销售订单" class="css_button4" onclick="selXsd();">
+			<input type="button" name="button1" value="关联销售订单" class="css_button3" onclick="selXsd();">
 			<input type="button" name="button1" value="关联零售单" class="css_button3" onclick="selLsd();">
 		</td>
 	</tr>
@@ -539,8 +519,8 @@ for(int i=0;i<3;i++){
 	</tr>	
 	<tr height="35">
 		<td class="a1" colspan="4">
-			<input type="button" name="btnSave" value="确 定" class="css_button2" onclick="saveInfo();">&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="reset" name="button2" value="重 置" class="css_button2">&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="button" name="btnSave" value="草 稿" class="css_button2" onclick="saveInfo('1');">&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="button" name="btnSub" value="入 库" class="css_button2" onclick="saveInfo('2');">&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="button" name="button3" value="关 闭" class="css_button2" onclick="window.close();">
 		</td>
 	</tr>

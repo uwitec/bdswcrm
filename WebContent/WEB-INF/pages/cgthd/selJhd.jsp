@@ -9,11 +9,11 @@
 OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
 
 Page results = (Page)VS.findValue("jhdPage");
-List providers = (List)VS.findValue("providers");
 
-String gysbh = (String)VS.findValue("gysbh");
-String state = (String)VS.findValue("state");
+String client_id = (String)VS.findValue("client_id");
 String cg_date = (String)VS.findValue("cg_date");
+String cg_date2 = (String)VS.findValue("cg_date2");
+String id = (String)VS.findValue("id");
 
 String orderName = (String)VS.findValue("orderName");
 String orderType = (String)VS.findValue("orderType");
@@ -35,31 +35,11 @@ String orderType = (String)VS.findValue("orderType");
 		window.open(destination,'详细信息',fea);	
 	}
 	
-	function del(id){
-		if(confirm("确定要删除该条记录吗！")){
-			location.href = "delJhd.html?id=" + id;
-		}
-	}
-	
 	function clearAll(){
-		document.myform.gysbh.value = "";
-		document.myform.state.value = "";
+		document.myform.id.value = "";
 		document.myform.cg_date.value = "";
+		document.myform.cg_date2.value = "";
 	}
-	
-	function add(){
-		var destination = "addJhd.html";
-		var fea ='width=800,height=700,left=' + (screen.availWidth-800)/2 + ',top=' + (screen.availHeight-700)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
-		
-		window.open(destination,'添加进货单',fea);	
-	}
-	
-	function edit(id){
-		var destination = "editJhd.html?id=" + id;
-		var fea ='width=800,height=700,left=' + (screen.availWidth-800)/2 + ',top=' + (screen.availHeight-700)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
-		
-		window.open(destination,'修改进货单',fea);		
-	}	
 	
 	function doSort(order_name){
 		if(myform.orderType.value=='asc'){
@@ -86,22 +66,17 @@ String orderType = (String)VS.findValue("orderType");
 	}
 </script>
 </head>
-<body oncontextmenu="return false;" >
+<body>
 <form name="myform" action="selJhd.html" method="post">
 <input type="hidden" name="orderType" value="<%=orderType %>">
 <input type="hidden" name="orderName" value="<%=orderName %>">
+<input type="hidden" name="client_id" value="<%=client_id %>">
 <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0">
 	<tr>
 		<td class="search" align="left" colspan="2">&nbsp;
-			供货单位：<input type="text" name="gysbh" value="<%=gysbh %>">
-			&nbsp;&nbsp;&nbsp;
-			进货单状态：
-			<select name="state">
-				<option value=""></option>
-				<option value="已保存" <%if(state.equals("已保存")) out.print("selected"); %>>已保存</option>
-				<option value="已提交" <%if(state.equals("已提交")) out.print("selected"); %>>已提交</option>
-			</select>&nbsp;&nbsp;&nbsp;
-			采购日期：<input type="text" name="cg_date" value="<%=cg_date %>" size="15"  class="Wdate" onFocus="WdatePicker()">	
+			采购订单编号：<input type="text" name="id" id="id" value="<%=id %>" maxlength="20">
+			采购日期：<input type="text" name="cg_date" value="<%=cg_date %>" size="15"  class="Wdate" onFocus="WdatePicker()">&nbsp;&nbsp;至&nbsp;&nbsp;
+			<input type="text" name="cg_date2" value="<%=cg_date2 %>" size="15"  class="Wdate" onFocus="WdatePicker()">
 			&nbsp;&nbsp;
 			<input type="submit" name="buttonCx" value=" 查询 " class="css_button2">&nbsp;
 			<input type="button" name="buttonQk" value=" 清空 " class="css_button2" onclick="clearAll();">

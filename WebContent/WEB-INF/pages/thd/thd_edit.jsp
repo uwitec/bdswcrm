@@ -20,7 +20,7 @@ if(thdProducts != null && thdProducts.size() > 0){
 
 <html>
 <head>
-<title>退货单管理</title>
+<title>销售退货单</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript" src="js/Check.js"></script>
@@ -30,16 +30,20 @@ if(thdProducts != null && thdProducts.size() > 0){
 <script language='JavaScript' src="js/selJsr.js"></script>
 <script type="text/javascript" src="js/prototype-1.4.0.js"></script>
 <style>
-	.selectTip{
-		background-color:#009;
-		 color:#fff;
-	}
+	.selectTip{background-color:#009;color:#fff;}
 </style>
 <script type="text/javascript">
 
 	var allCount = <%=counts %>;
 	
-	function saveInfo(){
+	function saveInfo(vl){
+
+		if(vl == "1"){
+			document.getElementById("state").value = "已保存";
+		}else{
+			document.getElementById("state").value = "已入库";
+		}
+		
 		if(document.getElementById("thd_id").value == ""){
 			alert("退货单编号不能为空！");
 			return;
@@ -56,10 +60,14 @@ if(thdProducts != null && thdProducts.size() > 0){
 			alert("经手人不能为空，请选择！");
 			return;
 		}	
+		if(document.getElementById("store_id").value == ""){
+			alert("退货库房不能为空，请选择！");
+			return;
+		}
 		if(document.getElementById("remark").value == ""){
 			alert("退货原因不能为空！");
 			return;
-		}				
+		}
 		if(document.getElementById("type").value == "现金"){
 			if(document.getElementById("skzh").value == ""){
 				alert("退款账号不能为空，请选择！");
@@ -68,59 +76,48 @@ if(thdProducts != null && thdProducts.size() > 0){
 		}
 		
 		//判断是否存在强制输入序列号的产品没有输入序列号
-		//只有在状态为已入库时才进行强制序列号及入库库房的判断
-		if(document.getElementById("state").value == "已入库"){
-		
-			if(document.getElementById("store_id").value == ""){
-				alert("入库库房不能为空，请选择！");
-				return;
-			}		
-		
-			for(var i=0;i<allCount;i++){
-				var qzflag = document.getElementById("qz_flag_" + i);            //标志是否强制输入
-				var qzserialnum = document.getElementById("qz_serial_num_" + i); //序列号
-				var pn = document.getElementById("product_name_" + i);           //产品名称
-				
-				if(qzflag != null){
-					if(qzflag.value == "是"){
-						if(qzserialnum.value == ""){
-							//如果没有输入序列号提示用户输入序列号
-							alert("产品" + pn.value + "强制序列号，请先输入序列号！");
+		for(var i=0;i<allCount;i++){
+			var qzflag = document.getElementById("qz_flag_" + i);            //标志是否强制输入
+			var qzserialnum = document.getElementById("qz_serial_num_" + i); //序列号
+			var pn = document.getElementById("product_name_" + i);           //产品名称
+			
+			if(qzflag != null){
+				if(qzflag.value == "是"){
+					if(qzserialnum.value == ""){
+						//如果没有输入序列号提示用户输入序列号
+						alert("产品" + pn.value + "强制序列号，请先输入序列号！");
+						qzserialnum.focus();
+						return;
+					}else{
+						//校验输入数量与产品数是否相同
+						var serial = document.getElementById("qz_serial_num_" + i).value;
+						var arrySerial = serial.split(",");
+						
+						var nms = document.getElementById("nums_" + i).value;
+						
+						if(parseInt(nms) != arrySerial.length){
+							alert("产品" + pn.value + "输入序列号数量与产品数量不符，请检查！");
 							qzserialnum.focus();
 							return;
-						}else{
-							//校验输入数量与产品数是否相同
-							var serial = document.getElementById("qz_serial_num_" + i).value;
-							var arrySerial = serial.split(",");
-							
-							var nms = document.getElementById("nums_" + i).value;
-							
-							if(parseInt(nms) != arrySerial.length){
-								alert("产品" + pn.value + "输入序列号数量与产品数量不符，请检查！");
-								qzserialnum.focus();
-								return;
-							}
 						}
 					}
 				}
-			}		
+			}
 		}		
 					
 		hj();
-		document.thdForm.submit();
-
-		document.thdForm.btnSave.disabled = true;
-	}
-	
-	
-	function chgState(vl){
-		var obj = document.getElementById("store_id");
-		if(vl == "已入库"){
-			obj.style.display = "";
+		if(document.getElementById("state").value == "已入库"){
+			if(window.confirm("确认要入库吗，入库后将无法修改！")){
+				document.thdForm.submit();		
+			}else{
+				return;
+			}		
 		}else{
-			obj.style.display = "none";
-			obj.style.value = "";
+			document.thdForm.submit();	
 		}
+		
+		document.thdForm.btnSave.disabled = true;
+		document.thdForm.btnSub.disabled = true;
 	}
 	
 	function openSerialWin(vl){
@@ -151,28 +148,12 @@ if(thdProducts != null && thdProducts.size() > 0){
 		window.open(destination,'详细信息',fea);	
 	}
 	
-	function openClientWin(){
-		var destination = "selectClient.html";
-		var fea ='width=800,height=500,left=' + (screen.availWidth-800)/2 + ',top=' + (screen.availHeight-500)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
-		
-		window.open(destination,'详细信息',fea);		
-	}
-	
-		function openywyWin()
-	{
-	   var destination = "selLsEmployee.html";
-		var fea ='width=800,height=500,left=' + (screen.availWidth-800)/2 + ',top=' + (screen.availHeight-500)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
-		
-		window.open(destination,'选择经手人',fea);	
-	}			
-	
 	function openAccount(){
 		var destination = "selSkAccount.html";
 		var fea ='width=400,height=200,left=' + (screen.availWidth-400)/2 + ',top=' + (screen.availHeight-200)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
 		window.open(destination,'选择账户',fea);		
 	}		
-
 	
 	function hj(){
 		var length = (document.getElementById('thtable').rows.length-2);
@@ -301,10 +282,11 @@ if(thdProducts != null && thdProducts.size() > 0){
 <body onload="initFzrTip();initClientTip();initVis();chgKpTyle('<%=StringUtils.nullToStr(thd.getFplx()) %>');">
 <form name="thdForm" action="updateThd.html" method="post">
 <input type="hidden" name="thd.xsd_id" id="xsd_id" value="<%=StringUtils.nullToStr(thd.getXsd_id()) %>">
+<input type="hidden" name="thd.state" id="state" value="">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
-		<td colspan="4">退货单信息</td>
+		<td colspan="4">销售退货单</td>
 	</tr>
 	</thead>
 	<tr>
@@ -339,22 +321,9 @@ if(thdProducts != null && thdProducts.size() > 0){
 				<option value="冲抵往来" <%if(StringUtils.nullToStr(thd.getType()).equals("冲抵往来")) out.print("selected"); %>>冲抵往来</option>
 			</select>			
 		</td>
-		<td class="a1">状&nbsp;&nbsp;态</td>
+		<td class="a1">退货库房</td>
 		<td class="a2">
-			<select name="thd.state" id="state" onchange="chgState(this.value);">
-				<option value="已保存" <%if(StringUtils.nullToStr(thd.getState()).equals("已保存")) out.print("selected"); %>>保存</option>
-				<option value="已提交" <%if(StringUtils.nullToStr(thd.getState()).equals("已提交")) out.print("selected"); %>>提交</option>
-				<option value="已入库" <%if(StringUtils.nullToStr(thd.getState()).equals("已入库")) out.print("selected"); %>>入库</option>
-			</select>
-			
-			<%
-			String cssStyle = "display:none";
-			if(StringUtils.nullToStr(thd.getState()).equals("已入库")){
-				cssStyle = "";
-			}
-			%>
-			<!-- 选择库房 -->
-			<select name="thd.store_id" id="store_id" style="<%=cssStyle %>" title="入库库房">
+			<select name="thd.store_id" id="store_id">
 				<option value=""></option>
 			<%
 			if(storeList != null && storeList.size()>0){
@@ -523,8 +492,8 @@ if(thdProducts!=null && thdProducts.size()>0){
 	</tr>	
 	<tr height="35">
 		<td class="a1" colspan="4">
-			<input type="button" name="btnSave" value="确 定" class="css_button2" onclick="saveInfo();">&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="reset" name="button2" value="重 置" class="css_button2">&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="button" name="btnSave" value="草 稿" class="css_button2" onclick="saveInfo('1');">&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="button" name="btnSub" value="入 库" class="css_button2" onclick="saveInfo('2');">&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="button" name="button3" value="关 闭" class="css_button2" onclick="window.close();">
 		</td>
 	</tr>

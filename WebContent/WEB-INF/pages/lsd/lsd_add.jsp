@@ -116,7 +116,9 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 		if(document.getElementById("state").value == "已提交"){
 			if(window.confirm("确认要提交零售单吗，提交后将无法修改！")){
 				document.lsdForm.submit();		
-			}			
+			}else{
+				return;
+			}
 		}else{
 			document.lsdForm.submit();	
 		}
