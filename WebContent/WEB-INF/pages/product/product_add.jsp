@@ -80,17 +80,12 @@ String[] jldw = (String[])VS.findValue("jldw");
 				%>
 			</select>
 		</td>
-		<td class="a1" width="15%">属性</td>
-		<td class="a2" width="35%">
-			<select name="prop" onkeyup="goNext(this.form,this.name);">
-				<option value="库存商品">库存商品</option>
-				<option value="服务/劳务">服务/劳务</option>
-			</select>
-		</td>		
+		<td class="a1" width="15%">移动加权价</td>
+		<td class="a2" width="35%"><input type="text" name="price" value="0.00" size="20" onkeyup="goNext(this.form,this.name);"></td>		
 	</tr>	
 	<tr>
-		<td class="a1" width="15%">移动加权价</td>
-		<td class="a2" width="35%"><input type="text" name="price" value="0.00" size="20" onkeyup="goNext(this.form,this.name);"></td>
+		<td class="a1" width="15%">预估成本价</td>
+		<td class="a2" width="35%"><input type="text" name="ygcbj" value="0.00" size="20" onkeyup="goNext(this.form,this.name);"></td>	
 		<td class="a1" width="15%">考核成本价</td>
 		<td class="a2" width="35%"><input type="text" name="khcbj" value="0.00" size="20" onkeyup="goNext(this.form,this.name);"></td>		
 	
@@ -114,15 +109,20 @@ String[] jldw = (String[])VS.findValue("jldw");
 		<td class="a2" width="35%"><input type="text" name="dss" value="0.00" size="20" onkeyup="goNext(this.form,this.name);"></td>
 	</tr>
 	 
-	<tr>		
-		<td class="a1" width="15%">预估成本价</td>
-		<td class="a2" width="35%"><input type="text" name="ygcbj" value="0.00" size="20" onkeyup="goNext(this.form,this.name);"></td>		
+	<tr>	
 		<td class="a1" width="15%">库存下限</td>
 		<td class="a2" width="35%"><input type="text" name="kcxx" value="0" size="20" onkeyup="goNext(this.form,this.name);"></td>	
+		<td class="a1" width="15%">库存上限</td>
+		<td class="a2" width="35%"><input type="text" name="kcsx" value="0" size="20" onkeyup="goNext(this.form,this.name);"></td>	
 	</tr>		
 	<tr>	
-		<td class="a1" width="15%">条形码</td>
-		<td class="a2"><input type="text" name="sp_txm" value="" size="20" onkeyup="goNext(this.form,this.name);"></td>		
+		<td class="a1" width="15%">强制序列号</td>
+		<td class="a2" width="35%">
+			<select name="qz_serial_num" onkeyup="goNext(this.form,this.name);">				
+				<option value="否">否</option>
+				<option value="是">是</option>
+			</select>
+		</td>	
 		<td class="a1" width="15%">状态</td>
 		<td class="a2" width="35%">
 			<select name="state" onkeyup="goNext(this.form,this.name);">
@@ -132,15 +132,20 @@ String[] jldw = (String[])VS.findValue("jldw");
 		</td>
 	</tr>		
 	<tr height="50">
-		<td class="a1" width="15%">强制序列号</td>
+	    <td class="a1" width="15%">条形码</td>
+		<td class="a2"><input type="text" name="sp_txm" value="" size="20" onkeyup="goNext(this.form,this.name);"></td>	
+		
+		<td class="a1" width="15%">属性</td>
 		<td class="a2" width="35%">
-			<select name="qz_serial_num" onkeyup="goNext(this.form,this.name);">				
-				<option value="否">否</option>
-				<option value="是">是</option>
+			<select name="prop" onkeyup="goNext(this.form,this.name);">
+				<option value="库存商品">库存商品</option>
+				<option value="服务/劳务">服务/劳务</option>
 			</select>
-		</td>	
-		<td class="a1">产品描述</td>
-		<td class="a2"><input type="text" name="ms" value=""  style="width:80%" onkeyup="goNext(this.form,this.name);"></td>
+		</td>			
+	</tr>
+	<tr>
+	    <td class="a1">产品描述</td>
+		<td class="a2" colspan="3"><input type="text"  name="ms" value=""  style="width:90%" onkeyup="goNext(this.form,this.name);"></td>
 	</tr>
 	<tr height="35">
 		<td class="a1" colspan="4">
