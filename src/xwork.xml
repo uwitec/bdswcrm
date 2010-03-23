@@ -1147,7 +1147,7 @@
         <action name="delCgthd" class="cgthdAction" method="del">
             <result name="success" type="redirect">listCgthd.html</result>
         </action>
-        <action name="selJhd" class="jhdAction" method="list">
+        <action name="selJhd" class="jhdAction" method="selSubmitJhd">
             <result name="success">/WEB-INF/pages/cgthd/selJhd.jsp</result>
         </action>
         <action name="descSelJhd" class="jhdAction" method="getJhdDesc">
