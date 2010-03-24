@@ -288,20 +288,25 @@ if(rkdProducts != null && rkdProducts.size()>0){
 		Map rkdProduct = (Map)rkdProducts.get(i);
 		
 		double price = rkdProduct.get("price")==null?0:((Double)rkdProduct.get("price")).doubleValue();
+		
+		String cssStyle = "";
+		if(StringUtils.nullToStr(rkdProduct.get("qz_flag")).equals("是")){
+			cssStyle = "color:red";
+		}
 %>
 	<tr>
 		<td class="a2">
-			<input type="text" id="product_name_<%=i %>" name="rkdProducts[<%=i %>].product_name" style="width:100%" readonly value="<%=StringUtils.nullToStr(rkdProduct.get("product_name")) %>">
+			<input type="text" id="product_name_<%=i %>" name="rkdProducts[<%=i %>].product_name" style="width:100%;<%=cssStyle %>" readonly value="<%=StringUtils.nullToStr(rkdProduct.get("product_name")) %>">
 			<input type="hidden" id="product_id_<%=i %>" name="rkdProducts[<%=i %>].product_id" value="<%=StringUtils.nullToStr(rkdProduct.get("product_id")) %>">
 			<input type="hidden" id="price_<%=i %>"  name="rkdProducts[<%=i %>].price" value="<%=JMath.round(price) %>" readonly>
 		</td>
-		<td class="a2"><input type="text" size="10" id="product_xh_<%=i %>" style="width:100%" name="rkdProducts[<%=i %>].product_xh" value="<%=StringUtils.nullToStr(rkdProduct.get("product_xh")) %>" readonly></td>
-		<td class="a2"><input type="text" size="5" id="nums_<%=i %>" style="width:100%" name="rkdProducts[<%=i %>].nums"  value="<%=StringUtils.nullToStr(rkdProduct.get("nums")) %>" readonly><input type="hidden" id="xj_<%=i %>" name="rkdProducts[<%=i %>].xj" readonly></td>
+		<td class="a2"><input type="text" size="10" id="product_xh_<%=i %>" style="width:100%;<%=cssStyle %>" name="rkdProducts[<%=i %>].product_xh" value="<%=StringUtils.nullToStr(rkdProduct.get("product_xh")) %>" readonly></td>
+		<td class="a2"><input type="text" size="5" id="nums_<%=i %>" style="width:100%;<%=cssStyle %>" name="rkdProducts[<%=i %>].nums"  value="<%=StringUtils.nullToStr(rkdProduct.get("nums")) %>" readonly><input type="hidden" id="xj_<%=i %>" name="rkdProducts[<%=i %>].xj" readonly></td>
 		<td class="a2">
-			<input type="text" id="qz_serial_num_<%=i %>" name="rkdProducts[<%=i %>].qz_serial_num" style="width:85%"  value="<%=StringUtils.nullToStr(rkdProduct.get("qz_serial_num")) %>" readonly>
+			<input type="text" id="qz_serial_num_<%=i %>" name="rkdProducts[<%=i %>].qz_serial_num" style="width:85%;<%=cssStyle %>"  value="<%=StringUtils.nullToStr(rkdProduct.get("qz_serial_num")) %>" readonly>
 			<input type="hidden" id="qz_flag_<%=i %>" name="rkdProducts[<%=i %>].qz_flag"  value="<%=StringUtils.nullToStr(rkdProduct.get("qz_flag")) %>"><a style="cursor:hand" title="左键点击输入输列号" onclick="openSerialWin('<%=i %>');"><b>...</b></a>&nbsp;
 		</td>		
-		<td class="a2"><input type="text" size="10" id="remark_<%=i %>" style="width:100%" name="rkdProducts[<%=i %>].remark" value="<%=StringUtils.nullToStr(rkdProduct.get("remark")) %>"></td>
+		<td class="a2"><input type="text" size="10" id="remark_<%=i %>" style="width:100%;<%=cssStyle %>" name="rkdProducts[<%=i %>].remark" value="<%=StringUtils.nullToStr(rkdProduct.get("remark")) %>"></td>
 	</tr>
 <%
 	}
@@ -310,6 +315,9 @@ if(rkdProducts != null && rkdProducts.size()>0){
 </table>	
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
 	<tr>
+		<td class="a2" colspan="2">注：列表中红色字体显示商品为强制序列号商品，必须输入序列号。</td>
+	</tr>
+	<tr>
 		<td class="a1" width="15%">描述信息</td>
 		<td class="a2" width="85%">
 			<textarea rows="3" name="rkd.ms" id="ms" style="width:75%"><%=StringUtils.nullToStr(rkd.getMs()) %></textarea>
@@ -317,15 +325,13 @@ if(rkdProducts != null && rkdProducts.size()>0){
 	</tr>	
 	<tr height="35">
 		<td class="a1" colspan="2">
-			<input type="button" name="btnSave" value="保 存" class="css_button2" onclick="saveInfo('1');">&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="button" name="btnSave" value="草 稿" class="css_button2" onclick="saveInfo('1');">&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="button" name="btnSub" value="入 库" class="css_button2" onclick="saveInfo('2');">&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="button" name="btnTh" value="退回订单" class="css_button3" onclick="doTh();">&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="button" name="button2" value="关 闭" class="css_button2" onclick="window.opener.document.myform.submit();window.close();">
 		</td>
 	</tr>
 </table>
-<BR>
-<font color="red">注：点击保存后不入库可修改；点击入库后完成入库不可修改；如订单有问题请点击退回订单。</font>
 </form>
 </body>
 </html>

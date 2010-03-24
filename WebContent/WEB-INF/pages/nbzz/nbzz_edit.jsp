@@ -163,14 +163,13 @@ if(msg != null && msg.size() > 0){
 	
 	<tr height="35">
 		<td class="a1" colspan="2">
-			<input type="button" name="btnSave" value="保 存" class="css_button2" onclick="saveInfo('1');">&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="button" name="btnSave" value="草 稿" class="css_button2" onclick="saveInfo('1');">&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="button" name="btnSub" value="提 交" class="css_button2" onclick="saveInfo('2');">&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="button" name="button3" value="关 闭" class="css_button2" onclick="window.close();">
 		</td>
 	</tr>
 </table>
 <BR>
-<font color="red">注：保存后不结算可修改；提交后后完成结算不可修改。</font>
 </form>
 </body>
 </html>

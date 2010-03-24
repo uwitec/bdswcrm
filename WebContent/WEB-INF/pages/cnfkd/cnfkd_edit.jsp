@@ -31,9 +31,12 @@ function saveInfo(vl){
 		document.getElementById("state").value = "已支付";
 		if(window.confirm("确认要付款吗？")){
 			document.cnfkdForm.submit();
+		}else{
+			return;
 		}
 	}
-	
+	document.cnfkdForm.btnSub.disabled = true;
+	document.cnfkdForm.btnSave.disabled = true;
 }
 </script>
 </head>
@@ -133,7 +136,7 @@ function saveInfo(vl){
 	</tr>			
 	<tr height="35">
 		<td class="a1" colspan="4">
-			<input type="button" name="btnSave" value=" 保存 " class="css_button2" onclick="saveInfo('1');">&nbsp;&nbsp;
+			<input type="button" name="btnSave" value=" 草 稿 " class="css_button2" onclick="saveInfo('1');">&nbsp;&nbsp;
 			<input type="button" name="btnSub" value="确认付款" class="css_button3" onclick="saveInfo('2');">&nbsp;&nbsp;
 			<input type="button" name="button1" value="关 闭" class="css_button2" onclick="window.close();">
 		</td>

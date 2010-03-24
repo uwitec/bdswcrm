@@ -485,15 +485,12 @@ if(xsdProducts!=null && xsdProducts.size()>0){
 	</tr>		
 	<tr height="35">
 		<td class="a1" colspan="4">
-			<input type="button" name="btnSave" value="保 存" class="css_button2" onclick="saveInfo('1');">&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="button" name="btnSave" value="草 稿" class="css_button2" onclick="saveInfo('1');">&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="button" name="btnSub" value="提 交" class="css_button2" onclick="saveInfo('2');">&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="reset" name="btnClose" value="关 闭" class="css_button2" onclick="window.opener.document.myform.submit();window.close();;">
 		</td>
 	</tr>
-</table>
-<BR>
-<font color="red">注：“保存”指销售订单暂存，可修改；“提交”后销售订单不可修改，如需审批则直接提交审批。</font>
-<BR><BR>
+</table><BR>
 </form>
 </body>
 </html>

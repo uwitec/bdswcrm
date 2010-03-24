@@ -349,7 +349,7 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 		<td class="a2" width="35%"><input type="text" name="kfdb.dbsq_id" id="dbsq_id" value="" size="30" maxlength="20"></td>
 		<td class="a1" width="15%">申请人</td>
 		<td class="a2" width="35%">
-		    <input id="sqr_text" type="text" length="20" onblur="setSqrValue();" />
+		    <input id="sqr_text" type="text" maxlength="20" onblur="setSqrValue();" />
             <div id="sqr_tips"  style="height:12px;position:absolute;left:610px; top:110px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
             </div>
 		    <input type="hidden" name="kfdb.sqr" id="sqr"/> 	
@@ -432,18 +432,17 @@ for(int i=0;i<3;i++){
 	<tr>
 		<td class="a1" width="15%">备注</td>
 		<td class="a2" width="85%">
-			<textarea rows="6" name="kfdb.remark" id="remark" style="width:75%" maxlength="500"></textarea>
+			<textarea rows="6" name="kfdb.remark" id="remark" style="width:75%"></textarea>
 		</td>
 	</tr>	
 	<tr height="35">
 		<td class="a1" colspan="2">
-			<input type="button" name="btnSave" value="保 存" class="css_button2" onclick="saveInfo('1');">&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="button" name="btnSave" value="草 稿" class="css_button2" onclick="saveInfo('1');">&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="button" name="btnSub" value="出 库" class="css_button2" onclick="saveInfo('2');">&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="button" name="button3" value="关 闭" class="css_button2" onclick="window.close();">
 		</td>
 	</tr>
 </table>
-
 </form>
 </body>
 </html>

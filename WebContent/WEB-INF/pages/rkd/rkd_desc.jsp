@@ -41,12 +41,12 @@ List results = (List)VS.findValue("rkdProducts");
 <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0" border="1" id="selTable">
 	<thead>
 	<tr>
-		<td width="15%">产品名称</td>
-		<td width="15%">规格</td>
+		<td width="25%">产品名称</td>
+		<td width="20%">规格</td>
 		<td width="10%">价格</td>
 		<td width="10%">数量</td>
-		<td width="35%">序列号</td>
-		<td width="15%">备注</td>
+		<td width="25%">序列号</td>
+		<td width="10%">备注</td>
 	</tr>
 	</thead>
 	<%
@@ -57,13 +57,13 @@ List results = (List)VS.findValue("rkdProducts");
 		
 		double price = rkdProduct.get("price")==null?0:((Double)rkdProduct.get("price")).doubleValue();
 	%>
-	<tr>
-		<td class="a2"><%=StringUtils.nullToStr(rkdProduct.get("product_name")) %></td>
-		<td class="a2"><%=StringUtils.nullToStr(rkdProduct.get("product_xh")) %></td>
-		<td class="a2"><%=JMath.round(price,2) %></td>
-		<td class="a2"><%=StringUtils.nullToStr(rkdProduct.get("nums")) %></td>
-		<td class="a2"><%=StringUtils.nullToStr(rkdProduct.get("qz_serial_num")) %></td>
-		<td class="a2"><%=StringUtils.nullToStr(rkdProduct.get("remark")) %></td>
+	<tr class="a1" onmousedown="trSelectChangeCss()">
+		<td align="left"><%=StringUtils.nullToStr(rkdProduct.get("product_name")) %></td>
+		<td align="left"><%=StringUtils.nullToStr(rkdProduct.get("product_xh")) %></td>
+		<td align="right"><%=JMath.round(price,2) %></td>
+		<td><%=StringUtils.nullToStr(rkdProduct.get("nums")) %></td>
+		<td align="left"><%=StringUtils.nullToStr(rkdProduct.get("qz_serial_num")) %></td>
+		<td align="left"><%=StringUtils.nullToStr(rkdProduct.get("remark")) %></td>
 	</tr>
 	
 	<%

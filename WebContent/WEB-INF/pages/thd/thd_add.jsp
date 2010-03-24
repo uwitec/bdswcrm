@@ -205,7 +205,12 @@ String thd_id = (String)VS.findValue("thd_id");
 	}
 
 	function selXsd(){
-		var destination = "selXsd.html";
+		if(document.getElementById('client_id').value == ""){
+			alert("请先选择客户！");
+			return;
+		}
+		
+		var destination = "selXsd.html?creatdate1=&creatdate2=&client_name=" + document.getElementById('client_id').value;
 		var fea ='width=850,height=600,left=' + (screen.availWidth-850)/2 + ',top=' + (screen.availHeight-600)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
 		window.open(destination,'关联销售单',fea);			

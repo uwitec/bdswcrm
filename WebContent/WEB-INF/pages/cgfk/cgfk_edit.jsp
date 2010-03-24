@@ -67,6 +67,7 @@ if(cgfkDescs != null && cgfkDescs.size()>0){
 			}
 		}
 
+		document.cgfkForm.btnSave.disabled = true;
 		document.cgfkForm.btnSub.disabled = true;
 	}
 	
@@ -327,14 +328,13 @@ if(cgfkDescs != null && cgfkDescs.size()>0){
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<tr height="35">
 		<td class="a1" colspan="2">
-			<input type="button" name="button1" value="保 存" class="css_button2" onclick="saveInfo('1');">&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="button" name="btnSave" value="草 稿" class="css_button2" onclick="saveInfo('1');">&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="button" name="btnSub" value="提 交" class="css_button2" onclick="saveInfo('2');">&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="button" name="button1" value="关 闭" class="css_button2" onclick="window.close();">
 		</td>
 	</tr>
 </table>
 <BR>
-<font color="red">注：“保存”指采购付款单暂存，可修改，“提交”如果系统设置需审批则提交审批，如果不需要审批则直接生成相应出纳付款单。</font>
 </form>
 </body>
 </html>

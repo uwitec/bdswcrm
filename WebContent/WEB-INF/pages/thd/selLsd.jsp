@@ -20,7 +20,7 @@ String orderType = (String)VS.findValue("orderType");
 
 <html>
 <head>
-<title>零售单管理</title>
+<title>关联零售单</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
