@@ -91,7 +91,7 @@ public class CgfkDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public List getDfkDesc(String gysbh){
-		String sql = "select id as jhd_id,cg_date as fsrq,total as fsje,(total-fkje) as yfje,fkje as yifje from jhd where state<>'已保存' and fklx<>'已付' and gysbh='" + gysbh + "'";
+		String sql = "select id as jhd_id,cg_date as fsrq,total as fsje,(total-fkje) as yfje,fkje as yifje from jhd where state='已入库' and fklx<>'已付' and gysbh='" + gysbh + "'";
 		
 		//处理应收期初信息,如果存在期初值，则需要UNION期初值
 		String init_sql = "select '期初应付' as jhd_id,DATE_FORMAT(cz_date,'%Y-%m-%d') as fsrq,yfqc as fsje,(yfqc-yifuje) as yfje,yifuje as yisk from client_wl_init where client_name='" + gysbh + "' and round(yfqc,2)<>round(yifuje,2)";

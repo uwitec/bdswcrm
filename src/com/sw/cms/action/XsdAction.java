@@ -161,9 +161,9 @@ public class XsdAction extends BaseAction {
 	
 	public String listCjXsd(){
 		
-		String con = " and state<>'已保存'";
+		String con = " and state='已出库'";
 		if(!client_name.equals("")){
-			con += " and client_name like'%" + client_name + "%'";
+			con += " and client_name='" + client_name + "'";
 		}
 		if(!creatdate1.equals("")){
 			con += " and creatdate>='" + creatdate1 + "'";

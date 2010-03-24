@@ -127,6 +127,7 @@ public class DbsqService {
 		
 		String kfdb_id = kfdbDao.getKfdbID();
 		kfdb.setId(kfdb_id);
+		kfdb.setCk_date(dbsq.getCreatdate());
 		kfdb.setDbsq_id(dbsq.getId());
 		kfdb.setRk_store_id(dbsq.getStore_id());
 		kfdb.setSqr(dbsq.getJsr());

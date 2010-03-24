@@ -19,7 +19,6 @@ import com.sw.cms.model.Rkd;
 import com.sw.cms.model.RkdProduct;
 import com.sw.cms.model.SerialNumFlow;
 import com.sw.cms.model.SerialNumMng;
-import com.sw.cms.model.Xssk;
 import com.sw.cms.util.StaticParamDo;
 
 
