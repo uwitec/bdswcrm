@@ -13,7 +13,7 @@ Xsd xsd = (Xsd)VS.findValue("xsd");
 
 String sp_type = StringUtils.nullToStr(xsd.getSp_type());
 if(sp_type.equals("1")){
-	sp_type = "客户存在超期应付款";
+	sp_type = "客户存在超期应收款";
 }else if(sp_type.equals("2")){
 	sp_type = "超出客户限额并且订单商品价格低于最低限价";	
 }else if(sp_type.equals("3")){

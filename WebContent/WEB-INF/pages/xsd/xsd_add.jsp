@@ -25,6 +25,7 @@ if(xsdProducts != null && xsdProducts.size()>0){
 	allCount = xsdProducts.size() -1;
 }
 
+String flag = StringUtils.nullToStr(VS.findValue("flag"));
 %>
 <html>
 <head>
@@ -49,6 +50,7 @@ if(xsdProducts != null && xsdProducts.size()>0){
 	var allCount = <%=allCount %>;
 	var temp_client_id = "";
 	var iscs_flag = '<%=iscs_flag %>';	
+	var flag = "<%=flag %>";
 
 	var xszq = 0;
 	
@@ -185,11 +187,36 @@ if(xsdProducts != null && xsdProducts.size()>0){
 			}
 		}
 	}
+
+	//判断审批标志
+	function submitSp(){
+		if(flag == "") return;
+
+		var msg = "";
+		if(flag == "1"){
+			msg = "客户存在超期应收款，需要提交审批，确定提交审批吗？";
+		}else if(flag == "2"){
+			msg = "超出客户限额且商品低于分销限价，需要提交审批，确定提交审批吗？";
+		}else if(flag == "3"){
+			msg = "超出客户限额，需要提交审批，确定提交审批吗？";
+		}else{
+			msg = "销售商品低于分销限价，城要提交审批，确定提交审批吗？";
+		}
+
+		if(window.confirm(msg)){
+			document.getElementById("state").value = "已提交";
+			document.xsdForm.submit();
+		}else{
+			window.close();
+			opener.document.myform.submit();
+		}
+	}
 </script>
 </head>
-<body onload="initFzrTip();initClientTip();onloadClientInfo();chgKpTyle('<%=StringUtils.nullToStr(xsd.getFplx()) %>');">
+<body onload="initFzrTip();initClientTip();onloadClientInfo();chgKpTyle('<%=StringUtils.nullToStr(xsd.getFplx()) %>');submitSp();">
 <form name="xsdForm" action="updateXsd.html" method="post">
 <input type="hidden" name="xsd.state" id="state" value="">
+<input type="hidden" name="flag" id="state" value="<%=flag %>">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>

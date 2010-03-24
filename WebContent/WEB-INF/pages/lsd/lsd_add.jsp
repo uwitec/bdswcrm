@@ -24,6 +24,8 @@ if(lsdProducts != null && lsdProducts.size()>0){
 String iscs_flag = StringUtils.nullToStr(VS.findValue("iscs_flag"));
 
 String msg = StringUtils.nullToStr(VS.findValue("msg"));
+
+String flag = StringUtils.nullToStr(VS.findValue("flag"));
 %>
 <html>
 <head>
@@ -45,7 +47,8 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 
 	var allCount = <%=counts %>;
 	var iscs_flag = '<%=iscs_flag %>';
-		
+	var flag = "<%=flag %>";
+	
 	function saveInfo(vl){ 
 
 		if(vl == '1'){
@@ -53,7 +56,7 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 		}else{
 			document.getElementById("state").value = "已提交";
 		}
-	 
+
 		if(document.getElementById("fzr").value == ""){
 			alert("经手人不能为空，请选择！");
 			return;
@@ -494,13 +497,27 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 		document.getElementById("nums_" + sel).value = "0";
 		document.getElementById("xj_" + sel).value = "0.00";
 		document.getElementById("remark_" + sel).value = "";
+	}
+
+	//判断审批标志
+	function submitSp(){
+		if(flag == "") return;
+		if(window.confirm("销售商品低于零售限价，需要提交审批，确定提交审批吗？")){
+			document.lsdForm.action = "updateLsd.html";
+			document.getElementById("state").value = "已提交";
+			document.lsdForm.submit();
+		}else{
+			window.close();
+			opener.document.myform.submit();
+		}
 	}		
 </script>
 
 </head>
-<body onload="initFzrTip();chgKpTyle('<%=StringUtils.nullToStr(lsd.getFplx()) %>');">
+<body onload="initFzrTip();chgKpTyle('<%=StringUtils.nullToStr(lsd.getFplx()) %>');submitSp();">
 <form name="lsdForm" action="saveLsd.html" method="post">
 <input type="hidden" name="lsd.state" id="state" value="">
+<input type="hidden" name="flag" id="state" value="<%=flag %>">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
