@@ -92,11 +92,6 @@ public class XsdAction extends BaseAction {
 	
 	private int curPage = 1;
 	
-	/**
-	 * flag="0" 修改销售单
-	 * flag="1" 有超期应收款
-	 * flag="2" 有超额应收款
-	 */
 	private String flag = "";
 	private int rowsPerPage = Constant.PAGE_SIZE;
 	
@@ -258,12 +253,6 @@ public class XsdAction extends BaseAction {
 		ysfs = sjzdService.getSjzdXmxxByZdId("SJZD_YSFS");
 		posTypeList = posTypeService.getPosTypeList();
 		fkfs = sjzdService.getSjzdXmxxByZdId("SJZD_FKFS");
-		boolean hasLowFxxj = xsdService.checkFxxj(xsdProducts); //是否存在低于分销限价的
-		boolean hasCeysk = xsdService.isCeysk(xsd.getClient_name(), xsd.getXsdje()-xsd.getSkje());
-		
-		if(hasLowFxxj || hasCeysk){
-			flag = "2";
-		}
 		return "success";
 	}
 	
@@ -329,8 +318,27 @@ public class XsdAction extends BaseAction {
 			
 			if(needSp){ 
 				//如果销售订单需要审批
-				xsd.setSp_state("2");  //待审批
-				xsd.setState("已保存");
+				
+				if(!flag.equals("")){
+					//如果是提交审批
+					xsd.setSp_state("2");  //待审批
+					xsd.setState("已保存");
+				}else{
+					//如果不是提交审批
+					xsd.setSp_state("1");  //需要审批
+					xsd.setState("已保存");
+					flag = xsd.getSp_type();
+					xsdService.updateXsd(xsd, xsdProducts);
+					
+					storeList = storeService.getAllStoreList();
+					iscs_flag = sysInitSetService.getQyFlag();
+					ysfs = sjzdService.getSjzdXmxxByZdId("SJZD_YSFS");
+					posTypeList = posTypeService.getPosTypeList();
+					fkfs = sjzdService.getSjzdXmxxByZdId("SJZD_FKFS");
+					
+					return INPUT;
+				}
+
 			}else{
 				//如果不需要审批
 				xsd.setSp_state("0");

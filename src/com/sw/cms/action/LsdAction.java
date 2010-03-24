@@ -225,13 +225,23 @@ public class LsdAction extends BaseAction {
 			
 		}
 		
-		//判断是否存在超低价商品，如存在则审批状态修改为待审批
-		if(lsd.getState().equals("已提交")){
-			if(lsdService.isExistLowLsxj(lsd,lsdProducts)){
-				//如果存在低于零售限价商品
-				lsd.setState("已保存");
-				lsd.setSp_state("2");  //待审批
-			}
+		//判断是否存在超低价商品，返回录入界面，提交用户提交审批，或关闭
+		if(lsd.getState().equals("已提交") && lsdService.isExistLowLsxj(lsd,lsdProducts)){
+
+			lsd.setState("已保存");
+			lsd.setSp_state("1");  //需要审批
+			lsdService.saveLsd(lsd, lsdProducts);
+			
+			//页面初始数据
+			storeList = storeService.getAllStoreList();
+			ysfs = sjzdService.getSjzdXmxxByZdId("SJZD_FKFS");
+			posTypeList = posTypeService.getPosTypeList();
+			userList = userService.getAllEmployeeList();
+			
+			//界面提示审批的标志
+			flag = "1";
+			
+			return INPUT;
 		}
 		
 		lsdService.saveLsd(lsd, lsdProducts);
@@ -290,12 +300,27 @@ public class LsdAction extends BaseAction {
 		
 		
 		//判断是否存在超低价商品，如存在则审批状态修改为待审批
-		if(lsd.getState().equals("已提交")){	
-			if(lsdService.isExistLowLsxj(lsd,lsdProducts)){
-				//如果存在低于零售限价商品
+		if(lsd.getState().equals("已提交") && lsdService.isExistLowLsxj(lsd,lsdProducts)){
+			if(flag.equals("1")){
+				//提交审批
 				lsd.setState("已保存");
 				lsd.setSp_state("2");  //待审批
+			}else{
+				//如果不是提交审批，返回录入界面给用户提示
+				lsd.setState("已保存");
+				lsd.setSp_state("1");  //需要审批
+				lsdService.updateLsd(lsd, lsdProducts);
+				
+				//页面初始数据
+				storeList = storeService.getAllStoreList();
+				ysfs = sjzdService.getSjzdXmxxByZdId("SJZD_FKFS");
+				posTypeList = posTypeService.getPosTypeList();
+				userList = userService.getAllEmployeeList();
+				flag = "1";
+				
+				return INPUT;
 			}
+
 		}
 		
 		lsdService.updateLsd(lsd, lsdProducts);
