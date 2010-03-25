@@ -152,7 +152,6 @@ public class CgfkService {
 			
 			if(sp_flag.equals("00") || sp_flag.equals("") || role_id.equals("")){
 				//如果采购付款不需要审批，直接生成相应的出纳付款单	，同时采购付款的状态为待支付
-				
 				cgfk.setState("待支付");
 				this.saveCnfkd(cgfk);
 				

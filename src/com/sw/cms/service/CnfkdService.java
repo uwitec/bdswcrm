@@ -47,10 +47,16 @@ public class CnfkdService {
 	public void updateCnfkd(Cnfkd cnfkd){
 		
 		Cnfkd tempCnfkd = cnfkdDao.getCnfkd(cnfkd.getId());
+		//如果出纳付款单状态为已支付，返回不做任何操作
+		if(tempCnfkd.getState().equals("已支付")){
+			return;
+		}
 		
-		if(!tempCnfkd.getState().equals("已支付") && cnfkd.getState().equals("已支付")){
+		cnfkdDao.updateCnfkd(cnfkd);
+		
+		if(cnfkd.getState().equals("已支付")){
 			
-			//如果采购付款不需要审批，更新采购订单相应已付金额	
+			//更新出纳付款单对应的付款申请单相应的进货单金额
 			Cgfk cgfk = (Cgfk)cgfkDao.getCgfk(cnfkd.getCgfk_id());
 			List cgfkDescs = cgfkDao.getCgfkDescObj(cnfkd.getCgfk_id());
 			cgfkDao.updateJhdFkje(cgfk,cgfkDescs);
@@ -70,9 +76,6 @@ public class CnfkdService {
 			//更新账户金额
 			accountsDao.updateAccountJe(cnfkd.getFkzh(), cnfkd.getFkje());
 		}
-		
-		cnfkdDao.updateCnfkd(cnfkd);
-		
 	}
 	
 	
