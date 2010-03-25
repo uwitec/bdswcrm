@@ -2,17 +2,20 @@ package com.sw.cms.dao;
 
 import java.util.Map;
 
+import com.sw.cms.dao.BfdDAO.BfdRowMapper;
+import com.sw.cms.dao.base.BeanRowMapper;
 import com.sw.cms.dao.base.JdbcBaseDAO;
+import com.sw.cms.model.Fysq;
 import com.sw.cms.model.Page;
 import com.sw.cms.model.SysUser;
 import com.sw.cms.util.GB2Alpha;
 
 /**
  * <p>
- * Ô±¹¤¹ÜÀí
+ * Ô±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
  * </p>
  * <p>
- * ÓëÏµÍ³ÓÃ»§¹²ÓÃÒ»¸ö±í(sys_user)
+ * ï¿½ï¿½ÏµÍ³ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½(sys_user)
  * </p>
  * <p>
  * is_sys_user==0
@@ -24,7 +27,7 @@ import com.sw.cms.util.GB2Alpha;
 public class EmployeeDAO extends JdbcBaseDAO {
 
 	/**
-	 * È¡Ô±¹¤ÁÐ±í£¨´ø·ÖÒ³£©
+	 * È¡Ô±ï¿½ï¿½ï¿½Ð±?ï¿½ï¿½ï¿½Ò³ï¿½ï¿½
 	 * 
 	 * @param con
 	 * @param curPage
@@ -42,7 +45,7 @@ public class EmployeeDAO extends JdbcBaseDAO {
 	}
 
 	/**
-	 * È¡ÒµÎñÔ±ÁÐ±í£¨´ø·ÖÒ³£©
+	 * È¡Òµï¿½ï¿½Ô±ï¿½Ð±?ï¿½ï¿½ï¿½Ò³ï¿½ï¿½
 	 * 
 	 * @param con
 	 * @param curPage
@@ -50,7 +53,7 @@ public class EmployeeDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public Page getYwyEmployee(String con, int curPage, int rowPerPage) {
-		String sql = "select a.*,b.dept_name from sys_user a left join dept b on b.dept_id=a.dept where a.is_sys_user=0 and a.is_ywy='ÊÇ' and a.is_del='0'";
+		String sql = "select a.*,b.dept_name from sys_user a left join dept b on b.dept_id=a.dept where a.is_sys_user=0 and a.is_ywy='ï¿½ï¿½' and a.is_del='0'";
 		if (!con.equals("")) {
 			sql = sql + con;
 		}
@@ -59,17 +62,19 @@ public class EmployeeDAO extends JdbcBaseDAO {
 
 
 	/**
-	 * ±£´æÓÃ»§ÐÅÏ¢
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½Ï¢
 	 * 
 	 * @param user
 	 */
 	public void saveUser(SysUser user) {
-		String sql = "insert into sys_user(real_name,csny,sex,gs_phone,mobile,jt_phone,fax,mail,msn,qq,address,p_code,dept,position,szkf,state,xh,is_ywy,gh,nl,china_py,user_id) "
-				+ "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		String sql = "insert into sys_user(real_name,csny,sex,gs_phone,mobile,jt_phone,fax,mail,msn,qq,address,p_code,dept,position,szkf,state,xh,is_ywy,gh,nl,china_py,user_id,"
+				+"id_card,nation,lxr,relation,jbgz,rzrq,gl,byxx,major,xl,gzjl,ldkh,remark,zzmm) "
+			     + "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,"
+			     +"?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
-		String user_id = getUserID();
-
-		Object[] param = new Object[22];
+		//String user_id = getUserID();
+		String user_id = user.getUser_id();
+		Object[] param = new Object[36];
 
 		param[0] = user.getReal_name();
 		param[1] = user.getCsny();
@@ -97,20 +102,36 @@ public class EmployeeDAO extends JdbcBaseDAO {
 
 		param[21] = user_id;
 
+		param[22] = user.getId_card();
+		param[23] = user.getNation();
+		param[24] = user.getLxr();
+		param[25] = user.getRelation();
+		param[26] = new Double(user.getJbgz());
+		param[27] = user.getRzrq();
+		param[28] = new Integer(user.getGl());
+		param[29] = user.getByxx();
+		param[30] = user.getMajor();
+		param[31] = user.getXl();
+		param[32] = user.getGzjl();
+		param[33] = user.getLdkh();
+		param[34] = user.getRemark();
+		param[35] = user.getZzmm();
+		
 		this.getJdbcTemplate().update(sql, param);
 
 	}
 
 	/**
-	 * ¸üÐÂÓÃ»§ÐÅÏ¢
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½Ï¢
 	 * 
 	 * @param user
 	 */
 	public void updateUser(SysUser user) {
 		String sql = "update sys_user set real_name=?,csny=?,sex=?,gs_phone=?,mobile=?,jt_phone=?,fax=?,mail=?,msn=?,qq=?,address=?,"
-				+ "p_code=?,dept=?,position=?,szkf=?,state=?,xh=?,is_ywy=?,gh=?,nl=?,china_py=? where user_id=?";
+				+ "p_code=?,dept=?,position=?,szkf=?,state=?,xh=?,is_ywy=?,gh=?,nl=?,china_py=?,id_card=?,"
+				+"nation=?,lxr=?,relation=?,jbgz=?,rzrq=?,gl=?,byxx=?,major=?,xl=?,gzjl=?,ldkh=?,remark=?,zzmm=? where user_id=?";
 
-		Object[] param = new Object[22];
+		Object[] param = new Object[36];
 
 		param[0] = user.getReal_name();
 		param[1] = user.getCsny();
@@ -136,13 +157,28 @@ public class EmployeeDAO extends JdbcBaseDAO {
 		GB2Alpha gb2Alpha = new GB2Alpha();
 		param[20] = gb2Alpha.String2Alpha(user.getReal_name());
 
-		param[21] = user.getUser_id();
+		param[21] = user.getId_card();
+		param[22] = user.getNation();
+		param[23] = user.getLxr();
+		param[24] = user.getRelation();
+		param[25] = new Double(user.getJbgz());
+		param[26] = user.getRzrq();
+		param[27] = new Integer(user.getGl());
+		param[28] = user.getByxx();
+		param[29] = user.getMajor();
+		param[30] = user.getXl();
+		param[31] = user.getGzjl();
+		param[32] = user.getLdkh();
+		param[33] = user.getRemark();
+		param[34] = user.getZzmm();
+		
+		param[35] = user.getUser_id();
 
 		this.getJdbcTemplate().update(sql, param);
 	}
 
 	/**
-	 * ¸ù¾Ýuser_idÈ¡ÓÃ»§ÐÅÏ¢
+	 * ï¿½ï¿½ï¿½user_idÈ¡ï¿½Ã»ï¿½ï¿½ï¿½Ï¢
 	 * 
 	 * @param user_id
 	 * @return
@@ -152,8 +188,9 @@ public class EmployeeDAO extends JdbcBaseDAO {
 		return this.getResultMap(sql);
 	}
 
+	
 	/**
-	 * É¾³ýÓÃ»§ÐÅÏ¢
+	 * É¾ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½Ï¢
 	 * 
 	 * @param user_id
 	 */
@@ -163,17 +200,17 @@ public class EmployeeDAO extends JdbcBaseDAO {
 	}
 
 	/**
-	 * È¡µ±Ç°¿ÉÓÃµÄÐòÁÐºÅ
+	 * È¡ï¿½ï¿½Ç°ï¿½ï¿½ï¿½Ãµï¿½ï¿½ï¿½ï¿½Ðºï¿½
 	 * 
 	 * @return
 	 */
-	private String getUserID() {
+	public String getUserID() {
 		String sql = "select userid from cms_all_seq";
 
-		// È¡µ±Ç°ÐòÁÐºÅ
+		// È¡ï¿½ï¿½Ç°ï¿½ï¿½ï¿½Ðºï¿½
 		String curId = this.getJdbcTemplate().queryForInt(sql) + "";
 
-		// ½«ÐòÁÐºÅ¼Ó1
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ÐºÅ¼ï¿½1
 		sql = "update cms_all_seq set userid=userid+1";
 		this.getJdbcTemplate().update(sql);
 
@@ -186,13 +223,13 @@ public class EmployeeDAO extends JdbcBaseDAO {
 
 	
 	/**
-	 * ÅÐ¶ÏÔ±¹¤ÐÕÃûÊÇ·ñÏàÍ¬
+	 * ï¿½Ð¶ï¿½Ô±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½Í¬
 	 * 
 	 * @param employeeName
 	 * @return
 	 */
 	public int getEmployeeByNameIsExist(String employeeName) {
-		String sql = "select count(*) as name from sys_user where is_sys_user=0 and is_ywy='ÊÇ' and is_del='0' and real_name='"
+		String sql = "select count(*) as name from sys_user where is_sys_user=0 and is_ywy='ï¿½ï¿½' and is_del='0' and real_name='"
 				+ employeeName + "'";
 		return this.getJdbcTemplate().queryForInt(sql);
 	}
