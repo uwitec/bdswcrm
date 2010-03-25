@@ -1,4 +1,4 @@
-2010-02-27更新
+﻿2010-02-27更新
 --修改客户往来情况视图
 CREATE OR REPLACE VIEW view_client_wl_info AS
 (select id as dj_id,gysbh as client_id,total as fsje,DATE_FORMAT(cz_date,'%Y-%m-%d') as cdate,'应付发生' as je_type,'采购' as yw_type,'viewXsd.html?id=' as url,cz_date,fzr as jsr from jhd where state='已入库')
@@ -411,3 +411,19 @@ CREATE TABLE `calendar_plan` (
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+2010-03-24 修改
+--用户管理增加字段
+ALTER TABLE `sys_user` ADD COLUMN `id_card` VARCHAR(40) AFTER `is_del`;
+ALTER TABLE `sys_user` ADD COLUMN `nation` VARCHAR(10) AFTER `id_card`;
+ALTER TABLE `sys_user` ADD COLUMN `lxr` VARCHAR(20) AFTER `nation`;
+ALTER TABLE `sys_user` ADD COLUMN `relation` VARCHAR(20) AFTER `lxr`;
+ALTER TABLE `sys_user` ADD COLUMN `jbgz` double default  0 AFTER `relation`;
+ALTER TABLE `sys_user` ADD COLUMN `rzrq` VARCHAR(20) AFTER `jbgz`;
+ALTER TABLE `sys_user` ADD COLUMN `gl` int(10) AFTER `rzrq`;
+ALTER TABLE `sys_user` ADD COLUMN `byxx` VARCHAR(50) AFTER `gl`;
+ALTER TABLE `sys_user` ADD COLUMN `major` VARCHAR(40) AFTER `byxx`;
+ALTER TABLE `sys_user` ADD COLUMN `xl` VARCHAR(10) AFTER `major`;
+ALTER TABLE `sys_user` ADD COLUMN `gzjl` VARCHAR(500)    AFTER `xl`;
+ALTER TABLE `sys_user` ADD COLUMN `ldkh` VARCHAR(500)  AFTER `gzjl`;
+ALTER TABLE `sys_user` ADD COLUMN `remark`  VARCHAR(100)  AFTER `ldkh`;
+ALTER TABLE `sys_user` ADD COLUMN `zzmm`  VARCHAR(20)  AFTER `remark`;
