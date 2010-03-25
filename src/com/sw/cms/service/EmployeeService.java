@@ -62,7 +62,6 @@ public class EmployeeService {
 		return employeeDao.getUser(user_id);
 	}
 	
-	
 	/**
 	 * 删除用户信息
 	 * @param user_id
@@ -81,6 +80,9 @@ public class EmployeeService {
 		 return employeeDao.getEmployeeByNameIsExist(employeeName);
 	}
 
+	public String updateUserId() {
+		return employeeDao.getUserID();
+	}
 
 	public EmployeeDAO getEmployeeDao() {
 		return employeeDao;
