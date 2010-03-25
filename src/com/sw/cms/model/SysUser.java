@@ -46,6 +46,107 @@ public class SysUser {
 	
 	private String is_del;    //是否删除（0：未删除；1：已删除）
 	
+	private String id_card;//身份证号码	
+	private String nation;//民族
+	private String lxr;//联系人
+	private String relation;//关系
+	private double jbgz;//基本工资
+	private String rzrq;//入职日期
+	private int gl;//工龄
+	private String byxx;//毕业学校
+	private String major;//专业
+	private String xl;//学历
+	private String gzjl;//工作简历
+	private String ldkh;//领导考核
+	private String remark;//备注
+	private String zzmm;//政治面貌
+	
+	
+	public String getZzmm() {
+		return zzmm;
+	}
+	public void setZzmm(String zzmm) {
+		this.zzmm = zzmm;
+	}
+	public double getJbgz() {
+		return jbgz;
+	}
+	public void setJbgz(double jbgz) {
+		this.jbgz = jbgz;
+	}
+	public String getRemark() {
+		return remark;
+	}
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+	public String getLdkh() {
+		return ldkh;
+	}
+	public void setLdkh(String ldkh) {
+		this.ldkh = ldkh;
+	}
+	public String getGzjl() {
+		return gzjl;
+	}
+	public void setGzjl(String gzjl) {
+		this.gzjl = gzjl;
+	}
+	public String getXl() {
+		return xl;
+	}
+	public void setXl(String xl) {
+		this.xl = xl;
+	}
+	public String getMajor() {
+		return major;
+	}
+	public void setMajor(String major) {
+		this.major = major;
+	}
+	public String getByxx() {
+		return byxx;
+	}
+	public void setByxx(String byxx) {
+		this.byxx = byxx;
+	}
+	public int getGl() {
+		return gl;
+	}
+	public void setGl(int gl) {
+		this.gl = gl;
+	}
+	public String getRzrq() {
+		return rzrq;
+	}
+	public void setRzrq(String rzrq) {
+		this.rzrq = rzrq;
+	}
+	public String getRelation() {
+		return relation;
+	}
+	public void setRelation(String relation) {
+		this.relation = relation;
+	}
+	public String getLxr() {
+		return lxr;
+	}
+	public void setLxr(String lxr) {
+		this.lxr = lxr;
+	}
+	public String getNation() {
+		return nation;
+	}
+	public void setNation(String nation) {
+		this.nation = nation;
+	}	
+	public String getId_card() {
+		return id_card;
+	}
+	public void setId_card(String id_card) {
+		this.id_card = id_card;
+	}
+	
 	public String getAddress() {
 		return address;
 	}
