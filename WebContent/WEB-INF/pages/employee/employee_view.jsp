@@ -55,10 +55,16 @@ Map userMap = (Map)VS.findValue("userMap");
 	</tr>
 	</thead>
 	<tr>
-		<td class="a1" width="15%">工号</td>
+		<td class="a1" width="15%">公司工号</td>
 		<td class="a2" width="35%"><%=StringUtils.nullToStr(userMap.get("gh")) %></td>	
+		<td class="a1" width="15%">显示排序</td>
+		<td class="a2" width="35%"><%=StringUtils.nullToStr(userMap.get("xh")) %></td>
+	</tr>	
+	<tr>
 		<td class="a1" width="15%">姓名</td>
 		<td class="a2" width="35%"><%=StringUtils.nullToStr(userMap.get("real_name")) %></td>		
+	    <td class="a1" width="15%">身份证号码</td>
+		<td class="a2" width="35%"><%=StringUtils.nullToStr(userMap.get("id_card")) %></td>
 	</tr>	
 	<tr>		
 		<td class="a1" width="15%">性别</td>
@@ -66,47 +72,81 @@ Map userMap = (Map)VS.findValue("userMap");
 		<td class="a1" width="15%">年龄</td>
 		<td class="a2" width="35%"><%=StringUtils.nullToStr(userMap.get("nl")) %></td>							
 	</tr>	
-	<tr>
-		<td class="a1" width="15%">联系电话</td>
-		<td class="a2" width="35%"><%=StringUtils.nullToStr(userMap.get("gs_phone")) %></td>
-		<td class="a1" width="15%">手机</td>
-		<td class="a2" width="35%"><%=StringUtils.nullToStr(userMap.get("mobile")) %></td>		
-	</tr>
-	<tr>
-		<td class="a1" width="15%">传真</td>
-		<td class="a2" width="35%"><%=StringUtils.nullToStr(userMap.get("fax")) %></td>
-		<td class="a1" width="15%">家庭电话</td>
-		<td class="a2" width="35%"><%=StringUtils.nullToStr(userMap.get("jt_phone")) %></td>		
+	<tr>	    
+	    <td class="a1" width="15%">生日</td>
+		<td class="a2" width="35%"><%=StringUtils.nullToStr(userMap.get("csny")) %></td>	
+	    <td class="a1" width="15%">手机</td>
+		<td class="a2" width="35%"><%=StringUtils.nullToStr(userMap.get("mobile")) %></td>	
 	</tr>	
 	<tr>
+		<td class="a1" width="15%">工作电话</td>
+		<td class="a2" width="35%"><%=StringUtils.nullToStr(userMap.get("gs_phone")) %></td>
 		<td class="a1" width="15%">E-Mail</td>
-		<td class="a2" width="35%"><%=StringUtils.nullToStr(userMap.get("mail")) %></td>
+		<td class="a2" width="35%"><%=StringUtils.nullToStr(userMap.get("mail")) %></td>	
+	</tr>
+	<tr>		
 		<td class="a1" width="15%">MSN</td>
 		<td class="a2" width="35%"><%=StringUtils.nullToStr(userMap.get("msn")) %></td>		
-	</tr>	
-	<tr>
-		<td class="a1" width="15%">QQ</td>
+	    <td class="a1" width="15%">QQ</td>
 		<td class="a2" width="35%"><%=StringUtils.nullToStr(userMap.get("qq")) %></td>
-		<td class="a1" width="15%">生日</td>
-		<td class="a2" width="35%"><%=StringUtils.nullToStr(userMap.get("csny")) %></td>		
-	</tr>		
+	</tr>
+	<tr>    
+	    <td class="a1" width="15%">民族</td>
+		<td class="a2" width="35%"><%=StringUtils.nullToStr(userMap.get("nation")) %></td>
+	    <td class="a1" width="15%">政治面貌</td>
+		<td class="a2" width="35%"><%=StringUtils.nullToStr(userMap.get("zzmm")) %></td>
+	</tr>
 	<tr>
-		<td class="a1" width="15%">地址</td>
+		<td class="a1" width="15%">家庭地址</td>
 		<td class="a2" width="35%"><%=StringUtils.nullToStr(userMap.get("address")) %></td>
-		<td class="a1" width="15%">邮编</td>
-		<td class="a2" width="35%"><%=StringUtils.nullToStr(userMap.get("p_code")) %></td>		
+	    <td class="a1" width="15%">联系人</td>
+		<td class="a2" width="35%"><%=StringUtils.nullToStr(userMap.get("lxr")) %></td>
+	</tr>
+	<tr>		
+		<td class="a1" width="15%">家庭电话</td>
+		<td class="a2" width="35%"><%=StringUtils.nullToStr(userMap.get("jt_phone")) %></td>		
+	    <td class="a1" width="15%">关系</td>
+		<td class="a2" width="35%"><%=StringUtils.nullToStr(userMap.get("relation")) %></td>
 	</tr>	
 	<tr>
 		<td class="a1" width="15%">部门</td>
 		<td class="a2" width="35%"><%=StaticParamDo.getDeptNameById(StringUtils.nullToStr(userMap.get("dept"))) %></td>
-		<td class="a1" width="15%">职位</td>
+		<td class="a1" width="15%">职务</td>
 		<td class="a2" width="35%"><%=StringUtils.nullToStr(userMap.get("position")) %></td>		
 	</tr>	
 	<tr>
+	    <td class="a1" width="15%">基本工资</td>
+		<td class="a2" width="35%"><%=userMap.get("jbgz")%></td>
+		<td class="a1" width="15%">入职日期</td>
+		<td class="a2" width="35%"><%=StringUtils.nullToStr(userMap.get("rzrq")) %></td>		
+	</tr>		
+	<tr>
+		<td class="a1" width="15%">工龄</td>
+		<td class="a2" width="35%"><%=StringUtils.nullToStr(userMap.get("gl")) %></td>
 		<td class="a1" width="15%">是否业务员</td>
-		<td class="a2"><%=StringUtils.nullToStr(userMap.get("is_ywy")) %></td>	
-		<td class="a1" width="15%">排序</td>
-		<td class="a2"><%=StringUtils.nullToStr(userMap.get("xh")) %></td>		
+		<td class="a2" width="35%"><%=StringUtils.nullToStr(userMap.get("is_ywy")) %></td>
+	</tr>
+	<tr>
+		<td class="a1" width="15%">毕业学校</td>
+		<td class="a2" width="85%" colspan="3"><%=StringUtils.nullToStr(userMap.get("byxx")) %></td>
+	</tr>	
+	<tr>
+		<td class="a1" width="15%">专业</td>
+		<td class="a2" width="35%"><%=StringUtils.nullToStr(userMap.get("major")) %></td>
+		<td class="a1" width="15%">学历</td>
+		<td class="a2" width="35%"><%=StringUtils.nullToStr(userMap.get("xl")) %></td>	
+	</tr>	
+	<tr>	
+		<td class="a1" width="15%">工作简历</td>	
+		<td class="a2" colspan="3"><%=StringUtils.nullToStr(userMap.get("gzjl")) %></td>			
+	</tr>	
+	<tr>	
+		<td class="a1" width="15%">领导考核</td>	
+		<td class="a2" colspan="3"><%=StringUtils.nullToStr(userMap.get("ldkh")) %></td>			
+	</tr>
+	<tr>
+		<td class="a1" width="15%">备注</td>
+		<td class="a2" width="35%" colspan="3"><%=StringUtils.nullToStr(userMap.get("remark")) %></td>
 	</tr>
 	<tr height="35">
 		<td class="a1" colspan="4">
