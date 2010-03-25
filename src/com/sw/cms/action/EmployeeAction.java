@@ -122,6 +122,7 @@ public class EmployeeAction extends BaseAction {
 	 */
 	public String add(){
 		positions = sjzdService.getSjzdXmxxByZdId("SJZD_ZWXX");
+		user.setUser_id(employeeService.updateUserId());
 		return "success";
 	}
 	
