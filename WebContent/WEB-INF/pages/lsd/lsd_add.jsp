@@ -715,7 +715,7 @@ if(lsdProducts != null && lsdProducts.size()>0){
 			</select>	
 			
 			<select name="lsd.pos_id" id="pos_id" style="display:none">
-				<option value="">选择刷卡POS机</option>
+				<option value=""></option>
 			<%
 			if(posTypeList != null && posTypeList.size() > 0){
 				for(int i =0;i<posTypeList.size();i++){
