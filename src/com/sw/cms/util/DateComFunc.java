@@ -443,8 +443,27 @@ public final class DateComFunc {
 		DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		return sdf.format(new Date());
 	}
+	
+	/**
+	 * 两年日期间年差，不满一年计0
+	 * @param startDate
+	 * @param endDate
+	 * @return
+	 */
+	public static int getYearSub(String startDate,String endDate){
+		try{
+			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+			Date date1 = df.parse(startDate);
+			Date date2 = df.parse(endDate);
+			long millDate = date2.getTime() - date1.getTime();
+			long temD = millDate/(1000*60*60*24);
+			return new Integer(temD/365+"").intValue();
+		}catch(Exception e){
+			return 0;
+		}
+	}
 
 	public static void main(String[] args) {
-		System.out.println(DateComFunc.getMonthFirstDay("2008-11-08"));
+		System.out.println(DateComFunc.getYearSub("2008-11-08","2010-03-03"));
 	}
 }

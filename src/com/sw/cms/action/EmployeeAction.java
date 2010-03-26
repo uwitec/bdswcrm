@@ -12,6 +12,7 @@ import com.sw.cms.service.EmployeeService;
 import com.sw.cms.service.SjzdService;
 import com.sw.cms.service.UserService;
 import com.sw.cms.util.Constant;
+import com.sw.cms.util.DateComFunc;
 import com.sw.cms.util.ParameterUtility;
 
 /**
@@ -144,6 +145,7 @@ public class EmployeeAction extends BaseAction {
 			}
 		}
 		
+		user.setGl(DateComFunc.getYearSub(user.getRzrq(),DateComFunc.getToday()));
 		employeeService.saveUser(user);
 		return "success";
 	}
@@ -185,6 +187,7 @@ public class EmployeeAction extends BaseAction {
 			    }
 			 }
 		}
+		user.setGl(DateComFunc.getYearSub(user.getRzrq(),DateComFunc.getToday()));
 		employeeService.updateUser(user);
 		return "success";
 	}
