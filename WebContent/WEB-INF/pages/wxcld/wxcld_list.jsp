@@ -53,9 +53,9 @@ String orderType = (String)VS.findValue("orderType");
 	}
 	
 	function add(){
-		var destination = "addSfd.html";
+		var destination = "addWxcld.html";
 			var fea ='width=750,height=400,left=' + (screen.availWidth-750)/2 + ',top=' + (screen.availHeight-400)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
-		window.open(destination,'售后服务单',fea);	
+		window.open(destination,'维修处理单',fea);	
 	}	
 	function edit(id,wxcld_id){
 		var destination ="editWxcld.html?id="+id+"&wxcld_id="+wxcld_id+"";
@@ -119,10 +119,10 @@ String orderType = (String)VS.findValue("orderType");
 				<option value="已保存" <%if(w_state.equals("已保存")) out.print("selected"); %>>已保存</option>
 				<option value="已提交" <%if(w_state.equals("已提交")) out.print("selected"); %>>已提交</option>
 			</select>&nbsp;&nbsp;
-			维修状态：<select name="w_wx_state">
-				<option value=""></option>
+			维修状态：<select name="w_wx_state">				
 				<option value="待处理" <%if(w_wx_state.equals("待处理")) out.print("selected"); %>>待处理</option>
 				<option value="已处理" <%if(w_wx_state.equals("已处理")) out.print("selected"); %>>已处理</option>
+			    <option value=""></option>
 			</select>&nbsp;&nbsp;
 			 序列号：<input type="text" name="product_serial_num" value="<%=product_serial_num%>">
 			<input type="submit" name="buttonCx" value=" 查询 " class="css_button">
@@ -137,12 +137,13 @@ String orderType = (String)VS.findValue("orderType");
 		<td onclick="doSort('w_client_name');">往来单位<%if(orderName.equals("w_client_name")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
 		<td onclick="doSort('w_linkman');">联系人<%if(orderName.equals("w_linkman")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
 		<td onclick="doSort('w_mobile');">联系电话<%if(orderName.equals("w_mobile")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td onclick="doSort('w_address');">地址<%if(orderName.equals("w_address")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
 		<td onclick="doSort('w_jx_date');">维修时间<%if(orderName.equals("w_jx_date")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
 		<td onclick="doSort('w_state');">状态<%if(orderName.equals("w_state")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>		
 		<td onclick="doSort('w_wx_state');">维修状态<%if(orderName.equals("w_wx_state")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
 		<td onclick="doSort('w_pgr');">派工人<%if(orderName.equals("w_pgr")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>				
 		<td onclick="doSort('w_wxr');">维修人<%if(orderName.equals("w_wxr")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>						
-		<td onclick="doSort('w_cjr');">操作员<%if(orderName.equals("w_cjr")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<!--  <td onclick="doSort('w_cjr');">操作员<%if(orderName.equals("w_cjr")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>-->
 		<td>操作</td>
 	</tr>
 	</thead>
@@ -158,12 +159,13 @@ String orderType = (String)VS.findValue("orderType");
 		<td><%=StringUtils.nullToStr(StaticParamDo.getClientNameById((String)pgd.get("w_client_name"))) %></td>
 		<td><%=StringUtils.nullToStr(pgd.get("w_linkman")) %></td>
 		<td><%=StringUtils.nullToStr(pgd.get("w_mobile")) %></td>
+		<td><%=StringUtils.nullToStr(pgd.get("w_address")) %></td>
 		<td><%=StringUtils.nullToStr(pgd.get("w_jx_date")) %></td>
 		<td><%=StringUtils.nullToStr(pgd.get("w_state")) %></td>	
 		<td><%=StringUtils.nullToStr(pgd.get("w_wx_state")) %></td>	 		 
 		<td><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(pgd.get("w_pgr"))) %></td>
 		<td><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(pgd.get("w_wxr"))) %></td>
-		<td><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(pgd.get("w_cjr"))) %></td>
+		<!--<td><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(pgd.get("w_cjr"))) %></td>-->
 		<td>
 		<%
 		if(StringUtils.nullToStr(pgd.get("w_state")).equals("已提交"))
