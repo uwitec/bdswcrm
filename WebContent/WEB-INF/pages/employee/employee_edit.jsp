@@ -31,30 +31,76 @@ SysUser user = (SysUser)VS.findValue("user");
 <script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
 <script type="text/javascript">
 	function saveInfo(){
-		if(!InputValid(document.getElementById("gh"),1,"string",1,1,20,"工号")){	 return; }
-		if(!InputValid(document.getElementById("real_name"),1,"string",1,1,20,"姓名")){	 return; }
-		if(!InputValid(document.getElementById("nl"),1,"int",1,1,99,"年龄")){	 return; }
-		if(!InputValid(document.getElementById("gs_phone"),1,"string",1,1,20,"联系电话")){	 return; }
-		
+			
 		if(document.getElementById("dept").value == ""){
 			alert("所在部门不能为空，请选择！");
 			return;
 		}
-		if(document.getElementById("position").value == ""){
-			alert("职位不能为空，请选择！");
+		
+		if(document.getElementById("real_name").value == ""){
+			alert("姓名不能为空，请填写！");
 			return;
 		}
+		
+		if(document.getElementById("id_card").value == ""){
+			alert("身份证号码不能为空，请填写！");
+			return;
+		}
+		
+		if(document.getElementById("nl").value == ""){
+			alert("年龄不能为空，请填写！");
+			return;
+		}
+		
+		if(document.getElementById("gs_phone").value == ""){
+			alert("工作电话不能为空，请填写！");
+			return;
+		}
+		
+		if(document.getElementById("address").value == ""){
+			alert("家庭住址不能为空，请填写！");
+			return;
+		}
+		
+		if(document.getElementById("position").value == ""){
+			alert("职务不能为空，请选择！");
+			return;
+		}
+		
+		if(document.getElementById("rzrq").value == ""){
+			alert("入职日期不能为空，请选择！");
+			return;
+		}
+		
 		if(document.getElementById("is_ywy").value == ""){
 			alert("是否业务员不能为空，请选择！");
 			return;
 		}
-		if(document.getElementById("dept").value == ""){
-			alert("所在部门不能为空，请选择！");
+		
+		if(document.getElementById("byxx").value == ""){
+			alert("毕业学校不能为空，请填写！");
 			return;
 		}
+		
+		if(document.getElementById("major").value == ""){
+			alert("专业不能为空，请填写！");
+			return;
+		}
+		
+		if(document.getElementById("xl").value == ""){
+			alert("学历不能为空，请填写！");
+			return;
+		}		
+		
+		if(!InputValid(document.getElementById("real_name"),1,"string",1,1,20,"姓名")){	 return; }
+		if(!InputValid(document.getElementById("nl"),1,"int",1,1,99,"年龄")){	 return; }
+		if(!InputValid(document.getElementById("gs_phone"),1,"string",1,1,20,"工作电话")){	 return; }
+		if(!InputValid(document.getElementById("address"),1,"string",1,1,100,"家庭地址")){	 return; }
+		if(!InputValid(document.getElementById("byxx"),1,"string",1,1,50,"毕业学校")){	 return; }
+		if(!InputValid(document.getElementById("major"),1,"string",1,1,40,"专业")){	 return; }
+		if(!InputValid(document.getElementById("xl"),1,"string",1,1,10,"学历")){	 return; }
 		document.userForm.submit();
 	}
-	
 </script>
 </head>
 <body>
@@ -97,7 +143,7 @@ SysUser user = (SysUser)VS.findValue("user");
 	    <td class="a1" width="10%">生日</td>
 		<td class="a2" width="35%"><input type="text" name="user.csny" id="csny" value="<%=StringUtils.nullToStr(userMap.get("csny")) %>"  class="Wdate" onFocus="WdatePicker()"></td>	
 	    <td class="a1" width="15%">手机</td>
-		<td class="a2" width="35%"><input type="text" name="user.mobile" id="mobile" value="<%=StringUtils.nullToStr(userMap.get("mobile")) %>" maxlength="20"><font color="red">*</font></td>	
+		<td class="a2" width="35%"><input type="text" name="user.mobile" id="mobile" value="<%=StringUtils.nullToStr(userMap.get("mobile")) %>" maxlength="20"></td>	
 	</tr>	
 	<tr>
 		<td class="a1" width="15%">工作电话</td>
@@ -117,18 +163,35 @@ SysUser user = (SysUser)VS.findValue("user");
 	    <td class="a1" width="15%">政治面貌</td>
 		<td class="a2" width="35%"><input type="text" name="user.zzmm" id="zzmm" value="<%=StringUtils.nullToStr(userMap.get("zzmm")) %>" maxlength="20"></td>
 	</tr>
+</table>
+<BR>
+<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
+	<thead>
+	<tr>
+		<td colspan="4">家庭信息</td>
+	</tr>
+	</thead>
 	<tr>
 		<td class="a1" width="15%">家庭地址</td>
 		<td class="a2" width="35%"><input type="text" name="user.address" id="address" value="<%=StringUtils.nullToStr(userMap.get("address")) %>" size="45" maxlength="50"><font color="red">*</font></td>
 	    <td class="a1" width="15%">联系人</td>
-		<td class="a2" width="35%"><input type="text" name="user.lxr" id="lxr" value="<%=StringUtils.nullToStr(userMap.get("lxr")) %>" size="25" maxlength="30"><font color="red">*</font></td>
+		<td class="a2" width="35%"><input type="text" name="user.lxr" id="lxr" value="<%=StringUtils.nullToStr(userMap.get("lxr")) %>" size="25" maxlength="30"></td>
 	</tr>
 	<tr>		
 		<td class="a1" width="15%">家庭电话</td>
-		<td class="a2" width="35%"><input type="text" name="user.jt_phone" id="jt_phone" value="<%=StringUtils.nullToStr(userMap.get("jt_phone")) %>" maxlength="20"><font color="red">*</font></td>		
+		<td class="a2" width="35%"><input type="text" name="user.jt_phone" id="jt_phone" value="<%=StringUtils.nullToStr(userMap.get("jt_phone")) %>" maxlength="20"></td>		
 	    <td class="a1" width="15%">关系</td>
 		<td class="a2" width="35%"><input type="text" name="user.relation" id="relation" value="<%=StringUtils.nullToStr(userMap.get("relation")) %>" maxlength="10"></td>
 	</tr>	
+</table>
+<BR>
+<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
+	<thead>
+	<tr>
+		<td colspan="4">档案信息</td>
+	</tr>
+	</thead>	
+	<tr>	
 	<tr>
 		<td class="a1">所在部门</td>
 		<td class="a4">
@@ -151,7 +214,7 @@ SysUser user = (SysUser)VS.findValue("user");
 					}
 				}
 				%>
-			</select>
+			</select><font color="red">*</font>	
 		</td>	
 		<td class="a1" width="15%">职务</td>
 		<td class="a2" width="35%">
@@ -167,7 +230,7 @@ SysUser user = (SysUser)VS.findValue("user");
 					}
 				}
 				%>			
-			</select>	
+			</select><font color="red">*</font>		
 		</td>		
 	</tr>	
 	<tr>
@@ -176,9 +239,7 @@ SysUser user = (SysUser)VS.findValue("user");
 		<td class="a1" width="15%">入职日期</td>
 		<td class="a2" width="35%"><input type="text" name="user.rzrq" id="rzrq" value="<%=StringUtils.nullToStr(userMap.get("rzrq")) %>"  maxlength="20" class="Wdate" onFocus="WdatePicker()"><font color="red">*</font></td>		
 	</tr>		
-	<tr>
-		<td class="a1" width="15%">工龄</td>
-		<td class="a2" width="35%"><input type="text" name="user.gl" id="gl" value="<%=StringUtils.nullToStr(userMap.get("gl")) %>"  maxlength="5" ><font color="red">*</font></td>
+	<tr>		
 		<td class="a1" width="15%">是否业务员</td>
 		<td class="a2">
 			<select name="user.is_ywy" id="is_ywy">
@@ -186,12 +247,10 @@ SysUser user = (SysUser)VS.findValue("user");
 				<option value="是" <%if(StringUtils.nullToStr(userMap.get("is_ywy")).equals("是")) out.print("selected"); %>>是</option>
 				<option value="否" <%if(StringUtils.nullToStr(userMap.get("is_ywy")).equals("否")) out.print("selected"); %>>否</option>
 			</select><font color="red">*</font>
-		</td>					
-	</tr>
-	<tr>
+		</td>
 		<td class="a1" width="15%">毕业学校</td>
-		<td class="a2" width="85%" colspan="3"><input type="text" name="user.byxx" id="byxx" value="<%=StringUtils.nullToStr(userMap.get("byxx")) %>" size="80" maxlength="80"><font color="red">*</font></td>
-	</tr>	
+		<td class="a2" width="35%"><input type="text" name="user.byxx" id="byxx" value="<%=StringUtils.nullToStr(userMap.get("byxx")) %>" size="60" maxlength="60"><font color="red">*</font></td>					
+	</tr>		
 	<tr>
 		<td class="a1" width="15%">专业</td>
 		<td class="a2" width="35%"><input type="text" name="user.major" id="major" value="<%=StringUtils.nullToStr(userMap.get("major")) %>"><font color="red">*</font></td>
@@ -201,7 +260,7 @@ SysUser user = (SysUser)VS.findValue("user");
 	<tr>	
 		<td class="a1" width="15%">工作简历</td>	
 		<td class="a2" colspan="3">
-			<ww:textarea name="user.gzjl" id="gzjl"  theme="simple" value="<%=StringUtils.nullToStr(userMap.get("gzjl")) %>" cssStyle="width:70%;height:70px"/><span style="color:red">*</span>
+			<ww:textarea name="user.gzjl" id="gzjl"  theme="simple" value="<%=StringUtils.nullToStr(userMap.get("gzjl")) %>" cssStyle="width:70%;height:70px"/>
 		</td>			
 	</tr>	
 	<tr>	
