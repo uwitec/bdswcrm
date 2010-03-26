@@ -189,7 +189,7 @@ session.removeAttribute("messages");
 	%>		
 	<tr>
 		<td class="a1" width="15%">入库单编号</td>
-		<td class="a2" width="35%"><input type="text" name="rkd.rkd_id" id="rkd_id" value="<%=StringUtils.nullToStr(rkd.getRkd_id()) %>" readonly>
+		<td class="a2" width="35%"><input type="text" name="rkd.rkd_id" id="rkd_id" value="<%=StringUtils.nullToStr(rkd.getRkd_id()) %>" size="30" readonly>
 		</td>	
 		<%
 		String rksj = StringUtils.nullToStr(rkd.getRk_date());
@@ -241,15 +241,15 @@ session.removeAttribute("messages");
 	</thead>	
 	<tr>
 		<td class="a1" width="15%">进货单编号</td>
-		<td class="a2"><input type="text" name="rkd.jhd_id" id="jhd_id" value="<%=StringUtils.nullToStr(rkd.getJhd_id()) %>" size="30" maxlength="20" readonly></td>	
+		<td class="a2" width="35%"><input type="text" name="rkd.jhd_id" id="jhd_id" value="<%=StringUtils.nullToStr(rkd.getJhd_id()) %>" size="30" maxlength="20" readonly></td>	
 		<%
 		String cjsj = StringUtils.nullToStr(rkd.getCreatdate());
 		if(cjsj.equals("")){
 			cjsj = DateComFunc.getToday();
 		}
 		%>		
-		<td class="a1">创建时间</td>
-		<td class="a2"><input type="text" name="rkd.creatdate" id="creatdate" value="<%=cjsj %>" readonly></td>						
+		<td class="a1" width="15%">创建时间</td>
+		<td class="a2" width="35%"><input type="text" name="rkd.creatdate" id="creatdate" value="<%=cjsj %>" readonly></td>						
 	</tr>
 	<tr>			
 		<td class="a1" width="15%">供货单位</td>
