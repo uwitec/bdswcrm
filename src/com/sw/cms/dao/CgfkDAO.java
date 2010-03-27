@@ -377,7 +377,7 @@ public class CgfkDAO extends JdbcBaseDAO {
 	/**
 	 * 更新预付款余额
 	 * @param id
-	 * @param yfk_ye
+	 * @param yfk_ye 
 	 */
 	public void updateYfkye(String id,double yfk_ye){
 		String sql = "update cgfk set yfk_ye=" + yfk_ye + " where id='" + id + "'";
@@ -401,6 +401,29 @@ public class CgfkDAO extends JdbcBaseDAO {
 		}
 		
 		return cgfk;
+	}
+	
+	
+	/**
+	 * 采购付款明细是否存在冲突(付款申请，预付冲应付)
+	 * @param jhd_id
+	 * @param gysbh
+	 * @return
+	 */
+	public boolean isCgfkDescExist(String jhd_id,String gysbh){
+		boolean is = false;
+		
+		String sql = "select count(1) as counts from cgfk_desc a join cgfk b on b.id=a.cgfk_id where b.state<>'已支付' and a.jhd_id='" + jhd_id + "' and b.gysbh='" + gysbh + "'";
+		int count1 = this.getJdbcTemplate().queryForInt(sql);
+		
+		sql = "select count(1) as count from yufu_to_yingfu_desc a join yufu_to_yingfu b on b.id=a.yw_id where b.state<>'已提交' and a.jhd_id='" + jhd_id + "' and client_name='" + gysbh + "'";
+		int count2 = this.getJdbcTemplate().queryForInt(sql);
+		
+		if((count1+count2) > 0){
+			is = true;
+		}
+		
+		return is;
 	}
 
 }

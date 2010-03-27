@@ -152,7 +152,7 @@ public class CgthdService {
 		cgfk.setFkje(0 - cgthd.getTkzje());
 		cgfk.setFkzh(cgthd.getZhmc());
 		cgfk.setGysbh(cgthd.getProvider_name());
-		cgfk.setState("已提交");
+		cgfk.setState("已支付");
 		cgfk.setRemark("采购退货单,退货单编号[" + cgthd.getId() + "]");
 		cgfk.setCzr(cgthd.getCzr());
 		cgfk.setDelete_key(cgthd.getId());

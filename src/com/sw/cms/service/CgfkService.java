@@ -1,5 +1,7 @@
 package com.sw.cms.service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +12,7 @@ import com.sw.cms.dao.CnfkdDAO;
 import com.sw.cms.dao.RoleDAO;
 import com.sw.cms.dao.YufukDAO;
 import com.sw.cms.model.Cgfk;
+import com.sw.cms.model.CgfkDesc;
 import com.sw.cms.model.Cnfkd;
 import com.sw.cms.model.Page;
 import com.sw.cms.util.StringUtils;
@@ -230,6 +233,67 @@ public class CgfkService {
 			cnfkdDao.insertCnfkd(cnfkd);
 		}
 		
+	}
+	
+	
+	/**
+	 * 判断提交的付款明细中是否存在与其他付款申请冲突，如果存在返回编号，不存在返回空
+	 * @param cgfk
+	 * @param cgfkDescs
+	 * @return
+	 */
+	public String getExistCgfkDesc(Cgfk cgfk,List cgfkDescs){
+		String temp = "";
+		
+		String gysbh = cgfk.getGysbh();
+		
+		if(cgfkDescs != null && cgfkDescs.size()>0){
+			for(int i =0;i<cgfkDescs.size();i++){
+				CgfkDesc cgfkDesc = (CgfkDesc)cgfkDescs.get(i);
+				if(cgfkDesc != null && cgfkDesc.getBcfk() != 0){
+					String jhd_id = cgfkDesc.getJhd_id();
+					
+					if(cgfkDao.isCgfkDescExist(jhd_id, gysbh)){
+						//如果存在冲突，则记录相应进货单编号
+						if(temp.equals("")){
+							temp = jhd_id;
+						}else{
+							temp += "," + jhd_id;
+						}
+					}
+				}
+			}
+		}
+		
+		return temp;
+	}
+	
+	
+	public List cgfkDescObjToMap(List cgfkDescs){
+		List list = new ArrayList();
+		if(cgfkDescs != null && cgfkDescs.size()>0){
+			for(int i =0;i<cgfkDescs.size();i++){
+				CgfkDesc cgfkDesc = (CgfkDesc)cgfkDescs.get(i);
+				if(cgfkDesc != null){
+					
+					String jhd_id = cgfkDesc.getJhd_id();
+					String fsrq = cgfkDesc.getFsrq();
+					double fsje = cgfkDesc.getFsje();
+					double yfje = cgfkDesc.getYfje();
+					double bcfk = cgfkDesc.getBcfk();
+					
+					Map map = new HashMap();
+					map.put("jhd_id", jhd_id);
+					map.put("fsrq", fsrq);
+					map.put("fsje", fsje);
+					map.put("yfje", yfje);
+					map.put("bcfk", bcfk);
+					
+					list.add(map);
+				}
+			}
+		}
+		return list;
 	}
 
 

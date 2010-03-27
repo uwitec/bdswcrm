@@ -7,6 +7,7 @@ import com.sw.cms.action.base.BaseAction;
 import com.sw.cms.model.LoginInfo;
 import com.sw.cms.model.Page;
 import com.sw.cms.model.YufuToYingfu;
+import com.sw.cms.service.CgfkService;
 import com.sw.cms.service.ClientsService;
 import com.sw.cms.service.UserService;
 import com.sw.cms.service.YufuToYingfuService;
@@ -17,6 +18,7 @@ public class YufuToYingfuAction extends BaseAction {
 	private YufuToYingfuService yufuToYingfuService;
 	private UserService userService;
 	private ClientsService clientsService;
+	private CgfkService cgfkService;
 	
 	private Page yufuToYingfuPage;
 	private YufuToYingfu yufuToYingfu = new YufuToYingfu();
@@ -102,6 +104,12 @@ public class YufuToYingfuAction extends BaseAction {
 		LoginInfo info = (LoginInfo)getSession().getAttribute("LOGINUSER");
 		String user_id = info.getUser_id();
 		yufuToYingfu.setCzr(user_id);
+		
+		String tempMsg = yufuToYingfuService.getExistYufuToYingfuDesc(yufuToYingfu,yufuToYingfuDescs);
+		if(!tempMsg.equals("")){
+			this.setMsg(tempMsg);
+			return INPUT;
+		}
 		
 		//保存预付冲应付信息
 		yufuToYingfuService.updateYufuToYingfu(yufuToYingfu,yufuToYingfuDescs);
@@ -256,6 +264,16 @@ public class YufuToYingfuAction extends BaseAction {
 
 	public void setClientsService(ClientsService clientsService) {
 		this.clientsService = clientsService;
+	}
+
+
+	public CgfkService getCgfkService() {
+		return cgfkService;
+	}
+
+
+	public void setCgfkService(CgfkService cgfkService) {
+		this.cgfkService = cgfkService;
 	}
 
 }

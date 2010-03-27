@@ -7,6 +7,8 @@ import java.util.Map;
 import com.sw.cms.dao.CgfkDAO;
 import com.sw.cms.dao.YufuToYingfuDAO;
 import com.sw.cms.dao.YufukDAO;
+import com.sw.cms.model.Cgfk;
+import com.sw.cms.model.CgfkDesc;
 import com.sw.cms.model.Page;
 import com.sw.cms.model.YufuToYingfu;
 import com.sw.cms.model.YufuToYingfuDesc;
@@ -134,6 +136,39 @@ public class YufuToYingfuService {
 	 */
 	public String updateID() {
 		return yufuToYingfuDao.getID();
+	}
+	
+	
+	/**
+	 * 判断提交的付款明细中是否存在与其他付款申请冲突，如果存在返回编号，不存在返回空
+	 * @param cgfk
+	 * @param cgfkDescs
+	 * @return
+	 */
+	public String getExistYufuToYingfuDesc(YufuToYingfu info,List descList){
+		String temp = "";
+		
+		String client_name = info.getClient_name();
+		
+		if(descList != null && descList.size()>0){
+			for(int i =0;i<descList.size();i++){
+				YufuToYingfuDesc yufuToYingfuDesc = (YufuToYingfuDesc)descList.get(i);
+				if(yufuToYingfuDesc != null && yufuToYingfuDesc.getBcjs() != 0){
+					String jhd_id = yufuToYingfuDesc.getJhd_id();
+					
+					if(cgfkDao.isCgfkDescExist(jhd_id, client_name)){
+						//如果存在冲突，则记录相应进货单编号
+						if(temp.equals("")){
+							temp = jhd_id;
+						}else{
+							temp += "," + jhd_id;
+						}
+					}
+				}
+			}
+		}
+		
+		return temp;
 	}
 	
 	

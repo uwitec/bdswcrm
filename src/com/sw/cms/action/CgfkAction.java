@@ -121,6 +121,14 @@ public class CgfkAction extends BaseAction {
 		String user_id = info.getUser_id();
 		cgfk.setCzr(user_id);
 		
+		String tempMsg = cgfkService.getExistCgfkDesc(cgfk, cgfkDescs);
+		if(!tempMsg.equals("")){
+			this.setMsg(tempMsg);
+			cgfkDescs = cgfkService.cgfkDescObjToMap(cgfkDescs);
+			return INPUT;
+		}
+		
+		
 		cgfkService.saveCgfk(cgfk, cgfkDescs);
 		return "success";
 	}
@@ -149,6 +157,13 @@ public class CgfkAction extends BaseAction {
 		LoginInfo info = (LoginInfo)getSession().getAttribute("LOGINUSER");
 		String user_id = info.getUser_id();
 		cgfk.setCzr(user_id);
+		
+		String tempMsg = cgfkService.getExistCgfkDesc(cgfk, cgfkDescs);
+		if(!tempMsg.equals("")){
+			this.setMsg(tempMsg);
+			cgfkDescs = cgfkService.cgfkDescObjToMap(cgfkDescs);
+			return INPUT;
+		}
 		
 		cgfkService.updateCgfk(cgfk, cgfkDescs);
 		return "success";
