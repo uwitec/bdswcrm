@@ -17,6 +17,8 @@ int allCount = 3;
 if(cgfkDescs != null && cgfkDescs.size()>0){
 	allCount = cgfkDescs.size();
 }
+
+String msg = StringUtils.nullToStr(VS.findValue("msg"));
 %>
 
 <html>
@@ -34,6 +36,7 @@ if(cgfkDescs != null && cgfkDescs.size()>0){
 </style>
 <script type="text/javascript">
 	var allCount = <%=allCount %>;
+	var msg = "<%=msg %>";
 	
 	function saveInfo(vl){
 		if(vl == "1"){
@@ -179,10 +182,18 @@ if(cgfkDescs != null && cgfkDescs.size()>0){
 		
 		document.cgfkForm.action = "addCgfk.html";
 		document.cgfkForm.submit();
+	}	
+
+	function onloadMsg(){
+		if(msg == "") return;
+
+		var tempMsg = "付款申请单付款明细中：\n" + msg + "\n与其它未支付付款申请单或未提交预付冲应付存在冲突，无法保存，请检查！";
+
+		alert(tempMsg);
 	}						
 </script>
 </head>
-<body onload="initFzrTip();">
+<body onload="initFzrTip();onloadMsg();">
 <form name="cgfkForm" action="updateCgfk.html" method="post">
 <input type="hidden" name="cgfk.state" id="state" value="<%=StringUtils.nullToStr(cgfk.getState()) %>">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
