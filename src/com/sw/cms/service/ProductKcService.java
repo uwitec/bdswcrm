@@ -78,10 +78,11 @@ public class ProductKcService {
 	 * @param productKc
 	 */
 	public void saveProductKc(String product_id,String store_id,String nums){
-		productKcDao.saveProductKc(product_id, store_id, nums);
-		
 		//生成库存期初值
-		this.genKcQc(product_id, store_id, nums);		
+		this.genKcQc(product_id, store_id, nums);	
+		
+		//保存当前库存值
+		productKcDao.saveProductKc(product_id, store_id, nums);	
 	}
 	
 	
@@ -95,6 +96,10 @@ public class ProductKcService {
 		SysInitSet sysInitSet = sysInitSetDao.getSysInitSet();
 		
 		String strQyrq = sysInitSet.getQyrq();
+		
+		if(strQyrq == null || strQyrq.equals("")){
+			return;
+		}
 		
 		Date qyrq = DateComFunc.strToDate(strQyrq,"yyyy-MM-dd"); //系统启用日期
 
