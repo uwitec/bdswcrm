@@ -145,6 +145,12 @@
     	<servlet-class>com.sw.cms.xls.down.DownLoadXlsServlet</servlet-class>
     </servlet>
     <servlet>
+    	<description>DownLoadFileServlet</description>
+    	<display-name>DownLoadFileServlet</display-name>
+    	<servlet-name>DownLoadFileServlet</servlet-name>
+    	<servlet-class>com.sw.cms.servlet.DownLoadFileServlet</servlet-class>
+    </servlet>    
+    <servlet>
     	<display-name>UploadFile</display-name>
     	<servlet-name>UploadFile</servlet-name>
     	<servlet-class>com.sw.cms.servlet.UploadFile</servlet-class>
@@ -157,7 +163,11 @@
 	<servlet-mapping>
 		<servlet-name>DownLoadXlsServlet</servlet-name>
 		<url-pattern>/DownLoadXlsServlet</url-pattern>
-	</servlet-mapping>
+	</servlet-mapping>	
+	<servlet-mapping>
+		<servlet-name>DownLoadFileServlet</servlet-name>
+		<url-pattern>/DownLoadFileServlet</url-pattern>
+	</servlet-mapping>	
 	<servlet-mapping>
 		<servlet-name>UploadFile</servlet-name>
 		<url-pattern>/UploadFile</url-pattern>
