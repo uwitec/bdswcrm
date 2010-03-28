@@ -28,6 +28,13 @@ function doSp(vl){
 		document.cgfkForm.submit();
 	}
 }
+
+function openWin(id){
+	var destination = "viewJhd.html?id="+id;
+	var fea ='width=850,height=600,left=' + (screen.availWidth-850)/2 + ',top=' + (screen.availHeight-600)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+	
+	window.open(destination,'详细信息',fea);	
+}
 </script>
 </head>
 <body>
@@ -98,9 +105,15 @@ if(cgfkDescs != null && cgfkDescs.size()>0){
 		double fsje = map.get("fsje")==null?0:((Double)map.get("fsje")).doubleValue();
 		double yfje = map.get("yfje")==null?0:((Double)map.get("yfje")).doubleValue();
 		double bcfk = map.get("bcfk")==null?0:((Double)map.get("bcfk")).doubleValue();
+		
+		String jhd_id = StringUtils.nullToStr(map.get("jhd_id"));
 %>
 	<tr>
-		<td class="a2"><%=StringUtils.nullToStr(map.get("jhd_id")) %></td>
+		<%if(jhd_id.indexOf("JH") != -1){ %>
+		<td class="a2"><a href="javascript:openWin('<%=jhd_id %>');" title="点击查看进货单详情"><%=jhd_id %></a></td>
+		<%}else{ %>
+		<td class="a2"><%=jhd_id %></td>
+		<%} %>
 		<td class="a2"><%=StringUtils.nullToStr(map.get("fsrq")) %></td>
 		<td class="a2"><%=JMath.round(fsje,2) %></td>
 		<td class="a2"><%=JMath.round(yfje,2) %></td>
