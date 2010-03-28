@@ -432,4 +432,4 @@ ALTER TABLE `sys_user` ADD COLUMN `zzmm`  VARCHAR(20)  AFTER `remark`;
 2010-03-27 修改
 --修改采购付款表的状态
 update cgfk set state='已支付' where state='已提交'
-
+--导入column_funcs表
