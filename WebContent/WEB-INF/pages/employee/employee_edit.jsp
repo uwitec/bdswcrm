@@ -147,7 +147,7 @@ SysUser user = (SysUser)VS.findValue("user");
 	</tr>	
 	<tr>
 		<td class="a1" width="15%">工作电话</td>
-		<td class="a2" width="35%"><input type="text" name="user.gs_phone" id="gs_phone" value="<%=StringUtils.nullToStr(userMap.get("gs_phone")) %>" maxlength="10" style="width:80%"><font color="red">*</font></td>
+		<td class="a2" width="35%"><input type="text" name="user.gs_phone" id="gs_phone" value="<%=StringUtils.nullToStr(userMap.get("gs_phone")) %>" maxlength="20" style="width:80%"><font color="red">*</font></td>
 		<td class="a1" width="15%">E-Mail</td>
 		<td class="a2" width="35%"><input type="text" name="user.mail" id="mail" value="<%=StringUtils.nullToStr(userMap.get("mail")) %>" maxlength="50" style="width:80%"></td>	
 	</tr>

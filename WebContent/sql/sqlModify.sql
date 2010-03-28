@@ -433,3 +433,11 @@ ALTER TABLE `sys_user` ADD COLUMN `zzmm`  VARCHAR(20)  AFTER `remark`;
 --修改采购付款表的状态
 update cgfk set state='已支付' where state='已提交'
 --导入column_funcs表
+
+ALTER TABLE `sys_user` MODIFY COLUMN `gs_phone` VARCHAR(40) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+ MODIFY COLUMN `mobile` VARCHAR(40) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+ MODIFY COLUMN `jt_phone` VARCHAR(40) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+ MODIFY COLUMN `fax` VARCHAR(40) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+ MODIFY COLUMN `qq` VARCHAR(40) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+ MODIFY COLUMN `p_code` VARCHAR(40) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL;
+

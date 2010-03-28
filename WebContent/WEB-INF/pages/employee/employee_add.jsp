@@ -149,7 +149,7 @@ SysUser user = (SysUser)VS.findValue("user");
 	</tr>	
 	<tr>
 		<td class="a1" width="15%">工作电话</td>
-		<td class="a2" width="35%"><input type="text" name="user.gs_phone" id="gs_phone" value="" maxlength="10" onkeyup="goNext(this.form,this.name);" style="width:80%"><font color="red">*</font></td>
+		<td class="a2" width="35%"><input type="text" name="user.gs_phone" id="gs_phone" value="" maxlength="20" onkeyup="goNext(this.form,this.name);" style="width:80%"><font color="red">*</font></td>
 		<td class="a1" width="15%">E-Mail</td>
 		<td class="a2" width="35%"><input type="text" name="user.mail" id="mail" value="" maxlength="50" onkeyup="goNext(this.form,this.name);" style="width:80%"></td>	
 	</tr>
@@ -177,7 +177,7 @@ SysUser user = (SysUser)VS.findValue("user");
 		<td class="a1" width="15%">家庭地址</td>
 		<td class="a2" width="35%"><input type="text" name="user.address" id="address" value=""  style="width:80%" maxlength="50" onkeyup="goNext(this.form,this.name);"><font color="red">*</font></td>
 	    <td class="a1" width="15%">联系人</td>
-		<td class="a2" width="35%"><input type="text" name="user.lxr" id="lxr" value=""  style="width:80%" maxlength="30" onkeyup="goNext(this.form,this.name);"></td>	
+		<td class="a2" width="35%"><input type="text" name="user.lxr" id="lxr" value=""  style="width:80%" maxlength="20" onkeyup="goNext(this.form,this.name);"></td>	
 	</tr>
 	<tr>		
 		<td class="a1" width="15%">家庭电话</td>
