@@ -45,11 +45,10 @@ String orderType = (String)VS.findValue("orderType");
 	
 	function clearAll(){
 		document.myform.linkman.value = "";
-		document.myform.cj_date1.value = "";
-		document.myform.cj_date2.value = "";
-		document.myform.wx_state.value = "";
-		document.myform.state.value = "";
-		document.myform.jxr.value = "";
+		document.myform.p_cj_date1.value = "";
+		document.myform.p_cj_date2.value = "";
+		document.myform.p_state.value = "";
+		document.myform.p_wx_state.value = "";
 	}
 	
 	function add(){
@@ -107,43 +106,58 @@ String orderType = (String)VS.findValue("orderType");
 			<img src="images/import.gif" align="absmiddle" border="0">&nbsp;<a href="#" class="xxlb" onclick="refreshPage();"> 刷 新 </a>	</td>			
 	</tr>
 	<tr>
-		<td class="search" align="left" colspan="2">&nbsp;&nbsp;
-			联系人：<input type="text" name="linkman" value="<%=linkman %>">&nbsp;&nbsp;
-			时间：<input type="text" name="p_cj_date1" value="<%=p_cj_date1 %>" size="15"  class="Wdate" onFocus="WdatePicker()" >
-			&nbsp;&nbsp;至&nbsp;&nbsp;
-			<input type="text" name="p_cj_date2" value="<%=p_cj_date2 %>" size="15"  class="Wdate" onFocus="WdatePicker()" >
-			&nbsp;&nbsp;
-			状态：<select name="p_state">
-				<option value=""></option>
-				<option value="已保存" <%if(p_state.equals("已保存")) out.print("selected"); %>>已保存</option>
-				<option value="已提交" <%if(p_state.equals("已提交")) out.print("selected"); %>>已提交</option>
-			</select>&nbsp;&nbsp;
-			维修状态：<select name="p_wx_state">				
-				<option value="待处理" <%if(p_wx_state.equals("待处理")) out.print("selected"); %>>待处理</option>
-				<option value="已处理" <%if(p_wx_state.equals("已处理")) out.print("selected"); %>>已处理</option>
-				<option value=""></option>
-			</select>&nbsp;&nbsp;
-			 
-			<input type="submit" name="buttonCx" value=" 查询 " class="css_button">
-			<input type="button" name="buttonQk" value=" 清空 " class="css_button" onclick="clearAll();">
+		<td class="search" align="left" colspan="2">
+			<table width="100%" border="0" style="font-size: 12px">
+				<tr>
+					<td align="center">联系人：</td>
+					<td><input type="text" name="linkman" value="<%=linkman %>"></td>
+					<td align="center">时　　间：</td>
+					<td>
+						<input type="text" name="p_cj_date1" value="<%=p_cj_date1 %>" class="Wdate" onFocus="WdatePicker()" >
+						&nbsp;&nbsp;至&nbsp;&nbsp;
+						<input type="text" name="p_cj_date2" value="<%=p_cj_date2 %>" class="Wdate" onFocus="WdatePicker()" >
+					</td>
+					<td rowspan="2">
+						<input type="submit" name="buttonCx" value=" 查询 " class="css_button">
+						<input type="button" name="buttonQk" value=" 清空 " class="css_button" onclick="clearAll();">			
+					</td>
+				</tr>
+				<tr>
+					<td align="center">状　态：</td>
+					<td>
+						<select name="p_state">
+							<option value=""></option>
+							<option value="已保存" <%if(p_state.equals("已保存")) out.print("selected"); %>>已保存</option>
+							<option value="已提交" <%if(p_state.equals("已提交")) out.print("selected"); %>>已提交</option>
+						</select>		
+					</td>
+					<td align="center">维修状态：</td>
+					<td>
+						<select name="p_wx_state">
+							<option value=""></option>			
+							<option value="待处理" <%if(p_wx_state.equals("待处理")) out.print("selected"); %>>待处理</option>
+							<option value="已处理" <%if(p_wx_state.equals("已处理")) out.print("selected"); %>>已处理</option>
+						</select>				
+					</td>
+				</tr>
+			</table>		
 		</td>				
 	</tr>		
 </table>
 <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0" border="1" id="selTable">
 	<thead>
 	<tr>
-		<td onclick="doSort('p_id');">派工单编号<%if(orderName.equals("p_id")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('client_name');">往来单位<%if(orderName.equals("client_name")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('linkman');">联系人<%if(orderName.equals("linkman")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('mobile');">联系电话<%if(orderName.equals("mobile")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('address');">地址<%if(orderName.equals("address")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('p_yy_date');">派工时间<%if(orderName.equals("p_yy_date")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('p_state');">状态<%if(orderName.equals("p_state")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>		
-		<td onclick="doSort('p_wx_state');">维修状态<%if(orderName.equals("p_wx_state")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('p_pgr');">派工人<%if(orderName.equals("p_pgr")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>				
-		<td onclick="doSort('p_wxr');">维修人<%if(orderName.equals("p_wxr")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>						
-		<!-- <td onclick="doSort('p_cjr');">操作员<%if(orderName.equals("p_cjr")) out.print("<img src='images/" + orderType + ".gif'>"); %></td> -->
-		<td>操作</td>
+		<td width="10%" onclick="doSort('p_id');">派工单编号<%if(orderName.equals("p_id")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="19%" onclick="doSort('client_name');">往来单位<%if(orderName.equals("client_name")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="8%" onclick="doSort('linkman');">联系人<%if(orderName.equals("linkman")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="8%" onclick="doSort('mobile');">联系电话<%if(orderName.equals("mobile")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="12%" onclick="doSort('address');">地址<%if(orderName.equals("address")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="7%" onclick="doSort('p_yy_date');">派工时间<%if(orderName.equals("p_yy_date")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="7%" onclick="doSort('p_state');">状态<%if(orderName.equals("p_state")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>		
+		<td width="7%" onclick="doSort('p_wx_state');">维修状态<%if(orderName.equals("p_wx_state")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="7%" onclick="doSort('p_pgr');">派工人<%if(orderName.equals("p_pgr")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>				
+		<td width="7%" onclick="doSort('p_wxr');">维修人<%if(orderName.equals("p_wxr")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>						
+		<td width="10%">操作</td>
 	</tr>
 	</thead>
 	<%
@@ -164,7 +178,6 @@ String orderType = (String)VS.findValue("orderType");
 		<td><%=StringUtils.nullToStr(pgd.get("p_wx_state")) %></td>	 		 
 		<td><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(pgd.get("p_pgr"))) %></td>
 		<td><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(pgd.get("p_wxr"))) %></td>
-		<!-- <td><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(pgd.get("p_cjr"))) %></td>-->
 		<td>
 		<%
 		if(StringUtils.nullToStr(pgd.get("p_state")).equals("已提交")){
