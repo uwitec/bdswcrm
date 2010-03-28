@@ -62,11 +62,14 @@ public class ThdService {
 	 * @param thdProducts
 	 */
 	public void saveThd(Thd thd,List thdProducts){
+		
+		//如果退货单已经提交或是已经入库，不做任何处理
+		if(thdDao.isThdSubmit(thd.getThd_id())){
+			return;
+		}
+		
 		thdDao.saveThd(thd, thdProducts);		
 		
-		/**
-		 * 退货分为两种方式（现金、冲抵往来）
-		 */
 		if(!thd.getState().equals("已保存")){
 			this.saveRkd(thd, thdProducts); //生成相应入库单
 			
