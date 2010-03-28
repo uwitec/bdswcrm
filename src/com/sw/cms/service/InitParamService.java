@@ -5,10 +5,14 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import com.sw.cms.dao.InitParamDAO;
 import com.sw.cms.dao.KcMxReportDAO;
 import com.sw.cms.dao.ProductDAO;
 import com.sw.cms.dao.StoreDAO;
+import com.sw.cms.dao.UserDAO;
 import com.sw.cms.model.StoreHouse;
 import com.sw.cms.util.DateComFunc;
 import com.sw.cms.util.StringUtils;
@@ -19,6 +23,9 @@ public class InitParamService {
 	private KcMxReportDAO kcMxReportDao;
 	private StoreDAO storeDao;
 	private ProductDAO productDao;
+	private UserDAO userDao;
+	
+	private Log log = LogFactory.getLog(getClass());
 	
 	/**
 	 * 重置业务相关参数为1
@@ -165,6 +172,31 @@ public class InitParamService {
 		}
 	}
 	
+	/**
+	 * 更新员工的工龄
+	 */
+	public void updateEmploeeGl(){
+		List list = userDao.getAllEmployeeList();
+		
+		String user_id = "";
+		if(list != null && list.size() > 0){
+			for(int i=0;i<list.size();i++){
+				Map map = (Map)list.get(i);
+				String rzrq = StringUtils.nullToStr(map.get("rzrq"));
+				
+				if(rzrq.equals(""))
+					continue;
+				
+				int gl = DateComFunc.getYearSub(rzrq,DateComFunc.getToday());
+				user_id = StringUtils.nullToStr(map.get("user_id"));
+				
+				userDao.updateUserGL(user_id, gl);
+			}
+		}
+		
+		log.info("更新员工工龄成功");
+	}
+	
 
 	public InitParamDAO getInitParamDao() {
 		return initParamDao;
@@ -196,6 +228,14 @@ public class InitParamService {
 
 	public void setProductDao(ProductDAO productDao) {
 		this.productDao = productDao;
+	}
+
+	public UserDAO getUserDao() {
+		return userDao;
+	}
+
+	public void setUserDao(UserDAO userDao) {
+		this.userDao = userDao;
 	}
 
 }

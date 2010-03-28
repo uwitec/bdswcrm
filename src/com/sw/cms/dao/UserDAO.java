@@ -101,7 +101,7 @@ public class UserDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public List getAllEmployeeList(){
-		String sql = "select user_id,real_name from sys_user where is_sys_user='0' and is_del='0'";
+		String sql = "select user_id,real_name,rzrq from sys_user where is_sys_user='0' and is_del='0'";
 		return this.getResultList(sql);
 	}
 	
@@ -620,6 +620,11 @@ public class UserDAO extends JdbcBaseDAO {
 			szkf = (String)map.get("szkf");
 		}
 		return szkf;
+	}
+	
+	public void updateUserGL(String user_id,int gl){
+		String sql = "update sys_user set gl='" + gl + "' where user_id='" + user_id + "'";
+		this.getJdbcTemplate().update(sql);
 	}
 	
 	

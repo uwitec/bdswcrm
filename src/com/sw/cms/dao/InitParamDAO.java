@@ -634,5 +634,6 @@ public class InitParamDAO extends JdbcBaseDAO {
 		String sql = "insert into product_kc_qc(product_id,store_id,nums,cdate,price) values('" + product_id + "','" + store_id + "'," + nums + ",'" + cdate + "'," + price + ")";
 		this.getJdbcTemplate().update(sql);
 	}
+	
 
 }
