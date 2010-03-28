@@ -19,6 +19,8 @@ int allCount = 3;
 if(yushouToYingshouDescs != null && yushouToYingshouDescs.size()>0){
 	allCount = yushouToYingshouDescs.size();
 }
+
+String msg = StringUtils.nullToStr(VS.findValue("msg"));
 %>
 
 <html>
@@ -32,14 +34,12 @@ if(yushouToYingshouDescs != null && yushouToYingshouDescs.size()>0){
 <script type="text/javascript" src="js/prototype-1.4.0.js"></script>
 <script language='JavaScript' src="js/selClient.js"></script>
 <style>
-	.selectTip{
-		background-color:#009;
-		 color:#fff;
-	}
+	.selectTip{background-color:#009;color:#fff;}
 </style>
 <script type="text/javascript">
 	var allCount = <%=allCount %>;
-
+	var msg = "<%=msg %>";
+	
 	function saveInfo(vl){
 
 		if(vl == "1"){
@@ -73,14 +73,6 @@ if(yushouToYingshouDescs != null && yushouToYingshouDescs.size()>0){
 		document.XsskForm.btnSave.disabled = true;
 		
 	}	
-	
-	function openClientWin(){
-		var destination = "selYinshoukClient.html";
-		var fea ='width=800,height=500,left=' + (screen.availWidth-800)/2 + ',top=' + (screen.availHeight-500)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
-		
-		window.open(destination,'详细信息',fea);		
-	}
-	
 	
 	function hj(){
 		var bcjs_hj = 0;
@@ -129,17 +121,16 @@ if(yushouToYingshouDescs != null && yushouToYingshouDescs.size()>0){
 		document.XsskForm.submit();
 	}
 	
-	function openywyWin()
-	{
-	   var destination = "selLsEmployee.html";
-		var fea ='width=800,height=500,left=' + (screen.availWidth-800)/2 + ',top=' + (screen.availHeight-500)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
-		
-		window.open(destination,'选择经手人',fea);	
+	function onloadMsg(){
+		if(msg == "") return;
+
+		var tempMsg = "销售收款单对应收款款明细中：\n" + msg + "\n与其它未提交销售收款单或未提交预收冲应收存在冲突，无法保存，请检查！";
+
+		alert(tempMsg);
 	}	
-		
 </script>
 </head>
-<body  onload="initFzrTip();initClientTip();">
+<body  onload="initFzrTip();initClientTip();onloadMsg();">
 <form name="XsskForm" action="saveYushouToYingshou.html" method="post">
 <input type="hidden" name="yushouToYingshou.state" id="state" value="">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">

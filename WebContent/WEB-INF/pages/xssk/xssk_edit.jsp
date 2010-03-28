@@ -17,6 +17,8 @@ int allCount = 3;
 if(xsskDescs != null && xsskDescs.size()>0){
 	allCount = xsskDescs.size();
 }
+
+String msg = StringUtils.nullToStr(VS.findValue("msg"));
 %>
 
 <html>
@@ -33,7 +35,8 @@ if(xsskDescs != null && xsskDescs.size()>0){
 </style>
 <script type="text/javascript">
 	var allCount = <%=allCount %>;
-
+	var msg = "<%=msg %>";
+	
 	function saveInfo(vl){
 		if(vl == "1"){
 			document.getElementById("state").value = "已保存";
@@ -78,21 +81,6 @@ if(xsskDescs != null && xsskDescs.size()>0){
 		var fea ='width=400,height=200,left=' + (screen.availWidth-400)/2 + ',top=' + (screen.availHeight-200)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
 		window.open(destination,'选择账户',fea);		
-	}
-	
-	function openywyWin()
-	{
-	   var destination = "selLsEmployee.html";
-		var fea ='width=800,height=500,left=' + (screen.availWidth-800)/2 + ',top=' + (screen.availHeight-500)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
-		
-		window.open(destination,'选择经手人',fea);	
-	}			
-	
-	function openClientWin(){
-		var destination = "selXsskClient.html";
-		var fea ='width=800,height=500,left=' + (screen.availWidth-800)/2 + ',top=' + (screen.availHeight-500)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
-		
-		window.open(destination,'详细信息',fea);		
 	}
 	
 	function hj(){
@@ -162,10 +150,17 @@ if(xsskDescs != null && xsskDescs.size()>0){
 			}
 		}
 	}
-				
+
+	function onloadMsg(){
+		if(msg == "") return;
+
+		var tempMsg = "销售收款单对应收款款明细中：\n" + msg + "\n与其它未提交销售收款单或未提交预收冲应收存在冲突，无法保存，请检查！";
+
+		alert(tempMsg);
+	}		
 </script>
 </head>
-<body onload="initFzrTip();">
+<body onload="initFzrTip();onloadMsg();">
 <form name="XsskForm" action="updateXssk.html" method="post">
 <input type="hidden"  name="xssk.state" id="state" value="">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
