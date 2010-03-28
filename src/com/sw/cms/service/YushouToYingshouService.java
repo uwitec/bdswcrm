@@ -8,6 +8,8 @@ import com.sw.cms.dao.XsskDAO;
 import com.sw.cms.dao.YushouToYingshouDAO;
 import com.sw.cms.dao.YushoukDAO;
 import com.sw.cms.model.Page;
+import com.sw.cms.model.Xssk;
+import com.sw.cms.model.XsskDesc;
 import com.sw.cms.model.YushouToYingshou;
 import com.sw.cms.model.YushouToYingshouDesc;
 
@@ -125,6 +127,40 @@ public class YushouToYingshouService {
 	public String updateID() {
 		return yushouToYingshouDao.getID();
 	}	
+	
+	
+	/**
+	 * 判断提交的预收冲应收明细中是否存在与其他销售收款单冲突，如果存在返回编号，不存在返回空
+	 * @param cgfk
+	 * @param cgfkDescs
+	 * @return
+	 */
+	public String getExistYushouToYingshouDesc(YushouToYingshou info,List descList){
+		String temp = "";
+		
+		String client_name = info.getClient_name();
+		
+		if(descList != null && descList.size()>0){
+			for(int i =0;i<descList.size();i++){
+				YushouToYingshouDesc desc = (YushouToYingshouDesc)descList.get(i);
+				if(desc != null && desc.getBcjs() != 0){
+					String xsd_id = desc.getXsd_id();
+					
+					if(xsskDao.isXsskDescExist(xsd_id, client_name)){
+						//如果存在冲突，则记录相应进货单编号
+						if(temp.equals("")){
+							temp = xsd_id;
+						}else{
+							temp += "," + xsd_id;
+						}
+					}
+				}
+			}
+		}
+		
+		return temp;
+	}
+	
 	public YushouToYingshouDAO getYushouToYingshouDao() {
 		return yushouToYingshouDao;
 	}

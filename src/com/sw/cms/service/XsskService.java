@@ -1,5 +1,7 @@
 package com.sw.cms.service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -8,8 +10,10 @@ import com.sw.cms.dao.AccountsDAO;
 import com.sw.cms.dao.XsskDAO;
 import com.sw.cms.dao.YushoukDAO;
 import com.sw.cms.model.AccountDzd;
+import com.sw.cms.model.CgfkDesc;
 import com.sw.cms.model.Page;
 import com.sw.cms.model.Xssk;
+import com.sw.cms.model.XsskDesc;
 import com.sw.cms.model.Yushouk;
 
 public class XsskService {
@@ -193,6 +197,67 @@ public class XsskService {
 		ysk.setCzr(xssk.getCzr());
 		
 		yushoukDao.saveYushouk(ysk);
+	}
+	
+	
+	/**
+	 * 判断提交的销售收款明细中是否存在与其他销售收款单冲突，如果存在返回编号，不存在返回空
+	 * @param cgfk
+	 * @param cgfkDescs
+	 * @return
+	 */
+	public String getExistXsskDesc(Xssk xssk,List xsskDescs){
+		String temp = "";
+		
+		String client_name = xssk.getClient_name();
+		
+		if(xsskDescs != null && xsskDescs.size()>0){
+			for(int i =0;i<xsskDescs.size();i++){
+				XsskDesc xssKdesc = (XsskDesc)xsskDescs.get(i);
+				if(xssKdesc != null && xssKdesc.getBcsk() != 0){
+					String xsd_id = xssKdesc.getXsd_id();
+					
+					if(xsskDao.isXsskDescExist(xsd_id, client_name)){
+						//如果存在冲突，则记录相应进货单编号
+						if(temp.equals("")){
+							temp = xsd_id;
+						}else{
+							temp += "," + xsd_id;
+						}
+					}
+				}
+			}
+		}
+		
+		return temp;
+	}
+	
+	
+	public List xsskDescObjToMap(List xsskDescs){
+		List list = new ArrayList();
+		if(xsskDescs != null && xsskDescs.size()>0){
+			for(int i =0;i<xsskDescs.size();i++){
+				XsskDesc xsskDesc = (XsskDesc)xsskDescs.get(i);
+				if(xsskDesc != null){
+					
+					String xsd_id = xsskDesc.getXsd_id();
+					String fsrq = xsskDesc.getFsrq();
+					double fsje = xsskDesc.getFsje();
+					double ysk = xsskDesc.getYsk();
+					double bcsk = xsskDesc.getBcsk();
+					
+					Map map = new HashMap();
+					map.put("xsd_id", xsd_id);
+					map.put("fsrq", fsrq);
+					map.put("fsje", fsje);
+					map.put("ysk", ysk);
+					map.put("bcsk", bcsk);
+					
+					list.add(map);
+				}
+			}
+		}
+		return list;
 	}
 
 

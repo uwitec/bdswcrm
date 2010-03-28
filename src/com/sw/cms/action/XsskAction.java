@@ -98,6 +98,13 @@ public class XsskAction extends BaseAction {
 		
 		xssk.setCzr(user_id);
 		
+		String tempMsg = xsskService.getExistXsskDesc(xssk, xsskDescs);
+		if(!tempMsg.equals("")){
+			this.setMsg(tempMsg);
+			xsskDescs = xsskService.xsskDescObjToMap(xsskDescs);
+			return INPUT;
+		}
+		
 		xsskService.saveXssk(xssk, xsskDescs);
 		return "success";
 	}
@@ -125,6 +132,13 @@ public class XsskAction extends BaseAction {
 		String user_id = info.getUser_id();
 		
 		xssk.setCzr(user_id);
+		
+		String tempMsg = xsskService.getExistXsskDesc(xssk, xsskDescs);
+		if(!tempMsg.equals("")){
+			this.setMsg(tempMsg);
+			xsskDescs = xsskService.xsskDescObjToMap(xsskDescs);
+			return INPUT;
+		}
 		
 		xsskService.updateXssk(xssk, xsskDescs);
 		return "success";

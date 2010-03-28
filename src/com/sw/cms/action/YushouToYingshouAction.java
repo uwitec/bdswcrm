@@ -102,6 +102,13 @@ public class YushouToYingshouAction extends BaseAction {
 		String user_id = info.getUser_id();
 		yushouToYingshou.setCzr(user_id);
 		
+		String tempMsg = yushouToYingshouService.getExistYushouToYingshouDesc(yushouToYingshou,yushouToYingshouDescs);
+		if(!tempMsg.equals("")){
+			this.setMsg(tempMsg);
+			clientHjYushouK = yushouToYingshouService.getYishoukjeByClientId(yushouToYingshou.getClient_name());
+			return INPUT;
+		}
+		
 		//保存预收转应收信息
 		yushouToYingshouService.updateYushouToYingshou(yushouToYingshou,yushouToYingshouDescs);
 		

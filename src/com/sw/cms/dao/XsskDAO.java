@@ -370,5 +370,28 @@ public class XsskDAO extends JdbcBaseDAO {
 		String sql = "delete from xssk_desc where xssk_id='" + xssk_id + "'";
 		this.getJdbcTemplate().update(sql);
 	}
+	
+	
+	/**
+	 * 销售收款明细是否存在冲突(销售收款，预收冲应收)
+	 * @param jhd_id
+	 * @param gysbh
+	 * @return
+	 */
+	public boolean isXsskDescExist(String xsd_id,String client_name){
+		boolean is = false;
+		
+		String sql = "select count(1) as counts from xssk_desc a join xssk b on b.id=a.xssk_id where b.state<>'已提交' and a.xsd_id='" + xsd_id + "' and b.client_name='" + client_name + "'";
+		int count1 = this.getJdbcTemplate().queryForInt(sql);
+		
+		sql = "select count(1) as count from yushou_to_yingshou_desc a join yushou_to_yingshou b on b.id=a.yw_id where b.state<>'已提交' and a.xsd_id='" + xsd_id + "' and b.client_name='" + client_name + "'";
+		int count2 = this.getJdbcTemplate().queryForInt(sql);
+		
+		if((count1+count2) > 0){
+			is = true;
+		}
+		
+		return is;
+	}
 
 }

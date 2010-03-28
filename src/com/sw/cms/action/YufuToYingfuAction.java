@@ -108,6 +108,7 @@ public class YufuToYingfuAction extends BaseAction {
 		String tempMsg = yufuToYingfuService.getExistYufuToYingfuDesc(yufuToYingfu,yufuToYingfuDescs);
 		if(!tempMsg.equals("")){
 			this.setMsg(tempMsg);
+			clientHjYufuK = yufuToYingfuService.getYufukjeByClientId(yufuToYingfu.getClient_name());
 			return INPUT;
 		}
 		
