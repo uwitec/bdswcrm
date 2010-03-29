@@ -116,7 +116,10 @@ SysUser user = (SysUser)VS.findValue("user");
 		if(!InputValid(document.getElementById("nl"),1,"int",1,1,99,"年龄")){	 return; }
 		if(!InputValid(document.getElementById("gs_phone"),1,"string",1,1,20,"工作电话")){	 return; }
 		if(!InputValid(document.getElementById("mail"),1,"string",1,1,100,"E-Mail")){	 return; }
-		if(!InputValid(document.getElementById("sfjh"),1,"string",1,1,20,"婚否")){	 return; }
+		if(document.getElementById("sfjh").value == ""){
+			alert("婚否不能为空，请选择！");
+			return;
+		}
 		if(!InputValid(document.getElementById("address"),1,"string",1,1,100,"家庭地址")){	 return; }
 		if(!InputValid(document.getElementById("lxr"),1,"string",1,1,20,"联系人")){	 return; }
 		if(!InputValid(document.getElementById("jt_phone"),1,"string",1,1,20,"家庭电话")){	 return; }
@@ -197,7 +200,7 @@ SysUser user = (SysUser)VS.findValue("user");
 	</thead>
 	<tr>
 	    <td class="a1" width="15%">家庭地址</td>
-		<td class="a2" width="35%" colspan="3"><input type="text" name="user.address" id="address" value="<%=StringUtils.nullToStr(userMap.get("address")) %>" style="width:80%" maxlength="50"><font color="red">*</font></td>
+		<td class="a2" width="35%" colspan="3"><input type="text" name="user.address" id="address" value="<%=StringUtils.nullToStr(userMap.get("address")) %>" style="width:92%" maxlength="50"><font color="red">*</font></td>
 	</tr>
 	<tr>		
 	    <td class="a1" width="15%">联系人</td>
@@ -209,7 +212,13 @@ SysUser user = (SysUser)VS.findValue("user");
 	    <td class="a1" width="15%">关系</td>
 		<td class="a2" width="35%"><input type="text" name="user.relation" id="relation" value="<%=StringUtils.nullToStr(userMap.get("relation")) %>" style="width:80%" maxlength="10"></td>
 	    <td class="a1" width="15%">婚否</td>
-		<td class="a2" width="35%"><input type="text" name="user.sfjh" id="sfjh" value="<%=StringUtils.nullToStr(userMap.get("sfjh")) %>" style="width:80%" maxlength="50"><font color="red">*</font></td>
+		<td class="a2" width="35%">
+			<select name="user.sfjh" id="sfjh" style="width:76%">
+				<option value=""></option>
+				<option value="已婚" <%if(StringUtils.nullToStr(userMap.get("sfjh")).equals("已婚")) out.print("selected"); %>>已婚</option>
+				<option value="未婚" <%if(StringUtils.nullToStr(userMap.get("sfjh")).equals("未婚")) out.print("selected"); %>>未婚</option>
+			</select><font color="red">*</font>
+		</td>
 	</tr>	
 </table>
 <BR>
