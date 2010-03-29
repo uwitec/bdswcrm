@@ -61,7 +61,22 @@ public class SysUser {
 	private String remark;//备注
 	private String zzmm;//政治面貌
 	
+	private String sfjh;//婚否
+	private String jtcy;//家庭成员
 	
+	public String getJtcy() {
+		return jtcy;
+	}
+	public void setJtcy(String jtcy) {
+		this.jtcy = jtcy;
+	}	
+	
+	public String getSfjh() {
+		return sfjh;
+	}
+	public void setSfjh(String sfjh) {
+		this.sfjh = sfjh;
+	}	
 	public String getZzmm() {
 		return zzmm;
 	}
