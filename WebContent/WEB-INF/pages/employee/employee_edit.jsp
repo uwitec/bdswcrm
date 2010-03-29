@@ -67,6 +67,16 @@ SysUser user = (SysUser)VS.findValue("user");
 			return;
 		}
 		
+		if(document.getElementById("lxr").value == ""){
+			alert("联系人不能为空，请填写！");
+			return;
+		}
+		
+		if(document.getElementById("jt_phone").value == ""){
+			alert("家庭电话不能为空，请填写！");
+			return;
+		}
+		
 		if(document.getElementById("position").value == ""){
 			alert("职务不能为空，请选择！");
 			return;
@@ -102,6 +112,8 @@ SysUser user = (SysUser)VS.findValue("user");
 		if(!InputValid(document.getElementById("gs_phone"),1,"string",1,1,20,"工作电话")){	 return; }
 		if(!InputValid(document.getElementById("sfjh"),1,"string",1,1,20,"婚否")){	 return; }
 		if(!InputValid(document.getElementById("address"),1,"string",1,1,100,"家庭地址")){	 return; }
+		if(!InputValid(document.getElementById("lxr"),1,"string",1,1,20,"联系人")){	 return; }
+		if(!InputValid(document.getElementById("jt_phone"),1,"string",1,1,20,"家庭电话")){	 return; }
 		if(!InputValid(document.getElementById("byxx"),1,"string",1,1,50,"毕业学校")){	 return; }
 		if(!InputValid(document.getElementById("major"),1,"string",1,1,40,"专业")){	 return; }
 		if(!InputValid(document.getElementById("xl"),1,"string",1,1,10,"学历")){	 return; }
@@ -178,22 +190,20 @@ SysUser user = (SysUser)VS.findValue("user");
 	</tr>
 	</thead>
 	<tr>
-		<td class="a1" width="15%">婚否</td>
-		<td class="a2" width="35%"><input type="text" name="user.sfjh" id="sfjh" value="<%=StringUtils.nullToStr(userMap.get("sfjh")) %>" style="width:80%" maxlength="50"><font color="red">*</font></td>
-	    <td class="a1" width="15%">家庭成员</td>
-		<td class="a2" width="35%"><input type="text" name="user.jtcy" id="jtcy" value="<%=StringUtils.nullToStr(userMap.get("jtcy")) %>" style="width:80%" maxlength="30"></td>
-	</tr>
-	<tr>
-		<td class="a1" width="15%">家庭地址</td>
-		<td class="a2" width="35%"><input type="text" name="user.address" id="address" value="<%=StringUtils.nullToStr(userMap.get("address")) %>" style="width:80%" maxlength="50"><font color="red">*</font></td>
-	    <td class="a1" width="15%">联系人</td>
-		<td class="a2" width="35%"><input type="text" name="user.lxr" id="lxr" value="<%=StringUtils.nullToStr(userMap.get("lxr")) %>" style="width:80%" maxlength="30"></td>
+	    <td class="a1" width="15%">家庭地址</td>
+		<td class="a2" width="35%" colspan="3"><input type="text" name="user.address" id="address" value="<%=StringUtils.nullToStr(userMap.get("address")) %>" style="width:80%" maxlength="50"><font color="red">*</font></td>
 	</tr>
 	<tr>		
+	    <td class="a1" width="15%">联系人</td>
+		<td class="a2" width="35%"><input type="text" name="user.lxr" id="lxr" value="<%=StringUtils.nullToStr(userMap.get("lxr")) %>" style="width:80%" maxlength="30"><font color="red">*</font></td>
 		<td class="a1" width="15%">家庭电话</td>
-		<td class="a2" width="35%"><input type="text" name="user.jt_phone" id="jt_phone" value="<%=StringUtils.nullToStr(userMap.get("jt_phone")) %>" style="width:80%" maxlength="20"></td>		
+		<td class="a2" width="35%"><input type="text" name="user.jt_phone" id="jt_phone" value="<%=StringUtils.nullToStr(userMap.get("jt_phone")) %>" style="width:80%" maxlength="20"><font color="red">*</font></td>		
+	</tr>
+	<tr>    
 	    <td class="a1" width="15%">关系</td>
 		<td class="a2" width="35%"><input type="text" name="user.relation" id="relation" value="<%=StringUtils.nullToStr(userMap.get("relation")) %>" style="width:80%" maxlength="10"></td>
+	    <td class="a1" width="15%">婚否</td>
+		<td class="a2" width="35%"><input type="text" name="user.sfjh" id="sfjh" value="<%=StringUtils.nullToStr(userMap.get("sfjh")) %>" style="width:80%" maxlength="50"><font color="red">*</font></td>
 	</tr>	
 </table>
 <BR>

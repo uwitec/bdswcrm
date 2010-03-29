@@ -66,6 +66,16 @@ SysUser user = (SysUser)VS.findValue("user");
 			return;
 		}
 		
+		if(document.getElementById("lxr").value == ""){
+			alert("联系人不能为空，请填写！");
+			return;
+		}
+		
+		if(document.getElementById("jt_phone").value == ""){
+			alert("家庭电话不能为空，请填写！");
+			return;
+		}
+		
 		if(document.getElementById("position").value == ""){
 			alert("职务不能为空，请选择！");
 			return;
@@ -101,6 +111,8 @@ SysUser user = (SysUser)VS.findValue("user");
 		if(!InputValid(document.getElementById("gs_phone"),1,"string",1,1,20,"工作电话")){	 return; }
 		if(!InputValid(document.getElementById("sfjh"),1,"string",1,1,20,"婚否")){	 return; }
 		if(!InputValid(document.getElementById("address"),1,"string",1,1,100,"家庭地址")){	 return; }
+		if(!InputValid(document.getElementById("lxr"),1,"string",1,1,20,"联系人")){	 return; }
+		if(!InputValid(document.getElementById("jt_phone"),1,"string",1,1,20,"家庭电话")){	 return; }
 		if(!InputValid(document.getElementById("byxx"),1,"string",1,1,50,"毕业学校")){	 return; }
 		if(!InputValid(document.getElementById("major"),1,"string",1,1,40,"专业")){	 return; }
 		if(!InputValid(document.getElementById("xl"),1,"string",1,1,10,"学历")){	 return; }
@@ -179,23 +191,21 @@ SysUser user = (SysUser)VS.findValue("user");
 		<td colspan="4">家庭信息</td>
 	</tr>
 	</thead>
-	<tr>		
-		<td class="a1" width="15%">婚否</td>
-		<td class="a2" width="35%"><input type="text" name="user.sfjh" id="sfjh" value="" style="width:80%" maxlength="20" onkeyup="goNext(this.form,this.name);"><font color="red">*</font></td>		
-	    <td class="a1" width="15%">家庭成员</td>
-		<td class="a2" width="35%"><input type="text" name="user.jtcy" id="jtcy" value="" style="width:80%" maxlength="10" onkeyup="goNext(this.form,this.name);"></td>
-	</tr>
 	<tr>
-		<td class="a1" width="15%">家庭地址</td>
-		<td class="a2" width="35%"><input type="text" name="user.address" id="address" value=""  style="width:80%" maxlength="50" onkeyup="goNext(this.form,this.name);"><font color="red">*</font></td>
-	    <td class="a1" width="15%">联系人</td>
-		<td class="a2" width="35%"><input type="text" name="user.lxr" id="lxr" value=""  style="width:80%" maxlength="20" onkeyup="goNext(this.form,this.name);"></td>	
+	    <td class="a1" width="15%">家庭地址</td>
+		<td class="a2" width="35%" colspan="3"><input type="text" name="user.address" id="address" value=""  style="width:80%" maxlength="50" onkeyup="goNext(this.form,this.name);"><font color="red">*</font></td>		
 	</tr>
 	<tr>		
+	    <td class="a1" width="15%">联系人</td>
+		<td class="a2" width="35%"><input type="text" name="user.lxr" id="lxr" value=""  style="width:80%" maxlength="20" onkeyup="goNext(this.form,this.name);"><font color="red">*</font></td>	
 		<td class="a1" width="15%">家庭电话</td>
-		<td class="a2" width="35%"><input type="text" name="user.jt_phone" id="jt_phone" value="" style="width:80%" maxlength="20" onkeyup="goNext(this.form,this.name);"></td>		
+		<td class="a2" width="35%"><input type="text" name="user.jt_phone" id="jt_phone" value="" style="width:80%" maxlength="20" onkeyup="goNext(this.form,this.name);"><font color="red">*</font></td>		
+	</tr>
+	<tr>   
 	    <td class="a1" width="15%">关系</td>
 		<td class="a2" width="35%"><input type="text" name="user.relation" id="relation" value="" style="width:80%" maxlength="10" onkeyup="goNext(this.form,this.name);"></td>
+	    <td class="a1" width="15%">婚否</td>
+		<td class="a2" width="35%" ><input type="text" name="user.sfjh" id="sfjh" value="" style="width:80%" maxlength="20" onkeyup="goNext(this.form,this.name);"><font color="red">*</font></td>
 	</tr>
 	
 </table>
