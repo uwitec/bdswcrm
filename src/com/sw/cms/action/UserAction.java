@@ -149,7 +149,11 @@ public class UserAction extends BaseAction {
 				//如果是确认的强制登录，则清空其它登陆用户的session
 				HttpSession session = OnlineSessionAndApplication.getSession(sessionId);
 				if (session!=null){
-					session.invalidate();
+					try{
+						session.invalidate();
+					}catch(Exception e){
+						e.printStackTrace();
+					}
 				}
 			}else{
 				//提醒用户可以强制登录
