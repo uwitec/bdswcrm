@@ -48,6 +48,11 @@ Map userMap = (Map)VS.findValue("userMap");
 			return;
 		}
 		
+		if(document.getElementById("sfjh").value == ""){
+			alert("婚否不能为空，请填写！");
+			return;
+		}
+		
 		if(document.getElementById("address").value == ""){
 			alert("家庭住址不能为空，请填写！");
 			return;
@@ -86,6 +91,7 @@ Map userMap = (Map)VS.findValue("userMap");
 		if(!InputValid(document.getElementById("real_name"),1,"string",1,1,20,"姓名")){	 return; }
 		if(!InputValid(document.getElementById("nl"),1,"int",1,1,99,"年龄")){	 return; }
 		if(!InputValid(document.getElementById("gs_phone"),1,"string",1,1,20,"工作电话")){	 return; }
+		if(!InputValid(document.getElementById("sfjh"),1,"string",1,1,20,"婚否")){	 return; }
 		if(!InputValid(document.getElementById("address"),1,"string",1,1,100,"家庭地址")){	 return; }
 		if(!InputValid(document.getElementById("byxx"),1,"string",1,1,50,"毕业学校")){	 return; }
 		if(!InputValid(document.getElementById("major"),1,"string",1,1,40,"专业")){	 return; }
@@ -154,6 +160,12 @@ Map userMap = (Map)VS.findValue("userMap");
 		<td colspan="4">家庭信息</td>
 	</tr>
 	</thead>
+	<tr>
+		<td class="a1" width="15%">婚否</td>
+		<td class="a2" width="35%"><%=StringUtils.nullToStr(userMap.get("sfjh")) %></td>
+	    <td class="a1" width="15%">家庭成员</td>
+		<td class="a2" width="35%"><%=StringUtils.nullToStr(userMap.get("jtcy")) %></td>
+	</tr>
 	<tr>
 		<td class="a1" width="15%">家庭地址</td>
 		<td class="a2" width="35%"><%=StringUtils.nullToStr(userMap.get("address")) %></td>

@@ -57,6 +57,11 @@ SysUser user = (SysUser)VS.findValue("user");
 			return;
 		}
 		
+		if(document.getElementById("sfjh").value == ""){
+			alert("婚否不能为空，请填写！");
+			return;
+		}
+		
 		if(document.getElementById("address").value == ""){
 			alert("家庭住址不能为空，请填写！");
 			return;
@@ -95,6 +100,7 @@ SysUser user = (SysUser)VS.findValue("user");
 		if(!InputValid(document.getElementById("real_name"),1,"string",1,1,20,"姓名")){	 return; }
 		if(!InputValid(document.getElementById("nl"),1,"int",1,1,99,"年龄")){	 return; }
 		if(!InputValid(document.getElementById("gs_phone"),1,"string",1,1,20,"工作电话")){	 return; }
+		if(!InputValid(document.getElementById("sfjh"),1,"string",1,1,20,"婚否")){	 return; }
 		if(!InputValid(document.getElementById("address"),1,"string",1,1,100,"家庭地址")){	 return; }
 		if(!InputValid(document.getElementById("byxx"),1,"string",1,1,50,"毕业学校")){	 return; }
 		if(!InputValid(document.getElementById("major"),1,"string",1,1,40,"专业")){	 return; }
@@ -171,6 +177,12 @@ SysUser user = (SysUser)VS.findValue("user");
 		<td colspan="4">家庭信息</td>
 	</tr>
 	</thead>
+	<tr>
+		<td class="a1" width="15%">婚否</td>
+		<td class="a2" width="35%"><input type="text" name="user.sfjh" id="sfjh" value="<%=StringUtils.nullToStr(userMap.get("sfjh")) %>" style="width:80%" maxlength="50"><font color="red">*</font></td>
+	    <td class="a1" width="15%">家庭成员</td>
+		<td class="a2" width="35%"><input type="text" name="user.jtcy" id="jtcy" value="<%=StringUtils.nullToStr(userMap.get("jtcy")) %>" style="width:80%" maxlength="30"></td>
+	</tr>
 	<tr>
 		<td class="a1" width="15%">家庭地址</td>
 		<td class="a2" width="35%"><input type="text" name="user.address" id="address" value="<%=StringUtils.nullToStr(userMap.get("address")) %>" style="width:80%" maxlength="50"><font color="red">*</font></td>
