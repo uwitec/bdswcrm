@@ -68,13 +68,13 @@ public class EmployeeDAO extends JdbcBaseDAO {
 	 */
 	public void saveUser(SysUser user) {
 		String sql = "insert into sys_user(real_name,csny,sex,gs_phone,mobile,jt_phone,fax,mail,msn,qq,address,p_code,dept,position,szkf,state,xh,is_ywy,gh,nl,china_py,user_id,"
-				+"id_card,nation,lxr,relation,jbgz,rzrq,gl,byxx,major,xl,gzjl,ldkh,remark,zzmm) "
+				+"id_card,nation,lxr,relation,jbgz,rzrq,gl,byxx,major,xl,gzjl,ldkh,remark,zzmm,sfjh,jtcy) "
 			     + "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,"
-			     +"?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			     +"?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
 		String user_id = getUserID();
 		//String user_id = user.getUser_id();
-		Object[] param = new Object[36];
+		Object[] param = new Object[38];
 
 		param[0] = user.getReal_name();
 		param[1] = user.getCsny();
@@ -116,7 +116,8 @@ public class EmployeeDAO extends JdbcBaseDAO {
 		param[33] = user.getLdkh();
 		param[34] = user.getRemark();
 		param[35] = user.getZzmm();
-		
+		param[36] = user.getSfjh();
+		param[37] = user.getJtcy();
 		this.getJdbcTemplate().update(sql, param);
 
 	}
@@ -128,10 +129,10 @@ public class EmployeeDAO extends JdbcBaseDAO {
 	 */
 	public void updateUser(SysUser user) {
 		String sql = "update sys_user set real_name=?,csny=?,sex=?,gs_phone=?,mobile=?,jt_phone=?,fax=?,mail=?,msn=?,qq=?,address=?,"
-				+ "p_code=?,dept=?,position=?,szkf=?,state=?,xh=?,is_ywy=?,gh=?,nl=?,china_py=?,id_card=?,"
-				+"nation=?,lxr=?,relation=?,jbgz=?,rzrq=?,gl=?,byxx=?,major=?,xl=?,gzjl=?,ldkh=?,remark=?,zzmm=? where user_id=?";
+				+ "p_code=?,dept=?,position=?,szkf=?,state=?,xh=?,is_ywy=?,gh=?,nl=?,china_py=?,id_card=?,nation=?,lxr=?,"
+				+"relation=?,jbgz=?,rzrq=?,gl=?,byxx=?,major=?,xl=?,gzjl=?,ldkh=?,remark=?,zzmm=?,sfjh=?,jtcy=? where user_id=?";
 
-		Object[] param = new Object[36];
+		Object[] param = new Object[38];
 
 		param[0] = user.getReal_name();
 		param[1] = user.getCsny();
@@ -171,8 +172,9 @@ public class EmployeeDAO extends JdbcBaseDAO {
 		param[32] = user.getLdkh();
 		param[33] = user.getRemark();
 		param[34] = user.getZzmm();
-		
-		param[35] = user.getUser_id();
+		param[35] = user.getSfjh();
+		param[36] = user.getJtcy();
+		param[37] = user.getUser_id();
 
 		this.getJdbcTemplate().update(sql, param);
 	}
