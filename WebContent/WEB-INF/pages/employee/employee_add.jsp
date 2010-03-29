@@ -56,6 +56,11 @@ SysUser user = (SysUser)VS.findValue("user");
 			return;
 		}
 		
+		if(document.getElementById("mail").value == ""){
+			alert("E-Mail不能为空，请填写！");
+			return;
+		}
+		
 		if(document.getElementById("sfjh").value == ""){
 			alert("婚否不能为空，请填写！");
 			return;
@@ -109,6 +114,7 @@ SysUser user = (SysUser)VS.findValue("user");
 		if(!InputValid(document.getElementById("real_name"),1,"string",1,1,20,"姓名")){	 return; }
 		if(!InputValid(document.getElementById("nl"),1,"int",1,1,99,"年龄")){	 return; }
 		if(!InputValid(document.getElementById("gs_phone"),1,"string",1,1,20,"工作电话")){	 return; }
+		if(!InputValid(document.getElementById("mail"),1,"string",1,1,100,"E-Mail")){	 return; }
 		if(!InputValid(document.getElementById("sfjh"),1,"string",1,1,20,"婚否")){	 return; }
 		if(!InputValid(document.getElementById("address"),1,"string",1,1,100,"家庭地址")){	 return; }
 		if(!InputValid(document.getElementById("lxr"),1,"string",1,1,20,"联系人")){	 return; }
@@ -169,11 +175,11 @@ SysUser user = (SysUser)VS.findValue("user");
 		<td class="a1" width="15%">工作电话</td>
 		<td class="a2" width="35%"><input type="text" name="user.gs_phone" id="gs_phone" value="" maxlength="20" onkeyup="goNext(this.form,this.name);" style="width:80%"><font color="red">*</font></td>
 		<td class="a1" width="15%">E-Mail</td>
-		<td class="a2" width="35%"><input type="text" name="user.mail" id="mail" value="" maxlength="50" onkeyup="goNext(this.form,this.name);" style="width:80%"></td>	
+		<td class="a2" width="35%"><input type="text" name="user.mail" id="mail" value="" maxlength="50" onkeyup="goNext(this.form,this.name);" style="width:80%"><font color="red">*</font></td>	
 	</tr>
 	<tr>		
 		<td class="a1" width="15%">MSN</td>
-		<td class="a2" width="35%"><input type="text" name="user.msn" id="msn" value=""  style="width:80%" maxlength="20" onkeyup="goNext(this.form,this.name);"></td>		
+		<td class="a2" width="35%"><input type="text" name="user.msn" id="msn" value=""  style="width:80%" maxlength="30" onkeyup="goNext(this.form,this.name);"></td>		
 	    <td class="a1" width="15%">QQ</td>
 		<td class="a2" width="35%"><input type="text" name="user.qq" id="qq" value=""  style="width:80%" onkeyup="goNext(this.form,this.name);"></td>
 	</tr>
