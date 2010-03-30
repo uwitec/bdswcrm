@@ -32,7 +32,35 @@ public class Jhd {
 	private double sjcjje; //采购订单实际成交金额
 	private String yjdhsj; //预计到货时间
 	
+	private String kh_address; //客户地址
+	private String kh_lxr; //联系人
+	private String kh_lxdh; //供应商联系电话
+	private String ysws; //已税/未税
 	
+	public String getYsws() {
+		return ysws;
+	}
+	public void setYsws(String ysws) {
+		this.ysws = ysws;
+	}
+	public String getKh_lxdh() {
+		return kh_lxdh;
+	}
+	public void setKh_lxdh(String kh_lxdh) {
+		this.kh_lxdh = kh_lxdh;
+	}
+	public String getKh_lxr() {
+		return kh_lxr;
+	}
+	public void setKh_lxr(String kh_lxr) {
+		this.kh_lxr = kh_lxr;
+	}
+	public String getKh_address() {
+		return kh_address;
+	}
+	public void setKh_address(String kh_address) {
+		this.kh_address = kh_address;
+	}
 	
 	public String getCg_date() {
 		return cg_date;
