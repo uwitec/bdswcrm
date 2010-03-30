@@ -83,10 +83,12 @@ public class JhdDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public void saveJhd(Jhd jhd,List jhdProducts){
-		String sql = "insert into jhd(id,gysbh,cg_date,state,fzr,ms,shuil,tzje,total,gysmc,czr,cz_date,fkje,fklx,yfrq,fkfs,yfje,store_id,zq,fkzh,sjcjje,yjdhsj) " +
-				"values(?,?,?,?,?,?,?,?,?,?,?,now(),?,?,?,?,?,?,?,?,?,?)";
+		String sql = "insert into jhd(id,gysbh,cg_date,state,fzr,ms,shuil,tzje,total,gysmc,czr,cz_date,fkje,fklx,yfrq,fkfs,yfje,store_id,zq,fkzh,sjcjje,yjdhsj"
+				+",kh_address,kh_lxr,kh_lxdh,ysws) "
+		        +"values(?,?,?,?,?,?,?,?,?,?,?,now(),?,?,?,?,?,?,?,?,?,?"
+				+",?,?,?,?)";
 		
-		Object[] param = new Object[21];
+		Object[] param = new Object[25];
 		
 		double total = jhd.getTotal();
 		double fkje = jhd.getFkje();
@@ -113,6 +115,11 @@ public class JhdDAO extends JdbcBaseDAO {
 		param[19] = jhd.getTotal();
 		param[20] = jhd.getYjdhsj();
 		
+		param[21] = jhd.getKh_address();
+		param[22] = jhd.getKh_lxr();
+		param[23] = jhd.getKh_lxdh();
+		param[24] = jhd.getYsws();
+		
 		this.getJdbcTemplate().update(sql, param); //添加进货单信息		
 		this.addJhdProduct(jhdProducts,jhd.getId());           //添加进货单关联的产品
 
@@ -127,9 +134,10 @@ public class JhdDAO extends JdbcBaseDAO {
 	 */
 	public void updateJhd(Jhd jhd,List jhdProducts){
 		String sql = "update jhd set gysbh=?,cg_date=?,state=?,fzr=?,ms=?,shuil=?,tzje=?,total=?,gysmc=?,czr=?," +
-				"cz_date=now(),fkje=?,fklx=?,yfrq=?,fkfs=?,yfje=?,store_id=?,zq=?,fkzh=?,sjcjje=? where id=?";
+				"cz_date=now(),fkje=?,fklx=?,yfrq=?,fkfs=?,yfje=?,store_id=?,zq=?,fkzh=?,sjcjje=?,"
+		        +"kh_address=?,kh_lxr=?,kh_lxdh=?,ysws=? where id=?";
 		
-		Object[] param = new Object[20];
+		Object[] param = new Object[24];
 		
 		double total = jhd.getTotal();
 		double fkje = jhd.getFkje();
@@ -153,7 +161,12 @@ public class JhdDAO extends JdbcBaseDAO {
 		param[16] = jhd.getZq();
 		param[17] = jhd.getFkzh();
 		param[18] = jhd.getSjcjje();
-		param[19] = jhd.getId();
+		
+		param[19] = jhd.getKh_address();
+		param[20] = jhd.getKh_lxr();
+		param[21] = jhd.getKh_lxdh();
+		param[22] = jhd.getYsws();
+		param[23] = jhd.getId();
 		
 		
 		this.getJdbcTemplate().update(sql, param);	 //修改进货单信息	
