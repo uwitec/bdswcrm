@@ -253,11 +253,7 @@ public class JhdAction extends BaseAction {
 			//经手人处显示电话、手机，标题为电话
 			jsr=((SysUser)userService.getUser(jhd.getFzr())).getGs_phone()+" "+((SysUser)userService.getUser(jhd.getFzr())).getMobile();
 			//增加供应商的联系人电话、付款日期、传真号
-			if(clientsLinkman != null && !clientsLinkman.equals("")) {
-			  lxr_tel= StringUtils.nullToStr(clientsLinkman.getName()) + "  " +StringUtils.nullToStr(clientsLinkman.getGzdh())+ "  " +StringUtils.nullToStr(clientsLinkman.getYddh());
-			}else{
-			  lxr_tel="";
-			}
+			lxr_tel= StringUtils.nullToStr(jhd.getKh_lxr()) + " " +StringUtils.nullToStr(jhd.getKh_lxdh());
 			
 			if(clients != null){
 				cz=StringUtils.nullToStr(clients.getCz());

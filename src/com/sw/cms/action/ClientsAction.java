@@ -510,6 +510,13 @@ public class ClientsAction extends BaseAction {
 						gzdh += "/" + mobile;
 					}
 					
+					int len=gzdh.length();
+					
+					if(gzdh.endsWith("/"))
+					{
+						gzdh=gzdh.substring(0,len-1);
+					}
+					
 					if(i == 0){
 						clientRegInfoText += StringUtils.nullToStr(clientslinkman.getId()) + "#" + StringUtils.nullToStr(clientslinkman.getName()) + "#" + gzdh;
 					}else{
