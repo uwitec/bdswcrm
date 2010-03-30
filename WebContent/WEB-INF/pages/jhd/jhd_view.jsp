@@ -36,20 +36,34 @@ Jhd jhd = (Jhd)VS.findValue("Jhd");
 	<tr>
 		<td class="a1" width="15%">供货单位</td>
 		<td class="a2" width="35%"><%=StringUtils.nullToStr(jhd.getGysmc()) %></td>	
+		<td class="a1" width="15%">地址</td>
+		<td class="a2"><%=StringUtils.nullToStr(jhd.getKh_address()) %></td>	
+	</tr>
+	
+	<tr>
+		<td class="a1" width="15%">客户联系人</td>
+		<td class="a2" width="35%"><%=StringUtils.nullToStr(jhd.getKh_lxr()) %></td>	
+		<td class="a1" width="15%">联系电话</td>
+		<td class="a2" width="35%"><%=StringUtils.nullToStr(jhd.getKh_lxdh()) %></td>
+	</tr>
+	<tr>
 		<td class="a1" width="15%">采购负责人</td>
 		<td class="a2" width="35%"><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(jhd.getFzr())) %>	</td>
-	</tr>
-	<tr>
-		<td class="a1" width="15%">账期</td>
+	    <td class="a1" width="15%">账期</td>
 		<td class="a2" width="35%"><%=StringUtils.nullToStr(jhd.getZq()) %>天</td>	
+	</tr>
+	<tr>		
 		<td class="a1" width="15%">进货单状态</td>
 		<td class="a2"><%=StringUtils.nullToStr(jhd.getState()) %></td>	
-	</tr>
-	<tr>
 		<td class="a1" width="15%">预计到货时间</td>
 		<td class="a2" width="35%"><%=StringUtils.nullToStr(jhd.getYjdhsj()) %></td>	
+	</tr>
+	<tr>		
 		<td class="a1" width="15%">到货库房</td>
 		<td class="a2" width="35%"><%=StaticParamDo.getStoreNameById(jhd.getStore_id()) %></td>
+		<td class="a1"  width="15%">发票类型</td>
+	     <td class="a2" width="35%"><%=StringUtils.nullToStr(jhd.getYsws()) %></td>	    
+      </td>	
 	</tr>	
 	<tr>
 		<td class="a1">合计金额</td>

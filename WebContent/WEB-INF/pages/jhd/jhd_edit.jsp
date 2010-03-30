@@ -22,18 +22,151 @@ session.removeAttribute("messages");
 <title>采购订单</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
+<LINK href="css/ddcolortabs.css" type=text/css rel=stylesheet>
 <script language="JavaScript" src="js/Check.js"></script>
 <script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
 <script language='JavaScript' src="js/nums.js"></script>
 <script language='JavaScript' src="js/selClient.js"></script>
 <script language='JavaScript' src="js/selJsr.js"></script>
 <script type="text/javascript" src="js/prototype-1.4.0.js"></script>
+<script type='text/javascript' src='dwr/interface/dwrService.js'></script>
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script>
+<script type="text/javascript" src="js/prototype-1.4.0.js"></script>
 <style>
 	.selectTip{background-color:#009;color:#fff;}
 </style>
 <script type="text/javascript">
 	
-	var allCount = <%=counts %>;
+	var allCount = 2;
+	var jhzq = 0;
+	//客户对应联系人信息
+	var arryLxrObj = new Array();
+	var temp_client_id = "";
+	//客户联系人对象
+	function LinkMan(id,name,tel){
+	    this.id = id;
+	    this.name = name;
+	    this.tel = tel;
+	}	
+
+	function onloadClientInfo(){
+		if($F('client_id') == ""){
+			return;
+		}
+		var url = 'queryClientsRegInfo.html';
+		var params = "clients_id=" + $F('client_id');
+		var myAjax = new Ajax.Request(
+		url,
+		{
+			method:'post',
+			parameters: params,
+			onComplete: initJhzq,
+			asynchronous:true
+		});
+	}
+
+	function initJhzq(originalRequest){
+		var resText = originalRequest.responseText.trim(); 
+		if(resText == ""){
+			return false;
+		}
+		var arryText = resText.split("%");
+
+		//客户地址填充
+		if(arryText != null && arryText.length>0){
+			var arryClientInfo = arryText[0].split("#");			
+			jhzq = arryClientInfo[6];
+		}
+	}
+	
+	
+	//查询客户相关信息
+	function setClientRegInfo(){		
+		//填充值
+		setClientValue(); 
+
+		if(temp_client_id == $F('client_id')){
+			return;
+		}
+		
+		temp_client_id = $F('client_id');
+		if($F('client_id') == ""){
+			return;
+		}
+		
+		//根据填充后的值选择客户地址联系人等信息
+		var url = 'queryClientsRegInfo.html';
+		var params = "clients_id=" + $F('client_id');
+		var myAjax = new Ajax.Request(
+		url,
+		{
+			method:'post',
+			parameters: params,
+			onComplete: fillClientRegInfo,
+			asynchronous:true
+		});
+	}
+	
+	//处理客户地址联系人等信息
+	function fillClientRegInfo(originalRequest){  
+
+		var resText = originalRequest.responseText.trim(); 
+		if(resText == ""){
+			return false;
+		}
+
+		var arryText = resText.split("%");
+
+		//客户地址填充
+		if(arryText != null && arryText.length>0){
+		
+			var arryClientInfo = arryText[0].split("#");			
+			document.getElementById("kh_address").value = arryClientInfo[0];
+			if(document.getElementById("fkfs").value == "账期") {
+				document.getElementById("zq").value = arryClientInfo[6];
+			}else{
+				document.getElementById("zq").value = '0';
+			}
+			jhzq = arryClientInfo[6];
+		}
+		
+		if(arryText != null && arryText.length>1){
+			var linkMantext = arryText[1];
+			
+			//联系人填充
+			var objLxr = document.getElementById("kh_lxr"); 
+			objLxr.options.length = 0;
+			
+			var arryLinkMan = linkMantext.split("$");
+			if(arryLinkMan.length > 0){
+				for(var i=0;i<arryLinkMan.length;i++){
+					var arryInfo = arryLinkMan[i].split("#");		
+					var manObj = new LinkMan(arryInfo[0],arryInfo[1],arryInfo[2]);
+					arryLxrObj[i] = manObj;
+					objLxr.add(new Option(arryInfo[1],arryInfo[1]));
+				}
+				if(arryLxrObj[0].tel != undefined)
+					document.getElementById("kh_lxdh").value = arryLxrObj[0].tel;
+			}		
+		}
+	}
+	
+	
+	//联系人与电话联动
+	function chgLxr(vl){
+		if(vl == ""){
+			return;
+		}
+		if(arryLxrObj != null && arryLxrObj.length > 0){
+			for(var i=0;i<arryLxrObj.length;i++){
+				if(vl == arryLxrObj[i].name){
+					document.getElementById("kh_lxdh").value = arryLxrObj[i].tel;
+					break;
+				}
+			}
+		}
+	}
 	
 	function saveInfo(vl){
 
@@ -58,6 +191,14 @@ session.removeAttribute("messages");
 		if(!InputValid(document.getElementById("zq"),1,"int",1,0,999,"账期限天数")){
 			return;
 		}
+		
+	    var rs=document.getElementsByName("jhd.ysws"); 
+        if(rs[0].checked==false&&rs[1].checked==false) 
+        { 
+			alert("发票类型不能为空，请选择！");
+			return;
+		}
+		
 		hj();
 		
 		if(vl == "1"){
@@ -243,24 +384,45 @@ session.removeAttribute("messages");
 	<tr>
 		<td class="a1" width="15%">供货单位</td>
 		<td class="a2" width="35%">
-			<input type="text" name="jhd.gysmc" id="client_name" value="<%=StringUtils.nullToStr(jhd.getGysmc()) %>" size="35"  onblur="setClientValue();">
+			<input type="text" name="jhd.gysmc" onblur="setClientRegInfo();" id="client_name" value="<%=StringUtils.nullToStr(jhd.getGysmc()) %>" size="35"  onblur="setClientValue();">
 			<input type="hidden" name="jhd.gysbh" id="client_id" value="<%=StringUtils.nullToStr(jhd.getGysbh()) %>">
 			<div id="clientsTip" style="height:12px;position:absolute;left:150px; top:85px; width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 			<font color="red">*</font>	
 		</td>	
+		<td class="a1">地址</td>
+		<td class="a2"><input type="text" name="jhd.kh_address" id="kh_address" value="<%=StringUtils.nullToStr(jhd.getKh_address()) %>" size="45"></td>	
+	</tr>
+	
+	<tr>
+		<td class="a1">客户联系人</td>
+		<td class="a2">
+			<select name="jhd.kh_lxr" id="kh_lxr" onchange="chgLxr(this.value);" style="width:90px">
+				<%
+				if(!StringUtils.nullToStr(jhd.getKh_lxr()).equals("")){
+				%>
+					<option value="<%=StringUtils.nullToStr(jhd.getKh_lxr()) %>" selected><%=StringUtils.nullToStr(jhd.getKh_lxr()) %></option>
+				<%
+				} 
+				%>
+			</select>
+		</td>	
+		<td class="a1">联系电话</td>
+		<td class="a2"><input type="text" name="jhd.kh_lxdh" id="kh_lxdh" value="<%=StringUtils.nullToStr(jhd.getKh_lxdh()) %>"></td>
+	</tr>
+	<tr>
 		<td class="a1" width="15%">采购负责人</td>
 		<td class="a2" width="35%">
 			 <input id="brand" type="text" length="20" onblur="setValue()" value="<%=StaticParamDo.getRealNameById(jhd.getFzr()) %>"/> 
 	         <div id="brandTip" style="height:12px;position:absolute;left:612px; top:85px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		     <input type="hidden" name="jhd.fzr" id="fzr" value="<%=jhd.getFzr()%>"/> <font color="red">*</font>	
 		</td>
-	</tr>
-	<tr>
 		<td class="a1" width="15%">账期</td>
 		<td class="a2">
 			<input type="text" name="jhd.zq" id="zq" value="<%=StringUtils.nullToStr(jhd.getZq()) %>" size="3" title="账期">天<font color="red">*</font>
 			<input type="hidden" name="jhd.fkfs" id="fkfs" value="账期">
 		</td>
+	</tr>
+	<tr>		
 		<td class="a1" width="15%">到货库房</td>
 		<td class="a2" width="35%">
 			<select name="jhd.store_id" id="store_id">
@@ -276,13 +438,18 @@ session.removeAttribute("messages");
 				}
 				%>
 			</select>
-		</td>			
-	</tr>	
-	<tr>
+		</td>
 		<td class="a1" width="15%">预计到货时间</td>
 		<td class="a2" colspan="3">
 		<input type="text" name="jhd.yjdhsj" id="yjdhsj" value="<%=StringUtils.nullToStr(jhd.getYjdhsj()) %>"  class="Wdate" onFocus="WdatePicker()">
-		</td>	
+		</td>			
+	</tr>	
+	<tr>
+	  <td class="a1"  width="15%">发票类型</td>
+	  <td class="a2">
+	    <input type="radio"  name="jhd.ysws" value="未税" <%if(StringUtils.nullToStr(jhd.getYsws()).equals("未税")) out.print("checked"); %>>未税
+	    <input type="radio"  name="jhd.ysws" value="已税" <%if(StringUtils.nullToStr(jhd.getYsws()).equals("已税")) out.print("checked"); %>>已税 <font color="red">*</font>
+      </td>	
 	</tr>		
 </table>
 <br>
