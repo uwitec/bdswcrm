@@ -445,3 +445,9 @@ ALTER TABLE `sys_user` MODIFY COLUMN `gs_phone` VARCHAR(40) CHARACTER SET utf8 C
 --增加婚否、家庭成员
 ALTER TABLE `sys_user` ADD COLUMN `sfjh`  VARCHAR(20)  AFTER `remark`;
 ALTER TABLE `sys_user` ADD COLUMN `jtcy`  VARCHAR(200)  AFTER `sfjh`;
+
+--进货单增加地址、联系人、联系电话、未税/已税
+ALTER TABLE `jhd` ADD COLUMN `kh_address`  VARCHAR(200)  AFTER `yjdhsj`;
+ALTER TABLE `jhd` ADD COLUMN `kh_lxr`  VARCHAR(45)  AFTER `kh_address`;
+ALTER TABLE `jhd` ADD COLUMN `kh_lxdh`  VARCHAR(45)  AFTER `kh_lxr`;
+ALTER TABLE `jhd` ADD COLUMN `ysws`  VARCHAR(6)  AFTER `kh_lxdh`;
