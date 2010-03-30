@@ -433,13 +433,13 @@ Jhd jhd = (Jhd)VS.findValue("jhd");
 			</select>
 		</td>
 		<td class="a1" width="15%">预计到货时间</td>
-		<td class="a2" colspan="3">
+		<td class="a2">
 		<input type="text" name="jhd.yjdhsj" id="yjdhsj" value="<%=DateComFunc.getToday() %>"  class="Wdate" onFocus="WdatePicker()">
 		</td>		
 	</tr>
 	<tr>
 	  <td class="a1"  width="15%">发票类型</td>
-	  <td class="a2">
+	  <td class="a2" colspan="3">
 	    <input type="radio"  name="jhd.ysws" value="未税" >未税
 	    <input type="radio"  name="jhd.ysws" value="已税" >已税 <font color="red">*</font>
       </td>	

@@ -241,6 +241,8 @@
     	</property>
     </bean>
     
+    <bean id="initParamServiceNoTranc" class="com.sw.cms.service.InitParamService" autowire="byName"/>
+    
     <!-- 现金银行统计报表 -->     
     <bean id="cashBankService"  parent="baseTransaction">
         <property name="target">
