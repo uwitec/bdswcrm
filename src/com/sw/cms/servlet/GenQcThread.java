@@ -13,7 +13,7 @@ public class GenQcThread implements Runnable {
 		
 		//批量生成客户往来期初
 		System.out.println("批量生成客户往来期初开始！");
-		service.updateBatchGenClientWlQc("2010-03-07", "2010-03-11");
+		service.updateBatchGenClientWlQc("2010-02-28", "2010-03-30");
 		System.out.println("批量生成客户往来期初结束！");
 		
 		System.out.println("------------------------------------------");
