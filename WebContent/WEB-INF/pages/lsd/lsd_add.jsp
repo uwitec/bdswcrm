@@ -450,6 +450,7 @@ String flag = StringUtils.nullToStr(VS.findValue("flag"));
 		
 		if(document.getElementById("fkfs").value == "刷卡"){
 			document.getElementById("pos_id").style.display = "";
+			document.getElementById("pos_id").value = "<%=StringUtils.nullToStr(lsd.getPos_id()) %>";
 		}else{
 			document.getElementById("pos_id").style.display = "none";
 		}		
