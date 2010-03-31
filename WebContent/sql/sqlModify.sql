@@ -13,7 +13,7 @@ union all
 union all
 (select id as dj_id,client_name as client_id,pzje as fsje,DATE_FORMAT(cz_date,'%Y-%m-%d') as cdate,'应收发生' as je_type,'往来调账' as yw_type,'viewPz.html?id=' as url,cz_date,jsr from pz where state='已提交' and type='应收')
 union all
-(select a.id as dj_id,a.gysbh as client_id,a.fkje as fsje,DATE_FORMAT(a.cz_date,'%Y-%m-%d') as cdate,'已付发生' as je_type,'采购付款' as yw_type,'viewCgfk.html?id=' as url,a.cz_date,jsr from cgfk a inner join clients b on b.id=a.gysbh where a.state='已提交' or a.state='已支付')
+(select id as dj_id,gysbh as client_id,fkje as fsje,DATE_FORMAT(cz_date,'%Y-%m-%d') as cdate,'已付发生' as je_type,'采购付款' as yw_type,'viewCgfk.html?id=' as url,cz_date,jsr from cgfk where state='已提交' or state='已支付')
 union all
 (select a.id as dj_id,a.client_name as client_id,a.skje as fsje,DATE_FORMAT(a.cz_date,'%Y-%m-%d') as cdate,'已收发生' as je_type,'销售收款' as yw_type,'viewXssk.html?id=' as url,a.cz_date,jsr from xssk a inner join clients b on b.id=a.client_name where a.state='已提交')
 
