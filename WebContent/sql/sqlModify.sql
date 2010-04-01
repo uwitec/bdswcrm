@@ -452,5 +452,6 @@ ALTER TABLE `jhd` ADD COLUMN `kh_lxr`  VARCHAR(45)  AFTER `kh_address`;
 ALTER TABLE `jhd` ADD COLUMN `kh_lxdh`  VARCHAR(45)  AFTER `kh_lxr`;
 ALTER TABLE `jhd` ADD COLUMN `ysws`  VARCHAR(6)  AFTER `kh_lxdh`;
 
+2010-04-01修改
 --更新采购订单发票类型字段值
 update jhd set ysws='含税' where ysws='已税'
