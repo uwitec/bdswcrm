@@ -414,7 +414,7 @@ String user_id = info.getUser_id();
 		<td class="a1"  width="15%">发票类型</td>
 	    <td class="a2" colspan="3">
 	        <input type="radio"  name="jhd.ysws" value="未税" >未税
-	        <input type="radio"  name="jhd.ysws" value="已税" >已税 <font color="red">*</font>
+	        <input type="radio"  name="jhd.ysws" value="含税" >含税 <font color="red">*</font>
         </td>
 	</tr>
 	<tr>			

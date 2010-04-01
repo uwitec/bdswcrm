@@ -418,7 +418,7 @@ session.removeAttribute("messages");
 		<td class="a1"  width="15%">发票类型</td>
 	    <td class="a2" colspan="3">
 	        <input type="radio"  name="jhd.ysws" value="未税" <%if(StringUtils.nullToStr(jhd.getYsws()).equals("未税")) out.print("checked"); %>>未税
-	        <input type="radio"  name="jhd.ysws" value="已税" <%if(StringUtils.nullToStr(jhd.getYsws()).equals("已税")) out.print("checked"); %>>已税 <font color="red">*</font>
+	        <input type="radio"  name="jhd.ysws" value="含税" <%if(StringUtils.nullToStr(jhd.getYsws()).equals("含税")) out.print("checked"); %>>含税 <font color="red">*</font>
         </td>	
 	</tr>
 	<tr>			
