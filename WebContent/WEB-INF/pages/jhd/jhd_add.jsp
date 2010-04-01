@@ -10,9 +10,6 @@ String id = (String)VS.findValue("id");
 List storeList = (List)VS.findValue("storeList");
 Jhd jhd = (Jhd)VS.findValue("jhd");
 
-LoginInfo info = (LoginInfo)session.getAttribute("LOGINUSER");
-String real_name = info.getReal_name();
-String user_id = info.getUser_id();
 %>
 
 <html>
@@ -442,10 +439,10 @@ String user_id = info.getUser_id();
 	<tr>
         <td class="a1" width="15%">采购负责人</td>
 		<td class="a2" width="35%">
-		    <input id="brand" type="text" length="20"  onblur="setValue()" value="<%=real_name %>"> 
+		    <input id="brand" type="text" length="20"  onblur="setValue()" value=""> 
             <div id="brandTip" style="height:12px;position:absolute;left:612px; top:85px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
             </div>
-		    <input type="hidden" name="jhd.fzr" id="fzr" value="<%=user_id %>"> <font color="red">*</font>	
+		    <input type="hidden" name="jhd.fzr" id="fzr" value=""> <font color="red">*</font>	
 		</td>	
 	</tr>	
 </table>
