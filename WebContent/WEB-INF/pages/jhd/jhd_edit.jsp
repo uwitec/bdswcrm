@@ -409,20 +409,23 @@ session.removeAttribute("messages");
 		<td class="a1">联系电话</td>
 		<td class="a2"><input type="text" name="jhd.kh_lxdh" id="kh_lxdh" value="<%=StringUtils.nullToStr(jhd.getKh_lxdh()) %>"></td>
 	</tr>
-	<tr>
-		<td class="a1" width="15%">采购负责人</td>
-		<td class="a2" width="35%">
-			 <input id="brand" type="text" length="20" onblur="setValue()" value="<%=StaticParamDo.getRealNameById(jhd.getFzr()) %>"/> 
-	         <div id="brandTip" style="height:12px;position:absolute;left:612px; top:85px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
-		     <input type="hidden" name="jhd.fzr" id="fzr" value="<%=jhd.getFzr()%>"/> <font color="red">*</font>	
-		</td>
+	<tr>		
 		<td class="a1" width="15%">账期</td>
 		<td class="a2">
 			<input type="text" name="jhd.zq" id="zq" value="<%=StringUtils.nullToStr(jhd.getZq()) %>" size="3" title="账期">天<font color="red">*</font>
 			<input type="hidden" name="jhd.fkfs" id="fkfs" value="账期">
 		</td>
+		<td class="a1"  width="15%">发票类型</td>
+	    <td class="a2" colspan="3">
+	        <input type="radio"  name="jhd.ysws" value="未税" <%if(StringUtils.nullToStr(jhd.getYsws()).equals("未税")) out.print("checked"); %>>未税
+	        <input type="radio"  name="jhd.ysws" value="已税" <%if(StringUtils.nullToStr(jhd.getYsws()).equals("已税")) out.print("checked"); %>>已税 <font color="red">*</font>
+        </td>	
 	</tr>
-	<tr>		
+	<tr>			
+		<td class="a1" width="15%">预计到货时间</td>
+		<td class="a2">
+		<input type="text" name="jhd.yjdhsj" id="yjdhsj" value="<%=StringUtils.nullToStr(jhd.getYjdhsj()) %>"  class="Wdate" onFocus="WdatePicker()">
+		</td>	
 		<td class="a1" width="15%">到货库房</td>
 		<td class="a2" width="35%">
 			<select name="jhd.store_id" id="store_id">
@@ -438,18 +441,15 @@ session.removeAttribute("messages");
 				}
 				%>
 			</select>
-		</td>
-		<td class="a1" width="15%">预计到货时间</td>
-		<td class="a2">
-		<input type="text" name="jhd.yjdhsj" id="yjdhsj" value="<%=StringUtils.nullToStr(jhd.getYjdhsj()) %>"  class="Wdate" onFocus="WdatePicker()">
-		</td>			
+		</td>		
 	</tr>	
-	<tr>
-	  <td class="a1"  width="15%">发票类型</td>
-	  <td class="a2" colspan="3">
-	    <input type="radio"  name="jhd.ysws" value="未税" <%if(StringUtils.nullToStr(jhd.getYsws()).equals("未税")) out.print("checked"); %>>未税
-	    <input type="radio"  name="jhd.ysws" value="已税" <%if(StringUtils.nullToStr(jhd.getYsws()).equals("已税")) out.print("checked"); %>>已税 <font color="red">*</font>
-      </td>	
+	<tr>	 
+      <td class="a1" width="15%">采购负责人</td>
+		<td class="a2" width="35%">
+			 <input id="brand" type="text" length="20" onblur="setValue()" value="<%=StaticParamDo.getRealNameById(jhd.getFzr()) %>"/> 
+	         <div id="brandTip" style="height:12px;position:absolute;left:612px; top:85px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+		     <input type="hidden" name="jhd.fzr" id="fzr" value="<%=jhd.getFzr()%>"/> <font color="red">*</font>	
+		</td>
 	</tr>		
 </table>
 <br>

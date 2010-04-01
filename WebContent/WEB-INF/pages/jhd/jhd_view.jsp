@@ -46,11 +46,11 @@ Jhd jhd = (Jhd)VS.findValue("Jhd");
 		<td class="a1" width="15%">联系电话</td>
 		<td class="a2" width="35%"><%=StringUtils.nullToStr(jhd.getKh_lxdh()) %></td>
 	</tr>
-	<tr>
-		<td class="a1" width="15%">采购负责人</td>
-		<td class="a2" width="35%"><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(jhd.getFzr())) %>	</td>
+	<tr>		
 	    <td class="a1" width="15%">账期</td>
 		<td class="a2" width="35%"><%=StringUtils.nullToStr(jhd.getZq()) %>天</td>	
+		<td class="a1"  width="15%">发票类型</td>
+	    <td class="a2" width="35%"><%=StringUtils.nullToStr(jhd.getYsws()) %></td>	
 	</tr>
 	<tr>		
 		<td class="a1" width="15%">进货单状态</td>
@@ -61,9 +61,8 @@ Jhd jhd = (Jhd)VS.findValue("Jhd");
 	<tr>		
 		<td class="a1" width="15%">到货库房</td>
 		<td class="a2" width="35%"><%=StaticParamDo.getStoreNameById(jhd.getStore_id()) %></td>
-		<td class="a1"  width="15%">发票类型</td>
-	     <td class="a2" width="35%"><%=StringUtils.nullToStr(jhd.getYsws()) %></td>	    
-      </td>	
+		<td class="a1" width="15%">采购负责人</td>
+		<td class="a2" width="35%"><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(jhd.getFzr())) %>	</td>    
 	</tr>	
 	<tr>
 		<td class="a1">合计金额</td>

@@ -9,6 +9,10 @@ OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
 String id = (String)VS.findValue("id");
 List storeList = (List)VS.findValue("storeList");
 Jhd jhd = (Jhd)VS.findValue("jhd");
+
+LoginInfo info = (LoginInfo)session.getAttribute("LOGINUSER");
+String real_name = info.getReal_name();
+String user_id = info.getUser_id();
 %>
 
 <html>
@@ -401,22 +405,24 @@ Jhd jhd = (Jhd)VS.findValue("jhd");
 		<td class="a1">联系电话</td>
 		<td class="a2"><input type="text" name="jhd.kh_lxdh" id="kh_lxdh" ></td>
 	</tr>
-	<tr>		
-		<td class="a1" width="15%">采购负责人</td>
-		<td class="a2" width="35%">
-		    <input id="brand" type="text" length="20" onblur="setValue()"/> 
-            <div id="brandTip" style="height:12px;position:absolute;left:612px; top:85px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
-            </div>
-		    <input type="hidden" name="jhd.fzr" id="fzr" /> <font color="red">*</font>	
-		</td>
+	<tr>	
 		<td class="a1" width="15%">账期</td>
 		<td class="a2">
 			<input type="text" name="jhd.zq" id="zq" value="0" size="3" title="账期">天<font color="red">*</font>
 			<input type="hidden" name="jhd.fkfs" id="fkfs" value="账期">
 		</td>
+		<td class="a1"  width="15%">发票类型</td>
+	    <td class="a2" colspan="3">
+	        <input type="radio"  name="jhd.ysws" value="未税" >未税
+	        <input type="radio"  name="jhd.ysws" value="已税" >已税 <font color="red">*</font>
+        </td>
 	</tr>
 	<tr>			
-		<td class="a1" width="15%">到货库房</td>
+		<td class="a1" width="15%">预计到货时间</td>
+		<td class="a2">
+		<input type="text" name="jhd.yjdhsj" id="yjdhsj" value="0" size="3" title="预计到货时间">天
+		</td>		
+	    <td class="a1" width="15%">到货库房</td>
 		<td class="a2" width="35%">
 			<select name="jhd.store_id" id="store_id">
 				<option value=""></option>
@@ -431,18 +437,16 @@ Jhd jhd = (Jhd)VS.findValue("jhd");
 				}
 				%>
 			</select>
-		</td>
-		<td class="a1" width="15%">预计到货时间</td>
-		<td class="a2">
-		<input type="text" name="jhd.yjdhsj" id="yjdhsj" value="<%=DateComFunc.getToday() %>"  class="Wdate" onFocus="WdatePicker()">
-		</td>		
-	</tr>
+		</td>	  
+    </tr>
 	<tr>
-	  <td class="a1"  width="15%">发票类型</td>
-	  <td class="a2" colspan="3">
-	    <input type="radio"  name="jhd.ysws" value="未税" >未税
-	    <input type="radio"  name="jhd.ysws" value="已税" >已税 <font color="red">*</font>
-      </td>	
+        <td class="a1" width="15%">采购负责人</td>
+		<td class="a2" width="35%">
+		    <input id="brand" type="text" length="20"  onblur="setValue()" value="<%=real_name %>"> 
+            <div id="brandTip" style="height:12px;position:absolute;left:612px; top:85px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
+            </div>
+		    <input type="hidden" name="jhd.fzr" id="fzr" value="<%=user_id %>"> <font color="red">*</font>	
+		</td>	
 	</tr>	
 </table>
 <br>
