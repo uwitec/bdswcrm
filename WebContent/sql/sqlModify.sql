@@ -1,6 +1,7 @@
-ALTER TABLE `crm_sw`.`xxfb_nbgg` MODIFY COLUMN `id` VARCHAR(50) DEFAULT NULL;
+2010-02-04修改
+ALTER TABLE `xxfb_nbgg` MODIFY COLUMN `id` VARCHAR(50) DEFAULT NULL;
 
---2010-02-18添加
+2010-02-18添加
 CREATE TABLE `zzd` (
   `id` varchar(20) NOT NULL,
   `cdate` varchar(45) default NULL,
