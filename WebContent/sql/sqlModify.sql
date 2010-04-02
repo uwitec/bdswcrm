@@ -1,4 +1,50 @@
-﻿2010-02-27更新
+ALTER TABLE `crm_sw`.`xxfb_nbgg` MODIFY COLUMN `id` VARCHAR(50) DEFAULT NULL;
+
+--2010-02-18添加
+CREATE TABLE `zzd` (
+  `id` varchar(20) NOT NULL,
+  `cdate` varchar(45) default NULL,
+  `store_id` varchar(45) default NULL,
+  `product_id` varchar(45) default NULL,
+  `product_name` varchar(200) default NULL,
+  `product_xh` varchar(200) default NULL,
+  `product_dw` varchar(50) default NULL,
+  `nums` int(11) default '0',
+  `price` double default '0',
+  `hjje` double default '0',
+  `jsr` varchar(45) default NULL,
+  `remark` varchar(45) default NULL,
+  `czr` varchar(45) default NULL,
+  `cz_date` datetime default NULL,
+  `state` varchar(45) default NULL,
+  `serial_nums` varchar(400) default NULL,
+  `qz_flag` varchar(10) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `zzd_product` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `zzd_id` varchar(45) NOT NULL,
+  `product_id` varchar(45) default NULL,
+  `product_name` varchar(200) default NULL,
+  `product_xh` varchar(200) default NULL,
+  `product_dw` varchar(45) default NULL,
+  `price` double default '0',
+  `nums` int(11) default '0',
+  `hj` double default '0',
+  `remark` varchar(200) default NULL,
+  `qz_serial_num` varchar(500) default NULL,
+  `qz_flag` varchar(10) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+ALTER TABLE `cms_all_seq` ADD COLUMN `zzdid` INTEGER UNSIGNED DEFAULT 1 AFTER `cnfkdid`;
+
+ALTER TABLE `xssk_desc` ADD COLUMN `ysk` DOUBLE DEFAULT 0 AFTER `fsje`;
+
+2010-02-27更新
 --修改客户往来情况视图
 CREATE OR REPLACE VIEW view_client_wl_info AS
 (select id as dj_id,gysbh as client_id,total as fsje,DATE_FORMAT(cz_date,'%Y-%m-%d') as cdate,'应付发生' as je_type,'采购' as yw_type,'viewXsd.html?id=' as url,cz_date,fzr as jsr from jhd where state='已入库')
