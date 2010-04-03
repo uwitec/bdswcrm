@@ -1,7 +1,7 @@
 package com.sw.cms.model;
 
 /**
- * 售后产品序列号流转记录
+ * 售后商品序列号流转记录
  * @author Administrator
  *
  */

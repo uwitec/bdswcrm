@@ -121,7 +121,7 @@ public class JhdDAO extends JdbcBaseDAO {
 		param[24] = jhd.getYsws();
 		
 		this.getJdbcTemplate().update(sql, param); //添加进货单信息		
-		this.addJhdProduct(jhdProducts,jhd.getId());           //添加进货单关联的产品
+		this.addJhdProduct(jhdProducts,jhd.getId());           //添加进货单关联的商品
 
 	}
 	
@@ -177,14 +177,14 @@ public class JhdDAO extends JdbcBaseDAO {
 			this.getJdbcTemplate().update(sql);
 		}
 		
-		this.delJhdProduct(jhd.getId());             //删除进货单关联产品
-		this.addJhdProduct(jhdProducts,jhd.getId()); //添加进货单新的关联产品
+		this.delJhdProduct(jhd.getId());             //删除进货单关联商品
+		this.addJhdProduct(jhdProducts,jhd.getId()); //添加进货单新的关联商品
 		
 	}
 	
 	
 	/**
-	 * 根据进货单号取进货关联产品
+	 * 根据进货单号取进货关联商品
 	 * @param jhd_id
 	 * @return
 	 */
@@ -205,7 +205,7 @@ public class JhdDAO extends JdbcBaseDAO {
 		String sql = "delete from jhd where id='" + id + "'";
 		
 		this.getJdbcTemplate().update(sql); //删除进货单信息
-		this.delJhdProduct(id);             //删除进货单关联产品
+		this.delJhdProduct(id);             //删除进货单关联商品
 	}
 	
 	/**
@@ -282,7 +282,7 @@ public class JhdDAO extends JdbcBaseDAO {
 	
 	
 	/**
-	 * 添加进货单产品
+	 * 添加进货单商品
 	 * @param jhdProducts
 	 */
 	private void addJhdProduct(List jhdProducts,String jhd_id){
@@ -326,7 +326,7 @@ public class JhdDAO extends JdbcBaseDAO {
 	
 	
 	/**
-	 * 更新采购订单产品实际成交数
+	 * 更新采购订单商品实际成交数
 	 * @param xsd_id
 	 * @param product_id
 	 * @param nums
@@ -341,7 +341,7 @@ public class JhdDAO extends JdbcBaseDAO {
 	
 	
 	/**
-	 * 删除进货单关联的所有产品
+	 * 删除进货单关联的所有商品
 	 * @param jhd_id
 	 */
 	private void delJhdProduct(String jhd_id){

@@ -46,7 +46,7 @@ public class ExportProductKcOutInResult extends ExportXlsTemplate {
 				conStr += "　库房：" + StaticParamDo.getStoreNameById(store_id);
 			}
 			if(!product_kind.equals("")){
-				conStr += "　产品类别：" + StaticParamDo.getProductKindNameById(product_kind);
+				conStr += "　商品类别：" + StaticParamDo.getProductKindNameById(product_kind);
 			}
 			
 			Label label = null;
@@ -103,7 +103,7 @@ public class ExportProductKcOutInResult extends ExportXlsTemplate {
 					String dw = StringUtils.nullToStr(map.get("dw"));
 					
 					
-					//根据产品编号、开始时间、库房编号取库存期初情况
+					//根据商品编号、开始时间、库房编号取库存期初情况
 					Map qcMap = kcMxReportService.getKcqcMxMap(product_id,start_date,store_id);
 					
 					String strNums = "0";   //期初数

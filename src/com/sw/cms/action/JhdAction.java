@@ -140,7 +140,7 @@ public class JhdAction extends BaseAction {
 	}
 
 	/**
-	 * 保存进货单信息 包括相关产品信息
+	 * 保存进货单信息 包括相关商品信息
 	 * 
 	 * @return
 	 */
@@ -166,7 +166,7 @@ public class JhdAction extends BaseAction {
 	}
 
 	/**
-	 * 更新进货单信息 包括相关产品信息
+	 * 更新进货单信息 包括相关商品信息
 	 * 
 	 * @return
 	 */
@@ -187,7 +187,7 @@ public class JhdAction extends BaseAction {
 	}
 
 	/**
-	 * 删除进货单信息 包括相关产品信息
+	 * 删除进货单信息 包括相关商品信息
 	 * 
 	 * @return
 	 */

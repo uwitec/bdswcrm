@@ -4,7 +4,7 @@ package com.sw.cms.model;
  * 报修返还单商品
  * 
  * @author Administrator
- * 2010-02-04修改，有以下信息：流水号\报修返还单ID\产品ID\产品名称\产品型号\产品序列号\仓库编号\库存状态\数量\产品附件\单价\金额\产品备注
+ * 2010-02-04修改，有以下信息：流水号\报修返还单ID\商品ID\商品名称\商品型号\商品序列号\仓库编号\库存状态\数量\商品附件\单价\金额\商品备注
  *         id\bxfhd_id\product_id\product_name\product_xh\qz_serial_num\store_id\storestate\nums\cpfj\price\totalmoney\remark
  * 
  */
@@ -12,17 +12,17 @@ public class BxfhdProduct
 {
 	private int id;// 流水号
 	private String bxfhd_id; // 报修返还单ID
-	private String product_id; // 产品ID
-	private String product_name; // 产品名称
-	private String product_xh; // 产品型号
-	private String qz_serial_num;// 产品序列号
-	private String remark;// 产品备注
+	private String product_id; // 商品ID
+	private String product_name; // 商品名称
+	private String product_xh; // 商品型号
+	private String qz_serial_num;// 商品序列号
+	private String remark;// 商品备注
 	private String store_id; // 仓库编号
 	private String storeState; // 仓库标识：仓库编号为坏件库编号时使用，1：在坏件库中  2：在外库中
-	private int nums; // 产品数量
-	private String cpfj;// 产品附件
-	private double price; // 产品价格
-	private double totalMoney; // 产品总金额
+	private int nums; // 商品数量
+	private String cpfj;// 商品附件
+	private double price; // 商品价格
+	private double totalMoney; // 商品总金额
 	 
 
 	public String getStord_id() {

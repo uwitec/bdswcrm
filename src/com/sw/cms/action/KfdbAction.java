@@ -231,7 +231,7 @@ public class KfdbAction extends BaseAction {
 	
 	
 	/**
-	 * 库房调拨产品明细
+	 * 库房调拨商品明细
 	 * @return
 	 */
 	public String descKfdb(){

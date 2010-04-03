@@ -140,7 +140,7 @@ public class SysInitSetAction extends BaseAction {
 				String filePath = ServletActionContext.getServletContext().getRealPath("/");
 				String imgPath = filePath + "logo/" + logoFileFileName;
 				
-				//上传产品图片文件
+				//上传商品图片文件
 				FileOutputStream outputStream = new FileOutputStream(imgPath);
 				FileInputStream fileIn = new FileInputStream(logoFile);
 				byte[] buffer = new byte[1024];

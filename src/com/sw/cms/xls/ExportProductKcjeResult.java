@@ -51,7 +51,7 @@ public class ExportProductKcjeResult extends ExportXlsTemplate {
 						
 					}
 				}
-				conStr += "　产品类别：" + kind_name;
+				conStr += "　商品类别：" + kind_name;
 			}
 			conStr += "　报表生成时间：" + DateComFunc.getCurTime();
 			

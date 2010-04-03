@@ -10,7 +10,7 @@ public class ProductKindService {
 	private ProductKindDAO productKindDao;
 	
 	/**
-	 * 取所有产品类别列表
+	 * 取所有商品类别列表
 	 * @return
 	 */
 	public List getAllProductKindList(){
@@ -18,7 +18,7 @@ public class ProductKindService {
 	}
 	
 	/**
-	 * 根据ID取产品类别
+	 * 根据ID取商品类别
 	 * @param id
 	 * @return
 	 */
@@ -28,7 +28,7 @@ public class ProductKindService {
 	
 	
 	/**
-	 * 添加产品信息
+	 * 添加商品信息
 	 * @param productKind
 	 */
 	public void saveProductKind(ProductKind productKind){
@@ -38,7 +38,7 @@ public class ProductKindService {
 	
 	
 	/**
-	 * 更新产品信息
+	 * 更新商品信息
 	 * @param productKind
 	 */
 	public void updateProductKind(ProductKind productKind){
@@ -56,7 +56,7 @@ public class ProductKindService {
 	}
 	
 	/**
-	 * 返回类别下子产品的数量
+	 * 返回类别下子商品的数量
 	 * @param id
 	 * @return
 	 */
@@ -65,7 +65,7 @@ public class ProductKindService {
 	}
 	
 	/**
-	 * 删除产品分类信息
+	 * 删除商品分类信息
 	 * @param id
 	 */
 	public void delProductKind(String id){

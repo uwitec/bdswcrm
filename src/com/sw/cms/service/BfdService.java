@@ -73,8 +73,8 @@ public class BfdService {
 				{
 					if(!bfdProduct.getProduct_id().equals("") && !bfdProduct.getProduct_name().equals(""))
 					{				
-						//只有在系统正式使用后才去修改产品的库存和处理序列号
-						//系统启用前也可输入产品序列号，但不硬性强制，对于输入的序列号系统做处理
+						//只有在系统正式使用后才去修改商品的库存和处理序列号
+						//系统启用前也可输入商品序列号，但不硬性强制，对于输入的序列号系统做处理
 						
 						//if(sysInitSetDao.getQyFlag().equals("1")){
 						//强制序列号处理

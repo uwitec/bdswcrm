@@ -18,7 +18,7 @@ import com.sw.cms.util.DateComFunc;
  * <p>已入库、未入库</p>
  * <p>已入库入库单只可查，不能做其它修改</p>
  * <p>入库单入库同时更新库存数据及价格</p>
- * <p>库存产品价格目前采用加权平均价</p>
+ * <p>库存商品价格目前采用加权平均价</p>
  * autor liyt
  * 2008-03-29
  */
@@ -45,7 +45,7 @@ public class RkdDAO extends JdbcBaseDAO {
 	
 	
 	/**
-	 * 保存入库单信息（包括关联产品信息）
+	 * 保存入库单信息（包括关联商品信息）
 	 * @param rkd
 	 * @param rkdProducts
 	 */
@@ -68,13 +68,13 @@ public class RkdDAO extends JdbcBaseDAO {
 		
 		this.getJdbcTemplate().update(sql,param);  //添加入库单信息
 		
-		addRkdProducts(rkdProducts, rkd_id);   //添加入库单关联产品信息
+		addRkdProducts(rkdProducts, rkd_id);   //添加入库单关联商品信息
 	}
 	
 	
 	
 	/**
-	 * 更新入库单信息（包括关联产品信息）
+	 * 更新入库单信息（包括关联商品信息）
 	 * @param rkd
 	 * @param rkdProducts
 	 */
@@ -97,14 +97,14 @@ public class RkdDAO extends JdbcBaseDAO {
 		
 		this.getJdbcTemplate().update(sql,param);     //更新入库单信息
 		
-		this.delRkdProducts(rkd.getRkd_id());    //删除入库单关联产品
-		this.addRkdProducts(rkdProducts, rkd.getRkd_id()); //添加新的入库单关联产品
+		this.delRkdProducts(rkd.getRkd_id());    //删除入库单关联商品
+		this.addRkdProducts(rkdProducts, rkd.getRkd_id()); //添加新的入库单关联商品
 	}
 	
 	
 	
 	/**
-	 * 删除入库单信息（包括关联产品）
+	 * 删除入库单信息（包括关联商品）
 	 * @param rkd_id
 	 */
 	public void delRkd(String rkd_id){
@@ -131,7 +131,7 @@ public class RkdDAO extends JdbcBaseDAO {
 	
 	
 	/**
-	 * 根据入库单ID取入库单产品列表
+	 * 根据入库单ID取入库单商品列表
 	 * @param rkd_id
 	 * @return
 	 */
@@ -161,8 +161,8 @@ public class RkdDAO extends JdbcBaseDAO {
 	
 	
 	/**
-	 * 添加入库单关联产品
-	 * @param rkdProducts  产品List
+	 * 添加入库单关联商品
+	 * @param rkdProducts  商品List
 	 * @param rkd_id    入库单ID
 	 */
 	private void addRkdProducts(List rkdProducts,String rkd_id){
@@ -197,7 +197,7 @@ public class RkdDAO extends JdbcBaseDAO {
 	
 	
 	/**
-	 * 删除入库单关联的所有产品
+	 * 删除入库单关联的所有商品
 	 * @param rkd_id
 	 */
 	private void delRkdProducts(String rkd_id){
@@ -260,7 +260,7 @@ public class RkdDAO extends JdbcBaseDAO {
 
 	
 	/**
-	 * 包装对象(入库单产品)
+	 * 包装对象(入库单商品)
 	 * 
 	 * @author liyt
 	 * 

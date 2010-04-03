@@ -1,7 +1,7 @@
 package com.sw.cms.model;
 
 /**
- * 拆卸单相关新产品
+ * 拆卸单相关新商品
  * @author jinyanni
  *
  */

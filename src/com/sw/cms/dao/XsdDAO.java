@@ -124,9 +124,9 @@ public class XsdDAO extends JdbcBaseDAO {
 		
 		this.getJdbcTemplate().update(sql,param);  //保存销售单信息
 		
-		delXsdProducts(xsd_id);    //删除相应销售单产品
+		delXsdProducts(xsd_id);    //删除相应销售单商品
 		
-		addXsdProducts(xsdProducts,xsd);   //添加销售单相关产品		
+		addXsdProducts(xsdProducts,xsd);   //添加销售单相关商品		
 		
 	}
 	
@@ -159,7 +159,7 @@ public class XsdDAO extends JdbcBaseDAO {
 		Xsd xsd = new Xsd();
 		xsd.setId(fxdd.getFxdd_id());
 		
-		addXsdProducts(xsdProducts,xsd);   //添加分销订单相关产品
+		addXsdProducts(xsdProducts,xsd);   //添加分销订单相关商品
 	}
 	
 	
@@ -237,9 +237,9 @@ public class XsdDAO extends JdbcBaseDAO {
 			this.getJdbcTemplate().update(sql);
 		}
 		
-		delXsdProducts(xsd_id);    //删除相应销售单产品
+		delXsdProducts(xsd_id);    //删除相应销售单商品
 		
-		addXsdProducts(xsdProducts,xsd);   //添加销售单相关产品		
+		addXsdProducts(xsdProducts,xsd);   //添加销售单相关商品		
 	}
 	
 	
@@ -267,12 +267,12 @@ public class XsdDAO extends JdbcBaseDAO {
 
 		this.getJdbcTemplate().update(sql,param);
 		
-		delXsdProducts(fxdd.getFxdd_id());    //删除相应分销订单产品
+		delXsdProducts(fxdd.getFxdd_id());    //删除相应分销订单商品
 		
 		Xsd xsd = new Xsd();
 		xsd.setId(fxdd.getFxdd_id());
 		
-		addXsdProducts(xsdProducts,xsd);   //添加分销订单相关产品
+		addXsdProducts(xsdProducts,xsd);   //添加分销订单相关商品
 	}
 	
 	
@@ -322,7 +322,7 @@ public class XsdDAO extends JdbcBaseDAO {
 	}
 	
 	/**
-	 * 更新销售单产品实际成交数
+	 * 更新销售单商品实际成交数
 	 * @param xsd_id
 	 * @param product_id
 	 * @param nums
@@ -336,7 +336,7 @@ public class XsdDAO extends JdbcBaseDAO {
 	
 	
 	/**
-	 * 根据编号获取销售相关产品
+	 * 根据编号获取销售相关商品
 	 * @param id
 	 * @return
 	 */
@@ -386,7 +386,7 @@ public class XsdDAO extends JdbcBaseDAO {
 	
 	
 	/**
-	 * 添加销售单相关产品
+	 * 添加销售单相关商品
 	 * @param XsdProducts
 	 * @param xsd_id
 	 */
@@ -503,7 +503,7 @@ public class XsdDAO extends JdbcBaseDAO {
 	
 	
 	/**
-	 * 删除销售单相关产品
+	 * 删除销售单相关商品
 	 * @param xsd_id
 	 */
 	private void delXsdProducts(String xsd_id){
@@ -649,7 +649,7 @@ public class XsdDAO extends JdbcBaseDAO {
 	
 	
 	/**
-	 * 判断销售单中是否存在该产品
+	 * 判断销售单中是否存在该商品
 	 * @param xsd_id
 	 * @param product_id
 	 * @return
@@ -791,7 +791,7 @@ public class XsdDAO extends JdbcBaseDAO {
 
 	
 	/**
-	 * 根据销售单编号及产品编号取销售明细信息
+	 * 根据销售单编号及商品编号取销售明细信息
 	 * @param xsd_id
 	 * @param product_id
 	 * @return
@@ -832,7 +832,7 @@ public class XsdDAO extends JdbcBaseDAO {
 	
 	
 	/**
-	 * 包装对象(销售单产品)
+	 * 包装对象(销售单商品)
 	 * 
 	 * @author liyt
 	 * 

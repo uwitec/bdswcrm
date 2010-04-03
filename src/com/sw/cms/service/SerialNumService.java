@@ -74,7 +74,7 @@ public class SerialNumService {
 	
 	/**
 	 * 查询序列号当前状态
-	 * 对应产品相关信息
+	 * 对应商品相关信息
 	 * @param serial_num
 	 * @return
 	 */

@@ -45,7 +45,7 @@ public class BxdDAO extends JdbcBaseDAO {
 	}
 
 	/**
-	 * 根据报修单ID返回保修单所修产品
+	 * 根据报修单ID返回保修单所修商品
 	 * 
 	 * @param bxd_id
 	 * @return

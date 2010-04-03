@@ -11,9 +11,9 @@ public class KlHzReportDAO extends JdbcBaseDAO {
 	
 	/**
 	 * 查询库龄汇总
-	 * @param product_kind 产品种类	           
-	 * @param product_name产品名称	             
-	 * @param store_id产品库房	          
+	 * @param product_kind 商品种类	           
+	 * @param product_name商品名称	             
+	 * @param store_id商品库房	          
 	 * @param kl_day库龄（天）	            
 	 * @return
 	 */

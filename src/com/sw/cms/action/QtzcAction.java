@@ -27,7 +27,7 @@ public class QtzcAction extends BaseAction {
 	
 	private String zc_date1 = "";
 	private String zc_date2 = "";
-	private String state = "";
+	private String state = "ÒÑ±£´æ";
 	
 	private String id = "";
 	

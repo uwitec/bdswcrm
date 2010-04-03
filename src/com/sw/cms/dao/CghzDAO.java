@@ -244,7 +244,7 @@ public class CghzDAO extends JdbcBaseDAO {
 	
 	
 	/**
-	 * 取单据产品明细
+	 * 取单据商品明细
 	 * @param dj_id
 	 * @param xwtype
 	 * @return

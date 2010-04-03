@@ -1,8 +1,8 @@
 package com.sw.cms.model;
 
 /**
- * 换件单产品信息
- * 2010-02-24 增加，有以下信息：编号、换件单ID、产品ID、产品名称、产品型号、旧产品序列号、新产品序列号、产品备注
+ * 换件单商品信息
+ * 2010-02-24 增加，有以下信息：编号、换件单ID、商品ID、商品名称、商品型号、旧商品序列号、新商品序列号、商品备注
  *           id    hjd_id    product_id  product_name product_xh oqz_serial_num  nqz_serial_num  product_remark 
  */
 public class HjdProduct {
@@ -10,17 +10,17 @@ public class HjdProduct {
 
 	private String hjd_id; // 换件单ID
 
-	private String product_id; // 产品ID
+	private String product_id; // 商品ID
 
-	private String product_name; // 产品名称	
+	private String product_name; // 商品名称	
 
-	private String product_xh; // 产品型号
+	private String product_xh; // 商品型号
 
-	private String oqz_serial_num; // 旧产品序列号
+	private String oqz_serial_num; // 旧商品序列号
 
-	private String product_remark; // 产品备注
+	private String product_remark; // 商品备注
 
-	private String nqz_serial_num; // 新产品序列号
+	private String nqz_serial_num; // 新商品序列号
 
 
 	public String getHjd_id() {

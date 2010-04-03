@@ -1,8 +1,8 @@
 package com.sw.cms.model;
 
 /**
- * 报废单产品信息
- * 2010-02-23 增加：编号、报废单ID、产品ID、产品名称、产品型号、产品序列号、产品备注、仓库编号、库存状态、数量
+ * 报废单商品信息
+ * 2010-02-23 增加：编号、报废单ID、商品ID、商品名称、商品型号、商品序列号、商品备注、仓库编号、库存状态、数量
  * id    bfd_id    product_id  product_name product_xh qz_serial_num product_remark store_id storestate nums 
  */
 public class BfdProduct {
@@ -10,21 +10,21 @@ public class BfdProduct {
 
 	private String bfd_id; // 报废单ID
 
-	private String product_id; // 产品ID
+	private String product_id; // 商品ID
 
-	private String product_name; // 产品名称	
+	private String product_name; // 商品名称	
 
-	private String product_xh; // 产品型号
+	private String product_xh; // 商品型号
 
-	private String qz_serial_num; // 产品序列号
+	private String qz_serial_num; // 商品序列号
 
-	private String product_remark; // 产品备注
+	private String product_remark; // 商品备注
 
 	private String store_id; // 仓库编号
 
 	private String storestate; // 仓库标识：1-坏件库中 2-在外库中，只对坏件库进行标识
 
-	private int nums; // 产品数量
+	private int nums; // 商品数量
 
 
 	public int getNums() {

@@ -3,7 +3,7 @@ package com.sw.cms.model;
 /**
  * 返还客户单商品
  * @author Administrator
- *2010-02-05修改，有以下信息：编号、返还客户单编号、产品编号、   产品名称、      产品规格、     产品附件
+ *2010-02-05修改，有以下信息：编号、返还客户单编号、商品编号、   商品名称、      商品规格、     商品附件
  *                         id   fhkhd_id    product_id  product_name  product_xh   cpfj
  *                      强制序列号、     备注、    单价、   金额、        仓库编号、    库存状态、     数量
  *                      qz_serial_num  remark   price   totalmoney   store_id    storestate   nums
@@ -12,10 +12,10 @@ public class FhkhdProduct
 {
 	   private int id  ;//流水号
 	   private String  fhkhd_id     ;//返还客户单ID
-	   private String product_id  ;//返还客户单产品ID
-	   private String product_name ;//返还客户单产品名称
-	   private String product_xh   ;//返还客户单产品规格
-	   private String qz_serial_num ;//返还客户单产品序列号
+	   private String product_id  ;//返还客户单商品ID
+	   private String product_name ;//返还客户单商品名称
+	   private String product_xh   ;//返还客户单商品规格
+	   private String qz_serial_num ;//返还客户单商品序列号
 	   private String remark       ;//备注
 	   
 	   private double price;       //单价
@@ -23,7 +23,7 @@ public class FhkhdProduct
 	   private String store_id;    //仓库编号
 	   private String storestate;  //库存状态
 	   private int nums;           //数量
-	   private String cpfj;  //产品附件
+	   private String cpfj;  //商品附件
 	   
 	public String getFhkhd_id() {
 		return fhkhd_id;

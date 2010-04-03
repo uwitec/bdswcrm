@@ -147,7 +147,7 @@ public class InitParamService {
 					Map map = (Map)productList.get(i);
 					String product_id = StringUtils.nullToStr(map.get("product_id"));
 					
-					//根据产品编号、开始时间、库房编号取前一天的库存期初情况
+					//根据商品编号、开始时间、库房编号取前一天的库存期初情况
 					Map qcMap = kcMxReportDao.getKcqcMxMap(product_id,cdat_1,store.getId());	
 					String strNums = "0";
 					if(qcMap != null){

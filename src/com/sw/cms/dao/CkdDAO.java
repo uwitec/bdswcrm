@@ -68,7 +68,7 @@ public class CkdDAO extends JdbcBaseDAO {
 
 		this.getJdbcTemplate().update(sql, param); // 更新出库单信息
 
-		addCkdProducts(ckdProducts, ckd.getCkd_id());// 添加出库单相关产品
+		addCkdProducts(ckdProducts, ckd.getCkd_id());// 添加出库单相关商品
 	}
 
 	/**
@@ -106,14 +106,14 @@ public class CkdDAO extends JdbcBaseDAO {
 
 		this.getJdbcTemplate().update(sql, param); // 更新出库单信息
 
-		this.delCkdProducts(ckd.getCkd_id()); // 删除关联产品
+		this.delCkdProducts(ckd.getCkd_id()); // 删除关联商品
 
-		this.addCkdProducts(ckdProducts, ckd.getCkd_id()); // 重新添加关联产品
+		this.addCkdProducts(ckdProducts, ckd.getCkd_id()); // 重新添加关联商品
 
 	}
 
 	/**
-	 * 根据出库单ID获取产品列表
+	 * 根据出库单ID获取商品列表
 	 * 
 	 * @param ckd_id
 	 * @return
@@ -151,7 +151,7 @@ public class CkdDAO extends JdbcBaseDAO {
 	}
 
 	/**
-	 * 添加出库单相关联产品
+	 * 添加出库单相关联商品
 	 * 
 	 * @param ckdProducts
 	 * @param ckd_id
@@ -230,7 +230,7 @@ public class CkdDAO extends JdbcBaseDAO {
 	}
 
 	/**
-	 * 删除出库单关联产品
+	 * 删除出库单关联商品
 	 * 
 	 * @param ckd_id
 	 */
@@ -337,7 +337,7 @@ public class CkdDAO extends JdbcBaseDAO {
 	}
 
 	/**
-	 * 包装对象(出库单产品)
+	 * 包装对象(出库单商品)
 	 * 
 	 * @author liyt
 	 * 

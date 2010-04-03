@@ -4,9 +4,9 @@ public class LsdProduct {
 	
 	private int id;                    //编号
 	private String lsd_id;             //零售单编号
-	private String product_id;         //产品编号
-	private String product_xh;         //产品规格
-	private String product_name;       //产品名称
+	private String product_id;         //商品编号
+	private String product_xh;         //商品规格
+	private String product_name;       //商品名称
 	private double price = 0;          //售价
 	private int nums = 0;              //数量
 	private double xj = 0;             //金额

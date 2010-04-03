@@ -38,7 +38,7 @@ public class BxfhdDAO extends JdbcBaseDAO
   }
   
   /**
-	 * 根据报修返还单ID返回保修返还单所还产品
+	 * 根据报修返还单ID返回保修返还单所还商品
 	 * 
 	 * @param bxfhd_id
 	 * @return
@@ -118,7 +118,7 @@ public class BxfhdDAO extends JdbcBaseDAO
 	  param[10]=bxfhd.getHjje();
 	 
 	  this.getJdbcTemplate().update(sql,param);
-      //插入对应的产品返回单的产品信息 
+      //插入对应的商品返回单的商品信息 
       this.addBxfhdProduct(bxfhd, bxfhdProducts);
   }
    
@@ -142,9 +142,9 @@ public class BxfhdDAO extends JdbcBaseDAO
 	    param[8]=bxfhd.getSsje();	 
 	    param[9]=bxfhd.getId();
 	    this.getJdbcTemplate().update(sql,param);
-	    //删除对应的报修返还单的产品信息
+	    //删除对应的报修返还单的商品信息
 	    this.deleteBxfhdProduct(bxfhd.getId());
-	    //更新对应的产品返回单的产品信息 
+	    //更新对应的商品返回单的商品信息 
 	    this.addBxfhdProduct(bxfhd, bxfhdProducts);  
   }
   

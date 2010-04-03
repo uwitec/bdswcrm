@@ -56,11 +56,18 @@ public class SysMsgDAO extends JdbcBaseDAO {
 		String sql = "select * from sys_msg where reciever_id='" + user_id + "' and msg_read_flag='0' and read_del_flag='0' order by send_time desc";	
 		List list = this.getResultList(sql,  new BeanRowMapper(SysMsg.class));
 		
-		//将用户未读消息置为已读
-		sql = "update sys_msg set msg_read_flag='1',read_time=now() where msg_read_flag='0' and reciever_id='" + user_id + "'";
-		this.getJdbcTemplate().update(sql);
-		
 		return list;
+	}
+	
+	
+	/**
+	 * 将未读消息置为已读
+	 * @param user_id
+	 */
+	public void updateNotReadMsg(String user_id){
+		//将用户未读消息置为已读
+		String sql = "update sys_msg set msg_read_flag='1',read_time=now() where msg_read_flag='0' and reciever_id='" + user_id + "'";
+		this.getJdbcTemplate().update(sql);
 	}
 	
 	

@@ -117,7 +117,7 @@ public class BfdAction extends BaseAction
 
 	
 	/**
-	 * 打开选择库存产品列表
+	 * 打开选择库存商品列表
 	 * 
 	 * @return
 	 */
@@ -174,7 +174,7 @@ public class BfdAction extends BaseAction
 						
             if(bfd.getState().equals("已提交"))
             {
-            	//判断提交的报修产品是否在在外库里            	
+            	//判断提交的报修商品是否在在外库里            	
             	if(bfdService.isBfShkcExist(bfd,bfdProducts))
             	{
             		bfd.setState("已保存");
@@ -234,7 +234,7 @@ public class BfdAction extends BaseAction
 				 
 			    if(bfd.getState().equals("已提交"))
 	            {
-	            	//判断提交的报修产品是否在坏件库里
+	            	//判断提交的报修商品是否在坏件库里
 				 if(bfdService.isBfShkcExist(bfd,bfdProducts))
 	            	{
 	            		bfd.setState("已保存");
@@ -274,7 +274,7 @@ public class BfdAction extends BaseAction
 	}
 	
 	/**
-	 * 单击报废单查看报废产品
+	 * 单击报废单查看报废商品
 	 * @return
 	 * @throws Exception
 	 */
@@ -287,7 +287,7 @@ public class BfdAction extends BaseAction
 		}
 		catch(Exception e)
 		{
-			log.error("单击报废单查看产品  失败原因："+e.getMessage());
+			log.error("单击报废单查看商品  失败原因："+e.getMessage());
 			return "error";
 		}
 	}

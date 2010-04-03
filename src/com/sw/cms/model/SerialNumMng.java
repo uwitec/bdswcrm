@@ -4,9 +4,9 @@ public class SerialNumMng {
 	
 	private int seq_id;          //流水号
 	private String serial_num;   //序列号
-	private String product_id;   //产品编号
-	private String product_name; //产品名称
-	private String product_xh;   //产品规格
+	private String product_id;   //商品编号
+	private String product_name; //商品名称
+	private String product_xh;   //商品规格
 	private String state;        //序列号状态，（在库、已售、已退货)
 	private String store_id;     //库房编号
 	private String store_name;   //库房名称(数据库中不保存，通过store_id在获取信息赋值)

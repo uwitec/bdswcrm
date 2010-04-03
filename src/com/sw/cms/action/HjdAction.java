@@ -115,7 +115,7 @@ public class HjdAction extends BaseAction
 
 	
 	/**
-	 * 打开选择库存产品列表
+	 * 打开选择库存商品列表
 	 * 
 	 * @return
 	 */
@@ -164,7 +164,7 @@ public class HjdAction extends BaseAction
 						
             if(hjd.getState().equals("已提交"))
             {
-            	//判断提交的报修产品是否在好件库里            	
+            	//判断提交的报修商品是否在好件库里            	
             	if(hjdService.isHaoShkcExist(hjd, hjdProducts))
             	{
             		hjd.setState("已保存");
@@ -222,7 +222,7 @@ public class HjdAction extends BaseAction
 				 
 			    if(hjd.getState().equals("已提交"))
 	            {
-	            	//判断提交的换件产品是否在好件库里
+	            	//判断提交的换件商品是否在好件库里
 				 if(hjdService.isHaoShkcExist(hjd, hjdProducts))
 	            	{
 	            		hjd.setState("已保存");
@@ -262,7 +262,7 @@ public class HjdAction extends BaseAction
 	}
 	
 	/**
-	 * 单击换件单查看换件产品
+	 * 单击换件单查看换件商品
 	 * @return
 	 * @throws Exception
 	 */
@@ -275,7 +275,7 @@ public class HjdAction extends BaseAction
 		}
 		catch(Exception e)
 		{
-			log.error("单击换件单查看产品  失败原因："+e.getMessage());
+			log.error("单击换件单查看商品  失败原因："+e.getMessage());
 			return "error";
 		}
 	}

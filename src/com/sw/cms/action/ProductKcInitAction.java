@@ -84,7 +84,7 @@ public class ProductKcInitAction extends BaseAction {
 	}
 	
 	/**
-	 * 初始产品列表
+	 * 初始商品列表
 	 * @return
 	 */
 	public String listProductKc(){

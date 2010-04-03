@@ -103,7 +103,7 @@ public class ThdService {
 	
 	
 	/**
-	 * 根据退货单ID返回产品明细
+	 * 根据退货单ID返回商品明细
 	 * @param thd_id
 	 * @return
 	 */

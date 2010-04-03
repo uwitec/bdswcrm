@@ -70,7 +70,7 @@ public class DwrService {
 	}
 
 	/**
-	 * 根据序列号查询产品对象
+	 * 根据序列号查询商品对象
 	 * 
 	 * @param serial_num
 	 * @return
@@ -80,7 +80,7 @@ public class DwrService {
 	}
 
 	/**
-	 * 根据序列号及产品编号看产品是否存在
+	 * 根据序列号及商品编号看商品是否存在
 	 * 
 	 * @param serial_num
 	 * @param product_id
@@ -122,7 +122,7 @@ public class DwrService {
 	public void updateProductKc(String product_id, String store_id,
 			String serial_num) {
 
-		// 根据产品编号取产品信息
+		// 根据商品编号取商品信息
 		Product product = (Product) productDao.getProductById(product_id);
 
 		// 保存序列号
@@ -130,7 +130,7 @@ public class DwrService {
 	}
 
 	/**
-	 * 取库存产品数量
+	 * 取库存商品数量
 	 * 
 	 * @param product_id
 	 * @param store_id
@@ -375,11 +375,11 @@ public class DwrService {
 				else if (type.equals("销售")) 
 				{ // 如果记录的类型是“销售单”
 
-					// 查询”销售单“里的销售产品有没有序列号
+					// 查询”销售单“里的销售商品有没有序列号
 					Map xsdmap = (Map) xsdDao.getXsdByIdBySerailNum(
 							(String) xsmap.get("yw_dj_id"), (String) xsmap
 									.get("serial_num"));
-					// 如果“销售单”里的销售产品中没有记录该序列号
+					// 如果“销售单”里的销售商品中没有记录该序列号
 					if (null != xsdmap) {
 						flog = "4";
 						xx[0] = StringUtils.nullToStr(xsdmap.get("product_id"));
@@ -412,7 +412,7 @@ public class DwrService {
 
 					} 
 					else 
-					{ // 在“出库单”里的销售产品查询该序列号
+					{ // 在“出库单”里的销售商品查询该序列号
 
 						Map maps = (Map) ckdDao.getCkdByXsdId((String) xsmap
 								.get("yw_dj_id"));
@@ -496,7 +496,7 @@ public class DwrService {
 	}
 
 	/**
-	 * 根据序列号查询坏件产品对象
+	 * 根据序列号查询坏件商品对象
 	 * 
 	 * @param serial_num
 	 * @return
@@ -507,7 +507,7 @@ public class DwrService {
 	
 	
 	/**
-	 * 根据序列号查询在外产品对象
+	 * 根据序列号查询在外商品对象
 	 * 
 	 * @param serial_num
 	 * @return
@@ -517,7 +517,7 @@ public class DwrService {
 	}
 	
 	/**
-	 * 根据序列号查询好件产品对象
+	 * 根据序列号查询好件商品对象
 	 * 
 	 * @param serial_num
 	 * @return

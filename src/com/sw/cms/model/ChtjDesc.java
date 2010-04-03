@@ -8,8 +8,8 @@ package com.sw.cms.model;
 public class ChtjDesc {
 	
 	private String chtj_id;      //存货调价编号
-	private String product_id;   //产品编号
-	private String product_name; //产品名称
+	private String product_id;   //商品编号
+	private String product_name; //商品名称
 	private String product_xh;   //产口规格
 	private double ysjg;         //原始价格
 	private double tzjg;         //调整后价格

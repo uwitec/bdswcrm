@@ -122,7 +122,7 @@ public class JhdService {
 	
 	
 	/**
-	 * 根据进货单号取进货关联产品
+	 * 根据进货单号取进货关联商品
 	 * @param jhd_id
 	 * @return
 	 */

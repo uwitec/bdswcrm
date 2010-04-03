@@ -45,7 +45,7 @@ public class BfdDAO extends JdbcBaseDAO {
 	}
 
 	/**
-	 * 根据报废单ID返回保废单所修产品
+	 * 根据报废单ID返回保废单所修商品
 	 * 
 	 * @param bfd_id
 	 * @return

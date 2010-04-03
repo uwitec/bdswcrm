@@ -4,9 +4,9 @@ public class XsdProduct {
 	
 	private int id;                  //编号
 	private String xsd_id;           //销售单编号
-	private String product_id;       //产品编号
-	private String product_xh;       //产品规格
-	private String product_name;     //产品名称
+	private String product_id;       //商品编号
+	private String product_xh;       //商品规格
+	private String product_name;     //商品名称
 	private double price;            //售价
 	private int nums;                //数量
 	private double xj;               //金额小计

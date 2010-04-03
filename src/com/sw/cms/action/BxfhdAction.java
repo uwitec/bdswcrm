@@ -173,7 +173,7 @@ public class BxfhdAction extends BaseAction
 			 
 		    if(bxfhd.getState().equals("已提交"))
             {
-            	//判断提交的报修产品是否在好件库里
+            	//判断提交的报修商品是否在好件库里
 			 if(bxfhdService.isHaoShkcExist(bxfhd,bxfhdProducts))
             	{
             		bxfhd.setState("已保存");
@@ -210,7 +210,7 @@ public class BxfhdAction extends BaseAction
 			 
 		    if(bxfhd.getState().equals("已提交"))
             {
-            	//判断提交的报修产品是否在好件库里
+            	//判断提交的报修商品是否在好件库里
 			 if(bxfhdService.isHaoShkcExist(bxfhd,bxfhdProducts))
             	{
             		bxfhd.setState("已保存");
@@ -253,7 +253,7 @@ public class BxfhdAction extends BaseAction
   }
   
   /**
-	 * 打开选择库存产品列表
+	 * 打开选择库存商品列表
 	 * 
 	 * @return
 	 */

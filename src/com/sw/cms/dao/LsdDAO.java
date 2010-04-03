@@ -199,7 +199,7 @@ public class LsdDAO extends JdbcBaseDAO {
 	
 	
 	/**
-	 * 根据lsd_id取相关联产品
+	 * 根据lsd_id取相关联商品
 	 * @param id
 	 * @return
 	 */
@@ -210,7 +210,7 @@ public class LsdDAO extends JdbcBaseDAO {
 	
 	
 	/**
-	 * 删除零售单信息（包括关联产品）
+	 * 删除零售单信息（包括关联商品）
 	 * @param id
 	 */
 	public void delLsd(String id){
@@ -223,7 +223,7 @@ public class LsdDAO extends JdbcBaseDAO {
 	
 	
 	/**
-	 * 添加零售单相关产品
+	 * 添加零售单相关商品
 	 * 商品列表中低于限价的商品工分减半
 	 * @param lsdProducts
 	 * @param lsd_id
@@ -318,7 +318,7 @@ public class LsdDAO extends JdbcBaseDAO {
 	
 	
 	/**
-	 * 删除零售单关联产品
+	 * 删除零售单关联商品
 	 * @param lsd_id
 	 */
 	private void delLsdProducts(String lsd_id){
@@ -483,7 +483,7 @@ public class LsdDAO extends JdbcBaseDAO {
 	
 	
 	/**
-	 * 包装对象(零售单产品)
+	 * 包装对象(零售单商品)
 	 * 
 	 * @author liyt
 	 * 

@@ -123,7 +123,7 @@ public class JjdDAO extends JdbcBaseDAO {
 		}
 	}
 	/**
-	 * 删除接件单及相关产品
+	 * 删除接件单及相关商品
 	 * @param id
 	 */
 	public void delJjd(String id)
@@ -145,7 +145,7 @@ public class JjdDAO extends JdbcBaseDAO {
 		this.getJdbcTemplate().update(sql);
 	}
 	/**
-	 * 根据接件单ID获取接件单产品
+	 * 根据接件单ID获取接件单商品
 	 * @param id
 	 * @return
 	 */

@@ -17,7 +17,7 @@ public class ProductKc {
 	private double fxbj;           //分销报价
 	private int gf;                //工分
 	private Date gxrq;             //更新日期
-	private String prop;           //产品属性
+	private String prop;           //商品属性
 	private String dw;
 	
 	private String flag;

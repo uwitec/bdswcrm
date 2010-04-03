@@ -33,7 +33,7 @@ public class ProductKindAction extends BaseAction implements ModelDriven{
 	
 	
 	/**
-	 * 添加产品类别
+	 * 添加商品类别
 	 * @return
 	 */
 	public String add(){
@@ -80,7 +80,7 @@ public class ProductKindAction extends BaseAction implements ModelDriven{
 	
 	
 	/**
-	 * 保存产品信息
+	 * 保存商品信息
 	 * @return
 	 */
 	public String save(){
@@ -90,7 +90,7 @@ public class ProductKindAction extends BaseAction implements ModelDriven{
 	
 	
 	/**
-	 * 更新产品类别信息
+	 * 更新商品类别信息
 	 * @return
 	 */
 	public String update(){
@@ -100,7 +100,7 @@ public class ProductKindAction extends BaseAction implements ModelDriven{
 	
 	
 	/**
-	 * 删除产品分类信息
+	 * 删除商品分类信息
 	 * @return
 	 */
 	public String del(){
@@ -110,14 +110,14 @@ public class ProductKindAction extends BaseAction implements ModelDriven{
 		//判断是否存在子类，存在子类别的不能删除
 		i = productKindService.getChildKindCount(id);
 		if(i>0){
-			getSession().setAttribute("MSG_KIND", "存在子产品类别，不能删除！");
+			getSession().setAttribute("MSG_KIND", "存在子商品类别，不能删除！");
 			return "success";
 		}
 		
-		//判断是否存在子产品，存在子产品的不能删除
+		//判断是否存在子商品，存在子商品的不能删除
 		i = productKindService.getChildProductCount(id);
 		if(i>0){
-			getSession().setAttribute("MSG_KIND", "存在关联产品，不能删除！");
+			getSession().setAttribute("MSG_KIND", "存在关联商品，不能删除！");
 			return "success";
 		}
 		

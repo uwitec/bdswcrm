@@ -5,7 +5,7 @@ package com.sw.cms.action;
  * author by liyt
  * 
  * 手动添加出库单必须输入销售单编号
- * 并且出库单中的产品在销售单中必须存在，否则不能添加
+ * 并且出库单中的商品在销售单中必须存在，否则不能添加
  */
 
 import java.util.ArrayList;
@@ -119,7 +119,7 @@ public class CkdAction extends BaseAction {
 	
 	
 	/**
-	 * 保存出库单信息，包括关联产品信息
+	 * 保存出库单信息，包括关联商品信息
 	 * @return
 	 */
 	public String save(){
@@ -136,13 +136,13 @@ public class CkdAction extends BaseAction {
 				if(!xsdService.isHasXsdByID(ckd.getXsd_id())){  //用户添写的销售单不存在
 					msg = "对应销售单不存在，出库单无法保存，请检查！";
 					return "input";
-				}else{  //如果存在则去判断产品是否存在
+				}else{  //如果存在则去判断商品是否存在
 					if(ckdProducts != null && ckdProducts.size()>0){
 						for(int i=0;i<ckdProducts.size();i++){
 							CkdProduct ckdProduct = (CkdProduct)ckdProducts.get(i);
 							if(ckdProduct.getProduct_id() != null && !ckdProduct.getProduct_id().equals("")){
 								if(!xsdService.isHasXsdProduct(ckd.getXsd_id(), ckdProduct.getProduct_id())){
-									msg = "出库单产品类别与对应销售单不同，出库单无法保存，请检查！";
+									msg = "出库单商品类别与对应销售单不同，出库单无法保存，请检查！";
 									return "input";
 								}
 							}
@@ -284,7 +284,7 @@ public class CkdAction extends BaseAction {
 	
 	
 	/**
-	 * 选择库存产品
+	 * 选择库存商品
 	 * @return
 	 */
 	public String selCkdProc(){
@@ -313,7 +313,7 @@ public class CkdAction extends BaseAction {
 	
 	
 	/**
-	 * 出库单相关产品明细
+	 * 出库单相关商品明细
 	 * @return
 	 */
 	public String descCkd(){

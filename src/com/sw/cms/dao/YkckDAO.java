@@ -105,7 +105,7 @@ public class YkckDAO extends JdbcBaseDAO
 	
 	
 	/**
-	 * 添加移库出库相关联产品
+	 * 添加移库出库相关联商品
 	 * @param lsdProducts
 	 * @param lsd_id
 	 */

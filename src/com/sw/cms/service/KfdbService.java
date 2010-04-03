@@ -70,7 +70,7 @@ public class KfdbService {
 	
 	
 	/**
-	 * 取库房调拨相关产品明细
+	 * 取库房调拨相关商品明细
 	 * @param id
 	 * @return
 	 */
@@ -79,7 +79,7 @@ public class KfdbService {
 	}
 	
 	/**
-	 * 取库房调拨相关产品明细
+	 * 取库房调拨相关商品明细
 	 * @param id
 	 * @return
 	 */

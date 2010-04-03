@@ -41,7 +41,7 @@ public class WxcldDAO extends JdbcBaseDAO
 	}
 	
 	/**
-	 * 根据维修处理单ID返回维修产品
+	 * 根据维修处理单ID返回维修商品
 	 * @param wxcld_id
 	 * @return
 	 */

@@ -118,7 +118,7 @@ public class ThdDAO extends JdbcBaseDAO {
 	
 	
 	/**
-	 * 根据退货单ID返回产品明细
+	 * 根据退货单ID返回商品明细
 	 * @param thd_id
 	 * @return
 	 */
@@ -195,7 +195,7 @@ public class ThdDAO extends JdbcBaseDAO {
 	
 	
 	/**
-	 * 添加退货单相关联产品
+	 * 添加退货单相关联商品
 	 * @param thdProducts
 	 * @param thd_id
 	 */
@@ -259,7 +259,7 @@ public class ThdDAO extends JdbcBaseDAO {
 	
 	
 	/**
-	 * 删除退货单关联产品
+	 * 删除退货单关联商品
 	 * @param thd_id
 	 */
 	private void delThdProducts(String thd_id){
@@ -331,7 +331,7 @@ public class ThdDAO extends JdbcBaseDAO {
 	
 	
 	/**
-	 * 包装对象(退货单产品)
+	 * 包装对象(退货单商品)
 	 * 
 	 * @author liyt
 	 * 

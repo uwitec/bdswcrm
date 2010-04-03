@@ -405,7 +405,7 @@ public class XsdAction extends BaseAction {
 	
 	
 	/**
-	 * 销售单选择库存产品表
+	 * 销售单选择库存商品表
 	 * @return
 	 */
 	public String selXsdProc(){
@@ -444,7 +444,7 @@ public class XsdAction extends BaseAction {
 	
 	
 	/**
-	 * 分销订单，选择产品列表
+	 * 分销订单，选择商品列表
 	 * @return
 	 */
 	public String selFxddProc(){

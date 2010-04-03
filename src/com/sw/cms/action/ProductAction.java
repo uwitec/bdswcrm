@@ -47,7 +47,7 @@ public class ProductAction extends BaseAction implements ModelDriven{
 
 	
 	/**
-	 * 显示产品维护大页面，当前无操作
+	 * 显示商品维护大页面，当前无操作
 	 * 后期添加权限控制
 	 * @return
 	 */
@@ -57,7 +57,7 @@ public class ProductAction extends BaseAction implements ModelDriven{
 	
 	
 	/**
-	 * 取得产品列表
+	 * 取得商品列表
 	 * @param curId
 	 * @param curPage
 	 * @param rowsPerPage
@@ -84,7 +84,7 @@ public class ProductAction extends BaseAction implements ModelDriven{
 	
 	
 	/**
-	 * 转到添加产品页面
+	 * 转到添加商品页面
 	 * @return
 	 */
 	public String addProduct(){
@@ -93,7 +93,7 @@ public class ProductAction extends BaseAction implements ModelDriven{
 	}
 	
 	/**
-	 * 保存产品信息
+	 * 保存商品信息
 	 * @return
 	 */
 	public String saveProduct()throws Exception {
@@ -102,7 +102,7 @@ public class ProductAction extends BaseAction implements ModelDriven{
 	}
 	
 	/**
-	 * 编辑或查看产品信息
+	 * 编辑或查看商品信息
 	 * @return
 	 */
 	public String editProduct(){
@@ -125,7 +125,7 @@ public class ProductAction extends BaseAction implements ModelDriven{
 	}
 	
 	/**
-	 * 更新产品信息
+	 * 更新商品信息
 	 * @return
 	 */
 	public String updateProduct()throws Exception{
@@ -134,7 +134,7 @@ public class ProductAction extends BaseAction implements ModelDriven{
 	}	
 	
 	/**
-	 * 删除产品信息
+	 * 删除商品信息
 	 * @return
 	 */
 	public String delProduct(){

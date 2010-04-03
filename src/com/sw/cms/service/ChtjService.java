@@ -95,7 +95,7 @@ public class ChtjService {
 	
 	
 	/**
-	 * 修改产品成本价
+	 * 修改商品成本价
 	 * @param chtjDescs
 	 */
 	private void updateProductPrice(List chtjDescs){

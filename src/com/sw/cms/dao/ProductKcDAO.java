@@ -75,7 +75,7 @@ public class ProductKcDAO extends JdbcBaseDAO {
 	
 	
 	/**
-	 * 返回某一产品的库存情况
+	 * 返回某一商品的库存情况
 	 * @param product_id
 	 * @return
 	 */
@@ -99,7 +99,7 @@ public class ProductKcDAO extends JdbcBaseDAO {
 	
 	
 	/**
-	 * 返回某一产品的库存情况
+	 * 返回某一商品的库存情况
 	 * @param product_id
 	 * @return
 	 */
@@ -123,7 +123,7 @@ public class ProductKcDAO extends JdbcBaseDAO {
 	
 	
 	/**
-	 * 取所有库存产品列表
+	 * 取所有库存商品列表
 	 * @param con
 	 * @return
 	 */
@@ -138,7 +138,7 @@ public class ProductKcDAO extends JdbcBaseDAO {
 	
 	
 	/**
-	 * 取所有库存产品列表（包括零库存商品）<BR>
+	 * 取所有库存商品列表（包括零库存商品）<BR>
 	 * 库存盘点时调用，其它调用会有问题
 	 * @param con
 	 * @param curPage
@@ -184,7 +184,7 @@ public class ProductKcDAO extends JdbcBaseDAO {
 	
 	
 	/**
-	 * 强制序列号产品初始库存操作
+	 * 强制序列号商品初始库存操作
 	 * 序列号存在则更新，不存在则添加
 	 * @param product
 	 * @param store_id
@@ -210,7 +210,7 @@ public class ProductKcDAO extends JdbcBaseDAO {
 	
 	
 	/**
-	 * 根据入库单及入库单产品列表更新产品库存
+	 * 根据入库单及入库单商品列表更新商品库存
 	 * 成本价采用加权平均算法
 	 * @param RkdProducts
 	 */
@@ -221,7 +221,7 @@ public class ProductKcDAO extends JdbcBaseDAO {
 			for(int i =0;i<rkdProducts.size();i++){
 				
 				RkdProduct rkdProduct = (RkdProduct)rkdProducts.get(i);				
-				String product_id = rkdProduct.getProduct_id();	 //入库产品编号
+				String product_id = rkdProduct.getProduct_id();	 //入库商品编号
 				
 				if(!product_id.equals("")){
 					
@@ -252,8 +252,8 @@ public class ProductKcDAO extends JdbcBaseDAO {
 						
 						double dqkczz = price * nums;  //当前库存总值
 						
-						int rk_product_nums = rkdProduct.getNums();        //入库产品数量
-						double rk_product_price = rkdProduct.getPrice();   //入库产品价格
+						int rk_product_nums = rkdProduct.getNums();        //入库商品数量
+						double rk_product_price = rkdProduct.getPrice();   //入库商品价格
 						
 						double rkzz = rk_product_nums * rk_product_price;  //入库商品总值
 						
@@ -270,12 +270,12 @@ public class ProductKcDAO extends JdbcBaseDAO {
 						int counts = this.getJdbcTemplate().queryForInt(sql);
 						
 						if(counts > 0){ 
-							// 该仓库中有该产品，需更新库存数量
+							// 该仓库中有该商品，需更新库存数量
 							sql = "update product_kc set nums=nums+" + rkdProduct.getNums() + " where product_id='" + product_id + "' and store_id='" + store_id + "'";
 							this.getJdbcTemplate().update(sql);
 							
 						}else{   
-							//库存中没有该产品，添加即可
+							//库存中没有该商品，添加即可
 							sql = "insert into product_kc(store_id,product_id,nums) values(?,?,?)";
 							Object[] param = new Object[3];
 						
@@ -302,12 +302,12 @@ public class ProductKcDAO extends JdbcBaseDAO {
 		int counts = this.getJdbcTemplate().queryForInt(sql);
 		
 		if(counts > 0){ 
-			// 该仓库中有该产品，需更新库存数量
+			// 该仓库中有该商品，需更新库存数量
 			sql = "update product_kc set nums=nums+1 where product_id='" + ykrkProduct.getProduct_id() + "' and store_id='" + ykrk.getRk_store_id() + "'";
 			this.getJdbcTemplate().update(sql);
 			
 		}else{   
-			//库存中没有该产品，添加即可
+			//库存中没有该商品，添加即可
 			sql = "insert into product_kc(store_id,product_id,nums) values(?,?,?)";
 			Object[] param = new Object[3];
 		
@@ -342,7 +342,7 @@ public class ProductKcDAO extends JdbcBaseDAO {
 	
 	
 	/**
-	 * 减少产品库存
+	 * 减少商品库存
 	 * @param store_id
 	 * @param product_id
 	 * @param nums
@@ -355,7 +355,7 @@ public class ProductKcDAO extends JdbcBaseDAO {
 			sql = "update product_kc set nums=nums-" + nums + " where product_id='" + product_id + "' and store_id='" + store_id + "'";
 			int returnValue = this.getJdbcTemplate().update(sql);
 			
-			if(returnValue<1){ //没有更新成功，出现原因为产品库存不存在，需要重新插入
+			if(returnValue<1){ //没有更新成功，出现原因为商品库存不存在，需要重新插入
 				sql = "insert into product_kc(product_id,store_id,nums) values('" +  product_id + "','" + store_id + "'," + (0-nums) + ")";
 				this.getJdbcTemplate().update(sql);
 			}
@@ -364,7 +364,7 @@ public class ProductKcDAO extends JdbcBaseDAO {
 	
 	
 	/**
-	 * 加产品库存
+	 * 加商品库存
 	 * @param store_id
 	 * @param product_id
 	 * @param nums
@@ -378,7 +378,7 @@ public class ProductKcDAO extends JdbcBaseDAO {
 			sql = "update product_kc set nums=nums+" + nums + " where product_id='" + product_id + "' and store_id='" + store_id + "'";
 			int returnValue = this.getJdbcTemplate().update(sql);
 			
-			if(returnValue<1){ //没有更新成功，出现原因为产品库存不存在，需要重新插入
+			if(returnValue<1){ //没有更新成功，出现原因为商品库存不存在，需要重新插入
 				sql = "insert into product_kc(product_id,store_id,nums) values('" +  product_id + "','" + store_id + "'," + nums + ")";
 				this.getJdbcTemplate().update(sql);
 			}			
@@ -387,7 +387,7 @@ public class ProductKcDAO extends JdbcBaseDAO {
 	
 	
 	/**
-	 * 根据库存产品返回是否存是该库存
+	 * 根据库存商品返回是否存是该库存
 	 * @param productKc
 	 * @return
 	 */
@@ -399,7 +399,7 @@ public class ProductKcDAO extends JdbcBaseDAO {
 	
 	
 	/**
-	 * 返回某一产品库存数
+	 * 返回某一商品库存数
 	 * @param product_id
 	 * @param store_id
 	 * @return
@@ -427,7 +427,7 @@ public class ProductKcDAO extends JdbcBaseDAO {
 	}
 	
 	/**
-	 * 返回某一产品在好件库的库存数
+	 * 返回某一商品在好件库的库存数
 	 * @param product_id
 	 * 
 	 * @return
@@ -529,7 +529,7 @@ public class ProductKcDAO extends JdbcBaseDAO {
 	
 	
 	/**
-	 * 取某一天某一仓库某一产品的出库数量
+	 * 取某一天某一仓库某一商品的出库数量
 	 * @param cdate
 	 * @return
 	 */
@@ -568,7 +568,7 @@ public class ProductKcDAO extends JdbcBaseDAO {
 
 	
 	/**
-	 * 取某一天某一仓库某一产品的入库数量
+	 * 取某一天某一仓库某一商品的入库数量
 	 * 时间取实际入库的操作时间
 	 * @param cdate
 	 * @return
@@ -627,7 +627,7 @@ public class ProductKcDAO extends JdbcBaseDAO {
 	
 	
 	/**
-	 * 包装对象(产品库存)
+	 * 包装对象(商品库存)
 	 * 
 	 * @author liyt
 	 * 

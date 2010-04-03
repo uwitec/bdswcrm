@@ -121,7 +121,7 @@ public class FhkhdAction extends BaseAction
    }
    
    /**
-	 * 打开选择库存产品列表
+	 * 打开选择库存商品列表
 	 * 
 	 * @return
 	 */

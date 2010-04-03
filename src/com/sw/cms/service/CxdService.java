@@ -134,7 +134,7 @@ public class CxdService {
 			int kcnums = productKcDao.getKcNums(product_id, store_id);//库存数量
 			
 			if(cknums>kcnums){
-				msg += "产品：" + cxd.getProduct_name() + "在" + StaticParamDo.getStoreNameById(store_id) +" 中当前库存为：" + kcnums + "  无法拆卸，拆卸单已保存，请先调拨后再拆卸！";
+				msg += "商品：" + cxd.getProduct_name() + "在" + StaticParamDo.getStoreNameById(store_id) +" 中当前库存为：" + kcnums + "  无法拆卸，拆卸单已保存，请先调拨后再拆卸！";
 			}
 		}
 		return msg;

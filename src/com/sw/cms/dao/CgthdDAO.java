@@ -107,7 +107,7 @@ public class CgthdDAO extends JdbcBaseDAO {
 	
 	
 	/**
-	 * 取采购退货单产品明细
+	 * 取采购退货单商品明细
 	 * @param id
 	 * @return
 	 */
@@ -196,7 +196,7 @@ public class CgthdDAO extends JdbcBaseDAO {
 	
 	
 	/**
-	 * 添加采购退货单相关联产品
+	 * 添加采购退货单相关联商品
 	 * @param thdProducts
 	 * @param thd_id
 	 */
@@ -231,7 +231,7 @@ public class CgthdDAO extends JdbcBaseDAO {
 	
 	
 	/**
-	 * 删采购除退货单关联产品
+	 * 删采购除退货单关联商品
 	 * @param thd_id
 	 */
 	private void delCgthdProducts(String id){
@@ -276,7 +276,7 @@ public class CgthdDAO extends JdbcBaseDAO {
 	
 	
 	/**
-	 * 包装对象(采购退货单产品)
+	 * 包装对象(采购退货单商品)
 	 * 
 	 * @author liyt
 	 * 

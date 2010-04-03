@@ -68,7 +68,7 @@ public class DataDisParseDAO extends JdbcBaseDAO {
 	
 	
 	/**
-	 * 根据产品类别编号取产品类别名称
+	 * 根据商品类别编号取商品类别名称
 	 * @param kind_id
 	 * @return
 	 */

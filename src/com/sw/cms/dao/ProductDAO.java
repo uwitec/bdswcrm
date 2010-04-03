@@ -15,7 +15,7 @@ import com.sw.cms.model.Product;
 public class ProductDAO extends JdbcBaseDAO {
 
 	/**
-	 * 根据产品类别ID取产品 采用分页模型
+	 * 根据商品类别ID取商品 采用分页模型
 	 * 
 	 * @param curId
 	 *            类别ID
@@ -33,7 +33,7 @@ public class ProductDAO extends JdbcBaseDAO {
 	
 	
 	/**
-	 * 根据查询条件取产品列表
+	 * 根据查询条件取商品列表
 	 * @param con
 	 * @param curPage
 	 * @param rowsPerPage
@@ -50,7 +50,7 @@ public class ProductDAO extends JdbcBaseDAO {
 	}
 	
 	/**
-	 * 取根据查询条取产品列表
+	 * 取根据查询条取商品列表
 	 * @param con
 	 * @param curPage
 	 * @param rowsPerPage
@@ -84,7 +84,7 @@ public class ProductDAO extends JdbcBaseDAO {
 	}
 
 	/**
-	 * 保存产品信息
+	 * 保存商品信息
 	 * 
 	 * @param product
 	 */
@@ -125,7 +125,7 @@ public class ProductDAO extends JdbcBaseDAO {
 	}
 
 	/**
-	 * 修改产品信息
+	 * 修改商品信息
 	 * 
 	 * @param product
 	 */
@@ -163,7 +163,7 @@ public class ProductDAO extends JdbcBaseDAO {
 	}
 
 	/**
-	 * 根据产品系统编号取产品详细信息
+	 * 根据商品系统编号取商品详细信息
 	 * 
 	 * @param productId
 	 * @return Map
@@ -175,7 +175,7 @@ public class ProductDAO extends JdbcBaseDAO {
 	}
 
 	/**
-	 * 根据产品系统编号取产品信息
+	 * 根据商品系统编号取商品信息
 	 * 
 	 * @param productId
 	 * @return Product对象
@@ -188,7 +188,7 @@ public class ProductDAO extends JdbcBaseDAO {
 	
 	
 	/**
-	 * 删除产品信息
+	 * 删除商品信息
 	 * @param productId
 	 */
 	public void delProductById(String productId){
@@ -198,7 +198,7 @@ public class ProductDAO extends JdbcBaseDAO {
 	}
 
 	/**
-	 * 取下一个可用产品编号
+	 * 取下一个可用商品编号
 	 * 
 	 * @return
 	 */
@@ -244,7 +244,7 @@ public class ProductDAO extends JdbcBaseDAO {
 	
 	
 	/**
-	 * 根据序列号查询产品对象
+	 * 根据序列号查询商品对象
 	 * @param serial_num
 	 * @return
 	 */
@@ -277,7 +277,7 @@ public class ProductDAO extends JdbcBaseDAO {
 	}
 	
 	/**
-	 * 根据产品编号及序列号查询产品是否存在
+	 * 根据商品编号及序列号查询商品是否存在
 	 * @param serial_num
 	 * @param product_id
 	 * @return
@@ -294,7 +294,7 @@ public class ProductDAO extends JdbcBaseDAO {
 	
 	
 	/**
-	 * 根据产品编号取分销限价
+	 * 根据商品编号取分销限价
 	 * @param product_id
 	 * @return
 	 */
@@ -313,7 +313,7 @@ public class ProductDAO extends JdbcBaseDAO {
 	
 	
 	/**
-	 * 根据产品编号取零售限价
+	 * 根据商品编号取零售限价
 	 * @param product_id
 	 * @return
 	 */
@@ -332,10 +332,10 @@ public class ProductDAO extends JdbcBaseDAO {
 	
 	
 	/**
-	 * 根据条件查询所有产品列表
-	 * @param product_kind  产品类别
-	 * @param product_name  产品名称
-	 * @param product_xh    产品规格
+	 * 根据条件查询所有商品列表
+	 * @param product_kind  商品类别
+	 * @param product_name  商品名称
+	 * @param product_xh    商品规格
 	 * @return
 	 */
 	public List getProductByCon(String product_kind,String product_name,String product_xh,String state){
@@ -359,7 +359,7 @@ public class ProductDAO extends JdbcBaseDAO {
 	
 	
 	/**
-	 * 根据查询条件取所有产品列表
+	 * 根据查询条件取所有商品列表
 	 * @param con
 	 * @return
 	 */
@@ -485,7 +485,7 @@ public class ProductDAO extends JdbcBaseDAO {
 	
 	
 	/**
-	 * 根据序列号查询坏件库产品对象
+	 * 根据序列号查询坏件库商品对象
 	 * @param serial_num
 	 * @return
 	 */
@@ -510,7 +510,7 @@ public class ProductDAO extends JdbcBaseDAO {
 	
 	
 	/**
-	 * 根据序列号查询在外库产品对象
+	 * 根据序列号查询在外库商品对象
 	 * @param serial_num
 	 * @return
 	 */
@@ -533,7 +533,7 @@ public class ProductDAO extends JdbcBaseDAO {
 	}
 	
 	/**
-	 * 根据序列号查询好件库产品对象
+	 * 根据序列号查询好件库商品对象
 	 * @param serial_num
 	 * @return
 	 */

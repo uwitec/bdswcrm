@@ -7,9 +7,9 @@ import com.sw.cms.dao.base.JdbcBaseDAO;
 public class HpxsMlHzDAO extends JdbcBaseDAO {
 	
 	/**
-	 * 产品列表信息
-	 * @param productKind 产品分类编号
-	 * @return   产品列表
+	 * 商品列表信息
+	 * @param productKind 商品分类编号
+	 * @return   商品列表
 	 */
 	public List getProductList(String productKind){
 		String sql = "select * from product where product_kind like'" + productKind + "%' or product_id='"+ productKind +"'";

@@ -1,23 +1,23 @@
 package com.sw.cms.model;
 
 /**
- * 产品类
+ * 商品类
  * @author liyt
  *
  */
 public class Product {
 
-	private String productId;  //产品系统编码
-	private String productXh;  //产品型号
-	private String productName;//产品名称
-	private String productKind;//产品分类
+	private String productId;  //商品系统编码
+	private String productXh;  //商品型号
+	private String productName;//商品名称
+	private String productKind;//商品分类
 	
 	private String gysbh;      //供应商编号
 	private String gysmc;      //供应商名称
 	
-	private String img;        //产品图片地址
-	private String ms;         //产品描述
-	private String prop;       //产品属性(库存商品，服务/劳务)
+	private String img;        //商品图片地址
+	private String ms;         //商品描述
+	private String prop;       //商品属性(库存商品，服务/劳务)
 	
 	private String dw;
 	

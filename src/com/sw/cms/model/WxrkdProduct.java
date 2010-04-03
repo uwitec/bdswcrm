@@ -1,12 +1,12 @@
 package com.sw.cms.model;
 /**
- * 维修入库单_产品
+ * 维修入库单_商品
  * @author Administrator
  * 2010-03-01修改，有以下信息：id  流水号
  * wxrkd_id        维修入库单编号
- * product_id      产品编号
- * product_name    产品名称
- * product_xh      产品规格
+ * product_id      商品编号
+ * product_name    商品名称
+ * product_xh      商品规格
  * qz_serial_num   强制序列号
  * remark          备注
  * nums            数量
@@ -17,12 +17,12 @@ public class WxrkdProduct
 {
 	 private int id  ;//流水号
      private String wxrkd_id ;//维修入库单ID
-     private String product_id; //产品ID 
-     private String  product_name  ;      //产品名称
+     private String product_id; //商品ID 
+     private String  product_name  ;      //商品名称
       
-     private String product_xh   ;   //产品型号 
-     private String qz_serial_num  ;//产品序列号
-     private String remark ;//产品备注    
+     private String product_xh   ;   //商品型号 
+     private String qz_serial_num  ;//商品序列号
+     private String remark ;//商品备注    
      private int nums       ;//数量
      private String store_id         ; //目标库
      private String storestate          ;//目标库状态

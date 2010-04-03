@@ -12,9 +12,9 @@ public class KcMxReportService {
 	private SysInitSetDAO sysInitSetDao;
 	
 	/**
-	 * 按查询条件取库存产品列表
-	 * @param product_name 产品类别
-	 * @param product_name 产品名称
+	 * 按查询条件取库存商品列表
+	 * @param product_name 商品类别
+	 * @param product_name 商品名称
 	 * @param store_id  仓库编号
 	 * @return
 	 */

@@ -71,7 +71,7 @@ public class DeptXshzAction extends BaseAction {
 	
 	
 	/**
-	 * 统计结果（产品汇总）
+	 * 统计结果（商品汇总）
 	 * @return
 	 */
 	public String getProductMxResults(){
@@ -79,7 +79,7 @@ public class DeptXshzAction extends BaseAction {
 			resultList = deptXshzService.getProductMxResults(xsry, start_date, end_date, client_name, product_kind, product_name);
 			return SUCCESS;
 		}catch(Exception e){
-			log.error("部门销售汇总--产品汇总出错，错误原因：" + e.getMessage());
+			log.error("部门销售汇总--商品汇总出错，错误原因：" + e.getMessage());
 			return ERROR;
 		}
 	}

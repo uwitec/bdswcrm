@@ -70,7 +70,7 @@ public class StaticParamDo{
 	
 	
 	/**
-	 * 根据id取产品类别名称
+	 * 根据id取商品类别名称
 	 * @param id
 	 * @return
 	 */

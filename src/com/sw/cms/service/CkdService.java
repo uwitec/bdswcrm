@@ -180,7 +180,7 @@ public class CkdService {
 	
 	
 	/**
-	 * 根据出库单ID获取产品列表
+	 * 根据出库单ID获取商品列表
 	 * @param ckd_id
 	 * @return
 	 */
@@ -318,7 +318,7 @@ public class CkdService {
 	
 	
 	/**
-	 * 更新产品库存
+	 * 更新商品库存
 	 * @param lsd
 	 * @param lsdProducts
 	 */

@@ -270,7 +270,7 @@ public class XsdService {
 	
 	
 	/**
-	 * 根据编号获取销售相关产品
+	 * 根据编号获取销售相关商品
 	 * @param id
 	 * @return
 	 */
@@ -576,7 +576,7 @@ public class XsdService {
 	
 	
 	/**
-	 * 更新产品库存
+	 * 更新商品库存
 	 * @param lsd
 	 * @param lsdProducts
 	 */
@@ -689,7 +689,7 @@ public class XsdService {
 		xsd.setMs(fxdd.getRemark());      //备注描述信息
 		xsd.setState("已提交");
 		
-		//处理产品明细的成本价
+		//处理商品明细的成本价
 		List xsdProducts2 = new ArrayList();
 		double cbjhj = 0;
 		if(xsdProducts != null && xsdProducts.size()>0){
@@ -733,7 +733,7 @@ public class XsdService {
 	
 	
 	/**
-	 * 判断销售单中是否存在该产品
+	 * 判断销售单中是否存在该商品
 	 * @param xsd_id
 	 * @param product_id
 	 * @return
@@ -766,7 +766,7 @@ public class XsdService {
 							int kcnums = productKcDao.getKcNums(product_id, store_id);//库存数量
 							
 							if(cknums>kcnums){
-								msg += "产品：" + xsdProduct.getProduct_name() + "在" + StaticParamDo.getStoreNameById(store_id) +" 中当前库存为：" + kcnums + "  无法出库，请先调拨<br>";
+								msg += "商品：" + xsdProduct.getProduct_name() + "在" + StaticParamDo.getStoreNameById(store_id) +" 中当前库存为：" + kcnums + "  无法出库，请先调拨<br>";
 							}
 						}
 					}

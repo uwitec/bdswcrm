@@ -63,11 +63,11 @@ public class ExportClientWlDzdResult extends ExportXlsTemplate {
 			sheet.addCell(label);	
 			
 			sheet.mergeCells(3, 2, 3, 3);
-			label = new Label(3,2,"产品名称",this.getFt_item_center_bold());
+			label = new Label(3,2,"商品名称",this.getFt_item_center_bold());
 			sheet.addCell(label);
 			
 			sheet.mergeCells(4, 2, 4, 3);
-			label = new Label(4,2,"产品规格",this.getFt_item_center_bold());
+			label = new Label(4,2,"商品规格",this.getFt_item_center_bold());
 			sheet.addCell(label);
 			
 			sheet.mergeCells(5, 2, 5, 3);

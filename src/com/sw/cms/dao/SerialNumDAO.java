@@ -192,7 +192,7 @@ public class SerialNumDAO extends JdbcBaseDAO {
 	
 	/**
 	 * 查询序列号当前状态
-	 * 对应产品相关信息
+	 * 对应商品相关信息
 	 * @param serial_num
 	 * @return
 	 */
@@ -203,7 +203,7 @@ public class SerialNumDAO extends JdbcBaseDAO {
 	
 	
 	/**
-	 * 根据序列号取产品明细信息
+	 * 根据序列号取商品明细信息
 	 * @param serial_num
 	 * @return
 	 */

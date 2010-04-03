@@ -103,7 +103,7 @@ public class CgthdService {
 	
 	
 	/**
-	 * 取采购退货单产品明细
+	 * 取采购退货单商品明细
 	 * @param id
 	 * @return
 	 */
@@ -342,7 +342,7 @@ public class CgthdService {
 	
 	
 	/**
-	 * 更新产品库存
+	 * 更新商品库存
 	 * @param lsd
 	 * @param lsdProducts
 	 */

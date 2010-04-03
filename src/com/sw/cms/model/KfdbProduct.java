@@ -1,7 +1,7 @@
 package com.sw.cms.model;
 
 /**
- * 库房调拨产品明细
+ * 库房调拨商品明细
  * @author liyt
  *
  */

@@ -98,8 +98,16 @@ public class SysMsgService {
 	 * @param rowsPerPage
 	 * @return
 	 */
-	public List updateAndGetNotReadMsg(String user_id){
+	public List getNotReadMsg(String user_id){
 		return sysMsgDao.getNotReadMsg(user_id);
+	}
+	
+	/**
+	 * 将未读消息置为已读
+	 * @param user_id
+	 */
+	public void updateNotReadMsg(String user_id){
+		sysMsgDao.updateNotReadMsg(user_id);
 	}
 	
 	/**

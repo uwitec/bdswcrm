@@ -101,7 +101,7 @@ public class KfdbDAO extends JdbcBaseDAO {
 	
 	
 	/**
-	 * 取库房调拨相关产品明细
+	 * 取库房调拨相关商品明细
 	 * @param id
 	 * @return
 	 */
@@ -112,7 +112,7 @@ public class KfdbDAO extends JdbcBaseDAO {
 	
 	
 	/**
-	 * 取库房调拨相关产品明细
+	 * 取库房调拨相关商品明细
 	 * @param id
 	 * @return
 	 */
@@ -178,7 +178,7 @@ public class KfdbDAO extends JdbcBaseDAO {
 	
 	
 	/**
-	 * 添加库房调拨相关联产品
+	 * 添加库房调拨相关联商品
 	 * @param lsdProducts
 	 * @param lsd_id
 	 */
@@ -210,7 +210,7 @@ public class KfdbDAO extends JdbcBaseDAO {
 	
 	
 	/**
-	 * 删除库房调拨关联产品
+	 * 删除库房调拨关联商品
 	 * @param lsd_id
 	 */
 	private void delKfdbProducts(String kfdb_id){
@@ -248,7 +248,7 @@ public class KfdbDAO extends JdbcBaseDAO {
 	
 	
 	/**
-	 * 包装对象(库房调拨产品)
+	 * 包装对象(库房调拨商品)
 	 * 
 	 * @author liyt
 	 * 

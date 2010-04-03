@@ -103,7 +103,7 @@ public class WxrkdAction extends BaseAction
   }
   
   /**
-	 * 打开选择库存产品列表
+	 * 打开选择库存商品列表
 	 * 
 	 * @return
 	 */
@@ -140,7 +140,7 @@ public class WxrkdAction extends BaseAction
 		    wxrkd.setCjr(user_id);			
             if(wxrkd.getState().equals("已提交"))
             {
-            	//判断提交的报修产品是否在坏件库里
+            	//判断提交的报修商品是否在坏件库里
             	String msg=wxrkdService.isBadShkcExist(wxrkdProducts);
             	if(!msg.equals(""))
             	{
@@ -196,7 +196,7 @@ public class WxrkdAction extends BaseAction
 	         wxrkd.setCjr(user_id);			 
 			 if(wxrkd.getState().equals("已提交"))
 	            {
-	            	//判断提交的报修产品是否在坏件库里
+	            	//判断提交的报修商品是否在坏件库里
 	            	String msg=wxrkdService.isBadShkcExist(wxrkdProducts);
 	            	if(!msg.equals(""))
 	            	{
@@ -237,7 +237,7 @@ public class WxrkdAction extends BaseAction
 	}
 	
 	/**
-	 * 单击维修单查看维修产品
+	 * 单击维修单查看维修商品
 	 * @return
 	 * @throws Exception
 	 */
@@ -252,7 +252,7 @@ public class WxrkdAction extends BaseAction
 		}
 		catch(Exception e)
 		{
-			log.error("单击维修单查看产品  失败原因："+e.getMessage());
+			log.error("单击维修单查看商品  失败原因："+e.getMessage());
 			return "error";
 		}
 	}

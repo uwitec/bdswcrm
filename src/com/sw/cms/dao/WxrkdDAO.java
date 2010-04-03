@@ -53,7 +53,7 @@ public class WxrkdDAO extends JdbcBaseDAO
 	}
 	
 	/**
-	 * 根据维修入库单ID返回保修单所修产品
+	 * 根据维修入库单ID返回保修单所修商品
 	 * 
 	 * @param bxd_id
 	 * @return

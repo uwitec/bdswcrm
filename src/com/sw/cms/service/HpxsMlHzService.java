@@ -9,9 +9,9 @@ public class HpxsMlHzService {
 	private HpxsMlHzDAO hpxsMlHzDao;
 	
 	/**
-	 * 产品列表信息
-	 * @param productKind 产品分类编号
-	 * @return   产品列表
+	 * 商品列表信息
+	 * @param productKind 商品分类编号
+	 * @return   商品列表
 	 */
 	public List getProductList(String productKind){
 		return hpxsMlHzDao.getProductList(productKind);

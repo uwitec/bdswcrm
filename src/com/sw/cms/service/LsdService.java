@@ -100,8 +100,8 @@ public class LsdService {
 			//同时处理相关序列号，但只有在系统正式使用后才能处理序列号
 			this.addCkd(lsd, lsdProducts);
 			
-			//更新产品库存(可能存在负库存)
-			this.updateProductKc(lsd, lsdProducts); //更新产品库存
+			//更新商品库存(可能存在负库存)
+			this.updateProductKc(lsd, lsdProducts); //更新商品库存
 			
 			this.saveXssk(lsd);//保存销售收款信息
 			this.addAccountJe(lsd);//修改账户金额
@@ -143,7 +143,7 @@ public class LsdService {
 			//同时处理相关序列号，但只有在系统正式使用后能处理序列号
 			this.addCkd(lsd, lsdProducts);
 
-			//更新产品库存
+			//更新商品库存
 			this.updateProductKc(lsd, lsdProducts); 
 			
 			this.saveXssk(lsd);//保存销售收款信息
@@ -178,7 +178,7 @@ public class LsdService {
 	
 	
 	/**
-	 * 根据lsd_id取相关联产品
+	 * 根据lsd_id取相关联商品
 	 * @param id
 	 * @return
 	 */
@@ -188,7 +188,7 @@ public class LsdService {
 	
 	
 	/**
-	 * 删除零售单信息（包括关联产品）
+	 * 删除零售单信息（包括关联商品）
 	 * @param id
 	 */
 	public void delLsd(String id){
@@ -257,8 +257,8 @@ public class LsdService {
 						ckdProduct.setJgtz(0);
 						
 						
-						//只有在系统正式使用后才去修改产品的库存和处理序列号
-						//系统启用前也可输入产品序列号，但不硬性强制，对于输入的序列号系统做处理
+						//只有在系统正式使用后才去修改商品的库存和处理序列号
+						//系统启用前也可输入商品序列号，但不硬性强制，对于输入的序列号系统做处理
 						
 						//if(sysInitSetDao.getQyFlag().equals("1")){
 						//强制序列号处理
@@ -344,7 +344,7 @@ public class LsdService {
 	
 	
 	/**
-	 * 更新产品库存
+	 * 更新商品库存
 	 * @param lsd
 	 * @param lsdProducts
 	 */
@@ -422,7 +422,7 @@ public class LsdService {
 							int kcnums = productKcDao.getKcNums(product_id, store_id);//库存数量
 							
 							if(cknums>kcnums){
-								msg += "产品：" + lsdProduct.getProduct_name() + "在" + StaticParamDo.getStoreNameById(store_id) +" 中当前库存为：" + kcnums + "  无法出库，零售单已保存，请先调拨后再出库！<br>";
+								msg += "商品：" + lsdProduct.getProduct_name() + "在" + StaticParamDo.getStoreNameById(store_id) +" 中当前库存为：" + kcnums + "  无法出库，零售单已保存，请先调拨后再出库！<br>";
 							}
 						}
 					}
@@ -435,7 +435,7 @@ public class LsdService {
 	
 	
 	/**
-	 * 是否存在低于零售限价的产品
+	 * 是否存在低于零售限价的商品
 	 * @param lsdProducts
 	 * @return
 	 */

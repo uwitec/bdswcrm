@@ -52,7 +52,7 @@ public class ExportProductDlKcNumsResult extends ExportXlsTemplate {
 						
 					}
 				}
-				conStr += "　产品类别：" + kind_name;
+				conStr += "　商品类别：" + kind_name;
 			}
 			conStr += "　报表生成时间：" + DateComFunc.getCurTime();
 			
@@ -93,7 +93,7 @@ public class ExportProductDlKcNumsResult extends ExportXlsTemplate {
 			//sheet.addCell(label);
 			//label = new Label(10,2,"点杀",this.getFt_item_center_bold());
 			//sheet.addCell(label);
-			label = new Label(6,2,"产品卖点",this.getFt_item_center_bold());
+			label = new Label(6,2,"商品卖点",this.getFt_item_center_bold());
 			sheet.addCell(label);
 			
 			List productList = kcMxReportService.getKcNumsResults(product_kind, product_name, store_id,state, flag, px);

@@ -105,7 +105,7 @@ public class KcpdService {
 	
 	
 	/**
-	 *根据条件取库存产品列表
+	 *根据条件取库存商品列表
 	 * @param con
 	 * @return
 	 */
@@ -115,7 +115,7 @@ public class KcpdService {
 	
 	
 	/**
-	 * 取所有库存产品列表（包括零库存商品）<BR>
+	 * 取所有库存商品列表（包括零库存商品）<BR>
 	 * 库存盘点时调用，其它调用会有问题
 	 * @param con
 	 * @param curPage

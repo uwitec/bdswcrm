@@ -73,7 +73,7 @@ public class DbsqService {
 	
 	
 	/**
-	 * 取调拨申请单相关产品列表
+	 * 取调拨申请单相关商品列表
 	 * @param id
 	 * @return
 	 */

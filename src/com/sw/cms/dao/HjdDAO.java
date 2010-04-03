@@ -45,7 +45,7 @@ public class HjdDAO extends JdbcBaseDAO {
 	}
 
 	/**
-	 * 根据换件单ID返回换件单所修产品
+	 * 根据换件单ID返回换件单所修商品
 	 * 
 	 * @param hjd_id
 	 * @return

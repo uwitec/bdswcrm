@@ -38,7 +38,7 @@ public class ExportFckcResult extends ExportXlsTemplate {
 						
 					}
 				}
-				conStr += "&nbsp;&nbsp;<b>产品类别：</b>" + kind_name;
+				conStr += "&nbsp;&nbsp;<b>商品类别：</b>" + kind_name;
 			}
 			if(!product_name.equals("")){
 				conStr += "&nbsp;&nbsp;<B>商品名称/规格：</B>" + product_name;

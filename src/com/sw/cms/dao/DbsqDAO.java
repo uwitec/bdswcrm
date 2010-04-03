@@ -93,7 +93,7 @@ public class DbsqDAO extends JdbcBaseDAO {
 	
 	
 	/**
-	 * 取调拨申请单相关产品列表
+	 * 取调拨申请单相关商品列表
 	 * @param id
 	 * @return
 	 */
@@ -178,7 +178,7 @@ public class DbsqDAO extends JdbcBaseDAO {
 	
 	
 	/**
-	 * 添加调拨申请相关联产品
+	 * 添加调拨申请相关联商品
 	 * @param lsdProducts
 	 * @param lsd_id
 	 */
@@ -209,7 +209,7 @@ public class DbsqDAO extends JdbcBaseDAO {
 	
 	
 	/**
-	 * 删除调拨申请单关联产品
+	 * 删除调拨申请单关联商品
 	 * @param lsd_id
 	 */
 	private void delDbsqProducts(String dbsq_id){

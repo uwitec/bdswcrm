@@ -203,7 +203,7 @@ public Page getYkckList(String con,int curPage, int rowsPerPage){
 			   int count=shkcDao.getShkcBySerialNum(serialNumStr[i]);
 			   if(count>0)
 			   {
-				   message="提交的移库出库单产品序列号已在售后库存中拥有，请检查！";
+				   message="提交的移库出库单商品序列号已在售后库存中拥有，请检查！";
 				   break;
 			   }
 			}

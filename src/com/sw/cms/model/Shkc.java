@@ -8,9 +8,9 @@ package com.sw.cms.model;
 public class Shkc 
 {
 	  private  int    id;                          //流水号
-	  private  String product_id;                  //产品ID
-	  private  String product_xh;                  //产品型号
-	  private  String product_name;                //产品名称
+	  private  String product_id;                  //商品ID
+	  private  String product_xh;                  //商品型号
+	  private  String product_name;                //商品名称
 	  private  String qz_serial_num;               //序列号    
 	  private  String state;                       //库存状态(1:坏 2：外)
 	  private  String day_num;                     //已送修天数

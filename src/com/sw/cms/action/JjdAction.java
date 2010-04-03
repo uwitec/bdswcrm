@@ -300,7 +300,7 @@ public void setId(String id) {
    }
    
    /**
-    * 单击接件单查看产品明细
+    * 单击接件单查看商品明细
     * @return
     * @throws Exception
     */
@@ -313,7 +313,7 @@ public void setId(String id) {
 	   }
 	   catch(Exception e)
 	   {
-		   log.error("单击接件单查看产品明细  失败原因："+e.getMessage());
+		   log.error("单击接件单查看商品明细  失败原因："+e.getMessage());
 		   return "error";
 	   }
    }

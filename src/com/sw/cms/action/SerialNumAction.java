@@ -106,7 +106,7 @@ public class SerialNumAction extends BaseAction {
 	
 	
 	/**
-	 * 取产品列表
+	 * 取商品列表
 	 * @return
 	 */
 	public String getProducts(){

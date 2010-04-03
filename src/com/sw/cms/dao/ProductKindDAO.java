@@ -13,7 +13,7 @@ import com.sw.cms.model.ProductKind;
 public class ProductKindDAO extends JdbcBaseDAO{
 	
 	/**
-	 * 取所有产品类别列表
+	 * 取所有商品类别列表
 	 * @return
 	 */
 	public List getAllProductKindList(){		
@@ -22,7 +22,7 @@ public class ProductKindDAO extends JdbcBaseDAO{
 	}
 	
 	/**
-	 * 根据ID取产品类别
+	 * 根据ID取商品类别
 	 * @param id
 	 * @return
 	 */
@@ -34,7 +34,7 @@ public class ProductKindDAO extends JdbcBaseDAO{
 	
 	
 	/**
-	 * 添加产品类别信息
+	 * 添加商品类别信息
 	 * @param productKind
 	 */
 	public void saveProductKind(ProductKind productKind){
@@ -55,7 +55,7 @@ public class ProductKindDAO extends JdbcBaseDAO{
 	
 	
 	/**
-	 * 更新产品信息
+	 * 更新商品信息
 	 * @param productKind
 	 */
 	public void updateProductKind(ProductKind productKind){
@@ -82,7 +82,7 @@ public class ProductKindDAO extends JdbcBaseDAO{
 	}
 	
 	/**
-	 * 返回类别下子产品的数量
+	 * 返回类别下子商品的数量
 	 * @param id
 	 * @return
 	 */
@@ -92,7 +92,7 @@ public class ProductKindDAO extends JdbcBaseDAO{
 	}
 	
 	/**
-	 * 删除产品分类信息
+	 * 删除商品分类信息
 	 * @param id
 	 */
 	public void delProductKind(String id){
@@ -103,7 +103,7 @@ public class ProductKindDAO extends JdbcBaseDAO{
 	
 	
 	/**
-	 * 根据产品类别编号取产品类别名称
+	 * 根据商品类别编号取商品类别名称
 	 * @param kind_id
 	 * @return
 	 */

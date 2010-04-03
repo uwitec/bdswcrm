@@ -17,7 +17,7 @@ import com.sw.cms.util.StringUtils;
 public class KcMxReportDAO extends JdbcBaseDAO {
 
 	/**
-	 * 按查询条件取库存产品列表
+	 * 按查询条件取库存商品列表
 	 * @param product_kind 商品类别
 	 * @param product_name 商品名称
 	 * @param store_id    库房编号
@@ -421,7 +421,7 @@ public class KcMxReportDAO extends JdbcBaseDAO {
 		if(flag.equals("否")){
 			sql += " having kc_nums>0";
 		}
-		if(px.equals("产品名称"))
+		if(px.equals("商品名称"))
 		{
 			sql+=" order by a.product_name";
 		}

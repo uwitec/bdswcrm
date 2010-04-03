@@ -123,11 +123,11 @@ public class SysInitSetDAO extends JdbcBaseDAO {
 		sqls[6] = "delete from cgfk";  //采购付款
 		sqls[7] = "delete from cgfk_desc";  //采购付款明细
 		sqls[8] = "delete from cgthd";  //采购退货单
-		sqls[9] = "delete from cgthd_product";  //采购退货单产品
+		sqls[9] = "delete from cgthd_product";  //采购退货单商品
 		sqls[10] = "delete from chtj";  //存货调价
 		sqls[11] = "delete from chtj_desc";  //存货调价明细
 		sqls[12] = "delete from ckd";  //出库单
-		sqls[13] = "delete from ckd_product";  //出库单产品
+		sqls[13] = "delete from ckd_product";  //出库单商品
 		sqls[14] = "delete from client_qc";  //客户期初
 		sqls[15] = "delete from client_wl_init";  //客户往来初始
 		sqls[16] = "delete from clients";  //往来客户
@@ -136,27 +136,27 @@ public class SysInitSetDAO extends JdbcBaseDAO {
 				   "roleid=2,pzid=1,thdid=1,dbsqid=1,kfdbid=1,chtjid=1,accountid=1," +
 				   "qtsrid=1,qtzcid=1,nbzzid=1,cgthdid=1,lsyskid=1,lsthdid=1,yushoutoyingshouid=1,yufutoyingfuid=1,fysqid=1,txfkid=1,txfkdescid=1,kcpdyk_id=1,linkman_id=1,bxdid=1,cxdid=1,cnfkdid=1,zzdid=1,bfdid=1,hjdid=1"; //更新系统所有序列
 		sqls[18] = "delete from dbsq";  //调拨申请
-		sqls[19] = "delete from dbsq_product"; //调拨申请相关产品
+		sqls[19] = "delete from dbsq_product"; //调拨申请相关商品
 		sqls[20] = "delete from fxdd";  //分销订单
 		sqls[21] = "delete from jhd";  //进货单
-		sqls[22] = "delete from jhd_product";  //进货单相关产品
+		sqls[22] = "delete from jhd_product";  //进货单相关商品
 		sqls[23] = "delete from kcpd";  //库存盘点
 		sqls[24] = "delete from kcpd_desc";  //库存盘点明细
 		sqls[25] = "delete from kfdb";  //库房调拨
-		sqls[26] = "delete from kfdb_product";  //库房调拨相关产品
+		sqls[26] = "delete from kfdb_product";  //库房调拨相关商品
 		sqls[27] = "delete from lsd";  //零售单
-		sqls[28] = "delete from lsd_product";  //零售单相关产品
+		sqls[28] = "delete from lsd_product";  //零售单相关商品
 		sqls[29] = "delete from lsysk";  //零售预收款
 		sqls[30] = "delete from nbzz";  //内部转账
-		sqls[31] = "delete from product";  //产品表
-		sqls[32] = "delete from product_kc";  //产品库存
-		sqls[33] = "delete from product_kc_qc";  //产品库存期初
-		sqls[34] = "delete from product_kind";  //产品类别
+		sqls[31] = "delete from product";  //商品表
+		sqls[32] = "delete from product_kc";  //商品库存
+		sqls[33] = "delete from product_kc_qc";  //商品库存期初
+		sqls[34] = "delete from product_kind";  //商品类别
 		sqls[35] = "delete from pz";  //往来调账（平账）
 		sqls[36] = "delete from qtsr";  //其它收入
 		sqls[37] = "delete from qtzc";  //其它支出
 		sqls[38] = "delete from rkd";  //入库单
-		sqls[39] = "delete from rkd_product";  //入库单相关产品
+		sqls[39] = "delete from rkd_product";  //入库单相关商品
 		sqls[40] = "delete from role where role_id<>'RL00000001'";  //角色
 		sqls[41] = "delete from role_func where role_id<>'RL00000001'";  //角色功能表
 		sqls[42] = "delete from serial_num_flow";  //序列号流转过程表
@@ -165,10 +165,10 @@ public class SysInitSetDAO extends JdbcBaseDAO {
 		sqls[45] = "delete from sys_init_set";  //系统初始相关设置
 		sqls[46] = "delete from sys_user where user_id<>'AD00000001'";  //系统用户表
 		sqls[47] = "delete from thd";  //退货单
-		sqls[48] = "delete from thd_product";  //退货单相关产品
+		sqls[48] = "delete from thd_product";  //退货单相关商品
 		sqls[49] = "delete from user_role where user_id<>'AD00000001'";  //用户角色表
 		sqls[50] = "delete from xsd";  //销售订单
-		sqls[51] = "delete from xsd_product";  //销售订单相关产品
+		sqls[51] = "delete from xsd_product";  //销售订单相关商品
 		sqls[52] = "delete from xssk";  //销售收款
 		sqls[53] = "delete from xssk_desc";  //销售收款明细
 		sqls[54] = "update accounts set qcje=0,dqje=0 where id='AD0001'";

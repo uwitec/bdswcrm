@@ -57,12 +57,12 @@ public class RkdService{
 	
 	
 	/**
-	 * 保存入库单信息（包括关联产品信息）
+	 * 保存入库单信息（包括关联商品信息）
 	 * @param rkd
 	 * @param rkdProducts
 	 */
 	public void saveRkd(Rkd rkd,List rkdProducts){
-		rkdDao.saveRkd(rkd, rkdProducts);  //保存入库单及关联产品信息
+		rkdDao.saveRkd(rkd, rkdProducts);  //保存入库单及关联商品信息
 		
 		if((rkd.getState()).equals("已入库")){  //如果入库单状态为已入库，则需要更新库存信息
 			productKcDao.updateProductKc(rkd, rkdProducts);
@@ -74,12 +74,12 @@ public class RkdService{
 	
 	
 	/**
-	 * 更新入库单信息（包括关联产品信息）
+	 * 更新入库单信息（包括关联商品信息）
 	 * @param rkd
 	 * @param rkdProducts
 	 */
 	public void updateRkd(Rkd rkd,List rkdProducts){
-		rkdDao.updateRkd(rkd, rkdProducts);  //更新入库单及关联产品信息
+		rkdDao.updateRkd(rkd, rkdProducts);  //更新入库单及关联商品信息
 		
 		if((rkd.getState()).equals("已入库")){  //如果入库单状态为已入库，则需要更新库存信息
 			productKcDao.updateProductKc(rkd, rkdProducts);
@@ -96,7 +96,7 @@ public class RkdService{
 	
 	
 	/**
-	 * 删除入库单信息（包括关联产品）
+	 * 删除入库单信息（包括关联商品）
 	 * @param rkd_id
 	 */
 	public void delRkd(String rkd_id){
@@ -124,7 +124,7 @@ public class RkdService{
 	
 	
 	/**
-	 * 根据入库单ID取入库单产品列表
+	 * 根据入库单ID取入库单商品列表
 	 * @param rkd_id
 	 * @return
 	 */

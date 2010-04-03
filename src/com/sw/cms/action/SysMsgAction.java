@@ -42,7 +42,9 @@ public class SysMsgAction extends BaseAction {
 		LoginInfo info = (LoginInfo)getSession().getAttribute("LOGINUSER");
 		String user_id = info.getUser_id();
 		
-		msgList = sysMsgService.updateAndGetNotReadMsg(user_id);
+		msgList = sysMsgService.getNotReadMsg(user_id);
+		
+		sysMsgService.updateNotReadMsg(user_id);
 		return "success";
 	}
 	

@@ -138,7 +138,7 @@ public class RkdAction extends BaseAction {
 	
 	
 	/**
-	 * 保存入库单信息（包括关联产品）
+	 * 保存入库单信息（包括关联商品）
 	 * @return
 	 */
 	public String save(){
@@ -152,7 +152,7 @@ public class RkdAction extends BaseAction {
 	
 	
 	/**
-	 * 进货单信息，包括关联产品信息
+	 * 进货单信息，包括关联商品信息
 	 * @return
 	 */
 	public String edit(){
@@ -190,7 +190,7 @@ public class RkdAction extends BaseAction {
 	
 	
 	/**
-	 * 删除入库单及相关联产品
+	 * 删除入库单及相关联商品
 	 * @return
 	 */
 	public String del(){

@@ -53,7 +53,7 @@ public class ProductKcService {
 	
 	
 	/**
-	 * 返回某一产品的库存情况
+	 * 返回某一商品的库存情况
 	 * @param product_id
 	 * @return
 	 */
@@ -63,7 +63,7 @@ public class ProductKcService {
 	}
 	
 	/**
-	 * 返回某一产品的库存情况
+	 * 返回某一商品的库存情况
 	 * @param product_id
 	 * @return
 	 */
@@ -74,7 +74,7 @@ public class ProductKcService {
 	
 	
 	/**
-	 * 初始化产品库存
+	 * 初始化商品库存
 	 * @param productKc
 	 */
 	public void saveProductKc(String product_id,String store_id,String nums){
@@ -136,7 +136,7 @@ public class ProductKcService {
 
 	
 	/**
-	 * 根据库存产品返回是否存是该库存
+	 * 根据库存商品返回是否存是该库存
 	 * @param productKc
 	 * @return
 	 */
