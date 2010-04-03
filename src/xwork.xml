@@ -131,7 +131,7 @@
         </action>             
         <!-- 采购付款 -->
                 
-        <!-- 产品及产品类别 -->
+        <!-- 商品及商品类别 -->
         <action name="product" class="productAction" method="showProductMain">
             <result name="success">/WEB-INF/pages/product/product.jsp</result>
         </action>
@@ -198,7 +198,7 @@
         <action name="batchUpdateProduct" class="productAction" method="batchUpdateProduct">
             <result name="success">/WEB-INF/pages/product/msg.jsp</result>
         </action>        
-        <!-- 产品及产品类别 -->
+        <!-- 商品及商品类别 -->
         
         <!-- 进货单 -->
         <action name="listJhd" class="jhdAction" method="list">
