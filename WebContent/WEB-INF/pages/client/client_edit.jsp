@@ -54,8 +54,8 @@ if(clientsPayInfos != null && clientsPayInfos.size() > 0){
 		
 		if(!InputValid(document.getElementById("zq"),0,"int",0,0,999,"帐期")){	 return; }
 		if(!InputValid(document.getElementById("xe"),0,"float",0,0,999999999,"限额")){	 return; }	
-		if(!InputValid(document.getElementById("cg_zq"),0,"int",0,0,999,"采购帐期")){	 return; }
-		if(!InputValid(document.getElementById("cg_xe"),0,"float",0,0,999999999,"采购限额")){	 return; }			
+		//if(!InputValid(document.getElementById("cg_zq"),0,"int",0,0,999,"采购帐期")){	 return; }
+		//if(!InputValid(document.getElementById("cg_xe"),0,"float",0,0,999999999,"采购限额")){	 return; }			
 		
 		document.clientForm.submit();
 	}
@@ -93,10 +93,10 @@ if(clientsPayInfos != null && clientsPayInfos.size() > 0){
 	</thead>
 	<tr>
 		<td class="a1" width="15%">单位名称</td>
-		<td class="a2" width="35%"><input type="text" name="client.name" id="name" value="<%=StringUtils.nullToStr(client.getName()) %>"><font color="red">*</font></td>
+		<td class="a2" width="35%"><input type="text" name="client.name" id="name" value="<%=StringUtils.nullToStr(client.getName()) %>" style="width:85%"><font color="red">*</font></td>
 		<td class="a1" width="15%">单位类型</td>
 		<td class="a2" width="35%">
-			<select name="client.client_type" id="client_type">
+			<select name="client.client_type" id="client_type" style="width:85%">
 				<option value=""></option>
 				<%
 				if(wldwlx != null && wldwlx.length > 0){ 
@@ -113,34 +113,34 @@ if(clientsPayInfos != null && clientsPayInfos.size() > 0){
 	</tr>
 	<tr>
 		<td class="a1" width="15%">地址</td>
-		<td class="a2" width="35%"><input type="text" name="client.address" id="address" value="<%=StringUtils.nullToStr(client.getAddress()) %>" maxlength="50"></td>			
+		<td class="a2" width="35%"><input type="text" name="client.address" id="address" value="<%=StringUtils.nullToStr(client.getAddress()) %>" style="width:85%" maxlength="50"></td>			
 		<td class="a1" width="15%">固定电话</td>
-		<td class="a2" width="35%"><input type="text" name="client.gzdh" id="gzdh" value="<%=StringUtils.nullToStr(client.getGzdh()) %>" maxlength="20"></td>
+		<td class="a2" width="35%"><input type="text" name="client.gzdh" id="gzdh" value="<%=StringUtils.nullToStr(client.getGzdh()) %>" style="width:85%" maxlength="20"></td>
 	</tr>
 	 
 	<tr>
 		<td class="a1" width="15%">传真</td>
-		<td class="a2" width="35%"><input type="text" name="client.cz" id="cz" value="<%=StringUtils.nullToStr(client.getCz()) %>" maxlength="20"></td>			
+		<td class="a2" width="35%"><input type="text" name="client.cz" id="cz" value="<%=StringUtils.nullToStr(client.getCz()) %>" maxlength="20" style="width:85%"></td>			
 		<td class="a1" width="15%">客户经理</td>
 		<td class="a2" width="35%">
-		    <input id="brand" type="text" length="20" onblur="setValue()" value="<%=StaticParamDo.getRealNameById(client.getKhjl()) %>"/>
+		    <input id="brand" type="text" length="20" onblur="setValue()" value="<%=StaticParamDo.getRealNameById(client.getKhjl()) %>" style="width:85%"/>
             <div id="brandTip" style="height:12px;position:absolute;left:417px; top:141px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		    <input type="hidden" name="client.khjl" id="fzr"  value="<%=client.getKhjl()%>"/> 
 		</td>		
 	</tr>	 				
 	<tr>
-		<td class="a1" width="15%">销售账期</td>
-		<td class="a2" width="35%"><input type="text" name="client.zq" id="zq" value="<%=StringUtils.nullToStr(client.getZq()) %>" size="5"> 天<font color="red">*</font></td>	
-		<td class="a1" width="15%">销售限额</td>
-		<td class="a2" width="35%"><input type="text" name="client.xe" id="xe" value="<%=JMath.round(client.getXe()) %>">元<font color="red">*</font></td>
-	</tr>		
+		<td class="a1" width="15%">账期</td>
+		<td class="a2" width="35%"><input type="text" name="client.zq" id="zq" value="<%=StringUtils.nullToStr(client.getZq()) %>"  style="width:85%"> 天<font color="red">*</font></td>	
+		<td class="a1" width="15%">限额</td>
+		<td class="a2" width="35%"><input type="text" name="client.xe" id="xe" value="<%=JMath.round(client.getXe()) %>" style="width:85%">元<font color="red">*</font></td>
+	</tr><!--		
 	<tr>
 		<td class="a1" width="15%">采购账期</td>
 		<td class="a2" width="35%"><input type="text" name="client.cg_zq" id="cg_zq" value="<%=StringUtils.nullToStr(client.getCg_zq()) %>" size="5"> 天</td>
 		<td class="a1" width="15%">采购限额</td>
 		<td class="a2" width="35%"><input type="text" name="client.cg_xe" id="cg_xe" value="<%=JMath.round(client.getCg_xe()) %>">元</td>
 	</tr>		
-</table>
+--></table>
 <br>
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
@@ -151,23 +151,23 @@ if(clientsPayInfos != null && clientsPayInfos.size() > 0){
 	<tr> 
 	     
 		<td class="a1" width="15%">单位全称</td>
-		<td class="a2" width="35%"><input type="text" name="client.kp_name" id="kp_name" value="<%=StringUtils.nullToStr(client.getKp_name()) %>" size="30" maxlength="100"></td>
+		<td class="a2" width="35%"><input type="text" name="client.kp_name" id="kp_name" value="<%=StringUtils.nullToStr(client.getKp_name()) %>" style="width:85%" maxlength="100"></td>
 		<td class="a1" width="15%">地址</td>
-		<td class="a2" width="35%"><input type="text" name="client.kp_address" id="kp_address" value="<%=StringUtils.nullToStr(client.getKp_address()) %>" size="30" maxlength="100"></td>		
+		<td class="a2" width="35%"><input type="text" name="client.kp_address" id="kp_address" value="<%=StringUtils.nullToStr(client.getKp_address()) %>" style="width:85%" maxlength="100"></td>		
 	</tr>
 	<tr>
 		<td class="a1" width="15%">电话</td>
-		<td class="a2" width="35%"><input type="text" name="client.kp_tel" id="kp_tel" value="<%=StringUtils.nullToStr(client.getKp_tel()) %>" maxlength="20"></td>
+		<td class="a2" width="35%"><input type="text" name="client.kp_tel" id="kp_tel" value="<%=StringUtils.nullToStr(client.getKp_tel()) %>" style="width:85%" maxlength="20"></td>
 		<td class="a1" width="15%">税号</td>
-		<td class="a2" width="35%"><input type="text" name="client.kp_sh" id="kp_sh" value="<%=StringUtils.nullToStr(client.getKp_sh()) %>" maxlength="50"></td>	
+		<td class="a2" width="35%"><input type="text" name="client.kp_sh" id="kp_sh" value="<%=StringUtils.nullToStr(client.getKp_sh()) %>" style="width:85%" maxlength="50"></td>	
 	</tr>
 	<tr>
 		<td class="a1" width="15%">开户行帐号</td>
-		<td class="a2" colspan="3"><input type="text" name="client.kp_khhzh" id="kp_khhzh" value="<%=StringUtils.nullToStr(client.getKp_khhzh()) %>" maxlength="50"></td>		
+		<td class="a2" colspan="3"><input type="text" name="client.kp_khhzh" id="kp_khhzh" value="<%=StringUtils.nullToStr(client.getKp_khhzh()) %>" maxlength="50" style="width:85%"></td>		
 	</tr>
 	<tr height="50">
 		<td class="a1" width="15%">备注</td>
-		<td class="a2" colspan="3"><input type="text" name="client.remark" id="remark" style="width:80%" maxlength="500" value="<%=StringUtils.nullToStr(client.getRemark()) %>">
+		<td class="a2" colspan="3"><input type="text" name="client.remark" id="remark" style="width:85%" maxlength="500" value="<%=StringUtils.nullToStr(client.getRemark()) %>">
 		</td>
 	</tr>
 </table>

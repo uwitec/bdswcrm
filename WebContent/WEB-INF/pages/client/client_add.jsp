@@ -39,10 +39,10 @@ session.removeAttribute("MSG");
 			return;
 		}		
 		
-		if(!InputValid(document.getElementById("zq"),0,"int",0,0,999,"销售帐期")){	 return; }
-		if(!InputValid(document.getElementById("xe"),0,"float",0,0,999999999,"销售限额")){	 return; }	
-		if(!InputValid(document.getElementById("cg_zq"),0,"int",0,0,999,"采购帐期")){	 return; }
-		if(!InputValid(document.getElementById("cg_xe"),0,"float",0,0,999999999,"采购限额")){	 return; }			
+		if(!InputValid(document.getElementById("zq"),0,"int",0,0,999,"帐期")){	 return; }
+		if(!InputValid(document.getElementById("xe"),0,"float",0,0,999999999,"限额")){	 return; }	
+		//if(!InputValid(document.getElementById("cg_zq"),0,"int",0,0,999,"采购帐期")){	 return; }
+		//if(!InputValid(document.getElementById("cg_xe"),0,"float",0,0,999999999,"采购限额")){	 return; }			
 		
 		if(document.getElementById("linkmanname").value == ""){
 			alert("联系人姓名不能为空 ！");
@@ -85,10 +85,10 @@ session.removeAttribute("MSG");
 	</thead>
 	<tr>
 		<td class="a1" width="15%">单位名称</td>
-		<td class="a2" width="35%"><input type="text" name="client.name" id="name" value=""><font color="red">*</font></td>
+		<td class="a2" width="35%"><input type="text" name="client.name" id="name" value="" style="width:85%"><font color="red">*</font></td>
 		<td class="a1" width="15%">单位类型</td>
 		<td class="a2" width="35%">
-			<select name="client.client_type" id="client_type">
+			<select name="client.client_type" id="client_type" style="width:85%">
 				<option value=""></option>
 				<%
 				if(wldwlx != null && wldwlx.length > 0){ 
@@ -105,17 +105,17 @@ session.removeAttribute("MSG");
 	</tr>
 	<tr>
 		<td class="a1" width="15%">地址</td>
-		<td class="a2" width="35%"><input type="text" name="client.address" id="address" value="" size="35" maxlength="50"></td>		
+		<td class="a2" width="35%"><input type="text" name="client.address" id="address" value="" style="width:85%" maxlength="50"></td>		
 		<td class="a1" width="15%">固定电话</td>
-		<td class="a2" width="35%"><input type="text" name="client.gzdh" id="gzdh" value="" maxlength="20"></td>
+		<td class="a2" width="35%"><input type="text" name="client.gzdh" id="gzdh" value="" style="width:85%" maxlength="20"></td>
 	
 	</tr>
 	<tr>
 		<td class="a1" width="15%">传真</td>
-		<td class="a2" width="35%"><input type="text" name="client.cz" id="cz" value="" maxlength="20"></td>	
+		<td class="a2" width="35%"><input type="text" name="client.cz" id="cz" value="" maxlength="20" style="width:85%"></td>	
 		<td class="a1" width="15%">客户经理</td>
 		<td class="a2" width="35%">
-		    <input  id="brand"    type="text"   length="20"  onblur="setValue()" /> 
+		    <input  id="brand"    type="text"   length="20"  onblur="setValue()"  style="width:85%"/> 
             <div   id="brandTip"  style="height:12px;position:absolute;left:514px; top:141px;  width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
             </div>
 		    <input type="hidden" name="client.khjl" id="fzr"  /> <font color="red">*</font>
@@ -123,20 +123,20 @@ session.removeAttribute("MSG");
 	</tr>
 	 	
 	<tr>
-		<td class="a1" width="15%">销售账期</td>
-		<td class="a2" width="35%"><input type="text" name="client.zq" id="zq" value="0" size="5"> 天</td>
-		<td class="a1" width="15%">销售限额</td>
-		<td class="a2" width="35%"><input type="text" name="client.xe" id="xe" value="0.00">元</td>
-	</tr>
+		<td class="a1" width="15%">账期</td>
+		<td class="a2" width="35%"><input type="text" name="client.zq" id="zq" value="0" style="width:85%"> 天</td>
+		<td class="a1" width="15%">限额</td>
+		<td class="a2" width="35%"><input type="text" name="client.xe" id="xe" value="0.00" style="width:85%">元</td>
+	</tr><!--
 	<tr>
 		<td class="a1" width="15%">采购账期</td>
 		<td class="a2" width="35%"><input type="text" name="client.cg_zq" id="cg_zq" value="0" size="5"> 天</td>
 		<td class="a1" width="15%">采购限额</td>
 		<td class="a2" width="35%"><input type="text" name="client.cg_xe" id="cg_xe" value="0.00">元</td>
 	</tr>	
-	<tr height="50">
+	--><tr height="50">
 		<td class="a1">备注</td>
-		<td class="a2" colspan="3"><input type="text" name="client.remark" id="remark" style="width:80%" maxlength="500"></textarea>
+		<td class="a2" colspan="3"><input type="text" name="client.remark" id="remark" style="width:85%" maxlength="500"></textarea>
 		</td>
 	</tr>	
 </table>
@@ -150,19 +150,19 @@ session.removeAttribute("MSG");
 	<tr> 
 	     
 		<td class="a1" width="15%">单位全称</td>
-		<td class="a2" width="35%"><input type="text" name="client.kp_name" id="kp_name" value="" size="30" maxlength="100"></td>
+		<td class="a2" width="35%"><input type="text" name="client.kp_name" id="kp_name" value="" style="width:85%" maxlength="100"></td>
 		<td class="a1" width="15%">地址</td>
-		<td class="a2" width="35%"><input type="text" name="client.kp_address" id="kp_address" value="" size="30" maxlength="100"></td>		
+		<td class="a2" width="35%"><input type="text" name="client.kp_address" id="kp_address" value="" style="width:85%" maxlength="100"></td>		
 	</tr>
 	<tr>
 		<td class="a1" width="15%">电话</td>
-		<td class="a2" width="35%"><input type="text" name="client.kp_tel" id="kp_tel" value="" maxlength="20"></td>
+		<td class="a2" width="35%"><input type="text" name="client.kp_tel" id="kp_tel" value="" maxlength="20" style="width:85%"></td>
 		<td class="a1" width="15%">税号</td>
-		<td class="a2" width="35%"><input type="text" name="client.kp_sh" id="kp_sh" value="" maxlength="50"></td>	
+		<td class="a2" width="35%"><input type="text" name="client.kp_sh" id="kp_sh" value="" maxlength="50" style="width:85%"></td>	
 	</tr>
 	<tr>
 		<td class="a1" width="15%">开户行帐号</td>
-		<td class="a2" colspan="3"><input type="text" name="client.kp_khhzh" id="kp_khhzh" value="" maxlength="50"></td>		
+		<td class="a2" colspan="3"><input type="text" name="client.kp_khhzh" id="kp_khhzh" value="" maxlength="50" style="width:85%"></td>		
 	</tr>
 </table>
 <br>
@@ -208,10 +208,10 @@ session.removeAttribute("MSG");
 	<tr> 
 	     
 		<td class="a1" width="15%">姓名</td>
-		<td class="a2" width="35%"><input type="text" name="linkman.name" id="linkmanname" value=""><font color="red">*</font></td>
+		<td class="a2" width="35%"><input type="text" name="linkman.name" id="linkmanname" value="" style="width:85%"><font color="red">*</font></td>
 		<td class="a1" width="15%">类型</td>
 		<td class="a2" width="35%">
-			<select name="linkman.lx" id="lx">
+			<select name="linkman.lx" id="lx" style="width:85%">
 				<option value="主联系人">主联系人</option>
 				<option value="联系人">联系人</option>
 			</select>
@@ -219,44 +219,44 @@ session.removeAttribute("MSG");
 	</tr>
 	<tr>
 		<td class="a1" width="15%">固定电话</td>
-		<td class="a2" width="35%"><input type="text" name="linkman.gzdh" id="gzdh" value=""  ></td>
+		<td class="a2" width="35%"><input type="text" name="linkman.gzdh" id="gzdh" value="" style="width:85%"></td>
 		<td class="a1" width="15%">移动电话</td>
-		<td class="a2" width="35%"><input type="text" name="linkman.yddh" id="yddh" value=""  ></td>	
+		<td class="a2" width="35%"><input type="text" name="linkman.yddh" id="yddh" value="" style="width:85%"></td>	
 	</tr>
 	<tr>
 		<td class="a1" width="15%">家庭电话</td>
-		<td class="a2" width="35%"><input type="text" name="linkman.jtdh" id="jtdh" value="" ></td>	
+		<td class="a2" width="35%"><input type="text" name="linkman.jtdh" id="jtdh" value="" style="width:85%"></td>	
 		<td class="a1" width="15%">其他联系方式</td>
-		<td class="a2" width="35%"><input type="text" name="linkman.qtlx" id="qtlx" value=""  ></td>	
+		<td class="a2" width="35%"><input type="text" name="linkman.qtlx" id="qtlx" value="" style="width:85%"></td>	
 	</tr>
 	<tr>	
 		<td class="a1" width="15%">E-Mail</td>
-		<td class="a2" width="35%"><input type="text" name="linkman.mail" id="mail" value=""  ></td>	
+		<td class="a2" width="35%"><input type="text" name="linkman.mail" id="mail" value="" style="width:85%"></td>	
 		<td class="a1" width="15%">部门</td>
-		<td class="a2" width="35%"><input type="text" name="linkman.dept" id="dept" value=""  ></td>
+		<td class="a2" width="35%"><input type="text" name="linkman.dept" id="dept" value="" style="width:85%"></td>
 		
 	</tr>
 	<tr>
 		<td class="a1" width="15%">性别</td>
 		<td class="a2" width="35%">
-          <select name="linkman.sex" id="sex">
+          <select name="linkman.sex" id="sex" style="width:85%">
 				<option value="男">男</option>
 				<option value="女">女</option>
 			</select>
         </td>
 		<td class="a1" width="15%">职务</td>
-		<td class="a2" width="35%"><input type="text" name="linkman.zw" id="zw" value=""  ></td>		
+		<td class="a2" width="35%"><input type="text" name="linkman.zw" id="zw" value="" style="width:85%"></td>		
 	</tr>
 	<tr>
 		<td class="a1" width="15%">生日</td>
-		<td class="a2" width="35%"><input type="text" name="linkman.sr" id="sr" class="Wdate" onFocus="WdatePicker()">
+		<td class="a2" width="35%"><input type="text" name="linkman.sr" id="sr" class="Wdate" onFocus="WdatePicker()" style="width:85%">
 		</td>	
 		<td class="a1" width="15%">爱好</td>
-		<td class="a2" width="35%"><input type="text" name="linkman.ah" id="ah"></td>	
+		<td class="a2" width="35%"><input type="text" name="linkman.ah" id="ah" style="width:85%"></td>	
 	</tr>			 
 	<tr height="50">
 		<td class="a1">备注</td>
-		<td class="a2" colspan="3"><input type="text" name="linkman.remark" id="remark" style="width:80%" maxlength="500"></textarea>
+		<td class="a2" colspan="3"><input type="text" name="linkman.remark" id="remark" style="width:85%" maxlength="500"></textarea>
 		</td>
 	</tr>
 	
@@ -267,7 +267,7 @@ session.removeAttribute("MSG");
 			<input type="button" name="button3" value="关 闭" class="css_button2" onclick="window.close();">
 		</td>
 	</tr>			
-</table>
+</table><BR>
 </form>
 </body>
 </html>

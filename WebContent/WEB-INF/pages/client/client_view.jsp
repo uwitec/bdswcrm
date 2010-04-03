@@ -138,18 +138,18 @@ List  clinetsFollowList=(List)VS.findValue("clientsFollow");
 	          <td class="a2" width="35%"><%=StringUtils.nullToStr(client.getGzdh()) %></td>
 	        </tr>
 	        <tr>
-	           <td class="a1" width="15%">销售账期</td>
+	           <td class="a1" width="15%">账期</td>
 	          <td class="a2" width="35%"><%=StringUtils.nullToStr(client.getZq()) %></td>
-	          <td class="a1" width="15%">销售限额</td>
+	          <td class="a1" width="15%">限额</td>
 	           <td class="a2" width="35%"><%=JMath.round(client.getXe(),2) %></td>	          
-	        </tr>
+	        </tr><!--
 	        <tr>
 	           <td class="a1" width="15%">采购账期</td>
 	          <td class="a2" width="35%"><%=StringUtils.nullToStr(client.getCg_zq()) %></td>
 	          <td class="a1" width="15%">采购限额</td>
 	           <td class="a2" width="35%"><%=JMath.round(client.getCg_xe(),2) %></td>	          
 	        </tr>	        
-	        <tr>
+	        --><tr>
 	           <td class="a1" width="15%">传真</td>
 	           <td class="a2" width="35%"><%=StringUtils.nullToStr(client.getCz()) %></td>		        
 	           <td class="a1" width="15%">客户经理</td>
@@ -178,8 +178,8 @@ List  clinetsFollowList=(List)VS.findValue("clientsFollow");
 					String url = StringUtils.nullToStr(map.get("url"));
 				%>
 				<tr>
-					<td width="100%" height="23">&nbsp;
-						<A class=xxlb href="#" onclick="vieYwdj('<%=url+dj_id %>');" title="点击查看明细">[<%=xwtype %>]&nbsp;&nbsp;<%=dj_id %> &nbsp;&nbsp;(<%=jsr %>)</A>
+					<td width="100%" height="22">&nbsp;
+						<A class=xxlb href="javascript:vieYwdj('<%=url+dj_id %>');" title="点击查看明细">[<%=xwtype %>]&nbsp;&nbsp;<%=dj_id %> &nbsp;&nbsp;(<%=jsr %>)</A>
 					</td>
 				</tr>	
 				<%
