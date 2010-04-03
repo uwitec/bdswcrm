@@ -18,7 +18,7 @@ String kind_name = StringUtils.nullToStr(request.getParameter("kind_name"));
 String conStr = "";
 conStr += "<b>日期：</b>" + start_date + "至" + end_date;
 if(!product_kind.equals("")){
-	conStr += "&nbsp;&nbsp;<b>产品类别：</b>" + kind_name;
+	conStr += "&nbsp;&nbsp;<b>商品类别：</b>" + kind_name;
 }
 %>
 
@@ -51,8 +51,8 @@ if(!product_kind.equals("")){
 <TABLE align="center" cellSpacing=0 cellPadding=0 width="99%" border=0 style="BORDER-TOP: #000000 2px solid;BORDER-LEFT:#000000 1px solid">
 	<THEAD>
 		<TR>
-			<TD class=ReportHead rowspan="2" width="15%">产品名称</TD>
-			<TD class=ReportHead rowspan="2" width="15%">产品规格</TD>
+			<TD class=ReportHead rowspan="2" width="15%">商品名称</TD>
+			<TD class=ReportHead rowspan="2" width="15%">商品规格</TD>
 			<TD class=ReportHead rowspan="2">日期</TD>
 			<TD class=ReportHead rowspan="2">业务类型</TD>
 			<TD class=ReportHead rowspan="2">单据编号</TD>
@@ -93,7 +93,7 @@ if(productKcList != null && productKcList.size()>0){
 		String product_xh = StringUtils.nullToStr(map.get("product_xh"));
 		String store_id = StringUtils.nullToStr(map.get("store_id"));
 		
-		//根据产品编号、开始时间、库房编号取库存期初情况
+		//根据商品编号、开始时间、库房编号取库存期初情况
 		Map qcMap = kcMxReportService.getKcqcMxMap(product_id,start_date,store_id);
 		
 		String strNums = "0";   //期初数

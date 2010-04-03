@@ -3,7 +3,7 @@
 <%@taglib uri="/WEB-INF/crm-taglib.tld" prefix="crm"%>
 <html>
 <head>
-<title>选择产品</title>
+<title>选择商品</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript">
@@ -29,14 +29,14 @@
 <form name="myform" action="getProducts.html" method="post">
 <table width="100%"  align="center"class="chart_list" cellpadding="0" cellspacing="0">
 	<tr>
-		<td class="csstitle" align="left" width="100%">&nbsp;&nbsp;&nbsp;&nbsp;<b>选择产品</b></td>	
+		<td class="csstitle" align="left" width="100%">&nbsp;&nbsp;&nbsp;&nbsp;<b>选择商品</b></td>	
 	</tr>
 	<tr>
 		<td class="search" align="left" colspan="2">&nbsp;&nbsp;
-			产品名称：
+			商品名称：
 			<ww:textfield theme="simple" name="product_name" id="product_name" value="%{product_name}"/> 
 			&nbsp;&nbsp;
-			产品规格：
+			商品规格：
 			<ww:textfield theme="simple" name="product_xh" id="product_xh" value="%{product_xh}"/> 
 			&nbsp;&nbsp;
 			<input type="submit" name="buttonCx" value=" 查询 " class="css_button">
@@ -47,9 +47,9 @@
 <table width="100%"  align="center"  border="1"   class="chart_list" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
-		<td>产品编号</td>
-		<td>产品名称</td>	
-		<td>产品规格</td>
+		<td>商品编号</td>
+		<td>商品名称</td>	
+		<td>商品规格</td>
 		<td>单位</td>
 	</tr>
 	</thead>

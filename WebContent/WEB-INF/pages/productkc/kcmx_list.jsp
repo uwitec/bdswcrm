@@ -48,7 +48,7 @@ String user_type = info.getIs_dls();   //用户类别
 <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0" border="1" id="selTable">
 	<thead>
 	<tr>
-		<td nowrap="nowrap">产品名称</td>
+		<td nowrap="nowrap">商品名称</td>
 		<td nowrap="nowrap">规格</td>	
 		<td nowrap="nowrap">库存数量</td>
 	<%

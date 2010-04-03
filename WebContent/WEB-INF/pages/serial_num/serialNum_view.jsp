@@ -22,11 +22,11 @@
 		<td class="a2" width="75%"><ww:property value="%{serialNumMng.serial_num}" /></td>		
 	</tr>
 	<tr>
-		<td class="a1" width="25%">产品名称</td>
+		<td class="a1" width="25%">商品名称</td>
 		<td class="a2" width="75%"><ww:property value="%{serialNumMng.product_name}" /></td>
 	</tr>
 	<tr>
-		<td class="a1" width="25%">产品规格</td>
+		<td class="a1" width="25%">商品规格</td>
 		<td class="a2" width="75%"><ww:property value="%{serialNumMng.product_xh}" /></td>
 	</tr>
 	<tr>

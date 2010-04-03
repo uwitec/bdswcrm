@@ -17,20 +17,20 @@ String product_state = StringUtils.nullToStr(VS.findValue("product_state"));
 
 <html>
 <head>
-<title>产品列表</title>
+<title>商品列表</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript">
 	function add(){
 		var id = "<%=curId %>";
 		if(id == ""){
-			alert("请首先选择产品类别，再添加产品！");
+			alert("请首先选择商品类别，再添加商品！");
 			return false;
 		}
 		var destination = "product_add.html?curId="+id;
 		var fea ='width=600,height=500,left=' + (screen.availWidth-600)/2 + ',top=' + (screen.availHeight-500)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 				
-		window.open(destination,'添加产品',fea);
+		window.open(destination,'添加商品',fea);
 	}
 	
 	function clearAll(){
@@ -58,7 +58,7 @@ String product_state = StringUtils.nullToStr(VS.findValue("product_state"));
 		var destination = "editProduct.html?productId="+id;
 		var fea ='width=600,height=500,left=' + (screen.availWidth-600)/2 + ',top=' + (screen.availHeight-500)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 				
-		window.open(destination,'添加产品',fea);
+		window.open(destination,'添加商品',fea);
 	}
 	
 	function trSelectChangeCss(){
@@ -82,16 +82,16 @@ String product_state = StringUtils.nullToStr(VS.findValue("product_state"));
 <input type="hidden" name="productId">
 <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0">
 	<tr>
-		<td class="csstitle" align="left" width="75%">&nbsp;&nbsp;&nbsp;&nbsp;<b>产品维护</b></td>
+		<td class="csstitle" align="left" width="75%">&nbsp;&nbsp;&nbsp;&nbsp;<b>商品维护</b></td>
 		<td class="csstitle" width="25%">
 			<img src="images/create.gif" align="absmiddle" border="0">&nbsp;<a href="#" onclick="add();" class="xxlb"> 添 加 </a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<img src="images/import.gif" align="absmiddle" border="0">&nbsp;<a href="#" class="xxlb" onclick="refreshPage();"> 刷 新 </a>	</td>			
 	</tr>
 	<tr>
 		<td class="search" align="left" colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;
-			产品名称：<input type="text" name="product_name" value="<%=product_name %>">
+			商品名称：<input type="text" name="product_name" value="<%=product_name %>">
 			&nbsp;&nbsp;
-			产品规格：<input type="text" name="product_xh" value="<%=product_xh %>">
+			商品规格：<input type="text" name="product_xh" value="<%=product_xh %>">
 			&nbsp;&nbsp;
 			状态：
 			<select name="product_state">
@@ -108,11 +108,11 @@ String product_state = StringUtils.nullToStr(VS.findValue("product_state"));
 <table width="100%"  align="center"  class="chart_list" border="1" cellpadding="0" cellspacing="0" id="productTable">
 	<thead>
 	<tr>
-		<td>产品编号</td>
-		<td>产品名称</td>
+		<td>商品编号</td>
+		<td>商品名称</td>
 		<td>规格</td>
 		<td>成本价</td>
-		<td>产品属性</td>
+		<td>商品属性</td>
 		<td>状态</td>
 		<td>操作</td>
 	</tr>
@@ -133,9 +133,9 @@ String product_state = StringUtils.nullToStr(VS.findValue("product_state"));
 		<td><%=StringUtils.nullToStr(map.get("prop")) %></td>
 		<td><%=StringUtils.nullToStr(map.get("state")) %></td>
 		<td>
-			<a onclick="editProduct('<%=StringUtils.nullToStr(map.get("product_id")) %>');"><img src="images/modify.gif" align="absmiddle" title="修改产品信息" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
-			<a onclick="openWin('<%=StringUtils.nullToStr(map.get("product_id")) %>');"><img src="images/view.gif" align="absmiddle" title="查看产品信息" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
-			<a onclick="delProduct('<%=StringUtils.nullToStr(map.get("product_id")) %>');"><img src="images/del.gif" align="absmiddle" title="删除该产品信息" border="0" style="cursor:hand"></a>
+			<a onclick="editProduct('<%=StringUtils.nullToStr(map.get("product_id")) %>');"><img src="images/modify.gif" align="absmiddle" title="修改商品信息" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
+			<a onclick="openWin('<%=StringUtils.nullToStr(map.get("product_id")) %>');"><img src="images/view.gif" align="absmiddle" title="查看商品信息" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
+			<a onclick="delProduct('<%=StringUtils.nullToStr(map.get("product_id")) %>');"><img src="images/del.gif" align="absmiddle" title="删除该商品信息" border="0" style="cursor:hand"></a>
 		</td>
 	</tr>
 	

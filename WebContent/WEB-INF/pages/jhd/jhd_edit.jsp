@@ -220,11 +220,11 @@ session.removeAttribute("messages");
 		var nm = document.getElementById("nums_" + vl).value;
 		
 		if(pn == ""){
-			alert("请选择产品，再输入序列号！");
+			alert("请选择商品，再输入序列号！");
 			return;
 		}
 		if(nm == "" || nm == "0"){
-			alert("请设置产品数量，再输入序列号！");
+			alert("请设置商品数量，再输入序列号！");
 			return;
 		}
 		
@@ -337,7 +337,7 @@ session.removeAttribute("messages");
 			}
 		}
 		if(k != 1){
-			alert("请选择产品明细，且只能选择一条信息！");
+			alert("请选择商品明细，且只能选择一条信息！");
 			return;
 		}
 		
@@ -456,7 +456,7 @@ session.removeAttribute("messages");
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td colspan="2">产品详细信息</td>
+		<td colspan="2">商品详细信息</td>
 	</tr>
 	</thead>
 </table>
@@ -464,7 +464,7 @@ session.removeAttribute("messages");
 	<thead>
 	<tr>
 		<td width="5%">选择</td>
-		<td width="25%">产品名称</td>
+		<td width="25%">商品名称</td>
 		<td width="25%">规格</td>
 		<td width="10%">采购价格</td>
 		<td width="10%">数量</td>
@@ -497,8 +497,8 @@ if(jhdProducts != null && jhdProducts.size()>0){
 <table width="100%"  align="center" id="jhtable"  class="chart_info" cellpadding="0" cellspacing="0">
 	<tr height="35">
 		<td class="a2" colspan="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="button" name="button1" value="添加产品" class="css_button3" onclick="openWin();">
-			<input type="button" name="button8" value="清除产品" class="css_button3" onclick="delDesc();">
+			<input type="button" name="button1" value="添加商品" class="css_button3" onclick="openWin();">
+			<input type="button" name="button8" value="清除商品" class="css_button3" onclick="delDesc();">
 		</td>
 	</tr>
 </table>

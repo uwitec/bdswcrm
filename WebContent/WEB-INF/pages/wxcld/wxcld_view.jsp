@@ -325,15 +325,15 @@ if(null==wxcldProducts)
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td colspan="2">维修产品信息</td>
+		<td colspan="2">维修商品信息</td>
 	</tr>
 	</thead>
 </table>
 <table width="100%"  align="center" id="lsdtable"  class="chart_list" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td>产品名称</td>
-		<td>产品规格</td> 
+		<td>商品名称</td>
+		<td>商品规格</td> 
 		<td>故障类型</td>
 		<td>购买天数</td>
 		<td>处理方式</td>	

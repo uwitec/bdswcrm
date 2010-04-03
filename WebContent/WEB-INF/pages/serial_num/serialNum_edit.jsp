@@ -14,7 +14,7 @@
 	//保存序列号
 	function saveInfo(){
 		if(!InputValid(document.getElementById("serial_num"),1,"string",1,1,50,"序列号")){	 return; }
-		if(!InputValid(document.getElementById("product_name"),0,"string",0,1,100,"产品名称")){	 return; }
+		if(!InputValid(document.getElementById("product_name"),0,"string",0,1,100,"商品名称")){	 return; }
 		if(document.getElementById("state").value == ""){
 			alert("序列号状态不能为空，请选择");
 			return;
@@ -22,11 +22,11 @@
 		document.serialNumForm.submit();
 	}
 	
-	//选择产品列表
+	//选择商品列表
 	function openWin(){
 		var destination = "getProducts.html";
 		var fea ='width=800,height=450,left=' + (screen.availWidth-800)/2 + ',top=' + (screen.availHeight-450)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
-		window.open(destination,'选择产品',fea);	
+		window.open(destination,'选择商品',fea);	
 	}
 	
 	//发送序列号
@@ -65,14 +65,14 @@
 		</td>		
 	</tr>
 	<tr>
-		<td class="a1" width="25%">产品名称</td>
+		<td class="a1" width="25%">商品名称</td>
 		<td class="a2" width="75%">
 			<ww:textfield  name="serialNumMng.product_name" id="product_name" value="%{serialNumMng.product_name}" theme="simple" cssStyle="width:75%" readonly="true"/>
-			<img src="images/select.gif" align="absmiddle" title="选择产品" border="0" onclick="openWin();" style="cursor:hand">
+			<img src="images/select.gif" align="absmiddle" title="选择商品" border="0" onclick="openWin();" style="cursor:hand">
 		</td>
 	</tr>
 	<tr>
-		<td class="a1" width="25%">产品规格</td>
+		<td class="a1" width="25%">商品规格</td>
 		<td class="a2" width="75%"><ww:textfield  name="serialNumMng.product_xh" id="product_xh" value="%{serialNumMng.product_xh}"  theme="simple"  readonly="true"  cssStyle="width:75%"/></td>
 	</tr>
 	<tr>

@@ -17,7 +17,7 @@ if(!msg.equals("")){
 
 <html>
 <head>
-<title>产品分类</title>
+<title>商品分类</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <link href="tree/menu.css" rel="stylesheet" type="text/css">
@@ -458,7 +458,7 @@ function addRoot(){
 
 <table width="100%" border="0" align="center" class="chart_list" cellpadding="0" cellspacing="0">
 	<tr>
-		<td class="csstitle">&nbsp;&nbsp;&nbsp;&nbsp;<b>产品类别管理</b></td>
+		<td class="csstitle">&nbsp;&nbsp;&nbsp;&nbsp;<b>商品类别管理</b></td>
 	</tr>
 </table>
 <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">

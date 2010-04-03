@@ -141,14 +141,14 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td colspan="2">产品详细信息</td>
+		<td colspan="2">商品详细信息</td>
 	</tr>
 	</thead>
 </table>
 <table width="100%"  align="center" id="lsdtable"  class="chart_list" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td>产品名称</td>
+		<td>商品名称</td>
 		<td>规格</td>
 		<td>销售价格</td>
 		<td>数量</td>

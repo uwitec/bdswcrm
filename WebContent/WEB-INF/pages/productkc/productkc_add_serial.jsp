@@ -117,15 +117,15 @@ Product product = (Product)VS.findValue("product");
 	</tr>
 	</thead>
 	<tr>
-		<td class="a1">产品编号</td>
+		<td class="a1">商品编号</td>
 		<td class="a2"><%=StringUtils.nullToStr(product.getProductId()) %></td>	
 	</tr>
 	<tr>
-		<td class="a1">产品名称</td>
+		<td class="a1">商品名称</td>
 		<td class="a2"><%=StringUtils.nullToStr(product.getProductName()) %></td>	
 	</tr>
 	<tr>
-		<td class="a1">产品规格</td>
+		<td class="a1">商品规格</td>
 		<td class="a2"><%=StringUtils.nullToStr(product.getProductXh()) %></td>	
 	</tr>
 	<tr>
@@ -157,8 +157,8 @@ Product product = (Product)VS.findValue("product");
 	</tr>
 </table>
 <BR>说明：<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;一、将光标定位于序列号输入框，用扫描枪扫描产品序列号，或输入序列号回车，系统自动保存产品序列号信息，并累加实际库存数。<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;二、所有库存序列号输入完成后，请点击“确定”按钮完成产品库存的初始，非法关闭窗口，产品初始化无效，要求一类产品的初始一次完成。
+&nbsp;&nbsp;&nbsp;&nbsp;一、将光标定位于序列号输入框，用扫描枪扫描商品序列号，或输入序列号回车，系统自动保存商品序列号信息，并累加实际库存数。<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;二、所有库存序列号输入完成后，请点击“确定”按钮完成商品库存的初始，非法关闭窗口，商品初始化无效，要求一类商品的初始一次完成。
 </form>
 </body>
 </html>

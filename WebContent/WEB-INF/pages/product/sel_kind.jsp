@@ -9,7 +9,7 @@ String strTree = (String)VS.findValue("strTree");
 
 <html>
 <head>
-<title>产品类别</title>
+<title>商品类别</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="tree/menu.css" rel="stylesheet" type="text/css">
 <link href="css/css.css" rel="stylesheet" type="text/css" />
@@ -211,7 +211,7 @@ function selOk(){
 <body align="center">
 <table width="100%" border="0" align="center" class="chart_list" cellpadding="0" cellspacing="0">
 	<tr>
-		<td class="csstitle">&nbsp;&nbsp;&nbsp;&nbsp;<b>选择产品类别</b></td>
+		<td class="csstitle">&nbsp;&nbsp;&nbsp;&nbsp;<b>选择商品类别</b></td>
 	</tr>
 </table>
 <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">

@@ -28,12 +28,12 @@
         </property> 
     </bean>
     
-    <!-- 产品分类 -->
+    <!-- 商品分类 -->
     <bean id="productKindDao"  class="com.sw.cms.dao.ProductKindDAO">
     	<property name="jdbcTemplate" ref="jdbcTemplate"/>
     </bean>
     
-    <!-- 产品 -->
+    <!-- 商品 -->
     <bean id="productDao"  class="com.sw.cms.dao.ProductDAO">
     	<property name="jdbcTemplate" ref="jdbcTemplate"/>
     </bean>

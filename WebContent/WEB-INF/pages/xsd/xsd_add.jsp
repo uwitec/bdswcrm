@@ -326,7 +326,7 @@ String flag = StringUtils.nullToStr(VS.findValue("flag"));
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td colspan="2">产品详细信息</td>
+		<td colspan="2">商品详细信息</td>
 	</tr>
 	</thead>
 </table>
@@ -334,7 +334,7 @@ String flag = StringUtils.nullToStr(VS.findValue("flag"));
 	<thead>
 	<tr>
 		<td width="5%">选择</td>
-		<td width="35%">产品名称</td>
+		<td width="35%">商品名称</td>
 		<td width="30%">规格</td>
 		<td width="10%">销售价格</td>
 		<td width="10%">数量</td>
@@ -397,8 +397,8 @@ if(xsdProducts!=null && xsdProducts.size()>0){
 <table width="100%"  align="center" class="chart_info" cellpadding="0" cellspacing="0">
 	<tr height="35">
 		<td class="a2" colspan="4" width="100%">&nbsp;
-			<input type="button" name="button1" value="添加产品" class="css_button3" onclick="openWin();">
-			<input type="button" name="button8" value="清除产品" class="css_button3" onclick="delDesc();">
+			<input type="button" name="button1" value="添加商品" class="css_button3" onclick="openWin();">
+			<input type="button" name="button8" value="清除商品" class="css_button3" onclick="delDesc();">
 		</td>
 	</tr>
 </table>

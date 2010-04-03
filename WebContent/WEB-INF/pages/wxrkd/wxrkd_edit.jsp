@@ -66,16 +66,16 @@ if(wxrkdProducts != null && wxrkdProducts.size()>0){
 		}
 		if(counts==0)
 		{
-		  alert("维修入库产品不能为空，请填写！");
+		  alert("维修入库商品不能为空，请填写！");
 		  return;
 		}
 		
 				
-		//判断是否存在强制输入序列号的产品没有输入序列号
+		//判断是否存在强制输入序列号的商品没有输入序列号
 		for(var i=0;i<=allCount;i++){
 		 
 			var qzserialnum = document.getElementById("qz_serial_num_"+i); //序列号
-			var pn = document.getElementById("product_name_" + i);           //产品名称
+			var pn = document.getElementById("product_name_" + i);           //商品名称
 			
 			 
 				 if(pn!=null&&pn.value!="")
@@ -84,20 +84,20 @@ if(wxrkdProducts != null && wxrkdProducts.size()>0){
 					if(qzserialnum.value == "")
 					{
 						//如果没有输入序列号提示用户输入序列号
-						alert("产品" + pn.value + "强制序列号，请先输入序列号！");
+						alert("商品" + pn.value + "强制序列号，请先输入序列号！");
 						qzserialnum.focus();
 						return;
 					}
 					else
 					{
-						//校验输入数量与产品数是否相同
+						//校验输入数量与商品数是否相同
 						var serial = document.getElementById("qz_serial_num_" + i).value;
 						var arrySerial = serial.split(",");
 						
 						var nms = document.getElementById("nums_" + i).value;
 						
 						if(parseInt(nms) != arrySerial.length){
-							alert("产品" + pn.value + "输入序列号数量与产品数量不符，请检查！");
+							alert("商品" + pn.value + "输入序列号数量与商品数量不符，请检查！");
 							qzserialnum.focus();
 							return;
 						}
@@ -174,11 +174,11 @@ if(wxrkdProducts != null && wxrkdProducts.size()>0){
 		var nm = document.getElementById("nums_" + vl).value;
 		
 		if(pn == ""){
-			alert("请选择产品，再输入序列号！");
+			alert("请选择商品，再输入序列号！");
 			return;
 		}
 		if(nm == "" || nm == "0"){
-			alert("请设置产品数量，再输入序列号！");
+			alert("请设置商品数量，再输入序列号！");
 			return;
 		}
 		
@@ -244,7 +244,7 @@ if(wxrkdProducts != null && wxrkdProducts.size()>0){
 		dwrService.getBadProductObjBySerialNum(serialNum,setProductInfo);		
 	}
 	
-	//处理返回产品对象
+	//处理返回商品对象
 	function setProductInfo(product)
 	{
 		if(product != null && product.productId != null)
@@ -260,7 +260,7 @@ if(wxrkdProducts != null && wxrkdProducts.size()>0){
 						var vl = dwr.util.getValue("qz_serial_num_" + i); //已有的序列号
 						var vl2 = dwr.util.getValue("s_nums");    //输入的序列号
 						if(vl.indexOf(vl2) != -1){
-							alert("产品列表中已存在该序列号，请检查！");
+							alert("商品列表中已存在该序列号，请检查！");
 							break;
 						}
 						
@@ -308,7 +308,7 @@ if(wxrkdProducts != null && wxrkdProducts.size()>0){
 			}
 		}
 		if(k != 1){
-			alert("请选择产品明细，且只能选择一条信息！");
+			alert("请选择商品明细，且只能选择一条信息！");
 			return;
 		}
 		
@@ -369,15 +369,15 @@ if(wxrkdProducts != null && wxrkdProducts.size()>0){
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td colspan="2">维修产品信息</td>
+		<td colspan="2">维修商品信息</td>
 	</tr>
 	</thead>
 </table>
 <table width="100%"  align="center" id="wxrkdtable"  class="chart_list" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td>产品名称</td>
-		<td>产品规格</td> 
+		<td>商品名称</td>
+		<td>商品规格</td> 
 		<td>目标库</td>
 		<td>数量</td>	
 		<td>序列号</td>

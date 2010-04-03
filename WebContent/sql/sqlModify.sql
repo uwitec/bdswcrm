@@ -108,7 +108,7 @@ CREATE TABLE   `jjd` (
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---接件单产品信息
+--接件单商品信息
 DROP TABLE IF EXISTS `jjd_product`;
 CREATE TABLE  `jjd_product` (
   `id` int(10) NOT NULL auto_increment,
@@ -140,7 +140,7 @@ CREATE TABLE   `bxd` (
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---报修单产品详细信息
+--报修单商品详细信息
 DROP TABLE IF EXISTS  `bxd_product`;
 CREATE TABLE   `bxd_product` (
   `id` int(10) unsigned NOT NULL auto_increment,
@@ -175,7 +175,7 @@ CREATE TABLE   `bxfhd` (
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---报修返还单产品明细
+--报修返还单商品明细
 DROP TABLE IF EXISTS  `bxfhd_product`;
 CREATE TABLE   `bxfhd_product` (
   `id` int(10) unsigned NOT NULL auto_increment,
@@ -211,7 +211,7 @@ CREATE TABLE `fhkhd` (
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---返还客户单产品明细
+--返还客户单商品明细
 DROP TABLE IF EXISTS `fhkhd_product`;
 CREATE TABLE  `fhkhd_product` (
   `id` int(10) unsigned NOT NULL auto_increment,
@@ -230,7 +230,7 @@ CREATE TABLE  `fhkhd_product` (
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---换件单，当产品序列号发生变化时，使用
+--换件单，当商品序列号发生变化时，使用
 DROP TABLE IF EXISTS  `hjd`;
 CREATE TABLE   `hjd` (
   `id` varchar(30) NOT NULL,
@@ -243,7 +243,7 @@ CREATE TABLE   `hjd` (
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---换件单产品明细
+--换件单商品明细
 DROP TABLE IF EXISTS  `hjd_product`;
 CREATE TABLE   `hjd_product` (
   `id` int(10) unsigned NOT NULL auto_increment,
@@ -257,7 +257,7 @@ CREATE TABLE   `hjd_product` (
     PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---报废单，当产品不能再修时，使用
+--报废单，当商品不能再修时，使用
 DROP TABLE IF EXISTS  `bfd`;
 CREATE TABLE `bfd` (
   `id` varchar(30) NOT NULL,
@@ -270,7 +270,7 @@ CREATE TABLE `bfd` (
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---报废单产品明细
+--报废单商品明细
 DROP TABLE IF EXISTS  `bfd_product`;
 CREATE TABLE `bfd_product` (
   `id` int(10) unsigned NOT NULL auto_increment,
@@ -286,7 +286,7 @@ CREATE TABLE `bfd_product` (
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---移库出库单,从产品库移出，移入坏件库
+--移库出库单,从商品库移出，移入坏件库
 DROP TABLE IF EXISTS  `ykck`;
 CREATE TABLE   `ykck` (
   `id` varchar(20) NOT NULL,
@@ -300,7 +300,7 @@ CREATE TABLE   `ykck` (
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---移库出库单产品明细
+--移库出库单商品明细
 DROP TABLE IF EXISTS  `ykck_product`;
 CREATE TABLE   `ykck_product` (
   `id` int(10) unsigned NOT NULL auto_increment,
@@ -314,7 +314,7 @@ CREATE TABLE   `ykck_product` (
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
    
---移库入库单,从好件库移出，移入产品库
+--移库入库单,从好件库移出，移入商品库
 DROP TABLE IF EXISTS  `ykrk`;
 CREATE TABLE   `ykrk` (
   `id` varchar(20) NOT NULL,
@@ -328,7 +328,7 @@ CREATE TABLE   `ykrk` (
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---移库入库单产品明细
+--移库入库单商品明细
 DROP TABLE IF EXISTS  `ykrk_product`;
 CREATE TABLE   `ykrk_product` (
   `id` int(10) unsigned NOT NULL auto_increment,
@@ -359,7 +359,7 @@ CREATE TABLE  `wxrkd` (
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---维修入库单产品明细
+--维修入库单商品明细
 DROP TABLE IF EXISTS `wxrkd_product`;
 CREATE TABLE  `wxrkd_product` (
   `id` int(10) unsigned NOT NULL auto_increment,

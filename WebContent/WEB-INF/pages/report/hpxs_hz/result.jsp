@@ -95,9 +95,9 @@ if(!product_xh.equals("")){
 <TABLE align="center" cellSpacing=0 cellPadding=0 width="99%" border=0 style="BORDER-TOP: #000000 2px solid;BORDER-LEFT:#000000 1px solid">
 	<THEAD>
 		<TR>
-			<TD class=ReportHead>产品编码</TD>
-			<TD class=ReportHead>产品名称</TD>
-			<TD class=ReportHead>产品规格</TD>
+			<TD class=ReportHead>商品编码</TD>
+			<TD class=ReportHead>商品名称</TD>
+			<TD class=ReportHead>商品规格</TD>
 			<TD class=ReportHead>数量</TD>
 			<TD class=ReportHead>金额</TD>		
 		</TR>

@@ -48,21 +48,21 @@ List bxfhdProducts = (List)VS.findValue("bxfhdProducts");
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td colspan="2">产品详细信息</td>
+		<td colspan="2">商品详细信息</td>
 	</tr>
 	</thead>	
 </table>
 <table width="100%"  align="center" id="bxfhdtable"  class="chart_list" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-	    <td width="18%">产品名称</td>	
-		<td width="15%">产品规格</td>
+	    <td width="18%">商品名称</td>	
+		<td width="15%">商品规格</td>
 		<td width="5%">仓库</td>
 		<td width="5%">单价</td>
 		<td width="5%">数量</td>	
 		<td width="5%">小计</td>
 		<td width="12%">强制序列号</td>
-		<td width="12%">产品附件</td>
+		<td width="12%">商品附件</td>
 		<td width="15%">备注</td>		
 	</tr>
 	</thead>

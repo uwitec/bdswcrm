@@ -74,17 +74,17 @@ session.removeAttribute("messages");
 		}
 		if(counts==0)
 		{
-		  alert("报修返还产品不能为空，请填写！");
+		  alert("报修返还商品不能为空，请填写！");
 		  return;
 		}
 		
 		if(!InputValid(document.getElementById("skzh"),1,"string",0,1,100,"付款账户")){return;}
 		
-		//判断是否存在强制输入序列号的产品没有输入序列号
+		//判断是否存在强制输入序列号的商品没有输入序列号
 		for(var i=0;i<=allCount;i++){
 		 
 			var qzserialnum = document.getElementById("qz_serial_num_"+i); //序列号
-			var pn = document.getElementById("product_name_" + i);           //产品名称
+			var pn = document.getElementById("product_name_" + i);           //商品名称
 			
 			 
 				 if(pn!=null&&pn.value!="")
@@ -93,20 +93,20 @@ session.removeAttribute("messages");
 					if(qzserialnum.value == "")
 					{
 						//如果没有输入序列号提示用户输入序列号
-						alert("产品" + pn.value + "强制序列号，请先输入序列号！");
+						alert("商品" + pn.value + "强制序列号，请先输入序列号！");
 						qzserialnum.focus();
 						return;
 					}
 					else
 					{
-						//校验输入数量与产品数是否相同
+						//校验输入数量与商品数是否相同
 						var serial = document.getElementById("qz_serial_num_" + i).value;
 						var arrySerial = serial.split(",");
 						
 						var nms = document.getElementById("nums_" + i).value;
 						
 						if(parseInt(nms) != arrySerial.length){
-							alert("产品" + pn.value + "输入序列号数量与产品数量不符，请检查！");
+							alert("商品" + pn.value + "输入序列号数量与商品数量不符，请检查！");
 							qzserialnum.focus();
 							return;
 						}
@@ -232,11 +232,11 @@ session.removeAttribute("messages");
 		var nm = document.getElementById("nums_" + vl).value;
 		
 		if(pn == ""){
-			alert("请选择产品，再输入序列号！");
+			alert("请选择商品，再输入序列号！");
 			return;
 		}
 		if(nm == "" || nm == "0"){
-			alert("请设置产品数量，再输入序列号！");
+			alert("请设置商品数量，再输入序列号！");
 			return;
 		}
 		
@@ -264,7 +264,7 @@ session.removeAttribute("messages");
 		dwrService.getZyProductObjBySerialNum(serialNum,setProductInfo);		
 	}
 	
-	//处理返回产品对象
+	//处理返回商品对象
 	function setProductInfo(product){
 		if(product != null && product.productId != null)
 		{
@@ -279,7 +279,7 @@ session.removeAttribute("messages");
 						var vl = dwr.util.getValue("qz_serial_num_" + i); //已有的序列号
 						var vl2 = dwr.util.getValue("s_nums");    //输入的序列号
 						if(vl.indexOf(vl2) != -1){
-							alert("产品列表中已存在该序列号，请检查！");
+							alert("商品列表中已存在该序列号，请检查！");
 							break;
 						}
 						
@@ -328,7 +328,7 @@ session.removeAttribute("messages");
 			}
 		}
 		if(k != 1){
-			alert("请选择产品明细，且只能选择一条信息！");
+			alert("请选择商品明细，且只能选择一条信息！");
 			return;
 		}
 		
@@ -450,21 +450,21 @@ session.removeAttribute("messages");
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td colspan="2">产品详细信息</td>
+		<td colspan="2">商品详细信息</td>
 	</tr>
 	</thead>	
 </table>
 <table width="100%"  align="center" id="bxfhdtable"  class="chart_list" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-	    <td width="15%">产品名称</td>	
-		<td width="15%">产品规格</td>
+	    <td width="15%">商品名称</td>	
+		<td width="15%">商品规格</td>
 		<td width="6%">仓库</td>
 		<td width="5%">单价</td>
 		<td width="4%">数量</td>	
 		<td width="5%">小计</td>
 		<td width="12%">强制序列号</td>
-		<td width="15%">产品附件</td>
+		<td width="15%">商品附件</td>
 		<td width="15%">备注</td>		
 	</tr>
 	</thead>

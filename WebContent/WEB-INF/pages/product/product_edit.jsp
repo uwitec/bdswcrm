@@ -19,17 +19,17 @@ String iscs_flag = StringUtils.nullToStr(VS.findValue("iscs_flag"));
 
 <html>
 <head>
-<title>产品信息</title>
+<title>商品信息</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript" src="js/Check.js"></script>
 <script language="JavaScript" src="js/keychange.js"></script>
 <script type="text/javascript">
 	function saveInfo(){
-		if(!InputValid(document.productForm.productName,1,"string",1,1,100,"产品名称")){	 document.productForm.productName.focus();return; }
+		if(!InputValid(document.productForm.productName,1,"string",1,1,100,"商品名称")){	 document.productForm.productName.focus();return; }
 		if(!InputValid(document.productForm.productXh,0,"string",0,1,100,"规格")){	document.productForm.productXh.focus(); return; }
 		if(document.productForm.prop.value == ""){
-			alert("产品属性为必选项！");
+			alert("商品属性为必选项！");
 			return;
 		}
 		if(!InputValid(document.productForm.price,0,"float",1,0,9999999,"移动加权价")){	 document.productForm.price.focus();return; }
@@ -42,7 +42,7 @@ String iscs_flag = StringUtils.nullToStr(VS.findValue("iscs_flag"));
 		if(!InputValid(document.productForm.dss,0,"float",0,0,9999999,"金额点杀")){	 document.productForm.dss.focus();return; }
 		if(!InputValid(document.productForm.ygcbj,0,"float",0,0,9999999,"预估成本价")){	 document.productForm.ygcbj.focus();return; }
 		if(!InputValid(document.productForm.sp_txm,0,"string",0,1,50,"商品条形码")){	 document.productForm.sp_txm.focus();return; }
-		if(!InputValid(document.productForm.ms,0,"string",0,1,500,"产品描述")){	 document.productForm.ms.focus();return; }
+		if(!InputValid(document.productForm.ms,0,"string",0,1,500,"商品描述")){	 document.productForm.ms.focus();return; }
 		
 		document.productForm.submit();
 	}
@@ -63,11 +63,11 @@ String iscs_flag = StringUtils.nullToStr(VS.findValue("iscs_flag"));
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
-		<td colspan="4">产品信息</td>
+		<td colspan="4">商品信息</td>
 	</tr>
 	</thead>	
 	<tr>
-		<td class="a1" width="15%">产品名称</td>
+		<td class="a1" width="15%">商品名称</td>
 		<td class="a2" width="35%"><input type="text" name="productName" value="<%=StringUtils.nullToStr(product.getProductName()) %>" size="20" onkeyup="goNext(this.form,this.name);"></td>	
 		<td class="a1" width="15%">规格</td>
 		<td class="a2" width="35%"><input type="text" name="productXh" value="<%=StringUtils.nullToStr(product.getProductXh()) %>" size="20" onkeyup="goNext(this.form,this.name);"></td>
@@ -175,7 +175,7 @@ String iscs_flag = StringUtils.nullToStr(VS.findValue("iscs_flag"));
 		</td>		
 	</tr>
 	<tr>
-	    <td class="a1">产品描述</td>
+	    <td class="a1">商品描述</td>
 		<td class="a2" colspan="3"><input type="text"  name="ms" value="<%=product.getMs() %>"  style="width:90%" onkeyup="goNext(this.form,this.name);"></td>
 	</tr>
 	<tr height="35">

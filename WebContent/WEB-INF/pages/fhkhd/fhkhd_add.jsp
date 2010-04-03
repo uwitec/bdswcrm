@@ -69,18 +69,18 @@ session.removeAttribute("messages");
 		}
 		if(counts==0)
 		{
-		  alert("返还产品不能为空，请填写！");
+		  alert("返还商品不能为空，请填写！");
 		  return;
 		}
 		
 		if(!InputValid(document.getElementById("skzh"),1,"string",0,1,100,"收款账户")){return;}
 
-		//判断是否存在强制输入序列号的产品没有输入序列号
+		//判断是否存在强制输入序列号的商品没有输入序列号
 		for(var i=0;i<=allCount;i++)
 		{
 		 
 			var qzserialnum = document.getElementById("qz_serial_num_"+i); //序列号
-			var pn = document.getElementById("product_name_" + i);           //产品名称
+			var pn = document.getElementById("product_name_" + i);           //商品名称
 			
 			 
 				 if(pn!=null&&pn.value!="")
@@ -89,20 +89,20 @@ session.removeAttribute("messages");
 					if(qzserialnum.value == "")
 					{
 						//如果没有输入序列号提示用户输入序列号
-						alert("产品" + pn.value + "强制序列号，请先输入序列号！");
+						alert("商品" + pn.value + "强制序列号，请先输入序列号！");
 						qzserialnum.focus();
 						return;
 					}
 					else
 					{
-						//校验输入数量与产品数是否相同
+						//校验输入数量与商品数是否相同
 						var serial = document.getElementById("qz_serial_num_" + i).value;
 						var arrySerial = serial.split(",");
 						
 						var nms = document.getElementById("nums_" + i).value;
 						
 						if(parseInt(nms) != arrySerial.length){
-							alert("产品" + pn.value + "输入序列号数量与产品数量不符，请检查！");
+							alert("商品" + pn.value + "输入序列号数量与商品数量不符，请检查！");
 							qzserialnum.focus();
 							return;
 						}
@@ -229,11 +229,11 @@ session.removeAttribute("messages");
 		var nm = document.getElementById("nums_" + vl).value;
 		
 		if(pn == ""){
-			alert("请选择产品，再输入序列号！");
+			alert("请选择商品，再输入序列号！");
 			return;
 		}
 		if(nm == "" || nm == "0"){
-			alert("请设置产品数量，再输入序列号！");
+			alert("请设置商品数量，再输入序列号！");
 			return;
 		}
 		
@@ -261,7 +261,7 @@ session.removeAttribute("messages");
 		dwrService.getGoodProductObjBySerialNum(serialNum,setProductInfo);		
 	}
 	
-	//处理返回产品对象
+	//处理返回商品对象
 	function setProductInfo(product){
 		if(product != null && product.productId != null)
 		{
@@ -276,7 +276,7 @@ session.removeAttribute("messages");
 						var vl = dwr.util.getValue("qz_serial_num_" + i); //已有的序列号
 						var vl2 = dwr.util.getValue("s_nums");    //输入的序列号
 						if(vl.indexOf(vl2) != -1){
-							alert("产品列表中已存在该序列号，请检查！");
+							alert("商品列表中已存在该序列号，请检查！");
 							break;
 						}
 						
@@ -325,7 +325,7 @@ session.removeAttribute("messages");
 			}
 		}
 		if(k != 1){
-			alert("请选择产品明细，且只能选择一条信息！");
+			alert("请选择商品明细，且只能选择一条信息！");
 			return;
 		}
 		
@@ -450,12 +450,12 @@ session.removeAttribute("messages");
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td colspan="2">产品详细信息</td>
+		<td colspan="2">商品详细信息</td>
 	</tr>
 	</thead>
 	<tr height="35">
 		<td class="a2" colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;输入序列号：<input type="text" name="s_nums" value="" onkeypress="javascript:f_enter()">
-			注：输入产品序列号回车，可自动提取产品信息到产品列表中
+			注：输入商品序列号回车，可自动提取商品信息到商品列表中
 		</td>
 	</tr>	
 </table>
@@ -463,14 +463,14 @@ session.removeAttribute("messages");
 	<thead>
 	<tr>
 	    <td width="2%">选择</td>
-	    <td width="15%">产品名称</td>	
-		<td width="15%">产品规格</td>
+	    <td width="15%">商品名称</td>	
+		<td width="15%">商品规格</td>
 		<td width="5%">仓库</td>
 		<td width="5%">单价</td>
 		<td width="6%">数量</td>	
 		<td width="8%">小计</td>
 		<td width="15%">强制序列号</td>
-		<td width="14%">产品附件</td>
+		<td width="14%">商品附件</td>
 		<td width="15%">备注</td>		
 	</tr>
 	</thead>
@@ -556,8 +556,8 @@ else
 <table width="100%"  align="center" class="chart_info" cellpadding="0" cellspacing="0">
    <tr height="35">
 		<td class="a2" colspan="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="button" name="button1" value="添加产品" class="css_button3" onclick="openWin();">
-			<input type="button" name="button8" value="清除产品" class="css_button3" onclick="delDesc();">
+			<input type="button" name="button1" value="添加商品" class="css_button3" onclick="openWin();">
+			<input type="button" name="button8" value="清除商品" class="css_button3" onclick="delDesc();">
 		</td>	 
 	</tr>
 	<tr height="35">	

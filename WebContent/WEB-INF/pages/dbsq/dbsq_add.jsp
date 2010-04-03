@@ -102,7 +102,7 @@ Dbsq dbsq = (Dbsq)VS.findValue("dbsq");
 	}     
 
 	
-	function openWin(id){  //与退货单使用一个产品选择
+	function openWin(id){  //与退货单使用一个商品选择
 		var destination = "selThdProc.html?openerId="+id;
 		var fea ='width=800,height=500,left=' + (screen.availWidth-800)/2 + ',top=' + (screen.availHeight-500)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
@@ -173,14 +173,14 @@ Dbsq dbsq = (Dbsq)VS.findValue("dbsq");
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td colspan="2">产品详细信息</td>
+		<td colspan="2">商品详细信息</td>
 	</tr>
 	</thead>
 </table>
 <table width="100%"  align="center" id="dbsqTable"  class="chart_list" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td>产品名称</td>
+		<td>商品名称</td>
 		<td>规格</td>
 		<td>数量</td>
 		<td>备注</td>

@@ -40,7 +40,7 @@ List results = (List)VS.findValue("kcpdDesc");
 <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0" border="1" id="selTable">
 	<thead>
 	<tr>
-		<td>产品名称</td>
+		<td>商品名称</td>
 		<td>规格</td>
 		<td>账面数量</td>
 		<td>实际数量</td>

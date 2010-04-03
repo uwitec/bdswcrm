@@ -95,7 +95,7 @@ String user_id = info.getUser_id();
 			tr.removeNode(true);
 	}     
 	
-	function openWin(id){  //与退货单使用一个产品选择
+	function openWin(id){  //与退货单使用一个商品选择
 		var destination = "selThdProc.html?openerId="+id;
 		var fea ='width=800,height=500,left=' + (screen.availWidth-800)/2 + ',top=' + (screen.availHeight-500)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
@@ -126,7 +126,7 @@ String user_id = info.getUser_id();
 		dwrService.getBxdRecordorBuyRecord(serialNum,setProductInfo);		
 	}
 	
-	//处理返回产品对象
+	//处理返回商品对象
 	function setProductInfo(product){
 		  
 		 var  client_name=document.getElementById("client_name");
@@ -147,7 +147,7 @@ String user_id = info.getUser_id();
 		     
 		   if(flog==2)  {
 		  	//零售记录
-		     ms.value='序列号: '+productArray[4]+'\n'+'产品名称: '+productArray[2]+'\n'+'产品型号: '+productArray[3];
+		     ms.value='序列号: '+productArray[4]+'\n'+'商品名称: '+productArray[2]+'\n'+'商品型号: '+productArray[3];
 			 linkman.value=productArray[5]; 
 			 mobile.value=productArray[6];			 
 			 address.value=productArray[8];
@@ -165,7 +165,7 @@ String user_id = info.getUser_id();
 		  else if(flog==4)
 		  {//销售记录
 		    
-		      ms.value='序列号: '+productArray[4]+'\n'+'产品名称: '+productArray[2]+'\n'+'产品型号: '+productArray[3];
+		      ms.value='序列号: '+productArray[4]+'\n'+'商品名称: '+productArray[2]+'\n'+'商品型号: '+productArray[3];
 			  client_id.value=productArray[5];
 			 linkman.value=productArray[6];
 			 address.value=productArray[7];
@@ -268,10 +268,10 @@ String user_id = info.getUser_id();
 		</td>					
 	</tr>
 	 <tr >
-	    <td class="a1" width="15%">产品序列号</td>
+	    <td class="a1" width="15%">商品序列号</td>
 		<td class="a2" colspan="4">
 		<input type="text" name="s_nums" value="" onkeypress="javascript:f_enter()">
-			注：输入产品序列号回车，可自动提取客户信息
+			注：输入商品序列号回车，可自动提取客户信息
 		</td>
 	</tr>		
 	<tr>

@@ -89,7 +89,7 @@ String iscs_flag = (String)VS.findValue("iscs_flag");
 	</tr>
 	<tr>
 		<td class="search" align="left" colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;
-			产品名称：<input type="text" name="product_name" value="<%=product_name %>">&nbsp;&nbsp;&nbsp;&nbsp;
+			商品名称：<input type="text" name="product_name" value="<%=product_name %>">&nbsp;&nbsp;&nbsp;&nbsp;
 			规格：<input type="text" name="product_xh" value="<%=product_xh %>">&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="submit" name="buttonCx" value=" 查询 " class="css_button2">&nbsp;&nbsp;&nbsp;&nbsp;	
 			<input type="button" name="buttonQk" value=" 清空 " class="css_button2" onclick="clearAll();">
@@ -100,7 +100,7 @@ String iscs_flag = (String)VS.findValue("iscs_flag");
 	<thead>
 	<tr>
 		<td>序号</td>
-		<td onclick="doSort('product_name');">产品名称<%if(orderName.equals("product_name")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td onclick="doSort('product_name');">商品名称<%if(orderName.equals("product_name")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
 		<td onclick="doSort('product_xh');">规格<%if(orderName.equals("product_xh")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
 		<td onclick="doSort('dw');">计量单位<%if(orderName.equals("dw")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
 		<td>初始日期</td>
@@ -117,7 +117,7 @@ String iscs_flag = (String)VS.findValue("iscs_flag");
 		
 		i = i + 1 ;
 	%>
-	<tr class="a1"  onmousedown="trSelectChangeCss()" <%if(iscs_flag.equals("0")){ %> title="双击设置产品库存" onDblClick="openWin('<%=StringUtils.nullToStr(map.get("product_id")) %>','<%=StringUtils.nullToStr(map.get("qz_serial_num")) %>');" <%}else{ %> title="库存初始已完成"<%} %>>
+	<tr class="a1"  onmousedown="trSelectChangeCss()" <%if(iscs_flag.equals("0")){ %> title="双击设置商品库存" onDblClick="openWin('<%=StringUtils.nullToStr(map.get("product_id")) %>','<%=StringUtils.nullToStr(map.get("qz_serial_num")) %>');" <%}else{ %> title="库存初始已完成"<%} %>>
 		<td><%=i %></td>
 		<td><%=StringUtils.nullToStr(map.get("product_name")) %></td>
 		<td><%=StringUtils.nullToStr(map.get("product_xh")) %></td>		
@@ -136,8 +136,8 @@ String iscs_flag = (String)VS.findValue("iscs_flag");
 	</tr>
 </table>
 <BR>
-产品库存初始分为两种情况，一、强制序列号产品，需要输入序列号来初始库存数量；二、不需要强制序列号产品，只需输入初始数量即可。<BR>
-系统初始工作结束后产品库存初始数据只可查看，不能修改。
+商品库存初始分为两种情况，一、强制序列号商品，需要输入序列号来初始库存数量；二、不需要强制序列号商品，只需输入初始数量即可。<BR>
+系统初始工作结束后商品库存初始数据只可查看，不能修改。
 </form>
 </body>
 </html>

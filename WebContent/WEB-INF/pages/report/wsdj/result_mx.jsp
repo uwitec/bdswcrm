@@ -61,8 +61,8 @@ if(!dept_id.equals("")){
 			<TD class=ReportHead>电话</TD>	
 			<TD class=ReportHead width="50">销售员</TD>
 			
-			<TD class=ReportHead>产品名称</TD>
-			<TD class=ReportHead>产品规格</TD>
+			<TD class=ReportHead>商品名称</TD>
+			<TD class=ReportHead>商品规格</TD>
 			<TD class=ReportHead width="50">单价</TD>
 			<TD class=ReportHead>数量</TD>
 			

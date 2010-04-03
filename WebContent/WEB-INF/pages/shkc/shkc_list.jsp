@@ -99,7 +99,7 @@ String state = (String)VS.findValue("state");
 			序列号：<input type="text" name="qz_serial_num" value="<%=qz_serial_num%>" size="20" >
 		 
 			 
-			产品名称:<input type="text" name="product_name" value="<%=product_name%>" size="30" >
+			商品名称:<input type="text" name="product_name" value="<%=product_name%>" size="30" >
 			 
 		    库存状态:
 		    <select name="state">
@@ -118,8 +118,8 @@ String state = (String)VS.findValue("state");
 	<thead>
 	<tr>
 		<td>序列号</td>
-		<td>产品名称</td>	
-		<td>产品规格</td>
+		<td>商品名称</td>	
+		<td>商品规格</td>
 		<td>状态</td>
 		<td>客户名称</td>
 		<td>联系人</td>		

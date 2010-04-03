@@ -50,8 +50,8 @@ con = "日期：" + start_date + "至" + end_date + "&nbsp;&nbsp; 客户名称�
 			<TD class=ReportHead rowspan="2">日期</TD>
 			<TD class=ReportHead rowspan="2">业务类型</TD>
 			<TD class=ReportHead rowspan="2">单据编号</TD>
-			<TD class=ReportHead rowspan="2">产品名称</TD>
-			<TD class=ReportHead rowspan="2">产品规格</TD>
+			<TD class=ReportHead rowspan="2">商品名称</TD>
+			<TD class=ReportHead rowspan="2">商品规格</TD>
 			<TD class=ReportHead rowspan="2">数量</TD>									
 			<TD class=ReportHead colspan="3">应收</TD>
 			<TD class=ReportHead colspan="3">应付</TD>	
@@ -333,7 +333,7 @@ if(list != null && list.size()>0){
 <br>
 <table width="99%">
 		<tr>
-			<td width="70%" height="30">注：点击产品编号可查看原始单据列表。</td>
+			<td width="70%" height="30">注：点击商品编号可查看原始单据列表。</td>
 			<td colspan="2" align="right" height="30">生成报表时间：<%=DateComFunc.getToday() %>&nbsp;&nbsp;&nbsp;</td>
 		</tr>
 </table>

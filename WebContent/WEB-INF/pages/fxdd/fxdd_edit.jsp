@@ -179,7 +179,7 @@ if(fxddProducts != null && fxddProducts.size()>0){
 			}
 		}
 		if(k != 1){
-			alert("请选择产品明细，且只能选择一条信息！");
+			alert("请选择商品明细，且只能选择一条信息！");
 			return;
 		}
 		
@@ -257,7 +257,7 @@ if(fxddProducts != null && fxddProducts.size()>0){
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td colspan="2">产品详细信息</td>
+		<td colspan="2">商品详细信息</td>
 	</tr>
 	</thead>
 </table>
@@ -265,7 +265,7 @@ if(fxddProducts != null && fxddProducts.size()>0){
 	<thead>
 	<tr>
 		<td>选择</td>
-		<td>产品名称</td>
+		<td>商品名称</td>
 		<td>规格</td>
 		<td>单价</td>
 		<td>数量</td>
@@ -319,8 +319,8 @@ if(fxddProducts!=null && fxddProducts.size()>0){
 <table width="100%"  align="center" class="chart_info" cellpadding="0" cellspacing="0">
 	<tr height="35">
 		<td class="a2" colspan="2" width="100%">&nbsp;
-			<input type="button" name="button1" value="添加产品" class="css_button3" onclick="openWin();">
-			<input type="button" name="button8" value="清除产品" class="css_button3" onclick="delDesc();">
+			<input type="button" name="button1" value="添加商品" class="css_button3" onclick="openWin();">
+			<input type="button" name="button8" value="清除商品" class="css_button3" onclick="delDesc();">
 		</td>
 	</tr>
 	<tr height="35">	

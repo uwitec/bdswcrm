@@ -109,7 +109,7 @@
 	</tr>
 	<tr>
 		<td class="search" align="left" colspan="2">&nbsp;&nbsp;
-			产品名称：
+			商品名称：
 			<ww:textfield theme="simple" name="product_name" id="product_name" value="%{product_name}"/> 
 			&nbsp;&nbsp;
 			规格：<ww:textfield theme="simple" name="product_xh" id="product_xh" value="%{product_xh}"/>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -123,7 +123,7 @@
 	<tr>
 		<td>序号</td>
 		<td><input type="checkbox" name="allCheck" onclick="selectAll();"></td>	
-		<td>产品名称</td>
+		<td>商品名称</td>
 		<td>规格</td>
 		<td>分销限价</td>
 		<td>单位</td>

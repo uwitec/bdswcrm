@@ -16,7 +16,7 @@ String xsry_id = StringUtils.nullToStr(request.getParameter("xsry_id"));
 String dj_id = StringUtils.nullToStr(request.getParameter("dj_id"));
 String dept_id = StringUtils.nullToStr(request.getParameter("dept_id"));
 
-String flag = StringUtils.nullToStr(request.getParameter("flag")); //是否显示产品明细列表0:不显示；1：显示
+String flag = StringUtils.nullToStr(request.getParameter("flag")); //是否显示商品明细列表0:不显示；1：显示
 
 String[] xwTypes = request.getParameterValues("xwType");   //查看的业务类型
 
@@ -110,7 +110,7 @@ if(!xsry_id.equals("")){
 			<TD class=ReportHead>客户</TD>
 			<TD class=ReportHead>销售人员</TD>
 			
-			<TD class=ReportHead>产品名称</TD>
+			<TD class=ReportHead>商品名称</TD>
 			<TD class=ReportHead>型号</TD>
 			<TD class=ReportHead>单价</TD>
 			<TD class=ReportHead>数量</TD>

@@ -38,11 +38,11 @@
 		</td>		
 	</tr>
 	<tr>
-		<td class="a1" width="25%">产品名称</td>
+		<td class="a1" width="25%">商品名称</td>
 		<td class="a2" width="75%"><ww:property value="%{productMap.product_name}"/></td>
 	</tr>
 	<tr>
-		<td class="a1" width="25%">产品规格</td>
+		<td class="a1" width="25%">商品规格</td>
 		<td class="a2" width="75%"><ww:property value="%{productMap.product_xh}"/></td>
 	</tr>
 </table><BR>

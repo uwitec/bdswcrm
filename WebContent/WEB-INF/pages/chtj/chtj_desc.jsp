@@ -40,7 +40,7 @@ List results = (List)VS.findValue("chtjDesc");
 <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0" border="1" id="selTable">
 	<thead>
 	<tr>
-		<td>产品名称</td>
+		<td>商品名称</td>
 		<td>规格</td>
 		<td>原价格</td>
 		<td>调整后价格</td>

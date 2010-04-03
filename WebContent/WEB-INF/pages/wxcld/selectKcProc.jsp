@@ -115,7 +115,7 @@ List kindList = (List)VS.findValue("kindList");
 			double khcbj = map.get("khcbj")==null?0:((Double)map.get("khcbj")).doubleValue();	
 			double gf = map.get("gf")==null?0:((Double)map.get("gf")).doubleValue();	
 	%>
-		<tr class="a1" onmouseover="this.className='a2';" onmouseout="this.className='a1';" title="左键单击选择产品" onclick="sel('<%=StringUtils.nullToStr(map.get("product_id")) %>','<%=StringUtils.nullToStr(map.get("product_xh")) %>','<%=StringUtils.nullToStr(map.get("product_name")) %>');">		
+		<tr class="a1" onmouseover="this.className='a2';" onmouseout="this.className='a1';" title="左键单击选择商品" onclick="sel('<%=StringUtils.nullToStr(map.get("product_id")) %>','<%=StringUtils.nullToStr(map.get("product_xh")) %>','<%=StringUtils.nullToStr(map.get("product_name")) %>');">		
 			<td><%=StringUtils.nullToStr(map.get("product_name")) %></td>
 			<td><%=StringUtils.nullToStr(map.get("product_xh")) %></td>
 			<td><%=StringUtils.nullToStr(map.get("kc_nums")) %></td>

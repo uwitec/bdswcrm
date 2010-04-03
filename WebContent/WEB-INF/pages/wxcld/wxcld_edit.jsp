@@ -63,7 +63,7 @@ if(null==wxcldProducts)
 		
 		if(document.getElementById("product_name").value=="")
 	   {
-	      alert("产品名称不能为空，请填写！");
+	      alert("商品名称不能为空，请填写！");
 	      return;
 	   }
 	   if(document.getElementById("product_wxlx").value=="")
@@ -83,7 +83,7 @@ if(null==wxcldProducts)
 	   }
 	   if(document.getElementById("product_serial_num").value=="")
 	   {
-	      alert("产品序列号不能为空，请填写！");
+	      alert("商品序列号不能为空，请填写！");
 	      return;
 	   }
 	   if(document.getElementById("w_isfy").value=="是")
@@ -365,15 +365,15 @@ if(null==wxcldProducts)
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td colspan="2">维修产品信息</td>
+		<td colspan="2">维修商品信息</td>
 	</tr>
 	</thead>
 </table>
 <table width="100%"  align="center" id="lsdtable"  class="chart_list" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td>产品名称</td>
-		<td>产品规格</td> 
+		<td>商品名称</td>
+		<td>商品规格</td> 
 		<td>故障类型</td>
 		<td>购买天数</td>
 		<td>处理方式</td>	

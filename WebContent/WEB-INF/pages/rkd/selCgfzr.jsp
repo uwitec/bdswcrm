@@ -112,7 +112,7 @@ String position = ParameterUtility.getStringParameter(request,"position", "");
 	while(it.hasNext()){
 		Map map = (Map)it.next();
 	%>
-	<tr class="a1" onmouseover="this.className='a2';" onmouseout="this.className='a1';" title="左键单击选择产品" onclick="sel('<%=map.get("user_id") %>','<%=map.get("real_name")%>');">		
+	<tr class="a1" onmouseover="this.className='a2';" onmouseout="this.className='a1';" title="左键单击选择商品" onclick="sel('<%=map.get("user_id") %>','<%=map.get("real_name")%>');">		
 		<td><%=StringUtils.nullToStr(map.get("gh")) %></td>
 		<td><%=StringUtils.nullToStr(map.get("real_name")) %></td>
 		<td><%=StringUtils.nullToStr(map.get("sex")) %></td>

@@ -31,11 +31,11 @@ Shkc shkc = (Shkc)VS.findValue("shkc");
 		<td class="a2" width="75%"><%=StringUtils.nullToStr(shkc.getQz_serial_num())%></td>		
 	</tr>
 	<tr>
-		<td class="a1" width="25%">产品名称</td>
+		<td class="a1" width="25%">商品名称</td>
 		<td class="a2" width="75%"><%=StringUtils.nullToStr(shkc.getProduct_name())%></td>
 	</tr>
 	<tr>
-		<td class="a1" width="25%">产品规格</td>
+		<td class="a1" width="25%">商品规格</td>
 		<td class="a2" width="75%"><%=StringUtils.nullToStr(shkc.getProduct_xh())%></td>
 	</tr> 
 	<tr>

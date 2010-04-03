@@ -94,7 +94,7 @@ if(!serialNums.equals("")){
 		dwrService.serialNumIsExist(obj.value,checkProduct);		
 	}
 	
-	//对返回的产品进行校验
+	//对返回的商品进行校验
 	function checkProduct(flag){
 		if(flag == "true"){
 			alert("库存在已经存在该序列号，序列号不能重复，请检查!");

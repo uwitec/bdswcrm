@@ -97,7 +97,7 @@
 <table width="100%"  align="center" id="cxdTable" class="chart_list" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td width="30%">产品名称</td>
+		<td width="30%">商品名称</td>
 		<td width="15%">规格</td>
 		<td width="6%">单位</td>
 		<td width="10%">单价</td>

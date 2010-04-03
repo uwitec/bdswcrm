@@ -50,15 +50,15 @@ List wxrkdProducts=(List)VS.findValue("wxrkdProducts");
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td colspan="2">维修产品信息</td>
+		<td colspan="2">维修商品信息</td>
 	</tr>
 	</thead>
 </table>
 <table width="100%"  align="center" id="wxrkdtable"  class="chart_list" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td>产品名称</td>
-		<td>产品规格</td> 
+		<td>商品名称</td>
+		<td>商品规格</td> 
 		<td>目标库</td>
 		<td>数量</td>
 		<td>序列号</td>

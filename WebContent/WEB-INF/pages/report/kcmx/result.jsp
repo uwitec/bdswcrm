@@ -27,7 +27,7 @@ if(!store_id.equals("")){
 	conStr += "&nbsp;&nbsp;<b>库房：</b>" + StaticParamDo.getStoreNameById(store_id);
 }
 if(!kind_name.equals("")){
-	conStr += "&nbsp;&nbsp;<b>产品类别：</b>" + kind_name;
+	conStr += "&nbsp;&nbsp;<b>商品类别：</b>" + kind_name;
 }
 %>
 
@@ -86,7 +86,7 @@ if(productKcList != null && productKcList.size()>0){
 		String dw = StringUtils.nullToStr(map.get("dw"));
 		
 		
-		//根据产品编号、开始时间、库房编号取库存期初情况
+		//根据商品编号、开始时间、库房编号取库存期初情况
 		Map qcMap = kcMxReportService.getKcqcMxMap(product_id,start_date,store_id);
 		
 		String strNums = "0";   //期初数

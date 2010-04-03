@@ -28,7 +28,7 @@ if(!product_kind.equals("")){
 			
 		}
 	}
-	conStr += "&nbsp;&nbsp;<b>产品类别：</b>" + kind_name;
+	conStr += "&nbsp;&nbsp;<b>商品类别：</b>" + kind_name;
 }
 if(!store_id.equals("")){
 	conStr += "&nbsp;&nbsp;<b>库房：</b>" + StaticParamDo.getStoreNameById(store_id);
@@ -67,7 +67,7 @@ if(!store_id.equals("")){
 			<TD class=ReportHead nowrap="nowrap">考核成本</TD>
 			<TD class=ReportHead nowrap="nowrap">比例点杀</TD>
 			<TD class=ReportHead nowrap="nowrap">金额点杀</TD>
-			<TD class=ReportHead nowrap="nowrap">产品卖点</TD>
+			<TD class=ReportHead nowrap="nowrap">商品卖点</TD>
 		</TR>
 	</THEAD>
 	<TBODY>

@@ -44,15 +44,15 @@ Product product = (Product)VS.findValue("product");
 	</tr>
 	</thead>
 	<tr>
-		<td class="a1">产品编号</td>
+		<td class="a1">商品编号</td>
 		<td class="a2"><%=StringUtils.nullToStr(product.getProductId()) %></td>	
 	</tr>
 	<tr>
-		<td class="a1">产品名称</td>
+		<td class="a1">商品名称</td>
 		<td class="a2"><%=StringUtils.nullToStr(product.getProductName()) %></td>	
 	</tr>
 	<tr>
-		<td class="a1">产品规格</td>
+		<td class="a1">商品规格</td>
 		<td class="a2"><%=StringUtils.nullToStr(product.getProductXh()) %></td>	
 	</tr>
 	<tr>

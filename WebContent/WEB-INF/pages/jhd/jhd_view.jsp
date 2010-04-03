@@ -73,14 +73,14 @@ Jhd jhd = (Jhd)VS.findValue("Jhd");
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td colspan="2">产品详细信息</td>
+		<td colspan="2">商品详细信息</td>
 	</tr>
 	</thead>
 </table>
 <table width="100%"  align="center" id="jhtable"  class="chart_list" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td width="30%">产品名称</td>
+		<td width="30%">商品名称</td>
 		<td width="30%">规格</td>
 		<td width="10%">进货价格</td>
 		<td width="5%">数量</td>

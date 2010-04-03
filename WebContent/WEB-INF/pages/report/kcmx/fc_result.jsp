@@ -29,7 +29,7 @@ if(!product_kind.equals("")){
 			
 		}
 	}
-	conStr += "&nbsp;&nbsp;<b>产品类别：</b>" + kind_name;
+	conStr += "&nbsp;&nbsp;<b>商品类别：</b>" + kind_name;
 }
 if(!store_id.equals("")){
 	conStr += "&nbsp;&nbsp;<b>库房：</b>" + StaticParamDo.getStoreNameById(store_id);

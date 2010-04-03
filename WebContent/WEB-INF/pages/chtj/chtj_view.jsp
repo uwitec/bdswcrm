@@ -42,14 +42,14 @@ List chtjDescs = (List)VS.findValue("chtjDesc");
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td colspan="2">产品明细</td>
+		<td colspan="2">商品明细</td>
 	</tr>
 	</thead>
 </table>
 <table width="100%"  align="center" id="kcpdDescTable"  class="chart_list" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td>产品名称</td>
+		<td>商品名称</td>
 		<td>规格</td>
 		<td>原价格</td>
 		<td>调整后价格</td>

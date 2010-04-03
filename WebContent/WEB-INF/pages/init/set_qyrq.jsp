@@ -51,7 +51,7 @@
 			</td>			
 		</tr>
 		<tr>
-			<td class="a2"><b>第二步</b>、维护产品基础数据，包括产品分类及产品资料，要维护产品基础数请点击“产品维护”链接。&nbsp;<a href="javascript:void(0);" onclick="parent.addtabFmMenu('产品维护','product.html','');">产品维护</a></td>			
+			<td class="a2"><b>第二步</b>、维护商品基础数据，包括商品分类及商品资料，要维护商品基础数请点击“商品维护”链接。&nbsp;<a href="javascript:void(0);" onclick="parent.addtabFmMenu('商品维护','product.html','');">商品维护</a></td>			
 		</tr>
 		<tr>
 			<td class="a2"><b>第三步</b>、录入员工信息，要录入员工信息请点击“员工管理”链接。&nbsp;<a href="javascript:void(0);" onclick="parent.addtabFmMenu('员工管理','showEmployeeFrame.html','');">员工管理</a></td>			
@@ -84,7 +84,7 @@
 			<td class="a2"><b>第九步</b>、往来初始，要维护往来初始信息请点击“往来初始”链接。&nbsp;<a href="javascript:void(0);" onclick="parent.addtabFmMenu('往来初始','listClientWlInit.html','');">往来初始</a></td>			
 		</tr>
 		<tr>
-			<td class="a2"><b>第十步</b>、初始化产品库存，要初始化产品库存信息请点击“库存初始”链接，库存初始可以与系统启用同步进行。&nbsp;<a href="javascript:void(0);" onclick="parent.addtabFmMenu('库存初始','listInit.html','');">库存初始</a></td>			
+			<td class="a2"><b>第十步</b>、初始化商品库存，要初始化商品库存信息请点击“库存初始”链接，库存初始可以与系统启用同步进行。&nbsp;<a href="javascript:void(0);" onclick="parent.addtabFmMenu('库存初始','listInit.html','');">库存初始</a></td>			
 		</tr>
 		<tr>
 			<td class="a2"><b>第十一步</b>、完成所有初始化工作，要完成系统初始工作请点击“完成初始化”链接。&nbsp;

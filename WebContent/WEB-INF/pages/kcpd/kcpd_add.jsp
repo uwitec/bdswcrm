@@ -139,7 +139,7 @@ String user_id = info.getUser_id();
 		var destination = "selKcProc.html?store_id=" + document.getElementById("store_id").value;
 		var fea ='width=850,height=500,left=' + (screen.availWidth-850)/2 + ',top=' + (screen.availHeight-500)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
-		window.open(destination,'选择库存产品',fea);	
+		window.open(destination,'选择库存商品',fea);	
 	}
 	function openywyWin()
 	{
@@ -183,7 +183,7 @@ String user_id = info.getUser_id();
 			}
 		}
 		if(k != 1){
-			alert("请选择产品明细，且只能选择一条信息！");
+			alert("请选择商品明细，且只能选择一条信息！");
 			return;
 		}
 		
@@ -255,7 +255,7 @@ String user_id = info.getUser_id();
 	<thead>
 	<tr>
 		<td>选择</td>
-		<td>产品名称</td>
+		<td>商品名称</td>
 		<td>规格</td>
 		<td>库存数量</td>
 		<td>实际数量</td>
@@ -285,7 +285,7 @@ for(int i=0;i<3;i++){
 <table width="100%"  align="center" class="chart_info" cellpadding="0" cellspacing="0">
 	<tr height="35">
 		<td class="a2" colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="button" name="button1" value="添加库存产品" class="css_button3" onclick="openWin();">
+			<input type="button" name="button1" value="添加库存商品" class="css_button3" onclick="openWin();">
 			<input type="button" name="button8" value="清除明细信息" class="css_button4" onclick="delDesc();">
 		</td>
 	</tr>

@@ -33,15 +33,15 @@ List results = (List)VS.findValue("jjdProducts");
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td colspan="2">接件单产品明细</td>
+		<td colspan="2">接件单商品明细</td>
 	</tr>
 	</thead>
 </table>
 <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0" border="1" id="selTable">
 	<thead>
 	<tr>
-		<td width="20%">产品名称</td>
-		<td width="15%">产品规格</td>		 
+		<td width="20%">商品名称</td>
+		<td width="15%">商品规格</td>		 
 		<td width="10%">数量</td>	 
 		<td width="25%">序列号</td>
 		<td width="10%">备注</td>

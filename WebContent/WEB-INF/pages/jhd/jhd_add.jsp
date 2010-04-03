@@ -328,7 +328,7 @@ Jhd jhd = (Jhd)VS.findValue("jhd");
 			}
 		}
 		if(k != 1){
-			alert("请选择产品明细，且只能选择一条信息！");
+			alert("请选择商品明细，且只能选择一条信息！");
 			return;
 		}
 		
@@ -450,7 +450,7 @@ Jhd jhd = (Jhd)VS.findValue("jhd");
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td colspan="2">产品详细信息</td>
+		<td colspan="2">商品详细信息</td>
 	</tr>
 	</thead>
 </table>
@@ -458,7 +458,7 @@ Jhd jhd = (Jhd)VS.findValue("jhd");
 	<thead>
 	<tr>
 		<td width="5%">选择</td>
-		<td width="25%">产品名称</td>
+		<td width="25%">商品名称</td>
 		<td width="25%">规格</td>
 		<td width="10%">采购价格</td>
 		<td width="10%">数量</td>
@@ -488,8 +488,8 @@ for(int i=0;i<3;i++){
 <table width="100%"  align="center" class="chart_info" cellpadding="0" cellspacing="0">
 	<tr height="35">
 		<td class="a2" colspan="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="button" name="button1" value="添加产品" class="css_button3" onclick="openWin();">
-			<input type="button" name="button8" value="清除产品" class="css_button3" onclick="delDesc();">
+			<input type="button" name="button1" value="添加商品" class="css_button3" onclick="openWin();">
+			<input type="button" name="button8" value="清除商品" class="css_button3" onclick="delDesc();">
 		</td>
 	</tr>
 </table>

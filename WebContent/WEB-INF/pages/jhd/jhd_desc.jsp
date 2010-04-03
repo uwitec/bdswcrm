@@ -34,14 +34,14 @@ List results = (List)VS.findValue("jhdProducts");
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td colspan="2">采购定单产品明细</td>
+		<td colspan="2">采购定单商品明细</td>
 	</tr>
 	</thead>
 </table>
 <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0" border="1" id="selTable">
 	<thead>
 	<tr>
-		<td width="35%">产品名称</td>
+		<td width="35%">商品名称</td>
 		<td width="30%">规格</td>
 		<td width="10%">采购价格</td>
 		<td width="10%">数量</td>

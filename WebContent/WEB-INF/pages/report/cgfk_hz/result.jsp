@@ -120,7 +120,7 @@ if(cgfkMxList != null && cgfkMxList.size() > 0){
 <br>
 <table width="99%">
 		<tr>
-			<td width="70%" height="30">注：点击产品编号可查看原始单据列表。</td>
+			<td width="70%" height="30">注：点击商品编号可查看原始单据列表。</td>
 			<td colspan="2" align="right" height="30">生成报表时间：<%=DateComFunc.getToday() %>&nbsp;&nbsp;&nbsp;</td>
 		</tr>
 </table>

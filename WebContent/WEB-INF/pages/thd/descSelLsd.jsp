@@ -148,7 +148,7 @@ String id = (String)VS.findValue("id");
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td colspan="2">选择退货产品明细</td>
+		<td colspan="2">选择退货商品明细</td>
 	</tr>
 	</thead>
 </table>
@@ -156,7 +156,7 @@ String id = (String)VS.findValue("id");
 	<thead>
 	<tr>
 		<td><input type="checkbox" name="allCheck" onclick="selectAll();"></td>
-		<td>产品名称</td>
+		<td>商品名称</td>
 		<td>规格</td>
 		<td>采购价格</td>
 		<td>数量</td>

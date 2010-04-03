@@ -40,14 +40,14 @@ List results = (List)VS.findValue("fhkhdProducts");
 <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0" border="1" id="selTable">
 	<thead>
 	<tr>
-		<td width="15%">产品名称</td>	
-		<td width="15%">产品规格</td>
+		<td width="15%">商品名称</td>	
+		<td width="15%">商品规格</td>
 		<td width="6%">仓库</td>
 		<td width="5%">单价</td>
 		<td width="4%">数量</td>	
 		<td width="5%">小计</td>
 		<td width="12%">强制序列号</td>
-		<td width="15%">产品附件</td>
+		<td width="15%">商品附件</td>
 		<td width="15%">备注</td>		
 	</tr>
 	</thead>

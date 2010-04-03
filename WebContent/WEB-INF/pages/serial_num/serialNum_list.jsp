@@ -54,7 +54,7 @@
 			序列号：
 			<ww:textfield theme="simple" name="serial_num" id="serial_num" value="%{serial_num}"/> 
 			&nbsp;&nbsp;		
-			产品名称：
+			商品名称：
 			<ww:textfield theme="simple" name="product_name" id="product_name" value="%{product_name}"/> 
 			&nbsp;&nbsp;
 			状态：
@@ -71,8 +71,8 @@
 	<thead>
 	<tr>
 		<td>序列号</td>
-		<td>产品名称</td>	
-		<td>产品规格</td>
+		<td>商品名称</td>	
+		<td>商品规格</td>
 		<td>状态</td>
 		<td>所在库房</td>
 		<td>是否样机</td>

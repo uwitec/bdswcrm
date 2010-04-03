@@ -53,7 +53,7 @@
 			<input type="hidden" name="clientId" id="client_id" value="">
 			<div id="clientsTip" style="height:12px;position:absolute;left:160px; top:85px; width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>			
 		</td>	
-		<td class="a1">显示产品明细</td>
+		<td class="a1">显示商品明细</td>
 		<td class="a4">
 			<input type="radio" name="flag" id="flag" value="1"> 是
 			<input type="radio" name="flag" id="flag" value="0" checked> 否

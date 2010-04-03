@@ -93,33 +93,33 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 		}
 		if(counts==0)
 		{
-		  alert("换件产品不能为空，请填写！");
+		  alert("换件商品不能为空，请填写！");
 		  return;
 		}
 		
-		//判断是否存在强制输入序列号的产品没有输入序列号
+		//判断是否存在强制输入序列号的商品没有输入序列号
 		for(var i=0;i<allCount;i++)
 		{				  
 			var oqzserialnum = document.getElementById("oqz_serial_num_" + i); //序列号
-			var pn = document.getElementById("product_name_" + i);           //产品名称			 
+			var pn = document.getElementById("product_name_" + i);           //商品名称			 
 			var nqzserialnum= document.getElementById("nqz_serial_num_" + i); //序列号
 			if(pn.value!="")
 			{
 			    if(oqzserialnum.value == ""){
 						//如果没有输入序列号提示用户输入序列号
-				alert("产品" + pn.value + "强制旧序列号，请先输入序列号！");
+				alert("商品" + pn.value + "强制旧序列号，请先输入序列号！");
 				oqzserialnum.focus();
 				return;
 				}
 			   				 
 			   if(nqzserialnum.value == ""){
 						//如果没有输入序列号提示用户输入序列号
-				alert("产品" + pn.value + "强制新序列号，请先输入序列号！");
+				alert("商品" + pn.value + "强制新序列号，请先输入序列号！");
 				nqzserialnum.focus();
 				return;
 				}					
 				else if(nqzserialnum.value ==oqzserialnum.value)  {											 
-				alert("产品" + pn.value + "输入的新序列号与旧序列号重复 ，请检查！");
+				alert("商品" + pn.value + "输入的新序列号与旧序列号重复 ，请检查！");
 				nqzserialnum.focus();
 				return;
 				}
@@ -187,7 +187,7 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 			tr.removeNode(true);
 	}     
 
-	//选择好件库产品
+	//选择好件库商品
 	function openWin(id)
 	{
 		var destination = "selHjdProcKc.html?openerId="+id;
@@ -219,7 +219,7 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 		 
 		
 		if(pn == ""){
-			alert("请选择产品，再输入序列号！");
+			alert("请选择商品，再输入序列号！");
 			return;
 		} 		
 		var url = "importHjSerial.html?openerId="+vl;
@@ -244,7 +244,7 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 		dwrService.getProductObjBySerialNum(serialNum,setProductInfo);		
 	}
 	
-	//处理返回产品对象
+	//处理返回商品对象
 	function setProductInfo(product){
 		if(product != null && product.productId != null){
 			var flag = false;
@@ -257,7 +257,7 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 						var vl = dwr.util.getValue("qz_serial_num_" + i); //已有的序列号
 						var vl2 = dwr.util.getValue("s_nums");    //输入的序列号
 						if(vl.indexOf(vl2) != -1){
-							alert("产品列表中已存在该序列号，请检查！");
+							alert("商品列表中已存在该序列号，请检查！");
 							break;
 						}
 						
@@ -301,7 +301,7 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 			}
 		}
 		if(k != 1){
-			alert("请选择产品明细，且只能选择一条信息！");
+			alert("请选择商品明细，且只能选择一条信息！");
 			return;
 		}
 		
@@ -347,13 +347,13 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td colspan="2">产品详细信息</td>
+		<td colspan="2">商品详细信息</td>
 	</tr>
 	</thead>
 	 
 	<tr height="35">
 		<td class="a2" colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;输入序列号：<input type="text" name="s_nums" value="" onkeypress="javascript:f_enter()">
-			注：输入产品序列号回车，可自动提取产品信息到产品列表中
+			注：输入商品序列号回车，可自动提取商品信息到商品列表中
 		</td>
 	</tr>		
 </table>
@@ -361,7 +361,7 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 	<thead>
 	<tr>
 	    <td width="5%">选择</td>
-		<td width="20%">产品名称</td>
+		<td width="20%">商品名称</td>
 		<td width="20%">规格</td>
 		<td width="15%">旧序列号</td>
 		<td width="15%">新序列号</td>
@@ -427,8 +427,8 @@ else
 <table>
   <tr height="35">
 		<td class="a2" colspan="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="button" name="button1" value="添加产品" class="css_button3" onclick="openWin();">
-			<input type="button" name="button8" value="清除产品" class="css_button3" onclick="delDesc();">
+			<input type="button" name="button1" value="添加商品" class="css_button3" onclick="openWin();">
+			<input type="button" name="button8" value="清除商品" class="css_button3" onclick="delDesc();">
 		</td>	 
 	</tr>
 </table> 

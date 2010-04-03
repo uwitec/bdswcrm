@@ -64,9 +64,9 @@ if(!product_xh.equals("")){
 <TABLE align="center" cellSpacing=0 cellPadding=0 width="99%" border=0 style="BORDER-TOP: #000000 2px solid;BORDER-LEFT:#000000 1px solid">
 	<THEAD>
 		<TR>
-			<TD class=ReportHead>产品编码</TD>
-			<TD class=ReportHead>产品名称</TD>
-			<TD class=ReportHead>产品规格</TD>
+			<TD class=ReportHead>商品编码</TD>
+			<TD class=ReportHead>商品名称</TD>
+			<TD class=ReportHead>商品规格</TD>
 			<TD class=ReportHead>数量</TD>
 			<TD class=ReportHead>金额</TD>		
 		</TR>
@@ -119,7 +119,7 @@ if(list != null && list.size()>0){
 <br>
 <table width="99%">
 		<tr>
-			<td width="70%" height="30">注：点击产品编号可查看原始单据列表。</td>
+			<td width="70%" height="30">注：点击商品编号可查看原始单据列表。</td>
 			<td colspan="2" align="right" height="30">生成报表时间：<%=DateComFunc.getToday() %>&nbsp;&nbsp;&nbsp;</td>
 		</tr>
 </table>

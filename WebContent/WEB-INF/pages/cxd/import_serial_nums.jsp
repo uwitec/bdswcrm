@@ -97,7 +97,7 @@ if(!serialNums.equals("")){
 		dwrService.productIsExist(obj.value,'<%=product_id %>',checkProduct);		
 	}
 	
-	//对返回的产品进行校验
+	//对返回的商品进行校验
 	function checkProduct(flag){
 		if(flag == "false"){
 			alert("序列号不存在，请检查!");

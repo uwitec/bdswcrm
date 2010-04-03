@@ -17,7 +17,7 @@ String product_name = ParameterUtility.getStringParameter(request,"product_name"
 
 <html>
 <head>
-<title>产品列表</title>
+<title>商品列表</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language='JavaScript' src="js/date.js"></script>
@@ -121,11 +121,11 @@ String product_name = ParameterUtility.getStringParameter(request,"product_name"
 <input type="hidden" name="chk_id" value="">
 <table width="100%"  align="center"class="chart_list" cellpadding="0" cellspacing="0">
 	<tr>
-		<td class="csstitle" align="left" width="100%">&nbsp;&nbsp;&nbsp;&nbsp;<b>选择产品</b></td>			
+		<td class="csstitle" align="left" width="100%">&nbsp;&nbsp;&nbsp;&nbsp;<b>选择商品</b></td>			
 	</tr>
 	<tr>
 		<td class="search" align="left" colspan="2">&nbsp;&nbsp;
-			产品名称：<input type="text" name="product_name" value="<%=product_name %>" size="20">&nbsp;&nbsp;
+			商品名称：<input type="text" name="product_name" value="<%=product_name %>" size="20">&nbsp;&nbsp;
 			规格：<input type="text" name="product_xh" value="<%=product_xh %>" size="20">&nbsp;&nbsp;
 			<input type="submit" name="buttonCx" value=" 查询 " class="css_button">
 			<input type="button" name="buttonQk" value=" 清空 " class="css_button" onclick="clearAll();">
@@ -136,7 +136,7 @@ String product_name = ParameterUtility.getStringParameter(request,"product_name"
 	<thead>
 	<tr>
 		<td><input type="checkbox" name="allCheck" onclick="selectAll();"></td>	
-		<td>产品名称</td>
+		<td>商品名称</td>
 		<td>规格</td>		
 		<td>库存数量</td>
 		<td>成本价</td>

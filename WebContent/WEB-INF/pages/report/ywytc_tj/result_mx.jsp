@@ -49,7 +49,7 @@ if(!user_id.equals("")){
 			<TD class=ReportHead width="100">单据号</TD>
 			<TD class=ReportHead width="50">类型</TD>
 			<TD class=ReportHead width="120">客户</TD>
-			<TD class=ReportHead>产品名称</TD>
+			<TD class=ReportHead>商品名称</TD>
 			<TD class=ReportHead>型号</TD>
 			<TD class=ReportHead>数量</TD>		
 			<TD class=ReportHead>考核毛利</TD>	

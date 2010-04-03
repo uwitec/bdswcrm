@@ -128,14 +128,14 @@ List lsdProducts = (List)VS.findValue("lsdProducts");
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td colspan="2">产品详细信息</td>
+		<td colspan="2">商品详细信息</td>
 	</tr>
 	</thead>
 </table>
 <table width="100%"  align="center" id="lsdtable"  class="chart_list" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td>产品名称</td>
+		<td>商品名称</td>
 		<td>规格</td>
 		<td>销售价格</td>
 		<td>数量</td>
@@ -217,16 +217,12 @@ if(lsdProducts != null && lsdProducts.size()>0){
 		<td class="a2" id="sh2" style="display:none"><%=StringUtils.nullToStr(lsd.getSh()) %></td>		
 	</tr>
 	<tr>
-	<tr>
 		<td class="a1" width="15%">发票信息摘要</td>
-		<td class="a2" colspan="3">
-			<textarea rows="2" name="lsd.fpxx" id="fpxx" style="width:75%" readonly><%=StringUtils.nullToStr(lsd.getFpxx()) %></textarea>
-		</td>	
-				
+		<td class="a2" colspan="3"><%=StringUtils.nullToStr(lsd.getFpxx()) %></td>	
 	</tr>
 	<tr>
 		<td class="a1" width="15%">描述信息</td>
-		<td class="a2" width="85%" colspan="3" name="lsd.ms" id="ms" readonly><%=StringUtils.nullToStr(lsd.getMs()) %></td>
+		<td class="a2" width="85%" colspan="3"><%=StringUtils.nullToStr(lsd.getMs()) %></td>
 	</tr>			
 	<tr height="35">
 		<td class="a1" colspan="4">
@@ -234,6 +230,6 @@ if(lsdProducts != null && lsdProducts.size()>0){
 		</td>
 	</tr>
 </table>
-
+<BR>
 </body>
 </html>

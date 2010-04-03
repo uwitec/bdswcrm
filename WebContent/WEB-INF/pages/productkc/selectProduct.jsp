@@ -16,7 +16,7 @@ String product_kind_id = ParameterUtility.getStringParameter(request, "product_k
 
 <html>
 <head>
-<title>选择产品</title>
+<title>选择商品</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <link href="tree/menu.css" rel="stylesheet" type="text/css">
@@ -51,7 +51,7 @@ function sel(product_id,product_xh,product_name,price,prop){
 
 <table width="100%" border="0" align="center" class="chart_list" cellpadding="0" cellspacing="0">
 	<tr>
-		<td class="csstitle">&nbsp;&nbsp;&nbsp;&nbsp;<b>选择产品</b></td>
+		<td class="csstitle">&nbsp;&nbsp;&nbsp;&nbsp;<b>选择商品</b></td>
 	</tr>
 </table>
 
@@ -77,12 +77,12 @@ function sel(product_id,product_xh,product_name,price,prop){
 		<table width="100%"  align="center"  class="chart_list" border="1" cellpadding="0" cellspacing="0">
 			<thead>
 			<tr>
-				<td>产品型号</td>
-				<td>产品名称</td>
-				<td>所属产品组</td>
+				<td>商品型号</td>
+				<td>商品名称</td>
+				<td>所属商品组</td>
 				<td>供应商名称</td>
 				<td>成本价</td>
-				<td>产品属性</td>
+				<td>商品属性</td>
 			</tr>
 			</thead>
 			<%

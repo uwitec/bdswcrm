@@ -81,32 +81,32 @@ session.removeAttribute("messages");
 		}
 		if(counts==0)
 		{
-		  alert("换件产品不能为空，请填写！");
+		  alert("换件商品不能为空，请填写！");
 		  return;
 		}
 		
-		//判断是否存在强制输入序列号的产品没有输入序列号
+		//判断是否存在强制输入序列号的商品没有输入序列号
 		for(var i=0;i<allCount;i++){				  
 			var oqzserialnum = document.getElementById("oqz_serial_num_" + i); //序列号
-			var pn = document.getElementById("product_name_" + i);           //产品名称			 
+			var pn = document.getElementById("product_name_" + i);           //商品名称			 
 			var nqzserialnum= document.getElementById("nqz_serial_num_" + i); //序列号
 			if(pn.value!="")
 			{
 			    if(oqzserialnum.value == ""){
 						//如果没有输入序列号提示用户输入序列号
-				alert("产品" + pn.value + "强制旧序列号，请先输入序列号！");
+				alert("商品" + pn.value + "强制旧序列号，请先输入序列号！");
 				oqzserialnum.focus();
 				return;
 				}
 			   				 
 			   if(nqzserialnum.value == ""){
 						//如果没有输入序列号提示用户输入序列号
-				alert("产品" + pn.value + "强制新序列号，请先输入序列号！");
+				alert("商品" + pn.value + "强制新序列号，请先输入序列号！");
 				nqzserialnum.focus();
 				return;
 				}					
 				else if(nqzserialnum.value ==oqzserialnum.value)  {											 
-				alert("产品" + pn.value + "输入的新序列号与旧序列号重复 ，请检查！");
+				alert("商品" + pn.value + "输入的新序列号与旧序列号重复 ，请检查！");
 				nqzserialnum.focus();
 				return;
 				}
@@ -171,7 +171,7 @@ session.removeAttribute("messages");
 			tr.removeNode(true);
 	}     
 
-	//选择好件库产品
+	//选择好件库商品
 	function openWin(id)
 	{
 		var destination = "selHjdProcKc.html?openerId="+id;
@@ -203,7 +203,7 @@ session.removeAttribute("messages");
 		 
 		
 		if(pn == ""){
-			alert("请选择产品，再输入序列号！");
+			alert("请选择商品，再输入序列号！");
 			return;
 		} 		
 		var url = "importHjSerial.html?openerId="+vl;
@@ -228,7 +228,7 @@ session.removeAttribute("messages");
 		dwrService.getProductObjBySerialNum(serialNum,setProductInfo);		
 	}
 	
-	//处理返回产品对象
+	//处理返回商品对象
 	function setProductInfo(product){
 		if(product != null && product.productId != null){
 			var flag = false;
@@ -241,7 +241,7 @@ session.removeAttribute("messages");
 						var vl = dwr.util.getValue("qz_serial_num_" + i); //已有的序列号
 						var vl2 = dwr.util.getValue("s_nums");    //输入的序列号
 						if(vl.indexOf(vl2) != -1){
-							alert("产品列表中已存在该序列号，请检查！");
+							alert("商品列表中已存在该序列号，请检查！");
 							break;
 						}
 						
@@ -285,7 +285,7 @@ session.removeAttribute("messages");
 			}
 		}
 		if(k != 1){
-			alert("请选择产品明细，且只能选择一条信息！");
+			alert("请选择商品明细，且只能选择一条信息！");
 			return;
 		}
 		
@@ -332,7 +332,7 @@ session.removeAttribute("messages");
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td colspan="2">产品详细信息</td>
+		<td colspan="2">商品详细信息</td>
 	</tr>
 	</thead>
 	 	
@@ -340,7 +340,7 @@ session.removeAttribute("messages");
 <table width="100%"  align="center" id="hjdTable"  class="chart_list" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td width="20%">产品名称</td>
+		<td width="20%">商品名称</td>
 		<td width="20%">规格</td>
 		<td width="15%">旧序列号</td>
 		<td width="20%">新序列号</td>

@@ -14,7 +14,7 @@ String end_date = StringUtils.nullToStr(request.getParameter("end_date"));
 String client_name = StringUtils.nullToStr(request.getParameter("client_name"));
 String dj_id = StringUtils.nullToStr(request.getParameter("dj_id"));
 String isShowZ = StringUtils.nullToStr(request.getParameter("isShowZ"));         //是否显示销售额为零客户
-String flag = StringUtils.nullToStr(request.getParameter("flag")); //是否显示产品明细列表0:不显示；1：显示
+String flag = StringUtils.nullToStr(request.getParameter("flag")); //是否显示商品明细列表0:不显示；1：显示
 
 String[] xwTypes = request.getParameterValues("xwType");   //查看的业务类型
 
@@ -57,7 +57,7 @@ List userList = (List)VS.findValue("userList");
 			<TD class=ReportHead>单据号</TD>
 			<TD class=ReportHead>业务类型</TD>
 			<TD class=ReportHead>客户</TD>
-			<TD class=ReportHead>产品名称</TD>
+			<TD class=ReportHead>商品名称</TD>
 			<TD class=ReportHead>型号</TD>
 			<TD class=ReportHead>单价</TD>
 			<TD class=ReportHead>数量</TD>

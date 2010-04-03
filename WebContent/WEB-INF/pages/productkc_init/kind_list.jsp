@@ -11,7 +11,7 @@ String store_id = StringUtils.nullToStr(request.getParameter("store_id"));
 
 <html>
 <head>
-<title>产品分类</title>
+<title>商品分类</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <link href="tree/menu.css" rel="stylesheet" type="text/css">

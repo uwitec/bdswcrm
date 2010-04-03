@@ -71,7 +71,7 @@ if(!store_id.equals("")){
 	</THEAD>
 	<TBODY>
 <%		
-	//根据产品编号、开始时间、库房编号取库存期初情况
+	//根据商品编号、开始时间、库房编号取库存期初情况
 	Map qcMap = kcMxReportService.getKcqcMxMap(product_id,start_date,store_id);
 	
 	String strNums = "0";   //期初数

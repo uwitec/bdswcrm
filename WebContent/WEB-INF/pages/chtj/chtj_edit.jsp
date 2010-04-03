@@ -126,7 +126,7 @@ if(chtjDescs!=null && chtjDescs.size()>0){
 		var destination = "selChProc.html";
 		var fea ='width=850,height=500,left=' + (screen.availWidth-850)/2 + ',top=' + (screen.availHeight-500)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
-		window.open(destination,'选择库存产品',fea);	
+		window.open(destination,'选择库存商品',fea);	
 	}	
 	
 	function openywyWin()
@@ -150,7 +150,7 @@ if(chtjDescs!=null && chtjDescs.size()>0){
 			}
 		}
 		if(k != 1){
-			alert("请选择产品明细，且只能选择一条信息！");
+			alert("请选择商品明细，且只能选择一条信息！");
 			return;
 		}
 		
@@ -201,7 +201,7 @@ if(chtjDescs!=null && chtjDescs.size()>0){
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td colspan="2">产品明细</td>
+		<td colspan="2">商品明细</td>
 	</tr>
 	</thead>
 </table>
@@ -209,7 +209,7 @@ if(chtjDescs!=null && chtjDescs.size()>0){
 	<thead>
 	<tr>
 		<td>选择</td>
-		<td>产品名称</td>
+		<td>商品名称</td>
 		<td>规格</td>
 		<td>原价格</td>
 		<td>调整后价格</td>
@@ -256,7 +256,7 @@ if(chtjDescs!=null && chtjDescs.size()>0){
 <table width="100%"  align="center" class="chart_info" cellpadding="0" cellspacing="0">
 	<tr height="35">
 		<td class="a2" colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="button" name="button1" value="添加明细产品" class="css_button3" onclick="openWin();">
+			<input type="button" name="button1" value="添加明细商品" class="css_button3" onclick="openWin();">
 			<input type="button" name="button8" value="清除明细信息" class="css_button4" onclick="delDesc();">
 		</td>
 	</tr>

@@ -46,8 +46,8 @@ con = "日期：" + start_date + "至" + end_date;
 			<TD class=ReportHead rowspan="2">日期</TD>
 			<TD class=ReportHead rowspan="2">业务类型</TD>
 			<TD class=ReportHead rowspan="2">单据编号</TD>
-			<TD class=ReportHead rowspan="2">产品名称</TD>
-			<TD class=ReportHead rowspan="2">产品规格</TD>
+			<TD class=ReportHead rowspan="2">商品名称</TD>
+			<TD class=ReportHead rowspan="2">商品规格</TD>
 			<TD class=ReportHead rowspan="2">数量</TD>									
 			<TD class=ReportHead colspan="3">应付</TD>
 		</TR>

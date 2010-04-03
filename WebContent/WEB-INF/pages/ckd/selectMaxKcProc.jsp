@@ -124,13 +124,13 @@ String prop = ParameterUtility.getStringParameter(request,"prop", "");
 <input type="hidden" name="chk_id" value="">
 <table width="100%"  align="center"class="chart_list" cellpadding="0" cellspacing="0">
 	<tr>
-		<td class="csstitle" align="left" width="100%">&nbsp;&nbsp;&nbsp;&nbsp;<b>选择库存产品</b></td>			
+		<td class="csstitle" align="left" width="100%">&nbsp;&nbsp;&nbsp;&nbsp;<b>选择库存商品</b></td>			
 	</tr>
 	<tr>
 		<td class="search" align="left" colspan="2">&nbsp;&nbsp;
-			产品名称：<input type="text" name="product_name" value="<%=product_name %>" size="20">&nbsp;&nbsp;
+			商品名称：<input type="text" name="product_name" value="<%=product_name %>" size="20">&nbsp;&nbsp;
 			规格：<input type="text" name="product_xh" value="<%=product_xh %>" size="20">&nbsp;&nbsp;
-			产品属性：<select name="prop">
+			商品属性：<select name="prop">
 				<option value=""></option>
 				<option value="库存商品" <%if(prop.equals("库存商品")) out.print("selected"); %>>库存商品</option>
 				<option value="服务/劳务" <%if(prop.equals("服务/劳务")) out.print("selected"); %>>服务/劳务</option>
@@ -144,7 +144,7 @@ String prop = ParameterUtility.getStringParameter(request,"prop", "");
 	<thead>
 	<tr>
 		<td><input type="checkbox" name="allCheck" onclick="selectAll();"></td>	
-		<td>产品名称</td>
+		<td>商品名称</td>
 		<td>规格</td>		
 		<td>库存数量</td>
 		<td>成本价</td>

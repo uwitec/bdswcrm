@@ -75,7 +75,7 @@ String openerId = ParameterUtility.getStringParameter(request, "openerId","");
 						
 			String vl = StringUtils.nullToStr(map.get("product_id")) + "|" + StringUtils.nullToStr(map.get("product_xh")) + "|" + StringUtils.nullToStr(map.get("product_name")) + "|" +StringUtils.nullToStr(map.get("qz_serial_num")) ;
 	%>
-		<tr class="a1" onmouseover="this.className='a2';" onmouseout="this.className='a1';" title="左键单击选择产品" onclick="sel('<%=StringUtils.nullToStr(map.get("product_id")) %>','<%=StringUtils.nullToStr(map.get("product_xh")) %>','<%=StringUtils.nullToStr(map.get("product_name")) %>','<%=StringUtils.nullToStr(map.get("qz_serial_num")) %>');">	
+		<tr class="a1" onmouseover="this.className='a2';" onmouseout="this.className='a1';" title="左键单击选择商品" onclick="sel('<%=StringUtils.nullToStr(map.get("product_id")) %>','<%=StringUtils.nullToStr(map.get("product_xh")) %>','<%=StringUtils.nullToStr(map.get("product_name")) %>','<%=StringUtils.nullToStr(map.get("qz_serial_num")) %>');">	
 			<td align="left"><%=StringUtils.nullToStr(map.get("product_name")) %></td>
 			<td align="left"><%=StringUtils.nullToStr(map.get("product_xh")) %></td>			
 			<td nowrap><%=StringUtils.nullToStr(map.get("hj_nums")) %></td>

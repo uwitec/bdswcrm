@@ -11,7 +11,7 @@ List results = (List)VS.findValue("results");
 String start_date = StringUtils.nullToStr(request.getParameter("start_date"));  //开始时间
 String end_date = StringUtils.nullToStr(request.getParameter("end_date"));      //结束时间
 String dept_id = StringUtils.nullToStr(request.getParameter("dept_id"));        //部门
-String product_kind = StringUtils.nullToStr(request.getParameter("product_kind")); //产品类别
+String product_kind = StringUtils.nullToStr(request.getParameter("product_kind")); //商品类别
 
 
 String strCon = "";

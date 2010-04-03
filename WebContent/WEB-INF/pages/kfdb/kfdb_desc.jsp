@@ -33,14 +33,14 @@ List results = (List)VS.findValue("kfdbProducts");
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td colspan="2">库房调拨产品明细</td>
+		<td colspan="2">库房调拨商品明细</td>
 	</tr>
 	</thead>
 </table>
 <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0" border="1" id="selTable">
 	<thead>
 	<tr>
-		<td width="20%">产品名称</td>
+		<td width="20%">商品名称</td>
 		<td width="15%">规格</td>
 		<td width="15%">数量</td>
 		<td width="35%">序列号</td>

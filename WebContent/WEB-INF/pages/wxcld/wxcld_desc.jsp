@@ -36,15 +36,15 @@ if(null==results)
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td colspan="2">维修产品详细明细</td>
+		<td colspan="2">维修商品详细明细</td>
 	</tr>
 	</thead>
 </table>
 <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0" border="1" id="selTable">
 	<thead>
 	<tr>
-		<td width="20%">产品名称</td>
-		<td width="10%">产品规格</td>		 		 
+		<td width="20%">商品名称</td>
+		<td width="10%">商品规格</td>		 		 
 		<td width="20%">序列号</td>
 		<td width="10%">处理方式</td>		 		 
 		<td width="20%">故障类型</td>			 

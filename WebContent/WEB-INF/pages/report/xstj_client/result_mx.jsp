@@ -51,7 +51,7 @@ String client_name = StringUtils.nullToStr(request.getParameter("client_name"));
 			<TD class=ReportHead>日期</TD>
 			<TD class=ReportHead>业务类型</TD>
 			<TD class=ReportHead>销售人员</TD>
-			<TD class=ReportHead>产品名称</TD>
+			<TD class=ReportHead>商品名称</TD>
 			<TD class=ReportHead>型号</TD>
 			<TD class=ReportHead>单价</TD>
 			<TD class=ReportHead>数量</TD>
@@ -208,7 +208,7 @@ if(thdList != null && thdList.size()>0){
 <br>
 <table width="99%">
 		<tr>
-			<td width="70%" height="30">注：点击产品编号可查看原始单据列表。</td>
+			<td width="70%" height="30">注：点击商品编号可查看原始单据列表。</td>
 			<td colspan="2" align="right" height="30">生成报表时间：<%=DateComFunc.getToday() %>&nbsp;&nbsp;&nbsp;</td>
 		</tr>
 </table>

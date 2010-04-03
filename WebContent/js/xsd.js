@@ -114,11 +114,11 @@ function openSerialWin(vl){
 	var nm = document.getElementById("nums_" + vl).value;
 	
 	if(pn == ""){
-		alert("请选择产品，再输入序列号！");
+		alert("请选择商品，再输入序列号！");
 		return;
 	}
 	if(nm == "" || nm == "0"){
-		alert("请设置产品数量，再输入序列号！");
+		alert("请设置商品数量，再输入序列号！");
 		return;
 	}
 	
@@ -248,7 +248,7 @@ function delDesc(){
 		}
 	}
 	if(k != 1){
-		alert("请选择产品明细，且只能选择一条信息！");
+		alert("请选择商品明细，且只能选择一条信息！");
 		return;
 	}
 	
@@ -309,7 +309,7 @@ function sendSerialNum(){
 	dwrService.getProductObjBySerialNum(serialNum,setProductInfo);		
 }
 
-//处理返回产品对象
+//处理返回商品对象
 function setProductInfo(product){
 	if(product != null && product.productId != null){
 		var flag = false;
@@ -322,7 +322,7 @@ function setProductInfo(product){
 					var vl = dwr.util.getValue("qz_serial_num_" + i); //已有的序列号
 					var vl2 = dwr.util.getValue("s_nums");    //输入的序列号
 					if(vl.indexOf(vl2) != -1){
-						alert("产品列表中已存在该序列号，请检查！");
+						alert("商品列表中已存在该序列号，请检查！");
 						break;
 					}
 					

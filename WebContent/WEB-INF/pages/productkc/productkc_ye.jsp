@@ -79,7 +79,7 @@ String orderType = (String)VS.findValue("orderType");
 	</tr>
 	<tr>
 		<td class="search" align="left" colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;
-			产品名称：<input type="text" name="product_name" value="<%=product_name %>">&nbsp;&nbsp;&nbsp;&nbsp;
+			商品名称：<input type="text" name="product_name" value="<%=product_name %>">&nbsp;&nbsp;&nbsp;&nbsp;
 			规格：<input type="text" name="product_xh" value="<%=product_xh %>">&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="submit" name="buttonCx" value=" 查询 " class="css_button2">&nbsp;&nbsp;&nbsp;&nbsp;	
 			<input type="button" name="buttonQk" value=" 清空 " class="css_button2" onclick="clearAll();">
@@ -90,10 +90,10 @@ String orderType = (String)VS.findValue("orderType");
 	<thead>
 	<tr>
 		<td>序号</td>
-		<td onclick="doSort('product_name');">产品名称<%if(orderName.equals("product_name")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td onclick="doSort('product_name');">商品名称<%if(orderName.equals("product_name")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
 		<td onclick="doSort('product_xh');">规格<%if(orderName.equals("product_xh")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
 		<td onclick="doSort('gysmc');">供应商名称<%if(orderName.equals("gysmc")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('prop');">产品属性<%if(orderName.equals("prop")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td onclick="doSort('prop');">商品属性<%if(orderName.equals("prop")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
 		<td onclick="doSort('dw');">计量单位<%if(orderName.equals("dw")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
 		<td onclick="doSort('kc_nums');">库存数量<%if(orderName.equals("kc_nums")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
 		<td onclick="doSort('price');">成本价<%if(orderName.equals("price")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
@@ -122,7 +122,7 @@ String orderType = (String)VS.findValue("orderType");
 		}
 		double kcye = price * new Integer(strNums).intValue();
 	%>
-	<tr class="a1" title="双击查看产品库存"  onmousedown="trSelectChangeCss()" onDblClick="openWin('<%=StringUtils.nullToStr(map.get("product_id")) %>');">
+	<tr class="a1" title="双击查看商品库存"  onmousedown="trSelectChangeCss()" onDblClick="openWin('<%=StringUtils.nullToStr(map.get("product_id")) %>');">
 		<td><%=i %></td>
 		<td><%=StringUtils.nullToStr(map.get("product_name")) %></td>
 		<td><%=StringUtils.nullToStr(map.get("product_xh")) %></td>

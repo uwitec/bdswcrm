@@ -172,14 +172,14 @@ Xsd xsd = (Xsd)VS.findValue("xsd");
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td colspan="2">产品详细信息</td>
+		<td colspan="2">商品详细信息</td>
 	</tr>
 	</thead>
 </table>
 <table width="100%"  align="center" id="xsdtable"  class="chart_list" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td width="35%">产品名称</td>
+		<td width="35%">商品名称</td>
 		<td width="35%">规格</td>
 		<td width="10%">销售价格</td>
 		<td width="10%">订单数量</td>

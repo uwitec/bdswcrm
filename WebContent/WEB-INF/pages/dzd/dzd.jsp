@@ -88,7 +88,7 @@ String e_date = StringUtils.nullToStr(VS.findValue("e_date"));
 		<td>交易日期</td>
 		<td>客户名称</td>
 		<td>类型</td>
-		<td>产品型号</td>
+		<td>商品型号</td>
 		<td>单价</td>
 		<td>数量</td>
 		<td>贷方金额</td>

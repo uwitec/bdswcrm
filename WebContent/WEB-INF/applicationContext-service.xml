@@ -25,7 +25,7 @@
     </bean>    
     
     
-    <!-- 产品分类管理 -->
+    <!-- 商品分类管理 -->
     <bean id="productKindService"  parent="baseTransaction">
         <property name="target">
     		<bean class="com.sw.cms.service.ProductKindService" autowire="byName"/>
@@ -33,7 +33,7 @@
     </bean>       
          
     
-    <!-- 产品管理 -->     
+    <!-- 商品管理 -->     
     <bean id="productService"  parent="baseTransaction">
         <property name="target">
     		<bean class="com.sw.cms.service.ProductService" autowire="byName"/>

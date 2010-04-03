@@ -16,7 +16,7 @@ if(obj != null){
 
 <html>
 <head>
-<title>产品信息</title>
+<title>商品信息</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 </head>
@@ -24,11 +24,11 @@ if(obj != null){
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
-		<td colspan="4">产品信息</td>
+		<td colspan="4">商品信息</td>
 	</tr>
 	</thead>	
 	<tr>
-		<td class="a1" width="15%">产品名称</td>
+		<td class="a1" width="15%">商品名称</td>
 		<td class="a2" width="35%"><%=StringUtils.nullToStr(product.getProductName()) %></td>
 		<td class="a1" width="15%">规格</td>
 		<td class="a2" width="35%"><%=StringUtils.nullToStr(product.getProductXh()) %></td>
@@ -82,7 +82,7 @@ if(obj != null){
 		<td class="a2" colspan="3"><%=StringUtils.nullToStr(product.getSp_txm()) %></td>
 	</tr>
 	<tr height="50">
-		<td class="a1">产品描述</td>
+		<td class="a1">商品描述</td>
 		<td class="a2" colspan="3">
 			<textarea rows="3" cols="50" name="ms" style="width:80%" readonly><%=StringUtils.nullToStr(product.getMs()) %></textarea>
 		</td>
