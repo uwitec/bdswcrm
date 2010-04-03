@@ -331,7 +331,7 @@ public class ClientsDAO extends JdbcBaseDAO {
 
 		String sql = "select * from ((" + xsd_sql + ") union (" + thd_sql + ") union (" + jhd_sql + ") union(" + cgthd_sql + ")) x order by cz_date desc";
 		
-		return this.getResultByPage(sql, 1, 6);
+		return this.getResultByPage(sql, 1, 5);
 	}
 	
 	
