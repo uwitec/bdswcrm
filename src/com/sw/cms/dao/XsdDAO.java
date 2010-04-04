@@ -114,7 +114,7 @@ public class XsdDAO extends JdbcBaseDAO {
 		param[21] = xsd.getXjd();
 		param[22] = xsd.getYsje();
 		param[23] = xsd.getZq();
-		param[24] = xsd.getSjcjje();
+		param[24] = xsd.getXsdje();
 		param[25] = xsd.getXsdkhcb();
 		param[26] = xsd.getSp_state();
 		param[27] = xsd.getSp_type();
@@ -212,7 +212,7 @@ public class XsdDAO extends JdbcBaseDAO {
 		param[20] = xsd.getXjd();
 		param[21] = xsd.getYsje();
 		param[22] = xsd.getZq();
-		param[23] = xsd.getSjcjje();
+		param[23] = xsd.getXsdje();
 		param[24] = xsd.getXsdkhcb();
 		param[25] = xsd.getSp_state();
 		param[26] = xsd.getSp_type();
@@ -431,8 +431,8 @@ public class XsdDAO extends JdbcBaseDAO {
 						param[8] = new Double(xsdProduct.getXj());
 						param[9] = new Double(xsdProduct.getCbj());
 						param[10] = xsdProduct.getQz_serial_num();
-						param[11] = xsdProduct.getSjcj_nums();
-						param[12] = xsdProduct.getSjcj_xj();
+						param[11] = xsdProduct.getNums();
+						param[12] = xsdProduct.getXj();
 						param[13] = xsdProduct.getKh_cbj(); 
 						
 						double gf = 0l;
@@ -482,7 +482,7 @@ public class XsdDAO extends JdbcBaseDAO {
 				String sql = "update xsd_product set cbj=" + xsdProduct.getCbj() + 
 						",kh_cbj=" + xsdProduct.getKh_cbj() + ",ds=" + xsdProduct.getDs() + 
 						",ygcbj=" + xsdProduct.getYgcbj() + ",gf=" + xsdProduct.getGf() + 
-						" where id=" + xsdProduct.getId();
+						",sd=" + xsdProduct.getSd() + ",basic_ratio=" + xsdProduct.getBasic_ratio() + ",out_ratio=" + xsdProduct.getOut_ratio() + " where id=" + xsdProduct.getId();
 				
 				this.getJdbcTemplate().update(sql);
 			}

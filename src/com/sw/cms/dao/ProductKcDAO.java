@@ -31,7 +31,7 @@ public class ProductKcDAO extends JdbcBaseDAO {
 	 */
 	public Page getProductKcList(String con,int curPage, int rowsPerPage){
 		
-		String sql = "select a.product_id, a.product_name,a.product_xh,a.gysmc,a.price,a.fxxj,a.lsxj,a.khcbj,a.prop,a.dw,a.lsbj,a.fxbj,a.qz_serial_num,a.gf,a.ygcbj,(select sum(nums) from product_kc b where b.product_id=a.product_id) as kc_nums from product a where 1=1";
+		String sql = "select a.product_id, a.product_name,a.product_xh,a.gysmc,a.price,a.fxxj,a.lsxj,a.khcbj,a.prop,a.dw,a.lsbj,a.fxbj,a.qz_serial_num,a.gf,a.dss,a.ygcbj,(select sum(nums) from product_kc b where b.product_id=a.product_id) as kc_nums from product a where 1=1";
 		if(!con.equals("")){
 			sql = sql + con;
 		}

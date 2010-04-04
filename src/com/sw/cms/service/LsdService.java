@@ -12,6 +12,7 @@ import com.sw.cms.dao.LsyskDAO;
 import com.sw.cms.dao.PosTypeDAO;
 import com.sw.cms.dao.ProductDAO;
 import com.sw.cms.dao.ProductKcDAO;
+import com.sw.cms.dao.ProductSaleFlowDAO;
 import com.sw.cms.dao.QtzcDAO;
 import com.sw.cms.dao.SerialNumDAO;
 import com.sw.cms.dao.SysInitSetDAO;
@@ -25,6 +26,7 @@ import com.sw.cms.model.Lsd;
 import com.sw.cms.model.LsdProduct;
 import com.sw.cms.model.Page;
 import com.sw.cms.model.Product;
+import com.sw.cms.model.ProductSaleFlow;
 import com.sw.cms.model.Qtzc;
 import com.sw.cms.model.SerialNumFlow;
 import com.sw.cms.model.SerialNumMng;
@@ -32,6 +34,7 @@ import com.sw.cms.model.SysMsg;
 import com.sw.cms.model.SysUser;
 import com.sw.cms.model.Xssk;
 import com.sw.cms.model.XsskDesc;
+import com.sw.cms.util.DateComFunc;
 import com.sw.cms.util.StaticParamDo;
 import com.sw.cms.util.StringUtils;
 
@@ -57,6 +60,7 @@ public class LsdService {
 	private SysMsgDAO sysMsgDao;
 	private PosTypeDAO posTypeDao;
 	private QtzcDAO qtzcDao;
+	private ProductSaleFlowDAO productSaleFlowDao;
 	
 	/**
 	 * 获取零售单列表（带分页）
@@ -100,6 +104,9 @@ public class LsdService {
 			//同时处理相关序列号，但只有在系统正式使用后才能处理序列号
 			this.addCkd(lsd, lsdProducts);
 			
+			//添加商品销售流水信息
+			this.addProductSaleFlow(lsd, lsdProducts);
+			
 			//更新商品库存(可能存在负库存)
 			this.updateProductKc(lsd, lsdProducts); //更新商品库存
 			
@@ -142,6 +149,9 @@ public class LsdService {
 			//保存相应出库单信息(状态为已出库)
 			//同时处理相关序列号，但只有在系统正式使用后能处理序列号
 			this.addCkd(lsd, lsdProducts);
+			
+			//添加商品销售流水信息
+			this.addProductSaleFlow(lsd, lsdProducts);
 
 			//更新商品库存
 			this.updateProductKc(lsd, lsdProducts); 
@@ -305,6 +315,87 @@ public class LsdService {
 		}
 		
 		ckdDao.saveCkd(ckd, ckdProducts);
+	}
+	
+	
+	/**
+	 * 根据销售信息生成商品销售流水
+	 * @param lsd
+	 * @param lsdProducts
+	 */
+	public void addProductSaleFlow(Lsd lsd,List lsdProducts){	
+		
+		double sd = lsdDao.getLssd();
+		
+		//提成比例
+		Map tcblMap = getTcbl();
+		double basic_ratio = 0;
+		double out_ratio = 0;
+		double ds_ratio = 0;
+		if(tcblMap != null){
+			basic_ratio = tcblMap.get("basic_ratio")==null?0:((Double)tcblMap.get("basic_ratio")).doubleValue();
+			out_ratio = tcblMap.get("out_ratio")==null?0:((Double)tcblMap.get("out_ratio")).doubleValue();
+			ds_ratio = tcblMap.get("ds_ratio")==null?0:((Double)tcblMap.get("ds_ratio")).doubleValue();
+		}
+		
+		if(lsdProducts != null && lsdProducts.size()>0){
+			for(int i=0;i<lsdProducts.size();i++){
+				LsdProduct lsdProduct = (LsdProduct)lsdProducts.get(i);
+				if(lsdProduct != null && !lsdProduct.getProduct_id().equals("") && !lsdProduct.getProduct_name().equals("")){
+					ProductSaleFlow info = new ProductSaleFlow();
+
+					info.setId(lsd.getId());
+					info.setYw_type("零售单");
+					info.setClient_name(lsd.getClient_name());
+					info.setXsry(lsd.getXsry());
+					info.setCz_date(DateComFunc.getToday());
+					info.setProduct_id(lsdProduct.getProduct_id());
+					info.setNums(lsdProduct.getNums());
+					
+					double gf = 0l;     //比例点杀
+					double ds = 0l;     //金额点杀
+					double lsxj = 0l;   //零售限价
+					double ygcbj = 0l;  //预估成本价
+					double cbj = 0l;    //成本价
+					double khcbj = 0l;  //考核成本价
+					
+					Map map = productDao.getProductInfoById(lsdProduct.getProduct_id());
+					if(map != null){
+						lsxj = map.get("lsxj")==null?0:((Double)map.get("lsxj")).doubleValue();
+						gf = map.get("gf")==null?0:((Double)map.get("gf")).doubleValue();
+						ds = map.get("dss")==null?0:((Double)map.get("dss")).doubleValue();
+						ygcbj = map.get("ygcbj")==null?0:((Double)map.get("ygcbj")).doubleValue();
+						cbj = map.get("price")==null?0:((Double)map.get("price")).doubleValue();
+						khcbj = map.get("khcbj")==null?0:((Double)map.get("khcbj")).doubleValue();
+					}
+					
+					//不含税单价低于零售限价时 点杀需要乘以比例
+					if((lsdProduct.getPrice()/ (1 + sd/100)) < lsxj){
+						ds = ds * ds_ratio/100;
+					}
+					
+					double bhsje = lsdProduct.getXj() / (1 + sd/100);  //不含税金额
+
+					info.setPrice(lsdProduct.getPrice());
+					info.setHjje(lsdProduct.getXj());
+					info.setDwcb(cbj);
+					info.setCb(cbj*lsdProduct.getNums());
+					info.setDwkhcb(khcbj);
+					info.setKhcb(khcbj*lsdProduct.getNums());
+					info.setDwygcb(ygcbj);
+					info.setYgcb(ygcbj*lsdProduct.getNums());
+					info.setSd(sd);
+					info.setBhsje(bhsje);
+					info.setGf(gf);
+					info.setDs(ds*lsdProduct.getNums());
+					info.setBasic_ratio(basic_ratio);
+					info.setOut_ratio(out_ratio);
+					info.setLsxj(lsxj*lsdProduct.getNums());
+					
+					productSaleFlowDao.insertProductSaleFlow(info);
+				}
+			}
+		}
 	}
 	
 	
@@ -754,6 +845,16 @@ public class LsdService {
 
 	public void setQtzcDao(QtzcDAO qtzcDao) {
 		this.qtzcDao = qtzcDao;
+	}
+
+
+	public ProductSaleFlowDAO getProductSaleFlowDao() {
+		return productSaleFlowDao;
+	}
+
+
+	public void setProductSaleFlowDao(ProductSaleFlowDAO productSaleFlowDao) {
+		this.productSaleFlowDao = productSaleFlowDao;
 	}
 
 }

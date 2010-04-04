@@ -2,14 +2,17 @@ package com.sw.cms.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.sw.cms.dao.AccountDzdDAO;
 import com.sw.cms.dao.AccountsDAO;
 import com.sw.cms.dao.CgfkDAO;
 import com.sw.cms.dao.CgthdDAO;
 import com.sw.cms.dao.CkdDAO;
+import com.sw.cms.dao.LsdDAO;
 import com.sw.cms.dao.ProductDAO;
 import com.sw.cms.dao.ProductKcDAO;
+import com.sw.cms.dao.ProductSaleFlowDAO;
 import com.sw.cms.dao.SerialNumDAO;
 import com.sw.cms.dao.StoreDAO;
 import com.sw.cms.dao.SysInitSetDAO;
@@ -20,10 +23,13 @@ import com.sw.cms.model.Ckd;
 import com.sw.cms.model.CkdProduct;
 import com.sw.cms.model.Page;
 import com.sw.cms.model.Product;
+import com.sw.cms.model.ProductSaleFlow;
 import com.sw.cms.model.SerialNumFlow;
 import com.sw.cms.model.SerialNumMng;
+import com.sw.cms.model.Xsd;
 import com.sw.cms.model.XsdProduct;
 import com.sw.cms.model.Xssk;
+import com.sw.cms.util.DateComFunc;
 import com.sw.cms.util.StaticParamDo;
 
 /**
@@ -46,6 +52,8 @@ public class CkdService {
 	private CgfkDAO cgfkDao;
 	private YufukDAO yufukDao;
 	private ProductDAO productDao;
+	private LsdDAO lsdDao;
+	private ProductSaleFlowDAO productSaleFlowDao;
 	
 
 	
@@ -115,23 +123,52 @@ public class CkdService {
 	 */
 	public void updateCkd(Ckd ckd,List ckdProducts){
 		
-		//设置出库单对应商品的成本价
-		List xsdProducts = new ArrayList();
+		//更新出库单
+		ckdDao.updateCkd(ckd, ckdProducts);
 		
-		if(ckdProducts != null && ckdProducts.size()>0){
-			for(int i=0;i<ckdProducts.size();i++){
-				CkdProduct cdkProduct = (CkdProduct)ckdProducts.get(i);
-				if(cdkProduct != null){
-					if(!cdkProduct.getProduct_id().equals("")){
+		if(ckd.getState().equals("已出库")){
+			
+			//税点
+			double sd = lsdDao.getLssd();
+			
+			//提成比例
+			Map tcblMap = lsdDao.getTcbl();
+			double basic_ratio = 0;
+			double out_ratio = 0;
+			double ds_ratio = 0;
+			if(tcblMap != null){
+				basic_ratio = tcblMap.get("basic_ratio")==null?0:((Double)tcblMap.get("basic_ratio")).doubleValue();
+				out_ratio = tcblMap.get("out_ratio")==null?0:((Double)tcblMap.get("out_ratio")).doubleValue();
+				ds_ratio = tcblMap.get("ds_ratio")==null?0:((Double)tcblMap.get("ds_ratio")).doubleValue();
+			}
+			
+			//出库单对应的销售单信息
+			Xsd xsd = (Xsd)xsdDao.getXsd(ckd.getXsd_id());
+			
+			//出库单对应的销售单商品明细
+			List xsdProducts = new ArrayList();
+			if(ckdProducts != null && ckdProducts.size()>0){
+				for(int i=0;i<ckdProducts.size();i++){
+					CkdProduct cdkProduct = (CkdProduct)ckdProducts.get(i);
+					if(cdkProduct != null && !cdkProduct.getProduct_id().equals("")){
 						XsdProduct xsdProduct = (XsdProduct)xsdDao.getXsdProductInfo(ckd.getXsd_id(), cdkProduct.getProduct_id());
 						Product product = (Product)productDao.getProductById(cdkProduct.getProduct_id());
 						
-						//回写出库时的成本价等信息
+						//回写销售订单出库时的成本价等信息
 						xsdProduct.setCbj(product.getPrice());     //成本价
 						xsdProduct.setKh_cbj(product.getKhcbj());  //考核成本价
 						xsdProduct.setYgcbj(product.getYgcbj());   //预估成本价
 						xsdProduct.setGf(product.getGf());         //工分(比例点杀)
-						xsdProduct.setDs(product.getDss());        //金额点杀
+						xsdProduct.setBasic_ratio(basic_ratio);    //基本提成
+						xsdProduct.setOut_ratio(out_ratio);        //超限提成
+						xsdProduct.setSd(sd);
+						
+						//不含税单价低于零售限价时 点杀需要乘以比例
+						double ds = product.getDss();
+						if((xsdProduct.getPrice()/ (1 + sd/100)) < product.getLsxj()){
+							ds = ds * ds_ratio/100;
+						}
+						xsdProduct.setDs(ds);                     //金额点杀
 						
 						xsdProducts.add(xsdProduct);
 						
@@ -146,34 +183,23 @@ public class CkdService {
 					}
 				}
 			}
-		}
-		
-		//更新出库单
-		ckdDao.updateCkd(ckd, ckdProducts);
-		
-		if(ckd.getState().equals("已出库")){
 			
-			this.updateProductKc(ckd, ckdProducts); //修改库存
+			//修改库存
+			this.updateProductKc(ckd, ckdProducts); 
 			
-			//修改相应销售单实际成交信息及物流相关信息
-			this.updateXsdSjcjInfo(ckd, ckdProducts);
-			
-
 			//系统正式启用前，不对强制序列号做限制，但输入的序列号系统同样给予处理			
-			this.updateSerialNum(ckd, ckdProducts);   //处理序列号
+			this.updateSerialNum(ckd, ckdProducts);
 			
-			//如果是销售单，处理销售单状态
-			if(ckd.getXsd_id().indexOf("XS") != -1){
-				this.updateXsdState(ckd.getXsd_id(), "已出库",ckd.getYsfs(),ckd.getCx_tel(),ckd.getJob_no(),ckd.getSend_time(),ckd.getStore_id(),ckd.getFzr(),ckd.getCk_date());
+			//处理对应销售单状态
+			this.updateXsdState(ckd.getXsd_id(), "已出库",ckd.getYsfs(),ckd.getCx_tel(),ckd.getJob_no(),ckd.getSend_time(),ckd.getStore_id(),ckd.getFzr(),ckd.getCk_date());
 				
-				//修改销售单对应的成本价及考核成本价
-				if(xsdProducts != null && xsdProducts.size() > 0){
-					xsdDao.updateXsdProducts(xsdProducts);
-				}
+			//修改销售单对应的成本价及考核成本价
+			if(xsdProducts != null && xsdProducts.size() > 0){
+				xsdDao.updateXsdProducts(xsdProducts);
 			}
 			
-			//更新相应分销订单的物流状态
-			this.updateFxddState(ckd.getXsd_id(), "已出库",ckd.getYsfs(),ckd.getCx_tel(),ckd.getJob_no(),ckd.getSend_time());
+			//生成商品销售明细
+			this.addProductSaleFlow(xsd, xsdProducts);
 		}
 	}
 
@@ -337,36 +363,6 @@ public class CkdService {
 	
 	
 	/**
-	 * 修改相应销售单实际成交数及金额
-	 * @param ckd
-	 * @param ckdProducts
-	 */
-	private void updateXsdSjcjInfo(Ckd ckd,List ckdProducts){
-		double sjcjje = 0; //销售单实际成交金额
-		String xsd_id = ckd.getXsd_id();
-		
-		//如果相关业务单据不是销售单时退出
-		if(xsd_id.indexOf("XS") == -1){
-			return;
-		}
-		
-		if(ckdProducts != null && ckdProducts.size()>0){
-			for(int i=0;i<ckdProducts.size();i++){
-				CkdProduct ckdProduct = (CkdProduct)ckdProducts.get(i);
-				if(ckdProduct != null){
-					if(!ckdProduct.getProduct_id().equals("") && !ckdProduct.getProduct_name().equals("")){
-						double sjcj_xj = ckdProduct.getNums() * (ckdProduct.getPrice() + ckdProduct.getJgtz());
-						sjcjje += sjcj_xj;
-						xsdDao.updateXsdSjcjNums(xsd_id, ckdProduct.getProduct_id(), ckdProduct.getNums(), sjcj_xj);
-					}
-				}
-			}
-		}
-		xsdDao.updateXsdSjcjje(xsd_id, sjcjje);
-	}
-	
-	
-	/**
 	 * 更新相应销售单状态
 	 * @param xsd_id     销售单编号
 	 * @param state      状态
@@ -379,16 +375,6 @@ public class CkdService {
 	 */
 	private void updateXsdState(String xsd_id,String state,String ysfs,String cx_tel,String job_no,String send_time,String store_id,String ck_jsr,String ck_date){
 		xsdDao.updateXsdState(xsd_id, state,ysfs,cx_tel,job_no,send_time, store_id, ck_jsr,ck_date);
-	}
-	
-	
-	/**
-	 * 更新相应分销订单状态
-	 * @param fxdd_id
-	 * @param state
-	 */
-	private void updateFxddState(String fxdd_id,String state,String ysfs,String cx_tel,String job_no,String send_time){
-		xsdDao.updateFxddState(fxdd_id, state,ysfs,cx_tel,job_no,send_time);
 	}
 	
 	
@@ -452,6 +438,48 @@ public class CkdService {
 							serialNumDao.saveSerialFlow(serialNumFlow);  //保存序列号流转过程
 						}
 					}
+				}
+			}
+		}
+	}
+	
+	
+	/**
+	 * 根据销售订单生成相应的商品销售流水信息
+	 * @param xsd
+	 * @param xsdProducts
+	 */
+	public void addProductSaleFlow(Xsd xsd, List xsdProducts){
+		if(xsdProducts != null && xsdProducts.size()>0){
+			for(int i=0;i<xsdProducts.size();i++){
+				XsdProduct xsdProduct = (XsdProduct)xsdProducts.get(i);
+				if(xsdProduct != null && !xsdProduct.getProduct_id().equals("") && !xsdProduct.getProduct_name().equals("")){
+					ProductSaleFlow info = new ProductSaleFlow();
+					
+					info.setId(xsd.getId());
+					info.setYw_type("销售单");
+					info.setClient_name(xsd.getClient_name());
+					info.setXsry(xsd.getFzr());
+					info.setCz_date(DateComFunc.getToday());
+					info.setProduct_id(xsdProduct.getProduct_id());
+					info.setNums(xsdProduct.getNums());
+					info.setPrice(xsdProduct.getPrice());
+					info.setHjje(xsdProduct.getSjcj_xj());
+					info.setDwcb(xsdProduct.getCbj());
+					info.setCb(xsdProduct.getCbj()*xsdProduct.getNums());
+					info.setDwkhcb(xsdProduct.getKh_cbj());
+					info.setKhcb(xsdProduct.getKh_cbj()*xsdProduct.getNums());
+					info.setDwygcb(xsdProduct.getYgcbj());
+					info.setYgcb(xsdProduct.getYgcbj()*xsdProduct.getNums());
+					info.setSd(xsdProduct.getSd());
+					info.setBhsje(xsdProduct.getSjcj_xj() / (1 + xsdProduct.getSd()/100));
+					info.setGf(xsdProduct.getGf());
+					info.setDs(xsdProduct.getDs() * xsdProduct.getNums());
+					info.setBasic_ratio(xsdProduct.getBasic_ratio());
+					info.setOut_ratio(xsdProduct.getOut_ratio());
+					info.setLsxj(xsdProduct.getLsxj() * xsdProduct.getNums());
+					
+					productSaleFlowDao.insertProductSaleFlow(info);
 				}
 			}
 		}
@@ -578,6 +606,30 @@ public class CkdService {
 
 	public void setProductDao(ProductDAO productDao) {
 		this.productDao = productDao;
+	}
+
+
+
+	public LsdDAO getLsdDao() {
+		return lsdDao;
+	}
+
+
+
+	public void setLsdDao(LsdDAO lsdDao) {
+		this.lsdDao = lsdDao;
+	}
+
+
+
+	public ProductSaleFlowDAO getProductSaleFlowDao() {
+		return productSaleFlowDao;
+	}
+
+
+
+	public void setProductSaleFlowDao(ProductSaleFlowDAO productSaleFlowDao) {
+		this.productSaleFlowDao = productSaleFlowDao;
 	}
 
 }

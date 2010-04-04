@@ -233,22 +233,22 @@ public class XstjXsryDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public List getYwymlHz(String start_date,String end_date,String dept_id,String user_id){
-		String sql = "select dept,xsry,real_name,sum(hjje) as xsje,sum(bhsje) as bhsje,sum(cb) as cb,sum(khcb) as khcb from view_hpxshz_tj where 1=1";
+		String sql = "select b.dept,a.xsry,b.real_name,sum(a.hjje) as xsje,sum(a.bhsje) as bhsje,sum(a.cb) as cb,sum(a.khcb) as khcb from product_sale_flow a left join sys_user b on b.user_id=a.xsry where 1=1";
 		
 		if(!start_date.equals("")){
-			sql += " and cz_date>='" + start_date + "'";
+			sql += " and a.cz_date>='" + start_date + "'";
 		}
 		if(!start_date.equals("")){
-			sql += " and cz_date<='" + end_date + "'";
+			sql += " and a.cz_date<='" + end_date + "'";
 		}
 		if(!dept_id.equals("")){
-			sql += " and dept like '" + dept_id + "%'";
+			sql += " and b.dept like '" + dept_id + "%'";
 		}
 		if(!user_id.equals("")){
-			sql += " and xsry='" + user_id + "'";
+			sql += " and a.xsry='" + user_id + "'";
 		}
 		
-		sql += " group by dept,xsry,real_name";
+		sql += " group by b.dept,a.xsry,b.real_name";
 		return this.getResultList(sql);
 	}
 	
@@ -288,21 +288,21 @@ public class XstjXsryDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public List getYwytcHz(String start_date,String end_date,String dept_id,String user_id){
-		String sql = "select yw_type,product_id,dept,xsry,real_name,(bhsje-khcb) as khml," +
-		"(bhsje-khcb)*basic_ratio/100 as jbtc,(bhsje-khcb)*gf/100 as blds,ds as jeds," +
-		"(bhsje-lsxj)*out_ratio/100 as cxjl from view_hpxshz_tj where 1=1";
+		String sql = "select a.yw_type,a.product_id,b.dept,a.xsry,b.real_name,(a.bhsje-a.khcb) as khml," +
+		"(a.bhsje-a.khcb)*a.basic_ratio/100 as jbtc,(a.bhsje-a.khcb)*a.gf/100 as blds,a.ds as jeds," +
+		"(a.bhsje-a.lsxj)*a.out_ratio/100 as cxjl from product_sale_flow a left join sys_user b on b.user_id=a.xsry where 1=1";
 		
 		if(!start_date.equals("")){
-			sql += " and cz_date>='" + start_date + "'";
+			sql += " and a.cz_date>='" + start_date + "'";
 		}
 		if(!start_date.equals("")){
-			sql += " and cz_date<='" + end_date + "'";
+			sql += " and a.cz_date<='" + end_date + "'";
 		}
 		if(!dept_id.equals("")){
-			sql += " and dept like '" + dept_id + "%'";
+			sql += " and b.dept like '" + dept_id + "%'";
 		}
 		if(!user_id.equals("")){
-			sql += " and xsry='" + user_id + "'";
+			sql += " and a.xsry='" + user_id + "'";
 		}
 		
 		sql += " order by dept,xsry";
@@ -320,18 +320,18 @@ public class XstjXsryDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public List getYwytcMx(String start_date,String end_date,String user_id){
-		String sql = "select cz_date,id,yw_type,client_name,product_name,product_id,product_xh,nums,(bhsje-khcb) as khml," +
-				"(bhsje-khcb)*basic_ratio/100 as jbtc,(bhsje-khcb)*gf/100 as blds,ds as jeds," +
-				"(bhsje-lsxj)*out_ratio/100 as cxjl from view_hpxshz_tj where 1=1";
+		String sql = "select a.cz_date,a.id,a.yw_type,a.client_name,c.product_name,a.product_id,c.product_xh,a.nums,(a.bhsje-a.khcb) as khml," +
+				"(a.bhsje-a.khcb)*a.basic_ratio/100 as jbtc,(a.bhsje-a.khcb)*a.gf/100 as blds,a.ds as jeds," +
+				"(a.bhsje-a.lsxj)*a.out_ratio/100 as cxjl from product_sale_flow a left join sys_user b on b.user_id=a.xsry left join product c on c.product_id=a.product_id where 1=1";
 		
 		if(!start_date.equals("")){
-			sql += " and cz_date>='" + start_date + "'";
+			sql += " and a.cz_date>='" + start_date + "'";
 		}
 		if(!start_date.equals("")){
-			sql += " and cz_date<='" + end_date + "'";
+			sql += " and a.cz_date<='" + end_date + "'";
 		}
 		if(!user_id.equals("")){
-			sql += " and xsry='" + user_id + "'";
+			sql += " and a.xsry='" + user_id + "'";
 		}
 		
 		sql += " order by id";

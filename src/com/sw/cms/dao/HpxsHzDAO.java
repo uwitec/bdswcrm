@@ -21,7 +21,7 @@ public class HpxsHzDAO extends JdbcBaseDAO {
 	public List getHpxshzTjResult(String product_kind,String product_name,String product_xh,
 			String start_date,String end_date,String client_name,String xsry_id,String client_type){
 		
-		String sql = "select product_id,product_name,product_xh,sum(nums) as nums,sum(hjje) as hjje from view_hpxshz_tj where 1=1";
+		String sql = "select a.product_id,b.product_name,b.product_xh,sum(a.nums) as nums,sum(a.hjje) as hjje from product_sale_flow a left join product b on b.product_id=a.product_id left join clients c on c.id=a.client_name where 1=1";
 		
 		//处理商品类别
 		if(!product_kind.equals("")){
@@ -30,9 +30,9 @@ public class HpxsHzDAO extends JdbcBaseDAO {
 				sql += " and (";
 				for(int i=0;i<arryItems.length;i++){
 					if(i == 0){
-						sql += " product_kind like '" + arryItems[i] + "%'";
+						sql += " b.product_kind like '" + arryItems[i] + "%'";
 					}else{
-						sql += " or product_kind like '" + arryItems[i] + "%'";
+						sql += " or b.product_kind like '" + arryItems[i] + "%'";
 					}
 				}
 				sql += ")";
@@ -41,40 +41,40 @@ public class HpxsHzDAO extends JdbcBaseDAO {
 		
 		//商品名称
 		if(!product_name.equals("")){
-			sql += " and product_name like '%" + product_name + "%'";
+			sql += " and b.product_name like '%" + product_name + "%'";
 		}
 		
 		//商品规格
 		if(!product_name.equals("")){
-			sql += " and product_xh like '%" + product_xh + "%'";
+			sql += " and b.product_xh like '%" + product_xh + "%'";
 		}
 		
 		//开始时间
 		if(!start_date.equals("")){
-			sql += " and cz_date>='" + start_date + "'";
+			sql += " and a.cz_date>='" + start_date + "'";
 		}
 		
 		//结束时间
 		if(!end_date.equals("")){
-			sql += " and cz_date<='" + end_date + "'";
+			sql += " and a.cz_date<='" + end_date + "'";
 		}
 		
 		//客户编号
 		if(!client_name.equals("")){
-			sql += " and client_name='" + client_name + "'";
+			sql += " and a.client_name='" + client_name + "'";
 		}
 		
 		//客户类型
 		if(!client_type.equals("")){
-			sql += " and client_type='" + client_type + "'";
+			sql += " and c.client_type='" + client_type + "'";
 		}
 		
 		//销售人员
 		if(!xsry_id.equals("")){
-			sql += " and xsry='" + xsry_id + "'";
+			sql += " and a.xsry='" + xsry_id + "'";
 		}
 		
-		sql += " group by product_id,product_name,product_xh";
+		sql += " group by a.product_id,b.product_name,b.product_xh";
 		
 		return this.getResultList(sql);
 	}
@@ -141,7 +141,7 @@ public class HpxsHzDAO extends JdbcBaseDAO {
 	public List getHpxsmlhzTjResult(String product_kind,String product_name,String product_xh,
 			String start_date,String end_date,String client_name,String xsry_id){
 		
-		String sql = "select product_id,product_name,product_xh,prop,sum(nums) as nums,sum(hjje) as hjje,sum(cb) as hjcb,sum(ygcb) as hjygcb from view_hpxshz_tj where 1=1";
+		String sql = "select a.product_id,b.product_name,b.product_xh,b.prop,sum(a.nums) as nums,sum(a.hjje) as hjje,sum(a.cb) as hjcb,sum(a.ygcb) as hjygcb from product_sale_flow a left join product b on b.product_id=a.product_id where 1=1";
 		
 		//处理商品类别
 		if(!product_kind.equals("")){
@@ -150,9 +150,9 @@ public class HpxsHzDAO extends JdbcBaseDAO {
 				sql += " and (";
 				for(int i=0;i<arryItems.length;i++){
 					if(i == 0){
-						sql += " product_kind like '" + arryItems[i] + "%'";
+						sql += " b.product_kind like '" + arryItems[i] + "%'";
 					}else{
-						sql += " or product_kind like '" + arryItems[i] + "%'";
+						sql += " or b.product_kind like '" + arryItems[i] + "%'";
 					}
 				}
 				sql += ")";
@@ -161,35 +161,35 @@ public class HpxsHzDAO extends JdbcBaseDAO {
 		
 		//商品名称
 		if(!product_name.equals("")){
-			sql += " and product_name like '%" + product_name + "%'";
+			sql += " and b.product_name like '%" + product_name + "%'";
 		}
 		
 		//商品规格
 		if(!product_name.equals("")){
-			sql += " and product_xh like '%" + product_xh + "%'";
+			sql += " and b.product_xh like '%" + product_xh + "%'";
 		}
 		
 		//开始时间
 		if(!start_date.equals("")){
-			sql += " and cz_date>='" + start_date + "'";
+			sql += " and a.cz_date>='" + start_date + "'";
 		}
 		
 		//结束时间
 		if(!end_date.equals("")){
-			sql += " and cz_date<='" + end_date + "'";
+			sql += " and a.cz_date<='" + end_date + "'";
 		}
 		
 		//客户编号
 		if(!client_name.equals("")){
-			sql += " and client_name='" + client_name + "'";
+			sql += " and a.client_name='" + client_name + "'";
 		}
 		
 		//销售人员
 		if(!xsry_id.equals("")){
-			sql += " and xsry='" + xsry_id + "'";
+			sql += " and a.xsry='" + xsry_id + "'";
 		}
 		
-		sql += " group by product_id,product_name,product_xh,prop";
+		sql += " group by a.product_id,b.product_name,b.product_xh,b.prop";
 		
 		return this.getResultList(sql);
 	}

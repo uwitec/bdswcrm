@@ -266,31 +266,33 @@ public class LsdDAO extends JdbcBaseDAO {
 						param[5] = new Integer(lsdProduct.getNums());//数量
 						param[6] = new Double(lsdProduct.getXj());   //含税金额
 						param[7] = lsdProduct.getRemark();           //备注
-						param[8] = new Double(lsdProduct.getCbj());  //成本价
-						param[9] = lsdProduct.getQz_serial_num();    //序列号
-						param[10] = lsdProduct.getKh_cbj();          //考核成本价
 						
 						double gf = 0l;  //比例点杀
 						Map map = this.getProductInfo(lsdProduct.getProduct_id());
-						double lsxj = 0l;
-						double ds = 0l;
-						double ygcbj = 0l;
+						double lsxj = 0l;   //零售限价
+						double ds = 0l;     //金额点杀
+						double ygcbj = 0l;  //预估成本价
+						double cbj = 0l;    //成本价
+						double khcbj = 0l;  //考核成本价
 						if(map != null){
 							lsxj = map.get("lsxj")==null?0:((Double)map.get("lsxj")).doubleValue();
 							gf = map.get("gf")==null?0:((Double)map.get("gf")).doubleValue();
 							ds = map.get("dss")==null?0:((Double)map.get("dss")).doubleValue();
 							ygcbj = map.get("ygcbj")==null?0:((Double)map.get("ygcbj")).doubleValue();
+							cbj = map.get("price")==null?0:((Double)map.get("price")).doubleValue();
+							khcbj = map.get("khcbj")==null?0:((Double)map.get("khcbj")).doubleValue();
 						}
-						
 						//不含税单价低于零售限价时 点杀需要乘以比例
 						if((lsdProduct.getPrice()/ (1 + sd/100)) < lsxj){
-							ds = ds * ds_ratio/100;
+							ds = ds * ds_ratio/100; //金额点杀
 						}
 						
-						param[11] = gf;    //工分
+						param[8] = cbj;  //成本价
+						param[9] = lsdProduct.getQz_serial_num();    //序列号
+						param[10] = khcbj;          //考核成本价
+						param[11] = gf;    //工分(比例点杀)
 						param[12] = sd;    //税点
 						param[13] = lsdProduct.getXj() / (1 + sd/100);  //不含税金额
-
 						param[14] = basic_ratio;
 						param[15] = out_ratio;
 						param[16] = ds;

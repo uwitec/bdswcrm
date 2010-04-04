@@ -19,6 +19,7 @@ import com.sw.cms.service.SysInitSetService;
 import com.sw.cms.service.UserService;
 import com.sw.cms.util.Constant;
 import com.sw.cms.util.DateComFunc;
+import com.sw.cms.util.JMath;
 import com.sw.cms.util.MoneyUtil;
 import com.sw.cms.util.ParameterUtility;
 import com.sw.cms.util.StaticParamDo;
@@ -397,6 +398,15 @@ public class LsdAction extends BaseAction {
 		
 		storeList = storeService.getAllStoreList();
 		kindList = productKindService.getAllProductKindList();
+		
+		sd = JMath.round(lsdService.getLssd());
+		
+		//Ìá³É±ÈÀý
+		Map tcblMap = lsdService.getTcbl();
+		if(tcblMap != null){
+			basic_ratio = JMath.round(tcblMap.get("basic_ratio")==null?0:((Double)tcblMap.get("basic_ratio")).doubleValue());
+			out_ratio = JMath.round(tcblMap.get("out_ratio")==null?0:((Double)tcblMap.get("out_ratio")).doubleValue());
+		}
 		
 		return "success";
 	}

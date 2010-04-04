@@ -7,6 +7,7 @@ import java.util.Map;
 import com.sw.cms.dao.AccountDzdDAO;
 import com.sw.cms.dao.AccountsDAO;
 import com.sw.cms.dao.ProductKcDAO;
+import com.sw.cms.dao.ProductSaleFlowDAO;
 import com.sw.cms.dao.RkdDAO;
 import com.sw.cms.dao.SerialNumDAO;
 import com.sw.cms.dao.ThdDAO;
@@ -15,6 +16,7 @@ import com.sw.cms.dao.XsskDAO;
 import com.sw.cms.dao.YushoukDAO;
 import com.sw.cms.model.AccountDzd;
 import com.sw.cms.model.Page;
+import com.sw.cms.model.ProductSaleFlow;
 import com.sw.cms.model.Rkd;
 import com.sw.cms.model.RkdProduct;
 import com.sw.cms.model.SerialNumFlow;
@@ -24,6 +26,7 @@ import com.sw.cms.model.ThdProduct;
 import com.sw.cms.model.Xssk;
 import com.sw.cms.model.XsskDesc;
 import com.sw.cms.model.Yushouk;
+import com.sw.cms.util.DateComFunc;
 import com.sw.cms.util.StaticParamDo;
 
 /**
@@ -43,6 +46,7 @@ public class ThdService {
 	private AccountDzdDAO accountDzdDao;
 	private SerialNumDAO serialNumDao;
 	private YushoukDAO yushoukDao;
+	private ProductSaleFlowDAO productSaleFlowDao;
 	
 	/**
 	 * 查询退货单列表，带分页
@@ -73,7 +77,9 @@ public class ThdService {
 		if(!thd.getState().equals("已保存")){
 			this.saveRkd(thd, thdProducts); //生成相应入库单
 			
-			this.updateThdJe(thd);			
+			this.updateThdJe(thd);			//处理退货单金额相关内容
+			
+			this.addProductSaleFlow(thd, thdProducts);  //处理退货单商品交易情况
 		}
 	}
 	
@@ -95,8 +101,12 @@ public class ThdService {
 		
 		// 退货分为两种方式（现金、冲抵往来）
 		if(!thd.getState().equals("已保存")){
-			this.saveRkd(thd, thdProducts); //生成相应入库单			
-			this.updateThdJe(thd);
+			
+			this.saveRkd(thd, thdProducts); //生成相应入库单	
+			
+			this.updateThdJe(thd);          //处理退货单金额相关内容
+			
+			this.addProductSaleFlow(thd, thdProducts);  //处理退货单商品交易情况
 		}
 		
 	}
@@ -217,6 +227,50 @@ public class ThdService {
 		productKcDao.updateProductKc(rkd, rkdProducts);			
 		//处理序列号
 		this.updateSerialNum(rkd, rkdProducts);		
+	}
+	
+	
+	/**
+	 * 根据退货单生成商品销售流水
+	 * @param thd
+	 * @param thdProducts
+	 */
+	private void addProductSaleFlow(Thd thd,List thdProducts){
+		if(thdProducts != null && thdProducts.size()>0){
+			for(int i=0;i<thdProducts.size();i++){
+				
+				ThdProduct thdProduct = (ThdProduct)thdProducts.get(i);
+				if(thdProduct != null && thdProduct.getProduct_name() != null && !thdProduct.getProduct_name().equals("")){
+					
+					ProductSaleFlow info = new ProductSaleFlow();
+					
+					info.setId(thd.getThd_id());
+					info.setYw_type("退货单");
+					info.setClient_name(thd.getClient_name());
+					info.setXsry(thd.getTh_fzr());
+					info.setCz_date(DateComFunc.getToday());
+					info.setProduct_id(thdProduct.getProduct_id());
+					info.setNums(0-thdProduct.getNums());
+					info.setPrice(thdProduct.getTh_price());
+					info.setHjje(0-thdProduct.getXj());
+					info.setDwcb(thdProduct.getCbj());
+					info.setCb(0-(thdProduct.getCbj()*thdProduct.getNums()));
+					info.setDwkhcb(thdProduct.getKh_cbj());
+					info.setKhcb(0-(thdProduct.getKh_cbj()*thdProduct.getNums()));
+					info.setDwygcb(thdProduct.getYgcbj());
+					info.setYgcb(0-(thdProduct.getYgcbj()*thdProduct.getNums()));
+					info.setSd(thdProduct.getSd());
+					info.setBhsje(0-(thdProduct.getXj() / (1 + thdProduct.getSd()/100)));
+					info.setGf(thdProduct.getGf());
+					info.setDs((0-thdProduct.getDs())*thdProduct.getNums());
+					info.setBasic_ratio(thdProduct.getBasic_ratio());
+					info.setOut_ratio(thdProduct.getOut_ratio());
+					info.setLsxj(0-(thdProduct.getLsxj()*thdProduct.getNums()));
+					
+					productSaleFlowDao.insertProductSaleFlow(info);
+				}
+			}
+		}
 	}
 	
 	
@@ -491,6 +545,16 @@ public class ThdService {
 
 	public void setYushoukDao(YushoukDAO yushoukDao) {
 		this.yushoukDao = yushoukDao;
+	}
+
+
+	public ProductSaleFlowDAO getProductSaleFlowDao() {
+		return productSaleFlowDao;
+	}
+
+
+	public void setProductSaleFlowDao(ProductSaleFlowDAO productSaleFlowDao) {
+		this.productSaleFlowDao = productSaleFlowDao;
 	}
 
 }
