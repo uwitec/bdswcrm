@@ -559,4 +559,4 @@ from (((lsd_product a left join lsd b on((b.id = a.lsd_id))) left join product c
 where (b.state = '已提交'))) a)
 
 --商品表添加索引
-ALTER TABLE `crm`.`product` ADD INDEX `Index_product_kind`(`product_id`, `product_kind`);
+ALTER TABLE `product` ADD INDEX `Index_product_kind`(`product_id`, `product_kind`);
