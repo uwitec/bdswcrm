@@ -38,10 +38,10 @@ List deptList = (List)VS.findValue("deptList");
 	<tr>
 		<td class="a1">开始日期</td>
 		<td class="a4">
-			<input type="text" name="start_date" id="start_date" value="<%=DateComFunc.getToday() %>"  class="Wdate" onFocus="WdatePicker()"></td>
+			<input type="text" name="start_date" id="start_date" value="<%=DateComFunc.getToday() %>" size="30"  class="Wdate" onFocus="WdatePicker()"></td>
 		<td class="a1">结束日期</td>
 		<td class="a4">
-			<input type="text" name="end_date" id="end_date" value="<%=DateComFunc.getToday() %>"  class="Wdate" onFocus="WdatePicker()"></td>
+			<input type="text" name="end_date" id="end_date" value="<%=DateComFunc.getToday() %>" size="30"  class="Wdate" onFocus="WdatePicker()"></td>
 	</tr>
 	<tr>
 		<td class="a1">部门</td>
@@ -69,7 +69,7 @@ List deptList = (List)VS.findValue("deptList");
 		</td>	
 		<td class="a1">销售人员</td>
 		<td class="a4">
-		    <input id="brand" type="text" length="20" onblur="setValue()"/> 
+		    <input id="brand" type="text" length="20" onblur="setValue()" size="30"/> 
             <div id="brandTip"  style="height:12px;position:absolute;left:680px; top:87px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		    <input type="hidden" name="user_id" id="fzr"/> 
 		</td>					

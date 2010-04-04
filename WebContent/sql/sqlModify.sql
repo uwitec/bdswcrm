@@ -502,3 +502,61 @@ ALTER TABLE `jhd` ADD COLUMN `ysws`  VARCHAR(6)  AFTER `kh_lxdh`;
 2010-04-01修改
 --更新采购订单发票类型字段值
 update jhd set ysws='含税' where ysws='已税'
+
+
+2010-04-03修改
+--添加商品销售流水表，提高后续商品销售的统计的效率
+CREATE TABLE `product_sale_flow` (
+  `seq_id` bigint(20) NOT NULL auto_increment,
+  `id` varchar(20) default NULL,
+  `yw_type` varchar(3) default NULL,
+  `product_id` varchar(20) default NULL,
+  `client_name` varchar(100) default NULL,
+  `xsry` varchar(20) default NULL,
+  `cz_date` varchar(20) default NULL,
+  `nums` bigint(20) default '0',
+  `price` double default '0',
+  `hjje` double default '0',
+  `dwcb` double default '0',
+  `cb` double default '0',
+  `dwkhcb` double default '0',
+  `khcb` double default '0',
+  `dwygcb` double default '0',
+  `ygcb` double default '0',
+  `sd` double default '0',
+  `bhsje` double default '0',
+  `gf` double default '0',
+  `ds` double default '0',
+  `basic_ratio` double default '0',
+  `out_ratio` double default '0',
+  `lsxj` double default '0',
+  `jy_time` datetime default NULL,
+  PRIMARY KEY  (`seq_id`),
+  KEY `index_product_sale_flow` (`id`,`product_id`,`client_name`,`xsry`,`cz_date`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+insert into product_sale_flow ( select 0 as seq_id,a.id,a.yw_type,product_id,client_name,xsry,cz_date,nums,price,hjje,dwcb,cb,dwkhcb,khcb,dwygcb,ygcb,
+sd,bhsje,gf,ds,basic_ratio,out_ratio,lsxj,jy_time from  
+((select b.id,'销售单' as yw_type,a.product_id AS product_id,c.product_name AS product_name,c.product_xh AS product_xh,c.product_kind AS product_kind,c.prop AS prop,b.client_name AS client_name,e.client_type AS client_type,b.fzr AS xsry,d.real_name AS real_name,d.dept AS dept,date_format(b.cz_date,'%Y-%m-%d') AS cz_date,a.sjcj_nums AS nums,a.price AS price,a.sjcj_xj AS hjje,
+a.cbj as dwcb,(a.cbj * a.sjcj_nums) AS cb,
+a.kh_cbj as dwkhcb,(a.kh_cbj*a.sjcj_nums) AS khcb,a.ygcbj as dwygcb,(a.ygcbj*a.sjcj_nums) as ygcb,
+a.sd,a.bhsje,a.gf,(a.ds*a.nums) as ds,a.basic_ratio,a.out_ratio,(a.nums * a.lsxj) as lsxj,cz_date as jy_time
+from ((((xsd_product a left join xsd b on((b.id = a.xsd_id))) left join product c on((c.product_id = a.product_id))) left join sys_user d on((d.user_id = b.fzr))) left join clients e on((e.id = b.client_name)))
+where (b.state = '已出库')) 
+union all 
+(select b.thd_id as id,'退货单' as yw_type, a.product_id AS product_id,c.product_name AS product_name,c.product_xh AS product_xh,c.product_kind AS product_kind,c.prop AS prop,b.client_name AS client_name,e.client_type AS client_type,b.th_fzr AS xsry,d.real_name AS real_name,d.dept AS dept,date_format(b.cz_date,'%Y-%m-%d') AS cz_date,(0 - a.nums) AS nums,a.th_price AS price,(0 - a.xj) AS hjje,
+a.cbj as dwcb,(0 - (a.cbj * a.nums)) AS cb,
+a.kh_cbj as dwkhcb,(0 - (a.kh_cbj*a.nums)) AS khcb,a.ygcbj as dwygcb,(0 - (a.ygcbj*a.nums)) AS ygcb,
+a.sd,(0-a.bhsje) as bhsje,a.gf,((0-a.ds)*a.nums) as ds,a.basic_ratio,a.out_ratio,(0-(a.nums * a.lsxj)) as lsxj,cz_date as jy_time
+from ((((thd_product a left join thd b on((b.thd_id = a.thd_id))) left join product c on((c.product_id = a.product_id))) left join sys_user d on((d.user_id = b.th_fzr))) left join clients e on((e.id = b.client_name)))
+where (b.state = '已入库')) 
+union all 
+(select b.id,'零售单' as yw_type, a.product_id AS product_id,c.product_name AS product_name,c.product_xh AS product_xh,c.product_kind AS product_kind,c.prop AS prop,b.client_name AS client_name,_utf8'' AS client_type,b.xsry AS xsry,d.real_name AS real_name,d.dept AS dept,date_format(b.cz_date,'%Y-%m-%d') AS cz_date,a.nums AS nums,a.price AS price,a.xj AS hjje,
+a.cbj as dwcb,(a.cbj * a.nums)AS cb,
+a.kh_cbj as dwkhcb,(a.kh_cbj*a.nums) AS khcb,a.ygcbj as dwygcb,(a.ygcbj*a.nums) as ygcb,
+a.sd,a.bhsje,a.gf,(a.ds*a.nums) as ds,a.basic_ratio,a.out_ratio,(a.lsxj*a.nums) as lsxj,cz_date as jy_time
+from (((lsd_product a left join lsd b on((b.id = a.lsd_id))) left join product c on((c.product_id = a.product_id))) left join sys_user d on((d.user_id = b.xsry)))
+where (b.state = '已提交'))) a)
+
+--商品表添加索引
+ALTER TABLE `crm`.`product` ADD INDEX `Index_product_kind`(`product_id`, `product_kind`);

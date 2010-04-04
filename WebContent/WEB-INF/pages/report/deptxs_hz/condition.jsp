@@ -47,15 +47,15 @@
 	<tr>
 		<td class="a1">开始日期</td>
 		<td class="a4">
-			<input type="text" name="start_date" id="start_date" value="<%=DateComFunc.getToday() %>"  class="Wdate" onFocus="WdatePicker()"></td>
+			<input type="text" name="start_date" id="start_date" value="<%=DateComFunc.getToday() %>"  class="Wdate" size="35" onFocus="WdatePicker()"></td>
 		<td class="a1">结束日期</td>
 		<td class="a4">
-			<input type="text" name="end_date" id="end_date" value="<%=DateComFunc.getToday() %>"  class="Wdate" onFocus="WdatePicker()"></td>
+			<input type="text" name="end_date" id="end_date" value="<%=DateComFunc.getToday() %>"  class="Wdate" size="35" onFocus="WdatePicker()"></td>
 	</tr>
 	<tr>
 		<td class="a1">客户名称</td>
 		<td class="a4">
-		<input type="text" name="clientId" id="client_name" value="" onblur="setClientValue();" size="30"  maxlength="50">
+		<input type="text" name="clientId" id="client_name" value="" onblur="setClientValue();" size="35"  maxlength="50">
 		<input type="hidden" name="client_name" id="client_id" value="">
 		<div id="clientsTip" style="height:12px;position:absolute;left:117px; top:85px; width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		</td>	
@@ -78,7 +78,7 @@
 		</td>
 		<td class="a1" width="15%">商品名称</td>
 		<td class="a4" width="35%">
-			<input type="text" name="product_name" id="product_name" value="">
+			<input type="text" name="product_name" id="product_name" value="" size="35">
 		</td>										
 	</tr>	
 	<tr height="35">

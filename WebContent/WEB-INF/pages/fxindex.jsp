@@ -71,11 +71,13 @@ String cpy_name = (String)VS.findValue("cpy_name");
 					<TR>
 						<TD class=Menutitle>代理商业务</TD>
 					</TR>
+					<!--
 					<TR>
 						<TD class=Menuitem onmouseover="className='ActiveMenuItem'" onmouseout="className='Menuitem'">
 						<IMG src="index_images/stock_m.gif"  align=absMiddle>
 						<A href="javascript:addtabFmMenu('采购订单','listFxdd.html','');">采购订单</A></TD>
 					</TR>
+					-->
 					<TR>
 						<TD class=Menuitem onmouseover="className='ActiveMenuItem'" onmouseout="className='Menuitem'">
 						<IMG src="index_images/funds.gif"  align=absMiddle>

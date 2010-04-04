@@ -153,12 +153,12 @@ if(results != null && results.size()>0){
 			<TD class=ReportItem>&nbsp;</TD>
 			<TD class=ReportItem>&nbsp;</TD>								
 			<TD class=ReportItemXH nowrap><%=hj_nums %>&nbsp;</TD>
-			<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(hj_khml,2) %>&nbsp;</TD>
-			<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(hj_jbtc,2) %>&nbsp;</TD>
-			<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(hj_blds,2) %>&nbsp;</TD>
-			<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(hj_jeds,2) %>&nbsp;</TD>
-			<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(hj_cxjl,2) %>&nbsp;</TD>
-			<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(hj_total,2) %>&nbsp;</TD>				
+			<TD class=ReportItemMoney style="font-weight:bold" nowrap="nowrap"><%=JMath.round(hj_khml,2) %>&nbsp;</TD>
+			<TD class=ReportItemMoney style="font-weight:bold" nowrap="nowrap"><%=JMath.round(hj_jbtc,2) %>&nbsp;</TD>
+			<TD class=ReportItemMoney style="font-weight:bold" nowrap="nowrap"><%=JMath.round(hj_blds,2) %>&nbsp;</TD>
+			<TD class=ReportItemMoney style="font-weight:bold" nowrap="nowrap"><%=JMath.round(hj_jeds,2) %>&nbsp;</TD>
+			<TD class=ReportItemMoney style="font-weight:bold" nowrap="nowrap"><%=JMath.round(hj_cxjl,2) %>&nbsp;</TD>
+			<TD class=ReportItemMoney style="font-weight:bold" nowrap="nowrap"><%=JMath.round(hj_total,2) %>&nbsp;</TD>				
 		</TR>
 <%
 }

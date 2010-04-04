@@ -537,7 +537,12 @@
       <!-- 日程安排-->
      <bean id="calendarPlanDao" class="com.sw.cms.dao.CalendarPlanDAO">
           <property name="jdbcTemplate" ref="jdbcTemplate"/>
-     </bean>     
+     </bean>
+     
+      <!-- 商品销售流水-->
+     <bean id="productSaleFlowDao" class="com.sw.cms.dao.ProductSaleFlowDAO">
+          <property name="jdbcTemplate" ref="jdbcTemplate"/>
+     </bean>          
 </beans>
 
 
