@@ -21,40 +21,42 @@ public class HpflxsHzDAO extends JdbcBaseDAO {
 	 */
 	public List getHzResults(String start_date,String end_date,String xsry,String client_name,String dept,String[] xwType,int dj){
 		
-		String con = "";
+		String sql = "select c.product_kind,sum(nums) as nums,sum(hjje) as hjje from product_sale_flow a inner join sys_user b on b.user_id=a.xsry inner join product c on c.product_id=a.product_id where 1=1";
+		
 		if(!start_date.equals("")){
-			con += " and b.cz_date>='" + start_date + "'";
+			sql += " and a.cz_date>='" + start_date + "'";
 		}
 		if(!end_date.equals("")){
-			con += " and b.cz_date<='" + end_date + "'"; 
+			sql += " and a.cz_date<='" + end_date + "'"; 
 		}
 		if(!xsry.equals("")){
-			con += " and b.xsry='" + xsry + "'";
+			sql += " and a.xsry='" + xsry + "'";
 		}
 		if(!client_name.equals("")){
-			con += " and b.client_name='" + client_name + "'"; 
+			sql += " and a.client_name='" + client_name + "'"; 
 		}
 		if(!dept.equals("")){
-			con += " and c.dept like '" + dept + "%'";
+			sql += " and b.dept like '" + dept + "%'";
 		}
 		if(xwType == null || xwType.length == 0){
 			return null;
 		}else{
-			con += " and(";
+			sql += " and(";
 			for(int i=0;i<xwType.length;i++){
 				if(i==0){
-					con += "yw_type='" + xwType[i] + "'";
+					sql += "a.yw_type='" + xwType[i] + "'";
 				}else{
-					con += " or yw_type='" + xwType[i] + "'";
+					sql += " or a.yw_type='" + xwType[i] + "'";
 				}
 			}
-			con += ")";
+			sql += ")";
 		}
+		sql += " group by c.product_kind";
 		
-		String sql = "select a.id,a.name," +
-				"(select sum(nums) from product_sale_flow b left join sys_user c on c.user_id=b.xsry left join product d on d.product_id=b.product_id where d.product_kind like concat(a.id,'%') " + con + ") as nums," +
-				"(select sum(hjje) from product_sale_flow b left join sys_user c on c.user_id=b.xsry left join product d on d.product_id=b.product_id where d.product_kind like concat(a.id,'%') " + con + ") as hjje" +
-				" from product_kind a where LENGTH(id)<=" + (dj*2);
+		sql = "select y.id,y.name," +
+				"(select sum(nums) from (" + sql + ") x where x.product_kind like concat(y.id,'%')) as nums," +
+				"(select sum(hjje) from (" + sql + ") x where x.product_kind like concat(y.id,'%')) as hjje " +
+				"from product_kind y where LENGTH(y.id)<=" + (dj*2);
 		
 		List list = this.getResultList(sql);
 		
