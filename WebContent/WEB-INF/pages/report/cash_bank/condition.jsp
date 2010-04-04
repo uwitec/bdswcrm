@@ -29,11 +29,11 @@ List accountList = (List)VS.findValue("accountList");
 </table>
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0" border="1" id="selTable">
 	<tr>
-		<td class="a1">开始日期</td>
-		<td class="a4">
+		<td class="a1" width="15%">开始日期</td>
+		<td class="a4" width="35%">
 			<input type="text" name="start_date" id="start_date" value="<%=DateComFunc.getToday() %>" class="Wdate" onFocus="WdatePicker()"></td>
-		<td class="a1">结束日期</td>
-		<td class="a4">
+		<td class="a1" width="15%">结束日期</td>
+		<td class="a4" width="35%">
 			<input type="text" name="end_date" id="end_date" value="<%=DateComFunc.getToday() %>" class="Wdate" onFocus="WdatePicker()"></td>
 	</tr>
 	<tr>

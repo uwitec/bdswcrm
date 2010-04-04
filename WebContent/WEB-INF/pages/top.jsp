@@ -230,9 +230,9 @@ List funcList = menuService.getUserYwgnFunc(user_id);
 					<TD class=NormalWhite vlign=middle width=10 bgColor=#bcc2d4>|</TD>
 					<TD noWrap align=middle width=85 bgColor=#bcc2d4><IMG  height=15  src="index_images/stock.gif" width=15 align=absMiddle> <A class=TitleMenu  href="#" onclick="sendMail();">发送邮件</A></TD>			
 					<TD class=NormalWhite vlign=middle width=10 bgColor=#bcc2d4>|</TD>					
-					<TD class=NormalWhite noWrap align=middle width=85 bgColor=#bcc2d4><IMG height=15 src="index_images/index_clock.gif" width=15 align=absMiddle><A class=TitleMenu href="#" onclick="parent.addtabFmMenu('修改密码','changePass.html','');">修改密码</A></TD>
+					<TD class=NormalWhite noWrap align=middle width=85 bgColor=#bcc2d4><IMG height=15 src="index_images/WORDPAD.gif" width=15 align=absMiddle> <A class=TitleMenu href="http://hi.baidu.com/bdthinking" target="_bland">系统帮助</A></TD>
 					<TD class=NormalWhite vlign=middle width=10 bgColor=#bcc2d4>|</TD>
-					<TD class=NormalWhite noWrap align=middle width=85 bgColor=#bcc2d4><IMG height=15 src="index_images/out_system.gif" width=15 align=absMiddle><A class=TitleMenu href="#" onclick="logout();">安全退出</A></TD>
+					<TD class=NormalWhite noWrap align=middle width=85 bgColor=#bcc2d4><IMG height=15 src="index_images/out_system.gif" width=15 align=absMiddle> <A class=TitleMenu href="#" onclick="logout();">安全退出</A></TD>
 				</TR>
 				</TBODY>
 			</TABLE>
