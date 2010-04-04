@@ -14,6 +14,7 @@ String dj = StringUtils.nullToStr(request.getParameter("dj"));
 String client_name = StringUtils.nullToStr(request.getParameter("client_name"));
 String xsry = StringUtils.nullToStr(request.getParameter("xsry"));
 String dept = StringUtils.nullToStr(request.getParameter("dept"));
+String[] xwType = request.getParameterValues("xwType");
 
 String con = "日期：" + start_date + "至" + end_date;
 
@@ -57,6 +58,15 @@ if(!client_name.equals("")){
 <input type="hidden" name="end_date" value="<%=end_date %>">
 <input type="hidden" name="xsry" value="<%=xsry %>">
 <input type="hidden" name="dj" value="<%=dj %>">
+<%
+if(xwType != null && xwType.length > 0){
+	for(int i=0;i<xwType.length;i++){
+%>
+<input type="hidden" name="xwType" value="<%=xwType[i] %>">
+<%		
+	}
+}
+%>
 </form>
 <TABLE  align="center" cellSpacing=0 cellPadding=0 width="99%" border=0>
 	<TBODY>
