@@ -10,6 +10,9 @@ OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
 
 Page results = (Page)VS.findValue("clientsPage");
 ClientsService clientsService = (ClientsService)VS.findValue("clientsService");
+
+Map qcMap = (Map)VS.findValue("clientQcMap");
+Map wlMap = (Map)VS.findValue("clientWlMap");
 %>
 
 <html>
@@ -46,17 +49,34 @@ ClientsService clientsService = (ClientsService)VS.findValue("clientsService");
 	while(it.hasNext()){
 		Map map = (Map)it.next();
 		double xe = map.get("xe")==null?0:((Double)map.get("xe")).doubleValue();
-		 
-		double yinshouje = clientsService.getClientYinshou(StringUtils.nullToStr(map.get("id")));
-		double yinfuje = clientsService.getClientYinfu(StringUtils.nullToStr(map.get("id")));
+		
+		String client_id = StringUtils.nullToStr(map.get("id"));
+		
+		double curYs = 0l;
+		double curYf = 0l;
+		
+		if(qcMap != null && wlMap != null){
+			double qcys = qcMap.get(client_id+"应收")==null?0:((Double)qcMap.get(client_id+"应收")).doubleValue();  //昨日期初应收数		
+			double bqfs = wlMap.get(client_id+"应收发生")==null?0:((Double)wlMap.get(client_id+"应收发生")).doubleValue();  //昨日应收发生
+			double ysje = wlMap.get(client_id+"已收发生")==null?0:((Double)wlMap.get(client_id+"已收发生")).doubleValue();  //昨日已收发生
+			
+			curYs = qcys + bqfs - ysje;  //当前应收数
+			
+			
+			double qcyf = qcMap.get(client_id+"应付")==null?0:((Double)qcMap.get(client_id+"应付")).doubleValue();  //昨日期初应付数		
+			double bqfsyf = wlMap.get(client_id+"应付发生")==null?0:((Double)wlMap.get(client_id+"应付发生")).doubleValue();  //本期发生
+			double yfje = wlMap.get(client_id+"已付发生")==null?0:((Double)wlMap.get(client_id+"已付发生")).doubleValue();  //本期已收
+			
+			curYf = qcyf + bqfsyf - yfje;  //当前应付数
+		}
 	%>
 	<tr class="a1" onmouseover="this.className='a2';" onmouseout="this.className='a1';" title="双击查看详情"  onDblClick="openWin('<%=StringUtils.nullToStr(map.get("id")) %>');">
 		<td><%=StringUtils.nullToStr(map.get("id")) %></td>
 		<td><%=StringUtils.nullToStr(map.get("name")) %></td>
 		<td><%=StringUtils.nullToStr(map.get("client_type")) %></td>
 		<td><%=JMath.round(xe,2) %></td>
-		<td><%=JMath.round(yinshouje,2) %></td>
-		<td><%=JMath.round(yinfuje,2) %></td>
+		<td><%=JMath.round(curYs,2) %></td>
+		<td><%=JMath.round(curYf,2) %></td>
 		<td><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(map.get("khjl"))) %></td>		
 	</tr>
 	
