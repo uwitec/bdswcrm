@@ -94,6 +94,15 @@ List userList = (List)VS.findValue("userList");
 	{
 	   document.myform.submit();
 	}	
+	
+	
+	//触发点击回车事件
+	function f_enter(){
+	    if (window.event.keyCode==13){
+	        submits();
+	        event.returnValue = false;
+	    }
+	}
 </script>
 </head>
 <body onload="initFzrTip();">
@@ -109,10 +118,10 @@ List userList = (List)VS.findValue("userList");
 	</tr>
 	<tr>
 		<td class="search" align="left" colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;
-			单位名称：<input type="text" name="name" value="<%=name %>">&nbsp;&nbsp;&nbsp;&nbsp;
-			联系人：<input type="text" name="lxr" value="<%=lxr %>">&nbsp;&nbsp;&nbsp;&nbsp;
+			单位名称：<input type="text" name="name" value="<%=name %>" onkeypress="f_enter();">&nbsp;&nbsp;&nbsp;&nbsp;
+			联系人：<input type="text" name="lxr" value="<%=lxr %>" onkeypress="f_enter();">&nbsp;&nbsp;&nbsp;&nbsp;
 			客户经理：
-		    <input  id="brand"    type="text"   length="20"  onblur="setValue()" value="<%=StaticParamDo.getRealNameById(khjl) %>"/> 
+		    <input  id="brand"    type="text"   length="20"  onblur="setValue()" value="<%=StaticParamDo.getRealNameById(khjl) %>" onkeypress="f_enter();"> 
             <div id="brandTip"  style="height:12px;position:absolute;left:515px; top:60px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		    <input type="hidden" name="khjl" id="fzr" value="<%=khjl%>" /> 
 			<input type="button" name="buttonCx" value=" 查询 " onclick="submits()" class="css_button2">&nbsp;&nbsp;&nbsp;&nbsp;	
