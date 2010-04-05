@@ -29,40 +29,20 @@ public class GainTblDAO extends JdbcBaseDAO {
 		double cost = 0;
 		
 		//本月
-		String sql = "select sum(a.xj) as xshj  from xsd_product a join xsd b on b.id=a.xsd_id JOIN product c on c.product_id=a.product_id where b.state='已出库' and c.prop='库存商品' and DATE_FORMAT(b.cz_date,'%Y-%m-%d')>='" + ny + "-01" + "' and DATE_FORMAT(b.cz_date,'%Y-%m-%d')<='" + ny + "-31" + "'";
-		Map xsdMap = this.getResultMap(sql);
-		if(xsdMap != null){
-			cost += xsdMap.get("xshj")==null?0:((Double)xsdMap.get("xshj")).doubleValue();
-		}
-		sql = "select sum(a.xj) as lshj  from lsd_product a join lsd b on b.id=a.lsd_id JOIN product c on c.product_id=a.product_id where b.state='已提交' and c.prop='库存商品' and DATE_FORMAT(b.cz_date,'%Y-%m-%d')>='" + ny + "-01" + "' and DATE_FORMAT(b.cz_date,'%Y-%m-%d')<='" + ny + "-31" + "'";
-		Map lsdMap = this.getResultMap(sql);
-		if(lsdMap != null){
-			cost += lsdMap.get("lshj")==null?0:((Double)lsdMap.get("lshj")).doubleValue();
-		}
-		sql = "select sum(a.xj) as thhj  from thd_product a join thd b on b.thd_id=a.thd_id JOIN product c on c.product_id=a.product_id where b.state='已入库' and c.prop='库存商品' and DATE_FORMAT(b.cz_date,'%Y-%m-%d')>='" + ny + "-01" + "' and DATE_FORMAT(b.cz_date,'%Y-%m-%d')<='" + ny + "-31" + "'";
-		Map thdMap = this.getResultMap(sql);
-		if(thdMap != null){
-			cost -= thdMap.get("thhj")==null?0:((Double)thdMap.get("thhj")).doubleValue();
+		String sql = "select sum(a.hjje) as hjje from product_sale_flow a join product b on b.product_id=a.product_id where b.prop='库存商品' and a.cz_date>='" + ny + "-01" + "' and a.cz_date<='" + ny + "-31" + "'";
+		Map monthMap = this.getResultMap(sql);
+		if(monthMap != null){
+			cost = monthMap.get("hjje")==null?0:((Double)monthMap.get("hjje")).doubleValue();
 		}
 		map.put("curMonth", cost);
 		
 		cost = 0;
 		
 		//本年累积
-		sql = "select sum(a.xj) as xshj  from xsd_product a join xsd b on b.id=a.xsd_id JOIN product c on c.product_id=a.product_id where b.state='已出库' and c.prop='库存商品' and DATE_FORMAT(b.cz_date,'%Y-%m-%d')>='" + this.getNdqs(ny) + "' and DATE_FORMAT(b.cz_date,'%Y-%m-%d')<='" + ny + "-31" + "'";
-		Map xsdAllMap = this.getResultMap(sql);
-		if(xsdMap != null){
-			cost += xsdAllMap.get("xshj")==null?0:((Double)xsdAllMap.get("xshj")).doubleValue();
-		}
-		sql = "select sum(a.xj) as lshj  from lsd_product a join lsd b on b.id=a.lsd_id JOIN product c on c.product_id=a.product_id where b.state='已提交' and c.prop='库存商品' and DATE_FORMAT(b.cz_date,'%Y-%m-%d')>='" + this.getNdqs(ny) + "' and DATE_FORMAT(b.cz_date,'%Y-%m-%d')<='" + ny + "-31" + "'";
-		Map lsdAllMap = this.getResultMap(sql);
-		if(lsdMap != null){
-			cost += lsdAllMap.get("lshj")==null?0:((Double)lsdAllMap.get("lshj")).doubleValue();
-		}
-		sql = "select sum(a.xj) as thhj  from thd_product a join thd b on b.thd_id=a.thd_id JOIN product c on c.product_id=a.product_id where b.state='已入库' and c.prop='库存商品' and DATE_FORMAT(b.cz_date,'%Y-%m-%d')>='" + this.getNdqs(ny) + "' and DATE_FORMAT(b.cz_date,'%Y-%m-%d')<='" + ny + "-31" + "'";
-		Map thdAllMap = this.getResultMap(sql);
-		if(thdMap != null){
-			cost -= thdAllMap.get("thhj")==null?0:((Double)thdAllMap.get("thhj")).doubleValue();
+		sql = "select sum(a.hjje) as hjje from product_sale_flow a join product b on b.product_id=a.product_id where b.prop='库存商品' and a.cz_date>='" + this.getNdqs(ny)+ "' and a.cz_date<='" + ny + "-31" + "'";
+		Map yearMap = this.getResultMap(sql);
+		if(yearMap != null){
+			cost = yearMap.get("hjje")==null?0:((Double)yearMap.get("hjje")).doubleValue();
 		}
 		map.put("allMonth", cost);
 		
@@ -84,40 +64,20 @@ public class GainTblDAO extends JdbcBaseDAO {
 		double cost = 0;
 		
 		//本月
-		String sql = "select sum(a.nums*a.cbj) as xshj  from xsd_product a join xsd b on b.id=a.xsd_id JOIN product c on c.product_id=a.product_id where b.state='已出库' and c.prop='库存商品' and DATE_FORMAT(b.cz_date,'%Y-%m-%d')>='" + ny + "-01" + "' and DATE_FORMAT(b.cz_date,'%Y-%m-%d')<='" + ny + "-31" + "'";
-		Map xsdMap = this.getResultMap(sql);
-		if(xsdMap != null){
-			cost += xsdMap.get("xshj")==null?0:((Double)xsdMap.get("xshj")).doubleValue();
-		}
-		sql = "select sum(a.nums*a.cbj) as lshj  from lsd_product a join lsd b on b.id=a.lsd_id JOIN product c on c.product_id=a.product_id where b.state='已提交' and c.prop='库存商品' and DATE_FORMAT(b.cz_date,'%Y-%m-%d')>='" + ny + "-01" + "' and DATE_FORMAT(b.cz_date,'%Y-%m-%d')<='" + ny + "-31" + "'";
-		Map lsdMap = this.getResultMap(sql);
-		if(lsdMap != null){
-			cost += lsdMap.get("lshj")==null?0:((Double)lsdMap.get("lshj")).doubleValue();
-		}
-		sql = "select sum(a.nums*a.cbj) as thhj  from thd_product a join thd b on b.thd_id=a.thd_id JOIN product c on c.product_id=a.product_id where b.state='已入库' and c.prop='库存商品' and DATE_FORMAT(b.cz_date,'%Y-%m-%d')>='" + ny + "-01" + "' and DATE_FORMAT(b.cz_date,'%Y-%m-%d')<='" + ny + "-31" + "'";
-		Map thdMap = this.getResultMap(sql);
-		if(thdMap != null){
-			cost -= thdMap.get("thhj")==null?0:((Double)thdMap.get("thhj")).doubleValue();
+		String sql = "select sum(a.cb) as cb from product_sale_flow a join product b on b.product_id=a.product_id where b.prop='库存商品' and a.cz_date>='" + ny + "-01" + "' and a.cz_date<='" + ny + "-31" + "'";
+		Map monthMap = this.getResultMap(sql);
+		if(monthMap != null){
+			cost = monthMap.get("cb")==null?0:((Double)monthMap.get("cb")).doubleValue();
 		}
 		map.put("curMonth", cost);
 		
 		cost = 0;
 		
 		//本年累积
-		sql = "select sum(a.nums*a.cbj) as xshj  from xsd_product a join xsd b on b.id=a.xsd_id JOIN product c on c.product_id=a.product_id where b.state='已出库' and c.prop='库存商品' and DATE_FORMAT(b.cz_date,'%Y-%m-%d')>='" + this.getNdqs(ny) + "' and DATE_FORMAT(b.cz_date,'%Y-%m-%d')<='" + ny + "-31" + "'";
-		Map xsdAllMap = this.getResultMap(sql);
-		if(xsdMap != null){
-			cost += xsdAllMap.get("xshj")==null?0:((Double)xsdAllMap.get("xshj")).doubleValue();
-		}
-		sql = "select sum(a.nums*a.cbj) as lshj  from lsd_product a join lsd b on b.id=a.lsd_id JOIN product c on c.product_id=a.product_id where b.state='已提交' and c.prop='库存商品' and DATE_FORMAT(b.cz_date,'%Y-%m-%d')>='" + this.getNdqs(ny) + "' and DATE_FORMAT(b.cz_date,'%Y-%m-%d')<='" + ny + "-31" + "'";
-		Map lsdAllMap = this.getResultMap(sql);
-		if(lsdMap != null){
-			cost += lsdAllMap.get("lshj")==null?0:((Double)lsdAllMap.get("lshj")).doubleValue();
-		}
-		sql = "select sum(a.nums*a.cbj) as thhj  from thd_product a join thd b on b.thd_id=a.thd_id JOIN product c on c.product_id=a.product_id where b.state='已入库' and c.prop='库存商品' and DATE_FORMAT(b.cz_date,'%Y-%m-%d')>='" + this.getNdqs(ny) + "' and DATE_FORMAT(b.cz_date,'%Y-%m-%d')<='" + ny + "-31" + "'";
-		Map thdAllMap = this.getResultMap(sql);
-		if(thdMap != null){
-			cost -= thdAllMap.get("thhj")==null?0:((Double)thdAllMap.get("thhj")).doubleValue();
+		sql = "select sum(a.cb) as cb from product_sale_flow a join product b on b.product_id=a.product_id where b.prop='库存商品' and a.cz_date>='" + this.getNdqs(ny)+ "' and a.cz_date<='" + ny + "-31" + "'";
+		Map yearMap = this.getResultMap(sql);
+		if(yearMap != null){
+			cost = yearMap.get("cb")==null?0:((Double)yearMap.get("cb")).doubleValue();
 		}
 		map.put("allMonth", cost);
 		
@@ -138,44 +98,25 @@ public class GainTblDAO extends JdbcBaseDAO {
 		double cost = 0;
 		
 		//本月
-		String sql = "select sum(a.xj) as xshj  from xsd_product a join xsd b on b.id=a.xsd_id JOIN product c on c.product_id=a.product_id where b.state='已出库' and c.prop='服务/劳务' and DATE_FORMAT(b.cz_date,'%Y-%m-%d')>='" + ny + "-01" + "' and DATE_FORMAT(b.cz_date,'%Y-%m-%d')<='" + ny + "-31" + "'";
-		Map xsdMap = this.getResultMap(sql);
-		if(xsdMap != null){
-			cost += xsdMap.get("xshj")==null?0:((Double)xsdMap.get("xshj")).doubleValue();
-		}
-		sql = "select sum(a.xj) as lshj  from lsd_product a join lsd b on b.id=a.lsd_id JOIN product c on c.product_id=a.product_id where b.state='已提交' and c.prop='服务/劳务' and DATE_FORMAT(b.cz_date,'%Y-%m-%d')>='" + ny + "-01" + "' and DATE_FORMAT(b.cz_date,'%Y-%m-%d')<='" + ny + "-31" + "'";
-		Map lsdMap = this.getResultMap(sql);
-		if(lsdMap != null){
-			cost += lsdMap.get("lshj")==null?0:((Double)lsdMap.get("lshj")).doubleValue();
-		}
-		sql = "select sum(a.xj) as thhj  from thd_product a join thd b on b.thd_id=a.thd_id JOIN product c on c.product_id=a.product_id where b.state='已入库' and c.prop='服务/劳务' and DATE_FORMAT(b.cz_date,'%Y-%m-%d')>='" + ny + "-01" + "' and DATE_FORMAT(b.cz_date,'%Y-%m-%d')<='" + ny + "-31" + "'";
-		Map thdMap = this.getResultMap(sql);
-		if(thdMap != null){
-			cost -= thdMap.get("thhj")==null?0:((Double)thdMap.get("thhj")).doubleValue();
+		String sql = "select sum(a.hjje) as hjje from product_sale_flow a join product b on b.product_id=a.product_id where b.prop='服务/劳务' and a.cz_date>='" + ny + "-01" + "' and a.cz_date<='" + ny + "-31" + "'";
+		Map monthMap = this.getResultMap(sql);
+		if(monthMap != null){
+			cost = monthMap.get("hjje")==null?0:((Double)monthMap.get("hjje")).doubleValue();
 		}
 		map.put("curMonth", cost);
 		
 		cost = 0;
 		
 		//本年累积
-		sql = "select sum(a.xj) as xshj  from xsd_product a join xsd b on b.id=a.xsd_id JOIN product c on c.product_id=a.product_id where b.state='已出库' and c.prop='服务/劳务' and DATE_FORMAT(b.cz_date,'%Y-%m-%d')>='" + this.getNdqs(ny) + "' and DATE_FORMAT(b.cz_date,'%Y-%m-%d')<='" + ny + "-31" + "'";
-		Map xsdAllMap = this.getResultMap(sql);
-		if(xsdMap != null){
-			cost += xsdAllMap.get("xshj")==null?0:((Double)xsdAllMap.get("xshj")).doubleValue();
-		}
-		sql = "select sum(a.xj) as lshj  from lsd_product a join lsd b on b.id=a.lsd_id JOIN product c on c.product_id=a.product_id where b.state='已提交' and c.prop='服务/劳务' and DATE_FORMAT(b.cz_date,'%Y-%m-%d')>='" + this.getNdqs(ny) + "' and DATE_FORMAT(b.cz_date,'%Y-%m-%d')<='" + ny + "-31" + "'";
-		Map lsdAllMap = this.getResultMap(sql);
-		if(lsdMap != null){
-			cost += lsdAllMap.get("lshj")==null?0:((Double)lsdAllMap.get("lshj")).doubleValue();
-		}
-		sql = "select sum(a.xj) as thhj  from thd_product a join thd b on b.thd_id=a.thd_id JOIN product c on c.product_id=a.product_id where b.state='已入库' and c.prop='服务/劳务' and DATE_FORMAT(b.cz_date,'%Y-%m-%d')>='" + this.getNdqs(ny) + "' and DATE_FORMAT(b.cz_date,'%Y-%m-%d')<='" + ny + "-31" + "'";
-		Map thdAllMap = this.getResultMap(sql);
-		if(thdMap != null){
-			cost -= thdAllMap.get("thhj")==null?0:((Double)thdAllMap.get("thhj")).doubleValue();
+		sql = "select sum(a.hjje) as hjje from product_sale_flow a join product b on b.product_id=a.product_id where b.prop='服务/劳务' and a.cz_date>='" + this.getNdqs(ny)+ "' and a.cz_date<='" + ny + "-31" + "'";
+		Map yearMap = this.getResultMap(sql);
+		if(yearMap != null){
+			cost = yearMap.get("hjje")==null?0:((Double)yearMap.get("hjje")).doubleValue();
 		}
 		map.put("allMonth", cost);
 		
 		return map;
+		
 	}
 	
 	

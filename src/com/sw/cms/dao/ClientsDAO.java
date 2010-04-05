@@ -1,5 +1,6 @@
 package com.sw.cms.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -100,7 +101,72 @@ public class ClientsDAO extends JdbcBaseDAO {
 	}
 	
 	
+	/**
+	 * 取用户期初，包括应收期初、应付期初
+	 * @param cdate
+	 * @return Map key:client_id+应收（应付） value:期初值
+	 */
+	public Map getClientQc(String con,String cdate){
+		Map<String,Object> qcMap = new HashMap<String,Object>();
+		
+		String sql = "select a.* from client_qc a inner join clients b on b.id=a.client_name where a.cdate='" + cdate + "'";
+		
+		if(!con.equals("")){
+			sql += con;
+		}
+		
+		List list = this.getResultList(sql);
+		
+		String client_id = "";
+		if(list != null && list.size() > 0){
+			for(int i=0;i<list.size();i++){
+				Map tempMap = (Map)list.get(i);
+				client_id = (String)tempMap.get("client_name");
+				
+				qcMap.put(client_id+"应收", tempMap.get("ysqc"));
+				qcMap.put(client_id+"应付", tempMap.get("yfqc"));
+			}
+		}
+		
+		return qcMap;
+	}
 	
+	
+	
+	/**
+	 * 取用户往来所有情况
+	 * @param start_date
+	 * @param end_date
+	 * @param client_id
+	 * @return map key:client_id+je_type  value:发生金额
+	 */
+	public Map getClientWlInfo(String con,String cdate){
+		Map<String,Object> map = new HashMap<String,Object>();
+		
+		String sql = "select a.client_id,a.je_type,sum(a.fsje) as fsje from view_client_wl_info a inner join clients b on b.id=a.client_id where 1=1";
+		
+		if(!cdate.equals("")){
+			sql += " and a.cdate='" + cdate + "'";
+		}
+		
+		sql += " group by a.client_id,a.je_type";
+		
+		List list = this.getResultList(sql);
+		
+		String je_type = "";
+		String client_id = "";
+		if(list != null && list.size() > 0){
+			for(int i=0;i<list.size();i++){
+				Map tempMap = (Map)list.get(i);
+				client_id = (String)tempMap.get("client_id");
+				je_type = (String)tempMap.get("je_type");
+				
+				map.put(client_id+je_type, tempMap.get("fsje"));
+			}
+		}
+		
+		return map;
+	}
 	
 	
 	/**

@@ -14,6 +14,7 @@ import com.sw.cms.service.ClientsService;
 import com.sw.cms.service.SjzdService;
 import com.sw.cms.service.UserService;
 import com.sw.cms.util.Constant;
+import com.sw.cms.util.DateComFunc;
 import com.sw.cms.util.ParameterUtility;
 import com.sw.cms.util.StringUtils;
 
@@ -57,6 +58,8 @@ public class ClientsAction extends BaseAction {
 	private String clientsTips = "";
 	private String clientRegInfoText = "";
 
+	private Map clientQcMap;
+	private Map clientWlMap;
 
 
 	/**
@@ -216,10 +219,14 @@ public class ClientsAction extends BaseAction {
 		try{
 			int rowsPerPage = Constant.PAGE_SIZE2;
 			String con = "";
+			String con2 = "";
 			if(!client_con.equals("")){
 				con = " and (name like '%" + client_con + "%' or address like '%" + client_con + "%' or lxdh='" + client_con + "' or mobile='" + client_con + "' or lxr like '%" + client_con + "%')";
+				con2 = " and (b.name like '%" + client_con + "%' or b.address like '%" + client_con + "%' or b.lxdh='" + client_con + "' or b.mobile='" + client_con + "' or b.lxr like '%" + client_con + "%')";
 			}
 			clientsPage = clientsService.getClientIncludYsk(con, curPage,rowsPerPage);
+			clientQcMap = clientsService.getClientQc(con2, DateComFunc.getToday());
+			clientWlMap = clientsService.getClientWlInfo(con2, DateComFunc.getToday());
 			return "success";
 		}catch(Exception e){
 			log.error("客户查询出错,错误原因:" + e.getMessage());
@@ -769,5 +776,21 @@ public class ClientsAction extends BaseAction {
 
 	public void setClientsPayInfos(List clientsPayInfos) {
 		this.clientsPayInfos = clientsPayInfos;
+	}
+
+	public Map getClientQcMap() {
+		return clientQcMap;
+	}
+
+	public void setClientQcMap(Map clientQcMap) {
+		this.clientQcMap = clientQcMap;
+	}
+
+	public Map getClientWlMap() {
+		return clientWlMap;
+	}
+
+	public void setClientWlMap(Map clientWlMap) {
+		this.clientWlMap = clientWlMap;
 	}
 }

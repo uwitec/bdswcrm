@@ -1,6 +1,8 @@
 package com.sw.cms.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.sw.cms.dao.ClientsDAO;
 import com.sw.cms.dao.ClientsFollowDAO;
@@ -68,6 +70,30 @@ public class ClientsService {
 	 */
 	public Page getClientIncludYsk(String con, int curPage, int rowsPerPage) {
 		return clientsDao.getClientIncludYsk(con, curPage, rowsPerPage);
+	}
+	
+	
+	
+	/**
+	 * 取用户期初，包括应收期初、应付期初
+	 * @param cdate
+	 * @return Map key:client_id+应收（应付） value:期初值
+	 */
+	public Map getClientQc(String con,String cdate){
+		return clientsDao.getClientQc(con, cdate);
+	}
+	
+	
+	
+	/**
+	 * 取用户往来所有情况
+	 * @param start_date
+	 * @param end_date
+	 * @param client_id
+	 * @return map key:client_id+je_type  value:发生金额
+	 */
+	public Map getClientWlInfo(String con,String cdate){
+		return clientsDao.getClientWlInfo(con, cdate);
 	}
 
 	/**
