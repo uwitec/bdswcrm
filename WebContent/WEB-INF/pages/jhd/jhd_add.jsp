@@ -400,7 +400,7 @@ Jhd jhd = (Jhd)VS.findValue("jhd");
 			</select>
 		</td>	
 		<td class="a1">联系电话</td>
-		<td class="a2"><input type="text" name="jhd.kh_lxdh" id="kh_lxdh" ></td>
+		<td class="a2"><input type="text" name="jhd.kh_lxdh" id="kh_lxdh" size="40"></td>
 	</tr>
 	<tr>	
 		<td class="a1" width="15%">账期</td>
