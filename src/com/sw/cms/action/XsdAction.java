@@ -286,6 +286,8 @@ public class XsdAction extends BaseAction {
 		String user_id = info.getUser_id();
 		xsd.setCzr(user_id);
 		
+		xsd.setTh_flag("0");  //修改退回标志，退回的订单修改后不再显示红色
+		
 		//提交时需要判断是否需要审批，如果需要审批，订单状态设置为 已保存，审批状态设置为待审批
 		if(xsd.getState().equals("已提交")){
 			boolean hasLowFxxj = xsdService.checkFxxj(xsdProducts); //是否存在低于分销限价的
@@ -344,8 +346,7 @@ public class XsdAction extends BaseAction {
 				xsd.setSp_state("0");
 			}
 		}
-		xsd.setTh_flag("0");  //修改退回标志，退回的订单修改后不再显示红色
-		
+
 		xsdService.updateXsd(xsd, xsdProducts);
 		return SUCCESS;
 	}

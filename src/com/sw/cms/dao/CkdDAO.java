@@ -228,6 +228,21 @@ public class CkdDAO extends JdbcBaseDAO {
 		}
 		return is;
 	}
+	
+	/**
+	 * 出库单是否已经删除
+	 * @param ckd_id
+	 * @return
+	 */
+	public boolean isCkdDel(String ckd_id) {
+		boolean is = false;
+		String sql = "select count(*) from ckd where ckd_id='" + ckd_id + "'";
+		int counts = this.getJdbcTemplate().queryForInt(sql);
+		if (counts == 0) {
+			is = true;
+		}
+		return is;
+	}
 
 	/**
 	 * 删除出库单关联商品

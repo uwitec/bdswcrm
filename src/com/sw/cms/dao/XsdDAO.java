@@ -178,16 +178,16 @@ public class XsdDAO extends JdbcBaseDAO {
 			//存在更新
 			sql = "update xsd set creatdate=?,fzr=?,client_name=?,sklx=?,state=?,yhje=?,xsdje=?,xsdcbj=?,skje=?,skzh=?,ms=?,czr=?,skxs=?," +
 					"skrq=?,ysrq=?,cz_date=now(),kh_address=?,kh_lxr=?,kh_lxdh=?,ysfs=?,store_id=?,xjd=?,ysje=?,zq=?," +
-					"sjcjje=?,xsdkhcb=?,sp_state=?,sp_type=?,skfs=?,pos_id=?,fplx=?,kp_mc=?,kp_address=?,kp_dh=?,khhzh=?,sh=?,fpxx=?,yfzf_type=? where id=?";
+					"sjcjje=?,xsdkhcb=?,sp_state=?,sp_type=?,skfs=?,pos_id=?,fplx=?,kp_mc=?,kp_address=?,kp_dh=?,khhzh=?,sh=?,fpxx=?,yfzf_type=?,th_flag=? where id=?";
 		}else{
 			//不存在添加
 			sql = "insert into xsd(creatdate,fzr,client_name,sklx,state,yhje,xsdje,xsdcbj,skje,skzh,ms,czr,skxs,skrq,ysrq,cz_date," +
-					"kh_address,kh_lxr,kh_lxdh,ysfs,store_id,xjd,ysje,zq,sjcjje,xsdkhcb,sp_state,sp_type,skfs,pos_id,fplx,kp_mc,kp_address,kp_dh,khhzh,sh,fpxx,yfzf_type,id) " +
-					"values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,now(),?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+					"kh_address,kh_lxr,kh_lxdh,ysfs,store_id,xjd,ysje,zq,sjcjje,xsdkhcb,sp_state,sp_type,skfs,pos_id,fplx,kp_mc,kp_address,kp_dh,khhzh,sh,fpxx,yfzf_type,th_flag,id) " +
+					"values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,now(),?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		}
 		
 		
-		Object[] param = new Object[38];
+		Object[] param = new Object[39];
 		
 		param[0] = xsd.getCreatdate();
 		param[1] = xsd.getFzr();
@@ -226,16 +226,10 @@ public class XsdDAO extends JdbcBaseDAO {
 		param[34] = xsd.getSh();
 		param[35] = xsd.getFpxx();	
 		param[36] = xsd.getYfzf_type();
-		param[37] = xsd_id;
-		
+		param[37] = xsd.getTh_flag();
+		param[38] = xsd_id;
 		
 		this.getJdbcTemplate().update(sql,param);  //更新销售单信息
-		
-		//修改退回标记
-		if(!xsd.getState().equals("已保存")){
-			sql = "update xsd set th_flag='0' where id='" + xsd.getId() + "'";
-			this.getJdbcTemplate().update(sql);
-		}
 		
 		delXsdProducts(xsd_id);    //删除相应销售单商品
 		

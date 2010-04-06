@@ -290,6 +290,15 @@ public class CkdService {
 	}
 	
 	/**
+	 * 出库单是否已经删除
+	 * @param ckd_id
+	 * @return
+	 */
+	public boolean isCkdDel(String ckd_id) {
+		return ckdDao.isCkdDel(ckd_id);
+	}
+	
+	/**
 	 * 取所有库房列表
 	 * @return
 	 */

@@ -207,6 +207,11 @@ public class CkdAction extends BaseAction {
 		if(ckdService.isCkdSubmit(ckd.getCkd_id())){
 			return SUCCESS;
 		}
+		
+		//判断出库单是否已经删除，如果已经删除，但不做任何操作
+		if(ckdService.isCkdDel(ckd.getCkd_id())){
+			return SUCCESS;
+		}
 		 
 		LoginInfo info = (LoginInfo)getSession().getAttribute("LOGINUSER");
 		String user_id = info.getUser_id();
