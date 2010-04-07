@@ -50,7 +50,7 @@ public class CbtzDAO extends JdbcBaseDAO {
 	 * @param dj_type
 	 * @param kh_cbj
 	 */
-	public void updateProduct(String id,String dj_type,double kh_cbj,double ygcbj,double lsxj,double gf,double ds){
+	public void updateProduct(String id,String dj_id,String product_id,String dj_type,double kh_cbj,double ygcbj,double lsxj,double gf,double ds){
 		String sql = "";
 		if(dj_type.equals("xs")){
 			sql = "update xsd_product set kh_cbj=" + kh_cbj + ",ygcbj=" + ygcbj + ",lsxj=" + lsxj + ",gf=" + gf + ",ds=" + ds + " where id='" + id + "'";
@@ -58,6 +58,9 @@ public class CbtzDAO extends JdbcBaseDAO {
 			sql = "update lsd_product set kh_cbj=" + kh_cbj + ",ygcbj=" + ygcbj + ",lsxj=" + lsxj + ",gf=" + gf + ",ds=" + ds + " where id='" + id + "'";
 		}
 		
+		this.getJdbcTemplate().update(sql);
+		
+		sql = "update product_sale_flow set dwkhcb=" + kh_cbj + ",khcb=" + kh_cbj + "*nums,dwygcb=" + ygcbj + ",ygcb=" + ygcbj + "*nums,lsxj=" + lsxj + "*nums,gf=" + gf + ",ds=" + ds + "*nums where id='" + dj_id + "' and product_id='" + product_id + "'";
 		this.getJdbcTemplate().update(sql);
 	}
 

@@ -36,8 +36,8 @@ public class CbtzService {
 	 * @param dj_type
 	 * @param kh_cbj
 	 */
-	public void updateProduct(String id,String dj_type,double kh_cbj,double ygcbj,double lsxj,double gf,double ds){
-		cbtzDao.updateProduct(id, dj_type, kh_cbj,ygcbj,lsxj,gf,ds);
+	public void updateProduct(String id,String dj_id,String product_id,String dj_type,double kh_cbj,double ygcbj,double lsxj,double gf,double ds){
+		cbtzDao.updateProduct(id,dj_id,product_id, dj_type, kh_cbj,ygcbj,lsxj,gf,ds);
 	}
 
 	public CbtzDAO getCbtzDao() {
