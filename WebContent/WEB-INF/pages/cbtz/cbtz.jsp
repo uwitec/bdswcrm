@@ -25,6 +25,8 @@
 <body>
 <form name="myform" action="updateKhcb.html" method="post">
 <ww:hidden name="id" id="id" value="%{id}" theme="simple"/>
+<ww:hidden name="product_id" id="product_id" value="%{product_id}" theme="simple"/>
+<ww:hidden name="dj_id" id="dj_id" value="%{dj_id}" theme="simple"/>
 <ww:hidden name="dj_type" id="dj_type" value="%{dj_type}" theme="simple"/>
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>

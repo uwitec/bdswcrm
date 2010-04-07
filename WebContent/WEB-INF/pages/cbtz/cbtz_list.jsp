@@ -19,13 +19,13 @@
 		document.myform.submit();
 	}
 	
-	function edit(dj_type,id){
+	function edit(dj_type,id,product_id){
 		if(dj_type == "零售单"){
 			dj_type = "ls";
 		}else{
 			dj_type = "xs";
 		}
-		var destination = "editKhcb.html?dj_type=" + dj_type + "&id=" + id;
+		var destination = 'editKhcb.html?dj_type=' + dj_type + '&id=' + id + '&product_id=' + product_id + '&dj_id=<ww:property value="%{dj_id}" />';
 		var fea ='width=600,height=400,left=' + (screen.availWidth-600)/2 + ',top=' + (screen.availHeight-400)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		window.open(destination,'考核成本调整',fea);		
 	}
@@ -81,7 +81,7 @@
 			<td align="right"><ww:property value="%{getText('global.format.money',{lsxj})}" />&nbsp;</td>
 			<td align="right"><ww:property value="%{getText('global.format.money',{gf})}" />&nbsp;</td>
 			<td align="right"><ww:property value="%{getText('global.format.money',{ds})}" />&nbsp;</td>				
-			<td><a href="javascript:edit('<ww:property value="%{dj_type}" />','<ww:property value="%{id}" />');">调整</a></td>
+			<td><a href="javascript:edit('<ww:property value="%{dj_type}" />','<ww:property value="%{id}" />','<ww:property value="%{product_id}" />');">调整</a></td>
 		</tr>
 	</ww:iterator>
 </table>
