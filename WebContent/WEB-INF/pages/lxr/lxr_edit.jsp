@@ -7,6 +7,7 @@
 <%
 OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
 ClientsLinkman linkman=(ClientsLinkman)VS.findValue("linkman");
+String[] lxrnld = (String[])VS.findValue("lxrnld"); 
  %>
 <html>
 <head>
@@ -34,6 +35,21 @@ ClientsLinkman linkman=(ClientsLinkman)VS.findValue("linkman");
              return ;
           }
 	    }
+	    
+	    if(document.getElementById("dept").value == ""){
+			alert("联系人的部门不能为空 ！");
+			return;
+		}
+		if(document.getElementById("zw").value == ""){
+			alert("联系人的职务不能为空 ！");
+			return;
+		}
+		
+		if((document.getElementById("gzdh").value == "") && (document.getElementById("yddh").value == "")){
+			alert("办公电话和移动电话不能都为空，至少要填写一个！");
+			return;
+		}
+		
 	    document.myform.action="updateLxr.html";
 		document.myform.submit(); 
 	   
@@ -50,7 +66,7 @@ ClientsLinkman linkman=(ClientsLinkman)VS.findValue("linkman");
  
 </head>
 <body   oncontextmenu="return false;">
-<form name="myform" action="viewClient.html" method="post">
+<form name="myform" action="editLxr.html" method="post">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
    <input type="hidden" name="linkman.id" value="<%=linkman.getId() %>">
 	<thead>
@@ -64,17 +80,34 @@ ClientsLinkman linkman=(ClientsLinkman)VS.findValue("linkman");
 	      <input type="text"   id="client_name"   size="37" maxlength="50" readonly="readonly" value="<%=linkman.getClients_id() %>"/>
 	    </td>
 	</tr>
-	<tr> 
-	     
+	<tr> 	     
 		<td class="a1" width="15%">姓名</td>
 		<td class="a2" width="35%"><input type="text" name="linkman.name" id="name" value="<%=linkman.getName() %>"><font color="red">*</font></td>
-		<td class="a1" width="15%">类型</td>
-		<td class="a2" width="35%">
-			<select name="linkman.lx" id="lx">
-				<option value="主联系人"  <%if(linkman.getLx().equals("主联系人"))out.print("selected"); %>>主联系人</option>
-				<option value="联系人"   <%if(linkman.getLx().equals("联系人"))out.print("selected"); %>>联系人</option>
-			</select>
-		</td>		
+		<td class="a1" width="15%">称呼</td>
+		<td class="a2" width="35%"><input type="text" name="linkman.ch" id="ch" value="<%=StringUtils.nullToStr(linkman.getCh()) %>" style="width:85%"></td>		
+	</tr>
+	<tr>
+	    <td class="a1" width="15%">部门</td>
+		<td class="a2" width="35%"><input type="text" name="linkman.dept" id="dept" value="<%=StringUtils.nullToStr(linkman.getDept()) %>" style="width:85%"><font color="red">*</font></td>
+		<td class="a1" width="15%">职务</td>
+		<td class="a2" width="35%"><input type="text" name="linkman.zw" id="zw" value="<%=StringUtils.nullToStr(linkman.getZw()) %>" style="width:85%"><font color="red">*</font></td>
+	</tr>
+	<tr>
+		<td class="a1" width="15%">办公电话</td>
+		<td class="a2" width="35%"><input type="text" name="linkman.gzdh" id="gzdh" value="<%=StringUtils.nullToStr(linkman.getGzdh()) %>"  ></td>	
+		<td class="a1" width="15%">移动电话</td>
+		<td class="a2" width="35%"><input type="text" name="linkman.yddh" id="yddh" value="<%=StringUtils.nullToStr(linkman.getYddh()) %>"  ></td>			
+	</tr>
+	
+	<tr>
+		<td class="a1" width="15%">E-Mail</td>
+		<td class="a2"  colspan="3"><input type="text" name="linkman.mail" id="mail" value="<%=StringUtils.nullToStr(linkman.getMail()) %>" size="50" ></td>	
+	</tr>
+	<tr>
+		<td class="a1" width="15%">QQ</td>
+		<td class="a2" width="35%"><input type="text" name="linkman.qq" id="qq" value="<%=StringUtils.nullToStr(linkman.getQq()) %>" style="width:85%"></td>	
+		<td class="a1" width="15%">MSN</td>
+		<td class="a2" width="35%"><input type="text" name="linkman.msn" id="msn" value="<%=StringUtils.nullToStr(linkman.getMsn()) %>" style="width:85%"></td>	
 	</tr>
 	<tr>
 		<td class="a1" width="15%">性别</td>
@@ -84,35 +117,31 @@ ClientsLinkman linkman=(ClientsLinkman)VS.findValue("linkman");
 				<option value="女" <%if(linkman.getSex().equals("女"))out.print("selected"); %>>女</option>
 			</select>
         </td>
-		<td class="a1" width="15%">职务</td>
-		<td class="a2" width="35%"><input type="text" name="linkman.zw" id="zw" value="<%=linkman.getZw() %>"  ></td>		
-	</tr>
+		<td class="a1" width="15%">年龄段</td>
+		<td class="a2" width="35%">
+			<select name="linkman.nld" id="nld" style="width:85%">
+				<option value=""></option>
+				<%
+				if(lxrnld != null && lxrnld.length > 0){ 
+					for(int i=0;i<lxrnld.length;i++){
+				%>
+				<option value="<%=lxrnld[i] %>" <%if(StringUtils.nullToStr(linkman.getNld()).equals(lxrnld[i])) out.print("selected"); %>><%=lxrnld[i] %></option>
+				<%
+					}
+				}
+				%>
+			</select>
+		</td>			
+	</tr>		
 	<tr>
-		<td class="a1" width="15%">部门</td>
-		<td class="a2" width="35%"><input type="text" name="linkman.dept" id="dept" value="<%=linkman.getDept() %>"  ></td>
-		<td class="a1" width="15%">座机</td>
-		<td class="a2" width="35%"><input type="text" name="linkman.gzdh" id="gzdh" value="<%=linkman.getGzdh()%>"  ></td>		
-	</tr>
-	<tr>
-		<td class="a1" width="15%">爱好</td>
-		<td class="a2" width="35%"><input type="text" name="linkman.ah" id="ah" value="<%=linkman.getAh()%>"></td>	
-		<td class="a1" width="15%">生日</td>
-		<td class="a2" width="35%"><input type="text" name="linkman.sr" id="sr" value="<%=StringUtils.nullToStr(linkman.getSr())%>"class="Wdate" onFocus="WdatePicker()">
+		<td class="a1" width="15%">类型</td>
+		<td class="a2" width="35%">
+			<select name="linkman.lx" id="lx" >
+				<option value="主联系人" <%if(linkman.getLx().equals("主联系人")) out.print("selected"); %>>主联系人</option>
+				<option value="联系人"   <%if(linkman.getLx().equals("联系人")) out.print("selected"); %>>联系人</option>
+			</select>
 		</td>
 	</tr>		
-	<tr>
-		<td class="a1" width="15%">移动电话</td>
-		<td class="a2" width="35%"><input type="text" name="linkman.yddh" id="yddh" value="<%=linkman.getYddh()%>"  ></td>	
-		<td class="a1" width="15%">E-Mail</td>
-		<td class="a2" width="35%"><input type="text" name="linkman.mail" id="mail" value="<%=linkman.getMail()%>"  ></td>		
-	</tr>	
-	<tr>
-		<td class="a1" width="15%">家庭电话</td>
-		<td class="a2" width="35%"><input type="text" name="linkman.jtdh" id="jtdh" value="<%=linkman.getJtdh()%>" ></td>
-		<td class="a1" width="15%">其他联系方式</td>
-		<td class="a2" width="35%"><input type="text" name="linkman.qtlx" id="qtlx" value="<%=linkman.getQtlx()%>"  ></td>		
-	</tr>		
-	
 	 
 	<tr height="50">
 		<td class="a1">备注</td>

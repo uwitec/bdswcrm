@@ -12,7 +12,7 @@ ClientsLinkman linkman=(ClientsLinkman)VS.findValue("linkman");
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 </head>
 <body   oncontextmenu="return false;">
-<form name="myform" action="viewClient.html" method="post">
+<form name="myform" action="viewLxr.html" method="post">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
@@ -29,44 +29,45 @@ ClientsLinkman linkman=(ClientsLinkman)VS.findValue("linkman");
 	     
 		<td class="a1" width="15%">姓名</td>
 		<td class="a2" width="35%"><%=linkman.getName() %></td>
-		<td class="a1" width="15%">类型</td>
-		<td class="a2" width="35%">
-			 <%=linkman.getLx() %>
-		</td>		
+		<td class="a1" width="15%">称呼</td>
+		<td class="a2" width="35%"><%=linkman.getCh() %></td>		
+	</tr>
+	<tr>
+	    <td class="a1" width="15%">部门</td>
+		<td class="a2" width="35%"><%=linkman.getDept() %></td>
+		<td class="a1" width="15%">职务</td>
+		<td class="a2" width="35%"><%=linkman.getZw()%></td>
+	</tr>
+	<tr>
+		<td class="a1" width="15%">办公电话</td>
+		<td class="a2" width="35%"><%=linkman.getGzdh()%></td>	
+		<td class="a1" width="15%">移动电话</td>
+		<td class="a2" width="35%"><%=linkman.getYddh()%></td>			
+	</tr>
+	
+	<tr>
+		<td class="a1" width="15%">E-Mail</td>
+		<td class="a2"  colspan="3"><%=linkman.getMail()%></td>	
+	</tr>
+	<tr>
+		<td class="a1" width="15%">QQ</td>
+		<td class="a2" width="35%"><%=linkman.getQq()%></td>	
+		<td class="a1" width="15%">MSN</td>
+		<td class="a2" width="35%"><%=linkman.getMsn()%></td>	
 	</tr>
 	<tr>
 		<td class="a1" width="15%">性别</td>
 		<td class="a2" width="35%">
           <%=linkman.getSex()%>
         </td>
-		<td class="a1" width="15%">职务</td>
-		<td class="a2" width="35%"><%=linkman.getZw()%></td>		
+		<td class="a1" width="15%">年龄段</td>
+		<td class="a2" width="35%"><%=linkman.getNld()%></td>		
 	</tr>
 	<tr>
-		<td class="a1" width="15%">部门</td>
-		<td class="a2" width="35%"><%=linkman.getDept()%></td>
-		<td class="a1" width="15%">座机</td>
-		<td class="a2" width="35%"><%=linkman.getGzdh()%></td>		
-	</tr>
-	<tr>
-		<td class="a1" width="15%">爱好</td>
-		<td class="a2" width="35%"><%=linkman.getAh() %></td>	
-		<td class="a1" width="15%">生日</td>
-		<td class="a2" width="35%"><%=linkman.getSr() %>
-		   
-		</td>
-	</tr>		
-	<tr>
-		<td class="a1" width="15%">移动电话</td>
-		<td class="a2" width="35%"><%=linkman.getYddh() %></td>	
-		<td class="a1" width="15%">E-Mail</td>
-		<td class="a2" width="35%"><%=linkman.getMail() %></td>		
-	</tr>	
-	<tr>
-		<td class="a1" width="15%">家庭电话</td>
-		<td class="a2" width="35%"><%=linkman.getJtdh() %></td>
-		<td class="a1" width="15%">其他联系方式</td>
-		<td class="a2" width="35%"><%=linkman.getQtlx() %></td>		
+		<td class="a1" width="15%">类型</td>
+		<td class="a2" width="35%">
+			 <%=linkman.getLx() %>
+		</td>	
 	</tr>		
 	
 	 
