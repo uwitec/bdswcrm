@@ -1,4 +1,4 @@
-2010-02-04修改
+﻿2010-02-04修改
 ALTER TABLE `xxfb_nbgg` MODIFY COLUMN `id` VARCHAR(50) DEFAULT NULL;
 
 2010-02-18添加
@@ -503,6 +503,11 @@ ALTER TABLE `jhd` ADD COLUMN `ysws`  VARCHAR(6)  AFTER `kh_lxdh`;
 --更新采购订单发票类型字段值
 update jhd set ysws='含税' where ysws='已税'
 
+2010-04-02修改
+--采购订单增加发票状态字段
+ALTER TABLE `jhd` ADD COLUMN `fpstate`  VARCHAR(20)  AFTER `ysws`;
+update jhd set ysws='含税' where ysws='已税'
+
 
 2010-04-03修改
 --添加商品销售流水表，提高后续商品销售的统计的效率
@@ -560,3 +565,22 @@ where (b.state = '已提交'))) a)
 
 --商品表添加索引
 ALTER TABLE `product` ADD INDEX `Index_product_kind`(`product_id`, `product_kind`);
+
+2010-04-05修改
+--菜单中增加发票管理
+INSERT INTO `column_mng`(`id`,`name`,`parent_id`,`xh`,`img`,`yw_flag`) 
+VALUES('010','发票管理','0','10','WORDPAD.gif','1'),('010001','发票管理','010',25,NULL,'1'),('010002','发票统计','010',26,NULL,'1');
+
+INSERT INTO `funcs`(`func_id`,`func_name`,`func_ms`,`url`,`img`,`xh`,`ywflag`,`funcflag`)  values
+('FC0105','采购发票','采购发票的处理','listCgfp.html','123.gif',82,'1','9');
+INSERT INTO `funcs`(`func_id`,`func_name`,`func_ms`,`url`,`img`,`xh`,`ywflag`,`funcflag`)  values
+('FC0110','采购发票统计','采购发票的统计','showCgfpCondition.html','127.gif',82,'1','9');
+
+
+2010-04-07修改
+--往来单位的联系人中增加qq、msn、称呼、年龄段
+ALTER TABLE `clients` ADD COLUMN `ch`  VARCHAR(50)  AFTER `clients_id`;
+ALTER TABLE `clients` ADD COLUMN `qq`  VARCHAR(20)  AFTER `ch`;
+ALTER TABLE `clients` ADD COLUMN `msn`  VARCHAR(50)  AFTER `qq`;
+ALTER TABLE `clients` ADD COLUMN `nld`  VARCHAR(20)  AFTER `msn`;
+
