@@ -38,6 +38,45 @@ public class ClientsLinkman {
 	private String remark; // 备注
 
 	private String clients_id;// 单位ID
+	
+	private String ch;// 称呼
+
+	private String qq; // QQ
+
+	private String msn; // MSN
+
+	private String nld; // 年龄段
+	
+	public String getNld() {
+		return nld;
+	}
+
+	public void setNld(String nld) {
+		this.nld = nld;
+	}
+	
+	public String getMsn() {
+		return msn;
+	}
+
+	public void setMsn(String msn) {
+		this.msn = msn;
+	}
+	public String getQq() {
+		return qq;
+	}
+
+	public void setQq(String qq) {
+		this.qq = qq;
+	}
+
+	public String getCh() {
+		return ch;
+	}
+
+	public void setCh(String ch) {
+		this.ch = ch;
+	}
 
 	public String getAddress() {
 		return address;
