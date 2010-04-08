@@ -37,7 +37,7 @@ public class ClientsAction extends BaseAction {
 	private String khjl = "";
 	
 	private String[] wldwlx;
-
+	private String[] lxrnld;
 	private String orderName = "";
 	private String orderType = "";
 
@@ -105,6 +105,7 @@ public class ClientsAction extends BaseAction {
 	 */
 	public String add() {
 		wldwlx = sjzdService.getSjzdXmxxByZdId("SJZD_WLDWLX");
+		lxrnld= sjzdService.getSjzdXmxxByZdId("SJZD_LXRNLD");
 		userList = userService.getAllEmployeeList();
 		return "success";
 	}
@@ -119,6 +120,7 @@ public class ClientsAction extends BaseAction {
 		if(clientsService.getClientsIsExist(client.getName())>0){
 			getSession().setAttribute("MSG", "单位名称已存在，请选用其它名称！");
 			wldwlx = sjzdService.getSjzdXmxxByZdId("SJZD_WLDWLX");
+			lxrnld= sjzdService.getSjzdXmxxByZdId("SJZD_LXRNLD");
 			userList = userService.getAllEmployeeList();
 			return "input";
 		}
@@ -136,6 +138,7 @@ public class ClientsAction extends BaseAction {
 		String id = ParameterUtility.getStringParameter(getRequest(), "id", "");
 		client = (Clients) clientsService.getClient(id);
 		wldwlx = sjzdService.getSjzdXmxxByZdId("SJZD_WLDWLX");
+		lxrnld= sjzdService.getSjzdXmxxByZdId("SJZD_LXRNLD");
 		userList = userService.getAllEmployeeList();
 		clientsPayInfos = clientsService.getClientsPayInfos(id);
 		return "success";
@@ -158,6 +161,7 @@ public class ClientsAction extends BaseAction {
 				client = (Clients) clientsService.getClient(map.getId());
 				client.setName(flogname);
 				wldwlx = sjzdService.getSjzdXmxxByZdId("SJZD_WLDWLX");
+				lxrnld= sjzdService.getSjzdXmxxByZdId("SJZD_LXRNLD");
 				userList = userService.getAllEmployeeList();
 				return "input";
 			}
@@ -280,6 +284,7 @@ public class ClientsAction extends BaseAction {
 	public String addLinkman() throws Exception {
 		try {
 			id = ParameterUtility.getStringParameter(getRequest(), "id", "");
+			lxrnld= sjzdService.getSjzdXmxxByZdId("SJZD_LXRNLD");
 			return "success";
 		} catch (Exception e) {
 			log.error("打开添加联系人页面 错误原因" + e.getMessage());
@@ -314,6 +319,7 @@ public class ClientsAction extends BaseAction {
 	public String editLinkman() throws Exception {
 		try {
 			linkman = (ClientsLinkman) clientsService.getLinkmanById(id);
+			lxrnld= sjzdService.getSjzdXmxxByZdId("SJZD_LXRNLD");
 			return "success";
 		} catch (Exception e) {
 			log.error("打开修改联系人页面 错误原因" + e.getMessage());
@@ -792,5 +798,13 @@ public class ClientsAction extends BaseAction {
 
 	public void setClientWlMap(Map clientWlMap) {
 		this.clientWlMap = clientWlMap;
+	}
+	
+	public String[] getLxrnld() {
+		return lxrnld;
+	}
+
+	public void setLxrnld(String[] lxrnld) {
+		this.lxrnld = lxrnld;
 	}
 }

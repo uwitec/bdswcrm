@@ -47,6 +47,7 @@ public class LxrAction extends BaseAction {
 	private String mailLxrId = "";
 
 	private String[] lxrid;
+	private String[] lxrnld;
 
 	private String orderName = "";
 
@@ -102,7 +103,7 @@ public class LxrAction extends BaseAction {
 	 */
 	public String add() throws Exception {
 
-		try {
+		try {lxrnld= sjzdService.getSjzdXmxxByZdId("SJZD_LXRNLD");
 			return "success";
 		} catch (Exception e) {
 			log.error("打开添加联系人页面  错误原因：" + e.getMessage());
@@ -137,6 +138,7 @@ public class LxrAction extends BaseAction {
 
 		try {
 			linkman = (ClientsLinkman) lxrService.getLinkmanById(id);
+			lxrnld= sjzdService.getSjzdXmxxByZdId("SJZD_LXRNLD");
 			return "success";
 		} catch (Exception e) {
 			log.error("打开修改联系人  错误原因" + e.getMessage());
@@ -377,5 +379,13 @@ public class LxrAction extends BaseAction {
 
 	public void setZt(String zt) {
 		this.zt = zt;
+	}
+	
+	public String[] getLxrnld() {
+		return lxrnld;
+	}
+
+	public void setLxrnld(String[] lxrnld) {
+		this.lxrnld = lxrnld;
 	}
 }
