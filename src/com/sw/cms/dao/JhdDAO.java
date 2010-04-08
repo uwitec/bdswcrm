@@ -84,9 +84,9 @@ public class JhdDAO extends JdbcBaseDAO {
 	 */
 	public void saveJhd(Jhd jhd,List jhdProducts){
 		String sql = "insert into jhd(id,gysbh,cg_date,state,fzr,ms,shuil,tzje,total,gysmc,czr,cz_date,fkje,fklx,yfrq,fkfs,yfje,store_id,zq,fkzh,sjcjje,yjdhsj"
-				+",kh_address,kh_lxr,kh_lxdh,ysws) "
+				+",kh_address,kh_lxr,kh_lxdh,ysws,fpstate) "
 		        +"values(?,?,?,?,?,?,?,?,?,?,?,now(),?,?,?,?,?,?,?,?,?,?"
-				+",?,?,?,?)";
+				+",?,?,?,?,'Î´Èë¿â')";
 		
 		Object[] param = new Object[25];
 		
@@ -135,7 +135,7 @@ public class JhdDAO extends JdbcBaseDAO {
 	public void updateJhd(Jhd jhd,List jhdProducts){
 		String sql = "update jhd set gysbh=?,cg_date=?,state=?,fzr=?,ms=?,shuil=?,tzje=?,total=?,gysmc=?,czr=?," +
 				"cz_date=now(),fkje=?,fklx=?,yfrq=?,fkfs=?,yfje=?,store_id=?,zq=?,fkzh=?,sjcjje=?,"
-		        +"kh_address=?,kh_lxr=?,kh_lxdh=?,ysws=? where id=?";
+		        +"kh_address=?,kh_lxr=?,kh_lxdh=?,ysws=?,fpstate='Î´Èë¿â' where id=?";
 		
 		Object[] param = new Object[24];
 		
