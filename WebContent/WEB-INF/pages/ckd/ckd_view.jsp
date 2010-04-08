@@ -96,7 +96,6 @@ List ckdProducts = (List)VS.findValue("ckdProducts");
 		<td>商品名称</td>
 		<td>规格</td>
 		<td>数量</td>
-		<td>备注</td>
 	</tr>
 	</thead>
 <%
@@ -108,7 +107,6 @@ if(ckdProducts!=null && ckdProducts.size()>0){
 		<td class="a2"><%=StringUtils.nullToStr(ckdProduct.get("product_name")) %></td>
 		<td class="a2"><%=StringUtils.nullToStr(ckdProduct.get("product_xh")) %></td>	
 		<td class="a2"><%=StringUtils.nullToStr(ckdProduct.get("nums")) %></td>
-		<td class="a2"><%=StringUtils.nullToStr(ckdProduct.get("remark")) %></td>
 	</tr>
 <%
 	}
@@ -124,9 +122,7 @@ if(ckdProducts!=null && ckdProducts.size()>0){
 	</thead>
 	<tr>
 		<td class="a1" width="15%">描述信息</td>
-		<td class="a2" width="85%">
-			<textarea rows="3" name="ckd.ms" id="ms" style="width:75%" maxlength="500" readonly><%=StringUtils.nullToStr(ckd.getMs()) %></textarea>
-		</td>
+		<td class="a2" width="85%"><%=StringUtils.nullToStr(ckd.getMs()) %></td>
 	</tr>	
 </table>
 <table width="100%"  align="center" class="chart_info" cellpadding="0" cellspacing="0">

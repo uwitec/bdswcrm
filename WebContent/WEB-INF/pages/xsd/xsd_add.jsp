@@ -230,7 +230,7 @@ String flag = StringUtils.nullToStr(VS.findValue("flag"));
 	<tr>
 		<td class="a1" width="15%">销售订单编号</td>
 		<td class="a2" width="35%">
-			<input type="text" name="xsd.id" id="id" value="<%=StringUtils.nullToStr(xsd.getId()) %>" size="30" readonly><font color="red">*</font>
+			<input type="text" name="xsd.id" id="id" value="<%=StringUtils.nullToStr(xsd.getId()) %>" size="40" readonly><font color="red">*</font>
 		</td>
 		<%
 		String creatDate = StringUtils.nullToStr(xsd.getCreatdate());
@@ -239,25 +239,24 @@ String flag = StringUtils.nullToStr(VS.findValue("flag"));
 		}
 		%>		
 		<td class="a1">创建时间</td>
-		<td class="a2"><input type="text" name="xsd.creatdate" id="creatdate" value="<%=creatDate %>"  class="Wdate" onFocus="WdatePicker()">
+		<td class="a2"><input type="text" name="xsd.creatdate" id="creatdate" value="<%=creatDate %>"  class="Wdate" size="40" onFocus="WdatePicker()">
 		</td>						 
 	</tr>
 	<tr>	
 		<td class="a1" width="15%">客户名称</td>
 		<td class="a2">
-		<input type="text" name="xsd.client_id" onblur="setClientRegInfo();" id="client_name" value="<%=StaticParamDo.getClientNameById(StringUtils.nullToStr(xsd.getClient_name())) %>" size="30" maxlength="50" >
+		<input type="text" name="xsd.client_id" onblur="setClientRegInfo();" id="client_name" value="<%=StaticParamDo.getClientNameById(StringUtils.nullToStr(xsd.getClient_name())) %>" size="40" maxlength="50" ><font color="red">*</font>
 		<input type="hidden" name="xsd.client_name" id="client_id" value="<%=StringUtils.nullToStr(xsd.getClient_name()) %>">
 		<div id="clientsTip" style="height:12px;position:absolute;width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
-		<font color="red">*</font>
 		</td>
 		<td class="a1">地址</td>
-		<td class="a2"><input type="text" name="xsd.kh_address" id="kh_address" value="<%=StringUtils.nullToStr(xsd.getKh_address()) %>"></td>	
+		<td class="a2"><input type="text" name="xsd.kh_address" id="kh_address" value="<%=StringUtils.nullToStr(xsd.getKh_address()) %>" maxlength="100" size="40"></td>	
 	</tr>
 	
 	<tr>
 		<td class="a1">客户联系人</td>
 		<td class="a2">
-			<select name="xsd.kh_lxr" id="kh_lxr" onchange="chgLxr(this.value);" style="width:90px">
+			<select name="xsd.kh_lxr" id="kh_lxr" onchange="chgLxr(this.value);" style="width:232px">
 				<%
 				if(!StringUtils.nullToStr(xsd.getKh_lxr()).equals("")){
 				%>
@@ -268,7 +267,7 @@ String flag = StringUtils.nullToStr(VS.findValue("flag"));
 			</select>
 		</td>	
 		<td class="a1">联系电话</td>
-		<td class="a2"><input type="text" name="xsd.kh_lxdh" id="kh_lxdh" value="<%=StringUtils.nullToStr(xsd.getKh_lxdh()) %>"></td>
+		<td class="a2"><input type="text" name="xsd.kh_lxdh" id="kh_lxdh" value="<%=StringUtils.nullToStr(xsd.getKh_lxdh()) %>" maxlength="22" size="40"></td>
 	</tr>
 	<tr>
 		
@@ -291,7 +290,7 @@ String flag = StringUtils.nullToStr(VS.findValue("flag"));
 			<%
 		String[] ysfss = ysfsArry; 
 		%>
-			<select name="xsd.ysfs" id="ysfs">
+			<select name="xsd.ysfs" id="ysfs" style="width:232px">
 				<option value=""></option>
 			<%
 			if(ysfss != null && ysfss.length > 0){
@@ -309,9 +308,9 @@ String flag = StringUtils.nullToStr(VS.findValue("flag"));
 	<tr>
 		<td class="a1"  width="15%">经手人</td>
 		<td class="a2">
-			<input  id="brand" type="text" length="20" onblur="setValue()" value="<%=StaticParamDo.getRealNameById(xsd.getFzr()) %>"/> 
+			<input  id="brand" type="text" mxlength="20" onblur="setValue()" value="<%=StaticParamDo.getRealNameById(xsd.getFzr()) %>" size="40"/><font color="red">*</font> 
 			<div id="brandTip"  style="height:12px;position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
-			<input type="hidden" name="xsd.fzr" id="fzr" value="<%=StringUtils.nullToStr(xsd.getFzr()) %>"/><font color="red">*</font>		
+			<input type="hidden" name="xsd.fzr" id="fzr" value="<%=StringUtils.nullToStr(xsd.getFzr()) %>"/>		
 		</td>
 		<%
 		String yfzfType = StringUtils.nullToStr(xsd.getYfzf_type());
@@ -416,25 +415,25 @@ if(xsdProducts!=null && xsdProducts.size()>0){
 	<tr height="35">	
 		<td class="a1" width="15%">订单合计金额</td>
 		<td class="a2">
-			<input type="text" name="xsd.xsdje" id="xsdje" value="<%=JMath.round(xsd.getXsdje()) %>" readonly>
+			<input type="text" name="xsd.xsdje" id="xsdje" value="<%=JMath.round(xsd.getXsdje()) %>" readonly size="40">元
 			<input type="hidden" name="xsd.xsdcbj" id="xsdcbj" value="<%=JMath.round(xsd.getXsdcbj()) %>">
 			<input type="hidden" name="xsd.xsdkhcb" id="xsdkhcb" value="<%=JMath.round(xsd.getXsdkhcb()) %>">
 			<input type="hidden" name="xsd.yhje" id="yhje" value="0.00">
-			<input type="hidden" id="ysje"  name="xsd.ysje" value="0.00">元
+			<input type="hidden" id="ysje"  name="xsd.ysje" value="0.00">
 		</td>
-		<td class="a1" widht="20%" id="td_skzh_label" style="<%=skxxStyle %>">收款账户</td>				
-		<td class="a2" id="td_skzh_value" style="<%=skxxStyle %>"><input type="text" id="zhname"  name="zhname" value="<%=StaticParamDo.getAccountNameById(StringUtils.nullToStr(xsd.getSkzh())) %>" readonly>
+		<td class="a1" width="15%" id="td_skzh_label" style="<%=skxxStyle %>">收款账户</td>				
+		<td class="a2" width="35%" id="td_skzh_value" style="<%=skxxStyle %>"><input type="text" id="zhname"  name="zhname" value="<%=StaticParamDo.getAccountNameById(StringUtils.nullToStr(xsd.getSkzh())) %>" size="40" onclick="openAccount();" readonly>
 		<input type="hidden" id="skzh"  name="xsd.skzh" value="<%=StringUtils.nullToStr(xsd.getSkzh()) %>">
 		<img src="images/select.gif" align="absmiddle" title="选择账户" border="0" onclick="openAccount();" style="cursor:hand">
 		</td>		
 	</tr>
 	<tr id="tr_skxx" style="<%=skxxStyle %>">
 		<td class="a1">本次收款金额</td>
-		<td class="a2"><input type="text" id="skje"  name="xsd.skje" value="<%=JMath.round(xsd.getSkje()) %>">元</td>
+		<td class="a2"><input type="text" id="skje"  name="xsd.skje" value="<%=JMath.round(xsd.getSkje()) %>" size="40">元</td>
 		
-		<td class="a1" widht="20%">收款方式</td>
+		<td class="a1">收款方式</td>
 		<td class="a2">
-			<select name="xsd.skfs" id="skfs"  onchange="selSkfs(this.value);">
+			<select name="xsd.skfs" id="skfs"  onchange="selSkfs(this.value);" style="width:232px">
 			<%
 			if(fkfsArry != null && fkfsArry.length > 0){
 				for(int i =0;i<fkfsArry.length;i++){
@@ -452,7 +451,7 @@ if(xsdProducts!=null && xsdProducts.size()>0){
 			%>
 			</select>
 			
-			<select name="xsd.pos_id" id="pos_id" style="<%=cssStyle %>">
+			<select name="xsd.pos_id" id="pos_id" style="<%=cssStyle %>;width:232px">
 				<option value="">选择刷卡POS机</option>
 			<%
 			String pos_id = StringUtils.nullToStr(xsd.getPos_id());
@@ -479,26 +478,26 @@ if(xsdProducts!=null && xsdProducts.size()>0){
 	<tr>
 		<td class="a1" width="15%">发票类型</td>
 		<td class="a2">
-			<select name="xsd.fplx" id="fplx" onchange="chgKpTyle(this.value);">
+			<select name="xsd.fplx" id="fplx" onchange="chgKpTyle(this.value);" style="width:232px">
 				<option value="出库单" <%if(StringUtils.nullToStr(xsd.getFplx()).equals("出库单")) out.print("selected"); %>>出库单</option>
 				<option value="普通发票" <%if(StringUtils.nullToStr(xsd.getFplx()).equals("普通发票")) out.print("selected"); %>>普通发票</option>
 				<option value="增值发票" <%if(StringUtils.nullToStr(xsd.getFplx()).equals("增值发票")) out.print("selected"); %>>增值发票</option>
 			</select>
 		</td>
 		<td class="a1" width="15%" id="mc1">名称</td>
-		<td class="a2" id="mc2"><input type="text" name="xsd.kp_mc" id="kp_mc" value="<%=StringUtils.nullToStr(xsd.getKp_mc()) %>" maxlength="50"></td>				
+		<td class="a2" id="mc2"><input type="text" name="xsd.kp_mc" id="kp_mc" value="<%=StringUtils.nullToStr(xsd.getKp_mc()) %>" maxlength="50" size="40"></td>				
 	</tr>									
 	<tr>
 		<td class="a1" width="15%" id="dz1" style="display:none">地址</td>
-		<td class="a2" id="dz2" style="display:none"><input type="text" name="xsd.kp_address" id="kp_address" value="<%=StringUtils.nullToStr(xsd.getKp_address()) %>" maxlength="50"></td>	
+		<td class="a2" id="dz2" style="display:none"><input type="text" name="xsd.kp_address" id="kp_address" value="<%=StringUtils.nullToStr(xsd.getKp_address()) %>" maxlength="50" size="40"></td>	
 		<td class="a1" width="15%" id="dh1" style="display:none">电话</td>
-		<td class="a2" id="dh2" style="display:none"><input type="text" name="xsd.kp_dh" id="kp_dh" value="<%=StringUtils.nullToStr(xsd.getKp_dh()) %>" maxlength="20"></td>		
+		<td class="a2" id="dh2" style="display:none"><input type="text" name="xsd.kp_dh" id="kp_dh" value="<%=StringUtils.nullToStr(xsd.getKp_dh()) %>" maxlength="20" size="40"></td>		
 	</tr>	
 	<tr>
 		<td class="a1" width="15%" id="zh1" style="display:none">开户行账号</td>
-		<td class="a2"  id="zh2" style="display:none"><input type="text" name="xsd.khhzh" id="khhzh" value="<%=StringUtils.nullToStr(xsd.getKhhzh()) %>" maxlength="50"></td>	
+		<td class="a2"  id="zh2" style="display:none"><input type="text" name="xsd.khhzh" id="khhzh" value="<%=StringUtils.nullToStr(xsd.getKhhzh()) %>" maxlength="50" size="40"></td>	
 		<td class="a1" width="15%" id="sh1" style="display:none">税号</td>
-		<td class="a2" id="sh2" style="display:none"><input type="text" name="xsd.sh" id="sh" value="<%=StringUtils.nullToStr(xsd.getSh()) %>" maxlength="50"></td>		
+		<td class="a2" id="sh2" style="display:none"><input type="text" name="xsd.sh" id="sh" value="<%=StringUtils.nullToStr(xsd.getSh()) %>" maxlength="50" size="40"></td>		
 	</tr>	
 	
 	<tr>

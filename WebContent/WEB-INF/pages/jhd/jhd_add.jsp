@@ -244,17 +244,12 @@ Jhd jhd = (Jhd)VS.findValue("jhd");
         otd4.className = "a2";
         otd4.innerHTML = '<input type="text" size="10"  id="xj_'+curId+'" name="jhdProducts['+curId+'].xj" value="0.00" style="width:100%" readonly>';  
         
-        var otd5 = document.createElement("td");
-        otd5.className = "a2";
-        otd5.innerHTML = '<input type="text" id="remark_'+curId+'" name="jhdProducts['+curId+'].remark" style="width:100%">';                       
-		
 		otr.appendChild(otd);
         otr.appendChild(otd0); 
         otr.appendChild(otd1); 
         otr.appendChild(otd2); 
         otr.appendChild(otd3); 
         otr.appendChild(otd4); 
-        otr.appendChild(otd5);              
     }	
      
      
@@ -368,10 +363,10 @@ Jhd jhd = (Jhd)VS.findValue("jhd");
 	<tr>
 		<td class="a1" width="15%">编号</td>
 		<td class="a2" width="35%">
-		<input type="text" name="jhd.id" id="id" value="<%=id %>" readonly>
+		<input type="text" name="jhd.id" id="id" value="<%=id %>" size="45" readonly>
 		</td>	
 		<td class="a1" width="15%">采购日期</td>
-		<td class="a2" width="35%"><input type="text" name="jhd.cg_date" id="cg_date" value="<%=DateComFunc.getToday() %>"  class="Wdate" onFocus="WdatePicker()"><font color="red">*</font>	
+		<td class="a2" width="35%"><input type="text" name="jhd.cg_date" id="cg_date" value="<%=DateComFunc.getToday() %>" size="45"  class="Wdate" onFocus="WdatePicker()"><font color="red">*</font>	
 		</td>
 	</tr>
 	<tr>
@@ -383,13 +378,13 @@ Jhd jhd = (Jhd)VS.findValue("jhd");
 		<font color="red">*</font>	
 		</td>
 		<td class="a1">地址</td>
-		<td class="a2"><input type="text" name="jhd.kh_address" id="kh_address" value="<%=StringUtils.nullToStr(jhd.getKh_address()) %>" size="45"></td>	
+		<td class="a2"><input type="text" name="jhd.kh_address" id="kh_address" value="<%=StringUtils.nullToStr(jhd.getKh_address()) %>" size="45" maxlength="100"></td>	
 	</tr>
 	
 	<tr>
 		<td class="a1">客户联系人</td>
 		<td class="a2">
-			<select name="jhd.kh_lxr" id="kh_lxr" onchange="chgLxr(this.value);" style="width:90px">
+			<select name="jhd.kh_lxr" id="kh_lxr" onchange="chgLxr(this.value);" style="width:256px">
 				<%
 				if(!StringUtils.nullToStr(jhd.getKh_lxr()).equals("")){
 				%>
@@ -400,12 +395,12 @@ Jhd jhd = (Jhd)VS.findValue("jhd");
 			</select>
 		</td>	
 		<td class="a1">联系电话</td>
-		<td class="a2"><input type="text" name="jhd.kh_lxdh" id="kh_lxdh" size="40"></td>
+		<td class="a2"><input type="text" name="jhd.kh_lxdh" id="kh_lxdh" size="45" maxlength="22"></td>
 	</tr>
 	<tr>	
 		<td class="a1" width="15%">账期</td>
 		<td class="a2">
-			<input type="text" name="jhd.zq" id="zq" value="0" size="3" title="账期">天<font color="red">*</font>
+			<input type="text" name="jhd.zq" id="zq" value="0" size="45" title="账期"  maxlength="5">天<font color="red">*</font>
 			<input type="hidden" name="jhd.fkfs" id="fkfs" value="账期">
 		</td>
 		<td class="a1"  width="15%">发票类型</td>
@@ -417,11 +412,11 @@ Jhd jhd = (Jhd)VS.findValue("jhd");
 	<tr>			
 		<td class="a1" width="15%">预计到货时间</td>
 		<td class="a2">
-		<input type="text" name="jhd.yjdhsj" id="yjdhsj" value="0" size="3" title="预计到货时间">天
+		<input type="text" name="jhd.yjdhsj" id="yjdhsj" value="0" size="45" title="预计到货时间">天
 		</td>		
 	    <td class="a1" width="15%">到货库房</td>
 		<td class="a2" width="35%">
-			<select name="jhd.store_id" id="store_id">
+			<select name="jhd.store_id" id="store_id" style="width:256px">
 				<option value=""></option>
 				<%
 				if(storeList != null && storeList.size()>0){
@@ -438,8 +433,8 @@ Jhd jhd = (Jhd)VS.findValue("jhd");
     </tr>
 	<tr>
         <td class="a1" width="15%">采购负责人</td>
-		<td class="a2" width="35%">
-		    <input id="brand" type="text" length="20"  onblur="setValue()" value=""> 
+		<td class="a2" colspan="3">
+		    <input id="brand" type="text" maxlength="20" size="45" onblur="setValue()" value=""> 
             <div id="brandTip" style="height:12px;position:absolute;left:612px; top:85px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
             </div>
 		    <input type="hidden" name="jhd.fzr" id="fzr" value=""> <font color="red">*</font>	
@@ -458,12 +453,11 @@ Jhd jhd = (Jhd)VS.findValue("jhd");
 	<thead>
 	<tr>
 		<td width="5%">选择</td>
-		<td width="25%">商品名称</td>
-		<td width="25%">规格</td>
-		<td width="10%">采购价格</td>
+		<td width="30%">商品名称</td>
+		<td width="30%">规格</td>
+		<td width="12%">采购价格</td>
 		<td width="10%">数量</td>
-		<td width="10%">小计</td>
-		<td width="15%">备注</td>
+		<td width="13%">小计</td>
 	</tr>
 	</thead>
 <%
@@ -479,7 +473,6 @@ for(int i=0;i<3;i++){
 		<td class="a2"><input type="text" size="10"  id="price_<%=i %>" name="jhdProducts[<%=i %>].price" value="0.00" style="width:100%" onblur="hj();"></td>
 		<td class="a2"><input type="text" size="5"  id="nums_<%=i %>" name="jhdProducts[<%=i %>].nums" value="1" style="width:100%" onblur="hj();"></td>		
 		<td class="a2"><input type="text" size="10"  id="xj_<%=i %>" name="jhdProducts[<%=i %>].xj" value="0.00" style="width:100%" readonly></td>
-		<td class="a2"><input type="text" id="remark_<%=i %>" name="jhdProducts[<%=i %>].remark" style="width:100%"></td>
 	</tr>
 <%
 }

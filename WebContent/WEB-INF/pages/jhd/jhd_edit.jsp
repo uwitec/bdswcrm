@@ -267,17 +267,12 @@ session.removeAttribute("messages");
         otd4.className = "a2";
         otd4.innerHTML = '<input type="text" size="10"  id="xj_'+curId+'" name="jhdProducts['+curId+'].xj" value="0.00" style="width:100%" readonly>';  
         
-        var otd5 = document.createElement("td");
-        otd5.className = "a2";
-        otd5.innerHTML = '<input type="text" id="remark_'+curId+'" name="jhdProducts['+curId+'].remark" style="width:100%">';                       
-		
 		otr.appendChild(otd);
         otr.appendChild(otd0); 
         otr.appendChild(otd1); 
         otr.appendChild(otd2); 
         otr.appendChild(otd3); 
         otr.appendChild(otd4); 
-        otr.appendChild(otd5);              
     }  
 	
 	
@@ -375,28 +370,28 @@ session.removeAttribute("messages");
 	<tr>
 		<td class="a1" width="15%">编号</td>
 		<td class="a2" width="35%">
-		<input type="text" name="jhd.id" id="id" value="<%=StringUtils.nullToStr(jhd.getId()) %>" readonly>	
+		<input type="text" name="jhd.id" id="id" value="<%=StringUtils.nullToStr(jhd.getId()) %>" size="45" readonly>	
 		</td>
 		<td class="a1" width="15%">采购日期</td>
-		<td class="a2" width="35%"><input type="text" name="jhd.cg_date" id="cg_date" value="<%=StringUtils.nullToStr(jhd.getCg_date()) %>"  class="Wdate" onFocus="WdatePicker()"><font color="red">*</font>
+		<td class="a2" width="35%"><input type="text" name="jhd.cg_date" id="cg_date" value="<%=StringUtils.nullToStr(jhd.getCg_date()) %>" size="45"  class="Wdate" onFocus="WdatePicker()"><font color="red">*</font>
 		</td>
 	</tr>
 	<tr>
 		<td class="a1" width="15%">供货单位</td>
 		<td class="a2" width="35%">
-			<input type="text" name="jhd.gysmc" onblur="setClientRegInfo();" id="client_name" value="<%=StringUtils.nullToStr(jhd.getGysmc()) %>" size="35"  onblur="setClientValue();">
+			<input type="text" name="jhd.gysmc" onblur="setClientRegInfo();" id="client_name" value="<%=StringUtils.nullToStr(jhd.getGysmc()) %>" size="45"  onblur="setClientValue();">
 			<input type="hidden" name="jhd.gysbh" id="client_id" value="<%=StringUtils.nullToStr(jhd.getGysbh()) %>">
 			<div id="clientsTip" style="height:12px;position:absolute;left:150px; top:85px; width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 			<font color="red">*</font>	
 		</td>	
 		<td class="a1">地址</td>
-		<td class="a2"><input type="text" name="jhd.kh_address" id="kh_address" value="<%=StringUtils.nullToStr(jhd.getKh_address()) %>" size="45"></td>	
+		<td class="a2"><input type="text" name="jhd.kh_address" id="kh_address" value="<%=StringUtils.nullToStr(jhd.getKh_address()) %>" maxlength="100" size="45"></td>	
 	</tr>
 	
 	<tr>
 		<td class="a1">客户联系人</td>
 		<td class="a2">
-			<select name="jhd.kh_lxr" id="kh_lxr" onchange="chgLxr(this.value);" style="width:90px">
+			<select name="jhd.kh_lxr" id="kh_lxr" onchange="chgLxr(this.value);" style="width:256px">
 				<%
 				if(!StringUtils.nullToStr(jhd.getKh_lxr()).equals("")){
 				%>
@@ -407,12 +402,12 @@ session.removeAttribute("messages");
 			</select>
 		</td>	
 		<td class="a1">联系电话</td>
-		<td class="a2"><input type="text" name="jhd.kh_lxdh" id="kh_lxdh" value="<%=StringUtils.nullToStr(jhd.getKh_lxdh()) %>"></td>
+		<td class="a2"><input type="text" name="jhd.kh_lxdh" id="kh_lxdh" value="<%=StringUtils.nullToStr(jhd.getKh_lxdh()) %>" maxlength="22" size="45"></td>
 	</tr>
 	<tr>		
 		<td class="a1" width="15%">账期</td>
 		<td class="a2">
-			<input type="text" name="jhd.zq" id="zq" value="<%=StringUtils.nullToStr(jhd.getZq()) %>" size="3" title="账期">天<font color="red">*</font>
+			<input type="text" name="jhd.zq" id="zq" value="<%=StringUtils.nullToStr(jhd.getZq()) %>" size="45" title="账期" maxlength="5">天<font color="red">*</font>
 			<input type="hidden" name="jhd.fkfs" id="fkfs" value="账期">
 		</td>
 		<td class="a1"  width="15%">发票类型</td>
@@ -424,11 +419,11 @@ session.removeAttribute("messages");
 	<tr>			
 		<td class="a1" width="15%">预计到货时间</td>
 		<td class="a2">
-		<input type="text" name="jhd.yjdhsj" id="yjdhsj" value="<%=StringUtils.nullToStr(jhd.getYjdhsj()) %>"  class="Wdate" onFocus="WdatePicker()">
+		<input type="text" name="jhd.yjdhsj" id="yjdhsj" value="<%=StringUtils.nullToStr(jhd.getYjdhsj()) %>" size="45"  class="Wdate" onFocus="WdatePicker()">
 		</td>	
 		<td class="a1" width="15%">到货库房</td>
 		<td class="a2" width="35%">
-			<select name="jhd.store_id" id="store_id">
+			<select name="jhd.store_id" id="store_id" style="width:256px">
 				<option value=""></option>
 				<%
 				if(storeList != null && storeList.size()>0){
@@ -445,8 +440,8 @@ session.removeAttribute("messages");
 	</tr>	
 	<tr>	 
       <td class="a1" width="15%">采购负责人</td>
-		<td class="a2" width="35%">
-			 <input id="brand" type="text" length="20" onblur="setValue()" value="<%=StaticParamDo.getRealNameById(jhd.getFzr()) %>"/> 
+		<td class="a2" colspan="3">
+			 <input id="brand" type="text" maxlength="20" onblur="setValue()" value="<%=StaticParamDo.getRealNameById(jhd.getFzr()) %>" size="45"/> 
 	         <div id="brandTip" style="height:12px;position:absolute;left:612px; top:85px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		     <input type="hidden" name="jhd.fzr" id="fzr" value="<%=jhd.getFzr()%>"/> <font color="red">*</font>	
 		</td>
@@ -464,12 +459,11 @@ session.removeAttribute("messages");
 	<thead>
 	<tr>
 		<td width="5%">选择</td>
-		<td width="25%">商品名称</td>
-		<td width="25%">规格</td>
-		<td width="10%">采购价格</td>
+		<td width="30%">商品名称</td>
+		<td width="30%">规格</td>
+		<td width="12%">采购价格</td>
 		<td width="10%">数量</td>
-		<td width="10%">小计</td>
-		<td width="15%">备注</td>
+		<td width="13%">小计</td>
 	</tr>
 	</thead>
 <%
@@ -487,7 +481,6 @@ if(jhdProducts != null && jhdProducts.size()>0){
 		<td class="a2"><input type="text" size="10" id="price_<%=i %>" name="jhdProducts[<%=i %>].price" value="<%=JMath.round(jhdProduct.getPrice()) %>" onblur="hj();" style="width:100%"></td>
 		<td class="a2"><input type="text" size="5" id="nums_<%=i %>" name="jhdProducts[<%=i %>].nums"  value="<%=StringUtils.nullToStr(jhdProduct.getNums()) %>" onblur="hj();" style="width:100%"></td>
 		<td class="a2"><input type="text" size="10" id="xj_<%=i %>" name="jhdProducts[<%=i %>].xj" value="<%=JMath.round(jhdProduct.getPrice() * jhdProduct.getNums()) %>" style="width:100%" readonly></td>
-		<td class="a2"><input type="text" id="remark_<%=i %>" name="jhdProducts[<%=i %>].remark" value="<%=StringUtils.nullToStr(jhdProduct.getRemark()) %>" style="width:100%"></td>	
 	</tr>
 <%
 	}
@@ -511,7 +504,7 @@ if(jhdProducts != null && jhdProducts.size()>0){
 		</td>	
 	</tr>
 	<tr>
-		<td class="a1" width="15%">描述信息</td>
+		<td class="a1" width="15%">备注</td>
 		<td class="a2" width="85%"><input type="text" name="jhd.ms" id="ms" style="width:75%" value="<%=StringUtils.nullToStr(jhd.getMs()) %>">
 		</td>
 	</tr>	

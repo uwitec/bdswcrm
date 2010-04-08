@@ -176,24 +176,24 @@ if(msg != null && msg.size() > 0){
 	<tr height="35">
 		<td class="a1" width="15%">实际成交金额</td>
 		<td class="a2" width="35%"><%=JMath.round(xsd.getSjcjje()) %></td>		
-		<td class="a1" widht="20%">回款类型</td>
-		<td class="a2" colspan="3"><%=StringUtils.nullToStr(xsd.getSkxs()) %></td>
+		<td class="a1" width="15%">回款类型</td>
+		<td class="a2" width="35"><%=StringUtils.nullToStr(xsd.getSkxs()) %></td>
 	</tr>	
 	<tr>
-		<td class="a1" widht="20%">收款账户</td>
+		<td class="a1">收款账户</td>
 		<td class="a2"><%=StaticParamDo.getAccountNameById(StringUtils.nullToStr(xsd.getSkzh())) %></td>
 		<td class="a1">收款金额</td>
 		<td class="a2"><%=JMath.round(xsd.getSkje()) %></td>
 	</tr>	
 	<tr>
-		<td class="a1" widht="20%">操作人</td>
+		<td class="a1">操作人</td>
 		<td class="a2"><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(xsd.getCzr())) %></td>
 		<td class="a1">成交时间</td>
 		<td class="a2"><%=StringUtils.nullToStr(xsd.getCz_date()) %></td>
 	</tr>
 	<tr>
-		<td class="a1" widht="20%">审批类型</td>
-		<td class="a2"><%=sp_type %></td>
+		<td class="a1">审批类型</td>
+		<td class="a2" colspan="3"><%=sp_type %></td>
 	</tr>		
 </table>
 <br>
@@ -210,10 +210,8 @@ if(msg != null && msg.size() > 0){
 		<td>商品名称</td>
 		<td>规格</td>
 		<td>销售价格</td>
-		<!--<td>价格调整</td>-->
 		<td>订单数量</td>
 		<td>订单金额</td>
-		<td>备注</td>
 	</tr>
 	</thead>
 <%
@@ -225,10 +223,8 @@ if(xsdProducts!=null && xsdProducts.size()>0){
 		<td class="a2"><%=StringUtils.nullToStr(xsdProduct.getProduct_name()) %></td>
 		<td class="a2"><%=StringUtils.nullToStr(xsdProduct.getProduct_xh()) %></td>
 		<td class="a2"><%=JMath.round(xsdProduct.getPrice(),2) %></td>
-		<!--<td class="a2"><%=JMath.round(xsdProduct.getJgtz(),2) %></td> -->
 		<td class="a2"><%=xsdProduct.getNums() %></td>
 		<td class="a2"><%=JMath.round(xsdProduct.getXj(),2) %></td>
-		<td class="a2"><%=StringUtils.nullToStr(xsdProduct.getRemark()) %></td>
 	</tr>
 <%
 	}
@@ -263,15 +259,13 @@ if(xsdProducts!=null && xsdProducts.size()>0){
 	
 	<tr>
 		<td class="a1" width="15%">发票信息摘要</td>
-		<td class="a2" colspan="3">
-			<textarea rows="2" name="xsd.fpxx" id="fpxx" style="width:75%" readonly><%=StringUtils.nullToStr(xsd.getFpxx()) %></textarea>
+		<td class="a2" colspan="3"><input type="text" name="xsd.fpxx" id="fpxx" readonly style="width:75%" value="<%=StringUtils.nullToStr(xsd.getFpxx()) %>"></input>
 		</td>	
 				
 	</tr>
 	<tr>
 		<td class="a1" width="15%">描述信息</td>
-		<td class="a2" width="85%" colspan="3">
-			<textarea rows="3" name="xsd.ms" id="ms" style="width:75%" readonly><%=StringUtils.nullToStr(xsd.getMs()) %></textarea>
+		<td class="a2" width="85%" colspan="3"><input type="text" name="xsd.ms" id="ms" readonly style="width:75%" value="<%=StringUtils.nullToStr(xsd.getMs()) %>"></input>
 		</td>
 	</tr>		
 	<tr height="35">

@@ -151,7 +151,7 @@ String orderType = (String)VS.findValue("orderType");
 	%>
 	<tr class="a1" title="双击查看详情" <%if(StringUtils.nullToStr(jhd.getTh_flag()).equals("1")){ %>style="color:red"<%} %>   onmousedown="trSelectChangeCss()" onclick="descMx('<%=StringUtils.nullToStr(jhd.getId()) %>');" onDblClick="openWin('<%=StringUtils.nullToStr(jhd.getId()) %>');">
 		<td><%=StringUtils.nullToStr(jhd.getId()) %></td>
-		<td><%=StringUtils.nullToStr(jhd.getGysmc()) %></td>
+		<td align="left"><%=StringUtils.nullToStr(jhd.getGysmc()) %></td>
 		<td><%=StringUtils.nullToStr(jhd.getState()) %></td>
 		<td><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(jhd.getFzr())) %></td>
 		<td align="right"><%=JMath.round(jhd.getTotal(),2) %>&nbsp;</td>

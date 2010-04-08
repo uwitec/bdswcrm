@@ -141,7 +141,6 @@ List lsdProducts = (List)VS.findValue("lsdProducts");
 		<td>数量</td>
 		<td>工分</td>
 		<td>小计（元）</td>
-		<td>备注</td>
 	</tr>
 	</thead>
 <%
@@ -158,7 +157,6 @@ if(lsdProducts != null && lsdProducts.size()>0){
 		<td class="a2"><%=lsdProduct.getNums() %></td>
 		<td class="a2"><%=JMath.round((lsdProduct.getGf() * lsdProduct.getNums()),2) %></td>
 		<td class="a2"><%=JMath.round(lsdProduct.getXj(),2) %></td>
-		<td class="a2"><%=StringUtils.nullToStr(lsdProduct.getRemark()) %></td>
 	</tr>
 <%
 	}

@@ -567,7 +567,6 @@ where (b.state = '已提交'))) a)
 ALTER TABLE `product` ADD INDEX `Index_product_kind`(`product_id`, `product_kind`);
 
 
-
 2010-04-07修改
 --往来单位的联系人中增加qq、msn、称呼、年龄段
 ALTER TABLE `clients_linkman` ADD COLUMN `ch`  VARCHAR(50)  AFTER `clients_id`;
@@ -581,5 +580,11 @@ INSERT INTO `sjzd_jbxx` VALUES ('SJZD_LXRNLD','联系人年龄段','联系人年
 
 INSERT INTO `sjzd_xmxx` VALUES (121,'SJZD_LXRNLD','20以下','20以下',6),(122,'SJZD_LXRNLD','21-30','21-30',5),(123,'SJZD_LXRNLD','31-40','31-40',4),(124,'SJZD_LXRNLD','41-50','41-50',3),(125,'SJZD_LXRNLD','51-60','51-60',2),(126,'SJZD_LXRNLD','61-70','61-70',1),(127,'SJZD_LXRNLD','70以上','70以上',0);
 
-
-
+2010-04-08修改
+--修改零售单扩充部分字段值大小
+ALTER TABLE `lsd` MODIFY COLUMN `client_name` VARCHAR(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+ MODIFY COLUMN `lxr` VARCHAR(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+ MODIFY COLUMN `lxdh` VARCHAR(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+ MODIFY COLUMN `mobile` VARCHAR(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+ MODIFY COLUMN `msn` VARCHAR(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+ MODIFY COLUMN `kp_dh` VARCHAR(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL;

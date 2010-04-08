@@ -217,7 +217,7 @@ String orderType = (String)VS.findValue("orderType");
 	%>
 	<tr class="a1" title="双击查看详情"  <%if(StringUtils.nullToStr(xsd.get("th_flag")).equals("1")){ %>style="color:red"<%} %> onmousedown="trSelectChangeCss()" onclick="descMx('<%=StringUtils.nullToStr(xsd.get("id")) %>');" onDblClick="openWin('<%=StringUtils.nullToStr(xsd.get("id")) %>');">
 		<td><%=StringUtils.nullToStr(xsd.get("id")) %></td>
-		<td><%=StaticParamDo.getClientNameById(StringUtils.nullToStr(xsd.get("client_name"))) %></td>
+		<td align="left"><%=StaticParamDo.getClientNameById(StringUtils.nullToStr(xsd.get("client_name"))) %></td>
 		<td><%=StringUtils.nullToStr(xsd.get("state")) %></td>
 		<td align="right"><%=JMath.round(xsdje,2) %>&nbsp;&nbsp;</td>
 		<td><%=StringUtils.nullToStr(xsd.get("creatdate")) %></td>

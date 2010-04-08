@@ -153,7 +153,6 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 		<td>销售价格</td>
 		<td>数量</td>
 		<td>小计</td>
-		<td>备注</td>
 	</tr>
 	</thead>
 <%
@@ -169,7 +168,6 @@ if(lsdProducts != null && lsdProducts.size()>0){
 		<td class="a2"><%=JMath.round(lsdProduct.getPrice(),2) %></td>
 		<td class="a2"><%=lsdProduct.getNums() %></td>
 		<td class="a2"><%=JMath.round(lsdProduct.getXj(),2) %></td>
-		<td class="a2"><%=StringUtils.nullToStr(lsdProduct.getRemark()) %></td>
 	</tr>
 <%
 	}

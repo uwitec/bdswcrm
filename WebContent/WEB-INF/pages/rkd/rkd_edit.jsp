@@ -189,7 +189,7 @@ session.removeAttribute("messages");
 	%>		
 	<tr>
 		<td class="a1" width="15%">入库单编号</td>
-		<td class="a2" width="35%"><input type="text" name="rkd.rkd_id" id="rkd_id" value="<%=StringUtils.nullToStr(rkd.getRkd_id()) %>" size="30" readonly>
+		<td class="a2" width="35%"><input type="text" name="rkd.rkd_id" id="rkd_id" value="<%=StringUtils.nullToStr(rkd.getRkd_id()) %>" size="40" readonly>
 		</td>	
 		<%
 		String rksj = StringUtils.nullToStr(rkd.getRk_date());
@@ -198,13 +198,13 @@ session.removeAttribute("messages");
 		}
 		%>
 		<td class="a1">入库时间</td>
-		<td class="a2"><input type="text" name="rkd.rk_date" id="rk_date" value="<%=rksj %>"  class="Wdate" onFocus="WdatePicker()"><font color="red">*</font>
+		<td class="a2"><input type="text" name="rkd.rk_date" id="rk_date" value="<%=rksj %>"  class="Wdate" onFocus="WdatePicker()" size="40"><font color="red">*</font>
 		</td>	
 	</tr>
 	<tr>		
 		<td class="a1" width="15%">仓库</td>
 		<td class="a2" width="35%">
-			<select name="rkd.store_id" id="store_id">
+			<select name="rkd.store_id" id="store_id" style="width:232px;">
 				<option value=""></option>
 			<%
 			String store_id = StringUtils.nullToStr(rkd.getStore_id());
@@ -224,7 +224,7 @@ session.removeAttribute("messages");
 		</td>
 		<td class="a1" width="15%">仓管员</td>
 		<td class="a2" width="35%">
-		 <input id="brand" type="text" length="20"  onblur="setValue()" value="<%=StaticParamDo.getRealNameById(rkd.getFzr()) %>"/> 
+		 <input id="brand" type="text" length="20"  size="40" onblur="setValue()" value="<%=StaticParamDo.getRealNameById(rkd.getFzr()) %>"/> 
          <!--<img src="images/select.gif" align="absmiddle" title="选择经手人" border="0" onclick="openywyWin();" style="cursor:hand">
           --><div id="brandTip" style="height:12px;position:absolute;left:580px; top:86px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
           </div>
@@ -241,7 +241,7 @@ session.removeAttribute("messages");
 	</thead>	
 	<tr>
 		<td class="a1" width="15%">进货单编号</td>
-		<td class="a2" width="35%"><input type="text" name="rkd.jhd_id" id="jhd_id" value="<%=StringUtils.nullToStr(rkd.getJhd_id()) %>" size="30" maxlength="20" readonly></td>	
+		<td class="a2" width="35%"><input type="text" name="rkd.jhd_id" id="jhd_id" value="<%=StringUtils.nullToStr(rkd.getJhd_id()) %>" size="40" maxlength="20" readonly></td>	
 		<%
 		String cjsj = StringUtils.nullToStr(rkd.getCreatdate());
 		if(cjsj.equals("")){
@@ -249,17 +249,17 @@ session.removeAttribute("messages");
 		}
 		%>		
 		<td class="a1" width="15%">创建时间</td>
-		<td class="a2" width="35%"><input type="text" name="rkd.creatdate" id="creatdate" value="<%=cjsj %>" readonly></td>						
+		<td class="a2" width="35%"><input type="text" name="rkd.creatdate" id="creatdate" value="<%=cjsj %>" size="40" readonly></td>						
 	</tr>
 	<tr>			
 		<td class="a1" width="15%">供货单位</td>
 		<td class="a2">
-		<input type="text" name="rkd.client_id" id="client_name" value="<%=StaticParamDo.getClientNameById(StringUtils.nullToStr(rkd.getClient_name())) %>" size="30" maxlength="50" readonly>
+		<input type="text" name="rkd.client_id" id="client_name" value="<%=StaticParamDo.getClientNameById(StringUtils.nullToStr(rkd.getClient_name())) %>" size="40" maxlength="50" readonly>
 		<input type="hidden" name="rkd.client_name" id="client_id" value="<%=StringUtils.nullToStr(rkd.getClient_name()) %>">
 		</td>
 		<td class="a1" width="15%">采购负责人</td>
 		<td class="a2">
-		 	<input name="cgfzr_name" id="cgfzr_name" type="text" length="20" value="<%=StaticParamDo.getRealNameById(rkd.getCgfzr()) %>" readonly/> 
+		 	<input name="cgfzr_name" id="cgfzr_name" type="text" maxlength="20" value="<%=StaticParamDo.getRealNameById(rkd.getCgfzr()) %>" size="40" readonly/> 
 		    <input type="hidden" name="rkd.cgfzr" id="cgfzr" value="<%=rkd.getCgfzr()%>"/>
 		</td>			
 	</tr>			
@@ -275,11 +275,10 @@ session.removeAttribute("messages");
 <table width="100%"  align="center" id="rktable"  class="chart_list" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td width="31%">商品名称</td>
-		<td width="31%">商品规格</td>
-		<td width="8%">数量</td>
-		<td width="15%">强制序列号</td>
-		<td width="15%">备注</td>
+		<td width="35%">商品名称</td>
+		<td width="30%">商品规格</td>
+		<td width="10%">数量</td>
+		<td width="25%">强制序列号</td>
 	</tr>
 	</thead>
 <%
@@ -306,7 +305,6 @@ if(rkdProducts != null && rkdProducts.size()>0){
 			<input type="text" id="qz_serial_num_<%=i %>" name="rkdProducts[<%=i %>].qz_serial_num" style="width:85%;<%=cssStyle %>"  value="<%=StringUtils.nullToStr(rkdProduct.get("qz_serial_num")) %>" readonly>
 			<input type="hidden" id="qz_flag_<%=i %>" name="rkdProducts[<%=i %>].qz_flag"  value="<%=StringUtils.nullToStr(rkdProduct.get("qz_flag")) %>"><a style="cursor:hand" title="左键点击输入输列号" onclick="openSerialWin('<%=i %>');"><b>...</b></a>&nbsp;
 		</td>		
-		<td class="a2"><input type="text" size="10" id="remark_<%=i %>" style="width:100%;<%=cssStyle %>" name="rkdProducts[<%=i %>].remark" value="<%=StringUtils.nullToStr(rkdProduct.get("remark")) %>"></td>
 	</tr>
 <%
 	}
@@ -319,8 +317,7 @@ if(rkdProducts != null && rkdProducts.size()>0){
 	</tr>
 	<tr>
 		<td class="a1" width="15%">描述信息</td>
-		<td class="a2" width="85%">
-			<textarea rows="3" name="rkd.ms" id="ms" style="width:75%"><%=StringUtils.nullToStr(rkd.getMs()) %></textarea>
+		<td class="a2" width="85%"><input type="text" name="rkd.ms" id="ms" size="100" value="<%=StringUtils.nullToStr(rkd.getMs()) %>"></input>
 		</td>
 	</tr>	
 	<tr height="35">

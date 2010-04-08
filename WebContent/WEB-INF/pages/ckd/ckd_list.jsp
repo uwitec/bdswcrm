@@ -144,7 +144,7 @@ String orderType = StringUtils.nullToStr(VS.findValue("orderType"));
 	<tr class="a1"  title="双击查看详情"  onmousedown="trSelectChangeCss()" onclick="descMx('<%=StringUtils.nullToStr(ckd.get("ckd_id")) %>');" onDblClick="openWin('<%=StringUtils.nullToStr(ckd.get("ckd_id")) %>');">
 		<td><%=StringUtils.nullToStr(ckd.get("ckd_id")) %></td>
 		<td><%=StringUtils.nullToStr(ckd.get("creatdate")) %></td>
-		<td><%=StaticParamDo.getClientNameById(StringUtils.nullToStr(ckd.get("client_name"))) %></td>
+		<td align="left"><%=StaticParamDo.getClientNameById(StringUtils.nullToStr(ckd.get("client_name"))) %></td>
 		<td><%=StringUtils.nullToStr(ckd.get("state")) %></td>
 		<td><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(ckd.get("fzr"))) %></td>
 		<td><%=StaticParamDo.getStoreNameById(StringUtils.nullToStr(ckd.get("store_id"))) %></td>		

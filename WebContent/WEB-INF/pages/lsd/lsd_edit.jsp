@@ -167,10 +167,6 @@ String flag = StringUtils.nullToStr(VS.findValue("flag"));
         otd9.className = "a2";
         otd9.innerHTML = '<input type="text" id="qz_serial_num_'+curId+'" name="lsdProducts['+curId+'].qz_serial_num" size="15" readonly><input type="hidden" id="qz_flag_'+curId+'" name="lsdProducts['+curId+'].qz_flag"><a style="cursor:hand" title="点击输入序列号" onclick="openSerialWin('+ curId +');"><b>...</b></a>&nbsp;';   
         
-        var otd6 = document.createElement("td");
-        otd6.className = "a2";
-        otd6.innerHTML = '<input type="text" id="remark_'+curId+'" name="lsdProducts['+curId+'].remark" style="width:100%">';                       
-	
 	    otr.appendChild(otd9); 
         otr.appendChild(otd0); 
         otr.appendChild(otd1); 
@@ -178,7 +174,6 @@ String flag = StringUtils.nullToStr(VS.findValue("flag"));
         otr.appendChild(otd5);
         otr.appendChild(otd8); 
         otr.appendChild(otd9);
-        otr.appendChild(otd6);      
                  
      }	 
 
@@ -477,21 +472,21 @@ String flag = StringUtils.nullToStr(VS.findValue("flag"));
 	<%if(!msg.equals("")){%><tr><td colspan="4" class="a2"><font color="red"><%=msg %></font></td></tr><%}%>		
 	<tr>
 		<td class="a1" width="15%">编  号</td>
-		<td class="a2" width="35%"><input type="text" name="lsd.id" id="id" value="<%=StringUtils.nullToStr(lsd.getId()) %>" readonly></td>	
+		<td class="a2" width="35%"><input type="text" name="lsd.id" id="id" value="<%=StringUtils.nullToStr(lsd.getId()) %>" size="40" readonly></td>	
 		<%
 		String rq = StringUtils.nullToStr(lsd.getCreatdate());
 		if(rq.equals("")){
 			rq = DateComFunc.getToday();
 		}
 		%>
-		<td class="a1">销售日期</td>
-		<td class="a2"><input type="text" name="lsd.creatdate" id="creatdate" value="<%=rq %>" readonly>
+		<td class="a1" width="15%">销售日期</td>
+		<td class="a2" width="35%"><input type="text" name="lsd.creatdate" id="creatdate" value="<%=rq %>" size="40" readonly>
 		</td>		
 	</tr>
 	<tr>		
 		<td class="a1" width="15%">出货库房</td>
 		<td class="a2">
-			<select name="lsd.store_id" id="store_id">
+			<select name="lsd.store_id" id="store_id" style="width:232px">
 				<option value=""></option>
 			<%
 			if(storeList != null){
@@ -508,7 +503,7 @@ String flag = StringUtils.nullToStr(VS.findValue("flag"));
 		</td>
 		<td class="a1" width="15%">经手人</td>
 		<td class="a2">
-		 <input  id="brand"  type="text"  onblur="setValue()" value="<%=StaticParamDo.getRealNameById(lsd.getXsry()) %>"/> 
+		 <input  id="brand"  type="text"  onblur="setValue()" value="<%=StaticParamDo.getRealNameById(lsd.getXsry()) %>" size="40"/> 
 		 <div  id="brandTip" style=" height:12px; position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;"></div>
 		    <input type="hidden" name="lsd.xsry" id="fzr" value="<%=StringUtils.nullToStr(lsd.getXsry()) %>"/> <font color="red">*</font>
 		</td>					
@@ -525,13 +520,12 @@ String flag = StringUtils.nullToStr(VS.findValue("flag"));
 <table width="100%"  align="center" id="lsdtable"  class="chart_list" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td width="25%">商品名称</td>
-		<td width="20%">规格</td>
+		<td width="30%">商品名称</td>
+		<td width="30%">规格</td>
 		<td width="10%">销售价格</td>
 		<td width="5%">数量</td>
 		<td width="10%">小计</td>
 		<td width="15%">强制序列号</td>
-		<td width="15%">备注</td>
 	</tr>
 	</thead>
 <%
@@ -561,7 +555,6 @@ if(lsdProducts != null && lsdProducts.size()>0){
 			<input type="text" id="qz_serial_num_<%=i %>" name="lsdProducts[<%=i %>].qz_serial_num" value="<%=StringUtils.nullToStr(lsdProduct.getQz_serial_num()) %>" size="15" readonly>
 			<input type="hidden" id="qz_flag_<%=i %>" name="lsdProducts[<%=i %>].qz_flag" value="<%=flag2 %>"><a style="cursor:hand" title="左键点击输入输列号" onclick="openSerialWin('<%=i %>');"><b>...</b></a>&nbsp;
 		</td>		
-		<td class="a2"><input type="text" id="remark_<%=i %>" name="lsdProducts[<%=i %>].remark" value="<%=StringUtils.nullToStr(lsdProduct.getRemark()) %>" style="width:100%"></td>
 	</tr>
 <%
 	}
@@ -572,7 +565,7 @@ if(lsdProducts != null && lsdProducts.size()>0){
 	<tr height="35">	
 		<td class="a1">合计金额</td>
 		<td class="a2" colspan="3">
-			<input type="text" name="lsd.lsdje" id="lsdje" value="<%=JMath.round(lsd.getLsdje()) %>" readonly>
+			<input type="text" name="lsd.lsdje" id="lsdje" value="<%=JMath.round(lsd.getLsdje()) %>" readonly size="40">
 			<input type="hidden" name="lsd.lsdcbj" id="lsdcbj" value="<%=JMath.round(lsd.getLsdcbj()) %>" readonly>
 			<input type="hidden" name="lsd.lsdkhcb" id="lsdkhcb" value="<%=JMath.round(lsd.getLsdkhcb()) %>" readonly>
 			<input type="hidden" name="lsd.yhje" id="yhje" value="0.00">
@@ -585,13 +578,13 @@ if(lsdProducts != null && lsdProducts.size()>0){
 	}
 	%>
 	<tr height="35">
-		<td class="a1">本次实收金额</td>
-		<td class="a2">
-			<input type="text" name="lsd.skje" id="skje" value="<%=JMath.round(lsd.getSkje()) %>" readonly>
+		<td class="a1" width="15%">本次实收金额</td>
+		<td class="a2" width="35%">
+			<input type="text" name="lsd.skje" id="skje" value="<%=JMath.round(lsd.getSkje()) %>" readonly size="40">
 		</td>	
-		<td class="a1">是否存在预收款</td>
-		<td class="a2">
-			<select name="lsd.has_yushk" id="has_yushk" onchange="chgSel(this.value);">
+		<td class="a1" width="15%">是否存在预收款</td>
+		<td class="a2" width="35%">
+			<select name="lsd.has_yushk" id="has_yushk" onchange="chgSel(this.value);" style="width:232px">
 				<option value="否" <%if(StringUtils.nullToStr(lsd.getHas_yushk()).equals("否")) out.print("selected"); %>>否</option>
 				<option value="是" <%if(StringUtils.nullToStr(lsd.getHas_yushk()).equals("是")) out.print("selected"); %>>是</option>
 			</select>
@@ -600,12 +593,12 @@ if(lsdProducts != null && lsdProducts.size()>0){
 	<tr height="35" id="ysStyle" style="<%=cssStyle %>">	
 		<td class="a1">预收款编号</td>
 		<td class="a2">
-			<input type="text" name="lsd.yushk_id" id="yushk_id" value="<%=StringUtils.nullToStr(lsd.getYushk_id()) %>" readonly>
-			<input type="button" name="btnSel" value="选择" class="css_button2" onclick="openYushk();">
+			<input type="text" name="lsd.yushk_id" id="yushk_id" value="<%=StringUtils.nullToStr(lsd.getYushk_id()) %>" readonly size="40" onclick="openYushk();">
+			<input type="button" name="btnSel" value="选择" class="css_button" onclick="openYushk();">
 		</td>
 		<td class="a1">预收金额</td>
 		<td class="a2">
-			<input type="text" name="lsd.yushkje" id="yushkje" value="<%=JMath.round(lsd.getYushkje()) %>" readonly>
+			<input type="text" name="lsd.yushkje" id="yushkje" value="<%=JMath.round(lsd.getYushkje()) %>" readonly size="40">
 		</td>		
 	</tr>		
 	<tr>
@@ -639,9 +632,9 @@ if(lsdProducts != null && lsdProducts.size()>0){
 				
 			</select>				
 		</td>	
-		<td class="a1" widht="20%">收款账户</td>
-		<td class="a2"><input type="text" id="zhname"  name="zhname" value="<%=StaticParamDo.getAccountNameById(StringUtils.nullToStr(lsd.getSkzh())) %>" readonly>
-		<input type="hidden" id="skzh"  name="lsd.skzh" value="<%=StringUtils.nullToStr(lsd.getSkzh()) %>">
+		<td class="a1">收款账户</td>
+		<td class="a2"><input type="text" id="zhname"  name="zhname" value="<%=StaticParamDo.getAccountNameById(StringUtils.nullToStr(lsd.getSkzh())) %>" size="40" onclick="openAccount();" readonly>
+		<input type="hidden" id="skzh"  name="lsd.skzh" value="<%=StringUtils.nullToStr(lsd.getSkzh()) %>" size="40">
 		<img src="images/select.gif" align="absmiddle" title="选择账户" border="0" onclick="openAccount();" style="cursor:hand"><font color="red">*</font>
 		</td>
 	</tr>	
@@ -655,22 +648,22 @@ if(lsdProducts != null && lsdProducts.size()>0){
 	</thead>			
 	<tr>
 		<td class="a1" width="15%">客户名称</td>
-		<td class="a2" width="35%"><input type="text" name="lsd.client_name" id="client_name" value="<%=StringUtils.nullToStr(lsd.getClient_name()) %>" size="30"><font color="red">*</font>
+		<td class="a2" width="35%"><input type="text" name="lsd.client_name" id="client_name" value="<%=StringUtils.nullToStr(lsd.getClient_name()) %>" size="40" maxlength="50"><font color="red">*</font>
 		</td>
 		<td class="a1" width="15%">联系人</td>
-		<td class="a2" width="35%"><input type="text" name="lsd.lxr" id="lxr" value="<%=StringUtils.nullToStr(lsd.getLxr()) %>"></td>	
+		<td class="a2" width="35%"><input type="text" name="lsd.lxr" id="lxr" value="<%=StringUtils.nullToStr(lsd.getLxr()) %>" size="40" maxlength="20"></td>	
 	</tr>
 	<tr>
 		<td class="a1" width="15%">联系电话</td>
-		<td class="a2"><input type="text" name="lsd.lxdh" id="lxdh" value="<%=StringUtils.nullToStr(lsd.getLxdh()) %>" maxlength="20"></td>	
+		<td class="a2"><input type="text" name="lsd.lxdh" id="lxdh" value="<%=StringUtils.nullToStr(lsd.getLxdh()) %>" size="40" maxlength="20"></td>	
 		<td class="a1" width="15%">手机</td>
-		<td class="a2"><input type="text" name="lsd.mobile" id="mobile" value="<%=StringUtils.nullToStr(lsd.getMobile()) %>" maxlength="20"></td>			
+		<td class="a2"><input type="text" name="lsd.mobile" id="mobile" value="<%=StringUtils.nullToStr(lsd.getMobile()) %>" size="40" maxlength="20"></td>			
 	</tr>
 	<tr>
 		<td class="a1" width="15%">地址</td>
-		<td class="a2"><input type="text" name="lsd.address" id="address" value="<%=StringUtils.nullToStr(lsd.getAddress()) %>" size="30" maxlength="100"></td>			
+		<td class="a2"><input type="text" name="lsd.address" id="address" value="<%=StringUtils.nullToStr(lsd.getAddress()) %>" size="40" maxlength="100"></td>			
 		<td class="a1" width="15%">E-Mail</td>
-		<td class="a2"><input type="text" name="lsd.mail" id="mail" value="<%=StringUtils.nullToStr(lsd.getMail()) %>" maxlength="50" size="30"></td>		
+		<td class="a2"><input type="text" name="lsd.mail" id="mail" value="<%=StringUtils.nullToStr(lsd.getMail()) %>" maxlength="50" size="40"></td>		
 	</tr>	
 </table>
 <BR>
@@ -683,26 +676,26 @@ if(lsdProducts != null && lsdProducts.size()>0){
 	<tr>
 		<td class="a1" width="15%">发票类型</td>
 		<td class="a2">
-			<select name="lsd.fplx" id="fplx" onchange="chgKpTyle(this.value);">
+			<select name="lsd.fplx" id="fplx" onchange="chgKpTyle(this.value);" style="width:232px">
 				<option value="普通发票" <%if(StringUtils.nullToStr(lsd.getFplx()).equals("普通发票")) out.print("selected"); %>>普通发票</option>
 				<option value="出库单" <%if(StringUtils.nullToStr(lsd.getFplx()).equals("出库单")) out.print("selected"); %>>出库单</option>				
 				<option value="增值发票" <%if(StringUtils.nullToStr(lsd.getFplx()).equals("增值发票")) out.print("selected"); %>>增值发票</option>
 			</select>
 		</td>
 		<td class="a1" width="15%" id="mc1">名称</td>
-		<td class="a2" id="mc2"><input type="text" name="lsd.kp_mc" id="kp_mc" value="<%=StringUtils.nullToStr(lsd.getKp_mc()) %>" maxlength="50"></td>				
+		<td class="a2" id="mc2"><input type="text" name="lsd.kp_mc" id="kp_mc" value="<%=StringUtils.nullToStr(lsd.getKp_mc()) %>" maxlength="50" size="40"></td>				
 	</tr>									
 	<tr>
 		<td class="a1" width="15%" id="dz1" style="display:none">地址</td>
-		<td class="a2" id="dz2" style="display:none"><input type="text" name="lsd.kp_address" id="kp_address" value="<%=StringUtils.nullToStr(lsd.getKp_address()) %>" maxlength="50"></td>	
+		<td class="a2" id="dz2" style="display:none"><input type="text" name="lsd.kp_address" id="kp_address" value="<%=StringUtils.nullToStr(lsd.getKp_address()) %>" maxlength="50" size="40"></td>	
 		<td class="a1" width="15%" id="dh1" style="display:none">电话</td>
-		<td class="a2" id="dh2" style="display:none"><input type="text" name="lsd.kp_dh" id="kp_dh" value="<%=StringUtils.nullToStr(lsd.getKp_dh()) %>" maxlength="20"></td>		
+		<td class="a2" id="dh2" style="display:none"><input type="text" name="lsd.kp_dh" id="kp_dh" value="<%=StringUtils.nullToStr(lsd.getKp_dh()) %>" maxlength="20" size="40"></td>		
 	</tr>	
 	<tr>
 		<td class="a1" width="15%" id="zh1" style="display:none">开户行账号</td>
-		<td class="a2"  id="zh2" style="display:none"><input type="text" name="lsd.khhzh" id="khhzh" value="<%=StringUtils.nullToStr(lsd.getKhhzh()) %>" maxlength="50"></td>	
+		<td class="a2"  id="zh2" style="display:none"><input type="text" name="lsd.khhzh" id="khhzh" value="<%=StringUtils.nullToStr(lsd.getKhhzh()) %>" maxlength="50" size="40"></td>	
 		<td class="a1" width="15%" id="sh1" style="display:none">税号</td>
-		<td class="a2" id="sh2" style="display:none"><input type="text" name="lsd.sh" id="sh" value="<%=StringUtils.nullToStr(lsd.getSh()) %>" maxlength="50"></td>		
+		<td class="a2" id="sh2" style="display:none"><input type="text" name="lsd.sh" id="sh" value="<%=StringUtils.nullToStr(lsd.getSh()) %>" maxlength="50" size="40"></td>		
 	</tr>	
 	
 	<tr>

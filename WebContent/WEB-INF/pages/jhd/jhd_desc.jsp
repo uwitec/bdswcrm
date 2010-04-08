@@ -30,7 +30,7 @@ List results = (List)VS.findValue("jhdProducts");
 	}		
 </script>
 </head>
-<body oncontextmenu="return false;">
+<body>
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
@@ -41,11 +41,12 @@ List results = (List)VS.findValue("jhdProducts");
 <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0" border="1" id="selTable">
 	<thead>
 	<tr>
-		<td width="35%">商品名称</td>
-		<td width="30%">规格</td>
+		<td width="15%">商品编号</td>
+		<td width="30%">商品名称</td>
+		<td width="25%">规格</td>
 		<td width="10%">采购价格</td>
 		<td width="10%">数量</td>
-		<td width="15%">备注</td>
+		<td width="10%">小计</td>
 	</tr>
 	</thead>
 	<%
@@ -55,11 +56,12 @@ List results = (List)VS.findValue("jhdProducts");
 		JhdProduct jhdProduct = (JhdProduct)it.next();
 	%>
 	<tr class="a1" onmousedown="trSelectChangeCss()">
-		<td><%=StringUtils.nullToStr(jhdProduct.getProduct_name()) %></td>
-		<td><%=StringUtils.nullToStr(jhdProduct.getProduct_xh()) %></td>
+		<td><%=StringUtils.nullToStr(jhdProduct.getProduct_id()) %></td>
+		<td align="left"><%=StringUtils.nullToStr(jhdProduct.getProduct_name()) %></td>
+		<td align="left"><%=StringUtils.nullToStr(jhdProduct.getProduct_xh()) %></td>
 		<td align="right"><%=JMath.round(jhdProduct.getPrice(),2) %></td>
 		<td><%=StringUtils.nullToStr(jhdProduct.getNums()) %></td>
-		<td><%=StringUtils.nullToStr(jhdProduct.getRemark()) %></td>
+		<td align="right"><%=JMath.round(jhdProduct.getPrice()*jhdProduct.getNums(),2) %></td>
 	</tr>
 	
 	<%
