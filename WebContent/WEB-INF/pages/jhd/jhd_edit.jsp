@@ -38,7 +38,7 @@ session.removeAttribute("messages");
 </style>
 <script type="text/javascript">
 	
-	var allCount = 2;
+	var allCount = <%=counts %>;
 	var jhzq = 0;
 	//客户对应联系人信息
 	var arryLxrObj = new Array();
