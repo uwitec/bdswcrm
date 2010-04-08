@@ -13,6 +13,7 @@ List userList = (List)VS.findValue("userList");
 String msg = StringUtils.nullToStr(session.getAttribute("MSG"));
 session.removeAttribute("MSG");
 
+
 List clientsPayInfos = (List)VS.findValue("clientsPayInfos");
 
 int counts = 2;

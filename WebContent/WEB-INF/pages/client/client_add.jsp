@@ -9,6 +9,7 @@ String[] wldwlx = (String[])VS.findValue("wldwlx");
 List userList = (List)VS.findValue("userList");
 String msg = StringUtils.nullToStr(session.getAttribute("MSG"));
 session.removeAttribute("MSG");
+String[] lxrnld = (String[])VS.findValue("lxrnld");
 %>
 <html>
 <head>
@@ -48,6 +49,20 @@ session.removeAttribute("MSG");
 			alert("联系人姓名不能为空 ！");
 			return;
 		}			
+		
+		if(document.getElementById("dept").value == ""){
+			alert("联系人的部门不能为空 ！");
+			return;
+		}
+		if(document.getElementById("zw").value == ""){
+			alert("联系人的职务不能为空 ！");
+			return;
+		}
+		
+		if((document.getElementById("gzdh").value == "") && (document.getElementById("yddh").value == "")){
+			alert("办公电话和移动电话不能都为空，至少要填写一个！");
+			return;
+		}
 		
 		document.clientForm.submit();
 		
@@ -136,7 +151,7 @@ session.removeAttribute("MSG");
 	</tr>	
 	--><tr height="50">
 		<td class="a1">备注</td>
-		<td class="a2" colspan="3"><input type="text" name="client.remark" id="remark" style="width:85%" maxlength="500"></textarea>
+		<td class="a2" colspan="3"><input type="text" name="client.remark" id="remark" style="width:85%" maxlength="500">
 		</td>
 	</tr>	
 </table>
@@ -209,32 +224,30 @@ session.removeAttribute("MSG");
 	     
 		<td class="a1" width="15%">姓名</td>
 		<td class="a2" width="35%"><input type="text" name="linkman.name" id="linkmanname" value="" style="width:85%"><font color="red">*</font></td>
-		<td class="a1" width="15%">类型</td>
-		<td class="a2" width="35%">
-			<select name="linkman.lx" id="lx" style="width:85%">
-				<option value="主联系人">主联系人</option>
-				<option value="联系人">联系人</option>
-			</select>
-		</td>		
+		<td class="a1" width="15%">称呼</td>
+		<td class="a2" width="35%"><input type="text" name="linkman.ch" id="ch" value="" style="width:85%"></td>		
 	</tr>
 	<tr>
-		<td class="a1" width="15%">固定电话</td>
+	    <td class="a1" width="15%">部门</td>
+		<td class="a2" width="35%"><input type="text" name="linkman.dept" id="dept" value="" style="width:85%"><font color="red">*</font></td>
+		<td class="a1" width="15%">职务</td>
+		<td class="a2" width="35%"><input type="text" name="linkman.zw" id="zw" value="" style="width:85%"><font color="red">*</font></td>
+	</tr>
+	<tr>
+		<td class="a1" width="15%">办公电话</td>
 		<td class="a2" width="35%"><input type="text" name="linkman.gzdh" id="gzdh" value="" style="width:85%"></td>
 		<td class="a1" width="15%">移动电话</td>
 		<td class="a2" width="35%"><input type="text" name="linkman.yddh" id="yddh" value="" style="width:85%"></td>	
-	</tr>
-	<tr>
-		<td class="a1" width="15%">家庭电话</td>
-		<td class="a2" width="35%"><input type="text" name="linkman.jtdh" id="jtdh" value="" style="width:85%"></td>	
-		<td class="a1" width="15%">其他联系方式</td>
-		<td class="a2" width="35%"><input type="text" name="linkman.qtlx" id="qtlx" value="" style="width:85%"></td>	
-	</tr>
+	</tr>	
 	<tr>	
 		<td class="a1" width="15%">E-Mail</td>
-		<td class="a2" width="35%"><input type="text" name="linkman.mail" id="mail" value="" style="width:85%"></td>	
-		<td class="a1" width="15%">部门</td>
-		<td class="a2" width="35%"><input type="text" name="linkman.dept" id="dept" value="" style="width:85%"></td>
-		
+		<td class="a2"  colspan="3"><input type="text" name="linkman.mail" id="mail" value=""  size="50" ></td>	
+	</tr>
+	<tr>
+		<td class="a1" width="15%">QQ</td>
+		<td class="a2" width="35%"><input type="text" name="linkman.qq" id="qq" value="" style="width:85%"></td>	
+		<td class="a1" width="15%">MSN</td>
+		<td class="a2" width="35%"><input type="text" name="linkman.msn" id="msn" value="" style="width:85%"></td>	
 	</tr>
 	<tr>
 		<td class="a1" width="15%">性别</td>
@@ -244,19 +257,35 @@ session.removeAttribute("MSG");
 				<option value="女">女</option>
 			</select>
         </td>
-		<td class="a1" width="15%">职务</td>
-		<td class="a2" width="35%"><input type="text" name="linkman.zw" id="zw" value="" style="width:85%"></td>		
+		<td class="a1" width="15%">年龄段</td>
+		<td class="a2" width="35%">
+			<select name="linkman.nld" id="nld" style="width:85%">
+				<option value=""></option>
+				<%
+				if(lxrnld != null && lxrnld.length > 0){ 
+					for(int i=0;i<lxrnld.length;i++){
+				%>
+				<option value="<%=lxrnld[i] %>"><%=lxrnld[i] %></option>
+				<%
+					}
+				}
+				%>
+			</select>
+		</td>
+				
 	</tr>
 	<tr>
-		<td class="a1" width="15%">生日</td>
-		<td class="a2" width="35%"><input type="text" name="linkman.sr" id="sr" class="Wdate" onFocus="WdatePicker()" style="width:85%">
-		</td>	
-		<td class="a1" width="15%">爱好</td>
-		<td class="a2" width="35%"><input type="text" name="linkman.ah" id="ah" style="width:85%"></td>	
+		<td class="a1" width="15%">类型</td>
+		<td class="a2" width="35%">
+			<select name="linkman.lx" id="lx" style="width:85%">
+				<option value="主联系人">主联系人</option>
+				<option value="联系人">联系人</option>
+			</select>
+		</td>
 	</tr>			 
 	<tr height="50">
 		<td class="a1">备注</td>
-		<td class="a2" colspan="3"><input type="text" name="linkman.remark" id="remark" style="width:85%" maxlength="500"></textarea>
+		<td class="a2" colspan="3"><textarea name="linkman.remark" id="remark" style="width:85%" maxlength="500"></textarea>
 		</td>
 	</tr>
 	

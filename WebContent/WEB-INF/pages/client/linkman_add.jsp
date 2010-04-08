@@ -6,7 +6,7 @@
 OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
 
 String clinetsid = (String)VS.findValue("id");
- 
+String[] lxrnld = (String[])VS.findValue("lxrnld"); 
 %>
 <html>
 <head>
@@ -29,6 +29,21 @@ String clinetsid = (String)VS.findValue("id");
              return ;
           }
 	    }		
+	    
+	    if(document.getElementById("dept").value == ""){
+			alert("联系人的部门不能为空 ！");
+			return;
+		}
+		if(document.getElementById("zw").value == ""){
+			alert("联系人的职务不能为空 ！");
+			return;
+		}
+		
+		if((document.getElementById("gzdh").value == "") && (document.getElementById("yddh").value == "")){
+			alert("办公电话和移动电话不能都为空，至少要填写一个！");
+			return;
+		}
+	    
 		document.clientForm.action="saveLinkman.html";
 		document.clientForm.submit();
 	}	
@@ -46,33 +61,32 @@ String clinetsid = (String)VS.findValue("id");
 	    <input type="hidden" name="linkman.clients_id" value="<%=clinetsid%>"/>
 		<td class="a1" width="15%">姓名</td>
 		<td class="a2" width="35%"><input type="text" name="linkman.name" id="name" value=""><font color="red">*</font></td>
-		<td class="a1" width="15%">类型</td>
-		<td class="a2" width="35%">
-			<select name="linkman.lx" id="lx">
-				<option value="主联系人">主联系人</option>
-				<option value="联系人">联系人</option>
-			</select>
-		</td>		
+		<td class="a1" width="15%">称呼</td>
+		<td class="a2" width="35%"><input type="text" name="linkman.ch" id="ch" value="" style="width:85%"></td>			
 	</tr>
 	<tr>
-		<td class="a1" width="15%">固定电话</td>
+	    <td class="a1" width="15%">部门</td>
+		<td class="a2" width="35%"><input type="text" name="linkman.dept" id="dept" value="" style="width:85%"><font color="red">*</font></td>
+		<td class="a1" width="15%">职务</td>
+		<td class="a2" width="35%"><input type="text" name="linkman.zw" id="zw" value="" style="width:85%"><font color="red">*</font></td>
+	</tr>
+	<tr>
+		<td class="a1" width="15%">办公电话</td>
 		<td class="a2" width="35%"><input type="text" name="linkman.gzdh" id="gzdh" value=""  ></td>
 		<td class="a1" width="15%">移动电话</td>
 		<td class="a2" width="35%"><input type="text" name="linkman.yddh" id="yddh" value=""  ></td>				
 	</tr>
 	<tr>
-		<td class="a1" width="15%">家庭电话</td>
-		<td class="a2" width="35%"><input type="text" name="linkman.jtdh" id="jtdh" value="" ></td>
-		<td class="a1" width="15%">其他联系方式</td>
-		<td class="a2" width="35%"><input type="text" name="linkman.qtlx" id="qtlx" value=""  ></td>		
-	</tr>	
-	<tr>
 		<td class="a1" width="15%">E-Mail</td>
-		<td class="a2" width="35%"><input type="text" name="linkman.mail" id="mail" value=""  ></td>		
-		<td class="a1" width="15%">部门</td>
-		<td class="a2" width="35%"><input type="text" name="linkman.dept" id="dept" value=""  ></td>
-		
+		<td class="a2"  colspan="3"><input type="text" name="linkman.mail" id="mail" value=""  size="50"  ></td>
 	</tr>
+	<tr>
+		<td class="a1" width="15%">QQ</td>
+		<td class="a2" width="35%"><input type="text" name="linkman.qq" id="qq" value="" style="width:85%"></td>	
+		<td class="a1" width="15%">MSN</td>
+		<td class="a2" width="35%"><input type="text" name="linkman.msn" id="msn" value="" style="width:85%"></td>	
+	</tr>
+	
 	<tr>
 		<td class="a1" width="15%">性别</td>
 		<td class="a2" width="35%">
@@ -81,15 +95,30 @@ String clinetsid = (String)VS.findValue("id");
 				<option value="女">女</option>
 			</select>
         </td>
-		<td class="a1" width="15%">职务</td>
-		<td class="a2" width="35%"><input type="text" name="linkman.zw" id="zw" value=""  ></td>
+		<td class="a1" width="15%">年龄段</td>
+		<td class="a2" width="35%">
+			<select name="linkman.nld" id="nld" style="width:85%">
+				<option value=""></option>
+				<%
+				if(lxrnld != null && lxrnld.length > 0){ 
+					for(int i=0;i<lxrnld.length;i++){
+				%>
+				<option value="<%=lxrnld[i] %>"><%=lxrnld[i] %></option>
+				<%
+					}
+				}
+				%>
+			</select>
+		</td>
 	</tr>	
 	<tr>
-		<td class="a1" width="15%">生日</td>
-		<td class="a2" width="35%"><input type="text" name="linkman.sr" id="sr" class="Wdate" onFocus="WdatePicker()">
-		</td>	
-		<td class="a1" width="15%">爱好</td>
-		<td class="a2" width="35%"><input type="text" name="linkman.ah" id="ah"></td>	
+		<td class="a1" width="15%">类型</td>
+		<td class="a2" width="35%">
+			<select name="linkman.lx" id="lx">
+				<option value="主联系人">主联系人</option>
+				<option value="联系人">联系人</option>
+			</select>
+		</td>
 	</tr>			
 	<tr height="50">
 		<td class="a1">备注</td>
