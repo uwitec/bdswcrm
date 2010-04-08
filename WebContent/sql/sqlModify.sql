@@ -566,21 +566,20 @@ where (b.state = '已提交'))) a)
 --商品表添加索引
 ALTER TABLE `product` ADD INDEX `Index_product_kind`(`product_id`, `product_kind`);
 
-2010-04-05修改
---菜单中增加发票管理
-INSERT INTO `column_mng`(`id`,`name`,`parent_id`,`xh`,`img`,`yw_flag`) 
-VALUES('010','发票管理','0','10','WORDPAD.gif','1'),('010001','发票管理','010',25,NULL,'1'),('010002','发票统计','010',26,NULL,'1');
-
-INSERT INTO `funcs`(`func_id`,`func_name`,`func_ms`,`url`,`img`,`xh`,`ywflag`,`funcflag`)  values
-('FC0105','采购发票','采购发票的处理','listCgfp.html','123.gif',82,'1','9');
-INSERT INTO `funcs`(`func_id`,`func_name`,`func_ms`,`url`,`img`,`xh`,`ywflag`,`funcflag`)  values
-('FC0110','采购发票统计','采购发票的统计','showCgfpCondition.html','127.gif',82,'1','9');
 
 
 2010-04-07修改
 --往来单位的联系人中增加qq、msn、称呼、年龄段
-ALTER TABLE `clients` ADD COLUMN `ch`  VARCHAR(50)  AFTER `clients_id`;
-ALTER TABLE `clients` ADD COLUMN `qq`  VARCHAR(20)  AFTER `ch`;
-ALTER TABLE `clients` ADD COLUMN `msn`  VARCHAR(50)  AFTER `qq`;
-ALTER TABLE `clients` ADD COLUMN `nld`  VARCHAR(20)  AFTER `msn`;
+ALTER TABLE `clients_linkman` ADD COLUMN `ch`  VARCHAR(50)  AFTER `clients_id`;
+ALTER TABLE `clients_linkman` ADD COLUMN `qq`  VARCHAR(20)  AFTER `ch`;
+ALTER TABLE `clients_linkman` ADD COLUMN `msn`  VARCHAR(50)  AFTER `qq`;
+ALTER TABLE `clients_linkman` ADD COLUMN `nld`  VARCHAR(20)  AFTER `msn`;
+
+--增加年龄段的数据字典
+INSERT INTO `sjzd_jbxx` VALUES ('SJZD_LXRNLD','联系人年龄段','联系人年龄段',12);
+
+
+INSERT INTO `sjzd_xmxx` VALUES (121,'SJZD_LXRNLD','20以下','20以下',6),(122,'SJZD_LXRNLD','21-30','21-30',5),(123,'SJZD_LXRNLD','31-40','31-40',4),(124,'SJZD_LXRNLD','41-50','41-50',3),(125,'SJZD_LXRNLD','51-60','51-60',2),(126,'SJZD_LXRNLD','61-70','61-70',1),(127,'SJZD_LXRNLD','70以上','70以上',0);
+
+
 
