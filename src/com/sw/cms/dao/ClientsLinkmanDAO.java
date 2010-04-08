@@ -26,7 +26,7 @@ public class ClientsLinkmanDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public List getClientsLinkman(String id) {
-		String sql = "select l.id,l.name,l.sex,l.lx,l.zw,l.dept,l.gzdh,l.yddh,l.mail,l.jtdh,l.qtlx,l.address,l.sr,l.ah,l.remark,c.name as clients_id from clients_linkman  l left join clients c on c.id=l.clients_id where c.id='"
+		String sql = "select l.id,l.name,l.sex,l.lx,l.zw,l.dept,l.gzdh,l.yddh,l.mail,l.jtdh,l.qtlx,l.address,l.sr,l.ah,l.remark,c.name as clients_id,l.ch,l.qq,l.msn,l.nld from clients_linkman  l left join clients c on c.id=l.clients_id where c.id='"
 				+ id + "' ";
 		return this.getJdbcTemplate().query(sql, new ClientsLinkmanRowMapper());
 	}
@@ -37,7 +37,7 @@ public class ClientsLinkmanDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public Page getClinetsLinkman(String con, int curPage, int rowsPerPage) {
-		String sql = "select l.id,l.name,l.sex,l.lx,l.zw,l.dept,l.yddh,l.mail,l.jtdh,l.gzdh,l.qtlx,l.address,l.sr,l.ah,l.remark,c.name as clients_name, c.id as clients_id,c.cz from clients_linkman  l left join clients c on c.id=l.clients_id where 1=1 ";
+		String sql = "select l.id,l.name,l.sex,l.lx,l.zw,l.dept,l.yddh,l.mail,l.jtdh,l.gzdh,l.qtlx,l.address,l.sr,l.ah,l.remark,c.name as clients_name, c.id as clients_id,c.cz,l.ch,l.qq,l.msn,l.nld from clients_linkman  l left join clients c on c.id=l.clients_id where 1=1 ";
 		if (!con.equals("")) {
 			sql = sql + con;
 		}
@@ -51,7 +51,7 @@ public class ClientsLinkmanDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public Object getLinkmanById(String id) {
-		String sql = "select l.id,l.name,l.sex,l.lx,l.zw,l.dept,l.gzdh,l.yddh,l.mail,l.jtdh,l.qtlx,l.address,l.sr,l.ah,l.remark,c.name as clients_id from clients_linkman  l left join clients c on c.id=l.clients_id where l.id='"
+		String sql = "select l.id,l.name,l.sex,l.lx,l.zw,l.dept,l.gzdh,l.yddh,l.mail,l.jtdh,l.qtlx,l.address,l.sr,l.ah,l.remark,c.name as clients_id,l.ch,l.qq,l.msn,l.nld from clients_linkman  l left join clients c on c.id=l.clients_id where l.id='"
 				+ id + "' ";
 		return this.getJdbcTemplate().queryForObject(sql,
 				new ClientsLinkmanRowMapper());
@@ -63,8 +63,8 @@ public class ClientsLinkmanDAO extends JdbcBaseDAO {
 	 * @param linkman
 	 */
 	public void insertLinkman(ClientsLinkman linkman) {
-		String sql = "insert into clients_linkman(id,name,sex,lx,zw,dept,gzdh,yddh,mail,jtdh,qtlx,address,sr,ah,remark,clients_id)values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-		Object[] obj = new Object[16];
+		String sql = "insert into clients_linkman(id,name,sex,lx,zw,dept,gzdh,yddh,mail,jtdh,qtlx,address,sr,ah,remark,clients_id,ch,qq,msn,nld)values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		Object[] obj = new Object[20];
 		obj[0] = getClientLinkmanId();
 		obj[1] = linkman.getName();
 		obj[2] = linkman.getSex();
@@ -77,10 +77,15 @@ public class ClientsLinkmanDAO extends JdbcBaseDAO {
 		obj[9] = linkman.getJtdh();
 		obj[10] = linkman.getQtlx();
 		obj[11] = linkman.getAddress();
-		obj[12] = StringUtils.strToNull(linkman.getSr());
+		obj[12] = linkman.getSr();
 		obj[13] = linkman.getAh();
 		obj[14] = linkman.getRemark();
 		obj[15] = linkman.getClients_id();
+		obj[16] = linkman.getCh();
+		obj[17] = linkman.getQq();
+		obj[18] = linkman.getMsn();
+		obj[19] = linkman.getNld();
+		
 		this.getJdbcTemplate().update(sql, obj);
 
 	}
@@ -91,8 +96,10 @@ public class ClientsLinkmanDAO extends JdbcBaseDAO {
 	 * @param linkman
 	 */
 	public void updateLinkman(ClientsLinkman linkman) {
-		String sql = "update clients_linkman set name=?,sex=?,lx=?,zw=?,dept=?,gzdh=?,yddh=?,mail=?,jtdh=?,qtlx=?,sr=?,ah=?,remark=?where id=?";
-		Object[] obj = new Object[14];
+		String sql = "update clients_linkman set name=?,sex=?,lx=?,zw=?,dept=?,gzdh=?,yddh=?,mail=?,jtdh=?,qtlx=?,sr=?,ah=?,remark=?,"+
+		             "ch=?,qq=?,msn=?,nld=?"+
+		             " where id=?";
+		Object[] obj = new Object[18];
 		obj[0] = linkman.getName();
 		obj[1] = linkman.getSex();
 		obj[2] = linkman.getLx();
@@ -103,10 +110,16 @@ public class ClientsLinkmanDAO extends JdbcBaseDAO {
 		obj[7] = linkman.getMail();
 		obj[8] = linkman.getJtdh();
 		obj[9] = linkman.getQtlx();
-		obj[10] = StringUtils.strToNull(linkman.getSr());
+		obj[10] = linkman.getSr();
 		obj[11] = linkman.getAh();
 		obj[12] = linkman.getRemark();
-		obj[13] = linkman.getId();
+		obj[13] = linkman.getCh();
+		obj[14] = linkman.getQq();
+		obj[15] = linkman.getMsn();
+		obj[16] = linkman.getNld();
+		
+		obj[17] = linkman.getId();
+		
 		this.getJdbcTemplate().update(sql, obj);
 	}
 
@@ -221,6 +234,10 @@ public class ClientsLinkmanDAO extends JdbcBaseDAO {
 			clientslinkman.setAh(rs.getString("ah"));
 			clientslinkman.setRemark(rs.getString("remark"));
 			clientslinkman.setClients_id(rs.getString("clients_id"));
+			clientslinkman.setCh(rs.getString("ch"));
+			clientslinkman.setQq(rs.getString("qq"));
+			clientslinkman.setMsn(rs.getString("msn"));
+			clientslinkman.setNld(rs.getString("nld"));
 			return clientslinkman;
 		}
 	}
