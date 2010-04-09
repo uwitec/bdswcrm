@@ -167,7 +167,7 @@ List employList = (List)VS.findValue("employList");
 </form>
 <div id="div_ywy" style="display:none">
 	 <!--修改 --------------------------------------------------------------------------------------  -->
-		 <input  id="brand"  type="text"   length="20"  onblur="setValue()" value="<%=StaticParamDo.getRealNameById(user.getClient_name() ) %> %>"/> 
+		 <input  id="brand"  type="text"   length="20"  onblur="setValue()" value="<%=StaticParamDo.getRealNameById(user.getClient_name() ) %>"/> 
          <img src="images/select.gif" align="absmiddle" title="选择经手人" border="0" onclick="openywyWin();" style="cursor:hand">
           <div   id="brandTip"  style="height:12px;position:absolute;left:385px; top:110px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
           </div>
