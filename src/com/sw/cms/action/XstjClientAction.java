@@ -15,9 +15,14 @@ public class XstjClientAction {
 	
 	private List userList = new ArrayList();
 	private List clientList = new ArrayList();
+	private List statResult = new ArrayList();
 	 
 	
 	private String client_name = "";
+	private String start_date = "";
+	private String end_date = "";
+	private String xsry_id = "";
+	private String dj_id = "";
 	
 	
 	public String showCondition(){
@@ -27,7 +32,7 @@ public class XstjClientAction {
 	}
 	
 	public String getResult(){
-		clientList = clientsService.getClientList(client_name);
+		statResult = xstjClientService.getXstjClientResult(start_date, end_date, client_name, xsry_id, dj_id);
 		return "success";
 	}
 	
@@ -86,6 +91,46 @@ public class XstjClientAction {
 
 	public void setClient_name(String client_name) {
 		this.client_name = client_name;
+	}
+
+	public List getStatResult() {
+		return statResult;
+	}
+
+	public void setStatResult(List statResult) {
+		this.statResult = statResult;
+	}
+
+	public String getStart_date() {
+		return start_date;
+	}
+
+	public void setStart_date(String startDate) {
+		start_date = startDate;
+	}
+
+	public String getEnd_date() {
+		return end_date;
+	}
+
+	public void setEnd_date(String endDate) {
+		end_date = endDate;
+	}
+
+	public String getXsry_id() {
+		return xsry_id;
+	}
+
+	public void setXsry_id(String xsryId) {
+		xsry_id = xsryId;
+	}
+
+	public String getDj_id() {
+		return dj_id;
+	}
+
+	public void setDj_id(String djId) {
+		dj_id = djId;
 	}
 
 }

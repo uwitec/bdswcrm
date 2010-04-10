@@ -100,6 +100,21 @@ public class XstjClientService {
 		return xstjClientDao.getLsdZje(start_date, end_date, xsry_id, dj_id);
 	}
 	
+	
+	/**
+	 * 客户销售汇总
+	 * 2010-04-10
+	 * @param start_date
+	 * @param end_date
+	 * @param client_name
+	 * @param xsry_id
+	 * @param dj_id
+	 * @return
+	 */
+	public List getXstjClientResult(String start_date, String end_date,String client_name, String xsry_id, String dj_id){
+		return xstjClientDao.getXstjClientResult(start_date, end_date, client_name, xsry_id, dj_id);
+	}
+	
 	public XstjClientDAO getXstjClientDao() {
 		return xstjClientDao;
 	}

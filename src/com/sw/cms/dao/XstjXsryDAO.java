@@ -261,19 +261,19 @@ public class XstjXsryDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public List getYwymlMx(String start_date,String end_date,String user_id){
-		String sql = "select cz_date,id,yw_type,client_name,product_name,product_id,product_xh,nums,price,hjje,bhsje,dwcb,cb,dwkhcb,khcb from view_hpxshz_tj where 1=1";
+		String sql = "select a.cz_date,a.id,a.yw_type,a.client_name,b.product_name,a.product_id,b.product_xh,a.nums,a.price,a.hjje,a.bhsje,a.dwcb,a.cb,a.dwkhcb,a.khcb from product_sale_flow a join product b on b.product_id=a.product_id where 1=1";
 		
 		if(!start_date.equals("")){
-			sql += " and cz_date>='" + start_date + "'";
+			sql += " and a.cz_date>='" + start_date + "'";
 		}
 		if(!start_date.equals("")){
-			sql += " and cz_date<='" + end_date + "'";
+			sql += " and a.cz_date<='" + end_date + "'";
 		}
 		if(!user_id.equals("")){
-			sql += " and xsry='" + user_id + "'";
+			sql += " and a.xsry='" + user_id + "'";
 		}
 		
-		sql += " order by id";
+		sql += " order by a.cz_date";
 		
 		return this.getResultList(sql);
 	}

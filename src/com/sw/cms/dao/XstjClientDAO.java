@@ -223,4 +223,39 @@ public class XstjClientDAO extends JdbcBaseDAO {
 		return lsdje;
 	}
 	
+	
+	/**
+	 * 客户销售汇总
+	 * 2010-04-10
+	 * @param start_date
+	 * @param end_date
+	 * @param client_name
+	 * @param xsry_id
+	 * @param dj_id
+	 * @return
+	 */
+	public List getXstjClientResult(String start_date, String end_date,String client_name, String xsry_id, String dj_id){
+		String sql = "select a.client_name as client_id,b.name as client_name,sum(hjje) as hjje from product_sale_flow a join clients b on b.id=a.client_name where (yw_type='销售单' or yw_type='退货单')";
+		
+		if(!start_date.equals("")){
+			sql += " and a.cz_date>='" + start_date + "'";
+		}
+		if(!end_date.equals("")){
+			sql += " and a.cz_date<='" + end_date + "'";
+		}
+		if(!client_name.equals("")){
+			sql += " and a.client_name ='" + client_name + "'";
+		}
+		if(!xsry_id.equals("")){
+			sql += " and a.xsry ='" + xsry_id + "'";
+		}
+		if(!dj_id.equals("")){
+			sql += " and a.id ='" + dj_id + "'";
+		}
+		
+		sql += " group by a.client_name,b.name";
+		
+		return this.getResultList(sql);
+	}
+	
 }
