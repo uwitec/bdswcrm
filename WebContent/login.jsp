@@ -37,6 +37,7 @@ function f_enter(){
 
 function chgImage(){
 	document.getElementById("imgCheck").src = "<%=request.getContextPath() %>/showImage?" + Math.random();
+	document.getElementById("authNums").focus();
 }
 </script>
 </head>
