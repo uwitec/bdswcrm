@@ -590,4 +590,10 @@ ALTER TABLE `clients_linkman` MODIFY COLUMN `msn` VARCHAR(100) CHARACTER SET utf
 INSERT INTO `sjzd_jbxx` VALUES ('SJZD_LXRNLD','联系人年龄段','联系人年龄段',12);
 
 
-INSERT INTO `sjzd_xmxx` VALUES (121,'SJZD_LXRNLD','20以下','20以下',6),(122,'SJZD_LXRNLD','21-30','21-30',5),(123,'SJZD_LXRNLD','31-40','31-40',4),(124,'SJZD_LXRNLD','41-50','41-50',3),(125,'SJZD_LXRNLD','51-60','51-60',2),(126,'SJZD_LXRNLD','61-70','61-70',1),(127,'SJZD_LXRNLD','70以上','70以上',0);
+INSERT INTO `sjzd_xmxx`(zd_id,xm_name,xm_ms,xh) VALUES ('SJZD_LXRNLD','20以下','20以下',6);
+INSERT INTO `sjzd_xmxx`(zd_id,xm_name,xm_ms,xh) VALUES ('SJZD_LXRNLD','21-30','21-30',5);
+INSERT INTO `sjzd_xmxx`(zd_id,xm_name,xm_ms,xh) VALUES ('SJZD_LXRNLD','31-40','31-40',4);
+INSERT INTO `sjzd_xmxx`(zd_id,xm_name,xm_ms,xh) VALUES ('SJZD_LXRNLD','41-50','41-50',3);
+INSERT INTO `sjzd_xmxx`(zd_id,xm_name,xm_ms,xh) VALUES ('SJZD_LXRNLD','51-60','51-60',2);
+INSERT INTO `sjzd_xmxx`(zd_id,xm_name,xm_ms,xh) VALUES ('SJZD_LXRNLD','61-70','61-70',1);
+INSERT INTO `sjzd_xmxx`(zd_id,xm_name,xm_ms,xh) VALUES ('SJZD_LXRNLD','70以上','70以上',0);

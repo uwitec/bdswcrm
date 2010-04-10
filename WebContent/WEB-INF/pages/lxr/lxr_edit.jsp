@@ -141,8 +141,7 @@ String[] lxrnld = (String[])VS.findValue("lxrnld");
 	 
 	<tr height="50">
 		<td class="a1">备注</td>
-		<td class="a2" colspan="3">
-			<textarea rows="3" cols="50" name="linkman.remark" id="remark" style="width:80%" maxlength="500"><%=linkman.getRemark()%></textarea>
+		<td class="a2" colspan="3"><input type="text" name="linkman.remark" id="remark" style="width:500px"" maxlength="500" value="<%=linkman.getRemark()%>"></input>
 		</td>
 	</tr>
 	
