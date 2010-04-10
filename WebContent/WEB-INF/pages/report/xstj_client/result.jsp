@@ -16,8 +16,8 @@ String dj_id = StringUtils.nullToStr(request.getParameter("dj_id"));            
 String isShowZ = StringUtils.nullToStr(request.getParameter("isShowZ"));         //是否显示销售额为零客户
 String client_name = StringUtils.nullToStr(request.getParameter("client_name")); 
 
-//客户列表
-List clientList = (List)VS.findValue("clientList");
+//汇总结果
+List statResult = (List)VS.findValue("statResult");
 
 
 %>
@@ -55,22 +55,20 @@ List clientList = (List)VS.findValue("clientList");
 		<TR>
 			<TD class=ReportHead>客户编号</TD>
 			<TD class=ReportHead>客户名称</TD>
-			<TD class=ReportHead>联系人</TD>
 			<TD class=ReportHead>总金额</TD>	
 		</TR>
 	</THEAD>
 	<TBODY>
 <%
 double hjje = 0;
-if(clientList != null && clientList.size()>0){
-	for(int i=0;i<clientList.size();i++){
-		Map map = (Map)clientList.get(i);
+if(statResult != null && statResult.size()>0){
+	for(int i=0;i<statResult.size();i++){
+		Map map = (Map)statResult.get(i);
 		
-		String id = StringUtils.nullToStr(map.get("id"));
-		String name = StringUtils.nullToStr(map.get("name"));
-		String lxr = StringUtils.nullToStr(map.get("lxr"));
+		String id = StringUtils.nullToStr(map.get("client_id"));
+		String name = StringUtils.nullToStr(map.get("client_name"));
 		
-		double zje = xstjClientService.getClientZje(start_date, end_date, xsry_id, id, dj_id);
+		double zje = map.get("hjje")==null?0:((Double)map.get("hjje")).doubleValue();
 		
 		boolean is = false;
 		if(isShowZ.equals("否")){
@@ -87,7 +85,6 @@ if(clientList != null && clientList.size()>0){
 	<TR>
 		<TD class=ReportItem><%=id %>&nbsp;</TD>
 		<TD class=ReportItem><a href="javascript:openWin('<%=id %>');"><%=name %></a>&nbsp;</TD>
-		<TD class=ReportItem><%=lxr %>&nbsp;</TD>
 		<TD class=ReportItemMoney><%=JMath.round(zje,2) %>&nbsp;</TD>
 	</TR>
 <%
@@ -104,7 +101,6 @@ if(client_name.equals("")){
 	<TR>
 		<TD class=ReportItem>&nbsp;</TD>
 		<TD class=ReportItem><a href="javascript:openWinLs();">零售单总计</a>&nbsp;</TD>
-		<TD class=ReportItem>&nbsp;</TD>
 		<TD class=ReportItemMoney><%=JMath.round(lsdzje,2) %>&nbsp;</TD>
 	</TR>
 <%
@@ -113,7 +109,6 @@ if(client_name.equals("")){
 
 	<TR>
 		<TD class=ReportItem style="font-weight:bold">合计：</TD>
-		<TD class=ReportItem>&nbsp;</TD>
 		<TD class=ReportItem>&nbsp;</TD>
 		<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(hjje,2) %>&nbsp;</TD>
 	</TR>

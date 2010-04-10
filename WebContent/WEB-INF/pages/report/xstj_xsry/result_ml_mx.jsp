@@ -51,16 +51,16 @@ if(!user_id.equals("")){
 <TABLE align="center" cellSpacing=0 cellPadding=0 width="99%" border=0 style="BORDER-TOP: #000000 2px solid;BORDER-LEFT:#000000 1px solid">
 	<THEAD>
 		<TR>
-			<TD class=ReportHead width="70">日期</TD>
-			<TD class=ReportHead width="100">单据号</TD>
-			<TD class=ReportHead width="50">业务类型</TD>
-			<TD class=ReportHead width="120">客户</TD>
+			<TD class=ReportHead>日期</TD>
+			<TD class=ReportHead>单据号</TD>
+			<TD class=ReportHead nowrap="nowrap">业务类型</TD>
+			<TD class=ReportHead>客户</TD>
 			<TD class=ReportHead>商品名称</TD>
 			<TD class=ReportHead>型号</TD>
-			<TD class=ReportHead>数量</TD>
+			<TD class=ReportHead nowrap="nowrap">数量</TD>
 			<TD class=ReportHead>单价</TD>
 			<TD class=ReportHead>销售金额</TD>		
-			<TD class=ReportHead>不含税金额金额</TD>	
+			<TD class=ReportHead>不含税金额</TD>	
 			<TD class=ReportHead>单位成本</TD>
 			<TD class=ReportHead>成本</TD>			
 			<TD class=ReportHead>毛利</TD>	
@@ -115,13 +115,13 @@ if(results != null && results.size()>0){
 		hj_ml += ml;
 %>
 		<TR>
-			<TD class=ReportItemXH><%=strDate %>&nbsp;</TD>
-			<TD class=ReportItemXH><%=strId %>&nbsp;</TD>
-			<TD class=ReportItemXH><%=strYwtype %>&nbsp;</TD>
+			<TD class=ReportItemXH nowrap="nowrap"><%=strDate %>&nbsp;</TD>
+			<TD class=ReportItemXH nowrap="nowrap"><%=strId %>&nbsp;</TD>
+			<TD class=ReportItemXH nowrap="nowrap"><%=strYwtype %>&nbsp;</TD>
 			<TD class=ReportItem><%=strClientName %>&nbsp;</TD>
 			<TD class=ReportItem><%=StringUtils.nullToStr(map.get("product_name")) %>&nbsp;</TD>
 			<TD class=ReportItem><%=StringUtils.nullToStr(map.get("product_xh")) %>&nbsp;</TD>								
-			<TD class=ReportItemXH nowrap><%=nums %>&nbsp;</TD>
+			<TD class=ReportItemXH nowrap="nowrap"><%=nums %>&nbsp;</TD>
 			<TD class=ReportItemMoney nowrap><%=JMath.round(price,2) %>&nbsp;</TD>
 			<TD class=ReportItemMoney nowrap><%=JMath.round(xsje,2) %>&nbsp;</TD>
 			<TD class=ReportItemMoney nowrap><%=JMath.round(bhsje,2) %>&nbsp;</TD>
