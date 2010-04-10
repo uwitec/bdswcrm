@@ -1,6 +1,7 @@
 <%@ page language="java" errorPage="/error.jsp" pageEncoding="UTF-8" contentType="text/html;charset=UTF-8" %>
 <%@ page import="com.opensymphony.xwork.util.OgnlValueStack" %>
 <%@ page import="com.sw.cms.model.*" %>
+<%@ page import="com.sw.cms.util.*" %>
 <%
 OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
 ClientsLinkman linkman=(ClientsLinkman)VS.findValue("linkman");
@@ -11,7 +12,7 @@ ClientsLinkman linkman=(ClientsLinkman)VS.findValue("linkman");
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 </head>
-<body   oncontextmenu="return false;">
+<body>
 <form name="myform" action="viewLxr.html" method="post">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
@@ -21,61 +22,49 @@ ClientsLinkman linkman=(ClientsLinkman)VS.findValue("linkman");
 	</thead>
 	<tr>
 	   <td class="a1" width="15%">往来单位</td>
-	   <td class="a2"  width="35%" colspan="3">
-	      <%=linkman.getClients_id() %>  
-	    </td>
-	</tr>
-	<tr> 
-	     
+	   <td class="a2"  width="35%"><%=StringUtils.nullToStr(linkman.getClients_id()) %></td>
 		<td class="a1" width="15%">姓名</td>
-		<td class="a2" width="35%"><%=linkman.getName() %></td>
+		<td class="a2" width="35%"><%=StringUtils.nullToStr(linkman.getName()) %></td>
+	</tr>
+	<tr> 		
 		<td class="a1" width="15%">称呼</td>
-		<td class="a2" width="35%"><%=linkman.getCh() %></td>		
-	</tr>
-	<tr>
+		<td class="a2" width="35%"><%=StringUtils.nullToStr(linkman.getCh()) %></td>		
 	    <td class="a1" width="15%">部门</td>
-		<td class="a2" width="35%"><%=linkman.getDept() %></td>
+		<td class="a2" width="35%"><%=StringUtils.nullToStr(linkman.getDept()) %></td>
+	</tr>
+	<tr> 		
 		<td class="a1" width="15%">职务</td>
-		<td class="a2" width="35%"><%=linkman.getZw()%></td>
-	</tr>
-	<tr>
+		<td class="a2" width="35%"><%=StringUtils.nullToStr(linkman.getZw())%></td>
 		<td class="a1" width="15%">办公电话</td>
-		<td class="a2" width="35%"><%=linkman.getGzdh()%></td>	
-		<td class="a1" width="15%">移动电话</td>
-		<td class="a2" width="35%"><%=linkman.getYddh()%></td>			
+		<td class="a2" width="35%"><%=StringUtils.nullToStr(linkman.getGzdh())%></td>	
 	</tr>
-	
-	<tr>
+	<tr> 		
+		<td class="a1" width="15%">移动电话</td>
+		<td class="a2" width="35%"><%=StringUtils.nullToStr(linkman.getYddh())%></td>			
 		<td class="a1" width="15%">E-Mail</td>
-		<td class="a2"  colspan="3"><%=linkman.getMail()%></td>	
+		<td class="a2"  colspan="3"><%=StringUtils.nullToStr(linkman.getMail())%></td>	
 	</tr>
 	<tr>
 		<td class="a1" width="15%">QQ</td>
-		<td class="a2" width="35%"><%=linkman.getQq()%></td>	
+		<td class="a2" width="35%"><%=StringUtils.nullToStr(linkman.getQq())%></td>	
 		<td class="a1" width="15%">MSN</td>
-		<td class="a2" width="35%"><%=linkman.getMsn()%></td>	
+		<td class="a2" width="35%"><%=StringUtils.nullToStr(linkman.getMsn())%></td>	
 	</tr>
 	<tr>
 		<td class="a1" width="15%">性别</td>
-		<td class="a2" width="35%">
-          <%=linkman.getSex()%>
-        </td>
+		<td class="a2" width="35%"><%=StringUtils.nullToStr(linkman.getSex())%></td>
 		<td class="a1" width="15%">年龄段</td>
-		<td class="a2" width="35%"><%=linkman.getNld()%></td>		
+		<td class="a2" width="35%"><%=StringUtils.nullToStr(linkman.getNld())%></td>		
 	</tr>
 	<tr>
 		<td class="a1" width="15%">类型</td>
-		<td class="a2" width="35%">
-			 <%=linkman.getLx() %>
-		</td>	
+		<td class="a2" colspan="3"><%=StringUtils.nullToStr(linkman.getLx()) %></td>	
 	</tr>		
 	
 	 
 	<tr height="50">
 		<td class="a1">备注</td>
-		<td class="a2" colspan="3">
-			<textarea rows="3" cols="50" name="linkman.remark" id="remark" style="width:80%" maxlength="500"><%=linkman.getRemark() %></textarea>
-		</td>
+		<td class="a2" colspan="3"><%=StringUtils.nullToStr(linkman.getRemark()) %></td>
 	</tr>
 	
 	<tr height="35">

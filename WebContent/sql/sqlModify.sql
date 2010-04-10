@@ -583,6 +583,9 @@ ALTER TABLE `clients_linkman` ADD COLUMN `qq`  VARCHAR(20)  AFTER `ch`;
 ALTER TABLE `clients_linkman` ADD COLUMN `msn`  VARCHAR(50)  AFTER `qq`;
 ALTER TABLE `clients_linkman` ADD COLUMN `nld`  VARCHAR(20)  AFTER `msn`;
 
+ALTER TABLE `clients_linkman` MODIFY COLUMN `msn` VARCHAR(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL;
+
+
 --增加年龄段的数据字典
 INSERT INTO `sjzd_jbxx` VALUES ('SJZD_LXRNLD','联系人年龄段','联系人年龄段',12);
 

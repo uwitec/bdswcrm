@@ -11,7 +11,8 @@ String[] lxrnld = (String[])VS.findValue("lxrnld");
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript" src="js/Check.js"></script>
-<script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
+<script type="text/javascript" src="js/prototype-1.4.0.js"></script>
+<script language='JavaScript' src="js/selClient.js"></script>
 <script  type="text/javascript">
      function saveInfo()
      {
@@ -64,7 +65,7 @@ String[] lxrnld = (String[])VS.findValue("lxrnld");
 </script>
  
 </head>
-<body   oncontextmenu="return false;">
+<body onload="initClientTip();">
 <form name="myform" action="addLxr.html" method="post">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
@@ -74,54 +75,50 @@ String[] lxrnld = (String[])VS.findValue("lxrnld");
 	</thead>
 	<tr>
 	   <td class="a1" width="15%">往来单位</td>
-	   <td class="a2"  width="35%" colspan="3">
-	      <input type="text"   id="client_name"   size="37" maxlength="50" readonly="readonly" />
-	      <input type="hidden" name="linkman.clients_id" id="client_id"/>
-	      <img src="images/select.gif" align="absmiddle" title="选择经手人" border="0" onclick="openClientWin()" style="cursor:hand">
-	      <font color="red">*</font>
+	   <td class="a2"  width="35%">
+		<input type="text" name="client_name" onblur="setClientValue();" id="client_name" value="" style="width:180px"><font color="red">*</font>
+		<input type="hidden" name="linkman.clients_id" id="client_id" value="">
+		<div id="clientsTip" style="height:12px;position:absolute;left:150px; top:85px; width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>	
 	    </td>
-	</tr>
-	<tr> 
-	     
 		<td class="a1" width="15%">姓名</td>
-		<td class="a2" width="35%"><input type="text" name="linkman.name" id="name" value=""><font color="red">*</font></td>
+		<td class="a2" width="35%"><input type="text" name="linkman.name" id="name" value="" style="width:180px"><font color="red">*</font></td>
+	</tr>
+	<tr> 		
 		<td class="a1" width="15%">称呼</td>
-		<td class="a2" width="35%"><input type="text" name="linkman.ch" id="ch" value="" style="width:85%"></td>			
-	</tr>
-	<tr>
+		<td class="a2" width="35%"><input type="text" name="linkman.ch" id="ch" value=""  style="width:180px"></td>			
 	    <td class="a1" width="15%">部门</td>
-		<td class="a2" width="35%"><input type="text" name="linkman.dept" id="dept" value="" style="width:85%"><font color="red">*</font></td>
+		<td class="a2" width="35%"><input type="text" name="linkman.dept" id="dept" value=""  style="width:180px"><font color="red">*</font></td>
+	</tr>
+	<tr> 		
 		<td class="a1" width="15%">职务</td>
-		<td class="a2" width="35%"><input type="text" name="linkman.zw" id="zw" value="" style="width:85%"><font color="red">*</font></td>
-	</tr>
-	<tr>
+		<td class="a2" width="35%"><input type="text" name="linkman.zw" id="zw" value=""  style="width:180px"><font color="red">*</font></td>
 		<td class="a1" width="15%">办公电话</td>
-		<td class="a2" width="35%"><input type="text" name="linkman.gzdh" id="gzdh" value=""  ></td>
-		<td class="a1" width="15%">移动电话</td>
-		<td class="a2" width="35%"><input type="text" name="linkman.yddh" id="yddh" value=""  ></td>				
+		<td class="a2" width="35%"><input type="text" name="linkman.gzdh" id="gzdh" value="" style="width:180px"></td>
 	</tr>
-	<tr>
+	<tr> 		
+		<td class="a1" width="15%">移动电话</td>
+		<td class="a2" width="35%"><input type="text" name="linkman.yddh" id="yddh" value="" style="width:180px"></td>				
 		<td class="a1" width="15%">E-Mail</td>
-		<td class="a2"  colspan="3"><input type="text" name="linkman.mail" id="mail" value=""   size="50" ></td>
+		<td class="a2"><input type="text" name="linkman.mail" id="mail" value=""  style="width:180px"></td>
 	</tr>
 	<tr>
 		<td class="a1" width="15%">QQ</td>
-		<td class="a2" width="35%"><input type="text" name="linkman.qq" id="qq" value="" style="width:85%"></td>	
+		<td class="a2" width="35%"><input type="text" name="linkman.qq" id="qq" value="" style="width:180px"></td>	
 		<td class="a1" width="15%">MSN</td>
-		<td class="a2" width="35%"><input type="text" name="linkman.msn" id="msn" value="" style="width:85%"></td>	
+		<td class="a2" width="35%"><input type="text" name="linkman.msn" id="msn" value="" style="width:180px"></td>	
 	</tr>
 	
 	<tr>
 		<td class="a1" width="15%">性别</td>
 		<td class="a2" width="35%">
-          <select name="linkman.sex" id="sex">
+          <select name="linkman.sex" id="sex" style="width:180px">
 				<option value="男">男</option>
 				<option value="女">女</option>
 			</select>
         </td>
 		<td class="a1" width="15%">年龄段</td>
 		<td class="a2" width="35%">
-			<select name="linkman.nld" id="nld" style="width:85%">
+			<select name="linkman.nld" id="nld" style="width:180px">
 				<option value=""></option>
 				<%
 				if(lxrnld != null && lxrnld.length > 0){ 
@@ -137,8 +134,8 @@ String[] lxrnld = (String[])VS.findValue("lxrnld");
 	</tr>	
 	<tr>
 		<td class="a1" width="15%">类型</td>
-		<td class="a2" width="35%">
-			<select name="linkman.lx" id="lx">
+		<td class="a2" colspan="3">
+			<select name="linkman.lx" id="lx" style="width:180px">
 				<option value="主联系人">主联系人</option>
 				<option value="联系人">联系人</option>
 			</select>
@@ -147,7 +144,7 @@ String[] lxrnld = (String[])VS.findValue("lxrnld");
 	<tr height="50">
 		<td class="a1">备注</td>
 		<td class="a2" colspan="3">
-			<textarea rows="3" cols="50" name="linkman.remark" id="remark" style="width:80%" maxlength="500"></textarea>
+			<input type="text" name="linkman.remark" id="remark" style="width:500px" maxlength="500">
 		</td>
 	</tr>
 	

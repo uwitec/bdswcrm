@@ -56,7 +56,7 @@ Jhd jhd = (Jhd)VS.findValue("Jhd");
 		<td class="a1" width="15%">进货单状态</td>
 		<td class="a2"><%=StringUtils.nullToStr(jhd.getState()) %></td>	
 		<td class="a1" width="15%">预计到货时间</td>
-		<td class="a2" width="35%"><%=StringUtils.nullToStr(jhd.getYjdhsj()) %></td>	
+		<td class="a2" width="35%"><%=StringUtils.nullToStr(jhd.getYjdhsj()) %>天</td>	
 	</tr>
 	<tr>		
 		<td class="a1" width="15%">到货库房</td>

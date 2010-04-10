@@ -241,15 +241,13 @@ String[] lxrnld = (String[])VS.findValue("lxrnld");
 	</tr>	
 	<tr>	
 		<td class="a1" width="15%">E-Mail</td>
-		<td class="a2"  colspan="3"><input type="text" name="linkman.mail" id="mail" value=""  size="50" ></td>	
-	</tr>
-	<tr>
+		<td class="a2"><input type="text" name="linkman.mail" id="mail" value="" style="width:85%"></td>	
 		<td class="a1" width="15%">QQ</td>
-		<td class="a2" width="35%"><input type="text" name="linkman.qq" id="qq" value="" style="width:85%"></td>	
+		<td class="a2" width="35%"><input type="text" name="linkman.qq" id="qq" value="" style="width:85%"></td>
+	</tr>
+	<tr>			
 		<td class="a1" width="15%">MSN</td>
 		<td class="a2" width="35%"><input type="text" name="linkman.msn" id="msn" value="" style="width:85%"></td>	
-	</tr>
-	<tr>
 		<td class="a1" width="15%">性别</td>
 		<td class="a2" width="35%">
           <select name="linkman.sex" id="sex" style="width:85%">
@@ -257,6 +255,8 @@ String[] lxrnld = (String[])VS.findValue("lxrnld");
 				<option value="女">女</option>
 			</select>
         </td>
+	</tr>
+	<tr>        
 		<td class="a1" width="15%">年龄段</td>
 		<td class="a2" width="35%">
 			<select name="linkman.nld" id="nld" style="width:85%">
@@ -272,9 +272,6 @@ String[] lxrnld = (String[])VS.findValue("lxrnld");
 				%>
 			</select>
 		</td>
-				
-	</tr>
-	<tr>
 		<td class="a1" width="15%">类型</td>
 		<td class="a2" width="35%">
 			<select name="linkman.lx" id="lx" style="width:85%">
@@ -285,8 +282,7 @@ String[] lxrnld = (String[])VS.findValue("lxrnld");
 	</tr>			 
 	<tr height="50">
 		<td class="a1">备注</td>
-		<td class="a2" colspan="3"><textarea name="linkman.remark" id="remark" style="width:85%" maxlength="500"></textarea>
-		</td>
+		<td class="a2" colspan="3"><input type="text" name="linkman.remark" id="remark" style="width:85%" maxlength="500"></td>
 	</tr>
 	
 	<tr height="35">

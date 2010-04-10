@@ -52,8 +52,9 @@ String[] lxrnld = (String[])VS.findValue("lxrnld");
 	}	
 </script>
 </head>
-<body oncontextmenu="return false;">
+<body>
 <form name="clientForm" action="updateLinkman.html" method="post">
+<input type="hidden" name="linkman.id" value="<%=StringUtils.nullToStr(linkman.getId()) %>"/>
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
@@ -61,47 +62,45 @@ String[] lxrnld = (String[])VS.findValue("lxrnld");
 	</tr>
 	</thead>
 	<tr>
-	    <input type="hidden" name="linkman.id" value="<%=StringUtils.nullToStr(linkman.getId()) %>"/>
-	    
 		<td class="a1" width="15%">姓名</td>
-		<td class="a2" width="35%"><input type="text" name="linkman.name" id="name" value="<%=StringUtils.nullToStr(linkman.getName()) %>"><font color="red">*</font></td>
+		<td class="a2" width="35%"><input type="text" name="linkman.name" id="name" value="<%=StringUtils.nullToStr(linkman.getName()) %>" maxlength="10" style="width:180px"><font color="red">*</font></td>
 		<td class="a1" width="15%">称呼</td>
-		<td class="a2" width="35%"><input type="text" name="linkman.ch" id="ch" value="<%=StringUtils.nullToStr(linkman.getCh()) %>" style="width:85%"></td>		
+		<td class="a2" width="35%"><input type="text" name="linkman.ch" id="ch" value="<%=StringUtils.nullToStr(linkman.getCh()) %>" maxlength="10" style="width:180px"></td>		
 	</tr>
 	<tr>
 	    <td class="a1" width="15%">部门</td>
-		<td class="a2" width="35%"><input type="text" name="linkman.dept" id="dept" value="<%=StringUtils.nullToStr(linkman.getDept()) %>" style="width:85%"><font color="red">*</font></td>
+		<td class="a2" width="35%"><input type="text" name="linkman.dept" id="dept" value="<%=StringUtils.nullToStr(linkman.getDept()) %>" maxlength="10" style="width:180px"><font color="red">*</font></td>
 		<td class="a1" width="15%">职务</td>
-		<td class="a2" width="35%"><input type="text" name="linkman.zw" id="zw" value="<%=StringUtils.nullToStr(linkman.getZw()) %>" style="width:85%"><font color="red">*</font></td>
+		<td class="a2" width="35%"><input type="text" name="linkman.zw" id="zw" value="<%=StringUtils.nullToStr(linkman.getZw()) %>" maxlength="10" style="width:180px"><font color="red">*</font></td>
 	</tr>
 	<tr>
 		<td class="a1" width="15%">办公电话</td>
-		<td class="a2" width="35%"><input type="text" name="linkman.gzdh" id="gzdh" value="<%=StringUtils.nullToStr(linkman.getGzdh()) %>"  ></td>	
+		<td class="a2" width="35%"><input type="text" name="linkman.gzdh" id="gzdh" value="<%=StringUtils.nullToStr(linkman.getGzdh()) %>" maxlength="15" style="width:180px"></td>	
 		<td class="a1" width="15%">移动电话</td>
-		<td class="a2" width="35%"><input type="text" name="linkman.yddh" id="yddh" value="<%=StringUtils.nullToStr(linkman.getYddh()) %>"  ></td>			
+		<td class="a2" width="35%"><input type="text" name="linkman.yddh" id="yddh" value="<%=StringUtils.nullToStr(linkman.getYddh()) %>" maxlength="15" style="width:180px"></td>			
 	</tr>
 	
 	<tr>
 		<td class="a1" width="15%">E-Mail</td>
-		<td class="a2"  colspan="3"><input type="text" name="linkman.mail" id="mail" value="<%=StringUtils.nullToStr(linkman.getMail()) %>"   size="50" ></td>	
-	</tr>
-	<tr>
+		<td class="a2"><input type="text" name="linkman.mail" id="mail" value="<%=StringUtils.nullToStr(linkman.getMail()) %>" maxlength="50" style="width:180px"></td>	
 		<td class="a1" width="15%">QQ</td>
-		<td class="a2" width="35%"><input type="text" name="linkman.qq" id="qq" value="<%=StringUtils.nullToStr(linkman.getQq()) %>" style="width:85%"></td>	
-		<td class="a1" width="15%">MSN</td>
-		<td class="a2" width="35%"><input type="text" name="linkman.msn" id="msn" value="<%=StringUtils.nullToStr(linkman.getMsn()) %>" style="width:85%"></td>	
+		<td class="a2" width="35%"><input type="text" name="linkman.qq" id="qq" value="<%=StringUtils.nullToStr(linkman.getQq()) %>" maxlength="10" style="width:180px"></td>	
 	</tr>
-	<tr>
+	<tr>		
+		<td class="a1" width="15%">MSN</td>
+		<td class="a2" width="35%"><input type="text" name="linkman.msn" id="msn" value="<%=StringUtils.nullToStr(linkman.getMsn()) %>" maxlength="50" style="width:180px"></td>	
 		<td class="a1" width="15%">性别</td>
 		<td class="a2" width="35%">
-          <select name="linkman.sex" id="sex">
+          <select name="linkman.sex" id="sex" style="width:180px">
 				<option value="男" <%if(linkman.getSex().equals("男"))out.print("selected"); %>>男</option>
 				<option value="女" <%if(linkman.getSex().equals("女"))out.print("selected"); %>>女</option>
 			</select>
         </td>
+	</tr>
+	<tr>        
 		<td class="a1" width="15%">年龄段</td>
 		<td class="a2" width="35%">
-			<select name="linkman.nld" id="nld" style="width:85%">
+			<select name="linkman.nld" id="nld" style="width:180px">
 				<option value=""></option>
 				<%
 				if(lxrnld != null && lxrnld.length > 0){ 
@@ -114,11 +113,9 @@ String[] lxrnld = (String[])VS.findValue("lxrnld");
 				%>
 			</select>
 		</td>			
-	</tr>		
-	<tr>
 		<td class="a1" width="15%">类型</td>
 		<td class="a2" width="35%">
-			<select name="linkman.lx" id="lx" >
+			<select name="linkman.lx" id="lx" style="width:180px">
 				<option value="主联系人" <%if(linkman.getLx().equals("主联系人")) out.print("selected"); %>>主联系人</option>
 				<option value="联系人"   <%if(linkman.getLx().equals("联系人")) out.print("selected"); %>>联系人</option>
 			</select>
@@ -127,8 +124,7 @@ String[] lxrnld = (String[])VS.findValue("lxrnld");
 
 	<tr height="50">
 		<td class="a1">备注</td>
-		<td class="a2" colspan="3">
-			<textarea rows="3" cols="50" name="linkman.remark" id="remark" style="width:80%" maxlength="500" ><%=StringUtils.nullToStr(linkman.getRemark()) %></textarea>
+		<td class="a2" colspan="3"><input type="text" name="linkman.remark" id="remark" style="width:492px" maxlength="500" value="<%=StringUtils.nullToStr(linkman.getRemark()) %>">
 		</td>
 	</tr>
 	
