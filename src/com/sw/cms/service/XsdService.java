@@ -144,7 +144,7 @@ public class XsdService {
 			xsd.setSkrq(xsd.getCreatdate()); //收款日期
 			xsd.setYsrq(xsd.getCreatdate()); //应收日期
 		}else{
-			if(xsd.getSkje()>0){
+			if(xsd.getSkje() != 0){
 				xsd.setSkrq(xsd.getCreatdate()); //如发生收款则存当前日期为收款日期
 			}
 
@@ -164,7 +164,7 @@ public class XsdService {
 			//第二步，添加相应出库单
 			this.addCkd(xsd, xsdProducts); //添加相应出库单
 			
-			if(xsd.getSkje()>0){
+			if(xsd.getSkje() != 0){
 				
 				//第三步，添加销售收款信息
 				this.saveXssk(xsd);//添加销售收款信息
