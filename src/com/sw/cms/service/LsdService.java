@@ -325,7 +325,10 @@ public class LsdService {
 	 */
 	public void addProductSaleFlow(Lsd lsd,List lsdProducts){	
 		
-		double sd = lsdDao.getLssd();
+		double sd = 0l;
+		if(!lsd.getFplx().equals("出库单")){
+			sd = lsdDao.getLssd();
+		}
 		
 		//提成比例
 		Map tcblMap = getTcbl();

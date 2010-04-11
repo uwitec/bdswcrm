@@ -128,9 +128,6 @@ public class CkdService {
 		
 		if(ckd.getState().equals("已出库")){
 			
-			//税点
-			double sd = lsdDao.getLssd();
-			
 			//提成比例
 			Map tcblMap = lsdDao.getTcbl();
 			double basic_ratio = 0;
@@ -144,6 +141,12 @@ public class CkdService {
 			
 			//出库单对应的销售单信息
 			Xsd xsd = (Xsd)xsdDao.getXsd(ckd.getXsd_id());
+			
+			//税点
+			double sd = 0l;
+			if(!xsd.getFplx().equals("出库单")){
+				sd = lsdDao.getLssd();
+			}
 			
 			//出库单对应的销售单商品明细
 			List xsdProducts = new ArrayList();
