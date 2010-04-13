@@ -702,7 +702,14 @@
         <property name="target">
            <bean class="com.sw.cms.service.CalendarPlanService" autowire="byName"/> 
         </property>
-    </bean>     
+    </bean>   
+    
+    <!-- 采购发票 -->
+    <bean id="cgfpService" parent="baseTransaction">
+        <property name="target">
+           <bean class="com.sw.cms.service.CgfpService" autowire="byName"/> 
+        </property>
+    </bean>  
 </beans>
 
 

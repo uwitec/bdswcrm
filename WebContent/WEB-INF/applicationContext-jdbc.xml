@@ -542,7 +542,12 @@
       <!-- 商品销售流水-->
      <bean id="productSaleFlowDao" class="com.sw.cms.dao.ProductSaleFlowDAO">
           <property name="jdbcTemplate" ref="jdbcTemplate"/>
-     </bean>          
+     </bean>    
+     
+     <!-- 采购发票-->
+     <bean id="cgfpDao" class="com.sw.cms.dao.CgfpDAO">
+          <property name="jdbcTemplate" ref="jdbcTemplate"/>
+     </bean>       
 </beans>
 
 
