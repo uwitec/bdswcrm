@@ -595,8 +595,7 @@ VALUES('010','发票管理','0','10','WORDPAD.gif','1'),('010001','发票管理'
 
 INSERT INTO `funcs`(`func_id`,`func_name`,`func_ms`,`url`,`img`,`xh`,`ywflag`,`funcflag`)  values
 ('FC0105','采购发票','采购发票的处理','listCgfp.html','123.gif',82,'1','9');
-INSERT INTO `funcs`(`func_id`,`func_name`,`func_ms`,`url`,`img`,`xh`,`ywflag`,`funcflag`)  values
-('FC0110','采购发票统计','采购发票的统计','showCgfpCondition.html','127.gif',82,'1','9');
+
 
 INSERT INTO `sjzd_xmxx`(zd_id,xm_name,xm_ms,xh) VALUES ('SJZD_LXRNLD','20以下','20以下',6);
 INSERT INTO `sjzd_xmxx`(zd_id,xm_name,xm_ms,xh) VALUES ('SJZD_LXRNLD','21-30','21-30',5);
