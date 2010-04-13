@@ -2641,6 +2641,23 @@
 		<action name="delPlan" class="calendarPlanAction" method="del">
             <result name="success" type="redirect">listPlan.html?cdate=${cdate}</result>
         </action>                         
-        <!-- 日程安排结束-->                               
+        <!-- 日程安排结束--> 
+        
+        <!-- 采购发票开始 -->
+        <action name="listCgfp" class="cgfpAction" method="list">
+            <result name="success" type="dispatcher">/WEB-INF/pages/cgfp/cgfp_list.jsp</result>
+        </action>       
+		<action name="editCgfp" class="cgfpAction" method="edit">
+            <result name="success">/WEB-INF/pages/cgfp/cgfp_edit.jsp</result>
+        </action>
+        <action name="viewCgfp" class="cgfpAction" method="edit">
+            <result name="success">/WEB-INF/pages/cgfp/cgfp_view.jsp</result>
+        </action>
+		<action name="updateCgfp" class="cgfpAction" method="update">
+            <result name="cancel" type="redirect">editCgfp.html</result>
+            <result name="input">/WEB-INF/pages/cgfp/cgfp_edit.jsp</result>
+            <result name="success">/WEB-INF/pages/msg.jsp</result>
+        </action>		
+        <!-- 采购发票结束 -->                               
     </package>
 </xwork>
