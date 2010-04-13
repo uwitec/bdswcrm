@@ -504,8 +504,6 @@ ALTER TABLE `jhd` ADD COLUMN `ysws`  VARCHAR(6)  AFTER `kh_lxdh`;
 update jhd set ysws='含税' where ysws='已税'
 
 2010-04-02修改
---采购订单增加发票状态字段
-ALTER TABLE `jhd` ADD COLUMN `fpstate`  VARCHAR(20)  AFTER `ysws`;
 update jhd set ysws='含税' where ysws='已税'
 
 
@@ -590,6 +588,16 @@ ALTER TABLE `clients_linkman` MODIFY COLUMN `msn` VARCHAR(100) CHARACTER SET utf
 INSERT INTO `sjzd_jbxx` VALUES ('SJZD_LXRNLD','联系人年龄段','联系人年龄段',12);
 
 
+2010-04-05修改
+--菜单中增加发票管理
+INSERT INTO `column_mng`(`id`,`name`,`parent_id`,`xh`,`img`,`yw_flag`) 
+VALUES('010','发票管理','0','10','WORDPAD.gif','1'),('010001','发票管理','010',25,NULL,'1'),('010002','发票统计','010',26,NULL,'1');
+
+INSERT INTO `funcs`(`func_id`,`func_name`,`func_ms`,`url`,`img`,`xh`,`ywflag`,`funcflag`)  values
+('FC0105','采购发票','采购发票的处理','listCgfp.html','123.gif',82,'1','9');
+INSERT INTO `funcs`(`func_id`,`func_name`,`func_ms`,`url`,`img`,`xh`,`ywflag`,`funcflag`)  values
+('FC0110','采购发票统计','采购发票的统计','showCgfpCondition.html','127.gif',82,'1','9');
+
 INSERT INTO `sjzd_xmxx`(zd_id,xm_name,xm_ms,xh) VALUES ('SJZD_LXRNLD','20以下','20以下',6);
 INSERT INTO `sjzd_xmxx`(zd_id,xm_name,xm_ms,xh) VALUES ('SJZD_LXRNLD','21-30','21-30',5);
 INSERT INTO `sjzd_xmxx`(zd_id,xm_name,xm_ms,xh) VALUES ('SJZD_LXRNLD','31-40','31-40',4);
@@ -597,3 +605,26 @@ INSERT INTO `sjzd_xmxx`(zd_id,xm_name,xm_ms,xh) VALUES ('SJZD_LXRNLD','41-50','4
 INSERT INTO `sjzd_xmxx`(zd_id,xm_name,xm_ms,xh) VALUES ('SJZD_LXRNLD','51-60','51-60',2);
 INSERT INTO `sjzd_xmxx`(zd_id,xm_name,xm_ms,xh) VALUES ('SJZD_LXRNLD','61-70','61-70',1);
 INSERT INTO `sjzd_xmxx`(zd_id,xm_name,xm_ms,xh) VALUES ('SJZD_LXRNLD','70以上','70以上',0);
+
+2010-04-13增加发票表
+DROP TABLE IF EXISTS `cgfpd`;
+CREATE TABLE `cgfpd` (
+  `id` varchar(20) NOT NULL,
+  `cg_date` varchar(45) default NULL,
+  `jhd_id` varchar(20) default NULL,
+  `gysbh` varchar(20) default NULL,
+  `total` double default NULL,
+  `czr` varchar(45) default NULL,
+  `cz_date` datetime default NULL,
+  `state` varchar(45) default NULL,
+  `ms` varchar(2000) default NULL,
+   PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--id自动生成CGFP******
+ALTER TABLE `cms_all_seq` ADD COLUMN `zxgdid` INTEGER UNSIGNED DEFAULT 1 AFTER `hjdid`;
+ALTER TABLE `cms_all_seq` ADD COLUMN `cgfpdid` INTEGER UNSIGNED DEFAULT 1 AFTER `zxgdid`;
+
+INSERT INTO `cgfpd`(id,cg_date,jhd_id,gysbh,total,czr,cz_date,state) select id,cg_date,id,gysbh,total,czr,cz_date,'未入库' from jhd where ysws='含税';
+
+update  `cgfpd`   set   id=REPLACE(id,'JH', 'CGFP');   
