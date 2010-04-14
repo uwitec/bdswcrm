@@ -112,6 +112,11 @@ SysUser user = (SysUser)VS.findValue("user");
 			return;
 		}		
 		
+		if(document.getElementById("zzzt").value == ""){
+			alert("在职状态不能为空，请填写！");
+			return;
+		}
+		
 		if(!InputValid(document.getElementById("real_name"),1,"string",1,1,20,"姓名")){	 return; }
 		if(!InputValid(document.getElementById("nl"),1,"int",1,1,99,"年龄")){	 return; }
 		if(!InputValid(document.getElementById("gs_phone"),1,"string",1,1,20,"工作电话")){	 return; }
@@ -189,6 +194,15 @@ SysUser user = (SysUser)VS.findValue("user");
 		<td class="a2" width="35%"><input type="text" name="user.nation" id="nation" value="<%=StringUtils.nullToStr(userMap.get("nation")) %>" style="width:80%" maxlength="20"></td>
 	    <td class="a1" width="15%">政治面貌</td>
 		<td class="a2" width="35%"><input type="text" name="user.zzmm" id="zzmm" value="<%=StringUtils.nullToStr(userMap.get("zzmm")) %>" style="width:80%" maxlength="20"></td>
+	</tr>
+	<tr>
+	<td class="a1" width="15%">在职状态</td>
+		<td class="a2" width="35%">
+			<select name="user.zzzt" id="zzzt" style="width:76%">
+				<option value="在职" <%if(StringUtils.nullToStr(userMap.get("zzzt")).equals("在职")) out.print("selected"); %>>在职</option>
+				<option value="离职" <%if(StringUtils.nullToStr(userMap.get("zzzt")).equals("离职")) out.print("selected"); %>>离职</option>
+			</select><font color="red">*</font>
+		</td>
 	</tr>
 </table>
 <BR>

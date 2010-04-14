@@ -164,6 +164,10 @@ Map userMap = (Map)VS.findValue("userMap");
 	    <td class="a1" width="15%">政治面貌</td>
 		<td class="a2" width="35%"><%=StringUtils.nullToStr(userMap.get("zzmm")) %></td>
 	</tr>
+	<tr>
+	    <td class="a1" width="15%">在职状态</td>
+		<td class="a2" width="35%"><%=StringUtils.nullToStr(userMap.get("zzzt")) %></td>
+	</tr>
 </table>
 <BR>
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
