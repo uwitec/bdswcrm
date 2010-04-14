@@ -2658,6 +2658,14 @@
             <result name="input">/WEB-INF/pages/cgfp/cgfp_edit.jsp</result>
             <result name="success">/WEB-INF/pages/msg.jsp</result>
         </action>		
-        <!-- 采购发票结束 -->                               
+        <!-- 采购发票结束 -->    
+        <!-- 员工报表开始 -->
+        <action name="listYgbb" class="ygbbAction" method="list">
+            <result name="success" type="dispatcher">/WEB-INF/pages/report/ygbb/ygbb_list.jsp</result>
+        </action> 
+        <action name="viewYgbb" class="ygbbAction" method="edit">
+            <result name="success">/WEB-INF/pages/report/ygbb/ygbb_view.jsp</result>
+        </action>		
+        <!-- 员工报表结束 -->    
     </package>
 </xwork>
