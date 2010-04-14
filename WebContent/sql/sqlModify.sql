@@ -596,6 +596,7 @@ VALUES('010','发票管理','0','10','WORDPAD.gif','1'),('010001','发票管理'
 INSERT INTO `funcs`(`func_id`,`func_name`,`func_ms`,`url`,`img`,`xh`,`ywflag`,`funcflag`)  values
 ('FC0105','采购发票','采购发票的处理','listCgfp.html','123.gif',82,'1','9');
 
+INSERT INTO `column_funcs` VALUES ('010001','FC0105');
 
 INSERT INTO `sjzd_xmxx`(zd_id,xm_name,xm_ms,xh) VALUES ('SJZD_LXRNLD','20以下','20以下',6);
 INSERT INTO `sjzd_xmxx`(zd_id,xm_name,xm_ms,xh) VALUES ('SJZD_LXRNLD','21-30','21-30',5);
@@ -624,6 +625,17 @@ CREATE TABLE `cgfpd` (
 ALTER TABLE `cms_all_seq` ADD COLUMN `zxgdid` INTEGER UNSIGNED DEFAULT 1 AFTER `hjdid`;
 ALTER TABLE `cms_all_seq` ADD COLUMN `cgfpdid` INTEGER UNSIGNED DEFAULT 1 AFTER `zxgdid`;
 
+--将进货单中含税的单据导入到采购发票表中
 INSERT INTO `cgfpd`(id,cg_date,jhd_id,gysbh,total,czr,cz_date,state) select id,cg_date,id,gysbh,total,czr,cz_date,'未入库' from jhd where ysws='含税';
 
 update  `cgfpd`   set   id=REPLACE(id,'JH', 'CGFP');   
+
+2010-04-14修改
+--菜单中增加基础报表
+INSERT INTO `column_mng`(`id`,`name`,`parent_id`,`xh`,`img`,`yw_flag`) 
+VALUES('007003','基础报表','007',27,NULL,'0');
+
+INSERT INTO `funcs`(`func_id`,`func_name`,`func_ms`,`url`,`img`,`xh`,`ywflag`,`funcflag`)  values
+('FC0205','员工报表','员工信息查询','listYgbb.html','121.gif',82,'1','7');
+
+INSERT INTO `column_funcs` VALUES ('007003','FC0205');
