@@ -710,6 +710,13 @@
            <bean class="com.sw.cms.service.CgfpService" autowire="byName"/> 
         </property>
     </bean>  
+    
+    <!-- 员工报表 -->
+    <bean id="ygbbService" parent="baseTransaction">
+        <property name="target">
+           <bean class="com.sw.cms.service.YgbbService" autowire="byName"/> 
+        </property>
+    </bean>  
 </beans>
 
 

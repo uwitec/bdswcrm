@@ -548,6 +548,11 @@
      <bean id="cgfpDao" class="com.sw.cms.dao.CgfpDAO">
           <property name="jdbcTemplate" ref="jdbcTemplate"/>
      </bean>       
+     
+     <!-- 员工报表-->
+     <bean id="ygbbDao" class="com.sw.cms.dao.YgbbDAO">
+          <property name="jdbcTemplate" ref="jdbcTemplate"/>
+     </bean>
 </beans>
 
 

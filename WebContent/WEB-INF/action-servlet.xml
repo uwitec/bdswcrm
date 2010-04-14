@@ -185,4 +185,7 @@
      <bean id="calendarPlanAction" class="com.sw.cms.action.CalendarPlanAction" autowire="byName" scope="prototype"/>
      
      <bean id="cgfpAction" class="com.sw.cms.action.CgfpAction" autowire="byName" scope="prototype"/>
+     
+     <bean id="ygbbAction" class="com.sw.cms.action.YgbbAction" autowire="byName" scope="prototype"/>
+     
 </beans>
