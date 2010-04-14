@@ -64,6 +64,15 @@ public class SysUser {
 	private String sfjh;//婚否
 	private String jtcy;//家庭成员
 	
+	private String zzzt;//在职状态  在职、离职
+	
+	public String getZzzt() {
+		return zzzt;
+	}
+	public void setZzzt(String zzzt) {
+		this.zzzt = zzzt;
+	}
+	
 	public String getJtcy() {
 		return jtcy;
 	}
