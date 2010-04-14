@@ -489,7 +489,7 @@ ALTER TABLE `sys_user` MODIFY COLUMN `gs_phone` VARCHAR(40) CHARACTER SET utf8 C
  MODIFY COLUMN `p_code` VARCHAR(40) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL;
 
 2010-03-29修改
---增加婚否、家庭成员
+--增加婚否、家庭成员、政治面貌
 ALTER TABLE `sys_user` ADD COLUMN `sfjh`  VARCHAR(20)  AFTER `remark`;
 ALTER TABLE `sys_user` ADD COLUMN `jtcy`  VARCHAR(200)  AFTER `sfjh`;
 
@@ -639,3 +639,7 @@ INSERT INTO `funcs`(`func_id`,`func_name`,`func_ms`,`url`,`img`,`xh`,`ywflag`,`f
 ('FC0205','员工报表','员工信息查询','listYgbb.html','121.gif',82,'1','7');
 
 INSERT INTO `column_funcs` VALUES ('007003','FC0205');
+
+--员工管理中增加是否在职的字段信息
+
+ALTER TABLE `sys_user` ADD COLUMN `zzzt`  VARCHAR(10)  AFTER `zzmm`;
