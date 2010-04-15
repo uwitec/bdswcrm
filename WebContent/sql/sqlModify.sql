@@ -643,3 +643,8 @@ INSERT INTO `column_funcs` VALUES ('007003','FC0205');
 --员工管理中增加是否在职的字段信息
 
 ALTER TABLE `sys_user` ADD COLUMN `zzzt`  VARCHAR(10)  AFTER `zzmm`;
+
+2010-04-15增加采购发票统计
+
+INSERT INTO `funcs`(`func_id`,`func_name`,`func_ms`,`url`,`img`,`xh`,`ywflag`,`funcflag`)  values
+('FC0110','采购发票统计','采购发票的统计','listCgfpTj.html','127.gif',82,'1','9');
