@@ -40,13 +40,6 @@ String orderType = (String)VS.findValue("orderType");
 		window.open(destination,'详细信息',fea);	
 	}
 		
-	function edit(id){
-		var destination = "editCgfp.html?id=" + id;
-		var fea ='width=850,height=600,left=' + (screen.availWidth-850)/2 + ',top=' + (screen.availHeight-720)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
-		
-		window.open(destination,'采购发票',fea);		
-	}		
-	
 	function clearAll(){
 		document.myform.gysmc.value = "";
 		document.myform.cg_date1.value = "";
@@ -80,7 +73,7 @@ String orderType = (String)VS.findValue("orderType");
 </script>
 </head>
 <body >
-<form name="myform" action="listCgfp.html" method="post">
+<form name="myform" action="listCgfpTj.html" method="post">
 <input type="hidden" name="orderType" value="<%=orderType %>">
 <input type="hidden" name="orderName" value="<%=orderName %>">
 <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0">
@@ -146,7 +139,6 @@ String orderType = (String)VS.findValue("orderType");
 		     if(map.get("state").equals("未入库"))
 		     {
 		     %>
-			<a href="#" onclick="edit('<%=StringUtils.nullToStr(map.get("gysbh")) %>');"><img src="images/modify.gif" align="absmiddle" title="修改" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
 			<a href="#" onclick="openWin('<%=StringUtils.nullToStr(map.get("gysbh")) %>');"><img src="images/view.gif" align="absmiddle" title="查看" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
 		  <%}
 		     else

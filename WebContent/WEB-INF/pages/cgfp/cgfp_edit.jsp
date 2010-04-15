@@ -49,6 +49,20 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 	
 	function setFpstate()
 	{
+	    if(allCount==0)
+	    {
+	      var fpstate = document.getElementById("state_0");
+		  var o = document.cgfpForm.proc_id;
+		  if(o.checked){
+		     fpstate.value = "已入库";
+		   }
+		  else
+		  {
+		    fpstate.value = "未入库";
+		  }
+	    }
+	    else
+	    {
 	       for(var y=0;y<=allCount;y++)
 		  	{
 			  var fpstate = document.getElementById("state_"+y);
@@ -61,6 +75,7 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 			    fpstate.value = "未入库";
 			  }
 			}
+		}
 	}
 		
 </script>
@@ -125,7 +140,7 @@ if(cgfpDescs != null && cgfpDescs.size()>0){
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<tr height="35">
 		<td class="a1" colspan="2">
-			<input type="button" name="btnSub" value="提 交" class="css_button2" onclick="saveInfo();">&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="button" name="btnSub" value="入 库" class="css_button2" onclick="saveInfo();">&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="button" name="button1" value="关 闭" class="css_button2" onclick="window.close();">
 		</td>
 	</tr>
