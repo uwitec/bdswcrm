@@ -48,7 +48,7 @@ public class CgfpService {
 	
 	
 	/**
-	 * 根据供应商编号取明细信息
+	 * 根据供应商编号取未入库的明细信息
 	 * @param gysbh
 	 * @return
 	 */
@@ -56,6 +56,16 @@ public class CgfpService {
 		return cgfpDao.getCgfpDesc(gysbh);
 	}
 
+	/**
+	 * 根据供应商编号取采购发票的明细信息
+	 * @param gysbh
+	 * @return
+	 */
+	public List getCgfpViewDesc(String gysbh){
+		return cgfpDao.getCgfpViewDesc(gysbh);
+	}
+	
+	
 	public CgfpDAO getCgfpDao() {
 		return cgfpDao;
 	}
