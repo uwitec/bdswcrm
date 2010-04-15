@@ -27,10 +27,10 @@ public class CgfpDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public Page getCgfps(String con,int curPage, int rowsPerPage){
-		String sql = "select count(a.jhd_id) as cgnums,sum(a.total) as cgmoney,b.name as gysmc,a.gysbh from cgfpd a  left join clients b on a.gysbh=b.id where 1=1  ";
+		String sql = "select count(a.jhd_id) as cgnums,sum(a.total) as cgmoney,b.name as gysmc,a.gysbh,a.state from cgfpd a  left join clients b on a.gysbh=b.id where 1=1  ";
 		
 		if(!con.equals("")){
-			sql = sql + " " + con+" group by a.gysbh,b.name";
+			sql = sql + " " + con+" group by a.gysbh,b.name,a.state";
 		}
 				
 		return this.getResultByPage(sql, curPage, rowsPerPage);
@@ -49,19 +49,27 @@ public class CgfpDAO extends JdbcBaseDAO {
 		return this.queryForObject(sql,new BeanRowMapper(Cgfpd.class));
 	}
 	
-	
 	/**
-	 * 根据供应商编号取明细信息
+	 * 根据供应商编号取未入库发票的明细信息
 	 * @param gysbh
 	 * @return
 	 */
 	public List getCgfpDesc(String gysbh){
-		String sql = "select * from cgfpd where gysbh='" + gysbh + "' and state='未入库'";
+		String sql = "select * from cgfpd where gysbh='" + gysbh+ "' and state='未入库'" ;
 		return this.getResultList(sql);
 	}
 	
+	/**
+	 * 根据供应商编号取采购发票的明细信息
+	 * @param gysbh
+	 * @return
+	 */
+	public List getCgfpViewDesc(String gysbh){
+		String sql = "select * from cgfpd where gysbh='" + gysbh+ "'  and state='已入库'" ;
+		return this.getResultList(sql);
+	}
 	
-	
+		
 	/**更新采购发票状态信息
 	 * 
 	 * @param cgfpDescs
@@ -87,7 +95,7 @@ public class CgfpDAO extends JdbcBaseDAO {
 						sql = "update cgfpd set state=? where jhd_id=? and gysbh=?";
 						param[0] = cgfpd.getState();
 						param[1] = cgfpd.getJhd_id();
-						param[2] = cgfpd.getGysbh();
+						param[2] = gysbh;
 						
 				       this.getJdbcTemplate().update(sql,param); 
 				}
