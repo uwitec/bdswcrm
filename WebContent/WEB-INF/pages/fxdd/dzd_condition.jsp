@@ -7,6 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language='JavaScript' src="js/date.js"></script>
+<script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
 <script type="text/javascript">
 	function sbForm(){
 		if(document.getElementById("start_date").value==""){
@@ -34,12 +35,12 @@
 	<tr>
 		<td class="a1">开始日期</td>
 		<td class="a4">
-			<input type="text" name="start_date" id="start_date" value="<%=DateComFunc.getToday() %>" readonly>
-			<img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.getElementById('start_date')); return false;"></td>
+			<input type="text" name="start_date" id="start_date" value="<%=DateComFunc.getToday() %>" size="15"  class="Wdate" onFocus="WdatePicker()">
+		</td>
 		<td class="a1">结束日期</td>
 		<td class="a4">
-			<input type="text" name="end_date" id="end_date" value="<%=DateComFunc.getToday() %>" readonly>
-			<img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.getElementById('end_date')); return false;"></td>
+			<input type="text" name="end_date" id="end_date" value="<%=DateComFunc.getToday() %>" size="15"  class="Wdate" onFocus="WdatePicker()">
+		</td>
 	</tr>
 	<tr>	
 		<td class="a1">显示明细</td>
