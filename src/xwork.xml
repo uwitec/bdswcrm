@@ -2650,7 +2650,10 @@
 		<action name="editCgfp" class="cgfpAction" method="edit">
             <result name="success">/WEB-INF/pages/cgfp/cgfp_edit.jsp</result>
         </action>
-        <action name="viewCgfp" class="cgfpAction" method="edit">
+        <action name="viewCgfp" class="cgfpAction" method="view">
+            <result name="success">/WEB-INF/pages/cgfp/cgfp_view.jsp</result>
+        </action>
+        <action name="viewCgfpRk" class="cgfpAction" method="viewRk">
             <result name="success">/WEB-INF/pages/cgfp/cgfp_view.jsp</result>
         </action>
 		<action name="updateCgfp" class="cgfpAction" method="update">
@@ -2658,6 +2661,9 @@
             <result name="input">/WEB-INF/pages/cgfp/cgfp_edit.jsp</result>
             <result name="success">/WEB-INF/pages/msg.jsp</result>
         </action>		
+        <action name="listCgfpTj" class="cgfpAction" method="list">
+            <result name="success" type="dispatcher">/WEB-INF/pages/cgfp/cgfpTj_list.jsp</result>
+        </action>
         <!-- 采购发票结束 -->    
         <!-- 员工报表开始 -->
         <action name="listYgbb" class="ygbbAction" method="list">
