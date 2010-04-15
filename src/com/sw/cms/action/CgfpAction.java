@@ -75,14 +75,18 @@ public class CgfpAction extends BaseAction {
 		if(!gysmc.equals("")){
 			con += " and b.name like'%" + gysmc + "%'";
 		}
-		if(!fpstate.equals("")){
+		if(fpstate.equals(" "))
+		{
+			con += "and (a.state='已入库' or a.state='未入库')";
+		}
+		else if(!fpstate.equals(""))
+		{
 			con += " and a.state='" + fpstate + "'";
 		}
 		else
 		{
 			con += " and (a.state='未入库')";
-		}
-		
+		}		
 		cgfpPage = cgfpService.getCgfps(con, curPage, rowsPerPage);
 		
 		return "success";
@@ -90,17 +94,43 @@ public class CgfpAction extends BaseAction {
 	
 		
 	/**
-	 * 根据供应商编号取应付款信息
+	 * 根据供应商编号取未入库的发票信息
 	 * @return
 	 */
 	public String edit(){
 		String id = ParameterUtility.getStringParameter(getRequest(), "id", "");
+		
 	    cgfpd=(Cgfpd)cgfpService.getCgfp(id);
 		cgfpDescs = cgfpService.getCgfpDesc(id);
 		
 		return "success";
 	}
 	
+	/**
+	 * 根据供应商编号取采购发票的信息
+	 * @return
+	 */
+	public String view(){
+		String id = ParameterUtility.getStringParameter(getRequest(), "id", "");
+		
+	    cgfpd=(Cgfpd)cgfpService.getCgfp(id);	
+	   	cgfpDescs = cgfpService.getCgfpDesc(id);
+	   	
+		return "success";
+	}
+	
+	/**
+	 * 根据供应商编号取采购发票的信息
+	 * @return
+	 */
+	public String viewRk(){
+		String id = ParameterUtility.getStringParameter(getRequest(), "id", "");
+		
+	    cgfpd=(Cgfpd)cgfpService.getCgfp(id);	
+	   	cgfpDescs = cgfpService.getCgfpViewDesc(id);
+	   	
+		return "success";
+	}
 	
 	/**
 	 * 更新采购发票信息
