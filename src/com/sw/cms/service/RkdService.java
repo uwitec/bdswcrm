@@ -5,6 +5,7 @@ import java.util.List;
 import com.sw.cms.dao.AccountDzdDAO;
 import com.sw.cms.dao.AccountsDAO;
 import com.sw.cms.dao.CgfkDAO;
+import com.sw.cms.dao.CgfpDAO;
 import com.sw.cms.dao.JhdDAO;
 import com.sw.cms.dao.ProductKcDAO;
 import com.sw.cms.dao.RkdDAO;
@@ -14,12 +15,15 @@ import com.sw.cms.dao.ThdDAO;
 import com.sw.cms.dao.XsskDAO;
 import com.sw.cms.dao.YushoukDAO;
 import com.sw.cms.model.Cgfk;
+import com.sw.cms.model.Cgfpd;
+import com.sw.cms.model.Jhd;
 import com.sw.cms.model.Page;
 import com.sw.cms.model.Rkd;
 import com.sw.cms.model.RkdProduct;
 import com.sw.cms.model.SerialNumFlow;
 import com.sw.cms.model.SerialNumMng;
 import com.sw.cms.util.StaticParamDo;
+import com.sw.cms.util.StringUtils;
 
 
 public class RkdService{
@@ -35,6 +39,7 @@ public class RkdService{
 	private AccountsDAO accountsDao;
 	private XsskDAO xsskDao;
 	private YushoukDAO yushoukDao;
+	private CgfpDAO cgfpDao;
 	
 	public void setProductKcDao(ProductKcDAO productKcDao) {
 		this.productKcDao = productKcDao;
@@ -90,7 +95,11 @@ public class RkdService{
 			//更新相关业务单据状态为已入库
 			jhdDao.updateJhdState(rkd.getJhd_id(), "已入库");
 			
+			//更新相应商品序列号
 			this.updateSerialNum(rkd, rkdProducts);
+			
+			//生成相应待开发票
+			this.addCgfpd(rkd);
 		}
 	}
 	
@@ -280,6 +289,37 @@ public class RkdService{
 	}
 	
 	
+	/**
+	 * 根据入库单生成待开发票
+	 * @param rkd
+	 */
+	private void addCgfpd(Rkd rkd){
+		
+		if(rkd.getJhd_id().indexOf("JH") == -1){
+			return;
+		}
+		Jhd jhd = (Jhd)jhdDao.getJhd(rkd.getJhd_id());
+		
+		if(!"含税".equals(StringUtils.nullToStr(jhd.getYsws()))){
+			return;
+		}
+		
+		Cgfpd cgfpd = new Cgfpd();
+		
+		String cgfpd_id = cgfpDao.getCgfpdID();//当前可用采购发票单号		
+		cgfpd.setId(cgfpd_id); 
+		cgfpd.setJhd_id(jhd.getId());
+		cgfpd.setCg_date(jhd.getCg_date());
+		cgfpd.setState("未入库");		
+		cgfpd.setMs(jhd.getCg_date() + "进货单号 [" + jhd.getId() + "] " + jhd.getMs());		
+		cgfpd.setCzr(jhd.getCzr());
+		cgfpd.setGysbh(jhd.getGysbh());		
+		cgfpd.setTotal(jhd.getTotal());
+		
+		cgfpDao.saveCgfpd(cgfpd);
+	}
+	
+	
 	public void setStoreDao(StoreDAO storeDao) {
 		this.storeDao = storeDao;
 	}
@@ -339,6 +379,12 @@ public class RkdService{
 	}
 	public void setYushoukDao(YushoukDAO yushoukDao) {
 		this.yushoukDao = yushoukDao;
+	}
+	public CgfpDAO getCgfpDao() {
+		return cgfpDao;
+	}
+	public void setCgfpDao(CgfpDAO cgfpDao) {
+		this.cgfpDao = cgfpDao;
 	}
 
 }

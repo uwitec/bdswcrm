@@ -7,12 +7,10 @@ package com.sw.cms.dao;
  */
 
 import java.util.List;
-import java.util.Map;
+
 import com.sw.cms.dao.base.BeanRowMapper;
 import com.sw.cms.dao.base.JdbcBaseDAO;
-import com.sw.cms.model.Jhd;
 import com.sw.cms.model.Cgfpd;
-
 import com.sw.cms.model.Page;
 import com.sw.cms.util.DateComFunc;
 
@@ -27,11 +25,12 @@ public class CgfpDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public Page getCgfps(String con,int curPage, int rowsPerPage){
-		String sql = "select count(a.jhd_id) as cgnums,sum(a.total) as cgmoney,b.name as gysmc,a.gysbh,a.state from cgfpd a  left join clients b on a.gysbh=b.id where 1=1  ";
+		String sql = "select count(*) as cgnums,sum(a.total) as cgmoney,b.name as gysmc,a.gysbh,a.state from cgfpd a  left join clients b on a.gysbh=b.id where 1=1  ";
 		
 		if(!con.equals("")){
-			sql = sql + " " + con+" group by a.gysbh,b.name,a.state";
+			sql += con;
 		}
+		sql += " group by a.gysbh,b.name,a.state";
 				
 		return this.getResultByPage(sql, curPage, rowsPerPage);
 

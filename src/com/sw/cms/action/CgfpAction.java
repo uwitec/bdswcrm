@@ -4,16 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.sw.cms.action.base.BaseAction;
-import com.sw.cms.model.Jhd;
-import com.sw.cms.model.Clients;
-import com.sw.cms.model.Page;
 import com.sw.cms.model.Cgfpd;
+import com.sw.cms.model.Clients;
+import com.sw.cms.model.Jhd;
+import com.sw.cms.model.Page;
 import com.sw.cms.service.AccountsService;
 import com.sw.cms.service.CgfpService;
 import com.sw.cms.service.ClientsService;
 import com.sw.cms.service.UserService;
 import com.sw.cms.util.Constant;
-import com.sw.cms.util.DateComFunc;
 import com.sw.cms.util.ParameterUtility;
 
 /**
@@ -45,7 +44,7 @@ public class CgfpAction extends BaseAction {
 	private String gysmc = "";
 	private String cg_date1 = "";
 	private String cg_date2 = "";
-	private String fpstate = "";
+	private String fpstate = "未入库";
 	private String remark = "";
 	private String gysbh = "";
 	
@@ -75,17 +74,8 @@ public class CgfpAction extends BaseAction {
 		if(!gysmc.equals("")){
 			con += " and b.name like'%" + gysmc + "%'";
 		}
-		if(fpstate.equals(" "))
-		{
-			con += "and (a.state='已入库' or a.state='未入库')";
-		}
-		else if(!fpstate.equals(""))
-		{
+		if(!fpstate.equals("")){
 			con += " and a.state='" + fpstate + "'";
-		}
-		else
-		{
-			con += " and (a.state='未入库')";
 		}		
 		cgfpPage = cgfpService.getCgfps(con, curPage, rowsPerPage);
 		
