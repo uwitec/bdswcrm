@@ -228,7 +228,7 @@ session.removeAttribute("messages");
          <!--<img src="images/select.gif" align="absmiddle" title="选择经手人" border="0" onclick="openywyWin();" style="cursor:hand">
           --><div id="brandTip" style="height:12px;position:absolute;left:580px; top:86px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
           </div>
-		    <input type="hidden" name="rkd.fzr" id="fzr" value="<%=rkd.getFzr()%>"/><font color="red">*</font>	
+		    <input type="hidden" name="rkd.fzr" id="fzr" value="<%=StringUtils.nullToStr(rkd.getFzr())%>"/><font color="red">*</font>	
 		</td>	
 	</tr>
 </table>

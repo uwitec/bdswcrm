@@ -37,7 +37,7 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 	
 	function saveInfo(){
 		
-		  	if(window.confirm("确认提交吗，提交后将不可修改！")){
+		  	if(window.confirm("确认入库吗，入库后将不可修改！")){
 				document.cgfpForm.submit();
 			}else{
 				return;
@@ -80,7 +80,7 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 		
 </script>
 </head>
-<body onload="initFzrTip();onloadMsg();">
+<body>
 <form name="cgfpForm" action="updateCgfp.html" method="post">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
@@ -128,7 +128,7 @@ if(cgfpDescs != null && cgfpDescs.size()>0){
 		    <input type="text" size="10" id="total_<%=i %>" name="cgfpDescs[<%=i %>].total" value="<%=JMath.round(total) %>" style="width:100%" readonly>
 		</td>   
 		<td class="a2">
-		    <input type="text" id="state_<%=i %>" name="cgfpDescs[<%=i %>].state" value="<%=StringUtils.nullToStr(map.get("state")) %>">
+		    <input type="text" id="state_<%=i %>" name="cgfpDescs[<%=i %>].state" value="<%=StringUtils.nullToStr(map.get("state")) %>" readonly="readonly">
 	    </td>
 		<td class="a2"><input type="checkbox" name="proc_id" id="proc_id" value="<%=i %>" onclick="setFpstate();"></td>
 	</tr>

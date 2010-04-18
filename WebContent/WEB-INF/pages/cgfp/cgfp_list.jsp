@@ -97,9 +97,9 @@ String orderType = (String)VS.findValue("orderType");
 			<input type="text" name="cg_date2" value="<%=cg_date2 %>" size="15"  class="Wdate" onFocus="WdatePicker()">
 			&nbsp;&nbsp;状态：
 			<select name="fpstate">
+				<option value=""></option>
 				<option value="未入库" <%if(fpstate.equals("未入库")) out.print("selected"); %>>未入库</option>
 				<option value="已入库" <%if(fpstate.equals("已入库")) out.print("selected"); %>>已入库</option>
-				<option value=" " <%if(fpstate.equals(" ")) out.print("selected"); %>></option>				
 			</select>&nbsp;&nbsp;
 			<input type="submit" name="buttonCx" value=" 查询 " class="css_button">	
 			<input type="button" name="buttonQk" value=" 清空 " class="css_button" onclick="clearAll();">
@@ -109,11 +109,11 @@ String orderType = (String)VS.findValue("orderType");
 <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0" border="1" id="selTable">
 	<thead>
 	<tr>		
-		<td width="24%" nowrap="nowrap" onclick="doSort('gysbh');">供货单位<%if(orderName.equals("gysbh")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td width="8%" nowrap="nowrap" onclick="doSort('cgnums');">单据数<%if(orderName.equals("cgnums")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>		
-		<td width="15%" nowrap="nowrap" onclick="doSort('cgmoney');">总金额<%if(orderName.equals("cgmoney")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td width="15%" nowrap="nowrap" onclick="doSort('state');">状态<%if(orderName.equals("state")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td width="10%" nowrap="nowrap">操作</td>
+		<td width="35%" nowrap="nowrap">供货单位</td>
+		<td width="15%" nowrap="nowrap">单据数</td>		
+		<td width="15%" nowrap="nowrap">总金额</td>
+		<td width="15%" nowrap="nowrap">状态</td>
+		<td width="20%" nowrap="nowrap">操作</td>
 	</tr>
 	</thead>
 	<%

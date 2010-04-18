@@ -586,6 +586,13 @@ ALTER TABLE `clients_linkman` MODIFY COLUMN `msn` VARCHAR(100) CHARACTER SET utf
 
 --增加年龄段的数据字典
 INSERT INTO `sjzd_jbxx` VALUES ('SJZD_LXRNLD','联系人年龄段','联系人年龄段',12);
+INSERT INTO `sjzd_xmxx`(zd_id,xm_name,xm_ms,xh) VALUES ('SJZD_LXRNLD','20以下','20以下',6);
+INSERT INTO `sjzd_xmxx`(zd_id,xm_name,xm_ms,xh) VALUES ('SJZD_LXRNLD','21-30','21-30',5);
+INSERT INTO `sjzd_xmxx`(zd_id,xm_name,xm_ms,xh) VALUES ('SJZD_LXRNLD','31-40','31-40',4);
+INSERT INTO `sjzd_xmxx`(zd_id,xm_name,xm_ms,xh) VALUES ('SJZD_LXRNLD','41-50','41-50',3);
+INSERT INTO `sjzd_xmxx`(zd_id,xm_name,xm_ms,xh) VALUES ('SJZD_LXRNLD','51-60','51-60',2);
+INSERT INTO `sjzd_xmxx`(zd_id,xm_name,xm_ms,xh) VALUES ('SJZD_LXRNLD','61-70','61-70',1);
+INSERT INTO `sjzd_xmxx`(zd_id,xm_name,xm_ms,xh) VALUES ('SJZD_LXRNLD','70以上','70以上',0);
 
 
 2010-04-05修改
@@ -597,14 +604,6 @@ INSERT INTO `funcs`(`func_id`,`func_name`,`func_ms`,`url`,`img`,`xh`,`ywflag`,`f
 ('FC0105','采购发票','采购发票的处理','listCgfp.html','123.gif',82,'1','9');
 
 INSERT INTO `column_funcs` VALUES ('010001','FC0105');
-
-INSERT INTO `sjzd_xmxx`(zd_id,xm_name,xm_ms,xh) VALUES ('SJZD_LXRNLD','20以下','20以下',6);
-INSERT INTO `sjzd_xmxx`(zd_id,xm_name,xm_ms,xh) VALUES ('SJZD_LXRNLD','21-30','21-30',5);
-INSERT INTO `sjzd_xmxx`(zd_id,xm_name,xm_ms,xh) VALUES ('SJZD_LXRNLD','31-40','31-40',4);
-INSERT INTO `sjzd_xmxx`(zd_id,xm_name,xm_ms,xh) VALUES ('SJZD_LXRNLD','41-50','41-50',3);
-INSERT INTO `sjzd_xmxx`(zd_id,xm_name,xm_ms,xh) VALUES ('SJZD_LXRNLD','51-60','51-60',2);
-INSERT INTO `sjzd_xmxx`(zd_id,xm_name,xm_ms,xh) VALUES ('SJZD_LXRNLD','61-70','61-70',1);
-INSERT INTO `sjzd_xmxx`(zd_id,xm_name,xm_ms,xh) VALUES ('SJZD_LXRNLD','70以上','70以上',0);
 
 2010-04-13增加发票表
 DROP TABLE IF EXISTS `cgfpd`;
@@ -626,7 +625,7 @@ ALTER TABLE `cms_all_seq` ADD COLUMN `zxgdid` INTEGER UNSIGNED DEFAULT 1 AFTER `
 ALTER TABLE `cms_all_seq` ADD COLUMN `cgfpdid` INTEGER UNSIGNED DEFAULT 1 AFTER `zxgdid`;
 
 --将进货单中含税的单据导入到采购发票表中
-INSERT INTO `cgfpd`(id,cg_date,jhd_id,gysbh,total,czr,cz_date,state) select id,cg_date,id,gysbh,total,czr,cz_date,'未入库' from jhd where ysws='含税';
+INSERT INTO `cgfpd`(id,cg_date,jhd_id,gysbh,total,czr,cz_date,state) select id,cg_date,id,gysbh,total,czr,cz_date,'未入库' from jhd where ysws='含税' and state='已入库';
 
 update  `cgfpd`   set   id=REPLACE(id,'JH', 'CGFP');   
 
