@@ -5,17 +5,19 @@ import java.util.List;
 
 import com.sw.cms.dao.JhdDAO;
 import com.sw.cms.dao.RkdDAO;
+import com.sw.cms.dao.CgfpDAO;
 import com.sw.cms.model.Jhd;
 import com.sw.cms.model.JhdProduct;
 import com.sw.cms.model.Page;
 import com.sw.cms.model.Rkd;
 import com.sw.cms.model.RkdProduct;
+import com.sw.cms.model.Cgfpd;
 import com.sw.cms.util.DateComFunc;
 
 public class JhdService {
 	private JhdDAO jhdDao;
 	private RkdDAO rkdDao;
-	
+	private CgfpDAO cgfpDao;
 	/**
 	 * 取进货单列表（带分页）
 	 * @param con
@@ -89,11 +91,14 @@ public class JhdService {
 		if(!jhd.getState().equals("已保存")){ //如果进货单状态为“已入库”或“已提交”	
 			//生成入库单
 			saveRkd(jhd,jhdProducts); 
+			
+			if(!jhd.getYsws().equals("含税")){ //如果发票类型为“含税”	
+				//生成采购发票单
+				saveCgfpd(jhd); 
+			}
 		}
 		
 	}
-	
-	
 	
 	/**
 	 * 修改进货单信息
@@ -116,7 +121,13 @@ public class JhdService {
 		if(!jhd.getState().equals("已保存")){ //如果进货单状态为“已入库”或“已提交”
 			//生成入库单
 			saveRkd(jhd,jhdProducts); 
+			
+			if(!jhd.getYsws().equals("含税")){ //如果发票类型为“含税”	
+				//生成采购发票单
+				saveCgfpd(jhd); 
+			}
 		}
+		
 		
 	}
 	
@@ -217,7 +228,35 @@ public class JhdService {
 		
 	}
 
-
+	/**
+	 * 生成相关采购发票单并保存
+	 * @param jhd
+	 * 
+	 */
+	private void saveCgfpd(Jhd jhd){
+		Cgfpd cgfpd = new Cgfpd();
+		
+		String cgfpd_id = cgfpDao.getCgfpdID();//当前可用采购发票单号
+		
+		cgfpd.setId(cgfpd_id); 
+		cgfpd.setJhd_id(jhd.getId());
+		cgfpd.setCg_date(jhd.getCg_date());
+		cgfpd.setState("未入库");
+		
+		cgfpd.setMs(jhd.getCg_date() + "进货单号 [" + jhd.getId() + "] " + jhd.getMs());
+		
+		cgfpd.setCzr(jhd.getCzr());
+		cgfpd.setGysbh(jhd.getGysbh());		
+		cgfpd.setTotal(jhd.getTotal());
+		
+		cgfpDao.saveCgfpd(cgfpd);
+		}
+		//保存采购发票单
+	
+		
+	
+	
+	
 	public JhdDAO getJhdDao() {
 		return jhdDao;
 	}
