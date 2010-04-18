@@ -6,114 +6,17 @@
 
 <%
 OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
-
 List depts = (List)VS.findValue("depts");
-
 Map userMap = (Map)VS.findValue("userMap");
-
 %>
 
 <html>
 <head>
-<title>员工报表</title>
+<title>员工资料</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
-<script language="JavaScript" src="js/Check.js"></script>
-<script language='JavaScript' src="js/date.js"></script>
-<script type="text/javascript">
-	function saveInfo(){
-			
-		if(document.getElementById("dept").value == ""){
-			alert("所在部门不能为空，请选择！");
-			return;
-		}
-		
-		if(document.getElementById("real_name").value == ""){
-			alert("姓名不能为空，请填写！");
-			return;
-		}
-		
-		if(document.getElementById("id_card").value == ""){
-			alert("身份证号码不能为空，请填写！");
-			return;
-		}
-		
-		if(document.getElementById("nl").value == ""){
-			alert("年龄不能为空，请填写！");
-			return;
-		}
-		
-		if(document.getElementById("gs_phone").value == ""){
-			alert("工作电话不能为空，请填写！");
-			return;
-		}
-		
-		if(document.getElementById("sfjh").value == ""){
-			alert("婚否不能为空，请填写！");
-			return;
-		}
-		
-		if(document.getElementById("address").value == ""){
-			alert("家庭住址不能为空，请填写！");
-			return;
-		}
-		
-		if(document.getElementById("lxr").value == ""){
-			alert("联系人不能为空，请填写！");
-			return;
-		}
-		
-		if(document.getElementById("jt_phone").value == ""){
-			alert("家庭电话不能为空，请填写！");
-			return;
-		}
-		
-		if(document.getElementById("position").value == ""){
-			alert("职务不能为空，请选择！");
-			return;
-		}
-		
-		if(document.getElementById("rzrq").value == ""){
-			alert("入职日期不能为空，请选择！");
-			return;
-		}
-		
-		if(document.getElementById("is_ywy").value == ""){
-			alert("是否业务员不能为空，请选择！");
-			return;
-		}
-		
-		if(document.getElementById("byxx").value == ""){
-			alert("毕业学校不能为空，请填写！");
-			return;
-		}
-		
-		if(document.getElementById("major").value == ""){
-			alert("专业不能为空，请填写！");
-			return;
-		}
-		
-		if(document.getElementById("xl").value == ""){
-			alert("学历不能为空，请填写！");
-			return;
-		}		
-		
-		if(!InputValid(document.getElementById("real_name"),1,"string",1,1,20,"姓名")){	 return; }
-		if(!InputValid(document.getElementById("nl"),1,"int",1,1,99,"年龄")){	 return; }
-		if(!InputValid(document.getElementById("gs_phone"),1,"string",1,1,20,"工作电话")){	 return; }
-		if(!InputValid(document.getElementById("sfjh"),1,"string",1,1,20,"婚否")){	 return; }
-		if(!InputValid(document.getElementById("address"),1,"string",1,1,100,"家庭地址")){	 return; }
-		if(!InputValid(document.getElementById("lxr"),1,"string",1,1,20,"联系人")){	 return; }
-		if(!InputValid(document.getElementById("jt_phone"),1,"string",1,1,20,"家庭电话")){	 return; }
-		if(!InputValid(document.getElementById("byxx"),1,"string",1,1,50,"毕业学校")){	 return; }
-		if(!InputValid(document.getElementById("major"),1,"string",1,1,40,"专业")){	 return; }
-		if(!InputValid(document.getElementById("xl"),1,"string",1,1,10,"学历")){	 return; }
-		document.userForm.submit();
-	}
-	
-</script>
 </head>
-<body oncontextmenu="return false;" >
+<body>
 <form name="userForm" action="updateEmployee.html" method="post">
 <input type="hidden" name="user.user_id" id="user_id" value="<%=StringUtils.nullToStr(userMap.get("user_id")) %>">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">

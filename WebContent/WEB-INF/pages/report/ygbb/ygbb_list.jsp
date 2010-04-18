@@ -19,7 +19,7 @@ List deptList = (List)VS.findValue("depts");
 
 <html>
 <head>
-<title>员工报表</title>
+<title>员工资料</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language='JavaScript' src="js/date.js"></script>
@@ -40,8 +40,17 @@ List deptList = (List)VS.findValue("depts");
 	}
 	
 	function refreshPage(){
-		document.myform.action = "listEmployee.html";
+		document.myform.action = "listYgbb.html";
 		document.myform.submit();
+	}
+
+	function trSelectChangeCss(){
+		if (event.srcElement.tagName=='TD'){
+			for(i=0;i<selTable.rows.length;i++){
+				selTable.rows[i].className="a1";
+			}
+			event.srcElement.parentElement.className='a2';
+		}
 	}		
 </script>
 </head>
@@ -50,8 +59,13 @@ List deptList = (List)VS.findValue("depts");
 
 <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0">
 	<tr>
+		<td class="csstitle" align="left" width="75%">&nbsp;&nbsp;&nbsp;&nbsp;<b>员工资料</b></td>
+		<td class="csstitle" width="25%">
+		  <img src="images/import.gif" align="absmiddle" border="0">&nbsp;<a href="#" onclick="refreshPage();" class="xxlb"> 刷 新 </a>	</td>			
+	</tr>
+	<tr>
 		<td class="search" align="left" colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;
-		    姓名：<input type="text" name="real_name" value="<%=real_name %>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	
+		    姓名：<input type="text" name="real_name" value="<%=real_name %>">&nbsp;&nbsp;
 		    部门：
 		    <select name="dept_id">
 				<option value=""></option>
@@ -85,14 +99,14 @@ List deptList = (List)VS.findValue("depts");
 					}
 				}
 				%>
-			</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	
+			</select>&nbsp;&nbsp;
 					
-			<input type="submit" name="buttonCx" value=" 查询 " class="css_button2">&nbsp;&nbsp;&nbsp;&nbsp;	
-			<input type="button" name="buttonQk" value=" 清空 " class="css_button2" onclick="clearAll();">
+			<input type="submit" name="buttonCx" value=" 查询 " class="css_button">&nbsp;
+			<input type="button" name="buttonQk" value=" 清空 " class="css_button" onclick="clearAll();">
 		</td>				
 	</tr>		
 </table>
-<table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0">
+<table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0" border="1" id="selTable">
 	<thead>
 	<tr>
 		<td>姓名</td>
@@ -112,16 +126,16 @@ List deptList = (List)VS.findValue("depts");
 	while(it.hasNext()){
 		Map map = (Map)it.next();
 	%>
-	<tr>
-		<td class="a1"><%=StringUtils.nullToStr(map.get("real_name")) %></td>
-		<td class="a1"><%=StringUtils.nullToStr(map.get("sex")) %></td>
-		<td class="a1"><%=StringUtils.nullToStr(map.get("gs_phone")) %></td>
-		<td class="a1"><%=StringUtils.nullToStr(map.get("mobile")) %></td>
-		<td class="a1"><%=StringUtils.nullToStr(map.get("dept_name")) %></td>
-		<td class="a1"><%=StringUtils.nullToStr(map.get("position")) %></td>
-		<td class="a1"><%=StringUtils.nullToStr(map.get("is_ywy")) %></td>
-		<td class="a1">
-			<a href="#" onclick="view('<%=StringUtils.nullToStr(map.get("user_id")) %>');"><img src="images/view.gif" align="absmiddle" title="查看" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
+	<tr  class="a1" title="双击查看详情" onmousedown="trSelectChangeCss()" onDblClick="view('<%=StringUtils.nullToStr(map.get("user_id")) %>');">
+		<td><%=StringUtils.nullToStr(map.get("real_name")) %></td>
+		<td><%=StringUtils.nullToStr(map.get("sex")) %></td>
+		<td><%=StringUtils.nullToStr(map.get("gs_phone")) %></td>
+		<td><%=StringUtils.nullToStr(map.get("mobile")) %></td>
+		<td><%=StringUtils.nullToStr(map.get("dept_name")) %></td>
+		<td><%=StringUtils.nullToStr(map.get("position")) %></td>
+		<td><%=StringUtils.nullToStr(map.get("is_ywy")) %></td>
+		<td>
+			<a href="javascript:view('<%=StringUtils.nullToStr(map.get("user_id")) %>');"><img src="images/view.gif" align="absmiddle" title="查看" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
 		</td>
 	</tr>
 	

@@ -635,7 +635,7 @@ INSERT INTO `column_mng`(`id`,`name`,`parent_id`,`xh`,`img`,`yw_flag`)
 VALUES('007003','基础报表','007',27,NULL,'0');
 
 INSERT INTO `funcs`(`func_id`,`func_name`,`func_ms`,`url`,`img`,`xh`,`ywflag`,`funcflag`)  values
-('FC0205','员工报表','员工信息查询','listYgbb.html','121.gif',82,'1','7');
+('FC0205','员工资料','员工信息查询','listYgbb.html','121.gif',82,'1','7');
 
 INSERT INTO `column_funcs` VALUES ('007003','FC0205');
 
