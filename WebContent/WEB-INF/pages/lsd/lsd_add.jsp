@@ -158,7 +158,7 @@ String flag = StringUtils.nullToStr(VS.findValue("flag"));
         
         var otd5 = document.createElement("td");
         otd5.className = "a2";
-        otd5.innerHTML = '<input type="text" id="nums_'+curId+'" name="lsdProducts['+curId+'].nums" value="1" size="5" style="width:100%" onblur="hj();">';
+        otd5.innerHTML = '<input type="text" id="nums_'+curId+'" name="lsdProducts['+curId+'].nums" value="0" size="5" style="width:100%" onblur="hj();">';
         
         var otd8 = document.createElement("td");
         otd8.className = "a2";
@@ -636,7 +636,7 @@ if(lsdProducts != null && lsdProducts.size()>0){
 					<input type="hidden" id="kh_cbj_<%=i %>" name="lsdProducts[<%=i %>].kh_cbj" value="0.00">
 					<input type="hidden" id="gf_<%=i %>" name="lsdProducts[<%=i %>].gf" value="0">
 				</td>
-				<td class="a2"><input type="text" id="nums_<%=i %>" name="lsdProducts[<%=i %>].nums" value="1" size="5" style="width:100%" onblur="hj();"></td>
+				<td class="a2"><input type="text" id="nums_<%=i %>" name="lsdProducts[<%=i %>].nums" value="0" size="5" style="width:100%" onblur="hj();"></td>
 				<td class="a2"><input type="text" id="xj_<%=i %>" name="lsdProducts[<%=i %>].xj" value="0.00" size="7" style="width:100%" readonly></td>
 				<td class="a2">
 					<input type="text" id="qz_serial_num_<%=i %>" name="lsdProducts[<%=i %>].qz_serial_num" size="15" readonly>
