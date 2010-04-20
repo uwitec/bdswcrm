@@ -2672,6 +2672,17 @@
         <action name="viewYgbb" class="ygbbAction" method="edit">
             <result name="success">/WEB-INF/pages/report/ygbb/ygbb_view.jsp</result>
         </action>		
-        <!-- 员工报表结束 -->    
+        <!-- 员工报表结束 -->   
+        <!-- 采购发票统计开始 -->
+        <action name="showCgfpCondtion" class="cgfptjAction" method="showCondition">
+            <result name="success">/WEB-INF/pages/report/cgfptj/condition.jsp</result>
+        </action>
+        <action name="getCgfpTjResult" class="cgfptjAction" method="getResult">
+            <result name="success">/WEB-INF/pages/report/cgfptj/result.jsp</result>
+        </action>
+        <action name="getCgfpTjMxResult" class="cgfptjAction" method="getResult">
+            <result name="success">/WEB-INF/pages/report/cgfptj/result_mx.jsp</result>
+        </action>
+        <!-- 采购发票统计结束 -->  
     </package>
 </xwork>
