@@ -646,4 +646,20 @@ ALTER TABLE `sys_user` ADD COLUMN `zzzt`  VARCHAR(10)  AFTER `zzmm`;
 2010-04-15增加采购发票统计
 
 INSERT INTO `funcs`(`func_id`,`func_name`,`func_ms`,`url`,`img`,`xh`,`ywflag`,`funcflag`)  values
-('FC0110','采购发票统计','采购发票的统计','listCgfpTj.html','127.gif',82,'1','9');
+('FC0110','采购发票统计','采购发票的统计','showCgfpCondtion.html','127.gif',82,'1','9');
+
+2010-04-16修改
+--增加咨询工单表
+DROP TABLE IF EXISTS `zxgd`;
+CREATE TABLE `zxgd` (
+  `id` varchar(50) NOT NULL,  
+  `sfd_id` varchar(50) default NULL,
+  `hfr` varchar(20) default NULL,
+  `hf_date` varchar(20) default NULL,
+  `content` varchar(1000) default NULL,
+  `khyj` varchar(1000) default NULL,
+  `czr` varchar(20) default NULL,
+  `cz_date` datetime default NULL,
+  `state` varchar(50) default NULL,   
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
