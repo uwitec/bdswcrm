@@ -663,3 +663,5 @@ CREATE TABLE `zxgd` (
   `state` varchar(50) default NULL,   
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE `thd` MODIFY COLUMN `fpxx` VARCHAR(200) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL;
