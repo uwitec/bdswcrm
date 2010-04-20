@@ -553,6 +553,11 @@
      <bean id="ygbbDao" class="com.sw.cms.dao.YgbbDAO">
           <property name="jdbcTemplate" ref="jdbcTemplate"/>
      </bean>
+     
+     <!-- 采购发票汇总-->
+     <bean id="cgfptjDao" class="com.sw.cms.dao.CgfptjDAO">
+          <property name="jdbcTemplate" ref="jdbcTemplate"/>
+     </bean>
 </beans>
 
 

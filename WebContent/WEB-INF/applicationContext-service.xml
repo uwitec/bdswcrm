@@ -717,6 +717,13 @@
            <bean class="com.sw.cms.service.YgbbService" autowire="byName"/> 
         </property>
     </bean>  
+    
+    <!-- 采购发票汇总 -->
+    <bean id="cgfptjService" parent="baseTransaction">
+        <property name="target">
+           <bean class="com.sw.cms.service.CgfptjService" autowire="byName"/> 
+        </property>
+    </bean>
 </beans>
 
 
