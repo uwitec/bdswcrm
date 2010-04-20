@@ -648,6 +648,8 @@ ALTER TABLE `sys_user` ADD COLUMN `zzzt`  VARCHAR(10)  AFTER `zzmm`;
 INSERT INTO `funcs`(`func_id`,`func_name`,`func_ms`,`url`,`img`,`xh`,`ywflag`,`funcflag`)  values
 ('FC0110','采购发票统计','采购发票的统计','showCgfpCondtion.html','127.gif',82,'1','9');
 
+INSERT INTO `column_funcs` VALUES ('010002','FC0110');
+
 2010-04-16修改
 --增加咨询工单表
 DROP TABLE IF EXISTS `zxgd`;
