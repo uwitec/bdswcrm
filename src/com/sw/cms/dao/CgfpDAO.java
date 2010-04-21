@@ -24,13 +24,13 @@ public class CgfpDAO extends JdbcBaseDAO {
 	 * @param rowsPerPage
 	 * @return
 	 */
-	public Page getCgfps(String con,int curPage, int rowsPerPage){
+	public Page getCgfps(String con,int curPage, int rowsPerPage,String orderName,String orderType){
 		String sql = "select count(*) as cgnums,sum(a.total) as cgmoney,b.name as gysmc,a.gysbh,a.state from cgfpd a  left join clients b on a.gysbh=b.id where 1=1  ";
 		
 		if(!con.equals("")){
 			sql += con;
 		}
-		sql += " group by a.gysbh,b.name,a.state";
+		sql += " group by a.gysbh,b.name,a.state order by " + orderName + " " + orderType + "";
 				
 		return this.getResultByPage(sql, curPage, rowsPerPage);
 
