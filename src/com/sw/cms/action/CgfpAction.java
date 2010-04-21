@@ -77,7 +77,16 @@ public class CgfpAction extends BaseAction {
 		if(!fpstate.equals("")){
 			con += " and a.state='" + fpstate + "'";
 		}		
-		cgfpPage = cgfpService.getCgfps(con, curPage, rowsPerPage);
+		
+		if (orderName.equals("")) 
+		{
+			orderName = "gysbh";
+		}
+		if (orderType.equals("")) {
+			orderType = "desc";
+		}
+		
+		cgfpPage = cgfpService.getCgfps(con, curPage, rowsPerPage,orderName,orderType);
 		
 		return "success";
 	}
