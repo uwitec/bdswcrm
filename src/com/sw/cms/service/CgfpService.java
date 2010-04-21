@@ -23,8 +23,8 @@ public class CgfpService {
 	 * @param rowsPerPage
 	 * @return
 	 */
-	public Page getCgfps(String con,int curPage, int rowsPerPage){
-		return cgfpDao.getCgfps(con, curPage, rowsPerPage);
+	public Page getCgfps(String con,int curPage, int rowsPerPage,String orderName,String orderType){
+		return cgfpDao.getCgfps(con, curPage, rowsPerPage,orderName,orderType);
 	}
 	/**
 	 * 更新采购发票相关信息
