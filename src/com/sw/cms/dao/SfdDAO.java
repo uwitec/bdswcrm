@@ -6,10 +6,12 @@ import java.util.List;
 
 import org.springframework.jdbc.core.RowMapper;
 
+import com.sw.cms.dao.base.BeanRowMapper;
 import com.sw.cms.dao.base.JdbcBaseDAO;
 import com.sw.cms.dao.base.SqlUtil;
 import com.sw.cms.model.Bxd;
 import com.sw.cms.model.BxdProduct;
+import com.sw.cms.model.Jhd;
 import com.sw.cms.model.Page;
 import com.sw.cms.model.Sfd;
 import com.sw.cms.util.DateComFunc;
@@ -135,7 +137,19 @@ public class SfdDAO extends JdbcBaseDAO
 		getJdbcTemplate().update(sql, param);
 	}
 	
-	
+	/**
+	 * 修改售服单流程
+	 * @param sfd
+	 */
+	public void updateSfdFlow(String id,String flow)
+	{
+		String sql="update sfd set flow=?,state='已提交' where id=?";
+		Object[] param = new Object[2];
+		param[0]=flow;
+		param[1]=id;
+		
+		getJdbcTemplate().update(sql, param);
+	}
 	  
 	
 	/**
@@ -162,6 +176,19 @@ public class SfdDAO extends JdbcBaseDAO
 		return "SF" + day + "-" + curId;
 
 	}
+	
+	/**
+	 * 根据售后服务单ID取售后服务单详细信息
+	 * @param id
+	 * @return
+	 */
+	public Object getSfd(String id){
+		String sql = "select * from sfd where id='" + id + "'";
+		
+		return this.queryForObject(sql,new BeanRowMapper(Sfd.class));
+	}
+	
+	  
 	/**
 	 * 售后服务单封装对象
 	 * 
@@ -199,7 +226,8 @@ public class SfdDAO extends JdbcBaseDAO
 			if (SqlUtil.columnIsExist(rs, "ms"))sfd.setMs(rs.getString("ms"));
 				
 			if (SqlUtil.columnIsExist(rs, "wx_state"))sfd.setWx_state(rs.getString("wx_state"));
-				
+			//2010-3-23增加一个控制流程流转的字段
+			if (SqlUtil.columnIsExist(rs, "flow"))sfd.setFlow(rs.getString("flow"));
 			return sfd;
 		}
 	}
