@@ -2367,7 +2367,7 @@
               <result name="success">/WEB-INF/pages/sfd/sfd_add.jsp</result>
         </action>
         <action name="saveSfd" class="sfdAction" method="save">
-             <result name="success">/WEB-INF/pages/msg.jsp</result>
+             <result name="success">/WEB-INF/pages/sfd/sfd_edit.jsp</result>
              <result name="input">/WEB-INF/pages/sfd/sfd_add.jsp</result>
              <result name="cancel" type="redirect">addSfd.html</result>
         </action>
@@ -2375,7 +2375,7 @@
               <result name="success">/WEB-INF/pages/sfd/sfd_edit.jsp</result>
         </action>
          <action name="updateSfd" class="sfdAction" method="update">
-             <result name="success">/WEB-INF/pages/msg.jsp</result>
+             <result name="success">/WEB-INF/pages/sfd/sfd_edit.jsp</result>
              <result name="input">/WEB-INF/pages/sfd/sfd_edit.jsp</result>
              <result name="cancel" type="redirect">editSfd.html</result>
         </action>
@@ -2400,8 +2400,9 @@
              <result name="input">/WEB-INF/pages/pgd/pgd_edit.jsp</result>
              <result name="cancel" type="redirect">editPgd.html</result>
         </action>
-          <action name="viewPgd" class="pgdAction" method="edit">
-             <result name="success">/WEB-INF/pages/pgd/pgd_view.jsp</result>
+
+        <action name="viewPgd" class="pgdAction" method="view">
+              <result name="success">/WEB-INF/pages/pgd/pgd_view.jsp</result>
         </action>
          <!-- 派工单 -->  
          
@@ -2684,5 +2685,23 @@
             <result name="success">/WEB-INF/pages/report/cgfptj/result_mx.jsp</result>
         </action>
         <!-- 采购发票统计结束 -->  
+        
+        <!-- 咨询工单开始 --> 
+        <action name="listZxgd" class="zxgdAction" method="list">
+             <result name="success">/WEB-INF/pages/zxgd/zxgd_list.jsp</result>
+        </action>
+      
+         <action name="editZxgd" class="zxgdAction" method="edit">
+              <result name="success">/WEB-INF/pages/zxgd/zxgd_edit.jsp</result>
+        </action>
+        <action name="updateZxgd" class="zxgdAction" method="update">
+             <result name="success">/WEB-INF/pages/msg.jsp</result>
+             <result name="input">/WEB-INF/pages/zxgd/zxgd_edit.jsp</result>
+             <result name="cancel" type="redirect">editZxgd.html</result>
+        </action>
+          <action name="viewZxgd" class="zxgdAction" method="view">
+             <result name="success">/WEB-INF/pages/zxgd/zxgd_view.jsp</result>
+        </action>
+        <!-- 咨询工单结束 -->  
     </package>
 </xwork>
