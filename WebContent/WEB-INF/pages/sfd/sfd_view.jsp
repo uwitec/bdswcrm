@@ -14,7 +14,7 @@ String user_id = info.getUser_id();
 
 <html>
 <head>
-<title>售后服务单添加</title>
+<title>售后服务单查看</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript" src="js/Check.js"></script>

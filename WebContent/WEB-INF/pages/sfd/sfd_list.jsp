@@ -46,19 +46,19 @@ String orderType = (String)VS.findValue("orderType");
 		document.myform.linkman.value = "";
 		document.myform.jx_date1.value = "";
 		document.myform.jx_date2.value = "";
-		document.myform.wx_state.value = "";
+		document.myform.wx_state.value = "待处理";
 		document.myform.state.value = "";
 		document.myform.jxr.value = "";
 	}
 	
 	function add(){
 		var destination = "addSfd.html";
-			var fea ='width=750,height=400,left=' + (screen.availWidth-750)/2 + ',top=' + (screen.availHeight-400)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+			var fea ='width=750,height=450,left=' + (screen.availWidth-750)/2 + ',top=' + (screen.availHeight-400)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		window.open(destination,'售后服务单',fea);	
 	}	
 	function edit(id){
 		var destination ="editSfd.html?id="+id;
-		var fea ='width=750,height=400,left=' + (screen.availWidth-750)/2 + ',top=' + (screen.availHeight-400)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		var fea ='width=750,height=450,left=' + (screen.availWidth-750)/2 + ',top=' + (screen.availHeight-400)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		window.open(destination,'售后服务单',fea);		
 	}	
 	
@@ -122,7 +122,7 @@ String orderType = (String)VS.findValue("orderType");
 					</td>
 				</tr>
 				<tr>
-					<td align="center">状　态：</td>
+					<!-- <td align="center">状　态：</td>
 					<td>
 						<select name="state">
 							<option value=""></option>
@@ -130,6 +130,7 @@ String orderType = (String)VS.findValue("orderType");
 							<option value="已提交" <%if(state.equals("已提交")) out.print("selected"); %>>已提交</option>
 						</select>			
 					</td>
+					 -->
 					<td align="center">维修状态：</td>
 					<td>
 						<select name="wx_state" >	
@@ -151,12 +152,12 @@ String orderType = (String)VS.findValue("orderType");
 		<td width="10%" onclick="doSort('id');" nowrap="nowrap">售后单编号<%if(orderName.equals("id")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
 		<td width="20%" onclick="doSort('client_name');">往来单位<%if(orderName.equals("client_name")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
 		<td width="8%" onclick="doSort('linkman');">联系人<%if(orderName.equals("linkman")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td width="8%" onclick="doSort('mobile');">联系电话<%if(orderName.equals("mobile")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td width="12%" onclick="doSort('address');">地址<%if(orderName.equals("address")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="14%" onclick="doSort('mobile');">联系电话<%if(orderName.equals("mobile")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="16%" onclick="doSort('address');">地址<%if(orderName.equals("address")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
 		<td width="8%" onclick="doSort('jx_date');">接修时间<%if(orderName.equals("jx_date")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td width="8%" onclick="doSort('state');">状态<%if(orderName.equals("state")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>		
-		<td width="8%" onclick="doSort('wx_state');">维修状态<%if(orderName.equals("wx_state")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td width="8%" onclick="doSort('jxr');">经手人<%if(orderName.equals("jxr")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>				
+		<!-- <td width="8%" onclick="doSort('state');">状态<%if(orderName.equals("state")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>	 -->	
+		<td width="6%" onclick="doSort('wx_state');">维修状态<%if(orderName.equals("wx_state")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="6%" onclick="doSort('jxr');">经手人<%if(orderName.equals("jxr")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>				
 		<td width="10%">操作</td>
 	</tr>
 	</thead>
@@ -177,12 +178,12 @@ String orderType = (String)VS.findValue("orderType");
 		<td><%=StringUtils.nullToStr(sfd.get("mobile")) %></td>
 		<td><%=StringUtils.nullToStr(sfd.get("address")) %></td>
 		<td><%=StringUtils.nullToStr(sfd.get("jx_date")) %></td>
-		<td><%=StringUtils.nullToStr(sfd.get("state")) %></td>	
+		<!--  <td><%=StringUtils.nullToStr(sfd.get("state")) %></td>-->	
 		<td><%=StringUtils.nullToStr(sfd.get("wx_state")) %></td>
 		<td><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(sfd.get("jxr"))) %></td>
 		<td>
 		<%
-		if(StringUtils.nullToStr(sfd.get("state")).equals("已提交")){
+		if((StringUtils.nullToStr(sfd.get("state")).equals("已提交")) && (!(StringUtils.nullToStr(sfd.get("flow")).equals("")))){
 		%>
 			<a href="#" onclick="openWin('<%=StringUtils.nullToStr(sfd.get("id")) %>');"><img src="images/view.gif" align="absmiddle" title="查看售后服务单信息" border="0" style="cursor:hand"></a>
 		<%	

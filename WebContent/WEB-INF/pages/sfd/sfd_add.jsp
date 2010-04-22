@@ -33,13 +33,133 @@ String user_id = info.getUser_id();
 <script type="text/javascript">
 
 	var allCount = 2;
+	var jhzq = 0;
+	//客户对应联系人信息
+	var arryLxrObj = new Array();
+	var temp_client_id = "";
+	//客户联系人对象
+	function LinkMan(id,name,tel){
+	    this.id = id;
+	    this.name = name;
+	    this.tel = tel;
+	}	
+
+	function onloadClientInfo(){
+		if($F('client_id') == ""){
+			return;
+		}
+		var url = 'queryClientsRegInfo.html';
+		var params = "clients_id=" + $F('client_id');
+		var myAjax = new Ajax.Request(
+		url,
+		{
+			method:'post',
+			parameters: params,
+			onComplete: initJhzq,
+			asynchronous:true
+		});
+	}
+
+	function initJhzq(originalRequest){
+		var resText = originalRequest.responseText.trim(); 
+		if(resText == ""){
+			return false;
+		}
+		var arryText = resText.split("%");
+
+		//客户地址填充
+		if(arryText != null && arryText.length>0){
+			var arryClientInfo = arryText[0].split("#");			
+			jhzq = arryClientInfo[6];
+		}
+	}
 	
+	
+	//查询客户相关信息
+	function setClientRegInfo(){		
+		//填充值
+		setClientValue(); 
+
+		if(temp_client_id == $F('client_id')){
+			return;
+		}
+		
+		temp_client_id = $F('client_id');
+		if($F('client_id') == ""){
+			return;
+		}
+		
+		//根据填充后的值选择客户地址联系人等信息
+		var url = 'queryClientsRegInfo.html';
+		var params = "clients_id=" + $F('client_id');
+		var myAjax = new Ajax.Request(
+		url,
+		{
+			method:'post',
+			parameters: params,
+			onComplete: fillClientRegInfo,
+			asynchronous:true
+		});
+	}
+	
+	//处理客户地址联系人等信息
+	function fillClientRegInfo(originalRequest){  
+
+		var resText = originalRequest.responseText.trim(); 
+		if(resText == ""){
+			return false;
+		}
+
+		var arryText = resText.split("%");
+
+		//客户地址填充
+		if(arryText != null && arryText.length>0){
+		
+			var arryClientInfo = arryText[0].split("#");			
+			document.getElementById("address").value = arryClientInfo[0];
+		}
+		
+		if(arryText != null && arryText.length>1){
+			var linkMantext = arryText[1];
+			
+			//联系人填充
+			var objLxr = document.getElementById("linkman"); 
+			objLxr.options.length = 0;
+			
+			var arryLinkMan = linkMantext.split("$");
+			if(arryLinkMan.length > 0){
+				for(var i=0;i<arryLinkMan.length;i++){
+					var arryInfo = arryLinkMan[i].split("#");		
+					var manObj = new LinkMan(arryInfo[0],arryInfo[1],arryInfo[2]);
+					arryLxrObj[i] = manObj;
+					objLxr.add(new Option(arryInfo[1],arryInfo[1]));
+				}
+				if(arryLxrObj[0].tel != undefined)
+					document.getElementById("mobile").value = arryLxrObj[0].tel;
+			}		
+		}
+	}
+	
+	
+	//联系人与电话联动
+	function chgLxr(vl){
+		if(vl == ""){
+			return;
+		}
+		if(arryLxrObj != null && arryLxrObj.length > 0){
+			for(var i=0;i<arryLxrObj.length;i++){
+				if(vl == arryLxrObj[i].name){
+					document.getElementById("mobile").value = arryLxrObj[i].tel;
+					break;
+				}
+			}
+		}
+	}
 	function saveInfo(vl){ 
 
 		if(vl == '1'){
 			document.getElementById("state").value = "已保存";
-		}else{
-			document.getElementById("state").value = "已提交";
+			document.getElementById("wx_state").value = "待处理";
 		}	
 	      
 		if(document.getElementById("id").value == ""){
@@ -79,15 +199,65 @@ String user_id = info.getUser_id();
 		}	
 		if(document.getElementById("state").value == "已提交"){
 			if(window.confirm("确认要提交售后服务单吗，提交后将无法修改！")){				
-				document.sfdForm.submit();		
+				document.sfdForm.submit();	
 			}
  	     }
 	     else
 	     { 
 	         document.sfdForm.submit();	
 	     }
-	     document.sfdForm.btnSave.disabled = true;
-		 document.sfdForm.btnSub.disabled = true;
+	     alert("操作成功！");
+	}
+    
+    function setFlow(v2,id){ 
+        if(document.getElementById("state").value == "")
+        {
+          alert("先保存单据，才能指定流程！");
+		  return;
+        }
+        
+        document.getElementById("state").value="已提交";
+        
+        if((document.getElementById("flow").value != ""))
+        {
+          alert("已经为本单指定了流程！");
+		  return;
+        }
+		if(v2 == '1')
+		{
+			document.getElementById("flow").value = "咨询";
+		}
+		else if(v2=='2')
+		{
+			document.getElementById("flow").value = "投诉";
+		}
+		else
+		{
+		    document.getElementById("flow").value = "维修";
+		}
+		if(v2=='1')
+		{
+		  var destination = "editZxgd.html?id="+id;
+		  var fea ='width=950,height=550,left=' + (screen.availWidth-950)/2 + ',top=' + (screen.availHeight-750)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		
+		  window.open(destination,'详细信息',fea);	
+		}
+		else if(v2=='2')
+		{
+		   var destination = "editTsgd.html?id="+id;
+		   var fea ='width=950,height=700,left=' + (screen.availWidth-950)/2 + ',top=' + (screen.availHeight-750)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		
+		   window.open(destination,'详细信息',fea);	
+		}
+		else
+		{
+		   var destination = "editPgd.html?id="+id;
+		   var fea ='width=950,height=700,left=' + (screen.availWidth-950)/2 + ',top=' + (screen.availHeight-750)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		
+		   window.open(destination,'详细信息',fea);	
+		}
+	 
+		
 	}
      
 	function delTr(i){
@@ -196,6 +366,8 @@ String user_id = info.getUser_id();
 <body onload="initFzrTip();initClientTip()">
 <form name="sfdForm" action="saveSfd.html" method="post">
 <input type="hidden" name="sfd.state" id="state" value="">
+<input type="hidden" name="sfd.wx_state" id="wx_state" value="">
+<input type="hidden" name="sfd.flow" id="flow" value="<%=StringUtils.nullToStr(sfd.getFlow())%>">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
@@ -221,24 +393,31 @@ String user_id = info.getUser_id();
 	</tr>
 	<tr>			
 		<td class="a1" width="15%">客户名称</td>
-		<td class="a2" width="35%"><input type="text" name="sfd.client_id"   id="client_name" value="" size="30" maxlength="50" onblur="setClientValue();" >
+		<td class="a2" width="35%"><input type="text" name="sfd.client_id"   id="client_name" onblur="setClientRegInfo();" value="" size="35" maxlength="50" >
 		<input type="hidden" name="sfd.client_name" id="client_id" value="" ><div id="clientsTip" style="height:12px;position:absolute;width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		<font color="red">*</font>
 		</td>
 		<td class="a1" width="15%">联系人</td>
-		<td class="a2" width="35%">
-		    <input id="linkman" name="sfd.linkman" type="text" length="20" value="" /> 
-            <font color="red">*</font>	
-		</td>
+		<td class="a2" width="35%" >
+			<select name="sfd.linkman" id="linkman" onchange="chgLxr(this.value);" style="width:256px" >
+				<%
+				if(!StringUtils.nullToStr(sfd.getLinkman()).equals("")){
+				%>
+					<option value="<%=StringUtils.nullToStr(sfd.getLinkman()) %>" selected><%=StringUtils.nullToStr(sfd.getLinkman()) %></option>
+				<%
+				} 
+				%>
+			</select>
+		</td>	
 	</tr>
 	<tr>			
 		<td class="a1" width="15%">联系电话</td>
-		<td class="a2">
-			<input type="text" name="sfd.mobile" id="mobile" value=""></input>
+		<td class="a2" width="35%">
+			<input type="text" name="sfd.mobile" id="mobile" value="" size="35"></input>
 		</td>	
 		<td class="a1" width="15%">地址</td>
 		<td class="a2" width="35%">
-		    <input id="address" name="sfd.address" type="text" length="20" value="" />            
+		    <input id="address" name="sfd.address" type="text" size="45" maxlength="100" value="<%=StringUtils.nullToStr(sfd.getAddress()) %>" />            
 		</td>
 	</tr>
 	<tr>
@@ -258,15 +437,7 @@ String user_id = info.getUser_id();
 			<font color="red">*</font> 		  		
 		</td>
 	</tr>
-	<tr>
-		<td class="a1">维修状态</td>
-		<td class="a2">
-			<select name="sfd.wx_state" id="wx_state">			     
-				<option value="待处理">待处理</option>
-				<option value="已处理">已处理</option>				 
-			</select>	<font color="red">*</font>		
-		</td>					
-	</tr>
+	
 	 <tr >
 	    <td class="a1" width="15%">商品序列号</td>
 		<td class="a2" colspan="4">
@@ -282,16 +453,32 @@ String user_id = info.getUser_id();
 	</tr>
 			
 	<tr height="35">
-		<td class="a1" colspan="4">
-			<input type="button" name="btnSave" value="草稿" class="css_button2" onclick="saveInfo('1');">&nbsp;&nbsp;&nbsp;&nbsp;	
-			<input type="button" name="btnSub" value="提交" class="css_button2" onclick="saveInfo('2');">&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="reset" name="button2" value="关 闭" class="css_button2" onclick="window.opener.document.myform.submit();window.close();">
+		<td class="a1" colspan="4" align=right>
+			<input type="button" name="btnSave" value="保 存" class="css_button2" onclick="saveInfo('1');">&nbsp;&nbsp;&nbsp;&nbsp;	
+			
 		</td>
 	</tr>
 </table>
 <BR>
-<font color="red">注：“草稿”指售后服务单暂存，可修改；“提交”后售后服务单不可修改，如需审批则直接提交审批。</font>
+<font color="red">注：“保存”后才可以进行处理流程的指定。</font>
 <BR><BR>
+<table width="100%"  align="center" class="chart_info" cellpadding="0" cellspacing="0">
+	<thead>
+	<tr>
+		<td colspan="4">选择本单处理流程</td>
+	</tr>
+	</thead> 
+	<tr height="35">
+		<td class="a1" colspan="4" width="100%">&nbsp;
+			<input type="button" name="btnConsult" value="咨 询" class="css_button3" onclick="setFlow('1','<%=StringUtils.nullToStr(sfd.getId())%>');">&nbsp;&nbsp;&nbsp;&nbsp;
+			<!--  <input type="button" name="btnComplain" value="投 诉" class="css_button3" onclick="setFlow('2','<%=StringUtils.nullToStr(sfd.getId())%>');">&nbsp;&nbsp;&nbsp;&nbsp;-->
+			<input type="button" name="btnRepair" value="维 修" class="css_button3" onclick="setFlow('3','<%=StringUtils.nullToStr(sfd.getId())%>');">
+		    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		    <input type="reset" name="button2" value="关 闭" class="css_button3" onclick="window.opener.document.myform.submit();window.close();">
+		</td>
+	</tr>
+	 
+</table>
 </form>
 </body>
 </html>
