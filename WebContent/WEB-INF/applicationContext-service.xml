@@ -724,6 +724,13 @@
            <bean class="com.sw.cms.service.CgfptjService" autowire="byName"/> 
         </property>
     </bean>
+    
+    <!-- 咨询工单 -->
+    <bean id="zxgdService" parent="baseTransaction">
+        <property name="target">
+           <bean class="com.sw.cms.service.ZxgdService" autowire="byName"/> 
+        </property>
+    </bean>
 </beans>
 
 

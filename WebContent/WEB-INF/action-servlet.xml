@@ -189,4 +189,6 @@
      <bean id="ygbbAction" class="com.sw.cms.action.YgbbAction" autowire="byName" scope="prototype"/>
      
      <bean id="cgfptjAction" class="com.sw.cms.action.CgfptjAction" autowire="byName" scope="prototype"/>
+     
+     <bean id="zxgdAction" class="com.sw.cms.action.ZxgdAction" autowire="byName" scope="prototype"/>
 </beans>

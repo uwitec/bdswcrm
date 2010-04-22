@@ -558,6 +558,11 @@
      <bean id="cgfptjDao" class="com.sw.cms.dao.CgfptjDAO">
           <property name="jdbcTemplate" ref="jdbcTemplate"/>
      </bean>
+     
+     <!-- 咨询工单-->
+     <bean id="zxgdDao" class="com.sw.cms.dao.ZxgdDAO">
+          <property name="jdbcTemplate" ref="jdbcTemplate"/>
+     </bean>
 </beans>
 
 
