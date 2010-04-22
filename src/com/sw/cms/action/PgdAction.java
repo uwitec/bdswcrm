@@ -13,113 +13,161 @@ import com.sw.cms.util.Constant;
 import com.sw.cms.util.DateComFunc;
 import com.sw.cms.util.ParameterUtility;
 
-public class PgdAction extends BaseAction {
-	private PgdService pgdService;
-	private SjzdService sjzdService;
+public class PgdAction extends BaseAction
+{
+	   private PgdService pgdService;
+	   private SjzdService sjzdService;
+	   
+	   private String[] wxlx;
+	   
+	   private Page pgdPage;
+	   private String orderName="";
+	   private String orderType="";
+	   private int curPage = 1;
+	   private String p_cj_date1 = "";
+	   private String p_cj_date2 = "";
+	   private String linkman="";
+	   private String p_wx_state="";
+	   private String p_state="";	    
+	   private Map  pgd;
+	   private Pgd pgds=new Pgd();
+	   
+	   
 
-	private String[] wxlx;
-
-	private Page pgdPage;
-	private String orderName = "";
-	private String orderType = "";
-	private int curPage = 1;
-	private String p_cj_date1 = "";
-	private String p_cj_date2 = "";
-	private String linkman = "";
-	private String p_wx_state = "待处理";
-	private String p_state = "";
-	private Map pgd;
-	private Pgd pgds = new Pgd();
-
-	/**
-	 * 售后服务单列表
-	 * 
-	 * @return
-	 */
-	public String list() {
-		try {
-			int rowsPerPage = Constant.PAGE_SIZE2;
-			String con = "";
-			if (!linkman.trim().equals("")) {
-				con += " and linkman like '%" + linkman + "%'";
-			}
-			if (!p_cj_date1.trim().equals("")) {
-				con += " and p_cj_date>='" + p_cj_date1 + "'";
-			}
-			if (!p_cj_date2.trim().equals("")) {
-				con += " and p_cj_date<='" + (p_cj_date2 + " 23:59:59") + "'";
-			}
-			if (!p_state.equals("")) {
-				con += " and p_state='" + p_state + "'";
-			}
-			if (!p_wx_state.trim().equals("")) {
-				con += " and p_wx_state='" + p_wx_state + "'";
-			}
-			if (orderName.equals("")) {
-				orderName = "p_id";
-			}
-			if (orderType.equals("")) {
-				orderType = "desc";
-			}
-			con += " order by " + orderName + " " + orderType + "";
-			pgdPage = pgdService.getPgdList(con, curPage, rowsPerPage);
-			return "success";
-		} catch (Exception e) {
-			log.error("获取派工单列表   失败原因:" + e.getMessage());
-			return "error";
-		}
-
-	}
 
 	/**
-	 * 修改售后服务单
-	 * 
-	 * @return
-	 * @throws Exception
-	 */
-	public String edit() throws Exception {
-		try {
-			String sfd_id = ParameterUtility.getStringParameter(getRequest(),
-					"id", "");
-			pgd = (Map) pgdService.getPgdBySfdId(sfd_id);
-			wxlx = sjzdService.getSjzdXmxxByZdId("SJZD_GZLX");
-
-			return "success";
-		} catch (Exception e) {
-			log.error("打开修改派工单页面  错误原因" + e.getMessage());
-			return "error";
-		}
-	}
-
-	/**
-	 * 保存修改派工服务单
-	 * 
-	 * @return
-	 * @throws Exception
-	 */
-	public String update() throws Exception {
-		try {
-			LoginInfo info = (LoginInfo) getSession().getAttribute("LOGINUSER");
-			String user_id = info.getUser_id();
-			pgds.setP_cjr(user_id);
-			if (pgds.getP_state().equals("已保存")) {
-				pgds.setP_wx_state("待处理");
-				pgdService.updatePgd(pgds);
-			}
-			if (pgds.getP_state().equals("已提交")) {
-				if (pgds.getP_wx_state().equals("已处理")) {
-					pgds.setP_jd_date(DateComFunc.getToday());
+	    * 售后服务单列表
+	    * @return
+	    * 未输入条件时，默认显示所有的未处理的记录
+	    */
+	   public String list()
+	   {
+		   try 
+		   {
+			   int rowsPerPage = Constant.PAGE_SIZE2;
+				String con = "";				 
+				if (!linkman.trim().equals("")) 
+				{
+					con += " and linkman like '%" +linkman +"%'";
+				}			
+				if (!p_cj_date1.trim().equals("")) {
+					con += " and p_cj_date>='" + p_cj_date1 + "'";
 				}
-				pgdService.updatePgd(pgds);
-			}
-
-			return "success";
-		} catch (Exception e) {
-			log.error("保存修改派工单  错误原因" + e.getMessage());
-			return "error";
-		}
-	}
-
+				if (!p_cj_date2.trim().equals("")) {
+					con += " and p_cj_date<='" + (p_cj_date2 + " 23:59:59") + "'";
+				}
+				if (!p_state.equals("")) {
+					con += " and p_state='" + p_state + "'";
+				}
+				if (!p_wx_state.trim().equals("")) {
+					con += " and p_wx_state='" + p_wx_state + "'";
+				}
+				else
+				{
+					con += " and p_wx_state='待处理'";
+				}
+				if (orderName.equals("")) 
+				{
+					orderName = "p_id";
+				}
+				if (orderType.equals("")) {
+					orderType = "desc";
+				}
+				con += " order by " + orderName + " " + orderType + "";
+				pgdPage = pgdService.getPgdList(con, curPage, rowsPerPage);
+				return "success";  			 
+	       } 
+		   catch (Exception e)
+	       {
+			 log.error("获取派工单列表   失败原因:"+e.getMessage());  
+			 return  "error";
+		   }
+		   
+	   }
+	   
+ 
+	   /**
+	    * 修改派工单
+	    * @return
+	    * @throws Exception
+	    */
+	   public String edit()throws Exception
+	   {
+		   try
+		   {			   
+			   String sfd_id = ParameterUtility.getStringParameter(getRequest(),
+						"id", "");
+			   pgdService.savePgd(pgds,sfd_id);
+			   pgd=(Map)pgdService.getPgdBySfdId(sfd_id);
+			   wxlx = sjzdService.getSjzdXmxxByZdId("SJZD_GZLX");
+			   
+			   return "success";
+		   }
+		   catch(Exception e)
+		   {
+			   log.error("打开修改派工单页面  错误原因"+e.getMessage());
+			   return "error";
+		   }
+	   }
+	   
+	   /**
+	    * 查看派工单
+	    * @return
+	    * @throws Exception
+	    */
+	   public String view()throws Exception
+	   {
+		   try
+		   {			   
+			   String sfd_id = ParameterUtility.getStringParameter(getRequest(),
+						"id", "");		  
+			   pgd=(Map)pgdService.getPgdBySfdId(sfd_id);
+			   wxlx = sjzdService.getSjzdXmxxByZdId("SJZD_GZLX");	
+			   
+			   return "success";
+		   }
+		   catch(Exception e)
+		   {
+			   log.error("打开派工单页面  错误原因"+e.getMessage());
+			   return "error";
+		   }
+	   }
+	   
+	   /**
+	    * 保存修改派工服务单
+	    * @return
+	    * @throws Exception
+	    */
+	   public String update()throws Exception
+	   {
+		   try
+		   {	
+			   LoginInfo info = (LoginInfo) getSession().getAttribute("LOGINUSER");
+			   String user_id = info.getUser_id();
+			   pgds.setP_cjr(user_id);
+			    if(pgds.getP_state().equals("已保存"))
+				{
+				   pgds.setP_wx_state("待处理");
+				   pgdService.updatePgd(pgds);
+				}
+				if(pgds.getP_state().equals("已提交"))
+				{
+					if(pgds.getP_wx_state().equals("已处理"))
+					{
+						pgds.setP_jd_date(DateComFunc.getToday());
+					}
+					pgdService.updatePgd(pgds);
+				}
+			   
+			   return "success";
+		   }
+		   catch(Exception e)
+		   {
+			   log.error("保存修改派工单  错误原因"+e.getMessage());
+			   return "error";
+		   }
+	   }
+	   
 	public int getCurPage() {
 		return curPage;
 	}
@@ -156,9 +204,11 @@ public class PgdAction extends BaseAction {
 		return pgd;
 	}
 
+
 	public void setPgd(Map pgd) {
 		this.pgd = pgd;
 	}
+
 
 	public Page getPgdPage() {
 		return pgdPage;
@@ -175,7 +225,7 @@ public class PgdAction extends BaseAction {
 	public void setPgdService(PgdService pgdService) {
 		this.pgdService = pgdService;
 	}
-
+ 
 	public SjzdService getSjzdService() {
 		return sjzdService;
 	}
