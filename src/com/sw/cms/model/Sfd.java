@@ -3,7 +3,7 @@ package com.sw.cms.model;
 /**
  * 售后服务单
  * @author Administrator
- *
+ * 2010-3-23增加一个字段 flow
  */
 public class Sfd 
 {
@@ -21,6 +21,7 @@ public class Sfd
 	   private String  state      ;//售后服务单状态（保存，提交）	   
 	   private String wx_state;     //维修状态(处理中，处理完)
 	   private String  ms          ;//描述
+	   private String  flow          ;//设置流程：咨询、投诉、维修
 	   
 	public String getAddress() {
 		return address;
@@ -106,4 +107,11 @@ public class Sfd
 	public void setWx_state(String wx_state) {
 		this.wx_state = wx_state;
 	} 
+	
+	public String getFlow() {
+		return flow;
+	}
+	public void setFlow(String flow) {
+		this.flow = flow;
+	}
 }
