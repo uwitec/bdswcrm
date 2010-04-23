@@ -664,7 +664,7 @@ CREATE TABLE `zxgd` (
   `cz_date` datetime default NULL,
   `state` varchar(50) default NULL,   
   PRIMARY KEY  (`id`)
-<<<<<<< .mine
+
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 2010-04-20修改
@@ -679,8 +679,8 @@ INSERT INTO `funcs`(`func_id`,`func_name`,`func_ms`,`url`,`img`,`xh`,`ywflag`,`f
 INSERT INTO `column_funcs` VALUES ('005001','FC0120');
 
 --增加售后服务单中联系电话的长度
-ALTER TABLE `sfd` MODIFY COLUMN `mobile` VARCHAR(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL;=======
+ALTER TABLE `sfd` MODIFY COLUMN `mobile` VARCHAR(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL;
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ALTER TABLE `thd` MODIFY COLUMN `fpxx` VARCHAR(200) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL;
->>>>>>> .r481
+
