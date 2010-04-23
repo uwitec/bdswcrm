@@ -32,7 +32,7 @@ Qtsr qtsr = (Qtsr)VS.findValue("qtsr");
 	</tr>
 	<tr>
 		<td class="a1" width="15%">类型</td>
-		<td class="a2" width="35%"><%=StringUtils.nullToStr(qtsr.getSr_date()) %></td>
+		<td class="a2" width="35%"><%=StringUtils.nullToStr(qtsr.getType()) %></td>
 		<td class="a1" width="15%">金额</td>
 		<td class="a2" width="35%"><%=JMath.round(qtsr.getSkje(),2) %></td>		
 	</tr>	
