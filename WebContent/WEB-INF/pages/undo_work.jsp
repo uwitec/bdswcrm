@@ -109,7 +109,7 @@ List dspFysqList = (List)VS.findValue("dspFysqList");
 			<div class="inner">
 				<table width="100%" align="left" cellpadding="0" cellspacing="0">
 					<tr>
-						<td height="27" style="border-bottom:1px solid #B8B8B8;background-image:url(images/head_top2bg.gif)" align="left" width="100%">&nbsp;&nbsp;&nbsp;&nbsp;<b>待出库单据</b></td>								
+						<td height="27" style="background-image:url(images/head_top2bg.gif)" align="left" width="100%">&nbsp;&nbsp;&nbsp;&nbsp;<b>待出库单据</b></td>								
 					</tr>
 					<tr><td height="5"></td></tr>
 					<%

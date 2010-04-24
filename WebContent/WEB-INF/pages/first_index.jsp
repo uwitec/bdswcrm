@@ -19,8 +19,8 @@ List bwlList = (List)VS.findValue("bwlList");
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <style type="text/css">
 .inner{
-	width:500px;
-	margin:5px; 
+	width:48%;
+	margin:2px; 
 	border:1px solid #B8B8B8;
 	text-align:left;
 	display:inline ;
