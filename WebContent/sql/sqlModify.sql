@@ -684,3 +684,9 @@ ALTER TABLE `sfd` MODIFY COLUMN `mobile` VARCHAR(50) CHARACTER SET utf8 COLLATE 
 
 ALTER TABLE `thd` MODIFY COLUMN `fpxx` VARCHAR(200) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL;
 
+2010-04-23修改
+--财务统计中增加其他收入统计菜单
+INSERT INTO `funcs`(`func_id`,`func_name`,`func_ms`,`url`,`img`,`xh`,`ywflag`,`funcflag`)  values
+('FC0121','其他收入统计','其他收入统计','showQtsrtjCondition.html','123.gif',7,'1','4');
+
+INSERT INTO `column_funcs` VALUES ('004003','FC0121');
