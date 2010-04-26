@@ -690,3 +690,10 @@ INSERT INTO `funcs`(`func_id`,`func_name`,`func_ms`,`url`,`img`,`xh`,`ywflag`,`f
 ('FC0121','其他收入统计','其他收入统计','showQtsrtjCondition.html','123.gif',7,'1','4');
 
 INSERT INTO `column_funcs` VALUES ('004003','FC0121');
+
+2010-04-26修改
+--基础报表中增加往来单位资料
+INSERT INTO `funcs`(`func_id`,`func_name`,`func_ms`,`url`,`img`,`xh`,`ywflag`,`funcflag`)  values
+('FC0206','往来单位资料','往来单位资料','listClientbb.html','140.gif',7,'1','7');
+
+INSERT INTO `column_funcs` VALUES ('007003','FC0206');
