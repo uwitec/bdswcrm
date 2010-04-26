@@ -1277,8 +1277,6 @@
          <action name="addDlMail" class="mailAction" method="add">
             <result name="success">/WEB-INF/pages/report/kcmx/dlmail_add.jsp</result>
         </action> 
-         
-                    
         <!-- 库存数量汇总 -->
         
         <!-- 分仓库存数量汇总 -->
@@ -2684,8 +2682,7 @@
         <action name="getCgfpTjMxResult" class="cgfptjAction" method="getResult">
             <result name="success">/WEB-INF/pages/report/cgfptj/result_mx.jsp</result>
         </action>
-        <!-- 采购发票统计结束 -->  
-        
+        <!-- 采购发票统计结束 --> 
         <!-- 咨询工单开始 --> 
         <action name="listZxgd" class="zxgdAction" method="list">
              <result name="success">/WEB-INF/pages/zxgd/zxgd_list.jsp</result>
@@ -2703,5 +2700,16 @@
              <result name="success">/WEB-INF/pages/zxgd/zxgd_view.jsp</result>
         </action>
         <!-- 咨询工单结束 -->  
+        <!-- 其他收入统计开始 -->
+        <action name="showQtsrtjCondition" class="qtsrtjReportAction" method="showCondition">
+            <result name="success" type="dispatcher">/WEB-INF/pages/report/qtsrtj/condition.jsp</result>
+        </action>
+        <action name="getQtsrtjResult" class="qtsrtjReportAction" method="getResutls">
+            <result name="success" type="dispatcher">/WEB-INF/pages/report/qtsrtj/result.jsp</result>
+        </action>
+        <action name="getQtsrtjResultMx" class="qtsrtjReportAction" method="getResultMx">
+            <result name="success" type="dispatcher">/WEB-INF/pages/report/qtsrtj/result_mx.jsp</result>
+        </action>
+        <!-- 其他收入统计结束 -->
     </package>
 </xwork>
