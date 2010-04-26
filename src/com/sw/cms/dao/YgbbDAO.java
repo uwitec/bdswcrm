@@ -33,7 +33,7 @@ public class YgbbDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public Page getUserList(String con, int curPage, int rowsPerPage) {
-		String sql = "select a.*,b.dept_name from sys_user a left join dept b on b.dept_id=a.dept where a.is_sys_user=0 and a.is_del='0'";
+		String sql = "select a.*,b.dept_name from sys_user a left join dept b on b.dept_id=a.dept where a.is_sys_user=0 and a.is_del='0'  and (a.zzzt='ÔÚÖ°' or a.zzzt='' or a.zzzt is null)";
 
 		if (!con.equals("")) {
 			sql = sql + con;
