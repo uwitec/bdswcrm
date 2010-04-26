@@ -193,4 +193,6 @@
      <bean id="zxgdAction" class="com.sw.cms.action.ZxgdAction" autowire="byName" scope="prototype"/>
 
      <bean id="qtsrtjReportAction" class="com.sw.cms.action.QtsrtjReportAction" autowire="byName" scope="prototype"/>
+     
+     <bean id="clientbbAction" class="com.sw.cms.action.ClientbbAction" autowire="byName" scope="prototype"/>
 </beans>
