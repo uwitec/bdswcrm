@@ -2711,5 +2711,14 @@
             <result name="success" type="dispatcher">/WEB-INF/pages/report/qtsrtj/result_mx.jsp</result>
         </action>
         <!-- 其他收入统计结束 -->
+        <!-- 往来单位资料开始 -->
+        <action name="listClientbb" class="clientbbAction" method="list">
+            <result name="success">/WEB-INF/pages/report/clientbb/client_list.jsp</result>
+        </action>
+        
+        <action name="viewClientbb" class="clientbbAction" method="listView">
+            <result name="success">/WEB-INF/pages/report/clientbb/client_view.jsp</result>
+        </action>
+        <!-- 往来单位资料结束 -->
     </package>
 </xwork>
