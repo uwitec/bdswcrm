@@ -563,6 +563,11 @@
      <bean id="zxgdDao" class="com.sw.cms.dao.ZxgdDAO">
           <property name="jdbcTemplate" ref="jdbcTemplate"/>
      </bean>
+     
+     <!-- 其他收入统计-->
+     <bean id="qtsrtjReportDao" class="com.sw.cms.dao.QtsrtjReportDAO">
+          <property name="jdbcTemplate" ref="jdbcTemplate"/>
+     </bean>
 </beans>
 
 

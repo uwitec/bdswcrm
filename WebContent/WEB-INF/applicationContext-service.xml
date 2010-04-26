@@ -731,6 +731,13 @@
            <bean class="com.sw.cms.service.ZxgdService" autowire="byName"/> 
         </property>
     </bean>
+    
+    <!-- 其他收入统计 -->
+    <bean id="qtsrtjReportService" parent="baseTransaction">
+        <property name="target">
+           <bean class="com.sw.cms.service.QtsrtjReportService" autowire="byName"/> 
+        </property>
+    </bean>
 </beans>
 
 
