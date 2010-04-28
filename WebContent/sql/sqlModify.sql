@@ -697,3 +697,17 @@ INSERT INTO `funcs`(`func_id`,`func_name`,`func_ms`,`url`,`img`,`xh`,`ywflag`,`f
 ('FC0206','往来单位资料','往来单位资料','listClientbb.html','140.gif',7,'1','7');
 
 INSERT INTO `column_funcs` VALUES ('007003','FC0206');
+
+2010-04-27修改
+--采购统计菜单增加货品采购订单汇总
+INSERT INTO `funcs`(`func_id`,`func_name`,`func_ms`,`url`,`img`,`xh`,`ywflag`,`funcflag`)  values
+('FC0207','货品采购订单汇总','货品采购订单汇总','showHpcgddHzCondition.html','123.gif',18,'1','2');
+
+INSERT INTO `column_funcs` VALUES ('002002','FC0207');
+
+2010-04-27修改
+--采购统计菜单增加供应商采购订单汇总
+INSERT INTO `funcs`(`func_id`,`func_name`,`func_ms`,`url`,`img`,`xh`,`ywflag`,`funcflag`)  values
+('FC0208','供应商采购订单汇总','供应商采购订单汇总','showClientcgddHzCondition.html','124.gif',19,'1','2');
+
+INSERT INTO `column_funcs` VALUES ('002002','FC0208');
