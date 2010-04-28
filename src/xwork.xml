@@ -2720,5 +2720,25 @@
             <result name="success">/WEB-INF/pages/report/clientbb/client_view.jsp</result>
         </action>
         <!-- 往来单位资料结束 -->
+        <!-- 采购订单汇总开始 -->
+        <action name="showHpcgddHzCondition" class="cgddhzAction" method="showCondition">
+            <result name="success">/WEB-INF/pages/report/cgddhz/condition_hp.jsp</result>
+        </action>
+        <action name="getHpcgddHzCondition" class="cgddhzAction" method="getResult">
+            <result name="success">/WEB-INF/pages/report/cgddhz/result_hp.jsp</result>
+        </action>
+        <action name="getHpcgddMxCondition" class="cgddhzAction" method="getResult">
+            <result name="success">/WEB-INF/pages/report/cgddhz/result_hp_mx.jsp</result>
+        </action>
+        <action name="showClientcgddHzCondition" class="cgddhzAction" method="showCondition">
+            <result name="success">/WEB-INF/pages/report/cgddhz/condition_client.jsp</result>
+        </action>
+        <action name="getClientcgddHzCondition" class="cgddhzAction" method="getResult">
+            <result name="success">/WEB-INF/pages/report/cgddhz/result_client.jsp</result>
+        </action>
+        <action name="getClientcgddMxCondition" class="cgddhzAction" method="getResult">
+            <result name="success">/WEB-INF/pages/report/cgddhz/result_client_mx.jsp</result>
+        </action>                      
+        <!-- 采购订单汇总结束 -->
     </package>
 </xwork>
