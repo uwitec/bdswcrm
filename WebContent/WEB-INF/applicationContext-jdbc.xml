@@ -568,6 +568,11 @@
      <bean id="qtsrtjReportDao" class="com.sw.cms.dao.QtsrtjReportDAO">
           <property name="jdbcTemplate" ref="jdbcTemplate"/>
      </bean>
+     
+     <!-- 采购订单执行汇总-->
+     <bean id="cgddhzDao" class="com.sw.cms.dao.CgddhzDAO">
+          <property name="jdbcTemplate" ref="jdbcTemplate"/>
+     </bean>
 </beans>
 
 

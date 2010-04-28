@@ -195,4 +195,6 @@
      <bean id="qtsrtjReportAction" class="com.sw.cms.action.QtsrtjReportAction" autowire="byName" scope="prototype"/>
      
      <bean id="clientbbAction" class="com.sw.cms.action.ClientbbAction" autowire="byName" scope="prototype"/>
+     
+     <bean id="cgddhzAction" class="com.sw.cms.action.CgddhzAction" autowire="byName" scope="prototype"/>
 </beans>

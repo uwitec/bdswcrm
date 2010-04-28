@@ -738,6 +738,13 @@
            <bean class="com.sw.cms.service.QtsrtjReportService" autowire="byName"/> 
         </property>
     </bean>
+    
+    <!-- 采购订单执行汇总 -->
+    <bean id="cgddhzService" parent="baseTransaction">
+        <property name="target">
+           <bean class="com.sw.cms.service.CgddhzService" autowire="byName"/> 
+        </property>
+    </bean>
 </beans>
 
 
