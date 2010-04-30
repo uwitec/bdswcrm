@@ -141,10 +141,12 @@ List  clinetsFollowList=(List)VS.findValue("clientsFollow");
 	          <tr>
 	           <td width="15%">联系人</td>
 		       <td width="10%">类型</td>
-		       <td width="15%">手机</td>
-		       <td width="15%">座机</td>
-		       <td width="15%">邮箱</td>
-		       <td width="15%">其他联系方式</td>
+		       <td width="10%">职务</td>
+		       <td width="10%">手机</td>
+		       <td width="10%">办公电话</td>
+		       <td width="10%">邮箱</td>
+		       <td width="10%">QQ</td>
+		       <td width="15%">MSN</td>
 		       <td width="10%">备注</td>
 	          </tr>
 	        </thead>
@@ -158,10 +160,12 @@ List  clinetsFollowList=(List)VS.findValue("clientsFollow");
 	        <tr class="a1"  onmousedown="trSelectChangeCss('selTable1')" onDblClick="linkmanedit('<%=linkman.getId()%>');" onmouseover="this.className='a2';" onmouseout="this.className='a1';">
 		      <td><%=StringUtils.nullToStr(linkman.getName()) %></td>
 		      <td><%=StringUtils.nullToStr(linkman.getLx()) %></td>
+		      <td><%=StringUtils.nullToStr(linkman.getZw()) %></td>
 		      <td><%=StringUtils.nullToStr(linkman.getYddh()) %> </td>
 		      <td><%=StringUtils.nullToStr(linkman.getGzdh()) %></td>
 		      <td><%=StringUtils.nullToStr(linkman.getMail()) %></td>
-		      <td><%=StringUtils.nullToStr(linkman.getQtlx()) %></td>
+		      <td><%=StringUtils.nullToStr(linkman.getQq()) %></td>
+		      <td><%=StringUtils.nullToStr(linkman.getMsn()) %></td>
 		      <td><%=StringUtils.nullToStr(linkman.getRemark()) %></td>
 	        </tr>
 	        <%
