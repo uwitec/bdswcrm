@@ -2592,6 +2592,9 @@
         <action name="viewCnfkd" class="cnfkdAction" method="edit">
             <result name="success">/WEB-INF/pages/cnfkd/cnfkd_view.jsp</result>
         </action>
+        <action name="delCnfkd" class="cnfkdAction" method="del">
+            <result name="success" type="redirect">listCnfkd.html</result>
+        </action>        
         <!-- 出纳付款单 -->
         
         <!-- 备忘录开始 -->
