@@ -68,6 +68,8 @@ int count_wrk = 0; //未入库数
 List list = cgfptjService.getCgfpHzList(start_date,end_date,client_name);
 String gysbh="";
 String gysbhNext="";
+double cgmoneyNext=0;
+String cgnumsNext="0";
 if(list != null && list.size()>0)
 {
 	for(int i=0;i<list.size();i++)
@@ -80,15 +82,17 @@ if(list != null && list.size()>0)
 		String cgnums=StringUtils.nullToStr(map.get("cgnums"));
 				
 		double cgmoney = map.get("cgmoney")==null?0:((Double)map.get("cgmoney")).doubleValue();	
-		
+		if((i+1)!=list.size())
+		{
 		Map mapNext = (Map)list.get(i+1);
 		gysbhNext = StringUtils.nullToStr(mapNext.get("gysbh"));	
-		String cgnumsNext=StringUtils.nullToStr(mapNext.get("cgnums"));
+		cgnumsNext=StringUtils.nullToStr(mapNext.get("cgnums"));
 				
-		double cgmoneyNext = mapNext.get("cgmoney")==null?0:((Double)mapNext.get("cgmoney")).doubleValue();			
+		cgmoneyNext = mapNext.get("cgmoney")==null?0:((Double)mapNext.get("cgmoney")).doubleValue();		
+		}	
 %>
 		<TR>
-			<TD class=ReportItem><%=gysbh %></TD>
+			<TD class=ReportItemXh><%=gysbh %></TD>
 			<TD class=ReportItem>
 			<a href="getCgfpTjMxResult.html?start_date=<%=start_date %>&end_date=<%=end_date %>&client_name=<%=gysbh %>"><%=gysmc %></a>&nbsp;
 			</TD>		
@@ -102,7 +106,7 @@ if(list != null && list.size()>0)
 		hj_wrk+=cgmoney;		
 		count_wrk+=new Integer(cgnums).intValue();
 		}
-		else if((state.equals("已入库"))&& (!(gysbh.equals(gysbhNext))))
+		else if((state.equals("已入库")))
 		{
 		%>			
 			<TD class=ReportItem>&nbsp;</TD>
@@ -119,8 +123,7 @@ if(list != null && list.size()>0)
 		{		
 		%>
 			<TD class=ReportItemMoney><%=cgnumsNext %>&nbsp;</TD>
-			<TD class=ReportItemMoney><%=JMath.round(cgmoneyNext,2) %>&nbsp;</TD>
-		</TR>
+			<TD class=ReportItemMoney><%=JMath.round(cgmoneyNext,2) %>&nbsp;</TD>		
 		<%
 		hj_rk+=cgmoneyNext;		
 		count_rk+=new Integer(cgnumsNext).intValue();
@@ -134,7 +137,9 @@ if(list != null && list.size()>0)
 		<%
 		}
 		}
-		
+		%>
+		</TR>
+		<%	
 	  }
 	}
 %>	

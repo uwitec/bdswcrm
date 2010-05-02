@@ -67,10 +67,10 @@ if(list != null && list.size()>0)
 		double total = map.get("total")==null?0:((Double)map.get("total")).doubleValue();
 %>
 		<TR>
-			<TD class=ReportItem><%=cg_date %></TD>
-			<TD class=ReportItem><a href="#"  onclick="openWin('viewJhd.html?id=<%=jhd_id %>','采购订单');" title="点击查看原始单据"><%=jhd_id %></a></TD>
+			<TD class=ReportItemXh><%=cg_date %></TD>
+			<TD class=ReportItemXh><a href="#"  onclick="openWin('viewJhd.html?id=<%=jhd_id %>','采购订单');" title="点击查看原始单据"><%=jhd_id %></a></TD>
 			<TD class=ReportItemMoney><%=JMath.round(total,2) %></TD>
-			<TD class=ReportItemMoney><%=state %></TD>
+			<TD class=ReportItemXh><%=state %></TD>
 		</TR>
 	
 <%
