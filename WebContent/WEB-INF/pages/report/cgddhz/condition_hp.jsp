@@ -6,11 +6,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
-<script language='JavaScript' src="js/selClient.js"></script>
-<script type="text/javascript" src="js/prototype-1.4.0.js"></script>
-<style>
-	.selectTip{background-color:#009;color:#fff;}
-</style>
 <script type="text/javascript">
 	function openClientWin(){
 		var destination = "selectClient.html";
@@ -31,7 +26,7 @@
 	}		
 </script>
 </head>
-<body onload="initClientTip();">
+<body>
 <form name="reportForm" action="getHpcgddHzCondition.html" method="post">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
 	<thead>
@@ -56,8 +51,8 @@
 			<input type="hidden" name="productKind" id="product_kind" value="">
 			<img src="images/select.gif" align="absmiddle" title="点击选择类别" border="0" onclick="openWin();" style="cursor:hand">
 		</td>	
-		<td class="a1">商品名称</td>
-		<td class="a4">
+		<td class="a1" width="15%">商品名称</td>
+		<td class="a4" width="35%">
 			<input type="text" name="product_name" id="product_name" value="" size="30">
 		</td>		
 	</tr>
