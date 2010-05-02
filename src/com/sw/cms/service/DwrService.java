@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.sw.cms.dao.AccountsDAO;
 import com.sw.cms.dao.BxdDAO;
 import com.sw.cms.dao.CkdDAO;
 import com.sw.cms.dao.ClientsDAO;
@@ -19,6 +20,7 @@ import com.sw.cms.dao.StoreDAO;
 import com.sw.cms.dao.SysInitSetDAO;
 import com.sw.cms.dao.UserDAO;
 import com.sw.cms.dao.XsdDAO;
+import com.sw.cms.model.Accounts;
 import com.sw.cms.model.Clients;
 import com.sw.cms.model.Product;
 import com.sw.cms.model.SysInitSet;
@@ -52,6 +54,8 @@ public class DwrService {
 	private CkdDAO ckdDao;
 
 	private ClientsLinkmanDAO clientsLinkmanDao;
+	
+	private AccountsDAO accountsDao;
 
 	public LsdDAO getLsdDao() {
 		return lsdDao;
@@ -534,6 +538,19 @@ public class DwrService {
 	public String getLxrMailByClientType(String clientType) {
 		return clientsLinkmanDao.getLxrMailByClientType(clientType);
 	}
+	
+	
+	/**
+	 * 根据账号ID取账号信息
+	 * @param id
+	 * @return
+	 */
+	public Accounts getAccountsById(String id){
+		for (int i = id.length(); i < 4; i++) {
+			id = "0" + id;
+		}
+		return accountsDao.getAccountObj(id);
+	}
 
 	public ClientsDAO getClientsDao() {
 		return clientsDao;
@@ -613,6 +630,14 @@ public class DwrService {
 
 	public void setClientsLinkmanDao(ClientsLinkmanDAO clientsLinkmanDao) {
 		this.clientsLinkmanDao = clientsLinkmanDao;
+	}
+
+	public AccountsDAO getAccountsDao() {
+		return accountsDao;
+	}
+
+	public void setAccountsDao(AccountsDAO accountsDao) {
+		this.accountsDao = accountsDao;
 	}
 
 }

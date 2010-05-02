@@ -69,9 +69,9 @@ public class CnfkdDAO extends JdbcBaseDAO {
 	 */
 	public void updateCnfkd(Cnfkd cnfkd){
 		String sql = "update cnfkd set fk_date=?,client_name=?,bank_no=?,fkje=?,fklx=?,lxr=?,fax=?,tel=?," +
-				"fkfs=?,fkzh=?,remark=?,state=?,czr=?,cz_date=now(),cgfk_id=?,client_all_name=?,jsr=? where id=?";
+				"fkfs=?,fkzh=?,remark=?,state=?,czr=?,cz_date=now(),cgfk_id=?,client_all_name=?,jsr=?,has_fy=?,fy_type=?,fy_account=?,fy_je=? where id=?";
 
-		Object[] param = new Object[17];
+		Object[] param = new Object[21];
 		
 		param[0] = cnfkd.getFk_date();
 		param[1] = cnfkd.getClient_name();
@@ -89,7 +89,11 @@ public class CnfkdDAO extends JdbcBaseDAO {
 		param[13] = cnfkd.getCgfk_id();
 		param[14] = cnfkd.getClient_all_name();
 		param[15] = cnfkd.getJsr();
-		param[16] = cnfkd.getId();
+		param[16] = cnfkd.getHas_fy();
+		param[17] = cnfkd.getFy_type();
+		param[18] = cnfkd.getFy_account();
+		param[19] = cnfkd.getFy_je();
+		param[20] = cnfkd.getId();
 		
 		this.getJdbcTemplate().update(sql,param);
 	}

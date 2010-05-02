@@ -71,6 +71,9 @@ public class CnfkdAction extends BaseAction {
 			if(cnfkd.getFk_date() == null || cnfkd.getFk_date().equals("")){
 				cnfkd.setFk_date(DateComFunc.getToday());
 			}
+			if(cnfkd.getHas_fy() == null || cnfkd.getHas_fy().equals("")){
+				cnfkd.setHas_fy("ÊÇ");
+			}
 			accountList = accountsService.getAccountList();
 			arryFkfs = sjzdService.getSjzdXmxxByZdId("SJZD_FKFS");
 			return SUCCESS;

@@ -28,6 +28,11 @@ public class Cnfkd {
 	private String cgfk_id;
 	private String jsr;
 	
+	private String has_fy = "ÊÇ";
+	private String fy_type;
+	private String fy_account;
+	private double fy_je;
+	
 	public String getId() {
 		return id;
 	}
@@ -135,6 +140,30 @@ public class Cnfkd {
 	}
 	public void setJsr(String jsr) {
 		this.jsr = jsr;
+	}
+	public String getHas_fy() {
+		return has_fy;
+	}
+	public void setHas_fy(String hasFy) {
+		has_fy = hasFy;
+	}
+	public String getFy_type() {
+		return fy_type;
+	}
+	public void setFy_type(String fyType) {
+		fy_type = fyType;
+	}
+	public String getFy_account() {
+		return fy_account;
+	}
+	public void setFy_account(String fyAccount) {
+		fy_account = fyAccount;
+	}
+	public double getFy_je() {
+		return fy_je;
+	}
+	public void setFy_je(double fyJe) {
+		fy_je = fyJe;
 	}
 
 }

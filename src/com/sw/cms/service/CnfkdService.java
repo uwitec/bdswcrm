@@ -7,12 +7,17 @@ import com.sw.cms.dao.AccountDzdDAO;
 import com.sw.cms.dao.AccountsDAO;
 import com.sw.cms.dao.CgfkDAO;
 import com.sw.cms.dao.CnfkdDAO;
+import com.sw.cms.dao.QtzcDAO;
+import com.sw.cms.dao.UserDAO;
 import com.sw.cms.dao.YufukDAO;
 import com.sw.cms.model.AccountDzd;
 import com.sw.cms.model.Cgfk;
 import com.sw.cms.model.Cnfkd;
 import com.sw.cms.model.Page;
+import com.sw.cms.model.Qtzc;
+import com.sw.cms.model.SysUser;
 import com.sw.cms.model.Yufuk;
+import com.sw.cms.util.StringUtils;
 
 /**
  * 出纳付款单
@@ -26,6 +31,8 @@ public class CnfkdService {
 	private AccountDzdDAO accountDzdDao;
 	private YufukDAO yufukDao;	
 	private CgfkDAO cgfkDao;
+	private QtzcDAO qtzcDao;
+	private UserDAO userDao;
 
 	
 	/**
@@ -76,6 +83,11 @@ public class CnfkdService {
 			
 			//更新账户金额
 			accountsDao.updateAccountJe(cnfkd.getFkzh(), cnfkd.getFkje());
+			
+			//如果出纳付款单包括费用
+			if(cnfkd.getHas_fy().equals("是")){
+				this.saveQtzc(cnfkd);
+			}
 		}
 	}
 	
@@ -149,6 +161,59 @@ public class CnfkdService {
 	}
 	
 	
+	/**
+	 * 根据销售单信息添加刷卡支出费用
+	 * @param xsd
+	 */
+	private void saveQtzc(Cnfkd cnfkd){
+		Qtzc qtzc = new Qtzc();
+		
+		String id = qtzcDao.getQtzcID();
+		
+		String dept = "";
+		if(!StringUtils.nullToStr(cnfkd.getJsr()).equals("")){
+			dept = ((SysUser)userDao.getUser(cnfkd.getJsr())).getDept();
+		}
+		
+		qtzc.setId(id);
+		qtzc.setZc_date(cnfkd.getFk_date());
+		qtzc.setType(cnfkd.getFy_type());
+		qtzc.setZcje(cnfkd.getFy_je());
+		qtzc.setZczh(cnfkd.getFy_account());
+		qtzc.setJsr(cnfkd.getJsr());
+		qtzc.setRemark("一般费用，由出纳付款单[" + cnfkd.getId() + "]自动生成");
+		qtzc.setCzr(cnfkd.getCzr());
+		qtzc.setState("已提交");
+		qtzc.setYwy(cnfkd.getJsr());
+		qtzc.setSqr(cnfkd.getJsr());
+		qtzc.setYwy_dept(dept);
+		qtzc.setZcxm("付款手续费");
+		qtzc.setFklx(cnfkd.getFkfs());
+		qtzc.setFysq_id("无");
+		
+		qtzcDao.saveQtzc(qtzc);  //保存其它支出（一般费用）
+		
+		accountsDao.updateAccountJe(cnfkd.getFy_account(),cnfkd.getFy_je()); //修改账户金额
+		
+		double jyje = 0 - cnfkd.getFy_je();
+		AccountDzd accountDzd = new AccountDzd();
+		accountDzd.setAccount_id(cnfkd.getFy_account());
+		accountDzd.setJyje(jyje);		
+		double zhye = 0;
+		Map map = accountsDao.getAccounts(cnfkd.getFy_account());
+		if(map != null){
+			zhye = (map.get("dqje")==null?0:((Double)map.get("dqje")).doubleValue());
+		}		
+		accountDzd.setZhye(zhye + jyje);
+		accountDzd.setRemark("一般费用，编号[" + id + "]");
+		accountDzd.setCzr(cnfkd.getCzr());
+		accountDzd.setJsr(cnfkd.getJsr());
+		accountDzd.setAction_url("viewQtzc.html?id=" + id);		
+		accountDzdDao.addDzd(accountDzd);   //添加资金交易记录
+		
+	}
+	
+	
 	public Cnfkd getCnfkd(String id){
 		return cnfkdDao.getCnfkd(id);
 	}
@@ -201,6 +266,26 @@ public class CnfkdService {
 
 	public void setCgfkDao(CgfkDAO cgfkDao) {
 		this.cgfkDao = cgfkDao;
+	}
+
+
+	public QtzcDAO getQtzcDao() {
+		return qtzcDao;
+	}
+
+
+	public void setQtzcDao(QtzcDAO qtzcDao) {
+		this.qtzcDao = qtzcDao;
+	}
+
+
+	public UserDAO getUserDao() {
+		return userDao;
+	}
+
+
+	public void setUserDao(UserDAO userDao) {
+		this.userDao = userDao;
 	}
 	
 }

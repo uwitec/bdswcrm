@@ -3,6 +3,7 @@ package com.sw.cms.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.sw.cms.dao.base.BeanRowMapper;
 import com.sw.cms.dao.base.JdbcBaseDAO;
 import com.sw.cms.model.Accounts;
 import com.sw.cms.util.DateComFunc;
@@ -70,6 +71,17 @@ public class AccountsDAO extends JdbcBaseDAO {
 	public Map getAccounts(String id){
 		String sql = "select * from accounts where id='" + id + "'";
 		return this.getJdbcTemplate().queryForMap(sql);
+	}
+	
+	
+	/**
+	 * 取账号信息，返回对象
+	 * @param id
+	 * @return
+	 */
+	public Accounts getAccountObj(String id){
+		String sql = "select * from accounts where id='" + id + "'";
+		return (Accounts)this.queryForObject(sql, new BeanRowMapper(Accounts.class));
 	}
 	
 	
@@ -205,5 +217,4 @@ public class AccountsDAO extends JdbcBaseDAO {
 		return curId;
 	}
 	
-
 }
