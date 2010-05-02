@@ -681,6 +681,7 @@ INSERT INTO `column_funcs` VALUES ('005001','FC0120');
 --增加售后服务单中联系电话的长度
 ALTER TABLE `sfd` MODIFY COLUMN `mobile` VARCHAR(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL;
 
+
 ALTER TABLE `thd` MODIFY COLUMN `fpxx` VARCHAR(200) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL;
 
 2010-04-23修改
@@ -710,3 +711,13 @@ INSERT INTO `funcs`(`func_id`,`func_name`,`func_ms`,`url`,`img`,`xh`,`ywflag`,`f
 ('FC0208','供应商采购订单汇总','供应商采购订单汇总','showClientcgddHzCondition.html','124.gif',19,'1','2');
 
 INSERT INTO `column_funcs` VALUES ('002002','FC0208');
+
+2010-05-02修改
+--修改采购统计名称
+DELETE FROM `funcs` where `func_id`='FC0207';
+INSERT INTO `funcs`(`func_id`,`func_name`,`func_ms`,`url`,`img`,`xh`,`ywflag`,`funcflag`)  values
+('FC0207','货品采购执行汇总','货品采购订单执行汇总','showHpcgddHzCondition.html','123.gif',18,'1','2');
+
+DELETE FROM `funcs` where `func_id`='FC0208';
+INSERT INTO `funcs`(`func_id`,`func_name`,`func_ms`,`url`,`img`,`xh`,`ywflag`,`funcflag`)  values
+('FC0208','供应商采购执行汇总','供应商采购订单执行汇总','showClientcgddHzCondition.html','124.gif',19,'1','2');
