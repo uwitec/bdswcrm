@@ -47,8 +47,9 @@ public class CnfkdService {
 	public void updateCnfkd(Cnfkd cnfkd){
 		
 		Cnfkd tempCnfkd = cnfkdDao.getCnfkd(cnfkd.getId());
-		//如果出纳付款单状态为已支付，返回不做任何操作
-		if(tempCnfkd.getState().equals("已支付")){
+		
+		//如果出纳付款单状态为退回或已支付，返回不做任何操作
+		if(tempCnfkd == null || tempCnfkd.getState().equals("已支付")){
 			return;
 		}
 		
@@ -75,6 +76,30 @@ public class CnfkdService {
 			
 			//更新账户金额
 			accountsDao.updateAccountJe(cnfkd.getFkzh(), cnfkd.getFkje());
+		}
+	}
+	
+	
+	/**
+	 * 退回出纳付款单
+	 * @param id
+	 */
+	public void delCnfkd(String id){
+		Cnfkd tempCnfkd = cnfkdDao.getCnfkd(id);
+		
+		//如果出纳付款单状态为退回或已支付，返回不做任何操作
+		if(tempCnfkd == null || tempCnfkd.getState().equals("已支付")){
+			return;
+		}
+		
+		//删除出纳付款单
+		cnfkdDao.delCnfkd(id);
+		
+		//更新对应采购付款申请状态
+		Cgfk cgfk = (Cgfk)cgfkDao.getCgfk(tempCnfkd.getId());
+		if(cgfk != null){
+			cgfk.setState("出纳退回");
+			cgfkDao.updateCgfkStat(cgfk);
 		}
 	}
 	

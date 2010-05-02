@@ -101,6 +101,22 @@ public class CnfkdAction extends BaseAction {
 		}
 	}
 	
+	
+	/**
+	 * 退回出纳付款单
+	 * @return
+	 */
+	public String del(){
+		try{
+			cnfkdService.delCnfkd(id);
+			return SUCCESS;
+		}catch(Exception e){
+			log.error("退回纳付款单错误，原因:" + e.getMessage());
+			e.printStackTrace();
+			return ERROR;
+		}
+	}
+	
 
 	public Page getCnfkdPage() {
 		return cnfkdPage;

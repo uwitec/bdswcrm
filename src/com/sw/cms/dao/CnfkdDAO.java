@@ -123,6 +123,15 @@ public class CnfkdDAO extends JdbcBaseDAO {
 	
 	
 	/**
+	 * 删除出纳付款单
+	 * @param id
+	 */
+	public void delCnfkd(String id){
+		String sql = "delete from cnfkd where id='" + id + "'";
+		this.getJdbcTemplate().update(sql);
+	}
+	
+	/**
 	 * 取当前可用的序列号
 	 * @return
 	 */
