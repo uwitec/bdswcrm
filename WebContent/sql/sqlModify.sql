@@ -702,13 +702,13 @@ INSERT INTO `column_funcs` VALUES ('007003','FC0206');
 
 2010-05-02修改
 --修改采购统计名称
-DELETE FROM `funcs` where `func_id`='FC0207';
 INSERT INTO `funcs`(`func_id`,`func_name`,`func_ms`,`url`,`img`,`xh`,`ywflag`,`funcflag`)  values
 ('FC0207','货品采购执行汇总','货品采购订单执行汇总','showHpcgddHzCondition.html','123.gif',18,'1','2');
+INSERT INTO `column_funcs` VALUES ('002002','FC0207');
 
-DELETE FROM `funcs` where `func_id`='FC0208';
 INSERT INTO `funcs`(`func_id`,`func_name`,`func_ms`,`url`,`img`,`xh`,`ywflag`,`funcflag`)  values
 ('FC0208','供应商采购执行汇总','供应商采购订单执行汇总','showClientcgddHzCondition.html','124.gif',19,'1','2');
+INSERT INTO `column_funcs` VALUES ('002002','FC0208');
 
 --修改出纳付款单添加费用相应字段
 ALTER TABLE `cnfkd` ADD COLUMN `has_fy` VARCHAR(20) AFTER `client_all_name`,
