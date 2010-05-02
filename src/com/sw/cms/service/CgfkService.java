@@ -176,7 +176,15 @@ public class CgfkService {
 	 * @param state
 	 */
 	public void doSp(String id,String state,String remark){
+		
 		Cgfk cgfk = (Cgfk)cgfkDao.getCgfk(id);
+		
+		//如果采购付款已完成审批，不做任何处理，返回
+		String tempState = cgfk.getState();
+		if(tempState.equals("审批通过") || tempState.equals("审批不通过") || tempState.equals("已付款")){
+			return;
+		}
+		
 		cgfk.setRemark(remark);
 		List cgfkDescs = cgfkDao.getCgfkDescObj(id);
 		

@@ -9,6 +9,7 @@ import com.sw.cms.dao.QtzcDAO;
 import com.sw.cms.model.AccountDzd;
 import com.sw.cms.model.Page;
 import com.sw.cms.model.Qtzc;
+import com.sw.cms.util.StringUtils;
 
 public class QtzcService {
 	
@@ -44,10 +45,18 @@ public class QtzcService {
 	
 	
 	/**
-	 * 更新其它支出
+	 * 更新一般费用
 	 * @param qtsr
 	 */
 	public void updateQtzc(Qtzc qtzc){
+		
+		//如果一般费用已经支出或退回不做任何操作
+		Qtzc tempQtzc = (Qtzc)qtzcDao.getQtzc(qtzc.getId());
+		
+		if(tempQtzc == null || tempQtzc.getState().equals("已提交")){
+			return;
+		}
+		
 		qtzcDao.updateQtzc(qtzc);
 		
 		if(qtzc.getState().equals("已提交")){
@@ -74,11 +83,26 @@ public class QtzcService {
 	
 	
 	/**
-	 * 删除其它支出
+	 * 一般费用出纳退回
 	 * @param id
 	 */
 	public void delQtzc(String id){
+		
+		Qtzc qtzc = (Qtzc)qtzcDao.getQtzc(id);
+		
+		//如果一般费用已经支出或退回不做任何操作
+		if(qtzc == null || qtzc.getState().equals("已提交")){
+			return;
+		}
+		
 		qtzcDao.delQtzc(id);
+		
+		if(qtzc != null){
+			String fysq_id = StringUtils.nullToStr(qtzc.getFysq_id());
+			if(!fysq_id.equals("")){
+				fysqDao.updateFysqState(fysq_id, "出纳退回");
+			}
+		}
 	}
 	
 	
