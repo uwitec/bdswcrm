@@ -5,8 +5,26 @@
 <title>出纳付款单</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+function chgHasFy(vl){
+	if(vl == "否"){
+		document.getElementById("fy_tdobj1").style.display = "none";
+		document.getElementById("fy_tdobj2").style.display = "none";
+		document.getElementById("fy_tdobj3").style.display = "none";
+
+		document.getElementById("fy_type").value = "";
+		document.getElementById("fy_type_show").value = "";
+		document.getElementById("fy_je").value = "0.00";
+		document.getElementById("fy_account").value = "";
+	}else{
+		document.getElementById("fy_tdobj1").style.display = "";
+		document.getElementById("fy_tdobj2").style.display = "";
+		document.getElementById("fy_tdobj3").style.display = "";
+	}
+}
+</script>
 </head>
-<body>
+<body onload="chgHasFy('<ww:property value="%{cnfkd.has_fy}"/>');">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
@@ -65,6 +83,28 @@
 		<td class="a1">备注</td>
 		<td class="a2" colspan="3"><ww:property value="%{cnfkd.remark}"/></td>	
 	</tr>			
+</table>
+<BR>
+<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
+	<thead>
+	<tr>
+		<td colspan="4">相关费用</td>
+	</tr>
+	</thead>	
+	<tr>
+		<td class="a1" width="15%">是否添加费用</td>
+		<td class="a2" width="35%"><ww:property value="%{cnfkd.has_fy}"/></td>	
+		<td class="a1" width="15%" id="fy_tdobj1">费用类型</td>
+		<td class="a2" width="35%" id="fy_tdobj2"><ww:property value="%{getFyTypeName(cnfkd.fy_type)}"/></td>
+	</tr>	
+	<tr id="fy_tdobj3">
+		<td class="a1">费用支付账号</td>
+		<td class="a2"><ww:property value="%{getAccountName(cnfkd.fy_account)}"/></td>
+		<td class="a1">费用金额</td>
+		<td class="a2"><ww:property value="%{getText('global.format.double',{cnfkd.fy_je})}"/></td>									
+	</tr>
+</table>
+<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">		
 	<tr height="35">
 		<td class="a1" colspan="4">
 			<input type="button" name="button1" value="关 闭" class="css_button2" onclick="window.close();">

@@ -707,3 +707,10 @@ INSERT INTO `funcs`(`func_id`,`func_name`,`func_ms`,`url`,`img`,`xh`,`ywflag`,`f
 DELETE FROM `funcs` where `func_id`='FC0208';
 INSERT INTO `funcs`(`func_id`,`func_name`,`func_ms`,`url`,`img`,`xh`,`ywflag`,`funcflag`)  values
 ('FC0208','供应商采购执行汇总','供应商采购订单执行汇总','showClientcgddHzCondition.html','124.gif',19,'1','2');
+
+--修改出纳付款单添加费用相应字段
+ALTER TABLE `cnfkd` ADD COLUMN `has_fy` VARCHAR(20) AFTER `client_all_name`,
+ ADD COLUMN `fy_type` VARCHAR(45) AFTER `has_fy`,
+ ADD COLUMN `fy_account` VARCHAR(20) AFTER `fy_type`,
+ ADD COLUMN `fy_je` DOUBLE DEFAULT 0 AFTER `fy_account`;
+ 

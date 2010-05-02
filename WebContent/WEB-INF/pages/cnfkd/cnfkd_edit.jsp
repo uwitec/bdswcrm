@@ -24,6 +24,19 @@ function saveInfo(vl){
 		return;
 	}
 	if(!InputValid(document.getElementById("fzr"),1,"string",1,1,20,"出纳")){return; }
+
+	if(document.getElementById("has_fy是").checked){
+		if(document.getElementById("fy_type").value == ""){
+			alert("费用类型不能为空，请选择");
+			return;
+		}
+		if(document.getElementById("fy_account").value == ""){
+			alert("费用支付账号不能为空，请选择");
+			return;
+		}
+		if(!InputValid(document.getElementById("fy_je"),1,"float",1,1,999999999,"费用金额")){	 return; }			
+	}
+	
 	if(vl == "1"){
 		document.getElementById("state").value = "待支付";
 		document.cnfkdForm.submit();
@@ -38,9 +51,33 @@ function saveInfo(vl){
 	document.cnfkdForm.btnSub.disabled = true;
 	document.cnfkdForm.btnSave.disabled = true;
 }
+
+function openFyType(){
+	var destination = "selFyType.html";
+	var fea ='width=400,height=400,left=' + (screen.availWidth-400)/2 + ',top=' + (screen.availHeight-400)/2 + ',directories=no,localtion=no,menubar=no,status=yes,toolbar=no,scrollbars=yes,resizeable=no';
+	
+	window.open(destination,'费用类别',fea);	
+}
+
+function chgHasFy(vl){
+	if(vl == "否"){
+		document.getElementById("fy_tdobj1").style.display = "none";
+		document.getElementById("fy_tdobj2").style.display = "none";
+		document.getElementById("fy_tdobj3").style.display = "none";
+
+		document.getElementById("fy_type").value = "";
+		document.getElementById("fy_type_show").value = "";
+		document.getElementById("fy_je").value = "0.00";
+		document.getElementById("fy_account").value = "";
+	}else{
+		document.getElementById("fy_tdobj1").style.display = "";
+		document.getElementById("fy_tdobj2").style.display = "";
+		document.getElementById("fy_tdobj3").style.display = "";
+	}
+}
 </script>
 </head>
-<body onload="initFzrTip();">
+<body onload="initFzrTip();chgHasFy('<ww:property value="%{cnfkd.has_fy}"/>');">
 <form name="cnfkdForm" action="updateCnfkd.html" method="post">
 <ww:hidden name="cnfkd.state" id="state" value="" theme="simple"></ww:hidden>
 <ww:hidden name="cnfkd.cgfk_id" id="cgfk_id" value="%{cnfkd.cgfk_id}" theme="simple"></ww:hidden>
@@ -133,7 +170,40 @@ function saveInfo(vl){
 		<td class="a2" colspan="3">
 			<ww:textfield name="cnfkd.remark"  id="remark" value="%{cnfkd.remark}" theme="simple" maxlength="250" cssStyle="width:95%"/>
 		</td>	
-	</tr>			
+	</tr>	
+</table>
+<BR>
+<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
+	<thead>
+	<tr>
+		<td colspan="4">相关费用</td>
+	</tr>
+	</thead>	
+	<tr>
+		<td class="a1" width="15%">是否添加费用</td>
+		<td class="a2" width="35%">
+			<ww:radio list="#{\"是\":'是',\"否\":'否'}" name="cnfkd.has_fy" id="has_fy" theme="simple" value="%{cnfkd.has_fy}" onclick="chgHasFy(this.value);"></ww:radio><span style="color:red">*</span>
+		</td>	
+		<td class="a1" width="15%" id="fy_tdobj1">费用类型</td>
+		<td class="a2" width="35%" id="fy_tdobj2">
+			<ww:textfield name="fy_type_show" id="fy_type_show" theme="simple" value="%{getFyTypeName(cnfkd.fy_type)}" onclick="openFyType();" readonly="true" cssStyle="width:85%"/><span style="color:red">*</span>
+			<ww:hidden name="cnfkd.fy_type" id="fy_type" theme="simple" value="%{cnfkd.fy_type}"/>
+			<img src="images/select.gif" align="absmiddle" title="选择费用类型" border="0" onclick="openFyType();" style="cursor:hand">			
+		</td>
+	</tr>	
+	<tr id="fy_tdobj3">
+		<td class="a1">费用支付账号</td>
+		<td class="a2">
+			<ww:select name="cnfkd.fy_account" id="fy_account" list="%{accountList}" listKey="id" listValue="name" theme="simple"  emptyOption="true" cssStyle="width:81%"></ww:select><span style="color:red">*</span>
+		</td>
+		<td class="a1">费用金额</td>
+		<td class="a2">
+			<ww:textfield name="cnfkd.fy_je" id="fy_je" onblur="setValue()" value="%{getText('global.format.double',{cnfkd.fy_je})}" theme="simple" cssStyle="width:85%"></ww:textfield>
+            <font color="red">*</font>	
+		</td>									
+	</tr>
+</table>
+<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">		
 	<tr height="35">
 		<td class="a1" colspan="4">
 			<input type="button" name="btnSave" value=" 草 稿 " class="css_button2" onclick="saveInfo('1');">&nbsp;&nbsp;

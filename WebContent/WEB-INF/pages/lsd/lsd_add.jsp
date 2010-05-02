@@ -366,6 +366,23 @@ String flag = StringUtils.nullToStr(VS.findValue("flag"));
 			alert("该序列号不存在，请检查!");
 		}
 	}	
+
+
+	function dwrGetAccount(){
+		id = dwr.util.getValue("pos_id");
+		if(id == ""){
+			return;
+		}
+
+		dwrService.getAccountsById(id,setAccount);		
+	}
+
+	function setAccount(account){
+		if(account != null && account.id != null){
+			dwr.util.setValue("skzh",account.id);
+			dwr.util.setValue("zhname",account.name);
+		}
+	}
 	
 	function chgKpTyle(vD){
 
@@ -710,7 +727,7 @@ if(lsdProducts != null && lsdProducts.size()>0){
 				
 			</select>	
 			
-			<select name="lsd.pos_id" id="pos_id" style="display:none;">
+			<select name="lsd.pos_id" id="pos_id" style="display:none;" onchange="dwrGetAccount();">
 				<option value=""></option>
 			<%
 			if(posTypeList != null && posTypeList.size() > 0){

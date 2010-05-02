@@ -21,6 +21,7 @@
 			<include method="getZyProductObjBySerialNum"/> 
 			<include method="getBadProductObjBySerialNum"/>
 			<include method="getGoodProductObjBySerialNum"/>
+			<include method="getAccountsById"/>
 		</create>
 		<convert converter="bean" match="com.sw.cms.model.Product">
 			<param name="include" value="productId,productName,productXh,price,lsbj,qz_serial_num,khcbj,gf" />
@@ -29,6 +30,9 @@
 			<param name="include" value="productId,productName,productXh,qz_serial_num" />
 		</convert>
 		<convert converter="bean" match="com.sw.cms.model.SysUser"/>
+		<convert converter="bean" match="com.sw.cms.model.Accounts">
+			<param name="include" value="id,name" />
+		</convert>
 		<create javascript="msgService" creator="spring">
 			<param name="beanName" value="sysMsgService"/>
 			<include method="isHasMsgByUser"/>

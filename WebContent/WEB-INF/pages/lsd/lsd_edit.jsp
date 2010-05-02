@@ -351,6 +351,22 @@ String flag = StringUtils.nullToStr(VS.findValue("flag"));
 			alert("该序列号不存在，请检查!");
 		}
 	}	
+
+	function dwrGetAccount(){
+		id = dwr.util.getValue("pos_id");
+		if(id == ""){
+			return;
+		}
+
+		dwrService.getAccountsById(id,setAccount);		
+	}
+
+	function setAccount(account){
+		if(account != null && account.id != null){
+			dwr.util.setValue("skzh",account.id);
+			dwr.util.setValue("zhname",account.name);
+		}
+	}	
 	
 	function chgKpTyle(vl){
 		if(vl == "") vl = "普通发票";
@@ -604,7 +620,7 @@ if(lsdProducts != null && lsdProducts.size()>0){
 	<tr>
 		<td class="a1" widht="20%">客户付款方式</td>
 		<td class="a2">
-			<select name="lsd.fkfs" id="fkfs">
+			<select name="lsd.fkfs" id="fkfs" onchange="selFkfs(this.value);">
 			<%
 			if(ysfsArry != null && ysfsArry.length > 0){
 				for(int i =0;i<ysfsArry.length;i++){
@@ -617,7 +633,7 @@ if(lsdProducts != null && lsdProducts.size()>0){
 				
 			</select>
 			
-			<select name="lsd.pos_id" id="pos_id" style="display:none">
+			<select name="lsd.pos_id" id="pos_id" style="display:none" onchange="dwrGetAccount();">
 				<option value=""></option>
 			<%
 			if(posTypeList != null && posTypeList.size() > 0){
