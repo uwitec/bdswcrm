@@ -595,6 +595,7 @@ INSERT INTO `sjzd_xmxx`(zd_id,xm_name,xm_ms,xh) VALUES ('SJZD_LXRNLD','61-70','6
 INSERT INTO `sjzd_xmxx`(zd_id,xm_name,xm_ms,xh) VALUES ('SJZD_LXRNLD','70以上','70以上',0);
 
 
+--其它四家系统2010-05-02更新起始
 2010-04-05修改
 --菜单中增加发票管理
 INSERT INTO `column_mng`(`id`,`name`,`parent_id`,`xh`,`img`,`yw_flag`) 
@@ -648,6 +649,7 @@ ALTER TABLE `sys_user` ADD COLUMN `zzzt`  VARCHAR(10)  AFTER `zzmm`;
 INSERT INTO `funcs`(`func_id`,`func_name`,`func_ms`,`url`,`img`,`xh`,`ywflag`,`funcflag`)  values
 ('FC0110','采购发票统计','采购发票的统计','showCgfpCondtion.html','127.gif',82,'1','9');
 
+--思维2010-05-02更新起始
 INSERT INTO `column_funcs` VALUES ('010002','FC0110');
 
 2010-04-16修改
