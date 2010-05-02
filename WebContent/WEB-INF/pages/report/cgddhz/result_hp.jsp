@@ -26,7 +26,7 @@ if(!product_xh.equals("")){
 %>
 <html>
 <head>
-<title>货品采购订单汇总</title>
+<title>货品采购执行汇总</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/report.css" rel="stylesheet" type="text/css" />
 <style media=print>  
@@ -38,7 +38,7 @@ if(!product_xh.equals("")){
 <TABLE  align="center" cellSpacing=0 cellPadding=0 width="99%" border=0>
 	<TBODY>
 		<TR style="BACKGROUND-COLOR: #dcdcdc;height:45;">
-		    <TD align="center" width="100%"><font style="FONT-SIZE: 16px"><B>货品采购订单汇总</B></font><br><%=con %></TD>
+		    <TD align="center" width="100%"><font style="FONT-SIZE: 16px"><B>货品采购执行汇总</B></font><br><%=con %></TD>
 		</TR>
 	</TBODY>
 </TABLE>
@@ -89,7 +89,7 @@ if(list != null && list.size()>0){
 		}		
 %>
 		<TR>
-			<TD class=ReportItem><%=product_id %>&nbsp;</TD>
+			<TD class=ReportItemXh><%=product_id %>&nbsp;</TD>
 			<TD class=ReportItem><a href="getHpcgddMxCondition.html?product_id=<%=product_id %>&start_date=<%=start_date %>&end_date=<%=end_date %>"><%=StringUtils.nullToStr(map.get("product_name")) %></a>&nbsp;</TD>			
 			<TD class=ReportItem><%=StringUtils.nullToStr(map.get("product_xh")) %>&nbsp;</TD>
 		<% 

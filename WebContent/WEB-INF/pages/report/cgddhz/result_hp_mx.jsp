@@ -20,7 +20,7 @@ List list = cgddhzService.getDjmxList(product_id, start_date, end_date);
 
 <html>
 <head>
-<title>货品采购订单汇总--单据列表</title>
+<title>货品采购执行汇总--单据列表</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/report.css" rel="stylesheet" type="text/css" />
 <style media=print>  
@@ -39,7 +39,7 @@ List list = cgddhzService.getDjmxList(product_id, start_date, end_date);
 <TABLE  align="center" cellSpacing=0 cellPadding=0 width="99%" border=0>
 	<TBODY>
 		<TR style="BACKGROUND-COLOR: #dcdcdc;height:30;">
-		    <TD align="center" width="100%"><font style="FONT-SIZE: 16px"><B>货品采购订单汇总--单据列表</B></font></TD>
+		    <TD align="center" width="100%"><font style="FONT-SIZE: 16px"><B>货品采购执行汇总--单据列表</B></font></TD>
 		</TR>
 	</TBODY>
 </TABLE>
@@ -73,10 +73,10 @@ if(list != null && list.size()>0){
 		double je = map.get("total")==null?0:((Double)map.get("total")).doubleValue();
 %>
 		<TR>
-			<TD class=ReportItem><a href="#" onclick="openWin('<%=url + dj_id %>');"><%=dj_id %></a></TD>
+			<TD class=ReportItemXh><a href="#" onclick="openWin('<%=url + dj_id %>');"><%=dj_id %></a></TD>
 			<TD class=ReportItem><%=StaticParamDo.getClientNameById(client_name) %></TD>
 			<TD class=ReportItemMoney><%=JMath.round(je,2) %></TD>
-			<TD class=ReportItem><%=state %></TD>		
+			<TD class=ReportItemXh><%=state %></TD>		
 			<TD class=ReportItem><%=creatdate %></TD>
 			<TD class=ReportItemMoney><%=StaticParamDo.getRealNameById(jsr) %></TD>
 		</TR>

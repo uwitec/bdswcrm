@@ -2,7 +2,7 @@
 <%@ page import="com.sw.cms.util.*" %>
 <html>
 <head>
-<title>货品采购订单汇总</title>
+<title>货品采购执行汇总</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
@@ -36,7 +36,7 @@
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td colspan="2">货品采购订单汇总</td>
+		<td colspan="2">货品采购执行汇总</td>
 	</tr>
 	</thead>
 </table>

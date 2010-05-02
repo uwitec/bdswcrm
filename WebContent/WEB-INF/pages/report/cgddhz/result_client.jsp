@@ -27,7 +27,7 @@ if(!dj_id.equals("")){
 
 <html>
 <head>
-<title>供应商采购订单汇总</title>
+<title>供应商采购执行汇总</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/report.css" rel="stylesheet" type="text/css" />
 <style media=print>  
@@ -47,7 +47,7 @@ if(!dj_id.equals("")){
 <TABLE  align="center" cellSpacing=0 cellPadding=0 width="99%" border=0>
 	<TBODY>
 		<TR style="BACKGROUND-COLOR: #dcdcdc;height:45;">
-		    <TD align="center" width="100%"><font style="FONT-SIZE: 16px"><B>供应商采购订单汇总</B></font><br><%=con %></TD>
+		    <TD align="center" width="100%"><font style="FONT-SIZE: 16px"><B>供应商采购执行汇总</B></font><br><%=con %></TD>
 		</TR>
 	</TBODY>
 </TABLE>
@@ -88,7 +88,7 @@ if(list != null && list.size()>0){
 		}
 %>
 		<TR>
-			<TD class=ReportItem><%=client_id %>&nbsp;</TD>
+			<TD class=ReportItemXh><%=client_id %>&nbsp;</TD>
 			<TD class=ReportItem><a href="#" onclick="openWin('<%=dj_id %>','<%=start_date %>','<%=end_date %>','<%=client_id %>');"><%=name %></a>&nbsp;</TD>			
 			<TD class=ReportItem><%=lxr %>&nbsp;</TD>
 			<TD class=ReportItem><%=lxdh %>&nbsp;</TD>

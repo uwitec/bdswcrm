@@ -20,7 +20,7 @@ List list = cgddhzService.getClientMxList(start_date, end_date,dj_id, client_nam
 
 <html>
 <head>
-<title>供应商采购订单汇总--单据列表</title>
+<title>供应商采购执行汇总--单据列表</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/report.css" rel="stylesheet" type="text/css" />
 <style media=print>  
@@ -39,7 +39,7 @@ List list = cgddhzService.getClientMxList(start_date, end_date,dj_id, client_nam
 <TABLE  align="center" cellSpacing=0 cellPadding=0 width="99%" border=0>
 	<TBODY>
 		<TR style="BACKGROUND-COLOR: #dcdcdc;height:30;">
-		    <TD align="center" width="100%"><font style="FONT-SIZE: 16px"><B>供应商采购订单汇总--单据列表</B></font></TD>
+		    <TD align="center" width="100%"><font style="FONT-SIZE: 16px"><B>供应商采购执行汇总--单据列表</B></font></TD>
 		</TR>
 	</TBODY>
 </TABLE>
@@ -81,11 +81,11 @@ if(list != null && list.size()>0){
 		
 %>
 		<TR>
-			<TD class=ReportItem><a href="#" onclick="openWin('<%=url + id %>');"><%=id %></a></TD>					
+			<TD class=ReportItemXh><a href="#" onclick="openWin('<%=url + id %>');"><%=id %></a></TD>					
 			<TD class=ReportItem><%=StaticParamDo.getClientNameById(name) %></TD>
 			<TD class=ReportItem><%=creatdate %></TD>
 			<TD class=ReportItem><%=StaticParamDo.getRealNameById(jsr) %></TD>
-			<TD class=ReportItem><%=state %></TD>	
+			<TD class=ReportItemXh><%=state %></TD>	
 			
 			<TD class=ReportItem>&nbsp;</TD>
 			<TD class=ReportItem>&nbsp;</TD>

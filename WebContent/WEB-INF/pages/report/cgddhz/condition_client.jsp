@@ -14,7 +14,7 @@ List clientsList=(List)VS.findValue("clientsList");
 
 <html>
 <head>
-<title>供应商采购订单汇总</title>
+<title>供应商采购执行汇总</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <style>
@@ -45,7 +45,7 @@ List clientsList=(List)VS.findValue("clientsList");
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td colspan="2">供应商采购订单汇总</td>
+		<td colspan="2">供应商采购执行汇总</td>
 	</tr>
 	</thead>
 </table>
@@ -63,7 +63,7 @@ List clientsList=(List)VS.findValue("clientsList");
 		<td class="a4">
 			<input type="text" name="dj_id" id="dj_id" value="" size="20">
 		</td>
-		<td class="a1">客户名称</td>
+		<td class="a1">供应商名称</td>
 		<td class="a4">
 			<input type="text" name="client_name" id="client_name" value="" onblur="setClientValue();"  size="45"  maxlength="50">
 			<input type="hidden" name="cl " id="client_id" value="">
