@@ -81,30 +81,30 @@ Fysq fysq = (Fysq)VS.findValue("fysq");
 	<tr>
 		<td class="a1" width="15%">编号</td>
 		<td class="a2" width="35%">
-			<ww:textfield name="fysq.id" id="id" value="%{fysq.id}" theme="simple" readonly="true"/><span style="color:red">*</span>
+			<ww:textfield name="fysq.id" id="id" value="%{fysq.id}" theme="simple" readonly="true" cssStyle="width:190px"/><span style="color:red">*</span>
 		</td>
 		<td class="a1" width="15%">申请日期</td>
 		<td class="a2" width="35%">
-			<ww:textfield name="fysq.creatdate" id="creatdate" value="%{fysq.creatdate}" theme="simple" readonly="true"/><span style="color:red">*</span>
+			<ww:textfield name="fysq.creatdate" id="creatdate" value="%{fysq.creatdate}" theme="simple" readonly="true" cssStyle="width:190px"/><span style="color:red">*</span>
 		</td>				
 	</tr>
 	<tr>
 		<td class="a1" width="15%">费用申请人</td>
 		<td class="a2" width="35%">
-		 <ww:textfield name="sqr_text" id="sqr_text" theme="simple" onblur="setSqrValue();" value="%{getUserRealName(fysq.sqr)}"/>
+		 <ww:textfield name="sqr_text" id="sqr_text" theme="simple" onblur="setSqrValue();" value="%{getUserRealName(fysq.sqr)}" cssStyle="width:190px"/><font color="red">*</font>	
          <div id="sqr_tips" style="height:12px;position:absolute;left:89px; top:82px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
          </div>
-         <ww:hidden name="fysq.sqr" id="sqr" theme="simple" value="%{fysq.sqr}"/><font color="red">*</font>	
+         <ww:hidden name="fysq.sqr" id="sqr" theme="simple" value="%{fysq.sqr}"/>
 		</td>
 		<td class="a1" width="15%">对应客户</td>
 		<td class="a2" width="35%">
-			<ww:textfield name="fysq.xgkh" id="xgkh" value="%{fysq.xgkh}" theme="simple" size="30" maxLength="100"/>
+			<ww:textfield name="fysq.xgkh" id="xgkh" value="%{fysq.xgkh}" theme="simple" cssStyle="width:190px" maxLength="100"/>
 		</td>
 	</tr>
 	<tr>
 		<td class="a1" width="15%">费用使用部门</td>
 		<td class="a2">
-			<select name="fysq.ywy_dept" id="ywy_dept">
+			<select name="fysq.ywy_dept" id="ywy_dept" style="width:190px">
 				<option value=""></option>
 				<%
 				if(deptList != null &&  deptList.size()>0){
@@ -123,11 +123,12 @@ Fysq fysq = (Fysq)VS.findValue("fysq");
 					}
 				}
 				%>
-			</select><font color="red">*</font>	
+			</select>
+			<font color="red">*</font>	
 		</td>		
 		<td class="a1" width="15%">费用使用人</td>
 		<td class="a2" width="35%">
-		 <ww:textfield name="brand" id="brand" theme="simple" onblur="setValue()" value="%{getUserRealName(fysq.ywy_id)}"/>
+		 <ww:textfield name="brand" id="brand" theme="simple" onblur="setValue()" value="%{getUserRealName(fysq.ywy_id)}" cssStyle="width:190px"/>
          <div id="brandTip" style="height:12px;position:absolute;left:89px; top:82px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
          </div>
          <ww:hidden name="fysq.ywy_id" id="fzr" theme="simple" value="%{fysq.ywy_id}"/>	
@@ -136,24 +137,24 @@ Fysq fysq = (Fysq)VS.findValue("fysq");
 	<tr>
 		<td class="a1" width="15%">费用类型</td>
 		<td class="a2" width="35%">
-			<ww:textfield name="fy_type_show" id="fy_type_show" theme="simple" value="%{getFyTypeName(fysq.fy_type)}" readonly="true"/>
+			<ww:textfield name="fy_type_show" id="fy_type_show" theme="simple" value="%{getFyTypeName(fysq.fy_type)}" readonly="true" cssStyle="width:190px"/><span style="color:red">*</span>
 			<ww:hidden name="fysq.fy_type" id="fy_type" theme="simple" value="%{fysq.fy_type}"/>
 			<img src="images/select.gif" align="absmiddle" title="选择费用类型" border="0" onclick="openFyType();" style="cursor:hand">
-			<span style="color:red">*</span>
+			
 		</td>	
 		<td class="a1" width="15%">金额</td>
 		<td class="a2" width="35%">
-			<ww:textfield name="fysq.je" id="je" value="%{getText('global.format.double',{fysq.je})}" theme="simple"/><span style="color:red">*</span>
+			<ww:textfield name="fysq.je" id="je" value="%{getText('global.format.double',{fysq.je})}" theme="simple" cssStyle="width:190px"/><span style="color:red">*</span>
 		</td>
 	</tr>
 	<tr>
 		<td class="a1" width="15%">支付方式</td>
 		<td class="a2" width="35%">
-			<ww:select name="fysq.fklx" id="fklx" theme="simple" list="%{fkfs}" emptyOption="true" />
+			<ww:select name="fysq.fklx" id="fklx" theme="simple" list="%{fkfs}" emptyOption="true"  cssStyle="width:190px"/>
 		</td>	
 		<td class="a1" width="15%">支付账户</td>
 		<td class="a2">
-			<ww:textfield id="zhname"  name="zhname" value="%{getAccountName(fysq.zfzh)}" theme="simple" readonly="true"/>
+			<ww:textfield id="zhname"  name="zhname" value="%{getAccountName(fysq.zfzh)}" theme="simple" cssStyle="width:190px" readonly="true"/>
 			<ww:hidden name="fysq.zfzh" id="fkzh" value="%{fysq.zfzh}" theme="simple"/>
 			<img src="images/select.gif" align="absmiddle" title="选择账户" border="0" onclick="openAccount();" style="cursor:hand">
 		</td>									
@@ -168,14 +169,13 @@ Fysq fysq = (Fysq)VS.findValue("fysq");
 	</tr>				
 	<tr height="35">
 		<td class="a1" colspan="4">
-			<input type="button" name="btnSub" value="保存" class="css_button2" onclick="saveInfo('1');">&nbsp;
+			<input type="button" name="btnSub" value="草稿" class="css_button2" onclick="saveInfo('1');">&nbsp;
 			<input type="button" name="button2" value="提交" class="css_button2" onclick="saveInfo('2');">&nbsp;
 			<input type="button" name="button1" value="关 闭" class="css_button2" onclick="window.close();">
 		</td>
 	</tr>
 </table>
 <BR>
-<font color="red">注：“保存”指费用申请暂存，可修改，“提交”如果系统设置需审批则提交审批，如果不需要审批则直接生成待支付一般费用。</font>
 </form>
 </body>
 </html>

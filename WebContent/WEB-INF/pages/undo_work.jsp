@@ -86,7 +86,7 @@ List dspFysqList = (List)VS.findValue("dspFysqList");
 	
 	function doSpFysq(id){
 		var destination = "spFysq.html?id=" + id;
-		var fea ='width=650,height=400,left=' + (screen.availWidth-650)/2 + ',top=' + (screen.availHeight-400)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		var fea ='width=750,height=400,left=' + (screen.availWidth-750)/2 + ',top=' + (screen.availHeight-400)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
 		window.open(destination,'审批费用申请',fea);
 	}		

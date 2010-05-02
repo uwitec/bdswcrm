@@ -60,12 +60,15 @@ session.removeAttribute("messages");
 	//审批事项
 	function doSp(flag){
 		if(chkForm){
-			document.getElementById("state").value = flag;
-			
-			document.frsqForm.btnTg.disabled = true;
-			document.frsqForm.btnBtg.disabled = true;
-			
-			document.frsqForm.submit();
+			var msg = "确认" + flag + "吗？";
+			if(window.confirm(msg)){
+				document.getElementById("state").value = flag;
+				
+				document.frsqForm.btnTg.disabled = true;
+				document.frsqForm.btnBtg.disabled = true;
+				
+				document.frsqForm.submit();
+			}
 		}
 	}
 	
@@ -101,30 +104,30 @@ session.removeAttribute("messages");
 	<tr>
 		<td class="a1" width="15%">编号</td>
 		<td class="a2" width="35%">
-			<ww:textfield name="fysq.id" id="id" value="%{fysq.id}" theme="simple" readonly="true"/><span style="color:red">*</span>
+			<ww:textfield name="fysq.id" id="id" value="%{fysq.id}" theme="simple" readonly="true" cssStyle="width:190px"/><span style="color:red">*</span>
 		</td>
 		<td class="a1" width="15%">申请日期</td>
 		<td class="a2" width="35%">
-			<ww:textfield name="fysq.creatdate" id="creatdate" value="%{fysq.creatdate}" theme="simple" readonly="true"/><span style="color:red">*</span>
+			<ww:textfield name="fysq.creatdate" id="creatdate" value="%{fysq.creatdate}" theme="simple" readonly="true" cssStyle="width:190px"/><span style="color:red">*</span>
 		</td>				
 	</tr>
 	<tr>
 		<td class="a1" width="15%">费用申请人</td>
 		<td class="a2" width="35%">
-		 <ww:textfield name="sqr_text" id="sqr_text" theme="simple" onblur="setSqrValue();" value="%{getUserRealName(fysq.sqr)}"/>
+		 <ww:textfield name="sqr_text" id="sqr_text" theme="simple" onblur="setSqrValue();" value="%{getUserRealName(fysq.sqr)}" cssStyle="width:190px"/><font color="red">*</font>
          <div id="sqr_tips" style="height:12px;position:absolute;left:89px; top:82px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
          </div>
-         <ww:hidden name="fysq.sqr" id="sqr" theme="simple" value="%{fysq.sqr}"/><font color="red">*</font>	
+         <ww:hidden name="fysq.sqr" id="sqr" theme="simple" value="%{fysq.sqr}"/>	
 		</td>
 		<td class="a1" width="15%">金额</td>
 		<td class="a2" width="35%">
-			<ww:textfield name="fysq.je" id="je" value="%{getText('global.format.double',{fysq.je})}" theme="simple"/><span style="color:red">*</span>
+			<ww:textfield name="fysq.je" id="je" value="%{getText('global.format.double',{fysq.je})}" theme="simple" cssStyle="width:190px"/><span style="color:red">*</span>
 		</td>		
 	</tr>	
 	<tr>
 		<td class="a1" width="15%">费用使用部门</td>
 		<td class="a2">
-			<select name="fysq.ywy_dept" id="ywy_dept">
+			<select name="fysq.ywy_dept" id="ywy_dept" style="width:190px">
 				<option value=""></option>
 				<%
 				if(deptList != null &&  deptList.size()>0){
@@ -143,11 +146,12 @@ session.removeAttribute("messages");
 					}
 				}
 				%>
-			</select><font color="red">*</font>	
+			</select>
+			<font color="red">*</font>	
 		</td>
 		<td class="a1" width="15%">费用使用人</td>
 		<td class="a2" width="35%">
-		 <ww:textfield name="brand" id="brand" theme="simple" onblur="setValue()" value="%{getUserRealName(fysq.ywy_id)}"/>
+		 <ww:textfield name="brand" id="brand" theme="simple" onblur="setValue()" value="%{getUserRealName(fysq.ywy_id)}" cssStyle="width:190px"/>
          <div id="brandTip" style="height:12px;position:absolute;left:89px; top:82px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
          </div>
          <ww:hidden name="fysq.ywy_id" id="fzr" theme="simple" value="%{fysq.ywy_id}"/>
@@ -156,24 +160,23 @@ session.removeAttribute("messages");
 	<tr>
 		<td class="a1" width="15%">费用类型</td>
 		<td class="a2" width="35%">
-			<ww:textfield name="fy_type_show" id="fy_type_show" theme="simple" value="%{getFyTypeName(fysq.fy_type)}" readonly="true"/>
+			<ww:textfield name="fy_type_show" id="fy_type_show" theme="simple" value="%{getFyTypeName(fysq.fy_type)}" readonly="true" cssStyle="width:190px"/><span style="color:red">*</span>
 			<ww:hidden name="fysq.fy_type" id="fy_type" theme="simple" value="%{fysq.fy_type}"/>
 			<img src="images/select.gif" align="absmiddle" title="选择费用类型" border="0" onclick="openFyType();" style="cursor:hand">
-			<span style="color:red">*</span>
 		</td>
 		<td class="a1" width="15%">对应客户</td>
 		<td class="a2" width="35%">
-			<ww:textfield name="fysq.xgkh" id="xgkh" value="%{fysq.xgkh}" theme="simple" size="30" maxLength="100"/>
+			<ww:textfield name="fysq.xgkh" id="xgkh" value="%{fysq.xgkh}" theme="simple" maxLength="100" cssStyle="width:190px"/>
 		</td>							
 	</tr>
 	<tr>
 		<td class="a1" width="15%">支付方式</td>
 		<td class="a2" width="35%">
-			<ww:select name="fysq.fklx" id="fklx" theme="simple" list="%{fkfs}" emptyOption="true" />
+			<ww:select name="fysq.fklx" id="fklx" theme="simple" list="%{fkfs}" emptyOption="true"  cssStyle="width:190px"/>
 		</td>	
 		<td class="a1" width="15%">支付账户</td>
 		<td class="a2" width="35%">
-			<ww:textfield id="zhname"  name="zhname" value="%{getAccountName(fysq.zfzh)}" theme="simple" readonly="true"/>
+			<ww:textfield id="zhname"  name="zhname" value="%{getAccountName(fysq.zfzh)}" theme="simple" readonly="true" cssStyle="width:190px"/>
 			<ww:hidden name="fysq.zfzh" id="fkzh" value="%{fysq.zfzh}" theme="simple"/>
 			<img src="images/select.gif" align="absmiddle" title="选择账户" border="0" onclick="openAccount();" style="cursor:hand">
 		</td>						
@@ -186,8 +189,8 @@ session.removeAttribute("messages");
 	</tr>				
 	<tr height="35">
 		<td class="a1" colspan="4">
-			<input type="button" name="btnTg" value="审批通过" class="css_button3" onclick="doSp('审批通过');this.disabled=true;">&nbsp;
-			<input type="reset" name="btnBtg" value="审批不通过" class="css_button3" onclick="doSp('审批不通过');this.disabled=true;">&nbsp;
+			<input type="button" name="btnTg" value="审批通过" class="css_button3" onclick="doSp('审批通过');">&nbsp;
+			<input type="reset" name="btnBtg" value="审批不通过" class="css_button3" onclick="doSp('审批不通过');">&nbsp;
 			<input type="button" name="button1" value=" 关 闭 " class="css_button3" onclick="window.opener.document.myform.submit();window.close();">
 		</td>
 	</tr>

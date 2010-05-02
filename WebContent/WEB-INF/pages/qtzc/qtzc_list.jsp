@@ -34,7 +34,7 @@ String state = StringUtils.nullToStr(VS.findValue("state"));
 	}
 	
 	function del(id){
-		if(confirm("确定要删除该条记录吗！")){
+		if(confirm("确定要退回吗！")){
 			location.href = "delQtzc.html?id=" + id;
 		}
 	}
@@ -153,8 +153,9 @@ String state = StringUtils.nullToStr(VS.findValue("state"));
 		<%	
 		}else{
 		%>
-			<a href="#" class="xxlb" onclick="edit('<%=StringUtils.nullToStr(qtzc.getId()) %>');">支出</a>&nbsp;&nbsp;&nbsp;&nbsp;
-			<a href="#" class="xxlb" onclick="openWin('<%=StringUtils.nullToStr(qtzc.getId()) %>');">查看</a>&nbsp;&nbsp;&nbsp;&nbsp;			
+			<a href="#" class="xxlb" onclick="edit('<%=StringUtils.nullToStr(qtzc.getId()) %>');" title="支出">支出</a>&nbsp;&nbsp;&nbsp;&nbsp;
+			<a href="#" class="xxlb" onclick="del('<%=StringUtils.nullToStr(qtzc.getId()) %>');" title="退回">退回</a>&nbsp;&nbsp;&nbsp;&nbsp;
+			<a href="#" class="xxlb" onclick="openWin('<%=StringUtils.nullToStr(qtzc.getId()) %>');" title="查看">查看</a>		
 		<%	
 		}
 		%>
