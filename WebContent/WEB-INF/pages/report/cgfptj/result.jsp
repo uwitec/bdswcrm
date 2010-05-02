@@ -13,7 +13,11 @@ String start_date = StringUtils.nullToStr(request.getParameter("start_date"));
 String end_date = StringUtils.nullToStr(request.getParameter("end_date"));
 String client_name = StringUtils.nullToStr(request.getParameter("clientId"));
 String con = "";
-con = "日期：" + start_date + "至" + end_date + "&nbsp;&nbsp; 客户名称：" + StaticParamDo.getClientNameById(client_name);
+con = "日期：" + start_date + "至" + end_date;
+if(!client_name.equals("")){
+	con += "&nbsp;&nbsp; 客户名称：" + StaticParamDo.getClientNameById(client_name);
+}
+
 %>
 <html>
 <head>
