@@ -110,6 +110,7 @@ String orderType = (String)VS.findValue("orderType");
 				<option value="审批不通过" <%if(state.equals("审批不通过")) out.print("selected"); %>>审批不通过</option>
 				<option value="待支付" <%if(state.equals("待支付")) out.print("selected"); %>>待支付</option>
 				<option value="已支付" <%if(state.equals("已支付")) out.print("selected"); %>>已支付</option>
+				<option value="出纳退回" <%if(state.equals("出纳退回")) out.print("selected"); %>>出纳退回</option>
 			</select>&nbsp;&nbsp;
 			<input type="submit" name="buttonCx" value=" 查询 " class="css_button">	
 			<input type="button" name="buttonQk" value=" 清空 " class="css_button" onclick="clearAll();">

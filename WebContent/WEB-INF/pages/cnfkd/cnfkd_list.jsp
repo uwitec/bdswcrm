@@ -26,6 +26,12 @@
 		document.myform.state.value = "";
 	}
 
+	function del(id){
+		if(window.confirm("确认要退回吗？")){
+			location.href = "delCnfkd.html?id=" + id;
+		}
+	}
+
 	function refreshPage(){
 		document.myform.action = "listCnfkd.html";
 		document.myform.submit();
@@ -81,6 +87,7 @@
 			<td>
 				<ww:if test="%{state=='待支付'}">
 				<a href="#" onclick="edit('<ww:property value="%{id}" />');">付款</a>&nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="#" onclick="del('<ww:property value="%{id}" />');">退回</a>&nbsp;&nbsp;&nbsp;&nbsp;
 				</ww:if>			
 				<a href="#" onclick="view('<ww:property value="%{id}" />');">查看</a>		
 			</td>
