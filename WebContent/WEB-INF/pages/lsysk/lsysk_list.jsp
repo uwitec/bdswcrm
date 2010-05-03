@@ -15,6 +15,7 @@ String id = (String)VS.findValue("id");
 String client_name = (String)VS.findValue("client_name");
 String ys_date1 = (String)VS.findValue("ys_date1");
 String ys_date2 = (String)VS.findValue("ys_date2");
+String ys_type = (String)VS.findValue("ys_type");
 
 %>
 
@@ -34,8 +35,14 @@ String ys_date2 = (String)VS.findValue("ys_date2");
 	}
 	
 	function del(id){
-		if(confirm("确定要删除该条记录吗！")){
+		if(confirm("确定要删除该条记录吗？")){
 			location.href = "delLsysk.html?id=" + id;
+		}
+	}
+
+	function th(id){
+		if(confirm("确定要退回预收款吗？")){
+			location.href = "doThLsysk.html?id=" + id;
 		}
 	}
 	
@@ -44,6 +51,7 @@ String ys_date2 = (String)VS.findValue("ys_date2");
 		document.myform.client_name.value = "";
 		document.myform.ys_date1.value = "";
 		document.myform.ys_date2.value = "";
+		document.myform.ys_type.value = "";
 	}	
 	
 	function add(){
@@ -106,15 +114,36 @@ String ys_date2 = (String)VS.findValue("ys_date2");
 			<img src="images/import.gif" align="absmiddle" border="0">&nbsp;<a href="#"  onclick="refreshPage();" class="xxlb"> 刷 新 </a>	</td>			
 	</tr>
 	<tr>
-		<td class="search" align="left" colspan="2">&nbsp;&nbsp;
-			编号：<input type="text" name="id" value="<%=id %>">&nbsp;&nbsp;
-			客户名称：<input type="text" name="client_name" value="<%=client_name %>">&nbsp;&nbsp;
-			预收时间：<input type="text" name="ys_date1" value="<%=ys_date1 %>" class="Wdate" onFocus="WdatePicker()">
-			&nbsp;至&nbsp;
-			<input type="text" name="ys_date2" value="<%=ys_date2 %>" class="Wdate" onFocus="WdatePicker()">
-			&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="submit" name="buttonCx" value=" 查询 " class="css_button2">&nbsp;&nbsp;&nbsp;&nbsp;	
-			<input type="button" name="buttonQk" value=" 清空 " class="css_button2" onclick="clearAll();">
+		<td class="search" align="left" colspan="2">
+			<table width="100%" style="font-size: 12px">
+				<tr>
+					<td align="center">编　　号：</td>
+					<td><input type="text" name="id" value="<%=id %>"></td>
+					<td align="center">预收时间：</td>
+					<td>
+						<input type="text" name="ys_date1" value="<%=ys_date1 %>" class="Wdate" onFocus="WdatePicker()">
+						&nbsp;至&nbsp;
+						<input type="text" name="ys_date2" value="<%=ys_date2 %>" class="Wdate" onFocus="WdatePicker()">
+					</td>
+					<td rowspan="2">
+						<input type="submit" name="buttonCx" value=" 查询 " class="css_button">&nbsp;&nbsp;
+						<input type="button" name="buttonQk" value=" 清空 " class="css_button" onclick="clearAll();">
+					</td>
+				</tr>
+				<tr>
+					<td align="center">客户名称：</td>
+					<td><input type="text" name="client_name" value="<%=client_name %>"></td>	
+					<td align="center">预收款状态：</td>
+					<td>
+						<select name="ys_type">
+							<option value=""></option>
+							<option value="未冲抵" <%if("未冲抵".equals(ys_type)) out.print("selected"); %>>未冲抵</option>
+							<option value="已冲抵" <%if("已冲抵".equals(ys_type)) out.print("selected"); %>>已冲抵</option>
+						</select>
+					</td>										
+				</tr>
+			</table>
+
 		</td>				
 	</tr>				
 </table>
@@ -139,7 +168,7 @@ String ys_date2 = (String)VS.findValue("ys_date2");
 		Lsysk lsysk = (Lsysk)its.next();
 		
 	%>
-	<tr class="a1"  title="双击查看详情"  onmousedown="trSelectChangeCss()"  onDblClick="openWin('<%=StringUtils.nullToStr(lsysk.getId()) %>');">
+	<tr class="a1" onmousedown="trSelectChangeCss()"  onDblClick="openWin('<%=StringUtils.nullToStr(lsysk.getId()) %>');">
 		<td><%=StringUtils.nullToStr(lsysk.getId()) %></td>
 		<td><%=StringUtils.nullToStr(lsysk.getClient_name()) %></td>
 		<td><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(lsysk.getJsr())) %></td>
@@ -152,15 +181,22 @@ String ys_date2 = (String)VS.findValue("ys_date2");
 		<%
 		if(StringUtils.nullToStr(lsysk.getState()).equals("已提交")){
 		%>
-			<a href="#" onclick="openWin('<%=StringUtils.nullToStr(lsysk.getId()) %>');"><img src="images/view.gif" align="absmiddle" title="查看" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
-			<a href="#" onclick="print('<%=StringUtils.nullToStr(lsysk.getId()) %>');"><img src="images/print.png" align="absmiddle" title="打印收据" border="0" style="cursor:hand"></a>
+			<a class="xxlb" href="javascript:openWin('<%=StringUtils.nullToStr(lsysk.getId()) %>');">查看</a>&nbsp;&nbsp;
+			<%if("未冲抵".equals(lsysk.getType())){ %>
+			<a class="xxlb" href="javascript:th('<%=StringUtils.nullToStr(lsysk.getId()) %>');">退款</a>&nbsp;&nbsp;
+			<%} %>			
+			<%if(lsysk.getYsje() > 0){ %>
+			<a class="xxlb" href="javascript:print('<%=StringUtils.nullToStr(lsysk.getId()) %>');">打印</a>
+			<%} %>
 		<%
 		}else{
 		%>	
-			<a href="#" onclick="edit('<%=StringUtils.nullToStr(lsysk.getId()) %>');"><img src="images/modify.gif" align="absmiddle" title="修改" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
-			<a href="#" onclick="openWin('<%=StringUtils.nullToStr(lsysk.getId()) %>');"><img src="images/view.gif" align="absmiddle" title="查看" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;			
-			<a href="#" onclick="del('<%=StringUtils.nullToStr(lsysk.getId()) %>');"><img src="images/del.gif" align="absmiddle" title="删除" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;	
-			<a href="#" onclick="print('<%=StringUtils.nullToStr(lsysk.getId()) %>');"><img src="images/print.png" align="absmiddle" title="打印收据" border="0" style="cursor:hand"></a>	
+			<a class="xxlb" class="xxfb" href="javascript:openWin('<%=StringUtils.nullToStr(lsysk.getId()) %>');">查看</a>&nbsp;&nbsp;
+			<a class="xxlb" href="javascript:edit('<%=StringUtils.nullToStr(lsysk.getId()) %>');">修改</a>&nbsp;&nbsp;
+			<a class="xxlb" href="javascript:del('<%=StringUtils.nullToStr(lsysk.getId()) %>');">删除</a>&nbsp;&nbsp;
+			<%if(lsysk.getYsje() > 0){ %>
+			<a class="xxlb" href="javascript:print('<%=StringUtils.nullToStr(lsysk.getId()) %>');">打印</a>	
+			<%} %>
 		<%
 		}
 		%>
@@ -178,5 +214,6 @@ String ys_date2 = (String)VS.findValue("ys_date2");
 	</tr>
 </table>
 </form>
+<font color="red">说明：退款操作默认以现金方式全额退款，收款时刷卡产生的手续费可以作其它收入冲抵。</font>
 </body>
 </html>
