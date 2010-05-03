@@ -45,6 +45,8 @@ public class ClientWlInitService {
 		}
 		Date qyrq = DateComFunc.strToDate(strQyrq,"yyyy-MM-dd"); //系统启用日期
 		
+		if(strQyrq == null || qyrq.equals("")) return;
+		
 		String client_name = clientWlInit.getClient_name();
 		
 		Date curDate = new Date();     //当前时间
