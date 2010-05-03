@@ -27,6 +27,9 @@ List posTypeList = (List)VS.findValue("posTypeList");
 <script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
 <script language='JavaScript' src="js/selJsr.js"></script>
 <script type="text/javascript" src="js/prototype-1.4.0.js"></script>
+<script type='text/javascript' src='dwr/interface/dwrService.js'></script>
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script>
 <style>
 	.selectTip{
 		background-color:#009;
@@ -101,6 +104,22 @@ List posTypeList = (List)VS.findValue("posTypeList");
 			document.getElementById("pos_id").style.display = "none";
 			document.getElementById("pos_id").value = "";
 		}
+	}	
+
+	function dwrGetAccount(){
+		id = dwr.util.getValue("pos_id");
+		if(id == ""){
+			return;
+		}
+
+		dwrService.getAccountsById(id,setAccount);		
+	}
+
+	function setAccount(account){
+		if(account != null && account.id != null){
+			dwr.util.setValue("skzh",account.id);
+			dwr.util.setValue("zhname",account.name);
+		}
 	}		
 </script>
 </head>
@@ -115,7 +134,7 @@ List posTypeList = (List)VS.findValue("posTypeList");
 	</thead>
 	<tr>
 		<td class="a1" width="15%">编号</td>
-		<td class="a2" width="35%"><input type="text" name="lsysk.id" id="id" value="<%=id %>" readonly><font color="red">*</font></td>
+		<td class="a2" width="35%"><input type="text" name="lsysk.id" id="id" value="<%=id %>" readonly> <font color="red">*</font></td>
 		<td class="a1" width="15%">预收日期</td>
 		<td class="a2">
 			<input type="text" name="lsysk.ys_date" id="ys_date" value="<%=DateComFunc.getToday() %>" class="Wdate" onFocus="WdatePicker()">
@@ -123,32 +142,27 @@ List posTypeList = (List)VS.findValue("posTypeList");
 	</tr>
 	<tr>
 		<td class="a1" width="15%">客户名称</td>
-		<td class="a2" width="35%"><input type="text" name="lsysk.client_name" id="client_name" value=""><font color="red">*</font></td>	
+		<td class="a2" width="35%"><input type="text" name="lsysk.client_name" id="client_name" value=""> <font color="red">*</font></td>	
 		<td class="a1" width="15%">联系人</td>
 		<td class="a2" width="35%"><input type="text" name="lsysk.lxr" id="lxr" value=""></td>
 	</tr>
 	<tr>
 		<td class="a1" width="15%">联系电话</td>
-		<td class="a2" width="35%"><input type="text" name="lsysk.lxdh" id="lxdh" value=""><font color="red">*</font></td>	
+		<td class="a2" width="35%"><input type="text" name="lsysk.lxdh" id="lxdh" value=""> <font color="red">*</font></td>	
 		<td class="a1" width="15%">手机</td>
 		<td class="a2" width="35%"><input type="text" name="lsysk.mobile" id="mobile" value=""></td>		
 	</tr>
 	<tr>						
 		<td class="a1" width="15%">经手人</td>
 		<td class="a2">
-		    <input  id="brand"    type="text"   length="20"  onblur="setValue()"  /> 
+		    <input  id="brand"    type="text"   length="20"  onblur="setValue()"  /> <font color="red">*</font>		
             <div   id="brandTip"  style="height:12px;position:absolute;left:117px; top:140px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
-		    <input type="hidden" name="lsysk.jsr" id="fzr"/> <font color="red">*</font>		
+		    <input type="hidden" name="lsysk.jsr" id="fzr"/>	
 		</td>	
 		<td class="a1" width="15%">预收金额</td>
 		<td class="a2" width="35%"><input type="text" name="lsysk.ysje" id="ysje" value="0.00"><font color="red">*</font></td>		
 	</tr>	
 	<tr>
-		<td class="a1" width="15%">收款账户</td>
-		<td class="a2" width="35%"><input type="text" id="zhname"  name="zhname" value="" readonly><font color="red">*</font>
-		<input type="hidden" id="skzh"  name="lsysk.skzh" value="">
-		<img src="images/select.gif" align="absmiddle" title="选择账户" border="0" onclick="openAccount();" style="cursor:hand">
-		</td>
 		<td class="a1" widht="20%">客户付款方式</td>
 		<td class="a2">
 			<select name="lsysk.fkfs" id="fkfs"  onchange="selFkfs(this.value);">
@@ -163,8 +177,8 @@ List posTypeList = (List)VS.findValue("posTypeList");
 			%>
 			</select>
 			
-			<select name="lsysk.pos_id" id="pos_id" style="display:none">
-				<option value="">选择刷卡POS机</option>
+			<select name="lsysk.pos_id" id="pos_id" style="display:none" onchange="dwrGetAccount();">
+				<option value=""></option>
 			<%
 			if(posTypeList != null && posTypeList.size() > 0){
 				for(int i =0;i<posTypeList.size();i++){
@@ -177,24 +191,19 @@ List posTypeList = (List)VS.findValue("posTypeList");
 			%>
 				
 			</select>		<font color="red">*</font>				
+		</td>	
+		<td class="a1" width="15%">收款账户</td>
+		<td class="a2" width="35%"><input type="text" id="zhname"  name="zhname" value="" readonly><font color="red">*</font>
+		<input type="hidden" id="skzh"  name="lsysk.skzh" value="">
+		<img src="images/select.gif" align="absmiddle" title="选择账户" border="0" onclick="openAccount();" style="cursor:hand">
 		</td>
 	</tr>
-</table>
-<br>
-<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
-	<thead>
 	<tr>
-		<td colspan="4">备 注</td>
-	</tr>
-	</thead>
-	<tr height="50">
-		<td class="a1" width="20%">备注</td>
-		<td class="a2" width="80%">
-			<textarea rows="3" cols="50" name="lsysk.remark" id="remark" style="width:90%" maxlength="500"></textarea>
-		</td>
+		<td class="a1">备注</td>
+		<td class="a2" colspan="3"><input name="lsysk.remark" id="remark" style="width:90%" maxlength="100" value=""></td>
 	</tr>
 	<tr height="35">
-		<td class="a1" colspan="2">
+		<td class="a1" colspan="4">
 			<input type="button" name="button1" value="草 稿" class="css_button2" onclick="saveInfo('1');">&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="button" name="button2" value="提 交" class="css_button2" onclick="saveInfo('2');">&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="button" name="button3" value="关 闭" class="css_button2" onclick="window.close();">

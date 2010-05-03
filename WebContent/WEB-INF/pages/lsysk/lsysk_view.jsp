@@ -16,7 +16,7 @@ Lsysk lsysk = (Lsysk)VS.findValue("lsysk");
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 </head>
-<body oncontextmenu="return false;" >
+<body>
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
@@ -50,29 +50,19 @@ Lsysk lsysk = (Lsysk)VS.findValue("lsysk");
 	<tr>
 		<td class="a1" width="15%">收款账户</td>
 		<td class="a2" width="35%"><%=StaticParamDo.getAccountNameById(StringUtils.nullToStr(lsysk.getSkzh())) %></td>
-		<td class="a1" widht="20%">客户付款方式</td>
+		<td class="a1">客户付款方式</td>
 		<td class="a2"><%=StringUtils.nullToStr(lsysk.getFkfs()) %>&nbsp;<%=StaticParamDo.getPosNameById(lsysk.getPos_id()) %></td>
 	</tr>
 	<tr>				
 		<td class="a1" width="15%">状态</td>
-		<td class="a2" width="35%"><%=StringUtils.nullToStr(lsysk.getState()) %></td>		
+		<td class="a2" colspan="3"><%=StringUtils.nullToStr(lsysk.getState()) %></td>		
 	</tr>
-	
-</table>
-<br>
-<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
-	<thead>
-	<tr>
-		<td colspan="4">备 注</td>
-	</tr>
-	</thead>
 	<tr height="50">
-		<td class="a1" width="20%">备注</td>
-		<td class="a2" width="80%">
-			<textarea rows="3" cols="50" name="lsysk.remark" id="remark" style="width:90%" maxlength="500" readonly><%=StringUtils.nullToStr(lsysk.getRemark()) %></textarea>
-		</td>
-	</tr>
-	
+		<td class="a1">备注</td>
+		<td class="a2" colspan="3"><%=StringUtils.nullToStr(lsysk.getRemark()) %></td>
+	</tr>	
+</table>
+<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<tr height="35">
 		<td class="a1" colspan="2">
 			<input type="button" name="button3" value="关 闭" class="css_button2" onclick="window.close();">
