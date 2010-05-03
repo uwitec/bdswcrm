@@ -194,7 +194,7 @@ List posTypeList = (List)VS.findValue("posTypeList");
 			}
 			%>
 				
-			</select>		<font color="red">*</font>				
+			</select> <font color="red">*</font>				
 		</td>	
 		<td class="a1" width="15%">收款账户</td>
 		<td class="a2" width="35%"><input type="text" id="zhname"  name="zhname" value="" readonly><font color="red">*</font>
