@@ -112,5 +112,6 @@ String client_name = (String)VS.findValue("client_name");
 	</tr>
 </table>
 </form>
+<font color="red">说明：如果添加初始信息列表没有反映，请检查系统启用日期是否设置。</font>
 </body>
 </html>
