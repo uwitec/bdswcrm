@@ -65,10 +65,14 @@ List posTypeList = (List)VS.findValue("posTypeList");
 		if(document.getElementById("state").value == "已提交"){
 			if(window.confirm("提交后将不能修改，确认提交吗？")){
 				document.lsyskForm.submit();
+			}else{
+				return;
 			}
 		}else{
 			document.lsyskForm.submit();
 		}
+		document.lsyskForm.btnSave.disabled = true;
+		document.lsyskForm.btnSub.disabled = true;
 	}
 
 	

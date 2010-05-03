@@ -67,10 +67,14 @@ List posTypeList = (List)VS.findValue("posTypeList");
 		if(document.getElementById("state").value == "已提交"){
 			if(window.confirm("提交后将不能修改，确认提交吗？")){
 				document.lsyskForm.submit();
+			}else{
+				return;
 			}
 		}else{
 			document.lsyskForm.submit();
 		}
+		document.lsyskForm.btnSave.disabled = true;
+		document.lsyskForm.btnSub.disabled = true;
 		
 	}
 
@@ -204,8 +208,8 @@ List posTypeList = (List)VS.findValue("posTypeList");
 	</tr>
 	<tr height="35">
 		<td class="a1" colspan="4">
-			<input type="button" name="button1" value="草 稿" class="css_button2" onclick="saveInfo('1');">&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="button" name="button2" value="提 交" class="css_button2" onclick="saveInfo('2');">&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="button" name="btnSave" value="草 稿" class="css_button2" onclick="saveInfo('1');">&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="button" name="btnSub" value="提 交" class="css_button2" onclick="saveInfo('2');">&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="button" name="button3" value="关 闭" class="css_button2" onclick="window.close();">
 		</td>
 	</tr>
