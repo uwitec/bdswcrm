@@ -125,13 +125,14 @@ public class LsyskService {
 			lsyskDao.updateLsysk(lsysk);
 			
 			//添加新的冲抵的零售预收款，状态为冲抵
-			lsysk.setId(lsyskDao.getLsyskId());
 			lsysk.setFkfs("现金");
 			lsysk.setPos_id("");
 			lsysk.setYsje(0-lsysk.getYsje());
 			lsysk.setYs_date(DateComFunc.getToday());
 			lsysk.setState("已提交");	
 			lsysk.setType("已冲抵");
+			lsysk.setRemark("零售预收退款自动冲抵生成，对应零收预款编号为：" + lsysk.getId());
+			lsysk.setId(lsyskDao.getLsyskId());
 			this.saveLsysk(lsysk);
 		}
 		
