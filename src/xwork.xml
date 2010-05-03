@@ -1184,6 +1184,9 @@
         <action name="delLsysk" class="lsyskAction" method="del">
             <result name="success" type="redirect">listLsysk.html</result>
         </action>
+        <action name="doThLsysk" class="lsyskAction" method="doTh">
+            <result name="success" type="redirect">listLsysk.html</result>
+        </action>        
         <!-- 零售预收款 -->
         
         <!-- 现金银行 -->
