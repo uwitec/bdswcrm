@@ -36,9 +36,9 @@ public class XsskDAO extends JdbcBaseDAO {
 	 * @param ysk
 	 */
 	public void saveXssk(Xssk xssk,List xsskDescs){
-		String sql = "insert into xssk(sk_date,client_name,skzh,jsr,skje,state,remark,is_ysk,ysk_ye,czr,cz_date,delete_key,id) values(?,?,?,?,?,?,?,?,?,?,now(),?,?)";
+		String sql = "insert into xssk(sk_date,client_name,skzh,jsr,skje,state,remark,is_ysk,ysk_ye,czr,cz_date,delete_key,skfs,pos_id,id) values(?,?,?,?,?,?,?,?,?,?,now(),?,?,?,?)";
 		
-		Object[] param = new Object[12];
+		Object[] param = new Object[14];
 		
 		String is_ysk = StringUtils.nullToStr(xssk.getIs_ysk());
 		if(is_ysk.equals("")){
@@ -61,7 +61,9 @@ public class XsskDAO extends JdbcBaseDAO {
 		param[8] = new Double(ysk_ye);
 		param[9] = xssk.getCzr();
 		param[10] = xssk.getDelete_key();
-		param[11] = xssk.getId();
+		param[11] = xssk.getSkfs();
+		param[12] = xssk.getPos_id();
+		param[13] = xssk.getId();
 		
 		this.getJdbcTemplate().update(sql,param);
 		
@@ -75,9 +77,9 @@ public class XsskDAO extends JdbcBaseDAO {
 	 * @param ysk
 	 */
 	public void updateXssk(Xssk xssk,List xsskDescs){
-		String sql = "update xssk set sk_date=?,client_name=?,skzh=?,jsr=?,skje=?,state=?,remark=?,is_ysk=?,ysk_ye=?,czr=?,cz_date=now() where id=?";
+		String sql = "update xssk set sk_date=?,client_name=?,skzh=?,jsr=?,skje=?,state=?,remark=?,is_ysk=?,ysk_ye=?,czr=?,cz_date=now(),skfs=?,pos_id=? where id=?";
 		
-		Object[] param = new Object[11];
+		Object[] param = new Object[13];
 		
 		String is_ysk = StringUtils.nullToStr(xssk.getIs_ysk());
 		if(is_ysk.equals("")){
@@ -99,7 +101,9 @@ public class XsskDAO extends JdbcBaseDAO {
 		param[7] = is_ysk;
 		param[8] = new Double(ysk_ye);
 		param[9] = xssk.getCzr();
-		param[10] = xssk.getId();
+		param[10] = xssk.getSkfs();
+		param[11] = xssk.getPos_id();
+		param[12] = xssk.getId();
 		
 		this.getJdbcTemplate().update(sql,param);
 		

@@ -22,6 +22,9 @@ public class Xssk {
 	//在发生销售现金退货时，需要将销售退货单ID写入
 	private String delete_key = "";
 	
+	private String skfs;
+	private String pos_id;
+	
 	public String getClient_name() {
 		return client_name;
 	}
@@ -99,6 +102,18 @@ public class Xssk {
 	}
 	public void setCz_date(Date czDate) {
 		cz_date = czDate;
+	}
+	public String getSkfs() {
+		return skfs;
+	}
+	public void setSkfs(String skfs) {
+		this.skfs = skfs;
+	}
+	public String getPos_id() {
+		return pos_id;
+	}
+	public void setPos_id(String posId) {
+		pos_id = posId;
 	}
 
 }

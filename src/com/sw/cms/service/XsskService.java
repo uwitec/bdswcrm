@@ -7,14 +7,19 @@ import java.util.Map;
 
 import com.sw.cms.dao.AccountDzdDAO;
 import com.sw.cms.dao.AccountsDAO;
+import com.sw.cms.dao.PosTypeDAO;
+import com.sw.cms.dao.QtzcDAO;
+import com.sw.cms.dao.UserDAO;
 import com.sw.cms.dao.XsskDAO;
 import com.sw.cms.dao.YushoukDAO;
 import com.sw.cms.model.AccountDzd;
-import com.sw.cms.model.CgfkDesc;
 import com.sw.cms.model.Page;
+import com.sw.cms.model.Qtzc;
+import com.sw.cms.model.SysUser;
 import com.sw.cms.model.Xssk;
 import com.sw.cms.model.XsskDesc;
 import com.sw.cms.model.Yushouk;
+import com.sw.cms.util.StringUtils;
 
 public class XsskService {
 	
@@ -22,6 +27,9 @@ public class XsskService {
 	private AccountsDAO accountsDao;
 	private AccountDzdDAO accountDzdDao;
 	private YushoukDAO yushoukDao;
+	private UserDAO userDao;
+	private PosTypeDAO posTypeDao;
+	private QtzcDAO qtzcDao;
 	
 	/**
 	 * 返回应收款列表（带分页）
@@ -57,6 +65,11 @@ public class XsskService {
 			}
 			
 			xsskDao.updateXsdFk(xssk,xsskDescs);  //更新销售单相关收款信息
+			
+			//如果收款方式为刷卡，并且POS机编号不为空，自动保存费用信息
+			if(xssk.getSkfs().equals("刷卡") && !xssk.getPos_id().equals("")){
+				this.saveQtzc(xssk);
+			}
 		}
 		
 	}
@@ -83,6 +96,11 @@ public class XsskService {
 			}
 			
 			xsskDao.updateXsdFk(xssk,xsskDescs);  //更新销售单相关收款信息
+			
+			//如果收款方式为刷卡，并且POS机编号不为空，自动保存费用信息
+			if(xssk.getSkfs().equals("刷卡") && !xssk.getPos_id().equals("")){
+				this.saveQtzc(xssk);
+			}
 		}
 	}
 	
@@ -259,6 +277,55 @@ public class XsskService {
 		}
 		return list;
 	}
+	
+	
+	private void saveQtzc(Xssk xssk){
+		Qtzc qtzc = new Qtzc();
+		
+		String id = qtzcDao.getQtzcID();
+		
+		String dept = "";
+		if(!StringUtils.nullToStr(xssk.getJsr()).equals("")){
+			dept = ((SysUser)userDao.getUser(xssk.getJsr())).getDept();
+		}
+		
+		qtzc.setId(id);
+		qtzc.setZc_date(xssk.getSk_date());
+		qtzc.setType("02");
+		qtzc.setZcje(posTypeDao.getBrushCardfy(xssk.getPos_id(), xssk.getSkje()));
+		qtzc.setZczh(xssk.getSkzh());
+		qtzc.setJsr(xssk.getJsr());
+		qtzc.setRemark("刷卡手续费，由销售收款[" + xssk.getId() + "]自动生成");
+		qtzc.setCzr(xssk.getCzr());
+		qtzc.setState("已提交");
+		qtzc.setYwy(xssk.getJsr());
+		qtzc.setSqr(xssk.getJsr());
+		qtzc.setYwy_dept(dept);
+		qtzc.setZcxm("刷卡手续费");
+		qtzc.setFklx("刷卡");
+		qtzc.setFysq_id("无");
+		
+		qtzcDao.saveQtzc(qtzc);  //保存其它支出（一般费用）
+		
+		accountsDao.updateAccountJe(xssk.getSkzh(),posTypeDao.getBrushCardfy(xssk.getPos_id(), xssk.getSkje())); //修改账户金额
+		
+		double jyje = 0 - posTypeDao.getBrushCardfy(xssk.getPos_id(), xssk.getSkje());
+		AccountDzd accountDzd = new AccountDzd();
+		accountDzd.setAccount_id(xssk.getSkzh());
+		accountDzd.setJyje(jyje);
+		double zhye = 0;
+		Map map = accountsDao.getAccounts(xssk.getSkzh());
+		if(map != null){
+			zhye = (map.get("dqje")==null?0:((Double)map.get("dqje")).doubleValue());
+		}		
+		accountDzd.setZhye(zhye + jyje);
+		accountDzd.setRemark("一般费用，编号[" + id + "]");
+		accountDzd.setCzr(xssk.getCzr());
+		accountDzd.setJsr(xssk.getJsr());
+		accountDzd.setAction_url("viewQtzc.html?id=" + id);		
+		accountDzdDao.addDzd(accountDzd);   //添加资金交易记录
+		
+	}
 
 
 	public XsskDAO getXsskDao() {
@@ -298,6 +365,36 @@ public class XsskService {
 
 	public void setYushoukDao(YushoukDAO yushoukDao) {
 		this.yushoukDao = yushoukDao;
+	}
+
+
+	public UserDAO getUserDao() {
+		return userDao;
+	}
+
+
+	public void setUserDao(UserDAO userDao) {
+		this.userDao = userDao;
+	}
+
+
+	public PosTypeDAO getPosTypeDao() {
+		return posTypeDao;
+	}
+
+
+	public void setPosTypeDao(PosTypeDAO posTypeDao) {
+		this.posTypeDao = posTypeDao;
+	}
+
+
+	public QtzcDAO getQtzcDao() {
+		return qtzcDao;
+	}
+
+
+	public void setQtzcDao(QtzcDAO qtzcDao) {
+		this.qtzcDao = qtzcDao;
 	}
 
 }

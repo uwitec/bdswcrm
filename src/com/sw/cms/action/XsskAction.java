@@ -8,6 +8,8 @@ import com.sw.cms.model.LoginInfo;
 import com.sw.cms.model.Page;
 import com.sw.cms.model.Xssk;
 import com.sw.cms.service.ClientsService;
+import com.sw.cms.service.PosTypeService;
+import com.sw.cms.service.SjzdService;
 import com.sw.cms.service.UserService;
 import com.sw.cms.service.XsskService;
 import com.sw.cms.util.Constant;
@@ -18,6 +20,8 @@ public class XsskAction extends BaseAction {
 	private XsskService xsskService;
 	private UserService userService;
 	private ClientsService clientsService;
+	private SjzdService sjzdService;
+	private PosTypeService posTypeService;
 	
 	private Page pageXssk;
 	private Xssk xssk = new Xssk();
@@ -33,6 +37,9 @@ public class XsskAction extends BaseAction {
 	private String orderName ="";
 	private String orderType ="";	
 	private int curPage = 1;
+	
+	private String[] ysfs;
+	private List posTypeList = new ArrayList();
 	
 	
 	/**
@@ -81,7 +88,8 @@ public class XsskAction extends BaseAction {
 		if(xssk.getId()== null || xssk.getId().equals("")){
 			xssk.setId(xsskService.updateXsskId());
 		}
-		
+		ysfs = sjzdService.getSjzdXmxxByZdId("SJZD_FKFS");
+		posTypeList = posTypeService.getPosTypeList();
 		userList = userService.getAllEmployeeList();
 		clientsList=clientsService.getClientList("");
 		return "success";
@@ -118,6 +126,8 @@ public class XsskAction extends BaseAction {
 		xssk = (Xssk)xsskService.getXssk(id);
 		xsskDescs = xsskService.getXsskDescs(id);
 		
+		ysfs = sjzdService.getSjzdXmxxByZdId("SJZD_FKFS");
+		posTypeList = posTypeService.getPosTypeList();
 		userList = userService.getAllEmployeeList();
 		return "success";
 	}
@@ -264,6 +274,46 @@ public class XsskAction extends BaseAction {
 
 	public void setClientsList(List clientsList) {
 		this.clientsList = clientsList;
+	}
+
+
+	public String[] getYsfs() {
+		return ysfs;
+	}
+
+
+	public void setYsfs(String[] ysfs) {
+		this.ysfs = ysfs;
+	}
+
+
+	public List getPosTypeList() {
+		return posTypeList;
+	}
+
+
+	public void setPosTypeList(List posTypeList) {
+		this.posTypeList = posTypeList;
+	}
+
+
+	public SjzdService getSjzdService() {
+		return sjzdService;
+	}
+
+
+	public void setSjzdService(SjzdService sjzdService) {
+		this.sjzdService = sjzdService;
+	}
+
+
+	public PosTypeService getPosTypeService() {
+		return posTypeService;
+	}
+
+
+	public void setPosTypeService(PosTypeService posTypeService) {
+		this.posTypeService = posTypeService;
 	}
 
 }

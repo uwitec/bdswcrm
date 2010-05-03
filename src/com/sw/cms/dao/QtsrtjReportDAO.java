@@ -32,7 +32,7 @@ public class QtsrtjReportDAO extends JdbcBaseDAO {
 		}
 		
 		String sql = "select b.xm_id,a.type,sum(a.skje) as hjje" +
-		" from qtsr a left join SJZD_XMXX b on a.type=b.xm_name where 1=1"+ con+" group by a.type,b.xm_id";
+		" from qtsr a left join sjzd_xmxx b on a.type=b.xm_name where 1=1"+ con+" group by a.type,b.xm_id";
 		
 		return this.getResultList(sql);
 	}
