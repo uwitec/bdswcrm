@@ -43,6 +43,7 @@ public class LsyskAction extends BaseAction {
 	private String client_name = "";
 	private String ys_date1 = "";
 	private String ys_date2 = "";
+	private String ys_type = "Œ¥≥Âµ÷";
 	
 	private String orderName ="";
 	private String orderType ="";	
@@ -113,6 +114,9 @@ public class LsyskAction extends BaseAction {
 		}
 		if(!id.equals("")){
 			con += " and id='" + id + "'";
+		}
+		if(!ys_type.equals("")){
+			con += " and type='" + ys_type + "'";
 		}
 		
 		if(orderName.equals("")){
@@ -188,6 +192,7 @@ public class LsyskAction extends BaseAction {
 		String user_id = info.getUser_id();
 		
 		lsysk.setCzr(user_id);
+		lsysk.setType("Œ¥≥Âµ÷");
 		
 		lsyskService.saveLsysk(lsysk);
 		
@@ -204,6 +209,7 @@ public class LsyskAction extends BaseAction {
 		String user_id = info.getUser_id();
 		
 		lsysk.setCzr(user_id);
+		lsysk.setType("Œ¥≥Âµ÷");
 		
 		lsyskService.updateLsysk(lsysk);
 		
@@ -232,6 +238,27 @@ public class LsyskAction extends BaseAction {
 		lsyskService.delLsysk(id);
 		
 		return "success";
+	}
+	
+	
+	/**
+	 * ÕÀªÿ¡„ €‘§ ’øÓ
+	 * @return
+	 */
+	public String doTh(){
+		try{
+			LoginInfo info = (LoginInfo)getSession().getAttribute("LOGINUSER");
+			String user_id = info.getUser_id();
+			
+			Lsysk lsysk = (Lsysk)lsyskService.getLsysk(id);
+			lsysk.setCzr(user_id);
+			lsyskService.updateLsyskTh(lsysk);
+			
+			return SUCCESS;
+		}catch(Exception e){
+			log.error("ÕÀªÿ¡„ €‘§ ’øÓ ß∞‹£¨‘≠“Ú£∫" + e);
+			return ERROR;
+		}
 	}
 	
 	
@@ -430,6 +457,16 @@ public class LsyskAction extends BaseAction {
 
 	public void setJsr(String jsr) {
 		this.jsr = jsr;
+	}
+
+
+	public String getYs_type() {
+		return ys_type;
+	}
+
+
+	public void setYs_type(String ysType) {
+		ys_type = ysType;
 	}
 
 }

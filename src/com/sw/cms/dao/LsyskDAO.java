@@ -56,7 +56,7 @@ public class LsyskDAO extends JdbcBaseDAO {
 		param[9] = lsysk.getRemark();
 		param[10] = lsysk.getCzr();
 		param[11] = lsysk.getYs_date();
-		param[12] = "Î´³åµÖ";
+		param[12] = lsysk.getType();
 		param[13] = lsysk.getPos_id();
 		param[14] = lsysk.getId();
 		
@@ -86,7 +86,7 @@ public class LsyskDAO extends JdbcBaseDAO {
 		param[9] = lsysk.getRemark();
 		param[10] = lsysk.getCzr();
 		param[11] = lsysk.getYs_date();
-		param[12] = "Î´³åµÖ";
+		param[12] = lsysk.getType();
 		param[13] = lsysk.getPos_id();
 		param[14] = lsysk.getId();
 		

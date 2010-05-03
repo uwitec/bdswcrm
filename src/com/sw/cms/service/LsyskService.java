@@ -16,6 +16,7 @@ import com.sw.cms.model.Page;
 import com.sw.cms.model.Qtzc;
 import com.sw.cms.model.Xssk;
 import com.sw.cms.model.XsskDesc;
+import com.sw.cms.util.DateComFunc;
 
 /**
  * 零售预收款处理
@@ -106,6 +107,34 @@ public class LsyskService {
 				this.saveQtzc(lsysk);
 			}
 		}
+	}
+	
+	
+	/**
+	 * 零售预收款退款
+	 * @param id
+	 */
+	public void updateLsyskTh(Lsysk lsysk){
+		if(lsysk!= null){
+			
+			//如果零售预收款已冲抵，不做任何操作返回
+			if(lsysk.getType().equals("已冲抵")) return;
+			
+			//修改当前零售预收款的冲抵状态
+			lsysk.setType("已冲抵");
+			lsyskDao.updateLsysk(lsysk);
+			
+			//添加新的冲抵的零售预收款，状态为冲抵
+			lsysk.setId(lsyskDao.getLsyskId());
+			lsysk.setFkfs("现金");
+			lsysk.setPos_id("");
+			lsysk.setYsje(0-lsysk.getYsje());
+			lsysk.setYs_date(DateComFunc.getToday());
+			lsysk.setState("已提交");	
+			lsysk.setType("已冲抵");
+			this.saveLsysk(lsysk);
+		}
+		
 	}
 	
 	
