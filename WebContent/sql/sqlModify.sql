@@ -719,5 +719,5 @@ ALTER TABLE `cnfkd` ADD COLUMN `has_fy` VARCHAR(20) AFTER `client_all_name`,
  
  2010-05-03添加
  --销售收款添加收款方式和pos机编号
- ALTER TABLE `crm`.`xssk` ADD COLUMN `skfs` VARCHAR(100) AFTER `delete_key`,
+ ALTER TABLE `xssk` ADD COLUMN `skfs` VARCHAR(100) AFTER `delete_key`,
  ADD COLUMN `pos_id` VARCHAR(45) AFTER `skfs`;
