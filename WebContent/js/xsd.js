@@ -265,7 +265,6 @@ function delDesc(){
 function changeSklx(vl){
 	if(vl == "账期"){
 		document.getElementById("lb_xjd").style.display = "none";
-		document.getElementById("tr_skxx").style.display = "none";
 		document.getElementById("xjd").style.display = "none";
 		document.getElementById("xjd").value = "0.00";
 		
@@ -273,13 +272,22 @@ function changeSklx(vl){
 		document.getElementById("zq").style.display = "";
 		document.getElementById("zq").value = xszq;			
 		
+		document.getElementById("td_skje_label").style.display = "none";
+		document.getElementById("td_skje_value").style.display = "none";
+		document.getElementById("skje").value = "0.00";
+		
+		document.getElementById("td_skxx_label").style.display = "none";
+		document.getElementById("td_skxx_value").style.display = "none";
+		document.getElementById("pos_id").style.display = "none";
+		document.getElementById("skfs").value = "";
+		document.getElementById("pos_id").value = "";
+		
 		document.getElementById("td_skzh_label").style.display = "none";
 		document.getElementById("td_skzh_value").style.display = "none";
 		document.getElementById("zhname").value = "";
 		document.getElementById("skzh").value = "";
 		
 	}else{
-		document.getElementById("tr_skxx").style.display = "";
 		document.getElementById("lb_xjd").style.display = "none";
 		document.getElementById("xjd").style.display = "none";
 		document.getElementById("xjd").value = "0.00";
@@ -288,8 +296,14 @@ function changeSklx(vl){
 		document.getElementById("zq").style.display = "none";
 		document.getElementById("zq").value = "0";	
 		
+		document.getElementById("td_skje_label").style.display = "";
+		document.getElementById("td_skje_value").style.display = "";
+		
+		document.getElementById("td_skxx_label").style.display = "";
+		document.getElementById("td_skxx_value").style.display = "";
+		
 		document.getElementById("td_skzh_label").style.display = "";
-		document.getElementById("td_skzh_value").style.display = "";				
+		document.getElementById("td_skzh_value").style.display = "";
 	}
 }
 

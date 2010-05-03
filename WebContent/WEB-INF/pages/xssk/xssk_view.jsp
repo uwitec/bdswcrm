@@ -65,7 +65,6 @@ List xsskDescs = (List)VS.findValue("xsskDescs");
 		<td>发生日期</td>
 		<td>发生金额</td>
 		<td>本次收款</td>
-		<td>备注</td>
 	</tr>
 	</thead>
 <%
@@ -90,7 +89,6 @@ if(xsskDescs != null && xsskDescs.size()>0){
 		<td class="a2"><%=StringUtils.nullToStr(map.get("fsrq")) %></td>
 		<td class="a2"><%=JMath.round(fsje,2) %></td>
 		<td class="a2"><%=JMath.round(bcsk,2) %></td>
-		<td class="a2"><%=StringUtils.nullToStr(map.get("remark")) %></td>	
 	</tr>
 <%
 	}
@@ -101,25 +99,15 @@ if(xsskDescs != null && xsskDescs.size()>0){
 		<td class="a2"></td>
 		<td class="a2"><%=JMath.round(hj_fsje,2) %></td>
 		<td class="a2"><%=JMath.round(hj_bcsk,2) %></td>
-		<td class="a2"></td>	
+	</tr>
+	<tr height="50">
+		<td class="a1">备  注</td>
+		<td class="a2" colspan="3" style="text-align: left"><%=StringUtils.nullToStr(xssk.getRemark()) %></td>
 	</tr>	
 </table>
-<br>
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
-	<thead>
-	<tr>
-		<td colspan="4">其    它</td>
-	</tr>
-	</thead>
-	<tr height="50">
-		<td class="a1" width="20%">备  注</td>
-		<td class="a2" width="80%">
-			<textarea rows="3" cols="50" name="xssk.remark" id="remark" style="width:80%" readonly><%=StringUtils.nullToStr(xssk.getRemark()) %></textarea>
-		</td>
-	</tr>
-	
 	<tr height="35">
-		<td class="a1" colspan="2">
+		<td class="a1">
 			<input type="button" name="button1" value="关闭" class="css_button2" onclick="window.close();">
 		</td>
 	</tr>

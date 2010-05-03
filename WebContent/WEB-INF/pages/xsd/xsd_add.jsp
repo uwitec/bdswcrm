@@ -215,6 +215,22 @@ String flag = StringUtils.nullToStr(VS.findValue("flag"));
 			opener.document.myform.submit();
 		}
 	}
+
+	function dwrGetAccount(){
+		id = dwr.util.getValue("pos_id");
+		if(id == ""){
+			return;
+		}
+
+		dwrService.getAccountsById(id,setAccount);		
+	}
+
+	function setAccount(account){
+		if(account != null && account.id != null){
+			dwr.util.setValue("skzh",account.id);
+			dwr.util.setValue("zhname",account.name);
+		}
+	}	
 </script>
 </head>
 <body onload="initFzrTip();initClientTip();onloadClientInfo();chgKpTyle('<%=StringUtils.nullToStr(xsd.getFplx()) %>');submitSp();">
@@ -421,19 +437,13 @@ if(xsdProducts!=null && xsdProducts.size()>0){
 			<input type="hidden" name="xsd.yhje" id="yhje" value="0.00">
 			<input type="hidden" id="ysje"  name="xsd.ysje" value="0.00">
 		</td>
-		<td class="a1" width="15%" id="td_skzh_label" style="<%=skxxStyle %>">收款账户</td>				
-		<td class="a2" width="35%" id="td_skzh_value" style="<%=skxxStyle %>"><input type="text" id="zhname"  name="zhname" value="<%=StaticParamDo.getAccountNameById(StringUtils.nullToStr(xsd.getSkzh())) %>" size="40" onclick="openAccount();" readonly>
-		<input type="hidden" id="skzh"  name="xsd.skzh" value="<%=StringUtils.nullToStr(xsd.getSkzh()) %>">
-		<img src="images/select.gif" align="absmiddle" title="选择账户" border="0" onclick="openAccount();" style="cursor:hand">
-		</td>		
+		<td class="a1" id="td_skje_label" style="<%=skxxStyle %>">本次收款金额</td>
+		<td class="a2" id="td_skje_value" style="<%=skxxStyle %>"><input type="text" id="skje"  name="xsd.skje" value="<%=JMath.round(xsd.getSkje()) %>" size="40">元</td>	
 	</tr>
-	<tr id="tr_skxx" style="<%=skxxStyle %>">
-		<td class="a1">本次收款金额</td>
-		<td class="a2"><input type="text" id="skje"  name="xsd.skje" value="<%=JMath.round(xsd.getSkje()) %>" size="40">元</td>
-		
-		<td class="a1">收款方式</td>
-		<td class="a2">
-			<select name="xsd.skfs" id="skfs"  onchange="selSkfs(this.value);" style="width:232px">
+	<tr>
+		<td class="a1" id="td_skxx_label" style="<%=skxxStyle %>">收款方式</td>
+		<td class="a2" id="td_skxx_value" style="<%=skxxStyle %>">
+			<select name="xsd.skfs" id="skfs"  onchange="selSkfs(this.value);">
 			<%
 			if(fkfsArry != null && fkfsArry.length > 0){
 				for(int i =0;i<fkfsArry.length;i++){
@@ -451,8 +461,8 @@ if(xsdProducts!=null && xsdProducts.size()>0){
 			%>
 			</select>
 			
-			<select name="xsd.pos_id" id="pos_id" style="<%=cssStyle %>;width:232px">
-				<option value="">选择刷卡POS机</option>
+			<select name="xsd.pos_id" id="pos_id" style="<%=cssStyle %>" onchange="dwrGetAccount();">
+				<option value=""></option>
 			<%
 			String pos_id = StringUtils.nullToStr(xsd.getPos_id());
 			if(posTypeList != null && posTypeList.size() > 0){
@@ -465,7 +475,13 @@ if(xsdProducts!=null && xsdProducts.size()>0){
 			}
 			%>				
 			</select><font color="red">*</font>				
-		</td>		
+		</td>	
+		<td class="a1" width="15%" id="td_skzh_label" style="<%=skxxStyle %>">收款账户</td>				
+		<td class="a2" width="35%" id="td_skzh_value" style="<%=skxxStyle %>">
+			<input type="text" id="zhname"  name="zhname" value="<%=StaticParamDo.getAccountNameById(StringUtils.nullToStr(xsd.getSkzh())) %>" size="40" onclick="openAccount();" readonly>
+			<input type="hidden" id="skzh"  name="xsd.skzh" value="<%=StringUtils.nullToStr(xsd.getSkzh()) %>">
+			<img src="images/select.gif" align="absmiddle" title="选择账户" border="0" onclick="openAccount();" style="cursor:hand">
+		</td>				
 	</tr>
 </table>
 <BR>

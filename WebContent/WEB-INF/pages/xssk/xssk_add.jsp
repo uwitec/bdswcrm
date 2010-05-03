@@ -15,6 +15,9 @@ List xsskDescs = (List)VS.findValue("xsskDescs");
 
 List clientsList=(List)VS.findValue("clientsList");
 
+List posTypeList = (List)VS.findValue("posTypeList");
+String[] ysfsArry = (String[])VS.findValue("ysfs");
+
 int allCount = 3;
 if(xsskDescs != null && xsskDescs.size()>0){
 	allCount = xsskDescs.size();
@@ -33,6 +36,9 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 <script language='JavaScript' src="js/selClient.js"></script>
 <script language='JavaScript' src="js/selJsr.js"></script>
 <script type="text/javascript" src="js/prototype-1.4.0.js"></script>
+<script type='text/javascript' src='dwr/interface/dwrService.js'></script>
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script>
 <style>
 	.selectTip{background-color:#009;color:#fff;}
 </style>
@@ -53,6 +59,12 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 		if(document.getElementById("fzr").value == ""){
 			alert("经手人不能为空，请选择！");
 			return;
+		}
+		if(document.getElementById("skfs").value == "刷卡"){
+			if(document.getElementById("pos_id").value == ""){
+				alert("请选择刷卡POS机！");
+				return;
+			}
 		}
 		if(!InputValid(document.getElementById("fkzh"),1,"string",1,1,50,"收款账户")){	 return; }
 		
@@ -178,6 +190,31 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 
 		alert(tempMsg);
 	}
+
+	function dwrGetAccount(){
+		id = dwr.util.getValue("pos_id");
+		if(id == ""){
+			return;
+		}
+
+		dwrService.getAccountsById(id,setAccount);		
+	}
+
+	function setAccount(account){
+		if(account != null && account.id != null){
+			dwr.util.setValue("fkzh",account.id);
+			dwr.util.setValue("zhname",account.name);
+		}
+	}	
+
+	function selSkfs(vD){
+		if(vD == "刷卡"){
+			document.getElementById("pos_id").style.display = "";
+		}else{
+			document.getElementById("pos_id").style.display = "none";
+			document.getElementById("pos_id").value = "";
+		}
+	}	
 </script>
 </head>
 <body onload="initFzrTip();initClientTip();onloadMsg();">
@@ -191,36 +228,66 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 	</thead>
 	<tr>
 		<td class="a1" width="15%">编号</td>
-		<td class="a2" width="35%"><input type="text" name="xssk.id" id="id" value="<%=StringUtils.nullToStr(xssk.getId()) %>" readonly>
-		</td>
-		<td class="a1" width="15%">是否预收款</td>
-		<td class="a2"><input type="checkbox" name="xssk.is_ysk" id="is_ysk" value="是" onclick="chkYsk();"  <%if(StringUtils.nullToStr(xssk.getIs_ysk()).equals("是")) out.print("checked"); %>>预收款</td>		
-
-	</tr>
-	<tr>		
-		<td class="a1" width="15%">往来单位</td>
-		<td class="a2" width="35%">
-		<input type="text" name="clientName" id="client_name" value="<%=StaticParamDo.getClientNameById(StringUtils.nullToStr(xssk.getClient_name())) %>"  size="35" onblur="queryYszd();">
-		<input type="hidden" name="xssk.client_name" id="client_id" value="<%=StringUtils.nullToStr(xssk.getClient_name()) %>">
-		<div id="clientsTip" style="height:12px;position:absolute;left:132px; top:85px; width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div><font color="red">*</font>	
+		<td class="a2" width="35%"><input type="text" name="xssk.id" id="id" value="<%=StringUtils.nullToStr(xssk.getId()) %>" style="width:190px" readonly>
 		</td>
 		<td class="a1" width="15%">收款日期</td>
 		<td class="a2" width="35%">
-			<input type="text" name="xssk.sk_date" id="sk_date" value="<%=StringUtils.nullToStr(xssk.getSk_date()).equals("")?DateComFunc.getToday():StringUtils.nullToStr(xssk.getSk_date()) %>"  class="Wdate" onFocus="WdatePicker()"><font color="red">*</font>	
-		</td>				
+			<input type="text" name="xssk.sk_date" id="sk_date" value="<%=StringUtils.nullToStr(xssk.getSk_date()).equals("")?DateComFunc.getToday():StringUtils.nullToStr(xssk.getSk_date()) %>"  class="Wdate" onFocus="WdatePicker()" style="width:190px"> <font color="red">*</font>	
+		</td>			
+	</tr>
+	<tr>	
+		<td class="a1" width="15%">是否预收款</td>
+		<td class="a2"><input type="checkbox" name="xssk.is_ysk" id="is_ysk" value="是" onclick="chkYsk();"  <%if(StringUtils.nullToStr(xssk.getIs_ysk()).equals("是")) out.print("checked"); %>>预收款</td>		
+		<td class="a1" width="15%">往来单位</td>
+		<td class="a2" width="35%">
+		<input type="text" name="clientName" id="client_name" value="<%=StaticParamDo.getClientNameById(StringUtils.nullToStr(xssk.getClient_name())) %>" style="width:190px" onblur="queryYszd();"> <font color="red">*</font>
+		<input type="hidden" name="xssk.client_name" id="client_id" value="<%=StringUtils.nullToStr(xssk.getClient_name()) %>">
+		<div id="clientsTip" style="height:12px;position:absolute;left:132px; top:85px; width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>	
+		</td>
 	</tr>
 	<tr>
 		<td class="a1" width="15%">经手人</td>
 		<td class="a2" width="35%">
-		 <input  id="brand"    type="text"   length="20"  onblur="setValue()" /> 
-             <div   id="brandTip"  style="height:12px;position:absolute;left:132px; top:113px;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
-            </div>
-		    <input type="hidden" name="xssk.jsr" id="fzr"  /> <font color="red">*</font>	
+			<input id="brand" style="width:190px" type="text" maxlength="20" onblur="setValue()" /> <font color="red">*</font>	
+        	<div id="brandTip" style="height:12px;position:absolute;left:132px; top:113px;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+		    <input type="hidden" name="xssk.jsr" id="fzr"/> 
+		</td>
+		<td class="a1">收款方式</td>
+		<td class="a2">
+			<select name="xssk.skfs" id="skfs" onchange="selSkfs(this.value);">
+			<%
+			if(ysfsArry != null && ysfsArry.length > 0){
+				for(int i =0;i<ysfsArry.length;i++){
+			%>
+				<option value="<%=ysfsArry[i] %>" <%if(StringUtils.nullToStr(xssk.getSkfs()).equals(ysfsArry[i])) out.print("selected"); %>><%=ysfsArry[i] %></option>
+			<%
+				}
+			}
+			%>
+				
+			</select>	
+			
+			<select name="xssk.pos_id" id="pos_id" style="display:none;" onchange="dwrGetAccount();">
+				<option value=""></option>
+			<%
+			if(posTypeList != null && posTypeList.size() > 0){
+				for(int i =0;i<posTypeList.size();i++){
+					PosType posType = (PosType)posTypeList.get(i);
+			%>
+				<option value="<%=posType.getId() %>" <%if(StringUtils.nullToStr(xssk.getPos_id()).equals(posType.getId())) out.print("selected"); %>><%=posType.getName() %></option>
+			<%
+				}
+			}
+			%>
+				
+			</select> <font color="red">*</font>
 		</td>	
-		<td class="a1" widht="20%">收款账户</td>
-		<td class="a2"><input type="text" id="zhname"  name="zhname" value="<%=StaticParamDo.getAccountNameById(StringUtils.nullToStr(xssk.getSkzh())) %>" readonly>
+	</tr>
+	<tr>					
+		<td class="a1">收款账户</td>
+		<td class="a2" colspan="3"><input type="text" id="zhname" style="width:190px" name="zhname" value="<%=StaticParamDo.getAccountNameById(StringUtils.nullToStr(xssk.getSkzh())) %>" readonly> <font color="red">*</font>
 		<input type="hidden" id="fkzh"  name="xssk.skzh" value="<%=StringUtils.nullToStr(xssk.getSkzh()) %>">
-		<img src="images/select.gif" align="absmiddle" title="选择账户" border="0" onclick="openAccount();" style="cursor:hand"><font color="red">*</font>
+		<img src="images/select.gif" align="absmiddle" title="选择账户" border="0" onclick="openAccount();" style="cursor:hand">
 		</td>
 	</tr>
 </table>
@@ -235,12 +302,11 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 <table width="100%"  align="center" class="chart_list" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td>销售单编号</td>
-		<td>发生日期</td>
-		<td>发生金额</td>
-		<td>应收金额</td>
-		<td>本次收款</td>
-		<td>备注</td>
+		<td width="20%">销售单编号</td>
+		<td width="20%">发生日期</td>
+		<td width="20%">发生金额</td>
+		<td width="20%">应收金额</td>
+		<td width="20%">本次收款</td>
 	</tr>
 	</thead>
 <%
@@ -260,12 +326,11 @@ if(xsskDescs != null && xsskDescs.size()>0){
 		hj_bcsk += bcsk;
 %>
 	<tr>
-		<td class="a2"><input type="text" id="xsd_id_<%=i %>" name="xsskDescs[<%=i %>].xsd_id" value="<%=StringUtils.nullToStr(map.get("xsd_id")) %>" readonly></td>
-		<td class="a2"><input type="text" size="10" id="fsrq_<%=i %>" name="xsskDescs[<%=i %>].fsrq" value="<%=StringUtils.nullToStr(map.get("fsrq")) %>" readonly></td>
-		<td class="a2"><input type="text" size="10" id="fsje_<%=i %>" name="xsskDescs[<%=i %>].fsje" value="<%=JMath.round(fsje) %>" readonly></td>
-		<td class="a2"><input type="text" size="10" id="ysk_<%=i %>" name="xsskDescs[<%=i %>].ysk"  value="<%=JMath.round(ysk) %>" readonly></td>
-		<td class="a2"><input type="text" size="10" id="bcsk_<%=i %>" name="xsskDescs[<%=i %>].bcsk" value="<%=JMath.round(bcsk) %>"  onblur="hj();"></td>
-		<td class="a2"><input type="text" id="remark_<%=i %>" name="xsskDescs[<%=i %>].remark" value="<%=StringUtils.nullToStr(map.get("remark")) %>"></td>	
+		<td class="a2"><input type="text" style="width:100%" id="xsd_id_<%=i %>" name="xsskDescs[<%=i %>].xsd_id" value="<%=StringUtils.nullToStr(map.get("xsd_id")) %>" readonly></td>
+		<td class="a2"><input type="text" style="width:100%" id="fsrq_<%=i %>" name="xsskDescs[<%=i %>].fsrq" value="<%=StringUtils.nullToStr(map.get("fsrq")) %>" readonly></td>
+		<td class="a2"><input type="text" style="width:100%" id="fsje_<%=i %>" name="xsskDescs[<%=i %>].fsje" value="<%=JMath.round(fsje) %>" readonly></td>
+		<td class="a2"><input type="text" style="width:100%" id="ysk_<%=i %>" name="xsskDescs[<%=i %>].ysk"  value="<%=JMath.round(ysk) %>" readonly></td>
+		<td class="a2"><input type="text" style="width:100%" id="bcsk_<%=i %>" name="xsskDescs[<%=i %>].bcsk" value="<%=JMath.round(bcsk) %>"  onblur="hj();"></td>
 	</tr>
 <%
 	}
@@ -273,12 +338,11 @@ if(xsskDescs != null && xsskDescs.size()>0){
 	for(int i=0;i<3;i++){
 %>
 	<tr>
-		<td class="a2"><input type="text" id="xsd_id_<%=i %>" name="xsskDescs[<%=i %>].xsd_id" value="" readonly></td>
-		<td class="a2"><input type="text" size="10" id="fsrq_<%=i %>" name="xsskDescs[<%=i %>].fsrq" value="" readonly></td>
-		<td class="a2"><input type="text" size="10" id="fsje_<%=i %>" name="xsskDescs[<%=i %>].fsje" value="0.00" readonly></td>
-		<td class="a2"><input type="text" size="10" id="ysk_<%=i %>" name="xsskDescs[<%=i %>].yfje"  value="0.00" readonly></td>
-		<td class="a2"><input type="text" size="10" id="bcsk_<%=i %>" name="xsskDescs[<%=i %>].bcsk" value="0.00" onblur="hj();"></td>
-		<td class="a2"><input type="text" id="remark_<%=i %>" name="xsskDescs[<%=i %>].remark" value=""></td>	
+		<td class="a2"><input type="text" style="width:100%" id="xsd_id_<%=i %>" name="xsskDescs[<%=i %>].xsd_id" value="" readonly></td>
+		<td class="a2"><input type="text" style="width:100%" id="fsrq_<%=i %>" name="xsskDescs[<%=i %>].fsrq" value="" readonly></td>
+		<td class="a2"><input type="text" style="width:100%" id="fsje_<%=i %>" name="xsskDescs[<%=i %>].fsje" value="0.00" readonly></td>
+		<td class="a2"><input type="text" style="width:100%" id="ysk_<%=i %>" name="xsskDescs[<%=i %>].yfje"  value="0.00" readonly></td>
+		<td class="a2"><input type="text" style="width:100%" id="bcsk_<%=i %>" name="xsskDescs[<%=i %>].bcsk" value="0.00" onblur="hj();"></td>
 	</tr>
 <%
 	}
@@ -287,10 +351,9 @@ if(xsskDescs != null && xsskDescs.size()>0){
 	<tr>
 		<td class="a2">合  计</td>
 		<td class="a2"></td>
-		<td class="a2"><input type="text" size="10" id="hj_fsje" name="hj_fsje" value="<%=JMath.round(hj_fsje) %>" readonly></td>
-		<td class="a2"><input type="text" size="10" id="hj_ysk" name="hj_ysk"  value="<%=JMath.round(hj_ysk) %>" readonly></td>
-		<td class="a2"><input type="text" size="10" id="hj_bcsk" name="hj_bcsk" value="<%=JMath.round(hj_bcsk) %>"></td>
-		<td class="a2"></td>	
+		<td class="a2"><input type="text" style="width:100%" id="hj_fsje" name="hj_fsje" value="<%=JMath.round(hj_fsje) %>" readonly></td>
+		<td class="a2"><input type="text" style="width:100%" id="hj_ysk" name="hj_ysk"  value="<%=JMath.round(hj_ysk) %>" readonly></td>
+		<td class="a2"><input type="text" style="width:100%" id="hj_bcsk" name="hj_bcsk" value="<%=JMath.round(hj_bcsk) %>"></td>
 	</tr>
 	 <%
 	 String cssStyle = "readonly";
@@ -300,25 +363,19 @@ if(xsskDescs != null && xsskDescs.size()>0){
 	 %>	
 	<tr>
 		<td class="a2">本次收款总金额</td>
-		<td class="a2" colspan="5"><input type="text" size="10" id="skje" name="xssk.skje" <%=cssStyle %> value="<%=JMath.round(hj_bcsk) %>"></td>
-	</tr>	
-</table>
-<br>
-<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
-	<thead>
+		<td class="a2"></td>
+		<td class="a2"></td>
+		<td class="a2"></td>
+		<td class="a2"><input type="text" style="width:100%" id="skje" name="xssk.skje" <%=cssStyle %> value="<%=JMath.round(hj_bcsk) %>"></td>
+	</tr>
 	<tr>
-		<td colspan="4">其    它</td>
+		<td class="a1">备  注</td>
+		<td class="a2" colspan="4"><input name="xssk.remark" id="remark" style="width:100%" value="<%=StringUtils.nullToStr(xssk.getRemark()) %>"></td>
 	</tr>
-	</thead>
-	<tr height="50">
-		<td class="a1" width="20%">备  注</td>
-		<td class="a2" width="80%">
-			<textarea rows="3" cols="50" name="xssk.remark" id="remark" style="width:80%"><%=StringUtils.nullToStr(xssk.getRemark()) %></textarea>
-		</td>
-	</tr>
-	
+</table>
+<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">		
 	<tr height="35">
-		<td class="a1" colspan="2">
+		<td class="a1">
 			<input type="button" name="btnSub" value="草 稿" class="css_button2" onclick="saveInfo('1');">&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="button" name="button2" value="提 交" class="css_button2" onclick="saveInfo('2');">&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="button" name="button1" value="关 闭" class="css_button2" onclick="window.close();">

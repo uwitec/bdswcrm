@@ -734,7 +734,7 @@ if(lsdProducts != null && lsdProducts.size()>0){
 				for(int i =0;i<posTypeList.size();i++){
 					PosType posType = (PosType)posTypeList.get(i);
 			%>
-				<option value="<%=posType.getId() %>" <%if(StringUtils.nullToStr(lsd.getFkfs()).equals(posType.getId())) out.print("selected"); %>><%=posType.getName() %></option>
+				<option value="<%=posType.getId() %>" <%if(StringUtils.nullToStr(lsd.getPos_id()).equals(posType.getId())) out.print("selected"); %>><%=posType.getName() %></option>
 			<%
 				}
 			}
