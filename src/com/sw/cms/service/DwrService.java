@@ -13,6 +13,7 @@ import com.sw.cms.dao.CkdDAO;
 import com.sw.cms.dao.ClientsDAO;
 import com.sw.cms.dao.ClientsLinkmanDAO;
 import com.sw.cms.dao.LsdDAO;
+import com.sw.cms.dao.PosTypeDAO;
 import com.sw.cms.dao.ProductDAO;
 import com.sw.cms.dao.ProductKcDAO;
 import com.sw.cms.dao.SerialNumDAO;
@@ -22,6 +23,7 @@ import com.sw.cms.dao.UserDAO;
 import com.sw.cms.dao.XsdDAO;
 import com.sw.cms.model.Accounts;
 import com.sw.cms.model.Clients;
+import com.sw.cms.model.PosType;
 import com.sw.cms.model.Product;
 import com.sw.cms.model.SysInitSet;
 import com.sw.cms.model.Xsd;
@@ -56,6 +58,8 @@ public class DwrService {
 	private ClientsLinkmanDAO clientsLinkmanDao;
 	
 	private AccountsDAO accountsDao;
+	
+	private PosTypeDAO posTypeDao;
 
 	public LsdDAO getLsdDao() {
 		return lsdDao;
@@ -546,10 +550,8 @@ public class DwrService {
 	 * @return
 	 */
 	public Accounts getAccountsById(String id){
-		for (int i = id.length(); i < 4; i++) {
-			id = "0" + id;
-		}
-		return accountsDao.getAccountObj(id);
+		PosType posType = posTypeDao.getPosType(id);
+		return accountsDao.getAccountObj(posType.getAccount_id());
 	}
 
 	public ClientsDAO getClientsDao() {
@@ -638,6 +640,14 @@ public class DwrService {
 
 	public void setAccountsDao(AccountsDAO accountsDao) {
 		this.accountsDao = accountsDao;
+	}
+
+	public PosTypeDAO getPosTypeDao() {
+		return posTypeDao;
+	}
+
+	public void setPosTypeDao(PosTypeDAO posTypeDao) {
+		this.posTypeDao = posTypeDao;
 	}
 
 }
