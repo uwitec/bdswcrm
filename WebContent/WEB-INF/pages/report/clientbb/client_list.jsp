@@ -123,26 +123,24 @@ List userList = (List)VS.findValue("userList");
 	Iterator it = list.iterator();
 	
 	while(it.hasNext()){
-		Map clients = (Map)it.next();
-		
+		Clients clients = (Clients)it.next();
 	%>
-	<tr class="a1"  title="双击查看详情" onDblClick="openWin('<%=StringUtils.nullToStr(clients.get("Id")) %>');">
-		<td class="a1"><%=StringUtils.nullToStr(clients.get("Id")) %></td>
-		<td class="a1"><%=StringUtils.nullToStr(clients.get("Name")) %></td>
-		<td class="a1"><%=StringUtils.nullToStr(clients.get("Address")) %></td>
+	<tr class="a1"  title="双击查看详情" onDblClick="openWin('<%=StringUtils.nullToStr(clients.getId()) %>');">
+		<td class="a1"><%=StringUtils.nullToStr(clients.getId()) %></td>
+		<td class="a1"><%=StringUtils.nullToStr(clients.getName()) %></td>
+		<td class="a1"><%=StringUtils.nullToStr(clients.getAddress()) %></td>
 	<% 
-	String id=StringUtils.nullToStr(clients.get("Id"));
+	String id=StringUtils.nullToStr(clients.getId());
 	ClientsLinkman clientsLinkman=(ClientsLinkman)clientsService.getZClientsLinkman(id);
-	
 	%>
 		<td class="a1"><%=StringUtils.nullToStr(clientsLinkman.getName()) %></td>
 		<td class="a1"><%=StringUtils.nullToStr(clientsLinkman.getYddh()) %></td>
 		<td class="a1"><%=StringUtils.nullToStr(clientsLinkman.getGzdh()) %></td>
 		<td class="a1"><%=StringUtils.nullToStr(clientsLinkman.getMail()) %></td>
 	
-		<td class="a1"><%=StaticParamDo.getRealNameById(StringUtils.nullToStr((clients.get("Khjl")))) %></td>
+		<td class="a1"><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(clients.getKhjl())) %></td>
 		<td class="a1">
-			<a href="#" onclick="openWin('<%=StringUtils.nullToStr(clients.get("Id")) %>');"><img src="images/view.gif" align="absmiddle" title="查看" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
+			<a href="#" onclick="openWin('<%=StringUtils.nullToStr(clients.getId()) %>');"><img src="images/view.gif" align="absmiddle" title="查看" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
 		</td>
 	</tr>
 	
