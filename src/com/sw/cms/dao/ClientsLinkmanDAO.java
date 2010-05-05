@@ -7,7 +7,9 @@ import java.util.Map;
 
 import org.springframework.jdbc.core.RowMapper;
 
+import com.sw.cms.dao.base.BeanRowMapper;
 import com.sw.cms.dao.base.JdbcBaseDAO;
+import com.sw.cms.model.Bwl;
 import com.sw.cms.model.ClientsLinkman;
 import com.sw.cms.model.Page;
 import com.sw.cms.util.StringUtils;
@@ -31,6 +33,26 @@ public class ClientsLinkmanDAO extends JdbcBaseDAO {
 		return this.getJdbcTemplate().query(sql, new ClientsLinkmanRowMapper());
 	}
 
+	/**
+	 * 获取主联系人
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public ClientsLinkman getZClientsLinkman(String id) {
+		ClientsLinkman info = new ClientsLinkman();
+		String sql = "select * from clients_linkman  where lx='主联系人' and clients_id='"
+				+ id + "' ";
+		
+		Object obj =this.queryForObject(sql, new BeanRowMapper(ClientsLinkman.class));
+		if(obj != null){
+			info = (ClientsLinkman)obj;
+		}
+		return info;
+	}
+
+	
+	
 	/**
 	 * 获取联系人列表（翻页）
 	 * 
