@@ -39,6 +39,8 @@ public class ClientsService {
 		return clientsDao.getClients(con, curPage, rowsPerPage);
 	}
 
+	
+		
 	/**
 	 * 根据客户名称模糊查询
 	 * 
@@ -185,6 +187,15 @@ public class ClientsService {
 		return clientsLinkmanDao.getClientsLinkman(id);
 	}
 
+	/**
+	 * desc 主联系人
+	 * 
+	 * @return
+	 */
+	public ClientsLinkman getZClientsLinkman(String id) {
+		return clientsLinkmanDao.getZClientsLinkman(id);
+	}
+	
 	/**
 	 * 根据客户ID 获取跟进记录
 	 * 
