@@ -3,12 +3,14 @@
 <%@ page import="com.sw.cms.model.Page" %>
 <%@ page import="com.sw.cms.util.*" %>
 <%@ page import="com.sw.cms.model.*" %>
+<%@ page import="com.sw.cms.service.*" %>
 <%@ page import="java.util.*" %>
 
 <%
 OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
 
 Page results = (Page)VS.findValue("clientsPage");
+ClientsService clientsService = (ClientsService)VS.findValue("clientsService");
 
 String name = (String)VS.findValue("name");
 String lxr = (String)VS.findValue("lxr");
@@ -108,7 +110,10 @@ List userList = (List)VS.findValue("userList");
 		<td onclick="doSort('id');">编号<%if(orderName.equals("id")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
 		<td onclick="doSort('name');">单位名称<%if(orderName.equals("name")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
 		<td onclick="doSort('address');">地址<%if(orderName.equals("address")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('gzdh');">固定电话<%if(orderName.equals("gzdh")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td onclick="doSort('lxr_name');">主联系人<%if(orderName.equals("lxr_name")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td onclick="doSort('lxr_yddh');">手机<%if(orderName.equals("lxr_yddh")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td onclick="doSort('lxr_gzdh');">电话<%if(orderName.equals("lxr_gzdh")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td onclick="doSort('lxr_mail');">Email<%if(orderName.equals("lxr_mail")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
 		<td onclick="doSort('khjl');">客户经理<%if(orderName.equals("khjl")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
 		<td>操作</td>
 	</tr>
@@ -118,16 +123,26 @@ List userList = (List)VS.findValue("userList");
 	Iterator it = list.iterator();
 	
 	while(it.hasNext()){
-		Clients clients = (Clients)it.next();
+		Map clients = (Map)it.next();
+		
 	%>
-	<tr class="a1"  title="双击查看详情" onDblClick="openWin('<%=StringUtils.nullToStr(clients.getId()) %>');">
-		<td class="a1"><%=StringUtils.nullToStr(clients.getId()) %></td>
-		<td class="a1"><%=StringUtils.nullToStr(clients.getName()) %></td>
-		<td class="a1"><%=StringUtils.nullToStr(clients.getAddress()) %></td>
-		<td class="a1"><%=StringUtils.nullToStr(clients.getGzdh()) %></td>
-		<td class="a1"><%=StaticParamDo.getRealNameById(clients.getKhjl()) %></td>
+	<tr class="a1"  title="双击查看详情" onDblClick="openWin('<%=StringUtils.nullToStr(clients.get("Id")) %>');">
+		<td class="a1"><%=StringUtils.nullToStr(clients.get("Id")) %></td>
+		<td class="a1"><%=StringUtils.nullToStr(clients.get("Name")) %></td>
+		<td class="a1"><%=StringUtils.nullToStr(clients.get("Address")) %></td>
+	<% 
+	String id=StringUtils.nullToStr(clients.get("Id"));
+	ClientsLinkman clientsLinkman=(ClientsLinkman)clientsService.getZClientsLinkman(id);
+	
+	%>
+		<td class="a1"><%=StringUtils.nullToStr(clientsLinkman.getName()) %></td>
+		<td class="a1"><%=StringUtils.nullToStr(clientsLinkman.getYddh()) %></td>
+		<td class="a1"><%=StringUtils.nullToStr(clientsLinkman.getGzdh()) %></td>
+		<td class="a1"><%=StringUtils.nullToStr(clientsLinkman.getMail()) %></td>
+	
+		<td class="a1"><%=StaticParamDo.getRealNameById(StringUtils.nullToStr((clients.get("Khjl")))) %></td>
 		<td class="a1">
-			<a href="#" onclick="openWin('<%=StringUtils.nullToStr(clients.getId()) %>');"><img src="images/view.gif" align="absmiddle" title="查看" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
+			<a href="#" onclick="openWin('<%=StringUtils.nullToStr(clients.get("Id")) %>');"><img src="images/view.gif" align="absmiddle" title="查看" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
 		</td>
 	</tr>
 	
