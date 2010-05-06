@@ -115,8 +115,20 @@ if(list != null && list.size()>0){
 		String dj_id = StringUtils.nullToStr(map.get("dj_id"));  //单据编号
 		
 		double je = map.get("je")==null?0:((Double)map.get("je")).doubleValue();
+
+		if(flag.equals("是"))
+		{		
 %>
-		<TR>
+		<TR style="BACKGROUND-COLOR: #E8E8E8">
+		<% 
+		}
+		else
+		{
+		%>
+		<TR style="BACKGROUND-COLOR: #FFFFFF">
+	    <% 
+	    }
+	    %>
 			<TD class=ReportItem><%=creatdate %></TD>			
 <%			
 		String url = "";
