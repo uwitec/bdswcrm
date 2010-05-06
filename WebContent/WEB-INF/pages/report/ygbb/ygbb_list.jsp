@@ -109,6 +109,7 @@ List deptList = (List)VS.findValue("depts");
 <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0" border="1" id="selTable">
 	<thead>
 	<tr>
+	    <td>ID</td>
 		<td>姓名</td>
 		<td>性别</td>
 		<td>电话</td>
@@ -116,6 +117,9 @@ List deptList = (List)VS.findValue("depts");
 		<td>部门</td>
 		<td>职位</td>
 		<td>是否业务员</td>
+		<td>Email</td>
+		<td>QQ</td>
+		<td>MSN</td>
 		<td>操作</td>
 	</tr>
 	</thead>
@@ -127,6 +131,7 @@ List deptList = (List)VS.findValue("depts");
 		Map map = (Map)it.next();
 	%>
 	<tr  class="a1" title="双击查看详情" onmousedown="trSelectChangeCss()" onDblClick="view('<%=StringUtils.nullToStr(map.get("user_id")) %>');">
+		<td><%=StringUtils.nullToStr(map.get("user_id")) %></td>
 		<td><%=StringUtils.nullToStr(map.get("real_name")) %></td>
 		<td><%=StringUtils.nullToStr(map.get("sex")) %></td>
 		<td><%=StringUtils.nullToStr(map.get("gs_phone")) %></td>
@@ -134,6 +139,9 @@ List deptList = (List)VS.findValue("depts");
 		<td><%=StringUtils.nullToStr(map.get("dept_name")) %></td>
 		<td><%=StringUtils.nullToStr(map.get("position")) %></td>
 		<td><%=StringUtils.nullToStr(map.get("is_ywy")) %></td>
+		<td><%=StringUtils.nullToStr(map.get("mail")) %></td>
+		<td><%=StringUtils.nullToStr(map.get("qq")) %></td>
+		<td><%=StringUtils.nullToStr(map.get("msn")) %></td>
 		<td>
 			<a href="javascript:view('<%=StringUtils.nullToStr(map.get("user_id")) %>');"><img src="images/view.gif" align="absmiddle" title="查看" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
 		</td>
