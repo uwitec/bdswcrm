@@ -721,3 +721,15 @@ ALTER TABLE `cnfkd` ADD COLUMN `has_fy` VARCHAR(20) AFTER `client_all_name`,
  --销售收款添加收款方式和pos机编号
  ALTER TABLE `xssk` ADD COLUMN `skfs` VARCHAR(100) AFTER `delete_key`,
  ADD COLUMN `pos_id` VARCHAR(45) AFTER `skfs`;
+ 
+ 2010-05-05增加
+ --备忘录增加共享人的存储
+ALTER TABLE `bwl` ADD COLUMN `gxr` VARCHAR(400) AFTER `cz_date`;
+ 
+DROP TABLE IF EXISTS `bwl_share`;
+CREATE TABLE `bwl_share` (
+  `id` int(10)  NOT NULL auto_increment,  
+  `bwl_id` varchar(50) default NULL,
+  `share` varchar(20) default NULL,     
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
