@@ -2604,6 +2604,10 @@
         <action name="listBwl" class="bwlAction" method="list">
             <result name="success" type="dispatcher">/WEB-INF/pages/bwl/bwl_list.jsp</result>
         </action>
+        <action name="listSyBwl" class="bwlAction" method="listsy">
+            <result name="success" type="dispatcher">/WEB-INF/pages/bwl/bwlsy_list.jsp</result>
+        </action>
+        
         <action name="addBwl" class="bwlAction" method="add">
             <result name="success">/WEB-INF/pages/bwl/bwl_add.jsp</result>
         </action> 
@@ -2625,6 +2629,9 @@
         </action>
 		<action name="delBwl" class="bwlAction" method="del">
             <result name="success" type="redirect">listBwl.html</result>
+        </action>
+        <action name="selMan" class="bwlAction" method="selLxr">
+              <result name="success">/WEB-INF/pages/bwl/sel_man.jsp</result>
         </action>
         <!-- 备忘录结束 -->    
         
