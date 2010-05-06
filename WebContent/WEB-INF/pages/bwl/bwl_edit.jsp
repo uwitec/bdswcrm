@@ -27,6 +27,12 @@ Bwl bwl = (Bwl)VS.findValue("bwl");
 		
 		document.myform.submit();
 	}	
+	function addTo(){
+		var destination = "selMan.html";
+		var fea ='width=750,height=420,left=' + (screen.availWidth-750)/2 + ',top=' + (screen.availHeight-420)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		
+		window.open(destination,'选择共享用户',fea);		
+	}
 </script>
 </head>
 <body >
@@ -38,6 +44,18 @@ Bwl bwl = (Bwl)VS.findValue("bwl");
 		<td colspan="4">备忘录</td>
 	</tr>
 	</thead>
+	<tr>
+		<td class="a1" width="15%">共享用户名</td>
+		<td class="a2" width="90%" valign="middle">
+			<table width="100%" border="0" style="font-size: 12px">
+				<tr>
+					<td width="80%"><textarea name="bwl.gxr" id="to" rows="3" style="width:95%" ><%=StringUtils.nullToStr(bwl.getGxr()) %></textarea><BR>&nbsp;<font color="red">多个人名用“,”隔开</font></td>
+					<td width="16"><img src="images/create.gif" border="0" style="cursor: hand"></td>
+					<td><a href="javascript:addTo();" class="xxlb"> 添加共享用户名 </a></td>
+				</tr>
+			</table>
+		</td> 
+	</tr>
 	<tr>
 		<td class="a1" width="15%">标题</td>
 		<td class="a2" width="80%" colspan="3"><input type="text" name="bwl.title" id="title" value="<%=StringUtils.nullToStr(bwl.getTitle()) %>" size="45"><font color="red">*</font></td>

@@ -57,8 +57,8 @@ Bwl bwl = (Bwl)VS.findValue("bwl");
 					                                <TR>
 					                                	<TD class=Bottom_dotted align=center width="100%">
 					                                		<B><%=StringUtils.nullToStr(bwl.getTitle()) %></B>
-					                                		<BR>操作人：<%=StaticParamDo.getRealNameById(StringUtils.nullToStr(bwl.getCzr())) %>&nbsp;&nbsp;&nbsp;&nbsp;
-					                                		操作时间：<%=StringUtils.nullToStr(bwl.getCz_date()) %>
+					                                		<BR>创建人：<%=StaticParamDo.getRealNameById(StringUtils.nullToStr(bwl.getCzr())) %>&nbsp;&nbsp;&nbsp;&nbsp;
+					                                		创建时间：<%=StringUtils.nullToStr(bwl.getCz_date()) %>
 					                                	</TD>																						
 													</TR>
 					                                <TR>
