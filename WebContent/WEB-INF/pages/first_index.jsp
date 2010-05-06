@@ -114,7 +114,7 @@ List bwlList = (List)VS.findValue("bwlList");
 					}
 					%>
 					<tr>
-					<TD align=right height="23" colspan="3"><a href="javascript:void(0);" onclick="parent.addtabFmMenu('备忘录列表','listBwl.html','');" class=xxlb>更多...</a>&nbsp;&nbsp;&nbsp;</TD>	
+					<TD align=right height="23" colspan="3"><a href="javascript:void(0);" onclick="parent.addtabFmMenu('备忘录列表','listSyBwl.html','');" class=xxlb>更多...</a>&nbsp;&nbsp;&nbsp;</TD>	
 					</tr>															
 				</table>
 			</div>
