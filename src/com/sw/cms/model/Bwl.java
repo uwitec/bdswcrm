@@ -14,7 +14,14 @@ public class Bwl {
 	private String content;
 	private String czr;
 	private String cz_date;
+	private String gxr;
 	
+	public String getGxr() {
+		return gxr;
+	}
+	public void setGxr(String gxr) {
+		this.gxr = gxr;
+	}
 	
 	public String getContent() {
 		return content;
