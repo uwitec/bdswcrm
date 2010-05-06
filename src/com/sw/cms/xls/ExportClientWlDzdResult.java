@@ -104,11 +104,25 @@ public class ExportClientWlDzdResult extends ExportXlsTemplate {
 			}
 			label = new Label(0,4,"期初",this.getFt_item_center());
 			sheet.addCell(label);
+			label = new Label(1,4,"",this.getFt_item_right());
+			sheet.addCell(label);
+			label = new Label(2,4,"",this.getFt_item_right());
+			sheet.addCell(label);
+			label = new Label(3,4,"",this.getFt_item_right());
+			sheet.addCell(label);
+			label = new Label(4,4,"",this.getFt_item_right());
+			sheet.addCell(label);
+			label = new Label(5,4,"",this.getFt_item_right());
+			sheet.addCell(label);
 			label = new Label(6,4,JMath.round(ysqc,2),this.getFt_item_right());
+			sheet.addCell(label);
+			label = new Label(7,4,"",this.getFt_item_right());
 			sheet.addCell(label);
 			label = new Label(8,4,JMath.round(ysqc,2),this.getFt_item_right());
 			sheet.addCell(label);
 			label = new Label(9,4,JMath.round(yfqc,2),this.getFt_item_right());
+			sheet.addCell(label);
+			label = new Label(10,4,"",this.getFt_item_right());
 			sheet.addCell(label);
 			label = new Label(11,4,JMath.round(yfqc,2),this.getFt_item_right());
 			sheet.addCell(label);
@@ -134,62 +148,307 @@ public class ExportClientWlDzdResult extends ExportXlsTemplate {
 					String dj_id = StringUtils.nullToStr(map.get("dj_id"));  //单据编号
 					
 					double je = map.get("je")==null?0:((Double)map.get("je")).doubleValue();
-					
+					if(flag.equals("是")){
 					//日期
-					label = new Label(0,k,creatdate,this.getFt_item_center());
+					label = new Label(0,k,creatdate,this.getFt_item_centergray());
 					sheet.addCell(label);
 					//业务类型
-					label = new Label(1,k,xwtype,this.getFt_item_center());
+					label = new Label(1,k,xwtype,this.getFt_item_centergray());
 					sheet.addCell(label);
 					//单据编号
-					label = new Label(2,k,dj_id,this.getFt_item_center());
+					label = new Label(2,k,dj_id,this.getFt_item_centergray());
+					sheet.addCell(label);
+					//商品名称
+					label = new Label(3,k,"",this.getFt_item_leftgray());
+					sheet.addCell(label);
+					//商品规格
+					label = new Label(4,k,"",this.getFt_item_leftgray());
+					sheet.addCell(label);
+					//数量
+					label = new Label(5,k,"",this.getFt_item_centergray());
 					sheet.addCell(label);
 					
 					if(xwtype.equals("销售") || xwtype.equals("销售退货")){
 						hj_ys += je;
-						ys_ye += je;
-						
-						label = new Label(6,k,JMath.round(je,2),this.getFt_item_right());
-						sheet.addCell(label);						
-						label = new Label(8,k,JMath.round(ys_ye,2),this.getFt_item_right());
+						ys_ye += je;	
+						//应收款
+						label = new Label(6,k,JMath.round(je,2),this.getFt_item_rightgray());
+						sheet.addCell(label);
+						//收款
+						label = new Label(7,k,"",this.getFt_item_rightgray());
+						sheet.addCell(label);
+						//余额
+						label = new Label(8,k,JMath.round(ys_ye,2),this.getFt_item_rightgray());
+						sheet.addCell(label);
+						//应付款
+						label = new Label(9,k,"",this.getFt_item_rightgray());
+						sheet.addCell(label);
+						//付款
+						label = new Label(10,k,"",this.getFt_item_rightgray());
+						sheet.addCell(label);
+						//余额
+						label = new Label(11,k,"",this.getFt_item_rightgray());
 						sheet.addCell(label);
 					}else if(xwtype.equals("收款")){
 						hj_sk += je;
 						ys_ye -= je;
-						label = new Label(7,k,JMath.round(je,2),this.getFt_item_right());
+						//应收款
+						label = new Label(6,k,"",this.getFt_item_rightgray());
+						sheet.addCell(label);
+						//收款
+						label = new Label(7,k,JMath.round(je,2),this.getFt_item_rightgray());
 						sheet.addCell(label);						
-						label = new Label(8,k,JMath.round(ys_ye,2),this.getFt_item_right());
+						//余额
+						label = new Label(8,k,JMath.round(ys_ye,2),this.getFt_item_rightgray());
+						sheet.addCell(label);
+						//应付款
+						label = new Label(9,k,"",this.getFt_item_rightgray());
+						sheet.addCell(label);
+						//付款
+						label = new Label(10,k,"",this.getFt_item_rightgray());
+						sheet.addCell(label);
+						//余额
+						label = new Label(11,k,"",this.getFt_item_rightgray());
 						sheet.addCell(label);
 					}else if(xwtype.equals("采购") || xwtype.equals("采购退货")){
 						hj_yf += je;
 						yf_ye += je;
-						label = new Label(9,k,JMath.round(je,2),this.getFt_item_right());
+						
+                        //应收款
+						label = new Label(6,k,"",this.getFt_item_rightgray());
+						sheet.addCell(label);
+						//收款
+						label = new Label(7,k,"",this.getFt_item_rightgray());
 						sheet.addCell(label);						
-						label = new Label(11,k,JMath.round(yf_ye,2),this.getFt_item_right());
+						//余额
+						label = new Label(8,k,"",this.getFt_item_rightgray());
+						sheet.addCell(label);
+						//应付款
+						label = new Label(9,k,JMath.round(je,2),this.getFt_item_rightgray());
+						sheet.addCell(label);
+						//付款
+						label = new Label(10,k,"",this.getFt_item_rightgray());
+						sheet.addCell(label);
+						//余额
+						label = new Label(11,k,JMath.round(yf_ye,2),this.getFt_item_rightgray());
 						sheet.addCell(label);
 					}else if(xwtype.equals("付款")){
 						hj_fk += je;
 						yf_ye -= je;
-						label = new Label(10,k,JMath.round(je,2),this.getFt_item_right());
+						
+                        //应收款
+						label = new Label(6,k,"",this.getFt_item_rightgray());
+						sheet.addCell(label);
+						//收款
+						label = new Label(7,k,"",this.getFt_item_rightgray());
 						sheet.addCell(label);						
-						label = new Label(11,k,JMath.round(yf_ye,2),this.getFt_item_right());
+						//余额
+						label = new Label(8,k,"",this.getFt_item_rightgray());
+						sheet.addCell(label);
+						//应付款
+						label = new Label(9,k,"",this.getFt_item_rightgray());
+						sheet.addCell(label);
+						//付款			
+						label = new Label(10,k,JMath.round(je,2),this.getFt_item_rightgray());
+						sheet.addCell(label);
+                        //余额
+						label = new Label(11,k,JMath.round(yf_ye,2),this.getFt_item_rightgray());
 						sheet.addCell(label);
 					}else if(xwtype.equals("往来调账(应收)")){
 						hj_ys += je;
 						ys_ye += je;
-						label = new Label(6,k,JMath.round(je,2),this.getFt_item_right());
+						//应收款
+						label = new Label(6,k,JMath.round(je,2),this.getFt_item_rightgray());
+						sheet.addCell(label);	
+                        //收款
+						label = new Label(7,k,"",this.getFt_item_rightgray());
 						sheet.addCell(label);						
-						label = new Label(8,k,JMath.round(ys_ye,2),this.getFt_item_right());
+						//余额
+						label = new Label(8,k,JMath.round(ys_ye,2),this.getFt_item_rightgray());
+						sheet.addCell(label);
+                        //应付款
+						label = new Label(9,k,"",this.getFt_item_rightgray());
+						sheet.addCell(label);
+						//付款			
+						label = new Label(10,k,"",this.getFt_item_rightgray());
+						sheet.addCell(label);
+                        //余额
+						label = new Label(11,k,"",this.getFt_item_rightgray());
 						sheet.addCell(label);
 					}else if(xwtype.equals("往来调账(应付)")){
 						hj_yf += je;
 						yf_ye += je;
-						label = new Label(9,k,JMath.round(je,2),this.getFt_item_right());
+                        //应收款
+						label = new Label(6,k,"",this.getFt_item_rightgray());
+						sheet.addCell(label);	
+                        //收款
+						label = new Label(7,k,"",this.getFt_item_rightgray());
 						sheet.addCell(label);						
-						label = new Label(11,k,JMath.round(yf_ye,2),this.getFt_item_right());
+						//余额
+						label = new Label(8,k,"",this.getFt_item_rightgray());
+						sheet.addCell(label);
+                        //应付款
+						label = new Label(9,k,JMath.round(je,2),this.getFt_item_rightgray());
+						sheet.addCell(label);	
+                        //付款			
+						label = new Label(10,k,"",this.getFt_item_rightgray());
+						sheet.addCell(label);
+                        //余额
+						label = new Label(11,k,JMath.round(yf_ye,2),this.getFt_item_rightgray());
 						sheet.addCell(label);
 					}
-					
+					}
+					else
+					{
+                        //日期
+						label = new Label(0,k,creatdate,this.getFt_item_center());
+						sheet.addCell(label);
+						//业务类型
+						label = new Label(1,k,xwtype,this.getFt_item_center());
+						sheet.addCell(label);
+						//单据编号
+						label = new Label(2,k,dj_id,this.getFt_item_center());
+						sheet.addCell(label);
+						//商品名称
+						label = new Label(3,k,"",this.getFt_item_left());
+						sheet.addCell(label);
+						//商品规格
+						label = new Label(4,k,"",this.getFt_item_left());
+						sheet.addCell(label);
+						//数量
+						label = new Label(5,k,"",this.getFt_item_center());
+						sheet.addCell(label);
+						
+						if(xwtype.equals("销售") || xwtype.equals("销售退货")){
+							hj_ys += je;
+							ys_ye += je;	
+							//应收款
+							label = new Label(6,k,JMath.round(je,2),this.getFt_item_right());
+							sheet.addCell(label);
+							//收款
+							label = new Label(7,k,"",this.getFt_item_right());
+							sheet.addCell(label);
+							//余额
+							label = new Label(8,k,JMath.round(ys_ye,2),this.getFt_item_right());
+							sheet.addCell(label);
+							//应付款
+							label = new Label(9,k,"",this.getFt_item_right());
+							sheet.addCell(label);
+							//付款
+							label = new Label(10,k,"",this.getFt_item_right());
+							sheet.addCell(label);
+							//余额
+							label = new Label(11,k,"",this.getFt_item_right());
+							sheet.addCell(label);
+						}else if(xwtype.equals("收款")){
+							hj_sk += je;
+							ys_ye -= je;
+							//应收款
+							label = new Label(6,k,"",this.getFt_item_right());
+							sheet.addCell(label);
+							//收款
+							label = new Label(7,k,JMath.round(je,2),this.getFt_item_right());
+							sheet.addCell(label);						
+							//余额
+							label = new Label(8,k,JMath.round(ys_ye,2),this.getFt_item_right());
+							sheet.addCell(label);
+							//应付款
+							label = new Label(9,k,"",this.getFt_item_right());
+							sheet.addCell(label);
+							//付款
+							label = new Label(10,k,"",this.getFt_item_right());
+							sheet.addCell(label);
+							//余额
+							label = new Label(11,k,"",this.getFt_item_right());
+							sheet.addCell(label);
+						}else if(xwtype.equals("采购") || xwtype.equals("采购退货")){
+							hj_yf += je;
+							yf_ye += je;
+							
+	                        //应收款
+							label = new Label(6,k,"",this.getFt_item_right());
+							sheet.addCell(label);
+							//收款
+							label = new Label(7,k,"",this.getFt_item_right());
+							sheet.addCell(label);						
+							//余额
+							label = new Label(8,k,"",this.getFt_item_right());
+							sheet.addCell(label);
+							//应付款
+							label = new Label(9,k,JMath.round(je,2),this.getFt_item_right());
+							sheet.addCell(label);
+							//付款
+							label = new Label(10,k,"",this.getFt_item_right());
+							sheet.addCell(label);
+							//余额
+							label = new Label(11,k,JMath.round(yf_ye,2),this.getFt_item_right());
+							sheet.addCell(label);
+						}else if(xwtype.equals("付款")){
+							hj_fk += je;
+							yf_ye -= je;
+							
+	                        //应收款
+							label = new Label(6,k,"",this.getFt_item_right());
+							sheet.addCell(label);
+							//收款
+							label = new Label(7,k,"",this.getFt_item_right());
+							sheet.addCell(label);						
+							//余额
+							label = new Label(8,k,"",this.getFt_item_right());
+							sheet.addCell(label);
+							//应付款
+							label = new Label(9,k,"",this.getFt_item_right());
+							sheet.addCell(label);
+							//付款			
+							label = new Label(10,k,JMath.round(je,2),this.getFt_item_right());
+							sheet.addCell(label);
+	                        //余额
+							label = new Label(11,k,JMath.round(yf_ye,2),this.getFt_item_right());
+							sheet.addCell(label);
+						}else if(xwtype.equals("往来调账(应收)")){
+							hj_ys += je;
+							ys_ye += je;
+							//应收款
+							label = new Label(6,k,JMath.round(je,2),this.getFt_item_right());
+							sheet.addCell(label);	
+	                        //收款
+							label = new Label(7,k,"",this.getFt_item_right());
+							sheet.addCell(label);						
+							//余额
+							label = new Label(8,k,JMath.round(ys_ye,2),this.getFt_item_right());
+							sheet.addCell(label);
+	                        //应付款
+							label = new Label(9,k,"",this.getFt_item_right());
+							sheet.addCell(label);
+							//付款			
+							label = new Label(10,k,"",this.getFt_item_right());
+							sheet.addCell(label);
+	                        //余额
+							label = new Label(11,k,"",this.getFt_item_right());
+							sheet.addCell(label);
+						}else if(xwtype.equals("往来调账(应付)")){
+							hj_yf += je;
+							yf_ye += je;
+	                        //应收款
+							label = new Label(6,k,"",this.getFt_item_right());
+							sheet.addCell(label);	
+	                        //收款
+							label = new Label(7,k,"",this.getFt_item_right());
+							sheet.addCell(label);						
+							//余额
+							label = new Label(8,k,"",this.getFt_item_right());
+							sheet.addCell(label);
+	                        //应付款
+							label = new Label(9,k,JMath.round(je,2),this.getFt_item_right());
+							sheet.addCell(label);	
+	                        //付款			
+							label = new Label(10,k,"",this.getFt_item_right());
+							sheet.addCell(label);
+	                        //余额
+							label = new Label(11,k,JMath.round(yf_ye,2),this.getFt_item_right());
+							sheet.addCell(label);
+						}
+					}
 					if(flag.equals("是")){
 						if(xwtype.equals("销售") || xwtype.equals("销售退货") || xwtype.equals("采购") || xwtype.equals("采购退货")){
 							List mxList = clientWlDzdService.getDjMxList(dj_id,xwtype);
@@ -199,19 +458,54 @@ public class ExportClientWlDzdResult extends ExportXlsTemplate {
 									
 									k++;
 									double xj = mxMap.get("xj")==null?0:((Double)mxMap.get("xj")).doubleValue();
-									
+									//商品名称
 									label = new Label(3,k,StringUtils.nullToStr(mxMap.get("product_name")),this.getFt_item_left());
-									sheet.addCell(label);						
+									sheet.addCell(label);	
+									//商品规格
 									label = new Label(4,k,StringUtils.nullToStr(mxMap.get("product_xh")),this.getFt_item_left());
 									sheet.addCell(label);
+									//数量
 									label = new Label(5,k,StringUtils.nullToStr(mxMap.get("nums")),this.getFt_item_center());
 									sheet.addCell(label);
 									
-									if(xwtype.equals("销售") || xwtype.equals("销售退货")){					
+									if(xwtype.equals("销售") || xwtype.equals("销售退货")){	
+										//应收款
 										label = new Label(6,k,JMath.round(xj,2),this.getFt_item_right());
 										sheet.addCell(label);
+                                        //收款
+										label = new Label(7,k,"",this.getFt_item_right());
+										sheet.addCell(label);						
+										//余额
+										label = new Label(8,k,"",this.getFt_item_right());
+										sheet.addCell(label);
+				                        //应付款
+										label = new Label(9,k,"",this.getFt_item_right());
+										sheet.addCell(label);	
+				                        //付款			
+										label = new Label(10,k,"",this.getFt_item_right());
+										sheet.addCell(label);
+				                        //余额
+										label = new Label(11,k,"",this.getFt_item_right());
+										sheet.addCell(label);
+										
 									}else if(xwtype.equals("采购") || xwtype.equals("采购退货")){
+                                        //应收款
+										label = new Label(6,k,"",this.getFt_item_right());
+										sheet.addCell(label);
+                                        //收款
+										label = new Label(7,k,"",this.getFt_item_right());
+										sheet.addCell(label);						
+										//余额
+										label = new Label(8,k,"",this.getFt_item_right());
+										sheet.addCell(label);
+				                        //应付款
 										label = new Label(9,k,JMath.round(xj,2),this.getFt_item_right());
+										sheet.addCell(label);
+                                        //付款			
+										label = new Label(10,k,"",this.getFt_item_right());
+										sheet.addCell(label);
+				                        //余额
+										label = new Label(11,k,"",this.getFt_item_right());
 										sheet.addCell(label);
 									}
 								}
@@ -226,6 +520,24 @@ public class ExportClientWlDzdResult extends ExportXlsTemplate {
 			//写合计
 			label = new Label(0,k,"合计",this.getFt_item_center());
 			sheet.addCell(label);
+			
+//			业务类型
+			label = new Label(1,k,"",this.getFt_item_center());
+			sheet.addCell(label);
+			//单据编号
+			label = new Label(2,k,"",this.getFt_item_center());
+			sheet.addCell(label);
+			//商品名称
+			label = new Label(3,k,"",this.getFt_item_left());
+			sheet.addCell(label);
+			//商品规格
+			label = new Label(4,k,"",this.getFt_item_left());
+			sheet.addCell(label);
+			//数量
+			label = new Label(5,k,"",this.getFt_item_center());
+			sheet.addCell(label);
+			
+			
 			label = new Label(6,k,JMath.round(hj_ys,2),this.getFt_item_right());
 			sheet.addCell(label);
 			label = new Label(7,k,JMath.round(hj_sk,2),this.getFt_item_right());
