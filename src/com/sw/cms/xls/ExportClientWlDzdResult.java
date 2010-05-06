@@ -158,12 +158,15 @@ public class ExportClientWlDzdResult extends ExportXlsTemplate {
 					//单据编号
 					label = new Label(2,k,dj_id,this.getFt_item_centergray());
 					sheet.addCell(label);
+					sheet.setColumnView(2, 40);
 					//商品名称
 					label = new Label(3,k,"",this.getFt_item_leftgray());
 					sheet.addCell(label);
+					sheet.setColumnView(3, 40);
 					//商品规格
 					label = new Label(4,k,"",this.getFt_item_leftgray());
 					sheet.addCell(label);
+					sheet.setColumnView(4, 40);
 					//数量
 					label = new Label(5,k,"",this.getFt_item_centergray());
 					sheet.addCell(label);
@@ -309,12 +312,15 @@ public class ExportClientWlDzdResult extends ExportXlsTemplate {
 						//单据编号
 						label = new Label(2,k,dj_id,this.getFt_item_center());
 						sheet.addCell(label);
+						sheet.setColumnView(2, 40);
 						//商品名称
 						label = new Label(3,k,"",this.getFt_item_left());
 						sheet.addCell(label);
+						sheet.setColumnView(3, 40);
 						//商品规格
 						label = new Label(4,k,"",this.getFt_item_left());
 						sheet.addCell(label);
+						sheet.setColumnView(4, 40);
 						//数量
 						label = new Label(5,k,"",this.getFt_item_center());
 						sheet.addCell(label);
