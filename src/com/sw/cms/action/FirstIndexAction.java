@@ -63,7 +63,7 @@ public class FirstIndexAction extends BaseAction {
 		nbggList = page.getResults();
 
 		//±¸ÍüÂ¼
-		Page bwlpage = bwlService.getBwlList(curPage, 10,user_id);
+		Page bwlpage = bwlService.getBwlShareList(curPage, 10,user_id);
 		bwlList = bwlpage.getResults();
 
 		
@@ -223,7 +223,7 @@ public class FirstIndexAction extends BaseAction {
 		String user_id = info.getUser_id();
 
 		//±¸ÍüÂ¼
-		Page page = bwlService.getBwlList(curPage, rowsPerPage,user_id);
+		Page page = bwlService.getBwlShareList(curPage, rowsPerPage,user_id);
 		bwlList = page.getResults();
 
 		return "success";

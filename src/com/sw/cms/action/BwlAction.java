@@ -1,5 +1,10 @@
 package com.sw.cms.action;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import com.sw.cms.action.base.BaseAction;
 import com.sw.cms.model.LoginInfo;
 import com.sw.cms.model.Page;
@@ -14,9 +19,21 @@ public class BwlAction extends BaseAction {
 	private Page bwlPage;
 	private Bwl bwl;
 	
+	String real_name= "";
 	private String id = "";
 	private int curPage = 1;
-	
+	private Page pageMan;
+	 
+   
+
+	public Page getPageMan() {
+		return pageMan;
+	}
+
+
+	public void setPageMan(Page pageMan) {
+		this.pageMan = pageMan;
+	}
 	
 	/**
 	 * 取备忘录信息列表
@@ -31,6 +48,19 @@ public class BwlAction extends BaseAction {
 		return "success";
 	}
 	
+
+	/**
+	 * 取备忘录共享信息列表
+	 * @return
+	 */
+	public String listsy(){
+		LoginInfo info = (LoginInfo)getSession().getAttribute("LOGINUSER");
+		String user_id = info.getUser_id();
+		
+		int rowsPerPage = Constant.PAGE_SIZE2;
+		bwlPage = bwlService.getBwlShareList(curPage, rowsPerPage,user_id);
+		return "success";
+	}
 	
 	/**
 	 * 打开添加页面
@@ -88,7 +118,34 @@ public class BwlAction extends BaseAction {
 		return "success";
 	}
 	
+	/**
+	 * 选择共享用户
+	 * @return
+	 */
+	 public String selLxr(){
+		try{
+			int rowsPerPage = Constant.PAGE_SIZE;
+			
+			pageMan=bwlService.getLxrAll(real_name, curPage, rowsPerPage);
+			
+			return SUCCESS;
+		}catch(Exception e){
+			log.error("选择邮件地址错误，原因：" + e.getMessage());
+			return ERROR;
+		}
+	}
+	
+	 
+	 
+	 public String getReal_name() {
+			return real_name;
+		}
 
+		public void setReal_name(String real_name) {
+			this.real_name = real_name;
+		}
+ 
+	 
 	public String getId() {
 		return id;
 	}
