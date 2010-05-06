@@ -28,7 +28,6 @@ public abstract class ExportXlsTemplate {
 	private WritableCellFormat ft_item_center_bold = null;   //单元格居中黑体
 	private WritableCellFormat ft_item_centergray = null;        //单元格居中并底色为灰色
 	
-	
 	private WritableCellFormat ft_item_left = null;        //单元格左对齐
 	private WritableCellFormat ft_item_left_bold = null;   //单元格左对齐黑体
 	private WritableCellFormat ft_item_leftgray = null;       //单元格左对齐并底色为灰色
@@ -146,7 +145,7 @@ public abstract class ExportXlsTemplate {
 		return ft_item_center_bold;
 	}
 
-
+	
 	/**
 	 * 单元格左对齐
 	 * @return
