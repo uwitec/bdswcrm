@@ -143,7 +143,7 @@ public class ClientWlDzdDAO extends JdbcBaseDAO {
 		String sql = "";
 		
 		if(xwtype.equals("销售")){
-			sql = "select product_id,product_name,product_xh,sjcj_nums,((price+jgtz) * sjcj_nums) as xj from xsd_product where xsd_id='" + dj_id + "'";
+			sql = "select product_id,product_name,product_xh,sjcj_nums as nums,((price+jgtz) * sjcj_nums) as xj from xsd_product where xsd_id='" + dj_id + "'";
 		}else if(xwtype.equals("销售退货")){
 			sql = "select product_id,product_name,product_xh,nums,(0-th_price * nums) as xj from thd_product where thd_id='" + dj_id + "'";
 		}else if(xwtype.equals("采购")){
