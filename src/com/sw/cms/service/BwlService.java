@@ -18,6 +18,25 @@ public class BwlService {
 		return bwlDao.getBwlList(curPage, rowsPerPage,user_id);
 	}
 	
+	/**
+	 * 取备忘录共享信息列表
+	 * @param curPage
+	 * @param rowsPerPage
+	 * @return
+	 */
+	public Page getBwlShareList(int curPage, int rowsPerPage,String user_id){
+		return bwlDao.getBwlShareList(curPage, rowsPerPage,user_id);
+	}
+	
+	/**
+	 * 取用户名列表
+	 * @param curPage
+	 * @param rowsPerPage
+	 * @return
+	 */
+	public Page getLxrAll(String real_name, int curPage, int rowsPerPage) {
+		return bwlDao.getLxrAll(real_name, curPage, rowsPerPage);
+	}
 	
 	/**
 	 * 保存备忘录信息
@@ -55,7 +74,7 @@ public class BwlService {
 		bwlDao.delBwl(id);
 	}
 	
-
+   
 	public BwlDAO getBwlDao() {
 		return bwlDao;
 	}
