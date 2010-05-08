@@ -279,7 +279,7 @@ function changeSklx(vl){
 		document.getElementById("td_skxx_label").style.display = "none";
 		document.getElementById("td_skxx_value").style.display = "none";
 		document.getElementById("pos_id").style.display = "none";
-		document.getElementById("skfs").value = "";
+		//document.getElementById("skfs").value = "";
 		document.getElementById("pos_id").value = "";
 		
 		document.getElementById("td_skzh_label").style.display = "none";
