@@ -54,6 +54,7 @@ String flag = StringUtils.nullToStr(VS.findValue("flag"));
 	var allCount = <%=counts %>;
 	var iscs_flag = '<%=iscs_flag %>';
 	var flag = "<%=flag %>";
+	var msg = "<%=msg %>";
 		
 	function saveInfo(vl){
 		if(vl == '1'){
@@ -123,6 +124,8 @@ String flag = StringUtils.nullToStr(VS.findValue("flag"));
 		if(document.getElementById("state").value == "已提交"){
 			if(window.confirm("确认要提交零售单吗，提交后将无法修改！")){
 				document.lsdForm.submit();		
+			}else{
+				return;
 			}			
 		}else{
 			document.lsdForm.submit();	
@@ -473,9 +476,16 @@ String flag = StringUtils.nullToStr(VS.findValue("flag"));
 			opener.document.myform.submit();
 		}
 	}
+
+	function showMsg(){
+		if(msg == "") return;
+		opener.document.myform.submit();
+		alert(msg);
+		window.close();
+	}	
 </script>
 </head>
-<body  onload="chgKpTyle('<%=StringUtils.nullToStr(lsd.getFplx()) %>');initFzrTip();submitSp();">
+<body  onload="chgKpTyle('<%=StringUtils.nullToStr(lsd.getFplx()) %>');initFzrTip();submitSp();showMsg();">
 <form name="lsdForm" action="updateLsd.html" method="post">
 <input type="hidden" name="lsd.state" id="state" value="">
 <input type="hidden" name="flag" id="state" value="<%=flag %>">
@@ -485,7 +495,6 @@ String flag = StringUtils.nullToStr(VS.findValue("flag"));
 		<td colspan="4">零售单信息</td>
 	</tr>
 	</thead>
-	<%if(!msg.equals("")){%><tr><td colspan="4" class="a2"><font color="red"><%=msg %></font></td></tr><%}%>		
 	<tr>
 		<td class="a1" width="15%">编  号</td>
 		<td class="a2" width="35%"><input type="text" name="lsd.id" id="id" value="<%=StringUtils.nullToStr(lsd.getId()) %>" size="40" readonly></td>	
