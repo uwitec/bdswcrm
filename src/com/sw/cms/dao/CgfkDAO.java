@@ -326,7 +326,7 @@ public class CgfkDAO extends JdbcBaseDAO {
 	public boolean isCgfkSubmit(String id){
 		boolean is = false;
 		
-		String sql = "select count(*) as nums from cgfk where id='" + id + "' and state<>'已保存' and state<>'审批不通过'";
+		String sql = "select count(*) as nums from cgfk where id='" + id + "' and state<>'已保存' and state<>'审批不通过' and state<>'出纳退回'";
 		int counts = this.getJdbcTemplate().queryForInt(sql);
 		
 		if(counts > 0){
