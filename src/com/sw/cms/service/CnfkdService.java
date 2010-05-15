@@ -108,7 +108,7 @@ public class CnfkdService {
 		cnfkdDao.delCnfkd(id);
 		
 		//更新对应采购付款申请状态
-		Cgfk cgfk = (Cgfk)cgfkDao.getCgfk(tempCnfkd.getId());
+		Cgfk cgfk = (Cgfk)cgfkDao.getCgfk(tempCnfkd.getCgfk_id());
 		if(cgfk != null){
 			cgfk.setState("出纳退回");
 			cgfkDao.updateCgfkStat(cgfk);
