@@ -72,12 +72,15 @@ public class BwlDAO extends JdbcBaseDAO {
 		param[0] = info.getTitle();
 		param[1] = info.getContent();
 		param[2] = info.getCzr();
-		param[3] = UUIDGenerator.getUUID();
+		String id=UUIDGenerator.getUUID();
+		param[3] = id;
 		param[4] = info.getGxr();
+		
+		
 		
 		this.getJdbcTemplate().update(sql,param);
 		
-		this.saveBwlShare(info);
+		this.saveBwlShare(info,id);
 	}
 	
 	
@@ -86,11 +89,11 @@ public class BwlDAO extends JdbcBaseDAO {
 	 * 
 	 * @param bwl
 	 */
-	public void saveBwlShare(Bwl bwl) 
+	public void saveBwlShare(Bwl bwl,String id) 
 	{ 
 		String sql = "";
 		Object[] param = new Object[2];	
-		String bwl_id = bwl.getId();
+		String bwl_id = id;
 		String[] shares = bwl.getGxr().split(",");		
 		if(shares != null && shares.length > 0){
 			
@@ -125,7 +128,7 @@ public class BwlDAO extends JdbcBaseDAO {
 		
 		delBwlShare(info.getId());
 		
-		this.saveBwlShare(info);
+		this.saveBwlShare(info,info.getId());
 	}
 	
 	
@@ -152,6 +155,8 @@ public class BwlDAO extends JdbcBaseDAO {
 	public void delBwl(String id){
 		String sql = "delete from bwl where id='" + id + "'";
 		this.getJdbcTemplate().update(sql);
+		
+		this.delBwlShare(id);
 	}
 
 	/**
