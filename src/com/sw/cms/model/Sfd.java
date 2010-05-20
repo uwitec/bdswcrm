@@ -20,8 +20,31 @@ public class Sfd
 	   private String  qzfs;      //求助方式
 	   private String  state      ;//售后服务单状态（保存，提交）	   
 	   private String wx_state;     //维修状态(处理中，处理完)
-	   private String  ms          ;//描述
+	   private String  ms          ;//商品信息描述
 	   private String  flow          ;//设置流程：咨询、投诉、维修
+	   private String  bxyy          ;//报修原因：从数据字典中获得
+	   private String  bxyy_ms          ;//报修原因说明：当报修原因为“其他”时，可以进行相关信息录入
+	   private String  qz_serial_num          ;//强制序列号
+	   
+	   public String getQz_serial_num() {
+			return qz_serial_num;
+		}
+		public void setQz_serial_num(String qz_serial_num) {
+			this.qz_serial_num = qz_serial_num;
+		}
+	   public String getBxyy() {
+			return bxyy;
+		}
+		public void setBxyy(String bxyy) {
+			this.bxyy = bxyy;
+		}
+		public String getBxyy_ms() {
+			return bxyy_ms;
+		}
+		public void setBxyy_ms(String bxyy_ms) {
+			this.bxyy_ms = bxyy_ms;
+		}
+	   
 	   
 	public String getAddress() {
 		return address;
