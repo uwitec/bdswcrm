@@ -29,7 +29,7 @@ public class ZxgdAction extends BaseAction
 	   private String hf_date2 = "";
 	   private String hfr="";
 	   private String client_name="";	
-	   private String state="";	    
+	   private String state="¥¶¿Ì÷–";	    
 	   private Map  zxgd;
 	   private Zxgd zxgds=new Zxgd();
 	   
