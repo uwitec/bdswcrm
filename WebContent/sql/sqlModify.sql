@@ -733,3 +733,15 @@ CREATE TABLE `bwl_share` (
   `share` varchar(20) default NULL,     
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+2010-05-20修改
+--sfd增加报修原因的存储
+ALTER TABLE `sfd` ADD COLUMN `qz_serial_num` VARCHAR(4000) AFTER `flow`;
+ALTER TABLE `sfd` ADD COLUMN `bxyy` VARCHAR(100) AFTER `qz_serial_num`;
+ALTER TABLE `sfd` ADD COLUMN `bxyy_ms` VARCHAR(1000) AFTER `bxyy`;
+
+--增加报修原因的字典信息
+INSERT INTO `sjzd_jbxx` VALUES ('SJZD_BXYY','报修原因','报修原因',13);
+INSERT INTO `sjzd_xmxx` VALUES (196,'SJZD_BXYY','其他','其他',0);
+
