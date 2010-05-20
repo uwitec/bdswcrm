@@ -23,6 +23,10 @@ public class SfdService
    
    public void  saveSfd(Sfd sfd)
    { 
+       //	 如果售后服务单已提交，不做处理
+		if(sfdDao.isSfdSubmit(sfd.getId())){
+			return;
+		}
 	   sfdDao.saveSfd(sfd);
     
 	   if(sfd.getState().equals("已提交")&&sfd.getWx_state().equals("已处理"))

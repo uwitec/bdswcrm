@@ -35,7 +35,10 @@ public class PgdService
     {
     	
 		Sfd sfd = (Sfd)sfdDao.getSfd(id);
-    	
+        //如果派工单已提交，不做处理
+		if(pgdDao.isPgdSubmit(sfd.getId())){
+			return;
+		}
     	   sfdDao.updateSfdFlow(id,"派工");
     	   pgd.setP_id(pgdDao.updatePgdId());
  		   pgd.setP_ms("售后服务单号["+sfd.getId()+"]");
@@ -54,6 +57,10 @@ public class PgdService
     	 {
     		 Sfd sfd=(Sfd)sfdDao.getSfdById(pgd.getP_sfd_id());
     		 Wxcld wxcld=new Wxcld();
+             // 如果派工单已提交，不做处理
+    		if(wxcldDao.isWxcldSubmit(pgd.getP_id())){
+    				return;
+    			}    		 
     		 wxcld.setW_id(wxcldDao.updateWxcldId());
     		 wxcld.setW_cjr(pgd.getP_cjr());
     		 wxcld.setW_ms("派工单["+pgd.getP_id()+"]");

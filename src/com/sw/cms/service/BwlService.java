@@ -43,6 +43,10 @@ public class BwlService {
 	 * @param info
 	 */
 	public void saveBwl(Bwl info){
+//		 如果备忘录已提交，不做处理
+		if(bwlDao.isBwlSubmit(info.getId())){
+			return;
+		}
 		bwlDao.saveBwl(info);
 	}
 	
