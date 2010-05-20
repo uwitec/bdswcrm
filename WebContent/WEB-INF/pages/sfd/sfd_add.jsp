@@ -9,6 +9,7 @@ OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
 Sfd sfd = (Sfd)VS.findValue("sfd");
 LoginInfo info = (LoginInfo)session.getAttribute("LOGINUSER");
 String user_id = info.getUser_id();
+String[] bxyy = (String[])VS.findValue("bxyy");
 %>
 
 <html>
@@ -176,10 +177,10 @@ String user_id = info.getUser_id();
 			alert("客户名称不能为空，请选择！");
 			return;
 		}		
-		if(document.getElementById("linkman").value == ""){
-			alert("联系人不能为空，请选择！");
-			return;
-		}
+		///if(document.getElementById("linkman").value == ""){
+		///	alert("联系人不能为空，请选择！");
+		////	return;
+		///}
 		if(document.getElementById("fzr").value == ""){
 			alert("经手人不能为空，请选择！");
 			return;
@@ -197,14 +198,19 @@ String user_id = info.getUser_id();
 			alert("说明不能为空，请选择！");
 			return;
 		}	
+		
+		if(document.getElementById("bxyy").value == ""){
+			alert("报修原因不能为空，请选择！");
+			return;
+		}	
 		if(document.getElementById("state").value == "已提交"){
 			if(window.confirm("确认要提交售后服务单吗，提交后将无法修改！")){				
-				document.sfdForm.submit();	
+				document.myform.submit();	
 			}
  	     }
 	     else
 	     { 
-	         document.sfdForm.submit();	
+	         document.myform.submit();	
 	     }
 	     alert("操作成功！");
 	}
@@ -256,8 +262,7 @@ String user_id = info.getUser_id();
 		
 		   window.open(destination,'详细信息',fea);	
 		}
-	 
-		
+		document.myform.btnSave.disabled = true;
 	}
      
 	function delTr(i){
@@ -360,14 +365,44 @@ String user_id = info.getUser_id();
 		      alert("维修记录和销售记录没有该序列号!");
 		  }
 	}	
+	function chgBxyy(vD){
+
+		var bxyy_ms1 = document.getElementById("bxyy_ms1");
+		var bxyy_ms2 = document.getElementById("bxyy_ms2");
+		
+		if(vD == "其他"){
+			bxyy_ms1.style.display = "";
+			bxyy_ms2.style.display = "";
+				
+		}else {
+			bxyy_ms1.style.display = "none";
+			bxyy_ms2.style.display = "none";
+		}
+	}
 	
+	function saveState()
+	{
+	  if(document.getElementById("flow").value!="")
+	  { 
+	     document.myform.btnSave.disabled = true;
+	     document.myform.btnConsult.disabled = true;
+	     document.myform.btnRepair.disabled = true;
+	  }
+	  else
+	  {
+	    document.myform.btnSave.disabled = false;
+	    document.myform.btnConsult.disabled = false;
+	    document.myform.btnRepair.disabled = false;
+	  }
+	}
 </script>
 </head>
-<body onload="initFzrTip();initClientTip()">
-<form name="sfdForm" action="saveSfd.html" method="post">
+<body onload="initFzrTip();initClientTip();saveState();">
+<form name="myform" action="saveSfd.html" method="post">
 <input type="hidden" name="sfd.state" id="state" value="">
 <input type="hidden" name="sfd.wx_state" id="wx_state" value="">
 <input type="hidden" name="sfd.flow" id="flow" value="<%=StringUtils.nullToStr(sfd.getFlow())%>">
+<input type="hidden" name="sfd.jx_date" id="jx_date" value="<%=DateComFunc.getToday()%>">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
@@ -385,28 +420,31 @@ String user_id = info.getUser_id();
 			rq = DateComFunc.getToday();
 		}
 		%>
-		<td class="a1" width="15%">接待日期</td>
+		<td class="a1" width="15%">商品序列号</td>
+		<td class="a2" colspan="4">
+		<input type="text" id="s_nums" name="sfd.qz_serial_num" value="" onkeypress="javascript:f_enter()"></td>
+		<!-- <td class="a1" width="15%">接待日期</td>
 		<td class="a2" width="35%">
 		 <input type="text" name="sfd.jx_date" id="jx_date" value="<%=rq%>" size="15"  class="Wdate" onFocus="WdatePicker()" >		
 		<font color="red">*</font>
-		</td>				
+		</td>	 -->			
 	</tr>
 	<tr>			
 		<td class="a1" width="15%">客户名称</td>
 		<td class="a2" width="35%"><input type="text" name="sfd.client_id"   id="client_name" onblur="setClientRegInfo();" value="" size="35" maxlength="50" >
 		<input type="hidden" name="sfd.client_name" id="client_id" value="" ><div id="clientsTip" style="height:12px;position:absolute;width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		<font color="red">*</font>
-		</td>
+		</td>		
 		<td class="a1" width="15%">联系人</td>
 		<td class="a2" width="35%" >
 			<select name="sfd.linkman" id="linkman" onchange="chgLxr(this.value);" style="width:256px" >
-				<%
-				if(!StringUtils.nullToStr(sfd.getLinkman()).equals("")){
-				%>
+		    <%
+			   if(!StringUtils.nullToStr(sfd.getLinkman()).equals("")){
+		    %>			
 					<option value="<%=StringUtils.nullToStr(sfd.getLinkman()) %>" selected><%=StringUtils.nullToStr(sfd.getLinkman()) %></option>
-				<%
-				} 
-				%>
+			<%
+			   } 			
+		    %>					
 			</select>
 		</td>	
 	</tr>
@@ -420,6 +458,35 @@ String user_id = info.getUser_id();
 		    <input id="address" name="sfd.address" type="text" size="45" maxlength="100" value="<%=StringUtils.nullToStr(sfd.getAddress()) %>" />            
 		</td>
 	</tr>
+	
+	<tr>
+		<td class="a1" width="15%">商品信息</td>
+		<td class="a2" colspan="3">
+			<textarea rows="6" name="sfd.ms" id="ms" style="width:75%" maxlength="500"></textarea>	
+		</td>
+	</tr>
+	<tr>
+		<td class="a1" width="15%">报修原因</td>
+		<td class="a2" colspan="3">
+			<select name="sfd.bxyy" id="bxyy"  onchange="chgBxyy(this.value);" style="width:76%">
+				<option value=""></option>
+				<%
+				if(bxyy != null && bxyy.length>0){
+					for(int i=0;i<bxyy.length;i++){
+				%>
+					<option value="<%=StringUtils.nullToStr(bxyy[i]) %>"><%=StringUtils.nullToStr(bxyy[i]) %></option>
+				<%
+					}
+				}
+				%>				
+			</select><font color="red">*</font>	
+		</td>	
+	</tr>
+	<tr>	
+		<td class="a1" width="15%" id="bxyy_ms1" style="display:none">报修原因说明</td>
+		<td class="a2" id="bxyy_ms2" style="display:none" colspan="3">
+		<textarea rows="6" name="sfd.bxyy_ms" id="bxyy_ms" style="width:75%" maxlength="500"><%=StringUtils.nullToStr(sfd.getBxyy_ms()) %></textarea>
+   </tr>	
 	<tr>
 		<td class="a1" width="15%">经手人</td>
 		<td class="a2">
@@ -427,7 +494,7 @@ String user_id = info.getUser_id();
            <div  id="brandTip"  style="height:12px;position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		   <input type="hidden" name="sfd.jxr" id="fzr" value=""/> 		    
 		</td>	
-	    <td class="a1" width="15%">求助方式</td>
+	    <td class="a1" width="15%">客户报修方式</td>
 		<td class="a2">
 			<select name="sfd.qzfs" id="qzfs">
 			    <option value=""></option>
@@ -436,22 +503,8 @@ String user_id = info.getUser_id();
 			</select>
 			<font color="red">*</font> 		  		
 		</td>
-	</tr>
 	
-	 <tr >
-	    <td class="a1" width="15%">商品序列号</td>
-		<td class="a2" colspan="4">
-		<input type="text" name="s_nums" value="" onkeypress="javascript:f_enter()">
-			注：输入商品序列号回车，可自动提取客户信息
-		</td>
-	</tr>		
-	<tr>
-		<td class="a1" width="15%">详细说明</td>
-		<td class="a2" colspan="3">
-			<textarea rows="6" name="sfd.ms" id="ms" style="width:75%" maxlength="500"></textarea><font color="red">*</font>	
-		</td>
-	</tr>
-			
+	</tr>			
 	<tr height="35">
 		<td class="a1" colspan="4" align=right>
 			<input type="button" name="btnSave" value="保 存" class="css_button2" onclick="saveInfo('1');">&nbsp;&nbsp;&nbsp;&nbsp;	

@@ -9,7 +9,7 @@ OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
 Sfd sfd = (Sfd)VS.findValue("sfd");
 LoginInfo info = (LoginInfo)session.getAttribute("LOGINUSER");
 String user_id = info.getUser_id();
- 
+String[] bxyy = (String[])VS.findValue("bxyy"); 
 %>
 
 <html>
@@ -176,10 +176,10 @@ var allCount = 2;
 			alert("客户名称不能为空，请选择！");
 			return;
 		}		
-		if(document.getElementById("linkman").value == ""){
-			alert("联系人不能为空，请选择！");
-			return;
-		}
+		///if(document.getElementById("linkman").value == ""){
+		///	alert("联系人不能为空，请选择！");
+		///	return;
+		///}
 		if(document.getElementById("fzr").value == ""){
 			alert("经手人不能为空，请选择！");
 			return;
@@ -197,14 +197,18 @@ var allCount = 2;
 			alert("说明不能为空，请选择！");
 			return;
 		}	
+		if(document.getElementById("bxyy").value == ""){
+			alert("报修原因不能为空，请选择！");
+			return;
+		}	
 		if(document.getElementById("state").value == "已提交"){
 			if(window.confirm("确认要提交售后服务单吗，提交后将无法修改！")){				
-				document.sfdForm.submit();	
+				document.myform.submit();	
 			}
  	     }
 	     else
 	     { 
-	         document.sfdForm.submit();	
+	         document.myform.submit();	
 	     }
 	      alert("操作成功！");
 	}
@@ -256,8 +260,6 @@ var allCount = 2;
 		
 		   window.open(destination,'详细信息',fea);	
 		}
-	 
-		
 	}
      
 	function delTr(i){
@@ -360,14 +362,44 @@ var allCount = 2;
 		      alert("维修记录和销售记录没有该序列号!");
 		  }
 	}	
+	function chgBxyy(vD){
+
+		var bxyy_ms1 = document.getElementById("bxyy_ms1");
+		var bxyy_ms2 = document.getElementById("bxyy_ms2");
+		
+		if(vD == "其他"){
+			bxyy_ms1.style.display = "";
+			bxyy_ms2.style.display = "";
+				
+		}else {
+			bxyy_ms1.style.display = "none";
+			bxyy_ms2.style.display = "none";
+		}
+	}
 	
+	function saveState()
+	{
+	  if(document.getElementById("flow").value!="")
+	  { 
+	     document.myform.btnSave.disabled = true;
+	     document.myform.btnConsult.disabled = true;
+	     document.myform.btnRepair.disabled = true;
+	  }
+	  else
+	  {
+	    document.myform.btnSave.disabled = false;
+	    document.myform.btnConsult.disabled = false;
+	    document.myform.btnRepair.disabled = false;
+	  }
+	}
 </script>
 </head>
-<body onload="initFzrTip();initClientTip()">
-<form name="sfdForm" action="updateSfd.html" method="post">
+<body onload="initFzrTip();initClientTip();chgBxyy('<%=StringUtils.nullToStr(sfd.getBxyy()) %>');saveState();">
+<form name="myform" action="updateSfd.html" method="post">
 <input type="hidden" name="sfd.state" id="state" value="<%=StringUtils.nullToStr(sfd.getState())%>">
 <input type="hidden" name="sfd.wx_state" id="wx_state" value="<%=StringUtils.nullToStr(sfd.getWx_state())%>">
 <input type="hidden" name="sfd.flow" id="flow" value="<%=StringUtils.nullToStr(sfd.getFlow())%>">
+<input type="hidden" name="sfd.jx_date" id="jx_date" value="<%=StringUtils.nullToStr(sfd.getJx_date())%>">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
@@ -379,11 +411,14 @@ var allCount = 2;
 		<td class="a2" width="35%">
 		<input type="text" name="sfd.id" id="id" value="<%=StringUtils.nullToStr(sfd.getId())%>"  maxlength="50" readonly><font color="red">*</font>
 		</td>
-		<td class="a1" width="15%">接待日期</td>
+		<td class="a1" width="15%">商品序列号</td>
+		<td class="a2" colspan="4">
+		<input type="text" id="s_nums" name="sfd.qz_serial_num" value="<%=StringUtils.nullToStr(sfd.getQz_serial_num())%>" onkeypress="javascript:f_enter()"></td>
+		<!-- <td class="a1" width="15%">接待日期</td>
 		<td class="a2" width="35%">
 		 <input type="text" name="sfd.jx_date" id="jx_date" value="<%=StringUtils.nullToStr(sfd.getJx_date()) %>" size="15"  class="Wdate" onFocus="WdatePicker()">
 		 <font color="red">*</font>
-		</td>				
+		</td> -->				
 	</tr>
 	<tr>
 	    <td class="a1" width="15%">客户名称</td>
@@ -416,13 +451,42 @@ var allCount = 2;
 		</td>
 	</tr>
 	<tr>
+		<td class="a1" width="15%">商品信息</td>
+		<td class="a2" colspan="3">
+			<textarea rows="6" name="sfd.ms" id="ms" style="width:75%" maxlength="500" ><%=StringUtils.nullToStr(sfd.getMs())%></textarea><span style="color:red">*</span>
+		</td>
+	</tr>	
+	<tr>
+		<td class="a1" width="15%">报修原因</td>
+		<td class="a2" colspan="3">
+			<select name="sfd.bxyy" id="bxyy"  onchange="chgBxyy(this.value);" style="width:76%">
+				<option value=""></option>
+				<%
+				String bxyy1 = StringUtils.nullToStr(sfd.getBxyy());
+				if(bxyy != null && bxyy.length>0){
+					for(int i=0;i<bxyy.length;i++){
+				%>
+					<option value="<%=StringUtils.nullToStr(bxyy[i]) %>" <%if(bxyy1.equals(StringUtils.nullToStr(bxyy[i]))) out.print("selected"); %>><%=StringUtils.nullToStr(bxyy[i]) %></option>
+				<%
+					}
+				}
+				%>				
+			</select><font color="red">*</font>	
+		</td>	
+	</tr>
+	<tr>	
+		<td class="a1" width="15%" id="bxyy_ms1" style="display:none">报修原因说明</td>
+		<td class="a2" id="bxyy_ms2" style="display:none" colspan="3">
+		<textarea rows="6" name="sfd.bxyy_ms" id="bxyy_ms" style="width:75%" maxlength="500"><%=StringUtils.nullToStr(sfd.getBxyy_ms()) %></textarea>
+   </tr>
+	<tr>
 		<td class="a1" width="15%">经手人</td>
 		<td class="a2">
 		   <input  id="brand"  type="text"   length="20"  onblur="setValue()" value="<%=StringUtils.nullToStr(StaticParamDo.getRealNameById(sfd.getJxr())) %>"/> <font color="red">*</font>
            <div  id="brandTip"  style="height:12px;position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		   <input type="hidden" name="sfd.jxr" id="fzr" value="<%=StringUtils.nullToStr(sfd.getJxr())%>"/> 		      
 		</td>	
-	    <td class="a1" width="15%">求助方式</td>
+	    <td class="a1" width="15%">客户报修方式</td>
 		<td class="a2">
 			<select name="sfd.qzfs" id="qzfs">
 			    <option value=""></option>
@@ -431,14 +495,7 @@ var allCount = 2;
 			</select>	
 			<font color="red">*</font> 	  		
 		</td>
-	</tr>
-		 
-	<tr>
-		<td class="a1" width="15%">详细说明</td>
-		<td class="a2" colspan="3">
-			<textarea rows="6" name="sfd.ms" id="ms" style="width:75%" maxlength="500" ><%=StringUtils.nullToStr(sfd.getMs())%></textarea><span style="color:red">*</span>
-		</td>
-	</tr>				
+	</tr>			
 	<tr height="35">
 		<td class="a1" colspan="4" >
 		    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

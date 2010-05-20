@@ -111,9 +111,8 @@ String user_id = info.getUser_id();
 	<tr>
 		<td class="a1" width="15%">编号</td>
 		<td class="a2" width="35%"><%=StringUtils.nullToStr(sfd.getId())%></td>
-				
-		<td class="a1" width="15%">接待日期</td>
-		<td class="a2" width="35%"> <%=StringUtils.nullToStr(sfd.getJx_date())%></td>							
+		<td class="a1" width="15%">商品序列号</td>
+		<td class="a2" width="35%"> <%=StringUtils.nullToStr(sfd.getQz_serial_num())%></td>	
 	</tr>
 	<tr>			
 		<td class="a1" width="15%">客户名称</td>		
@@ -134,35 +133,39 @@ String user_id = info.getUser_id();
 		<td class="a1" width="15%">经手人</td>
 		<td class="a2" width="35%"> <%=StringUtils.nullToStr(StaticParamDo.getRealNameById(sfd.getJxr()))%> </td>	  
 		            	    		
-	    <td class="a1" width="15%">求助方式</td>
+	    <td class="a1" width="15%">客户报修方式</td>
 		<td class="a2" width="35%"> <%=StringUtils.nullToStr(sfd.getQzfs()) %> </td>
 									
 	</tr>
 	<tr>
 		<td class="a1">状态</td>
 		<td class="a2"><%=StringUtils.nullToStr(sfd.getState())%></td> 	
-		 		 	
-		
 		<td class="a1">维修状态</td>
-		<td class="a2"> <%=StringUtils.nullToStr(sfd.getWx_state())%></td>		 
-		   
-				 	
-					
+		<td class="a2"> <%=StringUtils.nullToStr(sfd.getWx_state())%></td>	
 	</tr>
 	<tr>
-		<td class="a1">结单日期</td>
-		<td class="a2" colspan="3" > <%=StringUtils.nullToStr(sfd.getJd_date())%> </td>			 				
+	    <td class="a1" width="15%">接待日期</td>
+		<td class="a2" width="35%"> <%=StringUtils.nullToStr(sfd.getJx_date())%></td>	
+		<td class="a1" width="15%">结单日期</td>
+		<td class="a2" width="35%"> <%=StringUtils.nullToStr(sfd.getJd_date())%> </td>			 				
 	</tr>
 	 
 	<tr>
-		<td class="a1" width="15%">详细说明</td>
+		<td class="a1" width="15%">商品信息</td>
 		<td class="a2" colspan="3">
-			<textarea rows="6" name="sfd.ms" id="ms" style="width:75%" maxlength="500" readonly="readonly" ><%=StringUtils.nullToStr(sfd.getMs())%></textarea><span style="color:red">*</span>
+			<textarea rows="6"  style="width:75%" maxlength="500" readonly="readonly" ><%=StringUtils.nullToStr(sfd.getMs())%></textarea>
 		</td>
-	</tr>				
+	</tr>	
+	<tr>
+		<td class="a1" width="15%">报修原因</td>
+		<td class="a2" colspan="3"><%=StringUtils.nullToStr(sfd.getBxyy()) %></td>	
+	</tr>
+	<tr>	
+		<td class="a1" width="15%">报修原因说明</td>
+		<td class="a2" colspan="3"><textarea rows="6"  style="width:75%" maxlength="500" readonly="readonly" ><%=StringUtils.nullToStr(sfd.getBxyy_ms())%></textarea></td>
+   </tr>			
 	<tr height="35">
 		<td class="a1" colspan="4">
-			 
 			<input type="button" name="button1" value="关 闭" class="css_button2" onclick="window.close();">
 		</td>
 	</tr>

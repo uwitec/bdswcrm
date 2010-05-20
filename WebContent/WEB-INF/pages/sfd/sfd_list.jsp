@@ -32,7 +32,7 @@ String orderType = (String)VS.findValue("orderType");
 	
 	function openWin(id){
 		var destination = "viewSfd.html?id="+id;
-		var fea ='width=750,height=400,left=' + (screen.availWidth-750)/2 + ',top=' + (screen.availHeight-400)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		var fea ='width=750,height=500,left=' + (screen.availWidth-750)/2 + ',top=' + (screen.availHeight-500)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		window.open(destination,'售后服务单',fea);
 	}
 	
@@ -53,12 +53,12 @@ String orderType = (String)VS.findValue("orderType");
 	
 	function add(){
 		var destination = "addSfd.html";
-			var fea ='width=750,height=450,left=' + (screen.availWidth-750)/2 + ',top=' + (screen.availHeight-400)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+			var fea ='width=750,height=550,left=' + (screen.availWidth-750)/2 + ',top=' + (screen.availHeight-500)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		window.open(destination,'售后服务单',fea);	
 	}	
 	function edit(id){
 		var destination ="editSfd.html?id="+id;
-		var fea ='width=750,height=450,left=' + (screen.availWidth-750)/2 + ',top=' + (screen.availHeight-400)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		var fea ='width=750,height=550,left=' + (screen.availWidth-750)/2 + ',top=' + (screen.availHeight-500)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		window.open(destination,'售后服务单',fea);		
 	}	
 	
