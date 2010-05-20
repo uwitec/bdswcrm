@@ -82,8 +82,8 @@ String[] wxlx=(String[])VS.findValue("wxlx");
 	     { 
 	         document.myform.submit();	
 	     }
-	     document.sfdForm.btnSave.disabled = true;
-		 document.sfdForm.btnSub.disabled = true;
+	     document.myform.btnSave.disabled = true;
+		 document.myform.btnSub.disabled = true;
 	}	
 
     function clearVl(){       
