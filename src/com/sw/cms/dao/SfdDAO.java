@@ -52,7 +52,7 @@ public class SfdDAO extends JdbcBaseDAO
     */
    public Object getSfdById(String id)
    {
-	   String sql="select *from sfd where id='"+id+"'";
+	   String sql="select * from sfd where id='"+id+"'";
 	   return this.queryForObject(sql, new SfdRowMapper()); 
 	   
    }
@@ -63,8 +63,8 @@ public class SfdDAO extends JdbcBaseDAO
     */
 	public void saveSfd(Sfd sfd) 
 	{
-		String sql = "insert into sfd(id,client_name,address,mobile,linkman,jxr,cjr,jd_date,jx_date,cj_date,qzfs,state,wx_state,ms)values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-		Object[] param = new Object[14];
+		String sql = "insert into sfd(id,client_name,address,mobile,linkman,jxr,cjr,jd_date,jx_date,cj_date,qzfs,state,wx_state,ms,bxyy,bxyy_ms,qz_serial_num)values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		Object[] param = new Object[17];
 		param[0] = sfd.getId();
 		param[1] = sfd.getClient_name();
 		param[2] = sfd.getAddress();
@@ -78,7 +78,18 @@ public class SfdDAO extends JdbcBaseDAO
 		param[10]=sfd.getQzfs();
 		param[11]= sfd.getState();
 		param[12]= sfd.getWx_state(); 
-		param[13]= sfd.getMs();		
+		param[13]= sfd.getMs();	
+		String bxyy=sfd.getBxyy();
+		param[14]= bxyy; 
+		if(bxyy=="其他")
+		{
+		   param[15]= sfd.getBxyy_ms();	
+		}
+		else
+		{
+			param[15]="";
+		}
+		param[16]= sfd.getQz_serial_num();
 		getJdbcTemplate().update(sql, param);		 
 	}
 	 
@@ -104,8 +115,8 @@ public class SfdDAO extends JdbcBaseDAO
 	 */
 	public void updateSfd(Sfd sfd)
 	{		 
-		String sql = "update  sfd set client_name=?,address=?,mobile=?,linkman=?,jxr=?,cjr=?,jd_date=?,jx_date=?,cj_date=?,qzfs=?,state=?,wx_state=?,ms=? where id=?";
-		Object[] param = new Object[14];		
+		String sql = "update  sfd set client_name=?,address=?,mobile=?,linkman=?,jxr=?,cjr=?,jd_date=?,jx_date=?,cj_date=?,qzfs=?,state=?,wx_state=?,ms=?,bxyy=?,bxyy_ms=?,qz_serial_num=? where id=?";
+		Object[] param = new Object[17];		
 		param[0] = sfd.getClient_name();
 		param[1] = sfd.getAddress();
 		param[2] = sfd.getMobile();
@@ -118,8 +129,19 @@ public class SfdDAO extends JdbcBaseDAO
 		param[9]= sfd.getQzfs();
 		param[10]= sfd.getState();
 		param[11]= sfd.getWx_state();
-		param[12]= sfd.getMs();		
-		param[13] = sfd.getId();
+		param[12]= sfd.getMs();	
+		String bxyy=sfd.getBxyy();
+		param[13]= bxyy; 
+		if(bxyy=="其他")
+		{
+		   param[14]= sfd.getBxyy_ms();	
+		}
+		else
+		{
+			param[14]="";
+		}
+		param[15]= sfd.getQz_serial_num();
+		param[16] = sfd.getId();
 		getJdbcTemplate().update(sql, param);	
 	}
 	
@@ -190,6 +212,21 @@ public class SfdDAO extends JdbcBaseDAO
 	
 	  
 	/**
+	 * 查看售后服务单是否已经提交
+	 * @param ckd_id
+	 * @return
+	 */
+	public boolean isSfdSubmit(String sfd_id){
+		boolean is = false;
+		String sql = "select count(*) from sfd where id='" + sfd_id + "' and state='已提交'";
+		int counts = this.getJdbcTemplate().queryForInt(sql);
+		if(counts > 0){
+			is = true;
+		}
+		return is;
+	}
+	
+	/**
 	 * 售后服务单封装对象
 	 * 
 	 * @author Administrator
@@ -228,6 +265,12 @@ public class SfdDAO extends JdbcBaseDAO
 			if (SqlUtil.columnIsExist(rs, "wx_state"))sfd.setWx_state(rs.getString("wx_state"));
 			//2010-3-23增加一个控制流程流转的字段
 			if (SqlUtil.columnIsExist(rs, "flow"))sfd.setFlow(rs.getString("flow"));
+			
+			if (SqlUtil.columnIsExist(rs, "bxyy"))sfd.setBxyy(rs.getString("bxyy"));
+			
+			if (SqlUtil.columnIsExist(rs, "bxyy_ms"))sfd.setBxyy_ms(rs.getString("bxyy_ms"));
+			
+			if (SqlUtil.columnIsExist(rs, "qz_serial_num"))sfd.setQz_serial_num(rs.getString("qz_serial_num"));
 			return sfd;
 		}
 	}

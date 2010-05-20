@@ -137,6 +137,19 @@ public class PgdDAO extends JdbcBaseDAO
 		return "PG" + day + "-" + curId;
 
 	}
-   
+	/**
+	 * 查看派工单是否已经提交
+	 * @param ckd_id
+	 * @return
+	 */
+	public boolean isPgdSubmit(String p_sfd_id){
+		boolean is = false;
+		String sql = "select count(*) from pgd where p_sfd_id='" + p_sfd_id + "' and p_state='已提交'";
+		int counts = this.getJdbcTemplate().queryForInt(sql);
+		if(counts > 0){
+			is = true;
+		}
+		return is;
+	}
    
 }

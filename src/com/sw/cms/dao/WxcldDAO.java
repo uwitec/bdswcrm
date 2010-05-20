@@ -191,5 +191,18 @@ public class WxcldDAO extends JdbcBaseDAO
 		return "WL" + day + "-" + curId;
 
 	}
-	   
+	/**
+	 * 查看维修处理单是否已经提交
+	 * @param ckd_id
+	 * @return
+	 */
+	public boolean isWxcldSubmit(String w_pgd_id){
+		boolean is = false;
+		String sql = "select count(*) from wxcld where w_pgd_id='" + w_pgd_id + "' and w_state='已提交'";
+		int counts = this.getJdbcTemplate().queryForInt(sql);
+		if(counts > 0){
+			is = true;
+		}
+		return is;
+	}   
 }

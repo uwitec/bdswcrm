@@ -167,4 +167,19 @@ public class BwlDAO extends JdbcBaseDAO {
 		String sql = "delete from bwl_share where bwl_id='" + id + "'";
 		this.getJdbcTemplate().update(sql);
 	}
+	
+	/**
+	 * 查看备忘录是否已经提交
+	 * @param ckd_id
+	 * @return
+	 */
+	public boolean isBwlSubmit(String bwl_id){
+		boolean is = false;
+		String sql = "select count(*) from bwl where id='" + bwl_id + "' and state='已提交'";
+		int counts = this.getJdbcTemplate().queryForInt(sql);
+		if(counts > 0){
+			is = true;
+		}
+		return is;
+	}
 }
