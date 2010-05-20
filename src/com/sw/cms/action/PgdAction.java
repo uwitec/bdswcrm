@@ -97,6 +97,7 @@ public class PgdAction extends BaseAction
 		   {			   
 			   String sfd_id = ParameterUtility.getStringParameter(getRequest(),
 						"id", "");
+			   
 			   pgdService.savePgd(pgds,sfd_id);
 			   pgd=(Map)pgdService.getPgdBySfdId(sfd_id);
 			   wxlx = sjzdService.getSjzdXmxxByZdId("SJZD_GZLX");

@@ -5,14 +5,16 @@ import com.sw.cms.model.LoginInfo;
 import com.sw.cms.model.Page;
 import com.sw.cms.model.Sfd;
 import com.sw.cms.service.SfdService;
+import com.sw.cms.service.SjzdService;
 import com.sw.cms.util.Constant;
 import com.sw.cms.util.DateComFunc;
 import com.sw.cms.util.ParameterUtility;
 
+
 public class SfdAction extends BaseAction
 {
    private SfdService  sfdService;
-   
+   private SjzdService sjzdService;
    private Page sfdPage;
    private String orderName="";
    private String orderType="";
@@ -24,7 +26,7 @@ public class SfdAction extends BaseAction
    private String state="";
    private String jxr="";
    private Sfd  sfd=new  Sfd();
-
+   private String[] bxyy;
 /**
     * 售后服务单列表
     * @return
@@ -83,7 +85,8 @@ public class SfdAction extends BaseAction
    public String add()throws Exception
    {
 	   try
-	   {	
+	   {   
+		   bxyy = sjzdService.getSjzdXmxxByZdId("SJZD_BXYY");
 		   sfd.setId(sfdService.updateSfdId());
 		   return "success";
 	   }
@@ -135,7 +138,8 @@ public class SfdAction extends BaseAction
    public String edit()throws Exception
    {
 	   try
-	   {			   
+	   {  
+		   bxyy = sjzdService.getSjzdXmxxByZdId("SJZD_BXYY");		   
 		   String sfd_id = ParameterUtility.getStringParameter(getRequest(),
 					"id", "");		  
 		   sfd=(Sfd)sfdService.getSfdById(sfd_id);
@@ -157,7 +161,7 @@ public class SfdAction extends BaseAction
    {
 	   try
 	   {	
-		    		   
+		    bxyy = sjzdService.getSjzdXmxxByZdId("SJZD_BXYY");		   
 		    LoginInfo info = (LoginInfo) getSession().getAttribute("LOGINUSER");
 			String user_id = info.getUser_id();
 			sfd.setCjr(user_id);
@@ -278,5 +282,20 @@ public Sfd getSfd() {
 
 public void setSfd(Sfd sfd) {
 	this.sfd = sfd;
+}
+public SjzdService getSjzdService() {
+	return sjzdService;
+}
+
+public void setSjzdService(SjzdService sjzdService) {
+	this.sjzdService = sjzdService;
+}
+
+public String[] getBxyy() {
+	return bxyy;
+}
+
+public void setBxyy(String[] bxyy) {
+	this.bxyy = bxyy;
 }
 }
