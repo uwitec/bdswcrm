@@ -8,9 +8,16 @@ public class Ykck
 	private String ck_store_id;	 
 	private String czr;
 	private String state;
-	 
+	private String rk_store_id;	  
 	private String remark;
 	
+	
+	public String getRk_store_id() {
+		return rk_store_id;
+	}
+	public void setRk_store_id(String rk_store_id) {
+		this.rk_store_id = rk_store_id;
+	}
 	public String getCk_date() {
 		return ck_date;
 	}
