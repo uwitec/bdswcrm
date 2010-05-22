@@ -182,7 +182,20 @@ public class FhkhdDAO extends JdbcBaseDAO {
 
 	}
    
-	
+	/**
+	 * 查看返还客户单是否已经提交
+	 * @param ckd_id
+	 * @return
+	 */
+	public boolean isFhkhdSubmit(String fhkhd_id){
+		boolean is = false;
+		String sql = "select count(*) from fhkhd where id='" + fhkhd_id + "' and state='已提交'";
+		int counts = this.getJdbcTemplate().queryForInt(sql);
+		if(counts > 0){
+			is = true;
+		}
+		return is;
+	}
 	/**
 	 * 返还客户单包装类
 	 * 

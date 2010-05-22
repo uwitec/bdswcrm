@@ -199,6 +199,20 @@ public class BfdDAO extends JdbcBaseDAO {
 		this.saveBfdProduct(bfd, bfdProducts);
 	}
 
+	/**
+	 * 查看报废单是否已经提交
+	 * @param ckd_id
+	 * @return
+	 */
+	public boolean isBfdSubmit(String bfd_id){
+		boolean is = false;
+		String sql = "select count(*) from bfd where id='" + bfd_id + "' and state='已提交'";
+		int counts = this.getJdbcTemplate().queryForInt(sql);
+		if(counts > 0){
+			is = true;
+		}
+		return is;
+	}
 	
 	/**
 	 * 报废单封装对象

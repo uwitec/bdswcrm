@@ -169,6 +169,21 @@ public class YkrkDAO extends JdbcBaseDAO
 		return "YR" + day + "-" + curId;
 	}
 	
+	/**
+	 * 查看移库入库单是否已经提交
+	 * @param ckd_id
+	 * @return
+	 */
+	public boolean isYkrkdSubmit(String ykrk_id){
+		boolean is = false;
+		String sql = "select count(*) from ykrk where id='" + ykrk_id + "' and state='已提交'";
+		int counts = this.getJdbcTemplate().queryForInt(sql);
+		if(counts > 0){
+			is = true;
+		}
+		return is;
+	}
+	
 	class YkrkRowMapper implements RowMapper {
 		public Object mapRow(ResultSet rs, int index) throws SQLException {
 			Ykrk ykrk = new Ykrk();

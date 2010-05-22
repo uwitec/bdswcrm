@@ -204,7 +204,20 @@ public class BxdDAO extends JdbcBaseDAO {
 		
 		this.saveBxdProduct(bxd, bxdProducts);
 	}
-
+	/**
+	 * 查看报修单是否已经提交
+	 * @param ckd_id
+	 * @return
+	 */
+	public boolean isBxdSubmit(String bxd_id){
+		boolean is = false;
+		String sql = "select count(*) from bxd where id='" + bxd_id + "' and state='已提交'";
+		int counts = this.getJdbcTemplate().queryForInt(sql);
+		if(counts > 0){
+			is = true;
+		}
+		return is;
+	}
 	
 	/**
 	 * 报修单封装对象

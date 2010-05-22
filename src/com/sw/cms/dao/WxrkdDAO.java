@@ -183,6 +183,21 @@ public class WxrkdDAO extends JdbcBaseDAO
 	}
 	
 	/**
+	 * 查看维修入库单是否已经提交
+	 * @param ckd_id
+	 * @return
+	 */
+	public boolean isWxrkdSubmit(String wxrkd_id){
+		boolean is = false;
+		String sql = "select count(*) from bxd where id='" + wxrkd_id + "' and state='已提交'";
+		int counts = this.getJdbcTemplate().queryForInt(sql);
+		if(counts > 0){
+			is = true;
+		}
+		return is;
+	}
+	
+	/**
 	 * 维修入库单包装对象
 	 * @author Administrator
 	 *

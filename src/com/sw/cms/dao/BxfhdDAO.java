@@ -234,6 +234,22 @@ public class BxfhdDAO extends JdbcBaseDAO
 
 		return "BF" + day + "-" + bxfhdid;
   }
+  
+  /**
+	 * 查看报修返还单是否已经提交
+	 * @param ckd_id
+	 * @return
+	 */
+	public boolean isBxfhdSubmit(String bxfhd_id){
+		boolean is = false;
+		String sql = "select count(*) from bxfhd where id='" + bxfhd_id + "' and state='已提交'";
+		int counts = this.getJdbcTemplate().queryForInt(sql);
+		if(counts > 0){
+			is = true;
+		}
+		return is;
+	}
+	
   /**
    * 报修返还单包装类
    * @author Administrator

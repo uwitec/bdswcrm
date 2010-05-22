@@ -3,6 +3,7 @@ package com.sw.cms.dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.jdbc.core.RowMapper;
 
@@ -43,26 +44,27 @@ public class YkckDAO extends JdbcBaseDAO
 	 */
 	public void saveYkck(Ykck ykck,List ykckProducts)
 	{
-		String sql = "insert into ykck(ck_date,jsr,ck_store_id,czr,state,remark,cz_date,id) values(?,?,?,?,?,?,now(),?)";
+		String sql = "insert into ykck(ck_date,jsr,ck_store_id,czr,state,remark,cz_date,id,rk_store_id) values(?,?,?,?,?,?,now(),?,?)";
 		
-		Object[] param = new Object[7];
-		
+		Object[] param = new Object[8];
+			
 		param[0] = ykck.getCk_date();
 		param[1] = ykck.getJsr();
 		param[2] = ykck.getCk_store_id();		 
 		param[3] = ykck.getCzr();
 		param[4] = ykck.getState();
 		param[5] = ykck.getRemark();
-		param[6] = ykck.getId();		
+		param[6] = ykck.getId();	
+		param[7] = ykck.getRk_store_id();
 		this.getJdbcTemplate().update(sql,param);
 		
 		this.addYkckProducts(ykckProducts, ykck.getId());
 	}
 	
 	public void updateYkck(Ykck ykck,List ykckProducts){
-		String sql = "update ykck set ck_date=?,jsr=?,ck_store_id=?,czr=?,state=?,remark=?,cz_date=now() where id=?";
+		String sql = "update ykck set ck_date=?,jsr=?,ck_store_id=?,czr=?,state=?,remark=?,cz_date=now(),rk_store_id=? where id=?";
 		
-		Object[] param = new Object[7];
+		Object[] param = new Object[8];
 		
 		param[0] = ykck.getCk_date();
 		param[1] = ykck.getJsr();
@@ -71,7 +73,8 @@ public class YkckDAO extends JdbcBaseDAO
 		param[3] = ykck.getCzr();
 		param[4] = ykck.getState();
 		param[5] = ykck.getRemark();
-		param[6] = ykck.getId();
+		param[6] = ykck.getRk_store_id();
+		param[7] = ykck.getId();
 		
 		this.getJdbcTemplate().update(sql,param);
 		
@@ -171,6 +174,21 @@ public class YkckDAO extends JdbcBaseDAO
 		return "YC" + day + "-" + curId;
 	}
 	
+	/**
+	 * 查看移库出库单是否已经提交
+	 * @param ckd_id
+	 * @return
+	 */
+	public boolean isYkckdSubmit(String ykck_id){
+		boolean is = false;
+		String sql = "select count(*) from ykck where id='" + ykck_id + "' and state='已提交'";
+		int counts = this.getJdbcTemplate().queryForInt(sql);
+		if(counts > 0){
+			is = true;
+		}
+		return is;
+	}
+	
 	class YkckRowMapper implements RowMapper {
 		public Object mapRow(ResultSet rs, int index) throws SQLException {
 			Ykck ykck = new Ykck();
@@ -182,7 +200,7 @@ public class YkckDAO extends JdbcBaseDAO
 			ykck.setCzr(rs.getString("czr"));
 			ykck.setState(rs.getString("state"));
 			ykck.setRemark(rs.getString("remark"));
-			
+			ykck.setRk_store_id(rs.getString("rk_store_id"));
 			return ykck;
 		}
 	}	

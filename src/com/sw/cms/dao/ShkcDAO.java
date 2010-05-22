@@ -18,6 +18,7 @@ import com.sw.cms.model.HjdProduct;
 import com.sw.cms.model.WxrkdProduct;
 import com.sw.cms.model.Page;
 import com.sw.cms.model.Shkc;
+import com.sw.cms.util.DateComFunc;
 
 /**
  * 维修库存DAO
@@ -72,12 +73,13 @@ public class ShkcDAO extends JdbcBaseDAO
 	
 		storeId= (String)map.get("id") ; 
 		
-		String sql="select product_id, product_name,product_xh,qz_serial_num,(select sum(nums) from shkc b where b.product_id=a.product_id) as hj_nums from shkc a where  state='1' and store_id='"+storeId+"'";
+		String sql="select product_id, product_name,product_xh,qz_serial_num,sum(nums) as hj_nums from shkc  where state='1' and store_id='"+storeId+"'";
 		
 		if(!con.equals(""))
 		{
 			sql=sql+con;
 		}
+		sql=sql+" group by product_id, product_name,product_xh,qz_serial_num";
 		return this.getResultByPage(sql, curPage, rowsPerPage);
 	}
 	/**
@@ -97,11 +99,12 @@ public class ShkcDAO extends JdbcBaseDAO
 		
 		storeId= (String)map.get("id") ; 
 	    
-		String sql="select product_id, product_name,product_xh,qz_serial_num,(select sum(nums) from shkc b where b.product_id=a.product_id) as hj_nums from shkc a  where  a.store_id='"+storeId+"'";
+		String sql="select product_id, product_name,product_xh,qz_serial_num,sum(nums) as hj_nums from shkc  where  store_id='"+storeId+"'";
 		if(!con.equals(""))
 		{
 			sql=sql+con;
 		}
+		sql=sql+" group by product_id, product_name,product_xh,qz_serial_num";
 		return this.getResultByPage(sql, curPage, rowsPerPage);
 	}
 	//在外库
@@ -113,11 +116,12 @@ public class ShkcDAO extends JdbcBaseDAO
         Map map=getResultMap(sqlStore);		
 		storeId= (String)map.get("id"); 
 	    
-		String sql="select product_id, product_name,product_xh,qz_serial_num,(select sum(nums) from shkc b where b.product_id=a.product_id) as hj_nums from shkc a where a.state='2' and a.store_id='"+storeId+"'";
+		String sql="select product_id, product_name,product_xh,qz_serial_num,sum(nums) as hj_nums from shkc  where state='2' and store_id='"+storeId+"'";
 		if(!con.equals(""))
 		{
 			sql=sql+con;
 		}
+		sql=sql+" group by product_id, product_name,product_xh,qz_serial_num";
 		return this.getResultByPage(sql, curPage, rowsPerPage);
 	}
 	/**
@@ -205,8 +209,8 @@ public class ShkcDAO extends JdbcBaseDAO
     */
    public void saveShkc(Shkc  shkc)
    {
-	   String sql="insert into shkc(product_id,product_xh,product_name,qz_serial_num,state,client_id)values(?,?,?,?,?,?,?,?)";
-	   Object[]param=new Object[11];
+	   String sql="insert into shkc(product_id,product_xh,product_name,qz_serial_num,state,store_id)values(?,?,?,?,?,?)";
+	   Object[]param=new Object[6];
 	   param[0]=shkc.getProduct_id();
 	   param[1]=shkc.getProduct_xh();
 	   param[2]=shkc.getProduct_name();
@@ -431,7 +435,21 @@ public class ShkcDAO extends JdbcBaseDAO
        this.getJdbcTemplate().update(sql);
    }
    
-   
+   /**
+	 * 返回售后库ID
+	 * 
+	 * @return
+	 */
+	public String getShfwId(String name) {
+		String sql = "select id from storehouse where name='"+name+"'";
+
+        //取ID号
+		Map map=getResultMap(sql);		
+		String storeId= (String)map.get("id") ; 
+		return  storeId;
+
+
+	}
    /**
     * 售后库存封装类
     * @author Administrator
