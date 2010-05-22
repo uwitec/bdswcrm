@@ -80,12 +80,15 @@ if(list != null && list.size()>0){
 		String lxdh = StringUtils.nullToStr(map.get("lxdh"));
 		double je = map.get("je")==null?0:((Double)map.get("je")).doubleValue();
 
-		if((i+1)!=list.size())
-		{
-		  Map mapNext = (Map)list.get(i+1);
-		  client_idNext = StringUtils.nullToStr(mapNext.get("client_id"));
-		  jeNext = mapNext.get("je")==null?0:((Double)mapNext.get("je")).doubleValue();
-		}
+       
+		  if((i+1)!=list.size())
+		  {
+		    Map mapNext = (Map)list.get(i+1);
+		    client_idNext = StringUtils.nullToStr(mapNext.get("client_id"));
+		    jeNext = mapNext.get("je")==null?0:((Double)mapNext.get("je")).doubleValue();
+		  }	 
+		  
+		    
 %>
 		<TR>
 			<TD class=ReportItemXh><%=client_id %>&nbsp;</TD>
@@ -107,7 +110,7 @@ if(list != null && list.size()>0){
 		hj_je+=je;		
 		}
 		
-		if((state.equals("未入库") ))	{
+		if(state.equals("未入库"))	{
 		if(client_id.equals(client_idNext)){
 		%>
 			<TD class=ReportItemMoney><%=JMath.round(jeNext,2) %>&nbsp;</TD>
@@ -123,6 +126,8 @@ if(list != null && list.size()>0){
 %>
        </TR>   
 <%
+     client_idNext ="";
+	 jeNext = 0;
 	}
 }
 %>
