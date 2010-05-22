@@ -19,7 +19,7 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 
 <html>
 <head>
-<title>库房调拨</title>
+<title>移库出库</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 </head>
@@ -27,7 +27,7 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
-		<td colspan="4">库房调拨</td>
+		<td colspan="4">移库出库</td>
 	</tr>
 	</thead>
 	<tr>
@@ -45,14 +45,16 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 	<tr>			
 		<td class="a1" width="15%">调出仓库</td>
 		<td class="a2"><%=StaticParamDo.getStoreNameById(StringUtils.nullToStr(ykck.getCk_store_id())) %></td>
+				
+		<td class="a1" width="15%">调入仓库</td>
+		<td class="a2"><%=StringUtils.nullToStr(ykck.getRk_store_id()) %></td>
+	</tr>
+	<tr>
 	    <td class="a1" width="15%">经手人</td>
 		<td class="a2" width="35%"><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(ykck.getJsr())) %></td>	    
-	</tr>
 	
-	<tr>			
-		
-		<td class="a1">状态</td>
-		<td class="a2" colspan="3"><%=StringUtils.nullToStr(ykck.getState()) %></td>			
+		<td class="a1" width="15%">状态</td>
+		<td class="a2" width="35%"><%=StringUtils.nullToStr(ykck.getState()) %></td>			
 	</tr>
 </table>
 <br>

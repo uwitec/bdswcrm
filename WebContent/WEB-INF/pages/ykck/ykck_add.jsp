@@ -305,8 +305,18 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 			%>
 			</select><font color="red">*</font>		
 		</td>
+		<td class="a1" width="15%">调入仓库</td>
+		<td class="a2" width="35%" >
+			<select name="ykck.rk_store_id" id="rk_store_id">
+				<option value="坏件库" >坏件库</option>
+				<option value="好件库" >好件库</option>
+			</select>			
+			<font color="red">*</font>
+		</td>
+   </tr>
+   <tr>
 		<td class="a1" width="15%">经手人</td>
-		<td class="a2" width="35%">
+		<td class="a2" colspan="3">
 		    <input  id="brand"    type="text"length="20"  onblur="setValue();" />
             <div   id="brandTip"  style="height:12px;position:absolute;left:146px; top:141px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
             </div>
@@ -394,7 +404,7 @@ for(int i=0;i<3;i++){
 	</tr>
 </table>
 <BR>
-<font color="red">注：“草稿”指移库出库单暂存，可修改；“提交”后移库出库单不可修改，如需审批则直接提交审批。</font>
+<font color="red">注：“草稿”指移库出库单暂存，可修改；“提交”后移库出库单不可修改。</font>
 <BR><BR>
 </form>
 </body>

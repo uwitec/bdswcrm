@@ -161,7 +161,7 @@ session.removeAttribute("messages");
         
         var otd3 = document.createElement("td");
         otd3.className = "a2";
-        otd3.innerHTML = '<input type="text" id="nums_'+curId+'" name="jjdProducts['+curId+'].nums" value="1" size="5"  onblur="setNum('+curId+')" >';
+        otd3.innerHTML = '<input type="text" id="nums_'+curId+'" name="jjdProducts['+curId+'].nums" value="1" size="5"  onblur="setNum('+curId+')" readonly>';
         
         var otd4 = document.createElement("td");
         otd4.className = "a2";
@@ -478,7 +478,7 @@ session.removeAttribute("messages");
 				</td>
 				<td class="a2"><input type="text" id="product_xh_<%=i %>" name="jjdProducts[<%=i %>].product_xh" size="15" value="<%=StringUtils.nullToStr(jjdProduct.getProduct_xh()) %>" size="15" style="width:100%" readonly  ></td>	
 				
-				<td class="a2"><input type="text" id="nums_<%=i %>" name="jjdProducts[<%=i %>].nums" value="<%=StringUtils.nullToStr(jjdProduct.getNums()) %>" size="5" style="width:100%" onblur="setNum(<%=i %>)"  ></td>		 
+				<td class="a2"><input type="text" id="nums_<%=i %>" name="jjdProducts[<%=i %>].nums" value="<%=StringUtils.nullToStr(jjdProduct.getNums()) %>" size="5" style="width:100%" onblur="setNum(<%=i %>)"  readonly></td>		 
 				<td class="a2">
 					<input type="text" id="hjk_<%=i %>" name="producthjk" value="坏件库" size="7">					 
 				</td>
@@ -510,7 +510,7 @@ else
 				
 				<td class="a2"><input type="text" id="product_xh_<%=i %>" name="jjdProducts[<%=i %>].product_xh" size="15" style="width:100%" readonly  ></td>	
  				
-				<td class="a2"><input type="text" id="nums_<%=i %>" name="jjdProducts[<%=i %>].nums" value="1" size="5" style="width:100%" onblur="setNum(<%=i %>)" ></td>		 
+				<td class="a2"><input type="text" id="nums_<%=i %>" name="jjdProducts[<%=i %>].nums" value="1" size="5" style="width:100%" onblur="setNum(<%=i %>)" readonly></td>		 
 				<td class="a2">
 					<input type="text" id="hjk_<%=i %>" name="producthjk" value="坏件库" size="7">					 
 				</td>
@@ -584,7 +584,7 @@ else
 	</tr>
 </table>
 <BR>
-<font color="red">注：“草稿”指接件单暂存，可修改；“提交”后接件单不可修改，如需审批则直接提交审批。</font>
+<font color="red">注：“草稿”指接件单暂存，可修改；“提交”后接件单不可修改。</font>
 <BR><BR>
 </form>
 </BODY>

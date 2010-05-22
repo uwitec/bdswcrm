@@ -440,7 +440,7 @@ session.removeAttribute("messages");
 	</tr>
 </table>
 <BR>
-<font color="red">注：“草稿”指报废单暂存，可修改；“提交”后报废单不可修改，如需审批则直接提交审批。</font>
+<font color="red">注：“草稿”指报废单暂存，可修改；“提交”后报废单不可修改。</font>
 </form>
 </BODY>
 </HTML>

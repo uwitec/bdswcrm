@@ -427,7 +427,7 @@ for(int i=0;i<3;i++){
 	</tr>
 </table>
 <BR>
-<font color="red">注：“草稿”指移库入库单暂存，可修改；“提交”后移库入库单不可修改，如需审批则直接提交审批。</font>
+<font color="red">注：“草稿”指移库入库单暂存，可修改；“提交”后移库入库单不可修改。</font>
 <BR><BR>
 </form>
 </body>
