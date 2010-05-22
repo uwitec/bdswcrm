@@ -59,6 +59,10 @@ public class BxfhdService
   
   public void saveBxfhd(Bxfhd bxfhd,List bxfhdProducts)
   {
+//		 如果报修单已提交，不做处理
+		if(bxfhdDao.isBxfhdSubmit(bxfhd.getId())){
+			return;
+		}
 	  bxfhdDao.saveBxfhd(bxfhd, bxfhdProducts);
 	  if(bxfhd.getState().equals("已提交"))
 	  {

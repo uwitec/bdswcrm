@@ -34,6 +34,10 @@ public class BfdService {
 	
 	public void saveBfd(Bfd bfd,List bfdProducts)
 	{
+//		 如果报废单已提交，不做处理
+		if(bfdDao.isBfdSubmit(bfd.getId())){
+			return;
+		}
 		bfdDao.saveBfd(bfd, bfdProducts);
 		if(bfd.getState().equals("已提交"))
 		{

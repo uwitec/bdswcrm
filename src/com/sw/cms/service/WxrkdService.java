@@ -69,7 +69,10 @@ public class WxrkdService
   }
     
   public void saveWxrkd(Wxrkd wxrkd,List wxrkdProducts)
-  {
+  {     //		 如果维修入库单已提交，不做处理
+		if(wxrkdDao.isWxrkdSubmit(wxrkd.getId())){
+			return;
+		}
 		wxrkdDao.saveWxrkd(wxrkd, wxrkdProducts);
 		if(wxrkd.getState().equals("已提交"))
 		{

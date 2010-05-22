@@ -53,6 +53,10 @@ public class YkrkService
 		 * @param kfdbProducts
 		 */
 		public void saveYkrk(Ykrk ykrk,List ykrkProducts){
+//			 如果移库入库已提交，不做处理
+			if(ykrkDao.isYkrkdSubmit(ykrk.getId())){
+				return;
+			}
 			ykrkDao.saveYkrk(ykrk, ykrkProducts);
 			
 			if(ykrk.getState().equals("已提交")){ //改变库存值

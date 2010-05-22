@@ -70,6 +70,10 @@ public String updatefhkhdId()
    
    public void savefhkhd(Fhkhd fhkhd,List fhkhdProducts)
    {	   
+//		 如果返还客户单已提交，不做处理
+		if(fhkhdDao.isFhkhdSubmit(fhkhd.getId())){
+			return;
+		}
 	   fhkhdDao.saveFhkhd(fhkhd, fhkhdProducts);
 	   if(fhkhd.getState().equals("已提交"))
 	   {

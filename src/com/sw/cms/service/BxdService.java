@@ -40,7 +40,10 @@ public class BxdService {
 	
 	
 	public void saveBxd(Bxd bxd,List bxdProducts)
-	{
+	{//		 如果报修单已提交，不做处理
+		if(bxdDao.isBxdSubmit(bxd.getId())){
+			return;
+		}
 		bxdDao.saveBxd(bxd, bxdProducts);
 		if(bxd.getState().equals("已提交"))
 		{
