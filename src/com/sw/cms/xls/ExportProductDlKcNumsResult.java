@@ -33,7 +33,7 @@ public class ExportProductDlKcNumsResult extends ExportXlsTemplate {
 			String store_id = StringUtils.nullToStr(request.getParameter("store_id"));
 			String flag = StringUtils.nullToStr(request.getParameter("flag"));
 			String state = StringUtils.nullToStr(request.getParameter("state"));
-			String px="";
+			String px="商品名称";
 			
 			String conStr = "";
 			if(!store_id.equals("")){
@@ -59,12 +59,12 @@ public class ExportProductDlKcNumsResult extends ExportXlsTemplate {
 			Label label = null;
 			
 			//写统计表标题
-			sheet.mergeCells(0, 0, 10, 0);
+			sheet.mergeCells(0, 0, 6, 0);
 			label = new Label(0,0,"核心代理库存价格汇总",this.getFt_title());
 			sheet.addCell(label);
 			
 			//写统计条件
-			sheet.mergeCells(0, 1, 10, 1);
+			sheet.mergeCells(0, 1, 6, 1);
 			label = new Label(0,1,conStr,this.getFt_item_center());
 			sheet.addCell(label);
 					
@@ -113,9 +113,9 @@ public class ExportProductDlKcNumsResult extends ExportXlsTemplate {
 					String ms=StringUtils.nullToStr(map.get("ms"));
 					if(!ms.equals(""))
 					{
-					   if(ms.length()>10)
+					   if(ms.length()>20)
 					   {
-					     ms=ms.substring(0,10)+"...";
+					     ms=ms.substring(0,20)+"...";
 					   }
 					}
 					 
@@ -131,12 +131,15 @@ public class ExportProductDlKcNumsResult extends ExportXlsTemplate {
 					}
 					label = new Label(0,k,String.valueOf(i+1),this.getFt_item_left());
 					sheet.addCell(label);
+					sheet.setColumnView(0, 5);
 					//label = new Label(0,k,StringUtils.nullToStr(map.get("product_id")),this.getFt_item_center());
 					//sheet.addCell(label);			
 					label = new Label(1,k,StringUtils.nullToStr(map.get("product_name")),this.getFt_item_left());
-					sheet.addCell(label);			
+					sheet.addCell(label);
+					sheet.setColumnView(1, 40);
 					label = new Label(2,k,StringUtils.nullToStr(map.get("product_xh")),this.getFt_item_left());
-					sheet.addCell(label);			
+					sheet.addCell(label);
+					sheet.setColumnView(2, 45);
 					label = new Label(3,k,num,this.getFt_item_center());
 					sheet.addCell(label);
 					//label = new Label(4,k,JMath.round(khcbj,2),this.getFt_item_right());
@@ -153,9 +156,9 @@ public class ExportProductDlKcNumsResult extends ExportXlsTemplate {
 //					sheet.addCell(label);
 //					label = new Label(10,k,JMath.round(dss),this.getFt_item_right());
 //					sheet.addCell(label);
-					label = new Label(6,k,ms,this.getFt_item_center());
+					label = new Label(6,k,ms,this.getFt_item_left());
 					sheet.addCell(label);
-					
+					sheet.setColumnView(6, 35);
 					k++;
 				}
 			}
