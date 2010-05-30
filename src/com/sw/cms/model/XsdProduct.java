@@ -29,6 +29,8 @@ public class XsdProduct {
 	private String qz_serial_num;
 	private String qz_flag;
 	
+	private String sfcytc;            //是否参与提成
+	
 	public int getId() {
 		return id;
 	}
@@ -172,6 +174,12 @@ public class XsdProduct {
 	}
 	public void setYgcbj(double ygcbj) {
 		this.ygcbj = ygcbj;
+	}
+	public String getSfcytc() {
+		return sfcytc;
+	}
+	public void setSfcytc(String sfcytc) {
+		this.sfcytc = sfcytc;
 	}
 
 }

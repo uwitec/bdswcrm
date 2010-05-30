@@ -201,7 +201,7 @@ public class ThdDAO extends JdbcBaseDAO {
 	 */
 	private void addThdProducts(List thdProducts,Thd thd){
 		String sql = "";
-		Object[] param = new Object[19];
+		Object[] param = new Object[20];
 		
 		String thd_id = thd.getThd_id();
 		
@@ -211,7 +211,7 @@ public class ThdDAO extends JdbcBaseDAO {
 				
 				if(thdProduct != null){
 					if(!(thdProduct.getProduct_id()).equals("")){
-						sql = "insert into thd_product(thd_id,product_id,product_xh,product_name,th_price,nums,remark,xj,cbj,qz_serial_num,kh_cbj,sd,bhsje,ds,gf,basic_ratio,out_ratio,lsxj,ygcbj) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+						sql = "insert into thd_product(thd_id,product_id,product_xh,product_name,th_price,nums,remark,xj,cbj,qz_serial_num,kh_cbj,sd,bhsje,ds,gf,basic_ratio,out_ratio,lsxj,ygcbj,sfcytc) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 						
 						param[0] = thd_id;
 						param[1] = thdProduct.getProduct_id();
@@ -232,7 +232,7 @@ public class ThdDAO extends JdbcBaseDAO {
 						param[16] = thdProduct.getOut_ratio();
 						param[17] = thdProduct.getLsxj();
 						param[18] = thdProduct.getYgcbj();
-						
+						param[19] = thdProduct.getSfcytc();
 						
 						this.getJdbcTemplate().update(sql,param);
 					}
@@ -362,7 +362,7 @@ public class ThdDAO extends JdbcBaseDAO {
 			if(SqlUtil.columnIsExist(rs,"lsxj")) thdProduct.setLsxj(rs.getDouble("lsxj"));
 			
 			if(SqlUtil.columnIsExist(rs,"ygcbj")) thdProduct.setYgcbj(rs.getDouble("ygcbj"));
-			
+			if(SqlUtil.columnIsExist(rs,"sfcytc")) thdProduct.setSfcytc(rs.getString("sfcytc"));
 			return thdProduct;
 		}
 	}	

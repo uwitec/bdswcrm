@@ -266,6 +266,7 @@ public class ThdService {
 					info.setBasic_ratio(thdProduct.getBasic_ratio());
 					info.setOut_ratio(thdProduct.getOut_ratio());
 					info.setLsxj(0-(thdProduct.getLsxj()*thdProduct.getNums()));
+					info.setSfcytc(thdProduct.getSfcytc());
 					
 					productSaleFlowDao.insertProductSaleFlow(info);
 				}

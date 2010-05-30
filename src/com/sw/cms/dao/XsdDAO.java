@@ -14,6 +14,7 @@ import com.sw.cms.model.Page;
 import com.sw.cms.model.Xsd;
 import com.sw.cms.model.XsdProduct;
 import com.sw.cms.util.DateComFunc;
+import com.sw.cms.util.StringUtils;
 
 /**
  * 销售订单，分销订单
@@ -386,7 +387,7 @@ public class XsdDAO extends JdbcBaseDAO {
 	 */
 	private void addXsdProducts(List xsdProducts,Xsd xsd){
 		String sql = "";
-		Object[] param = new Object[22];
+		Object[] param = new Object[23];
 		
 		double sd = 0;
 		
@@ -412,7 +413,7 @@ public class XsdDAO extends JdbcBaseDAO {
 				XsdProduct xsdProduct = (XsdProduct)xsdProducts.get(i);
 				if(xsdProduct != null){
 					if(!xsdProduct.getProduct_id().equals("")){
-						sql = "insert into xsd_product(xsd_id,product_id,product_xh,product_name,price,jgtz,nums,remark,xj,cbj,qz_serial_num,sjcj_nums,sjcj_xj,kh_cbj,gf,sd,bhsje,basic_ratio,out_ratio,ds,lsxj,ygcbj) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+						sql = "insert into xsd_product(xsd_id,product_id,product_xh,product_name,price,jgtz,nums,remark,xj,cbj,qz_serial_num,sjcj_nums,sjcj_xj,kh_cbj,gf,sd,bhsje,basic_ratio,out_ratio,ds,lsxj,ygcbj,sfcytc) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 						
 						param[0] = xsd_id;
 						param[1] = xsdProduct.getProduct_id();
@@ -434,11 +435,13 @@ public class XsdDAO extends JdbcBaseDAO {
 						double lsxj = 0l;
 						double ds = 0l;
 						double ygcbj = 0l;
+						String sfcytc = ""; //是否参与提成
 						if(map != null){
 							lsxj = map.get("lsxj")==null?0:((Double)map.get("lsxj")).doubleValue();
 							gf = map.get("gf")==null?0:((Double)map.get("gf")).doubleValue();
 							ds = map.get("dss")==null?0:((Double)map.get("dss")).doubleValue();
 							ygcbj = map.get("ygcbj")==null?0:((Double)map.get("ygcbj")).doubleValue();
+							sfcytc = StringUtils.nullToStr(map.get("sfcytc"));
 						}
 						
 						//不含税单价低于零售限价时 点杀需要乘以比例
@@ -455,6 +458,7 @@ public class XsdDAO extends JdbcBaseDAO {
 						param[19] = ds;
 						param[20] = lsxj;
 						param[21] = ygcbj;
+						param[22] = sfcytc;
 						
 						this.getJdbcTemplate().update(sql,param);
 						
@@ -476,7 +480,7 @@ public class XsdDAO extends JdbcBaseDAO {
 				String sql = "update xsd_product set cbj=" + xsdProduct.getCbj() + 
 						",kh_cbj=" + xsdProduct.getKh_cbj() + ",ds=" + xsdProduct.getDs() + 
 						",ygcbj=" + xsdProduct.getYgcbj() + ",gf=" + xsdProduct.getGf() + 
-						",sd=" + xsdProduct.getSd() + ",basic_ratio=" + xsdProduct.getBasic_ratio() + ",out_ratio=" + xsdProduct.getOut_ratio() + " where id=" + xsdProduct.getId();
+						",sd=" + xsdProduct.getSd() + ",basic_ratio=" + xsdProduct.getBasic_ratio() + ",out_ratio=" + xsdProduct.getOut_ratio() + ",sfcytc='" + xsdProduct.getSfcytc() + "' where id=" + xsdProduct.getId();
 				
 				this.getJdbcTemplate().update(sql);
 			}
@@ -861,7 +865,7 @@ public class XsdDAO extends JdbcBaseDAO {
 			if(SqlUtil.columnIsExist(rs,"out_ratio")) xsdProduct.setOut_ratio(rs.getDouble("out_ratio"));
 			if(SqlUtil.columnIsExist(rs,"lsxj")) xsdProduct.setLsxj(rs.getDouble("lsxj"));
 			if(SqlUtil.columnIsExist(rs,"ygcbj")) xsdProduct.setYgcbj(rs.getDouble("ygcbj"));
-			
+			if(SqlUtil.columnIsExist(rs,"sfcytc")) xsdProduct.setSfcytc(rs.getString("sfcytc"));
 			return xsdProduct;
 		}
 	}

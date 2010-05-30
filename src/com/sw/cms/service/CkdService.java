@@ -165,6 +165,7 @@ public class CkdService {
 						xsdProduct.setBasic_ratio(basic_ratio);    //基本提成
 						xsdProduct.setOut_ratio(out_ratio);        //超限提成
 						xsdProduct.setSd(sd);
+						xsdProduct.setSfcytc(product.getSfcytc());  //是否参与提成
 						
 						//不含税单价低于零售限价时 点杀需要乘以比例
 						double ds = product.getDss();
@@ -490,6 +491,7 @@ public class CkdService {
 					info.setBasic_ratio(xsdProduct.getBasic_ratio());
 					info.setOut_ratio(xsdProduct.getOut_ratio());
 					info.setLsxj(xsdProduct.getLsxj() * xsdProduct.getNums());
+					info.setSfcytc(xsdProduct.getSfcytc());
 					
 					productSaleFlowDao.insertProductSaleFlow(info);
 				}

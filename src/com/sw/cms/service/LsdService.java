@@ -361,6 +361,7 @@ public class LsdService {
 					double ygcbj = 0l;  //预估成本价
 					double cbj = 0l;    //成本价
 					double khcbj = 0l;  //考核成本价
+					String sfcytc = ""; //是否参与提成
 					
 					Map map = productDao.getProductInfoById(lsdProduct.getProduct_id());
 					if(map != null){
@@ -370,6 +371,7 @@ public class LsdService {
 						ygcbj = map.get("ygcbj")==null?0:((Double)map.get("ygcbj")).doubleValue();
 						cbj = map.get("price")==null?0:((Double)map.get("price")).doubleValue();
 						khcbj = map.get("khcbj")==null?0:((Double)map.get("khcbj")).doubleValue();
+						sfcytc = StringUtils.nullToStr(map.get("sfcytc"));
 					}
 					
 					//不含税单价低于零售限价时 点杀需要乘以比例
@@ -394,6 +396,7 @@ public class LsdService {
 					info.setBasic_ratio(basic_ratio);
 					info.setOut_ratio(out_ratio);
 					info.setLsxj(lsxj*lsdProduct.getNums());
+					info.setSfcytc(sfcytc);
 					
 					productSaleFlowDao.insertProductSaleFlow(info);
 				}

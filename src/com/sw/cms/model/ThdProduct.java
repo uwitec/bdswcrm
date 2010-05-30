@@ -24,6 +24,7 @@ public class ThdProduct {
 	private double out_ratio = 0;
 	private double lsxj = 0;
 	private double ygcbj = 0;   //预估成本价
+	private String sfcytc;      //是否参与提成
 	
 	public int getId() {
 		return id;
@@ -144,6 +145,12 @@ public class ThdProduct {
 	}
 	public void setYgcbj(double ygcbj) {
 		this.ygcbj = ygcbj;
+	}
+	public String getSfcytc() {
+		return sfcytc;
+	}
+	public void setSfcytc(String sfcytc) {
+		this.sfcytc = sfcytc;
 	}
 
 }

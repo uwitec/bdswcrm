@@ -32,6 +32,7 @@ public class ProductSaleFlow {
 	private double basic_ratio;//基本提成比例
 	private double out_ratio;  //超限提成比例
 	private double lsxj;       //零售限价
+	private String sfcytc;     //是否参与提成
 	private Timestamp jy_time; //交易时间
 	
 	public int getSeq_id() {
@@ -177,6 +178,12 @@ public class ProductSaleFlow {
 	}
 	public void setJy_time(Timestamp jyTime) {
 		jy_time = jyTime;
+	}
+	public String getSfcytc() {
+		return sfcytc;
+	}
+	public void setSfcytc(String sfcytc) {
+		this.sfcytc = sfcytc;
 	}
 	
 }

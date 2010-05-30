@@ -44,6 +44,15 @@ public class Product {
 	
 	private String qz_serial_num; //强制序列号
 	
+	private String sfcytc; //是否参与提成
+	
+	public String getSfcytc() {
+		return sfcytc;
+	}
+	public void setSfcytc(String sfcytc) {
+		this.sfcytc = sfcytc;
+	}
+	
 	public String getGysbh() {
 		return gysbh;
 	}

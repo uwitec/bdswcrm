@@ -290,7 +290,7 @@ public class XstjXsryDAO extends JdbcBaseDAO {
 	public List getYwytcHz(String start_date,String end_date,String dept_id,String user_id){
 		String sql = "select a.yw_type,a.product_id,b.dept,a.xsry,b.real_name,(a.bhsje-a.khcb) as khml," +
 		"(a.bhsje-a.khcb)*a.basic_ratio/100 as jbtc,(a.bhsje-a.khcb)*a.gf/100 as blds,a.ds as jeds," +
-		"(a.bhsje-a.lsxj)*a.out_ratio/100 as cxjl from product_sale_flow a left join sys_user b on b.user_id=a.xsry where 1=1";
+		"(a.bhsje-a.lsxj)*a.out_ratio/100 as cxjl,a.sfcytc from product_sale_flow a left join sys_user b on b.user_id=a.xsry where 1=1";
 		
 		if(!start_date.equals("")){
 			sql += " and a.cz_date>='" + start_date + "'";
@@ -322,7 +322,7 @@ public class XstjXsryDAO extends JdbcBaseDAO {
 	public List getYwytcMx(String start_date,String end_date,String user_id){
 		String sql = "select a.cz_date,a.id,a.yw_type,a.client_name,c.product_name,a.product_id,c.product_xh,a.nums,(a.bhsje-a.khcb) as khml," +
 				"(a.bhsje-a.khcb)*a.basic_ratio/100 as jbtc,(a.bhsje-a.khcb)*a.gf/100 as blds,a.ds as jeds," +
-				"(a.bhsje-a.lsxj)*a.out_ratio/100 as cxjl from product_sale_flow a left join sys_user b on b.user_id=a.xsry left join product c on c.product_id=a.product_id where 1=1";
+				"(a.bhsje-a.lsxj)*a.out_ratio/100 as cxjl,a.sfcytc from product_sale_flow a left join sys_user b on b.user_id=a.xsry left join product c on c.product_id=a.product_id where 1=1";
 		
 		if(!start_date.equals("")){
 			sql += " and a.cz_date>='" + start_date + "'";

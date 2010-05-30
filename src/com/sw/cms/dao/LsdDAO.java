@@ -13,6 +13,7 @@ import com.sw.cms.model.Lsd;
 import com.sw.cms.model.LsdProduct;
 import com.sw.cms.model.Page;
 import com.sw.cms.util.DateComFunc;
+import com.sw.cms.util.StringUtils;
 
 /**
  * 零售单处理
@@ -29,8 +30,7 @@ public class LsdDAO extends JdbcBaseDAO {
 	 * @param rowsPerPage
 	 * @return
 	 */
-	public Page getLsdList(String con,int curPage, int rowsPerPage)
-	{
+	public Page getLsdList(String con,int curPage, int rowsPerPage){
 		String sql = "select a.id,a.client_name,a.lsdje,a.creatdate,a.state,b.real_name as xsry,a.czr,a.lxr,a.lxdh,a.sp_state from lsd a left join sys_user b on b.user_id=a.xsry where 1=1";
 		if(!con.equals(""))
 		{
@@ -230,7 +230,7 @@ public class LsdDAO extends JdbcBaseDAO {
 	 */
 	private void addLsdProducts(List lsdProducts,Lsd lsd){
 		String sql = "";
-		Object[] param = new Object[19];
+		Object[] param = new Object[20];
 		
 		String lsd_id = lsd.getId();
 		
@@ -256,7 +256,7 @@ public class LsdDAO extends JdbcBaseDAO {
 				LsdProduct lsdProduct = (LsdProduct)lsdProducts.get(i);
 				if(lsdProduct != null){
 					if(!lsdProduct.getProduct_id().equals("") && !lsdProduct.getProduct_name().equals("")){
-						sql = "insert into lsd_product(lsd_id,product_id,product_xh,product_name,price,nums,xj,remark,cbj,qz_serial_num,kh_cbj,gf,sd,bhsje,basic_ratio,out_ratio,ds,lsxj,ygcbj) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+						sql = "insert into lsd_product(lsd_id,product_id,product_xh,product_name,price,nums,xj,remark,cbj,qz_serial_num,kh_cbj,gf,sd,bhsje,basic_ratio,out_ratio,ds,lsxj,ygcbj,sfcytc) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 						
 						param[0] = lsd_id;
 						param[1] = lsdProduct.getProduct_id();
@@ -274,6 +274,7 @@ public class LsdDAO extends JdbcBaseDAO {
 						double ygcbj = 0l;  //预估成本价
 						double cbj = 0l;    //成本价
 						double khcbj = 0l;  //考核成本价
+						String sfcytc = ""; //是否参与提成
 						if(map != null){
 							lsxj = map.get("lsxj")==null?0:((Double)map.get("lsxj")).doubleValue();
 							gf = map.get("gf")==null?0:((Double)map.get("gf")).doubleValue();
@@ -281,6 +282,7 @@ public class LsdDAO extends JdbcBaseDAO {
 							ygcbj = map.get("ygcbj")==null?0:((Double)map.get("ygcbj")).doubleValue();
 							cbj = map.get("price")==null?0:((Double)map.get("price")).doubleValue();
 							khcbj = map.get("khcbj")==null?0:((Double)map.get("khcbj")).doubleValue();
+							sfcytc = StringUtils.nullToStr(map.get("sfcytc"));
 						}
 						//不含税单价低于零售限价时 点杀需要乘以比例
 						if((lsdProduct.getPrice()/ (1 + sd/100)) < lsxj){
@@ -298,6 +300,7 @@ public class LsdDAO extends JdbcBaseDAO {
 						param[16] = ds;
 						param[17] = lsxj;
 						param[18] = ygcbj;
+						param[19] = sfcytc;
 						
 						this.getJdbcTemplate().update(sql,param);
 					}
@@ -516,6 +519,7 @@ public class LsdDAO extends JdbcBaseDAO {
 			if(SqlUtil.columnIsExist(rs,"out_ratio")) lsdProduct.setOut_ratio(rs.getDouble("out_ratio"));
 			if(SqlUtil.columnIsExist(rs,"lsxj")) lsdProduct.setLsxj(rs.getDouble("lsxj"));
 			if(SqlUtil.columnIsExist(rs,"ygcbj")) lsdProduct.setYgcbj(rs.getDouble("ygcbj"));
+			if(SqlUtil.columnIsExist(rs,"sfcytc")) lsdProduct.setSfcytc(rs.getString("sfcytc"));
 			
 			return lsdProduct;
 		}

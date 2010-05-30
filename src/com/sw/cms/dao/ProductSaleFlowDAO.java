@@ -11,10 +11,10 @@ import com.sw.cms.model.ProductSaleFlow;
 public class ProductSaleFlowDAO extends JdbcBaseDAO {
 	
 	public void insertProductSaleFlow(ProductSaleFlow info){
-		String sql = "insert into product_sale_flow(id,yw_type,product_id,client_name,xsry,cz_date,nums,price,hjje,dwcb,cb,dwkhcb,khcb,dwygcb,ygcb,sd,bhsje,gf,ds,basic_ratio,out_ratio,lsxj,jy_time) " +
-				"values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,now())";
+		String sql = "insert into product_sale_flow(id,yw_type,product_id,client_name,xsry,cz_date,nums,price,hjje,dwcb,cb,dwkhcb,khcb,dwygcb,ygcb,sd,bhsje,gf,ds,basic_ratio,out_ratio,lsxj,sfcytc,jy_time) " +
+				"values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,now())";
 		
-		Object[] param = new Object[22];
+		Object[] param = new Object[23];
 		
 		param[0] = info.getId();
 		param[1] = info.getYw_type();
@@ -38,6 +38,8 @@ public class ProductSaleFlowDAO extends JdbcBaseDAO {
 		param[19] = info.getBasic_ratio();
 		param[20] = info.getOut_ratio();
 		param[21] = info.getLsxj();
+		param[22] = info.getSfcytc();
+		
 		
 		this.getJdbcTemplate().update(sql,param);
 	}

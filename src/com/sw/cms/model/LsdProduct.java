@@ -24,6 +24,7 @@ public class LsdProduct {
 	private double out_ratio = 0;      //超限提成比例
 	private double lsxj = 0;           //零售限价
 	private double ygcbj = 0;          //预估成本价
+	private String sfcytc;             //是否参与提成
 	
 	public double getCbj() {
 		return cbj;
@@ -150,6 +151,12 @@ public class LsdProduct {
 	}
 	public void setYgcbj(double ygcbj) {
 		this.ygcbj = ygcbj;
+	}
+	public String getSfcytc() {
+		return sfcytc;
+	}
+	public void setSfcytc(String sfcytc) {
+		this.sfcytc = sfcytc;
 	}
 	
 }
