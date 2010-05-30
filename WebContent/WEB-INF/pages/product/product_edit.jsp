@@ -151,7 +151,7 @@ String iscs_flag = StringUtils.nullToStr(VS.findValue("iscs_flag"));
 	</tr>
 	<tr>
 		<td class="a1" width="15%">商品类别</td>
-		<td class="a2" colspan="3">
+		<td class="a2"  width="35%">
 			<select name="productKind" onkeyup="goNext(this.form,this.name);">
 				<option value=""></option>
 		<%
@@ -172,7 +172,14 @@ String iscs_flag = StringUtils.nullToStr(VS.findValue("iscs_flag"));
 		}
 		%>
 			</select>
-		</td>		
+		</td>	
+		<td class="a1" width="15%">是否参与提成</td>
+		<td class="a2" width="35%">
+			<select name="sfcytc" onkeyup="goNext(this.form,this.name);">
+				<option value="1" <%if(StringUtils.nullToStr(product.getSfcytc()).equals("1")) out.print("selected"); %>>是</option>
+				<option value="0" <%if(StringUtils.nullToStr(product.getSfcytc()).equals("0")) out.print("selected"); %>>否</option>
+			</select>
+		</td>	
 	</tr>
 	<tr>
 	    <td class="a1">商品描述</td>

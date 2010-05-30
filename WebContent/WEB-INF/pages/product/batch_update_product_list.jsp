@@ -31,8 +31,8 @@
 		<TR>
 			<TD class=ReportHead width="3%" nowrap="nowrap">序号</TD>
 			<TD class=ReportHead width="8%" nowrap="nowrap">商品编码</TD>
-			<TD class=ReportHead width="20%">商品名称</TD>
-			<TD class=ReportHead width="13%">规格</TD>
+			<TD class=ReportHead width="15%">商品名称</TD>
+			<TD class=ReportHead width="11%">规格</TD>
 			<TD class=ReportHead width="7%" nowrap="nowrap">考核成本价</TD>
 			<TD class=ReportHead width="7%" nowrap="nowrap">预估成本价</TD>
 			<TD class=ReportHead width="7%" nowrap="nowrap">零售报价</TD>
@@ -41,6 +41,7 @@
 			<TD class=ReportHead width="7%" nowrap="nowrap">分销限价</TD>
 			<TD class=ReportHead width="7%" nowrap="nowrap">比例点杀</TD>
 			<TD class=ReportHead width="7%" nowrap="nowrap">金额点杀</TD>
+			<TD class=ReportHead width="7%" nowrap="nowrap">是否参与提成</TD>
 		</TR>
 	</THEAD>
 	<TBODY>
@@ -58,6 +59,7 @@
 		<TD class=ReportItemXh><input type="text" name='products[<ww:property value="%{#li.count-1}"/>].fxxj' id='fxxj_<ww:property value="%{#li.count-1}"/>' value="<ww:property value="%{getText('global.format.double',{fxxj})}"/>" class="cssTextRight" maxlength="10" notNull='true' vtype='float' vdisp='分销限价' onfocus="this.style.backgroundColor='#DCDCDC'" onblur="this.style.backgroundColor='#FFFFFF'"></TD>
 		<TD class=ReportItemXh><input type="text" name='products[<ww:property value="%{#li.count-1}"/>].gf' id='gf_<ww:property value="%{#li.count-1}"/>' value="<ww:property value="%{getText('global.format.double',{gf})}"/>" class="cssTextRight" maxlength="10" notNull='true' vtype='float' vdisp='比例点杀' onfocus="this.style.backgroundColor='#DCDCDC'" onblur="this.style.backgroundColor='#FFFFFF'"></TD>
 		<TD class=ReportItemXh><input type="text" name='products[<ww:property value="%{#li.count-1}"/>].dss' id='dss_<ww:property value="%{#li.count-1}"/>' value="<ww:property value="%{getText('global.format.double',{dss})}"/>" class="cssTextRight" maxlength="10" notNull='true' vtype='float' vdisp='金额点杀' onfocus="this.style.backgroundColor='#DCDCDC'" onblur="this.style.backgroundColor='#FFFFFF'"></TD>
+		<td class=ReportItemXh><ww:select list="#{\"1\":'是',\"0\":'否'}" name="products[%{#li.count-1}].sfcytc" id="sfcytc_%{#li.count-1}" value="%{sfcytc}" theme="simple"></ww:select></td>
 	</TR>
 	</ww:iterator>
 	</TBODY>

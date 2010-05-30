@@ -79,7 +79,10 @@ if(obj != null){
 	</tr>
 	<tr>
 		<td class="a1" width="15%">商品条形码</td>
-		<td class="a2" colspan="3"><%=StringUtils.nullToStr(product.getSp_txm()) %></td>
+		<td class="a2" width="35%"><%=StringUtils.nullToStr(product.getSp_txm()) %></td>
+		<td class="a1" width="15%">是否参与提成</td>
+		
+		<td class="a2" width="35%"><%=StringUtils.nullToStr(product.getSfcytc()).equals("1")?"是":"否" %></td>
 	</tr>
 	<tr height="50">
 		<td class="a1">商品描述</td>

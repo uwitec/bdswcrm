@@ -144,6 +144,15 @@ String[] jldw = (String[])VS.findValue("jldw");
 		</td>			
 	</tr>
 	<tr>
+	  <td class="a1" width="15%">是否参与提成</td>
+		<td class="a2" colspan="3">
+			<select name="sfcytc" onkeyup="goNext(this.form,this.name);">
+				<option value="1">是</option>
+				<option value="0">否</option>
+			</select>
+		</td>
+	</tr>
+	<tr>
 	    <td class="a1">商品描述</td>
 		<td class="a2" colspan="3"><input type="text"  name="ms" value=""  style="width:90%" onkeyup="goNext(this.form,this.name);"></td>
 	</tr>

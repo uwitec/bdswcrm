@@ -27,7 +27,7 @@ String out_ratio = StringUtils.nullToStr((String)VS.findValue("out_ratio"));
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript">
 
-	function sel(product_id,product_xh,product_name,qz_serial_num,cbj,khcbj,ygcbj,gf,ds,lsxj){
+	function sel(product_id,product_xh,product_name,qz_serial_num,cbj,khcbj,ygcbj,gf,ds,lsxj,sfcytc){
 		var id = window.opener.document.getElementById("product_id_<%=openerId%>");
 		var xh = window.opener.document.getElementById("product_xh_<%=openerId%>");
 		var name = window.opener.document.getElementById("product_name_<%=openerId%>");
@@ -43,6 +43,7 @@ String out_ratio = StringUtils.nullToStr((String)VS.findValue("out_ratio"));
 		var sd_obj = parent.window.opener.document.getElementById("sd_<%=openerId%>");
 		var basic_ratio_obj = parent.window.opener.document.getElementById("basic_ratio_<%=openerId%>");
 		var out_ratio_obj = parent.window.opener.document.getElementById("out_ratio_<%=openerId%>");
+		var sfcytc_obj = parent.window.opener.document.getElementById("sfcytc_<%=openerId%>");
 
 		if(id != null) id.value = product_id;
 		if(xh != null) xh.value = product_xh;
@@ -57,6 +58,7 @@ String out_ratio = StringUtils.nullToStr((String)VS.findValue("out_ratio"));
 		if(sd_obj != null) sd_obj.value = "<%=sd %>";
 		if(basic_ratio_obj != null) basic_ratio_obj.value = "<%=basic_ratio %>";
 		if(out_ratio_obj != null) out_ratio_obj.value = "<%=out_ratio %>";
+		if(sfcytc_obj != null) sfcytc_obj.value = sfcytc;
 		
 		window.close();	
 	}
@@ -141,7 +143,7 @@ String out_ratio = StringUtils.nullToStr((String)VS.findValue("out_ratio"));
 				double dss = map.get("dss")==null?0:((Double)map.get("dss")).doubleValue();
 				
 			%>
-			<tr class="a1" onmouseover="this.className='a2';" onmouseout="this.className='a1';" title="左键点击选择" onclick="sel('<%=StringUtils.nullToStr(map.get("product_id")) %>','<%=StringUtils.nullToStr(map.get("product_xh")) %>','<%=StringUtils.nullToStr(map.get("product_name")) %>','<%=StringUtils.nullToStr(map.get("qz_serial_num")) %>','<%=JMath.round(price) %>','<%=JMath.round(khcbj) %>','<%=JMath.round(ygcbj) %>','<%=JMath.round(gf) %>','<%=JMath.round(dss) %>','<%=JMath.round(lsxj) %>');">
+			<tr class="a1" onmouseover="this.className='a2';" onmouseout="this.className='a1';" title="左键点击选择" onclick="sel('<%=StringUtils.nullToStr(map.get("product_id")) %>','<%=StringUtils.nullToStr(map.get("product_xh")) %>','<%=StringUtils.nullToStr(map.get("product_name")) %>','<%=StringUtils.nullToStr(map.get("qz_serial_num")) %>','<%=JMath.round(price) %>','<%=JMath.round(khcbj) %>','<%=JMath.round(ygcbj) %>','<%=JMath.round(gf) %>','<%=JMath.round(dss) %>','<%=JMath.round(lsxj) %>','<%=StringUtils.nullToStr(map.get("sfcytc")) %>');">
 				<td><%=StringUtils.nullToStr(map.get("product_id")) %></td>
 				<td><%=StringUtils.nullToStr(map.get("product_name")) %></td>
 				<td><%=StringUtils.nullToStr(map.get("product_xh")) %></td>

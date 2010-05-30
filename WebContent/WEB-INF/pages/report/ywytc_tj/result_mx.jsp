@@ -80,6 +80,7 @@ if(results != null && results.size()>0){
 		Map map = (Map)results.get(i);
 		
 		String id = StringUtils.nullToStr(map.get("id"));
+		String sfcytc = StringUtils.nullToStr(map.get("sfcytc"));
 		
 		String strId = "";
 		String strDate = "";
@@ -115,6 +116,11 @@ if(results != null && results.size()>0){
 			if(blds < 0) blds = 0;
 		}
 		
+		//如果商品不参与提成
+		if(sfcytc.equals("0")){
+			jbtc = 0;
+			cxjl = 0;
+		}
 		
 		
 		double total = jbtc + blds + jeds + cxjl;

@@ -81,6 +81,7 @@ if(results != null && results.size()>0){
 		String xsry = StringUtils.nullToStr(map.get("xsry"));
 		String real_name = StringUtils.nullToStr(map.get("real_name"));
 		String dept = StringUtils.nullToStr(map.get("dept"));
+		String sfcytc = StringUtils.nullToStr(map.get("sfcytc"));
 		
 		double khml = map.get("khml") == null?0:((Double)map.get("khml")).doubleValue();   //考核毛利
 		double jbtc = map.get("jbtc") == null?0:((Double)map.get("jbtc")).doubleValue();   //基本提成
@@ -97,6 +98,12 @@ if(results != null && results.size()>0){
 		}else{
 			if(cxjl < 0) cxjl = 0;
 			if(blds < 0) blds = 0;
+		}
+		
+		//如果商品不参与提成
+		if(sfcytc.equals("0")){
+			jbtc = 0;
+			cxjl = 0;
 		}
 		
 		double total = jbtc + blds + jeds + cxjl;

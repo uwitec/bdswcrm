@@ -748,3 +748,19 @@ INSERT INTO `sjzd_xmxx` VALUES (196,'SJZD_BXYY','其他','其他',0);
 2010-05-21修改
 --移库出库中增加入库仓库的选择，可以是好件库，也可以是坏件库
 ALTER TABLE `ykck` ADD COLUMN `rk_store_id` VARCHAR(20) AFTER `remark`;
+
+2010-05-30商品表修改，
+--添加是否参与提成
+ALTER TABLE `product` ADD COLUMN `sfcytc` VARCHAR(10) DEFAULT 1 AFTER `ygcbj`;
+
+--商品交易表中添加是否参与提成字段
+ALTER TABLE `product_sale_flow` ADD COLUMN `sfcytc` VARCHAR(10) DEFAULT 1 AFTER `jy_time`;
+
+--零售单明细添加是否参与提成字段
+ALTER TABLE `lsd_product` ADD COLUMN `sfcytc` VARCHAR(10) DEFAULT 1 AFTER `ygcbj`;
+
+--销售单明细添加是否参与提成字段
+ALTER TABLE `xsd_product` ADD COLUMN `sfcytc` VARCHAR(10) DEFAULT 1 AFTER `ygcbj`;
+
+--退货单明细添加是否参与提成字段
+ALTER TABLE `crm_sw`.`thd_product` ADD COLUMN `sfcytc` VARCHAR(10) DEFAULT 1 AFTER `ygcbj`;

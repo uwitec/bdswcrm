@@ -110,6 +110,7 @@ String id = (String)VS.findValue("id");
 					var out_ratio = parent.window.opener.document.getElementById("out_ratio_"+k);
 					var lsxj = parent.window.opener.document.getElementById("lsxj_"+k);
 					var ygcbj_obj = parent.window.opener.document.getElementById("ygcbj_"+k);
+					var sfcytc_obj = parent.window.opener.document.getElementById("sfcytc_"+k);
 				
 					id.value = arryStr[0];
 					name.value = arryStr[1];
@@ -129,6 +130,7 @@ String id = (String)VS.findValue("id");
 					if(out_ratio != null) out_ratio.value = arryStr[12];
 					if(lsxj != null) lsxj.value = arryStr[13];
 					if(ygcbj_obj != null) ygcbj_obj.value = arryStr[14];
+					if(sfcytc_obj != null) sfcytc_obj.value = arryStr[15];
 					
 					k++;	
 				}	
@@ -177,6 +179,7 @@ String id = (String)VS.findValue("id");
 		vl += "|" + StringUtils.nullToStr(lsdProduct.getOut_ratio());
 		vl += "|" + StringUtils.nullToStr(lsdProduct.getLsxj());
 		vl += "|" + JMath.round(lsdProduct.getYgcbj());
+		vl += "|" + StringUtils.nullToStr(lsdProduct.getSfcytc());
 	%>
 	<tr class="a1" onmousedown="trSelectChangeCss()">
 		<td><input type="checkbox" name="selOption" value="<%=vl %>"></td>
