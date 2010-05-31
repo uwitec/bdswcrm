@@ -142,7 +142,7 @@ public class XstjXsryService {
 					String real_name = StringUtils.nullToStr(resultMap.get("real_name"));
 					String dept = StringUtils.nullToStr(resultMap.get("dept"));		
 					String yw_type = StringUtils.nullToStr(resultMap.get("yw_type"));
-					
+					String sfcytc = StringUtils.nullToStr(resultMap.get("sfcytc"));
 					double khml = resultMap.get("khml") == null?0:((Double)resultMap.get("khml")).doubleValue();   //考核毛利
 					double jbtc = resultMap.get("jbtc") == null?0:((Double)resultMap.get("jbtc")).doubleValue();   //基本提成
 					double blds = resultMap.get("blds") == null?0:((Double)resultMap.get("blds")).doubleValue();   //比例点杀
@@ -184,7 +184,7 @@ public class XstjXsryService {
 					tempMap.put("blds", temp_blds);
 					tempMap.put("jeds", temp_jeds);
 					tempMap.put("cxjl", temp_cxjl);
-					
+					tempMap.put("sfcytc", sfcytc);
 					map.put(xsry, tempMap);
 				}
 			}
