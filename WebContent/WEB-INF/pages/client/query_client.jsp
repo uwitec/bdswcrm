@@ -13,6 +13,7 @@ ClientsService clientsService = (ClientsService)VS.findValue("clientsService");
 
 Map qcMap = (Map)VS.findValue("clientQcMap");
 Map wlMap = (Map)VS.findValue("clientWlMap");
+String client_con = StringUtils.nullToStr(request.getParameter("client_con"));
 %>
 
 <html>
@@ -30,6 +31,7 @@ Map wlMap = (Map)VS.findValue("clientWlMap");
 </head>
 <body>
 <form name="myform" action="queryClients.html" method="post">
+<input type="hidden" name="client_con" id="client_con" value="<%=client_con %>">
 <table width="100%"  align="center" border="1"  class="chart_list" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
