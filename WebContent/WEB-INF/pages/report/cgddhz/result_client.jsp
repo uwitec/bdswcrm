@@ -136,7 +136,7 @@ if(list != null && list.size()>0){
 			<TD class=ReportItem>&nbsp;</TD>			
 			<TD class=ReportItem>&nbsp;</TD>
 			<TD class=ReportItem>&nbsp;</TD>
-			<TD class=ReportItem style="font-weight:bold"><%=JMath.round(hjw_je,2) %>&nbsp;</TD>
+			<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(hjw_je,2) %>&nbsp;</TD>
 			<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(hj_je,2) %>&nbsp;</TD>
 		</TR>
 	</TBODY>
