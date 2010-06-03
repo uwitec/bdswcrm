@@ -764,3 +764,12 @@ ALTER TABLE `xsd_product` ADD COLUMN `sfcytc` VARCHAR(10) DEFAULT 1 AFTER `ygcbj
 
 --退货单明细添加是否参与提成字段
 ALTER TABLE `crm_sw`.`thd_product` ADD COLUMN `sfcytc` VARCHAR(10) DEFAULT 1 AFTER `ygcbj`;
+
+
+2010-06-02销售统计增加货品销售执行汇总、客户销售执行汇总
+--将销售订单汇总改为客户销售执行汇总
+update funcs set func_name='客户销售执行汇总',func_ms='客户销售执行汇总'  where func_id='FC0047';
+--增加货品销售执行汇总
+INSERT INTO `funcs`(`func_id`,`func_name`,`func_ms`,`url`,`img`,`xh`,`ywflag`,`funcflag`)  values
+('FC0106','货品销售执行汇总','货品销售订单执行汇总','showHpxsddHzCondition.html','123.gif',12,'1','1');
+INSERT INTO `column_funcs` VALUES ('001002','FC0106');
