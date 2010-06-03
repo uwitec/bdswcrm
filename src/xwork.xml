@@ -1377,14 +1377,26 @@
         </action>      
         <!-- 采购付款汇总 -->
         
-        <!-- 销售订单汇总 -->
+        <!-- 客户销售订单执行汇总 -->
         <action name="showXsdHzCondition" class="xsdHzAction" method="showCondition">
             <result name="success">/WEB-INF/pages/report/xsd_hz/condition.jsp</result>
         </action>
         <action name="getXsdHzResult" class="xsdHzAction" method="getResult">
-            <result name="success">/WEB-INF/pages/report/xsd_hz/result.jsp</result>
+            <result name="success">/WEB-INF/pages/report/xsd_hz/result_client.jsp</result>
         </action>      
-        <!-- 销售订单汇总 -->
+         <action name="getClientxsMxResult" class="xsdHzAction" method="getResult">
+            <result name="success">/WEB-INF/pages/report/xsd_hz/result_client_mx.jsp</result>
+        </action>
+        <action name="showHpxsddHzCondition" class="xsdHzAction" method="showCondition">
+            <result name="success">/WEB-INF/pages/report/xsd_hz/condition_hp.jsp</result>
+        </action>
+        <action name="getHpxsHzCondition" class="xsdHzAction" method="getResult">
+            <result name="success">/WEB-INF/pages/report/xsd_hz/result_hp.jsp</result>
+        </action>
+        <action name="getHpxsMxCondition" class="xsdHzAction" method="getResult">
+            <result name="success">/WEB-INF/pages/report/xsd_hz/result_hp_mx.jsp</result>
+        </action>
+        <!-- 客户销售订单执行汇总 -->
         
         <!-- 货品销售汇总 -->
         <action name="showHpxsHzCondition" class="hpxsHzAction" method="showCondition">
