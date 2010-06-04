@@ -1,4 +1,4 @@
-<%@ page language="java" errorPage="/error.jsp" pageEncoding="UTF-8" contentType="text/html;charset=UTF-8" %>
+﻿<%@ page language="java" errorPage="/error.jsp" pageEncoding="UTF-8" contentType="text/html;charset=UTF-8" %>
 <%@ page import="com.opensymphony.xwork.util.OgnlValueStack" %>
 <%@ page import="com.sw.cms.util.*" %>
 <%@ page import="com.sw.cms.service.*" %>
@@ -18,7 +18,7 @@ String dj_id = StringUtils.nullToStr(request.getParameter("dj_id"));
 
 
 //销售单列表
-List xsdList =  xsdHzService.getXsdList(start_date,end_date,client_name,xsry_id,dj_id);
+List xsdList =  xsdHzService.getXsdList(start_date,end_date,client_name,dj_id);
 
 %>
 
