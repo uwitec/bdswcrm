@@ -22,7 +22,7 @@ public class SfdAction extends BaseAction
    private String jx_date1 = "";
    private String jx_date2 = "";
    private String linkman="";
-   private String wx_state="待处理";
+   private String wx_state="已保存";
    private String state="";
    private String jxr="";
    private Sfd  sfd=new  Sfd();
@@ -111,7 +111,7 @@ public class SfdAction extends BaseAction
 			sfd.setCjr(user_id);
 			if(sfd.getState().equals("已保存"))
 			{
-				sfd.setWx_state("待处理");
+				sfd.setWx_state("已保存");
 				
 				sfdService.saveSfd(sfd);
 			}
@@ -167,7 +167,7 @@ public class SfdAction extends BaseAction
 			sfd.setCjr(user_id);
 			if(sfd.getState().equals("已保存"))
 			{
-				sfd.setWx_state("待处理");
+				sfd.setWx_state("已保存");
 				 sfdService.updateSfd(sfd);
 			}
 			else
