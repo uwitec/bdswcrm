@@ -163,12 +163,13 @@ public class SfdDAO extends JdbcBaseDAO
 	 * 修改售服单流程
 	 * @param sfd
 	 */
-	public void updateSfdFlow(String id,String flow)
+	public void updateSfdFlow(String id,String flow,String wx_state)
 	{
-		String sql="update sfd set flow=?,state='已提交' where id=?";
-		Object[] param = new Object[2];
+		String sql="update sfd set flow=?,state='已提交',wx_state=? where id=?";
+		Object[] param = new Object[3];
 		param[0]=flow;
-		param[1]=id;
+		param[1]=wx_state;
+		param[2]=id;
 		
 		getJdbcTemplate().update(sql, param);
 	}
