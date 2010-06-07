@@ -131,12 +131,13 @@ String orderType = (String)VS.findValue("orderType");
 						</select>			
 					</td>
 					 -->
-					<td align="center">维修状态：</td>
+					<td align="center">单据状态：</td>
 					<td>
 						<select name="wx_state" >	
 							<option value=""></option>			
-							<option value="待处理" <%if(wx_state.equals("待处理")) out.print("selected"); %>>待处理</option>
-							<option value="已处理" <%if(wx_state.equals("已处理")) out.print("selected"); %>>已处理</option>
+							<option value="已保存" <%if(wx_state.equals("已保存")) out.print("selected"); %>>已保存</option>
+							<option value="提交咨询" <%if(wx_state.equals("提交咨询")) out.print("selected"); %>>提交咨询</option>
+							<option value="提交派工" <%if(wx_state.equals("提交派工")) out.print("selected"); %>>提交派工</option>
 						</select>					
 					</td>
 					<td align="center">经手人：</td>
@@ -156,7 +157,7 @@ String orderType = (String)VS.findValue("orderType");
 		<td width="16%" onclick="doSort('address');">地址<%if(orderName.equals("address")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
 		<td width="8%" onclick="doSort('jx_date');">接修时间<%if(orderName.equals("jx_date")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
 		<!-- <td width="8%" onclick="doSort('state');">状态<%if(orderName.equals("state")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>	 -->	
-		<td width="6%" onclick="doSort('wx_state');">维修状态<%if(orderName.equals("wx_state")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="6%" onclick="doSort('wx_state');">单据状态<%if(orderName.equals("wx_state")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
 		<td width="6%" onclick="doSort('jxr');">经手人<%if(orderName.equals("jxr")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>				
 		<td width="10%">操作</td>
 	</tr>
