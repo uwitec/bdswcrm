@@ -365,7 +365,7 @@ String[] wxlx=(String[])VS.findValue("wxlx");
 	</tr>
 </table>
 <BR>
-<font color="red">注：“草稿”指派工单暂存，可修改；“提交”后派工单不可修改，如需审批则直接提交审批。</font>
+<font color="red">注：“草稿”指派工单暂存，可修改；“提交”后派工单不可修改。</font>
 <BR><BR>
 </FORM>
 </BODY>
