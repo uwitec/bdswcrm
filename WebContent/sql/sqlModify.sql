@@ -773,3 +773,11 @@ update funcs set func_name='客户销售执行汇总',func_ms='客户销售执�
 INSERT INTO `funcs`(`func_id`,`func_name`,`func_ms`,`url`,`img`,`xh`,`ywflag`,`funcflag`)  values
 ('FC0106','货品销售执行汇总','货品销售订单执行汇总','showHpxsddHzCondition.html','123.gif',12,'1','1');
 INSERT INTO `column_funcs` VALUES ('001002','FC0106');
+
+
+--售后服务单中的维修状态变为：已保存、提交咨询、提交派工
+update sfd set wx_state='提交咨询' where wx_state='待处理' and flow='咨询';
+update sfd set wx_state='提交派工' where wx_state='待处理' and flow='派工';
+update sfd set wx_state='已保存' where state='已保存' and flow='';
+update sfd set state='已提交' where wx_state<>'已保存';
+
