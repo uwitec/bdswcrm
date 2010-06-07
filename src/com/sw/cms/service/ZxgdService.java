@@ -41,7 +41,7 @@ public class ZxgdService
     {
     	Sfd sfd = (Sfd)sfdDao.getSfd(id);
     	
-    	   sfdDao.updateSfdFlow(id,"×ÉÑ¯");
+    	   sfdDao.updateSfdFlow(id,"×ÉÑ¯","Ìá½»×ÉÑ¯");
  		   zxgd.setId(zxgdDao.updateZxgdId());
  		   zxgd.setCzr(sfd.getCjr());
  		   zxgd.setSfd_id(sfd.getId());

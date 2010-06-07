@@ -39,7 +39,7 @@ public class PgdService
 		if(pgdDao.isPgdSubmit(sfd.getId())){
 			return;
 		}
-    	   sfdDao.updateSfdFlow(id,"派工");
+    	   sfdDao.updateSfdFlow(id,"派工","提交派工");
     	   pgd.setP_id(pgdDao.updatePgdId());
  		   pgd.setP_ms("售后服务单号["+sfd.getId()+"]");
  		   pgd.setP_sfd_id(sfd.getId());
