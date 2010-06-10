@@ -8,25 +8,26 @@ import java.util.Map;
 import com.sw.cms.action.base.BaseAction;
 import com.sw.cms.model.LoginInfo;
 import com.sw.cms.model.Page;
-import com.sw.cms.model.Jfgz;
+import com.sw.cms.model.Hykfl;
+import com.sw.cms.service.HykflService;
 import com.sw.cms.service.JfgzService;
 import com.sw.cms.util.Constant;
 
-public class JfgzAction extends BaseAction {
+public class HykflAction extends BaseAction {
 	
+	private HykflService hykflService;
 	private JfgzService jfgzService;
-	
-	private Page jfgzPage;
-	private Jfgz jfgz;
+	private Page hykflPage;
+	private Hykfl hykfl;
 	
 	String real_name= "";
 	private String id = "";
 	private int curPage = 1;
-	
+	private List jfgzList = new ArrayList();
 	private String orderName = "";
 	private String orderType = "";
 	/**
-	 * 取积分规则列表
+	 * 取会员卡分类列表
 	 * @return
 	 */
 	public String list(){
@@ -42,7 +43,7 @@ public class JfgzAction extends BaseAction {
 		
 		con += " order by " + orderName + " " + orderType + "";
 		int rowsPerPage = Constant.PAGE_SIZE2;
-		jfgzPage = jfgzService.getJfgzList(curPage, rowsPerPage,con);
+		hykflPage = hykflService.getHykflList(curPage, rowsPerPage,con);
 		return "success";
 	}
 	
@@ -51,55 +52,58 @@ public class JfgzAction extends BaseAction {
 	 * 打开添加页面
 	 * @return
 	 */
-	public String add(){		
+	public String add(){	
+		id = hykflService.updateHykflId();
+		jfgzList = jfgzService.getAllJfgzList();
 		return "success";
 	}
 	
 	
 	/**
-	 * 保存积分规则
+	 * 保存会员卡分类
 	 * @return
 	 */
 	public String save(){
 		LoginInfo info = (LoginInfo)getSession().getAttribute("LOGINUSER");
 		String user_id = info.getUser_id();
-		jfgz.setCzr(user_id);
-		jfgz.setId(jfgzService.updateJfgzId());		
-		jfgzService.saveJfgz(jfgz);
+		hykfl.setCzr(user_id);
+			
+		hykflService.saveHykfl(hykfl);
 		return "success";
 	}
 	
 	
 	/**
-	 * 更新积分规则
+	 * 更新会员卡分类
 	 * @return
 	 */
 	public String update(){
 		LoginInfo info = (LoginInfo)getSession().getAttribute("LOGINUSER");
 		String user_id = info.getUser_id();
-		jfgz.setCzr(user_id);
+		hykfl.setCzr(user_id);
 		
-		jfgzService.updateJfgz(jfgz);
+		hykflService.updateHykfl(hykfl);
 		return "success";
 	}
 	
 	
 	/**
-	 * 编辑积分规则
+	 * 编辑会员卡分类
 	 * @return
 	 */
 	public String edit(){
-		jfgz = jfgzService.getJfgz(id);
+		jfgzList = jfgzService.getAllJfgzList();
+		hykfl = hykflService.getHykfl(id);		
 		return "success";
 	}
 	
 	
 	/**
-	 * 删除积分规则
+	 * 删除会员卡分类
 	 * @return
 	 */
 	public String del(){
-		jfgzService.delJfgz(id);
+		hykflService.delHykfl(id);
 		return "success";
 	}
 	
@@ -122,20 +126,28 @@ public class JfgzAction extends BaseAction {
 		this.id = id;
 	}
 
-	public Page getJfgzPage() {
-		return jfgzPage;
+	public Page getHykflPage() {
+		return hykflPage;
 	}
 
-	public void setJfgzPage(Page jfgzPage) {
-		this.jfgzPage = jfgzPage;
+	public void setHykflPage(Page hykflPage) {
+		this.hykflPage = hykflPage;
 	}
 
-	public Jfgz getJfgz() {
-		return jfgz;
+	public Hykfl getHykfl() {
+		return hykfl;
 	}
 
-	public void setJfgz(Jfgz jfgz) {
-		this.jfgz = jfgz;
+	public void setHykfl(Hykfl hykfl) {
+		this.hykfl = hykfl;
+	}
+
+	public HykflService getHykflService() {
+		return hykflService;
+	}
+
+	public void setHykflService(HykflService hykflService) {
+		this.hykflService = hykflService;
 	}
 
 	public JfgzService getJfgzService() {
@@ -145,7 +157,7 @@ public class JfgzAction extends BaseAction {
 	public void setJfgzService(JfgzService jfgzService) {
 		this.jfgzService = jfgzService;
 	}
-
+	
 	public int getCurPage() {
 		return curPage;
 	}
@@ -169,4 +181,13 @@ public class JfgzAction extends BaseAction {
 	public void setOrderType(String orderType) {
 		this.orderType = orderType;
 	}
+	
+	public List getJfgzList() {
+		return jfgzList;
+	}
+
+	public void setJfgzList(List jfgzList) {
+		this.jfgzList = jfgzList;
+	}
+
 }
