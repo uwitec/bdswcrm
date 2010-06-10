@@ -1,5 +1,7 @@
 package com.sw.cms.service;
 
+import java.util.List;
+
 import com.sw.cms.dao.JfgzDAO;
 import com.sw.cms.model.Page;
 import com.sw.cms.model.Jfgz;
@@ -28,7 +30,7 @@ public class JfgzService {
 	 * @param info
 	 */
 	public void saveJfgz(Jfgz info){
-//		 如果备忘录已提交，不做处理
+//		 如果积分规则已提交，不做处理
 		if(jfgzDao.isJfgzSubmit(info.getId())){
 			return;
 		}
@@ -63,7 +65,14 @@ public class JfgzService {
 		jfgzDao.delJfgz(id);
 	}
 	
-   
+	 /**
+	 * 取所有积分规则列表
+	 * @return
+	 */
+	public List getAllJfgzList(){
+		return jfgzDao.getAllJfgzList();
+	}
+	
 	public JfgzDAO getJfgzDao() {
 		return jfgzDao;
 	}
