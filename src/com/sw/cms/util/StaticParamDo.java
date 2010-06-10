@@ -10,6 +10,7 @@ import com.sw.cms.dao.PosTypeDAO;
 import com.sw.cms.dao.ProductKindDAO;
 import com.sw.cms.dao.StoreDAO;
 import com.sw.cms.dao.UserDAO;
+import com.sw.cms.dao.JfgzDAO;
 import com.sw.cms.source.SysSource;
 
 public class StaticParamDo{
@@ -129,6 +130,18 @@ public class StaticParamDo{
 		}
 	}
 	
+	/**
+	 * 根据积分规则ID取积分规则方法
+	 * @param id
+	 * @return
+	 */
+	public static String getJfgzNameById(String id){
+		JfgzDAO dao = (JfgzDAO)ctx.getBean("jfgzDao");
+		if(id == null || id.equals("")){
+			return "";
+		}
+		return dao.getJfgzNameById(id);
+	}
 	
 	/**
 	 * 根据费用类别编号取费用类别名称
