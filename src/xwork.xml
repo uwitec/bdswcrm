@@ -2765,5 +2765,60 @@
             <result name="success">/WEB-INF/pages/report/cgddhz/result_client_mx.jsp</result>
         </action>                      
         <!-- 采购订单汇总结束 -->
+        
+        <!-- 积分规则开始 -->
+        <action name="listJfgz" class="jfgzAction" method="list">
+            <result name="success" type="dispatcher">/WEB-INF/pages/jfgz/jfgz_list.jsp</result>
+        </action>
+        <action name="addJfgz" class="jfgzAction" method="add">
+            <result name="success">/WEB-INF/pages/jfgz/jfgz_add.jsp</result>
+        </action> 
+		<action name="saveJfgz" class="jfgzAction" method="save">
+            <result name="cancel" type="redirect">addJfgz.html</result>
+            <result name="input" type="dispatcher">/WEB-INF/pages/jfgz/jfgz_add.jsp</result>
+            <result name="success">/WEB-INF/pages/msg.jsp</result>
+        </action>
+		<action name="editJfgz" class="jfgzAction" method="edit">
+            <result name="success">/WEB-INF/pages/jfgz/jfgz_edit.jsp</result>
+        </action>
+        <action name="viewJfgz" class="jfgzAction" method="edit">
+            <result name="success">/WEB-INF/pages/jfgz/jfgz_view.jsp</result>
+        </action>
+		<action name="updateJfgz" class="jfgzAction" method="update">
+            <result name="cancel" type="redirect">editJfgz.html</result>
+            <result name="input">/WEB-INF/pages/jfgz/jfgz_edit.jsp</result>
+            <result name="success">/WEB-INF/pages/msg.jsp</result>
+        </action>
+		<action name="delJfgz" class="jfgzAction" method="del">
+            <result name="success" type="redirect">listJfgz.html</result>
+        </action>       
+        <!-- 积分规则结束 -->
+        <!-- 会员卡分类开始 -->
+        <action name="listHykfl" class="hykflAction" method="list">
+            <result name="success" type="dispatcher">/WEB-INF/pages/hykfl/hykfl_list.jsp</result>
+        </action>
+        <action name="addHykfl" class="hykflAction" method="add">
+            <result name="success">/WEB-INF/pages/hykfl/hykfl_add.jsp</result>
+        </action> 
+		<action name="saveHykfl" class="hykflAction" method="save">
+            <result name="cancel" type="redirect">addHykfl.html</result>
+            <result name="input" type="dispatcher">/WEB-INF/pages/hykfl/hykfl_add.jsp</result>
+            <result name="success">/WEB-INF/pages/msg.jsp</result>
+        </action>
+		<action name="editHykfl" class="hykflAction" method="edit">
+            <result name="success">/WEB-INF/pages/hykfl/hykfl_edit.jsp</result>
+        </action>
+        <action name="viewHykfl" class="hykflAction" method="edit">
+            <result name="success">/WEB-INF/pages/hykfl/hykfl_view.jsp</result>
+        </action>
+		<action name="updateHykfl" class="hykflAction" method="update">
+            <result name="cancel" type="redirect">editHykfl.html</result>
+            <result name="input">/WEB-INF/pages/hykfl/hykfl_edit.jsp</result>
+            <result name="success">/WEB-INF/pages/msg.jsp</result>
+        </action>
+		<action name="delHykfl" class="hykflAction" method="del">
+            <result name="success" type="redirect">listHykfl.html</result>
+        </action>       
+        <!-- 会员卡分类结束 -->
     </package>
 </xwork>
