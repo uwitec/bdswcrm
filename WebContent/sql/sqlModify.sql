@@ -781,3 +781,116 @@ update sfd set wx_state='提交派工' where wx_state='待处理' and flow='派�
 update sfd set wx_state='已保存' where state='已保存' and flow='';
 update sfd set state='已提交' where wx_state<>'已保存';
 
+2010-06-03增加会员管理
+--菜单中增加会员管理
+INSERT INTO `column_mng`(`id`,`name`,`parent_id`,`xh`,`img`,`yw_flag`) 
+VALUES('011','会员管理','0','27','buy.gif','1'),('011001','会员卡管理','011',28,NULL,'1'),('011002','会员积分管理','011',29,NULL,'1');
+
+
+INSERT INTO `funcs`(`func_id`,`func_name`,`func_ms`,`url`,`img`,`xh`,`ywflag`,`funcflag`)  values
+('FC0108','会员卡分类','会员卡分类','listHykfl.html','112.gif',1,'1','10');
+
+INSERT INTO `column_funcs` VALUES ('011001','FC0108');
+
+INSERT INTO `funcs`(`func_id`,`func_name`,`func_ms`,`url`,`img`,`xh`,`ywflag`,`funcflag`)  values
+('FC0113','会员卡制作','会员卡制作','listHykzz.html','129.gif',2,'1','10');
+
+INSERT INTO `column_funcs` VALUES ('011001','FC0113');
+
+INSERT INTO `funcs`(`func_id`,`func_name`,`func_ms`,`url`,`img`,`xh`,`ywflag`,`funcflag`)  values
+('FC0109','会员卡档案','会员卡档案','listHykda.html','228.gif',3,'1','10');
+
+INSERT INTO `column_funcs` VALUES ('011001','FC0109');
+
+INSERT INTO `funcs`(`func_id`,`func_name`,`func_ms`,`url`,`img`,`xh`,`ywflag`,`funcflag`)  values
+('FC0114','发卡管理','发卡管理','listFkgl.html','155.gif',4,'1','10');
+
+INSERT INTO `column_funcs` VALUES ('011001','FC0114');
+
+
+
+INSERT INTO `funcs`(`func_id`,`func_name`,`func_ms`,`url`,`img`,`xh`,`ywflag`,`funcflag`)  values
+('FC0107','积分规则设置','积分规则设置','listJfgz.html','229.gif',1,'1','10');
+
+INSERT INTO `column_funcs` VALUES ('011002','FC0107');
+
+
+INSERT INTO `funcs`(`func_id`,`func_name`,`func_ms`,`url`,`img`,`xh`,`ywflag`,`funcflag`)  values
+('FC0111','兑奖货品设置','兑奖货品设置','listDjhpsz.html','176.gif',2,'1','10');
+
+INSERT INTO `column_funcs` VALUES ('011002','FC0111');
+
+INSERT INTO `funcs`(`func_id`,`func_name`,`func_ms`,`url`,`img`,`xh`,`ywflag`,`funcflag`)  values
+('FC0112','积分查询兑奖','积分查询兑奖','listJfcxdj.html','180.gif',3,'1','10');
+
+INSERT INTO `column_funcs` VALUES ('011002','FC0112');
+
+--增加积分规则设置表
+DROP TABLE IF EXISTS `jfgz`;
+CREATE TABLE `jfgz` (
+  `id` varchar(50) NOT NULL,  
+  `jfff` varchar(200) default NULL,
+  `xfje` int(5) default 0,
+  `dyjf` int(2) default NULL, 
+  `czr` varchar(20) default NULL,
+  `cz_date` datetime default NULL,   
+  PRIMARY KEY  (`id`)
+
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--增加会员卡分类表
+DROP TABLE IF EXISTS `hykfl`;
+CREATE TABLE `hykfl` (
+  `id` varchar(50) NOT NULL,  
+  `name` varchar(50) default NULL,
+  `yhfs` varchar(50) default NULL,
+  `zkl` double default 0, 
+  `jffs` varchar(50) default NULL,
+  `czyhl` double default 0, 
+  `czr` varchar(20) default NULL,
+  `cz_date` datetime default NULL,   
+  PRIMARY KEY  (`id`)
+
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+--增加会员卡制作表
+DROP TABLE IF EXISTS `hykzz`;
+CREATE TABLE `hykzz` (
+  `id` varchar(50) NOT NULL,  
+  `card_type` varchar(10) default NULL,
+  `dept` varchar(50) default NULL,
+  `csjf` int(10) default 0, 
+  `csmm` varchar(20) default NULL,
+  `csje` double default 0, 
+  `yxrq` datetime default NULL,
+  `sxrq` datetime default NULL,
+  `sfcz` varchar(10) default NULL,
+  `czr` varchar(20) default NULL,
+  `cz_date` datetime default NULL,   
+  PRIMARY KEY  (`id`)
+
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+--增加会员卡档案表
+DROP TABLE IF EXISTS `hykda`;
+CREATE TABLE `hykda` (
+  `id` varchar(50) NOT NULL,  
+  `name` varchar(50) default NULL,
+  `yhfs` varchar(50) default NULL,
+  `zkl` double default 0, 
+  `jffs` varchar(50) default NULL,
+  `czyhl` double default 0, 
+  `czr` varchar(20) default NULL,
+  `cz_date` datetime default NULL,   
+  PRIMARY KEY  (`id`)
+
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+--增加积分规则编号
+ALTER TABLE `cms_all_seq` ADD COLUMN `jfgzid` INTEGER UNSIGNED DEFAULT 1 AFTER `cgfpdid`;
+ALTER TABLE `cms_all_seq` ADD COLUMN `hykflid` INTEGER UNSIGNED DEFAULT 1 AFTER `jfgzid`;
+ALTER TABLE `cms_all_seq` ADD COLUMN `hykzzid` INTEGER UNSIGNED DEFAULT 1 AFTER `hykflid`;
+
