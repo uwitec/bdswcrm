@@ -197,4 +197,8 @@
      <bean id="clientbbAction" class="com.sw.cms.action.ClientbbAction" autowire="byName" scope="prototype"/>
      
      <bean id="cgddhzAction" class="com.sw.cms.action.CgddhzAction" autowire="byName" scope="prototype"/>
+     
+     <bean id="jfgzAction" class="com.sw.cms.action.JfgzAction" autowire="byName" scope="prototype"/>
+     
+     <bean id="hykflAction" class="com.sw.cms.action.HykflAction" autowire="byName" scope="prototype"/>
 </beans>

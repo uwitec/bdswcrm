@@ -745,6 +745,20 @@
            <bean class="com.sw.cms.service.CgddhzService" autowire="byName"/> 
         </property>
     </bean>
+    
+    <!-- 积分规则 -->
+    <bean id="jfgzService" parent="baseTransaction">
+        <property name="target">
+           <bean class="com.sw.cms.service.JfgzService" autowire="byName"/> 
+        </property>
+    </bean>
+    
+    <!-- 会员卡分类 -->
+    <bean id="hykflService" parent="baseTransaction">
+        <property name="target">
+           <bean class="com.sw.cms.service.HykflService" autowire="byName"/> 
+        </property>
+    </bean>
 </beans>
 
 

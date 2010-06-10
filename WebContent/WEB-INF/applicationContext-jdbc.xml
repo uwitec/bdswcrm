@@ -573,6 +573,16 @@
      <bean id="cgddhzDao" class="com.sw.cms.dao.CgddhzDAO">
           <property name="jdbcTemplate" ref="jdbcTemplate"/>
      </bean>
+     
+     <!-- 积分规则-->
+     <bean id="jfgzDao" class="com.sw.cms.dao.JfgzDAO">
+          <property name="jdbcTemplate" ref="jdbcTemplate"/>
+     </bean>
+     
+      <!-- 会员卡分类-->
+     <bean id="hykflDao" class="com.sw.cms.dao.HykflDAO">
+          <property name="jdbcTemplate" ref="jdbcTemplate"/>
+     </bean>
 </beans>
 
 
