@@ -3,11 +3,13 @@ package com.sw.cms.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.sw.cms.dao.StoreDAO.StoreHouseRowMapper;
 import com.sw.cms.dao.base.BeanRowMapper;
 import com.sw.cms.dao.base.JdbcBaseDAO;
 
 import com.sw.cms.model.Page;
 import com.sw.cms.model.Jfgz;
+import com.sw.cms.model.StoreHouse;
 
 import com.sw.cms.util.DateComFunc;
 import com.sw.cms.util.StaticParamDo;
@@ -35,7 +37,15 @@ public class JfgzDAO extends JdbcBaseDAO {
 		return this.getResultByPage(sql, curPage, rowsPerPage,new BeanRowMapper(Jfgz.class));
 	}
 	
-	
+	/**
+	 * 取所有积分规则列表
+	 * @return
+	 */
+	public List getAllJfgzList(){
+		String sql = "select * from jfgz";
+		
+		return this.getJdbcTemplate().query(sql, new BeanRowMapper(Jfgz.class));
+	}
 		
 	/**
 	 * 保存积分规则信息
@@ -139,5 +149,20 @@ public class JfgzDAO extends JdbcBaseDAO {
 
 		return "JFGZ" + day + "-" + curId;
 
+	}
+	
+	/**
+	 * 根据ID取积分规则名称
+	 * @param id
+	 * @return
+	 */
+	public String getJfgzNameById(String id){
+		String jfff = "";
+		String sql = "select * from jfgz where id='" + id + "'";
+		Object obj = this.queryForObject(sql, new BeanRowMapper(Jfgz.class));
+		if(obj != null){
+			jfff = ((Jfgz)obj).getJfff();
+		}
+		return jfff;
 	}
 }
