@@ -107,7 +107,7 @@ String orderType = (String)VS.findValue("orderType");
 	<tr>
 		<td class="a1"><%=StringUtils.nullToStr(info.getId()) %></td>
 		<td class="a1"  align="left"><%=StringUtils.nullToStr(info.getName()) %></a></td>
-		<td class="a1"  align="right"><%=StringUtils.nullToStr(info.getJffs()) %></td>		
+		<td class="a1"  align="right"><%=StaticParamDo.getJfgzNameById(StringUtils.nullToStr(info.getJffs())) %></td>		
 		<td class="a1"><%=StringUtils.nullToStr(info.getCz_date()) %></td>
 		<td class="a1"><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(info.getCzr())) %></td>
 		<td class="a1">
