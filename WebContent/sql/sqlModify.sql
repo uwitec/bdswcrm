@@ -863,9 +863,11 @@ CREATE TABLE `hykzz` (
   `csjf` int(10) default 0, 
   `csmm` varchar(20) default NULL,
   `csje` double default 0, 
-  `yxrq` datetime default NULL,
-  `sxrq` datetime default NULL,
+  `yxrq` varchar(30) default NULL,
+  `sxrq` varchar(30) default NULL,
   `sfcz` varchar(10) default NULL,
+  `hykh` varchar(30) default NULL,
+  `ssfl` varchar(50) default NULL,
   `czr` varchar(20) default NULL,
   `cz_date` datetime default NULL,   
   PRIMARY KEY  (`id`)
