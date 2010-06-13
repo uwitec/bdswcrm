@@ -56,7 +56,7 @@ List cgthdProducts = (List)VS.findValue("cgthdProducts");
 		<td class="a2"><%=cgthd.getCz_date() %></td>		
 	</tr>
 	<tr>
-		<td class="a1">出货库房</td>
+		<td class="a1">操作人</td>
 		<td class="a2" colspan="3"><%=StaticParamDo.getRealNameById(cgthd.getCzr()) %></td>
 	</tr>	
 </table>
