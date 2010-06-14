@@ -759,6 +759,20 @@
            <bean class="com.sw.cms.service.HykflService" autowire="byName"/> 
         </property>
     </bean>
+    
+     <!-- 会员卡制作 -->
+    <bean id="hykzzService" parent="baseTransaction">
+        <property name="target">
+           <bean class="com.sw.cms.service.HykzzService" autowire="byName"/> 
+        </property>
+    </bean>
+    
+     <!-- 会员卡档案 -->
+    <bean id="hykdaService" parent="baseTransaction">
+        <property name="target">
+           <bean class="com.sw.cms.service.HykdaService" autowire="byName"/> 
+        </property>
+    </bean>
 </beans>
 
 

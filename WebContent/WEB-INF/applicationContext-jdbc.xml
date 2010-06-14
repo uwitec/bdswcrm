@@ -583,6 +583,16 @@
      <bean id="hykflDao" class="com.sw.cms.dao.HykflDAO">
           <property name="jdbcTemplate" ref="jdbcTemplate"/>
      </bean>
+     
+       <!-- 会员卡制作-->
+     <bean id="hykzzDao" class="com.sw.cms.dao.HykzzDAO">
+          <property name="jdbcTemplate" ref="jdbcTemplate"/>
+     </bean>
+     
+     <!-- 会员卡档案-->
+     <bean id="hykdaDao" class="com.sw.cms.dao.HykdaDAO">
+          <property name="jdbcTemplate" ref="jdbcTemplate"/>
+     </bean>
 </beans>
 
 

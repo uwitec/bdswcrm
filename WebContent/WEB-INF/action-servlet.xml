@@ -201,4 +201,10 @@
      <bean id="jfgzAction" class="com.sw.cms.action.JfgzAction" autowire="byName" scope="prototype"/>
      
      <bean id="hykflAction" class="com.sw.cms.action.HykflAction" autowire="byName" scope="prototype"/>
+     
+     <bean id="hykzzAction" class="com.sw.cms.action.HykzzAction" autowire="byName" scope="prototype"/>
+     
+     <bean id="hykdaAction" class="com.sw.cms.action.HykdaAction" autowire="byName" scope="prototype"/>
+     
+     <bean id="hykfkAction" class="com.sw.cms.action.HykfkAction" autowire="byName" scope="prototype"/>
 </beans>
