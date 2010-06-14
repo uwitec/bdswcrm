@@ -2820,5 +2820,81 @@
             <result name="success" type="redirect">listHykfl.html</result>
         </action>       
         <!-- 会员卡分类结束 -->
+        <!-- 会员卡制作开始 -->
+        <action name="listHykzz" class="hykzzAction" method="list">
+            <result name="success" type="dispatcher">/WEB-INF/pages/hykzz/hykzz_list.jsp</result>
+        </action>
+        <action name="addHykzz" class="hykzzAction" method="add">
+            <result name="success">/WEB-INF/pages/hykzz/hykzz_add.jsp</result>
+        </action> 
+		<action name="saveHykzz" class="hykzzAction" method="save">
+            <result name="cancel" type="redirect">addHykzz.html</result>
+            <result name="input" type="dispatcher">/WEB-INF/pages/hykzz/hykzz_add.jsp</result>
+            <result name="success">/WEB-INF/pages/msg.jsp</result>
+        </action>
+		<action name="editHykzz" class="hykzzAction" method="edit">
+            <result name="success">/WEB-INF/pages/hykzz/hykzz_edit.jsp</result>
+        </action>
+        <action name="viewHykzz" class="hykzzAction" method="edit">
+            <result name="success">/WEB-INF/pages/hykzz/hykzz_view.jsp</result>
+        </action>
+		<action name="updateHykzz" class="hykzzAction" method="update">
+            <result name="cancel" type="redirect">editHykzz.html</result>
+            <result name="input">/WEB-INF/pages/hykzz/hykzz_edit.jsp</result>
+            <result name="success">/WEB-INF/pages/msg.jsp</result>
+        </action>
+		<action name="delHykzz" class="hykzzAction" method="del">
+            <result name="success" type="redirect">listHykzz.html</result>
+        </action>       
+        <!-- 会员卡制作结束 -->
+        <!-- 会员卡档案开始 -->
+        <action name="listHykda" class="hykdaAction" method="list">
+            <result name="success" type="dispatcher">/WEB-INF/pages/hykda/hykda_list.jsp</result>
+        </action>
+        <action name="addHykda" class="hykdaAction" method="add">
+            <result name="success">/WEB-INF/pages/hykda/hykda_add.jsp</result>
+        </action> 
+		<action name="saveHykda" class="hykdaAction" method="save">
+            <result name="cancel" type="redirect">addHykda.html</result>
+            <result name="input" type="dispatcher">/WEB-INF/pages/hykda/hykda_add.jsp</result>
+            <result name="success">/WEB-INF/pages/msg.jsp</result>
+        </action>
+		<action name="editHykda" class="hykdaAction" method="edit">
+            <result name="success">/WEB-INF/pages/hykda/hykda_edit.jsp</result>
+        </action>
+        <action name="viewHykda" class="hykdaAction" method="edit">
+            <result name="success">/WEB-INF/pages/hykda/hykda_view.jsp</result>
+        </action>
+		<action name="updateHykda" class="hykdaAction" method="update">
+            <result name="cancel" type="redirect">editHykda.html</result>
+            <result name="input">/WEB-INF/pages/hykda/hykda_edit.jsp</result>
+            <result name="success">/WEB-INF/pages/msg.jsp</result>
+        </action>		      
+        <!-- 会员卡档案结束 -->
+        
+        <!-- 发卡管理开始 -->
+        <action name="listHykfk" class="hykfkAction" method="list">
+            <result name="success" type="dispatcher">/WEB-INF/pages/hykfk/hykfk_list.jsp</result>
+        </action>
+        <action name="addHykfk" class="hykfkAction" method="add">
+            <result name="success">/WEB-INF/pages/hykfk/hykfk_add.jsp</result>
+        </action> 
+		<action name="saveHykfk" class="hykfkAction" method="save">
+            <result name="cancel" type="redirect">addHykfk.html</result>
+            <result name="input" type="dispatcher">/WEB-INF/pages/hykfk/hykfk_add.jsp</result>
+            <result name="success">/WEB-INF/pages/msg.jsp</result>
+        </action>
+		<action name="editHykfk" class="hykfkAction" method="edit">
+            <result name="success">/WEB-INF/pages/hykfk/hykfk_edit.jsp</result>
+        </action>
+        <action name="viewHykfk" class="hykfkAction" method="edit">
+            <result name="success">/WEB-INF/pages/hykfk/hykfk_view.jsp</result>
+        </action>
+		<action name="updateHykfk" class="hykfkAction" method="update">
+            <result name="cancel" type="redirect">editHykfk.html</result>
+            <result name="input">/WEB-INF/pages/hykfk/hykfk_edit.jsp</result>
+            <result name="success">/WEB-INF/pages/msg.jsp</result>
+        </action>
+        <!-- 发卡管理结束 -->
     </package>
 </xwork>
