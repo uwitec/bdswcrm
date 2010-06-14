@@ -279,6 +279,32 @@ session.removeAttribute("MSG");
 	}
 	}
 	%>
+	<tr>
+	      <td class="a1" colspan="3" style="text-align:left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>会员管理</b></td>
+	 </tr>
+	
+	<%
+	Iterator it9 = funcList.iterator();
+	
+	while(it9.hasNext()){
+		Map map = (Map)it9.next();
+		String flag = "";
+	  if(StringUtils.nullToStr(map.get("funcflag")).equals("10"))
+	  {
+		if(roleFuncs.contains(StringUtils.nullToStr(map.get("func_id")))){
+			flag = "checked";
+		}		
+	  %>
+	 
+	<tr>
+		<td class="a1"><input type="checkbox" name="func_id" value="<%=StringUtils.nullToStr(map.get("func_id")) %>" <%=flag %>></td>
+		<td class="a1"><%=StringUtils.nullToStr(map.get("func_name")) %></td>
+		<td class="a1"><%=StringUtils.nullToStr(map.get("func_ms")) %></td>
+	</tr>	
+	<%
+	}
+	}
+	%>
 	<tr height="40">
 		<td class="a1" colspan="3">
 			<input type="submit" name="button1" value="提 交" class="css_button2">&nbsp;&nbsp;&nbsp;&nbsp;
