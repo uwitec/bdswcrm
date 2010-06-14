@@ -798,15 +798,14 @@ INSERT INTO `funcs`(`func_id`,`func_name`,`func_ms`,`url`,`img`,`xh`,`ywflag`,`f
 INSERT INTO `column_funcs` VALUES ('011001','FC0113');
 
 INSERT INTO `funcs`(`func_id`,`func_name`,`func_ms`,`url`,`img`,`xh`,`ywflag`,`funcflag`)  values
-('FC0109','会员卡档案','会员卡档案','listHykda.html','228.gif',3,'1','10');
-
-INSERT INTO `column_funcs` VALUES ('011001','FC0109');
-
-INSERT INTO `funcs`(`func_id`,`func_name`,`func_ms`,`url`,`img`,`xh`,`ywflag`,`funcflag`)  values
-('FC0114','发卡管理','发卡管理','listFkgl.html','155.gif',4,'1','10');
+('FC0114','发卡管理','发卡管理','listHykfk.html','155.gif',3,'1','10');
 
 INSERT INTO `column_funcs` VALUES ('011001','FC0114');
 
+INSERT INTO `funcs`(`func_id`,`func_name`,`func_ms`,`url`,`img`,`xh`,`ywflag`,`funcflag`)  values
+('FC0109','会员卡档案','会员卡档案','listHykda.html','228.gif',4,'1','10');
+
+INSERT INTO `column_funcs` VALUES ('011001','FC0109');
 
 
 INSERT INTO `funcs`(`func_id`,`func_name`,`func_ms`,`url`,`img`,`xh`,`ywflag`,`funcflag`)  values
@@ -879,20 +878,32 @@ CREATE TABLE `hykzz` (
 DROP TABLE IF EXISTS `hykda`;
 CREATE TABLE `hykda` (
   `id` varchar(50) NOT NULL,  
-  `name` varchar(50) default NULL,
-  `yhfs` varchar(50) default NULL,
-  `zkl` double default 0, 
-  `jffs` varchar(50) default NULL,
-  `czyhl` double default 0, 
+  `hykh` varchar(30) default NULL,
+  `state` varchar(10) default NULL,
+  `sfty` varchar(5) default NULL,
+  `hymc` varchar(50) default NULL,
+  `lxrname` varchar(30) default NULL,  
+  `lxdh`  varchar(30) default NULL,
+  `mobile` varchar(30) default NULL,  
+  `address`  varchar(30) default NULL,
+  `mail` varchar(30) default NULL, 
+  `sfzh` varchar(50) default NULL, 
+  `ffjg` varchar(50) default NULL, 
+  `fkrq` varchar(20) default NULL, 
+  `fkjsr` varchar(20) default NULL, 
+  `zkrq` varchar(20) default NULL, 
+  `zkjsr` varchar(20) default NULL, 
+  `hybh` varchar(20) default NULL,
+  `fkbz` varchar(200) default NULL,
   `czr` varchar(20) default NULL,
-  `cz_date` datetime default NULL,   
+  `cz_date` datetime default NULL,     
   PRIMARY KEY  (`id`)
 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
---增加积分规则编号
+--增加会员管理模块的编号
 ALTER TABLE `cms_all_seq` ADD COLUMN `jfgzid` INTEGER UNSIGNED DEFAULT 1 AFTER `cgfpdid`;
 ALTER TABLE `cms_all_seq` ADD COLUMN `hykflid` INTEGER UNSIGNED DEFAULT 1 AFTER `jfgzid`;
 ALTER TABLE `cms_all_seq` ADD COLUMN `hykzzid` INTEGER UNSIGNED DEFAULT 1 AFTER `hykflid`;
-
+ALTER TABLE `cms_all_seq` ADD COLUMN `hykdaid` INTEGER UNSIGNED DEFAULT 1 AFTER `hykzzid`;
