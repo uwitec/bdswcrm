@@ -175,7 +175,7 @@ public class BwlDAO extends JdbcBaseDAO {
 	 */
 	public boolean isBwlSubmit(String bwl_id){
 		boolean is = false;
-		String sql = "select count(*) from bwl where id='" + bwl_id + "' and state='ÒÑÌá½»'";
+		String sql = "select count(*) from bwl where id='" + bwl_id + "'";
 		int counts = this.getJdbcTemplate().queryForInt(sql);
 		if(counts > 0){
 			is = true;

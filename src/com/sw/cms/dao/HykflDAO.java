@@ -142,4 +142,18 @@ public class HykflDAO extends JdbcBaseDAO {
 		return "HYFL" + day + "-" + curId;
 
 	}
+	/**
+	 * 根据ID取会员卡分类名称
+	 * @param id
+	 * @return
+	 */
+	public String getHykflNameById(String id){
+		String name = "";
+		String sql = "select * from hykfl where id='" + id + "'";
+		Object obj = this.queryForObject(sql, new BeanRowMapper(Hykfl.class));
+		if(obj != null){
+			name = ((Hykfl)obj).getName();
+		}
+		return name;
+	}
 }
