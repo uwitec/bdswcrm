@@ -30,7 +30,7 @@ String orderType = (String)VS.findValue("orderType");
 	
 	function del(id){
 		if(confirm("确定要删除该条记录吗！")){
-			location.href = "delJfgz.html?id=" + id;
+			location.href = "delHykfl.html?id=" + id;
 		}
 	}
 	
@@ -106,7 +106,7 @@ String orderType = (String)VS.findValue("orderType");
 	%>
 	<tr>
 		<td class="a1"><%=StringUtils.nullToStr(info.getId()) %></td>
-		<td class="a1"  align="left"><%=StringUtils.nullToStr(info.getName()) %></a></td>
+		<td class="a1"  align="left"><%=StringUtils.nullToStr(info.getName()) %></td>
 		<td class="a1"  align="right"><%=StaticParamDo.getJfgzNameById(StringUtils.nullToStr(info.getJffs())) %></td>		
 		<td class="a1"><%=StringUtils.nullToStr(info.getCz_date()) %></td>
 		<td class="a1"><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(info.getCzr())) %></td>
