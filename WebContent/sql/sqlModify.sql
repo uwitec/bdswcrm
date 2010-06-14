@@ -743,7 +743,7 @@ ALTER TABLE `sfd` ADD COLUMN `bxyy_ms` VARCHAR(1000) AFTER `bxyy`;
 
 --增加报修原因的字典信息
 INSERT INTO `sjzd_jbxx` VALUES ('SJZD_BXYY','报修原因','报修原因',13);
-INSERT INTO `sjzd_xmxx` VALUES (196,'SJZD_BXYY','其他','其他',0);
+INSERT INTO `sjzd_xmxx` VALUES (196,'SJZD_BXYY','其他原因','其他原因',0);
 
 2010-05-21修改
 --移库出库中增加入库仓库的选择，可以是好件库，也可以是坏件库
