@@ -11,6 +11,7 @@ import com.sw.cms.dao.ProductKindDAO;
 import com.sw.cms.dao.StoreDAO;
 import com.sw.cms.dao.UserDAO;
 import com.sw.cms.dao.JfgzDAO;
+import com.sw.cms.dao.HykflDAO;
 import com.sw.cms.source.SysSource;
 
 public class StaticParamDo{
@@ -141,6 +142,19 @@ public class StaticParamDo{
 			return "";
 		}
 		return dao.getJfgzNameById(id);
+	}
+	
+	/**
+	 * 根据会员卡分类ID取会员卡分类名称
+	 * @param id
+	 * @return
+	 */
+	public static String getHykflNameById(String id){
+		HykflDAO dao = (HykflDAO)ctx.getBean("hykflDao");
+		if(id == null || id.equals("")){
+			return "";
+		}
+		return dao.getHykflNameById(id);
 	}
 	
 	/**
