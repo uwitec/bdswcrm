@@ -745,6 +745,7 @@ ALTER TABLE `sfd` ADD COLUMN `bxyy_ms` VARCHAR(1000) AFTER `bxyy`;
 INSERT INTO `sjzd_jbxx` VALUES ('SJZD_BXYY','报修原因','报修原因',13);
 INSERT INTO `sjzd_xmxx` VALUES (196,'SJZD_BXYY','其他原因','其他原因',0);
 
+
 2010-05-21修改
 --移库出库中增加入库仓库的选择，可以是好件库，也可以是坏件库
 ALTER TABLE `ykck` ADD COLUMN `rk_store_id` VARCHAR(20) AFTER `remark`;
@@ -763,6 +764,7 @@ ALTER TABLE `lsd_product` ADD COLUMN `sfcytc` VARCHAR(10) DEFAULT 1 AFTER `ygcbj
 ALTER TABLE `xsd_product` ADD COLUMN `sfcytc` VARCHAR(10) DEFAULT 1 AFTER `ygcbj`;
 
 --退货单明细添加是否参与提成字段
+ALTER TABLE `thd_product` ADD COLUMN `sfcytc` VARCHAR(10) DEFAULT 1 AFTER `ygcbj`;=======
 ALTER TABLE `crm_sw`.`thd_product` ADD COLUMN `sfcytc` VARCHAR(10) DEFAULT 1 AFTER `ygcbj`;
 
 
