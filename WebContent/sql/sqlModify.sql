@@ -764,8 +764,7 @@ ALTER TABLE `lsd_product` ADD COLUMN `sfcytc` VARCHAR(10) DEFAULT 1 AFTER `ygcbj
 ALTER TABLE `xsd_product` ADD COLUMN `sfcytc` VARCHAR(10) DEFAULT 1 AFTER `ygcbj`;
 
 --退货单明细添加是否参与提成字段
-ALTER TABLE `thd_product` ADD COLUMN `sfcytc` VARCHAR(10) DEFAULT 1 AFTER `ygcbj`;=======
-ALTER TABLE `crm_sw`.`thd_product` ADD COLUMN `sfcytc` VARCHAR(10) DEFAULT 1 AFTER `ygcbj`;
+ALTER TABLE `thd_product` ADD COLUMN `sfcytc` VARCHAR(10) DEFAULT 1 AFTER `ygcbj`;
 
 
 2010-06-02销售统计增加货品销售执行汇总、客户销售执行汇总
