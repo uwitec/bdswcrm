@@ -89,8 +89,8 @@ public class HykfkAction extends BaseAction {
 	public String update(){
 		LoginInfo info = (LoginInfo)getSession().getAttribute("LOGINUSER");
 		String user_id = info.getUser_id();
-		
-		hykdaService.updateHykfk(hykda);
+		String fklx = ParameterUtility.getStringParameter(getRequest(), "fklx","");
+		hykdaService.updateHykfk(hykda,fklx);
 		return "success";
 	}
 	
