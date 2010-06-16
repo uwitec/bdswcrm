@@ -2,10 +2,10 @@ package com.sw.cms.model;
 
 /*
  * 会员卡档案
- * 2010-06-12 增加，有以下信息：编号、会员卡号、状态、    是否停用、会员名称、联系人、  联系电话  手机       会员编号    发卡备注
- *                           id   hykh    state   sfty     hymc   lxrname  lxdh    mobile   hybh     fkbz
- *                           地址       mail  操作人、操作时间  身份证号  发放机构  发卡日期  发卡经手人    制卡日期    制卡经手人
- *                           address  mail   czr  cz_date   sfzh   ffjg     fkrq    fkjsr       zkrq      zkjsr
+ * 2010-06-12 增加，有以下信息：出生日期、编号、会员卡号、状态、    是否停用、会员名称、联系人、  联系电话  手机       会员编号    发卡备注
+ *                          birth   id   hykh    state   sfty     hymc   lxrname  lxdh    mobile   hybh     fkbz
+ *            sex      gzdw         地址       mail  操作人、操作时间  身份证号  发放机构  发卡日期  发卡经手人    制卡日期    制卡经手人
+ *            性别       工作单位        address  mail   czr  cz_date   sfzh   ffjg     fkrq    fkjsr       zkrq      zkjsr
  */
 public class Hykda {
 	private String id; // 编号
@@ -48,6 +48,36 @@ public class Hykda {
 	
 	private String fkbz; //发卡备注
 	
+    private String sex; //性别
+	
+	private String gzdw; //工作单位
+	
+	private String birth; //出生日期
+	
+	public String getBirth() {
+		return birth;
+	}
+
+	public void setBirth(String birth) {
+		this.birth = birth;
+	}
+	
+	
+	public String getGzdw() {
+		return gzdw;
+	}
+
+	public void setGzdw(String gzdw) {
+		this.gzdw = gzdw;
+	}
+	
+	public String getSex() {
+		return sex;
+	}
+
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
 	
 	public String getFkbz() {
 		return fkbz;
