@@ -72,6 +72,10 @@ String hykh = (String)VS.findValue("hykh");
 		document.myform.action = "listHykda.html";
 		document.myform.submit();
 	}
+	
+	function clearAll(){
+		document.myform.hykh.value = "";	
+	}
 </script>
 </head>
 <body >

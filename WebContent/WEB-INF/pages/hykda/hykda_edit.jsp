@@ -32,25 +32,22 @@ List hykflList = (List)VS.findValue("hykflList");
 		}
 	   
 	   		
-		if(document.getElementById("ssfl").value == ""){
-			alert("所属分类不能为空，请选择！");
+		if(document.getElementById("sfzh").value == ""){
+			alert("身份证号不能为空，请选择！");
 			return;
 		}
 		
-		if(document.getElementById("hykh").value == ""){
-			alert("会员卡号不能为空，请选择！");
+		if(document.getElementById("lxdh").value == ""){
+			alert("联系电话不能为空，请选择！");
 			return;
 		}
 		
-		if(document.getElementById("yxrq").value == ""){
-			alert("有效日期不能为空，请选择！");
+		if(document.getElementById("mobile").value == ""){
+			alert("手机不能为空，请选择！");
 			return;
 		}
 		
-		if(document.getElementById("sxrq").value == ""){
-			alert("失效日期不能为空，请选择！");
-			return;
-		}
+		
 		document.myform.submit();
 	}	
 	
@@ -125,7 +122,7 @@ List hykflList = (List)VS.findValue("hykflList");
 	<tr>
 		<td class="a1" width="15%">会员姓名</td>
 		<td class="a2" width="35%">
-		   <input type="text" name="hykda.hymc" id="hymc" value="<%=StringUtils.nullToStr(hykdas.get("hymc")) %>" size="45" >
+		   <input type="text" name="hykda.hymc" id="hymc" value="<%=StringUtils.nullToStr(hykdas.get("hymc")) %>" size="45" ><font color="red">*</font>
 		</td>
 	
 		<td class="a1" width="15%">联系人</td>
@@ -136,19 +133,19 @@ List hykflList = (List)VS.findValue("hykflList");
 	<tr>
 		<td class="a1" width="15%">联系电话</td>
 		<td class="a2" width="35%">
-		<input type="text" name="hykda.lxdh" id="lxdh" value="<%=StringUtils.nullToStr(hykdas.get("lxdh")) %>" size="45" >
+		<input type="text" name="hykda.lxdh" id="lxdh" value="<%=StringUtils.nullToStr(hykdas.get("lxdh")) %>" size="45" ><font color="red">*</font>
 		</td>
 	
 		<td class="a1" width="15%">手机</td>
 		<td class="a2" width="35%">
-		   <input type="text" name="hykda.mobile" id="mobile" value="<%=StringUtils.nullToStr(hykdas.get("mobile")) %>"  size="25" >
+		   <input type="text" name="hykda.mobile" id="mobile" value="<%=StringUtils.nullToStr(hykdas.get("mobile")) %>"  size="25" ><font color="red">*</font>
 		</td>
 	</tr>
 	 
 	<tr>
 		<td class="a1" width="15%">身份证号</td>
 		<td class="a2" width="35%">
-		   <input type="text" name="hykda.sfzh" id="sfzh" value="<%=StringUtils.nullToStr(hykdas.get("sfzh")) %>"   size="25" >
+		   <input type="text" name="hykda.sfzh" id="sfzh" value="<%=StringUtils.nullToStr(hykdas.get("sfzh")) %>"   size="25" ><font color="red">*</font>
 		</td>
 	
 		<td class="a1"  width="15%">E-Mail</td>
@@ -156,6 +153,27 @@ List hykflList = (List)VS.findValue("hykflList");
 	       <input type="text" name="hykda.mail" id="mail" value="<%=StringUtils.nullToStr(hykdas.get("mail")) %>"  size="25" >
         </td>
 	</tr>	
+	<tr>
+		<td class="a1" width="15%">性别</td>
+		<td class="a2" width="35%">
+		   <select name="hykda.sex" id="sex" style="width:76%">
+				<option value="男" <%if(StringUtils.nullToStr(hykdas.get("sex")).equals("男")) out.print("selected"); %>>男</option>
+				<option value="女" <%if(StringUtils.nullToStr(hykdas.get("sex")).equals("女")) out.print("selected"); %>>女</option>
+			</select>			
+			<font color="red">*</font>
+		</td>
+	    <td class="a1"  width="15%">出生日期</td>
+	    <td class="a2" width="35%">
+	       <input type="text" name="hykda.birth" id="birth" value="<%=StringUtils.nullToStr(hykdas.get("birth")) %>"   class="Wdate" onFocus="WdatePicker()" size="25">
+        </td>
+    </tr>	
+	<tr>
+		<td class="a1"  width="15%">工作单位</td>
+	    <td class="a2" colspan="3">
+	       <input type="text" name="hykda.gzdw" id="gzdw" value="<%=StringUtils.nullToStr(hykdas.get("gzdw")) %>"  size="50"  maxlength="80">
+        </td>
+	</tr>	
+	
 	<tr>
 		<td class="a1" width="15%">地址</td>
 		<td class="a2" colspan="3">

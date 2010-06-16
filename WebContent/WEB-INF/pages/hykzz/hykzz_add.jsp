@@ -49,6 +49,10 @@ List hykflList = (List)VS.findValue("hykflList");
 			alert("失效日期不能为空，请选择！");
 			return;
 		}
+		
+		if(document.getElementById("zzfs").value == "批量增加"){
+		if(!InputValid(document.getElementById("hykh"),1,"int",1,1,9999999999,"会员卡号")){	 return; }
+		}	
 		document.myform.submit();
 	}	
 	

@@ -31,10 +31,38 @@ Hykda hykda = (Hykda)VS.findValue("hykda");
 			return;
 		}
 	   
-	   		
-		if(document.getElementById("ffjg").value == ""){
+	   	
+		  if(document.getElementById("ffjg").value == ""){
 			alert("发卡机构不能为空，请选择！");
 			return;
+		  }
+		if(document.getElementById("fklx").value == "到机构")	
+	   	{
+		  if(document.getElementById("client_name").value == ""){
+			alert("领卡机构不能为空，请选择！");
+			return;
+		  }
+		}
+	    if(document.getElementById("fklx").value == "到个人")	
+	   	{
+		  if(document.getElementById("lxrname").value == ""){
+			alert("领用人不能为空，请输入！");
+			return;
+		  }
+		 if(document.getElementById("lxdh").value == ""){
+			alert("联系电话不能为空，请输入！");
+			return;
+		  }
+		  
+		  if(document.getElementById("sfzh").value == ""){
+			alert("身份证号不能为空，请输入！");
+			return;
+		  }
+		  
+		  if(document.getElementById("address").value == ""){
+			alert("地址不能为空，请输入！");
+			return;
+		  }
 		}
 		
 		document.myform.submit();
@@ -49,28 +77,46 @@ Hykda hykda = (Hykda)VS.findValue("hykda");
 		var obj_jg2 = document.getElementById("jg2");
 		var obj_ly1 = document.getElementById("ly1");
 		var obj_ly2 = document.getElementById("ly2");
-		
-		
+		var obj_lxdh1=document.getElementById("lxdh1");
+		var obj_lxdh2=document.getElementById("lxdh2");
+		var obj_m1 = document.getElementById("m1");
+		var obj_m2 = document.getElementById("m2");
+		var obj_sf1 = document.getElementById("sf1");
+		var obj_sf2 = document.getElementById("sf2");
+		var obj_dz1=document.getElementById("dz1");
+		var obj_dz2=document.getElementById("dz2");
 		if(vD == "到个人"){
 		    obj_jg1.style.display = "none";
 			obj_jg2.style.display = "none";
 			obj_ly1.style.display = "";
 			obj_ly2.style.display = "";
+			obj_lxdh1.style.display = "";
+			obj_lxdh2.style.display = "";
+			obj_m1.style.display = "";
+			obj_m2.style.display = "";
+			obj_sf1.style.display = "";
+			obj_sf2.style.display = "";
+			obj_dz1.style.display = "";
+			obj_dz2.style.display = "";
 		}else if(vD == "到机构"){
 		    obj_jg1.style.display = "";
 			obj_jg2.style.display = "";
 			obj_ly1.style.display = "none";
 			obj_ly2.style.display = "none";
+			obj_lxdh1.style.display = "none";
+			obj_lxdh2.style.display = "none";
+			obj_m1.style.display = "none";
+			obj_m2.style.display = "none";
+			obj_sf1.style.display = "none";
+			obj_sf2.style.display = "none";
+			obj_dz1.style.display = "none";
+			obj_dz2.style.display = "none";
 	}
 	}
 </script>
 </head>
 <body  onload="initFzrTip();initClientTip();onloadClientInfo();">
 <form name="myform" action="updateHykfk.html" method="post">
-<input type="hidden" name="hykda.lxdh" id="lxdh" value="<%=StringUtils.nullToStr(hykda.getLxdh()) %>">
-<input type="hidden" name="hykda.mobile" id="mobile" value="<%=StringUtils.nullToStr(hykda.getMobile()) %>">
-<input type="hidden" name="hykda.address" id="address" value="<%=StringUtils.nullToStr(hykda.getAddress()) %>">
-<input type="hidden" name="hykda.mail" id="mail" value="<%=StringUtils.nullToStr(hykda.getMail()) %>">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
@@ -124,6 +170,10 @@ Hykda hykda = (Hykda)VS.findValue("hykda");
 		<td class="a2" colspan="3" id="jg2">
 		   <input type="text" name="hykda.hymc" onblur="setClientValue();" id="client_name"  size="60" value="<%=StringUtils.nullToStr(hykda.getHymc()) %>">
 		   <input type="hidden" name="hykda.hybh" id="client_id" value="<%=StringUtils.nullToStr(hykda.getHybh()) %>">
+		   <input type="hidden" name="hykda.lxdh" id="lxdh" value="<%=StringUtils.nullToStr(hykda.getLxdh()) %>">
+           <input type="hidden" name="hykda.mobile" id="mobile" value="<%=StringUtils.nullToStr(hykda.getMobile()) %>">
+           <input type="hidden" name="hykda.address" id="address" value="<%=StringUtils.nullToStr(hykda.getAddress()) %>">
+           <input type="hidden" name="hykda.mail" id="mail" value="<%=StringUtils.nullToStr(hykda.getMail()) %>">		  
 		   <div id="clientsTip" style="height:12px;position:absolute;left:150px; top:85px; width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		   <font color="red">*</font>		  
 		</td>
@@ -132,7 +182,33 @@ Hykda hykda = (Hykda)VS.findValue("hykda");
 		<td class="a2" colspan="3" id="ly2" style="display:none">			  
 		   <input type="text" name="hykda.lxrname" id="lxrname" value="<%=StringUtils.nullToStr(hykda.getLxrname()) %>" size="20" maxlength="30"><font color="red">*</font> 
 		</td>	
-	  <%
+	    
+	</tr>
+	<tr>
+		<td class="a1" width="15%" style="display:none" id="lxdh1">联系电话</td>
+		<td class="a2" width="35%"  style="display:none" id="lxdh2">
+		<input type="text" name="hykda.lxdh" id="lxdh" value="<%=StringUtils.nullToStr(hykda.getLxdh()) %>" size="45" ><font color="red">*</font>
+		</td>
+	
+		<td class="a1" width="15%"  style="display:none" id="m1">手机</td>
+		<td class="a2" width="35%"  style="display:none" id="m2">
+		   <input type="text" name="hykda.mobile" id="mobile" value="<%=StringUtils.nullToStr(hykda.getMobile()) %>"  size="25" ><font color="red">*</font>
+		</td>
+	</tr>
+	 
+	<tr>
+		<td class="a1" width="15%"   style="display:none" id="sf1">身份证号</td>
+		<td class="a2" width="35%"   style="display:none" id="sf2">
+		   <input type="text" name="hykda.sfzh" id="sfzh" value="<%=StringUtils.nullToStr(hykda.getSfzh()) %>"   size="25" ><font color="red">*</font>
+		</td>
+	
+		<td class="a1" width="15%"    style="display:none" id="dz1">地址</td>
+		<td class="a2" width="15%"   style="display:none" id="dz2">
+		   <input type="text" name="hykda.address" id="address" value="<%=StringUtils.nullToStr(hykda.getAddress()) %>"   size="50" maxlength="80">
+		</td>
+	</tr>	
+	<tr>
+	<%
 	  }
 	  else
 	  {
@@ -149,10 +225,35 @@ Hykda hykda = (Hykda)VS.findValue("hykda");
 		<td class="a2" colspan="3" id="ly2">			  
 		   <input type="text" name="hykda.lxrname" id="lxrname" value="<%=StringUtils.nullToStr(hykda.getLxrname()) %>" size="20" maxlength="30"><font color="red">*</font> 
 		</td>	
+	
+	</tr>
+	<tr>
+		<td class="a1" width="15%"  id="lxdh1">联系电话</td>
+		<td class="a2" width="35%"   id="lxdh2">
+		<input type="text" name="hykda.lxdh" id="lxdh" value="<%=StringUtils.nullToStr(hykda.getLxdh()) %>" size="45" ><font color="red">*</font>
+		</td>
+	
+		<td class="a1" width="15%"   id="m1">手机</td>
+		<td class="a2" width="35%"  id="m2">
+		   <input type="text" name="hykda.mobile" id="mobile" value="<%=StringUtils.nullToStr(hykda.getMobile()) %>"  size="25" >
+		</td>
+	</tr>
+	 
+	<tr>
+		<td class="a1" width="15%"   id="sf1">身份证号</td>
+		<td class="a2" width="35%"   id="sf2">
+		   <input type="text" name="hykda.sfzh" id="sfzh" value="<%=StringUtils.nullToStr(hykda.getSfzh()) %>"   size="25" ><font color="red">*</font>
+		</td>
+	
+		<td class="a1" width="15%"  id="dz1">地址</td>
+		<td class="a2" width="15%"  id="dz2">
+		   <input type="text" name="hykda.address" id="address" value="<%=StringUtils.nullToStr(hykda.getAddress()) %>"   size="50" maxlength="80"><font color="red">*</font>
+		</td>
+	</tr>	
 	<%
 	}
 	 %>
-	</tr>
+
 	<tr>
 		<td class="a1" width="15%">备注</td>
 		<td class="a2" colspan="3">
