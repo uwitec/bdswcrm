@@ -96,9 +96,14 @@ public class HykdaService {
 	 * 更新会员卡发卡信息
 	 * @param info
 	 */
-	public void updateHykfk(Hykda info){
-		if(!info.getHybh().equals(""))
-		{
+	public void updateHykfk(Hykda info,String fklx){
+	   if(fklx.equals("到个人"))
+	   {
+		  info.setHymc(info.getLxrname());
+	   }
+		
+		  if(!info.getHybh().equals(""))
+		  {
 		   hykda= (Hykda) hykdaDao.getHykda(info.getHybh());
 		   
 		  if((!info.getHybh().equals(hykda.getHybh())) || (((info.getLxdh().equals(""))&& (info.getMobile().equals("")) && (info.getAddress().equals("")) && (info.getLxrname().equals("")) && (info.getMail().equals("")))))
@@ -110,11 +115,14 @@ public class HykdaService {
 		  info.setLxrname(clientLinkman.getName());
 		  info.setMail(clientLinkman.getMail());
 		  }
+		
+		 
 		  hykdaDao.saveHykfk(info);
 		}
 		else
 		{
-		  hykdaDao.saveHykfkgr(info);
+		
+		  hykdaDao.saveHykfk(info);
 		}
 	}
 	

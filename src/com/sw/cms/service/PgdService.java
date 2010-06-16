@@ -86,6 +86,18 @@ public class PgdService
     	 }
     }
 
+    public boolean isNotExist(String id)
+    {
+    	boolean existNotInPgd=true;
+    	
+    	int count=pgdDao.getPgdNum(id);
+		if(count!=0)
+		{
+			existNotInPgd=false;
+		}
+		return existNotInPgd;
+    }
+    
 	public PgdDAO getPgdDao() {
 		return pgdDao;
 	}

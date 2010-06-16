@@ -39,6 +39,10 @@ public class HykzzService {
 		}
 		if(zzfs.equals("单个增加"))
 		{
+		   if(hykzzDao.isHykzzHykhSubmit(info.getHykh()))
+		   {
+			   return;
+		   }
 		   hykzzDao.saveHykzz(info);
 		   
 		   Hykda hykda=new Hykda();
@@ -69,6 +73,10 @@ public class HykzzService {
 				  info.setId(hykzzDao.getHykzzId());
 				  info.setHykh(hykh);
 			  }
+			  if(hykzzDao.isHykzzHykhSubmit(info.getHykh()))
+			   {
+				   return;
+			   }
 			  hykzzDao.saveHykzz(info);	
 			  Hykda hykda=new Hykda();
 			   if(hykdaDao.isHykdaSubmit(info.getHykh())){
