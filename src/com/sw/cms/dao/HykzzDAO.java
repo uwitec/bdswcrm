@@ -150,6 +150,22 @@ public class HykzzDAO extends JdbcBaseDAO {
 		return is;
 	}
 	
+	
+	/**
+	 * 查看会员卡是否已经提交
+	 * @param hykzz_id
+	 * @return
+	 */
+	public boolean isHykzzHykhSubmit(String hykh){
+		boolean is = false;
+		String sql = "select count(*) from hykzz where hykh='" + hykh + "'";
+		int counts = this.getJdbcTemplate().queryForInt(sql);
+		if(counts > 0){
+			is = true;
+		}
+		return is;
+	}
+	
 	/**
 	 * 返回会员卡可用ID
 	 * 

@@ -151,5 +151,14 @@ public class PgdDAO extends JdbcBaseDAO
 		}
 		return is;
 	}
-   
+	/**
+	    * 根据售后服务编号判断是否存在在派工单中
+	    * @param id
+	    * @return
+	    */
+	   public int getPgdNum(String id)
+	   {
+		   String sql="select count(*) from pgd where p_sfd_id='"+id+"'";
+		   return this.getJdbcTemplate().queryForInt(sql);
+	   }
 }

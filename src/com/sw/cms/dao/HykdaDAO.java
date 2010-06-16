@@ -53,8 +53,8 @@ public class HykdaDAO extends JdbcBaseDAO {
 	 * @param info
 	 */
 	public void updateHykda(Hykda info){
-		String sql = "update hykda set sfty=?,hymc=?,lxrname=?,lxdh=?,mobile=?,address=?,mail=?,sfzh=?,cz_date=now(),czr=? where id=?";
-		Object[] param = new Object[10];
+		String sql = "update hykda set sfty=?,hymc=?,lxrname=?,lxdh=?,mobile=?,address=?,mail=?,sfzh=?,sex=?,gzdw=?,cz_date=now(),czr=?,birth=? where id=?";
+		Object[] param = new Object[13];
 		
 		param[0] = info.getSfty();
 		param[1] = info.getHymc();
@@ -64,8 +64,11 @@ public class HykdaDAO extends JdbcBaseDAO {
 		param[5] = info.getAddress();
 		param[6] = info.getMail();
 		param[7] = info.getSfzh();
-		param[8] = info.getCzr();
-		param[9] = info.getId();
+		param[8] = info.getSex();
+		param[9] = info.getGzdw();
+		param[10] = info.getCzr();
+		param[11] = info.getBirth();
+		param[12] = info.getId();
 		
 		this.getJdbcTemplate().update(sql,param);
 	}
@@ -169,10 +172,11 @@ public class HykdaDAO extends JdbcBaseDAO {
 	 * @param info
 	 */
 	public void saveHykfk(Hykda info){
-		String sql = "update hykda set state=?,hymc=?,hybh=?,lxrname=?,lxdh=?,address=?,fkbz=?,fkrq=?,fkjsr=?,ffjg=?,mobile=?,mail=? where hykh=?";
-		Object[] param = new Object[13];
+		String sql = "update hykda set state=?,hymc=?,hybh=?,lxrname=?,lxdh=?,address=?,fkbz=?,fkrq=?,fkjsr=?,ffjg=?,mobile=?,mail=?,sfzh=?,sex=?,gzdw=? where hykh=?";
+		Object[] param = new Object[16];
 		
 		param[0] = "已领用";
+		
 		param[1] = info.getHymc();
 		param[2] = info.getHybh();			
 		param[3] = info.getLxrname();
@@ -184,31 +188,16 @@ public class HykdaDAO extends JdbcBaseDAO {
 		param[9] = info.getFfjg();	
 		param[10] = info.getMobile();
 		param[11] = info.getMail();	
-		param[12] = info.getHykh();
+		param[12] = info.getSfzh();	
+		param[13] = info.getSex();
+		param[14] = info.getGzdw();
+		
+		param[15] = info.getHykh();
 		
 		this.getJdbcTemplate().update(sql,param);
 		
 		
 	}
 	
-	/**
-	 * 保存会员卡发卡个人信息
-	 * @param info
-	 */
-	public void saveHykfkgr(Hykda info){
-		String sql = "update hykda set state=?,lxrname=?,fkbz=?,fkrq=?,fkjsr=?,ffjg=? where hykh=?";
-		Object[] param = new Object[7];
-		
-		param[0] = "已领用";				
-		param[1] = info.getLxrname();				
-		param[2] = info.getFkbz();
-		param[3] = info.getFkrq();			
-		param[4] = info.getFkjsr();
-		param[5] = info.getFfjg();	
-		param[6] = info.getHykh();
-		
-		this.getJdbcTemplate().update(sql,param);
-		
-		
-	}
+	
 }
