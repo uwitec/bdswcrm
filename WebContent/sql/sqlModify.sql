@@ -911,3 +911,8 @@ ALTER TABLE `cms_all_seq` ADD COLUMN `jfgzid` INTEGER UNSIGNED DEFAULT 1 AFTER `
 ALTER TABLE `cms_all_seq` ADD COLUMN `hykflid` INTEGER UNSIGNED DEFAULT 1 AFTER `jfgzid`;
 ALTER TABLE `cms_all_seq` ADD COLUMN `hykzzid` INTEGER UNSIGNED DEFAULT 1 AFTER `hykflid`;
 ALTER TABLE `cms_all_seq` ADD COLUMN `hykdaid` INTEGER UNSIGNED DEFAULT 1 AFTER `hykzzid`;
+
+
+2010-06-17增加
+--售后服务单添加khlx字段，保存客户类型的信息
+ALTER TABLE `sfd` ADD COLUMN `khlx` VARCHAR(10) NOT NULL DEFAULT 0 AFTER `bxyy_ms`;
