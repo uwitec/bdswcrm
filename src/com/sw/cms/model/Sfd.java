@@ -26,6 +26,15 @@ public class Sfd
 	   private String  bxyy_ms          ;//报修原因说明：当报修原因为“其他”时，可以进行相关信息录入
 	   private String  qz_serial_num          ;//强制序列号
 	   
+	   private String  khlx          ;//客户类型
+	   
+	   public String getKhlx() {
+			return khlx;
+		}
+		public void setKhlx(String khlx) {
+			this.khlx = khlx;
+		}
+	   
 	   public String getQz_serial_num() {
 			return qz_serial_num;
 		}
