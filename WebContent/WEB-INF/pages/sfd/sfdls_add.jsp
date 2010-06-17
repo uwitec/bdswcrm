@@ -21,9 +21,7 @@ String[] bxyy = (String[])VS.findValue("bxyy");
 <script language='JavaScript' src="js/date.js"></script>
 <script language='JavaScript' src="js/nums.js"></script>
 <script type="text/javascript" src="js/prototype-1.4.0.js"></script>
-<script type="text/javascript" src="js/selSqr.js"></script>
 <script language='JavaScript' src="js/selJsr.js"></script>
-<script language='JavaScript' src="js/selClient.js"></script>
 <script type='text/javascript' src='dwr/interface/dwrService.js'></script>
 <script type='text/javascript' src='dwr/engine.js'></script>
 <script type='text/javascript' src='dwr/util.js'></script>
@@ -33,129 +31,7 @@ String[] bxyy = (String[])VS.findValue("bxyy");
 </style>
 <script type="text/javascript">
 
-	var allCount = 2;
-	var jhzq = 0;
-	//客户对应联系人信息
-	var arryLxrObj = new Array();
-	var temp_client_id = "";
-	//客户联系人对象
-	function LinkMan(id,name,tel){
-	    this.id = id;
-	    this.name = name;
-	    this.tel = tel;
-	}	
-
-	function onloadClientInfo(){
-		if($F('client_id') == ""){
-			return;
-		}
-		var url = 'queryClientsRegInfo.html';
-		var params = "clients_id=" + $F('client_id');
-		var myAjax = new Ajax.Request(
-		url,
-		{
-			method:'post',
-			parameters: params,
-			onComplete: initJhzq,
-			asynchronous:true
-		});
-	}
-
-	function initJhzq(originalRequest){
-		var resText = originalRequest.responseText.trim(); 
-		if(resText == ""){
-			return false;
-		}
-		var arryText = resText.split("%");
-
-		//客户地址填充
-		if(arryText != null && arryText.length>0){
-			var arryClientInfo = arryText[0].split("#");			
-			jhzq = arryClientInfo[6];
-		}
-	}
 	
-	
-	//查询客户相关信息
-	function setClientRegInfo(){		
-		//填充值
-		setClientValue(); 
-
-		if(temp_client_id == $F('client_id')){
-			return;
-		}
-		
-		temp_client_id = $F('client_id');
-		if($F('client_id') == ""){
-			return;
-		}
-		
-		//根据填充后的值选择客户地址联系人等信息
-		var url = 'queryClientsRegInfo.html';
-		var params = "clients_id=" + $F('client_id');
-		var myAjax = new Ajax.Request(
-		url,
-		{
-			method:'post',
-			parameters: params,
-			onComplete: fillClientRegInfo,
-			asynchronous:true
-		});
-	}
-	
-	//处理客户地址联系人等信息
-	function fillClientRegInfo(originalRequest){  
-
-		var resText = originalRequest.responseText.trim(); 
-		if(resText == ""){
-			return false;
-		}
-
-		var arryText = resText.split("%");
-
-		//客户地址填充
-		if(arryText != null && arryText.length>0){
-		
-			var arryClientInfo = arryText[0].split("#");			
-			document.getElementById("address").value = arryClientInfo[0];
-		}
-		
-		if(arryText != null && arryText.length>1){
-			var linkMantext = arryText[1];
-			
-			//联系人填充
-			var objLxr = document.getElementById("linkman"); 
-			objLxr.options.length = 0;
-			
-			var arryLinkMan = linkMantext.split("$");
-			if(arryLinkMan.length > 0){
-				for(var i=0;i<arryLinkMan.length;i++){
-					var arryInfo = arryLinkMan[i].split("#");		
-					var manObj = new LinkMan(arryInfo[0],arryInfo[1],arryInfo[2]);
-					arryLxrObj[i] = manObj;
-					objLxr.add(new Option(arryInfo[1],arryInfo[1]));
-				}
-				if(arryLxrObj[0].tel != undefined)
-					document.getElementById("mobile").value = arryLxrObj[0].tel;
-			}		
-		}
-	}
-	
-	
-	//联系人与电话联动
-	function chgLxr(vl){
-		if(vl == ""){
-			return;
-		}
-		if(arryLxrObj != null && arryLxrObj.length > 0){
-			for(var i=0;i<arryLxrObj.length;i++){
-				if(vl == arryLxrObj[i].name){
-					document.getElementById("mobile").value = arryLxrObj[i].tel;
-					break;
-				}
-			}
-		}
-	}
 	function saveInfo(vl){ 
 
 		if(vl == '1'){
@@ -173,7 +49,7 @@ String[] bxyy = (String[])VS.findValue("bxyy");
 			return;
 		}
 			
-		if(document.getElementById("client_id").value == ""){
+		if(document.getElementById("client_name").value == ""){
 			alert("客户名称不能为空，请选择！");
 			return;
 		}		
@@ -305,13 +181,13 @@ String[] bxyy = (String[])VS.findValue("bxyy");
 	function setProductInfo(product){
 		  
 		 var  client_name=document.getElementById("client_name");
-		 var  client_id=document.getElementById("client_id");
+		
 		 var linkman= document.getElementById("linkman");
 		 var  mobile=document.getElementById("mobile");
 		 var  address=document.getElementById("address");
 		 var  ms=document.getElementById("ms");
 		 client_name.value=""; 
-		 client_id.value="";   
+		
 		 linkman.value="";
 		 mobile.value=""
 		address.value="";
@@ -322,25 +198,24 @@ String[] bxyy = (String[])VS.findValue("bxyy");
 		     
 		   if(flog==2)  {
 		  	//零售记录
-		    alert("零售记录存在该序列号!");
+		     ms.value='序列号: '+productArray[4]+'\n'+'商品名称: '+productArray[2]+'\n'+'商品型号: '+productArray[3];
+			 linkman.value=productArray[5]; 
+			 mobile.value=productArray[6];			 
+			 address.value=productArray[8];
+			 client_name.value="零售客户";
+			 			 
+			 if(productArray[10]!="")
+			 {
+		       var destination = "viewLsd.html?id="+productArray[10];
+		       var fea ='width=950,height=700,left=' + (screen.availWidth-950)/2 + ',top=' + (screen.availHeight-750)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		
+		       window.open(destination,'详细信息',fea);	
+	 	     }
 		  }
 		  else if(flog==4)
 		  {//销售记录
 		    
-		      ms.value='序列号: '+productArray[4]+'\n'+'商品名称: '+productArray[2]+'\n'+'商品型号: '+productArray[3];
-			  client_id.value=productArray[5];
-			 linkman.value=productArray[6];
-			 address.value=productArray[7];
-			 mobile.value=productArray[8];
-			  client_name.value=productArray[9];
-			  
-			 if(productArray[10]!="")
-			 {
-			  var destination = "viewXsd.html?id="+productArray[10];
-		      var fea ='width=950,height=700,left=' + (screen.availWidth-950)/2 + ',top=' + (screen.availHeight-700)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
-		
-		      window.open(destination,'详细信息',fea);  
-		     }
+		     alert("销售记录存在该序列号!");
 		  }
 		  //没有记录
 		  else if(flog==3)
@@ -384,17 +259,17 @@ String[] bxyy = (String[])VS.findValue("bxyy");
 	}
 </script>
 </head>
-<body onload="initFzrTip();initClientTip();saveState();">
+<body onload="initFzrTip();saveState();">
 <form name="myform" action="saveSfd.html" method="post">
 <input type="hidden" name="sfd.state" id="state" value="">
 <input type="hidden" name="sfd.wx_state" id="wx_state" value="">
 <input type="hidden" name="sfd.flow" id="flow" value="<%=StringUtils.nullToStr(sfd.getFlow())%>">
 <input type="hidden" name="sfd.jx_date" id="jx_date" value="<%=DateComFunc.getToday()%>">
-<input type="hidden" name="sfd.khlx" id="khlx" value="往来单位">
+<input type="hidden" name="sfd.khlx" id="khlx" value="零售客户">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
-		<td colspan="4">售后服务单（往来）</td>
+		<td colspan="4">售后服务单（零售）</td>
 	</tr>
 	</thead>
 	<tr>
@@ -419,21 +294,13 @@ String[] bxyy = (String[])VS.findValue("bxyy");
 	</tr>
 	<tr>			
 		<td class="a1" width="15%">客户名称</td>
-		<td class="a2" width="35%"><input type="text" name="sfd.client_id"   id="client_name" onblur="setClientRegInfo();" value="" size="35" maxlength="50" >
-		<input type="hidden" name="sfd.client_name" id="client_id" value="" ><div id="clientsTip" style="height:12px;position:absolute;width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+		<td class="a2" width="35%">
+		<input type="text" name="sfd.client_name"   id="client_name"  value="" size="35" maxlength="50" >		
 		<font color="red">*</font>
 		</td>		
 		<td class="a1" width="15%">联系人</td>
 		<td class="a2" width="35%" >
-			<select name="sfd.linkman" id="linkman" onchange="chgLxr(this.value);" style="width:256px" >
-		    <%
-			   if(!StringUtils.nullToStr(sfd.getLinkman()).equals("")){
-		    %>			
-					<option value="<%=StringUtils.nullToStr(sfd.getLinkman()) %>" selected><%=StringUtils.nullToStr(sfd.getLinkman()) %></option>
-			<%
-			   } 			
-		    %>					
-			</select>
+			<input type="text" name="sfd.linkman"   id="linkman"  value="" size="35" maxlength="50" >
 		</td>	
 	</tr>
 	<tr>			

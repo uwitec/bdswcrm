@@ -62,6 +62,12 @@ String orderType = (String)VS.findValue("orderType");
 		window.open(destination,'售后服务单',fea);		
 	}	
 	
+	function addls(){
+		var destination = "addSfdls.html";
+			var fea ='width=750,height=550,left=' + (screen.availWidth-750)/2 + ',top=' + (screen.availHeight-500)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		window.open(destination,'售后服务单',fea);	
+	}
+	
 	function doSort(order_name){
 		if(myform.orderType.value=='asc'){
 			myform.orderType.value='desc';
@@ -101,7 +107,8 @@ String orderType = (String)VS.findValue("orderType");
 	<tr>
 		<td class="csstitle" align="left" width="75%">&nbsp;&nbsp;&nbsp;&nbsp;<b>售后服务单</b></td>
 		<td class="csstitle" width="25%">
-			<img src="images/create.gif" align="absmiddle" border="0">&nbsp;<a href="#" class="xxlb" onclick="add();"> 添 加 </a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<img src="images/create.gif" align="absmiddle" border="0">&nbsp;<a href="#" class="xxlb" onclick="add();"> 添 加(往来) </a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<img src="images/create.gif" align="absmiddle" border="0">&nbsp;<a href="#" class="xxlb" onclick="addls();"> 添 加(零售) </a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<img src="images/import.gif" align="absmiddle" border="0">&nbsp;<a href="#" class="xxlb" onclick="refreshPage();"> 刷 新 </a>	</td>			
 	</tr>
 	<tr>

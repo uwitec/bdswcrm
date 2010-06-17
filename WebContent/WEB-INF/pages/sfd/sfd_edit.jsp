@@ -171,11 +171,19 @@ var allCount = 2;
 			alert("接待时间不能为空，请选择！");
 			return;
 		}
-			
-		if(document.getElementById("client_id").value == ""){
+		if(document.getElementById("khlx").value == "往来单位"){	
+		  if(document.getElementById("client_id").value == ""){
 			alert("客户名称不能为空，请选择！");
 			return;
-		}		
+		  }	
+		}
+		else if(document.getElementById("khlx").value == "零售客户"){
+		if(document.getElementById("client_name").value == ""){
+			alert("客户名称不能为空，请选择！");
+			return;
+		  }
+		
+		}	
 		///if(document.getElementById("linkman").value == ""){
 		///	alert("联系人不能为空，请选择！");
 		///	return;
@@ -302,13 +310,16 @@ var allCount = 2;
 	function setProductInfo(product){
 		  
 		 var  client_name=document.getElementById("client_name");
-		 var  client_id=document.getElementById("client_id");
+		 if(document.getElementById("khlx").value == "往来单位"){	
+		   var  client_id=document.getElementById("client_id");
+		    client_id.value="";
+		 }
 		 var linkman= document.getElementById("linkman");
 		 var  mobile=document.getElementById("mobile");
 		 var  address=document.getElementById("address");
 		 var  ms=document.getElementById("ms");
 		 client_name.value=""; 
-		 client_id.value="";   
+		   
 		 linkman.value="";
 		 mobile.value=""
 		address.value="";
@@ -367,7 +378,7 @@ var allCount = 2;
 		var bxyy_ms1 = document.getElementById("bxyy_ms1");
 		var bxyy_ms2 = document.getElementById("bxyy_ms2");
 		
-		if(vD == "其他"){
+		if((vD == "其他") || (vD == "其他原因")){
 			bxyy_ms1.style.display = "";
 			bxyy_ms2.style.display = "";
 				
@@ -400,6 +411,7 @@ var allCount = 2;
 <input type="hidden" name="sfd.wx_state" id="wx_state" value="<%=StringUtils.nullToStr(sfd.getWx_state())%>">
 <input type="hidden" name="sfd.flow" id="flow" value="<%=StringUtils.nullToStr(sfd.getFlow())%>">
 <input type="hidden" name="sfd.jx_date" id="jx_date" value="<%=StringUtils.nullToStr(sfd.getJx_date())%>">
+<input type="hidden" name="sfd.khlx" id="khlx" value="<%=StringUtils.nullToStr(sfd.getKhlx())%>">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
@@ -420,6 +432,10 @@ var allCount = 2;
 		 <font color="red">*</font>
 		</td> -->				
 	</tr>
+	<%
+	  if(StringUtils.nullToStr(sfd.getKhlx()).equals("往来单位"))
+	  {
+	 %>
 	<tr>
 	    <td class="a1" width="15%">客户名称</td>
 		<td class="a2" width="35%"><input type="text" name="sfd.client_id"   id="client_name" onblur="setClientRegInfo();" value="<%=StringUtils.nullToStr(StaticParamDo.getClientNameById(sfd.getClient_name())) %>" size="35" maxlength="50" >
@@ -440,6 +456,26 @@ var allCount = 2;
 			</select>
 		</td>	
 	</tr>
+	<% 
+	}
+	else if(StringUtils.nullToStr(sfd.getKhlx()).equals("零售客户"))
+	{
+	%>
+	<tr>
+	    <td class="a1" width="15%">客户名称</td>
+		<td class="a2" width="35%">
+		<input type="text" name="sfd.client_name"   id="client_name"  value="<%=StringUtils.nullToStr(sfd.getClient_name()) %>" size="35" maxlength="50" >
+		<font color="red">*</font>
+		</td>			
+		
+		<td class="a1" width="15%">联系人</td>
+		<td class="a2" width="35%" >
+		<input type="text" name="sfd.linkman"   id="linkman"  value="<%=StringUtils.nullToStr(sfd.getLinkman()) %>" size="35" maxlength="50" >
+		</td>	
+	</tr>
+	<% 
+	}
+	%>
 	<tr>			
 		<td class="a1" width="15%">联系电话</td>
 		<td class="a2" width="35%">
@@ -474,11 +510,29 @@ var allCount = 2;
 			</select><font color="red">*</font>	
 		</td>	
 	</tr>
+	<% 
+	if((!StringUtils.nullToStr(sfd.getBxyy()).equals("其他")) && (!StringUtils.nullToStr(sfd.getBxyy()).equals("其他原因")))
+	  {
+	%>
 	<tr>	
 		<td class="a1" width="15%" id="bxyy_ms1" style="display:none">报修原因说明</td>
 		<td class="a2" id="bxyy_ms2" style="display:none" colspan="3">
 		<textarea rows="6" name="sfd.bxyy_ms" id="bxyy_ms" style="width:75%" maxlength="500"><%=StringUtils.nullToStr(sfd.getBxyy_ms()) %></textarea>
    </tr>
+   <% 
+   }
+   else
+   {
+   %>
+   <tr>	
+		<td class="a1" width="15%" id="bxyy_ms1">报修原因说明</td>
+		<td class="a2" id="bxyy_ms2" colspan="3">
+		<textarea rows="6" name="sfd.bxyy_ms" id="bxyy_ms" style="width:75%" maxlength="500"><%=StringUtils.nullToStr(sfd.getBxyy_ms()) %></textarea>
+   </tr>
+   <% 
+   }
+   %>
+   
 	<tr>
 		<td class="a1" width="15%">经手人</td>
 		<td class="a2">
