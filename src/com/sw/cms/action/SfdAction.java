@@ -119,7 +119,7 @@ public class SfdAction extends BaseAction
 			{
 				sfdService.updateSfd(sfd);
 			}
-		 	
+			bxyy = sjzdService.getSjzdXmxxByZdId("SJZD_BXYY");
 			this.saveMessage("²Ù×÷³É¹¦£¡");
 		   return "success";
 	   }
@@ -174,7 +174,7 @@ public class SfdAction extends BaseAction
 			{
 				 sfdService.updateSfd(sfd);
 			}
-		 			 
+			bxyy = sjzdService.getSjzdXmxxByZdId("SJZD_BXYY");		 
 		   return "success";
 	   }
 	   catch(Exception e)
