@@ -2398,6 +2398,15 @@
         <action name="delSfd" class="sfdAction" method="del">
              <result name="success">listSfd.html</result>
         </action>
+        
+        <action name="addSfdls" class="sfdAction" method="add">
+              <result name="success">/WEB-INF/pages/sfd/sfdls_add.jsp</result>
+        </action>
+        <action name="saveSfdls" class="sfdAction" method="save">
+             <result name="success">/WEB-INF/pages/sfd/sfd_edit.jsp</result>
+             <result name="input">/WEB-INF/pages/sfd/sfdls_add.jsp</result>
+             <result name="cancel" type="redirect">addSfdls.html</result>
+        </action>
          <!-- 售后服务单 -->
          
          <!-- 派工单 --> 
