@@ -63,8 +63,8 @@ public class SfdDAO extends JdbcBaseDAO
     */
 	public void saveSfd(Sfd sfd) 
 	{
-		String sql = "insert into sfd(id,client_name,address,mobile,linkman,jxr,cjr,jd_date,jx_date,cj_date,qzfs,state,wx_state,ms,bxyy,bxyy_ms,qz_serial_num)values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-		Object[] param = new Object[17];
+		String sql = "insert into sfd(id,client_name,address,mobile,linkman,jxr,cjr,jd_date,jx_date,cj_date,qzfs,state,wx_state,ms,bxyy,bxyy_ms,qz_serial_num,khlx)values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		Object[] param = new Object[18];
 		param[0] = sfd.getId();
 		param[1] = sfd.getClient_name();
 		param[2] = sfd.getAddress();
@@ -81,7 +81,7 @@ public class SfdDAO extends JdbcBaseDAO
 		param[13]= sfd.getMs();	
 		String bxyy=sfd.getBxyy();
 		param[14]= bxyy; 
-		if(bxyy=="其他")
+		if((bxyy.equals("其他")) || (bxyy.equals("其他原因")))
 		{
 		   param[15]= sfd.getBxyy_ms();	
 		}
@@ -90,6 +90,8 @@ public class SfdDAO extends JdbcBaseDAO
 			param[15]="";
 		}
 		param[16]= sfd.getQz_serial_num();
+		
+		param[17]= sfd.getKhlx();
 		getJdbcTemplate().update(sql, param);		 
 	}
 	 
@@ -132,7 +134,7 @@ public class SfdDAO extends JdbcBaseDAO
 		param[12]= sfd.getMs();	
 		String bxyy=sfd.getBxyy();
 		param[13]= bxyy; 
-		if(bxyy=="其他")
+		if((bxyy.equals("其他")) || (bxyy.equals("其他原因")))
 		{
 		   param[14]= sfd.getBxyy_ms();	
 		}
@@ -272,6 +274,8 @@ public class SfdDAO extends JdbcBaseDAO
 			if (SqlUtil.columnIsExist(rs, "bxyy_ms"))sfd.setBxyy_ms(rs.getString("bxyy_ms"));
 			
 			if (SqlUtil.columnIsExist(rs, "qz_serial_num"))sfd.setQz_serial_num(rs.getString("qz_serial_num"));
+			
+			if (SqlUtil.columnIsExist(rs, "khlx"))sfd.setKhlx(rs.getString("khlx"));
 			return sfd;
 		}
 	}
