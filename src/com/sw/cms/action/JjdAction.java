@@ -135,6 +135,7 @@ public void setId(String id) {
 		  
 		  if(jjd.getState().equals("已提交"))
 		  {
+			 
 			  //判断提交的序列号是否存在一样的
 			 String msg= jjdService.isSerialNumExist(jjdProducts);
 			 if(!msg.equals(""))
