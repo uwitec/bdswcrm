@@ -160,7 +160,7 @@ List kindList = (List)VS.findValue("kindList");
 		<td><input type="checkbox" name="allCheck" onclick="selectAll();"></td>	
 		<td nowrap>商品名称</td>
 		<td nowrap>规格</td>		
-		<td nowrap>库存数量</td>
+		<!--  <td nowrap>库存数量</td>-->
 		<!--<td nowrap>考核成本</td>
 		--><td nowrap>零售报价</td>
 		<!--<td nowrap>零售限价</td>
@@ -187,7 +187,7 @@ List kindList = (List)VS.findValue("kindList");
 			<td><input type="checkbox" name="chk_id" value="<%=vl %>"></td>
 			<td align="left"><%=StringUtils.nullToStr(map.get("product_name")) %></td>
 			<td align="left"><%=StringUtils.nullToStr(map.get("product_xh")) %></td>			
-			<td nowrap><%=StringUtils.nullToStr(map.get("kc_nums")) %></td>
+			<!-- <td nowrap><%=StringUtils.nullToStr(map.get("kc_nums")) %></td>-->
 			<!--<td nowrap align="right"><%=JMath.round(khcbj,2) %></td>
 			--><td nowrap align="right"><%=JMath.round(lsbj,2) %></td>
 			<!--<td nowrap align="right"><%=JMath.round(lsxj,2) %></td>

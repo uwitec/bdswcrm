@@ -161,7 +161,7 @@ session.removeAttribute("messages");
         
         var otd3 = document.createElement("td");
         otd3.className = "a2";
-        otd3.innerHTML = '<input type="text" id="nums_'+curId+'" name="jjdProducts['+curId+'].nums" value="1" size="5"  onblur="setNum('+curId+')" readonly>';
+        otd3.innerHTML = '<input type="text" id="nums_'+curId+'" name="jjdProducts['+curId+'].nums" value="1" size="5"  onblur="setNum('+curId+')" >';
         
         var otd4 = document.createElement("td");
         otd4.className = "a2";
@@ -478,7 +478,7 @@ session.removeAttribute("messages");
 				</td>
 				<td class="a2"><input type="text" id="product_xh_<%=i %>" name="jjdProducts[<%=i %>].product_xh" size="15" value="<%=StringUtils.nullToStr(jjdProduct.getProduct_xh()) %>" size="15" style="width:100%" readonly  ></td>	
 				
-				<td class="a2"><input type="text" id="nums_<%=i %>" name="jjdProducts[<%=i %>].nums" value="<%=StringUtils.nullToStr(jjdProduct.getNums()) %>" size="5" style="width:100%" onblur="setNum(<%=i %>)"  readonly></td>		 
+				<td class="a2"><input type="text" id="nums_<%=i %>" name="jjdProducts[<%=i %>].nums" value="<%=StringUtils.nullToStr(jjdProduct.getNums()) %>" size="5" style="width:100%" onblur="setNum(<%=i %>)"  ></td>		 
 				<td class="a2">
 					<input type="text" id="hjk_<%=i %>" name="producthjk" value="坏件库" size="7">					 
 				</td>
@@ -510,7 +510,7 @@ else
 				
 				<td class="a2"><input type="text" id="product_xh_<%=i %>" name="jjdProducts[<%=i %>].product_xh" size="15" style="width:100%" readonly  ></td>	
  				
-				<td class="a2"><input type="text" id="nums_<%=i %>" name="jjdProducts[<%=i %>].nums" value="1" size="5" style="width:100%" onblur="setNum(<%=i %>)" readonly></td>		 
+				<td class="a2"><input type="text" id="nums_<%=i %>" name="jjdProducts[<%=i %>].nums" value="1" size="5" style="width:100%" onblur="setNum(<%=i %>)" ></td>		 
 				<td class="a2">
 					<input type="text" id="hjk_<%=i %>" name="producthjk" value="坏件库" size="7">					 
 				</td>
