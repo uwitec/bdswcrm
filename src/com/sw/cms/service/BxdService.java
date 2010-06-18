@@ -58,7 +58,12 @@ public class BxdService {
 					{
 						if(!bxdProduct.getProduct_id().equals("") && !bxdProduct.getProduct_name().equals(""))
 						{
-                          shkcDao.updateShkcState(bxdProduct, "2");
+							String[] arryNums = (bxdProduct.getQz_serial_num()).split(",");
+							
+							for(int k=0;k<arryNums.length;k++)
+						   {	
+                             shkcDao.updateShkcState(arryNums[k], "2");
+						   }  
 						}
 					}
 				}
@@ -101,7 +106,7 @@ public class BxdService {
 								shSerialNumFlow.setFs_date(bxd.getBxdate());
 								shSerialNumFlow.setJsr(bxd.getJsr());
 								shSerialNumFlow.setKf("ÔÚÍâ¿â");
-								shSerialNumFlow.setQz_serial_num(bxdProduct.getQz_serial_num());
+								shSerialNumFlow.setQz_serial_num(arryNums[k]);
 								shSerialNumFlow.setRk_date(DateComFunc.getToday());
 								shSerialNumFlow.setYw_dj_id(bxd.getId());
 								shSerialNumFlow.setYw_url("viewBxd.html?id=");
@@ -145,7 +150,12 @@ public class BxdService {
 					{
 						if(!bxdProduct.getProduct_id().equals("") && !bxdProduct.getProduct_name().equals(""))
 						{
-                          shkcDao.updateShkcState(bxdProduct, "2");
+                           String[] arryNums = (bxdProduct.getQz_serial_num()).split(",");
+							
+							for(int k=0;k<arryNums.length;k++)
+						   {
+                              shkcDao.updateShkcState(arryNums[k], "2");
+						   }   
 						}
 					}
 				}

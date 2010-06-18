@@ -117,7 +117,7 @@ public class BxfhdService
 								shSerialNumFlow.setFs_date(bxfhd.getFh_date());
 								shSerialNumFlow.setJsr(bxfhd.getJsr());
 								shSerialNumFlow.setKf("ºÃ¼þ¿â");
-								shSerialNumFlow.setQz_serial_num(bxfhdProduct.getQz_serial_num());
+								shSerialNumFlow.setQz_serial_num(arryNums[k]);
 								shSerialNumFlow.setRk_date(DateComFunc.getToday());
 								shSerialNumFlow.setYw_dj_id(bxfhd.getId());
 								shSerialNumFlow.setYw_url("viewBxfhd.html?id=");

@@ -47,10 +47,15 @@ public class WxrkdService
 				WxrkdProduct wxrkddProduct = (WxrkdProduct)wxrkdProducts.get(i);
 			    if(!wxrkddProduct.getQz_serial_num().equals(""))
 			    {
-				   int count=shkcDao.getBadShkcBySerialNum(wxrkddProduct.getQz_serial_num());
-				   if(count==0)
+			    	String[] arryNums = (wxrkddProduct.getQz_serial_num()).split(",");
+					
+					for(int k=0;k<arryNums.length;k++)
 				   {
+				     int count=shkcDao.getBadShkcBySerialNum(arryNums[k]);
+				     if(count==0)
+				     {
 				    	message="坏件库已无序列号:"+wxrkddProduct.getQz_serial_num()+" 的商品,请检查！";
+				     }
 				   }
 			    }
 			}
@@ -91,21 +96,27 @@ public class WxrkdService
 				{
 					if(!wxrkdProduct.getProduct_id().equals("") && !wxrkdProduct.getProduct_name().equals(""))
 					{
+						String[] arryNums = (wxrkdProduct.getQz_serial_num()).split(",");
+						
+						for(int k=0;k<arryNums.length;k++)
+					   {
 	                     //修改库存状态为1：好件库
-		                  shkcDao.updateWxShkcState(wxrkdProduct.getQz_serial_num(), "3");
-		             }
+		                  shkcDao.updateWxShkcState(arryNums[k], "3");
+					   
 		             ShSerialNumFlow  shSerialNumFlow=new ShSerialNumFlow();
 		             shSerialNumFlow.setCj_date(DateComFunc.getToday());
 		             shSerialNumFlow.setFs_date(wxrkd.getWxrk_date());
 		             shSerialNumFlow.setJsr(wxrkd.getJsr());
 		             shSerialNumFlow.setKf("好件库");
-		             shSerialNumFlow.setQz_serial_num(wxrkdProduct.getQz_serial_num()); 
+		             shSerialNumFlow.setQz_serial_num(arryNums[k]); 
 		             shSerialNumFlow.setRk_date(DateComFunc.getToday());
 		             shSerialNumFlow.setYw_dj_id(wxrkd.getId());
 		             shSerialNumFlow.setYw_url("viewWxrkd.html?id=");
 		             shSerialNumFlow.setYwtype("维修入库");
 		             //添加序列号流转记录
 		             shSerialNumFlowDao.saveShSerialNumFlow(shSerialNumFlow);	
+					   }
+		             }
 				}
 			}
 		}

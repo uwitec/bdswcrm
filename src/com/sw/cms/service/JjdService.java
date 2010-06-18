@@ -3,13 +3,18 @@ package com.sw.cms.service;
 import java.util.List;
 
 import com.sw.cms.dao.JjdDAO;
+import com.sw.cms.dao.ProductDAO;
+import com.sw.cms.dao.ProductKcDAO;
 import com.sw.cms.dao.ShSerialNumFlowDAO;
 import com.sw.cms.dao.ShkcDAO;
+import com.sw.cms.model.Ckd;
+import com.sw.cms.model.CkdProduct;
 import com.sw.cms.model.Jjd;
 import com.sw.cms.model.JjdProduct;
 import com.sw.cms.model.Kfdb;
 import com.sw.cms.model.KfdbProduct;
 import com.sw.cms.model.Page;
+import com.sw.cms.model.Product;
 import com.sw.cms.model.ShSerialNumFlow;
 import com.sw.cms.model.Shkc;
 import com.sw.cms.util.DateComFunc;
@@ -18,7 +23,8 @@ public class JjdService {
 	private JjdDAO jjdDao;
 	private ShkcDAO shkcDao;
 	private ShSerialNumFlowDAO shSerialNumFlowDao;
-
+	private ProductDAO productDao;
+	private ProductKcDAO productKcDao;
 	
 	public ShSerialNumFlowDAO getShSerialNumFlowDao() {
 		return shSerialNumFlowDao;
@@ -115,7 +121,7 @@ public class JjdService {
 							     shSerialNumFlow.setFs_date(jjd.getJj_date());
 							     shSerialNumFlow.setJsr(jjd.getJjr());
 							     shSerialNumFlow.setKf("»µ¼þ¿â");
-							     shSerialNumFlow.setQz_serial_num(jjdProduct.getQz_serial_num());
+							     shSerialNumFlow.setQz_serial_num(arryNums[k]);
 							     shSerialNumFlow.setRk_date(DateComFunc.getToday());
 							     shSerialNumFlow.setYw_dj_id(jjd.getId());
 							     shSerialNumFlow.setYw_url("viewJjd.html?id=");
@@ -223,6 +229,8 @@ public class JjdService {
 		 
 		return message;
 	}
+	
+		
 	
 	public List getJjdProducts(String id)
 	{
