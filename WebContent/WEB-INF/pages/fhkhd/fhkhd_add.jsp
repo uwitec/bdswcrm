@@ -72,9 +72,10 @@ session.removeAttribute("messages");
 		  alert("返还商品不能为空，请填写！");
 		  return;
 		}
-		
-		if(!InputValid(document.getElementById("skzh"),1,"string",0,1,100,"收款账户")){return;}
-
+		if(!(document.getElementById("skje").value=="0.00"))
+		{
+		  if(!InputValid(document.getElementById("skzh"),1,"string",0,1,100,"收款账户")){return;}
+        }
 		//判断是否存在强制输入序列号的商品没有输入序列号
 		for(var i=0;i<=allCount;i++)
 		{
@@ -333,7 +334,7 @@ session.removeAttribute("messages");
 		document.getElementById("product_id_" + sel).value = "";
 		document.getElementById("product_xh_" + sel).value = "";
 		document.getElementById("price_" + sel).value = "0.00";
-		document.getElementById("nums_" + sel).value = "0";
+		document.getElementById("nums_" + sel).value = "1";
 		document.getElementById("xj_" + sel).value = "0.00";
 		document.getElementById("remark_" + sel).value = "";
 		document.getElementById("cpfj_" + sel).value = "";
@@ -536,7 +537,7 @@ else
 					<input type="text" id="store_id" name="store_id" value="好件库" size="7" readonly>				 
 				</td>
 				<td class="a2"><input type="text" id="price_<%=i %>" name="fhkhdProducts[<%=i %>].price" value="0.00" size="7" style="width:100% onblur="hj();"" >
-				<td class="a2"><input type="text" id="nums_<%=i %>" name="fhkhdProducts[<%=i %>].nums" value="0" size="5" onblur="hj();"  style="width:100%" ></td>		 
+				<td class="a2"><input type="text" id="nums_<%=i %>" name="fhkhdProducts[<%=i %>].nums" value="1" size="5" onblur="hj();"  style="width:100%" ></td>		 
 				<td class="a2"><input type="text" id="xj_<%=i %>" name="fhkhdProducts[<%=i %>].totalmoney" value="0.00" size="7" style="width:100%" readonly></td>	 
 				
 				<td class="a2">
