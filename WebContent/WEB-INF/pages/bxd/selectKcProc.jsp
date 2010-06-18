@@ -43,6 +43,7 @@ String product_name = StringUtils.nullToStr((String)VS.findValue("product_name")
 
 	function sel(sel_flag){
 		var k = 0;
+		var numstemp=1;
 		var allCount = window.opener.allCount;  //当前存在的最大行序号
 		//alert("当前存在的最大行序号" + allCount);
 		var startCount = 0;
@@ -75,12 +76,16 @@ String product_name = StringUtils.nullToStr((String)VS.findValue("product_name")
 				var flag = false;
 				for(var y=0;y<=allCount;y++){
 					var s_id = window.opener.document.getElementById("product_id_"+y);
+					var nums = window.opener.document.getElementById("nums_"+y);
 					
-					if(s_id.value == arryStr[0]){  //该值已存在
+					if(s_id.value == arryStr[0]){  //该值已存在	
+					    numstemp++;	
+					    nums.value=numstemp;				    
 						flag = true;
 					}
+				    
 				}			
-			
+			    
 				if(flag == false){
 					var id = window.opener.document.getElementById("product_id_"+k);
 					
@@ -93,15 +98,18 @@ String product_name = StringUtils.nullToStr((String)VS.findValue("product_name")
 					var xh = window.opener.document.getElementById("product_xh_"+k);
 					var name = window.opener.document.getElementById("product_name_"+k);
 					var qz_flag = window.opener.document.getElementById("qz_flag_" + k);
-
+					var nums=window.opener.document.getElementById("nums_" + k);
 					id.value = arryStr[0];
 					xh.value = arryStr[1];
 					name.value = arryStr[2];
 					qz_flag.value = arryStr[3];
 
 					k++;	
-				}	
+				}
+					
 			}
+			
+			
 		}
 		
 		if(sel_flag == "2"){
