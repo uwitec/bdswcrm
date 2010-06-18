@@ -289,19 +289,21 @@ public class ShkcDAO extends JdbcBaseDAO
 				JjdProduct jjdProduct = (JjdProduct)jjdProducts.get(i);
 				if(jjdProduct != null)
 				{
-					if(!jjdProduct.getProduct_id().equals("") && !jjdProduct.getProduct_name().equals(""))
-					{
-                       sql="insert into shkc(product_id,product_xh,product_name,qz_serial_num,state,store_id) values(?,?,?,?,?,?)";
-	                   Object[]param=new Object[6];
-	                   param[0]=jjdProduct.getProduct_id();
-	                   param[1]=jjdProduct.getProduct_xh();
-	                   param[2]=jjdProduct.getProduct_name();
-	                   param[3]=jjdProduct.getQz_serial_num();
-	                   param[4]=state; 
-	                   param[5]=storeId;
+					String[] arryNums = (jjdProduct.getQz_serial_num()).split(",");
+					
+					for(int k=0;k<arryNums.length;k++)
+				   {	
+                      sql="insert into shkc(product_id,product_xh,product_name,qz_serial_num,state,store_id) values(?,?,?,?,?,?)";
+                      Object[]param=new Object[6];
+                      param[0]=jjdProduct.getProduct_id();
+                      param[1]=jjdProduct.getProduct_xh();
+                      param[2]=jjdProduct.getProduct_name();
+                      param[3]=arryNums[k];
+                      param[4]=state; 
+                      param[5]=storeId;
 
-                       this.getJdbcTemplate().update(sql,param);
-					}
+                      this.getJdbcTemplate().update(sql,param);
+				   }
 				}
 			}
 		}
@@ -328,7 +330,7 @@ public class ShkcDAO extends JdbcBaseDAO
     * 修改售后库存（1：坏件库 2：在外库 3：好件库）
     *
     */
-   public void updateShkcState(BxdProduct bxdProduct,String state)
+   public void updateShkcState(String arryNums,String state)
    {
 	   String sqlStore="";
 	   String state1="1";
@@ -348,7 +350,7 @@ public class ShkcDAO extends JdbcBaseDAO
 	   }
 	   Map map=getResultMap(sqlStore);		
 	   String storeId= (String)map.get("id") ; 
-       sql="update shkc set state='"+state+"',store_id='"+storeId+"' where qz_serial_num='"+bxdProduct.getQz_serial_num()+"'";
+       sql="update shkc set state='"+state+"',store_id='"+storeId+"' where qz_serial_num='"+arryNums+"'";
        this.getJdbcTemplate().update(sql);
    }
    
@@ -387,9 +389,16 @@ public class ShkcDAO extends JdbcBaseDAO
 					if(!bxfhdProduct.getProduct_id().equals("") && !bxfhdProduct.getProduct_name().equals(""))
 					{ if(!state.equals(""))
 					 {
-	                  sql="update shkc set state='"+state+"',store_id='"+storeId+"' where qz_serial_num='"+bxfhdProduct.getQz_serial_num()+"'";
+						String[] arryNums = (bxfhdProduct.getQz_serial_num()).split(",");
+						
+						for(int k=0;k<arryNums.length;k++)
+					   {
+	                    sql="update shkc set state='"+state+"',store_id='"+storeId+"' where qz_serial_num='"+arryNums[k]+"'";
+	                    this.getJdbcTemplate().update(sql);
+					   }
+					   
 					 }					
-	                  this.getJdbcTemplate().update(sql);
+	                  
 					}
 				}
 			}
