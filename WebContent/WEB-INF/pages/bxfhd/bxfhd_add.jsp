@@ -76,9 +76,10 @@ session.removeAttribute("messages");
 		  alert("报修返还商品不能为空，请填写！");
 		  return;
 		}
-		
-		if(!InputValid(document.getElementById("skzh"),1,"string",0,1,100,"付款账户")){return;}
-		
+		if(!(document.getElementById("ssje").value=="0.00"))
+		{
+		  if(!InputValid(document.getElementById("skzh"),1,"string",0,1,100,"付款账户")){return;}
+		}
 		//判断是否存在强制输入序列号的商品没有输入序列号
 		for(var i=0;i<=allCount;i++){
 		 
@@ -166,7 +167,7 @@ session.removeAttribute("messages");
         
         var otd7 = document.createElement("td");
         otd7.className = "a2";
-        otd7.innerHTML = '<input type="text" id="nums_'+curId+'" name="bxfhdProducts['+curId+'].nums" value="0" size="5" style="width:100%"  onblur="hj()">';
+        otd7.innerHTML = '<input type="text" id="nums_'+curId+'" name="bxfhdProducts['+curId+'].nums" value="1" size="5" style="width:100%"  onblur="hj()">';
         
         var otd8 = document.createElement("td");
         otd8.className = "a2";
@@ -335,7 +336,7 @@ session.removeAttribute("messages");
 		document.getElementById("product_id_" + sel).value = "";
 		document.getElementById("product_xh_" + sel).value = "";
 		document.getElementById("price_" + sel).value = "0.00";
-		document.getElementById("nums_" + sel).value = "0";
+		document.getElementById("nums_" + sel).value = "1";
 		document.getElementById("xj_" + sel).value = "0.00";
 		document.getElementById("remark_" + sel).value = "";
 		document.getElementById("cpfj_" + sel).value = "";
@@ -537,7 +538,7 @@ else
 					<input type="text" id="store_id" name="store_id" value="好件库" size="7" readonly>				 
 				</td>
 				<td class="a2"><input type="text" id="price_<%=i %>" name="bxfhdProducts[<%=i %>].price" value="0.00" size="7" style="width:100% " onblur="hj();">
-				<td class="a2"><input type="text" id="nums_<%=i %>" name="bxfhdProducts[<%=i %>].nums" value="0" size="5" onblur="hj();"  style="width:100%" ></td>		 
+				<td class="a2"><input type="text" id="nums_<%=i %>" name="bxfhdProducts[<%=i %>].nums" value="1" size="5" onblur="hj();"  style="width:100%" ></td>		 
 				<td class="a2"><input type="text" id="xj_<%=i %>" name="bxfhdProducts[<%=i %>].totalmoney" value="0.00" size="7" style="width:100%" readonly></td>	 
 				
 				<td class="a2">
@@ -576,7 +577,7 @@ else
 		<td class="a1" widht="20%">付款账户</td>
 		<td class="a2" ><input type="text" id="zhname"  name="zhname" value="<%=StaticParamDo.getAccountNameById(StringUtils.nullToStr(bxfhd.getFkzh())) %>" readonly>
 		<input type="hidden" id="skzh"  name="bxfhd.fkzh" value="<%=StringUtils.nullToStr(bxfhd.getFkzh()) %>">
-		<img src="images/select.gif" align="absmiddle" title="选择账户" border="0" onclick="openAccount();" style="cursor:hand"><font color="red">*</font>
+		<img src="images/select.gif" align="absmiddle" title="选择账户" border="0" onclick="openAccount();" style="cursor:hand">
 		</td>
 	</tr>	
 </table> 
