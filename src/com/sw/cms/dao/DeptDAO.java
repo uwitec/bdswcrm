@@ -131,7 +131,7 @@ public class DeptDAO extends JdbcBaseDAO {
 	 * @param dept_id
 	 */
 	public void delDept(String dept_id) {
-		String sql = "delete from dept where dept_id ='" + dept_id + "' or parent_id like '" + dept_id + "'";
+		String sql = "delete from dept where dept_id ='" + dept_id + "'";
 		this.getJdbcTemplate().update(sql);
 	}
 
