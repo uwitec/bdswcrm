@@ -89,9 +89,9 @@ Hykda hykda = (Hykda)VS.findValue("hykda");
 	}
 	}
 </script>
-</script>
+
 </head>
-<body  onload="initFzrTip();initClientTip();onloadClientInfo();">
+<body  onload="initFzrTip();onloadClientInfo();">
 <form name="myform" action="saveHykfk.html" method="post">
 <input type="hidden" name="hykda.lxdh" id="lxdh" value="<%=StringUtils.nullToStr(hykda.getLxdh()) %>">
 <input type="hidden" name="hykda.mobile" id="mobile" value="<%=StringUtils.nullToStr(hykda.getMobile()) %>">
@@ -106,7 +106,7 @@ Hykda hykda = (Hykda)VS.findValue("hykda");
 	<tr>
 	   <td class="a1" width="15%">会员卡号</td>
 	   <td class="a2" width="35%" colspan="3">
-		   <input type="text" name="hykda.hykh" id="hykh" value="<%=StringUtils.nullToStr(hykda.getHykh()) %>" size="40" maxlength="50" readonly>
+		   <input type="text" name="hykda.hykh" id="hykh" value="<%=StringUtils.nullToStr(hykda.getHykh()) %>" size="45" maxlength="50" readonly>
 	   </td>
 	</tr>
 	
@@ -119,11 +119,11 @@ Hykda hykda = (Hykda)VS.findValue("hykda");
 		%>
 		<td class="a1" width="15%">发卡日期</td>
 		<td class="a2" width="35%">
-		   <input type="text" name="hykda.fkrq" id="fkrq" value="<%=rq%>"  class="Wdate" onFocus="WdatePicker()"  size="20"><font color="red">*</font>
+		   <input type="text" name="hykda.fkrq" id="fkrq" value="<%=rq%>"  class="Wdate" onFocus="WdatePicker()"  size="45"><font color="red">*</font>
 		</td>
 		<td class="a1" width="15%">经手人</td>
 		<td class="a2" width="35%">		   
-		   <input  id="brand"  type="text"   length="20"  onblur="setValue()" value="<%=StaticParamDo.getRealNameById(hykda.getFkjsr()) %>"> <font color="red">*</font>
+		   <input  id="brand"  type="text"    size="45" length="20"  onblur="setValue()" value="<%=StaticParamDo.getRealNameById(hykda.getFkjsr()) %>"> <font color="red">*</font>
            <div  id="brandTip"  style="height:12px;position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		   <input type="hidden" name="hykda.fkjsr" id="fzr" value="<%=StringUtils.nullToStr(hykda.getFkjsr()) %>"> 	
 		</td>
@@ -135,7 +135,7 @@ Hykda hykda = (Hykda)VS.findValue("hykda");
 		</td>
 		<td class="a1" width="15%">发卡类型</td>
 		<td class="a2" width="35%" >
-		   <select name="fklx" id="fklx" onchange="chgFkTyle(this.value);" style="width:232px" >
+		   <select name="fklx" id="fklx" onchange="chgFkTyle(this.value);" style="width:256px">
 			<option value="到机构" >到机构</option>
 			<option value="到个人" >到个人</option>	
 		</select>
@@ -145,7 +145,7 @@ Hykda hykda = (Hykda)VS.findValue("hykda");
 	  
 		<td class="a1" width="15%" id="jg1">领用机构</td>
 		<td class="a2" colspan="3" id="jg2">
-		   <input type="text" name="hykda.hymc" onblur="setClientValue();" id="client_name"  size="60" value="<%=StringUtils.nullToStr(hykda.getHymc()) %>">
+		   <input type="text" name="hykda.hymc" onblur="setClientValue();" id="client_name"  size="45" value="<%=StringUtils.nullToStr(hykda.getHymc()) %>">
 		   <input type="hidden" name="hykda.hybh" id="client_id" value="<%=StringUtils.nullToStr(hykda.getHybh()) %>">
 		   <div id="clientsTip" style="height:12px;position:absolute;left:150px; top:85px; width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		   <font color="red">*</font>		  
@@ -153,7 +153,7 @@ Hykda hykda = (Hykda)VS.findValue("hykda");
 		
 		<td class="a1" width="15%" id="ly1" style="display:none">领用人</td>
 		<td class="a2" colspan="3" id="ly2" style="display:none">			  
-		   <input type="text" name="hykda.lxrname" id="lxrname" value="" size="20" maxlength="30"><font color="red">*</font> 
+		   <input type="text" name="hykda.lxrname" id="lxrname" value="" size="45" maxlength="30"><font color="red">*</font> 
 		</td>	
 	  
 	</tr>
@@ -165,19 +165,19 @@ Hykda hykda = (Hykda)VS.findValue("hykda");
 	
 		<td class="a1" width="15%"  style="display:none" id="m1">手机</td>
 		<td class="a2" width="35%"  style="display:none" id="m2">
-		   <input type="text" name="hykda.mobile" id="mobile" value=""  size="25" >
+		   <input type="text" name="hykda.mobile" id="mobile" value=""  size="45" >
 		</td>
 	</tr>
 	 
 	<tr>
 		<td class="a1" width="15%"   style="display:none" id="sf1">身份证号</td>
 		<td class="a2" width="35%"   style="display:none" id="sf2">
-		   <input type="text" name="hykda.sfzh" id="sfzh" value=""   size="25" >
+		   <input type="text" name="hykda.sfzh" id="sfzh" value=""   size="45" >
 		</td>
 	
 		<td class="a1" width="15%"    style="display:none" id="dz1">地址</td>
 		<td class="a2" width="15%"   style="display:none" id="dz2">
-		   <input type="text" name="hykda.address" id="address" value=""   size="50" maxlength="80">
+		   <input type="text" name="hykda.address" id="address" value=""   size="45" maxlength="80">
 		</td>
 	</tr>	
 	
@@ -185,7 +185,7 @@ Hykda hykda = (Hykda)VS.findValue("hykda");
 	<tr>
 		<td class="a1" width="15%">备注</td>
 		<td class="a2" colspan="3">
-		   <input type="text" name="hykda.fkbz" id="fkbz" value=""   size="85">
+		   <input type="text" name="hykda.fkbz" id="fkbz" value=""   size="90">
 		</td>
 	</tr>	
    <tr height="35">
