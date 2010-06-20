@@ -81,26 +81,26 @@ List hykflList = (List)VS.findValue("hykflList");
 	
 		<td class="a1" width="15%">初始积分</td>
 		<td class="a2" width="35%">
-		   <input type="text" name="csjf" id="csjf" value="<%=StringUtils.nullToStr(hykdas.get("csjf")) %>"  size="25" readonly>
+		   <input type="text" name="csjf" id="csjf" value="<%=StringUtils.nullToStr(hykdas.get("csjf")) %>"  size="45" readonly>
 		</td>
 	</tr>
 	
 	<tr>
 		<td class="a1" width="15%">有效日期</td>
 		<td class="a2" width="35%">
-		   <input type="text" name="yxrq" id="yxrq" value="<%=StringUtils.nullToStr(hykdas.get("yxrq")) %>"   size="25" readonly>
+		   <input type="text" name="yxrq" id="yxrq" value="<%=StringUtils.nullToStr(hykdas.get("yxrq")) %>"   size="45" readonly>
 		</td>
 	
 		<td class="a1"  width="15%">失效日期</td>
 	    <td class="a2" width="35%">
-	       <input type="text" name="sxrq" id="sxrq" value="<%=StringUtils.nullToStr(hykdas.get("sxrq")) %>"  size="25" readonly>
+	       <input type="text" name="sxrq" id="sxrq" value="<%=StringUtils.nullToStr(hykdas.get("sxrq")) %>"  size="45" readonly>
         </td>
 	</tr>
 	
 	<tr>
 		<td class="a1" width="15%">领用情况</td>
 		<td class="a2" width="35%">
-		<input type="text" name="state" id="state" value="<%=StringUtils.nullToStr(hykdas.get("state")) %>"  size="25" readonly>		   
+		<input type="text" name="state" id="state" value="<%=StringUtils.nullToStr(hykdas.get("state")) %>"  size="45" readonly>		   
 		</td>
 	
 		<td class="a1"  width="15%">是否停用</td>
@@ -138,25 +138,25 @@ List hykflList = (List)VS.findValue("hykflList");
 	
 		<td class="a1" width="15%">手机</td>
 		<td class="a2" width="35%">
-		   <input type="text" name="hykda.mobile" id="mobile" value="<%=StringUtils.nullToStr(hykdas.get("mobile")) %>"  size="25" ><font color="red">*</font>
+		   <input type="text" name="hykda.mobile" id="mobile" value="<%=StringUtils.nullToStr(hykdas.get("mobile")) %>"  size="45" ><font color="red">*</font>
 		</td>
 	</tr>
 	 
 	<tr>
 		<td class="a1" width="15%">身份证号</td>
 		<td class="a2" width="35%">
-		   <input type="text" name="hykda.sfzh" id="sfzh" value="<%=StringUtils.nullToStr(hykdas.get("sfzh")) %>"   size="25" ><font color="red">*</font>
+		   <input type="text" name="hykda.sfzh" id="sfzh" value="<%=StringUtils.nullToStr(hykdas.get("sfzh")) %>"   size="45" ><font color="red">*</font>
 		</td>
 	
 		<td class="a1"  width="15%">E-Mail</td>
 	    <td class="a2" width="35%">
-	       <input type="text" name="hykda.mail" id="mail" value="<%=StringUtils.nullToStr(hykdas.get("mail")) %>"  size="25" >
+	       <input type="text" name="hykda.mail" id="mail" value="<%=StringUtils.nullToStr(hykdas.get("mail")) %>"  size="45" >
         </td>
 	</tr>	
 	<tr>
 		<td class="a1" width="15%">性别</td>
 		<td class="a2" width="35%">
-		   <select name="hykda.sex" id="sex" style="width:76%">
+		   <select name="hykda.sex" id="sex" style="width:80%">
 				<option value="男" <%if(StringUtils.nullToStr(hykdas.get("sex")).equals("男")) out.print("selected"); %>>男</option>
 				<option value="女" <%if(StringUtils.nullToStr(hykdas.get("sex")).equals("女")) out.print("selected"); %>>女</option>
 			</select>			
@@ -164,20 +164,20 @@ List hykflList = (List)VS.findValue("hykflList");
 		</td>
 	    <td class="a1"  width="15%">出生日期</td>
 	    <td class="a2" width="35%">
-	       <input type="text" name="hykda.birth" id="birth" value="<%=StringUtils.nullToStr(hykdas.get("birth")) %>"   class="Wdate" onFocus="WdatePicker()" size="25">
+	       <input type="text" name="hykda.birth" id="birth" value="<%=StringUtils.nullToStr(hykdas.get("birth")) %>"   class="Wdate" onFocus="WdatePicker()" size="45">
         </td>
     </tr>	
 	<tr>
 		<td class="a1"  width="15%">工作单位</td>
 	    <td class="a2" colspan="3">
-	       <input type="text" name="hykda.gzdw" id="gzdw" value="<%=StringUtils.nullToStr(hykdas.get("gzdw")) %>"  size="50"  maxlength="80">
+	       <input type="text" name="hykda.gzdw" id="gzdw" value="<%=StringUtils.nullToStr(hykdas.get("gzdw")) %>"  size="90"  maxlength="80">
         </td>
 	</tr>	
 	
 	<tr>
 		<td class="a1" width="15%">地址</td>
 		<td class="a2" colspan="3">
-		   <input type="text" name="hykda.address" id="address" value="<%=StringUtils.nullToStr(hykdas.get("address")) %>"   size="50" maxlength="80">
+		   <input type="text" name="hykda.address" id="address" value="<%=StringUtils.nullToStr(hykdas.get("address")) %>"   size="90" maxlength="80">
 		</td>
 	</tr>
 	<tr height="35">
