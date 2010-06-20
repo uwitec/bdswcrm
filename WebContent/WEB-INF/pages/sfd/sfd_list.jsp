@@ -105,11 +105,11 @@ String orderType = (String)VS.findValue("orderType");
 <input type="hidden" name="orderName" value="<%=orderName %>">
 <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0">
 	<tr>
-		<td class="csstitle" align="left" width="75%">&nbsp;&nbsp;&nbsp;&nbsp;<b>售后服务单</b></td>
-		<td class="csstitle" width="25%">
-			<img src="images/create.gif" align="absmiddle" border="0">&nbsp;<a href="#" class="xxlb" onclick="add();"> 添 加(往来) </a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<img src="images/create.gif" align="absmiddle" border="0">&nbsp;<a href="#" class="xxlb" onclick="addls();"> 添 加(零售) </a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<img src="images/import.gif" align="absmiddle" border="0">&nbsp;<a href="#" class="xxlb" onclick="refreshPage();"> 刷 新 </a>	</td>			
+		<td class="csstitle" align="left" width="65%">&nbsp;&nbsp;&nbsp;&nbsp;<b>售后服务单</b></td>
+		<td class="csstitle" width="35%">
+			<img src="images/create.gif" align="absmiddle" border="0">&nbsp;<a href="#" class="xxlb" onclick="add();"> 添加（往来） </a> &nbsp;&nbsp;&nbsp;
+			<img src="images/create.gif" align="absmiddle" border="0">&nbsp;<a href="#" class="xxlb" onclick="addls();"> 添加（零售） </a> &nbsp;&nbsp;&nbsp;
+			<img src="images/import.gif" align="absmiddle" border="0">&nbsp;<a href="#" class="xxlb" onclick="refreshPage();"> 刷 新 </a></td>			
 	</tr>
 	<tr>
 		<td class="search" align="left" colspan="2">

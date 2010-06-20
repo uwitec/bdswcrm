@@ -275,38 +275,29 @@ String[] bxyy = (String[])VS.findValue("bxyy");
 	<tr>
 		<td class="a1" width="15%">编号</td>
 		<td class="a2" width="35%">
-		<input type="text" name="sfd.id" id="id" value="<%=StringUtils.nullToStr(sfd.getId())%>"  maxlength="50" readonly><font color="red">*</font>
+		<input type="text" name="sfd.id" id="id" value="<%=StringUtils.nullToStr(sfd.getId())%>" size="45" maxlength="50" readonly><font color="red">*</font>
 		</td>
-		 <%
-		String rq = StringUtils.nullToStr(sfd.getJx_date()) ;
-		if(rq.equals("")){
-			rq = DateComFunc.getToday();
-		}
-		%>
+		
 		<td class="a1" width="15%">商品序列号</td>
-		<td class="a2" colspan="4">
-		<input type="text" id="s_nums" name="sfd.qz_serial_num" value="" onkeypress="javascript:f_enter()"></td>
-		<!-- <td class="a1" width="15%">接待日期</td>
 		<td class="a2" width="35%">
-		 <input type="text" name="sfd.jx_date" id="jx_date" value="<%=rq%>" size="15"  class="Wdate" onFocus="WdatePicker()" >		
-		<font color="red">*</font>
-		</td>	 -->			
+		<input type="text" id="s_nums" name="sfd.qz_serial_num" value="" size="45" onkeypress="javascript:f_enter()"></td>
+					
 	</tr>
 	<tr>			
 		<td class="a1" width="15%">客户名称</td>
 		<td class="a2" width="35%">
-		<input type="text" name="sfd.client_name"   id="client_name"  value="" size="35" maxlength="50" >		
+		<input type="text" name="sfd.client_name"   id="client_name"  value="" size="44" maxlength="50" >		
 		<font color="red">*</font>
 		</td>		
 		<td class="a1" width="15%">联系人</td>
 		<td class="a2" width="35%" >
-			<input type="text" name="sfd.linkman"   id="linkman"  value="" size="35" maxlength="50" >
+			<input type="text" name="sfd.linkman"   id="linkman"  value="" size="45" maxlength="50" >
 		</td>	
 	</tr>
 	<tr>			
 		<td class="a1" width="15%">联系电话</td>
 		<td class="a2" width="35%">
-			<input type="text" name="sfd.mobile" id="mobile" value="" size="35"></input>
+			<input type="text" name="sfd.mobile" id="mobile" value="" size="45"></input>
 		</td>	
 		<td class="a1" width="15%">地址</td>
 		<td class="a2" width="35%">
@@ -317,7 +308,7 @@ String[] bxyy = (String[])VS.findValue("bxyy");
 	<tr>
 		<td class="a1" width="15%">商品信息</td>
 		<td class="a2" colspan="3">
-			<textarea rows="6" name="sfd.ms" id="ms" style="width:75%" maxlength="500"></textarea>	
+			<textarea rows="6" name="sfd.ms" id="ms" style="width:92%" ></textarea>	
 		</td>
 	</tr>
 	<tr>
@@ -340,18 +331,18 @@ String[] bxyy = (String[])VS.findValue("bxyy");
 	<tr>	
 		<td class="a1" width="15%" id="bxyy_ms1" style="display:none">报修原因说明</td>
 		<td class="a2" id="bxyy_ms2" style="display:none" colspan="3">
-		<textarea rows="6" name="sfd.bxyy_ms" id="bxyy_ms" style="width:75%" maxlength="500"><%=StringUtils.nullToStr(sfd.getBxyy_ms()) %></textarea>
+		<textarea rows="6" name="sfd.bxyy_ms" id="bxyy_ms" style="width:92%" ><%=StringUtils.nullToStr(sfd.getBxyy_ms()) %></textarea>
    </tr>	
 	<tr>
 		<td class="a1" width="15%">经手人</td>
 		<td class="a2">
-		   <input  id="brand"  type="text"   length="20"  onblur="setValue()" value=""/> <font color="red">*</font>
+		   <input  id="brand"  type="text" size="43"  length="20"  onblur="setValue()" value=""/> <font color="red">*</font>
            <div  id="brandTip"  style="height:12px;position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		   <input type="hidden" name="sfd.jxr" id="fzr" value=""/> 		    
 		</td>	
 	    <td class="a1" width="15%">客户报修方式</td>
 		<td class="a2">
-			<select name="sfd.qzfs" id="qzfs">
+			<select name="sfd.qzfs" id="qzfs" style="width:76%">
 			    <option value=""></option>
 				<option value="电话" >电话</option>
 				<option value="带机" >带机</option>

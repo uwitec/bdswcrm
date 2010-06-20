@@ -421,16 +421,12 @@ var allCount = 2;
 	<tr>
 		<td class="a1" width="15%">编号</td>
 		<td class="a2" width="35%">
-		<input type="text" name="sfd.id" id="id" value="<%=StringUtils.nullToStr(sfd.getId())%>"  maxlength="50" readonly><font color="red">*</font>
+		<input type="text" name="sfd.id" id="id" value="<%=StringUtils.nullToStr(sfd.getId())%>"   size="45"  readonly>
 		</td>
 		<td class="a1" width="15%">商品序列号</td>
-		<td class="a2" colspan="4">
-		<input type="text" id="s_nums" name="sfd.qz_serial_num" value="<%=StringUtils.nullToStr(sfd.getQz_serial_num())%>" onkeypress="javascript:f_enter()"></td>
-		<!-- <td class="a1" width="15%">接待日期</td>
 		<td class="a2" width="35%">
-		 <input type="text" name="sfd.jx_date" id="jx_date" value="<%=StringUtils.nullToStr(sfd.getJx_date()) %>" size="15"  class="Wdate" onFocus="WdatePicker()">
-		 <font color="red">*</font>
-		</td> -->				
+		<input type="text" id="s_nums" name="sfd.qz_serial_num" value="<%=StringUtils.nullToStr(sfd.getQz_serial_num())%>" size="45" onkeypress="javascript:f_enter()"></td>
+					
 	</tr>
 	<%
 	  if(StringUtils.nullToStr(sfd.getKhlx()).equals("往来单位"))
@@ -438,14 +434,14 @@ var allCount = 2;
 	 %>
 	<tr>
 	    <td class="a1" width="15%">客户名称</td>
-		<td class="a2" width="35%"><input type="text" name="sfd.client_id"   id="client_name" onblur="setClientRegInfo();" value="<%=StringUtils.nullToStr(StaticParamDo.getClientNameById(sfd.getClient_name())) %>" size="35" maxlength="50" >
+		<td class="a2" width="35%"><input type="text" name="sfd.client_id"   id="client_name" onblur="setClientRegInfo();" value="<%=StringUtils.nullToStr(StaticParamDo.getClientNameById(sfd.getClient_name())) %>" size="45" maxlength="50" >
 		<input type="hidden" name="sfd.client_name" id="client_id" value="<%=StringUtils.nullToStr(sfd.getClient_name())%>" ><div id="clientsTip" style="height:12px;position:absolute;width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		<font color="red">*</font>
 		</td>			
 		
 		<td class="a1" width="15%">联系人</td>
 		<td class="a2" width="35%" >
-			<select name="sfd.linkman" id="linkman" onchange="chgLxr(this.value);" style="width:256px" >
+			<select name="sfd.linkman" id="linkman" onchange="chgLxr(this.value);" style="width:76%">
 				<%
 				if(!StringUtils.nullToStr(sfd.getLinkman()).equals("")){
 				%>
@@ -464,13 +460,13 @@ var allCount = 2;
 	<tr>
 	    <td class="a1" width="15%">客户名称</td>
 		<td class="a2" width="35%">
-		<input type="text" name="sfd.client_name"   id="client_name"  value="<%=StringUtils.nullToStr(sfd.getClient_name()) %>" size="35" maxlength="50" >
+		<input type="text" name="sfd.client_name"   id="client_name"  value="<%=StringUtils.nullToStr(sfd.getClient_name()) %>" size="45" maxlength="50" >
 		<font color="red">*</font>
 		</td>			
 		
 		<td class="a1" width="15%">联系人</td>
 		<td class="a2" width="35%" >
-		<input type="text" name="sfd.linkman"   id="linkman"  value="<%=StringUtils.nullToStr(sfd.getLinkman()) %>" size="35" maxlength="50" >
+		<input type="text" name="sfd.linkman"   id="linkman"  value="<%=StringUtils.nullToStr(sfd.getLinkman()) %>" size="45" maxlength="50" >
 		</td>	
 	</tr>
 	<% 
@@ -479,7 +475,7 @@ var allCount = 2;
 	<tr>			
 		<td class="a1" width="15%">联系电话</td>
 		<td class="a2" width="35%">
-			<input type="text" name="sfd.mobile" id="mobile" value="<%=StringUtils.nullToStr(sfd.getMobile()) %>" size="35"></input>
+			<input type="text" name="sfd.mobile" id="mobile" value="<%=StringUtils.nullToStr(sfd.getMobile()) %>" size="45"></input>
 		</td>	
 		<td class="a1" width="15%">地址</td>
 		<td class="a2" width="35%">
@@ -489,13 +485,13 @@ var allCount = 2;
 	<tr>
 		<td class="a1" width="15%">商品信息</td>
 		<td class="a2" colspan="3">
-			<textarea rows="6" name="sfd.ms" id="ms" style="width:75%" maxlength="500" ><%=StringUtils.nullToStr(sfd.getMs())%></textarea><span style="color:red">*</span>
+			<textarea rows="6" name="sfd.ms" id="ms" style="width:92%" maxlength="500" ><%=StringUtils.nullToStr(sfd.getMs())%></textarea><span style="color:red">*</span>
 		</td>
 	</tr>	
 	<tr>
 		<td class="a1" width="15%">报修原因</td>
 		<td class="a2" colspan="3">
-			<select name="sfd.bxyy" id="bxyy"  onchange="chgBxyy(this.value);" style="width:76%">
+			<select name="sfd.bxyy" id="bxyy"  onchange="chgBxyy(this.value);" style="width:80%">
 				<option value=""></option>
 				<%
 				String bxyy1 = StringUtils.nullToStr(sfd.getBxyy());
@@ -517,7 +513,7 @@ var allCount = 2;
 	<tr>	
 		<td class="a1" width="15%" id="bxyy_ms1" style="display:none">报修原因说明</td>
 		<td class="a2" id="bxyy_ms2" style="display:none" colspan="3">
-		<textarea rows="6" name="sfd.bxyy_ms" id="bxyy_ms" style="width:75%" maxlength="500"><%=StringUtils.nullToStr(sfd.getBxyy_ms()) %></textarea>
+		<textarea rows="6" name="sfd.bxyy_ms" id="bxyy_ms" style="width:92%"><%=StringUtils.nullToStr(sfd.getBxyy_ms()) %></textarea>
    </tr>
    <% 
    }
@@ -527,7 +523,7 @@ var allCount = 2;
    <tr>	
 		<td class="a1" width="15%" id="bxyy_ms1">报修原因说明</td>
 		<td class="a2" id="bxyy_ms2" colspan="3">
-		<textarea rows="6" name="sfd.bxyy_ms" id="bxyy_ms" style="width:75%" maxlength="500"><%=StringUtils.nullToStr(sfd.getBxyy_ms()) %></textarea>
+		<textarea rows="6" name="sfd.bxyy_ms" id="bxyy_ms" style="width:92%"><%=StringUtils.nullToStr(sfd.getBxyy_ms()) %></textarea>
    </tr>
    <% 
    }
@@ -536,13 +532,13 @@ var allCount = 2;
 	<tr>
 		<td class="a1" width="15%">经手人</td>
 		<td class="a2">
-		   <input  id="brand"  type="text"   length="20"  onblur="setValue()" value="<%=StringUtils.nullToStr(StaticParamDo.getRealNameById(sfd.getJxr())) %>"/> <font color="red">*</font>
+		   <input  id="brand"  type="text"  size="43" length="20"  onblur="setValue()" value="<%=StringUtils.nullToStr(StaticParamDo.getRealNameById(sfd.getJxr())) %>"/> <font color="red">*</font>
            <div  id="brandTip"  style="height:12px;position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		   <input type="hidden" name="sfd.jxr" id="fzr" value="<%=StringUtils.nullToStr(sfd.getJxr())%>"/> 		      
 		</td>	
 	    <td class="a1" width="15%">客户报修方式</td>
 		<td class="a2">
-			<select name="sfd.qzfs" id="qzfs">
+			<select name="sfd.qzfs" id="qzfs"  style="width:76%">
 			    <option value=""></option>
 				<option value="电话" <%if(StringUtils.nullToStr(sfd.getQzfs()).equals("电话"))out.print("selected"); %>>电话</option>
 				<option value="带机" <%if(StringUtils.nullToStr(sfd.getQzfs()).equals("带机"))out.print("selected"); %>>带机</option>
