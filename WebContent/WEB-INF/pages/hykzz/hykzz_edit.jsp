@@ -66,13 +66,13 @@ List hykflList = (List)VS.findValue("hykflList");
 	</thead>
 	<tr>
 		<td class="a1" width="15%">制卡单位</td>
-		<td class="a2" colspan="3">
+		<td class="a2" width="85%">
 		   <input type="text" name="hykzz.dept" id="dept" value="<%=StringUtils.nullToStr(hykzz.getDept()) %>" size="45"><font color="red">*</font>
 		</td>
 	</tr>
 	<tr>
 		<td class="a1"  width="15%">卡类型</td>
-	    <td class="a2" colspan="3">
+	    <td class="a2" width="85%"  style="width:80%">
 	        <input type="radio"  name="hykzz.card_type" value="条码卡" <%if(StringUtils.nullToStr(hykzz.getCard_type()).equals("条码卡")) out.print("checked"); %>>条码卡
 	        <input type="radio"  name="hykzz.card_type" value="磁卡" <%if(StringUtils.nullToStr(hykzz.getCard_type()).equals("磁卡")) out.print("checked"); %>>磁卡
 	        <input type="radio"  name="hykzz.card_type" value="IC卡" <%if(StringUtils.nullToStr(hykzz.getCard_type()).equals("IC卡")) out.print("checked"); %>>IC卡
@@ -81,8 +81,8 @@ List hykflList = (List)VS.findValue("hykflList");
 	</tr>
 	<tr>
 		<td class="a1" width="15%">所属分类</td>
-		<td class="a2" colspan="3">
-		  <select name="hykzz.ssfl" id="ssfl" style="width:256px">
+		<td class="a2" width="85%">
+		  <select name="hykzz.ssfl" id="ssfl" style="width:80%">
 				<option value=""></option>
 				<%
 				if(hykflList != null && hykflList.size()>0){
@@ -100,33 +100,33 @@ List hykflList = (List)VS.findValue("hykflList");
 	
 	<tr>
 		<td class="a1" width="15%">会员卡号</td>
-		<td class="a2" colspan="3">
-		   <input type="text" name="hykzz.hykh" id="hykh" value="<%=StringUtils.nullToStr(hykzz.getHykh())%>" size="40" maxlength="50"><font color="red">*</font>
+		<td class="a2" width="85%">
+		   <input type="text" name="hykzz.hykh" id="hykh" value="<%=StringUtils.nullToStr(hykzz.getHykh())%>" size="45" maxlength="50"><font color="red">*</font>
 		</td>
 	</tr>
 	 
 	<tr>
 		<td class="a1" width="15%">有效日期</td>
-		<td class="a2" colspan="3">
-		   <input type="text" name="hykzz.yxrq" id="yxrq" value="<%=StringUtils.nullToStr(hykzz.getYxrq()) %>"  class="Wdate" onFocus="WdatePicker()" size="25"><font color="red">*</font>
+		<td class="a2" width="85%">
+		   <input type="text" name="hykzz.yxrq" id="yxrq" value="<%=StringUtils.nullToStr(hykzz.getYxrq()) %>"  class="Wdate" onFocus="WdatePicker()" size="45"><font color="red">*</font>
 		</td>
 	</tr>
 	<tr>
 		<td class="a1"  width="15%">失效日期</td>
-	    <td class="a2" colspan="3">
-	       <input type="text" name="hykzz.sxrq" id="sxrq" value="<%=StringUtils.nullToStr(hykzz.getSxrq()) %>"  class="Wdate" onFocus="WdatePicker()" size="25"><font color="red">*</font>
+	    <td class="a2" width="85%">
+	       <input type="text" name="hykzz.sxrq" id="sxrq" value="<%=StringUtils.nullToStr(hykzz.getSxrq()) %>"  class="Wdate" onFocus="WdatePicker()" size="45"><font color="red">*</font>
         </td>
 	</tr>
 	<tr>
 		<td class="a1" width="15%">初始积分</td>
-		<td class="a2" colspan="3">
-		   <input type="text" name="hykzz.csjf" id="csjf" value="<%=StringUtils.nullToStr(hykzz.getCsjf()) %>"  size="25">
+		<td class="a2" width="85%">
+		   <input type="text" name="hykzz.csjf" id="csjf" value="<%=StringUtils.nullToStr(hykzz.getCsjf()) %>"  size="45">
 		</td>
 	</tr>
 	<tr>
 		<td class="a1"  width="15%">初始密码</td>
-	    <td class="a2" colspan="3">
-	       <input type="text" name="hykzz.csmm" id="csmm" value="<%=StringUtils.nullToStr(hykzz.getCsmm()) %>"  size="25">
+	    <td class="a2" width="85%">
+	       <input type="text" name="hykzz.csmm" id="csmm" value="<%=StringUtils.nullToStr(hykzz.getCsmm()) %>"  size="45">
         </td>
 	</tr>
 	<tr height="35">

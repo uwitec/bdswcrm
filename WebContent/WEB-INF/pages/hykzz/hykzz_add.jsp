@@ -83,13 +83,13 @@ List hykflList = (List)VS.findValue("hykflList");
 	</thead>
 	<tr>
 		<td class="a1" width="15%">制卡单位</td>
-		<td class="a2" colspan="3">
+		<td class="a2" width="85%">
 		   <input type="text" name="hykzz.dept" id="dept" value="" size="45"><font color="red">*</font>
 		</td>
 	</tr>
 	<tr>
 		<td class="a1"  width="15%">卡类型</td>
-	    <td class="a2" colspan="3">
+	    <td class="a2" width="85%" style="width:80%">
 	        <input type="radio"  name="hykzz.card_type" value="条码卡" checked="checked">条码卡
 	        <input type="radio"  name="hykzz.card_type" value="磁卡" >磁卡
 	        <input type="radio"  name="hykzz.card_type" value="IC卡" >IC卡
@@ -98,8 +98,8 @@ List hykflList = (List)VS.findValue("hykflList");
 	</tr>
 	<tr>
 		<td class="a1" width="15%">所属分类</td>
-		<td class="a2" colspan="3">
-		  <select name="hykzz.ssfl" id="ssfl" style="width:256px">
+		<td class="a2" width="85%" >
+		  <select name="hykzz.ssfl" id="ssfl" style="width:80%">
 				<option value=""></option>
 				<%
 				if(hykflList != null && hykflList.size()>0){
@@ -116,8 +116,8 @@ List hykflList = (List)VS.findValue("hykflList");
 	</tr>
 	<tr>
 		<td class="a1"  width="15%">制作方式</td>
-	    <td class="a2">
-        <select name="zzfs" id="zzfs" onchange="chgZzTyle(this.value);" style="width:232px" colspan="3">
+	    <td class="a2" width="85%">
+        <select name="zzfs" id="zzfs" onchange="chgZzTyle(this.value);" style="width:80%" colspan="3">
 			<option value="单个增加" >单个增加</option>
 			<option value="批量增加" >批量增加</option>	
 		</select>
@@ -125,38 +125,38 @@ List hykflList = (List)VS.findValue("hykflList");
 	</tr>
 	<tr>
 		<td class="a1" width="15%">会员卡号</td>
-		<td class="a2" colspan="3">
-		   <input type="text" name="hykzz.hykh" id="hykh" value="" size="40" maxlength="50"><font color="red">*</font>
+		<td class="a2" width="85%">
+		   <input type="text" name="hykzz.hykh" id="hykh" value="" size="45" maxlength="50"><font color="red">*</font>
 		</td>
 	</tr>
 	<tr>	
 		<td class="a1" width="15%" id="sl1" style="display:none">数量</td>
-		<td class="a2" id="sl2"  colspan="3" style="display:none">
-		   <input type="text" name="num" id="num" value="1" maxlength="30" size="20">
+		<td class="a2" id="sl2"  width="85%" style="display:none">
+		   <input type="text" name="num" id="num" value="1" maxlength="30" size="45">
 		</td>		
 	</tr>
 	<tr>
 		<td class="a1" width="15%">有效日期</td>
-		<td class="a2" colspan="3">
-		   <input type="text" name="hykzz.yxrq" id="yxrq" value="<%=DateComFunc.getToday() %>"  class="Wdate" onFocus="WdatePicker()" size="25"><font color="red">*</font>
+		<td class="a2" width="85%">
+		   <input type="text" name="hykzz.yxrq" id="yxrq" value="<%=DateComFunc.getToday() %>"  class="Wdate" onFocus="WdatePicker()" size="45"><font color="red">*</font>
 		</td>
 	</tr>
 	<tr>
 		<td class="a1"  width="15%">失效日期</td>
-	    <td class="a2" colspan="3">
-	       <input type="text" name="hykzz.sxrq" id="sxrq" value="<%=DateComFunc.getToday() %>"  class="Wdate" onFocus="WdatePicker()" size="25"><font color="red">*</font>
+	    <td class="a2" width="85%">
+	       <input type="text" name="hykzz.sxrq" id="sxrq" value="<%=DateComFunc.getToday() %>"  class="Wdate" onFocus="WdatePicker()" size="45"><font color="red">*</font>
         </td>
 	</tr>
 	<tr>
 		<td class="a1" width="15%">初始积分</td>
-		<td class="a2" colspan="3">
-		   <input type="text" name="hykzz.csjf" id="csjf" value="0"  size="25">
+		<td class="a2" width="85%">
+		   <input type="text" name="hykzz.csjf" id="csjf" value="0"  size="45">
 		</td>
 	</tr>
 	<tr>
 		<td class="a1"  width="15%">初始密码</td>
-	    <td class="a2" colspan="3">
-	       <input type="text" name="hykzz.csmm" id="csmm" value=""  size="25">
+	    <td class="a2" width="85%">
+	       <input type="text" name="hykzz.csmm" id="csmm" value=""  size="45">
         </td>
 	</tr>
 </table>
