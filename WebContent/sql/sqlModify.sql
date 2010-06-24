@@ -815,16 +815,6 @@ INSERT INTO `funcs`(`func_id`,`func_name`,`func_ms`,`url`,`img`,`xh`,`ywflag`,`f
 INSERT INTO `column_funcs` VALUES ('011002','FC0107');
 
 
-INSERT INTO `funcs`(`func_id`,`func_name`,`func_ms`,`url`,`img`,`xh`,`ywflag`,`funcflag`)  values
-('FC0111','兑奖货品设置','兑奖货品设置','listDjhpsz.html','176.gif',2,'1','10');
-
-INSERT INTO `column_funcs` VALUES ('011002','FC0111');
-
-INSERT INTO `funcs`(`func_id`,`func_name`,`func_ms`,`url`,`img`,`xh`,`ywflag`,`funcflag`)  values
-('FC0112','积分查询兑奖','积分查询兑奖','listJfcxdj.html','180.gif',3,'1','10');
-
-INSERT INTO `column_funcs` VALUES ('011002','FC0112');
-
 --增加积分规则设置表
 DROP TABLE IF EXISTS `jfgz`;
 CREATE TABLE `jfgz` (
@@ -916,3 +906,15 @@ ALTER TABLE `cms_all_seq` ADD COLUMN `hykdaid` INTEGER UNSIGNED DEFAULT 1 AFTER 
 2010-06-17增加
 --售后服务单添加khlx字段，保存客户类型的信息
 ALTER TABLE `sfd` ADD COLUMN `khlx` VARCHAR(10) NOT NULL DEFAULT 0 AFTER `bxyy_ms`;
+
+
+--暂时不更新
+INSERT INTO `funcs`(`func_id`,`func_name`,`func_ms`,`url`,`img`,`xh`,`ywflag`,`funcflag`)  values
+('FC0111','兑奖货品设置','兑奖货品设置','listDjhpsz.html','176.gif',2,'1','10');
+
+INSERT INTO `column_funcs` VALUES ('011002','FC0111');
+
+INSERT INTO `funcs`(`func_id`,`func_name`,`func_ms`,`url`,`img`,`xh`,`ywflag`,`funcflag`)  values
+('FC0112','积分查询兑奖','积分查询兑奖','listJfcxdj.html','180.gif',3,'1','10');
+
+INSERT INTO `column_funcs` VALUES ('011002','FC0112');
