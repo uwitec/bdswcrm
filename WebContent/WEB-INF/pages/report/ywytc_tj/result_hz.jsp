@@ -100,7 +100,7 @@ if(results != null && results.size()>0){
 			if(blds < 0) blds = 0;
 		}
 		
-		//如果商品不参与提成
+		//如果商品不参与提成，基本提成各，超限提成记0
 		if(sfcytc.equals("0")){
 			jbtc = 0;
 			cxjl = 0;
