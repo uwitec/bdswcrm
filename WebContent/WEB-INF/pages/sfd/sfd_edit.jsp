@@ -421,12 +421,11 @@ var allCount = 2;
 	<tr>
 		<td class="a1" width="15%">编号</td>
 		<td class="a2" width="35%">
-		<input type="text" name="sfd.id" id="id" value="<%=StringUtils.nullToStr(sfd.getId())%>"   size="45"  readonly>
+		<input type="text" name="sfd.id" id="id" value="<%=StringUtils.nullToStr(sfd.getId())%>" style="width:230px" readonly>
 		</td>
 		<td class="a1" width="15%">商品序列号</td>
 		<td class="a2" width="35%">
 		<input type="text" id="s_nums" name="sfd.qz_serial_num" value="<%=StringUtils.nullToStr(sfd.getQz_serial_num())%>" size="45" onkeypress="javascript:f_enter()"></td>
-					
 	</tr>
 	<%
 	  if(StringUtils.nullToStr(sfd.getKhlx()).equals("往来单位"))
@@ -434,14 +433,14 @@ var allCount = 2;
 	 %>
 	<tr>
 	    <td class="a1" width="15%">客户名称</td>
-		<td class="a2" width="35%"><input type="text" name="sfd.client_id"   id="client_name" onblur="setClientRegInfo();" value="<%=StringUtils.nullToStr(StaticParamDo.getClientNameById(sfd.getClient_name())) %>" size="45" maxlength="50" >
+		<td class="a2" width="35%"><input type="text" name="sfd.client_id"   id="client_name" onblur="setClientRegInfo();" value="<%=StringUtils.nullToStr(StaticParamDo.getClientNameById(sfd.getClient_name())) %>" style="width:230px" maxlength="50" >
 		<input type="hidden" name="sfd.client_name" id="client_id" value="<%=StringUtils.nullToStr(sfd.getClient_name())%>" ><div id="clientsTip" style="height:12px;position:absolute;width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		<font color="red">*</font>
 		</td>			
 		
 		<td class="a1" width="15%">联系人</td>
 		<td class="a2" width="35%" >
-			<select name="sfd.linkman" id="linkman" onchange="chgLxr(this.value);" style="width:76%">
+			<select name="sfd.linkman" id="linkman" onchange="chgLxr(this.value);" style="width:230px">
 				<%
 				if(!StringUtils.nullToStr(sfd.getLinkman()).equals("")){
 				%>
@@ -460,13 +459,13 @@ var allCount = 2;
 	<tr>
 	    <td class="a1" width="15%">客户名称</td>
 		<td class="a2" width="35%">
-		<input type="text" name="sfd.client_name"   id="client_name"  value="<%=StringUtils.nullToStr(sfd.getClient_name()) %>" size="45" maxlength="50" >
+		<input type="text" name="sfd.client_name"   id="client_name"  value="<%=StringUtils.nullToStr(sfd.getClient_name()) %>" style="width:230px" maxlength="50" >
 		<font color="red">*</font>
 		</td>			
 		
 		<td class="a1" width="15%">联系人</td>
 		<td class="a2" width="35%" >
-		<input type="text" name="sfd.linkman"   id="linkman"  value="<%=StringUtils.nullToStr(sfd.getLinkman()) %>" size="45" maxlength="50" >
+		<input type="text" name="sfd.linkman"   id="linkman"  value="<%=StringUtils.nullToStr(sfd.getLinkman()) %>" style="width:230px" maxlength="50" >
 		</td>	
 	</tr>
 	<% 
@@ -475,23 +474,23 @@ var allCount = 2;
 	<tr>			
 		<td class="a1" width="15%">联系电话</td>
 		<td class="a2" width="35%">
-			<input type="text" name="sfd.mobile" id="mobile" value="<%=StringUtils.nullToStr(sfd.getMobile()) %>" size="45"></input>
+			<input type="text" name="sfd.mobile" id="mobile" value="<%=StringUtils.nullToStr(sfd.getMobile()) %>" style="width:230px"></input>
 		</td>	
 		<td class="a1" width="15%">地址</td>
 		<td class="a2" width="35%">
-		    <input id="address" name="sfd.address" type="text" size="45" maxlength="100" value="<%=StringUtils.nullToStr(sfd.getAddress()) %>" />            
+		    <input id="address" name="sfd.address" type="text" style="width:230px" maxlength="100" value="<%=StringUtils.nullToStr(sfd.getAddress()) %>" />            
 		</td>
 	</tr>
 	<tr>
 		<td class="a1" width="15%">商品信息</td>
 		<td class="a2" colspan="3">
-			<textarea rows="6" name="sfd.ms" id="ms" style="width:92%" maxlength="500" ><%=StringUtils.nullToStr(sfd.getMs())%></textarea><span style="color:red">*</span>
+			<textarea rows="4" name="sfd.ms" id="ms" style="width:500px" maxlength="500" ><%=StringUtils.nullToStr(sfd.getMs())%></textarea><span style="color:red">*</span>
 		</td>
 	</tr>	
 	<tr>
 		<td class="a1" width="15%">报修原因</td>
 		<td class="a2" colspan="3">
-			<select name="sfd.bxyy" id="bxyy"  onchange="chgBxyy(this.value);" style="width:80%">
+			<select name="sfd.bxyy" id="bxyy" onchange="chgBxyy(this.value);" style="width:500px">
 				<option value=""></option>
 				<%
 				String bxyy1 = StringUtils.nullToStr(sfd.getBxyy());
@@ -513,7 +512,7 @@ var allCount = 2;
 	<tr>	
 		<td class="a1" width="15%" id="bxyy_ms1" style="display:none">报修原因说明</td>
 		<td class="a2" id="bxyy_ms2" style="display:none" colspan="3">
-		<textarea rows="6" name="sfd.bxyy_ms" id="bxyy_ms" style="width:92%"><%=StringUtils.nullToStr(sfd.getBxyy_ms()) %></textarea>
+		<textarea rows="4" name="sfd.bxyy_ms" id="bxyy_ms" style="width:500px"><%=StringUtils.nullToStr(sfd.getBxyy_ms()) %></textarea>
    </tr>
    <% 
    }
@@ -523,7 +522,7 @@ var allCount = 2;
    <tr>	
 		<td class="a1" width="15%" id="bxyy_ms1">报修原因说明</td>
 		<td class="a2" id="bxyy_ms2" colspan="3">
-		<textarea rows="6" name="sfd.bxyy_ms" id="bxyy_ms" style="width:92%"><%=StringUtils.nullToStr(sfd.getBxyy_ms()) %></textarea>
+		<textarea rows="4" name="sfd.bxyy_ms" id="bxyy_ms" style="width:500px"><%=StringUtils.nullToStr(sfd.getBxyy_ms()) %></textarea>
    </tr>
    <% 
    }
@@ -532,13 +531,13 @@ var allCount = 2;
 	<tr>
 		<td class="a1" width="15%">经手人</td>
 		<td class="a2">
-		   <input  id="brand"  type="text"  size="43" length="20"  onblur="setValue()" value="<%=StringUtils.nullToStr(StaticParamDo.getRealNameById(sfd.getJxr())) %>"/> <font color="red">*</font>
+		   <input  id="brand"  type="text" style="width:230px" length="20"  onblur="setValue()" value="<%=StringUtils.nullToStr(StaticParamDo.getRealNameById(sfd.getJxr())) %>"/> <font color="red">*</font>
            <div  id="brandTip"  style="height:12px;position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		   <input type="hidden" name="sfd.jxr" id="fzr" value="<%=StringUtils.nullToStr(sfd.getJxr())%>"/> 		      
 		</td>	
 	    <td class="a1" width="15%">客户报修方式</td>
 		<td class="a2">
-			<select name="sfd.qzfs" id="qzfs"  style="width:76%">
+			<select name="sfd.qzfs" id="qzfs" style="width:230px">
 			    <option value=""></option>
 				<option value="电话" <%if(StringUtils.nullToStr(sfd.getQzfs()).equals("电话"))out.print("selected"); %>>电话</option>
 				<option value="带机" <%if(StringUtils.nullToStr(sfd.getQzfs()).equals("带机"))out.print("selected"); %>>带机</option>
@@ -547,11 +546,7 @@ var allCount = 2;
 		</td>
 	</tr>			
 	<tr height="35">
-		<td class="a1" colspan="4" >
-		    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="button" name="btnSave" value="保 存" class="css_button2" onclick="saveInfo('1');">&nbsp;&nbsp;&nbsp;&nbsp;	
-		</td>
+		<td class="a1" colspan="4" ><input type="button" name="btnSave" value="保 存" class="css_button2" onclick="saveInfo('1');"></td>
 	</tr>
 </table>
 <BR>
@@ -565,11 +560,9 @@ var allCount = 2;
 	</thead> 
 	<tr height="35">
 		<td class="a1" colspan="4" width="100%">&nbsp;
-			<input type="button" name="btnConsult" value="咨 询" class="css_button3" onclick="setFlow('1','<%=StringUtils.nullToStr(sfd.getId())%>');">
-			<!--  <input type="button" name="btnComplain" value="投 诉" class="css_button3" onclick="setFlow('2','<%=StringUtils.nullToStr(sfd.getId())%>');">-->
-			<input type="button" name="btnRepair" value="维 修" class="css_button3" onclick="setFlow('3','<%=StringUtils.nullToStr(sfd.getId())%>');">
-		    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	        <input type="reset" name="button2" value="关 闭" class="css_button3" onclick="window.opener.document.myform.submit();window.close();">
+			<input type="button" name="btnConsult" value="咨 询" class="css_button2" onclick="setFlow('1','<%=StringUtils.nullToStr(sfd.getId())%>');">&nbsp;&nbsp;
+			<input type="button" name="btnRepair" value="维 修" class="css_button2" onclick="setFlow('3','<%=StringUtils.nullToStr(sfd.getId())%>');">&nbsp;&nbsp;
+	        <input type="reset" name="button2" value="关 闭" class="css_button2" onclick="window.opener.document.myform.submit();window.close();">
 		</td>
 	</tr>
 </table>

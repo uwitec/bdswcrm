@@ -167,12 +167,10 @@ Map zxgd=(Map)VS.findValue("zxgd");
 	<tr>
 	 <td class="a1" width="15%">内容描述</td>
 	 <td class="a2" width="85%" colspan="3">
-			<textarea rows="2"  id="ms" style="width:75%" readonly> <%=StringUtils.nullToStr(zxgd.get("ms")) %> </textarea>
+			<textarea rows="4"  id="ms" style="width:75%" readonly> <%=StringUtils.nullToStr(zxgd.get("ms")) %> </textarea>
 	</td> 
 	</tr>			
 </table> 
- <br> 
-
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
 	<tr height="35">
 		<td class="a1" colspan="4">

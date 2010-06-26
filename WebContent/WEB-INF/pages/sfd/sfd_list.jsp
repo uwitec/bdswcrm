@@ -47,18 +47,17 @@ String orderType = (String)VS.findValue("orderType");
 		document.myform.jx_date1.value = "";
 		document.myform.jx_date2.value = "";
 		document.myform.wx_state.value = "待处理";
-		document.myform.state.value = "";
 		document.myform.jxr.value = "";
 	}
 	
 	function add(){
 		var destination = "addSfd.html";
-			var fea ='width=750,height=550,left=' + (screen.availWidth-750)/2 + ',top=' + (screen.availHeight-500)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+			var fea ='width=780,height=550,left=' + (screen.availWidth-780)/2 + ',top=' + (screen.availHeight-550)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		window.open(destination,'售后服务单',fea);	
 	}	
 	function edit(id){
 		var destination ="editSfd.html?id="+id;
-		var fea ='width=750,height=550,left=' + (screen.availWidth-750)/2 + ',top=' + (screen.availHeight-500)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		var fea ='width=780,height=550,left=' + (screen.availWidth-780)/2 + ',top=' + (screen.availHeight-550)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		window.open(destination,'售后服务单',fea);		
 	}	
 	

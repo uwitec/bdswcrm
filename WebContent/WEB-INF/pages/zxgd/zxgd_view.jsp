@@ -81,7 +81,6 @@ Map zxgd=(Map)VS.findValue("zxgd");
 	 <td class="a2" width="85%" colspan="3"><%=StringUtils.nullToStr(zxgd.get("ms")) %></td> 
 	</tr>			
 </table> 
- <br> 
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
 	<tr height="35">
 		<td class="a1" colspan="4">

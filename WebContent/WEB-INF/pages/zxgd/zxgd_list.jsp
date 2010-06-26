@@ -30,7 +30,7 @@ String orderType = (String)VS.findValue("orderType");
 	
 	function openWin(id){
 		var destination = "viewZxgd.html?id="+id;
-		var fea ='width=750,height=530,left=' + (screen.availWidth-950)/2 + ',top=' + (screen.availHeight-750)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		var fea ='width=750,height=550,left=' + (screen.availWidth-750)/2 + ',top=' + (screen.availHeight-550)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
 		window.open(destination,'详细信息',fea);	
 	}
@@ -51,7 +51,7 @@ String orderType = (String)VS.findValue("orderType");
 		
 	function edit(id){
 		var destination ="editZxgd.html?id="+id;
-		var fea ='width=750,height=530,left=' + (screen.availWidth-950)/2 + ',top=' + (screen.availHeight-750)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		var fea ='width=750,height=550,left=' + (screen.availWidth-750)/2 + ',top=' + (screen.availHeight-550)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
 		window.open(destination,'详细信息',fea);			
 	}	
@@ -136,7 +136,7 @@ String orderType = (String)VS.findValue("orderType");
 	while(it.hasNext()){
 		Map zxgd = (Map)it.next();		
 	%>
-	<tr class="a1" title="双击查看详情"  onmousedown="trSelectChangeCss()"  onDblClick="openWin('<%=StringUtils.nullToStr(zxgd.get("id"))%>')">
+	<tr class="a1" title="双击查看详情"  onmousedown="trSelectChangeCss()"  onDblClick="openWin('<%=StringUtils.nullToStr(zxgd.get("sfd_id"))%>')">
 		<td><%=StringUtils.nullToStr(zxgd.get("id")) %></td>
 		<td><%=StringUtils.nullToStr(StaticParamDo.getClientNameById((String)zxgd.get("client_name"))) %></td>
 		<td><%=StringUtils.nullToStr(zxgd.get("linkman")) %></td>
