@@ -357,7 +357,7 @@ String[] bxyy = (String[])VS.findValue("bxyy");
 		var bxyy_ms1 = document.getElementById("bxyy_ms1");
 		var bxyy_ms2 = document.getElementById("bxyy_ms2");
 		
-		if(vD == "其他"){
+		if(vD == "其他" || vD == "其他原因"){
 			bxyy_ms1.style.display = "";
 			bxyy_ms2.style.display = "";
 				
