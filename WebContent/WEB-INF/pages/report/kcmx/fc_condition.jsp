@@ -70,11 +70,16 @@ List store_list = (List)VS.findValue("store_list");
 		</td>
 		<td class="a1">是否显示停售商品</td>
 		<td class="a4" >
-			<select name="state">
-				<option value="否">否</option>
-				<option value="是">是</option>
-			</select>
+			<input type="radio" name="state" value="否" checked="checked">否
+			<input type="radio" name="state" value="是">是
 		</td>				
+	</tr>
+	<tr>
+		<td class="a1">是否显示0库存商品</td>
+		<td class="a4" colspan="3">
+			<input type="radio" name="isZero" value="否" checked="checked">否
+			<input type="radio" name="isZero" value="是">是
+		</td>		
 	</tr>
 	<tr height="35">
 		<td class="a1" colspan="4" height="35">

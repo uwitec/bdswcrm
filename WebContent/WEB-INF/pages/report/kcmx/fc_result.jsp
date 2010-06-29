@@ -14,6 +14,7 @@ String product_kind = StringUtils.nullToStr(request.getParameter("product_kind")
 String product_name = StringUtils.nullToStr(request.getParameter("product_name"));
 String store_id = StringUtils.nullToStr(request.getParameter("store_id"));
 String state = StringUtils.nullToStr(request.getParameter("state"));
+String isZero = StringUtils.nullToStr(request.getParameter("isZero"));
 
 String conStr = "";
 if(!product_kind.equals("")){
@@ -78,14 +79,31 @@ if(!store_id.equals("")){
 	</THEAD>
 	<TBODY>
 <%
+int tempIndex = 1;
 if(productList != null && productList.size()>0){
 	for(int i=0;i<productList.size();i++){
 		Map map = (Map)productList.get(i);
 		
+		int tempTotal = 0;
+		if(store_list != null && store_list.size() > 0){
+			for(int k=0;k<store_list.size();k++){
+				Map storeMap = (Map)store_list.get(k);
+				
+				String num = StringUtils.nullToStr(fckcStatResult.get(StringUtils.nullToStr(map.get("product_id")) + StringUtils.nullToStr(storeMap.get("id"))));
+				if(num.equals("0")){
+					num = "";
+				}
+				if(!num.equals("")){
+					tempTotal += new Integer(num);
+				}
+			}
+		}
+		if(tempTotal == 0 && isZero.equals("否")) continue;
+		
 		int total = 0;
 %>
 		<TR>
-			<TD class=ReportItemXh><%=i+1 %>&nbsp;</TD>
+			<TD class=ReportItemXh><%=tempIndex %>&nbsp;</TD>
 			<TD class=ReportItemXh><%=StringUtils.nullToStr(map.get("product_id")) %></TD>
 			<TD class=ReportItem><%=StringUtils.nullToStr(map.get("product_name")) %>&nbsp;</TD>
 			<TD class=ReportItem><%=StringUtils.nullToStr(map.get("product_xh")) %>&nbsp;</TD>
@@ -111,6 +129,7 @@ if(productList != null && productList.size()>0){
 			
 		</TR>
 <%
+		tempIndex++;
 	}
 }
 %>

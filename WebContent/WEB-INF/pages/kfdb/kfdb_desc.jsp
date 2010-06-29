@@ -40,11 +40,10 @@ List results = (List)VS.findValue("kfdbProducts");
 <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0" border="1" id="selTable">
 	<thead>
 	<tr>
-		<td width="20%">商品名称</td>
-		<td width="15%">规格</td>
-		<td width="15%">数量</td>
+		<td width="30%">商品名称</td>
+		<td width="25%">规格</td>
+		<td width="10%">数量</td>
 		<td width="35%">序列号</td>
-		<td width="15%">备注</td>
 	</tr>
 	</thead>
 	<%
@@ -58,7 +57,6 @@ List results = (List)VS.findValue("kfdbProducts");
 		<td><%=StringUtils.nullToStr(kfdbProduct.get("product_xh")) %></td>
 		<td><%=StringUtils.nullToStr(kfdbProduct.get("nums")) %></td>
 		<td><%=StringUtils.nullToStr(kfdbProduct.get("qz_serial_num")) %></td>
-		<td><%=StringUtils.nullToStr(kfdbProduct.get("remark")) %></td>
 	</tr>
 	
 	<%

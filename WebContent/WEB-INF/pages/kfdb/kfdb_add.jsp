@@ -132,42 +132,60 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
     function addTr(){
         var otr = document.getElementById("kfdbTable").insertRow(-1);
 
-       // var curId = ($('xsdtable').rows.length-2);
         var curId = allCount + 1;   //curId一直加下去，防止重复
         allCount = allCount + 1;
+
+		var otd0 = document.createElement("td");
+		otd0.className = "a2";
+		otd0.innerHTML = '<input type="checkbox" name="proc_id" id="proc_id" value="' + curId + '">';
         
-        var otd0=document.createElement("td");
-        otd0.className = "a2";
-        otd0.innerHTML = '<input type="text" id="product_name_'+curId+'" name="kfdbProducts['+curId+'].product_name" readonly><input type="button" name="selectButton" value="选择" class="css_button" onclick="openWin('+curId+');"><input type="hidden" id="product_id_'+curId+'" name="kfdbProducts['+curId+'].product_id">';
-        
-        var otd1 = document.createElement("td");
+        var otd1=document.createElement("td");
         otd1.className = "a2";
-        otd1.innerHTML = '<input type="text" id="product_xh_'+curId+'"  name="kfdbProducts['+curId+'].product_xh" readonly>';
+        otd1.innerHTML = '<input type="text" id="product_name_'+curId+'" name="kfdbProducts['+curId+'].product_name" style="width:100%" readonly><input type="hidden" id="product_id_'+curId+'" name="kfdbProducts['+curId+'].product_id">';
+        
+        var otd2 = document.createElement("td");
+        otd2.className = "a2";
+        otd2.innerHTML = '<input type="text" id="product_xh_'+curId+'"  name="kfdbProducts['+curId+'].product_xh" style="width:100%" readonly>';
         
         var otd3 = document.createElement("td");
         otd3.className = "a2";
-        otd3.innerHTML = '<input type="text" id="nums_'+curId+'" name="kfdbProducts['+curId+'].nums" value="0">';
+        otd3.innerHTML = '<input type="text" id="nums_'+curId+'" name="kfdbProducts['+curId+'].nums" style="width:100%" value="0">';
         
-		var otd7 = document.createElement("td");
-		otd7.className = "a2";
-		otd7.innerHTML = '<input type="text" id="qz_serial_num_'+curId+'" name="kfdbProducts['+curId+'].qz_serial_num" size="15" readonly><input type="hidden" id="qz_flag_'+curId+'" name="kfdbProducts['+curId+'].qz_flag"><a style="cursor:hand" title="点击输入序列号" onclick="openSerialWin('+ curId +');"><b>...</b></a>&nbsp;';           
-		         
-        
-        var otd5 = document.createElement("td");
-        otd5.className = "a2";
-        otd5.innerHTML = '<input type="text" id="remark_'+curId+'" name="kfdbProducts['+curId+'].remark"  maxlength="50">';                       
+		var otd4 = document.createElement("td");
+		otd4.className = "a2";
+		otd4.innerHTML = '<input type="text" id="qz_serial_num_'+curId+'" name="kfdbProducts['+curId+'].qz_serial_num" size="25" readonly><input type="hidden" id="qz_flag_'+curId+'" name="kfdbProducts['+curId+'].qz_flag"><a style="cursor:hand" title="点击输入序列号" onclick="openSerialWin('+ curId +');"><b>...</b></a>&nbsp;';           
 
-		var otd6 = document.createElement("td");
-		otd6.className = "a2";
-		otd6.innerHTML = '<input type="button" name="delButton" value="删除" class="css_button" onclick="delTr(this);">';
-		
-        otr.appendChild(otd0); 
+		otr.appendChild(otd0); 
         otr.appendChild(otd1); 
-        otr.appendChild(otd3); 
-        otr.appendChild(otd7);
-        otr.appendChild(otd5);
-        otr.appendChild(otd6);               
+        otr.appendChild(otd2); 
+        otr.appendChild(otd3);
+        otr.appendChild(otd4);
      }	
+
+
+	function delDesc(){
+		var k = 0;
+		var sel = "0"; 
+		var arryProcId = document.getElementsByName("proc_id");
+		for(var i=0;i<arryProcId.length;i++){
+			var o = arryProcId[i];
+			if(o.checked){
+				k = k + 1;
+				sel = arryProcId[i].value;
+			}
+		}
+		if(k != 1){
+			alert("请选择商品明细，且只能选择一条信息！");
+			return;
+		}
+		
+		document.getElementById("product_name_" + sel).value = "";
+		document.getElementById("product_id_" + sel).value = "";
+		document.getElementById("product_xh_" + sel).value = "";
+		document.getElementById("nums_" + sel).value = "0";
+		document.getElementById("qz_serial_num_" + sel).value = "";
+		document.getElementById("qz_flag_" + sel).value = "";
+	}
      
      
 	function delTr(i){
@@ -178,8 +196,8 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 
 	//选择调拨商品
 	function openWin(id){
-		var destination = "selKfdbProc.html?openerId="+id;
-		var fea ='width=800,height=500,left=' + (screen.availWidth-800)/2 + ',top=' + (screen.availHeight-500)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		var destination = "selKfdbProc.html";
+		var fea ='width=850,height=650,left=' + (screen.availWidth-850)/2 + ',top=' + (screen.availHeight-650)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
 		window.open(destination,'详细信息',fea);	
 	}
@@ -298,16 +316,16 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 	<tr>
 		<td class="a1" width="15%">编号</td>
 		<td class="a2">
-		<input type="text" name="kfdb.id" id="id" value="<%=StringUtils.nullToStr(kfdb.getId()) %>" size="30" maxlength="50" readonly><font color="red">*</font>
+		<input type="text" name="kfdb.id" id="id" value="<%=StringUtils.nullToStr(kfdb.getId()) %>" style="width:230px" maxlength="50" readonly><font color="red">*</font>
 		</td>	
 		<td class="a1">日期</td>
-		<td class="a2"><input type="text" name="kfdb.ck_date" id="ck_date" value="<%=DateComFunc.getToday() %>"  class="Wdate" onFocus="WdatePicker()"><font color="red">*</font>
+		<td class="a2"><input type="text" name="kfdb.ck_date" id="ck_date" value="<%=DateComFunc.getToday() %>"  class="Wdate" style="width:230px" onFocus="WdatePicker()"><font color="red">*</font>
 		</td>	
 	</tr>
 	<tr>			
 		<td class="a1" width="15%">调出仓库</td>
 		<td class="a2">
-			<select name="kfdb.ck_store_id" id="ck_store_id">
+			<select name="kfdb.ck_store_id" id="ck_store_id" style="width:230px">
 				<option value=""></option>
 			<%
 			if(storeList != null){
@@ -326,7 +344,7 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 		</td>
 		<td class="a1" width="15%">调入仓库</td>
 		<td class="a2">
-			<select name="kfdb.rk_store_id" id="rk_store_id">
+			<select name="kfdb.rk_store_id" id="rk_store_id" style="width:230px">
 				<option value=""></option>
 			<%
 			if(storeList != null){
@@ -346,10 +364,10 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 	</tr>
 	<tr>
 		<td class="a1" width="15%">调拨申请单编号</td>
-		<td class="a2" width="35%"><input type="text" name="kfdb.dbsq_id" id="dbsq_id" value="" size="30" maxlength="20"></td>
+		<td class="a2" width="35%"><input type="text" name="kfdb.dbsq_id" id="dbsq_id" value="" style="width:230px" maxlength="20"></td>
 		<td class="a1" width="15%">申请人</td>
 		<td class="a2" width="35%">
-		    <input id="sqr_text" type="text" maxlength="20" onblur="setSqrValue();" />
+		    <input id="sqr_text" type="text" maxlength="20" style="width:230px" onblur="setSqrValue();" />
             <div id="sqr_tips"  style="height:12px;position:absolute;left:610px; top:110px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
             </div>
 		    <input type="hidden" name="kfdb.sqr" id="sqr"/> 	
@@ -358,10 +376,10 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 	<tr>			
 		<td class="a1" width="15%">经手人</td>
 		<td class="a2" colspan="3">
-		    <input  id="brand"    type="text"length="20"  onblur="setValue();" />
+		    <input  id="brand"    type="text"length="20"  onblur="setValue();"  style="width:230px"/> <font color="red">*</font>
             <div   id="brandTip"  style="height:12px;position:absolute;left:146px; top:141px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
             </div>
-		    <input type="hidden" name="kfdb.jsr" id="fzr" /><font color="red">*</font>
+		    <input type="hidden" name="kfdb.jsr" id="fzr" />
 		</td>
 	</tr>
 </table>
@@ -382,34 +400,28 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 <table width="100%"  align="center" id="kfdbTable"  class="chart_list" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td>商品名称</td>
-		<td>规格</td>
-		<td>数量</td>
-		<td>强制序列号</td>
-		<td>备注</td>
-		<td></td>
+		<td width="6%">选择</td>
+		<td width="30%">商品名称</td>
+		<td width="30%">规格</td>
+		<td width="10%">数量</td>
+		<td width="24%">强制序列号</td>
 	</tr>
 	</thead>
 <%
 for(int i=0;i<3;i++){
 %>
 	<tr>
+		<td class="a2"><input type="checkbox" name="proc_id" id="proc_id" value="<%=i %>"></td>
 		<td class="a2">
-			<input type="text" id="product_name_<%=i %>" name="kfdbProducts[<%=i %>].product_name" readonly><input type="button" name="selectButton" value="选择" class="css_button" onclick="openWin(<%=i %>);">
+			<input type="text" id="product_name_<%=i %>" name="kfdbProducts[<%=i %>].product_name" style="width:100%" readonly>
 			<input type="hidden" id="product_id_<%=i %>" name="kfdbProducts[<%=i %>].product_id">
 		</td>
-		<td class="a2"><input type="text" id="product_xh_<%=i %>" name="kfdbProducts[<%=i %>].product_xh" readonly></td>
-		<td class="a2"><input type="text" id="nums_<%=i %>" name="kfdbProducts[<%=i %>].nums" value="0"></td>
+		<td class="a2"><input type="text" id="product_xh_<%=i %>" name="kfdbProducts[<%=i %>].product_xh" style="width:100%" readonly></td>
+		<td class="a2"><input type="text" id="nums_<%=i %>" name="kfdbProducts[<%=i %>].nums" style="width:100%" value="0"></td>
 		<td class="a2">
-			<input type="text" id="qz_serial_num_<%=i %>" name="kfdbProducts[<%=i %>].qz_serial_num" value="" size="15" readonly>
+			<input type="text" id="qz_serial_num_<%=i %>" name="kfdbProducts[<%=i %>].qz_serial_num" value="" size="25" readonly>
 			<input type="hidden" id="qz_flag_<%=i %>" name="kfdbProducts[<%=i %>].qz_flag" value=""><a style="cursor:hand" title="左键点击输入输列号" onclick="openSerialWin('<%=i %>');"><b>...</b></a>&nbsp;
-		</td>		
-		<td class="a2"><input type="text" id="remark_<%=i %>" name="kfdbProducts[<%=i %>].remark" maxlength="50"></td>
-		<%if (i>0){ %>		
-		<td class="a2"><input type="button" name="delButton" value="删除" class="css_button" onclick="delTr(this);"></td>
-		<%}else{ %>
-		<td class="a2">&nbsp;</td>
-		<%} %>
+		</td>
 	</tr>
 <%
 }
@@ -418,7 +430,8 @@ for(int i=0;i<3;i++){
 <table width="100%"  align="center" class="chart_info" cellpadding="0" cellspacing="0">
 	<tr height="35">
 		<td class="a2" colspan="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="button" name="button1" value="添加一行" class="css_button2" onclick="addTr();">
+			<input type="button" name="button1" value="添加商品" class="css_button3" onclick="openWin();">
+			<input type="button" name="button8" value="清除商品" class="css_button3" onclick="delDesc();">
 		</td>
 	</tr>		
 </table>
@@ -432,7 +445,7 @@ for(int i=0;i<3;i++){
 	<tr>
 		<td class="a1" width="15%">备注</td>
 		<td class="a2" width="85%">
-			<textarea rows="6" name="kfdb.remark" id="remark" style="width:75%"></textarea>
+			<textarea rows="4" name="kfdb.remark" id="remark" style="width:75%"></textarea>
 		</td>
 	</tr>	
 	<tr height="35">

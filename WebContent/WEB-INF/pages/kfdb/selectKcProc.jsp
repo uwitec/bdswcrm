@@ -35,36 +35,97 @@ String openerId = ParameterUtility.getStringParameter(request, "openerId","");
 		var fea ='width=400,height=300,left=' + (screen.availWidth-400)/2 + ',top=' + (screen.availHeight-300)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
 		window.open(destination,'设置库存数量',fea);	
-	}	
-	
-	function sel(product_id,product_xh,product_name,lsxj,price,qz_serial_num,kh_cbj,gf){
-	
-		var id = window.opener.document.getElementById("product_id_<%=openerId%>");
-		var xh = window.opener.document.getElementById("product_xh_<%=openerId%>");
-		var name = window.opener.document.getElementById("product_name_<%=openerId%>");
-		var pc = window.opener.document.getElementById("price_<%=openerId%>");
-		var cbj = window.opener.document.getElementById("cbj_<%=openerId%>");
-		var qz_flag = window.opener.document.getElementById("qz_flag_<%=openerId%>");
-		var khcbj =  window.opener.document.getElementById("kh_cbj_<%=openerId%>");
-		var obj_gf =  window.opener.document.getElementById("gf_<%=openerId%>");
-		
-		if(id != null) id.value = product_id;
-		if(xh != null) xh.value = product_xh;
-		if(name != null) name.value = product_name;
-		if(pc != null) pc.value = lsxj;	
-		if(cbj != null) cbj.value = price;
-		if(qz_flag != null) qz_flag.value = qz_serial_num;
-		if(khcbj != null) khcbj.value = kh_cbj;
-		if(obj_gf != null) obj_gf.value = gf;
-		
-		window.close();	
 	}
+
+	function selectAll(){
+		var flag = false;
+		if(document.myform.allCheck.checked){
+			flag = true;
+		}
+		for(var i=0;i<document.myform.elements.length;i++){
+			var o = document.myform.elements[i];
+			if(o.name == "chk_id"){
+				if(flag == true){
+					o.checked = true;
+				}else{
+					o.checked = false;
+				}
+			}
+		}
+	}	
+
+	function sel(sel_flag){
+		var k = 0;
+		var allCount = window.opener.allCount;  //当前存在的最大行序号
+		//alert("当前存在的最大行序号" + allCount);
+		var startCount = 0;
+		for(var x=0;x<=allCount;x++){
+			var id = window.opener.document.getElementById("product_id_"+x);
+			var name = window.opener.document.getElementById("product_name_"+x);
+	
+			startCount = x;
+			
+			if(id.value=="" && name.value==""){  //如果该行无值则跳出
+				break;
+			}
+			
+			if(startCount == allCount){
+				startCount = startCount + 1;
+			}			
+		}
+		
+		k = startCount;  //从此位置开始添加
+		//alert("从此位置开始添加" + k);
+		
+		for(var i=1;i<document.myform.chk_id.length;i++){
+					
+			var o = document.myform.chk_id[i];
+			if(o.checked){
+			
+				var vl = document.myform.chk_id[i].value;
+				var arryStr = vl.split("|");
+				
+				var flag = false;
+				for(var y=0;y<=allCount;y++){
+					var s_id = window.opener.document.getElementById("product_id_"+y);
+					
+					if(s_id.value == arryStr[0]){  //该值已存在
+						flag = true;
+					}
+				}			
+			
+				if(flag == false){
+					var id = window.opener.document.getElementById("product_id_"+k);
+					
+					if(id == null){
+						window.opener.addTr();
+					}
+					
+					id = window.opener.document.getElementById("product_id_"+k);
+					
+					var xh = window.opener.document.getElementById("product_xh_"+k);
+					var name = window.opener.document.getElementById("product_name_"+k);
+					var qz_flag = window.opener.document.getElementById("qz_flag_"+k);
+				
+					id.value = arryStr[0];
+					xh.value = arryStr[1];
+					name.value = arryStr[2];
+					qz_flag.value = arryStr[3];
+					k++;	
+				}	
+			}
+		}
+		
+		if(sel_flag == "2"){
+			window.close();
+		}
+	}	
 	
 </script>
 </head>
-<body oncontextmenu="return false;" >
+<body>
 <form name="myform" action="selKfdbProc.html" method="post">
-<input type="hidden" name="openerId" value="<%=openerId %>">
+<input type="hidden" name="chk_id" value="">
 <table width="100%"  align="center"class="chart_list" cellpadding="0" cellspacing="0">
 	<tr>
 		<td class="csstitle" align="left" width="100%">&nbsp;&nbsp;&nbsp;&nbsp;<b>选择库存商品</b></td>			
@@ -99,13 +160,11 @@ String openerId = ParameterUtility.getStringParameter(request, "openerId","");
 <table width="100%"  align="center"  border="1"   class="chart_list" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
+		<td><input type="checkbox" name="allCheck" onclick="selectAll();"></td>
+		<td>商品编号</td>
 		<td>商品名称</td>
 		<td>规格</td>
 		<td>库存数量</td>
-		<td>考核成本</td>
-		<td>零售报价</td>
-		<td>零售限价</td>
-		<td>工分</td>
 		<td>强制序列号</td>
 	</tr>
 	</thead>
@@ -117,20 +176,14 @@ String openerId = ParameterUtility.getStringParameter(request, "openerId","");
 		while(it.hasNext()){
 			Map map = (Map)it.next();
 			
-			double price = map.get("price")==null?0:((Double)map.get("price")).doubleValue();
-			double lsbj = map.get("lsbj")==null?0:((Double)map.get("lsbj")).doubleValue();
-			double lsxj = map.get("lsxj")==null?0:((Double)map.get("lsxj")).doubleValue();	
-			double khcbj = map.get("khcbj")==null?0:((Double)map.get("khcbj")).doubleValue();	
-			double gf = map.get("gf")==null?0:((Double)map.get("gf")).doubleValue();	
+			String vl = StringUtils.nullToStr(map.get("product_id")) + "|" + StringUtils.nullToStr(map.get("product_xh")) + "|" + StringUtils.nullToStr(map.get("product_name")) + "|" + StringUtils.nullToStr(map.get("qz_serial_num"));
 	%>
-		<tr class="a1" onmouseover="this.className='a2';" onmouseout="this.className='a1';" title="左键单击选择商品" onclick="sel('<%=StringUtils.nullToStr(map.get("product_id")) %>','<%=StringUtils.nullToStr(map.get("product_xh")) %>','<%=StringUtils.nullToStr(map.get("product_name")) %>','<%=JMath.round(lsbj) %>','<%=JMath.round(price) %>','<%=StringUtils.nullToStr(map.get("qz_serial_num")) %>','<%=JMath.round(khcbj) %>','<%=JMath.round(gf) %>');">		
+		<tr class="a1" onmouseover="this.className='a2';" onmouseout="this.className='a1';">		
+			<td><input type="checkbox" name="chk_id" value="<%=vl %>"></td>
+			<td><%=StringUtils.nullToStr(map.get("product_id")) %></td>
 			<td><%=StringUtils.nullToStr(map.get("product_name")) %></td>
 			<td><%=StringUtils.nullToStr(map.get("product_xh")) %></td>
 			<td><%=StringUtils.nullToStr(map.get("kc_nums")) %></td>
-			<td><%=JMath.round(khcbj,2) %></td>
-			<td><%=JMath.round(lsbj,2) %></td>
-			<td><%=JMath.round(lsxj,2) %></td>
-			<td><%=JMath.round(gf,2) %></td>
 			<td><%=StringUtils.nullToStr(map.get("qz_serial_num")) %></td>
 		</tr>
 	
@@ -144,6 +197,11 @@ String openerId = ParameterUtility.getStringParameter(request, "openerId","");
 		<td class="page"><%=productPage.getPageScript() %></td>
 	</tr>
 </table>
+<center><BR>
+	<input type="button" name="buttonQd" value="确认并继续选择" onclick="sel('1');" class="css_button4">
+	<input type="button" name="buttonQd" value="确认选择并关闭" onclick="sel('2');" class="css_button4">
+	<input type="button" name="buttonQd" value=" 关闭 " onclick="window.close();" class="css_button2">
+</center>
 </form>
 </body>
 </html>

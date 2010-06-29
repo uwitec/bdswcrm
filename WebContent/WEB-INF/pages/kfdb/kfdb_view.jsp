@@ -75,7 +75,6 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 		<td>商品名称</td>
 		<td>规格</td>
 		<td>数量</td>
-		<td>备注</td>
 	</tr>
 	</thead>
 <%
@@ -87,7 +86,6 @@ if(kfdbProducts!=null && kfdbProducts.size()>0){
 		<td class="a2"><%=StringUtils.nullToStr(kfdbProduct.get("product_name")) %></td>
 		<td class="a2"><%=StringUtils.nullToStr(kfdbProduct.get("product_xh")) %></td>
 		<td class="a2"><%=StringUtils.nullToStr(kfdbProduct.get("nums")) %></td>
-		<td class="a2"><%=StringUtils.nullToStr(kfdbProduct.get("remark")) %></td>
 	</tr>
 <%
 	}
