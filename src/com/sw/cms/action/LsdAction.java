@@ -244,7 +244,15 @@ public class LsdAction extends BaseAction {
 			
 			return INPUT;
 		}
-		
+		if(!lsd.getHykh().equals(""))
+		{
+		boolean hasHykh = lsdService.isHykh(lsd.getHykh(),lsd.getClient_name(),lsd.getLxr());  //是否存在对应该客户的会员卡号
+		if(hasHykh==false)
+		{
+			 this.setMsg("该客户对应的会员卡号不存在，请检查！");
+			 return INPUT;
+		}
+		}
 		lsdService.saveLsd(lsd, lsdProducts);
 		return SUCCESS;
 	}
@@ -322,6 +330,13 @@ public class LsdAction extends BaseAction {
 				return INPUT;
 			}
 
+		}
+		
+		boolean hasHykh = lsdService.isHykh(lsd.getHykh(),lsd.getClient_name(),lsd.getLxr());  //是否存在对应该客户的会员卡号
+		if(hasHykh==false)
+		{
+			this.setMsg("该客户对应的会员卡号不存在，请检查！");
+			return INPUT;
 		}
 		
 		lsdService.updateLsd(lsd, lsdProducts);
@@ -421,6 +436,13 @@ public class LsdAction extends BaseAction {
 		return "success";
 	}
 	
+	/**
+	 * 打开输入会员卡窗口
+	 * @return
+	 */
+	public String importHyk(){
+		return "success";
+	}
 	
 	/**
 	 * 零售单名细
