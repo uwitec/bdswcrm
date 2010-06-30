@@ -7,8 +7,10 @@ import java.util.Map;
 
 import org.springframework.jdbc.core.RowMapper;
 
+import com.sw.cms.dao.base.BeanRowMapper;
 import com.sw.cms.dao.base.JdbcBaseDAO;
 import com.sw.cms.dao.base.SqlUtil;
+import com.sw.cms.model.Hykjf;
 import com.sw.cms.model.Lsd;
 import com.sw.cms.model.LsdProduct;
 import com.sw.cms.model.Page;
@@ -49,6 +51,8 @@ public class LsdDAO extends JdbcBaseDAO {
 		return this.getResultList(sql);
 	}
 	
+	
+	
 	/**
 	 * 保存零售单信息
 	 * @param lsd
@@ -57,9 +61,12 @@ public class LsdDAO extends JdbcBaseDAO {
 	 */
 	public void saveLsd(Lsd lsd,List lsdProducts){
 		
-		String sql = "insert into lsd(creatdate,xsry,fkfs,state,store_id,client_name,lxr,lxdh,mobile,mail,msn,address,p_code,fplx,khhzh,sh,fpxx,yhje,lsdje,skzh,skje,lsdcbj,ms,czr,cz_date,has_yushk,yushk_id,yushkje,id,kp_mc,kp_address,kp_dh,lsdkhcb,sp_state,pos_id) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,now(),?,?,?,?,?,?,?,?,?,?)";
+		String sql = "insert into lsd(creatdate,xsry,fkfs,state,store_id,client_name,lxr,lxdh,mobile,mail,msn,address,"+
+		             "p_code,fplx,khhzh,sh,fpxx,yhje,lsdje,skzh,skje,lsdcbj,ms,czr,cz_date,has_yushk,yushk_id,yushkje,"+
+		             "id,kp_mc,kp_address,kp_dh,lsdkhcb,sp_state,pos_id,hykh,hyjf) "+
+		             "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,now(),?,?,?,?,?,?,?,?,?,?,?,?)";
 		
-		Object[] param = new Object[34];
+		Object[] param = new Object[36];
 		
 		param[0] = lsd.getCreatdate();
 		param[1] = lsd.getXsry();
@@ -95,6 +102,8 @@ public class LsdDAO extends JdbcBaseDAO {
 		param[31] = lsd.getLsdkhcb();
 		param[32] = lsd.getSp_state();
 		param[33] = lsd.getPos_id();
+		param[34] = lsd.getHykh();
+		param[35] = lsd.getHyjf();
 		
 		this.getJdbcTemplate().update(sql,param);
 		
@@ -109,9 +118,12 @@ public class LsdDAO extends JdbcBaseDAO {
 	 * @param lsdProducts
 	 */
 	public void updateLsd(Lsd lsd,List lsdProducts){
-		String sql = "update lsd set creatdate=?,xsry=?,fkfs=?,state=?,store_id=?,client_name=?,lxr=?,lxdh=?,mobile=?,mail=?,msn=?,address=?,p_code=?,fplx=?,khhzh=?,sh=?,fpxx=?,yhje=?,lsdje=?,skzh=?,skje=?,lsdcbj=?,ms=?,czr=?,cz_date=now(),has_yushk=?,yushk_id=?,yushkje=?,kp_mc=?,kp_address=?,kp_dh=?,lsdkhcb=?,sp_state=?,pos_id=? where id=?";
+		String sql = "update lsd set creatdate=?,xsry=?,fkfs=?,state=?,store_id=?,client_name=?,lxr=?,lxdh=?,"+
+		             "mobile=?,mail=?,msn=?,address=?,p_code=?,fplx=?,khhzh=?,sh=?,fpxx=?,yhje=?,lsdje=?,"+
+		             "skzh=?,skje=?,lsdcbj=?,ms=?,czr=?,cz_date=now(),has_yushk=?,yushk_id=?,yushkje=?,kp_mc=?,"+
+		             "kp_address=?,kp_dh=?,lsdkhcb=?,sp_state=?,pos_id=?,hykh=?,hyjf=? where id=?";
 		
-		Object[] param = new Object[34];
+		Object[] param = new Object[36];
 		
 		param[0] = lsd.getCreatdate();
 		param[1] = lsd.getXsry();
@@ -146,7 +158,9 @@ public class LsdDAO extends JdbcBaseDAO {
 		param[30] = lsd.getLsdkhcb();
 		param[31] = lsd.getSp_state();
 		param[32] = lsd.getPos_id();
-		param[33] = lsd.getId();
+		param[33] = lsd.getHykh();
+		param[34] = lsd.getHyjf();
+		param[35] = lsd.getId();
 		
 		this.getJdbcTemplate().update(sql,param);
 		
@@ -482,6 +496,9 @@ public class LsdDAO extends JdbcBaseDAO {
 			if(SqlUtil.columnIsExist(rs,"sp_opinion")) lsd.setSp_opinion(rs.getString("sp_opinion"));
 			if(SqlUtil.columnIsExist(rs,"pos_id")) lsd.setPos_id(rs.getString("pos_id"));
 			
+            //增加会员卡信息
+			if(SqlUtil.columnIsExist(rs,"hykh")) lsd.setHykh(rs.getString("hykh"));
+			if(SqlUtil.columnIsExist(rs,"hyjf")) lsd.setHyjf(rs.getInt("hyjf"));
 			return lsd;
 		}
 	}

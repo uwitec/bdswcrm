@@ -199,5 +199,21 @@ public class HykdaDAO extends JdbcBaseDAO {
 		
 	}
 	
-	
+	/**
+	 * 根据会员卡号看是否存在在会员卡档案中
+	 * 
+	 * @param hykh
+	 * 
+	 * @return
+	 */
+	public String hykhIsExist(String hykh){
+		String flag = "false";
+		String sql = "select a.* from hykda a left join hykzz b on a.hykh=b.hykh where a.hykh='" + hykh + "' and sfty='否' and state='已领用'"+
+                     " and '"+DateComFunc.getToday()+"'>=b.yxrq and '"+DateComFunc.getToday()+"'<=b.sxrq";
+		List list = this.getResultList(sql);
+		if(list != null && list.size() > 0){
+			flag = "true";
+		}
+		return flag;
+	}	
 }
