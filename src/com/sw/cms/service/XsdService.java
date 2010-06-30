@@ -23,6 +23,7 @@ import com.sw.cms.dao.SysMsgDAO;
 import com.sw.cms.dao.UserDAO;
 import com.sw.cms.dao.XsdDAO;
 import com.sw.cms.dao.XsskDAO;
+import com.sw.cms.dao.HykjfDAO;
 import com.sw.cms.model.AccountDzd;
 import com.sw.cms.model.Ckd;
 import com.sw.cms.model.CkdProduct;
@@ -37,6 +38,7 @@ import com.sw.cms.model.Xsd;
 import com.sw.cms.model.XsdProduct;
 import com.sw.cms.model.Xssk;
 import com.sw.cms.model.XsskDesc;
+import com.sw.cms.model.Hykjf;
 import com.sw.cms.util.DateComFunc;
 import com.sw.cms.util.StaticParamDo;
 import com.sw.cms.util.StringUtils;
@@ -63,7 +65,7 @@ public class XsdService {
 	private SysMsgDAO sysMsgDao;
 	private PosTypeDAO posTypeDao;
 	private QtzcDAO qtzcDao;
-	
+	private HykjfDAO hykjfDao;
 	
 	public PosTypeDAO getPosTypeDao() {
 		return posTypeDao;
@@ -83,7 +85,15 @@ public class XsdService {
 	public void setQtzcDao(QtzcDAO qtzcDao) {
 		this.qtzcDao = qtzcDao;
 	}
+	
+	public HykjfDAO getHykjfDao() {
+		return hykjfDao;
+	}
 
+
+	public void setHykjfDao(HykjfDAO hykjfDao) {
+		this.hykjfDao = hykjfDao;
+	}
 
 	/**
 	 * 取销售单列表(带分页）
@@ -156,6 +166,23 @@ public class XsdService {
 			}
 			xsd.setYsrq(ysrq);
 		}
+		
+		//增加会员积分
+		int hyjf;
+		Map mp = (Map)hykjfDao.getHyxx(xsd.getHykh(),xsd.getClient_name());
+		if(mp!=null && mp.size()>0)
+		{
+		String xfje = StringUtils.nullToStr(mp.get("xfje"));   //销售金额
+		String dyjf = StringUtils.nullToStr(mp.get("dyjf"));   //对应积分
+		
+		hyjf=0;
+		hyjf=(int)(xsd.getXsdje())/Integer.parseInt(xfje)*Integer.parseInt(dyjf);
+		}
+		else
+		{
+		hyjf=0;
+		}
+		xsd.setHyjf(hyjf);
 		
 		xsdDao.updateXsd(xsd, xsdProducts);	
 		
@@ -352,6 +379,24 @@ public class XsdService {
 	
 	
 	/**
+	 *判断客户是否有此会员卡号 
+	 * @param xsd
+	 * @param
+	 * @return
+	 */
+	public boolean isHykh(String client_id,String hykh){
+		boolean is = false;
+		
+		Map hykMap =(Map)hykjfDao.getHyxx(hykh,client_id);
+		if(hykMap!=null && hykMap.size()>0)
+		{
+			is = true;
+		}
+		
+		return is;
+	}
+	
+	/**
 	 * 取具超额审批权限角色列表
 	 * @return
 	 */
@@ -520,6 +565,8 @@ public class XsdService {
 		//发送待出库单消息
 		this.saveMsg(ckd);
 	}
+	
+	
 	
 	
 	/**

@@ -21,6 +21,7 @@ import com.sw.cms.dao.StoreDAO;
 import com.sw.cms.dao.SysInitSetDAO;
 import com.sw.cms.dao.UserDAO;
 import com.sw.cms.dao.XsdDAO;
+import com.sw.cms.dao.HykdaDAO;
 import com.sw.cms.model.Accounts;
 import com.sw.cms.model.Clients;
 import com.sw.cms.model.PosType;
@@ -61,6 +62,8 @@ public class DwrService {
 	
 	private PosTypeDAO posTypeDao;
 
+	private HykdaDAO hykdaDao;
+	
 	public LsdDAO getLsdDao() {
 		return lsdDao;
 	}
@@ -98,6 +101,16 @@ public class DwrService {
 		return productDao.productIsExist(serial_num, product_id);
 	}
 	
+	/**
+	 * 根据会员卡号看是否存在在会员卡档案中
+	 * 
+	 * @param hykh
+	 * 
+	 * @return
+	 */
+	public String hykhIsExist(String hykh) {
+		return hykdaDao.hykhIsExist(hykh);
+	}
 	
 	/**
 	 * 根据客户编号取客户采购账期
@@ -648,6 +661,14 @@ public class DwrService {
 
 	public void setPosTypeDao(PosTypeDAO posTypeDao) {
 		this.posTypeDao = posTypeDao;
+	}
+	
+	public HykdaDAO getHykdaDao() {
+		return hykdaDao;
+	}
+
+	public void setHykdaDao(HykdaDAO hykdaDao) {
+		this.hykdaDao = hykdaDao;
 	}
 
 }

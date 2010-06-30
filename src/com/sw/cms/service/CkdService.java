@@ -19,8 +19,11 @@ import com.sw.cms.dao.SysInitSetDAO;
 import com.sw.cms.dao.XsdDAO;
 import com.sw.cms.dao.XsskDAO;
 import com.sw.cms.dao.YufukDAO;
+import com.sw.cms.dao.HykjfDAO;
 import com.sw.cms.model.Ckd;
 import com.sw.cms.model.CkdProduct;
+import com.sw.cms.model.Hykjf;
+import com.sw.cms.model.Jhd;
 import com.sw.cms.model.Page;
 import com.sw.cms.model.Product;
 import com.sw.cms.model.ProductSaleFlow;
@@ -54,7 +57,7 @@ public class CkdService {
 	private ProductDAO productDao;
 	private LsdDAO lsdDao;
 	private ProductSaleFlowDAO productSaleFlowDao;
-	
+	private HykjfDAO hykjfDao;
 
 	
 	/**
@@ -112,6 +115,11 @@ public class CkdService {
 			//}
 			
 			this.updateXsdState(ckd.getXsd_id(), "已出库",ckd.getYsfs(),ckd.getCx_tel(),ckd.getJob_no(),ckd.getSend_time(),ckd.getStore_id(),ckd.getFzr(),ckd.getCk_date());
+		    
+            //生成会员卡积分信息
+			Xsd xsd = (Xsd)xsdDao.getXsd(ckd.getXsd_id());
+			this.addKyxx(xsd);
+		
 		}
 	}
 	
@@ -122,12 +130,9 @@ public class CkdService {
 	 * @param ckdProducts
 	 */
 	public void updateCkd(Ckd ckd,List ckdProducts){
-		
 		//更新出库单
 		ckdDao.updateCkd(ckd, ckdProducts);
-		
 		if(ckd.getState().equals("已出库")){
-			
 			//提成比例
 			Map tcblMap = lsdDao.getTcbl();
 			double basic_ratio = 0;
@@ -190,10 +195,8 @@ public class CkdService {
 			
 			//修改库存
 			this.updateProductKc(ckd, ckdProducts); 
-			
 			//系统正式启用前，不对强制序列号做限制，但输入的序列号系统同样给予处理			
 			this.updateSerialNum(ckd, ckdProducts);
-			
 			//处理对应销售单状态
 			this.updateXsdState(ckd.getXsd_id(), "已出库",ckd.getYsfs(),ckd.getCx_tel(),ckd.getJob_no(),ckd.getSend_time(),ckd.getStore_id(),ckd.getFzr(),ckd.getCk_date());
 				
@@ -201,13 +204,42 @@ public class CkdService {
 			if(xsdProducts != null && xsdProducts.size() > 0){
 				xsdDao.updateXsdProducts(xsdProducts);
 			}
-			
 			//生成商品销售明细
 			this.addProductSaleFlow(xsd, xsdProducts);
+			//生成会员卡积分信息
+			this.addKyxx(xsd);
 		}
 	}
 
-	
+	/**
+	 * 添加会员卡信息
+	 * 
+	 * @param xsd
+	 * 
+	 */
+	private void addKyxx(Xsd xsd){
+		int zjf;
+		int ssjf;
+		Hykjf hykjfOld = (Hykjf)hykjfDao.getHykjf(xsd.getHykh());
+		if(hykjfOld != null){
+		 zjf=hykjfOld.getZjf();
+		 ssjf=hykjfOld.getSsjf();
+		}
+		else
+		{
+		 zjf=0;
+		 ssjf=0;
+		}
+		Hykjf hykjf = new Hykjf();
+		hykjf.setHybh(xsd.getClient_name());
+		hykjf.setHymc(StaticParamDo.getClientNameById(xsd.getClient_name()));
+		hykjf.setHykh(xsd.getHykh());
+		
+		hykjf.setZjf(zjf+xsd.getHyjf());
+		hykjf.setSsjf(ssjf+xsd.getHyjf());
+		
+		hykjfDao.saveHyxx(hykjf);
+	}
 	
 	/**
 	 * 根据出库单ID获取商品列表
@@ -646,4 +678,12 @@ public class CkdService {
 		this.productSaleFlowDao = productSaleFlowDao;
 	}
 
+	public HykjfDAO getHykjfDao() {
+		return hykjfDao;
+	}
+
+
+	public void setHykjfDao(HykjfDAO hykjfDao) {
+		this.hykjfDao = hykjfDao;
+	}
 }
