@@ -654,6 +654,9 @@
         <action name="selXsdProc" class="xsdAction" method="selXsdProc">
             <result name="success">/WEB-INF/pages/xsd/selectMaxKcProc.jsp</result>
         </action>
+        <action name="importHyk" class="xsdAction" method="importHyk">
+            <result name="success">/WEB-INF/pages/xsd/importHyk.jsp</result>
+        </action>
         <!-- 销售订单 -->
         
         <!-- 分销订单 -->
@@ -738,7 +741,10 @@
         </action>
         <action name="saveTcbl" class="lsdAction" method="saveTcbl">
             <result name="success" type="chain">editTcbl</result>
-        </action>                              
+        </action>             
+        <action name="importHykls" class="lsdAction" method="importHyk">
+            <result name="success">/WEB-INF/pages/lsd/importHyk.jsp</result>
+        </action>                 
         <!-- 零售单管理 -->
         
         <!-- 角色管理 -->      
@@ -2905,5 +2911,29 @@
             <result name="success">/WEB-INF/pages/msg.jsp</result>
         </action>
         <!-- 发卡管理结束 -->
+        <!-- 会员卡兑奖开始 -->
+        <action name="listHykdj" class="hykdjAction" method="list">
+            <result name="success" type="dispatcher">/WEB-INF/pages/hykdj/hykdj_list.jsp</result>
+        </action>
+        <action name="addHykdj" class="hykdjAction" method="add">
+            <result name="success">/WEB-INF/pages/hykdj/hykdj_add.jsp</result>
+        </action> 
+		<action name="saveHykdj" class="hykdjAction" method="save">
+            <result name="cancel" type="redirect">addHykdj.html</result>
+            <result name="input" type="dispatcher">/WEB-INF/pages/hykdj/hykdj_add.jsp</result>
+            <result name="success">/WEB-INF/pages/msg.jsp</result>
+        </action>
+		<action name="editHykdj" class="hykdjAction" method="edit">
+            <result name="success">/WEB-INF/pages/hykdj/hykdj_edit.jsp</result>
+        </action>
+        <action name="viewHykdj" class="hykdjAction" method="edit">
+            <result name="success">/WEB-INF/pages/hykdj/hykdj_view.jsp</result>
+        </action>
+		<action name="updateHykdj" class="hykdjAction" method="update">
+            <result name="cancel" type="redirect">editHykdj.html</result>
+            <result name="input">/WEB-INF/pages/hykdj/hykdj_edit.jsp</result>
+            <result name="success">/WEB-INF/pages/msg.jsp</result>
+        </action>
+        <!-- 会员卡兑奖结束 -->
     </package>
 </xwork>
