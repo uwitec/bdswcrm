@@ -49,6 +49,26 @@ public class Lsd {
 	private String sp_date;    //审批时间
 	private String sp_opinion; //审批意见
 
+	
+    private String hykh;  //会员卡号
+	
+	private int hyjf;     //会员积分
+	
+	
+	public String getHykh() {
+		return hykh;
+	}
+	public void setHykh(String hykh) {
+		this.hykh = hykh;
+	}
+	public int getHyjf() {
+		return hyjf;
+	}
+	
+	public void setHyjf(int hyjf) {
+		this.hyjf = hyjf;
+	}
+	
 	public String getAddress() {
 		return address;
 	}

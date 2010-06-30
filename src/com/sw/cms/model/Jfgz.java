@@ -10,9 +10,9 @@ public class Jfgz {
 
 	private String jfff; // 积分方法
 
-	private int xfje; // 消费金额
+	private String xfje; // 消费金额
 
-	private int dyjf; // 对应积分
+	private String dyjf; // 对应积分
 
 	private String czr; // 操作人
 
@@ -52,19 +52,19 @@ public class Jfgz {
 		this.jfff = jfff;
 	}
 
-	public int getXfje() {
+	public String getXfje() {
 		return xfje;
 	}
 
-	public void setXfje(int xfje) {
+	public void setXfje(String xfje) {
 		this.xfje = xfje;
 	}
 
-	public int getDyjf() {
+	public String getDyjf() {
 		return dyjf;
 	}
 
-	public void setDyjf(int dyjf) {
+	public void setDyjf(String dyjf) {
 		this.dyjf = dyjf;
 	}
 
