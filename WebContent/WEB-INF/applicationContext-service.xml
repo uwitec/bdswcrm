@@ -773,6 +773,13 @@
            <bean class="com.sw.cms.service.HykdaService" autowire="byName"/> 
         </property>
     </bean>
+    
+    <!-- 会员卡兑奖 -->
+    <bean id="hykdjService" parent="baseTransaction">
+        <property name="target">
+           <bean class="com.sw.cms.service.HykdjService" autowire="byName"/> 
+        </property>
+    </bean>
 </beans>
 
 

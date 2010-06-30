@@ -17,7 +17,7 @@
 			<include method="getLxrMailByClientType" />
 			<include method="getClientCgzq" /> 
 			<include method="getClientXszq" /> 
-			
+			<include method="hykhIsExist"/>
 			<include method="getZyProductObjBySerialNum"/> 
 			<include method="getBadProductObjBySerialNum"/>
 			<include method="getGoodProductObjBySerialNum"/>
@@ -28,6 +28,9 @@
 		</convert>
 		<convert converter="bean" match="com.sw.cms.model.shkc">
 			<param name="include" value="productId,productName,productXh,qz_serial_num" />
+		</convert>
+		<convert converter="bean" match="com.sw.cms.model.hykda">
+			<param name="include" value="hykh,hymc,hybh" />
 		</convert>
 		<convert converter="bean" match="com.sw.cms.model.SysUser"/>
 		<convert converter="bean" match="com.sw.cms.model.Accounts">
