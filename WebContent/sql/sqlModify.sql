@@ -825,7 +825,7 @@ CREATE TABLE `jfgz` (
   `id` varchar(50) NOT NULL,  
   `jfff` varchar(200) default NULL,
   `xfje` int(5) default 0,
-  `dyjf` int(2) default NULL, 
+  `dyjf` int(2) default 0, 
   `czr` varchar(20) default NULL,
   `cz_date` datetime default NULL,   
   PRIMARY KEY  (`id`)
@@ -909,7 +909,9 @@ ALTER TABLE `cms_all_seq` ADD COLUMN `hykdaid` INTEGER UNSIGNED DEFAULT 1 AFTER 
 
 2010-06-17增加
 --售后服务单添加khlx字段，保存客户类型的信息
+
 ALTER TABLE `sfd` ADD COLUMN `khlx` VARCHAR(10) NOT NULL DEFAULT 0 AFTER `bxyy_ms`;
+
 
 
 --暂时不更新
@@ -922,3 +924,48 @@ INSERT INTO `funcs`(`func_id`,`func_name`,`func_ms`,`url`,`img`,`xh`,`ywflag`,`f
 ('FC0112','积分查询兑奖','积分查询兑奖','listJfcxdj.html','180.gif',3,'1','10');
 
 INSERT INTO `column_funcs` VALUES ('011002','FC0112');
+
+
+2010-06-22增加
+--增加积分表
+DROP TABLE IF EXISTS `hykjf`;
+CREATE TABLE `hykjf` (
+`hykh` varchar(30) NOT NULL,
+`hymc` varchar(50) NOT NULL,
+`hybh` varchar(50) default NULL,
+`zjf` int(10) default 0,
+`ssjf` int(10) default 0,
+PRIMARY KEY  (`hykh`)
+
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--增加兑奖表
+DROP TABLE IF EXISTS `hykdj`;
+CREATE TABLE `hykdj` (
+`id` varchar(20) NOT NULL,
+`hykh` varchar(30) NOT NULL,
+`hymc` varchar(50) NOT NULL,
+`hybh` varchar(50) default NULL,
+`sjjf` int(10) default NULL,
+`jpmc` varchar(50) default NULL,
+`jpsl` int(10) default NULL,
+`ssjf` int(10) default NULL,
+`czr` varchar(20) default NULL,
+`cz_date` datetime default NULL,  
+PRIMARY KEY  (`id`)
+
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+2010-06-23修改
+--销售单增加会员卡号
+ALTER TABLE `xsd` ADD COLUMN `hykh` VARCHAR(20) default NULL AFTER `yfzf_type`;
+ALTER TABLE `xsd` ADD COLUMN `hyjf` int(10) default NULL AFTER `hykh`;
+--零售单增加会员卡号
+ALTER TABLE `lsd` ADD COLUMN `hykh` VARCHAR(20) default NULL AFTER `pos_id`;
+ALTER TABLE `lsd` ADD COLUMN `hyjf` int(10) default NULL AFTER `hykh`;
+
+ALTER TABLE `sfd` ADD COLUMN `khlx` VARCHAR(10) NOT NULL DEFAULT 0 AFTER `bxyy_ms`;
+
+--修改积分规则表结构
+ALTER TABLE `jfgz` MODIFY COLUMN `xfje` VARCHAR(10) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL;
+ALTER TABLE `jfgz` MODIFY COLUMN `dyjf` VARCHAR(10) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL;
