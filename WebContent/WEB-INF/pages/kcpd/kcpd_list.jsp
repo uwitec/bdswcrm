@@ -133,13 +133,13 @@ String orderType = (String)VS.findValue("orderType");
 <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0" border="1" id="selTable">
 	<thead>
 	<tr>
-		<td onclick="doSort('id');">编号<%if(orderName.equals("id")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('store_id');">仓库名称<%if(orderName.equals("store_id")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('pdr');">盘点人<%if(orderName.equals("pdr")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('pdrq');">盘点日期<%if(orderName.equals("pdrq")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('state');">状态<%if(orderName.equals("state")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('czr');">操作员<%if(orderName.equals("czr")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td>操作</td>
+		<td width="12%" nowrap="nowrap" onclick="doSort('id');">编号<%if(orderName.equals("id")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="23%" nowrap="nowrap" onclick="doSort('store_id');">仓库名称<%if(orderName.equals("store_id")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="13%" nowrap="nowrap" onclick="doSort('pdr');">盘点人<%if(orderName.equals("pdr")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="15%" nowrap="nowrap" onclick="doSort('pdrq');">盘点日期<%if(orderName.equals("pdrq")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="10%" nowrap="nowrap" onclick="doSort('state');">状态<%if(orderName.equals("state")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="12%" nowrap="nowrap" onclick="doSort('czr');">操作员<%if(orderName.equals("czr")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="15%" nowrap="nowrap">操作</td>
 	</tr>
 	</thead>
 	<%

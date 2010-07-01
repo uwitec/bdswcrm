@@ -14,7 +14,7 @@ List kcpdDescs = (List)VS.findValue("kcpdDesc");
 
 <html>
 <head>
-<title>添加库存盘点</title>
+<title>库存盘点</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 </head>
@@ -58,7 +58,6 @@ List kcpdDescs = (List)VS.findValue("kcpdDesc");
 		<td>库存数量</td>
 		<td>实际数量</td>
 		<td>盈亏</td>
-		<td>备注</td>
 	</tr>
 	</thead>
 <%
@@ -72,7 +71,6 @@ if(kcpdDescs!=null && kcpdDescs.size()>0){
 		<td class="a2"><%=StringUtils.nullToStr(kcpdDesc.getKc_nums()) %></td>
 		<td class="a2"><%=StringUtils.nullToStr(kcpdDesc.getSj_nums()) %></td>
 		<td class="a2"><%=StringUtils.nullToStr(kcpdDesc.getYk()) %></td>
-		<td class="a2"><%=StringUtils.nullToStr(kcpdDesc.getRemark()) %></td>
 	</tr>
 <%
 	}
@@ -89,7 +87,7 @@ if(kcpdDescs!=null && kcpdDescs.size()>0){
 	<tr>
 		<td class="a1" width="15%">备注</td>
 		<td class="a2" width="85%">
-			<textarea rows="6" name="kcpd.remark" id="remark" style="width:75%" maxlength="500" readonly><%=StringUtils.nullToStr(kcpd.getRemark()) %></textarea>
+			<textarea rows="4" name="kcpd.remark" id="remark" style="width:75%" readonly><%=StringUtils.nullToStr(kcpd.getRemark()) %></textarea>
 		</td>
 	</tr>	
 	<tr height="35">

@@ -88,29 +88,25 @@ String user_id = info.getUser_id();
         
         var otd0=document.createElement("td");
         otd0.className = "a2";
-        otd0.innerHTML = '<input type="text" id="product_name_'+curId+'" name="kcpdDesc['+curId+'].product_name" readonly><input type="hidden" id="product_id_'+curId+'" name="kcpdDesc['+curId+'].product_id">';
+        otd0.innerHTML = '<input type="text" id="product_name_'+curId+'" name="kcpdDesc['+curId+'].product_name" style="width:100%" readonly><input type="hidden" id="product_id_'+curId+'" name="kcpdDesc['+curId+'].product_id">';
         
         var otd1 = document.createElement("td");
         otd1.className = "a2";
-        otd1.innerHTML = '<input type="text" id="product_xh_'+curId+'"  name="kcpdDesc['+curId+'].product_xh" readonly>';
+        otd1.innerHTML = '<input type="text" id="product_xh_'+curId+'"  name="kcpdDesc['+curId+'].product_xh" style="width:100%" readonly>';
         
         
         var otd2 = document.createElement("td");
         otd2.className = "a2";
-        otd2.innerHTML = '<input type="text" id="kc_nums_'+curId+'" name="kcpdDesc['+curId+'].kc_nums" value="0" size="5" onblur="pdAll();">';
+        otd2.innerHTML = '<input type="text" id="kc_nums_'+curId+'" name="kcpdDesc['+curId+'].kc_nums" style="width:100%" value="0" size="5" onblur="pdAll();" readonly>';
         
         var otd3 = document.createElement("td");
         otd3.className = "a2";
-        otd3.innerHTML = '<input type="text" id="sj_nums_'+curId+'" name="kcpdDesc['+curId+'].sj_nums" value="0" size="5" onblur="pdAll();">';        
+        otd3.innerHTML = '<input type="text" id="sj_nums_'+curId+'" name="kcpdDesc['+curId+'].sj_nums" style="width:100%" value="0" size="5" onblur="pdAll();">';        
         
         var otd4 = document.createElement("td");
         otd4.className = "a2";
-        otd4.innerHTML = '<input type="text" id="yk_'+curId+'" name="kcpdDesc['+curId+'].yk" value="0" size="5">';         
+        otd4.innerHTML = '<input type="text" id="yk_'+curId+'" name="kcpdDesc['+curId+'].yk" value="0" style="width:100%" size="5" readonly>';         
         
-        
-        var otd5 = document.createElement("td");
-        otd5.className = "a2";
-        otd5.innerHTML = '<input type="text" id="remark_'+curId+'" name="kcpdDesc['+curId+'].remark">';                       
 		
 		otr.appendChild(otd9); 
         otr.appendChild(otd0); 
@@ -118,7 +114,6 @@ String user_id = info.getUser_id();
         otr.appendChild(otd2); 
         otr.appendChild(otd3); 
         otr.appendChild(otd4);
-        otr.appendChild(otd5);     
      }	
      
      
@@ -209,16 +204,16 @@ String user_id = info.getUser_id();
 	</thead>
 	<tr>
 		<td class="a1" width="15%">编号</td>
-		<td class="a2" width="35%"><input type="text" name="kcpd.id" id="id" value="<%=id %>" maxlength="25"><font color="red">*</font>	
+		<td class="a2" width="35%"><input type="text" name="kcpd.id" id="id" value="<%=id %>" maxlength="25" style="width:230px"> <font color="red">*</font>	
 		</td>	
 		<td class="a1">盘点日期</td>
-		<td class="a2"><input type="text" name="kcpd.pdrq" id="pdrq" value="<%=DateComFunc.getToday() %>"  class="Wdate" onFocus="WdatePicker()"><font color="red">*</font>	
+		<td class="a2"><input type="text" name="kcpd.pdrq" id="pdrq" value="<%=DateComFunc.getToday() %>" style="width:230px" class="Wdate" onFocus="WdatePicker()"> <font color="red">*</font>	
 		</td>			
 	</tr>	
 	<tr>
 		<td class="a1" width="15%">仓库名称</td>
 		<td class="a2" width="35%">			
-			<select name="kcpd.store_id" id="store_id">
+			<select name="kcpd.store_id" id="store_id" style="width:230px">
 				<option value=""></option>
 			<%
 			if(storeList != null){
@@ -233,13 +228,13 @@ String user_id = info.getUser_id();
 				}
 			}
 			%>
-			</select><font color="red">*</font>		
+			</select> <font color="red">*</font>		
 		</td>		
 		<td class="a1" width="15%">盘点人</td>
 		<td class="a2" width="35%">
-		    <input id="brand" type="text"   length="20"  onblur="setValue()" />  
+		    <input id="brand" type="text"   length="20"  onblur="setValue()"  style="width:230px"/> <font color="red">*</font>	 
             <div   id="brandTip"  style="height:12px;position:absolute;left:610px; top:55px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
-		    <input type="hidden" name="kcpd.pdr" id="fzr"  /><font color="red">*</font>	
+		    <input type="hidden" name="kcpd.pdr" id="fzr"  />
 		</td>		
 	</tr>
 </table>
@@ -254,13 +249,12 @@ String user_id = info.getUser_id();
 <table width="100%"  align="center" id="kcpdDescTable"  class="chart_list" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td>选择</td>
-		<td>商品名称</td>
-		<td>规格</td>
-		<td>库存数量</td>
-		<td>实际数量</td>
-		<td>盈亏</td>
-		<td>备注</td>
+		<td width="10%">选择</td>
+		<td width="30%">商品名称</td>
+		<td width="25%">规格</td>
+		<td width="12%">库存数量</td>
+		<td width="12%">实际数量</td>
+		<td width="11%">盈亏</td>
 	</tr>
 	</thead>
 <%
@@ -269,14 +263,13 @@ for(int i=0;i<3;i++){
 	<tr>
 		<td class="a2"><input type="checkbox" name="proc_id" id="proc_id" value="<%=i %>"></td>
 		<td class="a2">
-			<input type="text" id="product_name_<%=i %>" name="kcpdDesc[<%=i %>].product_name" readonly>
+			<input type="text" id="product_name_<%=i %>" name="kcpdDesc[<%=i %>].product_name" style="width:100%" readonly>
 			<input type="hidden" id="product_id_<%=i %>" name="kcpdDesc[<%=i %>].product_id">
 		</td>
-		<td class="a2"><input type="text" id="product_xh_<%=i %>" name="kcpdDesc[<%=i %>].product_xh" readonly></td>
-		<td class="a2"><input type="text" id="kc_nums_<%=i %>" name="kcpdDesc[<%=i %>].kc_nums" size="5" value="0" onblur="pdAll();"></td>
-		<td class="a2"><input type="text" id="sj_nums_<%=i %>" name="kcpdDesc[<%=i %>].sj_nums" size="5" value="0" onblur="pdAll();"></td>
-		<td class="a2"><input type="text" id="yk_<%=i %>" name="kcpdDesc[<%=i %>].yk" size="5" value="0"></td>
-		<td class="a2"><input type="text" id="remark_<%=i %>" name="kcpdDesc[<%=i %>].remark"></td>
+		<td class="a2"><input type="text" id="product_xh_<%=i %>" name="kcpdDesc[<%=i %>].product_xh" style="width:100%" readonly></td>
+		<td class="a2"><input type="text" id="kc_nums_<%=i %>" name="kcpdDesc[<%=i %>].kc_nums" style="width:100%" size="5" value="0" onblur="pdAll();" readonly></td>
+		<td class="a2"><input type="text" id="sj_nums_<%=i %>" name="kcpdDesc[<%=i %>].sj_nums" style="width:100%" size="5" value="0" onblur="pdAll();"></td>
+		<td class="a2"><input type="text" id="yk_<%=i %>" name="kcpdDesc[<%=i %>].yk" size="5" style="width:100%" value="0" readonly></td>
 	</tr>
 <%
 }
@@ -300,7 +293,7 @@ for(int i=0;i<3;i++){
 	<tr>
 		<td class="a1" width="15%">备注</td>
 		<td class="a2" width="85%">
-			<textarea rows="6" name="kcpd.remark" id="remark" style="width:75%" maxlength="500"></textarea>
+			<textarea rows="4" name="kcpd.remark" id="remark" style="width:75%" maxlength="500"></textarea>
 		</td>
 	</tr>	
 	<tr height="35">

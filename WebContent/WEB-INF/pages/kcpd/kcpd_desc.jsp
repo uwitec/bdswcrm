@@ -40,12 +40,11 @@ List results = (List)VS.findValue("kcpdDesc");
 <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0" border="1" id="selTable">
 	<thead>
 	<tr>
-		<td>商品名称</td>
-		<td>规格</td>
-		<td>账面数量</td>
-		<td>实际数量</td>
-		<td>盈亏</td>
-		<td>备注</td>
+		<td width="35%">商品名称</td>
+		<td width="35%">规格</td>
+		<td width="10%">账面数量</td>
+		<td width="10%">实际数量</td>
+		<td width="10%">盈亏</td>
 	</tr>
 	</thead>
 	<%
@@ -60,7 +59,6 @@ List results = (List)VS.findValue("kcpdDesc");
 		<td><%=StringUtils.nullToStr(kcpdDesc.getKc_nums()) %></td>
 		<td><%=StringUtils.nullToStr(kcpdDesc.getSj_nums()) %></td>
 		<td><%=StringUtils.nullToStr(kcpdDesc.getYk()) %></td>
-		<td><%=StringUtils.nullToStr(kcpdDesc.getRemark()) %></td>
 	</tr>
 	
 	<%
