@@ -939,6 +939,22 @@ PRIMARY KEY  (`hykh`)
 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
+--增加兑奖货品设置表
+
+DROP TABLE IF EXISTS `djhpsz`;
+CREATE TABLE `djhpsz` (
+`product_id` varchar(30) NOT NULL,
+`product_name` varchar(50) NOT NULL,
+`product_xh` varchar(50) default NULL,
+`dwjf` varchar(10) default NULL,
+`czr` varchar(10) default NULL,
+`cz_date` datetime default NULL,
+PRIMARY KEY  (`product_id`)
+
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
 --增加兑奖表
 DROP TABLE IF EXISTS `hykdj`;
 CREATE TABLE `hykdj` (
@@ -946,7 +962,7 @@ CREATE TABLE `hykdj` (
 `hykh` varchar(30) NOT NULL,
 `hymc` varchar(50) NOT NULL,
 `hybh` varchar(50) default NULL,
-`sjjf` int(10) default NULL,
+`zjf` int(10) default NULL,
 `jpmc` varchar(50) default NULL,
 `jpsl` int(10) default NULL,
 `ssjf` int(10) default NULL,
