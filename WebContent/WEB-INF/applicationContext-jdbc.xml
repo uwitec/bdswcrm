@@ -603,6 +603,11 @@
      <bean id="hykjfDao" class="com.sw.cms.dao.HykjfDAO">
           <property name="jdbcTemplate" ref="jdbcTemplate"/>
      </bean>
+     
+     <!-- 兑奖货品设置-->
+     <bean id="djhpszDao" class="com.sw.cms.dao.DjhpszDAO">
+          <property name="jdbcTemplate" ref="jdbcTemplate"/>
+     </bean>
 </beans>
 
 

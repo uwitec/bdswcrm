@@ -209,4 +209,6 @@
      <bean id="hykfkAction" class="com.sw.cms.action.HykfkAction" autowire="byName" scope="prototype"/>
      
      <bean id="hykdjAction" class="com.sw.cms.action.HykdjAction" autowire="byName" scope="prototype"/>
+     
+     <bean id="djhpszAction" class="com.sw.cms.action.DjhpszAction" autowire="byName" scope="prototype"/>
 </beans>

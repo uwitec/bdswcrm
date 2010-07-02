@@ -780,6 +780,13 @@
            <bean class="com.sw.cms.service.HykdjService" autowire="byName"/> 
         </property>
     </bean>
+    
+    <!-- 兑奖货品设置 -->
+    <bean id="djhpszService" parent="baseTransaction">
+        <property name="target">
+           <bean class="com.sw.cms.service.DjhpszService" autowire="byName"/> 
+        </property>
+    </bean>
 </beans>
 
 
