@@ -774,13 +774,6 @@
         </property>
     </bean>
     
-    <!-- 会员卡兑奖 -->
-    <bean id="hykdjService" parent="baseTransaction">
-        <property name="target">
-           <bean class="com.sw.cms.service.HykdjService" autowire="byName"/> 
-        </property>
-    </bean>
-    
     <!-- 兑奖货品设置 -->
     <bean id="djhpszService" parent="baseTransaction">
         <property name="target">

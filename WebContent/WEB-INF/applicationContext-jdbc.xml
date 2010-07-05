@@ -594,11 +594,6 @@
           <property name="jdbcTemplate" ref="jdbcTemplate"/>
      </bean>
      
-     <!-- 会员卡兑奖-->
-     <bean id="hykdjDao" class="com.sw.cms.dao.HykdjDAO">
-          <property name="jdbcTemplate" ref="jdbcTemplate"/>
-     </bean>
-     
      <!-- 会员卡积分-->
      <bean id="hykjfDao" class="com.sw.cms.dao.HykjfDAO">
           <property name="jdbcTemplate" ref="jdbcTemplate"/>
