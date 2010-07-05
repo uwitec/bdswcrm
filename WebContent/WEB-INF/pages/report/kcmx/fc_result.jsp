@@ -150,6 +150,7 @@ if(productList != null && productList.size()>0){
 <input type="hidden" name="product_name" value="<%=product_name %>">
 <input type="hidden" name="store_id" value="<%=store_id %>">
 <input type="hidden" name="state" value="<%=state %>">
+<input type="hidden" name="isZero" value="<%=isZero %>">
 </form>
 </body>
 </html>
