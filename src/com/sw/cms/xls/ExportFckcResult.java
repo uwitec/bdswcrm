@@ -23,6 +23,7 @@ public class ExportFckcResult extends ExportXlsTemplate {
 			String product_name = StringUtils.nullToStr(request.getParameter("product_name"));
 			String store_id = StringUtils.nullToStr(request.getParameter("store_id"));
 			String state = StringUtils.nullToStr(request.getParameter("state"));
+			String isZero= StringUtils.nullToStr(request.getParameter("isZero"));
 
 			String conStr = "";
 			if(!product_kind.equals("")){
@@ -38,19 +39,20 @@ public class ExportFckcResult extends ExportXlsTemplate {
 						
 					}
 				}
-				conStr += "&nbsp;&nbsp;<b>商品类别：</b>" + kind_name;
+				conStr += "   商品类别： " + kind_name;
 			}
 			if(!product_name.equals("")){
-				conStr += "&nbsp;&nbsp;<B>商品名称/规格：</B>" + product_name;
+				conStr += "  商品名称/规格： " + product_name;
 			}
 			if(!store_id.equals("")){
-				conStr += "&nbsp;&nbsp;<b>库房：</b>" + StaticParamDo.getStoreNameById(store_id);
+				conStr += "  库房： " + StaticParamDo.getStoreNameById(store_id);
 			}
 
 			//统计结果
 			List productList = kcMxReportService.getProductList(product_kind, product_name, state);
 			List store_list = kcMxReportService.getStoreList(store_id);
 			Map fckcStatResult = kcMxReportService.getKcStatResult(product_kind, product_name, state, store_id);
+						
 			
 			int maxCol = 4;  //最大列数默认为6
 			if(store_list != null && store_list.size() > 0){
@@ -73,9 +75,11 @@ public class ExportFckcResult extends ExportXlsTemplate {
 			label = new Label(0,2,"商品编码",this.getFt_item_center_bold());
 			sheet.addCell(label);			
 			label = new Label(1,2,"商品名称",this.getFt_item_center_bold());
-			sheet.addCell(label);			
+			sheet.addCell(label);
+			sheet.setColumnView(1, 40);
 			label = new Label(2,2,"规格",this.getFt_item_center_bold());
-			sheet.addCell(label);			
+			sheet.addCell(label);		
+			sheet.setColumnView(2, 40);
 			if(store_list != null && store_list.size() > 0){
 				for(int i=0;i<store_list.size();i++){
 					Map map = (Map)store_list.get(i);
@@ -93,6 +97,23 @@ public class ExportFckcResult extends ExportXlsTemplate {
 			if(productList != null && productList.size()>0){
 				for(int i=0;i<productList.size();i++){
 					Map map = (Map)productList.get(i);
+					
+					int tempTotal = 0;
+					
+					if(store_list != null && store_list.size() > 0){
+						for(int k=0;k<store_list.size();k++){
+							Map storeMap = (Map)store_list.get(k);
+							
+							String num = StringUtils.nullToStr(fckcStatResult.get(StringUtils.nullToStr(map.get("product_id")) + StringUtils.nullToStr(storeMap.get("id"))));
+							if(num.equals("")){
+								num = "0";
+							}
+							if(!num.equals("")){
+							tempTotal += new Integer(num);
+							}							
+						}
+					}
+					if(tempTotal == 0 && isZero.equals("否")) continue;
 					
 					int total = 0;
 					
@@ -117,7 +138,8 @@ public class ExportFckcResult extends ExportXlsTemplate {
 							sheet.addCell(label);	
 							
 						}
-					}
+					}				
+					
 					
 					label = new Label(maxCol-1,curRow,total+"",this.getFt_item_center());
 					sheet.addCell(label);			
