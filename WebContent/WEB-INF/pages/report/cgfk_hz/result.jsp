@@ -93,7 +93,20 @@ if(cgfkMxList != null && cgfkMxList.size() > 0){
 			<TD class=ReportItem><a style="cursor:hand" onclick="openWin('viewCgfk.html?id=<%=id %>','采购付款');" title="点击查看原始单据"><%=id %></a></TD>
 			<TD class=ReportItem><%=StaticParamDo.getRealNameById(fk_jsr) %></TD>
 			<TD class=ReportItem><%=fk_date %></TD>
+			<% 
+			if(!fkzh.equals(""))
+			{
+			%>
 			<TD class=ReportItem><%=StaticParamDo.getAccountNameById(fkzh) %></TD>
+			<% 
+			}
+			else
+			{
+			%>
+			<TD class=ReportItem>&nbsp;</TD>
+			<% 
+			}
+			%>
 			<TD class=ReportItem><%=is_yfk %></TD>		
 			<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(fkje,2) %></TD>
 		</TR>
