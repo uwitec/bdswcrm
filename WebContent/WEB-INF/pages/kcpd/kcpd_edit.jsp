@@ -262,7 +262,7 @@ if(kcpdDescs!=null && kcpdDescs.size()>0){
 		<td width="10%">选择</td>
 		<td width="30%">商品名称</td>
 		<td width="25%">规格</td>
-		<td width="12%">库存数量</td>
+		<td width="12%">账面数量</td>
 		<td width="12%">实际数量</td>
 		<td width="11%">盈亏</td>
 	</tr>

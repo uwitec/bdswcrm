@@ -55,7 +55,7 @@ List kcpdDescs = (List)VS.findValue("kcpdDesc");
 	<tr>
 		<td>商品名称</td>
 		<td>规格</td>
-		<td>库存数量</td>
+		<td>账面数量</td>
 		<td>实际数量</td>
 		<td>盈亏</td>
 	</tr>
