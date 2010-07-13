@@ -22,6 +22,7 @@ import com.sw.cms.dao.SysInitSetDAO;
 import com.sw.cms.dao.UserDAO;
 import com.sw.cms.dao.XsdDAO;
 import com.sw.cms.dao.HykdaDAO;
+import com.sw.cms.dao.ShkcDAO;
 import com.sw.cms.model.Accounts;
 import com.sw.cms.model.Clients;
 import com.sw.cms.model.PosType;
@@ -63,6 +64,8 @@ public class DwrService {
 	private PosTypeDAO posTypeDao;
 
 	private HykdaDAO hykdaDao;
+	
+	private ShkcDAO shkcDao;
 	
 	public LsdDAO getLsdDao() {
 		return lsdDao;
@@ -548,6 +551,17 @@ public class DwrService {
 	}
 	
 	/**
+	 * 根据序列号看是否存在在好件库中
+	 * 
+	 * @param serial
+	 * 
+	 * @return
+	 */
+	public String SerialIsExist(String serial,String product_id) {
+		return shkcDao.SerialIsExist(serial,product_id);
+	}
+	
+	/**
 	 * 根据单位类型查询联系人邮箱地址
 	 * 
 	 * @return
@@ -669,6 +683,14 @@ public class DwrService {
 
 	public void setHykdaDao(HykdaDAO hykdaDao) {
 		this.hykdaDao = hykdaDao;
+	}
+
+	public ShkcDAO getShkcDao() {
+		return shkcDao;
+	}
+
+	public void setShkcDao(ShkcDAO shkcDao) {
+		this.shkcDao = shkcDao;
 	}
 
 }

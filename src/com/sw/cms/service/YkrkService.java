@@ -71,7 +71,7 @@ public class YkrkService
 							   {
 								   if(!ykrkProduct.getProduct_name().equals(""))
 								   {									   
-									        shkcDao.deleteShkcHaoById(ykrkProduct.getQz_serial_num());
+									        shkcDao.deleteShkcHaoById(ykrkProduct.getProduct_id(),ykrkProduct.getQz_serial_num());
 									        ShSerialNumFlow shSerialNumFlow=new ShSerialNumFlow();	
 									        SerialNumMng serialNumMng = new SerialNumMng();
 											SerialNumFlow serialNumFlow = new SerialNumFlow();
@@ -186,7 +186,7 @@ public class YkrkService
 						   {
 							   if(!ykrkProduct.getProduct_name().equals(""))
 							   {									   
-								   shkcDao.deleteShkcHaoById(ykrkProduct.getQz_serial_num());
+								   shkcDao.deleteShkcHaoById(ykrkProduct.getProduct_id(),ykrkProduct.getQz_serial_num());
 							        ShSerialNumFlow shSerialNumFlow=new ShSerialNumFlow();	
 							        SerialNumMng serialNumMng = new SerialNumMng();
 									SerialNumFlow serialNumFlow = new SerialNumFlow();

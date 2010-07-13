@@ -119,7 +119,7 @@ public String updatefhkhdId()
 					
 					for(int k=0;k<arryNums.length;k++)
 				   {
-				      shkcDao.deleteShkcById(arryNums[k]);//删除库存中的仓库信息
+				      shkcDao.deleteShkcById(fhkhdProduct.getProduct_id(),arryNums[k]);//删除库存中的仓库信息
 				   }
 			   }
 		   }

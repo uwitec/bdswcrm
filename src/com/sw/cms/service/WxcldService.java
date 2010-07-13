@@ -10,7 +10,8 @@ import com.sw.cms.dao.PgdDAO;
 import com.sw.cms.dao.QtsrDAO;
 import com.sw.cms.dao.SfdDAO;
 import com.sw.cms.dao.WxcldDAO;
-import com.sw.cms.model.Fhkhd;
+import com.sw.cms.dao.ShkcDAO;
+
 import com.sw.cms.model.Jjd;
 import com.sw.cms.model.JjdProduct;
 import com.sw.cms.model.Page;
@@ -31,81 +32,126 @@ public class WxcldService
    private QtsrService qtsrService;
    private JjdService jjdService;
    private JjdDAO  jjdDao;
-
+   private ShkcDAO  shkcDao;
+   
+   
    public Page getWxcldList(String con,int cruPage,int rowsPerPage)
    {
 	   return wxcldDao.getWxcldList(con, cruPage, rowsPerPage);
    }
    
-   public Object getWxcldBySfdPgdId(String pgd_id)
+   public Object getWxcldBySfdPgdId(String w_id)
    {
-		return wxcldDao.getWxcldBySfdPgdId(pgd_id);
+		return wxcldDao.getWxcldBySfdPgdId(w_id);
    }
-   
-   public Object getWxcldProduct(String wxcld_id)
+     
+   public List getWxcldProduct(String wxcld_id)
    {
 	      
 	   return wxcldDao.getWxcldProduct(wxcld_id);
 	      
    }
    
-   public void updateWxcld(Wxcld wxcld,WxcldProduct wxcldProduct) 
+   public void updateWxcld(Wxcld wxcld,List wxcldProducts) 
    {
-	   wxcldDao.updateWxcld(wxcld,wxcldProduct);
-	   if(wxcld.getW_state().equals("已提交"))
-	   {
-		   if(wxcldProduct.getProduct_clfs().equals("维修"))
-		   {	    		 
-	    	    if(wxcld.getW_isfy().equals("是"))//如果产生费用
-	   		    {
-	   			   saveQtsr(wxcld);//添加资金流向
-	   		    }
+	   String isProduct="false";
+	   if(wxcldProducts != null && wxcldProducts.size()>0){
+			for(int i=0;i<wxcldProducts.size();i++){
+				
+				WxcldProduct wxcldProduct = (WxcldProduct)wxcldProducts.get(i);
+				if(wxcldProduct != null){
+					if(wxcldProduct.getProduct_name() != null && !wxcldProduct.getProduct_name().equals("")){
+	                     wxcldDao.updateWxcld(wxcld,wxcldProduct);
+	                     isProduct="true";
+	                     if(wxcld.getW_state().equals("已提交"))
+	                     {
+		                    if(wxcldProduct.getProduct_clfs().equals("维修"))
+		                    {	    		 
+	    	                   if(wxcld.getW_isfy().equals("是"))//如果产生费用
+	   		                  {
+	   			                saveQtsr(wxcld);//添加资金流向
+	   		                   }
 	    		 
-		   }
-		   if(wxcldProduct.getProduct_clfs().equals("报修"))
-		   {
-			   Jjd jjd=new Jjd();
-			   jjd.setId(jjdDao.getJjdId());
-			   jjd.setJj_date(DateComFunc.getToday());
-			   jjd.setCj_date(DateComFunc.getToday());
-			   jjd.setCjr(wxcld.getW_cjr());
-			   jjd.setJjr(wxcld.getW_wxr());
-			   jjd.setState("已保存");
+		                    }
+		                   if(wxcldProduct.getProduct_clfs().equals("换件"))
+		                   {
+			                 Jjd jjd=new Jjd();
+			                 jjd.setId(jjdDao.getJjdId());
+			                 jjd.setJj_date(DateComFunc.getToday());
+			                 jjd.setCj_date(DateComFunc.getToday());
+			                 jjd.setCjr(wxcld.getW_cjr());
+			                 jjd.setJjr(wxcld.getW_wxr());
+			                 jjd.setState("已保存");
 			   
-			   jjd.setClient_name(wxcld.getW_client_name());
-			   jjd.setLinkman(wxcld.getW_linkman());
-			   jjd.setMobile(wxcld.getW_mobile());
+			                 jjd.setClient_name(wxcld.getW_client_name());
+			                 jjd.setLinkman(wxcld.getW_linkman());
+			                 jjd.setMobile(wxcld.getW_mobile());
 			   
-			   JjdProduct jjdProduct =new JjdProduct();
-			   jjdProduct.setJjd_id(jjd.getId());
-			   jjdProduct.setNums(1);
-			   jjdProduct.setProduct_id(wxcldProduct.getProduct_id());
-			   jjdProduct.setProduct_name(wxcldProduct.getProduct_name());
-			   jjdProduct.setProduct_xh(wxcldProduct.getProduct_xh());
-			   jjdProduct.setQz_serial_num(wxcldProduct.getProduct_serial_num());
-			   jjdProduct.setRemark(wxcldProduct.getProduct_remark());
-			   List jjdProducts=new ArrayList();
-			   jjdProducts.add(jjdProduct);
-			   jjdService.saveJjd(jjd, jjdProducts);
-		   }
+			                 JjdProduct jjdProduct =new JjdProduct();
+			                 jjdProduct.setJjd_id(jjd.getId());
+			                 jjdProduct.setNums(1);
+			                 jjdProduct.setProduct_id(wxcldProduct.getProduct_id());
+			                 jjdProduct.setProduct_name(wxcldProduct.getProduct_name());
+			                 jjdProduct.setProduct_xh(wxcldProduct.getProduct_xh());
+			                 jjdProduct.setQz_serial_num(wxcldProduct.getProduct_serial_num());
+			                 jjdProduct.setRemark(wxcldProduct.getProduct_remark());
+			                 List jjdProducts=new ArrayList();
+			                 jjdProducts.add(jjdProduct);
+			                 jjdService.saveJjd(jjd, jjdProducts);
+			                 
+			                 shkcDao.deleteShkcById(wxcldProduct.getProduct_id(),wxcldProduct.getN_product_serial_num());//删除库存中的仓库信息
+		                   }
 		   
-		     Pgd pgd=new Pgd();
-		     pgd.setP_id(wxcld.getW_pgd_id());
-		     pgd.setP_wx_state("已处理");
-		     pgd.setP_jd_date(DateComFunc.getToday());
-  		     pgdDao.updatePgdState(pgd);//修改派工单状态
-  		     Map pgdMap=(Map)pgdDao.getSfdByPgdId(wxcld.getW_pgd_id());
-  		     if(null==pgdMap)
-  		     {
-  			   pgdMap=new HashMap();
-  		     }
-		     Sfd sfd=new Sfd();
-  		    sfd.setId(StringUtils.nullToStr(pgdMap.get("p_sfd_id")));
-  		    sfd.setWx_state("已处理");
-  		    sfd.setJd_date(DateComFunc.getToday());
-  		    sfdDao.updateSfdState(sfd);//修改售后服务单状态 
+		                   Pgd pgd=new Pgd();
+		                   pgd.setP_id(wxcld.getW_pgd_id());
+		                   pgd.setP_wx_state("已处理");
+		                   pgd.setP_jd_date(DateComFunc.getToday());
+  		                   pgdDao.updatePgdState(pgd);//修改派工单状态
+  		                   Map pgdMap=(Map)pgdDao.getSfdByPgdId(wxcld.getW_pgd_id());
+  		                   if(null==pgdMap)
+  		                   {
+  			                 pgdMap=new HashMap();
+  		                   }
+		                   Sfd sfd=new Sfd();
+  		                   sfd.setId(StringUtils.nullToStr(pgdMap.get("p_sfd_id")));
+  		                   sfd.setWx_state("已处理");
+  		                   sfd.setJd_date(DateComFunc.getToday());
+  		                   sfdDao.updateSfdState(sfd);//修改售后服务单状态 
+	                     }
+					  }
+				}
+			}
 	   }
+	   if(isProduct=="false")
+	   {
+		   wxcldDao.updateWxcldMain(wxcld); 
+		   if(wxcld.getW_state().equals("已提交"))
+           {
+                 if(wxcld.getW_isfy().equals("是"))//如果产生费用
+	             {
+		           saveQtsr(wxcld);//添加资金流向
+	             }
+                 Pgd pgd=new Pgd();
+                 pgd.setP_id(wxcld.getW_pgd_id());
+                 pgd.setP_wx_state("已处理");
+                 pgd.setP_jd_date(DateComFunc.getToday());
+                 pgdDao.updatePgdState(pgd);//修改派工单状态
+                 Map pgdMap=(Map)pgdDao.getSfdByPgdId(wxcld.getW_pgd_id());
+                 if(null==pgdMap)
+                 {
+	               pgdMap=new HashMap();
+                 }
+                 Sfd sfd=new Sfd();
+                 sfd.setId(StringUtils.nullToStr(pgdMap.get("p_sfd_id")));
+                 sfd.setWx_state("已处理");
+                 sfd.setJd_date(DateComFunc.getToday());
+                 sfdDao.updateSfdState(sfd);//修改售后服务单状态 
+           }	 
+	   }
+	   
    }
+   
+ 
    
    public void saveQtsr(Wxcld wxcld)
    {
@@ -177,5 +223,13 @@ public JjdService getJjdService() {
 
 public void setJjdService(JjdService jjdService) {
 	this.jjdService = jjdService;
+}
+
+public ShkcDAO getShkcDao() {
+	return shkcDao;
+}
+
+public void setShkcDao(ShkcDAO shkcDao) {
+	this.shkcDao = shkcDao;
 }
 }
