@@ -15,6 +15,7 @@ import com.sw.cms.model.FhkhdProduct;
 import com.sw.cms.model.JjdProduct;
 import com.sw.cms.model.BfdProduct;
 import com.sw.cms.model.HjdProduct;
+import com.sw.cms.model.Product;
 import com.sw.cms.model.WxrkdProduct;
 import com.sw.cms.model.Page;
 import com.sw.cms.model.Shkc;
@@ -225,37 +226,37 @@ public class ShkcDAO extends JdbcBaseDAO
     * 根据序列号删除库存
     * @param serial_num
     */
-   public void deleteShkcById(String serial_num)
+   public void deleteShkcById(String product_id,String serial_num)
    {
 	   String sqlStore="";
 	   String storeId="";
 	   sqlStore= "select id from storehouse where name='好件库'";		
 	   Map map=getResultMap(sqlStore);		
 	   storeId= (String)map.get("id"); 
-	   String sql="update shkc set state='',store_id=''  where  qz_serial_num='"+serial_num+"' and store_id='"+storeId+"'";
+	   String sql="update shkc set state='',store_id=''  where  qz_serial_num='"+serial_num+"' and store_id='"+storeId+"' and product_id='"+product_id+"'";
 	   this.getJdbcTemplate().update(sql);
    }
    
-   public void deleteShkcWaiById(String serial_num)
+   public void deleteShkcWaiById(String product_id,String serial_num)
    {
 	   String sqlStore="";
 	   String storeId="";
 	   sqlStore= "select id from storehouse where name='坏件库'";		
 	   Map map=getResultMap(sqlStore);		
 	   storeId= (String)map.get("id"); 
-	   String sql="delete from shkc where state='2' and qz_serial_num='"+serial_num+"' and store_id='"+storeId+"'";
+	   String sql="delete from shkc where state='2' and qz_serial_num='"+serial_num+"' and store_id='"+storeId+"' and product_id='"+product_id+"'";
 	   this.getJdbcTemplate().update(sql);
    }
    
    
-   public void deleteShkcHaoById(String serial_num)
+   public void deleteShkcHaoById(String product_id,String serial_num)
    {
 	   String sqlStore="";
 	   String storeId="";
 	   sqlStore= "select id from storehouse where name='好件库'";		
 	   Map map=getResultMap(sqlStore);		
 	   storeId= (String)map.get("id"); 
-	   String sql="delete from shkc where state='3' and qz_serial_num='"+serial_num+"' and store_id='"+storeId+"'";
+	   String sql="delete from shkc where state='3' and qz_serial_num='"+serial_num+"' and store_id='"+storeId+"' and product_id='"+product_id+"'";
 	   this.getJdbcTemplate().update(sql);
    }
    /**
@@ -456,9 +457,31 @@ public class ShkcDAO extends JdbcBaseDAO
 		Map map=getResultMap(sql);		
 		String storeId= (String)map.get("id") ; 
 		return  storeId;
-
-
 	}
+	
+	/**
+	 * <p>判断序列号是否存在</p>
+	 * @param serial_num 序列号
+	 * @return 存在返回true;不存在返回false
+	 */
+	public String SerialIsExist(String serial_num,String product_id){
+		String is = "false";		
+		String sqlStore=""; 
+		String storeId="";
+		sqlStore= "select id from storehouse where name='好件库'";
+		Map map=getResultMap(sqlStore);
+	
+		storeId= (String)map.get("id") ; 
+		String sql = "select a.*,b.qz_serial_num as qz_flag from shkc a left join product b on b.product_id=a.product_id "+
+		             " where a.state='3' and a.qz_serial_num='" + serial_num + "' and a.store_id='"+storeId+"' and a.product_id='"+product_id+"'";
+		
+		List list = this.getResultList(sql);
+		if(list != null && list.size()>0){
+			is = "true";
+		}
+		return is;
+	}
+	
    /**
     * 售后库存封装类
     * @author Administrator
