@@ -137,7 +137,15 @@ ALTER TABLE `cms_all_seq` ADD COLUMN `hykdaid` INTEGER UNSIGNED DEFAULT 1 AFTER 
 2010-06-17增加
 --售后服务单添加khlx字段，保存客户类型的信息
 
-ALTER TABLE `sfd` ADD COLUMN `khlx` VARCHAR(10) NOT NULL DEFAULT 0 AFTER `bxyy_ms`;
+ALTER TABLE `sfd` ADD COLUMN `khlx` VARCHAR(10) NOT NULL DEFAULT NULL AFTER `bxyy_ms`;
+
+
+--暂时不更新
+INSERT INTO `funcs`(`func_id`,`func_name`,`func_ms`,`url`,`img`,`xh`,`ywflag`,`funcflag`)  values
+('FC0111','兑奖货品设置','兑奖货品设置','listDjhpsz.html','176.gif',2,'1','10');
+
+INSERT INTO `column_funcs` VALUES ('011002','FC0111');
+
 
 2010-06-22增加
 --增加积分表
@@ -162,9 +170,9 @@ ALTER TABLE `jfgz` MODIFY COLUMN `dyjf` VARCHAR(10) CHARACTER SET utf8 COLLATE u
 
 DROP TABLE IF EXISTS `djhpsz`;
 CREATE TABLE `djhpsz` (
-`product_id` varchar(30) NOT NULL,
-`product_name` varchar(50) NOT NULL,
-`product_xh` varchar(50) default NULL,
+`product_id` varchar(45) NOT NULL,
+`product_name` varchar(200) NOT NULL,
+`product_xh` varchar(200) default NULL,
 `dwjf` varchar(10) default NULL,
 `czr` varchar(10) default NULL,
 `cz_date` datetime default NULL,
@@ -172,20 +180,24 @@ PRIMARY KEY  (`product_id`)
 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--修改积分规则表结构
+ALTER TABLE `jfgz` MODIFY COLUMN `xfje` VARCHAR(10) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL;
+ALTER TABLE `jfgz` MODIFY COLUMN `dyjf` VARCHAR(10) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL;
 
---增加兑奖表
-DROP TABLE IF EXISTS `hykdj`;
-CREATE TABLE `hykdj` (
-`id` varchar(20) NOT NULL,
-`hykh` varchar(30) NOT NULL,
-`hymc` varchar(50) NOT NULL,
-`hybh` varchar(50) default NULL,
-`zjf` int(10) default NULL,
-`jpmc` varchar(50) default NULL,
-`jpsl` int(10) default NULL,
-`ssjf` int(10) default NULL,
-`czr` varchar(20) default NULL,
-`cz_date` datetime default NULL,  
-PRIMARY KEY  (`id`)
+2010-06-23修改
+--销售单增加会员卡号
+ALTER TABLE `xsd` ADD COLUMN `hykh` VARCHAR(20) default NULL AFTER `yfzf_type`;
+ALTER TABLE `xsd` ADD COLUMN `hyjf` int(10) default 0 AFTER `hykh`;
+--零售单增加会员卡号
+ALTER TABLE `lsd` ADD COLUMN `hykh` VARCHAR(20) default NULL AFTER `pos_id`;
+ALTER TABLE `lsd` ADD COLUMN `hyjf` int(10) default 0 AFTER `hykh`;
 
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE `cms_all_seq` ADD COLUMN `hykdjid` INTEGER UNSIGNED DEFAULT 1 AFTER `hykdaid`;
+
+2010-07-06修改
+--维修处理单增加解决方法的保存
+ALTER TABLE `wxcld` ADD COLUMN `w_jjff` VARCHAR(1000) default NULL AFTER `w_address`;
+--维修处理单（产品）增加新序列号
+ALTER TABLE `wxcld_product` ADD COLUMN `n_product_serial_num` VARCHAR(200) default NULL AFTER `product_clfs`;
+
