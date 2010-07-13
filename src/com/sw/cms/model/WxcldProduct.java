@@ -12,7 +12,15 @@ public class WxcldProduct
 	private  String product_gmts;    
 	private  String product_wxlx;    
 	private  String product_clfs;
-	 
+	private  String n_product_serial_num;
+	
+	public String getN_product_serial_num() {
+		return n_product_serial_num;
+	}
+	public void setN_product_serial_num(String n_product_serial_num) {
+		this.n_product_serial_num = n_product_serial_num;
+	}
+	
 	public int getWxcld_product_id() {
 		return wxcld_product_id;
 	}

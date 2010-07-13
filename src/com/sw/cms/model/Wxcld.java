@@ -20,6 +20,15 @@ public class Wxcld
 	  private String w_mobile;
 	  private String w_address;
 	  private String w_ms;
+	  private String w_jjff;
+	  
+	  public String getW_jjff() {
+			return w_jjff;
+		}
+		public void setW_jjff(String w_jjff) {
+			this.w_jjff = w_jjff;
+		}
+	  
 	public String getW_cj_date() {
 		return w_cj_date;
 	}
