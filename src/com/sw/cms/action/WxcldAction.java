@@ -48,10 +48,10 @@ public class WxcldAction extends BaseAction {
 	private Wxcld wxcld = new Wxcld();;
 	private WxcldProduct wxcldProduct = new WxcldProduct();
 	private Map wxclds;
-	private Map wxcldProducts;
+	private List wxcldProducts= new ArrayList();
 
 	/**
-	 * 售后服务单列表
+	 * 维修处理单列表
 	 * 
 	 * @return
 	 */
@@ -94,24 +94,22 @@ public class WxcldAction extends BaseAction {
 	}
 
 	/**
-	 * 修改售后服务单
+	 * 修改维修处理单
 	 * 
 	 * @return
 	 * @throws Exception
 	 */
 	public String edit() throws Exception {
-		try {
-			String sfd_id = ParameterUtility.getStringParameter(getRequest(),
-					"id", "");
+		try {			
 			String wxclid = ParameterUtility.getStringParameter(getRequest(),
 					"wxcld_id", "");
 
-			wxclds = (Map) wxcldService.getWxcldBySfdPgdId(sfd_id);
-			wxcldProducts = (Map) wxcldService.getWxcldProduct(wxclid);
+			wxclds = (Map) wxcldService.getWxcldBySfdPgdId(wxclid);
+			wxcldProducts = wxcldService.getWxcldProduct(wxclid);
 			wxlx = sjzdService.getSjzdXmxxByZdId("SJZD_GZLX");
 			return "success";
 		} catch (Exception e) {
-			log.error("打开修改派工单页面  错误原因" + e.getMessage());
+			log.error("打开修改维修处理单页面  错误原因" + e.getMessage());
 			return "error";
 		}
 	}
@@ -129,13 +127,13 @@ public class WxcldAction extends BaseAction {
 			wxcld.setW_cjr(user_id);
 			if (wxcld.getW_state().equals("已保存")) {
 				wxcld.setW_wx_state("待处理");
-				wxcldService.updateWxcld(wxcld, wxcldProduct);
+		    	wxcldService.updateWxcld(wxcld, wxcldProducts);				
 			}
 			if (wxcld.getW_state().equals("已提交")) {
 
 				wxcld.setW_wx_state("已处理");
 				wxcld.setW_jd_date(DateComFunc.getToday());
-				wxcldService.updateWxcld(wxcld, wxcldProduct);
+				wxcldService.updateWxcld(wxcld, wxcldProducts);				
 			}
 
 			return "success";
@@ -153,19 +151,19 @@ public class WxcldAction extends BaseAction {
 	public String selWxProduct() throws Exception {
 		try {
 			int rowsPerPage = 15;
-
-			String con = "";
-			if (!product_name.equals("")) {
-				con += " and (a.product_name like '%" + product_name
-						+ "%' or a.product_xh like '%" + product_name + "%')";
+			
+			String con = " and a.state='正常'";
+			if(!product_name.equals("")){
+				con += " and (a.product_name like '%" + product_name + "%' or a.product_xh like '%" + product_name + "%')";
 			}
-			if (!product_kind.equals("")) {
+			if(!product_kind.equals("")){
 				con += " and a.product_kind like '" + product_kind + "%'";
 			}
-			productPage = productKcService.getProductKcList(con, curPage,
-					rowsPerPage);
+			
+			productPage = productKcService.getProductKcList(con, curPage, rowsPerPage);
+			
 			kindList = productKindService.getAllProductKindList();
-
+			
 			return "success";
 		} catch (Exception e) {
 			log.error("维修处理单选择库存商品 失败原因：" + e.getMessage());
@@ -183,7 +181,7 @@ public class WxcldAction extends BaseAction {
 		try {
 			String id = ParameterUtility.getStringParameter(getRequest(), "id",
 					"");
-			wxcldProducts = (Map) wxcldService.getWxcldProduct(id);
+			wxcldProducts = wxcldService.getWxcldProduct(id);
 			return "success";
 		} catch (Exception e) {
 			log.error("单击返还客户单查看报修返还信息 错误原因:" + e.getMessage());
@@ -295,11 +293,11 @@ public class WxcldAction extends BaseAction {
 		this.wxcldProduct = wxcldProduct;
 	}
 
-	public Map getWxcldProducts() {
+	public List getWxcldProducts() {
 		return wxcldProducts;
 	}
 
-	public void setWxcldProducts(Map wxcldProducts) {
+	public void setWxcldProducts(List wxcldProducts) {
 		this.wxcldProducts = wxcldProducts;
 	}
 
