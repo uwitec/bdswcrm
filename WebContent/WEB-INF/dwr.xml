@@ -8,6 +8,7 @@
 			<include method="getProductObjBySerialNum"/>
 			<include method="productIsExist"/>
 			<include method="serialNumIsExist"/>
+			<include method="SerialIsExist"/>
 			<include method="updateProductKc"/>
 			<include method="getProudctKcNums"/>
 			<include method="genKcqc"/>
