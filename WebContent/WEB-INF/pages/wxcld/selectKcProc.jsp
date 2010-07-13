@@ -13,8 +13,7 @@ Page productPage = (Page)VS.findValue("productPage");
 String product_name = StringUtils.nullToStr((String)VS.findValue("product_name"));
 String product_kind = StringUtils.nullToStr((String)VS.findValue("product_kind"));
 List kindList = (List)VS.findValue("kindList");
-
- 
+String openerId = StringUtils.nullToStr(request.getParameter("openerId")); 
 %>
 
 <html>
@@ -24,31 +23,23 @@ List kindList = (List)VS.findValue("kindList");
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language='JavaScript' src="js/date.js"></script>
 <script type="text/javascript">
-	
+	var openerId=<%=openerId%>
 	function clearAll(){
 		document.myform.product_kind.value = "";
 		document.myform.product_name.value = "";
 	}
 
-	function openWin(id){
-		var destination = "viewKcye.html?product_id="+id;
-		var fea ='width=400,height=300,left=' + (screen.availWidth-400)/2 + ',top=' + (screen.availHeight-300)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
-		
-		window.open(destination,'设置库存数量',fea);	
-	}	
 	
-	function sel(product_id,product_xh,product_name,lsxj,price,qz_serial_num,kh_cbj,gf){
-	
-		var id = window.opener.document.getElementById("product_id");
-		var xh = window.opener.document.getElementById("product_xh ");
-		var name = window.opener.document.getElementById("product_name");
-	 
-		
+	function sel(product_id,product_xh,product_name){
+	    
+		var id = window.opener.document.getElementById("product_id_"+openerId);
+		var xh = window.opener.document.getElementById("product_xh_"+openerId);
+		var name = window.opener.document.getElementById("product_name_"+openerId);
+	    		
 		if(id != null) id.value = product_id;
 		if(xh != null) xh.value = product_xh;
 		if(name != null) name.value = product_name;
-		 
-		
+				
 		window.close();	
 	}
 	
@@ -56,7 +47,7 @@ List kindList = (List)VS.findValue("kindList");
 </head>
 <body oncontextmenu="return false;" >
 <form name="myform" action="selWxProduct.html" method="post">
- 
+<input type="hidden" name="openerId" id="openerId" value="<%=openerId%>">
 <table width="100%"  align="center"class="chart_list" cellpadding="0" cellspacing="0">
 	<tr>
 		<td class="csstitle" align="left" width="100%">&nbsp;&nbsp;&nbsp;&nbsp;<b>选择库存商品</b></td>			
@@ -109,7 +100,6 @@ List kindList = (List)VS.findValue("kindList");
 		while(it.hasNext()){
 			Map map = (Map)it.next();
 			
-			double price = map.get("price")==null?0:((Double)map.get("price")).doubleValue();
 			double lsbj = map.get("lsbj")==null?0:((Double)map.get("lsbj")).doubleValue();
 			double lsxj = map.get("lsxj")==null?0:((Double)map.get("lsxj")).doubleValue();	
 			double khcbj = map.get("khcbj")==null?0:((Double)map.get("khcbj")).doubleValue();	

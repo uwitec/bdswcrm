@@ -7,11 +7,7 @@
 <%
 OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
 
-Map results = (Map)VS.findValue("wxcldProducts");
-if(null==results)
-{
-  results=new HashMap();
-}
+List results = (List)VS.findValue("wxcldProducts");
 %>
 
 <html>
@@ -45,23 +41,31 @@ if(null==results)
 	<tr>
 		<td width="20%">商品名称</td>
 		<td width="10%">商品规格</td>		 		 
-		<td width="20%">序列号</td>
+		<td width="15%">序列号</td>
+		<td width="15%">新序列号</td>
 		<td width="10%">处理方式</td>		 		 
 		<td width="20%">故障类型</td>			 
 		<td width="10%">备注</td>
 	</tr>
 	</thead>
-	 
-	  
+	<%
+	Iterator it = results.iterator();
+	
+	while(it.hasNext()){
+		WxcldProduct wxcldProduct = (WxcldProduct)it.next();
+	%>  
 	<tr class="a1" onmousedown="trSelectChangeCss()">
-		<td><%=StringUtils.nullToStr(results.get("product_name")) %></td>
-		<td><%=StringUtils.nullToStr(results.get("product_xh")) %></td>
-		<td><%=StringUtils.nullToStr(results.get("product_serial_num")) %></td>		  
-		<td><%=StringUtils.nullToStr(results.get("product_clfs")) %></td>
-		<td><%=StringUtils.nullToStr(results.get("product_wxlx")) %></td>
-		<td><%=StringUtils.nullToStr(results.get("product_remark")) %></td>		 
+		<td><%=StringUtils.nullToStr(wxcldProduct.getProduct_name()) %></td>
+		<td><%=StringUtils.nullToStr(wxcldProduct.getProduct_xh()) %></td>
+		<td><%=StringUtils.nullToStr(wxcldProduct.getProduct_serial_num()) %></td>	
+		<td><%=StringUtils.nullToStr(wxcldProduct.getN_product_serial_num()) %></td>		  
+		<td><%=StringUtils.nullToStr(wxcldProduct.getProduct_clfs()) %></td>
+		<td><%=StringUtils.nullToStr(wxcldProduct.getProduct_wxlx()) %></td>
+		<td><%=StringUtils.nullToStr(wxcldProduct.getProduct_remark()) %></td>		 
 	</tr>
-	 
+	<% 
+	}
+	%> 
 </table>
 </body>
 </html>

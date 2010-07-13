@@ -31,8 +31,8 @@ String orderType = (String)VS.findValue("orderType");
 <script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
 <script type="text/javascript">
 	
-	function openWin(id,wxcld_id){
-		var destination = "viewWxcld.html?id="+id+"&wxcld_id="+wxcld_id+"";
+	function openWin(wxcld_id){
+		var destination = "viewWxcld.html?wxcld_id="+wxcld_id;
 		var fea ='width=950,height=700,left=' + (screen.availWidth-950)/2 + ',top=' + (screen.availHeight-750)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';		
 		window.open(destination,'详细信息',fea);	
 	}
@@ -57,9 +57,9 @@ String orderType = (String)VS.findValue("orderType");
 			var fea ='width=750,height=400,left=' + (screen.availWidth-750)/2 + ',top=' + (screen.availHeight-400)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		window.open(destination,'维修处理单',fea);	
 	}	
-	function edit(id,wxcld_id){
-		var destination ="editWxcld.html?id="+id+"&wxcld_id="+wxcld_id+"";
-		var fea ='width=950,height=700,left=' + (screen.availWidth-950)/2 + ',top=' + (screen.availHeight-750)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+	function edit(wxcld_id){
+		var destination ="editWxcld.html?wxcld_id="+wxcld_id;
+		var fea ='width=950,height=700,left=' + (screen.availWidth-950)/2 + ',top=' + (screen.availHeight-700)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
 		window.open(destination,'详细信息',fea);			
 	}	
@@ -169,30 +169,30 @@ String orderType = (String)VS.findValue("orderType");
 	Iterator it = list.iterator();
 	
 	while(it.hasNext()){
-		Map pgd = (Map)it.next();		
+		Map wxcld = (Map)it.next();		
 	%>
-	<tr class="a1" title="双击查看详情"  onmousedown="trSelectChangeCss()" onclick="descMx('<%=StringUtils.nullToStr(pgd.get("w_id"))%>');"  onDblClick="openWin('<%=StringUtils.nullToStr(pgd.get("w_pgd_id"))%>','<%=StringUtils.nullToStr(pgd.get("w_id"))%>');">
-		<td><%=StringUtils.nullToStr(pgd.get("w_id")) %></td>
-		<td><%=StringUtils.nullToStr(StaticParamDo.getClientNameById((String)pgd.get("w_client_name"))) %></td>
-		<td><%=StringUtils.nullToStr(pgd.get("w_linkman")) %></td>
-		<td><%=StringUtils.nullToStr(pgd.get("w_mobile")) %></td>
-		<td><%=StringUtils.nullToStr(pgd.get("w_address")) %></td>
-		<td><%=StringUtils.nullToStr(pgd.get("w_jx_date")) %></td>
-		<td><%=StringUtils.nullToStr(pgd.get("w_state")) %></td>	
-		<td><%=StringUtils.nullToStr(pgd.get("w_wx_state")) %></td>	 		 
-		<td><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(pgd.get("w_pgr"))) %></td>
-		<td><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(pgd.get("w_wxr"))) %></td>
+	<tr class="a1" title="双击查看详情"  onmousedown="trSelectChangeCss()" onclick="descMx('<%=StringUtils.nullToStr(wxcld.get("w_id"))%>');"  onDblClick="openWin('<%=StringUtils.nullToStr(wxcld.get("w_pgd_id"))%>','<%=StringUtils.nullToStr(wxcld.get("w_id"))%>');">
+		<td><%=StringUtils.nullToStr(wxcld.get("w_id")) %></td>
+		<td><%=StringUtils.nullToStr(StaticParamDo.getClientNameById((String)wxcld.get("w_client_name"))) %></td>
+		<td><%=StringUtils.nullToStr(wxcld.get("w_linkman")) %></td>
+		<td><%=StringUtils.nullToStr(wxcld.get("w_mobile")) %></td>
+		<td><%=StringUtils.nullToStr(wxcld.get("w_address")) %></td>
+		<td><%=StringUtils.nullToStr(wxcld.get("w_jx_date")) %></td>
+		<td><%=StringUtils.nullToStr(wxcld.get("w_state")) %></td>	
+		<td><%=StringUtils.nullToStr(wxcld.get("w_wx_state")) %></td>	 		 
+		<td><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(wxcld.get("w_pgr"))) %></td>
+		<td><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(wxcld.get("w_wxr"))) %></td>
 		<td>
 		<%
-		if(StringUtils.nullToStr(pgd.get("w_state")).equals("已提交"))
+		if(StringUtils.nullToStr(wxcld.get("w_state")).equals("已提交"))
 		{
 		%>
-			<a href="#" onclick="openWin('<%=StringUtils.nullToStr(pgd.get("w_pgd_id")) %>','<%=StringUtils.nullToStr(pgd.get("w_id"))%>');"><img src="images/view.gif" align="absmiddle" title="查看派工单信息" border="0" style="cursor:hand"></a>
+			<a href="#" onclick="openWin('<%=StringUtils.nullToStr(wxcld.get("w_id"))%>');"><img src="images/view.gif" align="absmiddle" title="查看维修处理单信息" border="0" style="cursor:hand"></a>
 		<%	
 		}else{
 		%>
-			<a href="#" onclick="edit('<%=StringUtils.nullToStr(pgd.get("w_pgd_id"))%>','<%=StringUtils.nullToStr(pgd.get("w_id"))%>');"><img src="images/modify.gif" align="absmiddle" title="修改派工单信息" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
-			<a href="#" onclick="openWin('<%=StringUtils.nullToStr(pgd.get("w_pgd_id")) %>','<%=StringUtils.nullToStr(pgd.get("w_id"))%>');"><img src="images/view.gif" align="absmiddle" title="查看派工单信息" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;			 
+			<a href="#" onclick="edit('<%=StringUtils.nullToStr(wxcld.get("w_id"))%>');"><img src="images/modify.gif" align="absmiddle" title="修改维修处理单信息" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
+			<a href="#" onclick="openWin('<%=StringUtils.nullToStr(wxcld.get("w_id"))%>');"><img src="images/view.gif" align="absmiddle" title="查看维修处理单信息" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;			 
 		<%	
 		}		
 		%>
