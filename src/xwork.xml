@@ -2934,6 +2934,9 @@
             <result name="input">/WEB-INF/pages/hykdj/hykdj_edit.jsp</result>
             <result name="success">/WEB-INF/pages/msg.jsp</result>
         </action>
+        <action name="queryHykhRegInfo" class="hykdjAction" method="getHykhRegInfo">
+            <result name="success">/WEB-INF/pages/hykdj/hykh_reg_info.jsp</result>
+        </action>
         <!-- 会员卡兑奖结束 -->
         <!-- 兑奖货品设置开始 -->
         <action name="listDjhpsz" class="djhpszAction" method="list">
@@ -2963,7 +2966,7 @@
         </action>
         <action name="delDjhpsz" class="djhpszAction" method="del">
             <result name="success" type="redirect">listDjhpsz.html</result>
-        </action>
+        </action>        
         <!-- 兑奖货品设置结束 -->
     </package>
 </xwork>
