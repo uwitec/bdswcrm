@@ -15,23 +15,23 @@ public class XstjClientDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public List getXsdList(String start_date,String end_date,String xsry_id,String client_name,String dj_id){
-		String sql = "select DATE_FORMAT(cz_date,'%Y-%m-%d') as creatdate,id,fzr,sjcjje as xsdje from xsd where state='已出库'";
+		String sql = "select DATE_FORMAT(a.cz_date,'%Y-%m-%d') as creatdate,a.id,a.fzr,a.sjcjje as xsdje from xsd a where a.state='已出库'";
 		if(!dj_id.equals("")){
-			sql = sql + " and id='" + dj_id + "'";
+			sql = sql + " and a.id='" + dj_id + "'";
 		}			
 		if(!start_date.equals("")){
-			sql = sql + " and DATE_FORMAT(cz_date,'%Y-%m-%d')>='" + start_date + "'";
+			sql = sql + " and DATE_FORMAT(a.cz_date,'%Y-%m-%d')>='" + start_date + "'";
 		}
 		if(!end_date.equals("")){
-			sql = sql + " and DATE_FORMAT(cz_date,'%Y-%m-%d')<='" + (end_date + " 23:59:59") + "'";
+			sql = sql + " and DATE_FORMAT(a.cz_date,'%Y-%m-%d')<='" + (end_date + " 23:59:59") + "'";
 		}
 		if(!xsry_id.equals("")){
-			sql = sql + " and fzr ='" + xsry_id + "'";
+			sql = sql + " and a.fzr ='" + xsry_id + "'";
 		}
 		if(!client_name.equals("")){
-			sql = sql + " and client_name = '" + client_name + "'";
+			sql = sql + " and a.client_name = '" + client_name + "'";
 		}
-		
+				
 		return this.getResultList(sql);
 	}
 	
@@ -92,22 +92,24 @@ public class XstjClientDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public List getThdList(String start_date,String end_date,String xsry_id,String client_name,String dj_id){
-		String sql = "select DATE_FORMAT(cz_date,'%Y-%m-%d') as th_date,thd_id,th_fzr,thdje from thd where state='已入库'";
+		String sql = "select DATE_FORMAT(a.cz_date,'%Y-%m-%d') as th_date,a.thd_id,a.th_fzr,a.thdje from thd  a  where a.state='已入库'";
 		if(!dj_id.equals("")){
-			sql = sql + " and thd_id='" + dj_id + "'";
+			sql = sql + " and a.thd_id='" + dj_id + "'";
 		}
 		if(!start_date.equals("")){
-			sql = sql + " and DATE_FORMAT(cz_date,'%Y-%m-%d')>='" + start_date + "'";
+			sql = sql + " and DATE_FORMAT(a.cz_date,'%Y-%m-%d')>='" + start_date + "'";
 		}
 		if(!end_date.equals("")){
-			sql = sql + " and DATE_FORMAT(cz_date,'%Y-%m-%d')<='" + (end_date + " 23:59:59") + "'";
+			sql = sql + " and DATE_FORMAT(a.cz_date,'%Y-%m-%d')<='" + (end_date + " 23:59:59") + "'";
 		}
 		if(!xsry_id.equals("")){
-			sql = sql + " and th_fzr = '" + xsry_id + "'";
+			sql = sql + " and a.th_fzr = '" + xsry_id + "'";
 		}
 		if(!client_name.equals("")){
-			sql = sql + " and client_name = '" + client_name + "'";
-		}		
+			sql = sql + " and a.client_name = '" + client_name + "'";
+		}
+		
+		
 		return this.getResultList(sql);
 	}
 	
@@ -201,7 +203,7 @@ public class XstjClientDAO extends JdbcBaseDAO {
 	 */
 	public double getLsdZje(String start_date,String end_date,String xsry_id,String dj_id){
 		double lsdje = 0;
-		String sql = "select sum(lsdje) as lsdje from lsd where state='已提交'";
+		String sql = "select sum(lsdje) as lsdje from lsd  where state='已提交'";
 		if(!dj_id.equals("")){
 			sql = sql + " and id='" + dj_id + "'";
 		}			
@@ -232,10 +234,13 @@ public class XstjClientDAO extends JdbcBaseDAO {
 	 * @param client_name
 	 * @param xsry_id
 	 * @param dj_id
+	 * @param client_type
+	 * @param khjl
 	 * @return
 	 */
-	public List getXstjClientResult(String start_date, String end_date,String client_name, String xsry_id, String dj_id){
-		String sql = "select a.client_name as client_id,b.name as client_name,sum(hjje) as hjje from product_sale_flow a join clients b on b.id=a.client_name where (yw_type='销售单' or yw_type='退货单')";
+	public List getXstjClientResult(String start_date, String end_date,String client_name, String xsry_id,String client_type, String khjl,String dj_id){
+		String sql = "select a.client_name as client_id,b.name as client_name,sum(hjje) as hjje from product_sale_flow a "+
+		             "join clients b on b.id=a.client_name join sys_user c on b.khjl=c.user_id where (yw_type='销售单' or yw_type='退货单')";
 		
 		if(!start_date.equals("")){
 			sql += " and a.cz_date>='" + start_date + "'";
@@ -251,6 +256,13 @@ public class XstjClientDAO extends JdbcBaseDAO {
 		}
 		if(!dj_id.equals("")){
 			sql += " and a.id ='" + dj_id + "'";
+		}
+		
+		if(!client_type.equals("")){
+			sql += " and b.client_type ='" + client_type + "'";
+		}
+		if(!khjl.equals("")){
+			sql += " and c.real_name ='" + khjl + "'";
 		}
 		
 		sql += " group by a.client_name,b.name";
