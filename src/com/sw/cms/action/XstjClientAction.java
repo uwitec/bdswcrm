@@ -6,33 +6,37 @@ import java.util.List;
 import com.sw.cms.service.ClientsService;
 import com.sw.cms.service.UserService;
 import com.sw.cms.service.XstjClientService;
+import com.sw.cms.service.SjzdService;
 
 public class XstjClientAction {
 	
 	private XstjClientService xstjClientService;
 	private UserService userService;
 	private ClientsService clientsService;
+	private SjzdService sjzdService;
 	
 	private List userList = new ArrayList();
 	private List clientList = new ArrayList();
 	private List statResult = new ArrayList();
-	 
+	private String[] wldwlx;
 	
 	private String client_name = "";
 	private String start_date = "";
 	private String end_date = "";
 	private String xsry_id = "";
 	private String dj_id = "";
-	
+	private String client_type = "";
+	private String khjl = "";
 	
 	public String showCondition(){
 		userList = userService.getAllEmployeeList();
 		clientList=clientsService.getClientList("");
+		wldwlx = sjzdService.getSjzdXmxxByZdId("SJZD_WLDWLX");
 		return "success";
 	}
 	
 	public String getResult(){
-		statResult = xstjClientService.getXstjClientResult(start_date, end_date, client_name, xsry_id, dj_id);
+		statResult = xstjClientService.getXstjClientResult(start_date, end_date, client_name, xsry_id,client_type,khjl,dj_id);
 		return "success";
 	}
 	
@@ -133,4 +137,35 @@ public class XstjClientAction {
 		dj_id = djId;
 	}
 
+	public SjzdService getSjzdService() {
+		return sjzdService;
+	}
+
+	public void setSjzdService(SjzdService sjzdService) {
+		this.sjzdService = sjzdService;
+	}
+
+	public String[] getWldwlx() {
+		return wldwlx;
+	}
+
+	public void setWldwlx(String[] wldwlx) {
+		this.wldwlx = wldwlx;
+	}
+	
+	public String getClient_type() {
+		return client_type;
+	}
+
+	public void setClient_type(String client_type) {
+		this.client_type = client_type;
+	}
+	
+	public String getKhjl() {
+		return khjl;
+	}
+
+	public void setKhjl(String khjl) {
+		this.khjl = khjl;
+	}
 }
