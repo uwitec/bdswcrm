@@ -12,6 +12,10 @@ public class XstjClientService {
 	 * 取销售单列表
 	 * @param start_date
 	 * @param end_date
+	 * @param client_name
+	 * @param client_type
+	 * @param khjl
+	 * @param dj_id
 	 * @param xsry_id
 	 * @return
 	 */
@@ -34,7 +38,8 @@ public class XstjClientService {
 	 * 根据查询条件取零售单列表
 	 * @param start_date 开始时间
 	 * @param end_date  截止时间
-	 * @param client_id  客户名称
+	 * @param xsry_id  客户名称
+	 * @param dj_id  单据编号
 	 * @return
 	 */
 	public List getLsdList(String start_date,String end_date,String xsry_id,String dj_id){
@@ -57,6 +62,10 @@ public class XstjClientService {
 	 * @param start_date
 	 * @param end_date
 	 * @param client_name
+	 * @param client_type
+	 * @param khjl
+	 * @param dj_id
+	 * @param xsry_id
 	 * @return
 	 */
 	public List getThdList(String start_date,String end_date,String xsry_id,String client_name,String dj_id){
@@ -111,8 +120,8 @@ public class XstjClientService {
 	 * @param dj_id
 	 * @return
 	 */
-	public List getXstjClientResult(String start_date, String end_date,String client_name, String xsry_id, String dj_id){
-		return xstjClientDao.getXstjClientResult(start_date, end_date, client_name, xsry_id, dj_id);
+	public List getXstjClientResult(String start_date, String end_date,String client_name, String xsry_id,String client_type, String khjl,String dj_id){
+		return xstjClientDao.getXstjClientResult(start_date, end_date, client_name, xsry_id,client_type,khjl,dj_id);
 	}
 	
 	public XstjClientDAO getXstjClientDao() {
@@ -121,8 +130,5 @@ public class XstjClientService {
 
 	public void setXstjClientDao(XstjClientDAO xstjClientDao) {
 		this.xstjClientDao = xstjClientDao;
-	}
-	
-	
-
+	}	
 }
