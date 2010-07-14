@@ -1,5 +1,10 @@
 <%@ page language="java" errorPage="/error.jsp" pageEncoding="UTF-8" contentType="text/html;charset=utf-8" %>
 <%@ page import="com.sw.cms.util.*" %>
+<%@ page import="com.opensymphony.xwork.util.OgnlValueStack" %>
+<%
+OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
+String[] wldwlx = (String[])VS.findValue("wldwlx");
+%>
 <html>
 <head>
 <title>客户销售汇总</title>
@@ -52,6 +57,27 @@
             <div   id="brandTip"  style="height:12px;position:absolute;left:760px; top:87px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
             </div>
 		    <input type="hidden" name="xsry_id" id="fzr"  /> 
+		</td>			
+	</tr>
+	<tr>
+		<td class="a1">客户类型</td>
+		<td class="a4">
+		<select name="client_type" id="client_type" style="width:40%">
+				<option value=""></option>
+				<%
+				if(wldwlx != null && wldwlx.length > 0){ 
+					for(int i=0;i<wldwlx.length;i++){
+				%>
+				<option value="<%=wldwlx[i] %>"><%=wldwlx[i] %></option>
+				<%
+					}
+				}
+				%>
+			</select>
+		</td>	
+		<td class="a1">客户经理</td>
+		<td class="a4">
+		    <input type="text" name="khjl" id="khjl"  value="" size="30" > 
 		</td>			
 	</tr>
 	<tr>

@@ -16,10 +16,10 @@ String dj_id = StringUtils.nullToStr(request.getParameter("dj_id"));            
 String isShowZ = StringUtils.nullToStr(request.getParameter("isShowZ"));         //是否显示销售额为零客户
 String client_name = StringUtils.nullToStr(request.getParameter("client_name")); 
 
+String khjl = StringUtils.nullToStr(request.getParameter("khjl"));         //客户经理
+String client_type = StringUtils.nullToStr(request.getParameter("client_type")); //客户类型
 //汇总结果
 List statResult = (List)VS.findValue("statResult");
-
-
 %>
 
 <html>
@@ -33,7 +33,7 @@ List statResult = (List)VS.findValue("statResult");
 <script language='JavaScript' src="js/date.js"></script>
 <script type="text/javascript">
 	function openWin(client_name){
-		location.href = "getXstjClientResultMx.html?start_date=<%=start_date%>&end_date=<%=end_date%>&xsry_id=<%=xsry_id%>&dj_id=<%=dj_id%>&client_name=" + client_name;
+		location.href = "getXstjClientResultMx.html?start_date=<%=start_date%>&end_date=<%=end_date%>&xsry_id=<%=xsry_id%>&dj_id=<%=dj_id%>&client_type=<%=client_type%>&khjl=<%=khjl%>&client_name=" + client_name;
 	}
 	
 	function openWinLs(){
@@ -92,7 +92,7 @@ if(statResult != null && statResult.size()>0){
 	}
 }
 
-if(client_name.equals("")){
+if(client_name.equals("")&& client_type.equals("") && khjl.equals("")){
 
 	double lsdzje = xstjClientService.getLsdZje(start_date, end_date, xsry_id, dj_id);
 	hjje += lsdzje;
