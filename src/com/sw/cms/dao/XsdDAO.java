@@ -7,15 +7,12 @@ import java.util.Map;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import com.sw.cms.dao.base.BeanRowMapper;
 import com.sw.cms.dao.base.JdbcBaseDAO;
 import com.sw.cms.dao.base.SqlUtil;
-import com.sw.cms.model.ClientsPayInfo;
 import com.sw.cms.model.Fxdd;
 import com.sw.cms.model.Page;
 import com.sw.cms.model.Xsd;
 import com.sw.cms.model.XsdProduct;
-import com.sw.cms.model.Hykjf;
 import com.sw.cms.util.DateComFunc;
 import com.sw.cms.util.StringUtils;
 
@@ -182,18 +179,16 @@ public class XsdDAO extends JdbcBaseDAO {
 			//存在更新
 			sql = "update xsd set creatdate=?,fzr=?,client_name=?,sklx=?,state=?,yhje=?,xsdje=?,xsdcbj=?,skje=?,skzh=?,ms=?,czr=?,skxs=?," +
 					"skrq=?,ysrq=?,cz_date=now(),kh_address=?,kh_lxr=?,kh_lxdh=?,ysfs=?,store_id=?,xjd=?,ysje=?,zq=?," +
-					"sjcjje=?,xsdkhcb=?,sp_state=?,sp_type=?,skfs=?,pos_id=?,fplx=?,kp_mc=?,kp_address=?,kp_dh=?,khhzh=?,"+
-					"sh=?,fpxx=?,yfzf_type=?,th_flag=?,hykh=?,hyjf=? where id=?";
+					"sjcjje=?,xsdkhcb=?,sp_state=?,sp_type=?,skfs=?,pos_id=?,fplx=?,kp_mc=?,kp_address=?,kp_dh=?,khhzh=?,sh=?,fpxx=?,yfzf_type=?,th_flag=? where id=?";
 		}else{
 			//不存在添加
 			sql = "insert into xsd(creatdate,fzr,client_name,sklx,state,yhje,xsdje,xsdcbj,skje,skzh,ms,czr,skxs,skrq,ysrq,cz_date," +
-					"kh_address,kh_lxr,kh_lxdh,ysfs,store_id,xjd,ysje,zq,sjcjje,xsdkhcb,sp_state,sp_type,skfs,pos_id,fplx,kp_mc,"+
-					"kp_address,kp_dh,khhzh,sh,fpxx,yfzf_type,th_flag,hykh,hyjf,id) " +
-					"values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,now(),?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+					"kh_address,kh_lxr,kh_lxdh,ysfs,store_id,xjd,ysje,zq,sjcjje,xsdkhcb,sp_state,sp_type,skfs,pos_id,fplx,kp_mc,kp_address,kp_dh,khhzh,sh,fpxx,yfzf_type,th_flag,id) " +
+					"values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,now(),?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		}
 		
 		
-		Object[] param = new Object[41];
+		Object[] param = new Object[39];
 		
 		param[0] = xsd.getCreatdate();
 		param[1] = xsd.getFzr();
@@ -233,9 +228,7 @@ public class XsdDAO extends JdbcBaseDAO {
 		param[35] = xsd.getFpxx();	
 		param[36] = xsd.getYfzf_type();
 		param[37] = xsd.getTh_flag();
-		param[38] = xsd.getHykh();
-		param[39] = xsd.getHyjf();
-		param[40] = xsd_id;
+		param[38] = xsd_id;
 		
 		this.getJdbcTemplate().update(sql,param);  //更新销售单信息
 		
@@ -278,7 +271,6 @@ public class XsdDAO extends JdbcBaseDAO {
 	}
 	
 	
-		
 	/**
 	 * 根据编号获取销售单信息
 	 * @param id
@@ -290,7 +282,6 @@ public class XsdDAO extends JdbcBaseDAO {
 		return this.queryForObject(sql, new XsdRowMapper());
 	}
 	
-		
 	
 	/**
 	 * 根据分销定单编号取分销订单信息
@@ -790,9 +781,8 @@ public class XsdDAO extends JdbcBaseDAO {
 			if(SqlUtil.columnIsExist(rs,"cx_tel")) xsd.setCx_tel(rs.getString("cx_tel"));
 			if(SqlUtil.columnIsExist(rs,"send_time")) xsd.setSend_time(rs.getString("send_time"));
 			if(SqlUtil.columnIsExist(rs,"yfzf_type")) xsd.setYfzf_type(rs.getString("yfzf_type"));
-			//增加会员卡信息
-			if(SqlUtil.columnIsExist(rs,"hykh")) xsd.setHykh(rs.getString("hykh"));
-			if(SqlUtil.columnIsExist(rs,"hyjf")) xsd.setHyjf(rs.getInt("hyjf"));
+			
+			
 			return xsd;
 		}
 	}

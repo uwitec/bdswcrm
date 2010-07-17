@@ -345,13 +345,6 @@ public class XsdAction extends BaseAction {
 				//如果不需要审批
 				xsd.setSp_state("0");
 			}
-			
-		}
-		boolean hasHykh = xsdService.isHykh(xsd.getClient_name(),xsd.getHykh());  //是否存在对应该客户的会员卡号
-		if(hasHykh==false)
-		{
-			msg = "该客户对应的会员卡号不存在，请检查！";
-			return "input";
 		}
 
 		xsdService.updateXsd(xsd, xsdProducts);
@@ -503,13 +496,7 @@ public class XsdAction extends BaseAction {
 			return "error";
 		}		
 	}
-	/**
-	 * 打开输入会员卡窗口
-	 * @return
-	 */
-	public String importHyk(){
-		return "success";
-	}
+	
 	
 	public Page getPageXsd() {
 		return pageXsd;

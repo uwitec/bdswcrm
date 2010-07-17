@@ -19,11 +19,9 @@ import com.sw.cms.dao.SysInitSetDAO;
 import com.sw.cms.dao.SysMsgDAO;
 import com.sw.cms.dao.UserDAO;
 import com.sw.cms.dao.XsskDAO;
-import com.sw.cms.dao.HykjfDAO;
 import com.sw.cms.model.AccountDzd;
 import com.sw.cms.model.Ckd;
 import com.sw.cms.model.CkdProduct;
-import com.sw.cms.model.Hykjf;
 import com.sw.cms.model.Lsd;
 import com.sw.cms.model.LsdProduct;
 import com.sw.cms.model.Page;
@@ -34,7 +32,6 @@ import com.sw.cms.model.SerialNumFlow;
 import com.sw.cms.model.SerialNumMng;
 import com.sw.cms.model.SysMsg;
 import com.sw.cms.model.SysUser;
-import com.sw.cms.model.Xsd;
 import com.sw.cms.model.Xssk;
 import com.sw.cms.model.XsskDesc;
 import com.sw.cms.util.DateComFunc;
@@ -64,7 +61,7 @@ public class LsdService {
 	private PosTypeDAO posTypeDao;
 	private QtzcDAO qtzcDao;
 	private ProductSaleFlowDAO productSaleFlowDao;
-	private HykjfDAO hykjfDao;
+	
 	/**
 	 * 获取零售单列表（带分页）
 	 * @param con
@@ -99,23 +96,6 @@ public class LsdService {
 			return;
 		}
 		
-        //增加会员积分
-		int hyjf;
-		Map mp = (Map)hykjfDao.getHyxxls(lsd.getHykh(),lsd.getClient_name(),lsd.getLxr());
-		if(mp!=null && mp.size()>0)
-		{
-		String xfje = StringUtils.nullToStr(mp.get("xfje"));   //销售金额
-		String dyjf = StringUtils.nullToStr(mp.get("dyjf"));   //对应积分
-		
-		hyjf=0;
-		hyjf=(int)(lsd.getSkje())/Integer.parseInt(xfje)*Integer.parseInt(dyjf);
-		}
-		else
-		{
-			hyjf=0;	
-		}
-		lsd.setHyjf(hyjf);
-		
 		lsdDao.saveLsd(lsd, lsdProducts);		
 		
 		if(lsd.getState().equals("已提交")){
@@ -141,8 +121,6 @@ public class LsdService {
 			if(lsd.getFkfs().equals("刷卡") && !lsd.getPos_id().equals("")){
 				this.saveQtzc(lsd);
 			}
-			//增加会员卡积分信息
-			this.addKyxx(lsd);
 		}
 		
 		//如果审批状态为待审批，发送系统消息
@@ -151,33 +129,6 @@ public class LsdService {
 		}
 	}
 	
-	/**
-	 * 添加会员卡信息
-	 * 
-	 * @param lsd
-	 * 
-	 */
-	private void addKyxx(Lsd lsd){
-		int zjf;
-		int ssjf;
-		Hykjf hykjfOld = (Hykjf)hykjfDao.getHykjf(lsd.getHykh());
-		if(hykjfOld != null){
-		 zjf=hykjfOld.getZjf();
-		 ssjf=hykjfOld.getSsjf();
-		}
-		else
-		{
-		 zjf=0;
-		 ssjf=0;
-		}
-		Hykjf hykjf = new Hykjf();
-		hykjf.setHymc(lsd.getClient_name());
-		hykjf.setHykh(lsd.getHykh());
-		hykjf.setZjf(zjf+lsd.getHyjf());
-		hykjf.setSsjf(ssjf+lsd.getHyjf());
-		
-		hykjfDao.saveHyxxls(hykjf);
-	}
 	
 	/**
 	 * 更新零售单信息
@@ -190,25 +141,6 @@ public class LsdService {
 		if(lsdDao.isLsdSubmit(lsd.getId())){
 			return;
 		}
-		
-        //增加会员积分
-		int hyjf;
-		Map mp = (Map)hykjfDao.getHyxxls(lsd.getHykh(),lsd.getClient_name(),lsd.getLxr());
-		if(mp!=null && mp.size()>0)
-		{
-		String xfje = StringUtils.nullToStr(mp.get("xfje"));   //销售金额
-		String dyjf = StringUtils.nullToStr(mp.get("dyjf"));   //对应积分
-		
-		hyjf=0;
-		hyjf=(int)(lsd.getSkje())/Integer.parseInt(xfje)*Integer.parseInt(dyjf);
-		}
-		else
-		{
-		hyjf=0;
-		}
-		
-		lsd.setHyjf(hyjf);
-
 		
 		lsdDao.updateLsd(lsd, lsdProducts);
 		
@@ -235,9 +167,6 @@ public class LsdService {
 			if(lsd.getFkfs().equals("刷卡") && !lsd.getPos_id().equals("")){
 				this.saveQtzc(lsd);
 			}
-			
-            //增加会员卡积分信息
-			this.addKyxx(lsd);
 		}	
 		
 		//如果审批状态为待审批，发送系统消息
@@ -247,23 +176,6 @@ public class LsdService {
 		
 	} 
 	
-	/**
-	 *判断客户是否有此会员卡号 
-	 * @param xsd
-	 * @param
-	 * @return
-	 */
-	public boolean isHykh(String hykh,String client_name,String lxr){
-		boolean is = false;
-		
-		Map hykMap =(Map)hykjfDao.getHyxxls(hykh,client_name,lxr);
-		if(hykMap!=null && hykMap.size()>0)
-		{
-			is = true;
-		}
-		
-		return is;
-	}
 	
 	/**
 	 * 根据零售单ID取零售单信息
@@ -951,12 +863,4 @@ public class LsdService {
 		this.productSaleFlowDao = productSaleFlowDao;
 	}
 
-	public HykjfDAO getHykjfDao() {
-		return hykjfDao;
-	}
-
-
-	public void setHykjfDao(HykjfDAO hykjfDao) {
-		this.hykjfDao = hykjfDao;
-	}
 }

@@ -60,25 +60,6 @@ public class Xsd {
 	
 	private String yfzf_type;    //运费支付类型
 	
-	private String hykh;  //会员卡号
-	
-	private int hyjf;     //会员积分
-	
-	
-	public String getHykh() {
-		return hykh;
-	}
-	public void setHykh(String hykh) {
-		this.hykh = hykh;
-	}
-	public int getHyjf() {
-		return hyjf;
-	}
-	
-	public void setHyjf(int hyjf) {
-		this.hyjf = hyjf;
-	}
-	
 	public String getClient_name() {
 		return client_name;
 	}
