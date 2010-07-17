@@ -231,16 +231,6 @@ String flag = StringUtils.nullToStr(VS.findValue("flag"));
 			dwr.util.setValue("zhname",account.name);
 		}
 	}	
-	
-	function openHykWin(){
-	    var hykh = document.getElementById("hykh").value;
-	    var client_id = document.getElementById("client_id").value;
-		var url = "importHyk.html?hykh=" + hykh ;
-		var fea ='width=300,height=200,left=' + (screen.availWidth-300)/2 + ',top=' + (screen.availHeight-300)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
-		
-		window.open(url,'详细信息',fea);	
-	}	
-	
 </script>
 </head>
 <body onload="initFzrTip();initClientTip();onloadClientInfo();chgKpTyle('<%=StringUtils.nullToStr(xsd.getFplx()) %>');submitSp();">
@@ -491,7 +481,7 @@ if(xsdProducts!=null && xsdProducts.size()>0){
 			<input type="text" id="zhname"  name="zhname" value="<%=StaticParamDo.getAccountNameById(StringUtils.nullToStr(xsd.getSkzh())) %>" size="40" onclick="openAccount();" readonly>
 			<input type="hidden" id="skzh"  name="xsd.skzh" value="<%=StringUtils.nullToStr(xsd.getSkzh()) %>">
 			<img src="images/select.gif" align="absmiddle" title="选择账户" border="0" onclick="openAccount();" style="cursor:hand">
-		</td>					
+		</td>				
 	</tr>
 </table>
 <BR>
@@ -538,29 +528,9 @@ if(xsdProducts!=null && xsdProducts.size()>0){
 		<td class="a2" width="85%" colspan="3">
 			<input type="text" name="xsd.ms" id="ms" value="<%=StringUtils.nullToStr(xsd.getMs()) %>" style="width:75%" maxlength="100">
 		</td>
-	</tr>
-</table>
-<BR>
-<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
-	<thead>
-	<tr>
-		<td colspan="4">会员信息</td>
-	</tr>
-	</thead>
-	<tr>
-		<td class="a1" width="15%">会员卡号</td>
-		<td class="a2" width="45%">
-			<input type="text" name="xsd.hykh" id="hykh" value="<%=StringUtils.nullToStr(xsd.getHykh()) %>" size="40" readonly>
-		</td>	
-		<td class="a1" width="15%">积分</td>
-		<td class="a2" width="45%">
-			<input type="text" name="xsd.hyjf" id="hyjf" value="<%=StringUtils.nullToStr(xsd.getHyjf()) %>" size="40" readonly>
-		</td>	 
-	</tr>	
-		
+	</tr>		
 	<tr height="35">
 		<td class="a1" colspan="4">
-		    <input type="button" name="btnHyk" value="会 员 卡" class="css_button2" onclick="openHykWin()">&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="button" name="btnSave" value="草 稿" class="css_button2" onclick="saveInfo('1');">&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="button" name="btnSub" value="提 交" class="css_button2" onclick="saveInfo('2');">&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="reset" name="btnClose" value="关 闭" class="css_button2" onclick="window.opener.document.myform.submit();window.close();;">
