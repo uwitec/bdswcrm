@@ -184,15 +184,6 @@ PRIMARY KEY  (`product_id`)
 ALTER TABLE `jfgz` MODIFY COLUMN `xfje` VARCHAR(10) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL;
 ALTER TABLE `jfgz` MODIFY COLUMN `dyjf` VARCHAR(10) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL;
 
-2010-06-23修改
---销售单增加会员卡号
-ALTER TABLE `xsd` ADD COLUMN `hykh` VARCHAR(20) default NULL AFTER `yfzf_type`;
-ALTER TABLE `xsd` ADD COLUMN `hyjf` int(10) default 0 AFTER `hykh`;
---零售单增加会员卡号
-ALTER TABLE `lsd` ADD COLUMN `hykh` VARCHAR(20) default NULL AFTER `pos_id`;
-ALTER TABLE `lsd` ADD COLUMN `hyjf` int(10) default 0 AFTER `hykh`;
-
-
 ALTER TABLE `cms_all_seq` ADD COLUMN `hykdjid` INTEGER UNSIGNED DEFAULT 1 AFTER `hykdaid`;
 
 2010-07-06修改
