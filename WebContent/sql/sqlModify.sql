@@ -140,34 +140,12 @@ ALTER TABLE `cms_all_seq` ADD COLUMN `hykdaid` INTEGER UNSIGNED DEFAULT 1 AFTER 
 ALTER TABLE `sfd` ADD COLUMN `khlx` VARCHAR(10) NOT NULL DEFAULT NULL AFTER `bxyy_ms`;
 
 
---暂时不更新
-INSERT INTO `funcs`(`func_id`,`func_name`,`func_ms`,`url`,`img`,`xh`,`ywflag`,`funcflag`)  values
-('FC0111','兑奖货品设置','兑奖货品设置','listDjhpsz.html','176.gif',2,'1','10');
-
-INSERT INTO `column_funcs` VALUES ('011002','FC0111');
-
-
-2010-06-22增加
---增加积分表
-DROP TABLE IF EXISTS `hykjf`;
-CREATE TABLE `hykjf` (
-`hykh` varchar(30) NOT NULL,
-`hymc` varchar(50) NOT NULL,
-`hybh` varchar(50) default NULL,
-`zjf` int(10) default 0,
-`ssjf` int(10) default 0,
-PRIMARY KEY  (`hykh`)
-
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
 --修改积分规则表结构
 ALTER TABLE `jfgz` MODIFY COLUMN `xfje` VARCHAR(10) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL;
 ALTER TABLE `jfgz` MODIFY COLUMN `dyjf` VARCHAR(10) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL;
 
 
 --增加兑奖货品设置表
-
 DROP TABLE IF EXISTS `djhpsz`;
 CREATE TABLE `djhpsz` (
 `product_id` varchar(45) NOT NULL,
