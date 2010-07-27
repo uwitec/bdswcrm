@@ -122,7 +122,7 @@ session.removeAttribute("MSG");
 	}
 	%>
 	 <tr>
-	      <td class="a1" colspan="3" style="text-align:left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>资金管理</b></td>
+	      <td class="a1" colspan="3" style="text-align:left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>出纳管理</b></td>
 	 </tr>
 	
 	<%
@@ -147,12 +147,12 @@ session.removeAttribute("MSG");
 	}
 	}
 	%>
-	  <tr>
-	      <td class="a1" colspan="3" style="text-align:left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>售后管理</b></td>
+	
+	 <tr>
+	      <td class="a1" colspan="3" style="text-align:left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>账务管理</b></td>
 	 </tr>
-	 
-	 
-	 <%
+	
+	<%
 	Iterator it4 = funcList.iterator();
 	
 	while(it4.hasNext()){
@@ -174,35 +174,10 @@ session.removeAttribute("MSG");
 	}
 	}
 	%>
-	 <tr>
-	      <td class="a1" colspan="3" style="text-align:left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>OA办公</b></td>
+	  <tr>
+	      <td class="a1" colspan="3" style="text-align:left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>售后管理</b></td>
 	 </tr>
-	
-	<%
-	Iterator it5 = funcList.iterator();
-	
-	while(it5.hasNext()){
-		Map map = (Map)it5.next();
-		String flag = "";
-	  if(StringUtils.nullToStr(map.get("funcflag")).equals("6"))
-	  {
-		if(roleFuncs.contains(StringUtils.nullToStr(map.get("func_id")))){
-			flag = "checked";
-		}		
-	  %>
 	 
-	<tr>
-		<td class="a1"><input type="checkbox" name="func_id" value="<%=StringUtils.nullToStr(map.get("func_id")) %>" <%=flag %>></td>
-		<td class="a1"><%=StringUtils.nullToStr(map.get("func_name")) %></td>
-		<td class="a1"><%=StringUtils.nullToStr(map.get("func_ms")) %></td>
-	</tr>	
-	<%
-	}
-	}
-	%>
-	 <tr>
-	      <td class="a1" colspan="3" style="text-align:left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>基础资料</b></td>
-	 </tr>
 	 
 	 <%
 	Iterator it6 = funcList.iterator();
@@ -227,7 +202,7 @@ session.removeAttribute("MSG");
 	}
 	%>
 	 <tr>
-	      <td class="a1" colspan="3" style="text-align:left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>系统管理</b></td>
+	      <td class="a1" colspan="3" style="text-align:left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>OA办公</b></td>
 	 </tr>
 	
 	<%
@@ -252,9 +227,8 @@ session.removeAttribute("MSG");
 	}
 	}
 	%>
-	 
-	 <tr>
-	      <td class="a1" colspan="3" style="text-align:left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>发票管理</b></td>
+	<tr>
+	      <td class="a1" colspan="3" style="text-align:left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>会员管理</b></td>
 	 </tr>
 	
 	<%
@@ -262,6 +236,32 @@ session.removeAttribute("MSG");
 	
 	while(it8.hasNext()){
 		Map map = (Map)it8.next();
+		String flag = "";
+	  if(StringUtils.nullToStr(map.get("funcflag")).equals("11"))
+	  {
+		if(roleFuncs.contains(StringUtils.nullToStr(map.get("func_id")))){
+			flag = "checked";
+		}		
+	  %>
+	 
+	<tr>
+		<td class="a1"><input type="checkbox" name="func_id" value="<%=StringUtils.nullToStr(map.get("func_id")) %>" <%=flag %>></td>
+		<td class="a1"><%=StringUtils.nullToStr(map.get("func_name")) %></td>
+		<td class="a1"><%=StringUtils.nullToStr(map.get("func_ms")) %></td>
+	</tr>	
+	<%
+	}
+	}
+	%>	
+	 <tr>
+	      <td class="a1" colspan="3" style="text-align:left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>基础资料</b></td>
+	 </tr>
+	 
+	 <%
+	Iterator it9 = funcList.iterator();
+	
+	while(it9.hasNext()){
+		Map map = (Map)it9.next();
 		String flag = "";
 	  if(StringUtils.nullToStr(map.get("funcflag")).equals("9"))
 	  {
@@ -279,15 +279,15 @@ session.removeAttribute("MSG");
 	}
 	}
 	%>
-	<tr>
-	      <td class="a1" colspan="3" style="text-align:left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>会员管理</b></td>
+	 <tr>
+	      <td class="a1" colspan="3" style="text-align:left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>系统管理</b></td>
 	 </tr>
 	
 	<%
-	Iterator it9 = funcList.iterator();
+	Iterator it10 = funcList.iterator();
 	
-	while(it9.hasNext()){
-		Map map = (Map)it9.next();
+	while(it10.hasNext()){
+		Map map = (Map)it10.next();
 		String flag = "";
 	  if(StringUtils.nullToStr(map.get("funcflag")).equals("10"))
 	  {
@@ -304,7 +304,9 @@ session.removeAttribute("MSG");
 	<%
 	}
 	}
-	%>
+	%>	 
+	 
+	
 	<tr height="40">
 		<td class="a1" colspan="3">
 			<input type="submit" name="button1" value="提 交" class="css_button2">&nbsp;&nbsp;&nbsp;&nbsp;
