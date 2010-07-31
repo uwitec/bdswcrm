@@ -137,7 +137,7 @@ ALTER TABLE `cms_all_seq` ADD COLUMN `hykdaid` INTEGER UNSIGNED DEFAULT 1 AFTER 
 2010-06-17增加
 --售后服务单添加khlx字段，保存客户类型的信息
 
-ALTER TABLE `sfd` ADD COLUMN `khlx` VARCHAR(10) NOT NULL DEFAULT NULL AFTER `bxyy_ms`;
+ALTER TABLE `sfd` ADD COLUMN `khlx` VARCHAR(10) DEFAULT NULL AFTER `bxyy_ms`;
 
 
 --修改积分规则表结构
@@ -173,7 +173,7 @@ ALTER TABLE `wxcld_product` ADD COLUMN `n_product_serial_num` VARCHAR(200) defau
 
 2010-07-24修改
 --退货单添加退货类型
-ALTER TABLE `thd` ADD COLUMN `yw_type` VARCHAR(5) DEFAULT 1 AFTER `out_ratio`;
+ALTER TABLE `thd` ADD COLUMN `yw_type` VARCHAR(5) DEFAULT 1 AFTER `fpxx`;
 
 
 2010-07-31修改
