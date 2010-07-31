@@ -223,7 +223,7 @@ public class CgfkService {
 		cnfkd.setClient_all_name(cgfk.getClient_all_name());
 		cnfkd.setCzr(cgfk.getCzr());
 		cnfkd.setFax(cgfk.getFax());
-		if(cgfk.getIs_yfk().equals("是")){
+		if(StringUtils.nullToStr(cgfk.getIs_yfk()).equals("是")){
 			cnfkd.setFklx("预付款");
 		}else{
 			cnfkd.setFklx("应付款");
@@ -254,6 +254,7 @@ public class CgfkService {
 		String temp = "";
 		
 		String gysbh = cgfk.getGysbh();
+		String cgfk_id = cgfk.getId();
 		
 		if(cgfkDescs != null && cgfkDescs.size()>0){
 			for(int i =0;i<cgfkDescs.size();i++){
@@ -261,7 +262,7 @@ public class CgfkService {
 				if(cgfkDesc != null && cgfkDesc.getBcfk() != 0){
 					String jhd_id = cgfkDesc.getJhd_id();
 					
-					if(cgfkDao.isCgfkDescExist(jhd_id, gysbh)){
+					if(cgfkDao.isCgfkDescExist(cgfk_id, jhd_id, gysbh)){
 						//如果存在冲突，则记录相应进货单编号
 						if(temp.equals("")){
 							temp = jhd_id;

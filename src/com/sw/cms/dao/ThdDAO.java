@@ -24,7 +24,7 @@ public class ThdDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public Page getThdList(String con,int curPage, int rowsPerPage){		
-		String sql = "select * from thd where 1=1";
+		String sql = "select a.* from thd a left join clients b on b.id=a.client_name where 1=1";
 		if(!con.equals("")){
 			sql = sql + con;
 		}
@@ -40,9 +40,9 @@ public class ThdDAO extends JdbcBaseDAO {
 	 */
 	public void saveThd(Thd thd,List thdProducts){
 		
-		String sql = "insert into thd(client_name,thdje,th_fzr,remark,th_date,state,tkzh,czr,cz_date,type,xsd_id,thd_id,store_id,fplx,kp_mc,kp_address,kp_dh,khhzh,sh,fpxx) values(?,?,?,?,?,?,?,?,now(),?,?,?,?,?,?,?,?,?,?,?)";
+		String sql = "insert into thd(client_name,thdje,th_fzr,remark,th_date,state,tkzh,czr,cz_date,type,xsd_id,thd_id,store_id,fplx,kp_mc,kp_address,kp_dh,khhzh,sh,fpxx,yw_type) values(?,?,?,?,?,?,?,?,now(),?,?,?,?,?,?,?,?,?,?,?,?)";
 		
-		Object[] param = new Object[19];
+		Object[] param = new Object[20];
 		
 		param[0] = thd.getClient_name();
 		param[1] = new Double(thd.getThdje());
@@ -62,7 +62,8 @@ public class ThdDAO extends JdbcBaseDAO {
 		param[15] = thd.getKp_dh();
 		param[16] = thd.getKhhzh();
 		param[17] = thd.getSh();
-		param[18] = thd.getFpxx();	
+		param[18] = thd.getFpxx();
+		param[19] = thd.getYw_type();	
 		
 		this.getJdbcTemplate().update(sql,param);
 		
@@ -78,9 +79,9 @@ public class ThdDAO extends JdbcBaseDAO {
 	 */
 	public void updateThd(Thd thd,List thdProducts){
 		
-		String sql = "update thd set client_name=?,thdje=?,th_fzr=?,remark=?,th_date=?,state=?,tkzh=?,czr=?,cz_date=now(),type=?,xsd_id=?,store_id=?,fplx=?,kp_mc=?,kp_address=?,kp_dh=?,khhzh=?,sh=?,fpxx=? where thd_id=?";
+		String sql = "update thd set client_name=?,thdje=?,th_fzr=?,remark=?,th_date=?,state=?,tkzh=?,czr=?,cz_date=now(),type=?,xsd_id=?,store_id=?,fplx=?,kp_mc=?,kp_address=?,kp_dh=?,khhzh=?,sh=?,fpxx=?,yw_type=? where thd_id=?";
 		
-		Object[] param = new Object[19];
+		Object[] param = new Object[20];
 		
 		param[0] = thd.getClient_name();
 		param[1] = new Double(thd.getThdje());
@@ -100,7 +101,8 @@ public class ThdDAO extends JdbcBaseDAO {
 		param[15] = thd.getKhhzh();
 		param[16] = thd.getSh();
 		param[17] = thd.getFpxx();
-		param[18] = thd.getThd_id();
+		param[18] = thd.getYw_type();
+		param[19] = thd.getThd_id();
 		
 		this.getJdbcTemplate().update(sql,param);
 		
@@ -323,7 +325,7 @@ public class ThdDAO extends JdbcBaseDAO {
 			if(SqlUtil.columnIsExist(rs,"khhzh")) thd.setKhhzh(rs.getString("khhzh"));
 			if(SqlUtil.columnIsExist(rs,"sh")) thd.setSh(rs.getString("sh"));
 			if(SqlUtil.columnIsExist(rs,"fpxx")) thd.setFpxx(rs.getString("fpxx"));
-			
+			if(SqlUtil.columnIsExist(rs,"yw_type")) thd.setYw_type(rs.getString("yw_type"));
 			return thd;
 		}
 	}

@@ -228,6 +228,7 @@ public class XsskService {
 		String temp = "";
 		
 		String client_name = xssk.getClient_name();
+		String xssk_id = xssk.getId();
 		
 		if(xsskDescs != null && xsskDescs.size()>0){
 			for(int i =0;i<xsskDescs.size();i++){
@@ -235,7 +236,7 @@ public class XsskService {
 				if(xssKdesc != null && xssKdesc.getBcsk() != 0){
 					String xsd_id = xssKdesc.getXsd_id();
 					
-					if(xsskDao.isXsskDescExist(xsd_id, client_name)){
+					if(xsskDao.isXsskDescExist(xssk_id, xsd_id, client_name)){
 						//如果存在冲突，则记录相应进货单编号
 						if(temp.equals("")){
 							temp = xsd_id;

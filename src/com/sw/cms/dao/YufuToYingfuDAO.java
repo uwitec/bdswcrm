@@ -176,6 +176,29 @@ public class YufuToYingfuDAO extends JdbcBaseDAO {
 
 		return "YFJS" + day + "-" + curId;
 	}
+	
+	
+	/**
+	 * 采购付款明细是否存在冲突(付款申请，预付冲应付)
+	 * @param jhd_id
+	 * @param gysbh
+	 * @return
+	 */
+	public boolean isCgfkDescExist(String yw_id, String jhd_id,String gysbh){
+		boolean is = false;
+		
+		String sql = "select count(1) as counts from cgfk_desc a join cgfk b on b.id=a.cgfk_id where b.state<>'已支付'  and a.jhd_id='" + jhd_id + "' and b.gysbh='" + gysbh + "'";
+		int count1 = this.getJdbcTemplate().queryForInt(sql);
+		
+		sql = "select count(1) as count from yufu_to_yingfu_desc a join yufu_to_yingfu b on b.id=a.yw_id where b.state<>'已提交' and a.yw_id<>'" + yw_id + "' and a.jhd_id='" + jhd_id + "' and client_name='" + gysbh + "'";
+		int count2 = this.getJdbcTemplate().queryForInt(sql);
+		
+		if((count1+count2) > 0){
+			is = true;
+		}
+		
+		return is;
+	}
 
 	
 	/**

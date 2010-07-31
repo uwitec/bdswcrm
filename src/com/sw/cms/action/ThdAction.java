@@ -50,13 +50,13 @@ public class ThdAction extends BaseAction {
 
 		String con = "";
 		if (!client_name.equals("")) {
-			con += " and client_name like'%" + client_name + "%'";
+			con += " and (a.client_name like'%" + client_name + "%' or b.name like '%" + client_name + "%')";
 		}
 		if (!th_date1.equals("")) {
-			con += " and th_date>='" + th_date1 + "'";
+			con += " and a.th_date>='" + th_date1 + "'";
 		}
 		if (!th_date2.equals("")) {
-			con += " and th_date<='" + th_date2 + "'";
+			con += " and a.th_date<='" + th_date2 + "'";
 		}
 
 		if (orderName.equals("")) {

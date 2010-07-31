@@ -139,6 +139,7 @@ public class YushouToYingshouService {
 		String temp = "";
 		
 		String client_name = info.getClient_name();
+		String yw_id = info.getId();
 		
 		if(descList != null && descList.size()>0){
 			for(int i =0;i<descList.size();i++){
@@ -146,7 +147,7 @@ public class YushouToYingshouService {
 				if(desc != null && desc.getBcjs() != 0){
 					String xsd_id = desc.getXsd_id();
 					
-					if(xsskDao.isXsskDescExist(xsd_id, client_name)){
+					if(yushouToYingshouDao.isXsskDescExist(yw_id, xsd_id, client_name)){
 						//如果存在冲突，则记录相应进货单编号
 						if(temp.equals("")){
 							temp = xsd_id;

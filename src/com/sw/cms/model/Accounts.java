@@ -10,6 +10,7 @@ public class Accounts {
 	private String bank;
 	private String bank_count;
 	private String remark;
+	private String flag;
 	
 	public String getBank() {
 		return bank;
@@ -58,6 +59,12 @@ public class Accounts {
 	}
 	public void setType(String type) {
 		this.type = type;
+	}
+	public String getFlag() {
+		return flag;
+	}
+	public void setFlag(String flag) {
+		this.flag = flag;
 	}
 
 }

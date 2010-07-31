@@ -410,10 +410,10 @@ public class CgfkDAO extends JdbcBaseDAO {
 	 * @param gysbh
 	 * @return
 	 */
-	public boolean isCgfkDescExist(String jhd_id,String gysbh){
+	public boolean isCgfkDescExist(String cgfk_id, String jhd_id,String gysbh){
 		boolean is = false;
 		
-		String sql = "select count(1) as counts from cgfk_desc a join cgfk b on b.id=a.cgfk_id where b.state<>'已支付' and a.jhd_id='" + jhd_id + "' and b.gysbh='" + gysbh + "'";
+		String sql = "select count(1) as counts from cgfk_desc a join cgfk b on b.id=a.cgfk_id where b.state<>'已支付' and a.cgfk_id<>'" + cgfk_id + "' and a.jhd_id='" + jhd_id + "' and b.gysbh='" + gysbh + "'";
 		int count1 = this.getJdbcTemplate().queryForInt(sql);
 		
 		sql = "select count(1) as count from yufu_to_yingfu_desc a join yufu_to_yingfu b on b.id=a.yw_id where b.state<>'已提交' and a.jhd_id='" + jhd_id + "' and client_name='" + gysbh + "'";

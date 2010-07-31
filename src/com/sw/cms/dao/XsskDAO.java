@@ -382,10 +382,10 @@ public class XsskDAO extends JdbcBaseDAO {
 	 * @param gysbh
 	 * @return
 	 */
-	public boolean isXsskDescExist(String xsd_id,String client_name){
+	public boolean isXsskDescExist(String xssk_id,String xsd_id,String client_name){
 		boolean is = false;
 		
-		String sql = "select count(1) as counts from xssk_desc a join xssk b on b.id=a.xssk_id where b.state<>'已提交' and a.xsd_id='" + xsd_id + "' and b.client_name='" + client_name + "'";
+		String sql = "select count(1) as counts from xssk_desc a join xssk b on b.id=a.xssk_id where b.state<>'已提交' and a.xssk_id<>'" + xssk_id + "' and a.xsd_id='" + xsd_id + "' and b.client_name='" + client_name + "'";
 		int count1 = this.getJdbcTemplate().queryForInt(sql);
 		
 		sql = "select count(1) as count from yushou_to_yingshou_desc a join yushou_to_yingshou b on b.id=a.yw_id where b.state<>'已提交' and a.xsd_id='" + xsd_id + "' and b.client_name='" + client_name + "'";

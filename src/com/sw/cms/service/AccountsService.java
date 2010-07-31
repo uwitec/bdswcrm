@@ -14,8 +14,8 @@ public class AccountsService {
 	 * 取账户列表
 	 * @return
 	 */
-	public List getAccountList(){
-		return accountsDao.getAccountList();
+	public List getAccountList(String flag){
+		return accountsDao.getAccountList(flag);
 	}
 	
 	
@@ -52,8 +52,8 @@ public class AccountsService {
 	 * 删除账号信息
 	 * @param id
 	 */
-	public void delAccounts(String id){
-		accountsDao.delAccounts(id);
+	public void updateAccountFlag(String id,String flag){
+		accountsDao.updateAccountFlag(id,flag);
 	}
 	
 	

@@ -143,7 +143,7 @@ public class CgfkAction extends BaseAction {
 		cgfkDescs = cgfkService.getCgfkDesc(id);
 		
 		userList = userService.getAllEmployeeList();
-		accountList = accountsService.getAccountList();
+		accountList = accountsService.getAccountList("1");
 		
 		return "success";
 	}

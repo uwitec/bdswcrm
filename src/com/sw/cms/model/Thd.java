@@ -25,6 +25,8 @@ public class Thd {
 	private String sh;           //税号
 	private String fpxx;         //发票信息
 	
+	private String yw_type;      //退货类型 1:销售订单;2:零售订单
+	
 	public String getClient_name() {
 		return client_name;
 	}
@@ -144,6 +146,12 @@ public class Thd {
 	}
 	public void setSh(String sh) {
 		this.sh = sh;
+	}
+	public String getYw_type() {
+		return yw_type;
+	}
+	public void setYw_type(String ywType) {
+		yw_type = ywType;
 	}
 	
 }

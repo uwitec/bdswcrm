@@ -18,7 +18,7 @@ public class StoreDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public List getAllStoreList(){
-		String sql = "select * from storehouse";
+		String sql = "select * from storehouse where id not like 'WX%'";
 		
 		return this.getJdbcTemplate().query(sql, new StoreHouseRowMapper());
 	}

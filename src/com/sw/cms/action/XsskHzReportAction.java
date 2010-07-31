@@ -20,7 +20,7 @@ public class XsskHzReportAction extends BaseAction {
 	
 	public String showCondition(){
 		userList = userService.getAllEmployeeList();
-		accountList = accountsService.getAccountList();
+		accountList = accountsService.getAccountList("1");
 		return "success";
 	}
 	

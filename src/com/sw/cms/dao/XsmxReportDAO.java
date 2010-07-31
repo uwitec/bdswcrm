@@ -112,7 +112,7 @@ public class XsmxReportDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public List getThdList(String start_date,String end_date,String client_name,String xsry_id,String dj_id,String dept_id){
-		String sql = "select DATE_FORMAT(a.cz_date,'%Y-%m-%d') as th_date,a.thd_id,b.name as client_name,a.th_fzr,thdje " +
+		String sql = "select DATE_FORMAT(a.cz_date,'%Y-%m-%d') as th_date,a.thd_id,a.client_name,a.th_fzr,thdje " +
 				     "from thd a left join clients b on b.id=a.client_name left join sys_user c on c.user_id=a.th_fzr where a.state='ÒÑÈë¿â'";
 		if(!dj_id.equals("")){
 			sql = sql + " and a.thd_id='" + dj_id + "'";
@@ -124,7 +124,7 @@ public class XsmxReportDAO extends JdbcBaseDAO {
 			sql = sql + " and DATE_FORMAT(a.cz_date,'%Y-%m-%d')<='" + (end_date + " 23:59:59") + "'";
 		}
 		if(!client_name.equals("")){
-			sql = sql + " and b.name like'%" + client_name + "%'";
+			sql = sql + " and (a.client_name like '%" + client_name + "%' or b.name like'%" + client_name + "%')";
 		}
 		if(!xsry_id.equals("")){
 			sql = sql + " and a.th_fzr='" + xsry_id + "'";

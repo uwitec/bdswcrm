@@ -74,7 +74,7 @@ public class CnfkdAction extends BaseAction {
 			if(cnfkd.getHas_fy() == null || cnfkd.getHas_fy().equals("")){
 				cnfkd.setHas_fy("ÊÇ");
 			}
-			accountList = accountsService.getAccountList();
+			accountList = accountsService.getAccountList("1");
 			arryFkfs = sjzdService.getSjzdXmxxByZdId("SJZD_FKFS");
 			return SUCCESS;
 		}catch(Exception e){

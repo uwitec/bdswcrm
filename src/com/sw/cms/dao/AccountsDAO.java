@@ -14,8 +14,11 @@ public class AccountsDAO extends JdbcBaseDAO {
 	 * 取账户列表
 	 * @return
 	 */
-	public List getAccountList(){
+	public List getAccountList(String flag){
 		String sql = "select * from accounts";
+		if(!flag.equals("")){
+			sql += " where flag='" + flag + "'";
+		}
 		return this.getJdbcTemplate().queryForList(sql);
 	}
 	
@@ -89,8 +92,8 @@ public class AccountsDAO extends JdbcBaseDAO {
 	 * 删除账号信息
 	 * @param id
 	 */
-	public void delAccounts(String id){
-		String sql = "delete from accounts where id='" + id + "'";
+	public void updateAccountFlag(String id,String flag){
+		String sql = "update accounts set flag='" + flag + "' where id='" + id + "'";
 		this.getJdbcTemplate().update(sql);
 	}
 	

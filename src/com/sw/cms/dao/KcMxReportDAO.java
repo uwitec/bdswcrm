@@ -572,7 +572,7 @@ public class KcMxReportDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public List getStoreList(String store_id){
-		String sql = "select * from storehouse where 1=1";
+		String sql = "select * from storehouse where id not like 'WX%'";
 		
 		if(!store_id.equals("")){
 			sql += " and id='" + store_id + "'";

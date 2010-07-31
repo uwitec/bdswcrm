@@ -14,7 +14,7 @@ public class CashBankAction extends BaseAction {
 	private List accountList = new ArrayList();
 	
 	public String showCondition(){
-		accountList = accountsService.getAccountList();
+		accountList = accountsService.getAccountList("1");
 		return "success";
 	}
 	

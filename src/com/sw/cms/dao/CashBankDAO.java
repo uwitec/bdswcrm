@@ -21,7 +21,7 @@ public class CashBankDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public List getAccountList(String account_id,String type){
-		String sql = "select * from accounts where 1=1";
+		String sql = "select * from accounts where flag='1'";
 		if(!account_id.equals("")){
 			sql = sql + " and id='" + account_id + "'";
 		}

@@ -23,7 +23,7 @@ public class CgfkHzReportAction extends BaseAction {
 	
 	public String showCondition(){
 		userList = userService.getAllEmployeeList();
-		accountList = accountsService.getAccountList();
+		accountList = accountsService.getAccountList("1");
 		clientList=clientsService.getClientList("");
 		return "success";
 	}
