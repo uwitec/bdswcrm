@@ -859,9 +859,11 @@
             <result name="success">/WEB-INF/pages/account/account_view.jsp</result>
         </action>
         <action name="delAccount" class="accountsAction" method="del">
-        	<result name="notDel">/WEB-INF/pages/msg_info.jsp</result>
             <result name="success" type="redirect">listAccount.html</result>
         </action>
+        <action name="restoreAccount" class="accountsAction" method="restore">
+            <result name="success" type="redirect">listAccount.html</result>
+        </action>        
         <action name="initAccount" class="accountsAction" method="list">
             <result name="success">/WEB-INF/pages/account/init_account.jsp</result>
         </action>
@@ -2911,33 +2913,6 @@
             <result name="success">/WEB-INF/pages/msg.jsp</result>
         </action>
         <!-- 发卡管理结束 -->
-        <!-- 会员卡兑奖开始 -->
-        <action name="listHykdj" class="hykdjAction" method="list">
-            <result name="success" type="dispatcher">/WEB-INF/pages/hykdj/hykdj_list.jsp</result>
-        </action>
-        <action name="addHykdj" class="hykdjAction" method="add">
-            <result name="success">/WEB-INF/pages/hykdj/hykdj_add.jsp</result>
-        </action> 
-		<action name="saveHykdj" class="hykdjAction" method="save">
-            <result name="cancel" type="redirect">addHykdj.html</result>
-            <result name="input" type="dispatcher">/WEB-INF/pages/hykdj/hykdj_add.jsp</result>
-            <result name="success">/WEB-INF/pages/msg.jsp</result>
-        </action>
-		<action name="editHykdj" class="hykdjAction" method="edit">
-            <result name="success">/WEB-INF/pages/hykdj/hykdj_edit.jsp</result>
-        </action>
-        <action name="viewHykdj" class="hykdjAction" method="edit">
-            <result name="success">/WEB-INF/pages/hykdj/hykdj_view.jsp</result>
-        </action>
-		<action name="updateHykdj" class="hykdjAction" method="update">
-            <result name="cancel" type="redirect">editHykdj.html</result>
-            <result name="input">/WEB-INF/pages/hykdj/hykdj_edit.jsp</result>
-            <result name="success">/WEB-INF/pages/msg.jsp</result>
-        </action>
-        <action name="queryHykhRegInfo" class="hykdjAction" method="getHykhRegInfo">
-            <result name="success">/WEB-INF/pages/hykdj/hykh_reg_info.jsp</result>
-        </action>
-        <!-- 会员卡兑奖结束 -->
         <!-- 兑奖货品设置开始 -->
         <action name="listDjhpsz" class="djhpszAction" method="list">
             <result name="success" type="dispatcher">/WEB-INF/pages/djhpsz/djhpsz_list.jsp</result>
