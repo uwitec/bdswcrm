@@ -43,7 +43,7 @@ String thd_id = (String)VS.findValue("thd_id");
 			alert("退货日期不能为空！");
 			return;
 		}					
-		if(document.getElementById("client_name").value == ""){
+		if(document.getElementById("client_id").value == ""){
 			alert("客户名称不能为空，请选择！");
 			return;
 		}
@@ -142,32 +142,28 @@ String thd_id = (String)VS.findValue("thd_id");
         
         var otd0=document.createElement("td");
         otd0.className = "a2";
-        otd0.innerHTML = '<input type="text" id="product_name_'+curId+'" name="thdProducts['+curId+'].product_name" readonly><input type="button" name="selectButton" value="选择" class="css_button" onclick="openWin('+curId+');"><input type="hidden" id="product_id_'+curId+'" name="thdProducts['+curId+'].product_id">';
+        otd0.innerHTML = '<input type="text" id="product_name_'+curId+'" name="thdProducts['+curId+'].product_name" readonly style="width:180px"><input type="button" name="selectButton" value="选择" class="css_button" onclick="openWin('+curId+');"><input type="hidden" id="product_id_'+curId+'" name="thdProducts['+curId+'].product_id">';
         
         var otd1 = document.createElement("td");
         otd1.className = "a2";
-        otd1.innerHTML = '<input type="text" id="product_xh_'+curId+'"  name="thdProducts['+curId+'].product_xh" size="10" readonly>';
+        otd1.innerHTML = '<input type="text" id="product_xh_'+curId+'"  name="thdProducts['+curId+'].product_xh" style="width:150px" readonly>';
         
         var otd2 = document.createElement("td");
         otd2.className = "a2";
-        otd2.innerHTML = '<input type="text" id="th_price_'+curId+'" name="thdProducts['+curId+'].th_price" size="10" value="0.00" onblur="hj();"><input type="hidden" id="cbj_'+curId+'" name="thdProducts['+curId+'].cbj" value="0.00"><input type="hidden" id="kh_cbj_'+curId+'" name="thdProducts['+curId+'].kh_cbj" value="0.00"><input type="hidden" id="sd_'+curId+'" name="thdProducts['+curId+'].sd"  value="0.00"><input type="hidden" id="gf_'+curId+'" name="thdProducts['+curId+'].gf"  value="0.00"><input type="hidden" id="ds_'+curId+'" name="thdProducts['+curId+'].ds"  value="0.00"><input type="hidden" id="basic_ratio_'+curId+'" name="thdProducts['+curId+'].basic_ratio"  value="0.00"><input type="hidden" id="out_ratio_'+curId+'" name="thdProducts['+curId+'].out_ratio"  value="0.00"><input type="hidden" id="lsxj_'+curId+'" name="thdProducts['+curId+'].lsxj"  value="0.00"><input type="hidden" id="ygcbj_'+curId+'" name="thdProducts['+curId+'].ygcbj"  value="0.00"><input type="hidden" id="sfcytc_'+curId+'" name="thdProducts['+curId+'].sfcytc"  value="">';
+        otd2.innerHTML = '<input type="text" id="th_price_'+curId+'" name="thdProducts['+curId+'].th_price" style="width:80px" value="0.00" onblur="hj();"><input type="hidden" id="cbj_'+curId+'" name="thdProducts['+curId+'].cbj" value="0.00"><input type="hidden" id="kh_cbj_'+curId+'" name="thdProducts['+curId+'].kh_cbj" value="0.00"><input type="hidden" id="sd_'+curId+'" name="thdProducts['+curId+'].sd"  value="0.00"><input type="hidden" id="gf_'+curId+'" name="thdProducts['+curId+'].gf"  value="0.00"><input type="hidden" id="ds_'+curId+'" name="thdProducts['+curId+'].ds"  value="0.00"><input type="hidden" id="basic_ratio_'+curId+'" name="thdProducts['+curId+'].basic_ratio"  value="0.00"><input type="hidden" id="out_ratio_'+curId+'" name="thdProducts['+curId+'].out_ratio"  value="0.00"><input type="hidden" id="lsxj_'+curId+'" name="thdProducts['+curId+'].lsxj"  value="0.00"><input type="hidden" id="ygcbj_'+curId+'" name="thdProducts['+curId+'].ygcbj"  value="0.00"><input type="hidden" id="sfcytc_'+curId+'" name="thdProducts['+curId+'].sfcytc"  value="">';
         
         var otd3 = document.createElement("td");
         otd3.className = "a2";
-        otd3.innerHTML = '<input type="text" id="nums_'+curId+'" name="thdProducts['+curId+'].nums" size="5" value="0" onblur="hj();">';
+        otd3.innerHTML = '<input type="text" id="nums_'+curId+'" name="thdProducts['+curId+'].nums" style="width:60px" value="0" onblur="hj();">';
         
 		var otd7 = document.createElement("td");
 		otd7.className = "a2";
-		otd7.innerHTML = '<input type="text" id="qz_serial_num_'+curId+'" name="thdProducts['+curId+'].qz_serial_num" size="15" readonly><input type="hidden" id="qz_flag_'+curId+'" name="thdProducts['+curId+'].qz_flag"><a style="cursor:hand" title="点击输入序列号" onclick="openSerialWin('+ curId +');"><b>...</b></a>&nbsp;';               
+		otd7.innerHTML = '<input type="text" id="qz_serial_num_'+curId+'" name="thdProducts['+curId+'].qz_serial_num" style="width:120px" readonly><input type="hidden" id="qz_flag_'+curId+'" name="thdProducts['+curId+'].qz_flag"><a style="cursor:hand" title="点击输入序列号" onclick="openSerialWin('+ curId +');"><b>...</b></a>&nbsp;';               
         
         var otd4 = document.createElement("td");
         otd4.className = "a2";
-        otd4.innerHTML = '<input type="text" id="xj_'+curId+'" name="thdProducts['+curId+'].xj" size="10" value="0.00" readonly>';  
+        otd4.innerHTML = '<input type="text" id="xj_'+curId+'" name="thdProducts['+curId+'].xj" style="width:80px" value="0.00" readonly>';  
         
-        var otd5 = document.createElement("td");
-        otd5.className = "a2";
-        otd5.innerHTML = '<input type="text" id="remark_'+curId+'" name="thdProducts['+curId+'].remark"  maxlength="50">';                       
-
 		var otd6 = document.createElement("td");
 		otd6.className = "a2";
 		otd6.innerHTML = '<input type="button" name="delButton" value="删除" class="css_button" onclick="delTr(this);">';
@@ -178,7 +174,6 @@ String thd_id = (String)VS.findValue("thd_id");
         otr.appendChild(otd3); 
         otr.appendChild(otd7);
         otr.appendChild(otd4); 
-        otr.appendChild(otd5);
         otr.appendChild(otd6);               
      }	
      
@@ -334,7 +329,22 @@ String thd_id = (String)VS.findValue("thd_id");
 			obj_sh2.style.display = "";			
 		}	
 	}	
-	
+
+	function chgYwType(vl){
+		if(vl == "1"){
+			document.getElementById("client_name").style.display = '';
+			document.getElementById("client_id").style.display = 'none';
+			document.getElementById("btnXsd").style.display = '';
+			document.getElementById("btnLsd").style.display = 'none';
+		}else{
+			document.getElementById("client_name").style.display = 'none';
+			document.getElementById("client_id").style.display = '';
+			document.getElementById("btnXsd").style.display = 'none';
+			document.getElementById("btnLsd").style.display = '';
+		}
+		document.getElementById("client_name").value = "";
+		document.getElementById("client_id").value = "";
+	}
 </script>
 </head>
 <body onload="initFzrTip();initClientTip();">
@@ -350,39 +360,46 @@ String thd_id = (String)VS.findValue("thd_id");
 	<tr>
 		<td class="a1" width="15%">退货单编号</td>
 		<td class="a2">
-		<input type="text" name="thd.thd_id" id="thd_id" value="<%=thd_id %>" size="30" maxlength="50" readonly><span style="color:red">*</span>
+		<input type="text" name="thd.thd_id" id="thd_id" value="<%=thd_id %>" style="width:232px" maxlength="50" readonly> <span style="color:red">*</span>
 		</td>	
 		<td class="a1">退货日期</td>
 		<td class="a2">
-			<input type="text" name="thd.th_date" id="th_date" value="<%=DateComFunc.getToday() %>" class="Wdate" onFocus="WdatePicker()"><span style="color:red">*</span>
+			<input type="text" name="thd.th_date" id="th_date" value="<%=DateComFunc.getToday() %>" class="Wdate" onFocus="WdatePicker()" style="width:232px"> <span style="color:red">*</span>
 		</td>	
 	</tr>
-	<tr>			
-		<td class="a1" width="15%">客户名称</td>
+	<tr>	
+		<td class="a1">退货类型</td>
 		<td class="a2">
-		<input type="text" name="thd.client_id" id="client_name" value="" size="30" maxlength="50" onblur="setClientValue();" >
-		<input type="hidden" name="thd.client_name" id="client_id" value="" >
+			<select name="thd.yw_type" id="yw_type" onchange="chgYwType(this.value);" style="width:232px">
+				<option value="1">销售订单</option>
+				<option value="2">零售单</option>
+			</select><span style="color:red">*</span>
+		</td>			
+		<td class="a1" width="15%">客户名称</td>
+		<td class="a2" id="objTdClient">
+		<input type="text" name="thd.client_id" id="client_name" value="" style="width:232px" maxlength="50" onblur="setClientValue();" ><input type="text" name="thd.client_name" id="client_id" value="" style="width:232px;display: none"> <font color="red">*</font>
 		<div id="clientsTip" style="height:12px;position:absolute;left:147px; top:85px; width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
-		<font color="red">*</font>
 		</td>	
-		<td class="a1" width="15%">经手人</td>
-		<td class="a2" width="35%">
-		 <input id="brand"  type="text"   length="20"  onblur="setValue()"/>
-		 <div id="brandTip" style=" height:12px; position:absolute;left:612px;top:85px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;"></div>
-		 <input type="hidden" name="thd.th_fzr" id="fzr" value=""/><font color="red">*</font>	
-		</td>
 	</tr>
 	<tr>
+		<td class="a1" width="15%">经手人</td>
+		<td class="a2" width="35%">
+		 <input id="brand"  type="text"   length="20"  onblur="setValue()"  style="width:232px"/> <font color="red">*</font>
+		 <div id="brandTip" style=" height:12px; position:absolute;left:612px;top:85px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;"></div>
+		 <input type="hidden" name="thd.th_fzr" id="fzr" value=""/> 	
+		</td>	
 		<td class="a1">退款方式</td>
 		<td class="a2">
-			<select name="thd.type" id="type" onchange="chgType(this.value);">
+			<select name="thd.type" id="type" onchange="chgType(this.value);" style="width:232px">
 				<option value="现金">现金</option>
 				<option value="冲抵往来">冲抵往来</option>
-			</select><span style="color:red">*</span>
-		</td>
+			</select> <span style="color:red">*</span>
+		</td>	
+	</tr>
+	<tr>
 		<td class="a1">退货库房</td>
 		<td class="a2">
-			<select name="thd.store_id" id="store_id" title="退货库房">
+			<select name="thd.store_id" id="store_id" title="退货库房" style="width:232px">
 				<option value=""></option>
 			<%
 			if(storeList != null && storeList.size()>0){
@@ -394,13 +411,11 @@ String thd_id = (String)VS.findValue("thd_id");
 				}
 			}
 			%>
-			</select><span style="color:red">*</span>
+			</select> <span style="color:red">*</span>
 		</td>	
-	</tr>
-	<tr>
 		<td class="a1" width="15%">退货原因</td>
-		<td class="a2" colspan="3">
-			<input type="text" name="thd.remark" id="remark" value="" maxlength="100" style="width:75%"><font color="red">*</font>
+		<td class="a2">
+			<input type="text" name="thd.remark" id="remark" value="" maxlength="100" style="width:232px"> <font color="red">*</font>
 		</td>
 	</tr>	
 </table>
@@ -415,14 +430,13 @@ String thd_id = (String)VS.findValue("thd_id");
 <table width="100%"  align="center" id="thtable"  class="chart_list" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td>商品名称</td>
-		<td>规格</td>
-		<td>退货价格</td>
-		<td>数量</td>
-		<td>强制序列号</td>
-		<td>小计</td>
-		<td>备注</td>
-		<td></td>
+		<td width="25%">商品名称</td>
+		<td width="20%">规格</td>
+		<td width="10%">退货价格</td>
+		<td width="7%">数量</td>
+		<td width="20%">强制序列号</td>
+		<td width="10%">小计</td>
+		<td width="8%"></td>
 	</tr>
 	</thead>
 <%
@@ -430,12 +444,12 @@ for(int i=0;i<3;i++){
 %>
 	<tr>
 		<td class="a2">
-			<input type="text" id="product_name_<%=i %>" name="thdProducts[<%=i %>].product_name" readonly><input type="button" name="selectButton" value="选择" class="css_button" onclick="openWin(<%=i %>);">
+			<input type="text" id="product_name_<%=i %>" name="thdProducts[<%=i %>].product_name" style="width:180px" readonly><input type="button" name="selectButton" value="选择" class="css_button" onclick="openWin(<%=i %>);">
 			<input type="hidden" id="product_id_<%=i %>" name="thdProducts[<%=i %>].product_id">
 		</td>
-		<td class="a2"><input type="text" id="product_xh_<%=i %>" name="thdProducts[<%=i %>].product_xh" size="10" readonly></td>
+		<td class="a2"><input type="text" id="product_xh_<%=i %>" name="thdProducts[<%=i %>].product_xh" style="width:150px" readonly></td>
 		<td class="a2">
-			<input type="text" id="th_price_<%=i %>" name="thdProducts[<%=i %>].th_price" size="10" value="0.00" onblur="hj();">
+			<input type="text" id="th_price_<%=i %>" name="thdProducts[<%=i %>].th_price" style="width:80px" value="0.00" onblur="hj();">
 			<input type="hidden" id="cbj_<%=i %>" name="thdProducts[<%=i %>].cbj"  value="0.00">
 			<input type="hidden" id="kh_cbj_<%=i %>" name="thdProducts[<%=i %>].kh_cbj"  value="0.00">
 			
@@ -448,13 +462,12 @@ for(int i=0;i<3;i++){
 			<input type="hidden" id="ygcbj_<%=i %>" name="thdProducts[<%=i %>].ygcbj"  value="0.00">
 			<input type="hidden" id="sfcytc_<%=i %>" name="thdProducts[<%=i %>].sfcytc"  value="">
 		</td>
-		<td class="a2"><input type="text" id="nums_<%=i %>" name="thdProducts[<%=i %>].nums" value="0" size="5" onblur="hj();"></td>
+		<td class="a2"><input type="text" id="nums_<%=i %>" name="thdProducts[<%=i %>].nums" value="0" style="width:60px" onblur="hj();"></td>
 		<td class="a2">
-			<input type="text" id="qz_serial_num_<%=i %>" name="thdProducts[<%=i %>].qz_serial_num" size="15" readonly>
+			<input type="text" id="qz_serial_num_<%=i %>" name="thdProducts[<%=i %>].qz_serial_num" style="width:120px" readonly>
 			<input type="hidden" id="qz_flag_<%=i %>" name="thdProducts[<%=i %>].qz_flag"><a style="cursor:hand" title="左键点击输入输列号" onclick="openSerialWin('<%=i %>');"><b>...</b></a>&nbsp;
 		</td>		
-		<td class="a2"><input type="text" id="xj_<%=i %>" name="thdProducts[<%=i %>].xj" value="0.00" size="10" readonly></td>
-		<td class="a2"><input type="text" id="remark_<%=i %>" name="thdProducts[<%=i %>].remark" maxlength="50"></td>
+		<td class="a2"><input type="text" id="xj_<%=i %>" name="thdProducts[<%=i %>].xj" value="0.00" style="width:80px" readonly></td>
 		<%if (i>0){ %>		
 		<td class="a2"><input type="button" name="delButton" value="删除" class="css_button" onclick="delTr(this);"></td>
 		<%}else{ %>
@@ -469,18 +482,18 @@ for(int i=0;i<3;i++){
 	<tr height="35">
 		<td class="a2" colspan="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="button" name="button1" value="添加一行" class="css_button2" onclick="addTr();">
-			<input type="button" name="button1" value="关联销售订单" class="css_button3" onclick="selXsd();">
-			<input type="button" name="button1" value="关联零售单" class="css_button3" onclick="selLsd();">
+			<input type="button" name="btnXsd" id="btnXsd" value="关联销售订单" class="css_button3" onclick="selXsd();">
+			<input type="button" name="btnLsd" id="btnLsd" value="关联零售单" style="display:none" class="css_button3" onclick="selLsd();">
 		</td>
 	</tr>
 </table>
 <table width="100%"  align="center" class="chart_info" cellpadding="0" cellspacing="0">	
 	<tr>
-		<td class="a1" widht="20%">合计退款金额</td>
-		<td class="a2"><input type="text" id="thdje"  name="thd.thdje" value="0.00" readonly></td>	
+		<td class="a1" width="15%">合计退款金额</td>
+		<td class="a2"><input type="text" id="thdje"  name="thd.thdje" value="0.00" style="width:232px" readonly></td>	
 		
-		<td class="a1" id="td_zh_label">退款账户</td>
-		<td class="a2" id="td_zh_value"><input type="text" id="zhname"  name="zhname" value="" readonly>
+		<td class="a1" id="td_zh_label" width="15%">退款账户</td>
+		<td class="a2" id="td_zh_value" width="35%"><input type="text" id="zhname"  name="zhname" style="width:232px" onclick="openAccount();" value="" readonly>
 		<input type="hidden" id="skzh"  name="thd.tkzh" value="">
 		<img src="images/select.gif" align="absmiddle" title="选择账户" border="0" onclick="openAccount();" style="cursor:hand">
 		</td>
@@ -495,32 +508,32 @@ for(int i=0;i<3;i++){
 	</thead>
 	<tr>
 		<td class="a1" width="15%">发票类型</td>
-		<td class="a2">
-			<select name="thd.fplx" id="fplx" onchange="chgKpTyle(this.value);">
+		<td class="a2" width="35%">
+			<select name="thd.fplx" id="fplx" onchange="chgKpTyle(this.value);" style="width:232px">
 				<option value="出库单">出库单</option>
 				<option value="普通发票">普通发票</option>
 				<option value="增值发票">增值发票</option>
 			</select>
 		</td>
 		<td class="a1" width="15%" id="mc1">名称</td>
-		<td class="a2" id="mc2"><input type="text" name="thd.kp_mc" id="kp_mc" value="" maxlength="50"></td>				
+		<td class="a2" id="mc2" width="35%"><input type="text" name="thd.kp_mc" id="kp_mc" value="" maxlength="50" style="width:232px"></td>				
 	</tr>									
 	<tr>
 		<td class="a1" width="15%" id="dz1" style="display:none">地址</td>
-		<td class="a2" id="dz2" style="display:none"><input type="text" name="thd.kp_address" id="kp_address" value="" maxlength="50"></td>	
+		<td class="a2" id="dz2" style="display:none"><input type="text" name="thd.kp_address" id="kp_address" value="" style="width:232px" maxlength="50"></td>	
 		<td class="a1" width="15%" id="dh1" style="display:none">电话</td>
-		<td class="a2" id="dh2" style="display:none"><input type="text" name="thd.kp_dh" id="kp_dh" value="" maxlength="20"></td>		
+		<td class="a2" id="dh2" style="display:none"><input type="text" name="thd.kp_dh" id="kp_dh" value="" style="width:232px" maxlength="20"></td>		
 	</tr>	
 	<tr>
 		<td class="a1" width="15%" id="zh1" style="display:none">开户行账号</td>
-		<td class="a2"  id="zh2" style="display:none"><input type="text" name="thd.khhzh" id="khhzh" value="" maxlength="50"></td>	
+		<td class="a2"  id="zh2" style="display:none"><input type="text" name="thd.khhzh" id="khhzh" value="" style="width:232px" maxlength="50"></td>	
 		<td class="a1" width="15%" id="sh1" style="display:none">税号</td>
-		<td class="a2" id="sh2" style="display:none"><input type="text" name="thd.sh" id="sh" value="" maxlength="50"></td>		
+		<td class="a2" id="sh2" style="display:none"><input type="text" name="thd.sh" id="sh" value="" style="width:232px" maxlength="50"></td>		
 	</tr>	
 	<tr>
 		<td class="a1" width="15%">发票信息摘要</td>
 		<td class="a2" colspan="3">
-			<input type="text" name="thd.fpxx" id="fpxx" value="" maxlength="100" style="width:75%">
+			<input type="text" name="thd.fpxx" id="fpxx" value="" maxlength="100" style="width:90%">
 		</td>
 	</tr>	
 	<tr height="35">

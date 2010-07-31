@@ -31,27 +31,29 @@ List thdProducts = (List)VS.findValue("thdProducts");
 		<td class="a1">退货日期</td>
 		<td class="a2"><%=StringUtils.nullToStr(thd.getTh_date()) %></td>	
 	</tr>
-	<tr>			
+	<tr>	
+		<td class="a1" width="15%">退货类型</td>
+		<td class="a2"><%=StringUtils.nullToStr(thd.getYw_type()).equals("1")?"销售订单":"零售单" %></td>				
 		<td class="a1" width="15%">客户名称</td>
 		<td class="a2"><%=StaticParamDo.getClientNameById(StringUtils.nullToStr(thd.getClient_name())) %></td>	
+	</tr>
+	<tr>
 		<td class="a1" width="15%">经手人</td>
 		<td class="a2" width="35%"><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(thd.getTh_fzr())) %></td>
-	</tr>
-	<tr>
 		<td class="a1">退款方式</td>
 		<td class="a2"><%=StringUtils.nullToStr(thd.getType()) %></td>	
+	</tr>
+	<tr>
 		<td class="a1">状态</td>
 		<td class="a2"><%=StringUtils.nullToStr(thd.getState()) %></td>			
-	</tr>
-	<tr>
 		<td class="a1" widht="20%">退款账户</td>
 		<td class="a2"><%=StaticParamDo.getAccountNameById(StringUtils.nullToStr(thd.getTkzh())) %></td>
-		<td class="a1">合计退款金额</td>
-		<td class="a2"><%=JMath.round(thd.getThdje(),2) %></td>
 	</tr>
 	<tr>
+		<td class="a1">合计退款金额</td>
+		<td class="a2"><%=JMath.round(thd.getThdje(),2) %></td>	
 		<td class="a1">入库库房</td>
-		<td class="a2" colspan="3"><%=StaticParamDo.getStoreNameById(thd.getStore_id()) %></td>			
+		<td class="a2"><%=StaticParamDo.getStoreNameById(thd.getStore_id()) %></td>			
 	</tr>
 	<tr>
 		<td class="a1" width="15%">退货原因</td>
@@ -74,7 +76,6 @@ List thdProducts = (List)VS.findValue("thdProducts");
 		<td>退货价格</td>
 		<td>数量</td>
 		<td>小计</td>
-		<td>备注</td>
 	</tr>
 	</thead>
 <%
@@ -88,7 +89,6 @@ if(thdProducts!=null && thdProducts.size()>0){
 		<td class="a2"><%=JMath.round(thdProduct.getTh_price(),2) %></td>
 		<td class="a2"><%=StringUtils.nullToStr(thdProduct.getNums()) %></td>
 		<td class="a2"><%=JMath.round(thdProduct.getXj(),2) %></td>
-		<td class="a2"><%=StringUtils.nullToStr(thdProduct.getRemark()) %></td>
 	</tr>
 <%
 	}

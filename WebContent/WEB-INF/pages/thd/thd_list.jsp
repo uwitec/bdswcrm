@@ -115,6 +115,7 @@ String orderType = (String)VS.findValue("orderType");
 	<thead>
 	<tr>
 		<td onclick="doSort('thd_id');">退货单编号<%if(orderName.equals("thd_id")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td onclick="doSort('yw_type');">退货类型<%if(orderName.equals("yw_type")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
 		<td onclick="doSort('client_name');">客户名称<%if(orderName.equals("client_name")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
 		<td onclick="doSort('th_fzr');">退货负责人<%if(orderName.equals("th_fzr")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
 		<td onclick="doSort('thdje');">退货单金额<%if(orderName.equals("thdje")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
@@ -134,6 +135,7 @@ String orderType = (String)VS.findValue("orderType");
 	%>
 	<tr class="a1"  title="双击查看详情" <%if(StringUtils.nullToStr(thd.get("th_flag")).equals("1")){ %>style="color:red"<%} %>  onmousedown="trSelectChangeCss();"  onclick="descMx('<%=StringUtils.nullToStr(thd.get("thd_id")) %>');" onDblClick="openWin('<%=StringUtils.nullToStr(thd.get("thd_id")) %>');">
 		<td><%=StringUtils.nullToStr(thd.get("thd_id")) %></td>
+		<td><%=StringUtils.nullToStr(thd.get("yw_type")).equals("1")?"销售订单":"零售单" %></td>
 		<td><%=StaticParamDo.getClientNameById(StringUtils.nullToStr(thd.get("client_name"))) %></td>
 		<td><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(thd.get("th_fzr"))) %></td>
 		<td align="right"><%=JMath.round(thdje,2) %>&nbsp;&nbsp;&nbsp;</td>

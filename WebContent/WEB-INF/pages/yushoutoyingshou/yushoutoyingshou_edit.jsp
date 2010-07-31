@@ -117,6 +117,42 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 
 		alert(tempMsg);
 	}	
+
+	function autoFix(){
+		
+		var yskje = parseFloat(document.getElementById("yushouzje").value);  //预收款金额
+
+		if(yskje <= 0){
+			alert("客户预收总金额小于或等于0时无法自动分配,请手动分配处理!");
+			return;
+		}
+		
+		var lastJe = yskje;
+
+		for(var i=0;i<allCount;i++){
+			document.getElementById("bcjs_" + i).value = "0.00";
+		}
+
+		for(var i=0;i<allCount;i++){
+
+			var jsje = document.getElementById("bcjs_" + i);   //本行本次结算金额
+			var ysje = document.getElementById("yingshouje_" + i);   //本行应收金额
+
+			if(parseFloat(lastJe) != 0){ //当前剩余金额不等于0
+				if((parseFloat(lastJe)) >= (parseFloat(ysje.value))){
+					jsje.value = parseFloat(ysje.value).toFixed(2);
+					lastJe = (parseFloat(lastJe)) - (parseFloat(ysje.value));
+				}else{
+					jsje.value = lastJe.toFixed(2);
+					break;
+				}
+			}
+
+			if(lastJe == 0) break;
+		}
+
+		hj();
+	}		
 </script>
 </head>
 <body  onload="initFzrTip();onloadMsg();">
@@ -130,29 +166,31 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 	</thead>
 	<tr>
 		<td class="a1" width="15%">编号</td>
-		<td class="a2" width="35%"><input type="text" name="yushouToYingshou.id" id="id" value="<%=StringUtils.nullToStr(yushouToYingshou.getId()) %>" readonly><font color="red">*</font>
+		<td class="a2" width="35%"><input type="text" name="yushouToYingshou.id" id="id" style="width:220px" value="<%=StringUtils.nullToStr(yushouToYingshou.getId()) %>" readonly><font color="red">*</font>
 		</td>
 		<td class="a1" width="15%">结算日期</td>
-		<td class="a2" width="35%"><input type="text" name="yushouToYingshou.create_date" id="create_date" value="<%=StringUtils.nullToStr(yushouToYingshou.getCreate_date()).equals("")?DateComFunc.getToday():StringUtils.nullToStr(yushouToYingshou.getCreate_date()) %>" class="Wdate" onFocus="WdatePicker()"><font color="red">*</font>
+		<td class="a2" width="35%"><input type="text" name="yushouToYingshou.create_date" style="width:220px" id="create_date" value="<%=StringUtils.nullToStr(yushouToYingshou.getCreate_date()).equals("")?DateComFunc.getToday():StringUtils.nullToStr(yushouToYingshou.getCreate_date()) %>" class="Wdate" onFocus="WdatePicker()"><font color="red">*</font>
 		</td>		
 	</tr>
 	<tr>		
 		<td class="a1" width="15%">往来单位</td>
 		<td class="a2" width="35%">
-		<input type="text" name="clientName" id="client_name" value="<%=StaticParamDo.getClientNameById(StringUtils.nullToStr(yushouToYingshou.getClient_name())) %>" size="35" readonly>
+		<input type="text" name="clientName" id="client_name" style="width:220px" value="<%=StaticParamDo.getClientNameById(StringUtils.nullToStr(yushouToYingshou.getClient_name())) %>" size="35" readonly> <font color="red">*</font>
 		<input type="hidden" name="yushouToYingshou.client_name" id="client_id" value="<%=StringUtils.nullToStr(yushouToYingshou.getClient_name()) %>">
-		<font color="red">*</font></td>
+		</td>
 		<td class="a1" width="15%">经手人</td>
 		<td class="a2" width="35%">
-		 <input  id="brand"    type="text"   length="20"  onblur="setValue()"value="<%=StaticParamDo.getRealNameById(yushouToYingshou.getJsr()) %>"/>
+		 <input  id="brand"    type="text" style="width:220px"  onblur="setValue()"value="<%=StaticParamDo.getRealNameById(yushouToYingshou.getJsr()) %>"/> <font color="red">*</font>
           <div   id="brandTip"  style="height:12px;position:absolute;left:612px; top:85px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
           </div>
-		    <input type="hidden" name="yushouToYingshou.jsr" id="fzr" value="<%=yushouToYingshou.getJsr()%>" /> <font color="red">*</font>
+		    <input type="hidden" name="yushouToYingshou.jsr" id="fzr" value="<%=yushouToYingshou.getJsr()%>" />
 		</td>				
 	</tr>
 	<tr>		
 		<td class="a1" width="15%">客户预收总金额</td>
-		<td class="a2" colspan="3"><%=JMath.round(clientHjYushouK) %><input type="hidden" name="yushouzje" id="yushouzje" value="<%=JMath.round(clientHjYushouK) %>"></td>					
+		<td class="a2" colspan="3"><input type="text" name="yushouzje" id="yushouzje" value="<%=JMath.round(clientHjYushouK) %>" style="width:120px" readonly>
+		<input type="button" name="btnAutoFix" id="btnAutoFix" value="自动分配" class="css_button2" onclick="autoFix();">
+		</td>					
 	</tr>	
 </table>
 <br>
@@ -166,10 +204,10 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 <table width="100%"  align="center" class="chart_list" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td>销售单编号</td>
-		<td>应收金额</td>
-		<td>本次结算</td>
-		<td>备注</td>
+		<td width="25%">销售单编号</td>
+		<td width="25%">应收金额</td>
+		<td width="25%">本次结算</td>
+		<td width="25%">备注</td>
 	</tr>
 	</thead>
 <%
@@ -184,10 +222,10 @@ if(yushouToYingshouDescs != null && yushouToYingshouDescs.size()>0){
 		hj_bcjs += info.getBcjs();
 %>
 	<tr>
-		<td class="a2"><input type="text" id="xsd_id_<%=i %>" name="yushouToYingshouDescs[<%=i %>].xsd_id" value="<%=StringUtils.nullToStr(info.getXsd_id()) %>" readonly></td>
-		<td class="a2"><input type="text" size="15" id="yingshouje_<%=i %>" name="yushouToYingshouDescs[<%=i %>].yingshouje" value="<%=JMath.round(info.getYingshouje()) %>" readonly></td>
-		<td class="a2"><input type="text" size="15" id="bcjs_<%=i %>" name="yushouToYingshouDescs[<%=i %>].bcjs" value="<%=JMath.round(info.getBcjs()) %>" onblur="hj();"></td>
-		<td class="a2"><input type="text" size="25" id="remark_<%=i %>" name="yushouToYingshouDescs[<%=i %>].remark" value="<%=StringUtils.nullToStr(info.getRemark()) %>"></td>	
+		<td class="a2"><input type="text" style="width:100%" id="xsd_id_<%=i %>" name="yushouToYingshouDescs[<%=i %>].xsd_id" value="<%=StringUtils.nullToStr(info.getXsd_id()) %>" readonly></td>
+		<td class="a2"><input type="text" style="width:100%" id="yingshouje_<%=i %>" name="yushouToYingshouDescs[<%=i %>].yingshouje" value="<%=JMath.round(info.getYingshouje()) %>" readonly></td>
+		<td class="a2"><input type="text" style="width:100%" id="bcjs_<%=i %>" name="yushouToYingshouDescs[<%=i %>].bcjs" value="<%=JMath.round(info.getBcjs()) %>" onblur="hj();"></td>
+		<td class="a2"><input type="text" style="width:100%" id="remark_<%=i %>" name="yushouToYingshouDescs[<%=i %>].remark" value="<%=StringUtils.nullToStr(info.getRemark()) %>"></td>	
 	</tr>
 <%
 	}
@@ -195,10 +233,10 @@ if(yushouToYingshouDescs != null && yushouToYingshouDescs.size()>0){
 	for(int i=0;i<3;i++){
 %>
 	<tr>
-		<td class="a2"><input type="text" id="xsd_id_<%=i %>" name="yushouToYingshouDescs[<%=i %>].xsd_id" value="" readonly></td>
-		<td class="a2"><input type="text" size="15" id="yingshouje_<%=i %>" name="yushouToYingshouDescs[<%=i %>].yingshouje" value="0.00" readonly></td>
-		<td class="a2"><input type="text" size="15" id="bcjs_<%=i %>" name="yushouToYingshouDescs[<%=i %>].bcjs" value="0.00" onblur="hj();"></td>
-		<td class="a2"><input type="text" size="25" id="remark_<%=i %>" name="yushouToYingshouDescs[<%=i %>].remark"  value="" readonly></td>
+		<td class="a2"><input type="text" style="width:100%" id="xsd_id_<%=i %>" name="yushouToYingshouDescs[<%=i %>].xsd_id" value="" readonly></td>
+		<td class="a2"><input type="text" style="width:100%" id="yingshouje_<%=i %>" name="yushouToYingshouDescs[<%=i %>].yingshouje" value="0.00" readonly></td>
+		<td class="a2"><input type="text" style="width:100%" id="bcjs_<%=i %>" name="yushouToYingshouDescs[<%=i %>].bcjs" value="0.00" onblur="hj();"></td>
+		<td class="a2"><input type="text" style="width:100%" id="remark_<%=i %>" name="yushouToYingshouDescs[<%=i %>].remark"  value="" readonly></td>
 	</tr>
 <%
 	}
@@ -206,8 +244,8 @@ if(yushouToYingshouDescs != null && yushouToYingshouDescs.size()>0){
 %>	
 	<tr>
 		<td class="a2">合  计</td>
-		<td class="a2"><input type="text" size="15" id="hj_yingshouje" name="hj_yingshouje" value="<%=JMath.round(hj_yingshouje) %>" readonly></td>
-		<td class="a2"><input type="text" size="15" id="total" name="yushouToYingshou.total" value="<%=JMath.round(hj_bcjs) %>" readonly></td>
+		<td class="a2"><input type="text" style="width:100%" id="hj_yingshouje" name="hj_yingshouje" value="<%=JMath.round(hj_yingshouje) %>" readonly></td>
+		<td class="a2"><input type="text" style="width:100%" id="total" name="yushouToYingshou.total" value="<%=JMath.round(hj_bcjs) %>" readonly></td>
 		<td class="a2"></td>	
 	</tr>	
 </table>

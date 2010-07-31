@@ -61,8 +61,15 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 		hj();
 		
 		if(isNaN(document.getElementById("fkje").value) || parseFloat(document.getElementById("fkje").value) == 0){
-			alert("本次付款金额必须为数字并且不等于0，请检查！");
+			alert("本次付款总金额必须为数字并且不等于0，请检查！");
 			return;
+		}
+
+		if(!document.getElementById("is_yfk").checked){
+			if((parseFloat(document.getElementById("fkje").value)).toFixed(2) != (parseFloat(document.getElementById("hj_bcfk").value)).toFixed(2)){
+				alert("本次付款总金额必须与合计付款金额相同!");
+				return;
+			}
 		}
 
 		if(vl == "1"){
@@ -141,14 +148,9 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 			
 			hjz = parseFloat(hjz) + parseFloat(fk.value);
 		}
-
-			
 		
-		var fkje = document.getElementById("fkje");
 		var hj_bcfk = document.getElementById("hj_bcfk");
 		hj_bcfk.value = hjz.toFixed(2);
-		fkje.value = hjz.toFixed(2);
-		
 	}
 	
 	function chkYfk(){
@@ -158,21 +160,9 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 				document.getElementById("is_yfk").checked = false;
 				return;
 			}
-			
-			document.getElementById("fkje").readOnly = false;
-			document.getElementById("hj_bcfk").readOnly = true;
-			
-			for(var i=0;i<allCount;i++){
-				document.getElementById("bcfk_" + i).readOnly = true;
-			}
-			
+			document.getElementById("btnAutoFix").style.display = "none";
 		}else{
-			document.getElementById("fkje").readOnly = true;
-			document.getElementById("hj_bfk").readOnly = false;
-			
-			for(var i=0;i<allCount;i++){
-				document.getElementById("bcfk_" + i).readOnly = false;
-			}
+			document.getElementById("btnAutoFix").style.display = "";
 		}
 	}	
 	
@@ -197,6 +187,50 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 		var tempMsg = "付款申请单付款明细中：\n" + msg + "\n与其它未支付付款申请单或未提交预付冲应付存在冲突，无法保存，请检查！";
 
 		alert(tempMsg);
+	}	
+
+	function autoFix(){
+		if(document.getElementById("is_yfk").checked){
+			return;
+		}
+
+		if(isNaN(document.getElementById("fkje").value) || parseFloat(document.getElementById("fkje").value) == 0){
+			alert("本次付款总金额必须为数字并且不等于0，请检查！");
+			return;
+		}
+		
+		var fkje = parseFloat(document.getElementById("fkje").value);  //本次收款金额
+
+		if(fkje <= 0){
+			alert("本次付款总金额小于或等于0时无法自动分配,请手动分配处理!");
+			return;
+		}
+		
+		var lastJe = fkje;
+
+		for(var i=0;i<allCount;i++){
+			document.getElementById("bcfk_" + i).value = "0.00";
+		}
+
+		for(var i=0;i<allCount;i++){
+
+			var fk = document.getElementById("bcfk_" + i);   //本行本次付款
+			var yfje = document.getElementById("yfje_" + i);   //本行应收金额
+
+			if(parseFloat(lastJe) != 0){ //当前剩余金额不等于0
+				if((parseFloat(lastJe)) >= (parseFloat(yfje.value))){
+					fk.value = parseFloat(yfje.value).toFixed(2);
+					lastJe = (parseFloat(lastJe)) - (parseFloat(yfje.value));
+				}else{
+					fk.value = lastJe.toFixed(2);
+					break;
+				}
+			}
+
+			if(lastJe == 0) break;
+		}
+
+		hj();
 	}					
 </script>
 </head>
@@ -267,11 +301,15 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 		</td>	
 	</tr>
 	<tr>	
-		<td class="a1" widht="20%">付款账户</td>
-		<td class="a2" colspan="3"><input type="text" id="zhname"  name="zhname" value="<%=StaticParamDo.getAccountNameById(StringUtils.nullToStr(cgfk.getFkzh())) %>" size="35" readonly>
+		<td class="a1">付款账户</td>
+		<td class="a2"><input type="text" id="zhname"  name="zhname" value="<%=StaticParamDo.getAccountNameById(StringUtils.nullToStr(cgfk.getFkzh())) %>" size="35" readonly>
 			<input type="hidden" id="fkzh"  name="cgfk.fkzh" value="<%=StringUtils.nullToStr(cgfk.getFkzh()) %>">
 			<img src="images/select.gif" align="absmiddle" title="选择账户" border="0" onclick="openAccount();" style="cursor:hand">
 		</td>
+		<td class="a1">本次付款总金额</td>
+		<td class="a2"><input type="text" size="15" id="fkje" name="cgfk.fkje" value="<%=JMath.round(cgfk.getFkje()) %>">
+		<input type="button" name="btnAutoFix" id="btnAutoFix" value="自动分配" class="css_button2" onclick="autoFix();"> <font color="red">*</font>
+		</td>		
 	</tr>
 	<tr>
 		<td class="a1">备  注</td>
@@ -290,11 +328,10 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 	<thead>
 	<tr>
 		<td width="20%">进货单编号</td>
-		<td width="15%">发生日期</td>
-		<td width="15%">发生金额</td>
-		<td width="15%">应付金额</td>
-		<td width="15%">本次付款</td>
-		<td width="20%">备注</td>
+		<td width="20%">发生日期</td>
+		<td width="20%">发生金额</td>
+		<td width="20%">应付金额</td>
+		<td width="20%">本次付款</td>
 	</tr>
 	</thead>
 <%
@@ -317,7 +354,6 @@ if(cgfkDescs != null && cgfkDescs.size()>0){
 		<td class="a2"><input type="text" size="10" id="fsje_<%=i %>" name="cgfkDescs[<%=i %>].fsje" value="<%=JMath.round(fsje) %>" style="width:100%" readonly></td>
 		<td class="a2"><input type="text" size="10" id="yfje_<%=i %>" name="cgfkDescs[<%=i %>].yfje"  value="<%=JMath.round(yfje) %>" style="width:100%" readonly></td>
 		<td class="a2"><input type="text" size="10" id="bcfk_<%=i %>" name="cgfkDescs[<%=i %>].bcfk" value="<%=JMath.round(bcfk) %>" style="width:100%"  onblur="hj();"></td>
-		<td class="a2"><input type="text" id="remark_<%=i %>" name="cgfkDescs[<%=i %>].remark" value="<%=StringUtils.nullToStr(map.get("remark")) %>" style="width:100%"></td>	
 	</tr>
 <%
 	}
@@ -329,8 +365,7 @@ if(cgfkDescs != null && cgfkDescs.size()>0){
 		<td class="a2"><input type="text" size="10" id="fsrq_<%=i %>" name="cgfkDescs[<%=i %>].fsrq" value="" style="width:100%" readonly></td>
 		<td class="a2"><input type="text" size="10" id="fsje_<%=i %>" name="cgfkDescs[<%=i %>].fsje" value="0.00" style="width:100%" readonly></td>
 		<td class="a2"><input type="text" size="10" id="yfje_<%=i %>" name="cgfkDescs[<%=i %>].yfje"  value="0.00" style="width:100%" readonly></td>
-		<td class="a2"><input type="text" size="10" id="bcfk_<%=i %>" name="cgfkDescs[<%=i %>].bcfk" value="0.00" style="width:100%" onblur="hj();"></td>
-		<td class="a2"><input type="text" id="remark_<%=i %>" name="cgfkDescs[<%=i %>].remark" value="" style="width:100%"></td>	
+		<td class="a2"><input type="text" size="10" id="bcfk_<%=i %>" name="cgfkDescs[<%=i %>].bcfk" value="0.00" style="width:100%" readonly onblur="hj();"></td>
 	</tr>
 <%
 	}
@@ -341,12 +376,7 @@ if(cgfkDescs != null && cgfkDescs.size()>0){
 		<td class="a2"></td>
 		<td class="a2"><input type="text" size="10" id="hj_fsje" name="hj_fsje" value="<%=JMath.round(hj_fsje) %>" style="width:100%" readonly></td>
 		<td class="a2"><input type="text" size="10" id="hj_yfje" name="hj_yfje"  value="<%=JMath.round(hj_yfje) %>" style="width:100%" readonly></td>
-		<td class="a2"><input type="text" size="10" id="hj_bcfk" name="hj_bcfk" value="0.00" style="width:100%"></td>
-		<td class="a2"></td>	
-	</tr>
-	<tr>
-		<td class="a1">本次付款总金额</td>
-		<td class="a4" colspan="5"><input type="text" size="10" id="fkje" name="cgfk.fkje" value="0.00" readonly></td>
+		<td class="a2"><input type="text" size="10" id="hj_bcfk" name="hj_bcfk" value="0.00" style="width:100%" readonly></td>
 	</tr>	
 </table>
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">

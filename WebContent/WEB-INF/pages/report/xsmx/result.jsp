@@ -326,7 +326,7 @@ if(thdList != null && thdList.size()>0){
 		
 		String th_date = StringUtils.nullToStr(map.get("th_date"));
 		String thd_id = StringUtils.nullToStr(map.get("thd_id"));
-		String name = StringUtils.nullToStr(map.get("client_name"));
+		String name = StaticParamDo.getClientNameById((String)map.get("client_name"));
 		String th_fzr = StaticParamDo.getRealNameById(StringUtils.nullToStr(map.get("th_fzr")));
 		double thdje = 0 - (map.get("thdje")==null?0:((Double)map.get("thdje")).doubleValue());
 		

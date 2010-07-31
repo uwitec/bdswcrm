@@ -26,8 +26,14 @@ List accountList = (List)VS.findValue("accountList");
 	}
 	
 	function del(id){
-		if(confirm("确定要删除该条记录吗！")){
+		if(confirm("确定要停用吗！")){
 			location.href = "delAccount.html?id=" + id;
+		}
+	}
+
+	function restore(id){
+		if(confirm("确定要启用吗！")){
+			location.href = "restoreAccount.html?id=" + id;
 		}
 	}
 	
@@ -80,6 +86,7 @@ List accountList = (List)VS.findValue("accountList");
 		<td>账户类型</td>
 		<td>开户行</td>
 		<td>账号</td>
+		<td>状态</td>
 		<td>操作</td>
 	</tr>
 	</thead>
@@ -95,10 +102,16 @@ List accountList = (List)VS.findValue("accountList");
 		<td><%=StringUtils.nullToStr(map.get("type")) %></td>
 		<td><%=StringUtils.nullToStr(map.get("bank")) %></td>
 		<td><%=StringUtils.nullToStr(map.get("bank_count")) %></td>
+		<td><%=StringUtils.nullToStr(map.get("flag")).equals("1")?"正常":"停用" %></td>
 		<td>
-			<a href="#" onclick="edit('<%=StringUtils.nullToStr(map.get("id")) %>');"><img src="images/modify.gif" align="absmiddle" title="修改" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
-			<a href="#" onclick="openWin('<%=StringUtils.nullToStr(map.get("id")) %>');"><img src="images/view.gif" align="absmiddle" title="查看" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;			
-			<a href="#" onclick="del('<%=StringUtils.nullToStr(map.get("id")) %>');"><img src="images/del.gif" align="absmiddle" title="删除" border="0" style="cursor:hand"></a>
+			<a href="#" class="xxlb" onclick="edit('<%=StringUtils.nullToStr(map.get("id")) %>');">修改</a>&nbsp;&nbsp;&nbsp;&nbsp;
+			<a href="#" class="xxlb" onclick="openWin('<%=StringUtils.nullToStr(map.get("id")) %>');">查看</a>&nbsp;&nbsp;&nbsp;&nbsp;	
+			
+			<%if(StringUtils.nullToStr(map.get("flag")).equals("1")){ %>		
+			<a href="#" class="xxlb" onclick="del('<%=StringUtils.nullToStr(map.get("id")) %>');">停用</a>
+			<%}else{ %>
+			<a href="#" class="xxlb" onclick="restore('<%=StringUtils.nullToStr(map.get("id")) %>');">重新启用</a>
+			<%} %>
 		</td>
 	</tr>
 	

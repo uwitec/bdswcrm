@@ -75,6 +75,13 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 			return;
 		}
 
+		if(!document.getElementById("is_ysk").checked){
+			if((parseFloat(document.getElementById("skje").value)).toFixed(2) != (parseFloat(document.getElementById("hj_bcsk").value)).toFixed(2)){
+				alert("本次收款金额必须与合计收款金额相同!");
+				return;
+			}
+		}
+
 		if(document.getElementById("state").value == "已提交"){
 			if(window.confirm("提交后将不能修改，确认提交吗？")){
 				document.XsskForm.submit();
@@ -93,7 +100,7 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 	
 	function openAccount(){
 		var destination = "selAccount.html";
-		var fea ='width=400,height=200,left=' + (screen.availWidth-400)/2 + ',top=' + (screen.availHeight-200)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		var fea ='width=400,height=300,left=' + (screen.availWidth-400)/2 + ',top=' + (screen.availHeight-300)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
 		window.open(destination,'选择账户',fea);		
 	}
@@ -135,11 +142,53 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 		}
 
 		
-		var skje = document.getElementById("skje");
 		var hj_bcsk = document.getElementById("hj_bcsk");
 		hj_bcsk.value = hjz.toFixed(2);
-		skje.value = hjz.toFixed(2);
+	}
+
+
+	function autoFix(){
+		if(document.getElementById("is_ysk").checked){
+			return;
+		}
+
+		if(isNaN(document.getElementById("skje").value) || parseFloat(document.getElementById("skje").value) == 0){
+			alert("本次收款金额必须为数字并且不等于0，请检查！");
+			return;
+		}
 		
+		var skje = parseFloat(document.getElementById("skje").value);  //本次收款金额
+
+		if(skje <= 0){
+			alert("本次收款金额小于或等于0时无法自动分配,请手动分配处理!");
+			return;
+		}
+		
+		var lastJe = skje;
+
+		for(var i=0;i<allCount;i++){
+			document.getElementById("bcsk_" + i).value = "0.00";
+		}
+
+		for(var i=0;i<allCount;i++){
+
+			var sk = document.getElementById("bcsk_" + i);   //本行本次收款
+			var ysk = document.getElementById("ysk_" + i);   //本行应收款
+
+			if(parseFloat(lastJe) != 0){ //当前剩余金额不等于0
+				if((parseFloat(lastJe)) >= (parseFloat(ysk.value))){
+					sk.value = parseFloat(ysk.value).toFixed(2);
+					lastJe = (parseFloat(lastJe)) - (parseFloat(ysk.value));
+				}else{
+					sk.value = lastJe.toFixed(2);
+					break;
+				}
+			}
+
+			if(lastJe == 0) break;
+		}
+
+		hj();
 	}
 	
 	function chkYsk(){
@@ -150,20 +199,21 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 				return;
 			}
 			
-			document.getElementById("skje").readOnly = false;
 			document.getElementById("hj_bcsk").readOnly = true;
 			
 			for(var i=0;i<allCount;i++){
 				document.getElementById("bcsk_" + i).readOnly = true;
 			}
-			
+
+			document.getElementById("btnAutoFix").style.display = "none";
 		}else{
-			document.getElementById("skje").readOnly = true;
 			document.getElementById("hj_bcsk").readOnly = false;
 			
 			for(var i=0;i<allCount;i++){
 				document.getElementById("bcsk_" + i).readOnly = false;
 			}
+
+			document.getElementById("btnAutoFix").style.display = "";
 		}
 	}
 
@@ -285,10 +335,14 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 	</tr>
 	<tr>					
 		<td class="a1">收款账户</td>
-		<td class="a2" colspan="3"><input type="text" id="zhname" style="width:190px" name="zhname" value="<%=StaticParamDo.getAccountNameById(StringUtils.nullToStr(xssk.getSkzh())) %>" readonly> <font color="red">*</font>
+		<td class="a2"><input type="text" id="zhname" style="width:190px" name="zhname" value="<%=StaticParamDo.getAccountNameById(StringUtils.nullToStr(xssk.getSkzh())) %>" onclick="openAccount();" readonly> <font color="red">*</font>
 		<input type="hidden" id="fkzh"  name="xssk.skzh" value="<%=StringUtils.nullToStr(xssk.getSkzh()) %>">
 		<img src="images/select.gif" align="absmiddle" title="选择账户" border="0" onclick="openAccount();" style="cursor:hand">
 		</td>
+		<td class="a1">本次收款金额</td>
+		<td class="a2"><input type="text" style="width:100px" name="xssk.skje" id="skje" value="<%=JMath.round(xssk.getSkje()) %>">
+		<input type="button" name="btnAutoFix" id="btnAutoFix" value="自动分配" class="css_button2" onclick="autoFix();"> <font color="red">*</font>
+		</td>		
 	</tr>
 </table>
 <br>
@@ -342,7 +396,7 @@ if(xsskDescs != null && xsskDescs.size()>0){
 		<td class="a2"><input type="text" style="width:100%" id="fsrq_<%=i %>" name="xsskDescs[<%=i %>].fsrq" value="" readonly></td>
 		<td class="a2"><input type="text" style="width:100%" id="fsje_<%=i %>" name="xsskDescs[<%=i %>].fsje" value="0.00" readonly></td>
 		<td class="a2"><input type="text" style="width:100%" id="ysk_<%=i %>" name="xsskDescs[<%=i %>].yfje"  value="0.00" readonly></td>
-		<td class="a2"><input type="text" style="width:100%" id="bcsk_<%=i %>" name="xsskDescs[<%=i %>].bcsk" value="0.00" onblur="hj();"></td>
+		<td class="a2"><input type="text" style="width:100%" id="bcsk_<%=i %>" name="xsskDescs[<%=i %>].bcsk" value="0.00" readonly onblur="hj();"></td>
 	</tr>
 <%
 	}
@@ -353,7 +407,7 @@ if(xsskDescs != null && xsskDescs.size()>0){
 		<td class="a2"></td>
 		<td class="a2"><input type="text" style="width:100%" id="hj_fsje" name="hj_fsje" value="<%=JMath.round(hj_fsje) %>" readonly></td>
 		<td class="a2"><input type="text" style="width:100%" id="hj_ysk" name="hj_ysk"  value="<%=JMath.round(hj_ysk) %>" readonly></td>
-		<td class="a2"><input type="text" style="width:100%" id="hj_bcsk" name="hj_bcsk" value="<%=JMath.round(hj_bcsk) %>"></td>
+		<td class="a2"><input type="text" style="width:100%" id="hj_bcsk" name="hj_bcsk" value="<%=JMath.round(hj_bcsk) %>" readonly></td>
 	</tr>
 	 <%
 	 String cssStyle = "readonly";
@@ -361,13 +415,6 @@ if(xsskDescs != null && xsskDescs.size()>0){
 		 cssStyle = "";
 	 } 
 	 %>	
-	<tr>
-		<td class="a2">本次收款总金额</td>
-		<td class="a2"></td>
-		<td class="a2"></td>
-		<td class="a2"></td>
-		<td class="a2"><input type="text" style="width:100%" id="skje" name="xssk.skje" <%=cssStyle %> value="<%=JMath.round(hj_bcsk) %>"></td>
-	</tr>
 	<tr>
 		<td class="a1">备  注</td>
 		<td class="a2" colspan="4"><input name="xssk.remark" id="remark" style="width:100%" value="<%=StringUtils.nullToStr(xssk.getRemark()) %>"></td>

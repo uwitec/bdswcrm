@@ -13,6 +13,8 @@ List userList = (List)VS.findValue("userList");
 
 List xsskDescs = (List)VS.findValue("xsskDescs");
 
+List clientsList=(List)VS.findValue("clientsList");
+
 List posTypeList = (List)VS.findValue("posTypeList");
 String[] ysfsArry = (String[])VS.findValue("ysfs");
 
@@ -31,6 +33,7 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript" src="js/Check.js"></script>
 <script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
+<script language='JavaScript' src="js/selClient.js"></script>
 <script language='JavaScript' src="js/selJsr.js"></script>
 <script type="text/javascript" src="js/prototype-1.4.0.js"></script>
 <script type='text/javascript' src='dwr/interface/dwrService.js'></script>
@@ -42,7 +45,7 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 <script type="text/javascript">
 	var allCount = <%=allCount %>;
 	var msg = "<%=msg %>";
-	
+
 	function saveInfo(vl){
 		if(vl == "1"){
 			document.getElementById("state").value = "已保存";
@@ -72,6 +75,13 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 			return;
 		}
 
+		if(!document.getElementById("is_ysk").checked){
+			if((parseFloat(document.getElementById("skje").value)).toFixed(2) != (parseFloat(document.getElementById("hj_bcsk").value)).toFixed(2)){
+				alert("本次收款金额必须与合计收款金额相同!");
+				return;
+			}
+		}
+
 		if(document.getElementById("state").value == "已提交"){
 			if(window.confirm("提交后将不能修改，确认提交吗？")){
 				document.XsskForm.submit();
@@ -90,7 +100,7 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 	
 	function openAccount(){
 		var destination = "selAccount.html";
-		var fea ='width=400,height=200,left=' + (screen.availWidth-400)/2 + ',top=' + (screen.availHeight-200)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		var fea ='width=400,height=300,left=' + (screen.availWidth-400)/2 + ',top=' + (screen.availHeight-300)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
 		window.open(destination,'选择账户',fea);		
 	}
@@ -112,6 +122,7 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 					sk.focus();
 					return;
 				}
+
 				if(parseFloat(ysk.value)>0){
 					if(parseFloat(sk.value) > parseFloat(ysk.value)){
 						alert("本次收款金额应小于或等于应收金额，请检查！");
@@ -131,12 +142,56 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 		}
 
 		
-		var skje = document.getElementById("skje");
 		var hj_bcsk = document.getElementById("hj_bcsk");
 		hj_bcsk.value = hjz.toFixed(2);
-		skje.value = hjz.toFixed(2);
+	}
+
+
+	function autoFix(){
+		if(document.getElementById("is_ysk").checked){
+			return;
+		}
+
 		
-	}	
+
+		if(isNaN(document.getElementById("skje").value) || parseFloat(document.getElementById("skje").value) == 0){
+			alert("本次收款金额必须为数字并且不等于0，请检查！");
+			return;
+		}
+		
+		var skje = parseFloat(document.getElementById("skje").value);  //本次收款金额
+
+		if(skje <= 0){
+			alert("本次收款金额小于或等于0时无法自动分配,请手动分配处理!");
+			return;
+		}
+		
+		var lastJe = skje;
+
+		for(var i=0;i<allCount;i++){
+			document.getElementById("bcsk_" + i).value = "0.00";
+		}
+
+		for(var i=0;i<allCount;i++){
+
+			var sk = document.getElementById("bcsk_" + i);   //本行本次收款
+			var ysk = document.getElementById("ysk_" + i);   //本行应收款
+
+			if(parseFloat(lastJe) != 0){ //当前剩余金额不等于0
+				if((parseFloat(lastJe)) >= (parseFloat(ysk.value))){
+					sk.value = parseFloat(ysk.value).toFixed(2);
+					lastJe = (parseFloat(lastJe)) - (parseFloat(ysk.value));
+				}else{
+					sk.value = lastJe.toFixed(2);
+					break;
+				}
+			}
+
+			if(lastJe == 0) break;
+		}
+
+		hj();
+	}
 	
 	function chkYsk(){
 		if(document.getElementById("is_ysk").checked){
@@ -146,21 +201,38 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 				return;
 			}
 			
-			document.getElementById("skje").readOnly = false;
 			document.getElementById("hj_bcsk").readOnly = true;
 			
 			for(var i=0;i<allCount;i++){
 				document.getElementById("bcsk_" + i).readOnly = true;
 			}
-			
+
+			document.getElementById("btnAutoFix").style.display = "none";
 		}else{
-			document.getElementById("skje").readOnly = true;
 			document.getElementById("hj_bcsk").readOnly = false;
 			
 			for(var i=0;i<allCount;i++){
 				document.getElementById("bcsk_" + i).readOnly = false;
 			}
+
+			document.getElementById("btnAutoFix").style.display = "";
 		}
+	}
+
+	
+	function queryYszd(){
+		setClientValue();
+		
+		if(document.getElementById("client_id").value == ""){
+			return;
+		}
+		
+		if(document.getElementById("is_ysk").checked){
+			return;
+		}
+		
+		document.XsskForm.action = "addXssk.html";
+		document.XsskForm.submit();
 	}
 
 	function onloadMsg(){
@@ -169,7 +241,7 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 		var tempMsg = "销售收款单对应收款款明细中：\n" + msg + "\n与其它未提交销售收款单或未提交预收冲应收存在冲突，无法保存，请检查！";
 
 		alert(tempMsg);
-	}		
+	}
 
 	function dwrGetAccount(){
 		id = dwr.util.getValue("pos_id");
@@ -197,7 +269,7 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 	}	
 </script>
 </head>
-<body onload="initFzrTip();onloadMsg();selSkfs('<%=StringUtils.nullToStr(xssk.getSkfs()) %>');">
+<body onload="initFzrTip();initClientTip();onloadMsg();">
 <form name="XsskForm" action="updateXssk.html" method="post">
 <input type="hidden"  name="xssk.state" id="state" value="">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
@@ -211,25 +283,27 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 		<td class="a2" width="35%"><input type="text" name="xssk.id" id="id" value="<%=StringUtils.nullToStr(xssk.getId()) %>" style="width:190px" readonly>
 		</td>
 		<td class="a1" width="15%">收款日期</td>
-		<td class="a2" width="35%"><input type="text" name="xssk.sk_date" style="width:190px" id="sk_date" value="<%=StringUtils.nullToStr(xssk.getSk_date()).equals("")?DateComFunc.getToday():StringUtils.nullToStr(xssk.getSk_date()) %>"  class="Wdate" onFocus="WdatePicker()"> <font color="red">*</font>
-		</td>		
+		<td class="a2" width="35%">
+			<input type="text" name="xssk.sk_date" id="sk_date" value="<%=StringUtils.nullToStr(xssk.getSk_date()).equals("")?DateComFunc.getToday():StringUtils.nullToStr(xssk.getSk_date()) %>"  class="Wdate" onFocus="WdatePicker()" style="width:190px"> <font color="red">*</font>	
+		</td>			
 	</tr>
-	<tr>
+	<tr>	
 		<td class="a1" width="15%">是否预收款</td>
-		<td class="a2"><input type="checkbox" name="xssk.is_ysk" id="is_ysk" value="是" onclick="chkYsk();" <%if(StringUtils.nullToStr(xssk.getIs_ysk()).equals("是")) out.print("checked"); %>>预收款</td>		
+		<td class="a2"><input type="checkbox" name="xssk.is_ysk" id="is_ysk" value="是" onclick="chkYsk();"  <%if(StringUtils.nullToStr(xssk.getIs_ysk()).equals("是")) out.print("checked"); %>>预收款</td>		
 		<td class="a1" width="15%">往来单位</td>
 		<td class="a2" width="35%">
-		<input type="text" name="clientName" id="client_name" value="<%=StaticParamDo.getClientNameById(StringUtils.nullToStr(xssk.getClient_name())) %>" style="width:190px" readonly> <font color="red">*</font>	
-		<input type="hidden" name="xssk.client_name" id="client_id" value="<%=StringUtils.nullToStr(xssk.getClient_name()) %>"></td>
+		<input type="text" name="clientName" id="client_name" value="<%=StaticParamDo.getClientNameById(StringUtils.nullToStr(xssk.getClient_name())) %>" style="width:190px" onblur="queryYszd();"> <font color="red">*</font>
+		<input type="hidden" name="xssk.client_name" id="client_id" value="<%=StringUtils.nullToStr(xssk.getClient_name()) %>">
+		<div id="clientsTip" style="height:12px;position:absolute;left:132px; top:85px; width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>	
+		</td>
 	</tr>
 	<tr>
 		<td class="a1" width="15%">经手人</td>
 		<td class="a2" width="35%">
-		    <input  id="brand"    type="text" maxlength="20"  style="width:190px" onblur="setValue()" value="<%=StaticParamDo.getRealNameById(xssk.getJsr()) %>"/>  <font color="red">*</font>	
-            <div   id="brandTip"  style="height:12px;position:absolute;left:132px; top:113px;width:125px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
-            </div>
-		    <input type="hidden" name="xssk.jsr" id="fzr" value="<%=xssk.getJsr()%>"/>
-		</td>	
+			<input id="brand" style="width:190px" type="text" maxlength="20" onblur="setValue()" value="<%=StaticParamDo.getRealNameById(xssk.getJsr()) %>"/> <font color="red">*</font>	
+        	<div id="brandTip" style="height:12px;position:absolute;left:132px; top:113px;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+		    <input type="hidden" name="xssk.jsr" id="fzr" value="<%=StringUtils.nullToStr(xssk.getJsr()) %>"/> 
+		</td>
 		<td class="a1">收款方式</td>
 		<td class="a2">
 			<select name="xssk.skfs" id="skfs" onchange="selSkfs(this.value);">
@@ -243,30 +317,34 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 			}
 			%>
 				
-			</select>
-			<select name="xssk.pos_id" id="pos_id" onchange="dwrGetAccount();">
+			</select>	
+			
+			<select name="xssk.pos_id" id="pos_id" style="display:none;" onchange="dwrGetAccount();">
 				<option value=""></option>
 			<%
 			if(posTypeList != null && posTypeList.size() > 0){
 				for(int i =0;i<posTypeList.size();i++){
 					PosType posType = (PosType)posTypeList.get(i);
 			%>
-				<option value="<%=posType.getId() %>" <%if(StringUtils.nullToStr(xssk.getPos_id()).equals(posType.getId()+"")) out.print("selected"); %>><%=posType.getName() %></option>
+				<option value="<%=posType.getId() %>" <%if(StringUtils.nullToStr(xssk.getPos_id()).equals(posType.getId())) out.print("selected"); %>><%=posType.getName() %></option>
 			<%
 				}
 			}
 			%>
 				
 			</select> <font color="red">*</font>
-		</td>
+		</td>	
 	</tr>
-	<tr>				
-		<td class="a1" widht="20%">收款账户</td>
-		<td class="a2" colspan="3"><input type="text" id="zhname"  style="width:190px" name="zhname" value="<%=StaticParamDo.getAccountNameById(StringUtils.nullToStr(xssk.getSkzh())) %>" readonly> <font color="red">*</font>
+	<tr>					
+		<td class="a1">收款账户</td>
+		<td class="a2"><input type="text" id="zhname" style="width:190px" name="zhname" value="<%=StaticParamDo.getAccountNameById(StringUtils.nullToStr(xssk.getSkzh())) %>" onclick="openAccount();" readonly> <font color="red">*</font>
 		<input type="hidden" id="fkzh"  name="xssk.skzh" value="<%=StringUtils.nullToStr(xssk.getSkzh()) %>">
 		<img src="images/select.gif" align="absmiddle" title="选择账户" border="0" onclick="openAccount();" style="cursor:hand">
 		</td>
-
+		<td class="a1">本次收款金额</td>
+		<td class="a2"><input type="text" style="width:100px" name="xssk.skje" id="skje" value="<%=JMath.round(xssk.getSkje()) %>">
+		<input type="button" name="btnAutoFix" id="btnAutoFix" value="自动分配" class="css_button2" onclick="autoFix();"> <font color="red">*</font>
+		</td>		
 	</tr>
 </table>
 <br>
@@ -300,7 +378,6 @@ if(xsskDescs != null && xsskDescs.size()>0){
 		hj_fsje += fsje;
 		double ysk = map.get("ysk")==null?0:((Double)map.get("ysk")).doubleValue();
 		hj_ysk += ysk;
-		
 		double bcsk = map.get("bcsk")==null?0:((Double)map.get("bcsk")).doubleValue();
 		hj_bcsk += bcsk;
 %>
@@ -309,7 +386,7 @@ if(xsskDescs != null && xsskDescs.size()>0){
 		<td class="a2"><input type="text" style="width:100%" id="fsrq_<%=i %>" name="xsskDescs[<%=i %>].fsrq" value="<%=StringUtils.nullToStr(map.get("fsrq")) %>" readonly></td>
 		<td class="a2"><input type="text" style="width:100%" id="fsje_<%=i %>" name="xsskDescs[<%=i %>].fsje" value="<%=JMath.round(fsje) %>" readonly></td>
 		<td class="a2"><input type="text" style="width:100%" id="ysk_<%=i %>" name="xsskDescs[<%=i %>].ysk"  value="<%=JMath.round(ysk) %>" readonly></td>
-		<td class="a2"><input type="text" style="width:100%" id="bcsk_<%=i %>" name="xsskDescs[<%=i %>].bcsk" value="<%=JMath.round(bcsk) %>"  onblur="hj();" <%if(StringUtils.nullToStr(xssk.getIs_ysk()).equals("是")) out.print("readonly"); %>></td>
+		<td class="a2"><input type="text" style="width:100%" id="bcsk_<%=i %>" name="xsskDescs[<%=i %>].bcsk" value="<%=JMath.round(bcsk) %>"  onblur="hj();"></td>
 	</tr>
 <%
 	}
@@ -320,8 +397,8 @@ if(xsskDescs != null && xsskDescs.size()>0){
 		<td class="a2"><input type="text" style="width:100%" id="xsd_id_<%=i %>" name="xsskDescs[<%=i %>].xsd_id" value="" readonly></td>
 		<td class="a2"><input type="text" style="width:100%" id="fsrq_<%=i %>" name="xsskDescs[<%=i %>].fsrq" value="" readonly></td>
 		<td class="a2"><input type="text" style="width:100%" id="fsje_<%=i %>" name="xsskDescs[<%=i %>].fsje" value="0.00" readonly></td>
-		<td class="a2"><input type="text" style="width:100%" id="ysk_<%=i %>" name="xsskDescs[<%=i %>].ysk"  value="0.00" readonly></td>
-		<td class="a2"><input type="text" style="width:100%" id="bcsk_<%=i %>" name="xsskDescs[<%=i %>].bcsk" value="0.00" onblur="hj();" <%if(StringUtils.nullToStr(xssk.getIs_ysk()).equals("是")) out.print("readonly"); %>></td>
+		<td class="a2"><input type="text" style="width:100%" id="ysk_<%=i %>" name="xsskDescs[<%=i %>].yfje"  value="0.00" readonly></td>
+		<td class="a2"><input type="text" style="width:100%" id="bcsk_<%=i %>" name="xsskDescs[<%=i %>].bcsk" value="0.00" readonly onblur="hj();"></td>
 	</tr>
 <%
 	}
@@ -332,22 +409,20 @@ if(xsskDescs != null && xsskDescs.size()>0){
 		<td class="a2"></td>
 		<td class="a2"><input type="text" style="width:100%" id="hj_fsje" name="hj_fsje" value="<%=JMath.round(hj_fsje) %>" readonly></td>
 		<td class="a2"><input type="text" style="width:100%" id="hj_ysk" name="hj_ysk"  value="<%=JMath.round(hj_ysk) %>" readonly></td>
-		<td class="a2"><input type="text" style="width:100%" id="hj_bcsk" name="hj_bcsk" value="<%=JMath.round(hj_bcsk) %>" <%if(StringUtils.nullToStr(xssk.getIs_ysk()).equals("是")) out.print("readonly"); %>></td>
+		<td class="a2"><input type="text" style="width:100%" id="hj_bcsk" name="hj_bcsk" value="<%=JMath.round(hj_bcsk) %>" readonly></td>
 	</tr>
-	<tr>
-		<td class="a2">本次收款总金额</td>
-		<td class="a2"></td>
-		<td class="a2"></td>
-		<td class="a2"></td>
-		<td class="a2"><input type="text" style="width:100%" id="skje" name="xssk.skje" value="<%=JMath.round(xssk.getSkje()) %>"></td>
-	</tr>	
+	 <%
+	 String cssStyle = "readonly";
+	 if(StringUtils.nullToStr(xssk.getIs_ysk()).equals("是")){
+		 cssStyle = "";
+	 } 
+	 %>	
 	<tr>
 		<td class="a1">备  注</td>
-		<td class="a2" colspan="4"><input name="xssk.remark" id="remark" style="width:100%" value="<%=StringUtils.nullToStr(xssk.getRemark()) %>">
-		</td>
-	</tr>	
+		<td class="a2" colspan="4"><input name="xssk.remark" id="remark" style="width:100%" value="<%=StringUtils.nullToStr(xssk.getRemark()) %>"></td>
+	</tr>
 </table>
-<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
+<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">		
 	<tr height="35">
 		<td class="a1">
 			<input type="button" name="btnSub" value="草 稿" class="css_button2" onclick="saveInfo('1');">&nbsp;&nbsp;&nbsp;&nbsp;
