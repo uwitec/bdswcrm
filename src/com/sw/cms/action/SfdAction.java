@@ -246,13 +246,11 @@ public SfdService getSfdService() {
 }
 public void setSfdService(SfdService sfdService) {
 	this.sfdService = sfdService;
-}
- 
+} 
  
 public String getJxr() {
 	return jxr;
 }
-
 public void setJxr(String jxr) {
 	this.jxr = jxr;
 }
