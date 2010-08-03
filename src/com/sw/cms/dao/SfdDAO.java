@@ -69,7 +69,14 @@ public class SfdDAO extends JdbcBaseDAO
 		param[1] = sfd.getClient_name();
 		param[2] = sfd.getAddress();
 		param[3] = sfd.getMobile();
-		param[4] = sfd.getLinkman();
+		if(sfd.getKhlx().equals("零售客户"))
+		{
+		  param[4] = sfd.getLinkmanLs();
+		}
+		else
+		{
+		  param[4] = sfd.getLinkman();
+		}		
 		param[5] = sfd.getJxr();
 		param[6] = sfd.getCjr();		 
 		param[7] = sfd.getJd_date();
@@ -122,7 +129,14 @@ public class SfdDAO extends JdbcBaseDAO
 		param[0] = sfd.getClient_name();
 		param[1] = sfd.getAddress();
 		param[2] = sfd.getMobile();
-		param[3] = sfd.getLinkman();
+		if(sfd.getKhlx().equals("零售客户"))
+		{
+		  param[3] = sfd.getLinkmanLs();
+		}
+		else
+		{
+		  param[3] = sfd.getLinkman();
+		}
 		param[4] = sfd.getJxr();		 
 		param[5] = sfd.getCjr();
 		param[6] = sfd.getJd_date();
@@ -275,7 +289,10 @@ public class SfdDAO extends JdbcBaseDAO
 			
 			if (SqlUtil.columnIsExist(rs, "qz_serial_num"))sfd.setQz_serial_num(rs.getString("qz_serial_num"));
 			
-			if (SqlUtil.columnIsExist(rs, "khlx"))sfd.setKhlx(rs.getString("khlx"));
+			if (SqlUtil.columnIsExist(rs, "khlx"))sfd.setKhlx(rs.getString("khlx"));		
+			
+			if (SqlUtil.columnIsExist(rs, "linkmanLs"))sfd.setLinkmanLs(rs.getString("linkmanLs"));
+			
 			return sfd;
 		}
 	}
