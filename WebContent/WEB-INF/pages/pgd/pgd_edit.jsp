@@ -173,7 +173,7 @@ String[] wxlx=(String[])VS.findValue("wxlx");
 	 	
 		<tr>
 		<td class="a1" width="15%">派工单编号</td>
-		<td class="a2" width="35%"><input type="text" name="pgds.p_id" id="p_id" value="<%=StringUtils.nullToStr(pgd.get("p_id")) %>" readonly></td>	
+		<td class="a2" width="35%"><input type="text" name="pgds.p_id" id="p_id" value="<%=StringUtils.nullToStr(pgd.get("p_id")) %>" style="width:230px" readonly></td>	
 		 
 		<td class="a1">派工日期</td>
 		<%
@@ -188,22 +188,22 @@ String[] wxlx=(String[])VS.findValue("wxlx");
 		    rq=DateComFunc.getToday();
 		  }
 		 %>
-		<td class="a2"><input type="text" name="pgds.p_yy_date" id="p_yy_date" value="<%=rq %>" size="15"  class="Wdate" onFocus="WdatePicker()">
+		<td class="a2"><input type="text" name="pgds.p_yy_date" id="p_yy_date" value="<%=rq %>" size="15" style="width:230px" class="Wdate" onFocus="WdatePicker()">
 		<font color="red">*</font>
 		</td>
 	</tr>
 	<tr>
 		
 		<td class="a1" width="15%">派工人</td>
-		<td class="a2">
-		   <input  id="brand"  type="text"   length="20"  onblur="setValue()" value="<%=StaticParamDo.getRealNameById((String)pgd.get("p_pgr")) %>"/> <font color="red">*</font>
+		<td class="a2" width="35%">
+		   <input  id="brand" style="width:230px" type="text"   length="20"  onblur="setValue()" value="<%=StaticParamDo.getRealNameById((String)pgd.get("p_pgr")) %>"/> <font color="red">*</font>
            <div  id="brandTip"  style="height:12px;position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		   <input type="hidden" name="pgds.p_pgr" id="fzr" value="<%=StringUtils.nullToStr(pgd.get("p_pgr")) %>"/> 
 		    
 		</td>	
 		<td class="a1" width="15%">维修人</td>
-    	<td class="a2">	  
-		 <input  name="sqr_text" id="sqr_text"   onblur="setSqrValue();" value="<%=StaticParamDo.getRealNameById((String)pgd.get("p_wxr")) %>"/> <font color="red">*</font>
+    	<td class="a2" width="35%">	  
+		 <input  name="sqr_text" id="sqr_text"  style="width:230px" onblur="setSqrValue();" value="<%=StaticParamDo.getRealNameById((String)pgd.get("p_wxr")) %>"/> <font color="red">*</font>
          
         <div id="sqr_tips" style="height:12px;position:absolute;left:89px; top:82px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
          </div>
@@ -214,7 +214,7 @@ String[] wxlx=(String[])VS.findValue("wxlx");
 	<tr>
 		<td class="a1" width="15%">维修状态</td>
 		<td class="a2" width="35%"  >
-			<select name="pgds.p_wx_state" id="p_wx_state">
+			<select name="pgds.p_wx_state" id="p_wx_state" style="width:232px">
 				<option value="待处理" <%if(StringUtils.nullToStr(pgd.get("p_wx_state")).equals("待处理"))out.print("selected"); %>>待处理</option>
 				<option value="已处理" <%if(StringUtils.nullToStr(pgd.get("p_wx_state")).equals("已处理"))out.print("selected"); %>>已处理</option>
 			</select>		
@@ -231,49 +231,49 @@ String[] wxlx=(String[])VS.findValue("wxlx");
 	</thead>	
 	<tr>
 		<td class="a1" width="15%">售服单编号</td>
-		<td class="a2"><input type="text" name="pgds.p_sfd_id"   id="sfd_id" value="<%=StringUtils.nullToStr(pgd.get("p_sfd_id")) %>" maxlength="20" readonly></td>	
+		<td class="a2" width="35%"><input type="text" name="pgds.p_sfd_id" style="width:232px"  id="sfd_id" value="<%=StringUtils.nullToStr(pgd.get("p_sfd_id")) %>" maxlength="45" readonly></td>	
 		 	
-		<td class="a1">接待日期</td>
-		<td class="a2"><input type="text"   id="jx_date" value="<%=StringUtils.nullToStr(pgd.get("jx_date")) %>" readonly>
+		<td class="a1" width="15%">接待日期</td>
+		<td class="a2" width="35%"><input type="text"  style="width:232px" id="jx_date" value="<%=StringUtils.nullToStr(pgd.get("jx_date")) %>" maxlength="45"  readonly>
 		 </td>						
 	</tr>
 	<tr>			
 		<td class="a1" width="15%">往来单位</td>
-		<td class="a2">
-		<input type="text" id="client_name" value="<%=StaticParamDo.getClientNameById(StringUtils.nullToStr(pgd.get("client_name")))%>"  maxlength="70" readonly>
+		<td class="a2" width="35%">
+		<input type="text" id="client_name" style="width:232px" value="<%=StaticParamDo.getClientNameById(StringUtils.nullToStr(pgd.get("client_name")))%>"  maxlength="45" readonly>
 		 </td>
 		<td class="a1" width="15%">经手人</td>
-		<td class="a2">
-		   <input  id="jxr"  type="text"   length="20"   value="<%=StaticParamDo.getRealNameById(StringUtils.nullToStr(pgd.get("jxr"))) %>" readonly>  
+		<td class="a2" width="35%">
+		   <input  id="jxr"  type="text" style="width:232px"   value="<%=StaticParamDo.getRealNameById(StringUtils.nullToStr(pgd.get("jxr"))) %>" maxlength="45" readonly>  
            		    
 		</td>
 			
 	</tr>
 	<tr>
 	   <td class="a1" width="15%">联系人</td>
-	   <td class="a2">
-	  	 	<input id="linkman" type="text" length="20" value="<%=StringUtils.nullToStr(pgd.get("linkman")) %>" readonly> 
+	   <td class="a2" width="35%">
+	  	 	<input id="linkman" type="text" length="45" style="width:232px" value="<%=StringUtils.nullToStr(pgd.get("linkman")) %>" readonly> 
 		</td>
 		<td class="a1" width="15%">电话</td>
-		<td class="a2">
-		 	<input  id="mobile" type="text" length="20" value="<%=StringUtils.nullToStr(pgd.get("mobile")) %>" readonly> 
+		<td class="a2" width="35%">
+		 	<input  id="mobile" type="text" length="45" style="width:232px" value="<%=StringUtils.nullToStr(pgd.get("mobile")) %>" readonly> 
 		</td>
 			
 	</tr>
 	<tr>
 	   <td class="a1" width="15%">地址</td>
-		<td class="a2">
-		 	<input  id="address" type="text" length="60" value="<%=StringUtils.nullToStr(pgd.get("address")) %>" readonly> 
+		<td class="a2" width="35%">
+		 	<input  id="address" type="text" length="45" style="width:232px" value="<%=StringUtils.nullToStr(pgd.get("address")) %>" readonly> 
 		 </td>
 		<td class="a1" width="15%">求助方式</td>
-		<td class="a2">
-		 	<input  id="qzfs" type="text" length="20" value="<%=StringUtils.nullToStr(pgd.get("qzfs")) %>" readonly> 
+		<td class="a2" width="35%">
+		 	<input  id="qzfs" type="text" length="45" style="width:232px" value="<%=StringUtils.nullToStr(pgd.get("qzfs")) %>" readonly> 
 		 </td>	
 	</tr>
 	<tr>
 	 <td class="a1" width="15%">内容描述</td>
 	 <td class="a2" width="85%" colspan="3">
-			<textarea rows="2"  id="ms" style="width:75%"> <%=StringUtils.nullToStr(pgd.get("ms")) %> </textarea>
+			<textarea rows="2"  id="ms" style="width:86%"> <%=StringUtils.nullToStr(pgd.get("ms")) %> </textarea>
 	</td> 
 	</tr>			
 </table> 
@@ -287,7 +287,7 @@ String[] wxlx=(String[])VS.findValue("wxlx");
 	 <tr>	
 	   <td class="a1" width="15%">故障类型</td>
 		<td class="a2" width="35%">
-		 	<select name="pgds.p_gzlx" id="p_gzlx">
+		 	<select name="pgds.p_gzlx" id="p_gzlx"  style="width:232px">
 			 <option value=""></option>
 			<%
 			   if(wxlx != null && wxlx.length>0){
@@ -303,7 +303,7 @@ String[] wxlx=(String[])VS.findValue("wxlx");
 		</td>
 		<td class="a1" width="15%">客户性质</td>
 		<td class="a2" width="35%">
-		    <select name="pgds.p_khxz" id="p_khxz">
+		    <select name="pgds.p_khxz" id="p_khxz"  style="width:232px">
 		 	 <option value=""></option>
 			     <option value="送修" <%if(StringUtils.nullToStr(pgd.get("p_khxz")).equals("送修"))out.print("selected"); %>>送修</option>
 				 <option value="上门" <%if(StringUtils.nullToStr(pgd.get("p_khxz")).equals("上门"))out.print("selected"); %>>上门</option>
@@ -316,7 +316,7 @@ String[] wxlx=(String[])VS.findValue("wxlx");
 	<tr>	   
 		<td class="a1" width="15%">维修类型</td>
 		<td class="a2" width="35%">
-		 	<select name="pgds.p_wx_type" id="p_wx_type">
+		 	<select name="pgds.p_wx_type" id="p_wx_type"  style="width:232px">
 		 	 <option value=""></option>
 			     <option value="个人" <%if(StringUtils.nullToStr(pgd.get("p_wx_type")).equals("个人"))out.print("selected"); %>>个人</option>
 				 <option value="单位" <%if(StringUtils.nullToStr(pgd.get("p_wx_type")).equals("单位"))out.print("selected"); %>>单位</option>
@@ -325,7 +325,7 @@ String[] wxlx=(String[])VS.findValue("wxlx");
 		</td>
 		<td class="a1" width="15%">维修凭证</td>
 		<td class="a2" width="35%">
-		 	<select name="pgds.p_wxpz" id="p_wxpz">
+		 	<select name="pgds.p_wxpz" id="p_wxpz" style="width:232px">
 		 	 <option value=""></option>
 			     <option value="保修卡" <%if(StringUtils.nullToStr(pgd.get("p_wxpz")).equals("保修卡"))out.print("selected"); %>>保修卡</option>
 				 <option value="收款单据" <%if(StringUtils.nullToStr(pgd.get("p_wxpz")).equals("收款单据"))out.print("selected"); %>>收款单据</option>			      
@@ -336,7 +336,7 @@ String[] wxlx=(String[])VS.findValue("wxlx");
 	<tr height="35">
 		 <td class="a1" width="15%">故障及分析</td>
 		<td class="a2" colspan="3">
-			<textarea rows="2" name="pgds.p_gzfx" id="p_gzfx" style="width:75%"><%=StringUtils.nullToStr(pgd.get("p_gzfx"))%></textarea>
+			<textarea rows="2" name="pgds.p_gzfx" id="p_gzfx" style="width:86%"><%=StringUtils.nullToStr(pgd.get("p_gzfx"))%></textarea>
 		<font color="red">*</font></td>	
 	</tr>		 
 </table>
@@ -352,7 +352,7 @@ String[] wxlx=(String[])VS.findValue("wxlx");
 	<tr>
 		<td class="a1" width="15%">备注</td>
 		<td class="a2" width="85%" colspan="3">
-			<textarea rows="4" name="pgds.p_ms" id="p_ms" style="width:75%"> <%=StringUtils.nullToStr(pgd.get("p_ms")) %> </textarea>
+			<textarea rows="4" name="pgds.p_ms" id="p_ms" style="width:86%"> <%=StringUtils.nullToStr(pgd.get("p_ms")) %> </textarea>
 		</td>
 	</tr>			
 	<tr height="35">
