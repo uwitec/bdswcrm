@@ -307,27 +307,45 @@ String[] bxyy = (String[])VS.findValue("bxyy");
 		 var  client_name=document.getElementById("client_name");
 		 var  client_id=document.getElementById("client_id");
 		 var linkman= document.getElementById("linkman");
+		 var linkmanLs= document.getElementById("linkmanLs");
 		 var  mobile=document.getElementById("mobile");
 		 var  address=document.getElementById("address");
 		 var  ms=document.getElementById("ms");
+		 var khlx=document.getElementById("khlx");
 		 client_name.value=""; 
 		 client_id.value="";   
 		 linkman.value="";
 		 mobile.value=""
 		address.value="";
-		ms.value="";
+		ms.value="";		
 		  var productArray=product.split("$");
 		  var flog= productArray[0];
 		  //维修记录
 		     
 		   if(flog==2)  {
-		  	//零售记录
-		    alert("零售记录存在该序列号!");
+		  	//零售记录		  
+		     ms.value='序列号: '+productArray[4]+'\n'+'商品名称: '+productArray[2]+'\n'+'商品型号: '+productArray[3];
+		     khlx.value="零售客户";
+		     chgYwType("零售客户");
+		     client_id.value=productArray[5];
+			 linkmanLs.value=productArray[6]; 
+			 address.value=productArray[7];
+			 mobile.value=productArray[8];	
+			 			 
+			 if(productArray[10]!="")
+			 {
+		       var destination = "viewLsd.html?id="+productArray[10];
+		       var fea ='width=950,height=700,left=' + (screen.availWidth-950)/2 + ',top=' + (screen.availHeight-750)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		
+		       window.open(destination,'详细信息',fea);	
+	 	     }
 		  }
 		  else if(flog==4)
 		  {//销售记录
 		    
 		      ms.value='序列号: '+productArray[4]+'\n'+'商品名称: '+productArray[2]+'\n'+'商品型号: '+productArray[3];
+		      khlx.value="往来单位";
+		      chgYwType("往来单位");
 			  client_id.value=productArray[5];
 			 linkman.value=productArray[6];
 			 address.value=productArray[7];
@@ -382,6 +400,26 @@ String[] bxyy = (String[])VS.findValue("bxyy");
 	    document.myform.btnRepair.disabled = false;
 	  }
 	}
+	
+	function chgYwType(vl){
+		if(vl == "往来单位"){
+			document.getElementById("client_name").style.display = '';
+			document.getElementById("client_id").style.display = 'none';			
+			document.getElementById("linkman").style.display = '';
+			document.getElementById("linkmanLs").style.display = 'none';			
+		}else{
+			document.getElementById("client_name").style.display = 'none';					
+			document.getElementById("client_id").style.display = '';				
+			document.getElementById("linkman").style.display = 'none';
+			document.getElementById("linkmanLs").style.display = '';			
+		}
+		document.getElementById("client_name").value = "";
+		document.getElementById("client_id").value = "";
+		document.getElementById("linkman").value = "";
+		document.getElementById("linkmanLs").value = "";
+		document.getElementById("mobile").value = "";
+		document.getElementById("address").value = "";
+	}
 </script>
 </head>
 <body onload="initFzrTip();initClientTip();saveState();">
@@ -390,11 +428,10 @@ String[] bxyy = (String[])VS.findValue("bxyy");
 <input type="hidden" name="sfd.wx_state" id="wx_state" value="">
 <input type="hidden" name="sfd.flow" id="flow" value="<%=StringUtils.nullToStr(sfd.getFlow())%>">
 <input type="hidden" name="sfd.jx_date" id="jx_date" value="<%=DateComFunc.getToday()%>">
-<input type="hidden" name="sfd.khlx" id="khlx" value="往来单位">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
-		<td colspan="4">售后服务单（往来）</td>
+		<td colspan="4">售后服务单</td>
 	</tr>
 	</thead>
 	<tr>
@@ -404,13 +441,24 @@ String[] bxyy = (String[])VS.findValue("bxyy");
 		<td class="a1" width="15%">商品序列号</td>
 		<td class="a2" width="35%"><input type="text" id="s_nums" name="sfd.qz_serial_num" value="" style="width:230px" onkeypress="javascript:f_enter()"></td>
 	</tr>
+	<tr>
+	    <td class="a1" width="15%">服务类型</td>
+		<td class="a2"  colspan="3">
+			<select name="sfd.khlx" id="khlx" onchange="chgYwType(this.value);" style="width:232px">
+				<option value="往来单位">往来单位</option>
+				<option value="零售客户">零售客户</option>
+			</select><span style="color:red">*</span>
+		</td>
+	</tr>
 	<tr>			
 		<td class="a1" width="15%">客户名称</td>
-		<td class="a2" width="35%"><input type="text" name="sfd.client_id"   id="client_name" onblur="setClientRegInfo();" value="" style="width:230px" maxlength="50" > <font color="red">*</font>
-		<input type="hidden" name="sfd.client_name" id="client_id" value="" ><div id="clientsTip" style="height:12px;position:absolute;width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
-		</td>		
+		<td class="a2" width="35%">
+		<input type="text" name="sfd.client_id"   id="client_name" onblur="setClientRegInfo();" value="" style="width:230px" maxlength="50">
+		<input style="width:230px;display: none" type="text" name="sfd.client_name" id="client_id" value=""  maxlength="50" >
+		<font color="red">*</font><div id="clientsTip" style="height:12px;position:absolute;width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;"></div>
+		</td>				
 		<td class="a1" width="15%">联系人</td>
-		<td class="a2" width="35%" >
+		<td class="a2" width="35%">		 
 			<select name="sfd.linkman" id="linkman" onchange="chgLxr(this.value);"  style="width:230px">
 		    <%
 			   if(!StringUtils.nullToStr(sfd.getLinkman()).equals("")){
@@ -419,8 +467,9 @@ String[] bxyy = (String[])VS.findValue("bxyy");
 			<%
 			   } 			
 		    %>					
-			</select>
-		</td>	
+			</select>		
+			<input type="text" name="sfd.linkmanLs" id="linkmanLs" value="" style="width:230px;display: none"></td>
+		</td>			
 	</tr>
 	<tr>			
 		<td class="a1" width="15%">联系电话</td>

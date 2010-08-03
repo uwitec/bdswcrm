@@ -46,7 +46,7 @@ String orderType = (String)VS.findValue("orderType");
 		document.myform.linkman.value = "";
 		document.myform.jx_date1.value = "";
 		document.myform.jx_date2.value = "";
-		document.myform.wx_state.value = "待处理";
+		document.myform.wx_state.value = "已保存";
 		document.myform.jxr.value = "";
 	}
 	
@@ -60,12 +60,6 @@ String orderType = (String)VS.findValue("orderType");
 		var fea ='width=780,height=550,left=' + (screen.availWidth-780)/2 + ',top=' + (screen.availHeight-550)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		window.open(destination,'售后服务单',fea);		
 	}	
-	
-	function addls(){
-		var destination = "addSfdls.html";
-			var fea ='width=750,height=550,left=' + (screen.availWidth-750)/2 + ',top=' + (screen.availHeight-500)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
-		window.open(destination,'售后服务单',fea);	
-	}
 	
 	function doSort(order_name){
 		if(myform.orderType.value=='asc'){
@@ -104,10 +98,9 @@ String orderType = (String)VS.findValue("orderType");
 <input type="hidden" name="orderName" value="<%=orderName %>">
 <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0">
 	<tr>
-		<td class="csstitle" align="left" width="65%">&nbsp;&nbsp;&nbsp;&nbsp;<b>售后服务单</b></td>
-		<td class="csstitle" width="35%">
-			<img src="images/create.gif" align="absmiddle" border="0">&nbsp;<a href="#" class="xxlb" onclick="add();"> 添加（往来） </a> &nbsp;&nbsp;&nbsp;
-			<img src="images/create.gif" align="absmiddle" border="0">&nbsp;<a href="#" class="xxlb" onclick="addls();"> 添加（零售） </a> &nbsp;&nbsp;&nbsp;
+		<td class="csstitle" align="left" width="75%">&nbsp;&nbsp;&nbsp;&nbsp;<b>售后服务单</b></td>		
+		<td class="csstitle" width="25%">		    
+			<img src="images/create.gif" align="absmiddle" border="0">&nbsp;<a href="#" class="xxlb" onclick="add();"> 添 加 </a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;			
 			<img src="images/import.gif" align="absmiddle" border="0">&nbsp;<a href="#" class="xxlb" onclick="refreshPage();"> 刷 新 </a></td>			
 	</tr>
 	<tr>
@@ -144,6 +137,7 @@ String orderType = (String)VS.findValue("orderType");
 							<option value="已保存" <%if(wx_state.equals("已保存")) out.print("selected"); %>>已保存</option>
 							<option value="提交咨询" <%if(wx_state.equals("提交咨询")) out.print("selected"); %>>提交咨询</option>
 							<option value="提交派工" <%if(wx_state.equals("提交派工")) out.print("selected"); %>>提交派工</option>
+							<option value="已处理" <%if(wx_state.equals("已处理")) out.print("selected"); %>>已处理</option>
 						</select>					
 					</td>
 					<td align="center">经手人：</td>
@@ -181,7 +175,20 @@ String orderType = (String)VS.findValue("orderType");
 	<tr class="a1" title="双击查看详情"  onmousedown="trSelectChangeCss()"  onDblClick="openWin('<%=StringUtils.nullToStr(sfd.get("id"))%>')">
 		<td><%=StringUtils.nullToStr(sfd.get("id")) %></td>
 		<td><%=StringUtils.nullToStr(StaticParamDo.getClientNameById((String)sfd.get("client_name"))) %></td>
-		<td><%=StringUtils.nullToStr(sfd.get("linkman")) %></td>
+		<% 
+		if(sfd.get("khlx").equals("零售客户"))
+		{
+		%>
+		<td><%=StringUtils.nullToStr(sfd.get("linkmanLs")) %></td>
+		<%
+		}
+		else
+		{
+		 %>
+		 <td><%=StringUtils.nullToStr(sfd.get("linkman")) %></td>
+		<%
+		}
+		 %>
 		<td><%=StringUtils.nullToStr(sfd.get("mobile")) %></td>
 		<td><%=StringUtils.nullToStr(sfd.get("address")) %></td>
 		<td><%=StringUtils.nullToStr(sfd.get("jx_date")) %></td>
