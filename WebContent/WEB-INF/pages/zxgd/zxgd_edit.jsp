@@ -143,25 +143,25 @@ Map zxgd=(Map)VS.findValue("zxgd");
 		 </td>
 		<td class="a1" width="15%">经手人</td>
 		<td class="a2">
-		   <input  id="jxr"  type="text"   length="20"   value="<%=StaticParamDo.getRealNameById(StringUtils.nullToStr(zxgd.get("jxr"))) %>" readonly/>  
+		   <input  id="jxr"  type="text"   length="20"   value="<%=StaticParamDo.getRealNameById(StringUtils.nullToStr(zxgd.get("jxr"))) %>" readonly>  
 		</td>
 	</tr>
 	<tr>
 	
 	   <td class="a1" width="15%">联系人</td>
 		<td class="a2">
-		 	<input id="linkman" type="text" length="20" value="<%=StringUtils.nullToStr(zxgd.get("linkman")) %>" readonly/> 		    
+			<input id="linkman" type="text" length="20" value="<%=StringUtils.nullToStr(zxgd.get("linkman")) %>" readonly>
 		</td>
 		<td class="a1" width="15%">电话</td>
 		<td class="a2">
-		 	<input  id="mobile" type="text" length="20" value="<%=StringUtils.nullToStr(zxgd.get("mobile")) %>" readonly/> 
+		 	<input  id="mobile" type="text" length="20" value="<%=StringUtils.nullToStr(zxgd.get("mobile")) %>" readonly> 
 		</td>
 			
 	</tr>
 	<tr>
 	   <td class="a1" width="15%">地址</td>
 		<td class="a2"  colspan="3">
-		 	<input  id="address" type="text" length="60" value="<%=StringUtils.nullToStr(zxgd.get("address")) %>" readonly/> 
+		 	<input  id="address" type="text" length="60" value="<%=StringUtils.nullToStr(zxgd.get("address")) %>" readonly> 
 		 </td>
 	</tr>
 	<tr>

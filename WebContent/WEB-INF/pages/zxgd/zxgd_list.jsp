@@ -100,7 +100,7 @@ String orderType = (String)VS.findValue("orderType");
 	</tr>
 	<tr>
 		<td class="search" align="left" colspan="2">&nbsp;&nbsp;
-			联系人：<input type="text" name="client_name" value="<%=client_name %>">&nbsp;&nbsp;
+			往来单位：<input type="text" name="client_name" value="<%=client_name %>">&nbsp;&nbsp;
 			时间：<input type="text" name="hf_date1" value="<%=hf_date1 %>" size="15"  class="Wdate" onFocus="WdatePicker()" >
 			&nbsp;&nbsp;至&nbsp;&nbsp;
 			<input type="text" name="hf_date2" value="<%=hf_date2 %>" size="15"  class="Wdate" onFocus="WdatePicker()" >
@@ -139,7 +139,7 @@ String orderType = (String)VS.findValue("orderType");
 	<tr class="a1" title="双击查看详情"  onmousedown="trSelectChangeCss()"  onDblClick="openWin('<%=StringUtils.nullToStr(zxgd.get("sfd_id"))%>')">
 		<td><%=StringUtils.nullToStr(zxgd.get("id")) %></td>
 		<td><%=StringUtils.nullToStr(StaticParamDo.getClientNameById((String)zxgd.get("client_name"))) %></td>
-		<td><%=StringUtils.nullToStr(zxgd.get("linkman")) %></td>
+		<td><%=StringUtils.nullToStr(zxgd.get("linkman")) %></td>		
 		<td><%=StringUtils.nullToStr(zxgd.get("mobile")) %></td>
 		<td><%=StringUtils.nullToStr(zxgd.get("address")) %></td>
 		<td><%=StringUtils.nullToStr(zxgd.get("state")) %></td>			
