@@ -388,12 +388,12 @@ public class DwrService {
 					if (s == 0) {
 						xx[3] = "";
 					}
-					xx[4] = StringUtils.nullToStr(lsmap.get("client_name"));
-					xx[5] = StringUtils.nullToStr(lsmap.get("lxdh"));
-					xx[6] = StringUtils.nullToStr(lsmap.get("mail"));
-					xx[7] = StringUtils.nullToStr(lsmap.get("address"));
-					xx[8] = "";
-					xx[9] = (String) xsmap.get("yw_dj_id");
+					xx[4] = StringUtils.nullToStr(lsmap.get("client_name"));					
+					xx[5] = StringUtils.nullToStr(lsmap.get("lxr"));
+					xx[6] = StringUtils.nullToStr(lsmap.get("address"));
+					xx[7] = StringUtils.nullToStr(lsmap.get("lxdh"));
+					xx[8] = StringUtils.nullToStr(lsmap.get("mail"));
+					xx[9] = (String) xsmap.get("yw_dj_id");					
 
 				}
 				else if (type.equals("œ˙ €")) 

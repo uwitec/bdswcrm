@@ -70,7 +70,8 @@ public class PgdService
     		 wxcld.setW_state("已保存");
     		 wxcld.setW_wx_state("待处理");
     		 wxcld.setW_client_name(StringUtils.nullToStr(sfd.getClient_name()));
-    		 wxcld.setW_linkman(StringUtils.nullToStr(sfd.getLinkman()));
+    		 wxcld.setW_linkman(StringUtils.nullToStr(sfd.getLinkman())); 
+    		
     		 wxcld.setW_mobile(StringUtils.nullToStr(sfd.getMobile()));
     		 wxcld.setW_address(StringUtils.nullToStr(sfd.getAddress()));
     		 wxcldDao.saveWxcld(wxcld);

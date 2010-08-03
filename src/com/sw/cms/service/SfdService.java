@@ -28,12 +28,6 @@ public class SfdService
 			return;
 		}
 	   sfdDao.saveSfd(sfd);
-    
-	   if(sfd.getState().equals("已提交")&&sfd.getWx_state().equals("已处理"))
-	   {
-		sfdDao.updateSfdJddate(sfd);
-	   }
-	   
    }
    
  
@@ -50,11 +44,7 @@ public class SfdService
    
    public void updateSfd(Sfd sfd)
    {
-	   sfdDao.updateSfd(sfd);
-	   if(sfd.getState().equals("已提交")&&sfd.getWx_state().equals("已处理"))
-	   {
-		sfdDao.updateSfdJddate(sfd);
-	   }
+	   sfdDao.updateSfd(sfd);	   
    }
 
 public SfdDAO getSfdDao() {
