@@ -244,31 +244,30 @@ String[] wxlx=(String[])VS.findValue("wxlx");
 		 </td>
 		<td class="a1" width="15%">经手人</td>
 		<td class="a2">
-		   <input  id="jxr"  type="text"   length="20"   value="<%=StaticParamDo.getRealNameById(StringUtils.nullToStr(pgd.get("jxr"))) %>" readonly/>  
+		   <input  id="jxr"  type="text"   length="20"   value="<%=StaticParamDo.getRealNameById(StringUtils.nullToStr(pgd.get("jxr"))) %>" readonly>  
            		    
 		</td>
 			
 	</tr>
 	<tr>
-	
 	   <td class="a1" width="15%">联系人</td>
-		<td class="a2">
-		 	<input id="linkman" type="text" length="20" value="<%=StringUtils.nullToStr(pgd.get("linkman")) %>" readonly/> 		    
+	   <td class="a2">
+	  	 	<input id="linkman" type="text" length="20" value="<%=StringUtils.nullToStr(pgd.get("linkman")) %>" readonly> 
 		</td>
 		<td class="a1" width="15%">电话</td>
 		<td class="a2">
-		 	<input  id="mobile" type="text" length="20" value="<%=StringUtils.nullToStr(pgd.get("mobile")) %>" readonly/> 
+		 	<input  id="mobile" type="text" length="20" value="<%=StringUtils.nullToStr(pgd.get("mobile")) %>" readonly> 
 		</td>
 			
 	</tr>
 	<tr>
 	   <td class="a1" width="15%">地址</td>
 		<td class="a2">
-		 	<input  id="address" type="text" length="60" value="<%=StringUtils.nullToStr(pgd.get("address")) %>" readonly/> 
+		 	<input  id="address" type="text" length="60" value="<%=StringUtils.nullToStr(pgd.get("address")) %>" readonly> 
 		 </td>
 		<td class="a1" width="15%">求助方式</td>
 		<td class="a2">
-		 	<input  id="qzfs" type="text" length="20" value="<%=StringUtils.nullToStr(pgd.get("qzfs")) %>" readonly/> 
+		 	<input  id="qzfs" type="text" length="20" value="<%=StringUtils.nullToStr(pgd.get("qzfs")) %>" readonly> 
 		 </td>	
 	</tr>
 	<tr>
@@ -360,7 +359,7 @@ String[] wxlx=(String[])VS.findValue("wxlx");
 		<td class="a1" colspan="4">
 			<input type="button" name="btnSave" value="草稿" class="css_button2" onclick="saveInfo('1');">&nbsp;&nbsp;&nbsp;&nbsp;	
 			<input type="button" name="btnSub" value="提交" class="css_button2" onclick="saveInfo('2');">&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="reset" name="button2" value="关 闭" class="css_button2" onclick="window.opener.document.myform.submit();window.close();">
+			<input type="reset" name="button2" value="关 闭" class="css_button2" onclick="window.close();">
 		</td>
 	</tr>
 </table>

@@ -60,7 +60,7 @@ String orderType = (String)VS.findValue("orderType");
 		var destination ="editPgd.html?id="+id;
 		var fea ='width=950,height=700,left=' + (screen.availWidth-950)/2 + ',top=' + (screen.availHeight-750)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
-		window.open(destination,'详细信息');			
+		window.open(destination,'详细信息',fea);			
 	}	
 	
 	function doSort(order_name){
