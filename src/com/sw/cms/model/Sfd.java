@@ -28,6 +28,8 @@ public class Sfd
 	   
 	   private String  khlx          ;//客户类型
 	   
+	   private String  linkmanLs    ;//联系人（零售）
+	   
 	   public String getKhlx() {
 			return khlx;
 		}
@@ -145,5 +147,12 @@ public class Sfd
 	}
 	public void setFlow(String flow) {
 		this.flow = flow;
+	}
+	
+	public String getLinkmanLs() {
+		return linkmanLs;
+	}
+	public void setLinkmanLs(String linkmanLs) {
+		this.linkmanLs = linkmanLs;
 	}
 }
