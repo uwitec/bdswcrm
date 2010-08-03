@@ -420,9 +420,23 @@ String[] bxyy = (String[])VS.findValue("bxyy");
 		document.getElementById("mobile").value = "";
 		document.getElementById("address").value = "";
 	}
+	
+	function setYwType(vl){
+		if(vl == "往来单位"){
+			document.getElementById("client_name").style.display = '';
+			document.getElementById("client_id").style.display = 'none';			
+			document.getElementById("linkman").style.display = '';
+			document.getElementById("linkmanLs").style.display = 'none';			
+		}else{
+			document.getElementById("client_name").style.display = 'none';					
+			document.getElementById("client_id").style.display = '';				
+			document.getElementById("linkman").style.display = 'none';
+			document.getElementById("linkmanLs").style.display = '';			
+		}		
+	}
 </script>
 </head>
-<body onload="initFzrTip();initClientTip();chgBxyy('<%=StringUtils.nullToStr(sfd.getBxyy()) %>');saveState();">
+<body onload="initFzrTip();initClientTip();chgBxyy('<%=StringUtils.nullToStr(sfd.getBxyy()) %>');saveState();setYwType('<%=StringUtils.nullToStr(sfd.getKhlx()) %>');">
 <form name="myform" action="updateSfd.html" method="post">
 <input type="hidden" name="sfd.state" id="state" value="<%=StringUtils.nullToStr(sfd.getState())%>">
 <input type="hidden" name="sfd.wx_state" id="wx_state" value="<%=StringUtils.nullToStr(sfd.getWx_state())%>">

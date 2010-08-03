@@ -175,20 +175,7 @@ String orderType = (String)VS.findValue("orderType");
 	<tr class="a1" title="双击查看详情"  onmousedown="trSelectChangeCss()"  onDblClick="openWin('<%=StringUtils.nullToStr(sfd.get("id"))%>')">
 		<td><%=StringUtils.nullToStr(sfd.get("id")) %></td>
 		<td><%=StringUtils.nullToStr(StaticParamDo.getClientNameById((String)sfd.get("client_name"))) %></td>
-		<% 
-		if(sfd.get("khlx").equals("零售客户"))
-		{
-		%>
-		<td><%=StringUtils.nullToStr(sfd.get("linkmanLs")) %></td>
-		<%
-		}
-		else
-		{
-		 %>
-		 <td><%=StringUtils.nullToStr(sfd.get("linkman")) %></td>
-		<%
-		}
-		 %>
+	    <td><%=StringUtils.nullToStr(sfd.get("linkman")) %></td>		
 		<td><%=StringUtils.nullToStr(sfd.get("mobile")) %></td>
 		<td><%=StringUtils.nullToStr(sfd.get("address")) %></td>
 		<td><%=StringUtils.nullToStr(sfd.get("jx_date")) %></td>
