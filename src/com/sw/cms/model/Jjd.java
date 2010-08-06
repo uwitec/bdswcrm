@@ -20,7 +20,24 @@ public class Jjd
 	   private String  state;
 	   private String  ms;
 	   private String  mail;
+	   private String  khlx;//客户类型：往来单位、零售客户
+	   private String  address;
+	   private String  linkmanLs;//零售客户联系人
 	   
+	   public String getAddress() {
+			return address;
+		}
+		public void setAddress(String address) {
+			this.address = address;
+		}
+	   
+		public String getLinkmanLs() {
+			return linkmanLs;
+		}
+		public void setLinkmanLs(String linkmanLs) {
+			this.linkmanLs = linkmanLs;
+		}
+		
 	public String getCj_date() {
 		return cj_date;
 	}
@@ -100,4 +117,11 @@ public class Jjd
 		this.state = state;
 	}
 	 
+	public String getKhlx() {
+		return khlx;
+	}
+
+	public void setKhlx(String khlx) {
+		this.khlx = khlx;
+	}
 }
