@@ -294,16 +294,19 @@ public class ShkcDAO extends JdbcBaseDAO
 					
 					for(int k=0;k<arryNums.length;k++)
 				   {	
-                      sql="insert into shkc(product_id,product_xh,product_name,qz_serial_num,state,store_id) values(?,?,?,?,?,?)";
-                      Object[]param=new Object[6];
-                      param[0]=jjdProduct.getProduct_id();
-                      param[1]=jjdProduct.getProduct_xh();
-                      param[2]=jjdProduct.getProduct_name();
-                      param[3]=arryNums[k];
-                      param[4]=state; 
-                      param[5]=storeId;
+                      if(!arryNums[k].equals(""))
+                      {
+					     sql="insert into shkc(product_id,product_xh,product_name,qz_serial_num,state,store_id) values(?,?,?,?,?,?)";
+                         Object[]param=new Object[6];
+                         param[0]=jjdProduct.getProduct_id();
+                         param[1]=jjdProduct.getProduct_xh();
+                         param[2]=jjdProduct.getProduct_name();
+                         param[3]=arryNums[k];
+                         param[4]=state; 
+                         param[5]=storeId;
 
-                      this.getJdbcTemplate().update(sql,param);
+                         this.getJdbcTemplate().update(sql,param);
+                      }
 				   }
 				}
 			}

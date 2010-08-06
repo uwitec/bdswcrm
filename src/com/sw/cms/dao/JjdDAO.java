@@ -25,7 +25,7 @@ public class JjdDAO extends JdbcBaseDAO {
 	 */
 	public Page getJjdList(String con, int curPage, int rowsPerPage) 
 	{
-		String sql = "select j.id,j.client_name,j.linkman,j.mobile,j.jj_date,j.state,j.jjr,j.cjr from jjd j left join sys_user s on j.jjr=s.user_id  where 1=1 "; 
+		String sql = "select j.id,j.client_name,j.linkman,j.mobile,j.lxdh,j.jj_date,j.state,j.jjr,j.cjr from jjd j left join sys_user s on j.jjr=s.user_id  where 1=1 "; 
 		if(!con.equals(""))
 		{
 			sql=sql+con;
@@ -59,21 +59,30 @@ public class JjdDAO extends JdbcBaseDAO {
 	 */
 	public void saveJjd(Jjd jjd,List jjdProduct)
 	{
-		String sql="insert into jjd(id,sfd_id,client_name,mail,mobile,linkman,jjr,cjr,jj_date,cj_date,state,ms)values(?,?,?,?,?,?,?,?,?,?,?,?)";
-		Object param[]=new Object[12]; 
+		String sql="insert into jjd(id,sfd_id,client_name,mail,mobile,linkman,jjr,cjr,jj_date,cj_date,state,ms,address,khlx,lxdh)values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		Object param[]=new Object[15]; 
 		param[0]=jjd.getId();
 		param[1]=jjd.getSfd_id();
 		param[2]=jjd.getClient_name();
 		param[3]=jjd.getMail();
 		param[4]=jjd.getMobile();
-		param[5]=jjd.getLinkman();
+		if(jjd.getKhlx().equals("零售客户"))
+		{
+		  param[5] = jjd.getLinkmanLs();
+		}
+		else
+		{
+		  param[5] = jjd.getLinkman();
+		}	
 		param[6]=jjd.getJjr();
 		param[7]=jjd.getCjr();
 		param[8]=jjd.getJj_date();	
 		param[9]=DateComFunc.getToday();
 		param[10]=jjd.getState();
 		param[11]=jjd.getMs();
-		
+		param[12]=jjd.getAddress();
+		param[13]=jjd.getKhlx();
+		param[14]=jjd.getLxdh();
 		this.getJdbcTemplate().update(sql,param);
 		this.addJjdProducts(jjdProduct,jjd.getId());
 		
@@ -174,17 +183,27 @@ public class JjdDAO extends JdbcBaseDAO {
 	 */
 	public void updateJjd(Jjd jjd,List jjdProduct)
 	{
-		String sql="update jjd set client_name=?,lxdh=?,mobile=?,linkman=?,jjr=?,jj_date=?,state=?,ms=? where id=?";
-		Object param[]=new Object[9];
+		String sql="update jjd set client_name=?,lxdh=?,mobile=?,linkman=?,jjr=?,jj_date=?,state=?,ms=?,mail=?,address=?,khlx=? where id=?";
+		Object param[]=new Object[12];
 		param[0]=jjd.getClient_name();
 		param[1]=jjd.getLxdh();
 		param[2]=jjd.getMobile();
-		param[3]=jjd.getLinkman();
+		if(jjd.getKhlx().equals("零售客户"))
+		{
+		  param[3] = jjd.getLinkmanLs();
+		}
+		else
+		{
+		  param[3] = jjd.getLinkman();
+		}
 		param[4]=jjd.getJjr();
 		param[5]=jjd.getJj_date();
 		param[6]=jjd.getState();
 		param[7]=jjd.getMs();
-		param[8]=jjd.getId();
+		param[8]=jjd.getMail();
+		param[9]=jjd.getAddress();
+		param[10]=jjd.getKhlx();
+		param[11]=jjd.getId();
 		this.getJdbcTemplate().update(sql,param);
 		delJjdProduct(jjd.getId());
 		addJjdProducts(jjdProduct,jjd.getId());
@@ -204,7 +223,7 @@ public class JjdDAO extends JdbcBaseDAO {
 			if (SqlUtil.columnIsExist(rs, "id"))jjd.setId(rs.getString("id"));
 			if (SqlUtil.columnIsExist(rs, "sfd_id"))jjd.setSfd_id(rs.getString("sfd_id"));
 			if (SqlUtil.columnIsExist(rs, "client_name"))jjd.setClient_name(rs.getString("client_name"));
-			//if (SqlUtil.columnIsExist(rs, "address"))jjd.setAddress(rs.getString("address"));
+			if (SqlUtil.columnIsExist(rs, "address"))jjd.setAddress(rs.getString("address"));
 			if (SqlUtil.columnIsExist(rs, "mobile"))jjd.setMobile(rs.getString("mobile"));
 			if (SqlUtil.columnIsExist(rs, "linkman"))jjd.setLinkman(rs.getString("linkman"));
 			if (SqlUtil.columnIsExist(rs, "jjr"))jjd.setJjr(rs.getString("jjr"));
@@ -215,6 +234,8 @@ public class JjdDAO extends JdbcBaseDAO {
 			if (SqlUtil.columnIsExist(rs, "ms"))jjd.setMs(rs.getString("ms"));
 			if (SqlUtil.columnIsExist(rs, "lxdh"))jjd.setLxdh(rs.getString("lxdh"));
 			if (SqlUtil.columnIsExist(rs, "mail"))jjd.setMail(rs.getString("mail"));
+			if (SqlUtil.columnIsExist(rs, "khlx"))jjd.setKhlx(rs.getString("khlx"));
+			if (SqlUtil.columnIsExist(rs, "linkmanLs"))jjd.setLinkmanLs(rs.getString("linkmanLs"));
 			return jjd;
 		}
 	}
