@@ -36,10 +36,155 @@ session.removeAttribute("messages");
 	.selectTip{background-color:#009;color:#fff;}
 </style>
 <script type="text/javascript">
-
-	  
 	var allCount = <%=counts %>;
+	var jhzq = 0;
+	//客户对应联系人信息
+	var arryLxrObj = new Array();
+	var temp_client_id = "";
+	//客户联系人对象
+	function LinkMan(id,name,tel){
+	    this.id = id;
+	    this.name = name;
+	    this.tel = tel;
+	}	
+
+	function onloadClientInfo(){
+		if($F('client_id') == ""){
+			return;
+		}
+		var url = 'queryClientsRegInfo.html';
+		var params = "clients_id=" + $F('client_id');
+		var myAjax = new Ajax.Request(
+		url,
+		{
+			method:'post',
+			parameters: params,
+			onComplete: initJhzq,
+			asynchronous:true
+		});
+	}
 	
+	//查询客户相关信息
+	function setClientRegInfo(){		
+		//填充值
+		setClientValue(); 
+
+		if(temp_client_id == $F('client_id')){
+			return;
+		}
+		
+		temp_client_id = $F('client_id');
+		if($F('client_id') == ""){
+			return;
+		}
+		
+		//根据填充后的值选择客户地址联系人等信息
+		var url = 'queryClientsRegInfo.html';
+		var params = "clients_id=" + $F('client_id');
+		var myAjax = new Ajax.Request(
+		url,
+		{
+			method:'post',
+			parameters: params,
+			onComplete: fillClientRegInfo,
+			asynchronous:true
+		});
+	}
+	
+	//处理客户地址联系人等信息
+	function fillClientRegInfo(originalRequest){  
+
+		var resText = originalRequest.responseText.trim(); 
+		if(resText == ""){
+			return false;
+		}
+
+		var arryText = resText.split("%");
+
+		//客户地址填充
+		if(arryText != null && arryText.length>0){
+		
+			var arryClientInfo = arryText[0].split("#");			
+			document.getElementById("address").value = arryClientInfo[0];
+		}
+		
+		if(arryText != null && arryText.length>1){
+			var linkMantext = arryText[1];
+			
+			//联系人填充
+			var objLxr = document.getElementById("linkman"); 
+			objLxr.options.length = 0;
+			
+			var arryLinkMan = linkMantext.split("$");
+			if(arryLinkMan.length > 0){
+				for(var i=0;i<arryLinkMan.length;i++){
+					var arryInfo = arryLinkMan[i].split("#");		
+					var manObj = new LinkMan(arryInfo[0],arryInfo[1],arryInfo[2]);
+					arryLxrObj[i] = manObj;
+					objLxr.add(new Option(arryInfo[1],arryInfo[1]));
+				}
+				if(arryLxrObj[0].tel != undefined)
+				{
+				    var arrDh=arryLxrObj[0].tel.split("/");	
+				    if(arrDh[1] != undefined)	
+				    {		   
+					  document.getElementById("mobile").value = arrDh[1];
+					}
+					if(arrDh[0] != undefined)
+					{
+					  document.getElementById("lxdh").value = arrDh[0];
+					}
+				}
+			}		
+		}
+	}
+	
+	
+	//联系人与电话联动
+	function chgLxr(vl){
+		if(vl == ""){
+			return;
+		}
+		if(arryLxrObj != null && arryLxrObj.length > 0){
+			for(var i=0;i<arryLxrObj.length;i++){
+				if(vl == arryLxrObj[i].name){
+					var arrDh=arryLxrObj[0].tel.split("/");				   
+					if(arrDh[1] != undefined)	
+				    {		   
+					  document.getElementById("mobile").value = arrDh[1];
+					}
+					if(arrDh[0] != undefined)
+					{
+					  document.getElementById("lxdh").value = arrDh[0];
+					}
+					break;
+				}
+			}
+		}
+	}
+	
+	function chgYwType(vl){
+		if(vl == "往来单位"){
+			document.getElementById("client_name").style.display = '';
+			document.getElementById("client_id").style.display = 'none';			
+			document.getElementById("linkman").style.display = '';
+			document.getElementById("linkmanLs").style.display = 'none';			
+		}else{
+			document.getElementById("client_name").style.display = 'none';					
+			document.getElementById("client_id").style.display = '';				
+			document.getElementById("linkman").style.display = 'none';
+			document.getElementById("linkmanLs").style.display = '';			
+		}
+		document.getElementById("client_name").value = "";
+		document.getElementById("client_id").value = "";
+		document.getElementById("linkman").value = "";
+		document.getElementById("linkmanLs").value = "";
+		document.getElementById("lxdh").value = "";
+		document.getElementById("mobile").value = "";
+		document.getElementById("mail").value = "";
+		document.getElementById("address").value = "";
+	}
+		
 	function saveInfo(vl){ 
 
 		if(vl == '1'){
@@ -53,15 +198,11 @@ session.removeAttribute("messages");
 			return;
 		}	
 		 	
-		if(document.getElementById("client_name").value == ""){
+		if(document.getElementById("client_id").value == ""){
 			alert("客户姓名不能为空，请填写！");
 			return;
 		}
-		if(document.getElementById("linkman").value=="")
-		{
-		   alert("联系人不能为空,请填写!");
-		   return;
-		}
+				
 		 var counts=0;		 
 		for(var i=0;i<=allCount;i++)
 		{			 	
@@ -110,10 +251,8 @@ session.removeAttribute("messages");
 							return;
 						}
 					}
-			     }
-			 
+			     }			 
 		}
-
 		  
 		if(document.getElementById("state").value == "已提交"){
 			if(window.confirm("确认要提交接修单吗，提交后将无法修改！")){
@@ -145,12 +284,11 @@ session.removeAttribute("messages");
 
         var curId = allCount + 1;   //curId一直加下去，防止重复
         allCount = allCount + 1;
-        
-        
+     
         var otd0=document.createElement("td");
 		otd0.className = "a2";
 		otd0.innerHTML = '<td class="a2"><input type="checkbox" name="proc_id" id="proc_id" value="' + curId + '"></td>';
-       
+     
         var otd1=document.createElement("td");
         otd1.className = "a2";
         otd1.innerHTML = '<input type="text" id="product_name_'+curId+'" name="jjdProducts['+curId+'].product_name" style="width:100%" readonly> <input type="hidden" id="product_id_'+curId+'" name="jjdProducts['+curId+'].product_id">';
@@ -167,13 +305,10 @@ session.removeAttribute("messages");
         otd4.className = "a2";
         otd4.innerHTML = '<input type="text" id="hjk_'+curId+'" name="producthjk" value="坏件库" size="7">';
        
-        
         var otd5 = document.createElement("td");
         otd5.className = "a2";
         otd5.innerHTML = '<input type="text" id="qz_serial_num_'+curId+'" name="jjdProducts['+curId+'].qz_serial_num" size="15" readonly><input type="hidden" id="qz_flag_'+curId+'" name="jjdProducts['+curId+'].qz_flag"><a style="cursor:hand" title="点击输入序列号" onclick="openSerialWin('+ curId +');"><b>...</b></a>&nbsp;';   
-        
-        
-     
+    
         var otd6  = document.createElement("td"); 
         otd6.className = "a2";
         otd6.innerHTML = '<input type="text" id="cpfj_'+curId+'" name="jjdProducts['+curId+'].cpfj"  size="15" style="width:100%">';                       
@@ -181,39 +316,24 @@ session.removeAttribute("messages");
          var otd7  = document.createElement("td"); 
         otd7.className = "a2";
         otd7.innerHTML = '<input type="text" id="fxts_'+curId+'" name="jjdProducts['+curId+'].fxts"  size="15" style="width:100%">';          
-	 		
-        
-        
         var otd8 = document.createElement("td");
         otd8.className = "a2";
         otd8.innerHTML = '<input type="text" id="remark_'+curId+'" name="jjdProducts['+curId+'].remark">';                       
-
-		 
-		
         otr.appendChild(otd0); 
         otr.appendChild(otd1); 
-          
         otr.appendChild(otd2);
         otr.appendChild(otd3); 
         otr.appendChild(otd4);
         otr.appendChild(otd5);
         otr.appendChild(otd6);        
-         otr.appendChild(otd7);
+        otr.appendChild(otd7);
         otr.appendChild(otd8);           
      }
-     
-     
-     
-    
-     
      
 	function delTr(i){
 			var tr = i.parentNode.parentNode;
 			tr.removeNode(true);
-			 
-			
 	}     
-	
 	
 	function openWin(){
 		var destination = "selJjProduct.html";
@@ -221,10 +341,6 @@ session.removeAttribute("messages");
 		
 		window.open(destination,'详细信息',fea);	
 	}
-	
-	 
-	
-	
 	function openywyWin()
 	{
 	   var destination = "selLsEmployee.html";
@@ -254,8 +370,6 @@ session.removeAttribute("messages");
 		
 		window.open(destination,'选择零售预收款',fea);		
 	}		
-	
- 
 	
 	function chgSel(vl){
 		if(vl == "是"){
@@ -382,11 +496,7 @@ session.removeAttribute("messages");
 		document.getElementById("hjk_" + sel).value="";
 		document.getElementById("remark_" + sel).value = "";
 	}			 
- 
-	
-	 
 </script>
-
 </head>
 <body onload="initFzrTip();initClientTip();">
 <form name="jjdForm" action="saveJjd.html" method="post">
@@ -396,10 +506,8 @@ session.removeAttribute("messages");
 	<tr>
 		<td colspan="4">接件单信息</td>
 	</tr>
-	</thead>
-	 
-	 <%
-	 
+	</thead>	 
+	 <%	 
 	if(msg != null && msg.size() > 0){
 		for(int i=0;i<msg.size();i++){
 	%>
@@ -412,7 +520,7 @@ session.removeAttribute("messages");
 	%>		
 	<tr>
 		<td class="a1" width="15%">编  号</td>
-		<td class="a2" width="35%"><input type="text" name="jjd.id" id="id" value="<%=StringUtils.nullToStr(jjd.getId()) %>" readonly></td>	
+		<td class="a2" width="35%"><input type="text" name="jjd.id" id="id" value="<%=StringUtils.nullToStr(jjd.getId()) %>" readonly style="width:230px"></td>	
 		 
 		 <%
 		String rq = StringUtils.nullToStr(jjd.getJj_date());
@@ -421,13 +529,13 @@ session.removeAttribute("messages");
 		}
 		%>
 		<td class="a1">接件日期</td>
-		<td class="a2"><input type="text" name="jjd.jj_date" id="jjdate" value="<%= rq %>" readonly> 
+		<td class="a2"><input type="text" name="jjd.jj_date" id="jjdate" value="<%= rq %>" readonly style="width:230px"> 
 		</td>		
 	</tr>
 	<tr>
 		<td class="a1" width="15%">接件人</td>
 		<td class="a2">         
-			<input id="brand" type="text" length="20" onblur="setValue()" value="<%=StaticParamDo.getRealNameById(jjd.getJjr()) %>"/> 
+			<input id="brand" type="text" style="width:230px" onblur="setValue()" value="<%=StaticParamDo.getRealNameById(jjd.getJjr()) %>"/> 
 			<div id="brandTip"  style="height:12px;position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 			<input type="hidden" name="jjd.jjr" id="fzr" value="<%=StringUtils.nullToStr(jjd.getJjr())%>"/><font color="red">*</font>	          
 		</td>							
@@ -540,7 +648,6 @@ else
 	</tr>
 	 
 </table>
- 
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
@@ -548,31 +655,53 @@ else
 	</tr>
 	</thead>			
 	<tr>
-		<td class="a1" width="15%">客户名称</td>
-		<td class="a2" width="35%"><input type="text" name="jjd.client_id"   id="client_name" value="<%=StaticParamDo.getClientNameById(StringUtils.nullToStr(jjd.getClient_name())) %>" size="30" maxlength="50" onblur="setClientValue();">
-		<input type="hidden" name="jjd.client_name" id="client_id" value="<%=StringUtils.nullToStr(jjd.getClient_name()) %>"><div id="clientsTip" style="height:12px;position:absolute;width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
-		<font color="red">*</font>
+	    <td class="a1" width="15%">服务类型</td>
+		<td class="a2"  colspan="3">
+			<select name="jjd.khlx" id="khlx" onchange="chgYwType(this.value);" style="width:232px">
+				<option value="往来单位">往来单位</option>
+				<option value="零售客户">零售客户</option>
+			</select><span style="color:red">*</span>
 		</td>
+	</tr>
+	<tr>			
+		<td class="a1" width="15%">客户名称</td>
+		<td class="a2" width="35%">
+		<input type="text" name="jjd.client_id"   id="client_name" onblur="setClientRegInfo();" value="" style="width:232px" maxlength="50">
+		<input style="width:230px;display: none" type="text" name="jjd.client_name" id="client_id" value=""  maxlength="50" >
+		<font color="red">*</font><div id="clientsTip" style="height:12px;position:absolute;width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;"></div>
+		</td>				
 		<td class="a1" width="15%">联系人</td>
-		<td class="a2" width="35%"><input type="text" name="jjd.linkman" id="linkman" size="30" value="<%=StringUtils.nullToStr(jjd.getLinkman()) %>"><font color="red">*</font></td>	
+		<td class="a2" width="35%">		 
+			<select name="jjd.linkman" id="linkman" onchange="chgLxr(this.value);"  style="width:232px">
+		    <%
+			   if(!StringUtils.nullToStr(jjd.getLinkman()).equals("")){
+		    %>			
+					<option value="<%=StringUtils.nullToStr(jjd.getLinkman()) %>" selected><%=StringUtils.nullToStr(jjd.getLinkman()) %></option>
+			<%
+			   } 			
+		    %>					
+			</select>		
+			<input type="text" name="jjd.linkmanLs" id="linkmanLs" value="" style="width:232px;display: none"></td>
+		</td>			
 	</tr>
 	<tr>
 		<td class="a1" width="15%">联系电话</td>
-		<td class="a2"><input type="text" name="jjd.lxdh" id="lxdh" size="30" value="<%=StringUtils.nullToStr(jjd.getLxdh()) %>"></td>	
+		<td class="a2"><input type="text" name="jjd.lxdh" id="lxdh" style="width:232px" value="<%=StringUtils.nullToStr(jjd.getLxdh()) %>"></td>	
 		<td class="a1" width="15%">手机</td>
-		<td class="a2"><input type="text" name="jjd.mobile" id="mobile" size="30" maxlength="100" value="<%= StringUtils.nullToStr(jjd.getMobile())%>"></td>			
+		<td class="a2"><input type="text" name="jjd.mobile" id="mobile" style="width:232px"  value="<%= StringUtils.nullToStr(jjd.getMobile())%>"></td>			
 	</tr>
  	<tr>
 		<td class="a1" width="15%">Email</td>
-		<td class="a2" colspan="3"><input type="text" name="jjd.mail" id="mail" size="30" value="<%=StringUtils.nullToStr(jjd.getMail()) %>"></td>	
+		<td class="a2" width="35%"><input type="text" name="jjd.mail" id="mail" style="width:232px" value="<%=StringUtils.nullToStr(jjd.getMail()) %>"></td>	
+		<td class="a1" width="15%">地址</td>
+		<td class="a2" width="35%"><input type="text" name="jjd.address" id="address" style="width:232px" value="<%=StringUtils.nullToStr(jjd.getAddress()) %>"></td>
 	 </tr>
-</table>
- 
+</table> 
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">		 
 	<tr>
 		<td class="a1" width="15%">备注</td>
 		<td class="a2" width="85%" colspan="3">
-			<textarea rows="4" name="jjd.ms" id="ms" style="width:75%"><%=StringUtils.nullToStr(jjd.getMs()) %> </textarea>
+			<textarea rows="4" name="jjd.ms" id="ms" style="width:85%"><%=StringUtils.nullToStr(jjd.getMs()) %> </textarea>
 		</td>
 	</tr>			
 	<tr height="35">

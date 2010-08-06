@@ -99,11 +99,16 @@ if(jjdProducts != null && jjdProducts.size()>0){
 	</tr>
 	<tr>
 		<td class="a1" width="15%">联系电话</td>
-		<td class="a2"><%=StringUtils.nullToStr(jjd.getMobile()) %></td>	
-		 <td class="a1" width="15%">Email</td>
-		<td class="a2"><%=StringUtils.nullToStr(jjd.getMail()) %></td>			
+		<td class="a2"><%=StringUtils.nullToStr(jjd.getLxdh()) %></td>
+		<td class="a1" width="15%">手机</td>
+		<td class="a2"><%= StringUtils.nullToStr(jjd.getMobile())%></td>
 	</tr>
- 
+	<tr>		
+		<td class="a1" width="15%">Email</td>
+		<td class="a2"><%=StringUtils.nullToStr(jjd.getMail()) %></td>	
+		<td class="a1" width="15%">地址</td>
+		<td class="a2" width="35%"><%=StringUtils.nullToStr(jjd.getAddress()) %></td>		
+	</tr> 
 </table>
 <BR>
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">		 

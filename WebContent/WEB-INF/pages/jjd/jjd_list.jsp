@@ -127,7 +127,8 @@ String orderType = (String)VS.findValue("orderType");
 		<td onclick="doSort('id');">接件单编号<%if(orderName.equals("id")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
 		<td onclick="doSort('client_name');">单位名称<%if(orderName.equals("client_name")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
 		<td onclick="doSort('linkman');">联系人<%if(orderName.equals("linkman")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('mobile');">联系电话<%if(orderName.equals("mobile")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td onclick="doSort('lxdh');">联系电话<%if(orderName.equals("lxdh")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td onclick="doSort('mobile');">手机<%if(orderName.equals("mobile")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
 		<td onclick="doSort('jj_date');">接件时间<%if(orderName.equals("jj_date")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
 		<td onclick="doSort('state');">状态<%if(orderName.equals("state")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>		
 		<td onclick="doSort('jjr');">接件人<%if(orderName.equals("jjr")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
@@ -145,9 +146,9 @@ String orderType = (String)VS.findValue("orderType");
 	%>
 	<tr class="a1" title="双击查看详情"  onmousedown="trSelectChangeCss()" onclick="descMx('<%=StringUtils.nullToStr(jjd.get("id")) %>');" onDblClick="openWin('<%=StringUtils.nullToStr(jjd.get("id")) %>');">
 		<td><%=StringUtils.nullToStr(jjd.get("id")) %></td>
-		<td><%=StaticParamDo.getClientNameById(StringUtils.nullToStr(jjd.get("client_name"))) %></td>
-		 
+		<td><%=StaticParamDo.getClientNameById(StringUtils.nullToStr(jjd.get("client_name"))) %></td>		 
 		<td><%=StringUtils.nullToStr(jjd.get("linkman"))  %></td>
+		<td><%=StringUtils.nullToStr(jjd.get("lxdh")) %></td>
 		<td><%=StringUtils.nullToStr(jjd.get("mobile")) %></td>
 		<td><%=StringUtils.nullToStr(jjd.get("jj_date")) %></td>
 		<td><%=StringUtils.nullToStr(jjd.get("state")) %></td>
