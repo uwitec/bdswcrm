@@ -170,7 +170,7 @@ if(wxcldProducts != null && wxcldProducts.size()>0){
 	//对返回的序列号进行校验
 	function checkSerial(flag){
 		if(flag == "false"){
-			alert("该新序列号为存在在好件库中，请检查!");
+			alert("该新序列号未存在在好件库中，请检查!");
 			sObj.focus();
 			return;
 		}
