@@ -86,7 +86,12 @@ public class WxcldService
 			                 jjd.setClient_name(wxcld.getW_client_name());
 			                 jjd.setLinkman(wxcld.getW_linkman());
 			                 jjd.setMobile(wxcld.getW_mobile());
-			   
+			                 jjd.setAddress(wxcld.getW_address());
+			                 
+			                 String sql="select a.khlx from sfd a join pgd b on a.id=b.p_sfd_id join wxcld c on b.p_id=c.w_pgd_id where c.w_id='"+wxcld.getW_id()+"'";
+			                 Map jjdMap=(Map)wxcldDao.getResultMap(sql);
+			                 jjd.setKhlx(jjdMap.get("khlx").toString());
+			                 
 			                 JjdProduct jjdProduct =new JjdProduct();
 			                 jjdProduct.setJjd_id(jjd.getId());
 			                 jjdProduct.setNums(1);
