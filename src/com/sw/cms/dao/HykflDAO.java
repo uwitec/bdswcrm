@@ -1,18 +1,10 @@
 package com.sw.cms.dao;
 
-import java.util.List;
-import java.util.Map;
-
-import com.sw.cms.dao.StoreDAO.StoreHouseRowMapper;
 import com.sw.cms.dao.base.BeanRowMapper;
 import com.sw.cms.dao.base.JdbcBaseDAO;
-
-import com.sw.cms.model.Page;
 import com.sw.cms.model.Hykfl;
-import com.sw.cms.model.StoreHouse;
-
+import com.sw.cms.model.Page;
 import com.sw.cms.util.DateComFunc;
-import com.sw.cms.util.StaticParamDo;
 
 /**
  * 积分卡分类
@@ -110,7 +102,7 @@ public class HykflDAO extends JdbcBaseDAO {
 	 */
 	public boolean isHykflSubmit(String hykfl_id){
 		boolean is = false;
-		String sql = "select count(*) from Hykfl where id='" + hykfl_id + "'";
+		String sql = "select count(*) from hykfl where id='" + hykfl_id + "'";
 		int counts = this.getJdbcTemplate().queryForInt(sql);
 		if(counts > 0){
 			is = true;
