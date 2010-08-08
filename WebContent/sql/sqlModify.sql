@@ -176,130 +176,6 @@ ALTER TABLE `wxcld_product` ADD COLUMN `n_product_serial_num` VARCHAR(200) defau
 ALTER TABLE `thd` ADD COLUMN `yw_type` VARCHAR(5) DEFAULT 1 AFTER `fpxx`;
 
 
-
-delete from column_funcs;
-INSERT INTO `column_funcs` VALUES ('001001','FC0009');
-INSERT INTO `column_funcs` VALUES ('001001','FC0010');
-INSERT INTO `column_funcs` VALUES ('001001','FC0013');
-INSERT INTO `column_funcs` VALUES ('001001','FC0020');
-INSERT INTO `column_funcs` VALUES ('001001','FC0023');
-INSERT INTO `column_funcs` VALUES ('001001','FC0033');
-INSERT INTO `column_funcs` VALUES ('001001','FC0088');
-INSERT INTO `column_funcs` VALUES ('001002','FC0036');
-INSERT INTO `column_funcs` VALUES ('001002','FC0037');
-INSERT INTO `column_funcs` VALUES ('001002','FC0038');
-INSERT INTO `column_funcs` VALUES ('001002','FC0047');
-INSERT INTO `column_funcs` VALUES ('001002','FC0048');
-INSERT INTO `column_funcs` VALUES ('001002','FC0106');
-INSERT INTO `column_funcs` VALUES ('001003','FC0050');
-INSERT INTO `column_funcs` VALUES ('001003','FC0051');
-INSERT INTO `column_funcs` VALUES ('001003','FC0065');
-INSERT INTO `column_funcs` VALUES ('001003','FC0066');
-INSERT INTO `column_funcs` VALUES ('001003','FC0075');
-INSERT INTO `column_funcs` VALUES ('001003','FC0081');
-INSERT INTO `column_funcs` VALUES ('001003','FC0082');
-INSERT INTO `column_funcs` VALUES ('001003','FC9002');
-INSERT INTO `column_funcs` VALUES ('001003','FC9004');
-INSERT INTO `column_funcs` VALUES ('002001','FC0002');
-INSERT INTO `column_funcs` VALUES ('002001','FC0012');
-INSERT INTO `column_funcs` VALUES ('002001','FC0032');
-INSERT INTO `column_funcs` VALUES ('002002','FC0052');
-INSERT INTO `column_funcs` VALUES ('002002','FC0053');
-INSERT INTO `column_funcs` VALUES ('002002','FC0207');
-INSERT INTO `column_funcs` VALUES ('002002','FC0208');
-INSERT INTO `column_funcs` VALUES ('003001','FC0004');
-INSERT INTO `column_funcs` VALUES ('003001','FC0005');
-INSERT INTO `column_funcs` VALUES ('003001','FC0007');
-INSERT INTO `column_funcs` VALUES ('003001','FC0024');
-INSERT INTO `column_funcs` VALUES ('003001','FC0025');
-INSERT INTO `column_funcs` VALUES ('003001','FC0056');
-INSERT INTO `column_funcs` VALUES ('003001','FC0060');
-INSERT INTO `column_funcs` VALUES ('003001','FC9903');
-INSERT INTO `column_funcs` VALUES ('003001','FC9908');
-INSERT INTO `column_funcs` VALUES ('003002','FC0039');
-INSERT INTO `column_funcs` VALUES ('003002','FC0046');
-INSERT INTO `column_funcs` VALUES ('003002','FC0076');
-INSERT INTO `column_funcs` VALUES ('003002','FC0077');
-INSERT INTO `column_funcs` VALUES ('003002','FC0086');
-INSERT INTO `column_funcs` VALUES ('003002','FC0099');
-INSERT INTO `column_funcs` VALUES ('003002','FC0100');
-INSERT INTO `column_funcs` VALUES ('004001','FC0027');
-INSERT INTO `column_funcs` VALUES ('004001','FC0028');
-INSERT INTO `column_funcs` VALUES ('004001','FC0029');
-INSERT INTO `column_funcs` VALUES ('004001','FC0031');
-INSERT INTO `column_funcs` VALUES ('004001','FC0073');
-INSERT INTO `column_funcs` VALUES ('004001','FC9905');
-INSERT INTO `column_funcs` VALUES ('004002','FC0040');
-INSERT INTO `column_funcs` VALUES ('004002','FC0043');
-INSERT INTO `column_funcs` VALUES ('004002','FC0049');
-INSERT INTO `column_funcs` VALUES ('004002','FC0067');
-INSERT INTO `column_funcs` VALUES ('004003','FC0035');
-INSERT INTO `column_funcs` VALUES ('004003','FC0041');
-INSERT INTO `column_funcs` VALUES ('004003','FC0044');
-INSERT INTO `column_funcs` VALUES ('004003','FC0070');
-INSERT INTO `column_funcs` VALUES ('004003','FC0121');
-INSERT INTO `column_funcs` VALUES ('004003','FC9003');
-INSERT INTO `column_funcs` VALUES ('005001','FC0063');
-INSERT INTO `column_funcs` VALUES ('005001','FC0064');
-INSERT INTO `column_funcs` VALUES ('005002','FC0105');
-INSERT INTO `column_funcs` VALUES ('005003','FC0079');
-INSERT INTO `column_funcs` VALUES ('005003','FC0110');
-INSERT INTO `column_funcs` VALUES ('007001','FC0096');
-INSERT INTO `column_funcs` VALUES ('007001','FC0097');
-INSERT INTO `column_funcs` VALUES ('007001','FC0098');
-INSERT INTO `column_funcs` VALUES ('007001','FC0120');
-INSERT INTO `column_funcs` VALUES ('007002','FC0089');
-INSERT INTO `column_funcs` VALUES ('007002','FC0090');
-INSERT INTO `column_funcs` VALUES ('007002','FC0091');
-INSERT INTO `column_funcs` VALUES ('007002','FC0092');
-INSERT INTO `column_funcs` VALUES ('007002','FC0093');
-INSERT INTO `column_funcs` VALUES ('007002','FC0101');
-INSERT INTO `column_funcs` VALUES ('007002','FC0102');
-INSERT INTO `column_funcs` VALUES ('007002','FC0103');
-INSERT INTO `column_funcs` VALUES ('007002','FC0104');
-INSERT INTO `column_funcs` VALUES ('007003','FC0094');
-INSERT INTO `column_funcs` VALUES ('007003','FC0095');
-INSERT INTO `column_funcs` VALUES ('008001','FC0001');
-INSERT INTO `column_funcs` VALUES ('008001','FC0008');
-INSERT INTO `column_funcs` VALUES ('008001','FC0011');
-INSERT INTO `column_funcs` VALUES ('008001','FC0026');
-INSERT INTO `column_funcs` VALUES ('008001','FC0055');
-INSERT INTO `column_funcs` VALUES ('008001','FC0083');
-INSERT INTO `column_funcs` VALUES ('008001','FC0084');
-INSERT INTO `column_funcs` VALUES ('008001','FC9904');
-INSERT INTO `column_funcs` VALUES ('008002','FC0006');
-INSERT INTO `column_funcs` VALUES ('008002','FC0042');
-INSERT INTO `column_funcs` VALUES ('008002','FC0045');
-INSERT INTO `column_funcs` VALUES ('008002','FC0058');
-INSERT INTO `column_funcs` VALUES ('008003','FC0205');
-INSERT INTO `column_funcs` VALUES ('008003','FC0206');
-INSERT INTO `column_funcs` VALUES ('009001','FC0014');
-INSERT INTO `column_funcs` VALUES ('009001','FC0015');
-INSERT INTO `column_funcs` VALUES ('009001','FC0016');
-INSERT INTO `column_funcs` VALUES ('009001','FC0054');
-INSERT INTO `column_funcs` VALUES ('009002','FC0059');
-INSERT INTO `column_funcs` VALUES ('009002','FC0072');
-INSERT INTO `column_funcs` VALUES ('009002','FC0078');
-INSERT INTO `column_funcs` VALUES ('009002','FC0085');
-INSERT INTO `column_funcs` VALUES ('009002','FC0087');
-INSERT INTO `column_funcs` VALUES ('009002','FC9001');
-INSERT INTO `column_funcs` VALUES ('009003','FC0061');
-INSERT INTO `column_funcs` VALUES ('009003','FC0062');
-INSERT INTO `column_funcs` VALUES ('009003','FC0071');
-INSERT INTO `column_funcs` VALUES ('009003','FC9906');
-INSERT INTO `column_funcs` VALUES ('009003','FC9907');
-INSERT INTO `column_funcs` VALUES ('010001','FC0057');
-INSERT INTO `column_funcs` VALUES ('010001','FC0068');
-INSERT INTO `column_funcs` VALUES ('010001','FC0080');
-INSERT INTO `column_funcs` VALUES ('010001','FC9005');
-INSERT INTO `column_funcs` VALUES ('010001','FC9910');
-INSERT INTO `column_funcs` VALUES ('011001','FC0108');
-INSERT INTO `column_funcs` VALUES ('011001','FC0109');
-INSERT INTO `column_funcs` VALUES ('011001','FC0113');
-INSERT INTO `column_funcs` VALUES ('011001','FC0114');
-INSERT INTO `column_funcs` VALUES ('011002','FC0107');
-
-
 2010-07-31修改
 --账号添加删除标志
 ALTER TABLE `accounts` ADD COLUMN `flag` VARCHAR(2) DEFAULT 1 AFTER `remark`;
@@ -312,4 +188,8 @@ ALTER TABLE `jjd` ADD COLUMN `address` VARCHAR(500) DEFAULT NULL AFTER `khlx`;
 2010-08-05
 --销售订单的发票信息长度加大
 ALTER TABLE `xsd` MODIFY  `fpxx` VARCHAR(200) DEFAULT NULL;
+
+
+2010-08-07修改
+--部署需求没有待出库的单据,或者是待出库的单据对应的销售订单收款方式不是现结
 

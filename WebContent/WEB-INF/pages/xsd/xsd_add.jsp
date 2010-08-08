@@ -537,6 +537,7 @@ if(xsdProducts!=null && xsdProducts.size()>0){
 		</td>
 	</tr>
 </table><BR>
+<font color="red">注：销售订单出库后，收款金额才会过账。</font>
 </form>
 </body>
 </html>
