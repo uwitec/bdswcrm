@@ -15,6 +15,12 @@ import com.opensymphony.webwork.ServletActionContext;
 import com.opensymphony.xwork.ActionSupport;
 import com.sw.cms.dao.DataDisParseDAO;
 
+/**
+ * 所有Action类继承该类<BR>
+ * 集成了日志处理,数据字典解析等<BR>
+ * @author liyt
+ *
+ */
 public class BaseAction extends ActionSupport {
 	
 	protected transient final Log log = LogFactory.getLog(getClass());

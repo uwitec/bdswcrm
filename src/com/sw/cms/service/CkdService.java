@@ -10,27 +10,35 @@ import com.sw.cms.dao.CgfkDAO;
 import com.sw.cms.dao.CgthdDAO;
 import com.sw.cms.dao.CkdDAO;
 import com.sw.cms.dao.LsdDAO;
+import com.sw.cms.dao.PosTypeDAO;
 import com.sw.cms.dao.ProductDAO;
 import com.sw.cms.dao.ProductKcDAO;
 import com.sw.cms.dao.ProductSaleFlowDAO;
+import com.sw.cms.dao.QtzcDAO;
 import com.sw.cms.dao.SerialNumDAO;
 import com.sw.cms.dao.StoreDAO;
 import com.sw.cms.dao.SysInitSetDAO;
+import com.sw.cms.dao.UserDAO;
 import com.sw.cms.dao.XsdDAO;
 import com.sw.cms.dao.XsskDAO;
 import com.sw.cms.dao.YufukDAO;
+import com.sw.cms.model.AccountDzd;
 import com.sw.cms.model.Ckd;
 import com.sw.cms.model.CkdProduct;
 import com.sw.cms.model.Page;
 import com.sw.cms.model.Product;
 import com.sw.cms.model.ProductSaleFlow;
+import com.sw.cms.model.Qtzc;
 import com.sw.cms.model.SerialNumFlow;
 import com.sw.cms.model.SerialNumMng;
+import com.sw.cms.model.SysUser;
 import com.sw.cms.model.Xsd;
 import com.sw.cms.model.XsdProduct;
 import com.sw.cms.model.Xssk;
+import com.sw.cms.model.XsskDesc;
 import com.sw.cms.util.DateComFunc;
 import com.sw.cms.util.StaticParamDo;
+import com.sw.cms.util.StringUtils;
 
 /**
  * 出库单操作
@@ -54,7 +62,9 @@ public class CkdService {
 	private ProductDAO productDao;
 	private LsdDAO lsdDao;
 	private ProductSaleFlowDAO productSaleFlowDao;
-	
+	private UserDAO userDao;
+	private PosTypeDAO posTypeDao;
+	private QtzcDAO qtzcDao;
 
 	
 	/**
@@ -200,6 +210,21 @@ public class CkdService {
 			//修改销售单对应的成本价及考核成本价
 			if(xsdProducts != null && xsdProducts.size() > 0){
 				xsdDao.updateXsdProducts(xsdProducts);
+			}
+			
+			//如果对应销售单的收款类型为现金,并且收款金额不等于,则销售金额过账
+			if(xsd.getSklx().equals("现结") && xsd.getSkje() != 0){
+				
+				//添加销售收款信息,及对账单信息
+				this.saveXssk(xsd);//添加销售收款信息
+				
+				//更新账户金额
+				this.addAccountJe(xsd);//更新账户金额
+				
+				//如果付款方式为刷卡，并且POS机编号不为空，自动保存费用信息
+				if(xsd.getSkfs().equals("刷卡") && !xsd.getPos_id().equals("")){
+					this.saveQtzc(xsd);
+				}
 			}
 			
 			//生成商品销售明细
@@ -352,6 +377,127 @@ public class CkdService {
 		}
 		
 		return msg;
+	}
+	
+	/**
+	 * 保存销售收款信息
+	 * @param lsd
+	 */
+	private void saveXssk(Xsd xsd){
+		Xssk xssk = new Xssk();
+		
+		String xssk_id = xsskDao.getXsskID();
+		xssk.setId(xssk_id);
+		xssk.setSk_date(xsd.getCreatdate());
+		xssk.setClient_name(xsd.getClient_name());
+		xssk.setJsr(xsd.getFzr());
+		xssk.setSkzh(xsd.getSkzh());
+		xssk.setSkje(xsd.getSkje());
+		xssk.setState("已提交");
+		xssk.setCzr(xsd.getCzr());
+		xssk.setRemark("销售收款，销售单编号 [" + xsd.getId() + "]");
+		xssk.setDelete_key(xsd.getId());
+		
+		List<XsskDesc> xsskDescs = new ArrayList<XsskDesc>();
+		
+		XsskDesc xsskDesc = new XsskDesc();
+		xsskDesc.setXsd_id(xsd.getId());
+		xsskDesc.setXssk_id(xssk_id);
+		xsskDesc.setBcsk(xsd.getSkje());
+		xsskDesc.setRemark("销售收款，销售单编号 [" + xsd.getId() + "]");
+		
+		xsskDescs.add(xsskDesc);
+		
+		xsskDao.saveXssk(xssk, xsskDescs);
+		
+		//保存对账单信息
+		this.saveAccountDzd(xssk.getSkzh(), xssk.getSkje(), xssk.getCzr(), xssk.getJsr(), "销售收款，编号[" + xssk.getId() + "]",xssk.getId());
+	}
+	
+	/**
+	 * 将收款金额入账户中
+	 * @param lsd
+	 */
+	private void addAccountJe(Xsd xsd){
+		String account_id = xsd.getSkzh();
+		double je = xsd.getSkje();
+		
+		accountsDao.addAccountJe(account_id, je);
+	}
+	
+	/**
+	 * 添加资金交易记录
+	 * @param cgfk
+	 */
+	private void saveAccountDzd(String account_id,double jyje,String czr,String jsr,String remark,String xssk_id){
+		AccountDzd accountDzd = new AccountDzd();
+		
+		double zhye = 0;
+		Map map = accountsDao.getAccounts(account_id);
+		if(map != null){
+			zhye = (map.get("dqje")==null?0:((Double)map.get("dqje")).doubleValue());
+		}
+		
+		accountDzd.setAccount_id(account_id);
+		accountDzd.setJyje(jyje);
+		accountDzd.setZhye(zhye + jyje);
+		accountDzd.setRemark(remark);
+		accountDzd.setCzr(czr);
+		accountDzd.setJsr(jsr);
+		accountDzd.setAction_url("viewXssk.html?id=" + xssk_id);
+		
+		accountDzdDao.addDzd(accountDzd);
+	}
+	/**
+	 * 根据销售单信息添加刷卡支出费用
+	 * @param xsd
+	 */
+	private void saveQtzc(Xsd xsd){
+		Qtzc qtzc = new Qtzc();
+		
+		String id = qtzcDao.getQtzcID();
+		
+		String dept = "";
+		if(!StringUtils.nullToStr(xsd.getFzr()).equals("")){
+			dept = ((SysUser)userDao.getUser(xsd.getFzr())).getDept();
+		}
+		
+		qtzc.setId(id);
+		qtzc.setZc_date(xsd.getCreatdate());
+		qtzc.setType("02");
+		qtzc.setZcje(posTypeDao.getBrushCardfy(xsd.getPos_id(), xsd.getSkje()));
+		qtzc.setZczh(xsd.getSkzh());
+		qtzc.setJsr(xsd.getFzr());
+		qtzc.setRemark("刷卡手续费，由销售单[" + xsd.getId() + "]自动生成");
+		qtzc.setCzr(xsd.getCzr());
+		qtzc.setState("已提交");
+		qtzc.setYwy(xsd.getFzr());
+		qtzc.setSqr(xsd.getFzr());
+		qtzc.setYwy_dept(dept);
+		qtzc.setZcxm("刷卡手续费");
+		qtzc.setFklx("刷卡");
+		qtzc.setFysq_id("无");
+		
+		qtzcDao.saveQtzc(qtzc);  //保存其它支出（一般费用）
+		
+		accountsDao.updateAccountJe(xsd.getSkzh(),posTypeDao.getBrushCardfy(xsd.getPos_id(), xsd.getSkje())); //修改账户金额
+		
+		double jyje = 0 - posTypeDao.getBrushCardfy(xsd.getPos_id(), xsd.getSkje());
+		AccountDzd accountDzd = new AccountDzd();
+		accountDzd.setAccount_id(xsd.getSkzh());
+		accountDzd.setJyje(jyje);		
+		double zhye = 0;
+		Map map = accountsDao.getAccounts(xsd.getSkzh());
+		if(map != null){
+			zhye = (map.get("dqje")==null?0:((Double)map.get("dqje")).doubleValue());
+		}		
+		accountDzd.setZhye(zhye + jyje);
+		accountDzd.setRemark("一般费用，编号[" + id + "]");
+		accountDzd.setCzr(xsd.getCzr());
+		accountDzd.setJsr(xsd.getFzr());
+		accountDzd.setAction_url("viewQtzc.html?id=" + id);		
+		accountDzdDao.addDzd(accountDzd);   //添加资金交易记录
+		
 	}
 	
 	
@@ -644,6 +790,42 @@ public class CkdService {
 
 	public void setProductSaleFlowDao(ProductSaleFlowDAO productSaleFlowDao) {
 		this.productSaleFlowDao = productSaleFlowDao;
+	}
+
+
+
+	public UserDAO getUserDao() {
+		return userDao;
+	}
+
+
+
+	public void setUserDao(UserDAO userDao) {
+		this.userDao = userDao;
+	}
+
+
+
+	public PosTypeDAO getPosTypeDao() {
+		return posTypeDao;
+	}
+
+
+
+	public void setPosTypeDao(PosTypeDAO posTypeDao) {
+		this.posTypeDao = posTypeDao;
+	}
+
+
+
+	public QtzcDAO getQtzcDao() {
+		return qtzcDao;
+	}
+
+
+
+	public void setQtzcDao(QtzcDAO qtzcDao) {
+		this.qtzcDao = qtzcDao;
 	}
 
 }

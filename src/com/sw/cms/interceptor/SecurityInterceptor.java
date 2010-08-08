@@ -32,7 +32,7 @@ public class SecurityInterceptor implements Interceptor {
         
         
         //验证用户是否登录，只有在当前actionName不等于login时才判断session
-        if(!actionName.equals("login")){
+        if(!actionName.equals("login") && !actionName.equals("toLogin")){
 	        if(session.getAttribute("LOGINUSER") == null){
 	        	log.info("用户尚未登录或登录已失效，请重新登录！");
 	        	request.setAttribute("LOGINERROR", "用户尚未登录或登录已失效，请重新登录！");

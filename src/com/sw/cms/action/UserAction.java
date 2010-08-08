@@ -91,6 +91,26 @@ public class UserAction extends BaseAction {
 	public void setJsrTips(String jsrTips) {
 		this.jsrTips = jsrTips;
 	}
+	
+	
+	/**
+	 * 转向登陆页面
+	 * @return
+	 */
+	public String toLogin(){
+		try{
+			Map map = sysInitSetService.getSysLogo();
+			
+			if(map != null){
+				cpy_name = StringUtils.nullToStr(map.get("cpy_name"));
+			}
+			
+			return SUCCESS;
+		}catch(Exception e){
+			log.error("打开登录页面报错,原因:" + e);
+			return ERROR;
+		}
+	}
 
 
 	/**

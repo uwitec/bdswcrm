@@ -160,23 +160,8 @@ public class XsdService {
 		xsdDao.updateXsd(xsd, xsdProducts);	
 		
 		if(!xsd.getState().equals("已保存")){
-			
 			//第二步，添加相应出库单
 			this.addCkd(xsd, xsdProducts); //添加相应出库单
-			
-			if(xsd.getSkje() != 0){
-				
-				//第三步，添加销售收款信息
-				this.saveXssk(xsd);//添加销售收款信息
-				
-				//第四步，更新账户金额
-				this.addAccountJe(xsd);//更新账户金额
-			}
-			
-			//如果付款方式为刷卡，并且POS机编号不为空，自动保存费用信息
-			if(xsd.getSkfs().equals("刷卡") && !xsd.getPos_id().equals("")){
-				this.saveQtzc(xsd);
-			}
 		}
 		
 		//如果审批状态为待审批，发送系统消息
