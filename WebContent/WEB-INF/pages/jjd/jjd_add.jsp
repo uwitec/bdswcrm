@@ -681,7 +681,7 @@ else
 			   } 			
 		    %>					
 			</select>		
-			<input type="text" name="jjd.linkmanLs" id="linkmanLs" value="" style="width:232px;display: none"></td>
+			<input type="text" name="jjd.linkmanLs" id="linkmanLs" value="" style="width:232px;display: none">
 		</td>			
 	</tr>
 	<tr>
