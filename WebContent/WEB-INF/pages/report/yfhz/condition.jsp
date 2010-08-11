@@ -48,6 +48,7 @@ function openClientWin(){
 </head>
 <body onload="initFzrTip();initClientTip();">
 <form name="reportForm" action="getYfHzResult.html" method="post">
+<input type="hidden" name="end_date" id="end_date" value="<%=DateComFunc.getToday() %>">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
@@ -57,35 +58,32 @@ function openClientWin(){
 </table>
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0" border="1" id="selTable">
 	<tr>
-		<td class="a1" width="15%">开始日期</td>
+		<td class="a1" width="15%">起始日期</td>
 		<td class="a4" width="35%">
 			<input type="text" name="start_date" id="start_date" value="<%=DateComFunc.getToday() %>" class="Wdate" onFocus="WdatePicker()"></td>
-		<td class="a1" width="15%">结束日期</td>
-		<td class="a4" width="35%">
-			<input type="text" name="end_date" id="end_date" value="<%=DateComFunc.getToday() %>" class="Wdate" onFocus="WdatePicker()"></td>
-	</tr>
-	<tr>
 		<td class="a1">供应商名称</td>
 		<td class="a4">
 		<input type="text" name="cl" id="client_name" value="" onblur="setClientValue();"  size="30"  maxlength="50">
 		<input type="hidden" name="client_name" id="client_id" value="">
 		<div id="clientsTip" style="height:12px;position:absolute;left:276px; top:85px; width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
-		</td>	
+		</td>				
+	</tr>
+	<tr>
 		<td class="a1">客户经理</td>
 		<td class="a4">
 		    <input  id="brand" type="text" length="20"  onblur="setValue()"  /> 
             <div id="brandTip" style="height:12px;position:absolute;left:720px; top:85px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		    <input type="hidden" name="khjl" id="fzr"  /> 
-		</td>							
-	</tr>	
-	<tr>
+		</td>	
 		<td class="a1">不显示0往来单位</td>
 		<td class="a4">	
 			<input type="radio" name="flag" id="flag" value="是"/>是&nbsp;&nbsp;
 			<input type="radio" name="flag" id="flag" value="否" checked/>否			
-		</td>	
+		</td>									
+	</tr>	
+	<tr>
 		<td class="a1">不显示余额为0往来单位</td>
-		<td class="a4">
+		<td class="a4" colspan="3">
 			<input type="radio" name="flag2" id="flag2" value="是" checked/>是&nbsp;&nbsp;
 			<input type="radio" name="flag2" id="flag2" value="否"/>否				
 		</td>	
@@ -98,5 +96,6 @@ function openClientWin(){
 	</tr>
 </table>
 </form>
+<font color="red">注：供应商应付汇总期间为起始日期至当前日期。</font>
 </body>
 </html>
