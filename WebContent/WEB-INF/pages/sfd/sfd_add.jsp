@@ -468,7 +468,7 @@ String[] bxyy = (String[])VS.findValue("bxyy");
 			   } 			
 		    %>					
 			</select>		
-			<input type="text" name="sfd.linkmanLs" id="linkmanLs" value="" style="width:230px;display: none"></td>
+			<input type="text" name="sfd.linkmanLs" id="linkmanLs" value="" style="width:230px;display: none">
 		</td>			
 	</tr>
 	<tr>			
