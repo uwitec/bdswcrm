@@ -33,6 +33,10 @@
             </result>
         </global-results>
         
+        <action name="toLogin" class="userAction" method="toLogin">
+        	<result name="success" type="dispatcher">/WEB-INF/pages/login.jsp</result>
+        </action>
+        
         <!-- 系统登录 -->
         <action name="login" class="userAction" method="login">
             <result name="cancel" type="redirect">login.jsp</result>
