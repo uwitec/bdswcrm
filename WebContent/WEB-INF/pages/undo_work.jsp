@@ -95,6 +95,20 @@ List dspFysqList = (List)VS.findValue("dspFysqList");
 		document.myform.action = "undoWork.html";
 		document.myform.submit();
 	}	
+
+	function printCkd(id){
+		var destination = "printCkd.html?ckd_id=" + id;
+		var fea ='width=850,height=600,left=' + (screen.availWidth-850)/2 + ',top=' + (screen.availHeight-600)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		
+		window.open(destination,'出库单打印',fea);				
+	}	
+
+	function printRkd(id){
+		var destination = "printRkd.html?rkd_id=" + id;
+		var fea ='width=850,height=600,left=' + (screen.availWidth-850)/2 + ',top=' + (screen.availHeight-600)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		
+		window.open(destination,'入库单打印',fea);				
+	}				
 </script>
 </head>
 <body>
@@ -125,6 +139,7 @@ List dspFysqList = (List)VS.findValue("dspFysqList");
 					<tr>
 						<td width="100%" height="23">&nbsp;
 							<A class=xxlb href="#" onclick="edit('<%=id %>');" title="点击查看待出库单据详情"><%=id %>&nbsp;&nbsp;&nbsp;<%=client_name %>&nbsp;&nbsp;&nbsp;<%=xsry %>&nbsp;&nbsp;&nbsp;【<%=creatdate %>】</A>
+							<a href="#" class=xxlb onclick="printCkd('<%=id %>');" title="点击打印出库单">打印</a>
 						</td>
 					</tr>
 					<%
@@ -162,6 +177,7 @@ List dspFysqList = (List)VS.findValue("dspFysqList");
 					<tr>
 						<td width="100%" height="23">&nbsp;
 							<A class=xxlb href="#" onclick="editRkd('<%=id %>');" title="点击查看待入库单据详情"><%=id %>&nbsp;&nbsp;&nbsp;<%=client_name %>&nbsp;&nbsp;&nbsp;<%=cgfzr %>&nbsp;&nbsp;&nbsp;【<%=creatdate %>】</A>
+							<a href="#" class=xxlb onclick="printRkd('<%=id %>');" title="点击打印入库单">打印</a>
 						</td>
 					</tr>
 					<%
