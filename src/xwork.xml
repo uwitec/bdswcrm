@@ -2064,6 +2064,24 @@
 			</result>
         </action> 
         
+        <!-- 出库单打印 -->                                                                                                             
+        <action name="printCkd" class="ckdAction" method="printCkd">
+            <result name="success" type="jasper">
+				<param name="location">/WEB-INF/report/ckdTemplate.jasper</param>
+				<param name="dataSource">ckdProducts</param>
+				<param name="format">PDF</param>
+			</result>
+        </action>
+        
+        <!-- 入库单打印 -->                                                                                                             
+        <action name="printRkd" class="rkdAction" method="printRkd">
+            <result name="success" type="jasper">
+				<param name="location">/WEB-INF/report/rkdTemplate.jasper</param>
+				<param name="dataSource">rkdProducts</param>
+				<param name="format">PDF</param>
+			</result>
+        </action>        
+        
         <!-- 零售预收单 -->                                                                                                             
         <action name="printLsysk" class="lsyskAction" method="printLsysk">
             <result name="success" type="jasper">
