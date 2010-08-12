@@ -10,6 +10,7 @@ package com.sw.cms.action;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.sw.cms.action.base.BaseAction;
 import com.sw.cms.model.Ckd;
@@ -28,6 +29,8 @@ import com.sw.cms.service.XsdService;
 import com.sw.cms.util.Constant;
 import com.sw.cms.util.DateComFunc;
 import com.sw.cms.util.ParameterUtility;
+import com.sw.cms.util.StaticParamDo;
+import com.sw.cms.util.StringUtils;
 
 public class CkdAction extends BaseAction {
 	
@@ -65,6 +68,21 @@ public class CkdAction extends BaseAction {
 	private String iscs_flag = "";  //系统是否初始完成标志
 	
 	private int curPage = 1;
+	
+	//打印参数
+	private String ckdate;
+	private String client_name;
+	private String client_tel;
+	private String job_no;
+	private String store_name;
+	private String jsr;
+	private String strYsfs;
+	private String title_name;
+	private String foot_name;
+	private String remark;
+	private String address;
+	private String cx_tel;
+	private String send_time;
 	
 	/**
 	 * 取出库单列表（带分页）
@@ -327,6 +345,43 @@ public class CkdAction extends BaseAction {
 	}
 	
 	
+	/**
+	 * 打印出库单
+	 * @return
+	 */
+	public String printCkd(){
+		try{
+			
+			ckd = (Ckd)ckdService.getCkd(ckd_id);
+			
+			ckdate = StringUtils.nullToStr(ckd.getCk_date());
+			client_name = StaticParamDo.getClientNameById(ckd.getClient_name()) + "　　" + StringUtils.nullToStr(ckd.getClient_lxr());
+			client_tel = StringUtils.nullToStr(ckd.getClient_lxr_tel());
+			job_no = StringUtils.nullToStr(ckd.getJob_no());
+			store_name = StaticParamDo.getStoreNameById(ckd.getStore_id());
+			jsr = StaticParamDo.getRealNameById(ckd.getFzr());
+			strYsfs = StringUtils.nullToStr(ckd.getYsfs());;
+			remark = StringUtils.nullToStr(ckd.getMs());
+			address = StringUtils.nullToStr(ckd.getClient_lxr_address());
+			cx_tel = StringUtils.nullToStr(ckd.getCx_tel());
+			send_time = StringUtils.nullToStr(ckd.getSend_time());
+			
+			Map map = sysInitSetService.getReportSet();			
+			if(map != null){
+				title_name = StringUtils.nullToStr(map.get("title_name")) + "出库单";
+				foot_name = StringUtils.nullToStr(map.get("foot_name"));	
+			}
+			
+			ckdProducts = ckdService.getCkdProducts(ckd_id);
+			
+			return SUCCESS;
+		}catch(Exception e){
+			
+			return ERROR;
+		}
+	}
+	
+	
 	public Ckd getCkd() {
 		return ckd;
 	}
@@ -574,6 +629,136 @@ public class CkdAction extends BaseAction {
 
 	public void setClient(Clients client) {
 		this.client = client;
+	}
+
+
+	public String getCkdate() {
+		return ckdate;
+	}
+
+
+	public void setCkdate(String ckdate) {
+		this.ckdate = ckdate;
+	}
+
+
+	public String getClient_name() {
+		return client_name;
+	}
+
+
+	public void setClient_name(String clientName) {
+		client_name = clientName;
+	}
+
+
+	public String getClient_tel() {
+		return client_tel;
+	}
+
+
+	public void setClient_tel(String clientTel) {
+		client_tel = clientTel;
+	}
+
+
+	public String getJob_no() {
+		return job_no;
+	}
+
+
+	public void setJob_no(String jobNo) {
+		job_no = jobNo;
+	}
+
+
+	public String getStore_name() {
+		return store_name;
+	}
+
+
+	public void setStore_name(String storeName) {
+		store_name = storeName;
+	}
+
+
+	public String getJsr() {
+		return jsr;
+	}
+
+
+	public void setJsr(String jsr) {
+		this.jsr = jsr;
+	}
+
+
+	public String getStrYsfs() {
+		return strYsfs;
+	}
+
+
+	public void setStrYsfs(String strYsfs) {
+		this.strYsfs = strYsfs;
+	}
+
+
+	public String getTitle_name() {
+		return title_name;
+	}
+
+
+	public void setTitle_name(String titleName) {
+		title_name = titleName;
+	}
+
+
+	public String getFoot_name() {
+		return foot_name;
+	}
+
+
+	public void setFoot_name(String footName) {
+		foot_name = footName;
+	}
+
+
+	public String getRemark() {
+		return remark;
+	}
+
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
+
+	public String getAddress() {
+		return address;
+	}
+
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+
+	public String getCx_tel() {
+		return cx_tel;
+	}
+
+
+	public void setCx_tel(String cxTel) {
+		cx_tel = cxTel;
+	}
+
+
+	public String getSend_time() {
+		return send_time;
+	}
+
+
+	public void setSend_time(String sendTime) {
+		send_time = sendTime;
 	}
 
 }

@@ -136,7 +136,7 @@ public class RkdDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public List getRkdProducts(String rkd_id){
-		String sql = "select a.*,b.qz_serial_num as qz_flag from rkd_product a left join product b on b.product_id=a.product_id where a.rkd_id='" + rkd_id + "'";
+		String sql = "select a.*,b.qz_serial_num as qz_flag,b.dw from rkd_product a left join product b on b.product_id=a.product_id where a.rkd_id='" + rkd_id + "'";
 		
 		return this.getResultList(sql);
 	}

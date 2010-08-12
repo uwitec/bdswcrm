@@ -119,7 +119,7 @@ public class CkdDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public List getCkdProducts(String ckd_id) {
-		String sql = "select a.*,b.qz_serial_num as qz_flag from ckd_product a left join product b on b.product_id=a.product_id where a.ckd_id='"
+		String sql = "select a.*,b.qz_serial_num as qz_flag,b.dw from ckd_product a left join product b on b.product_id=a.product_id where a.ckd_id='"
 				+ ckd_id + "'";
 
 		return this.getResultList(sql);

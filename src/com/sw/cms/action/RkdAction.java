@@ -2,6 +2,7 @@ package com.sw.cms.action;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.sw.cms.action.base.BaseAction;
 import com.sw.cms.model.LoginInfo;
@@ -12,10 +13,13 @@ import com.sw.cms.service.DeptService;
 import com.sw.cms.service.EmployeeService;
 import com.sw.cms.service.RkdService;
 import com.sw.cms.service.SjzdService;
+import com.sw.cms.service.SysInitSetService;
 import com.sw.cms.service.UserService;
 import com.sw.cms.util.Constant;
 import com.sw.cms.util.DateComFunc;
 import com.sw.cms.util.ParameterUtility;
+import com.sw.cms.util.StaticParamDo;
+import com.sw.cms.util.StringUtils;
 
 public class RkdAction extends BaseAction {
 	
@@ -24,6 +28,8 @@ public class RkdAction extends BaseAction {
 	private DeptService deptService;
 	private SjzdService sjzdService;
 	private EmployeeService employeeService;
+	private SysInitSetService sysInitSetService;
+	
 	private Rkd rkd = new Rkd();
 	private List depts = new ArrayList();
 	private String[] positions;
@@ -45,6 +51,16 @@ public class RkdAction extends BaseAction {
 	
 	private String orderName ="";
 	private String orderType ="";
+	
+	//入库单打印
+	private String rkdate;
+	private String client_name;
+	private String store_name;
+	private String jsr;
+	private String title_name;
+	private String foot_name;
+	private String remark;
+	private String cgfzr;
 	
 	
 	
@@ -233,6 +249,36 @@ public class RkdAction extends BaseAction {
 		
 		rkdService.doTh(rkd);
 		return "success";
+	}
+	
+	
+	/**
+	 * 打印入库单
+	 * @return
+	 */
+	public String printRkd(){
+		try{
+			rkd = (Rkd)rkdService.getRkd(rkd_id);
+			
+			rkdate = StringUtils.nullToStr(rkd.getRk_date());
+			client_name = StaticParamDo.getClientNameById(rkd.getClient_name());
+			store_name = StaticParamDo.getStoreNameById(rkd.getStore_id());
+			jsr = StaticParamDo.getRealNameById(rkd.getFzr());
+			remark = StringUtils.nullToStr(rkd.getMs());
+			cgfzr = StaticParamDo.getRealNameById(rkd.getCgfzr());
+			
+			Map map = sysInitSetService.getReportSet();			
+			if(map != null){
+				title_name = StringUtils.nullToStr(map.get("title_name")) + "入库单";
+				foot_name = StringUtils.nullToStr(map.get("foot_name"));	
+			}
+			
+			rkdProducts = rkdService.getRkdProducts(rkd_id);
+			return SUCCESS;
+		}catch(Exception e){
+			e.printStackTrace();
+			return ERROR;
+		}
 	}
 	
 	
@@ -435,6 +481,78 @@ public class RkdAction extends BaseAction {
 
 	public void setYwyEmployeePage(Page ywyEmployeePage) {
 		this.ywyEmployeePage = ywyEmployeePage;
+	}
+
+	public String getRkdate() {
+		return rkdate;
+	}
+
+	public void setRkdate(String rkdate) {
+		this.rkdate = rkdate;
+	}
+
+	public String getClient_name() {
+		return client_name;
+	}
+
+	public void setClient_name(String clientName) {
+		client_name = clientName;
+	}
+
+	public String getStore_name() {
+		return store_name;
+	}
+
+	public void setStore_name(String storeName) {
+		store_name = storeName;
+	}
+
+	public String getJsr() {
+		return jsr;
+	}
+
+	public void setJsr(String jsr) {
+		this.jsr = jsr;
+	}
+
+	public String getTitle_name() {
+		return title_name;
+	}
+
+	public void setTitle_name(String titleName) {
+		title_name = titleName;
+	}
+
+	public String getFoot_name() {
+		return foot_name;
+	}
+
+	public void setFoot_name(String footName) {
+		foot_name = footName;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
+	public String getCgfzr() {
+		return cgfzr;
+	}
+
+	public void setCgfzr(String cgfzr) {
+		this.cgfzr = cgfzr;
+	}
+
+	public SysInitSetService getSysInitSetService() {
+		return sysInitSetService;
+	}
+
+	public void setSysInitSetService(SysInitSetService sysInitSetService) {
+		this.sysInitSetService = sysInitSetService;
 	}
 
 }
