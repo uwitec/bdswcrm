@@ -49,7 +49,7 @@ List posTypeList = (List)VS.findValue("posTypeList");
 			alert("经手人不能为空，请选择！");
 			return;
 		}		
-		if(!InputValid(document.getElementById("ysje"),1,"float",1,-999999999,999999999,"预收金额")){	 return; }
+		if(!InputValid(document.getElementById("ysje"),1,"float",1,0,999999999,"预收金额")){	 return; }
 		
 		if(document.getElementById("skzh").value == ""){
 			alert("收款账户不能为空，请选择！");
