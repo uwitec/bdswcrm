@@ -193,3 +193,6 @@ ALTER TABLE `xsd` MODIFY  `fpxx` VARCHAR(200) DEFAULT NULL;
 2010-08-07修改
 --部署需求没有待出库的单据,或者是待出库的单据对应的销售订单收款方式不是现结
 
+
+ALTER TABLE `sfd` MODIFY COLUMN `khlx` VARCHAR(10) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT 0,
+ ADD COLUMN `linkmanls` VARCHAR(100) AFTER `khlx`;

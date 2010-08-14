@@ -108,13 +108,13 @@ String product_state = StringUtils.nullToStr(VS.findValue("product_state"));
 <table width="100%"  align="center"  class="chart_list" border="1" cellpadding="0" cellspacing="0" id="productTable">
 	<thead>
 	<tr>
-		<td>商品编号</td>
-		<td>商品名称</td>
-		<td>规格</td>
-		<td>成本价</td>
-		<td>商品属性</td>
-		<td>状态</td>
-		<td>操作</td>
+		<td nowrap="nowrap">商品编号</td>
+		<td nowrap="nowrap">商品名称</td>
+		<td nowrap="nowrap">规格</td>
+		<td nowrap="nowrap">成本价</td>
+		<td nowrap="nowrap">商品属性</td>
+		<td nowrap="nowrap">状态</td>
+		<td nowrap="nowrap">操作</td>
 	</tr>
 	</thead>
 	<%

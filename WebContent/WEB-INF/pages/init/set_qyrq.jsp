@@ -9,10 +9,17 @@
 <script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
 <script type="text/javascript">
 	function setQyrq(){
+		var curDate = "<ww:property value="%{sysInitSet.qyrq}"/>";
 		if(document.getElementById("qyrq").value == ""){
 			alert("系统启用日期不能为空，请选择！");
 			return;
 		}
+		
+		if(document.getElementById("qyrq").value > curDate){
+			alert("系统启用日期必须为当前日期及当前日期之前的日期！");
+			return;
+		}
+		
 		if(window.confirm("设置系统启用日期，确认吗？")){
 			document.myform.action = "setQyrq.html";
 			document.myform.submit();
@@ -27,27 +34,34 @@
 	}
 
 	function clearData(){
-		if(window.confirm("确认要清空系统数据吗？")){
+		if(window.confirm("确认要清空系统全部数据吗？，清空后将不可还原！")){
 			document.myform.action = "clearSysData.html";
 			document.myform.submit();
 		}
 	}
+
+	function clearYwData(){
+		if(window.confirm("确认要清空系统业务数据吗？，清空后将不可还原！")){
+			document.myform.action = "clearSysYwData.html";
+			document.myform.submit();
+		}
+	}	
 </script>
 </head>
 <body>
 <form name="myform" action="setQyrq.html" method="post">
 <table width="100%"  align="center"class="chart_list" cellpadding="0" cellspacing="0">
 	<tr>
-		<td class="csstitle" align="left" width="100%">&nbsp;&nbsp;&nbsp;&nbsp;<b>系统初始化导航</b></td>			
+		<td class="csstitle" align="left" width="100%">&nbsp;&nbsp;&nbsp;&nbsp;<b>系统初始化导航</b> <font color="red">(初始化必须按照以下步骤进行)</font> </td>			
 	</tr>
 </table>
 <FONT color="red"><ww:property value="%{msg}"/></FONT>
 <table width="100%"  align="center"  border="1"   class="chart_info" cellpadding="0" cellspacing="0">
 		<tr>
-			<td class="a2"><b>第一步</b>、首先清空系统历史数据，清空历史数据请点击“清空系统数据”链接。&nbsp;
+			<td class="a2"><b>第一步</b>、首先清空系统历史数据，清空历史数据包括两类,1.清空系统全部数据请点击“清空系统全部数据”链接；2.只清空系统业务数据，请点击“清空系统业务数据”；请根据情况慎重选择，操作不可逆。&nbsp;
 				
-				<a href='#' onclick="clearData();">清空系统数据</a>
-			
+				<a href='#' onclick="clearData();">清空系统全部数据</a>&nbsp;&nbsp;
+				<a href='#' onclick="clearYwData();">清空系统业务数据</a>
 			</td>			
 		</tr>
 		<tr>
