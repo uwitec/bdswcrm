@@ -46,10 +46,17 @@ public class SysInitSetService {
 	}
 	
 	/**
-	 * 清空系统数据
+	 * 清空系统数据(全部清空)
 	 */
 	public void updateSys_ClearData(){
 		sysInitSetDao.updateSys_ClearData();
+	}
+	
+	/**
+	 * 清空系统数据（只清空业务数据）
+	 */
+	public void updateSys_ClearYwData(){
+		sysInitSetDao.updateSys_ClearYwData();
 	}
 	
 	/**

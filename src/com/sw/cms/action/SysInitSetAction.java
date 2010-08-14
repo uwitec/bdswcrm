@@ -97,12 +97,23 @@ public class SysInitSetAction extends BaseAction {
 	}
 	
 	/**
-	 * 清空系统数据
+	 * 清空系统数据(全部清空)
 	 * @return
 	 */
 	public String clearSysData(){
 		sysInitSetService.updateSys_ClearData();
-		msg = "清空系统数据成功！";
+		msg = "清空系统全部数据成功！";
+		return SUCCESS;
+	}
+	
+	
+	/**
+	 * 清空系统数据(清空业务数据)
+	 * @return
+	 */
+	public String clearSysYwData(){
+		sysInitSetService.updateSys_ClearYwData();
+		msg = "清空系统业务数据成功！";
 		return SUCCESS;
 	}
 	

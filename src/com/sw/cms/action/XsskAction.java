@@ -2,6 +2,7 @@ package com.sw.cms.action;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.sw.cms.action.base.BaseAction;
 import com.sw.cms.model.LoginInfo;
@@ -10,10 +11,15 @@ import com.sw.cms.model.Xssk;
 import com.sw.cms.service.ClientsService;
 import com.sw.cms.service.PosTypeService;
 import com.sw.cms.service.SjzdService;
+import com.sw.cms.service.SysInitSetService;
 import com.sw.cms.service.UserService;
 import com.sw.cms.service.XsskService;
 import com.sw.cms.util.Constant;
 import com.sw.cms.util.DateComFunc;
+import com.sw.cms.util.JMath;
+import com.sw.cms.util.MoneyUtil;
+import com.sw.cms.util.StaticParamDo;
+import com.sw.cms.util.StringUtils;
 
 public class XsskAction extends BaseAction {
 	
@@ -22,6 +28,7 @@ public class XsskAction extends BaseAction {
 	private ClientsService clientsService;
 	private SjzdService sjzdService;
 	private PosTypeService posTypeService;
+	private SysInitSetService sysInitSetService;
 	
 	private Page pageXssk;
 	private Xssk xssk = new Xssk();
@@ -40,6 +47,19 @@ public class XsskAction extends BaseAction {
 	
 	private String[] ysfs;
 	private List posTypeList = new ArrayList();
+	
+	
+	//销售收款打印
+	private String ys_date = "";
+	private String skfs = "";
+	private String skzh = "";
+	private String skje = "";
+	private String dxje = "";
+	private String foot_name = "";
+	private String title_name = "";
+	private String jsr = "";
+	
+	private List xsskList = new ArrayList();
 	
 	
 	/**
@@ -164,6 +184,39 @@ public class XsskAction extends BaseAction {
 		return "success";
 	}
 	
+	
+	/**
+	 * 打印销售收款
+	 * @return
+	 */
+	public String printXssk(){
+		try{
+			
+			xssk = (Xssk)xsskService.getXssk(id);
+			
+			xsskList.add(xssk);
+			
+			ys_date = StringUtils.nullToStr(xssk.getSk_date());
+			skfs = StringUtils.nullToStr(xssk.getSkfs());
+			skzh = StaticParamDo.getAccountNameById(xssk.getSkzh());
+			skje = JMath.round(xssk.getSkje());
+			dxje = MoneyUtil.toChinese(xssk.getSkje() + "");
+			client_name = StaticParamDo.getClientNameById(xssk.getClient_name());
+			jsr = StaticParamDo.getRealNameById(xssk.getJsr());
+			
+			Map map = sysInitSetService.getReportSet();			
+			if(map != null){
+				title_name = StringUtils.nullToStr(map.get("title_name")) + "收款单";
+				foot_name = StringUtils.nullToStr(map.get("foot_name"));	
+			}
+			
+			return SUCCESS;
+		}catch(Exception e){
+			log.error("打印收款单出错，原因：" + e.getMessage());
+			e.printStackTrace();
+			return ERROR;
+		}
+	}
 	
 	public int getCurPage() {
 		return curPage;
@@ -314,6 +367,106 @@ public class XsskAction extends BaseAction {
 
 	public void setPosTypeService(PosTypeService posTypeService) {
 		this.posTypeService = posTypeService;
+	}
+
+
+	public String getYs_date() {
+		return ys_date;
+	}
+
+
+	public void setYs_date(String ysDate) {
+		ys_date = ysDate;
+	}
+
+
+	public String getSkfs() {
+		return skfs;
+	}
+
+
+	public void setSkfs(String skfs) {
+		this.skfs = skfs;
+	}
+
+
+	public String getSkzh() {
+		return skzh;
+	}
+
+
+	public void setSkzh(String skzh) {
+		this.skzh = skzh;
+	}
+
+
+	public String getSkje() {
+		return skje;
+	}
+
+
+	public void setSkje(String skje) {
+		this.skje = skje;
+	}
+
+
+	public String getDxje() {
+		return dxje;
+	}
+
+
+	public void setDxje(String dxje) {
+		this.dxje = dxje;
+	}
+
+
+	public String getFoot_name() {
+		return foot_name;
+	}
+
+
+	public void setFoot_name(String footName) {
+		foot_name = footName;
+	}
+
+
+	public String getTitle_name() {
+		return title_name;
+	}
+
+
+	public void setTitle_name(String titleName) {
+		title_name = titleName;
+	}
+
+
+	public String getJsr() {
+		return jsr;
+	}
+
+
+	public void setJsr(String jsr) {
+		this.jsr = jsr;
+	}
+
+
+	public SysInitSetService getSysInitSetService() {
+		return sysInitSetService;
+	}
+
+
+	public void setSysInitSetService(SysInitSetService sysInitSetService) {
+		this.sysInitSetService = sysInitSetService;
+	}
+
+
+	public List getXsskList() {
+		return xsskList;
+	}
+
+
+	public void setXsskList(List xsskList) {
+		this.xsskList = xsskList;
 	}
 
 }

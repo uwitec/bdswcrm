@@ -11,8 +11,8 @@ import org.springframework.jdbc.core.RowMapper;
 import com.sw.cms.model.Page;
 
 /**
- * 所有DAO类均要继承此类，植入了JdbcTemplate
- * 添加分页及单个对象的处理，修补了JdbcTemplate相关问题 
+ * 所有DAO类均要继承此类，植入了JdbcTemplate<BR>
+ * 添加分页及单个对象的处理，修补了JdbcTemplate相关问题 <BR>
  * @author liyt
  *
  */

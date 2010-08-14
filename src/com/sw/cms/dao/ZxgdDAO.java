@@ -21,7 +21,7 @@ public class ZxgdDAO extends JdbcBaseDAO
 	 */
    public Page getZxgdList(String con,int cruPage,int rowsPerPage)
    {
-	   String sql="select a.*,b.client_name,b.linkman,b.linkmanLs,b.khlx,b.mobile,b.address from zxgd a left join sfd b on a.sfd_id=b.id   where 1=1 ";
+	   String sql="select a.*,b.client_name,b.linkman,b.linkmanls,b.khlx,b.mobile,b.address from zxgd a left join sfd b on a.sfd_id=b.id   where 1=1 ";
 	   if(!con.equals(""))
 	   {
 		   sql=sql+con;
