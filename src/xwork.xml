@@ -1591,7 +1591,10 @@
         </action>
         <action name="clearSysData" class="sysInitSetAction" method="clearSysData">
             <result name="success">showSzXgqyrqPage.html</result>
-        </action>        
+        </action>
+        <action name="clearSysYwData" class="sysInitSetAction" method="clearSysYwData">
+            <result name="success">showSzXgqyrqPage.html</result>
+        </action>                      
         <!-- 设置系统启用，及初始化相关项 -->
         
 		<!-- 数据字典 -->
@@ -2089,7 +2092,16 @@
 				<param name="dataSource">lsyskList</param>
 				<param name="format">PDF</param>
 			</result>
-        </action>                           
+        </action> 
+        
+        <!-- 收款单 -->                                                                                                             
+        <action name="printXssk" class="xsskAction" method="printXssk">
+            <result name="success" type="jasper">
+				<param name="location">/WEB-INF/report/xsskTemplate.jasper</param>
+				<param name="dataSource">xsskList</param>
+				<param name="format">PDF</param>
+			</result>
+        </action>                                   
         
         <!-- 成本调整，查询结果 -->
         <action name="queryProduct" class="cbtzAction" method="getResults">
