@@ -84,11 +84,25 @@ String[] lxrnld = (String[])VS.findValue("lxrnld");
 		
         otr.appendChild(otd0); 
         otr.appendChild(otd1);              
-     }			
+     }		
+     
+     function setClientState()
+	{	    
+	      var ClientState = document.getElementById("flag");
+		  var o = document.clientForm.proc_id;
+		  if(o.checked){
+		     ClientState.value = "0";
+		   }
+		  else
+		  {
+		    ClientState.value = "1";
+		  }
+	}	
 </script>
 </head>
 <body onload="initFzrTip();">
 <form name="clientForm" action="saveClient.html" method="post">
+<input type="hidden" name="client.flag" id="flag" value="1">
 <center>
 <font color="red" style="font-size:16px;"><%=msg %></font>
 </center>
@@ -154,6 +168,12 @@ String[] lxrnld = (String[])VS.findValue("lxrnld");
 		<td class="a2" colspan="3"><input type="text" name="client.remark" id="remark" style="width:85%" maxlength="500">
 		</td>
 	</tr>	
+	<tr>
+	    <td class="a1"  width="15%">状态</td>
+	    <td class="a2" colspan="3">
+	        <input type="checkbox"  name="proc_id"  value="停用" onclick="setClientState();">停用	       
+        </td>
+    </tr>    
 </table>
 <br>
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">

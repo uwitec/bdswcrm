@@ -137,6 +137,7 @@ List userList = (List)VS.findValue("userList");
 		<td onclick="doSort('address');">地址<%if(orderName.equals("address")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
 		<td onclick="doSort('gzdh');">固定电话<%if(orderName.equals("gzdh")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
 		<td onclick="doSort('khjl');">客户经理<%if(orderName.equals("khjl")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td onclick="doSort('flag');">状态<%if(orderName.equals("flag")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
 		<td>操作</td>
 	</tr>
 	</thead>
@@ -153,6 +154,7 @@ List userList = (List)VS.findValue("userList");
 		<td class="a1"><%=StringUtils.nullToStr(clients.getAddress()) %></td>
 		<td class="a1"><%=StringUtils.nullToStr(clients.getGzdh()) %></td>
 		<td class="a1"><%=StaticParamDo.getRealNameById(clients.getKhjl()) %></td>
+		<td class="a1"><%=StringUtils.nullToStr(clients.getFlag()).equals("1")?"正常":"停用" %></td>
 		<td class="a1">
 			<a href="#" onclick="edit('<%=StringUtils.nullToStr(clients.getId()) %>');"><img src="images/modify.gif" align="absmiddle" title="修改" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
 			<a href="#" onclick="openWin('<%=StringUtils.nullToStr(clients.getId()) %>');"><img src="images/view.gif" align="absmiddle" title="查看" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;

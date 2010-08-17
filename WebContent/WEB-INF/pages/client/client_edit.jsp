@@ -77,11 +77,35 @@ if(clientsPayInfos != null && clientsPayInfos.size() > 0){
 		
         otr.appendChild(otd0); 
         otr.appendChild(otd1);              
-     }			
+     }		
+     function setClientState()
+	{	    
+	      var ClientState = document.getElementById("flag");
+		  var o = document.clientForm.proc_id;
+		  if(o.checked){
+		     ClientState.value = "0";
+		   }
+		  else
+		  {
+		    ClientState.value = "1";
+		  }
+	}		
+	function initClientState(flag)
+	{	 
+		  var o = document.clientForm.proc_id;
+		  if(flag=="0"){
+		    o.checked=true;
+		  }
+		  else
+		  {
+		    o.checked=false;
+		  }
+	}	
 </script>
 </head>
-<body onload="initFzrTip();">
+<body onload="initFzrTip();initClientState('<%=StringUtils.nullToStr(client.getFlag()) %>');">
 <form name="clientForm" action="updateClient.html" method="post">
+<input type="hidden" name="client.flag" id="flag" value="<%=StringUtils.nullToStr(client.getFlag()) %>">
 <input type="hidden" name="client.id" id="id" value="<%=StringUtils.nullToStr(client.getId()) %>">
 <center>
 <font color="red" style="font-size:16px;"><%=msg %></font>
@@ -141,7 +165,14 @@ if(clientsPayInfos != null && clientsPayInfos.size() > 0){
 		<td class="a1" width="15%">采购限额</td>
 		<td class="a2" width="35%"><input type="text" name="client.cg_xe" id="cg_xe" value="<%=JMath.round(client.getCg_xe()) %>">元</td>
 	</tr>		
---></table>
+-->
+    <tr>
+	    <td class="a1"  width="15%">状态</td>
+	    <td class="a2" colspan="3">
+	        <input type="checkbox"  name="proc_id"  value="停用" <%if(StringUtils.nullToStr(client.getFlag()).equals("0")) out.print("checked"); %> onclick="setClientState();">停用	       
+        </td>
+    </tr> 
+</table>
 <br>
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
