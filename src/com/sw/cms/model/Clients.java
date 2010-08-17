@@ -35,6 +35,8 @@ public class Clients {
 	private int cg_zq;          //采购账期
 	private double cg_xe;       //采购限额
 	
+	private String flag;
+	
 	public String getChina_py() {
 		return china_py;
 	}
@@ -203,5 +205,10 @@ public class Clients {
 	public void setCg_xe(double cgXe) {
 		cg_xe = cgXe;
 	}
-	
+	public String getFlag() {
+		return flag;
+	}
+	public void setFlag(String flag) {
+		this.flag = flag;
+	}
 }
