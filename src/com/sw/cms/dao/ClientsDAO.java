@@ -73,10 +73,10 @@ public class ClientsDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public List getClientListByAjaxParam(String clientsName){
-		String sql = "select * from clients";
+		String sql = "select * from clients  where flag='1'";
 		
 		if(!clientsName.equals("")){
-			sql = sql + " where name like '%" + clientsName + "%' or china_py like '%" + clientsName.toUpperCase() + "%'";
+			sql = sql + " and name like '%" + clientsName + "%' or china_py like '%" + clientsName.toUpperCase() + "%'";
 		}
 		return this.getResultList(sql);
 	}
@@ -176,10 +176,10 @@ public class ClientsDAO extends JdbcBaseDAO {
 	public Object saveClient(Clients clients,List clientsPayInfos){
 		String sql = "insert into clients(name,lxr,lxdh,mobile,address,p_code,mail,msn,qq,zq,xe," +
 				"remark,ygs,gsxz,client_type,khjl,id,gzdh,cz,comaddress,china_py," +
-				"kp_name,kp_address,kp_tel,kp_khhzh,kp_sh,cg_zq,cg_xe) " +
-				"values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+				"kp_name,kp_address,kp_tel,kp_khhzh,kp_sh,cg_zq,cg_xe,flag) " +
+				"values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		
-		Object[] param = new Object[28];
+		Object[] param = new Object[29];
 
 		param[0] = clients.getName();
 		param[1] = clients.getLxr();
@@ -212,7 +212,7 @@ public class ClientsDAO extends JdbcBaseDAO {
 		param[25] = clients.getKp_sh();
 		param[26] = clients.getCg_zq();
 		param[27] = clients.getCg_xe();
-		
+		param[28] = clients.getFlag();
 		this.getJdbcTemplate().update(sql,param);
 		
 		this.addClientsPayInfos(param[16].toString(), clientsPayInfos);
@@ -231,9 +231,9 @@ public class ClientsDAO extends JdbcBaseDAO {
 		
 		String sql = "update clients set name=?,lxr=?,lxdh=?,mobile=?,address=?,p_code=?,mail=?," +
 				"msn=?,qq=?,zq=?,xe=?,remark=?,ygs=?,gsxz=?,client_type=?,khjl=?,gzdh=?,cz=?," +
-				"comaddress=?,china_py=?,kp_name=?,kp_address=?,kp_tel=?,kp_khhzh=?,kp_sh=?,cg_zq=?,cg_xe=? where id=?";
+				"comaddress=?,china_py=?,kp_name=?,kp_address=?,kp_tel=?,kp_khhzh=?,kp_sh=?,cg_zq=?,cg_xe=?,flag=? where id=?";
 		
-		Object[] param = new Object[28];
+		Object[] param = new Object[29];
 		
 		
 		param[0] = clients.getName();
@@ -267,7 +267,8 @@ public class ClientsDAO extends JdbcBaseDAO {
 		param[24] = clients.getKp_sh();
 		param[25] = clients.getCg_zq();
 		param[26] = clients.getCg_xe();
-		param[27] = clients.getId();
+		param[27] = clients.getFlag();
+		param[28] = clients.getId();
 		
 		this.delClientsPayInfos(clients.getId());
 		this.addClientsPayInfos(clients.getId(), clientsPayInfos);
