@@ -62,6 +62,20 @@ public class DeptAction extends BaseAction {
 	 * @return
 	 */
 	public String del(){
+		if(!dept_id.equals("")){		
+		  if(!deptService.hasChild(dept_id)){
+			this.setMsg("有下属部门,不能删除！");
+			return "notDel";
+		 }
+		}
+		
+		if(!dept_id.equals("")){
+		  if(!deptService.isCanDel(dept_id)){
+			this.setMsg("发生费用,不能删除！");
+			return "notDel";
+		  }
+		}
+		
 		deptService.delDept(dept_id);
 		return "success";
 	}
