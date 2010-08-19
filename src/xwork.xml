@@ -1496,6 +1496,7 @@
             <result name="success">/WEB-INF/pages/employee/dept_edit.jsp</result>
         </action>
         <action name="delDept" class="deptAction" method="del">
+            <result name="notDel">/WEB-INF/pages/employee/msg_info.jsp</result>
             <result name="success" type="redirect">listDept.html</result>
         </action>        
         <action name="updateDept" class="deptAction" method="update">
@@ -2439,8 +2440,7 @@
         </action>
         <action name="delSfd" class="sfdAction" method="del">
              <result name="success">listSfd.html</result>
-        </action>
-        
+        </action>        
         <action name="addSfdls" class="sfdAction" method="add">
               <result name="success">/WEB-INF/pages/sfd/sfdls_add.jsp</result>
         </action>
@@ -2947,6 +2947,7 @@
             <result name="success">/WEB-INF/pages/msg.jsp</result>
         </action>
         <!-- 发卡管理结束 -->
+
         <!-- 兑奖货品设置开始 -->
         <action name="listDjhpsz" class="djhpszAction" method="list">
             <result name="success" type="dispatcher">/WEB-INF/pages/djhpsz/djhpsz_list.jsp</result>
@@ -2976,6 +2977,6 @@
         <action name="delDjhpsz" class="djhpszAction" method="del">
             <result name="success" type="redirect">listDjhpsz.html</result>
         </action>        
-        <!-- 兑奖货品设置结束 -->
+        <!-- 兑奖货品设置结束 -->        
     </package>
 </xwork>
