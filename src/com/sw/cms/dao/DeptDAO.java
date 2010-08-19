@@ -126,6 +126,42 @@ public class DeptDAO extends JdbcBaseDAO {
 	}
 
 	/**
+	 * 判断部门信息是否可以删除<BR>
+	 * 发生了费用支付的部门信息不能删除<BR>
+	 * 
+	 * @param dept_id
+	 * @return boolean true:可以；false:不可以
+	 */
+	public boolean isCanDel(String dept_id){
+		
+		//判断是否存在费用申请
+		String sql = "select count(*) from fysq where ywy_dept='" + dept_id + "'";
+		if(this.getJdbcTemplate().queryForInt(sql) > 0){
+			return false;
+		}		
+		
+		return true;
+	}
+	
+	/**
+	 * 判断部门信息是否可以删除<BR>
+	 * 有下属部门的部门信息不能删除<BR>
+	 * 
+	 * @param dept_id
+	 * @return boolean true:可以；false:不可以
+	 */
+	public boolean hasChild(String dept_id){
+		
+		//判断是否存在下属部门
+		String sql = "select count(*) from dept where parent_id='" + dept_id + "'";
+		if(this.getJdbcTemplate().queryForInt(sql) > 0){
+			return false;
+		}		
+		
+		return true;
+	}
+	
+	/**
 	 * 删除部门信息
 	 * 
 	 * @param dept_id

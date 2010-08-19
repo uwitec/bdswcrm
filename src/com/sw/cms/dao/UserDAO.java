@@ -70,7 +70,7 @@ public class UserDAO extends JdbcBaseDAO {
 	 */
 	public List getUserListAjaxTip(String paramValue){
 		//所有为业务员的员工信息
-		String sql = "select user_id,real_name,china_py from sys_user where is_sys_user='0' and is_ywy='是' and is_del='0' ";
+		String sql = "select user_id,real_name,china_py from sys_user where is_sys_user='0' and is_ywy='是' and is_del='0'  and (zzzt='在职' or zzzt='' or zzzt is null) ";
 		
 		if(!paramValue.equals("")){
 			sql += "and (real_name like '%" + paramValue + "%' or china_py like '%" + paramValue.toUpperCase() + "%')";
