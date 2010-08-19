@@ -46,6 +46,28 @@ public class DeptService {
 	
 	
 	/**
+	 * 判断部门信息是否可以删除<BR>
+	 * 发生了费用支付的部门信息不能删除<BR>
+	 * 
+	 * @param dept_id
+	 * @return boolean true:可以；false:不可以
+	 */
+	public boolean isCanDel(String dept_id){
+		return deptDao.isCanDel(dept_id);
+	}
+	
+	/**
+	 * 判断部门信息是否可以删除<BR>
+	 * 有下属部门的部门信息不能删除<BR>
+	 * 
+	 * @param dept_id
+	 * @return boolean true:可以；false:不可以
+	 */
+	public boolean hasChild(String dept_id){
+		return deptDao.hasChild(dept_id);
+	}
+	
+	/**
 	 * 删除部门信息
 	 * @param dept_id
 	 */
