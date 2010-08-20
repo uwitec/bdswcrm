@@ -24,10 +24,24 @@ List providers = (List)VS.findValue("providerList");
 		
 		document.storeHouseForm.submit();
 	}
+	
+	 function setStoreState()
+	{	    
+	      var StoreState = document.getElementById("flag");
+		  var o = document.storeHouseForm.proc_id;
+		  if(o.checked){
+		     StoreState.value = "0";
+		   }
+		  else
+		  {
+		    StoreState.value = "1";
+		  }
+	}	
 </script>
 </head>
 <body oncontextmenu="return false;" >
 <form name="storeHouseForm" action="saveStore.html" method="post">
+<input type="hidden" name="storeHouse.flag" id="flag" value="1">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
@@ -46,6 +60,14 @@ List providers = (List)VS.findValue("providerList");
 		<td class="a1" width="15%">联系电话</td>
 		<td class="a2" width="35%"><input type="text" name="storeHouse.lxdh" id="lxdh" value="" size="30" maxlength="20"></td>
 	</tr>	
+	
+	<tr>
+	    <td class="a1"  width="15%">状态</td>
+	    <td class="a2" colspan="3">
+	        <input type="checkbox"  name="proc_id"  value="停用" onclick="setStoreState();">停用	       
+        </td>
+    </tr> 
+   
 </table>
 <br>
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">

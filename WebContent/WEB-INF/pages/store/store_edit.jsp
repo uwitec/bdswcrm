@@ -24,11 +24,35 @@ StoreHouse storeHouse = (StoreHouse)VS.findValue("storeHouse");
 		
 		document.storeHouseForm.submit();
 	}
+	function setStoreState()
+	{	    
+	      var storeState = document.getElementById("flag");
+		  var o = document.storeHouseForm.proc_id;
+		  if(o.checked){
+		     storeState.value = "0";
+		   }
+		  else
+		  {
+		    storeState.value = "1";
+		  }
+	}		
+	function initStoreState(flag)
+	{	 
+		  var o = document.storeHouseForm.proc_id;
+		  if(flag=="0"){
+		    o.checked=true;
+		  }
+		  else
+		  {
+		    o.checked=false;
+		  }
+	}	
 </script>
 </head>
-<body oncontextmenu="return false;" >
+<body oncontextmenu="return false;initStoreState('<%=StringUtils.nullToStr(storeHouse.getFlag()) %>');" >
 <form name="storeHouseForm" action="updateStore.html" method="post">
 <input type="hidden" name="storeHouse.id" value="<%=StringUtils.nullToStr(storeHouse.getId()) %>">
+<input type="hidden" name="storeHouse.flag" id="flag" value="<%=StringUtils.nullToStr(storeHouse.getFlag()) %>">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
@@ -46,7 +70,20 @@ StoreHouse storeHouse = (StoreHouse)VS.findValue("storeHouse");
 		<td class="a2" width="35%"><input type="text" name="storeHouse.lxr" id="lxr" value="<%=StringUtils.nullToStr(storeHouse.getLxr()) %>" size="25" maxlength="10"></td>
 		<td class="a1" width="15%">联系电话</td>
 		<td class="a2" width="35%"><input type="text" name="storeHouse.lxdh" id="lxdh" value="<%=StringUtils.nullToStr(storeHouse.getLxdh()) %>" size="30" maxlength="20"></td>
-	</tr>	
+	</tr>
+	<% 
+	if(!((storeHouse.getId().equals("WX00000001"))||(storeHouse.getId().equals("WX00000002"))))
+	{
+	%>	
+	<tr>
+	    <td class="a1"  width="15%">状态</td>
+	    <td class="a2" colspan="3">
+	        <input type="checkbox"  name="proc_id"  value="停用" <%if(StringUtils.nullToStr(storeHouse.getFlag()).equals("0")) out.print("checked"); %> onclick="setStoreState();">停用	       
+        </td>
+    </tr>
+     <%
+    }
+     %>
 </table>
 <br>
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">

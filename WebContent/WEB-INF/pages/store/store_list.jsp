@@ -81,6 +81,7 @@ String orderType = (String)VS.findValue("orderType");
 		<td onclick="doSort('address');">地址<%if(orderName.equals("address")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
 		<td onclick="doSort('lxr');">负责人<%if(orderName.equals("lxr")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
 		<td onclick="doSort('lxdh');">联系电话<%if(orderName.equals("lxdh")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td onclick="doSort('flag');">状态<%if(orderName.equals("flag")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
 		<td>操作</td>
 	</tr>
 	</thead>
@@ -97,6 +98,7 @@ String orderType = (String)VS.findValue("orderType");
 		<td class="a1"><%=StringUtils.nullToStr(map.get("address")) %></td>
 		<td class="a1"><%=StringUtils.nullToStr(map.get("lxr")) %></td>
 		<td class="a1"><%=StringUtils.nullToStr(map.get("lxdh")) %></td>
+		<td class="a1"><%=StringUtils.nullToStr(map.get("flag")).equals("1")?"正常":"停用" %></td>
 		<td class="a1">
 			<a href="editStore.html?id=<%=StringUtils.nullToStr(map.get("id")) %>"><img src="images/modify.gif" align="absmiddle" title="修改仓库信息" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
 			<a href="#" onclick="openWin('<%=StringUtils.nullToStr(map.get("id")) %>');"><img src="images/view.gif" align="absmiddle" title="查看仓库信息" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
