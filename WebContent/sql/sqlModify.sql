@@ -200,3 +200,8 @@ ALTER TABLE `sfd` MODIFY COLUMN `khlx` VARCHAR(10) CHARACTER SET utf8 COLLATE ut
 2010-08-11修改
 --往来单位添加删除标志
 ALTER TABLE `clients` ADD COLUMN `flag` VARCHAR(2) DEFAULT 1 AFTER `cg_xe`;
+
+
+2010-08-20修改
+--仓库资料增加删除标志
+ALTER TABLE `storehouse` ADD COLUMN `flag` VARCHAR(2) DEFAULT 1 AFTER `remark`;
