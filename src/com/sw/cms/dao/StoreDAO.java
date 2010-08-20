@@ -18,7 +18,7 @@ public class StoreDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public List getAllStoreList(){
-		String sql = "select * from storehouse where id not like 'WX%'";
+		String sql = "select * from storehouse where id not like 'WX%' and flag='1'";
 		
 		return this.getJdbcTemplate().query(sql, new StoreHouseRowMapper());
 	}
@@ -62,9 +62,9 @@ public class StoreDAO extends JdbcBaseDAO {
 	 * @param store
 	 */
 	public void saveStore(StoreHouse store){
-		String sql = "insert into storehouse(id,name,address,lxr,lxdh,mobile,msn,qq,remark) values(?,?,?,?,?,?,?,?,?)";
+		String sql = "insert into storehouse(id,name,address,lxr,lxdh,mobile,msn,qq,remark,flag) values(?,?,?,?,?,?,?,?,?,?)";
 		
-		Object[] param = new Object[9];
+		Object[] param = new Object[10];
 		
 		param[0] = getKfID();
 		param[1] = store.getName();
@@ -75,7 +75,7 @@ public class StoreDAO extends JdbcBaseDAO {
 		param[6] = store.getMsn();
 		param[7] = store.getQq();
 		param[8] = store.getRemark();
-		
+		param[9] = store.getFlag();
 		this.getJdbcTemplate().update(sql,param);
 	}
 	
@@ -86,9 +86,9 @@ public class StoreDAO extends JdbcBaseDAO {
 	 * @param store
 	 */
 	public void updateStore(StoreHouse store){
-		String sql = "update storehouse set name=?,address=?,lxr=?,lxdh=?,mobile=?,msn=?,qq=?,remark=? where id=?";
+		String sql = "update storehouse set name=?,address=?,lxr=?,lxdh=?,mobile=?,msn=?,qq=?,remark=?,flag=? where id=?";
 		
-		Object[] param = new Object[9];
+		Object[] param = new Object[10];
 		
 		param[0] = store.getName();
 		param[1] = store.getAddress();
@@ -98,7 +98,8 @@ public class StoreDAO extends JdbcBaseDAO {
 		param[5] = store.getMsn();
 		param[6] = store.getQq();
 		param[7] = store.getRemark();
-		param[8] = store.getId();
+		param[8] = store.getFlag();
+		param[9] = store.getId();
 		
 		
 		this.getJdbcTemplate().update(sql,param);
@@ -168,6 +169,12 @@ public class StoreDAO extends JdbcBaseDAO {
 			return false;
 		}		
 		
+        //ÅÐ¶ÏÊÛºó¿â´æÊÇ·ñ´æÔÚ¿â´æÖµ
+		sql = "select count(*) as counts from shkc where store_id='" + id + "'";
+		if(this.getJdbcTemplate().queryForInt(sql) > 0){
+			return false;
+		}
+		
 		return true;
 	}
 	
@@ -214,7 +221,7 @@ public class StoreDAO extends JdbcBaseDAO {
 			store.setMsn(rs.getString("msn"));
 			store.setQq(rs.getString("qq"));
 			store.setRemark(rs.getString("remark"));
-			
+			store.setFlag(rs.getString("flag"));
 			return store;
 		}
 	}
