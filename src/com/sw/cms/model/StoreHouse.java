@@ -11,6 +11,14 @@ public class StoreHouse {
 	private String msn;
 	private String qq;
 	private String remark;
+	private String flag;//0:Í£ÓÃ£»1£ºÕý³£
+	
+	public String getFlag() {
+		return flag;
+	}
+	public void setFlag(String flag) {
+		this.flag = flag;
+	}
 	
 	public String getAddress() {
 		return address;
