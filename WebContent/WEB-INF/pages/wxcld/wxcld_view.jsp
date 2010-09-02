@@ -159,17 +159,17 @@ String[] wxlx=(String[])VS.findValue("wxlx");
  {
       for(int i=0;i<wxcldProducts.size();i++)
       {	
-		 WxcldProduct wxcldProduct= (WxcldProduct)wxcldProducts.get(i);
+		 Map wxcldProduct= (Map)wxcldProducts.get(i);
  %> 
      <tr>
-		<td class="a2"><%=StringUtils.nullToStr(wxcldProduct.getProduct_name())%></td>
-		<td class="a2"><%=StringUtils.nullToStr(wxcldProduct.getProduct_xh())%></td>
-	    <td class="a2"><%=StringUtils.nullToStr(wxcldProduct.getProduct_wxlx())%></td>
-	    <td class="a2"><%=StringUtils.nullToStr(wxcldProduct.getProduct_gmts())%></td>
-		<td class="a2"><%=StringUtils.nullToStr(wxcldProduct.getProduct_clfs())%></td>		
-		<td class="a2"><%=StringUtils.nullToStr(wxcldProduct.getProduct_serial_num())%></td>	
-		<td class="a2"><%=StringUtils.nullToStr(wxcldProduct.getN_product_serial_num())%></td>		
-		<td class="a2"><%=StringUtils.nullToStr(wxcldProduct.getProduct_remark())%></td>
+		<td class="a2"><%=StringUtils.nullToStr(wxcldProduct.get("product_name"))%></td>
+		<td class="a2"><%=StringUtils.nullToStr(wxcldProduct.get("product_xh"))%></td>
+	    <td class="a2"><%=StringUtils.nullToStr(wxcldProduct.get("product_wxlx"))%></td>
+	    <td class="a2"><%=StringUtils.nullToStr(wxcldProduct.get("roduct_gmts"))%></td>
+		<td class="a2"><%=StringUtils.nullToStr(wxcldProduct.get("product_clfs"))%></td>		
+		<td class="a2"><%=StringUtils.nullToStr(wxcldProduct.get("product_serial_num"))%></td>	
+		<td class="a2"><%=StringUtils.nullToStr(wxcldProduct.get("n_product_serial_num"))%></td>		
+		<td class="a2"><%=StringUtils.nullToStr(wxcldProduct.get("product_remark"))%></td>
 	</tr>
 <%
 	}
