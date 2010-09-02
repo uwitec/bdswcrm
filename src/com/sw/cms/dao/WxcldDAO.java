@@ -50,8 +50,8 @@ public class WxcldDAO extends JdbcBaseDAO
 	 */
 	public List getWxcldProduct(String wxcld_id)
 	{
-		String sql="select * from wxcld_product where wxcld_id='"+wxcld_id+"'";
-		return  this.getJdbcTemplate().query(sql,  new BeanRowMapper(WxcldProduct.class));
+		String sql="select a.*,b.qz_serial_num as qz_flag from wxcld_product  a left join product b on b.product_id=a.product_id where wxcld_id='"+wxcld_id+"'";
+		return this.getResultList(sql);
 		 
 	}
 	
