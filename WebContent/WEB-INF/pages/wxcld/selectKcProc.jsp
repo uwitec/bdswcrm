@@ -30,16 +30,17 @@ String openerId = StringUtils.nullToStr(request.getParameter("openerId"));
 	}
 
 	
-	function sel(product_id,product_xh,product_name){
+	function sel(product_id,product_xh,product_name,qz_serial_num){
 	    
 		var id = window.opener.document.getElementById("product_id_"+openerId);
 		var xh = window.opener.document.getElementById("product_xh_"+openerId);
 		var name = window.opener.document.getElementById("product_name_"+openerId);
-	    		
+	    var qz_flag = window.opener.document.getElementById("qz_flag_"+openerId);	
+	    	
 		if(id != null) id.value = product_id;
 		if(xh != null) xh.value = product_xh;
 		if(name != null) name.value = product_name;
-				
+		if(qz_flag != null) qz_flag.value = qz_serial_num;		
 		window.close();	
 	}
 	
@@ -105,7 +106,7 @@ String openerId = StringUtils.nullToStr(request.getParameter("openerId"));
 			double khcbj = map.get("khcbj")==null?0:((Double)map.get("khcbj")).doubleValue();	
 			double gf = map.get("gf")==null?0:((Double)map.get("gf")).doubleValue();	
 	%>
-		<tr class="a1" onmouseover="this.className='a2';" onmouseout="this.className='a1';" title="左键单击选择商品" onclick="sel('<%=StringUtils.nullToStr(map.get("product_id")) %>','<%=StringUtils.nullToStr(map.get("product_xh")) %>','<%=StringUtils.nullToStr(map.get("product_name")) %>');">		
+		<tr class="a1" onmouseover="this.className='a2';" onmouseout="this.className='a1';" title="左键单击选择商品" onclick="sel('<%=StringUtils.nullToStr(map.get("product_id")) %>','<%=StringUtils.nullToStr(map.get("product_xh")) %>','<%=StringUtils.nullToStr(map.get("product_name")) %>','<%=StringUtils.nullToStr(map.get("qz_serial_num")) %>');">		
 			<td><%=StringUtils.nullToStr(map.get("product_name")) %></td>
 			<td><%=StringUtils.nullToStr(map.get("product_xh")) %></td>
 			<td><%=StringUtils.nullToStr(map.get("kc_nums")) %></td>

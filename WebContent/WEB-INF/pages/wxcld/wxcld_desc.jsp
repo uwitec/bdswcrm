@@ -52,16 +52,16 @@ List results = (List)VS.findValue("wxcldProducts");
 	Iterator it = results.iterator();
 	
 	while(it.hasNext()){
-		WxcldProduct wxcldProduct = (WxcldProduct)it.next();
+		Map wxcldProduct = (Map)it.next();
 	%>  
 	<tr class="a1" onmousedown="trSelectChangeCss()">
-		<td><%=StringUtils.nullToStr(wxcldProduct.getProduct_name()) %></td>
-		<td><%=StringUtils.nullToStr(wxcldProduct.getProduct_xh()) %></td>
-		<td><%=StringUtils.nullToStr(wxcldProduct.getProduct_serial_num()) %></td>	
-		<td><%=StringUtils.nullToStr(wxcldProduct.getN_product_serial_num()) %></td>		  
-		<td><%=StringUtils.nullToStr(wxcldProduct.getProduct_clfs()) %></td>
-		<td><%=StringUtils.nullToStr(wxcldProduct.getProduct_wxlx()) %></td>
-		<td><%=StringUtils.nullToStr(wxcldProduct.getProduct_remark()) %></td>		 
+		<td><%=StringUtils.nullToStr(wxcldProduct.get("product_name")) %></td>
+		<td><%=StringUtils.nullToStr(wxcldProduct.get("product_xh")) %></td>
+		<td><%=StringUtils.nullToStr(wxcldProduct.get("product_serial_num")) %></td>	
+		<td><%=StringUtils.nullToStr(wxcldProduct.get("n_product_serial_num")) %></td>		  
+		<td><%=StringUtils.nullToStr(wxcldProduct.get("product_clfs")) %></td>
+		<td><%=StringUtils.nullToStr(wxcldProduct.get("product_wxlx")) %></td>
+		<td><%=StringUtils.nullToStr(wxcldProduct.get("product_remark")) %></td>		 
 	</tr>
 	<% 
 	}

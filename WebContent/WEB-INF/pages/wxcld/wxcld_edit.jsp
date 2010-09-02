@@ -8,9 +8,10 @@ OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
 Map wxclds=(Map)VS.findValue("wxclds");
 List wxcldProducts=(List)VS.findValue("wxcldProducts");
 String[] wxlx=(String[])VS.findValue("wxlx");
-int counts = 2;
+int counts = 3;
+
 if(wxcldProducts != null && wxcldProducts.size()>0){
-	counts = wxcldProducts.size() - 1;
+	counts = wxcldProducts.size();
 } 
  %>
 <html>
@@ -64,30 +65,40 @@ if(wxcldProducts != null && wxcldProducts.size()>0){
 				}
 			}
 	   }  
-	   
+	  
 	   //判断是否存在没有输入序列号的商品
 		for(var i=0;i<allCount;i++){			
 			var qzserialnum = document.getElementById("product_serial_num_" + i); //序列号
 			var pn = document.getElementById("product_name_" + i);           //商品名称
 			var nqzserialnum = document.getElementById("n_product_serial_num_" + i); //新序列号
 			var product_clfs = document.getElementById("product_clfs_" + i); //处理方式
+			var qz_flag = document.getElementById("qz_flag_" + i); //是否强制序列号
 			
-			if(pn.value != ""){
-			  if(qzserialnum.value == ""){
-			    //如果没有输入序列号提示用户输入序列号
-			    alert("未输入商品" + pn.value + "序列号，请先输入序列号！");
-			    qzserialnum.focus();
-			    return;
-			   }
+			if(qz_flag != null)
+			{
+			    
+				if(qz_flag.value == "是")
+				{			     
+				
+			        if(qzserialnum.value == "")
+			        {
+			         //如果没有输入序列号提示用户输入序列号
+			           alert("未输入商品" + pn.value + "序列号，请先输入序列号！");
+			           qzserialnum.focus();
+			           return;
+			         }
 			 
-			   if(product_clfs.value=="换件"){
-			      if(nqzserialnum.value == ""){
-			      //如果没有输入序列号提示用户输入序列号
-			        alert("未输入商品" + pn.value + "新序列号，请先输入新序列号！");
-			        nqzserialnum.focus();
-			        return;
-			      }
-			   }
+			        if(product_clfs.value=="换件")
+			        {
+			          if(nqzserialnum.value == "")
+			          {
+			            //如果没有输入序列号提示用户输入序列号
+			            alert("未输入商品" + pn.value + "新序列号，请先输入新序列号！");
+			            nqzserialnum.focus();
+			            return;
+			          }
+			        }			      
+			    }  
 			 }
 		} 	    	   	    
 	   
@@ -126,6 +137,7 @@ if(wxcldProducts != null && wxcldProducts.size()>0){
 		  document.getElementById("product_gmts_"+ sel).value="";
 		  document.getElementById("product_clfs_"+ sel).value="";
 		  document.getElementById("product_serial_num_"+ sel).value="";
+		  document.getElementById("qz_flag_"+ sel).value="";
 		  document.getElementById("n_product_serial_num_"+ sel).value="";
 		  document.getElementById("product_remark_"+ sel).value="";      
     }	
@@ -354,12 +366,12 @@ if(wxcldProducts != null && wxcldProducts.size()>0){
 		<td width="5%">选择</td>
 		<td width="15%">商品名称</td>
 		<td width="15%">商品规格</td> 
-		<td width="10%">故障类型</td>
+		<td width="20%">故障类型</td>
 		<td width="5%">购买天数</td>
 		<td width="5%">处理方式</td>	
-		<td width="15%">序列号</td>	
-		<td width="15%">新序列号</td>
-		<td width="15%">备注</td>		 
+		<td width="12%">序列号</td>	
+		<td width="12%">新序列号</td>
+		<td width="10%">备注</td>		 
 	</tr>
 	</thead>
  <%
@@ -367,27 +379,27 @@ if(wxcldProducts != null && wxcldProducts.size()>0){
  {
       for(int i=0;i<wxcldProducts.size();i++)
       {	
-		         WxcldProduct wxcldProduct= (WxcldProduct)wxcldProducts.get(i);
+		         Map wxcldProduct= (Map)wxcldProducts.get(i);
  %>
  <tr>
        <td class="a2"><input type="checkbox" name="proc_id" id="proc_id" value="<%=i %>"></td>
        <td class="a2">
-			<input type="text" id="product_name_<%=i %>" name="wxcldProducts[<%=i %>].product_name" value="<%=StringUtils.nullToStr(wxcldProduct.getProduct_name()) %>" size="25">			
-			<input type="hidden" id="product_id_<%=i %>" name="wxcldProducts[<%=i %>].product_id" value="<%=StringUtils.nullToStr(wxcldProduct.getProduct_id()) %>">				
+			<input type="text" id="product_name_<%=i %>" name="wxcldProducts[<%=i %>].product_name" value="<%=StringUtils.nullToStr(wxcldProduct.get("product_name")) %>" style="width:100%;">			
+			<input type="hidden" id="product_id_<%=i %>" name="wxcldProducts[<%=i %>].product_id" value="<%=StringUtils.nullToStr(wxcldProduct.get("product_id")) %>">				
 		</td>
 		<td class="a2">
-			<input type="text" id="product_xh_<%=i %>" name="wxcldProducts[<%=i %>].product_xh" value="<%=StringUtils.nullToStr(wxcldProduct.getProduct_xh()) %>" size="25">
+			<input type="text" id="product_xh_<%=i %>" name="wxcldProducts[<%=i %>].product_xh" value="<%=StringUtils.nullToStr(wxcldProduct.get("product_xh")) %>" style="width:100%;">
 		</td>
 	    
 	    <td class="a2">
-	        <select name="wxcldProducts[<%=i %>].product_wxlx" id="product_wxlx_<%=i %>">
+	        <select name="wxcldProducts[<%=i %>].product_wxlx" id="product_wxlx_<%=i %>" style="width:90%;">
 			 <option value=""></option>
 			  <%
 			   if(wxlx != null && wxlx.length>0){
 			     for(int j=0;j<wxlx.length;j++){
 			       String szd=wxlx[j];
 			 %>
-			      <option value="<%=szd %>" <%if(!(StringUtils.nullToStr(wxcldProduct.getProduct_wxlx()).equals("")))out.print("selected"); %>><%=szd %></option>
+			      <option value="<%=szd %>" <%if(szd.equals(wxcldProduct.get("product_wxlx"))) out.print("selected"); %>><%=szd %></option>
 			 <%
 			      }
 			   }
@@ -395,23 +407,24 @@ if(wxcldProducts != null && wxcldProducts.size()>0){
 			</select>
 	    </td>
 	    <td class="a2">
-			<input type="text" id="product_gmts_<%=i %>" name="wxcldProducts[<%=i %>].product_gmts" value="<%=StringUtils.nullToStr(wxcldProduct.getProduct_gmts())%>"  size="3">
+			<input type="text" id="product_gmts_<%=i %>" name="wxcldProducts[<%=i %>].product_gmts" value="<%=StringUtils.nullToStr(wxcldProduct.get("product_gmts"))%>"  size="3">
 		</td>
 		<td class="a2">
 			<select name="wxcldProducts[<%=i %>].product_clfs" id="product_clfs_<%=i %>" onchange="chgClfsTyle(this.value,<%=i%>);">
 		 	 <option value=""></option>
-			     <option value="维修" <%if(StringUtils.nullToStr(wxcldProduct.getProduct_clfs()).equals("维修"))out.print("selected"); %>>维修</option>                   
-				 <option value="换件" <%if(StringUtils.nullToStr(wxcldProduct.getProduct_clfs()).equals("换件"))out.print("selected"); %>>换件</option>                    		      
+			     <option value="维修" <%if(StringUtils.nullToStr(wxcldProduct.get("product_clfs")).equals("维修"))out.print("selected"); %>>维修</option>                   
+				 <option value="换件" <%if(StringUtils.nullToStr(wxcldProduct.get("product_clfs")).equals("换件"))out.print("selected"); %>>换件</option>                    		      
 			</select>
 		</td>		
 		<td class="a2">
-			<input type="text" id="product_serial_num_<%=i %>" name="wxcldProducts[<%=i %>].product_serial_num" value="<%=StringUtils.nullToStr(wxcldProduct.getProduct_serial_num())%>"  size="10">
+			<input type="text" id="product_serial_num_<%=i %>" name="wxcldProducts[<%=i %>].product_serial_num" value="<%=StringUtils.nullToStr(wxcldProduct.get("product_serial_num"))%>"  style="width:100%;">
+		    <input type="hidden" id="qz_flag_<%=i %>" name="wxcldProducts[<%=i %>].qz_flag" value="<%=StringUtils.nullToStr(wxcldProduct.get("qz_flag")) %>">
 		</td>	
 		<td class="a2">
-			<input type="text" id="n_product_serial_num_<%=i %>" name="wxcldProducts[<%=i %>].n_product_serial_num" value="<%=StringUtils.nullToStr(wxcldProduct.getN_product_serial_num())%>" size="10" onblur="sendSerialNum(this,<%=i%>);" onkeypress="javascript:f_enter(this,<%=i%>);" onkeydown="javascript:f_enter(this,<%=i%>);">
+			<input type="text" id="n_product_serial_num_<%=i %>" name="wxcldProducts[<%=i %>].n_product_serial_num" value="<%=StringUtils.nullToStr(wxcldProduct.get("n_product_serial_num"))%>" style="width:100%;" onblur="sendSerialNum(this,<%=i%>);" onkeypress="javascript:f_enter(this,<%=i%>);" onkeydown="javascript:f_enter(this,<%=i%>);">
 		</td>	
 		<td class="a2">
-		    <input type="text" id="product_remark_<%=i %>" name="wxcldProducts[<%=i %>].product_remark" value="<%=StringUtils.nullToStr(wxcldProduct.getProduct_remark())%>" size="10">
+		    <input type="text" id="product_remark_<%=i %>" name="wxcldProducts[<%=i %>].product_remark" value="<%=StringUtils.nullToStr(wxcldProduct.get("product_remark"))%>" style="width:100%;">
 		</td>
 	</tr>
 	<%
@@ -423,16 +436,16 @@ if(wxcldProducts != null && wxcldProducts.size()>0){
 <tr>
        <td class="a2"><input type="checkbox" name="proc_id" id="proc_id" value="<%=i %>"></td>
        <td class="a2">
-			<input type="text" id="product_name_<%=i %>" name="wxcldProducts[<%=i %>].product_name"  size="25">
+			<input type="text" id="product_name_<%=i %>" name="wxcldProducts[<%=i %>].product_name"  style="width:100%;">
 			<input type="button" name="selectButton" value="选择" class="css_button" onclick="openWin(<%=i %>);">
 			<input type="hidden" id="product_id_<%=i %>" name="wxcldProducts[<%=i %>].product_id" >				
 		</td>
 		<td class="a2">
-			<input type="text" id="product_xh_<%=i %>" name="wxcldProducts[<%=i %>].product_xh"  size="25">
+			<input type="text" id="product_xh_<%=i %>" name="wxcldProducts[<%=i %>].product_xh"  style="width:100%;">
 		</td>
 	    
 	    <td class="a2">
-	        <select name="wxcldProducts[<%=i %>].product_wxlx" id="product_wxlx_<%=i %>">
+	        <select name="wxcldProducts[<%=i %>].product_wxlx" id="product_wxlx_<%=i %>" style="width:90%;">
 			 <option value=""></option>
 			  <%
 			   if(wxlx != null && wxlx.length>0){
@@ -450,20 +463,21 @@ if(wxcldProducts != null && wxcldProducts.size()>0){
 			<input type="text" id="product_gmts_<%=i %>" name="wxcldProducts[<%=i %>].product_gmts"   size="5">
 		</td>
 		<td class="a2">
-			<select name="wxcldProducts[<%=i %>].product_clfs" id="product_clfs_<%=i %>" onchange="chgClfsTyle(this.value,<%=i%>);">
+			<select name="wxcldProducts[<%=i %>].product_clfs" id="product_clfs_<%=i %>" onchange="chgClfsTyle(this.value,<%=i%>);" >
 		 	 <option value=""></option>
 			     <option value="维修">维修</option>                   
 				 <option value="换件">换件</option>                    		      
 			</select>
 		</td>		
 		<td class="a2">
-			<input type="text" id="product_serial_num_<%=i %>" name="wxcldProducts[<%=i %>].product_serial_num"  size="10">
+			<input type="text" id="product_serial_num_<%=i %>" name="wxcldProducts[<%=i %>].product_serial_num"  style="width:100%;">
 		</td>	
 		<td class="a2">
-			<input type="text" id="n_product_serial_num_<%=i %>" name="wxcldProducts[<%=i %>].n_product_serial_num"  size="10" onkeypress="javascript:f_enter(this,<%=i%>);" onkeydown="javascript:f_enter(this,<%=i%>);" onblur="sendSerialNum(this,<%=i%>);">
+			<input type="text" id="n_product_serial_num_<%=i %>" name="wxcldProducts[<%=i %>].n_product_serial_num"  style="width:100%;" onkeypress="javascript:f_enter(this,<%=i%>);" onkeydown="javascript:f_enter(this,<%=i%>);" onblur="sendSerialNum(this,<%=i%>);">
+		    <input type="hidden" id="qz_flag_<%=i %>" name="wxcldProducts[<%=i %>].qz_flag">
 		</td>	
 		<td class="a2">
-		    <input type="text" id="product_remark_<%=i %>" name="wxcldProducts[<%=i %>].product_remark"  size="10">
+		    <input type="text" id="product_remark_<%=i %>" name="wxcldProducts[<%=i %>].product_remark"  style="width:100%;">
 		</td>
 	</tr>
 
