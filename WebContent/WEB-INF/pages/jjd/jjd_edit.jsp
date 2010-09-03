@@ -223,8 +223,10 @@ session.removeAttribute("messages");
 			var qzserialnum = document.getElementById("qz_serial_num_"+i); //序列号
 			var pn = document.getElementById("product_name_" + i);           //商品名称
 			
+			var qzflag = document.getElementById("qz_flag_" + i);            //标志是否强制输入
 			 
-				 if(pn!=null&&pn.value!="")
+			if(qzflag != null){
+				if(qzflag.value == "是")
 				 {
 				     
 					if(qzserialnum.value == "")
@@ -248,7 +250,8 @@ session.removeAttribute("messages");
 							return;
 						}
 					}
-			     }			 
+			     }	
+			 }		 
 		}
 		  
 		if(document.getElementById("state").value == "已提交"){

@@ -6,16 +6,14 @@
 <%
 OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
 Jjd jjd = (Jjd)VS.findValue("jjd");
-List jjdProducts = (List)VS.findValue("jjdProducts");
- 
+List jjdProducts = (List)VS.findValue("jjdProducts"); 
 
 int counts = 2;
 if(jjdProducts != null && jjdProducts.size()>0){
 	counts = jjdProducts.size() - 1;
 }
-
  
- List msg = (List)session.getAttribute("messages");
+List msg = (List)session.getAttribute("messages");
 session.removeAttribute("messages");
 %>
 <html>
@@ -225,11 +223,10 @@ session.removeAttribute("messages");
 		 
 			var qzserialnum = document.getElementById("qz_serial_num_"+i); //序列号
 			var pn = document.getElementById("product_name_" + i);           //商品名称
-			
+			var qzflag = document.getElementById("qz_flag_" + i);            //标志是否强制输入
 			 
-				 if(pn!=null&&pn.value!="")
-				 {
-				     
+			if(qzflag != null){
+				if(qzflag.value == "是"){				     
 					if(qzserialnum.value == "")
 					{
 						//如果没有输入序列号提示用户输入序列号
@@ -251,7 +248,8 @@ session.removeAttribute("messages");
 							return;
 						}
 					}
-			     }			 
+			     }	
+			}		 
 		}
 		  
 		if(document.getElementById("state").value == "已提交"){
@@ -491,6 +489,7 @@ session.removeAttribute("messages");
 		document.getElementById("product_xh_" + sel).value = "";
 		document.getElementById("nums_" + sel).value = "0";
 		document.getElementById("qz_serial_num_" + sel).value = "";
+		document.getElementById("qz_flag_" + sel).value = "";
 		document.getElementById("cpfj_" + sel).value = "";
 		document.getElementById("fxts_" + sel).value = "";
 		document.getElementById("hjk_" + sel).value="";
@@ -500,7 +499,7 @@ session.removeAttribute("messages");
 </head>
 <body onload="initFzrTip();initClientTip();">
 <form name="jjdForm" action="saveJjd.html" method="post">
-<input type="hidden" name="jjd.state" id="state" value="">
+t<input type="hidden" name="jjd.state" id="state" value="">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
