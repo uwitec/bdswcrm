@@ -109,7 +109,7 @@ public class JjdDAO extends JdbcBaseDAO {
 				JjdProduct jjdProduct=(JjdProduct)jjdProducts.get(i);
 				 if(jjdProduct!=null)					
 				 {
-				   if(!jjdProduct.getProduct_name().equals("")&&!jjdProduct.getQz_serial_num().equals(""))
+				   if(!jjdProduct.getProduct_name().equals(""))
 				   {
 					 sql="insert into jjd_product(jjd_id,product_id,product_name,product_xh,qz_serial_num,remark,nums,cpfj,store_id,storestate,fxts)values(?,?,?,?,?,?,?,?,?,?,?)";
 				     
