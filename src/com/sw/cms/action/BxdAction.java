@@ -181,6 +181,15 @@ public class BxdAction extends BaseAction
             		wxszd = sjzdService.getSjzdXmxxByZdId("SJZD_WXSZD");
             		return "input";
             	} 
+                //判断库存是否满足要求            	
+            	msg = bxdService.checkKc(bxd, bxdProducts);
+				if(!msg.equals(""))
+				{
+            		bxd.setState("已保存");
+            		wxszd = sjzdService.getSjzdXmxxByZdId("SJZD_WXSZD");
+            		return "input";
+            	}
+            	
             	//保存信息
             	bxdService.saveBxd(bxd, bxdProducts);
             }
