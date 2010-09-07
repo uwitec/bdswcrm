@@ -499,7 +499,7 @@ session.removeAttribute("messages");
 </head>
 <body onload="initFzrTip();initClientTip();">
 <form name="jjdForm" action="saveJjd.html" method="post">
-t<input type="hidden" name="jjd.state" id="state" value="">
+<input type="hidden" name="jjd.state" id="state" value="">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
