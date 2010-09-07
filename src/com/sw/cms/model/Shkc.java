@@ -21,10 +21,16 @@ public class Shkc
 	  private  String lxdh ;                     //联系电话
 	  private  String address ;                    //地址
 	  private   double  wxf;                       //维修费
-	  
+	  private  int nums ;                          //数量
 	  
 	  private  String store_id ;                  //仓库编号
 	  
+	  public int getNums() {
+			return nums;
+		}
+		public void setNums(int nums) {
+			this.nums = nums;
+		}
 	  
 	public double getWxf() {
 		return wxf;
