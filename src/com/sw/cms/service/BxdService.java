@@ -12,10 +12,13 @@ import com.sw.cms.model.Ckd;
 import com.sw.cms.model.CkdProduct;
 import com.sw.cms.model.Lsd;
 import com.sw.cms.model.LsdProduct;
+import com.sw.cms.model.Product;
+import com.sw.cms.model.Shkc;
 import com.sw.cms.model.Page;
 import com.sw.cms.model.SerialNumFlow;
 import com.sw.cms.model.SerialNumMng;
 import com.sw.cms.model.ShSerialNumFlow;
+import com.sw.cms.model.Xsd;
 import com.sw.cms.util.DateComFunc;
 import com.sw.cms.util.StaticParamDo;
 
@@ -58,17 +61,66 @@ public class BxdService {
 					{
 						if(!bxdProduct.getProduct_id().equals("") && !bxdProduct.getProduct_name().equals(""))
 						{
-							String[] arryNums = (bxdProduct.getQz_serial_num()).split(",");
+							if(!bxdProduct.getQz_serial_num().equals(""))
+							{
+						    	String[] arryNums = (bxdProduct.getQz_serial_num()).split(",");
 							
-							for(int k=0;k<arryNums.length;k++)
-						   {	
-                             shkcDao.updateShkcState(arryNums[k], "2");
-						   }  
+							    for(int k=0;k<arryNums.length;k++)
+						        {	
+                                  shkcDao.updateShkcState(arryNums[k], "2");
+						        }
+							}
+							else
+							{
+								Shkc shkc = (Shkc)shkcDao.getShkc(bxdProduct.getProduct_id(),"1");
+								if((shkc.getNums()-bxdProduct.getNums())==0)
+								{
+								    shkcDao.updateShkcStateAll(bxdProduct.getProduct_id(),bxdProduct.getNums(),"2","1");
+								}
+								else
+								{
+									shkcDao.updateShkcNums(bxdProduct.getProduct_id(),bxdProduct.getNums(),"2","1");
+									shkcDao.updateShkcStateNums(bxdProduct.getProduct_id(),bxdProduct.getNums(),"2","1");
+								}
+								
+							}
 						}
 					}
 				}
 			}
 		}
+	}
+	
+	/**
+	 * 判断库存量是否满足报修处理
+	 * @param ckd
+	 * @param ckdProducts
+	 */
+	public String checkKc(Bxd bxd,List bxdProducts){
+		String msg = "";
+		
+		if(bxdProducts != null && bxdProducts.size()>0){
+			for(int i=0;i<bxdProducts.size();i++){
+				BxdProduct bxdProduct = (BxdProduct)bxdProducts.get(i);
+				if(bxdProduct != null){
+					if(!bxdProduct.getProduct_id().equals("") && !bxdProduct.getProduct_name().equals("")){
+						String product_id = bxdProduct.getProduct_id();
+						
+						//进行库存数量判断
+						Shkc shkc = (Shkc)shkcDao.getShkc(product_id,"1");
+						
+							int cknums = bxdProduct.getNums();  //要报修数量
+							int kcnums = shkc.getNums();//库存数量
+							
+							if(cknums>kcnums){
+								msg += bxdProduct.getProduct_name() + " 当前库存为：" + kcnums + "  无法进行报修处理\n";
+							}						
+					}
+				}
+			}
+		}
+		
+		return msg;
 	}
 	
 	/**
@@ -149,13 +201,31 @@ public class BxdService {
 					if(bxdProduct != null)
 					{
 						if(!bxdProduct.getProduct_id().equals("") && !bxdProduct.getProduct_name().equals(""))
-						{
-                           String[] arryNums = (bxdProduct.getQz_serial_num()).split(",");
-							
-							for(int k=0;k<arryNums.length;k++)
+						{  
+							if((bxdProduct.getQz_serial_num() != null) && (!bxdProduct.getQz_serial_num().equals("")))
 						   {
-                              shkcDao.updateShkcState(arryNums[k], "2");
-						   }   
+                              String[] arryNums = (bxdProduct.getQz_serial_num()).split(",");
+							   
+							  for(int k=0;k<arryNums.length;k++)
+						      {
+                                shkcDao.updateShkcState(arryNums[k], "2");
+						      } 
+						    }
+							else
+							{
+								Shkc shkc = (Shkc)shkcDao.getShkc(bxdProduct.getProduct_id(),"1");
+								if((shkc.getNums()-bxdProduct.getNums())==0)
+								{
+								    shkcDao.updateShkcStateAll(bxdProduct.getProduct_id(),bxdProduct.getNums(),"2","1");
+								}
+								else
+								{
+									shkcDao.updateShkcNums(bxdProduct.getProduct_id(),bxdProduct.getNums(),"2","1");
+									shkcDao.updateShkcStateNums(bxdProduct.getProduct_id(),bxdProduct.getNums(),"2","1");
+								}
+								
+							}
+							
 						}
 					}
 				}

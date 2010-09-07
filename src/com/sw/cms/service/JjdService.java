@@ -211,10 +211,12 @@ public class JjdService {
 	public String isSerialNumInKcExist(List jjdProducts)
 	{
 		String message="";
-		String serialNumStr[]=getSerialNum(jjdProducts).toString().split(",");	
-		 
-		if(serialNumStr.length!=0)
+		if(!getSerialNum(jjdProducts).toString().equals(""))
 		{
+		  String serialNumStr[]=getSerialNum(jjdProducts).toString().split(",");	
+		 
+		  if(serialNumStr.length!=0)
+		  {
 			
 			for(int i=0;i<serialNumStr.length;i++)
 			{
@@ -225,6 +227,7 @@ public class JjdService {
 				   break;
 			   }
 			}
+		  }
 		}
 		 
 		return message;
