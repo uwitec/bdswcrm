@@ -33,9 +33,9 @@ List kcpdDescs = (List)VS.findValue("kcpdDesc");
 	</tr>	
 	<tr>
 		<td class="a1" width="15%">仓库名称</td>
-		<td class="a2" width="35%"><%=StringUtils.nullToStr(kcpd.getStore_id()) %></td>		
+		<td class="a2" width="35%"><%=StaticParamDo.getStoreNameById(StringUtils.nullToStr(kcpd.getStore_id())) %></td>		
 		<td class="a1" width="15%">盘点人</td>
-		<td class="a2" width="35%"><%=StringUtils.nullToStr(kcpd.getPdr()) %></td>		
+		<td class="a2" width="35%"><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(kcpd.getPdr())) %></td>		
 	</tr>
 	<tr>
 		<td class="a1" width="15%">状态</td>
