@@ -37,10 +37,10 @@ public class KfdbService {
 	public void saveKfdb(Kfdb kfdb,List kfdbProducts){
 		kfdbDao.saveKfdb(kfdb, kfdbProducts);
 		
-		if(kfdb.getState().equals("已出库")){ //改变库存值
-			this.updateKc(kfdb, kfdbProducts);
-			this.updateSerialNum(kfdb, kfdbProducts); //处理序列号
-		}
+//		if(kfdb.getState().equals("已出库")){ //改变库存值
+//			this.updateKc(kfdb, kfdbProducts);
+//			this.updateSerialNum(kfdb, kfdbProducts); //处理序列号
+//		}
 	}
 	
 	
@@ -52,10 +52,26 @@ public class KfdbService {
 	public void updateKfdb(Kfdb kfdb,List kfdbProducts){
 		kfdbDao.updateKfdb(kfdb, kfdbProducts);
 		
-		if(kfdb.getState().equals("已出库")){ //改变库存值
+//		if(kfdb.getState().equals("已出库")){ //改变库存值
+//			this.updateKc(kfdb, kfdbProducts);
+//			this.updateSerialNum(kfdb, kfdbProducts);//处理序列号
+//		}
+		
+		if(kfdb.getState().equals("已入库")){ 
+			//确认入库
 			this.updateKc(kfdb, kfdbProducts);
 			this.updateSerialNum(kfdb, kfdbProducts);//处理序列号
 		}
+	}
+	
+	
+	/**
+	 * 获取用户待确认的库房调拨列表
+	 * @param user_id
+	 * @return
+	 */
+	public List getConfirmKfdbList(String user_id){
+		return kfdbDao.getConfirmKfdbList(user_id);
 	}
 	
 	

@@ -379,6 +379,22 @@ public class UserAction extends BaseAction {
 	
 	
 	/**
+	 * 重置密码
+	 * @return
+	 */
+	public String resetPass(){
+		try{
+			userService.updatePass(user_name, "111111");
+			this.setMsg("密码重置成功，默认为：111111,请通知用户及时修改！");
+			return SUCCESS;
+		}catch(Exception e){
+			this.setMsg("重置密码失败，请与管理员联系！");
+			return ERROR;
+		}
+	}
+	
+	
+	/**
 	 * 修改用户密码
 	 * @return
 	 */

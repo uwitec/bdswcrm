@@ -257,7 +257,7 @@ public class KcMxReportDAO extends JdbcBaseDAO {
 		
 		
 		//调拨单入库数量
-		String sql_db = "select sum(a.nums) as rk_nums from kfdb_product a left join kfdb b on b.id=a.kfdb_id where b.state='已出库'";
+		String sql_db = "select sum(a.nums) as rk_nums from kfdb_product a left join kfdb b on b.id=a.kfdb_id where b.state='已入库'";
 		
 		if(!product_id.equals("")){
 			sql_db = sql_db + " and a.product_id='" + product_id + "'";
@@ -331,7 +331,7 @@ public class KcMxReportDAO extends JdbcBaseDAO {
 		
 		
 		//调拨单出库数量
-		String sql_db = "select sum(a.nums) as ck_nums from kfdb_product a left join kfdb b on b.id=a.kfdb_id where b.state='已出库'";
+		String sql_db = "select sum(a.nums) as ck_nums from kfdb_product a left join kfdb b on b.id=a.kfdb_id where b.state='已入库'";
 		
 		if(!product_id.equals("")){
 			sql_db = sql_db + " and a.product_id='" + product_id + "'";

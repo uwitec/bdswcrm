@@ -220,12 +220,9 @@ public class XstjXsryDAO extends JdbcBaseDAO {
 	}
 	
 	
-	
-	//2009-10-10修改业务员考核毛利
-	
-	
 	/**
-	 * 业务员毛利汇总
+	 * 业务员毛利汇总<BR>
+	 * 包括：销售毛利、考核毛利、预估毛利<BR>
 	 * @param start_date   开始时间
 	 * @param end_date     结束时间
 	 * @param dept_id      部门编号
@@ -233,7 +230,7 @@ public class XstjXsryDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public List getYwymlHz(String start_date,String end_date,String dept_id,String user_id){
-		String sql = "select b.dept,a.xsry,b.real_name,sum(a.hjje) as xsje,sum(a.bhsje) as bhsje,sum(a.cb) as cb,sum(a.khcb) as khcb from product_sale_flow a left join sys_user b on b.user_id=a.xsry where 1=1";
+		String sql = "select b.dept,a.xsry,b.real_name,sum(a.hjje) as xsje,sum(a.bhsje) as bhsje,sum(a.cb) as cb,sum(a.khcb) as khcb,sum(a.ygcb) as ygcb from product_sale_flow a left join sys_user b on b.user_id=a.xsry where 1=1";
 		
 		if(!start_date.equals("")){
 			sql += " and a.cz_date>='" + start_date + "'";
@@ -254,14 +251,15 @@ public class XstjXsryDAO extends JdbcBaseDAO {
 	
 	
 	/**
-	 * 业务员毛利汇总明细
+	 * 业务员毛利汇总明细<BR>
+	 * 包括：销售毛利、考核毛利、预估毛利<BR>
 	 * @param start_date
 	 * @param end_date
 	 * @param user_id
 	 * @return
 	 */
 	public List getYwymlMx(String start_date,String end_date,String user_id){
-		String sql = "select a.cz_date,a.id,a.yw_type,a.client_name,b.product_name,a.product_id,b.product_xh,a.nums,a.price,a.hjje,a.bhsje,a.dwcb,a.cb,a.dwkhcb,a.khcb from product_sale_flow a join product b on b.product_id=a.product_id where 1=1";
+		String sql = "select a.cz_date,a.id,a.yw_type,a.client_name,b.product_name,a.product_id,b.product_xh,a.nums,a.price,a.hjje,a.bhsje,a.dwcb,a.cb,a.dwkhcb,a.khcb,a.dwygcb,a.ygcb from product_sale_flow a join product b on b.product_id=a.product_id where 1=1";
 		
 		if(!start_date.equals("")){
 			sql += " and a.cz_date>='" + start_date + "'";

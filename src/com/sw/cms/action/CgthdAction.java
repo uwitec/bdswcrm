@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.sw.cms.action.base.BaseAction;
 import com.sw.cms.model.Cgthd;
+import com.sw.cms.model.Clients;
 import com.sw.cms.model.LoginInfo;
 import com.sw.cms.model.Page;
 import com.sw.cms.service.CgthdService;
@@ -13,6 +14,7 @@ import com.sw.cms.service.StoreService;
 import com.sw.cms.service.SysInitSetService;
 import com.sw.cms.service.UserService;
 import com.sw.cms.util.Constant;
+import com.sw.cms.util.DateComFunc;
 
 public class CgthdAction extends BaseAction {
 	
@@ -80,6 +82,8 @@ public class CgthdAction extends BaseAction {
 	 */
 	public String add() {
 		id = cgthdService.updateCgthdID();
+		cgthd.setId(id);
+		cgthd.setTh_date(DateComFunc.getToday());
 		userList = userService.getAllEmployeeList();
 		storeList = storeService.getAllStoreList();
 		iscs_flag = sysInitSetService.getQyFlag();
@@ -95,6 +99,35 @@ public class CgthdAction extends BaseAction {
 		LoginInfo info = (LoginInfo)getSession().getAttribute("LOGINUSER");
 		String user_id = info.getUser_id();
 		cgthd.setCzr(user_id);
+		
+		iscs_flag = sysInitSetService.getQyFlag();  //系统是否完成标志
+		//只有在系统正式启用后才去判断库存是否满足需求
+		if(iscs_flag.equals("1")){
+			 
+			if(!cgthd.getState().equals("已保存")){
+				 
+				msg = cgthdService.checkKc(cgthd, cgthdProducts);
+				if(!msg.equals("")){
+					 
+					cgthd.setState("已保存");
+					
+					if(cgthdService.getCgthd(cgthd.getId()) == null){
+						cgthdService.saveCgthd(cgthd, cgthdProducts);
+					}else{
+						cgthdService.updateCgthd(cgthd, cgthdProducts);
+					}
+					
+					userList = userService.getAllEmployeeList();
+					storeList = storeService.getAllStoreList();
+					iscs_flag = sysInitSetService.getQyFlag();
+					clientsList=clientsService.getClientList("");
+					
+					this.saveMessage(msg);
+					
+					return "input";
+				}
+			}
+		}
 		
 		cgthdService.saveCgthd(cgthd, cgthdProducts);
 		return "success";
@@ -135,6 +168,30 @@ public class CgthdAction extends BaseAction {
 		LoginInfo info = (LoginInfo)getSession().getAttribute("LOGINUSER");
 		String user_id = info.getUser_id();
 		cgthd.setCzr(user_id);
+		
+		iscs_flag = sysInitSetService.getQyFlag();  //系统是否完成标志
+		//只有在系统正式启用后才去判断库存是否满足需求
+		if(iscs_flag.equals("1")){
+			 
+			if(!cgthd.getState().equals("已保存")){
+				 
+				msg = cgthdService.checkKc(cgthd, cgthdProducts);
+				if(!msg.equals("")){
+					 
+					cgthd.setState("已保存");
+					cgthdService.updateCgthd(cgthd, cgthdProducts);
+					
+					userList = userService.getAllEmployeeList();
+					storeList = storeService.getAllStoreList();
+					iscs_flag = sysInitSetService.getQyFlag();
+					clientsList=clientsService.getClientList("");
+					
+					this.saveMessage(msg);
+					
+					return "input";
+				}
+			}
+		}
 		
 		cgthdService.updateCgthd(cgthd, cgthdProducts);
 		return "success";

@@ -8,6 +8,11 @@ import com.sw.cms.service.DeptService;
 import com.sw.cms.service.UserService;
 import com.sw.cms.service.XstjXsryService;
 
+/**
+ * 销售人员相关统计
+ * @author liyt
+ *
+ */
 public class XstjXsryAction extends BaseAction {
 	
 	private XstjXsryService xstjXsryService;
@@ -61,6 +66,28 @@ public class XstjXsryAction extends BaseAction {
 		return "success";
 	}
 	
+	
+	/**
+	 * 预估毛利汇总结果
+	 * @return
+	 */
+	public String getYgmlhzResult(){
+		try{
+			String con = "";
+			
+			if(!dept_id.equals("")){
+				con += " and dept like '" + dept_id + "%'";
+			}
+			if(!user_id.equals("")){
+				con += " and user_id='" + user_id + "'";
+			}
+			userList = userService.getYwryListByCon(con);
+			return SUCCESS;
+		}catch(Exception e){
+			e.printStackTrace();
+			return ERROR;
+		}
+	}
 	
 	public String getYwytcHzResult(){
 		return "success";

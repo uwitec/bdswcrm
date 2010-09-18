@@ -7,15 +7,16 @@ import java.util.Map;
 import com.sw.cms.action.base.BaseAction;
 import com.sw.cms.model.LoginInfo;
 import com.sw.cms.model.Page;
+import com.sw.cms.service.BwlService;
 import com.sw.cms.service.CgfkService;
 import com.sw.cms.service.FirstIndexService;
 import com.sw.cms.service.FysqService;
+import com.sw.cms.service.KfdbService;
 import com.sw.cms.service.LsdService;
 import com.sw.cms.service.MenuService;
 import com.sw.cms.service.UserService;
 import com.sw.cms.service.XsdService;
 import com.sw.cms.service.XxfbNbggService;
-import com.sw.cms.service.BwlService;
 import com.sw.cms.util.Constant;
 import com.sw.cms.util.StringUtils;
 
@@ -30,6 +31,7 @@ public class FirstIndexAction extends BaseAction {
 	private XsdService xsdService;
 	private CgfkService cgfkService;
 	private FysqService fysqService;
+	private KfdbService kfdbService;
 
 	private List nbggList = new ArrayList();
 	private List bwlList = new ArrayList();
@@ -39,6 +41,7 @@ public class FirstIndexAction extends BaseAction {
 	private List dspXsdList = new ArrayList();
 	private List dspCgfkList = new ArrayList();
 	private List dspFysqList = new ArrayList();
+	private List confirmKfdbList = new ArrayList();
 	
 	private String isCkdRight = "0"; 
 	private String isRkdRight = "0";
@@ -206,6 +209,7 @@ public class FirstIndexAction extends BaseAction {
 				dspFysqList = fysqService.getFysqList(" and (state='提交' or state='待审批')");
 			}
 			
+			confirmKfdbList = kfdbService.getConfirmKfdbList(user_id);
 			return SUCCESS;
 		}catch(Exception e){
 			log.error("取待办列表信息出错，错误原因：" + e.getMessage());
@@ -453,5 +457,25 @@ public class FirstIndexAction extends BaseAction {
 
 	public void setBwlService(BwlService bwlService) {
 		this.bwlService = bwlService;
+	}
+
+
+	public List getConfirmKfdbList() {
+		return confirmKfdbList;
+	}
+
+
+	public void setConfirmKfdbList(List confirmKfdbList) {
+		this.confirmKfdbList = confirmKfdbList;
+	}
+
+
+	public KfdbService getKfdbService() {
+		return kfdbService;
+	}
+
+
+	public void setKfdbService(KfdbService kfdbService) {
+		this.kfdbService = kfdbService;
 	}
 }

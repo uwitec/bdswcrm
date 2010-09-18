@@ -10,6 +10,7 @@ import com.sw.cms.dao.CgfkDAO;
 import com.sw.cms.dao.CgthdDAO;
 import com.sw.cms.dao.CkdDAO;
 import com.sw.cms.dao.JhdDAO;
+import com.sw.cms.dao.ProductDAO;
 import com.sw.cms.dao.ProductKcDAO;
 import com.sw.cms.dao.SerialNumDAO;
 import com.sw.cms.dao.SysInitSetDAO;
@@ -22,6 +23,7 @@ import com.sw.cms.model.CgthdProduct;
 import com.sw.cms.model.Ckd;
 import com.sw.cms.model.CkdProduct;
 import com.sw.cms.model.Page;
+import com.sw.cms.model.Product;
 import com.sw.cms.model.SerialNumFlow;
 import com.sw.cms.model.SerialNumMng;
 import com.sw.cms.model.Yufuk;
@@ -44,6 +46,7 @@ public class CgthdService {
 	private SysInitSetDAO sysInitSetDao;
 	private ProductKcDAO productKcDao;
 	private YufukDAO yufukDao;
+	private ProductDAO productDao;
 	
 	/**
 	 * 取采购退货单列表
@@ -380,6 +383,41 @@ public class CgthdService {
 		yufukDao.saveYufuk(yfk);
 	}
 	
+	
+	/**
+	 * 判断库存量是否满足出库需要
+	 * @param ckd
+	 * @param ckdProducts
+	 */
+	public String checkKc(Cgthd cgthd,List cgthdProducts){
+		String msg = "";
+		String store_id = cgthd.getStore_id();
+		
+		if(cgthdProducts != null && cgthdProducts.size()>0){
+			for(int i=0;i<cgthdProducts.size();i++){
+				CgthdProduct cgthdProduct = (CgthdProduct)cgthdProducts.get(i);
+				if(cgthdProduct != null){
+					if(!cgthdProduct.getProduct_id().equals("") && !cgthdProduct.getProduct_name().equals("")){
+						String product_id = cgthdProduct.getProduct_id();
+						
+						//判断商品是否是库存商品,只仍库存商品才进行库存数量判断
+						Product product = (Product)productDao.getProductById(product_id);
+						if(product.getProp().equals("库存商品")){	
+							int cknums = cgthdProduct.getNums();  //要出库数量
+							int kcnums = productKcDao.getKcNums(product_id, store_id);//库存数量
+							
+							if(cknums>kcnums){
+								msg += cgthdProduct.getProduct_name() + " 当前库存为：" + kcnums + "  无法退货，请先调拨\n";
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		return msg;
+	}
+	
 
 	public CgthdDAO getCgthdDao() {
 		return cgthdDao;
@@ -478,6 +516,16 @@ public class CgthdService {
 
 	public void setYufukDao(YufukDAO yufukDao) {
 		this.yufukDao = yufukDao;
+	}
+
+
+	public ProductDAO getProductDao() {
+		return productDao;
+	}
+
+
+	public void setProductDao(ProductDAO productDao) {
+		this.productDao = productDao;
 	}
 
 }

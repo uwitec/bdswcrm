@@ -7,6 +7,7 @@ import com.sw.cms.action.base.BaseAction;
 import com.sw.cms.model.LoginInfo;
 import com.sw.cms.model.Page;
 import com.sw.cms.model.Thd;
+import com.sw.cms.service.AccountsService;
 import com.sw.cms.service.ClientsService;
 import com.sw.cms.service.StoreService;
 import com.sw.cms.service.ThdService;
@@ -20,6 +21,7 @@ public class ThdAction extends BaseAction {
 	private StoreService storeService;
 	private UserService userService;
 	private ClientsService clientsService;
+	private AccountsService accountsService;
 
 	private Page pageThd;
 
@@ -79,6 +81,10 @@ public class ThdAction extends BaseAction {
 	 */
 	public String add() {
 		thd_id = thdService.updateThdId();
+		
+		thd.setThd_id(thd_id);
+		thd.setTh_date(DateComFunc.getToday());
+		
 		storeList = storeService.getAllStoreList();
 		return "success";
 	}
@@ -92,6 +98,24 @@ public class ThdAction extends BaseAction {
 		LoginInfo info = (LoginInfo)getSession().getAttribute("LOGINUSER");
 		String user_id = info.getUser_id();
 		thd.setCzr(user_id);
+		
+		//如查退货单状态是已入库，并且现金退货，需要判断账号金额是否足够
+		if(thd.getState().equals("已入库") && thd.getType().equals("现金")){
+			if(accountsService.isZhjeXyZero(thd.getTkzh(), thd.getThdje())){
+				this.setMsg("退款账户金额不足，请检查！");
+				
+				storeList = storeService.getAllStoreList();
+				
+				thd.setState("已保存");
+				if(thdService.getThd(thd.getThd_id()) == null){
+					thdService.saveThd(thd, thdProducts);
+				}else{
+					thdService.updateThd(thd, thdProducts);
+				}
+				
+				return "input";
+			}
+		}
 		
 		thdService.saveThd(thd, thdProducts);
 		return "success";
@@ -129,6 +153,20 @@ public class ThdAction extends BaseAction {
 		LoginInfo info = (LoginInfo)getSession().getAttribute("LOGINUSER");
 		String user_id = info.getUser_id();
 		thd.setCzr(user_id);
+		
+		//如查退货单状态是已入库，并且现金退货，需要判断账号金额是否足够
+		if(thd.getState().equals("已入库") && thd.getType().equals("现金")){
+			if(accountsService.isZhjeXyZero(thd.getTkzh(), thd.getThdje())){
+				this.setMsg("退款账户金额不足，请检查！");
+				
+				storeList = storeService.getAllStoreList();
+				
+				thd.setState("已保存");				
+				thdService.updateThd(thd, thdProducts);
+				
+				return "input";
+			}
+		}
 		
 		thdService.updateThd(thd, thdProducts);
 		return "success";
@@ -278,6 +316,14 @@ public class ThdAction extends BaseAction {
 
 	public void setTh_date2(String thDate2) {
 		th_date2 = thDate2;
+	}
+
+	public AccountsService getAccountsService() {
+		return accountsService;
+	}
+
+	public void setAccountsService(AccountsService accountsService) {
+		this.accountsService = accountsService;
 	}
 
 }

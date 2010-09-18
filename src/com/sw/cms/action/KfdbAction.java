@@ -21,6 +21,13 @@ import com.sw.cms.util.ParameterUtility;
 import com.sw.cms.util.StaticParamDo;
 import com.sw.cms.util.StringUtils;
 
+/**
+ * 库房调拨<BR>
+ * 状态包括：已保存、已出库、已入库三类<BR>
+ * 已入库状态即确认完成后的状态，确认完成做库存结算处理<BR>
+ * @author liyt
+ *
+ */
 public class KfdbAction extends BaseAction {
 	
 	private KfdbService kfdbService;
@@ -46,6 +53,7 @@ public class KfdbAction extends BaseAction {
 	private String id = "";
 	private String ck_date1 = DateComFunc.getToday();
 	private String ck_date2 = DateComFunc.getToday();
+	private String state = "";
 	private String orderName ="";
 	private String orderType ="";	
 	private int curPage = 1;
@@ -80,6 +88,9 @@ public class KfdbAction extends BaseAction {
 		}
 		if(!ck_date2.equals("")){
 			con += " and ck_date<='" + ck_date2 + "'";
+		}
+		if(!state.equals("")){
+			con += " and state='" + state + "'";
 		}
 		
 		if(orderName.equals("")){
@@ -210,13 +221,82 @@ public class KfdbAction extends BaseAction {
 			}
 		}
 		
-		//判断调拨单是否已经提交，如果已经提交返回成功，不做任何操作
-		if(kfdbService.isDbFinish(kfdb.getId())){
-			return SUCCESS;
-		}
-		
 		kfdbService.updateKfdb(kfdb, kfdbProducts);
 		return "success";
+	}
+	
+	
+	/**
+	 * 确认入库
+	 * @return
+	 */
+	public String confirm(){
+		try{
+			//判断调拨单是否已经提交，如果已经提交返回成功，不做任何操作
+			if(kfdbService.isDbFinish(id)){
+				return SUCCESS;
+			}
+			
+			LoginInfo info = (LoginInfo)getSession().getAttribute("LOGINUSER");
+			String user_id = info.getUser_id();
+			
+			kfdb = (Kfdb)kfdbService.getKfdb(id);
+			kfdbProducts = kfdbService.getKfdbProductsObj(id);
+			
+			kfdb.setState("已入库");
+			kfdb.setCzr(user_id);
+			
+			iscs_flag = sysInitSetService.getQyFlag();
+			//只有在系统正式启用后才去判断库存是否满足需求
+			if(iscs_flag.equals("1")){
+				if(kfdb.getState().equals("已入库")){
+					msg = kfdbService.checkKc(kfdb, kfdbProducts);
+					if(!msg.equals("")){
+						kfdb.setState("已出存");
+						kfdbService.updateKfdb(kfdb, kfdbProducts);
+						storeList = storeService.getAllStoreList();
+						return "input";
+					}
+				}
+			}
+			
+			kfdbService.updateKfdb(kfdb, kfdbProducts);
+			
+			return SUCCESS;
+		}catch(Exception e){
+			log.error("确认库房调拨入库出错，错误原因：" + e);
+			e.printStackTrace();
+			return ERROR;
+		}
+	}
+	
+	
+	/**
+	 * 待确认库房调拨单退回
+	 * @return
+	 */
+	public String doTh(){
+		try{
+			//判断调拨单是否已经提交，如果已经提交返回成功，不做任何操作
+			if(kfdbService.isDbFinish(id)){
+				return SUCCESS;
+			}
+			
+			LoginInfo info = (LoginInfo)getSession().getAttribute("LOGINUSER");
+			String user_id = info.getUser_id();
+			
+			kfdb = (Kfdb)kfdbService.getKfdb(id);
+			kfdbProducts = kfdbService.getKfdbProductsObj(id);
+			
+			kfdb.setState("已退回");
+			kfdb.setCzr(user_id);
+			
+			kfdbService.updateKfdb(kfdb, kfdbProducts);
+			
+			return SUCCESS;
+		}catch(Exception e){
+			return ERROR;
+		}
 	}
 	
 	
@@ -497,6 +577,16 @@ public class KfdbAction extends BaseAction {
 
 	public void setTitle_name(String title_name) {
 		this.title_name = title_name;
+	}
+
+
+	public String getState() {
+		return state;
+	}
+
+
+	public void setState(String state) {
+		this.state = state;
 	}
 
 }

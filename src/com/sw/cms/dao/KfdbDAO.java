@@ -34,6 +34,18 @@ public class KfdbDAO extends JdbcBaseDAO {
 	
 	
 	/**
+	 * 取用户待确认库房调拨
+	 * @param user_id
+	 * @return
+	 */
+	public List getConfirmKfdbList(String user_id){
+		String sql = "select * from kfdb where state='已出库' and rk_store_id in (SELECT szkf FROM sys_user where user_id='" + user_id + "')";
+		
+		return this.getResultList(sql,new KfdbRowMapper());
+	}
+	
+	
+	/**
 	 * 保存库房调拨相关信息
 	 * @param kfdb
 	 * @param kfdbProducts
@@ -161,13 +173,13 @@ public class KfdbDAO extends JdbcBaseDAO {
 	
 	
 	/**
-	 * 判断调拨单是否已经提交
+	 * 判断调拨单是否已经确认入库
 	 * @param id
 	 * @return
 	 */
 	public boolean isDbFinish(String id) {
 		boolean is = false;
-		String sql = "select count(*) from kfdb where id='" + id + "' and state='已出库'";
+		String sql = "select count(*) from kfdb where id='" + id + "' and state='已入库'";
 		int counts = this.getJdbcTemplate().queryForInt(sql);
 		if(counts > 0){
 			is = true;
@@ -263,7 +275,7 @@ public class KfdbDAO extends JdbcBaseDAO {
 			if(SqlUtil.columnIsExist(rs,"product_xh")) kfdbProduct.setProduct_xh(rs.getString("product_xh"));
 			if(SqlUtil.columnIsExist(rs,"nums")) kfdbProduct.setNums(rs.getInt("nums"));
 			if(SqlUtil.columnIsExist(rs,"dw")) kfdbProduct.setDw(rs.getString("dw"));
-			
+			if(SqlUtil.columnIsExist(rs,"qz_serial_num")) kfdbProduct.setQz_serial_num(rs.getString("qz_serial_num"));
 			return kfdbProduct;
 		}
 	}	
