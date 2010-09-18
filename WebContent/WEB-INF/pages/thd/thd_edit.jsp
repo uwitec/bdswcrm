@@ -14,8 +14,10 @@ List thdProducts = (List)VS.findValue("thdProducts");
 
 int counts = 2;
 if(thdProducts != null && thdProducts.size() > 0){
-	counts = thdProducts.size();
+	counts = thdProducts.size()-1;
 }
+
+String msg = StringUtils.nullToStr(VS.findValue("msg"));
 %>
 
 <html>
@@ -119,7 +121,57 @@ if(thdProducts != null && thdProducts.size() > 0){
 		document.thdForm.btnSave.disabled = true;
 		document.thdForm.btnSub.disabled = true;
 	}
-	
+
+
+    function addTr(){
+        var otr = document.getElementById("thtable").insertRow(-1);
+
+       // var curId = ($('xsdtable').rows.length-2);
+        var curId = allCount + 1;   //curId一直加下去，防止重复
+        allCount = allCount + 1;
+        
+        var otd0=document.createElement("td");
+        otd0.className = "a2";
+        otd0.innerHTML = '<input type="text" id="product_name_'+curId+'" name="thdProducts['+curId+'].product_name" readonly style="width:150px"><input type="button" name="selectButton" value="选择" class="css_button" onclick="openWin('+curId+');"><input type="hidden" id="product_id_'+curId+'" name="thdProducts['+curId+'].product_id">';
+        
+        var otd1 = document.createElement("td");
+        otd1.className = "a2";
+        otd1.innerHTML = '<input type="text" id="product_xh_'+curId+'"  name="thdProducts['+curId+'].product_xh" style="width:150px" readonly>';
+        
+        var otd2 = document.createElement("td");
+        otd2.className = "a2";
+        otd2.innerHTML = '<input type="text" id="th_price_'+curId+'" name="thdProducts['+curId+'].th_price" style="width:80px" value="0.00" onblur="hj();"><input type="hidden" id="cbj_'+curId+'" name="thdProducts['+curId+'].cbj" value="0.00"><input type="hidden" id="kh_cbj_'+curId+'" name="thdProducts['+curId+'].kh_cbj" value="0.00"><input type="hidden" id="sd_'+curId+'" name="thdProducts['+curId+'].sd"  value="0.00"><input type="hidden" id="gf_'+curId+'" name="thdProducts['+curId+'].gf"  value="0.00"><input type="hidden" id="ds_'+curId+'" name="thdProducts['+curId+'].ds"  value="0.00"><input type="hidden" id="basic_ratio_'+curId+'" name="thdProducts['+curId+'].basic_ratio"  value="0.00"><input type="hidden" id="out_ratio_'+curId+'" name="thdProducts['+curId+'].out_ratio"  value="0.00"><input type="hidden" id="lsxj_'+curId+'" name="thdProducts['+curId+'].lsxj"  value="0.00"><input type="hidden" id="ygcbj_'+curId+'" name="thdProducts['+curId+'].ygcbj"  value="0.00"><input type="hidden" id="sfcytc_'+curId+'" name="thdProducts['+curId+'].sfcytc"  value="">';
+        
+        var otd3 = document.createElement("td");
+        otd3.className = "a2";
+        otd3.innerHTML = '<input type="text" id="nums_'+curId+'" name="thdProducts['+curId+'].nums" style="width:60px" value="0" onblur="hj();">';
+        
+		var otd7 = document.createElement("td");
+		otd7.className = "a2";
+		otd7.innerHTML = '<input type="text" id="qz_serial_num_'+curId+'" name="thdProducts['+curId+'].qz_serial_num" style="width:120px" readonly><input type="hidden" id="qz_flag_'+curId+'" name="thdProducts['+curId+'].qz_flag"><a style="cursor:hand" title="点击输入序列号" onclick="openSerialWin('+ curId +');"><b>...</b></a>&nbsp;';               
+        
+        var otd4 = document.createElement("td");
+        otd4.className = "a2";
+        otd4.innerHTML = '<input type="text" id="xj_'+curId+'" name="thdProducts['+curId+'].xj" style="width:80px" value="0.00" readonly>';  
+        
+		var otd6 = document.createElement("td");
+		otd6.className = "a2";
+		otd6.innerHTML = '<input type="button" name="delButton" value="删除" class="css_button" onclick="delTr(this);">';
+		
+        otr.appendChild(otd0); 
+        otr.appendChild(otd1); 
+        otr.appendChild(otd2); 
+        otr.appendChild(otd3); 
+        otr.appendChild(otd7);
+        otr.appendChild(otd4); 
+        otr.appendChild(otd6);               
+     }	
+    
+	function delTr(i){
+		var tr = i.parentNode.parentNode;
+		tr.removeNode(true);
+	}   
+		
 	function openSerialWin(vl){
 		var pn = document.getElementById("product_name_" + vl).value;
 		var nm = document.getElementById("nums_" + vl).value;
@@ -281,9 +333,13 @@ if(thdProducts != null && thdProducts.size() > 0){
 		if(vl == "1"){
 			document.getElementById("client_name").style.display = '';
 			document.getElementById("client_id").style.display = 'none';
+			document.getElementById("btnXsd").style.display = '';
+			document.getElementById("btnLsd").style.display = 'none';
 		}else{
 			document.getElementById("client_name").style.display = 'none';
 			document.getElementById("client_id").style.display = '';
+			document.getElementById("btnXsd").style.display = 'none';
+			document.getElementById("btnLsd").style.display = '';
 		}
 		document.getElementById("client_name").value = "";
 		document.getElementById("client_id").value = "";
@@ -293,10 +349,33 @@ if(thdProducts != null && thdProducts.size() > 0){
 		if(vl == "1"){
 			document.getElementById("client_name").style.display = '';
 			document.getElementById("client_id").style.display = 'none';
+			document.getElementById("btnXsd").style.display = '';
+			document.getElementById("btnLsd").style.display = 'none';
 		}else{
 			document.getElementById("client_name").style.display = 'none';
 			document.getElementById("client_id").style.display = '';
+			document.getElementById("btnXsd").style.display = 'none';
+			document.getElementById("btnLsd").style.display = '';
 		}
+	}	
+
+	function selXsd(){
+		if(document.getElementById('client_id').value == ""){
+			alert("请先选择客户！");
+			return;
+		}
+		
+		var destination = "selXsd.html?creatdate1=&creatdate2=&client_name=" + document.getElementById('client_id').value;
+		var fea ='width=850,height=600,left=' + (screen.availWidth-850)/2 + ',top=' + (screen.availHeight-600)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		
+		window.open(destination,'关联销售单',fea);			
+	}
+	
+	function selLsd(){
+		var destination = "selLsd.html";
+		var fea ='width=850,height=600,left=' + (screen.availWidth-850)/2 + ',top=' + (screen.availHeight-600)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		
+		window.open(destination,'关联销售单',fea);		
 	}	
 </script>
 </head>
@@ -310,6 +389,11 @@ if(thdProducts != null && thdProducts.size() > 0){
 		<td colspan="4">销售退货单</td>
 	</tr>
 	</thead>
+	<%if(!msg.equals("")){ %>
+	<tr>
+		<td class="a2" colspan="4"><font color="red"><%=msg %></font></td>		
+	</tr>	
+	<%} %>		
 	<tr>
 		<td class="a1" width="15%">退货单编号</td>
 		<td class="a2">
@@ -469,6 +553,15 @@ if(thdProducts!=null && thdProducts.size()>0){
 	}
 }
 %>	
+</table>
+<table width="100%"  align="center" class="chart_info" cellpadding="0" cellspacing="0">
+	<tr height="35">
+		<td class="a2" colspan="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="button" name="button1" value="添加一行" class="css_button2" onclick="addTr();">
+			<input type="button" name="btnXsd" id="btnXsd" value="关联销售订单" class="css_button3" onclick="selXsd();">
+			<input type="button" name="btnLsd" id="btnLsd" value="关联零售单" style="display:none" class="css_button3" onclick="selLsd();">
+		</td>
+	</tr>
 </table>
 <table width="100%"  align="center" class="chart_info" cellpadding="0" cellspacing="0">
 	<tr>

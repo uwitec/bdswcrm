@@ -33,6 +33,13 @@ String real_name = (String)VS.findValue("real_name");
 			location.href = "delUser.html?user_id=" + id;
 		}
 	}
+
+	function resetPass(userName){
+		if(confirm("确定要重置该用户密码吗！")){
+			document.descForm.user_name.value = userName;
+			document.descForm.submit();
+		}
+	}
 	
 	function add(){
 		var destination = "addUser.html";
@@ -106,13 +113,13 @@ String real_name = (String)VS.findValue("real_name");
 <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
-		<td>选择</td>
-		<td onclick="doSort('user_id');">用户编号<%if(orderName.equals("user_id")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('user_name');">登录名<%if(orderName.equals("user_name")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('real_name');">真实姓名<%if(orderName.equals("real_name")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('gs_phone');">电话<%if(orderName.equals("gs_phone")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('mobile');">手机<%if(orderName.equals("mobile")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td>操作</td>
+		<td width="10%">选择</td>
+		<td width="10%" onclick="doSort('user_id');">用户编号<%if(orderName.equals("user_id")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="15%" onclick="doSort('user_name');">登录名<%if(orderName.equals("user_name")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="15%" onclick="doSort('real_name');">真实姓名<%if(orderName.equals("real_name")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="15%" onclick="doSort('gs_phone');">电话<%if(orderName.equals("gs_phone")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="15%" onclick="doSort('mobile');">手机<%if(orderName.equals("mobile")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="20%">操作</td>
 	</tr>
 	</thead>
 	<%
@@ -130,9 +137,10 @@ String real_name = (String)VS.findValue("real_name");
 		<td class="a1"><%=StringUtils.nullToStr(map.get("gs_phone")) %></td>
 		<td class="a1"><%=StringUtils.nullToStr(map.get("mobile")) %></td>
 		<td class="a1">
-			<a href="#" onclick="edit('<%=StringUtils.nullToStr(map.get("user_id")) %>');"><img src="images/modify.gif" align="absmiddle" title="修改用户信息" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
-			<a href="#" onclick="openWin('<%=StringUtils.nullToStr(map.get("user_id")) %>');"><img src="images/view.gif" align="absmiddle" title="查看用户信息" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
-			<a href="#" onclick="del('<%=StringUtils.nullToStr(map.get("user_id")) %>');"><img src="images/del.gif" align="absmiddle" title="删除该用户" border="0" style="cursor:hand"></a>
+			<a href="javascript:edit('<%=StringUtils.nullToStr(map.get("user_id")) %>');">修改</a>&nbsp;&nbsp;&nbsp;&nbsp;
+			<a href="javascript:openWin('<%=StringUtils.nullToStr(map.get("user_id")) %>');">查看</a>&nbsp;&nbsp;&nbsp;&nbsp;
+			<a href="javascript:del('<%=StringUtils.nullToStr(map.get("user_id")) %>');">删除</a>&nbsp;&nbsp;&nbsp;&nbsp;
+			<a href="javascript:resetPass('<%=StringUtils.nullToStr(map.get("user_name")) %>');">重置密码</a>
 		</td>
 	</tr>
 	
@@ -149,5 +157,9 @@ String real_name = (String)VS.findValue("real_name");
 	</tr>	
 </table>
 </form>
+<form name="descForm" action="resetPass.html" method="post" target="hiddenIframe">
+	<input type="hidden" name="user_name" value="">
+</form>
+<iframe name="hiddenIframe" id="hiddenIframe" width="0" height="0"/>
 </body>
 </html>

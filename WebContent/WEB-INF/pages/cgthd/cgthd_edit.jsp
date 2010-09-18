@@ -19,6 +19,8 @@ if(cgthdProducts != null && cgthdProducts.size()>0){
 //0：未完成；1：已完成
 String iscs_flag = StringUtils.nullToStr(VS.findValue("iscs_flag"));
 
+List msg = (List)session.getAttribute("messages");
+session.removeAttribute("messages");
 %>
 
 <html>
@@ -276,6 +278,18 @@ String iscs_flag = StringUtils.nullToStr(VS.findValue("iscs_flag"));
 		<td colspan="4">采购退货单信息</td>
 	</tr>
 	</thead>
+<%
+//如果有信息则显示
+if(msg != null && msg.size() > 0){
+	for(int i=0;i<msg.size();i++){
+%>
+	<tr>
+		<td colspan="4" class="a2"><font color="red"><%=StringUtils.nullToStr(msg.get(i)) %></font></td>
+	</tr>	
+<%
+	}
+}
+%>		
 	<tr>
 		<td class="a1" width="15%">退货单编号</td>
 		<td class="a2">
@@ -415,7 +429,7 @@ if(cgthdProducts != null && cgthdProducts.size()>0){
 	</tr>
 	<tr id="trSkzh">
 		<td class="a1" widht="20%">账户名称</td>
-		<td class="a2"><input type="text" id="zhname"  name="zhname" value="<%=StaticParamDo.getAccountNameById(StringUtils.nullToStr(cgthd.getZhmc())) %>" readonly>
+		<td class="a2"><input type="text" id="zhname"  name="zhname" onclick="openAccount();" value="<%=StaticParamDo.getAccountNameById(StringUtils.nullToStr(cgthd.getZhmc())) %>" readonly>
 		<input type="hidden" id="skzh"  name="cgthd.zhmc" value="<%=StringUtils.nullToStr(cgthd.getZhmc()) %>">
 		<img src="images/select.gif" align="absmiddle" title="选择账户" border="0" onclick="openAccount();" style="cursor:hand">
 		</td>

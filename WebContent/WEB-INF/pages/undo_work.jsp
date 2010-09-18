@@ -30,6 +30,8 @@ List dspCgfkList = (List)VS.findValue("dspCgfkList");
 String isFysqSpRight = (String)VS.findValue("isFysqSpRight");
 List dspFysqList = (List)VS.findValue("dspFysqList");
 
+//待确认库房调拨
+List confirmKfdbList = (List)VS.findValue("confirmKfdbList");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -89,6 +91,13 @@ List dspFysqList = (List)VS.findValue("dspFysqList");
 		var fea ='width=750,height=400,left=' + (screen.availWidth-750)/2 + ',top=' + (screen.availHeight-400)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
 		window.open(destination,'审批费用申请',fea);
+	}	
+
+	function doConfirmKfdb(id){
+		var destination = "toConfirmKfdb.html?id=" + id;
+		var fea ='width=750,height=400,left=' + (screen.availWidth-750)/2 + ',top=' + (screen.availHeight-400)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		
+		window.open(destination,'确认库房调拨',fea);
 	}		
 
 	function refreshPage(){
@@ -316,7 +325,34 @@ List dspFysqList = (List)VS.findValue("dspFysqList");
 				</div>	
 				<%
 				}
-				%>				
+				%>	
+				
+				<%
+				if(confirmKfdbList != null && confirmKfdbList.size() > 0){
+				%>
+				<div class="inner">	
+					<table width="100%" align="left" cellpadding="0" cellspacing="0">
+						<tr>
+							<td height="27" style="background-image:url(images/head_top2bg.gif)" align="left" width="100%">&nbsp;&nbsp;&nbsp;&nbsp;<b>待确认库房调拨</b></td>
+						</tr>
+						<tr><td height="5"></td></tr>
+						<%
+						
+							for(int i=0;i<confirmKfdbList.size();i++){
+								Kfdb kfdb = (Kfdb)confirmKfdbList.get(i);
+						%>			
+						<tr>
+							<td width="100%" height="23">&nbsp;<A class=xxlb title="点击打开确认页面" href="javascript:doConfirmKfdb('<%=StringUtils.nullToStr(kfdb.getId()) %>');">
+							<%=StringUtils.nullToStr(kfdb.getId()) %>&nbsp;&nbsp;<%=StaticParamDo.getStoreNameById(kfdb.getCk_store_id()) %>&nbsp;&nbsp;<%=StaticParamDo.getRealNameById(kfdb.getJsr()) %>&nbsp;&nbsp;【<%=StringUtils.nullToStr(kfdb.getCk_date()) %>】</A></td>
+						</tr>
+						<%
+							}
+						%>															
+					</table>	
+				</div>	
+				<%
+				}
+				%>		
 		</td>
 	</tr>
 </table>

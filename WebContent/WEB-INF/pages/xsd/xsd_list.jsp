@@ -180,16 +180,16 @@ String orderType = (String)VS.findValue("orderType");
 <table width="100%" align="center"  class="chart_list" cellpadding="0" cellspacing="0" border="1" id="selTable">
 	<thead>
 	<tr>
-		<td onclick="doSort('id');">销售单编号<%if(orderName.equals("id")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('client_name');">客户名称<%if(orderName.equals("client_name")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('state');">状态<%if(orderName.equals("state")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('xsdje');">销售单金额<%if(orderName.equals("xsdje")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('creatdate');">日期<%if(orderName.equals("creatdate")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('fzr');">销售员<%if(orderName.equals("fzr")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('czr');">操作员<%if(orderName.equals("czr")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('skxs');">回款类型<%if(orderName.equals("skxs")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('sp_state');">审批状态<%if(orderName.equals("sp_state")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td>操作</td>
+		<td width="12%" onclick="doSort('id');">销售单编号<%if(orderName.equals("id")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="21%" onclick="doSort('client_name');">客户名称<%if(orderName.equals("client_name")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="8%" onclick="doSort('state');">状态<%if(orderName.equals("state")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="8%" onclick="doSort('xsdje');">销售单金额<%if(orderName.equals("xsdje")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="8%" onclick="doSort('creatdate');">日期<%if(orderName.equals("creatdate")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="7%" onclick="doSort('fzr');">销售员<%if(orderName.equals("fzr")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="7%" onclick="doSort('czr');">操作员<%if(orderName.equals("czr")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="8%" onclick="doSort('skxs');">回款类型<%if(orderName.equals("skxs")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="8%" onclick="doSort('sp_state');">审批状态<%if(orderName.equals("sp_state")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="13%">操作</td>
 	</tr>
 	</thead>
 	<%

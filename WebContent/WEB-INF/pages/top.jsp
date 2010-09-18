@@ -106,7 +106,7 @@ List funcList = menuService.getUserYwgnFunc(user_id);
 	//调用DWR服务检查用户是否有新消息
 	function getHasMsg(){
 		msgService.isHasMsgByUser('<%=user_id %>',chkReturn);
-		setTimeout("getHasMsg()",20*1000);
+		setTimeout("getHasMsg()",90*1000);
 	}
 	
 	//对返回结果进行处理

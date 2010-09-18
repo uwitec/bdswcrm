@@ -87,7 +87,7 @@ String iscs_flag = StringUtils.nullToStr(VS.findValue("iscs_flag"));
 				%>
 			</select></td>
 		<td class="a1" width="15%">移动加权价</td>
-		<td class="a2" width="35%"><input type="text" name="price" value="<%=JMath.round(product.getPrice()) %>" size="20" onkeyup="goNext(this.form,this.name);"></td>		
+		<td class="a2" width="35%"><input type="text" name="price" value="<%=JMath.round(product.getPrice()) %>" size="20" onkeyup="goNext(this.form,this.name);" <%if(iscs_flag.equals("1")) out.print("readonly"); %>></td>		
 	</tr>	
 	<tr>
 		<td class="a1" width="15%">预估成本价</td>

@@ -8,6 +8,11 @@
 OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
 List storeList = (List)VS.findValue("storeList");
 String thd_id = (String)VS.findValue("thd_id");
+
+Thd thd = (Thd)VS.findValue("thd");
+List thdProducts = (List)VS.findValue("thdProducts");
+
+String msg = StringUtils.nullToStr(VS.findValue("msg"));
 %>
 
 <html>
@@ -142,7 +147,7 @@ String thd_id = (String)VS.findValue("thd_id");
         
         var otd0=document.createElement("td");
         otd0.className = "a2";
-        otd0.innerHTML = '<input type="text" id="product_name_'+curId+'" name="thdProducts['+curId+'].product_name" readonly style="width:180px"><input type="button" name="selectButton" value="选择" class="css_button" onclick="openWin('+curId+');"><input type="hidden" id="product_id_'+curId+'" name="thdProducts['+curId+'].product_id">';
+        otd0.innerHTML = '<input type="text" id="product_name_'+curId+'" name="thdProducts['+curId+'].product_name" readonly style="width:150px"><input type="button" name="selectButton" value="选择" class="css_button" onclick="openWin('+curId+');"><input type="hidden" id="product_id_'+curId+'" name="thdProducts['+curId+'].product_id">';
         
         var otd1 = document.createElement("td");
         otd1.className = "a2";
@@ -347,7 +352,7 @@ String thd_id = (String)VS.findValue("thd_id");
 	}
 </script>
 </head>
-<body onload="initFzrTip();initClientTip();">
+<body onload="initFzrTip();initClientTip();chgKpTyle('<%=StringUtils.nullToStr(thd.getFplx()) %>');initChgYwType('<%=StringUtils.nullToStr(thd.getYw_type()) %>');">
 <form name="thdForm" action="saveThd.html" method="post">
 <input type="hidden" name="thd.xsd_id" id="xsd_id" value="">
 <input type="hidden" name="thd.state" id="state" value="">
@@ -357,65 +362,69 @@ String thd_id = (String)VS.findValue("thd_id");
 		<td colspan="4">销售退货单</td>
 	</tr>
 	</thead>
+	<%if(!msg.equals("")){ %>
+	<tr>
+		<td class="a2" colspan="4"><font color="red"><%=msg %></font></td>		
+	</tr>	
+	<%} %>		
 	<tr>
 		<td class="a1" width="15%">退货单编号</td>
 		<td class="a2">
-		<input type="text" name="thd.thd_id" id="thd_id" value="<%=thd_id %>" style="width:232px" maxlength="50" readonly> <span style="color:red">*</span>
+		<input type="text" name="thd.thd_id" id="thd_id" style="width:232px" value="<%=StringUtils.nullToStr(thd.getThd_id()) %>" size="30" maxlength="50" readonly>
 		</td>	
 		<td class="a1">退货日期</td>
-		<td class="a2">
-			<input type="text" name="thd.th_date" id="th_date" value="<%=DateComFunc.getToday() %>" class="Wdate" onFocus="WdatePicker()" style="width:232px"> <span style="color:red">*</span>
+		<td class="a2"><input type="text" name="thd.th_date" style="width:232px" id="th_date" value="<%=StringUtils.nullToStr(thd.getTh_date()) %>"  class="Wdate" onFocus="WdatePicker()">
 		</td>	
 	</tr>
-	<tr>	
+	<tr>			
 		<td class="a1">退货类型</td>
 		<td class="a2">
 			<select name="thd.yw_type" id="yw_type" onchange="chgYwType(this.value);" style="width:232px">
-				<option value="1">销售订单</option>
-				<option value="2">零售单</option>
-			</select><span style="color:red">*</span>
-		</td>			
+				<option value="1" <%if(StringUtils.nullToStr(thd.getYw_type()).equals("1")) out.print("selected"); %>>销售订单</option>
+				<option value="2" <%if(StringUtils.nullToStr(thd.getYw_type()).equals("2")) out.print("selected"); %>>零售单</option>
+			</select> <span style="color:red">*</span>
+		</td>		
 		<td class="a1" width="15%">客户名称</td>
-		<td class="a2" id="objTdClient">
-		<input type="text" name="thd.client_id" id="client_name" value="" style="width:232px" maxlength="50" onblur="setClientValue();" ><input type="text" name="thd.client_name" id="client_id" value="" style="width:232px;display: none"> <font color="red">*</font>
+		<td class="a2">
+		<input type="text" name="thd.client_id" id="client_name" style="width:232px" value="<%=StaticParamDo.getClientNameById(StringUtils.nullToStr(thd.getClient_name())) %>" size="30" maxlength="50" onblur="setClientValue();"><input type="text" name="thd.client_name" id="client_id" style="width:232px;display: none" value="<%=StringUtils.nullToStr(thd.getClient_name()) %>"> <font color="red">*</font>
 		<div id="clientsTip" style="height:12px;position:absolute;left:147px; top:85px; width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		</td>	
 	</tr>
 	<tr>
 		<td class="a1" width="15%">经手人</td>
 		<td class="a2" width="35%">
-		 <input id="brand"  type="text"   length="20"  onblur="setValue()"  style="width:232px"/> <font color="red">*</font>
-		 <div id="brandTip" style=" height:12px; position:absolute;left:612px;top:85px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;"></div>
-		 <input type="hidden" name="thd.th_fzr" id="fzr" value=""/> 	
+		 <input  id="brand"  type="text" mxlength="20" style="width:232px"  onblur="setValue()" value="<%=StaticParamDo.getRealNameById(thd.getTh_fzr() )%>"/> <font color="red">*</font>
+         <div id="brandTip" style=" height:12px; position:absolute;left:612px;top:85px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;"  ></div>
+		    <input type="hidden" name="thd.th_fzr" id="fzr" value="<%=thd.getTh_fzr() %>"/>	
 		</td>	
 		<td class="a1">退款方式</td>
 		<td class="a2">
 			<select name="thd.type" id="type" onchange="chgType(this.value);" style="width:232px">
-				<option value="现金">现金</option>
-				<option value="冲抵往来">冲抵往来</option>
-			</select> <span style="color:red">*</span>
-		</td>	
+				<option value="现金" <%if(StringUtils.nullToStr(thd.getType()).equals("现金")) out.print("selected"); %>>现金</option>
+				<option value="冲抵往来" <%if(StringUtils.nullToStr(thd.getType()).equals("冲抵往来")) out.print("selected"); %>>冲抵往来</option>
+			</select> <font color="red">*</font>
+		</td>
 	</tr>
 	<tr>
 		<td class="a1">退货库房</td>
 		<td class="a2">
-			<select name="thd.store_id" id="store_id" title="退货库房" style="width:232px">
+			<select name="thd.store_id" id="store_id" style="width:232px">
 				<option value=""></option>
 			<%
 			if(storeList != null && storeList.size()>0){
 				for(int i=0;i<storeList.size();i++){
 					StoreHouse storeHouse = (StoreHouse)storeList.get(i);
 			%>
-				<option value="<%=storeHouse.getId() %>"><%=storeHouse.getName() %></option>
+				<option value="<%=storeHouse.getId() %>" <%if(storeHouse.getId().equals(thd.getStore_id())) out.print("selected"); %>><%=storeHouse.getName() %></option>
 			<%
 				}
 			}
 			%>
-			</select> <span style="color:red">*</span>
+			</select> <font color="red">*</font>	
 		</td>	
 		<td class="a1" width="15%">退货原因</td>
 		<td class="a2">
-			<input type="text" name="thd.remark" id="remark" value="" maxlength="100" style="width:232px"> <font color="red">*</font>
+			<input type="text" name="thd.remark" id="remark" value="<%=StringUtils.nullToStr(thd.getRemark()) %>" maxlength="100" style="width:232px"> <font color="red">*</font>
 		</td>
 	</tr>	
 </table>
@@ -440,14 +449,54 @@ String thd_id = (String)VS.findValue("thd_id");
 	</tr>
 	</thead>
 <%
-for(int i=0;i<3;i++){
+if(thdProducts!=null && thdProducts.size()>0){
+	for(int i=0;i<thdProducts.size();i++){
+		ThdProduct thdProduct = (ThdProduct)thdProducts.get(i);
 %>
 	<tr>
 		<td class="a2">
-			<input type="text" id="product_name_<%=i %>" name="thdProducts[<%=i %>].product_name" style="width:180px" readonly><input type="button" name="selectButton" value="选择" class="css_button" onclick="openWin(<%=i %>);">
+			<input type="text" id="product_name_<%=i %>" name="thdProducts[<%=i %>].product_name" style="width:150px" value="<%=StringUtils.nullToStr(thdProduct.getProduct_name()) %>" readonly>
+			<input type="button" name="selectButton" value="选择" class="css_button" onclick="openWin(<%=i %>);">
+			<input type="hidden" id="product_id_<%=i %>" name="thdProducts[<%=i %>].product_id" value="<%=StringUtils.nullToStr(thdProduct.getProduct_id()) %>">
+		</td>
+		<td class="a2"><input type="text" id="product_xh_<%=i %>" name="thdProducts[<%=i %>].product_xh" style="width:150px" value="<%=StringUtils.nullToStr(thdProduct.getProduct_xh()) %>" readonly></td>
+		<td class="a2">
+			<input type="text" id="th_price_<%=i %>" name="thdProducts[<%=i %>].th_price" style="width:80px" value="<%=JMath.round(thdProduct.getTh_price()) %>" onblur="hj();">
+			<input type="hidden" id="cbj_<%=i %>" name="thdProducts[<%=i %>].cbj" value="<%=JMath.round(thdProduct.getCbj()) %>">
+			<input type="hidden" id="kh_cbj_<%=i %>" name="thdProducts[<%=i %>].kh_cbj" value="<%=JMath.round(thdProduct.getKh_cbj()) %>">
+			
+			<input type="hidden" id="sd_<%=i %>" name="thdProducts[<%=i %>].sd"  value="<%=JMath.round(thdProduct.getSd()) %>">
+			<input type="hidden" id="gf_<%=i %>" name="thdProducts[<%=i %>].gf"  value="<%=JMath.round(thdProduct.getGf()) %>">
+			<input type="hidden" id="ds_<%=i %>" name="thdProducts[<%=i %>].ds"  value="<%=JMath.round(thdProduct.getDs()) %>">
+			<input type="hidden" id="basic_ratio_<%=i %>" name="thdProducts[<%=i %>].basic_ratio"  value="<%=JMath.round(thdProduct.getBasic_ratio()) %>">
+			<input type="hidden" id="out_ratio_<%=i %>" name="thdProducts[<%=i %>].out_ratio"  value="<%=JMath.round(thdProduct.getOut_ratio()) %>">			
+			<input type="hidden" id="lsxj_<%=i %>" name="thdProducts[<%=i %>].lsxj"  value="<%=JMath.round(thdProduct.getLsxj()) %>">
+			<input type="hidden" id="ygcbj_<%=i %>" name="thdProducts[<%=i %>].ygcbj"  value="<%=JMath.round(thdProduct.getYgcbj()) %>">
+			<input type="hidden" id="sfcytc_<%=i %>" name="thdProducts[<%=i %>].sfcytc"  value="<%=StringUtils.nullToStr(thdProduct.getSfcytc()) %>">				
+		</td>
+		<td class="a2"><input type="text" id="nums_<%=i %>" name="thdProducts[<%=i %>].nums" style="width:60px" value="<%=StringUtils.nullToStr(thdProduct.getNums()) %>" onblur="hj();"></td>
+		<td class="a2">
+			<input type="text" id="qz_serial_num_<%=i %>" name="thdProducts[<%=i %>].qz_serial_num" value="<%=StringUtils.nullToStr(thdProduct.getQz_serial_num()) %>" style="width:120px" readonly>
+			<input type="hidden" id="qz_flag_<%=i %>" name="thdProducts[<%=i %>].qz_flag" value="<%=StringUtils.nullToStr(thdProduct.getQz_flag()) %>"><a style="cursor:hand" title="左键点击输入输列号" onclick="openSerialWin('<%=i %>');"><b>...</b></a>&nbsp;
+		</td>		
+		<td class="a2"><input type="text" id="xj_<%=i %>" name="thdProducts[<%=i %>].xj" style="width:80px" value="<%=JMath.round(thdProduct.getXj()) %>" readonly></td>
+		<%if (i>0){ %>		
+		<td class="a2"><input type="button" name="delButton" value="删除" class="css_button" onclick="delTr(this);"></td>
+		<%}else{ %>
+		<td class="a2">&nbsp;</td>
+		<%} %>
+	</tr>
+<%
+	}
+}else{
+	for(int i=0;i<3;i++){
+%>
+	<tr>
+		<td class="a2">
+			<input type="text" id="product_name_<%=i %>" name="thdProducts[<%=i %>].product_name" style="width:150px" readonly><input type="button" name="selectButton" value="选择" class="css_button" onclick="openWin(<%=i %>);">
 			<input type="hidden" id="product_id_<%=i %>" name="thdProducts[<%=i %>].product_id">
 		</td>
-		<td class="a2"><input type="text" id="product_xh_<%=i %>" name="thdProducts[<%=i %>].product_xh" style="width:150px" readonly></td>
+		<td class="a2"><input type="text" id="product_xh_<%=i %>" name="thdProducts[<%=i %>].product_xh" style="width:150px" size="10" readonly></td>
 		<td class="a2">
 			<input type="text" id="th_price_<%=i %>" name="thdProducts[<%=i %>].th_price" style="width:80px" value="0.00" onblur="hj();">
 			<input type="hidden" id="cbj_<%=i %>" name="thdProducts[<%=i %>].cbj"  value="0.00">
@@ -457,16 +506,15 @@ for(int i=0;i<3;i++){
 			<input type="hidden" id="gf_<%=i %>" name="thdProducts[<%=i %>].gf"  value="0.00">
 			<input type="hidden" id="ds_<%=i %>" name="thdProducts[<%=i %>].ds"  value="0.00">
 			<input type="hidden" id="basic_ratio_<%=i %>" name="thdProducts[<%=i %>].basic_ratio"  value="0.00">
-			<input type="hidden" id="out_ratio_<%=i %>" name="thdProducts[<%=i %>].out_ratio"  value="0.00">
+			<input type="hidden" id="out_ratio_<%=i %>" name="thdProducts[<%=i %>].out_ratio"  value="0.00">	
 			<input type="hidden" id="lsxj_<%=i %>" name="thdProducts[<%=i %>].lsxj"  value="0.00">
-			<input type="hidden" id="ygcbj_<%=i %>" name="thdProducts[<%=i %>].ygcbj"  value="0.00">
-			<input type="hidden" id="sfcytc_<%=i %>" name="thdProducts[<%=i %>].sfcytc"  value="">
+			<input type="hidden" id="sfcytc_<%=i %>" name="thdProducts[<%=i %>].sfcytc"  value="">				
 		</td>
 		<td class="a2"><input type="text" id="nums_<%=i %>" name="thdProducts[<%=i %>].nums" value="0" style="width:60px" onblur="hj();"></td>
 		<td class="a2">
 			<input type="text" id="qz_serial_num_<%=i %>" name="thdProducts[<%=i %>].qz_serial_num" style="width:120px" readonly>
 			<input type="hidden" id="qz_flag_<%=i %>" name="thdProducts[<%=i %>].qz_flag"><a style="cursor:hand" title="左键点击输入输列号" onclick="openSerialWin('<%=i %>');"><b>...</b></a>&nbsp;
-		</td>		
+		</td>			
 		<td class="a2"><input type="text" id="xj_<%=i %>" name="thdProducts[<%=i %>].xj" value="0.00" style="width:80px" readonly></td>
 		<%if (i>0){ %>		
 		<td class="a2"><input type="button" name="delButton" value="删除" class="css_button" onclick="delTr(this);"></td>
@@ -475,6 +523,7 @@ for(int i=0;i<3;i++){
 		<%} %>
 	</tr>
 <%
+	}
 }
 %>	
 </table>
@@ -487,14 +536,14 @@ for(int i=0;i<3;i++){
 		</td>
 	</tr>
 </table>
-<table width="100%"  align="center" class="chart_info" cellpadding="0" cellspacing="0">	
+<table width="100%"  align="center" class="chart_info" cellpadding="0" cellspacing="0">
 	<tr>
 		<td class="a1" width="15%">合计退款金额</td>
-		<td class="a2"><input type="text" id="thdje"  name="thd.thdje" value="0.00" style="width:232px" readonly></td>	
+		<td class="a2"><input type="text" id="thdje"  name="thd.thdje" value="<%=JMath.round(thd.getThdje()) %>" style="width:232px" readonly></td>	
 		
 		<td class="a1" id="td_zh_label" width="15%">退款账户</td>
-		<td class="a2" id="td_zh_value" width="35%"><input type="text" id="zhname"  name="zhname" style="width:232px" onclick="openAccount();" value="" readonly>
-		<input type="hidden" id="skzh"  name="thd.tkzh" value="">
+		<td class="a2" id="td_zh_value" width="35%"><input type="text" id="zhname"  name="zhname" style="width:232px" value="<%=StaticParamDo.getAccountNameById(StringUtils.nullToStr(thd.getTkzh())) %>" readonly>
+		<input type="hidden" id="skzh"  name="thd.tkzh" value="<%=StringUtils.nullToStr(thd.getTkzh()) %>">
 		<img src="images/select.gif" align="absmiddle" title="选择账户" border="0" onclick="openAccount();" style="cursor:hand">
 		</td>
 	</tr>		
@@ -510,30 +559,30 @@ for(int i=0;i<3;i++){
 		<td class="a1" width="15%">发票类型</td>
 		<td class="a2" width="35%">
 			<select name="thd.fplx" id="fplx" onchange="chgKpTyle(this.value);" style="width:232px">
-				<option value="出库单">出库单</option>
-				<option value="普通发票">普通发票</option>
-				<option value="增值发票">增值发票</option>
+				<option value="出库单" <%if(StringUtils.nullToStr(thd.getFplx()).equals("出库单")) out.print("selected"); %>>出库单</option>
+				<option value="普通发票" <%if(StringUtils.nullToStr(thd.getFplx()).equals("普通发票")) out.print("selected"); %>>普通发票</option>
+				<option value="增值发票" <%if(StringUtils.nullToStr(thd.getFplx()).equals("增值发票")) out.print("selected"); %>>增值发票</option>
 			</select>
 		</td>
 		<td class="a1" width="15%" id="mc1">名称</td>
-		<td class="a2" id="mc2" width="35%"><input type="text" name="thd.kp_mc" id="kp_mc" value="" maxlength="50" style="width:232px"></td>				
+		<td class="a2" id="mc2" width="35%"><input type="text" name="lsd.kp_mc" id="kp_mc" value="<%=StringUtils.nullToStr(thd.getKp_mc()) %>" style="width:232px" maxlength="50"></td>				
 	</tr>									
 	<tr>
 		<td class="a1" width="15%" id="dz1" style="display:none">地址</td>
-		<td class="a2" id="dz2" style="display:none"><input type="text" name="thd.kp_address" id="kp_address" value="" style="width:232px" maxlength="50"></td>	
+		<td class="a2" id="dz2" style="display:none"><input type="text" name="thd.kp_address" id="kp_address" value="<%=StringUtils.nullToStr(thd.getKp_address()) %>" style="width:232px" maxlength="50"></td>	
 		<td class="a1" width="15%" id="dh1" style="display:none">电话</td>
-		<td class="a2" id="dh2" style="display:none"><input type="text" name="thd.kp_dh" id="kp_dh" value="" style="width:232px" maxlength="20"></td>		
-	</tr>	
+		<td class="a2" id="dh2" style="display:none"><input type="text" name="thd.kp_dh" id="kp_dh" value="<%=StringUtils.nullToStr(thd.getKp_dh()) %>" style="width:232px" maxlength="20"></td>		
+	</tr>
 	<tr>
 		<td class="a1" width="15%" id="zh1" style="display:none">开户行账号</td>
-		<td class="a2"  id="zh2" style="display:none"><input type="text" name="thd.khhzh" id="khhzh" value="" style="width:232px" maxlength="50"></td>	
+		<td class="a2"  id="zh2" style="display:none"><input type="text" name="thd.khhzh" id="khhzh" value="<%=StringUtils.nullToStr(thd.getKhhzh()) %>" style="width:232px" maxlength="50"></td>	
 		<td class="a1" width="15%" id="sh1" style="display:none">税号</td>
-		<td class="a2" id="sh2" style="display:none"><input type="text" name="thd.sh" id="sh" value="" style="width:232px" maxlength="50"></td>		
-	</tr>	
+		<td class="a2" id="sh2" style="display:none"><input type="text" name="thd.sh" id="sh" value="<%=StringUtils.nullToStr(thd.getSh()) %>" style="width:232px" maxlength="50"></td>		
+	</tr>
 	<tr>
 		<td class="a1" width="15%">发票信息摘要</td>
 		<td class="a2" colspan="3">
-			<input type="text" name="thd.fpxx" id="fpxx" value="" maxlength="100" style="width:90%">
+			<input type="text" name="thd.fpxx" id="fpxx" value="<%=StringUtils.nullToStr(thd.getFpxx()) %>" maxlength="100" style="width:90%">
 		</td>
 	</tr>	
 	<tr height="35">

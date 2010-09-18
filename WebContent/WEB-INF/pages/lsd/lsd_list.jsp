@@ -145,17 +145,16 @@ String orderType = (String)VS.findValue("orderType");
 <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0" border="1" id="selTable">
 	<thead>
 	<tr>
-		<td onclick="doSort('id');">零售单编号<%if(orderName.equals("id")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('client_name');">客户姓名<%if(orderName.equals("client_name")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<!--<td onclick="doSort('lxr');">联系人<%if(orderName.equals("lxr")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		--><td onclick="doSort('lxdh');">联系电话<%if(orderName.equals("lxdh")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('lsdje');">金额<%if(orderName.equals("lsdje")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('creatdate');">时间<%if(orderName.equals("creatdate")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>		
-		<td onclick="doSort('state');">状态<%if(orderName.equals("state")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('xsry');">销售人员<%if(orderName.equals("xsry")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>		
-		<td onclick="doSort('czr');">操作员<%if(orderName.equals("czr")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('sp_state');">审批状态<%if(orderName.equals("sp_state")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td>操作</td>
+		<td width="12%" onclick="doSort('id');">零售单编号<%if(orderName.equals("id")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="16%" onclick="doSort('client_name');">客户姓名<%if(orderName.equals("client_name")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="10%" onclick="doSort('lxdh');">联系电话<%if(orderName.equals("lxdh")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="8%" onclick="doSort('lsdje');">金额<%if(orderName.equals("lsdje")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="10%" onclick="doSort('creatdate');">时间<%if(orderName.equals("creatdate")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>		
+		<td width="7%" onclick="doSort('state');">状态<%if(orderName.equals("state")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="8%" onclick="doSort('xsry');">销售人员<%if(orderName.equals("xsry")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>		
+		<td width="8%" onclick="doSort('czr');">操作员<%if(orderName.equals("czr")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="8%" onclick="doSort('sp_state');">审批状态<%if(orderName.equals("sp_state")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="13%">操作</td>
 	</tr>
 	</thead>
 	<%
@@ -187,8 +186,7 @@ String orderType = (String)VS.findValue("orderType");
 	<tr class="a1" title="双击查看详情"  onmousedown="trSelectChangeCss()" onclick="descMx('<%=StringUtils.nullToStr(lsd.get("id")) %>');" onDblClick="openWin('<%=StringUtils.nullToStr(lsd.get("id")) %>');">
 		<td><%=StringUtils.nullToStr(lsd.get("id")) %></td>
 		<td><%=StringUtils.nullToStr(lsd.get("client_name")) %></td>
-		<!--<td><%=StringUtils.nullToStr(lsd.get("lxr")) %></td>
-		--><td><%=StringUtils.nullToStr(lsd.get("lxdh")) %></td>
+		<td><%=StringUtils.nullToStr(lsd.get("lxdh")) %></td>
 		<td align="right"><%=JMath.round(lsdje,2) %>&nbsp;</td>
 		<td><%=StringUtils.nullToStr(lsd.get("creatdate")) %></td>
 		<td><%=vl_state %></td>

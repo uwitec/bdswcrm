@@ -12,7 +12,7 @@ Page results = (Page)VS.findValue("pageKfdb");
 
 String ck_date1 = (String)VS.findValue("ck_date1");
 String ck_date2 = (String)VS.findValue("ck_date2");
-
+String state = (String)VS.findValue("state");
 String orderName = (String)VS.findValue("orderName");
 String orderType = (String)VS.findValue("orderType");
 %>
@@ -48,6 +48,7 @@ String orderType = (String)VS.findValue("orderType");
 	function clearAll(){
 		document.myform.ck_date1.value = "";
 		document.myform.ck_date2.value = "";
+		document.myform.state.value = "";
 	}
 	
 	function edit(id){
@@ -111,7 +112,16 @@ String orderType = (String)VS.findValue("orderType");
 			日期：<input type="text" name="ck_date1" value="<%=ck_date1 %>" size="15"  class="Wdate" onFocus="WdatePicker()">	
 			&nbsp;&nbsp;&nbsp;至&nbsp;&nbsp;&nbsp;
 			<input type="text" name="ck_date2" value="<%=ck_date2 %>" size="15"  class="Wdate" onFocus="WdatePicker()">			
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			状态：
+			<select name="state">
+				<option value=""></option>
+				<option value="已保存" <%if(state.equals("已保存")) out.print("selected"); %>>已保存</option>
+				<option value="已出库" <%if(state.equals("已出库")) out.print("selected"); %>>已出库</option>
+				<option value="已入库" <%if(state.equals("已入库")) out.print("selected"); %>>已入库</option>
+				<option value="已退回" <%if(state.equals("已退回")) out.print("selected"); %>>已退回</option>
+			</select>
+			&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="submit" name="buttonCx" value=" 查询 " class="css_button2">&nbsp;&nbsp;&nbsp;&nbsp;	
 			<input type="button" name="buttonQk" value=" 清空 " class="css_button2" onclick="clearAll();">
 		</td>				
@@ -147,15 +157,15 @@ String orderType = (String)VS.findValue("orderType");
 		<td><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(kfdb.getCzr())) %></td>
 		<td>
 		<%
-		if(StringUtils.nullToStr(kfdb.getState()).equals("已出库")){
-		%>
-			<a href="#" onclick="openWin('<%=StringUtils.nullToStr(kfdb.getId()) %>');"><img src="images/view.gif" align="absmiddle" title="查看" border="0" style="cursor:hand"></a>
-		<%	
-		}else{
+		if(StringUtils.nullToStr(kfdb.getState()).equals("已保存") || StringUtils.nullToStr(kfdb.getState()).equals("已退回")){
 		%>
 			<a href="#" onclick="edit('<%=StringUtils.nullToStr(kfdb.getId()) %>');"><img src="images/modify.gif" align="absmiddle" title="修改" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
 			<a href="#" onclick="openWin('<%=StringUtils.nullToStr(kfdb.getId()) %>');"><img src="images/view.gif" align="absmiddle" title="查看" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
-			<a href="#" onclick="del('<%=StringUtils.nullToStr(kfdb.getId()) %>');"><img src="images/del.gif" align="absmiddle" title="删除" border="0" style="cursor:hand"></a>		
+			<a href="#" onclick="del('<%=StringUtils.nullToStr(kfdb.getId()) %>');"><img src="images/del.gif" align="absmiddle" title="删除" border="0" style="cursor:hand"></a>			
+		<%	
+		}else{
+		%>
+			<a href="#" onclick="openWin('<%=StringUtils.nullToStr(kfdb.getId()) %>');"><img src="images/view.gif" align="absmiddle" title="查看" border="0" style="cursor:hand"></a>
 		<%	
 		}		
 		%>
@@ -174,7 +184,7 @@ String orderType = (String)VS.findValue("orderType");
 	</tr>
 </table>
 </form>
-
+<font color="red">状态说明，已保存：草稿状态；已出库：调拨单已出库，等待入库库房确认；已入库：调入库房确认入库；已退回：调入库房退回；</font>
 <form name="descForm" action="descKfdb.html" method="post" target="desc">
 	<input type="hidden" name="id" value="">
 </form>

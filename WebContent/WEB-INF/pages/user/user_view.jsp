@@ -22,12 +22,15 @@ SysUser user = (SysUser)VS.findValue("user");
 		if(vl == "1"){
 			obj.innerHTML = document.getElementById("div_dls").innerHTML;
 			obj2.innerHTML = "代理商";
+			document.getElementById("trSzkf").style.display = "none";
 		}else if(vl == "2"){
 			obj.innerHTML = document.getElementById("div_gys").innerHTML;
 			obj2.innerHTML = "供应商品类别";
+			document.getElementById("trSzkf").style.display = "none";
 		}else{
 			obj.innerHTML = document.getElementById("div_ywy").innerHTML;
 			obj2.innerHTML = "业务员";
+			document.getElementById("trSzkf").style.display = "";
 		}
 	}
 </script>
@@ -66,6 +69,10 @@ SysUser user = (SysUser)VS.findValue("user");
 		<td class="a2" width="35%"><%=is_dls %></td>
 		<td class="a1" width="15%" id="selName"></td>
 		<td class="a2" width="35%" id="selUserType"></td>		
+	</tr>
+	<tr id="trSzkf">
+		<td class="a1" width="15%">所在库房</td>
+		<td class="a2" colspan="3"><%=StaticParamDo.getStoreNameById(user.getSzkf()) %></td>
 	</tr>	
 	<tr height="35">
 		<td class="a1" colspan="4">

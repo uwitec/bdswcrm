@@ -13,6 +13,11 @@ String id = (String)VS.findValue("id");
 //0：未完成；1：已完成
 String iscs_flag = StringUtils.nullToStr(VS.findValue("iscs_flag"));
 
+List msg = (List)session.getAttribute("messages");
+session.removeAttribute("messages");
+
+Cgthd cgthd = (Cgthd)VS.findValue("cgthd");
+List cgthdProducts = (List)VS.findValue("cgthdProducts");
 %>
 
 <html>
@@ -290,41 +295,53 @@ String iscs_flag = StringUtils.nullToStr(VS.findValue("iscs_flag"));
 		<td colspan="4">采购退货单信息</td>
 	</tr>
 	</thead>
+<%
+//如果有信息则显示
+if(msg != null && msg.size() > 0){
+	for(int i=0;i<msg.size();i++){
+%>
+	<tr>
+		<td colspan="4" class="a2"><font color="red"><%=StringUtils.nullToStr(msg.get(i)) %></font></td>
+	</tr>	
+<%
+	}
+}
+%>	
 	<tr>
 		<td class="a1" width="15%">退货单编号</td>
 		<td class="a2">
-		<input type="text" name="cgthd.id" id="id" value="<%=id %>" size="30" maxlength="50" readonly>
+		<input type="text" name="cgthd.id" id="id" value="<%=StringUtils.nullToStr(cgthd.getId()) %>" style="width:230px" maxlength="50" readonly>
 		</td>	
 		<td class="a1">退货日期</td>
-		<td class="a2"><input type="text" name="cgthd.th_date" id="th_date" value="<%=DateComFunc.getToday() %>"  class="Wdate" onFocus="WdatePicker()"><font color="red">*</font>
+		<td class="a2"><input type="text" name="cgthd.th_date" id="th_date" style="width:230px" value="<%=StringUtils.nullToStr(cgthd.getTh_date()) %>"  class="Wdate" onFocus="WdatePicker()"><font color="red">*</font>
 		</td>	
 	</tr>
 	<tr>			
 		<td class="a1" width="15%">供货单位</td>
 		<td class="a2">
-		<input type="text" name="cgthd.provider_id" id="client_name" value="" size="30" maxlength="50"  onblur="setClientValue();">
-		<input type="hidden" name="cgthd.provider_name" id="client_id" value="">
+		<input type="text" name="cgthd.provider_id" id="client_name" value="<%=StaticParamDo.getClientNameById(StringUtils.nullToStr(cgthd.getProvider_name())) %>" style="width:230px" maxlength="50" onblur="setClientValue();">
+		<input type="hidden" name="cgthd.provider_name" id="client_id" value="<%=StringUtils.nullToStr(cgthd.getProvider_name()) %>">
 		<div id="clientsTip" style="height:12px;position:absolute;left:150px; top:85px; width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
-		<font color="red">*</font>
 		</td>	
 		<td class="a1" width="15%">经手人</td>
 		<td class="a2" width="35%">
-		 <input id="brand" type="text" maxlength="20" onblur="setValue();" /> 
-         <div id="brandTip" style="height:12px;position:absolute;left:610px; top:85px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
-		  <input type="hidden" name="cgthd.jsr" id="fzr"/> <font color="red">*</font>	
+		 <input  id="brand"    type="text"   maxlength="20" style="width:230px"  onblur="setValue()" value="<%=StaticParamDo.getRealNameById(cgthd.getJsr()) %>"/><font color="red">*</font> 
+         <div   id="brandTip"  style="height:12px;position:absolute;left:610px; top:85px;  width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
+         </div>
+		 <input type="hidden" name="cgthd.jsr" id="fzr" value="<%=cgthd.getJsr()%>"/> 	
 		</td>
 	</tr>
 	<tr>
 		<td class="a1">退款方式</td>
 		<td class="a2">
-			<select name="cgthd.tkfs" id="tkfs" onchange="selTkfs(this.value);">
-				<option value="现金">现金</option>
-				<option value="冲抵往来">冲抵往来</option>
+			<select name="cgthd.tkfs" id="tkfs" style="width:230px" onchange="selTkfs(this.value);">
+				<option value="现金" <%if(StringUtils.nullToStr(cgthd.getTkfs()).equals("现金")) out.print("selected"); %>>现金</option>
+				<option value="冲抵往来" <%if(StringUtils.nullToStr(cgthd.getTkfs()).equals("冲抵往来")) out.print("selected"); %>>冲抵往来</option>
 			</select>			
 		</td>
 		<td class="a1">退货库房</td>
 		<td class="a2">
-			<select name="cgthd.store_id" id="store_id">
+			<select name="cgthd.store_id" style="width:230px" id="store_id">
 				<option value=""></option>
 			<%
 			if(storeList != null){
@@ -332,13 +349,13 @@ String iscs_flag = StringUtils.nullToStr(VS.findValue("iscs_flag"));
 				while(it.hasNext()){
 					StoreHouse sh = (StoreHouse)it.next();
 			%>
-				<option value="<%=StringUtils.nullToStr(sh.getId()) %>"><%=StringUtils.nullToStr(sh.getName()) %></option>
+				<option value="<%=sh.getId() %>" <%if(sh.getId().equals(cgthd.getStore_id())) out.print("selected"); %>><%=StringUtils.nullToStr(sh.getName()) %></option>
 			<%
 				}
 			}
 			%>
-			</select>					
-		</td>			
+			</select>						
+		</td>
 	</tr>
 </table>
 <br>
@@ -363,12 +380,38 @@ String iscs_flag = StringUtils.nullToStr(VS.findValue("iscs_flag"));
 	</tr>
 	</thead>
 <%
-for(int i=0;i<3;i++){
+if(cgthdProducts != null && cgthdProducts.size()>0){
+	for(int i=0;i<cgthdProducts.size();i++){
+		CgthdProduct cgthdProduct = (CgthdProduct)cgthdProducts.get(i);
 %>
 	<tr>
 		<td class="a2">
-			<input type="text" id="product_name_<%=i %>" name="cgthdProducts[<%=i %>].product_name" readonly>
-			<input type="button" name="selectButton" value="选择" class="css_button" onclick="openWin(<%=i %>);">
+			<input type="text" id="product_name_<%=i %>" name="cgthdProducts[<%=i %>].product_name" value="<%=StringUtils.nullToStr(cgthdProduct.getProduct_name()) %>" readonly><input type="button" name="selectButton" value="选择" class="css_button" onclick="openWin(<%=i %>);">
+			<input type="hidden" id="product_id_<%=i %>" name="cgthdProducts[<%=i %>].product_id" value="<%=StringUtils.nullToStr(cgthdProduct.getProduct_id()) %>" >
+		</td>
+		<td class="a2"><input type="text" id="product_xh_<%=i %>" name="cgthdProducts[<%=i %>].product_xh" size="10" value="<%=StringUtils.nullToStr(cgthdProduct.getProduct_xh()) %>" readonly></td>
+		<td class="a2"><input type="text" id="th_price_<%=i %>" name="cgthdProducts[<%=i %>].th_price" size="10" value="<%=JMath.round(cgthdProduct.getTh_price()) %>" onblur="hj();"></td>
+		<td class="a2"><input type="text" id="nums_<%=i %>" name="cgthdProducts[<%=i %>].nums" value="<%=cgthdProduct.getNums() %>" size="5" onblur="hj();"></td>
+		<td class="a2">
+			<input type="text" id="qz_serial_num_<%=i %>" name="cgthdProducts[<%=i %>].qz_serial_num" value="<%=StringUtils.nullToStr(cgthdProduct.getQz_serial_num()) %>" size="15" readonly>
+			<input type="hidden" id="qz_flag_<%=i %>" name="cgthdProducts[<%=i %>].qz_flag" value="<%=StringUtils.nullToStr(cgthdProduct.getQz_flag()) %>"><a style="cursor:hand" title="左键点击输入输列号" onclick="openSerialWin('<%=i %>');"><b>...</b></a>&nbsp;
+		</td>		
+		<td class="a2"><input type="text" id="xj_<%=i %>" name="cgthdProducts[<%=i %>].xj" value="<%=JMath.round(cgthdProduct.getXj()) %>" size="10" readonly></td>
+		<td class="a2"><input type="text" id="remark_<%=i %>" name="cgthdProducts[<%=i %>].remark" value="<%=StringUtils.nullToStr(cgthdProduct.getRemark()) %>" maxlength="50"></td>
+		<%if (i>0){ %>		
+		<td class="a2"><input type="button" name="delButton" value="删除" class="css_button" onclick="delTr(this);"></td>
+		<%}else{ %>
+		<td class="a2">&nbsp;</td>
+		<%} %>
+	</tr>
+<%		
+	}
+}else{
+	for(int i=0;i<3;i++){
+%>
+	<tr>
+		<td class="a2">
+			<input type="text" id="product_name_<%=i %>" name="cgthdProducts[<%=i %>].product_name" readonly><input type="button" name="selectButton" value="选择" class="css_button" onclick="openWin(<%=i %>);">
 			<input type="hidden" id="product_id_<%=i %>" name="cgthdProducts[<%=i %>].product_id">
 		</td>
 		<td class="a2"><input type="text" id="product_xh_<%=i %>" name="cgthdProducts[<%=i %>].product_xh" size="10" readonly></td>
@@ -377,7 +420,7 @@ for(int i=0;i<3;i++){
 		<td class="a2">
 			<input type="text" id="qz_serial_num_<%=i %>" name="cgthdProducts[<%=i %>].qz_serial_num" size="15" readonly>
 			<input type="hidden" id="qz_flag_<%=i %>" name="cgthdProducts[<%=i %>].qz_flag"><a style="cursor:hand" title="左键点击输入输列号" onclick="openSerialWin('<%=i %>');"><b>...</b></a>&nbsp;
-		</td>
+		</td>		
 		<td class="a2"><input type="text" id="xj_<%=i %>" name="cgthdProducts[<%=i %>].xj" value="0.00" size="10" readonly></td>
 		<td class="a2"><input type="text" id="remark_<%=i %>" name="cgthdProducts[<%=i %>].remark" maxlength="50"></td>
 		<%if (i>0){ %>		
@@ -387,6 +430,7 @@ for(int i=0;i<3;i++){
 		<%} %>
 	</tr>
 <%
+	}
 }
 %>	
 </table>
@@ -394,17 +438,16 @@ for(int i=0;i<3;i++){
 	<tr height="35">
 		<td class="a2" colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="button" name="button1" value="添加一行" class="css_button2" onclick="addTr();">
-			<input type="button" name="button1" value="关联进货单" class="css_button3" onclick="selJhd();">
 		</td>
 	</tr>
 	<tr>
 		<td class="a1">合计金额</td>
-		<td class="a2"><input type="text" id="tkzje"  name="cgthd.tkzje" value="0.00" readonly></td>
+		<td class="a2"><input type="text" id="tkzje" style="width:230px"  name="cgthd.tkzje" value="<%=JMath.round(cgthd.getTkzje()) %>" readonly></td>
 	</tr>
 	<tr id="trSkzh">
 		<td class="a1" widht="20%">账户名称</td>
-		<td class="a2"><input type="text" id="zhname"  name="zhname" value="" readonly>
-		<input type="hidden" id="skzh"  name="cgthd.zhmc" value="">
+		<td class="a2"><input type="text" id="zhname" style="width:230px" onclick="openAccount();"  name="zhname" value="<%=StaticParamDo.getAccountNameById(StringUtils.nullToStr(cgthd.getZhmc())) %>" readonly>
+		<input type="hidden" id="skzh"  name="cgthd.zhmc" value="<%=StringUtils.nullToStr(cgthd.getZhmc()) %>">
 		<img src="images/select.gif" align="absmiddle" title="选择账户" border="0" onclick="openAccount();" style="cursor:hand">
 		</td>
 	</tr>			

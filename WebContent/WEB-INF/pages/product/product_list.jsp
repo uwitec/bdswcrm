@@ -108,13 +108,13 @@ String product_state = StringUtils.nullToStr(VS.findValue("product_state"));
 <table width="100%"  align="center"  class="chart_list" border="1" cellpadding="0" cellspacing="0" id="productTable">
 	<thead>
 	<tr>
-		<td nowrap="nowrap">商品编号</td>
-		<td nowrap="nowrap">商品名称</td>
-		<td nowrap="nowrap">规格</td>
-		<td nowrap="nowrap">成本价</td>
-		<td nowrap="nowrap">商品属性</td>
-		<td nowrap="nowrap">状态</td>
-		<td nowrap="nowrap">操作</td>
+		<td nowrap="nowrap" width="10%">商品编号</td>
+		<td nowrap="nowrap" width="25%">商品名称</td>
+		<td nowrap="nowrap" width="27%">规格</td>
+		<td nowrap="nowrap" width="8%">成本价</td>
+		<td nowrap="nowrap" width="10%">商品属性</td>
+		<td nowrap="nowrap" width="8%">状态</td>
+		<td nowrap="nowrap" width="12%">操作</td>
 	</tr>
 	</thead>
 	<%
@@ -127,9 +127,9 @@ String product_state = StringUtils.nullToStr(VS.findValue("product_state"));
 	%>
 	<tr class="a1"  onmousedown="trSelectChangeCss()" onDblClick="openWin('<%=StringUtils.nullToStr(map.get("product_id")) %>');">		
 		<td><%=StringUtils.nullToStr(map.get("product_id")) %></td>
-		<td><%=StringUtils.nullToStr(map.get("product_name")) %></td>
-		<td><%=StringUtils.nullToStr(map.get("product_xh")) %></td>
-		<td><%=JMath.round(price,2) %></td>
+		<td align="left"><%=StringUtils.nullToStr(map.get("product_name")) %></td>
+		<td align="left"><%=StringUtils.nullToStr(map.get("product_xh")) %></td>
+		<td align="right"><%=JMath.round(price,2) %></td>
 		<td><%=StringUtils.nullToStr(map.get("prop")) %></td>
 		<td><%=StringUtils.nullToStr(map.get("state")) %></td>
 		<td>
