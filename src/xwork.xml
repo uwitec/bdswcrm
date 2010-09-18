@@ -275,7 +275,10 @@
         </action> 
         <action name="queryAllJsrTipInfo" class="userAction" method="getAllJsrInfo">
             <result name="success" type="dispatcher">/WEB-INF/pages/user/jsr_tip.jsp</result>
-        </action>               
+        </action>
+        <action name="resetPass" class="userAction" method="resetPass">
+            <result name="success" type="dispatcher">/WEB-INF/pages/user/alertMsg.jsp</result>
+        </action>                       
         <!-- 用户管理 -->
         
         <!-- 修改密码 -->
@@ -944,7 +947,18 @@
         </action>
         <action name="selKfdbProc" class="lsdAction" method="selKcProc">
             <result name="success">/WEB-INF/pages/kfdb/selectKcProc.jsp</result>
-        </action>         
+        </action>
+        <action name="toConfirmKfdb" class="kfdbAction" method="edit">
+            <result name="success">/WEB-INF/pages/kfdb/kfdb_confirm.jsp</result>
+        </action>
+        <action name="confirmKfdb" class="kfdbAction" method="confirm">
+            <result name="cancel" type="redirect">toConfirmKfdb.html</result>
+            <result name="input">/WEB-INF/pages/kfdb/kfdb_confirm.jsp</result>
+            <result name="success">/WEB-INF/pages/kfdb/msg.jsp</result>
+        </action>
+        <action name="doThKfdb" class="kfdbAction" method="doTh">
+            <result name="success">/WEB-INF/pages/kfdb/msg.jsp</result>
+        </action>        
         <!-- 库房调拨 -->
         
         <!-- 调拨申请 -->
@@ -1246,7 +1260,16 @@
         </action>
         <action name="getXsryKhmlMxResult" class="xstjXsryAction" method="getKhmlhzResult">
             <result name="success">/WEB-INF/pages/report/xstj_xsry/result_khml_mx.jsp</result>
-        </action>        
+        </action> 
+        <action name="showXsryYgmlhzCondition" class="xstjXsryAction" method="showCondition">
+            <result name="success">/WEB-INF/pages/report/xstj_xsry/condition_ygml.jsp</result>
+        </action>
+        <action name="getXsryYgmlhzResult" class="xstjXsryAction" method="getYgmlhzResult">
+            <result name="success">/WEB-INF/pages/report/xstj_xsry/result_ygml_hz.jsp</result>
+        </action>
+        <action name="getXsryYgmlMxResult" class="xstjXsryAction" method="getYgmlhzResult">
+            <result name="success">/WEB-INF/pages/report/xstj_xsry/result_ygml_mx.jsp</result>
+        </action>                 
         <!-- 业务员销售汇总、毛利汇总、明细 -->
         
         <!-- 客户销售汇总 -->
