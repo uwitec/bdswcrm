@@ -95,7 +95,7 @@ List confirmKfdbList = (List)VS.findValue("confirmKfdbList");
 
 	function doConfirmKfdb(id){
 		var destination = "toConfirmKfdb.html?id=" + id;
-		var fea ='width=750,height=400,left=' + (screen.availWidth-750)/2 + ',top=' + (screen.availHeight-400)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		var fea ='width=850,height=700,left=' + (screen.availWidth-850)/2 + ',top=' + (screen.availHeight-700)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
 		window.open(destination,'确认库房调拨',fea);
 	}		
