@@ -149,6 +149,7 @@ session.removeAttribute("MSG");
 		<td class="a1" width="15%">所在库房</td>
 		<td class="a2" colspan="3">
 			<select name="user.szkf" id="szkf" style="width:150px">
+			<option value=""></option>
 			<%
 			if(storeList != null){
 				Iterator it = storeList.iterator();
