@@ -131,9 +131,9 @@ public class KcMxReportDAO extends JdbcBaseDAO {
 		
 		//库房调拨
 		String sql_db = "select dj_id,'' as cd_id,product_id,product_name,product_xh,nums,price,ck_date as fsrq,flag,cz_date,'' as client_name from (" +
-				"(select a.kfdb_id as dj_id,a.product_id,a.product_name,a.product_xh, a.nums,c.price,b.ck_store_id as store_id,DATE_FORMAT(b.cz_date,'%Y-%m-%d') as ck_date,'调拨单' as type,'出库' as flag,b.cz_date from kfdb_product a left join kfdb b on b.id=a.kfdb_id left join product c on c.product_id=a.product_id where b.state='已出库') " +
+				"(select a.kfdb_id as dj_id,a.product_id,a.product_name,a.product_xh, a.nums,c.price,b.ck_store_id as store_id,DATE_FORMAT(b.cz_date,'%Y-%m-%d') as ck_date,'调拨单' as type,'出库' as flag,b.cz_date from kfdb_product a left join kfdb b on b.id=a.kfdb_id left join product c on c.product_id=a.product_id where b.state='已入库') " +
 				"union " +
-				"(select a.kfdb_id as dj_id,a.product_id,a.product_name,a.product_xh,a.nums as nums,c.price,b.rk_store_id as store_id,DATE_FORMAT(b.cz_date,'%Y-%m-%d') as ck_date,'调拨单' as type,'入库' as flag,b.cz_date from kfdb_product a left join kfdb b on b.id=a.kfdb_id left join product c on c.product_id=a.product_id where b.state='已出库')) " +
+				"(select a.kfdb_id as dj_id,a.product_id,a.product_name,a.product_xh,a.nums as nums,c.price,b.rk_store_id as store_id,DATE_FORMAT(b.cz_date,'%Y-%m-%d') as ck_date,'调拨单' as type,'入库' as flag,b.cz_date from kfdb_product a left join kfdb b on b.id=a.kfdb_id left join product c on c.product_id=a.product_id where b.state='已入库')) " +
 				"z where 1=1";
 		if(!product_id.equals("")){
 			sql_db = sql_db + " and product_id='" + product_id + "'";
