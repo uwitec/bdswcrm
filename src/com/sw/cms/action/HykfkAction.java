@@ -1,119 +1,161 @@
 package com.sw.cms.action;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.sw.cms.action.base.BaseAction;
+import com.sw.cms.model.Hykda;
+import com.sw.cms.model.Hykzz;
 import com.sw.cms.model.LoginInfo;
 import com.sw.cms.model.Page;
-import com.sw.cms.model.Hykda;
 import com.sw.cms.service.HykdaService;
+import com.sw.cms.service.HykzzService;
 import com.sw.cms.util.Constant;
-import com.sw.cms.util.ParameterUtility;
-
+import com.sw.cms.util.UUIDGenerator;
 
 public class HykfkAction extends BaseAction {
-	
-	private HykdaService hykdaService;
 
-	private Page hykdaPage;
+	private HykdaService hykdaService;
+	private HykzzService hykzzService;
+
+	private Page hykzzPage;
+	private Hykzz hykzz;
+
 	private Hykda hykda;
 
-	String real_name= "";
+	String real_name = "";
 	private String hykh = "";
 	private String state = "未使用";
 	private int curPage = 1;
-	
+	private String id = "";
+
 	private String orderName = "";
 	private String orderType = "";
+
 	/**
-	 * 取会员卡发卡列表
+	 * 取会员卡发卡列表<BR>
+	 * 取会员卡制作中的信息
 	 * @return
 	 */
-	public String list(){
-		LoginInfo info = (LoginInfo)getSession().getAttribute("LOGINUSER");
-		String user_id = info.getUser_id();
+	public String list() {
+
 		String con = "";
-		
+
 		if (!hykh.trim().equals("")) {
-			con += " and hykh like '" + hykh + "'";
+			con += " and hykh = '" + hykh + "'";
 		}
-		
+
 		if (!state.trim().equals("")) {
 			con += " and state = '" + state + "'";
-		}		
-		
-		if(orderName.equals("")){
+		}
+
+		if (orderName.equals("")) {
 			orderName = "hykh";
 		}
-		if(orderType.equals("")){
+		if (orderType.equals("")) {
 			orderType = "desc";
 		}
-		
+
 		con += " order by " + orderName + " " + orderType + "";
+
 		int rowsPerPage = Constant.PAGE_SIZE2;
-		hykdaPage = hykdaService.getHykdaList(curPage, rowsPerPage,con);
-		return "success";
+		hykzzPage = hykzzService.getHykzzList(curPage, rowsPerPage, con);
+
+		return SUCCESS;
 	}
-	
 
 	/**
-	 * 打开添加页面
+	 * 打开发卡页面
 	 * @return
 	 */
-	public String add(){
-		return "success";
+	public String edit() {
+		hykzz = hykzzService.getHykzz(id);
+		return SUCCESS;
 	}
 	
 	/**
-	 * 保存会员卡发卡信息
+	 * 执行发卡操作
 	 * @return
 	 */
-	public String save(){
-		LoginInfo info = (LoginInfo)getSession().getAttribute("LOGINUSER");
-		String nums = ParameterUtility.getStringParameter(getRequest(), "num","");
-		String scfs = ParameterUtility.getStringParameter(getRequest(), "scfs","");
-		String fklx = ParameterUtility.getStringParameter(getRequest(), "fklx","");
+	public String update() {
+		LoginInfo info = (LoginInfo) getSession().getAttribute("LOGINUSER");
 		String user_id = info.getUser_id();
+		hykda.setCzr(user_id);
+		hykda.setId(UUIDGenerator.getUUID());
+		hykda.setState("正常");
 		
-		hykdaService.saveHykfk(hykda,nums,scfs,fklx);
-		return "success";
-	}
-	
-	/**
-	 * 更新会员卡发卡记录
-	 * @return
-	 */
-	public String update(){
-		LoginInfo info = (LoginInfo)getSession().getAttribute("LOGINUSER");
-		String user_id = info.getUser_id();
-		String fklx = ParameterUtility.getStringParameter(getRequest(), "fklx","");
-		hykdaService.updateHykfk(hykda,fklx);
-		return "success";
-	}
-	
-	
-	/**
-	 * 编辑会员卡发卡记录
-	 * @return
-	 */
-	public String edit(){
-		hykda = hykdaService.getHykda(hykh);		
-		return "success";
-	}
-	
-		 
-	 public String getReal_name() {
-			return real_name;
+		String returnVl = hykdaService.updateHykfk(hykda);
+		
+		if(!returnVl.equals("")){
+			this.setMsg(returnVl);
+			hykzz = hykzzService.getHykzz(hykda.getHykh());
+			return INPUT;
 		}
+		
+		return SUCCESS;
+	}
+	
+	
+	/**
+	 * 执行退卡操作
+	 * @return
+	 */
+	public String doTh(){
+		try{
+			hykzzService.updateHykzzDoth(id);
+			return SUCCESS;
+		}catch(Exception e){
+			log.error("退货失败" + e.getMessage());
+			e.printStackTrace();
+			return ERROR;
+		}
+	}
 
-		public void setReal_name(String real_name) {
-			this.real_name = real_name;
-		}
- 
-	 
+	public HykdaService getHykdaService() {
+		return hykdaService;
+	}
+
+	public void setHykdaService(HykdaService hykdaService) {
+		this.hykdaService = hykdaService;
+	}
+
+	public HykzzService getHykzzService() {
+		return hykzzService;
+	}
+
+	public void setHykzzService(HykzzService hykzzService) {
+		this.hykzzService = hykzzService;
+	}
+
+	public Page getHykzzPage() {
+		return hykzzPage;
+	}
+
+	public void setHykzzPage(Page hykzzPage) {
+		this.hykzzPage = hykzzPage;
+	}
+
+	public Hykzz getHykzz() {
+		return hykzz;
+	}
+
+	public void setHykzz(Hykzz hykzz) {
+		this.hykzz = hykzz;
+	}
+
+	public Hykda getHykda() {
+		return hykda;
+	}
+
+	public void setHykda(Hykda hykda) {
+		this.hykda = hykda;
+	}
+
+	public String getReal_name() {
+		return real_name;
+	}
+
+	public void setReal_name(String realName) {
+		real_name = realName;
+	}
+
 	public String getHykh() {
 		return hykh;
 	}
@@ -129,30 +171,6 @@ public class HykfkAction extends BaseAction {
 	public void setState(String state) {
 		this.state = state;
 	}
-	
-	public Page getHykdaPage() {
-		return hykdaPage;
-	}
-
-	public void setHykdaPage(Page hykdaPage) {
-		this.hykdaPage = hykdaPage;
-	}
-
-	public Hykda getHykda() {
-		return hykda;
-	}
-
-	public void setHykda(Hykda hykda) {
-		this.hykda = hykda;
-	}
-
-	public HykdaService getHykdaService() {
-		return hykdaService;
-	}
-
-	public void setHykdaService(HykdaService hykdaService) {
-		this.hykdaService = hykdaService;
-	}
 
 	public int getCurPage() {
 		return curPage;
@@ -160,6 +178,14 @@ public class HykfkAction extends BaseAction {
 
 	public void setCurPage(int curPage) {
 		this.curPage = curPage;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getOrderName() {
@@ -177,4 +203,5 @@ public class HykfkAction extends BaseAction {
 	public void setOrderType(String orderType) {
 		this.orderType = orderType;
 	}
+
 }

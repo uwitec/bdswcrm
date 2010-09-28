@@ -1,18 +1,15 @@
 package com.sw.cms.action;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.sw.cms.action.base.BaseAction;
+import com.sw.cms.model.Hykzz;
 import com.sw.cms.model.LoginInfo;
 import com.sw.cms.model.Page;
-import com.sw.cms.model.Hykzz;
 import com.sw.cms.service.HykflService;
 import com.sw.cms.service.HykzzService;
 import com.sw.cms.util.Constant;
-import com.sw.cms.util.ParameterUtility;
 
 public class HykzzAction extends BaseAction {
 	
@@ -27,6 +24,11 @@ public class HykzzAction extends BaseAction {
 	private String hykh = "";
 	private String orderName = "";
 	private String orderType = "";
+	
+	private int nums = 0;
+	private String zzfs = "";
+	private String state = "";
+	
 	/**
 	 * 取会员卡列表
 	 * @return
@@ -36,7 +38,10 @@ public class HykzzAction extends BaseAction {
 		String user_id = info.getUser_id();
 		String con = "";
 		if (!hykh.trim().equals("")) {
-			con += " and hykh like '" + hykh + "'";
+			con += " and hykh='" + hykh + "'";
+		}
+		if (!state.trim().equals("")) {
+			con += " and state='" + state + "'";
 		}
 		if(orderName.equals("")){
 			orderName = "hykh";
@@ -67,13 +72,18 @@ public class HykzzAction extends BaseAction {
 	 * @return
 	 */
 	public String save(){
+		if(hykzzService.isExist(hykzz, nums, zzfs)){
+			this.setMsg("会员卡号重复，提交失败，请检查");
+			return ERROR;
+		}
+		
 		LoginInfo info = (LoginInfo)getSession().getAttribute("LOGINUSER");
-		String nums = ParameterUtility.getStringParameter(getRequest(), "num","");
-		String zzfs = ParameterUtility.getStringParameter(getRequest(), "zzfs","");
 		String user_id = info.getUser_id();
+		
 		hykzz.setCzr(user_id);
-		hykzz.setId(hykzzService.updateHykzzId());		
-		hykzzService.saveHykzz(hykzz,nums,zzfs);
+		
+		hykzzService.saveHykzz(hykzz,nums,zzfs); 
+		
 		return "success";
 	}
 	
@@ -202,5 +212,35 @@ public class HykzzAction extends BaseAction {
 
 	public void setHykflList(List hykflList) {
 		this.hykflList = hykflList;
+	}
+
+
+	public int getNums() {
+		return nums;
+	}
+
+
+	public void setNums(int nums) {
+		this.nums = nums;
+	}
+
+
+	public String getZzfs() {
+		return zzfs;
+	}
+
+
+	public void setZzfs(String zzfs) {
+		this.zzfs = zzfs;
+	}
+
+
+	public String getState() {
+		return state;
+	}
+
+
+	public void setState(String state) {
+		this.state = state;
 	}
 }

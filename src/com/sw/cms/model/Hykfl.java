@@ -1,5 +1,7 @@
 package com.sw.cms.model;
 
+import java.util.Date;
+
 /*
  * 会员卡分类表
  * 2010-06-03 增加，有以下信息：编号、名称、优惠方式、折扣率、积分方式、充值优惠率、操作人、操作时间
@@ -20,17 +22,7 @@ public class Hykfl {
 
 	private String czr; // 操作人
 
-	private String cz_date; // 操作时间
-
-
-
-	public String getCz_date() {
-		return cz_date;
-	}
-
-	public void setCz_date(String cz_date) {
-		this.cz_date = cz_date;
-	}
+	private Date cz_date; // 操作时间
 
 	public String getCzr() {
 		return czr;
@@ -86,5 +78,13 @@ public class Hykfl {
 
 	public void setJffs(String jffs) {
 		this.jffs = jffs;
+	}
+
+	public Date getCz_date() {
+		return cz_date;
+	}
+
+	public void setCz_date(Date czDate) {
+		cz_date = czDate;
 	}
 }

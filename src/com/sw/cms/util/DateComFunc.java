@@ -6,12 +6,29 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
+/**
+ * 常用日期处理函数
+ * @author liyt
+ *
+ */
 public final class DateComFunc {
-
+	
 	/**
-	 * turn date into string
+	 * 按默认规则格式化日期，格式为：yyyy-MM-dd
+	 * @param dDate  要格式化的日期
+	 * @return
 	 */
+	public static String formatDate(Date dDate) {
+		return formatDate(dDate,"yyyy-MM-dd");
+	}	
 
+	
+	/**
+	 * 按设置规则格式化日期
+	 * @param dDate  要格式化的日期
+	 * @param sFormat 格式化规则
+	 * @return
+	 */
 	public static String formatDate(Date dDate, String sFormat) {
 		String tmp = "";
 		try {
@@ -22,16 +39,28 @@ public final class DateComFunc {
 			} else
 				tmp = "";
 		} catch (Exception ex) {
-			System.out.println("Date" + dDate + "to String is error");
+			ex.printStackTrace();
 		}
 		return tmp;
 	}
-
+	
+	
 	/**
-	 * turn the string with date format to date
-	 * 
+	 * 按默认规则将字符型日期转化为日期类型,格式为：yyyy-MM-dd
+	 * @param s   输入的字符型日期
+	 * @return
 	 */
+	public static Date strToDate(String s) {
+		return strToDate(s,"yyyy-MM-dd");
+	}
 
+	
+	/**
+	 * 将字符型日期转化为日期类型
+	 * @param s   输入的字符型日期
+	 * @param pattern  格式化规则
+	 * @return
+	 */
 	public static Date strToDate(String s, String pattern) {
 
 		SimpleDateFormat formatter = new SimpleDateFormat(pattern,

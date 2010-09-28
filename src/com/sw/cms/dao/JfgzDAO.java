@@ -1,18 +1,12 @@
 package com.sw.cms.dao;
 
 import java.util.List;
-import java.util.Map;
 
-import com.sw.cms.dao.StoreDAO.StoreHouseRowMapper;
 import com.sw.cms.dao.base.BeanRowMapper;
 import com.sw.cms.dao.base.JdbcBaseDAO;
-
-import com.sw.cms.model.Page;
 import com.sw.cms.model.Jfgz;
-import com.sw.cms.model.StoreHouse;
-
+import com.sw.cms.model.Page;
 import com.sw.cms.util.DateComFunc;
-import com.sw.cms.util.StaticParamDo;
 
 /**
  * 积分规则设置

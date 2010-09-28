@@ -1,5 +1,7 @@
 package com.sw.cms.model;
 
+import java.util.Date;
+
 /*
  * 积分规则设置
  * 2010-06-03 增加，有以下信息：编号、积分方法、消费金额、对应积分、操作人、操作时间
@@ -10,23 +12,13 @@ public class Jfgz {
 
 	private String jfff; // 积分方法
 
-	private String xfje; // 消费金额
+	private double xfje; // 消费金额
 
-	private String dyjf; // 对应积分
+	private double dyjf; // 对应积分
 
 	private String czr; // 操作人
 
-	private String cz_date; // 操作时间
-
-
-
-	public String getCz_date() {
-		return cz_date;
-	}
-
-	public void setCz_date(String cz_date) {
-		this.cz_date = cz_date;
-	}
+	private Date cz_date; // 操作时间
 
 	public String getCzr() {
 		return czr;
@@ -52,20 +44,27 @@ public class Jfgz {
 		this.jfff = jfff;
 	}
 
-	public String getXfje() {
+	public double getXfje() {
 		return xfje;
 	}
 
-	public void setXfje(String xfje) {
+	public void setXfje(double xfje) {
 		this.xfje = xfje;
 	}
 
-	public String getDyjf() {
+	public double getDyjf() {
 		return dyjf;
 	}
 
-	public void setDyjf(String dyjf) {
+	public void setDyjf(double dyjf) {
 		this.dyjf = dyjf;
 	}
 
+	public Date getCz_date() {
+		return cz_date;
+	}
+
+	public void setCz_date(Date czDate) {
+		cz_date = czDate;
+	}
 }

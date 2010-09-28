@@ -1,17 +1,12 @@
 package com.sw.cms.dao;
 
 import java.util.List;
-import java.util.Map;
 
 import com.sw.cms.dao.base.BeanRowMapper;
 import com.sw.cms.dao.base.JdbcBaseDAO;
-
-import com.sw.cms.model.Page;
-import com.sw.cms.model.Hykzz;
 import com.sw.cms.model.Hykfl;
-import com.sw.cms.model.Hykda;
-import com.sw.cms.util.DateComFunc;
-import com.sw.cms.util.StaticParamDo;
+import com.sw.cms.model.Hykzz;
+import com.sw.cms.model.Page;
 
 /**
  * 会员卡设置
@@ -53,8 +48,8 @@ public class HykzzDAO extends JdbcBaseDAO {
 	 * @param info
 	 */
 	public void saveHykzz(Hykzz info){
-		String sql = "insert into hykzz(card_type,dept,csjf,yxrq,sxrq,hykh,ssfl,cz_date,id,czr) values(?,?,?,?,?,?,?,now(),?,?)";
-		Object[] param = new Object[9];
+		String sql = "insert into hykzz(card_type,dept,csjf,yxrq,sxrq,hykh,ssfl,cz_date,id,czr,state) values(?,?,?,?,?,?,?,now(),?,?,?)";
+		Object[] param = new Object[10];
 		
 		param[0] = info.getCard_type();
 		param[1] = info.getDept();
@@ -65,8 +60,9 @@ public class HykzzDAO extends JdbcBaseDAO {
 		param[6] = info.getSsfl();
 		param[7] = info.getId();
 		param[8] = info.getCzr();
+		param[9] = info.getState();
 		
-		this.getJdbcTemplate().update(sql,param);	
+		this.getJdbcTemplate().update(sql,param);
 		
 	}
 	
@@ -76,8 +72,8 @@ public class HykzzDAO extends JdbcBaseDAO {
 	 * @param info
 	 */
 	public void updateHykzz(Hykzz info){
-		String sql = "update hykzz set card_type=?,dept=?,csjf=?,yxrq=?,sxrq=?,hykh=?,ssfl=?,cz_date=now(),czr=? where id=?";
-		Object[] param = new Object[9];
+		String sql = "update hykzz set card_type=?,dept=?,csjf=?,yxrq=?,sxrq=?,hykh=?,ssfl=?,cz_date=now(),czr=?,state=? where id=?";
+		Object[] param = new Object[10];
 		
 		param[0] = info.getCard_type();
 		param[1] = info.getDept();
@@ -87,7 +83,9 @@ public class HykzzDAO extends JdbcBaseDAO {
 		param[5] = info.getHykh();
 		param[6] = info.getSsfl();
 		param[7] = info.getCzr();
-		param[8] = info.getId();
+		param[8] = info.getState();
+		param[9] = info.getId();
+		
 		
 		this.getJdbcTemplate().update(sql,param);
 	}
@@ -115,13 +113,9 @@ public class HykzzDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public Hykzz getHykzzda(String hykh){
-		Hykzz info = new Hykzz();
 		String sql = "select * from hykzz where hykh='" + hykh + "'";		
 		Object obj =this.queryForObject(sql, new BeanRowMapper(Hykzz.class));
-		if(obj != null){
-			info = (Hykzz)obj;
-		}
-		return info;
+		return (Hykzz)obj;
 	}
 	
 	/**
@@ -132,64 +126,6 @@ public class HykzzDAO extends JdbcBaseDAO {
 		String sql = "delete from hykzz where hykh='" + hykh + "'";
 		this.getJdbcTemplate().update(sql);
 		
-	}
-
-
-	/**
-	 * 查看会员卡是否已经提交
-	 * @param hykzz_id
-	 * @return
-	 */
-	public boolean isHykzzSubmit(String hykzz_id){
-		boolean is = false;
-		String sql = "select count(*) from hykzz where id='" + hykzz_id + "'";
-		int counts = this.getJdbcTemplate().queryForInt(sql);
-		if(counts > 0){
-			is = true;
-		}
-		return is;
-	}
-	
-	
-	/**
-	 * 查看会员卡是否已经提交
-	 * @param hykzz_id
-	 * @return
-	 */
-	public boolean isHykzzHykhSubmit(String hykh){
-		boolean is = false;
-		String sql = "select count(*) from hykzz where hykh='" + hykh + "'";
-		int counts = this.getJdbcTemplate().queryForInt(sql);
-		if(counts > 0){
-			is = true;
-		}
-		return is;
-	}
-	
-	/**
-	 * 返回会员卡可用ID
-	 * 
-	 * @return
-	 */
-	public String getHykzzId() {
-		String sql = "select hykzzid from cms_all_seq";
-
-		// 取当前序列号
-		String curId = this.getJdbcTemplate().queryForInt(sql) + "";
-
-		String day = DateComFunc.getCurDay();
-
-		// 将序列号加1
-		sql = "update cms_all_seq set hykzzid=hykzzid+1";
-		this.getJdbcTemplate().update(sql);
-
-		for (int i = curId.length(); i < 3; i++) {
-			curId = "0" + curId;
-		}
-
-		return "HYZZ" + day + "-" + curId;
-
-	}
-	
+	}	
 	
 }

@@ -104,16 +104,6 @@ public class DwrService {
 		return productDao.productIsExist(serial_num, product_id);
 	}
 	
-	/**
-	 * 根据会员卡号看是否存在在会员卡档案中
-	 * 
-	 * @param hykh
-	 * 
-	 * @return
-	 */
-	public String hykhIsExist(String hykh) {
-		return hykdaDao.hykhIsExist(hykh);
-	}
 	
 	/**
 	 * 根据客户编号取客户采购账期
