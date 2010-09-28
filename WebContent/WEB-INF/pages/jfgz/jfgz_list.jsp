@@ -92,7 +92,7 @@ String orderType = (String)VS.findValue("orderType");
 		<td onclick="doSort('jfff');">积分方法<%if(orderName.equals("jfff")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
 		<td onclick="doSort('xfje');">消费金额<%if(orderName.equals("xfje")) out.print("<img src='images/" + orderType + ".gif'>"); %> </td>
 		<td onclick="doSort('dyjj');">对应积分<%if(orderName.equals("dyjj")) out.print("<img src='images/" + orderType + ".gif'>"); %> </td>
-        <td onclick="doSort('cz_date');">创建时间<%if(orderName.equals("cz_date")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+        <td onclick="doSort('cz_date');">创建日期<%if(orderName.equals("cz_date")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
 		<td onclick="doSort('czr');">创建人<%if(orderName.equals("czr")) out.print("<img src='images/" + orderType + ".gif'>"); %> </td>			
 		<td>操作</td>		
 	</tr>
@@ -108,9 +108,9 @@ String orderType = (String)VS.findValue("orderType");
 	<tr>
 		<td class="a1"><%=StringUtils.nullToStr(info.getId()) %></td>
 		<td class="a1"  align="left"><%=StringUtils.nullToStr(info.getJfff()) %></td>
-		<td class="a1"  align="right"><%=info.getXfje() %></td>
-		<td class="a1"  align="right"><%=info.getDyjf() %></td>
-		<td class="a1"><%=StringUtils.nullToStr(info.getCz_date()) %></td>
+		<td class="a1"  align="right"><%=JMath.round(info.getXfje()) %></td>
+		<td class="a1"  align="right"><%=JMath.round(info.getDyjf()) %></td>
+		<td class="a1"><%=DateComFunc.formatDate(info.getCz_date()) %></td>
 		<td class="a1"><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(info.getCzr())) %></td>
 		<td class="a1">
 			<a href="javascript:void(0);" onclick="edit('<%=StringUtils.nullToStr(info.getId()) %>');"><img src="images/modify.gif" align="absmiddle" title="修改" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;

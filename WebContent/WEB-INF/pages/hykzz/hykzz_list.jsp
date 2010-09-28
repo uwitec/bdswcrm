@@ -13,6 +13,7 @@ String orderName = (String)VS.findValue("orderName");
 String orderType = (String)VS.findValue("orderType"); 
 
 String hykh = (String)VS.findValue("hykh");
+String state = (String)VS.findValue("state");
 %>
 
 <html>
@@ -22,10 +23,9 @@ String hykh = (String)VS.findValue("hykh");
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language='JavaScript' src="js/date.js"></script>
 <script type="text/javascript">
-	
 	function openWin(id){
 		var destination = "viewHykzz.html?id="+id;
-		var fea = 'width=400,height=400,left=' + (screen.availWidth-350)/2 + ',top=' + (screen.availHeight-350)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		var fea = 'width=500,height=500,left=' + (screen.availWidth-500)/2 + ',top=' + (screen.availHeight-500)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
 		window.open(destination,'详细信息',fea);	
 	}
@@ -38,14 +38,14 @@ String hykh = (String)VS.findValue("hykh");
 	
 	function add(){
 		var destination = "addHykzz.html";
-		var fea = 'width=400,height=400,left=' + (screen.availWidth-350)/2 + ',top=' + (screen.availHeight-350)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		var fea = 'width=500,height=500,left=' + (screen.availWidth-500)/2 + ',top=' + (screen.availHeight-500)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
 		window.open(destination,'添加会员卡',fea);	
 	}
 	
 	function edit(id){
 		var destination = "editHykzz.html?id=" + id;
-		var fea = 'width=400,height=400,left=' + (screen.availWidth-350)/2 + ',top=' + (screen.availHeight-350)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		var fea = 'width=500,height=500,left=' + (screen.availWidth-500)/2 + ',top=' + (screen.availHeight-500)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
 		window.open(destination,'修改会员卡',fea);		
 	}		
@@ -75,7 +75,8 @@ String hykh = (String)VS.findValue("hykh");
 	}
 	
 	function clearAll(){
-		document.myform.hykh.value = "";		
+		document.myform.hykh.value = "";
+		document.myform.state.value = "";		
 	}
 </script>
 </head>
@@ -93,23 +94,29 @@ String hykh = (String)VS.findValue("hykh");
 	<tr>
 		<td class="search" align="left" colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;
 			会员卡号：<input type="text" name="hykh" value="<%=hykh %>" size="25" >	
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;			
-			<input type="submit" name="buttonCx" value=" 查询 " class="css_button2">&nbsp;&nbsp;&nbsp;&nbsp;	
-			<input type="button" name="buttonQk" value=" 清空 " class="css_button2" onclick="clearAll();">
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			状态:<select name="state">
+							<option value=""></option>
+							<option value="已使用" <%if(state.equals("已使用")) out.print("selected"); %>>已使用</option>
+							<option value="未使用" <%if(state.equals("未使用")) out.print("selected"); %>>未使用</option>
+						</select>		
+			<input type="submit" name="buttonCx" value=" 查询 " class="css_button">&nbsp;&nbsp;&nbsp;&nbsp;	
+			<input type="button" name="buttonQk" value=" 清空 " class="css_button" onclick="clearAll();">
 		</td>				
 	</tr>	
 </table>
 <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0"  border="1" id="selTable">
 	<thead>
 	<tr>
-		<td onclick="doSort('hykh');">会员卡号<%if(orderName.equals("hykh")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('dept');">制卡机构<%if(orderName.equals("dept")) out.print("<img src='images/" + orderType + ".gif'>"); %> </td>
-		<td onclick="doSort('csjf');">初始积分<%if(orderName.equals("csjf")) out.print("<img src='images/" + orderType + ".gif'>"); %> </td>
-		<td onclick="doSort('ssfl');">所属分类<%if(orderName.equals("ssfl")) out.print("<img src='images/" + orderType + ".gif'>"); %> </td>
-        <td onclick="doSort('card_type');">卡类型<%if(orderName.equals("card_type")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('cz_date');">创建时间<%if(orderName.equals("cz_date")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('czr');">创建人<%if(orderName.equals("czr")) out.print("<img src='images/" + orderType + ".gif'>"); %> </td>			
-		<td>操作</td>		
+		<td width="15%" onclick="doSort('hykh');">会员卡号<%if(orderName.equals("hykh")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="15%" onclick="doSort('dept');">制卡机构<%if(orderName.equals("dept")) out.print("<img src='images/" + orderType + ".gif'>"); %> </td>
+		<td width="10%" onclick="doSort('csjf');">初始积分<%if(orderName.equals("csjf")) out.print("<img src='images/" + orderType + ".gif'>"); %> </td>
+		<td width="15%" onclick="doSort('ssfl');">所属分类<%if(orderName.equals("ssfl")) out.print("<img src='images/" + orderType + ".gif'>"); %> </td>
+        <td width="10%" onclick="doSort('card_type');">卡类型<%if(orderName.equals("card_type")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="9%" onclick="doSort('cz_date');">创建日期<%if(orderName.equals("cz_date")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="8%" onclick="doSort('czr');">创建人<%if(orderName.equals("czr")) out.print("<img src='images/" + orderType + ".gif'>"); %> </td>	
+		<td width="8%">状态</td>		
+		<td width="10%">操作</td>		
 	</tr>
 	</thead>
 	<%
@@ -126,8 +133,9 @@ String hykh = (String)VS.findValue("hykh");
 		<td class="a1"  align="right"><%=info.getCsjf() %></td>
 		<td class="a1"  align="left"><%=StaticParamDo.getHykflNameById(StringUtils.nullToStr(info.getSsfl())) %></td>
 		<td class="a1"><%=StringUtils.nullToStr(info.getCard_type()) %></td>
-		<td class="a1"><%=StringUtils.nullToStr(info.getCz_date()) %></td>
+		<td class="a1"><%=DateComFunc.formatDate(info.getCz_date()) %></td>
 		<td class="a1"><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(info.getCzr())) %></td>
+		<td class="a1"><%=StringUtils.nullToStr(info.getState()) %></td>
 		<td class="a1">
 			<a href="javascript:void(0);" onclick="edit('<%=StringUtils.nullToStr(info.getId()) %>');"><img src="images/modify.gif" align="absmiddle" title="修改" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
 			<a href="javascript:void(0);" onclick="openWin('<%=StringUtils.nullToStr(info.getId()) %>');"><img src="images/view.gif" align="absmiddle" title="查看" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;

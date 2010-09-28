@@ -91,7 +91,7 @@ String orderType = (String)VS.findValue("orderType");
 	    <td onclick="doSort('id');">编号<%if(orderName.equals("id")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
 		<td onclick="doSort('name');">名称<%if(orderName.equals("name")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
 		<td onclick="doSort('jffs');">积分方式<%if(orderName.equals("jffs")) out.print("<img src='images/" + orderType + ".gif'>"); %> </td>
-		<td onclick="doSort('cz_date');">创建时间<%if(orderName.equals("cz_date")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td onclick="doSort('cz_date');">创建日期<%if(orderName.equals("cz_date")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
 		<td onclick="doSort('czr');">创建人<%if(orderName.equals("czr")) out.print("<img src='images/" + orderType + ".gif'>"); %> </td>			
 		<td>操作</td>		
 	</tr>
@@ -108,7 +108,7 @@ String orderType = (String)VS.findValue("orderType");
 		<td class="a1"><%=StringUtils.nullToStr(info.getId()) %></td>
 		<td class="a1"  align="left"><%=StringUtils.nullToStr(info.getName()) %></td>
 		<td class="a1"  align="right"><%=StaticParamDo.getJfgzNameById(StringUtils.nullToStr(info.getJffs())) %></td>		
-		<td class="a1"><%=StringUtils.nullToStr(info.getCz_date()) %></td>
+		<td class="a1"><%=DateComFunc.formatDate(info.getCz_date()) %></td>
 		<td class="a1"><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(info.getCzr())) %></td>
 		<td class="a1">
 			<a href="javascript:void(0);" onclick="edit('<%=StringUtils.nullToStr(info.getId()) %>');"><img src="images/modify.gif" align="absmiddle" title="修改" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
