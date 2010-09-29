@@ -24,6 +24,18 @@ public class KcMxReportService {
 	
 	
 	/**
+	 * 按查询条件取库存商品列表
+	 * @param product_kind 商品类别
+	 * @param product_name 商品名称
+	 * @param store_id    库房编号
+	 * @return
+	 */
+	public List getKcProductList(String product_kind,String product_name,String store_id){
+		return kcMxReportDao.getKcProductList(product_kind,product_name,store_id);
+	}
+	
+	
+	/**
 	 * <p>取库存期初相关信息</p>
 	 * <p>需要对用户选择的期初日期做出判断</p>
 	 * <p>如果选择的期初日期小于系统正始启用日期则期初日期取系统启用日期</p>
@@ -47,6 +59,27 @@ public class KcMxReportService {
 			map.put("qc_date", cdate);
 		}
 		return map;
+	}
+	
+	
+	/**
+	 * 批量取库存期初信息
+	 * @param product_id
+	 * @param cdate
+	 * @param store_id
+	 * @return map
+	 */
+	public Map getKcqcMxMap(String product_kind,String product_name,String cdate,String store_id){
+		String xtqyrq = sysInitSetDao.getSysInitSet().getQyrq(); //系统启用日期
+		if(xtqyrq == null){
+			xtqyrq = "";
+		}
+		
+		//如果用户选择日期小于系统启用日期
+		if(cdate.compareTo(xtqyrq)<0){
+			cdate = xtqyrq;
+		}
+		return kcMxReportDao.getKcqcMxMap(product_kind,product_name,cdate,store_id);
 	}
 	
 	
@@ -179,6 +212,30 @@ public class KcMxReportService {
 		return kcMxReportDao.getKcStatResult(product_kind, product_name, state, store_id);
 	}
 
+	
+	/**
+	 * 取入库数量批量
+	 * @param product_id
+	 * @param start_date
+	 * @param end_date
+	 * @param store_id
+	 * @return
+	 */
+	public Map getRkNums(String product_kind,String product_name,String start_date,String end_date,String store_id){
+		return kcMxReportDao.getRkNums(product_kind, product_name, start_date, end_date, store_id);
+	}
+	
+	/**
+	 * 取出库数量批量
+	 * @param product_id
+	 * @param start_date
+	 * @param end_date
+	 * @param store_id
+	 * @return
+	 */
+	public Map getCkNums(String product_kind,String product_name,String start_date,String end_date,String store_id){
+		return kcMxReportDao.getCkNums(product_kind, product_name, start_date, end_date, store_id);
+	}
 	
 	public KcMxReportDAO getKcMxReportDao() {
 		return kcMxReportDao;

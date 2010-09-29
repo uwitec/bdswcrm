@@ -57,6 +57,48 @@ public class KcMxReportDAO extends JdbcBaseDAO {
 	}
 	
 	
+	/**
+	 * 按查询条件取库存商品列表
+	 * @param product_kind 商品类别
+	 * @param product_name 商品名称
+	 * @param store_id    库房编号
+	 * @return
+	 */
+	public List getKcProductList(String product_kind,String product_name,String store_id){
+		
+		String sql = "select a.product_id,b.product_name,b.product_xh,b.dw from product_kc a join product b on b.product_id=a.product_id where b.prop='库存商品'";
+		
+		if(!store_id.equals("")){
+			sql += " and a.store_id='" + store_id + "'";
+		}
+		
+		//处理商品类别
+		if(!product_kind.equals("")){
+			String[] arryItems = product_kind.split(",");
+			
+			if(arryItems != null && arryItems.length >0){
+				sql += " and (";
+				for(int i=0;i<arryItems.length;i++){
+					if(i == 0){
+						sql += " b.product_kind like '" + arryItems[i] + "%'";
+					}else{
+						sql += " or b.product_kind like '" + arryItems[i] + "%'";
+					}
+				}
+				sql += ")";
+			}
+			
+		}
+		if(!product_name.equals("")){
+			sql = sql + " and b.product_name like '%" + product_name + "%'";
+		}
+		
+		sql += " group by a.product_id,b.product_name,b.product_xh,b.dw";
+		
+		return this.getResultList(sql);
+	}
+	
+	
 	
 	/**
 	 * 取库存期初相关信息
@@ -69,13 +111,65 @@ public class KcMxReportDAO extends JdbcBaseDAO {
 		Map map = null;
 		String sql = "";
 		if(!store_id.equals("")){
-			sql = "select product_id,sum(nums) as nums,price from product_kc_qc where product_id='" + product_id + "' and store_id='" + store_id + "' and cdate='" + cdate + "' group by product_id,store_id,price";
+			sql = "select product_id,sum(nums) as nums,price from product_kc_qc where cdate='" + cdate + "' and product_id='" + product_id + "' and store_id='" + store_id + "' group by product_id,store_id,price";
 		}else{
-			sql = "select product_id,sum(nums) as nums,price from product_kc_qc where product_id='" + product_id +"' and cdate='" + cdate + "' group by product_id,price";
+			sql = "select product_id,sum(nums) as nums,price from product_kc_qc where cdate='" + cdate + "' and product_id='" + product_id +"' group by product_id,price";
 		}
 		List list = this.getResultList(sql);
 		if(list != null && list.size() > 0){
 			map = (Map)list.get(0);
+		}
+		return map;
+	}
+	
+	
+	/**
+	 * 批量取库存期初信息
+	 * @param product_id
+	 * @param cdate
+	 * @param store_id
+	 * @return map
+	 */
+	public Map getKcqcMxMap(String product_kind,String product_name,String cdate,String store_id){
+		Map map = new HashMap();
+		String sql = "";
+		if(!store_id.equals("")){
+			sql = "select a.product_id,sum(a.nums) as nums from (select * from product_kc_qc where cdate='" + cdate + "' and store_id='" + store_id + "') a join product b on b.product_id=a.product_id where 1=1";
+		}else{
+			sql = "select a.product_id,sum(a.nums) as nums from (select * from product_kc_qc where cdate='" + cdate + "') a join product b on b.product_id=a.product_id where 1=1";
+		}
+		
+		//处理商品类别
+		if(!product_kind.equals("")){
+			String[] arryItems = product_kind.split(",");
+			
+			if(arryItems != null && arryItems.length >0){
+				sql += " and (";
+				for(int i=0;i<arryItems.length;i++){
+					if(i == 0){
+						sql += " b.product_kind like '" + arryItems[i] + "%'";
+					}else{
+						sql += " or b.product_kind like '" + arryItems[i] + "%'";
+					}
+				}
+				sql += ")";
+			}
+			
+		}
+		if(!product_name.equals("")){
+			sql = sql + " and b.product_name like '%" + product_name + "%'";
+		}
+		
+		sql += " group by a.product_id";
+		
+		System.out.println(sql);
+		
+		List list = this.getResultList(sql);
+		if(list != null && list.size() > 0){
+			for(int i=0;i<list.size();i++){
+				Map tempMap = (Map)list.get(i);
+				map.put(tempMap.get("product_id"), tempMap.get("nums"));
+			}
 		}
 		return map;
 	}
@@ -296,6 +390,252 @@ public class KcMxReportDAO extends JdbcBaseDAO {
 		}
 		
 		return rkNums;
+	}
+	
+	
+	/**
+	 * 取入库数量批量
+	 * @param product_id
+	 * @param start_date
+	 * @param end_date
+	 * @param store_id
+	 * @return
+	 */
+	public Map getRkNums(String product_kind,String product_name,String start_date,String end_date,String store_id){
+		
+		//入库单入库数量
+		String sql_rk = "select a.product_id,sum(a.nums) as nums from rkd_product a join rkd b on b.rkd_id=a.rkd_id join product c on c.product_id=a.product_id where b.state='已入库'";
+		if(!store_id.equals("")){
+			sql_rk = sql_rk + " and b.store_id='" + store_id + "'";
+		}
+		if(!start_date.equals("")){
+			sql_rk = sql_rk + " and DATE_FORMAT(b.cz_date,'%Y-%m-%d')>='" + start_date + "'";
+		}
+		if(!end_date.equals("")){
+			sql_rk = sql_rk + " and DATE_FORMAT(b.cz_date,'%Y-%m-%d')<='" + (end_date + " 23:59:59") + "'";
+		}
+		if(!product_kind.equals("")){
+			String[] arryItems = product_kind.split(",");
+			
+			if(arryItems != null && arryItems.length >0){
+				sql_rk += " and (";
+				for(int i=0;i<arryItems.length;i++){
+					if(i == 0){
+						sql_rk += " c.product_kind like '" + arryItems[i] + "%'";
+					}else{
+						sql_rk += " or c.product_kind like '" + arryItems[i] + "%'";
+					}
+				}
+				sql_rk += ")";
+			}
+			
+		}
+		if(!product_name.equals("")){
+			sql_rk = sql_rk + " and c.product_name like '%" + product_name + "%'";
+		}
+		sql_rk += " group by a.product_id";
+		
+		
+		//调拨单入库数量
+		String sql_db = "select a.product_id,sum(a.nums) as nums from kfdb_product a left join kfdb b on b.id=a.kfdb_id join product c on c.product_id=a.product_id where b.state='已入库'";
+		if(!store_id.equals("")){
+			sql_db = sql_db + " and b.rk_store_id='" + store_id + "'";
+		}
+		if(!start_date.equals("")){
+			sql_db = sql_db + " and DATE_FORMAT(b.cz_date,'%Y-%m-%d')>='" + start_date + "'";
+		}
+		if(!end_date.equals("")){
+			sql_db = sql_db + " and DATE_FORMAT(b.cz_date,'%Y-%m-%d')<='" + (end_date + " 23:59:59") + "'";
+		}
+		if(!product_kind.equals("")){
+			String[] arryItems = product_kind.split(",");
+			
+			if(arryItems != null && arryItems.length >0){
+				sql_db += " and (";
+				for(int i=0;i<arryItems.length;i++){
+					if(i == 0){
+						sql_db += " c.product_kind like '" + arryItems[i] + "%'";
+					}else{
+						sql_db += " or c.product_kind like '" + arryItems[i] + "%'";
+					}
+				}
+				sql_db += ")";
+			}
+			
+		}
+		if(!product_name.equals("")){
+			sql_db = sql_db + " and c.product_name like '%" + product_name + "%'";
+		}
+		sql_db += " group by a.product_id";
+		
+		
+		
+		//库存盘点报溢数量
+		String sql_kcpd = "select a.product_id,sum(yk) as nums from kcpd_desc a join kcpd b on b.id=a.pd_id join product c on c.product_id=a.product_id where b.state='已提交' and a.yk>0";
+		if(!store_id.equals("")){
+			sql_kcpd = sql_kcpd + " and b.store_id='" + store_id + "'";
+		}
+		if(!start_date.equals("")){
+			sql_kcpd = sql_kcpd + " and DATE_FORMAT(b.cz_date,'%Y-%m-%d')>='" + start_date + "'";
+		}
+		if(!end_date.equals("")){
+			sql_kcpd = sql_kcpd + " and DATE_FORMAT(b.cz_date,'%Y-%m-%d')<='" + (end_date + " 23:59:59") + "'";
+		}
+		if(!product_kind.equals("")){
+			String[] arryItems = product_kind.split(",");
+			
+			if(arryItems != null && arryItems.length >0){
+				sql_kcpd += " and (";
+				for(int i=0;i<arryItems.length;i++){
+					if(i == 0){
+						sql_kcpd += " c.product_kind like '" + arryItems[i] + "%'";
+					}else{
+						sql_kcpd += " or c.product_kind like '" + arryItems[i] + "%'";
+					}
+				}
+				sql_kcpd += ")";
+			}
+			
+		}
+		if(!product_name.equals("")){
+			sql_kcpd = sql_kcpd + " and c.product_name like '%" + product_name + "%'";
+		}
+		sql_kcpd += " group by a.product_id";
+		
+		String sql = "select x.product_id,sum(x.nums) as nums from ((" + sql_rk + ") union all (" + sql_db + ") union all (" + sql_kcpd + ")) x group by x.product_id";
+		System.out.println(sql);
+		Map map = new HashMap();
+		List list = this.getResultList(sql);
+		if(list != null && list.size() > 0){
+			for(int i=0;i<list.size();i++){
+				Map tempMap = (Map)list.get(i);
+				map.put(tempMap.get("product_id"), tempMap.get("nums"));
+			}
+		}
+		
+		return map;
+	}
+	
+	
+	/**
+	 * 取出库数量批量
+	 * @param product_id
+	 * @param start_date
+	 * @param end_date
+	 * @param store_id
+	 * @return
+	 */
+	public Map getCkNums(String product_kind,String product_name,String start_date,String end_date,String store_id){
+		//出库单出库数量
+		String sql_ck = "select a.product_id,sum(a.nums) as nums from ckd_product a join ckd b on b.ckd_id=a.ckd_id join product c on c.product_id=a.product_id where b.state='已出库'";
+		if(!store_id.equals("")){
+			sql_ck = sql_ck + " and b.store_id='" + store_id + "'";
+		}
+		if(!start_date.equals("")){
+			sql_ck = sql_ck + " and DATE_FORMAT(b.cz_date,'%Y-%m-%d')>='" + start_date + "'";
+		}
+		if(!end_date.equals("")){
+			sql_ck = sql_ck + " and DATE_FORMAT(b.cz_date,'%Y-%m-%d')<='" + (end_date + " 23:59:59") + "'";
+		}
+		if(!product_kind.equals("")){
+			String[] arryItems = product_kind.split(",");
+			
+			if(arryItems != null && arryItems.length >0){
+				sql_ck += " and (";
+				for(int i=0;i<arryItems.length;i++){
+					if(i == 0){
+						sql_ck += " c.product_kind like '" + arryItems[i] + "%'";
+					}else{
+						sql_ck += " or c.product_kind like '" + arryItems[i] + "%'";
+					}
+				}
+				sql_ck += ")";
+			}
+			
+		}
+		if(!product_name.equals("")){
+			sql_ck = sql_ck + " and c.product_name like '%" + product_name + "%'";
+		}
+		sql_ck += " group by a.product_id";
+		
+		
+		//调拨单出库数量
+		String sql_db = "select a.product_id,sum(a.nums) as nums from kfdb_product a join kfdb b on b.id=a.kfdb_id join product c on c.product_id=a.product_id where b.state='已入库'";
+		if(!store_id.equals("")){
+			sql_db = sql_db + " and b.ck_store_id='" + store_id + "'";
+		}
+		if(!start_date.equals("")){
+			sql_db = sql_db + " and DATE_FORMAT(b.cz_date,'%Y-%m-%d')>='" + start_date + "'";
+		}
+		if(!end_date.equals("")){
+			sql_db = sql_db + " and DATE_FORMAT(b.cz_date,'%Y-%m-%d')<='" + (end_date + " 23:59:59") + "'";
+		}
+		if(!product_kind.equals("")){
+			String[] arryItems = product_kind.split(",");
+			
+			if(arryItems != null && arryItems.length >0){
+				sql_db += " and (";
+				for(int i=0;i<arryItems.length;i++){
+					if(i == 0){
+						sql_db += " c.product_kind like '" + arryItems[i] + "%'";
+					}else{
+						sql_db += " or c.product_kind like '" + arryItems[i] + "%'";
+					}
+				}
+				sql_db += ")";
+			}
+			
+		}
+		if(!product_name.equals("")){
+			sql_db = sql_db + " and c.product_name like '%" + product_name + "%'";
+		}
+		sql_db += " group by a.product_id";
+		
+		
+		//库存盘点报损数量
+		String sql_kcpd = "select a.product_id,sum(0-a.yk) as nums from kcpd_desc a join kcpd b on b.id=a.pd_id join product c on c.product_id=a.product_id where b.state='已提交' and a.yk<0";
+		if(!store_id.equals("")){
+			sql_kcpd = sql_kcpd + " and b.store_id='" + store_id + "'";
+		}
+		if(!start_date.equals("")){
+			sql_kcpd = sql_kcpd + " and DATE_FORMAT(b.cz_date,'%Y-%m-%d')>='" + start_date + "'";
+		}
+		if(!end_date.equals("")){
+			sql_kcpd = sql_kcpd + " and DATE_FORMAT(b.cz_date,'%Y-%m-%d')<='" + (end_date + " 23:59:59") + "'";
+		}
+		if(!product_kind.equals("")){
+			String[] arryItems = product_kind.split(",");
+			
+			if(arryItems != null && arryItems.length >0){
+				sql_kcpd += " and (";
+				for(int i=0;i<arryItems.length;i++){
+					if(i == 0){
+						sql_kcpd += " c.product_kind like '" + arryItems[i] + "%'";
+					}else{
+						sql_kcpd += " or c.product_kind like '" + arryItems[i] + "%'";
+					}
+				}
+				sql_kcpd += ")";
+			}
+			
+		}
+		if(!product_name.equals("")){
+			sql_kcpd = sql_kcpd + " and c.product_name like '%" + product_name + "%'";
+		}
+		sql_kcpd += " group by a.product_id";
+		
+		String sql = "select x.product_id,sum(x.nums) as nums from ((" + sql_ck + ") union all (" + sql_db + ") union all (" + sql_kcpd + ")) x group by x.product_id";
+		System.out.println(sql);
+		Map map = new HashMap();
+		List list = this.getResultList(sql);
+		if(list != null && list.size() > 0){
+			for(int i=0;i<list.size();i++){
+				Map tempMap = (Map)list.get(i);
+				map.put(tempMap.get("product_id"), tempMap.get("nums"));
+			}
+		}
+		
+		return map;
 	}
 	
 	
