@@ -33,14 +33,12 @@ function sel(product_id,product_xh,product_name,price,qz_serial_num){
 	
 	var qz_flag = window.opener.document.getElementById("qz_flag_<%=openerId%>");
 	
-	id.value = product_id;
-	xh.value = product_xh;
-	name.value = product_name;
-	pc.value = price;	
+	if(id != null) id.value = product_id;
+	if(xh != null) xh.value = product_xh;
+	if(name != null) name.value = product_name;
+	if(pc != null) pc.value = price;
 	
-	if(qz_flag != null){
-		qz_flag.value = qz_serial_num;
-	}
+	if(qz_flag != null) qz_flag.value = qz_serial_num;
 	
 	window.close();	
 }

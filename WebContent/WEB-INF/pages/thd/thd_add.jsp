@@ -508,6 +508,7 @@ if(thdProducts!=null && thdProducts.size()>0){
 			<input type="hidden" id="basic_ratio_<%=i %>" name="thdProducts[<%=i %>].basic_ratio"  value="0.00">
 			<input type="hidden" id="out_ratio_<%=i %>" name="thdProducts[<%=i %>].out_ratio"  value="0.00">	
 			<input type="hidden" id="lsxj_<%=i %>" name="thdProducts[<%=i %>].lsxj"  value="0.00">
+			<input type="hidden" id="ygcbj_<%=i %>" name="thdProducts[<%=i %>].ygcbj"  value="0.00">
 			<input type="hidden" id="sfcytc_<%=i %>" name="thdProducts[<%=i %>].sfcytc"  value="">				
 		</td>
 		<td class="a2"><input type="text" id="nums_<%=i %>" name="thdProducts[<%=i %>].nums" value="0" style="width:60px" onblur="hj();"></td>
@@ -593,7 +594,6 @@ if(thdProducts!=null && thdProducts.size()>0){
 		</td>
 	</tr>
 </table>
-
 </form>
 </body>
 </html>

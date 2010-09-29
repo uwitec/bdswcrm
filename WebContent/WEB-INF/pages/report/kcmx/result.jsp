@@ -67,7 +67,11 @@ if(!kind_name.equals("")){
 	<TBODY>
 <%
 
-List productKcList = kcMxReportService.getProductKcList(product_kind,product_name,store_id);
+List productKcList = kcMxReportService.getKcProductList(product_kind,product_name,store_id);
+			
+Map qcMap = kcMxReportService.getKcqcMxMap(product_kind,product_name,start_date,store_id);   //期初结果集
+Map rkMap = kcMxReportService.getRkNums(product_kind,product_name,start_date,end_date,store_id);//入库数结果集
+Map ckMap = kcMxReportService.getCkNums(product_kind,product_name,start_date,end_date,store_id);//出库结果集
 
 int hj_qc_nums = 0; //期初数量合计
 int hj_ck_nums = 0; //出库数量合计
@@ -85,21 +89,23 @@ if(productKcList != null && productKcList.size()>0){
 		String product_xh = StringUtils.nullToStr(map.get("product_xh"));
 		String dw = StringUtils.nullToStr(map.get("dw"));
 		
-		
-		//根据商品编号、开始时间、库房编号取库存期初情况
-		Map qcMap = kcMxReportService.getKcqcMxMap(product_id,start_date,store_id);
-		
-		String strNums = "0";   //期初数
-		if(qcMap != null){
-			strNums = StringUtils.nullToStr(qcMap.get("nums"));
-			if(strNums.equals("")){
-				strNums = "0";
-			}
+		String strNums = StringUtils.nullToStr(qcMap.get(product_id));
+		if(strNums.equals("")){
+			strNums = "0";
 		}
-		
 		int qc_nums = new Integer(strNums).intValue();  //期初数
-		int rk_nums = kcMxReportService.getRkNums(product_id,start_date,end_date,store_id); //收入数量
-		int ck_nums = kcMxReportService.getCkNums(product_id,start_date,end_date,store_id); //发出数量
+		
+		strNums = StringUtils.nullToStr(rkMap.get(product_id));
+		if(strNums.equals("")){
+			strNums = "0";
+		}
+		int rk_nums = new Integer(strNums).intValue();  //收入数量
+		
+		strNums = StringUtils.nullToStr(ckMap.get(product_id));
+		if(strNums.equals("")){
+			strNums = "0";
+		}
+		int ck_nums = new Integer(strNums).intValue();  //发出数量
 		
 		int jc_nums = qc_nums + rk_nums - ck_nums;
 		
@@ -164,7 +170,7 @@ if(productKcList != null && productKcList.size()>0){
 </table>
 <center class="Noprint">
 	<input type="button" name="button_print" value=" 打 印 " onclick="window.print();"> &nbsp;&nbsp;
-	<input type="button" name="button_print" value=" 导 出 " onclick="document.reportForm.submit();"> &nbsp;&nbsp;
+	<!--<input type="button" name="button_print" value=" 导 出 " onclick="document.reportForm.submit();">--> &nbsp;&nbsp;
     <input type="button" name="button_fh" value=" 返 回 " onclick="location.href='showKcMxCondition.html';"> 
 </center>
 <form name="reportForm" action="DownLoadXlsServlet" method="post">

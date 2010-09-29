@@ -46,4 +46,56 @@
        ---------------------------------------------------------------------------------------------------  
 
 
+思维EIP系统V1.02
+　　1、发布日期：2010-09-29
+
+　　2、更新内容：
+　　　　一、悠久改销售退货，预估成本为需问题；
+　　　　二、会员管理模块进行了改造，重新梳理；
+			  三、出入库汇总、库存成本汇本进行了修改，改善了执行时资源占用过多的问题；
+			  四、解决出入库汇总明细不正确的问题；
+
+　　3、数据库修改：
+				--修改积分规则表修改字段类型
+				ALTER TABLE `jfgz` MODIFY COLUMN `xfje` DOUBLE DEFAULT 0,
+				 MODIFY COLUMN `dyjf` DOUBLE DEFAULT 0;
+				 
+				--会员卡制作表修改,添加状态,去掉了是否充值,初始金额
+				ALTER TABLE `hykzz` DROP COLUMN `sfcz`;
+				ALTER TABLE `hykzz` ADD COLUMN `state` VARCHAR(45) AFTER `cz_date`;
+				ALTER TABLE `hykzz` DROP COLUMN `csje`;
+				
+				--会员卡档案表修改
+				ALTER TABLE `hykda` MODIFY COLUMN `hykh` VARCHAR(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+				 DROP COLUMN `sfty`,
+				 MODIFY COLUMN `hymc` VARCHAR(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+				 MODIFY COLUMN `lxrname` VARCHAR(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+				 MODIFY COLUMN `lxdh` VARCHAR(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+				 MODIFY COLUMN `mobile` VARCHAR(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+				 MODIFY COLUMN `address` VARCHAR(200) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+				 MODIFY COLUMN `mail` VARCHAR(200) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+				 DROP COLUMN `ffjg`,
+				 DROP COLUMN `zkrq`,
+				 DROP COLUMN `zkjsr`,
+				 DROP COLUMN `hybh`,
+				 MODIFY COLUMN `fkbz` VARCHAR(1000) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL;
+		 
+　　4、对应SVN版本号：778
+
+　　5、部署进度跟踪
+　　　  -------------------------------------------------------------------------------------------------
+           服务器帐套名称            |              帐套部署时间                       |    部署人员
+        -------------------------------------------------------------------------------------------------
+　　　   保定思维                    |               2010-09-29                        |    李玉堂
+　　　   张家口升源                  |                待部署                           |                                                     
+　　　   易县未来                    |                待部署                           |                                   
+　　　   定州创逸                    |                待部署                           |                                                            
+　　　   高碑店骏腾                  |                待部署                           |                                                     
+　　　   保定博通                    |                待部署                           |                                 
+　　　   张家口金诺                  |                待部署                           |         
+　　　   秦皇岛金恒生                |                待部署                           |                               
+　　　   承德扬天                    |                待部署                           |                                                         
+　　　   北京银联合力                |                待部署                           |            
+       ---------------------------------------------------------------------------------------------------  
+
                                                                                                

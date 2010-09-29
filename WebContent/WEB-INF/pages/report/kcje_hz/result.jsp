@@ -78,7 +78,7 @@ if(!product_kind.equals("")){
 double kczz = 0 ; //库存总值
 
 
-List productKcList = kcMxReportService.getProductKcList(product_kind,product_name,"");
+List productKcList = kcMxReportService.getKcProductList(product_kind,product_name,"");
 
 if(productKcList != null && productKcList.size()>0){
 	
@@ -274,11 +274,11 @@ if(productKcList != null && productKcList.size()>0){
 		kczz += jc_cb;
 %>
 		<TR>
+			<TD class=ReportItemXh style="font-weight:bold">合计</TD>
 			<TD class=ReportItem>&nbsp;</TD>
 			<TD class=ReportItem>&nbsp;</TD>			
 			<TD class=ReportItem>&nbsp;</TD>
 			<TD class=ReportItem>&nbsp;</TD>			
-			<TD class=ReportItemXh style="font-weight:bold">小计&nbsp;</TD>
 			
 			<TD class=ReportItemMoney style="font-weight:bold"><%=rk_nums %>&nbsp;</TD>
 			<TD class=ReportItemMoney style="font-weight:bold">&nbsp;</TD>
@@ -295,7 +295,7 @@ if(productKcList != null && productKcList.size()>0){
 <%
 	}
 }
-%>
+%><!--
 		<TR>
 			<TD class=ReportItem>&nbsp;</TD>
 			<TD class=ReportItem>&nbsp;</TD>		
@@ -315,7 +315,7 @@ if(productKcList != null && productKcList.size()>0){
 			<TD class=ReportItemMoney style="font-weight:bold">&nbsp;</TD>
 			<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(kczz,2) %>&nbsp;</TD>						
 		</TR>
-	</TBODY>
+	--></TBODY>
 </TABLE>
 <br>
 <table width="99%">
