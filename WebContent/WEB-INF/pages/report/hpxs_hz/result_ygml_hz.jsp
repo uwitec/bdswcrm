@@ -44,6 +44,8 @@ if(!product_xh.equals("")){
 <title>货品预估毛利汇总</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/report.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="jquery/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="js/switchCss.js"></script>
 <script type="text/javascript">
 	function openWin(product_id,client_name,xsry_id){
 		document.myform.product_id.value = product_id;
@@ -70,7 +72,7 @@ if(!product_xh.equals("")){
 	</TBODY>
 </TABLE>
 <BR>
-<TABLE align="center" cellSpacing=0 cellPadding=0 width="99%" border=0 style="BORDER-TOP: #000000 2px solid;BORDER-LEFT:#000000 1px solid">
+<TABLE align="center" class="stripe" cellSpacing=0 cellPadding=0 width="99%" border=0 style="BORDER-TOP: #000000 2px solid;BORDER-LEFT:#000000 1px solid">
 	<THEAD>
 		<TR>
 			<TD class=ReportHead>货品编码</TD>

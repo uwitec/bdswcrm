@@ -33,6 +33,8 @@ if(!store_id.equals("")){
 <title>出入库汇总——明细信息</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/report.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="jquery/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="js/switchCss.js"></script>
 <style media=print>  
 .Noprint{display:none;}<!--用本样式在打印时隐藏非打印项目-->
 </style> 
@@ -57,7 +59,7 @@ if(!store_id.equals("")){
 	</TBODY>
 </TABLE>
 <BR>
-<TABLE align="center" cellSpacing=0 cellPadding=0 width="99%" border=0 style="BORDER-TOP: #000000 2px solid;BORDER-LEFT:#000000 1px solid">
+<TABLE align="center" class="stripe" cellSpacing=0 cellPadding=0 width="99%" border=0 style="BORDER-TOP: #000000 2px solid;BORDER-LEFT:#000000 1px solid">
 	<THEAD>
 		<TR>
 			<TD class=ReportHead>业务类型</TD>

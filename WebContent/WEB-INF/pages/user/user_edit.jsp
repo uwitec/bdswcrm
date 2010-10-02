@@ -49,7 +49,11 @@ List storeList = (List)VS.findValue("storeList");
 				return;
 			}			
 		}			
-	
+		//所在库房不能为空
+		if(document.getElementById("szkf").value == ""){
+			alert("所在库房不能为空，请选择！");
+			return;
+		}
 		document.userForm.submit();
 	}
 	
@@ -155,20 +159,19 @@ List storeList = (List)VS.findValue("storeList");
 	<tr id="trSzkf">
 		<td class="a1" width="15%">所在库房</td>
 		<td class="a2" colspan="3">
-			<select name="user.szkf" id="szkf" style="width:150px">
-			<option value=""></option>
+			<select name="user.szkf" id="szkf" multiple="multiple" style="width:250px;height:140px;">
 			<%
 			if(storeList != null){
 				Iterator it = storeList.iterator();
 				while(it.hasNext()){
 					StoreHouse storeHouse = (StoreHouse)it.next();
 			%>
-				<option value="<%=StringUtils.nullToStr(storeHouse.getId()) %>" <%if(StringUtils.nullToStr(storeHouse.getId()).equals(StringUtils.nullToStr(user.getSzkf()))) out.print("selected"); %>><%=StringUtils.nullToStr(storeHouse.getName()) %></option>
+				<option value="<%=StringUtils.nullToStr(storeHouse.getId()) %>" <%if(StringUtils.nullToStr(user.getSzkf()).indexOf(StringUtils.nullToStr(storeHouse.getId())) != -1) out.print("selected"); %>><%=StringUtils.nullToStr(storeHouse.getName()) %></option>
 			<%
 				}
 			}
 			%>
-			</select><font color="red">*</font>
+			</select><font color="red">*</font><BR>注:选择多个、取消选择请按住CTRL键点击鼠标左键。
 		</td>
 	</tr>			
 	<tr height="35">

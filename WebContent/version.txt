@@ -80,7 +80,7 @@
 				 DROP COLUMN `hybh`,
 				 MODIFY COLUMN `fkbz` VARCHAR(1000) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL;
 		 
-　　4、对应SVN版本号：778
+　　4、对应SVN版本号：785
 
 　　5、部署进度跟踪
 　　　  -------------------------------------------------------------------------------------------------

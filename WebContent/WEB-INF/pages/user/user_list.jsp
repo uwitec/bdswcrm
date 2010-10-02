@@ -138,7 +138,7 @@ String real_name = (String)VS.findValue("real_name");
 		<td class="a1"><%=StringUtils.nullToStr(map.get("mobile")) %></td>
 		<td class="a1">
 			<a href="javascript:edit('<%=StringUtils.nullToStr(map.get("user_id")) %>');">修改</a>&nbsp;&nbsp;&nbsp;&nbsp;
-			<a href="javascript:openWin('<%=StringUtils.nullToStr(map.get("user_id")) %>');">查看</a>&nbsp;&nbsp;&nbsp;&nbsp;
+			<!--<a href="javascript:openWin('<%=StringUtils.nullToStr(map.get("user_id")) %>');">查看</a>&nbsp;&nbsp;&nbsp;&nbsp;-->
 			<a href="javascript:del('<%=StringUtils.nullToStr(map.get("user_id")) %>');">删除</a>&nbsp;&nbsp;&nbsp;&nbsp;
 			<a href="javascript:resetPass('<%=StringUtils.nullToStr(map.get("user_name")) %>');">重置密码</a>
 		</td>

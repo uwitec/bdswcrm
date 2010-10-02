@@ -40,6 +40,8 @@ if(!store_id.equals("")){
 <title>库龄汇总——统计结果</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/report.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="jquery/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="js/switchCss.js"></script>
 <style media=print>  
 .Noprint{display:none;}<!--用本样式在打印时隐藏非打印项目-->
 </style> 
@@ -54,7 +56,7 @@ if(!store_id.equals("")){
 	</TBODY>
 </TABLE>
 <BR>
-<TABLE align="center" cellSpacing=0 cellPadding=0 width="99%" border=0 style="BORDER-TOP: #000000 2px solid;BORDER-LEFT:#000000 1px solid">
+<TABLE align="center" class="stripe" cellSpacing=0 cellPadding=0 width="99%" border=0 style="BORDER-TOP: #000000 2px solid;BORDER-LEFT:#000000 1px solid">
 	<THEAD>
 		<TR>
 			<TD class=ReportHead>序号</TD>
@@ -89,19 +91,19 @@ if(productList != null && productList.size()>0){
 		 
 %>
 		<TR>
-			<TD class=ReportItemXh><%=i+1 %>&nbsp;</TD>
-			<TD class=ReportItemXh><%=StringUtils.nullToStr(map.get("serial_num"))%>&nbsp;</TD>
-			<TD class=ReportItemXh><%=StringUtils.nullToStr(map.get("product_id")) %></TD>
+			<TD class=ReportItemXh nowrap="nowrap"><%=i+1 %>&nbsp;</TD>
+			<TD class=ReportItemXh nowrap="nowrap"><%=StringUtils.nullToStr(map.get("serial_num"))%>&nbsp;</TD>
+			<TD class=ReportItemXh nowrap="nowrap"><%=StringUtils.nullToStr(map.get("product_id")) %></TD>
 			<TD class=ReportItem><%=StringUtils.nullToStr(map.get("product_name")) %>&nbsp;</TD>
 			<TD class=ReportItem><%=StringUtils.nullToStr(map.get("product_xh")) %>&nbsp;</TD>
-			<TD class=ReportItemMoney><%=StringUtils.nullToStr(map.get("klday")) %>&nbsp;</TD>
-			<td class=ReportItemMoney><%=JMath.round(khcbj,2) %>&nbsp;</td>
-			<td class=ReportItemMoney><%=JMath.round(lsbj,2) %>&nbsp;</td>
-			<td class=ReportItemMoney><%=JMath.round(lsxj,2) %>&nbsp;</td>
-			<td class=ReportItemMoney><%=JMath.round(fxbj,2) %>&nbsp;</td>
-			<td class=ReportItemMoney><%=JMath.round(fxxj,2) %>&nbsp;</td>
-			<td class=ReportItemMoney><%=JMath.round(gf) %>&nbsp;</td>
-			<td class=ReportItemMoney><%=JMath.round(dss) %>&nbsp;</td>
+			<TD class=ReportItemMoney nowrap="nowrap"><%=StringUtils.nullToStr(map.get("klday")) %>&nbsp;</TD>
+			<td class=ReportItemMoney nowrap="nowrap"><%=JMath.round(khcbj,2) %>&nbsp;</td>
+			<td class=ReportItemMoney nowrap="nowrap"><%=JMath.round(lsbj,2) %>&nbsp;</td>
+			<td class=ReportItemMoney nowrap="nowrap"><%=JMath.round(lsxj,2) %>&nbsp;</td>
+			<td class=ReportItemMoney nowrap="nowrap"><%=JMath.round(fxbj,2) %>&nbsp;</td>
+			<td class=ReportItemMoney nowrap="nowrap"><%=JMath.round(fxxj,2) %>&nbsp;</td>
+			<td class=ReportItemMoney nowrap="nowrap"><%=JMath.round(gf) %>&nbsp;</td>
+			<td class=ReportItemMoney nowrap="nowrap"><%=JMath.round(dss) %>&nbsp;</td>
 		</TR>
 <%
 	}

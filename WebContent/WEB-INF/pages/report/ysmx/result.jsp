@@ -23,6 +23,8 @@ String flag2 = StringUtils.nullToStr(request.getParameter("flag2"));            
 <title>客户应收汇总表</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/report.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="jquery/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="js/switchCss.js"></script>
 <style media=print>  
 .Noprint{display:none;}<!--用本样式在打印时隐藏非打印项目-->
 </style> 
@@ -48,7 +50,7 @@ String flag2 = StringUtils.nullToStr(request.getParameter("flag2"));            
 	<input type="hidden" name="end_date" value="<%=end_date %>">
 	<input type="hidden" name="client_name" value="">
 </form>
-<TABLE align="center" cellSpacing=0 cellPadding=0 width="99%" border=0 style="BORDER-TOP: #000000 2px solid;BORDER-LEFT:#000000 1px solid">
+<TABLE align="center" class="stripe" cellSpacing=0 cellPadding=0 width="99%" border=0 style="BORDER-TOP: #000000 2px solid;BORDER-LEFT:#000000 1px solid">
 	<THEAD>
 		<TR>
 			<TD class=ReportHead width="18%">客户名称</TD>

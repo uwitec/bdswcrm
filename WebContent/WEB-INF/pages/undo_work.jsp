@@ -326,10 +326,6 @@ List confirmKfdbList = (List)VS.findValue("confirmKfdbList");
 				<%
 				}
 				%>	
-				
-				<%
-				if(confirmKfdbList != null && confirmKfdbList.size() > 0){
-				%>
 				<div class="inner">	
 					<table width="100%" align="left" cellpadding="0" cellspacing="0">
 						<tr>
@@ -337,7 +333,7 @@ List confirmKfdbList = (List)VS.findValue("confirmKfdbList");
 						</tr>
 						<tr><td height="5"></td></tr>
 						<%
-						
+						if(confirmKfdbList != null && confirmKfdbList.size() > 0){
 							for(int i=0;i<confirmKfdbList.size();i++){
 								Kfdb kfdb = (Kfdb)confirmKfdbList.get(i);
 						%>			
@@ -347,12 +343,16 @@ List confirmKfdbList = (List)VS.findValue("confirmKfdbList");
 						</tr>
 						<%
 							}
+						}else{
+						%>
+						<tr>
+							<td width="100%" height="23" align="left">&nbsp;无待确认库房调拨单！</td>
+						</tr>							
+						<%
+						}
 						%>															
 					</table>	
 				</div>	
-				<%
-				}
-				%>		
 		</td>
 	</tr>
 </table>

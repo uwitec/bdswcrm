@@ -61,7 +61,12 @@ session.removeAttribute("MSG");
 				return;
 			}
 		}
-		
+
+		//所在库房不能为空
+		if(document.getElementById("szkf").value == ""){
+			alert("所在库房不能为空，请选择！");
+			return;
+		}
 		document.userForm.submit();
 	}
 	
@@ -148,8 +153,7 @@ session.removeAttribute("MSG");
 	<tr id="trSzkf">
 		<td class="a1" width="15%">所在库房</td>
 		<td class="a2" colspan="3">
-			<select name="user.szkf" id="szkf" style="width:150px">
-			<option value=""></option>
+			<select name="user.szkf" id="szkf" multiple="multiple" style="width:250px;height:140px;">
 			<%
 			if(storeList != null){
 				Iterator it = storeList.iterator();
@@ -161,7 +165,7 @@ session.removeAttribute("MSG");
 				}
 			}
 			%>
-			</select><font color="red">*</font>
+			</select><font color="red">*</font><BR>注:选择多个、取消选择请按住CTRL键点击鼠标左键。
 		</td>
 	</tr>		
 	<tr height="35">
