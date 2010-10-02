@@ -3,6 +3,7 @@ package com.sw.cms.dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.jdbc.core.RowMapper;
 
@@ -12,6 +13,7 @@ import com.sw.cms.model.Kfdb;
 import com.sw.cms.model.KfdbProduct;
 import com.sw.cms.model.Page;
 import com.sw.cms.util.DateComFunc;
+import com.sw.cms.util.StringUtils;
 
 public class KfdbDAO extends JdbcBaseDAO {
 	
@@ -39,7 +41,28 @@ public class KfdbDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public List getConfirmKfdbList(String user_id){
-		String sql = "select * from kfdb where state='已出库' and rk_store_id in (SELECT szkf FROM sys_user where user_id='" + user_id + "')";
+		
+		String szkf = "";
+		String tempSql = "SELECT szkf FROM sys_user where user_id='" + user_id + "'";
+		Map map = this.getResultMap(tempSql);
+		if(map != null) szkf = StringUtils.nullToStr(map.get("szkf"));
+		
+		String sql = "select * from kfdb where state='已出库'";
+		if(!szkf.equals("")){
+			String[] arrySzkf = szkf.split(",");
+			if(arrySzkf != null && arrySzkf.length > 0){
+				sql += " and(";
+				for(int i=0;i<arrySzkf.length;i++){
+					if(i == 0){
+						sql += "rk_store_id='" + (arrySzkf[i]).trim() + "'";
+					}else{
+						sql += " or rk_store_id='" + (arrySzkf[i]).trim() + "'";
+					}
+					sql += "";
+				}
+				sql += ")";
+			}
+		}
 		
 		return this.getResultList(sql,new KfdbRowMapper());
 	}
