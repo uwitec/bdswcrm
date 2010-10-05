@@ -143,8 +143,9 @@ List storeList = (List)VS.findValue("storeList");
 		<td class="a1" width="15%">用户类别</td>
 		<td class="a2" width="35%">
 			<select name="user.is_dls" id="is_dls" onchange="selType(this.value);" style="width:150px">
-				<option value="0" <%if(StringUtils.nullToStr(user.getIs_dls()).equals("0")) out.print("selected"); %>>业务员</option>
+				<option value="0" <%if(StringUtils.nullToStr(user.getIs_dls()).equals("0")) out.print("selected"); %>>业务员(普通)</option>
 				<option value="3" <%if(StringUtils.nullToStr(user.getIs_dls()).equals("3")) out.print("selected"); %>>业务员(零售)</option>
+				<option value="4" <%if(StringUtils.nullToStr(user.getIs_dls()).equals("4")) out.print("selected"); %>>业务员(渠道)</option>
 				<option value="1" <%if(StringUtils.nullToStr(user.getIs_dls()).equals("1")) out.print("selected"); %>>代理商</option>
 				<option value="2" <%if(StringUtils.nullToStr(user.getIs_dls()).equals("2")) out.print("selected"); %>>供应商</option>
 			</select><font color="red">*</font>

@@ -11,11 +11,6 @@ function chgHasFy(vl){
 		document.getElementById("fy_tdobj1").style.display = "none";
 		document.getElementById("fy_tdobj2").style.display = "none";
 		document.getElementById("fy_tdobj3").style.display = "none";
-
-		document.getElementById("fy_type").value = "";
-		document.getElementById("fy_type_show").value = "";
-		document.getElementById("fy_je").value = "0.00";
-		document.getElementById("fy_account").value = "";
 	}else{
 		document.getElementById("fy_tdobj1").style.display = "";
 		document.getElementById("fy_tdobj2").style.display = "";

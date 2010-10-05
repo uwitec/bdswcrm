@@ -137,8 +137,9 @@ session.removeAttribute("MSG");
 		<td class="a1" width="15%">用户类别</td>
 		<td class="a2" width="35%">
 			<select name="user.is_dls" id="is_dls" onchange="selType(this.value);" style="width:150px">
-				<option value="0">业务员</option>
+				<option value="0">业务员(普通)</option>
 				<option value="3">业务员(零售)</option>
+				<option value="4">业务员(渠道)</option>
 				<option value="1">代理商</option>
 				<option value="2">供应商</option>
 			</select><font color="red">*</font>

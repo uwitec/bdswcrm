@@ -79,7 +79,7 @@ List funcList = menuService.getUserYwgnFunc(user_id);
 	function openWin(flag){
 		if(flag == "1"){
 			var destination = "top.htm";
-			var fea ='width=800,height=600,left=' + (screen.availWidth-800)/2 + ',top=' + (screen.availHeight-600)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+			var fea ='width=900,height=600,left=' + (screen.availWidth-900)/2 + ',top=' + (screen.availHeight-600)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 			
 			var newWin =window.open(destination,'库存查询',fea);
 			newWin.focus();

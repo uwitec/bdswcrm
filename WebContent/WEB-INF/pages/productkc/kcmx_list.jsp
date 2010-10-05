@@ -52,16 +52,21 @@ String user_type = info.getIs_dls();   //用户类别
 		<td nowrap="nowrap">规格</td>	
 		<td nowrap="nowrap">库存数量</td>
 	<%
-	if(user_type.equals("0")){
+	if(user_type.equals("0") || user_type.equals("4")){  //业务员普通、业务员渠道
 	%>
 		<td nowrap="nowrap">考核成本</td>
 	<%
 	}
-	%>
+	if(user_type.equals("4")){  //业务员渠道
+	%>	
+		<td nowrap="nowrap">预估成本</td>
+	<%
+	}
+	%>		
 		<td nowrap="nowrap">零售报价</td>
 		<td nowrap="nowrap">零售限价</td>
 	<%
-	if(user_type.equals("0")){
+	if(user_type.equals("0") || user_type.equals("4")){  //业务员普通、业务员渠道
 	%>		
 		<td nowrap="nowrap">分销报价</td>
 		<td nowrap="nowrap">分销限价</td>
@@ -79,6 +84,7 @@ String user_type = info.getIs_dls();   //用户类别
 		Map map = (Map)it.next();
 		
 		double khcbj = map.get("khcbj")==null?0:((Double)map.get("khcbj")).doubleValue();
+		double ygcbj = map.get("ygcbj")==null?0:((Double)map.get("ygcbj")).doubleValue();
 		double lsbj = map.get("lsbj")==null?0:((Double)map.get("lsbj")).doubleValue();
 		double lsxj = map.get("lsxj")==null?0:((Double)map.get("lsxj")).doubleValue();
 		double fxxj = map.get("fxxj")==null?0:((Double)map.get("fxxj")).doubleValue();
@@ -97,16 +103,21 @@ String user_type = info.getIs_dls();   //用户类别
 		<td align="left"><%=StringUtils.nullToStr(map.get("product_xh")) %></td>
 		<td nowrap="nowrap"><%=num %></td>
 	<%
-	if(user_type.equals("0")){
+	if(user_type.equals("0") || user_type.equals("4")){
 	%>		
 		<td align="right" nowrap="nowrap"><%=JMath.round(khcbj,2) %>&nbsp;</td>
 	<%
 	}
+	if(user_type.equals("4")){
 	%>		
+	    <td align="right" nowrap="nowrap"><%=JMath.round(ygcbj,2) %>&nbsp;</td>
+	<%
+	}
+	%>    
 		<td align="right" nowrap="nowrap"><%=JMath.round(lsbj,2) %>&nbsp;</td>
 		<td align="right" nowrap="nowrap"><%=JMath.round(lsxj,2) %>&nbsp;</td>
 	<%
-	if(user_type.equals("0")){
+	if(user_type.equals("0") || user_type.equals("4")){
 	%>			
 		<td align="right" nowrap="nowrap"><%=JMath.round(fxbj,2) %>&nbsp;</td>
 		<td align="right" nowrap="nowrap"><%=JMath.round(fxxj,2) %>&nbsp;</td>

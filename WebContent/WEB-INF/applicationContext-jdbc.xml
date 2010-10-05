@@ -603,6 +603,11 @@
      <bean id="djhpszDao" class="com.sw.cms.dao.DjhpszDAO">
           <property name="jdbcTemplate" ref="jdbcTemplate"/>
      </bean>
+     
+     <!-- 业务员应收汇总-->
+     <bean id="yshzJsrDao" class="com.sw.cms.dao.YshzJsrDAO">
+          <property name="jdbcTemplate" ref="jdbcTemplate"/>
+     </bean>     
 </beans>
 
 

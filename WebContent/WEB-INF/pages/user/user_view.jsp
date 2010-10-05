@@ -57,11 +57,15 @@ SysUser user = (SysUser)VS.findValue("user");
 	<%
 	String is_dls = StringUtils.nullToStr(user.getIs_dls());
 	if(is_dls.equals("0")){
-		is_dls = "业务员";
+		is_dls = "业务员(普通)";
 	}else if(is_dls.equals("1")){
 		is_dls = "代理商";
 	}else if(is_dls.equals("2")){
 		is_dls = "供应商";
+	}else if(is_dls.equals("3")){
+		is_dls = "业务员(零售)";
+	}else if(is_dls.equals("4")){
+		is_dls = "业务员(渠道)";
 	}
 	%>
 	<tr>
