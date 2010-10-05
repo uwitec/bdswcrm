@@ -2988,6 +2988,19 @@
         <action name="delDjhpsz" class="djhpszAction" method="del">
             <result name="success" type="redirect">listDjhpsz.html</result>
         </action>        
-        <!-- 兑奖货品设置结束 -->        
+        <!-- 兑奖货品设置结束 -->
+
+        <!-- 业务员应收汇总 -->
+        <action name="showYshzJsrCondition" class="yshzJsrAction" method="showCondition">
+            <result name="success">/WEB-INF/pages/report/yshz_jsr/condition.jsp</result>
+        </action>
+        <action name="getYshzJsrResult" class="yshzJsrAction" method="getResult">
+            <result name="success">/WEB-INF/pages/report/yshz_jsr/result.jsp</result>
+        </action>
+        <action name="getYshzJsrResultMx" class="yshzJsrAction" method="getResultMx">
+            <result name="success">/WEB-INF/pages/report/yshz_jsr/result_mx.jsp</result>
+        </action>        
+        <!-- 业务员应收汇总 -->
+
     </package>
 </xwork>
