@@ -55,6 +55,34 @@ public class YshzJsrService {
 	public List getXsdList(String start_date,String end_date,String client_name,String jsr){
 		return yshzJsrDao.getXsdList(start_date, end_date, client_name, jsr);
 	}
+	
+	
+	/**
+	 * 业务员应收汇总表--应收列
+	 * @return
+	 */
+	public Map getYwyYsjeMap(){
+		return yshzJsrDao.getYwyYsjeMap();
+	}
+	
+	
+	/**
+	 * 业务员应收汇总表--超期应收款
+	 * @return
+	 */
+	public Map getYwyCqjeMap(){
+		return yshzJsrDao.getYwyCqjeMap();
+	}
+	
+	
+	/**
+	 * 业务员应收汇总--最长账期、平均账期
+	 * @param client_id
+	 * @return
+	 */
+	public Map getYwyCqts(){
+		return yshzJsrDao.getYwyCqts();
+	}
 
 	public YshzJsrDAO getYshzJsrDao() {
 		return yshzJsrDao;

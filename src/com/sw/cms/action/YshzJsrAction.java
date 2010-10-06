@@ -19,6 +19,10 @@ public class YshzJsrAction extends BaseAction {
 	private Map fsMap = new HashMap();
 	private List xsdList = new ArrayList();
 	
+	private Map ysjeMap = new HashMap();
+	private Map cqjeMap = new HashMap();
+	private Map cqtsMap = new HashMap();
+	
 	private String start_date = "";
 	private String end_date = "";
 	private String client_name = "";
@@ -75,6 +79,27 @@ public class YshzJsrAction extends BaseAction {
 			}
 			qcMap = yshzJsrService.getYshzJsrQc(start_date, client_name, jsr);
 			xsdList = yshzJsrService.getXsdList(start_date, end_date, client_name, jsr);	
+			return SUCCESS;
+		}catch(Exception e){
+			log.error("业务员应收汇总出错," + e.getMessage());
+			e.printStackTrace();
+			return ERROR;
+		}
+	}
+	
+	
+	/**
+	 * 业务员应收汇总表
+	 * @return
+	 */
+	public String getHzResult(){
+		try{
+			userList = userService.getYwryListByCon("");
+			
+			ysjeMap = yshzJsrService.getYwyYsjeMap();
+			cqjeMap = yshzJsrService.getYwyCqjeMap();
+			cqtsMap = yshzJsrService.getYwyCqts();
+			
 			return SUCCESS;
 		}catch(Exception e){
 			log.error("业务员应收汇总出错," + e.getMessage());
@@ -179,6 +204,36 @@ public class YshzJsrAction extends BaseAction {
 
 	public void setXsdList(List xsdList) {
 		this.xsdList = xsdList;
+	}
+
+
+	public Map getYsjeMap() {
+		return ysjeMap;
+	}
+
+
+	public void setYsjeMap(Map ysjeMap) {
+		this.ysjeMap = ysjeMap;
+	}
+
+
+	public Map getCqjeMap() {
+		return cqjeMap;
+	}
+
+
+	public void setCqjeMap(Map cqjeMap) {
+		this.cqjeMap = cqjeMap;
+	}
+
+
+	public Map getCqtsMap() {
+		return cqtsMap;
+	}
+
+
+	public void setCqtsMap(Map cqtsMap) {
+		this.cqtsMap = cqtsMap;
 	}
 
 }
