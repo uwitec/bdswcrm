@@ -2999,8 +2999,23 @@
         </action>
         <action name="getYshzJsrResultMx" class="yshzJsrAction" method="getResultMx">
             <result name="success">/WEB-INF/pages/report/yshz_jsr/result_mx.jsp</result>
-        </action>        
+        </action>
+        <action name="getYwyYshzResult" class="yshzJsrAction" method="getHzResult">
+            <result name="success">/WEB-INF/pages/report/yshz_jsr/result_hz.jsp</result>
+        </action>
         <!-- 业务员应收汇总 -->
+        
+        <!-- 客户经理应收汇总 -->
+        <action name="showYshzKhjlCondition" class="yshzKhjlAction" method="showCondition">
+            <result name="success">/WEB-INF/pages/report/yshz_khjl/condition.jsp</result>
+        </action>
+        <action name="getYshzKhjlResult" class="yshzKhjlAction" method="getResult">
+            <result name="success">/WEB-INF/pages/report/yshz_khjl/result.jsp</result>
+        </action>
+        <action name="getYshzKhjlResultMx" class="yshzKhjlAction" method="getResultMx">
+            <result name="success">/WEB-INF/pages/report/yshz_khjl/result_mx.jsp</result>
+        </action>
+        <!-- 客户经理应收汇总 -->
 
     </package>
 </xwork>
