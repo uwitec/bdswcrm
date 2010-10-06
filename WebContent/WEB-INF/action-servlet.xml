@@ -211,4 +211,6 @@
      <bean id="djhpszAction" class="com.sw.cms.action.DjhpszAction" autowire="byName" scope="prototype"/>
      
      <bean id="yshzJsrAction" class="com.sw.cms.action.YshzJsrAction" autowire="byName" scope="prototype"/>
+     
+     <bean id="yshzKhjlAction" class="com.sw.cms.action.YshzKhjlAction" autowire="byName" scope="prototype"/>
 </beans>

@@ -6,7 +6,7 @@
 <%@ page import="java.util.*" %>
 <html>
 <head>
-<title>业务员应收变化</title>
+<title>客户经理应收汇总</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
@@ -29,11 +29,11 @@ function doSubmit(){
 </script>
 </head>
 <body onload="initFzrTip();initClientTip();">
-<form name="reportForm" action="getYshzJsrResult.html" method="post">
+<form name="reportForm" action="getYshzKhjlResult.html" method="post">
 <table width="100%" align="center" class="chart_info" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td colspan="2">业务员应收变化</td>
+		<td colspan="2">客户经理应收汇总</td>
 	</tr>
 	</thead>
 </table>
@@ -53,11 +53,11 @@ function doSubmit(){
 		<input type="hidden" name="client_name" id="client_id" value="">
 		<div id="clientsTip" style="height:12px;position:absolute;left:276px; top:85px; width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		</td>	
-		<td class="a1">业务员</td>
+		<td class="a1">客户经理</td>
 		<td class="a4">
 		    <input id="brand" type="text" maxlength="20" style="width:200px" onblur="setValue()"  /> 
             <div id="brandTip" style="height:12px;position:absolute;left:720px; top:85px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
-		    <input type="hidden" name="jsr" id="fzr"  /> 
+		    <input type="hidden" name="khjl" id="fzr"  /> 
 		</td>										
 	</tr>	
 	<tr height="35">

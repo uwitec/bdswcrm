@@ -28,7 +28,7 @@ if(!client_name.equals("")){
 
 <html>
 <head>
-<title>业务员应收汇总--明细</title>
+<title>业务员应收变化--明细</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/report.css" rel="stylesheet" type="text/css" />
 <style media=print>  
@@ -48,7 +48,7 @@ if(!client_name.equals("")){
 <TABLE  align="center" cellSpacing=0 cellPadding=0 width="99%" border=0>
 	<TBODY>
 		<TR style="BACKGROUND-COLOR: #dcdcdc;height:45;">
-		    <TD align="center" width="100%"><font style="FONT-SIZE: 16px"><B>业务员应收汇总--明细</B></font><br><%=strCon %></TD>
+		    <TD align="center" width="100%"><font style="FONT-SIZE: 16px"><B>业务员应收变化--明细</B></font><br><%=strCon %></TD>
 		</TR>
 	</TBODY>
 </TABLE>

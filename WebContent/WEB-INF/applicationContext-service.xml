@@ -787,6 +787,13 @@
            <bean class="com.sw.cms.service.YshzJsrService" autowire="byName"/> 
         </property>
     </bean>
+    
+    <!-- 客户经理应收汇总 -->
+    <bean id="yshzKhjlService" parent="baseTransaction">
+        <property name="target">
+           <bean class="com.sw.cms.service.YshzKhjlService" autowire="byName"/> 
+        </property>
+    </bean>
 
 </beans>
 

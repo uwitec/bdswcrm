@@ -8,7 +8,7 @@
 <%
 OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
 
-List userList = (List)VS.findValue("userList");
+List khjlList = (List)VS.findValue("khjlList");
 
 Map qcMap = (Map)VS.findValue("qcMap");
 Map fsMap = (Map)VS.findValue("fsMap");
@@ -16,7 +16,7 @@ Map fsMap = (Map)VS.findValue("fsMap");
 String start_date = StringUtils.nullToStr(VS.findValue("start_date"));   //开始时间
 String end_date = StringUtils.nullToStr(VS.findValue("end_date"));       //结束时间
 String client_name = StringUtils.nullToStr(VS.findValue("client_name")); //客户名称
-String jsr = StringUtils.nullToStr(VS.findValue("jsr"));                 //经手人
+String khjl = StringUtils.nullToStr(VS.findValue("khjl"));                 //经手人
 
 String con = "日期：" + start_date + "至" + end_date;
 if(!client_name.equals("")){
@@ -26,32 +26,28 @@ if(!client_name.equals("")){
 
 <html>
 <head>
-<title>业务员应收变化</title>
+<title>客户经理应收汇总</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/report.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="jquery/jquery-1.4.2.min.js"></script>
 <script type="text/javascript" src="js/switchCss.js"></script>
 <style media=print>  
-.Noprint{display:none;}<!--用本样式在打印时隐藏非打印项目-->
+	.Noprint{display:none;}<!--用本样式在打印时隐藏非打印项目-->
 </style> 
 </head>
 <body align="center">
 <TABLE  align="center" cellSpacing=0 cellPadding=0 width="99%" border=0>
 	<TBODY>
 		<TR style="BACKGROUND-COLOR: #dcdcdc;height:45;">
-		    <TD align="center" width="100%"><font style="FONT-SIZE: 16px"><B>业务员应收变化</B></font><br><%=con %></TD>
+		    <TD align="center" width="100%"><font style="FONT-SIZE: 16px"><B>客户经理应收汇总</B></font><br><%=con %></TD>
 		</TR>
 	</TBODY>
 </TABLE>
-<form name="myform" method="post" action="getYshzJsrResultMx.html">
-	<input type="hidden" name="start_date" value="<%=start_date %>">
-	<input type="hidden" name="end_date" value="<%=end_date %>">
-	<input type="hidden" name="client_name" value="<%=client_name %>">
-</form>
+<BR>
 <TABLE align="center" class="stripe" cellSpacing=0 cellPadding=0 width="99%" border=0 style="BORDER-TOP: #000000 2px solid;BORDER-LEFT:#000000 1px solid">
 	<THEAD>
 		<TR>
-			<TD class=ReportHead>业务员</TD>
+			<TD class=ReportHead>客户经理</TD>
 			<TD class=ReportHead>期初数</TD>
 			<TD class=ReportHead>本期发生数</TD>
 			<TD class=ReportHead>本期收款</TD>
@@ -68,16 +64,18 @@ double hj_bqfs = 0;
 double hj_bqsk = 0;
 double hj_dqys = 0;
 
-if(userList != null && userList.size() > 0){
-	for(int i=0;i<userList.size();i++){
-		SysUser user = (SysUser)userList.get(i);
+if(khjlList != null && khjlList.size() > 0){
+	for(int i=0;i<khjlList.size();i++){
+		Map khjlMap = (Map)khjlList.get(i);
 		
-		String user_name = StringUtils.nullToStr(user.getReal_name());
-		String user_id = StringUtils.nullToStr(user.getUser_id());
+		String user_name = StringUtils.nullToStr(khjlMap.get("real_name"));
+		String user_id = StringUtils.nullToStr(khjlMap.get("user_id"));
 		
-		double qcs = qcMap.get(user_id)==null?0:((Double)qcMap.get(user_id)).doubleValue();  //期初数		
-		double bqfs = fsMap.get(user_id+"-01")==null?0:((Double)fsMap.get(user_id+"-01")).doubleValue();  //本期发生
-		double bqsk = fsMap.get(user_id+"-02")==null?0:((Double)fsMap.get(user_id+"-02")).doubleValue();  //本期已收
+		double qcs = qcMap.get(user_id)==null?0:((Double)qcMap.get(user_id)).doubleValue();  //期初数
+		
+		double bqfs = fsMap.get(user_id+"应收发生")==null?0:((Double)fsMap.get(user_id+"应收发生")).doubleValue();  //本期发生
+		
+		double bqsk = fsMap.get(user_id+"已收发生")==null?0:((Double)fsMap.get(user_id+"已收发生")).doubleValue();  //本期已收
 		
 		double dqys = qcs + bqfs - bqsk;
 		
@@ -88,7 +86,7 @@ if(userList != null && userList.size() > 0){
 			hj_dqys += dqys;
 %>	
 		<TR>
-			<TD class=ReportItemXh><a href="getYshzJsrResultMx.html?start_date=<%=start_date %>&end_date=<%=end_date %>&client_name=<%=client_name %>&jsr=<%=user_id %>"><%=user_name %></a></TD>
+			<TD class=ReportItemXh><a href="getYshzKhjlResultMx.html?start_date=<%=start_date %>&end_date=<%=end_date %>&client_name=<%=client_name %>&khjl=<%=user_id %>"><%=user_name %></a></TD>
 			<TD class=ReportItemMoney nowrap="nowrap" title="期初数"><%=JMath.round(qcs,2) %>&nbsp;</TD>
 			<TD class=ReportItemMoney nowrap="nowrap" title="本期发生数"><%=JMath.round(bqfs,2) %>&nbsp;</TD>
 			<TD class=ReportItemMoney nowrap="nowrap" title="本期收款"><%=JMath.round(bqsk,2) %>&nbsp;</TD>
