@@ -75,9 +75,6 @@ if(resultList != null && resultList.size()>0){
 		
 		double je = map.get("hjje")==null?0:((Double)map.get("hjje")).doubleValue();
 		
-		if(type.length() == 2){
-			hj_je += je;	
-		}
 		
 		String stl = "BACKGROUND-COLOR: #FFFFFF";
 		if(type.length() == 2){
@@ -94,6 +91,7 @@ if(resultList != null && resultList.size()>0){
 		</TR>
 	
 <%
+        hj_je += je;
 		}
 	}
 }
