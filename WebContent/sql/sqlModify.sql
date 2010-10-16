@@ -46,3 +46,7 @@ ALTER TABLE `hykda` MODIFY COLUMN `hykh` VARCHAR(50) CHARACTER SET utf8 COLLATE 
 2010-10-02更新
 --修改系统用户的所在库房字段,增加为varchar(500),可以支持选择多个库房
 ALTER TABLE `sys_user` MODIFY COLUMN `szkf` VARCHAR(500) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL;
+2010-10-16更新
+--将数据字典中的报修原因修改为“其他原因”
+
+update sjzd_xmxx set xm_name='其他原因',xm_ms='其他原因' where xm_name='其他' and zd_id='SJZD_BXYY';
