@@ -11,6 +11,7 @@ import com.sw.cms.model.FhkhdProduct;
 import com.sw.cms.model.Page;
 import com.sw.cms.model.Qtsr;
 import com.sw.cms.model.ShSerialNumFlow;
+import com.sw.cms.model.Shkc;
 import com.sw.cms.util.DateComFunc;
 
 public class FhkhdService 
@@ -79,10 +80,10 @@ public String updatefhkhdId()
 	   {
 		   updateShkc(fhkhd,fhkhdProducts);//删除售后库存
 		   saveSerialNumFlow(fhkhd,fhkhdProducts); //添加序列号流转记录
-		   //if(fhkhd.getIsfy().equals("是"))//如果产生费用
-		   //{
-			//   saveQtsr(fhkhd);//添加资金流向
-		  // }
+		   if(!fhkhd.getSkzh().equals(""))//如果产生收入
+		   {
+			   saveQtsr(fhkhd);//添加资金流向
+		   }
 		 
 	   }
    }
@@ -93,11 +94,10 @@ public String updatefhkhdId()
 	   {
 		   updateShkc(fhkhd,fhkhdProducts);//更新售后库存
 		   saveSerialNumFlow(fhkhd,fhkhdProducts); //添加序列号流转记录
-		 //  if(fhkhd.getIsfy().equals("是"))//如果产生费用
-		//   {
-		//	   saveQtsr(fhkhd);//添加资金流向
-		//   }
-		 
+		   if(!fhkhd.getSkzh().equals(""))//如果产生收入
+		   {
+			   saveQtsr(fhkhd);//添加资金流向
+		   }
 	   }
    }
    
@@ -113,15 +113,33 @@ public String updatefhkhdId()
 		   for(int i=0;i<fhkhdProducts.size();i++)
 		   {
 			   FhkhdProduct fhkhdProduct=(FhkhdProduct)fhkhdProducts.get(i);
-			   if(!(fhkhdProduct.getProduct_name().equals(""))&&!(fhkhdProduct.getQz_serial_num().equals("")))
+			   if(!fhkhdProduct.getProduct_id().equals("") && !fhkhdProduct.getProduct_name().equals(""))
 			   {
-				   String[] arryNums = (fhkhdProduct.getQz_serial_num()).split(",");
-					
-					for(int k=0;k<arryNums.length;k++)
+				   if((fhkhdProduct.getQz_serial_num() != null) && (!fhkhdProduct.getQz_serial_num().equals("")))
 				   {
-				      shkcDao.deleteShkcById(fhkhdProduct.getProduct_id(),arryNums[k]);//删除库存中的仓库信息
-				   }
+				      String[] arryNums = (fhkhdProduct.getQz_serial_num()).split(",");
+					
+					  for(int k=0;k<arryNums.length;k++)
+				      {
+				         shkcDao.deleteShkcById(fhkhdProduct.getProduct_id(),arryNums[k]);//删除库存中的仓库信息
+				      }
+				   }					
+				   else
+				   {
+						Shkc shkc = (Shkc)shkcDao.getShkc(fhkhdProduct.getProduct_id(),"3");
+						if((shkc.getNums()-fhkhdProduct.getNums())==0)
+						{
+							shkcDao.updateShkcStateAll(fhkhdProduct.getProduct_id(),fhkhdProduct.getNums(),"","3");
+						}
+						else
+						{
+							shkcDao.updateShkcNums(fhkhdProduct.getProduct_id(),fhkhdProduct.getNums(),"","3");
+							shkcDao.updateShkcStateNums(fhkhdProduct.getProduct_id(),fhkhdProduct.getNums(),"","3");
+						}
+					}
+				   
 			   }
+			   
 		   }
 	   }	  
    }

@@ -11,6 +11,7 @@ import com.sw.cms.model.Bxfhd;
 import com.sw.cms.model.BxfhdProduct;
 import com.sw.cms.model.Page;
 import com.sw.cms.model.ShSerialNumFlow;
+import com.sw.cms.model.Shkc;
 import com.sw.cms.util.DateComFunc;
 
 public class BxfhdService 
@@ -138,9 +139,8 @@ public class BxfhdService
 	 * @param bxdProducts
 	 * @return
 	 */
-	public boolean isHaoShkcExist(Bxfhd bxfhd,List bxfhdProducts)
-	{
-		boolean is = false;
+	public String isHaoShkcExist(Bxfhd bxfhd,List bxfhdProducts)
+	{		
 		String message="";
 		if(bxfhdProducts != null && bxfhdProducts.size()>0)
 		{
@@ -150,22 +150,49 @@ public class BxfhdService
 				if(!bxfhdProduct.getQz_serial_num().equals(""))
 			    {
 				  int count=shkcDao.getHaoShkcBySerialNum(bxfhdProduct.getQz_serial_num());
-				  if(count==0)
-			     {
-					message="好件库已无序列号:"+bxfhdProduct.getQz_serial_num()+" 的商品,请检查！";
-				 }
-				  else
-				  {
-					  is = true;
-						break;
-				  }
+				  if(count!=0)
+			      {					
+					message+="好件库存在该序列号:"+bxfhdProduct.getQz_serial_num()+" 的商品,请检查！\n";					
+				  }				 
 			    }
 		    }
 		}
 		
-		return is;
+		return message;
 	} 
-  
+	/**
+	 * 判断库存量是否满足报修返还处理
+	 * @param bxfhd
+	 * @param bxfhdProducts
+	 */
+	public String checkKc(Bxfhd bxfhd,List bxfhdProducts){
+		String msg = "";
+		
+		if(bxfhdProducts != null && bxfhdProducts.size()>0){
+			for(int i=0;i<bxfhdProducts.size();i++){
+				BxfhdProduct bxfhdProduct = (BxfhdProduct)bxfhdProducts.get(i);
+				if(bxfhdProduct != null){
+					if(!bxfhdProduct.getProduct_id().equals("") && !bxfhdProduct.getProduct_name().equals("")){
+						String product_id = bxfhdProduct.getProduct_id();
+						
+						//进行库存数量判断
+						Shkc shkc = (Shkc)shkcDao.getShkc(product_id,"2");
+						
+							int cknums = bxfhdProduct.getNums();  //要报修数量
+							int kcnums = shkc.getNums();//库存数量
+							
+							if(cknums>kcnums){
+								msg += bxfhdProduct.getProduct_name() + " 当前库存为：" + kcnums + "  无法进行报修返还处理\n";
+							}						
+					}
+				}
+			}
+		}
+		
+		return msg;
+	}
+	
+	
 public BxfhdDAO getBxfhdDao() {
 	return bxfhdDao;
 }

@@ -93,8 +93,8 @@ public class BxdService {
 	
 	/**
 	 * 判断库存量是否满足报修处理
-	 * @param ckd
-	 * @param ckdProducts
+	 * @param bxd
+	 * @param bxdProducts
 	 */
 	public String checkKc(Bxd bxd,List bxdProducts){
 		String msg = "";
@@ -243,9 +243,8 @@ public class BxdService {
 	 * @param bxdProducts
 	 * @return
 	 */
-	public boolean isZyShkcExist(Bxd bxd,List bxdProducts)
-	{
-		boolean is = false;
+	public String isZyShkcExist(Bxd bxd,List bxdProducts)
+	{		
 		String message="";
 		if(bxdProducts != null && bxdProducts.size()>0)
 		{
@@ -255,20 +254,14 @@ public class BxdService {
 				if(!bxdProduct.getQz_serial_num().equals(""))
 			    {
 				  int count=shkcDao.getWeiShkcBySerialNum(bxdProduct.getQz_serial_num());
-				  if(count==0)
-			     {
-					message="坏件库已无序列号:"+bxdProduct.getQz_serial_num()+" 的商品,请检查！";
-				 }
-				  else
-				  {
-					  is = true;
-						break;
+				  if(count!=0)
+			      {
+					  message+="该序列号:"+bxdProduct.getQz_serial_num()+" 的商品已经报修,请检查！";
 				  }
 			    }
 		    }
-		}
-		
-		return is;
+		}		
+		return message;
 	}
 
 	/**

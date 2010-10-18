@@ -62,6 +62,10 @@ public class JjdService {
 	 */
 	public void saveJjd(Jjd jjd,List jjdProducts)
 	{
+       // 如果接件单已提交，不做处理
+		if(jjdDao.isJjdSubmit(jjd.getId())){
+			return;
+		}
 		jjdDao.saveJjd(jjd, jjdProducts);
 		if(jjd.getState().equals("已提交"))
 		{
