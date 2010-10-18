@@ -38,14 +38,30 @@ List fhkhdProducts = (List)VS.findValue("fhkhdProducts");
 		<td class="a1" width="15%">联系人</td>
 		<td class="a2" width="35%"><%=StringUtils.nullToStr(fhkhd.getLxr()) %></td>	
 	</tr>
-	
+	<tr>
+		<td class="a1" width="15%">联系电话</td>
+		<td class="a2" width="35%"><%=StringUtils.nullToStr(fhkhd.getLxdh()) %></td>	
+		<td class="a1" width="15%">手机</td>
+		<td class="a2" width="35%"><%= StringUtils.nullToStr(fhkhd.getMobile())%></td>			
+	</tr>
+	<tr>
+		<td class="a1" width="15%">Email</td>
+		<td class="a2" width="35%"><%=StringUtils.nullToStr(fhkhd.getMail()) %></td>	
+		<td class="a1" width="15%">地址</td>
+		<td class="a2" width="35%"><%=StringUtils.nullToStr(fhkhd.getAddress()) %></td>
+	 </tr>
 	<tr>
 		<td class="a1" width="15%">经手人</td>
 		<td class="a2"><%=StaticParamDo.getRealNameById(fhkhd.getJsr()) %></td>
 		<td class="a1" width="15%">返还客户单状态</td>
 		<td class="a2"><%=StringUtils.nullToStr(fhkhd.getState()) %></td>				
 	</tr>
-	 
+	<tr>
+	    <td class="a1" width="15%">收款金额</td>
+		<td class="a2" width="35%"><%=JMath.round(fhkhd.getSkje()) %></td>
+		<td class="a1" widht="15%">收款账户</td>
+		<td class="a2" width="35%"><%=StaticParamDo.getAccountNameById(StringUtils.nullToStr(fhkhd.getSkzh())) %></td> 
+	</tr>
 </table>
 <br>
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
@@ -92,16 +108,7 @@ List fhkhdProducts = (List)VS.findValue("fhkhdProducts");
   }
    %>
 </table>
-<table width="100%"  align="center" class="chart_info" cellpadding="0" cellspacing="0">
-   	<tr height="35">	
-		<td class="a1">收款金额</td>
-		<td class="a2"><%=JMath.round(fhkhd.getSkje()) %></td>
-		<td class="a1" widht="20%">收款账户</td>
-		<td class="a2" ><%=StaticParamDo.getAccountNameById(StringUtils.nullToStr(fhkhd.getSkzh())) %></td>
-	</tr>
-</table> 
- <BR>
- 
+
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">		 
 	<tr>
 		<td class="a1" width="15%">备注</td>

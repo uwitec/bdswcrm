@@ -13,7 +13,6 @@ int counts = 2;
 if(fhkhdProducts != null && fhkhdProducts.size()>0){
 	counts = fhkhdProducts.size() - 1;
 }
-
  
  List msg = (List)session.getAttribute("messages");
 session.removeAttribute("messages");
@@ -36,7 +35,154 @@ session.removeAttribute("messages");
 	.selectTip{background-color:#009;color:#fff;}
 </style>
 <script type="text/javascript">	  
-    var allCount = <%=counts %>;	
+    var allCount = <%=counts %>;
+	var jhzq = 0;
+	//客户对应联系人信息
+	var arryLxrObj = new Array();
+	var temp_client_id = "";
+	//客户联系人对象
+	function LinkMan(id,name,tel){
+	    this.id = id;
+	    this.name = name;
+	    this.tel = tel;
+	}	
+
+	function onloadClientInfo(){
+		if($F('client_id') == ""){
+			return;
+		}
+		var url = 'queryClientsRegInfo.html';
+		var params = "clients_id=" + $F('client_id');
+		var myAjax = new Ajax.Request(
+		url,
+		{
+			method:'post',
+			parameters: params,
+			onComplete: initJhzq,
+			asynchronous:true
+		});
+	}
+	
+	//查询客户相关信息
+	function setClientRegInfo(){		
+		//填充值
+		setClientValue(); 
+
+		if(temp_client_id == $F('client_id')){
+			return;
+		}
+		
+		temp_client_id = $F('client_id');
+		if($F('client_id') == ""){
+			return;
+		}
+		
+		//根据填充后的值选择客户地址联系人等信息
+		var url = 'queryClientsRegInfo.html';
+		var params = "clients_id=" + $F('client_id');
+		var myAjax = new Ajax.Request(
+		url,
+		{
+			method:'post',
+			parameters: params,
+			onComplete: fillClientRegInfo,
+			asynchronous:true
+		});
+	}
+	
+	//处理客户地址联系人等信息
+	function fillClientRegInfo(originalRequest){  
+
+		var resText = originalRequest.responseText.trim(); 
+		if(resText == ""){
+			return false;
+		}
+
+		var arryText = resText.split("%");
+
+		//客户地址填充
+		if(arryText != null && arryText.length>0){
+		
+			var arryClientInfo = arryText[0].split("#");			
+			document.getElementById("address").value = arryClientInfo[0];
+		}
+		
+		if(arryText != null && arryText.length>1){
+			var linkMantext = arryText[1];
+			
+			//联系人填充
+			var objLxr = document.getElementById("lxr"); 
+			objLxr.options.length = 0;
+			
+			var arryLinkMan = linkMantext.split("$");
+			if(arryLinkMan.length > 0){
+				for(var i=0;i<arryLinkMan.length;i++){
+					var arryInfo = arryLinkMan[i].split("#");		
+					var manObj = new LinkMan(arryInfo[0],arryInfo[1],arryInfo[2]);
+					arryLxrObj[i] = manObj;
+					objLxr.add(new Option(arryInfo[1],arryInfo[1]));
+				}
+				if(arryLxrObj[0].tel != undefined)
+				{
+				    var arrDh=arryLxrObj[0].tel.split("/");	
+				    if(arrDh[1] != undefined)	
+				    {		   
+					  document.getElementById("mobile").value = arrDh[1];
+					}
+					if(arrDh[0] != undefined)
+					{
+					  document.getElementById("lxdh").value = arrDh[0];
+					}
+				}
+			}		
+		}
+	}
+	
+	
+	//联系人与电话联动
+	function chgLxr(vl){
+		if(vl == ""){
+			return;
+		}
+		if(arryLxrObj != null && arryLxrObj.length > 0){
+			for(var i=0;i<arryLxrObj.length;i++){
+				if(vl == arryLxrObj[i].name){
+					var arrDh=arryLxrObj[0].tel.split("/");				   
+					if(arrDh[1] != undefined)	
+				    {		   
+					  document.getElementById("mobile").value = arrDh[1];
+					}
+					if(arrDh[0] != undefined)
+					{
+					  document.getElementById("lxdh").value = arrDh[0];
+					}
+					break;
+				}
+			}
+		}
+	}
+	
+	function chgYwType(vl){
+		if(vl == "往来单位"){
+			document.getElementById("client_name").style.display = '';
+			document.getElementById("client_id").style.display = 'none';			
+			document.getElementById("lxr").style.display = '';
+			document.getElementById("linkmanLs").style.display = 'none';			
+		}else{
+			document.getElementById("client_name").style.display = 'none';					
+			document.getElementById("client_id").style.display = '';				
+			document.getElementById("lxr").style.display = 'none';
+			document.getElementById("linkmanLs").style.display = '';			
+		}
+		document.getElementById("client_name").value = "";
+		document.getElementById("client_id").value = "";
+		document.getElementById("lxr").value = "";
+		document.getElementById("linkmanLs").value = "";
+		document.getElementById("lxdh").value = "";
+		document.getElementById("mobile").value = "";
+		document.getElementById("mail").value = "";
+		document.getElementById("address").value = "";
+	}	
 	function saveInfo(vl){ 
 
 		if(vl == '1'){
@@ -45,7 +191,7 @@ session.removeAttribute("messages");
 			document.getElementById("state").value = "已提交";
 		}		
 			
-	    if(document.getElementById("client_name").value == ""){
+	    if(document.getElementById("client_id").value == ""){
 			alert("客户名称不能为空，请填写！");
 			return;
 		}
@@ -82,11 +228,10 @@ session.removeAttribute("messages");
 		 
 			var qzserialnum = document.getElementById("qz_serial_num_"+i); //序列号
 			var pn = document.getElementById("product_name_" + i);           //商品名称
-			
+			var qzflag = document.getElementById("qz_flag_" + i);            //标志是否强制输入
 			 
-				 if(pn!=null&&pn.value!="")
-				 {
-				     
+			if(qzflag != null){
+				if(qzflag.value == "是"){	
 					if(qzserialnum.value == "")
 					{
 						//如果没有输入序列号提示用户输入序列号
@@ -109,6 +254,7 @@ session.removeAttribute("messages");
 						}
 					}
 			     }
+			   }
 		}
 	  
 		if(document.getElementById("state").value == "已提交"){
@@ -295,8 +441,17 @@ session.removeAttribute("messages");
 						dwr.util.setValue("product_name_" + i,product.productName);
 						dwr.util.setValue("product_xh_" + i,product.productXh);
 												
+						var serial = document.getElementById("qz_serial_num_" + i).value;
+						var arrySerial = serial.split(",");		
 						var nums = dwr.util.getValue("nums_" + i);
-						dwr.util.setValue("nums_" + i,parseInt(nums)+1);					
+						if(arrySerial.length==1)
+						{
+						  dwr.util.setValue("nums_" + i,parseInt(nums));
+						}
+						else
+						{
+						   dwr.util.setValue("nums_" + i,parseInt(nums)+1);
+						}						
 						
 						dwr.util.setValue("qz_flag_" + i,product.qz_serial_num);
 						
@@ -427,16 +582,47 @@ session.removeAttribute("messages");
 		</td>		
 	</tr>
 	<tr>
-		<td class="a1" width="15%">客户名称</td>
-		<td class="a2" width="35%"><input type="text" name="fhkhd.client_name"   id="client_name" value="<%=StaticParamDo.getClientNameById(StringUtils.nullToStr(fhkhd.getClient_id())) %>" size="30" maxlength="50" onblur="setClientValue();">
-		<input type="hidden" name="fhkhd.client_id" id="client_id" value="<%=StringUtils.nullToStr(fhkhd.getClient_id()) %>">
-		<div id="clientsTip" style="height:12px;position:absolute;width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
-		<font color="red">*</font>
+	    <td class="a1" width="15%">客户类型</td>
+		<td class="a2"  colspan="3">
+			<select name="fhkhd.khlx" id="khlx" onchange="chgYwType(this.value);" style="width:232px">
+				<option value="往来单位">往来单位</option>
+				<option value="零售客户">零售客户</option>
+			</select><span style="color:red">*</span>
 		</td>
-		<td class="a1" width="15%">联系人</td>
-		<td class="a2" width="35%"><input type="text" name="fhkhd.lxr" id="lxr" size="30" value="<%=StringUtils.nullToStr(fhkhd.getLxr()) %>"></td>	
 	</tr>
-	
+	<tr>			
+		<td class="a1" width="15%">客户名称</td>
+		<td class="a2" width="35%">
+		<input type="text" name="fhkhd.client_name"   id="client_name" onblur="setClientRegInfo();" value="" style="width:232px" maxlength="50">
+		<input style="width:230px;display: none" type="text" name="fhkhd.client_id" id="client_id" value=""  maxlength="50" >
+		<font color="red">*</font><div id="clientsTip" style="height:12px;position:absolute;width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;"></div>
+		</td>				
+		<td class="a1" width="15%">联系人</td>
+		<td class="a2" width="35%">		 
+			<select name="fhkhd.lxr" id="lxr" onchange="chgLxr(this.value);"  style="width:232px">
+		    <%
+			   if(!StringUtils.nullToStr(fhkhd.getLxr()).equals("")){
+		    %>			
+					<option value="<%=StringUtils.nullToStr(fhkhd.getLxr()) %>" selected><%=StringUtils.nullToStr(fhkhd.getLxr()) %></option>
+			<%
+			   } 			
+		    %>					
+			</select>		
+			<input type="text" name="fhkhd.linkmanLs" id="linkmanLs" value="" style="width:232px;display: none">
+		</td>			
+	</tr>
+	<tr>
+		<td class="a1" width="15%">联系电话</td>
+		<td class="a2"><input type="text" name="fhkhd.lxdh" id="lxdh" style="width:232px" value="<%=StringUtils.nullToStr(fhkhd.getLxdh()) %>"></td>	
+		<td class="a1" width="15%">手机</td>
+		<td class="a2"><input type="text" name="fhkhd.mobile" id="mobile" style="width:232px"  value="<%= StringUtils.nullToStr(fhkhd.getMobile())%>"></td>			
+	</tr>
+ 	<tr>
+		<td class="a1" width="15%">Email</td>
+		<td class="a2" width="35%"><input type="text" name="fhkhd.mail" id="mail" style="width:232px" value="<%=StringUtils.nullToStr(fhkhd.getMail()) %>"></td>	
+		<td class="a1" width="15%">地址</td>
+		<td class="a2" width="35%"><input type="text" name="fhkhd.address" id="address" style="width:232px" value="<%=StringUtils.nullToStr(fhkhd.getAddress()) %>"></td>
+	 </tr>
 	<tr>
 		<td class="a1" width="15%">经手人</td>
 		<td class="a2">         
@@ -536,7 +722,7 @@ else
 				<td class="a2">					
 					<input type="text" id="store_id" name="store_id" value="好件库" size="7" readonly>				 
 				</td>
-				<td class="a2"><input type="text" id="price_<%=i %>" name="fhkhdProducts[<%=i %>].price" value="0.00" size="7" style="width:100% onblur="hj();"" >
+				<td class="a2"><input type="text" id="price_<%=i %>" name="fhkhdProducts[<%=i %>].price" value="0.00" size="7" style="width:100%" onblur="hj();" >
 				<td class="a2"><input type="text" id="nums_<%=i %>" name="fhkhdProducts[<%=i %>].nums" value="1" size="5" onblur="hj();"  style="width:100%" ></td>		 
 				<td class="a2"><input type="text" id="xj_<%=i %>" name="fhkhdProducts[<%=i %>].totalmoney" value="0.00" size="7" style="width:100%" readonly></td>	 
 				

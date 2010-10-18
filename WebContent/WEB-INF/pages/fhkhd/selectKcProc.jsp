@@ -101,7 +101,7 @@ String product_name = StringUtils.nullToStr((String)VS.findValue("product_name")
 					id.value = arryStr[0];
 					xh.value = arryStr[1];
 					name.value = arryStr[2];
-					qz_flag.value = arryStr[3];
+					qz_flag.value = arryStr[4];
 
 					k++;	
 				}	
@@ -146,7 +146,7 @@ String product_name = StringUtils.nullToStr((String)VS.findValue("product_name")
 		while(it.hasNext()){
 			Map map = (Map)it.next();			
 						
-			String vl = StringUtils.nullToStr(map.get("product_id")) + "|" + StringUtils.nullToStr(map.get("product_xh")) + "|" + StringUtils.nullToStr(map.get("product_name")) + "|" +StringUtils.nullToStr(map.get("qz_serial_num")) ;
+			String vl = StringUtils.nullToStr(map.get("product_id")) + "|" + StringUtils.nullToStr(map.get("product_xh")) + "|" + StringUtils.nullToStr(map.get("product_name")) + "|" +StringUtils.nullToStr(map.get("qz_serial_num"))+ "|" +StringUtils.nullToStr(map.get("qz_flag")) ;
 	%>
 		<tr class="a1" onmouseover="this.className='a2';" onmouseout="this.className='a1';">
 			<td><input type="checkbox" name="chk_id" value="<%=vl %>"></td>
