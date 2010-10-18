@@ -64,7 +64,7 @@ public class BxdAction extends BaseAction
 	private String id = "";
 	private int curPage = 1;
 	private String dept;
-	
+	private String msg = "";
 	private String product_name = "";
 	private String product_kind = "";
 	private List kindList = new ArrayList();
@@ -175,11 +175,14 @@ public class BxdAction extends BaseAction
             if(bxd.getState().equals("已提交"))
             {
             	//判断提交的报修商品是否在在外库里            	
-            	if(bxdService.isZyShkcExist(bxd,bxdProducts))
-            	{
+            	msg =bxdService.isZyShkcExist(bxd,bxdProducts); 
+			    if(!msg.equals(""))
+            	{            		
             		bxd.setState("已保存");
             		wxszd = sjzdService.getSjzdXmxxByZdId("SJZD_WXSZD");
+            		this.saveMessage(msg);
             		return "input";
+            		
             	} 
                 //判断库存是否满足要求            	
             	msg = bxdService.checkKc(bxd, bxdProducts);
@@ -187,9 +190,10 @@ public class BxdAction extends BaseAction
 				{
             		bxd.setState("已保存");
             		wxszd = sjzdService.getSjzdXmxxByZdId("SJZD_WXSZD");
+            		this.saveMessage(msg);
             		return "input";
             	}
-            	
+				
             	//保存信息
             	bxdService.saveBxd(bxd, bxdProducts);
             }
@@ -244,12 +248,24 @@ public class BxdAction extends BaseAction
 			    if(bxd.getState().equals("已提交"))
 	            {
 	            	//判断提交的报修商品是否在坏件库里
-				 if(bxdService.isZyShkcExist(bxd,bxdProducts))
-	            	{
-	            		bxd.setState("已保存");
+			    	msg =bxdService.isZyShkcExist(bxd,bxdProducts); 
+				    if(!msg.equals(""))
+	            	{					    
+					    bxd.setState("已保存");
 	            		wxszd = sjzdService.getSjzdXmxxByZdId("SJZD_WXSZD");
+	            		this.saveMessage(msg);
 	            		return "input";
 	            	} 
+				 //判断库存是否满足要求            	
+	            	msg = bxdService.checkKc(bxd, bxdProducts);
+					if(!msg.equals(""))
+					{
+	            		bxd.setState("已保存");
+	            		wxszd = sjzdService.getSjzdXmxxByZdId("SJZD_WXSZD");
+	            		this.saveMessage(msg);
+	            		return "input";
+	            	}
+					
 	            	//保存信息
 	            	bxdService.updateBxd(bxd, bxdProducts);
 	            }
@@ -582,4 +598,14 @@ public class BxdAction extends BaseAction
 	public void setId(String id) {
 		this.id = id;
 	}
+	
+	public String getMsg() {
+		return msg;
+	}
+
+
+	public void setMsg(String msg) {
+		this.msg = msg;
+	}
+
 }

@@ -173,13 +173,25 @@ public class BxfhdAction extends BaseAction
 			 
 		    if(bxfhd.getState().equals("已提交"))
             {
-            	//判断提交的报修商品是否在好件库里
-			 if(bxfhdService.isHaoShkcExist(bxfhd,bxfhdProducts))
+              //判断提交的报修商品是否在好件库里
+		    	msg = bxfhdService.isHaoShkcExist(bxfhd,bxfhdProducts);
+			    if(!msg.equals(""))
             	{
             		bxfhd.setState("已保存");
             		wxszd = sjzdService.getSjzdXmxxByZdId("SJZD_WXSZD");
+            		this.saveMessage(msg);
             		return "input";
-            	} 
+            	}
+			 //判断库存是否满足要求            	
+	         	msg = bxfhdService.checkKc(bxfhd,bxfhdProducts);
+				if(!msg.equals(""))
+				{
+					bxfhd.setState("已保存");
+	         	    wxszd = sjzdService.getSjzdXmxxByZdId("SJZD_WXSZD");
+	         	    this.saveMessage(msg);
+	         	    return "input";
+	            }
+         	
             	//保存信息
 			 bxfhdService.updateBxfhd(bxfhd, bxfhdProducts);
            }
@@ -211,12 +223,23 @@ public class BxfhdAction extends BaseAction
 		    if(bxfhd.getState().equals("已提交"))
             {
             	//判断提交的报修商品是否在好件库里
-			 if(bxfhdService.isHaoShkcExist(bxfhd,bxfhdProducts))
+		    	msg = bxfhdService.isHaoShkcExist(bxfhd,bxfhdProducts);
+			    if(!msg.equals(""))
             	{
             		bxfhd.setState("已保存");
             		wxszd = sjzdService.getSjzdXmxxByZdId("SJZD_WXSZD");
+            		this.saveMessage(msg);
             		return "input";
-            	} 
+            	}
+			 //判断库存是否满足要求            	
+	         	msg = bxfhdService.checkKc(bxfhd,bxfhdProducts);
+				if(!msg.equals(""))
+				{
+					bxfhd.setState("已保存");
+	         	    wxszd = sjzdService.getSjzdXmxxByZdId("SJZD_WXSZD");
+	         	    this.saveMessage(msg);
+	         	    return "input";
+	            }
             	//保存信息
 			 bxfhdService.saveBxfhd(bxfhd, bxfhdProducts);
            }

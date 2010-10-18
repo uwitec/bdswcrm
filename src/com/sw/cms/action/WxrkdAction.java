@@ -148,6 +148,16 @@ public class WxrkdAction extends BaseAction
             		wxrkd.setState("已保存");           	 
             		return "input";
             	} 
+            	
+                // 判断库存是否满足要求            	
+            	msg = wxrkdService.checkKc(wxrkd, wxrkdProducts);
+				if(!msg.equals(""))
+				{
+					wxrkd.setState("已保存");            		
+            		this.saveMessage(msg);
+            		return "input";
+            	}
+            	
             	//保存信息
             	wxrkdService.saveWxrkd(wxrkd, wxrkdProducts);
             }
@@ -204,6 +214,15 @@ public class WxrkdAction extends BaseAction
 	            		wxrkd.setState("已保存");	            	 
 	            		return "input";
 	            	} 
+	            	
+	            	 // 判断库存是否满足要求            	
+	            	msg = wxrkdService.checkKc(wxrkd, wxrkdProducts);
+					if(!msg.equals(""))
+					{
+						wxrkd.setState("已保存");            		
+	            		this.saveMessage(msg);
+	            		return "input";
+	            	}
 	            	//保存信息
 	            	wxrkdService.updateWxrkd(wxrkd, wxrkdProducts);
 	            }

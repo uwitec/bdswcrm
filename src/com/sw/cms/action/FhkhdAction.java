@@ -160,9 +160,23 @@ public class FhkhdAction extends BaseAction
 	   {
 		   LoginInfo info = (LoginInfo)getSession().getAttribute("LOGINUSER");
 		   String user_id = info.getUser_id();
-		   fhkhd.setCjr(user_id);
+		   fhkhd.setCjr(user_id);		   
 		   
-		   fhkhdService.savefhkhd(fhkhd, fhkhdProducts);
+		   if(fhkhd.getState().equals("已提交"))
+		   {
+			   String msg=fhkhdService.isHaoShkcExist(fhkhdProducts);
+			   if(!msg.equals(""))
+			   {
+				     this.saveMessage(msg);
+					 fhkhd.setState("已保存");
+					 return "input";
+			   }
+			  fhkhdService.savefhkhd(fhkhd, fhkhdProducts); 
+		   }
+		   if(fhkhd.getState().equals("已保存"))
+		   {
+              fhkhdService.savefhkhd(fhkhd, fhkhdProducts);
+		   }
 		  
 		   return "success";
 	   }
