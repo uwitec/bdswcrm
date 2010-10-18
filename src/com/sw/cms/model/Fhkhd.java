@@ -5,7 +5,9 @@ package com.sw.cms.model;
  * @author Administrator
  * 2010-02-05修改，有以下信息：返还客户单编号、返还客户日期、创建日期、经手人、创建人、状态、客户编号、      收款金额、收款账户、备注、    联系人
  *                          id           fh_date    cj_date  jsr   cjr   state  client_id  skje    skzh    remark  lxr
- *
+ *                           客户类型      联系电话      手机      地址          E-Mail
+ *                           khlx         lxdh        mobile    address      mail
+ * 
  */
 public class Fhkhd 
 {
@@ -20,6 +22,55 @@ public class Fhkhd
 	 private double skje       ;   //实收金额
      private String skzh       ;//收款账号
      private String  remark ;//备注	
+     
+     private String khlx;
+     private String lxdh;
+     private String mobile;
+     private String address;
+     private String mail;
+     private String  linkmanLs;//零售客户联系人
+     
+     public String getLinkmanLs() {
+			return linkmanLs;
+		}
+		public void setLinkmanLs(String linkmanLs) {
+			this.linkmanLs = linkmanLs;
+		}
+     
+     public String getLxdh() {
+  		return lxdh;
+  	}
+  	public void setLxdh(String lxdh) {
+  		this.lxdh = lxdh;
+  	}
+
+  	public String getMobile() {
+  		return mobile;
+  	}
+  	public void setMobile(String mobile) {
+  		this.mobile = mobile;
+  	}
+     
+  	public String getAddress() {
+  		return address;
+  	}
+  	public void setAddress(String address) {
+  		this.address = address;
+  	}
+  	
+  	public String getMail() {
+  		return mail;
+  	}
+  	public void setMail(String mail) {
+  		this.mail = mail;
+  	}
+  	
+     public String getKhlx() {
+ 		return khlx;
+ 	}
+ 	public void setKhlx(String khlx) {
+ 		this.khlx = khlx;
+ 	}
 
 	public String getCj_date() {
 		return cj_date;

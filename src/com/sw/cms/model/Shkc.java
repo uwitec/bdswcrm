@@ -12,7 +12,7 @@ public class Shkc
 	  private  String product_xh;                  //商品型号
 	  private  String product_name;                //商品名称
 	  private  String qz_serial_num;               //序列号    
-	  private  String state;                       //库存状态(1:坏 2：外 3:好)
+	  private  String state;                       //库存状态(1:坏 2：外 3:好  4：报废)
 	  private  String day_num;                     //已送修天数
 	  private  String remark;                      //备注
 	  private  String client_name ;                //所属客户
