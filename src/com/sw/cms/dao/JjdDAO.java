@@ -131,6 +131,22 @@ public class JjdDAO extends JdbcBaseDAO {
 			}
 		}
 	}
+	
+	/**
+	 * 查看接件单是否已经提交
+	 * @param ckd_id
+	 * @return
+	 */
+	public boolean isJjdSubmit(String jjd_id){
+		boolean is = false;
+		String sql = "select count(*) from jjd where id='" + jjd_id + "' and state='已提交'";
+		int counts = this.getJdbcTemplate().queryForInt(sql);
+		if(counts > 0){
+			is = true;
+		}
+		return is;
+	}
+	
 	/**
 	 * 删除接件单及相关商品
 	 * @param id

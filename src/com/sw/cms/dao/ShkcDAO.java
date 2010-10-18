@@ -298,7 +298,7 @@ public class ShkcDAO extends JdbcBaseDAO
 					
 					for(int k=0;k<arryNums.length;k++)
 				    {	
-                      if(!arryNums[k].equals(""))
+                      if((!arryNums[k].equals("")) && (!jjdProduct.getProduct_id().equals("")))
                       {
 					     sql="insert into shkc(product_id,product_xh,product_name,qz_serial_num,state,store_id) values(?,?,?,?,?,?)";
                          Object[]param=new Object[6];
@@ -335,18 +335,21 @@ public class ShkcDAO extends JdbcBaseDAO
 						  	this.getJdbcTemplate().update(sql,param);						  	
 						}
 						else
-						{	
-						   sql="insert into shkc(product_id,product_xh,product_name,qz_serial_num,state,store_id,nums) values(?,?,?,?,?,?,?)";
-	                       Object[]param=new Object[7];
-	                       param[0]=jjdProduct.getProduct_id();
-	                       param[1]=jjdProduct.getProduct_xh();
-	                       param[2]=jjdProduct.getProduct_name();
-	                       param[3]=jjdProduct.getQz_serial_num();
-	                       param[4]=state; 
-	                       param[5]=storeId;
-	                       param[6]=jjdProduct.getNums();
+						{
+						  if(!jjdProduct.getProduct_id().equals(""))
+						  {
+						     sql="insert into shkc(product_id,product_xh,product_name,qz_serial_num,state,store_id,nums) values(?,?,?,?,?,?,?)";
+	                         Object[]param=new Object[7];
+	                         param[0]=jjdProduct.getProduct_id();
+	                         param[1]=jjdProduct.getProduct_xh();
+	                         param[2]=jjdProduct.getProduct_name();
+	                         param[3]=jjdProduct.getQz_serial_num();
+	                         param[4]=state; 
+	                         param[5]=storeId;
+	                         param[6]=jjdProduct.getNums();
 
-	                       this.getJdbcTemplate().update(sql,param);
+	                         this.getJdbcTemplate().update(sql,param);
+						  }
 						}
 					}
 				  
@@ -452,7 +455,10 @@ public class ShkcDAO extends JdbcBaseDAO
 	   }
 	   Map map=getResultMap(sqlStore);		
 	   String storeId= (String)map.get("id") ; 
-	  		
+	   if(state.equals(""))
+	   {
+		  storeId=""; 
+	   }
 	   boolean flag=isExist(product_id,state);
 		if(flag==true)
 		{
@@ -496,27 +502,10 @@ public class ShkcDAO extends JdbcBaseDAO
     */
    public void updateShkcNums(String product_id,int nums,String state,String oldState)
    {
-	   String sqlStore="";
-	   String state1="1";
-	   String state2="2";
 	   String  sql="";
-	   if (state.equals(state1))
-	   {
-		   sqlStore= "select id from storehouse where name='坏件库'";		
-	   }
-	   else if (state.equals(state2))
-	   {
-		   sqlStore= "select id from storehouse where name='坏件库'";	   
-	   }
-	   else
-	   {
-		   sqlStore= "select id from storehouse where name='好件库'";	  
-	   }
-	   Map map=getResultMap(sqlStore);		
-	   String storeId= (String)map.get("id") ; 
 	   
 	   int numsTemp = 0;
-		sql = "select * from shkc where product_id='" + product_id + "' and state='1'";	
+		sql = "select * from shkc where product_id='" + product_id + "' and state='"+oldState+"'";	
 		Map mapShkc = this.getResultMap(sql);
 		String strNums = StringUtils.nullToStr(mapShkc.get("nums"));
 		if(!strNums.equals("")){
@@ -534,28 +523,48 @@ public class ShkcDAO extends JdbcBaseDAO
     */
    public void updateShkcStateAll(String product_id,int nums,String state,String oldState)
    {
-	   String sqlStore="";
-	   String state1="1";
-	   String state2="2";
+	   String sqlStore="";	  
 	   String  sql="";
-	   if (state.equals(state1))
+	   if (state.equals("3"))
 	   {
-		   sqlStore= "select id from storehouse where name='坏件库'";		
+		   sqlStore= "select id from storehouse where name='好件库'";		
 	   }
-	   else if (state.equals(state2))
+	   else 
 	   {
 		   sqlStore= "select id from storehouse where name='坏件库'";	   
-	   }
-	   else
-	   {
-		   sqlStore= "select id from storehouse where name='好件库'";	  
 	   }
 	   Map map=getResultMap(sqlStore);		
 	   String storeId= (String)map.get("id") ; 
 	   
-	   sql="update shkc set state='"+state+"',store_id='"+storeId+"' where product_id='"+product_id+"' and state='"+oldState+"'";
+	   if(state.equals(""))
+	   {
+		   storeId="";
+	   }
+	   boolean flag=isExist(product_id,state);
+		if(flag==true)
+		{
+          //当前商品总库存数
+			int numsTemp = 0;	
+			sql = "select * from shkc where product_id='" + product_id + "' and state='" + state + "'";	
+			Map mapShkc = this.getResultMap(sql);
+			String strNums = StringUtils.nullToStr(mapShkc.get("nums"));
+			if(!strNums.equals("")){
+				numsTemp = (new Integer(strNums)).intValue();
+			}
+		  	sql="update shkc set nums=? where product_id=? and store_id=? and state=?";
+		  	Object[] param=new Object[4];
+		  	param[0]=numsTemp+nums;
+		  	param[1]=product_id;
+		  	param[2]=storeId;
+		  	param[3]=state; 
+		  	this.getJdbcTemplate().update(sql,param);						  	
+		}
+		else
+		{	
+	       sql="update shkc set state='"+state+"',store_id='"+storeId+"' where product_id='"+product_id+"' and state='"+oldState+"'";
 	   
-	   this.getJdbcTemplate().update(sql);
+	       this.getJdbcTemplate().update(sql);
+		}
    }
    
    /**
@@ -565,20 +574,15 @@ public class ShkcDAO extends JdbcBaseDAO
    public void updateBxfhShkcState(List bxfhdProducts,String state)
    {
 	   String sqlStore="";
-	   String state1="1";
-	   String state2="2";
+	   
 	   String  sql="";
-	   if (state.equals(state1))
+	   if (state.equals("3"))
 	   {
-		   sqlStore= "select id from storehouse where name='坏件库'";		
+		   sqlStore= "select id from storehouse where name='好件库'";		
 	   }
-	   else if (state.equals(state2))
+	   else 
 	   {
 		   sqlStore= "select id from storehouse where name='坏件库'";	   
-	   }
-	   else
-	   {
-		   sqlStore= "select id from storehouse where name='好件库'";	  
 	   }
 	   Map map=getResultMap(sqlStore);		
 	   String storeId= (String)map.get("id") ; 
@@ -592,16 +596,32 @@ public class ShkcDAO extends JdbcBaseDAO
 				{
 					if(!bxfhdProduct.getProduct_id().equals("") && !bxfhdProduct.getProduct_name().equals(""))
 					{ if(!state.equals(""))
-					 {
-						String[] arryNums = (bxfhdProduct.getQz_serial_num()).split(",");
+					  {
+						if((bxfhdProduct.getQz_serial_num() != null) && (!bxfhdProduct.getQz_serial_num().equals("")))
+						{
+						   String[] arryNums = (bxfhdProduct.getQz_serial_num()).split(",");
 						
-						for(int k=0;k<arryNums.length;k++)
-					   {
-	                    sql="update shkc set state='"+state+"',store_id='"+storeId+"' where qz_serial_num='"+arryNums[k]+"'";
-	                    this.getJdbcTemplate().update(sql);
-					   }
+						   for(int k=0;k<arryNums.length;k++)
+					       {
+	                         sql="update shkc set state='"+state+"',store_id='"+storeId+"' where qz_serial_num='"+arryNums[k]+"'";
+	                         this.getJdbcTemplate().update(sql);
+					       }
+						}
+						else
+						{
+							Shkc shkc = (Shkc)getShkc(bxfhdProduct.getProduct_id(),"2");
+							if((shkc.getNums()-bxfhdProduct.getNums())==0)
+							{
+							    updateShkcStateAll(bxfhdProduct.getProduct_id(),bxfhdProduct.getNums(),"3","2");
+							}
+							else
+							{
+								updateShkcNums(bxfhdProduct.getProduct_id(),bxfhdProduct.getNums(),"3","2");
+								updateShkcStateNums(bxfhdProduct.getProduct_id(),bxfhdProduct.getNums(),"3","2");
+							}
+						}
 					   
-					 }					
+					  }					
 	                  
 					}
 				}
@@ -613,7 +633,7 @@ public class ShkcDAO extends JdbcBaseDAO
     * 修改报废售后库存（1：坏件库 2：在外库 3：好件库）
     *
     */
-   public void updateBfShkcState(BfdProduct bfdProduct,String state)
+   public void updateBfShkcState(String serial,String state)
    {
 	   String sqlStore="";	   
 	   String  sql="";
@@ -628,7 +648,7 @@ public class ShkcDAO extends JdbcBaseDAO
 	   
 	   Map map=getResultMap(sqlStore);		
 	   String storeId= (String)map.get("id") ; 
-       sql="update shkc set state='"+state+"',store_id='"+storeId+"' where qz_serial_num='"+bfdProduct.getQz_serial_num()+"'";
+       sql="update shkc set state='"+state+"',store_id='"+storeId+"' where qz_serial_num='"+serial+"'";
        this.getJdbcTemplate().update(sql);
    }
    
