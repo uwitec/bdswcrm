@@ -38,11 +38,18 @@ List bxfhdProducts = (List)VS.findValue("bxfhdProducts");
 		<td class="a1" width="15%">经手人</td>
 		<td class="a2" width="35%"><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(bxfhd.getJsr())) %></td>		 
 	</tr>
+	<tr>	
+		<td class="a1" width="15%">合计金额</td>
+		<td class="a2" width="35%"><%=JMath.round(bxfhd.getHjje()) %></td>
+		<td class="a1" width="15%">本次实付金额</td>
+		<td class="a2" width="35%"><%=JMath.round(bxfhd.getSsje()) %></td>		
+	</tr>			
 	<tr>
+		<td class="a1" width="15%">收款账户</td>
+		<td class="a2" width="35%"><%=StaticParamDo.getAccountNameById(StringUtils.nullToStr(bxfhd.getFkzh())) %> </td>
 		<td class="a1" width="15%">报修返还单状态</td>
-		<td class="a2"><%=StringUtils.nullToStr(bxfhd.getState()) %></td>							
-	</tr>
-	 
+		<td class="a2" width="35%"><%=StringUtils.nullToStr(bxfhd.getState()) %></td>							
+	</tr>	 
 </table>
 <br>
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
@@ -89,21 +96,6 @@ List bxfhdProducts = (List)VS.findValue("bxfhdProducts");
   }
    %>
 </table>
-
-<table width="100%"  align="center" class="chart_info" cellpadding="0" cellspacing="0">
-    <tr height="35">	
-		<td class="a1" width="15%">合计金额</td>
-		<td class="a2" width="34%"><%=JMath.round(bxfhd.getHjje()) %></td>
-		<td class="a1" width="15%">本次实付金额</td>
-		<td class="a2"><%=JMath.round(bxfhd.getSsje()) %></td>		
-	</tr>
-			
-	<tr>
-		<td class="a1" >收款账户</td>
-		<td class="a2"><%=StaticParamDo.getAccountNameById(StringUtils.nullToStr(bxfhd.getFkzh())) %> </td>
-	</tr>	
-</table> 
- 
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">		 
 	<tr>
 		<td class="a1" width="15%">备注</td>

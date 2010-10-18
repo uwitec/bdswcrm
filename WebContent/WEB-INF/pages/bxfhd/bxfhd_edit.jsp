@@ -85,11 +85,10 @@ session.removeAttribute("messages");
 		 
 			var qzserialnum = document.getElementById("qz_serial_num_"+i); //序列号
 			var pn = document.getElementById("product_name_" + i);           //商品名称
-			
+			var qzflag = document.getElementById("qz_flag_" + i);            //标志是否强制输入
 			 
-				 if(pn!=null&&pn.value!="")
-				 {
-				     
+			if(qzflag != null){
+				if(qzflag.value == "是"){					     
 					if(qzserialnum.value == "")
 					{
 						//如果没有输入序列号提示用户输入序列号
@@ -112,6 +111,7 @@ session.removeAttribute("messages");
 						}
 					}
 			     }
+			 }
 		}
 	  
 		if(document.getElementById("state").value == "已提交"){
@@ -297,9 +297,17 @@ session.removeAttribute("messages");
 						dwr.util.setValue("product_name_" + i,product.productName);
 						dwr.util.setValue("product_xh_" + i,product.productXh);
 												
+						var serial = document.getElementById("qz_serial_num_" + i).value;
+						var arrySerial = serial.split(",");		
 						var nums = dwr.util.getValue("nums_" + i);
-						dwr.util.setValue("nums_" + i,parseInt(nums)+1);					
-						
+						if(arrySerial.length==1)
+						{
+						  dwr.util.setValue("nums_" + i,parseInt(nums));
+						}
+						else
+						{
+						   dwr.util.setValue("nums_" + i,parseInt(nums)+1);
+						}	
 						dwr.util.setValue("qz_flag_" + i,product.qz_serial_num);
 						
 						dwr.util.setValue("s_nums","");
