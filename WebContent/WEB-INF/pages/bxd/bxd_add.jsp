@@ -294,8 +294,18 @@ session.removeAttribute("messages");
 						dwr.util.setValue("product_id_" + i,product.productId);
 						dwr.util.setValue("product_name_" + i,product.productName);
 						dwr.util.setValue("product_xh_" + i,product.productXh);
+						
+						var serial = document.getElementById("qz_serial_num_" + i).value;
+						var arrySerial = serial.split(",");		
 						var nums = dwr.util.getValue("nums_" + i);
-						dwr.util.setValue("nums_" + i,parseInt(nums)+1);						
+						if(arrySerial.length==1)
+						{
+						  dwr.util.setValue("nums_" + i,parseInt(nums));
+						}
+						else
+						{
+						   dwr.util.setValue("nums_" + i,parseInt(nums)+1);
+						}						
 						dwr.util.setValue("qz_flag_" + i,product.qz_flag);
 						
 						dwr.util.setValue("s_nums","");
@@ -411,12 +421,12 @@ session.removeAttribute("messages");
 	    <td width="5%">选择</td>
 	    <td width="20%">商品名称</td>	
 		<td width="15%">规格</td>
-		<td width="3%">数量</td>	
+		<td width="5%">数量</td>	
 		<td width="5%">仓库</td>
 		<td width="15%">强制序列号</td>
 		<td width="7%">送修天数</td>
 		<td width="15%">商品附件</td>
-		<td width="15%">备注</td>		
+		<td width="13%">备注</td>		
 	</tr>
 	</thead>
 <%

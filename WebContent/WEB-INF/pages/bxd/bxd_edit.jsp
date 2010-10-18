@@ -7,15 +7,13 @@
 OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
 Bxd bxd = (Bxd)VS.findValue("bxd");
 List bxdProducts = (List)VS.findValue("bxdProducts");
- 
 
 int counts = 2;
 if(bxdProducts != null && bxdProducts.size()>0){
 	counts = bxdProducts.size() - 1;
 }
-
  
- List msg = (List)session.getAttribute("messages");
+List msg = (List)session.getAttribute("messages");
 session.removeAttribute("messages");
 %>
 <html>
