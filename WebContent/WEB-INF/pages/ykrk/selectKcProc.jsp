@@ -37,7 +37,7 @@ String openerId = ParameterUtility.getStringParameter(request, "openerId","");
 		if(id != null) id.value = product_id;
 		if(xh != null) xh.value = product_xh;
 		if(name != null) name.value = product_name;		
-		if(qz_flag != null) qz_flag.value = qz_serial_num;
+		if(qz_flag != null) qz_flag.value = qz_flag;
 		window.close();	
 	}
 	
@@ -73,9 +73,9 @@ String openerId = ParameterUtility.getStringParameter(request, "openerId","");
 		while(it.hasNext()){
 			Map map = (Map)it.next();			
 						
-			String vl = StringUtils.nullToStr(map.get("product_id")) + "|" + StringUtils.nullToStr(map.get("product_xh")) + "|" + StringUtils.nullToStr(map.get("product_name")) + "|" +StringUtils.nullToStr(map.get("qz_serial_num")) ;
+			String vl = StringUtils.nullToStr(map.get("product_id")) + "|" + StringUtils.nullToStr(map.get("product_xh")) + "|" + StringUtils.nullToStr(map.get("product_name")) + "|" +StringUtils.nullToStr(map.get("qz_serial_num"))+ "|" +StringUtils.nullToStr(map.get("qz_flag")) ;
 	%>
-		<tr class="a1" onmouseover="this.className='a2';" onmouseout="this.className='a1';" title="左键单击选择商品" onclick="sel('<%=StringUtils.nullToStr(map.get("product_id")) %>','<%=StringUtils.nullToStr(map.get("product_xh")) %>','<%=StringUtils.nullToStr(map.get("product_name")) %>','<%=StringUtils.nullToStr(map.get("qz_serial_num")) %>');">	
+		<tr class="a1" onmouseover="this.className='a2';" onmouseout="this.className='a1';" title="左键单击选择商品" onclick="sel('<%=StringUtils.nullToStr(map.get("product_id")) %>','<%=StringUtils.nullToStr(map.get("product_xh")) %>','<%=StringUtils.nullToStr(map.get("product_name")) %>','<%=StringUtils.nullToStr(map.get("qz_flag")) %>');">	
 			<td align="left"><%=StringUtils.nullToStr(map.get("product_name")) %></td>
 			<td align="left"><%=StringUtils.nullToStr(map.get("product_xh")) %></td>			
 			<td nowrap><%=StringUtils.nullToStr(map.get("hj_nums")) %></td>
