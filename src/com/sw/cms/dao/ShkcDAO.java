@@ -208,19 +208,35 @@ public class ShkcDAO extends JdbcBaseDAO
    
    /**
     * 添加售后库存
-    * @param jjdProducts
+    * @param shkc
     */
    public void saveShkc(Shkc  shkc)
    {
-	   String sql="insert into shkc(product_id,product_xh,product_name,qz_serial_num,state,store_id)values(?,?,?,?,?,?)";
-	   Object[]param=new Object[6];
+	   String sql="insert into shkc(product_id,product_xh,product_name,qz_serial_num,state,store_id,nums)values(?,?,?,?,?,?,?)";
+	   Object[]param=new Object[7];
 	   param[0]=shkc.getProduct_id();
 	   param[1]=shkc.getProduct_xh();
 	   param[2]=shkc.getProduct_name();
 	   param[3]=shkc.getQz_serial_num();
 	   param[4]=shkc.getState(); 
 	   param[5]=shkc.getStore_id();
-
+	   param[6]=shkc.getNums();
+	   this.getJdbcTemplate().update(sql,param);	   
+   }
+   
+   /**
+    * 增加售后库存
+    * @param shkc
+    */
+   public void addShkc(Shkc  shkc,int nums)
+   {
+	   String sql="update shkc set nums=? where product_id=? and store_id=? and state=?";
+	   Object[]param=new Object[4];
+	   param[0]=shkc.getNums()+nums;
+	   param[1]=shkc.getProduct_id();
+	   param[2]=shkc.getStore_id();
+	   param[3]=shkc.getState();
+	   
 	   this.getJdbcTemplate().update(sql,param);	   
    }
    
@@ -250,7 +266,10 @@ public class ShkcDAO extends JdbcBaseDAO
 	   this.getJdbcTemplate().update(sql);
    }
    
-   
+   /**
+    * 移库入库处理售后库存（按照序列号进行移出售后库存）
+    *
+    */   
    public void deleteShkcHaoById(String product_id,String serial_num)
    {
 	   String sqlStore="";
@@ -261,27 +280,61 @@ public class ShkcDAO extends JdbcBaseDAO
 	   String sql="delete from shkc where state='3' and qz_serial_num='"+serial_num+"' and store_id='"+storeId+"' and product_id='"+product_id+"'";
 	   this.getJdbcTemplate().update(sql);
    }
+   
    /**
-    * 修改接件售后库存（1：坏件库 2：在外库 3：好件库）
+    * 移库入库处理售后库存（将所有的对应商品移出售后库存）
+    *
+    */
+   public void deleteShkcHaoByIdAll(String product_id)
+   {
+	   String sqlStore="";
+	   String storeId="";
+	   sqlStore= "select id from storehouse where name='好件库'";		
+	   Map map=getResultMap(sqlStore);		
+	   storeId= (String)map.get("id"); 
+	   String sql="delete from shkc where state='3' and  store_id='"+storeId+"' and product_id='"+product_id+"'";
+	   this.getJdbcTemplate().update(sql);
+   }
+   
+   /**
+    * 移库入库处理售后库存（将部分的对应商品移出售后库存）
+    *
+    */
+   public void deleteShkcHaoByIdBf(String product_id,int nums)
+   {
+	   String sqlStore="";
+	   String storeId="";
+	   String sql="";
+	   sqlStore= "select id from storehouse where name='好件库'";		
+	   Map map=getResultMap(sqlStore);		
+	   storeId= (String)map.get("id"); 
+	   int numsTemp = 0;
+		sql = "select * from shkc where product_id='" + product_id + "' and state='3'";	
+		Map mapShkc = this.getResultMap(sql);
+		String strNums = StringUtils.nullToStr(mapShkc.get("nums"));
+		if(!strNums.equals("")){
+			numsTemp = (new Integer(strNums)).intValue();
+		}
+	  
+	   sql="update shkc set nums="+(numsTemp-nums)+" where product_id='"+product_id+"' and state='3' and store_id='"+storeId+"'";
+	   this.getJdbcTemplate().update(sql);
+   }
+   
+   /**
+    * 修改接件售后库存（1：坏件库 2：在外库 3：好件库 4：报废库）
     *
     */
    public void insertJjShkcState(List jjdProducts,String state)
    {
-	   String sqlStore="";
-	   String state1="1";
-	   String state2="2";
+	   String sqlStore="";	   
 	   String  sql="";
-	   if (state.equals(state1))
+	   if (state.equals("3"))
 	   {
-		   sqlStore= "select id from storehouse where name='坏件库'";		
+		   sqlStore= "select id from storehouse where name='好件库'";		
 	   }
-	   else if (state.equals(state2))
+	   else 
 	   {
 		   sqlStore= "select id from storehouse where name='坏件库'";	   
-	   }
-	   else
-	   {
-		   sqlStore= "select id from storehouse where name='好件库'";	  
 	   }
 	   Map map=getResultMap(sqlStore);		
 	   String storeId= (String)map.get("id") ; 
@@ -387,7 +440,7 @@ public class ShkcDAO extends JdbcBaseDAO
    }
    
    /**
-    * 维修入库单修改售后库存（0：坏件库1：在外库2：好件库）
+    * 维修入库单修改售后库存（0：坏件库1：在外库2：好件库 4：报废库）
     *
     */
    public void updateWxShkcState(String serialNum,String state)
@@ -403,26 +456,20 @@ public class ShkcDAO extends JdbcBaseDAO
    }
    
    /**
-    * 修改售后库存（1：坏件库 2：在外库 3：好件库）
+    * 修改售后库存（1：坏件库 2：在外库 3：好件库 4：报废库）
     *
     */
    public void updateShkcState(String arryNums,String state)
    {
-	   String sqlStore="";
-	   String state1="1";
-	   String state2="2";
+	   String sqlStore="";	   
 	   String  sql="";
-	   if (state.equals(state1))
+	   if (state.equals("3"))
 	   {
-		   sqlStore= "select id from storehouse where name='坏件库'";		
+		   sqlStore= "select id from storehouse where name='好件库'";		
 	   }
-	   else if (state.equals(state2))
+	   else 
 	   {
 		   sqlStore= "select id from storehouse where name='坏件库'";	   
-	   }
-	   else
-	   {
-		   sqlStore= "select id from storehouse where name='好件库'";	  
 	   }
 	   Map map=getResultMap(sqlStore);		
 	   String storeId= (String)map.get("id") ; 
@@ -432,27 +479,22 @@ public class ShkcDAO extends JdbcBaseDAO
    }
    
    /**
-    * 修改售后库存商品不是强制序列号的（1：坏件库 2：在外库 3：好件库）
+    * 修改售后库存商品不是强制序列号的（1：坏件库 2：在外库 3：好件库 4：报废库）
     *
     */
    public void updateShkcStateNums(String product_id,int nums,String state,String oldState)
    {
-	   String sqlStore="";
-	   String state1="1";
-	   String state2="2";
+	   String sqlStore="";	   
 	   String  sql="";
-	   if (state.equals(state1))
+	   if (state.equals("3"))
 	   {
-		   sqlStore= "select id from storehouse where name='坏件库'";		
+		   sqlStore= "select id from storehouse where name='好件库'";		
 	   }
-	   else if (state.equals(state2))
+	   else 
 	   {
 		   sqlStore= "select id from storehouse where name='坏件库'";	   
 	   }
-	   else
-	   {
-		   sqlStore= "select id from storehouse where name='好件库'";	  
-	   }
+	   
 	   Map map=getResultMap(sqlStore);		
 	   String storeId= (String)map.get("id") ; 
 	   if(state.equals(""))
@@ -497,7 +539,7 @@ public class ShkcDAO extends JdbcBaseDAO
    }
    
    /**
-    * 修改售后库存商品不是强制序列号的（1：坏件库 2：在外库 3：好件库）
+    * 修改售后库存商品不是强制序列号的（1：坏件库 2：在外库 3：好件库 4：报废库）
     *
     */
    public void updateShkcNums(String product_id,int nums,String state,String oldState)
@@ -518,7 +560,7 @@ public class ShkcDAO extends JdbcBaseDAO
    }
    
    /**
-    * 修改售后库存商品不是强制序列号的（1：坏件库 2：在外库 3：好件库）
+    * 修改售后库存商品不是强制序列号的（1：坏件库 2：在外库 3：好件库 4：报废库）
     *
     */
    public void updateShkcStateAll(String product_id,int nums,String state,String oldState)
@@ -568,7 +610,7 @@ public class ShkcDAO extends JdbcBaseDAO
    }
    
    /**
-    * 修改报修返还售后库存（1：坏件库 2：在外库  3:好件库）
+    * 修改报修返还售后库存（1：坏件库 2：在外库  3:好件库 4：报废库）
     *
     */
    public void updateBxfhShkcState(List bxfhdProducts,String state)
@@ -630,7 +672,7 @@ public class ShkcDAO extends JdbcBaseDAO
    }
    
    /**
-    * 修改报废售后库存（1：坏件库 2：在外库 3：好件库）
+    * 修改报废售后库存（1：坏件库 2：在外库 3：好件库 4：报废库）
     *
     */
    public void updateBfShkcState(String serial,String state)
@@ -653,7 +695,7 @@ public class ShkcDAO extends JdbcBaseDAO
    }
    
    /**
-    * 修改换件售后库存（1：坏件库 2：在外库 3：好件库）
+    * 修改换件售后库存（1：坏件库 2：在外库 3：好件库 4：报废库）
     *
     */
    public void updateHjShkcState(HjdProduct hjdProduct)
