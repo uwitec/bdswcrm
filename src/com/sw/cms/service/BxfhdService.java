@@ -179,7 +179,14 @@ public class BxfhdService
 						Shkc shkc = (Shkc)shkcDao.getShkc(product_id,"2");
 						
 							int cknums = bxfhdProduct.getNums();  //要报修数量
-							int kcnums = shkc.getNums();//库存数量
+							int kcnums;
+							if(shkc != null){
+							   kcnums = shkc.getNums();//库存数量
+							}
+							else
+							{
+							   kcnums =0;
+							}
 							
 							if(cknums>kcnums){
 								msg += bxfhdProduct.getProduct_name() + " 当前库存为：" + kcnums + "  无法进行报修返还处理\n";

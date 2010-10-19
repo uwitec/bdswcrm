@@ -6,6 +6,8 @@ import com.sw.cms.dao.FhkhdDAO;
 import com.sw.cms.dao.QtsrDAO;
 import com.sw.cms.dao.ShSerialNumFlowDAO;
 import com.sw.cms.dao.ShkcDAO;
+import com.sw.cms.model.Bxd;
+import com.sw.cms.model.BxdProduct;
 import com.sw.cms.model.Fhkhd;
 import com.sw.cms.model.FhkhdProduct;
 import com.sw.cms.model.Page;
@@ -68,6 +70,45 @@ public String updatefhkhdId()
 		   
 	   return message;
    }
+   
+   /**
+	 * 判断库存量是否满足返回客户处理
+	 * @param fhkhd
+	 * @param fhkhdProducts
+	 */
+	public String checkKc(Fhkhd fhkhd,List fhkhdProducts){
+		String msg = "";
+		
+		if(fhkhdProducts != null && fhkhdProducts.size()>0){
+			for(int i=0;i<fhkhdProducts.size();i++){
+				FhkhdProduct fhkhdProduct = (FhkhdProduct)fhkhdProducts.get(i);
+				if(fhkhdProduct != null){
+					if(!fhkhdProduct.getProduct_id().equals("") && !fhkhdProduct.getProduct_name().equals("")){
+						String product_id = fhkhdProduct.getProduct_id();
+						
+						//进行库存数量判断
+						Shkc shkc = (Shkc)shkcDao.getShkc(product_id,"3");
+						
+							int cknums = fhkhdProduct.getNums();  //要报修数量
+							int kcnums;
+							if(shkc != null){
+							   kcnums = shkc.getNums();//库存数量
+							}
+							else
+							{
+							   kcnums =0;
+							}
+							
+							if(cknums>kcnums){
+								msg += fhkhdProduct.getProduct_name() + " 当前库存为：" + kcnums + "  无法进行报修处理\n";
+							}						
+					}
+				}
+			}
+		}
+		
+		return msg;
+	}
    
    public void savefhkhd(Fhkhd fhkhd,List fhkhdProducts)
    {	   
