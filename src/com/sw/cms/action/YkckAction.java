@@ -99,16 +99,15 @@ public class YkckAction extends BaseAction
 						
 						return "input";
 					}
-					 msg=ykckService.isSerialNumInKcExist(ykckProducts);
-					 if(!msg.equals("")){
+					msg=ykckService.isSerialNumInKcExist(ykckProducts);
+					if(!msg.equals("")){
 							ykck.setState("已保存");
-							ykckService.saveYkck(ykck, ykckProducts);
-							
+							ykckService.saveYkck(ykck, ykckProducts);							
 							return "input";
-						}
+					}
+					
 				}
-			}
-			
+			}			
 			
 			ykckService.saveYkck(ykck, ykckProducts);
 			return "success";
@@ -141,19 +140,20 @@ public class YkckAction extends BaseAction
 						ykckProducts = ykckService.getykckProducts(ykck.getId());
 						return "input";
 					}
+					
 					 msg=ykckService.isSerialNumInKcExist(ykckProducts);
 					 if(!msg.equals("")){
 							ykck.setState("已保存");
-							ykckService.saveYkck(ykck, ykckProducts);
+							ykckService.updateYkck(ykck, ykckProducts);
 							
 							return "input";
 						}
 				}
 			}
 			
-			//判断调拨单是否已经提交
+			//判断移库出库单是否已经提交
 			if(ykckService.isDbFinish(ykck.getId())){
-				msg = "调拨单已经出库，不能重复出库，请检查！";
+				msg = "移库出库单已经出库，不能重复出库，请检查！";
 				
 				storeList = storeService.getAllStoreList();
 				ykckProducts = ykckService.getykckProducts(ykck.getId());
@@ -172,7 +172,7 @@ public class YkckAction extends BaseAction
 		
 		
 		/**
-		 * 库房调拨商品明细
+		 * 移库出库商品明细
 		 * @return
 		 */
 		public String descYkck(){

@@ -123,30 +123,27 @@ public class YkrkAction extends BaseAction
 			{
 				if(ykrk.getState().equals("已提交"))
 				{
-                    msg = ykrkService.checkHaoKc(ykrk, ykrkProducts);
-					
+                    msg = ykrkService.checkHaoKc(ykrk, ykrkProducts);					
 					if(!msg.equals(""))
 					
 					{
 						ykrk.setState("已保存");
+						this.saveMessage(msg);
 						ykrkService.saveYkrk(ykrk, ykrkProducts);
-						
 						return "input";
 					}
 					 msg=ykrkService.isSerialNumInKcExist(ykrkProducts);
 					 if(!msg.equals(""))
 					 {
 							ykrk.setState("已保存");
-							ykrkService.saveYkrk(ykrk, ykrkProducts);							
+							this.saveMessage(msg);
+							ykrkService.saveYkrk(ykrk, ykrkProducts);
 							return "input";
-					 }
-				}
-			}
+					 }					 
+				}				
+				  ykrkService.saveYkrk(ykrk, ykrkProducts);				
+			}			
 			
-			if(ykrk.getState().equals("已保存"))
-			{
-			  ykrkService.saveYkrk(ykrk, ykrkProducts);
-			}
 			return "success";
 		}
 		
@@ -175,8 +172,7 @@ public class YkrkAction extends BaseAction
 					if(!msg.equals(""))
 					{
 						ykrk.setState("已保存");
-						ykrkService.saveYkrk(ykrk, ykrkProducts);
-						
+						ykrkService.saveYkrk(ykrk, ykrkProducts);						
 						return "input";
 					} 
 					

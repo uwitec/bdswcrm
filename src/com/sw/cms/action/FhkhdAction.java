@@ -35,7 +35,7 @@ public class FhkhdAction extends BaseAction
    private String lxr="";
    private String fh_date1="";
    private String fh_date2="";
-   
+   private String msg = "";
    private String state="";
    private String client_name="";
    private String id="";
@@ -164,13 +164,23 @@ public class FhkhdAction extends BaseAction
 		   
 		   if(fhkhd.getState().equals("已提交"))
 		   {
-			   String msg=fhkhdService.isHaoShkcExist(fhkhdProducts);
+			   msg=fhkhdService.isHaoShkcExist(fhkhdProducts);
 			   if(!msg.equals(""))
 			   {
 				     this.saveMessage(msg);
 					 fhkhd.setState("已保存");
 					 return "input";
 			   }
+			   
+			   //判断库存是否满足要求            	
+           	    msg = fhkhdService.checkKc(fhkhd, fhkhdProducts);
+				if(!msg.equals(""))
+				{
+					fhkhd.setState("已保存");           		
+           		    this.saveMessage(msg);
+           		    return "input";
+             	}
+				
 			  fhkhdService.savefhkhd(fhkhd, fhkhdProducts); 
 		   }
 		   if(fhkhd.getState().equals("已保存"))
@@ -242,13 +252,22 @@ public class FhkhdAction extends BaseAction
 		   
 		   if(fhkhd.getState().equals("已提交"))
 		   {
-			   String msg=fhkhdService.isHaoShkcExist(fhkhdProducts);
+			   msg=fhkhdService.isHaoShkcExist(fhkhdProducts);
 			   if(!msg.equals(""))
 			   {
 				     this.saveMessage(msg);
 					 fhkhd.setState("已保存");
 					 return "input";
 			   }
+			   
+			   //判断库存是否满足要求            	
+           	    msg = fhkhdService.checkKc(fhkhd, fhkhdProducts);
+				if(!msg.equals(""))
+				{
+					fhkhd.setState("已保存");           		
+           		    this.saveMessage(msg);
+           		    return "input";
+             	}
 			  fhkhdService.updatefhkhd(fhkhd, fhkhdProducts); 
 		   }
 		   if(fhkhd.getState().equals("已保存"))
@@ -420,5 +439,14 @@ public String getId() {
 
 public void setId(String id) {
 	this.id = id;
+}
+
+public String getMsg() {
+	return msg;
+}
+
+
+public void setMsg(String msg) {
+	this.msg = msg;
 }
 }
