@@ -281,8 +281,8 @@ if(!msg.equals("")){
 %>	
 	<tr>
 		<td class="a1" width="15%">编号</td>
-		<td class="a2">
-		<input type="text" name="ykck.id" id="id" value="<%=StringUtils.nullToStr(ykck.getId()) %>" size="30" maxlength="50" readonly><font color="red">*</font>	
+		<td class="a2"  width="35%">
+		<input type="text" name="ykck.id" id="id" value="<%=StringUtils.nullToStr(ykck.getId()) %>" size="45" readonly><font color="red">*</font>	
 		</td>	
 		<%
 		String date = StringUtils.nullToStr(ykck.getCk_date());
@@ -290,15 +290,15 @@ if(!msg.equals("")){
 			date = DateComFunc.getToday();
 		}
 		%>
-		<td class="a1">日期</td>
-		<td class="a2"><input type="text" name="ykck.ck_date" id="ck_date" value="<%=date %>"  class="Wdate" onFocus="WdatePicker()">
+		<td class="a1"  width="15%">日期</td>
+		<td class="a2"  width="35%"><input type="text" name="ykck.ck_date" id="ck_date" value="<%=date %>"  class="Wdate" onFocus="WdatePicker()" size="45">
 		<font color="red">*</font>	
 		</td>	
 	</tr>
 	<tr>			
 		<td class="a1" width="15%">调出仓库</td>
-		<td class="a2">
-			<select name="ykck.ck_store_id" id="ck_store_id">
+		<td class="a2"  width="35%" >
+			<select name="ykck.ck_store_id" id="ck_store_id"  style="width:256px">
 				<option value=""></option>
 			<%
 			if(storeList != null){
@@ -315,9 +315,9 @@ if(!msg.equals("")){
 			%>
 			</select><font color="red">*</font>			
 		</td>
-	<td class="a1" width="15%">调入仓库</td>
+	    <td class="a1" width="15%">调入仓库</td>
 		<td class="a2" width="35%" >
-			<select name="ykck.rk_store_id" id="rk_store_id">
+			<select name="ykck.rk_store_id" id="rk_store_id"  style="width:256px">
 				<option value="坏件库" <%if(StringUtils.nullToStr(ykck.getRk_store_id()).equals("坏件库")) out.print("selected"); %>>坏件库</option>
 				<option value="好件库" <%if(StringUtils.nullToStr(ykck.getRk_store_id()).equals("好件库")) out.print("selected"); %>>好件库</option>
 			</select>			
@@ -327,7 +327,7 @@ if(!msg.equals("")){
    <tr>
 		 <td class="a1" width="15%">经手人</td>
 		<td class="a2" colspan="3">
-		    <input  id="brand"    type="text"   length="20"  onblur="setValue()" value="<%=StaticParamDo.getRealNameById(ykck.getJsr()) %>"/>   
+		    <input  id="brand"    type="text"   size="45"  onblur="setValue()" value="<%=StaticParamDo.getRealNameById(ykck.getJsr()) %>"/>   
             <div   id="brandTip"  style="height:12px;position:absolute;left:146px; top:141px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		    <input type="hidden" name="ykck.jsr" id="fzr" value="<%=ykck.getJsr()%>"/> <font color="red">*</font>	
 		</td>
@@ -340,21 +340,16 @@ if(!msg.equals("")){
 		<td colspan="2">商品详细信息</td>
 	</tr>
 	</thead>
-	<tr height="35">
-		<td class="a2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;输入序列号：<input type="text" name="s_nums" value="" onkeypress="javascript:f_enter()">
-			注：输入商品序列号回车，自动提取商品信息
-		</td>
-	</tr>		
+		
 </table>
 <table width="100%"  align="center" id="kfdbTable"  class="chart_list" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td>商品名称</td>
-		<td>规格</td>
-		<td>数量</td>
-		<td>强制序列号</td>
-		<td>备注</td>
-		<td></td>
+		<td width="25%">商品名称</td>
+		<td width="25%">规格</td>
+		<td width="10%">数量</td>
+		<td width="20%">强制序列号</td>
+		<td width="20%">备注</td>		
 	</tr>
 	</thead>
 <%
@@ -364,22 +359,17 @@ if(ykckProducts!=null && ykckProducts.size()>0){
 %>
 	<tr>
 		<td class="a2">
-			<input type="text" id="product_name_<%=i %>" name="ykckProducts[<%=i %>].product_name" value="<%=StringUtils.nullToStr(ykckProduct.get("product_name")) %>" readonly>
-			<input type="button" name="selectButton" value="选择" class="css_button" onclick="openWin(<%=i %>);">
+			<input type="text" id="product_name_<%=i %>" name="ykckProducts[<%=i %>].product_name" value="<%=StringUtils.nullToStr(ykckProduct.get("product_name")) %>" readonly style="width:100%">
 			<input type="hidden" id="product_id_<%=i %>" name="ykckProducts[<%=i %>].product_id" value="<%=StringUtils.nullToStr(ykckProduct.get("product_id")) %>">
 		</td>
-		<td class="a2"><input type="text" id="product_xh_<%=i %>" name="ykckProducts[<%=i %>].product_xh" value="<%=StringUtils.nullToStr(ykckProduct.get("product_xh")) %>" readonly></td>
-		<td class="a2"><input type="text" id="nums_<%=i %>" name="ykckProducts[<%=i %>].nums"  value="<%=StringUtils.nullToStr(ykckProduct.get("nums")) %>"></td>
+		<td class="a2"><input type="text" id="product_xh_<%=i %>" name="ykckProducts[<%=i %>].product_xh" value="<%=StringUtils.nullToStr(ykckProduct.get("product_xh")) %>" readonly style="width:100%"></td>
+		<td class="a2"><input type="text" id="nums_<%=i %>" name="ykckProducts[<%=i %>].nums"  value="<%=StringUtils.nullToStr(ykckProduct.get("nums")) %>" style="width:100%"></td>
 		<td class="a2">
-			<input type="text" id="qz_serial_num_<%=i %>" name="ykckProducts[<%=i %>].qz_serial_num" value="<%=StringUtils.nullToStr(ykckProduct.get("qz_serial_num")) %>" size="15" readonly>
+			<input type="text" id="qz_serial_num_<%=i %>" name="ykckProducts[<%=i %>].qz_serial_num" value="<%=StringUtils.nullToStr(ykckProduct.get("qz_serial_num")) %>" size="15" readonly style="width:70%">
 			<input type="hidden" id="qz_flag_<%=i %>" name="ykckProducts[<%=i %>].qz_flag" value="<%=StringUtils.nullToStr(ykckProduct.get("qz_flag")) %>"><a style="cursor:hand" title="左键点击输入输列号" onclick="openSerialWin('<%=i %>');"><b>...</b></a>&nbsp;
 		</td>		
-		<td class="a2"><input type="text" id="product_remark_<%=i %>" name="ykckProducts[<%=i %>].product_remark" value="<%=StringUtils.nullToStr(ykckProduct.get("product_remark")) %>" maxlength="50"></td>
-		<%if (i>0){ %>		
-		<td class="a2"><input type="button" name="delButton" value="删除" class="css_button" onclick="delTr(this);"></td>
-		<%}else{ %>
-		<td class="a2">&nbsp;</td>
-		<%} %>
+		<td class="a2"><input type="text" id="product_remark_<%=i %>" name="ykckProducts[<%=i %>].product_remark" value="<%=StringUtils.nullToStr(ykckProduct.get("product_remark")) %>" maxlength="50" style="width:100%"></td>
+		
 	</tr>
 <%
 	}
@@ -388,7 +378,7 @@ if(ykckProducts!=null && ykckProducts.size()>0){
 %>
 	<tr>
 		<td class="a2">
-			<input type="text" id="product_name_<%=i %>" name="ykckProducts[<%=i %>].product_name" readonly><input type="button" name="selectButton" value="选择" class="css_button" onclick="openWin(<%=i %>);">
+			<input type="text" id="product_name_<%=i %>" name="ykckProducts[<%=i %>].product_name" readonly>
 			<input type="hidden" id="product_id_<%=i %>" name="ykckProducts[<%=i %>].product_id">
 		</td>
 		<td class="a2"><input type="text" id="product_xh_<%=i %>" name="ykckProducts[<%=i %>].product_xh" readonly></td>
@@ -398,24 +388,14 @@ if(ykckProducts!=null && ykckProducts.size()>0){
 			<input type="hidden" id="qz_flag_<%=i %>" name="ykckProducts[<%=i %>].qz_flag" value=""><a style="cursor:hand" title="左键点击输入输列号" onclick="openSerialWin('<%=i %>');"><b>...</b></a>&nbsp;
 		</td>		
 		<td class="a2"><input type="text" id="product_remark_<%=i %>" name="ykckProducts[<%=i %>].product_remark" maxlength="50"></td>
-		<%if (i>0){ %>		
-		<td class="a2"><input type="button" name="delButton" value="删除" class="css_button" onclick="delTr(this);"></td>
-		<%}else{ %>
-		<td class="a2">&nbsp;</td>
-		<%} %>
+		
 	</tr>
 <%
 	}
 }
 %>	
 </table>
-<table width="100%"  align="center" class="chart_info" cellpadding="0" cellspacing="0">
-	<tr height="35">
-		<td class="a2" colspan="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="button" name="button1" value="添加一行" class="css_button2" onclick="addTr();">
-		</td>
-	</tr>		
-</table>
+
 <br>
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
 	<thead>
