@@ -54,6 +54,8 @@ public class KfdbAction extends BaseAction {
 	private String ck_date1 = DateComFunc.getToday();
 	private String ck_date2 = DateComFunc.getToday();
 	private String state = "";
+	private String dckf = "";
+	private String drkf = "";
 	private String orderName ="";
 	private String orderType ="";	
 	private int curPage = 1;
@@ -93,6 +95,14 @@ public class KfdbAction extends BaseAction {
 			con += " and state='" + state + "'";
 		}
 		
+		if(!dckf.equals("")){
+			con += " and ck_store_id='" + dckf + "'";
+		}
+		
+		if(!drkf.equals("")){
+			con += " and rk_store_id='" + drkf + "'";
+		}
+		
 		if(orderName.equals("")){
 			orderName = "id";
 		}
@@ -103,6 +113,7 @@ public class KfdbAction extends BaseAction {
 		con += " order by " + orderName + " " + orderType;
 		
 		pageKfdb = kfdbService.getKfdbList(con, curPage, rowsPerPage);
+		storeList = storeService.getAllStoreList();
 		return "success";
 	}
 	
@@ -589,4 +600,21 @@ public class KfdbAction extends BaseAction {
 		this.state = state;
 	}
 
+	public String getDckf() {
+		return dckf;
+	}
+
+
+	public void setDckf(String dckf) {
+		this.dckf = dckf;
+	}
+	
+	public String getDrkf() {
+		return drkf;
+	}
+
+
+	public void setDrkf(String drkf) {
+		this.drkf = drkf;
+	}
 }
