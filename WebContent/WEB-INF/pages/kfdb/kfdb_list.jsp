@@ -9,9 +9,12 @@
 OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
 
 Page results = (Page)VS.findValue("pageKfdb");
-
+List storeList = (List)VS.findValue("storeList");
 String ck_date1 = (String)VS.findValue("ck_date1");
 String ck_date2 = (String)VS.findValue("ck_date2");
+String dckf = (String)VS.findValue("dckf");
+String drkf = (String)VS.findValue("drkf");
+
 String state = (String)VS.findValue("state");
 String orderName = (String)VS.findValue("orderName");
 String orderType = (String)VS.findValue("orderType");
@@ -49,6 +52,8 @@ String orderType = (String)VS.findValue("orderType");
 		document.myform.ck_date1.value = "";
 		document.myform.ck_date2.value = "";
 		document.myform.state.value = "";
+		document.myform.dckf.value = "";
+		document.myform.drkf.value = "";
 	}
 	
 	function edit(id){
@@ -122,6 +127,40 @@ String orderType = (String)VS.findValue("orderType");
 				<option value="已退回" <%if(state.equals("已退回")) out.print("selected"); %>>已退回</option>
 			</select>
 			&nbsp;&nbsp;&nbsp;&nbsp;
+			调出仓库：<select name="dckf">
+				<option value=""></option>
+			<%
+			if(storeList != null && storeList.size()>0){
+				Iterator it = storeList.iterator();
+				while(it.hasNext()){
+					StoreHouse storeHose = (StoreHouse)it.next();
+					String id = StringUtils.nullToStr(storeHose.getId());
+					String name = StringUtils.nullToStr(storeHose.getName());
+			%>
+				<option value="<%=id %>" <%if(id.equals(dckf)) out.print("selected"); %>><%=name %></option>
+			<%
+				}
+			}
+			%>
+			</select>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			调入仓库：<select name="drkf">
+				<option value=""></option>
+			<%
+			if(storeList != null && storeList.size()>0){
+				Iterator it = storeList.iterator();
+				while(it.hasNext()){
+					StoreHouse storeHose = (StoreHouse)it.next();
+					String id = StringUtils.nullToStr(storeHose.getId());
+					String name = StringUtils.nullToStr(storeHose.getName());
+			%>
+				<option value="<%=id %>" <%if(id.equals(drkf)) out.print("selected"); %>><%=name %></option>
+			<%
+				}
+			}
+			%>
+			</select>
 			<input type="submit" name="buttonCx" value=" 查询 " class="css_button2">&nbsp;&nbsp;&nbsp;&nbsp;	
 			<input type="button" name="buttonQk" value=" 清空 " class="css_button2" onclick="clearAll();">
 		</td>				
