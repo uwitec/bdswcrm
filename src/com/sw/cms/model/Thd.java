@@ -27,6 +27,16 @@ public class Thd {
 	
 	private String yw_type;      //退货类型 1:销售订单;2:零售订单
 	
+	private String typeLs;      //销售退货中，零售单的退款方式
+	
+	
+	public String getTypeLs() {
+		return typeLs;
+	}
+	public void setTypeLs(String typeLs) {
+		this.typeLs = typeLs;
+	}
+	
 	public String getClient_name() {
 		return client_name;
 	}
