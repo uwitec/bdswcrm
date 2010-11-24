@@ -64,12 +64,26 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 			alert("退货原因不能为空！");
 			return;
 		}	
-		if(document.getElementById("type").value == "现金"){
-			if(document.getElementById("skzh").value == ""){
+		
+		if(document.getElementById("yw_type").value == "1")
+		{
+		  if(document.getElementById("type").value == "现金"){
+			 if(document.getElementById("skzh").value == ""){
 				alert("退款账号不能为空，请选择！");
 				return;
-			}
-		}			
+			 }
+		   }
+		 }			
+		
+		if(document.getElementById("yw_type").value == "2")
+		{
+		  if(document.getElementById("typeLs").value == "现金"){
+			 if(document.getElementById("skzh").value == ""){
+				alert("退款账号不能为空，请选择！");
+				return;
+			 }
+		   }
+		 }
 		
 		//判断是否存在强制输入序列号的商品没有输入序列号
 		for(var i=0;i<allCount;i++){
@@ -341,14 +355,21 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 			document.getElementById("client_id").style.display = 'none';
 			document.getElementById("btnXsd").style.display = '';
 			document.getElementById("btnLsd").style.display = 'none';
+			document.getElementById("type").style.display = '';
+			document.getElementById("typeLs").style.display = 'none';
 		}else{
 			document.getElementById("client_name").style.display = 'none';
 			document.getElementById("client_id").style.display = '';
 			document.getElementById("btnXsd").style.display = 'none';
 			document.getElementById("btnLsd").style.display = '';
+			document.getElementById("type").style.display = 'none';
+			document.getElementById("typeLs").style.display = '';			
 		}
+		
 		document.getElementById("client_name").value = "";
 		document.getElementById("client_id").value = "";
+		document.getElementById("type").value = "";
+		document.getElementById("typeLs").value = "";
 	}
 </script>
 </head>
@@ -386,7 +407,9 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 		</td>		
 		<td class="a1" width="15%">客户名称</td>
 		<td class="a2">
-		<input type="text" name="thd.client_id" id="client_name" style="width:232px" value="<%=StaticParamDo.getClientNameById(StringUtils.nullToStr(thd.getClient_name())) %>" size="30" maxlength="50" onblur="setClientValue();"><input type="text" name="thd.client_name" id="client_id" style="width:232px;display: none" value="<%=StringUtils.nullToStr(thd.getClient_name()) %>"> <font color="red">*</font>
+		<input type="text" name="thd.client_id" id="client_name" style="width:232px" value="<%=StaticParamDo.getClientNameById(StringUtils.nullToStr(thd.getClient_name())) %>" size="30" maxlength="50" onblur="setClientValue();">
+		<input type="text" name="thd.client_name" id="client_id" style="width:232px;display: none" value="<%=StringUtils.nullToStr(thd.getClient_name()) %>"> 
+		<font color="red">*</font>
 		<div id="clientsTip" style="height:12px;position:absolute;left:147px; top:85px; width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		</td>	
 	</tr>
@@ -402,7 +425,12 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 			<select name="thd.type" id="type" onchange="chgType(this.value);" style="width:232px">
 				<option value="现金" <%if(StringUtils.nullToStr(thd.getType()).equals("现金")) out.print("selected"); %>>现金</option>
 				<option value="冲抵往来" <%if(StringUtils.nullToStr(thd.getType()).equals("冲抵往来")) out.print("selected"); %>>冲抵往来</option>
-			</select> <font color="red">*</font>
+			</select> 
+			<select name="thd.typeLs" id="typeLs" onchange="chgType(this.value);" style="width:232px;display: none">
+				<option value="现金" <%if(StringUtils.nullToStr(thd.getType()).equals("现金")) out.print("selected"); %>>现金</option>				
+			</select>
+			
+			<font color="red">*</font>			
 		</td>
 	</tr>
 	<tr>
