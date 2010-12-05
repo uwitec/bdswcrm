@@ -54,6 +54,8 @@
 　　　　二、会员管理模块进行了改造，重新梳理；
 			  三、出入库汇总、库存成本汇本进行了修改，改善了执行时资源占用过多的问题；
 			  四、解决出入库汇总明细不正确的问题；
+        五、修改系统用户的所在库房字段,增加为varchar(500),可以支持选择多个库房
+	  
 
 　　3、数据库修改：
 				--修改积分规则表修改字段类型
@@ -79,6 +81,9 @@
 				 DROP COLUMN `zkjsr`,
 				 DROP COLUMN `hybh`,
 				 MODIFY COLUMN `fkbz` VARCHAR(1000) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL;
+				 
+				 --修改系统用户的所在库房字段,增加为varchar(500),可以支持选择多个库房
+				 ALTER TABLE `sys_user` MODIFY COLUMN `szkf` VARCHAR(500) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL;		
 		 
 　　4、对应SVN版本号：785
 
@@ -91,8 +96,8 @@
 　　　   易县未来                    |                待部署                           |                                   
 　　　   定州创逸                    |                待部署                           |                                                            
 　　　   高碑店骏腾                  |                待部署                           |                                                     
-　　　   保定博通                    |                待部署                           |                                 
-　　　   张家口金诺                  |                待部署                           |         
+　　　   保定博通                    |               2010-12-05                        |    李玉堂                             
+　　　   张家口金诺                  |               2010-11-22                        |    李玉堂     
 　　　   秦皇岛金恒生                |                待部署                           |                               
 　　　   承德扬天                    |                待部署                           |                                                         
 　　　   北京银联合力                |                待部署                           |            
