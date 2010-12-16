@@ -52,14 +52,7 @@ public class ThdDAO extends JdbcBaseDAO {
 		param[5] = thd.getState();
 		param[6] = thd.getTkzh();
 		param[7] = thd.getCzr();
-		if(thd.getYw_type().equals("1"))
-		{
-		  param[8] = thd.getType();
-		}
-		else
-		{
-		  param[8] = thd.getTypeLs();
-		}
+		param[8] = thd.getType();
 		param[9] = thd.getXsd_id();
 		param[10] = thd.getThd_id();
 		param[11] = thd.getStore_id();		
@@ -98,14 +91,7 @@ public class ThdDAO extends JdbcBaseDAO {
 		param[5] = thd.getState();
 		param[6] = thd.getTkzh();
 		param[7] = thd.getCzr();
-		if(thd.getYw_type().equals("1"))
-		{
-		  param[8] = thd.getType();
-		}
-		else
-		{
-		  param[8] = thd.getTypeLs();
-		}
+		param[8] = thd.getType();
 		param[9] = thd.getXsd_id();
 		param[10] = thd.getStore_id();
 		param[11] = thd.getFplx();
@@ -331,7 +317,7 @@ public class ThdDAO extends JdbcBaseDAO {
 			if(SqlUtil.columnIsExist(rs,"xsd_id")) thd.setXsd_id(rs.getString("xsd_id"));
 			if(SqlUtil.columnIsExist(rs,"store_id")) thd.setStore_id(rs.getString("store_id"));
 			if(SqlUtil.columnIsExist(rs,"th_flag")) thd.setTh_flag(rs.getString("th_flag"));
-			if(SqlUtil.columnIsExist(rs,"typeLs")) thd.setType(rs.getString("typeLs"));
+			
 			if(SqlUtil.columnIsExist(rs,"fplx")) thd.setFplx(rs.getString("fplx"));
 			if(SqlUtil.columnIsExist(rs,"kp_mc")) thd.setKp_mc(rs.getString("kp_mc"));
 			if(SqlUtil.columnIsExist(rs,"kp_address")) thd.setKp_address(rs.getString("kp_address"));

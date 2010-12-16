@@ -281,10 +281,8 @@ public class ThdService {
 	 * @param thd
 	 */
 	private void updateThdJe(Thd thd){
-		//销售订单
-		if(thd.getYw_type().equals("1"))
-		{
-		  if(thd.getType().equals("现金")){  //现金退货
+		
+		if(thd.getType().equals("现金")){  //现金退货
 			
 			//添加相应销售收款信息，负值
 			this.saveXssk(thd);
@@ -292,28 +290,10 @@ public class ThdService {
 			//更新相应账号余额
 			this.updateAccountJe(thd);
 			
-		  }else{ //冲抵往来退货
+		}else{ //冲抵往来退货
 			
 			//应收转预收
 			this.addYushouk(thd);
-		  }
-		}
-		//零售单
-		if(thd.getYw_type().equals("2"))
-		{
-		  if(thd.getTypeLs().equals("现金")){  //现金退货
-			
-			//添加相应销售收款信息，负值
-			this.saveXssk(thd);
-			
-			//更新相应账号余额
-			this.updateAccountJe(thd);
-			
-		  }else{ //冲抵往来退货
-			
-			//应收转预收
-			this.addYushouk(thd);
-		  }
 		}
 	}
 	
