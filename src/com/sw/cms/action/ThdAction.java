@@ -100,8 +100,10 @@ public class ThdAction extends BaseAction {
 		thd.setCzr(user_id);
 		
 		//如查退货单状态是已入库，并且现金退货，需要判断账号金额是否足够
-		if(thd.getState().equals("已入库") && thd.getType().equals("现金")){
-			if(accountsService.isZhjeXyZero(thd.getTkzh(), thd.getThdje())){
+		if (thd.getYw_type().equals("1"))
+		{
+		  if(thd.getState().equals("已入库") && thd.getType().equals("现金")){
+			 if(accountsService.isZhjeXyZero(thd.getTkzh(), thd.getThdje())){
 				this.setMsg("退款账户金额不足，请检查！");
 				
 				storeList = storeService.getAllStoreList();
@@ -115,8 +117,28 @@ public class ThdAction extends BaseAction {
 				
 				return "input";
 			}
+		  }
 		}
 		
+		if (thd.getYw_type().equals("2"))
+		{
+		  if(thd.getState().equals("已入库") && thd.getTypeLs().equals("现金")){
+				 if(accountsService.isZhjeXyZero(thd.getTkzh(), thd.getThdje())){
+						this.setMsg("退款账户金额不足，请检查！");
+						
+						storeList = storeService.getAllStoreList();
+						
+						thd.setState("已保存");
+						if(thdService.getThd(thd.getThd_id()) == null){
+							thdService.saveThd(thd, thdProducts);
+						}else{
+							thdService.updateThd(thd, thdProducts);
+						}
+						
+						return "input";
+				}
+		  }
+		}
 		thdService.saveThd(thd, thdProducts);
 		return "success";
 	}
@@ -155,7 +177,9 @@ public class ThdAction extends BaseAction {
 		thd.setCzr(user_id);
 		
 		//如查退货单状态是已入库，并且现金退货，需要判断账号金额是否足够
-		if(thd.getState().equals("已入库") && thd.getType().equals("现金")){
+		if (thd.getYw_type().equals("1"))
+		{
+		  if(thd.getState().equals("已入库") && thd.getType().equals("现金")){
 			if(accountsService.isZhjeXyZero(thd.getTkzh(), thd.getThdje())){
 				this.setMsg("退款账户金额不足，请检查！");
 				
@@ -166,8 +190,23 @@ public class ThdAction extends BaseAction {
 				
 				return "input";
 			}
+		  }
 		}
-		
+		if (thd.getYw_type().equals("2"))
+		{
+		  if(thd.getState().equals("已入库") && thd.getTypeLs().equals("现金")){
+			if(accountsService.isZhjeXyZero(thd.getTkzh(), thd.getThdje())){
+				this.setMsg("退款账户金额不足，请检查！");
+				
+				storeList = storeService.getAllStoreList();
+				
+				thd.setState("已保存");				
+				thdService.updateThd(thd, thdProducts);
+				
+				return "input";
+			}
+		  }
+		}
 		thdService.updateThd(thd, thdProducts);
 		return "success";
 	}
