@@ -212,8 +212,7 @@ Hykda hykda = (Hykda)VS.findValue("hykda");
 	   <td class="a2" width="35%"><%=StringUtils.nullToStr(hykda.getHykh()) %>
 	   </td>
 	   <td class="a1" width="15%">发卡机构</td>
-		<td class="a2" width="35%"><%=StringUtils.nullToStr(hykda.getFfjg()) %>
-		</td>
+		<td class="a2" width="35%"></td>
 	</tr>
 	
 	<tr>
