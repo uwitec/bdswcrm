@@ -177,7 +177,7 @@ public class KcMxReportDAO extends JdbcBaseDAO {
 	
 	/**
 	 * 取库存变化明细
-	 * 包括出库单、入库单、库房调拨
+	 * 包括出库单、入库单、库房调拨、移库出库、移库入库
 	 * @param product_id
 	 * @param start_date
 	 * @param end_date
@@ -257,7 +257,41 @@ public class KcMxReportDAO extends JdbcBaseDAO {
 			sql_pd = sql_pd + " and b.pdrq<='" + (end_date + " 23:59:59") + "'";
 		}
 		
-		sql = "select * from ((" + sql_rk + ") union all (" + sql_ck + ") union all (" + sql_db + ") union all (" + sql_pd + ")) x order by cz_date asc"; 
+        //移库入库
+		String sql_ykrk = "select dj_id,'' as cd_id,product_id,product_name,product_xh,nums,price,rk_date as fsrq,flag,cz_date,'' as client_name  from "+
+		                  "(select a.ykrk_id as dj_id,a.product_id,a.product_name,a.product_xh, a.nums,c.price,b.rk_store_id as store_id,b.rk_date,'移库入库单' as type,'入库' as flag,"+
+		                  "b.cz_date from ykrk_product a left join ykrk b on b.id=a.ykrk_id left join product c on c.product_id=a.product_id where b.state='已提交') z where 1=1";
+		if(!product_id.equals("")){
+			sql_ykrk = sql_ykrk + " and product_id='" + product_id + "'";
+		}
+		if(!store_id.equals("")){
+			sql_ykrk = sql_ykrk + " and store_id='" + store_id + "'";
+		}
+		if(!start_date.equals("")){
+			sql_ykrk = sql_ykrk + " and rk_date>='" + start_date + "'";
+		}
+		if(!end_date.equals("")){
+			sql_ykrk = sql_ykrk + " and rk_date<='" + (end_date + " 23:59:59") + "'";
+		}
+		
+//		移库出库
+		String sql_ykck = "select dj_id,'' as cd_id,product_id,product_name,product_xh,nums,price,ck_date as fsrq,flag,cz_date,'' as client_name  from "+
+		                  "(select a.ykck_id as dj_id,a.product_id,a.product_name,a.product_xh, a.nums,c.price,b.ck_store_id as store_id,b.ck_date,'移库出库单' as type,'出库' as flag,"+
+		                  "b.cz_date from ykck_product a left join ykck b on b.id=a.ykck_id left join product c on c.product_id=a.product_id where b.state='已提交') z where 1=1";
+		if(!product_id.equals("")){
+			sql_ykck = sql_ykck + " and product_id='" + product_id + "'";
+		}
+		if(!store_id.equals("")){
+			sql_ykck = sql_ykck + " and store_id='" + store_id + "'";
+		}
+		if(!start_date.equals("")){
+			sql_ykck = sql_ykck + " and ck_date>='" + start_date + "'";
+		}
+		if(!end_date.equals("")){
+			sql_ykck = sql_ykck + " and ck_date<='" + (end_date + " 23:59:59") + "'";
+		}
+		
+		sql = "select * from ((" + sql_rk + ") union all (" + sql_ck + ") union all (" + sql_db + ") union all (" + sql_pd + ") union all (" + sql_ykrk + ")  union all (" + sql_ykck + "))  x order by cz_date asc"; 
 		
 		return this.getResultList(sql);
 		
@@ -502,7 +536,40 @@ public class KcMxReportDAO extends JdbcBaseDAO {
 		}
 		sql_kcpd += " group by a.product_id";
 		
-		String sql = "select x.product_id,sum(x.nums) as nums from ((" + sql_rk + ") union all (" + sql_db + ") union all (" + sql_kcpd + ")) x group by x.product_id";
+//		移库入库数量
+		String sql_ykrk = "select a.product_id,sum(a.nums) as nums from ykrk_product a join ykrk b on b.id=a.ykrk_id join product c on c.product_id=a.product_id where b.state='已提交'";
+		if(!store_id.equals("")){
+			sql_ykrk = sql_ykrk + " and b.rk_store_id='" + store_id + "'";
+		}
+		if(!start_date.equals("")){
+			sql_ykrk = sql_ykrk + " and b.rk_date>='" + start_date + "'";
+		}
+		if(!end_date.equals("")){
+			sql_ykrk = sql_ykrk + " and b.rk_date<='" + (end_date + " 23:59:59") + "'";
+		}
+		if(!product_kind.equals("")){
+			String[] arryItems = product_kind.split(",");
+			
+			if(arryItems != null && arryItems.length >0){
+				sql_ykrk += " and (";
+				for(int i=0;i<arryItems.length;i++){
+					if(i == 0){
+						sql_ykrk += " c.product_kind like '" + arryItems[i] + "%'";
+					}else{
+						sql_ykrk += " or c.product_kind like '" + arryItems[i] + "%'";
+					}
+				}
+				sql_ykrk += ")";
+			}
+			
+		}
+		if(!product_name.equals("")){
+			sql_ykrk = sql_ykrk + " and c.product_name like '%" + product_name + "%'";
+		}
+		sql_ykrk += " group by a.product_id";
+		
+		
+		String sql = "select x.product_id,sum(x.nums) as nums from ((" + sql_rk + ") union all (" + sql_db + ") union all (" + sql_kcpd + ") union all (" + sql_ykrk + ")) x group by x.product_id";
 		System.out.println(sql);
 		Map map = new HashMap();
 		List list = this.getResultList(sql);
@@ -624,7 +691,39 @@ public class KcMxReportDAO extends JdbcBaseDAO {
 		}
 		sql_kcpd += " group by a.product_id";
 		
-		String sql = "select x.product_id,sum(x.nums) as nums from ((" + sql_ck + ") union all (" + sql_db + ") union all (" + sql_kcpd + ")) x group by x.product_id";
+        //移库出库数量
+		String sql_ykck = "select a.product_id,sum(a.nums) as nums from ykck_product a join ykck b on b.id=a.ykck_id join product c on c.product_id=a.product_id where b.state='已提交'";
+		if(!store_id.equals("")){
+			sql_ykck = sql_ykck + " and b.ck_store_id='" + store_id + "'";
+		}
+		if(!start_date.equals("")){
+			sql_ykck = sql_ykck + " and b.ck_date>='" + start_date + "'";
+		}
+		if(!end_date.equals("")){
+			sql_ykck = sql_ykck + " and b.ck_date<='" + (end_date + " 23:59:59") + "'";
+		}
+		if(!product_kind.equals("")){
+			String[] arryItems = product_kind.split(",");
+			
+			if(arryItems != null && arryItems.length >0){
+				sql_kcpd += " and (";
+				for(int i=0;i<arryItems.length;i++){
+					if(i == 0){
+						sql_ykck += " c.product_kind like '" + arryItems[i] + "%'";
+					}else{
+						sql_ykck += " or c.product_kind like '" + arryItems[i] + "%'";
+					}
+				}
+				sql_ykck += ")";
+			}
+			
+		}
+		if(!product_name.equals("")){
+			sql_ykck = sql_ykck + " and c.product_name like '%" + product_name + "%'";
+		}
+		sql_ykck += " group by a.product_id";
+		
+		String sql = "select x.product_id,sum(x.nums) as nums from ((" + sql_ck + ") union all (" + sql_db + ") union all (" + sql_kcpd + ") union all (" + sql_ykck + ")) x group by x.product_id";
 		System.out.println(sql);
 		Map map = new HashMap();
 		List list = this.getResultList(sql);
