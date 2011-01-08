@@ -519,7 +519,7 @@ public class LsdService {
 							int kcnums = productKcDao.getKcNums(product_id, store_id);//库存数量
 							
 							if(cknums>kcnums){
-								msg += "商品：" + lsdProduct.getProduct_name() + "在" + StaticParamDo.getStoreNameById(store_id) +" 中当前库存为：" + kcnums + "  无法出库，零售单已保存，请先调拨后再出库！<br>";
+								msg += "商品：" + lsdProduct.getProduct_name() + "在" + StaticParamDo.getStoreNameById(store_id) +" 中当前库存为：" + kcnums + "  无法出库，零售单已保存，请先调拨后再出库！\\n";
 							}
 						}
 					}
