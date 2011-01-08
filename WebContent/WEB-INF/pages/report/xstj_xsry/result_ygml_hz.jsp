@@ -37,15 +37,27 @@ if(!user_id.equals("")){
 <link href="css/report.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="jquery/jquery-1.4.2.min.js"></script>
 <script type="text/javascript" src="js/switchCss.js"></script>
+<script type="text/javascript">
+function pageRefresh(){
+	document.refreshform.submit();
+}
+</script>
 <style media=print>  
 .Noprint{display:none;}<!--用本样式在打印时隐藏非打印项目-->
 </style>
 </head>
 <body align="center" >
+<form name="refreshform" action="getXsryYgmlhzResult.html" method="post">
+<input type="hidden" name="start_date" value="<%=start_date %>">
+<input type="hidden" name="end_date" value="<%=end_date %>">
+<input type="hidden" name="dept_id" value="<%=dept_id %>">
+<input type="hidden" name="user_id" value="<%=user_id %>">
+</form>
 <TABLE  align="center" cellSpacing=0 cellPadding=0 width="99%" border=0>
 	<TBODY>
 		<TR style="BACKGROUND-COLOR: #dcdcdc;height:45;">
 		    <TD align="center" width="100%"><font style="FONT-SIZE: 16px"><B>业务员预估毛利汇总</B></font><br><%=strCon %></TD>
+		    <TD align="center"><input type="button" name="btnRes" value="刷新" onclick="pageRefresh();"></TD>	
 		</TR>
 	</TBODY>
 </TABLE>
@@ -103,7 +115,7 @@ if(results != null && results.size()>0){
 	}
 %>
 		<TR>
-			<TD class=ReportItem style="font-weight:bold">合计</TD>
+			<TD class=ReportItemXH style="font-weight:bold">合计</TD>
 			<TD class=ReportItem>&nbsp;</TD>
 			<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(hj_xsje,2) %>&nbsp;</TD>
 			<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(hj_bhsje,2) %>&nbsp;</TD>

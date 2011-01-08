@@ -141,9 +141,9 @@ String flag = StringUtils.nullToStr(VS.findValue("flag"));
         var curId = allCount + 1;   //curId一直加下去，防止重复
         allCount = allCount + 1;
         
-        var otd9=document.createElement("td");
-		otd9.className = "a2";
-		otd9.innerHTML = '<td class="a2"><input type="checkbox" name="proc_id" id="proc_id" value="' + curId + '"></td>';
+        var otd=document.createElement("td");
+		otd.className = "a2";
+		otd.innerHTML = '<td class="a2"><input type="checkbox" name="proc_id" id="proc_id" value="' + curId + '"></td>';
         
         var otd0=document.createElement("td");
         otd0.className = "a2";
@@ -170,15 +170,21 @@ String flag = StringUtils.nullToStr(VS.findValue("flag"));
         otd9.className = "a2";
         otd9.innerHTML = '<input type="text" id="qz_serial_num_'+curId+'" name="lsdProducts['+curId+'].qz_serial_num" size="15" readonly><input type="hidden" id="qz_flag_'+curId+'" name="lsdProducts['+curId+'].qz_flag"><a style="cursor:hand" title="点击输入序列号" onclick="openSerialWin('+ curId +');"><b>...</b></a>&nbsp;';   
         
-	    otr.appendChild(otd9); 
+	    otr.appendChild(otd); 
         otr.appendChild(otd0); 
         otr.appendChild(otd1); 
         otr.appendChild(otd3); 
         otr.appendChild(otd5);
         otr.appendChild(otd8); 
         otr.appendChild(otd9);
-                 
-     }	 
+     }	
+     
+     
+	function delTr(i){
+			var tr = i.parentNode.parentNode;
+			tr.removeNode(true);
+			
+	}     
 
 
 	function openAccount(){
@@ -483,6 +489,41 @@ String flag = StringUtils.nullToStr(VS.findValue("flag"));
 		alert(msg);
 		window.close();
 	}	
+
+	function openWin(){
+		var destination = "selLsProcCkd.html";
+		var fea ='width=800,height=550,left=' + (screen.availWidth-800)/2 + ',top=' + (screen.availHeight-550)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		
+		window.open(destination,'详细信息',fea);	
+	}	
+
+	function delDesc(){
+		var k = 0;
+		var sel = "0"; 
+		for(var i=0;i<document.lsdForm.proc_id.length;i++){
+			var o = document.lsdForm.proc_id[i];
+			if(o.checked){
+				k = k + 1;
+				sel = document.lsdForm.proc_id[i].value;
+
+				document.getElementById("product_name_" + sel).value = "";
+				document.getElementById("product_id_" + sel).value = "";
+				document.getElementById("product_xh_" + sel).value = "";
+				document.getElementById("price_" + sel).value = "0.00";
+				document.getElementById("cbj_" + sel).value = "0.00";
+				document.getElementById("kh_cbj_" + sel).value = "0.00";
+				document.getElementById("gf_" + sel).value = "0.00";
+				document.getElementById("nums_" + sel).value = "0";
+				document.getElementById("xj_" + sel).value = "0.00";
+				document.getElementById("qz_serial_num_" + sel).value = "";
+				document.getElementById("qz_flag_" + sel).value = "";				
+			}
+		}
+		if(k == 0){
+			alert("请选择商品明细！");
+			return;
+		}
+	}	
 </script>
 </head>
 <body  onload="chgKpTyle('<%=StringUtils.nullToStr(lsd.getFplx()) %>');initFzrTip();submitSp();showMsg();">
@@ -545,8 +586,9 @@ String flag = StringUtils.nullToStr(VS.findValue("flag"));
 <table width="100%"  align="center" id="lsdtable"  class="chart_list" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
+		<td width="5%">选择</td>
 		<td width="30%">商品名称</td>
-		<td width="30%">规格</td>
+		<td width="25%">规格</td>
 		<td width="10%">销售价格</td>
 		<td width="5%">数量</td>
 		<td width="10%">小计</td>
@@ -563,6 +605,7 @@ if(lsdProducts != null && lsdProducts.size()>0){
 		}
 %>
 	<tr>
+		<td class="a2"><input type="checkbox" name="proc_id" id="proc_id" value="<%=i %>"></td>
 		<td class="a2">
 			<input type="text" id="product_name_<%=i %>" name="lsdProducts[<%=i %>].product_name" value="<%=StringUtils.nullToStr(lsdProduct.getProduct_name()) %>" style="width:100%" readonly>
 			<input type="hidden" id="product_id_<%=i %>" name="lsdProducts[<%=i %>].product_id" value="<%=StringUtils.nullToStr(lsdProduct.getProduct_id()) %>">
@@ -583,10 +626,41 @@ if(lsdProducts != null && lsdProducts.size()>0){
 	</tr>
 <%
 	}
+}else{
+	for(int i=0;i<3;i++){
+		%>
+			<tr>
+				<td class="a2"><input type="checkbox" name="proc_id" id="proc_id" value="<%=i %>"></td>
+				<td class="a2">
+					<input type="text" id="product_name_<%=i %>" name="lsdProducts[<%=i %>].product_name" style="width:100%" readonly>
+					<input type="hidden" id="product_id_<%=i %>" name="lsdProducts[<%=i %>].product_id">
+				</td>
+				<td class="a2"><input type="text" id="product_xh_<%=i %>" name="lsdProducts[<%=i %>].product_xh" size="15" style="width:100%" readonly></td>	
+				<td class="a2">
+					<input type="text" id="price_<%=i %>" name="lsdProducts[<%=i %>].price" value="0.00" size="7" style="width:100%" onblur="hj();">
+					<input type="hidden" id="cbj_<%=i %>" name="lsdProducts[<%=i %>].cbj" value="0.00">
+					<input type="hidden" id="kh_cbj_<%=i %>" name="lsdProducts[<%=i %>].kh_cbj" value="0.00">
+					<input type="hidden" id="gf_<%=i %>" name="lsdProducts[<%=i %>].gf" value="0">
+				</td>
+				<td class="a2"><input type="text" id="nums_<%=i %>" name="lsdProducts[<%=i %>].nums" value="0" size="5" style="width:100%" onblur="hj();"></td>
+				<td class="a2"><input type="text" id="xj_<%=i %>" name="lsdProducts[<%=i %>].xj" value="0.00" size="7" style="width:100%" readonly></td>
+				<td class="a2">
+					<input type="text" id="qz_serial_num_<%=i %>" name="lsdProducts[<%=i %>].qz_serial_num" size="15" readonly>
+					<input type="hidden" id="qz_flag_<%=i %>" name="lsdProducts[<%=i %>].qz_flag"><a style="cursor:hand" title="左键点击输入输列号" onclick="openSerialWin('<%=i %>');"><b>...</b></a>&nbsp;
+				</td>				
+			</tr>
+		<%
+	}
 }
 %>	
 </table>
 <table width="100%"  align="center" class="chart_info" cellpadding="0" cellspacing="0">
+	<tr height="35">
+		<td class="a2" colspan="4" width="100%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="button" name="button1" value="添加商品" class="css_button3" onclick="openWin();">
+			<input type="button" name="button8" value="清除商品" class="css_button3" onclick="delDesc();">
+		</td>
+	</tr>
 	<tr height="35">	
 		<td class="a1">合计金额</td>
 		<td class="a2" colspan="3">

@@ -498,23 +498,24 @@ String flag = StringUtils.nullToStr(VS.findValue("flag"));
 			if(o.checked){
 				k = k + 1;
 				sel = document.lsdForm.proc_id[i].value;
+
+				document.getElementById("product_name_" + sel).value = "";
+				document.getElementById("product_id_" + sel).value = "";
+				document.getElementById("product_xh_" + sel).value = "";
+				document.getElementById("price_" + sel).value = "0.00";
+				document.getElementById("cbj_" + sel).value = "0.00";
+				document.getElementById("kh_cbj_" + sel).value = "0.00";
+				document.getElementById("gf_" + sel).value = "0.00";
+				document.getElementById("nums_" + sel).value = "0";
+				document.getElementById("xj_" + sel).value = "0.00";
+				document.getElementById("qz_serial_num_" + sel).value = "";
+				document.getElementById("qz_flag_" + sel).value = "";
 			}
 		}
-		if(k != 1){
-			alert("请选择商品明细，且只能选择一条信息！");
+		if(k == 0){
+			alert("请选择商品明细！");
 			return;
 		}
-		
-		document.getElementById("product_name_" + sel).value = "";
-		document.getElementById("product_id_" + sel).value = "";
-		document.getElementById("product_xh_" + sel).value = "";
-		document.getElementById("price_" + sel).value = "0.00";
-		document.getElementById("cbj_" + sel).value = "0.00";
-		document.getElementById("kh_cbj_" + sel).value = "0.00";
-		document.getElementById("gf_" + sel).value = "0.00";
-		document.getElementById("nums_" + sel).value = "0";
-		document.getElementById("xj_" + sel).value = "0.00";
-		document.getElementById("remark_" + sel).value = "";
 	}
 
 	//判断审批标志
