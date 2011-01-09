@@ -40,12 +40,7 @@ public class SysInitSetAction extends BaseAction {
 	 * @return
 	 */
 	public String getXgqyFlag(){
-		sysInitSet = sysInitSetService.getSysInitSet();
-		
-		if("".equals(StringUtils.nullToStr(sysInitSet.getQyrq()))){
-			sysInitSet.setQyrq(DateComFunc.getToday());			
-		}
-		
+		sysInitSet = sysInitSetService.getSysInitSet();		
 		flag = sysInitSetService.getQyFlag();
 		return SUCCESS;
 	}
