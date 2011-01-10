@@ -706,7 +706,7 @@ public class KcMxReportDAO extends JdbcBaseDAO {
 			String[] arryItems = product_kind.split(",");
 			
 			if(arryItems != null && arryItems.length >0){
-				sql_kcpd += " and (";
+				sql_ykck += " and (";
 				for(int i=0;i<arryItems.length;i++){
 					if(i == 0){
 						sql_ykck += " c.product_kind like '" + arryItems[i] + "%'";
