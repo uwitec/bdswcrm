@@ -230,7 +230,7 @@ List funcList = menuService.getUserYwgnFunc(user_id);
 					<TD class=NormalWhite vlign=middle width=10 bgColor=#bcc2d4>|</TD>
 					<TD noWrap align=middle width=85 bgColor=#bcc2d4><IMG  height=15  src="index_images/stock.gif" width=15 align=absMiddle> <A class=TitleMenu  href="#" onclick="sendMail();">发送邮件</A></TD>			
 					<TD class=NormalWhite vlign=middle width=10 bgColor=#bcc2d4>|</TD>					
-					<TD class=NormalWhite noWrap align=middle width=85 bgColor=#bcc2d4><IMG height=15 src="index_images/WORDPAD.gif" width=15 align=absMiddle> <A class=TitleMenu href="http://221.194.37.139:8080/jforum" target="_bland">系统帮助</A></TD>
+					<TD class=NormalWhite noWrap align=middle width=85 bgColor=#bcc2d4><IMG height=15 src="index_images/WORDPAD.gif" width=15 align=absMiddle> <A class=TitleMenu href="http://221.194.37.139:8080/jforum" target="_bland">服务论坛</A></TD>
 					<TD class=NormalWhite vlign=middle width=10 bgColor=#bcc2d4>|</TD>
 					<TD class=NormalWhite noWrap align=middle width=85 bgColor=#bcc2d4><IMG height=15 src="index_images/out_system.gif" width=15 align=absMiddle> <A class=TitleMenu href="#" onclick="logout();">安全退出</A></TD>
 				</TR>
