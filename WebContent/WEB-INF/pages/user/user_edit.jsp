@@ -29,19 +29,7 @@ List storeList = (List)VS.findValue("storeList");
 		if(!InputValid(document.getElementById("user_name"),1,"string",1,1,20,"登录名")){	 return; }
 		if(!InputValid(document.getElementById("real_name"),1,"string",1,1,20,"真实姓名")){	 return; }	
 		
-		if(document.getElementById("is_dls").value == "0"){
-			//用户类型：业务员
-			if(document.getElementById("fzr").value == ""){
-				alert("业务员不能为空，请选择！");
-				return;
-			}
-			//所在库房不能为空
-		  if(document.getElementById("szkf").value == ""){
-		    	alert("所在库房不能为空，请选择！");
-		    	return;
-		  }
-		
-		}else if(document.getElementById("is_dls").value == "1"){
+		if(document.getElementById("is_dls").value == "1"){
 			//用户类型：代理商
 			if(document.getElementById("client_id").value == ""){
 				alert("代理商不能为空，请选择！");
@@ -52,10 +40,20 @@ List storeList = (List)VS.findValue("storeList");
 			if(document.getElementById("product_kind").value == ""){
 				alert("供应商品类别不能为空，请选择！");
 				return;
-			}	
-					
+			}				
+		}else{
+			//用户类型：业务员
+			if(document.getElementById("fzr").value == ""){
+				alert("业务员不能为空，请选择！");
+				return;
+			}
+			//所在库房不能为空
+	    	if(document.getElementById("szkf").value == ""){
+		    	alert("所在库房不能为空，请选择！");
+		    	return;
+		    }
 		}			
-		
+				
 		document.userForm.submit();
 	}
 	
