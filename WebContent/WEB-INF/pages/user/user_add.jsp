@@ -60,13 +60,14 @@ session.removeAttribute("MSG");
 				alert("业务员不能为空，请选择！");
 				return;
 			}
+			//所在库房不能为空
+	    	if(document.getElementById("szkf").value == ""){
+		    	alert("所在库房不能为空，请选择！");
+		    	return;
+		    }
 		}
 
-		//所在库房不能为空
-		if(document.getElementById("szkf").value == ""){
-			alert("所在库房不能为空，请选择！");
-			return;
-		}
+		
 		document.userForm.submit();
 	}
 	

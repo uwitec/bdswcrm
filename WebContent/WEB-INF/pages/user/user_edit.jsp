@@ -35,6 +35,11 @@ List storeList = (List)VS.findValue("storeList");
 				alert("业务员不能为空，请选择！");
 				return;
 			}
+			//所在库房不能为空
+		  if(document.getElementById("szkf").value == ""){
+		    	alert("所在库房不能为空，请选择！");
+		    	return;
+		  }
 		
 		}else if(document.getElementById("is_dls").value == "1"){
 			//用户类型：代理商
@@ -47,13 +52,10 @@ List storeList = (List)VS.findValue("storeList");
 			if(document.getElementById("product_kind").value == ""){
 				alert("供应商品类别不能为空，请选择！");
 				return;
-			}			
+			}	
+					
 		}			
-		//所在库房不能为空
-		if(document.getElementById("szkf").value == ""){
-			alert("所在库房不能为空，请选择！");
-			return;
-		}
+		
 		document.userForm.submit();
 	}
 	
