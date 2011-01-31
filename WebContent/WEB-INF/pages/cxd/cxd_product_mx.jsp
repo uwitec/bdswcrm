@@ -61,13 +61,14 @@
 		
 		k = startCount;  //从此位置开始添加
 		//alert("从此位置开始添加" + k);
-		
-		for(var i=0;i<document.myform.chk_id.length;i++){
+
+		var objs = document.getElementsByName("chk_id");
+		for(var i=0;i<objs.length;i++){
 					
-			var o = document.myform.chk_id[i];
+			var o = objs[i];
 			if(o.checked){
 			
-				var vl = document.myform.chk_id[i].value;
+				var vl = objs[i].value;
 				var arryStr = vl.split("|");
 				
 				var flag = false;
