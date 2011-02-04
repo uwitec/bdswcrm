@@ -20,7 +20,7 @@ input
 {
     font-size: 12px; 
 	text-indent:0px;
-	border:1 solid #B8B8B8;
+	border:solid 1px #B8B8B8;
 	margin-left:6px;
 	margin-right:6px;
 }
@@ -37,7 +37,7 @@ textarea
 {
     font-size: 12px; 
 	text-indent:0px;
-	border:1 solid #B8B8B8;
+	border:solid 1px #B8B8B8;
 	margin-top:8px;
 	margin-left:6px;
 	margin-bottom:8px;
@@ -108,9 +108,9 @@ table.chart_info
 	 background-color: #FFFFFF; 
 	 border-collapse:collapse; 
 	 font-size: 12px;
-	 border-left:1 solid #D6D7D6;
-	 border-right:1 solid #D6D7D6;
-	 border-bottom:1 solid #D6D7D6;
+	 border-left:solid 1px #D6D7D6;
+	 border-right:solid 1px #D6D7D6;
+	 border-bottom:solid 1px #D6D7D6;
 }
 table.chart_info thead td
 {
@@ -119,10 +119,8 @@ table.chart_info thead td
 	text-align: center;
 	vertical-align:middle;
 	font-size: 12px;
-	border-right-width: 1px;
-	border-right-style: solid;
-	border-right-color: #D8D8D8;
-	border-bottom:1 solid #D8D8D8;
+	border-right:solid 1px #D8D8D8;
+	border-bottom:solid 1px #D8D8D8;
 }
 table.chart_info td.a1
 {
@@ -130,8 +128,8 @@ table.chart_info td.a1
 	height:28px;	
 	text-align: center ;
 	font-size: 12px;
-	border-bottom:1 solid #D8D8D8;
-	border-right:1 solid #D8D8D8;
+	border-bottom:solid 1px #D8D8D8;
+	border-right:solid 1px #D8D8D8;
 }
 table.chart_info td.a2
 {
@@ -141,8 +139,8 @@ table.chart_info td.a2
 	font-size: 12px;
 	margin-left: 10px;
 	text-indent: 3pt;
-	border-bottom:1 solid #D8D8D8;
-	border-right:1 solid #D8D8D8;
+	border-bottom:solid 1px #D8D8D8;
+	border-right:solid 1px #D8D8D8;
 }
 table.chart_info td.a3
 {
@@ -150,8 +148,8 @@ table.chart_info td.a3
 	height:28px;	
 	text-align: center ;
 	font-size: 12px;
-	border-bottom:1 solid #D8D8D8;
-	border-right:1 solid #D8D8D8;
+	border-bottom:solid 1px #D8D8D8;
+	border-right:solid 1px #D8D8D8;
 }
 /***********************************/
 /* 样式类型：详细信息页面样式              */
@@ -162,9 +160,9 @@ table.chart_index
 	 background-color: #FFFFFF; 
 	 border-collapse:collapse; 
 	 font-size: 12px;
-	 border-left:1 solid #D6D7D6;
-	 border-right:1 solid #D6D7D6;
-	 border-bottom:1 solid #D6D7D6;
+	 border-left:solid 1px #D6D7D6;
+	 border-right:solid 1px #D6D7D6;
+	 border-bottom:solid 1px #D6D7D6;
 }
 table.chart_index td.a1
 {
@@ -202,9 +200,9 @@ table.chart_list
 	 background-color: #FFFFFF; 
 	 border-collapse:collapse; 
 	 font-size: 12px;
-	 border-left:1 solid #D6D7D6;
-	 border-right:1 solid #D6D7D6;
-	 border-bottom:1 solid #D6D7D6;
+	 border-left:solid 1px #D6D7D6;
+	 border-right:solid 1px #D6D7D6;
+	 border-bottom:solid 1px #D6D7D6;
 }
 table.chart_list thead td
 {
@@ -213,17 +211,15 @@ table.chart_list thead td
 	text-align: center;
 	vertical-align:middle;
 	font-size: 12px;
-	border-right-width: 1px;
-	border-right-style: solid;
-	border-right-color: #D8D8D8;
-	border-bottom:1 solid #D8D8D8;
+	border-right:solid 1px #D8D8D8;
+	border-bottom:solid 1px #D8D8D8;
 	cursor: hand;
 }
 table.chart_list td.csstitle
 {
 	background-image:url(../images/head_top2bg.gif);
 	height:30px;	
-	border-top:1 solid #D6D7D6;
+	border-top:solid 1px #D6D7D6;
 	font-size: 12px;
 }
 table.chart_list td.search
@@ -238,8 +234,8 @@ table.chart_list td.a1
 	height:25px;	
 	text-align: center ;
 	font-size: 12px;
-	border-bottom:1 solid #D8D8D8;
-	border-right:1 solid #D8D8D8;
+	border-bottom:solid 1px #D8D8D8;
+	border-right:solid 1px #D8D8D8;
 }
 table.chart_list td.a3
 {
@@ -247,8 +243,8 @@ table.chart_list td.a3
 	height:25px;	
 	text-align: right ;
 	font-size: 12px;
-	border-bottom:1 solid #D8D8D8;
-	border-right:1 solid #D8D8D8;
+	border-bottom:solid 1px #D8D8D8;
+	border-right:solid 1px #D8D8D8;
 }
 table.chart_list td.a4
 {
@@ -257,8 +253,8 @@ table.chart_list td.a4
 	text-align: left ;
 	font-size: 12px;
 	text-indent: 2pt;
-	border-bottom:1 solid #D8D8D8;
-	border-right:1 solid #D8D8D8;
+	border-bottom:solid 1px #D8D8D8;
+	border-right:solid 1px #D8D8D8;
 }
 table.chart_list td.a2
 {
@@ -266,8 +262,8 @@ table.chart_list td.a2
 	height:25px;	
 	text-align: center ;
 	font-size: 12px;
-	border-bottom:1 solid #D8D8D8;
-	border-right:1 solid #D8D8D8;
+	border-bottom:solid 1px #D8D8D8;
+	border-right:solid 1px #D8D8D8;
 }
 table.chart_list tr.a1
 {
@@ -291,8 +287,8 @@ table.chart_list td.page
 	height:25px;	
 	text-align: right;
 	font-size: 12px;
-	border-bottom:1 solid #D8D8D8;
-	border-right:1 solid #D8D8D8;
+	border-bottom:solid 1px #D8D8D8;
+	border-right:solid 1px #D8D8D8;
 }
 table.chart_list td.tree
 {
@@ -300,8 +296,16 @@ table.chart_list td.tree
 	height:25px;	
 	text-align: left ;
 	font-size: 12px;
-	border-bottom:1 solid #D8D8D8;
-	border-right:1 solid #D8D8D8;
+	border-bottom:solid 1px #D8D8D8;
+	border-right:solid 1px #D8D8D8;
+}
+table.chart_list input
+{
+    font-size: 12px; 
+	text-indent:0px;
+	border:solid 1px #B8B8B8;
+	margin-left:1px;
+	margin-right:1px;
 }
 .bjd_input {
     font-size: 10pt;
@@ -311,4 +315,4 @@ table.chart_list td.tree
 table{
 	word-break:break-all;
 }
-.selectTip{background-color:#009;color:#fff;}
+.selectTip{background-color:#009000;color:#fff000;}
