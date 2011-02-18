@@ -339,7 +339,7 @@ List confirmKfdbList = (List)VS.findValue("confirmKfdbList");
 						%>			
 						<tr>
 							<td width="100%" height="23">&nbsp;<A class=xxlb title="点击打开确认页面" href="javascript:doConfirmKfdb('<%=StringUtils.nullToStr(kfdb.getId()) %>');">
-							<%=StringUtils.nullToStr(kfdb.getId()) %>&nbsp;&nbsp;<%=StaticParamDo.getStoreNameById(kfdb.getRk_store_id()) %>&nbsp;&nbsp;<%=StaticParamDo.getStoreNameById(kfdb.getCk_store_id()) %>&nbsp;&nbsp;<%=StaticParamDo.getRealNameById(kfdb.getJsr()) %></A></td>
+							<%=StringUtils.nullToStr(kfdb.getId()) %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=StaticParamDo.getStoreNameById(kfdb.getRk_store_id()) %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=StaticParamDo.getStoreNameById(kfdb.getCk_store_id()) %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=StaticParamDo.getRealNameById(kfdb.getJsr()) %></A></td>
 						</tr>
 						<%
 							}
