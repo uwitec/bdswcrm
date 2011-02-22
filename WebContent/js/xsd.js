@@ -260,6 +260,8 @@ function delDesc(){
 	document.getElementById("jgtz_" + sel).value = "0.00";
 	document.getElementById("nums_" + sel).value = "0";
 	document.getElementById("xj_" + sel).value = "0.00";
+	
+	hj();
 }
 
 function changeSklx(vl){
