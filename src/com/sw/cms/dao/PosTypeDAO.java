@@ -114,6 +114,9 @@ public class PosTypeDAO extends JdbcBaseDAO {
 				if(fy > posType.getFdfy()){
 					fy = posType.getFdfy();
 				}
+				if(fy < -posType.getFdfy()){
+					fy = 0-posType.getFdfy();
+				}
 			}
 		}		
 		return fy;
