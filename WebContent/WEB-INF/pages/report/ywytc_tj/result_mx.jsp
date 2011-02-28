@@ -76,6 +76,7 @@ if(results != null && results.size()>0){
 	double hj_jeds = 0;
 	double hj_cxjl = 0;
 	double hj_total = 0;
+	String strYwtypeTemp="";
 	
 	for(int i=0;i<results.size();i++){
 		
@@ -87,13 +88,14 @@ if(results != null && results.size()>0){
 		String strId = "";
 		String strDate = "";
 		String strYwtype = "";
-		String strClientName = "";
+		String strClientName = "";		
 		
 		if(!id.equals(ywdj_id)){
 			strId = id;
 			strDate = StringUtils.nullToStr(map.get("cz_date"));
 			strYwtype = StringUtils.nullToStr(map.get("yw_type"));
 			strClientName = StaticParamDo.getClientNameById((String)map.get("client_name"));
+			strYwtypeTemp=StringUtils.nullToStr(map.get("yw_type"));
 		}
 		
 		ywdj_id = id;
@@ -110,7 +112,7 @@ if(results != null && results.size()>0){
 		//如果是退货单    超限奖励大于时取0，比例点杀大于0时取0
 		//其它单据零售单、销售订单，   超限奖励小于0时取0，比例点杀小于0时取0
 		
-		if(strYwtype.equals("退货单")){
+		if(strYwtypeTemp.equals("退货单")){
 			if(cxjl > 0) cxjl = 0;
 			if(blds > 0) blds = 0;
 		}else{
