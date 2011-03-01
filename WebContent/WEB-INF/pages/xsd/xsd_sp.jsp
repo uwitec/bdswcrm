@@ -164,8 +164,8 @@ if(msg != null && msg.size() > 0){
 	<tr>
 		<td class="a1" width="15%">客户付款类型</td>
 		<td class="a2"><%=StringUtils.nullToStr(xsd.getSklx()) %></td>				
-		<td class="a1" width="15%">销售单状态</td>
-		<td class="a2" width="35%"><%=StringUtils.nullToStr(xsd.getState()) %></td>	
+		<td class="a1" width="15%">账期</td>
+		<td class="a2" width="35%"><%=xsd.getZq() %></td>	
 	</tr>
 	<tr height="35">
 		<td class="a1" width="15%">出货仓库</td>
@@ -192,6 +192,8 @@ if(msg != null && msg.size() > 0){
 		<td class="a2"><%=StringUtils.nullToStr(xsd.getCz_date()) %></td>
 	</tr>
 	<tr>
+	    <td class="a1" width="15%">销售单状态</td>
+		<td class="a2" width="35%"><%=StringUtils.nullToStr(xsd.getState()) %></td>	
 		<td class="a1">审批类型</td>
 		<td class="a2" colspan="3"><%=sp_type %></td>
 	</tr>		
