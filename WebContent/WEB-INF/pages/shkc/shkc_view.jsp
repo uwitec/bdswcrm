@@ -41,28 +41,13 @@ Shkc shkc = (Shkc)VS.findValue("shkc");
 	<tr>
 		<td class="a1" width="25%">状态</td>
 		<td class="a2" width="75%"><%String str=StringUtils.nullToStr(shkc.getState()); if(str.equals("1"))out.println("坏件库");if(str.equals("2"))out.println("在外库");if(str.equals(""))out.println("好件库");%></td>		
-	</tr>
+	</tr>	
 	
 	<tr>
-		<td class="a1" width="25%">客户名称</td>
-		<td class="a2" width="75%"><%=StringUtils.nullToStr(StaticParamDo.getClientNameById(shkc.getClient_name()))%></td>		
-	</tr>
-	<tr>
-		<td class="a1" width="25%">联系人</td>
-		<td class="a2" width="75%"><%=StringUtils.nullToStr(shkc.getLinkman())%></td>		
-	</tr>
-	<tr>
-		<td class="a1" width="25%">联系电话</td>
-		<td class="a2" width="75%"><%=StringUtils.nullToStr(shkc.getLxdh())%></td>		
+		<td class="a1" width="25%">数量</td>
+		<td class="a2" width="75%"><%=StringUtils.nullToStr(shkc.getNums())%></td>		
 	</tr>	
-	<tr>
-		<td class="a1" width="25%">手机</td>
-		<td class="a2" width="75%"><%=StringUtils.nullToStr(shkc.getMobile())%></td>		
-	</tr>
-	<tr>
-		<td class="a1" width="25%">备注</td>
-		<td class="a2" width="75%"><%=StringUtils.nullToStr(shkc.getRemark())%></td>		
-	</tr>					
+			
 	
 	<tr height="35">
 		<td class="a1" colspan="2">

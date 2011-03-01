@@ -121,8 +121,7 @@ String state = (String)VS.findValue("state");
 		<td>商品名称</td>	
 		<td>商品规格</td>
 		<td>状态</td>
-		<td>客户名称</td>
-		<td>联系人</td>		
+		<td>数量</td>		
 		<td>操作</td>
 	</tr>
 	</thead>
@@ -138,8 +137,7 @@ String state = (String)VS.findValue("state");
 		<td><%=StringUtils.nullToStr(shkc.get("product_name"))%></td>
 		<td><%=StringUtils.nullToStr(shkc.get("product_xh"))%></td>
 		<td><% String str=StringUtils.nullToStr(shkc.get("state")); if(str.equals("1"))out.println("坏件库");if(str.equals("2"))out.println("在外库");if(str.equals("3"))out.println("好件库");%></td>
-		<td><%=StaticParamDo.getClientNameById(StringUtils.nullToStr(shkc.get("client_name"))) %></td>
-		<td><%=StringUtils.nullToStr(shkc.get("linkman"))%></td>
+		<td><%=StringUtils.nullToStr(shkc.get("nums"))%></td>		
 		<td>	 
 			<a href="#" onclick="openWin('<%=StringUtils.nullToStr(shkc.get("id")) %>');"><img src="images/view.gif" align="absmiddle" title="查看" border="0" style="cursor:hand"></a>		 
 		</td>
