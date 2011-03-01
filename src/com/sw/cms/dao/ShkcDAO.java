@@ -40,7 +40,7 @@ public class ShkcDAO extends JdbcBaseDAO
 	 */
 	public Page getShkcProduct(String con,int curPage,int rowsPerPage)
 	{
-		String sql="select a.*,b.client_name,b.linkman,b.lxdh,b.mobile from shkc a left join jjd_product c on a.qz_serial_num=c.qz_serial_num left join jjd b on b.id=c.jjd_id  where 1=1 and (a.store_id<>'' and a.state<>'4') ";
+		String sql="select a.* from shkc a  where 1=1 and (a.store_id<>'' and a.state<>'4') ";
 		if(!con.equals(""))
 		{
 			sql=sql+con;
@@ -54,7 +54,7 @@ public class ShkcDAO extends JdbcBaseDAO
 	 */
 	public Object getShkcById(String id)
 	{
-		String sql="select a.*,b.client_name,b.linkman,b.lxdh,b.mobile from shkc a left join jjd_product c on a.qz_serial_num=c.qz_serial_num left join jjd b on b.id=c.jjd_id  where a.id="+id+"";
+		String sql="select a.* from shkc a  where a.id="+id+"";
 	    return  this.getJdbcTemplate().queryForObject(sql, new ShkcRowMapper());
 		 
 	}
