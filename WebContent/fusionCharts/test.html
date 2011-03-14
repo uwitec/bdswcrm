@@ -1,0 +1,36 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>test</title>
+<script type="text/javascript" src="FusionCharts.js"></script>
+</head>
+<body>
+<div id="chartdiv_bing_1" align="center" style="padding-top:5px;"></div>
+<div id="chartdiv_zhu_1" align="center"  style="padding-top:5px;"></div>
+<script type="text/javascript">
+
+	//饼图
+
+	var myChart_bing_1 = new FusionCharts("Pie3D.swf?PBarLoadingText=Loading&XMLLoadingText=Loading&ParsingDataText=Loading", "myChartId_bing_", "630", "250", "0", "0");
+
+	myChart_bing_1.addParam('wmode','transparent');
+
+	myChart_bing_1.setDataXML("<chart baseFontSize='12' numberSuffix='%25' showAboutMenuItem='0' decimals='2' chartTopMargin='0' chartBottomMargin='0' caption='' showValues='0' formatNumberScale='0' bgAlpha='0' logoURL='http://www.sinaimg.cn/dy/deco/2009/0903/survey/wmark_pie3.png' logoPosition='TR' startingAngle='60'><set label='1' value='35.2' displayValue='约瑟夫-阿米德 (35.2%)' toolText='约瑟夫-阿米德 (35.2%)' isSliced='1' /><set label='2' value='25.1' displayValue='邓卓翔 (25.1%)' toolText='邓卓翔 (25.1%)'  /><set label='3' value='5.6' displayValue='郜林 (5.6%)' toolText='郜林 (5.6%)'  /><set label='4' value='4.5' displayValue='曾诚 (4.5%)' toolText='曾诚 (4.5%)'  /><set label='5' value='3.3' displayValue='荣昊 (3.3%)' toolText='荣昊 (3.3%)'  /><set label='6' value='2.9' displayValue='塞巴斯蒂安 (2.9%)' toolText='塞巴斯蒂安 (2.9%)'  /><set label='7' value='2.7' displayValue='曲波 (2.7%)' toolText='曲波 (2.7%)'  /><set label='8' value='2.7' displayValue='于海 (2.7%)' toolText='于海 (2.7%)'  /><set label='9' value='2.3' displayValue='赵鹏 (2.3%)' toolText='赵鹏 (2.3%)'  /><set label='10' value='2.3' displayValue='布尔汗 (2.3%)' toolText='布尔汗 (2.3%)'  /><set label='11' value='2.3' displayValue='张琳芃 (2.3%)' toolText='张琳芃 (2.3%)'  /><set label='12' value='2.1' displayValue='杨昊 (2.1%)' toolText='杨昊 (2.1%)'  /><set label='13' value='1.9' displayValue='于涛 (1.9%)' toolText='于涛 (1.9%)'  /><set label='14' value='1.9' displayValue='蒿俊闵 (1.9%)' toolText='蒿俊闵 (1.9%)'  /><set label='15' value='1.4' displayValue='卡索拉-穆罕默德 (1.4%)' toolText='卡索拉-穆罕默德 (1.4%)'  /><set label='16' value='1' displayValue='杜威 (1%)' toolText='杜威 (1%)'  /><set label='17' value='0.8' displayValue='阿布杜拉马杰德 (0.8%)' toolText='阿布杜拉马杰德 (0.8%)'  /><set label='18' value='0.6' displayValue='拉兹克-马吉迪 (0.6%)' toolText='拉兹克-马吉迪 (0.6%)'  /><set label='19' value='0.6' displayValue='穆罕默德-萨义德 (0.6%)' toolText='穆罕默德-萨义德 (0.6%)'  /><set label='20' value='0.4' displayValue='阿布拉辛-阿布杜拉 (0.4%)' toolText='阿布拉辛-阿布杜拉 (0.4%)'  /><set label='21' value='0.2' displayValue='穆罕默德-拉贾巴 (0.2%)' toolText='穆罕默德-拉贾巴 (0.2%)'  /><set label='22' value='0.2' displayValue='杨旭 (0.2%)' toolText='杨旭 (0.2%)'  /><set label='23' value='0.2' displayValue='周海滨 (0.2%)' toolText='周海滨 (0.2%)'  /></chart>");
+
+	myChart_bing_1.render("chartdiv_bing_1");
+
+	//柱图
+
+	var myChart_zhu_1 = new FusionCharts("Column3D.swf?PBarLoadingText=Loading&XMLLoadingText=Loading&ParsingDataText=Loading", "myChartId_zhu_1", "630", "250", "0", "0");
+
+	myChart_zhu_1.addParam('wmode','transparent');
+
+	myChart_zhu_1.setDataXML("<chart baseFontSize='12' baseFontColor='888888' outCnvBaseFontColor='999999' outCnvBaseFontSize='12' numberSuffix='%25' showAboutMenuItem='0' decimals='2' yAxisMaxValue='100' palette='2' enableRotation='1' canvasBgColor='ffffff' canvasBgAlpha='40' canvasBgDepth='3' canvasBaseColor='ffffff' divLineColor='d8d8d8' numDivLines='4' bgAlpha='0' logoURL='http://www.sinaimg.cn/dy/deco/2009/0903/survey/wmark_column3_1.png' logoPosition='TR' divLineColor='d8d8d8' canvasPadding='8' chartLeftMargin='0' chartRightMargin='5' chartTopMargin='5' chartBottomMargin='0' maxColWidth='70' showValues='1'><styles><definition><style name='myToolTip' type='font' size='12' color='666666' /></definition><application><apply toObject='ToolTip' styles='myToolTip' /></application></styles><set label='约瑟夫-阿米德' value='35.2' toolText='约瑟夫-阿米德 (35.2%)' /><set label='邓卓翔' value='25.1' toolText='邓卓翔 (25.1%)' /><set label='郜林' value='5.6' toolText='郜林 (5.6%)' /><set label='曾诚' value='4.5' toolText='曾诚 (4.5%)' /><set label='荣昊' value='3.3' toolText='荣昊 (3.3%)' /><set label='塞巴斯蒂安' value='2.9' toolText='塞巴斯蒂安 (2.9%)' /><set label='曲波' value='2.7' toolText='曲波 (2.7%)' /><set label='于海' value='2.7' toolText='于海 (2.7%)' /><set label='赵鹏' value='2.3' toolText='赵鹏 (2.3%)' /><set label='布尔汗' value='2.3' toolText='布尔汗 (2.3%)' /><set label='张琳芃' value='2.3' toolText='张琳芃 (2.3%)' /><set label='杨昊' value='2.1' toolText='杨昊 (2.1%)' /><set label='于涛' value='1.9' toolText='于涛 (1.9%)' /><set label='蒿俊闵' value='1.9' toolText='蒿俊闵 (1.9%)' /><set label='卡索拉-穆罕默德' value='1.4' toolText='卡索拉-穆罕默德 (1.4%)' /><set label='杜威' value='1' toolText='杜威 (1%)' /><set label='阿布杜拉马杰德' value='0.8' toolText='阿布杜拉马杰德 (0.8%)' /><set label='拉兹克-马吉迪' value='0.6' toolText='拉兹克-马吉迪 (0.6%)' /><set label='穆罕默德-萨义德' value='0.6' toolText='穆罕默德-萨义德 (0.6%)' /><set label='阿布拉辛-阿布杜拉' value='0.4' toolText='阿布拉辛-阿布杜拉 (0.4%)' /><set label='穆罕默德-拉贾巴' value='0.2' toolText='穆罕默德-拉贾巴 (0.2%)' /><set label='杨旭' value='0.2' toolText='杨旭 (0.2%)' /><set label='周海滨' value='0.2' toolText='周海滨 (0.2%)' /></chart>");
+
+	myChart_zhu_1.render("chartdiv_zhu_1");
+
+</script>
+
+</body>
+
+</html>

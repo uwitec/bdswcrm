@@ -113,56 +113,69 @@ String orderType = (String)VS.findValue("orderType");
 			<img src="images/import.gif" align="absmiddle" border="0">&nbsp;<a href="#" onclick="refreshPage();" class="xxlb"> 刷 新 </a>	</td>			
 	</tr>
 	<tr>
-		<td class="search" align="left" colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;
-			日期：<input type="text" name="ck_date1" value="<%=ck_date1 %>" size="15"  class="Wdate" onFocus="WdatePicker()">	
+		<td class="search" align="left" colspan="2">
+			<table width="100%" border="0" style="font-size: 12px">
+				<tr>
+					<td align="center">日　　期：</td>
+					<td><input type="text" name="ck_date1" value="<%=ck_date1 %>" size="15"  class="Wdate" onFocus="WdatePicker()">	
 			&nbsp;&nbsp;&nbsp;至&nbsp;&nbsp;&nbsp;
-			<input type="text" name="ck_date2" value="<%=ck_date2 %>" size="15"  class="Wdate" onFocus="WdatePicker()">			
-			&nbsp;&nbsp;&nbsp;&nbsp;
-			状态：
-			<select name="state">
-				<option value=""></option>
-				<option value="已保存" <%if(state.equals("已保存")) out.print("selected"); %>>已保存</option>
-				<option value="已出库" <%if(state.equals("已出库")) out.print("selected"); %>>已出库</option>
-				<option value="已入库" <%if(state.equals("已入库")) out.print("selected"); %>>已入库</option>
-				<option value="已退回" <%if(state.equals("已退回")) out.print("selected"); %>>已退回</option>
-			</select>
-			&nbsp;&nbsp;&nbsp;&nbsp;
-			调出仓库：<select name="dckf">
-				<option value=""></option>
-			<%
-			if(storeList != null && storeList.size()>0){
-				Iterator it = storeList.iterator();
-				while(it.hasNext()){
-					StoreHouse storeHose = (StoreHouse)it.next();
-					String id = StringUtils.nullToStr(storeHose.getId());
-					String name = StringUtils.nullToStr(storeHose.getName());
-			%>
-				<option value="<%=id %>" <%if(id.equals(dckf)) out.print("selected"); %>><%=name %></option>
-			<%
-				}
-			}
-			%>
-			</select>
-			
-			&nbsp;&nbsp;&nbsp;&nbsp;
-			调入仓库：<select name="drkf">
-				<option value=""></option>
-			<%
-			if(storeList != null && storeList.size()>0){
-				Iterator it = storeList.iterator();
-				while(it.hasNext()){
-					StoreHouse storeHose = (StoreHouse)it.next();
-					String id = StringUtils.nullToStr(storeHose.getId());
-					String name = StringUtils.nullToStr(storeHose.getName());
-			%>
-				<option value="<%=id %>" <%if(id.equals(drkf)) out.print("selected"); %>><%=name %></option>
-			<%
-				}
-			}
-			%>
-			</select>
-			<input type="submit" name="buttonCx" value=" 查询 " class="css_button2">&nbsp;&nbsp;&nbsp;&nbsp;	
-			<input type="button" name="buttonQk" value=" 清空 " class="css_button2" onclick="clearAll();">
+			<input type="text" name="ck_date2" value="<%=ck_date2 %>" size="15"  class="Wdate" onFocus="WdatePicker()">	</td>
+					<td align="center">状　　态：</td>
+					<td>
+						<select name="state">
+							<option value=""></option>
+							<option value="已保存" <%if(state.equals("已保存")) out.print("selected"); %>>已保存</option>
+							<option value="已出库" <%if(state.equals("已出库")) out.print("selected"); %>>已出库</option>
+							<option value="已入库" <%if(state.equals("已入库")) out.print("selected"); %>>已入库</option>
+							<option value="已退回" <%if(state.equals("已退回")) out.print("selected"); %>>已退回</option>
+						</select>							
+					</td>
+					<td rowspan="2">
+						<input type="submit" name="buttonCx" value=" 查询 " class="css_button">
+						<input type="button" name="buttonQk" value=" 清空 " class="css_button" onclick="clearAll();">				
+					</td>
+				</tr>			
+				<tr>
+					<td align="center">调出仓库：</td>
+					<td>
+						<select name="dckf">
+							<option value=""></option>
+						<%
+						if(storeList != null && storeList.size()>0){
+							Iterator it = storeList.iterator();
+							while(it.hasNext()){
+								StoreHouse storeHose = (StoreHouse)it.next();
+								String id = StringUtils.nullToStr(storeHose.getId());
+								String name = StringUtils.nullToStr(storeHose.getName());
+						%>
+							<option value="<%=id %>" <%if(id.equals(dckf)) out.print("selected"); %>><%=name %></option>
+						<%
+							}
+						}
+						%>
+						</select>
+					</td>
+					<td align="center">调入仓库：</td>
+					<td>
+						<select name="drkf">
+							<option value=""></option>
+						<%
+						if(storeList != null && storeList.size()>0){
+							Iterator it = storeList.iterator();
+							while(it.hasNext()){
+								StoreHouse storeHose = (StoreHouse)it.next();
+								String id = StringUtils.nullToStr(storeHose.getId());
+								String name = StringUtils.nullToStr(storeHose.getName());
+						%>
+							<option value="<%=id %>" <%if(id.equals(drkf)) out.print("selected"); %>><%=name %></option>
+						<%
+							}
+						}
+						%>
+						</select>					
+					</td>
+				</tr>
+			</table>		
 		</td>				
 	</tr>		
 </table>

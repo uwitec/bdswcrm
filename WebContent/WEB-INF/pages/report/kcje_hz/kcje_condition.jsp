@@ -14,11 +14,22 @@ List productKindList = (List)VS.findValue("productKindList");
 <title>库存金额汇总</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
-<script language='JavaScript' src="js/date.js"></script>
+<script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
 <script type="text/javascript">
 
 	function subForm(){
-		document.reportForm.submit();
+		var objs = document.getElementsByName("tj_type");
+		if(objs[0].checked){
+			document.reportForm.action = "getKcJeResult.html";
+			document.reportForm.submit();
+		}else{
+			if(document.getElementById("cdate").value == ""){
+				alert("库存日期不能为空,请选择!");
+				return;
+			}
+			document.reportForm.action = "getHisKcJeResult.html";
+			document.reportForm.submit();
+		}
 	}
 	
 	function openWin(){
@@ -26,7 +37,20 @@ List productKindList = (List)VS.findValue("productKindList");
 		var fea ='width=400,height=500,left=' + (screen.availWidth-400)/2 + ',top=' + (screen.availHeight-500)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
 		window.open(destination,'选择商品类别',fea);
-	}		
+	}	
+
+	function chkHis(vl){
+		if(vl == "0"){
+			document.getElementById("td_cdate_lable").style.display = "none";
+			document.getElementById("td_cdate_value").style.display = "none";
+			document.getElementById("tr_flag_lable").style.display = "";
+			document.getElementById("cdate").value = "";
+		}else{
+			document.getElementById("td_cdate_lable").style.display = "";
+			document.getElementById("td_cdate_value").style.display = "";
+			document.getElementById("tr_flag_lable").style.display = "none";
+		}
+	}	
 	
 </script>
 </head>
@@ -41,6 +65,17 @@ List productKindList = (List)VS.findValue("productKindList");
 </table>
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0" border="1" id="selTable">
 	<tr>
+		<td class="a1" width="15%">汇总类型</td>
+		<td class="a4" width="35%">
+			<input type="radio" name="tj_type" id="tj_type" value="0" checked onclick="chkHis(this.value);">当前库存
+			<input type="radio" name="tj_type" id="tj_type" value="1" onclick="chkHis(this.value);">历史库存
+		</td>	
+		<td class="a1" id="td_cdate_lable"  style="display:none">库存日期</td>
+		<td class="a4" id="td_cdate_value" style="display:none">
+			<input type="text" name="cdate" id="cdate" value=""  class="Wdate" onFocus="WdatePicker()">
+		</td>					
+	</tr>
+	<tr>
 		<td class="a1" width="15%">商品类别</td>
 		<td class="a4" width="35%">
 			<input type="text" name="kind_name" id="kind_name" value="" size="55" onclick="openWin();" readonly>
@@ -52,9 +87,25 @@ List productKindList = (List)VS.findValue("productKindList");
 			<input type="text" name="product_name" id="product_name" value="">
 		</td>					
 	</tr>
+	<tr id="tr_flag_lable">
+		<td class="a1">是否显示0库存商品</td>
+		<td class="a4">
+			<select name="flag">
+				<option value="否">否</option>
+				<option value="是">是</option>
+			</select>
+		</td>
+		<td class="a1">是否显示停售商品</td>
+		<td class="a4" colspan="3">
+			<select name="state">
+				<option value="否">否</option>
+				<option value="是">是</option>
+			</select>
+		</td>					
+	</tr>
 	<tr>
 		<td class="a1">仓库名称</td>
-		<td class="a4">
+		<td class="a4" colspan="3">
 			<select name="store_id" id="store_id">
 				<option value="">全部</option>
 				<%
@@ -68,23 +119,7 @@ List productKindList = (List)VS.findValue("productKindList");
 				}
 				%>
 			</select>
-		</td>	
-		<td class="a1">是否显示0库存商品</td>
-		<td class="a4">
-			<select name="flag">
-				<option value="否">否</option>
-				<option value="是">是</option>
-			</select>
-		</td>			
-	</tr>
-	<tr>
-		<td class="a1">是否显示停售商品</td>
-		<td class="a4" colspan="3">
-			<select name="state">
-				<option value="否">否</option>
-				<option value="是">是</option>
-			</select>
-		</td>	
+		</td>				
 	</tr>
 	<tr height="35">
 		<td class="a1" colspan="4" height="35">
@@ -93,6 +128,8 @@ List productKindList = (List)VS.findValue("productKindList");
 		</td>
 	</tr>
 </table>
+注:历史库存汇总统计值为当天的期初值。
 </form>
 </body>
 </html>
+

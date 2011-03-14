@@ -438,6 +438,7 @@ if(cgthdProducts != null && cgthdProducts.size()>0){
 	<tr height="35">
 		<td class="a2" colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="button" name="button1" value="添加一行" class="css_button2" onclick="addTr();">
+			<input type="button" name="button1" value="关联进货单" class="css_button3" onclick="selJhd();">
 		</td>
 	</tr>
 	<tr>
