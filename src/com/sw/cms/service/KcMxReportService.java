@@ -149,6 +149,19 @@ public class KcMxReportService {
 		return  kcMxReportDao.getKcNumsResults(product_kind, product_name, store_id,state, flag,px);
 	}
 	
+	/**
+	 * 库存金额汇总(历史)
+	 * @param product_kind   商品类别
+	 * @param product_name   商口名称
+	 * @param store_id       库房编号
+	 * @param state          是否显示停售商品
+	 * @param flag           是否显示0库存商品
+	 * @return
+	 */
+	public List getHisKcResults(String product_kind,String product_name,String store_id,String state,String flag,String cdate){
+		return kcMxReportDao.getHisKcResults(product_kind, product_name, store_id, state, flag, cdate);
+	}
+	
 	
 	/**
 	 * 库存数量汇总(供应商)

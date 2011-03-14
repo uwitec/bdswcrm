@@ -30,7 +30,7 @@ public class ServletContextInit extends HttpServlet {
 			//dao.genAccountQc("2009-12-16","2009-12-15"); 
 			
 			//批量生成客户期初值
-			//dao.updateBatchGenClientWlQc("2009-09-01", "2010-01-05");
+			//dao.updateBatchGenClientWlQc("2011-03-03", "2011-03-03");
 			
 			//Thread.sleep(100*1000);
 			

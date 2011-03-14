@@ -34,6 +34,7 @@ public class KcMxReportAction extends BaseAction {
 	private String flag = "";
 	private String state = "";
 	private String px="";
+	private String cdate = "";
 	
 	public String getPx() {
 		return px;
@@ -76,6 +77,16 @@ public class KcMxReportAction extends BaseAction {
 	 */
 	public String getKcNumsResult(){
 		productList = kcMxReportService.getKcNumsResults(product_kind, product_name, store_id,state, flag,px);
+		return "success";
+	}
+	
+	
+	/**
+	 * 历史库存汇总情况表
+	 * @return
+	 */
+	public String getHisKcResult(){
+		productList = kcMxReportService.getHisKcjeResults(product_kind, product_name, "", store_id, cdate);
 		return "success";
 	}
 	
@@ -229,6 +240,14 @@ public class KcMxReportAction extends BaseAction {
 
 	public Map getFckcStatResult() {
 		return fckcStatResult;
+	}
+
+	public String getCdate() {
+		return cdate;
+	}
+
+	public void setCdate(String cdate) {
+		this.cdate = cdate;
 	}
 	
 }

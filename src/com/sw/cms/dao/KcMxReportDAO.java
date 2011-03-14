@@ -870,6 +870,64 @@ public class KcMxReportDAO extends JdbcBaseDAO {
 		}
 		return this.getResultList(sql);
 	}
+	
+	
+	
+	/**
+	 * 库存金额汇总(历史)
+	 * @param product_kind   商品类别
+	 * @param product_name   商口名称
+	 * @param store_id       库房编号
+	 * @param state          是否显示停售商品
+	 * @param flag           是否显示0库存商品
+	 * @return
+	 */
+	public List getHisKcResults(String product_kind,String product_name,String store_id,String state,String flag,String cdate){
+		String sql = "select a.product_id,a.product_name,sum(b.nums) as nums,b.price from product a join product_kc_qc b on b.product_id=a.product_id where b.cdate='" + cdate + "'";
+		
+		if(!store_id.equals("")){
+			sql += " and b.store_id='" + store_id + "'";
+		}
+		
+		sql += " and a.prop='库存商品'";
+		
+		//处理商品类别
+		if(!product_kind.equals("")){
+			String[] arryItems = product_kind.split(",");
+			
+			if(arryItems != null && arryItems.length >0){
+				sql += " and (";
+				for(int i=0;i<arryItems.length;i++){
+					if(i == 0){
+						sql += " a.product_kind like '" + arryItems[i] + "%'";
+					}else{
+						sql += " or a.product_kind like '" + arryItems[i] + "%'";
+					}
+				}
+				sql += ")";
+			}
+			
+		}
+		
+		
+		if(!product_name.equals("")){
+			sql += " and a.product_name like '%" + product_name + "%'";
+		}
+		if(state.equals("否")){
+			sql += " and a.state='正常'";
+		}
+		
+		sql += " group by a.product_id,a.product_name,b.price";
+		
+		if(flag.equals("否")){
+			sql += " having nums>0";
+		}
+		
+		
+		
+		return this.getResultList(sql);
+	}
+	
 
 	
 	/**

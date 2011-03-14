@@ -263,7 +263,7 @@ public class KfdbAction extends BaseAction {
 				if(kfdb.getState().equals("已入库")){
 					msg = kfdbService.checkKc(kfdb, kfdbProducts);
 					if(!msg.equals("")){
-						kfdb.setState("已出存");
+						kfdb.setState("已出库");
 						kfdbService.updateKfdb(kfdb, kfdbProducts);
 						storeList = storeService.getAllStoreList();
 						return "input";
