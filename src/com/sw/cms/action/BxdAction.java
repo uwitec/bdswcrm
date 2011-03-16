@@ -128,11 +128,11 @@ public class BxdAction extends BaseAction
 				
 			String con = "";
 			if(!product_name.equals("")){
-				con += " and (product_name like '%" + product_name + "%' or product_xh like '%" + product_name + "%')";
+				con += " and (a.product_name like '%" + product_name + "%' or a.product_xh like '%" + product_name + "%')";
 			}	
 
 			if(!product_kind.equals("")){
-				con += " and product_kind like '" + product_kind + "%'";
+				con += " and a.product_kind like '" + product_kind + "%'";
 			}
 			
 			shkcPage = shkcService.getShkuIsBadProduct(con, curPage, rowsPerPage);	

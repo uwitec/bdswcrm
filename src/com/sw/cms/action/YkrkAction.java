@@ -94,7 +94,7 @@ public class YkrkAction extends BaseAction
 				String con = "";
 			 
 				if(!product_name.equals("")){
-					con += " and (product_name like '%" + product_name + "%' or product_xh like '%" + product_name + "%')";
+					con += " and (a.product_name like '%" + product_name + "%' or a.product_xh like '%" + product_name + "%')";
 				}
 
 				shkcPage = shkcService.getShkcIsHaoProduct(con, curPage, rowsPerPage);
