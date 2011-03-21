@@ -36,6 +36,12 @@ String position = (String)VS.findValue("position");
 		}
 	}
 	
+	function restore(id){
+		if(confirm("确定要还原该条记录吗！")){
+			location.href = "restoreEmployee.html?employee_id=" + id;
+		}
+	}
+	
 	function add(){
 		if(document.myform.dept_id.value == ""){
 			alert("请先选择部门，再添加员工！");
@@ -128,7 +134,11 @@ String position = (String)VS.findValue("position");
 		<td class="a1">
 			<a href="#" onclick="edit('<%=StringUtils.nullToStr(map.get("user_id")) %>');"><img src="images/modify.gif" align="absmiddle" title="修改" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
 			<a href="#" onclick="view('<%=StringUtils.nullToStr(map.get("user_id")) %>');"><img src="images/view.gif" align="absmiddle" title="查看" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
-			<a href="#" onclick="del('<%=StringUtils.nullToStr(map.get("user_id")) %>');"><img src="images/del.gif" align="absmiddle" title="删除" border="0" style="cursor:hand"></a>
+			<%if(StringUtils.nullToStr(map.get("is_del")).equals("0")){ %>
+			  <a href="#" onclick="del('<%=StringUtils.nullToStr(map.get("user_id")) %>');"><img src="images/del.gif" align="absmiddle" title="删除" border="0" style="cursor:hand"></a>
+		    <%}else{ %>
+		      <a href="#" onclick="restore('<%=StringUtils.nullToStr(map.get("user_id")) %>');"><img src="images/import.gif" align="absmiddle" title="还原" border="0" style="cursor:hand"></a>
+		    <%} %>
 		</td>
 	</tr>
 	
