@@ -284,6 +284,9 @@ public class UserAction extends BaseAction {
 		String dept = ParameterUtility.getStringParameter(getRequest(), "dept",""); 
 		String position = ParameterUtility.getStringParameter(getRequest(), "position",""); 
 		
+		LoginInfo info = (LoginInfo) getSession().getAttribute("LOGINUSER");
+		String user_id = info.getUser_id();
+		
 		int curPage = ParameterUtility.getIntParameter(getRequest(), "curPage",1);
 		int rowsPerPage =  Constant.PAGE_SIZE2;
 		
@@ -305,7 +308,7 @@ public class UserAction extends BaseAction {
 		}
 		
 		con += " order by " + orderName + " " + orderType;
-		userPage = userService.getUserList(con, curPage, rowsPerPage);
+		userPage = userService.getUserListFb(con, curPage, rowsPerPage,user_id);
 		
 		depts = userService.getAllDeptList();
 		positions = sjzdService.getSjzdXmxxByZdId("SJZD_ZWXX");
@@ -377,6 +380,15 @@ public class UserAction extends BaseAction {
 		return "success";
 	}
 	
+	/**
+	 * 还原删除的用户信息
+	 * @return
+	 */
+	public String restore(){
+		String user_id = ParameterUtility.getStringParameter(getRequest(), "user_id","");
+		userService.restoreUser(user_id,"0");
+		return "success";
+	}
 	
 	/**
 	 * 重置密码

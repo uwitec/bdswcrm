@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.sw.cms.action.base.BaseAction;
+import com.sw.cms.model.LoginInfo;
 import com.sw.cms.model.Page;
 import com.sw.cms.model.SysUser;
 import com.sw.cms.service.DeptService;
@@ -62,6 +63,9 @@ public class EmployeeAction extends BaseAction {
 		int curPage = ParameterUtility.getIntParameter(getRequest(), "curPage",1);
 		int rowsPerPage = Constant.PAGE_SIZE2;
 		
+		LoginInfo info = (LoginInfo) getSession().getAttribute("LOGINUSER");
+		String user_id = info.getUser_id();
+		
 		String con = "";
 		if(!real_name.equals("")){
 			con += " and real_name like'%" + real_name + "%'";
@@ -72,7 +76,7 @@ public class EmployeeAction extends BaseAction {
 		if(!position.equals("")){
 			con += " and position='" + position + "'";
 		}
-		employeePage = employeeService.getUserList(con, curPage, rowsPerPage);
+		employeePage = employeeService.getUserListFb(con, curPage, rowsPerPage,user_id);
 		positions = sjzdService.getSjzdXmxxByZdId("SJZD_ZWXX");
 		
 		return "success";
@@ -202,6 +206,14 @@ public class EmployeeAction extends BaseAction {
 		return "success";
 	}
 	
+	/**
+	 * 还原删除的用户信息
+	 * @return
+	 */
+	public String restore(){
+		employeeService.updateEmployeeFlag(employee_id,"0");
+		return "success";
+	}
 	
 	public List getDepts() {
 		return depts;
