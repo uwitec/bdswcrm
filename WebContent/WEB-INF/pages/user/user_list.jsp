@@ -34,6 +34,12 @@ String real_name = (String)VS.findValue("real_name");
 		}
 	}
 
+   function restore(id){
+		if(confirm("确定要恢复该条记录吗！")){
+			location.href = "restoreUser.html?user_id=" + id;
+		}
+	}
+
 	function resetPass(userName){
 		if(confirm("确定要重置该用户密码吗！")){
 			document.descForm.user_name.value = userName;
@@ -139,7 +145,11 @@ String real_name = (String)VS.findValue("real_name");
 		<td class="a1">
 			<a href="javascript:edit('<%=StringUtils.nullToStr(map.get("user_id")) %>');">修改</a>&nbsp;&nbsp;&nbsp;&nbsp;
 			<!--<a href="javascript:openWin('<%=StringUtils.nullToStr(map.get("user_id")) %>');">查看</a>&nbsp;&nbsp;&nbsp;&nbsp;-->
-			<a href="javascript:del('<%=StringUtils.nullToStr(map.get("user_id")) %>');">删除</a>&nbsp;&nbsp;&nbsp;&nbsp;
+			<%if(StringUtils.nullToStr(map.get("is_del")).equals("0")){ %>
+			  <a href="javascript:del('<%=StringUtils.nullToStr(map.get("user_id")) %>');">删除</a>&nbsp;&nbsp;&nbsp;&nbsp;
+			<%}else{ %>
+		      <a href="javascript:restore('<%=StringUtils.nullToStr(map.get("user_id")) %>');">还原</a>&nbsp;&nbsp;&nbsp;&nbsp;
+		    <%} %>
 			<a href="javascript:resetPass('<%=StringUtils.nullToStr(map.get("user_name")) %>');">重置密码</a>
 		</td>
 	</tr>
