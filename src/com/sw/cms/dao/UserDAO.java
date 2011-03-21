@@ -158,6 +158,23 @@ public class UserDAO extends JdbcBaseDAO {
 		return this.getResultByPage(sql, curPage, rowsPerPage);
 	}
 	
+	/**
+	 * 取所有的用户信息
+	 * 取用户列表（带分页）
+	 * @param con
+	 * @param curPage
+	 * @param rowsPerPage
+	 * @return
+	 */
+	public Page getUserListAll(String con,int curPage, int rowsPerPage){
+		String sql = "select a.*,b.dept_name from sys_user a left join dept b on b.dept_id=a.dept where a.is_sys_user='1' ";
+		
+		if(!con.equals("")){
+			sql = sql + con;
+		}
+		
+		return this.getResultByPage(sql, curPage, rowsPerPage);
+	}
 	
 	/**
 	 * 保存用户信息
@@ -263,6 +280,16 @@ public class UserDAO extends JdbcBaseDAO {
 		this.getJdbcTemplate().update(sql);
 	}
 	
+	
+	/**
+	 * 还原删除的用户信息
+	 * @param flag
+	 * @param user_id
+	 */
+	public void restoreUser(String user_id,String flag){
+		String sql = "update sys_user set is_del='" + flag + "' where user_id='" + user_id + "'";
+		this.getJdbcTemplate().update(sql);
+	}
 	
 	/**
 	 * 修改密码

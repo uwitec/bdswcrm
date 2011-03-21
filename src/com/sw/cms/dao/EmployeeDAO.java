@@ -45,6 +45,24 @@ public class EmployeeDAO extends JdbcBaseDAO {
 	}
 
 	/**
+	 * 取员工列表（带分页）
+	 * 可以看到所有的员工信息
+	 * @param con
+	 * @param curPage
+	 * @param rowsPerPage
+	 * @return
+	 */
+	public Page getUserListAll(String con, int curPage, int rowsPerPage) {
+		String sql = "select a.*,b.dept_name from sys_user a left join dept b on b.dept_id=a.dept where a.is_sys_user=0 ";
+
+		if (!con.equals("")) {
+			sql = sql + con;
+		}
+
+		return this.getResultByPage(sql, curPage, rowsPerPage);
+	}
+	
+	/**
 	 * 取业务员列表（带分页）
 	 * 
 	 * @param con
@@ -201,6 +219,13 @@ public class EmployeeDAO extends JdbcBaseDAO {
 		this.getJdbcTemplate().update(sql);
 	}
 
+	
+	public void updateEmployeeFlag(String user_id,String flag)
+	{
+		String sql = "update sys_user set is_del='" + flag + "' where user_id='" + user_id + "'";
+		this.getJdbcTemplate().update(sql);
+	}
+	
 	/**
 	 * 取当前可用的序列号
 	 * 
