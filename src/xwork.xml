@@ -267,6 +267,9 @@
         <action name="delUser" class="userAction" method="del">
             <result name="success" type="redirect">listUser.html</result>
         </action>
+        <action name="restoreUser" class="userAction" method="restore">
+            <result name="success" type="redirect">listUser.html</result>
+        </action>
         <action name="showOnlineUser" class="userAction" method="showOnlineUser">
             <result name="success" type="dispatcher">/WEB-INF/pages/user/onlineUser.jsp</result>
         </action> 
@@ -1555,7 +1558,9 @@
         <action name="delEmployee" class="employeeAction" method="del">
             <result name="success" type="redirect">listEmployee.html</result>
         </action> 
-        
+        <action name="restoreEmployee" class="employeeAction" method="restore">
+            <result name="success" type="redirect">listEmployee.html</result>
+        </action>
         <!-- 修改 业务员列表 修改-->
         <action name="selLsEmployee" class="employeeAction" method="selYwyEmployee">
            <result name="success">/WEB-INF/pages/employee/selectYwyEmployee.jsp</result>
