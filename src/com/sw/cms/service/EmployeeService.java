@@ -23,6 +23,25 @@ public class EmployeeService {
 	}
      
 	/**
+	 * 系统管理员可以看到所有的员工信息，非系统管理员只能看到未删除或未离职的员工信息
+	 * 取员工列表（带分页）
+	 * @param con
+	 * @param curPage
+	 * @param rowsPerPage
+	 * @return
+	 */
+	public Page getUserListFb(String con,int curPage, int rowsPerPage,String user_id){
+		if(user_id.equals("AD00000001"))
+		{
+		   return employeeDao.getUserListAll(con, curPage, rowsPerPage);
+		}
+		else
+		{
+		  return employeeDao.getUserList(con, curPage, rowsPerPage);
+		}
+	}
+	
+	/**
 	 * 取业务员列表（带分页）
 	 * @param con
 	 * @param curPage
@@ -68,6 +87,16 @@ public class EmployeeService {
 	 */
 	public void delUser(String user_id){
 		employeeDao.delUser(user_id);
+	}
+	
+	/**
+	 * 还原删除的用户信息
+	 * @param user_id
+	 * @param flag
+	 */
+	public void updateEmployeeFlag(String user_id,String flag)
+	{
+		employeeDao.updateEmployeeFlag(user_id,flag);
 	}
 	
 	/**
