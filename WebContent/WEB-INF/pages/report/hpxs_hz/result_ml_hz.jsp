@@ -51,6 +51,16 @@ if(!product_xh.equals("")){
 		document.myform.product_id.value = product_id;
 		document.myform.submit();
 	}
+
+	function pageRefresh(){
+		document.myform.action = "getHpxsMlHzResult.html";
+		document.myform.submit();
+	}
+
+	function exportXls(){
+		document.myform.action = "getHpxsMlMxResult.html";
+		document.myform.submit();
+	}
 </script>
 <style media=print>  
 .Noprint{display:none;}<!--用本样式在打印时隐藏非打印项目-->
@@ -68,6 +78,7 @@ if(!product_xh.equals("")){
 	<TBODY>
 		<TR style="BACKGROUND-COLOR: #dcdcdc;height:45;">
 		    <TD align="center" width="100%"><font style="FONT-SIZE: 16px"><B>货品销售毛利汇总</B></font><br><%=con %></TD>
+		    <TD><input type="button" name="btnRes" value="刷新" onclick="pageRefresh();"></TD>
 		</TR>
 	</TBODY>
 </TABLE>
@@ -149,7 +160,7 @@ if(resultList != null && resultList.size()>0){
 </table>
 <center class="Noprint">
 	<input type="button" name="button_print" value=" 打 印 " onclick="window.print();"> &nbsp;&nbsp;
-	<input type="button" name="button_print" value=" 导 出 " onclick="document.reportForm.submit();"> &nbsp;&nbsp;	
+	<input type="button" name="button_print" value=" 导 出 " onclick="exportXls();"> &nbsp;&nbsp;	
     <input type="button" name="button_fh" value=" 返 回 " onclick="history.go(-1);"> 
 </center>
 <form name="reportForm" action="DownLoadXlsServlet" method="post">
