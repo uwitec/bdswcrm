@@ -173,7 +173,7 @@ public class XsskDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public List getYskByClientId(String client_id){
-		String sql = "select id as xsd_id,creatdate as fsrq,sjcjje as fsje,(sjcjje-skje) as ysk,skje as yisk from xsd where state='已出库' and skxs<>'已收' and client_name='" + client_id + "'";
+		String sql = "select id as xsd_id,creatdate as fsrq,sjcjje as fsje,(sjcjje-skje) as ysk,skje as yisk from xsd where state='已出库' and skxs<>'已收' and client_name='" + client_id + "' order by id";
 		
 		//处理应收期初信息,如果存在期初值，则需要UNION期初值
 		String init_sql = "select '期初应收' as xsd_id,DATE_FORMAT(cz_date,'%Y-%m-%d') as fsrq,ysqc as fsje,(ysqc-yishouje) as ysk,yishouje as yisk from client_wl_init where client_name='" + client_id + "' and round(ysqc,2)<>round(yishouje,2)";
@@ -183,7 +183,7 @@ public class XsskDAO extends JdbcBaseDAO {
 		}
 		
 		//处理应收期初信息,如果存在期初值，则需要UNION期初值
-		String pz_sql = "select id as jhd_id,DATE_FORMAT(cz_date,'%Y-%m-%d') as fsrq,pzje as fsje,(pzje-jsje) as yfje,jsje as yisk from pz where state='已提交' and type='应收' and client_name='" + client_id + "' and round(jsje,2)<>round(pzje,2)";
+		String pz_sql = "select id as jhd_id,DATE_FORMAT(cz_date,'%Y-%m-%d') as fsrq,pzje as fsje,(pzje-jsje) as yfje,jsje as yisk from pz where state='已提交' and type='应收' and client_name='" + client_id + "' and round(jsje,2)<>round(pzje,2) order by id";
 		List pzList = this.getResultList(pz_sql);
 		if(pzList != null && pzList.size()>0){
 			sql = "(" + sql + ") union (" + pz_sql + ")";

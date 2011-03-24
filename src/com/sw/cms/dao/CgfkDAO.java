@@ -91,7 +91,7 @@ public class CgfkDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public List getDfkDesc(String gysbh){
-		String sql = "select id as jhd_id,cg_date as fsrq,total as fsje,(total-fkje) as yfje,fkje as yifje from jhd where state='已入库' and fklx<>'已付' and gysbh='" + gysbh + "'";
+		String sql = "select id as jhd_id,cg_date as fsrq,total as fsje,(total-fkje) as yfje,fkje as yifje from jhd where state='已入库' and fklx<>'已付' and gysbh='" + gysbh + "' order by id";
 		
 		//处理应收期初信息,如果存在期初值，则需要UNION期初值
 		String init_sql = "select '期初应付' as jhd_id,DATE_FORMAT(cz_date,'%Y-%m-%d') as fsrq,yfqc as fsje,(yfqc-yifuje) as yfje,yifuje as yisk from client_wl_init where client_name='" + gysbh + "' and round(yfqc,2)<>round(yifuje,2)";
@@ -101,7 +101,7 @@ public class CgfkDAO extends JdbcBaseDAO {
 		}
 		
 		//处理应收期初信息,如果存在期初值，则需要UNION期初值
-		String pz_sql = "select id as jhd_id,DATE_FORMAT(cz_date,'%Y-%m-%d') as fsrq,pzje as fsje,(pzje-jsje) as yfje,jsje as yisk from pz where state='已提交' and type='应付' and client_name='" + gysbh + "' and round(jsje,2)<>round(pzje,2)";
+		String pz_sql = "select id as jhd_id,DATE_FORMAT(cz_date,'%Y-%m-%d') as fsrq,pzje as fsje,(pzje-jsje) as yfje,jsje as yisk from pz where state='已提交' and type='应付' and client_name='" + gysbh + "' and round(jsje,2)<>round(pzje,2)  order by id";
 		List pzList = this.getResultList(pz_sql);
 		if(pzList != null && pzList.size()>0){
 			sql = "(" + sql + ") union (" + pz_sql + ")";
