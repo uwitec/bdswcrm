@@ -14,7 +14,12 @@ String end_date = StringUtils.nullToStr(request.getParameter("end_date"));      
 String dept_id = StringUtils.nullToStr(request.getParameter("dept_id"));        //部门
 String user_id = StringUtils.nullToStr(request.getParameter("user_id"));        //业务员编号
 
-List results = xstjXsryService.getYwymlHz(start_date,end_date,dept_id,user_id);
+
+String product_kind = StringUtils.nullToStr(request.getParameter("product_kind"));      //商品类别
+String product_name = StringUtils.nullToStr(request.getParameter("product_name"));      //商品名称/规格
+String kind_name = StringUtils.nullToStr(request.getParameter("kind_name"));            //商品类别名称
+
+List results = xstjXsryService.getYwymlHz(start_date,end_date,dept_id,user_id,product_kind,product_name);
 
 
 String strCon = "";
@@ -27,6 +32,13 @@ if(!dept_id.equals("")){
 
 if(!user_id.equals("")){
 	strCon += "&nbsp;&nbsp;业务员：" + StaticParamDo.getRealNameById(user_id);
+}
+
+if(!kind_name.equals("")){
+	strCon += "&nbsp; 商品类别：" + kind_name;
+}
+if(!product_name.equals("")){
+	strCon += "&nbsp; 商品名称/规格：" + product_name;
 }
 %>
 
