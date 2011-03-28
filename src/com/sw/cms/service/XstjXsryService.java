@@ -96,8 +96,8 @@ public class XstjXsryService {
 	 * @param user_id      销售人员
 	 * @return
 	 */
-	public List getYwymlHz(String start_date,String end_date,String dept_id,String user_id){
-		return xstjXsryDao.getYwymlHz(start_date, end_date, dept_id, user_id);
+	public List getYwymlHz(String start_date,String end_date,String dept_id,String user_id,String product_kind,String product_name){
+		return xstjXsryDao.getYwymlHz(start_date, end_date, dept_id, user_id, product_kind, product_name);
 	}
 	
 	

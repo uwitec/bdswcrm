@@ -229,8 +229,8 @@ public class XstjXsryDAO extends JdbcBaseDAO {
 	 * @param user_id      销售人员
 	 * @return
 	 */
-	public List getYwymlHz(String start_date,String end_date,String dept_id,String user_id){
-		String sql = "select b.dept,a.xsry,b.real_name,sum(a.hjje) as xsje,sum(a.bhsje) as bhsje,sum(a.cb) as cb,sum(a.khcb) as khcb,sum(a.ygcb) as ygcb from product_sale_flow a left join sys_user b on b.user_id=a.xsry where 1=1";
+	public List getYwymlHz(String start_date,String end_date,String dept_id,String user_id,String product_kind,String product_name){
+		String sql = "select b.dept,a.xsry,b.real_name,sum(a.hjje) as xsje,sum(a.bhsje) as bhsje,sum(a.cb) as cb,sum(a.khcb) as khcb,sum(a.ygcb) as ygcb from product_sale_flow a left join sys_user b on b.user_id=a.xsry left join product c on c.product_id=a.product_id where 1=1";
 		
 		if(!start_date.equals("")){
 			sql += " and a.cz_date>='" + start_date + "'";
@@ -243,6 +243,27 @@ public class XstjXsryDAO extends JdbcBaseDAO {
 		}
 		if(!user_id.equals("")){
 			sql += " and a.xsry='" + user_id + "'";
+		}
+		
+		//处理商品类别
+		if(!product_kind.equals("")){
+			String[] arryItems = product_kind.split(",");			
+			if(arryItems != null && arryItems.length >0){
+				sql += " and (";
+				for(int i=0;i<arryItems.length;i++){
+					if(i == 0){
+						sql += " c.product_kind like '" + arryItems[i] + "%'";
+					}else{
+						sql += " or c.product_kind like '" + arryItems[i] + "%'";
+					}
+				}
+				sql += ")";
+			}
+		}
+		
+		//商品名称
+		if(!product_name.equals("")){
+			sql += " and (c.product_name like '%" + product_name + "%' or c.product_xh like '%" + product_name + "%')";
 		}
 		
 		sql += " group by b.dept,a.xsry,b.real_name";
