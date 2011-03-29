@@ -279,7 +279,7 @@ public class XstjXsryDAO extends JdbcBaseDAO {
 	 * @param user_id
 	 * @return
 	 */
-	public List getYwymlMx(String start_date,String end_date,String user_id){
+	public List getYwymlMx(String start_date,String end_date,String user_id,String product_kind,String product_name){
 		String sql = "select a.cz_date,a.id,a.yw_type,a.client_name,b.product_name,a.product_id,b.product_xh,a.nums,a.price,a.hjje,a.bhsje,a.dwcb,a.cb,a.dwkhcb,a.khcb,a.dwygcb,a.ygcb from product_sale_flow a join product b on b.product_id=a.product_id where 1=1";
 		
 		if(!start_date.equals("")){
@@ -290,6 +290,27 @@ public class XstjXsryDAO extends JdbcBaseDAO {
 		}
 		if(!user_id.equals("")){
 			sql += " and a.xsry='" + user_id + "'";
+		}
+		
+		//处理商品类别
+		if(!product_kind.equals("")){
+			String[] arryItems = product_kind.split(",");			
+			if(arryItems != null && arryItems.length >0){
+				sql += " and (";
+				for(int i=0;i<arryItems.length;i++){
+					if(i == 0){
+						sql += " b.product_kind like '" + arryItems[i] + "%'";
+					}else{
+						sql += " or b.product_kind like '" + arryItems[i] + "%'";
+					}
+				}
+				sql += ")";
+			}
+		}
+		
+		//商品名称
+		if(!product_name.equals("")){
+			sql += " and (b.product_name like '%" + product_name + "%' or b.product_xh like '%" + product_name + "%')";
 		}
 		
 		sql += " order by a.cz_date";

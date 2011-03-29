@@ -108,8 +108,8 @@ public class XstjXsryService {
 	 * @param user_id
 	 * @return
 	 */
-	public List getYwymlMx(String start_date,String end_date,String user_id){
-		return xstjXsryDao.getYwymlMx(start_date, end_date, user_id);
+	public List getYwymlMx(String start_date,String end_date,String user_id,String product_kind,String product_name){
+		return xstjXsryDao.getYwymlMx(start_date, end_date, user_id, product_kind, product_name);
 	}
 	
 	
