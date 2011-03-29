@@ -52,6 +52,10 @@ if(!product_name.equals("")){
 function pageRefresh(){
 	document.refreshform.submit();
 }
+function getMx(xsry){
+	document.reportForm.user_id.value = xsry;
+	document.reportForm.submit();
+}
 </script>
 <style media=print>  
 .Noprint{display:none;}<!--用本样式在打印时隐藏非打印项目-->
@@ -63,6 +67,14 @@ function pageRefresh(){
 <input type="hidden" name="end_date" value="<%=end_date %>">
 <input type="hidden" name="dept_id" value="<%=dept_id %>">
 <input type="hidden" name="user_id" value="<%=user_id %>">
+</form>
+<form name="reportForm" action="getXsryYgmlMxResult.html" method="post">
+	<input type="hidden" name="start_date" value="<%=start_date %>">
+	<input type="hidden" name="end_date" value="<%=end_date %>">
+	<input type="hidden" name="user_id" value="">
+	<input type="hidden" name="product_kind" value="<%=product_kind %>">
+	<input type="hidden" name="product_name" value="<%=product_name %>">
+	<input type="hidden" name="kind_name" value="<%=kind_name %>">
 </form>
 <TABLE  align="center" cellSpacing=0 cellPadding=0 width="99%" border=0>
 	<TBODY>
@@ -115,7 +127,7 @@ if(results != null && results.size()>0){
 		<TR>
 			<TD class=ReportItemXH><%=StaticParamDo.getDeptNameById((String)map.get("dept")) %>&nbsp;</TD>
 			<TD class=ReportItemXH>
-				<a href="getXsryYgmlMxResult.html?start_date=<%=start_date %>&end_date=<%=end_date %>&user_id=<%=StringUtils.nullToStr(map.get("xsry")) %>"><%=StringUtils.nullToStr(map.get("real_name")) %></a>&nbsp;</TD>
+				<a href="javascript:getMx('<%=StringUtils.nullToStr(map.get("xsry")) %>');"><%=StringUtils.nullToStr(map.get("real_name")) %></a>&nbsp;</TD>
 			<TD class=ReportItemMoney><%=JMath.round(xsje,2) %>&nbsp;</TD>
 			<TD class=ReportItemMoney><%=JMath.round(bhsje,2) %>&nbsp;</TD>
 			<TD class=ReportItemMoney><%=JMath.round(ygcb,2) %>&nbsp;</TD>

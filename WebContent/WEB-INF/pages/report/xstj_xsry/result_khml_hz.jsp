@@ -47,11 +47,25 @@ if(!product_name.equals("")){
 <link href="css/report.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="jquery/jquery-1.4.2.min.js"></script>
 <script type="text/javascript" src="js/switchCss.js"></script>
+<script type="text/javascript">
+function getMx(xsry){
+	document.reportForm.user_id.value = xsry;
+	document.reportForm.submit();
+}
+</script>
 <style media=print>  
 .Noprint{display:none;}<!--用本样式在打印时隐藏非打印项目-->
 </style>
 </head>
 <body align="center" >
+<form name="reportForm" action="getXsryKhmlMxResult.html" method="post">
+	<input type="hidden" name="start_date" value="<%=start_date %>">
+	<input type="hidden" name="end_date" value="<%=end_date %>">
+	<input type="hidden" name="user_id" value="">
+	<input type="hidden" name="product_kind" value="<%=product_kind %>">
+	<input type="hidden" name="product_name" value="<%=product_name %>">
+	<input type="hidden" name="kind_name" value="<%=kind_name %>">
+</form>
 <TABLE  align="center" cellSpacing=0 cellPadding=0 width="99%" border=0>
 	<TBODY>
 		<TR style="BACKGROUND-COLOR: #dcdcdc;height:45;">
@@ -102,7 +116,7 @@ if(results != null && results.size()>0){
 		<TR>
 			<TD class=ReportItemXH><%=StaticParamDo.getDeptNameById((String)map.get("dept")) %>&nbsp;</TD>
 			<TD class=ReportItemXH>
-				<a href="getXsryKhmlMxResult.html?start_date=<%=start_date %>&end_date=<%=end_date %>&user_id=<%=StringUtils.nullToStr(map.get("xsry")) %>"><%=StringUtils.nullToStr(map.get("real_name")) %></a>&nbsp;</TD>
+				<a href="javascript:getMx('<%=StringUtils.nullToStr(map.get("xsry")) %>');"><%=StringUtils.nullToStr(map.get("real_name")) %></a>&nbsp;</TD>
 			<TD class=ReportItemMoney><%=JMath.round(xsje,2) %>&nbsp;</TD>
 			<TD class=ReportItemMoney><%=JMath.round(bhsje,2) %>&nbsp;</TD>
 			<TD class=ReportItemMoney><%=JMath.round(khcb,2) %>&nbsp;</TD>
