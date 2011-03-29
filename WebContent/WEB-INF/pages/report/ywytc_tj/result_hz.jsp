@@ -13,8 +13,21 @@ String start_date = StringUtils.nullToStr(request.getParameter("start_date"));  
 String end_date = StringUtils.nullToStr(request.getParameter("end_date"));      //结束时间
 String dept_id = StringUtils.nullToStr(request.getParameter("dept_id"));        //部门
 String user_id = StringUtils.nullToStr(request.getParameter("user_id"));        //业务员编号
+String dj_type = StringUtils.nullToStr(request.getParameter("dj_type"));        //单据类型
 
-Map results = xstjXsryService.getYwytcHz(start_date,end_date,dept_id,user_id);
+Map results = xstjXsryService.getYwytcHz(start_date,end_date,dept_id,user_id,dj_type);
+String dj_id="";
+if(dj_type.equals("退货单")){
+   dj_id="TH";
+}
+else if(dj_type.equals("销售单")){		
+    dj_id="XS";
+}
+else if(dj_type.equals("零售单")){
+    dj_id="LS";
+}else{
+    dj_id="";
+}
 
 
 String strCon = "";
@@ -28,6 +41,7 @@ if(!dept_id.equals("")){
 if(!user_id.equals("")){
 	strCon += "&nbsp;&nbsp;业务员：" + StaticParamDo.getRealNameById(user_id);
 }
+
 %>
 
 <html>
@@ -75,12 +89,14 @@ if(results != null && results.size()>0){
 	double hj_cxjl = 0;
 	double hj_total = 0;
 	
+	
 	Iterator iter = results.entrySet().iterator(); 
 	while (iter.hasNext()) { 
 		Map.Entry entry = (Map.Entry) iter.next(); 
 		Map map = (Map)entry.getValue(); 
 		
 		String xsry = StringUtils.nullToStr(map.get("xsry"));
+		
 		String real_name = StringUtils.nullToStr(map.get("real_name"));
 		String dept = StringUtils.nullToStr(map.get("dept"));
 		String sfcytc = StringUtils.nullToStr(map.get("sfcytc"));
@@ -107,7 +123,7 @@ if(results != null && results.size()>0){
 			jbtc = 0;
 			cxjl = 0;
 		}
-		
+				
 		double total = jbtc + blds + jeds + cxjl;
 		
 		hj_khml += khml;
@@ -120,7 +136,8 @@ if(results != null && results.size()>0){
 		<TR>
 			<TD class=ReportItemXH><%=StaticParamDo.getDeptNameById(dept) %>&nbsp;</TD>
 			<TD class=ReportItemXH>
-				<a href="getYwytcMxResult.html?start_date=<%=start_date %>&end_date=<%=end_date %>&user_id=<%=xsry %>"><%=real_name %></a>&nbsp;</TD>
+			   <a href="getYwytcMxResult.html?start_date=<%=start_date %>&end_date=<%=end_date %>&user_id=<%=xsry %>&dj_id=<%=dj_id%>"><%=real_name %></a>&nbsp;
+			</TD>
 			<TD class=ReportItemMoney><%=JMath.round(khml,2) %>&nbsp;</TD>
 			<TD class=ReportItemMoney><%=JMath.round(jbtc,2) %>&nbsp;</TD>
 			<TD class=ReportItemMoney><%=JMath.round(blds,2) %>&nbsp;</TD>

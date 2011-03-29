@@ -12,8 +12,9 @@ XstjXsryService xstjXsryService = (XstjXsryService)VS.findValue("xstjXsryService
 String start_date = StringUtils.nullToStr(request.getParameter("start_date"));
 String end_date = StringUtils.nullToStr(request.getParameter("end_date"));
 String user_id = StringUtils.nullToStr(request.getParameter("user_id")); 
+String dj_id = StringUtils.nullToStr(request.getParameter("dj_id"));        //单据类型
 
-List results = xstjXsryService.getYwytcMx(start_date,end_date,user_id);
+List results = xstjXsryService.getYwytcMx(start_date,end_date,user_id,dj_id);
 
 String strCon = "";
 
@@ -21,6 +22,7 @@ strCon = "日期：" + start_date + "至" + end_date;
 if(!user_id.equals("")){
 	strCon += "&nbsp;&nbsp;销售人员：" + StaticParamDo.getRealNameById(user_id);
 }
+
 %>
 
 <html>

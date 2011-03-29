@@ -3,6 +3,7 @@
 <%@ page import="com.sw.cms.util.*" %>
 <%@ page import="com.sw.cms.model.*" %>
 <%@ page import="java.util.*" %>
+<%@taglib uri="/webwork" prefix="ww"%>
 <%
 OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
 List deptList = (List)VS.findValue("deptList");
@@ -73,6 +74,17 @@ List deptList = (List)VS.findValue("deptList");
             <div id="brandTip"  style="height:12px;position:absolute;left:680px; top:87px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		    <input type="hidden" name="user_id" id="fzr"/> 
 		</td>					
+	</tr>
+	<tr>
+	  <td class="a1">单据类型</td>
+	  <td class="a4" colspan="3">
+			<select name="dj_type">
+				<option value=""></option>
+				<option value="零售单">零售单</option>
+				<option value="销售单">销售单</option>
+				<option value="退货单">退货单</option>
+			</select>
+	  </td>
 	</tr>
 	<tr height="35">
 		<td class="a1" colspan="4">
