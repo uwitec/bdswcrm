@@ -119,11 +119,12 @@ public class XstjXsryService {
 	 * @param end_date
 	 * @param dept_id
 	 * @param user_id
+	 * @param dj_type
 	 * @return
 	 */
-	public Map getYwytcHz(String start_date,String end_date,String dept_id,String user_id){
+	public Map getYwytcHz(String start_date,String end_date,String dept_id,String user_id,String dj_type){
 		
-		List list = xstjXsryDao.getYwytcHz(start_date, end_date, dept_id, user_id);
+		List list = xstjXsryDao.getYwytcHz(start_date, end_date, dept_id, user_id,dj_type);
 		Map map = new HashMap();
 		
 		try{
@@ -206,10 +207,11 @@ public class XstjXsryService {
 	 * @param end_date
 	 * @param dept_id
 	 * @param user_id
+	 * @param dj_id
 	 * @return
 	 */
-	public List getYwytcMx(String start_date,String end_date,String user_id){
-		return xstjXsryDao.getYwytcMx(start_date, end_date, user_id);
+	public List getYwytcMx(String start_date,String end_date,String user_id,String dj_id){
+		return xstjXsryDao.getYwytcMx(start_date, end_date, user_id,dj_id);
 	}
 	
 
