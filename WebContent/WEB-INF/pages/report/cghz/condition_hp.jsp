@@ -7,6 +7,7 @@
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
 <script language='JavaScript' src="js/selClient.js"></script>
+<script language='JavaScript' src="js/selJsr.js"></script>
 <script type="text/javascript" src="js/prototype-1.4.0.js"></script>
 <style>
 	.selectTip{background-color:#009;color:#fff;}
@@ -31,7 +32,7 @@
 	}		
 </script>
 </head>
-<body onload="initClientTip();">
+<body onload="initFzrTip();initClientTip();">
 <form name="reportForm" action="getHpcgHzCondition.html" method="post">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
 	<thead>
@@ -71,6 +72,14 @@
 		<td class="a1">商品规格</td>
 		<td class="a4">
 			<input type="text" name="product_xh" id="product_xh" value="" size="30">	
+		</td>
+	</tr>
+	<tr>
+		<td class="a1">采购人员</td>
+		<td class="a4" colspan="3">
+		    <input  id="brand" type="text"   length="20"  onblur="setValue()"   size="30"> 
+            <div   id="brandTip"  style="height:12px;position:absolute;left:700px; top:85px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+		    <input type="hidden" name="cgry_id" id="fzr"/>
 		</td>
 	</tr>		
 	<tr height="35">
