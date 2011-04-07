@@ -142,10 +142,11 @@ public class ProductAction extends BaseAction implements ModelDriven{
 		String productId = StringUtils.nullToStr(getRequest().getParameter("productId"));	
 		
 		if(!productService.isCanDel(productId)){
-			this.setMsg("该商品已发生业务往来，不能删除！");
+			this.setMsg("该商品已发生业务往来或库存数量不为0，不能删除！");
 			return "notDel";
 		}
-		productService.delProductById(productId);
+		productService.delProductById(productId);		
+		
 		return "success";
 	}	
 	
