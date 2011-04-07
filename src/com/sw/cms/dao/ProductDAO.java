@@ -382,11 +382,12 @@ public class ProductDAO extends JdbcBaseDAO {
 	 * 发生业务数据的商品不能删除<BR>
 	 * 业务数据包括：零售、销售、退货、采购、采购退货、调拨申请、调拨、调价<BR>
 	 * 因为出库入库，不能添加，只能有相应单据生成，所以不在考虑范围内
+	 * 期初初始有库存数量的商品不能删除
 	 * @param product_id  商品编号
 	 * @return boolean true:可以；false:不可以
 	 */
 	public boolean isCanDel(String product_id){
-		
+				
 		//判断是否发生零售，如果发生零售则返回false
 		String sql = "select count(*) as counts from lsd_product where product_id='" + product_id + "'";		
 		if(this.getJdbcTemplate().queryForInt(sql) > 0){
@@ -434,6 +435,15 @@ public class ProductDAO extends JdbcBaseDAO {
 		if(this.getJdbcTemplate().queryForInt(sql) > 0){
 			return false;
 		}			
+		
+        //判断是否有期初库存，如果有期初库存则返回false
+		String sqlCount = "select count(*) as counts from product_kc_qc where product_id='" + product_id + "'";
+		if(this.getJdbcTemplate().queryForInt(sqlCount) > 0){
+		  sql = "select sum(nums) as sums from product_kc_qc  where product_id='" + product_id + "'and cdate<=(select cswcrq from sys_init_set) group by product_id";
+		  if(this.getJdbcTemplate().queryForInt(sql) > 0){
+		    	return false;
+		  }
+		}
 		
 		return true;
 	}
