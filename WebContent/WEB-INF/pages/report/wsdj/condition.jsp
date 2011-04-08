@@ -90,9 +90,9 @@ List deptList = (List)VS.findValue("deptList");
 		</td>	
 		<td class="a1">销售人员</td>
 		<td class="a4">
-		    <input  id="brand" type="text"   length="20"  onblur="setValue()"  /> 
+		    <input  id="brand" type="text"   length="20"  onblur="setValue()"  > 
             <div id="brandTip" style="height:12px;position:absolute;left:720px; top:85px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
-		    <input type="hidden" name="xsry_id" id="fzr"  /> 
+		    <input type="hidden" name="xsry_id" id="fzr"  > 
 		</td>					
 	</tr>
 	<tr>
@@ -102,17 +102,22 @@ List deptList = (List)VS.findValue("deptList");
 			<input type="hidden" name="client_id" id="client_id" value=""> 
 			<div id="clientsTip" style="height:12px;position:absolute;left:110px; top:115px; width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		</td>	
+		<td class="a1">客户经理</td>
+		<td class="a4">
+		    <input type="text" name="khjl" id="khjl"  value="" length="20" >
+		</td>
+	</tr>
+	<tr>
 		<td class="a1">是否显示明细</td>
-		<td class="a4" colspan="3">
+		<td class="a4">
 			<select name="flag">
 				<option value="否">否</option>
 				<option value="是">是</option>
 			</select>
 		</td>
-	</tr>	
-	<tr>
+	
 		<td class="a1">只显示超期单据</td>
-		<td class="a4" colspan="3">
+		<td class="a4">
 			<select name="cq_flag">
 				<option value="否">否</option>
 				<option value="是">是</option>

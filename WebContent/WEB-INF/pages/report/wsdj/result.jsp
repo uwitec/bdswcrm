@@ -15,13 +15,17 @@ String dept_id = StringUtils.nullToStr(request.getParameter("dept_id"));        
 String xsry_id = StringUtils.nullToStr(request.getParameter("xsry_id"));        //销售人员
 String client_name = StringUtils.nullToStr(request.getParameter("client_id"));        //客户编号
 String cq_flag = StringUtils.nullToStr(request.getParameter("cq_flag"));        //客户编号
-
+String khjl = StringUtils.nullToStr(request.getParameter("khjl"));        //客户经理
 String strCon = "";
 
 strCon = "日期：" + start_date + "至" + end_date;
 
 if(!dept_id.equals("")){
 	strCon += "&nbsp;&nbsp;部门：" + StaticParamDo.getDeptNameById(dept_id);
+}
+
+if(!khjl.equals("")){
+	strCon += "&nbsp;&nbsp;客户经理：" + khjl;
 }
 %>
 
@@ -68,7 +72,7 @@ if(!dept_id.equals("")){
 	
 	<TBODY>
 <%
-List results = xsmxReportService.getWsdjList(start_date,end_date,dept_id,xsry_id,client_name,cq_flag);
+List results = xsmxReportService.getWsdjKhjlList(start_date,end_date,dept_id,xsry_id,khjl,client_name,cq_flag);
 if(results != null && results.size()>0){
 	
 	double hj_je = 0;
