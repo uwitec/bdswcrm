@@ -80,12 +80,26 @@ public class XsmxReportService {
 	 * @param end_date 结束时间
 	 * @param dept_id 部门编号
 	 * @param xsry_id 销售人员
+	 * @param khjl 客户经理
+	 * @return
+	 */
+	public List getWsdjKhjlList(String start_date,String end_date,String dept_id,String xsry_id,String khjl,String client_name,String cq_flag){
+		return xsmxReportDao.getWsdjKhjlList(start_date, end_date, dept_id, xsry_id,khjl,client_name,cq_flag);
+	}
+
+	/**
+	 * 取未收单据列表
+	 * @param start_date 开始时间
+	 * @param end_date 结束时间
+	 * @param dept_id 部门编号
+	 * @param xsry_id 销售人员
+	 * 
 	 * @return
 	 */
 	public List getWsdjList(String start_date,String end_date,String dept_id,String xsry_id,String client_name,String cq_flag){
 		return xsmxReportDao.getWsdjList(start_date, end_date, dept_id, xsry_id,client_name,cq_flag);
 	}
-
+	
 	public XsmxReportDAO getXsmxReportDao() {
 		return xsmxReportDao;
 	}
