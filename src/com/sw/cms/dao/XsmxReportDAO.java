@@ -153,6 +153,47 @@ public class XsmxReportDAO extends JdbcBaseDAO {
 	 * @param end_date
 	 * @param dept_id
 	 * @param xsry_id
+	 * @param khjl
+	 * @return
+	 */
+	public List getWsdjKhjlList(String start_date,String end_date,String dept_id,String xsry_id,String khjl,String client_name,String cq_flag){
+		String sql = "select a.creatdate,a.ysrq,a.id,a.client_name,a.kh_lxr,a.kh_lxdh,a.fzr,a.xsdje,(a.xsdje-a.skje) as je,"+
+		             "c.khjl from xsd a join clients c on a.client_name=c.id  join sys_user b on c.khjl=b.user_id  "+
+		             "where a.state='已出库' and a.skxs<>'已收'";
+		if(!start_date.equals("")){
+			sql += " and DATE_FORMAT(a.cz_date,'%Y-%m-%d')>='" + start_date + "'";
+		}
+		if(!end_date.equals("")){
+			sql += " and DATE_FORMAT(a.cz_date,'%Y-%m-%d')<='" + (end_date + " 23:59:59") + "'"; 
+		}
+		if(!dept_id.equals("")){
+			sql += " and b.dept like '" + dept_id + "%'";
+		}
+		if(!xsry_id.equals("")){
+			sql += " and a.fzr='" + xsry_id + "'";
+		}
+		if(!client_name.equals("")){
+			sql += " and a.client_name='"+ client_name +"'";
+		}
+		
+		if(!khjl.equals("")){
+			sql += " and b.real_name='" + khjl + "'";
+		}
+		
+		if(cq_flag.equals("是")){  //如果是只显示超期单据
+			sql += " and a.ysrq<'" + DateComFunc.formatDate(new Date(),"yyyy-MM-dd") + "'";
+		}
+		
+		return this.getResultList(sql);
+	}
+	
+	/**
+	 * 取未收单据列表
+	 * @param start_date
+	 * @param end_date
+	 * @param dept_id
+	 * @param xsry_id
+	 * 
 	 * @return
 	 */
 	public List getWsdjList(String start_date,String end_date,String dept_id,String xsry_id,String client_name,String cq_flag){
@@ -172,6 +213,8 @@ public class XsmxReportDAO extends JdbcBaseDAO {
 		if(!client_name.equals("")){
 			sql += " and a.client_name='"+ client_name +"'";
 		}
+		
+		
 		if(cq_flag.equals("是")){  //如果是只显示超期单据
 			sql += " and a.ysrq<'" + DateComFunc.formatDate(new Date(),"yyyy-MM-dd") + "'";
 		}
