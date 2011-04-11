@@ -17,10 +17,11 @@ public class CghzService {
 	 * @param product_name
 	 * @param product_xh
 	 * @param cgry_id
+	 * @param product_prop
 	 * @return
 	 */
-	public List getHpcgList(String product_kind,String start_date,String end_date,String client_name,String product_name,String product_xh,String cgry_id){
-		return cghzDao.getHpcgList(product_kind, start_date, end_date, client_name, product_name, product_xh,cgry_id);
+	public List getHpcgList(String product_kind,String start_date,String end_date,String client_name,String product_name,String product_xh,String cgry_id,String product_prop){
+		return cghzDao.getHpcgList(product_kind, start_date, end_date, client_name, product_name, product_xh,cgry_id,product_prop);
 	}
 	
 	/**
@@ -30,10 +31,11 @@ public class CghzService {
 	 * @param end_date
 	 * @param client_name
 	 * @param cgry_id
+	 * @param product_prop
 	 * @return
 	 */
-	public List getDjmxList(String proudct_id,String start_date,String end_date,String client_name,String cgry_id){
-		return cghzDao.getDjmxList(proudct_id, start_date, end_date, client_name,cgry_id);
+	public List getDjmxList(String proudct_id,String start_date,String end_date,String client_name,String cgry_id,String product_prop){
+		return cghzDao.getDjmxList(proudct_id, start_date, end_date, client_name,cgry_id,product_prop);
 	}
 	
 	
