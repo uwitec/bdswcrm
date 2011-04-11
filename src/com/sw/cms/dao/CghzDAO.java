@@ -22,12 +22,23 @@ public class CghzDAO extends JdbcBaseDAO {
 	 * @param product_name
 	 * @param product_xh
 	 * @param cgry_id
+	 * @param product_prop
 	 * @return
 	 */
-	public List getHpcgList(String product_kind,String start_date,String end_date,String client_name,String product_name,String product_xh,String cgry_id){
+	public List getHpcgList(String product_kind,String start_date,String end_date,String client_name,String product_name,String product_xh,String cgry_id,String product_prop){
 		
 		//进货单
-		String jhd_sql = "select a.product_id,c.product_name,c.product_xh,sum(nums) as nums,sum(a.price*a.nums) as je from jhd_product a join jhd b on b.id=a.jhd_id left join product c on c.product_id=a.product_id where b.state='已入库' and c.prop='库存商品'";
+		String jhd_sql = "select a.product_id,c.product_name,c.product_xh,sum(nums) as nums,sum(a.price*a.nums) as je from jhd_product a join jhd b on b.id=a.jhd_id left join product c on c.product_id=a.product_id where b.state='已入库' ";
+		if(product_prop.equals("1"))
+		{
+			jhd_sql += " and c.prop='库存商品'";
+		}
+		else if(product_prop.equals("2"))
+		{
+			jhd_sql += " and c.prop='服务/劳务'";
+		}
+		   
+		   
 		//处理商品类别
 		if(!product_kind.equals("")){
 			String[] arryItems = product_kind.split(",");
@@ -67,7 +78,16 @@ public class CghzDAO extends JdbcBaseDAO {
 		jhd_sql += " group by a.product_id,c.product_name,c.product_xh";
 		
 		//采购退货单
-		String cgthd_sql = "select a.product_id,c.product_name,c.product_xh,(0-sum(nums)) as nums,(0-sum(th_price*nums)) as je from cgthd_product a join cgthd b on b.id=a.cgthd_id left join product c on c.product_id=a.product_id where b.state='已出库' and c.prop='库存商品'";
+		String cgthd_sql = "select a.product_id,c.product_name,c.product_xh,(0-sum(nums)) as nums,(0-sum(th_price*nums)) as je from cgthd_product a join cgthd b on b.id=a.cgthd_id left join product c on c.product_id=a.product_id where b.state='已出库' ";
+		if(product_prop.equals("1"))
+		{
+			cgthd_sql += " and c.prop='库存商品'";
+		}
+		else if(product_prop.equals("2"))
+		{
+			cgthd_sql += " and c.prop='服务/劳务'";
+		}
+		
 		//处理商品类别
 		if(!product_kind.equals("")){
 			String[] arryItems = product_kind.split(",");
@@ -119,11 +139,21 @@ public class CghzDAO extends JdbcBaseDAO {
 	 * @param end_date
 	 * @param client_name
 	 * @param cgry_id
+	 * @param product_prop
 	 * @return
 	 */
-	public List getDjmxList(String proudct_id,String start_date,String end_date,String client_name,String cgry_id){
+	public List getDjmxList(String proudct_id,String start_date,String end_date,String client_name,String cgry_id,String product_prop){
 		//进货单
-		String jhd_sql = "select b.id as dj_id,'采购' as xwtype,b.gysbh as client_name,b.fzr as jsr,DATE_FORMAT(b.cz_date,'%Y-%m-%d') as creatdate,'viewJhd.html?id=' as url,b.cz_date from jhd_product a left join jhd b on b.id=a.jhd_id where b.state='已入库'";
+		String jhd_sql = "select b.id as dj_id,'采购' as xwtype,b.gysbh as client_name,b.fzr as jsr,DATE_FORMAT(b.cz_date,'%Y-%m-%d') as creatdate,'viewJhd.html?id=' as url,b.cz_date from jhd_product a left join jhd b on b.id=a.jhd_id left join product c on c.product_id=a.product_id where b.state='已入库'";
+		if(product_prop.equals("1"))
+		{
+			jhd_sql += " and c.prop='库存商品'";
+		}
+		else if(product_prop.equals("2"))
+		{
+			jhd_sql += " and c.prop='服务/劳务'";
+		}
+		
 		if(!proudct_id.equals("")){
 			jhd_sql += " and a.product_id='" + proudct_id + "'";
 		}
@@ -140,7 +170,15 @@ public class CghzDAO extends JdbcBaseDAO {
 			jhd_sql += " and b.fzr ='" + cgry_id + "'";
 		}
 		//采购退货单
-		String cgthd_sql = "select b.id as dj_id,'退货' as xwtype,b.provider_name as client_name,b.jsr,DATE_FORMAT(b.cz_date,'%Y-%m-%d') as creatdate,'viewCgthd.html?id=' as url,b.cz_date from cgthd_product a left join cgthd b on b.id=a.cgthd_id where b.state='已出库'";
+		String cgthd_sql = "select b.id as dj_id,'退货' as xwtype,b.provider_name as client_name,b.jsr,DATE_FORMAT(b.cz_date,'%Y-%m-%d') as creatdate,'viewCgthd.html?id=' as url,b.cz_date from cgthd_product a left join cgthd b on b.id=a.cgthd_id left join product c on c.product_id=a.product_id where b.state='已出库'";
+		if(product_prop.equals("1"))
+		{
+			cgthd_sql += " and c.prop='库存商品'";
+		}
+		else if(product_prop.equals("2"))
+		{
+			cgthd_sql += " and c.prop='服务/劳务'";
+		}
 		if(!proudct_id.equals("")){
 			cgthd_sql += " and a.product_id='" + proudct_id + "'";
 		}
