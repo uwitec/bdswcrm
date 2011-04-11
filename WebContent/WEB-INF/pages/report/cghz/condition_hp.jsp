@@ -76,11 +76,19 @@
 	</tr>
 	<tr>
 		<td class="a1">采购人员</td>
-		<td class="a4" colspan="3">
+		<td class="a4">
 		    <input  id="brand" type="text"   length="20"  onblur="setValue()"   size="30"> 
             <div   id="brandTip"  style="height:12px;position:absolute;left:700px; top:85px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		    <input type="hidden" name="cgry_id" id="fzr"/>
 		</td>
+		<td class="a1">商品属性</td>
+	    <td class="a4">
+			<select name="product_prop">
+				<option value=""></option>
+				<option value="1">库存商品</option>
+				<option value="2">服务商品</option>				
+			</select>
+	   </td>
 	</tr>		
 	<tr height="35">
 		<td class="a1" colspan="4">

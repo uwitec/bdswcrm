@@ -14,7 +14,8 @@ String end_date = StringUtils.nullToStr(request.getParameter("end_date"));
 String client_name = StringUtils.nullToStr(request.getParameter("client_name"));
 String product_id = StringUtils.nullToStr(request.getParameter("product_id"));
 String cgry_id = StringUtils.nullToStr(request.getParameter("cgry_id"));
-List list = cghzService.getDjmxList(product_id, start_date, end_date, client_name,cgry_id);
+String product_prop=StringUtils.nullToStr(request.getParameter("product_prop"));
+List list = cghzService.getDjmxList(product_id, start_date, end_date, client_name,cgry_id,product_prop);
 
 %>
 

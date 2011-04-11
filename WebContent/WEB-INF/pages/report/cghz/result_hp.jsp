@@ -18,6 +18,9 @@ String kind_name = StringUtils.nullToStr(request.getParameter("kind_name"));
 String cgry_id = StringUtils.nullToStr(request.getParameter("cgry_id"));
 String product_name = StringUtils.nullToStr(request.getParameter("product_name"));
 String product_xh = StringUtils.nullToStr(request.getParameter("product_xh"));
+
+String product_prop=StringUtils.nullToStr(request.getParameter("product_prop"));
+
 String con = "";
 con = "日期：" + start_date + "至" + end_date;
 if(!clientId.equals("")){
@@ -32,9 +35,24 @@ if(!product_name.equals("")){
 if(!product_xh.equals("")){
 	con += "&nbsp; 商品规格：" + product_xh;
 }
+
+if(!product_prop.equals(""))
+{
+   if(product_prop.equals("1"))
+   {
+      con += "&nbsp; 商品属性：库存商品" ;
+   }
+   else if(product_prop.equals("2"))
+   {
+      con += "&nbsp; 商品属性：服务商品" ;
+   }
+}
+
 if(!cgry_id.equals("")){
 	con += "&nbsp; 采购人员：" + StaticParamDo.getRealNameById(cgry_id);
 }
+
+
 %>
 
 <html>
@@ -47,11 +65,11 @@ if(!cgry_id.equals("")){
 </style> 
 <script language='JavaScript' src="js/date.js"></script>
 <script type="text/javascript">
-	function openWin(product_id,start_date,end_date,client_name,cgry_id){
+	function openWin(product_id,start_date,end_date,client_name,cgry_id,product_prop){
 		//var fea ='width=' + screen.availWidth + ',height=' + (screen.availHeight-25) + ',left=0,top=0,directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		//var url = "getHpcgMxCondition.html?product_id=" + product_id + "&start_date=" + start_date + "&end_date=" + end_date + "&client_name=" + client_name;
 		//window.open(url,'详细信息',fea);
-		location.href = "getHpcgMxCondition.html?product_id=" + product_id + "&start_date=" + start_date + "&end_date=" + end_date + "&client_name=" + client_name+ "&cgry_id=" + cgry_id;
+		location.href = "getHpcgMxCondition.html?product_id=" + product_id + "&start_date=" + start_date + "&end_date=" + end_date + "&client_name=" + client_name+ "&cgry_id=" + cgry_id+"&product_prop=" +product_prop;
 	}
 </script>
 </head>
@@ -76,7 +94,7 @@ if(!cgry_id.equals("")){
 	</THEAD>
 	<TBODY>
 <%
-List list = cghzService.getHpcgList(productKind, start_date, end_date, client_name, product_name, product_xh,cgry_id);
+List list = cghzService.getHpcgList(productKind, start_date, end_date, client_name, product_name, product_xh,cgry_id,product_prop);
 if(list != null && list.size()>0){
 	
 	int hj_nums = 0;
@@ -98,7 +116,7 @@ if(list != null && list.size()>0){
 %>
 		<TR>
 			<TD class=ReportItem><%=product_id %>&nbsp;</TD>
-			<TD class=ReportItem><a href="#" onclick="openWin('<%=product_id %>','<%=start_date %>','<%=end_date %>','<%=client_name %>','<%=cgry_id %>');"><%=StringUtils.nullToStr(map.get("product_name")) %></a>&nbsp;</TD>			
+			<TD class=ReportItem><a href="#" onclick="openWin('<%=product_id %>','<%=start_date %>','<%=end_date %>','<%=client_name %>','<%=cgry_id %>','<%=product_prop %>');"><%=StringUtils.nullToStr(map.get("product_name")) %></a>&nbsp;</TD>			
 			<TD class=ReportItem><%=StringUtils.nullToStr(map.get("product_xh")) %>&nbsp;</TD>
 			<TD class=ReportItemMoney><%=nums %>&nbsp;</TD>
 			<TD class=ReportItemMoney><%=JMath.round(je,2) %>&nbsp;</TD>
