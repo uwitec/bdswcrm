@@ -220,8 +220,8 @@ public class XsskService {
 	
 	/**
 	 * 判断提交的销售收款明细中是否存在与其他销售收款单冲突，如果存在返回编号，不存在返回空
-	 * @param cgfk
-	 * @param cgfkDescs
+	 * @param xssk
+	 * @param xsskDescs
 	 * @return
 	 */
 	public String getExistXsskDesc(Xssk xssk,List xsskDescs){
@@ -235,8 +235,8 @@ public class XsskService {
 				XsskDesc xssKdesc = (XsskDesc)xsskDescs.get(i);
 				if(xssKdesc != null && xssKdesc.getBcsk() != 0){
 					String xsd_id = xssKdesc.getXsd_id();
-					
-					if(xsskDao.isXsskDescExist(xssk_id, xsd_id, client_name)){
+					double bcsk=xssKdesc.getBcsk();
+					if(xsskDao.isXsskDescExist(xssk_id, xsd_id, client_name,bcsk)){
 						//如果存在冲突，则记录相应进货单编号
 						if(temp.equals("")){
 							temp = xsd_id;
@@ -244,6 +244,9 @@ public class XsskService {
 							temp += "," + xsd_id;
 						}
 					}
+					
+					double ysk=xssKdesc.getYsk();
+					
 				}
 			}
 		}

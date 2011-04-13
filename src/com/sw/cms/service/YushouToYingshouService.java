@@ -131,8 +131,8 @@ public class YushouToYingshouService {
 	
 	/**
 	 * 判断提交的预收冲应收明细中是否存在与其他销售收款单冲突，如果存在返回编号，不存在返回空
-	 * @param cgfk
-	 * @param cgfkDescs
+	 * @param YushouToYingshou
+	 * @param descList
 	 * @return
 	 */
 	public String getExistYushouToYingshouDesc(YushouToYingshou info,List descList){
@@ -146,8 +146,8 @@ public class YushouToYingshouService {
 				YushouToYingshouDesc desc = (YushouToYingshouDesc)descList.get(i);
 				if(desc != null && desc.getBcjs() != 0){
 					String xsd_id = desc.getXsd_id();
-					
-					if(yushouToYingshouDao.isXsskDescExist(yw_id, xsd_id, client_name)){
+					double bcjs=desc.getBcjs();
+					if(yushouToYingshouDao.isXsskDescExist(yw_id, xsd_id, client_name,bcjs)){
 						//如果存在冲突，则记录相应进货单编号
 						if(temp.equals("")){
 							temp = xsd_id;
