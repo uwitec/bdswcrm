@@ -14,7 +14,7 @@
 			<table width="100%" border="0" height="100%" cellpadding="0" cellspacing="0" class="chart_list">
 			  <tr>
 			    <td width="100%" class="a2">
-					<iframe width="100%" height="100%" name="deptFrame" allowTransparency="true" src="listDept.html" border="0" frameborder="0" SCROLLING="no"></iframe>
+					<iframe width="100%" height="100%" name="deptFrame" allowTransparency="true" src="listDept.html" border="0" frameborder="0" SCROLLING="auto"></iframe>
 				</td>
 			  </tr>
 			</table>
