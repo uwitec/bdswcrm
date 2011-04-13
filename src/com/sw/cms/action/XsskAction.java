@@ -129,7 +129,7 @@ public class XsskAction extends BaseAction {
 		String tempMsg = xsskService.getExistXsskDesc(xssk, xsskDescs);
 		if(!tempMsg.equals("")){
 			this.setMsg(tempMsg);
-			xsskDescs = xsskService.xsskDescObjToMap(xsskDescs);
+			xsskDescs = xsskService.xsskDescObjToMap(xsskDescs);			
 			return INPUT;
 		}
 		
