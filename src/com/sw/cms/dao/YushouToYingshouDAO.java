@@ -186,23 +186,40 @@ public class YushouToYingshouDAO extends JdbcBaseDAO {
 	
 	/**
 	 * 销售收款明细是否存在冲突(销售收款，预收冲应收)
-	 * @param jhd_id
-	 * @param gysbh
+	 * @param yw_id
+	 * @param xsd_id
+	 * @param client_name
+	 * @param bcjs
 	 * @return
 	 */
-	public boolean isXsskDescExist(String yw_id,String xsd_id,String client_name){
+	public boolean isXsskDescExist(String yw_id,String xsd_id,String client_name,double bcjs){
 		boolean is = false;
+		double skje=0;
 		
-		String sql = "select count(1) as counts from xssk_desc a join xssk b on b.id=a.xssk_id where b.state<>'已提交' and a.xsd_id='" + xsd_id + "' and b.client_name='" + client_name + "'";
+		String sql = "select count(1) as counts from xssk_desc a join xssk b on b.id=a.xssk_id  where b.state<>'已提交'  and a.xsd_id='" + xsd_id + "' and b.client_name='" + client_name + "'";
 		int count1 = this.getJdbcTemplate().queryForInt(sql);
 		
-		sql = "select count(1) as count from yushou_to_yingshou_desc a join yushou_to_yingshou b on b.id=a.yw_id where b.state<>'已提交' and a.yw_id<>'" + yw_id + "' and a.xsd_id='" + xsd_id + "' and b.client_name='" + client_name + "'";
+		sql = "select count(1) as count from yushou_to_yingshou_desc a join yushou_to_yingshou b on b.id=a.yw_id  where b.state<>'已提交'  and a.yw_id<>'" + yw_id + "' and a.xsd_id='" + xsd_id + "' and b.client_name='" + client_name + "'";
 		int count2 = this.getJdbcTemplate().queryForInt(sql);
+		
+		if(xsd_id.equals("期初应收")){
+		   sql="select (ysqc-yishouje) as ysk from client_wl_init  where  client_name='" + client_name + "'";
+		   skje = this.getJdbcTemplate().queryForLong(sql);	
+		}else if(xsd_id.indexOf("PZ") != -1){
+		   sql="select (pzje-jsje) as ysk from pz where state='已提交' and type='应收' and client_name='" + client_name + "'";
+		   skje = this.getJdbcTemplate().queryForLong(sql);
+		}else{
+		   sql="select (sjcjje-skje) as ysk from xsd where state='已出库'  and id='" + xsd_id + "' and  client_name='" + client_name + "'";	
+		   skje = this.getJdbcTemplate().queryForLong(sql);
+		}
 		
 		if((count1+count2) > 0){
 			is = true;
 		}
-		
+		if(bcjs>skje){
+			is = true;
+		}
+			
 		return is;
 	}
 	
