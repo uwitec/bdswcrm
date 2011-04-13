@@ -124,7 +124,7 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 	function onloadMsg(){
 		if(msg == "") return;
 
-		var tempMsg = "销售收款单对应收款款明细中：\n" + msg + "\n与其它未提交销售收款单或未提交预收冲应收存在冲突，无法保存，请检查！";
+		var tempMsg = "销售收款单对应收款款明细中：\n" + msg + "\n与其它销售收款单或预收冲应收存在冲突，无法保存，请检查！";
 
 		alert(tempMsg);
 	}
