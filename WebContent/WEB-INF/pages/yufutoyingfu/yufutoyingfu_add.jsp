@@ -126,7 +126,7 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 	function onloadMsg(){
 		if(msg == "") return;
 
-		var tempMsg = "预付冲应付明细中：\n" + msg + "\n与其它未支付付款申请单或未提交预付冲应付存在冲突，无法保存，请检查！";
+		var tempMsg = "预付冲应付明细中：\n" + msg + "\n与其它付款申请单或预付冲应付存在冲突，无法保存，请检查！";
 
 		alert(tempMsg);
 	}	
