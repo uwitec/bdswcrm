@@ -156,8 +156,8 @@ public class YufuToYingfuService {
 				YufuToYingfuDesc yufuToYingfuDesc = (YufuToYingfuDesc)descList.get(i);
 				if(yufuToYingfuDesc != null && yufuToYingfuDesc.getBcjs() != 0){
 					String jhd_id = yufuToYingfuDesc.getJhd_id();
-					
-					if(yufuToYingfuDao.isCgfkDescExist(yw_id, jhd_id, client_name)){
+					double bcjs=yufuToYingfuDesc.getBcjs();
+					if(yufuToYingfuDao.isCgfkDescExist(yw_id, jhd_id, client_name,bcjs)){
 						//如果存在冲突，则记录相应进货单编号
 						if(temp.equals("")){
 							temp = jhd_id;

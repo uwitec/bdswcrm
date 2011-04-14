@@ -261,8 +261,8 @@ public class CgfkService {
 				CgfkDesc cgfkDesc = (CgfkDesc)cgfkDescs.get(i);
 				if(cgfkDesc != null && cgfkDesc.getBcfk() != 0){
 					String jhd_id = cgfkDesc.getJhd_id();
-					
-					if(cgfkDao.isCgfkDescExist(cgfk_id, jhd_id, gysbh)){
+					double bcfk=cgfkDesc.getBcfk();
+					if(cgfkDao.isCgfkDescExist(cgfk_id, jhd_id, gysbh,bcfk)){
 						//如果存在冲突，则记录相应进货单编号
 						if(temp.equals("")){
 							temp = jhd_id;
