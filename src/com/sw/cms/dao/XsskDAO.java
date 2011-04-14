@@ -400,10 +400,10 @@ public class XsskDAO extends JdbcBaseDAO {
 		   skje = this.getJdbcTemplate().queryForLong(sql);	
 		   
 		}else if(xsd_id.indexOf("PZ") != -1){
-		   sql="select (pzje-jsje) as ysk from pz where state='已提交' and type='应收' and client_name='" + client_name + "'";
+		   sql="select (pzje-jsje) as ysk from pz where id='" + xsd_id + "' and client_name='" + client_name + "'";
 		   skje = this.getJdbcTemplate().queryForLong(sql);
 		}else{
-		   sql="select (sjcjje-skje) as ysk from xsd where state='已出库'  and id='" + xsd_id + "' and  client_name='" + client_name + "'";	
+		   sql="select (sjcjje-skje) as ysk from xsd where  id='" + xsd_id + "' and  client_name='" + client_name + "'";	
 		   skje = this.getJdbcTemplate().queryForLong(sql);
 		}
 		if((count1+count2) > 0){

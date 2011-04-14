@@ -408,18 +408,35 @@ public class CgfkDAO extends JdbcBaseDAO {
 	 * 采购付款明细是否存在冲突(付款申请，预付冲应付)
 	 * @param jhd_id
 	 * @param gysbh
+	 * @param cgfk_id
+	 * @param bcfk
 	 * @return
 	 */
-	public boolean isCgfkDescExist(String cgfk_id, String jhd_id,String gysbh){
+	public boolean isCgfkDescExist(String cgfk_id, String jhd_id,String gysbh,double bcfk){
 		boolean is = false;
-		
+		double fkje=0;
 		String sql = "select count(1) as counts from cgfk_desc a join cgfk b on b.id=a.cgfk_id where b.state<>'已支付' and a.cgfk_id<>'" + cgfk_id + "' and a.jhd_id='" + jhd_id + "' and b.gysbh='" + gysbh + "'";
 		int count1 = this.getJdbcTemplate().queryForInt(sql);
 		
 		sql = "select count(1) as count from yufu_to_yingfu_desc a join yufu_to_yingfu b on b.id=a.yw_id where b.state<>'已提交' and a.jhd_id='" + jhd_id + "' and client_name='" + gysbh + "'";
 		int count2 = this.getJdbcTemplate().queryForInt(sql);
 		
+		if(jhd_id.equals("期初应付")){
+		   sql="select (yfqc-yifuje) as yfje from client_wl_init where client_name='" + gysbh + "'";
+		   fkje = this.getJdbcTemplate().queryForLong(sql);	
+		}else if(jhd_id.indexOf("PZ") != -1){
+		   sql="select (pzje-jsje) as yfje from pz where id='" + jhd_id + "'  and client_name='" + gysbh + "'";
+		   fkje = this.getJdbcTemplate().queryForLong(sql);
+		}else{
+		   sql="select (total-fkje) as yfje from jhd where  id='" + jhd_id + "' and  gysbh='" + gysbh + "'";	
+		   fkje = this.getJdbcTemplate().queryForLong(sql);
+		}
+		
 		if((count1+count2) > 0){
+			is = true;
+		}
+		
+		if(bcfk>fkje){
 			is = true;
 		}
 		
