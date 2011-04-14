@@ -49,7 +49,7 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 		if(!InputValid(document.getElementById("client_id"),1,"string",1,1,50,"往来单位")){	 return; }
 		
 		if(document.getElementById("fzr").value == ""){
-			alert("经手人不能为空，请选择！");
+			alert("申请人不能为空，请选择！");
 			return;
 		}
 		
