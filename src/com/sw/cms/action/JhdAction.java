@@ -217,7 +217,7 @@ public class JhdAction extends BaseAction {
 		
 		String con = " and a.state='Õý³£'";
 		if(!product_name.equals("")){
-			con += " and (a.product_name like '%" + product_name + "%' or a.product_xh like '%" + product_name + "%')";
+			con += " and (a.product_name like '%" + product_name + "%' or a.product_xh like '%" + product_name + "%' or a.sp_txm like '%" + product_name + "%')";
 		}
 		if(!product_kind.equals("")){
 			con += " and a.product_kind like '" + product_kind + "%'";
