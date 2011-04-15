@@ -470,7 +470,7 @@ public class ProductKcDAO extends JdbcBaseDAO {
 		String sql = "SELECT a.*,(select sum(nums) from product_kc b where b.product_id=a.product_id) as nums from product a  where a.state='正常' and a.prop='库存商品'";
 		
 		if(!kc_con.equals("")){
-			sql = sql + " and( a.product_id like '%" + kc_con + "%' or a.product_name like '%" + kc_con + "%' or a.product_xh like '%" + kc_con + "%')";
+			sql = sql + " and( a.product_id like '%" + kc_con + "%' or a.product_name like '%" + kc_con + "%' or a.product_xh like '%" + kc_con + "%' or a.sp_txm like '%" + kc_con + "%')";
 		}
 
 		return this.getResultByPage(sql, curPage, rowsPerPage);
@@ -481,7 +481,7 @@ public class ProductKcDAO extends JdbcBaseDAO {
 		String sql = "SELECT a.*,(select sum(nums) from product_kc b where b.product_id=a.product_id) as nums from product a  where state='正常'";
 		
 		if(!kc_con.equals("")){
-			sql = sql + " and( a.product_id like '%" + kc_con + "%' or a.product_name like '%" + kc_con + "%' or a.product_xh like '%" + kc_con + "%')";
+			sql = sql + " and( a.product_id like '%" + kc_con + "%' or a.product_name like '%" + kc_con + "%' or a.product_xh like '%" + kc_con + "%' or a.sp_txm like '%" + kc_con + "%')";
 		}
 
 		return this.getResultByPage(sql, curPage, rowsPerPage);		
