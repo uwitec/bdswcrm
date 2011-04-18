@@ -60,3 +60,9 @@ ALTER TABLE `fhkhd` ADD COLUMN `mobile` VARCHAR(20) DEFAULT NULL AFTER `lxdh`;
 ALTER TABLE `fhkhd` ADD COLUMN `mail` VARCHAR(100) DEFAULT NULL AFTER `mobile`;
 
 update fhkhd set khlx='往来单位';
+
+2011-04-18更新
+----增加货品销售毛利分类汇总
+INSERT INTO `funcs` VALUES ('FC9915','货品毛利分类汇总','货品毛利分类汇总','showHpmlflHzCon.html','112.gif',11,'1','1');
+
+INSERT INTO `column_funcs` VALUES ('001003','FC9915');
