@@ -213,4 +213,6 @@
      <bean id="yshzJsrAction" class="com.sw.cms.action.YshzJsrAction" autowire="byName" scope="prototype"/>
      
      <bean id="yshzKhjlAction" class="com.sw.cms.action.YshzKhjlAction" autowire="byName" scope="prototype"/>
+     
+     <bean id="hpmlflxsHzAction" class="com.sw.cms.action.HpmlflxsHzAction" scope="prototype" autowire="byName"/>
 </beans>

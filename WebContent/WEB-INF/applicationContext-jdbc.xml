@@ -613,6 +613,10 @@
      <bean id="yshzKhjlDao" class="com.sw.cms.dao.YshzKhjlDAO">
           <property name="jdbcTemplate" ref="jdbcTemplate"/>
      </bean>          
+     
+    <!-- 货品销售毛利分类汇总 -->
+    <bean id="hpmlflxsHzDao" class="com.sw.cms.dao.HpmlflxsHzDAO" autowire="byName"/>
+    <!-- 货品销售毛利分类汇总 --> 
 </beans>
 
 

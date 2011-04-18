@@ -795,6 +795,13 @@
         </property>
     </bean>
 
+    <!-- 货品销售毛利分类汇总 -->
+    <bean id="hpmlflxsHzService" parent="baseTransaction">
+      <property name="target">
+          <bean class="com.sw.cms.service.HpmlflxsHzService" autowire="byName"/>
+      </property>
+    </bean>
+
 </beans>
 
 
