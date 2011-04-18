@@ -3025,5 +3025,16 @@
         </action>
         <!-- 客户经理应收汇总 -->
 
+        <!-- 货品销售毛利分类汇总 -->
+        <action name="showHpmlflHzCon" class="hpmlflxsHzAction" method="showCondition">
+            <result name="success">/WEB-INF/pages/report/hpmlflhz/condition.jsp</result>
+        </action>
+        <action name="getHpmlflHzResult" class="hpmlflxsHzAction" method="getResults">
+            <result name="success">/WEB-INF/pages/report/hpmlflhz/result.jsp</result>
+        </action>
+        <action name="getHpmlflMxResult" class="hpmlflxsHzAction" method="getMxResults">
+            <result name="success">/WEB-INF/pages/report/hpmlflhz/result_mx.jsp</result>
+        </action>      
+        <!-- 货品销售毛利分类汇总 -->  
     </package>
 </xwork>
