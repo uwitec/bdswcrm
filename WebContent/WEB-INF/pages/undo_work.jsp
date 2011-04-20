@@ -278,7 +278,7 @@ List confirmKfdbList = (List)VS.findValue("confirmKfdbList");
 					%>			
 					<tr>
 						<td width="100%" height="23">&nbsp;<A class=xxlb title="点击打开审批页面" href="javascript:doSpCgfk('<%=StringUtils.nullToStr(cgfk.getId()) %>');">
-						<%=StringUtils.nullToStr(cgfk.getId()) %>&nbsp;&nbsp;<%=StaticParamDo.getClientNameById(cgfk.getGysbh()) %>&nbsp;&nbsp;【<%=StringUtils.nullToStr(cgfk.getFk_date()) %>】</A></td>
+						<%=StringUtils.nullToStr(cgfk.getId()) %>&nbsp;&nbsp;<%=StaticParamDo.getClientNameById(cgfk.getGysbh()) %>&nbsp;&nbsp;<%=StaticParamDo.getRealNameById(cgfk.getCzr()) %>&nbsp;&nbsp;【<%=StringUtils.nullToStr(cgfk.getFk_date()) %>】</A></td>
 					</tr>
 					<%
 						}
