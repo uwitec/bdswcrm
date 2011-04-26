@@ -34,9 +34,7 @@ Page results = (Page)VS.findValue("bwlPage");
 <form name="myform" action="listBwl.html" method="post">
 <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0">
 	<tr>
-		<td class="csstitle" align="left" width="75%">&nbsp;&nbsp;&nbsp;&nbsp;<b>备忘录</b></td>
-		<td class="csstitle" width="25%" align="right">
-			<img src="images/create.gif" align="absmiddle" border="0">&nbsp;<a href="#" onclick="add();" class="xxlb"> 添 加 </a> &nbsp;&nbsp;&nbsp;</td>			
+		<td class="csstitle" align="left" width="75%">&nbsp;&nbsp;&nbsp;&nbsp;<b>备忘录</b></td>		
 	</tr>
 </table>
 <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0">
