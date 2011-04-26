@@ -162,7 +162,7 @@ if(resultList != null && resultList.size()>0){
 	<input type="button" name="button_print" value=" 打 印 " onclick="window.print();"> &nbsp;&nbsp;
 	<input type="button" name="button_print" value=" 导 出 " onclick="exportXls();"> &nbsp;&nbsp;	
     <input type="button" name="button_fh" value=" 返 回 " onclick="javascript:location.href='showHpxsMlHzCondition.html';"> &nbsp;&nbsp;
-    <input type="button" name="button_Res" value=" 刷 新 " onclick="pageRefresh();"></TD>
+    <input type="button" name="button_Res" value=" 刷 新 " onclick="pageRefresh();">
 </center>
 <form name="reportForm" action="DownLoadXlsServlet" method="post">
 <input type="hidden" name="action" value="exportHpxsMlHzResult">
