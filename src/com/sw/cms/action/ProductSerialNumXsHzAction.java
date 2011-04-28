@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.sw.cms.action.base.BaseAction;
+import com.sw.cms.service.ClientsService;
 import com.sw.cms.service.DeptService;
 import com.sw.cms.service.ProductKindService;
 import com.sw.cms.service.ProductSerialNumXsHzService;
@@ -15,6 +16,7 @@ public class ProductSerialNumXsHzAction extends BaseAction {
 	private UserService userService;
 	private DeptService deptService;
 	private ProductKindService productKindService;
+	private ClientsService clientsService;
 	
 	private String start_date = "";
 	private String end_date = "";
@@ -22,13 +24,13 @@ public class ProductSerialNumXsHzAction extends BaseAction {
 	private String product_name = "";
 	private String dept_id = "";
 	private String xsry_name = "";
-	
+	private String clientId = "";
 	private List userList = new ArrayList();
 	private List deptList = new ArrayList();
 	private List productKindList = new ArrayList();
 	
 	private List results = new ArrayList();
-	
+	private List clientsList= new ArrayList();
 	/**
 	 * 打开查询条件列表页面
 	 * @return
@@ -37,6 +39,7 @@ public class ProductSerialNumXsHzAction extends BaseAction {
 		userList = userService.getAllEmployeeList();
 		deptList = deptService.getDepts();
 		productKindList = productKindService.getAllProductKindList();
+		clientsList=clientsService.getClientList("");
 		return "success";
 	}
 	
@@ -45,7 +48,7 @@ public class ProductSerialNumXsHzAction extends BaseAction {
 	 * @return
 	 */
 	public String listResults(){
-		results = productSerialNumXsHzService.getSerialNumXsList(start_date, end_date, product_kind, product_name, dept_id, xsry_name);
+		results = productSerialNumXsHzService.getSerialNumXsList(start_date, end_date, product_kind, product_name, dept_id, xsry_name,clientId);
 		return "success";
 	}
 
@@ -174,4 +177,26 @@ public class ProductSerialNumXsHzAction extends BaseAction {
 		this.xsry_name = xsry_name;
 	}
 
+	public String getClientId() {
+		return clientId;
+	}
+
+
+	public void setClientId(String clientId) {
+		this.clientId = clientId;
+	}
+	
+	public List getClientsList() {
+		return clientsList;
+	}
+	public void setClientsList(List clientsList) {
+		this.clientsList = clientsList;
+	}
+
+	public ClientsService getClientsService() {
+		return clientsService;
+	}
+	public void setClientsService(ClientsService clientsService) {
+		this.clientsService = clientsService;
+	}
 }
