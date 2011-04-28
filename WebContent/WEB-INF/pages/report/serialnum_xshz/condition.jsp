@@ -13,6 +13,7 @@ List productKindList = (List)VS.findValue("productKindList");
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
 <script language='JavaScript' src="js/selJsr.js"></script>
+<script language='JavaScript' src="js/selClient.js"></script>
 <script type="text/javascript" src="js/prototype-1.4.0.js"></script>
 <style>
 	.selectTip{
@@ -26,7 +27,7 @@ List productKindList = (List)VS.findValue("productKindList");
 	}
 </script>
 </head>
-<body onload="initFzrTip();">
+<body onload="initFzrTip();initClientTip();">
 <form name="reportForm" action="getSerialXshzResult.html" method="post">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
 	<thead>
@@ -39,10 +40,10 @@ List productKindList = (List)VS.findValue("productKindList");
 	<tr>
 		<td class="a1">开始日期</td>
 		<td class="a4">
-			<input type="text" name="start_date" id="start_date" value="<%=DateComFunc.getToday() %>"  class="Wdate" onFocus="WdatePicker()"></td>
+			<input type="text" name="start_date" id="start_date" value="<%=DateComFunc.getToday() %>"  class="Wdate" onFocus="WdatePicker()"  size="35" maxlength="50"></td>
 		<td class="a1">结束日期</td>
 		<td class="a4">
-			<input type="text" name="end_date" id="end_date" value="<%=DateComFunc.getToday() %>"  class="Wdate" onFocus="WdatePicker()"></td>
+			<input type="text" name="end_date" id="end_date" value="<%=DateComFunc.getToday() %>"  class="Wdate" onFocus="WdatePicker()"  size="35" maxlength="50"></td>
 	</tr>
 	<tr>
 		<td class="a1">商品类别</td>
@@ -68,16 +69,22 @@ List productKindList = (List)VS.findValue("productKindList");
 		</td>	
 		<td class="a1">商品名称</td>
 		<td class="a4">
-			<input type="text" name="product_name" id="product_name" value="">
+			<input type="text" name="product_name" id="product_name"  size="35" maxlength="50" value="">
 		</td>					
 	</tr>	
 	<tr>	
 		<td class="a1">销售人员</td>
-		<td class="a4" colspan="3">
-		 <input  id="brand" type="text"   length="20"  onblur="setValue()"  /> 
+		<td class="a4">
+		 <input  id="brand" type="text"    size="35" maxlength="50"  onblur="setValue()"  /> 
             <div   id="brandTip"  style="height:12px;position:absolute;left:120px; top:116px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
             </div>
 		    <input type="hidden" name="xsry_name" id="fzr"  /> 
+		</td>
+		<td class="a1">客户名称</td>
+		<td class="a4">
+		    <input type="text" name="clientId" id="client_name" value=""  onblur="setClientValue();"  size="35" maxlength="50">
+		    <input type="hidden" name="clientName" id="client_id" value="">
+		    <div id="clientsTip" style="height:12px;position:absolute;left:106px; top:85px; width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		</td>					
 	</tr>
 	<tr height="35">

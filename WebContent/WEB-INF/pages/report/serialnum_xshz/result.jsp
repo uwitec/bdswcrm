@@ -12,7 +12,8 @@ String start_date = StringUtils.nullToStr(request.getParameter("start_date"));  
 String end_date = StringUtils.nullToStr(request.getParameter("end_date"));      //结束时间
 String dept_id = StringUtils.nullToStr(request.getParameter("dept_id"));        //部门
 String product_kind = StringUtils.nullToStr(request.getParameter("product_kind")); //商品类别
-
+String client_name = StringUtils.nullToStr(request.getParameter("clientName"));
+String clientId = StringUtils.nullToStr(request.getParameter("clientId"));
 
 String strCon = "";
 
@@ -24,6 +25,10 @@ if(!dept_id.equals("")){
 
 if(!product_kind.equals("")){
 	strCon += "&nbsp;&nbsp;商品类别：" + StaticParamDo.getProductKindNameById(product_kind);
+}
+
+if(!clientId.equals("")){
+	strCon += "&nbsp; 客户名称：" + clientId;
 }
 %>
 
