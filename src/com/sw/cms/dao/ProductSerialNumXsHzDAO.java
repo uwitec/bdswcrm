@@ -19,10 +19,11 @@ public class ProductSerialNumXsHzDAO extends JdbcBaseDAO {
 	 * @param product_name 商品名称
 	 * @param dept_id      部门编号
 	 * @param xsry_id      销售人员编号
+	 * @param clientId 客户名称
 	 * @return
 	 */
 	public List getSerialNumXsList(String start_date,String end_date,String product_kind,
-								   String product_name,String dept_id,String xsry_name){
+								   String product_name,String dept_id,String xsry_name,String clientId){
 	
 		String sql = "SELECT a.fs_date,a.serial_num,b.product_name,b.product_xh,a.client_name,a.tel,a.jsr,a.xsdj " +
 					 "FROM  serial_num_flow a inner join serial_num_mng b on b.serial_num=a.serial_num " +
@@ -42,6 +43,9 @@ public class ProductSerialNumXsHzDAO extends JdbcBaseDAO {
 		}
 		if(!xsry_name.equals("")){
 			sql += " and a.jsr='" + xsry_name + "'";
+		}
+		if(!clientId.equals("")){
+			sql += " and a.client_name='" + clientId + "'";
 		}
 		
 		sql += " order by a.fs_date";
