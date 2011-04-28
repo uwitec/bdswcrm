@@ -16,11 +16,12 @@ public class ProductSerialNumXsHzService {
 	 * @param product_name 商品名称
 	 * @param dept_id      部门编号
 	 * @param xsry_id      销售人员编号
+	 * @param clientId      客户名称
 	 * @return
 	 */
 	public List getSerialNumXsList(String start_date,String end_date,String product_kind,
-								   String product_name,String dept_id,String xsry_name){
-		return productSerialNumXsHzDAO.getSerialNumXsList(start_date, end_date, product_kind, product_name, dept_id, xsry_name);
+								   String product_name,String dept_id,String xsry_name,String clientId){
+		return productSerialNumXsHzDAO.getSerialNumXsList(start_date, end_date, product_kind, product_name, dept_id, xsry_name,clientId);
 	}
 
 	public ProductSerialNumXsHzDAO getProductSerialNumXsHzDAO() {
