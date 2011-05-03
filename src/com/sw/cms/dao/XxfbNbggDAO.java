@@ -1,11 +1,12 @@
 package com.sw.cms.dao;
 
 import java.util.List;
-
+import java.util.Map;
 import com.sw.cms.dao.base.BeanRowMapper;
 import com.sw.cms.dao.base.JdbcBaseDAO;
 import com.sw.cms.model.Page;
 import com.sw.cms.model.XxfbNbgg;
+import com.sw.cms.util.StringUtils;
 import com.sw.cms.util.UUIDGenerator;
 
 /**
@@ -27,6 +28,18 @@ public class XxfbNbggDAO extends JdbcBaseDAO {
 		return this.getResultByPage(sql, curPage, rowsPerPage,new BeanRowMapper(XxfbNbgg.class));
 	}
 	
+	
+	public String getFinalhfr(String id,String cz_date)
+	{		
+		String sql="select * from xxfb_nbgg where parent_id='"+id+"' and cz_date='"+cz_date+"'";
+		String strCzr ="";
+		List list = this.getJdbcTemplate().queryForList(sql);
+		if(list != null && list.size()>0){
+			Map map = (Map)list.get(0);
+			strCzr = StringUtils.nullToStr(map.get("czr"));			
+		}		
+		return strCzr;
+	}
 	
 	/**
 	 * 取内部公告信息列表
