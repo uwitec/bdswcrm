@@ -3,11 +3,14 @@
 <%@ page import="com.sw.cms.util.*" %>
 <%@ page import="com.sw.cms.model.*" %>
 <%@ page import="java.util.*" %>
-
+<%@ page import="com.sw.cms.service.*" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <%
 OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
 
 List nbggList = (List)VS.findValue("nbggList");
+
+XxfbNbggService xxfbNbggService = (XxfbNbggService)VS.findValue("xxfbNbggService");
 
 List bwlList = (List)VS.findValue("bwlList");
 %>
@@ -54,10 +57,11 @@ List bwlList = (List)VS.findValue("bwlList");
 			<div class="inner">
 				<table width="100%" align="left" cellpadding="0" cellspacing="0" border="0">
 					<tr>
-						<td height="27" colspan="3" align="left" style="background-image:url(images/head_top2bg.gif)">&nbsp;&nbsp;&nbsp;&nbsp;<b>内部公告</b></td>
+						<td height="27" colspan="4" align="left" style="background-image:url(images/head_top2bg.gif)">&nbsp;&nbsp;&nbsp;&nbsp;<b>内部公告</b></td>
 					</tr>
-					<tr><td height="3" colspan="3"></td></tr>
+					<tr><td height="3" colspan="4"></td></tr>
 					<%
+					SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 					Iterator itNbgg = nbggList.iterator();
 					while(itNbgg.hasNext()){
 						XxfbNbgg info = (XxfbNbgg)itNbgg.next();
@@ -70,17 +74,20 @@ List bwlList = (List)VS.findValue("bwlList");
 						}
 						String pub_date = StringUtils.nullToStr(info.getPub_date());
 						String jsr = StaticParamDo.getRealNameById(info.getCzr());
+						String cz_date=StringUtils.nullToStr(sdf.format(info.getCz_date()));						
+						String finalhfr=StaticParamDo.getRealNameById(xxfbNbggService.getFinalhfr(id,cz_date));
 					%>				
 					<tr>
-						<td width="60% height="23">&nbsp;<A class=xxlb href="#" onclick="openNbggWin('<%=id %>');" title="<%=title %>"><%=subTitle %></A></td>
+						<td width="55% height="23">&nbsp;<A class=xxlb href="#" onclick="openNbggWin('<%=id %>');" title="<%=title %>"><%=subTitle %></A></td>
 						<td width="15%" nowrap="nowrap" height="23"><%=jsr %></td>
+						<td width="15%" nowrap="nowrap" height="23"><%=finalhfr %></td>
 						<td width="15%" nowrap="nowrap" height="23">【<%=pub_date %>】</td>
 					</tr>
 					<%
 					}
 					%>
 					<tr>
-					<TD align=right height="23" colspan="3"><a href="javascript:void(0);" onclick="parent.addtabFmMenu('公告列表','listGdNbgg.html','');" class=xxlb>更多...</a>&nbsp;&nbsp;&nbsp;</TD>	
+					<TD align=right height="23" colspan="4"><a href="javascript:void(0);" onclick="parent.addtabFmMenu('公告列表','listGdNbgg.html','');" class=xxlb>更多...</a>&nbsp;&nbsp;&nbsp;</TD>	
 					</tr>															
 				</table>
 			</div>
