@@ -2,6 +2,7 @@ package com.sw.cms.service;
 
 import java.util.List;
 
+import java.util.Map;
 import com.sw.cms.dao.XxfbNbggDAO;
 import com.sw.cms.model.Page;
 import com.sw.cms.model.XxfbNbgg;
@@ -41,6 +42,10 @@ public class XxfbNbggService {
 		xxfbNbggDao.saveNbgg(info);
 	}
 	
+	public String getFinalhfr(String id, String cz_date) 
+    {
+	   return xxfbNbggDao.getFinalhfr(id, cz_date);      	
+    }
 	
 	/**
 	 * 更新内部公告信息
