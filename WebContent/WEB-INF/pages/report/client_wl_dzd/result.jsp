@@ -54,7 +54,8 @@ con = "日期：" + start_date + "至" + end_date + "&nbsp;&nbsp; 客户名称�
 			<TD class=ReportHead rowspan="2">单据编号</TD>
 			<TD class=ReportHead rowspan="2">商品名称</TD>
 			<TD class=ReportHead rowspan="2">商品规格</TD>
-			<TD class=ReportHead rowspan="2">数量</TD>									
+			<TD class=ReportHead rowspan="2">数量</TD>	
+			<TD class=ReportHead rowspan="2">价格</TD>								
 			<TD class=ReportHead colspan="3">应收</TD>
 			<TD class=ReportHead colspan="3">应付</TD>	
 		</TR>
@@ -84,7 +85,8 @@ if(qcMap != null){
 			<TD class=ReportItem>&nbsp;</TD>
 			<TD class=ReportItem>&nbsp;</TD>
 			<TD class=ReportItem>&nbsp;</TD>
-			<TD class=ReportItem>&nbsp;</TD>				
+			<TD class=ReportItem>&nbsp;</TD>	
+			<TD class=ReportItem>&nbsp;</TD>			
 			<TD class=ReportItemMoney><%=JMath.round(ysqc,2) %>&nbsp;</TD>
 			<TD class=ReportItemMoney>&nbsp;</TD>
 			<TD class=ReportItemMoney><%=JMath.round(ysqc,2) %>&nbsp;</TD>
@@ -151,7 +153,7 @@ if(list != null && list.size()>0){
 			<TD class=ReportItem>&nbsp;</TD>
 			<TD class=ReportItem>&nbsp;</TD>
 			<TD class=ReportItem>&nbsp;</TD>
-					
+			<TD class=ReportItem>&nbsp;</TD>		
 			<TD class=ReportItemMoney><%=JMath.round(je,2) %>&nbsp;</TD>
 			<TD class=ReportItemMoney>&nbsp;</TD>
 			<TD class=ReportItemMoney><%=JMath.round(ys_ye,2) %>&nbsp;</TD>
@@ -170,7 +172,8 @@ if(list != null && list.size()>0){
 			
 			<TD class=ReportItem>&nbsp;</TD>
 			<TD class=ReportItem>&nbsp;</TD>
-			<TD class=ReportItem>&nbsp;</TD>		
+			<TD class=ReportItem>&nbsp;</TD>	
+			<TD class=ReportItem>&nbsp;</TD>	
 			<TD class=ReportItemMoney>&nbsp;</TD>
 			<TD class=ReportItemMoney><%=JMath.round(je,2) %>&nbsp;</TD>
 			<TD class=ReportItemMoney><%=JMath.round(ys_ye,2) %>&nbsp;</TD>
@@ -194,6 +197,7 @@ if(list != null && list.size()>0){
 			
 			<TD class=ReportItem>&nbsp;</TD>
 			<TD class=ReportItem>&nbsp;</TD>
+			<TD class=ReportItem>&nbsp;</TD>
 			<TD class=ReportItem>&nbsp;</TD>		
 			<TD class=ReportItemMoney>&nbsp;</TD>
 			<TD class=ReportItemMoney>&nbsp;</TD>
@@ -211,6 +215,7 @@ if(list != null && list.size()>0){
 			<TD class=ReportItem><%=xwtype %></TD>
 			<TD class=ReportItem><a href="#" onclick="openWin('<%=url %>');"><%=dj_id %></a></TD>
 			
+			<TD class=ReportItem>&nbsp;</TD>
 			<TD class=ReportItem>&nbsp;</TD>
 			<TD class=ReportItem>&nbsp;</TD>
 			<TD class=ReportItem>&nbsp;</TD>		
@@ -233,7 +238,7 @@ if(list != null && list.size()>0){
 			<TD class=ReportItem>&nbsp;</TD>
 			<TD class=ReportItem>&nbsp;</TD>
 			<TD class=ReportItem>&nbsp;</TD>
-					
+			<TD class=ReportItem>&nbsp;</TD>		
 			<TD class=ReportItemMoney><%=JMath.round(je,2) %>&nbsp;</TD>
 			<TD class=ReportItemMoney>&nbsp;</TD>
 			<TD class=ReportItemMoney><%=JMath.round(ys_ye,2) %>&nbsp;</TD>
@@ -252,6 +257,7 @@ if(list != null && list.size()>0){
 			<TD class=ReportItem><%=xwtype %></TD>
 			<TD class=ReportItem><a href="#" onclick="openWin('<%=url %>');"><%=dj_id %></a></TD>
 			
+			<TD class=ReportItem>&nbsp;</TD>
 			<TD class=ReportItem>&nbsp;</TD>
 			<TD class=ReportItem>&nbsp;</TD>
 			<TD class=ReportItem>&nbsp;</TD>		
@@ -287,7 +293,8 @@ if(list != null && list.size()>0){
 							
 							<TD class=ReportItem><%=StringUtils.nullToStr(mxMap.get("product_name")) %>&nbsp;</TD>
 							<TD class=ReportItem><%=StringUtils.nullToStr(mxMap.get("product_xh")) %>&nbsp;</TD>
-							<TD class=ReportItemMoney><%=StringUtils.nullToStr(mxMap.get("nums")) %>&nbsp;</TD>									
+							<TD class=ReportItemMoney><%=StringUtils.nullToStr(mxMap.get("nums")) %>&nbsp;</TD>	
+							<TD class=ReportItemMoney><%=StringUtils.nullToStr(mxMap.get("price")) %>&nbsp;</TD>									
 							<TD class=ReportItemMoney><%=JMath.round(xj,2) %>&nbsp;</TD>
 							<TD class=ReportItemMoney>&nbsp;</TD>
 							<TD class=ReportItemMoney>&nbsp;</TD>
@@ -307,7 +314,8 @@ if(list != null && list.size()>0){
 							
 							<TD class=ReportItem><%=StringUtils.nullToStr(mxMap.get("product_name")) %>&nbsp;</TD>
 							<TD class=ReportItem><%=StringUtils.nullToStr(mxMap.get("product_xh")) %>&nbsp;</TD>
-							<TD class=ReportItemMoney><%=StringUtils.nullToStr(mxMap.get("nums")) %>&nbsp;</TD>									
+							<TD class=ReportItemMoney><%=StringUtils.nullToStr(mxMap.get("nums")) %>&nbsp;</TD>		
+							<TD class=ReportItemMoney><%=StringUtils.nullToStr(mxMap.get("price")) %>&nbsp;</TD>								
 							<TD class=ReportItemMoney>&nbsp;</TD>
 							<TD class=ReportItemMoney>&nbsp;</TD>
 							<TD class=ReportItemMoney>&nbsp;</TD>
@@ -333,7 +341,7 @@ if(list != null && list.size()>0){
 			<TD class=ReportItem>&nbsp;</TD>
 			<TD class=ReportItem>&nbsp;</TD>
 			<TD class=ReportItem>&nbsp;</TD>
-							
+			<TD class=ReportItem>&nbsp;</TD>				
 			<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(hj_ys,2) %>&nbsp;</TD>
 			<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(hj_sk,2) %>&nbsp;</TD>
 			<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(ys_ye,2) %>&nbsp;</TD>
