@@ -163,6 +163,12 @@ if(!store_id.equals("")){
 			}else if(dj_id.indexOf("ZZ") != -1){
 				type = "组装单";
 				url = "viewZzd.html?id=";
+			}else if(dj_id.indexOf("YR") != -1){
+				type = "移库入库";
+				url = "viewYkrk.html?id=";
+			}else if(dj_id.indexOf("YC") != -1){
+				type = "移库出库";
+				url = "viewYkck.html?id=";
 			}
 			
 %>
