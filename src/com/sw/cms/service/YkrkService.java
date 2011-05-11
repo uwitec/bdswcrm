@@ -116,14 +116,29 @@ public class YkrkService
 											{
 												shkcDao.deleteShkcHaoByIdBf(ykrkProduct.getProduct_id(),ykrkProduct.getNums());
 											}
+											this.addProductKc(ykrk,ykrkProducts);
 									  }
 								   }
 								   
 							   }
 						   }
-					   }
+						   
+					   }				 	
 				}
 			 
+		}
+		
+		
+		public void addProductKc(Ykrk ykrk,List ykrkProducts)
+		{
+				for(int i=0;i<ykrkProducts.size();i++){
+				YkrkProduct ykrkProduct = (YkrkProduct)ykrkProducts.get(i);
+				if(ykrkProduct != null){
+					if(!ykrkProduct.getProduct_id().equals("") && !ykrkProduct.getProduct_name().equals("")){						
+						productKcDao.addProductKc(ykrk.getRk_store_id(), ykrkProduct.getProduct_id(), ykrkProduct.getNums());
+					}
+				}
+			}
 		}
 		
 		/**
@@ -250,11 +265,13 @@ public class YkrkService
 										{
 											shkcDao.deleteShkcHaoByIdBf(ykrkProduct.getProduct_id(),ykrkProduct.getNums());
 										}
+										this.addProductKc(ykrk,ykrkProducts);
 								  }
 							   }
 							   
 						   }
 					   }
+					   
 				   }
 			}
 		}
