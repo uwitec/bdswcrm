@@ -450,7 +450,7 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 		<td class="a2" width="35%">
 		 <input  id="brand"  type="text" mxlength="20" style="width:232px"  onblur="setValue()" value="<%=StaticParamDo.getRealNameById(thd.getTh_fzr() )%>"/> <font color="red">*</font>
          <div id="brandTip" style=" height:12px; position:absolute;left:612px;top:85px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;"  ></div>
-		    <input type="hidden" name="thd.th_fzr" id="fzr" value="<%=thd.getTh_fzr() %>"/>	
+		    <input type="hidden" name="thd.th_fzr" id="fzr" value="<%=StringUtils.nullToStr(thd.getTh_fzr()) %>"/>	
 		</td>	
 		<td class="a1">退款方式</td>
 		<td class="a2">

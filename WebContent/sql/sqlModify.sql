@@ -66,3 +66,8 @@ update fhkhd set khlx='往来单位';
 INSERT INTO `funcs` VALUES ('FC9915','货品毛利分类汇总','货品毛利分类汇总','showHpmlflHzCon.html','112.gif',11,'1','1');
 
 INSERT INTO `column_funcs` VALUES ('001003','FC9915');
+
+2011-05-23更新
+--商品交易信息中添加销售人员所在部门列，并更新数据
+ALTER TABLE `product_sale_flow` ADD COLUMN `xsry_dept` VARCHAR(45) AFTER `sfcytc`;
+update product_sale_flow a set xsry_dept=(select dept from sys_user b where b.user_id=a.xsry)
