@@ -14,6 +14,7 @@ public class ProductSaleFlow {
 	private String yw_type;    //业务类型
 	private String client_name;//客户编号（名称）
 	private String xsry;       //销售人员编号
+	private String xsry_dept;  //销售人员部门编号
 	private String cz_date;    //成交日期
 	private String product_id; //商品编号
 	private int nums;          //数量
@@ -184,6 +185,12 @@ public class ProductSaleFlow {
 	}
 	public void setSfcytc(String sfcytc) {
 		this.sfcytc = sfcytc;
+	}
+	public String getXsry_dept() {
+		return xsry_dept;
+	}
+	public void setXsry_dept(String xsryDept) {
+		xsry_dept = xsryDept;
 	}
 	
 }

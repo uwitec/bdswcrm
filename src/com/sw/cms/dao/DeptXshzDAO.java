@@ -22,7 +22,7 @@ public class DeptXshzDAO extends JdbcBaseDAO {
 	 */
 	public List getResults(String start_date,String end_date,String client_name,int dj,String product_kind,String product_name) throws Exception{
 	
-		String sql = "select b.dept,sum(nums) as nums,sum(hjje) as hjje from product_sale_flow a inner join sys_user b on b.user_id=a.xsry inner join product c on c.product_id=a.product_id where 1=1";
+		String sql = "select a.xsry_dept as dept,sum(nums) as nums,sum(hjje) as hjje from product_sale_flow a where 1=1";
 		if(!start_date.equals("")){
 			sql += " and a.cz_date>='" + start_date + "'";
 		}
@@ -52,7 +52,7 @@ public class DeptXshzDAO extends JdbcBaseDAO {
 		if(!product_name.equals("")){
 			sql += " and c.product_name like '%" + product_name + "%'";
 		}
-		sql += " group by b.dept";
+		sql += " group by a.xsry_dept";
 		
 		sql = "select y.dept_id,y.dept_name," +
 				"(select sum(x.nums) from (" + sql + ") x where x.dept like concat(y.dept_id,'%')) as nums," +
@@ -77,7 +77,7 @@ public class DeptXshzDAO extends JdbcBaseDAO {
 		String sql = "select a.xsry,b.real_name,sum(a.nums) as nums,sum(a.hjje) as hjje FROM product_sale_flow a left join sys_user b on b.user_id=a.xsry left join product c on c.product_id=a.product_id where 1=1";
 		
 		if(!dept.equals("")){
-			sql += " and b.dept like '" + dept + "%'";
+			sql += " and a.xsry_dept like '" + dept + "%'";
 		}
 		if(!start_date.equals("")){
 			sql += " and a.cz_date>='" + start_date + "'";
@@ -126,7 +126,7 @@ public class DeptXshzDAO extends JdbcBaseDAO {
 	 * @throws Exception
 	 */
 	public List getProductMxResults(String xsry,String start_date,String end_date,String client_name,String product_kind,String product_name) throws Exception{
-		String sql = "select a.product_id,c.product_name,c.product_xh,sum(a.nums) as nums,sum(a.hjje) as hjje from product_sale_flow a left join sys_user b on b.user_id=a.xsry left join product c on c.product_id=a.product_id where 1=1";
+		String sql = "select a.product_id,c.product_name,c.product_xh,sum(a.nums) as nums,sum(a.hjje) as hjje from product_sale_flow a left join product c on c.product_id=a.product_id where 1=1";
 		
 		if(!xsry.equals("")){
 			sql += " and a.xsry='" + xsry + "'";
