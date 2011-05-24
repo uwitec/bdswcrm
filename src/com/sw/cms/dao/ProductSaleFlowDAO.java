@@ -1,9 +1,12 @@
 package com.sw.cms.dao;
 
+import java.util.Map;
+
 import com.sw.cms.dao.base.BeanRowMapper;
 import com.sw.cms.dao.base.JdbcBaseDAO;
 import com.sw.cms.model.ProductSaleFlow;
 import com.sw.cms.model.SysUser;
+import com.sw.cms.util.StringUtils;
 
 /**
  * 商品销售流水处理
@@ -55,14 +58,11 @@ public class ProductSaleFlowDAO extends JdbcBaseDAO {
 	 */
 	private String getXsryDept(String xsry){
 		String dept = "";
-		String sql = "select * from sys_user where user_id='" + xsry + "'";
-		
-		SysUser user = (SysUser)this.queryForObject(sql, new BeanRowMapper(SysUser.class));
-		
-		if(user != null){
-			dept = user.getDept();
+		String sql = "select dept from sys_user where user_id='" + xsry + "'";
+		Map map = this.getJdbcTemplate().queryForMap(sql);
+		if(map != null){
+			dept = StringUtils.nullToStr(map.get("dept"));
 		}
-		
 		return dept;
 	}
 
