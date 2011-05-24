@@ -2,10 +2,8 @@ package com.sw.cms.dao;
 
 import java.util.Map;
 
-import com.sw.cms.dao.base.BeanRowMapper;
 import com.sw.cms.dao.base.JdbcBaseDAO;
 import com.sw.cms.model.ProductSaleFlow;
-import com.sw.cms.model.SysUser;
 import com.sw.cms.util.StringUtils;
 
 /**
