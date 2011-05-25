@@ -388,7 +388,7 @@ public class XsskDAO extends JdbcBaseDAO {
 		boolean is = false;
 		double skje=0;
 		
-		
+		String sqlSkje="";
 		String sql = "select count(1) as counts from xssk_desc a join xssk b on b.id=a.xssk_id  where b.state<>'已提交'  and a.xssk_id<>'" + xssk_id + "' and a.xsd_id='" + xsd_id + "' and b.client_name='" + client_name + "'";
 		int count1 = this.getJdbcTemplate().queryForInt(sql);
 		
@@ -396,16 +396,18 @@ public class XsskDAO extends JdbcBaseDAO {
 		int count2 = this.getJdbcTemplate().queryForInt(sql);
 		
 		if(xsd_id.equals("期初应收")){
-		   sql="select (ysqc-yishouje) as ysk from client_wl_init  where  client_name='" + client_name + "'";
-		   skje = this.getJdbcTemplate().queryForLong(sql);	
+			sqlSkje="select (ysqc-yishouje) as ysk from client_wl_init  where  client_name='" + client_name + "'";		   
 		   
 		}else if(xsd_id.indexOf("PZ") != -1){
-		   sql="select (pzje-jsje) as ysk from pz where id='" + xsd_id + "' and client_name='" + client_name + "'";
-		   skje = this.getJdbcTemplate().queryForLong(sql);
+			sqlSkje="select (pzje-jsje) as ysk from pz where id='" + xsd_id + "' and client_name='" + client_name + "'";		  
 		}else{
-		   sql="select (sjcjje-skje) as ysk from xsd where  id='" + xsd_id + "' and  client_name='" + client_name + "'";	
-		   skje = this.getJdbcTemplate().queryForLong(sql);
+			sqlSkje="select (sjcjje-skje) as ysk from xsd where  id='" + xsd_id + "' and  client_name='" + client_name + "'";			   
 		}
+		Map map = this.getResultMap(sqlSkje);
+		if(map!= null){
+			skje = map.get("ysk")==null?0:((Double)map.get("ysk")).doubleValue();;
+		}
+		
 		if((count1+count2) > 0){
 			is = true;
 		}

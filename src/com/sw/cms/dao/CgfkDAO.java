@@ -7,6 +7,7 @@ package com.sw.cms.dao;
  */
 
 import java.util.List;
+import java.util.Map;
 
 import com.sw.cms.dao.base.BeanRowMapper;
 import com.sw.cms.dao.base.JdbcBaseDAO;
@@ -414,7 +415,9 @@ public class CgfkDAO extends JdbcBaseDAO {
 	 */
 	public boolean isCgfkDescExist(String cgfk_id, String jhd_id,String gysbh,double bcfk){
 		boolean is = false;
+		
 		double fkje=0;
+		String sqlFkje="";
 		String sql = "select count(1) as counts from cgfk_desc a join cgfk b on b.id=a.cgfk_id where b.state<>'已支付' and a.cgfk_id<>'" + cgfk_id + "' and a.jhd_id='" + jhd_id + "' and b.gysbh='" + gysbh + "'";
 		int count1 = this.getJdbcTemplate().queryForInt(sql);
 		
@@ -422,14 +425,18 @@ public class CgfkDAO extends JdbcBaseDAO {
 		int count2 = this.getJdbcTemplate().queryForInt(sql);
 		
 		if(jhd_id.equals("期初应付")){
-		   sql="select (yfqc-yifuje) as yfje from client_wl_init where client_name='" + gysbh + "'";
-		   fkje = this.getJdbcTemplate().queryForLong(sql);	
+			sqlFkje="select (yfqc-yifuje) as yfje from client_wl_init where client_name='" + gysbh + "'";	
+			
 		}else if(jhd_id.indexOf("PZ") != -1){
-		   sql="select (pzje-jsje) as yfje from pz where id='" + jhd_id + "'  and client_name='" + gysbh + "'";
-		   fkje = this.getJdbcTemplate().queryForLong(sql);
+			sqlFkje="select (pzje-jsje) as yfje from pz where id='" + jhd_id + "'  and client_name='" + gysbh + "'";
+			
 		}else{
-		   sql="select (total-fkje) as yfje from jhd where  id='" + jhd_id + "' and  gysbh='" + gysbh + "'";	
-		   fkje = this.getJdbcTemplate().queryForLong(sql);
+			sqlFkje="select (total-fkje) as yfje from jhd where  id='" + jhd_id + "' and  gysbh='" + gysbh + "'";				
+		}
+		
+		Map map = this.getResultMap(sqlFkje);
+		if(map!= null){
+			fkje = map.get("yfje")==null?0:((Double)map.get("yfje")).doubleValue();;
 		}
 		
 		if((count1+count2) > 0){
