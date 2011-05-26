@@ -22,7 +22,7 @@ public class DeptXshzDAO extends JdbcBaseDAO {
 	 */
 	public List getResults(String start_date,String end_date,String client_name,int dj,String product_kind,String product_name) throws Exception{
 	
-		String sql = "select a.xsry_dept as dept,sum(nums) as nums,sum(hjje) as hjje from product_sale_flow a where 1=1";
+		String sql = "select a.xsry_dept as dept,sum(nums) as nums,sum(hjje) as hjje from product_sale_flow a inner join product c on a.product_id=c.product_id where 1=1";
 		if(!start_date.equals("")){
 			sql += " and a.cz_date>='" + start_date + "'";
 		}
