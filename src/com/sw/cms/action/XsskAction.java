@@ -184,6 +184,22 @@ public class XsskAction extends BaseAction {
 		return "success";
 	}
 	
+	/**
+	 * 刷新添加销售收款页面
+	 * @return
+	 */
+	public String refresh(){
+		
+		if(xssk.getClient_name()==null || xssk.getClient_name().equals("")){
+			xsskDescs = null;
+		}
+		ysfs = sjzdService.getSjzdXmxxByZdId("SJZD_FKFS");
+		posTypeList = posTypeService.getPosTypeList();
+		userList = userService.getAllEmployeeList();
+		clientsList=clientsService.getClientList("");
+		
+		return "success";
+	}
 	
 	/**
 	 * 打印销售收款

@@ -171,6 +171,21 @@ public class CgfkAction extends BaseAction {
 	
 	
 	/**
+	 * 转达到刷新应付款页面
+	 * @return
+	 */
+	public String refresh(){
+		if(cgfk.getGysbh()==null || cgfk.getGysbh().equals("")){
+			cgfkDescs = null;			
+		}
+		userList = userService.getAllEmployeeList();
+		
+		clientsList=clientsService.getClientList("");
+		return "success";
+	}
+	
+	
+	/**
 	 * 根据应付款ID删除应付款信息
 	 * @return
 	 */
