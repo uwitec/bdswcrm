@@ -132,7 +132,11 @@
         </action>   
         <action name="doSpCgfk" class="cgfkAction" method="doSp">
             <result name="success">/WEB-INF/pages/msg.jsp</result>
-        </action>             
+        </action>  
+        
+        <action name="refreshCgfk" class="cgfkAction" method="refresh">
+            <result name="success">/WEB-INF/pages/cgfk/cgfk_add.jsp</result>
+        </action>     
         <!-- 采购付款 -->
                 
         <!-- 商品及商品类别 -->
@@ -914,6 +918,14 @@
         <action name="selXsskClient" class="clientsAction" method="listSel">
             <result name="success">/WEB-INF/pages/xssk/selClient.jsp</result>
         </action>
+        
+        <action name="refreshXssk" class="xsskAction" method="refresh">
+            <result name="success">/WEB-INF/pages/xssk/xssk_add.jsp</result>
+        </action>
+        
+        <action name="refreshXsskEdit" class="xsskAction" method="refresh">
+            <result name="success">/WEB-INF/pages/xssk/xssk_edit.jsp</result>
+        </action>
         <!-- 销售收款 -->
         
         <!-- 库房调拨 -->
@@ -1083,6 +1095,8 @@
         <action name="selChProc" class="chtjAction" method="selProc">
             <result name="success">/WEB-INF/pages/chtj/selectKcProc.jsp</result>
         </action>
+        
+        
         <!-- 存货调价 -->
         
         <!-- 内部转账 -->
