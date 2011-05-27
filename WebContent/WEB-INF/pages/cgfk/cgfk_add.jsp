@@ -170,6 +170,8 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 		setClientValue();
 		
 		if(document.getElementById("client_id").value == ""){
+		document.cgfkForm.action = "refreshCgfk.html";
+		document.cgfkForm.submit();
 			return;
 		}
 		
