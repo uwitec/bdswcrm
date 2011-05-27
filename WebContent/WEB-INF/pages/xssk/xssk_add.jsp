@@ -222,10 +222,12 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 		setClientValue();
 		
 		if(document.getElementById("client_id").value == ""){
+		document.XsskForm.action = "refreshXssk.html";
+		document.XsskForm.submit();		
 			return;
 		}
 		
-		if(document.getElementById("is_ysk").checked){
+		if(document.getElementById("is_ysk").checked){		
 			return;
 		}
 		

@@ -224,6 +224,8 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 		setClientValue();
 		
 		if(document.getElementById("client_id").value == ""){
+		document.XsskForm.action = "refreshXsskEdit.html";
+		document.XsskForm.submit();
 			return;
 		}
 		
