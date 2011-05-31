@@ -4,7 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
-
+ 
 import org.springframework.jdbc.core.RowMapper;
 
 import com.sw.cms.dao.base.JdbcBaseDAO;
@@ -13,7 +13,7 @@ import com.sw.cms.model.Page;
 import com.sw.cms.model.YushouToYingshou;
 import com.sw.cms.model.YushouToYingshouDesc;
 import com.sw.cms.util.DateComFunc;
-
+ 
 /**
  * 预收转应收数据处理
  * @author liyt
@@ -196,6 +196,7 @@ public class YushouToYingshouDAO extends JdbcBaseDAO {
 	public boolean isXsskDescExist(String yw_id,String xsd_id,String client_name,double bcjs){
 		boolean is = false;
 		double skje=0;
+		
 		String sqlSkje="";
 		String sql = "select count(1) as counts from xssk_desc a join xssk b on b.id=a.xssk_id  where b.state<>'已提交'  and a.xsd_id='" + xsd_id + "' and b.client_name='" + client_name + "'";
 		int count1 = this.getJdbcTemplate().queryForInt(sql);
@@ -215,9 +216,13 @@ public class YushouToYingshouDAO extends JdbcBaseDAO {
 		}
 		Map map = this.getResultMap(sqlSkje);
 		if(map!= null){
-			skje = map.get("ysk")==null?0:((Double)map.get("ysk")).doubleValue();;
+			skje = map.get("ysk")==null?0:((Double)map.get("ysk")).doubleValue();
+			
 		}
 		
+		skje = (double)Math.round(skje*100)/100;
+
+
 		
 		if((count1+count2) > 0){
 			is = true;

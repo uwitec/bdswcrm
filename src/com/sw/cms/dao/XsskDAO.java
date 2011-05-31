@@ -407,6 +407,7 @@ public class XsskDAO extends JdbcBaseDAO {
 		if(map!= null){
 			skje = map.get("ysk")==null?0:((Double)map.get("ysk")).doubleValue();;
 		}
+		skje = (double)Math.round(skje*100)/100;
 		
 		if((count1+count2) > 0){
 			is = true;

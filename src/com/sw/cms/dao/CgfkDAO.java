@@ -439,6 +439,8 @@ public class CgfkDAO extends JdbcBaseDAO {
 			fkje = map.get("yfje")==null?0:((Double)map.get("yfje")).doubleValue();;
 		}
 		
+		fkje = (double)Math.round(fkje*100)/100;
+		
 		if((count1+count2) > 0){
 			is = true;
 		}
