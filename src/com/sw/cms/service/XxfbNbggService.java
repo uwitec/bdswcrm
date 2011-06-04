@@ -42,9 +42,9 @@ public class XxfbNbggService {
 		xxfbNbggDao.saveNbgg(info);
 	}
 	
-	public String getFinalhfr(String id, String cz_date) 
+	public String getFinalhfr(String id) 
     {
-	   return xxfbNbggDao.getFinalhfr(id, cz_date);      	
+	   return xxfbNbggDao.getFinalhfr(id);      	
     }
 	
 	/**
