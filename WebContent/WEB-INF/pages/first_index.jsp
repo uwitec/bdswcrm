@@ -75,7 +75,7 @@ List bwlList = (List)VS.findValue("bwlList");
 						String pub_date = StringUtils.nullToStr(info.getPub_date());
 						String jsr = StaticParamDo.getRealNameById(info.getCzr());
 						String cz_date=StringUtils.nullToStr(sdf.format(info.getCz_date()));						
-						String finalhfr=StaticParamDo.getRealNameById(xxfbNbggService.getFinalhfr(id,cz_date));
+						String finalhfr=StaticParamDo.getRealNameById(xxfbNbggService.getFinalhfr(id));
 					%>				
 					<tr>
 						<td width="55% height="23">&nbsp;<A class=xxlb href="#" onclick="openNbggWin('<%=id %>');" title="<%=title %>"><%=subTitle %></A></td>
