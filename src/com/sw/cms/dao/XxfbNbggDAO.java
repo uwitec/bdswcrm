@@ -29,9 +29,9 @@ public class XxfbNbggDAO extends JdbcBaseDAO {
 	}
 	
 	
-	public String getFinalhfr(String id,String cz_date)
+	public String getFinalhfr(String id)
 	{		
-		String sql="select * from xxfb_nbgg where parent_id='"+id+"' and cz_date='"+cz_date+"'";
+		String sql="select * from xxfb_nbgg where parent_id='"+id+"' order by cz_date desc";
 		String strCzr ="";
 		List list = this.getJdbcTemplate().queryForList(sql);
 		if(list != null && list.size()>0){
