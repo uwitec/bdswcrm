@@ -50,9 +50,26 @@ if(!product_name.equals("")){
 		document.refreshForm.action = "getDeptxsMxResult.html?dept=" + dept;
 		document.refreshForm.submit();
 	}
+	function onloadTotal(){
+		var objs = document.getElementsByName("fz_vl");
+
+		var hjml_vl = parseFloat(document.getElementById("fm").value);
+		
+		for(var i=0;i<objs.length;i++){
+			var objId = objs[i].id;
+			var arryTemp = objId.split("_");
+			
+			var zbId = "zb_" + arryTemp[1];
+			try{
+				document.getElementById(zbId).innerText = ((parseFloat(document.getElementById(objId).value)/hjml_vl*100).toFixed(2)) + "%";
+			}catch(e){
+				document.getElementById(zbId).innerText = "0.00%";
+			}
+		}
+	}
 </script>
 </head>
-<body align="center" >
+<body align="center" onload="onloadTotal();">
 <form name="refreshForm" action="getDeptxsResult.html" method="post">
 <input type="hidden" name="client_name" value="<%=client_name %>">
 <input type="hidden" name="start_date" value="<%=start_date %>">
@@ -78,7 +95,8 @@ if(!product_name.equals("")){
 		<TR>
 			<TD class=ReportHead>部门名称</TD>
 			<TD class=ReportHead>数量</TD>
-			<TD class=ReportHead>金额</TD>		
+			<TD class=ReportHead>金额</TD>	
+			<TD class=ReportHead>占比</TD>		
 		</TR>
 	</THEAD>
 	<TBODY>
@@ -123,7 +141,8 @@ if(resultList != null && resultList.size()>0){
 		<TR style="<%=stl %>">
 			<TD class=ReportItem><%=strBlank %><a href="javascript:openMx('<%=dept_id %>');"><%=dept_name %></a>&nbsp;</TD>
 			<TD class=ReportItemMoney><%=nums %>&nbsp;</TD>
-			<TD class=ReportItemMoney><%=JMath.round(je,2) %>&nbsp;</TD>
+			<TD class=ReportItemMoney><input type="hidden" name="fz_vl" id="fz_<%=dept_id %>" value="<%=je %>"><%=JMath.round(je,2) %>&nbsp;</TD>
+			<TD class=ReportItemMoney><span id="zb_<%=dept_id %>"></span>&nbsp;</TD>	
 		</TR>
 	
 <%
@@ -134,7 +153,8 @@ if(resultList != null && resultList.size()>0){
 		<TR>
 			<TD class=ReportItemXh style="font-weight:bold">合计</TD>
 			<TD class=ReportItemMoney style="font-weight:bold"><%=hj_nums %>&nbsp;</TD>
-			<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(hj_je,2) %>&nbsp;</TD>
+			<TD class=ReportItemMoney style="font-weight:bold"><input type="hidden" name="fm" id="fm" value="<%=hj_je %>"><%=JMath.round(hj_je,2) %>&nbsp;</TD>
+			<TD class=ReportItemMoney style="font-weight:bold">--&nbsp;</TD>
 		</TR>
 		
 	</TBODY>

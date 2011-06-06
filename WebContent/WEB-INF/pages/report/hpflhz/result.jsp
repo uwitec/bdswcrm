@@ -51,9 +51,26 @@ if(!client_name.equals("")){
 	function openMx(product_kind,start_date,end_date,client_name,xsry,dept){
 		location.href="getHpflMxResult.html?product_kind=" + product_kind + "&start_date=" + start_date + "&end_date=" + end_date + "&client_name=" + client_name + "&xsry=" + xsry + "&dept=" + dept;
 	}
+	function onloadTotal(){
+		var objs = document.getElementsByName("fz_vl");
+
+		var hjml_vl = parseFloat(document.getElementById("fm").value);
+		
+		for(var i=0;i<objs.length;i++){
+			var objId = objs[i].id;
+			var arryTemp = objId.split("_");
+			
+			var zbId = "zb_" + arryTemp[1];
+			try{
+				document.getElementById(zbId).innerText = ((parseFloat(document.getElementById(objId).value)/hjml_vl*100).toFixed(2)) + "%";
+			}catch(e){
+				document.getElementById(zbId).innerText = "0.00%";
+			}
+		}
+	}
 </script>
 </head>
-<body align="center" >
+<body align="center" onload="onloadTotal();">
 <form name="refreshForm" action="getHpflHzResult.html" method="post">
 <input type="hidden" name="client_name" value="<%=client_name %>">
 <input type="hidden" name="start_date" value="<%=start_date %>">
@@ -86,7 +103,8 @@ if(xwType != null && xwType.length > 0){
 		<TR>
 			<TD class=ReportHead>商品类别名称</TD>
 			<TD class=ReportHead>数量</TD>
-			<TD class=ReportHead>金额</TD>		
+			<TD class=ReportHead>金额</TD>
+			<TD class=ReportHead>占比</TD>			
 		</TR>
 	</THEAD>
 	<TBODY>
@@ -131,7 +149,8 @@ if(resultList != null && resultList.size()>0){
 		<TR style="<%=stl %>">
 			<TD class=ReportItem><%=strBlank %><a href="javascript:openMx('<%=id %>','<%=start_date %>','<%=end_date %>','<%=client_name %>','<%=xsry %>','<%=dept %>');"><%=name %></a>&nbsp;</TD>
 			<TD class=ReportItemMoney><%=nums %>&nbsp;</TD>
-			<TD class=ReportItemMoney><%=JMath.round(je,2) %>&nbsp;</TD>
+			<TD class=ReportItemMoney><input type="hidden" name="fz_vl" id="fz_<%=id %>" value="<%=je %>"><%=JMath.round(je,2) %>&nbsp;</TD>
+			<TD class=ReportItemMoney><span id="zb_<%=id %>"></span>&nbsp;</TD>
 		</TR>
 	
 <%
@@ -142,7 +161,8 @@ if(resultList != null && resultList.size()>0){
 		<TR>
 			<TD class=ReportItemXh style="font-weight:bold">合计</TD>
 			<TD class=ReportItemMoney style="font-weight:bold"><%=hj_nums %>&nbsp;</TD>
-			<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(hj_je,2) %>&nbsp;</TD>
+			<TD class=ReportItemMoney style="font-weight:bold"><input type="hidden" name="fm" id="fm" value="<%=hj_je %>"><%=JMath.round(hj_je,2) %>&nbsp;</TD>
+			<TD class=ReportItemMoney style="font-weight:bold">--&nbsp;</TD>
 		</TR>
 		
 	</TBODY>

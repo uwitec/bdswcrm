@@ -15,6 +15,9 @@ String account_id = StringUtils.nullToStr(request.getParameter("account_id"));
 String account_type = StringUtils.nullToStr(request.getParameter("account_type"));
 
 List accountList = cashBankService.getAccountList(account_id,account_type);
+Map qcMap = cashBankService.getBankQcByBatch(start_date);
+Map jyzcMap = cashBankService.getAccountSeqBatch(start_date,end_date,0);
+Map jysrMap = cashBankService.getAccountSeqBatch(start_date,end_date,1);
 
 String conStr = "时间：" + start_date + " 至 " + end_date;
 if(!account_id.equals("")){
@@ -87,29 +90,15 @@ if(accountList != null && accountList.size()>0){
 		double zcje = 0;   //支出金额
 		double srje = 0;   //收入金额
 		
-		Map qc_map = cashBankService.getCashBankQc(start_date,id);
-		if(qc_map != null){
-			qc_je = qc_map.get("qcje")==null?0:((Double)qc_map.get("qcje")).doubleValue();
-		}
-		
-		List mxList = cashBankService.getAccountSeqList(id,start_date,end_date);		
-		if(mxList != null && mxList.size()>0){
-			for(int k=0;k<mxList.size();k++){
-				Map mxMap = (Map)mxList.get(k);					
-				
-				double jyje = mxMap.get("jyje")==null?0:((Double)mxMap.get("jyje")).doubleValue(); //交易金额
-				
-				if(jyje > 0){
-					srje += jyje;
-				}else{
-					zcje += (0-jyje);
-				}
-			}
-		}
+		qc_je = qcMap.get(id)==null?0:((Double)qcMap.get(id)).doubleValue();
+		srje =  jysrMap.get(id)==null?0:((Double)jysrMap.get(id)).doubleValue();
+		zcje =  0-(jyzcMap.get(id)==null?0:((Double)jyzcMap.get(id)).doubleValue());
+
 		hj_qc_je += qc_je;
 		hj_zcje += zcje;
 		hj_srje += srje;
 		double ye = qc_je + srje - zcje;  //余额
+		
 		hj_ye += ye;
 %>
 		<TR>
