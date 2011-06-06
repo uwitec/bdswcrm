@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 import com.opensymphony.webwork.ServletActionContext;
 import com.opensymphony.xwork.ActionInvocation;
 import com.opensymphony.xwork.interceptor.Interceptor;
+import com.sw.cms.model.LoginInfo;
 
 public class SecurityInterceptor implements Interceptor {
 
@@ -26,7 +27,7 @@ public class SecurityInterceptor implements Interceptor {
 		
 		//当前请求的action名称
 		String actionName = actionInvocation.getInvocationContext().getName();
-
+		
 		HttpServletRequest request = ServletActionContext.getRequest();   
         HttpSession session = request.getSession(); 
         
@@ -39,7 +40,10 @@ public class SecurityInterceptor implements Interceptor {
 	        	
 	        	return "error";
 	        }
+	        LoginInfo info = (LoginInfo)session.getAttribute("LOGINUSER");
+	        log.info("当前用户---" + info.getReal_name() +"---访问页面---" + actionName + ".html");
         }
+
 		return actionInvocation.invoke();
 	}
 
