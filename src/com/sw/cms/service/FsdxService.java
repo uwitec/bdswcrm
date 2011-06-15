@@ -7,12 +7,10 @@ import com.sw.cms.dao.FsdxDAO;
 import com.sw.cms.model.Flinkman;
 import com.sw.cms.model.Flx;
 import com.sw.cms.model.Page;
-import com.sw.cms.sendsms.*;
 
 public class FsdxService {
 	private FsdxDAO fsdxDao;
 
-	private SMSEngine engine;
 
 	public List getLxList() {
 		return fsdxDao.getLxList();
@@ -61,7 +59,7 @@ public class FsdxService {
 	 * @param msg   ПыПўМе
 	 */
 	public List sendSMS(String sendLinkman, String msg,String user_id) {
-		return engine.sendMsg(sendLinkman, msg,user_id);
+		return null;
 
 	}
 
@@ -73,11 +71,4 @@ public class FsdxService {
 		this.fsdxDao = fsdxDao;
 	}
 
-	public SMSEngine getEngine() {
-		return engine;
-	}
-
-	public void setEngine(SMSEngine engine) {
-		this.engine = engine;
-	}
 }
