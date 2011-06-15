@@ -141,7 +141,7 @@
 					ALTER TABLE `product_sale_flow` ADD COLUMN `xsry_dept` VARCHAR(45) AFTER `sfcytc`;
 					update product_sale_flow a set xsry_dept=(select dept from sys_user b where b.user_id=a.xsry)	 
 		 
-　　4、对应SVN版本号：785
+　　4、对应SVN版本号：934
 
 　　5、部署进度跟踪
 　　　  -------------------------------------------------------------------------------------------------
