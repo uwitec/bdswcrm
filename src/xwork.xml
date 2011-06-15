@@ -133,7 +133,6 @@
         <action name="doSpCgfk" class="cgfkAction" method="doSp">
             <result name="success">/WEB-INF/pages/msg.jsp</result>
         </action>  
-        
         <action name="refreshCgfk" class="cgfkAction" method="refresh">
             <result name="success">/WEB-INF/pages/cgfk/cgfk_add.jsp</result>
         </action>     
