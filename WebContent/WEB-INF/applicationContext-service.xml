@@ -499,9 +499,6 @@
     <!-- 月度利润 -->     
     
     <!-- 发送短信 -->
-    <bean id="engine"  class="com.sw.cms.sendsms.SMSEngine" factory-method="getSMSEngine" autowire="byName"/>  
-    
-    <!-- 发送短信 -->
     <bean id="fsdxService" parent="baseTransaction">
       <property name="target">
           <bean class="com.sw.cms.service.FsdxService" autowire="byName"/>
