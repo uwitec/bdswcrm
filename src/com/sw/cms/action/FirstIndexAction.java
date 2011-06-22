@@ -9,6 +9,8 @@ import com.sw.cms.model.LoginInfo;
 import com.sw.cms.model.Page;
 import com.sw.cms.service.BwlService;
 import com.sw.cms.service.CgfkService;
+import com.sw.cms.service.ClientWlStatService;
+import com.sw.cms.service.ClientsService;
 import com.sw.cms.service.FirstIndexService;
 import com.sw.cms.service.FysqService;
 import com.sw.cms.service.KfdbService;
@@ -17,6 +19,7 @@ import com.sw.cms.service.MenuService;
 import com.sw.cms.service.UserService;
 import com.sw.cms.service.XsdService;
 import com.sw.cms.service.XxfbNbggService;
+import com.sw.cms.service.ClientWlStatService;
 import com.sw.cms.util.Constant;
 import com.sw.cms.util.StringUtils;
 
@@ -32,7 +35,10 @@ public class FirstIndexAction extends BaseAction {
 	private CgfkService cgfkService;
 	private FysqService fysqService;
 	private KfdbService kfdbService;
-
+	private ClientsService clientsService;
+	
+	private ClientWlStatService clientWlStatService;
+	
 	private List nbggList = new ArrayList();
 	private List bwlList = new ArrayList();
 	private List dckList = new ArrayList();
@@ -42,6 +48,7 @@ public class FirstIndexAction extends BaseAction {
 	private List dspCgfkList = new ArrayList();
 	private List dspFysqList = new ArrayList();
 	private List confirmKfdbList = new ArrayList();
+	private List clientList = new ArrayList();
 	
 	private String isCkdRight = "0"; 
 	private String isRkdRight = "0";
@@ -50,16 +57,15 @@ public class FirstIndexAction extends BaseAction {
 	private String isCgfkSpRight = "0";
 	private String isFysqSpRight = "0";
 	private int curPage = 1;
-	
-	
+		
 	/**
 	 * 首页显示项
 	 * @return
 	 */
 	public String listMain(){
-		
+		String user_id ="";
 		LoginInfo info = (LoginInfo)getSession().getAttribute("LOGINUSER");
-		String user_id = info.getUser_id();
+		user_id = info.getUser_id();
 
 		//内部公告
 		Page page = xxfbNbggService.getNbggList(1, 10);
@@ -69,6 +75,9 @@ public class FirstIndexAction extends BaseAction {
 		Page bwlpage = bwlService.getBwlShareList(curPage, 10,user_id);
 		bwlList = bwlpage.getResults();
 
+		//往来单位列表
+				
+		clientList = clientsService.getSyClietsById(user_id);
 		
 		return "success";
 	}
@@ -263,13 +272,13 @@ public class FirstIndexAction extends BaseAction {
 	}
 
 
-	public UserService getUserService() {
-		return userService;
+	public ClientsService getClientsService() {
+		return clientsService;
 	}
 
 
-	public void setUserService(UserService userService) {
-		this.userService = userService;
+	public void setClientsService(ClientsService clientsService) {
+		this.clientsService = clientsService;
 	}
 
 
@@ -311,7 +320,16 @@ public class FirstIndexAction extends BaseAction {
 		this.cgfkService = cgfkService;
 	}
 
+	public UserService getUserService() {
+		return userService;
+	}
 
+
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
+	
+	
 	public List getDckList() {
 		return dckList;
 	}
@@ -478,4 +496,21 @@ public class FirstIndexAction extends BaseAction {
 	public void setKfdbService(KfdbService kfdbService) {
 		this.kfdbService = kfdbService;
 	}
+	
+	public List getClientList() {
+		return clientList;
+	}
+
+	public void setClientList(List clientList) {
+		this.clientList = clientList;
+	}
+	
+	public ClientWlStatService getClientWlStatService() {
+		return clientWlStatService;
+	}
+
+	public void setClientWlStatService(ClientWlStatService clientWlStatService) {
+		this.clientWlStatService = clientWlStatService;
+	}	
+	
 }
