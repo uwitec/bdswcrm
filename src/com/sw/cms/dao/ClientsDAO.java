@@ -66,6 +66,18 @@ public class ClientsDAO extends JdbcBaseDAO {
 		return this.getResultList(sql);
 	}
 	
+	/**
+	 * 首页客户列表
+	 * @param client_id
+	 * @return
+	 */
+	public List getSyClietsById(String user_id){
+		String sql ="";
+		sql="select a.id,a.name,b.real_name as khjl from clients a left join sys_user b on b.client_name=a.khjl where 1=1 and b.user_id='"+user_id+"' ";
+		
+		return this.getResultList(sql);
+	}
+	
 	
 	/**
 	 * 根据客户提示框输入的提示信息查询相关客户信息
