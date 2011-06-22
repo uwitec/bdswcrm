@@ -63,6 +63,15 @@ public class ClientsService {
 	
 	
 	/**
+	 * 首页客户列表
+	 * @param client_id
+	 * @return
+	 */
+	public List getSyClietsById(String user_id){
+		return clientsDao.getSyClietsById(user_id);
+	}
+	
+	/**
 	 * 返回客户列表包括应付款信息(带分页)
 	 * 
 	 * @param con
