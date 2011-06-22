@@ -13,6 +13,9 @@ List nbggList = (List)VS.findValue("nbggList");
 XxfbNbggService xxfbNbggService = (XxfbNbggService)VS.findValue("xxfbNbggService");
 
 List bwlList = (List)VS.findValue("bwlList");
+List clientList = (List)VS.findValue("clientList");
+
+ClientWlStatService clientWlStatService = (ClientWlStatService)VS.findValue("clientWlStatService");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -20,6 +23,8 @@ List bwlList = (List)VS.findValue("bwlList");
 <title>首页</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="jquery/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="js/switchCss.js"></script>
 <style type="text/css">
 .inner{
 	width:48%;
@@ -125,6 +130,90 @@ List bwlList = (List)VS.findValue("bwlList");
 					</tr>															
 				</table>
 			</div>
+			
+			<div class="inner">
+				<table width="100%" align="left" cellpadding="0" cellspacing="0">
+					<tr>
+						<td height="27" colspan="7" align="left" style="background-image:url(images/head_top2bg.gif)">&nbsp;&nbsp;&nbsp;&nbsp;<b>客户应收汇总</b></td>								
+					</tr>
+					<tr>
+											 
+			           <TD width="55% height="23">客户名称</TD>
+			           <TD width="15%" nowrap="nowrap" height="23">当前应收款</TD>			           
+			           <TD width="15%" nowrap="nowrap" height="23">超期应收款</font></TD>			           
+			           <TD width="15%" nowrap="nowrap" height="23">最长超期天数</TD>
+		           
+					</tr>
+					<tr><td height="7"></td></tr>
+					<%
+					double hj_dqys = 0;
+                    double hj_wdqysk = 0;
+                    double hj_cqysk = 0;
+                    double hj_ysk = 0;
+                    double hj_qtysk = 0;
+
+                    Map qcMap = clientWlStatService.getClientQc(DateComFunc.getToday());
+                    Map infoMap = clientWlStatService.getClientWlInfo(DateComFunc.getToday(),DateComFunc.getToday(),"");
+                    Map maxCqtsMap = clientWlStatService.getClientMaxCqts("");  //最长超期天数
+                    Map wdqyskMap = clientWlStatService.getClientWdqysk("");    //未到期应收款
+                    Map cqyskMap = clientWlStatService.getClientCqysk("");      //超期应收款 
+
+                    Map yskMap = clientWlStatService.getClientYushouk("");      //预收款
+                    Map qcjsMap = clientWlStatService.getClientQcjsye("");      //期初结算
+                    Map tzjsMap = clientWlStatService.getClientTzjsye("");      //调账（应收）结算
+
+                    if(clientList != null && clientList.size() > 0){
+	                for(int i=0;i<clientList.size();i++){
+		            Map map = (Map)clientList.get(i);
+		
+		            String client_id = StringUtils.nullToStr(map.get("id"));
+		            String client_name = StringUtils.nullToStr(map.get("name"));		            
+		            
+		            double qcs = qcMap.get(client_id+"应收")==null?0:((Double)qcMap.get(client_id+"应收")).doubleValue();  //期初数		
+		            double bqfs = infoMap.get(client_id+"应收发生")==null?0:((Double)infoMap.get(client_id+"应收发生")).doubleValue();  //本期发生
+		            double ysje = infoMap.get(client_id+"已收发生")==null?0:((Double)infoMap.get(client_id+"已收发生")).doubleValue();  //本期已收
+		            String strCqts = StringUtils.nullToStr(maxCqtsMap.get(client_id));
+		            int cqts = 0; //最长超期天数
+		            if(!strCqts.equals("")){
+			            cqts = new Integer(strCqts).intValue();
+		            }
+		            double wdqysk = wdqyskMap.get(client_id)==null?0:((Double)wdqyskMap.get(client_id)).doubleValue();  //未到期应收款 
+		            double cqysk = cqyskMap.get(client_id)==null?0:((Double)cqyskMap.get(client_id)).doubleValue();  //超期应收款
+		
+		            double ysk = yskMap.get(client_id)==null?0:((Double)yskMap.get(client_id)).doubleValue();  //预收款
+		            double qtysk = (qcjsMap.get(client_id)==null?0:((Double)qcjsMap.get(client_id)).doubleValue()) + (tzjsMap.get(client_id)==null?0:((Double)tzjsMap.get(client_id)).doubleValue()); //其它应收款 
+
+		            double dqys = qcs + bqfs - ysje;  //当前应收
+		 	        
+			        hj_dqys += dqys;
+			        hj_wdqysk += wdqysk;
+			        hj_cqysk += cqysk;
+			        hj_ysk += ysk;
+			        hj_qtysk += qtysk;
+			
+%>			
+                  <TR>					 
+			           <TD width="55% height="23"><%=client_name %></TD>
+			           <TD width="15%" nowrap="nowrap" height="23"><%=JMath.round(dqys,2) %></TD>			           
+			           <TD width="15%" nowrap="nowrap" height="23"><%=JMath.round(cqysk,2) %></font></TD>			           
+			           <TD width="15%" nowrap="nowrap" height="23"><%=cqts %></TD>
+		            </TR>					
+
+<%		
+		}
+	}
+	
+%>	
+                   <TR>
+		               <TD width="55% height="23">合计（金额）</TD>
+		               <TD width="15%" nowrap="nowrap" height="23"><%=JMath.round(hj_dqys,2) %></TD>
+		               <TD width="15%" nowrap="nowrap" height="23"><%=JMath.round(hj_cqysk,2) %></font></TD>		            
+		               <TD width="15%" nowrap="nowrap" height="23">--</TD>
+	                </TR>
+                    																			
+				</table>
+			</div>
+			
 		</td>		
 	</tr>
 </table>
