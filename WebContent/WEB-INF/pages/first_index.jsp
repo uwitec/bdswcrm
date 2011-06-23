@@ -185,6 +185,16 @@ ClientWlStatService clientWlStatService = (ClientWlStatService)VS.findValue("cli
 
 		            double dqys = qcs + bqfs - ysje;  //当前应收
 		 	        
+		 	        
+		            boolean bl = false;		 
+			        if(dqys !=0){
+			 	        bl = true;
+			        }
+		          else{
+			          bl = false;
+		           }
+		 	        	 	        
+		 	       if(bl){ 
 			        hj_dqys += dqys;
 			        hj_wdqysk += wdqysk;
 			        hj_cqysk += cqysk;
@@ -202,6 +212,8 @@ ClientWlStatService clientWlStatService = (ClientWlStatService)VS.findValue("cli
 <%		
 		}
 	}
+	
+}
 	
 %>	
                    <TR>
