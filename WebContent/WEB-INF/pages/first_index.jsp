@@ -138,9 +138,10 @@ ClientWlStatService clientWlStatService = (ClientWlStatService)VS.findValue("cli
 					</tr>
 					<tr>
 											 
-			           <TD width="55% height="23">客户名称</TD>
-			           <TD width="15%" nowrap="nowrap" height="23">当前应收款</TD>			           
-			           <TD width="15%" nowrap="nowrap" height="23">超期应收款</font></TD>			           
+			           <TD width="45% height="23">客户名称</TD>
+			           <TD width="14%" nowrap="nowrap" height="23">当前应收款</TD>			           
+			           <TD width="14%" nowrap="nowrap" height="23">超期应收款</TD>	
+			           <TD width="12%" nowrap="nowrap" height="23">预收款</TD>			           
 			           <TD width="15%" nowrap="nowrap" height="23">最长超期天数</TD>
 		           
 					</tr>
@@ -187,7 +188,7 @@ ClientWlStatService clientWlStatService = (ClientWlStatService)VS.findValue("cli
 		 	        
 		 	        
 		            boolean bl = false;		 
-			        if(dqys !=0){
+			        if(dqys !=0 || cqysk!=0 || ysk!=0) {
 			 	        bl = true;
 			        }
 		          else{
@@ -203,9 +204,10 @@ ClientWlStatService clientWlStatService = (ClientWlStatService)VS.findValue("cli
 			
 %>			
                   <TR>					 
-			           <TD width="55% height="23"><%=client_name %></TD>
-			           <TD width="15%" nowrap="nowrap" height="23"><%=JMath.round(dqys,2) %></TD>			           
-			           <TD width="15%" nowrap="nowrap" height="23"><%=JMath.round(cqysk,2) %></font></TD>			           
+			           <TD width="45% height="23"><%=client_name %></TD>
+			           <TD width="14%" nowrap="nowrap" height="23"><%=JMath.round(dqys,2) %></TD>			           
+			           <TD width="14%" nowrap="nowrap" height="23"><%=JMath.round(cqysk,2) %></TD>	
+			           <TD width="12%" nowrap="nowrap" height="23"><%=JMath.round(ysk,2) %></TD>			           
 			           <TD width="15%" nowrap="nowrap" height="23"><%=cqts %></TD>
 		            </TR>					
 
@@ -217,9 +219,10 @@ ClientWlStatService clientWlStatService = (ClientWlStatService)VS.findValue("cli
 	
 %>	
                    <TR>
-		               <TD width="55% height="23">合计（金额）</TD>
-		               <TD width="15%" nowrap="nowrap" height="23"><%=JMath.round(hj_dqys,2) %></TD>
-		               <TD width="15%" nowrap="nowrap" height="23"><%=JMath.round(hj_cqysk,2) %></font></TD>		            
+		               <TD width="45% height="23">合计（金额）</TD>
+		               <TD width="14%" nowrap="nowrap" height="23"><%=JMath.round(hj_dqys,2) %></TD>
+		               <TD width="14%" nowrap="nowrap" height="23"><%=JMath.round(hj_cqysk,2) %></TD>
+		               <TD width="12%" nowrap="nowrap" height="23"><%=JMath.round(hj_ysk,2) %></TD>		            
 		               <TD width="15%" nowrap="nowrap" height="23">--</TD>
 	                </TR>
                     																			
