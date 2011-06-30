@@ -58,7 +58,7 @@
 				<ww:elseif test="type==3">固定扣款率(封顶)</ww:elseif>
 			</td>
 			<td align="right"><ww:property value="%{getText('global.format.money',{mbfy})}" />&nbsp;</td>
-			<td align="right"><ww:property value="%{getText('global.format.money',{fl})}" />&nbsp;</td>
+			<td align="right"><ww:property value="%{getText('global.format.money1',{fl})}" />&nbsp;</td>
 			<td align="right"><ww:property value="%{getText('global.format.money',{fdfy})}" />&nbsp;</td>
 			<td><ww:property value="%{getAccountName(account_id)}" /></td>	
 			<td>
