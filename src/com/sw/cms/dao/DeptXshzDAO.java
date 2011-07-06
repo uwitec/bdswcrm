@@ -138,7 +138,7 @@ public class DeptXshzDAO extends JdbcBaseDAO {
 			sql += " and a.cz_date<='" + end_date + "'";
 		}
 		if(!client_name.equals("")){
-			sql += " a.client_name='" + client_name + "'";
+			sql += " and a.client_name='" + client_name + "'";
 		}
 		
 		//处理商品类别
