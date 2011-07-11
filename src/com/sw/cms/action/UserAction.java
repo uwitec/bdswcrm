@@ -48,6 +48,7 @@ public class UserAction extends BaseAction {
 	private List userList = new ArrayList();
 	private List employList = new ArrayList();
 	private Map spRightMap;
+	private Map qzxlhRightMap;
 	
 	private String user_name;
 	private String curPass;
@@ -606,6 +607,42 @@ public class UserAction extends BaseAction {
 	
 	
 	/**
+	 * 打开强制序列号设置页面
+	 * @return
+	 */
+	public String openQzxlhRight(){
+		try{
+			qzxlhRightMap = userService.getQzxlhRight();
+			
+			if(qzxlhRightMap != null){
+				sp_flag = StringUtils.nullToStr(qzxlhRightMap.get("sp_flag"));				
+			}
+			return SUCCESS;
+		}catch(Exception e){
+			log.error("打开强制序列号设置页面错误码，错误原因：" + e.getMessage());
+			e.printStackTrace();
+			return ERROR;
+		}
+	}
+	
+	
+	/**
+	 * 保存强制序列号设置相关信息
+	 * @return
+	 */
+	public String saveQzxlhRight(){
+		try{
+			userService.saveQzxlhRight(sp_flag);
+			this.setMsg("保存强制序列号设置成功！");
+			return SUCCESS;
+		}catch(Exception e){
+			log.error("保存强制序列号设置相关信息错误，错误原因：" + e.getMessage());
+			e.printStackTrace();
+			return ERROR;
+		}
+	}
+	
+	/**
 	 * 查询ajax经手人提示信息
 	 * @return
 	 */
@@ -949,4 +986,13 @@ public class UserAction extends BaseAction {
 		this.spRightMap = spRightMap;
 	}
 	
+	
+	public Map getQzxlhRightMap() {
+		return qzxlhRightMap;
+	}
+
+
+	public void setQzxlhRightMap(Map qzxlhRightMap) {
+		this.qzxlhRightMap = qzxlhRightMap;
+	}
 }
