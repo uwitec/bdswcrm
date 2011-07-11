@@ -656,6 +656,29 @@ public class UserDAO extends JdbcBaseDAO {
 	
 	
 	/**
+	 * 获取强制序列号相关信息
+	 * @return
+	 */
+	public Map getQzxlhRight(){
+		String sql = "select * from qzxlh_right ";
+		return this.getResultMap(sql);
+	}
+	
+	/**
+	 * 保存强制序列号相关信息
+	 * @param sp_flag
+	 * 
+	 */
+	public void saveQzxlhRight(String sp_flag){
+		String sql = "delete from qzxlh_right";
+		this.getJdbcTemplate().execute(sql);
+		
+		sql = "insert into qzxlh_right(sp_flag) values('" + sp_flag + "')";
+		this.getJdbcTemplate().execute(sql);
+	}
+	
+	
+	/**
 	 * 包装对象
 	 * 
 	 * @author liyt
