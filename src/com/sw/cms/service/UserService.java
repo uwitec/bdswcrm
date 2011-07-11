@@ -341,6 +341,14 @@ public class UserService {
 		return roleDao.getSpRight(yw_type);
 	}
 	
+	/**
+	 * 获取强制序列号相关信息
+	 * @return
+	 */
+	public Map getQzxlhRight(){
+		return userDao.getQzxlhRight();
+	}
+	
 	
 	/**
 	 * 保存审批相关信息
@@ -359,6 +367,16 @@ public class UserService {
 			}
 		}
 		roleDao.saveSpRight(sp_flag, strRole, yw_type);
+	}
+	
+	/**
+	 * 保存强制序列号相关信息
+	 * @param sp_flag
+	 * @param role_id
+	 */
+	public void saveQzxlhRight(String sp_flag){
+		
+		userDao.saveQzxlhRight(sp_flag);
 	}
 	
 	/**
