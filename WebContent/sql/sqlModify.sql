@@ -71,3 +71,18 @@ INSERT INTO `column_funcs` VALUES ('001003','FC9915');
 --商品交易信息中添加销售人员所在部门列，并更新数据
 ALTER TABLE `product_sale_flow` ADD COLUMN `xsry_dept` VARCHAR(45) AFTER `sfcytc`;
 update product_sale_flow a set xsry_dept=(select dept from sys_user b where b.user_id=a.xsry)
+
+2011-7-11更新
+INSERT INTO `funcs` VALUES ('FC9916','强制序列号设置','强制序列号设置','openQzxlhRight.html','111.gif',10,'1','10');
+
+INSERT INTO `column_funcs` VALUES ('009003','FC9916');
+
+INSERT INTO `role_func` VALUES ('RL00000001','FC9916');
+
+---强制序列号设置
+DROP TABLE IF EXISTS `qzxlh_right`;
+CREATE TABLE `qzxlh_right` (
+  `sp_flag` varchar(8) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `qzxlh_right` VALUES ('01');
