@@ -3049,5 +3049,16 @@
             <result name="success">/WEB-INF/pages/report/hpmlflhz/result_mx.jsp</result>
         </action>      
         <!-- 货品销售毛利分类汇总 -->  
+        
+        <!-- 强制序列号设定 -->
+        <action name="openQzxlhRight" class="userAction" method="openQzxlhRight">
+            <result name="success">/WEB-INF/pages/sp_right/qzxlh_right_set.jsp</result>
+        </action>
+        <action name="saveQzxlhRight" class="userAction" method="saveQzxlhRight">
+            <result name="cancel" type="redirect">openQzxlhRight</result>
+            <result name="input" type="dispatcher">/WEB-INF/pages/sp_right/qzxlh_right_set.jsp</result>
+            <result name="success" type="chain">openQzxlhRight</result>
+        </action>        
+        <!-- 强制序列号设定 --> 
     </package>
 </xwork>
