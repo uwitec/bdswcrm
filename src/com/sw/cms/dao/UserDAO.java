@@ -665,6 +665,24 @@ public class UserDAO extends JdbcBaseDAO {
 	}
 	
 	/**
+	 * 获取强制序列号的标志
+	 * 00:未强制序列号；01:强制序列号
+	 * @return
+	 */
+	public String getQzxlh(){		
+		String flag = "01";
+		String sql = "select sp_flag from qzxlh_right";
+		List list = this.getResultList(sql);
+		
+		if(list.size() > 0){
+			Map map = (Map)list.get(0);
+			flag = (String)map.get("sp_flag");
+		}
+		
+		return flag;
+	}
+	
+	/**
 	 * 保存强制序列号相关信息
 	 * @param sp_flag
 	 * 
