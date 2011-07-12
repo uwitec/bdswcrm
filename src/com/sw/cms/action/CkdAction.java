@@ -84,6 +84,8 @@ public class CkdAction extends BaseAction {
 	private String cx_tel;
 	private String send_time;
 	
+	private String isqzxlh_flag = "";  //系统是否要求强制序列号
+	
 	/**
 	 * 取出库单列表（带分页）
 	 * @return
@@ -131,6 +133,7 @@ public class CkdAction extends BaseAction {
 		storeList = ckdService.getStoreList();
 		userList = userService.getAllEmployeeList();
 		iscs_flag = sysInitSetService.getQyFlag();
+		isqzxlh_flag = userService.getQzxlh();
 		ckd_id = ckdService.updateCkdId();
 		return "success";
 	}
@@ -171,7 +174,7 @@ public class CkdAction extends BaseAction {
 		}
 		
 		iscs_flag = sysInitSetService.getQyFlag();
-		
+		isqzxlh_flag = userService.getQzxlh();
 		//只有在系统正式启用后才去判断库存是否满足需求
 		if(iscs_flag.equals("1")){
 			
@@ -185,6 +188,15 @@ public class CkdAction extends BaseAction {
 					ckd.setState("待出库");
 					ckdService.saveCkd(ckd,ckdProducts);
 					return "input";
+				}
+				if(isqzxlh_flag.equals("01")){
+				   msg = ckdService.checkXlh(ckd, ckdProducts);
+				   if(!msg.equals(""))
+				   {
+					  ckd.setState("待出库");
+					  ckdService.saveCkd(ckd,ckdProducts);
+					  return "input";
+				   }
 				}
 			}
 		}
@@ -203,6 +215,7 @@ public class CkdAction extends BaseAction {
 		ckd = (Ckd)ckdService.getCkd(ckd_id);
 		ckdProducts = ckdService.getCkdProducts(ckd_id);
 		iscs_flag = sysInitSetService.getQyFlag();
+		isqzxlh_flag = userService.getQzxlh();
 		userList = userService.getAllEmployeeList();
 		storeList = ckdService.getStoreList();
 		ysfs = sjzdService.getSjzdXmxxByZdId("SJZD_YSFS");
@@ -236,6 +249,7 @@ public class CkdAction extends BaseAction {
 		ckd.setCzr(user_id);
 		
 		iscs_flag = sysInitSetService.getQyFlag();  //系统是否完成标志
+		isqzxlh_flag = userService.getQzxlh();
 		//只有在系统正式启用后才去判断库存是否满足需求
 		if(iscs_flag.equals("1")){
 			 
@@ -249,6 +263,7 @@ public class CkdAction extends BaseAction {
 					
 					ckdProducts = ckdService.getCkdProducts(ckd.getCkd_id());
 					iscs_flag = sysInitSetService.getQyFlag();
+					isqzxlh_flag = userService.getQzxlh();
 					userList = userService.getAllEmployeeList();
 					storeList = ckdService.getStoreList();
 					ysfs = sjzdService.getSjzdXmxxByZdId("SJZD_YSFS");
@@ -261,6 +276,29 @@ public class CkdAction extends BaseAction {
 					
 					return "input";
 				}
+				
+				if(isqzxlh_flag.equals("01")){
+					msg = ckdService.checkXlh(ckd, ckdProducts);
+					if(!msg.equals(""))
+					{
+						  ckd.setState("待出库");
+						  ckdService.updateCkd(ckd, ckdProducts);
+							
+							ckdProducts = ckdService.getCkdProducts(ckd.getCkd_id());
+							iscs_flag = sysInitSetService.getQyFlag();
+							isqzxlh_flag = userService.getQzxlh();
+							userList = userService.getAllEmployeeList();
+							storeList = ckdService.getStoreList();
+							ysfs = sjzdService.getSjzdXmxxByZdId("SJZD_YSFS");
+							
+							if(clientsService.getClient(ckd.getClient_name()) != null){
+								client = (Clients)clientsService.getClient(ckd.getClient_name());
+							}
+							
+							this.saveMessage(msg);
+						  return "input";
+					   }
+					}
 			}
 		}
 		
@@ -291,6 +329,7 @@ public class CkdAction extends BaseAction {
 			
 			ckdProducts = ckdService.getCkdProducts(ckd.getCkd_id());
 			iscs_flag = sysInitSetService.getQyFlag();
+			isqzxlh_flag = userService.getQzxlh();
 			userList = userService.getAllEmployeeList();
 			storeList = ckdService.getStoreList();
 			ysfs = sjzdService.getSjzdXmxxByZdId("SJZD_YSFS");
@@ -759,6 +798,15 @@ public class CkdAction extends BaseAction {
 
 	public void setSend_time(String sendTime) {
 		send_time = sendTime;
+	}
+	
+	public String getIsqzxlh_flag() {
+		return isqzxlh_flag;
+	}
+
+
+	public void setIsqzxlh_flag(String isqzxlh_flag) {
+		this.isqzxlh_flag = isqzxlh_flag;
 	}
 
 }
