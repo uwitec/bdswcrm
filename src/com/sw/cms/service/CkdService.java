@@ -380,6 +380,46 @@ public class CkdService {
 	}
 	
 	/**
+	 * 判断序列号是否满足出库需要
+	 * @param ckd
+	 * @param ckdProducts
+	 */
+	public String checkXlh(Ckd ckd,List ckdProducts){
+		String msg = "";
+		String store_id = ckd.getStore_id();
+		
+		if(ckdProducts != null && ckdProducts.size()>0){
+			for(int i=0;i<ckdProducts.size();i++){
+				CkdProduct ckdProduct = (CkdProduct)ckdProducts.get(i);
+				if(ckdProduct != null){
+					if(!ckdProduct.getProduct_id().equals("") && !ckdProduct.getProduct_name().equals("")){
+						String product_id = ckdProduct.getProduct_id();
+						String[] arryNums = (ckdProduct.getQz_serial_num()).split(",");
+						
+						//判断商品是否是库存商品,只仍库存商品才进行强制序列号判断
+						Product product = (Product)productDao.getProductById(product_id);
+						if(product.getProp().equals("库存商品")){	
+							for(int k=0;k<arryNums.length;k++){
+							  String serialNum = arryNums[k];  //要出库的序列号
+							  boolean is_store = serialNumDao.getSerialNumState(product_id, store_id,serialNum);//序列号的状态
+							
+							  if(is_store){								
+							  }
+							  else
+							  {
+								  msg += ckdProduct.getProduct_name() + " 序列号为：" + serialNum + " 不存在，请确认后再进行出库处理\n";
+							  }
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		return msg;
+	}
+	
+	/**
 	 * 保存销售收款信息
 	 * @param lsd
 	 */

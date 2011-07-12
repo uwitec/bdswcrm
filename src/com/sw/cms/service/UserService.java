@@ -351,6 +351,14 @@ public class UserService {
 	
 	
 	/**
+	 * 获取强制序列号的标志
+	 * @return
+	 */
+	public String getQzxlh(){
+		return userDao.getQzxlh();
+	}
+	
+	/**
 	 * 保存审批相关信息
 	 * @param sp_flag
 	 * @param role_id
