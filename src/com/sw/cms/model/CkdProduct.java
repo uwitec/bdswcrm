@@ -14,6 +14,7 @@ public class CkdProduct {
 	private double jgtz = 0;
 	private double cbj = 0;
 	private String qz_serial_num;
+	private String qz_flag;            //«ø÷∆–Ú¡–∫≈
 	
 	public String getCkd_id() {
 		return ckd_id;
@@ -87,5 +88,10 @@ public class CkdProduct {
 	public void setCk_nums(int ck_nums) {
 		this.ck_nums = ck_nums;
 	}
-	
+	public String getQz_flag() {
+		return qz_flag;
+	}
+	public void setQz_flag(String qz_flag) {
+		this.qz_flag = qz_flag;
+	}
 }
