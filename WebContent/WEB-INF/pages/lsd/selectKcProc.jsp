@@ -125,7 +125,7 @@ List kindList = (List)VS.findValue("kindList");
 	
 </script>
 </head>
-<body>
+<body oncontextmenu="return false;" >
 <form name="myform" action="selLsProcCkd.html" method="post">
 <input type="hidden" name="chk_id" value="">
 <table width="100%"  align="center"class="chart_list" cellpadding="0" cellspacing="0">
