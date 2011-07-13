@@ -385,7 +385,7 @@ public class CkdDAO extends JdbcBaseDAO {
 				ckdProduct.setQz_serial_num(rs.getString("qz_serial_num"));
 			if (SqlUtil.columnIsExist(rs, "ck_nums"))
 				ckdProduct.setCk_nums(rs.getInt("ck_nums"));
-
+			if(SqlUtil.columnIsExist(rs,"qz_flag")) ckdProduct.setQz_flag(rs.getString("qz_flag"));
 			return ckdProduct;
 		}
 	}
