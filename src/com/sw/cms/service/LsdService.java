@@ -498,8 +498,8 @@ public class LsdService {
 	
 	/**
 	 * 判断库存量是否满足出库需要
-	 * @param ckd
-	 * @param ckdProducts
+	 * @param lsd
+	 * @param lsdProducts
 	 */
 	public String checkKc(Lsd lsd,List lsdProducts){
 		String msg = "";
@@ -530,6 +530,53 @@ public class LsdService {
 		return msg;
 	}
 	
+	
+	/**
+	 * 判断序列号是否满足出库需要
+	 * @param ckd
+	 * @param ckdProducts
+	 */
+	public String checkXlh(Lsd lsd,List lsdProducts){
+		String msg = "";
+		String store_id = lsd.getStore_id();
+		boolean xlh=false;
+		String serialnums="";
+		
+		if(lsdProducts != null && lsdProducts.size()>0){
+			for(int i=0;i<lsdProducts.size();i++){
+				LsdProduct lsdProduct = (LsdProduct)lsdProducts.get(i);
+				if(lsdProduct != null){
+					if(!lsdProduct.getProduct_id().equals("") && !lsdProduct.getProduct_name().equals("") && lsdProduct.getQz_flag().equals("是")){
+						String product_id = lsdProduct.getProduct_id();
+						String[] arryNums = (lsdProduct.getQz_serial_num()).split(",");
+						
+						//判断商品是否是库存商品,只仍库存商品才进行强制序列号判断
+						Product product = (Product)productDao.getProductById(product_id);
+						if(product.getProp().equals("库存商品")){	
+							for(int k=0;k<arryNums.length;k++){
+							  String serialNum = arryNums[k];  //要出库的序列号
+							  boolean is_store = serialNumDao.getSerialNumState(product_id, store_id,serialNum);//序列号的状态
+							
+							  if(is_store){								
+							  }
+							  else
+							  {
+								  serialnums+=serialNum+" ";
+								  xlh=true;
+							  }
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		if(xlh){
+			msg += " 序列号为：" + serialnums + " 不存在，请确认后再进行出库处理!\\n";
+		}
+		
+		return msg;
+	}
 	
 	/**
 	 * 是否存在低于零售限价的商品

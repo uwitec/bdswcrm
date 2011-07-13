@@ -392,7 +392,7 @@ public class CkdService {
 			for(int i=0;i<ckdProducts.size();i++){
 				CkdProduct ckdProduct = (CkdProduct)ckdProducts.get(i);
 				if(ckdProduct != null){
-					if(!ckdProduct.getProduct_id().equals("") && !ckdProduct.getProduct_name().equals("")){
+					if(!ckdProduct.getProduct_id().equals("") && !ckdProduct.getProduct_name().equals("") && ckdProduct.getQz_flag().equals("ÊÇ")){
 						String product_id = ckdProduct.getProduct_id();
 						String[] arryNums = (ckdProduct.getQz_serial_num()).split(",");
 						
