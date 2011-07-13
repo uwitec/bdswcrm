@@ -65,7 +65,7 @@ public class LsdAction extends BaseAction {
 	private String iscs_flag = "";  //系统是否初始完成标志
 	private String flag = "";
 	private String xsry_name = "";
-	
+	private String isqzxlh_flag = "";  //系统是否要求强制序列号
 	private int curPage = 1;
 	
 	private String id = "";
@@ -182,7 +182,7 @@ public class LsdAction extends BaseAction {
 		storeList = storeService.getAllStoreList();
 		
 		iscs_flag = sysInitSetService.getQyFlag();  //是否完成初始标志
-		
+		isqzxlh_flag = userService.getQzxlh();
 		ysfs = sjzdService.getSjzdXmxxByZdId("SJZD_FKFS");
 		
 		posTypeList = posTypeService.getPosTypeList();
@@ -202,7 +202,7 @@ public class LsdAction extends BaseAction {
 		
 		//是否完成初始标志
 		iscs_flag = sysInitSetService.getQyFlag();
-		
+		isqzxlh_flag = userService.getQzxlh();
 		//只有在完成初始工作后再做库存是否满足需求判断
 		if(iscs_flag.equals("1")){
 			
@@ -221,6 +221,22 @@ public class LsdAction extends BaseAction {
 					userList = userService.getAllEmployeeList();
 					
 					return INPUT;
+				}
+				
+				if(isqzxlh_flag.equals("01")){
+			 	   if(!(lsdService.checkXlh(lsd, lsdProducts)).equals("")){
+						this.setMsg(lsdService.checkXlh(lsd, lsdProducts));
+						lsd.setState("已保存");
+						lsdService.saveLsd(lsd, lsdProducts);
+						
+						//页面初始数据
+						storeList = storeService.getAllStoreList();
+						ysfs = sjzdService.getSjzdXmxxByZdId("SJZD_FKFS");
+						posTypeList = posTypeService.getPosTypeList();
+						userList = userService.getAllEmployeeList();
+						
+						return INPUT;
+				   }
 				}
 			}
 			
@@ -261,6 +277,7 @@ public class LsdAction extends BaseAction {
 		storeList = storeService.getAllStoreList();
 		userList = userService.getAllEmployeeList();
 		iscs_flag = sysInitSetService.getQyFlag();
+		isqzxlh_flag = userService.getQzxlh();
 		ysfs = sjzdService.getSjzdXmxxByZdId("SJZD_FKFS");
 		posTypeList = posTypeService.getPosTypeList();
 		return "success";
@@ -276,7 +293,7 @@ public class LsdAction extends BaseAction {
 		lsd.setCzr(user_id);
 		
 		iscs_flag = sysInitSetService.getQyFlag();
-		
+		isqzxlh_flag = userService.getQzxlh();
 		//只有在完成初始工作后再做库存是否满足需求判断
 		if(iscs_flag.equals("1")){
 			
@@ -295,6 +312,21 @@ public class LsdAction extends BaseAction {
 					posTypeList = posTypeService.getPosTypeList();
 					
 					return INPUT;
+				}
+				if(isqzxlh_flag.equals("01")){
+				  if(!(lsdService.checkXlh(lsd, lsdProducts)).equals("")){
+					this.setMsg(lsdService.checkXlh(lsd, lsdProducts));
+					lsd.setState("已保存");
+					lsdService.updateLsd(lsd, lsdProducts);
+					
+					//页面初始数据
+					storeList = storeService.getAllStoreList();
+					ysfs = sjzdService.getSjzdXmxxByZdId("SJZD_FKFS");
+					posTypeList = posTypeService.getPosTypeList();
+					userList = userService.getAllEmployeeList();
+					
+					return INPUT;
+				  }
 				}
 			}
 		}
@@ -338,7 +370,7 @@ public class LsdAction extends BaseAction {
 		String user_id = info.getUser_id();
 		
 		lsdProducts = lsdService.getLsdProducts(lsd.getId());
-
+		isqzxlh_flag = userService.getQzxlh();
 		String msg = lsdService.checkKc(lsd, lsdProducts);
 		if(!msg.equals("")){
 			this.saveMessage(msg);
@@ -349,6 +381,21 @@ public class LsdAction extends BaseAction {
 			posTypeList = posTypeService.getPosTypeList();
 			
 			return "input";
+		}
+		
+		if(isqzxlh_flag.equals("01")){
+			 msg = lsdService.checkXlh(lsd, lsdProducts);
+			 if(!msg.equals(""))
+			 {
+				   this.saveMessage(msg);
+					
+					userList = userService.getAllEmployeeList();
+					storeList = storeService.getAllStoreList();
+					ysfs = sjzdService.getSjzdXmxxByZdId("SJZD_FKFS");
+					posTypeList = posTypeService.getPosTypeList();
+					
+					return "input";
+			   }
 		}
 		
 		lsd.setCzr(user_id);
@@ -443,13 +490,19 @@ public class LsdAction extends BaseAction {
 		lsd = (Lsd)lsdService.getLsd(id); //零售单
 		lsdProducts = lsdService.getLsdProducts(id);
 		iscs_flag = sysInitSetService.getQyFlag();
-		
+		isqzxlh_flag = userService.getQzxlh();
 		//只有在审批通过并且完成初始化后再判断库存是否满足
 		if(sp_state.equals("3") && iscs_flag.equals("1")){	
 			//审批通过,需要判断库存是否满足
 			if(!(lsdService.checkKc(lsd, lsdProducts)).equals("")){
 				this.setMsg(lsdService.checkKc(lsd, lsdProducts));
 				return "input";
+			}
+			if(isqzxlh_flag.equals("01")){
+				  if(!(lsdService.checkXlh(lsd, lsdProducts)).equals("")){
+					  this.setMsg(lsdService.checkXlh(lsd, lsdProducts));
+					  return "input";  
+				  }
 			}
 		}
 		
@@ -822,5 +875,12 @@ public class LsdAction extends BaseAction {
 	public void setDs_ratio(String ds_ratio) {
 		this.ds_ratio = ds_ratio;
 	}
-	
+	public String getIsqzxlh_flag() {
+		return isqzxlh_flag;
+	}
+
+
+	public void setIsqzxlh_flag(String isqzxlh_flag) {
+		this.isqzxlh_flag = isqzxlh_flag;
+	}
 }
