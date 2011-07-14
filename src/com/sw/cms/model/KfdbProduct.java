@@ -16,7 +16,7 @@ public class KfdbProduct {
 	private int nums;
 	private String remark;
 	private String qz_serial_num;
-
+	private String qz_flag;
 
 	public int getNums() {
 		return nums;
@@ -80,5 +80,13 @@ public class KfdbProduct {
 
 	public void setDw(String dw) {
 		this.dw = dw;
+	}
+	
+	public String getQz_flag() {
+		return qz_flag;
+	}
+
+	public void setQz_flag(String qz_flag) {
+		this.qz_flag = qz_flag;
 	}
 }
