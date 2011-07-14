@@ -5,9 +5,13 @@ import java.util.List;
 import com.sw.cms.dao.KfdbDAO;
 import com.sw.cms.dao.ProductKcDAO;
 import com.sw.cms.dao.SerialNumDAO;
+import com.sw.cms.dao.ProductDAO;
+import com.sw.cms.model.Ckd;
+import com.sw.cms.model.CkdProduct;
 import com.sw.cms.model.Kfdb;
 import com.sw.cms.model.KfdbProduct;
 import com.sw.cms.model.Page;
+import com.sw.cms.model.Product;
 import com.sw.cms.model.SerialNumFlow;
 import com.sw.cms.util.StaticParamDo;
 
@@ -16,7 +20,7 @@ public class KfdbService {
 	private KfdbDAO kfdbDao;
 	private ProductKcDAO productKcDao;
 	private SerialNumDAO serialNumDao;
-	
+	private ProductDAO productDao;
 	/**
 	 * 根据查询条件取库房调拨列表信息
 	 * @param con
@@ -161,6 +165,48 @@ public class KfdbService {
 		return msg;
 	}
 	
+	/**
+	 * 判断序列号是否满足出库需要
+	 * @param kfdb
+	 * @param kfdbProducts
+	 */
+	public String checkXlh(Kfdb kfdb,List kfdbProducts){
+		String msg = "";
+		String store_id = kfdb.getCk_store_id();
+		
+		if(kfdbProducts != null && kfdbProducts.size()>0){
+			for(int i=0;i<kfdbProducts.size();i++){
+				KfdbProduct kfdbProduct = (KfdbProduct)kfdbProducts.get(i);
+				if(kfdbProduct != null){
+					if(!kfdbProduct.getProduct_id().equals("") && !kfdbProduct.getProduct_name().equals("") ){
+					  if(!kfdbProduct.getQz_serial_num().equals("")){
+						String product_id = kfdbProduct.getProduct_id();
+						String[] arryNums = (kfdbProduct.getQz_serial_num()).split(",");
+						
+						//判断商品是否是库存商品,只仍库存商品才进行强制序列号判断
+						Product product = (Product)productDao.getProductById(product_id);
+						if(product.getProp().equals("库存商品")){	
+							for(int k=0;k<arryNums.length;k++){
+							  String serialNum = arryNums[k];  //要出库的序列号
+							  boolean is_store = serialNumDao.getSerialNumState(product_id, store_id,serialNum);//序列号的状态
+							
+							  if(is_store){								
+							  }
+							  else
+							  {
+								  msg += kfdbProduct.getProduct_name() + " 序列号为：" + serialNum + " 不存在，请确认后再进行出库处理\n";
+							  }
+							}
+						}
+					  }
+					}
+				}
+			}
+		}
+		
+		return msg;
+	}
+	
 	
 	/**
 	 * 改变库存值
@@ -260,6 +306,15 @@ public class KfdbService {
 
 	public void setSerialNumDao(SerialNumDAO serialNumDao) {
 		this.serialNumDao = serialNumDao;
+	}
+	
+	public ProductDAO getProductDao() {
+		return productDao;
+	}
+
+
+	public void setProductDao(ProductDAO productDao) {
+		this.productDao = productDao;
 	}
 
 }
