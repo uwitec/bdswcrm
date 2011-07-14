@@ -73,7 +73,7 @@ public class KfdbAction extends BaseAction {
 	private String dbr = "";
 	private String title_name = "";
 	
-	
+	private String isqzxlh_flag = "";  //系统是否要求强制序列号
 	
 	/**
 	 * 库房调拨列表
@@ -173,7 +173,7 @@ public class KfdbAction extends BaseAction {
 		LoginInfo info = (LoginInfo)getSession().getAttribute("LOGINUSER");
 		String user_id = info.getUser_id();
 		kfdb.setCzr(user_id);
-		
+		isqzxlh_flag = userService.getQzxlh();
 		iscs_flag = sysInitSetService.getQyFlag();
 		//只有在系统正式启用后才去判断库存是否满足需求
 		if(iscs_flag.equals("1")){
@@ -185,7 +185,18 @@ public class KfdbAction extends BaseAction {
 					
 					return "input";
 				}
-			}
+				
+				if(isqzxlh_flag.equals("01")){
+				   msg = kfdbService.checkXlh(kfdb, kfdbProducts);
+				   if(!msg.equals(""))
+				   {
+					   kfdb.setState("已保存");
+					   kfdbService.saveKfdb(kfdb, kfdbProducts);
+					  return "input";
+				   }
+				}
+			}			
+			
 		}
 		
 		
@@ -216,7 +227,7 @@ public class KfdbAction extends BaseAction {
 		LoginInfo info = (LoginInfo)getSession().getAttribute("LOGINUSER");
 		String user_id = info.getUser_id();
 		kfdb.setCzr(user_id);
-		
+		isqzxlh_flag = userService.getQzxlh();
 		iscs_flag = sysInitSetService.getQyFlag();
 		//只有在系统正式启用后才去判断库存是否满足需求
 		if(iscs_flag.equals("1")){
@@ -228,6 +239,18 @@ public class KfdbAction extends BaseAction {
 					storeList = storeService.getAllStoreList();
 					kfdbProducts = kfdbService.getKfdbProducts(kfdb.getId());
 					return "input";
+				}
+				
+				if(isqzxlh_flag.equals("01")){
+				   msg = kfdbService.checkXlh(kfdb, kfdbProducts);
+				   if(!msg.equals(""))
+				   {
+					   kfdb.setState("已保存");
+					   kfdbService.updateKfdb(kfdb, kfdbProducts);
+					   storeList = storeService.getAllStoreList();
+					   kfdbProducts = kfdbService.getKfdbProducts(kfdb.getId());
+					   return "input";
+				   }
 				}
 			}
 		}
@@ -256,7 +279,7 @@ public class KfdbAction extends BaseAction {
 			
 			kfdb.setState("已入库");
 			kfdb.setCzr(user_id);
-			
+			isqzxlh_flag = userService.getQzxlh();
 			iscs_flag = sysInitSetService.getQyFlag();
 			//只有在系统正式启用后才去判断库存是否满足需求
 			if(iscs_flag.equals("1")){
@@ -267,6 +290,16 @@ public class KfdbAction extends BaseAction {
 						kfdbService.updateKfdb(kfdb, kfdbProducts);
 						storeList = storeService.getAllStoreList();
 						return "input";
+					}
+					if(isqzxlh_flag.equals("01")){
+					   msg = kfdbService.checkXlh(kfdb, kfdbProducts);
+					   if(!msg.equals(""))
+					   {
+						    kfdb.setState("已出库");
+							kfdbService.updateKfdb(kfdb, kfdbProducts);
+							storeList = storeService.getAllStoreList();
+							return "input";
+					   }
 					}
 				}
 			}
@@ -616,5 +649,14 @@ public class KfdbAction extends BaseAction {
 
 	public void setDrkf(String drkf) {
 		this.drkf = drkf;
+	}
+	
+	public String getIsqzxlh_flag() {
+		return isqzxlh_flag;
+	}
+
+
+	public void setIsqzxlh_flag(String isqzxlh_flag) {
+		this.isqzxlh_flag = isqzxlh_flag;
 	}
 }
