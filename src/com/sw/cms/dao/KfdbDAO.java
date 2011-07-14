@@ -299,6 +299,7 @@ public class KfdbDAO extends JdbcBaseDAO {
 			if(SqlUtil.columnIsExist(rs,"nums")) kfdbProduct.setNums(rs.getInt("nums"));
 			if(SqlUtil.columnIsExist(rs,"dw")) kfdbProduct.setDw(rs.getString("dw"));
 			if(SqlUtil.columnIsExist(rs,"qz_serial_num")) kfdbProduct.setQz_serial_num(rs.getString("qz_serial_num"));
+			if(SqlUtil.columnIsExist(rs,"qz_flag")) kfdbProduct.setQz_serial_num(rs.getString("qz_flag"));
 			return kfdbProduct;
 		}
 	}	
