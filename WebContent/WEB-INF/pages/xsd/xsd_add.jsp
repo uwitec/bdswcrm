@@ -348,6 +348,11 @@ String flag = StringUtils.nullToStr(VS.findValue("flag"));
 		<td colspan="2">商品详细信息</td>
 	</tr>
 	</thead>
+	<tr height="35">
+		<td class="a2" colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;输入序列号：<input type="text" name="s_nums" value="" onkeypress="javascript:f_enter()">
+			注：输入商品序列号或条形码回车，可自动提取商品信息到商品列表中
+		</td>
+	</tr>		
 </table>
 <table width="100%"  align="center" id="xsdtable"  class="chart_list" cellpadding="0" cellspacing="0">	
 	<thead>

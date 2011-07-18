@@ -25,7 +25,7 @@
 			<include method="getAccountsById"/>
 		</create>
 		<convert converter="bean" match="com.sw.cms.model.Product">
-			<param name="include" value="productId,productName,productXh,price,lsbj,qz_serial_num,khcbj,gf" />
+			<param name="include" value="productId,productName,productXh,price,lsbj,qz_serial_num,khcbj,gf,img" />
 		</convert>
 		<convert converter="bean" match="com.sw.cms.model.shkc">
 			<param name="include" value="productId,productName,productXh,qz_serial_num" />

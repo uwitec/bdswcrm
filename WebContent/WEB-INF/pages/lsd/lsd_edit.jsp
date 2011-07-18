@@ -319,20 +319,20 @@ String flag = StringUtils.nullToStr(VS.findValue("flag"));
 								
 				if(obj != null){
 					if(obj.value == "" || obj.value==product.productId){
-					
-						var vl = dwr.util.getValue("qz_serial_num_" + i); //已有的序列号
-						var vl2 = dwr.util.getValue("s_nums");    //输入的序列号
-						if(vl.indexOf(vl2) != -1){
-							alert("商品列表中已存在该序列号，请检查！");
-							break;
+						if(product.img == "1"){
+							var vl = dwr.util.getValue("qz_serial_num_" + i); //已有的序列号
+							var vl2 = dwr.util.getValue("s_nums");    //输入的序列号
+							if(vl.indexOf(vl2) != -1){
+								alert("商品列表中已存在该序列号，请检查！");
+								break;
+							}
+							if(vl == ""){
+								vl = vl2;
+							}else{
+								vl += "," + vl2;
+							}
+							dwr.util.setValue("qz_serial_num_" + i,vl);
 						}
-						
-						if(vl == ""){
-							vl = vl2;
-						}else{
-							vl += "," + vl2;
-						}
-						dwr.util.setValue("qz_serial_num_" + i,vl);
 											
 						dwr.util.setValue("product_id_" + i,product.productId);
 						dwr.util.setValue("product_name_" + i,product.productName);
@@ -582,6 +582,11 @@ String flag = StringUtils.nullToStr(VS.findValue("flag"));
 		<td colspan="2">商品详细信息</td>
 	</tr>
 	</thead>
+	<tr height="35">
+		<td class="a2" colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;输入序列号：<input type="text" name="s_nums" value="" onkeypress="javascript:f_enter()">
+			注：输入商品序列号或条形码回车，可自动提取商品信息到商品列表中
+		</td>
+	</tr>		
 </table>
 <table width="100%"  align="center" id="lsdtable"  class="chart_list" cellpadding="0" cellspacing="0">	
 	<thead>

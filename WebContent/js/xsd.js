@@ -335,19 +335,21 @@ function setProductInfo(product){
 			if(obj != null){
 				if(obj.value == "" || obj.value==product.productId){
 				
-					var vl = dwr.util.getValue("qz_serial_num_" + i); //已有的序列号
-					var vl2 = dwr.util.getValue("s_nums");    //输入的序列号
-					if(vl.indexOf(vl2) != -1){
-						alert("商品列表中已存在该序列号，请检查！");
-						break;
+					if(product.img == "1"){
+						var vl = dwr.util.getValue("qz_serial_num_" + i); //已有的序列号
+						var vl2 = dwr.util.getValue("s_nums");    //输入的序列号
+						if(vl.indexOf(vl2) != -1){
+							alert("商品列表中已存在该序列号，请检查！");
+							break;
+						}
+						
+						if(vl == ""){
+							vl = vl2;
+						}else{
+							vl += "," + vl2;
+						}
+						dwr.util.setValue("qz_serial_num_" + i,vl);
 					}
-					
-					if(vl == ""){
-						vl = vl2;
-					}else{
-						vl += "," + vl2;
-					}
-					dwr.util.setValue("qz_serial_num_" + i,vl);
 										
 					dwr.util.setValue("product_id_" + i,product.productId);
 					dwr.util.setValue("product_name_" + i,product.productName);
