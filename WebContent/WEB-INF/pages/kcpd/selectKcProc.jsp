@@ -99,13 +99,13 @@ String product_name = ParameterUtility.getStringParameter(request,"product_name"
 					var xh = window.opener.document.getElementById("product_xh_"+k);
 					var name = window.opener.document.getElementById("product_name_"+k);
 					var kc_nums = window.opener.document.getElementById("kc_nums_"+k);
-				
+				    var qz_flag = window.opener.document.getElementById("qz_flag_"+k);
 				
 					id.value = arryStr[0];
 					xh.value = arryStr[1];
 					name.value = arryStr[2];
 					kc_nums.value = arryStr[3];
-					
+					qz_flag.value = arryStr[4];
 					k++;	
 				}	
 			}
@@ -147,6 +147,7 @@ String product_name = ParameterUtility.getStringParameter(request,"product_name"
 		<td>分销限价</td>
 		<td>零售限价</td>
 		<td>状态</td>
+		<td>强制序列号</td>
 	</tr>
 	</thead>
 	<%
@@ -157,7 +158,7 @@ String product_name = ParameterUtility.getStringParameter(request,"product_name"
 		while(it.hasNext()){
 			Map map = (Map)it.next();
 			String state = StringUtils.nullToStr(map.get("state"));
-			
+			String qz_flag = StringUtils.nullToStr(map.get("qz_serial_num"));
 			double price = map.get("price")==null?0:((Double)map.get("price")).doubleValue();
 			double fxxj = map.get("fxxj")==null?0:((Double)map.get("fxxj")).doubleValue();
 			double lsxj = map.get("lsxj")==null?0:((Double)map.get("lsxj")).doubleValue();
@@ -165,7 +166,7 @@ String product_name = ParameterUtility.getStringParameter(request,"product_name"
 			String nums = StringUtils.nullToStr(map.get("nums"));
 			if(nums.equals("")) nums="0";
 			
-			String vl = StringUtils.nullToStr(map.get("product_id")) + "|" + StringUtils.nullToStr(map.get("product_xh")) + "|" + StringUtils.nullToStr(map.get("product_name")) + "|" + nums;
+			String vl = StringUtils.nullToStr(map.get("product_id")) + "|" + StringUtils.nullToStr(map.get("product_xh")) + "|" + StringUtils.nullToStr(map.get("product_name")) + "|" + nums+ "|" + StringUtils.nullToStr(map.get("qz_serial_num"));
 	%>
 		<tr class="a1" onmouseover="this.className='a2';" onmouseout="this.className='a1';">
 			<td><input type="checkbox" name="chk_id" value="<%=vl %>"></td>
@@ -176,6 +177,7 @@ String product_name = ParameterUtility.getStringParameter(request,"product_name"
 			<td><%=JMath.round(fxxj,2) %></td>
 			<td><%=JMath.round(lsxj,2) %></td>
 			<td><%=state %></td>
+			<td><%=qz_flag %></td>
 		</tr>
 	
 	<%
@@ -183,10 +185,10 @@ String product_name = ParameterUtility.getStringParameter(request,"product_name"
 	}
 	%>
 		<tr>
-			<td colspan="8" class="page"><%=productPage.getPageScript() %></td>
+			<td colspan="9" class="page"><%=productPage.getPageScript() %></td>
 		</tr>	
 		<tr>
-			<td colspan="8"><input type="button" name="buttonQd" value=" 确定 " onclick="sel();" class="css_button2"></td>
+			<td colspan="9"><input type="button" name="buttonQd" value=" 确定 " onclick="sel();" class="css_button2"></td>
 		</tr>
 </table>
 </form>

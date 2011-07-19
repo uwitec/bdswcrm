@@ -7,7 +7,7 @@
 <%
 OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
 List storeList = (List)VS.findValue("storeList");
-
+String msg = StringUtils.nullToStr(VS.findValue("msg"));
 List userList = (List)VS.findValue("userList");
 String id = (String)VS.findValue("id");
 
@@ -25,6 +25,9 @@ String user_id = info.getUser_id();
 <script language='JavaScript' src="js/nums.js"></script>
 <script language='JavaScript' src="js/selJsr.js"></script>
 <script type="text/javascript" src="js/prototype-1.4.0.js"></script>
+<script type='text/javascript' src='dwr/interface/dwrService.js'></script>
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script>
 <style>
 	.selectTip{
 		background-color:#009;
@@ -32,6 +35,12 @@ String user_id = info.getUser_id();
 	}
 </style>
 <script type="text/javascript">
+	<%if(!msg.equals("")){ %>
+		alert("<%=msg%>");
+		window.close();
+		opener.document.myform.submit();
+	<%}%>
+	
 	var allCount = 2;
 	
 	function saveInfo(vl){
@@ -59,8 +68,40 @@ String user_id = info.getUser_id();
 			return;
 		}		
 		
+		//判断是否存在强制输入序列号的商品没有输入序列号
+		for(var i=0;i<allCount;i++){
+			var qzflag = document.getElementById("qz_flag_" + i);            //标志是否强制输入
+			var qzserialnum = document.getElementById("qz_serial_num_" + i); //序列号
+			var pn = document.getElementById("product_name_" + i);           //商品名称				
+			if(qzflag != null){
+				if(qzflag.value == "是"){
+					if(qzserialnum.value == ""){
+						//如果没有输入序列号提示用户输入序列号
+						alert("商品" + pn.value + "强制序列号，请先输入序列号！");
+						qzserialnum.focus();
+						return;
+					}else{
+						//校验输入数量与商品数是否相同
+						var serial = document.getElementById("qz_serial_num_" + i).value;
+						var arrySerial = serial.split(",");							
+						var nms = document.getElementById("yk_" + i).value;		
+						if(nms<0)
+		                {
+		                   nms=-nms;
+		                }				
+						if(parseInt(nms) != arrySerial.length){
+							alert("商品" + pn.value + "输入序列号数量与商品数量不符，请检查！");
+							qzserialnum.focus();
+							return;
+						}						
+					}
+				}
+			}
+		}
+		
 		pdAll();
 
+        
 		if(vl == "1"){
 			document.kcpdForm.submit();
 		}else{
@@ -107,6 +148,10 @@ String user_id = info.getUser_id();
         otd4.className = "a2";
         otd4.innerHTML = '<input type="text" id="yk_'+curId+'" name="kcpdDesc['+curId+'].yk" value="0" style="width:100%" size="5" readonly>';         
         
+        var otd5 = document.createElement("td");
+		otd5.className = "a2";
+		otd5.innerHTML = '<input type="text" id="qz_serial_num_'+curId+'" name="kcpdDesc['+curId+'].qz_serial_num" size="15" readonly><input type="hidden" id="qz_flag_'+curId+'" name="kcpdDesc['+curId+'].qz_flag"><a style="cursor:hand" title="点击输入序列号" onclick="openSerialWin('+ curId +');"><b>...</b></a>&nbsp;';           
+		
 		
 		otr.appendChild(otd9); 
         otr.appendChild(otd0); 
@@ -114,6 +159,7 @@ String user_id = info.getUser_id();
         otr.appendChild(otd2); 
         otr.appendChild(otd3); 
         otr.appendChild(otd4);
+        otr.appendChild(otd5);
      }	
      
      
@@ -122,6 +168,33 @@ String user_id = info.getUser_id();
 			tr.removeNode(true);
 			
 	}     
+	
+	//打开输入序列号窗口
+	function openSerialWin(vl){
+		var pn = document.getElementById("product_id_" + vl).value;
+		var nm = document.getElementById("yk_" + vl).value;
+		
+		if(nm<0)
+		{
+		  nm=-nm;
+		}
+		
+		if(pn == ""){
+			alert("请选择商品，再输入序列号！");
+			return;
+		}
+		if(nm == "" || nm == "0"){
+			alert("请设置商品数量，再输入序列号！");
+			return;
+		}
+		
+		var qzserialnum = document.getElementById("qz_serial_num_" + vl).value;
+		
+		var url = "importSerial.html?openerId=" + vl + "&nums=" + nm + "&serialNum=" + qzserialnum + "&product_id=" + pn;
+		var fea ='width=300,height=200,left=' + (screen.availWidth-300)/2 + ',top=' + (screen.availHeight-300)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		
+		window.open(url,'详细信息',fea);	
+	}
 	
 	
 	function openWin(){
@@ -188,9 +261,76 @@ String user_id = info.getUser_id();
 		document.getElementById("kc_nums_" + sel).value = "0";
 		document.getElementById("sj_nums_" + sel).value = "0";
 		document.getElementById("yk_" + sel).value = "0";
+		document.getElementById("qz_serial_num_" + sel).value = "";
+		document.getElementById("qz_flag_" + sel).value = "";
 		document.getElementById("remark_" + sel).value = "";
 	}		
 	
+	//触发点击回车事件
+	function f_enter(){
+	    if (window.event.keyCode==13){
+	        sendSerialNum();
+	    }
+	}
+	
+	//发送序列号
+	function sendSerialNum(){
+		var serialNum = dwr.util.getValue("s_nums");
+		if(serialNum == ""){
+			return;
+		}
+		dwrService.getProductObjBySerialNum(serialNum,setProductInfo);		
+	}
+	
+	//处理返回商品对象
+	function setProductInfo(product){
+		if(product != null && product.productId != null){
+			var flag = false;
+			for(var i=0;i<=allCount;i++){
+				var obj = document.getElementById("product_id_" + i);
+								
+				if(obj != null){
+					if(obj.value == "" || obj.value==product.productId){
+					
+						var vl = dwr.util.getValue("qz_serial_num_" + i); //已有的序列号
+						var vl2 = dwr.util.getValue("s_nums");    //输入的序列号
+						if(vl.indexOf(vl2) != -1){
+							alert("商品列表中已存在该序列号，请检查！");
+							break;
+						}
+						
+						if(vl == ""){
+							vl = vl2;
+						}else{
+							vl += "," + vl2;
+						}
+						dwr.util.setValue("qz_serial_num_" + i,vl);
+											
+						dwr.util.setValue("product_id_" + i,product.productId);
+						dwr.util.setValue("product_name_" + i,product.productName);
+						dwr.util.setValue("product_xh_" + i,product.productXh);
+						
+						var nums = dwr.util.getValue("yk_" + i);
+						if(nums<0)
+						{
+						  nums=-nums;
+						}
+						dwr.util.setValue("yk_" + i,parseInt(nums)+1);					
+						
+						dwr.util.setValue("qz_flag_" + i,product.qz_serial_num);
+						
+						dwr.util.setValue("s_nums","");
+						break;
+					}
+					if(i==allCount){
+						addTr();				
+					}
+				}
+			}
+		}else{
+			alert("该序列号不存在，请检查!");
+		}
+	}		
 </script>
 </head>
 <body onload="initFzrTip();">
@@ -250,11 +390,12 @@ String user_id = info.getUser_id();
 	<thead>
 	<tr>
 		<td width="10%">选择</td>
-		<td width="30%">商品名称</td>
-		<td width="25%">规格</td>
+		<td width="20%">商品名称</td>
+		<td width="20%">规格</td>
 		<td width="12%">账面数量</td>
 		<td width="12%">实际数量</td>
-		<td width="11%">盈亏</td>
+		<td width="8%">盈亏</td>
+		<td width="18%">强制序列号</td>
 	</tr>
 	</thead>
 <%
@@ -270,6 +411,10 @@ for(int i=0;i<3;i++){
 		<td class="a2"><input type="text" id="kc_nums_<%=i %>" name="kcpdDesc[<%=i %>].kc_nums" style="width:100%" size="5" value="0" onblur="pdAll();" readonly></td>
 		<td class="a2"><input type="text" id="sj_nums_<%=i %>" name="kcpdDesc[<%=i %>].sj_nums" style="width:100%" size="5" value="0" onblur="pdAll();"></td>
 		<td class="a2"><input type="text" id="yk_<%=i %>" name="kcpdDesc[<%=i %>].yk" size="5" style="width:100%" value="0" readonly></td>
+	    <td class="a2">
+			<input type="text" id="qz_serial_num_<%=i %>" name="kcpdDesc[<%=i %>].qz_serial_num" size="15" readonly>
+			<input type="hidden" id="qz_flag_<%=i %>" name="kcpdDesc[<%=i %>].qz_flag"><a style="cursor:hand" title="左键点击输入输列号" onclick="openSerialWin('<%=i %>');"><b>...</b></a>&nbsp;
+		</td>
 	</tr>
 <%
 }

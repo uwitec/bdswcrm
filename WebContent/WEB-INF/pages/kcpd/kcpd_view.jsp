@@ -58,19 +58,21 @@ List kcpdDescs = (List)VS.findValue("kcpdDesc");
 		<td>账面数量</td>
 		<td>实际数量</td>
 		<td>盈亏</td>
+		<td>强制序列号</td>
 	</tr>
 	</thead>
 <%
 if(kcpdDescs!=null && kcpdDescs.size()>0){
 	for(int i=0;i<kcpdDescs.size();i++){
-		KcpdDesc kcpdDesc = (KcpdDesc)kcpdDescs.get(i);
+		Map kcpdDesc = (Map)kcpdDescs.get(i);
 %>
 	<tr>
-		<td class="a2"><%=StringUtils.nullToStr(kcpdDesc.getProduct_name()) %></td>
-		<td class="a2"><%=StringUtils.nullToStr(kcpdDesc.getProduct_xh()) %></td>
-		<td class="a2"><%=StringUtils.nullToStr(kcpdDesc.getKc_nums()) %></td>
-		<td class="a2"><%=StringUtils.nullToStr(kcpdDesc.getSj_nums()) %></td>
-		<td class="a2"><%=StringUtils.nullToStr(kcpdDesc.getYk()) %></td>
+		<td class="a2"><%=StringUtils.nullToStr(kcpdDesc.get("Product_name")) %></td>
+		<td class="a2"><%=StringUtils.nullToStr(kcpdDesc.get("Product_xh")) %></td>
+		<td class="a2"><%=StringUtils.nullToStr(kcpdDesc.get("Kc_nums")) %></td>
+		<td class="a2"><%=StringUtils.nullToStr(kcpdDesc.get("Sj_nums")) %></td>
+		<td class="a2"><%=StringUtils.nullToStr(kcpdDesc.get("Yk")) %></td>
+		<td class="a2"><%=StringUtils.nullToStr(kcpdDesc.get("Qz_serial_num")) %></td>
 	</tr>
 <%
 	}

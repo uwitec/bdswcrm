@@ -40,25 +40,27 @@ List results = (List)VS.findValue("kcpdDesc");
 <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0" border="1" id="selTable">
 	<thead>
 	<tr>
-		<td width="35%">商品名称</td>
-		<td width="35%">规格</td>
+		<td width="25%">商品名称</td>
+		<td width="25%">规格</td>
 		<td width="10%">账面数量</td>
 		<td width="10%">实际数量</td>
 		<td width="10%">盈亏</td>
+		<td width="20%">强制序列号</td>
 	</tr>
 	</thead>
 	<%
 	Iterator it = results.iterator();
 	
 	while(it.hasNext()){
-		KcpdDesc kcpdDesc = (KcpdDesc)it.next();
+		Map kcpdDesc = (Map)it.next();
 	%>
 	<tr class="a1" onmousedown="trSelectChangeCss()">
-		<td><%=StringUtils.nullToStr(kcpdDesc.getProduct_name()) %></td>
-		<td><%=StringUtils.nullToStr(kcpdDesc.getProduct_xh()) %></td>
-		<td><%=StringUtils.nullToStr(kcpdDesc.getKc_nums()) %></td>
-		<td><%=StringUtils.nullToStr(kcpdDesc.getSj_nums()) %></td>
-		<td><%=StringUtils.nullToStr(kcpdDesc.getYk()) %></td>
+		<td><%=StringUtils.nullToStr(kcpdDesc.get("Product_name")) %></td>
+		<td><%=StringUtils.nullToStr(kcpdDesc.get("Product_xh")) %></td>
+		<td><%=StringUtils.nullToStr(kcpdDesc.get("Kc_nums")) %></td>
+		<td><%=StringUtils.nullToStr(kcpdDesc.get("Sj_nums")) %></td>
+		<td><%=StringUtils.nullToStr(kcpdDesc.get("Yk")) %></td>
+		<td><%=StringUtils.nullToStr(kcpdDesc.get("Qz_serial_num")) %></td>
 	</tr>
 	
 	<%
