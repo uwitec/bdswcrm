@@ -299,7 +299,7 @@ String flag = StringUtils.nullToStr(VS.findValue("flag"));
 		var url = "importSerial.html?openerId=" + vl + "&nums=" + nm + "&serialNum=" + qzserialnum + "&product_id=" + pn;
 		var fea ='width=300,height=200,left=' + (screen.availWidth-300)/2 + ',top=' + (screen.availHeight-300)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
-		window.open(url,'详细信息',fea);	
+		window.open(url,'',fea);	
 	}	
 
 	
@@ -356,6 +356,13 @@ String flag = StringUtils.nullToStr(VS.findValue("flag"));
 						dwr.util.setValue("qz_flag_" + i,product.qz_serial_num);
 						
 						dwr.util.setValue("s_nums","");
+
+						if(product.qz_serial_num == "是"){
+							if(window.confirm("该商品强制输入序列号，确认现在要输入序列号吗？")){
+								openSerialWin(i);
+							}
+						}
+						
 						break;
 					}
 					if(i==allCount){

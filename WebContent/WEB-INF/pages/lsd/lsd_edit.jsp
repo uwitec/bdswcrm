@@ -348,6 +348,13 @@ String flag = StringUtils.nullToStr(VS.findValue("flag"));
 						dwr.util.setValue("qz_flag_" + i,product.qz_serial_num);
 						
 						dwr.util.setValue("s_nums","");
+
+						if(product.qz_serial_num == "是"){
+							if(window.confirm("该商品强制输入序列号，确认现在要输入序列号吗？")){
+								openSerialWin(i);
+							}
+						}
+						
 						break;
 					}
 					if(i==allCount){
