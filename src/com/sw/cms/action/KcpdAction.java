@@ -28,7 +28,7 @@ public class KcpdAction extends BaseAction {
 	private List storeList;
 	private List userList = new ArrayList();
 	
-
+	
 	private String pdrq1 = "";
 	private String pdrq2 = "";
 	private String store_id = "";
@@ -40,7 +40,7 @@ public class KcpdAction extends BaseAction {
 	
 	private int curPage = 1;
 	
-	
+	private String isqzxlh_flag = "";  //系统是否要求强制序列号
 	/**
 	 * 返回列表
 	 * @return
@@ -85,6 +85,7 @@ public class KcpdAction extends BaseAction {
 		storeList = storeService.getAllStoreList();
 		userList = userService.getAllEmployeeList();
 		id = kcpdService.updateKcpdId();
+		isqzxlh_flag = userService.getQzxlh();
 		return "success";
 	}
 	
@@ -98,7 +99,17 @@ public class KcpdAction extends BaseAction {
 		LoginInfo info = (LoginInfo)getSession().getAttribute("LOGINUSER");
 		String user_id = info.getUser_id();
 		kcpd.setCzr(user_id);
+		isqzxlh_flag = userService.getQzxlh();
 		
+		if(isqzxlh_flag.equals("01")){
+			   msg = kcpdService.checkXlh(kcpd, kcpdDesc);
+			   if(!msg.equals(""))
+			   {
+				  kcpd.setState("已保存");
+				  kcpdService.saveKcpd(kcpd, kcpdDesc);
+				  return "input";
+			   }
+			}
 		kcpdService.saveKcpd(kcpd, kcpdDesc);
 		return "success";
 	}
@@ -111,7 +122,7 @@ public class KcpdAction extends BaseAction {
 	public String edit(){
 		kcpd = (Kcpd)kcpdService.getKcpd(id);
 		kcpdDesc = kcpdService.getKcpdDescs(id);
-		
+		isqzxlh_flag = userService.getQzxlh();
 		storeList = storeService.getAllStoreList();
 		userList = userService.getAllEmployeeList();
 		return "success";
@@ -123,10 +134,30 @@ public class KcpdAction extends BaseAction {
 	 * @return
 	 */
 	public String update(){
+//		判断出库单是否已经提交，如果已经提交不做任何操作
+		if(kcpdService.isKcpdSubmit(kcpd.getId())){
+			return SUCCESS;
+		}
 		LoginInfo info = (LoginInfo)getSession().getAttribute("LOGINUSER");
 		String user_id = info.getUser_id();
 		kcpd.setCzr(user_id);
-		
+		isqzxlh_flag = userService.getQzxlh();
+		if(isqzxlh_flag.equals("01")){
+			   msg = kcpdService.checkXlh(kcpd, kcpdDesc);
+			   if(!msg.equals(""))
+			   {
+				  kcpd.setState("已保存");
+				  kcpdService.updateKcpd(kcpd, kcpdDesc);				  
+				 
+				  kcpdDesc = kcpdService.getKcpdDescs(kcpd.getId());
+				  isqzxlh_flag = userService.getQzxlh();
+				  storeList = storeService.getAllStoreList();
+				  userList = userService.getAllEmployeeList();
+				  
+				  this.saveMessage(msg);
+				  return "input";
+			   }
+			}
 		kcpdService.updateKcpd(kcpd, kcpdDesc);
 		return "success";
 	}
@@ -311,4 +342,12 @@ public class KcpdAction extends BaseAction {
 		this.productPage = productPage;
 	}
 
+	public String getIsqzxlh_flag() {
+		return isqzxlh_flag;
+	}
+
+
+	public void setIsqzxlh_flag(String isqzxlh_flag) {
+		this.isqzxlh_flag = isqzxlh_flag;
+	}
 }
