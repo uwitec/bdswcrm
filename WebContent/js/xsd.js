@@ -365,7 +365,7 @@ function setProductInfo(product){
 					
 					dwr.util.setValue("s_nums","");
 					
-					if(product.qz_serial_num == "是"){
+					if(product.img == "2" && product.qz_serial_num == "是"){
 						if(window.confirm("该商品强制输入序列号，确认现在要输入序列号吗？")){
 							openSerialWin(i);
 						}

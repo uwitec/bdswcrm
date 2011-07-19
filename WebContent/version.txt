@@ -184,6 +184,8 @@
 					) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 					
 					INSERT INTO `qzxlh_right` VALUES ('01');
+					
+					ALTER TABLE `kcpd_desc` ADD COLUMN `qz_serial_num` varchar(4000) default NULL  AFTER `remark`;
 		 
 　　4、对应SVN版本号：962
 
