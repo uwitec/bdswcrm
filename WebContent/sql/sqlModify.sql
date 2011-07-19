@@ -86,3 +86,7 @@ CREATE TABLE `qzxlh_right` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `qzxlh_right` VALUES ('01');
+
+
+--库存盘点增加强制序列号字段
+ALTER TABLE `kcpd_desc` ADD COLUMN `qz_serial_num` varchar(4000) default NULL  AFTER `remark`;
