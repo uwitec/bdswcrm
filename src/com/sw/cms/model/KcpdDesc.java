@@ -12,6 +12,9 @@ public class KcpdDesc {
 	private int yk;
 	private String remark;
 	
+	private String qz_serial_num;
+	private String qz_flag;            //«ø÷∆–Ú¡–∫≈
+	
 	public int getId() {
 		return id;
 	}
@@ -66,5 +69,16 @@ public class KcpdDesc {
 	public void setYk(int yk) {
 		this.yk = yk;
 	}
-
+	public String getQz_serial_num() {
+		return qz_serial_num;
+	}
+	public void setQz_serial_num(String qz_serial_num) {
+		this.qz_serial_num = qz_serial_num;
+	}
+	public String getQz_flag() {
+		return qz_flag;
+	}
+	public void setQz_flag(String qz_flag) {
+		this.qz_flag = qz_flag;
+	}
 }
