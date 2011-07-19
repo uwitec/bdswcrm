@@ -146,7 +146,7 @@ public class ProductKcDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public Page getAllProductKcIncludeZero(String con,String store_id,int curPage, int rowsPerPage){
-		String sql = "select a.product_id,a.product_name,a.product_xh,a.product_kind,a.price,a.fxxj,a.lsxj,a.state,(select nums from product_kc b where b.product_id=a.product_id and b.store_id='" + store_id + "') as nums from product a where a.state='正常' and prop='库存商品'";
+		String sql = "select a.product_id,a.product_name,a.product_xh,a.product_kind,a.price,a.fxxj,a.lsxj,a.state,a.qz_serial_num,(select nums from product_kc b where b.product_id=a.product_id and b.store_id='" + store_id + "') as nums from product a where a.state='正常' and prop='库存商品'";
 		if(!con.equals("")){
 			sql = sql + con;
 		}
