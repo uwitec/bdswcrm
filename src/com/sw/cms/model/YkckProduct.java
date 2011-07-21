@@ -9,6 +9,7 @@ public class YkckProduct
 	private String product_xh;
 	private String product_remark;
 	private String qz_serial_num;
+	private String qz_flag;
 	private int nums;
 	public int getNums() {
 		return nums;
@@ -52,5 +53,11 @@ public class YkckProduct
 	}
 	public void setYkck_id(String ykck_id) {
 		this.ykck_id = ykck_id;
+	}
+	public String getQz_flag() {
+		return qz_flag;
+	}
+	public void setQz_flag(String qz_flag) {
+		this.qz_flag = qz_flag;
 	}
 }
