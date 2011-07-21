@@ -217,6 +217,7 @@ public class YkckDAO extends JdbcBaseDAO
 			if(SqlUtil.columnIsExist(rs,"qz_serial_num")) ykckProduct.setQz_serial_num(rs.getString("qz_serial_num"));
 			if(SqlUtil.columnIsExist(rs,"product_remark")) ykckProduct.setProduct_remark(rs.getString("product_remark"));
 			if(SqlUtil.columnIsExist(rs, "nums"))ykckProduct.setNums(rs.getInt("nums"));
+			if(SqlUtil.columnIsExist(rs,"qz_flag")) ykckProduct.setQz_serial_num(rs.getString("qz_flag"));
 			return ykckProduct;
 		}
 	}	
