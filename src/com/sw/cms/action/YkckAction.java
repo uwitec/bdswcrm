@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.sw.cms.action.base.BaseAction;
+import com.sw.cms.model.Clients;
 import com.sw.cms.model.Kfdb;
 import com.sw.cms.model.LoginInfo;
 import com.sw.cms.model.Page;
@@ -34,7 +35,8 @@ public class YkckAction extends BaseAction
 	 private Page pageYkck;
 	 private int curPage = 1;
 	 private String iscs_flag = "";  //系统是否初始完成标志
-		
+	
+	 private String isqzxlh_flag = "";  //系统是否要求强制序列号
 	private String msg = "";
 	    /**
 		 * 移库出库列表
@@ -72,7 +74,7 @@ public class YkckAction extends BaseAction
 		 */
 		public String add(){
 			ykck.setId(ykckService.updateYkckID());
-			
+			isqzxlh_flag = userService.getQzxlh();
 			storeList = storeService.getAllStoreList();
 			userList = userService.getAllEmployeeList();
 			return "success";
@@ -86,26 +88,40 @@ public class YkckAction extends BaseAction
 			LoginInfo info = (LoginInfo)getSession().getAttribute("LOGINUSER");
 			String user_id = info.getUser_id();
 			ykck.setCzr(user_id);
-			
+			isqzxlh_flag = userService.getQzxlh();
 			iscs_flag = sysInitSetService.getQyFlag();
 			//只有在系统正式启用后才去判断库存是否满足需求
-			if(iscs_flag.equals("1")){
-				if(ykck.getState().equals("已提交")){
-					msg = ykckService.checkKc(ykck, ykckProducts);
-					
-					if(!msg.equals("")){
+			if(iscs_flag.equals("1"))
+			{
+				if(ykck.getState().equals("已提交"))
+				{
+					msg = ykckService.checkKc(ykck, ykckProducts);					
+					if(!msg.equals(""))
+					{
 						ykck.setState("已保存");
 						ykckService.saveYkck(ykck, ykckProducts);
 						
 						return "input";
 					}
+					
+					if(isqzxlh_flag.equals("01")){
+						msg = ykckService.checkXlh(ykck, ykckProducts);
+						if(!msg.equals(""))
+						{
+							ykck.setState("已保存");
+							ykckService.saveYkck(ykck, ykckProducts);
+							
+							return "input";
+					   }
+					}
+					
 					msg=ykckService.isSerialNumInKcExist(ykckProducts);
-					if(!msg.equals("")){
+					if(!msg.equals(""))
+					{
 							ykck.setState("已保存");
 							ykckService.saveYkck(ykck, ykckProducts);							
 							return "input";
-					}
-					
+					}					
 				}
 			}			
 			
@@ -116,7 +132,7 @@ public class YkckAction extends BaseAction
 		public String edit(){
 			storeList = storeService.getAllStoreList();
 			userList = userService.getAllEmployeeList();
-			
+			isqzxlh_flag = userService.getQzxlh();
 			ykck = (Ykck)ykckService.getYkck(id);
 			ykckProducts = ykckService.getykckProducts(id);
 			return "success";
@@ -127,7 +143,7 @@ public class YkckAction extends BaseAction
 			LoginInfo info = (LoginInfo)getSession().getAttribute("LOGINUSER");
 			String user_id = info.getUser_id();
 			ykck.setCzr(user_id);
-			
+			isqzxlh_flag = userService.getQzxlh();
 			iscs_flag = sysInitSetService.getQyFlag();
 			//只有在系统正式启用后才去判断库存是否满足需求
 			if(iscs_flag.equals("1")){
@@ -140,6 +156,18 @@ public class YkckAction extends BaseAction
 						ykckProducts = ykckService.getykckProducts(ykck.getId());
 						return "input";
 					}
+					
+					if(isqzxlh_flag.equals("01")){
+						msg = ykckService.checkXlh(ykck, ykckProducts);
+						if(!msg.equals(""))
+						{
+							ykck.setState("已保存");
+							ykckService.updateYkck(ykck, ykckProducts);
+							storeList = storeService.getAllStoreList();
+							ykckProducts = ykckService.getykckProducts(ykck.getId());
+							return "input";
+						   }
+						}
 					
 					 msg=ykckService.isSerialNumInKcExist(ykckProducts);
 					 if(!msg.equals("")){
@@ -334,5 +362,13 @@ public class YkckAction extends BaseAction
 
 	public void setId(String id) {
 		this.id = id;
+	}
+	public String getIsqzxlh_flag() {
+		return isqzxlh_flag;
+	}
+
+
+	public void setIsqzxlh_flag(String isqzxlh_flag) {
+		this.isqzxlh_flag = isqzxlh_flag;
 	}
 }

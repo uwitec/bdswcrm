@@ -289,6 +289,7 @@ public class KfdbAction extends BaseAction {
 						kfdb.setState("已出库");
 						kfdbService.updateKfdb(kfdb, kfdbProducts);
 						storeList = storeService.getAllStoreList();
+						kfdbProducts = kfdbService.getKfdbProducts(id);
 						return "input";
 					}
 					if(isqzxlh_flag.equals("01")){
@@ -298,6 +299,7 @@ public class KfdbAction extends BaseAction {
 						    kfdb.setState("已出库");
 							kfdbService.updateKfdb(kfdb, kfdbProducts);
 							storeList = storeService.getAllStoreList();
+							kfdbProducts = kfdbService.getKfdbProducts(id);
 							return "input";
 					   }
 					}
