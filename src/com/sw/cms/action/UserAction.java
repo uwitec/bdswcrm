@@ -68,6 +68,8 @@ public class UserAction extends BaseAction {
 	private String real_name = "";
 	private String dept = "";
 	private String position = "";
+	private String zzzt = "";
+	private String is_del = "";
 	
 	private String orderName ="";
 	private String orderType ="";
@@ -281,12 +283,6 @@ public class UserAction extends BaseAction {
 	 * @return
 	 */
 	public String list(){
-		String real_name = ParameterUtility.getStringParameter(getRequest(), "real_name","");
-		String dept = ParameterUtility.getStringParameter(getRequest(), "dept",""); 
-		String position = ParameterUtility.getStringParameter(getRequest(), "position",""); 
-		
-		LoginInfo info = (LoginInfo) getSession().getAttribute("LOGINUSER");
-		String user_id = info.getUser_id();
 		
 		int curPage = ParameterUtility.getIntParameter(getRequest(), "curPage",1);
 		int rowsPerPage =  Constant.PAGE_SIZE2;
@@ -300,7 +296,13 @@ public class UserAction extends BaseAction {
 		}
 		if(!position.equals("")){
 			con += " and position='" + position + "'";
-		}		
+		}
+		if(!zzzt.equals("")){
+			con += " and zzzt='" + zzzt + "'";
+		}
+		if(!is_del.equals("")){
+			con += " and is_del='" + is_del + "'";
+		}
 		if(orderName.equals("")){
 			orderName = "xh";
 		}
@@ -309,7 +311,7 @@ public class UserAction extends BaseAction {
 		}
 		
 		con += " order by " + orderName + " " + orderType;
-		userPage = userService.getUserListFb(con, curPage, rowsPerPage,user_id);
+		userPage = userService.getUserList(con, curPage, rowsPerPage);
 		
 		depts = userService.getAllDeptList();
 		positions = sjzdService.getSjzdXmxxByZdId("SJZD_ZWXX");
@@ -994,5 +996,25 @@ public class UserAction extends BaseAction {
 
 	public void setQzxlhRightMap(Map qzxlhRightMap) {
 		this.qzxlhRightMap = qzxlhRightMap;
+	}
+
+
+	public String getZzzt() {
+		return zzzt;
+	}
+
+
+	public void setZzzt(String zzzt) {
+		this.zzzt = zzzt;
+	}
+
+
+	public String getIs_del() {
+		return is_del;
+	}
+
+
+	public void setIs_del(String isDel) {
+		is_del = isDel;
 	}
 }

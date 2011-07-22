@@ -42,6 +42,9 @@ public class EmployeeAction extends BaseAction {
 	private String dept_id = "";
 	private String position = "";
 	private String employee_id = "";
+	private String zzzt = "";
+	private String is_del = "";
+
 	
 	private String[] positions;
  
@@ -75,6 +78,12 @@ public class EmployeeAction extends BaseAction {
 		}
 		if(!position.equals("")){
 			con += " and position='" + position + "'";
+		}
+		if(!zzzt.equals("")){
+			con += " and zzzt='" + zzzt + "'";
+		}
+		if(!is_del.equals("")){
+			con += " and is_del='" + is_del + "'";
 		}
 		employeePage = employeeService.getUserListFb(con, curPage, rowsPerPage,user_id);
 		positions = sjzdService.getSjzdXmxxByZdId("SJZD_ZWXX");
@@ -312,6 +321,22 @@ public class EmployeeAction extends BaseAction {
 
 	public void setYwyEmployeePage(Page ywyEmployeePage) {
 		this.ywyEmployeePage = ywyEmployeePage;
+	}
+
+	public String getZzzt() {
+		return zzzt;
+	}
+
+	public void setZzzt(String zzzt) {
+		this.zzzt = zzzt;
+	}
+
+	public String getIs_del() {
+		return is_del;
+	}
+
+	public void setIs_del(String isDel) {
+		is_del = isDel;
 	}
 
 }

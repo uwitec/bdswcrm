@@ -42,24 +42,6 @@ public class UserService {
 		return userDao.getUserList(con, curPage, rowsPerPage);
 	}
 	
-	/**
-	 * 系统管理员可以看到所有的用户信息，非系统管理员只能看到未删除的用户信息
-	 * 取用户列表（带分页）
-	 * @param con
-	 * @param curPage
-	 * @param rowsPerPage
-	 * @return
-	 */
-	public Page getUserListFb(String con,int curPage, int rowsPerPage,String user_id){
-		if(user_id.equals("AD00000001"))
-		{
-		   return userDao.getUserListAll(con, curPage, rowsPerPage);
-		}
-		else
-		{
-			return userDao.getUserList(con, curPage, rowsPerPage);
-		}
-	}
 	
 	/**
 	 * 保存用户信息

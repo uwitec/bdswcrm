@@ -31,14 +31,7 @@ public class EmployeeService {
 	 * @return
 	 */
 	public Page getUserListFb(String con,int curPage, int rowsPerPage,String user_id){
-		if(user_id.equals("AD00000001"))
-		{
 		   return employeeDao.getUserListAll(con, curPage, rowsPerPage);
-		}
-		else
-		{
-		  return employeeDao.getUserList(con, curPage, rowsPerPage);
-		}
 	}
 	
 	/**
