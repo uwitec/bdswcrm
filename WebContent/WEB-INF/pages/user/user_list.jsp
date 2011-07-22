@@ -11,6 +11,7 @@ Page results = (Page)VS.findValue("userPage");
 String orderName = (String)VS.findValue("orderName");
 String orderType = (String)VS.findValue("orderType");
 String real_name = (String)VS.findValue("real_name");
+String is_del = (String)VS.findValue("is_del");
 %>
 
 <html>
@@ -110,7 +111,13 @@ String real_name = (String)VS.findValue("real_name");
 	</tr>
 	<tr>
 		<td class="search" align="left" colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;
-			真实姓名：<input type="text" name="real_name" value="<%=real_name %>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;		
+			真实姓名：<input type="text" name="real_name" value="<%=real_name %>">&nbsp;&nbsp;&nbsp;&nbsp;
+			状态：
+			<select name="is_del">
+				<option value=""></option>
+				<option value="0" <%if("0".equals(StringUtils.nullToStr(is_del))) out.print("selected"); %>>正常</option>
+				<option value="1" <%if("1".equals(StringUtils.nullToStr(is_del))) out.print("selected"); %>>删除</option>
+			</select>&nbsp;&nbsp;&nbsp;&nbsp;		
 			<input type="submit" name="buttonCx" value=" 查询 " class="css_button2">&nbsp;&nbsp;&nbsp;&nbsp;	
 			<input type="button" name="buttonQk" value=" 清空 " class="css_button2" onclick="clearAll();">
 		</td>				
@@ -119,13 +126,14 @@ String real_name = (String)VS.findValue("real_name");
 <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
-		<td width="10%">选择</td>
-		<td width="10%" onclick="doSort('user_id');">用户编号<%if(orderName.equals("user_id")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td width="15%" onclick="doSort('user_name');">登录名<%if(orderName.equals("user_name")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td width="15%" onclick="doSort('real_name');">真实姓名<%if(orderName.equals("real_name")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td width="15%" onclick="doSort('gs_phone');">电话<%if(orderName.equals("gs_phone")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td width="15%" onclick="doSort('mobile');">手机<%if(orderName.equals("mobile")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td width="20%">操作</td>
+		<td>选择</td>
+		<td onclick="doSort('user_id');">用户编号<%if(orderName.equals("user_id")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td onclick="doSort('user_name');">登录名<%if(orderName.equals("user_name")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td onclick="doSort('real_name');">真实姓名<%if(orderName.equals("real_name")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td onclick="doSort('gs_phone');">电话<%if(orderName.equals("gs_phone")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td onclick="doSort('mobile');">手机<%if(orderName.equals("mobile")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td onclick="doSort('mobile');">状态<%if(orderName.equals("is_del")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td>操作</td>
 	</tr>
 	</thead>
 	<%
@@ -134,6 +142,12 @@ String real_name = (String)VS.findValue("real_name");
 	
 	while(it.hasNext()){
 		Map map = (Map)it.next();
+		String q_is_del = StringUtils.nullToStr(map.get("is_del"));
+		if(q_is_del.equals("0")){
+			q_is_del =  "正常";
+		}else{
+			q_is_del = "删除";
+		}
 	%>
 	<tr>
 		<td class="a1"><input type="checkbox" name="user_id" value="<%=StringUtils.nullToStr(map.get("user_id")) %>"></td>
@@ -142,9 +156,9 @@ String real_name = (String)VS.findValue("real_name");
 		<td class="a1"><%=StringUtils.nullToStr(map.get("real_name")) %></td>
 		<td class="a1"><%=StringUtils.nullToStr(map.get("gs_phone")) %></td>
 		<td class="a1"><%=StringUtils.nullToStr(map.get("mobile")) %></td>
+		<td class="a1"><%=q_is_del %></td>
 		<td class="a1">
 			<a href="javascript:edit('<%=StringUtils.nullToStr(map.get("user_id")) %>');">修改</a>&nbsp;&nbsp;&nbsp;&nbsp;
-			<!--<a href="javascript:openWin('<%=StringUtils.nullToStr(map.get("user_id")) %>');">查看</a>&nbsp;&nbsp;&nbsp;&nbsp;-->
 			<%if(StringUtils.nullToStr(map.get("is_del")).equals("0")){ %>
 			  <a href="javascript:del('<%=StringUtils.nullToStr(map.get("user_id")) %>');">删除</a>&nbsp;&nbsp;&nbsp;&nbsp;
 			<%}else{ %>

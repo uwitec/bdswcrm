@@ -90,3 +90,6 @@ INSERT INTO `qzxlh_right` VALUES ('01');
 
 --库存盘点增加强制序列号字段
 ALTER TABLE `kcpd_desc` ADD COLUMN `qz_serial_num` varchar(4000) default NULL  AFTER `remark`;
+
+2011-07-20修改员工状态
+update sys_user set zzzt='在职' where is_sys_user='0' and zzzt is null
