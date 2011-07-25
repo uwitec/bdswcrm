@@ -174,6 +174,16 @@ public class BxdAction extends BaseAction
 						
             if(bxd.getState().equals("已提交"))
             {
+//            	判断提交的报修商品是否在坏件库里
+            	msg =bxdService.isBadShkcExist(bxd,bxdProducts); 
+            	if(!msg.equals(""))
+            	{            		
+            		bxd.setState("已保存");
+            		wxszd = sjzdService.getSjzdXmxxByZdId("SJZD_WXSZD");
+            		this.saveMessage(msg);
+            		return "input";            		
+            	} 
+            	
             	//判断提交的报修商品是否在在外库里            	
             	msg =bxdService.isZyShkcExist(bxd,bxdProducts); 
 			    if(!msg.equals(""))
@@ -189,19 +199,17 @@ public class BxdAction extends BaseAction
 				if(!msg.equals(""))
 				{
             		bxd.setState("已保存");
-            		wxszd = sjzdService.getSjzdXmxxByZdId("SJZD_WXSZD");
+            		wxszd = sjzdService.getSjzdXmxxByZdId("SJZD_WXSZD");            		
             		this.saveMessage(msg);
             		return "input";
             	}
 				
-            	//保存信息
-            	bxdService.saveBxd(bxd, bxdProducts);
+				bxdService.saveBxd(bxd, bxdProducts);
             }
             if(bxd.getState().equals("已保存"))
             {
-            	bxdService.saveBxd(bxd, bxdProducts);
+               bxdService.saveBxd(bxd, bxdProducts);
             }
-			
 			return "success";
 		} catch (Exception e) {
 			log.error("保存报修单  失败原因" + e.getMessage());
@@ -247,7 +255,17 @@ public class BxdAction extends BaseAction
 				 
 			    if(bxd.getState().equals("已提交"))
 	            {
-	            	//判断提交的报修商品是否在坏件库里
+			    	//判断提交的报修商品是否在坏件库里
+	            	msg =bxdService.isBadShkcExist(bxd,bxdProducts); 
+	            	if(!msg.equals(""))
+	            	{            		
+	            		bxd.setState("已保存");
+	            		wxszd = sjzdService.getSjzdXmxxByZdId("SJZD_WXSZD");
+	            		this.saveMessage(msg);
+	            		return "input";            		
+	            	} 
+			    	
+			    	//判断提交的报修商品是否在在外库里
 			    	msg =bxdService.isZyShkcExist(bxd,bxdProducts); 
 				    if(!msg.equals(""))
 	            	{					    
