@@ -383,7 +383,7 @@ var allCount = <%=counts %>;
 		</td>	
 		<td class="a1" width="15%">经手人</td>
 		<td class="a2" width="35%">
-		 <input id="brand" type="text" ength="20" onblur="setValue();" value="<%=StaticParamDo.getRealNameById(StringUtils.nullToStr(bxd.getJsr())) %>"/> 
+		 <input id="brand" type="text" ength="20" onblur="setValue();" value="<%=StaticParamDo.getRealNameById(StringUtils.nullToStr(bxd.getJsr())) %>"> 
          <!--<img src="images/select.gif" align="absmiddle" title="选择经手人" border="0" onclick="openywyWin();" style="cursor:hand">
           --><div   id="brandTip"  style="height:12px;position:absolute;left:610px; top:85px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
           </div>
