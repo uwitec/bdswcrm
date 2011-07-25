@@ -44,6 +44,16 @@ function doTh(){
 		<td colspan="4">库房调拨</td>
 	</tr>
 	</thead>
+	<%
+//如果有信息则显示
+if(!msg.equals("")){
+%>
+	<tr>
+		<td colspan="4" class="a2"><font color="red"><%=msg %></font></td>
+	</tr>	
+<%
+}
+%>
 	<tr>
 		<td class="a1" width="15%">编号</td>
 		<td class="a2"><%=StringUtils.nullToStr(kfdb.getId()) %></td>	
