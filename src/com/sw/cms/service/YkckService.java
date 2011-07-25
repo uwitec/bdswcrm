@@ -265,11 +265,12 @@ public Page getYkckList(String con,int curPage, int rowsPerPage){
 				if(ykckProduct != null){
 					if(!ykckProduct.getProduct_id().equals("") && !ykckProduct.getProduct_name().equals("")){
 						String product_id = ykckProduct.getProduct_id();
-						int cknums = ykckProduct.getNums();  //要出库数量						
+						int cknums = ykckProduct.getNums();  //要出库数量	
+						
 						int kcnums = productKcDao.getKcNums(product_id, store_id);//库存数量
 						
 						if(cknums>kcnums){
-							msg += ykckProduct.getProduct_name() + " 当前库存为：" + kcnums + "  无法满足调拨请求，不能出库\n";
+							msg += ykckProduct.getProduct_name() + " 当前库存为：" + kcnums + "  无法满足移库出库请求，不能出库\n";
 						}
 					}
 				}

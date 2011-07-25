@@ -215,6 +215,7 @@ public class JjdService {
 	public String isSerialNumInKcExist(List jjdProducts)
 	{
 		String message="";
+		String serials="";
 		if(!getSerialNum(jjdProducts).toString().equals(""))
 		{
 		  String serialNumStr[]=getSerialNum(jjdProducts).toString().split(",");	
@@ -227,13 +228,16 @@ public class JjdService {
 			   int count=shkcDao.getShkcBySerialNum(serialNumStr[i]);
 			   if(count>0)
 			   {
-				   message="提交的接件单商品序列号已在售后库存中拥有，请检查！";
-				   break;
+				   serials+=serialNumStr[i]+" ";	
 			   }
 			}
 		  }
 		}
 		 
+		if(!serials.equals(""))
+		{
+			message="提交的接件单商品序列号"+serials+"已在售后库存中拥有，请检查！";
+		}
 		return message;
 	}
 	

@@ -155,9 +155,15 @@ public class YkrkService
 					if(ykrkProduct != null){
 						if(!ykrkProduct.getProduct_id().equals("") && !ykrkProduct.getProduct_name().equals("")){
 							String product_id = ykrkProduct.getProduct_id();
-							int cknums = ykrkProduct.getNums();  //要入库数量						
-							int kcnums = productKcDao.getHaoKcNums(product_id);//库存数量
-							
+							int cknums = ykrkProduct.getNums();  //要入库数量	
+							int kcnums =0;
+							if(!ykrkProduct.getQz_serial_num().equals("")){
+							    kcnums = productKcDao.getHaoKcNums(product_id);//库存数量
+							}
+							else
+							{
+								kcnums = productKcDao.getHaoKcNumsNqz(product_id);//库存数量
+							}
 							if(cknums>kcnums){
 								msg += ykrkProduct.getProduct_name() + " 当前好件库中库存为：" + kcnums + "  无法满足移库请求，不能出库\n";
 							}
@@ -172,6 +178,7 @@ public class YkrkService
 		public String isSerialNumInKcExist(List ykrkProducts)
 		{
 			String message="";	
+			String serialNumList="";
 			if(ykrkProducts!=null&&ykrkProducts.size()>0)
 			{
 				 for(int i=0;i<ykrkProducts.size();i++)
@@ -187,8 +194,7 @@ public class YkrkService
 							     int count=shkcDao.getHaoShkcBySerialNum(serialNum[j]);
 					    	     if(count==0)
 					    	     {
-					    		    message="好件库已无序列号:"+serialNum[j]+" 的商品,请检查！";
-					    		    break;
+					    	    	serialNumList+=serialNum[j]+" ";					    		   
 					    	     }
 						      }
 				        }
@@ -197,7 +203,10 @@ public class YkrkService
 				  }
 			}
 			 
-			
+			if(!serialNumList.equals(""))
+			{
+				message="好件库已无序列号:"+serialNumList+" 的商品,请检查！";
+			}
 			return message;
 		}
 		
