@@ -439,8 +439,25 @@ public class ShkcDAO extends JdbcBaseDAO
 		return this.queryForObject(sql, new ShkcRowMapper());
    }
    
+   public int getShkcQz(String product_id,String state)
+   {
+	   int nums = 0;
+	   String sql = "select sum(nums) as nums from shkc where product_id='" + product_id + "' and state='"+ state + "'";
+		
+	   List list = this.getResultList(sql);
+		if(list != null && list.size() > 0){
+			Map map = (Map)list.get(0);
+			String strNum = StringUtils.nullToStr(map.get("nums"));
+			
+			if(!strNum.equals("")){
+				nums = Integer.parseInt(strNum);
+			}
+		}
+		return nums;
+   }
+   
    /**
-    * 维修入库单修改售后库存（0：坏件库1：在外库2：好件库 4：报废库）
+    * 维修入库单修改售后库存（1：坏件库 2：在外库 3：好件库 4：报废库）
     *
     */
    public void updateWxShkcState(String serialNum,String state)
