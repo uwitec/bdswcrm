@@ -136,30 +136,101 @@ public class BxfhdService
   
   /**
 	 * 检查好件库是否有该序列号
-	 * @param bxdProducts
+	 * @param bxfhdProducts
+	 * @param bxfhd
 	 * @return
 	 */
 	public String isHaoShkcExist(Bxfhd bxfhd,List bxfhdProducts)
 	{		
 		String message="";
-		if(bxfhdProducts != null && bxfhdProducts.size()>0)
+		String serials="";
+		String serialNumStr[]=getSerialNum(bxfhdProducts).toString().split(",");	
+		if(!serialNumStr.equals(""))
 		{
-			for(int i=0;i<bxfhdProducts.size();i++)
+			
+			for(int i=0;i<serialNumStr.length;i++)
 			{
-				BxfhdProduct bxfhdProduct = (BxfhdProduct)bxfhdProducts.get(i);
-				if(!bxfhdProduct.getQz_serial_num().equals(""))
-			    {
-				  int count=shkcDao.getHaoShkcBySerialNum(bxfhdProduct.getQz_serial_num());
+			  if(!serialNumStr[i].equals(""))
+			  {
+				  int count=shkcDao.getHaoShkcBySerialNum(serialNumStr[i]);
 				  if(count!=0)
-			      {					
-					message+="好件库存在该序列号:"+bxfhdProduct.getQz_serial_num()+" 的商品,请检查！\n";					
+			      {	
+					serials+=serialNumStr[i]+" ";		 
 				  }				 
 			    }
 		    }
 		}
 		
+		if(!serials.equals(""))
+		{
+			message+="好件库存在该序列号:"+serials+" 的商品,请检查！";
+		}
 		return message;
 	} 
+	
+	
+	/**
+	 * 检查在外库是否有该序列号
+	 * @param bxfhdProducts
+	 * @return
+	 */
+	public String isZyShkcExist(Bxfhd bxfhd,List bxfhdProducts)
+	{		
+		String message="";
+		String serials="";
+		String serialNumStr[]=getSerialNum(bxfhdProducts).toString().split(",");	
+		if(!serialNumStr.equals(""))
+		{
+			
+			for(int i=0;i<serialNumStr.length;i++)
+			{
+			  if(!serialNumStr[i].equals(""))
+			  {
+				  int count=shkcDao.getWeiShkcBySerialNum(serialNumStr[i]);
+				  if(count==0)
+			      {
+					  serials+=serialNumStr[i]+" ";					 
+				  }
+			    }
+		    }
+		}	
+		if(!serials.equals(""))
+		{
+			 message+="该序列号:"+serials+" 的商品未送修在外,请检查！";
+		}
+		
+		return message;
+	}
+	
+	public String getSerialNum(List bxfhdProducts)
+	{
+		 
+		String serialNumList="";
+		if(bxfhdProducts!=null&&bxfhdProducts.size()>0)
+		{
+		   for(int i=0;i<bxfhdProducts.size();i++)
+		  {
+			  BxfhdProduct bxfhdProduct = (BxfhdProduct)bxfhdProducts.get(i);
+			 if(bxfhdProduct!=null)
+			 {
+				if(!bxfhdProduct.getProduct_name().equals("")&&!bxfhdProduct.getProduct_id().equals(""))
+				{	
+					if(!bxfhdProduct.getQz_serial_num().equals(""))
+					{
+			          String serialNum[]=bxfhdProduct.getQz_serial_num().toString().split(",");
+				      for(int j=0;j<serialNum.length;j++)
+				      {
+				     	serialNumList+=serialNum[j]+",";
+				      }
+					}
+		 	     }		    
+			 }
+		  }
+		}
+		return serialNumList;
+	}
+	
+	
 	/**
 	 * 判断库存量是否满足报修返还处理
 	 * @param bxfhd
@@ -176,21 +247,25 @@ public class BxfhdService
 						String product_id = bxfhdProduct.getProduct_id();
 						
 						//进行库存数量判断
-						Shkc shkc = (Shkc)shkcDao.getShkc(product_id,"2");
-						
-							int cknums = bxfhdProduct.getNums();  //要报修数量
-							int kcnums;
-							if(shkc != null){
+						int kcnums;
+						if(bxfhdProduct.getQz_serial_num().equals("")){
+						   Shkc shkc = (Shkc)shkcDao.getShkc(product_id,"2");
+						   if(shkc != null){
 							   kcnums = shkc.getNums();//库存数量
 							}
 							else
 							{
 							   kcnums =0;
 							}
-							
-							if(cknums>kcnums){
-								msg += bxfhdProduct.getProduct_name() + " 当前库存为：" + kcnums + "  无法进行报修返还处理\n";
-							}						
+						}
+						else
+						{
+							kcnums= shkcDao.getShkcQz(product_id,"2");							
+						}
+						int cknums = bxfhdProduct.getNums();  //要报修数量
+						if(cknums>kcnums){
+							msg += bxfhdProduct.getProduct_name() + " 当前库存为：" + kcnums + "  无法进行报修返还处理\n";
+						}						
 					}
 				}
 			}
