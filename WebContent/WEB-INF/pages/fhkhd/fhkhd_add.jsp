@@ -593,8 +593,8 @@ session.removeAttribute("messages");
 	<tr>			
 		<td class="a1" width="15%">客户名称</td>
 		<td class="a2" width="35%">
-		<input type="text" name="fhkhd.client_name"   id="client_name" onblur="setClientRegInfo();" value="" style="width:232px" maxlength="50">
-		<input style="width:230px;display: none" type="text" name="fhkhd.client_id" id="client_id" value=""  maxlength="50" >
+		<input type="text" name="fhkhd.client_name"   id="client_name" onblur="setClientRegInfo();" value="<%=StaticParamDo.getClientNameById(StringUtils.nullToStr(fhkhd.getClient_id())) %>"  style="width:232px" maxlength="50">
+		<input style="width:230px;display: none" type="text" name="fhkhd.client_id" id="client_id" value="<%=StringUtils.nullToStr(fhkhd.getClient_id()) %>"  maxlength="50" >
 		<font color="red">*</font><div id="clientsTip" style="height:12px;position:absolute;width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;"></div>
 		</td>				
 		<td class="a1" width="15%">联系人</td>
