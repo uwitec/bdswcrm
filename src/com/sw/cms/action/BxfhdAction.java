@@ -173,7 +173,18 @@ public class BxfhdAction extends BaseAction
 			 
 		    if(bxfhd.getState().equals("已提交"))
             {
-              //判断提交的报修商品是否在好件库里
+                //判断提交的报修商品是否在在外库里            	
+            	msg =bxfhdService.isZyShkcExist(bxfhd,bxfhdProducts);
+			    if(!msg.equals(""))
+            	{            		
+			    	bxfhd.setState("已保存");
+            		wxszd = sjzdService.getSjzdXmxxByZdId("SJZD_WXSZD");
+            		this.saveMessage(msg);
+            		return "input";
+            		
+            	} 
+		    	
+		    	//判断提交的报修商品是否在好件库里
 		    	msg = bxfhdService.isHaoShkcExist(bxfhd,bxfhdProducts);
 			    if(!msg.equals(""))
             	{
@@ -222,7 +233,19 @@ public class BxfhdAction extends BaseAction
 			 
 		    if(bxfhd.getState().equals("已提交"))
             {
-            	//判断提交的报修商品是否在好件库里
+               //判断提交的报修商品是否在在外库里            	
+            	msg =bxfhdService.isZyShkcExist(bxfhd,bxfhdProducts);
+			    if(!msg.equals(""))
+            	{            		
+			    	bxfhd.setState("已保存");
+            		wxszd = sjzdService.getSjzdXmxxByZdId("SJZD_WXSZD");
+            		this.saveMessage(msg);
+            		return "input";
+            		
+            	} 
+		    	
+		    	
+		    	//判断提交的报修商品是否在好件库里
 		    	msg = bxfhdService.isHaoShkcExist(bxfhd,bxfhdProducts);
 			    if(!msg.equals(""))
             	{
