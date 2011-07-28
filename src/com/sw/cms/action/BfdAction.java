@@ -174,6 +174,16 @@ public class BfdAction extends BaseAction
 						
             if(bfd.getState().equals("已提交"))
             {
+                 //判断提交的报废商品是否在坏件库里
+            	msg =bfdService.isBadShkcExist(bfd,bfdProducts);
+            	if(!msg.equals(""))
+            	{            		
+            		bfd.setState("已保存");
+            		wxszd = sjzdService.getSjzdXmxxByZdId("SJZD_WXSZD");
+            		this.saveMessage(msg);
+            		return "input";        		
+            	} 
+            	
             	//判断提交的报废商品是否在报废库里
             	msg=bfdService.isBfShkcExist(bfd,bfdProducts);
             	if(!msg.equals(""))
@@ -246,7 +256,18 @@ public class BfdAction extends BaseAction
 				 
 			    if(bfd.getState().equals("已提交"))
 	            {
-	            	//判断提交的报废商品是否在报废库里
+			    	 //判断提交的报废商品是否在坏件库里
+	            	msg =bfdService.isBadShkcExist(bfd,bfdProducts);
+	            	if(!msg.equals(""))
+	            	{            		
+	            		bfd.setState("已保存");
+	            		wxszd = sjzdService.getSjzdXmxxByZdId("SJZD_WXSZD");
+	            		this.saveMessage(msg);
+	            		return "input";        		
+	            	} 
+			    	
+			    	
+			    	//判断提交的报废商品是否在报废库里
 			    	msg=bfdService.isBfShkcExist(bfd,bfdProducts);
 	            	if(!msg.equals(""))
 	            	{

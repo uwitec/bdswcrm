@@ -93,6 +93,7 @@ public class WxrkdAction extends BaseAction
 		    userList = userService.getAllEmployeeList();	 
 			wxrkd.setId(wxrkdService.updateWxrkdId());		
 			clientsList = clientsService.getClientList("");
+			userList = userService.getAllEmployeeList();
 		  return "success";
 	  }
 	  catch(Exception e)
@@ -148,6 +149,16 @@ public class WxrkdAction extends BaseAction
             		wxrkd.setState("已保存");           	 
             		return "input";
             	} 
+            	
+               //判断提交的报修商品是否在好件库里
+		    	msg = wxrkdService.isHaoShkcExist(wxrkdProducts);
+			    if(!msg.equals(""))
+            	{
+			    	this.saveMessage(msg);
+            		wxrkd.setState("已保存");           	 
+            		return "input";
+            	}
+            	
             	
                 // 判断库存是否满足要求            	
             	msg = wxrkdService.checkKc(wxrkd, wxrkdProducts);
@@ -214,6 +225,16 @@ public class WxrkdAction extends BaseAction
 	            		wxrkd.setState("已保存");	            	 
 	            		return "input";
 	            	} 
+	            	
+	            	
+                   //判断提交的报修商品是否在好件库里
+			    	msg = wxrkdService.isHaoShkcExist(wxrkdProducts);
+				    if(!msg.equals(""))
+	            	{
+				    	this.saveMessage(msg);
+	            		wxrkd.setState("已保存");           	 
+	            		return "input";
+	            	}
 	            	
 	            	 // 判断库存是否满足要求            	
 	            	msg = wxrkdService.checkKc(wxrkd, wxrkdProducts);
