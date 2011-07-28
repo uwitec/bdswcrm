@@ -337,7 +337,7 @@ if(wxrkdProducts != null && wxrkdProducts.size()>0){
 </script>
 
 </head>
-<body onload="initFzrTip();initClientTip()">
+<body onload="initFzrTip();">
 <FORM  name="wxrkdForm" action="saveWxrkd.html" method="post">
 <input type="hidden" name="wxrkd.state" id="state" value="">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0" id="tables">
@@ -383,7 +383,7 @@ if(wxrkdProducts != null && wxrkdProducts.size()>0){
 		
 		<td class="a1" width="15%">维修人</td>
 		<td class="a2">
-		   <input  id="brand"  type="text"   length="20"  onblur="setValue()" value="<%=StaticParamDo.getRealNameById(wxrkd.getJsr()) %>"/><font color="red">*</font> 
+		   <input  id="brand"  type="text"   length="20"  onblur="setValue()" value="<%=StaticParamDo.getRealNameById(wxrkd.getJsr()) %>"><font color="red">*</font> 
            <div  id="brandTip"  style="height:12px;position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		   <input type="hidden" name="wxrkd.jsr" id="fzr" value="<%=StringUtils.nullToStr(wxrkd.getJsr()) %>"/> 
 		    
@@ -423,6 +423,7 @@ if(wxrkdProducts != null && wxrkdProducts.size()>0){
 		   }
  %>
 	<tr>
+	    <td class="a2"><input type="checkbox" name="proc_id" id="proc_id" value="<%=i %>"></td>
 		<td class="a2">
 			<input type="text" id="product_name_<%=i %>" name="wxrkdProducts[<%=i %>].product_name" value="<%=StringUtils.nullToStr(wxrkdProduct.getProduct_name()) %>" style="width:100%" readonly="readonly">
 			<input type="hidden" id="product_id_<%=i %>" name="wxrkdProducts[<%=i %>].product_id" value="<%=StringUtils.nullToStr(wxrkdProduct.getProduct_id()) %>">

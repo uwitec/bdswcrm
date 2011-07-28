@@ -327,7 +327,7 @@ session.removeAttribute("messages");
 </script>
 
 </head>
-<body onload="initFzrTip();initClientTip();">
+<body onload="initFzrTip();">
 <form name="bfdForm" action="updateBfd.html" method="post">
 <input type="hidden" name="bfd.state" id="state" value="">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
@@ -360,11 +360,11 @@ session.removeAttribute("messages");
 	<tr>		 
 		<td class="a1" width="15%">经手人</td>
 		<td class="a2" width="35%">
-		 <input id="brand" type="text" ength="20" onblur="setValue();" value="<%=StaticParamDo.getRealNameById(StringUtils.nullToStr(bfd.getJsr())) %>"/> 
+		 <input id="brand" type="text" ength="20" onblur="setValue();" value="<%=StaticParamDo.getRealNameById(StringUtils.nullToStr(bfd.getJsr())) %>"> 
          <!--<img src="images/select.gif" align="absmiddle" title="选择经手人" border="0" onclick="openywyWin();" style="cursor:hand">
           --><div   id="brandTip"  style="height:12px;position:absolute;left:610px; top:85px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
           </div>
-		  <input type="hidden" name="bfd.jsr" id="fzr" value="<%=bfd.getJsr()%>"/> <font color="red">*</font>	
+		  <input type="hidden" name="bfd.jsr" id="fzr" value="<%=bfd.getJsr()%>"> <font color="red">*</font>	
 		</td>
 	</tr>	 
 </table>

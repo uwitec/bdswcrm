@@ -49,7 +49,7 @@ String orderType = (String)VS.findValue("orderType");
 	function add(){
 		var destination = "addWxrkd.html";
 		var fea ='width=950,height=700,left=' + (screen.availWidth-950)/2 + ',top=' + (screen.availHeight-750)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';	
-		window.open(destination,'添加维修入库单',fea );	
+		window.open(destination,'添加维修入库单',fea);	
 	}
 	
 	function edit(id){

@@ -333,7 +333,7 @@ if(wxrkdProducts != null && wxrkdProducts.size()>0){
 </script>
 
 </head>
-<body onload="initFzrTip();initClientTip()">
+<body onload="initFzrTip();">
 <FORM  name="wxrkdForm" action="updateWxrkd.html" method="post">
 <input type="hidden" name="wxrkd.state" id="state" value="">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0" id="tables">
@@ -367,9 +367,9 @@ if(wxrkdProducts != null && wxrkdProducts.size()>0){
 		
 		<td class="a1" width="15%">维修人</td>
 		<td class="a2">
-		   <input  id="brand"  type="text"   length="20"  onblur="setValue()" value="<%=StaticParamDo.getRealNameById(wxrkd.getJsr()) %>"/> 
+		   <input  id="brand"  type="text"   length="20"  onblur="setValue()" value="<%=StaticParamDo.getRealNameById(wxrkd.getJsr()) %>"> 
            <div  id="brandTip"  style="height:12px;position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
-		   <input type="hidden" name="wxrkd.jsr" id="fzr" value="<%=StringUtils.nullToStr(wxrkd.getJsr()) %>"/> 
+		   <input type="hidden" name="wxrkd.jsr" id="fzr" value="<%=StringUtils.nullToStr(wxrkd.getJsr()) %>"> 
 		    
 		</td>				
 	</tr>
