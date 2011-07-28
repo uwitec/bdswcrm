@@ -5,6 +5,7 @@ import com.sw.cms.dao.ShkcDAO;
 import com.sw.cms.dao.WxrkdDAO;
 import com.sw.cms.model.Bxd;
 import com.sw.cms.model.BxdProduct;
+import com.sw.cms.model.Bxfhd;
 import com.sw.cms.model.Page;
 import com.sw.cms.model.ShSerialNumFlow;
 import com.sw.cms.model.Shkc;
@@ -43,6 +44,7 @@ public class WxrkdService
   public String isBadShkcExist(List wxrkdProducts)
   {
 		String message="";
+		String serials="";
 		if(wxrkdProducts != null && wxrkdProducts.size()>0)
 		{
 			for(int i=0;i<wxrkdProducts.size();i++)
@@ -57,15 +59,59 @@ public class WxrkdService
 				     int count=shkcDao.getBadShkcBySerialNum(arryNums[k]);
 				     if(count==0)
 				     {
-				    	message+="坏件库已无序列号:"+wxrkddProduct.getQz_serial_num()+" 的商品,请检查！";
+				    	 serials+=arryNums[k]+" ";				    	
 				     }
 				   }
 			    }
 			}
 		}
-		
+		if(!serials.equals(""))
+		{
+			message+="坏件库已无序列号:"+serials+" 的商品,请检查！";
+		}
 		return message;
    }
+  
+  /**
+	 * 检查好件库是否有该序列号
+	 * @param wxrkdProducts
+	 * @param 
+	 * @return
+	 */
+	public String isHaoShkcExist(List wxrkdProducts)
+	{		
+		String message="";
+		String serials="";
+		if(wxrkdProducts != null && wxrkdProducts.size()>0)
+		{
+			for(int i=0;i<wxrkdProducts.size();i++)
+			{
+				WxrkdProduct wxrkddProduct = (WxrkdProduct)wxrkdProducts.get(i);
+			    if(!wxrkddProduct.getQz_serial_num().equals(""))
+			    {
+			    	String[] arryNums = (wxrkddProduct.getQz_serial_num()).split(",");
+					
+			        for(int j=0;j<arryNums.length;j++)
+			        {
+			            if(!arryNums[j].equals(""))
+			            {
+				            int count=shkcDao.getHaoShkcBySerialNum(arryNums[j]);
+				            if(count!=0)
+			                {	
+					          serials+=arryNums[j]+" ";	
+			                }
+			            }
+			         }
+				  }				 
+		      }
+		  }		
+		
+		if(!serials.equals(""))
+		{
+			message+="好件库存在该序列号:"+serials+" 的商品,请检查！";
+		}
+		return message;
+	} 
   
   /**
 	 * 判断库存量是否满足维修入库处理
@@ -83,10 +129,9 @@ public class WxrkdService
 						String product_id = wxrkdProduct.getProduct_id();
 						
 						//进行库存数量判断
-						Shkc shkc = (Shkc)shkcDao.getShkc(product_id,"1");
-						
-							int cknums = wxrkdProduct.getNums();  //要维修入库数量
-							int kcnums;
+						int kcnums;
+						if(wxrkdProduct.getQz_serial_num().equals("")){
+							Shkc shkc = (Shkc)shkcDao.getShkc(product_id,"1");
 							if(shkc != null){
 							   kcnums = shkc.getNums();//库存数量
 							}
@@ -94,10 +139,16 @@ public class WxrkdService
 							{
 							   kcnums =0;
 							}
+						}
+						else
+						{
+							kcnums = shkcDao.getShkcQz(product_id,"1");							
+						}
+						int cknums = wxrkdProduct.getNums();  //要维修入库数量
 							
-							if(cknums>kcnums){
-								msg += wxrkdProduct.getProduct_name() + " 当前库存为：" + kcnums + "  无法进行维修入库\n";
-							}						
+						if(cknums>kcnums){
+							msg += wxrkdProduct.getProduct_name() + " 当前库存为：" + kcnums + "  无法进行维修入库\n";
+						}						
 					}
 				}
 			}

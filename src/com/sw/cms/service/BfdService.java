@@ -13,6 +13,7 @@ import com.sw.cms.model.SerialNumFlow;
 import com.sw.cms.model.SerialNumMng;
 import com.sw.cms.model.ShSerialNumFlow;
 import com.sw.cms.model.Shkc;
+import com.sw.cms.model.YkckProduct;
 import com.sw.cms.util.DateComFunc;
 import com.sw.cms.util.StaticParamDo;
 
@@ -209,17 +210,22 @@ public class BfdService {
 						String product_id = bfdProduct.getProduct_id();
 						
 						//进行库存数量判断
-						Shkc shkc = (Shkc)shkcDao.getShkc(product_id,"1");
-						
-							int cknums = bfdProduct.getNums();  //要报废数量
-							int kcnums;
-							if(shkc != null){
-							   kcnums = shkc.getNums();//库存数量
-							}
-							else
-							{
-							   kcnums =0;
-							}
+						int kcnums;
+						if(bfdProduct.getQz_serial_num().equals("")){
+						  Shkc shkc = (Shkc)shkcDao.getShkc(product_id,"1");
+						  if(shkc != null){
+						     kcnums = shkc.getNums();//库存数量
+						  }
+						  else
+						  {
+						     kcnums =0;
+						  }
+						}
+						else
+						{
+							kcnums = shkcDao.getShkcQz(product_id,"1");						    
+						}
+							int cknums = bfdProduct.getNums();  //要报废数量		
 							
 							if(cknums>kcnums){
 								msg += bfdProduct.getProduct_name() + " 当前库存为：" + kcnums + "  无法进行报废处理\n";
@@ -247,26 +253,91 @@ public class BfdService {
 	{
 		
 		String message="";
-		if(bfdProducts != null && bfdProducts.size()>0)
+		String serials="";
+		String serialNumStr[]=getSerialNum(bfdProducts).toString().split(",");	
+		if(!serialNumStr.equals(""))
 		{
-			for(int i=0;i<bfdProducts.size();i++)
+			
+			for(int i=0;i<serialNumStr.length;i++)
 			{
-				BfdProduct bfdProduct = (BfdProduct)bfdProducts.get(i);
-				if(!bfdProduct.getQz_serial_num().equals(""))
-			    {
-				  int count=shkcDao.getBfShkcBySerialNum(bfdProduct.getQz_serial_num());
+			  if(!serialNumStr[i].equals(""))
+			  {
+				  int count=shkcDao.getBfShkcBySerialNum(serialNumStr[i]);
 				  if(count!=0)
 			      {
-					message="该序列号:"+bfdProduct.getQz_serial_num()+" 的商品已经报废,请检查！";
-					break;
+					serials+=serialNumStr[i]+" ";	
 				  }				  
 			    }
 		    }
 		}
-		
+		if(!serials.equals(""))
+		{
+			message="该序列号:"+serials+" 的商品已经报废,请检查！";
+		}
 		return message;
 	}
 
+	/**
+	 * 检查坏件库是否有该序列号
+	 * @param bfdProducts
+	 * @return
+	 */
+	public String isBadShkcExist(Bfd bfd,List bfdProducts)
+	{		
+		String message="";
+		String serials="";
+		String serialNumStr[]=getSerialNum(bfdProducts).toString().split(",");	
+		if(!serialNumStr.equals(""))
+		{
+			
+			for(int i=0;i<serialNumStr.length;i++)
+			{
+			  if(!serialNumStr[i].equals(""))
+			  {
+				  int count=shkcDao.getBadShkcBySerialNum(serialNumStr[i]);
+				  if(count==0)
+			      {
+					  serials+=serialNumStr[i]+" ";					 
+				  }
+			    }
+		    }
+		}	
+		if(!serials.equals(""))
+		{
+			 message+="该序列号:"+serials+" 的商品未在坏件库中,请检查！";
+		}
+		
+		return message;
+	}
+	
+	public String getSerialNum(List bfdProducts)
+	{
+		 
+		String serialNumList="";
+		if(bfdProducts!=null&&bfdProducts.size()>0)
+		{
+		   for(int i=0;i<bfdProducts.size();i++)
+		  {
+			  BfdProduct bfdProduct = (BfdProduct)bfdProducts.get(i);
+			 if(bfdProduct!=null)
+			 {
+				if(!bfdProduct.getProduct_name().equals("")&&!bfdProduct.getProduct_id().equals(""))
+				{	
+					if(!bfdProduct.getQz_serial_num().equals(""))
+					{
+			          String serialNum[]=bfdProduct.getQz_serial_num().toString().split(",");
+				      for(int j=0;j<serialNum.length;j++)
+				      {
+				     	serialNumList+=serialNum[j]+",";
+				      }
+					}
+		 	     }		    
+			 }
+		  }
+		}
+		return serialNumList;
+	}
+	
 	/**
 	 * 坏件库列表（带分页）
 	 * @param con
