@@ -502,10 +502,21 @@ public class ProductKcDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public Page getProductKcMx(String kc_con,int curPage,int rowsPerPage){
+		kc_con = ((kc_con.replace("　", " ")).replace(",", "")).replace("，", " ");
+		String[] arryCon = kc_con.split(" ");
 		String sql = "SELECT a.*,(select sum(nums) from product_kc b where b.product_id=a.product_id) as nums from product a  where a.state='正常' and a.prop='库存商品'";
 		
-		if(!kc_con.equals("")){
-			sql = sql + " and( a.product_id like '%" + kc_con + "%' or a.product_name like '%" + kc_con + "%' or a.product_xh like '%" + kc_con + "%' or a.sp_txm like '%" + kc_con + "%')";
+		String tempSql = "";
+		if(arryCon != null && arryCon.length > 0){
+			sql += " and(";
+			for(int i=0;i<arryCon.length;i++){
+				if(tempSql.equals("")){
+					tempSql = "(a.product_id like '%" + arryCon[i] + "%' or a.product_name like '%" + arryCon[i] + "%' or a.product_xh like '%" + arryCon[i] + "%' or a.sp_txm like '%" + arryCon[i] + "%')";
+				}else{
+					tempSql = tempSql + " and (a.product_id like '%" + arryCon[i] + "%' or a.product_name like '%" + arryCon[i] + "%' or a.product_xh like '%" + arryCon[i] + "%' or a.sp_txm like '%" + arryCon[i] + "%')";
+				}
+			}
+			sql = sql + tempSql + ")";
 		}
 
 		return this.getResultByPage(sql, curPage, rowsPerPage);
