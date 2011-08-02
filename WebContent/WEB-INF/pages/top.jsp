@@ -202,7 +202,7 @@ List funcList = menuService.getUserYwgnFunc(user_id);
 			<%
 			if(funcList.contains("FC9999")){
 			%>
-			<font style="font-size: 12px;">库存查询：</font><input type="text" name="kc_con"  onkeypress="f_enter('1');"  size="12">
+			<font style="font-size: 12px;">库存查询：</font><input type="text" name="kc_con"  onkeypress="f_enter('1');"  size="12" title="可用空格或逗号分隔关键词">
 			<input type="button" name="button1" value=" 查询 " class="css_button" onclick="openWin('1');">
 			&nbsp;&nbsp;&nbsp;
 			<%
