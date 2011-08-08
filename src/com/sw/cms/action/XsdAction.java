@@ -415,7 +415,20 @@ public class XsdAction extends BaseAction {
 		
 		String con = " and a.state='Õý³£'";
 		if(!product_name.equals("")){
-			con += " and (a.product_name like '%" + product_name + "%' or a.product_xh like '%" + product_name + "%' or a.sp_txm like '%" + product_name + "%')";
+			product_name = ((product_name.replace("¡¡", " ")).replace(",", "")).replace("£¬", " ");
+			String[] arryCon = product_name.split(" ");
+			String tempSql = "";
+			if(arryCon != null && arryCon.length > 0){
+				con +=" and(";
+				for(int i=0;i<arryCon.length;i++){
+					if(tempSql.equals("")){
+						tempSql = "(a.product_id like '%" + arryCon[i] + "%' or a.product_name like '%" + arryCon[i] + "%' or a.product_xh like '%" + arryCon[i] + "%' or a.sp_txm like '%" + arryCon[i] + "%')";
+					}else{
+						tempSql = tempSql + " and (a.product_id like '%" + arryCon[i] + "%' or a.product_name like '%" + arryCon[i] + "%' or a.product_xh like '%" + arryCon[i] + "%' or a.sp_txm like '%" + arryCon[i] + "%')";
+					}
+				}
+				con += tempSql + ")";
+			}
 		}
 		if(!product_kind.equals("")){
 			con += " and a.product_kind like '" + product_kind + "%'";
