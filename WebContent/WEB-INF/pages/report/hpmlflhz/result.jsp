@@ -32,7 +32,11 @@ if(!client_name.equals("")){
 <html>
 <head>
 <title>货品毛利分类汇总</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Expires" content="0">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Pragma" content="no-cache">
+
 <link href="css/report.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="jquery/jquery-1.4.2.min.js"></script>
 <script type="text/javascript" src="js/switchCss.js"></script>
@@ -41,12 +45,8 @@ if(!client_name.equals("")){
 </style> 
 <script language='JavaScript' src="js/date.js"></script>
 <script type="text/javascript">
-	function openWin(product_id,client_name,xsry_id){
-		document.myform.product_id.value = product_id;
-		document.myform.submit();
-	}
 	function pageRefresh(){
-		document.refreshForm.submit();
+		document.refreshFormMain.submit();
 	}
 	function openMx(product_kind,start_date,end_date,client_name,xsry,dept){
 		location.href="getHpmlflMxResult.html?product_kind=" + product_kind + "&start_date=" + start_date + "&end_date=" + end_date + "&client_name=" + client_name + "&xsry=" + xsry + "&dept=" + dept;
@@ -72,7 +72,7 @@ if(!client_name.equals("")){
 </script>
 </head>
 <body align="center" onload="onloadTotal();">
-<form name="refreshForm" action="getHpmlflHzResult.html" method="post">
+<form name="refreshFormMain" action="getHpmlflHzResult.html" method="post">
 <input type="hidden" name="client_name" value="<%=client_name %>">
 <input type="hidden" name="start_date" value="<%=start_date %>">
 <input type="hidden" name="end_date" value="<%=end_date %>">

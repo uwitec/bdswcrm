@@ -30,8 +30,12 @@ if(!product_kind.equals("")){
 <html>
 <head>
 <title>货品毛利分类汇总--明细</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link href="css/report.css" rel="stylesheet" type="text/css" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
+<meta http-equiv="Expires" content="0">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Pragma" content="no-cache">
+
+<link href="css/report.css" rel="stylesheet" type="text/css" >
 <script type="text/javascript" src="jquery/jquery-1.4.2.min.js"></script>
 <script type="text/javascript" src="js/switchCss.js"></script>
 <style media=print>  
