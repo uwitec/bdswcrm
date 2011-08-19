@@ -40,7 +40,7 @@ public class CgthdAction extends BaseAction {
 	private String orderName = "";
 	private String orderType = "";
 	private String iscs_flag = "";  //系统是否初始完成标志
-	
+	private String isqzxlh_flag = "";  //系统是否要求强制序列号
 	
 	/**
 	 * 采购退货单列表（带分页）
@@ -87,6 +87,7 @@ public class CgthdAction extends BaseAction {
 		userList = userService.getAllEmployeeList();
 		storeList = storeService.getAllStoreList();
 		iscs_flag = sysInitSetService.getQyFlag();
+		isqzxlh_flag = userService.getQzxlh();
 		clientsList=clientsService.getClientList("");
 		return "success";
 	}
@@ -99,7 +100,7 @@ public class CgthdAction extends BaseAction {
 		LoginInfo info = (LoginInfo)getSession().getAttribute("LOGINUSER");
 		String user_id = info.getUser_id();
 		cgthd.setCzr(user_id);
-		
+		isqzxlh_flag = userService.getQzxlh();
 		iscs_flag = sysInitSetService.getQyFlag();  //系统是否完成标志
 		//只有在系统正式启用后才去判断库存是否满足需求
 		if(iscs_flag.equals("1")){
@@ -126,6 +127,27 @@ public class CgthdAction extends BaseAction {
 					
 					return "input";
 				}
+				if(isqzxlh_flag.equals("01")){
+					msg =cgthdService.checkXlh(cgthd, cgthdProducts);
+					if(!msg.equals("")){
+					  cgthd.setState("已保存");
+						
+						if(cgthdService.getCgthd(cgthd.getId()) == null){
+							cgthdService.saveCgthd(cgthd, cgthdProducts);
+						}else{
+							cgthdService.updateCgthd(cgthd, cgthdProducts);
+						}
+						
+						userList = userService.getAllEmployeeList();
+						storeList = storeService.getAllStoreList();
+						iscs_flag = sysInitSetService.getQyFlag();
+						clientsList=clientsService.getClientList("");
+						
+						this.saveMessage(msg);
+						
+						return "input";
+				   }
+				}
 			}
 		}
 		
@@ -144,6 +166,7 @@ public class CgthdAction extends BaseAction {
 		userList = userService.getAllEmployeeList();
 		storeList = storeService.getAllStoreList();
 		iscs_flag = sysInitSetService.getQyFlag();
+		isqzxlh_flag = userService.getQzxlh();
 		clientsList=clientsService.getClientList("");
 		return "success";
 	}
@@ -168,7 +191,7 @@ public class CgthdAction extends BaseAction {
 		LoginInfo info = (LoginInfo)getSession().getAttribute("LOGINUSER");
 		String user_id = info.getUser_id();
 		cgthd.setCzr(user_id);
-		
+		isqzxlh_flag = userService.getQzxlh();
 		iscs_flag = sysInitSetService.getQyFlag();  //系统是否完成标志
 		//只有在系统正式启用后才去判断库存是否满足需求
 		if(iscs_flag.equals("1")){
@@ -189,6 +212,22 @@ public class CgthdAction extends BaseAction {
 					this.saveMessage(msg);
 					
 					return "input";
+				}
+				if(isqzxlh_flag.equals("01")){
+				  msg =cgthdService.checkXlh(cgthd, cgthdProducts);
+				  if(!msg.equals("")){
+					  cgthd.setState("已保存");
+				  	  cgthdService.updateCgthd(cgthd, cgthdProducts);
+							
+					  userList = userService.getAllEmployeeList();
+					  storeList = storeService.getAllStoreList();
+					  iscs_flag = sysInitSetService.getQyFlag();
+					  clientsList=clientsService.getClientList("");
+							
+					  this.saveMessage(msg);
+							
+					  return "input";
+				   }
 				}
 			}
 		}
@@ -335,5 +374,10 @@ public class CgthdAction extends BaseAction {
 	public void setClientsService(ClientsService clientsService) {
 		this.clientsService = clientsService;
 	}
-
+	public String getIsqzxlh_flag() {
+		return isqzxlh_flag;
+	}
+	public void setIsqzxlh_flag(String isqzxlh_flag) {
+		this.isqzxlh_flag = isqzxlh_flag;
+	}
 }
