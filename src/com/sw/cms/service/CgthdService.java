@@ -22,6 +22,8 @@ import com.sw.cms.model.Cgthd;
 import com.sw.cms.model.CgthdProduct;
 import com.sw.cms.model.Ckd;
 import com.sw.cms.model.CkdProduct;
+import com.sw.cms.model.Lsd;
+import com.sw.cms.model.LsdProduct;
 import com.sw.cms.model.Page;
 import com.sw.cms.model.Product;
 import com.sw.cms.model.SerialNumFlow;
@@ -127,6 +129,54 @@ public class CgthdService {
 		}
 		
 		cgthdDao.delCgthd(id);
+	}
+	
+	
+	/**
+	 * 判断序列号是否满足退货需要
+	 * @param cgthd
+	 * @param cgthdProducts
+	 */
+	public String checkXlh(Cgthd cgthd,List cgthdProducts){
+		String msg = "";
+		String store_id = cgthd.getStore_id();
+		boolean xlh=false;
+		String serialnums="";
+		
+		if(cgthdProducts != null && cgthdProducts.size()>0){
+			for(int i=0;i<cgthdProducts.size();i++){
+				CgthdProduct cgthdProduct = (CgthdProduct)cgthdProducts.get(i);
+				if(cgthdProduct != null){
+					if(!cgthdProduct.getProduct_id().equals("") && !cgthdProduct.getProduct_name().equals("") && cgthdProduct.getQz_flag().equals("是")){
+						String product_id = cgthdProduct.getProduct_id();
+						String[] arryNums = (cgthdProduct.getQz_serial_num()).split(",");
+						
+						//判断商品是否是库存商品,只仍库存商品才进行强制序列号判断
+						Product product = (Product)productDao.getProductById(product_id);
+						if(product.getProp().equals("库存商品")){	
+							for(int k=0;k<arryNums.length;k++){
+							  String serialNum = arryNums[k];  //要出库的序列号
+							  boolean is_store = serialNumDao.getSerialNumState(product_id, store_id,serialNum);//序列号的状态
+							
+							  if(is_store){								
+							  }
+							  else
+							  {
+								  serialnums+=serialNum+" ";
+								  xlh=true;
+							  }
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		if(xlh){
+			msg += " 序列号为：" + serialnums + " 不存在，请确认后再进行退货处理!\n";
+		}
+		
+		return msg;
 	}
 	
 	
