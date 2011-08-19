@@ -220,7 +220,7 @@ public class SerialNumDAO extends JdbcBaseDAO {
 	public boolean getSerialNumState(String product_id,String store_id,String serialNum){		
 		boolean is = false;
 		
-		String sql = "select count(*) as counts from serial_num_mng where product_id='"+product_id+"' and store_id='"+store_id+"' and serial_num='"+serialNum+"'";
+		String sql = "select count(*) as counts from serial_num_mng where product_id='"+product_id+"' and store_id='"+store_id+"' and serial_num='"+serialNum+"' and state='ÔÚ¿â'";
 		int counts = this.getJdbcTemplate().queryForInt(sql);
 		
 		if(counts > 0){
