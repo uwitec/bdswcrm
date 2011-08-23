@@ -230,6 +230,23 @@ public class SerialNumDAO extends JdbcBaseDAO {
 		return is;
 	}
 	
+	/**
+	 * 判断当前的序列号是否已售
+	 * 
+	 * @return
+	 */
+	public boolean getSerialNumStateXs(String product_id,String store_id,String serialNum){		
+		boolean is = false;
+		
+		String sql = "select count(*) as counts from serial_num_mng where product_id='"+product_id+"'  and serial_num='"+serialNum+"' and state='已售'";
+		int counts = this.getJdbcTemplate().queryForInt(sql);
+		
+		if(counts > 0){
+			is = true;
+		}
+		
+		return is;
+	}
 	
 	/**
 	 * 包装对象(序列号)
