@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.sw.cms.dao.AccountDzdDAO;
 import com.sw.cms.dao.AccountsDAO;
+import com.sw.cms.dao.ProductDAO;
 import com.sw.cms.dao.ProductKcDAO;
 import com.sw.cms.dao.ProductSaleFlowDAO;
 import com.sw.cms.dao.RkdDAO;
@@ -15,7 +16,10 @@ import com.sw.cms.dao.XsdDAO;
 import com.sw.cms.dao.XsskDAO;
 import com.sw.cms.dao.YushoukDAO;
 import com.sw.cms.model.AccountDzd;
+import com.sw.cms.model.Cgthd;
+import com.sw.cms.model.CgthdProduct;
 import com.sw.cms.model.Page;
+import com.sw.cms.model.Product;
 import com.sw.cms.model.ProductSaleFlow;
 import com.sw.cms.model.Rkd;
 import com.sw.cms.model.RkdProduct;
@@ -47,7 +51,7 @@ public class ThdService {
 	private SerialNumDAO serialNumDao;
 	private YushoukDAO yushoukDao;
 	private ProductSaleFlowDAO productSaleFlowDao;
-	
+	private ProductDAO productDao;
 	/**
 	 * 查询退货单列表，带分页
 	 * @param con
@@ -83,6 +87,52 @@ public class ThdService {
 		}
 	}
 	
+	/**
+	 * 判断序列号是否满足销售退货需要
+	 * @param thd
+	 * @param thdProducts
+	 */
+	public String checkXlh(Thd thd,List thdProducts){
+		String msg = "";
+		String store_id = thd.getStore_id();
+		boolean xlh=false;
+		String serialnums="";
+		
+		if(thdProducts != null && thdProducts.size()>0){
+			for(int i=0;i<thdProducts.size();i++){
+				ThdProduct thdProduct = (ThdProduct)thdProducts.get(i);
+				if(thdProduct != null){
+					if(!thdProduct.getProduct_id().equals("") && !thdProduct.getProduct_name().equals("") && thdProduct.getQz_flag().equals("是")){
+						String product_id = thdProduct.getProduct_id();
+						String[] arryNums = (thdProduct.getQz_serial_num()).split(",");
+						
+						//判断商品是否是库存商品,只仍库存商品才进行强制序列号判断
+						Product product = (Product)productDao.getProductById(product_id);
+						if(product.getProp().equals("库存商品")){	
+							for(int k=0;k<arryNums.length;k++){
+							  String serialNum = arryNums[k];  //要出库的序列号
+							  boolean is_store = serialNumDao.getSerialNumStateXs(product_id, store_id,serialNum);//序列号的状态
+							
+							  if(is_store){								
+							  }
+							  else
+							  {
+								  serialnums+=serialNum+" ";
+								  xlh=true;
+							  }
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		if(xlh){
+			msg += " 序列号为：" + serialnums + " 不存在，请确认后再进行销售退货处理!\n";
+		}
+		
+		return msg;
+	}
 	
 	
 	/**
@@ -558,4 +608,12 @@ public class ThdService {
 		this.productSaleFlowDao = productSaleFlowDao;
 	}
 
+	public ProductDAO getProductDao() {
+		return productDao;
+	}
+
+
+	public void setProductDao(ProductDAO productDao) {
+		this.productDao = productDao;
+	}
 }
