@@ -40,7 +40,7 @@ public class ThdAction extends BaseAction {
 	private String thd_id = "";
 
 	private int curPage = 1;
-
+	private String isqzxlh_flag = "";  //系统是否要求强制序列号
 	/**
 	 * 退货单列表（带分页）
 	 * 
@@ -84,7 +84,7 @@ public class ThdAction extends BaseAction {
 		
 		thd.setThd_id(thd_id);
 		thd.setTh_date(DateComFunc.getToday());
-		
+		isqzxlh_flag = userService.getQzxlh();
 		storeList = storeService.getAllStoreList();
 		return "success";
 	}
@@ -98,7 +98,7 @@ public class ThdAction extends BaseAction {
 		LoginInfo info = (LoginInfo)getSession().getAttribute("LOGINUSER");
 		String user_id = info.getUser_id();
 		thd.setCzr(user_id);
-		
+		isqzxlh_flag = userService.getQzxlh();
 		//如查退货单状态是已入库，并且现金退货，需要判断账号金额是否足够
 		if(thd.getState().equals("已入库") && thd.getType().equals("现金")){
 			if(accountsService.isZhjeXyZero(thd.getTkzh(), thd.getThdje())){
@@ -116,8 +116,29 @@ public class ThdAction extends BaseAction {
 				return "input";
 			}
 		}
-		
-		thdService.saveThd(thd, thdProducts);
+		if(thd.getState().equals("已入库")){
+		if(isqzxlh_flag.equals("01")){
+			  msg =thdService.checkXlh(thd, thdProducts);
+			  if(!msg.equals("")){
+				  this.setMsg(msg);
+				  storeList = storeService.getAllStoreList();
+					
+					thd.setState("已保存");
+					if(thdService.getThd(thd.getThd_id()) == null){
+						thdService.saveThd(thd, thdProducts);
+					}else{
+						thdService.updateThd(thd, thdProducts);
+					}
+					
+					return "input";
+			   }
+			}
+		}
+		if(thdService.getThd(thd.getThd_id()) == null){
+			thdService.saveThd(thd, thdProducts);
+		}else{
+			thdService.updateThd(thd, thdProducts);
+		}
 		return "success";
 	}
 
@@ -129,6 +150,7 @@ public class ThdAction extends BaseAction {
 	public String edit() {
 		thd = (Thd) thdService.getThd(thd_id);
 		thdProducts = thdService.getThdProducts(thd_id);
+		isqzxlh_flag = userService.getQzxlh();
 		storeList = storeService.getAllStoreList();
 		return "success";
 	}
@@ -153,7 +175,7 @@ public class ThdAction extends BaseAction {
 		LoginInfo info = (LoginInfo)getSession().getAttribute("LOGINUSER");
 		String user_id = info.getUser_id();
 		thd.setCzr(user_id);
-		
+		isqzxlh_flag = userService.getQzxlh();
 		//如查退货单状态是已入库，并且现金退货，需要判断账号金额是否足够
 		if(thd.getState().equals("已入库") && thd.getType().equals("现金")){
 			if(accountsService.isZhjeXyZero(thd.getTkzh(), thd.getThdje())){
@@ -167,7 +189,20 @@ public class ThdAction extends BaseAction {
 				return "input";
 			}
 		}
-		
+		if(thd.getState().equals("已入库")){
+			if(isqzxlh_flag.equals("01")){
+				  msg =thdService.checkXlh(thd, thdProducts);
+				  if(!msg.equals("")){
+					  this.setMsg(msg);
+					  storeList = storeService.getAllStoreList();
+						
+						thd.setState("已保存");				
+						thdService.updateThd(thd, thdProducts);
+						
+						return "input";
+				   }
+				}
+			}
 		thdService.updateThd(thd, thdProducts);
 		return "success";
 	}
@@ -325,5 +360,10 @@ public class ThdAction extends BaseAction {
 	public void setAccountsService(AccountsService accountsService) {
 		this.accountsService = accountsService;
 	}
-
+	public String getIsqzxlh_flag() {
+		return isqzxlh_flag;
+	}
+	public void setIsqzxlh_flag(String isqzxlh_flag) {
+		this.isqzxlh_flag = isqzxlh_flag;
+	}
 }
