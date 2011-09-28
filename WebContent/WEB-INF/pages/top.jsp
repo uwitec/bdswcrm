@@ -13,8 +13,14 @@ String logo_url = (String)VS.findValue("logo_url");
 
 MenuService menuService = (MenuService)VS.findValue("menuService");
 List funcList = menuService.getUserYwgnFunc(user_id);
+
+String flag = request.getParameter("flag");
+if(flag == null){
+	flag = "2";
+}
 %>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>top</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -176,15 +182,23 @@ List funcList = menuService.getUserYwgnFunc(user_id);
 		var destination = "addMail.html";
 		var fea ='width=850,height=650,left=' + (screen.availWidth-850)/2 + ',top=' + (screen.availHeight-650)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		window.open(destination,'发送邮件',fea);			
-	}			
+	}	
+
+	function switchUi(flag){
+		if(flag == "2"){
+			parent.location='thk_main.html';
+		}else{
+			parent.location='thk_main_new.html';
+		}
+	}		
 </script>
 </head>
-<body onload="init();getHasMsg();">
+<body onload="init();getHasMsg();" bgColor=#FBFBFB>
 <form name="myform" action="queryKcMx.html" method="post" target="_blank">
 <div id="dropmenu1_a" class="menu_down">
-<a href="javascript:showWdMsg();"><span id="wdMsgTxt">未读消息</span></a>
-<a href="javascript:shoYdMsg();"><span>已读消息</span></a>
-<a href="javascript:send();"><span>发送消息</span></a>
+<a class="menu_down_span" href="javascript:showWdMsg();"><span id="wdMsgTxt">未读消息</span></a>
+<a class="menu_down_span" href="javascript:shoYdMsg();"><span>已读消息</span></a>
+<a class="menu_down_span" href="javascript:send();"><span>发送消息</span></a>
 </div>
 <TABLE cellSpacing=0 cellPadding=0 width=100% height=100% align=center border=0 bgColor=#FBFBFB>
 	<TBODY>
@@ -235,8 +249,8 @@ List funcList = menuService.getUserYwgnFunc(user_id);
 					<TD class=NormalWhite noWrap align=middle width=85 bgColor=#bcc2d4><IMG height=15 src="index_images/out_system.gif" width=15 align=absMiddle> <A class=TitleMenu href="#" onclick="logout();">安全退出</A></TD>
 				</TR>
 				</TBODY>
-			</TABLE>
-			<font style="font-size: 12px;">欢迎<%=real_name %>光临系统&nbsp;</font>
+			</TABLE><BR>
+			<font style="font-size: 12px;">欢迎<%=real_name %>光临系统&nbsp;</font>&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:switchUi('<%=flag %>');">切换界面</a>&nbsp;&nbsp;&nbsp;&nbsp;
 		</td>
 	</tr>
 	</TBODY>
