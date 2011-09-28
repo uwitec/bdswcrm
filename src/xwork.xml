@@ -52,6 +52,9 @@
         
         <!-- 内网用户首页 -->
         <action name="thk_main" class="userAction" method="logined">
+            <result name="success" type="dispatcher">/WEB-INF/pages/index_old.jsp</result>
+        </action>
+        <action name="thk_main_new" class="userAction" method="logined">
             <result name="success" type="dispatcher">/WEB-INF/pages/index.jsp</result>
         </action>
         <action name="thk_main_top" class="userAction" method="showTop">
