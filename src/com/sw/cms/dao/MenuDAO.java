@@ -47,8 +47,14 @@ public class MenuDAO extends JdbcBaseDAO {
 	 */
 	public List getColumnList(String user_id,String parent_id,String yw_flag){
 		List<Map> list = new ArrayList<Map>();
-		String sql = "select * from column_mng where parent_id='" + parent_id + "' and yw_flag='" + yw_flag + "' order by xh";
-		
+		String sql = "select * from column_mng where 1=1";
+		if(!parent_id.equals("")){
+			sql += " and parent_id='" + parent_id + "'";
+		}
+		if(!yw_flag.equals("")){
+			sql += " and yw_flag='" + yw_flag + "'";
+		}
+		sql += " order by xh";
 		List allList = this.getResultList(sql);
 		if(allList != null && allList.size() > 0){
 			for(int i=0;i<allList.size();i++){
