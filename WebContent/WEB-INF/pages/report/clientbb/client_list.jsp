@@ -21,7 +21,8 @@ String orderType = (String)VS.findValue("orderType");
 List userList = (List)VS.findValue("userList");
 %>
 
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>往来单位资料</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -97,7 +98,7 @@ List userList = (List)VS.findValue("userList");
 			联系人：<input type="text" name="lxr" value="<%=lxr %>" onkeypress="f_enter();">&nbsp;&nbsp;&nbsp;&nbsp;
 			客户经理：
 		    <input  id="brand"    type="text"   length="20"  onblur="setValue()" value="<%=StaticParamDo.getRealNameById(khjl) %>" onkeypress="f_enter();"> 
-            <div id="brandTip"  style="height:12px;position:absolute;left:515px; top:60px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+            <div id="brandTip"  style="position:absolute;left:515px; top:60px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		    <input type="hidden" name="khjl" id="fzr" value="<%=khjl%>" /> 
 			<input type="button" name="buttonCx" value=" 查询 " onclick="submits()" class="css_button2">&nbsp;&nbsp;&nbsp;&nbsp;	
 			<input type="button" name="buttonQk" value=" 清空 " class="css_button2" onclick="clearAll();">

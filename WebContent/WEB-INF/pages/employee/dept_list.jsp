@@ -82,7 +82,7 @@ function menu(id)						//画菜单
 		if(treedata[i][1]==id)	currdata[currdata.length] = treedata[i];
 	}//end for	
 	
-	
+	var onmouseup = null;
 	for(var i=0; i<currdata.length; i++)
 	{					//遍历数组，执行判断
 		if(itemExists(currdata[i][0]))

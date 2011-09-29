@@ -12,7 +12,8 @@ OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
 List clientsList=(List)VS.findValue("clientsList");
 %>
 
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>供应商采购执行汇总</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -67,7 +68,7 @@ List clientsList=(List)VS.findValue("clientsList");
 		<td class="a4">
 			<input type="text" name="client_name" id="client_name" value="" onblur="setClientValue();"  size="45"  maxlength="50">
 			<input type="hidden" name="cl " id="client_id" value="">
-			<div id="clientsTip" style="height:12px;position:absolute;left:586px; top:85px; width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+			<div id="clientsTip" style="position:absolute;left:586px; top:85px; width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		</td>	
 	</tr>			
 	<tr height="35">

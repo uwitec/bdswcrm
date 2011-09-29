@@ -18,7 +18,8 @@ String flag = StringUtils.nullToStr(request.getParameter("flag"));              
 String flag2 = StringUtils.nullToStr(request.getParameter("flag2"));             //不显示余额为0往来单位
 %>
 
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>客户应收汇总表</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />

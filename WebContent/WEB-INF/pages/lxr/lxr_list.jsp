@@ -18,7 +18,8 @@ String orderType = (String)VS.findValue("orderType");
 List userList = (List)VS.findValue("userList");
 %>
 
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>联系人列表</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -112,7 +113,7 @@ List userList = (List)VS.findValue("userList");
 			单位名称：<input type="text" name="clients_name" value="<%=name %>">&nbsp;&nbsp;&nbsp;&nbsp;	
 			客户经理：
 		    <input  id="brand"    type="text"   length="20"  onblur="setValue()" value="<%=StaticParamDo.getRealNameById(khjl) %>"/> 
-            <div   id="brandTip"  style="height:12px;position:absolute;left:515px; top:60px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+            <div   id="brandTip"  style="position:absolute;left:515px; top:60px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		    <input type="hidden" name="khjl" id="fzr" value="<%=khjl%>" /> 
 			<input type="button" name="buttonCx" value=" 查询 " onclick="submits()" class="css_button2">&nbsp;&nbsp;&nbsp;&nbsp;	
 			<input type="button" name="buttonQk" value=" 清空 " class="css_button2" onclick="clearAll();">
@@ -124,12 +125,12 @@ List userList = (List)VS.findValue("userList");
 	<tr>
 		<td width="10%" onclick="doSort('id');">编号<%if(orderName.equals("id"))           out.print("<img src='images/" + orderType + ".gif'>"); %></td>
 		<td width="10%" onclick="doSort('name');">联系人<%if(orderName.equals("name"))    out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td width="29%" onclick="doSort('clients_name');">所属单位<%if(orderName.equals("clients_name")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="20%" onclick="doSort('clients_name');">所属单位<%if(orderName.equals("clients_name")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
 		<td width="10%" onclick="doSort('gzdh');">座机<%if(orderName.equals("gzdh"))    out.print("<img src='images/" + orderType + ".gif'>"); %></td>
 		<td width="10%" onclick="doSort('yddh');">手机<%if(orderName.equals("yddh"))    out.print("<img src='images/" + orderType + ".gif'>"); %></td>
 		<td width="14%" onclick="doSort('mail')">邮箱<%if(orderName.equals("mail"))    out.print("<img src='images/" + orderType + ".gif'>"); %></td>
 		<td width="10%" onclick="doSort('cz')">传真<%if(orderName.equals("cz"))    out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td width="6%">操作</td>
+		<td width="15%">操作</td>
 	</tr>
 	</thead>
 	<%

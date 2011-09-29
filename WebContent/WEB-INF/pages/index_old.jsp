@@ -15,7 +15,7 @@ String cpy_name = (String)VS.findValue("cpy_name");
 
 int menu_index = 0;
 %>
-<HTML>
+<html>
 <HEAD>
 <TITLE><%=cpy_name %></TITLE>
 <META content="text/html; charset=UTF-8" http-equiv=Content-Type>

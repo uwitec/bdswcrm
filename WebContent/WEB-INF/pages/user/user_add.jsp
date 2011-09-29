@@ -15,7 +15,8 @@ session.removeAttribute("MSG");
 
 %>
 
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>用户管理</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -148,7 +149,7 @@ session.removeAttribute("MSG");
 		<td class="a1" width="15%" id="selName">业务员</td>
 		<td class="a2" width="35%" id="selUserType">
 			<input id="brand" type="text" style="width:150px" onblur="setValue();" value=""/><font color="red">*</font>
-			<div id="brandTip"  style="height:12px;position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+			<div id="brandTip"  style="position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 			<input type="hidden" name="user.client_name" id="fzr" value=""/>		
 		</td>		
 	</tr>
@@ -183,7 +184,7 @@ session.removeAttribute("MSG");
 </html>
 <div id="div_ywy" style="display:none">
 	<input id="brand" type="text" style="width:150px" onblur="setValue();" value=""/><font color="red">*</font>
-	<div id="brandTip"  style="height:12px;position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+	<div id="brandTip"  style="position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 	<input type="hidden" name="user.client_name" id="fzr" value=""/>		
 </div>
 <div id="div_dls" style="display:none">

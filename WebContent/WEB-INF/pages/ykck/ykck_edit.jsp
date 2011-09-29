@@ -21,7 +21,8 @@ if(ykckProducts!=null && ykckProducts.size()>0){
 
 %>
 
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>移库出库</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -328,7 +329,7 @@ if(!msg.equals("")){
 		 <td class="a1" width="15%">经手人</td>
 		<td class="a2" colspan="3">
 		    <input  id="brand"    type="text"   size="45"  onblur="setValue()" value="<%=StaticParamDo.getRealNameById(ykck.getJsr()) %>"/>   
-            <div   id="brandTip"  style="height:12px;position:absolute;left:146px; top:141px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+            <div   id="brandTip"  style="position:absolute;left:146px; top:141px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		    <input type="hidden" name="ykck.jsr" id="fzr" value="<%=ykck.getJsr()%>"/> <font color="red">*</font>	
 		</td>
 	</tr>
@@ -359,16 +360,16 @@ if(ykckProducts!=null && ykckProducts.size()>0){
 %>
 	<tr>
 		<td class="a2">
-			<input type="text" id="product_name_<%=i %>" name="ykckProducts[<%=i %>].product_name" value="<%=StringUtils.nullToStr(ykckProduct.get("product_name")) %>" readonly style="width:100%">
+			<input type="text" id="product_name_<%=i %>" name="ykckProducts[<%=i %>].product_name" value="<%=StringUtils.nullToStr(ykckProduct.get("product_name")) %>" readonly style="width:90%">
 			<input type="hidden" id="product_id_<%=i %>" name="ykckProducts[<%=i %>].product_id" value="<%=StringUtils.nullToStr(ykckProduct.get("product_id")) %>">
 		</td>
-		<td class="a2"><input type="text" id="product_xh_<%=i %>" name="ykckProducts[<%=i %>].product_xh" value="<%=StringUtils.nullToStr(ykckProduct.get("product_xh")) %>" readonly style="width:100%"></td>
-		<td class="a2"><input type="text" id="nums_<%=i %>" name="ykckProducts[<%=i %>].nums"  value="<%=StringUtils.nullToStr(ykckProduct.get("nums")) %>" style="width:100%"></td>
+		<td class="a2"><input type="text" id="product_xh_<%=i %>" name="ykckProducts[<%=i %>].product_xh" value="<%=StringUtils.nullToStr(ykckProduct.get("product_xh")) %>" readonly style="width:90%"></td>
+		<td class="a2"><input type="text" id="nums_<%=i %>" name="ykckProducts[<%=i %>].nums"  value="<%=StringUtils.nullToStr(ykckProduct.get("nums")) %>" style="width:90%"></td>
 		<td class="a2">
 			<input type="text" id="qz_serial_num_<%=i %>" name="ykckProducts[<%=i %>].qz_serial_num" value="<%=StringUtils.nullToStr(ykckProduct.get("qz_serial_num")) %>" size="15" readonly style="width:70%">
 			<input type="hidden" id="qz_flag_<%=i %>" name="ykckProducts[<%=i %>].qz_flag" value="<%=StringUtils.nullToStr(ykckProduct.get("qz_flag")) %>"><a style="cursor:hand" title="左键点击输入输列号" onclick="openSerialWin('<%=i %>');"><b>...</b></a>&nbsp;
 		</td>		
-		<td class="a2"><input type="text" id="product_remark_<%=i %>" name="ykckProducts[<%=i %>].product_remark" value="<%=StringUtils.nullToStr(ykckProduct.get("product_remark")) %>" maxlength="50" style="width:100%"></td>
+		<td class="a2"><input type="text" id="product_remark_<%=i %>" name="ykckProducts[<%=i %>].product_remark" value="<%=StringUtils.nullToStr(ykckProduct.get("product_remark")) %>" maxlength="50" style="width:90%"></td>
 		
 	</tr>
 <%

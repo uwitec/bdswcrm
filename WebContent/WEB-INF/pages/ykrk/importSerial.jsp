@@ -9,7 +9,8 @@
 String openerId = StringUtils.nullToStr(request.getParameter("openerId"));
 %>
 
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>输入序列号</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -47,7 +48,7 @@ String openerId = StringUtils.nullToStr(request.getParameter("openerId"));
  
  <tr class="a1">
 		<td> </td>
-		<td class="a4"><input type="text" id="serial_num" name="serial_num"   style="width:100%"  ></td>
+		<td class="a4"><input type="text" id="serial_num" name="serial_num"   style="width:90%"  ></td>
 	</tr>
 	
  

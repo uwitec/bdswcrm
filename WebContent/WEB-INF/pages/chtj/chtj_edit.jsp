@@ -17,7 +17,8 @@ if(chtjDescs!=null && chtjDescs.size()>0){
 }
 %>
 
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>存货调价</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -192,7 +193,7 @@ if(chtjDescs!=null && chtjDescs.size()>0){
 		<td class="a1" width="15%">经手人</td>
 		<td class="a2" colspan="3">
 		    <input  id="brand"    type="text"   length="20"  onblur="setValue()" value="<%=StaticParamDo.getRealNameById(chtj.getJsr()) %>"/>  
-            <div   id="brandTip"  style="height:12px;position:absolute;left:125px; top:85px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+            <div   id="brandTip"  style="position:absolute;left:125px; top:85px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		    <input type="hidden" name="chtj.jsr" id="fzr"  value="<%=chtj.getJsr() %>" /> <font color="red">*</font>	
 		</td>	
 	</tr>

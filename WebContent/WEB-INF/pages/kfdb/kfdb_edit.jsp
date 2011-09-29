@@ -21,7 +21,8 @@ if(kfdbProducts!=null && kfdbProducts.size()>0){
 
 %>
 
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>库房调拨</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -133,15 +134,15 @@ if(kfdbProducts!=null && kfdbProducts.size()>0){
         
         var otd1=document.createElement("td");
         otd1.className = "a2";
-        otd1.innerHTML = '<input type="text" id="product_name_'+curId+'" name="kfdbProducts['+curId+'].product_name" style="width:100%" readonly><input type="hidden" id="product_id_'+curId+'" name="kfdbProducts['+curId+'].product_id">';
+        otd1.innerHTML = '<input type="text" id="product_name_'+curId+'" name="kfdbProducts['+curId+'].product_name" style="width:90%" readonly><input type="hidden" id="product_id_'+curId+'" name="kfdbProducts['+curId+'].product_id">';
         
         var otd2 = document.createElement("td");
         otd2.className = "a2";
-        otd2.innerHTML = '<input type="text" id="product_xh_'+curId+'"  name="kfdbProducts['+curId+'].product_xh" style="width:100%" readonly>';
+        otd2.innerHTML = '<input type="text" id="product_xh_'+curId+'"  name="kfdbProducts['+curId+'].product_xh" style="width:90%" readonly>';
         
         var otd3 = document.createElement("td");
         otd3.className = "a2";
-        otd3.innerHTML = '<input type="text" id="nums_'+curId+'" name="kfdbProducts['+curId+'].nums" style="width:100%" value="0">';
+        otd3.innerHTML = '<input type="text" id="nums_'+curId+'" name="kfdbProducts['+curId+'].nums" style="width:90%" value="0">';
         
 		var otd4 = document.createElement("td");
 		otd4.className = "a2";
@@ -376,7 +377,7 @@ if(!msg.equals("")){
 		<td class="a1" width="15%">申请人</td>
 		<td class="a2" width="35%">
 		    <input  id="sqr_text"  type="text"   maxlength="20" style="width:230px"  onblur="setSqrValue();" value="<%=StaticParamDo.getRealNameById(kfdb.getSqr()) %>"/> 
-            <div   id="sqr_tips"  style="height:12px;position:absolute;left:610px; top:110px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
+            <div   id="sqr_tips"  style="position:absolute;left:610px; top:110px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
             </div>
 		    <input type="hidden" name="kfdb.sqr" id="sqr" value="<%=kfdb.getSqr()%>"/> 	
 		</td>
@@ -385,7 +386,7 @@ if(!msg.equals("")){
 		<td class="a1" width="15%">经手人</td>
 		<td class="a2" colspan="3">
 		    <input  id="brand"    type="text"   maxlength="20" style="width:230px"  onblur="setValue()" value="<%=StaticParamDo.getRealNameById(kfdb.getJsr()) %>"/> <font color="red">*</font>   
-            <div   id="brandTip"  style="height:12px;position:absolute;left:146px; top:141px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+            <div   id="brandTip"  style="position:absolute;left:146px; top:141px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		    <input type="hidden" name="kfdb.jsr" id="fzr" value="<%=kfdb.getJsr()%>"/>
 		</td>
 	</tr>
@@ -421,11 +422,11 @@ if(kfdbProducts!=null && kfdbProducts.size()>0){
 	<tr>
 		<td class="a2"><input type="checkbox" name="proc_id" id="proc_id" value="<%=i %>"></td>
 		<td class="a2">
-			<input type="text" id="product_name_<%=i %>" name="kfdbProducts[<%=i %>].product_name" value="<%=StringUtils.nullToStr(kfdbProduct.get("product_name")) %>" style="width:100%" readonly>
+			<input type="text" id="product_name_<%=i %>" name="kfdbProducts[<%=i %>].product_name" value="<%=StringUtils.nullToStr(kfdbProduct.get("product_name")) %>" style="width:90%" readonly>
 			<input type="hidden" id="product_id_<%=i %>" name="kfdbProducts[<%=i %>].product_id" value="<%=StringUtils.nullToStr(kfdbProduct.get("product_id")) %>">
 		</td>
-		<td class="a2"><input type="text" id="product_xh_<%=i %>" name="kfdbProducts[<%=i %>].product_xh" value="<%=StringUtils.nullToStr(kfdbProduct.get("product_xh")) %>" style="width:100%" readonly></td>
-		<td class="a2"><input type="text" id="nums_<%=i %>" name="kfdbProducts[<%=i %>].nums"  value="<%=StringUtils.nullToStr(kfdbProduct.get("nums")) %>" style="width:100%"></td>
+		<td class="a2"><input type="text" id="product_xh_<%=i %>" name="kfdbProducts[<%=i %>].product_xh" value="<%=StringUtils.nullToStr(kfdbProduct.get("product_xh")) %>" style="width:90%" readonly></td>
+		<td class="a2"><input type="text" id="nums_<%=i %>" name="kfdbProducts[<%=i %>].nums"  value="<%=StringUtils.nullToStr(kfdbProduct.get("nums")) %>" style="width:90%"></td>
 		<td class="a2">
 			<input type="text" id="qz_serial_num_<%=i %>" name="kfdbProducts[<%=i %>].qz_serial_num" value="<%=StringUtils.nullToStr(kfdbProduct.get("qz_serial_num")) %>" size="25" readonly>
 			<input type="hidden" id="qz_flag_<%=i %>" name="kfdbProducts[<%=i %>].qz_flag" value="<%=StringUtils.nullToStr(kfdbProduct.get("qz_flag")) %>"><a style="cursor:hand" title="左键点击输入输列号" onclick="openSerialWin('<%=i %>');"><b>...</b></a>&nbsp;
@@ -439,11 +440,11 @@ if(kfdbProducts!=null && kfdbProducts.size()>0){
 	<tr>
 		<td class="a2"><input type="checkbox" name="proc_id" id="proc_id" value="<%=i %>"></td>
 		<td class="a2">
-			<input type="text" id="product_name_<%=i %>" name="kfdbProducts[<%=i %>].product_name"  style="width:100%"readonly>
+			<input type="text" id="product_name_<%=i %>" name="kfdbProducts[<%=i %>].product_name"  style="width:90%"readonly>
 			<input type="hidden" id="product_id_<%=i %>" name="kfdbProducts[<%=i %>].product_id">
 		</td>
-		<td class="a2"><input type="text" id="product_xh_<%=i %>" name="kfdbProducts[<%=i %>].product_xh" style="width:100%" readonly></td>
-		<td class="a2"><input type="text" id="nums_<%=i %>" name="kfdbProducts[<%=i %>].nums" value="0" style="width:100%"></td>
+		<td class="a2"><input type="text" id="product_xh_<%=i %>" name="kfdbProducts[<%=i %>].product_xh" style="width:90%" readonly></td>
+		<td class="a2"><input type="text" id="nums_<%=i %>" name="kfdbProducts[<%=i %>].nums" value="0" style="width:90%"></td>
 		<td class="a2">
 			<input type="text" id="qz_serial_num_<%=i %>" name="kfdbProducts[<%=i %>].qz_serial_num" value="" size="25" readonly>
 			<input type="hidden" id="qz_flag_<%=i %>" name="kfdbProducts[<%=i %>].qz_flag" value=""><a style="cursor:hand" title="左键点击输入输列号" onclick="openSerialWin('<%=i %>');"><b>...</b></a>&nbsp;

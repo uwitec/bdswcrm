@@ -22,7 +22,7 @@ if(!msg.equals("")){
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <link href="tree/menu.css" rel="stylesheet" type="text/css">
 
-<script language="JavaScript">
+<script>
 
 treedata	= new Array();
 path		= "";
@@ -81,7 +81,8 @@ function menu(id)						//画菜单
 	{					//判断有无此节点
 		if(treedata[i][1]==id)	currdata[currdata.length] = treedata[i];
 	}//end for	
-	
+
+	var onmouseup = null;
 	
 	for(var i=0; i<currdata.length; i++)
 	{					//遍历数组，执行判断
@@ -392,7 +393,7 @@ function del(){
 }
 </SCRIPT>
 
-<script language='javascript'> 
+<script> 
 /*******以下内容可以修改***************/ 
 var mname=new Array( 
 "新　建", 
@@ -446,7 +447,7 @@ function addRoot(){
 
 </head>
 
-<body onselectstart="return false;" onLoad="window_onload();" onClick="showoff();" align="center">
+<body onLoad="window_onload();" onClick="showoff();" align="center">
 <div id="mlay" style="position:absolute;display:none;cursor:default;" onClick="return false;"></div>
 
 <form name="productKindForm" action="saveProductKind.html" method="post">

@@ -8,7 +8,8 @@
 OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
 List djhpszProducts = (List)VS.findValue("djhpszProducts");
 %>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>兑奖货品设置</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -51,11 +52,11 @@ List djhpszProducts = (List)VS.findValue("djhpszProducts");
         
         var otd0=document.createElement("td");
         otd0.className = "a2";
-        otd0.innerHTML = '<input type="text" id="product_name_'+curId+'" name="djhpszProducts['+curId+'].product_name" style="width:100%" readonly><input type="hidden" id="product_id_'+curId+'" name="djhpszProducts['+curId+'].product_id">';
+        otd0.innerHTML = '<input type="text" id="product_name_'+curId+'" name="djhpszProducts['+curId+'].product_name" style="width:90%" readonly><input type="hidden" id="product_id_'+curId+'" name="djhpszProducts['+curId+'].product_id">';
         
         var otd1 = document.createElement("td");
         otd1.className = "a2";
-        otd1.innerHTML = '<input type="text" size="10"  id="product_xh_'+curId+'"  name="djhpszProducts['+curId+'].product_xh" style="width:100%" readonly>';
+        otd1.innerHTML = '<input type="text" size="10"  id="product_xh_'+curId+'"  name="djhpszProducts['+curId+'].product_xh" style="width:90%" readonly>';
         
         var otd2 = document.createElement("td");
         otd2.className = "a2";
@@ -149,10 +150,10 @@ if(djhpszProducts!=null && djhpszProducts.size()>0){
 	    <td class="a2"><input type="checkbox" name="proc_id" id="proc_id" value="<%=i %>"></td>
 	    
 		<td class="a2">
-			<input type="text" id="product_name_<%=i %>" name="djhpszProducts[<%=i %>].product_name" style="width:100%" value="<%=StringUtils.nullToStr(djhpsz.getProduct_name()) %>" readonly>
+			<input type="text" id="product_name_<%=i %>" name="djhpszProducts[<%=i %>].product_name" style="width:90%" value="<%=StringUtils.nullToStr(djhpsz.getProduct_name()) %>" readonly>
 			<input type="hidden" id="product_id_<%=i %>" name="djhpszProducts[<%=i %>].product_id" value="<%=StringUtils.nullToStr(djhpsz.getProduct_id()) %>">
 		</td>
-		<td class="a2"><input type="text" id="product_xh_<%=i %>" name="djhpszProducts[<%=i %>].product_xh" style="width:100%" size="10" value="<%=StringUtils.nullToStr(djhpsz.getProduct_xh()) %>" readonly></td>
+		<td class="a2"><input type="text" id="product_xh_<%=i %>" name="djhpszProducts[<%=i %>].product_xh" style="width:90%" size="10" value="<%=StringUtils.nullToStr(djhpsz.getProduct_xh()) %>" readonly></td>
 		
 		<td class="a2"><input type="text" id="dwjf_<%=i %>" name="djhpszProducts[<%=i %>].dwjf" value="<%=StringUtils.nullToStr(djhpsz.getDwjf())%>" size="10" onblur="checkDwjf();"></td>
 		
@@ -166,10 +167,10 @@ if(djhpszProducts!=null && djhpszProducts.size()>0){
 	    <td class="a2"><input type="checkbox" name="proc_id" id="proc_id" ></td>
 		
 		<td class="a2">
-			<input type="text" id="product_name_<%=i %>" style="width:100%" name="djhpszProducts[<%=i %>].product_name" readonly>
+			<input type="text" id="product_name_<%=i %>" style="width:90%" name="djhpszProducts[<%=i %>].product_name" readonly>
 			<input type="hidden" id="product_id_<%=i %>" name="djhpszProducts[<%=i %>].product_id">
 		</td>
-		<td class="a2"><input type="text" id="product_xh_<%=i %>" style="width:100%" name="djhpszProducts[<%=i %>].product_xh" size="10" readonly></td>
+		<td class="a2"><input type="text" id="product_xh_<%=i %>" style="width:90%" name="djhpszProducts[<%=i %>].product_xh" size="10" readonly></td>
 		
 		<td class="a2"><input type="text" id="dwjf_<%=i %>" name="djhpszProducts[<%=i %>].dwjf" value="0" size="10" onblur="checkDwjf();"></td>
 			

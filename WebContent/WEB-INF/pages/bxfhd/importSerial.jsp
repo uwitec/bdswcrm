@@ -19,7 +19,8 @@ if(!serialNums.equals("")){
 }
 %>
 
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>输入序列号</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -133,7 +134,7 @@ for(int i=0;i<nums;i++){
 %>
 	<tr class="a1">
 		<td><%=i+1 %></td>
-		<td class="a4"><input type="text" id="serial_num" name="serial_num" value="<%=nm %>" style="width:100%" onkeypress="javascript:f_enter(this,<%=i %>);"></td>
+		<td class="a4"><input type="text" id="serial_num" name="serial_num" value="<%=nm %>" style="width:90%" onkeypress="javascript:f_enter(this,<%=i %>);"></td>
 	</tr>
 <%
 }

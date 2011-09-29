@@ -12,7 +12,8 @@ String user_id = info.getUser_id();
 String[] bxyy = (String[])VS.findValue("bxyy");
 %>
 
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>售后服务单添加</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -337,7 +338,7 @@ String[] bxyy = (String[])VS.findValue("bxyy");
 		<td class="a1" width="15%">经手人</td>
 		<td class="a2">
 		   <input  id="brand"  type="text" style="width:230px" length="20"  onblur="setValue()" value=""/> <font color="red">*</font>
-           <div  id="brandTip"  style="height:12px;position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+           <div  id="brandTip"  style="position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		   <input type="hidden" name="sfd.jxr" id="fzr" value=""/> 		    
 		</td>	
 	    <td class="a1" width="15%">客户报修方式</td>

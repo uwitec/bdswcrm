@@ -8,7 +8,8 @@ OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
 List deptList = (List)VS.findValue("deptList");
 %>
 
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>业务员销售毛利汇总</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -76,7 +77,7 @@ List deptList = (List)VS.findValue("deptList");
 		<td class="a1">销售人员</td>
 		<td class="a4">
 		    <input id="brand" type="text" length="20" onblur="setValue()" size="30"/> 
-            <div id="brandTip"  style="height:12px;position:absolute;left:680px; top:87px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+            <div id="brandTip"  style="position:absolute;left:680px; top:87px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		    <input type="hidden" name="user_id" id="fzr"/> 
 		</td>					
 	</tr>

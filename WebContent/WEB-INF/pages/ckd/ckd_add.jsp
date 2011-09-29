@@ -22,7 +22,8 @@ String user_id = info.getUser_id();
 String iscs_flag = StringUtils.nullToStr(VS.findValue("iscs_flag"));
 %>
 
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>出库单管理</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />

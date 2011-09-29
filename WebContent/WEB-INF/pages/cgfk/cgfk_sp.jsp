@@ -9,7 +9,8 @@ Cgfk cgfk = (Cgfk)VS.findValue("cgfk");
 List cgfkDescs = (List)VS.findValue("cgfkDescs");
 %>
 
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>审批付款申请单</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -134,7 +135,7 @@ if(cgfkDescs != null && cgfkDescs.size()>0){
 	</tr>
 	<tr>
 		<td class="a1">备注</td>
-		<td class="a2" colspan="3"><input type="text" name="remark" id="remark" style="width:100%" value="<%=StringUtils.nullToStr(cgfk.getRemark()) %>" maxlength="500"></td>
+		<td class="a2" colspan="3"><input type="text" name="remark" id="remark" style="width:90%" value="<%=StringUtils.nullToStr(cgfk.getRemark()) %>" maxlength="500"></td>
 	</tr>
 	<tr height="35">
 		<td class="a1" colspan="4">

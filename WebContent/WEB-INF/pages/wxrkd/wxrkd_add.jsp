@@ -15,7 +15,8 @@ if(wxrkdProducts != null && wxrkdProducts.size()>0){
 	counts = wxrkdProducts.size() - 1;
 }
  %>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>维修入库单添加</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -140,20 +141,20 @@ if(wxrkdProducts != null && wxrkdProducts.size()>0){
 		
         var otd0=document.createElement("td");
         otd0.className = "a2";
-        otd0.innerHTML = '<input type="text" id="product_name_'+curId+'" name="wxrkdProducts['+curId+'].product_name" style="width:100%" readonly><input type="hidden" id="product_id_'+curId+'" name="wxrkdProducts['+curId+'].product_id">';
+        otd0.innerHTML = '<input type="text" id="product_name_'+curId+'" name="wxrkdProducts['+curId+'].product_name" style="width:90%" readonly><input type="hidden" id="product_id_'+curId+'" name="wxrkdProducts['+curId+'].product_id">';
         
         var otd1 = document.createElement("td");
         otd1.className = "a2";
-        otd1.innerHTML = '<input type="text" id="product_xh_'+curId+'"  name="wxrkdProducts['+curId+'].product_xh" size="15" style="width:100%" readonly>';
+        otd1.innerHTML = '<input type="text" id="product_xh_'+curId+'"  name="wxrkdProducts['+curId+'].product_xh" size="15" style="width:90%" readonly>';
 
         var otd4 = document.createElement("td");
         otd4.className = "a2";
-        otd4.innerHTML = '<input type="text" id="store_id_'+curId+'" name="wxrkdProducts['+curId+'].store_id" value="好件库" size="7" style="width:100%"  readonly>';
+        otd4.innerHTML = '<input type="text" id="store_id_'+curId+'" name="wxrkdProducts['+curId+'].store_id" value="好件库" size="7" style="width:90%"  readonly>';
         
                 
         var otd7 = document.createElement("td");
         otd7.className = "a2";
-        otd7.innerHTML = '<input type="text" id="nums_'+curId+'" name="wxrkdProducts['+curId+'].nums" value="1" size="5" style="width:100%"  onblur="hj()">';
+        otd7.innerHTML = '<input type="text" id="nums_'+curId+'" name="wxrkdProducts['+curId+'].nums" value="1" size="5" style="width:90%"  onblur="hj()">';
         
              
         var otd9 = document.createElement("td");
@@ -162,7 +163,7 @@ if(wxrkdProducts != null && wxrkdProducts.size()>0){
         
         var otd6 = document.createElement("td");
         otd6.className = "a2";
-        otd6.innerHTML = '<input type="text" id="remark_'+curId+'" name="wxrkdProducts['+curId+'].remark" style="width:100%"  >';                       
+        otd6.innerHTML = '<input type="text" id="remark_'+curId+'" name="wxrkdProducts['+curId+'].remark" style="width:90%"  >';                       
 	
 		otr.appendChild(otd); 
         otr.appendChild(otd0); 
@@ -384,7 +385,7 @@ if(wxrkdProducts != null && wxrkdProducts.size()>0){
 		<td class="a1" width="15%">维修人</td>
 		<td class="a2">
 		   <input  id="brand"  type="text"   length="20"  onblur="setValue()" value="<%=StaticParamDo.getRealNameById(wxrkd.getJsr()) %>"><font color="red">*</font> 
-           <div  id="brandTip"  style="height:12px;position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+           <div  id="brandTip"  style="position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		   <input type="hidden" name="wxrkd.jsr" id="fzr" value="<%=StringUtils.nullToStr(wxrkd.getJsr()) %>"/> 
 		    
 		</td>			
@@ -425,11 +426,11 @@ if(wxrkdProducts != null && wxrkdProducts.size()>0){
 	<tr>
 	    <td class="a2"><input type="checkbox" name="proc_id" id="proc_id" value="<%=i %>"></td>
 		<td class="a2">
-			<input type="text" id="product_name_<%=i %>" name="wxrkdProducts[<%=i %>].product_name" value="<%=StringUtils.nullToStr(wxrkdProduct.getProduct_name()) %>" style="width:100%" readonly="readonly">
+			<input type="text" id="product_name_<%=i %>" name="wxrkdProducts[<%=i %>].product_name" value="<%=StringUtils.nullToStr(wxrkdProduct.getProduct_name()) %>" style="width:90%" readonly="readonly">
 			<input type="hidden" id="product_id_<%=i %>" name="wxrkdProducts[<%=i %>].product_id" value="<%=StringUtils.nullToStr(wxrkdProduct.getProduct_id()) %>">
 		</td>
 		<td class="a2">
-			<input type="text" id="product_xh_<%=i %>" name="wxrkdProducts[<%=i %>].product_xh" value="<%=StringUtils.nullToStr(wxrkdProduct.getProduct_xh()) %>" style="width:100%" readonly="readonly">
+			<input type="text" id="product_xh_<%=i %>" name="wxrkdProducts[<%=i %>].product_xh" value="<%=StringUtils.nullToStr(wxrkdProduct.getProduct_xh()) %>" style="width:90%" readonly="readonly">
 		</td>
 	    
 	    <td class="a2">
@@ -444,16 +445,16 @@ if(wxrkdProducts != null && wxrkdProducts.size()>0){
 	        kf="好件库";
 	      }
 	     %>
-	         <input type="text" id="store_id" name="store_id" value="<%=kf %>" style="width:100%" readonly="readonly">
+	         <input type="text" id="store_id" name="store_id" value="<%=kf %>" style="width:90%" readonly="readonly">
 	    </td>
-	    <td class="a2"><input type="text" id="nums_<%=i %>" name="wxrkdProducts[<%=i %>].nums" value="<%=StringUtils.nullToStr(wxrkdProduct.getNums()) %>" size="5"   style="width:100%" ></td>	
+	    <td class="a2"><input type="text" id="nums_<%=i %>" name="wxrkdProducts[<%=i %>].nums" value="<%=StringUtils.nullToStr(wxrkdProduct.getNums()) %>" size="5"   style="width:90%" ></td>	
 		<td class="a2">
 			<input type="text" id="qz_serial_num_<%=i %>" name="wxrkdProducts[<%=i %>].qz_serial_num" value="<%=StringUtils.nullToStr(wxrkdProduct.getQz_serial_num()) %>" size="10" readonly>
 			<input type="hidden" id="qz_flag_<%=i %>" name="bxfhdProducts[<%=i %>].qz_flag" value="<%=flag2 %>"><a style="cursor:hand" title="左键点击输入输列号" onclick="openSerialWin('<%=i %>');"><b>...</b></a>&nbsp;
 		</td>	
 			
 		<td class="a2">
-		    <input type="text" id="product_remark_<%=i %>" name="wxrkdProducts[<%=i %>].remark" value="<%=StringUtils.nullToStr(wxrkdProduct.getRemark()) %>" style="width:100%">
+		    <input type="text" id="product_remark_<%=i %>" name="wxrkdProducts[<%=i %>].remark" value="<%=StringUtils.nullToStr(wxrkdProduct.getRemark()) %>" style="width:90%">
 		</td>
 	</tr>
 <%
@@ -467,20 +468,20 @@ else
 			<tr>
 			    <td class="a2"><input type="checkbox" name="proc_id" id="proc_id" value="<%=i %>"></td>
 				<td class="a2">
-					<input type="text" id="product_name_<%=i %>" name="wxrkdProducts[<%=i %>].product_name"  style="width:100%">
+					<input type="text" id="product_name_<%=i %>" name="wxrkdProducts[<%=i %>].product_name"  style="width:90%">
 					<input type="hidden" id="product_id_<%=i %>" name="wxrkdProducts[<%=i %>].product_id">
 				</td>
-				<td class="a2"><input type="text" id="product_xh_<%=i %>" name="wxrkdProducts[<%=i %>].product_xh" style="width:100%"  ></td>	
+				<td class="a2"><input type="text" id="product_xh_<%=i %>" name="wxrkdProducts[<%=i %>].product_xh" style="width:90%"  ></td>	
 				<td class="a2">					
-					<input type="text" id="store_id" name="store_id" value="好件库" style="width:100%" readonly>				 
+					<input type="text" id="store_id" name="store_id" value="好件库" style="width:90%" readonly>				 
 				</td>
-				<td class="a2"><input type="text" id="nums_<%=i %>" name="wxrkdProducts[<%=i %>].nums" value="1" size="5"   style="width:100%" ></td>		 
+				<td class="a2"><input type="text" id="nums_<%=i %>" name="wxrkdProducts[<%=i %>].nums" value="1" size="5"   style="width:90%" ></td>		 
 				<td class="a2">
 			        <input type="text" id="qz_serial_num_<%=i %>" name="wxrkdProducts[<%=i %>].qz_serial_num"  size="10" readonly>
 			        <input type="hidden" id="qz_flag_<%=i %>" name="wxrkdProducts[<%=i %>].qz_flag"> <a style="cursor:hand" title="左键点击输入输列号" onclick="openSerialWin('<%=i %>');"><b>...</b></a>&nbsp;
 				</td>				
 				
-				<td class="a2"><input type="text" id="product_remark_<%=i %>" name="wxrkdProducts[<%=i %>].remark"  style="width:100%"></td>				
+				<td class="a2"><input type="text" id="product_remark_<%=i %>" name="wxrkdProducts[<%=i %>].remark"  style="width:90%"></td>				
 			</tr>
 		<%
 	}

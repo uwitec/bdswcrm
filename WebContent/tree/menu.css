@@ -86,6 +86,7 @@ a:active {
 	height:15px;
 	border:1px solid #FFFFFF;
 	padding-top:1px;
+	vertical-align:middle
 }
 .textItem {
 	font-size: 9pt;
@@ -93,4 +94,5 @@ a:active {
 	height: 17px;
 	cursor: hand;
 	padding-left: 0px;
+	vertical-align:middle
 }

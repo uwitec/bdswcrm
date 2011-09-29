@@ -17,7 +17,8 @@ String user_id = info.getUser_id();
 
 %>
 
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>其它收入</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -134,7 +135,7 @@ String user_id = info.getUser_id();
 		<td class="a1" width="15%">经手人</td>
 		<td class="a2">
 		    <input  id="brand"    type="text"   length="20"  onblur="setValue()" /> 
-            <div   id="brandTip"  style="height:12px;position:absolute;left:385px; top:110px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+            <div   id="brandTip"  style="position:absolute;left:385px; top:110px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		    <input type="hidden" name="qtsr.jsr" id="fzr"/> <font color="red">*</font>
 		</td>		
 	</tr>

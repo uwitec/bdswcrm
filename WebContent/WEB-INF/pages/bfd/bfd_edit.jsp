@@ -18,7 +18,8 @@ if(bfdProducts != null && bfdProducts.size()>0){
  List msg = (List)session.getAttribute("messages");
 session.removeAttribute("messages");
 %>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>报废单修改</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -140,19 +141,19 @@ session.removeAttribute("messages");
 		
         var otd0=document.createElement("td");
         otd0.className = "a2";
-        otd0.innerHTML = '<input type="text" id="product_name_'+curId+'" name="bfdProducts['+curId+'].product_name" size="14" style="width:100%" readonly><input type="hidden" id="product_id_'+curId+'" name="bfdProducts['+curId+'].product_id">';
+        otd0.innerHTML = '<input type="text" id="product_name_'+curId+'" name="bfdProducts['+curId+'].product_name" size="14" style="width:90%" readonly><input type="hidden" id="product_id_'+curId+'" name="bfdProducts['+curId+'].product_id">';
         
         var otd1 = document.createElement("td");
         otd1.className = "a2";
-        otd1.innerHTML = '<input type="text" id="product_xh_'+curId+'"  name="bfdProducts['+curId+'].product_xh" size="14" style="width:100%" readonly>';
+        otd1.innerHTML = '<input type="text" id="product_xh_'+curId+'"  name="bfdProducts['+curId+'].product_xh" size="14" style="width:90%" readonly>';
 
         var otd5 = document.createElement("td");
         otd5.className = "a2";
-        otd5.innerHTML = '<input type="text" id="nums_'+curId+'" name="bfdProducts['+curId+'].nums" value="1" size="3" style="width:100%" readonly onblur="setNum('+curId+')">';
+        otd5.innerHTML = '<input type="text" id="nums_'+curId+'" name="bfdProducts['+curId+'].nums" value="1" size="3" style="width:90%" readonly onblur="setNum('+curId+')">';
         
         var otd4 = document.createElement("td");
         otd4.className = "a2";
-        otd4.innerHTML = '<input type="text" id="store_id_'+curId+'" name="bfdProducts['+curId+'].store_id" value="坏件库" size="5" style="width:100%"  readonly>';
+        otd4.innerHTML = '<input type="text" id="store_id_'+curId+'" name="bfdProducts['+curId+'].store_id" value="坏件库" size="5" style="width:90%"  readonly>';
                
         var otd9 = document.createElement("td");
         otd9.className = "a2";
@@ -160,7 +161,7 @@ session.removeAttribute("messages");
         
         var otd6 = document.createElement("td");
         otd6.className = "a2";
-        otd6.innerHTML = '<input type="text" id="product_remark_'+curId+'" name="bfdProducts['+curId+'].product_remark" size="15" style="width:100%"  readonly>';                       
+        otd6.innerHTML = '<input type="text" id="product_remark_'+curId+'" name="bfdProducts['+curId+'].product_remark" size="15" style="width:90%"  readonly>';                       
 	
 		otr.appendChild(otd); 
         otr.appendChild(otd0); 
@@ -362,7 +363,7 @@ session.removeAttribute("messages");
 		<td class="a2" width="35%">
 		 <input id="brand" type="text" ength="20" onblur="setValue();" value="<%=StaticParamDo.getRealNameById(StringUtils.nullToStr(bfd.getJsr())) %>"> 
          <!--<img src="images/select.gif" align="absmiddle" title="选择经手人" border="0" onclick="openywyWin();" style="cursor:hand">
-          --><div   id="brandTip"  style="height:12px;position:absolute;left:610px; top:85px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
+          --><div   id="brandTip"  style="position:absolute;left:610px; top:85px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
           </div>
 		  <input type="hidden" name="bfd.jsr" id="fzr" value="<%=bfd.getJsr()%>"> <font color="red">*</font>	
 		</td>
@@ -400,12 +401,12 @@ session.removeAttribute("messages");
  %>
 	<tr>
 	            <td class="a2">
-					<input type="text" id="product_name_<%=i %>" name="bfdProducts[<%=i %>].product_name" value="<%=StringUtils.nullToStr(bfdProduct.getProduct_name()) %>" style="width:100%" readonly>
+					<input type="text" id="product_name_<%=i %>" name="bfdProducts[<%=i %>].product_name" value="<%=StringUtils.nullToStr(bfdProduct.getProduct_name()) %>" style="width:90%" readonly>
 					<input type="hidden" id="product_id_<%=i %>" name="bfdProducts[<%=i %>].product_id" value="<%=StringUtils.nullToStr(bfdProduct.getProduct_id()) %>">
 				</td>
-				<td class="a2"><input type="text" id="product_xh_<%=i %>" name="bfdProducts[<%=i %>].product_xh"  value="<%=StringUtils.nullToStr(bfdProduct.getProduct_xh()) %>"  style="width:100%" readonly></td>	
+				<td class="a2"><input type="text" id="product_xh_<%=i %>" name="bfdProducts[<%=i %>].product_xh"  value="<%=StringUtils.nullToStr(bfdProduct.getProduct_xh()) %>"  style="width:90%" readonly></td>	
 				
-				<td class="a2"><input type="text" id="nums_<%=i %>" name="bfdProducts[<%=i %>].nums" value="<%=StringUtils.nullToStr(bfdProduct.getNums()) %>" size="5" onblur="setNum(<%=i %>)"  style="width:100%" readonly></td>		 
+				<td class="a2"><input type="text" id="nums_<%=i %>" name="bfdProducts[<%=i %>].nums" value="<%=StringUtils.nullToStr(bfdProduct.getNums()) %>" size="5" onblur="setNum(<%=i %>)"  style="width:90%" readonly></td>		 
 				<td class="a2">	
 				<% String productname=StringUtils.nullToStr(bfdProduct.getProduct_name());
 	               String kf="";
@@ -418,14 +419,14 @@ session.removeAttribute("messages");
 	                kf="坏件库";
 	               }
 	            %>			    
-					<input type="text" id="store_id" name="store_id" value="<%=kf %>" size="8"  style="width:100%" readonly>					 
+					<input type="text" id="store_id" name="store_id" value="<%=kf %>" size="8"  style="width:90%" readonly>					 
 				</td>
 				<td class="a2">
 			        <input type="text" id="qz_serial_num_<%=i %>" name="bfdProducts[<%=i %>].qz_serial_num" value="<%=StringUtils.nullToStr(bfdProduct.getQz_serial_num()) %>" size="10" readonly>
 			        <input type="hidden" id="qz_flag_<%=i %>" name="bfdProducts[<%=i %>].qz_flag" value="<%=flag2 %>"><a style="cursor:hand" title="左键点击输入输列号" onclick="openSerialWin('<%=i %>');"><b>...</b></a>&nbsp;
 				</td>				
 				
-				<td class="a2"><input type="text" id="product_remark_<%=i %>" name="bfdProducts[<%=i %>].product_remark" value="<%=StringUtils.nullToStr(bfdProduct.getProduct_remark()) %>" style="width:100%"></td>				
+				<td class="a2"><input type="text" id="product_remark_<%=i %>" name="bfdProducts[<%=i %>].product_remark" value="<%=StringUtils.nullToStr(bfdProduct.getProduct_remark()) %>" style="width:90%"></td>				
 			</tr>
 <%
 }

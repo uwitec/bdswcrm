@@ -12,7 +12,8 @@ Jhd jhd = (Jhd)VS.findValue("jhd");
 
 %>
 
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>采购订单</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -225,24 +226,24 @@ Jhd jhd = (Jhd)VS.findValue("jhd");
         
         var otd0=document.createElement("td");
         otd0.className = "a2";
-        otd0.innerHTML = '<input type="text" id="product_name_'+curId+'" name="jhdProducts['+curId+'].product_name" style="width:100%" readonly><input type="hidden" id="product_id_'+curId+'" name="jhdProducts['+curId+'].product_id">';
+        otd0.innerHTML = '<input type="text" id="product_name_'+curId+'" name="jhdProducts['+curId+'].product_name" style="width:90%" readonly><input type="hidden" id="product_id_'+curId+'" name="jhdProducts['+curId+'].product_id">';
         
         var otd1 = document.createElement("td");
         otd1.className = "a2";
-        otd1.innerHTML = '<input type="text" size="10"  id="product_xh_'+curId+'"  name="jhdProducts['+curId+'].product_xh" style="width:100%" readonly>';
+        otd1.innerHTML = '<input type="text" size="10"  id="product_xh_'+curId+'"  name="jhdProducts['+curId+'].product_xh" style="width:90%" readonly>';
         
         var otd2 = document.createElement("td");
         otd2.className = "a2";
-        otd2.innerHTML = '<input type="text" size="10"  id="price_'+curId+'" name="jhdProducts['+curId+'].price" value="0.00" style="width:100%" onblur="hj();">';
+        otd2.innerHTML = '<input type="text" size="10"  id="price_'+curId+'" name="jhdProducts['+curId+'].price" value="0.00" style="width:90%" onblur="hj();">';
         
         var otd3 = document.createElement("td");
         otd3.className = "a2";
-        otd3.innerHTML = '<input type="text" size="5"  id="nums_'+curId+'" name="jhdProducts['+curId+'].nums" value="1" style="width:100%" onblur="hj();">';
+        otd3.innerHTML = '<input type="text" size="5"  id="nums_'+curId+'" name="jhdProducts['+curId+'].nums" value="1" style="width:90%" onblur="hj();">';
 
         
         var otd4 = document.createElement("td");
         otd4.className = "a2";
-        otd4.innerHTML = '<input type="text" size="10"  id="xj_'+curId+'" name="jhdProducts['+curId+'].xj" value="0.00" style="width:100%" readonly>';  
+        otd4.innerHTML = '<input type="text" size="10"  id="xj_'+curId+'" name="jhdProducts['+curId+'].xj" value="0.00" style="width:90%" readonly>';  
         
 		otr.appendChild(otd);
         otr.appendChild(otd0); 
@@ -374,7 +375,7 @@ Jhd jhd = (Jhd)VS.findValue("jhd");
 		<td class="a2" width="35%">
 		<input type="text" name="jhd.gysmc" onblur="setClientRegInfo();" id="client_name" value="<%=StaticParamDo.getClientNameById(StringUtils.nullToStr(jhd.getGysbh())) %>" size="45" >
 		<input type="hidden" name="jhd.gysbh" id="client_id" value="<%=StringUtils.nullToStr(jhd.getGysbh()) %>">
-		<div id="clientsTip" style="height:12px;position:absolute;left:150px; top:85px; width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+		<div id="clientsTip" style="position:absolute;left:150px; top:85px; width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		<font color="red">*</font>	
 		</td>
 		<td class="a1">地址</td>
@@ -435,7 +436,7 @@ Jhd jhd = (Jhd)VS.findValue("jhd");
         <td class="a1" width="15%">采购负责人</td>
 		<td class="a2" colspan="3">
 		    <input id="brand" type="text" maxlength="20" size="45" onblur="setValue()" value=""> 
-            <div id="brandTip" style="height:12px;position:absolute;left:612px; top:85px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
+            <div id="brandTip" style="position:absolute;left:612px; top:85px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
             </div>
 		    <input type="hidden" name="jhd.fzr" id="fzr" value=""> <font color="red">*</font>	
 		</td>	
@@ -466,13 +467,13 @@ for(int i=0;i<3;i++){
 	<tr>
 		<td class="a2"><input type="checkbox" name="proc_id" id="proc_id" value="<%=i %>"></td>
 		<td class="a2">
-			<input type="text"  id="product_name_<%=i %>" name="jhdProducts[<%=i %>].product_name" style="width:100%" readonly>
+			<input type="text"  id="product_name_<%=i %>" name="jhdProducts[<%=i %>].product_name" style="width:90%" readonly>
 			<input type="hidden" id="product_id_<%=i %>" name="jhdProducts[<%=i %>].product_id">
 		</td>
-		<td class="a2"><input type="text" size="10" id="product_xh_<%=i %>" name="jhdProducts[<%=i %>].product_xh" style="width:100%" readonly></td>
-		<td class="a2"><input type="text" size="10"  id="price_<%=i %>" name="jhdProducts[<%=i %>].price" value="0.00" style="width:100%" onblur="hj();"></td>
-		<td class="a2"><input type="text" size="5"  id="nums_<%=i %>" name="jhdProducts[<%=i %>].nums" value="1" style="width:100%" onblur="hj();"></td>		
-		<td class="a2"><input type="text" size="10"  id="xj_<%=i %>" name="jhdProducts[<%=i %>].xj" value="0.00" style="width:100%" readonly></td>
+		<td class="a2"><input type="text" size="10" id="product_xh_<%=i %>" name="jhdProducts[<%=i %>].product_xh" style="width:90%" readonly></td>
+		<td class="a2"><input type="text" size="10"  id="price_<%=i %>" name="jhdProducts[<%=i %>].price" value="0.00" style="width:90%" onblur="hj();"></td>
+		<td class="a2"><input type="text" size="5"  id="nums_<%=i %>" name="jhdProducts[<%=i %>].nums" value="1" style="width:90%" onblur="hj();"></td>		
+		<td class="a2"><input type="text" size="10"  id="xj_<%=i %>" name="jhdProducts[<%=i %>].xj" value="0.00" style="width:90%" readonly></td>
 	</tr>
 <%
 }

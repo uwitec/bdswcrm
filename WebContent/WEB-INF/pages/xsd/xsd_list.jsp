@@ -22,7 +22,8 @@ String orderType = (String)VS.findValue("orderType");
 
 %>
 
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>销售出库单管理</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -134,7 +135,7 @@ String orderType = (String)VS.findValue("orderType");
 					<td>
 						<input type="text" name="client_brand" onblur="setClientValue();" id="client_name" value="<%=StaticParamDo.getClientNameById(client_name) %>" size="30" maxlength="50" >
 						<input type="hidden" name="client_name" id="client_id" value="<%=client_name %>">
-						<div id="clientsTip" style="height:12px;position:absolute;width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>				
+						<div id="clientsTip" style="position:absolute;width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>				
 					</td>
 					<td align="center">日　　期：</td>
 					<td colspan="3">
@@ -151,7 +152,7 @@ String orderType = (String)VS.findValue("orderType");
 					<td width="10%" align="center">销 售 员：</td>
 					<td width="20%">
 						<input  id="brand" name="xsry_brand" type="text" length="20" onblur="setValue();" value="<%=StaticParamDo.getRealNameById(fzr) %>"/> 
-						<div id="brandTip"  style="height:12px;position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+						<div id="brandTip"  style="position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 						<input type="hidden" name="fzr" id="fzr" value="<%=fzr%>"/>
 					</td>
 					<td width="10%" align="center">订单状态：</td>
@@ -233,13 +234,13 @@ String orderType = (String)VS.findValue("orderType");
 		<%	
 		}else{
 		%>
-			<a href="#" onclick="edit('<%=StringUtils.nullToStr(xsd.get("id")) %>');"><img src="images/modify.gif" align="absmiddle" title="修改销售订单信息" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
-			<a href="#" onclick="openWin('<%=StringUtils.nullToStr(xsd.get("id")) %>');"><img src="images/view.gif" align="absmiddle" title="查看销售订单信息" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
+			<a href="#" onclick="edit('<%=StringUtils.nullToStr(xsd.get("id")) %>');"><img src="images/modify.gif" align="absmiddle" title="修改销售订单信息" border="0" style="cursor:hand"></a>&nbsp;&nbsp;
+			<a href="#" onclick="openWin('<%=StringUtils.nullToStr(xsd.get("id")) %>');"><img src="images/view.gif" align="absmiddle" title="查看销售订单信息" border="0" style="cursor:hand"></a>&nbsp;&nbsp;
 			<a href="#" onclick="del('<%=StringUtils.nullToStr(xsd.get("id")) %>');"><img src="images/del.gif" align="absmiddle" title="删除该销售订单" border="0" style="cursor:hand"></a>		
 		<%
 		}		
 		%>
-		&nbsp;&nbsp;&nbsp;&nbsp;	
+		&nbsp;&nbsp;	
 		<a href="#" onclick="print('<%=StringUtils.nullToStr(xsd.get("id")) %>');"><img src="images/print.png" align="absmiddle" title="打印销售订单" border="0" style="cursor:hand"></a>			
 		</td>
 	</tr>

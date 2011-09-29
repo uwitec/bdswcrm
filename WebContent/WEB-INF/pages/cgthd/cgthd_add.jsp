@@ -20,7 +20,8 @@ Cgthd cgthd = (Cgthd)VS.findValue("cgthd");
 List cgthdProducts = (List)VS.findValue("cgthdProducts");
 %>
 
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>采购退货单</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -321,12 +322,12 @@ if(msg != null && msg.size() > 0){
 		<td class="a2">
 		<input type="text" name="cgthd.provider_id" id="client_name" value="<%=StaticParamDo.getClientNameById(StringUtils.nullToStr(cgthd.getProvider_name())) %>" style="width:230px" maxlength="50" onblur="setClientValue();">
 		<input type="hidden" name="cgthd.provider_name" id="client_id" value="<%=StringUtils.nullToStr(cgthd.getProvider_name()) %>">
-		<div id="clientsTip" style="height:12px;position:absolute;left:150px; top:85px; width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+		<div id="clientsTip" style="position:absolute;left:150px; top:85px; width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		</td>	
 		<td class="a1" width="15%">经手人</td>
 		<td class="a2" width="35%">
 		 <input  id="brand"    type="text"   maxlength="20" style="width:230px"  onblur="setValue()" value="<%=StaticParamDo.getRealNameById(cgthd.getJsr()) %>"/><font color="red">*</font> 
-         <div   id="brandTip"  style="height:12px;position:absolute;left:610px; top:85px;  width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
+         <div   id="brandTip"  style="position:absolute;left:610px; top:85px;  width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
          </div>
 		 <input type="hidden" name="cgthd.jsr" id="fzr" value="<%=cgthd.getJsr()%>"/> 	
 		</td>

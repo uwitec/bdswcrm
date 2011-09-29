@@ -19,7 +19,8 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 
 %>
 
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>换件单</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -152,15 +153,15 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
         
         var otd0=document.createElement("td");
         otd0.className = "a2";
-        otd0.innerHTML = '<input type="text" id="product_name_'+curId+'" name="hjdProducts['+curId+'].product_name" style="width:100%" readonly><input type="hidden" id="product_id_'+curId+'" name="hjdProducts['+curId+'].product_id">';
+        otd0.innerHTML = '<input type="text" id="product_name_'+curId+'" name="hjdProducts['+curId+'].product_name" style="width:90%" readonly><input type="hidden" id="product_id_'+curId+'" name="hjdProducts['+curId+'].product_id">';
         
         var otd1 = document.createElement("td");
         otd1.className = "a2";
-        otd1.innerHTML = '<input type="text" id="product_xh_'+curId+'"  name="hjdProducts['+curId+'].product_xh" style="width:100%" readonly>';
+        otd1.innerHTML = '<input type="text" id="product_xh_'+curId+'"  name="hjdProducts['+curId+'].product_xh" style="width:90%" readonly>';
         
         var otd3 = document.createElement("td");
         otd3.className = "a2";
-        otd3.innerHTML = '<input type="text" id="oqz_serial_num_'+curId+'" name="hjdProducts['+curId+'].oqz_serial_num" style="width:100%" >';
+        otd3.innerHTML = '<input type="text" id="oqz_serial_num_'+curId+'" name="hjdProducts['+curId+'].oqz_serial_num" style="width:90%" >';
         
 		var otd7 = document.createElement("td");
 		otd7.className = "a2";
@@ -169,7 +170,7 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
         
         var otd5 = document.createElement("td");
         otd5.className = "a2";
-        otd5.innerHTML = '<input type="text" id="product_remark_'+curId+'" name="hjdProducts['+curId+'].product_remark" style="width:100%" >';                       
+        otd5.innerHTML = '<input type="text" id="product_remark_'+curId+'" name="hjdProducts['+curId+'].product_remark" style="width:90%" >';                       
 
 				
 		otr.appendChild(otd);
@@ -337,7 +338,7 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 		<td class="a1" width="15%">经手人</td>
 		<td class="a2" width="35%">
 		    <input  id="brand"    type="text"length="20"  onblur="setValue();" />
-            <div   id="brandTip"  style="height:12px;position:absolute;left:146px; top:141px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
+            <div   id="brandTip"  style="position:absolute;left:146px; top:141px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
             </div>
 		    <input type="hidden" name="hjd.jsr" id="fzr" /><font color="red">*</font>
 		</td>
@@ -381,18 +382,18 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 		   }
  %>
 	<tr>
-	    <td class="a2"><input type="checkbox" name="proc_id" id="proc_id" value="<%=i %>" style="width:100%" ></td>
+	    <td class="a2"><input type="checkbox" name="proc_id" id="proc_id" value="<%=i %>" style="width:90%" ></td>
 		<td class="a2">
-			<input type="text" id="product_name_<%=i %>" name="hjdProducts[<%=i %>].product_name" style="width:100%" readonly  >
+			<input type="text" id="product_name_<%=i %>" name="hjdProducts[<%=i %>].product_name" style="width:90%" readonly  >
 			<input type="hidden" id="product_id_<%=i %>" name="hjdProducts[<%=i %>].product_id">
 		</td>
-		<td class="a2"><input type="text" id="product_xh_<%=i %>" name="hjdProducts[<%=i %>].product_xh" style="width:100%" readonly></td>
-		<td class="a2"> <input type="text" id="oqz_serial_num_<%=i %>" name="hjdProducts[<%=i %>].oqz_serial_num" value="" style="width:100%"></td>
+		<td class="a2"><input type="text" id="product_xh_<%=i %>" name="hjdProducts[<%=i %>].product_xh" style="width:90%" readonly></td>
+		<td class="a2"> <input type="text" id="oqz_serial_num_<%=i %>" name="hjdProducts[<%=i %>].oqz_serial_num" value="" style="width:90%"></td>
 		<td class="a2">
 			<input type="text" id="nqz_serial_num_<%=i %>" name="hjdProducts[<%=i %>].nqz_serial_num" value="" size="15" readonly>
 			<input type="hidden" id="qz_flag_<%=i %>" name="hjdProducts[<%=i %>].qz_flag" value=""><a style="cursor:hand" title="左键点击输入输列号" onclick="openSerialWin('<%=i %>');"><b>...</b></a>&nbsp;
 		</td>		
-		<td class="a2"><input type="text" id="product_remark_<%=i %>" name="hjdProducts[<%=i %>].product_remark" style="width:100%" ></td>
+		<td class="a2"><input type="text" id="product_remark_<%=i %>" name="hjdProducts[<%=i %>].product_remark" style="width:90%" ></td>
 	</tr>
 <%
  }
@@ -406,17 +407,17 @@ else
 <tr>
 			    <td class="a2"><input type="checkbox" name="proc_id" id="proc_id" value="<%=i %>"></td>
 				<td class="a2">
-					<input type="text" id="product_name_<%=i %>" name="hjdProducts[<%=i %>].product_name" style="width:100%"  >
+					<input type="text" id="product_name_<%=i %>" name="hjdProducts[<%=i %>].product_name" style="width:90%"  >
 					<input type="hidden" id="product_id_<%=i %>" name="hjdProducts[<%=i %>].product_id">
 				</td>
-				<td class="a2"><input type="text" id="product_xh_<%=i %>" name="hjdProducts[<%=i %>].product_xh" size="13" style="width:100%" ></td>	
-				<td class="a2"><input type="text" id="oqz_serial_num_<%=i %>" name="hjdProducts[<%=i %>].oqz_serial_num"  style="width:100%"></td>		 
+				<td class="a2"><input type="text" id="product_xh_<%=i %>" name="hjdProducts[<%=i %>].product_xh" size="13" style="width:90%" ></td>	
+				<td class="a2"><input type="text" id="oqz_serial_num_<%=i %>" name="hjdProducts[<%=i %>].oqz_serial_num"  style="width:90%"></td>		 
 				
 				<td class="a2">
 			        <input type="text" id="nqz_serial_num_<%=i %>" name="hjdProducts[<%=i %>].nqz_serial_num"  size="15" readonly>
 			        <input type="hidden" id="qz_flag_<%=i %>" name="hjdProducts[<%=i %>].qz_flag"> <a style="cursor:hand" title="左键点击输入序列号" onclick="openSerialWin('<%=i %>');"><b>...</b></a>&nbsp;
 				</td>		
-				<td class="a2"><input type="text" id="product_remark_<%=i %>" name="hjdProducts[<%=i %>].product_remark"  style="width:100%"></td>				
+				<td class="a2"><input type="text" id="product_remark_<%=i %>" name="hjdProducts[<%=i %>].product_remark"  style="width:90%"></td>				
 			</tr>
 		<%
 	}

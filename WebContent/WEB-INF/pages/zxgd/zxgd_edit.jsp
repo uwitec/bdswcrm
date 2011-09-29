@@ -7,7 +7,8 @@
 OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
 Map zxgd=(Map)VS.findValue("zxgd");
  %>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>咨询工单</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -88,7 +89,7 @@ Map zxgd=(Map)VS.findValue("zxgd");
 		<td class="a1" width="15%">回复人</td>
 		<td class="a2">
 		   <input  id="brand"  type="text"   length="20"  onblur="setValue()" value="<%=StaticParamDo.getRealNameById((String)zxgd.get("hfr")) %>"> <font color="red">*</font>
-           <div  id="brandTip"  style="height:12px;position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+           <div  id="brandTip"  style="position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		   <input type="hidden" name="zxgds.hfr" id="fzr" value="<%=StringUtils.nullToStr(zxgd.get("hfr")) %>"> 
 		</td>
 		<td class="a1">回复日期</td>

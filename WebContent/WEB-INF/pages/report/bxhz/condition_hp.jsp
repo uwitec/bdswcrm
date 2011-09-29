@@ -9,7 +9,8 @@ OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
 List clientsList=(List)VS.findValue("clientsList");
 List userList=(List)VS.findValue("user_list");
 %>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>货品报修汇总</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -75,7 +76,7 @@ List userList=(List)VS.findValue("user_list");
 		<input type="text" name="clientId" id="client_name" value=""  onblur="setvalues()"  size="30" maxlength="50">
 		<input type="hidden" name="clientName" id="client_id" value="">
 		<img src="images/select.gif" align="absmiddle" title="选择客户" border="0" onclick="openClientWin();" style="cursor:hand">
-		<div id="clientsTip" style="height:12px;position:absolute;left:100px; top:87px; width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+		<div id="clientsTip" style="position:absolute;left:100px; top:87px; width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		</td>	
 		<td class="a1" width="15%">联系人</td>
 		<td class="a4" width="35%">
@@ -93,7 +94,7 @@ List userList=(List)VS.findValue("user_list");
     	<td class="a2">	  
 		 <input  id="bian"  type="text"   length="20"  onblur="setvaluess()"  /> 
          <img src="images/select.gif" align="absmiddle" title="选择经手人" border="0" onclick="opengcsWin();" style="cursor:hand">
-          <div   id="bianTip"  style="height:12px;position:absolute; left:700px; top:115px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
+          <div   id="bianTip"  style="position:absolute; left:700px; top:115px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
           </div>
 		    <input type="hidden" name="gcs" id="gcs"  /> 
 		</td>			

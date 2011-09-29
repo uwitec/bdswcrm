@@ -13,7 +13,8 @@ session.removeAttribute("MSG");
 
 %>
 
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>修改密码</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -39,17 +40,16 @@ session.removeAttribute("MSG");
 <body >
 <form name="userForm" action="savePass.html" method="post">
 <input type="hidden" name="user_name" value="<%=loginInfo.getUser_name() %>">
-
-<BR>
 <center>
 <font color="red"><%=msg %></font>
 </center>
-<table width="50%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
-	<thead>
+<table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0">
 	<tr>
-		<td colspan="4">修改密码</td>
+		<td class="csstitle" align="left" width="75%">&nbsp;&nbsp;&nbsp;&nbsp;<b>修改密码</b></td>
+		<td class="csstitle" width="25%">&nbsp;</td>			
 	</tr>
-	</thead>
+</table>
+<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<tr>
 		<td class="a1" width="25%">当前密码</td>
 		<td class="a2" width="75%"><input type="password" name="curPass" value=""><font color="red">*</font></td>

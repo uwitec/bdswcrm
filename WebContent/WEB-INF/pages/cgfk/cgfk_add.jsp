@@ -24,7 +24,8 @@ Clients clients = (Clients)VS.findValue("clients");
 String msg = StringUtils.nullToStr(VS.findValue("msg"));
 %>
 
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>付款申请单</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -260,7 +261,7 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 		<td class="a2" width="35%">
 			<input type="text" name="gysmc" id="client_name" value="<%=StaticParamDo.getClientNameById(StringUtils.nullToStr(cgfk.getGysbh())) %>" size="35" onblur="queryYszd();">
 			<input type="hidden" name="cgfk.gysbh" id="client_id" value="<%=StringUtils.nullToStr(cgfk.getGysbh()) %>">
-			<div id="clientsTip" style="height:12px;position:absolute;width:270px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+			<div id="clientsTip" style="position:absolute;width:270px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 			<font color="red">*</font>
 		</td>	
 	</tr>
@@ -298,7 +299,7 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 		<td class="a1" width="15%">申请人</td>
 		<td class="a2" width="35%">
 		    <input id="brand" type="text" size="35" onblur="setValue()" />
-            <div   id="brandTip"  style="height:12px;position:absolute;left:132px; top:114px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+            <div   id="brandTip"  style="position:absolute;left:132px; top:114px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		    <input type="hidden" name="cgfk.jsr" id="fzr"  /> <font color="red">*</font>	
 		</td>	
 	</tr>
@@ -351,11 +352,11 @@ if(cgfkDescs != null && cgfkDescs.size()>0){
 		double bcfk = map.get("bcfk")==null?0:((Double)map.get("bcfk")).doubleValue();
 %>
 	<tr>
-		<td class="a2"><input type="text" id="jhd_id_<%=i %>" name="cgfkDescs[<%=i %>].jhd_id" value="<%=StringUtils.nullToStr(map.get("jhd_id")) %>" style="width:100%" readonly></td>
-		<td class="a2"><input type="text" size="10" id="fsrq_<%=i %>" name="cgfkDescs[<%=i %>].fsrq" value="<%=StringUtils.nullToStr(map.get("fsrq")) %>" style="width:100%" readonly></td>
-		<td class="a2"><input type="text" size="10" id="fsje_<%=i %>" name="cgfkDescs[<%=i %>].fsje" value="<%=JMath.round(fsje) %>" style="width:100%" readonly></td>
-		<td class="a2"><input type="text" size="10" id="yfje_<%=i %>" name="cgfkDescs[<%=i %>].yfje"  value="<%=JMath.round(yfje) %>" style="width:100%" readonly></td>
-		<td class="a2"><input type="text" size="10" id="bcfk_<%=i %>" name="cgfkDescs[<%=i %>].bcfk" value="<%=JMath.round(bcfk) %>" style="width:100%"  onblur="hj();"></td>
+		<td class="a2"><input type="text" id="jhd_id_<%=i %>" name="cgfkDescs[<%=i %>].jhd_id" value="<%=StringUtils.nullToStr(map.get("jhd_id")) %>" style="width:90%" readonly></td>
+		<td class="a2"><input type="text" size="10" id="fsrq_<%=i %>" name="cgfkDescs[<%=i %>].fsrq" value="<%=StringUtils.nullToStr(map.get("fsrq")) %>" style="width:90%" readonly></td>
+		<td class="a2"><input type="text" size="10" id="fsje_<%=i %>" name="cgfkDescs[<%=i %>].fsje" value="<%=JMath.round(fsje) %>" style="width:90%" readonly></td>
+		<td class="a2"><input type="text" size="10" id="yfje_<%=i %>" name="cgfkDescs[<%=i %>].yfje"  value="<%=JMath.round(yfje) %>" style="width:90%" readonly></td>
+		<td class="a2"><input type="text" size="10" id="bcfk_<%=i %>" name="cgfkDescs[<%=i %>].bcfk" value="<%=JMath.round(bcfk) %>" style="width:90%"  onblur="hj();"></td>
 	</tr>
 <%
 	}
@@ -363,11 +364,11 @@ if(cgfkDescs != null && cgfkDescs.size()>0){
 	for(int i=0;i<3;i++){
 %>
 	<tr>
-		<td class="a2"><input type="text" id="jhd_id_<%=i %>" name="cgfkDescs[<%=i %>].jhd_id" value="" style="width:100%" readonly></td>
-		<td class="a2"><input type="text" size="10" id="fsrq_<%=i %>" name="cgfkDescs[<%=i %>].fsrq" value="" style="width:100%" readonly></td>
-		<td class="a2"><input type="text" size="10" id="fsje_<%=i %>" name="cgfkDescs[<%=i %>].fsje" value="0.00" style="width:100%" readonly></td>
-		<td class="a2"><input type="text" size="10" id="yfje_<%=i %>" name="cgfkDescs[<%=i %>].yfje"  value="0.00" style="width:100%" readonly></td>
-		<td class="a2"><input type="text" size="10" id="bcfk_<%=i %>" name="cgfkDescs[<%=i %>].bcfk" value="0.00" style="width:100%" readonly onblur="hj();"></td>
+		<td class="a2"><input type="text" id="jhd_id_<%=i %>" name="cgfkDescs[<%=i %>].jhd_id" value="" style="width:90%" readonly></td>
+		<td class="a2"><input type="text" size="10" id="fsrq_<%=i %>" name="cgfkDescs[<%=i %>].fsrq" value="" style="width:90%" readonly></td>
+		<td class="a2"><input type="text" size="10" id="fsje_<%=i %>" name="cgfkDescs[<%=i %>].fsje" value="0.00" style="width:90%" readonly></td>
+		<td class="a2"><input type="text" size="10" id="yfje_<%=i %>" name="cgfkDescs[<%=i %>].yfje"  value="0.00" style="width:90%" readonly></td>
+		<td class="a2"><input type="text" size="10" id="bcfk_<%=i %>" name="cgfkDescs[<%=i %>].bcfk" value="0.00" style="width:90%" readonly onblur="hj();"></td>
 	</tr>
 <%
 	}
@@ -376,9 +377,9 @@ if(cgfkDescs != null && cgfkDescs.size()>0){
 	<tr>
 		<td class="a2">合  计</td>
 		<td class="a2"></td>
-		<td class="a2"><input type="text" size="10" id="hj_fsje" name="hj_fsje" value="<%=JMath.round(hj_fsje) %>" style="width:100%" readonly></td>
-		<td class="a2"><input type="text" size="10" id="hj_yfje" name="hj_yfje"  value="<%=JMath.round(hj_yfje) %>" style="width:100%" readonly></td>
-		<td class="a2"><input type="text" size="10" id="hj_bcfk" name="hj_bcfk" value="0.00" style="width:100%" readonly></td>
+		<td class="a2"><input type="text" size="10" id="hj_fsje" name="hj_fsje" value="<%=JMath.round(hj_fsje) %>" style="width:90%" readonly></td>
+		<td class="a2"><input type="text" size="10" id="hj_yfje" name="hj_yfje"  value="<%=JMath.round(hj_yfje) %>" style="width:90%" readonly></td>
+		<td class="a2"><input type="text" size="10" id="hj_bcfk" name="hj_bcfk" value="0.00" style="width:90%" readonly></td>
 	</tr>	
 </table>
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">

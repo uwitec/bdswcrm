@@ -16,7 +16,8 @@ if(jjdProducts != null && jjdProducts.size()>0){
 List msg = (List)session.getAttribute("messages");
 session.removeAttribute("messages");
 %>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>接件单管理</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -289,11 +290,11 @@ session.removeAttribute("messages");
      
         var otd1=document.createElement("td");
         otd1.className = "a2";
-        otd1.innerHTML = '<input type="text" id="product_name_'+curId+'" name="jjdProducts['+curId+'].product_name" style="width:100%" readonly> <input type="hidden" id="product_id_'+curId+'" name="jjdProducts['+curId+'].product_id">';
+        otd1.innerHTML = '<input type="text" id="product_name_'+curId+'" name="jjdProducts['+curId+'].product_name" style="width:90%" readonly> <input type="hidden" id="product_id_'+curId+'" name="jjdProducts['+curId+'].product_id">';
         
         var otd2 = document.createElement("td");
         otd2.className = "a2";
-        otd2.innerHTML = '<input type="text" id="product_xh_'+curId+'"  name="jjdProducts['+curId+'].product_xh" size="15" style="width:100%" readonly>';     
+        otd2.innerHTML = '<input type="text" id="product_xh_'+curId+'"  name="jjdProducts['+curId+'].product_xh" size="15" style="width:90%" readonly>';     
         
         var otd3 = document.createElement("td");
         otd3.className = "a2";
@@ -309,11 +310,11 @@ session.removeAttribute("messages");
     
         var otd6  = document.createElement("td"); 
         otd6.className = "a2";
-        otd6.innerHTML = '<input type="text" id="cpfj_'+curId+'" name="jjdProducts['+curId+'].cpfj"  size="15" style="width:100%">';                       
+        otd6.innerHTML = '<input type="text" id="cpfj_'+curId+'" name="jjdProducts['+curId+'].cpfj"  size="15" style="width:90%">';                       
           
          var otd7  = document.createElement("td"); 
         otd7.className = "a2";
-        otd7.innerHTML = '<input type="text" id="fxts_'+curId+'" name="jjdProducts['+curId+'].fxts"  size="15" style="width:100%">';          
+        otd7.innerHTML = '<input type="text" id="fxts_'+curId+'" name="jjdProducts['+curId+'].fxts"  size="15" style="width:90%">';          
         var otd8 = document.createElement("td");
         otd8.className = "a2";
         otd8.innerHTML = '<input type="text" id="remark_'+curId+'" name="jjdProducts['+curId+'].remark">';                       
@@ -535,7 +536,7 @@ session.removeAttribute("messages");
 		<td class="a1" width="15%">接件人</td>
 		<td class="a2">         
 			<input id="brand" type="text" style="width:230px" onblur="setValue()" value="<%=StaticParamDo.getRealNameById(jjd.getJjr()) %>"/> 
-			<div id="brandTip"  style="height:12px;position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+			<div id="brandTip"  style="position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 			<input type="hidden" name="jjd.jjr" id="fzr" value="<%=StringUtils.nullToStr(jjd.getJjr())%>"/><font color="red">*</font>	          
 		</td>							
 	</tr>
@@ -580,12 +581,12 @@ session.removeAttribute("messages");
 	      <tr>
 	             <td class="a2"><input type="checkbox" name="proc_id" id="proc_id" value="<%=i %>"></td>
 				<td class="a2">				   
-					<input type="text" id="product_name_<%=i %>" name="jjdProducts[<%=i %>].product_name" value="<%=StringUtils.nullToStr(jjdProduct.getProduct_name()) %>" style="width:100%" readonly>			 
+					<input type="text" id="product_name_<%=i %>" name="jjdProducts[<%=i %>].product_name" value="<%=StringUtils.nullToStr(jjdProduct.getProduct_name()) %>" style="width:90%" readonly>			 
 					<input type="hidden" id="product_id_<%=i %>" name="jjdProducts[<%=i %>].product_id" value="<%=StringUtils.nullToStr(jjdProduct.getProduct_id()) %>">
 				</td>
-				<td class="a2"><input type="text" id="product_xh_<%=i %>" name="jjdProducts[<%=i %>].product_xh" size="15" value="<%=StringUtils.nullToStr(jjdProduct.getProduct_xh()) %>" size="15" style="width:100%" readonly  ></td>	
+				<td class="a2"><input type="text" id="product_xh_<%=i %>" name="jjdProducts[<%=i %>].product_xh" size="15" value="<%=StringUtils.nullToStr(jjdProduct.getProduct_xh()) %>" size="15" style="width:90%" readonly  ></td>	
 				
-				<td class="a2"><input type="text" id="nums_<%=i %>" name="jjdProducts[<%=i %>].nums" value="<%=StringUtils.nullToStr(jjdProduct.getNums()) %>" size="5" style="width:100%" onblur="setNum(<%=i %>)"  ></td>		 
+				<td class="a2"><input type="text" id="nums_<%=i %>" name="jjdProducts[<%=i %>].nums" value="<%=StringUtils.nullToStr(jjdProduct.getNums()) %>" size="5" style="width:90%" onblur="setNum(<%=i %>)"  ></td>		 
 				<td class="a2">
 					<input type="text" id="hjk_<%=i %>" name="producthjk" value="坏件库" size="7">					 
 				</td>
@@ -593,10 +594,10 @@ session.removeAttribute("messages");
 					<input type="text" id="qz_serial_num_<%=i %>" name="jjdProducts[<%=i %>].qz_serial_num" size="15" value="<%=StringUtils.nullToStr(jjdProduct.getQz_serial_num()) %>">
 			         <input type="hidden" id="qz_flag_<%=i %>" name="jjdProducts[<%=i %>].qz_flag" value="<%=flag2 %>"><a style="cursor:hand" title="左键点击输入输列号" onclick="openSerialWin('<%=i %>');"><b>...</b></a>&nbsp;
 					</td>				
-				<td class="a2"><input type="text" id="cpfj_<%=i %>" name="jjdProducts[<%=i %>].cpfj" style="width:100%" value="<%=StringUtils.nullToStr(jjdProduct.getCpfj())%>"></td>
-				<td class="a2"><input type="text" id="fxts_<%=i %>" name="jjdProducts[<%=i %>].fxts" style="width:100%" value="<%=StringUtils.nullToStr(jjdProduct.getFxts())%>"></td>
+				<td class="a2"><input type="text" id="cpfj_<%=i %>" name="jjdProducts[<%=i %>].cpfj" style="width:90%" value="<%=StringUtils.nullToStr(jjdProduct.getCpfj())%>"></td>
+				<td class="a2"><input type="text" id="fxts_<%=i %>" name="jjdProducts[<%=i %>].fxts" style="width:90%" value="<%=StringUtils.nullToStr(jjdProduct.getFxts())%>"></td>
 				
-				<td class="a2"><input type="text" id="remark_<%=i %>" name="jjdProducts[<%=i %>].remark" style="width:100%" value="<%=StringUtils.nullToStr(jjdProduct.getRemark())%>"></td>
+				<td class="a2"><input type="text" id="remark_<%=i %>" name="jjdProducts[<%=i %>].remark" style="width:90%" value="<%=StringUtils.nullToStr(jjdProduct.getRemark())%>"></td>
 			</tr>
 <%
 }
@@ -611,13 +612,13 @@ else
 			    <td class="a2"><input type="checkbox" name="proc_id" id="proc_id" value="<%=i %>"></td>
 				 
 				<td class="a2">
-					<input type="text" id="product_name_<%=i %>" name="jjdProducts[<%=i %>].product_name"  style="width:100%" readonly>					 
+					<input type="text" id="product_name_<%=i %>" name="jjdProducts[<%=i %>].product_name"  style="width:90%" readonly>					 
 					<input type="hidden" id="product_id_<%=i %>" name="jjdProducts[<%=i %>].product_id">
 				</td>		 
 				
-				<td class="a2"><input type="text" id="product_xh_<%=i %>" name="jjdProducts[<%=i %>].product_xh" size="15" style="width:100%" readonly  ></td>	
+				<td class="a2"><input type="text" id="product_xh_<%=i %>" name="jjdProducts[<%=i %>].product_xh" size="15" style="width:90%" readonly  ></td>	
  				
-				<td class="a2"><input type="text" id="nums_<%=i %>" name="jjdProducts[<%=i %>].nums" value="1" size="5" style="width:100%" onblur="setNum(<%=i %>)" ></td>		 
+				<td class="a2"><input type="text" id="nums_<%=i %>" name="jjdProducts[<%=i %>].nums" value="1" size="5" style="width:90%" onblur="setNum(<%=i %>)" ></td>		 
 				<td class="a2">
 					<input type="text" id="hjk_<%=i %>" name="producthjk" value="坏件库" size="7">					 
 				</td>
@@ -626,9 +627,9 @@ else
 				    <input type="hidden" id="qz_flag_<%=i %>" name="jjdProducts[<%=i %>].qz_flag"><a style="cursor:hand" title="左键点击输入输列号" onclick="openSerialWin('<%=i %>');"><b>...</b></a>&nbsp;
 				</td>				
 				
-				<td class="a2"><input type="text" id="cpfj_<%=i %>" name="jjdProducts[<%=i %>].cpfj"  size="15" style="width:100%"></td>
-				<td class="a2"><input type="text" id="fxts_<%=i %>" name="jjdProducts[<%=i %>].fxts"  size="15" style="width:100%"></td>				
-				<td class="a2"><input type="text" id="remark_<%=i %>" name="jjdProducts[<%=i %>].remark" size="15" style="width:100%"></td>
+				<td class="a2"><input type="text" id="cpfj_<%=i %>" name="jjdProducts[<%=i %>].cpfj"  size="15" style="width:90%"></td>
+				<td class="a2"><input type="text" id="fxts_<%=i %>" name="jjdProducts[<%=i %>].fxts"  size="15" style="width:90%"></td>				
+				<td class="a2"><input type="text" id="remark_<%=i %>" name="jjdProducts[<%=i %>].remark" size="15" style="width:90%"></td>
 				 
 			</tr>
 		<%
@@ -667,7 +668,7 @@ else
 		<td class="a2" width="35%">
 		<input type="text" name="jjd.client_id"   id="client_name" onblur="setClientRegInfo();" value="" style="width:232px" maxlength="50">
 		<input style="width:230px;display: none" type="text" name="jjd.client_name" id="client_id" value=""  maxlength="50" >
-		<font color="red">*</font><div id="clientsTip" style="height:12px;position:absolute;width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;"></div>
+		<font color="red">*</font><div id="clientsTip" style="position:absolute;width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;"></div>
 		</td>				
 		<td class="a1" width="15%">联系人</td>
 		<td class="a2" width="35%">		 

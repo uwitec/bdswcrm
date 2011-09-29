@@ -13,7 +13,8 @@ String fk_date1 = (String)VS.findValue("fk_date1");
 String fk_date2 = (String)VS.findValue("fk_date2");
 %>
 
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>待审批付款申请</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />

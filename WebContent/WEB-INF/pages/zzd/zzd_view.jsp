@@ -1,6 +1,7 @@
 <%@ page language="java" errorPage="/error.jsp" pageEncoding="UTF-8" contentType="text/html;charset=UTF-8" %>
 <%@taglib uri="/webwork" prefix="ww"%>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>商品组装单</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -111,18 +112,18 @@
 	<ww:iterator value="%{zzdProducts}" status="li">
 	<tr>
 		<td class="a2">
-			<ww:textfield name='zzdProducts[%{#li.count-1}].product_name' id='product_name_%{#li.count-1}' value="%{product_name}" theme="simple" cssStyle="width:100%" readonly="true"/>
+			<ww:textfield name='zzdProducts[%{#li.count-1}].product_name' id='product_name_%{#li.count-1}' value="%{product_name}" theme="simple" cssStyle="width:90%" readonly="true"/>
 			<ww:hidden name='zzdProducts[%{#li.count-1}].product_id' id='product_id_%{#li.count-1}' value="%{product_id}" theme="simple"/>
 		</td>
-		<td class="a2"><ww:textfield name='zzdProducts[%{#li.count-1}].product_xh' id='product_xh_%{#li.count-1}' value="%{product_xh}" theme="simple" cssStyle="width:100%" readonly="true"/></td>
-		<td class="a2"><ww:textfield name='zzdProducts[%{#li.count-1}].product_dw' id='product_dw_%{#li.count-1}' value="%{product_dw}" theme="simple" cssStyle="width:100%" readonly="true"/></td>
-		<td class="a2"><ww:textfield name='zzdProducts[%{#li.count-1}].price' id='price_%{#li.count-1}' value="%{getText('global.format.double',{price})}" readonly="true" theme="simple" cssStyle="width:100%"/></td>
-		<td class="a2"><ww:textfield name='zzdProducts[%{#li.count-1}].nums' id='nums_%{#li.count-1}' value="%{nums}" readonly="true" theme="simple" cssStyle="width:100%"/></td>
-		<td class="a2"><ww:textfield name='zzdProducts[%{#li.count-1}].hj' id='hj_%{#li.count-1}' value="%{getText('global.format.double',{hj})}" theme="simple" cssStyle="width:100%" readonly="true"/></td>
+		<td class="a2"><ww:textfield name='zzdProducts[%{#li.count-1}].product_xh' id='product_xh_%{#li.count-1}' value="%{product_xh}" theme="simple" cssStyle="width:90%" readonly="true"/></td>
+		<td class="a2"><ww:textfield name='zzdProducts[%{#li.count-1}].product_dw' id='product_dw_%{#li.count-1}' value="%{product_dw}" theme="simple" cssStyle="width:90%" readonly="true"/></td>
+		<td class="a2"><ww:textfield name='zzdProducts[%{#li.count-1}].price' id='price_%{#li.count-1}' value="%{getText('global.format.double',{price})}" readonly="true" theme="simple" cssStyle="width:90%"/></td>
+		<td class="a2"><ww:textfield name='zzdProducts[%{#li.count-1}].nums' id='nums_%{#li.count-1}' value="%{nums}" readonly="true" theme="simple" cssStyle="width:90%"/></td>
+		<td class="a2"><ww:textfield name='zzdProducts[%{#li.count-1}].hj' id='hj_%{#li.count-1}' value="%{getText('global.format.double',{hj})}" theme="simple" cssStyle="width:90%" readonly="true"/></td>
 		<td class="a2">
 			<ww:textfield name='zzdProducts[%{#li.count-1}].qz_serial_num' id='qz_serial_num_%{#li.count-1}' value="%{qz_serial_num}" theme="simple" cssStyle="width:85%" readonly="true"/>
 		</td>
-		<td class="a2"><ww:textfield name='zzdProducts[%{#li.count-1}].remark' id='remark_%{#li.count-1}' value="%{remark}" theme="simple" cssStyle="width:100%" readonly="true"/></td>
+		<td class="a2"><ww:textfield name='zzdProducts[%{#li.count-1}].remark' id='remark_%{#li.count-1}' value="%{remark}" theme="simple" cssStyle="width:90%" readonly="true"/></td>
 	</tr>	
 	</ww:iterator>
 </table>

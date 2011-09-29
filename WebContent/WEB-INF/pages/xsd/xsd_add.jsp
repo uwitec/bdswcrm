@@ -31,7 +31,8 @@ if(xsdProducts != null && xsdProducts.size()>0){
 
 String flag = StringUtils.nullToStr(VS.findValue("flag"));
 %>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>销售订单</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -263,7 +264,7 @@ String flag = StringUtils.nullToStr(VS.findValue("flag"));
 		<td class="a2">
 		<input type="text" name="xsd.client_id" onblur="setClientRegInfo();" id="client_name" value="<%=StaticParamDo.getClientNameById(StringUtils.nullToStr(xsd.getClient_name())) %>" size="40" maxlength="50" ><font color="red">*</font>
 		<input type="hidden" name="xsd.client_name" id="client_id" value="<%=StringUtils.nullToStr(xsd.getClient_name()) %>">
-		<div id="clientsTip" style="height:12px;position:absolute;width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+		<div id="clientsTip" style="position:absolute;width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		</td>
 		<td class="a1">地址</td>
 		<td class="a2"><input type="text" name="xsd.kh_address" id="kh_address" value="<%=StringUtils.nullToStr(xsd.getKh_address()) %>" maxlength="100" size="40"></td>	
@@ -325,7 +326,7 @@ String flag = StringUtils.nullToStr(VS.findValue("flag"));
 		<td class="a1"  width="15%">经手人</td>
 		<td class="a2">
 			<input  id="brand" type="text" mxlength="20" onblur="setValue()" value="<%=StaticParamDo.getRealNameById(xsd.getFzr()) %>" size="40"/><font color="red">*</font> 
-			<div id="brandTip"  style="height:12px;position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+			<div id="brandTip"  style="position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 			<input type="hidden" name="xsd.fzr" id="fzr" value="<%=StringUtils.nullToStr(xsd.getFzr()) %>"/>		
 		</td>
 		<%
@@ -373,10 +374,10 @@ if(xsdProducts!=null && xsdProducts.size()>0){
 	<tr>
 		<td class="a2"><input type="checkbox" name="proc_id" id="proc_id" value="<%=i %>"></td>
 		<td class="a2">
-			<input type="text" id="product_name_<%=i %>" name="xsdProducts[<%=i %>].product_name" style="width:100%" value="<%=StringUtils.nullToStr(xsdProduct.getProduct_name()) %>" readonly>
+			<input type="text" id="product_name_<%=i %>" name="xsdProducts[<%=i %>].product_name" style="width:90%" value="<%=StringUtils.nullToStr(xsdProduct.getProduct_name()) %>" readonly>
 			<input type="hidden" id="product_id_<%=i %>" name="xsdProducts[<%=i %>].product_id" value="<%=StringUtils.nullToStr(xsdProduct.getProduct_id()) %>">
 		</td>
-		<td class="a2"><input type="text" id="product_xh_<%=i %>" name="xsdProducts[<%=i %>].product_xh" style="width:100%" size="10" value="<%=StringUtils.nullToStr(xsdProduct.getProduct_xh()) %>" readonly></td>
+		<td class="a2"><input type="text" id="product_xh_<%=i %>" name="xsdProducts[<%=i %>].product_xh" style="width:90%" size="10" value="<%=StringUtils.nullToStr(xsdProduct.getProduct_xh()) %>" readonly></td>
 		<td class="a2">
 			<input type="text" id="price_<%=i %>" name="xsdProducts[<%=i %>].price" value="<%=JMath.round(xsdProduct.getPrice()) %>" size="10" onblur="hj();">
 			<input type="hidden" id="cbj_<%=i %>" name="xsdProducts[<%=i %>].cbj" value="<%=JMath.round(xsdProduct.getCbj()) %>">
@@ -397,10 +398,10 @@ if(xsdProducts!=null && xsdProducts.size()>0){
 	<tr>
 		<td class="a2"><input type="checkbox" name="proc_id" id="proc_id" value="<%=i %>"></td>
 		<td class="a2">
-			<input type="text" id="product_name_<%=i %>" style="width:100%" name="xsdProducts[<%=i %>].product_name" readonly>
+			<input type="text" id="product_name_<%=i %>" style="width:90%" name="xsdProducts[<%=i %>].product_name" readonly>
 			<input type="hidden" id="product_id_<%=i %>" name="xsdProducts[<%=i %>].product_id">
 		</td>
-		<td class="a2"><input type="text" id="product_xh_<%=i %>" style="width:100%" name="xsdProducts[<%=i %>].product_xh" size="10" readonly></td>
+		<td class="a2"><input type="text" id="product_xh_<%=i %>" style="width:90%" name="xsdProducts[<%=i %>].product_xh" size="10" readonly></td>
 		<td class="a2">
 			<input type="text" id="price_<%=i %>" name="xsdProducts[<%=i %>].price" value="0.00" size="10" onblur="hj();">
 			<input type="hidden" id="cbj_<%=i %>" name="xsdProducts[<%=i %>].cbj" value="0.00">

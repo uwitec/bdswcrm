@@ -9,7 +9,8 @@ OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
 String sendlinkman = (String)VS.findValue("sendLinkman");
   
 %>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>短信内容</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -65,7 +66,7 @@ String sendlinkman = (String)VS.findValue("sendLinkman");
 	<tr>
 		<td class="a1" width="15%">短信内容</td>
 		<td class="a2" colspan="3">
-			<textarea name="context" id="context"  rows="30" style="width:100%"  onkeydown="check(context,ContentUse,ContentRem,180)" onkeyup="check(context,ContentUse,ContentRem,180)" onchange="check(context,ContentUse,ContentRem,180)"></textarea> 
+			<textarea name="context" id="context"  rows="30" style="width:90%"  onkeydown="check(context,ContentUse,ContentRem,180)" onkeyup="check(context,ContentUse,ContentRem,180)" onchange="check(context,ContentUse,ContentRem,180)"></textarea> 
 		</td>
 	</tr>
 </table>

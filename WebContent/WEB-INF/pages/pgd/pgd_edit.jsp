@@ -8,7 +8,8 @@ OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
 Map pgd=(Map)VS.findValue("pgd");
 String[] wxlx=(String[])VS.findValue("wxlx");
  %>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>派工单</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -197,7 +198,7 @@ String[] wxlx=(String[])VS.findValue("wxlx");
 		<td class="a1" width="15%">派工人</td>
 		<td class="a2" width="35%">
 		   <input  id="brand" style="width:230px" type="text"   length="20"  onblur="setValue()" value="<%=StaticParamDo.getRealNameById((String)pgd.get("p_pgr")) %>"/> <font color="red">*</font>
-           <div  id="brandTip"  style="height:12px;position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+           <div  id="brandTip"  style="position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		   <input type="hidden" name="pgds.p_pgr" id="fzr" value="<%=StringUtils.nullToStr(pgd.get("p_pgr")) %>"/> 
 		    
 		</td>	
@@ -205,7 +206,7 @@ String[] wxlx=(String[])VS.findValue("wxlx");
     	<td class="a2" width="35%">	  
 		 <input  name="sqr_text" id="sqr_text"  style="width:230px" onblur="setSqrValue();" value="<%=StaticParamDo.getRealNameById((String)pgd.get("p_wxr")) %>"/> <font color="red">*</font>
          
-        <div id="sqr_tips" style="height:12px;position:absolute;left:89px; top:82px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
+        <div id="sqr_tips" style="position:absolute;left:89px; top:82px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
          </div>
 		    <input type="hidden" name="pgds.p_wxr" id="sqr"  value="<%=StringUtils.nullToStr(pgd.get("p_wxr")) %>"/> 
 		   

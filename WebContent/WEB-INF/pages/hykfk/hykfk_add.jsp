@@ -8,7 +8,8 @@ OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
 Hykda hykda = (Hykda)VS.findValue("hykda");
 
 %>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>发卡管理</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -124,7 +125,7 @@ Hykda hykda = (Hykda)VS.findValue("hykda");
 		<td class="a1" width="15%">经手人</td>
 		<td class="a2" width="35%">		   
 		   <input  id="brand"  type="text"    size="45" length="20"  onblur="setValue()" value="<%=StaticParamDo.getRealNameById(hykda.getFkjsr()) %>"> <font color="red">*</font>
-           <div  id="brandTip"  style="height:12px;position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+           <div  id="brandTip"  style="position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		   <input type="hidden" name="hykda.fkjsr" id="fzr" value="<%=StringUtils.nullToStr(hykda.getFkjsr()) %>"> 	
 		</td>
 	</tr>
@@ -147,7 +148,7 @@ Hykda hykda = (Hykda)VS.findValue("hykda");
 		<td class="a2" colspan="3" id="jg2">
 		   <input type="text" name="hykda.hymc" onblur="setClientValue();" id="client_name"  size="45" value="<%=StringUtils.nullToStr(hykda.getHymc()) %>">
 		   <input type="hidden" name="hykda.hybh" id="client_id" value="">
-		   <div id="clientsTip" style="height:12px;position:absolute;left:150px; top:85px; width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+		   <div id="clientsTip" style="position:absolute;left:150px; top:85px; width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		   <font color="red">*</font>		  
 		</td>
 		

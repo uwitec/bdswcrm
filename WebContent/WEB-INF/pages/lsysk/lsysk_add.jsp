@@ -18,7 +18,8 @@ List posTypeList = (List)VS.findValue("posTypeList");
 
 %>
 
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>零售预收款</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -160,7 +161,7 @@ List posTypeList = (List)VS.findValue("posTypeList");
 		<td class="a1" width="15%">经手人</td>
 		<td class="a2">
 		    <input  id="brand"    type="text"   length="20"  onblur="setValue()"  /> <font color="red">*</font>		
-            <div   id="brandTip"  style="height:12px;position:absolute;left:117px; top:140px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+            <div   id="brandTip"  style="position:absolute;left:117px; top:140px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		    <input type="hidden" name="lsysk.jsr" id="fzr"/>	
 		</td>	
 		<td class="a1" width="15%">预收金额</td>

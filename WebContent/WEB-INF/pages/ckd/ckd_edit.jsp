@@ -31,7 +31,8 @@ if(client != null){
 
 %>
 
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>出库单管理</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -343,7 +344,7 @@ if(msg != null && msg.size() > 0){
 		<td class="a1" width="15%">出库经手人</td>
 		<td class="a2" width="35%">
 			 <input  id="brand" type="text" maxlength="20" onblur="setValue()" value="<%=StaticParamDo.getRealNameById(ckd.getFzr()) %>" size="40"/> 
-	         <div id="brandTip" style="height:12px;position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+	         <div id="brandTip" style="position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		    <input type="hidden" name="ckd.fzr" id="fzr" value="<%=ckd.getFzr()%>"/><font color="red">*</font>	
 		</td>						
 	</tr>		

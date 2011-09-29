@@ -13,7 +13,8 @@ List deptList = (List)VS.findValue("deptList");
 List msg = (List)session.getAttribute("messages");
 session.removeAttribute("messages");
 %>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>费用审批</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -115,7 +116,7 @@ session.removeAttribute("messages");
 		<td class="a1" width="15%">费用申请人</td>
 		<td class="a2" width="35%">
 		 <ww:textfield name="sqr_text" id="sqr_text" theme="simple" onblur="setSqrValue();" value="%{getUserRealName(fysq.sqr)}" cssStyle="width:190px"/><font color="red">*</font>
-         <div id="sqr_tips" style="height:12px;position:absolute;left:89px; top:82px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
+         <div id="sqr_tips" style="position:absolute;left:89px; top:82px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
          </div>
          <ww:hidden name="fysq.sqr" id="sqr" theme="simple" value="%{fysq.sqr}"/>	
 		</td>
@@ -152,7 +153,7 @@ session.removeAttribute("messages");
 		<td class="a1" width="15%">费用使用人</td>
 		<td class="a2" width="35%">
 		 <ww:textfield name="brand" id="brand" theme="simple" onblur="setValue()" value="%{getUserRealName(fysq.ywy_id)}" cssStyle="width:190px"/>
-         <div id="brandTip" style="height:12px;position:absolute;left:89px; top:82px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
+         <div id="brandTip" style="position:absolute;left:89px; top:82px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
          </div>
          <ww:hidden name="fysq.ywy_id" id="fzr" theme="simple" value="%{fysq.ywy_id}"/>
 		</td>								

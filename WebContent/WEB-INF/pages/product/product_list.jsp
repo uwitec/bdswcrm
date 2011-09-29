@@ -15,7 +15,8 @@ String product_xh = StringUtils.nullToStr(VS.findValue("product_xh"));
 String product_state = StringUtils.nullToStr(VS.findValue("product_state"));
 %>
 
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>商品列表</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -84,7 +85,7 @@ String product_state = StringUtils.nullToStr(VS.findValue("product_state"));
 	<tr>
 		<td class="csstitle" align="left" width="75%">&nbsp;&nbsp;&nbsp;&nbsp;<b>商品维护</b></td>
 		<td class="csstitle" width="25%">
-			<img src="images/create.gif" align="absmiddle" border="0">&nbsp;<a href="#" onclick="add();" class="xxlb"> 添 加 </a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<img src="images/create.gif" align="absmiddle" border="0">&nbsp;<a href="#" onclick="add();" class="xxlb"> 添 加 </a> &nbsp;&nbsp;&nbsp;
 			<img src="images/import.gif" align="absmiddle" border="0">&nbsp;<a href="#" class="xxlb" onclick="refreshPage();"> 刷 新 </a>	</td>			
 	</tr>
 	<tr>
@@ -126,15 +127,15 @@ String product_state = StringUtils.nullToStr(VS.findValue("product_state"));
 		double price = map.get("price")==null?0:((Double)map.get("price")).doubleValue();
 	%>
 	<tr class="a1"  onmousedown="trSelectChangeCss()" onDblClick="openWin('<%=StringUtils.nullToStr(map.get("product_id")) %>');">		
-		<td><%=StringUtils.nullToStr(map.get("product_id")) %></td>
+		<td nowrap="nowrap"><%=StringUtils.nullToStr(map.get("product_id")) %></td>
 		<td align="left"><%=StringUtils.nullToStr(map.get("product_name")) %></td>
 		<td align="left"><%=StringUtils.nullToStr(map.get("product_xh")) %></td>
-		<td align="right"><%=JMath.round(price,2) %></td>
-		<td><%=StringUtils.nullToStr(map.get("prop")) %></td>
-		<td><%=StringUtils.nullToStr(map.get("state")) %></td>
-		<td>
-			<a onclick="editProduct('<%=StringUtils.nullToStr(map.get("product_id")) %>');"><img src="images/modify.gif" align="absmiddle" title="修改商品信息" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
-			<a onclick="openWin('<%=StringUtils.nullToStr(map.get("product_id")) %>');"><img src="images/view.gif" align="absmiddle" title="查看商品信息" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
+		<td nowrap="nowrap" align="right"><%=JMath.round(price,2) %></td>
+		<td nowrap="nowrap"><%=StringUtils.nullToStr(map.get("prop")) %></td>
+		<td nowrap="nowrap"><%=StringUtils.nullToStr(map.get("state")) %></td>
+		<td nowrap="nowrap">
+			<a onclick="editProduct('<%=StringUtils.nullToStr(map.get("product_id")) %>');"><img src="images/modify.gif" align="absmiddle" title="修改商品信息" border="0" style="cursor:hand"></a>&nbsp;&nbsp;
+			<a onclick="openWin('<%=StringUtils.nullToStr(map.get("product_id")) %>');"><img src="images/view.gif" align="absmiddle" title="查看商品信息" border="0" style="cursor:hand"></a>&nbsp;&nbsp;
 			<a onclick="delProduct('<%=StringUtils.nullToStr(map.get("product_id")) %>');"><img src="images/del.gif" align="absmiddle" title="删除该商品信息" border="0" style="cursor:hand"></a>
 		</td>
 	</tr>

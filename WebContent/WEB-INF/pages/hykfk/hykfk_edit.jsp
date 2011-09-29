@@ -9,7 +9,8 @@ Hykzz hykzz = (Hykzz)VS.findValue("hykzz");
 
 String msg = StringUtils.nullToStr(VS.findValue("msg"));
 %>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>发卡管理</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -85,7 +86,7 @@ function selType(vl){
 		<td class="a1">经手人</td>
 		<td class="a2">		   
 		   <input id="brand" type="text" maxlength="20" style="width:200px"onblur="setValue()" value=""> <font color="red">*</font>
-           <div id="brandTip" style="height:12px;position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+           <div id="brandTip" style="position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		   <input type="hidden" name="hykda.fkjsr" id="fzr" value=""> 	
 		</td>
 	</tr>
@@ -101,7 +102,7 @@ function selType(vl){
 		<td class="a2" id="tdHymc">
 		   <input type="text" name="hymc" onblur="setClientValue();" id="client_name" maxlength="50" style="width:200px" value=""> <font color="red">*</font>
 		   <input type="hidden" name="hykda.hymc" id="client_id" value="">
-		   <div id="clientsTip" style="height:12px;position:absolute;left:150px; top:85px; width:250px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+		   <div id="clientsTip" style="position:absolute;left:150px; top:85px; width:250px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		</td>		
 	</tr>
 	<tr>	
@@ -174,7 +175,7 @@ function selType(vl){
 <div id="div_jg" style="display:none">
 	<input type="text" name="hymc" onblur="setClientValue();" id="client_name" maxlength="50" style="width:200px" value=""> <font color="red">*</font>
 	<input type="hidden" name="hykda.hymc" id="client_id" value="">
-	<div id="clientsTip" style="height:12px;position:absolute;left:150px; top:85px; width:250px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>	
+	<div id="clientsTip" style="position:absolute;left:150px; top:85px; width:250px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>	
 </div>
 <div id="div_gr" style="display:none">
 	<input type="text" name="hykda.hymc" id="client_id" value="" maxlength="50" style="width:200px" > <font color="red">*</font>

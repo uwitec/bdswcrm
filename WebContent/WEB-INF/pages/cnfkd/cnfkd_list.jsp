@@ -1,7 +1,8 @@
 <%@ page language="java" errorPage="/error.jsp" pageEncoding="UTF-8" contentType="text/html;charset=UTF-8" %>
 <%@taglib uri="/webwork" prefix="ww"%>
 <%@taglib uri="/WEB-INF/crm-taglib.tld" prefix="crm"%>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>出纳付款单</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -64,14 +65,14 @@
 	<thead>
 	<tr>
 		<td width="10%">编号</td>
-		<td width="19%">单位名称</td>
+		<td width="15%">单位名称</td>
 		<td width="8%">付款类型</td>	
 		<td width="10%">付款金额</td>
-		<td width="14%">付款账户</td>
+		<td width="13%">付款账户</td>
 		<td width="8%">出纳</td>
 		<td width="8%">付款日期</td>
 		<td width="8%">状态</td>
-		<td width="10%">操作</td>
+		<td width="15%">操作</td>
 	</tr>
 	</thead>
 	<ww:iterator value="%{cnfkdPage.results}">
@@ -84,10 +85,10 @@
 			<td><ww:property value="%{getUserRealName(jsr)}" /></td>
 			<td><ww:property value="%{fk_date}" /></td>
 			<td><ww:property value="%{state}" /></td>	
-			<td>
+			<td nowrap="nowrap">
 				<ww:if test="%{state=='待支付'}">
-				<a href="#" onclick="edit('<ww:property value="%{id}" />');">付款</a>&nbsp;&nbsp;&nbsp;&nbsp;
-				<a href="#" onclick="del('<ww:property value="%{id}" />');">退回</a>&nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="#" onclick="edit('<ww:property value="%{id}" />');">付款</a>&nbsp;&nbsp;
+				<a href="#" onclick="del('<ww:property value="%{id}" />');">退回</a>&nbsp;&nbsp;
 				</ww:if>			
 				<a href="#" onclick="view('<ww:property value="%{id}" />');">查看</a>		
 			</td>

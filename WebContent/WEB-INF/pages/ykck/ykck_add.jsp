@@ -19,7 +19,8 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 
 %>
 
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>移库出库</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -318,7 +319,7 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 		<td class="a1" width="15%">经手人</td>
 		<td class="a2" colspan="3">
 		    <input  id="brand"    type="text" size="45" onblur="setValue();" />
-            <div   id="brandTip"  style="height:12px;position:absolute;left:146px; top:141px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
+            <div   id="brandTip"  style="position:absolute;left:146px; top:141px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
             </div>
 		    <input type="hidden" name="ykck.jsr" id="fzr" /><font color="red">*</font>
 		</td>
@@ -358,13 +359,13 @@ for(int i=0;i<3;i++){
 			<input type="text" id="product_name_<%=i %>" name="ykckProducts[<%=i %>].product_name" readonly style="width:70%"><input type="button" name="selectButton" value="选择" class="css_button" onclick="openWin(<%=i %>);">
 			<input type="hidden" id="product_id_<%=i %>" name="ykckProducts[<%=i %>].product_id">
 		</td>
-		<td class="a2"><input type="text" id="product_xh_<%=i %>" name="ykckProducts[<%=i %>].product_xh" readonly style="width:100%"></td>
-		<td class="a2"><input type="text" id="nums_<%=i %>" name="ykckProducts[<%=i %>].nums" value="0" style="width:100%"></td>
+		<td class="a2"><input type="text" id="product_xh_<%=i %>" name="ykckProducts[<%=i %>].product_xh" readonly style="width:90%"></td>
+		<td class="a2"><input type="text" id="nums_<%=i %>" name="ykckProducts[<%=i %>].nums" value="0" style="width:90%"></td>
 		<td class="a2">
 			<input type="text" id="qz_serial_num_<%=i %>" name="ykckProducts[<%=i %>].qz_serial_num" value="" style="width:70%" readonly>
 			<input type="hidden" id="qz_flag_<%=i %>" name="ykckProducts[<%=i %>].qz_flag" value=""><a style="cursor:hand" title="左键点击输入输列号" onclick="openSerialWin('<%=i %>');"><b>...</b></a>&nbsp;
 		</td>		
-		<td class="a2"><input type="text" id="product_remark_<%=i %>" name="ykckProducts[<%=i %>].product_remark" style="width:100%"></td>
+		<td class="a2"><input type="text" id="product_remark_<%=i %>" name="ykckProducts[<%=i %>].product_remark" style="width:90%"></td>
 		<%if (i>0){ %>		
 		<td class="a2"><input type="button" name="delButton" value="删除" class="css_button" onclick="delTr(this);"></td>
 		<%}else{ %>

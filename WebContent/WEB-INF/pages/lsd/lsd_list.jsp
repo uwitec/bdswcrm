@@ -19,7 +19,8 @@ String orderName = (String)VS.findValue("orderName");
 String orderType = (String)VS.findValue("orderType");
 %>
 
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>零售单管理</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -201,13 +202,13 @@ String orderType = (String)VS.findValue("orderType");
 		<%	
 		}else{
 		%>
-			<a href="#" onclick="edit('<%=StringUtils.nullToStr(lsd.get("id")) %>');"><img src="images/modify.gif" align="absmiddle" title="修改零售单信息" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
-			<a href="#" onclick="openWin('<%=StringUtils.nullToStr(lsd.get("id")) %>');"><img src="images/view.gif" align="absmiddle" title="查看零售单信息" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
+			<a href="#" onclick="edit('<%=StringUtils.nullToStr(lsd.get("id")) %>');"><img src="images/modify.gif" align="absmiddle" title="修改零售单信息" border="0" style="cursor:hand"></a>&nbsp;&nbsp;
+			<a href="#" onclick="openWin('<%=StringUtils.nullToStr(lsd.get("id")) %>');"><img src="images/view.gif" align="absmiddle" title="查看零售单信息" border="0" style="cursor:hand"></a>&nbsp;&nbsp;
 			<a href="#" onclick="del('<%=StringUtils.nullToStr(lsd.get("id")) %>');"><img src="images/del.gif" align="absmiddle" title="删除该零售单" border="0" style="cursor:hand"></a>		
 		<%	
 		}		
 		%>
-		&nbsp;&nbsp;&nbsp;&nbsp;	
+		&nbsp;&nbsp;
 		<a href="#" onclick="print('<%=StringUtils.nullToStr(lsd.get("id")) %>');"><img src="images/print.png" align="absmiddle" title="打印零售单" border="0" style="cursor:hand"></a>	
 		</td>
 	</tr>

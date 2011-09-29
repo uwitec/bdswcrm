@@ -1,10 +1,6 @@
 body
 {
 	font-size: 12px;
-	color: #000000;
-	background:#FFFFFF;
-	left: 0px;
-	top: 0px;	
 	margin-top:0px;
 	margin-right:0px;
 	margin-bottom: 0px;
@@ -45,25 +41,21 @@ textarea
 A.xxlb:link
 {
     color:#000000;
-    TEXT-DECORATION: none;
 }
 A.xxlb:active                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
 {
     COLOR:#696969;
     FONT-SIZE: 9pt;
-    TEXT-DECORATION:none;
 }
 A.xxlb:visited
 {
 	color:#696969;
-	TEXT-DECORATION: none;
 
 }
 A.xxlb:hover
 {
     COLOR:#000000;
     FONT-SIZE: 9pt; 
-    TEXT-DECORATION: underline
 }
 .css_button
 {
@@ -314,4 +306,7 @@ table.chart_list input
 table{
 	word-break:break-all;
 }
-.selectTip{background-color:#009000;color:#fff000;}
+.selectTip{
+	background-color:#009000;
+	color:#fff000;
+	}

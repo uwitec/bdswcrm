@@ -80,11 +80,11 @@ function addTr(){
 	
 	var otd0=document.createElement("td");
 	otd0.className = "a2";
-	otd0.innerHTML = '<input type="text" id="product_name_'+curId+'"  style="width:100%" name="xsdProducts['+curId+'].product_name" readonly><input type="hidden" id="product_id_'+curId+'" name="xsdProducts['+curId+'].product_id">';
+	otd0.innerHTML = '<input type="text" id="product_name_'+curId+'"  style="width:90%" name="xsdProducts['+curId+'].product_name" readonly><input type="hidden" id="product_id_'+curId+'" name="xsdProducts['+curId+'].product_id">';
 	
 	var otd1 = document.createElement("td");
 	otd1.className = "a2";
-	otd1.innerHTML = '<input type="text" id="product_xh_'+curId+'"  style="width:100%"  name="xsdProducts['+curId+'].product_xh" size="10" readonly>';
+	otd1.innerHTML = '<input type="text" id="product_xh_'+curId+'"  style="width:90%"  name="xsdProducts['+curId+'].product_xh" size="10" readonly>';
 	
 	var otd3 = document.createElement("td");
 	otd3.className = "a2";

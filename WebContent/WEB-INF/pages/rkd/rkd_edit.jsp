@@ -18,7 +18,8 @@ List msg = (List)session.getAttribute("messages");
 session.removeAttribute("messages");
 %>
 
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>编辑入库单</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -226,7 +227,7 @@ session.removeAttribute("messages");
 		<td class="a2" width="35%">
 		 <input id="brand" type="text" length="20"  size="40" onblur="setValue()" value="<%=StaticParamDo.getRealNameById(rkd.getFzr()) %>"/> 
          <!--<img src="images/select.gif" align="absmiddle" title="选择经手人" border="0" onclick="openywyWin();" style="cursor:hand">
-          --><div id="brandTip" style="height:12px;position:absolute;left:580px; top:86px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
+          --><div id="brandTip" style="position:absolute;left:580px; top:86px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
           </div>
 		    <input type="hidden" name="rkd.fzr" id="fzr" value="<%=StringUtils.nullToStr(rkd.getFzr())%>"/><font color="red">*</font>	
 		</td>	

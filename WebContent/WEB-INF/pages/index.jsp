@@ -45,7 +45,7 @@ var contentPanel = new Ext.TabPanel({
 	region:'center',
 	enableTabScroll:true,
 	activeTab:0,
-	margins: '0 0 5 0',
+	margins: '0 0 0 0',
 	border:false,
 	items:[{
 		id:'homePage',
@@ -260,13 +260,13 @@ if(list != null && list.size() > 0){
 //左侧功能导航区域
 var leftNav = new Ext.Panel({
 		title:"功能导航",
-		width:180,
+		width:185,
 		region:'west',
 		layout:"accordion",
 		layoutConfig:{animate:true},
 		split:true,
 		collapsible: true,
-		margins: '0 0 5 5',
+		margins: '0 0 0 5',
 		collapseMode: 'mini',
 		items:[
 			<%=tpArray%>
@@ -279,12 +279,19 @@ var topNav = new Ext.Panel({
 		split:true,
 		collapsible: false,
 		collapseMode: 'mini',
-		height:70,
+		height:62,
 		margins:'0 0 0 0',
 		autoScroll:false,
 		html:'<iframe scrolling="no" frameborder="0" width="100%" height="100%" src="thk_main_top.html?flag=2"></iframe>'
 	});
 
+var bottomNav = new Ext.Panel({
+	region:"south",
+	height:25,
+	margins:'0 0 0 0',
+	autoScroll:false,
+	html:'<iframe scrolling="no" frameborder="0" width="100%" height="100%" src="bottom.jsp"></iframe>'
+})
 
 Ext.onReady(function(){
 	new Ext.Viewport({
@@ -293,7 +300,8 @@ Ext.onReady(function(){
 		items:[
 			topNav,
 			leftNav,
-			contentPanel
+			contentPanel,
+			bottomNav
 		]
 	});
 });

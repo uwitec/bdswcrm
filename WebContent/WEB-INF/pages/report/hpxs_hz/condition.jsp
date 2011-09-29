@@ -8,7 +8,8 @@ OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
 String[] arryClientType = (String[])VS.findValue("arryClientType");
 %>
 
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>货品销售汇总</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -73,7 +74,7 @@ String[] arryClientType = (String[])VS.findValue("arryClientType");
 		<td class="a4">
 			<input type="text" name="clientId" id="client_name" value=""  size="35" onblur="setClientValue();" maxlength="50">
 			<input type="hidden" name="clientName" id="client_id" value="">
-			<div id="clientsTip" style="height:12px;position:absolute;left:170px; top:85px; width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+			<div id="clientsTip" style="position:absolute;left:170px; top:85px; width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		</td>
 		<td class="a1">客户类型</td>
 		<td class="a4">
@@ -95,7 +96,7 @@ String[] arryClientType = (String[])VS.findValue("arryClientType");
 		<td class="a1">销售人员</td>
 		<td class="a4">
 		    <input  id="brand" type="text"   length="20"  onblur="setValue()"   size="35"/> 
-            <div   id="brandTip"  style="height:12px;position:absolute;left:700px; top:85px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+            <div   id="brandTip"  style="position:absolute;left:700px; top:85px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		    <input type="hidden" name="xsry_id" id="fzr"/>
 		</td>	
 		<td class="a1" width="15%">商品类别</td>

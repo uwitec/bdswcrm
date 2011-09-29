@@ -18,7 +18,8 @@ List list = cghzService.getClientMxList(start_date, end_date,dj_id, client_name)
 
 %>
 
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>客户采购汇总--单据列表</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />

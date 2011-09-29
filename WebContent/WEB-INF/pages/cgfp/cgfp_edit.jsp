@@ -18,7 +18,8 @@ if(cgfpDescs != null && cgfpDescs.size()>0){
 String msg = StringUtils.nullToStr(VS.findValue("msg"));
 %>
 
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>采购发票</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -122,10 +123,10 @@ if(cgfpDescs != null && cgfpDescs.size()>0){
 	double total = map.get("total")==null?0:((Double)map.get("total")).doubleValue();	
 %>
 	<tr>		
-		<td class="a2"><input type="text" size="10" id="cg_date_<%=i %>" name="cgfpDescs[<%=i %>].cg_date" value="<%=StringUtils.nullToStr(map.get("cg_date")) %>" style="width:100%" readonly></td>
-		<td class="a2"><input type="text" id="jhd_id_<%=i %>" name="cgfpDescs[<%=i %>].jhd_id" value="<%=StringUtils.nullToStr(map.get("jhd_id")) %>" style="width:100%" readonly></td>
+		<td class="a2"><input type="text" size="10" id="cg_date_<%=i %>" name="cgfpDescs[<%=i %>].cg_date" value="<%=StringUtils.nullToStr(map.get("cg_date")) %>" style="width:90%" readonly></td>
+		<td class="a2"><input type="text" id="jhd_id_<%=i %>" name="cgfpDescs[<%=i %>].jhd_id" value="<%=StringUtils.nullToStr(map.get("jhd_id")) %>" style="width:90%" readonly></td>
 		<td class="a2">
-		    <input type="text" size="10" id="total_<%=i %>" name="cgfpDescs[<%=i %>].total" value="<%=JMath.round(total) %>" style="width:100%" readonly>
+		    <input type="text" size="10" id="total_<%=i %>" name="cgfpDescs[<%=i %>].total" value="<%=JMath.round(total) %>" style="width:90%" readonly>
 		</td>   
 		<td class="a2">
 		    <input type="text" id="state_<%=i %>" name="cgfpDescs[<%=i %>].state" value="<%=StringUtils.nullToStr(map.get("state")) %>" readonly="readonly">

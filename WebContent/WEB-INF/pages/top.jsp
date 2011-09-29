@@ -203,7 +203,7 @@ if(flag == null){
 <TABLE cellSpacing=0 cellPadding=0 width=100% height=100% align=center border=0 bgColor=#FBFBFB>
 	<TBODY>
 	<tr>
-		<td width="200">
+		<td width="160">
 			<TABLE cellSpacing=0 cellPadding=0 border=0>
 				<TBODY>
            				<TR>
@@ -216,26 +216,26 @@ if(flag == null){
 			<%
 			if(funcList.contains("FC9999")){
 			%>
-			<font style="font-size: 12px;">库存查询：</font><input type="text" name="kc_con"  onkeypress="f_enter('1');"  size="12" title="可用空格或逗号分隔关键词">
-			<input type="button" name="button1" value=" 查询 " class="css_button" onclick="openWin('1');">
-			&nbsp;&nbsp;&nbsp;
+			<font style="font-size: 12px;">库存查询：</font><input type="text" name="kc_con"  onkeypress="f_enter('1');"  size="14" title="可用空格或逗号分隔关键词">
+			<input type="button" name="button1" value="查询" class="css_button" onclick="openWin('1');">
+			&nbsp;&nbsp;&nbsp;<BR>
 			<%
 			}
 			if(funcList.contains("FC9998")){
 			%>			
-			<font style="font-size: 12px;">客户查询：</font><input type="text" name="client_con"  onkeypress="f_enter('2');"  size="12">
-			<input type="button" name="button1" value=" 查询 " class="css_button" onclick="openWin('2');">	
+			<font style="font-size: 12px;">客户查询：</font><input type="text" name="client_con"  size="14"  onkeypress="f_enter('2');"  size="12">
+			<input type="button" name="button1" value="查询" class="css_button" onclick="openWin('2');">	&nbsp;&nbsp;&nbsp;
 			<%
 			}
 			%>		
 		</td>
-		<td vAlign=top align=right >
+		<td vAlign=top align=right  width="500">
 			<TABLE cellSpacing=0 cellPadding=0 border=0>
 				<TBODY>
            		<TR>
 					<TD>&nbsp;</TD>
 					<TD align=middle width=10><IMG src="index_images/head_right.gif"></TD>
-					<TD noWrap align=middle width=85 bgColor=#bcc2d4><IMG  height=15  src="index_images/index_home.gif" width=15 align=absMiddle> <A class=TitleMenu  href="#" onclick="parent.location='thk_main.html';">首 页</A></TD>		
+					<TD noWrap align=middle width=85 bgColor=#bcc2d4><IMG  height=15  src="index_images/index_home.gif" width=15 align=absMiddle> <A class=TitleMenu  href="#" onclick="parent.location='thk_main_new.html';">首 页</A></TD>		
 					<TD class=NormalWhite vlign=middle width=10 bgColor=#bcc2d4>|</TD>
 					<TD noWrap align=middle vlign=middle width=85 bgColor=#bcc2d4><div id="colortab" class="ddcolortabs">
 						<IMG id="msgImage" src="images/msg_1.gif" align=absMiddle>
@@ -249,8 +249,7 @@ if(flag == null){
 					<TD class=NormalWhite noWrap align=middle width=85 bgColor=#bcc2d4><IMG height=15 src="index_images/out_system.gif" width=15 align=absMiddle> <A class=TitleMenu href="#" onclick="logout();">安全退出</A></TD>
 				</TR>
 				</TBODY>
-			</TABLE><BR>
-			<font style="font-size: 12px;">欢迎<%=real_name %>光临系统&nbsp;</font>&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:switchUi('<%=flag %>');">切换界面</a>&nbsp;&nbsp;&nbsp;&nbsp;
+			</TABLE>
 		</td>
 	</tr>
 	</TBODY>

@@ -1,6 +1,7 @@
 <%@ page language="java" errorPage="/error.jsp" pageEncoding="UTF-8" contentType="text/html;charset=utf-8" %>
 <%@taglib uri="/webwork" prefix="ww"%>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>付摊销付款</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -138,7 +139,7 @@
 		<td class="a1" width="15%">经手人</td>
 		<td class="a2" width="35%">
 			<ww:textfield name="brand" id="brand" onblur="setValue()" value="%{getUserRealName(txfk.getJsr())}" theme="simple"></ww:textfield>
-            <div id="brandTip" style="height:12px;position:absolute;left:548px; top:85px;  width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+            <div id="brandTip" style="position:absolute;left:548px; top:85px;  width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		    <ww:hidden name="txfk.jsr" id="fzr" value="%{txfk.jsr}" theme="simple"></ww:hidden><font color="red">*</font>		
 		</td>						
 	</tr>

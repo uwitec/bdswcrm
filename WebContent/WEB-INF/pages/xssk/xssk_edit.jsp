@@ -26,7 +26,8 @@ if(xsskDescs != null && xsskDescs.size()>0){
 String msg = StringUtils.nullToStr(VS.findValue("msg"));
 %>
 
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>销售收款</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -296,14 +297,14 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 		<td class="a2" width="35%">
 		<input type="text" name="clientName" id="client_name" value="<%=StaticParamDo.getClientNameById(StringUtils.nullToStr(xssk.getClient_name())) %>" style="width:190px" onblur="queryYszd();"> <font color="red">*</font>
 		<input type="hidden" name="xssk.client_name" id="client_id" value="<%=StringUtils.nullToStr(xssk.getClient_name()) %>">
-		<div id="clientsTip" style="height:12px;position:absolute;left:132px; top:85px; width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>	
+		<div id="clientsTip" style="position:absolute;left:132px; top:85px; width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>	
 		</td>
 	</tr>
 	<tr>
 		<td class="a1" width="15%">经手人</td>
 		<td class="a2" width="35%">
 			<input id="brand" style="width:190px" type="text" maxlength="20" onblur="setValue()" value="<%=StaticParamDo.getRealNameById(xssk.getJsr()) %>"/> <font color="red">*</font>	
-        	<div id="brandTip" style="height:12px;position:absolute;left:132px; top:113px;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+        	<div id="brandTip" style="position:absolute;left:132px; top:113px;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		    <input type="hidden" name="xssk.jsr" id="fzr" value="<%=StringUtils.nullToStr(xssk.getJsr()) %>"/> 
 		</td>
 		<td class="a1">收款方式</td>
@@ -384,11 +385,11 @@ if(xsskDescs != null && xsskDescs.size()>0){
 		hj_bcsk += bcsk;
 %>
 	<tr>
-		<td class="a2"><input type="text" style="width:100%" id="xsd_id_<%=i %>" name="xsskDescs[<%=i %>].xsd_id" value="<%=StringUtils.nullToStr(map.get("xsd_id")) %>" readonly></td>
-		<td class="a2"><input type="text" style="width:100%" id="fsrq_<%=i %>" name="xsskDescs[<%=i %>].fsrq" value="<%=StringUtils.nullToStr(map.get("fsrq")) %>" readonly></td>
-		<td class="a2"><input type="text" style="width:100%" id="fsje_<%=i %>" name="xsskDescs[<%=i %>].fsje" value="<%=JMath.round(fsje) %>" readonly></td>
-		<td class="a2"><input type="text" style="width:100%" id="ysk_<%=i %>" name="xsskDescs[<%=i %>].ysk"  value="<%=JMath.round(ysk) %>" readonly></td>
-		<td class="a2"><input type="text" style="width:100%" id="bcsk_<%=i %>" name="xsskDescs[<%=i %>].bcsk" value="<%=JMath.round(bcsk) %>"  onblur="hj();"></td>
+		<td class="a2"><input type="text" style="width:90%" id="xsd_id_<%=i %>" name="xsskDescs[<%=i %>].xsd_id" value="<%=StringUtils.nullToStr(map.get("xsd_id")) %>" readonly></td>
+		<td class="a2"><input type="text" style="width:90%" id="fsrq_<%=i %>" name="xsskDescs[<%=i %>].fsrq" value="<%=StringUtils.nullToStr(map.get("fsrq")) %>" readonly></td>
+		<td class="a2"><input type="text" style="width:90%" id="fsje_<%=i %>" name="xsskDescs[<%=i %>].fsje" value="<%=JMath.round(fsje) %>" readonly></td>
+		<td class="a2"><input type="text" style="width:90%" id="ysk_<%=i %>" name="xsskDescs[<%=i %>].ysk"  value="<%=JMath.round(ysk) %>" readonly></td>
+		<td class="a2"><input type="text" style="width:90%" id="bcsk_<%=i %>" name="xsskDescs[<%=i %>].bcsk" value="<%=JMath.round(bcsk) %>"  onblur="hj();"></td>
 	</tr>
 <%
 	}
@@ -396,11 +397,11 @@ if(xsskDescs != null && xsskDescs.size()>0){
 	for(int i=0;i<3;i++){
 %>
 	<tr>
-		<td class="a2"><input type="text" style="width:100%" id="xsd_id_<%=i %>" name="xsskDescs[<%=i %>].xsd_id" value="" readonly></td>
-		<td class="a2"><input type="text" style="width:100%" id="fsrq_<%=i %>" name="xsskDescs[<%=i %>].fsrq" value="" readonly></td>
-		<td class="a2"><input type="text" style="width:100%" id="fsje_<%=i %>" name="xsskDescs[<%=i %>].fsje" value="0.00" readonly></td>
-		<td class="a2"><input type="text" style="width:100%" id="ysk_<%=i %>" name="xsskDescs[<%=i %>].yfje"  value="0.00" readonly></td>
-		<td class="a2"><input type="text" style="width:100%" id="bcsk_<%=i %>" name="xsskDescs[<%=i %>].bcsk" value="0.00" readonly onblur="hj();"></td>
+		<td class="a2"><input type="text" style="width:90%" id="xsd_id_<%=i %>" name="xsskDescs[<%=i %>].xsd_id" value="" readonly></td>
+		<td class="a2"><input type="text" style="width:90%" id="fsrq_<%=i %>" name="xsskDescs[<%=i %>].fsrq" value="" readonly></td>
+		<td class="a2"><input type="text" style="width:90%" id="fsje_<%=i %>" name="xsskDescs[<%=i %>].fsje" value="0.00" readonly></td>
+		<td class="a2"><input type="text" style="width:90%" id="ysk_<%=i %>" name="xsskDescs[<%=i %>].yfje"  value="0.00" readonly></td>
+		<td class="a2"><input type="text" style="width:90%" id="bcsk_<%=i %>" name="xsskDescs[<%=i %>].bcsk" value="0.00" readonly onblur="hj();"></td>
 	</tr>
 <%
 	}
@@ -409,9 +410,9 @@ if(xsskDescs != null && xsskDescs.size()>0){
 	<tr>
 		<td class="a2">合  计</td>
 		<td class="a2"></td>
-		<td class="a2"><input type="text" style="width:100%" id="hj_fsje" name="hj_fsje" value="<%=JMath.round(hj_fsje) %>" readonly></td>
-		<td class="a2"><input type="text" style="width:100%" id="hj_ysk" name="hj_ysk"  value="<%=JMath.round(hj_ysk) %>" readonly></td>
-		<td class="a2"><input type="text" style="width:100%" id="hj_bcsk" name="hj_bcsk" value="<%=JMath.round(hj_bcsk) %>" readonly></td>
+		<td class="a2"><input type="text" style="width:90%" id="hj_fsje" name="hj_fsje" value="<%=JMath.round(hj_fsje) %>" readonly></td>
+		<td class="a2"><input type="text" style="width:90%" id="hj_ysk" name="hj_ysk"  value="<%=JMath.round(hj_ysk) %>" readonly></td>
+		<td class="a2"><input type="text" style="width:90%" id="hj_bcsk" name="hj_bcsk" value="<%=JMath.round(hj_bcsk) %>" readonly></td>
 	</tr>
 	 <%
 	 String cssStyle = "readonly";
@@ -421,7 +422,7 @@ if(xsskDescs != null && xsskDescs.size()>0){
 	 %>	
 	<tr>
 		<td class="a1">备  注</td>
-		<td class="a2" colspan="4"><input name="xssk.remark" id="remark" style="width:100%" value="<%=StringUtils.nullToStr(xssk.getRemark()) %>"></td>
+		<td class="a2" colspan="4"><input name="xssk.remark" id="remark" style="width:90%" value="<%=StringUtils.nullToStr(xssk.getRemark()) %>"></td>
 	</tr>
 </table>
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">		
