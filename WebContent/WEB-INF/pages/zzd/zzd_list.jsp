@@ -120,12 +120,12 @@
 </table>
 </form>
 
-<form name="descForm" action="descZzd.html" method="post" target="desc">
+<form name="descForm" action="descZzd.html" method="post" target="zzddesc">
 	<input type="hidden" name="id" value="">
 </form>
 <table width="100%"  align="center" cellpadding="0" cellspacing="0">
 	<tr>
-		<td><iframe id="desc" name="desc" width="100%" onload="dyniframesize('desc');" border="0" frameborder="0" SCROLLING="no"  src=''/></td>
+		<td><iframe id="zzddesc" name="zzddesc" width="100%" onload="dyniframesize('zzddesc');" border="0" frameborder="0" SCROLLING="no"  src=''/></td>
 	</tr>
 </table>
 </body>

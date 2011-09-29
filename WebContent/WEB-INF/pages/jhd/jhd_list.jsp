@@ -185,13 +185,13 @@ String orderType = (String)VS.findValue("orderType");
 </div>
 </form>
 
-<form name="descForm" action="descJhd.html" method="post" target="desc">
+<form name="descForm" action="descJhd.html" method="post" target="jhddesc">
 	<input type="hidden" name="id" value="">
 </form>
 说明：红色字体标示该订单为库房退回订单，订单修改后可再次提交
 <table width="100%"  align="center" cellpadding="0" cellspacing="0">
 	<tr>
-		<td><iframe id="desc" name="desc" width="100%" onload="dyniframesize('desc');" border="0" frameborder="0" SCROLLING="no"  src=''/></td>
+		<td><iframe id="jhddesc" name="jhddesc" width="100%" onload="dyniframesize('jhddesc');" border="0" frameborder="0" SCROLLING="no"  src=''/></td>
 	</tr>
 </table>
 

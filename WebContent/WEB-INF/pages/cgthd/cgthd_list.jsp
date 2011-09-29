@@ -171,12 +171,12 @@ String orderType = (String)VS.findValue("orderType");
 </table>
 </form>
 说明：红色字体标示该订单为库房退回单据，修改后可再次提交
-<form name="descForm" action="descCgthd.html" method="post" target="desc">
+<form name="descForm" action="descCgthd.html" method="post" target="cgthddesc">
 	<input type="hidden" name="id" value="">
 </form>
 <table width="100%"  align="center" cellpadding="0" cellspacing="0">
 	<tr>
-		<td><iframe id="desc" name="desc" onload="dyniframesize('desc');" width="100%" border="0" frameborder="0" SCROLLING="no"  src=''/></td>
+		<td><iframe id="cgthddesc" name="cgthddesc" onload="dyniframesize('cgthddesc');" width="100%" border="0" frameborder="0" SCROLLING="no"  src=''/></td>
 	</tr>
 </table>
 

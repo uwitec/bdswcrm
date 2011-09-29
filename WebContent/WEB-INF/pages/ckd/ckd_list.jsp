@@ -180,12 +180,12 @@ String orderType = StringUtils.nullToStr(VS.findValue("orderType"));
 </table>
 </form>
 
-<form name="descForm" action="descCkdProduct.html" method="post" target="desc">
+<form name="descForm" action="descCkdProduct.html" method="post" target="ckddesc">
 	<input type="hidden" name="ckd_id" value="">
 </form>
 <table width="100%"  align="center" cellpadding="0" cellspacing="0">
 	<tr>
-		<td><iframe id="desc" name="desc" width="100%" onload="dyniframesize('desc');" border="0" frameborder="0" SCROLLING="no"  src=''/></td>
+		<td><iframe id="ckddesc" name="ckddesc" width="100%" onload="dyniframesize('ckddesc');" border="0" frameborder="0" SCROLLING="no"  src=''/></td>
 	</tr>
 </table>
 

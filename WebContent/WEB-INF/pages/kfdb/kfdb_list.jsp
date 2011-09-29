@@ -238,12 +238,12 @@ String orderType = (String)VS.findValue("orderType");
 </table>
 </form>
 <font color="red">状态说明，已保存：草稿状态；已出库：调拨单已出库，等待入库库房确认；已入库：调入库房确认入库；已退回：调入库房退回；</font>
-<form name="descForm" action="descKfdb.html" method="post" target="desc">
+<form name="descForm" action="descKfdb.html" method="post" target="kfdbdesc">
 	<input type="hidden" name="id" value="">
 </form>
 <table width="100%"  align="center" cellpadding="0" cellspacing="0">
 	<tr>
-		<td><iframe id="desc" name="desc" width="100%" onload="dyniframesize('desc');" border="0" frameborder="0" SCROLLING="no"  src=''/></td>
+		<td><iframe id="kfdbdesc" name="kfdbdesc" width="100%" onload="dyniframesize('kfdbdesc');" border="0" frameborder="0" SCROLLING="no"  src=''/></td>
 	</tr>
 </table>
 

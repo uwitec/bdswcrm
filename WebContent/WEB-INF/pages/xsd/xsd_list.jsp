@@ -256,12 +256,12 @@ String orderType = (String)VS.findValue("orderType");
 </table>
 </form>
 说明：红色字体标示该订单为库房退回订单，订单修改后可再次提交
-<form name="descForm" action="descXsd.html" method="post" target="desc">
+<form name="descForm" action="descXsd.html" method="post" target="xsddesc">
 	<input type="hidden" name="id" value="">
 </form>
 <table width="100%"  align="center" cellpadding="0" cellspacing="0">
 	<tr>
-		<td><iframe id="desc" name="desc" width="100%" onload="dyniframesize('desc');" border="0" frameborder="0" SCROLLING="no"  src=''/></td>
+		<td><iframe id="xsddesc" name="xsddesc" width="100%" onload="dyniframesize('xsddesc');" border="0" frameborder="0" SCROLLING="no"  src=''/></td>
 	</tr>
 </table>
 
