@@ -296,12 +296,12 @@ if(rkdProducts != null && rkdProducts.size()>0){
 %>
 	<tr>
 		<td class="a2">
-			<input type="text" id="product_name_<%=i %>" name="rkdProducts[<%=i %>].product_name" style="width:100%;<%=cssStyle %>" readonly value="<%=StringUtils.nullToStr(rkdProduct.get("product_name")) %>">
+			<input type="text" id="product_name_<%=i %>" name="rkdProducts[<%=i %>].product_name" style="width:90%;<%=cssStyle %>" readonly value="<%=StringUtils.nullToStr(rkdProduct.get("product_name")) %>">
 			<input type="hidden" id="product_id_<%=i %>" name="rkdProducts[<%=i %>].product_id" value="<%=StringUtils.nullToStr(rkdProduct.get("product_id")) %>">
 			<input type="hidden" id="price_<%=i %>"  name="rkdProducts[<%=i %>].price" value="<%=JMath.round(price) %>" readonly>
 		</td>
-		<td class="a2"><input type="text" size="10" id="product_xh_<%=i %>" style="width:100%;<%=cssStyle %>" name="rkdProducts[<%=i %>].product_xh" value="<%=StringUtils.nullToStr(rkdProduct.get("product_xh")) %>" readonly></td>
-		<td class="a2"><input type="text" size="5" id="nums_<%=i %>" style="width:100%;<%=cssStyle %>" name="rkdProducts[<%=i %>].nums"  value="<%=StringUtils.nullToStr(rkdProduct.get("nums")) %>" readonly><input type="hidden" id="xj_<%=i %>" name="rkdProducts[<%=i %>].xj" readonly></td>
+		<td class="a2"><input type="text" size="10" id="product_xh_<%=i %>" style="width:90%;<%=cssStyle %>" name="rkdProducts[<%=i %>].product_xh" value="<%=StringUtils.nullToStr(rkdProduct.get("product_xh")) %>" readonly></td>
+		<td class="a2"><input type="text" size="5" id="nums_<%=i %>" style="width:90%;<%=cssStyle %>" name="rkdProducts[<%=i %>].nums"  value="<%=StringUtils.nullToStr(rkdProduct.get("nums")) %>" readonly><input type="hidden" id="xj_<%=i %>" name="rkdProducts[<%=i %>].xj" readonly></td>
 		<td class="a2">
 			<input type="text" id="qz_serial_num_<%=i %>" name="rkdProducts[<%=i %>].qz_serial_num" style="width:85%;<%=cssStyle %>"  value="<%=StringUtils.nullToStr(rkdProduct.get("qz_serial_num")) %>" readonly>
 			<input type="hidden" id="qz_flag_<%=i %>" name="rkdProducts[<%=i %>].qz_flag"  value="<%=StringUtils.nullToStr(rkdProduct.get("qz_flag")) %>"><a style="cursor:hand" title="左键点击输入输列号" onclick="openSerialWin('<%=i %>');"><b>...</b></a>&nbsp;

@@ -50,7 +50,7 @@
 	<tr>
 		<td class="a1" width="15%">公告内容</td>
 		<td class="a2" colspan="3">
-			<textarea id="content" name="xxfbNbgg.content" rows="25" style="width:99%"></textarea>
+			<textarea id="content" name="xxfbNbgg.content" rows="25" style="width:90%"></textarea>
 		</td>
 	</tr>
 </table>

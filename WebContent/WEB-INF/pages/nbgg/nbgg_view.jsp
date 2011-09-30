@@ -87,7 +87,7 @@ function saveInfo(){
 															</tr>																														
 															</ww:iterator>	
 															<tr>
-																<td width="100%"><BR><ww:textarea name="content" id="content" value="" cssStyle="width:99%" rows="5" theme="simple"></ww:textarea></td>
+																<td width="100%"><BR><ww:textarea name="content" id="content" value="" cssStyle="width:90%" rows="5" theme="simple"></ww:textarea></td>
 															</tr>
 															<tr>
 																<td width="100%" align="center" height="30">

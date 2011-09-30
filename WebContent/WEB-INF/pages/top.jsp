@@ -124,7 +124,7 @@ if(flag == null){
 			}
 			document.getElementById("wdMsgTxt").innerText = "未读消息[" + flag + "]";
 			document.getElementById("msgImage").src = "images/msg_new.gif";
-			MM_controlSound('play','document.MM_controlSound1');
+			//MM_controlSound('play','document.MM_controlSound1');
 		}else{
 			end();
 			is = false;
@@ -248,6 +248,7 @@ if(flag == null){
 					<TD class=NormalWhite vlign=middle width=10 bgColor=#bcc2d4>|</TD>
 					<TD class=NormalWhite noWrap align=middle width=85 bgColor=#bcc2d4><IMG height=15 src="index_images/out_system.gif" width=15 align=absMiddle> <A class=TitleMenu href="#" onclick="logout();">安全退出</A></TD>
 				</TR>
+				<TR height="20"><TD colspan="11"><font style="font-size: 12px;">欢迎<%=real_name %>光临系统&nbsp;</font>&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:switchUi('<%=flag %>');">切换界面</a>&nbsp;&nbsp;&nbsp;&nbsp;</TD></TR>
 				</TBODY>
 			</TABLE>
 		</td>
@@ -255,7 +256,7 @@ if(flag == null){
 	</TBODY>
 </TABLE>
 </form>
-<embed name='MM_controlSound1' src='css/1.wav' loop=false autostart=false mastersound hidden=true width=0 height=0></embed>
+<!--<embed name='MM_controlSound1' src='css/1.wav' loop=false autostart=false mastersound hidden=true width=0 height=0></embed>-->
 <script type="text/javascript">
 	tabdropdown.init("colortab", 3)
 </script>
