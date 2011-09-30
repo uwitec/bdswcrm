@@ -131,7 +131,7 @@ List confirmKfdbList = (List)VS.findValue("confirmKfdbList");
 		
 			<%
 			int nums = 1;
-			if(isCkdRight.equals("1")){
+			if(isCkdRight.equals("1") && dckList!=null && dckList.size()>0){
 			%>		
 			<div class="inner">
 				<table width="100%" align="left" cellpadding="0" cellspacing="0">
@@ -160,12 +160,6 @@ List confirmKfdbList = (List)VS.findValue("confirmKfdbList");
 					</tr>
 					<%
 						}
-					}else{
-					%>
-					<tr>
-						<td width="100%" height="23" align="left">&nbsp;无待出库单据！</td>
-					</tr>							
-					<%
 					}
 					%>													
 				</table>				
@@ -173,7 +167,7 @@ List confirmKfdbList = (List)VS.findValue("confirmKfdbList");
 			<%
 				nums++;
 			}
-			if(isRkdRight.equals("1")){
+			if(isRkdRight.equals("1") && drkList!=null && drkList.size()>0){
 			%>
 			<div class="inner">
 				<table width="100%" align="left" cellpadding="0" cellspacing="0">
@@ -185,7 +179,6 @@ List confirmKfdbList = (List)VS.findValue("confirmKfdbList");
 					</tr>
 					<tr><td height="5"></td></tr>
 					<%
-					if(drkList!=null && drkList.size()>0){
 						for(int i=0;i<drkList.size();i++){
 							Map info = (Map)drkList.get(i);
 							
@@ -202,20 +195,13 @@ List confirmKfdbList = (List)VS.findValue("confirmKfdbList");
 					</tr>
 					<%
 						}
-					}else{
-					%>
-					<tr>
-						<td width="100%" height="23" align="left">&nbsp;无待入库单据！</td>
-					</tr>							
-					<%
-					}
 					%>													
 				</table>
 			</div>	
 			<%
 				nums++;
 			}
-			if(isLsdSpRight.equals("1")){
+			if(isLsdSpRight.equals("1") && dspLsdList != null && dspLsdList.size() > 0){
 			%>	
 			<div class="inner">			
 				<table width="100%" align="left" cellpadding="0" cellspacing="0">
@@ -227,7 +213,6 @@ List confirmKfdbList = (List)VS.findValue("confirmKfdbList");
 					</tr>
 					<tr><td height="5"></td></tr>
 					<%
-					if(dspLsdList != null && dspLsdList.size() > 0){
 						for(int i=0;i<dspLsdList.size();i++){
 							Map lsd = (Map)dspLsdList.get(i);
 					%>			
@@ -236,20 +221,13 @@ List confirmKfdbList = (List)VS.findValue("confirmKfdbList");
 					</tr>
 					<%
 						}
-					}else{
-					%>
-					<tr>
-						<td width="100%" height="23" align="left">&nbsp;无待审批零售单！</td>
-					</tr>					
-					<%
-					}
 					%>															
 				</table>	
 			</div>	
 			<%
 				nums++;
 			}
-			if(isXsdSpRight.equals("1")){
+			if(isXsdSpRight.equals("1") && dspXsdList != null && dspXsdList.size() > 0){
 			%>	
 			<div class="inner">		
 				<table width="100%" align="left" cellpadding="0" cellspacing="0">
@@ -261,7 +239,6 @@ List confirmKfdbList = (List)VS.findValue("confirmKfdbList");
 					</tr>
 					<tr><td height="5"></td></tr>
 					<%
-					if(dspXsdList != null && dspXsdList.size() > 0){
 						for(int i=0;i<dspXsdList.size();i++){
 							Map xsd = (Map)dspXsdList.get(i);
 					%>			
@@ -270,20 +247,13 @@ List confirmKfdbList = (List)VS.findValue("confirmKfdbList");
 					</tr>
 					<%
 						}
-					}else{
-					%>
-					<tr>
-						<td width="100%" height="23" align="left">&nbsp;无待审批销售订单！</td>
-					</tr>					
-					<%
-					}
 					%>															
 				</table>	
 			</div>	
 			<%
 				nums ++;
 			}
-			if(isCgfkSpRight.equals("1")){
+			if(isCgfkSpRight.equals("1") && dspCgfkList != null && dspCgfkList.size() > 0){
 			%>	
 			<div class="inner">	
 				<table width="100%" align="left" cellpadding="0" cellspacing="0">
@@ -295,7 +265,6 @@ List confirmKfdbList = (List)VS.findValue("confirmKfdbList");
 					</tr>
 					<tr><td height="5"></td></tr>
 					<%
-					if(dspCgfkList != null && dspCgfkList.size() > 0){
 						for(int i=0;i<dspCgfkList.size();i++){
 							Cgfk cgfk = (Cgfk)dspCgfkList.get(i);
 					%>			
@@ -305,13 +274,6 @@ List confirmKfdbList = (List)VS.findValue("confirmKfdbList");
 					</tr>
 					<%
 						}
-					}else{
-					%>
-					<tr>
-						<td width="100%" height="23" align="left">&nbsp;无待审批付款申请单！</td>
-					</tr>					
-					<%
-					}
 					%>															
 				</table>	
 			</div>	
@@ -319,7 +281,7 @@ List confirmKfdbList = (List)VS.findValue("confirmKfdbList");
 				nums++;
 			}
 			
-			if(isFysqSpRight.equals("1")){
+			if(isFysqSpRight.equals("1") && dspFysqList != null && dspFysqList.size() > 0){
 				%>	
 				<div class="inner">	
 					<table width="100%" align="left" cellpadding="0" cellspacing="0">
@@ -331,7 +293,6 @@ List confirmKfdbList = (List)VS.findValue("confirmKfdbList");
 						</tr>
 						<tr><td height="5"></td></tr>
 						<%
-						if(dspFysqList != null && dspFysqList.size() > 0){
 							for(int i=0;i<dspFysqList.size();i++){
 								Fysq fysq = (Fysq)dspFysqList.get(i);
 						%>			
@@ -341,47 +302,38 @@ List confirmKfdbList = (List)VS.findValue("confirmKfdbList");
 						</tr>
 						<%
 							}
-						}else{
-						%>
-						<tr>
-							<td width="100%" height="23" align="left">&nbsp;无待审批费用申请！</td>
-						</tr>					
-						<%
-						}
 						%>															
 					</table>	
 				</div>	
 				<%
 					nums++;
 				}
-				%>	
-				<div class="inner">	
-					<table width="100%" align="left" cellpadding="0" cellspacing="0">
-						<tr>
-							<td height="27" style="background-image:url(images/head_top2bg.gif)" align="left" width="100%">&nbsp;&nbsp;&nbsp;&nbsp;<b>待确认库房调拨</b></td>
-						</tr>
-						<tr><td height="5"></td></tr>
-						<%
+
 						if(confirmKfdbList != null && confirmKfdbList.size() > 0){
+							%>	
+							<div class="inner">	
+								<table width="100%" align="left" cellpadding="0" cellspacing="0">
+									<tr>
+										<td height="27" style="background-image:url(images/head_top2bg.gif)" align="left" width="100%">&nbsp;&nbsp;&nbsp;&nbsp;<b>待确认库房调拨</b></td>
+									</tr>
+									<tr><td height="5"></td></tr>
+									<%							
 							for(int i=0;i<confirmKfdbList.size();i++){
 								Kfdb kfdb = (Kfdb)confirmKfdbList.get(i);
 						%>			
-						<tr>
-							<td width="100%" height="23">&nbsp;<A class=xxlb title="点击打开确认页面" href="javascript:doConfirmKfdb('<%=StringUtils.nullToStr(kfdb.getId()) %>');">
-							<%=StringUtils.nullToStr(kfdb.getId()) %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=StaticParamDo.getStoreNameById(kfdb.getRk_store_id()) %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=StaticParamDo.getStoreNameById(kfdb.getCk_store_id()) %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=StaticParamDo.getRealNameById(kfdb.getJsr()) %></A></td>
-						</tr>
+									<tr>
+										<td width="100%" height="23">&nbsp;<A class=xxlb title="点击打开确认页面" href="javascript:doConfirmKfdb('<%=StringUtils.nullToStr(kfdb.getId()) %>');">
+										<%=StringUtils.nullToStr(kfdb.getId()) %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=StaticParamDo.getStoreNameById(kfdb.getRk_store_id()) %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=StaticParamDo.getStoreNameById(kfdb.getCk_store_id()) %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=StaticParamDo.getRealNameById(kfdb.getJsr()) %></A></td>
+									</tr>
 						<%
 							}
-						}else{
 						%>
-						<tr>
-							<td width="100%" height="23" align="left">&nbsp;无待确认库房调拨单！</td>
-						</tr>							
+								</table>	
+							</div>							
 						<%
 						}
 						%>															
-					</table>	
-				</div>	
+
 		</td>
 	</tr>
 </table>
