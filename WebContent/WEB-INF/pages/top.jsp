@@ -235,7 +235,11 @@ if(flag == null){
            		<TR>
 					<TD>&nbsp;</TD>
 					<TD align=middle width=10><IMG src="index_images/head_right.gif"></TD>
-					<TD noWrap align=middle width=85 bgColor=#bcc2d4><IMG  height=15  src="index_images/index_home.gif" width=15 align=absMiddle> <A class=TitleMenu  href="#" onclick="parent.location='thk_main_new.html';">首 页</A></TD>		
+					<%if(flag.equals("1")){ %>
+					<TD noWrap align=middle width=85 bgColor=#bcc2d4><IMG  height=15  src="index_images/index_home.gif" width=15 align=absMiddle> <A class=TitleMenu  href="#" onclick="parent.location='thk_main.html';">首 页</A></TD>
+					<%}else{ %>		
+					<TD noWrap align=middle width=85 bgColor=#bcc2d4><IMG  height=15  src="index_images/index_home.gif" width=15 align=absMiddle> <A class=TitleMenu  href="#" onclick="parent.location='thk_main_new.html';">首 页</A></TD>
+					<%} %>
 					<TD class=NormalWhite vlign=middle width=10 bgColor=#bcc2d4>|</TD>
 					<TD noWrap align=middle vlign=middle width=85 bgColor=#bcc2d4><div id="colortab" class="ddcolortabs">
 						<IMG id="msgImage" src="images/msg_1.gif" align=absMiddle>

@@ -62,7 +62,8 @@ ClientWlStatService clientWlStatService = (ClientWlStatService)VS.findValue("cli
 			<div class="inner">
 				<table width="100%" align="left" cellpadding="0" cellspacing="0" border="0">
 					<tr>
-						<td height="27" colspan="4" align="left" style="background-image:url(images/head_top2bg.gif)">&nbsp;&nbsp;&nbsp;&nbsp;<b>内部公告</b></td>
+						<td height="27" colspan="3" align="left" style="background-image:url(images/head_top2bg.gif)">&nbsp;&nbsp;&nbsp;&nbsp;<b>内部公告</b></td>
+						<td height="27" align="center" style="background-image:url(images/head_top2bg.gif)"><img src="images/import.gif" align="absmiddle" border="0"> <a href="#" class="xxlb" onclick="refreshPage();">刷新首页</a></td>
 					</tr>
 					<tr><td height="3" colspan="4"></td></tr>
 					<%

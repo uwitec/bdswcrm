@@ -127,12 +127,16 @@ List confirmKfdbList = (List)VS.findValue("confirmKfdbList");
 		<td width="100%" align="center">
 		
 			<%
+			int nums = 1;
 			if(isCkdRight.equals("1")){
 			%>		
 			<div class="inner">
 				<table width="100%" align="left" cellpadding="0" cellspacing="0">
 					<tr>
-						<td height="27" style="background-image:url(images/head_top2bg.gif)" align="left" width="100%">&nbsp;&nbsp;&nbsp;&nbsp;<b>待出库单据</b></td>								
+						<td height="27" style="background-image:url(images/head_top2bg.gif)" align="left">&nbsp;&nbsp;&nbsp;&nbsp;<b>待出库单据</b></td>
+						<%if(nums == 1){ %>								
+						<td width="50px" height="27" align="center" style="background-image:url(images/head_top2bg.gif)"><img src="images/import.gif" align="absmiddle" border="0"> <a href="#" class="xxlb" onclick="refreshPage();">刷新待办工作</a></td>
+						<%} %>
 					</tr>
 					<tr><td height="5"></td></tr>
 					<%
@@ -146,7 +150,7 @@ List confirmKfdbList = (List)VS.findValue("confirmKfdbList");
 							String xsry = StaticParamDo.getRealNameById((String)info.get("xsry"));
 					%>				
 					<tr>
-						<td width="100%" height="23">&nbsp;
+						<td width="100%" height="23" colspan="2">&nbsp;
 							<A class=xxlb href="#" onclick="edit('<%=id %>');" title="点击查看待出库单据详情"><%=id %>&nbsp;&nbsp;&nbsp;<%=client_name %>&nbsp;&nbsp;&nbsp;<%=xsry %>&nbsp;&nbsp;&nbsp;【<%=creatdate %>】</A>
 							<a href="#" class=xxlb onclick="printCkd('<%=id %>');" title="点击打印出库单">打印</a>
 						</td>
@@ -164,13 +168,17 @@ List confirmKfdbList = (List)VS.findValue("confirmKfdbList");
 				</table>				
 			</div>
 			<%
+				nums++;
 			}
 			if(isRkdRight.equals("1")){
 			%>
 			<div class="inner">
 				<table width="100%" align="left" cellpadding="0" cellspacing="0">
 					<tr>
-						<td height="27" align="left" width="100%" style="background-image:url(images/head_top2bg.gif)">&nbsp;&nbsp;&nbsp;&nbsp;<b>待入库单据</b></td>
+						<td height="27" align="left"  style="background-image:url(images/head_top2bg.gif)">&nbsp;&nbsp;&nbsp;&nbsp;<b>待入库单据</b></td>
+						<%if(nums == 1){ %>								
+						<td width="50px" height="27" align="center" style="background-image:url(images/head_top2bg.gif)"><img src="images/import.gif" align="absmiddle" border="0"> <a href="#" class="xxlb" onclick="refreshPage();">刷新待办工作</a></td>
+						<%} %>
 					</tr>
 					<tr><td height="5"></td></tr>
 					<%
@@ -184,7 +192,7 @@ List confirmKfdbList = (List)VS.findValue("confirmKfdbList");
 							String cgfzr = StaticParamDo.getRealNameById((String)info.get("cgfzr"));
 					%>				
 					<tr>
-						<td width="100%" height="23">&nbsp;
+						<td width="100%" height="23" colspan="2">&nbsp;
 							<A class=xxlb href="#" onclick="editRkd('<%=id %>');" title="点击查看待入库单据详情"><%=id %>&nbsp;&nbsp;&nbsp;<%=client_name %>&nbsp;&nbsp;&nbsp;<%=cgfzr %>&nbsp;&nbsp;&nbsp;【<%=creatdate %>】</A>
 							<a href="#" class=xxlb onclick="printRkd('<%=id %>');" title="点击打印入库单">打印</a>
 						</td>
@@ -202,13 +210,17 @@ List confirmKfdbList = (List)VS.findValue("confirmKfdbList");
 				</table>
 			</div>	
 			<%
+				nums++;
 			}
 			if(isLsdSpRight.equals("1")){
 			%>	
 			<div class="inner">			
 				<table width="100%" align="left" cellpadding="0" cellspacing="0">
 					<tr>
-						<td align="left" height="27" width="100%" style="background-image:url(images/head_top2bg.gif)">&nbsp;&nbsp;&nbsp;&nbsp;<b>待审批零售单</b></td>
+						<td align="left" height="27" style="background-image:url(images/head_top2bg.gif)">&nbsp;&nbsp;&nbsp;&nbsp;<b>待审批零售单</b></td>
+						<%if(nums == 1){ %>								
+						<td width="50px" height="27" align="center" style="background-image:url(images/head_top2bg.gif)"><img src="images/import.gif" align="absmiddle" border="0"> <a href="#" class="xxlb" onclick="refreshPage();">刷新待办工作</a></td>
+						<%} %>
 					</tr>
 					<tr><td height="5"></td></tr>
 					<%
@@ -217,7 +229,7 @@ List confirmKfdbList = (List)VS.findValue("confirmKfdbList");
 							Map lsd = (Map)dspLsdList.get(i);
 					%>			
 					<tr>
-						<td width="100%" height="23">&nbsp;<A class=xxlb title="点击打开审批页面" href="javascript:doSpLsd('<%=StringUtils.nullToStr(lsd.get("id")) %>');"><%=StringUtils.nullToStr(lsd.get("id")) %>&nbsp;&nbsp;<%=StringUtils.nullToStr(lsd.get("dept_name")) %>&nbsp;&nbsp;<%=StringUtils.nullToStr(lsd.get("real_name")) %>&nbsp;&nbsp;【<%=lsd.get("creatdate") %>】</A></td>
+						<td width="100%" height="23" colspan="2">&nbsp;<A class=xxlb title="点击打开审批页面" href="javascript:doSpLsd('<%=StringUtils.nullToStr(lsd.get("id")) %>');"><%=StringUtils.nullToStr(lsd.get("id")) %>&nbsp;&nbsp;<%=StringUtils.nullToStr(lsd.get("dept_name")) %>&nbsp;&nbsp;<%=StringUtils.nullToStr(lsd.get("real_name")) %>&nbsp;&nbsp;【<%=lsd.get("creatdate") %>】</A></td>
 					</tr>
 					<%
 						}
@@ -232,6 +244,7 @@ List confirmKfdbList = (List)VS.findValue("confirmKfdbList");
 				</table>	
 			</div>	
 			<%
+				nums++;
 			}
 			if(isXsdSpRight.equals("1")){
 			%>	
@@ -239,6 +252,9 @@ List confirmKfdbList = (List)VS.findValue("confirmKfdbList");
 				<table width="100%" align="left" cellpadding="0" cellspacing="0">
 					<tr>
 						<td height="27" style="background-image:url(images/head_top2bg.gif)" align="left" width="100%">&nbsp;&nbsp;&nbsp;&nbsp;<b>待审批销售订单</b></td>
+						<%if(nums == 1){ %>								
+						<td width="50px" height="27" align="center" style="background-image:url(images/head_top2bg.gif)"><img src="images/import.gif" align="absmiddle" border="0"> <a href="#" class="xxlb" onclick="refreshPage();">刷新待办工作</a></td>
+						<%} %>
 					</tr>
 					<tr><td height="5"></td></tr>
 					<%
@@ -247,7 +263,7 @@ List confirmKfdbList = (List)VS.findValue("confirmKfdbList");
 							Map xsd = (Map)dspXsdList.get(i);
 					%>			
 					<tr>
-						<td width="100%" height="23">&nbsp;<A class=xxlb title="点击打开审批页面" href="javascript:doSpXsd('<%=StringUtils.nullToStr(xsd.get("id")) %>');"><%=StringUtils.nullToStr(xsd.get("id")) %>&nbsp;&nbsp;<%=StringUtils.nullToStr(xsd.get("dept_name")) %>&nbsp;&nbsp;<%=StringUtils.nullToStr(xsd.get("real_name")) %>&nbsp;&nbsp;【<%=StringUtils.nullToStr(xsd.get("creatdate")) %>】</A></td>
+						<td width="100%" height="23" colspan="2">&nbsp;<A class=xxlb title="点击打开审批页面" href="javascript:doSpXsd('<%=StringUtils.nullToStr(xsd.get("id")) %>');"><%=StringUtils.nullToStr(xsd.get("id")) %>&nbsp;&nbsp;<%=StringUtils.nullToStr(xsd.get("dept_name")) %>&nbsp;&nbsp;<%=StringUtils.nullToStr(xsd.get("real_name")) %>&nbsp;&nbsp;【<%=StringUtils.nullToStr(xsd.get("creatdate")) %>】</A></td>
 					</tr>
 					<%
 						}
@@ -262,13 +278,17 @@ List confirmKfdbList = (List)VS.findValue("confirmKfdbList");
 				</table>	
 			</div>	
 			<%
+				nums ++;
 			}
 			if(isCgfkSpRight.equals("1")){
 			%>	
 			<div class="inner">	
 				<table width="100%" align="left" cellpadding="0" cellspacing="0">
 					<tr>
-						<td height="27" style="background-image:url(images/head_top2bg.gif)" align="left" width="100%">&nbsp;&nbsp;&nbsp;&nbsp;<b>待审批付款申请单</b></td>
+						<td height="27" style="background-image:url(images/head_top2bg.gif)" align="left">&nbsp;&nbsp;&nbsp;&nbsp;<b>待审批付款申请单</b></td>
+						<%if(nums == 1){ %>								
+						<td width="50px" height="27" align="center" style="background-image:url(images/head_top2bg.gif)"><img src="images/import.gif" align="absmiddle" border="0"> <a href="#" class="xxlb" onclick="refreshPage();">刷新待办工作</a></td>
+						<%} %>
 					</tr>
 					<tr><td height="5"></td></tr>
 					<%
@@ -277,7 +297,7 @@ List confirmKfdbList = (List)VS.findValue("confirmKfdbList");
 							Cgfk cgfk = (Cgfk)dspCgfkList.get(i);
 					%>			
 					<tr>
-						<td width="100%" height="23">&nbsp;<A class=xxlb title="点击打开审批页面" href="javascript:doSpCgfk('<%=StringUtils.nullToStr(cgfk.getId()) %>');">
+						<td width="100%" height="23" colspan="2">&nbsp;<A class=xxlb title="点击打开审批页面" href="javascript:doSpCgfk('<%=StringUtils.nullToStr(cgfk.getId()) %>');">
 						<%=StringUtils.nullToStr(cgfk.getId()) %>&nbsp;&nbsp;<%=StaticParamDo.getClientNameById(cgfk.getGysbh()) %>&nbsp;&nbsp;<%=StaticParamDo.getRealNameById(cgfk.getCzr()) %>&nbsp;&nbsp;【<%=StringUtils.nullToStr(cgfk.getFk_date()) %>】</A></td>
 					</tr>
 					<%
@@ -293,13 +313,18 @@ List confirmKfdbList = (List)VS.findValue("confirmKfdbList");
 				</table>	
 			</div>	
 			<%
+				nums++;
 			}
+			
 			if(isFysqSpRight.equals("1")){
 				%>	
 				<div class="inner">	
 					<table width="100%" align="left" cellpadding="0" cellspacing="0">
 						<tr>
-							<td height="27" style="background-image:url(images/head_top2bg.gif)" align="left" width="100%">&nbsp;&nbsp;&nbsp;&nbsp;<b>待审批费用申请</b></td>
+							<td height="27" style="background-image:url(images/head_top2bg.gif)" align="left">&nbsp;&nbsp;&nbsp;&nbsp;<b>待审批费用申请</b></td>
+						<%if(nums == 1){ %>								
+							<td width="50px" height="27" align="center" style="background-image:url(images/head_top2bg.gif)"><img src="images/import.gif" align="absmiddle" border="0"> <a href="#" class="xxlb" onclick="refreshPage();">刷新待办工作</a></td>
+						<%} %>
 						</tr>
 						<tr><td height="5"></td></tr>
 						<%
@@ -308,7 +333,7 @@ List confirmKfdbList = (List)VS.findValue("confirmKfdbList");
 								Fysq fysq = (Fysq)dspFysqList.get(i);
 						%>			
 						<tr>
-							<td width="100%" height="23">&nbsp;<A class=xxlb title="点击打开审批页面" href="javascript:doSpFysq('<%=StringUtils.nullToStr(fysq.getId()) %>');">
+							<td width="100%" height="23" colspan="2">&nbsp;<A class=xxlb title="点击打开审批页面" href="javascript:doSpFysq('<%=StringUtils.nullToStr(fysq.getId()) %>');">
 							<%=StringUtils.nullToStr(fysq.getId()) %>&nbsp;&nbsp;<%=StaticParamDo.getDeptNameById(fysq.getYwy_dept()) %>&nbsp;&nbsp;<%=StaticParamDo.getRealNameById(fysq.getSqr()) %>&nbsp;&nbsp;【<%=StringUtils.nullToStr(fysq.getCreatdate()) %>】</A></td>
 						</tr>
 						<%
@@ -324,6 +349,7 @@ List confirmKfdbList = (List)VS.findValue("confirmKfdbList");
 					</table>	
 				</div>	
 				<%
+					nums++;
 				}
 				%>	
 				<div class="inner">	
