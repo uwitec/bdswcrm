@@ -42,8 +42,10 @@
             <result name="cancel" type="redirect">login.jsp</result>
             <result name="input" type="redirect">login.jsp</result>
             <result name="reLogin" type="redirect">reLogin.jsp</result>
-            <!-- 内网用户登录成功 -->
+            <!-- 内网用户登录成功IE浏览器 -->
             <result name="success" type="redirect">thk_main.html</result>
+            <!-- 内网用户登录成功其他浏览器 -->
+            <result name="otherBrowserSuccess" type="redirect">thk_main_new.html</result>
             <!-- 代理商登录成功 -->
             <result name="fxSuccess" type="redirect">dls_index.html</result>
             <!-- 供应商登录成功 -->
