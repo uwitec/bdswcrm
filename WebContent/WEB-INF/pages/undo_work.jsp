@@ -47,6 +47,9 @@ List confirmKfdbList = (List)VS.findValue("confirmKfdbList");
 	text-align:left;
 	display:inline ;
 	float:left;
+	height: 290px;
+	overflow-y: auto;
+	overflow-x: none;
 }
 </style>
 <script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
@@ -135,7 +138,7 @@ List confirmKfdbList = (List)VS.findValue("confirmKfdbList");
 					<tr>
 						<td height="27" style="background-image:url(images/head_top2bg.gif)" align="left">&nbsp;&nbsp;&nbsp;&nbsp;<b>待出库单据</b></td>
 						<%if(nums == 1){ %>								
-						<td width="50px" height="27" align="center" style="background-image:url(images/head_top2bg.gif)"><img src="images/import.gif" align="absmiddle" border="0"> <a href="#" class="xxlb" onclick="refreshPage();">刷新待办工作</a></td>
+						<td width="80px" height="27" align="center" style="background-image:url(images/head_top2bg.gif)"><img src="images/import.gif" align="absmiddle" border="0"> <a href="#" class="xxlb" onclick="refreshPage();">刷新待办工作</a></td>
 						<%} %>
 					</tr>
 					<tr><td height="5"></td></tr>
@@ -177,7 +180,7 @@ List confirmKfdbList = (List)VS.findValue("confirmKfdbList");
 					<tr>
 						<td height="27" align="left"  style="background-image:url(images/head_top2bg.gif)">&nbsp;&nbsp;&nbsp;&nbsp;<b>待入库单据</b></td>
 						<%if(nums == 1){ %>								
-						<td width="50px" height="27" align="center" style="background-image:url(images/head_top2bg.gif)"><img src="images/import.gif" align="absmiddle" border="0"> <a href="#" class="xxlb" onclick="refreshPage();">刷新待办工作</a></td>
+						<td width="80px" height="27" align="center" style="background-image:url(images/head_top2bg.gif)"><img src="images/import.gif" align="absmiddle" border="0"> <a href="#" class="xxlb" onclick="refreshPage();">刷新待办工作</a></td>
 						<%} %>
 					</tr>
 					<tr><td height="5"></td></tr>
@@ -219,7 +222,7 @@ List confirmKfdbList = (List)VS.findValue("confirmKfdbList");
 					<tr>
 						<td align="left" height="27" style="background-image:url(images/head_top2bg.gif)">&nbsp;&nbsp;&nbsp;&nbsp;<b>待审批零售单</b></td>
 						<%if(nums == 1){ %>								
-						<td width="50px" height="27" align="center" style="background-image:url(images/head_top2bg.gif)"><img src="images/import.gif" align="absmiddle" border="0"> <a href="#" class="xxlb" onclick="refreshPage();">刷新待办工作</a></td>
+						<td width="80px" height="27" align="center" style="background-image:url(images/head_top2bg.gif)"><img src="images/import.gif" align="absmiddle" border="0"> <a href="#" class="xxlb" onclick="refreshPage();">刷新待办工作</a></td>
 						<%} %>
 					</tr>
 					<tr><td height="5"></td></tr>
@@ -253,7 +256,7 @@ List confirmKfdbList = (List)VS.findValue("confirmKfdbList");
 					<tr>
 						<td height="27" style="background-image:url(images/head_top2bg.gif)" align="left" width="100%">&nbsp;&nbsp;&nbsp;&nbsp;<b>待审批销售订单</b></td>
 						<%if(nums == 1){ %>								
-						<td width="50px" height="27" align="center" style="background-image:url(images/head_top2bg.gif)"><img src="images/import.gif" align="absmiddle" border="0"> <a href="#" class="xxlb" onclick="refreshPage();">刷新待办工作</a></td>
+						<td width="80px" height="27" align="center" style="background-image:url(images/head_top2bg.gif)"><img src="images/import.gif" align="absmiddle" border="0"> <a href="#" class="xxlb" onclick="refreshPage();">刷新待办工作</a></td>
 						<%} %>
 					</tr>
 					<tr><td height="5"></td></tr>
@@ -287,7 +290,7 @@ List confirmKfdbList = (List)VS.findValue("confirmKfdbList");
 					<tr>
 						<td height="27" style="background-image:url(images/head_top2bg.gif)" align="left">&nbsp;&nbsp;&nbsp;&nbsp;<b>待审批付款申请单</b></td>
 						<%if(nums == 1){ %>								
-						<td width="50px" height="27" align="center" style="background-image:url(images/head_top2bg.gif)"><img src="images/import.gif" align="absmiddle" border="0"> <a href="#" class="xxlb" onclick="refreshPage();">刷新待办工作</a></td>
+						<td width="80px" height="27" align="center" style="background-image:url(images/head_top2bg.gif)"><img src="images/import.gif" align="absmiddle" border="0"> <a href="#" class="xxlb" onclick="refreshPage();">刷新待办工作</a></td>
 						<%} %>
 					</tr>
 					<tr><td height="5"></td></tr>
@@ -323,7 +326,7 @@ List confirmKfdbList = (List)VS.findValue("confirmKfdbList");
 						<tr>
 							<td height="27" style="background-image:url(images/head_top2bg.gif)" align="left">&nbsp;&nbsp;&nbsp;&nbsp;<b>待审批费用申请</b></td>
 						<%if(nums == 1){ %>								
-							<td width="50px" height="27" align="center" style="background-image:url(images/head_top2bg.gif)"><img src="images/import.gif" align="absmiddle" border="0"> <a href="#" class="xxlb" onclick="refreshPage();">刷新待办工作</a></td>
+							<td width="80px" height="27" align="center" style="background-image:url(images/head_top2bg.gif)"><img src="images/import.gif" align="absmiddle" border="0"> <a href="#" class="xxlb" onclick="refreshPage();">刷新待办工作</a></td>
 						<%} %>
 						</tr>
 						<tr><td height="5"></td></tr>

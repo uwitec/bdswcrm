@@ -252,7 +252,7 @@ if(flag == null){
 					<TD class=NormalWhite vlign=middle width=10 bgColor=#bcc2d4>|</TD>
 					<TD class=NormalWhite noWrap align=middle width=85 bgColor=#bcc2d4><IMG height=15 src="index_images/out_system.gif" width=15 align=absMiddle> <A class=TitleMenu href="#" onclick="logout();">安全退出</A></TD>
 				</TR>
-				<TR height="20"><TD colspan="11"><font style="font-size: 12px;">欢迎<%=real_name %>光临系统&nbsp;</font>&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:switchUi('<%=flag %>');">切换界面</a>&nbsp;&nbsp;&nbsp;&nbsp;</TD></TR>
+				<TR height="20"><TD colspan="11" align="right"><font style="font-size: 12px;">欢迎<%=real_name %>光临系统&nbsp;</font>&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:switchUi('<%=flag %>');">切换界面</a>&nbsp;&nbsp;&nbsp;&nbsp;</TD></TR>
 				</TBODY>
 			</TABLE>
 		</td>

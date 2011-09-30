@@ -37,19 +37,19 @@
 	<TBODY>
 	<TR>
 		<TD class=ReportItem>　　<B>一、主营业务收入</B></TD>
-		<TD class=ReportItemXH><B>1</B></TD>
+		<TD class=ReportItemXH><B>1</B>&nbsp;</TD>
 		<TD class=ReportItemMoney><B><ww:property value="%{getText('global.format.money',{zyywsrMap['curMonth']})}" /></B>&nbsp;</TD>
 		<TD class=ReportItemMoney><B><ww:property value="%{getText('global.format.money',{zyywsrMap['allMonth']})}" /></B>&nbsp;</TD>
 	</TR>
 	<TR>
 		<TD class=ReportItem>　　　　减：主营业务成本</TD>
-		<TD class=ReportItemXH>2</TD>
+		<TD class=ReportItemXH>2&nbsp;</TD>
 		<TD class=ReportItemMoney><ww:property value="%{getText('global.format.money',{zyywcbMap['curMonth']})}" />&nbsp;</TD>
 		<TD class=ReportItemMoney><ww:property value="%{getText('global.format.money',{zyywcbMap['allMonth']})}" />&nbsp;</TD>
 	</TR>
 	<TR>
 		<TD class=ReportItem>　　　　减：主营业务税金及附加</TD>
-		<TD class=ReportItemXH>3</TD>
+		<TD class=ReportItemXH>3&nbsp;</TD>
 		<TD class=ReportItemMoney><ww:property value="%{getText('global.format.money',{zyywsjjfjMap['curMonth']})}" />&nbsp;</TD>
 		<TD class=ReportItemMoney><ww:property value="%{getText('global.format.money',{zyywsjjfjMap['allMonth']})}" />&nbsp;</TD>
 	</TR>
@@ -57,31 +57,31 @@
 	<ww:set name="zyxwlrAll" value="zyywsrMap['allMonth']-zyywcbMap['allMonth']-zyywsjjfjMap['allMonth']"/>
 	<TR>
 		<TD class=ReportItem>　　<B>二、主营业务利润(亏损以"-"号填列)</B></TD>
-		<TD class=ReportItemXH><B>4</B></TD>
+		<TD class=ReportItemXH><B>4</B>&nbsp;</TD>
 		<TD class=ReportItemMoney><B><ww:property value="%{getText('global.format.money',{#zyxwlrCur})}" /></B>&nbsp;</TD>
 		<TD class=ReportItemMoney><B><ww:property value="%{getText('global.format.money',{#zyxwlrAll})}" /></B>&nbsp;</TD>
 	</TR>
 	<TR>
 		<TD class=ReportItem>　　　　加：其它业务利润</TD>
-		<TD class=ReportItemXH>5</TD>
+		<TD class=ReportItemXH>5&nbsp;</TD>
 		<TD class=ReportItemMoney><ww:property value="%{getText('global.format.money',{qtywsrMap['curMonth']-qtywcbMap['curMonth']})}" />&nbsp;</TD>
 		<TD class=ReportItemMoney><ww:property value="%{getText('global.format.money',{qtywsrMap['allMonth']-qtywcbMap['allMonth']})}" />&nbsp;</TD>
 	</TR>
 	<TR>
 		<TD class=ReportItem>　　　　减：营业费用</TD>
-		<TD class=ReportItemXH>6</TD>
+		<TD class=ReportItemXH>6&nbsp;</TD>
 		<TD class=ReportItemMoney><ww:property value="%{getText('global.format.money',{yywzcMap['curMonth']+dtfyMap['curMonth']})}" />&nbsp;</TD>
 		<TD class=ReportItemMoney><ww:property value="%{getText('global.format.money',{yywzcMap['allMonth']+dtfyMap['allMonth']})}" />&nbsp;</TD>
 	</TR>
 	<TR>
 		<TD class=ReportItem>　　　　减：财务费用</TD>
-		<TD class=ReportItemXH>7</TD>
+		<TD class=ReportItemXH>7&nbsp;</TD>
 		<TD class=ReportItemMoney><ww:property value="%{getText('global.format.money',{cwfyMap['curMonth']})}" />&nbsp;</TD>
 		<TD class=ReportItemMoney><ww:property value="%{getText('global.format.money',{cwfyMap['allMonth']})}" />&nbsp;</TD>
 	</TR>
 	<TR>
 		<TD class=ReportItem>　　　　减：管理费用</TD>
-		<TD class=ReportItemXH>8</TD>
+		<TD class=ReportItemXH>8&nbsp;</TD>
 		<TD class=ReportItemMoney><ww:property value="%{getText('global.format.money',{glfyMap['curMonth']})}" />&nbsp;</TD>
 		<TD class=ReportItemMoney><ww:property value="%{getText('global.format.money',{glfyMap['allMonth']})}" />&nbsp;</TD>
 	</TR>		
@@ -89,19 +89,19 @@
 	<ww:set name="yylrAll" value="#zyxwlrAll+qtywsrMap['allMonth']-qtywcbMap['allMonth']-yywzcMap['allMonth']-dtfyMap['allMonth']-cwfyMap['allMonth']-glfyMap['allMonth']"/>			
 	<TR>
 		<TD class=ReportItem>　　<B>三、营业利润（亏损以"-"号填列）</B></TD>
-		<TD class=ReportItemXH><B>9</B></TD>
+		<TD class=ReportItemXH><B>9</B>&nbsp;</TD>
 		<TD class=ReportItemMoney><B><ww:property value="%{getText('global.format.money',{#yylrCur})}" /></B>&nbsp;</TD>
 		<TD class=ReportItemMoney><B><ww:property value="%{getText('global.format.money',{#yylrAll})}" /></B>&nbsp;</TD>
 	</TR>
 	<TR>
 		<TD class=ReportItem>　　　　加：营业外收入</TD>
-		<TD class=ReportItemXH>10</TD>
+		<TD class=ReportItemXH>10&nbsp;</TD>
 		<TD class=ReportItemMoney><ww:property value="%{getText('global.format.money',{yywsrMap['curMonth']+spbysrMap['curMonth']+wltzsrMap['curMonth']+tjlrMap['curMonth']})}" />&nbsp;</TD>
 		<TD class=ReportItemMoney><ww:property value="%{getText('global.format.money',{yywsrMap['allMonth']+spbysrMap['allMonth']+wltzsrMap['allMonth']+tjlrMap['allMonth']})}" />&nbsp;</TD>
 	</TR>
 	<TR>
 		<TD class=ReportItem>　　　　减：营业外支出</TD>
-		<TD class=ReportItemXH>11</TD>
+		<TD class=ReportItemXH>11&nbsp;</TD>
 		<TD class=ReportItemMoney><ww:property value="%{getText('global.format.money',{spbszcMap['curMonth']+wltzzcMap['curMonth']})}" />&nbsp;</TD>
 		<TD class=ReportItemMoney><ww:property value="%{getText('global.format.money',{spbszcMap['allMonth']+wltzzcMap['allMonth']})}" />&nbsp;</TD>
 	</TR>
@@ -109,13 +109,13 @@
 	<ww:set name="lrzeAll" value="#yylrAll+yywsrMap['allMonth']+spbysrMap['allMonth']+wltzsrMap['allMonth']+tjlrMap['allMonth']-spbszcMap['allMonth']-wltzzcMap['allMonth']"/>		
 	<TR>
 		<TD class=ReportItem>　　<B>四、利润总额（亏损总额以"-"号填列）</B></TD>
-		<TD class=ReportItemXH><B>12</B></TD>
+		<TD class=ReportItemXH><B>12</B>&nbsp;</TD>
 		<TD class=ReportItemMoney><B><ww:property value="%{getText('global.format.money',{#lrzeCur})}" /></B>&nbsp;</TD>
 		<TD class=ReportItemMoney><B><ww:property value="%{getText('global.format.money',{#lrzeAll})}" /></B>&nbsp;</TD>
 	</TR>
 	<TR>
 		<TD class=ReportItem>　　　　减：所得税</TD>
-		<TD class=ReportItemXH>13</TD>
+		<TD class=ReportItemXH>13&nbsp;</TD>
 		<TD class=ReportItemMoney><ww:property value="%{getText('global.format.money',{sdsMap['curMonth']})}" />&nbsp;</TD>
 		<TD class=ReportItemMoney><ww:property value="%{getText('global.format.money',{sdsMap['allMonth']})}" />&nbsp;</TD>
 	</TR>
@@ -123,7 +123,7 @@
 	<ww:set name="jlrAll" value="#lrzeAll-sdsMap['allMonth']"/>			
 	<TR>
 		<TD class=ReportItem>　　<B>五、净利润（亏损以"-"号填列）</B></TD>
-		<TD class=ReportItemXH><B>14</B></TD>
+		<TD class=ReportItemXH><B>14</B>&nbsp;</TD>
 		<TD class=ReportItemMoney><B><ww:property value="%{getText('global.format.money',{#jlrCur})}" /></B>&nbsp;</TD>
 		<TD class=ReportItemMoney><B><ww:property value="%{getText('global.format.money',{#jlrAll})}" /></B>&nbsp;</TD>
 	</TR>		

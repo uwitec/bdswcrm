@@ -25,7 +25,7 @@ ClientWlStatService clientWlStatService = (ClientWlStatService)VS.findValue("cli
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="jquery/jquery-1.4.2.min.js"></script>
 <script type="text/javascript" src="js/switchCss.js"></script>
-<style type="text/css">
+<style type="text/css"><!--
 .inner{
 	width:48%;
 	margin:2px; 
@@ -33,6 +33,9 @@ ClientWlStatService clientWlStatService = (ClientWlStatService)VS.findValue("cli
 	text-align:left;
 	display:inline ;
 	float:left;	
+	height: 290px;
+	overflow-y: auto;
+	overflow-x: none; 
 }
 </style>
 <script type="text/javascript">	
