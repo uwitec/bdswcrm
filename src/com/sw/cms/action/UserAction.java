@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.StringTokenizer;
 
 import javax.servlet.http.HttpSession;
 
@@ -206,15 +205,20 @@ public class UserAction extends BaseAction {
 		}else{
 			//其它用户登陆内网首页
 			String agent = getRequest().getHeader("User-agent");
+			log.info("用户浏览器信息：" + agent);
 			String sendUrl = "success";
-			if(agent != null){
-				if(agent.indexOf("MSIE") != -1 && agent.indexOf("MSIE 9.0") == -1){
-					//是IE浏览器，但不是9.0的版本
-					sendUrl = "success";
-				}else{
-					sendUrl = "otherBrowserSuccess";
+			try{
+				if(agent != null){
+					if(agent.indexOf("MSIE") != -1 && agent.indexOf("MSIE 9.0") == -1){
+						//是IE浏览器，但不是9.0的版本
+						sendUrl = "success";
+					}else{
+						sendUrl = "otherBrowserSuccess";
+					}
 				}
-			}			
+			}catch(Exception e){
+				e.printStackTrace();
+			}
 			return sendUrl;
 			
 		}
