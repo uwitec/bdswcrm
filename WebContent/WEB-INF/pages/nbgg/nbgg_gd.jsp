@@ -7,9 +7,9 @@
 
 <%
 OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
+
 Page results = (Page)VS.findValue("nbggPage");
 
-List nbggList = results.getResults();
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -17,117 +17,66 @@ List nbggList = results.getResults();
 <head>
 <title>内部公告</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<LINK href="css/InitNav.css" type=text/css rel=stylesheet>
-<LINK href="css/Portal.css" type=text/css rel=stylesheet>
-<LINK href="css/Desktop.css" type=text/css rel=stylesheet>
+<link href="css/css.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="jquery/jquery.js"></script>
 <script type="text/javascript" src="js/initPageSize.js"></script>
 <script type="text/javascript">
 	function openWin(id){
 		var destination = "viewNbgg.html?id="+id;
-		var fea = 'width=800,height=650,left=' + (screen.availWidth-800)/2 + ',top=' + (screen.availHeight-650)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		var fea = 'width=850,height=650,left=' + (screen.availWidth-850)/2 + ',top=' + (screen.availHeight-650)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
 		window.open(destination,'详细信息',fea);	
 	}
 </script>
 </head>
-<BODY align="center">
-<div class="rightContentDiv" id="divContent">
+<body >
 <form name="myform" action="listGdNbgg.html" method="post">
-<TABLE cellSpacing=0 cellPadding=10 width="100%" border=0>
-	<TBODY>
+<div class="rightContentDiv" id="divContent">
+<table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0">
+	<tr>
+		<td class="csstitle" align="left" width="75%">&nbsp;&nbsp;&nbsp;&nbsp;<b>内部公告</b></td>
+		<td class="csstitle" width="25%" align="right">
+			<img src="images/create.gif" align="absmiddle" border="0">&nbsp;<a href="#" onclick="add();" class="xxlb"> 添 加 </a> &nbsp;&nbsp;&nbsp;</td>			
+	</tr>
+</table>
+<table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0">
+	<thead>
+	<tr>
+		<td>序号</td>
+		<td>标题</td>
+		<td>发布时间</td>
+		<td>发布人</td>
+		<td>操作</td>
+	</tr>
+	</thead>
+	<%
+	List list = results.getResults();
+	Iterator it = list.iterator();
+	int i = 0;
+	while(it.hasNext()){
+		XxfbNbgg info = (XxfbNbgg)it.next();
+		i++;
+	%>
+	<tr>
+		<td class="a1"><%=i %></td>
+		<td class="a1"><a href="javascript:void(0);" onclick="openWin('<%=StringUtils.nullToStr(info.getId()) %>');" class="xxlb"><%=StringUtils.nullToStr(info.getTitle()) %></a></td>
+		<td class="a1"><%=StringUtils.nullToStr(info.getPub_date()) %></td>
+		<td class="a1"><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(info.getCzr())) %></td>
+		<td class="a1">
+			<a href="javascript:void(0);" onclick="openWin('<%=StringUtils.nullToStr(info.getId()) %>');"><img src="images/view.gif" align="absmiddle" title="查看" border="0" style="cursor:hand"></a>
+		</td>
+	</tr>
 	
-	<TR>
-		<TD vAlign=top width="100%" align="center">
-		
-			<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
-				<TBODY>
-				<TR>
-					<TD vAlign=bottom>
-						<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
-							<TBODY>
-							<TR>
-								<TD width=10 background="index_images/subTab_topleftL2.gif">&nbsp;</TD>
-								<TD class="SubTab_top " align=right>&nbsp;</TD>
-								<TD vAlign=bottom align=right width=10><IMG src="index_images/subTab_topright.gif"></TD>
-							</TR>
-							</TBODY>
-						</TABLE>
-					</TD>
-				</TR>
-				<TR>
-					<TD class=SubTab_LR vAlign=top align=middle>
-						<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
-							<TBODY>
-							
-							<TR>
-								<TD vAlign=top align=middle colSpan=3>
-									<TABLE id=_ctl1_News_lstAnnouncements style="WIDTH: 95%; BORDER-COLLAPSE: collapse" cellSpacing=0 cellPadding=2 border=0>
-										<TBODY>
-										<TR>
-											<TD>
-												<TABLE cellSpacing=0 cellPadding=1 width="100%" border=0>
-													<TBODY>
-					                                <TR>
-					                                	<TD class=Bottom_dotted align=center width="10%"><B>序号</B></TD>	
-					                                	<TD class=Bottom_dotted align=center width="65%"><B>标题</B></TD>
-					                                	<TD class=Bottom_dotted align=center width="25%"><B>发布时间</B></TD>																					
-													</TR>
-													<%
-													Iterator it = nbggList.iterator();
-													int i = 0;
-													while(it.hasNext()){
-														XxfbNbgg info = (XxfbNbgg)it.next();
-														i++;
-													%>
-					                                <TR>
-					                                	<TD class=Bottom_dotted align=center width="10%"><%=i %></TD>	
-					                                	<TD class=Bottom_dotted align=left width="65%"><a href="javascript:void(0);" onclick="openWin('<%=StringUtils.nullToStr(info.getId()) %>');"><%=StringUtils.nullToStr(info.getTitle()) %></a></TD>
-					                                	<TD class=Bottom_dotted align=center width="25%"><%=StringUtils.nullToStr(info.getPub_date()) %></TD>																					
-													</TR>
-													<%
-													}
-													%>
-					                                <TR>
-					                                	<TD class=Bottom_no_dotted align=right colspan="3"><BR><%=results.getPageScript() %></TD>																					
-													</TR>																																																																											
-													</TBODY>
-												</TABLE>
-											</TD>
-										</TR>
-										</TBODY>
-									</TABLE>
-								</TD>
-							</TR>			
-							
-							</TBODY>
-						</TABLE>
-					</TD>
-				</TR>
-				
-				<TR>
-					<TD vAlign=top align=left height=10>
-						<TABLE cellSpacing=0 cellPadding=0 width="100%" background=index_images/subTab_footcenter.gif border=0>
-							<TBODY>
-							<TR>
-								<TD vAlign=bottom align=left width=10><IMG src="index_images/subTab_footleft.gif"></TD>
-								<TD class=SubTab_bottom width="100%" height=10></TD>
-								<TD vAlign=bottom align=right width=10><IMG src="index_images/subTab_footright.gif"></TD>
-							</TR>
-							</TBODY>
-						</TABLE>
-					</TD>
-				</TR>					
-				
-				</TBODY>
-			</TABLE>
-			
-		</TD>
-	</TR>	
-	
-	</TBODY>
-</TABLE>
+	<%
+	}
+	%>
+</table>
+<table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0">
+	<tr>
+		<td class="page"><%=results.getPageScript() %></td>
+	</tr>
+</table>
 </form>
 </div>
-</BODY>
+</body>
 </html>

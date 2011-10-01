@@ -56,9 +56,6 @@ if(!client_name.equals("")){
 		var objs = document.getElementsByName("fz_vl");
 
 		var hjml_vl = parseFloat(document.getElementById("fm").value);
-		alert(hjml_vl);
-		alert(objs.length);
-		
 		for(var i=0;i<objs.length;i++){
 			var objId = objs[i].id;
 			var arryTemp = objId.split("_");
