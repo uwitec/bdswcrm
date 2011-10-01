@@ -57,7 +57,7 @@ public class SysMsgAction extends BaseAction {
 		LoginInfo info = (LoginInfo)getSession().getAttribute("LOGINUSER");
 		String user_id = info.getUser_id();
 		
-		int rowsPerPage = Constant.PAGE_SIZE;
+		int rowsPerPage = Constant.PAGE_SIZE2;
 		
 		msgPage = sysMsgService.getReadedMsg(user_id, curPage, rowsPerPage);
 		return "success";
