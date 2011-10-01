@@ -313,7 +313,7 @@ function addtabFmMenu(strTitle,strUrl,id){
 			'id':id,
 			'title':strTitle,
 			closable:true,  //通过html载入目标页
-			html:'<iframe scrolling="yes" frameborder="0" width="100%" height="100%" src="' + strUrl + '"></iframe>'
+			html:'<iframe scrolling="no" frameborder="0" width="100%" height="100%" src="' + strUrl + '"></iframe>'
 		});
 	}
 	contentPanel.setActiveTab(n);
