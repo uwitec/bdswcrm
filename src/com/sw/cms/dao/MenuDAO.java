@@ -18,7 +18,7 @@ public class MenuDAO extends JdbcBaseDAO {
 	 */
 	public List getUserYwgzFunc(String user_id,String column_id){
 		String sql = "select * from " +
-				"(select distinct(c.func_name) as func_name,c.url,c.img from user_role a,role_func b,funcs c,column_funcs d " +
+				"(select distinct(c.func_name) as func_name,c.url,c.img,c.func_id from user_role a,role_func b,funcs c,column_funcs d " +
 				"where c.func_id=b.func_id and b.role_id=a.role_id and d.func_id=b.func_id and c.ywflag='1' and  a.user_id='" + user_id + "' and d.column_id='" + column_id + "' order by c.xh) x";
 		
 		return this.getResultList(sql);		
