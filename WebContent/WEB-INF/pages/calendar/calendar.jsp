@@ -44,6 +44,8 @@ if(sMonth.length() == 1){
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
+<script type="text/javascript" src="jquery/jquery.js"></script>
+<script type="text/javascript" src="js/initPageSize.js"></script>
 <style type="text/css">
 .td_css1{background-color:#DDDDDD;}
 .td_css2{background-color:#FFFFFF;}
@@ -93,6 +95,7 @@ function loadMx(){
 </script>
 </head>
 <body onload="loadMx();">
+<div class="rightContentDiv" id="divContent">
 <form name="myform" action="showCalendar.html" method="post">
 	<table cellspacing="0" cellpadding="0" border="0" width="99%" align="center" style="border-bottom: 1 solid #B8B8B8;border-left: 1 solid #B8B8B8;border-right: 1 solid #B8B8B8;border-top: 1 solid #B8B8B8">
 		<tr height="35">
@@ -212,5 +215,6 @@ function loadMx(){
 		<td><iframe id="desc" name="desc" width="100%" onload="dyniframesize('desc');" border="0" frameborder="0" SCROLLING="no"  src=''/></td>
 	</tr>
 </table>
+</div>
 </body>
 </html>

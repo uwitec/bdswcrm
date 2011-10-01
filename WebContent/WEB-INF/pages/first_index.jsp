@@ -23,9 +23,9 @@ ClientWlStatService clientWlStatService = (ClientWlStatService)VS.findValue("cli
 <title>首页</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="jquery/jquery-1.4.2.min.js"></script>
-<script type="text/javascript" src="js/switchCss.js"></script>
-<style type="text/css"><!--
+<script type="text/javascript" src="jquery/jquery.js"></script>
+<script type="text/javascript" src="js/initPageSize.js"></script>
+<style type="text/css">
 .inner{
 	width:48%;
 	margin:2px; 
@@ -57,7 +57,8 @@ ClientWlStatService clientWlStatService = (ClientWlStatService)VS.findValue("cli
 	}	
 </script>
 </head>
-<BODY>
+<body>
+<div class="rightContentDiv" id="divContent">
 <form name="myform" action="listMain.html" method="post">
 <table width="100%" align="center" border="0" cellpadding="0" cellspacing="0">
 	<tr>
@@ -78,8 +79,8 @@ ClientWlStatService clientWlStatService = (ClientWlStatService)VS.findValue("cli
 						String id = StringUtils.nullToStr(info.getId());
 						String title = StringUtils.nullToStr(info.getTitle());
 						String subTitle = title;
-						if(title.length()>22){
-							subTitle = title.substring(0,22) + "...";
+						if(title.length()>20){
+							subTitle = title.substring(0,20) + "...";
 						}
 						String pub_date = StringUtils.nullToStr(info.getPub_date());
 						String jsr = StaticParamDo.getRealNameById(info.getCzr());
@@ -96,7 +97,7 @@ ClientWlStatService clientWlStatService = (ClientWlStatService)VS.findValue("cli
 					}
 					%>
 					<tr>
-					<TD align=right height="23" colspan="4"><a href="javascript:void(0);" onclick="parent.addtabFmMenu('公告列表','listGdNbgg.html','');" class=xxlb>更多...</a>&nbsp;&nbsp;&nbsp;</TD>	
+					<TD align=right height="23" colspan="4"><a href="javascript:void(0);" onclick="parent.addtabFmMenu('公告列表','listGdNbgg.html','gbnbgg');" class=xxlb>更多...</a>&nbsp;&nbsp;&nbsp;</TD>	
 					</tr>															
 				</table>
 			</div>
@@ -115,8 +116,8 @@ ClientWlStatService clientWlStatService = (ClientWlStatService)VS.findValue("cli
 						String id = StringUtils.nullToStr(info.getId());
 						String title = StringUtils.nullToStr(info.getTitle());
 						String subTitle = title;
-						if(title.length()>22){
-							subTitle = title.substring(0,22) + "...";
+						if(title.length()>20){
+							subTitle = title.substring(0,20) + "...";
 						}
 						String cz_date = StringUtils.nullToStr(info.getCz_date());
 						String jsr = StaticParamDo.getRealNameById(info.getCzr());
@@ -130,7 +131,7 @@ ClientWlStatService clientWlStatService = (ClientWlStatService)VS.findValue("cli
 					}
 					%>
 					<tr>
-					<TD align=right height="23" colspan="3"><a href="javascript:void(0);" onclick="parent.addtabFmMenu('备忘录列表','listSyBwl.html','');" class=xxlb>更多...</a>&nbsp;&nbsp;&nbsp;</TD>	
+					<TD align=right height="23" colspan="3"><a href="javascript:void(0);" onclick="parent.addtabFmMenu('备忘录列表','listSyBwl.html','sybwl');" class=xxlb>更多...</a>&nbsp;&nbsp;&nbsp;</TD>	
 					</tr>															
 				</table>
 			</div>
@@ -237,5 +238,6 @@ ClientWlStatService clientWlStatService = (ClientWlStatService)VS.findValue("cli
 	</tr>
 </table>
 </form>
-</BODY>
+</div>
+</body>
 </html>

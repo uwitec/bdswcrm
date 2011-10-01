@@ -49,6 +49,7 @@ if(!store_id.equals("")){
 <script language='JavaScript' src="js/date.js"></script>
 </head>
 <body align="center" >
+<div class="rightContentDiv" id="divContent">
 <TABLE  align="center" cellSpacing=0 cellPadding=0 width="99%" border=0>
 	<TBODY>
 		<TR style="BACKGROUND-COLOR: #dcdcdc;height:45;">
@@ -137,5 +138,6 @@ if(productList != null && productList.size()>0){
 <input type="hidden" name="flag" value="<%=flag %>">
 <input type="hidden" name="state" value="<%=state %>">
 </form>
+</div>
 </body>
 </html>

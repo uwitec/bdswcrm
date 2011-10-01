@@ -7,6 +7,8 @@
 <title>库存初始化</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="jquery/jquery.js"></script>
+<script type="text/javascript" src="js/initPageSize.js"></script>
 <script type="text/javascript">
 	function edit(store_id){
 		var destination = "initMain.html?store_id=" + store_id;
@@ -16,6 +18,7 @@
 </script>
 </head>
 <body>
+<div class="rightContentDiv" id="divContent">
 <form name="myform" action="listInit.html" method="post">
 <table width="100%"  align="center"class="chart_list" cellpadding="0" cellspacing="0">
 	<tr>
@@ -45,5 +48,6 @@
 </table>
 </form>
 说明：库存的初始化工作按库房分别进行，点击“开始一个新的初始化”，开始一个新的初始化，双击列表中的库房信息可以继续原有的初始化工作。
+</div>
 </body>
 </html>

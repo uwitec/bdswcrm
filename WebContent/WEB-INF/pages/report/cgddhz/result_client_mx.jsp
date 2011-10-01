@@ -28,6 +28,8 @@ List list = cgddhzService.getClientMxList(start_date, end_date,dj_id, client_nam
 .Noprint{display:none;}<!--用本样式在打印时隐藏非打印项目-->
 </style> 
 <script language='JavaScript' src="js/date.js"></script>
+<script type="text/javascript" src="jquery/jquery.js"></script>
+<script type="text/javascript" src="js/initPageSize.js"></script>
 <script type="text/javascript">
 	function openWin(url){
 		var fea ='width=800,height=600,left=' + (screen.availWidth-800)/2 + ',top=' + (screen.availHeight-600)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
@@ -37,6 +39,7 @@ List list = cgddhzService.getClientMxList(start_date, end_date,dj_id, client_nam
 </script>
 </head>
 <body align="center" >
+<div class="rightContentDiv" id="divContent">
 <TABLE  align="center" cellSpacing=0 cellPadding=0 width="99%" border=0>
 	<TBODY>
 		<TR style="BACKGROUND-COLOR: #dcdcdc;height:30;">
@@ -136,5 +139,6 @@ if(list != null && list.size()>0){
 <center class="Noprint">
     <input type="button" name="button_fh" value=" 返 回 " onclick="history.go(-1);"> 
 </center>
+</div>
 </body>
 </html>

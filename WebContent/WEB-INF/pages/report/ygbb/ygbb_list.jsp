@@ -24,6 +24,8 @@ List deptList = (List)VS.findValue("depts");
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language='JavaScript' src="js/date.js"></script>
+<script type="text/javascript" src="jquery/jquery.js"></script>
+<script type="text/javascript" src="js/initPageSize.js"></script>
 
 <script type="text/javascript">	
 	function view(id){
@@ -56,6 +58,7 @@ List deptList = (List)VS.findValue("depts");
 </script>
 </head>
 <body >
+<div class="rightContentDiv" id="divContent">
 <form name="myform" action="listYgbb.html" method="post">
 
 <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0">
@@ -158,5 +161,6 @@ List deptList = (List)VS.findValue("depts");
 	</tr>	
 </table>
 </form>
+</div>
 </body>
 </html>

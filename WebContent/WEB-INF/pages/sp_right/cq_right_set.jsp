@@ -23,8 +23,11 @@ session.removeAttribute("MSG");
 <title>超期审批权限设定</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="jquery/jquery.js"></script>
+<script type="text/javascript" src="js/initPageSize.js"></script>
 </head>
 <body>
+<div class="rightContentDiv" id="divContent">
 <form name="myform" action="saveCqSpRightRoles.html" method="post">
 <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0">
 	<tr>
@@ -70,5 +73,6 @@ session.removeAttribute("MSG");
 </table>
 </form>
 说明：超期审批权限与角色关联，选择具有超期审批权限的角色，点击何“保存”按钮即可。
+</div>
 </body>
 </html>

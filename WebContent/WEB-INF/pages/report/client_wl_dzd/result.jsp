@@ -39,6 +39,7 @@ con = "日期：" + start_date + "至" + end_date + "&nbsp;&nbsp; 客户名称�
 </script>
 </head>
 <body align="center" >
+<div class="rightContentDiv" id="divContent">
 <TABLE  align="center" cellSpacing=0 cellPadding=0 width="99%" border=0>
 	<TBODY>
 		<TR style="BACKGROUND-COLOR: #dcdcdc;height:45;">
@@ -372,5 +373,6 @@ if(list != null && list.size()>0){
 <input type="hidden" name="client_name" value="<%=client_name %>">
 <input type="hidden" name="flag" value="<%=flag %>">
 </form>
+</div>
 </body>
 </html>

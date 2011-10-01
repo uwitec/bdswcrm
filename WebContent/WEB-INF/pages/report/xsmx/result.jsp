@@ -75,6 +75,7 @@ if(!xsry_id.equals("")){
 </script>
 </head>
 <body align="center" >
+<div class="rightContentDiv" id="divContent">
 <form name="reportForm" action="getXsmxReportResult.html" method="post">
 	<input type="hidden" name="start_date" value="<%=start_date %>">
 	<input type="hidden" name="end_date" value="<%=end_date %>">
@@ -437,5 +438,6 @@ String strNums = (hj_nums + "").equals("0")?"":hj_nums + "";
 	<input type="button" name="button_refresh" value=" 刷 新 " onclick="pageRefresh();"> &nbsp;&nbsp;
     <input type="button" name="button_fh" value=" 返 回 " onclick="location.href='showXsmxReportCondition.html';"> 
 </center>
+</div>
 </body>
 </html>

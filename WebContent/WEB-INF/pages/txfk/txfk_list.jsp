@@ -8,6 +8,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
+<script type="text/javascript" src="jquery/jquery.js"></script>
+<script type="text/javascript" src="js/initPageSize.js"></script>
 <script type="text/javascript">
 	function edit(id){
 		var destination = "editTxfk.html?id=" + id;
@@ -65,6 +67,7 @@
 </script>
 </head>
 <body>
+<div class="rightContentDiv" id="divContent">
 <form name="myform" action="listTxfk.html" method="post">
 <ww:hidden name="orderName" id="orderName" theme="simple" value="%{orderName}" />
 <ww:hidden name="orderType" id="orderType" theme="simple" value="%{orderType}" />
@@ -142,5 +145,6 @@
 		<td><iframe id="txfkdesc" name="txfkdesc" width="100%" onload="dyniframesize('txfkdesc');" border="0" frameborder="0" SCROLLING="no"  src=''/></td>
 	</tr>
 </table>
+</div>
 </body>
 </html>

@@ -6,6 +6,8 @@
 <title>系统字典维护</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="jquery/jquery.js"></script>
+<script type="text/javascript" src="js/initPageSize.js"></script>
 <script type="text/javascript">
 	function edit(zd_id,xm_id){
 		var destination = "editZdxx.html?zd_id=" + zd_id + "&xm_id=" + xm_id;
@@ -21,6 +23,7 @@
 </script>
 </head>
 <body>
+<div class="rightContentDiv" id="divContent">
 <form name="myform" action="listZdxx.html" method="post">
 <ww:hidden name="zd_id" id="zd_id" value="%{zd_id}" />
 <table width="100%"  align="center"class="chart_list" cellpadding="0" cellspacing="0">
@@ -54,5 +57,6 @@
 	</ww:iterator>
 </table>
 </form>
+</div>
 </body>
 </html>

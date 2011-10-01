@@ -24,6 +24,8 @@ String zz_date2 = (String)VS.findValue("zz_date2");
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
+<script type="text/javascript" src="jquery/jquery.js"></script>
+<script type="text/javascript" src="js/initPageSize.js"></script>
 <script type="text/javascript">
 	
 	function openWin(id){
@@ -86,6 +88,7 @@ String zz_date2 = (String)VS.findValue("zz_date2");
 </script>
 </head>
 <body>
+<div class="rightContentDiv" id="divContent">
 <form name="myform" action="listNbzz.html" method="post">
 <input type="hidden" name="orderType" value="<%=orderType %>">
 <input type="hidden" name="orderName" value="<%=orderName %>">
@@ -163,5 +166,6 @@ String zz_date2 = (String)VS.findValue("zz_date2");
 	</tr>
 </table>
 </form>
+</div>
 </body>
 </html>

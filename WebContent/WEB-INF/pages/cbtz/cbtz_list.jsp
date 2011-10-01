@@ -6,6 +6,8 @@
 <title>考核指标调整</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="jquery/jquery.js"></script>
+<script type="text/javascript" src="js/initPageSize.js"></script>
 <script type="text/javascript">
 	function queryProduct(){
 		if(document.getElementById("dj_id").value == ""){
@@ -38,6 +40,7 @@
 </script>
 </head>
 <body>
+<div class="rightContentDiv" id="divContent">
 <form name="myform" action="queryProduct.html" method="post">
 <table width="100%"  align="center"class="chart_list" cellpadding="0" cellspacing="0">
 	<tr>
@@ -87,5 +90,6 @@
 	</ww:iterator>
 </table>
 </form>
+</div>
 </body>
 </html>

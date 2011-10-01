@@ -28,6 +28,7 @@ Map cqtsMap = (Map)VS.findValue("cqtsMap");
 </style> 
 </head>
 <body align="center">
+<div class="rightContentDiv" id="divContent">
 <TABLE  align="center" cellSpacing=0 cellPadding=0 width="99%" border=0>
 	<TBODY>
 		<TR style="BACKGROUND-COLOR: #dcdcdc;height:45;">
@@ -105,5 +106,6 @@ if(userList != null && userList.size() > 0){
 	<input type="button" name="button_print" value=" 打 印 " onclick="window.print();"> &nbsp;&nbsp;
     <input type="button" name="button_fh" value=" 返 回 " onclick="history.go(-1);"> 
 </center>
+</div>
 </body>
 </html>

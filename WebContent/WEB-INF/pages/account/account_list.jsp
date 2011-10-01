@@ -17,6 +17,8 @@ List accountList = (List)VS.findValue("accountList");
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language='JavaScript' src="js/date.js"></script>
+<script type="text/javascript" src="jquery/jquery.js"></script>
+<script type="text/javascript" src="js/initPageSize.js"></script>
 <script type="text/javascript">
 	
 	function openWin(id){
@@ -70,6 +72,7 @@ List accountList = (List)VS.findValue("accountList");
 </script>
 </head>
 <body oncontextmenu="return false;" >
+<div class="rightContentDiv" id="divContent">
 <form name="myform" action="listAccount.html" method="post">
 <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0">
 	<tr>
@@ -121,5 +124,6 @@ List accountList = (List)VS.findValue("accountList");
 	%>
 </table>
 </form>
+</div>
 </body>
 </html>

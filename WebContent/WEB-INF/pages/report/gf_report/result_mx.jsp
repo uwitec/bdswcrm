@@ -29,6 +29,8 @@ if(!xsry_id.equals("")){
 <title>零售工分统计——明细</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/report.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="jquery/jquery.js"></script>
+<script type="text/javascript" src="js/initPageSize.js"></script>
 <script type="text/javascript">
 	function openWin(url){
 		var fea ='width=850,height=650,left=' + (screen.availWidth-850)/2 + ',top=' + (screen.availHeight-650)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
@@ -41,6 +43,7 @@ if(!xsry_id.equals("")){
 </style> 
 </head>
 <body align="center" >
+<div class="rightContentDiv" id="divContent">
 <form name="reportForm" action="">
 	<input type="hidden" name="start_date" value="<%=start_date %>">
 	<input type="hidden" name="end_date" value="<%=end_date %>">
@@ -112,5 +115,6 @@ if(resultMxList != null && resultMxList.size()>0){
 	<input type="button" name="button_print" value=" 打 印 " onclick="window.print();"> &nbsp;&nbsp;
     <input type="button" name="button_fh" value=" 返 回 " onclick="history.go(-1);"> 
 </center>
+</div>
 </body>
 </html>

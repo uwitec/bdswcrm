@@ -24,6 +24,8 @@ String iscs_flag = (String)VS.findValue("iscs_flag");
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language='JavaScript' src="js/date.js"></script>
+<script type="text/javascript" src="jquery/jquery.js"></script>
+<script type="text/javascript" src="js/initPageSize.js"></script>
 <script type="text/javascript">
 	
 	//打开设置存初始数量窗口
@@ -79,6 +81,7 @@ String iscs_flag = (String)VS.findValue("iscs_flag");
 </script>
 </head>
 <body >
+<div class="rightContentDiv" id="divContent">
 <form name="myform" action="listProductKc.html" method="post">
 <input type="hidden" name="orderType" value="<%=orderType %>">
 <input type="hidden" name="orderName" value="<%=orderName %>">
@@ -140,5 +143,6 @@ String iscs_flag = (String)VS.findValue("iscs_flag");
 商品库存初始分为两种情况，一、强制序列号商品，需要输入序列号来初始库存数量；二、不需要强制序列号商品，只需输入初始数量即可。<BR>
 系统初始工作结束后商品库存初始数据只可查看，不能修改。
 </form>
+</div>
 </body>
 </html>

@@ -20,6 +20,8 @@ String yfrq2 = (String)VS.findValue("yfrq2");
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language='JavaScript' src="js/date.js"></script>
+<script type="text/javascript" src="jquery/jquery.js"></script>
+<script type="text/javascript" src="js/initPageSize.js"></script>
 <script type="text/javascript">
 	
 	function openMx(gysbh){
@@ -46,6 +48,7 @@ String yfrq2 = (String)VS.findValue("yfrq2");
 </script>
 </head>
 <body >
+<div class="rightContentDiv" id="divContent">
 <form name="myform" action="listYftj.html" method="post">
 <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0">
 	<tr>
@@ -99,5 +102,6 @@ String yfrq2 = (String)VS.findValue("yfrq2");
 	</tr>	
 </table>
 </form>
+</div>
 </body>
 </html>

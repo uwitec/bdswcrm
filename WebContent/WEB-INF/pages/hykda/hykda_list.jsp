@@ -24,6 +24,8 @@ String state = StringUtils.nullToStr(VS.findValue("state"));
 <title>会员卡档案</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="jquery/jquery.js"></script>
+<script type="text/javascript" src="js/initPageSize.js"></script>
 <script type="text/javascript">
 	function openWin(id){
 		var destination = "viewHykda.html?id="+id;
@@ -67,6 +69,7 @@ String state = StringUtils.nullToStr(VS.findValue("state"));
 </script>
 </head>
 <body >
+<div class="rightContentDiv" id="divContent">
 <form name="myform" action="listHykda.html" method="post">
 <input type="hidden" name="orderType" value="<%=orderType %>">
 <input type="hidden" name="orderName" value="<%=orderName %>">
@@ -147,5 +150,6 @@ String state = StringUtils.nullToStr(VS.findValue("state"));
 	</tr>
 </table>
 </form>
+</div>
 </body>
 </html>

@@ -30,6 +30,8 @@ List userList = (List)VS.findValue("userList");
 <script language='JavaScript' src="js/date.js"></script>
 <script language='JavaScript' src="js/selJsr.js"></script>
 <script type="text/javascript" src="js/prototype-1.4.0.js"></script>
+<script type="text/javascript" src="jquery/jquery.js"></script>
+<script type="text/javascript" src="js/initPageSize.js"></script>
 <style>
 	.selectTip{
 		background-color:#009;
@@ -83,6 +85,7 @@ List userList = (List)VS.findValue("userList");
 </script>
 </head>
 <body onload="initFzrTip();">
+<div class="rightContentDiv" id="divContent">
 <form name="myform" action="listClientbb.html" method="post">
 <input type="hidden" name="orderType" value="<%=orderType %>">
 <input type="hidden" name="orderName" value="<%=orderName %>">
@@ -155,5 +158,6 @@ List userList = (List)VS.findValue("userList");
 	</tr>
 </table>
 </form>
+</div>
 </body>
 </html>

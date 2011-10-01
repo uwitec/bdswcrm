@@ -50,6 +50,7 @@ if(!account_type.equals("")){
 </script>
 </head>
 <body align="center" >
+<div class="rightContentDiv" id="divContent">
 <TABLE  align="center" cellSpacing=0 cellPadding=0 width="99%" border=0>
 	<TBODY>
 		<TR style="BACKGROUND-COLOR: #dcdcdc;height:45;">
@@ -143,4 +144,5 @@ if(accountList != null && accountList.size()>0){
     <input type="button" name="button_fh" value=" 返 回 " onclick="location.href='showCashBankCondition.html';"> 
 </center>
 </body>
+</div>
 </html>

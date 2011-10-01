@@ -62,6 +62,7 @@ if(!product_xh.equals("")){
 </style>
 </head>
 <body align="center" >
+<div class="rightContentDiv" id="divContent">
 <form name="myform" action="getHpxsMlMxResult.html" method="post">
 <input type="hidden" name="product_id" value="">
 <input type="hidden" name="start_date" value="<%=start_date %>">
@@ -168,5 +169,6 @@ if(resultList != null && resultList.size()>0){
 	<input type="button" name="button_print" value=" 打 印 " onclick="window.print();"> &nbsp;&nbsp;
     <input type="button" name="button_fh" value=" 返 回 " onclick="history.go(-1);"> 
 </center>
+</div>
 </body>
 </html>

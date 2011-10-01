@@ -9,14 +9,14 @@ if(msg != null && !msg.equals("")){
 	out.print("<script>alert(\"" + msg + "\");</script>");
 }
 %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 <head>
 <title>费用类别</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <link href="tree/menu.css" rel="stylesheet" type="text/css">
-
+<script type="text/javascript" src="jquery/jquery.js"></script>
+<script type="text/javascript" src="js/initPageSize.js"></script>
 <script language="JavaScript">
 treedata = new Array();
 path = "";
@@ -38,7 +38,7 @@ function menu(id){
 	for(; i<treedata.length; i++){					//判断有无此节点
 		if(treedata[i][1]==id)	currdata[currdata.length] = treedata[i];
 	}
-	
+	var onmouseup = null;
 	for(var i=0; i<currdata.length; i++){					//遍历数组，执行判断
 		if(itemExists(currdata[i][0])){						//判断是否有子节点
 			if(i==currdata.length-1){			// 最后一个
@@ -223,16 +223,16 @@ function fresh() {
 </head>
 
 <body onLoad="window_onload();" onClick="showoff();" align="center">
+<div class="rightContentDiv" id="divContent">
 <div id="mlay" style="position:absolute;display:none;cursor:default;" onClick="return false;"></div>
-
-<form name="myform" action="listFyType.html" method="post">
-<input type="hidden" name="parent_id" id="parent_id" value="">
-</form>
 <table width="100%" border="0" align="center" class="chart_list"
 	cellpadding="0" cellspacing="0">
 	<tr>
 		<td class="csstitle">&nbsp;&nbsp;&nbsp;&nbsp;<b>费用类别维护</b></td>
 	</tr>
+<form name="myform" action="listFyType.html" method="post">
+<input type="hidden" name="parent_id" id="parent_id" value="">
+</form>	
 </table>
 <table width="100%" border="0" align="center" cellpadding="0"
 	cellspacing="0">
@@ -247,6 +247,6 @@ function fresh() {
 		<td width="1%">&nbsp;</td>
 	</tr>
 </table>
-
+</div>
 </body>
 </html>

@@ -35,6 +35,8 @@ String orderType = (String)VS.findValue("orderType");
 <script language='JavaScript' src="js/selClient.js"></script>
 <script language='JavaScript' src="js/selJsr.js"></script>
 <script type="text/javascript" src="js/prototype-1.4.0.js"></script>
+<script type="text/javascript" src="jquery/jquery.js"></script>
+<script type="text/javascript" src="js/initPageSize.js"></script>
 <script type="text/javascript">
 	
 	function openWin(id){
@@ -117,6 +119,7 @@ String orderType = (String)VS.findValue("orderType");
 </script>
 </head>
 <body onload="initFzrTip();initClientTip();">
+<div class="rightContentDiv" id="divContent">
 <form name="myform" action="listXsd.html" method="post">
 <input type="hidden" name="orderType" value="<%=orderType %>">
 <input type="hidden" name="orderName" value="<%=orderName %>">
@@ -264,6 +267,6 @@ String orderType = (String)VS.findValue("orderType");
 		<td><iframe id="xsddesc" name="xsddesc" width="100%" onload="dyniframesize('xsddesc');" border="0" frameborder="0" SCROLLING="no"  src=''/></td>
 	</tr>
 </table>
-
+</div>
 </body>
 </html>

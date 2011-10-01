@@ -10,8 +10,11 @@
 .Noprint{display:none;}<!--用本样式在打印时隐藏非打印项目-->
 </style> 
 <script language='JavaScript' src="js/date.js"></script>
+<script type="text/javascript" src="jquery/jquery.js"></script>
+<script type="text/javascript" src="js/initPageSize.js"></script>
 </head>
 <body align="center" >
+<div class="rightContentDiv" id="divContent">
 <ww:form name="myform" action="getMothlyGainList" method="post" theme="simple">
 <TABLE  align="center" cellSpacing=0 cellPadding=0 width="99%" border=0>
 	<TBODY>
@@ -140,5 +143,6 @@
 　四、营业费用 ＝ 营业费用 ＋ 摊销付款<BR>
 　五、营业外收入 ＝ 其它收入 ＋ 商品报溢收入 ＋ 往来调账收入 ＋ 存货调价收入<BR>
 　六、营业外支出 ＝ 商品报损支出 ＋ 往来调账支出<BR>
+</div>
 </body>
 </html>

@@ -17,6 +17,8 @@ List lxList = (List)VS.findValue("lxlist");
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language='JavaScript' src="js/date.js"></script>
+<script type="text/javascript" src="jquery/jquery.js"></script>
+<script type="text/javascript" src="js/initPageSize.js"></script>
 <script type="text/javascript">
 	
  
@@ -59,6 +61,7 @@ List lxList = (List)VS.findValue("lxlist");
 </script>
 </head>
 <body oncontextmenu="return false;" >
+<div class="rightContentDiv" id="divContent">
 <form name="myform" action="listlx.html" method="post">
 <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0">
 	<tr>
@@ -98,5 +101,6 @@ List lxList = (List)VS.findValue("lxlist");
 	%>
 </table>
 </form>
+</div>
 </body>
 </html>

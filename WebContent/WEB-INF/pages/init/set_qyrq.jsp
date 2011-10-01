@@ -8,6 +8,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
+<script type="text/javascript" src="jquery/jquery.js"></script>
+<script type="text/javascript" src="js/initPageSize.js"></script>
 <script type="text/javascript">
 	function setQyrq(){
 		var curDate = "<ww:property value="%{sysInitSet.qyrq}"/>";
@@ -81,6 +83,7 @@
 </script>
 </head>
 <body>
+<div class="rightContentDiv" id="divContent">
 <form name="myform" action="setQyrq.html" method="post">
 <table width="100%"  align="center"class="chart_list" cellpadding="0" cellspacing="0">
 	<tr>
@@ -143,5 +146,6 @@
 </form>
 注：系统的初始工作必须按照初始导航所描述的步骤进行，在完成第八步“设置系统启用日期”后，系统即可正始使用，往来初始、库存初始可以和使用同时进行，所有的初始工作完成后，请点击第十一步的“完成初始化”链接，完成系统的初始化工作。
 <iframe name="hiddenFrm" width="0" height="0"/>
+</div>
 </body>
 </html>

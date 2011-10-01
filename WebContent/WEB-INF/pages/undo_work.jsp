@@ -39,6 +39,8 @@ List confirmKfdbList = (List)VS.findValue("confirmKfdbList");
 <title>待办工作</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="jquery/jquery.js"></script>
+<script type="text/javascript" src="js/initPageSize.js"></script>
 <style type="text/css">
 .inner{
 	width:48%;
@@ -47,7 +49,7 @@ List confirmKfdbList = (List)VS.findValue("confirmKfdbList");
 	text-align:left;
 	display:inline ;
 	float:left;
-	height: 290px;
+	height: 240px;
 	overflow-y: auto;
 	overflow-x: none;
 }
@@ -124,6 +126,7 @@ List confirmKfdbList = (List)VS.findValue("confirmKfdbList");
 </script>
 </head>
 <body>
+<div class="rightContentDiv" id="divContent">
 <form name="myform" action="undoWork.html" method="post">
 <table width="100%" align="center" border="0" cellpadding="0" cellspacing="0">
 	<tr>
@@ -337,7 +340,7 @@ List confirmKfdbList = (List)VS.findValue("confirmKfdbList");
 		</td>
 	</tr>
 </table>
-
 </form>
+</div>
 </body>
 </html>

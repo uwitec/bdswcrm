@@ -61,6 +61,7 @@ function getMx(xsry){
 </style>
 </head>
 <body align="center" >
+<div class="rightContentDiv" id="divContent">
 <form name="reportForm" action="getXsmlMxXsryResult.html" method="post">
 	<input type="hidden" name="start_date" value="<%=start_date %>">
 	<input type="hidden" name="end_date" value="<%=end_date %>">
@@ -153,5 +154,6 @@ if(results != null && results.size()>0){
 	<input type="button" name="button_print" value=" 打 印 " onclick="window.print();"> &nbsp;&nbsp;
     <input type="button" name="button_fh" value=" 返 回 " onclick="history.go(-1);"> 
 </center>
+</div>
 </body>
 </html>

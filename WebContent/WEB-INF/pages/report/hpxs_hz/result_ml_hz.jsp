@@ -68,6 +68,7 @@ if(!product_xh.equals("")){
 </style>
 </head>
 <body align="center" >
+<div class="rightContentDiv" id="divContent">
 <form name="myform" action="getHpxsMlMxResult.html" method="post">
 <input type="hidden" name="product_id" value="">
 <input type="hidden" name="start_date" value="<%=start_date %>">
@@ -176,5 +177,6 @@ if(resultList != null && resultList.size()>0){
 <input type="hidden" name="end_date" value="<%=end_date %>">
 <input type="hidden" name="xsry_id" value="<%=xsry_id %>">
 </form>
+</div>
 </body>
 </html>

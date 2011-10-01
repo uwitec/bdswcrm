@@ -35,6 +35,8 @@ if(!dj_id.equals("")){
 .Noprint{display:none;}<!--用本样式在打印时隐藏非打印项目-->
 </style> 
 <script language='JavaScript' src="js/date.js"></script>
+<script type="text/javascript" src="jquery/jquery.js"></script>
+<script type="text/javascript" src="js/initPageSize.js"></script>
 <script type="text/javascript">
 	function openWin(dj_id,start_date,end_date,client_name){
 		//var fea ='width=' + screen.availWidth + ',height=' + (screen.availHeight-25) + ',left=0,top=0,directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
@@ -45,6 +47,7 @@ if(!dj_id.equals("")){
 </script>
 </head>
 <body align="center" >
+<div class="rightContentDiv" id="divContent">
 <TABLE  align="center" cellSpacing=0 cellPadding=0 width="99%" border=0>
 	<TBODY>
 		<TR style="BACKGROUND-COLOR: #dcdcdc;height:45;">
@@ -153,5 +156,6 @@ if(list != null && list.size()>0){
 	<input type="button" name="button_print" value=" 打 印 " onclick="window.print();"> &nbsp;&nbsp;
     <input type="button" name="button_fh" value=" 返 回 " onclick="history.go(-1);"> 
 </center>
+</div>
 </body>
 </html>

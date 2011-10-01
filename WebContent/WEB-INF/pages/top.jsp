@@ -147,7 +147,7 @@ if(flag == null){
 	
 	//打开已读消息窗口
 	function shoYdMsg(){
-		parent.addtabFmMenu('已读消息','listReadedMsg.html','');		
+		parent.addtabFmMenu('已读消息','listReadedMsg.html','readeMsg');		
 	}		
 	
 	//隐藏菜单

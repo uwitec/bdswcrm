@@ -20,6 +20,8 @@ String client_name = (String)VS.findValue("client_name");
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language='JavaScript' src="js/date.js"></script>
+<script type="text/javascript" src="jquery/jquery.js"></script>
+<script type="text/javascript" src="js/initPageSize.js"></script>
 <script type="text/javascript">
 	
 	function openWin(id){
@@ -55,6 +57,7 @@ String client_name = (String)VS.findValue("client_name");
 </script>
 </head>
 <body >
+<div class="rightContentDiv" id="divContent">
 <form name="myform" action="listClientWlInit.html" method="post">
 <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0">
 	<tr>
@@ -114,5 +117,6 @@ String client_name = (String)VS.findValue("client_name");
 </table>
 </form>
 <font color="red">说明：如果添加初始信息列表没有反映，请检查系统启用日期是否设置。</font>
+</div>
 </body>
 </html>

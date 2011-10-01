@@ -22,6 +22,8 @@ String state = (String)VS.findValue("state");
 <title>发卡管理</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="jquery/jquery.js"></script>
+<script type="text/javascript" src="js/initPageSize.js"></script>
 <script type="text/javascript">
 	function doTh(id){
 		if(confirm("确定要退卡吗？退卡原有的会员信息将被注销！")){
@@ -57,6 +59,7 @@ String state = (String)VS.findValue("state");
 </script>
 </head>
 <body >
+<div class="rightContentDiv" id="divContent">
 <form name="myform" action="listHykfk.html" method="post">
 <input type="hidden" name="orderType" value="<%=orderType %>">
 <input type="hidden" name="orderName" value="<%=orderName %>">
@@ -128,5 +131,6 @@ String state = (String)VS.findValue("state");
 	</tr>
 </table>
 </form>
+</div>
 </body>
 </html>

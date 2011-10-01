@@ -1,5 +1,5 @@
 BODY {
-	FONT-SIZE: 12px; MARGIN: 0px; SCROLLBAR-HIGHLIGHT-COLOR: #f5f9ff; SCROLLBAR-SHADOW-COLOR: #828282; SCROLLBAR-3DLIGHT-COLOR: #828282; SCROLLBAR-ARROW-COLOR: #797979; SCROLLBAR-TRACK-COLOR: #ececec; FONT-FAMILY: "Arial", "Helvetica", "sans-serif"; SCROLLBAR-DARKSHADOW-COLOR: #ffffff
+	FONT-SIZE: 12px; MARGIN: 0px; FONT-FAMILY: "Arial", "Helvetica", "sans-serif"; SCROLLBAR-DARKSHADOW-COLOR: #ffffff
 }
 TD {
 	FONT-SIZE: 12px; MARGIN: 2px;FONT-FAMILY: "Arial", "Helvetica", "sans-serif";
@@ -22,7 +22,10 @@ TH {
 .ReportItem {
 	BORDER-LEFT-COLOR: #000000; BORDER-TOP-COLOR: #000000; BORDER-BOTTOM: #000000 1px solid; HEIGHT: 20px; TEXT-ALIGN: left; BORDER-RIGHT: #000000 1px solid;padding-left:4px;
 }
-.ReportItemXh {
+.ReportItemXh{
+	BORDER-LEFT-COLOR: #000000; BORDER-TOP-COLOR: #000000; BORDER-BOTTOM: #000000 1px solid; HEIGHT: 20px; TEXT-ALIGN: center; BORDER-RIGHT: #000000 1px solid;
+}
+.ReportItemXH{
 	BORDER-LEFT-COLOR: #000000; BORDER-TOP-COLOR: #000000; BORDER-BOTTOM: #000000 1px solid; HEIGHT: 20px; TEXT-ALIGN: center; BORDER-RIGHT: #000000 1px solid;
 }
 .ReportItemMoney {
@@ -34,16 +37,16 @@ TH {
 .serialItme {
 	BORDER-LEFT-COLOR: #000000; BORDER-TOP-COLOR: #000000; BORDER-BOTTOM: #000000 1px solid; HEIGHT: 22px; TEXT-ALIGN: center; BORDER-RIGHT: #000000 1px solid
 }
-A.noline:link {
+A:link {
 	FONT-SIZE: 9pt; COLOR: #000000; TEXT-DECORATION: none
 }
-A.noline:visited {
+A:visited {
 	FONT-SIZE: 9pt; COLOR: #000000; TEXT-DECORATION: none
 }
-A.noline:hover {
+A:hover {
 	FONT-SIZE: 9pt; COLOR: #198af8; TEXT-DECORATION: none
 }
-A.noline:active {
+A:active {
 	FONT-SIZE: 9pt; COLOR: #0066b3; TEXT-DECORATION: none
 }
 table{
@@ -54,4 +57,12 @@ tr.alt td {
 }
 tr.over td {
 	background:#bcd4ec; /*这个将是鼠标高亮行的背景色*/
+}
+.rightContentDiv{
+	width:100%;
+	text-align:left;
+	display:inline ;
+	float:left;
+	overflow-y: auto;
+	overflow-x: none; 
 }

@@ -23,8 +23,11 @@ session.removeAttribute("MSG");
 <title>价格审批权限设定</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="jquery/jquery.js"></script>
+<script type="text/javascript" src="js/initPageSize.js"></script>
 </head>
 <body>
+<div class="rightContentDiv" id="divContent">
 <form name="myform" action="saveJgSpRightRoles.html" method="post">
 <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0">
 	<tr>
@@ -70,5 +73,6 @@ session.removeAttribute("MSG");
 </table>
 </form>
 说明：销售单商品价格低于商品分销限价，零售单商品低于零售限价，订单须经审核才能提交，审核权限与角色关联，在此进行设置。
+</div>
 </body>
 </html>

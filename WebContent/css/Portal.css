@@ -826,7 +826,7 @@ p.NormalRedThin
 {
     background-image: url(../images/button-m.gif);
 	width: 70px; 
-    CURSOR: hand;
+    CURSOR: pointer;
     height:20px;
 	border:0px;
 }
@@ -834,7 +834,7 @@ p.NormalRedThin
 {
 	background-image: url(../images/button-l.gif);
 	width: 45px;
-	CURSOR: hand;
+	CURSOR: pointer;
 	height:20px;
 	border:0px;
 }

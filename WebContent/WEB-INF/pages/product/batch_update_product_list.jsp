@@ -7,6 +7,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/reportJust.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="js/validateform.js"></script>
+<script type="text/javascript" src="jquery/jquery.js"></script>
+<script type="text/javascript" src="js/initPageSize.js"></script>
 <script type="text/javascript">
 	function tj(){
 		if(doValidate(reportForm)){
@@ -18,6 +20,7 @@
 </script>
 </head>
 <body align="center" >
+<div class="rightContentDiv" id="divContent">
 <TABLE  align="center" cellSpacing=0 cellPadding=0 width="99%" border=0>
 	<TBODY>
 		<TR style="BACKGROUND-COLOR: #dcdcdc;height:45;">
@@ -70,5 +73,7 @@
     <input type="button" name="button_fh" value=" 返 回 " onclick="location.href='batchUpdateProductCon.html';"> 
 </center>
 </form>
+</BR>
+</div>
 </body>
 </html>

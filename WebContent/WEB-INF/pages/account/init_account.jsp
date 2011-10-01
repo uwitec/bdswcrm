@@ -17,6 +17,8 @@ String iscs_flag = (String)VS.findValue("iscs_flag");
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language='JavaScript' src="js/date.js"></script>
+<script type="text/javascript" src="jquery/jquery.js"></script>
+<script type="text/javascript" src="js/initPageSize.js"></script>
 <script type="text/javascript">
 	
 	function openWin(id){
@@ -39,6 +41,7 @@ String iscs_flag = (String)VS.findValue("iscs_flag");
 </script>
 </head>
 <body>
+<div class="rightContentDiv" id="divContent">
 <form name="myform" action="initAccount.html" method="post">
 <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0">
 	<tr>
@@ -74,5 +77,6 @@ String iscs_flag = (String)VS.findValue("iscs_flag");
 </table>
 </form>
 注：在系统正式启用前请首先初始各账号金额，没有初始化的账号金额的默认为0。双击每行数据，初始化相应账号金额，系统初始工作结束后不能再次初始化账号金额。
+</div>
 </body>
 </html>

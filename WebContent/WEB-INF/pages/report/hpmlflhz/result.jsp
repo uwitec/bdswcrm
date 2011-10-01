@@ -73,6 +73,7 @@ if(!client_name.equals("")){
 </script>
 </head>
 <body align="center" onload="onloadTotal();">
+<div class="rightContentDiv" id="divContent">
 <form name="refreshFormMain" action="getHpmlflHzResult.html" method="post">
 <input type="hidden" name="client_name" value="<%=client_name %>">
 <input type="hidden" name="start_date" value="<%=start_date %>">
@@ -188,5 +189,6 @@ if(resultList != null && resultList.size()>0){
 	<input type="button" name="button_print" value=" 打 印 " onclick="window.print();"> &nbsp;&nbsp;
     <input type="button" name="button_fh" value=" 返 回 " onclick="location.href='showHpmlflHzCon.html';"> 
 </center>
+</div>
 </body>
 </html>

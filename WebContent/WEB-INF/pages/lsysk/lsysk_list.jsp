@@ -26,6 +26,8 @@ String ys_type = (String)VS.findValue("ys_type");
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
+<script type="text/javascript" src="jquery/jquery.js"></script>
+<script type="text/javascript" src="js/initPageSize.js"></script>
 <script type="text/javascript">
 	
 	function openWin(id){
@@ -104,6 +106,7 @@ String ys_type = (String)VS.findValue("ys_type");
 </script>
 </head>
 <body>
+<div class="rightContentDiv" id="divContent">
 <form name="myform" action="listLsysk.html" method="post">
 <input type="hidden" name="orderType" value="<%=orderType %>">
 <input type="hidden" name="orderName" value="<%=orderName %>">
@@ -216,5 +219,6 @@ String ys_type = (String)VS.findValue("ys_type");
 </table>
 </form>
 <font color="red">说明：退款操作默认以现金方式全额退款，收款时刷卡产生的手续费可以作其它收入冲抵。</font>
+</div>
 </body>
 </html>

@@ -23,6 +23,8 @@ String state = (String)VS.findValue("state");
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language='JavaScript' src="js/date.js"></script>
+<script type="text/javascript" src="jquery/jquery.js"></script>
+<script type="text/javascript" src="js/initPageSize.js"></script>
 <script type="text/javascript">
 	function openWin(id){
 		var destination = "viewHykzz.html?id="+id;
@@ -82,6 +84,7 @@ String state = (String)VS.findValue("state");
 </script>
 </head>
 <body >
+<div class="rightContentDiv" id="divContent">
 <form name="myform" action="listHykzz.html" method="post">
 <input type="hidden" name="orderType" value="<%=orderType %>">
 <input type="hidden" name="orderName" value="<%=orderName %>">
@@ -154,5 +157,6 @@ String state = (String)VS.findValue("state");
 	</tr>
 </table>
 </form>
+</div>
 </body>
 </html>

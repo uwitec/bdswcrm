@@ -51,12 +51,12 @@ var contentPanel = new Ext.TabPanel({
 		id:'homePage',
 		title:' 首　页 ',
 		autoScroll:true,
-		html:'<iframe scrolling="yes" frameborder="0" width="100%" height="100%" src="listMain.html"></iframe>'
+		html:'<iframe scrolling="yes" name="pageIndex" id="pageIndex" frameborder="0" width="100%" height="100%" src="listMain.html"></iframe>'
 	},{
 		id:'undoWord',
 		title:'待办工作',
 		autoScroll:true,
-		html:'<iframe scrolling="yes" frameborder="0" width="100%" height="100%" src="undoWork.html"></iframe>'
+		html:'<iframe scrolling="yes" name="pageUndowork" id="pageUndowork" frameborder="0" width="100%" height="100%" src="undoWork.html"></iframe>'
 	}]
 });
 
@@ -306,14 +306,14 @@ Ext.onReady(function(){
 	});
 });
 
-function addtabFmMenu(strTitle,strUrl,param){
+function addtabFmMenu(strTitle,strUrl,id){
 	var n = contentPanel.getComponent("readedMsg");
 	if (!n) { //判断是否已经打开该面板
 		n = contentPanel.add({
-			'id':"readedMsg",
-			'title':"已读消息",
+			'id':id,
+			'title':strTitle,
 			closable:true,  //通过html载入目标页
-			html:'<iframe scrolling="yes" frameborder="0" width="100%" height="100%" src="listReadedMsg.html"></iframe>'
+			html:'<iframe scrolling="yes" frameborder="0" width="100%" height="100%" src="' + strUrl + '"></iframe>'
 		});
 	}
 	contentPanel.setActiveTab(n);

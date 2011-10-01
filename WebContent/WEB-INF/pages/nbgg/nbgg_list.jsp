@@ -19,6 +19,8 @@ Page results = (Page)VS.findValue("nbggPage");
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language='JavaScript' src="js/date.js"></script>
+<script type="text/javascript" src="jquery/jquery.js"></script>
+<script type="text/javascript" src="js/initPageSize.js"></script>
 <script type="text/javascript">
 	
 	function openWin(id){
@@ -51,6 +53,7 @@ Page results = (Page)VS.findValue("nbggPage");
 </head>
 <body >
 <form name="myform" action="listNbgg.html" method="post">
+<div class="rightContentDiv" id="divContent">
 <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0">
 	<tr>
 		<td class="csstitle" align="left" width="75%">&nbsp;&nbsp;&nbsp;&nbsp;<b>内部公告</b></td>
@@ -98,5 +101,6 @@ Page results = (Page)VS.findValue("nbggPage");
 	</tr>
 </table>
 </form>
+</div>
 </body>
 </html>

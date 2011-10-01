@@ -6,11 +6,6 @@ body
 	margin-bottom: 0px;
 	margin-left: 0px;
 	text-indent: 2pt;
-	SCROLLBAR-HIGHLIGHT-COLOR: #f5f9ff;
-	SCROLLBAR-SHADOW-COLOR: #828282;
-	SCROLLBAR-3DLIGHT-COLOR: #828282; 
-	SCROLLBAR-ARROW-COLOR: #797979; 
-	SCROLLBAR-TRACK-COLOR: #ececec; 
 }
 input
 {
@@ -41,27 +36,31 @@ textarea
 A.xxlb:link
 {
     color:#000000;
+	text-decoration: none; 
 }
 A.xxlb:active                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
 {
-    COLOR:#696969;
+    COLOR:#000000;
     FONT-SIZE: 9pt;
+	text-decoration: none;     
 }
 A.xxlb:visited
 {
 	color:#696969;
+	text-decoration: none; 	
 
 }
 A.xxlb:hover
 {
     COLOR:#000000;
-    FONT-SIZE: 9pt; 
+    FONT-SIZE: 9pt;     
+	text-decoration: none;     
 }
 .css_button
 {
 	background-image: url(../images/button-l.gif);
 	width: 45px;
-	CURSOR: hand;
+	CURSOR: pointer;
 	height:20px;
 	border:0px;
 }
@@ -69,7 +68,7 @@ A.xxlb:hover
 {
     background-image: url(../images/button-m.gif);
 	width: 70px; 
-    CURSOR: hand;
+    CURSOR: pointer;
     height:20px;
 	border:0px;
 }
@@ -77,7 +76,7 @@ A.xxlb:hover
 {
     background-image: url(../images/button-c.gif);
 	width: 100px; 
-    CURSOR: hand;
+    CURSOR: pointer;
     height:20px;
 	border:0px;
 }
@@ -85,7 +84,7 @@ A.xxlb:hover
 {
     background-image: url(../images/button-130.gif);
 	width: 130px; 
-    CURSOR: hand;
+    CURSOR: pointer;
     height:20px;
 	border:0px;
 }
@@ -205,7 +204,7 @@ table.chart_list thead td
 	font-size: 12px;
 	border-right:solid 1px #D8D8D8;
 	border-bottom:solid 1px #D8D8D8;
-	cursor: hand;
+	cursor: pointer;
 }
 table.chart_list td.csstitle
 {
@@ -263,7 +262,7 @@ table.chart_list tr.a1
 	height:25px;	
 	text-align: center ;
 	font-size: 12px;
-	cursor:hand;
+	cursor:pointer;
 }
 table.chart_list tr.a2
 {
@@ -271,7 +270,7 @@ table.chart_list tr.a2
 	height:25px;	
 	text-align: center ;
 	font-size: 12px;
-	cursor:hand;
+	cursor:pointer;
 }
 table.chart_list td.page
 {
@@ -309,4 +308,12 @@ table{
 .selectTip{
 	background-color:#009000;
 	color:#fff000;
-	}
+}
+.rightContentDiv{
+	width:100%;
+	text-align:left;
+	display:inline ;
+	float:left;
+	overflow-y: auto;
+	overflow-x: none; 
+}
