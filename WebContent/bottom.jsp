@@ -46,6 +46,33 @@ if(onlineList != null){
 		freshOnlineUser();
 		setTimeout("getOnlineNums()",20*1000);
 	}
+	function isIE(){ //ie?
+		  if (window.navigator.userAgent.toLowerCase().indexOf("msie") >= 1)
+		  	return true;
+		  else
+		  	return false;
+	}
+
+	if(!isIE()){ //firefox innerText define
+		  HTMLElement.prototype.__defineGetter__( "innerText",
+			  function(){
+				  var anyString = "";
+				  var childS = this.childNodes;
+				  for(var i=0; i <childS.length; i++) {
+					  if(childS[i].nodeType==1)
+					  	anyString += childS[i].tagName=="BR" ? '\n' : childS[i].innerText;
+					  else if(childS[i].nodeType==3)
+					  	anyString += childS[i].nodeValue;
+				  }
+				  return anyString;
+			  }
+		  );
+		  HTMLElement.prototype.__defineSetter__( "innerText",
+			  function(sText){
+			  	this.textContent=sText;
+			  }
+		  );
+	}		
 </script>
 </head>
 <body leftmargin="0" topmargin="0" bgcolor="#e5e5e5" onload="getOnlineNums();">
