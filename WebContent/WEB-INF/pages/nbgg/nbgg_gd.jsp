@@ -20,6 +20,8 @@ List nbggList = results.getResults();
 <LINK href="css/InitNav.css" type=text/css rel=stylesheet>
 <LINK href="css/Portal.css" type=text/css rel=stylesheet>
 <LINK href="css/Desktop.css" type=text/css rel=stylesheet>
+<script type="text/javascript" src="jquery/jquery.js"></script>
+<script type="text/javascript" src="js/initPageSize.js"></script>
 <script type="text/javascript">
 	function openWin(id){
 		var destination = "viewNbgg.html?id="+id;
@@ -29,7 +31,8 @@ List nbggList = results.getResults();
 	}
 </script>
 </head>
-<BODY id=Body bottomMargin=0 leftMargin=0 topMargin=0 align="center">
+<BODY align="center">
+<div class="rightContentDiv" id="divContent">
 <form name="myform" action="listGdNbgg.html" method="post">
 <TABLE cellSpacing=0 cellPadding=10 width="100%" border=0>
 	<TBODY>
@@ -125,5 +128,6 @@ List nbggList = results.getResults();
 	</TBODY>
 </TABLE>
 </form>
+</div>
 </BODY>
-</HTML>
+</html>
