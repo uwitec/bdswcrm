@@ -51,12 +51,12 @@ var contentPanel = new Ext.TabPanel({
 		id:'homePage',
 		title:' 首　页 ',
 		autoScroll:true,
-		html:'<iframe scrolling="yes" name="pageIndex" id="pageIndex" frameborder="0" width="100%" height="100%" src="listMain.html"></iframe>'
+		html:'<iframe scrolling="no" name="pageIndex" id="pageIndex" frameborder="0" width="100%" height="100%" src="listMain.html"></iframe>'
 	},{
 		id:'undoWord',
 		title:'待办工作',
 		autoScroll:true,
-		html:'<iframe scrolling="yes" name="pageUndowork" id="pageUndowork" frameborder="0" width="100%" height="100%" src="undoWork.html"></iframe>'
+		html:'<iframe scrolling="no" name="pageUndowork" id="pageUndowork" frameborder="0" width="100%" height="100%" src="undoWork.html"></iframe>'
 	}]
 });
 
@@ -139,7 +139,7 @@ if(list != null && list.size() > 0){
 														'id':node.id,
 														'title':node.text,
 														closable:true,  //通过html载入目标页
-														html:'<iframe scrolling="yes" frameborder="0" width="100%" height="100%" src="<%=funcUrl%>"></iframe>'
+														html:'<iframe scrolling="no" frameborder="0" width="100%" height="100%" src="<%=funcUrl%>"></iframe>'
 													});
 												}
 												contentPanel.setActiveTab(n);
@@ -158,7 +158,7 @@ if(list != null && list.size() > 0){
 														'id':node.id,
 														'title':node.text,
 														closable:true,  //通过html载入目标页
-														html:'<iframe scrolling="yes" frameborder="0" width="100%" height="100%" src="<%=funcUrl%>"></iframe>'
+														html:'<iframe scrolling="no" frameborder="0" width="100%" height="100%" src="<%=funcUrl%>"></iframe>'
 													});
 												}
 												contentPanel.setActiveTab(n);
@@ -201,7 +201,7 @@ if(list != null && list.size() > 0){
 														'id':node.id,
 														'title':node.text,
 														closable:true,  //通过html载入目标页
-														html:'<iframe scrolling="yes" frameborder="0" width="100%" height="100%" src="<%=funcUrl%>"></iframe>'
+														html:'<iframe scrolling="no" frameborder="0" width="100%" height="100%" src="<%=funcUrl%>"></iframe>'
 													});
 												}
 												contentPanel.setActiveTab(n);
@@ -220,7 +220,7 @@ if(list != null && list.size() > 0){
 														'id':node.id,
 														'title':node.text,
 														closable:true,  //通过html载入目标页
-														html:'<iframe scrolling="yes" frameborder="0" width="100%" height="100%" src="<%=funcUrl%>"></iframe>'
+														html:'<iframe scrolling="no" frameborder="0" width="100%" height="100%" src="<%=funcUrl%>"></iframe>'
 													});
 												}
 												contentPanel.setActiveTab(n);
