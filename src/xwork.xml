@@ -89,12 +89,40 @@
         <action name="listMain" class="firstIndexAction" method="listMain">
             <result name="success">/WEB-INF/pages/first_index.jsp</result>
         </action>
+        
+        <!-- ajax请求 -->
+        <action name="getUndoWorkNums" class="firstIndexAction" method="getUndoWorkNums"/>
+        <action name="getResultsForChart" class="hpflxsHzAction" method="getResultsForChart"/>
+        <action name="queryHpmlflhz" class="hpmlflxsHzAction" method="queryHpmlflhz"/>
+        <action name="queryClientsYshz" class="firstIndexAction" method="queryClientsYshz"/>
+        
         <action name="listFxMain" class="firstIndexAction" method="listFxMain">
             <result name="success">/WEB-INF/pages/fxfirst_index.jsp</result>
         </action>  
         <action name="listGysMain" class="firstIndexAction" method="listGysMain">
             <result name="success">/WEB-INF/pages/fxfirst_index.jsp</result>
         </action>
+        <action name="queryDckList" class="firstIndexAction" method="queryDckList">
+            <result name="success">/WEB-INF/pages/dck_list.jsp</result>
+        </action>     
+        <action name="queryDrkList" class="firstIndexAction" method="queryDrkList">
+            <result name="success">/WEB-INF/pages/drk_list.jsp</result>
+        </action> 
+        <action name="queryDspLsdList" class="firstIndexAction" method="queryDspLsdList">
+            <result name="success">/WEB-INF/pages/dsplsd_list.jsp</result>
+        </action>
+        <action name="queryDspXsdList" class="firstIndexAction" method="queryDspXsdList">
+            <result name="success">/WEB-INF/pages/dspxsd_list.jsp</result>
+        </action> 
+        <action name="queryDspFksqList" class="firstIndexAction" method="queryDspFksqList">
+            <result name="success">/WEB-INF/pages/dspfksq_list.jsp</result>
+        </action> 
+        <action name="queryDspFysqList" class="firstIndexAction" method="queryDspFysqList">
+            <result name="success">/WEB-INF/pages/dspfysq_list.jsp</result>
+        </action>
+        <action name="queryDqrDfdbList" class="firstIndexAction" method="queryDqrDfdbList">
+            <result name="success">/WEB-INF/pages/dqrkfdb_list.jsp</result>
+        </action> 
         <!-- 首页 -->
         
         <!-- 待办工作 -->
