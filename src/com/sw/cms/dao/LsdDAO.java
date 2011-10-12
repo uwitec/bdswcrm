@@ -45,7 +45,7 @@ public class LsdDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public List getDspLsdList(){
-		String sql = "select a.id,a.client_name,b.real_name,c.dept_name,a.creatdate from lsd a left join sys_user b on b.user_id=a.xsry left join dept c on c.dept_id=b.dept where a.sp_state='2'";
+		String sql = "select a.*,b.real_name,c.dept_name from lsd a left join sys_user b on b.user_id=a.xsry left join dept c on c.dept_id=b.dept where a.sp_state='2'";
 		return this.getResultList(sql);
 	}
 	

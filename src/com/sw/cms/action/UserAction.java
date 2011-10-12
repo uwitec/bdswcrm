@@ -209,8 +209,8 @@ public class UserAction extends BaseAction {
 			String sendUrl = "success";
 			try{
 				if(agent != null){
-					if(agent.indexOf("MSIE") != -1 && agent.indexOf("MSIE 9.0") == -1){
-						//是IE浏览器，但不是9.0的版本
+					if(agent.indexOf("MSIE") != -1 && agent.indexOf("MSIE 9.0") == -1 && agent.indexOf("MSIE 6.0") == -1){
+						//是IE浏览器，但不是6.0,9.0的版本
 						sendUrl = "success";
 					}else{
 						sendUrl = "otherBrowserSuccess";

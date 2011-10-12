@@ -2,12 +2,14 @@ package com.sw.cms.action;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.sw.cms.action.base.BaseAction;
-import com.sw.cms.service.ClientsService;
 import com.sw.cms.service.DeptService;
 import com.sw.cms.service.HpflxsHzService;
-import com.sw.cms.service.UserService;
+import com.sw.cms.util.DateComFunc;
+import com.sw.cms.util.JMath;
+import com.sw.cms.util.StringUtils;
 
 /**
  * 货品分类销售汇总
@@ -32,6 +34,8 @@ public class HpflxsHzAction extends BaseAction {
 	private String dept = "";
 	private String[] xwType;
 	
+	String c_end_date = "";
+	String c_start_date = "";
 
 	/**
 	 * 显示条件
@@ -56,6 +60,37 @@ public class HpflxsHzAction extends BaseAction {
 		}catch(Exception e){
 			log.error("货品销售分类汇总出错，错误原因：" + e.getMessage());
 			return ERROR;
+		}
+	}
+	
+	/**
+	 * 货品销售分类汇总（饼状图），默认时间当月
+	 * @throws Exception
+	 */
+	public void getResultsForChart() throws Exception{
+		try{
+			resultList = hpflxsHzService.getHzResults(c_start_date,c_end_date,"","","", new String[]{"销售单","零售单","退货单"},1);
+			String strResult = "";
+			double hjje = 0;
+			if(resultList != null && resultList.size()>0){
+				for(int i=0;i<resultList.size();i++){
+					Map map = (Map)resultList.get(i);
+					hjje += map.get("hjje")==null?0:((Double)map.get("hjje")).doubleValue();
+				}
+			}
+			if(resultList != null && resultList.size()>0){
+				for(int i=0;i<resultList.size();i++){
+					Map map = (Map)resultList.get(i);
+					
+					String id = StringUtils.nullToStr(map.get("id"));
+					String name = StringUtils.nullToStr(map.get("name"));
+					double je = map.get("hjje")==null?0:((Double)map.get("hjje")).doubleValue();
+					strResult += "<set label='" + name + "' value='" + JMath.round(je) + "' toolText='" + name + ":" + JMath.round(je,2) + "元:占比" + JMath.percent(je, hjje) + "'/>";
+				}
+			}
+			this.writeStringToResponse(strResult);
+		}catch(Exception e){
+			log.error("货品销售分类汇总出错，错误原因：" + e.getMessage());
 		}
 	}
 	
@@ -193,6 +228,26 @@ public class HpflxsHzAction extends BaseAction {
 
 	public void setXwType(String[] xwType) {
 		this.xwType = xwType;
+	}
+
+
+	public String getC_start_date() {
+		return c_start_date;
+	}
+
+
+	public void setC_start_date(String cStartDate) {
+		c_start_date = cStartDate;
+	}
+
+
+	public String getC_end_date() {
+		return c_end_date;
+	}
+
+
+	public void setC_end_date(String cEndDate) {
+		c_end_date = cEndDate;
 	}
 
 }

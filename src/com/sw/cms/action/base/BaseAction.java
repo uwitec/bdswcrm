@@ -1,5 +1,6 @@
 package com.sw.cms.action.base;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,6 +8,9 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -117,6 +121,72 @@ public class BaseAction extends ActionSupport {
 		return dataDisParseDao.getFyTypeNameById(id);
 	}
 	
+	/**
+	 * 消息处理
+	 * @param msg
+	 */
+    protected void saveMessage(String msg) {
+        List messages = (List) getRequest().getSession().getAttribute("messages");
+        if (messages == null) {
+            messages = new ArrayList();
+        }
+        messages.add(msg);
+        getRequest().getSession().setAttribute("messages", messages);
+	}	
+    
+    /**
+     * JSONObject输出
+     * @param jsonObj
+     */
+    public void writeJsonToResponse(JSONObject jsonObj){
+    	PrintWriter out = null;
+    	getResponse().setContentType("text/html;charset=utf-8");
+    	try{
+    		out = getResponse().getWriter();
+    		out.print(jsonObj);
+    		out.flush();
+    	}catch(Exception e){
+    		e.printStackTrace();
+    	}finally{
+    		out.close();
+    	}
+    }
+    
+    /**
+     * JSONArray输出
+     */
+    public void writeJsonToResponse(JSONArray jsonArray){
+    	PrintWriter out = null;
+    	getResponse().setContentType("text/html;charset=utf-8");
+    	try{
+    		out = getResponse().getWriter();
+    		out.print(jsonArray);
+    		out.flush();
+    	}catch(Exception e){
+    		e.printStackTrace();
+    	}finally{
+    		out.close();
+    	}
+    }
+    
+    /**
+     * 字符输出
+     * @param vl
+     */
+    public void writeStringToResponse(String vl){
+    	PrintWriter out = null;
+    	getResponse().setContentType("text/html;charset=utf-8");
+    	try{
+    		out = getResponse().getWriter();
+    		out.print(vl);
+    		out.flush();
+    	}catch(Exception e){
+    		e.printStackTrace();
+    	}finally{
+    		out.close();
+    	}
+    }
+	
 
 	public DataDisParseDAO getDataDisParseDao() {
 		return dataDisParseDao;
@@ -141,15 +211,6 @@ public class BaseAction extends ActionSupport {
     	return ServletActionContext.getServletContext();
     }
     
-    protected void saveMessage(String msg) {
-        List messages = (List) getRequest().getSession().getAttribute("messages");
-        if (messages == null) {
-            messages = new ArrayList();
-        }
-        messages.add(msg);
-        getRequest().getSession().setAttribute("messages", messages);
-	}
-
 	public String getMsg() {
 		return msg;
 	}

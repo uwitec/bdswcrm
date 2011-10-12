@@ -2,12 +2,15 @@ package com.sw.cms.action;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.sw.cms.action.base.BaseAction;
 import com.sw.cms.service.ClientsService;
 import com.sw.cms.service.DeptService;
 import com.sw.cms.service.HpmlflxsHzService;
 import com.sw.cms.service.UserService;
+import com.sw.cms.util.JMath;
+import com.sw.cms.util.StringUtils;
 
 /**
  * 货品毛利分类销售汇总
@@ -71,6 +74,42 @@ public class HpmlflxsHzAction extends BaseAction {
 		}catch(Exception e){
 			log.error("货品销售毛利分类汇总明细信息出错，错误原因：" + e.getMessage());
 			return ERROR;
+		}
+	}
+	
+	/**
+	 * ajax货品毛利分类汇总
+	 */
+	public void queryHpmlflhz(){
+		try{
+			resultList = hpmlflxsHzService.getHzResults(start_date,end_date,"","","",1);
+			
+			String strResult = "";
+			double hjml = 0;
+			if(resultList != null && resultList.size()>0){
+				for(int i=0;i<resultList.size();i++){
+					Map map = (Map)resultList.get(i);
+					double hjje = map.get("hjje")==null?0:((Double)map.get("hjje")).doubleValue();
+					double hjcb = map.get("hjcb")==null?0:((Double)map.get("hjcb")).doubleValue();
+					hjml += hjje - hjcb;
+				}
+			}
+			if(resultList != null && resultList.size()>0){
+				for(int i=0;i<resultList.size();i++){
+					Map map = (Map)resultList.get(i);
+					
+					String id = StringUtils.nullToStr(map.get("id"));
+					String name = StringUtils.nullToStr(map.get("name"));
+					double hjje = map.get("hjje")==null?0:((Double)map.get("hjje")).doubleValue();
+					double hjcb = map.get("hjcb")==null?0:((Double)map.get("hjcb")).doubleValue();
+					double ml = hjje - hjcb;
+					strResult += "<set label='" + name + "' value='" + JMath.round(ml) + "' toolText='" + name + ":" + JMath.round(ml,2) + "元:占比" + JMath.percent(ml, hjml) + "'/>";
+				}
+			}
+			this.writeStringToResponse(strResult);
+			
+		}catch(Exception e){
+			e.printStackTrace();
 		}
 	}
 
