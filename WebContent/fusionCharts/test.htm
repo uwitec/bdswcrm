@@ -1,33 +1,43 @@
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>test</title>
 <script type="text/javascript" src="FusionCharts.js"></script>
 </head>
 <body>
 <div id="chartdiv_bing_1" align="center" style="padding-top:5px;"></div>
 <div id="chartdiv_zhu_1" align="center"  style="padding-top:5px;"></div>
+<div id="chartdiv_line_1" align="center"  style="padding-top:10px;"></div>
 <script type="text/javascript">
 
-	//±ýÍ¼
+	//é¥¼å›¾
 
-	var myChart_bing_1 = new FusionCharts("Pie3D.swf?PBarLoadingText=Loading&XMLLoadingText=Loading&ParsingDataText=Loading", "myChartId_bing_", "630", "250", "0", "0");
+	var myChart_bing_1 = new FusionCharts("Pie3D.swf?PBarLoadingText=Loading&XMLLoadingText=Loading&ParsingDataText=Loading", "myChartId_bing_", "630", "450", "0", "0");
 
 	myChart_bing_1.addParam('wmode','transparent');
 
-	myChart_bing_1.setDataXML("<chart baseFontSize='12' numberSuffix='%25' showAboutMenuItem='0' decimals='2' chartTopMargin='0' chartBottomMargin='0' caption='' showValues='0' formatNumberScale='0' bgAlpha='0' logoURL='http://www.sinaimg.cn/dy/deco/2009/0903/survey/wmark_pie3.png' logoPosition='TR' startingAngle='60'><set label='1' value='35.2' displayValue='Ô¼Éª·ò-°¢Ã×µÂ (35.2%)' toolText='Ô¼Éª·ò-°¢Ã×µÂ (35.2%)' isSliced='1' /><set label='2' value='25.1' displayValue='µË×¿Ïè (25.1%)' toolText='µË×¿Ïè (25.1%)'  /><set label='3' value='5.6' displayValue='Û¬ÁÖ (5.6%)' toolText='Û¬ÁÖ (5.6%)'  /><set label='4' value='4.5' displayValue='Ôø³Ï (4.5%)' toolText='Ôø³Ï (4.5%)'  /><set label='5' value='3.3' displayValue='ÈÙê» (3.3%)' toolText='ÈÙê» (3.3%)'  /><set label='6' value='2.9' displayValue='Èû°ÍË¹µÙ°² (2.9%)' toolText='Èû°ÍË¹µÙ°² (2.9%)'  /><set label='7' value='2.7' displayValue='Çú²¨ (2.7%)' toolText='Çú²¨ (2.7%)'  /><set label='8' value='2.7' displayValue='ÓÚº£ (2.7%)' toolText='ÓÚº£ (2.7%)'  /><set label='9' value='2.3' displayValue='ÕÔÅô (2.3%)' toolText='ÕÔÅô (2.3%)'  /><set label='10' value='2.3' displayValue='²¼¶ûº¹ (2.3%)' toolText='²¼¶ûº¹ (2.3%)'  /><set label='11' value='2.3' displayValue='ÕÅÁÕÆM (2.3%)' toolText='ÕÅÁÕÆM (2.3%)'  /><set label='12' value='2.1' displayValue='Ñîê» (2.1%)' toolText='Ñîê» (2.1%)'  /><set label='13' value='1.9' displayValue='ÓÚÌÎ (1.9%)' toolText='ÓÚÌÎ (1.9%)'  /><set label='14' value='1.9' displayValue='Ýï¿¡ãÉ (1.9%)' toolText='Ýï¿¡ãÉ (1.9%)'  /><set label='15' value='1.4' displayValue='¿¨Ë÷À­-ÄÂº±Ä¬µÂ (1.4%)' toolText='¿¨Ë÷À­-ÄÂº±Ä¬µÂ (1.4%)'  /><set label='16' value='1' displayValue='¶ÅÍþ (1%)' toolText='¶ÅÍþ (1%)'  /><set label='17' value='0.8' displayValue='°¢²¼¶ÅÀ­Âí½ÜµÂ (0.8%)' toolText='°¢²¼¶ÅÀ­Âí½ÜµÂ (0.8%)'  /><set label='18' value='0.6' displayValue='À­×È¿Ë-Âí¼ªµÏ (0.6%)' toolText='À­×È¿Ë-Âí¼ªµÏ (0.6%)'  /><set label='19' value='0.6' displayValue='ÄÂº±Ä¬µÂ-ÈøÒåµÂ (0.6%)' toolText='ÄÂº±Ä¬µÂ-ÈøÒåµÂ (0.6%)'  /><set label='20' value='0.4' displayValue='°¢²¼À­ÐÁ-°¢²¼¶ÅÀ­ (0.4%)' toolText='°¢²¼À­ÐÁ-°¢²¼¶ÅÀ­ (0.4%)'  /><set label='21' value='0.2' displayValue='ÄÂº±Ä¬µÂ-À­¼Ö°Í (0.2%)' toolText='ÄÂº±Ä¬µÂ-À­¼Ö°Í (0.2%)'  /><set label='22' value='0.2' displayValue='ÑîÐñ (0.2%)' toolText='ÑîÐñ (0.2%)'  /><set label='23' value='0.2' displayValue='ÖÜº£±õ (0.2%)' toolText='ÖÜº£±õ (0.2%)'  /></chart>");
+	myChart_bing_1.setDataXML("<chart baseFontSize='12' showAboutMenuItem='0' bgColor='FFFFFF,999999' decimals='2' chartTopMargin='0' chartBottomMargin='0' caption='cccccccccccccc' showValues='0' formatNumberScale='0' bgAlpha='0' startingAngle='60'><set label='3333' value='25.1'/><set label='rrrrr' value='5.6' /><set label='hhh' value='4.5'/></chart>");
 
 	myChart_bing_1.render("chartdiv_bing_1");
 
-	//ÖùÍ¼
+	//æŸ±å›¾
 
-	var myChart_zhu_1 = new FusionCharts("Column3D.swf?PBarLoadingText=Loading&XMLLoadingText=Loading&ParsingDataText=Loading", "myChartId_zhu_1", "630", "250", "0", "0");
+	var myChart_zhu_1 = new FusionCharts("Column3D.swf?PBarLoadingText=Loading&XMLLoadingText=Loading&ParsingDataText=Loading", "myChartId_zhu_1", "630", "450", "0", "0");
 
 	myChart_zhu_1.addParam('wmode','transparent');
 
-	myChart_zhu_1.setDataXML("<chart baseFontSize='12' baseFontColor='888888' outCnvBaseFontColor='999999' outCnvBaseFontSize='12' numberSuffix='%25' showAboutMenuItem='0' decimals='2' yAxisMaxValue='100' palette='2' enableRotation='1' canvasBgColor='ffffff' canvasBgAlpha='40' canvasBgDepth='3' canvasBaseColor='ffffff' divLineColor='d8d8d8' numDivLines='4' bgAlpha='0' logoURL='http://www.sinaimg.cn/dy/deco/2009/0903/survey/wmark_column3_1.png' logoPosition='TR' divLineColor='d8d8d8' canvasPadding='8' chartLeftMargin='0' chartRightMargin='5' chartTopMargin='5' chartBottomMargin='0' maxColWidth='70' showValues='1'><styles><definition><style name='myToolTip' type='font' size='12' color='666666' /></definition><application><apply toObject='ToolTip' styles='myToolTip' /></application></styles><set label='Ô¼Éª·ò-°¢Ã×µÂ' value='35.2' toolText='Ô¼Éª·ò-°¢Ã×µÂ (35.2%)' /><set label='µË×¿Ïè' value='25.1' toolText='µË×¿Ïè (25.1%)' /><set label='Û¬ÁÖ' value='5.6' toolText='Û¬ÁÖ (5.6%)' /><set label='Ôø³Ï' value='4.5' toolText='Ôø³Ï (4.5%)' /><set label='ÈÙê»' value='3.3' toolText='ÈÙê» (3.3%)' /><set label='Èû°ÍË¹µÙ°²' value='2.9' toolText='Èû°ÍË¹µÙ°² (2.9%)' /><set label='Çú²¨' value='2.7' toolText='Çú²¨ (2.7%)' /><set label='ÓÚº£' value='2.7' toolText='ÓÚº£ (2.7%)' /><set label='ÕÔÅô' value='2.3' toolText='ÕÔÅô (2.3%)' /><set label='²¼¶ûº¹' value='2.3' toolText='²¼¶ûº¹ (2.3%)' /><set label='ÕÅÁÕÆM' value='2.3' toolText='ÕÅÁÕÆM (2.3%)' /><set label='Ñîê»' value='2.1' toolText='Ñîê» (2.1%)' /><set label='ÓÚÌÎ' value='1.9' toolText='ÓÚÌÎ (1.9%)' /><set label='Ýï¿¡ãÉ' value='1.9' toolText='Ýï¿¡ãÉ (1.9%)' /><set label='¿¨Ë÷À­-ÄÂº±Ä¬µÂ' value='1.4' toolText='¿¨Ë÷À­-ÄÂº±Ä¬µÂ (1.4%)' /><set label='¶ÅÍþ' value='1' toolText='¶ÅÍþ (1%)' /><set label='°¢²¼¶ÅÀ­Âí½ÜµÂ' value='0.8' toolText='°¢²¼¶ÅÀ­Âí½ÜµÂ (0.8%)' /><set label='À­×È¿Ë-Âí¼ªµÏ' value='0.6' toolText='À­×È¿Ë-Âí¼ªµÏ (0.6%)' /><set label='ÄÂº±Ä¬µÂ-ÈøÒåµÂ' value='0.6' toolText='ÄÂº±Ä¬µÂ-ÈøÒåµÂ (0.6%)' /><set label='°¢²¼À­ÐÁ-°¢²¼¶ÅÀ­' value='0.4' toolText='°¢²¼À­ÐÁ-°¢²¼¶ÅÀ­ (0.4%)' /><set label='ÄÂº±Ä¬µÂ-À­¼Ö°Í' value='0.2' toolText='ÄÂº±Ä¬µÂ-À­¼Ö°Í (0.2%)' /><set label='ÑîÐñ' value='0.2' toolText='ÑîÐñ (0.2%)' /><set label='ÖÜº£±õ' value='0.2' toolText='ÖÜº£±õ (0.2%)' /></chart>");
+	myChart_zhu_1.setDataXML("<chart baseFontSize='12' baseFontColor='888888' outCnvBaseFontColor='999999' outCnvBaseFontSize='12' numberSuffix='%25' showAboutMenuItem='0' decimals='2' palette='2' enableRotation='1' canvasBgColor='ffffff' canvasBgAlpha='40' canvasBgDepth='3' canvasBaseColor='ffffff' divLineColor='d8d8d8' numDivLines='4' bgAlpha='0'  divLineColor='d8d8d8' canvasPadding='8' chartLeftMargin='0' chartRightMargin='5' chartTopMargin='5' chartBottomMargin='0' maxColWidth='70' showValues='0'><set label='çº¦ç‘Ÿå¤«-é˜¿ç±³å¾·' value='35.2' toolText='çº¦ç‘Ÿå¤«-é˜¿ç±³å¾· (35.2%)' /><set label='é‚“å“ç¿”' value='25.1' toolText='é‚“å“ç¿” (25.1%)' /><set label='éƒœæž—' value='5.6' toolText='éƒœæž— (5.6%)' /><set label='æ›¾è¯š' value='4.5' toolText='æ›¾è¯š (4.5%)' /><set label='è£æ˜Š' value='3.3' toolText='è£æ˜Š (3.3%)' /><set label='å¡žå·´æ–¯è’‚å®‰' value='2.9' toolText='å¡žå·´æ–¯è’‚å®‰ (2.9%)' /><set label='æ›²æ³¢' value='2.7' toolText='æ›²æ³¢ (2.7%)' /><set label='äºŽæµ·' value='2.7' toolText='äºŽæµ· (2.7%)' /><set label='èµµé¹' value='2.3' toolText='èµµé¹ (2.3%)' /><set label='å¸ƒå°”æ±—' value='2.3' toolText='å¸ƒå°”æ±— (2.3%)' /><set label='å¼ ç³ï¿½M' value='2.3' toolText='å¼ ç³ï¿½M (2.3%)' /><set label='æ¨æ˜Š' value='2.1' toolText='æ¨æ˜Š (2.1%)' /><set label='äºŽæ¶›' value='1.9' toolText='äºŽæ¶› (1.9%)' /><set label='è’¿ä¿Šé—µ' value='1.9' toolText='è’¿ä¿Šé—µ (1.9%)' /><set label='å¡ç´¢æ‹‰-ç©†ç½•é»˜å¾·' value='1.4' toolText='å¡ç´¢æ‹‰-ç©†ç½•é»˜å¾· (1.4%)' /><set label='æœå¨' value='1' toolText='æœå¨ (1%)' /><set label='é˜¿å¸ƒæœæ‹‰é©¬æ°å¾·' value='0.8' toolText='é˜¿å¸ƒæœæ‹‰é©¬æ°å¾· (0.8%)' /><set label='æ‹‰å…¹å…‹-é©¬å‰è¿ª' value='0.6' toolText='æ‹‰å…¹å…‹-é©¬å‰è¿ª (0.6%)' /><set label='ç©†ç½•é»˜å¾·-è¨ä¹‰å¾·' value='0.6' toolText='ç©†ç½•é»˜å¾·-è¨ä¹‰å¾· (0.6%)' /><set label='é˜¿å¸ƒæ‹‰è¾›-é˜¿å¸ƒæœæ‹‰' value='0.4' toolText='é˜¿å¸ƒæ‹‰è¾›-é˜¿å¸ƒæœæ‹‰ (0.4%)' /><set label='ç©†ç½•é»˜å¾·-æ‹‰è´¾å·´' value='0.2' toolText='ç©†ç½•é»˜å¾·-æ‹‰è´¾å·´ (0.2%)' /><set label='æ¨æ—­' value='0.2' toolText='æ¨æ—­ (0.2%)' /><set label='å‘¨æµ·æ»¨' value='0.2' toolText='å‘¨æµ·æ»¨ (0.2%)' /></chart>");
 
 	myChart_zhu_1.render("chartdiv_zhu_1");
+	
+	//æŠ˜çº¿å›¾
+	var myChart_line_1 = new FusionCharts("MSLine.swf?PBarLoadingText=Loading&XMLLoadingText=Loading&ParsingDataText=Loading", "myChartId_line_1", "630", "450", "0", "0");
+
+	myChart_line_1.addParam('wmode','transparent');
+ 
+	myChart_line_1.setDataXML("<chart xAxisName='å«ç”Ÿæœºæž„' yAxisName='ç»Ÿè®¡æƒ…å†µ' caption='å«ç”Ÿæœºæž„ç»Ÿè®¡å›¾' subcaption='ä¸­å›½.åŒ—äº¬' bgColor='FFFFFF,999999' showValues='1' baseFontColor='#800000' baseFontSize='13' lineThickness='2' formatNumber = '0' formatNumberScale='0' rotateYAxisName='1' connectNullData='1' lineDashGap='7' showPrintMenuItem='0' showAboutMenuItem='0' showBorder='0' chartRightMargin='50'><categories><category label='2001'/><category label='2002'/><category label='2003'/><category label='2004'/></categories><dataset seriesName='aaa'><set value='15' /><set value='18' /><set value='16' /><set value='15' /></dataset><dataset seriesName='bbbb'><set value='25' /><set value='12' /><set value='11' /><set value='25' /></dataset></chart>");
+
+	myChart_line_1.render("chartdiv_line_1");	
 
 </script>
 

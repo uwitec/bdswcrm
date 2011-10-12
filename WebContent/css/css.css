@@ -41,20 +41,18 @@ A.xxlb:link
 A.xxlb:active                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
 {
     COLOR:#000000;
-    FONT-SIZE: 9pt;
 	text-decoration: none;     
 }
 A.xxlb:visited
 {
-	color:#696969;
+	color:#000000;
 	text-decoration: none; 	
 
 }
 A.xxlb:hover
 {
-    COLOR:#000000;
-    FONT-SIZE: 9pt;     
-	text-decoration: none;     
+    COLOR:#BA2636;
+    text-decoration: underline;  
 }
 .css_button
 {
@@ -314,6 +312,6 @@ table{
 	text-align:left;
 	display:inline ;
 	float:left;
-	overflow-y: auto;
-	overflow-x: none; 
+	overflow-x: auto; 
+	overflow-y: auto;	
 }

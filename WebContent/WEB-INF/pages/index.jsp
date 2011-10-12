@@ -52,11 +52,6 @@ var contentPanel = new Ext.TabPanel({
 		title:' 首　页 ',
 		autoScroll:true,
 		html:'<iframe scrolling="no" name="pageIndex" id="pageIndex" frameborder="0" width="100%" height="100%" src="listMain.html"></iframe>'
-	},{
-		id:'undoWord',
-		title:'待办工作',
-		autoScroll:true,
-		html:'<iframe scrolling="no" name="pageUndowork" id="pageUndowork" frameborder="0" width="100%" height="100%" src="undoWork.html"></iframe>'
 	}]
 });
 

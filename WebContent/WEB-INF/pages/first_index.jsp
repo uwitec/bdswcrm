@@ -13,7 +13,6 @@ List nbggList = (List)VS.findValue("nbggList");
 XxfbNbggService xxfbNbggService = (XxfbNbggService)VS.findValue("xxfbNbggService");
 
 List bwlList = (List)VS.findValue("bwlList");
-List clientList = (List)VS.findValue("clientList");
 
 ClientWlStatService clientWlStatService = (ClientWlStatService)VS.findValue("clientWlStatService");
 %>
@@ -25,16 +24,29 @@ ClientWlStatService clientWlStatService = (ClientWlStatService)VS.findValue("cli
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="jquery/jquery.js"></script>
 <script type="text/javascript" src="js/initPageSize.js"></script>
+<script type="text/javascript" src="fusionCharts/FusionCharts.js"></script>
+<script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
 <style type="text/css">
 .inner{
-	width:48%;
+	width:99%;
+	margin:2px; 
+	border:1px solid #B8B8B8;
+	text-align:left;
+	display:inline ;
+	float:left;	
+	height: 240px;
+	overflow-y: auto;
+	overflow-x: none; 
+}
+.innerImage{
+	width:99%;
 	margin:2px; 
 	border:1px solid #B8B8B8;
 	text-align:left;
 	display:inline ;
 	float:left;	
 	height: 290px;
-	overflow-y: auto;
+	overflow-y: none;
 	overflow-x: none; 
 }
 </style>
@@ -54,15 +66,143 @@ ClientWlStatService clientWlStatService = (ClientWlStatService)VS.findValue("cli
 	function refreshPage(){
 		document.myform.action = "listMain.html";
 		document.myform.submit();
+	}
+
+	function queryUndoWorkNums(){
+		//个人工作台数据
+		$("#dckSpan").html('<img src="images/indicator.gif"></img>');
+		$("#drkSpan").html('<img src="images/indicator.gif"></img>');
+		$("#dspLsdSpan").html('<img src="images/indicator.gif"></img>');
+		$("#dspXsdSpan").html('<img src="images/indicator.gif"></img>');
+		$("#dspFksqSpan").html('<img src="images/indicator.gif"></img>');
+		$("#dspFysqSpan").html('<img src="images/indicator.gif"></img>');
+		$("#dqrKfdbSpan").html('<img src="images/indicator.gif"></img>');
+		$.ajax({
+			cache: false,
+			url:"getUndoWorkNums.html",
+			dataType:"json",
+			type: "POST",
+			success: function(json) {
+				$("#dckSpan").html(json.dckListNums);
+				$("#drkSpan").html(json.drkListNums);
+				$("#dspLsdSpan").html(json.dspLsdNums);
+				$("#dspXsdSpan").html(json.dspXsdNums);
+				$("#dspFksqSpan").html(json.dspCgfkNums);
+				$("#dspFysqSpan").html(json.dspFysqNums);
+				$("#dqrKfdbSpan").html(json.confirmKfdbNums);
+			}
+		});
+	}
+
+	function queryHpflhzChart(start_date,end_date){
+		$("#chartdiv_bing").html('<BR><BR><BR><BR><BR><img src="images/indicator.gif"></img>');
+		//货品销售分类汇总图
+		$.ajax({
+			cache: false,
+			url:"getResultsForChart.html",
+			type: "POST",
+			data:{c_start_date:start_date,c_end_date:end_date},
+			success: function(result) {
+				var myChart_bing_1 = new FusionCharts("fusionCharts/Pie3D.swf?PBarLoadingText=Loading&XMLLoadingText=Loading&ParsingDataText=Loading", "myChartId_bing_", ($(window).width()-60)/2, "240", "0", "0");
+				myChart_bing_1.addParam('wmode','transparent');
+				var chartDataXml = "<chart baseFontSize='12' showAboutMenuItem='0' decimals='2' chartTopMargin='0' chartBottomMargin='0' chartLeftMargin='0' chartRightMargin='0' caption='' showValues='0' formatNumberScale='2' bgAlpha='0' startingAngle='0' showZeroPies='0'>";
+				chartDataXml = chartDataXml + result;
+				chartDataXml = chartDataXml + "</chart>";
+				myChart_bing_1.setDataXML(chartDataXml);
+				myChart_bing_1.render("chartdiv_bing");
+			}
+		});	
+	}
+
+	function queryHpmlflhzChart(start_date,end_date){
+		$("#chartdiv_hpmlflhz").html('<BR><BR><BR><BR><BR><img src="images/indicator.gif"></img>');
+		//货品毛利分类汇总图
+		$.ajax({
+			cache: false,
+			url:"queryHpmlflhz.html",
+			type: "POST",
+			data:{start_date:start_date,end_date:end_date},
+			success: function(result) {
+				var myChart_bing_1 = new FusionCharts("fusionCharts/Pie3D.swf?PBarLoadingText=Loading&XMLLoadingText=Loading&ParsingDataText=Loading", "myChartId_bing_", ($(window).width()-60)/2, "240", "0", "0");
+				myChart_bing_1.addParam('wmode','transparent');
+				var chartDataXml = "<chart baseFontSize='12' showAboutMenuItem='0' decimals='2' chartTopMargin='0' chartBottomMargin='0' chartLeftMargin='0' chartRightMargin='0' caption='' showValues='0' formatNumberScale='2' bgAlpha='0' startingAngle='0' showZeroPies='0'>";
+				chartDataXml = chartDataXml + result;
+				chartDataXml = chartDataXml + "</chart>";
+				myChart_bing_1.setDataXML(chartDataXml);
+				myChart_bing_1.render("chartdiv_hpmlflhz");
+			}
+		});	
 	}	
+
+	function queryClientsYshz(){
+		//客户应收汇总
+		$("#clientYshzDiv").html('<BR><BR><BR><BR><BR><img src="images/indicator.gif"></img>');
+		$.ajax({
+			cache: false,
+			url:"queryClientsYshz.html",
+			type: "POST",
+			success: function(result) {
+				$("#clientYshzDiv").html(result);
+			}
+		});
+	}
+
+	function queryHpflhzCharByCon(){
+		var start_date =  document.getElementById("creatdate").value;
+		var end_date =  document.getElementById("creatdate2").value;
+		if(start_date == "" || end_date == ""){
+			alert("时间不能为空！");
+			return;
+		}else{
+			queryHpflhzChart(start_date,end_date);
+		}
+	}
+
+	function queryHpmlflhzCharByCon(){
+		var start_date =  document.getElementById("hpml_start_date").value;
+		var end_date =  document.getElementById("hpml_end_date").value;
+		if(start_date == "" || end_date == ""){
+			alert("时间不能为空！");
+			return;
+		}else{
+			queryHpmlflhzChart(start_date,end_date);
+		}
+	}
+	
+	function initPage(){
+		var end_date = "<%=DateComFunc.getToday()%>";
+		var start_date = "<%=DateComFunc.getMonthFirstDay(DateComFunc.getToday())%>";
+
+		queryHpflhzChart(start_date,end_date);
+		queryHpmlflhzChart(start_date,end_date);
+		queryUndoWorkNums();
+		queryClientsYshz();
+	}
 </script>
 </head>
-<body>
+<body onload="initPage();">
 <div class="rightContentDiv" id="divContent">
 <form name="myform" action="listMain.html" method="post">
 <table width="100%" align="center" border="0" cellpadding="0" cellspacing="0">
 	<tr>
-		<td width="100%" align="center">
+		<td width="50%" align="center">
+			<div class="inner">
+				<table width="100%" align="left" cellpadding="0" cellspacing="0" border="0">
+					<tr>
+						<td height="27" align="left" style="background-image:url(images/head_top2bg.gif)">&nbsp;&nbsp;&nbsp;&nbsp;<b>个人工作台</b></td>
+					</tr>
+					<tr><td height="3"></td></tr>		
+					<tr><td height="23">&nbsp;&nbsp;待出库单：&nbsp;&nbsp; <span id="dckSpan"></span> 件&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:parent.addtabFmMenu('待出库单','queryDckList.html','dckList');" class="xxlb">点击查看</a></td></tr>
+					<tr><td height="23">&nbsp;&nbsp;待入库单： &nbsp;&nbsp;<span id="drkSpan"></span> 件&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:parent.addtabFmMenu('待入库单','queryDrkList.html','drkList');" class="xxlb">点击查看</a></td></tr>		
+					<tr><td height="23">&nbsp;&nbsp;待审批零售单：&nbsp;&nbsp; <span id="dspLsdSpan"></span> 件&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:parent.addtabFmMenu('待审批零售单','queryDspLsdList.html','dspLsdList');" class="xxlb">点击查看</a></td></tr>		
+					<tr><td height="23">&nbsp;&nbsp;待审批销售单： &nbsp;&nbsp;<span id="dspXsdSpan"></span> 件&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:parent.addtabFmMenu('待审批销售单','queryDspXsdList.html','dspXsdList');" class="xxlb">点击查看</a></td></tr>		
+					<tr><td height="23">&nbsp;&nbsp;待审批付款申请：&nbsp;&nbsp; <span id="dspFksqSpan"></span> 件&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:parent.addtabFmMenu('待审批付款申请','queryDspFksqList.html','dspFksqList');" class="xxlb">点击查看</a></td></tr>		
+					<tr><td height="23">&nbsp;&nbsp;待审批费用申请：&nbsp;&nbsp; <span id="dspFysqSpan"></span> 件&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:parent.addtabFmMenu('待审批费用申请','queryDspFysqList.html','dspFysqList');" class="xxlb">点击查看</a></td></tr>		
+					<tr><td height="23">&nbsp;&nbsp;待确认库房调拨：&nbsp;&nbsp; <span id="dqrKfdbSpan"></span> 件&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:parent.addtabFmMenu('待确认库房调拨','queryDqrDfdbList.html','dqrKfdbList');" class="xxlb">点击查看</a></td></tr>		
+				</table>
+			</div>	
+		</td>
+		<td align="center">	
 			<div class="inner">
 				<table width="100%" align="left" cellpadding="0" cellspacing="0" border="0">
 					<tr>
@@ -101,7 +241,10 @@ ClientWlStatService clientWlStatService = (ClientWlStatService)VS.findValue("cli
 					</tr>															
 				</table>
 			</div>
-		
+		</td>	
+	</tr>
+	<tr>
+		<td  align="center">		
 			<div class="inner">
 				<table width="100%" align="left" cellpadding="0" cellspacing="0" border="0">
 					<tr>
@@ -116,8 +259,8 @@ ClientWlStatService clientWlStatService = (ClientWlStatService)VS.findValue("cli
 						String id = StringUtils.nullToStr(info.getId());
 						String title = StringUtils.nullToStr(info.getTitle());
 						String subTitle = title;
-						if(title.length()>20){
-							subTitle = title.substring(0,20) + "...";
+						if(title.length()>18){
+							subTitle = title.substring(0,18) + "...";
 						}
 						String cz_date = StringUtils.nullToStr(info.getCz_date());
 						String jsr = StaticParamDo.getRealNameById(info.getCzr());
@@ -135,108 +278,47 @@ ClientWlStatService clientWlStatService = (ClientWlStatService)VS.findValue("cli
 					</tr>															
 				</table>
 			</div>
-			
-			<div class="inner">
+		</td>
+		<td align="center">	
+			<div class="inner" align="center" id="clientYshzDiv" style="vertical-align: middle;text-align: center;"></div>	
+		</td>		
+	</tr>
+	<tr>
+		<td  align="center">		
+			<div class="innerImage">
 				<table width="100%" align="left" cellpadding="0" cellspacing="0">
 					<tr>
-						<td height="27" colspan="7" align="left" style="background-image:url(images/head_top2bg.gif)">&nbsp;&nbsp;&nbsp;&nbsp;<b>客户应收汇总</b></td>								
+						<td height="27" align="left" style="background-image:url(images/head_top2bg.gif)">&nbsp;&nbsp;&nbsp;&nbsp;<b>货品销售分类汇总</b></td>								
 					</tr>
+                    <TR>
+                    	<TD height="23">&nbsp;<input type="text" name="creatdate" id="creatdate" value="<%=DateComFunc.getMonthFirstDay(DateComFunc.getToday()) %>" size="12" class="Wdate" onFocus="WdatePicker()"/>&nbsp;至&nbsp;
+						<input type="text" name="creatdate2" id="creatdate2" value="<%=DateComFunc.getToday() %>"  class="Wdate" size="12" onFocus="WdatePicker()"/>&nbsp;&nbsp;
+						<input type="button" name="buttonCx" value="汇总" onclick="queryHpflhzCharByCon();" class="css_button">
+                    	</TD>
+                    </TR>
+					<tr><td height="240"><div id="chartdiv_bing" align="center" style="width:100%;height:240px;display:inline;float:left;overflow-x:none;overflow-y:none;border:0px;vertical-align: middle;text-align: center;"></div></td></tr>
+				</table>			
+			</div>		
+		</td>
+		<td  align="center">		
+			<div class="innerImage">
+				<table width="100%" align="left" cellpadding="0" cellspacing="0">
 					<tr>
-											 
-			           <TD width="45% height="23">客户名称</TD>
-			           <TD width="14%" nowrap="nowrap" height="23">当前应收款</TD>			           
-			           <TD width="14%" nowrap="nowrap" height="23">超期应收款</TD>	
-			           <TD width="12%" nowrap="nowrap" height="23">预收款</TD>			           
-			           <TD width="15%" nowrap="nowrap" height="23">最长超期天数</TD>
-		           
+						<td height="27" align="left" style="background-image:url(images/head_top2bg.gif)">&nbsp;&nbsp;&nbsp;&nbsp;<b>货品毛利分类汇总</b></td>								
 					</tr>
-					<tr><td height="7"></td></tr>
-					<%
-					double hj_dqys = 0;
-                    double hj_wdqysk = 0;
-                    double hj_cqysk = 0;
-                    double hj_ysk = 0;
-                    double hj_qtysk = 0;
-
-                    Map qcMap = clientWlStatService.getClientQc(DateComFunc.getToday());
-                    Map infoMap = clientWlStatService.getClientWlInfo(DateComFunc.getToday(),DateComFunc.getToday(),"");
-                    Map maxCqtsMap = clientWlStatService.getClientMaxCqts("");  //最长超期天数
-                    Map wdqyskMap = clientWlStatService.getClientWdqysk("");    //未到期应收款
-                    Map cqyskMap = clientWlStatService.getClientCqysk("");      //超期应收款 
-
-                    Map yskMap = clientWlStatService.getClientYushouk("");      //预收款
-                    Map qcjsMap = clientWlStatService.getClientQcjsye("");      //期初结算
-                    Map tzjsMap = clientWlStatService.getClientTzjsye("");      //调账（应收）结算
-
-                    if(clientList != null && clientList.size() > 0){
-	                for(int i=0;i<clientList.size();i++){
-		            Map map = (Map)clientList.get(i);
-		
-		            String client_id = StringUtils.nullToStr(map.get("id"));
-		            String client_name = StringUtils.nullToStr(map.get("name"));		            
-		            
-		            double qcs = qcMap.get(client_id+"应收")==null?0:((Double)qcMap.get(client_id+"应收")).doubleValue();  //期初数		
-		            double bqfs = infoMap.get(client_id+"应收发生")==null?0:((Double)infoMap.get(client_id+"应收发生")).doubleValue();  //本期发生
-		            double ysje = infoMap.get(client_id+"已收发生")==null?0:((Double)infoMap.get(client_id+"已收发生")).doubleValue();  //本期已收
-		            String strCqts = StringUtils.nullToStr(maxCqtsMap.get(client_id));
-		            int cqts = 0; //最长超期天数
-		            if(!strCqts.equals("")){
-			            cqts = new Integer(strCqts).intValue();
-		            }
-		            double wdqysk = wdqyskMap.get(client_id)==null?0:((Double)wdqyskMap.get(client_id)).doubleValue();  //未到期应收款 
-		            double cqysk = cqyskMap.get(client_id)==null?0:((Double)cqyskMap.get(client_id)).doubleValue();  //超期应收款
-		
-		            double ysk = yskMap.get(client_id)==null?0:((Double)yskMap.get(client_id)).doubleValue();  //预收款
-		            double qtysk = (qcjsMap.get(client_id)==null?0:((Double)qcjsMap.get(client_id)).doubleValue()) + (tzjsMap.get(client_id)==null?0:((Double)tzjsMap.get(client_id)).doubleValue()); //其它应收款 
-
-		            double dqys = qcs + bqfs - ysje;  //当前应收
-		 	        
-		 	        
-		            boolean bl = false;		 
-			        if(dqys !=0 || cqysk!=0 || ysk!=0) {
-			 	        bl = true;
-			        }
-		          else{
-			          bl = false;
-		           }
-		 	        	 	        
-		 	       if(bl){ 
-			        hj_dqys += dqys;
-			        hj_wdqysk += wdqysk;
-			        hj_cqysk += cqysk;
-			        hj_ysk += ysk;
-			        hj_qtysk += qtysk;
-			
-%>			
-                  <TR>					 
-			           <TD width="45% height="23"><%=client_name %></TD>
-			           <TD width="14%" nowrap="nowrap" height="23"><%=JMath.round(dqys,2) %></TD>			           
-			           <TD width="14%" nowrap="nowrap" height="23"><%=JMath.round(cqysk,2) %></TD>	
-			           <TD width="12%" nowrap="nowrap" height="23"><%=JMath.round(ysk,2) %></TD>			           
-			           <TD width="15%" nowrap="nowrap" height="23"><%=cqts %></TD>
-		            </TR>					
-
-<%		
-		}
-	}
-	
-}
-	
-%>	
-                   <TR>
-		               <TD width="45% height="23">合计（金额）</TD>
-		               <TD width="14%" nowrap="nowrap" height="23"><%=JMath.round(hj_dqys,2) %></TD>
-		               <TD width="14%" nowrap="nowrap" height="23"><%=JMath.round(hj_cqysk,2) %></TD>
-		               <TD width="12%" nowrap="nowrap" height="23"><%=JMath.round(hj_ysk,2) %></TD>		            
-		               <TD width="15%" nowrap="nowrap" height="23">--</TD>
-	                </TR>
-                    																			
-				</table>
-			</div>
-			
+                    <TR>
+                    	<TD height="23">&nbsp;<input type="text" name="hpml_start_date" id="hpml_start_date" value="<%=DateComFunc.getMonthFirstDay(DateComFunc.getToday()) %>" size="12" class="Wdate" onFocus="WdatePicker()"/>&nbsp;至&nbsp;
+						<input type="text" name="hpml_end_date" id="hpml_end_date" value="<%=DateComFunc.getToday() %>"  class="Wdate" size="12" onFocus="WdatePicker()"/>&nbsp;&nbsp;
+						<input type="button" name="buttonCx" value="汇总" onclick="queryHpmlflhzCharByCon();" class="css_button">
+                    	</TD>
+                    </TR>
+					<tr><td height="240"><div id="chartdiv_hpmlflhz" align="center" style="width:100%;height:240px;display:inline;float:left;overflow-x:none;overflow-y:none;border:0px;vertical-align: middle;text-align: center;"></div></td></tr>
+				</table>			
+			</div>		
 		</td>		
 	</tr>
 </table>
+<BR>
 </form>
 </div>
 </body>

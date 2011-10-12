@@ -1,5 +1,5 @@
 BODY {
-	FONT-SIZE: 12px; MARGIN: 0px; FONT-FAMILY: "Arial", "Helvetica", "sans-serif"; SCROLLBAR-DARKSHADOW-COLOR: #ffffff
+	FONT-SIZE: 12px; MARGIN: 0px; FONT-FAMILY: "Arial", "Helvetica", "sans-serif";
 }
 TD {
 	FONT-SIZE: 12px; MARGIN: 2px;FONT-FAMILY: "Arial", "Helvetica", "sans-serif";
@@ -64,5 +64,5 @@ tr.over td {
 	display:inline ;
 	float:left;
 	overflow-y: auto;
-	overflow-x: none; 
+	overflow-x: auto; 
 }

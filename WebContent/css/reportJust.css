@@ -1,5 +1,5 @@
 BODY {
-	FONT-SIZE: 12px; MARGIN: 0px; FONT-FAMILY: "Arial", "Helvetica", "sans-serif"; SCROLLBAR-DARKSHADOW-COLOR: #ffffff
+	FONT-SIZE: 12px; MARGIN: 0px; FONT-FAMILY: "Arial", "Helvetica", "sans-serif"; 
 }
 TD {
 	FONT-SIZE: 12px;margin-left:2px;margin-right:2px;margin-top:0px;margin-bottom:0px; FONT-FAMILY: "Arial", "Helvetica", "sans-serif";
@@ -34,5 +34,5 @@ table{word-break:break-all;}
 	display:inline ;
 	float:left;
 	overflow-y: auto;
-	overflow-x: none; 
+	overflow-x: auto; 
 }

@@ -26,6 +26,7 @@ int menu_index = 0;
 <SCRIPT language=javascript src="script/RollScript.js"></SCRIPT>
 <SCRIPT language=javascript src="script/eTab.js"></SCRIPT>
 <SCRIPT language=javascript src="script/Menu.js"></SCRIPT>
+<script type="text/javascript" src="jquery/jquery.js"></script>
 <script type="text/javascript">
 	function hidMenu(){
 		if(tdService.style.display=='none'){
@@ -62,7 +63,7 @@ int menu_index = 0;
 						<div class="tabHeader_div">
 						<ul id="tabHeader">	
 							<a onclick="javascript:document.getElementById('ifrIndex1').src='listMain.html';"><li id="first" title="点击刷新首页">首页</li></a>
-							<a onclick="javascript:document.getElementById('ifrIndex2').src='undoWork.html';"><li id="second" title="点击刷新待办工作">待办工作</li></a>
+							<li id="second" style="display: none;"></li>
 						</ul>
 						</div>
 					</td>
@@ -344,7 +345,7 @@ int menu_index = 0;
 			<div class="tabcontent_div">
 			<ul id="tabContent">							
 				<li><iframe id="ifrIndex1" src="listMain.html" scrolling="auto" border="0" style="width:100%;" onload="FrameChange('ifrIndex1');" frameborder="0"></iframe></li>
-				<li><iframe id="ifrIndex2" src="undoWork.html" scrolling="auto" border="0" style="width:100%;" onload="FrameChange('ifrIndex2');" frameborder="0"></iframe></li>
+				<li></li>
 			</ul>
 			</div>
 		</TD>
@@ -367,6 +368,7 @@ int menu_index = 0;
 <script language="javascript">
 		document.getElementById("tabTable").width = screen.availWidth-200;
 		DesktopInit();
+		document.getElementById("ifrIndex1").style.height = $(window).height()-105 + "px";
 </script>
 </BODY>
 </HTML>
