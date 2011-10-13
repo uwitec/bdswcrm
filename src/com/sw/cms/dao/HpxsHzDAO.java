@@ -93,7 +93,7 @@ public class HpxsHzDAO extends JdbcBaseDAO {
 	 */
 	public List getGysHpxshzTjResult(String product_kind,String start_date,String end_date){
 		
-		String sql = "select product_id,product_name,product_xh,sum(nums) as nums from view_hpxshz_tj where prop='库存商品'";
+		String sql = "select a.product_id,c.product_name,c.product_xh,sum(a.nums) as nums from product_sale_flow a inner join product c on c.product_id=a.product_id where c.prop='库存商品'";
 		
 		//处理商品类别
 		if(!product_kind.equals("")){
@@ -102,9 +102,9 @@ public class HpxsHzDAO extends JdbcBaseDAO {
 				sql += " and (";
 				for(int i=0;i<arryItems.length;i++){
 					if(i == 0){
-						sql += " product_kind like '" + arryItems[i] + "%'";
+						sql += " c.product_kind like '" + arryItems[i] + "%'";
 					}else{
-						sql += " or product_kind like '" + arryItems[i] + "%'";
+						sql += " or c.product_kind like '" + arryItems[i] + "%'";
 					}
 				}
 				sql += ")";
@@ -113,15 +113,15 @@ public class HpxsHzDAO extends JdbcBaseDAO {
 		
 		//开始时间
 		if(!start_date.equals("")){
-			sql += " and cz_date>='" + start_date + "'";
+			sql += " and a.cz_date>='" + start_date + "'";
 		}
 		
 		//结束时间
 		if(!end_date.equals("")){
-			sql += " and cz_date<='" + end_date + "'";
+			sql += " and a.cz_date<='" + end_date + "'";
 		}
 		
-		sql += " group by product_id,product_name,product_xh having sum(nums)>0 ";
+		sql += " group by a.product_id,c.product_name,c.product_xh having sum(a.nums)>0 ";
 		
 		return this.getResultList(sql);
 	}
