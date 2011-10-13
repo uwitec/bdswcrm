@@ -21,14 +21,25 @@ List productList = (List)VS.findValue("productList");
 <script language='JavaScript' src="js/date.js"></script>
 <script type="text/javascript" src="jquery/jquery.js"></script>
 <script type="text/javascript" src="js/initPageSize.js"></script>
+<script>
+function pageRefresh(){
+	document.refreshFormMain.submit();
+}
+</script>
 </head>
 <body align="center" >
 <div class="rightContentDiv" id="divContent">
+<form name="refreshFormMain" action="getGysKcList.html" method="post">
+</form>
 <TABLE  align="center" cellSpacing=0 cellPadding=0 width="99%" border=0>
 	<TBODY>
 		<TR style="BACKGROUND-COLOR: #dcdcdc;height:45;">
 		    <TD align="center" width="100%"><font style="FONT-SIZE: 16px"><B>库 存 情 况</B></font></TD>
+		    <TD align="center">
+		    	<input type="button" name="btnRes" value="刷新" onclick="pageRefresh();">
+		    </TD>			    
 		</TR>
+		
 	</TBODY>
 </TABLE>
 <BR>

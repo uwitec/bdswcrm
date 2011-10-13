@@ -7,14 +7,9 @@
 <%@ page import="java.text.SimpleDateFormat" %>
 <%
 OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
-
 List nbggList = (List)VS.findValue("nbggList");
-
 XxfbNbggService xxfbNbggService = (XxfbNbggService)VS.findValue("xxfbNbggService");
-
 List bwlList = (List)VS.findValue("bwlList");
-
-ClientWlStatService clientWlStatService = (ClientWlStatService)VS.findValue("clientWlStatService");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -26,30 +21,6 @@ ClientWlStatService clientWlStatService = (ClientWlStatService)VS.findValue("cli
 <script type="text/javascript" src="js/initPageSize.js"></script>
 <script type="text/javascript" src="fusionCharts/FusionCharts.js"></script>
 <script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
-<style type="text/css">
-.inner{
-	width:99%;
-	margin:2px; 
-	border:1px solid #B8B8B8;
-	text-align:left;
-	display:inline ;
-	float:left;	
-	height: 240px;
-	overflow-y: auto;
-	overflow-x: none; 
-}
-.innerImage{
-	width:99%;
-	margin:2px; 
-	border:1px solid #B8B8B8;
-	text-align:left;
-	display:inline ;
-	float:left;	
-	height: 290px;
-	overflow-y: none;
-	overflow-x: none; 
-}
-</style>
 <script type="text/javascript">	
 	function openNbggWin(id){
 		var destination = "viewNbgg.html?id="+id;
@@ -169,7 +140,7 @@ ClientWlStatService clientWlStatService = (ClientWlStatService)VS.findValue("cli
 		}
 	}
 	
-	function initPage(){
+	$(document).ready(function(){
 		var end_date = "<%=DateComFunc.getToday()%>";
 		var start_date = "<%=DateComFunc.getMonthFirstDay(DateComFunc.getToday())%>";
 
@@ -177,10 +148,10 @@ ClientWlStatService clientWlStatService = (ClientWlStatService)VS.findValue("cli
 		queryHpmlflhzChart(start_date,end_date);
 		queryUndoWorkNums();
 		queryClientsYshz();
-	}
+	});
 </script>
 </head>
-<body onload="initPage();">
+<body>
 <div class="rightContentDiv" id="divContent">
 <form name="myform" action="listMain.html" method="post">
 <table width="100%" align="center" border="0" cellpadding="0" cellspacing="0">

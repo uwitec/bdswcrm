@@ -56,13 +56,12 @@ String logo_url = (String)VS.findValue("logo_url");
 				</TR>						
 				</TBODY>
 			</TABLE>					
-		</td>
-		<td width="300" width="40%" height=100%  vAlign=bottom  align=right><BR>
-			<form name="myForm" method="post" action="queryKcInfo.html">
+		</td><form name="myForm" method="post" action="queryKcInfo.html">
+		<td width="300" width="40%" height=100% align=center>
 			<font style="font-size: 12px;">库存查询：</font><input type="text" name="kc_con"  onkeypress="f_enter();"  size="15">
 			<input type="button" name="button1" value=" 查询 " class="css_button2" onclick="openWin();">
-			</form>
-		</td>
+			
+		</td></form>
 		<td vAlign=top align=right width="30%">
 			<TABLE cellSpacing=0 cellPadding=0 border=0>
 				<TBODY>

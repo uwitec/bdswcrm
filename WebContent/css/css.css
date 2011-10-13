@@ -315,3 +315,25 @@ table{
 	overflow-x: auto; 
 	overflow-y: auto;	
 }
+.inner{
+	width:99%;
+	margin:2px; 
+	border:1px solid #B8B8B8;
+	text-align:left;
+	display:inline ;
+	float:left;	
+	height: 240px;
+	overflow-y: auto;
+	overflow-x: none; 
+}
+.innerImage{
+	width:99%;
+	margin:2px; 
+	border:1px solid #B8B8B8;
+	text-align:left;
+	display:inline ;
+	float:left;	
+	height: 290px;
+	overflow-y: none;
+	overflow-x: none; 
+}
