@@ -71,7 +71,7 @@ List dspFysqList = (List)VS.findValue("dspFysqList");
 		<td><%=StringUtils.nullToStr(fysq.getCreatdate()) %></td>
 		<td><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(fysq.getSqr())) %></td>
 		<td><%=StaticParamDo.getDeptNameById(StringUtils.nullToStr(fysq.getYwy_dept())) %></td>
-		<td><%=StringUtils.nullToStr(fysq.getFy_type()) %></td>
+		<td><%=StaticParamDo.getFyTypeNameById(StringUtils.nullToStr(fysq.getFy_type())) %></td>
 		<td><%=je %>&nbsp;&nbsp;</td>
 		<td>
 			<a href="javascript:doSpFysq('<%=StringUtils.nullToStr(fysq.getId()) %>');" class="xxlb">审批</a>

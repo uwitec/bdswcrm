@@ -24,8 +24,11 @@ session.removeAttribute("MSG");
 <title>设定角色功能</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="jquery/jquery.js"></script>
+<script type="text/javascript" src="js/initPageSize.js"></script>
 </head>
-<body oncontextmenu="return false;" >
+<body>
+<div class="rightContentDiv" id="divContent">
 <form name="myform" action="saveRoleFuncs.html" method="post">
 <input type="hidden" name="role_id" value="<%=role_id %>">
 <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0">
@@ -317,5 +320,6 @@ session.removeAttribute("MSG");
 	</tr>	
 </table>
 </form>
+</div>
 </body>
 </html>

@@ -58,7 +58,7 @@ String role_name = ParameterUtility.getStringParameter(request,"role_name", "");
 	}	
 </script>
 </head>
-<body oncontextmenu="return false;" >
+<body>
 <div class="rightContentDiv" id="divContent">
 <form name="myform" action="listRole.html" method="post">
 <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0">
