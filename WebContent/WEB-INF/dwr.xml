@@ -6,6 +6,7 @@
 		<create creator="spring" javascript="dwrService">  
 			<param name="beanName" value="dwrService"/>
 			<include method="getProductObjBySerialNum"/>
+			<include method="getProductObjBySerialNumAndStoreId"/>
 			<include method="productIsExist"/>
 			<include method="serialNumIsExist"/>
 			<include method="SerialIsExist"/>

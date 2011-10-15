@@ -59,7 +59,7 @@ String logo_url = (String)VS.findValue("logo_url");
 				</TR>
 				</TBODY>
 			</TABLE>
-			<font style="font-size: 12px;">欢迎<%=real_name %>光临系统&nbsp;</font>
+			<font style="font-size: 12px;"><iframe src="http://m.weather.com.cn/m/pn7/weather.htm " width="195" valign="middle" height="20" marginwidth="0" marginheight="0" hspace="0" vspace="0" frameborder="0" scrolling="no"></iframe>&nbsp;&nbsp;&nbsp;&nbsp;欢迎<%=real_name %>光临系统&nbsp;</font>
 		</td>
 	</tr>
 	</TBODY>

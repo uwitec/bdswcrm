@@ -313,10 +313,15 @@ String flag = StringUtils.nullToStr(VS.findValue("flag"));
 	//发送序列号
 	function sendSerialNum(){
 		var serialNum = dwr.util.getValue("s_nums");
+		var storeId = dwr.util.getValue("store_id");
 		if(serialNum == ""){
 			return;
 		}
-		dwrService.getProductObjBySerialNum(serialNum,setProductInfo);		
+		if(storeId == ""){
+			alert("出货库房不能为空，请选择！");
+			return;
+		}
+		dwrService.getProductObjBySerialNumAndStoreId(serialNum,storeId,setProductInfo);		
 	}
 	
 	//处理返回商品对象
@@ -373,7 +378,7 @@ String flag = StringUtils.nullToStr(VS.findValue("flag"));
 			}
 			hj();
 		}else{
-			alert("该序列号不存在，请检查!");
+			alert("当前库房中不存在该序列号或条形码不存在，请检查!");
 		}
 	}	
 

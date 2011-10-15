@@ -250,10 +250,15 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 	//发送序列号
 	function sendSerialNum(){
 		var serialNum = dwr.util.getValue("s_nums");
+		var storeId = dwr.util.getValue("ck_store_id");
 		if(serialNum == ""){
 			return;
 		}
-		dwrService.getProductObjBySerialNum(serialNum,setProductInfo);		
+		if(storeId == ""){
+			alert("调出仓库不能为空，请选择！");
+			return;
+		}
+		dwrService.getProductObjBySerialNumAndStoreId(serialNum,storeId,setProductInfo);				
 	}
 	
 	//处理返回商品对象
