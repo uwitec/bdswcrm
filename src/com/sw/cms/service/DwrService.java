@@ -92,6 +92,16 @@ public class DwrService {
 	public Product getProductObjBySerialNum(String serial_num) {
 		return productDao.getProductBySerialNum(serial_num);
 	}
+	
+	/**
+	 * 根据序列号查询商品对象
+	 * 
+	 * @param serial_num
+	 * @return
+	 */
+	public Product getProductObjBySerialNumAndStoreId(String serial_num,String store_id) {
+		return productDao.getProductBySerialNum(serial_num,store_id);
+	}
 
 	/**
 	 * 根据序列号及商品编号看商品是否存在

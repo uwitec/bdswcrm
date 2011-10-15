@@ -274,6 +274,34 @@ public class ProductDAO extends JdbcBaseDAO {
 	
 	
 	/**
+	 * 根据序列号查询商品对象<BR>
+	 * 首先根据商品的序列号查询，如果该序列号不存在则用商品条形码查询
+	 * @param serial_num
+	 * @return
+	 */
+	public Product getProductBySerialNum(String serial_num,String store_id){
+		Product product = new Product();
+		String sql = "select b.* from serial_num_mng a left join product b on b.product_id=a.product_id where a.state='在库' and a.store_id=? and a.serial_num=?";
+		
+		Object obj = this.queryForObject(sql, new Object[]{store_id,serial_num}, new ProductRowMapper());
+		
+		if(obj != null){
+			product = (Product)obj;
+			//在img属性中存储查询利用的是序列号还是条形码（1：序列好；2：条形码）
+			product.setImg("1");
+		}else{
+			sql = "select * from product where sp_txm=?";
+			obj = this.queryForObject(sql, new Object[]{serial_num}, new ProductRowMapper());
+			if(obj != null){
+				product = (Product)obj;
+				product.setImg("2");
+			}
+		}
+		return product;
+	}
+	
+	
+	/**
 	 * 查看序列号是否在库
 	 * @param serial_num
 	 * @param product_id
