@@ -207,10 +207,15 @@ if(kfdbProducts!=null && kfdbProducts.size()>0){
 			alert("请设置商品数量，再输入序列号！");
 			return;
 		}
+		var storeId = document.getElementById("ck_store_id").value;
+		if(storeId == ""){
+			alert("调出仓库不能为空，请选择！");
+			return;
+		}
 		
 		var qzserialnum = document.getElementById("qz_serial_num_" + vl).value;
 		
-		var url = "importSerial.html?openerId=" + vl + "&nums=" + nm + "&serialNum=" + qzserialnum + "&product_id=" + pn;
+		var url = "importSerial.html?openerId=" + vl + "&nums=" + nm + "&serialNum=" + qzserialnum + "&product_id=" + pn + "&store_id=" + storeId;
 		var fea ='width=300,height=200,left=' + (screen.availWidth-300)/2 + ',top=' + (screen.availHeight-300)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
 		window.open(url,'详细信息',fea);	

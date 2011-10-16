@@ -10,6 +10,7 @@ String strNums = StringUtils.nullToStr(request.getParameter("nums"));
 String serialNums = StringUtils.nullToStr(request.getParameter("serialNum"));
 String openerId = StringUtils.nullToStr(request.getParameter("openerId"));
 String product_id = StringUtils.nullToStr(request.getParameter("product_id"));
+String store_id = StringUtils.nullToStr(request.getParameter("store_id"));
 
 int nums = Integer.parseInt(strNums);
 
@@ -96,7 +97,7 @@ if(!serialNums.equals("")){
 	//发送序列号
 	function sendSerialNum(obj){
 		sObj = obj;
-		dwrService.productIsExist(obj.value,'<%=product_id %>',checkProduct);		
+		dwrService.productIsExistIncludStore(obj.value,'<%=product_id %>','<%=store_id%>',checkProduct);		
 	}
 	
 	//对返回的商品进行校验
@@ -142,6 +143,7 @@ for(int i=0;i<nums;i++){
 <BR>
 说明：输入序列号回车，系统自动进行检验。
 <center>
+<input type="text" name="text1" value="" style="display:none"/>
 <input type="button" name="button1" value=" 确定 " class="css_button" onclick="importSub();">
 <input type="button" name="button2" value=" 关闭 " class="css_button" onclick="window.close();">
 </center>

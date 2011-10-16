@@ -54,6 +54,27 @@ A.xxlb:hover
     COLOR:#BA2636;
     text-decoration: underline;  
 }
+A:link
+{
+    color:#000000;
+	text-decoration: none; 
+}
+A:active                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+{
+    COLOR:#000000;
+	text-decoration: none;     
+}
+A:visited
+{
+	color:#000000;
+	text-decoration: none; 	
+
+}
+A:hover
+{
+    COLOR:#BA2636;
+    text-decoration: underline;  
+}
 .css_button
 {
 	background-image: url(../images/button-l.gif);

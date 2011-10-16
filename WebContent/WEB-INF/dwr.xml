@@ -8,6 +8,7 @@
 			<include method="getProductObjBySerialNum"/>
 			<include method="getProductObjBySerialNumAndStoreId"/>
 			<include method="productIsExist"/>
+			<include method="productIsExistIncludStore"/>
 			<include method="serialNumIsExist"/>
 			<include method="SerialIsExist"/>
 			<include method="updateProductKc"/>

@@ -69,21 +69,11 @@ List userList = (List)VS.findValue("userList");
 	<tr>			
 		<td class="a1" width="15%">供货单位</td>
 		<td class="a2" colspan="3"><%=StaticParamDo.getClientNameById(StringUtils.nullToStr(rkd.getClient_name())) %></td>	
-	</tr>			
-</table>
-<br>
-<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
-	<thead>
-	<tr>
-		<td colspan="2">描述信息</td>
-	</tr>
-	</thead>
+	</tr>	
 	<tr>
 		<td class="a1" width="15%">描述信息</td>
-		<td class="a2" width="85%">
-			<textarea rows="6" name="rkd.ms" id="ms" style="width:75%" readonly><%=StringUtils.nullToStr(rkd.getMs()) %></textarea>
-		</td>
-	</tr>	
+		<td class="a2" colspan="3"><%=StringUtils.nullToStr(rkd.getMs()) %></td>
+	</tr>				
 </table>
 <br>
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
