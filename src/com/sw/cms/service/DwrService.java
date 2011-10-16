@@ -116,6 +116,24 @@ public class DwrService {
 	
 	
 	/**
+	 * 根据序列号及商品编号看商品是否存在
+	 * 
+	 * @param serial_num
+	 * @param product_id
+	 * @oaram store_id
+	 * @return
+	 */
+	public String productIsExistIncludStore(String serial_num, String product_id, String store_id) {
+		if(store_id != null && !store_id.equals("")){
+			return productDao.productIsExist(serial_num, product_id, store_id);
+		}else{
+			return productDao.productIsExist(serial_num, product_id);
+		}
+		
+	}
+	
+	
+	/**
 	 * 根据客户编号取客户采购账期
 	 * @param client_id
 	 * @return

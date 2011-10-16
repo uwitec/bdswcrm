@@ -325,8 +325,26 @@ public class ProductDAO extends JdbcBaseDAO {
 	 */
 	public String productIsExist(String serial_num,String product_id){
 		String flag = "false";
-		String sql = "select * from serial_num_mng where product_id='" + product_id + "' and serial_num='" + serial_num + "' and state='在库'";
-		List list = this.getResultList(sql);
+		String sql = "select * from serial_num_mng where product_id=? and serial_num=? and state='在库'";
+		List list = this.getResultList(sql,new Object[]{product_id,serial_num});
+		if(list != null && list.size() > 0){
+			flag = "true";
+		}
+		return flag;
+	}	
+	
+	
+	/**
+	 * 根据商品编号及序列号查询商品是否存在
+	 * @param serial_num
+	 * @param product_id
+	 * @param store_id
+	 * @return
+	 */
+	public String productIsExist(String serial_num,String product_id,String store_id){
+		String flag = "false";
+		String sql = "select * from serial_num_mng where product_id=? and serial_num=? and store_id=? and state='在库'";
+		List list = this.getResultList(sql,new Object[]{product_id,serial_num,store_id});
 		if(list != null && list.size() > 0){
 			flag = "true";
 		}
