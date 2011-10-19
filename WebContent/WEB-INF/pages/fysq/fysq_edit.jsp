@@ -138,7 +138,7 @@ Fysq fysq = (Fysq)VS.findValue("fysq");
 	<tr>
 		<td class="a1" width="15%">费用类型</td>
 		<td class="a2" width="35%">
-			<ww:textfield name="fy_type_show" id="fy_type_show" theme="simple" value="%{getFyTypeName(fysq.fy_type)}" readonly="true" cssStyle="width:190px"/><span style="color:red">*</span>
+			<ww:textfield name="fy_type_show" id="fy_type_show" theme="simple" onclick="openFyType();" value="%{getFyTypeName(fysq.fy_type)}" readonly="true" cssStyle="width:190px"/><span style="color:red">*</span>
 			<ww:hidden name="fysq.fy_type" id="fy_type" theme="simple" value="%{fysq.fy_type}"/>
 			<img src="images/select.gif" align="absmiddle" title="选择费用类型" border="0" onclick="openFyType();" style="cursor:hand">
 			
@@ -155,7 +155,7 @@ Fysq fysq = (Fysq)VS.findValue("fysq");
 		</td>	
 		<td class="a1" width="15%">支付账户</td>
 		<td class="a2">
-			<ww:textfield id="zhname"  name="zhname" value="%{getAccountName(fysq.zfzh)}" theme="simple" cssStyle="width:190px" readonly="true"/>
+			<ww:textfield id="zhname"  name="zhname" value="%{getAccountName(fysq.zfzh)}" theme="simple" onclick="openAccount();" cssStyle="width:190px" readonly="true"/>
 			<ww:hidden name="fysq.zfzh" id="fkzh" value="%{fysq.zfzh}" theme="simple"/>
 			<img src="images/select.gif" align="absmiddle" title="选择账户" border="0" onclick="openAccount();" style="cursor:hand">
 		</td>									

@@ -9,7 +9,8 @@ if(msg != null && !msg.equals("")){
 	out.print("<script>alert(\"" + msg + "\");</script>");
 }
 %>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>费用类别</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -222,7 +223,7 @@ function fresh() {
 
 </head>
 
-<body onLoad="window_onload();" onClick="showoff();" align="center">
+<body onLoad="window_onload();" onClick="showoff();">
 <div class="rightContentDiv" id="divContent">
 <div id="mlay" style="position:absolute;display:none;cursor:default;" onClick="return false;"></div>
 <table width="100%" border="0" align="center" class="chart_list"
@@ -238,7 +239,7 @@ function fresh() {
 	cellspacing="0">
 	<tr>
 		<td width="1%">&nbsp;</td>
-		<td width="98%" valign="top"><span class="a1" height="30">费用类别
+		<td width="98%" valign="top" style="text-align: left"><span class="a1" height="30">费用类别
 		<script language="javascript" type="text/javascript">
 			<%=strTree %>
 			document.write(menu('00'));

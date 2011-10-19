@@ -7,7 +7,8 @@ OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
 String strTree = (String)VS.findValue("strTree");
 %>
 
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>商品类别</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -97,12 +98,12 @@ function menu(id){						//画菜单
 		}//end if
 
 		if(currdata[i][3]!="" && currdata[i][3]!=null){
-			menuname	= "<input type='checkbox' name='chkKind' value='" + currdata[i][0] + "|" + currdata[i][2] + "' style='height:16px;width:16px;'><span onMouseOver='over_str(this)' valign='bottom' onMouseOut='out_str(this)' class='item' onclick=" + onmouseup + ">" + currdata[i][2] + "</span>";
+			menuname	= "<input type='checkbox' name='chkKind' value='" + currdata[i][0] + "|" + currdata[i][2] + "' style='height:16px;width:16px;vertical-align:middle'><span onMouseOver='over_str(this)' valign='bottom' onMouseOut='out_str(this)' class='item' onclick=" + onmouseup + ">" + currdata[i][2] + "</span>";
 		}else{
 			menuname	= currdata[i][2];
 		}//end if
 
-		ico			= "<img src='"+path+currdata[i][4]+"' id='ico"+currdata[i][0]+"' align=middle border=0 onclick=\""+onmouseup+"\">";
+		ico			= "<img src='"+path+currdata[i][4]+"' id='ico"+currdata[i][0]+"' style=\"vertical-align:middle\" align=middle border=0 onclick=\""+onmouseup+"\">";
 		printstr	+= "<tr><td id='pr"+currdata[i][0]+"' class="+menutype+" onclick=\""+onmouseup+"\"></td><td valign=middle class=textItem>"+ico + menuname+"</td></tr>\n";
 		printstr	+= "<tr id='item"+currdata[i][0]+"' style='display:none'><td class="+listtype+" onclick=\""+onmouseup+"\"></td><td class=textItem>"+menu(currdata[i][0])+"</td></tr>\n";
 
@@ -208,7 +209,7 @@ function selOk(){
 </SCRIPT>
 </head>
 
-<body align="center">
+<body>
 <table width="100%" border="0" align="center" class="chart_list" cellpadding="0" cellspacing="0">
 	<tr>
 		<td class="csstitle">&nbsp;&nbsp;&nbsp;&nbsp;<b>选择商品类别</b></td>
@@ -216,7 +217,7 @@ function selOk(){
 </table>
 <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
 	<tr>
-		<td width="100%" valign="top">
+		<td width="100%" valign="top" style="text-align: left">
 				<script language="javascript" type="text/javascript">
 					<%=strTree %>
 					document.write(menu(0));

@@ -34,6 +34,7 @@ function menu(id){
 	var printstr	= "<table border='0' cellspacing='0' cellpadding='0'>\n";
 	var listtype	= "";
 	var menutype	= "";
+	var onmouseup = null;
 	
 	for(; i<treedata.length; i++){					//判断有无此节点
 		if(treedata[i][1]==id)	currdata[currdata.length] = treedata[i];
@@ -164,7 +165,7 @@ function selType(id,name){
 
 </head>
 
-<body align="center">
+<body>
 <table width="100%" border="0" align="center" class="chart_list"
 	cellpadding="0" cellspacing="0">
 	<tr>
@@ -175,7 +176,7 @@ function selType(id,name){
 	cellspacing="0">
 	<tr>
 		<td width="1%">&nbsp;</td>
-		<td width="98%" valign="top"><span class="a1" height="30">费用类别
+		<td width="98%" valign="top" style="text-align: left"><span class="a1" height="30">费用类别
 		<script language="javascript" type="text/javascript">
 			<%=strTree %>
 			document.write(menu('00'));
