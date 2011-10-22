@@ -32,9 +32,6 @@ String orderType = (String)VS.findValue("orderType");
 	.selectTip{background-color:#009;color:#fff;}
 </style>
 <script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
-<script language='JavaScript' src="js/selClient.js"></script>
-<script language='JavaScript' src="js/selJsr.js"></script>
-<script type="text/javascript" src="js/prototype-1.4.0.js"></script>
 <script type="text/javascript" src="jquery/jquery.js"></script>
 <script type="text/javascript" src="js/initPageSize.js"></script>
 <script type="text/javascript">
@@ -54,8 +51,6 @@ String orderType = (String)VS.findValue("orderType");
 	
 	function clearAll(){
 		document.getElementById("client_name").value = "";
-		document.getElementById("client_id").value = "";
-		document.getElementById("brand").value = "";
 		document.getElementById("fzr").value = "";			
 		document.myform.creatdate1.value = "";
 		document.myform.creatdate2.value = "";
@@ -118,7 +113,7 @@ String orderType = (String)VS.findValue("orderType");
 	}	
 </script>
 </head>
-<body onload="initFzrTip();initClientTip();">
+<body>
 <div class="rightContentDiv" id="divContent">
 <form name="myform" action="listXsd.html" method="post">
 <input type="hidden" name="orderType" value="<%=orderType %>">
@@ -136,9 +131,7 @@ String orderType = (String)VS.findValue("orderType");
 				<tr>
 					<td align="center">客户名称：</td>
 					<td>
-						<input type="text" name="client_brand" onblur="setClientValue();" id="client_name" value="<%=StaticParamDo.getClientNameById(client_name) %>" size="20" maxlength="50" >
-						<input type="hidden" name="client_name" id="client_id" value="<%=client_name %>">
-						<div id="clientsTip" style="position:absolute;width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>				
+						<input type="text" name="client_name" id="client_name" value="<%=client_name %>">
 					</td>
 					<td align="center">日　　期：</td>
 					<td colspan="3">
@@ -154,9 +147,7 @@ String orderType = (String)VS.findValue("orderType");
 				<tr>
 					<td width="10%" align="center">销 售 员：</td>
 					<td width="20%">
-						<input  id="brand" name="xsry_brand" type="text" length="20" onblur="setValue();" value="<%=StaticParamDo.getRealNameById(fzr) %>"/> 
-						<div id="brandTip"  style="position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
-						<input type="hidden" name="fzr" id="fzr" value="<%=fzr%>"/>
+						<input type="text" name="fzr" id="fzr" value="<%=fzr%>"/>
 					</td>
 					<td width="10%" align="center">订单状态：</td>
 					<td width="20%">
