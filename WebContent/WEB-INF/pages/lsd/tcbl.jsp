@@ -22,24 +22,24 @@
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
-		<td colspan="4">提成比例设置</td>
+		<td colspan="2">提成比例设置</td>
 	</tr>
 	</thead>
 	<tr>
 		<td class="a1" width="15%">基本提成比例</td>
-		<td class="a2" width="35%">
+		<td class="a2" width="85%">
 			<ww:textfield name="basic_ratio" id="basic_ratio" value="%{tcblMap.basic_ratio}" theme="simple" />%<span style="color:red">*</span>
 		</td>			
 	</tr>
 	<tr>
 		<td class="a1" width="15%">超限提成比例</td>
-		<td class="a2" width="35%">
+		<td class="a2" width="85%">
 			<ww:textfield name="out_ratio" id="out_ratio" value="%{tcblMap.out_ratio}" theme="simple" />%<span style="color:red">*</span>
 		</td>			
 	</tr>
 	<tr>
 		<td class="a1" width="15%">低于零售限价时点杀比例</td>
-		<td class="a2" width="35%">
+		<td class="a2" width="85%">
 			<ww:textfield name="ds_ratio" id="ds_ratio" value="%{tcblMap.ds_ratio}" theme="simple" />%<span style="color:red">*</span>
 		</td>			
 	</tr>					

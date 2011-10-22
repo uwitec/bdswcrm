@@ -27,9 +27,6 @@ List userList = (List)VS.findValue("userList");
 <title>往来单位资料</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
-<script language='JavaScript' src="js/date.js"></script>
-<script language='JavaScript' src="js/selJsr.js"></script>
-<script type="text/javascript" src="js/prototype-1.4.0.js"></script>
 <script type="text/javascript" src="jquery/jquery.js"></script>
 <script type="text/javascript" src="js/initPageSize.js"></script>
 <style>
@@ -51,7 +48,6 @@ List userList = (List)VS.findValue("userList");
 		document.myform.name.value = "";
 		document.myform.lxr.value = "";
 		document.myform.khjl.value = "";
-		document.myform.brand.value="";
 	}
 	
 		
@@ -84,7 +80,7 @@ List userList = (List)VS.findValue("userList");
 	}
 </script>
 </head>
-<body onload="initFzrTip();">
+<body>
 <div class="rightContentDiv" id="divContent">
 <form name="myform" action="listClientbb.html" method="post">
 <input type="hidden" name="orderType" value="<%=orderType %>">
@@ -96,15 +92,13 @@ List userList = (List)VS.findValue("userList");
 			<img src="images/import.gif" align="absmiddle" border="0">&nbsp;<a href="#" class="xxlb" onclick="refreshPage();"> 刷 新 </a>	</td>			
 	</tr>
 	<tr>
-		<td class="search" align="left" colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;
-			单位名称：<input type="text" name="name" value="<%=name %>" onkeypress="f_enter();">&nbsp;&nbsp;&nbsp;&nbsp;
-			联系人：<input type="text" name="lxr" value="<%=lxr %>" onkeypress="f_enter();">&nbsp;&nbsp;&nbsp;&nbsp;
+		<td class="search" align="left" colspan="2">&nbsp;&nbsp;
+			单位名称：<input type="text" name="name" value="<%=name %>" onkeypress="f_enter();">&nbsp;&nbsp;
+			联系人：<input type="text" name="lxr" value="<%=lxr %>" onkeypress="f_enter();">&nbsp;&nbsp;
 			客户经理：
-		    <input  id="brand"    type="text"   length="20"  onblur="setValue()" value="<%=StaticParamDo.getRealNameById(khjl) %>" onkeypress="f_enter();"> 
-            <div id="brandTip"  style="position:absolute;left:515px; top:60px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
-		    <input type="hidden" name="khjl" id="fzr" value="<%=khjl%>" /> 
-			<input type="button" name="buttonCx" value=" 查询 " onclick="submits()" class="css_button2">&nbsp;&nbsp;&nbsp;&nbsp;	
-			<input type="button" name="buttonQk" value=" 清空 " class="css_button2" onclick="clearAll();">
+		    <input type="text" name="khjl" id="khjl" value="<%=khjl%>" onkeypress="f_enter();" /> 
+			<input type="button" name="buttonCx" value=" 查询 " onclick="submits()" class="css_button">&nbsp;&nbsp;
+			<input type="button" name="buttonQk" value=" 清空 " class="css_button" onclick="clearAll();">
 		</td>				
 	</tr>		
 </table>

@@ -224,6 +224,7 @@ table.chart_list thead td
 	border-right:solid 1px #D8D8D8;
 	border-bottom:solid 1px #D8D8D8;
 	cursor: pointer;
+	white-space: nowrap;
 }
 table.chart_list td.csstitle
 {

@@ -279,7 +279,7 @@ if(flag == null){
 					<TD class=NormalWhite vlign=middle width=10 bgColor=#bcc2d4>|</TD>
 					<TD class=NormalWhite noWrap align=middle width=85 bgColor=#bcc2d4><IMG height=15 src="index_images/out_system.gif" width=15 align=absMiddle> <A class=TitleMenu href="#" onclick="logout();">安全退出</A></TD>
 				</TR>
-				<TR height="20"><TD colspan="11" align="right"><iframe src="http://m.weather.com.cn/m/pn7/weather.htm " width="195" valign="middle" height="20" marginwidth="0" marginheight="0" hspace="0" vspace="0" frameborder="0" scrolling="no"></iframe>&nbsp;&nbsp;&nbsp;&nbsp;<font style="font-size: 12px;">欢迎<%=real_name %>光临系统&nbsp;</font>&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:switchUi('<%=flag %>');">切换界面</a>&nbsp;&nbsp;&nbsp;&nbsp;</TD></TR>
+				<TR height="20"><TD colspan="11" align="right"><iframe src="http://m.weather.com.cn/m/pn7/weather.htm " width="195" style="vertical-align: middle;" height="20" marginwidth="0" marginheight="0" hspace="0" vspace="0" frameborder="0" scrolling="no"></iframe>&nbsp;&nbsp;&nbsp;&nbsp;<font style="font-size: 12px;">欢迎<%=real_name %>光临系统&nbsp;</font>&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:switchUi('<%=flag %>');">切换界面</a>&nbsp;&nbsp;&nbsp;&nbsp;</TD></TR>
 				</TBODY>
 			</TABLE>
 		</td>

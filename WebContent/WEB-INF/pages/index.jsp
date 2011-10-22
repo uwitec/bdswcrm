@@ -24,6 +24,7 @@ int menu_index = 0;
 <link rel="stylesheet" type="text/css" media="all" href="extjs/resources/css/xtheme-gray.css" />
 <script type="text/javascript" src="extjs/adapter/ext/ext-base.js"></script>
 <script type="text/javascript" src="extjs/ext-all.js"></script>
+<script type="text/javascript" src="jquery/jquery.js"></script>
 <style>
 .menu_icon_001 { background-image: url(index_images/merchandise_sales.gif);}
 .menu_icon_002 { background-image: url(index_images/stock_m.gif);}
@@ -271,7 +272,7 @@ var leftNav = new Ext.Panel({
 //顶部导航区域
 var topNav = new Ext.Panel({
 		region:"north",
-		split:true,
+		split:false,
 		collapsible: false,
 		collapseMode: 'mini',
 		height:62,
@@ -313,6 +314,12 @@ function addtabFmMenu(strTitle,strUrl,id){
 	}
 	contentPanel.setActiveTab(n);
 }
+
+var leftWinHeight = ($(window).height()-115) + "px";
+
+$(window).resize(function(){
+	leftWinHeight = ($(window).height()-115) + "px";
+});
 </script>
 </head>
 <body>

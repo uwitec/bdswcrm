@@ -1,6 +1,10 @@
 $(document).ready(function(){
 	if(document.getElementById("divContent") != null){
-		document.getElementById("divContent").style.height = $(window).height() + "px";
+		if(parent.leftWinHeight != null){
+			document.getElementById("divContent").style.height = parent.leftWinHeight;
+		}else{
+			document.getElementById("divContent").style.height = $(window).height() + "px";
+		}
 	}
 	$(".stripe tbody tr").mouseover(function(){
 		//如果鼠标移到class为stripe的表格的tr上时，执行函数
@@ -10,6 +14,10 @@ $(document).ready(function(){
 });
 $(window).resize(function(){
 	if(document.getElementById("divContent") != null){
-		document.getElementById("divContent").style.height = $(window).height() + "px";
+		if(parent.leftWinHeight != null){
+			document.getElementById("divContent").style.height = parent.leftWinHeight;
+		}else{
+			document.getElementById("divContent").style.height = $(window).height() + "px";
+		}
 	}
 });
