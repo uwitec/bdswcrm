@@ -127,7 +127,7 @@ public class UserAction extends BaseAction {
 		
 		String checkNums = (String)getSession().getAttribute("RAND_AUTH_NUMS");
 		getSession().removeAttribute("RAND_AUTH_NUMS");
-		if(!authNums.equals(checkNums)){
+		if(!authNums.equalsIgnoreCase(checkNums)){
 			return "cancel";
 		}
 		

@@ -138,17 +138,17 @@ public class PageComponent extends Component {
 		if(curPage==1){ //如果当前是第一页
 			if(totalPage>1){  //如果总页数大于1,显示下一页和末页，否则不显示任何信息
 				pageScript.append("<a href='#' onclick='goPage(\"" + (curPage+1) + "\");'>下一页</a>&nbsp;&nbsp");
-				pageScript.append("<a href='#' onclick='goPage(\"" + totalPage + "\");'>末&nbsp;&nbsp;页</a>");
+				pageScript.append("<a href='#' onclick='goPage(\"" + totalPage + "\");'>末&nbsp;&nbsp;页</a>&nbsp;&nbsp");
 			}		
 		}else{ //如果当前不是第一页
 			if(curPage == totalPage){  //如果当前页是最后一页
 				pageScript.append("<a href='#' onclick='goPage(1);'>首&nbsp;&nbsp;页</a>&nbsp;&nbsp");
-				pageScript.append("<a href='#' onclick='goPage(\"" + (curPage-1) + "\");'>上一页</a>");
+				pageScript.append("<a href='#' onclick='goPage(\"" + (curPage-1) + "\");'>上一页</a>&nbsp;&nbsp");
 			}else{
 				pageScript.append("<a href='#' onclick='goPage(1)'>首&nbsp;&nbsp;页</a>&nbsp;&nbsp");
 				pageScript.append("<a href='#' onclick='goPage(\"" + (curPage-1) + "\");'>上一页</a>&nbsp;&nbsp");
 				pageScript.append("<a href='#' onclick='goPage(\"" + (curPage+1) + "\");'>下一页</a>&nbsp;&nbsp");
-				pageScript.append("<a href='#' onclick='goPage(\"" + totalPage + "\");'>末&nbsp;&nbsp;页</a>");
+				pageScript.append("<a href='#' onclick='goPage(\"" + totalPage + "\");'>末&nbsp;&nbsp;页</a>&nbsp;&nbsp");
 			}
 		}
 		

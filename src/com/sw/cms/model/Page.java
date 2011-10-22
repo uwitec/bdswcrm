@@ -103,17 +103,17 @@ public class Page {
 		if(this.curPage==1){ //如果当前是第一页
 			if(this.totalPage>1){  //如果总页数大于1,显示下一页和末页，否则不显示任何信息
 				pageScript += "<a href='#' class=\"xxlb\" onclick='goPage(\"" + (this.curPage+1) + "\")'>下一页</a>&nbsp;&nbsp";
-				pageScript += "<a href='#' class=\"xxlb\" onclick='goPage(\"" + this.totalPage + "\")'>末&nbsp;&nbsp;页</a>";
+				pageScript += "<a href='#' class=\"xxlb\" onclick='goPage(\"" + this.totalPage + "\")'>末&nbsp;&nbsp;页</a>&nbsp;&nbsp";
 			}		
 		}else{ //如果当前不是第一页
 			if(this.curPage == this.totalPage){  //如果当前页是最后一页
 				pageScript += "<a href='#' class=\"xxlb\" onclick='goPage(1)'>首&nbsp;&nbsp;页</a>&nbsp;&nbsp";
-				pageScript += "<a href='#' class=\"xxlb\" onclick='goPage(\"" + (this.curPage-1) + "\")'>上一页</a>";
+				pageScript += "<a href='#' class=\"xxlb\" onclick='goPage(\"" + (this.curPage-1) + "\")'>上一页</a>&nbsp;&nbsp";
 			}else{
 				pageScript += "<a href='#' class=\"xxlb\" onclick='goPage(1)'>首&nbsp;&nbsp;页</a>&nbsp;&nbsp";
 				pageScript += "<a href='#' class=\"xxlb\" onclick='goPage(\"" + (this.curPage-1) + "\")'>上一页</a>&nbsp;&nbsp";
 				pageScript += "<a href='#' class=\"xxlb\" onclick='goPage(\"" + (this.curPage+1) + "\")'>下一页</a>&nbsp;&nbsp";
-				pageScript += "<a href='#' class=\"xxlb\" onclick='goPage(\"" + this.totalPage + "\")'>末&nbsp;&nbsp;页</a>";
+				pageScript += "<a href='#' class=\"xxlb\" onclick='goPage(\"" + this.totalPage + "\")'>末&nbsp;&nbsp;页</a>&nbsp;&nbsp";
 			}
 		}
 		
