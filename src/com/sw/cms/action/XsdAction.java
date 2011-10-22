@@ -118,25 +118,25 @@ public class XsdAction extends BaseAction {
 
 		String con = "";
 		if(!id.equals("")){
-			con += " and id='" + id + "'";
+			con += " and a.id='" + id + "'";
 		}
 		if(!client_name.equals("")){
-			con += " and client_name='" + client_name + "'";
+			con += " and c.name like '%" + client_name + "%'";
 		}
 		if(!fzr.equals("")){
-			con += " and fzr='" + fzr + "'";
+			con += " and b.real_name like '%" + fzr + "%'";
 		}		
 		if(!creatdate1.equals("")){
-			con += " and creatdate>='" + creatdate1 + "'";
+			con += " and a.creatdate>='" + creatdate1 + "'";
 		}
 		if(!creatdate2.equals("")){
-			con += " and creatdate<='" + (creatdate2+ " 23:59:59") + "'";
+			con += " and a.creatdate<='" + (creatdate2+ " 23:59:59") + "'";
 		}
 		if(!skxs.equals("")){
-			con += " and skxs='" + skxs + "'";
+			con += " and a.skxs='" + skxs + "'";
 		}
 		if(!state.equals("")){
-			con += " and state='" + state + "'";
+			con += " and a.state='" + state + "'";
 		}
 		
 		if(orderName.equals("")){

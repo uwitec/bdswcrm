@@ -33,7 +33,7 @@ public class XsdDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public Page getXsdList(String con,int curPage, int rowsPerPage){
-		String sql = "select id,client_name,state,xsdje,creatdate,fzr,czr,skxs,sp_state,sklx,th_flag from xsd where 1=1";
+		String sql = "select a.id,a.client_name,a.state,a.xsdje,a.creatdate,a.fzr,a.czr,a.skxs,a.sp_state,a.sklx,a.th_flag from xsd a left join sys_user b on b.user_id=a.fzr left join clients c on c.id=a.client_name where 1=1";
 		
 		if(!con.equals("")){
 			sql = sql + con;
