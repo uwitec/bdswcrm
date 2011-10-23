@@ -15,7 +15,6 @@ String khjl = (String)VS.findValue("khjl");
 
 String orderName = (String)VS.findValue("orderName");
 String orderType = (String)VS.findValue("orderType");
-List userList = (List)VS.findValue("userList");
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -24,17 +23,8 @@ List userList = (List)VS.findValue("userList");
 <title>联系人列表</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
-<script language='JavaScript' src="js/date.js"></script>
-<script type="text/javascript" src="js/prototype-1.4.0.js"></script>
-<script type='text/javascript' src="js/selJsr.js"></script>
 <script type="text/javascript" src="jquery/jquery.js"></script>
 <script type="text/javascript" src="js/initPageSize.js"></script>
-<style>
-	.selectTip{
-		background-color:#009;
-		 color:#fff;
-	}
-</style>
 <script type="text/javascript">
 	
 	function openWin(id){
@@ -66,7 +56,6 @@ List userList = (List)VS.findValue("userList");
 		document.myform.clients_name.value = "";
 		document.myform.lxr.value = "";
 		document.myform.khjl.value = "";
-		document.myform.brand.value="";
 	}
 	
 	function openywyWin()
@@ -98,7 +87,7 @@ List userList = (List)VS.findValue("userList");
 	}
 </script>
 </head>
-<body onload="initFzrTip();">
+<body>
 <div class="rightContentDiv" id="divContent">
 <form name="myform" action="listLxr.html" method="post">
 <input type="hidden" name="orderType" value="<%=orderType %>">
@@ -111,15 +100,13 @@ List userList = (List)VS.findValue("userList");
 			<img src="images/import.gif" align="absmiddle" border="0">&nbsp;<a href="#" class="xxlb" onclick="refreshPage();"> 刷 新 </a>	</td>			
 	</tr>
 	<tr>
-		<td class="search" align="left" colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;
-		    联系人：<input type="text" name="lxr" value="<%=lxr %>">&nbsp;&nbsp;&nbsp;&nbsp;
-			单位名称：<input type="text" name="clients_name" value="<%=name %>">&nbsp;&nbsp;&nbsp;&nbsp;	
+		<td class="search" align="left" colspan="2">&nbsp;&nbsp;
+		    联系人：<input type="text" name="lxr" value="<%=lxr %>">&nbsp;&nbsp;
+			单位名称：<input type="text" name="clients_name" value="<%=name %>">&nbsp;&nbsp;
 			客户经理：
-		    <input  id="brand"    type="text"   length="20"  onblur="setValue()" value="<%=StaticParamDo.getRealNameById(khjl) %>"/> 
-            <div   id="brandTip"  style="position:absolute;left:515px; top:60px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
-		    <input type="hidden" name="khjl" id="fzr" value="<%=khjl%>" /> 
-			<input type="button" name="buttonCx" value=" 查询 " onclick="submits()" class="css_button2">&nbsp;&nbsp;&nbsp;&nbsp;	
-			<input type="button" name="buttonQk" value=" 清空 " class="css_button2" onclick="clearAll();">
+		    <input type="text" name="khjl" id="khjl" value="<%=khjl%>" /> 
+			<input type="button" name="buttonCx" value=" 查询 " onclick="submits()" class="css_button">&nbsp;&nbsp;
+			<input type="button" name="buttonQk" value=" 清空 " class="css_button" onclick="clearAll();">
 		</td>				
 	</tr>		
 </table>
