@@ -74,13 +74,13 @@ public class ClientsAction extends BaseAction {
 		String con = "";
       
 		if (!name.equals("")) {
-			con += " and name like'%" + name + "%'";
+			con += " and a.name like'%" + name + "%'";
 		}
 		if (!lxr.equals("")) {
-			con += " and lxr like'%" + lxr + "%'";
+			con += " and a.lxr like'%" + lxr + "%'";
 		}
 		if (!khjl.equals("")) {
-			con += " and khjl like '%" + khjl + "%'";
+			con += " and b.real_name like '%" + khjl + "%'";
 		}
 
 		if (orderName.equals("")) {
@@ -93,7 +93,6 @@ public class ClientsAction extends BaseAction {
 		con += " order by " + orderName + " " + orderType;
 
 		clientsPage = clientsService.getClients(con, curPage, rowsPerPage);
-		userList = userService.getAllEmployeeList();
 
 		return "success";
 	}

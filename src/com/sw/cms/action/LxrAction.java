@@ -6,7 +6,6 @@ import java.util.List;
 import com.sw.cms.action.base.BaseAction;
 import com.sw.cms.model.ClientsLinkman;
 import com.sw.cms.model.Page;
-import com.sw.cms.sendmail.SendMail;
 import com.sw.cms.service.LxrService;
 import com.sw.cms.service.SjzdService;
 import com.sw.cms.service.UserService;
@@ -77,7 +76,7 @@ public class LxrAction extends BaseAction {
 			con += " and l.name like'%" + lxr + "%'";
 		}
 		if (!khjl.equals("")) {
-			con += " and c.khjl='" + khjl + "'";
+			con += " and s.real_name like '%" + khjl + "%'";
 		}
 
 		if (orderName.equals("")) {
@@ -90,8 +89,6 @@ public class LxrAction extends BaseAction {
 		con += " order by " + orderName + " " + orderType;
 
 		lxrPage = lxrService.getClinetsLinkman(con, curPage, rowsPerPage);
-		userList = userService.getAllEmployeeList();
-
 		return "success";
 
 	}

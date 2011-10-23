@@ -59,7 +59,7 @@ public class ClientsLinkmanDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public Page getClinetsLinkman(String con, int curPage, int rowsPerPage) {
-		String sql = "select l.id,l.name,l.sex,l.lx,l.zw,l.dept,l.yddh,l.mail,l.jtdh,l.gzdh,l.qtlx,l.address,l.sr,l.ah,l.remark,c.name as clients_name, c.id as clients_id,c.cz,l.ch,l.qq,l.msn,l.nld from clients_linkman  l left join clients c on c.id=l.clients_id where 1=1 ";
+		String sql = "select l.id,l.name,l.sex,l.lx,l.zw,l.dept,l.yddh,l.mail,l.jtdh,l.gzdh,l.qtlx,l.address,l.sr,l.ah,l.remark,c.name as clients_name, c.id as clients_id,c.cz,l.ch,l.qq,l.msn,l.nld from clients_linkman  l left join clients c on c.id=l.clients_id left join sys_user s on s.user_id=c.khjl where 1=1 ";
 		if (!con.equals("")) {
 			sql = sql + con;
 		}
