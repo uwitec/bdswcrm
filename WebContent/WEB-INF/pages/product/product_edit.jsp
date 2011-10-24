@@ -164,7 +164,7 @@ String iscs_flag = StringUtils.nullToStr(VS.findValue("iscs_flag"));
 				String name = StringUtils.nullToStr(map.get("name"));	
 				
 				for(int k=0;k<id.length()-2;k++){
-					name = "　" + name;
+					name = "&nbsp;&nbsp;" + name;
 				}
 		%>
 				<option value="<%=id %>" <%if(StringUtils.nullToStr(product.getProductKind()).equals(id)) out.print("selected"); %>><%=name %></option>

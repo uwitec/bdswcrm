@@ -56,7 +56,7 @@ String[] fy_types = (String[])VS.findValue("fy_types");
 						String dept_name = dept.getDept_name();
 						
 						for(int k=0;k<dept_id.length()-2;k++){
-							dept_name = "　" + dept_name;
+							dept_name = "&nbsp;&nbsp;" + dept_name;
 						}
 				%>
 				<option value="<%=dept_id %>"><%=dept_name %></option>

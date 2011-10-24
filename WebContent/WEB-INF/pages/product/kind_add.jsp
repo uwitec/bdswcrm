@@ -37,7 +37,7 @@
 	</thead>
 	<tr>
 		<td class="a1" width="15%">商品类别名称</td>
-		<td class="a2" width="35%"><input type="text" name="kindName" value=""></td>
+		<td class="a2" width="35%"><input type="text" name="kindName" value="" style="width:230px"></td>
 	</tr>
 	<tr height="50">
 		<td class="a1" width="15%">商品类别描述</td>

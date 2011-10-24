@@ -376,14 +376,14 @@ function window_onload(){
 
 function openAdd(){
 	var destination = "addProductKind.html";
-	var fea ='width=400,height=200,left=' + (screen.availWidth-300)/2 + ',top=' + (screen.availHeight-200)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+	var fea ='width=600,height=300,left=' + (screen.availWidth-600)/2 + ',top=' + (screen.availHeight-300)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 	
 	window.open(destination,'',fea);	
 }
 
 function openEdit(){
 	var destination = "editProductKind.html?id=" + document.productKindForm.parent_id.value;
-	var fea ='width=400,height=200,left=' + (screen.availWidth-300)/2 + ',top=' + (screen.availHeight-200)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+	var fea ='width=600,height=300,left=' + (screen.availWidth-600)/2 + ',top=' + (screen.availHeight-300)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 	
 	window.open(destination,'',fea);		
 }
@@ -456,6 +456,7 @@ function addRoot(){
 		<td class="csstitle">&nbsp;&nbsp;&nbsp;&nbsp;<b>商品类别管理</b></td>
 	</tr>
 	<form name="productKindForm" action="saveProductKind.html" method="post">
+	<input type="hidden" name="old_parent_id" id="old_parent_id" value="">
 	<input type="hidden" name="parent_id" id="parent_id" value="">
 	<input type="hidden" name="id"  value="">
 	<input type="hidden" name="name" value="">

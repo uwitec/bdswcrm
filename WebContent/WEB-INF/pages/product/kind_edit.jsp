@@ -8,6 +8,7 @@
 OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
 
 ProductKind productKind = (ProductKind)VS.findValue("productKind");
+List productKindList= (List)VS.findValue("productKindList");
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -19,24 +20,27 @@ ProductKind productKind = (ProductKind)VS.findValue("productKind");
 <script language="JavaScript" src="js/Check.js"></script>
 <script type="text/javascript">
 	function saveInfo(){
-		if(!InputValid(document.myform.kindName,1,"string",1,1,25,"商品类别名称")){	 return; }
-		if(!InputValid(document.myform.ms,0,"string",0,1,500,"商品类别描述")){	 return; }
-
-		window.opener.document.productKindForm.parent_id.value = document.myform.parent_id.value;
-		window.opener.document.productKindForm.id.value = document.myform.id.value;
-		window.opener.document.productKindForm.name.value = document.myform.kindName.value;
-		window.opener.document.productKindForm.ms.value = document.myform.ms.value;
-		
-		window.opener.document.productKindForm.action = "updateProductKind.html";
-		window.opener.document.productKindForm.submit();
-		
-		window.close();
+		if(window.confirm("确认提交修改吗，提交后类别编码将重新生成！")){
+			if(!InputValid(document.myform.kindName,1,"string",1,1,25,"商品类别名称")){	 return; }
+			if(!InputValid(document.myform.ms,0,"string",0,1,500,"商品类别描述")){	 return; }
+	
+			window.opener.document.productKindForm.parent_id.value = document.myform.parent_id.value;
+			window.opener.document.productKindForm.old_parent_id.value = document.myform.old_parent_id.value;
+			window.opener.document.productKindForm.id.value = document.myform.id.value;
+			window.opener.document.productKindForm.name.value = document.myform.kindName.value;
+			window.opener.document.productKindForm.ms.value = document.myform.ms.value;
+			
+			window.opener.document.productKindForm.action = "updateProductKind.html";
+			window.opener.document.productKindForm.submit();
+			
+			window.close();
+		}
 	}
 </script>
 </head>
 <body>
 <form name="myform">
-<input type="hidden" name="parent_id" value="<%=StringUtils.nullToStr(productKind.getParent_id()) %>">
+<input type="hidden" name="old_parent_id" value="<%=StringUtils.nullToStr(productKind.getParent_id()) %>">
 <input type="hidden" name="id" value="<%=StringUtils.nullToStr(productKind.getId()) %>">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
@@ -45,12 +49,37 @@ ProductKind productKind = (ProductKind)VS.findValue("productKind");
 	</tr>
 	</thead>
 	<tr>
+		<td class="a1" width="15%">上层类别</td>
+		<td class="a2"  width="85%">
+			<select name="parent_id" style="width:230px">
+				<option value=""></option>
+		<%
+		if(productKindList != null && productKindList.size() > 0){
+			for(int i=0;i<productKindList.size();i++){
+				Map map = (Map)productKindList.get(i);
+				
+				String id = StringUtils.nullToStr(map.get("id"));
+				String name = StringUtils.nullToStr(map.get("name"));	
+				
+				for(int k=0;k<id.length()-2;k++){
+					name = "&nbsp;&nbsp;" + name;
+				}
+		%>
+				<option value="<%=id %>" <%if(StringUtils.nullToStr(productKind.getParent_id()).equals(id)) out.print("selected"); %>><%=name %></option>
+		<%
+			}
+		}
+		%>
+			</select>
+		</td>
+	</tr>	
+	<tr>
 		<td class="a1" width="15%">商品类别名称</td>
-		<td class="a2" width="35%"><input type="text" name="kindName" value="<%=StringUtils.nullToStr(productKind.getName()) %>"></td>
+		<td class="a2" width="85%"><input type="text" name="kindName" value="<%=StringUtils.nullToStr(productKind.getName()) %>" style="width:230px"></td>
 	</tr>
 	<tr height="50">
 		<td class="a1" width="15%">商品类别描述</td>
-		<td class="a2" width="35%">
+		<td class="a2" width="85%">
 			<textarea rows="4" style="width:80%;" name="ms"><%=StringUtils.nullToStr(productKind.getMs()) %></textarea>
 		</td>
 	</tr>

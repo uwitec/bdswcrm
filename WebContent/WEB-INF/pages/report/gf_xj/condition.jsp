@@ -43,7 +43,7 @@ List productKindList = (List)VS.findValue("productKindList");
 						String id = StringUtils.nullToStr(map.get("id"));
 						String name = StringUtils.nullToStr(map.get("name"));
 						for(int k=0;k<id.length()-3;k++){
-							name = "　" + name;
+							name = "&nbsp;&nbsp;" + name;
 						}
 				%>
 				<option value="<%=id %>"><%=name %></option>
