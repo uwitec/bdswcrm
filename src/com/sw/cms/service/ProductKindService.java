@@ -2,12 +2,14 @@ package com.sw.cms.service;
 
 import java.util.List;
 
+import com.sw.cms.dao.ProductDAO;
 import com.sw.cms.dao.ProductKindDAO;
 import com.sw.cms.model.ProductKind;
 
 public class ProductKindService {
 	
 	private ProductKindDAO productKindDao;
+	private ProductDAO productDao;
 	
 	/**
 	 * 取所有商品类别列表
@@ -41,8 +43,20 @@ public class ProductKindService {
 	 * 更新商品信息
 	 * @param productKind
 	 */
-	public void updateProductKind(ProductKind productKind){
-		productKindDao.updateProductKind(productKind);
+	public void updateProductKind(ProductKind productKind,String old_parent_id){
+		if(productKind.getParent_id().equals(old_parent_id)){
+			//如果新的parent_id与旧的parent_id一致
+			productKindDao.updateProductKind(productKind);
+		}else{
+			//如果新的parent_id与旧的parent_id不一致
+			//1、删除旧的商品类别
+			productKindDao.delProductKind(productKind.getId());
+			//2、添加新的商品类别
+			String new_id = productKindDao.saveProductKind(productKind);
+			//3、修改设计道德所有商品的类别
+			productDao.updateProductKind(new_id, productKind.getId());
+		}
+		
 	}
 	
 	
@@ -78,6 +92,14 @@ public class ProductKindService {
 
 	public void setProductKindDao(ProductKindDAO productKindDao) {
 		this.productKindDao = productKindDao;
+	}
+
+	public ProductDAO getProductDao() {
+		return productDao;
+	}
+
+	public void setProductDao(ProductDAO productDao) {
+		this.productDao = productDao;
 	}
 
 }

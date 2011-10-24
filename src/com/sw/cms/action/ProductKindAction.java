@@ -1,5 +1,6 @@
 package com.sw.cms.action;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -22,6 +23,9 @@ public class ProductKindAction extends BaseAction implements ModelDriven{
 	
 	private ProductKind productKind = new ProductKind();
 	private String strTree = "";
+	private List productKindList = new ArrayList();
+	
+	private String old_parent_id = "";
 	
 	private Page productPage = new Page();
 
@@ -75,6 +79,8 @@ public class ProductKindAction extends BaseAction implements ModelDriven{
 		if(obj != null){
 			productKind = (ProductKind)obj;
 		}
+		
+		productKindList = productKindService.getAllProductKindList();
 		return "success";
 	}
 	
@@ -94,7 +100,7 @@ public class ProductKindAction extends BaseAction implements ModelDriven{
 	 * @return
 	 */
 	public String update(){
-		productKindService.updateProductKind(productKind);
+		productKindService.updateProductKind(productKind,old_parent_id);
 		return "success";
 	}
 	
@@ -187,6 +193,36 @@ public class ProductKindAction extends BaseAction implements ModelDriven{
 
 	public void setProductService(ProductService productService) {
 		this.productService = productService;
+	}
+
+
+	public List getProductKindList() {
+		return productKindList;
+	}
+
+
+	public void setProductKindList(List productKindList) {
+		this.productKindList = productKindList;
+	}
+
+
+	public void setStrTree(String strTree) {
+		this.strTree = strTree;
+	}
+
+
+	public void setProductPage(Page productPage) {
+		this.productPage = productPage;
+	}
+
+
+	public String getOld_parent_id() {
+		return old_parent_id;
+	}
+
+
+	public void setOld_parent_id(String oldParentId) {
+		old_parent_id = oldParentId;
 	}
 
 	

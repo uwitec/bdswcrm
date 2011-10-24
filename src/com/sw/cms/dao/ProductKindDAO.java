@@ -37,19 +37,22 @@ public class ProductKindDAO extends JdbcBaseDAO{
 	 * 添加商品类别信息
 	 * @param productKind
 	 */
-	public void saveProductKind(ProductKind productKind){
+	public String saveProductKind(ProductKind productKind){
 		String sql = "insert into product_kind(id,name,parent_id,ms) values(?,?,?,?)";
 		String parent_id = productKind.getParent_id();
 		if(parent_id.equals("")){
 			parent_id = "0";
 		}
+		String id = getProductKindID(productKind.getParent_id());
 		Object[] params = new Object[4];
-		params[0] = getProductKindID(productKind.getParent_id());
+		params[0] = id;
 		params[1] = productKind.getName();
 		params[2] = parent_id;
 		params[3] = productKind.getMs();
 		
 		this.getJdbcTemplate().update(sql,params);
+		
+		return id;
 	}
 	
 	

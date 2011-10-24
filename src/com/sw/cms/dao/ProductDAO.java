@@ -637,6 +637,16 @@ public class ProductDAO extends JdbcBaseDAO {
 	}
 	
 	/**
+	 * 更新商品类别为新类别
+	 * @param new_product_kind
+	 * @param old_product_kind
+	 */
+	public void updateProductKind(String new_product_kind,String old_product_kind){
+		String sql = "update product set product_kind='" + new_product_kind + "' where product_kind='" + old_product_kind + "'";
+		this.update(sql);
+	}
+	
+	/**
 	 * 包装对象
 	 * 
 	 * @author liyt
