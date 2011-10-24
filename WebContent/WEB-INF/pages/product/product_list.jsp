@@ -21,6 +21,8 @@ String product_state = StringUtils.nullToStr(VS.findValue("product_state"));
 <title>商品列表</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="jquery/jquery.js"></script>
+<script type="text/javascript" src="js/initPageSize.js"></script>
 <script type="text/javascript">
 	function add(){
 		var id = "<%=curId %>";
@@ -38,6 +40,7 @@ String product_state = StringUtils.nullToStr(VS.findValue("product_state"));
 		document.myform.product_name.value = "";
 		document.myform.product_xh.value = "";
 		document.myform.product_state.value = "";
+		document.myform.curId.value = "";
 	}	
 	
 	function openWin(id){
@@ -78,6 +81,7 @@ String product_state = StringUtils.nullToStr(VS.findValue("product_state"));
 </script>
 </head>
 <body>
+<div class="rightContentDiv" id="divContent">
 <form name="myform" action="product_list.html" method="post">
 <input type="hidden" name="curId" id="curId" value="<%=curId %>">
 <input type="hidden" name="productId">
@@ -89,18 +93,18 @@ String product_state = StringUtils.nullToStr(VS.findValue("product_state"));
 			<img src="images/import.gif" align="absmiddle" border="0">&nbsp;<a href="#" class="xxlb" onclick="refreshPage();"> 刷 新 </a>	</td>			
 	</tr>
 	<tr>
-		<td class="search" align="left" colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;
-			商品名称：<input type="text" name="product_name" value="<%=product_name %>">
-			&nbsp;&nbsp;
-			商品规格：<input type="text" name="product_xh" value="<%=product_xh %>">
-			&nbsp;&nbsp;
+		<td class="search" align="left" colspan="2">&nbsp;&nbsp;
+			名称：<input type="text" name="product_name" value="<%=product_name %>" size="15">
+			&nbsp;
+			规格：<input type="text" name="product_xh" value="<%=product_xh %>" size="15">
+			&nbsp;
 			状态：
 			<select name="product_state">
 				<option value=""></option>
 				<option value="正常" <%if(product_state.equals("正常")) out.print("selected"); %>>正常</option>
 				<option value="停售" <%if(product_state.equals("停售")) out.print("selected"); %>>停售</option>
 			</select>
-			<input type="submit" name="buttonCx" value=" 查询 " class="css_button">&nbsp;&nbsp;&nbsp;&nbsp;	
+			<input type="submit" name="buttonCx" value=" 查询 " class="css_button">
 			<input type="button" name="buttonQk" value=" 清空 " class="css_button" onclick="clearAll();">
 		</td>				
 	</tr>	
@@ -151,5 +155,6 @@ String product_state = StringUtils.nullToStr(VS.findValue("product_state"));
 	</tr>
 </table>
 </form>
+</div>
 </body>
 </html>

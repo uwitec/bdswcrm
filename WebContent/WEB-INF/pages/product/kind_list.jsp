@@ -15,13 +15,15 @@ if(!msg.equals("")){
 }
 %>
 
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>商品分类</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <link href="tree/menu.css" rel="stylesheet" type="text/css">
-
+<script type="text/javascript" src="jquery/jquery.js"></script>
+<script type="text/javascript" src="js/initPageSize.js"></script>
 <script>
 
 treedata	= new Array();
@@ -116,7 +118,7 @@ function menu(id)						//画菜单
 		if(currdata[i][3]!="" && currdata[i][3]!=null)
 		{
 			//oncontextmenu事件中所有代码为后添加
-			menuname	= "<a oncontextmenu='document.getElementById(\"parent_id\").value=\"" + currdata[i][0] + "\";mlay.style.display=\"\";mlay.style.pixelTop=event.clientY; mlay.style.pixelLeft=event.clientX; return false;' href='"+currdata[i][3] + "?curId=" + currdata[i][0] +"' target='"+currdata[i][6]+"'>"+currdata[i][2]+"</a>";
+			menuname	= "<a oncontextmenu='document.getElementById(\"parent_id\").value=\"" + currdata[i][0] + "\";mlay.style.display=\"\";mlay.style.pixelTop=event.clientY; mlay.style.pixelLeft=event.clientX; return false;' href='"+currdata[i][3] + "?curId=" + currdata[i][0] +"' target='productRight'>"+currdata[i][2]+"</a>";
 		}
 		else
 		{
@@ -448,19 +450,17 @@ function addRoot(){
 </head>
 
 <body onLoad="window_onload();" onClick="showoff();" align="center">
-<div id="mlay" style="position:absolute;display:none;cursor:default;" onClick="return false;"></div>
-
-<form name="productKindForm" action="saveProductKind.html" method="post">
-<input type="hidden" name="parent_id" id="parent_id" value="">
-<input type="hidden" name="id"  value="">
-<input type="hidden" name="name" value="">
-<input type="hidden" name="ms" value="">
-</form>
-
+<div class="rightContentDiv" id="divContent"><div id="mlay" style="position:absolute;display:none;cursor:default;" onClick="return false;"></div>
 <table width="100%" border="0" align="center" class="chart_list" cellpadding="0" cellspacing="0">
 	<tr>
 		<td class="csstitle">&nbsp;&nbsp;&nbsp;&nbsp;<b>商品类别管理</b></td>
 	</tr>
+	<form name="productKindForm" action="saveProductKind.html" method="post">
+	<input type="hidden" name="parent_id" id="parent_id" value="">
+	<input type="hidden" name="id"  value="">
+	<input type="hidden" name="name" value="">
+	<input type="hidden" name="ms" value="">
+	</form>	
 </table>
 <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
 	<tr>
@@ -472,6 +472,6 @@ function addRoot(){
 				</script></td>
 	</tr>
 </table>
-
+</div>
 </body>
 </html>

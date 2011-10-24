@@ -25,6 +25,8 @@ String is_del = (String)VS.findValue("is_del");
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language='JavaScript' src="js/date.js"></script>
+<script type="text/javascript" src="jquery/jquery.js"></script>
+<script type="text/javascript" src="js/initPageSize.js"></script>
 <script type="text/javascript">	
 	function view(id){
 		var destination = "viewEmployee.html?employee_id="+id;
@@ -68,6 +70,7 @@ String is_del = (String)VS.findValue("is_del");
 		document.myform.position.value = "";
 		document.myform.zzzt.value = "";
 		document.myform.is_del.value = "";
+		document.myform.dept_id.value = "";
 	}
 	
 	function refreshPage(){
@@ -77,6 +80,7 @@ String is_del = (String)VS.findValue("is_del");
 </script>
 </head>
 <body >
+<div class="rightContentDiv" id="divContent">
 <form name="myform" action="listEmployee.html" method="post">
 <input type="hidden" name="dept_id" value="<%=dept_id %>">
 <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0">
@@ -87,9 +91,8 @@ String is_del = (String)VS.findValue("is_del");
 			<img src="images/import.gif" align="absmiddle" border="0">&nbsp;<a href="#" class="xxlb" onclick="refreshPage();"> 刷 新 </a>	</td>			
 	</tr>
 	<tr>
-		<td class="search" align="left" colspan="2">&nbsp;&nbsp;&nbsp;&nbsp; 姓名：<input type="text" name="real_name" value="<%=real_name %>">&nbsp;&nbsp;&nbsp;&nbsp;
-			职位：
-			<select name="position">
+		<td class="search" align="left" colspan="2">姓名:<input type="text" name="real_name" value="<%=real_name %>" size="10">&nbsp;
+			职位:<select name="position">
 				<option value=""></option>
 				<%
 				if(positions != null && positions.length>0){
@@ -100,21 +103,17 @@ String is_del = (String)VS.findValue("is_del");
 					}
 				}
 				%>
-			</select>&nbsp;&nbsp;&nbsp;&nbsp;
-			在职状态：
-			<select name="zzzt">
+			</select>&nbsp;
+			在职状态:<select name="zzzt">
 				<option value=""></option>
 				<option value="在职" <%if("在职".equals(StringUtils.nullToStr(zzzt))) out.print("selected"); %>>在职</option>
 				<option value="离职" <%if("离职".equals(StringUtils.nullToStr(zzzt))) out.print("selected"); %>>离职</option>
-			</select>&nbsp;&nbsp;&nbsp;&nbsp;
-			状态：
-			<select name="is_del">
+			</select>&nbsp;
+			状态:<select name="is_del">
 				<option value=""></option>
 				<option value="0" <%if("0".equals(StringUtils.nullToStr(is_del))) out.print("selected"); %>>正常</option>
 				<option value="1" <%if("1".equals(StringUtils.nullToStr(is_del))) out.print("selected"); %>>删除</option>
-			</select>&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="submit" name="buttonCx" value=" 查询 " class="css_button">&nbsp;&nbsp;
-			<input type="button" name="buttonQk" value=" 清空 " class="css_button" onclick="clearAll();">
+			</select>&nbsp;<input type="submit" name="buttonCx" value=" 查询 " class="css_button"><input type="button" name="buttonQk" value=" 清空 " class="css_button" onclick="clearAll();">
 		</td>				
 	</tr>		
 </table>
@@ -148,8 +147,8 @@ String is_del = (String)VS.findValue("is_del");
 		}
 	%>
 	<tr>
-		<td class="a1"><%=StringUtils.nullToStr(map.get("gh")) %></td>
-		<td class="a1"><%=StringUtils.nullToStr(map.get("real_name")) %></td>
+		<td class="a1" no><%=StringUtils.nullToStr(map.get("gh")) %></td>
+		<td class="a1" nowrap="nowrap"><%=StringUtils.nullToStr(map.get("real_name")) %></td>
 		<td class="a1"><%=StringUtils.nullToStr(map.get("sex")) %></td>
 		<td class="a1"><%=StringUtils.nullToStr(map.get("gs_phone")) %></td>
 		<td class="a1"><%=StringUtils.nullToStr(map.get("mobile")) %></td>
@@ -158,9 +157,9 @@ String is_del = (String)VS.findValue("is_del");
 		<td class="a1"><%=StringUtils.nullToStr(map.get("is_ywy")) %></td>
 		<td class="a1"><%=StringUtils.nullToStr(map.get("zzzt")) %></td>
 		<td class="a1"><%=q_is_del %></td>
-		<td class="a1">
-			<a href="#" onclick="edit('<%=StringUtils.nullToStr(map.get("user_id")) %>');">修改</a>&nbsp;&nbsp;
-			<a href="#" onclick="view('<%=StringUtils.nullToStr(map.get("user_id")) %>');">查看</a>&nbsp;&nbsp;
+		<td class="a1" nowrap="nowrap">
+			<a href="#" onclick="edit('<%=StringUtils.nullToStr(map.get("user_id")) %>');">修改</a>
+			<a href="#" onclick="view('<%=StringUtils.nullToStr(map.get("user_id")) %>');">查看</a>
 			<%if(StringUtils.nullToStr(map.get("is_del")).equals("0")){ %>
 			  <a href="#" onclick="del('<%=StringUtils.nullToStr(map.get("user_id")) %>');">删除</a>
 		    <%}else{ %>
@@ -179,5 +178,6 @@ String is_del = (String)VS.findValue("is_del");
 	</tr>	
 </table>
 </form>
+</div>
 </body>
 </html>

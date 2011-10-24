@@ -316,9 +316,11 @@ function addtabFmMenu(strTitle,strUrl,id){
 }
 
 var leftWinHeight = ($(window).height()-115) + "px";
+var leftWinHeightLit = ($(window).height()-120) + "px";
 
 $(window).resize(function(){
 	leftWinHeight = ($(window).height()-115) + "px";
+	leftWinHeightLit = ($(window).height()-120) + "px";
 });
 </script>
 </head>
