@@ -175,6 +175,7 @@
         <action name="product" class="productAction" method="showProductMain">
             <result name="success">/WEB-INF/pages/product/product.jsp</result>
         </action>
+        <action name="getChildKindNums" class="productKindAction" method="getChildKindNums"/>
         <action name="selectProduct"  class="lsdAction" method="selKcProc">
             <result name="success">/WEB-INF/pages/product/selectProduct.jsp</result>
         </action>
