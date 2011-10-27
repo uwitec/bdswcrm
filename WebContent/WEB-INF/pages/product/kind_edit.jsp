@@ -9,6 +9,11 @@ OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
 
 ProductKind productKind = (ProductKind)VS.findValue("productKind");
 List productKindList= (List)VS.findValue("productKindList");
+
+String parent_id = StringUtils.nullToStr(productKind.getParent_id());
+if(parent_id.equals("0")){
+	parent_id = "";
+}
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -18,9 +23,10 @@ List productKindList= (List)VS.findValue("productKindList");
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript" src="js/Check.js"></script>
+<script type="text/javascript" src="jquery/jquery.js"></script>
 <script type="text/javascript">
 	function saveInfo(){
-		if(window.confirm("确认提交修改吗，提交后类别编码将重新生成！")){
+		if(window.confirm("确认提交修改吗！")){
 			if(!InputValid(document.myform.kindName,1,"string",1,1,25,"商品类别名称")){	 return; }
 			if(!InputValid(document.myform.ms,0,"string",0,1,500,"商品类别描述")){	 return; }
 	
@@ -29,10 +35,27 @@ List productKindList= (List)VS.findValue("productKindList");
 			window.opener.document.productKindForm.id.value = document.myform.id.value;
 			window.opener.document.productKindForm.name.value = document.myform.kindName.value;
 			window.opener.document.productKindForm.ms.value = document.myform.ms.value;
-			
 			window.opener.document.productKindForm.action = "updateProductKind.html";
+		}
+		
+		if($("#old_parent_id").val() != $("#parent_id").val()){
+			$.ajax({
+				cache: false,
+				url:"getChildKindNums.html",
+				type: "POST",
+				data:{kind_id:$("#id").val()},
+				success: function(resText) {
+					if(resText != "0"){
+						alert("该类别下存在子类别，无法修改！请先移除子类别。");
+						return;
+					}else{
+						window.opener.document.productKindForm.submit();
+						window.close();
+					}
+				}
+			});
+		}else{
 			window.opener.document.productKindForm.submit();
-			
 			window.close();
 		}
 	}
@@ -40,8 +63,8 @@ List productKindList= (List)VS.findValue("productKindList");
 </head>
 <body>
 <form name="myform">
-<input type="hidden" name="old_parent_id" value="<%=StringUtils.nullToStr(productKind.getParent_id()) %>">
-<input type="hidden" name="id" value="<%=StringUtils.nullToStr(productKind.getId()) %>">
+<input type="hidden" name="old_parent_id"  id="old_parent_id" value="<%=StringUtils.nullToStr(productKind.getParent_id()) %>">
+<input type="hidden" name="id" id="id" value="<%=StringUtils.nullToStr(productKind.getId()) %>">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
@@ -51,7 +74,7 @@ List productKindList= (List)VS.findValue("productKindList");
 	<tr>
 		<td class="a1" width="15%">上层类别</td>
 		<td class="a2"  width="85%">
-			<select name="parent_id" style="width:230px">
+			<select name="parent_id" id="parent_id" style="width:230px">
 				<option value=""></option>
 		<%
 		if(productKindList != null && productKindList.size() > 0){
