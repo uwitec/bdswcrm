@@ -26,7 +26,18 @@ public class ProductKindAction extends BaseAction implements ModelDriven{
 	private List productKindList = new ArrayList();
 	
 	private String old_parent_id = "";
+	private String kind_id = "";
 	
+	public String getKind_id() {
+		return kind_id;
+	}
+
+
+	public void setKind_id(String kindId) {
+		kind_id = kindId;
+	}
+
+
 	private Page productPage = new Page();
 
 
@@ -157,6 +168,16 @@ public class ProductKindAction extends BaseAction implements ModelDriven{
 		productPage = productService.getProductListByID(product_kind_id, curPage, rowsPerPage);
 		
 		return "success";
+	}
+	
+	
+	public void getChildKindNums(){
+		try{
+			int nums = productKindService.getChildKindCount(kind_id);
+			this.writeStringToResponse(nums+"");
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 	
     public Object getModel() {
