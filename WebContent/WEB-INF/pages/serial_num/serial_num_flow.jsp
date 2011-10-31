@@ -43,7 +43,7 @@ if(serialStateMap != null){
 	}
 </script>
 </head>
-<body align="center" >
+<body>
 <form name="reportForm" action="getSerialFlow.html" method="post">
 <TABLE  align="center" cellSpacing=0 cellPadding=0 width="99%" border=0>
 	<TBODY>
@@ -67,7 +67,7 @@ if(serialFlowList!=null && serialFlowList.size()>0){
 %>
 <TABLE  align="center" cellSpacing=0 cellPadding=0 width="99%" border=0>
 	<tr>
-		<td>
+		<td align="left">
 			&nbsp;<B>序 列 号：</B><%=serial_num %><BR>
 			&nbsp;<B>货品编号：</B><%=product_id %><BR>
 			&nbsp;<B>货品名称：</B><%=product_name %><BR>
