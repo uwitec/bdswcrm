@@ -189,7 +189,7 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 		<td class="a2" width="35%">
 		<input type="text" name="clientName" id="client_name" value="<%=StaticParamDo.getClientNameById(StringUtils.nullToStr(yushouToYingshou.getClient_name())) %>" style="width:220px"  onblur="queryYszd();"> <font color="red">*</font>
 		<input type="hidden" name="yushouToYingshou.client_name" id="client_id" value="<%=StringUtils.nullToStr(yushouToYingshou.getClient_name()) %>">
-		<div id="clientsTip" style="position:absolute;left:125px; top:85px; width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+		<div id="clientsTip" style="position:absolute;width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		</td>
 		<td class="a1" width="15%">经手人</td>
 		<td class="a2" width="35%">

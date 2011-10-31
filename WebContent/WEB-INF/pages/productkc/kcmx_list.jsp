@@ -49,6 +49,7 @@ String user_type = info.getIs_dls();   //用户类别
 <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0" border="1" id="selTable">
 	<thead>
 	<tr>
+		<td nowrap="nowrap">商品编号</td>
 		<td nowrap="nowrap">商品名称</td>
 		<td nowrap="nowrap">规格</td>	
 		<td nowrap="nowrap">库存数量</td>
@@ -100,6 +101,7 @@ String user_type = info.getIs_dls();   //用户类别
 		}
 	%>
 	<tr class="a1" onmousedown="trSelectChangeCss()" title="点击查看分仓库存" onclick="desc('<%=StringUtils.nullToStr(map.get("product_id")) %>');">
+		<td align="center" nowrap="nowrap"><%=StringUtils.nullToStr(map.get("product_id")) %></td>
 		<td align="left"><%=StringUtils.nullToStr(map.get("product_name")) %></td>
 		<td align="left"><%=StringUtils.nullToStr(map.get("product_xh")) %></td>
 		<td nowrap="nowrap"><%=num %></td>

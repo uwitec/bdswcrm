@@ -305,7 +305,7 @@ if(msg != null && msg.size() > 0){
 		<td class="a2">
 		<input type="text" name="cgthd.provider_id" id="client_name" value="<%=StaticParamDo.getClientNameById(StringUtils.nullToStr(cgthd.getProvider_name())) %>" size="30" maxlength="50" onblur="setClientValue();">
 		<input type="hidden" name="cgthd.provider_name" id="client_id" value="<%=StringUtils.nullToStr(cgthd.getProvider_name()) %>">
-		<div id="clientsTip" style="position:absolute;left:150px; top:85px; width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+		<div id="clientsTip" style="position:absolute;width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		</td>	
 		<td class="a1" width="15%">经手人</td>
 		<td class="a2" width="35%">

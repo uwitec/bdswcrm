@@ -85,14 +85,14 @@ function chgType(){
 		<td class="a4">
 		<input type="text" name="cl" id="client_name" value="" onblur="setClientValue();"  size="30"  maxlength="50">
 		<input type="hidden" name="client_name" id="client_id" value="">
-		<div id="clientsTip" style="position:absolute;left:276px; top:85px; width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+		<div id="clientsTip" style="position:absolute;width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		</td>				
 	</tr>
 	<tr>
 		<td class="a1">客户经理</td>
 		<td class="a4">
 		    <input  id="brand" type="text"   length="20"  onblur="setValue()"  /> 
-            <div id="brandTip" style="position:absolute;left:720px; top:85px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+            <div id="brandTip" style="position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		    <input type="hidden" name="khjl" id="fzr"  /> 
 		</td>		
 		<td class="a1">不显示0往来单位</td>

@@ -76,7 +76,7 @@ List userList=(List)VS.findValue("user_list");
 		<input type="text" name="clientId" id="client_name" value=""  onblur="setvalues()"  size="30" maxlength="50">
 		<input type="hidden" name="clientName" id="client_id" value="">
 		<img src="images/select.gif" align="absmiddle" title="选择客户" border="0" onclick="openClientWin();" style="cursor:hand">
-		<div id="clientsTip" style="position:absolute;left:100px; top:87px; width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+		<div id="clientsTip" style="position:absolute;width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		</td>	
 		<td class="a1" width="15%">联系人</td>
 		<td class="a4" width="35%">

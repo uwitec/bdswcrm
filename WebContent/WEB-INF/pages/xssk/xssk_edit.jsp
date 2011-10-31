@@ -297,14 +297,14 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 		<td class="a2" width="35%">
 		<input type="text" name="clientName" id="client_name" value="<%=StaticParamDo.getClientNameById(StringUtils.nullToStr(xssk.getClient_name())) %>" style="width:190px" onblur="queryYszd();"> <font color="red">*</font>
 		<input type="hidden" name="xssk.client_name" id="client_id" value="<%=StringUtils.nullToStr(xssk.getClient_name()) %>">
-		<div id="clientsTip" style="position:absolute;left:132px; top:85px; width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>	
+		<div id="clientsTip" style="position:absolute;width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>	
 		</td>
 	</tr>
 	<tr>
 		<td class="a1" width="15%">经手人</td>
 		<td class="a2" width="35%">
 			<input id="brand" style="width:190px" type="text" maxlength="20" onblur="setValue()" value="<%=StaticParamDo.getRealNameById(xssk.getJsr()) %>"/> <font color="red">*</font>	
-        	<div id="brandTip" style="position:absolute;left:132px; top:113px;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+        	<div id="brandTip" style="position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		    <input type="hidden" name="xssk.jsr" id="fzr" value="<%=StringUtils.nullToStr(xssk.getJsr()) %>"/> 
 		</td>
 		<td class="a1">收款方式</td>

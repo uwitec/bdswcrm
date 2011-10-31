@@ -195,7 +195,7 @@ function initClientTip(){
 	Event.observe("clientsTip","mousedown",clientTipDown,true);
 	
 	//初始提示层的位置
-	var pos = GetObjPos(document.getElementById("client_name"))
+	var pos = GetObjPos(document.getElementById("client_name"));
 	document.getElementById("clientsTip").style.left = pos.x;
 	document.getElementById("clientsTip").style.top = pos.y + 22;
 	

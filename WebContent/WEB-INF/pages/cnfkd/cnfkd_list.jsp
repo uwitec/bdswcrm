@@ -27,6 +27,7 @@
 		document.myform.start_date.value = "";
 		document.myform.end_date.value = "";
 		document.myform.state.value = "";
+		document.myform.client_name.value = "";
 	}
 
 	function del(id){
@@ -53,12 +54,12 @@
 	</tr>
 	<tr>
 		<td class="search" align="left" colspan="2">&nbsp;&nbsp;
-			创建时间：<input type="text" name="start_date" value="<ww:property value="%{start_date}"/>" size="15"  class="Wdate" onFocus="WdatePicker()">	&nbsp;至&nbsp;
+			创建时间：<input type="text" name="start_date" value="<ww:property value="%{start_date}"/>" size="15"  class="Wdate" onFocus="WdatePicker()">&nbsp;至&nbsp;
 			<input type="text" name="end_date" value="<ww:property value="%{end_date}"/>" size="15"  class="Wdate" onFocus="WdatePicker()">
-			&nbsp;&nbsp;
-			状态：
-			<ww:select name="state" id="state" theme="simple" list="#{'待支付':'待支付','已支付':'已支付'}"  emptyOption="true" ></ww:select>
-			&nbsp;&nbsp;
+			&nbsp;
+			客户名称：<ww:textfield name="client_name" id="client_name" value="%{client_name}" theme="simple"/>
+			状态：<ww:select name="state" id="state" theme="simple" list="#{'待支付':'待支付','已支付':'已支付'}"  emptyOption="true" ></ww:select>
+			&nbsp;
 			<input type="submit" name="buttonCx" value=" 查询 " class="css_button">
 			<input type="button" name="buttonQk" value=" 清空 " class="css_button" onclick="clearAll();">			
 		</td>				

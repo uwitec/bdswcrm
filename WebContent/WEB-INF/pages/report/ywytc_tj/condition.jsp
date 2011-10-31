@@ -72,7 +72,7 @@ List deptList = (List)VS.findValue("deptList");
 		<td class="a1">销售人员</td>
 		<td class="a4">
 		    <input id="brand" type="text" length="20" onblur="setValue()" size="30"/> 
-            <div id="brandTip"  style="position:absolute;left:680px; top:87px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+            <div id="brandTip"  style="position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		    <input type="hidden" name="user_id" id="fzr"/> 
 		</td>					
 	</tr>

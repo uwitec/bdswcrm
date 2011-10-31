@@ -102,7 +102,7 @@ function selType(vl){
 		<td class="a2" id="tdHymc">
 		   <input type="text" name="hymc" onblur="setClientValue();" id="client_name" maxlength="50" style="width:200px" value=""> <font color="red">*</font>
 		   <input type="hidden" name="hykda.hymc" id="client_id" value="">
-		   <div id="clientsTip" style="position:absolute;left:150px; top:85px; width:250px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+		   <div id="clientsTip" style="position:absolute;width:250px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		</td>		
 	</tr>
 	<tr>	
@@ -175,7 +175,7 @@ function selType(vl){
 <div id="div_jg" style="display:none">
 	<input type="text" name="hymc" onblur="setClientValue();" id="client_name" maxlength="50" style="width:200px" value=""> <font color="red">*</font>
 	<input type="hidden" name="hykda.hymc" id="client_id" value="">
-	<div id="clientsTip" style="position:absolute;left:150px; top:85px; width:250px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>	
+	<div id="clientsTip" style="position:absolute;width:250px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>	
 </div>
 <div id="div_gr" style="display:none">
 	<input type="text" name="hykda.hymc" id="client_id" value="" maxlength="50" style="width:200px" > <font color="red">*</font>

@@ -68,12 +68,12 @@ function openClientWin(){
 		<td class="a4">
 		<input type="text" name="client_name" id="client_name" value="" onblur="setClientValue();"  size="30"  maxlength="50">
 		<input type="hidden" name="cl " id="client_id" value="">
-		<div id="clientsTip" style="position:absolute;left:115px; top:85px; width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+		<div id="clientsTip" style="position:absolute;width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		</td>	
 		<td class="a1">经手人</td>
 		<td class="a4">
 		    <input  id="brand" type="text"   length="20"  onblur="setValue()"  />
-            <div id="brandTip" style="position:absolute;left:708px; top:85px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
+            <div id="brandTip" style="position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
             </div>
 		    <input type="hidden" name="jsr" id="fzr"  /> 
 		</td>		

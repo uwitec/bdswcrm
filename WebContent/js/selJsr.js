@@ -196,7 +196,7 @@ function initFzrTip(){
 	Event.observe("brandTip","mousedown",down,true);
 	
 	//初始提示层的位置
-	var pos = GetObjPos(document.getElementById("brand"))
+	var pos = GetObjPos(document.getElementById("brand"));
 	document.getElementById("brandTip").style.left = pos.x;
 	document.getElementById("brandTip").style.top = pos.y + 22;
 	

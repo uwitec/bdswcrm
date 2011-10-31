@@ -378,7 +378,7 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 		<td class="a1" width="15%">申请人</td>
 		<td class="a2" width="35%">
 		    <input id="sqr_text" type="text" maxlength="20" style="width:230px" onblur="setSqrValue();" />
-            <div id="sqr_tips"  style="position:absolute;left:610px; top:110px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
+            <div id="sqr_tips"  style="position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
             </div>
 		    <input type="hidden" name="kfdb.sqr" id="sqr"/> 	
 		</td>	

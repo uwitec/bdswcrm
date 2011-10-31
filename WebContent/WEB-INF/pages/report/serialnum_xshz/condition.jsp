@@ -85,7 +85,7 @@ List productKindList = (List)VS.findValue("productKindList");
 		<td class="a4">
 		    <input type="text" name="clientId" id="client_name" value=""  onblur="setClientValue();"  size="35" maxlength="50">
 		    <input type="hidden" name="clientName" id="client_id" value="">
-		    <div id="clientsTip" style="position:absolute;left:106px; top:85px; width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+		    <div id="clientsTip" style="position:absolute;width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		</td>					
 	</tr>
 	<tr height="35">

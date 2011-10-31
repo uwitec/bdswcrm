@@ -52,12 +52,12 @@ function doSubmit(){
 		<td class="a4">
 		<input type="text" name="cl" id="client_name" value="" onblur="setClientValue();" style="width:200px" maxlength="50">
 		<input type="hidden" name="client_name" id="client_id" value="">
-		<div id="clientsTip" style="position:absolute;left:276px; top:85px; width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+		<div id="clientsTip" style="position:absolute;width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		</td>	
 		<td class="a1">业务员</td>
 		<td class="a4">
 		    <input id="brand" type="text" maxlength="20" style="width:200px" onblur="setValue()"  /> 
-            <div id="brandTip" style="position:absolute;left:720px; top:85px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+            <div id="brandTip" style="position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		    <input type="hidden" name="jsr" id="fzr"  /> 
 		</td>										
 	</tr>	

@@ -152,7 +152,7 @@ List userList = (List)VS.findValue("userList");
 		<td class="a2" width="35%">
 		<input type="text" name="clientName" id="client_name" value="<%=StaticParamDo.getClientNameById(StringUtils.nullToStr(pz.getClient_name())) %>" size="20" onblur="setClientValue();">
 		<input type="hidden" name="pz.client_name" id="client_id" value="<%=StringUtils.nullToStr(pz.getClient_name()) %>">
-		<div id="clientsTip" style="position:absolute;left:385px; top:113px; width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+		<div id="clientsTip" style="position:absolute;width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		</td>			
 	</tr>
 	<tr>

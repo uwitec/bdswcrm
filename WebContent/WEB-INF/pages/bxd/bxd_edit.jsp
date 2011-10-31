@@ -379,7 +379,7 @@ var allCount = <%=counts %>;
 		<input type="text" name="bxd.bxcs_id" id="client_name" value="<%=StaticParamDo.getClientNameById(StringUtils.nullToStr(bxd.getBxcs())) %>" size="30" maxlength="50"  onblur="setClientValue();">
 		<input type="hidden" name="bxd.bxcs" id="client_id" value="<%=StringUtils.nullToStr(bxd.getBxcs()) %>">
 		<!--<img src="images/select.gif" align="absmiddle" title="选择客户" border="0" onclick="openProvider();" style="cursor:hand">
-			--><div id="clientsTip" style="position:absolute;left:150px; top:85px; width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+			--><div id="clientsTip" style="position:absolute;width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 			<font color="red">*</font>
 		</td>	
 		<td class="a1" width="15%">经手人</td>

@@ -92,7 +92,7 @@ List deptList = (List)VS.findValue("deptList");
 		<td class="a1">销售人员</td>
 		<td class="a4">
 		    <input  id="brand" type="text"   length="20"  onblur="setValue()"  > 
-            <div id="brandTip" style="position:absolute;left:720px; top:85px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+            <div id="brandTip" style="position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		    <input type="hidden" name="xsry_id" id="fzr"  > 
 		</td>					
 	</tr>
@@ -101,7 +101,7 @@ List deptList = (List)VS.findValue("deptList");
 		<td class="a4">
 			<input type="text" name="client_name" id="client_name" value="" size="30" onblur="setClientValue();"  >
 			<input type="hidden" name="client_id" id="client_id" value=""> 
-			<div id="clientsTip" style="position:absolute;left:110px; top:115px; width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+			<div id="clientsTip" style="position:absolute;width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		</td>	
 		<td class="a1">客户经理</td>
 		<td class="a4">

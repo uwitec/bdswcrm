@@ -346,7 +346,7 @@
 		<td class="a1" width="15%">经手人</td>
 		<td class="a2">
 			<ww:textfield name="brand" id="brand" onblur="setValue()" value="%{getUserRealName(zzd.jsr)}" theme="simple"></ww:textfield>
-            <div id="brandTip" style="position:absolute;left:548px; top:85px;  width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+            <div id="brandTip" style="position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		    <ww:hidden name="zzd.jsr" id="fzr" value="%{zzd.jsr}" theme="simple"></ww:hidden><font color="red">*</font>	
 		</td>						
 	</tr>

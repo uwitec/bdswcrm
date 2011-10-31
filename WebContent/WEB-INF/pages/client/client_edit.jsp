@@ -150,7 +150,7 @@ if(clientsPayInfos != null && clientsPayInfos.size() > 0){
 		<td class="a1" width="15%">客户经理</td>
 		<td class="a2" width="35%">
 		    <input id="brand" type="text" length="20" onblur="setValue()" value="<%=StaticParamDo.getRealNameById(client.getKhjl()) %>" style="width:85%"/>
-            <div id="brandTip" style="position:absolute;left:417px; top:141px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+            <div id="brandTip" style="position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		    <input type="hidden" name="client.khjl" id="fzr"  value="<%=client.getKhjl()%>"/> 
 		</td>		
 	</tr>	 				

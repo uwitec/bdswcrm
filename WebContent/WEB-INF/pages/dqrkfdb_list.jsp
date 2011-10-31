@@ -35,7 +35,11 @@ List confirmKfdbList = (List)VS.findValue("confirmKfdbList");
 			}
 			event.srcElement.parentElement.className='a2';
 		}
-	}			
+	}	
+	function descMx(id){
+		document.descForm.id.value = id;
+		document.descForm.submit();			
+	}				
 </script>
 </head>
 <body>
@@ -65,7 +69,7 @@ List confirmKfdbList = (List)VS.findValue("confirmKfdbList");
 	while(its.hasNext()){
 		Kfdb kfdb = (Kfdb)its.next();
 	%>
-	<tr class="a1" onmousedown="trSelectChangeCss()">
+	<tr class="a1" onmousedown="trSelectChangeCss()" onclick="descMx('<%=StringUtils.nullToStr(kfdb.getId()) %>');" >
 		<td><%=StringUtils.nullToStr(kfdb.getId()) %></td>
 		<td><%=StringUtils.nullToStr(kfdb.getCk_date()) %></td>
 		<td><%=StaticParamDo.getStoreNameById(StringUtils.nullToStr(kfdb.getCk_store_id())) %></td>
@@ -81,6 +85,14 @@ List confirmKfdbList = (List)VS.findValue("confirmKfdbList");
 	%>
 </table>
 </form>
+<form name="descForm" action="descKfdb.html" method="post" target="drqKfdbDesc">
+	<input type="hidden" name="id" value="">
+</form>
+<table width="100%"  align="center" cellpadding="0" cellspacing="0">
+	<tr>
+		<td><iframe id="drqKfdbDesc" name="drqKfdbDesc" width="100%" onload="dyniframesize('drqKfdbDesc');" border="0" frameborder="0" SCROLLING="no"  src=''/></td>
+	</tr>
+</table>
 </div>
 </body>
 </html>

@@ -162,7 +162,7 @@ function chgHasFy(vl){
 		<td class="a1">出纳</td>
 		<td class="a2">
 			<ww:textfield name="brand" id="brand" onblur="setValue()" value="%{getUserRealName(cnfkd.jsr)}" theme="simple" cssStyle="width:85%"></ww:textfield>
-            <div id="brandTip" style="position:absolute;left:548px; top:85px;  width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+            <div id="brandTip" style="position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		    <ww:hidden name="cnfkd.jsr" id="fzr" value="%{cnfkd.jsr}" theme="simple"></ww:hidden><font color="red">*</font>	
 		</td>									
 	</tr>		

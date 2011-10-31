@@ -93,7 +93,7 @@ Fysq fysq = (Fysq)VS.findValue("fysq");
 		<td class="a1" width="15%">费用申请人</td>
 		<td class="a2" width="35%">
 		 <ww:textfield name="sqr_text" id="sqr_text" theme="simple" onblur="setSqrValue();" value="%{getUserRealName(fysq.sqr)}" cssStyle="width:190px"/><font color="red">*</font>	
-         <div id="sqr_tips" style="position:absolute;left:89px; top:82px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
+         <div id="sqr_tips" style="position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
          </div>
          <ww:hidden name="fysq.sqr" id="sqr" theme="simple" value="%{fysq.sqr}"/>
 		</td>
@@ -130,7 +130,7 @@ Fysq fysq = (Fysq)VS.findValue("fysq");
 		<td class="a1" width="15%">费用使用人</td>
 		<td class="a2" width="35%">
 		 <ww:textfield name="brand" id="brand" theme="simple" onblur="setValue()" value="%{getUserRealName(fysq.ywy_id)}" cssStyle="width:190px"/>
-         <div id="brandTip" style="position:absolute;left:89px; top:82px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
+         <div id="brandTip" style="position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
          </div>
          <ww:hidden name="fysq.ywy_id" id="fzr" theme="simple" value="%{fysq.ywy_id}"/>	
 		</td>		

@@ -114,9 +114,16 @@ if(!serialNums.equals("")){
 		}
 	}
 
+	function initPage(){
+		var objs = document.getElementsByName("serial_num");
+		if(objs != null && objs.length>0){
+			objs[0].focus();
+		}
+	}
+
 </script>
 </head>
-<body >
+<body onload="initPage();">
 <form name="myform" method="post">
 <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0" border="1" id="selTable">
 	<thead>

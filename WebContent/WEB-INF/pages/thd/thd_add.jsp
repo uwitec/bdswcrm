@@ -430,14 +430,14 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 		<td class="a1" width="15%">客户名称</td>
 		<td class="a2">
 		<input type="text" name="thd.client_id" id="client_name" style="width:232px" value="<%=StaticParamDo.getClientNameById(StringUtils.nullToStr(thd.getClient_name())) %>" size="30" maxlength="50" onblur="setClientValue();"><input type="text" name="thd.client_name" id="client_id" style="width:232px;display: none" value="<%=StringUtils.nullToStr(thd.getClient_name()) %>"> <font color="red">*</font>
-		<div id="clientsTip" style="position:absolute;left:147px; top:85px; width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+		<div id="clientsTip" style="position:absolute;width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		</td>	
 	</tr>
 	<tr>
 		<td class="a1" width="15%">经手人</td>
 		<td class="a2" width="35%">
 		 <input  id="brand"  type="text" mxlength="20" style="width:232px"  onblur="setValue()" value="<%=StaticParamDo.getRealNameById(thd.getTh_fzr() )%>"/> <font color="red">*</font>
-         <div id="brandTip" style="  position:absolute;left:612px;top:85px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;"  ></div>
+         <div id="brandTip" style="position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;"  ></div>
 		    <input type="hidden" name="thd.th_fzr" id="fzr" value="<%=StringUtils.nullToStr(thd.getTh_fzr()) %>"/>	
 		</td>	
 		<td class="a1">退款方式</td>

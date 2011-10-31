@@ -195,7 +195,7 @@ function initSqrTip(){
 	Event.observe("sqr_tips","mousedown",sqrDown,true);
 	
 	//初始提示层的位置
-	var pos = GetObjPos(document.getElementById("sqr_text"))
+	var pos = GetObjPos(document.getElementById("sqr_text"));
 	document.getElementById("sqr_tips").style.left = pos.x;
 	document.getElementById("sqr_tips").style.top = pos.y + 22;
 	

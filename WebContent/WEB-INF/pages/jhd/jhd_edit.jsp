@@ -382,7 +382,7 @@ session.removeAttribute("messages");
 		<td class="a2" width="35%">
 			<input type="text" name="jhd.gysmc" onblur="setClientRegInfo();" id="client_name" value="<%=StringUtils.nullToStr(jhd.getGysmc()) %>" size="45"  onblur="setClientValue();">
 			<input type="hidden" name="jhd.gysbh" id="client_id" value="<%=StringUtils.nullToStr(jhd.getGysbh()) %>">
-			<div id="clientsTip" style="position:absolute;left:150px; top:85px; width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+			<div id="clientsTip" style="position:absolute;width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 			<font color="red">*</font>	
 		</td>	
 		<td class="a1">地址</td>
@@ -443,7 +443,7 @@ session.removeAttribute("messages");
       <td class="a1" width="15%">采购负责人</td>
 		<td class="a2" colspan="3">
 			 <input id="brand" type="text" maxlength="20" onblur="setValue()" value="<%=StaticParamDo.getRealNameById(jhd.getFzr()) %>" size="45"/> 
-	         <div id="brandTip" style="position:absolute;left:612px; top:85px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+	         <div id="brandTip" style="position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		     <input type="hidden" name="jhd.fzr" id="fzr" value="<%=jhd.getFzr()%>"/> <font color="red">*</font>	
 		</td>
 	</tr>		

@@ -52,7 +52,7 @@
 		<td class="a4">
 			<input type="text" name="client_name" id="client_name" value=""  onblur="setClientValue();" size="30"   maxlength="50">
 			<input type="hidden" name="clientId" id="client_id" value="">
-			<div id="clientsTip" style="position:absolute;left:160px; top:85px; width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>			
+			<div id="clientsTip" style="position:absolute;width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>			
 		</td>	
 		<td class="a1">显示商品明细</td>
 		<td class="a4">

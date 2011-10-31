@@ -206,7 +206,7 @@ String[] wxlx=(String[])VS.findValue("wxlx");
     	<td class="a2" width="35%">	  
 		 <input  name="sqr_text" id="sqr_text"  style="width:230px" onblur="setSqrValue();" value="<%=StaticParamDo.getRealNameById((String)pgd.get("p_wxr")) %>"/> <font color="red">*</font>
          
-        <div id="sqr_tips" style="position:absolute;left:89px; top:82px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
+        <div id="sqr_tips" style="position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
          </div>
 		    <input type="hidden" name="pgds.p_wxr" id="sqr"  value="<%=StringUtils.nullToStr(pgd.get("p_wxr")) %>"/> 
 		   
