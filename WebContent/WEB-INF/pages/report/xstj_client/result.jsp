@@ -14,7 +14,9 @@ String end_date = StringUtils.nullToStr(request.getParameter("end_date"));      
 String xsry_id = StringUtils.nullToStr(request.getParameter("xsry_id"));         //销售人员编号
 String dj_id = StringUtils.nullToStr(request.getParameter("dj_id"));             //单据编号
 String isShowZ = StringUtils.nullToStr(request.getParameter("isShowZ"));         //是否显示销售额为零客户
-String client_name = StringUtils.nullToStr(request.getParameter("client_name")); 
+String client_name = StringUtils.nullToStr(request.getParameter("client_name"));
+String product_kind = StringUtils.nullToStr(request.getParameter("product_kind"));
+String product_name = StringUtils.nullToStr(request.getParameter("product_name")); 
 
 String khjl = StringUtils.nullToStr(request.getParameter("khjl"));         //客户经理
 String client_type = StringUtils.nullToStr(request.getParameter("client_type")); //客户类型
@@ -36,7 +38,7 @@ List statResult = (List)VS.findValue("statResult");
 <script type="text/javascript" src="js/initPageSize.js"></script>
 <script type="text/javascript">
 	function openWin(client_name){
-		location.href = "getXstjClientResultMx.html?start_date=<%=start_date%>&end_date=<%=end_date%>&xsry_id=<%=xsry_id%>&dj_id=<%=dj_id%>&client_type=<%=client_type%>&khjl=<%=khjl%>&client_name=" + client_name;
+		location.href = "getXstjClientResultMx.html?start_date=<%=start_date%>&end_date=<%=end_date%>&xsry_id=<%=xsry_id%>&dj_id=<%=dj_id%>&client_type=<%=client_type%>&khjl=<%=khjl%>&product_kind=<%=product_kind%>&product_name=<%=product_name%>&client_name=" + client_name;
 	}
 	
 	function openWinLs(){

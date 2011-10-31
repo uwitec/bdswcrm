@@ -25,6 +25,12 @@ String[] wldwlx = (String[])VS.findValue("wldwlx");
 	function submits(){
 	   document.reportForm.submit();
 	}
+	function openWin(){
+		var destination = "selKind.html";
+		var fea ='width=400,height=500,left=' + (screen.availWidth-400)/2 + ',top=' + (screen.availHeight-500)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		
+		window.open(destination,'选择商品类别',fea);
+	}	
 </script>
 </head>
 <body onload="initFzrTip();initClientTip();">
@@ -93,6 +99,18 @@ String[] wldwlx = (String[])VS.findValue("wldwlx");
 				<option value="是">是</option>
 			</select>
 		</td>		
+	</tr>
+	<tr>
+		<td class="a1" width="15%">商品类别</td>
+		<td class="a4" width="35%">
+			<input type="text" name="kind_name" id="kind_name" value="" size="30" onclick="openWin();" readonly>
+			<input type="hidden" name="product_kind" id="product_kind" value="">
+			<img src="images/select.gif" align="absmiddle" title="点击选择类别" border="0" onclick="openWin();" style="cursor:hand">
+		</td>
+		<td class="a1" width="15%">商品名称</td>
+		<td class="a4" width="35%">
+			<input type="text" name="product_name" id="product_name" value="" size="30">
+		</td>										
 	</tr>		
 	<tr height="35">
 		<td class="a1" colspan="4">
