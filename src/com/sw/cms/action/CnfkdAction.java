@@ -26,7 +26,18 @@ public class CnfkdAction extends BaseAction {
 	private String start_date = "";
 	private String end_date = "";
 	private String state = "´ıÖ§¸¶";
+	private String client_name = "";
 	
+	public String getClient_name() {
+		return client_name;
+	}
+
+
+	public void setClient_name(String clientName) {
+		client_name = clientName;
+	}
+
+
 	private String id = "";
 	
 	private int curPage = 1;
@@ -41,13 +52,16 @@ public class CnfkdAction extends BaseAction {
 			String con = "";
 			
 			if(!start_date.equals("")){
-				con += " and fk_date>='" + start_date + "'";
+				con += " and a.fk_date>='" + start_date + "'";
 			}
 			if(!end_date.equals("")){
-				con += " and fk_date<='" + (end_date + " 23:59:59") + "'";
+				con += " and a.fk_date<='" + (end_date + " 23:59:59") + "'";
 			}
 			if(!state.equals("")){
-				con += " and state='" + state + "'";
+				con += " and a.state='" + state + "'";
+			}
+			if(!client_name.equals("")){
+				con += " and b.name like '%" + client_name + "%'";
 			}
 			con += " order by id desc";
 			

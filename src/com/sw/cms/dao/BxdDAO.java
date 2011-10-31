@@ -7,12 +7,10 @@ import java.util.Map;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import com.sw.cms.dao.LsdDAO.LsdProductRowMapper;
 import com.sw.cms.dao.base.JdbcBaseDAO;
 import com.sw.cms.dao.base.SqlUtil;
 import com.sw.cms.model.Bxd;
 import com.sw.cms.model.BxdProduct;
-import com.sw.cms.model.LsdProduct;
 import com.sw.cms.model.Page;
 import com.sw.cms.util.DateComFunc;
 

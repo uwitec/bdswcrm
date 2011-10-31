@@ -156,15 +156,15 @@ public class XsdAction extends BaseAction {
 	
 	public String listCjXsd(){
 		
-		String con = " and state='已出库'";
+		String con = " and a.state='已出库'";
 		if(!client_name.equals("")){
-			con += " and client_name='" + client_name + "'";
+			con += " and a.client_name='" + client_name + "'";
 		}
 		if(!creatdate1.equals("")){
-			con += " and creatdate>='" + creatdate1 + "'";
+			con += " and a.creatdate>='" + creatdate1 + "'";
 		}
 		if(!creatdate2.equals("")){
-			con += " and creatdate<='" + (creatdate2+ " 23:59:59") + "'";
+			con += " and a.creatdate<='" + (creatdate2+ " 23:59:59") + "'";
 		}
 		if(orderName.equals("")){
 			orderName = "id";

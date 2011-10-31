@@ -1,16 +1,11 @@
 package com.sw.cms.dao;
 
-import java.util.List;
-import java.util.Map;
-
 import com.sw.cms.dao.base.BeanRowMapper;
 import com.sw.cms.dao.base.JdbcBaseDAO;
-import com.sw.cms.model.Bfd;
-import com.sw.cms.model.BfdProduct;
-import com.sw.cms.model.Page;
 import com.sw.cms.model.Bwl;
-import com.sw.cms.util.UUIDGenerator;
+import com.sw.cms.model.Page;
 import com.sw.cms.util.StaticParamDo;
+import com.sw.cms.util.UUIDGenerator;
 
 /**
  * 信息发布内部公告

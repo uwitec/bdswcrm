@@ -7,12 +7,8 @@ import java.util.Map;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import com.sw.cms.dao.BxdDAO.BxdProductRowMapper;
-import com.sw.cms.dao.BxdDAO.BxdRowMapper;
 import com.sw.cms.dao.base.JdbcBaseDAO;
 import com.sw.cms.dao.base.SqlUtil;
-import com.sw.cms.model.Bxd;
-import com.sw.cms.model.BxdProduct;
 import com.sw.cms.model.Bxfhd;
 import com.sw.cms.model.BxfhdProduct;
 import com.sw.cms.model.Page;
