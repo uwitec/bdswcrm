@@ -27,7 +27,25 @@ public class XstjClientAction {
 	private String dj_id = "";
 	private String client_type = "";
 	private String khjl = "";
+	private String product_kind = "";
+	private String product_name = "";
 	
+	public String getProduct_kind() {
+		return product_kind;
+	}
+
+	public void setProduct_kind(String productKind) {
+		product_kind = productKind;
+	}
+
+	public String getProduct_name() {
+		return product_name;
+	}
+
+	public void setProduct_name(String productName) {
+		product_name = productName;
+	}
+
 	public String showCondition(){
 		userList = userService.getAllEmployeeList();
 		clientList=clientsService.getClientList("");
@@ -36,7 +54,7 @@ public class XstjClientAction {
 	}
 	
 	public String getResult(){
-		statResult = xstjClientService.getXstjClientResult(start_date, end_date, client_name, xsry_id,client_type,khjl,dj_id);
+		statResult = xstjClientService.getXstjClientResult(start_date, end_date, client_name, xsry_id,client_type,khjl,dj_id, product_kind, product_name);
 		return "success";
 	}
 	

@@ -310,12 +310,23 @@ public class CkdService {
 	
 	
 	/**
-	 * 查看出库单是否已经提交
+	 * 查看出库单是否可操作（出库、退回）
 	 * @param ckd_id
-	 * @return
+	 * @return false:不能操作；true:能操作
 	 */
 	public boolean isCkdSubmit(String ckd_id){
-		return ckdDao.isCkdSubmit(ckd_id);
+		Ckd ckd = (Ckd)ckdDao.getCkd(ckd_id);
+		if(ckd == null){
+			//出库单已经不存在，不能操作
+			return false;
+		}else{
+			if(ckd.getState().equals("已出库")){
+				//出库单已出库，不能操作
+				return false;
+			}else{
+				return true;
+			}
+		}
 	}
 	
 	/**

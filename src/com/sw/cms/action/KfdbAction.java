@@ -224,6 +224,9 @@ public class KfdbAction extends BaseAction {
 	 * @return
 	 */
 	public String update(){
+		if(!kfdbService.isDoKfdb(kfdb.getId())){
+			return "success";
+		}
 		LoginInfo info = (LoginInfo)getSession().getAttribute("LOGINUSER");
 		String user_id = info.getUser_id();
 		kfdb.setCzr(user_id);
@@ -267,7 +270,7 @@ public class KfdbAction extends BaseAction {
 	public String confirm(){
 		try{
 			//判断调拨单是否已经提交，如果已经提交返回成功，不做任何操作
-			if(kfdbService.isDbFinish(id)){
+			if(!kfdbService.isDbFinish(id)){
 				return SUCCESS;
 			}
 			
@@ -324,7 +327,7 @@ public class KfdbAction extends BaseAction {
 	public String doTh(){
 		try{
 			//判断调拨单是否已经提交，如果已经提交返回成功，不做任何操作
-			if(kfdbService.isDbFinish(id)){
+			if(!kfdbService.isDbFinish(id)){
 				return SUCCESS;
 			}
 			
@@ -351,6 +354,9 @@ public class KfdbAction extends BaseAction {
 	 * @return
 	 */
 	public String del(){
+		if(!kfdbService.isDoKfdb(kfdb.getId())){
+			return "success";
+		}
 		kfdbService.delKfdb(id);
 		return "success";
 	}	

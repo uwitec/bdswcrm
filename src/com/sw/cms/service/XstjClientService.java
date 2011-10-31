@@ -120,8 +120,8 @@ public class XstjClientService {
 	 * @param dj_id
 	 * @return
 	 */
-	public List getXstjClientResult(String start_date, String end_date,String client_name, String xsry_id,String client_type, String khjl,String dj_id){
-		return xstjClientDao.getXstjClientResult(start_date, end_date, client_name, xsry_id,client_type,khjl,dj_id);
+	public List getXstjClientResult(String start_date, String end_date,String client_name, String xsry_id,String client_type, String khjl,String dj_id,String product_kind,String product_name){
+		return xstjClientDao.getXstjClientResult(start_date, end_date, client_name, xsry_id,client_type,khjl,dj_id,product_kind,product_name);
 	}
 	
 	public XstjClientDAO getXstjClientDao() {

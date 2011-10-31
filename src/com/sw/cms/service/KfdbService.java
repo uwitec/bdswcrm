@@ -3,11 +3,9 @@ package com.sw.cms.service;
 import java.util.List;
 
 import com.sw.cms.dao.KfdbDAO;
+import com.sw.cms.dao.ProductDAO;
 import com.sw.cms.dao.ProductKcDAO;
 import com.sw.cms.dao.SerialNumDAO;
-import com.sw.cms.dao.ProductDAO;
-import com.sw.cms.model.Ckd;
-import com.sw.cms.model.CkdProduct;
 import com.sw.cms.model.Kfdb;
 import com.sw.cms.model.KfdbProduct;
 import com.sw.cms.model.Page;
@@ -127,12 +125,53 @@ public class KfdbService {
 	
 	
 	/**
-	 * 判断调拨单是否已经提交
+	 * 确认调拨时是否可操作（）
 	 * @param id
-	 * @return
+	 * @return false:不能操作；true:可操作
 	 */
 	public boolean isDbFinish(String id) {
-		return kfdbDao.isDbFinish(id);
+		Kfdb kfdb = (Kfdb)kfdbDao.getKfdb(id);
+		if(kfdb == null){
+			//调拨已经删除，不能操作
+			return false;
+		}else{
+			if(kfdb.getState().equals("已入库")){
+				//调拨已经入库，不能操作
+				return false;
+			}else if(kfdb.getState().equals("已退回")){
+				//调拨已经退回，不能操作
+				return false;
+			}else if(kfdb.getState().equals("已保存")){
+				//调拨尚处在以保存状态，不能确认做确认操作中的任何操作
+				return false;
+			}else{
+				return true;
+			}
+		}
+	}
+	
+	
+	/**
+	 * 库房调拨草稿、出库、删除时，是否可操作
+	 * @param id
+	 * @return false:不能操作；true:能操作
+	 */
+	public boolean isDoKfdb(String id){
+		Kfdb kfdb = (Kfdb)kfdbDao.getKfdb(id);
+		if(kfdb == null){
+			//调拨已经删除，不能操作
+			return false;
+		}else{
+			if(kfdb.getState().equals("已出库")){
+				//调拨已经出库，不能操作
+				return false;
+			}else if(kfdb.getState().equals("已入库")){
+				//调拨已入库，不能操作
+				return false;
+			}else{
+				return true;
+			}
+		}
 	}
 
 	

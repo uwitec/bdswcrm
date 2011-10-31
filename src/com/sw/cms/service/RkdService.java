@@ -152,12 +152,21 @@ public class RkdService{
 	
 	
 	/**
-	 * 根据入库单编号查看入库单是否已经入库
+	 * 根据入库单编号查看入库单是否可操作（已退回、已入库，无法进行下一步操作）
 	 * @param xsd_id
-	 * @return
+	 * @return true:可操作；false:不可操作
 	 */
 	public boolean isJhdSubmit(String rkd_id){
-		return rkdDao.isJhdSubmit(rkd_id);
+		Rkd rkd = (Rkd)rkdDao.getRkd(rkd_id);
+		if(rkd != null){
+			if(rkd.getState().equals("已入库")){
+				return false;
+			}else{
+				return true;
+			}
+		}else{
+			return false;
+		}
 	}
 	
 	

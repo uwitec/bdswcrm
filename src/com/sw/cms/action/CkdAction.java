@@ -235,12 +235,7 @@ public class CkdAction extends BaseAction {
 	public String update(){
 		
 		//判断出库单是否已经提交，如果已经提交不做任何操作
-		if(ckdService.isCkdSubmit(ckd.getCkd_id())){
-			return SUCCESS;
-		}
-		
-		//判断出库单是否已经删除，如果已经删除，但不做任何操作
-		if(ckdService.isCkdDel(ckd.getCkd_id())){
+		if(!ckdService.isCkdSubmit(ckd.getCkd_id())){
 			return SUCCESS;
 		}
 		 
@@ -323,25 +318,12 @@ public class CkdAction extends BaseAction {
 	 * @return
 	 */
 	public String doTh(){
-		//判断出库单是否已经提交
-		if(ckdService.isCkdSubmit(ckd.getCkd_id())){
-			this.saveMessage("出库单已经出库，不能退回，请检查！");
-			
-			ckdProducts = ckdService.getCkdProducts(ckd.getCkd_id());
-			iscs_flag = sysInitSetService.getQyFlag();
-			isqzxlh_flag = userService.getQzxlh();
-			userList = userService.getAllEmployeeList();
-			storeList = ckdService.getStoreList();
-			ysfs = sjzdService.getSjzdXmxxByZdId("SJZD_YSFS");
-			
-			if(clientsService.getClient(ckd.getClient_name()) != null){
-				client = (Clients)clientsService.getClient(ckd.getClient_name());
-			}
-			
-			return "input";
+		//判断出库单是否可操作
+		if(!ckdService.isCkdSubmit(ckd.getCkd_id())){
+			return SUCCESS;
 		}
 		ckdService.doTh(ckd);
-		return "success";
+		return SUCCESS;
 	}
 	
 	

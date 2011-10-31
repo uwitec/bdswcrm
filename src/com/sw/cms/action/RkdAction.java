@@ -188,8 +188,8 @@ public class RkdAction extends BaseAction {
 	 */
 	public String update(){
 		
-		if(rkdService.isJhdSubmit(rkd.getRkd_id())){
-			this.saveMessage("入库单已提交，不能重复提交，请检查！");
+		if(!rkdService.isJhdSubmit(rkd.getRkd_id())){
+			this.saveMessage("入库单状态已经发生变化，可能已入库或者已退回，不能重复操作，请检查！");
 			rkdProducts = rkdService.getRkdProducts(rkd.getRkd_id());
 			storeList = rkdService.getAllStoreList();
 			return "input";
@@ -240,8 +240,8 @@ public class RkdAction extends BaseAction {
 	 */
 	public String doTh(){
 		
-		if(rkdService.isJhdSubmit(rkd.getRkd_id())){
-			this.saveMessage("入库单已入库，不能退回，请检查！");
+		if(!rkdService.isJhdSubmit(rkd.getRkd_id())){
+			this.saveMessage("入库单状态已经发生变化，可能已入库或者已退回，不能重复操作，请检查！");
 			rkdProducts = rkdService.getRkdProducts(rkd.getRkd_id());
 			storeList = rkdService.getAllStoreList();
 			return "input";
