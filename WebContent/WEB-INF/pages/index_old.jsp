@@ -369,6 +369,14 @@ int menu_index = 0;
 		document.getElementById("tabTable").width = screen.availWidth-200;
 		DesktopInit();
 		document.getElementById("ifrIndex1").style.height = $(window).height()-105 + "px";
+
+		var leftWinHeight = ($(window).height()-115) + "px";
+		var leftWinHeightLit = ($(window).height()-120) + "px";
+
+		$(window).resize(function(){
+			leftWinHeight = ($(window).height()-115) + "px";
+			leftWinHeightLit = ($(window).height()-120) + "px";
+		});		
 </script>
 </BODY>
 </HTML>

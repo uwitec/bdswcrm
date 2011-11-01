@@ -118,8 +118,8 @@ Product product = (Product)VS.findValue("product");
 	</tr>
 	</thead>
 	<tr>
-		<td class="a1">商品编号</td>
-		<td class="a2"><%=StringUtils.nullToStr(product.getProductId()) %></td>	
+		<td class="a1" width="25%">商品编号</td>
+		<td class="a2" width="75%"><%=StringUtils.nullToStr(product.getProductId()) %></td>	
 	</tr>
 	<tr>
 		<td class="a1">商品名称</td>

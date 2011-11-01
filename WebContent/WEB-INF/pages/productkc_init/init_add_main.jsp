@@ -70,7 +70,7 @@ if(productKcInit != null){
 
 <body align="center" onload="loadFlag();">
 <form name="myform" action="saveInit.html" method="post">
-<table width="100%" height="495" border="0" align="left" cellpadding="0" class="chart_list" cellspacing="0">	
+<table width="99%" height="495" border="0" align="left" cellpadding="0" class="chart_list" cellspacing="0">	
 	<tr>
 		<td class="search" align="left" colspan="2">
 		&nbsp;仓库名称：
@@ -115,10 +115,10 @@ if(productKcInit != null){
 	</tr>
 	<tr valign="top" height="450">
 		<td width="200" class="a2">
-			<iframe width="100%" height="100%" name="kindFrame" allowTransparency="true" src="initLeftKind.html?store_id=<%=store_id %>" border="0" frameborder="0" SCROLLING="auto"></iframe>
+			<iframe width="100%" height="450" name="kindFrame" allowTransparency="true" src="initLeftKind.html?store_id=<%=store_id %>" border="0" frameborder="0" SCROLLING="auto"></iframe>
 		</td>	
 		<td width="600">
-			<iframe width="100%" height="100%" name="right" allowTransparency="true" src="listInitProductKc.html?store_id=<%=store_id %>"  border="0" frameborder="0" SCROLLING="no"></iframe>			
+			<iframe width="100%" height="450" name="rightFrame" allowTransparency="true" src="listInitProductKc.html?store_id=<%=store_id %>"  border="0" frameborder="0" SCROLLING="auto"></iframe>			
 		</td>
 	</tr>
 </table>

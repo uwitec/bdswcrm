@@ -17,7 +17,6 @@ String store_id = StringUtils.nullToStr(request.getParameter("store_id"));
 <link href="tree/menu.css" rel="stylesheet" type="text/css">
 
 <script language="JavaScript">
-
 treedata	= new Array();
 path		= "";
 function treemenu(tree_path,tree_name,tree_ico,url,target)
@@ -27,7 +26,7 @@ function treemenu(tree_path,tree_name,tree_ico,url,target)
 	ico	= tree_ico;
 	
 	if(url!="" && url!=null)
-		document.write("<div><img src='"+path+ico+"' align=top border=0><a style='font-size:15px;font-weight:bold' href='"+url+"' target='"+target+"'>"+name+"</a></div>");
+		document.write("<div><img src='"+path+ico+"' align=top border=0><a style='font-size:15px;font-weight:bold' href='"+url+"' target='rightFrame'>"+name+"</a></div>");
 	else
 		document.write("<div style='font-size:15px;font-weight:bold'><img src='"+path+ico+"' align=top border=0>"+name+"</div>");
 
@@ -70,12 +69,13 @@ function menu(id)						//画菜单
 	var printstr	= "<table border='0' cellspacing='0' cellpadding='0'>\n";
 	var listtype	= "";
 	var menutype	= "";
-	var onmouseup = null;
+	
 	for(; i<treedata.length; i++)
 	{					//判断有无此节点
 		if(treedata[i][1]==id)	currdata[currdata.length] = treedata[i];
 	}//end for	
-	
+
+	var onmouseup = null;
 	
 	for(var i=0; i<currdata.length; i++)
 	{					//遍历数组，执行判断
@@ -109,7 +109,7 @@ function menu(id)						//画菜单
 		if(currdata[i][3]!="" && currdata[i][3]!=null)
 		{
 			//oncontextmenu事件中所有代码为后添加
-			menuname	= "<a href='"+currdata[i][3] + "?product_kind=" + currdata[i][0] +"&store_id=" + document.getElementById("store_id").value + "' target='"+currdata[i][6]+"'>"+currdata[i][2]+"</a>";
+			menuname	= "<a oncontextmenu='document.getElementById(\"parent_id\").value=\"" + currdata[i][0] + "\";mlay.style.display=\"\";mlay.style.pixelTop=event.clientY; mlay.style.pixelLeft=event.clientX; return false;' href='"+currdata[i][3] + "?curId=" + currdata[i][0] +"' target='rightFrame'>"+currdata[i][2]+"</a>";
 		}
 		else
 		{
@@ -362,6 +362,7 @@ function deleteCookie(name, path, domain)
 
 function window_onload(){
 	initialize();
+	fresh();
 }
 </SCRIPT>
 

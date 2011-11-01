@@ -56,6 +56,7 @@ String iscs_flag = (String)VS.findValue("iscs_flag");
 	function clearAll(){
 		document.myform.product_xh.value = "";
 		document.myform.product_name.value = "";
+		document.myform.product_kind.value = "";
 	}
 	
 	function add(){
