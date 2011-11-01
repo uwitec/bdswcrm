@@ -21,8 +21,6 @@ String product_state = StringUtils.nullToStr(VS.findValue("product_state"));
 <title>商品列表</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="jquery/jquery.js"></script>
-<script type="text/javascript" src="js/initPageSize.js"></script>
 <script type="text/javascript">
 	function add(){
 		var id = "<%=curId %>";
@@ -81,7 +79,6 @@ String product_state = StringUtils.nullToStr(VS.findValue("product_state"));
 </script>
 </head>
 <body>
-<div class="rightContentDiv" id="divContent">
 <form name="myform" action="product_list.html" method="post">
 <input type="hidden" name="curId" id="curId" value="<%=curId %>">
 <input type="hidden" name="productId">
@@ -155,6 +152,5 @@ String product_state = StringUtils.nullToStr(VS.findValue("product_state"));
 	</tr>
 </table>
 </form>
-</div>
 </body>
 </html>

@@ -362,7 +362,6 @@ function deleteCookie(name, path, domain)
 
 function window_onload(){
 	initialize();
-	fresh();
 }
 </SCRIPT>
 

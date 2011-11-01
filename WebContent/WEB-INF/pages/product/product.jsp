@@ -58,7 +58,7 @@ $(window).resize(function(){
 			<table width="100%" border="0"cellpadding="0" cellspacing="0" class="chart_list">
 			  <tr>
 			    <td width="100%" class="a2">
-					<iframe width="100%" name="kindFrame" id="kindFrame" src="kind_list.html" border="0" frameborder="0" SCROLLING="yes"></iframe>
+					<iframe width="100%" name="kindFrame" id="kindFrame" src="kind_list.html" border="0" frameborder="0" SCROLLING="auto"></iframe>
 				</td>
 			  </tr>
 			</table>

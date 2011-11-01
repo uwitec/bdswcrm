@@ -22,8 +22,6 @@ if(!msg.equals("")){
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <link href="tree/menu.css" rel="stylesheet" type="text/css"> 
-<script type="text/javascript" src="jquery/jquery.js"></script>
-<script type="text/javascript" src="js/initPageSize.js"></script>
 <script language="JavaScript">
 
 treedata	= new Array();
@@ -448,8 +446,7 @@ function addRoot(){
 
 </head>
 
-<body onselectstart="return false;" onLoad="window_onload();" onClick="showoff();" align="center">
-<div class="rightContentDiv" id="divContent">
+<body onselectstart="return false;" onLoad="window_onload();" onClick="showoff();" align="left">
 <div id="mlay" style="position:absolute;display:none;cursor:default;" onClick="return false;"></div>
 <table width="100%" border="0" align="center" class="chart_list" cellpadding="0" cellspacing="0">
 	<tr>
@@ -471,6 +468,5 @@ function addRoot(){
 </table>
 <form name="myform" action="listDept.html" method="post">
 </form>
-</div>
 </body>
 </html>
