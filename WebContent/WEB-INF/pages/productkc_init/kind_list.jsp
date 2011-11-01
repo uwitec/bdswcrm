@@ -109,7 +109,7 @@ function menu(id)						//画菜单
 		if(currdata[i][3]!="" && currdata[i][3]!=null)
 		{
 			//oncontextmenu事件中所有代码为后添加
-			menuname	= "<a oncontextmenu='document.getElementById(\"parent_id\").value=\"" + currdata[i][0] + "\";mlay.style.display=\"\";mlay.style.pixelTop=event.clientY; mlay.style.pixelLeft=event.clientX; return false;' href='"+currdata[i][3] + "?product_kind=" + currdata[i][0] +"' target='rightFrame'>"+currdata[i][2]+"</a>";
+			menuname	= "<a oncontextmenu='document.getElementById(\"parent_id\").value=\"" + currdata[i][0] + "\";mlay.style.display=\"\";mlay.style.pixelTop=event.clientY; mlay.style.pixelLeft=event.clientX; return false;' href='"+currdata[i][3] + "?store_id=<%=store_id%>&product_kind=" + currdata[i][0] +"' target='rightFrame'>"+currdata[i][2]+"</a>";
 		}
 		else
 		{
