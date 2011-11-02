@@ -47,9 +47,9 @@ public class CghzDAO extends JdbcBaseDAO {
 				jhd_sql += " and (";
 				for(int i=0;i<arryItems.length;i++){
 					if(i == 0){
-						jhd_sql += " a.product_id like '" + arryItems[i] + "%'";
+						jhd_sql += " c.product_kind like '" + arryItems[i] + "%'";
 					}else{
-						jhd_sql += " or a.product_id like '" + arryItems[i] + "%'";
+						jhd_sql += " or c.product_kind like '" + arryItems[i] + "%'";
 					}
 				}
 				jhd_sql += ")";
