@@ -42,10 +42,12 @@ List results = (List)VS.findValue("ckdProducts");
 <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0" border="1" id="selTable">
 	<thead>
 	<tr>
-		<td width="30%">商品名称</td>
-		<td width="25%">规格</td>
+		<td width="20%">商品名称</td>
+		<td width="20%">规格</td>
+		<td width="10%">单价</td>
 		<td width="10%">数量</td>
-		<td width="35%">序列号</td>
+		<td width="10%">小计</td>
+		<td width="30%">序列号</td>
 	</tr>
 	</thead>
 	<%
@@ -53,11 +55,22 @@ List results = (List)VS.findValue("ckdProducts");
 	
 	while(it.hasNext()){
 		Map ckdProduct = (Map)it.next();
+		double price = ckdProduct.get("price")==null?0:((Double)ckdProduct.get("price")).doubleValue();
+		
+		String strNums = StringUtils.nullToStr(ckdProduct.get("nums"));
+		if(strNums.equals("")){
+			strNums = "0";
+		}
+		
+		int nums = new Integer(strNums).intValue();
+		double xj = price * nums;
 	%>
 	<tr class="a1" onmousedown="trSelectChangeCss()">
 		<td align="left"><%=StringUtils.nullToStr(ckdProduct.get("product_name")) %></td>
 		<td align="left"><%=StringUtils.nullToStr(ckdProduct.get("product_xh")) %></td>
-		<td><%=StringUtils.nullToStr(ckdProduct.get("nums")) %></td>
+		<td align="right"><%=JMath.round(price,2) %></td>
+		<td><%=nums %></td>
+		<td align="right"><%=JMath.round(xj,2) %></td>
 		<td align="left"><%=StringUtils.nullToStr(ckdProduct.get("qz_serial_num")) %></td>
 	</tr>
 	

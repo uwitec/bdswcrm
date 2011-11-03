@@ -425,11 +425,17 @@ if(ckdProducts!=null && ckdProducts.size()>0){
 		if(StringUtils.nullToStr(ckdProduct.get("qz_flag")).equals("是")){
 			cssStyle = "color:red";
 		}
+		
+		double price = ckdProduct.get("price")==null?0:((Double)ckdProduct.get("price")).doubleValue();
+		double cbj =  ckdProduct.get("cbj")==null?0:((Double)ckdProduct.get("cbj")).doubleValue();
 %>
 	<tr>
 		<td class="a2">
 			<input type="text" id="product_name_<%=i %>" style="width:90%;<%=cssStyle %>" name="ckdProducts[<%=i %>].product_name" value="<%=StringUtils.nullToStr(ckdProduct.get("product_name")) %>" readonly>
 			<input type="hidden" id="product_id_<%=i %>" name="ckdProducts[<%=i %>].product_id" value="<%=StringUtils.nullToStr(ckdProduct.get("product_id")) %>">
+			
+			<input type="hidden" id="price_<%=i %>" name="ckdProducts[<%=i %>].price" value="<%=price %>">
+			<input type="hidden" id="cbj_<%=i %>" name="ckdProducts[<%=i %>].cbj" value="<%=cbj %>">
 		</td>
 		<td class="a2"><input type="text" id="product_xh_<%=i %>"  style="width:90%;<%=cssStyle %>" name="ckdProducts[<%=i %>].product_xh" size="10" value="<%=StringUtils.nullToStr(ckdProduct.get("product_xh")) %>" readonly></td>	
 		<td class="a2"><input type="text" id="nums_<%=i %>" name="ckdProducts[<%=i %>].nums" value="<%=StringUtils.nullToStr(ckdProduct.get("nums")) %>" readonly  style="width:90%;<%=cssStyle %>"></td>
