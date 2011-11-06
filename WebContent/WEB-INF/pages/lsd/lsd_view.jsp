@@ -102,13 +102,13 @@ List lsdProducts = (List)VS.findValue("lsdProducts");
 		<td class="a1" width="15%">出货库房</td>
 		<td class="a2"><%=StaticParamDo.getStoreNameById(StringUtils.nullToStr(lsd.getStore_id())) %></td>					
 	</tr>
-	<tr height="35">
+	<tr>
 		<td class="a1">是否存在预收款</td>
 		<td class="a2"><%=StringUtils.nullToStr(lsd.getHas_yushk()) %></td>	
 		<td class="a1">预收款编号</td>
 		<td class="a2"><%=StringUtils.nullToStr(lsd.getYushk_id()) %></td>
 	</tr>
-	<tr height="35">
+	<tr>
 		<td class="a1">预收金额</td>
 		<td class="a2"><%=JMath.round(lsd.getYushkje()) %></td>	
 		<td class="a1">本次实收金额</td>
@@ -120,9 +120,9 @@ List lsdProducts = (List)VS.findValue("lsdProducts");
 		<td class="a1" widht="20%">收款账户</td>
 		<td class="a2"><%=StaticParamDo.getAccountNameById(StringUtils.nullToStr(lsd.getSkzh())) %></td>
 	</tr>
-	<tr height="35">
+	<tr>
 		<td class="a1">零售单合计金额</td>
-		<td class="a2"><%=JMath.round(lsd.getLsdje(),2) %></td>
+		<td class="a2" colspan="3"><%=JMath.round(lsd.getLsdje(),2) %></td>
 	</tr>	
 </table>
 <br>

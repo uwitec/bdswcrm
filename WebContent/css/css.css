@@ -12,8 +12,8 @@ input
     font-size: 12px; 
 	text-indent:0px;
 	border:solid 1px #B8B8B8;
-	margin-left:6px;
-	margin-right:6px;
+	margin-left:3px;
+	margin-right:3px;
 }
 span.a1
 {
@@ -21,8 +21,8 @@ font-size: 12px;
 }
 select
 {
-	margin-left:6px;
-	margin-right:6px;
+	margin-left:3px;
+	margin-right36px;
 }
 textarea
 {
@@ -30,7 +30,7 @@ textarea
 	text-indent:0px;
 	border:solid 1px #B8B8B8;
 	margin-top:8px;
-	margin-left:6px;
+	margin-left:3px;
 	margin-bottom:8px;
 }
 A.xxlb:link
@@ -125,17 +125,18 @@ table.chart_info
 table.chart_info thead td
 {
 	background-image:url(../images/light-bg.png);
-	height:30px;
+	height:28px;
 	text-align: center;
 	vertical-align:middle;
 	font-size: 12px;
 	border-right:solid 1px #D8D8D8;
 	border-bottom:solid 1px #D8D8D8;
+	font-weight:bold;
 }
 table.chart_info td.a1
 {
 	background-color: #f6f6f6;
-	height:28px;	
+	height:25px;	
 	text-align: center ;
 	font-size: 12px;
 	border-bottom:solid 1px #D8D8D8;
@@ -144,7 +145,7 @@ table.chart_info td.a1
 table.chart_info td.a2
 {
 	background-color: #FFFFFF;
-	height:28px;	
+	height:25px;	
 	text-align: left ;
 	font-size: 12px;
 	margin-left: 10px;
@@ -155,7 +156,7 @@ table.chart_info td.a2
 table.chart_info td.a3
 {
 	background-color: #FFFFFF;
-	height:28px;	
+	height:25px;	
 	text-align: center ;
 	font-size: 12px;
 	border-bottom:solid 1px #D8D8D8;

@@ -692,13 +692,13 @@ if(lsdProducts != null && lsdProducts.size()>0){
 %>	
 </table>
 <table width="100%"  align="center" class="chart_info" cellpadding="0" cellspacing="0">
-	<tr height="35">
+	<tr>
 		<td class="a2" colspan="4" width="100%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="button" name="button1" value="添加商品" class="css_button3" onclick="openWin();">
 			<input type="button" name="button8" value="清除商品" class="css_button3" onclick="delDesc();">
 		</td>
 	</tr>
-	<tr height="35">	
+	<tr>	
 		<td class="a1">合计金额</td>
 		<td class="a2" colspan="3">
 			<input type="text" name="lsd.lsdje" id="lsdje" value="<%=JMath.round(lsd.getLsdje()) %>" size="40" readonly>
@@ -713,7 +713,7 @@ if(lsdProducts != null && lsdProducts.size()>0){
 		cssStyle = "";
 	}
 	%>
-	<tr height="35">
+	<tr>
 		<td class="a1" width="15%">本次实收金额</td>
 		<td class="a2" width="35%">
 			<input type="text" name="lsd.skje" id="skje" value="<%=JMath.round(lsd.getSkje()) %>" size="40" readonly>
@@ -726,7 +726,7 @@ if(lsdProducts != null && lsdProducts.size()>0){
 			</select>
 		</td>	
 	</tr>
-	<tr height="35" id="ysStyle" style="<%=cssStyle %>">	
+	<tr id="ysStyle" style="<%=cssStyle %>">	
 		<td class="a1">预收款编号</td>
 		<td class="a2">
 			<input type="text" name="lsd.yushk_id" id="yushk_id" value="<%=StringUtils.nullToStr(lsd.getYushk_id()) %>" size="40" onclick="openYushk();" readonly>

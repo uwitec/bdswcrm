@@ -21,7 +21,7 @@ List drkList = (List)VS.findValue("drkList");
 <script type="text/javascript">
 	function editRkd(id){
 		var destination = "editRkd.html?rkd_id=" + id;
-		var fea ='width=900,height=700,left=' + (screen.availWidth-900)/2 + ',top=' + (screen.availHeight-700)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		var fea ='width=900,height=650,left=' + (screen.availWidth-900)/2 + ',top=' + (screen.availHeight-650)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		window.open(destination,'入库单',fea);			
 	}
 	function refreshPage(){

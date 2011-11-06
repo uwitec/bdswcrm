@@ -434,7 +434,7 @@ if(xsdProducts!=null && xsdProducts.size()>0){
 		skxxStyle = "display:none";
 	}
 	%>	
-	<tr height="35">	
+	<tr>	
 		<td class="a1" width="15%">订单合计金额</td>
 		<td class="a2">
 			<input type="text" name="xsd.xsdje" id="xsdje" value="<%=JMath.round(xsd.getXsdje()) %>" readonly size="40">元

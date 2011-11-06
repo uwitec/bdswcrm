@@ -20,7 +20,7 @@ List dspCgfkList = (List)VS.findValue("dspCgfkList");
 <script type="text/javascript">
 	function doSpCgfk(id){
 		var destination = "spCgfk.html?id=" + id;
-		var fea ='width=850,height=700,left=' + (screen.availWidth-850)/2 + ',top=' + (screen.availHeight-750)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		var fea ='width=850,height=650,left=' + (screen.availWidth-850)/2 + ',top=' + (screen.availHeight-650)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
 		window.open(destination,'审批付款申请单',fea);
 	}

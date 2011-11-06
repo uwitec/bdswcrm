@@ -22,7 +22,7 @@ List dckList = (List)VS.findValue("dckList");
 <script type="text/javascript">
 	function editCkd(id){
 		var destination = "editCkd.html?ckd_id=" + id;
-		var fea ='width=900,height=700,left=' + (screen.availWidth-900)/2 + ',top=' + (screen.availHeight-700)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		var fea ='width=900,height=650,left=' + (screen.availWidth-900)/2 + ',top=' + (screen.availHeight-650)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		window.open(destination,'出库单',fea);		
 	}
 	
