@@ -47,7 +47,7 @@ function f_enter(){
 }
 
 function chgImage(){
-	document.getElementById("imgCheck").src = "<%=request.getContextPath() %>/showImage?" + Math.random();
+	document.getElementById("imgCheck").src = "showImage?" + Math.random();
 	document.getElementById("authNums").focus();
 }
 </script>
@@ -73,8 +73,8 @@ function chgImage(){
 	</tr>
 	<tr>
 		<td class="a1" width="30%">验证码：</td>
-		<td class="a2" width="40%"><input type="text" name="authNums" value="" style="width:90%" onKeyPress="f_enter();"></td>
-		<td class="a2" width="30%"><img alt="验证码" id="imgCheck" src="<%=request.getContextPath() %>/showImage" title="点击换一张" onclick="chgImage();" style="cursor: hand"></td>
+		<td class="a2" width="40%"><input type="text" name="authNums" id="authNums" value="" style="width:90%" onKeyPress="f_enter();"></td>
+		<td class="a2" width="30%"><img alt="验证码" id="imgCheck" src="showImage" title="点击换一张" onclick="chgImage();" style="cursor: hand"></td>
 	</tr>
 	<tr>
 		<td colspan="3" class="a1"><BR><BR>
