@@ -32,15 +32,15 @@
 	</tr>
 	</thead>
 	<tr>
-		<td class="a1" width="15%">标题</td>
-		<td class="a2" width="80%" colspan="3"><input type="text" name="xxfbNbgg.title" id="title" value="" size="45"><font color="red">*</font></td>
+		<td class="a1">标题</td>
+		<td class="a2" colspan="3"><input type="text" name="xxfbNbgg.title" id="title" value="" size="45"><font color="red">*</font></td>
 	</tr>
 	<tr>
 		<td class="a1" width="15%">发布时间</td>
-		<td class="a2" width="30%"><input type="text" name="xxfbNbgg.pub_date" id="pub_date" value="<%=DateComFunc.getToday() %>" class="Wdate" onFocus="WdatePicker()">
+		<td class="a2" width="35%"><input type="text" name="xxfbNbgg.pub_date" id="pub_date" value="<%=DateComFunc.getToday() %>" class="Wdate" onFocus="WdatePicker()">
 		</td>
 		<td class="a1" width="15%">分销商是否可见</td>
-		<td class="a2" width="30%">
+		<td class="a2" width="35%">
 			<select name="xxfbNbgg.type" id="type">
 				<option value="0">否</option>
 				<option value="1">是</option>
@@ -48,7 +48,7 @@
 		</td>		
 	</tr>		
 	<tr>
-		<td class="a1" width="15%">公告内容</td>
+		<td class="a1" width="15%" nowrap="nowrap">公告内容</td>
 		<td class="a2" colspan="3">
 			<textarea id="content" name="xxfbNbgg.content" rows="25" style="width:90%"></textarea>
 		</td>
@@ -56,7 +56,7 @@
 </table>
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<tr height="35">
-		<td class="a1" colspan="2">
+		<td class="a1">
 			<input type="button" name="button1" value="提 交" class="css_button2" onclick="saveInfo();">&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="reset" name="button2" value="重 置" class="css_button2">&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="button" name="button3" value="关 闭" class="css_button2" onclick="window.close();">

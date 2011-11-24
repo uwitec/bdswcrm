@@ -57,7 +57,7 @@ XxfbNbgg xxfbNbgg = (XxfbNbgg)VS.findValue("xxfbNbgg");
 		</td>		
 	</tr>
 	<tr>
-		<td class="a1" width="15%">公告内容</td>
+		<td class="a1" width="15%" nowrap="nowrap">公告内容</td>
 		<td class="a2" colspan="3">
 			<textarea id="content" name="xxfbNbgg.content" rows="25" style="width:90%"><%=StringUtils.nullToStr(xxfbNbgg.getContent()) %></textarea>
 		</td>

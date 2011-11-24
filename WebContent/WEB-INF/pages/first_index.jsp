@@ -25,7 +25,8 @@ List bwlList = (List)VS.findValue("bwlList");
 	function openNbggWin(id){
 		var destination = "viewNbgg.html?id="+id;
 		var fea = 'width=800,height=650,left=' + (screen.availWidth-800)/2 + ',top=' + (screen.availHeight-650)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
-		window.open(destination,'详细信息',fea);	
+		window.open(destination,'详细信息',fea);
+		//top.showPopWin("viewNbgg.html?id="+id,800,600,"内部公告");
 	}
 
    function openBwlWin(id){

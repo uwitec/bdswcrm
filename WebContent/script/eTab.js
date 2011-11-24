@@ -285,6 +285,7 @@ eTab = function()
 			ifm.border = 0;		
 			ifm.frameBorder = 0; 			
 			ifm.id=tabTitle;
+			ifm.scrolling = "no";
 			ifm.style.display='none';
 			ifm.attachEvent("onload",autoChange);
 
@@ -425,12 +426,13 @@ function autoChange(){
 	if(ifm.Document.body!=null)
 	{
 
-		if(ifm.Document.body.scrollWidth>(window.document.body.scrollWidth-LeftWidth))
-			ifm.width=ifm.Document.body.scrollWidth;
-		else
-			ifm.width=window.document.body.scrollWidth-LeftWidth;	
-			
-		ifm.height=window.document.body.scrollHeight-110;
+		//if(ifm.Document.body.scrollWidth>(window.document.body.scrollWidth-LeftWidth))
+		//	ifm.width=ifm.Document.body.scrollWidth;
+		//else
+		//	ifm.width=window.document.body.scrollWidth-LeftWidth;	
+		
+		ifm.width = $(window).width()-172 + "px";
+		ifm.height=$(window).height()-105 + "px";
 	}
 		
 }
@@ -441,7 +443,8 @@ function FrameChange(frameName){
 		ifm.style.display='block';			
 		if(ifm.Document.body!=null)
 		{
-			ifm.height=window.document.body.scrollHeight-110;
+			ifm.height=$(window).height()-105 + "px";
+			ifm.width = $(window).width()-172 + "px";
 		}
 }
 function reloadContent(){

@@ -6,6 +6,7 @@ body
 	margin-bottom: 0px;
 	margin-left: 0px;
 	text-indent: 2pt;
+	background-color: #FFFFFF;
 }
 input
 {
@@ -335,19 +336,19 @@ table{
 	text-align:left;
 	display:inline ;
 	float:left;
-	overflow-x: auto; 
-	overflow-y: auto;	
+	overflow-x: auto;
+	overflow-y: auto;
 }
 .inner{
 	width:99%;
-	margin:2px; 
+	margin:2px;
 	border:1px solid #B8B8B8;
 	text-align:left;
 	display:inline ;
 	float:left;	
 	height: 240px;
 	overflow-y: auto;
-	overflow-x: none; 
+	overflow-x: auto; 
 }
 .innerImage{
 	width:99%;

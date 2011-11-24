@@ -12,7 +12,7 @@ if(error == null){
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 </head>
-<body oncontextmenu="return false;" style="margin-top:80px;">
+<body style="margin-top:80px;">
 <table width="400" height="30"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>

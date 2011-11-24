@@ -24,7 +24,7 @@ Page results = (Page)VS.findValue("nbggPage");
 	function openWin(id){
 		var destination = "viewNbgg.html?id="+id;
 		var fea = 'width=850,height=650,left=' + (screen.availWidth-850)/2 + ',top=' + (screen.availHeight-650)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
-		
+
 		window.open(destination,'详细信息',fea);	
 	}
 </script>
@@ -34,9 +34,7 @@ Page results = (Page)VS.findValue("nbggPage");
 <div class="rightContentDiv" id="divContent">
 <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0">
 	<tr>
-		<td class="csstitle" align="left" width="75%">&nbsp;&nbsp;&nbsp;&nbsp;<b>内部公告</b></td>
-		<td class="csstitle" width="25%" align="right">
-			<img src="images/create.gif" align="absmiddle" border="0">&nbsp;<a href="#" onclick="add();" class="xxlb"> 添 加 </a> &nbsp;&nbsp;&nbsp;</td>			
+		<td class="csstitle" align="left" width="100%">&nbsp;&nbsp;&nbsp;&nbsp;<b>内部公告</b></td>
 	</tr>
 </table>
 <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0">

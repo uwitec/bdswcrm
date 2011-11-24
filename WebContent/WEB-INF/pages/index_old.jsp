@@ -27,6 +27,10 @@ int menu_index = 0;
 <SCRIPT language=javascript src="script/eTab.js"></SCRIPT>
 <SCRIPT language=javascript src="script/Menu.js"></SCRIPT>
 <script type="text/javascript" src="jquery/jquery.js"></script>
+<link rel="stylesheet" type="text/css" media="all" href="extjs/resources/css/ext-all.css" />
+<link rel="stylesheet" type="text/css" media="all" href="extjs/resources/css/xtheme-gray.css" />
+<script type="text/javascript" src="extjs/adapter/ext/ext-base.js"></script>
+<script type="text/javascript" src="extjs/ext-all.js"></script>
 <script type="text/javascript">
 	function hidMenu(){
 		if(tdService.style.display=='none'){
@@ -41,7 +45,7 @@ int menu_index = 0;
 	}
 </script>
 </HEAD>
-<BODY id=Body bottomMargin=0 leftMargin=0 topMargin=0 onload="MenusInit();" align="left">
+<BODY id=Body bottomMargin=0 leftMargin=0 topMargin=0 onload="MenusInit();" align="left" style="overflow-y:hidden;overflow-x:hidden;">
 <TABLE cellSpacing=0 cellPadding=0 width="100%" height="100%" background="" border=0>
 	<TBODY>
 	<!-- 头开始 -->
@@ -342,12 +346,7 @@ int menu_index = 0;
 		
 		<!-- 右侧主工作区 -->
 		<TD  valign="top" align="left" width="100%" id="tdContent" height="100%" >
-			<div class="tabcontent_div">
-			<ul id="tabContent">							
-				<li><iframe id="ifrIndex1" src="listMain.html" scrolling="auto" border="0" style="width:100%;" onload="FrameChange('ifrIndex1');" frameborder="0"></iframe></li>
-				<li></li>
-			</ul>
-			</div>
+			<div class="tabcontent_div"><ul id="tabContent"><li><iframe id="ifrIndex1" src="listMain.html" scrolling="no" style="width:100%;" onload="FrameChange('ifrIndex1');" frameborder="0"></iframe></li><li></li></ul></div>
 		</TD>
 		<!-- 右侧主工作区 -->
 	</TR>
@@ -366,9 +365,10 @@ int menu_index = 0;
 		
 </TBODY>					
 <script language="javascript">
-		document.getElementById("tabTable").width = screen.availWidth-200;
-		DesktopInit();
+		document.getElementById("tabTable").width = $(window).width()-200 + "px";
+		document.getElementById("ifrIndex1").style.width = $(window).width()-172 + "px";
 		document.getElementById("ifrIndex1").style.height = $(window).height()-105 + "px";
+		DesktopInit();
 
 		var leftWinHeight = ($(window).height()-115) + "px";
 		var leftWinHeightLit = ($(window).height()-120) + "px";

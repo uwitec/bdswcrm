@@ -24,6 +24,7 @@ int menu_index = 0;
 <link rel="stylesheet" type="text/css" media="all" href="extjs/resources/css/xtheme-gray.css" />
 <script type="text/javascript" src="extjs/adapter/ext/ext-base.js"></script>
 <script type="text/javascript" src="extjs/ext-all.js"></script>
+<script type="text/javascript" src="js/pop_win.js"></script> 
 <style>
 .menu_icon_001 { background-image: url(index_images/merchandise_sales.gif);}
 .menu_icon_002 { background-image: url(index_images/stock_m.gif);}
