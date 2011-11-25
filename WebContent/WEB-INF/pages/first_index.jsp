@@ -142,11 +142,11 @@ List bwlList = (List)VS.findValue("bwlList");
 	}
 	
 	$(document).ready(function(){
-		var end_date = "<%=DateComFunc.getToday()%>";
-		var start_date = "<%=DateComFunc.getMonthFirstDay(DateComFunc.getToday())%>";
+		//var end_date = "<%=DateComFunc.getToday()%>";
+		//var start_date = "<%=DateComFunc.getMonthFirstDay(DateComFunc.getToday())%>";
 
-		queryHpflhzChart(start_date,end_date);
-		queryHpmlflhzChart(start_date,end_date);
+		//queryHpflhzChart(start_date,end_date);
+		//queryHpmlflhzChart(start_date,end_date);
 		queryUndoWorkNums();
 		queryClientsYshz();
 	});
@@ -255,7 +255,7 @@ List bwlList = (List)VS.findValue("bwlList");
 			<div class="inner" align="center" id="clientYshzDiv" style="vertical-align: middle;text-align: center;"></div>	
 		</td>		
 	</tr>
-	<tr>
+	<!--<tr>
 		<td  align="center">		
 			<div class="innerImage">
 				<table width="100%" align="left" cellpadding="0" cellspacing="0">
@@ -289,7 +289,7 @@ List bwlList = (List)VS.findValue("bwlList");
 			</div>		
 		</td>		
 	</tr>
-</table>
+--></table>
 <BR>
 </form>
 </div>
