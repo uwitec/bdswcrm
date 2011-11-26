@@ -239,6 +239,8 @@
         <action name="batchUpdateProduct" class="productAction" method="batchUpdateProduct">
             <result name="success">/WEB-INF/pages/product/msg.jsp</result>
         </action>        
+        <action name="checkProductKind" class="productAction" method="checkProductKind"/>
+        <action name="checkSubProduct" class="productKindAction" method="checkSubProduct"/>
         <!-- 商品及商品类别 -->
         
         <!-- 进货单 -->
@@ -859,6 +861,9 @@
         <action name="selThdProc" class="lsdAction" method="selKcProc">
             <result name="success">/WEB-INF/pages/thd/selectProduct.jsp</result>
         </action>
+        <action name="selThdProcMx" class="lsdAction" method="selKcProc">
+            <result name="success">/WEB-INF/pages/thd/selectProductMx.jsp</result>
+        </action>        
         <action name="selXsd" class="xsdAction" method="listCjXsd">
             <result name="success">/WEB-INF/pages/thd/selXsd.jsp</result>
         </action>
