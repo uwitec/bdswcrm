@@ -34,7 +34,15 @@ public class ProductKindService {
 	 * @param productKind
 	 */
 	public void saveProductKind(ProductKind productKind){
-		productKindDao.saveProductKind(productKind);
+		//添加新的商品类别
+		String product_kind = productKindDao.saveProductKind(productKind);
+		
+		//处理类别对应的商品
+		String parent_id = productKind.getParent_id();
+		if(parent_id.equals("")){
+			parent_id = "0";
+		}
+		productDao.updateProductKind(product_kind,parent_id);
 	}
 	
 	

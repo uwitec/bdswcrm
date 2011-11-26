@@ -216,6 +216,19 @@ public class ProductAction extends BaseAction implements ModelDriven{
 			return ERROR;
 		}
 	}
+	
+	
+	/**
+	 * 检查产品类别下是否存在子类别
+	 */
+	public void checkProductKind(){
+		int nums = productKindService.getChildKindCount(curId);
+		if(nums > 0){
+			this.writeStringToResponse("true");
+		}else{
+			this.writeStringToResponse("false");
+		}
+	}
 
 	
 	public String getCurId() {

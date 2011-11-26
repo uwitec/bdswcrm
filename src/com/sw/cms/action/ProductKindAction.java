@@ -180,6 +180,22 @@ public class ProductKindAction extends BaseAction implements ModelDriven{
 		}
 	}
 	
+	/**
+	 * 检查类别下是否存在商品
+	 */
+	public void checkSubProduct(){
+		try{
+			int nums = productKindService.getChildProductCount(kind_id);
+			if(nums > 0){
+				this.writeStringToResponse("true");
+			}else{
+				this.writeStringToResponse("false");
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+	
     public Object getModel() {
     	return productKind;
     }
