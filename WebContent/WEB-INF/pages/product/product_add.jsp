@@ -17,6 +17,7 @@ String[] jldw = (String[])VS.findValue("jldw");
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript" src="js/Check.js"></script>
 <script language="JavaScript" src="js/keychange.js"></script>
+<script type="text/javascript" src="jquery/jquery.js"></script>
 <script type="text/javascript">
 	function saveInfo(){
 		if(!InputValid(document.productForm.productName,1,"string",1,1,100,"商品名称")){	 document.productForm.productName.focus();return; }
@@ -37,7 +38,20 @@ String[] jldw = (String[])VS.findValue("jldw");
 		if(!InputValid(document.productForm.sp_txm,0,"string",0,1,50,"商品条形码")){	 document.productForm.sp_txm.focus();return; }
 		if(!InputValid(document.productForm.ms,0,"string",0,1,500,"商品描述")){	 document.productForm.ms.focus();return; }
 		
-		document.productForm.submit();
+		var id = "<%=curId %>";
+		$.ajax({
+			cache: false,
+			url:"checkProductKind.html",
+			type: "POST",
+			data:{curId:id},
+			success: function(result) {
+				if(result == "true"){
+					alert("当前商品类别下存在子类别，不能添加商品，商品只能添加到最终的子类别下！");
+				}else{
+					document.productForm.submit();
+				}
+			}
+		});	
 	}
 	
 	function openWin(){

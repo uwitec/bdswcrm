@@ -34,7 +34,7 @@
 	<tr>
 		<td class="a1" width="25%">商品类别</td>
 		<td class="a4" width="75%">
-			<input type="text" name="kind_name" id="kind_name" value="" size="55" onclick="openWin();" readonly>
+			<input type="text" name="kind_name" id="kind_name" value="" size="30" onclick="openWin();" readonly>
 			<input type="hidden" name="product_kind" id="product_kind" value="">
 			<img src="images/select.gif" title="点击选择类别" border="0" onclick="openWin();" style="cursor:hand">
 		</td>
@@ -42,7 +42,7 @@
 	<tr>				
 		<td class="a1">商品名称</td>
 		<td class="a4">
-			<input type="text" name="product_name" id="product_name" value="" size="55" maxlength="100">
+			<input type="text" name="product_name" id="product_name" value="" size="30" maxlength="100">
 		</td>					
 	</tr>
 	<tr>				

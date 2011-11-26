@@ -163,6 +163,17 @@ table.chart_info td.a3
 	border-bottom:solid 1px #D8D8D8;
 	border-right:solid 1px #D8D8D8;
 }
+table.chart_info td.a4
+{
+	background-color: #FFFFFF;
+	height:25px;	
+	text-align: left ;
+	font-size: 12px;
+	margin-left: 10px;
+	text-indent: 3pt;
+	border-bottom:solid 1px #D8D8D8;
+	border-right:solid 1px #D8D8D8;
+}
 /***********************************/
 /* 样式类型：详细信息页面样式              */
 /* 适用范围：添加、编辑、查看页面             */

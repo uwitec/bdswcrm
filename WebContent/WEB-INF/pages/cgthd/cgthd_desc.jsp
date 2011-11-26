@@ -41,13 +41,12 @@ List results = (List)VS.findValue("cgthdProducts");
 <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0" border="1" id="selTable">
 	<thead>
 	<tr>
-		<td width="20%">商品名称</td>
-		<td width="20%">规格</td>
+		<td width="25%">商品名称</td>
+		<td width="25%">规格</td>
 		<td width="10%">退货价格</td>
 		<td width="10%">数量</td>
 		<td width="10%">小计</td>
 		<td width="20%">序列号</td>
-		<td width="10%">备注</td>
 	</tr>
 	</thead>
 	<%
@@ -57,13 +56,12 @@ List results = (List)VS.findValue("cgthdProducts");
 		CgthdProduct cgthdProduct = (CgthdProduct)it.next();
 	%>
 	<tr class="a1" onmousedown="trSelectChangeCss()">
-		<td><%=StringUtils.nullToStr(cgthdProduct.getProduct_name()) %></td>
-		<td><%=StringUtils.nullToStr(cgthdProduct.getProduct_xh()) %></td>
-		<td><%=JMath.round(cgthdProduct.getTh_price(),2) %></td>
+		<td align="left"><%=StringUtils.nullToStr(cgthdProduct.getProduct_name()) %></td>
+		<td align="left"><%=StringUtils.nullToStr(cgthdProduct.getProduct_xh()) %></td>
+		<td align="right"><%=JMath.round(cgthdProduct.getTh_price(),2) %></td>
 		<td><%=StringUtils.nullToStr(cgthdProduct.getNums()) %></td>
-		<td><%=JMath.round(cgthdProduct.getXj(),2) %></td>
-		<td><%=StringUtils.nullToStr(cgthdProduct.getQz_serial_num()) %></td>
-		<td><%=StringUtils.nullToStr(cgthdProduct.getRemark()) %></td>
+		<td align="right"><%=JMath.round(cgthdProduct.getXj(),2) %></td>
+		<td align="left"><%=StringUtils.nullToStr(cgthdProduct.getQz_serial_num()) %></td>
 	</tr>
 	
 	<%

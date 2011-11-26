@@ -58,7 +58,7 @@ Lsysk lsysk = (Lsysk)VS.findValue("lsysk");
 		<td class="a1" width="15%">状态</td>
 		<td class="a2" colspan="3"><%=StringUtils.nullToStr(lsysk.getState()) %></td>		
 	</tr>
-	<tr height="50">
+	<tr>
 		<td class="a1">备注</td>
 		<td class="a2" colspan="3"><%=StringUtils.nullToStr(lsysk.getRemark()) %></td>
 	</tr>	

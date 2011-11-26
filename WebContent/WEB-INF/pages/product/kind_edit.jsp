@@ -26,18 +26,23 @@ if(parent_id.equals("0")){
 <script type="text/javascript" src="jquery/jquery.js"></script>
 <script type="text/javascript">
 	function saveInfo(){
-		if(window.confirm("确认提交修改吗！")){
-			if(!InputValid(document.myform.kindName,1,"string",1,1,25,"商品类别名称")){	 return; }
-			if(!InputValid(document.myform.ms,0,"string",0,1,500,"商品类别描述")){	 return; }
-	
-			window.opener.document.productKindForm.parent_id.value = document.myform.parent_id.value;
-			window.opener.document.productKindForm.old_parent_id.value = document.myform.old_parent_id.value;
-			window.opener.document.productKindForm.id.value = document.myform.id.value;
-			window.opener.document.productKindForm.name.value = document.myform.kindName.value;
-			window.opener.document.productKindForm.ms.value = document.myform.ms.value;
-			window.opener.document.productKindForm.action = "updateProductKind.html";
+		if($("#id").val() == $("#parent_id").val()){
+			alert("上层类别与商品类别相同，请重新选择！");
+			return;
 		}
 		
+		if(!InputValid(document.myform.kindName,1,"string",1,1,25,"商品类别名称")){	 return; }
+		if(!InputValid(document.myform.ms,0,"string",0,1,500,"商品类别描述")){	 return; }
+
+		window.opener.document.productKindForm.parent_id.value = document.myform.parent_id.value;
+		window.opener.document.productKindForm.old_parent_id.value = document.myform.old_parent_id.value;
+		window.opener.document.productKindForm.id.value = document.myform.id.value;
+		window.opener.document.productKindForm.name.value = document.myform.kindName.value;
+		window.opener.document.productKindForm.ms.value = document.myform.ms.value;
+		window.opener.document.productKindForm.action = "updateProductKind.html";
+
+		var parentId = document.myform.parent_id.value;
+
 		if($("#old_parent_id").val() != $("#parent_id").val()){
 			$.ajax({
 				cache: false,
@@ -49,14 +54,44 @@ if(parent_id.equals("0")){
 						alert("该类别下存在子类别，无法修改！请先移除子类别。");
 						return;
 					}else{
-						window.opener.document.productKindForm.submit();
-						window.close();
+						$.ajax({
+							cache: false,
+							url:"checkSubProduct.html",
+							type: "POST",
+							data:{kind_id:parentId},
+							success: function(result) {
+								if(result == "true"){
+									alert("该上层类别下存在商品，不能修改，请先移走该上层类别下的商品，再修改！");
+									return;
+								}else{
+									if(window.confirm("确认提交修改吗！")){
+										window.opener.document.productKindForm.submit();
+										window.close();
+									}
+								}
+							}
+						});
 					}
 				}
 			});
 		}else{
-			window.opener.document.productKindForm.submit();
-			window.close();
+			$.ajax({
+				cache: false,
+				url:"checkSubProduct.html",
+				type: "POST",
+				data:{kind_id:parentId},
+				success: function(result) {
+					if(result == "true"){
+						alert("该上层类别下存在商品，不能修改，请先移走该上层类别下的商品，再修改！");
+						return;
+					}else{
+						if(window.confirm("确认提交修改吗！")){
+							window.opener.document.productKindForm.submit();
+							window.close();
+						}
+					}
+				}
+			});
 		}
 	}
 </script>

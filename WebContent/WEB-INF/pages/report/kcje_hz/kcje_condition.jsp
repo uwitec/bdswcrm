@@ -67,25 +67,27 @@ List productKindList = (List)VS.findValue("productKindList");
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0" border="1" id="selTable">
 	<tr>
 		<td class="a1" width="15%">汇总类型</td>
-		<td class="a4" width="35%">
+		<td class="a4" colspan="3">
 			<input type="radio" name="tj_type" id="tj_type" value="0" checked onclick="chkHis(this.value);">当前库存
 			<input type="radio" name="tj_type" id="tj_type" value="1" onclick="chkHis(this.value);">历史库存
 		</td>	
+	</tr>
+	<tr>
 		<td class="a1" id="td_cdate_lable"  style="display:none">库存日期</td>
-		<td class="a4" id="td_cdate_value" style="display:none">
-			<input type="text" name="cdate" id="cdate" value=""  class="Wdate" onFocus="WdatePicker()">
+		<td class="a4" colspan="3" id="td_cdate_value" style="display:none">
+			<input type="text" name="cdate" id="cdate" value="" size="30"  class="Wdate" onFocus="WdatePicker()">
 		</td>					
 	</tr>
 	<tr>
 		<td class="a1" width="15%">商品类别</td>
 		<td class="a4" width="35%">
-			<input type="text" name="kind_name" id="kind_name" value="" size="55" onclick="openWin();" readonly>
+			<input type="text" name="kind_name" id="kind_name" value="" size="30" onclick="openWin();" readonly>
 			<input type="hidden" name="product_kind" id="product_kind" value="">
 			<img src="images/select.gif" align="absmiddle" title="点击选择类别" border="0" onclick="openWin();" style="cursor:hand">
 		</td>	
-		<td class="a1">商品名称</td>
-		<td class="a4">
-			<input type="text" name="product_name" id="product_name" value="">
+		<td class="a1" width="15%">商品名称</td>
+		<td class="a4" width="35%">
+			<input type="text" name="product_name" size="30" id="product_name" value="">
 		</td>					
 	</tr>
 	<tr id="tr_flag_lable">

@@ -54,15 +54,15 @@ List clientsList=(List)VS.findValue("clientsList");
 	<tr>
 		<td class="a1">开始日期</td>
 		<td class="a4">
-			<input type="text" name="start_date" id="start_date" value="<%=DateComFunc.getToday() %>"  class="Wdate" onFocus="WdatePicker()"></td>
+			<input type="text" name="start_date" size="30" id="start_date" value="<%=DateComFunc.getToday() %>"  class="Wdate" onFocus="WdatePicker()"></td>
 		<td class="a1">结束日期</td>
 		<td class="a4">
-			<input type="text" name="end_date" id="end_date" value="<%=DateComFunc.getToday() %>"  class="Wdate" onFocus="WdatePicker()"></td>
+			<input type="text" name="end_date" size="30" id="end_date" value="<%=DateComFunc.getToday() %>"  class="Wdate" onFocus="WdatePicker()"></td>
 	</tr>
 	<tr>
 		<td class="a1">单据编号</td>
 		<td class="a4">
-			<input type="text" name="dj_id" id="dj_id" value="" size="20">
+			<input type="text" name="dj_id" id="dj_id" value="" size="30">
 		</td>
 		<td class="a1">客户名称</td>
 		<td class="a4">

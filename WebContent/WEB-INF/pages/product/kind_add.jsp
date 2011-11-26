@@ -11,6 +11,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript" src="js/Check.js"></script>
+<script type="text/javascript" src="jquery/jquery.js"></script>
 <script type="text/javascript">
 	function saveInfo(){
 		if(!InputValid(document.myform.kindName,1,"string",1,1,25,"商品类别名称")){	 return; }
@@ -18,11 +19,27 @@
 
 		window.opener.document.productKindForm.name.value = document.myform.kindName.value;
 		window.opener.document.productKindForm.ms.value = document.myform.ms.value;
-		
-		window.opener.document.productKindForm.action = "saveProductKind.html";
-		window.opener.document.productKindForm.submit();
-		
-		window.close();
+
+		var parentId = window.opener.document.productKindForm.parent_id.value;
+
+		$.ajax({
+			cache: false,
+			url:"checkSubProduct.html",
+			type: "POST",
+			data:{kind_id:parentId},
+			success: function(result) {
+				if(result == "true"){
+					if(window.confirm("父类别下有商品，如果添加子类别，父类别下的商品会自动转移到新添加的子类别下，确认添加吗？")){
+						window.opener.document.productKindForm.action = "saveProductKind.html";
+						window.opener.document.productKindForm.submit();
+					}
+				}else{
+					window.opener.document.productKindForm.action = "saveProductKind.html";
+					window.opener.document.productKindForm.submit();
+				}
+				window.close();
+			}
+		});
 	}
 </script>
 </head>

@@ -31,21 +31,21 @@ String orderType = (String)VS.findValue("orderType");
 	
 	function openWin(id){
 		var destination = "viewCgthd.html?id="+id;
-		var fea ='width=950,height=700,left=' + (screen.availWidth-950)/2 + ',top=' + (screen.availHeight-720)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		var fea ='width=950,height=600,left=' + (screen.availWidth-950)/2 + ',top=' + (screen.availHeight-600)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
 		window.open(destination,'详细信息',fea);	
 	}
 	
 	function add(){
 		var destination = "addCgthd.html";
-		var fea ='width=950,height=700,left=' + (screen.availWidth-950)/2 + ',top=' + (screen.availHeight-720)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		var fea ='width=950,height=600,left=' + (screen.availWidth-950)/2 + ',top=' + (screen.availHeight-600)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
 		window.open(destination,'添加采购退货单',fea);	
 	}
 	
 	function edit(id){
 		var destination = "editCgthd.html?id=" + id;
-		var fea ='width=950,height=700,left=' + (screen.availWidth-950)/2 + ',top=' + (screen.availHeight-720)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		var fea ='width=950,height=600,left=' + (screen.availWidth-950)/2 + ',top=' + (screen.availHeight-600)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
 		window.open(destination,'修改采购退货单',fea);		
 	}	
@@ -120,14 +120,14 @@ String orderType = (String)VS.findValue("orderType");
 <table width="100%"  align="center"  class="chart_list" cellpadding="0" border="1" cellspacing="0" id="selTable">
 	<thead>
 	<tr>
-		<td onclick="doSort('id');">编号<%if(orderName.equals("id")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('provider_name');">供货单位<%if(orderName.equals("provider_name")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('jsr');">经手人<%if(orderName.equals("jsr")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('tkzje');">合计总金额<%if(orderName.equals("tkzje")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('th_date');">退货日期<%if(orderName.equals("th_date")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('state');">状态<%if(orderName.equals("state")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>		
-		<td onclick="doSort('czr');">操作员<%if(orderName.equals("czr")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>		
-		<td>操作</td>
+		<td width="15%" onclick="doSort('id');">编号<%if(orderName.equals("id")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="20%" onclick="doSort('provider_name');">供货单位<%if(orderName.equals("provider_name")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="13%" onclick="doSort('jsr');">经手人<%if(orderName.equals("jsr")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="10%" onclick="doSort('tkzje');">合计总金额<%if(orderName.equals("tkzje")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="10%" onclick="doSort('th_date');">退货日期<%if(orderName.equals("th_date")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="10%" onclick="doSort('state');">状态<%if(orderName.equals("state")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>		
+		<td width="10%" onclick="doSort('czr');">操作员<%if(orderName.equals("czr")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>		
+		<td width="12%">操作</td>
 	</tr>
 	</thead>
 	<%

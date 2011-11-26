@@ -43,7 +43,7 @@ List store_list = (List)VS.findValue("store_list");
 	<tr>
 		<td class="a1" width="15%">商品类别</td>
 		<td class="a4" width="35%">
-			<input type="text" name="kind_name" id="kind_name" value="" size="55" onclick="openWin();" readonly>
+			<input type="text" name="kind_name" id="kind_name" value="" size="30" onclick="openWin();" readonly>
 			<input type="hidden" name="product_kind" id="product_kind" value="">
 			<img src="images/select.gif" align="absmiddle" title="点击选择类别" border="0" onclick="openWin();" style="cursor:hand">
 		</td>	

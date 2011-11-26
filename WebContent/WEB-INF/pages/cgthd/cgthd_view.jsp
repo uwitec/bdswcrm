@@ -59,7 +59,11 @@ List cgthdProducts = (List)VS.findValue("cgthdProducts");
 	<tr>
 		<td class="a1">操作人</td>
 		<td class="a2" colspan="3"><%=StaticParamDo.getRealNameById(cgthd.getCzr()) %></td>
-	</tr>	
+	</tr>
+	<tr>
+		<td class="a1">备注</td>
+		<td class="a2" colspan="3"><%=StringUtils.nullToStr(cgthd.getRemark()) %></td>
+	</tr>			
 </table>
 <br>
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
@@ -77,7 +81,6 @@ List cgthdProducts = (List)VS.findValue("cgthdProducts");
 		<td>退货价格</td>
 		<td>数量</td>
 		<td>小计</td>
-		<td>备注</td>
 	</tr>
 	</thead>
 <%
@@ -91,7 +94,6 @@ if(cgthdProducts != null && cgthdProducts.size()>0){
 		<td class="a2"><%=JMath.round(cgthdProduct.getTh_price(),2) %></td>
 		<td class="a2"><%=cgthdProduct.getNums() %></td>
 		<td class="a2"><%=JMath.round(cgthdProduct.getXj(),2) %></td>
-		<td class="a2"><%=StringUtils.nullToStr(cgthdProduct.getRemark()) %></td>
 	</tr>
 <%		
 	}
@@ -99,12 +101,6 @@ if(cgthdProducts != null && cgthdProducts.size()>0){
 %>	
 </table>
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
-	<tr>
-		<td class="a1" width="15%">备注</td>
-		<td class="a2" width="85%">
-			<textarea rows="3" name="cgthd.remark" id="remark" style="width:75%" maxlength="500" readonly><%=StringUtils.nullToStr(cgthd.getRemark()) %></textarea>
-		</td>
-	</tr>	
 	<tr height="35">
 		<td class="a1" colspan="2">
 			<input type="button" name="button3" value="关 闭" class="css_button2" onclick="window.close();">

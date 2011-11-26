@@ -18,6 +18,11 @@ session.removeAttribute("messages");
 
 Cgthd cgthd = (Cgthd)VS.findValue("cgthd");
 List cgthdProducts = (List)VS.findValue("cgthdProducts");
+
+int counts = 2;
+if(cgthdProducts != null && cgthdProducts.size()>0){
+	counts = cgthdProducts.size() - 1;
+}
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -33,14 +38,12 @@ List cgthdProducts = (List)VS.findValue("cgthdProducts");
 <script language='JavaScript' src="js/selJsr.js"></script>
 <script type="text/javascript" src="js/prototype-1.4.0.js"></script>
 <style>
-	.selectTip{
-		background-color:#009;
-		 color:#fff;
-	}
+	.selectTip{background-color:#009;color:#fff;}
 </style>
+
 <script type="text/javascript">
 
-	var allCount = 2;
+	var allCount = <%=counts %>;
 	var iscs_flag = '<%=iscs_flag %>';
 	
 	function saveInfo(vl){
@@ -136,25 +139,28 @@ List cgthdProducts = (List)VS.findValue("cgthdProducts");
     function addTr(){
         var otr = document.getElementById("thtable").insertRow(-1);
 
-       // var curId = ($('xsdtable').rows.length-2);
         var curId = allCount + 1;   //curId一直加下去，防止重复
         allCount = allCount + 1;
+
+        var otd=document.createElement("td");
+		otd.className = "a2";
+		otd.innerHTML = '<td class="a2"><input type="checkbox" name="proc_id" id="proc_id" value="' + curId + '"></td>';
         
         var otd0=document.createElement("td");
         otd0.className = "a2";
-        otd0.innerHTML = '<input type="text" id="product_name_'+curId+'" name="cgthdProducts['+curId+'].product_name" readonly><input type="button" name="selectButton" value="选择" class="css_button" onclick="openWin('+curId+');"><input type="hidden" id="product_id_'+curId+'" name="cgthdProducts['+curId+'].product_id">';
+        otd0.innerHTML = '<input type="text" id="product_name_'+curId+'" style="width:90%" name="cgthdProducts['+curId+'].product_name" readonly><input type="hidden" id="product_id_'+curId+'" name="cgthdProducts['+curId+'].product_id">';
         
         var otd1 = document.createElement("td");
         otd1.className = "a2";
-        otd1.innerHTML = '<input type="text" id="product_xh_'+curId+'"  name="cgthdProducts['+curId+'].product_xh" size="10" readonly>';
+        otd1.innerHTML = '<input type="text" id="product_xh_'+curId+'" style="width:90%"  name="cgthdProducts['+curId+'].product_xh" size="10" readonly>';
         
         var otd2 = document.createElement("td");
         otd2.className = "a2";
-        otd2.innerHTML = '<input type="text" id="th_price_'+curId+'" name="cgthdProducts['+curId+'].th_price" size="10" value="0.00" onblur="hj();;">';
+        otd2.innerHTML = '<input type="text" id="th_price_'+curId+'" style="width:90%" name="cgthdProducts['+curId+'].th_price" size="10" value="0.00" onblur="hj();;">';
         
         var otd3 = document.createElement("td");
         otd3.className = "a2";
-        otd3.innerHTML = '<input type="text" id="nums_'+curId+'" name="cgthdProducts['+curId+'].nums" size="5" value="0" onblur="hj();">';
+        otd3.innerHTML = '<input type="text" id="nums_'+curId+'" style="width:90%" name="cgthdProducts['+curId+'].nums" size="5" value="0" onblur="hj();">';
         
 		var otd7 = document.createElement("td");
 		otd7.className = "a2";
@@ -163,25 +169,42 @@ List cgthdProducts = (List)VS.findValue("cgthdProducts");
        
         var otd4 = document.createElement("td");
         otd4.className = "a2";
-        otd4.innerHTML = '<input type="text" id="xj_'+curId+'" name="cgthdProducts['+curId+'].xj" size="10" value="0.00" readonly>';  
+        otd4.innerHTML = '<input type="text" id="xj_'+curId+'" name="cgthdProducts['+curId+'].xj" style="width:90%" size="10" value="0.00" readonly>';  
         
-        var otd5 = document.createElement("td");
-        otd5.className = "a2";
-        otd5.innerHTML = '<input type="text" id="remark_'+curId+'" name="cgthdProducts['+curId+'].remark"  maxlength="50">';                       
 
-		var otd6 = document.createElement("td");
-		otd6.className = "a2";
-		otd6.innerHTML = '<input type="button" name="delButton" value="删除" class="css_button" onclick="delTr(this);">';
-		
+        otr.appendChild(otd); 
         otr.appendChild(otd0); 
         otr.appendChild(otd1); 
         otr.appendChild(otd2); 
         otr.appendChild(otd3); 
         otr.appendChild(otd7); 
         otr.appendChild(otd4); 
-        otr.appendChild(otd5);
-        otr.appendChild(otd6);               
-     }     
+     } 
+
+	function delDesc(){
+		var k = 0;
+		var sel = "0"; 
+		for(var i=0;i<document.cgthdForm.proc_id.length;i++){
+			var o = document.cgthdForm.proc_id[i];
+			if(o.checked){
+				k = k + 1;
+				sel = document.cgthdForm.proc_id[i].value;
+
+				document.getElementById("product_name_" + sel).value = "";
+				document.getElementById("product_id_" + sel).value = "";
+				document.getElementById("product_xh_" + sel).value = "";
+				document.getElementById("th_price_" + sel).value = "0.00";
+				document.getElementById("nums_" + sel).value = "0";
+				document.getElementById("qz_serial_num_" + sel).value = "";
+				document.getElementById("qz_flag_" + sel).value = "";
+				document.getElementById("xj_" + sel).value = "0.00";
+			}
+		}
+		if(k == 0){
+			alert("请选择商品明细！");
+			return;
+		}
+	}    
      
     //打开输入序列号窗口
 	function openSerialWin(vl){
@@ -212,16 +235,16 @@ List cgthdProducts = (List)VS.findValue("cgthdProducts");
 	}     
 
 	
-	function openWin(id){
-		var destination = "selThdProc.html?openerId="+id;
-		var fea ='width=800,height=500,left=' + (screen.availWidth-800)/2 + ',top=' + (screen.availHeight-500)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+	function openWin(){
+		var destination = "selThdProcMx.html";
+		var fea ='width=850,height=500,left=' + (screen.availWidth-850)/2 + ',top=' + (screen.availHeight-500)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
 		window.open(destination,'详细信息',fea);	
 	}
 	
 	function openAccount(){
 		var destination = "selSkAccount.html";
-		var fea ='width=400,height=200,left=' + (screen.availWidth-400)/2 + ',top=' + (screen.availHeight-200)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		var fea ='width=400,height=400,left=' + (screen.availWidth-400)/2 + ',top=' + (screen.availHeight-400)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
 		window.open(destination,'选择账户',fea);		
 	}
@@ -327,7 +350,7 @@ if(msg != null && msg.size() > 0){
 		<td class="a1" width="15%">经手人</td>
 		<td class="a2" width="35%">
 		 <input  id="brand"    type="text"   maxlength="20" style="width:230px"  onblur="setValue()" value="<%=StaticParamDo.getRealNameById(cgthd.getJsr()) %>"/><font color="red">*</font> 
-         <div   id="brandTip"  style="position:absolute;left:610px; top:85px;  width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
+         <div   id="brandTip"  style="position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
          </div>
 		 <input type="hidden" name="cgthd.jsr" id="fzr" value="<%=cgthd.getJsr()%>"/> 	
 		</td>
@@ -370,14 +393,13 @@ if(msg != null && msg.size() > 0){
 <table width="100%"  align="center" id="thtable"  class="chart_list" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td>商品名称</td>
-		<td>规格</td>
-		<td>退货价格</td>
-		<td>数量</td>
-		<td>强制序列号</td>
-		<td>小计</td>
-		<td>备注</td>
-		<td></td>
+		<td width="5%">选择</td>
+		<td width="25%">商品名称</td>
+		<td width="25%">规格</td>
+		<td width="10%">退货价格</td>
+		<td width="10%">数量</td>
+		<td width="15%">强制序列号</td>
+		<td width="10%">小计</td>
 	</tr>
 	</thead>
 <%
@@ -386,24 +408,19 @@ if(cgthdProducts != null && cgthdProducts.size()>0){
 		CgthdProduct cgthdProduct = (CgthdProduct)cgthdProducts.get(i);
 %>
 	<tr>
+		<td class="a2"><input type="checkbox" name="proc_id" id="proc_id" value="<%=i %>"></td>
 		<td class="a2">
-			<input type="text" id="product_name_<%=i %>" name="cgthdProducts[<%=i %>].product_name" value="<%=StringUtils.nullToStr(cgthdProduct.getProduct_name()) %>" readonly><input type="button" name="selectButton" value="选择" class="css_button" onclick="openWin(<%=i %>);">
+			<input type="text" style="width:90%" id="product_name_<%=i %>" name="cgthdProducts[<%=i %>].product_name" value="<%=StringUtils.nullToStr(cgthdProduct.getProduct_name()) %>" readonly>
 			<input type="hidden" id="product_id_<%=i %>" name="cgthdProducts[<%=i %>].product_id" value="<%=StringUtils.nullToStr(cgthdProduct.getProduct_id()) %>" >
 		</td>
-		<td class="a2"><input type="text" id="product_xh_<%=i %>" name="cgthdProducts[<%=i %>].product_xh" size="10" value="<%=StringUtils.nullToStr(cgthdProduct.getProduct_xh()) %>" readonly></td>
-		<td class="a2"><input type="text" id="th_price_<%=i %>" name="cgthdProducts[<%=i %>].th_price" size="10" value="<%=JMath.round(cgthdProduct.getTh_price()) %>" onblur="hj();"></td>
-		<td class="a2"><input type="text" id="nums_<%=i %>" name="cgthdProducts[<%=i %>].nums" value="<%=cgthdProduct.getNums() %>" size="5" onblur="hj();"></td>
+		<td class="a2"><input type="text" style="width:90%" id="product_xh_<%=i %>" name="cgthdProducts[<%=i %>].product_xh" size="10" value="<%=StringUtils.nullToStr(cgthdProduct.getProduct_xh()) %>" readonly></td>
+		<td class="a2"><input type="text" style="width:90%" id="th_price_<%=i %>" name="cgthdProducts[<%=i %>].th_price" size="10" value="<%=JMath.round(cgthdProduct.getTh_price()) %>" onblur="hj();"></td>
+		<td class="a2"><input type="text" style="width:90%" id="nums_<%=i %>" name="cgthdProducts[<%=i %>].nums" value="<%=cgthdProduct.getNums() %>" size="5" onblur="hj();"></td>
 		<td class="a2">
 			<input type="text" id="qz_serial_num_<%=i %>" name="cgthdProducts[<%=i %>].qz_serial_num" value="<%=StringUtils.nullToStr(cgthdProduct.getQz_serial_num()) %>" size="15" readonly>
 			<input type="hidden" id="qz_flag_<%=i %>" name="cgthdProducts[<%=i %>].qz_flag" value="<%=StringUtils.nullToStr(cgthdProduct.getQz_flag()) %>"><a style="cursor:hand" title="左键点击输入输列号" onclick="openSerialWin('<%=i %>');"><b>...</b></a>&nbsp;
 		</td>		
-		<td class="a2"><input type="text" id="xj_<%=i %>" name="cgthdProducts[<%=i %>].xj" value="<%=JMath.round(cgthdProduct.getXj()) %>" size="10" readonly></td>
-		<td class="a2"><input type="text" id="remark_<%=i %>" name="cgthdProducts[<%=i %>].remark" value="<%=StringUtils.nullToStr(cgthdProduct.getRemark()) %>" maxlength="50"></td>
-		<%if (i>0){ %>		
-		<td class="a2"><input type="button" name="delButton" value="删除" class="css_button" onclick="delTr(this);"></td>
-		<%}else{ %>
-		<td class="a2">&nbsp;</td>
-		<%} %>
+		<td class="a2"><input type="text" style="width:90%" id="xj_<%=i %>" name="cgthdProducts[<%=i %>].xj" value="<%=JMath.round(cgthdProduct.getXj()) %>" size="10" readonly></td>
 	</tr>
 <%		
 	}
@@ -411,24 +428,19 @@ if(cgthdProducts != null && cgthdProducts.size()>0){
 	for(int i=0;i<3;i++){
 %>
 	<tr>
+		<td class="a2"><input type="checkbox" name="proc_id" id="proc_id" value="<%=i %>"></td>
 		<td class="a2">
-			<input type="text" id="product_name_<%=i %>" name="cgthdProducts[<%=i %>].product_name" readonly><input type="button" name="selectButton" value="选择" class="css_button" onclick="openWin(<%=i %>);">
+			<input type="text" style="width:90%" id="product_name_<%=i %>" name="cgthdProducts[<%=i %>].product_name" readonly>
 			<input type="hidden" id="product_id_<%=i %>" name="cgthdProducts[<%=i %>].product_id">
 		</td>
-		<td class="a2"><input type="text" id="product_xh_<%=i %>" name="cgthdProducts[<%=i %>].product_xh" size="10" readonly></td>
-		<td class="a2"><input type="text" id="th_price_<%=i %>" name="cgthdProducts[<%=i %>].th_price" size="10" value="0.00" onblur="hj();"></td>
-		<td class="a2"><input type="text" id="nums_<%=i %>" name="cgthdProducts[<%=i %>].nums" value="0" size="5" onblur="hj();"></td>
+		<td class="a2"><input style="width:90%" type="text" id="product_xh_<%=i %>" name="cgthdProducts[<%=i %>].product_xh" size="10" readonly></td>
+		<td class="a2"><input style="width:90%" type="text" id="th_price_<%=i %>" name="cgthdProducts[<%=i %>].th_price" size="10" value="0.00" onblur="hj();"></td>
+		<td class="a2"><input style="width:90%" type="text" id="nums_<%=i %>" name="cgthdProducts[<%=i %>].nums" value="0" size="5" onblur="hj();"></td>
 		<td class="a2">
 			<input type="text" id="qz_serial_num_<%=i %>" name="cgthdProducts[<%=i %>].qz_serial_num" size="15" readonly>
 			<input type="hidden" id="qz_flag_<%=i %>" name="cgthdProducts[<%=i %>].qz_flag"><a style="cursor:hand" title="左键点击输入输列号" onclick="openSerialWin('<%=i %>');"><b>...</b></a>&nbsp;
 		</td>		
-		<td class="a2"><input type="text" id="xj_<%=i %>" name="cgthdProducts[<%=i %>].xj" value="0.00" size="10" readonly></td>
-		<td class="a2"><input type="text" id="remark_<%=i %>" name="cgthdProducts[<%=i %>].remark" maxlength="50"></td>
-		<%if (i>0){ %>		
-		<td class="a2"><input type="button" name="delButton" value="删除" class="css_button" onclick="delTr(this);"></td>
-		<%}else{ %>
-		<td class="a2">&nbsp;</td>
-		<%} %>
+		<td class="a2"><input type="text" style="width:90%" id="xj_<%=i %>" name="cgthdProducts[<%=i %>].xj" value="0.00" size="10" readonly></td>
 	</tr>
 <%
 	}
@@ -438,42 +450,35 @@ if(cgthdProducts != null && cgthdProducts.size()>0){
 <table width="100%"  align="center" class="chart_info" cellpadding="0" cellspacing="0">
 	<tr height="35">
 		<td class="a2" colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="button" name="button1" value="添加一行" class="css_button2" onclick="addTr();">
+			<input type="button" name="button1" value="添加商品" class="css_button2" onclick="openWin();">
+			<input type="button" name="button8" value="清除商品" class="css_button3" onclick="delDesc();">
 			<input type="button" name="button1" value="关联进货单" class="css_button3" onclick="selJhd();">
 		</td>
 	</tr>
 	<tr>
-		<td class="a1">合计金额</td>
+		<td class="a1" width="15%">合计金额</td>
 		<td class="a2"><input type="text" id="tkzje" style="width:230px"  name="cgthd.tkzje" value="<%=JMath.round(cgthd.getTkzje()) %>" readonly></td>
 	</tr>
 	<tr id="trSkzh">
-		<td class="a1" widht="20%">账户名称</td>
+		<td class="a1">账户名称</td>
 		<td class="a2"><input type="text" id="zhname" style="width:230px" onclick="openAccount();"  name="zhname" value="<%=StaticParamDo.getAccountNameById(StringUtils.nullToStr(cgthd.getZhmc())) %>" readonly>
 		<input type="hidden" id="skzh"  name="cgthd.zhmc" value="<%=StringUtils.nullToStr(cgthd.getZhmc()) %>">
 		<img src="images/select.gif" align="absmiddle" title="选择账户" border="0" onclick="openAccount();" style="cursor:hand">
 		</td>
-	</tr>			
-</table>
-<br>
-<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
-	<thead>
-	<tr>
-		<td colspan="2">备注</td>
 	</tr>
-	</thead>
 	<tr>
 		<td class="a1" width="15%">备注</td>
 		<td class="a2" width="85%">
-			<textarea rows="3" name="cgthd.remark" id="remark" style="width:75%" maxlength="500"></textarea>
+			<input type="text" name="cgthd.remark" id="remark" value="" style="width:75%" maxlength="100">
 		</td>
-	</tr>	
+	</tr>
 	<tr height="35">
 		<td class="a1" colspan="2">
 			<input type="button" name="btnSave" value="草 稿" class="css_button2" onclick="saveInfo('1');">&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="button" name="btnSub" value="出 库" class="css_button2" onclick="saveInfo('2');">&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="button" name="button3" value="关 闭" class="css_button2" onclick="window.close();">
 		</td>
-	</tr>
+	</tr>					
 </table>
 </form>
 </body>

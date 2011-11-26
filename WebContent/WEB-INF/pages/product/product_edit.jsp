@@ -25,6 +25,7 @@ String iscs_flag = StringUtils.nullToStr(VS.findValue("iscs_flag"));
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript" src="js/Check.js"></script>
 <script language="JavaScript" src="js/keychange.js"></script>
+<script type="text/javascript" src="jquery/jquery.js"></script>
 <script type="text/javascript">
 	function saveInfo(){
 		if(!InputValid(document.productForm.productName,1,"string",1,1,100,"商品名称")){	 document.productForm.productName.focus();return; }
@@ -44,8 +45,22 @@ String iscs_flag = StringUtils.nullToStr(VS.findValue("iscs_flag"));
 		if(!InputValid(document.productForm.ygcbj,0,"float",0,0,9999999,"预估成本价")){	 document.productForm.ygcbj.focus();return; }
 		if(!InputValid(document.productForm.sp_txm,0,"string",0,1,50,"商品条形码")){	 document.productForm.sp_txm.focus();return; }
 		if(!InputValid(document.productForm.ms,0,"string",0,1,500,"商品描述")){	 document.productForm.ms.focus();return; }
+
+		$.ajax({
+			cache: false,
+			url:"getChildKindNums.html",
+			type: "POST",
+			data:{kind_id:$("#productKind").val()},
+			success: function(resText) {
+				if(resText != "0"){
+					alert("商品类别存在子类别，无法修改！");
+					return;
+				}else{
+					document.productForm.submit();
+				}
+			}
+		});
 		
-		document.productForm.submit();
 	}
 	
 	function openWin(){
@@ -153,7 +168,7 @@ String iscs_flag = StringUtils.nullToStr(VS.findValue("iscs_flag"));
 	<tr>
 		<td class="a1" width="15%">商品类别</td>
 		<td class="a2"  width="35%">
-			<select name="productKind" onkeyup="goNext(this.form,this.name);">
+			<select name="productKind" id="productKind" onkeyup="goNext(this.form,this.name);">
 				<option value=""></option>
 		<%
 		if(productKindList != null && productKindList.size() > 0){
