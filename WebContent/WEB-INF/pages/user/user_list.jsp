@@ -24,11 +24,9 @@ String is_del = (String)VS.findValue("is_del");
 <script type="text/javascript" src="jquery/jquery.js"></script>
 <script type="text/javascript" src="js/initPageSize.js"></script>
 <script type="text/javascript">
-	
 	function openWin(id){
 		var destination = "viewUser.html?user_id="+id;
 		var fea ='width=600,height=400,left=' + (screen.availWidth-600)/2 + ',top=' + (screen.availHeight-400)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
-		
 		window.open(destination,'详细信息',fea);	
 	}
 	
@@ -40,7 +38,20 @@ String is_del = (String)VS.findValue("is_del");
 
    function restore(id){
 		if(confirm("确定要恢复该条记录吗！")){
-			location.href = "restoreUser.html?user_id=" + id;
+			$.ajax({
+				cache: false,
+				url:"checkUserLimit.html",
+				type: "POST",
+				success: function(result) {
+					if(result == "true"){
+						alert("超出用户数限制不能恢复该用户，如需恢复该用户请与服务商联系！");
+						return;
+					}else{
+						location.href = "restoreUser.html?user_id=" + id;
+					}
+				}
+			});	
+			
 		}
 	}
 
@@ -52,21 +63,32 @@ String is_del = (String)VS.findValue("is_del");
 	}
 	
 	function add(){
-		var destination = "addUser.html";
-		var fea ='width=600,height=400,left=' + (screen.availWidth-600)/2 + ',top=' + (screen.availHeight-400)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
-		
-		window.open(destination,'添加系统用户',fea);	
+		$.ajax({
+			cache: false,
+			url:"checkUserLimit.html",
+			type: "POST",
+			success: function(result) {
+				if(result == "true"){
+					alert("超出用户数限制不能添加新的用户，如需增加用户请与服务商联系！");
+					return;
+				}else{
+					var destination = "addUser.html";
+					var fea ='width=600,height=400,left=' + (screen.availWidth-600)/2 + ',top=' + (screen.availHeight-400)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+					window.open(destination,'添加系统用户',fea);	
+				}
+			}
+		});	
 	}
 	
 	function edit(userId){
 		var destination = "editUser.html?user_id=" + userId;
 		var fea ='width=600,height=400,left=' + (screen.availWidth-600)/2 + ',top=' + (screen.availHeight-400)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
-		
 		window.open(destination,'添加系统用户',fea);	
 	}		
 	
 	function clearAll(){
 		document.myform.real_name.value = "";
+		document.myform.is_del.value = "";
 	}
 	
 	function sel(){
@@ -110,7 +132,7 @@ String is_del = (String)VS.findValue("is_del");
 	<tr>
 		<td class="csstitle" align="left" width="75%">&nbsp;&nbsp;&nbsp;&nbsp;<b>用户管理</b></td>
 		<td class="csstitle" width="25%">
-			<img src="images/create.gif" align="absmiddle" border="0">&nbsp;<a href="#" onclick="add();" class="xxlb"> 添 加 </a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<img src="images/create.gif" align="absmiddle" border="0">&nbsp;<a href="javascript:add();" class="xxlb"> 添 加 </a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<img src="images/import.gif" align="absmiddle" border="0">&nbsp;<a href="#" class="xxlb" onclick="refreshPage();"> 刷 新 </a>	</td>			
 	</tr>
 	<tr>

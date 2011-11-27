@@ -25,6 +25,7 @@ session.removeAttribute("MSG");
 <script language='JavaScript' src="js/date.js"></script>
 <script type="text/javascript" src="js/prototype-1.4.0.js"></script>
 <script type='text/javascript' src="js/selJsr.js"></script>
+
 <style>
 	.selectTip{
 		background-color:#009;color:#fff;
@@ -67,9 +68,22 @@ session.removeAttribute("MSG");
 		    	return;
 		    }
 		}
-
 		
-		document.userForm.submit();
+		var myAjax = new Ajax.Request("checkUserLimit.html",
+				{
+					method:'post',
+					onComplete: subForm,
+					asynchronous:true
+				});
+	}
+
+	function subForm(originalRequest){
+		if(originalRequest.responseText.trim() == "true"){
+			alert("超出用户数限制不能添加新的用户，如需增加用户请与服务商联系！");
+			return;
+		}else{
+			document.userForm.submit();
+		}
 	}
 	
 	function openClientWin(){

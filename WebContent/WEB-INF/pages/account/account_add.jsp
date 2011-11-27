@@ -53,10 +53,10 @@
 	</thead>
 	<tr>
 		<td class="a1" width="15%">账户名称</td>
-		<td class="a2" width="35%"><input type="text" name="accounts.name" id="name" value=""></td>
+		<td class="a2" width="35%"><input type="text" name="accounts.name" id="name" style="width:170px" value=""></td>
 		<td class="a1" width="15%">账户类型</td>
 		<td class="a2" width="35%">
-			<select name="accounts.type" id="type" onchange="selType(this.value);">
+			<select name="accounts.type" id="type" onchange="selType(this.value);" style="width:170px">
 				<option value="现金">现金</option>
 				<option value="银行">银行</option>
 			</select>
@@ -64,9 +64,9 @@
 	</tr>
 	<tr>
 		<td class="a1" width="15%">开户行</td>
-		<td class="a2" width="35%"><input type="text" name="accounts.bank" id="bank" value="" maxlength="50" readonly></td>
+		<td class="a2" width="35%"><input type="text" name="accounts.bank" id="bank" style="width:170px" value="" maxlength="50" readonly></td>
 		<td class="a1" width="15%">账号</td>
-		<td class="a2" width="35%"><input type="text" name="accounts.bank_count" id="bank_count" value=""  readonly maxlength="50"></td>		
+		<td class="a2" width="35%"><input type="text" name="accounts.bank_count" id="bank_count" style="width:170px" value=""  readonly maxlength="50"></td>		
 	</tr>	
 </table>
 <br>

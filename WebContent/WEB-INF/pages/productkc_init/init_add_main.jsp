@@ -38,7 +38,7 @@ if(productKcInit != null){
 <title>库存初始化</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
-<script language='JavaScript' src="js/date.js"></script>
+<script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
 <script type="text/javascript">
 	var flag = "<%=errorFlag%>";	
 	function saveInfo(){
@@ -70,7 +70,7 @@ if(productKcInit != null){
 
 <body align="center" onload="loadFlag();">
 <form name="myform" action="saveInit.html" method="post">
-<table width="99%" height="495" border="0" align="left" cellpadding="0" class="chart_list" cellspacing="0">	
+<table width="100%" height="495" border="0" align="left" cellpadding="0" class="chart_list" cellspacing="0">	
 	<tr>
 		<td class="search" align="left" colspan="2">
 		&nbsp;仓库名称：
@@ -104,11 +104,9 @@ if(productKcInit != null){
 		}
 		%>
 		</select>&nbsp;&nbsp;
-		初始日期：<input type="text" name="productKcInit.create_date" id="create_date" value="<%=create_date %>" size="12" readonly <%=flag %>>
+		初始日期：<input type="text" name="productKcInit.create_date"  id="create_date"  value="<%=create_date %>" size="15"  class="Wdate" onFocus="WdatePicker()">
 		
 		<%if(flag.equals("")){ %>
-		<img src="images/data.gif" style="cursor:hand" width="16" height="16" border="0" onClick="return fPopUpCalendarDlg(document.getElementById('create_date')); return false;">		
-		
 		<input type="button" name="button1" value="保存" onclick="saveInfo();" class="css_button2">
 		<%} %>
 		</td>	

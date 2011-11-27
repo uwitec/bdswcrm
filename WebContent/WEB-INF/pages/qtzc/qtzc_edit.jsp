@@ -144,32 +144,32 @@ session.removeAttribute("messages");
 	</thead>					
 	<tr>
 		<td class="a1" width="15%">支出编号</td>
-		<td class="a2" width="35%"><input type="text" name="qtzc.id" id="id" value="<%=StringUtils.nullToStr(qtzc.getId()) %>" readonly></td>
+		<td class="a2" width="35%"><input type="text" name="qtzc.id"style="width:232px" id="id" value="<%=StringUtils.nullToStr(qtzc.getId()) %>" readonly></td>
 		<td class="a1" width="15%">支出日期</td>
 		<td class="a2">
-			<input type="text" name="qtzc.zc_date" id="zc_date" value="<%=StringUtils.nullToStr(qtzc.getZc_date()) %>" readonly>
+			<input type="text" name="qtzc.zc_date" id="zc_date"style="width:232px" value="<%=StringUtils.nullToStr(qtzc.getZc_date()) %>" readonly>
 		</td>		
 	</tr>
 	<tr>
 		<td class="a1" width="15%">出纳</td>
 		<td class="a2">
-		    <input  id="brand"    type="text"   length="20"  onblur="setValue()" value="<%=StaticParamDo.getRealNameById(qtzc.getJsr()) %>"/> 
-            <div   id="brandTip"  style="position:absolute;left:95px; top:141px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
+		    <input  id="brand"    type="text"style="width:232px"   length="20"  onblur="setValue()" value="<%=StaticParamDo.getRealNameById(qtzc.getJsr()) %>"/> 
+            <div   id="brandTip"  style="position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
             </div>
 		    <input type="hidden" name="qtzc.jsr" id="fzr" value="<%=StringUtils.nullToStr(qtzc.getJsr())%>"/><font color="red">*</font>	
 		</td>	
 		<td class="a1" width="15%">金额</td>
-		<td class="a2" width="35%"><input type="text" name="qtzc.zcje" id="zcje" value="<%=JMath.round(qtzc.getZcje()) %>" readonly></td>		
+		<td class="a2" width="35%"><input type="text"style="width:232px" name="qtzc.zcje" id="zcje" value="<%=JMath.round(qtzc.getZcje()) %>" readonly></td>		
 	</tr>	
 	<tr>
 		<td class="a1" width="15%">支出账号</td>
-		<td class="a2" width="35%"><input type="text" id="zhname"  name="zhname" value="<%=StaticParamDo.getAccountNameById(StringUtils.nullToStr(qtzc.getZczh())) %>" size="30" readonly>
+		<td class="a2" width="35%"><input type="text" id="zhname" style="width:232px" name="zhname" value="<%=StaticParamDo.getAccountNameById(StringUtils.nullToStr(qtzc.getZczh())) %>" size="30" readonly>
 		<input type="hidden" id="skzh"  name="qtzc.zczh" value="<%=StringUtils.nullToStr(qtzc.getZczh()) %>"><span style="color:red">*</span>
 		<img src="images/select.gif" align="absmiddle" title="选择账户" border="0" onclick="openAccount();" style="cursor:hand">
 		</td>	
 		<td class="a1" width="15%">付款方式</td>
 		<td class="a2" width="35%">
-			<select name="qtzc.fklx" id="fklx">
+			<select name="qtzc.fklx" id="fklx" style="width:232px">
 				<option value=""></option>
 			<%
 			if(fkfs != null && fkfs.length>0){
@@ -194,8 +194,7 @@ session.removeAttribute("messages");
 	<tr height="50">
 		<td class="a1" width="15%">详细说明</td>
 		<td class="a2" width="85%">
-			<textarea rows="3" cols="50" name="qtzc.remark" id="remark" style="width:80%" maxlength="500"><%=StringUtils.nullToStr(qtzc.getRemark()) %>
-			</textarea><span style="color:red">*</span>
+			<textarea rows="3" cols="50" name="qtzc.remark" id="remark" style="width:80%" maxlength="500"><%=StringUtils.nullToStr(qtzc.getRemark()) %></textarea> <span style="color:red">*</span>
 		</td>
 	</tr>
 	<tr height="35">

@@ -41,10 +41,10 @@ List results = (List)VS.findValue("dbsqProducts");
 <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0" border="1" id="selTable">
 	<thead>
 	<tr>
-		<td>商品名称</td>
-		<td>规格</td>
-		<td>数量</td>
-		<td>备注</td>
+		<td width="35%">商品名称</td>
+		<td width="35%">规格</td>
+		<td width="10%">数量</td>
+		<td width="20%">备注</td>
 	</tr>
 	</thead>
 	<%

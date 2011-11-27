@@ -28,7 +28,18 @@ String orderType = (String)VS.findValue("orderType");
 	function openWin(id){
 		var destination = "viewStore.html?id="+id;
 		var fea ='width=600,height=400,left=' + (screen.availWidth-600)/2 + ',top=' + (screen.availHeight-400)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
-		
+		window.open(destination,'详细信息',fea);	
+	}
+
+	function add(){
+		var destination = "addStore.html";
+		var fea ='width=600,height=400,left=' + (screen.availWidth-600)/2 + ',top=' + (screen.availHeight-400)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		window.open(destination,'详细信息',fea);	
+	}	
+
+	function edit(id){
+		var destination = "editStore.html?id=" + id;
+		var fea ='width=600,height=400,left=' + (screen.availWidth-600)/2 + ',top=' + (screen.availHeight-400)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		window.open(destination,'详细信息',fea);	
 	}
 	
@@ -42,10 +53,6 @@ String orderType = (String)VS.findValue("orderType");
 		document.myform.yfk_id.value = "";
 		document.myform.fklx.value = "";
 		document.myform.yfrq.value = "";
-	}
-	
-	function add(){
-		lcation.href = "addStore.html";
 	}
 	
 	function doSort(order_name){
@@ -73,7 +80,7 @@ String orderType = (String)VS.findValue("orderType");
 	<tr>
 		<td class="csstitle" align="left" width="75%">&nbsp;&nbsp;&nbsp;&nbsp;<b>仓库资料</b></td>
 		<td class="csstitle" width="25%">
-			<img src="images/create.gif" align="absmiddle" border="0">&nbsp;<a href="addStore.html" class="xxlb"> 添 加 </a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<img src="images/create.gif" align="absmiddle" border="0">&nbsp;<a href="javascript:add();" class="xxlb"> 添 加 </a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<img src="images/import.gif" align="absmiddle" border="0">&nbsp;<a href="#" class="xxlb" onclick="refreshPage();"> 刷 新 </a>	</td>			
 	</tr>	
 </table>
@@ -104,9 +111,9 @@ String orderType = (String)VS.findValue("orderType");
 		<td class="a1"><%=StringUtils.nullToStr(map.get("lxdh")) %></td>
 		<td class="a1"><%=StringUtils.nullToStr(map.get("flag")).equals("1")?"正常":"停用" %></td>
 		<td class="a1">
-			<a href="editStore.html?id=<%=StringUtils.nullToStr(map.get("id")) %>"><img src="images/modify.gif" align="absmiddle" title="修改仓库信息" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
-			<a href="#" onclick="openWin('<%=StringUtils.nullToStr(map.get("id")) %>');"><img src="images/view.gif" align="absmiddle" title="查看仓库信息" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
-			<a href="#" onclick="del('<%=StringUtils.nullToStr(map.get("id")) %>');"><img src="images/del.gif" align="absmiddle" title="删除仓库信息" border="0" style="cursor:hand"></a>
+			<a href="javascript:edit('<%=StringUtils.nullToStr(map.get("id")) %>')"><img src="images/modify.gif" align="absmiddle" title="修改仓库信息" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
+			<a href="javascript:openWin('<%=StringUtils.nullToStr(map.get("id")) %>');"><img src="images/view.gif" align="absmiddle" title="查看仓库信息" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
+			<a href="javascript:del('<%=StringUtils.nullToStr(map.get("id")) %>');"><img src="images/del.gif" align="absmiddle" title="删除仓库信息" border="0" style="cursor:hand"></a>
 		</td>
 	</tr>
 	

@@ -67,33 +67,56 @@ Dbsq dbsq = (Dbsq)VS.findValue("dbsq");
        // var curId = ($('xsdtable').rows.length-2);
         var curId = allCount + 1;   //curId一直加下去，防止重复
         allCount = allCount + 1;
+
+        var otd=document.createElement("td");
+		otd.className = "a2";
+		otd.innerHTML = '<td class="a2"><input type="checkbox" name="proc_id" id="proc_id" value="' + curId + '"></td>';
         
         var otd0=document.createElement("td");
         otd0.className = "a2";
-        otd0.innerHTML = '<input type="text" id="product_name_'+curId+'" name="dbsqProducts['+curId+'].product_name" readonly><input type="button" name="selectButton" value="选择" class="css_button" onclick="openWin('+curId+');"><input type="hidden" id="product_id_'+curId+'" name="dbsqProducts['+curId+'].product_id">';
+        otd0.innerHTML = '<input type="text" id="product_name_'+curId+'" name="dbsqProducts['+curId+'].product_name"  style="width:90%" readonly><input type="hidden" id="product_id_'+curId+'" name="dbsqProducts['+curId+'].product_id">';
         
         var otd1 = document.createElement("td");
         otd1.className = "a2";
-        otd1.innerHTML = '<input type="text" id="product_xh_'+curId+'"  name="dbsqProducts['+curId+'].product_xh" readonly>';
+        otd1.innerHTML = '<input type="text" id="product_xh_'+curId+'"  name="dbsqProducts['+curId+'].product_xh" style="width:90%" readonly>';
         
         var otd3 = document.createElement("td");
         otd3.className = "a2";
-        otd3.innerHTML = '<input type="text" id="nums_'+curId+'" name="dbsqProducts['+curId+'].nums" value="0">';
+        otd3.innerHTML = '<input type="text" id="nums_'+curId+'" name="dbsqProducts['+curId+'].nums" style="width:90%" value="0">';
         
         var otd5 = document.createElement("td");
         otd5.className = "a2";
-        otd5.innerHTML = '<input type="text" id="remark_'+curId+'" name="dbsqProducts['+curId+'].remark"  maxlength="50">';                       
+        otd5.innerHTML = '<input type="text" id="remark_'+curId+'" name="dbsqProducts['+curId+'].remark"  maxlength="50" style="width:90%">';                       
 
-		var otd6 = document.createElement("td");
-		otd6.className = "a2";
-		otd6.innerHTML = '<input type="button" name="delButton" value="删除" class="css_button" onclick="delTr(this);">';
-		
+
+		otr.appendChild(otd); 
         otr.appendChild(otd0); 
         otr.appendChild(otd1); 
         otr.appendChild(otd3); 
         otr.appendChild(otd5);
-        otr.appendChild(otd6);               
      }	
+
+	function delDesc(){
+		var k = 0;
+		var sel = "0"; 
+		for(var i=0;i<document.dbsqForm.proc_id.length;i++){
+			var o = document.dbsqForm.proc_id[i];
+			if(o.checked){
+				k = k + 1;
+				sel = document.dbsqForm.proc_id[i].value;
+
+				document.getElementById("product_name_" + sel).value = "";
+				document.getElementById("product_id_" + sel).value = "";
+				document.getElementById("product_xh_" + sel).value = "";
+				document.getElementById("nums_" + sel).value = "0";
+				document.getElementById("remark_" + sel).value = "";
+			}
+		}
+		if(k == 0){
+			alert("请选择商品明细！");
+			return;
+		}
+	}      
      
      
 	function delTr(i){
@@ -104,8 +127,8 @@ Dbsq dbsq = (Dbsq)VS.findValue("dbsq");
 
 	
 	function openWin(id){  //与退货单使用一个商品选择
-		var destination = "selThdProc.html?openerId="+id;
-		var fea ='width=800,height=500,left=' + (screen.availWidth-800)/2 + ',top=' + (screen.availHeight-500)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		var destination = "selThdProcMx.html";
+		var fea ='width=850,height=500,left=' + (screen.availWidth-850)/2 + ',top=' + (screen.availHeight-500)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
 		window.open(destination,'详细信息',fea);	
 	}
@@ -134,17 +157,17 @@ Dbsq dbsq = (Dbsq)VS.findValue("dbsq");
 	<tr>
 		<td class="a1" width="15%">编号</td>
 		<td class="a2">
-		<input type="text" name="dbsq.id" id="id" value="<%=StringUtils.nullToStr(dbsq.getId()) %>" size="30" maxlength="50" readonly><font color="red">*</font>
+		<input type="text" name="dbsq.id" id="id" value="<%=StringUtils.nullToStr(dbsq.getId()) %>" style="width:232px" maxlength="50" readonly><font color="red">*</font>
 		</td>	
 		<td class="a1">日期</td>
-		<td class="a2"><input type="text" name="dbsq.creatdate" id="creatdate" value="<%=DateComFunc.getToday() %>" class="Wdate" onFocus="WdatePicker()">
+		<td class="a2"><input type="text" name="dbsq.creatdate" id="creatdate" value="<%=DateComFunc.getToday() %>" class="Wdate" style="width:232px" onFocus="WdatePicker()">
 		<font color="red">*</font>
 		</td>	
 	</tr>
 	<tr>			
 		<td class="a1" width="15%">仓库</td>
 		<td class="a2">
-			<select name="dbsq.store_id" id="store_id">
+			<select name="dbsq.store_id" id="store_id" style="width:232px">
 				<option value=""></option>
 			<%
 			if(storeList != null){
@@ -159,12 +182,13 @@ Dbsq dbsq = (Dbsq)VS.findValue("dbsq");
 				}
 			}
 			%>
-			</select><font color="red">*</font>		
+			</select>
+			<font color="red">*</font>		
 		</td>	
 		<td class="a1" width="15%">经手人</td>
 		<td class="a2" width="35%">
-		    <input id="brand" type="text" length="20" onblur="setValue()"/> 
-            <div   id="brandTip"  style="position:absolute;left:513px; top:82px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
+		    <input id="brand" type="text" maxlength="20" onblur="setValue()" style="width:232px"/> 
+            <div   id="brandTip"  style="position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
             </div>
 		    <input type="hidden" name="dbsq.jsr" id="fzr"/><font color="red">*</font>	
 		</td>
@@ -181,29 +205,25 @@ Dbsq dbsq = (Dbsq)VS.findValue("dbsq");
 <table width="100%"  align="center" id="dbsqTable"  class="chart_list" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td>商品名称</td>
-		<td>规格</td>
-		<td>数量</td>
-		<td>备注</td>
-		<td></td>
+		<td width="5%">选择</td>
+		<td width="30%">商品名称</td>
+		<td width="30%">规格</td>
+		<td width="15%">数量</td>
+		<td width="20%">备注</td>
 	</tr>
 	</thead>
 <%
 for(int i=0;i<3;i++){
 %>
 	<tr>
+		<td class="a2"><input type="checkbox" name="proc_id" id="proc_id" value="<%=i %>"></td>
 		<td class="a2">
-			<input type="text" id="product_name_<%=i %>" name="dbsqProducts[<%=i %>].product_name" readonly><input type="button" name="selectButton" value="选择" class="css_button" onclick="openWin(<%=i %>);">
+			<input type="text" id="product_name_<%=i %>" name="dbsqProducts[<%=i %>].product_name" style="width:90%" readonly>
 			<input type="hidden" id="product_id_<%=i %>" name="dbsqProducts[<%=i %>].product_id">
 		</td>
-		<td class="a2"><input type="text" id="product_xh_<%=i %>" name="dbsqProducts[<%=i %>].product_xh" readonly></td>
-		<td class="a2"><input type="text" id="nums_<%=i %>" name="dbsqProducts[<%=i %>].nums" value="0"></td>
-		<td class="a2"><input type="text" id="remark_<%=i %>" name="dbsqProducts[<%=i %>].remark" maxlength="50"></td>
-		<%if (i>0){ %>		
-		<td class="a2"><input type="button" name="delButton" value="删除" class="css_button" onclick="delTr(this);"></td>
-		<%}else{ %>
-		<td class="a2">&nbsp;</td>
-		<%} %>
+		<td class="a2"><input type="text" id="product_xh_<%=i %>" name="dbsqProducts[<%=i %>].product_xh" style="width:90%" readonly></td>
+		<td class="a2"><input type="text" id="nums_<%=i %>" name="dbsqProducts[<%=i %>].nums" value="0" style="width:90%"></td>
+		<td class="a2"><input type="text" id="remark_<%=i %>" name="dbsqProducts[<%=i %>].remark" maxlength="50" style="width:90%"></td>
 	</tr>
 <%
 }
@@ -212,7 +232,8 @@ for(int i=0;i<3;i++){
 <table width="100%"  align="center" class="chart_info" cellpadding="0" cellspacing="0">
 	<tr height="35">
 		<td class="a2" colspan="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="button" name="button1" value="添加一行" class="css_button2" onclick="addTr();">
+			<input type="button" name="button1" value="添加商品" class="css_button2" onclick="openWin();">
+			<input type="button" name="button8" value="清除商品" class="css_button2" onclick="delDesc();">
 		</td>
 	</tr>		
 </table>

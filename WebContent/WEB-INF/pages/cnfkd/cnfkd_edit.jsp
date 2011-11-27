@@ -8,8 +8,8 @@
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript" src="js/Check.js"></script>
 <script language="JavaScript" type="text/javascript" src="datepicker/WdatePicker.js"></script>
-<script language='JavaScript' src="js/selJsr.js"></script>
 <script type="text/javascript" src="js/prototype-1.4.0.js"></script>
+<script language='JavaScript' src="js/selJsr.js"></script>
 <style>
 	.selectTip{background-color:#009;color:#fff;}
 </style>
@@ -44,13 +44,46 @@ function saveInfo(vl){
 	}else{
 		document.getElementById("state").value = "已支付";
 		if(window.confirm("确认要付款吗？")){
-			document.cnfkdForm.submit();
+			var myAjax = new Ajax.Request("checkAccountJe.html",
+					{
+						method:'post',
+						parameters: 'account_id=' + document.getElementById("fkzh").value + "&zcje=" + document.getElementById("fkje").value,
+						onComplete: subForm,
+						asynchronous:true
+					});
 		}else{
 			return;
 		}
 	}
-	document.cnfkdForm.btnSub.disabled = true;
-	document.cnfkdForm.btnSave.disabled = true;
+}
+
+
+function subForm(originalRequest){
+	if(originalRequest.responseText.trim() == "false"){
+		alert("付款账户金额不足！");
+		return;
+	}else{
+		if(document.getElementById("has_fy是").checked){
+			var myAjax = new Ajax.Request("checkAccountJe.html",
+					{
+						method:'post',
+						parameters: 'account_id=' + document.getElementById("fy_account").value + "&zcje=" + document.getElementById("fy_je").value,
+						onComplete: subForm2,
+						asynchronous:true
+					});
+		}else{
+			document.cnfkdForm.submit();
+		}
+	}
+}
+
+function subForm2(originalRequest){
+	if(originalRequest.responseText.trim() == "false"){
+		alert("费用支付账号金额不足！");
+		return;
+	}else{
+		document.cnfkdForm.submit();
+	}
 }
 
 function openFyType(){
@@ -91,49 +124,49 @@ function chgHasFy(vl){
 	<tr>
 		<td class="a1" width="15%">编号</td>
 		<td class="a2" width="35%">
-			<ww:textfield name="cnfkd.id" id="id" value="%{cnfkd.id}" theme="simple" readonly="true" cssStyle="width:85%"/>
+			<ww:textfield name="cnfkd.id" id="id" value="%{cnfkd.id}" theme="simple" readonly="true" cssStyle="width:232px"/>
 		</td>
 		<td class="a1" width="15%">日期</td>
 		<td class="a2" width="35%">
-			<input type="text" name="cnfkd.fk_date" id="fk_date" value="<ww:property value="%{cnfkd.fk_date}"/>" class="Wdate" onFocus="WdatePicker()" style="width:85%"/>&nbsp;	
+			<input type="text" name="cnfkd.fk_date" id="fk_date" value="<ww:property value="%{cnfkd.fk_date}"/>" class="Wdate" onFocus="WdatePicker()" style="width:232px"/>&nbsp;	
 			<span style="color:red">*</span>
 		</td>				
 	</tr>
 	<tr>
 		<td class="a1">往来单位</td>
 		<td class="a2">
-			<ww:textfield name="wldw" id="wldw" value="%{getClientName(cnfkd.client_name)}" theme="simple" cssStyle="width:85%" readonly="true"/>
+			<ww:textfield name="wldw" id="wldw" value="%{getClientName(cnfkd.client_name)}" theme="simple" cssStyle="width:232px" readonly="true"/>
 			<ww:hidden name="cnfkd.client_name" id="client_name" value="%{cnfkd.client_name}" theme="simple"/>
 		</td>
 		<td class="a1">联系人</td>
 		<td class="a2">
-			<ww:textfield name="cnfkd.lxr" id="lxr" value="%{cnfkd.lxr}" theme="simple" cssStyle="width:85%" readonly="true"/>
+			<ww:textfield name="cnfkd.lxr" id="lxr" value="%{cnfkd.lxr}" theme="simple" cssStyle="width:232px" readonly="true"/>
 		</td>							
 	</tr>
 	<tr>
 		<td class="a1">电话</td>
 		<td class="a2">
-			<ww:textfield name="cnfkd.tel" id="tel" value="%{cnfkd.tel}" theme="simple" cssStyle="width:85%" readonly="true"/>
+			<ww:textfield name="cnfkd.tel" id="tel" value="%{cnfkd.tel}" theme="simple" cssStyle="width:232px" readonly="true"/>
 		</td>
 		<td class="a1">传真</td>
 		<td class="a2">
-			<ww:textfield name="cnfkd.fax" id="fax" value="%{cnfkd.fax}" theme="simple" cssStyle="width:85%" readonly="true"/>
+			<ww:textfield name="cnfkd.fax" id="fax" value="%{cnfkd.fax}" theme="simple" cssStyle="width:232px" readonly="true"/>
 		</td>							
 	</tr>	
 	<tr>
 		<td class="a1">单位全称</td>
 		<td class="a2">
-			<ww:textfield name="cnfkd.client_all_name" id="client_all_name" value="%{cnfkd.client_all_name}" theme="simple" cssStyle="width:85%" readonly="true"/>
+			<ww:textfield name="cnfkd.client_all_name" id="client_all_name" value="%{cnfkd.client_all_name}" theme="simple" cssStyle="width:232px" readonly="true"/>
 		</td>						
 		<td class="a1">开户行及账号</td>
 		<td class="a2">
-			<ww:textfield name="cnfkd.bank_no" id="bank_no" value="%{cnfkd.bank_no}" theme="simple" cssStyle="width:85%" readonly="true"/>
+			<ww:textfield name="cnfkd.bank_no" id="bank_no" value="%{cnfkd.bank_no}" theme="simple" cssStyle="width:232px" readonly="true"/>
 		</td>					
 	</tr>
 	<tr>
 		<td class="a1">付款类型</td>
 		<td class="a2" colspan="3">
-			<ww:textfield name="cnfkd.fklx" id="fklx" value="%{cnfkd.fklx}" theme="simple" readonly="true" size="35"/>
+			<ww:textfield name="cnfkd.fklx" id="fklx" value="%{cnfkd.fklx}" theme="simple" readonly="true" cssStyle="width:232px"/>
 		</td>
 	</tr>
 </table>
@@ -147,21 +180,21 @@ function chgHasFy(vl){
 	<tr>
 		<td class="a1" width="15%">付款方式</td>
 		<td class="a2" width="35%">
-			<ww:select name="cnfkd.fkfs" id="fkfs" list="%{arryFkfs}" emptyOption="true" theme="simple"  cssStyle="width:81%"></ww:select><span style="color:red">*</span>
+			<ww:select name="cnfkd.fkfs" id="fkfs" list="%{arryFkfs}" emptyOption="true" theme="simple"  cssStyle="width:232px"></ww:select><span style="color:red">*</span>
 		</td>	
 		<td class="a1" width="15%">付款金额</td>
 		<td class="a2" width="35%">
-			<ww:textfield name="cnfkd.fkje" id="fkje" value="%{getText('global.format.double',{cnfkd.fkje})}" theme="simple" cssStyle="width:85%" readonly="true"/>
+			<ww:textfield name="cnfkd.fkje" id="fkje" value="%{getText('global.format.double',{cnfkd.fkje})}" theme="simple" cssStyle="width:232px" readonly="true"/>
 		</td>								
 	</tr>	
 	<tr>
 		<td class="a1">付款账户</td>
 		<td class="a2">
-			<ww:select name="cnfkd.fkzh" id="fkzh" list="%{accountList}" listKey="id" listValue="name" theme="simple"  emptyOption="true" cssStyle="width:81%"></ww:select><span style="color:red">*</span>
+			<ww:select name="cnfkd.fkzh" id="fkzh" list="%{accountList}" listKey="id" listValue="name" theme="simple"  emptyOption="true" cssStyle="width:232px"></ww:select><span style="color:red">*</span>
 		</td>
 		<td class="a1">出纳</td>
 		<td class="a2">
-			<ww:textfield name="brand" id="brand" onblur="setValue()" value="%{getUserRealName(cnfkd.jsr)}" theme="simple" cssStyle="width:85%"></ww:textfield>
+			<ww:textfield name="brand" id="brand" onblur="setValue()" value="%{getUserRealName(cnfkd.jsr)}" theme="simple" cssStyle="width:232px"></ww:textfield>
             <div id="brandTip" style="position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		    <ww:hidden name="cnfkd.jsr" id="fzr" value="%{cnfkd.jsr}" theme="simple"></ww:hidden><font color="red">*</font>	
 		</td>									
@@ -169,7 +202,7 @@ function chgHasFy(vl){
 	<tr>
 		<td class="a1">备注</td>
 		<td class="a2" colspan="3">
-			<ww:textfield name="cnfkd.remark"  id="remark" value="%{cnfkd.remark}" theme="simple" maxlength="250" cssStyle="width:95%"/>
+			<ww:textfield name="cnfkd.remark"  id="remark" value="%{cnfkd.remark}" theme="simple" maxlength="250" cssStyle="width:85%"/>
 		</td>	
 	</tr>	
 </table>
@@ -187,7 +220,7 @@ function chgHasFy(vl){
 		</td>	
 		<td class="a1" width="15%" id="fy_tdobj1">费用类型</td>
 		<td class="a2" width="35%" id="fy_tdobj2">
-			<ww:textfield name="fy_type_show" id="fy_type_show" theme="simple" value="%{getFyTypeName(cnfkd.fy_type)}" onclick="openFyType();" readonly="true" cssStyle="width:85%"/><span style="color:red">*</span>
+			<ww:textfield name="fy_type_show" id="fy_type_show" theme="simple" value="%{getFyTypeName(cnfkd.fy_type)}" onclick="openFyType();" readonly="true" cssStyle="width:232px"/><span style="color:red">*</span>
 			<ww:hidden name="cnfkd.fy_type" id="fy_type" theme="simple" value="%{cnfkd.fy_type}"/>
 			<img src="images/select.gif" align="absmiddle" title="选择费用类型" border="0" onclick="openFyType();" style="cursor:hand">			
 		</td>
@@ -195,11 +228,11 @@ function chgHasFy(vl){
 	<tr id="fy_tdobj3">
 		<td class="a1">费用支付账号</td>
 		<td class="a2">
-			<ww:select name="cnfkd.fy_account" id="fy_account" list="%{accountList}" listKey="id" listValue="name" theme="simple"  emptyOption="true" cssStyle="width:81%"></ww:select><span style="color:red">*</span>
+			<ww:select name="cnfkd.fy_account" id="fy_account" list="%{accountList}" listKey="id" listValue="name" theme="simple"  emptyOption="true" cssStyle="width:232px"></ww:select><span style="color:red">*</span>
 		</td>
 		<td class="a1">费用金额</td>
 		<td class="a2">
-			<ww:textfield name="cnfkd.fy_je" id="fy_je" onblur="setValue()" value="%{getText('global.format.double',{cnfkd.fy_je})}" theme="simple" cssStyle="width:85%"></ww:textfield>
+			<ww:textfield name="cnfkd.fy_je" id="fy_je" onblur="setValue()" value="%{getText('global.format.double',{cnfkd.fy_je})}" theme="simple" cssStyle="width:232px"></ww:textfield>
             <font color="red">*</font>	
 		</td>									
 	</tr>

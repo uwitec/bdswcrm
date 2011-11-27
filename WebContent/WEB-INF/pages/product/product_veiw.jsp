@@ -85,11 +85,9 @@ if(obj != null){
 		
 		<td class="a2" width="35%"><%=StringUtils.nullToStr(product.getSfcytc()).equals("1")?"是":"否" %></td>
 	</tr>
-	<tr height="50">
+	<tr>
 		<td class="a1">商品描述</td>
-		<td class="a2" colspan="3">
-			<textarea rows="3" cols="50" name="ms" style="width:80%" readonly><%=StringUtils.nullToStr(product.getMs()) %></textarea>
-		</td>
+		<td class="a2" colspan="3"><%=StringUtils.nullToStr(product.getMs()) %></td>
 	</tr>
 	
 	<tr height="35">

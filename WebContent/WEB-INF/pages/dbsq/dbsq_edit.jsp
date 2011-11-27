@@ -16,6 +16,10 @@ List dbsqProducts = (List)VS.findValue("dbsqProducts");
 List msg = (List)session.getAttribute("messages");
 session.removeAttribute("messages");
 
+int counts = 2;
+if(dbsqProducts != null && dbsqProducts.size()>0){
+	counts = dbsqProducts.size() - 1;
+}
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -37,7 +41,7 @@ session.removeAttribute("messages");
 </style>
 <script type="text/javascript">
 
-	var allCount = 2;
+	var allCount = <%=counts %>;
 	
 	function saveInfo(vl){
 		if(vl == "1"){
@@ -80,33 +84,56 @@ session.removeAttribute("messages");
        // var curId = ($('xsdtable').rows.length-2);
         var curId = allCount + 1;   //curId一直加下去，防止重复
         allCount = allCount + 1;
+
+        var otd=document.createElement("td");
+		otd.className = "a2";
+		otd.innerHTML = '<td class="a2"><input type="checkbox" name="proc_id" id="proc_id" value="' + curId + '"></td>';
         
         var otd0=document.createElement("td");
         otd0.className = "a2";
-        otd0.innerHTML = '<input type="text" id="product_name_'+curId+'" name="dbsqProducts['+curId+'].product_name" readonly><input type="button" name="selectButton" value="选择" class="css_button" onclick="openWin('+curId+');"><input type="hidden" id="product_id_'+curId+'" name="dbsqProducts['+curId+'].product_id">';
+        otd0.innerHTML = '<input type="text" id="product_name_'+curId+'" name="dbsqProducts['+curId+'].product_name"  style="width:90%" readonly><input type="hidden" id="product_id_'+curId+'" name="dbsqProducts['+curId+'].product_id">';
         
         var otd1 = document.createElement("td");
         otd1.className = "a2";
-        otd1.innerHTML = '<input type="text" id="product_xh_'+curId+'"  name="dbsqProducts['+curId+'].product_xh" readonly>';
+        otd1.innerHTML = '<input type="text" id="product_xh_'+curId+'"  name="dbsqProducts['+curId+'].product_xh" style="width:90%" readonly>';
         
         var otd3 = document.createElement("td");
         otd3.className = "a2";
-        otd3.innerHTML = '<input type="text" id="nums_'+curId+'" name="dbsqProducts['+curId+'].nums" value="0">';
+        otd3.innerHTML = '<input type="text" id="nums_'+curId+'" name="dbsqProducts['+curId+'].nums" style="width:90%" value="0">';
         
         var otd5 = document.createElement("td");
         otd5.className = "a2";
-        otd5.innerHTML = '<input type="text" id="remark_'+curId+'" name="dbsqProducts['+curId+'].remark"  maxlength="50">';                       
+        otd5.innerHTML = '<input type="text" id="remark_'+curId+'" name="dbsqProducts['+curId+'].remark"  maxlength="50" style="width:90%">';                       
 
-		var otd6 = document.createElement("td");
-		otd6.className = "a2";
-		otd6.innerHTML = '<input type="button" name="delButton" value="删除" class="css_button" onclick="delTr(this);">';
-		
+
+		otr.appendChild(otd); 
         otr.appendChild(otd0); 
         otr.appendChild(otd1); 
         otr.appendChild(otd3); 
         otr.appendChild(otd5);
-        otr.appendChild(otd6);               
      }	
+
+	function delDesc(){
+		var k = 0;
+		var sel = "0"; 
+		for(var i=0;i<document.dbsqForm.proc_id.length;i++){
+			var o = document.dbsqForm.proc_id[i];
+			if(o.checked){
+				k = k + 1;
+				sel = document.dbsqForm.proc_id[i].value;
+
+				document.getElementById("product_name_" + sel).value = "";
+				document.getElementById("product_id_" + sel).value = "";
+				document.getElementById("product_xh_" + sel).value = "";
+				document.getElementById("nums_" + sel).value = "0";
+				document.getElementById("remark_" + sel).value = "";
+			}
+		}
+		if(k == 0){
+			alert("请选择商品明细！");
+			return;
+		}
+	}
      
      
 	function delTr(i){
@@ -114,7 +141,6 @@ session.removeAttribute("messages");
 			tr.removeNode(true);
 			
 	}     
-
 	
 	function openWin(id){  //与退货单使用一个商品选择
 		var destination = "selThdProc.html?openerId="+id;
@@ -157,17 +183,17 @@ if(msg != null && msg.size() > 0){
 	<tr>
 		<td class="a1" width="15%">编号</td>
 		<td class="a2">
-		<input type="text" name="dbsq.id" id="id" value="<%=StringUtils.nullToStr(dbsq.getId()) %>" size="30" maxlength="50" readonly><font color="red">*</font>
+		<input type="text" name="dbsq.id" id="id" value="<%=StringUtils.nullToStr(dbsq.getId()) %>" style="width:232px" maxlength="50" readonly><font color="red">*</font>
 		</td>	
 		<td class="a1">日期</td>
-		<td class="a2"><input type="text" name="dbsq.creatdate" id="creatdate" value="<%=StringUtils.nullToStr(dbsq.getCreatdate()) %>" class="Wdate" onFocus="WdatePicker()">
+		<td class="a2"><input type="text" name="dbsq.creatdate" id="creatdate" style="width:232px" value="<%=StringUtils.nullToStr(dbsq.getCreatdate()) %>" class="Wdate" onFocus="WdatePicker()">
 		<font color="red">*</font>
 		</td>	
 	</tr>
 	<tr>			
 		<td class="a1" width="15%">仓库</td>
 		<td class="a2">
-			<select name="dbsq.store_id" id="store_id">
+			<select name="dbsq.store_id" id="store_id" style="width:232px">
 				<option value=""></option>
 			<%
 			if(storeList != null){
@@ -182,11 +208,12 @@ if(msg != null && msg.size() > 0){
 				}
 			}
 			%>
-			</select><font color="red">*</font>		
+			</select>
+			<font color="red">*</font>		
 		</td>	
 		<td class="a1" width="15%">经手人</td>
 		<td class="a2" width="35%">
-		    <input id="brand" type="text" length="20" onblur="setValue()" value="<%=StaticParamDo.getRealNameById(dbsq.getJsr()) %>"/> 
+		    <input id="brand" type="text" mxlength="20" style="width:232px" onblur="setValue()" value="<%=StaticParamDo.getRealNameById(dbsq.getJsr()) %>"/> 
             <div id="brandTip" style="position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
             </div>
 		    <input type="hidden" name="dbsq.jsr" id="fzr" value="<%=dbsq.getJsr() %>"/><font color="red">*</font>	
@@ -204,11 +231,11 @@ if(msg != null && msg.size() > 0){
 <table width="100%"  align="center" id="dbsqTable"  class="chart_list" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td>商品名称</td>
-		<td>规格</td>
-		<td>数量</td>
-		<td>备注</td>
-		<td></td>
+		<td width="5%">选择</td>
+		<td width="30%">商品名称</td>
+		<td width="30%">规格</td>
+		<td width="15%">数量</td>
+		<td width="20%">备注</td>
 	</tr>
 	</thead>
 <%
@@ -217,19 +244,14 @@ if(dbsqProducts!=null && dbsqProducts.size()>0){
 		DbsqProduct dbsqProduct = (DbsqProduct)dbsqProducts.get(i);
 %>
 	<tr>
+		<td class="a2"><input type="checkbox" name="proc_id" id="proc_id" value="<%=i %>"></td>
 		<td class="a2">
-			<input type="text" id="product_name_<%=i %>" name="dbsqProducts[<%=i %>].product_name" value="<%=StringUtils.nullToStr(dbsqProduct.getProduct_name()) %>" readonly>
-			<input type="button" name="selectButton" value="选择" class="css_button" onclick="openWin(<%=i %>);">
+			<input type="text" id="product_name_<%=i %>" name="dbsqProducts[<%=i %>].product_name" style="width:90%" value="<%=StringUtils.nullToStr(dbsqProduct.getProduct_name()) %>" readonly>
 			<input type="hidden" id="product_id_<%=i %>" name="dbsqProducts[<%=i %>].product_id" value="<%=StringUtils.nullToStr(dbsqProduct.getProduct_id()) %>">
 		</td>
-		<td class="a2"><input type="text" id="product_xh_<%=i %>" name="dbsqProducts[<%=i %>].product_xh" value="<%=StringUtils.nullToStr(dbsqProduct.getProduct_xh()) %>" readonly></td>
-		<td class="a2"><input type="text" id="nums_<%=i %>" name="dbsqProducts[<%=i %>].nums"  value="<%=StringUtils.nullToStr(dbsqProduct.getNums()) %>"></td>
-		<td class="a2"><input type="text" id="remark_<%=i %>" name="dbsqProducts[<%=i %>].remark" value="<%=StringUtils.nullToStr(dbsqProduct.getRemark()) %>" maxlength="50"></td>
-		<%if (i>0){ %>		
-		<td class="a2"><input type="button" name="delButton" value="删除" class="css_button" onclick="delTr(this);"></td>
-		<%}else{ %>
-		<td class="a2">&nbsp;</td>
-		<%} %>
+		<td class="a2"><input type="text" id="product_xh_<%=i %>" name="dbsqProducts[<%=i %>].product_xh" style="width:90%" value="<%=StringUtils.nullToStr(dbsqProduct.getProduct_xh()) %>" readonly></td>
+		<td class="a2"><input type="text" id="nums_<%=i %>" name="dbsqProducts[<%=i %>].nums" style="width:90%"  value="<%=StringUtils.nullToStr(dbsqProduct.getNums()) %>"></td>
+		<td class="a2"><input type="text" id="remark_<%=i %>" name="dbsqProducts[<%=i %>].remark" style="width:90%" value="<%=StringUtils.nullToStr(dbsqProduct.getRemark()) %>" maxlength="50"></td>
 	</tr>
 <%
 	}
@@ -237,18 +259,14 @@ if(dbsqProducts!=null && dbsqProducts.size()>0){
 	for(int i=0;i<3;i++){
 %>
 	<tr>
+		<td class="a2"><input type="checkbox" name="proc_id" id="proc_id" value="<%=i %>"></td>
 		<td class="a2">
-			<input type="text" id="product_name_<%=i %>" name="dbsqProducts[<%=i %>].product_name" readonly><input type="button" name="selectButton" value="选择" class="css_button" onclick="openWin(<%=i %>);">
+			<input type="text" id="product_name_<%=i %>" name="dbsqProducts[<%=i %>].product_name" style="width:90%" readonly>
 			<input type="hidden" id="product_id_<%=i %>" name="dbsqProducts[<%=i %>].product_id">
 		</td>
-		<td class="a2"><input type="text" id="product_xh_<%=i %>" name="dbsqProducts[<%=i %>].product_xh" readonly></td>
-		<td class="a2"><input type="text" id="nums_<%=i %>" name="dbsqProducts[<%=i %>].nums" value="0"></td>
-		<td class="a2"><input type="text" id="remark_<%=i %>" name="dbsqProducts[<%=i %>].remark" maxlength="50"></td>
-		<%if (i>0){ %>		
-		<td class="a2"><input type="button" name="delButton" value="删除" class="css_button" onclick="delTr(this);"></td>
-		<%}else{ %>
-		<td class="a2">&nbsp;</td>
-		<%} %>
+		<td class="a2"><input type="text" id="product_xh_<%=i %>" name="dbsqProducts[<%=i %>].product_xh" style="width:90%" readonly></td>
+		<td class="a2"><input type="text" id="nums_<%=i %>" name="dbsqProducts[<%=i %>].nums" style="width:90%" value="0"></td>
+		<td class="a2"><input type="text" id="remark_<%=i %>" name="dbsqProducts[<%=i %>].remark" style="width:90%" maxlength="50"></td>
 	</tr>
 <%
 	}
@@ -258,7 +276,8 @@ if(dbsqProducts!=null && dbsqProducts.size()>0){
 <table width="100%"  align="center" class="chart_info" cellpadding="0" cellspacing="0">
 	<tr height="35">
 		<td class="a2" colspan="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="button" name="button1" value="添加一行" class="css_button2" onclick="addTr();">
+			<input type="button" name="button1" value="添加商品" class="css_button2" onclick="openWin();">
+			<input type="button" name="button8" value="清除商品" class="css_button2" onclick="delDesc();">
 		</td>
 	</tr>		
 </table>

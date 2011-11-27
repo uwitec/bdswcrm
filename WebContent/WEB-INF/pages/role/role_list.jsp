@@ -56,6 +56,18 @@ String role_name = ParameterUtility.getStringParameter(request,"role_name", "");
 		document.myform.action = "listRole.html";
 		document.myform.submit();
 	}	
+
+	function add(){
+		var destination = "addRole.html";
+		var fea ='width=600,height=400,left=' + (screen.availWidth-600)/2 + ',top=' + (screen.availHeight-400)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		window.open(destination,'详细信息',fea);	
+	}	
+
+	function edit(id){
+		var destination = "editRole.html?id=" + id;
+		var fea ='width=600,height=400,left=' + (screen.availWidth-600)/2 + ',top=' + (screen.availHeight-400)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		window.open(destination,'详细信息',fea);	
+	}
 </script>
 </head>
 <body>
@@ -65,7 +77,7 @@ String role_name = ParameterUtility.getStringParameter(request,"role_name", "");
 	<tr>
 		<td class="csstitle" align="left" width="75%">&nbsp;&nbsp;&nbsp;&nbsp;<b>角色管理</b></td>
 		<td class="csstitle" width="25%">
-			<img src="images/create.gif" align="absmiddle" border="0">&nbsp;<a href="addRole.html" class="xxlb"> 添 加 </a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<img src="images/create.gif" align="absmiddle" border="0">&nbsp;<a href="javascript:add();" class="xxlb"> 添 加 </a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<img src="images/import.gif" align="absmiddle" border="0">&nbsp;<a href="#" class="xxlb" onclick="refreshPage();"> 刷 新 </a>	</td>			
 	</tr>
 	<tr>
@@ -99,8 +111,8 @@ String role_name = ParameterUtility.getStringParameter(request,"role_name", "");
 		<td class="a1"><%=StringUtils.nullToStr(map.get("role_name")) %></td>
 		<td class="a1"><%=StringUtils.nullToStr(map.get("xh")) %></td>
 		<td class="a1">
-			<a href="editRole.html?id=<%=StringUtils.nullToStr(map.get("role_id")) %>"><img src="images/modify.gif" align="absmiddle" title="修改角色信息" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
-			<a href="#" onclick="del('<%=StringUtils.nullToStr(map.get("role_id")) %>');"><img src="images/del.gif" align="absmiddle" title="删除角色信息" border="0" style="cursor:hand"></a>
+			<a href="javascript:edit('<%=StringUtils.nullToStr(map.get("role_id")) %>');"><img src="images/modify.gif" align="absmiddle" title="修改角色信息" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
+			<a href="javascript:del('<%=StringUtils.nullToStr(map.get("role_id")) %>');"><img src="images/del.gif" align="absmiddle" title="删除角色信息" border="0" style="cursor:hand"></a>
 		</td>
 	</tr>
 	

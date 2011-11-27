@@ -51,15 +51,15 @@ List providers = (List)VS.findValue("providerList");
 	</thead>
 	<tr>
 		<td class="a1" width="15%">仓库名称</td>
-		<td class="a2" width="35%"><input type="text" name="storeHouse.name" id="name" value="" size="30" maxlength="50"></td>
+		<td class="a2" width="35%"><input type="text" name="storeHouse.name" id="name" value="" style="width:170px" maxlength="50"> <font color="red">*</font></td>
 		<td class="a1" width="15%">地址</td>
-		<td class="a2" width="35%"><input type="text" name="storeHouse.address" id="address" value="" size="40" maxlength="100"></td>
+		<td class="a2" width="35%"><input type="text" name="storeHouse.address" id="address" value="" style="width:170px" maxlength="100"></td>
 	</tr>
 	<tr>
 		<td class="a1" width="15%">联系人</td>
-		<td class="a2" width="35%"><input type="text" name="storeHouse.lxr" id="lxr" value="" size="25" maxlength="10"></td>
+		<td class="a2" width="35%"><input type="text" name="storeHouse.lxr" id="lxr" value="" style="width:170px" maxlength="10"></td>
 		<td class="a1" width="15%">联系电话</td>
-		<td class="a2" width="35%"><input type="text" name="storeHouse.lxdh" id="lxdh" value="" size="30" maxlength="20"></td>
+		<td class="a2" width="35%"><input type="text" name="storeHouse.lxdh" id="lxdh" value="" style="width:170px" maxlength="20"></td>
 	</tr>	
 	
 	<tr>
@@ -77,10 +77,10 @@ List providers = (List)VS.findValue("providerList");
 		<td colspan="4">其    它</td>
 	</tr>
 	</thead>
-	<tr height="50">
+	<tr>
 		<td class="a1" width="20%">备注</td>
 		<td class="a2" width="80%">
-			<textarea rows="6" cols="50" name="storeHouse.remark" id="remark" style="width:80%" maxlength="500"></textarea>
+			<textarea rows="3" cols="50" name="storeHouse.remark" id="remark" style="width:80%" maxlength="500"></textarea>
 		</td>
 	</tr>
 	
@@ -88,7 +88,7 @@ List providers = (List)VS.findValue("providerList");
 		<td class="a1" colspan="2">
 			<input type="button" name="button1" value="提 交" class="css_button2" onclick="saveInfo();">&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="reset" name="button2" value="重 置" class="css_button2">&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="button" name="button1" value="返 回" class="css_button2" onclick="history.go(-1);">
+			<input type="button" name="button1" value="关 闭" class="css_button2" onclick="window.close();">
 		</td>
 	</tr>
 </table>

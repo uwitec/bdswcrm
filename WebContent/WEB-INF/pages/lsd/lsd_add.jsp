@@ -624,10 +624,10 @@ String flag = StringUtils.nullToStr(VS.findValue("flag"));
 	<thead>
 	<tr>
 		<td width="5%">选择</td>
-		<td width="30%">商品名称</td>
+		<td width="25%">商品名称</td>
 		<td width="25%">规格</td>
 		<td width="10%">销售价格</td>
-		<td width="5%">数量</td>
+		<td width="10%">数量</td>
 		<td width="10%">小计</td>
 		<td width="15%">强制序列号</td>
 	</tr>

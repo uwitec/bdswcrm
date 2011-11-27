@@ -25,7 +25,7 @@
 </head>
 <body oncontextmenu="return false;" >
 <form name="roleForm" action="saveRole.html" method="post">
-<table width="90%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
+<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
 		<td colspan="4">角色信息</td>
@@ -34,7 +34,7 @@
 	<tr>
 		<td class="a1" width="25%">角色名称</td>
 		<td class="a2" width="75%">
-			<input type="text" name="role_name" value="">
+			<input type="text" name="role_name" value="" maxlength="25">
 		</td>		
 	</tr>	
 	
@@ -47,7 +47,7 @@
 		<td class="a1" colspan="2">
 			<input type="button" name="button1" value="提 交" class="css_button2" onclick="saveInfo();">&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="reset" name="button2" value="重 置" class="css_button2">&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="button" name="button1" value="返 回" class="css_button2" onclick="history.go(-1);">
+			<input type="button" name="button1" value="关 闭" class="css_button2" onclick="window.close();">
 		</td>
 	</tr>
 </table>

@@ -47,6 +47,7 @@
     	<property name="page_size" value="${page.size}"/>
     	<property name="page_size2" value="${page.size2}"/>
     	<property name="expireDay" value="${msg.expireday}"/>
+    	<property name="user_nums" value="${sys_user.nums}"/>
     </bean>
     
     <!-- 利用quartz调度任务 -->

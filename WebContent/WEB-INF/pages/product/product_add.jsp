@@ -146,7 +146,7 @@ String[] jldw = (String[])VS.findValue("jldw");
 			</select>
 		</td>
 	</tr>		
-	<tr height="50">
+	<tr>
 	    <td class="a1" width="15%">条形码</td>
 		<td class="a2"><input type="text" name="sp_txm" value="" size="20" onkeyup="goNext(this.form,this.name);"></td>	
 		

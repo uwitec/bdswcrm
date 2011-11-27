@@ -42,11 +42,9 @@ Map map = (Map)VS.findValue("accountMap");
 		<td colspan="4">备 注</td>
 	</tr>
 	</thead>
-	<tr height="50">
+	<tr>
 		<td class="a1" width="20%">备注</td>
-		<td class="a2" width="80%">
-			<textarea rows="3" cols="50" name="accounts.remark" id="remark" style="width:80%" maxlength="500" readonly><%=StringUtils.nullToStr(map.get("remark")) %></textarea>
-		</td>
+		<td class="a2" width="80%"><%=StringUtils.nullToStr(map.get("remark")) %></td>
 	</tr>
 	
 	<tr height="35">

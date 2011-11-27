@@ -31,7 +31,7 @@ String state = StringUtils.nullToStr(VS.findValue("state"));
 	
 	function openWin(id){
 		var destination = "viewQtzc.html?id="+id;
-		var fea ='width=750,height=600,left=' + (screen.availWidth-750)/2 + ',top=' + (screen.availHeight-600)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		var fea ='width=850,height=600,left=' + (screen.availWidth-850)/2 + ',top=' + (screen.availHeight-600)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
 		window.open(destination,'详细信息',fea);	
 	}
@@ -50,14 +50,14 @@ String state = StringUtils.nullToStr(VS.findValue("state"));
 	
 	function add(){
 		var destination = "addQtzc.html";
-		var fea ='width=750,height=400,left=' + (screen.availWidth-750)/2 + ',top=' + (screen.availHeight-400)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		var fea ='width=850,height=400,left=' + (screen.availWidth-850)/2 + ',top=' + (screen.availHeight-400)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
 		window.open(destination,'其他支出',fea);	
 	}
 	
 	function edit(id){
 		var destination = "editQtzc.html?id=" + id;
-		var fea ='width=750,height=600,left=' + (screen.availWidth-750)/2 + ',top=' + (screen.availHeight-600)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		var fea ='width=850,height=600,left=' + (screen.availWidth-850)/2 + ',top=' + (screen.availHeight-600)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
 		window.open(destination,'其他支出',fea);		
 	}	

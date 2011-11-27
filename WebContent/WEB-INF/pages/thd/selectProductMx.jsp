@@ -176,7 +176,7 @@ String out_ratio = StringUtils.nullToStr((String)VS.findValue("out_ratio"));
 	</tr>		
 </table>
 
-<table width="100%" border="0" align="center" class="chart_info" cellpadding="0" cellspacing="0" height="450">
+<table width="100%" border="0" align="center" class="chart_info" cellpadding="0" cellspacing="0">
 <tr>	
 	<td width="80%" class="a2"  valign="top">
 		<table width="100%"  align="center"  class="chart_list" border="1" cellpadding="0" cellspacing="0">
@@ -242,7 +242,7 @@ String out_ratio = StringUtils.nullToStr((String)VS.findValue("out_ratio"));
 	</td>
 </tr>
 </table>
-<center><BR>
+<center>
 	<input type="button" name="buttonQd" value="确认并继续选择" onclick="sel('1');" class="css_button4">
 	<input type="button" name="buttonQd" value="确认选择并关闭" onclick="sel('2');" class="css_button4">
 	<input type="button" name="buttonQd" value=" 关闭 " onclick="window.close();" class="css_button2">
