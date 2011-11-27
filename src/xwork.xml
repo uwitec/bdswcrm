@@ -284,6 +284,7 @@
         <action name="listUser" class="userAction" method="list">
             <result name="success" type="dispatcher">/WEB-INF/pages/user/user_list.jsp</result>
         </action>
+        <action name="checkUserLimit" class="userAction" method="checkUserLimit"/>
         <action name="addUser" class="userAction" method="add">
             <result name="success">/WEB-INF/pages/user/user_add.jsp</result>
         </action>
@@ -518,7 +519,7 @@
         <action name="saveStore" class="storeAction" method="save">
             <result name="cancel" type="redirect">addStore.html</result>
             <result name="input">/WEB-INF/pages/store/store_add.jsp</result>
-            <result name="success" type="redirect">listStore.html</result>
+            <result name="success">/WEB-INF/pages/msg.jsp</result>
         </action>
         <action name="editStore" class="storeAction" method="edit">
             <result name="success">/WEB-INF/pages/store/store_edit.jsp</result>
@@ -526,7 +527,7 @@
         <action name="updateStore" class="storeAction" method="update">
             <result name="cancel" type="redirect">editStore.html</result>
             <result name="input">/WEB-INF/pages/store/store_edit.jsp</result>
-            <result name="success" type="redirect">listStore.html</result>
+            <result name="success">/WEB-INF/pages/msg.jsp</result>
         </action>
         <action name="delStore" class="storeAction" method="del">
         	<result name="notDel">/WEB-INF/pages/msg_info.jsp</result>
@@ -806,7 +807,7 @@
         <action name="saveRole" class="roleAction" method="save">
             <result name="cancel" type="redirect">addRole.html</result>
             <result name="input" type="dispatcher">/WEB-INF/pages/role/role_add.jsp</result>
-            <result name="success" type="redirect">listRole.html</result>
+            <result name="success">/WEB-INF/pages/msg.jsp</result>
         </action>
         <action name="editRole" class="roleAction" method="edit">
             <result name="success">/WEB-INF/pages/role/role_edit.jsp</result>
@@ -814,7 +815,7 @@
         <action name="updateRole" class="roleAction" method="update">
             <result name="cancel" type="redirect">editRole.html</result>
             <result name="input">/WEB-INF/pages/role/role_edit.jsp</result>
-            <result name="success" type="redirect">listRole.html</result>
+            <result name="success">/WEB-INF/pages/msg.jsp</result>
         </action>
         <action name="delRole" class="roleAction" method="del">
             <result name="success" type="redirect">listRole.html</result>
@@ -924,7 +925,8 @@
         </action>        
         <action name="initAccountJe" class="accountsAction" method="initAccountJe">
             <result name="success">/WEB-INF/pages/account/msg.jsp</result>
-        </action>                
+        </action>    
+        <action name="checkAccountJe" class="accountsAction" method="checkAccountJe"/>            
         <!-- 账户管理 -->
         
         <!-- 销售收款 -->
