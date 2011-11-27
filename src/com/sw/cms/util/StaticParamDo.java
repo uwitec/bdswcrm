@@ -201,4 +201,14 @@ public class StaticParamDo{
 		return sysSource.getSysMsgExpireDay();
 	}
 	
+	
+	/**
+	 * 取系统限制用户数量
+	 * @return
+	 */
+	public static int getUserNums(){
+		SysSource sysSource = (SysSource)ctx.getBean("sysSource");
+		return sysSource.getSysUserNums();
+	}
+	
 }

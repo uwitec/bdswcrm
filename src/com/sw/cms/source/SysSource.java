@@ -5,6 +5,7 @@ public class SysSource {
 	private String page_size = "0";
 	private String page_size2 = "0";
 	private String expireDay = "7";
+	private String user_nums = "0";
 	
 	/**
 	 * 返回配置文件中的总页数
@@ -14,6 +15,18 @@ public class SysSource {
 		return new Integer(page_size).intValue();
 	}
 	
+	public int getSysUserNums() {
+		if(user_nums != null && !user_nums.equals("")){
+			return new Integer(user_nums).intValue();
+		}else{
+			return 0;
+		}
+	}
+
+	public void setUser_nums(String user_nums) {
+		this.user_nums = user_nums;
+	}
+
 	/**
 	 * 返回配置文件中配置的总页数2
 	 * @return
@@ -56,6 +69,10 @@ public class SysSource {
 
 	public void setExpireDay(String expireDay) {
 		this.expireDay = expireDay;
+	}
+
+	public String getUser_nums() {
+		return user_nums;
 	}
 
 }

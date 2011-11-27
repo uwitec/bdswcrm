@@ -22,6 +22,7 @@ public class AccountsAction extends BaseAction {
 	private String account_id;
 	private double qcje;
 	private String iscs_flag = "0";
+	private double zcje;
 	
 	
 	/**
@@ -116,6 +117,18 @@ public class AccountsAction extends BaseAction {
 		return "success";
 	}
 	
+	
+	/**
+	 * 检查账户金额是否满足支出需求,返回true满足，返回false不满足
+	 */
+	public void checkAccountJe(){
+		if(accountsService.isZhjeXyZero(account_id, zcje)){
+			this.writeStringToResponse("false");
+		}else{
+			this.writeStringToResponse("true");
+		}
+	}
+	
 
 	public List getAccountList() {
 		return accountList;
@@ -201,5 +214,15 @@ public class AccountsAction extends BaseAction {
 
 	public void setIscs_flag(String iscs_flag) {
 		this.iscs_flag = iscs_flag;
+	}
+
+
+	public double getZcje() {
+		return zcje;
+	}
+
+
+	public void setZcje(double zcje) {
+		this.zcje = zcje;
 	}
 }

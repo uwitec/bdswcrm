@@ -107,7 +107,7 @@ public class UserDAO extends JdbcBaseDAO {
 	
 	
 	/**
-	 * 取所有系统用户列表
+	 * 取所有系统有效用户列表
 	 * @return
 	 */
 	public List getAllSysUserList(){

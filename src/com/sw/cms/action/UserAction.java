@@ -69,7 +69,7 @@ public class UserAction extends BaseAction {
 	private String dept = "";
 	private String position = "";
 	private String zzzt = "";
-	private String is_del = "";
+	private String is_del = "0";
 	
 	private String orderName ="";
 	private String orderType ="";
@@ -86,6 +86,18 @@ public class UserAction extends BaseAction {
 	private String paramValue = "";
 	private String jsrTips = "";
 	
+	private int nums = 0;
+	
+	public int getNums() {
+		return nums;
+	}
+
+
+	public void setNums(int nums) {
+		this.nums = nums;
+	}
+
+
 	public String getJsrTips() {
 		return jsrTips;
 	}
@@ -709,6 +721,33 @@ public class UserAction extends BaseAction {
 		}catch(Exception e){
 			log.error("Ajax查询经手人信息出错，错误原因：" + e.getMessage());
 			return "error";
+		}
+	}
+	
+	/**
+	 * 检查用户数量是否超出了限制，返回true超出限制，返回false没有超出限制
+	 */
+	public void checkUserLimit(){
+		try{
+			int sysUserLimit = Constant.SYS_USER_NUMS;
+			if(sysUserLimit == 0){
+				//limit==0不限制用户数
+				this.writeStringToResponse("false");
+			}else{
+				int curUserNums = 0; //当前系统有效用户数量				
+				List userList = userService.getAllSysUserList();
+				if(userList != null) curUserNums = userList.size();
+				
+				if(curUserNums >= sysUserLimit){
+					//超出用户限制
+					this.writeStringToResponse("true");
+				}else{
+					//没有超出限制，可以继续添加用户
+					this.writeStringToResponse("false");
+				}
+			}
+		}catch(Exception e){
+			e.printStackTrace();
 		}
 	}
 	
