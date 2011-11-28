@@ -44,9 +44,22 @@ public class XxfbNbggAction extends BaseAction {
 		if(!end_date.equals("")){
 			con += " and a.pub_date<='" + (end_date + " 23:59:59") + "'";
 		}
-		if(!q_con.equals("")){
-			con += " and (a.title like'%" + q_con + "%' or a.content like '%" + q_con + "%')";
+		
+		q_con = ((q_con.replace("¡¡", " ")).replace(",", "")).replace("£¬", " ");
+		String[] arryCon = q_con.split(" ");
+		String tempCon = "";
+		if(arryCon != null && arryCon.length > 0){
+			con += " and(";
+			for(int i=0;i<arryCon.length;i++){
+				if(tempCon.equals("")){
+					tempCon = "(a.title like'%" + arryCon[i] + "%' or a.content like '%" + arryCon[i] + "%')";
+				}else{
+					tempCon = tempCon + " and (a.title like'%" + arryCon[i] + "%' or a.content like '%" + arryCon[i] + "%')";
+				}
+			}
+			con = con + tempCon + ")";
 		}
+		
 		if(!czr.equals("")){
 			con += " and b.real_name like'%" + czr + "%'";
 		}
