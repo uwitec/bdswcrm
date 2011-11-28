@@ -23,8 +23,12 @@ public class XxfbNbggDAO extends JdbcBaseDAO {
 	 * @param rowsPerPage
 	 * @return
 	 */
-	public Page getNbggList(int curPage, int rowsPerPage){
-		String sql = "select * from xxfb_nbgg where parent_id='0' order by cz_date desc";
+	public Page getNbggList(String con, int curPage, int rowsPerPage){
+		String sql = "select a.* from xxfb_nbgg a left join sys_user b on b.user_id=a.czr where parent_id='0'";
+		if(!con.equals("")){
+			sql = sql + con;
+		}	
+		sql += " order by cz_date desc";
 		return this.getResultByPage(sql, curPage, rowsPerPage,new BeanRowMapper(XxfbNbgg.class));
 	}
 	

@@ -2,7 +2,6 @@ package com.sw.cms.service;
 
 import java.util.List;
 
-import java.util.Map;
 import com.sw.cms.dao.XxfbNbggDAO;
 import com.sw.cms.model.Page;
 import com.sw.cms.model.XxfbNbgg;
@@ -17,8 +16,8 @@ public class XxfbNbggService {
 	 * @param rowsPerPage
 	 * @return
 	 */
-	public Page getNbggList(int curPage, int rowsPerPage){
-		return xxfbNbggDao.getNbggList(curPage, rowsPerPage);
+	public Page getNbggList(String con, int curPage, int rowsPerPage){
+		return xxfbNbggDao.getNbggList(con, curPage, rowsPerPage);
 	}
 	
 	

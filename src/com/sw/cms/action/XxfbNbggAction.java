@@ -24,6 +24,11 @@ public class XxfbNbggAction extends BaseAction {
 	private String content;
 	private String parent_id;
 	
+	private String q_con = "";
+	private String start_date = "";
+	private String end_date = "";
+	private String czr = "";
+	
 	
 	/**
 	 * 取内部公告信息列表
@@ -31,7 +36,21 @@ public class XxfbNbggAction extends BaseAction {
 	 */
 	public String list(){
 		int rowsPerPage = Constant.PAGE_SIZE2;
-		nbggPage = xxfbNbggService.getNbggList(curPage, rowsPerPage);
+		
+		String con = "";
+		if(!start_date.equals("")){
+			con += " and a.pub_date>='" + start_date + "'";
+		}
+		if(!end_date.equals("")){
+			con += " and a.pub_date<='" + (end_date + " 23:59:59") + "'";
+		}
+		if(!q_con.equals("")){
+			con += " and (a.title like'%" + q_con + "%' or a.content like '%" + q_con + "%')";
+		}
+		if(!czr.equals("")){
+			con += " and b.real_name like'%" + czr + "%'";
+		}
+		nbggPage = xxfbNbggService.getNbggList(con, curPage, rowsPerPage);
 		return "success";
 	}
 	
@@ -202,6 +221,46 @@ public class XxfbNbggAction extends BaseAction {
 
 	public void setParent_id(String parentId) {
 		parent_id = parentId;
+	}
+
+
+	public String getQ_con() {
+		return q_con;
+	}
+
+
+	public void setQ_con(String qCon) {
+		q_con = qCon;
+	}
+
+
+	public String getStart_date() {
+		return start_date;
+	}
+
+
+	public void setStart_date(String startDate) {
+		start_date = startDate;
+	}
+
+
+	public String getEnd_date() {
+		return end_date;
+	}
+
+
+	public void setEnd_date(String endDate) {
+		end_date = endDate;
+	}
+
+
+	public String getCzr() {
+		return czr;
+	}
+
+
+	public void setCzr(String czr) {
+		this.czr = czr;
 	}
 
 }

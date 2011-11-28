@@ -72,7 +72,7 @@ public class FirstIndexAction extends BaseAction {
 		user_id = info.getUser_id();
 
 		//内部公告
-		Page page = xxfbNbggService.getNbggList(1, 8);
+		Page page = xxfbNbggService.getNbggList("",1, 8);
 		nbggList = page.getResults();
 
 		//备忘录

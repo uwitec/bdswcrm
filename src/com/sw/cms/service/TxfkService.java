@@ -41,6 +41,13 @@ public class TxfkService {
 	 * @param txfkDescs
 	 */
 	public void updateTxfk(Txfk txfk,List txfkDescs){
+		
+		//判断摊销付款是否已经提价，已提交直接返回
+		Txfk tempTxfk = txfkDao.getTxfk(txfk.getId());
+		if(tempTxfk != null && tempTxfk.getState().equals("已提交")){
+			return;
+		}
+		
 		txfkDao.updateTxfk(txfk, txfkDescs);
 		
 		//如果状态为已提交，则生成相应对账单，修改账户余额
