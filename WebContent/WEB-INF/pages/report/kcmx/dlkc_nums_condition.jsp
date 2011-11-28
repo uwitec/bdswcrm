@@ -71,7 +71,7 @@ List store_list = (List)VS.findValue("store_list");
 		</td>	
 		<td class="a1">是否显示0库存商品</td>
 		<td class="a4">
-			<select name="flag">
+			<select name="flag" style="width:232px" >
 				<option value="是">是</option>
 				<option value="否">否</option>
 			</select>
@@ -80,7 +80,7 @@ List store_list = (List)VS.findValue("store_list");
 	<tr>
 		<td class="a1">是否显示停售商品</td>
 		<td class="a4" >
-			<select name="state">
+			<select name="state" style="width:232px" >
 				<option value="否">否</option>
 				<option value="是">是</option>
 			</select>
