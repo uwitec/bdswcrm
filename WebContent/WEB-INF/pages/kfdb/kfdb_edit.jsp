@@ -387,7 +387,7 @@ if(!msg.equals("")){
 		<td class="a1" width="15%">申请人</td>
 		<td class="a2" width="35%">
 		    <input  id="sqr_text"  type="text"   maxlength="20" style="width:230px"  onblur="setSqrValue();" value="<%=StaticParamDo.getRealNameById(kfdb.getSqr()) %>"/> 
-            <div   id="sqr_tips"  style="position:absolute;left:610px; top:110px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
+            <div   id="sqr_tips"  style="position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
             </div>
 		    <input type="hidden" name="kfdb.sqr" id="sqr" value="<%=kfdb.getSqr()%>"/> 	
 		</td>
@@ -396,7 +396,7 @@ if(!msg.equals("")){
 		<td class="a1" width="15%">经手人</td>
 		<td class="a2" colspan="3">
 		    <input  id="brand"    type="text"   maxlength="20" style="width:230px"  onblur="setValue()" value="<%=StaticParamDo.getRealNameById(kfdb.getJsr()) %>"/> <font color="red">*</font>   
-            <div   id="brandTip"  style="position:absolute;left:146px; top:141px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+            <div   id="brandTip"  style="position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		    <input type="hidden" name="kfdb.jsr" id="fzr" value="<%=kfdb.getJsr()%>"/>
 		</td>
 	</tr>

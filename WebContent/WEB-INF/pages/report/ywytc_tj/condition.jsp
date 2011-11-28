@@ -36,19 +36,19 @@ List deptList = (List)VS.findValue("deptList");
 	</tr>
 	</thead>
 </table>
-<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0" border="1" id="selTable">
+<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0" border="0" id="selTable">
 	<tr>
 		<td class="a1">开始日期</td>
 		<td class="a4">
-			<input type="text" name="start_date" id="start_date" value="<%=DateComFunc.getToday() %>"  class="Wdate" size="30" onFocus="WdatePicker()"></td>
+			<input type="text" name="start_date" id="start_date" value="<%=DateComFunc.getToday() %>"  class="Wdate" style="width:232px" onFocus="WdatePicker()"></td>
 		<td class="a1">结束日期</td>
 		<td class="a4">
-			<input type="text" name="end_date" id="end_date" value="<%=DateComFunc.getToday() %>"  class="Wdate" size="30" onFocus="WdatePicker()"></td>
+			<input type="text" name="end_date" id="end_date" value="<%=DateComFunc.getToday() %>"  class="Wdate" style="width:232px" onFocus="WdatePicker()"></td>
 	</tr>
 	<tr>
 		<td class="a1">部门</td>
 		<td class="a4">
-			<select name="dept_id">
+			<select name="dept_id" style="width:232px">
 				<option value=""></option>
 				<%
 				if(deptList != null &&  deptList.size()>0){
@@ -71,7 +71,7 @@ List deptList = (List)VS.findValue("deptList");
 		</td>	
 		<td class="a1">销售人员</td>
 		<td class="a4">
-		    <input id="brand" type="text" length="20" onblur="setValue()" size="30"/> 
+		    <input id="brand" type="text" length="20" onblur="setValue()" style="width:232px"/> 
             <div id="brandTip"  style="position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		    <input type="hidden" name="user_id" id="fzr"/> 
 		</td>					
@@ -79,7 +79,7 @@ List deptList = (List)VS.findValue("deptList");
 	<tr>
 	  <td class="a1">单据类型</td>
 	  <td class="a4" colspan="3">
-			<select name="dj_type">
+			<select name="dj_type" style="width:232px">
 				<option value=""></option>
 				<option value="零售单">零售单</option>
 				<option value="销售单">销售单</option>

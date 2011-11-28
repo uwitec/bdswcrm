@@ -61,40 +61,40 @@ List userList=(List)VS.findValue("user_list");
 	</tr>
 	</thead>
 </table>
-<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0" border="1" id="selTable">
+<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0" border="0" id="selTable">
 	<tr>
 		<td class="a1">开始日期</td>
 		<td class="a4">
-			<input type="text" name="start_date" id="start_date" value="<%=DateComFunc.getToday() %>" class="Wdate" onFocus="WdatePicker()"></td>
+			<input type="text" name="start_date" id="start_date" value="<%=DateComFunc.getToday() %>" class="Wdate" style="width:232px" onFocus="WdatePicker()"></td>
 		<td class="a1">结束日期</td>
 		<td class="a4">
-			<input type="text" name="end_date" id="end_date" value="<%=DateComFunc.getToday() %>" class="Wdate" onFocus="WdatePicker()"></td>
+			<input type="text" name="end_date" id="end_date" value="<%=DateComFunc.getToday() %>" class="Wdate" style="width:232px" onFocus="WdatePicker()"></td>
 	</tr>
 	<tr>
 		<td class="a1">客户名称</td>
 		<td class="a4">
-		<input type="text" name="clientId" id="client_name" value=""  onblur="setvalues()"  size="30" maxlength="50">
+		<input type="text" name="clientId" id="client_name" value=""  onblur="setvalues()" style="width:232px" maxlength="50">
 		<input type="hidden" name="clientName" id="client_id" value="">
 		<img src="images/select.gif" align="absmiddle" title="选择客户" border="0" onclick="openClientWin();" style="cursor:hand">
 		<div id="clientsTip" style="position:absolute;width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		</td>	
 		<td class="a1" width="15%">联系人</td>
 		<td class="a4" width="35%">
-			<input type="text" name="lxr" id="lxr" value="" size="30"> 
+			<input type="text" name="lxr" id="lxr" value="" style="width:232px"> 
 		</td>			
 	</tr>
 	<tr>
 		<td class="a1">商品名称</td>
 		<td class="a4">
-		<input type="text" name="product_name" id="product_name" value=""  size="30" >
+		<input type="text" name="product_name" id="product_name" value="" style="width:232px">
 		<img src="images/select.gif" align="absmiddle" title="选择商品" border="0" onclick="openWin()" style="cursor:hand">
 	
 		</td>	
 		<td class="a1" width="15%">工程师</td>
     	<td class="a2">	  
-		 <input  id="bian"  type="text"   length="20"  onblur="setvaluess()"  /> 
+		 <input  id="bian"  type="text"   length="20"  onblur="setvaluess()"  style="width:232px" /> 
          <img src="images/select.gif" align="absmiddle" title="选择经手人" border="0" onclick="opengcsWin();" style="cursor:hand">
-          <div   id="bianTip"  style="position:absolute; left:700px; top:115px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
+          <div   id="bianTip"  style="position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
           </div>
 		    <input type="hidden" name="gcs" id="gcs"  /> 
 		</td>			

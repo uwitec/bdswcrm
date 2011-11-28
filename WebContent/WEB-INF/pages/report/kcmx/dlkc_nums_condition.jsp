@@ -39,23 +39,23 @@ List store_list = (List)VS.findValue("store_list");
 	</tr>
 	</thead>
 </table>
-<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0" border="1" id="selTable">
+<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0" border="0" id="selTable">
 	<tr>
 		<td class="a1" width="15%">商品类别</td>
 		<td class="a4" width="35%">
-			<input type="text" name="kind_name" id="kind_name" value="" size="25" onclick="openWin();" readonly>
+			<input type="text" name="kind_name" id="kind_name" value="" size="25" style="width:232px" onclick="openWin();" readonly>
 			<input type="hidden" name="product_kind" id="product_kind" value="">
 			<img src="images/select.gif" align="absmiddle" title="点击选择类别" border="0" onclick="openWin();" style="cursor:hand">
 		</td>	
 		<td class="a1" width="15%">商品名称</td>
 		<td class="a4" width="35%">
-			<input type="text" name="product_name" id="product_name" size="25" value="">
+			<input type="text" name="product_name" id="product_name" style="width:232px" size="25" value="">
 		</td>					
 	</tr>
 	<tr>
 		<td class="a1">仓库名称</td>
 		<td class="a4">
-			<select name="store_id" id="store_id">
+			<select name="store_id" id="store_id" style="width:232px">
 				<option value="">全部</option>
 				<%
 				if(store_list != null && store_list.size()>0){
@@ -87,7 +87,7 @@ List store_list = (List)VS.findValue("store_list");
 		</td>
 		<td class="a1">排序</td>
 		<td class="a4" >
-			<select name="px">
+			<select name="px" style="width:232px">
 				<option value="商品名称" selected="selected">商品名称</option>
 				<option value="分销限价">分销限价</option>
 			</select>

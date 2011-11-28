@@ -39,23 +39,23 @@ List store_list = (List)VS.findValue("store_list");
 	</tr>
 	</thead>
 </table>
-<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0" border="1" id="selTable">
+<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0" border="0" id="selTable">
 	<tr>
 		<td class="a1" width="15%">商品类别</td>
 		<td class="a4" width="35%">
-			<input type="text" name="kind_name" id="kind_name" value="" size="30" onclick="openWin();" readonly>
+			<input type="text" name="kind_name" id="kind_name" value="" size="30" style="width:232px" onclick="openWin();" readonly>
 			<input type="hidden" name="product_kind" id="product_kind" value="">
 			<img src="images/select.gif" align="absmiddle" title="点击选择类别" border="0" onclick="openWin();" style="cursor:hand">
 		</td>	
 		<td class="a1" width="15%">商品名称</td>
 		<td class="a4" width="35%">
-			<input type="text" name="product_name" id="product_name" value="">
+			<input type="text" name="product_name" id="product_name" value="" style="width:232px">
 		</td>					
 	</tr>
 	<tr>
 		<td class="a1">仓库名称</td>
 		<td class="a4">
-			<select name="store_id" id="store_id">
+			<select name="store_id" id="store_id" style="width:232px">
 				<option value="">全部</option>
 				<%
 				if(store_list != null && store_list.size()>0){
@@ -71,7 +71,7 @@ List store_list = (List)VS.findValue("store_list");
 		</td>	
 		<td class="a1">是否显示0库存商品</td>
 		<td class="a4">
-			<select name="flag">
+			<select name="flag" style="width:232px">
 				<option value="是">是</option>
 				<option value="否">否</option>
 			</select>
@@ -80,7 +80,7 @@ List store_list = (List)VS.findValue("store_list");
 	<tr>
 		<td class="a1">是否显示停售商品</td>
 		<td class="a4" colspan="3">
-			<select name="state">
+			<select name="state" style="width:232px">
 				<option value="否">否</option>
 				<option value="是">是</option>
 			</select>

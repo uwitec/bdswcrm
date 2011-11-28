@@ -61,20 +61,33 @@ session.removeAttribute("messages");
 			document.qtzcForm.submit();
 		}else{
 			if(window.confirm("确认支付吗？支付后将不可修改！")){
-				document.qtzcForm.submit();
+
+				var myAjax = new Ajax.Request("checkAccountJe.html",
+						{
+							method:'post',
+							parameters: 'account_id=' + document.getElementById("skzh").value + "&zcje=" + document.getElementById("zcje").value,
+							onComplete: subForm,
+							asynchronous:true
+						});
 			}else{
 				return;
 			}
 		}
-		
-		document.qtzcForm.btnSub.disabled = true;
-		document.qtzcForm.btnSave.disabled = true;
 	}
 
 	
+	function subForm(originalRequest){
+		if(originalRequest.responseText.trim() == "false"){
+			alert("支出账号金额不足，请检查！");
+			return;
+		}else{
+			document.qtzcForm.submit();
+		}
+	}
+	
 	function openAccount(){
 		var destination = "selSkAccount.html";
-		var fea ='width=400,height=200,left=' + (screen.availWidth-400)/2 + ',top=' + (screen.availHeight-200)/2 + ',directories=no,localtion=no,menubar=no,status=yes,toolbar=no,scrollbars=yes,resizeable=no';
+		var fea ='width=400,height=400,left=' + (screen.availWidth-400)/2 + ',top=' + (screen.availHeight-400)/2 + ',directories=no,localtion=no,menubar=no,status=yes,toolbar=no,scrollbars=yes,resizeable=no';
 		
 		window.open(destination,'选择账户',fea);
 	}
@@ -163,7 +176,7 @@ session.removeAttribute("messages");
 	</tr>	
 	<tr>
 		<td class="a1" width="15%">支出账号</td>
-		<td class="a2" width="35%"><input type="text" id="zhname" style="width:232px" name="zhname" value="<%=StaticParamDo.getAccountNameById(StringUtils.nullToStr(qtzc.getZczh())) %>" size="30" readonly>
+		<td class="a2" width="35%"><input type="text" id="zhname" style="width:232px" onclick="openAccount();" name="zhname" value="<%=StaticParamDo.getAccountNameById(StringUtils.nullToStr(qtzc.getZczh())) %>" size="30" readonly>
 		<input type="hidden" id="skzh"  name="qtzc.zczh" value="<%=StringUtils.nullToStr(qtzc.getZczh()) %>"><span style="color:red">*</span>
 		<img src="images/select.gif" align="absmiddle" title="选择账户" border="0" onclick="openAccount();" style="cursor:hand">
 		</td>	

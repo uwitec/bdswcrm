@@ -32,19 +32,19 @@ function submits(){
 	</tr>
 	</thead>
 </table>
-<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0" border="1" id="selTable">
+<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0" border="0" id="selTable">
 	<tr>
 		<td class="a1">开始日期</td>
 		<td class="a4">
-			<input type="text" name="start_date" id="start_date" value="<%=DateComFunc.getToday() %>" class="Wdate" onFocus="WdatePicker()"></td>
+			<input type="text" name="start_date" id="start_date" style="width:232px" value="<%=DateComFunc.getToday() %>" class="Wdate" onFocus="WdatePicker()"></td>
 		<td class="a1">结束日期</td>
 		<td class="a4">
-			<input type="text" name="end_date" id="end_date" value="<%=DateComFunc.getToday() %>" class="Wdate" onFocus="WdatePicker()"></td>
+			<input type="text" name="end_date" id="end_date" style="width:232px" value="<%=DateComFunc.getToday() %>" class="Wdate" onFocus="WdatePicker()"></td>
 	</tr>
 	<tr>
 		<td class="a1">收入类型</td>
 		<td class="a2" colspan="3">
-			<select name="type" id="type">
+			<select name="type" id="type" style="width:232px">
 				<option value=""></option>
 			<%
 			if(srlx != null && srlx.length>0){

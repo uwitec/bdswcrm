@@ -42,26 +42,26 @@ String[] wldwlx = (String[])VS.findValue("wldwlx");
 	</tr>
 	</thead>
 </table>
-<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0" border="1" id="selTable">
+<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0" border="0" id="selTable">
 	<tr>
 		<td class="a1" width="15%">开始日期</td>
 		<td class="a4" width="35%">
-			<input type="text" name="start_date" id="start_date" value="<%=DateComFunc.getToday() %>" size="30" class="Wdate" onFocus="WdatePicker()"></td>
+			<input type="text" name="start_date" id="start_date" value="<%=DateComFunc.getToday() %>" style="width:232px" size="30" class="Wdate" onFocus="WdatePicker()"></td>
 		<td class="a1" width="15%">结束日期</td>
 		<td class="a4" width="35%">
-			<input type="text" name="end_date" id="end_date" value="<%=DateComFunc.getToday() %>" size="30"class="Wdate" onFocus="WdatePicker()"></td>
+			<input type="text" name="end_date" id="end_date" value="<%=DateComFunc.getToday() %>" style="width:232px" size="30"class="Wdate" onFocus="WdatePicker()"></td>
 	</tr>
 	<tr>
 		<td class="a1">客户名称</td>
 		<td class="a4">
-		<input type="text" name="cl" id="client_name" value="" onblur="setClientValue();"  size="30"  maxlength="50">
+		<input type="text" name="cl" id="client_name" value="" onblur="setClientValue();" style="width:232px" size="30"  maxlength="50">
 		<input type="hidden" name="client_name" id="client_id" value="">
 		<div id="clientsTip" style="position:absolute;width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		</td>	
 		<td class="a1">销售人员</td>
 		<td class="a4">
-		    <input  id="brand" type="text"   length="20"  onblur="setValue()" size="30"/> 
-            <div   id="brandTip"  style="position:absolute;left:760px; top:87px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
+		    <input  id="brand" type="text" style="width:232px"  onblur="setValue()" size="30"/> 
+            <div   id="brandTip"  style="position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
             </div>
 		    <input type="hidden" name="xsry_id" id="fzr"  /> 
 		</td>			
@@ -69,7 +69,7 @@ String[] wldwlx = (String[])VS.findValue("wldwlx");
 	<tr>
 		<td class="a1">客户类型</td>
 		<td class="a4">
-		<select name="client_type" id="client_type" style="width:40%">
+		<select name="client_type" id="client_type" style="width:232px">
 				<option value=""></option>
 				<%
 				if(wldwlx != null && wldwlx.length > 0){ 
@@ -84,17 +84,17 @@ String[] wldwlx = (String[])VS.findValue("wldwlx");
 		</td>	
 		<td class="a1">客户经理</td>
 		<td class="a4">
-		    <input type="text" name="khjl" id="khjl"  value="" size="30" > 
+		    <input type="text" name="khjl" id="khjl"  value="" size="30" style="width:232px"> 
 		</td>			
 	</tr>
 	<tr>
 		<td class="a1">单据编号</td>
 		<td class="a4">
-			<input type="text" name="dj_id" id="dj_id" value=""  size="30">
+			<input type="text" name="dj_id" id="dj_id" value=""  size="30" style="width:232px">
 		</td>
 		<td class="a1">是否显示销售额为零客户</td>
 		<td class="a4">
-			<select name="isShowZ">
+			<select name="isShowZ" style="width:232px">
 				<option value="否">否</option>
 				<option value="是">是</option>
 			</select>
@@ -103,13 +103,13 @@ String[] wldwlx = (String[])VS.findValue("wldwlx");
 	<tr>
 		<td class="a1" width="15%">商品类别</td>
 		<td class="a4" width="35%">
-			<input type="text" name="kind_name" id="kind_name" value="" size="30" onclick="openWin();" readonly>
+			<input type="text" name="kind_name" id="kind_name" value="" style="width:232px" size="30" onclick="openWin();" readonly>
 			<input type="hidden" name="product_kind" id="product_kind" value="">
 			<img src="images/select.gif" align="absmiddle" title="点击选择类别" border="0" onclick="openWin();" style="cursor:hand">
 		</td>
 		<td class="a1" width="15%">商品名称</td>
 		<td class="a4" width="35%">
-			<input type="text" name="product_name" id="product_name" value="" size="30">
+			<input type="text" name="product_name" style="width:232px" id="product_name" value="" size="30">
 		</td>										
 	</tr>		
 	<tr height="35">

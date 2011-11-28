@@ -41,19 +41,19 @@ List deptList = (List)VS.findValue("deptList");
 	</tr>
 	</thead>
 </table>
-<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0" border="1" id="selTable">
+<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0" border="0" id="selTable">
 	<tr>
 		<td class="a1">开始日期</td>
 		<td class="a4">
-			<input type="text" name="start_date" id="start_date" value="<%=DateComFunc.getToday() %>"  class="Wdate" size="30" onFocus="WdatePicker()"></td>
+			<input type="text" name="start_date" id="start_date" value="<%=DateComFunc.getToday() %>"  class="Wdate" style="width:232px" onFocus="WdatePicker()"></td>
 		<td class="a1">结束日期</td>
 		<td class="a4">
-			<input type="text" name="end_date" id="end_date" value="<%=DateComFunc.getToday() %>"  class="Wdate" size="30" onFocus="WdatePicker()"></td>
+			<input type="text" name="end_date" id="end_date" value="<%=DateComFunc.getToday() %>"  class="Wdate" style="width:232px" onFocus="WdatePicker()"></td>
 	</tr>
 	<tr>
 		<td class="a1">部门</td>
 		<td class="a4">
-			<select name="dept_id">
+			<select name="dept_id" style="width:232px">
 				<option value=""></option>
 				<%
 				if(deptList != null &&  deptList.size()>0){
@@ -76,7 +76,7 @@ List deptList = (List)VS.findValue("deptList");
 		</td>	
 		<td class="a1">销售人员</td>
 		<td class="a4">
-		    <input id="brand" type="text" length="20" onblur="setValue()" size="30"/> 
+		    <input id="brand" type="text" length="20" onblur="setValue()" style="width:232px"/> 
             <div id="brandTip"  style="position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		    <input type="hidden" name="user_id" id="fzr"/> 
 		</td>					
@@ -84,13 +84,13 @@ List deptList = (List)VS.findValue("deptList");
 	<tr>
 		<td class="a1" width="15%">商品类别</td>
 		<td class="a4" width="35%">
-			<input type="text" name="kind_name" id="kind_name" value="" size="30" onclick="openWin();" readonly>
+			<input type="text" name="kind_name" id="kind_name" value="" style="width:232px" onclick="openWin();" readonly>
 			<input type="hidden" name="product_kind" id="product_kind" value="">
 			<img src="images/select.gif" align="absmiddle" title="点击选择类别" border="0" onclick="openWin();" style="cursor:hand">
 		</td>
 		<td class="a1" width="15%">商品名称/规格</td>
 		<td class="a4" width="35%">
-			<input type="text" name="product_name" id="product_name" size="30" value="">
+			<input type="text" name="product_name" id="product_name" style="width:232px" value="">
 		</td>										
 	</tr>	
 	<tr height="35">

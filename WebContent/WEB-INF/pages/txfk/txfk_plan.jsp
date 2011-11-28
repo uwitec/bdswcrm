@@ -70,7 +70,7 @@
 				strYear++;
 			}
 		}
-		
+		window.opener.document.getElementById("fkje").readOnly = "true";
 		window.close();
 	}	
 </script>

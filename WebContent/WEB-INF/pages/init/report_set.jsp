@@ -33,7 +33,7 @@
 	</tr>
 </table>
 <FONT color="red"><ww:property value="%{msg}"/></FONT>
-<table width="100%"  align="center" border="1" class="chart_info" cellpadding="0" cellspacing="0">
+<table width="100%"  align="center" border="0" class="chart_info" cellpadding="0" cellspacing="0">
 	<tr>
 		<td class="a1">公司名称</td>
 		<td class="a2">

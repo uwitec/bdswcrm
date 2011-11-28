@@ -45,7 +45,7 @@
 	</tr>
 	</thead>
 </table>
-<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0" border="1" id="selTable">
+<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0" border="0" id="selTable">
 	<tr>
 		<td class="a1">开始日期</td>
 		<td class="a4">
@@ -64,7 +64,7 @@
 		<td class="a1">销售人员</td>
 		<td class="a4"> 
 		    <input  id="brand" type="text"   length="20"  onblur="setValue()" size="35"/> 
-            <div   id="brandTip"  style="position:absolute;left:698px; top:85px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
+            <div   id="brandTip"  style="position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
             </div>
 		    <input type="hidden" name="xsry_id" id="fzr"  /> 
 		</td>	

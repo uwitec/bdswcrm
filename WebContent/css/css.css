@@ -23,7 +23,7 @@ font-size: 12px;
 select
 {
 	margin-left:3px;
-	margin-right36px;
+	margin-right:3px;
 }
 textarea
 {
@@ -223,6 +223,7 @@ table.chart_list
 	 background-color: #FFFFFF; 
 	 border-collapse:collapse; 
 	 font-size: 12px;
+	 border-top: hidden;
 	 border-left:solid 1px #D6D7D6;
 	 border-right:solid 1px #D6D7D6;
 	 border-bottom:solid 1px #D6D7D6;

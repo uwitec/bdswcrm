@@ -44,25 +44,25 @@
 	</tr>
 	</thead>
 </table>
-<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0" border="1" id="selTable">
+<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0" border="0" id="selTable">
 	<tr>
 		<td class="a1">开始日期</td>
 		<td class="a4">
-			<input type="text" name="start_date" id="start_date" value="<%=DateComFunc.getToday() %>"  class="Wdate" size="35" onFocus="WdatePicker()"></td>
+			<input type="text" name="start_date" id="start_date" value="<%=DateComFunc.getToday() %>"  class="Wdate" style="width:232px" onFocus="WdatePicker()"></td>
 		<td class="a1">结束日期</td>
 		<td class="a4">
-			<input type="text" name="end_date" id="end_date" value="<%=DateComFunc.getToday() %>"  class="Wdate" size="35" onFocus="WdatePicker()"></td>
+			<input type="text" name="end_date" id="end_date" value="<%=DateComFunc.getToday() %>"  class="Wdate" style="width:232px" onFocus="WdatePicker()"></td>
 	</tr>
 	<tr>
 		<td class="a1">客户名称</td>
 		<td class="a4">
-		<input type="text" name="clientId" id="client_name" value="" onblur="setClientValue();" size="35"  maxlength="50">
+		<input type="text" name="clientId" id="client_name" value="" onblur="setClientValue();" style="width:232px"  maxlength="50">
 		<input type="hidden" name="client_name" id="client_id" value="">
 		<div id="clientsTip" style="position:absolute;width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		</td>	
 		<td class="a1">部门等级</td>
 		<td class="a4">
-			<select name="dj">
+			<select name="dj" style="width:232px">
 				<option value="1">第一级</option>
 				<option value="2">第二级</option>
 				<option value="3">第三级</option>
@@ -73,13 +73,13 @@
 	<tr>
 		<td class="a1" width="15%">商品类别</td>
 		<td class="a4" width="35%">
-			<input type="text" name="kind_name" id="kind_name" value="" size="35" onclick="openWin();" readonly>
+			<input type="text" name="kind_name" id="kind_name" value="" style="width:232px" onclick="openWin();" readonly>
 			<input type="hidden" name="product_kind" id="product_kind" value="">
 			<img src="images/select.gif" align="absmiddle" title="点击选择类别" border="0" onclick="openWin();" style="cursor:hand">
 		</td>
 		<td class="a1" width="15%">商品名称</td>
 		<td class="a4" width="35%">
-			<input type="text" name="product_name" id="product_name" value="" size="35">
+			<input type="text" name="product_name" id="product_name" value="" style="width:232px">
 		</td>										
 	</tr>	
 	<tr height="35">

@@ -50,23 +50,23 @@ List clientsList=(List)VS.findValue("clientsList");
 	</tr>
 	</thead>
 </table>
-<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0" border="1" id="selTable">
+<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0" border="0" id="selTable">
 	<tr>
 		<td class="a1">开始日期</td>
 		<td class="a4">
-			<input type="text" name="start_date" size="30" id="start_date" value="<%=DateComFunc.getToday() %>"  class="Wdate" onFocus="WdatePicker()"></td>
+			<input type="text" name="start_date" style="width:232px" id="start_date" value="<%=DateComFunc.getToday() %>"  class="Wdate" onFocus="WdatePicker()"></td>
 		<td class="a1">结束日期</td>
 		<td class="a4">
-			<input type="text" name="end_date" size="30" id="end_date" value="<%=DateComFunc.getToday() %>"  class="Wdate" onFocus="WdatePicker()"></td>
+			<input type="text" name="end_date" style="width:232px" id="end_date" value="<%=DateComFunc.getToday() %>"  class="Wdate" onFocus="WdatePicker()"></td>
 	</tr>
 	<tr>
 		<td class="a1">单据编号</td>
 		<td class="a4">
-			<input type="text" name="dj_id" id="dj_id" value="" size="30">
+			<input type="text" name="dj_id" id="dj_id" value="" style="width:232px">
 		</td>
 		<td class="a1">客户名称</td>
 		<td class="a4">
-			<input type="text" name="client_name" id="client_name" value="" onblur="setClientValue();"  size="30"  maxlength="50">
+			<input type="text" name="client_name" id="client_name" value="" onblur="setClientValue();" style="width:232px" maxlength="50">
 			<input type="hidden" name="cl " id="client_id" value="">
 			<div id="clientsTip" style="position:absolute;width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		</td>	

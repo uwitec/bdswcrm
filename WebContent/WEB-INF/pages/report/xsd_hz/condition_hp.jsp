@@ -36,31 +36,31 @@
 	</tr>
 	</thead>
 </table>
-<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0" border="1" id="selTable">
+<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0" border="0" id="selTable">
 	<tr>
 		<td class="a1">开始日期</td>
 		<td class="a2">
-			<input type="text" name="start_date" size="25" id="start_date" value="<%=DateComFunc.getToday() %>"  class="Wdate" onFocus="WdatePicker()"></td>
+			<input type="text" name="start_date" size="25" id="start_date" value="<%=DateComFunc.getToday() %>" style="width:232px"  class="Wdate" onFocus="WdatePicker()"></td>
 		<td class="a1">结束日期</td>
 		<td class="a2">
-			<input type="text" name="end_date" size="25" id="end_date" value="<%=DateComFunc.getToday() %>"  class="Wdate" onFocus="WdatePicker()"></td>
+			<input type="text" name="end_date" size="25" id="end_date" value="<%=DateComFunc.getToday() %>" style="width:232px"  class="Wdate" onFocus="WdatePicker()"></td>
 	</tr>
 	<tr>
 		<td class="a1" width="15%">商品类别</td>
 		<td class="a2" width="35%">
-			<input type="text" name="kind_name" id="kind_name" value="" size="25" onclick="openWin();" readonly>
+			<input type="text" name="kind_name" id="kind_name" value="" size="25" style="width:232px" onclick="openWin();" readonly>
 			<input type="hidden" name="productKind" id="product_kind" value="">
 			<img src="images/select.gif" align="absmiddle" title="点击选择类别" border="0" onclick="openWin();" style="cursor:hand">
 		</td>	
 		<td class="a1" width="15%">商品名称</td>
 		<td class="a2" width="35%">
-			<input type="text" name="product_name" id="product_name" value="" size="25">
+			<input type="text" name="product_name" id="product_name" value="" style="width:232px" size="25">
 		</td>		
 	</tr>
 	<tr>		
 		<td class="a1">商品规格</td>
 		<td class="a2" colspan="3">
-			<input type="text" name="product_xh" id="product_xh" value="" size="25">	
+			<input type="text" name="product_xh" id="product_xh" value="" style="width:232px" size="25">	
 		</td>
 	</tr>		
 	<tr height="35">

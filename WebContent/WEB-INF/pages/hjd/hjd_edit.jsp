@@ -324,7 +324,7 @@ session.removeAttribute("messages");
 		<td class="a1" width="15%">经手人</td>
 		<td class="a2" width="35%">
 		    <input  id="brand"    type="text"   length="20"  onblur="setValue()" value="<%=StaticParamDo.getRealNameById(hjd.getJsr()) %>"/>   
-            <div   id="brandTip"  style="position:absolute;left:146px; top:141px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+            <div   id="brandTip"  style="position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		    <input type="hidden" name="hjd.jsr" id="fzr" value="<%=hjd.getJsr()%>"/> <font color="red">*</font>	
 		</td>
 	</tr>

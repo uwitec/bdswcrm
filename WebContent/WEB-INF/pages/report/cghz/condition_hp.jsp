@@ -42,25 +42,25 @@
 	</tr>
 	</thead>
 </table>
-<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0" border="1" id="selTable">
+<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0" border="0" id="selTable">
 	<tr>
 		<td class="a1">开始日期</td>
 		<td class="a4">
-			<input type="text" name="start_date" id="start_date" size="30" value="<%=DateComFunc.getToday() %>"  class="Wdate" onFocus="WdatePicker()"></td>
+			<input type="text" name="start_date" id="start_date" style="width:232px" value="<%=DateComFunc.getToday() %>"  class="Wdate" onFocus="WdatePicker()"></td>
 		<td class="a1">结束日期</td>
 		<td class="a4">
-			<input type="text" name="end_date" id="end_date" size="30" value="<%=DateComFunc.getToday() %>"  class="Wdate" onFocus="WdatePicker()"></td>
+			<input type="text" name="end_date" id="end_date" style="width:232px" value="<%=DateComFunc.getToday() %>"  class="Wdate" onFocus="WdatePicker()"></td>
 	</tr>
 	<tr>
 		<td class="a1">客户名称</td>
 		<td class="a4">
-		    <input type="text" name="clientId" id="client_name" value=""  onblur="setClientValue();"  size="30" maxlength="50">
+		    <input type="text" name="clientId" id="client_name" value=""  onblur="setClientValue();" style="width:232px" maxlength="50">
 		    <input type="hidden" name="clientName" id="client_id" value="">
 		    <div id="clientsTip" style="position:absolute;width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		</td>	
 		<td class="a1" width="15%">商品类别</td>
 		<td class="a4" width="35%">
-			<input type="text" name="kind_name" id="kind_name" value="" size="30" onclick="openWin();" readonly>
+			<input type="text" name="kind_name" id="kind_name" value="" style="width:232px" onclick="openWin();" readonly>
 			<input type="hidden" name="productKind" id="product_kind" value="">
 			<img src="images/select.gif" align="absmiddle" title="点击选择类别" border="0" onclick="openWin();" style="cursor:hand">
 		</td>			
@@ -68,23 +68,23 @@
 	<tr>
 		<td class="a1">商品名称</td>
 		<td class="a4">
-			<input type="text" name="product_name" id="product_name" value="" size="30">
+			<input type="text" name="product_name" id="product_name" value="" style="width:232px">
 		</td>
 		<td class="a1">商品规格</td>
 		<td class="a4">
-			<input type="text" name="product_xh" id="product_xh" value="" size="30">	
+			<input type="text" name="product_xh" id="product_xh" value="" style="width:232px">	
 		</td>
 	</tr>
 	<tr>
 		<td class="a1">采购人员</td>
 		<td class="a4">
-		    <input  id="brand" type="text"   length="20"  onblur="setValue()"   size="30"> 
-            <div   id="brandTip"  style="position:absolute;left:700px; top:85px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+		    <input  id="brand" type="text"   length="20"  onblur="setValue()" style="width:232px"> 
+            <div   id="brandTip"  style="position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		    <input type="hidden" name="cgry_id" id="fzr"/>
 		</td>
 		<td class="a1">商品属性</td>
 	    <td class="a4">
-			<select name="product_prop">
+			<select name="product_prop" style="width:232px">
 				<option value=""></option>
 				<option value="1">库存商品</option>
 				<option value="2">服务商品</option>				

@@ -386,7 +386,7 @@ var allCount = <%=counts %>;
 		<td class="a2" width="35%">
 		 <input id="brand" type="text" ength="20" onblur="setValue();" value="<%=StaticParamDo.getRealNameById(StringUtils.nullToStr(bxd.getJsr())) %>"> 
          <!--<img src="images/select.gif" align="absmiddle" title="选择经手人" border="0" onclick="openywyWin();" style="cursor:hand">
-          --><div   id="brandTip"  style="position:absolute;left:610px; top:85px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
+          --><div   id="brandTip"  style="position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
           </div>
 		  <input type="hidden" name="bxd.jsr" id="fzr" value="<%=bxd.getJsr()%>"/> <font color="red">*</font>	
 		</td>

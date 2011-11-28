@@ -127,7 +127,7 @@ String[] pzlx = (String[])VS.findValue("pzlx");
 		<td class="a1" width="15%">经手人</td>
 		<td class="a2">
 		    <input  id="brand"    type="text"   length="20"  onblur="setValue()" /> 
-            <div   id="brandTip"  style="position:absolute;left:96px; top:112px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+            <div   id="brandTip"  style="position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		    <input type="hidden" name="pz.jsr" id="fzr"  /> <font color="red">*</font>
 		</td>	
 		<td class="a1" width="15%">往来单位</td>

@@ -150,7 +150,7 @@ if(msg != null && msg.size() > 0){
 		<td class="a1" width="15%">经手人</td>
 		<td class="a2"> 
 		 <input  id="brand"    type="text"   length="20"  onblur="setValue()" /> 
-          <div   id="brandTip"  style="position:absolute;left:383px; top:111px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
+          <div   id="brandTip"  style="position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
           </div>
 		    <input type="hidden" name="nbzz.jsr" id="fzr"  /><span style="color:red">*</span>
 		</td>		

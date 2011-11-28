@@ -188,7 +188,7 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 		<td class="a1" width="15%">经手人</td>
 		<td class="a2" width="35%">
 		    <input  id="brand"    type="text" style="width:200px"   onblur="setValue()" value="<%=StaticParamDo.getRealNameById(yufuToYingfu.getJsr())%>"/>  <font color="red">*</font>
-            <div   id="brandTip"  style="position:absolute;left:612px; top:85px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+            <div   id="brandTip"  style="position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		    <input type="hidden" name="yufuToYingfu.jsr" id="fzr"  value="<%=yufuToYingfu.getJsr()%>"/> 
 		</td>				
 	</tr>

@@ -49,19 +49,19 @@ List deptList = (List)VS.findValue("deptList");
 	</tr>
 	</thead>
 </table>
-<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0" border="1" id="selTable">
+<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0" border="0" id="selTable">
 	<tr>
 		<td class="a1">开始日期</td>
 		<td class="a4">
-			<input type="text" name="start_date" id="start_date" value="<%=DateComFunc.getToday() %>"  class="Wdate" onFocus="WdatePicker()"></td>
+			<input type="text" name="start_date" id="start_date" value="<%=DateComFunc.getToday() %>"  class="Wdate" style="width:232px" onFocus="WdatePicker()"></td>
 		<td class="a1">结束日期</td>
 		<td class="a4">
-			<input type="text" name="end_date" id="end_date" value="<%=DateComFunc.getToday() %>"  class="Wdate" onFocus="WdatePicker()"></td>
+			<input type="text" name="end_date" id="end_date" value="<%=DateComFunc.getToday() %>"  class="Wdate" style="width:232px" onFocus="WdatePicker()"></td>
 	</tr>
 	<tr>
 		<td class="a1">部门</td>
 		<td class="a4">
-			<select name="dept">
+			<select name="dept" style="width:232px">
 				<option value=""></option>
 				<%
 				if(deptList != null &&  deptList.size()>0){
@@ -84,8 +84,8 @@ List deptList = (List)VS.findValue("deptList");
 		</td>	
 		<td class="a1">销售人员</td>
 		<td class="a4">
-		    <input  id="brand" type="text" length="20" onblur="setValue()"  /> 
-            <div   id="brandTip"  style="position:absolute;left:720px; top:85px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
+		    <input  id="brand" type="text" style="width:232px" onblur="setValue()"  /> 
+            <div   id="brandTip"  style="position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
             </div>
 		    <input type="hidden" name="xsry" id="fzr"  /> 
 		</td>	
@@ -93,7 +93,7 @@ List deptList = (List)VS.findValue("deptList");
 	<tr>
 		<td class="a1">客户名称</td>
 		<td class="a4">
-			<input type="text" name="clientId" id="client_name" value=""  onblur="setClientValue();" size="30"   maxlength="50">
+			<input type="text" name="clientId" id="client_name" value=""  onblur="setClientValue();" style="width:232px"   maxlength="50">
 			<input type="hidden" name="client_name" id="client_id" value="">
 			<div id="clientsTip" style="position:absolute;width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		</td>		
@@ -107,7 +107,7 @@ List deptList = (List)VS.findValue("deptList");
 	<tr>
 		<td class="a1">货品类别等级</td>
 		<td class="a4" colspan="3">
-			<select name="dj">
+			<select name="dj" style="width:232px">
 				<option value="1">第一级</option>
 				<option value="2">第二级</option>
 				<option value="3">第三级</option>

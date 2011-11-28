@@ -57,14 +57,14 @@ function openClientWin(){
 	</tr>
 	</thead>
 </table>
-<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0" border="1" id="selTable">
+<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0" border="0" id="selTable">
 	<tr>
 		<td class="a1" width="15%">起始日期</td>
 		<td class="a4" width="35%">
-			<input type="text" name="start_date" id="start_date" value="<%=DateComFunc.getToday() %>" class="Wdate" onFocus="WdatePicker()"></td>
+			<input type="text" name="start_date" id="start_date" value="<%=DateComFunc.getToday() %>" style="width:232px" class="Wdate" onFocus="WdatePicker()"></td>
 		<td class="a1">供应商名称</td>
 		<td class="a4">
-		<input type="text" name="cl" id="client_name" value="" onblur="setClientValue();"  size="30"  maxlength="50">
+		<input type="text" name="cl" id="client_name" value="" onblur="setClientValue();"  style="width:232px" size="30"  maxlength="50">
 		<input type="hidden" name="client_name" id="client_id" value="">
 		<div id="clientsTip" style="position:absolute;width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		</td>				
@@ -72,7 +72,7 @@ function openClientWin(){
 	<tr>
 		<td class="a1">客户经理</td>
 		<td class="a4">
-		    <input  id="brand" type="text" length="20"  onblur="setValue()"  /> 
+		    <input  id="brand" type="text" length="20"  onblur="setValue()"   style="width:232px"/> 
             <div id="brandTip" style="position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		    <input type="hidden" name="khjl" id="fzr"  /> 
 		</td>	

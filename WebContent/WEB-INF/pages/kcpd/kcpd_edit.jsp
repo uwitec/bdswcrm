@@ -326,7 +326,7 @@ if(msg != null && msg.size() > 0){
 		<td class="a1" width="15%">盘点人</td>
 		<td class="a2" width="35%">
 		    <input  id="brand"    type="text"   length="20"  onblur="setValue()" style="width:230px"  value="<%=StaticParamDo.getRealNameById(kcpd.getPdr())%>"/> <font color="red">*</font>	 
-            <div   id="brandTip"  style="position:absolute;left:515px; top:82px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+            <div   id="brandTip"  style="position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		    <input type="hidden" name="kcpd.pdr" id="fzr" value="<%= kcpd.getPdr()%>" />
 		</td>		
 	</tr>

@@ -44,15 +44,26 @@
 			document.txfkForm.submit();
 		}else{
 			if(window.confirm("确认提交吗？提交后将不可修改！")){
-				document.txfkForm.submit();
+				var myAjax = new Ajax.Request("checkAccountJe.html",
+						{
+							method:'post',
+							parameters: 'account_id=' + document.getElementById("fkzh").value + "&zcje=" + document.getElementById("fkje").value,
+							onComplete: subForm,
+							asynchronous:true
+						});
 			}else{
 				return;
 			}
 		}
-		
-		document.txfkForm.btnSub.disabled = true;
-		document.txfkForm.btnSave.disabled = true;
-		
+	}
+
+	function subForm(originalRequest){
+		if(originalRequest.responseText.trim() == "false"){
+			alert("支付账户金额不足，请检查！");
+			return;
+		}else{
+			document.txfkForm.submit();
+		}
 	}
 		
     function addTr(){
@@ -66,16 +77,16 @@
         
         var otd1 = document.createElement("td");
         otd1.className = "a2";
-        otd1.innerHTML = '<input type="text" name="txfkDescs[' + curId + '].txrq" id="txrq_' + curId + '" value="" theme="simple" readonly="true" size="15"/>';
+        otd1.innerHTML = '<input type="text" name="txfkDescs[' + curId + '].txrq" id="txrq_' + curId + '" value="" theme="simple" readonly="true" style="width:90%"/>';
        
         var otd2 = document.createElement("td");
         otd2.className = "a2";
-        otd2.innerHTML = '<input type="text" name="txfkDescs[' + curId + '].je" id="je_' + curId + '" value="" theme="simple" size="15"/>';
+        otd2.innerHTML = '<input type="text" name="txfkDescs[' + curId + '].je" id="je_' + curId + '" value="" theme="simple" style="width:90%"/>';
         
         
         var otd3 = document.createElement("td");
         otd3.className = "a2";
-        otd3.innerHTML = '<input type="text"  name="txfkDescs[' + curId + '].remark" id="remark_' + curId + '" value="" theme="simple" size="50"/>';        
+        otd3.innerHTML = '<input type="text"  name="txfkDescs[' + curId + '].remark" id="remark_' + curId + '" value="" theme="simple" style="width:90%"/>';        
         
         otr.appendChild(otd0); 
         otr.appendChild(otd1); 
@@ -85,18 +96,10 @@
 	
 	function openAccount(){
 		var destination = "selAccount.html";
-		var fea ='width=400,height=300,left=' + (screen.availWidth-400)/2 + ',top=' + (screen.availHeight-300)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		var fea ='width=400,height=400,left=' + (screen.availWidth-400)/2 + ',top=' + (screen.availHeight-400)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
 		window.open(destination,'选择账户',fea);		
 	}
-	
-	function openywyWin()
-	{
-	   var destination = "selLsEmployee.html";
-		var fea ='width=800,height=500,left=' + (screen.availWidth-800)/2 + ',top=' + (screen.availHeight-500)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
-		
-		window.open(destination,'选择经手人',fea);	
-	}	
 	
 	function opePlan(){
 		if(!InputValid(document.getElementById("fkje"),1,"float",1,-9999999999,999999999,"付款金额")){	
@@ -105,7 +108,7 @@
 		}
 	
 		var destination = "planTxfk.html?id=" + document.getElementById("id").value + "&fkje=" + document.getElementById("fkje").value;
-		var fea ='width=300,height=240,left=' + (screen.availWidth-300)/2 + ',top=' + (screen.availHeight-300)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=no,resizeable=no';
+		var fea ='width=500,height=400,left=' + (screen.availWidth-500)/2 + ',top=' + (screen.availHeight-400)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=no,resizeable=no';
 		
 		window.open(destination,'选择账户',fea);
 	}	
@@ -123,22 +126,22 @@
 	<tr>
 		<td class="a1" width="15%">编号</td>
 		<td class="a2" width="35%">
-			<ww:textfield name="txfk.id" id="id" value="%{txfk.id}" theme="simple" readonly="true"/><span style="color:red">*</span>
+			<ww:textfield name="txfk.id" id="id" value="%{txfk.id}" theme="simple" readonly="true"  cssStyle="width:232px"/><span style="color:red">*</span>
 		</td>
 		<td class="a1" width="15%">付款日期</td>
 		<td class="a2" width="35%">
-			<input type="text" name="txfk.fk_date" id="fk_date" value="<ww:property value="%{txfk.fk_date}"/>" class="Wdate" onFocus="WdatePicker()"/>&nbsp;	
+			<input type="text" name="txfk.fk_date" id="fk_date" value="<ww:property value="%{txfk.fk_date}"/>" class="Wdate"  style="width:232px" onFocus="WdatePicker()"/>&nbsp;	
 			<span style="color:red">*</span>
 		</td>				
 	</tr>
 	<tr>
 		<td class="a1" width="15%">相关客户</td>
 		<td class="a2" width="35%">
-			<ww:textfield name="txfk.client_name" id="client_name" value="%{txfk.client_name}" theme="simple" size="30" maxLength="100"/><span style="color:red">*</span>
+			<ww:textfield name="txfk.client_name" id="client_name" value="%{txfk.client_name}" theme="simple"  cssStyle="width:232px" maxLength="100"/><span style="color:red">*</span>
 		</td>	
 		<td class="a1" width="15%">经手人</td>
 		<td class="a2" width="35%">
-			<ww:textfield name="brand" id="brand" onblur="setValue()" value="%{getUserRealName(txfk.getJsr())}" theme="simple"></ww:textfield>
+			<ww:textfield name="brand" id="brand" onblur="setValue()" value="%{getUserRealName(txfk.getJsr())}"  cssStyle="width:232px" theme="simple"></ww:textfield>
             <div id="brandTip" style="position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		    <ww:hidden name="txfk.jsr" id="fzr" value="%{txfk.jsr}" theme="simple"></ww:hidden><font color="red">*</font>		
 		</td>						
@@ -146,17 +149,17 @@
 	<tr>
 		<td class="a1" width="15%">支付类型</td>
 		<td class="a2" width="35%">
-			<ww:select name="txfk.fklx" id="fklx" theme="simple" list="%{zclxArray}"  emptyOption="true" /><span style="color:red">*</span>
+			<ww:select name="txfk.fklx" id="fklx" theme="simple" list="%{zclxArray}"  emptyOption="true"  cssStyle="width:232px"/><span style="color:red">*</span>
 		</td>
 		<td class="a1" width="15%">付款金额</td>
 		<td class="a2" width="35%">
-			<ww:textfield name="txfk.fkje" id="fkje" value="%{getText('global.format.double',{txfk.fkje})}" theme="simple" /><span style="color:red">*</span>
+			<ww:textfield name="txfk.fkje" id="fkje" value="%{getText('global.format.double',{txfk.fkje})}" theme="simple" cssStyle="width:232px"/><span style="color:red">*</span>
 		</td>						
 	</tr>
 	<tr>
 		<td class="a1" width="15%">支付账户</td>
 		<td class="a2" colspan="3">
-			<ww:textfield id="zhname"  name="zhname" value="%{getAccountName(txfk.account_id)}" theme="simple" size="30" readonly="true"/>
+			<ww:textfield id="zhname"  name="zhname" value="%{getAccountName(txfk.account_id)}" onclick="openAccount();" theme="simple"  cssStyle="width:232px" readonly="true"/>
 			<ww:hidden name="txfk.account_id" id="fkzh" value="%{txfk.account_id}" theme="simple"/>
 			<img src="images/select.gif" align="absmiddle" title="选择账户" border="0" onclick="openAccount();" style="cursor:hand"><span style="color:red">*</span>
 		</td>
@@ -184,18 +187,18 @@
 	<ww:iterator value="%{txfkDescs}" status="li">
 	<tr>
 		<td class="a2"><ww:property value="#li.count"/></td>
-		<td class="a2"><ww:textfield name='txfkDescs[%{#li.count-1}].txrq' id='txrq_%{#li.count-1}' value="%{txrq}" theme="simple" size="15" /></td>
-		<td class="a2"><ww:textfield name='txfkDescs[%{#li.count-1}].je' id='je_%{#li.count-1}' value="%{getText('global.format.double',{je})}" theme="simple" size="15" /></td>
-		<td class="a2"><ww:textfield name='txfkDescs[%{#li.count-1}].remark' id='remark_%{#li.count-1}' value="%{remark}" theme="simple" size="50" /></td>
+		<td class="a2"><ww:textfield name='txfkDescs[%{#li.count-1}].txrq' id='txrq_%{#li.count-1}' value="%{txrq}" theme="simple" cssStyle="width:90%"/></td>
+		<td class="a2"><ww:textfield name='txfkDescs[%{#li.count-1}].je' id='je_%{#li.count-1}' value="%{getText('global.format.double',{je})}" theme="simple"  cssStyle="width:90%"/></td>
+		<td class="a2"><ww:textfield name='txfkDescs[%{#li.count-1}].remark' id='remark_%{#li.count-1}' value="%{remark}" theme="simple"  cssStyle="width:90%"/></td>
 	</tr>	
 	</ww:iterator>
 	</ww:if>	
 	<ww:else>
 	<tr>
 		<td class="a2">1</td>
-		<td class="a2"><ww:textfield name="txfkDescs[0].txrq" id="txrq_0" value="" theme="simple"  readonly="true" size="15" /></td>
-		<td class="a2"><ww:textfield name="txfkDescs[0].je" id="je_0" value="" theme="simple" size="15" /></td>
-		<td class="a2"><ww:textfield name="txfkDescs[0].remark" id="remark_0" value="" theme="simple" size="50" /></td>
+		<td class="a2"><ww:textfield name="txfkDescs[0].txrq" id="txrq_0" value="" theme="simple"  readonly="true" cssStyle="width:90%"/></td>
+		<td class="a2"><ww:textfield name="txfkDescs[0].je" id="je_0" value="" theme="simple" cssStyle="width:90%"/></td>
+		<td class="a2"><ww:textfield name="txfkDescs[0].remark" id="remark_0" value="" theme="simple" cssStyle="width:90%"/></td>
 	</tr>	
 	</ww:else>	
 </table>

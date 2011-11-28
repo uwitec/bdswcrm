@@ -38,19 +38,19 @@
 	</tr>
 	</thead>
 </table>
-<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0" border="1" id="selTable">
+<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0" border="0" id="selTable">
 	<tr>
 		<td class="a1" width="15%">开始日期</td>
 		<td class="a4" width="35%">
-			<input type="text" name="start_date" id="start_date" value="<%=DateComFunc.getToday() %>"  class="Wdate" size="30" onFocus="WdatePicker()"></td>
+			<input type="text" name="start_date" id="start_date" value="<%=DateComFunc.getToday() %>"  class="Wdate" style="width:232px" onFocus="WdatePicker()"></td>
 		<td class="a1" width="15%">结束日期</td>
 		<td class="a4" width="35%">
-			<input type="text" name="end_date" id="end_date" value="<%=DateComFunc.getToday() %>"  class="Wdate" size="30" onFocus="WdatePicker()"></td>
+			<input type="text" name="end_date" id="end_date" value="<%=DateComFunc.getToday() %>"  class="Wdate" style="width:232px" onFocus="WdatePicker()"></td>
 	</tr>
 	<tr>
 		<td class="a1">客户名称</td>
 		<td class="a4">
-			<input type="text" name="client_name" id="client_name" value=""  onblur="setClientValue();" size="30"   maxlength="50">
+			<input type="text" name="client_name" id="client_name" value=""  onblur="setClientValue();" style="width:232px" maxlength="50">
 			<input type="hidden" name="clientId" id="client_id" value="">
 			<div id="clientsTip" style="position:absolute;width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>			
 		</td>	
@@ -63,8 +63,8 @@
 	<tr>
 		<td class="a1">销售人员</td>
 		<td class="a4">
-		    <input  id="brand" type="text"   length="20" size="30"onblur="setValue()"  /> 
-            <div   id="brandTip"  style="position:absolute;left:109px; top:111px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
+		    <input  id="brand" type="text"   length="20" style="width:232px" onblur="setValue()"  /> 
+            <div   id="brandTip"  style="position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
             </div>
 		    <input type="hidden" name="xsry_id" id="fzr"  /> 
 		</td>	
@@ -78,11 +78,11 @@
 	<tr>
 		<td class="a1">单据编号</td>
 		<td class="a4">
-			<input type="text" name="dj_id" id="dj_id" value="" size="30">
+			<input type="text" name="dj_id" id="dj_id" value="" style="width:232px">
 		</td>
 		<td class="a1">显示销量为0业务员</td>
 		<td class="a4">
-			<select name="isShowZ">
+			<select name="isShowZ" style="width:232px">
 				<option value="否">否</option>
 				<option value="是">是</option>
 			</select>

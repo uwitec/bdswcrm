@@ -30,11 +30,11 @@ List productKindList = (List)VS.findValue("productKindList");
 	</tr>
 	</thead>
 </table>
-<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0" border="1" id="selTable">
+<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0" border="0" id="selTable">
 	<tr>
 		<td class="a1">商品类别</td>
 		<td class="a4">
-			<select name="product_kind">
+			<select name="product_kind" style="width:232px">
 				<option value=""></option>
 				<%
 				if(productKindList != null &&  productKindList.size()>0){
@@ -55,13 +55,13 @@ List productKindList = (List)VS.findValue("productKindList");
 		</td>	
 		<td class="a1">商品名称</td>
 		<td class="a4">
-			<input type="text" name="product_name" id="product_name" value="">
+			<input type="text" name="product_name" style="width:232px" id="product_name" value="">
 		</td>					
 	</tr>
 	<tr>
 		<td class="a1">商品规格</td>
 		<td class="a4">
-			<input type="text" name="product_xh" id="product_xh" value="">
+			<input type="text" name="product_xh" style="width:232px" id="product_xh" value="">
 		</td>				
 	</tr>
 	<tr height="35">

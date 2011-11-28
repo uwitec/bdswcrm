@@ -47,26 +47,26 @@ function submits()
 	</tr>
 	</thead>
 </table>
-<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0" border="1" id="selTable">
+<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0" border="0" id="selTable">
 	<tr>
 		<td class="a1">开始日期</td>
 		<td class="a4">
-			<input type="text" name="start_date" id="start_date" value="<%=DateComFunc.getToday() %>" class="Wdate" onFocus="WdatePicker()"></td>
+			<input type="text" name="start_date" id="start_date" value="<%=DateComFunc.getToday() %>" style="width:232px" class="Wdate" onFocus="WdatePicker()"></td>
 		<td class="a1">结束日期</td>
 		<td class="a4">
-			<input type="text" name="end_date" id="end_date" value="<%=DateComFunc.getToday() %>" class="Wdate" onFocus="WdatePicker()"></td>
+			<input type="text" name="end_date" id="end_date" value="<%=DateComFunc.getToday() %>" style="width:232px" class="Wdate" onFocus="WdatePicker()"></td>
 	</tr>
 	<tr>
 		<td class="a1">客户名称</td>
 		<td class="a4">
-			<input type="text" name="client_name" id="client_name" value=""  onblur="setClientValue();" size="30"   maxlength="50">
+			<input type="text" name="client_name" id="client_name" value="" style="width:232px"  onblur="setClientValue();" size="30"   maxlength="50">
 			<input type="hidden" name="clientId" id="client_id" value="">
 			<div id="clientsTip" style="position:absolute;width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>						
 		</td>
 		<td class="a1">经手人</td>
 		<td class="a4">
-		    <input  id="brand" type="text"   length="20"  onblur="setValue()"  /> 
-            <div   id="brandTip"  style="position:absolute;left:685px; top:85px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
+		    <input  id="brand" type="text" style="width:232px" onblur="setValue()"  /> 
+            <div   id="brandTip"  style="position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
             </div>
 		    <input type="hidden" name="jsr" id="fzr"  /> 
 		</td>		
@@ -74,8 +74,8 @@ function submits()
 	<tr>
 		<td class="a1">收款账户</td>
 		<td class="a4">
-			<select name="account_id">
-				<option value="">----请选择-----</option>
+			<select name="account_id" style="width:232px">
+				<option value=""></option>
 				<%
 				if(accountList != null &&  accountList.size()>0){
 					for(int i=0;i<accountList.size();i++){

@@ -137,7 +137,7 @@ List  clinetsFollowList=(List)VS.findValue("clientsFollow");
 	<tr>
 	  <td colspan="2">
 	    <div id="linkmanid" style="display: ">
-	       <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0" border="1" id="selTable1">
+	       <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0" border="0" id="selTable1">
 	        <thead>
 	          <tr>
 	           <td width="15%">联系人</td>
@@ -186,7 +186,7 @@ List  clinetsFollowList=(List)VS.findValue("clientsFollow");
 	<tr>
 	  <td colspan="2">
 	    <div id="followid" style="display: ">
-	       <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0" border="1" id="selTable2">
+	       <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0" border="0" id="selTable2">
 	        <thead>
 	          <tr>
 	           <td width="5%">操作</td>

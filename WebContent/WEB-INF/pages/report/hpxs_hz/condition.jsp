@@ -60,25 +60,25 @@ String[] arryClientType = (String[])VS.findValue("arryClientType");
 	</tr>
 	</thead>
 </table>
-<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0" border="1" id="selTable">
+<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0" border="0" id="selTable">
 	<tr>
 		<td class="a1">开始日期</td>
 		<td class="a4">
-			<input type="text" name="start_date" id="start_date" value="<%=DateComFunc.getToday() %>"  class="Wdate" size="35" onFocus="WdatePicker()"></td>
+			<input type="text" name="start_date" id="start_date" value="<%=DateComFunc.getToday() %>"  class="Wdate" style="width:232px" onFocus="WdatePicker()"></td>
 		<td class="a1">结束日期</td>
 		<td class="a4">
-			<input type="text" name="end_date" id="end_date" value="<%=DateComFunc.getToday() %>"  class="Wdate" size="35" onFocus="WdatePicker()"></td>
+			<input type="text" name="end_date" id="end_date" value="<%=DateComFunc.getToday() %>"  class="Wdate" style="width:232px" onFocus="WdatePicker()"></td>
 	</tr>
 	<tr>
 		<td class="a1">客户名称</td>
 		<td class="a4">
-			<input type="text" name="clientId" id="client_name" value=""  size="35" onblur="setClientValue();" maxlength="50">
+			<input type="text" name="clientId" id="client_name" value="" style="width:232px" onblur="setClientValue();" maxlength="50">
 			<input type="hidden" name="clientName" id="client_id" value="">
 			<div id="clientsTip" style="position:absolute;width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		</td>
 		<td class="a1">客户类型</td>
 		<td class="a4">
-			<select name="client_type">
+			<select name="client_type" style="width:232px">
 				<option value=""></option>
 				<%
 				if(arryClientType != null && arryClientType.length > 0){
@@ -95,13 +95,13 @@ String[] arryClientType = (String[])VS.findValue("arryClientType");
 	<tr>
 		<td class="a1">销售人员</td>
 		<td class="a4">
-		    <input  id="brand" type="text"   length="20"  onblur="setValue()"   size="35"/> 
-            <div   id="brandTip"  style="position:absolute;left:700px; top:85px; width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
+		    <input  id="brand" type="text"   length="20"  onblur="setValue()" style="width:232px"/> 
+            <div   id="brandTip"  style="position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		    <input type="hidden" name="xsry_id" id="fzr"/>
 		</td>	
 		<td class="a1" width="15%">商品类别</td>
 		<td class="a4" width="35%">
-			<input type="text" name="kind_name" id="kind_name" value="" size="35" onclick="openWin();" readonly>
+			<input type="text" name="kind_name" id="kind_name" value="" style="width:232px" onclick="openWin();" readonly>
 			<input type="hidden" name="product_kind" id="product_kind" value="">
 			<img src="images/select.gif" align="absmiddle" title="点击选择类别" border="0" onclick="openWin();" style="cursor:hand">
 		</td>					
@@ -109,11 +109,11 @@ String[] arryClientType = (String[])VS.findValue("arryClientType");
 	<tr>
 		<td class="a1" width="15%">商品名称</td>
 		<td class="a4" width="35%">
-			<input type="text" name="product_name" id="product_name" value="" size="35">
+			<input type="text" name="product_name" id="product_name" value="" style="width:232px">
 		</td>		
 		<td class="a1" width="15%">商品规格</td>
 		<td class="a4">
-			<input type="text" name="product_xh" id="product_xh" value="" size="35">
+			<input type="text" name="product_xh" id="product_xh" value="" style="width:232px">
 		</td>										
 	</tr>
 	<tr height="35">

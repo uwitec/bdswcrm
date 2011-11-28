@@ -28,19 +28,19 @@ List accountList = (List)VS.findValue("accountList");
 	</tr>
 	</thead>
 </table>
-<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0" border="1" id="selTable">
+<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0" border="0" id="selTable">
 	<tr>
 		<td class="a1" width="15%">开始日期</td>
 		<td class="a4" width="35%">
-			<input type="text" name="start_date" id="start_date" value="<%=DateComFunc.getToday() %>" class="Wdate" onFocus="WdatePicker()"></td>
+			<input type="text" name="start_date" id="start_date" value="<%=DateComFunc.getToday() %>" class="Wdate" style="width:232px" onFocus="WdatePicker()"></td>
 		<td class="a1" width="15%">结束日期</td>
 		<td class="a4" width="35%">
-			<input type="text" name="end_date" id="end_date" value="<%=DateComFunc.getToday() %>" class="Wdate" onFocus="WdatePicker()"></td>
+			<input type="text" name="end_date" id="end_date" value="<%=DateComFunc.getToday() %>" class="Wdate" style="width:232px" onFocus="WdatePicker()"></td>
 	</tr>
 	<tr>
 		<td class="a1">账户类型</td>
 		<td class="a4">
-			<select name="account_type">
+			<select name="account_type" style="width:232px">
 				<option value=""></option>
 				<option value="现金">现金</option>
 				<option value="银行">银行</option>
@@ -48,7 +48,7 @@ List accountList = (List)VS.findValue("accountList");
 		</td>	
 		<td class="a1">账户名称</td>
 		<td class="a4">
-			<select name="account_id">
+			<select name="account_id" style="width:232px">
 				<option value=""></option>
 				<%
 				if(accountList != null &&  accountList.size()>0){

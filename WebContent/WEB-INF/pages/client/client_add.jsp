@@ -146,7 +146,7 @@ String[] lxrnld = (String[])VS.findValue("lxrnld");
 		<td class="a1" width="15%">客户经理</td>
 		<td class="a2" width="35%">
 		    <input  id="brand"    type="text"   length="20"  onblur="setValue()"  style="width:85%"/> 
-            <div   id="brandTip"  style="position:absolute;left:514px; top:141px;  width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
+            <div   id="brandTip"  style="position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" >
             </div>
 		    <input type="hidden" name="client.khjl" id="fzr"  /> <font color="red">*</font>
 		</td>
