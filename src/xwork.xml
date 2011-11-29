@@ -456,7 +456,7 @@
         <action name="saveProductKc" class="productKcAction" method="save">
             <result name="cancel" type="redirect">addProductKc.html</result>
             <result name="input">/WEB-INF/pages/productkc/productkc_add.jsp</result>
-            <result name="success" type="redirect">listProductKc.html</result>
+            <result name="success">/WEB-INF/pages/msg.jsp</result>
         </action>
         <action name="listKcye" class="productKcAction" method="list">
             <result name="success">/WEB-INF/pages/productkc/productkc_ye.jsp</result>
