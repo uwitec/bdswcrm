@@ -63,8 +63,8 @@ import com.sw.cms.xls.template.ExportXlsTemplate;
             os.close();          
             //É¾³ýÎÄ¼þ
              
-            	File file = new File(fileName);
-                file.delete(); 
+        	File file = new File(fileName);
+            file.delete(); 
             
                        
         }catch (Exception ex) {
