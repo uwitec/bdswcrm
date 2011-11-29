@@ -19,12 +19,12 @@
 </head>
 <body>
 <form name="lssdForm" action="saveTcbl.html" method="post">
-<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
-	<thead>
+<table width="100%"  align="center"class="chart_list" cellpadding="0" cellspacing="0">
 	<tr>
-		<td colspan="2">提成比例设置</td>
+		<td class="csstitle" align="left" width="100%">&nbsp;&nbsp;&nbsp;&nbsp;<b>提成比例设置</b></td>			
 	</tr>
-	</thead>
+</table>
+<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<tr>
 		<td class="a1" width="15%">基本提成比例</td>
 		<td class="a2" width="85%">

@@ -29,13 +29,13 @@ Product product = (Product)VS.findValue("product");
 		}
 		
 		document.productKcForm.submit();
-		this.opener.document.myform.submit();
-        close();  
+		//this.opener.document.myform.submit();
+        //close();  
 	}
 </script>
 </head>
 <body >
-<form name="productKcForm" action="saveProductKc.html" method="post" target="_parent">
+<form name="productKcForm" action="saveProductKc.html" method="post">
 <input type="hidden" name="product_id" value="<%=StringUtils.nullToStr(product.getProductId()) %>">
 <input type="hidden" name="store_id" value="<%=store_id %>">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">

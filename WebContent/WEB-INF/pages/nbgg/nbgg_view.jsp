@@ -9,14 +9,18 @@
 <LINK href="css/InitNav.css" type=text/css rel=stylesheet>
 <LINK href="css/Portal.css" type=text/css rel=stylesheet>
 <LINK href="css/Desktop.css" type=text/css rel=stylesheet>
+<script type="text/javascript" src="xhEditor/jquery/jquery-1.3.2.min.js"></script>
+<script type="text/javascript" charset="UTF-8"  src="xhEditor/xheditor.js"></script>
 <script type="text/javascript">
+$(pageInit);
+function pageInit(){
+	$('#content').xheditor(true,{tools:'full',upLinkUrl:"<%=request.getContextPath() %>/UploadFile",upLinkExt:"zip,rar,txt",upImgUrl:"<%=request.getContextPath() %>/UploadFile",upImgExt:"jpg,jpeg,gif,png",upFlashUrl:"<%=request.getContextPath() %>/UploadFile",upFlashExt:"swf",upMediaUrl:"<%=request.getContextPath() %>/UploadFile",upMediaExt:"avi"});
+}
 function saveInfo(){
-	if(document.getElementById("content").value == ""){
+	if($('#content').val() == ""){
 		alert("回复内容不能为空！");
-		document.getElementById("content").focus();
 		return;
-	}
-
+	}	
 	document.myform.submit();
 }
 </script>
@@ -87,7 +91,7 @@ function saveInfo(){
 															</tr>																														
 															</ww:iterator>	
 															<tr>
-																<td width="100%"><BR><ww:textarea name="content" id="content" value="" cssStyle="width:90%" rows="5" theme="simple"></ww:textarea></td>
+																<td width="100%" align="center"><ww:textarea name="content" id="content" value="" cssStyle="width:99%" rows="8" theme="simple"></ww:textarea></td>
 															</tr>
 															<tr>
 																<td width="100%" align="center" height="30">

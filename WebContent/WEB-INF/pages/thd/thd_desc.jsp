@@ -51,16 +51,16 @@ List results = (List)VS.findValue("thdProducts");
 	</thead>
 	<%
 	Iterator it = results.iterator();
-	
+	 
 	while(it.hasNext()){
 		ThdProduct thdProduct = (ThdProduct)it.next();
 	%>
 	<tr class="a1" onmousedown="trSelectChangeCss()">
-		<td><%=StringUtils.nullToStr(thdProduct.getProduct_name()) %></td>
-		<td><%=StringUtils.nullToStr(thdProduct.getProduct_xh()) %></td>
-		<td><%=JMath.round(thdProduct.getTh_price(),2) %></td>
-		<td><%=StringUtils.nullToStr(thdProduct.getNums()) %></td>
-		<td><%=StringUtils.nullToStr(thdProduct.getQz_serial_num()) %></td>
+		<td align="left"><%=StringUtils.nullToStr(thdProduct.getProduct_name()) %></td>
+		<td align="left"><%=StringUtils.nullToStr(thdProduct.getProduct_xh()) %></td>
+		<td align="right"><%=JMath.round(thdProduct.getTh_price(),2) %></td>
+		<td align="center"><%=StringUtils.nullToStr(thdProduct.getNums()) %></td>
+		<td align="left"><%=StringUtils.nullToStr(thdProduct.getQz_serial_num()) %></td>
 	</tr>
 	
 	<%

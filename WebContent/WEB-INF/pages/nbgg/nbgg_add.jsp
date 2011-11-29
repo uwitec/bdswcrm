@@ -17,7 +17,12 @@
 	}
 	function saveInfo(){
 		if(!InputValid(document.getElementById("title"),1,"string",1,1,100,"标题")){	 return; }
-		if(!InputValid(document.getElementById("pub_date"),1,"string",1,1,20,"发布时间")){	 return; }		
+		if(!InputValid(document.getElementById("pub_date"),1,"string",1,1,20,"发布时间")){	 return; }	
+
+		if($('#content').val() == ""){
+			alert("内容不能为空！");
+			return;
+		}	
 		document.myform.submit();
 	}	
 </script>

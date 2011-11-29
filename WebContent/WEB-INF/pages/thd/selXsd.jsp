@@ -31,7 +31,7 @@ String orderType = (String)VS.findValue("orderType");
 	
 	function openWin(id){
 		var destination = "viewXsd.html?id="+id;
-		var fea ='width=900,height=700,left=' + (screen.availWidth-850)/2 + ',top=' + (screen.availHeight-700)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		var fea ='width=900,height=600,left=' + (screen.availWidth-850)/2 + ',top=' + (screen.availHeight-600)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
 		window.open(destination,'详细信息',fea);	
 	}

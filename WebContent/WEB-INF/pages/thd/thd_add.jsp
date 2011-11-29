@@ -13,6 +13,11 @@ Thd thd = (Thd)VS.findValue("thd");
 List thdProducts = (List)VS.findValue("thdProducts");
 
 String msg = StringUtils.nullToStr(VS.findValue("msg"));
+
+int counts = 2;
+if(thdProducts != null && thdProducts.size()>0){
+	counts = thdProducts.size() - 1;
+}
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -31,7 +36,7 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 	.selectTip{background-color:#009;color:#fff;}
 </style>
 <script type="text/javascript">
-	var allCount = 2;
+	var allCount = <%=counts %>;
 	
 	function saveInfo(vl){
 
@@ -145,22 +150,26 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
        // var curId = ($('xsdtable').rows.length-2);
         var curId = allCount + 1;   //curId一直加下去，防止重复
         allCount = allCount + 1;
+
+        var otd=document.createElement("td");
+		otd.className = "a2";
+		otd.innerHTML = '<td class="a2"><input type="checkbox" name="proc_id" id="proc_id" value="' + curId + '"></td>';
         
         var otd0=document.createElement("td");
         otd0.className = "a2";
-        otd0.innerHTML = '<input type="text" id="product_name_'+curId+'" name="thdProducts['+curId+'].product_name" readonly style="width:150px"><input type="button" name="selectButton" value="选择" class="css_button" onclick="openWin('+curId+');"><input type="hidden" id="product_id_'+curId+'" name="thdProducts['+curId+'].product_id">';
+        otd0.innerHTML = '<input type="text" id="product_name_'+curId+'" name="thdProducts['+curId+'].product_name" readonly style="width:90%"><input type="hidden" id="product_id_'+curId+'" name="thdProducts['+curId+'].product_id">';
         
         var otd1 = document.createElement("td");
         otd1.className = "a2";
-        otd1.innerHTML = '<input type="text" id="product_xh_'+curId+'"  name="thdProducts['+curId+'].product_xh" style="width:150px" readonly>';
+        otd1.innerHTML = '<input type="text" id="product_xh_'+curId+'"  name="thdProducts['+curId+'].product_xh" style="width:90%" readonly>';
         
         var otd2 = document.createElement("td");
         otd2.className = "a2";
-        otd2.innerHTML = '<input type="text" id="th_price_'+curId+'" name="thdProducts['+curId+'].th_price" style="width:80px" value="0.00" onblur="hj();"><input type="hidden" id="cbj_'+curId+'" name="thdProducts['+curId+'].cbj" value="0.00"><input type="hidden" id="kh_cbj_'+curId+'" name="thdProducts['+curId+'].kh_cbj" value="0.00"><input type="hidden" id="sd_'+curId+'" name="thdProducts['+curId+'].sd"  value="0.00"><input type="hidden" id="gf_'+curId+'" name="thdProducts['+curId+'].gf"  value="0.00"><input type="hidden" id="ds_'+curId+'" name="thdProducts['+curId+'].ds"  value="0.00"><input type="hidden" id="basic_ratio_'+curId+'" name="thdProducts['+curId+'].basic_ratio"  value="0.00"><input type="hidden" id="out_ratio_'+curId+'" name="thdProducts['+curId+'].out_ratio"  value="0.00"><input type="hidden" id="lsxj_'+curId+'" name="thdProducts['+curId+'].lsxj"  value="0.00"><input type="hidden" id="ygcbj_'+curId+'" name="thdProducts['+curId+'].ygcbj"  value="0.00"><input type="hidden" id="sfcytc_'+curId+'" name="thdProducts['+curId+'].sfcytc"  value="">';
+        otd2.innerHTML = '<input type="text" id="th_price_'+curId+'" name="thdProducts['+curId+'].th_price" style="width:90%" value="0.00" onblur="hj();"><input type="hidden" id="cbj_'+curId+'" name="thdProducts['+curId+'].cbj" value="0.00"><input type="hidden" id="kh_cbj_'+curId+'" name="thdProducts['+curId+'].kh_cbj" value="0.00"><input type="hidden" id="sd_'+curId+'" name="thdProducts['+curId+'].sd"  value="0.00"><input type="hidden" id="gf_'+curId+'" name="thdProducts['+curId+'].gf"  value="0.00"><input type="hidden" id="ds_'+curId+'" name="thdProducts['+curId+'].ds"  value="0.00"><input type="hidden" id="basic_ratio_'+curId+'" name="thdProducts['+curId+'].basic_ratio"  value="0.00"><input type="hidden" id="out_ratio_'+curId+'" name="thdProducts['+curId+'].out_ratio"  value="0.00"><input type="hidden" id="lsxj_'+curId+'" name="thdProducts['+curId+'].lsxj"  value="0.00"><input type="hidden" id="ygcbj_'+curId+'" name="thdProducts['+curId+'].ygcbj"  value="0.00"><input type="hidden" id="sfcytc_'+curId+'" name="thdProducts['+curId+'].sfcytc"  value="">';
         
         var otd3 = document.createElement("td");
         otd3.className = "a2";
-        otd3.innerHTML = '<input type="text" id="nums_'+curId+'" name="thdProducts['+curId+'].nums" style="width:60px" value="0" onblur="hj();">';
+        otd3.innerHTML = '<input type="text" id="nums_'+curId+'" name="thdProducts['+curId+'].nums" style="width:90%" value="0" onblur="hj();">';
         
 		var otd7 = document.createElement("td");
 		otd7.className = "a2";
@@ -168,20 +177,50 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
         
         var otd4 = document.createElement("td");
         otd4.className = "a2";
-        otd4.innerHTML = '<input type="text" id="xj_'+curId+'" name="thdProducts['+curId+'].xj" style="width:80px" value="0.00" readonly>';  
+        otd4.innerHTML = '<input type="text" id="xj_'+curId+'" name="thdProducts['+curId+'].xj" style="width:90%" value="0.00" readonly>';  
         
-		var otd6 = document.createElement("td");
-		otd6.className = "a2";
-		otd6.innerHTML = '<input type="button" name="delButton" value="删除" class="css_button" onclick="delTr(this);">';
-		
+        otr.appendChild(otd); 
         otr.appendChild(otd0); 
         otr.appendChild(otd1); 
         otr.appendChild(otd2); 
         otr.appendChild(otd3); 
         otr.appendChild(otd7);
         otr.appendChild(otd4); 
-        otr.appendChild(otd6);               
-     }	
+    }	
+
+	function delDesc(){
+		var k = 0;
+		var sel = "0"; 
+		for(var i=0;i<document.thdForm.proc_id.length;i++){
+			var o = document.thdForm.proc_id[i];
+			if(o.checked){
+				k = k + 1;
+				sel = document.thdForm.proc_id[i].value;
+				document.getElementById("product_name_" + sel).value = "";
+				document.getElementById("product_id_" + sel).value = "";
+				document.getElementById("product_xh_" + sel).value = "";
+				document.getElementById("th_price_" + sel).value = "0.00";
+				document.getElementById("cbj_" + sel).value = "0.00";
+				document.getElementById("kh_cbj_" + sel).value = "0.00";
+				document.getElementById("sd_" + sel).value = "0.00";
+				document.getElementById("gf_" + sel).value = "0.00";
+				document.getElementById("ds_" + sel).value = "0.00";
+				document.getElementById("basic_ratio_" + sel).value = "0.00";
+				document.getElementById("out_ratio_" + sel).value = "0.00";
+				document.getElementById("lsxj_" + sel).value = "0.00";
+				document.getElementById("ygcbj_" + sel).value = "0.00";
+				document.getElementById("sfcytc_" + sel).value = "0.00";
+				document.getElementById("nums_" + sel).value = "0";
+				document.getElementById("qz_serial_num_" + sel).value = "";
+				document.getElementById("qz_flag_" + sel).value = "";
+				document.getElementById("xj_" + sel).value = "0.00";
+			}
+		}
+		if(k == 0){
+			alert("请选择商品明细！");
+			return;
+		}
+	}    
      
      
 	function delTr(i){
@@ -192,15 +231,15 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 
 	
 	function openWin(id){
-		var destination = "selThdProc.html?openerId="+id;
-		var fea ='width=800,height=500,left=' + (screen.availWidth-800)/2 + ',top=' + (screen.availHeight-500)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		var destination = "selThdProcMx.html";
+		var fea ='width=900,height=600,left=' + (screen.availWidth-900)/2 + ',top=' + (screen.availHeight-600)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
 		window.open(destination,'详细信息',fea);	
 	}
 	
 	function openAccount(){
 		var destination = "selSkAccount.html";
-		var fea ='width=400,height=200,left=' + (screen.availWidth-400)/2 + ',top=' + (screen.availHeight-200)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		var fea ='width=400,height=400,left=' + (screen.availWidth-400)/2 + ',top=' + (screen.availHeight-400)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
 		window.open(destination,'选择账户',fea);		
 	}
@@ -482,13 +521,13 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 <table width="100%"  align="center" id="thtable"  class="chart_list" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
+		<td width="5%">选择</td>
 		<td width="25%">商品名称</td>
 		<td width="20%">规格</td>
 		<td width="10%">退货价格</td>
-		<td width="7%">数量</td>
+		<td width="10%">数量</td>
 		<td width="20%">强制序列号</td>
 		<td width="10%">小计</td>
-		<td width="8%"></td>
 	</tr>
 	</thead>
 <%
@@ -497,14 +536,14 @@ if(thdProducts!=null && thdProducts.size()>0){
 		ThdProduct thdProduct = (ThdProduct)thdProducts.get(i);
 %>
 	<tr>
+		<td class="a2"><input type="checkbox" name="proc_id" id="proc_id" value="<%=i %>"></td>
 		<td class="a2">
-			<input type="text" id="product_name_<%=i %>" name="thdProducts[<%=i %>].product_name" style="width:150px" value="<%=StringUtils.nullToStr(thdProduct.getProduct_name()) %>" readonly>
-			<input type="button" name="selectButton" value="选择" class="css_button" onclick="openWin(<%=i %>);">
+			<input type="text" id="product_name_<%=i %>" name="thdProducts[<%=i %>].product_name" style="width:90%" value="<%=StringUtils.nullToStr(thdProduct.getProduct_name()) %>" readonly>
 			<input type="hidden" id="product_id_<%=i %>" name="thdProducts[<%=i %>].product_id" value="<%=StringUtils.nullToStr(thdProduct.getProduct_id()) %>">
 		</td>
-		<td class="a2"><input type="text" id="product_xh_<%=i %>" name="thdProducts[<%=i %>].product_xh" style="width:150px" value="<%=StringUtils.nullToStr(thdProduct.getProduct_xh()) %>" readonly></td>
+		<td class="a2"><input type="text" id="product_xh_<%=i %>" name="thdProducts[<%=i %>].product_xh" style="width:90%" value="<%=StringUtils.nullToStr(thdProduct.getProduct_xh()) %>" readonly></td>
 		<td class="a2">
-			<input type="text" id="th_price_<%=i %>" name="thdProducts[<%=i %>].th_price" style="width:80px" value="<%=JMath.round(thdProduct.getTh_price()) %>" onblur="hj();">
+			<input type="text" id="th_price_<%=i %>" name="thdProducts[<%=i %>].th_price" style="width:90%" value="<%=JMath.round(thdProduct.getTh_price()) %>" onblur="hj();">
 			<input type="hidden" id="cbj_<%=i %>" name="thdProducts[<%=i %>].cbj" value="<%=JMath.round(thdProduct.getCbj()) %>">
 			<input type="hidden" id="kh_cbj_<%=i %>" name="thdProducts[<%=i %>].kh_cbj" value="<%=JMath.round(thdProduct.getKh_cbj()) %>">
 			
@@ -517,17 +556,12 @@ if(thdProducts!=null && thdProducts.size()>0){
 			<input type="hidden" id="ygcbj_<%=i %>" name="thdProducts[<%=i %>].ygcbj"  value="<%=JMath.round(thdProduct.getYgcbj()) %>">
 			<input type="hidden" id="sfcytc_<%=i %>" name="thdProducts[<%=i %>].sfcytc"  value="<%=StringUtils.nullToStr(thdProduct.getSfcytc()) %>">				
 		</td>
-		<td class="a2"><input type="text" id="nums_<%=i %>" name="thdProducts[<%=i %>].nums" style="width:60px" value="<%=StringUtils.nullToStr(thdProduct.getNums()) %>" onblur="hj();"></td>
+		<td class="a2"><input type="text" id="nums_<%=i %>" name="thdProducts[<%=i %>].nums" style="width:90%" value="<%=StringUtils.nullToStr(thdProduct.getNums()) %>" onblur="hj();"></td>
 		<td class="a2">
 			<input type="text" id="qz_serial_num_<%=i %>" name="thdProducts[<%=i %>].qz_serial_num" value="<%=StringUtils.nullToStr(thdProduct.getQz_serial_num()) %>" style="width:120px" readonly>
 			<input type="hidden" id="qz_flag_<%=i %>" name="thdProducts[<%=i %>].qz_flag" value="<%=StringUtils.nullToStr(thdProduct.getQz_flag()) %>"><a style="cursor:hand" title="左键点击输入输列号" onclick="openSerialWin('<%=i %>');"><b>...</b></a>&nbsp;
 		</td>		
-		<td class="a2"><input type="text" id="xj_<%=i %>" name="thdProducts[<%=i %>].xj" style="width:80px" value="<%=JMath.round(thdProduct.getXj()) %>" readonly></td>
-		<%if (i>0){ %>		
-		<td class="a2"><input type="button" name="delButton" value="删除" class="css_button" onclick="delTr(this);"></td>
-		<%}else{ %>
-		<td class="a2">&nbsp;</td>
-		<%} %>
+		<td class="a2"><input type="text" id="xj_<%=i %>" name="thdProducts[<%=i %>].xj" style="width:90%" value="<%=JMath.round(thdProduct.getXj()) %>" readonly></td>
 	</tr>
 <%
 	}
@@ -535,13 +569,14 @@ if(thdProducts!=null && thdProducts.size()>0){
 	for(int i=0;i<3;i++){
 %>
 	<tr>
+		<td class="a2"><input type="checkbox" name="proc_id" id="proc_id" value="<%=i %>"></td>
 		<td class="a2">
-			<input type="text" id="product_name_<%=i %>" name="thdProducts[<%=i %>].product_name" style="width:150px" readonly><input type="button" name="selectButton" value="选择" class="css_button" onclick="openWin(<%=i %>);">
+			<input type="text" id="product_name_<%=i %>" name="thdProducts[<%=i %>].product_name" style="width:90%" readonly>
 			<input type="hidden" id="product_id_<%=i %>" name="thdProducts[<%=i %>].product_id">
 		</td>
-		<td class="a2"><input type="text" id="product_xh_<%=i %>" name="thdProducts[<%=i %>].product_xh" style="width:150px" size="10" readonly></td>
+		<td class="a2"><input type="text" id="product_xh_<%=i %>" name="thdProducts[<%=i %>].product_xh" style="width:90%" size="10" readonly></td>
 		<td class="a2">
-			<input type="text" id="th_price_<%=i %>" name="thdProducts[<%=i %>].th_price" style="width:80px" value="0.00" onblur="hj();">
+			<input type="text" id="th_price_<%=i %>" name="thdProducts[<%=i %>].th_price" style="width:90%" value="0.00" onblur="hj();">
 			<input type="hidden" id="cbj_<%=i %>" name="thdProducts[<%=i %>].cbj"  value="0.00">
 			<input type="hidden" id="kh_cbj_<%=i %>" name="thdProducts[<%=i %>].kh_cbj"  value="0.00">
 			
@@ -554,17 +589,12 @@ if(thdProducts!=null && thdProducts.size()>0){
 			<input type="hidden" id="ygcbj_<%=i %>" name="thdProducts[<%=i %>].ygcbj"  value="0.00">
 			<input type="hidden" id="sfcytc_<%=i %>" name="thdProducts[<%=i %>].sfcytc"  value="">				
 		</td>
-		<td class="a2"><input type="text" id="nums_<%=i %>" name="thdProducts[<%=i %>].nums" value="0" style="width:60px" onblur="hj();"></td>
+		<td class="a2"><input type="text" id="nums_<%=i %>" name="thdProducts[<%=i %>].nums" value="0" style="width:90%" onblur="hj();"></td>
 		<td class="a2">
 			<input type="text" id="qz_serial_num_<%=i %>" name="thdProducts[<%=i %>].qz_serial_num" style="width:120px" readonly>
 			<input type="hidden" id="qz_flag_<%=i %>" name="thdProducts[<%=i %>].qz_flag"><a style="cursor:hand" title="左键点击输入输列号" onclick="openSerialWin('<%=i %>');"><b>...</b></a>&nbsp;
 		</td>			
-		<td class="a2"><input type="text" id="xj_<%=i %>" name="thdProducts[<%=i %>].xj" value="0.00" style="width:80px" readonly></td>
-		<%if (i>0){ %>		
-		<td class="a2"><input type="button" name="delButton" value="删除" class="css_button" onclick="delTr(this);"></td>
-		<%}else{ %>
-		<td class="a2">&nbsp;</td>
-		<%} %>
+		<td class="a2"><input type="text" id="xj_<%=i %>" name="thdProducts[<%=i %>].xj" value="0.00" style="width:90%" readonly></td>
 	</tr>
 <%
 	}
@@ -574,7 +604,8 @@ if(thdProducts!=null && thdProducts.size()>0){
 <table width="100%"  align="center" class="chart_info" cellpadding="0" cellspacing="0">
 	<tr height="35">
 		<td class="a2" colspan="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="button" name="button1" value="添加一行" class="css_button2" onclick="addTr();">
+			<input type="button" name="button1" value="添加商品" class="css_button2" onclick="openWin();">
+			<input type="button" name="button8" value="清除商品" class="css_button3" onclick="delDesc();">
 			<input type="button" name="btnXsd" id="btnXsd" value="关联销售订单" class="css_button3" onclick="selXsd();">
 			<input type="button" name="btnLsd" id="btnLsd" value="关联零售单" style="display:none" class="css_button3" onclick="selLsd();">
 		</td>
@@ -586,7 +617,7 @@ if(thdProducts!=null && thdProducts.size()>0){
 		<td class="a2"><input type="text" id="thdje"  name="thd.thdje" value="<%=JMath.round(thd.getThdje()) %>" style="width:232px" readonly></td>	
 		
 		<td class="a1" id="td_zh_label" width="15%">退款账户</td>
-		<td class="a2" id="td_zh_value" width="35%"><input type="text" id="zhname"  name="zhname" style="width:232px" value="<%=StaticParamDo.getAccountNameById(StringUtils.nullToStr(thd.getTkzh())) %>" readonly>
+		<td class="a2" id="td_zh_value" width="35%"><input type="text" id="zhname" onclick="openAccount();" name="zhname" style="width:232px" value="<%=StaticParamDo.getAccountNameById(StringUtils.nullToStr(thd.getTkzh())) %>" readonly>
 		<input type="hidden" id="skzh"  name="thd.tkzh" value="<%=StringUtils.nullToStr(thd.getTkzh()) %>">
 		<img src="images/select.gif" align="absmiddle" title="选择账户" border="0" onclick="openAccount();" style="cursor:hand">
 		</td>
@@ -626,7 +657,7 @@ if(thdProducts!=null && thdProducts.size()>0){
 	<tr>
 		<td class="a1" width="15%">发票信息摘要</td>
 		<td class="a2" colspan="3">
-			<input type="text" name="thd.fpxx" id="fpxx" value="<%=StringUtils.nullToStr(thd.getFpxx()) %>" maxlength="100" style="width:90%">
+			<input type="text" name="thd.fpxx" id="fpxx" value="<%=StringUtils.nullToStr(thd.getFpxx()) %>" maxlength="100" style="width:80%">
 		</td>
 	</tr>	
 	<tr height="35">

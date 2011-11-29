@@ -88,27 +88,41 @@ Product product = (Product)VS.findValue("product");
 	
 	//生成库存期初
 	function doGenKcqc(){
-		var productId = dwr.util.getValue("product_id");
-		var storeId = dwr.util.getValue("store_id");
-		var kcNums = dwr.util.getValue("kc_nums");
+		//var productId = dwr.util.getValue("product_id");
+		//var storeId = dwr.util.getValue("store_id");
+		//var kcNums = dwr.util.getValue("kc_nums");
 		
 		if(kcNums == 0){
 			if(!window.confirm("商品实际库存为0,确认吗？点击确认系统将生成期初，点击取消继续初始化！")){
 				return;
 			}
 		}
+
+		if(window.confirm("确认提交吗？")){
+			document.productKcForm.submit();
+		}
 		
-		dwrService.genKcqc(productId,storeId,kcNums);
 		
-		alert("库存初始成功！");
-		parent.opener.document.myform.submit();
-		window.close();
+		//dwrService.genKcqc(productId,storeId,kcNums);
+		
+		//alert("库存初始成功！");
+		//parent.opener.document.myform.submit();
+		//window.close();
 	}
-		
+	
+	function saveInfo(){
+		var kcNums = dwr.util.getValue("kc_nums");
+		if(kcNums == 0){
+			if(!window.confirm("商品实际库存为0,确认吗？点击确认系统将生成期初，点击取消继续初始化！")){
+				return;
+			}
+		}
+		document.productKcForm.submit();
+	}
 </script>
 </head>
 <body style="margin-top:0px;">
-<form name="productKcForm" action="saveProductKc.html" method="post" target="_parent">
+<form name="productKcForm" action="saveProductKc.html" method="post">
 <input type="hidden" name="product_id" id="product_id" value="<%=StringUtils.nullToStr(product.getProductId()) %>">
 <input type="hidden" name="store_id" id="store_id" value="<%=store_id %>">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
@@ -153,13 +167,14 @@ Product product = (Product)VS.findValue("product");
 	</tr>	
 	<tr height="35">
 		<td class="a1" colspan="2">
-			<input type="button" name="button1" value="确定" class="css_button" onclick="doGenKcqc();">
+			<input type="button" name="button1" value="确定" class="css_button" onclick="saveInfo();">
 		</td>
 	</tr>
-</table>
+</table><font color="red">
 <BR>说明：<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;一、将光标定位于序列号输入框，用扫描枪扫描商品序列号，或输入序列号回车，系统自动保存商品序列号信息，并累加实际库存数。<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;二、所有库存序列号输入完成后，请点击“确定”按钮完成商品库存的初始，非法关闭窗口，商品初始化无效，要求一类商品的初始一次完成。
+</font>
 </form>
 </body>
 </html>

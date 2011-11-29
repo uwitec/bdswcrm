@@ -228,6 +228,7 @@
 	  	摊销付款增加了金额判断；
 
 　　3、数据库修改：
+			update column_funcs set column_id='009002' where func_id='FC9916'
 
 		 
 　　4、对应SVN版本号：

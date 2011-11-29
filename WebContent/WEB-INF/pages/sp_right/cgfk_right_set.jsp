@@ -6,8 +6,11 @@
 <title>采购付款审批设置</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="jquery/jquery.js"></script>
+<script type="text/javascript" src="js/initPageSize.js"></script>
 </head>
 <body>
+<div class="rightContentDiv" id="divContent">
 <form name="myform" action="saveCgfkSpRight.html" method="post">
 <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0">
 	<tr>
@@ -26,7 +29,7 @@
 	<tr>
 		<td class="a1">审批权限角色名称</td>
 		<td class="a4">
-			<ww:checkboxlist list="roleList" name="role_id" id="role_id" listKey="role_id" listValue="role_name" theme="simple" value="%{role_id}"></ww:checkboxlist>
+			<ww:checkboxlist list="roleList" name="role_id" id="role_id" listKey="role_id" listValue="role_name" theme="div_simple" value="%{role_id}"></ww:checkboxlist>
 		</td>
 	</tr>
 	<tr height="40">
@@ -38,5 +41,6 @@
 </table><BR>
 注：设置采购付款是否需要审批，如果需要审批请选择“是”，否则选则“否”，选择“是”后需选择相应角色才能生效。
 </form>
+</div>
 </body>
 </html>

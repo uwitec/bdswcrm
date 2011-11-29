@@ -32,7 +32,7 @@ String orderType = (String)VS.findValue("orderType");
 	
 	function openWin(id){
 		var destination = "viewJhd.html?id="+id;
-		var fea ='width=950,height=700,left=' + (screen.availWidth-950)/2 + ',top=' + (screen.availHeight-700)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		var fea ='width=950,height=600,left=' + (screen.availWidth-950)/2 + ',top=' + (screen.availHeight-600)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
 		window.open(destination,'详细信息',fea);	
 	}
@@ -52,14 +52,14 @@ String orderType = (String)VS.findValue("orderType");
 	
 	function add(){
 		var destination = "addJhd.html";
-		var fea ='width=950,height=700,left=' + (screen.availWidth-950)/2 + ',top=' + (screen.availHeight-700)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		var fea ='width=950,height=600,left=' + (screen.availWidth-950)/2 + ',top=' + (screen.availHeight-600)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
 		window.open(destination,'添加进货单',fea);	
 	}
 	
 	function edit(id){
 		var destination = "editJhd.html?id=" + id;
-		var fea ='width=950,height=700,left=' + (screen.availWidth-950)/2 + ',top=' + (screen.availHeight-700)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		var fea ='width=950,height=600,left=' + (screen.availWidth-950)/2 + ',top=' + (screen.availHeight-600)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
 		window.open(destination,'修改进货单',fea);		
 	}	
