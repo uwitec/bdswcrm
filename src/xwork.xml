@@ -155,7 +155,7 @@
             <result name="success">/WEB-INF/pages/msg.jsp</result>
         </action>
         <action name="delCgfk" class="cgfkAction" method="del">
-            <result name="success" type="redirect">listCgfk.html</result>
+            <result name="success" type="chain">listCgfk</result>
         </action>
         <action name="listDspCgfk" class="cgfkAction" method="listDspCgfk">
             <result name="success">/WEB-INF/pages/cgfk/cgfk_dsp.jsp</result>
@@ -176,6 +176,7 @@
             <result name="success">/WEB-INF/pages/product/product.jsp</result>
         </action>
         <action name="getChildKindNums" class="productKindAction" method="getChildKindNums"/>
+         <action name="checkProductCanDel" class="productAction" method="checkProductCanDel"/>
         <action name="selectProduct"  class="lsdAction" method="selKcProc">
             <result name="success">/WEB-INF/pages/product/selectProduct.jsp</result>
         </action>
@@ -227,8 +228,7 @@
             <result name="success">/WEB-INF/pages/product/product_veiw.jsp</result>
         </action>
         <action name="delProduct" class="productAction" method="delProduct">
-        	<result name="notDel">/WEB-INF/pages/msg_info.jsp</result>
-            <result name="success" type="redirect">product_list.html</result>
+            <result name="success" type="chain">product_list</result>
         </action>
         <action name="batchUpdateProductCon" class="productAction" method="queryProductCon">
             <result name="success">/WEB-INF/pages/product/batch_update_product_con.jsp</result>
@@ -267,7 +267,7 @@
             <result name="success">/WEB-INF/pages/msg.jsp</result>
         </action>
         <action name="delJhd" class="jhdAction" method="del">
-            <result name="success" type="redirect">listJhd.html</result>
+            <result name="success" type="chain">listJhd</result>
         </action>
         <action name="selectJhd" class="jhdAction" method="list">
             <result name="success">/WEB-INF/pages/jhd/selectJhd.jsp</result>
@@ -305,10 +305,10 @@
             <result name="success">/WEB-INF/pages/msg.jsp</result>
         </action>
         <action name="delUser" class="userAction" method="del">
-            <result name="success" type="redirect">listUser.html</result>
+            <result name="success" type="chain">listUser</result>
         </action>
         <action name="restoreUser" class="userAction" method="restore">
-            <result name="success" type="redirect">listUser.html</result>
+            <result name="success" type="chain">listUser</result>
         </action>
         <action name="showOnlineUser" class="userAction" method="showOnlineUser">
             <result name="success" type="dispatcher">/WEB-INF/pages/user/onlineUser.jsp</result>
@@ -458,6 +458,11 @@
             <result name="input">/WEB-INF/pages/productkc/productkc_add.jsp</result>
             <result name="success">/WEB-INF/pages/msg.jsp</result>
         </action>
+        <action name="saveProductKcSerial" class="productKcAction" method="save">
+            <result name="cancel" type="redirect">addProductKcSerial.html</result>
+            <result name="input">/WEB-INF/pages/productkc/productkc_add_serial.jsp</result>
+            <result name="success">/WEB-INF/pages/msg.jsp</result>
+        </action>        
         <action name="listKcye" class="productKcAction" method="list">
             <result name="success">/WEB-INF/pages/productkc/productkc_ye.jsp</result>
         </action>
@@ -496,7 +501,7 @@
             <result name="success">/WEB-INF/pages/kcpd/msg.jsp</result>
         </action>
         <action name="delKcpd" class="kcpdAction" method="del">
-            <result name="success" type="redirect">listKcpd.html</result>
+            <result name="success" type="chain">listKcpd</result>
         </action>
         <action name="viewKcpd" class="kcpdAction" method="edit">
             <result name="success">/WEB-INF/pages/kcpd/kcpd_view.jsp</result>
@@ -513,6 +518,7 @@
         <action name="listStore" class="storeAction" method="list">
             <result name="success">/WEB-INF/pages/store/store_list.jsp</result>
         </action>
+        <action name="checkStoreCanDel" class="storeAction" method="checkStoreCanDel"/>
         <action name="addStore" class="storeAction" method="add">
             <result name="success">/WEB-INF/pages/store/store_add.jsp</result>
         </action>
@@ -530,8 +536,7 @@
             <result name="success">/WEB-INF/pages/msg.jsp</result>
         </action>
         <action name="delStore" class="storeAction" method="del">
-        	<result name="notDel">/WEB-INF/pages/msg_info.jsp</result>
-            <result name="success" type="redirect">listStore.html</result>
+            <result name="success" type="chain">listStore</result>
         </action>
         <action name="viewStore" class="storeAction" method="edit">
             <result name="success">/WEB-INF/pages/store/store_view.jsp</result>
@@ -581,6 +586,7 @@
         <action name="listClient" class="clientsAction" method="list">
             <result name="success">/WEB-INF/pages/client/client_list.jsp</result>
         </action>
+        <action name="checkClientCanDel" class="clientsAction" method="checkClientCanDel"/>
         <action name="addClient" class="clientsAction" method="add">
             <result name="success">/WEB-INF/pages/client/client_add.jsp</result>
         </action>
@@ -598,8 +604,7 @@
             <result name="success">/WEB-INF/pages/msg.jsp</result>
         </action>
         <action name="delClient" class="clientsAction" method="del">
-        	<result name="notDel">/WEB-INF/pages/msg_info.jsp</result>
-            <result name="success" type="redirect">listClient.html</result>
+            <result name="success" type="chain">listClient</result>
         </action>
         <action name="selectClient" class="clientsAction" method="listSel">
             <result name="success">/WEB-INF/pages/client/selClient.jsp</result>
@@ -693,7 +698,7 @@
             <result name="success">/WEB-INF/pages/xsd/xsd_add.jsp</result>
         </action>        
         <action name="delXsd" class="xsdAction" method="del">
-            <result name="success" type="redirect">listXsd.html</result>
+            <result name="success" type="chain">listXsd</result>
         </action>
         <action name="viewXsd" class="xsdAction" method="edit">
             <result name="success">/WEB-INF/pages/xsd/xsd_view.jsp</result>
@@ -766,7 +771,7 @@
             <result name="success">/WEB-INF/pages/lsd/msg.jsp</result>
         </action>        
         <action name="delLsd" class="lsdAction" method="del">
-            <result name="success" type="redirect">listLsd.html</result>
+            <result name="success" type="chain">listLsd</result>
         </action>
         <action name="viewLsd" class="lsdAction" method="edit">
             <result name="success">/WEB-INF/pages/lsd/lsd_view.jsp</result>
@@ -857,7 +862,7 @@
             <result name="success">/WEB-INF/pages/thd/thd_desc.jsp</result>
         </action>        
         <action name="delThd" class="thdAction" method="del">
-            <result name="success" type="redirect">listThd.html</result>
+            <result name="success" type="chain">listThd</result>
         </action>
         <action name="selThdProc" class="lsdAction" method="selKcProc">
             <result name="success">/WEB-INF/pages/thd/selectProduct.jsp</result>
@@ -953,7 +958,7 @@
             <result name="success">/WEB-INF/pages/xssk/xssk_view.jsp</result>
         </action>
         <action name="delXssk" class="xsskAction" method="del">
-            <result name="success" type="redirect">listXssk.html</result>
+            <result name="success" type="chain">listXssk</result>
         </action>
         <action name="selXsskClient" class="clientsAction" method="listSel">
             <result name="success">/WEB-INF/pages/xssk/selClient.jsp</result>
@@ -992,7 +997,7 @@
             <result name="success">/WEB-INF/pages/kfdb/kfdb_view.jsp</result>
         </action>
         <action name="delKfdb" class="kfdbAction" method="del">
-            <result name="success" type="redirect">listKfdb.html</result>
+            <result name="success" type="chain">listKfdb</result>
         </action>
         <action name="descKfdb" class="kfdbAction" method="descKfdb">
             <result name="success">/WEB-INF/pages/kfdb/kfdb_desc.jsp</result>
@@ -1040,7 +1045,7 @@
             <result name="success">/WEB-INF/pages/dbsq/dbsq_view.jsp</result>
         </action>
         <action name="delDbsq" class="dbsqAction" method="del">
-            <result name="success" type="redirect">listDbsq.html</result>
+            <result name="success" type="chain">listDbsq</result>
         </action>
         <action name="descDbsq" class="dbsqAction" method="descDbsq">
             <result name="success">/WEB-INF/pages/dbsq/dbsq_desc.jsp</result>
@@ -1071,7 +1076,7 @@
             <result name="success">/WEB-INF/pages/qtzc/qtzc_view.jsp</result>
         </action>
         <action name="delQtzc" class="qtzcAction" method="del">
-            <result name="success" type="redirect">listQtzc.html</result>
+            <result name="success" type="chain">listQtzc</result>
         </action>
         <!-- 其它支出 -->        
         
@@ -1099,7 +1104,7 @@
             <result name="success">/WEB-INF/pages/qtsr/qtsr_view.jsp</result>
         </action>
         <action name="delQtsr" class="qtsrAction" method="del">
-            <result name="success" type="redirect">listQtsr.html</result>
+            <result name="success" type="chain">listQtsr</result>
         </action>
         <!-- 其它收入 -->
         
@@ -1127,7 +1132,7 @@
             <result name="success">/WEB-INF/pages/chtj/chtj_view.jsp</result>
         </action>
         <action name="delChtj" class="chtjAction" method="del">
-            <result name="success" type="redirect">listChtj.html</result>
+            <result name="success" type="chain">listChtj</result>
         </action>
         <action name="descChtj" class="chtjAction" method="descChtj">
             <result name="success">/WEB-INF/pages/chtj/chtj_desc.jsp</result>
@@ -1163,7 +1168,7 @@
             <result name="success">/WEB-INF/pages/nbzz/nbzz_view.jsp</result>
         </action>
         <action name="delNbzz" class="nbzzAction" method="del">
-            <result name="success" type="redirect">listNbzz.html</result>
+            <result name="success" type="chain">listNbzz</result>
         </action>
         <action name="selZczh" class="accountsAction" method="sel">
             <result name="success">/WEB-INF/pages/nbzz/sel_zczh.jsp</result>
@@ -1197,7 +1202,7 @@
             <result name="success">/WEB-INF/pages/pz/pz_view.jsp</result>
         </action>
         <action name="delPz" class="pzAction" method="del">
-            <result name="success" type="redirect">listPz.html</result>
+            <result name="success" type="chain">listPz</result>
         </action>
         <!-- 平账 -->
         
@@ -1228,7 +1233,7 @@
             <result name="success">/WEB-INF/pages/cgthd/cgthd_desc.jsp</result>
         </action>        
         <action name="delCgthd" class="cgthdAction" method="del">
-            <result name="success" type="redirect">listCgthd.html</result>
+            <result name="success" type="chain">listCgthd</result>
         </action>
         <action name="selJhd" class="jhdAction" method="selSubmitJhd">
             <result name="success">/WEB-INF/pages/cgthd/selJhd.jsp</result>
@@ -1265,10 +1270,10 @@
             <result name="success">/WEB-INF/pages/msg.jsp</result>
         </action>        
         <action name="delLsysk" class="lsyskAction" method="del">
-            <result name="success" type="redirect">listLsysk.html</result>
+            <result name="success" type="chain">listLsysk</result>
         </action>
         <action name="doThLsysk" class="lsyskAction" method="doTh">
-            <result name="success" type="redirect">listLsysk.html</result>
+            <result name="success" type="chain">listLsysk</result>
         </action>        
         <!-- 零售预收款 -->
         
@@ -1447,7 +1452,7 @@
             <result name="success">/WEB-INF/pages/msg.jsp</result>
         </action>
         <action name="delClientWlInit" class="clientWlInitAction" method="del">
-            <result name="success" type="redirect">listClientWlInit.html</result>
+            <result name="success" type="chain">listClientWlInit</result>
         </action>                
         <!-- 客户往来初始 -->
         
@@ -1610,10 +1615,10 @@
             <result name="success">/WEB-INF/pages/msg.jsp</result>
         </action>
         <action name="delEmployee" class="employeeAction" method="del">
-            <result name="success" type="redirect">listEmployee.html</result>
+            <result name="success" type="chain">listEmployee</result>
         </action> 
         <action name="restoreEmployee" class="employeeAction" method="restore">
-            <result name="success" type="redirect">listEmployee.html</result>
+            <result name="success" type="chain">listEmployee</result>
         </action>
         <!-- 修改 业务员列表 修改-->
         <action name="selLsEmployee" class="employeeAction" method="selYwyEmployee">
@@ -1659,7 +1664,7 @@
             <result name="success">/WEB-INF/pages/msg.jsp</result>
         </action>
         <action name="delNbgg" class="xxfbNbggAction" method="del">
-            <result name="success" type="redirect">listNbgg.html</result>
+            <result name="success" type="chain">listNbgg</result>
         </action>
         <!-- 内部公告 -->
         
@@ -1719,7 +1724,7 @@
             <result name="success">/WEB-INF/pages/msg.jsp</result>
         </action>
         <action name="delSerialNum" class="serialNumAction" method="del">
-            <result name="success" type="redirect">listSerialNum.html</result>
+            <result name="success" type="chain">listSerialNum</result>
         </action>
         <action name="getProducts" class="serialNumAction" method="getProducts">
             <result name="success" type="dispatcher">/WEB-INF/pages/serial_num/selectProduct.jsp</result>
@@ -1770,7 +1775,7 @@
             <result name="success">/WEB-INF/pages/yushoutoyingshou/yushoutoyingshou_view.jsp</result>
         </action>
         <action name="delYushouToYingshou" class="yushouToYingshouAction" method="del">
-            <result name="success" type="redirect">listYushouToYingshou.html</result>
+            <result name="success" type="chain">listYushouToYingshou</result>
         </action>
         <action name="selYinshoukClient" class="clientsAction" method="listSel">
             <result name="success">/WEB-INF/pages/yushoutoyingshou/selClient.jsp</result>
@@ -1804,7 +1809,7 @@
             <result name="success">/WEB-INF/pages/yufutoyingfu/yufutoyingfu_view.jsp</result>
         </action>
         <action name="delYufuToYingfu" class="yufuToYingfuAction" method="del">
-            <result name="success" type="redirect">listYufuToYingfu.html</result>
+            <result name="success" type="chain">listYufuToYingfu</result>
         </action>
         <action name="selYingfukClient" class="clientsAction" method="listSel">
             <result name="success">/WEB-INF/pages/yufutoyingfu/selClient.jsp</result>
@@ -1859,7 +1864,7 @@
             <result name="success">/WEB-INF/pages/msg.jsp</result>
         </action>                       
         <action name="delFysq" class="fysqAction" method="del">
-            <result name="success" type="redirect">listFysq.html</result>
+            <result name="success" type="chain">listFysq</result>
         </action>
         <!-- 费用申请单 -->
         
@@ -1923,7 +1928,7 @@
             <result name="success">/WEB-INF/pages/txfk/txfk_view.jsp</result>
         </action>
         <action name="delTxfk" class="txfkAction" method="del">
-            <result name="success" type="redirect">listTxfk.html</result>
+            <result name="success" type="chain">listTxfk</result>
         </action>
         <!-- 摊销付款 -->
           
@@ -2066,7 +2071,7 @@
              <result name="cancel" type="redirect">editLxr.html</result>
         </action>
         <action name="delLxr" class="lxrAction" method="del">
-             <result name="success">listLxr.html</result>
+             <result name="success" type="chain">listLxr</result>
         </action>       
         <!-- 联系人 -->
         
@@ -2615,7 +2620,7 @@
             <result name="success">/WEB-INF/pages/msg.jsp</result>
         </action>
         <action name="delCxd" class="cxdAction" method="del">
-            <result name="success" type="redirect">listCxd.html</result>
+            <result name="success" type="chain">listCxd</result>
         </action>
         <action name="viewCxd" class="cxdAction" method="edit">
             <result name="success">/WEB-INF/pages/cxd/cxd_view.jsp</result>
@@ -2647,7 +2652,7 @@
             <result name="success">/WEB-INF/pages/msg.jsp</result>
         </action>
         <action name="delZzd" class="zzdAction" method="del">
-            <result name="success" type="redirect">listZzd.html</result>
+            <result name="success" type="chain">listZzd</result>
         </action>
         <action name="viewZzd" class="zzdAction" method="edit">
             <result name="success">/WEB-INF/pages/zzd/zzd_view.jsp</result>
@@ -2744,7 +2749,7 @@
             <result name="success">/WEB-INF/pages/cnfkd/cnfkd_view.jsp</result>
         </action>
         <action name="delCnfkd" class="cnfkdAction" method="del">
-            <result name="success" type="redirect">listCnfkd.html</result>
+            <result name="success" type="chain">listCnfkd</result>
         </action>        
         <!-- 出纳付款单 -->
         
@@ -2776,7 +2781,7 @@
             <result name="success">/WEB-INF/pages/msg.jsp</result>
         </action>
 		<action name="delBwl" class="bwlAction" method="del">
-            <result name="success" type="redirect">listBwl.html</result>
+            <result name="success" type="chain">listBwl</result>
         </action>
         <action name="selMan" class="bwlAction" method="selLxr">
               <result name="success">/WEB-INF/pages/bwl/sel_man.jsp</result>
