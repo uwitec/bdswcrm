@@ -46,21 +46,10 @@ String iscs_flag = (String)VS.findValue("iscs_flag");
 		window.open(destination,'设置库存数量',fea);	
 	}
 	
-	//删除记录
-	function del(id){
-		if(confirm("确定要删除该条记录吗！")){
-			location.href = "delProductKc.html?kc_id=" + id;
-		}
-	}
-	
 	function clearAll(){
 		document.myform.product_xh.value = "";
 		document.myform.product_name.value = "";
 		document.myform.product_kind.value = "";
-	}
-	
-	function add(){
-		lcation.href = "addJhd.html";
 	}
 	
 	function doSort(order_name){
@@ -109,27 +98,30 @@ String iscs_flag = (String)VS.findValue("iscs_flag");
 	</thead>
 	<%
 	List list = results.getResults();
-	Iterator it = list.iterator();
 	
-	while(it.hasNext()){
-		Map map = (Map)it.next();
+	if(list != null){
+		Iterator it = list.iterator();
 		
-		String initNums = StringUtils.nullToStr(map.get("init_nums"));
+		while(it.hasNext()){
+			Map map = (Map)it.next();
+			
+			String initNums = StringUtils.nullToStr(map.get("init_nums"));
+			
+			String cssStyle = "";
+			if(!initNums.equals("")){
+				cssStyle = "style=\"color:red\"";
+			}
+		%>
+		<tr class="a1"  onmousedown="trSelectChangeCss()" <%=cssStyle %> <%if(iscs_flag.equals("0")){ %> title="双击设置商品库存" onDblClick="openWin('<%=StringUtils.nullToStr(map.get("product_id")) %>','<%=StringUtils.nullToStr(map.get("qz_serial_num")) %>');" <%}else{ %> title="库存初始已完成"<%} %>>
+			<td><%=StringUtils.nullToStr(map.get("product_name")) %></td>
+			<td><%=StringUtils.nullToStr(map.get("product_xh")) %></td>		
+			<td><%=StringUtils.nullToStr(map.get("dw")) %></td>
+			<td><%=StringUtils.nullToStr(map.get("init_date")) %></td>
+			<td><%=initNums %></td>
+		</tr>
 		
-		String cssStyle = "";
-		if(!initNums.equals("")){
-			cssStyle = "style=\"color:red\"";
+		<%
 		}
-	%>
-	<tr class="a1"  onmousedown="trSelectChangeCss()" <%=cssStyle %> <%if(iscs_flag.equals("0")){ %> title="双击设置商品库存" onDblClick="openWin('<%=StringUtils.nullToStr(map.get("product_id")) %>','<%=StringUtils.nullToStr(map.get("qz_serial_num")) %>');" <%}else{ %> title="库存初始已完成"<%} %>>
-		<td><%=StringUtils.nullToStr(map.get("product_name")) %></td>
-		<td><%=StringUtils.nullToStr(map.get("product_xh")) %></td>		
-		<td><%=StringUtils.nullToStr(map.get("dw")) %></td>
-		<td><%=StringUtils.nullToStr(map.get("init_date")) %></td>
-		<td><%=initNums %></td>
-	</tr>
-	
-	<%
 	}
 	%>
 </table>
@@ -139,6 +131,7 @@ String iscs_flag = (String)VS.findValue("iscs_flag");
 	</tr>
 </table>
 <BR>
+说明：请先保存页面顶部的初始化基本信息，保存后才能开始初始化商品库存；<BR><BR>
 商品库存初始分为两种情况，<BR>一、强制序列号商品，需要输入序列号来初始库存数量；<BR>二、不需要强制序列号商品，只需输入初始数量即可。<BR>红色字体代表，商品库存已初始化，
 系统初始工作结束后商品库存初始数据只可查看，不能修改。<BR>
 <font color="red">注意：如果添加初始信息列表没有反映，请检查系统启用日期是否设置。</font>

@@ -32,7 +32,9 @@
 
 	function del(id){
 		if(window.confirm("确认要退回吗？")){
-			location.href = "delCnfkd.html?id=" + id;
+			//location.href = "delCnfkd.html?id=" + id;
+			document.myform.action = "delCnfkd.html?id=" + id;
+			document.myform.submit();
 		}
 	}
 

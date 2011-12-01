@@ -36,7 +36,9 @@ String czr = StringUtils.nullToStr(VS.findValue("czr"));
 	
 	function del(id){
 		if(confirm("确定要删除该条记录吗！")){
-			location.href = "delNbgg.html?id=" + id;
+			//location.href = "delNbgg.html?id=" + id;
+			document.myform.action = "delNbgg.html?id=" + id;
+			document.myform.submit();
 		}
 	}
 	

@@ -122,7 +122,7 @@ Product product = (Product)VS.findValue("product");
 </script>
 </head>
 <body style="margin-top:0px;">
-<form name="productKcForm" action="saveProductKc.html" method="post">
+<form name="productKcForm" action="saveProductKcSerial.html" method="post">
 <input type="hidden" name="product_id" id="product_id" value="<%=StringUtils.nullToStr(product.getProductId()) %>">
 <input type="hidden" name="store_id" id="store_id" value="<%=store_id %>">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">

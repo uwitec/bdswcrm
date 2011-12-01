@@ -1,11 +1,11 @@
 BODY {
-	FONT-SIZE: 12px; MARGIN: 0px; FONT-FAMILY: "Arial", "Helvetica", "sans-serif";
+	FONT-SIZE: 12px; MARGIN: 0px;
 }
 TD {
-	FONT-SIZE: 12px; MARGIN: 2px;FONT-FAMILY: "Arial", "Helvetica", "sans-serif";
+	FONT-SIZE: 12px; MARGIN: 2px;
 }
 TH {
-	FONT-SIZE: 12px; MARGIN: 2px;FONT-FAMILY: "Arial", "Helvetica", "sans-serif";
+	FONT-SIZE: 12px; MARGIN: 2px;
 }
 .reportTitle {
 	FONT-WEIGHT: bold; FONT-SIZE: 14px; COLOR: #000000

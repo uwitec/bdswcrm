@@ -25,7 +25,9 @@
 	
 	function del(id){
 		if(window.confirm("确认要删除该行数据吗？")){
-			location.href = "delTxfk.html?id=" + id;
+			//location.href = "delTxfk.html?id=" + id;
+			document.myform.action = "delTxfk.html?id=" + id;
+			document.myform.submit();
 			return;
 		}
 	}

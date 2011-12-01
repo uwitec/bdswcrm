@@ -50,7 +50,9 @@ String client_name = (String)VS.findValue("client_name");
 	
 	function del(id){
 		if(confirm("确定要删除该条记录吗！")){
-			location.href = "delClientWlInit.html?seq_id=" + id;
+			//location.href = "delClientWlInit.html?seq_id=" + id;
+			document.myform.action = "delClientWlInit.html?seq_id=" + id;
+			document.myform.submit();
 		}
 	}	
 	

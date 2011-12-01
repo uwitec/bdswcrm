@@ -38,10 +38,7 @@ List userList = (List)VS.findValue("userList");
 <script type="text/javascript">
 	
 	function openWin(id){
-		var destination = "viewClientbb.html?id="+id;
-		var fea ='width=950,height=750,left=' + (screen.availWidth-800)/2 + ',top=' + (screen.availHeight-800)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
-		
-		window.open(destination,'详细信息',fea);		
+		window.open("viewClientbb.html?id="+id);		
 	}
 	
 	function clearAll(){
@@ -78,6 +75,15 @@ List userList = (List)VS.findValue("userList");
 	        event.returnValue = false;
 	    }
 	}
+
+	function trSelectChangeCss(){
+		if (event.srcElement.tagName=='TD'){
+			for(i=0;i<selTable.rows.length;i++){
+				selTable.rows[i].className="a1";
+			}
+			event.srcElement.parentElement.className='a2';
+		}
+	}
 </script>
 </head>
 <body>
@@ -102,7 +108,7 @@ List userList = (List)VS.findValue("userList");
 		</td>				
 	</tr>		
 </table>
-<table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0">
+<table width="100%"  align="center"  class="chart_list" cellpadding="0" border="1" cellspacing="0" id="selTable">
 	<thead>
 	<tr>
 		<td onclick="doSort('id');">编号<%if(orderName.equals("id")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
@@ -123,22 +129,22 @@ List userList = (List)VS.findValue("userList");
 	while(it.hasNext()){
 		Clients clients = (Clients)it.next();
 	%>
-	<tr class="a1"  title="双击查看详情" onDblClick="openWin('<%=StringUtils.nullToStr(clients.getId()) %>');">
-		<td class="a1"><%=StringUtils.nullToStr(clients.getId()) %></td>
-		<td class="a1"><%=StringUtils.nullToStr(clients.getName()) %></td>
-		<td class="a1"><%=StringUtils.nullToStr(clients.getAddress()) %></td>
+	<tr class="a1"  title="双击查看详情" onmousedown="trSelectChangeCss()"  onDblClick="openWin('<%=StringUtils.nullToStr(clients.getId()) %>');">
+		<td><%=StringUtils.nullToStr(clients.getId()) %></td>
+		<td><%=StringUtils.nullToStr(clients.getName()) %></td>
+		<td><%=StringUtils.nullToStr(clients.getAddress()) %></td>
 	<% 
 	String id=StringUtils.nullToStr(clients.getId());
 	ClientsLinkman clientsLinkman=(ClientsLinkman)clientsService.getZClientsLinkman(id);
 	%>
-		<td class="a1"><%=StringUtils.nullToStr(clientsLinkman.getName()) %></td>
-		<td class="a1"><%=StringUtils.nullToStr(clientsLinkman.getYddh()) %></td>
-		<td class="a1"><%=StringUtils.nullToStr(clientsLinkman.getGzdh()) %></td>
-		<td class="a1"><%=StringUtils.nullToStr(clientsLinkman.getMail()) %></td>
+		<td><%=StringUtils.nullToStr(clientsLinkman.getName()) %></td>
+		<td><%=StringUtils.nullToStr(clientsLinkman.getYddh()) %></td>
+		<td><%=StringUtils.nullToStr(clientsLinkman.getGzdh()) %></td>
+		<td><%=StringUtils.nullToStr(clientsLinkman.getMail()) %></td>
 	
-		<td class="a1"><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(clients.getKhjl())) %></td>
-		<td class="a1">
-			<a href="#" onclick="openWin('<%=StringUtils.nullToStr(clients.getId()) %>');"><img src="images/view.gif" align="absmiddle" title="查看" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
+		<td><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(clients.getKhjl())) %></td>
+		<td>
+			<a href="javascript:openWin('<%=StringUtils.nullToStr(clients.getId()) %>');"><img src="images/view.gif" align="absmiddle" title="查看" border="0" style="cursor:hand"></a>
 		</td>
 	</tr>
 	

@@ -26,8 +26,9 @@
 	
 	function del(id){
 		if(window.confirm("确认要删除该行数据吗？")){
-			location.href = "delZzd.html?id=" + id;
-			return;
+			//location.href = "delZzd.html?id=" + id;
+			document.myform.action = "delZzd.html?id=" + id;
+			document.myform.submit();
 		}
 	}
 	

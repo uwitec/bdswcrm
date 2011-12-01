@@ -31,6 +31,7 @@ con = "日期：" + start_date + "至" + end_date;
 <script language='JavaScript' src="js/date.js"></script>
 <script type="text/javascript" src="jquery/jquery.js"></script>
 <script type="text/javascript" src="js/initPageSize.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
 <script type="text/javascript">
 	function openWin(dj_id,start_date,end_date,client_name){
 		//var fea ='width=' + screen.availWidth + ',height=' + (screen.availHeight-25) + ',left=0,top=0,directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
@@ -107,7 +108,7 @@ if(list != null && list.size()>0){
 		</tr>
 </table>
 <center class="Noprint">
-	<input type="button" name="button_print" value=" 打 印 " onclick="window.print();"> &nbsp;&nbsp;
+	<input type="button" name="button_print" value=" 打 印 " onclick="printDiv('divContent');"> &nbsp;&nbsp;
     <input type="button" name="button_fh" value=" 返 回 " onclick="history.go(-1);"> 
 </center>
 </div>

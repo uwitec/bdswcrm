@@ -40,7 +40,9 @@ String orderType = (String)VS.findValue("orderType");
 	
 	function del(id){
 		if(confirm("确定要删除该条记录吗！")){
-			location.href = "delKfdb.html?id=" + id;
+			//location.href = "delKfdb.html?id=" + id;
+			document.myform.action = "delKfdb.html?id=" + id;
+			document.myform.submit();
 		}
 	}
 	

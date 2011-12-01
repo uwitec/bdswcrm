@@ -37,6 +37,7 @@ if(!dj_id.equals("")){
 <script language='JavaScript' src="js/date.js"></script>
 <script type="text/javascript" src="jquery/jquery.js"></script>
 <script type="text/javascript" src="js/initPageSize.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
 <script type="text/javascript">
 	function openWin(dj_id,start_date,end_date,client_name){
 		location.href = "getClientxsMxResult.html?dj_id=" + dj_id + "&start_date=" + start_date + "&end_date=" + end_date + "&client_name=" + client_name;
@@ -150,7 +151,7 @@ if(list != null && list.size()>0){
 		</tr>
 </table>
 <center class="Noprint">
-	<input type="button" name="button_print" value=" 打 印 " onclick="window.print();"> &nbsp;&nbsp;
+	<input type="button" name="button_print" value=" 打 印 " onclick="printDiv('divContent');"> &nbsp;&nbsp;
     <input type="button" name="button_fh" value=" 返 回 " onclick="history.go(-1);"> 
 </center>
 </div>

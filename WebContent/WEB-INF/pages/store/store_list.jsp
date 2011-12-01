@@ -45,7 +45,21 @@ String orderType = (String)VS.findValue("orderType");
 	
 	function del(id){
 		if(confirm("确定要删除该条记录吗！")){
-			location.href = "delStore.html?id=" + id;
+			//location.href = "delStore.html?id=" + id;
+			$.ajax({
+				cache: false,
+				url:"checkStoreCanDel.html",
+				type: "POST",
+				data:{id:id},
+				success: function(result) {
+					if(result == "false"){
+						alert("当前库房已产生业务往来数据不能删除！");
+					}else{
+						document.myform.action = "delStore.html?id=" + id;
+						document.myform.submit();
+					}
+				}
+			});	
 		}
 	}
 	
@@ -103,7 +117,7 @@ String orderType = (String)VS.findValue("orderType");
 	while(it.hasNext()){
 		Map map = (Map)it.next();
 	%>
-	<tr>
+	<tr class="a1"  title="双击查看详情" onDblClick="openWin('<%=StringUtils.nullToStr(map.get("id")) %>');">
 		<td class="a1"><%=StringUtils.nullToStr(map.get("id")) %></td>
 		<td class="a1"><%=StringUtils.nullToStr(map.get("name")) %></td>
 		<td class="a1"><%=StringUtils.nullToStr(map.get("address")) %></td>

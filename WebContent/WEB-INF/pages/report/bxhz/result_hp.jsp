@@ -43,6 +43,7 @@ if(!gcs.equals(""))
 <link href="css/report.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="jquery/jquery.js"></script>
 <script type="text/javascript" src="js/initPageSize.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
 <style media=print>  
 .Noprint{display:none;}<!--用本样式在打印时隐藏非打印项目-->
 </style> 
@@ -117,7 +118,7 @@ if(list != null && list.size()>0)
 		</tr>
 </table>
 <center class="Noprint">
-	<input type="button" name="button_print" value=" 打 印 " onclick="window.print();"> &nbsp;&nbsp;
+	<input type="button" name="button_print" value=" 打 印 " onclick="printDiv('divContent');"> &nbsp;&nbsp;
     <input type="button" name="button_fh" value=" 返 回 " onclick="history.go(-1);"> 
 </center>
 </div>

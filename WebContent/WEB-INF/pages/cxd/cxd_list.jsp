@@ -25,7 +25,9 @@
 	
 	function del(id){
 		if(window.confirm("确认要删除该行数据吗？")){
-			location.href = "delCxd.html?id=" + id;
+			//location.href = "delCxd.html?id=" + id;
+			document.myform.action = "delCxd.html?id=" + id;
+			document.myform.submit();
 			return;
 		}
 	}

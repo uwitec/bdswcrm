@@ -35,7 +35,20 @@ String orderType = (String)VS.findValue("orderType");
 	
 	function del(id){
 		if(confirm("确定要删除该单位及联系人吗！")){
-			location.href = "delClient.html?id=" + id;
+			$.ajax({
+				cache: false,
+				url:"checkClientCanDel.html",
+				type: "POST",
+				data:{id:id},
+				success: function(result) {
+					if(result == "false"){
+						alert("已发生往来业务，客户信息不能删除！");
+					}else{
+						document.myform.action = "delClient.html?id=" + id;
+						document.myform.submit();
+					}
+				}
+			});	
 		}
 	}
 	

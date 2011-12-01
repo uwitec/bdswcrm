@@ -44,20 +44,9 @@ String iscs_flag = (String)VS.findValue("iscs_flag");
 		window.open(destination,'设置库存数量',fea);	
 	}
 	
-	//删除记录
-	function del(id){
-		if(confirm("确定要删除该条记录吗！")){
-			location.href = "delProductKc.html?kc_id=" + id;
-		}
-	}
-	
 	function clearAll(){
 		document.myform.product_xh.value = "";
 		document.myform.product_name.value = "";
-	}
-	
-	function add(){
-		lcation.href = "addJhd.html";
 	}
 	
 	function doSort(order_name){

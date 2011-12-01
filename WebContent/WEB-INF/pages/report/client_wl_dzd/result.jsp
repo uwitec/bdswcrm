@@ -26,6 +26,7 @@ con = "日期：" + start_date + "至" + end_date + "&nbsp;&nbsp; 客户名称�
 <link href="css/report.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="jquery/jquery-1.4.2.min.js"></script>
 <script type="text/javascript" src="js/switchCss.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
 <style media=print>  
 .Noprint{display:none;}<!--用本样式在打印时隐藏非打印项目-->
 </style> 
@@ -362,7 +363,7 @@ if(list != null && list.size()>0){
 		</tr>
 </table>
 <center class="Noprint">
-	<input type="button" name="button_print" value=" 打 印 " onclick="window.print();"> &nbsp;&nbsp;
+	<input type="button" name="button_print" value=" 打 印 " onclick="printDiv('divContent');"> &nbsp;&nbsp;
 	<input type="button" name="button_print" value=" 导 出 " onclick="document.reportForm.submit();"> &nbsp;&nbsp;
     <input type="button" name="button_fh" value=" 返 回 " onclick="history.go(-1);"> 
 </center>

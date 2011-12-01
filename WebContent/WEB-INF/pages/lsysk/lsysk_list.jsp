@@ -12,6 +12,7 @@ String orderName = (String)VS.findValue("orderName");
 String orderType = (String)VS.findValue("orderType");
 
 String id = (String)VS.findValue("id");
+String q_id = (String)VS.findValue("q_id");
 String client_name = (String)VS.findValue("client_name");
 String ys_date1 = (String)VS.findValue("ys_date1");
 String ys_date2 = (String)VS.findValue("ys_date2");
@@ -39,18 +40,22 @@ String ys_type = (String)VS.findValue("ys_type");
 	
 	function del(id){
 		if(confirm("确定要删除该条记录吗？")){
-			location.href = "delLsysk.html?id=" + id;
+			//location.href = "delLsysk.html?id=" + id;
+			document.myform.action = "delLsysk.html?id=" + id;
+			document.myform.submit();
 		}
 	}
 
 	function th(id){
 		if(confirm("确定要退回预收款吗？")){
-			location.href = "doThLsysk.html?id=" + id;
+			//location.href = "doThLsysk.html?id=" + id;
+			document.myform.action = "doThLsysk.html?id=" + id;
+			document.myform.submit();
 		}
 	}
 	
 	function clearAll(){
-		document.myform.id.value = "";
+		document.myform.q_id.value = "";
 		document.myform.client_name.value = "";
 		document.myform.ys_date1.value = "";
 		document.myform.ys_date2.value = "";
@@ -122,7 +127,7 @@ String ys_type = (String)VS.findValue("ys_type");
 			<table width="100%" style="font-size: 12px">
 				<tr>
 					<td align="center">编　　号：</td>
-					<td><input type="text" name="id" value="<%=id %>"></td>
+					<td><input type="text" name="q_id" value="<%=q_id %>"></td>
 					<td align="center">预收时间：</td>
 					<td>
 						<input type="text" name="ys_date1" value="<%=ys_date1 %>" class="Wdate" onFocus="WdatePicker()">

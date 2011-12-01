@@ -39,7 +39,9 @@ String type = (String)VS.findValue("type");
 	
 	function del(id){
 		if(confirm("确定要删除该条记录吗！")){
-			location.href = "delPz.html?id=" + id;
+			//location.href = "delPz.html?id=" + id;
+			document.myform.action = "delPz.html?id=" + id;
+			document.myform.submit();
 		}
 	}
 	

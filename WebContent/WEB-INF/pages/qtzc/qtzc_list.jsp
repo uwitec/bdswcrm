@@ -38,7 +38,9 @@ String state = StringUtils.nullToStr(VS.findValue("state"));
 	
 	function del(id){
 		if(confirm("确定要退回吗！")){
-			location.href = "delQtzc.html?id=" + id;
+			//location.href = "delQtzc.html?id=" + id;
+			document.myform.action = "delQtzc.html?id=" + id;
+			document.myform.submit();
 		}
 	}
 	

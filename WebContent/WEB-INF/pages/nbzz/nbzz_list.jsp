@@ -37,7 +37,9 @@ String zz_date2 = (String)VS.findValue("zz_date2");
 	
 	function del(id){
 		if(confirm("确定要删除该条记录吗！")){
-			location.href = "delNbzz.html?id=" + id;
+			//location.href = "delNbzz.html?id=" + id;
+			document.myform.action = "delNbzz.html?id=" + id;
+			document.myform.submit();
 		}
 	}
 	

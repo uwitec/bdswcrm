@@ -24,13 +24,15 @@
 	
 	function del(serial_num){
 		if(window.confirm("确认要删除该行数据吗？")){
-			location.href = "delSerialNum.html?serial_num=" + serial_num;
+			//location.href = "delSerialNum.html?serial_num=" + serial_num;
+			document.myform.action = "delSerialNum.html?serial_num=" + serial_num;
+			document.myform.submit();
 			return;
 		}
 	}
 	
 	function clearAll(){
-		document.myform.serial_num.value = "";
+		document.myform.q_serial_num.value = "";
 		document.myform.product_name.value = "";
 		document.myform.state.value = "";
 		document.myform.store_id.value = "";
@@ -56,7 +58,7 @@
 	<tr>
 		<td class="search" align="left" colspan="2">&nbsp;&nbsp;
 			序列号：
-			<ww:textfield theme="simple" name="serial_num" id="serial_num" value="%{serial_num}"/> 
+			<ww:textfield theme="simple" name="q_serial_num" id="q_serial_num" value="%{q_serial_num}"/> 
 			&nbsp;&nbsp;		
 			商品名称：
 			<ww:textfield theme="simple" name="product_name" id="product_name" value="%{product_name}"/> 

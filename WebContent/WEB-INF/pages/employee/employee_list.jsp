@@ -35,13 +35,17 @@ String is_del = (String)VS.findValue("is_del");
 	
 	function del(id){
 		if(confirm("确定要删除该条记录吗！")){
-			location.href = "delEmployee.html?employee_id=" + id;
+			//location.href = "delEmployee.html?employee_id=" + id;
+			document.myform.action = "delEmployee.html?employee_id=" + id;
+			document.myform.submit();
 		}
 	}
 	
 	function restore(id){
 		if(confirm("确定要还原该条记录吗！")){
-			location.href = "restoreEmployee.html?employee_id=" + id;
+			//location.href = "restoreEmployee.html?employee_id=" + id;
+			document.myform.action = "restoreEmployee.html?employee_id=" + id;
+			document.myform.submit();
 		}
 	}
 	

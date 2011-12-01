@@ -55,7 +55,7 @@ String product_state = StringUtils.nullToStr(VS.findValue("product_state"));
 	}	
 	
 	function openWin(id){
-		var destination = "viewProduct.html?productId="+id;
+		var destination = "viewProduct.html?product_id="+id;
 		var fea ='width=600,height=500,left=' + (screen.availWidth-600)/2 + ',top=' + (screen.availHeight-500)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
 		window.open(destination,'详细信息',fea);	
@@ -63,14 +63,25 @@ String product_state = StringUtils.nullToStr(VS.findValue("product_state"));
 	
 	function delProduct(id){
 		if(confirm("确定要删除该条记录吗！")){
-			document.myform.action = "delProduct.html";
-			document.myform.productId.value = id;
-			document.myform.submit();
+			$.ajax({
+				cache: false,
+				url:"checkProductCanDel.html",
+				type: "POST",
+				data:{product_id:id},
+				success: function(result) {
+					if(result == "false"){
+						alert("当前商品已产生业务往来数据不能删除！");
+					}else{
+						document.myform.action = "delProduct.html?product_id=" + id;
+						document.myform.submit();
+					}
+				}
+			});	
 		}
 	}
 	function editProduct(id){
 
-		var destination = "editProduct.html?productId="+id;
+		var destination = "editProduct.html?product_id="+id;
 		var fea ='width=600,height=500,left=' + (screen.availWidth-600)/2 + ',top=' + (screen.availHeight-500)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 				
 		window.open(destination,'添加商品',fea);
@@ -94,7 +105,6 @@ String product_state = StringUtils.nullToStr(VS.findValue("product_state"));
 <body>
 <form name="myform" action="product_list.html" method="post">
 <input type="hidden" name="curId" id="curId" value="<%=curId %>">
-<input type="hidden" name="productId">
 <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0">
 	<tr>
 		<td class="csstitle" align="left" width="75%">&nbsp;&nbsp;&nbsp;&nbsp;<b>商品维护</b></td>

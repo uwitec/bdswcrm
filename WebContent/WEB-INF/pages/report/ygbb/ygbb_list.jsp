@@ -30,7 +30,7 @@ List deptList = (List)VS.findValue("depts");
 <script type="text/javascript">	
 	function view(id){
 		var destination = "viewYgbb.html?employee_id="+id;
-		var fea ='width=800,height=660,left=' + (screen.availWidth-800)/2 + ',top=' + (screen.availHeight-660)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		var fea ='width=800,height=600,left=' + (screen.availWidth-800)/2 + ',top=' + (screen.availHeight-600)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
 		window.open(destination,'详细信息',fea);	
 	}
@@ -147,7 +147,7 @@ List deptList = (List)VS.findValue("depts");
 		<td><%=StringUtils.nullToStr(map.get("qq")) %></td>
 		<td><%=StringUtils.nullToStr(map.get("msn")) %></td>
 		<td>
-			<a href="javascript:view('<%=StringUtils.nullToStr(map.get("user_id")) %>');"><img src="images/view.gif" align="absmiddle" title="查看" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
+			<a href="javascript:view('<%=StringUtils.nullToStr(map.get("user_id")) %>');"><img src="images/view.gif" align="absmiddle" title="查看" border="0" style="cursor:hand"></a>
 		</td>
 	</tr>
 	

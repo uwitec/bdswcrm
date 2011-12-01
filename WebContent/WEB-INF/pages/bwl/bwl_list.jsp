@@ -32,7 +32,9 @@ Page results = (Page)VS.findValue("bwlPage");
 	
 	function del(id){
 		if(confirm("确定要删除该条记录吗！")){
-			location.href = "delBwl.html?id=" + id;
+			//location.href = "delBwl.html?id=" + id;
+			document.myform.action = "delBwl.html?id=" + id;
+			document.myform.submit();
 		}
 	}
 	
@@ -48,7 +50,12 @@ Page results = (Page)VS.findValue("bwlPage");
 		var fea = 'width=850,height=650,left=' + (screen.availWidth-850)/2 + ',top=' + (screen.availHeight-650)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
 		window.open(destination,'修改备忘录',fea);		
-	}		
+	}	
+
+	function refreshPage(){
+		document.myform.action = "listBwl.html";
+		document.myform.submit();
+	}	
 </script>
 </head>
 <body >
@@ -57,8 +64,9 @@ Page results = (Page)VS.findValue("bwlPage");
 <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0">
 	<tr>
 		<td class="csstitle" align="left" width="75%">&nbsp;&nbsp;&nbsp;&nbsp;<b>备忘录</b></td>
-		<td class="csstitle" width="25%" align="right">
-			<img src="images/create.gif" align="absmiddle" border="0">&nbsp;<a href="#" onclick="add();" class="xxlb"> 添 加 </a> &nbsp;&nbsp;&nbsp;</td>			
+		<td class="csstitle" width="25%" align="left">
+			<img src="images/create.gif" align="absmiddle" border="0">&nbsp;<a href="#" onclick="add();" class="xxlb"> 添 加 </a> &nbsp;&nbsp;&nbsp;
+			<img src="images/import.gif" align="absmiddle" border="0">&nbsp;<a href="#" onclick="refreshPage();" class="xxlb"> 刷 新 </a>	</td>
 	</tr>
 </table>
 <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0">

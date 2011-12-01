@@ -39,7 +39,9 @@ String orderType = (String)VS.findValue("orderType");
 	
 	function del(id){
 		if(confirm("确定要删除该条记录吗！")){
-			location.href = "delLsd.html?id=" + id;
+			//location.href = "delLsd.html?id=" + id;
+			document.myform.action = "delLsd.html?id=" + id;
+			document.myform.submit();
 		}
 	}
 	

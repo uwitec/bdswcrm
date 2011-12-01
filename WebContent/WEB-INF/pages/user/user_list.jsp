@@ -32,7 +32,9 @@ String is_del = (String)VS.findValue("is_del");
 	
 	function del(id){
 		if(confirm("确定要删除该条记录吗！")){
-			location.href = "delUser.html?user_id=" + id;
+			//location.href = "delUser.html?user_id=" + id;
+			document.myform.action = "delUser.html?user_id=" + id;
+			document.myform.submit();
 		}
 	}
 
@@ -47,7 +49,9 @@ String is_del = (String)VS.findValue("is_del");
 						alert("超出用户数限制不能恢复该用户，如需恢复该用户请与服务商联系！");
 						return;
 					}else{
-						location.href = "restoreUser.html?user_id=" + id;
+						//location.href = "restoreUser.html?user_id=" + id;
+						document.myform.action = "restoreUser.html?user_id=" + id;
+						document.myform.submit();
 					}
 				}
 			});	

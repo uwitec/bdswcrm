@@ -12,6 +12,7 @@
 <script language='JavaScript' src="js/date.js"></script>
 <script type="text/javascript" src="jquery/jquery.js"></script>
 <script type="text/javascript" src="js/initPageSize.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
 </head>
 <body align="center" >
 <div class="rightContentDiv" id="divContent">
@@ -134,7 +135,7 @@
 </TABLE>
 </ww:form>
 <center class="Noprint">
-	<input type="button" name="button_print" value=" 打 印 " onclick="window.print();">
+	<input type="button" name="button_print" value=" 打 印 " onclick="printDiv('divContent');">
 </center>
 　注：<BR>
 　一、主营业务收入 ＝ 库存商品销售收入 － 库存商品退货金额<BR>

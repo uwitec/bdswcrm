@@ -30,6 +30,7 @@ String client_name = StringUtils.nullToStr(request.getParameter("client_name"));
 <script language='JavaScript' src="js/date.js"></script>
 <script type="text/javascript" src="jquery/jquery.js"></script>
 <script type="text/javascript" src="js/initPageSize.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
 <script type="text/javascript">
 	function openWin(url,winTitle){
 		var fea ='width=800,height=600,left=' + (screen.availWidth-800)/2 + ',top=' + (screen.availHeight-600)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
@@ -150,7 +151,7 @@ if(lsdList != null && lsdList.size()>0){
 		</tr>
 </table>
 <center class="Noprint">
-	<input type="button" name="button_print" value=" 打印 " onclick="window.print();"> &nbsp;&nbsp;
+	<input type="button" name="button_print" value=" 打印 " onclick="printDiv('divContent');"> &nbsp;&nbsp;
     <input type="button" name="button_fh" value=" 返回 " onclick="history.go(-1);"> 
 </center>
 </div>
