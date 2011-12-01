@@ -12,7 +12,6 @@ import com.sw.cms.service.ProductService;
 import com.sw.cms.service.SjzdService;
 import com.sw.cms.service.SysInitSetService;
 import com.sw.cms.util.Constant;
-import com.sw.cms.util.StringUtils;
 
 public class ProductAction extends BaseAction implements ModelDriven{
 	
@@ -40,6 +39,7 @@ public class ProductAction extends BaseAction implements ModelDriven{
 	private String product_xh = "";
 	private String product_state = "正常";
 	private String iscs_flag = "";  //系统是否初始完成标志
+	private String product_id = "";
 
 	public Page getProductPage() {
 		return productPage;
@@ -106,11 +106,8 @@ public class ProductAction extends BaseAction implements ModelDriven{
 	 * @return
 	 */
 	public String editProduct(){
-		
-		String productId = StringUtils.nullToStr(getRequest().getParameter("productId"));
-		
-		if(!productId.equals("")){
-			Object obj = productService.getProductById(productId);
+		if(!product_id.equals("")){
+			Object obj = productService.getProductById(product_id);
 			if(obj != null){
 				setProduct((Product)obj);
 			}
@@ -138,17 +135,20 @@ public class ProductAction extends BaseAction implements ModelDriven{
 	 * @return
 	 */
 	public String delProduct(){
-		
-		String productId = StringUtils.nullToStr(getRequest().getParameter("productId"));	
-		
-		if(!productService.isCanDel(productId)){
-			this.setMsg("该商品已发生业务往来或库存数量不为0，不能删除！");
-			return "notDel";
-		}
-		productService.delProductById(productId);		
-		
+		productService.delProductById(product_id);		
 		return "success";
 	}	
+	
+	/**
+	 * 判断商品是否能够被删除
+	 */
+	public void checkProductCanDel(){
+		if(!productService.isCanDel(product_id)){
+			this.writeStringToResponse("false");
+		}else{
+			this.writeStringToResponse("true");
+		}
+	}
 	
 	
 	/**
@@ -416,5 +416,14 @@ public class ProductAction extends BaseAction implements ModelDriven{
 	public void setProduct_prop(String productProp) {
 		product_prop = productProp;
 	}
-	
+
+
+	public String getProduct_id() {
+		return product_id;
+	}
+
+
+	public void setProduct_id(String productId) {
+		product_id = productId;
+	}
 }

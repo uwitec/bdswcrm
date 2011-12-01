@@ -354,7 +354,7 @@ public class KfdbAction extends BaseAction {
 	 * @return
 	 */
 	public String del(){
-		if(!kfdbService.isDoKfdb(kfdb.getId())){
+		if(!kfdbService.isDoKfdb(id)){
 			return "success";
 		}
 		kfdbService.delKfdb(id);

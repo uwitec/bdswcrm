@@ -19,6 +19,7 @@ public class SerialNumAction extends BaseAction {
 	private StoreService storeService;
 	
 	private String serial_num = "";
+	private String q_serial_num = "";
 	private String state = "";
 	private String product_name = "";
 	private String product_xh = "";
@@ -41,8 +42,8 @@ public class SerialNumAction extends BaseAction {
 	public String list(){
 		int rowsPerPage = Constant.PAGE_SIZE2;
 		String con = "";
-		if(!serial_num.equals("")){
-			con += " and serial_num='" + serial_num + "'";
+		if(!q_serial_num.equals("")){
+			con += " and serial_num='" + q_serial_num + "'";
 		}
 		if(!state.equals("")){
 			con += " and state='" + state + "'";
@@ -260,6 +261,14 @@ public class SerialNumAction extends BaseAction {
 
 	public void setStore_id(String store_id) {
 		this.store_id = store_id;
+	}
+
+	public String getQ_serial_num() {
+		return q_serial_num;
+	}
+
+	public void setQ_serial_num(String qSerialNum) {
+		q_serial_num = qSerialNum;
 	}
 
 }

@@ -117,9 +117,6 @@ public class XsdAction extends BaseAction {
 	public String list(){
 
 		String con = "";
-		if(!id.equals("")){
-			con += " and a.id='" + id + "'";
-		}
 		if(!client_name.equals("")){
 			con += " and c.name like '%" + client_name + "%'";
 		}

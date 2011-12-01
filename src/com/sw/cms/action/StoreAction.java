@@ -94,15 +94,17 @@ public class StoreAction extends BaseAction {
 	 */
 	public String del(){
 		String id = ParameterUtility.getStringParameter(getRequest(),"id", "");
-		
-		//发生业务关系，库房信息不能删除
-		if(!storeService.isCanDel(id)){
-			this.setMsg("已产生业务关系，库房信息不能删除");
-			return "notDel";
-		}
-		
 		storeService.delStore(id);
 		return "success";
+	}
+	
+	public void checkStoreCanDel(){
+		String id = ParameterUtility.getStringParameter(getRequest(),"id", "");
+		if(!storeService.isCanDel(id)){
+			this.writeStringToResponse("false");
+		}else{
+			this.writeStringToResponse("true");
+		}
 	}
 	
 

@@ -39,7 +39,18 @@ public class LsyskAction extends BaseAction {
 	private List posTypeList = new ArrayList();
 	
 	private String id = "";
+	private String q_id = "";
 	
+	public String getQ_id() {
+		return q_id;
+	}
+
+
+	public void setQ_id(String qId) {
+		q_id = qId;
+	}
+
+
 	private String client_name = "";
 	private String ys_date1 = "";
 	private String ys_date2 = "";
@@ -112,8 +123,8 @@ public class LsyskAction extends BaseAction {
 		if(!ys_date2.equals("")){
 			con += " and ys_date<='" + ys_date2 + "'";
 		}
-		if(!id.equals("")){
-			con += " and id='" + id + "'";
+		if(!q_id.equals("")){
+			con += " and id='" + q_id + "'";
 		}
 		if(!ys_type.equals("")){
 			con += " and type='" + ys_type + "'";

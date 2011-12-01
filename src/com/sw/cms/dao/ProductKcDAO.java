@@ -8,6 +8,7 @@ import java.util.Map;
 
 import org.springframework.jdbc.core.RowMapper;
 
+import com.sw.cms.dao.SysInitSetDAO.SysInitSetRowMapper;
 import com.sw.cms.dao.base.JdbcBaseDAO;
 import com.sw.cms.dao.base.SqlUtil;
 import com.sw.cms.model.Page;
@@ -15,6 +16,7 @@ import com.sw.cms.model.Product;
 import com.sw.cms.model.ProductKc;
 import com.sw.cms.model.Rkd;
 import com.sw.cms.model.RkdProduct;
+import com.sw.cms.model.SysInitSet;
 import com.sw.cms.model.Ykrk;
 import com.sw.cms.model.YkrkProduct;
 import com.sw.cms.util.StringUtils;
@@ -48,7 +50,32 @@ public class ProductKcDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public Page getProductInitList(String con,String store_id,int curPage, int rowsPerPage){
-		String sql = "select a.product_id,a.product_name,a.product_xh,a.dw,a.qz_serial_num,b.cdate as init_date,b.nums as init_nums from product a left join (select * from product_kc_qc where cdate=(select qyrq from sys_init_set) and store_id='" + store_id + "') b on b.product_id=a.product_id where a.prop='库存商品'";
+		//取系统启用日期
+		String qyrqSql = "select * from sys_init_set";
+		List list = this.getResultList(qyrqSql);
+		String qyrq = "";
+		if(list.size() > 0){
+			Map qyrqMap = (Map)list.get(0);
+			if(qyrqMap != null){
+				qyrq = StringUtils.nullToStr(qyrqMap.get("qyrq"));
+			}
+		}
+		
+		if(qyrq.equals("")){
+			//如果没有设置启用日期，返回空；
+			return new Page();
+		}
+		
+		//没有保存仓库信息列表为空
+		if(store_id == null || store_id.equals("")){
+			return new Page();
+		}
+		
+		String sql = "select a.product_id,a.product_name,a.product_xh,a.dw,a.qz_serial_num,b.cdate as init_date,b.nums as init_nums from product a " +
+				     "left join " +
+				     "(select cdate,nums,store_id,product_id from product_kc_qc where cdate='" + qyrq + "' and store_id='" + store_id + "') b " +
+				     "on b.product_id=a.product_id " +
+				     "where a.prop='库存商品'";
 		
 		if(!con.equals("")){
 			sql = sql + con;
