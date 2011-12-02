@@ -823,7 +823,7 @@
             <result name="success">/WEB-INF/pages/msg.jsp</result>
         </action>
         <action name="delRole" class="roleAction" method="del">
-            <result name="success" type="redirect">listRole.html</result>
+            <result name="success" type="chain">listRole</result>
         </action>
         <action name="openFuns" class="roleAction" method="openFuns">
             <result name="success">/WEB-INF/pages/role/selectFuncs.jsp</result>
