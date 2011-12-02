@@ -44,6 +44,15 @@ String czr = StringUtils.nullToStr(VS.findValue("czr"));
 		document.myform.action = "listGdNbgg.html";
 		document.myform.submit();
 	}
+
+	function trSelectChangeCss(){
+		if (event.srcElement.tagName=='TD'){
+			for(i=0;i<selTable.rows.length;i++){
+				selTable.rows[i].className="a1";
+			}
+			event.srcElement.parentElement.className='a2';
+		}
+	}
 </script>
 </head>
 <body >
@@ -67,7 +76,7 @@ String czr = StringUtils.nullToStr(VS.findValue("czr"));
 		</td>				
 	</tr>	
 </table>
-<table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0">
+<table width="100%" border="1" align="center"  class="chart_list" cellpadding="0" cellspacing="0" id="selTable">
 	<thead>
 	<tr>
 		<td>序号</td>
@@ -85,12 +94,12 @@ String czr = StringUtils.nullToStr(VS.findValue("czr"));
 		XxfbNbgg info = (XxfbNbgg)it.next();
 		i++;
 	%>
-	<tr>
-		<td class="a1"><%=i %></td>
-		<td class="a1"><a href="javascript:void(0);" onclick="openWin('<%=StringUtils.nullToStr(info.getId()) %>');" class="xxlb"><%=StringUtils.nullToStr(info.getTitle()) %></a></td>
-		<td class="a1"><%=StringUtils.nullToStr(info.getPub_date()) %></td>
-		<td class="a1"><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(info.getCzr())) %></td>
-		<td class="a1">
+	<tr class="a1" onmousedown="trSelectChangeCss()" onDblClick="openWin('<%=StringUtils.nullToStr(info.getId()) %>');">
+		<td><%=i %></td>
+		<td><a href="javascript:void(0);" onclick="openWin('<%=StringUtils.nullToStr(info.getId()) %>');" class="xxlb"><%=StringUtils.nullToStr(info.getTitle()) %></a></td>
+		<td><%=StringUtils.nullToStr(info.getPub_date()) %></td>
+		<td><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(info.getCzr())) %></td>
+		<td>
 			<a href="javascript:void(0);" onclick="openWin('<%=StringUtils.nullToStr(info.getId()) %>');"><img src="images/view.gif" align="absmiddle" title="查看" border="0" style="cursor:hand"></a>
 		</td>
 	</tr>

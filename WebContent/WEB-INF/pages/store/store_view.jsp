@@ -36,33 +36,22 @@ StoreHouse storeHouse = (StoreHouse)VS.findValue("storeHouse");
 	</thead>
 	<tr>
 		<td class="a1" width="15%">仓库名称</td>
-		<td class="a2" width="35%"><input type="text" name="storeHouse.name" id="name" value="<%=StringUtils.nullToStr(storeHouse.getName()) %>" readonly size="30" maxlength="35"></td>
+		<td class="a2" width="35%"><%=StringUtils.nullToStr(storeHouse.getName()) %></td>
 		<td class="a1" width="15%">地址</td>
-		<td class="a2" width="35%"><input type="text" name="storeHouse.address" id="address" value="<%=StringUtils.nullToStr(storeHouse.getAddress()) %>" readonly size="40" maxlength="50"></td>
+		<td class="a2" width="35%"><%=StringUtils.nullToStr(storeHouse.getAddress()) %></td>
 	</tr>
 	<tr>
 		<td class="a1" width="15%">联系人</td>
-		<td class="a2" width="35%"><input type="text" name="storeHouse.lxr" id="lxr" value="<%=StringUtils.nullToStr(storeHouse.getLxr()) %>" readonly size="25" maxlength="32"></td>
+		<td class="a2" width="35%"><%=StringUtils.nullToStr(storeHouse.getLxr()) %></td>
 		<td class="a1" width="15%">联系电话</td>
-		<td class="a2" width="35%"><input type="text" name="storeHouse.lxdh" id="lxdh" value="<%=StringUtils.nullToStr(storeHouse.getLxdh()) %>" readonly size="30" maxlength="50"></td>
+		<td class="a2" width="35%"><%=StringUtils.nullToStr(storeHouse.getLxdh()) %></td>
 	</tr>	
-</table>
-<br>
-<table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
-	<thead>
 	<tr>
-		<td colspan="4">其    它</td>
+		<td class="a1" width="15%">备注</td>
+		<td class="a2" width="85%" colspan="3"><%=StringUtils.nullToStr(storeHouse.getRemark()) %></td>
 	</tr>
-	</thead>
-	<tr height="50">
-		<td class="a1" width="20%">备注</td>
-		<td class="a2" width="80%">
-			<textarea rows="6" cols="50" name="storeHouse.remark" id="remark" style="width:80%" maxlength="500" readonly><%=StringUtils.nullToStr(storeHouse.getRemark()) %></textarea>
-		</td>
-	</tr>
-	
 	<tr height="35">
-		<td class="a1" colspan="2">
+		<td class="a1" colspan="4">
 			<input type="button" name="button1" value="关闭" class="css_button2" onclick="window.close();">
 		</td>
 	</tr>

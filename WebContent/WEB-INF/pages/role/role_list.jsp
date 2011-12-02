@@ -26,7 +26,9 @@ String role_name = ParameterUtility.getStringParameter(request,"role_name", "");
 	
 	function del(id){
 		if(confirm("确定要删除该条记录吗！")){
-			location.href = "delRole.html?id=" + id;
+			//location.href = "delRole.html?id=" + id;
+			document.myform.action = "delRole.html?id=" + id;
+			document.myform.submit();
 		}
 	}
 	
@@ -68,6 +70,15 @@ String role_name = ParameterUtility.getStringParameter(request,"role_name", "");
 		var fea ='width=600,height=400,left=' + (screen.availWidth-600)/2 + ',top=' + (screen.availHeight-400)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		window.open(destination,'详细信息',fea);	
 	}
+
+	function trSelectChangeCss(){
+		if (event.srcElement.tagName=='TD'){
+			for(i=0;i<selTable.rows.length;i++){
+				selTable.rows[i].className="a1";
+			}
+			event.srcElement.parentElement.className='a2';
+		}
+	}
 </script>
 </head>
 <body>
@@ -88,7 +99,7 @@ String role_name = ParameterUtility.getStringParameter(request,"role_name", "");
 		</td>				
 	</tr>		
 </table>
-<table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0">
+<table width="100%" border="1" align="center"  class="chart_list" cellpadding="0" cellspacing="0" id="selTable">
 	<thead>
 	<tr>
 		<td>选择</td>
@@ -105,12 +116,12 @@ String role_name = ParameterUtility.getStringParameter(request,"role_name", "");
 	while(it.hasNext()){
 		Map map = (Map)it.next();
 	%>
-	<tr>
-		<td class="a1"><input type="checkbox" name="role_id" value="<%=StringUtils.nullToStr(map.get("role_id")) %>"></td>
-		<td class="a1"><%=StringUtils.nullToStr(map.get("role_id")) %></td>
-		<td class="a1"><%=StringUtils.nullToStr(map.get("role_name")) %></td>
-		<td class="a1"><%=StringUtils.nullToStr(map.get("xh")) %></td>
-		<td class="a1">
+	<tr class="a1" onmousedown="trSelectChangeCss()" onDblClick="edit('<%=StringUtils.nullToStr(map.get("role_id")) %>');">
+		<td><input type="checkbox" name="role_id" value="<%=StringUtils.nullToStr(map.get("role_id")) %>"></td>
+		<td><%=StringUtils.nullToStr(map.get("role_id")) %></td>
+		<td><%=StringUtils.nullToStr(map.get("role_name")) %></td>
+		<td><%=StringUtils.nullToStr(map.get("xh")) %></td>
+		<td>
 			<a href="javascript:edit('<%=StringUtils.nullToStr(map.get("role_id")) %>');"><img src="images/modify.gif" align="absmiddle" title="修改角色信息" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
 			<a href="javascript:del('<%=StringUtils.nullToStr(map.get("role_id")) %>');"><img src="images/del.gif" align="absmiddle" title="删除角色信息" border="0" style="cursor:hand"></a>
 		</td>

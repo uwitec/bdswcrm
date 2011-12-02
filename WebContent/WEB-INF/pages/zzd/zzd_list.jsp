@@ -47,6 +47,15 @@
 		document.descForm.id.value = id;
 		document.descForm.submit();		
 	}	
+
+	function trSelectChangeCss(){
+		if (event.srcElement.tagName=='TD'){
+			for(i=0;i<selTable.rows.length;i++){
+				selTable.rows[i].className="a1";
+			}
+			event.srcElement.parentElement.className='a2';
+		}
+	}
 </script>
 </head>
 <body>
@@ -73,7 +82,7 @@
 		</td>				
 	</tr>		
 </table>
-<table width="100%"  align="center"  border="1"   class="chart_list" cellpadding="0" cellspacing="0">
+<table width="100%"  align="center"  border="1"   class="chart_list" cellpadding="0" cellspacing="0" id="selTable">
 	<thead>
 	<tr>
 		<td>编号</td>
@@ -91,7 +100,7 @@
 	</tr>
 	</thead>
 	<ww:iterator value="%{pageZzd.results}">
-		<tr class="a1" onmouseover="this.className='a2';" onmouseout="this.className='a1';" onclick="descMx('<ww:property value="%{id}" />');" onDblClick="view('<ww:property value="%{id}" />');";>
+		<tr class="a1" onmousedown="trSelectChangeCss()" onclick="descMx('<ww:property value="%{id}" />');" onDblClick="view('<ww:property value="%{id}" />');";>
 			<td><ww:property value="%{id}" /></td>
 			<td><ww:property value="%{product_id}" /></td>
 			<td align="left"><ww:property value="%{product_name}" /></td>

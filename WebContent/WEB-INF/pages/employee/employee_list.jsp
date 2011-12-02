@@ -28,7 +28,7 @@ String is_del = (String)VS.findValue("is_del");
 <script type="text/javascript">	
 	function view(id){
 		var destination = "viewEmployee.html?employee_id="+id;
-		var fea ='width=800,height=660,left=' + (screen.availWidth-800)/2 + ',top=' + (screen.availHeight-660)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		var fea ='width=800,height=600,left=' + (screen.availWidth-800)/2 + ',top=' + (screen.availHeight-600)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
 		window.open(destination,'详细信息',fea);	
 	}
@@ -55,14 +55,14 @@ String is_del = (String)VS.findValue("is_del");
 			return;
 		}
 		var destination = "addEmployee.html?dept_id=" + document.myform.dept_id.value;
-		var fea ='width=800,height=660,left=' + (screen.availWidth-800)/2 + ',top=' + (screen.availHeight-660)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		var fea ='width=800,height=600,left=' + (screen.availWidth-800)/2 + ',top=' + (screen.availHeight-600)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
 		window.open(destination,'添加',fea);	
 	}
 	
 	function edit(userId){
 		var destination = "editEmployee.html?employee_id=" + userId;
-		var fea ='width=800,height=660,left=' + (screen.availWidth-800)/2 + ',top=' + (screen.availHeight-660)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		var fea ='width=800,height=600,left=' + (screen.availWidth-800)/2 + ',top=' + (screen.availHeight-600)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
 		window.open(destination,'修改',fea);	
 	}		
@@ -78,7 +78,16 @@ String is_del = (String)VS.findValue("is_del");
 	function refreshPage(){
 		document.myform.action = "listEmployee.html";
 		document.myform.submit();
-	}		
+	}	
+
+	function trSelectChangeCss(){
+		if (event.srcElement.tagName=='TD'){
+			for(i=0;i<selTable.rows.length;i++){
+				selTable.rows[i].className="a1";
+			}
+			event.srcElement.parentElement.className='a2';
+		}
+	}	
 </script>
 </head>
 <body >
@@ -118,7 +127,7 @@ String is_del = (String)VS.findValue("is_del");
 		</td>				
 	</tr>		
 </table>
-<table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0">
+<table width="100%" border="1" align="center"  class="chart_list" cellpadding="0" cellspacing="0" id="selTable">
 	<thead>
 	<tr>
 		<td>工号</td>
@@ -147,18 +156,18 @@ String is_del = (String)VS.findValue("is_del");
 			q_is_del = "删除";
 		}
 	%>
-	<tr>
-		<td class="a1" no><%=StringUtils.nullToStr(map.get("gh")) %></td>
-		<td class="a1" nowrap="nowrap"><%=StringUtils.nullToStr(map.get("real_name")) %></td>
-		<td class="a1"><%=StringUtils.nullToStr(map.get("sex")) %></td>
-		<td class="a1"><%=StringUtils.nullToStr(map.get("gs_phone")) %></td>
-		<td class="a1"><%=StringUtils.nullToStr(map.get("mobile")) %></td>
-		<td class="a1"><%=StringUtils.nullToStr(map.get("dept_name")) %></td>
-		<td class="a1"><%=StringUtils.nullToStr(map.get("position")) %></td>
-		<td class="a1"><%=StringUtils.nullToStr(map.get("is_ywy")) %></td>
-		<td class="a1"><%=StringUtils.nullToStr(map.get("zzzt")) %></td>
-		<td class="a1"><%=q_is_del %></td>
-		<td class="a1" nowrap="nowrap">
+	<tr class="a1" onmousedown="trSelectChangeCss()" onDblClick="view('<%=StringUtils.nullToStr(map.get("user_id")) %>');";>
+		<td nowrap="nowrap"><%=StringUtils.nullToStr(map.get("gh")) %></td>
+		<td nowrap="nowrap"><%=StringUtils.nullToStr(map.get("real_name")) %></td>
+		<td><%=StringUtils.nullToStr(map.get("sex")) %></td>
+		<td><%=StringUtils.nullToStr(map.get("gs_phone")) %></td>
+		<td><%=StringUtils.nullToStr(map.get("mobile")) %></td>
+		<td><%=StringUtils.nullToStr(map.get("dept_name")) %></td>
+		<td><%=StringUtils.nullToStr(map.get("position")) %></td>
+		<td><%=StringUtils.nullToStr(map.get("is_ywy")) %></td>
+		<td><%=StringUtils.nullToStr(map.get("zzzt")) %></td>
+		<td><%=q_is_del %></td>
+		<td nowrap="nowrap">
 			<a href="#" onclick="edit('<%=StringUtils.nullToStr(map.get("user_id")) %>');">修改</a>
 			<a href="#" onclick="view('<%=StringUtils.nullToStr(map.get("user_id")) %>');">查看</a>
 			<%if(StringUtils.nullToStr(map.get("is_del")).equals("0")){ %>

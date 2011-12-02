@@ -142,7 +142,7 @@ String orderType = (String)VS.findValue("orderType");
 	<tr class="a1"  title="双击查看详情" <%if(StringUtils.nullToStr(thd.get("th_flag")).equals("1")){ %>style="color:red"<%} %>  onmousedown="trSelectChangeCss();"  onclick="descMx('<%=StringUtils.nullToStr(thd.get("thd_id")) %>');" onDblClick="openWin('<%=StringUtils.nullToStr(thd.get("thd_id")) %>');">
 		<td><%=StringUtils.nullToStr(thd.get("thd_id")) %></td>
 		<td><%=StringUtils.nullToStr(thd.get("yw_type")).equals("1")?"销售订单":"零售单" %></td>
-		<td><%=StaticParamDo.getClientNameById(StringUtils.nullToStr(thd.get("client_name"))) %></td>
+		<td align="left"><%=StaticParamDo.getClientNameById(StringUtils.nullToStr(thd.get("client_name"))) %></td>
 		<td><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(thd.get("th_fzr"))) %></td>
 		<td align="right"><%=JMath.round(thdje,2) %>&nbsp;&nbsp;&nbsp;</td>
 		<td><%=StringUtils.nullToStr(thd.get("th_date")) %></td>

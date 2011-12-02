@@ -8,6 +8,16 @@
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="jquery/jquery.js"></script>
 <script type="text/javascript" src="js/initPageSize.js"></script>
+<script>
+	function trSelectChangeCss(){
+		if (event.srcElement.tagName=='TD'){
+			for(i=0;i<selTable.rows.length;i++){
+				selTable.rows[i].className="a1";
+			}
+			event.srcElement.parentElement.className='a2';
+		}
+	}
+</script>
 </head>
 <body>
 <div class="rightContentDiv" id="divContent">
@@ -16,7 +26,7 @@
 		<td class="csstitle" align="left" width="100%">&nbsp;&nbsp;&nbsp;&nbsp;<b>系统字典维护</b></td>			
 	</tr>	
 </table>
-<table width="100%"  align="center"  border="1"   class="chart_list" cellpadding="0" cellspacing="0">
+<table width="100%" align="center"  border="1" class="chart_list" cellpadding="0" cellspacing="0" id="selTable">
 	<thead>
 	<tr>
 		<td>字典编码</td>
@@ -26,7 +36,7 @@
 	</tr>
 	</thead>
 	<ww:iterator value="%{sjzdJbxxList}" status="rowstatus">
-		<tr class="a1" onmouseover="this.className='a2';" onmouseout="this.className='a1';">
+		<tr class="a1" onmousedown="trSelectChangeCss();">
 			<td><ww:property value="%{zd_id}" /></td>
 			<td><ww:property value="%{zd_name}" /></td>
 			<td><ww:property value="%{zdms}" /></td>			

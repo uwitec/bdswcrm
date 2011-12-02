@@ -108,6 +108,15 @@ String orderType = (String)VS.findValue("orderType");
 	        event.returnValue = false;
 	    }
 	}
+
+	function trSelectChangeCss(){
+		if (event.srcElement.tagName=='TD'){
+			for(i=0;i<selTable.rows.length;i++){
+				selTable.rows[i].className="a1";
+			}
+			event.srcElement.parentElement.className='a2';
+		}
+	}
 </script>
 </head>
 <body>
@@ -133,7 +142,7 @@ String orderType = (String)VS.findValue("orderType");
 		</td>				
 	</tr>		
 </table>
-<table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0">
+<table width="100%"  align="center"  class="chart_list" cellpadding="0" border="1" cellspacing="0" id="selTable">
 	<thead>
 	<tr>
 		<td onclick="doSort('id');">编号<%if(orderName.equals("id")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
@@ -152,14 +161,14 @@ String orderType = (String)VS.findValue("orderType");
 	while(it.hasNext()){
 		Clients clients = (Clients)it.next();
 	%>
-	<tr class="a1"  title="双击查看详情" onDblClick="openWin('<%=StringUtils.nullToStr(clients.getId()) %>');">
-		<td class="a1"><%=StringUtils.nullToStr(clients.getId()) %></td>
-		<td class="a1"><%=StringUtils.nullToStr(clients.getName()) %></td>
-		<td class="a1"><%=StringUtils.nullToStr(clients.getAddress()) %></td>
-		<td class="a1"><%=StringUtils.nullToStr(clients.getGzdh()) %></td>
-		<td class="a1"><%=StaticParamDo.getRealNameById(clients.getKhjl()) %></td>
-		<td class="a1"><%=StringUtils.nullToStr(clients.getFlag()).equals("1")?"正常":"停用" %></td>
-		<td class="a1">
+	<tr class="a1" onmousedown="trSelectChangeCss()" title="双击查看详情" onDblClick="openWin('<%=StringUtils.nullToStr(clients.getId()) %>');">
+		<td><%=StringUtils.nullToStr(clients.getId()) %></td>
+		<td><%=StringUtils.nullToStr(clients.getName()) %></td>
+		<td><%=StringUtils.nullToStr(clients.getAddress()) %></td>
+		<td><%=StringUtils.nullToStr(clients.getGzdh()) %></td>
+		<td><%=StaticParamDo.getRealNameById(clients.getKhjl()) %></td>
+		<td><%=StringUtils.nullToStr(clients.getFlag()).equals("1")?"正常":"停用" %></td>
+		<td>
 			<a href="#" onclick="edit('<%=StringUtils.nullToStr(clients.getId()) %>');"><img src="images/modify.gif" align="absmiddle" title="修改" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
 			<a href="#" onclick="openWin('<%=StringUtils.nullToStr(clients.getId()) %>');"><img src="images/view.gif" align="absmiddle" title="查看" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
 			<a href="#" onclick="del('<%=StringUtils.nullToStr(clients.getId()) %>');"><img src="images/del.gif" align="absmiddle" title="删除" border="0" style="cursor:hand"></a>

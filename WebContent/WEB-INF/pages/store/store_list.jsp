@@ -82,7 +82,16 @@ String orderType = (String)VS.findValue("orderType");
 	function refreshPage(){
 		document.myform.action = "listStore.html";
 		document.myform.submit();
-	}		
+	}	
+
+	function trSelectChangeCss(){
+		if (event.srcElement.tagName=='TD'){
+			for(i=0;i<selTable.rows.length;i++){
+				selTable.rows[i].className="a1";
+			}
+			event.srcElement.parentElement.className='a2';
+		}
+	}	
 </script>
 </head>
 <body oncontextmenu="return false;" >
@@ -98,7 +107,7 @@ String orderType = (String)VS.findValue("orderType");
 			<img src="images/import.gif" align="absmiddle" border="0">&nbsp;<a href="#" class="xxlb" onclick="refreshPage();"> 刷 新 </a>	</td>			
 	</tr>	
 </table>
-<table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0">
+<table width="100%"  align="center"  class="chart_list" cellpadding="0" border="1" cellspacing="0" id="selTable">
 	<thead>
 	<tr>
 		<td onclick="doSort('id');">仓库编号<%if(orderName.equals("id")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
@@ -117,14 +126,14 @@ String orderType = (String)VS.findValue("orderType");
 	while(it.hasNext()){
 		Map map = (Map)it.next();
 	%>
-	<tr class="a1"  title="双击查看详情" onDblClick="openWin('<%=StringUtils.nullToStr(map.get("id")) %>');">
-		<td class="a1"><%=StringUtils.nullToStr(map.get("id")) %></td>
-		<td class="a1"><%=StringUtils.nullToStr(map.get("name")) %></td>
-		<td class="a1"><%=StringUtils.nullToStr(map.get("address")) %></td>
-		<td class="a1"><%=StringUtils.nullToStr(map.get("lxr")) %></td>
-		<td class="a1"><%=StringUtils.nullToStr(map.get("lxdh")) %></td>
-		<td class="a1"><%=StringUtils.nullToStr(map.get("flag")).equals("1")?"正常":"停用" %></td>
-		<td class="a1">
+	<tr class="a1" onmousedown="trSelectChangeCss()" title="双击查看详情" onDblClick="openWin('<%=StringUtils.nullToStr(map.get("id")) %>');">
+		<td><%=StringUtils.nullToStr(map.get("id")) %></td>
+		<td><%=StringUtils.nullToStr(map.get("name")) %></td>
+		<td><%=StringUtils.nullToStr(map.get("address")) %></td>
+		<td><%=StringUtils.nullToStr(map.get("lxr")) %></td>
+		<td><%=StringUtils.nullToStr(map.get("lxdh")) %></td>
+		<td><%=StringUtils.nullToStr(map.get("flag")).equals("1")?"正常":"停用" %></td>
+		<td>
 			<a href="javascript:edit('<%=StringUtils.nullToStr(map.get("id")) %>')"><img src="images/modify.gif" align="absmiddle" title="修改仓库信息" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
 			<a href="javascript:openWin('<%=StringUtils.nullToStr(map.get("id")) %>');"><img src="images/view.gif" align="absmiddle" title="查看仓库信息" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
 			<a href="javascript:del('<%=StringUtils.nullToStr(map.get("id")) %>');"><img src="images/del.gif" align="absmiddle" title="删除仓库信息" border="0" style="cursor:hand"></a>

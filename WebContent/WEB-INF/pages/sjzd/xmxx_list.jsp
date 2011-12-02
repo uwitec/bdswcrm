@@ -20,6 +20,15 @@
 			location.href = "delZdxx.html?zd_id=" + zd_id + "&xm_id=" + xm_id;
 		}
 	}
+
+	function trSelectChangeCss(){
+		if (event.srcElement.tagName=='TD'){
+			for(i=0;i<selTable.rows.length;i++){
+				selTable.rows[i].className="a1";
+			}
+			event.srcElement.parentElement.className='a2';
+		}
+	}
 </script>
 </head>
 <body>
@@ -35,7 +44,7 @@
 		</td>					
 	</tr>	
 </table>
-<table width="100%"  align="center"  border="1"   class="chart_list" cellpadding="0" cellspacing="0">
+<table width="100%"  align="center"  border="1" class="chart_list" cellpadding="0" cellspacing="0" id="selTable">
 	<thead>
 	<tr>
 		<td>子项名称</td>	
@@ -45,7 +54,7 @@
 	</tr>
 	</thead>
 	<ww:iterator value="%{sjzdXmxxList}" status="rowstatus">
-		<tr class="a1" onmouseover="this.className='a2';" onmouseout="this.className='a1';">
+		<tr class="a1" onmousedown="trSelectChangeCss()">
 			<td><ww:property value="%{xm_name}" /></td>
 			<td><ww:property value="%{xm_ms}" /></td>
 			<td><ww:property value="%{xh}" /></td>

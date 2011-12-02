@@ -87,6 +87,15 @@ String orderType = (String)VS.findValue("orderType");
 	{
 	   document.myform.submit();
 	}
+
+	function trSelectChangeCss(){
+		if (event.srcElement.tagName=='TD'){
+			for(i=0;i<selTable.rows.length;i++){
+				selTable.rows[i].className="a1";
+			}
+			event.srcElement.parentElement.className='a2';
+		}
+	}
 </script>
 </head>
 <body>
@@ -112,7 +121,7 @@ String orderType = (String)VS.findValue("orderType");
 		</td>				
 	</tr>		
 </table>
-<table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0">
+<table width="100%"  align="center"  class="chart_list" cellpadding="0" border="1" cellspacing="0" id="selTable">
 	<thead>
 	<tr>
 		<td width="10%" onclick="doSort('id');">编号<%if(orderName.equals("id"))           out.print("<img src='images/" + orderType + ".gif'>"); %></td>
@@ -132,15 +141,15 @@ String orderType = (String)VS.findValue("orderType");
 	while(it.hasNext()){
 		Map lxrs = (Map)it.next();
 	%>
-	    <tr class="a1"  title="双击查看详情" onDblClick="openWin('<%=StringUtils.nullToStr(lxrs.get("id")) %>');">
-		<td class="a1"><%=StringUtils.nullToStr(lxrs.get("id")) %></td>
-		<td class="a1"><%=StringUtils.nullToStr(lxrs.get("name")) %></td>
-		<td class="a1"><%=StringUtils.nullToStr(lxrs.get("clients_name")) %></td>
-		<td class="a1"><%=StringUtils.nullToStr(lxrs.get("gzdh")) %></td>
-		<td class="a1"><%=StringUtils.nullToStr(lxrs.get("yddh")) %></td>
-		<td class="a1"><%=StringUtils.nullToStr(lxrs.get("mail")) %></td>
-		<td class="a1"><%=StringUtils.nullToStr(lxrs.get("cz")) %></td>
-		<td class="a1">
+	    <tr class="a1" onmousedown="trSelectChangeCss()" title="双击查看详情" onDblClick="openWin('<%=StringUtils.nullToStr(lxrs.get("id")) %>');">
+		<td><%=StringUtils.nullToStr(lxrs.get("id")) %></td>
+		<td><%=StringUtils.nullToStr(lxrs.get("name")) %></td>
+		<td><%=StringUtils.nullToStr(lxrs.get("clients_name")) %></td>
+		<td><%=StringUtils.nullToStr(lxrs.get("gzdh")) %></td>
+		<td><%=StringUtils.nullToStr(lxrs.get("yddh")) %></td>
+		<td><%=StringUtils.nullToStr(lxrs.get("mail")) %></td>
+		<td><%=StringUtils.nullToStr(lxrs.get("cz")) %></td>
+		<td>
 			<a href="#" onclick="edit('<%=StringUtils.nullToStr(lxrs.get("id")) %>');"><img src="images/modify.gif" align="absmiddle" title="修改" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
 			<a href="#" onclick="openWin('<%=StringUtils.nullToStr(lxrs.get("id")) %>');"><img src="images/view.gif" align="absmiddle" title="查看" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
 			<a href="#" onclick="del('<%=StringUtils.nullToStr(lxrs.get("id")) %>');"><img src="images/del.gif" align="absmiddle" title="删除" border="0" style="cursor:hand"></a>

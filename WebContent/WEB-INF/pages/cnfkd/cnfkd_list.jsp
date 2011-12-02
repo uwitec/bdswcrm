@@ -41,7 +41,16 @@
 	function refreshPage(){
 		document.myform.action = "listCnfkd.html";
 		document.myform.submit();
-	}		
+	}	
+
+	function trSelectChangeCss(){
+		if (event.srcElement.tagName=='TD'){
+			for(i=0;i<selTable.rows.length;i++){
+				selTable.rows[i].className="a1";
+			}
+			event.srcElement.parentElement.className='a2';
+		}
+	}	
 </script>
 </head>
 <body>
@@ -67,7 +76,7 @@
 		</td>				
 	</tr>		
 </table>
-<table width="100%"  align="center"  border="1"   class="chart_list" cellpadding="0" cellspacing="0">
+<table width="100%"  align="center"  border="1"   class="chart_list" cellpadding="0" cellspacing="0" id="selTable">
 	<thead>
 	<tr>
 		<td width="10%">编号</td>
@@ -82,9 +91,9 @@
 	</tr>
 	</thead>
 	<ww:iterator value="%{cnfkdPage.results}">
-		<tr class="a1" onmouseover="this.className='a2';" onmouseout="this.className='a1';" onDblClick="view('<ww:property value="%{id}" />');";>
+		<tr class="a1" onmousedown="trSelectChangeCss()" onDblClick="view('<ww:property value="%{id}" />');";>
 			<td><ww:property value="%{id}" /></td>
-			<td><ww:property value="%{getClientName(client_name)}" /></td>
+			<td align="left"><ww:property value="%{getClientName(client_name)}" /></td>
 			<td><ww:property value="%{fklx}" /></td>
 			<td align="right"><ww:property value="%{getText('global.format.money',{fkje})}" />&nbsp;</td>
 			<td><ww:property value="%{getAccountName(fkzh)}" /></td>

@@ -112,6 +112,7 @@ String is_del = (String)VS.findValue("is_del");
 		document.myform.action = "openRoles.html";
 		document.myform.submit();
 	}	
+	
 	function doSort(order_name){
 		if(myform.orderType.value=='asc'){
 			myform.orderType.value='desc';
@@ -121,10 +122,20 @@ String is_del = (String)VS.findValue("is_del");
 		myform.orderName.value = order_name;
 	    myform.submit();		
 	}
+	
 	function refreshPage(){
 		document.myform.action = "listUser.html";
 		document.myform.submit();
-	}		
+	}	
+
+	function trSelectChangeCss(){
+		if (event.srcElement.tagName=='TD'){
+			for(i=0;i<selTable.rows.length;i++){
+				selTable.rows[i].className="a1";
+			}
+			event.srcElement.parentElement.className='a2';
+		}
+	}	
 </script>
 </head>
 <body >
@@ -153,7 +164,7 @@ String is_del = (String)VS.findValue("is_del");
 		</td>				
 	</tr>		
 </table>
-<table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0">
+<table width="100%"  align="center"  class="chart_list" border="1" cellpadding="0" cellspacing="0" id="selTable">
 	<thead>
 	<tr>
 		<td>选择</td>
@@ -179,15 +190,15 @@ String is_del = (String)VS.findValue("is_del");
 			q_is_del = "删除";
 		}
 	%>
-	<tr>
-		<td class="a1"><input type="checkbox" name="user_id" value="<%=StringUtils.nullToStr(map.get("user_id")) %>"></td>
-		<td class="a1"><%=StringUtils.nullToStr(map.get("user_id")) %></td>
-		<td class="a1"><%=StringUtils.nullToStr(map.get("user_name")) %></td>
-		<td class="a1"><%=StringUtils.nullToStr(map.get("real_name")) %></td>
-		<td class="a1"><%=StringUtils.nullToStr(map.get("gs_phone")) %></td>
-		<td class="a1"><%=StringUtils.nullToStr(map.get("mobile")) %></td>
-		<td class="a1"><%=q_is_del %></td>
-		<td class="a1">
+	<tr class="a1" onmousedown="trSelectChangeCss()" onDblClick="edit('<%=StringUtils.nullToStr(map.get("user_id")) %>');";>
+		<td><input type="checkbox" name="user_id" value="<%=StringUtils.nullToStr(map.get("user_id")) %>"></td>
+		<td><%=StringUtils.nullToStr(map.get("user_id")) %></td>
+		<td><%=StringUtils.nullToStr(map.get("user_name")) %></td>
+		<td><%=StringUtils.nullToStr(map.get("real_name")) %></td>
+		<td><%=StringUtils.nullToStr(map.get("gs_phone")) %></td>
+		<td><%=StringUtils.nullToStr(map.get("mobile")) %></td>
+		<td><%=q_is_del %></td>
+		<td>
 			<a href="javascript:edit('<%=StringUtils.nullToStr(map.get("user_id")) %>');">修改</a>&nbsp;&nbsp;&nbsp;&nbsp;
 			<%if(StringUtils.nullToStr(map.get("is_del")).equals("0")){ %>
 			  <a href="javascript:del('<%=StringUtils.nullToStr(map.get("user_id")) %>');">删除</a>&nbsp;&nbsp;&nbsp;&nbsp;

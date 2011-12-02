@@ -41,6 +41,15 @@
 		document.myform.action = "listFysq.html";
 		document.myform.submit();
 	}	
+	
+	function trSelectChangeCss(){
+		if (event.srcElement.tagName=='TD'){
+			for(i=0;i<selTable.rows.length;i++){
+				selTable.rows[i].className="a1";
+			}
+			event.srcElement.parentElement.className='a2';
+		}
+	}
 </script>
 </head>
 <body>
@@ -67,7 +76,7 @@
 		</td>				
 	</tr>		
 </table>
-<table width="100%"  align="center"  border="1"   class="chart_list" cellpadding="0" cellspacing="0">
+<table width="100%" align="center" border="1" class="chart_list" cellpadding="0" cellspacing="0" id="selTable">
 	<thead>
 	<tr>
 		<td>编号</td>
@@ -81,14 +90,14 @@
 	</tr>
 	</thead>
 	<ww:iterator value="%{fysqPage.results}">
-		<tr class="a1" onmouseover="this.className='a2';" onmouseout="this.className='a1';" onDblClick="view('<ww:property value="%{id}" />');";>
+		<tr class="a1" onmousedown="trSelectChangeCss()" onDblClick="view('<ww:property value="%{id}" />');";>
 			<td><ww:property value="%{id}" /></td>
 			<td><ww:property value="%{creatdate}" /></td>
 			<td><ww:property value="%{getUserRealName(sqr)}" /></td>
 			<td><ww:property value="%{getDeptName(ywy_dept)}" /></td>
 			<td><ww:property value="%{getFyTypeName(fy_type)}" /></td>
 			<td align="right"><ww:property value="%{getText('global.format.money',{je})}" />&nbsp;</td>
-			<td><ww:property value="%{state}" /></td>		
+			<td><ww:property value="%{state}" /></td>
 			<td>
 				<ww:if test="state=='保存' or state=='审批不通过' or state=='出纳退回'">
 					<a href="#" onclick="edit('<ww:property value="%{id}" />');"><img src="images/modify.gif" align="absmiddle" title="修改" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;			

@@ -42,6 +42,15 @@
 		document.myform.action = "listSerialNum.html";
 		document.myform.submit();
 	}	
+
+	function trSelectChangeCss(){
+		if (event.srcElement.tagName=='TD'){
+			for(i=0;i<selTable.rows.length;i++){
+				selTable.rows[i].className="a1";
+			}
+			event.srcElement.parentElement.className='a2';
+		}
+	}
 </script>
 </head>
 <body>
@@ -73,7 +82,7 @@
 		</td>				
 	</tr>		
 </table>
-<table width="100%"  align="center"  border="1"   class="chart_list" cellpadding="0" cellspacing="0">
+<table width="100%"  align="center"  border="1"   class="chart_list" cellpadding="0" cellspacing="0" id="selTable">
 	<thead>
 	<tr>
 		<td>序列号</td>
@@ -86,7 +95,7 @@
 	</tr>
 	</thead>
 	<ww:iterator value="%{pageSerialNum.results}">
-		<tr class="a1" onmouseover="this.className='a2';" onmouseout="this.className='a1';" onDblClick="view('<ww:property value="%{serial_num}" />');";>
+		<tr class="a1" onmousedown="trSelectChangeCss()" onDblClick="view('<ww:property value="%{serial_num}" />');";>
 			<td><ww:property value="%{serial_num}" /></td>
 			<td><ww:property value="%{product_name}" /></td>
 			<td><ww:property value="%{product_xh}" /></td>
