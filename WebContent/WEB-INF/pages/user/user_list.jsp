@@ -67,21 +67,9 @@ String is_del = (String)VS.findValue("is_del");
 	}
 	
 	function add(){
-		$.ajax({
-			cache: false,
-			url:"checkUserLimit.html",
-			type: "POST",
-			success: function(result) {
-				if(result == "true"){
-					alert("超出用户数限制不能添加新的用户，如需增加用户请与服务商联系！");
-					return;
-				}else{
-					var destination = "addUser.html";
-					var fea ='width=600,height=400,left=' + (screen.availWidth-600)/2 + ',top=' + (screen.availHeight-400)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
-					window.open(destination,'添加系统用户',fea);	
-				}
-			}
-		});	
+		var destination = "addUser.html";
+		var fea ='width=600,height=400,left=' + (screen.availWidth-600)/2 + ',top=' + (screen.availHeight-400)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		window.open(destination,'添加系统用户',fea);	
 	}
 	
 	function edit(userId){

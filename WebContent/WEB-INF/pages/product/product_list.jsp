@@ -29,22 +29,11 @@ String product_state = StringUtils.nullToStr(VS.findValue("product_state"));
 			alert("请首先选择商品类别，再添加商品！");
 			return false;
 		}
-		$.ajax({
-			cache: false,
-			url:"checkProductKind.html",
-			type: "POST",
-			data:{curId:id},
-			success: function(result) {
-				if(result == "true"){
-					alert("当前商品类别下存在子类别，不能添加商品，商品只能添加到最终的子类别下！");
-				}else{
-					var destination = "product_add.html?curId="+id;
-					var fea ='width=600,height=500,left=' + (screen.availWidth-600)/2 + ',top=' + (screen.availHeight-500)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
-							
-					window.open(destination,'添加商品',fea);
-				}
-			}
-		});			
+
+		var destination = "product_add.html?curId="+id;
+		var fea ='width=600,height=500,left=' + (screen.availWidth-600)/2 + ',top=' + (screen.availHeight-500)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+				
+		window.open(destination,'添加商品',fea);
 	}
 	
 	function clearAll(){
