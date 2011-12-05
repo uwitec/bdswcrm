@@ -63,6 +63,6 @@ tr.over td {
 	text-align:left;
 	display:inline ;
 	float:left;
-	overflow-y: auto;
+	overflow-y: scroll;
 	overflow-x: auto; 
 }

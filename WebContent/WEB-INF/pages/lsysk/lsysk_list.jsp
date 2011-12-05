@@ -159,15 +159,15 @@ String ys_type = (String)VS.findValue("ys_type");
 <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0" border="1" id="selTable">
 	<thead>
 	<tr>
-		<td onclick="doSort('id');">编号<%if(orderName.equals("id")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('client_name');">客户名称<%if(orderName.equals("client_name")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('jsr');">经手人<%if(orderName.equals("jsr")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('ys_date');">预收日期<%if(orderName.equals("ys_date")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('ysje');">预收金额<%if(orderName.equals("ysje")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('skzh');">收款账号<%if(orderName.equals("skzh")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('type');">预收款状态<%if(orderName.equals("type")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('czr');">操作员<%if(orderName.equals("czr")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td>操作</td>
+		<td width="14%" onclick="doSort('id');">编号<%if(orderName.equals("id")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="16%" onclick="doSort('client_name');">客户名称<%if(orderName.equals("client_name")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="8%" onclick="doSort('jsr');">经手人<%if(orderName.equals("jsr")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="8%" onclick="doSort('ys_date');">预收日期<%if(orderName.equals("ys_date")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="8%" onclick="doSort('ysje');">预收金额<%if(orderName.equals("ysje")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="15%" onclick="doSort('skzh');">收款账号<%if(orderName.equals("skzh")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="8%" onclick="doSort('type');">预收款状态<%if(orderName.equals("type")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="8%" onclick="doSort('czr');">操作员<%if(orderName.equals("czr")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="16%">操作</td>
 	</tr>
 	</thead>
 	<%
@@ -179,7 +179,7 @@ String ys_type = (String)VS.findValue("ys_type");
 	%>
 	<tr class="a1" onmousedown="trSelectChangeCss()"  onDblClick="openWin('<%=StringUtils.nullToStr(lsysk.getId()) %>');">
 		<td><%=StringUtils.nullToStr(lsysk.getId()) %></td>
-		<td><%=StringUtils.nullToStr(lsysk.getClient_name()) %></td>
+		<td align="left"><%=StringUtils.nullToStr(lsysk.getClient_name()) %></td>
 		<td><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(lsysk.getJsr())) %></td>
 		<td><%=StringUtils.nullToStr(lsysk.getYs_date()) %></td>
 		<td align="right"><%=JMath.round(lsysk.getYsje(),2) %>&nbsp;&nbsp;</td>
@@ -190,9 +190,9 @@ String ys_type = (String)VS.findValue("ys_type");
 		<%
 		if(StringUtils.nullToStr(lsysk.getState()).equals("已提交")){
 		%>
-			<a class="xxlb" href="javascript:openWin('<%=StringUtils.nullToStr(lsysk.getId()) %>');">查看</a>&nbsp;&nbsp;
+			<a class="xxlb" href="javascript:openWin('<%=StringUtils.nullToStr(lsysk.getId()) %>');">查看</a>&nbsp;
 			<%if("未冲抵".equals(lsysk.getType())){ %>
-			<a class="xxlb" href="javascript:th('<%=StringUtils.nullToStr(lsysk.getId()) %>');">退款</a>&nbsp;&nbsp;
+			<a class="xxlb" href="javascript:th('<%=StringUtils.nullToStr(lsysk.getId()) %>');">退款</a>&nbsp;
 			<%} %>			
 			<%if(lsysk.getYsje() > 0){ %>
 			<a class="xxlb" href="javascript:print('<%=StringUtils.nullToStr(lsysk.getId()) %>');">打印</a>
@@ -200,9 +200,9 @@ String ys_type = (String)VS.findValue("ys_type");
 		<%
 		}else{
 		%>	
-			<a class="xxlb" class="xxfb" href="javascript:openWin('<%=StringUtils.nullToStr(lsysk.getId()) %>');">查看</a>&nbsp;&nbsp;
-			<a class="xxlb" href="javascript:edit('<%=StringUtils.nullToStr(lsysk.getId()) %>');">修改</a>&nbsp;&nbsp;
-			<a class="xxlb" href="javascript:del('<%=StringUtils.nullToStr(lsysk.getId()) %>');">删除</a>&nbsp;&nbsp;
+			<a class="xxlb" class="xxfb" href="javascript:openWin('<%=StringUtils.nullToStr(lsysk.getId()) %>');">查看</a>&nbsp;
+			<a class="xxlb" href="javascript:edit('<%=StringUtils.nullToStr(lsysk.getId()) %>');">修改</a>&nbsp;
+			<a class="xxlb" href="javascript:del('<%=StringUtils.nullToStr(lsysk.getId()) %>');">删除</a>&nbsp;
 			<%if(lsysk.getYsje() > 0){ %>
 			<a class="xxlb" href="javascript:print('<%=StringUtils.nullToStr(lsysk.getId()) %>');">打印</a>	
 			<%} %>

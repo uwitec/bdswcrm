@@ -141,8 +141,8 @@ String orderType = (String)VS.findValue("orderType");
 	<%  
 	   }
 	%>
-		<td><%=StringUtils.nullToStr(map.get("gysmc")) %> </td>
-		<td align="right" nowrap="nowrap"><%=map.get("cgnums") %>&nbsp;&nbsp;</td>
+		<td align="left"><%=StringUtils.nullToStr(map.get("gysmc")) %> </td>
+		<td nowrap="nowrap"><%=map.get("cgnums") %>&nbsp;&nbsp;</td>
 		<td align="right" nowrap="nowrap"><%=cgmoney %>&nbsp;&nbsp;</td>
 		<td><%=StringUtils.nullToStr(map.get("state")) %> </td>					
 		<td>

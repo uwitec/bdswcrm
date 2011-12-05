@@ -127,14 +127,14 @@ String orderType = (String)VS.findValue("orderType");
 	<thead>
 	<tr>
 		<td width="10%" nowrap="nowrap" onclick="doSort('id');">编号<%if(orderName.equals("id")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td width="24%" nowrap="nowrap" onclick="doSort('gysbh');">供货单位<%if(orderName.equals("gysbh")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="22%" nowrap="nowrap" onclick="doSort('gysbh');">供货单位<%if(orderName.equals("gysbh")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
 		<td width="8%" nowrap="nowrap" onclick="doSort('fkje');">付款金额<%if(orderName.equals("fkje")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>		
 		<td width="15%" nowrap="nowrap" onclick="doSort('fkzh');">付款账户<%if(orderName.equals("fkzh")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
 		<td width="8%" nowrap="nowrap" onclick="doSort('jsr');">经手人<%if(orderName.equals("jsr")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
 		<td width="10%" nowrap="nowrap" onclick="doSort('state');">状态<%if(orderName.equals("state")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
 		<td width="7%" nowrap="nowrap">是否预付款</td>
 		<td width="8%" nowrap="nowrap" onclick="doSort('czr');">操作员<%if(orderName.equals("czr")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td width="10%" nowrap="nowrap">操作</td>
+		<td width="12%" nowrap="nowrap">操作</td>
 	</tr>
 	</thead>
 	<%
@@ -148,7 +148,7 @@ String orderType = (String)VS.findValue("orderType");
 	%>
 	<tr class="a1" title="双击查看详情"  onmousedown="trSelectChangeCss()" onDblClick="openWin('<%=StringUtils.nullToStr(map.get("id")) %>');">
 		<td nowrap="nowrap"><%=StringUtils.nullToStr(map.get("id")) %></td>
-		<td><%=StringUtils.nullToStr(map.get("gysmc")) %></td>
+		<td align="left"><%=StringUtils.nullToStr(map.get("gysmc")) %></td>
 		<td align="right" nowrap="nowrap"><%=fkje %>&nbsp;&nbsp;</td>
 		<td><%=StaticParamDo.getAccountNameById(StringUtils.nullToStr(map.get("fkzh"))) %></td>
 		<td><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(map.get("jsr"))) %></td>
@@ -163,8 +163,8 @@ String orderType = (String)VS.findValue("orderType");
 		<%	
 		}else{
 		%>
-			<a href="#" onclick="edit('<%=StringUtils.nullToStr(map.get("id")) %>');"><img src="images/modify.gif" align="absmiddle" title="修改" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
-			<a href="#" onclick="openWin('<%=StringUtils.nullToStr(map.get("id")) %>');"><img src="images/view.gif" align="absmiddle" title="查看" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
+			<a href="#" onclick="edit('<%=StringUtils.nullToStr(map.get("id")) %>');"><img src="images/modify.gif" align="absmiddle" title="修改" border="0" style="cursor:hand"></a>&nbsp;&nbsp;
+			<a href="#" onclick="openWin('<%=StringUtils.nullToStr(map.get("id")) %>');"><img src="images/view.gif" align="absmiddle" title="查看" border="0" style="cursor:hand"></a>&nbsp;&nbsp;
 			<a href="#" onclick="del('<%=StringUtils.nullToStr(map.get("id")) %>');"><img src="images/del.gif" align="absmiddle" title="删除" border="0" style="cursor:hand"></a>
 		
 		<%	

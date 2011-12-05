@@ -163,8 +163,8 @@ String orderType = (String)VS.findValue("orderType");
 	%>
 	<tr class="a1" onmousedown="trSelectChangeCss()" title="双击查看详情" onDblClick="openWin('<%=StringUtils.nullToStr(clients.getId()) %>');">
 		<td><%=StringUtils.nullToStr(clients.getId()) %></td>
-		<td><%=StringUtils.nullToStr(clients.getName()) %></td>
-		<td><%=StringUtils.nullToStr(clients.getAddress()) %></td>
+		<td align="left"><%=StringUtils.nullToStr(clients.getName()) %></td>
+		<td align="left"><%=StringUtils.nullToStr(clients.getAddress()) %></td>
 		<td><%=StringUtils.nullToStr(clients.getGzdh()) %></td>
 		<td><%=StaticParamDo.getRealNameById(clients.getKhjl()) %></td>
 		<td><%=StringUtils.nullToStr(clients.getFlag()).equals("1")?"正常":"停用" %></td>

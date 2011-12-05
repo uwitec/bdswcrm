@@ -50,7 +50,7 @@ String orderType = (String)VS.findValue("orderType");
 		document.myform.creatdate.value = "";
 		document.myform.creatdate2.value = "";
 		document.myform.state.value = "";
-		document.myform.store_id.value = "";
+		//document.myform.store_id.value = "";
 	}
 	
 	function add(){
@@ -125,7 +125,7 @@ String orderType = (String)VS.findValue("orderType");
 				<option value=""></option>
 				<option value="已保存" <%if(state.equals("已保存")) out.print("selected"); %>>已保存</option>
 				<option value="已入库" <%if(state.equals("已入库")) out.print("selected"); %>>已入库</option>
-			</select>&nbsp;&nbsp;&nbsp;&nbsp;
+			</select><!-- &nbsp;&nbsp;&nbsp;&nbsp;
 			仓库：<select name="store_id">
 				<option value=""></option>
 			<%
@@ -141,7 +141,7 @@ String orderType = (String)VS.findValue("orderType");
 				}
 			}
 			%>
-			</select>
+			</select> -->
 			<input type="submit" name="buttonCx" value=" 查询 " class="css_button">
 			<input type="button" name="buttonQk" value=" 清空 " class="css_button" onclick="clearAll();">
 		</td>				
@@ -150,15 +150,15 @@ String orderType = (String)VS.findValue("orderType");
 <table width="100%"  align="center"  class="chart_list" cellpadding="0" border="1" cellspacing="0" id="selTable">
 	<thead>
 	<tr>
-		<td onclick="doSort('rkd_id');">入库单编号<%if(orderName.equals("rkd_id")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('client_name');">供应商<%if(orderName.equals("client_name")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('creatdate');">创建日期<%if(orderName.equals("creatdate")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('state');">状态<%if(orderName.equals("state")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('store_id');">仓库<%if(orderName.equals("store_id")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('rk_date');">入库时间<%if(orderName.equals("rk_date")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('fzr');">库管员<%if(orderName.equals("fzr")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('czr');">操作员<%if(orderName.equals("czr")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td>操作</td>
+		<td width="12%" onclick="doSort('rkd_id');">入库单编号<%if(orderName.equals("rkd_id")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="20%" onclick="doSort('client_name');">供应商<%if(orderName.equals("client_name")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="8%" onclick="doSort('creatdate');">创建日期<%if(orderName.equals("creatdate")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="8%" onclick="doSort('state');">状态<%if(orderName.equals("state")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="16%" onclick="doSort('store_id');">仓库<%if(orderName.equals("store_id")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="8%" onclick="doSort('rk_date');">入库时间<%if(orderName.equals("rk_date")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="8%" onclick="doSort('fzr');">库管员<%if(orderName.equals("fzr")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="8%" onclick="doSort('czr');">操作员<%if(orderName.equals("czr")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="12%">操作</td>
 	</tr>
 	</thead>
 	<%
@@ -172,7 +172,7 @@ String orderType = (String)VS.findValue("orderType");
 	%>
 	<tr class="a1"  title="双击查看详情"  onmousedown="trSelectChangeCss()" onclick="descMx('<%=StringUtils.nullToStr(rkd.get("rkd_id")) %>');" onDblClick="openWin('<%=StringUtils.nullToStr(rkd.get("rkd_id")) %>');">
 		<td><%=StringUtils.nullToStr(rkd.get("rkd_id")) %></td>
-		<td><%=StaticParamDo.getClientNameById(StringUtils.nullToStr(rkd.get("client_name"))) %></td>
+		<td align="left"><%=StaticParamDo.getClientNameById(StringUtils.nullToStr(rkd.get("client_name"))) %></td>
 		<td><%=StringUtils.nullToStr(rkd.get("creatdate")) %></td>
 		<td><%=StringUtils.nullToStr(rkd.get("state")) %></td>
 		<td><%=StaticParamDo.getStoreNameById(StringUtils.nullToStr(rkd.get("store_id"))) %></td>
@@ -183,10 +183,10 @@ String orderType = (String)VS.findValue("orderType");
 			<%if(rkd_state.equals("已入库")){  //已入库的入库单不能修改%>
 				<a href="#" onclick="openWin('<%=StringUtils.nullToStr(rkd.get("rkd_id")) %>');"><img src="images/view.gif" align="absmiddle" title="查看入库单信息" border="0" style="cursor:hand"></a>
 			<%}else{%>
-				<a href="#" onclick="edit('<%=StringUtils.nullToStr(rkd.get("rkd_id")) %>');"><img src="images/modify.gif" align="absmiddle" title="修改入库单信息" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;			
+				<a href="#" onclick="edit('<%=StringUtils.nullToStr(rkd.get("rkd_id")) %>');"><img src="images/modify.gif" align="absmiddle" title="修改入库单信息" border="0" style="cursor:hand"></a>&nbsp;&nbsp;	
 				<a href="#" onclick="openWin('<%=StringUtils.nullToStr(rkd.get("rkd_id")) %>');"><img src="images/view.gif" align="absmiddle" title="查看入库单信息" border="0" style="cursor:hand"></a>
 			<%} %>
-			&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="print('<%=StringUtils.nullToStr(rkd.get("rkd_id")) %>');"><img src="images/print.png" align="absmiddle" title="打印入库单" border="0" style="cursor:hand"></a>
+			&nbsp;&nbsp;<a href="#" onclick="print('<%=StringUtils.nullToStr(rkd.get("rkd_id")) %>');"><img src="images/print.png" align="absmiddle" title="打印入库单" border="0" style="cursor:hand"></a>
 		</td>
 	</tr>
 	

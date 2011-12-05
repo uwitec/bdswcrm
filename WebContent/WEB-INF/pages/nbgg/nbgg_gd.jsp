@@ -79,11 +79,11 @@ String czr = StringUtils.nullToStr(VS.findValue("czr"));
 <table width="100%" border="1" align="center"  class="chart_list" cellpadding="0" cellspacing="0" id="selTable">
 	<thead>
 	<tr>
-		<td>序号</td>
-		<td>标题</td>
-		<td>发布时间</td>
-		<td>发布人</td>
-		<td>操作</td>
+		<td width="10%">序号</td>
+		<td width="35%">标题</td>
+		<td width="15%">发布时间</td>
+		<td width="15%">发布人</td>
+		<td width="15%">操作</td>
 	</tr>
 	</thead>
 	<%
@@ -96,11 +96,11 @@ String czr = StringUtils.nullToStr(VS.findValue("czr"));
 	%>
 	<tr class="a1" onmousedown="trSelectChangeCss()" onDblClick="openWin('<%=StringUtils.nullToStr(info.getId()) %>');">
 		<td><%=i %></td>
-		<td><a href="javascript:void(0);" onclick="openWin('<%=StringUtils.nullToStr(info.getId()) %>');" class="xxlb"><%=StringUtils.nullToStr(info.getTitle()) %></a></td>
+		<td align="left"><a href="javascript:openWin('<%=StringUtils.nullToStr(info.getId()) %>');" class="xxlb"><%=StringUtils.nullToStr(info.getTitle()) %></a></td>
 		<td><%=StringUtils.nullToStr(info.getPub_date()) %></td>
 		<td><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(info.getCzr())) %></td>
 		<td>
-			<a href="javascript:void(0);" onclick="openWin('<%=StringUtils.nullToStr(info.getId()) %>');"><img src="images/view.gif" align="absmiddle" title="查看" border="0" style="cursor:hand"></a>
+			<a href="javascript:openWin('<%=StringUtils.nullToStr(info.getId()) %>');"><img src="images/view.gif" align="absmiddle" title="查看" border="0" style="cursor:hand"></a>
 		</td>
 	</tr>
 	

@@ -190,7 +190,7 @@ String orderType = (String)VS.findValue("orderType");
 	%>
 	<tr class="a1" title="双击查看详情"  onmousedown="trSelectChangeCss()" onclick="descMx('<%=StringUtils.nullToStr(lsd.get("id")) %>');" onDblClick="openWin('<%=StringUtils.nullToStr(lsd.get("id")) %>');">
 		<td><%=StringUtils.nullToStr(lsd.get("id")) %></td>
-		<td><%=StringUtils.nullToStr(lsd.get("client_name")) %></td>
+		<td align="left"><%=StringUtils.nullToStr(lsd.get("client_name")) %></td>
 		<td><%=StringUtils.nullToStr(lsd.get("lxdh")) %></td>
 		<td align="right"><%=JMath.round(lsdje,2) %>&nbsp;</td>
 		<td><%=StringUtils.nullToStr(lsd.get("creatdate")) %></td>

@@ -131,8 +131,8 @@ List userList = (List)VS.findValue("userList");
 	%>
 	<tr class="a1"  title="双击查看详情" onmousedown="trSelectChangeCss()"  onDblClick="openWin('<%=StringUtils.nullToStr(clients.getId()) %>');">
 		<td><%=StringUtils.nullToStr(clients.getId()) %></td>
-		<td><%=StringUtils.nullToStr(clients.getName()) %></td>
-		<td><%=StringUtils.nullToStr(clients.getAddress()) %></td>
+		<td align="left"><%=StringUtils.nullToStr(clients.getName()) %></td>
+		<td align="left"><%=StringUtils.nullToStr(clients.getAddress()) %></td>
 	<% 
 	String id=StringUtils.nullToStr(clients.getId());
 	ClientsLinkman clientsLinkman=(ClientsLinkman)clientsService.getZClientsLinkman(id);

@@ -85,18 +85,18 @@
 <table width="100%"  align="center"  border="1"   class="chart_list" cellpadding="0" cellspacing="0" id="selTable">
 	<thead>
 	<tr>
-		<td>编号</td>
-		<td>商品编号</td>
-		<td>商品名称</td>	
-		<td>商品规格</td>
-		<td>单价</td>
-		<td>数量</td>
-		<td>金额</td>
-		<td>库房</td>
-		<td>经手人</td>
-		<td>日期</td>
-		<td>状态</td>
-		<td>操作</td>
+		<td width="11%">编号</td>
+		<td width="8%">商品编号</td>
+		<td width="14%">商品名称</td>	
+		<td width="13%">商品规格</td>
+		<td width="6%">单价</td>
+		<td width="5%">数量</td>
+		<td width="6%">金额</td>
+		<td width="10%">库房</td>
+		<td width="6%">经手人</td>
+		<td width="6%">日期</td>
+		<td width="6%">状态</td>
+		<td width="9%">操作</td>
 	</tr>
 	</thead>
 	<ww:iterator value="%{pageCxd.results}">
@@ -114,11 +114,11 @@
 			<td><ww:property value="%{state}" /></td>		
 			<td>
 				<ww:if test="%{state=='已保存'}">
-				<a href="#" onclick="edit('<ww:property value="%{id}" />');"><img src="images/modify.gif" title="修改" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="#" onclick="edit('<ww:property value="%{id}" />');"><img src="images/modify.gif" title="修改" border="0" style="cursor:hand"></a>&nbsp;&nbsp;
 				</ww:if>			
 				<a href="#" onclick="view('<ww:property value="%{id}" />');"><img src="images/view.gif" title="查看" border="0" style="cursor:hand"></a>
 				<ww:if test="%{state=='已保存'}">
-				&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;
 				<a href="#" onclick="del('<ww:property value="%{id}" />');"><img src="images/del.gif" title="删除该行数据" border="0" style="cursor:hand"></a>
 				</ww:if>			
 			</td>

@@ -93,26 +93,26 @@
 			<input type="submit" name="buttonCx" value=" 查询 " class="css_button">
 			<input type="button" name="buttonQk" value=" 清空 " class="css_button" onclick="clearAll();">			
 		</td>				
-	</tr>		
+	</tr>
 </table>
 <table width="100%"  align="center"  border="1"   class="chart_list" cellpadding="0" cellspacing="0" id="selTable">
 	<thead>
 	<tr>
-		<td onclick="doSort('id');">编号<ww:if test="orderName=='id'"><img src='images/<ww:property value="%{orderType}" />.gif'></ww:if></td>
-		<td onclick="doSort('fk_date');">付款日期<ww:if test="orderName=='fk_date'"><img src='images/<ww:property value="%{orderType}" />.gif'></ww:if></td>	
-		<td onclick="doSort('client_name');">相关客户<ww:if test="orderName=='client_name'"><img src='images/<ww:property value="%{orderType}" />.gif'></ww:if></td>
-		<td onclick="doSort('fklx');">支出类型<ww:if test="orderName=='fklx'"><img src='images/<ww:property value="%{orderType}" />.gif'></ww:if></td>
-		<td onclick="doSort('fkje');">支出金额<ww:if test="orderName=='fkje'"><img src='images/<ww:property value="%{orderType}" />.gif'></ww:if></td>
-		<td onclick="doSort('account_id');">支出账户<ww:if test="orderName=='account_id'"><img src='images/<ww:property value="%{orderType}" />.gif'></ww:if></td>
-		<td onclick="doSort('jsr');">经手人<ww:if test="orderName=='jsr'"><img src='images/<ww:property value="%{orderType}" />.gif'></ww:if></td>
-		<td>操作</td>
+		<td width="12%" onclick="doSort('id');">编号<ww:if test="orderName=='id'"><img src='images/<ww:property value="%{orderType}" />.gif'></ww:if></td>
+		<td width="8%" onclick="doSort('fk_date');">付款日期<ww:if test="orderName=='fk_date'"><img src='images/<ww:property value="%{orderType}" />.gif'></ww:if></td>	
+		<td width="15%" onclick="doSort('client_name');">相关客户<ww:if test="orderName=='client_name'"><img src='images/<ww:property value="%{orderType}" />.gif'></ww:if></td>
+		<td width="16%" onclick="doSort('fklx');">支出类型<ww:if test="orderName=='fklx'"><img src='images/<ww:property value="%{orderType}" />.gif'></ww:if></td>
+		<td width="9%" onclick="doSort('fkje');">支出金额<ww:if test="orderName=='fkje'"><img src='images/<ww:property value="%{orderType}" />.gif'></ww:if></td>
+		<td width="17%" onclick="doSort('account_id');">支出账户<ww:if test="orderName=='account_id'"><img src='images/<ww:property value="%{orderType}" />.gif'></ww:if></td>
+		<td width="8%" onclick="doSort('jsr');">经手人<ww:if test="orderName=='jsr'"><img src='images/<ww:property value="%{orderType}" />.gif'></ww:if></td>
+		<td width="15%">操作</td>
 	</tr>
 	</thead>
 	<ww:iterator value="%{txfkPage.results}">
 		<tr class="a1" onmousedown="trSelectChangeCss()" onclick="descMx('<ww:property value="%{id}" />');" onDblClick="view('<ww:property value="%{id}" />');";>
 			<td><ww:property value="%{id}" /></td>
 			<td><ww:property value="%{fk_date}" /></td>
-			<td><ww:property value="%{client_name}" /></td>
+			<td align="left"><ww:property value="%{client_name}" /></td>
 			<td><ww:property value="%{fklx}" /></td>
 			<td align="right"><ww:text name="global.format.money"><ww:param value="fkje"/></ww:text>&nbsp;</td>
 			<td><ww:property value="%{getAccountName(account_id)}" /></td>

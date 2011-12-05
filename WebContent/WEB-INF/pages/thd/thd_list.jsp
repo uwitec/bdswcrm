@@ -120,15 +120,15 @@ String orderType = (String)VS.findValue("orderType");
 <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0"  border="1" id="selTable">
 	<thead>
 	<tr>
-		<td onclick="doSort('thd_id');">退货单编号<%if(orderName.equals("thd_id")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('yw_type');">退货类型<%if(orderName.equals("yw_type")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('client_name');">客户名称<%if(orderName.equals("client_name")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('th_fzr');">退货负责人<%if(orderName.equals("th_fzr")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('thdje');">退货单金额<%if(orderName.equals("thdje")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('th_date');">退货日期<%if(orderName.equals("th_date")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('state');">状态<%if(orderName.equals("state")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>		
-		<td onclick="doSort('czr');">操作员<%if(orderName.equals("czr")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>	
-		<td>操作</td>
+		<td width="12%" onclick="doSort('thd_id');">退货单编号<%if(orderName.equals("thd_id")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="10%" onclick="doSort('yw_type');">退货类型<%if(orderName.equals("yw_type")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="18%" onclick="doSort('client_name');">客户名称<%if(orderName.equals("client_name")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="10%" onclick="doSort('th_fzr');">退货负责人<%if(orderName.equals("th_fzr")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="10%" onclick="doSort('thdje');">退货单金额<%if(orderName.equals("thdje")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="10%" onclick="doSort('th_date');">退货日期<%if(orderName.equals("th_date")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="10%" onclick="doSort('state');">状态<%if(orderName.equals("state")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>		
+		<td width="10%" onclick="doSort('czr');">操作员<%if(orderName.equals("czr")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>	
+		<td width="12%">操作</td>
 	</tr>
 	</thead>
 	<%
@@ -156,8 +156,8 @@ String orderType = (String)VS.findValue("orderType");
 		<%	
 		}else{
 		%>
-			<a href="#" onclick="edit('<%=StringUtils.nullToStr(thd.get("thd_id")) %>');"><img src="images/modify.gif" align="absmiddle" title="修改" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
-			<a href="#" onclick="openWin('<%=StringUtils.nullToStr(thd.get("thd_id")) %>');"><img src="images/view.gif" align="absmiddle" title="查看" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
+			<a href="#" onclick="edit('<%=StringUtils.nullToStr(thd.get("thd_id")) %>');"><img src="images/modify.gif" align="absmiddle" title="修改" border="0" style="cursor:hand"></a>&nbsp;&nbsp;
+			<a href="#" onclick="openWin('<%=StringUtils.nullToStr(thd.get("thd_id")) %>');"><img src="images/view.gif" align="absmiddle" title="查看" border="0" style="cursor:hand"></a>&nbsp;&nbsp;
 			<a href="#" onclick="del('<%=StringUtils.nullToStr(thd.get("thd_id")) %>');"><img src="images/del.gif" align="absmiddle" title="删除" border="0" style="cursor:hand"></a>		
 		<%	
 		}		

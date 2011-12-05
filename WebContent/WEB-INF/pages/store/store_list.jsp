@@ -129,7 +129,7 @@ String orderType = (String)VS.findValue("orderType");
 	<tr class="a1" onmousedown="trSelectChangeCss()" title="双击查看详情" onDblClick="openWin('<%=StringUtils.nullToStr(map.get("id")) %>');">
 		<td><%=StringUtils.nullToStr(map.get("id")) %></td>
 		<td><%=StringUtils.nullToStr(map.get("name")) %></td>
-		<td><%=StringUtils.nullToStr(map.get("address")) %></td>
+		<td align="left"><%=StringUtils.nullToStr(map.get("address")) %></td>
 		<td><%=StringUtils.nullToStr(map.get("lxr")) %></td>
 		<td><%=StringUtils.nullToStr(map.get("lxdh")) %></td>
 		<td><%=StringUtils.nullToStr(map.get("flag")).equals("1")?"正常":"停用" %></td>

@@ -55,7 +55,15 @@ String client_name = (String)VS.findValue("client_name");
 			document.myform.submit();
 		}
 	}	
-	
+
+	function trSelectChangeCss(){
+		if (event.srcElement.tagName=='TD'){
+			for(i=0;i<selTable.rows.length;i++){
+				selTable.rows[i].className="a1";
+			}
+			event.srcElement.parentElement.className='a2';
+		}
+	}
 </script>
 </head>
 <body >
@@ -76,7 +84,7 @@ String client_name = (String)VS.findValue("client_name");
 		</td>				
 	</tr>		
 </table>
-<table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0">
+<table width="100%"  align="center" border="1" class="chart_list" cellpadding="0" cellspacing="0" id="selTable">
 	<thead>
 	<tr>
 		<td>单位名称</td>
@@ -99,13 +107,13 @@ String client_name = (String)VS.findValue("client_name");
 		String czr = StringUtils.nullToStr(map.get("czr"));
 		String cz_date = StringUtils.nullToStr(map.get("cz_date"));
 	%>
-	<tr class="a1">
-		<td class="a1"><%=StaticParamDo.getClientNameById(clientName) %></td>
-		<td class="a1"><%=JMath.round(ysqc,2) %></td>
-		<td class="a1"><%=JMath.round(yfqc,2) %></td>
-		<td class="a1"><%=StaticParamDo.getRealNameById(czr) %></td>
-		<td class="a1"><%=cz_date.substring(0,10) %></td>
-		<td class="a1"><a href="#" onclick="del('<%=StringUtils.nullToStr(map.get("seq_id")) %>');"><img src="images/del.gif" align="absmiddle" title="删除" border="0" style="cursor:hand"></a></td>
+	<tr class="a1" onmousedown="trSelectChangeCss()">
+		<td align="left"><%=StaticParamDo.getClientNameById(clientName) %></td>
+		<td align="right"><%=JMath.round(ysqc,2) %></td>
+		<td align="right"><%=JMath.round(yfqc,2) %></td>
+		<td><%=StaticParamDo.getRealNameById(czr) %></td>
+		<td><%=cz_date.substring(0,10) %></td>
+		<td><a href="#" onclick="del('<%=StringUtils.nullToStr(map.get("seq_id")) %>');"><img src="images/del.gif" align="absmiddle" title="删除" border="0" style="cursor:hand"></a></td>
 	</tr>
 	
 	<%

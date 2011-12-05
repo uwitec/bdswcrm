@@ -142,7 +142,7 @@ String orderType = (String)VS.findValue("orderType");
 	%>
 	<tr class="a1"  title="双击查看详情" <%if(StringUtils.nullToStr(cgthd.get("th_flag")).equals("1")){ %>style="color:red"<%} %>   onmousedown="trSelectChangeCss()"  onclick="descMx('<%=StringUtils.nullToStr(cgthd.get("id")) %>');" onDblClick="openWin('<%=StringUtils.nullToStr(cgthd.get("id")) %>');">
 		<td><%=StringUtils.nullToStr(cgthd.get("id")) %></td>
-		<td><%=StringUtils.nullToStr(cgthd.get("provider_name")) %></td>
+		<td align="left"><%=StringUtils.nullToStr(cgthd.get("provider_name")) %></td>
 		<td><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(cgthd.get("jsr"))) %></td>
 		<td align="right"><%=JMath.round(tkzje,2) %>&nbsp;&nbsp;&nbsp;</td>
 		<td><%=StringUtils.nullToStr(cgthd.get("th_date")) %></td>

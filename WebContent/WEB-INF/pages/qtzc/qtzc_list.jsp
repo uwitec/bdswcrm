@@ -122,16 +122,16 @@ String state = StringUtils.nullToStr(VS.findValue("state"));
 <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0" border="1" id="selTable">
 	<thead>
 	<tr>
-		<td onclick="doSort('id');">编号<%if(orderName.equals("id")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('ywy');">申请人<%if(orderName.equals("ywy")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('type');">费用类型<%if(orderName.equals("type")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('fysq_id');">费用申请单编号<%if(orderName.equals("fysq_id")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>		
-		<td onclick="doSort('zcje');">金额<%if(orderName.equals("zcje")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>	
-		<td onclick="doSort('jsr');">出纳<%if(orderName.equals("jsr")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('zc_date');">支出日期<%if(orderName.equals("zc_date")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('zczh');">支出账户<%if(orderName.equals("zczh")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>				
-		<td onclick="doSort('czr');">操作员<%if(orderName.equals("czr")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td>操作</td>
+		<td width="12%" onclick="doSort('id');">编号<%if(orderName.equals("id")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="7%" onclick="doSort('ywy');">申请人<%if(orderName.equals("ywy")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="12%" onclick="doSort('type');">费用类型<%if(orderName.equals("type")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="14%" onclick="doSort('fysq_id');">费用申请单编号<%if(orderName.equals("fysq_id")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>		
+		<td width="8%" onclick="doSort('zcje');">金额<%if(orderName.equals("zcje")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>	
+		<td width="7%" onclick="doSort('jsr');">出纳<%if(orderName.equals("jsr")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="8%" onclick="doSort('zc_date');">支出日期<%if(orderName.equals("zc_date")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="12%" onclick="doSort('zczh');">支出账户<%if(orderName.equals("zczh")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>				
+		<td width="8%" onclick="doSort('czr');">操作员<%if(orderName.equals("czr")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="13%">操作</td>
 	</tr>
 	</thead>
 	<%
@@ -159,8 +159,8 @@ String state = StringUtils.nullToStr(VS.findValue("state"));
 		<%	
 		}else{
 		%>
-			<a href="#" class="xxlb" onclick="edit('<%=StringUtils.nullToStr(qtzc.getId()) %>');" title="支出">支出</a>&nbsp;&nbsp;&nbsp;&nbsp;
-			<a href="#" class="xxlb" onclick="del('<%=StringUtils.nullToStr(qtzc.getId()) %>');" title="退回">退回</a>&nbsp;&nbsp;&nbsp;&nbsp;
+			<a href="#" class="xxlb" onclick="edit('<%=StringUtils.nullToStr(qtzc.getId()) %>');" title="支出">支出</a>&nbsp;
+			<a href="#" class="xxlb" onclick="del('<%=StringUtils.nullToStr(qtzc.getId()) %>');" title="退回">退回</a>&nbsp;
 			<a href="#" class="xxlb" onclick="openWin('<%=StringUtils.nullToStr(qtzc.getId()) %>');" title="查看">查看</a>		
 		<%	
 		}

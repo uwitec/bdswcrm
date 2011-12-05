@@ -67,10 +67,10 @@
 	<tr>
 		<td class="search" align="left" colspan="2">&nbsp;&nbsp;
 			序列号：
-			<ww:textfield theme="simple" name="q_serial_num" id="q_serial_num" value="%{q_serial_num}"/> 
+			<ww:textfield theme="simple" name="q_serial_num" size="12" id="q_serial_num" value="%{q_serial_num}"/> 
 			&nbsp;&nbsp;		
 			商品名称：
-			<ww:textfield theme="simple" name="product_name" id="product_name" value="%{product_name}"/> 
+			<ww:textfield theme="simple" name="product_name" size="12" id="product_name" value="%{product_name}"/> 
 			&nbsp;&nbsp;
 			状态：
 			<ww:select name="state" id="state" theme="simple" list="#{'在库':'在库','已售':'已售','已退货':'已退货'}"  emptyOption="true" ></ww:select>
@@ -85,20 +85,20 @@
 <table width="100%"  align="center"  border="1"   class="chart_list" cellpadding="0" cellspacing="0" id="selTable">
 	<thead>
 	<tr>
-		<td>序列号</td>
-		<td>商品名称</td>	
-		<td>商品规格</td>
-		<td>状态</td>
-		<td>所在库房</td>
-		<td>是否样机</td>
-		<td>操作</td>
+		<td width="16%">序列号</td>
+		<td width="21%">商品名称</td>	
+		<td width="19%">商品规格</td>
+		<td width="8%">状态</td>
+		<td width="15%">所在库房</td>
+		<td width="8%">是否样机</td>
+		<td width="13%">操作</td>
 	</tr>
 	</thead>
 	<ww:iterator value="%{pageSerialNum.results}">
 		<tr class="a1" onmousedown="trSelectChangeCss()" onDblClick="view('<ww:property value="%{serial_num}" />');";>
 			<td><ww:property value="%{serial_num}" /></td>
-			<td><ww:property value="%{product_name}" /></td>
-			<td><ww:property value="%{product_xh}" /></td>
+			<td align="left"><ww:property value="%{product_name}" /></td>
+			<td align="left"><ww:property value="%{product_xh}" /></td>
 			<td><ww:property value="%{state}" /></td>
 			<td><ww:property value="%{store_name}" /></td>
 			<td><ww:if test="yj_flag==1">是</ww:if><ww:else>否</ww:else></td>		

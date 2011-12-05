@@ -115,14 +115,14 @@ String zz_date2 = (String)VS.findValue("zz_date2");
 <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0" border="1" id="selTable">
 	<thead>
 	<tr>
-		<td onclick="doSort('id');">编号<%if(orderName.equals("id")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('zczh');">转出账户<%if(orderName.equals("zczh")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('zrzh');">转入账户<%if(orderName.equals("zrzh")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>		
-		<td onclick="doSort('zzje');">转账金额<%if(orderName.equals("zzje")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('jsr');">经手人<%if(orderName.equals("jsr")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('zz_date');">日期<%if(orderName.equals("zz_date")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('czr');">操作员<%if(orderName.equals("czr")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td>操作</td>
+		<td width="13%" onclick="doSort('id');">编号<%if(orderName.equals("id")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="18%" onclick="doSort('zczh');">转出账户<%if(orderName.equals("zczh")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="18%" onclick="doSort('zrzh');">转入账户<%if(orderName.equals("zrzh")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>		
+		<td width="10%" onclick="doSort('zzje');">转账金额<%if(orderName.equals("zzje")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="8%" onclick="doSort('jsr');">经手人<%if(orderName.equals("jsr")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="8%" onclick="doSort('zz_date');">日期<%if(orderName.equals("zz_date")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="9%" onclick="doSort('czr');">操作员<%if(orderName.equals("czr")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="13%">操作</td>
 	</tr>
 	</thead>
 	<%

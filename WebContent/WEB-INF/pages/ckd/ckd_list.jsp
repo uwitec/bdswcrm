@@ -132,15 +132,15 @@ String orderType = StringUtils.nullToStr(VS.findValue("orderType"));
 <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0" border="1" id="selTable">
 	<thead>
 	<tr>
-		<td onclick="doSort('ckd_id');">出库单编号<%if(orderName.equals("ckd_id")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('creatdate');">创建日期<%if(orderName.equals("creatdate")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('client_name');">客户名称<%if(orderName.equals("client_name")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('state');">物流状态<%if(orderName.equals("state")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('fzr');">经手人<%if(orderName.equals("fzr")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>		
-		<td onclick="doSort('store_id');">仓库<%if(orderName.equals("store_id")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('ck_date');">出库时间<%if(orderName.equals("ck_date")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('czr');">操作员<%if(orderName.equals("czr")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td>操作</td>
+		<td width="12%" onclick="doSort('ckd_id');">出库单编号<%if(orderName.equals("ckd_id")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="10%" onclick="doSort('creatdate');">创建日期<%if(orderName.equals("creatdate")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="20%" onclick="doSort('client_name');">客户名称<%if(orderName.equals("client_name")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="8%" onclick="doSort('state');">物流状态<%if(orderName.equals("state")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="8%" onclick="doSort('fzr');">经手人<%if(orderName.equals("fzr")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>		
+		<td width="14%" onclick="doSort('store_id');">仓库<%if(orderName.equals("store_id")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="8%" onclick="doSort('ck_date');">出库时间<%if(orderName.equals("ck_date")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="8%" onclick="doSort('czr');">操作员<%if(orderName.equals("czr")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="12%">操作</td>
 	</tr>
 	</thead>
 	<%
@@ -165,10 +165,10 @@ String orderType = StringUtils.nullToStr(VS.findValue("orderType"));
 			<%if(ckd_state.equals("已出库")){  //已入库的入库单不能修改%>
 			<a href="#" onclick="openWin('<%=StringUtils.nullToStr(ckd.get("ckd_id")) %>');"><img src="images/view.gif" align="absmiddle" title="查看入库单信息" border="0" style="cursor:hand"></a>	
 			<%}else{ %>
-			<a href="#" onclick="edit('<%=StringUtils.nullToStr(ckd.get("ckd_id")) %>');"><img src="images/modify.gif" align="absmiddle" title="修改入库单信息" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
+			<a href="#" onclick="edit('<%=StringUtils.nullToStr(ckd.get("ckd_id")) %>');"><img src="images/modify.gif" align="absmiddle" title="修改入库单信息" border="0" style="cursor:hand"></a>&nbsp;&nbsp;
 			<a href="#" onclick="openWin('<%=StringUtils.nullToStr(ckd.get("ckd_id")) %>');"><img src="images/view.gif" align="absmiddle" title="查看入库单信息" border="0" style="cursor:hand"></a>
 			<%} %>
-			&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="print('<%=StringUtils.nullToStr(ckd.get("ckd_id")) %>');"><img src="images/print.png" align="absmiddle" title="打印出库单" border="0" style="cursor:hand"></a>
+			&nbsp;&nbsp;<a href="#" onclick="print('<%=StringUtils.nullToStr(ckd.get("ckd_id")) %>');"><img src="images/print.png" align="absmiddle" title="打印出库单" border="0" style="cursor:hand"></a>
 		</td>
 	</tr>
 	

@@ -144,7 +144,7 @@ String orderType = (String)VS.findValue("orderType");
 	    <tr class="a1" onmousedown="trSelectChangeCss()" title="双击查看详情" onDblClick="openWin('<%=StringUtils.nullToStr(lxrs.get("id")) %>');">
 		<td><%=StringUtils.nullToStr(lxrs.get("id")) %></td>
 		<td><%=StringUtils.nullToStr(lxrs.get("name")) %></td>
-		<td><%=StringUtils.nullToStr(lxrs.get("clients_name")) %></td>
+		<td align="left"><%=StringUtils.nullToStr(lxrs.get("clients_name")) %></td>
 		<td><%=StringUtils.nullToStr(lxrs.get("gzdh")) %></td>
 		<td><%=StringUtils.nullToStr(lxrs.get("yddh")) %></td>
 		<td><%=StringUtils.nullToStr(lxrs.get("mail")) %></td>
