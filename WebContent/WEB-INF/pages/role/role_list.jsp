@@ -16,7 +16,7 @@ String role_name = ParameterUtility.getStringParameter(request,"role_name", "");
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>客户列表</title>
+<title>角色列表</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
 <script language='JavaScript' src="js/date.js"></script>
@@ -102,11 +102,11 @@ String role_name = ParameterUtility.getStringParameter(request,"role_name", "");
 <table width="100%" border="1" align="center"  class="chart_list" cellpadding="0" cellspacing="0" id="selTable">
 	<thead>
 	<tr>
-		<td>选择</td>
-		<td>角色编号</td>
-		<td>角色名称</td>
-		<td>序号</td>
-		<td>操作</td>
+		<td width="15%">选择</td>
+		<td width="25%">角色编号</td>
+		<td width="25%">角色名称</td>
+		<td width="20%">序号</td>
+		<td width="15%">操作</td>
 	</tr>
 	</thead>
 	<%

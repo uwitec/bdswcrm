@@ -155,14 +155,14 @@ String is_del = (String)VS.findValue("is_del");
 <table width="100%"  align="center"  class="chart_list" border="1" cellpadding="0" cellspacing="0" id="selTable">
 	<thead>
 	<tr>
-		<td>选择</td>
-		<td onclick="doSort('user_id');">用户编号<%if(orderName.equals("user_id")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('user_name');">登录名<%if(orderName.equals("user_name")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('real_name');">真实姓名<%if(orderName.equals("real_name")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('gs_phone');">电话<%if(orderName.equals("gs_phone")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('mobile');">手机<%if(orderName.equals("mobile")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td onclick="doSort('mobile');">状态<%if(orderName.equals("is_del")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
-		<td>操作</td>
+		<td width="8%">选择</td>
+		<td width="12%" onclick="doSort('user_id');">用户编号<%if(orderName.equals("user_id")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="12%" onclick="doSort('user_name');">登录名<%if(orderName.equals("user_name")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="12%" onclick="doSort('real_name');">真实姓名<%if(orderName.equals("real_name")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="11%" onclick="doSort('gs_phone');">电话<%if(orderName.equals("gs_phone")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="10%" onclick="doSort('mobile');">手机<%if(orderName.equals("mobile")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="10%" onclick="doSort('mobile');">状态<%if(orderName.equals("is_del")) out.print("<img src='images/" + orderType + ".gif'>"); %></td>
+		<td width="15%">操作</td>
 	</tr>
 	</thead>
 	<%
