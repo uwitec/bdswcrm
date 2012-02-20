@@ -3120,5 +3120,14 @@
             <result name="success">/WEB-INF/pages/report/storexs_hz/result_product_mx.jsp</result>
         </action>
         <!-- 仓库销售汇总 -->
+        
+        <!-- 序列号状态 -->
+        <action name="listSerialNum" class="serialNumAction" method="list">
+            <result name="success" type="dispatcher">/WEB-INF/pages/report/serial_state/serialNum_list.jsp</result>
+        </action>       
+        <action name="viewSerialNum" class="serialNumAction" method="edit">
+            <result name="success">/WEB-INF/pages/report/serial_state/serialNum_view.jsp</result>
+        </action>        
+         <!-- 序列号状态 -->
     </package>
 </xwork>
