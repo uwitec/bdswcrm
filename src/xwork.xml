@@ -3106,5 +3106,19 @@
             <result name="success" type="chain">openQzxlhRight</result>
         </action>        
         <!-- 强制序列号设定 --> 
+        <!-- 仓库销售汇总 -->
+        <action name="showStorexsHzCondition" class="storexsHzAction" method="showStoreCondition">
+            <result name="success">/WEB-INF/pages/report/storexs_hz/condition_store.jsp</result>
+        </action>
+        <action name="getStorexsHzResult" class="storexsHzAction" method="getStorexshzTjResult">
+            <result name="success">/WEB-INF/pages/report/storexs_hz/result_store.jsp</result>
+        </action>
+        <action name="getStorexsHzMxResult" class="storexsHzAction" method="getStoreResultMx">
+            <result name="success">/WEB-INF/pages/report/storexs_hz/result_store_mx.jsp</result>
+        </action>
+        <action name="getStorexsProductMxResult" class="storexsHzAction" method="getStorexsProductMxResult">
+            <result name="success">/WEB-INF/pages/report/storexs_hz/result_product_mx.jsp</result>
+        </action>
+        <!-- 仓库销售汇总 -->
     </package>
 </xwork>
