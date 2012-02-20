@@ -103,3 +103,8 @@ update product_sale_flow a inner join rkd b on  a.id=b.jhd_id set a.store_id=b.s
 INSERT INTO `funcs` VALUES ('FC9918','仓库销售汇总','仓库销售汇总','showStorexsHzCondition.html','199.gif',13,'1','1');
 
 INSERT INTO `column_funcs` VALUES ('001002','FC9918');
+
+----增加序列号汇总报表
+INSERT INTO `funcs` VALUES ('FC9919','序列号汇总','序列号汇总','listSerialNum.html','108.gif',9,'1','3');
+
+INSERT INTO `column_funcs` VALUES ('003002','FC9919');
