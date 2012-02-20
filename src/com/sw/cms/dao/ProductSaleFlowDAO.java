@@ -14,10 +14,10 @@ import com.sw.cms.util.StringUtils;
 public class ProductSaleFlowDAO extends JdbcBaseDAO {
 	
 	public void insertProductSaleFlow(ProductSaleFlow info){
-		String sql = "insert into product_sale_flow(id,yw_type,product_id,client_name,xsry,cz_date,nums,price,hjje,dwcb,cb,dwkhcb,khcb,dwygcb,ygcb,sd,bhsje,gf,ds,basic_ratio,out_ratio,lsxj,sfcytc,jy_time,xsry_dept) " +
-				"values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,now(),?)";
+		String sql = "insert into product_sale_flow(id,yw_type,product_id,client_name,xsry,cz_date,nums,price,hjje,dwcb,cb,dwkhcb,khcb,dwygcb,ygcb,sd,bhsje,gf,ds,basic_ratio,out_ratio,lsxj,sfcytc,jy_time,xsry_dept,store_id) " +
+				"values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,now(),?,?)";
 		
-		Object[] param = new Object[24];
+		Object[] param = new Object[25];
 		
 		param[0] = info.getId();
 		param[1] = info.getYw_type();
@@ -43,7 +43,7 @@ public class ProductSaleFlowDAO extends JdbcBaseDAO {
 		param[21] = info.getLsxj();
 		param[22] = info.getSfcytc();
 		param[23] = this.getXsryDept(info.getXsry());
-		
+		param[24] = this.getStoreId(info.getId(),info.getYw_type());
 		
 		this.getJdbcTemplate().update(sql,param);
 	}
@@ -64,4 +64,27 @@ public class ProductSaleFlowDAO extends JdbcBaseDAO {
 		return dept;
 	}
 
+	/**
+	 * 根据单据编号取出库库房编号
+	 * @param id 单据编号
+	 * @param yw_type 业务类型
+	 * @return  String 仓库编号
+	 */
+	private String getStoreId(String id,String yw_type){
+		String store = "";
+		String sql="";
+		if(yw_type.equals("退货单"))
+		{
+			sql = "select store_id from rkd where jhd_id='" + id + "'";
+		}
+		else
+		{
+		   sql = "select store_id from ckd where xsd_id='" + id + "'";
+		}
+		Map map = this.getJdbcTemplate().queryForMap(sql);
+		if(map != null){
+			store = StringUtils.nullToStr(map.get("store_id"));
+		}
+		return store;
+	}
 }
