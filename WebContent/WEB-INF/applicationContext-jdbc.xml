@@ -617,6 +617,11 @@
     <!-- 货品销售毛利分类汇总 -->
     <bean id="hpmlflxsHzDao" class="com.sw.cms.dao.HpmlflxsHzDAO" autowire="byName"/>
     <!-- 货品销售毛利分类汇总 --> 
+    
+    <!-- 仓库销售汇总 -->
+    <bean id="storexsHzDao"  class="com.sw.cms.dao.StorexsHzDAO">
+    	<property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
 </beans>
 
 

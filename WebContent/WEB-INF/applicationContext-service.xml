@@ -799,6 +799,12 @@
       </property>
     </bean>
 
+   <!-- 仓库销售汇总 -->     
+    <bean id="storexsHzService"  parent="baseTransaction">
+        <property name="target">
+    		<bean class="com.sw.cms.service.StorexsHzService" autowire="byName"/>
+    	</property>
+    </bean>
 </beans>
 
 
