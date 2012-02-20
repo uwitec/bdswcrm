@@ -93,3 +93,13 @@ ALTER TABLE `kcpd_desc` ADD COLUMN `qz_serial_num` varchar(4000) default NULL  A
 
 2011-07-20修改员工状态
 update sys_user set zzzt='在职' where is_sys_user='0' and zzzt is null
+
+2012-02-16更新
+--商品交易信息中添加仓库列，并更新数据
+ALTER TABLE `product_sale_flow` ADD COLUMN `store_id` VARCHAR(20) AFTER `xsry_dept`;
+update product_sale_flow a inner join ckd b on a.id=b.xsd_id set a.store_id=b.store_id;
+update product_sale_flow a inner join rkd b on  a.id=b.jhd_id set a.store_id=b.store_id;
+----增加仓库销售汇总
+INSERT INTO `funcs` VALUES ('FC9918','仓库销售汇总','仓库销售汇总','showStorexsHzCondition.html','199.gif',13,'1','1');
+
+INSERT INTO `column_funcs` VALUES ('001002','FC9918');
