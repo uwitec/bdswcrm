@@ -35,6 +35,7 @@ public class ProductSaleFlow {
 	private double lsxj;       //零售限价
 	private String sfcytc;     //是否参与提成
 	private Timestamp jy_time; //交易时间
+	private String store_id;         //仓库编号
 	
 	public int getSeq_id() {
 		return seq_id;
@@ -193,4 +194,10 @@ public class ProductSaleFlow {
 		xsry_dept = xsryDept;
 	}
 	
+	public String getStore_id() {
+		return store_id;
+	}
+	public void setStore_id(String store_id) {
+		this.store_id = store_id;
+	}
 }
