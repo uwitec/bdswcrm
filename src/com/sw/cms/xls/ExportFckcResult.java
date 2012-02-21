@@ -63,7 +63,7 @@ public class ExportFckcResult extends ExportXlsTemplate {
 			
 			//写统计表标题
 			sheet.mergeCells(0, 0, maxCol-1, 0);
-			label = new Label(0,0,"货品销售毛利汇总",this.getFt_title());
+			label = new Label(0,0,"分仓库存数量汇总",this.getFt_title());
 			sheet.addCell(label);
 			
 			//写统计条件
