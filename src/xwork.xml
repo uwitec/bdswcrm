@@ -1711,7 +1711,10 @@
 		<!-- 序列号管理 -->
         <action name="listSerialNum" class="serialNumAction" method="list">
             <result name="success" type="dispatcher">/WEB-INF/pages/serial_num/serialNum_list.jsp</result>
-        </action>       
+        </action>
+		<action name="querySerialNum" class="serialNumAction" method="list">
+            <result name="success" type="dispatcher">/WEB-INF/pages/serial_num/query_serialNum_list.jsp</result>
+        </action>        
         <action name="editSerialNum" class="serialNumAction" method="edit">
             <result name="success">/WEB-INF/pages/serial_num/serialNum_edit.jsp</result>
         </action>
@@ -2125,7 +2128,7 @@
         <!-- 零售单打印 -->                                                                                                             
         <action name="printLsd" class="lsdAction" method="printLsd">
             <result name="success" type="jasper">
-				<param name="location">/WEB-INF/report/xsdTemplate.jasper</param>
+				<param name="location">/WEB-INF/report/lsdTemplate.jasper</param>
 				<param name="dataSource">lsdProducts</param>
 				<param name="format">PDF</param>
 			</result>

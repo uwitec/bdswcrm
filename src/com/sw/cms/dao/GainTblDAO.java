@@ -460,7 +460,7 @@ public class GainTblDAO extends JdbcBaseDAO {
 		
 		//本月
 		String sql = "select sum(srje) as srje from((select sum(pzje) srje from pz where type='应收' and pzje>0 and DATE_FORMAT(cz_date,'%Y-%m-%d')>='" + ny + "-01" + "' and DATE_FORMAT(cz_date,'%Y-%m-%d')<='" + ny + "-31" + "')";
-		sql += "union (select sum(0-pzje) srje from pz where type='应付' and pzje<0 and DATE_FORMAT(cz_date,'%Y-%m-%d')>='" + ny + "-01" + "' and DATE_FORMAT(cz_date,'%Y-%m-%d')<='" + ny + "-31" + "')) x";
+		sql += "union all  (select sum(0-pzje) srje from pz where type='应付' and pzje<0 and DATE_FORMAT(cz_date,'%Y-%m-%d')>='" + ny + "-01" + "' and DATE_FORMAT(cz_date,'%Y-%m-%d')<='" + ny + "-31" + "')) x";
 		Map mapMonth = this.getResultMap(sql);
 		if(mapMonth != null){
 			cost = mapMonth.get("srje")==null?0:((Double)mapMonth.get("srje")).doubleValue();
@@ -498,7 +498,7 @@ public class GainTblDAO extends JdbcBaseDAO {
 		//本月
 		String sql = "select sum(srje) as srje from(" +
 				"(select sum(0-pzje) srje from pz where type='应收' and pzje<0 and DATE_FORMAT(cz_date,'%Y-%m-%d')>='" + ny + "-01" + "' and DATE_FORMAT(cz_date,'%Y-%m-%d')<='" + ny + "-31" + "')";
-		sql += "union (select sum(pzje) srje from pz where type='应付' and pzje>0 and DATE_FORMAT(cz_date,'%Y-%m-%d')>='" + ny + "-01" + "' and DATE_FORMAT(cz_date,'%Y-%m-%d')<='" + ny + "-31" + "')) x";
+		sql += "union all (select sum(pzje) srje from pz where type='应付' and pzje>0 and DATE_FORMAT(cz_date,'%Y-%m-%d')>='" + ny + "-01" + "' and DATE_FORMAT(cz_date,'%Y-%m-%d')<='" + ny + "-31" + "')) x";
 		Map mapMonth = this.getResultMap(sql);
 		if(mapMonth != null){
 			cost = mapMonth.get("srje")==null?0:((Double)mapMonth.get("srje")).doubleValue();
