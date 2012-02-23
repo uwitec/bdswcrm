@@ -24,7 +24,7 @@ if(serialStateMap != null){
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>序列号查询</title>
+<title>序列号跟踪</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/report.css" rel="stylesheet" type="text/css" />
 <style media=print>  
@@ -47,9 +47,9 @@ if(serialStateMap != null){
 <form name="reportForm" action="getSerialFlow.html" method="post">
 <TABLE  align="center" cellSpacing=0 cellPadding=0 width="99%" border=0>
 	<TBODY>
-		<TR style="BACKGROUND-COLOR: #dcdcdc;height:45;">
+		<TR style="BACKGROUND-COLOR: #dcdcdc;height:45px;">
 		    <TD align="center" width="100%"><font style="FONT-SIZE: 16px">
-		    <B>序列号查询</B></font>
+		    <B>序列号跟踪</B></font>
 		    
 		    </TD>
 		</TR>

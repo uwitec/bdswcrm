@@ -94,6 +94,13 @@ ALTER TABLE `kcpd_desc` ADD COLUMN `qz_serial_num` varchar(4000) default NULL  A
 2011-07-20修改员工状态
 update sys_user set zzzt='在职' where is_sys_user='0' and zzzt is null
 
+
+2012-01-12修改
+update funcs set func_name='序列号跟踪' where func_id='FC0056'
+insert into funcs(func_id,func_name,func_ms,url,img,xh,ywflag,funcflag) values('FC9917','序列号查询','序列号查询','querySerialNum.html','102.gif','10','1','3')
+INSERT INTO `column_funcs` VALUES ('003001','FC9917');
+update sys_user set zzzt='在职' where is_sys_user='0' and zzzt is null
+
 2012-02-16更新
 --商品交易信息中添加仓库列，并更新数据
 ALTER TABLE `product_sale_flow` ADD COLUMN `store_id` VARCHAR(20) AFTER `xsry_dept`;

@@ -1,0 +1,464 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report2" language="groovy" pageWidth="595" pageHeight="421" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isFloatColumnFooter="true">
+	<parameter name="creatdate" class="java.lang.String"/>
+	<parameter name="id" class="java.lang.String"/>
+	<parameter name="client_name" class="java.lang.String"/>
+	<parameter name="client_tel" class="java.lang.String"/>
+	<parameter name="dept_name" class="java.lang.String"/>
+	<parameter name="xsry_name" class="java.lang.String"/>
+	<parameter name="skfs" class="java.lang.String"/>
+	<parameter name="skzh_name" class="java.lang.String"/>
+	<parameter name="title_name" class="java.lang.String"/>
+	<parameter name="foot_name" class="java.lang.String"/>
+	<parameter name="remark" class="java.lang.String"/>
+	<parameter name="address" class="java.lang.String"/>
+	<parameter name="jexj_dx" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="product_name" class="java.lang.String">
+		<fieldDescription><![CDATA[product_name]]></fieldDescription>
+	</field>
+	<field name="product_id" class="java.lang.String">
+		<fieldDescription><![CDATA[product_id]]></fieldDescription>
+	</field>
+	<field name="price" class="java.lang.Double">
+		<fieldDescription><![CDATA[price]]></fieldDescription>
+	</field>
+	<field name="nums" class="java.lang.Integer">
+		<fieldDescription><![CDATA[nums]]></fieldDescription>
+	</field>
+	<field name="xj" class="java.lang.Double">
+		<fieldDescription><![CDATA[xj]]></fieldDescription>
+	</field>
+	<field name="product_xh" class="java.lang.String">
+		<fieldDescription><![CDATA[product_xh]]></fieldDescription>
+	</field>
+	<field name="id" class="java.lang.String">
+		<fieldDescription><![CDATA[id]]></fieldDescription>
+	</field>
+	<field name="creatdate" class="java.lang.String">
+		<fieldDescription><![CDATA[creatdate]]></fieldDescription>
+	</field>
+	<field name="client_name" class="java.lang.String">
+		<fieldDescription><![CDATA[client_name]]></fieldDescription>
+	</field>
+	<field name="lxdh" class="java.lang.String">
+		<fieldDescription><![CDATA[lxdh]]></fieldDescription>
+	</field>
+	<field name="lxr" class="java.lang.String">
+		<fieldDescription><![CDATA[lxr]]></fieldDescription>
+	</field>
+	<field name="mail" class="java.lang.String">
+		<fieldDescription><![CDATA[mail]]></fieldDescription>
+	</field>
+	<field name="mobile" class="java.lang.String">
+		<fieldDescription><![CDATA[mobile]]></fieldDescription>
+	</field>
+	<field name="dw" class="java.lang.String"/>
+	<variable name="total_nums" class="java.lang.Integer" incrementType="Report" calculation="Sum">
+		<variableExpression><![CDATA[new java.lang.Integer($V{total_nums}.intValue()+$F{nums}.intValue())]]></variableExpression>
+		<initialValueExpression><![CDATA[new java.lang.Integer(0)]]></initialValueExpression>
+	</variable>
+	<variable name="total_xj" class="java.lang.Double" incrementType="Report" calculation="Sum">
+		<variableExpression><![CDATA[new java.lang.Double($V{total_xj}.doubleValue()+$F{xj}.doubleValue())]]></variableExpression>
+		<initialValueExpression><![CDATA[new java.lang.Double(0)]]></initialValueExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="87">
+			<textField>
+				<reportElement x="364" y="32" width="190" height="19"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{creatdate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="7" y="32" width="39" height="19"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[编号：]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="363" y="50" width="191" height="19"/>
+				<textElement>
+					<font pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{address}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement x="102" y="50" width="204" height="19"/>
+				<textElement>
+					<font fontName="SansSerif" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{client_name}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="7" y="50" width="94" height="19"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[客户名称/联系人：]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="28" width="554" height="1"/>
+				<graphicElement>
+					<pen lineWidth="1.5" lineStyle="Double" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="306" y="32" width="58" height="19"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[销售日期：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="306" y="50" width="58" height="19"/>
+				<textElement>
+					<font isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[地址：]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="101" y="68" width="453" height="19"/>
+				<textElement>
+					<font fontName="SansSerif" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{client_tel}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1" y="0" width="553" height="28"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None">
+					<font fontName="黑体" size="18" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{title_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="46" y="32" width="149" height="19"/>
+				<textElement>
+					<font fontName="SansSerif" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{id}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="7" y="68" width="94" height="19"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[电话/手机/Email:]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="197" height="20" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="黑体" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[商品名称]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="198" y="0" width="155" height="20" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="黑体" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[商品规格]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="452" y="0" width="39" height="20" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="黑体" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[数量]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="390" y="0" width="61" height="20" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="黑体" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[单价]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="491" y="0" width="64" height="20" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="黑体" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[小计]]></text>
+			</staticText>
+			<line>
+				<reportElement x="197" y="0" width="1" height="20"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="389" y="0" width="1" height="20"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="451" y="0" width="1" height="20"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="491" y="0" width="1" height="20"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="354" y="1" width="34" height="18" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="黑体" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[单位]]></text>
+			</staticText>
+			<line>
+				<reportElement x="352" y="0" width="1" height="20"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+			<rectangle>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" mode="Transparent" x="0" y="0" width="555" height="20" backcolor="#FFFFFF"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="198" y="2" width="151" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{product_xh}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="394" y="2" width="50" height="16"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{price}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="451" y="0" width="1" height="20"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="491" y="0" width="1" height="20"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="389" y="0" width="1" height="20"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="197" y="0" width="1" height="20"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" mode="Transparent" x="4" y="2" width="193" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{product_name}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="492" y="2" width="54" height="16"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{xj}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="452" y="2" width="39" height="16"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{nums}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="352" y="0" width="1" height="20" isRemoveLineWhenBlank="true"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="353" y="2" width="36" height="16"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{dw}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" mode="Transparent" x="0" y="0" width="555" height="20"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="24" splitType="Stretch">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="6" y="4" width="547" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{foot_name}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="3" width="555" height="1"/>
+				<graphicElement>
+					<pen lineWidth="1.5" lineStyle="Double"/>
+				</graphicElement>
+			</line>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="63">
+			<staticText>
+				<reportElement x="7" y="44" width="69" height="19"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[销售部门：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="188" y="44" width="69" height="19"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[销售人员：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="350" y="44" width="62" height="19"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[客户签字：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="188" y="23" width="69" height="19"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[收款方式：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="7" y="23" width="69" height="19"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[收 款 人：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="350" y="23" width="62" height="19"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[收款账户：]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="76" y="44" width="111" height="19"/>
+				<textElement>
+					<font fontName="SansSerif" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{dept_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="257" y="44" width="92" height="19"/>
+				<textElement>
+					<font fontName="SansSerif" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{xsry_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="257" y="23" width="92" height="19"/>
+				<textElement>
+					<font fontName="SansSerif" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{skfs}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="76" y="23" width="111" height="19"/>
+				<textElement>
+					<font fontName="SansSerif" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{xsry_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="412" y="23" width="142" height="19"/>
+				<textElement>
+					<font fontName="SansSerif" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{skzh_name}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Transparent" x="12" y="0" width="176" height="20" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[合  计]]></text>
+			</staticText>
+			<line>
+				<reportElement x="197" y="0" width="1" height="20"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="451" y="0" width="1" height="20"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="491" y="0" width="55" height="20" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{total_xj}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Transparent" x="456" y="0" width="35" height="20" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$V{total_nums}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="491" y="0" width="1" height="20"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+			<rectangle>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" mode="Transparent" x="0" y="0" width="555" height="20"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+		</band>
+	</summary>
+</jasperReport>
