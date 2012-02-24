@@ -228,6 +228,20 @@ table.chart_list
 	 border-right:solid 1px #D6D7D6;
 	 border-bottom:solid 1px #D6D7D6;
 }
+table.chart_list td
+{
+	 border-top: solid 1px #D6D7D6;
+	 border-left:solid 1px #D6D7D6;
+	 border-right:solid 1px #D6D7D6;
+	 border-bottom:solid 1px #D6D7D6;
+}
+table.chart_list td table td
+{
+	 border-top: solid 0px #D6D7D6;
+	 border-left:solid 0px #D6D7D6;
+	 border-right:solid 0px #D6D7D6;
+	 border-bottom:solid 0px #D6D7D6;
+}
 table.chart_list thead td
 {
 	background-image:url(../images/mailSubHeaderBg-grey.gif);
@@ -246,12 +260,19 @@ table.chart_list td.csstitle
 	height:30px;	
 	border-top:solid 1px #D6D7D6;
 	font-size: 12px;
+	 border-left:solid 0px #D6D7D6;
+	 border-right:solid 0px #D6D7D6;
+	 border-bottom:solid 0px #D6D7D6;	
 }
 table.chart_list td.search
 {
 	background-image:url(../images/layerPopupBg.gif);
 	height:35px;
 	font-size: 12px;
+	border-top:solid 0px #D6D7D6;
+	border-left:solid 0px #D6D7D6;
+	border-right:solid 0px #D6D7D6;
+    border-bottom:solid 0px #D6D7D6;		
 }
 table.chart_list td.a1
 {

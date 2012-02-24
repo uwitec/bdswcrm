@@ -224,9 +224,9 @@ if(flag == null){
 <body onload="init();getHasMsg();" bgColor=#FBFBFB>
 <form name="myform" action="queryKcMx.html" method="post" target="_blank">
 <div id="dropmenu1_a" class="menu_down">
-<a class="menu_down_span" href="javascript:showWdMsg();"><span id="wdMsgTxt">未读消息</span></a>
-<a class="menu_down_span" href="javascript:shoYdMsg();"><span>已读消息</span></a>
-<a class="menu_down_span" href="javascript:send();"><span>发送消息</span></a>
+<div class="menu_down_span" ><a href="javascript:showWdMsg();"><span id="wdMsgTxt">未读消息</span></a></div>
+<div class="menu_down_span" ><a href="javascript:shoYdMsg();"><span>已读消息</span></a></div>
+<div class="menu_down_span" ><a href="javascript:send();"><span>发送消息</span></a></div>
 </div>
 <TABLE cellSpacing=0 cellPadding=0 width=100% height=100% align=center border=0 bgColor=#FBFBFB>
 	<TBODY>

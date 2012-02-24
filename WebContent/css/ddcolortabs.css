@@ -4,16 +4,18 @@ top: 0;
 border-top: 1px solid black; /*Top border width. Should match height of .ddcolortabsline above*/
 border-bottom: 1px solid black;
 border-right: 1px solid black;
+border-left: 1px solid black;
 line-height:18px;
 z-index:100;
 background-color: white;
-width: 183px;
+width: 222px;
 visibility: hidden;
 }
 .menu_down_span{
-border-top: 0 solid #678b3f;
-border-left: 1px solid black; /*THEME CHANGE HERE*/
-padding: 2px 0;
+	width: 70px;
+	padding: 2px;
+	display:inline ;
+	float:left;
 }
 .msg_back{
 border-left: 1px solid #918d8d;
