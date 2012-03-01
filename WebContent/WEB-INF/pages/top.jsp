@@ -28,9 +28,7 @@ if(flag == null){
 <LINK href="css/Portal.css" type=text/css rel=stylesheet>
 <LINK href="css/ddcolortabs.css" type=text/css rel=stylesheet>
 <script type="text/javascript" src="js/dropdowntabs.js"></script>
-<script type='text/javascript' src='dwr/interface/msgService.js'></script>
-<script type='text/javascript' src='dwr/engine.js'></script>
-<script type='text/javascript' src='dwr/util.js'></script>
+<script type="text/javascript" src="jquery/jquery.js"></script>
 
 <script>
 
@@ -91,10 +89,6 @@ if(flag == null){
 			newWin.focus();
 
 		}else{
-			//var destination = "client.htm";
-			//var fea ='width=800,height=600,left=' + (screen.availWidth-800)/2 + ',top=' + (screen.availHeight-600)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
-			
-			//window.open(destination,'客户查询',fea);	
 			document.myform.action = "queryClients.html";
 			document.myform.submit();
 		}		
@@ -110,10 +104,22 @@ if(flag == null){
 	
 	var is = false;
 	
-	//调用DWR服务检查用户是否有新消息
+	//检查用户是否有新消息
 	function getHasMsg(){
-		msgService.isHasMsgByUser('<%=user_id %>',chkReturn);
-		setTimeout("getHasMsg()",120*1000);
+		freshUserMsg();
+		setTimeout("getHasMsg()",20*1000);
+	}
+	
+	function freshUserMsg(){
+		$.ajax({
+			cache: false,
+			url:"user_msg.jsp",
+			dataType:"string",
+			type: "POST",
+			success: function(vl) {
+				chkReturn(vl.trim());
+			}
+		});
 	}
 	
 	//对返回结果进行处理
@@ -125,7 +131,6 @@ if(flag == null){
 			}
 			document.getElementById("wdMsgTxt").innerText = "未读消息[" + flag + "]";
 			document.getElementById("msgImage").src = "images/msg_new.gif";
-			//MM_controlSound('play','document.MM_controlSound1');
 		}else{
 			end();
 			is = false;
@@ -164,24 +169,14 @@ if(flag == null){
 	//发送消息
 	function send(){
 		var destination = "sendMsg.html";
-		var fea ='width=850,height=650,left=' + (screen.availWidth-850)/2 + ',top=' + (screen.availHeight-650)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		var fea ='width=850,height=600,left=' + (screen.availWidth-850)/2 + ',top=' + (screen.availHeight-600)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		window.open(destination,'发送消息',fea);	
 	}
-	
-	function MM_controlSound(sndAction,sndObj){ 　
-		if(eval(sndObj) != null){ 　　
-			if(navigator.appName=='Netscape'){
-				eval(sndObj+((sndAction=='stop')?'.stop()':'.play(false)')); 　　
-			}else if(eval(sndObj+".FileName")){
-				eval(sndObj+((sndAction=='stop')?'.stop()':'.play()')); 　
-			}
-		}
-	}	
 	
 	//打开未读消息窗口
 	function sendMail(){
 		var destination = "addMail.html";
-		var fea ='width=850,height=650,left=' + (screen.availWidth-850)/2 + ',top=' + (screen.availHeight-650)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		var fea ='width=850,height=600,left=' + (screen.availWidth-850)/2 + ',top=' + (screen.availHeight-600)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		window.open(destination,'发送邮件',fea);			
 	}	
 
@@ -288,7 +283,6 @@ if(flag == null){
 	</TBODY>
 </TABLE>
 </form>
-<!--<embed name='MM_controlSound1' src='css/1.wav' loop=false autostart=false mastersound hidden=true width=0 height=0></embed>-->
 <script type="text/javascript">
 	tabdropdown.init("colortab", 3)
 </script>

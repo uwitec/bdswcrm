@@ -107,6 +107,22 @@ ALTER TABLE `product_sale_flow` ADD COLUMN `store_id` VARCHAR(20) AFTER `xsry_de
 update product_sale_flow a inner join ckd b on a.id=b.xsd_id set a.store_id=b.store_id;
 update product_sale_flow a inner join rkd b on  a.id=b.jhd_id set a.store_id=b.store_id;
 ----增加仓库销售汇总
-INSERT INTO `funcs` VALUES ('FC9918','仓库销售汇总','仓库销售汇总','showStorexsHzCondition.html','199.gif',13,'1','1');
+INSERT INTO `funcs` VALUES ('FC9918','仓库销售汇总','仓库销售汇总','showStorexsHzCondition.html','199.gif',13,'1','3');
 INSERT INTO `column_funcs` VALUES ('001002','FC9918');
 
+2012-03-01更新
+--添加序列号盘点功能
+INSERT INTO `funcs` VALUES ('FC9919','序列号盘点','序列号盘点','pdSerialNumCon.html','121.gif',14,'1','1');
+INSERT INTO `column_funcs` VALUES ('003001','FC9919');
+
+--序列号盘点记录表
+CREATE TABLE serial_num_pd (
+  `id` INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+  `cdate` VARCHAR(45) NOT NULL,
+  `jsr` VARCHAR(45) NOT NULL,
+  `store_id` VARCHAR(45) NOT NULL,
+  `cz_date` DATETIME NOT NULL,
+  `pd_result` VARCHAR(400) NOT NULL,
+  PRIMARY KEY(`id`)
+)
+ENGINE = InnoDB;

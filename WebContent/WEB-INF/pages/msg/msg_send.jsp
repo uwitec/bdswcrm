@@ -48,10 +48,14 @@
 			}
 		}
 	}
+	
+	function resetForm(){
+		document.myform.reset();
+	}
 </script>
 </head>
 <body>
-<form name="myform" action="saveMsg.html" method="post">
+<form name="myform" action="saveMsg.html" method="post" target="hiddenFrame">
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
@@ -100,5 +104,6 @@
 	</tr>
 </table>
 </form>
+<iframe name="hiddenFrame" id="hiddenFrame" width="0" height="0" style="display: none;"></iframe>
 </body>
 </html>

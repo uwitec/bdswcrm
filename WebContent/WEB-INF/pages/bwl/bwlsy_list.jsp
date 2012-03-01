@@ -30,18 +30,34 @@ Page results = (Page)VS.findValue("bwlPage");
 		window.open(destination,'详细信息',fea);	
 	}
 	
+	function refreshPage(){
+		document.myform.action = "listSyBwl.html";
+		document.myform.submit();
+	}
+
+	function trSelectChangeCss(){
+		if (event.srcElement.tagName=='TD'){
+			for(i=0;i<selTable.rows.length;i++){
+				selTable.rows[i].className="a1";
+			}
+			event.srcElement.parentElement.className='a2';
+		}
+	}	
 		
 </script>
 </head>
 <body >
 <div class="rightContentDiv" id="divContent">
-<form name="myform" action="listBwl.html" method="post">
+<form name="myform" action="listSyBwl.html" method="post">
 <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0">
 	<tr>
 		<td class="csstitle" align="left" width="75%">&nbsp;&nbsp;&nbsp;&nbsp;<b>备忘录</b></td>		
+		<td class="csstitle" width="25%" align="left">
+			<img src="images/import.gif" align="absmiddle" border="0">&nbsp;<a href="#" onclick="refreshPage();" class="xxlb"> 刷 新 </a>	</td>
+	</tr>		
 	</tr>
 </table>
-<table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0">
+<table width="100%"  align="center"  class="chart_list" cellpadding="0"  border="1" cellspacing="0" id="selTable">
 	<thead>
 	<tr>
 		<td>序号</td>
@@ -59,13 +75,13 @@ Page results = (Page)VS.findValue("bwlPage");
 		Bwl info = (Bwl)it.next();
 		i++;
 	%>
-	<tr>
-		<td class="a1"><%=i %></td>
-		<td class="a1"><a href="javascript:void(0);" onclick="openWin('<%=StringUtils.nullToStr(info.getId()) %>');" class="xxlb"><%=StringUtils.nullToStr(info.getTitle()) %></a></td>
-		<td class="a1"><%=StringUtils.nullToStr(info.getCz_date()) %></td>
-		<td class="a1"><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(info.getCzr())) %></td>
-		<td class="a1">
-			<a href="javascript:void(0);" onclick="openWin('<%=StringUtils.nullToStr(info.getId()) %>');"><img src="images/view.gif" align="absmiddle" title="查看" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
+	<tr class="a1" onmousedown="trSelectChangeCss()">
+		<td><%=i %></td>
+		<td align="left"><a href="javascript:openWin('<%=StringUtils.nullToStr(info.getId()) %>');" class="xxlb"><%=StringUtils.nullToStr(info.getTitle()) %></a></td>
+		<td><%=StringUtils.nullToStr(info.getCz_date()) %></td>
+		<td><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(info.getCzr())) %></td>
+		<td>
+			<a href="javascript:openWin('<%=StringUtils.nullToStr(info.getId()) %>');"><img src="images/view.gif" align="absmiddle" title="查看" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
 		</td>
 	</tr>
 	
