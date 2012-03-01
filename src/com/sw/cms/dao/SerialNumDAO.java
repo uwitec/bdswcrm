@@ -7,11 +7,13 @@ import java.util.Map;
 
 import org.springframework.jdbc.core.RowMapper;
 
+import com.sw.cms.dao.base.BeanRowMapper;
 import com.sw.cms.dao.base.JdbcBaseDAO;
 import com.sw.cms.dao.base.SqlUtil;
 import com.sw.cms.model.Page;
 import com.sw.cms.model.SerialNumFlow;
 import com.sw.cms.model.SerialNumMng;
+import com.sw.cms.model.SerialNumPd;
 import com.sw.cms.model.Ykrk;
 import com.sw.cms.model.YkrkProduct;
 import com.sw.cms.util.StaticParamDo;
@@ -235,7 +237,7 @@ public class SerialNumDAO extends JdbcBaseDAO {
 	 * 
 	 * @return
 	 */
-	public boolean getSerialNumStateXs(String product_id,String store_id,String serialNum){		
+	public boolean getSerialNumStateXs(String product_id,String store_id,String serialNum){
 		boolean is = false;
 		
 		String sql = "select count(*) as counts from serial_num_mng where product_id='"+product_id+"'  and serial_num='"+serialNum+"' and state='已售'";
@@ -247,6 +249,74 @@ public class SerialNumDAO extends JdbcBaseDAO {
 		
 		return is;
 	}
+	
+	
+	/**
+	 * 根据库房ID取序列号列表
+	 * @param store_id
+	 * @return
+	 */
+	public List getSerialNumMngListByStoreId(String store_id){
+		String sql = "select * from serial_num_mng where state='在库' and store_id=?";
+		return this.getResultList(sql, new Object[]{store_id},new SerialNumMngMapper());
+	}
+	
+	
+	/**
+	 * 盘点是否以保存
+	 * @param cdate
+	 * @param store_id
+	 * @return
+	 */
+	public boolean isSerialNumPdExist(String cdate,String store_id){
+		boolean is = false;
+		String sql = "select count(*) as nums from serial_num_pd where cdate='" + cdate + "' and store_id='" + store_id + "'";
+		int vl = this.getJdbcTemplate().queryForInt(sql);
+		if(vl > 0){
+			is = true;
+		}
+		return is;
+	}
+	
+	/**
+	 * 序列号盘点记录
+	 * @param curPage
+	 * @param rowsPerPage
+	 * @return
+	 */
+	public Page getSerialNumPdPage(String con,int curPage, int rowsPerPage){
+		String sql = "select a.* from serial_num_pd a join sys_user b on b.user_id=a.jsr where 1=1";
+		if(!con.equals("")){
+			sql = sql + con;
+		}
+		return this.getResultByPage(sql, curPage, rowsPerPage, new BeanRowMapper(SerialNumPd.class));
+	}
+	
+	
+	/**
+	 * 保存序列号盘点结果
+	 * @param info
+	 */
+	public void insertSerialNumPd(SerialNumPd info){
+		String sql = "insert into serial_num_pd(cdate,jsr,store_id,pd_result,cz_date) values(?,?,?,?,now())";
+		Object[] params = new Object[4];
+		params[0] = info.getCdate();
+		params[1] = info.getJsr();
+		params[2] = info.getStore_id();
+		params[3] = info.getPd_result();
+		this.update(sql,params);
+	}
+	
+	
+	/**
+	 * 去序列号盘点记录
+	 * @return
+	 */
+	public List getSerialNumPdList(){
+		String sql = "select * from serial_num_pd";
+		return this.getResultList(sql, new BeanRowMapper(SerialNumPd.class));
+	}
+	
 	
 	/**
 	 * 包装对象(序列号)

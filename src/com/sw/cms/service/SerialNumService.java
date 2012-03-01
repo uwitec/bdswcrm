@@ -6,6 +6,7 @@ import java.util.Map;
 import com.sw.cms.dao.SerialNumDAO;
 import com.sw.cms.model.Page;
 import com.sw.cms.model.SerialNumMng;
+import com.sw.cms.model.SerialNumPd;
 
 public class SerialNumService {
 
@@ -82,6 +83,43 @@ public class SerialNumService {
 		return serialNumDao.getSerialState(serial_num);
 	}
 	
+	
+	/**
+	 * 根据库房ID取序列号列表
+	 * @param store_id
+	 * @return
+	 */
+	public List getSerialNumMngListByStoreId(String store_id){
+		return serialNumDao.getSerialNumMngListByStoreId(store_id);
+	}
+	
+	/**
+	 * 保存序列号盘点结果
+	 * @param info
+	 */
+	public void insertSerialNumPd(SerialNumPd info){
+		serialNumDao.insertSerialNumPd(info);
+	}
+	
+	/**
+	 * 盘点是否以保存
+	 * @param cdate
+	 * @param store_id
+	 * @return
+	 */
+	public boolean isSerialNumPdExist(String cdate,String store_id){
+		return serialNumDao.isSerialNumPdExist(cdate, store_id);
+	}
+	
+	/**
+	 * 序列号盘点记录
+	 * @param curPage
+	 * @param rowsPerPage
+	 * @return
+	 */
+	public Page getSerialNumPdPage(String con,int curPage, int rowsPerPage){
+		return serialNumDao.getSerialNumPdPage(con, curPage, rowsPerPage);
+	}
 	
 	public SerialNumDAO getSerialNumDao() {
 		return serialNumDao;

@@ -1,6 +1,8 @@
 package com.sw.cms.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.sw.cms.dao.base.BeanRowMapper;
 import com.sw.cms.dao.base.JdbcBaseDAO;
@@ -101,6 +103,25 @@ public class SysMsgDAO extends JdbcBaseDAO {
 	public void delRecievedMsg(String id){
 		String sql = "update sys_msg set read_del_flag='1' where msg_id='" + id + "'";
 		this.getJdbcTemplate().update(sql);
+	}
+	
+	
+	/**
+	 * 取所有用户的未读消息情况
+	 */
+	public Map getUserNoReadMsg(){
+		Map map = new HashMap();
+		
+		String sql = "select b.user_id,count(a.msg_id) as nums from sys_msg a inner join sys_user b on b.user_id=a.reciever_id where a.msg_read_flag='0' group by b.user_id";
+		List list = this.getResultList(sql);
+		if(list != null && list.size()>0){
+			for(int i=0;i<list.size();i++){
+				Map tempMap = (Map)list.get(i);
+				map.put(tempMap.get("user_id"), tempMap.get("nums"));
+			}
+		}
+		
+		return map;
 	}
 
 }

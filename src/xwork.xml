@@ -1732,6 +1732,18 @@
         <action name="getProducts" class="serialNumAction" method="getProducts">
             <result name="success" type="dispatcher">/WEB-INF/pages/serial_num/selectProduct.jsp</result>
         </action>        
+		<action name="pdSerialNumCon" class="serialNumAction" method="pdSerialNumCon">
+            <result name="success" type="dispatcher">/WEB-INF/pages/serial_num/serial_num_pd_con.jsp</result>
+        </action>
+		<action name="pdSerialNumResult" class="serialNumAction" method="pdSerialNumResult">
+            <result name="success" type="dispatcher">/WEB-INF/pages/serial_num/serial_num_pd_result.jsp</result>
+        </action>
+        <action name="insertSerialNumPd" class="serialNumAction" method="insertSerialNumPd">
+            <result name="success">/WEB-INF/pages/serial_num/msg.jsp</result>
+        </action>  
+        <action name="listSerialNumPd" class="serialNumAction" method="listSerialNumPd">
+            <result name="success" type="dispatcher">/WEB-INF/pages/serial_num/serialNumPd_list.jsp</result>
+        </action>              
         <!-- 序列号管理 -->
         
 		<!-- 库存初始化 -->

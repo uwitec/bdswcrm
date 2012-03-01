@@ -2,6 +2,7 @@ package com.sw.cms.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.sw.cms.dao.SysMsgDAO;
 import com.sw.cms.dao.UserDAO;
@@ -136,6 +137,14 @@ public class SysMsgService {
 	 */
 	public void delRecievedMsg(String id){
 		sysMsgDao.delRecievedMsg(id);
+	}
+	
+	
+	/**
+	 * 取所有用户的未读消息情况
+	 */
+	public Map getUserNoReadMsg(){
+		return sysMsgDao.getUserNoReadMsg();
 	}
 	
 

@@ -8,7 +8,6 @@ import org.apache.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
-import com.sw.cms.dao.InitParamDAO;
 import com.sw.cms.util.StaticParamDo;
 
 public class ServletContextInit extends HttpServlet {
@@ -20,6 +19,10 @@ public class ServletContextInit extends HttpServlet {
 			ServletContext servletContext = getServletContext();
 			ApplicationContext ctx = WebApplicationContextUtils.getRequiredWebApplicationContext(servletContext);
 			StaticParamDo.setCtx(ctx);
+			
+			//用户未读消息轮转线程
+			Thread thUserNoMsg = new Thread(UserMsgLoadThread.getInstace(servletContext));
+			thUserNoMsg.start();
 			 
 			
 			//生成期初调试
