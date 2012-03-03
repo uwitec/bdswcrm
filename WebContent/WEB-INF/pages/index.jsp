@@ -29,7 +29,7 @@ int menu_index = 0;
 .menu_icon_001 { background-image: url(index_images/merchandise_sales.gif);}
 .menu_icon_002 { background-image: url(index_images/stock_m.gif);}
 .menu_icon_003 { background-image: url(index_images/stock.gif);}
-.menu_icon_004 { background-image: url(index_images/funds.gif);}
+.menu_icon_004 { background-image: url(index_images/base_set.gif);}
 .menu_icon_005 { background-image: url(index_images/WORDPAD.gif);}
 .menu_icon_006 { background-image: url(index_images/buy.gif);}
 .menu_icon_007 { background-image: url(index_images/buy.gif);}

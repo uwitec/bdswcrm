@@ -112,7 +112,7 @@ INSERT INTO `column_funcs` VALUES ('001002','FC9918');
 
 2012-03-01更新
 --添加序列号盘点功能
-INSERT INTO `funcs` VALUES ('FC9919','序列号盘点','序列号盘点','pdSerialNumCon.html','121.gif',14,'1','1');
+INSERT INTO `funcs` VALUES ('FC9919','序列号盘点','序列号盘点','pdSerialNumCon.html','121.gif',14,'1','3');
 INSERT INTO `column_funcs` VALUES ('003001','FC9919');
 
 --序列号盘点记录表
