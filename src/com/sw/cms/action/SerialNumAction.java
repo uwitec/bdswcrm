@@ -31,8 +31,12 @@ import com.sw.cms.service.StoreService;
 import com.sw.cms.util.Constant;
 import com.sw.cms.util.FileUtils;
 import com.sw.cms.util.StaticParamDo;
-import com.sw.cms.util.StringUtils;
 
+/**
+ * 序列号管理
+ * @author liyt
+ *
+ */
 public class SerialNumAction extends BaseAction  {
 	
 	private SerialNumService serialNumService;
@@ -261,7 +265,8 @@ public class SerialNumAction extends BaseAction  {
 	}
 	
 	/**
-	 * 保存序列号盘点记录
+	 * 保存序列号盘点记录<BR>
+	 * 盘点记录存储在关系数据库中，盘点结果以excel方式存储在数据库中
 	 * @return
 	 */
 	public String insertSerialNumPd(){
@@ -313,7 +318,9 @@ public class SerialNumAction extends BaseAction  {
 			sheet.addCell(label);
 	        
 			String[] arryPdNums = (String[])this.getSession().getAttribute("arryPdNums");
+			this.getSession().removeAttribute("arryPdNums");
 			List serialPdNumList = (List)this.getSession().getAttribute("serialPdNumList");
+			this.getSession().removeAttribute("serialPdNumList");
 			
 			int i =0;
 			if(arryPdNums != null && arryPdNums.length > 0){
@@ -358,6 +365,7 @@ public class SerialNumAction extends BaseAction  {
 	        book.write();
             book.close();
             
+            //当前登录用户
     		LoginInfo info = (LoginInfo)getSession().getAttribute("LOGINUSER");
     		String user_id = info.getUser_id();
     		
