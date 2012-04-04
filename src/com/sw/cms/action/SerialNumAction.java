@@ -333,7 +333,7 @@ public class SerialNumAction extends BaseAction  {
 							SerialNumMng serialNumMng = (SerialNumMng)serialPdNumList.get(k);
 							
 							//如果账面存在该序列号
-							if((arryPdNums[i].trim()).equals(serialNumMng.getSerial_num())){
+							if((arryPdNums[i].trim()).equalsIgnoreCase(serialNumMng.getSerial_num())){
 								
 								//账面对应情况取值
 								zmdy =serialNumMng.getSerial_num() + "/" + serialNumMng.getProduct_id() + "/" + serialNumMng.getProduct_name() + "/" + serialNumMng.getProduct_xh();
