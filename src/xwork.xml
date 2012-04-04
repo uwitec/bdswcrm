@@ -31,6 +31,9 @@
             <result name="error" type="dispatcher">
                 <param name="location">/WEB-INF/pages/error.jsp</param>
             </result>
+             <result name="loginExpire" type="dispatcher">
+                <param name="location">/WEB-INF/pages/error_loginExpire.jsp</param>
+            </result>           
         </global-results>
         
         <action name="toLogin" class="userAction" method="toLogin">

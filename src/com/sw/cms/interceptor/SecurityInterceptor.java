@@ -38,7 +38,7 @@ public class SecurityInterceptor implements Interceptor {
 	        	log.info("用户尚未登录或登录已失效，请重新登录！");
 	        	request.setAttribute("LOGINERROR", "用户尚未登录或登录已失效，请重新登录！");
 	        	
-	        	return "error";
+	        	return "loginExpire";
 	        }
 	        LoginInfo info = (LoginInfo)session.getAttribute("LOGINUSER");
 	        log.info("当前用户---" + info.getReal_name() +"---访问页面---" + actionName + ".html");
