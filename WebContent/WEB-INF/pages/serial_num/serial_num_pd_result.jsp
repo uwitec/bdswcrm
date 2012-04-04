@@ -79,7 +79,7 @@ String cdate =  DateComFunc.getCurTime();
 					SerialNumMng serialNumMng = (SerialNumMng)serialNumList.get(k);
 					
 					//如果账面存在该序列号
-					if((arryNums[i].trim()).equals(serialNumMng.getSerial_num())){
+					if((arryNums[i].trim()).equalsIgnoreCase(serialNumMng.getSerial_num())){
 						
 						//账面对应情况取值
 						zmdy =serialNumMng.getSerial_num() + "/" + serialNumMng.getProduct_id() + "/" + serialNumMng.getProduct_name() + "/" + serialNumMng.getProduct_xh();
