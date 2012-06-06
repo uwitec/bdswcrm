@@ -280,7 +280,13 @@
         </action> 
         <action name="selJhdProc" class="jhdAction" method="selJhdProc">
             <result name="success">/WEB-INF/pages/jhd/selectMaxKcProc.jsp</result>
-        </action>              
+        </action>
+        <action name="editCgsd" class="jhdAction" method="editCgsd">
+            <result name="success">/WEB-INF/pages/jhd/cgsd.jsp</result>
+        </action>
+        <action name="saveCgsd" class="jhdAction" method="saveCgsd">
+            <result name="success" type="chain">editCgsd</result>
+        </action>                     
         <!-- 进货单 -->
         
 		<!-- 用户管理 -->
@@ -1351,6 +1357,15 @@
             <result name="success">/WEB-INF/pages/report/xstj_client/result_ls_mx.jsp</result>
         </action>              
         <!-- 客户销售汇总 -->
+        
+        <!-- 客户销售毛利汇总 -->
+        <action name="showXstjClientMlCondition" class="xstjClientAction" method="showCondition">
+            <result name="success">/WEB-INF/pages/report/xstj_client/condition_ml.jsp</result>
+        </action>
+        <action name="getXstjClientMlResult" class="xstjClientAction" method="getResult">
+            <result name="success">/WEB-INF/pages/report/xstj_client/result_ml.jsp</result>
+        </action>   
+        <!-- 客户销售毛利汇总 -->
         
         <!-- 库存数量汇总、出入库汇总 -->
         <action name="showKcMxCondition" class="kcMxReportAction" method="showCondition">
