@@ -167,7 +167,7 @@ public class RkdDAO extends JdbcBaseDAO {
 	 */
 	private void addRkdProducts(List rkdProducts,String rkd_id){
 		String sql = "";
-		Object[] param = new Object[8];
+		Object[] param = new Object[12];
 		
 		if(rkdProducts != null && rkdProducts.size()>0){
 			for(int i =0;i<rkdProducts.size();i++){
@@ -175,7 +175,7 @@ public class RkdDAO extends JdbcBaseDAO {
 				RkdProduct rkdProduct = (RkdProduct)rkdProducts.get(i);
 				if(rkdProduct != null){
 					if(!rkdProduct.getProduct_name().equals("")){
-						sql = "insert into rkd_product(rkd_id,product_id,product_xh,product_name,price,nums,remark,qz_serial_num) values(?,?,?,?,?,?,?,?)";
+						sql = "insert into rkd_product(rkd_id,product_id,product_xh,product_name,price,nums,remark,qz_serial_num,sd,hsje,sje,bhsje) values(?,?,?,?,?,?,?,?,?,?,?,?)";
 						
 						param[0] = rkd_id;
 						param[1] = rkdProduct.getProduct_id();
@@ -185,7 +185,10 @@ public class RkdDAO extends JdbcBaseDAO {
 						param[5] = new Integer(rkdProduct.getNums());
 						param[6] = rkdProduct.getRemark();
 						param[7] = rkdProduct.getQz_serial_num();
-						
+						param[8] = rkdProduct.getSd();
+						param[9] = rkdProduct.getHsje();
+						param[10] = rkdProduct.getSje();
+						param[11] = rkdProduct.getBhsje();
 						this.getJdbcTemplate().update(sql, param);
 					}
 				}

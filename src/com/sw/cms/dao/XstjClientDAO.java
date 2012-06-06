@@ -290,4 +290,65 @@ public class XstjClientDAO extends JdbcBaseDAO {
 		return this.getResultList(sql);
 	}
 	
+	
+	/**
+	 * 客户销售毛利汇总
+	 * 2010-04-10
+	 * @param start_date
+	 * @param end_date
+	 * @param client_name
+	 * @param xsry_id
+	 * @param dj_id
+	 * @param client_type
+	 * @param khjl
+	 * @return
+	 */
+	public List getXstjClientMlResult(String start_date, String end_date,String client_name, String xsry_id,String client_type, String khjl,String dj_id,String product_kind,String product_name){
+		String sql = "select b.id,b.name,c.real_name as khjl,sum(cb) as cb,sum(hjje) as hjje,sum(bhsje) as bhsje from product_sale_flow a join clients b on b.id=a.client_name left join sys_user c on b.khjl=c.user_id where 1=1";
+		
+		if(!start_date.equals("")){
+			sql += " and a.cz_date>='" + start_date + "'";
+		}
+		if(!end_date.equals("")){
+			sql += " and a.cz_date<='" + end_date + "'";
+		}
+		if(!client_name.equals("")){
+			sql += " and a.client_name ='" + client_name + "'";
+		}
+		if(!xsry_id.equals("")){
+			sql += " and a.xsry ='" + xsry_id + "'";
+		}
+		if(!dj_id.equals("")){
+			sql += " and a.id ='" + dj_id + "'";
+		}
+		if(!client_type.equals("")){
+			sql += " and b.client_type ='" + client_type + "'";
+		}
+		if(!khjl.equals("")){
+			sql += " and c.real_name ='" + khjl + "'";
+		}
+		//处理商品类别
+		if(!product_kind.equals("")){
+			String[] arryItems = product_kind.split(",");
+			
+			if(arryItems != null && arryItems.length >0){
+				sql += " and (";
+				for(int i=0;i<arryItems.length;i++){
+					if(i == 0){
+						sql += " d.product_kind like '" + arryItems[i] + "%'";
+					}else{
+						sql += " or d.product_kind like '" + arryItems[i] + "%'";
+					}
+				}
+				sql += ")";
+			}
+		}
+		if(!product_name.equals("")){
+			sql = sql + " and d.product_name like '%" + product_name + "%'";
+		}
+		sql += " group by b.id,b.name,c.real_name";
+		
+		return this.getResultList(sql);
+	}
+	
 }

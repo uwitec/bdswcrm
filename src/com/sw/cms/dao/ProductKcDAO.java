@@ -280,9 +280,10 @@ public class ProductKcDAO extends JdbcBaseDAO {
 						double dqkczz = price * nums;  //当前库存总值
 						
 						int rk_product_nums = rkdProduct.getNums();        //入库商品数量
-						double rk_product_price = rkdProduct.getPrice();   //入库商品价格
+						//double rk_product_price = rkdProduct.getPrice();   //入库商品价格
 						
-						double rkzz = rk_product_nums * rk_product_price;  //入库商品总值
+						//double rkzz = rk_product_nums * rk_product_price;  //入库商品总值
+						double rkzz = rkdProduct.getBhsje();   //入库商品总值(不含税金额)
 						
 						//采用加权平均后的成本价
 						double cbj = price;						

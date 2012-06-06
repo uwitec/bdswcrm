@@ -1,6 +1,7 @@
 package com.sw.cms.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.sw.cms.dao.base.BeanRowMapper;
 import com.sw.cms.dao.base.JdbcBaseDAO;
@@ -84,11 +85,11 @@ public class JhdDAO extends JdbcBaseDAO {
 	 */
 	public void saveJhd(Jhd jhd,List jhdProducts){
 		String sql = "insert into jhd(id,gysbh,cg_date,state,fzr,ms,shuil,tzje,total,gysmc,czr,cz_date,fkje,fklx,yfrq,fkfs,yfje,store_id,zq,fkzh,sjcjje,yjdhsj"
-				+",kh_address,kh_lxr,kh_lxdh,ysws) "
+				+",kh_address,kh_lxr,kh_lxdh,ysws,hjsje,hjbhsje) "
 		        +"values(?,?,?,?,?,?,?,?,?,?,?,now(),?,?,?,?,?,?,?,?,?,?"
-				+",?,?,?,?)";
+				+",?,?,?,?,?,?)";
 		
-		Object[] param = new Object[25];
+		Object[] param = new Object[27];
 		
 		double total = jhd.getTotal();
 		double fkje = jhd.getFkje();
@@ -120,6 +121,9 @@ public class JhdDAO extends JdbcBaseDAO {
 		param[23] = jhd.getKh_lxdh();
 		param[24] = jhd.getYsws();
 		
+		param[25] = jhd.getHjsje();
+		param[26] = jhd.getHjbhsje();
+		
 		this.getJdbcTemplate().update(sql, param); //添加进货单信息		
 		this.addJhdProduct(jhdProducts,jhd.getId());           //添加进货单关联的商品
 
@@ -135,9 +139,9 @@ public class JhdDAO extends JdbcBaseDAO {
 	public void updateJhd(Jhd jhd,List jhdProducts){
 		String sql = "update jhd set gysbh=?,cg_date=?,state=?,fzr=?,ms=?,shuil=?,tzje=?,total=?,gysmc=?,czr=?," +
 				"cz_date=now(),fkje=?,fklx=?,yfrq=?,fkfs=?,yfje=?,store_id=?,zq=?,fkzh=?,sjcjje=?,"
-		        +"kh_address=?,kh_lxr=?,kh_lxdh=?,ysws=? where id=?";
+		        +"kh_address=?,kh_lxr=?,kh_lxdh=?,ysws=?,hjsje=?,hjbhsje=? where id=?";
 		
-		Object[] param = new Object[24];
+		Object[] param = new Object[26];
 		
 		double total = jhd.getTotal();
 		double fkje = jhd.getFkje();
@@ -166,7 +170,11 @@ public class JhdDAO extends JdbcBaseDAO {
 		param[20] = jhd.getKh_lxr();
 		param[21] = jhd.getKh_lxdh();
 		param[22] = jhd.getYsws();
-		param[23] = jhd.getId();
+		
+		param[23] = jhd.getHjsje();
+		param[24] = jhd.getHjbhsje();
+		
+		param[25] = jhd.getId();
 		
 		
 		this.getJdbcTemplate().update(sql, param);	 //修改进货单信息	
@@ -287,14 +295,14 @@ public class JhdDAO extends JdbcBaseDAO {
 	 */
 	private void addJhdProduct(List jhdProducts,String jhd_id){
 		String sql = "";
-		Object[] param = new Object[8];
+		Object[] param = new Object[12];
 		if(jhdProducts != null && jhdProducts.size()>0){
 			for(int i=0;i<jhdProducts.size();i++){
 				
 				JhdProduct jhdProduct = (JhdProduct)jhdProducts.get(i);
 				if(jhdProduct != null){
 					if(jhdProduct.getProduct_name() != null && !jhdProduct.getProduct_name().equals("")){
-						sql = "insert into jhd_product(jhd_id,product_id,product_xh,product_name,price,nums,remark,qz_serial_num) values(?,?,?,?,?,?,?,?)";
+						sql = "insert into jhd_product(jhd_id,product_id,product_xh,product_name,price,nums,remark,qz_serial_num,sd,hsje,sje,bhsje) values(?,?,?,?,?,?,?,?,?,?,?,?)";
 						
 						param[0] = jhd_id;
 						param[1] = jhdProduct.getProduct_id();
@@ -304,6 +312,11 @@ public class JhdDAO extends JdbcBaseDAO {
 						param[5] = new Integer(jhdProduct.getNums());
 						param[6] = jhdProduct.getRemark();
 						param[7] = jhdProduct.getQz_serial_num();
+						
+						param[8] = jhdProduct.getSd();
+						param[9] = jhdProduct.getHsje();
+						param[10] = jhdProduct.getSje();
+						param[11] = jhdProduct.getBhsje();
 						
 						this.getJdbcTemplate().update(sql, param);
 					}
@@ -366,6 +379,34 @@ public class JhdDAO extends JdbcBaseDAO {
 			is = true;
 		}
 		return is;
+	}
+	
+	
+	/**
+	 * 取采购税点
+	 * @return
+	 */
+	public double getCgsd(){
+		double sd = 0;
+		String sql = "select cgsd from cgsd";
+		Map map = this.getResultMap(sql);
+		if(map != null){
+			sd = ((Double)map.get("cgsd")).doubleValue();
+		}
+		return sd;
+	}
+	
+	
+	/**
+	 * 保存采购税点
+	 * @param sd
+	 */
+	public void saveCgsd(String cgsd){
+		String sql = "delete from cgsd";
+		this.getJdbcTemplate().update(sql);
+		
+		sql = "insert into cgsd(cgsd) values(" + cgsd + ")";
+		this.getJdbcTemplate().update(sql);
 	}
 	
 }

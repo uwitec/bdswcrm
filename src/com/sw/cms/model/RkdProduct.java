@@ -11,6 +11,10 @@ public class RkdProduct {
 	private int nums;
 	private String remark;
 	private String qz_serial_num;
+	private double sd;					//税点
+	private double hsje;				//含税金额
+	private double bhsje;			//不含税金额
+	private double sje;				//税额
 	
 	public int getNums() {
 		return nums;
@@ -65,6 +69,30 @@ public class RkdProduct {
 	}
 	public void setQz_serial_num(String qz_serial_num) {
 		this.qz_serial_num = qz_serial_num;
+	}
+	public double getSd() {
+		return sd;
+	}
+	public void setSd(double sd) {
+		this.sd = sd;
+	}
+	public double getHsje() {
+		return hsje;
+	}
+	public void setHsje(double hsje) {
+		this.hsje = hsje;
+	}
+	public double getBhsje() {
+		return bhsje;
+	}
+	public void setBhsje(double bhsje) {
+		this.bhsje = bhsje;
+	}
+	public double getSje() {
+		return sje;
+	}
+	public void setSje(double sje) {
+		this.sje = sje;
 	}
 	
 }

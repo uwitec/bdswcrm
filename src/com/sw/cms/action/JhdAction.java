@@ -5,14 +5,14 @@ import java.util.List;
 import java.util.Map;
 
 import com.sw.cms.action.base.BaseAction;
+import com.sw.cms.model.Clients;
+import com.sw.cms.model.ClientsLinkman;
 import com.sw.cms.model.Jhd;
 import com.sw.cms.model.JhdProduct;
 import com.sw.cms.model.LoginInfo;
 import com.sw.cms.model.Page;
-import com.sw.cms.model.SysUser;
-import com.sw.cms.model.Clients;
 import com.sw.cms.model.StoreHouse;
-import com.sw.cms.model.ClientsLinkman;
+import com.sw.cms.model.SysUser;
 import com.sw.cms.service.ClientsService;
 import com.sw.cms.service.JhdService;
 import com.sw.cms.service.ProductKcService;
@@ -22,6 +22,7 @@ import com.sw.cms.service.SysInitSetService;
 import com.sw.cms.service.UserService;
 import com.sw.cms.util.Constant;
 import com.sw.cms.util.DateComFunc;
+import com.sw.cms.util.JMath;
 import com.sw.cms.util.MoneyUtil;
 import com.sw.cms.util.ParameterUtility;
 import com.sw.cms.util.StaticParamDo;
@@ -72,6 +73,8 @@ public class JhdAction extends BaseAction {
 	private String product_kind = "";
 	
 	private String client_id = "";
+	
+	private String cgsd = "0";
 	
 	
 	//打印所需参数
@@ -136,6 +139,7 @@ public class JhdAction extends BaseAction {
 		storeList = storeService.getAllStoreList();
 		id = jhdService.updateJhdID();
 		clientsList=clientsService.getClientList("");
+		cgsd = JMath.round(jhdService.getCgsd());
 		return "success";
 	}
 
@@ -324,7 +328,25 @@ public class JhdAction extends BaseAction {
 
 		return "success";
 	}
-
+	
+	
+	/**
+	 * 编辑采购税点
+	 * @return
+	 */
+	public String editCgsd(){
+		cgsd = jhdService.getCgsd() + "";
+		return "success";
+	}
+	
+	/**
+	 * 保存采购税点
+	 * @return
+	 */
+	public String saveCgsd(){
+		jhdService.saveCgsd(cgsd);
+		return "success";
+	}
 
 	public Jhd getJhd() {
 		return jhd;
@@ -692,5 +714,13 @@ public class JhdAction extends BaseAction {
 
 	public void setClient_id(String clientId) {
 		client_id = clientId;
+	}
+
+	public String getCgsd() {
+		return cgsd;
+	}
+
+	public void setCgsd(String cgsd) {
+		this.cgsd = cgsd;
 	}
 }

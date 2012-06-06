@@ -28,7 +28,7 @@ public class CghzDAO extends JdbcBaseDAO {
 	public List getHpcgList(String product_kind,String start_date,String end_date,String client_name,String product_name,String product_xh,String cgry_id,String product_prop){
 		
 		//进货单
-		String jhd_sql = "select a.product_id,c.product_name,c.product_xh,sum(nums) as nums,sum(a.price*a.nums) as je from jhd_product a join jhd b on b.id=a.jhd_id left join product c on c.product_id=a.product_id where b.state='已入库' ";
+		String jhd_sql = "select a.product_id,c.product_name,c.product_xh,sum(nums) as nums,sum(hsje) as je,sum(sje) as sje,sum(bhsje) as bhsje from jhd_product a join jhd b on b.id=a.jhd_id left join product c on c.product_id=a.product_id where b.state='已入库' ";
 		if(product_prop.equals("1"))
 		{
 			jhd_sql += " and c.prop='库存商品'";
@@ -78,7 +78,7 @@ public class CghzDAO extends JdbcBaseDAO {
 		jhd_sql += " group by a.product_id,c.product_name,c.product_xh";
 		
 		//采购退货单
-		String cgthd_sql = "select a.product_id,c.product_name,c.product_xh,(0-sum(nums)) as nums,(0-sum(th_price*nums)) as je from cgthd_product a join cgthd b on b.id=a.cgthd_id left join product c on c.product_id=a.product_id where b.state='已出库' ";
+		String cgthd_sql = "select a.product_id,c.product_name,c.product_xh,(0-sum(nums)) as nums,(0-sum(th_price*nums)) as je,0 as sje,(0-sum(th_price*nums)) as bhsje from cgthd_product a join cgthd b on b.id=a.cgthd_id left join product c on c.product_id=a.product_id where b.state='已出库' ";
 		if(product_prop.equals("1"))
 		{
 			cgthd_sql += " and c.prop='库存商品'";
@@ -126,7 +126,7 @@ public class CghzDAO extends JdbcBaseDAO {
 		
 		cgthd_sql += " group by a.product_id,c.product_name,c.product_xh";
 		
-		String sql = "select product_id,product_name,product_xh,sum(nums) as nums,sum(je) as je from ((" + jhd_sql + ") union all (" + cgthd_sql + ")) x group by product_id,product_name,product_xh";
+		String sql = "select product_id,product_name,product_xh,sum(nums) as nums,sum(je) as je,sum(sje) as sje,sum(bhsje) as bhsje from ((" + jhd_sql + ") union all (" + cgthd_sql + ")) x group by product_id,product_name,product_xh";
 		
 		return this.getResultList(sql);
 	}
@@ -211,7 +211,7 @@ public class CghzDAO extends JdbcBaseDAO {
 	public List getClientCgList(String start_date,String end_date,String dj_id,String client_name){
 		
 		//进货单
-		String jhd_sql = "select gysbh as client_id,sum(total) as je  from jhd where state='已入库'";
+		String jhd_sql = "select gysbh as client_id,sum(total) as je,sum(hjsje) as hjsje,sum(hjbhsje) as hjbhsje  from jhd where state='已入库'";
 		if(!dj_id.equals("")){
 			jhd_sql += " and id='" + dj_id + "'";
 		}
@@ -225,7 +225,7 @@ public class CghzDAO extends JdbcBaseDAO {
 
 		
 		//采购退货单
-		String cgthd_sql = "select provider_name as client_id,(0-sum(tkzje)) as je from cgthd where state='已出库'";
+		String cgthd_sql = "select provider_name as client_id,(0-sum(tkzje)) as je,0 as hjsje,(0-sum(tkzje)) as hjbhsje from cgthd where state='已出库'";
 		if(!dj_id.equals("")){
 			cgthd_sql += " and id='" + dj_id + "'";
 		}
@@ -238,9 +238,9 @@ public class CghzDAO extends JdbcBaseDAO {
 		cgthd_sql += " group by client_id";
 
 		
-		String sql = "select client_id,sum(je) as je from ((" + jhd_sql + ") union (" + cgthd_sql + ")) x group by x.client_id";
+		String sql = "select client_id,sum(je) as je,sum(hjsje) as hjsje,sum(hjbhsje) as hjbhsje from ((" + jhd_sql + ") union (" + cgthd_sql + ")) x group by x.client_id";
 		
-		sql = "select m.client_id,n.name as client_name,n.lxr,n.lxdh,m.je from (" + sql + ") m left join clients n on n.id=m.client_id where 1=1";
+		sql = "select m.client_id,n.name as client_name,n.lxr,n.lxdh,m.je,m.hjsje,m.hjbhsje from (" + sql + ") m left join clients n on n.id=m.client_id where 1=1";
 		if(!client_name.equals("")){
 			sql = sql + " and n.name like '%" + client_name + "%'";
 		}
@@ -260,7 +260,7 @@ public class CghzDAO extends JdbcBaseDAO {
 	public List getClientMxList(String start_date,String end_date,String dj_id,String client_name){
 		
 		//进货单
-		String jhd_sql = "select id as dj_id,'采购' as xwtype,gysbh as client_name,fzr as jsr,DATE_FORMAT(cz_date,'%Y-%m-%d') as creatdate,total as je,'viewJhd.html?id=' as url,cz_date from jhd where state='已入库'";
+		String jhd_sql = "select id as dj_id,'采购' as xwtype,gysbh as client_name,fzr as jsr,DATE_FORMAT(cz_date,'%Y-%m-%d') as creatdate,total as je,hjsje,hjbhsje,'viewJhd.html?id=' as url,cz_date from jhd where state='已入库'";
 		if(!dj_id.equals("")){
 			jhd_sql += " and id='" + dj_id + "'";
 		}
@@ -276,7 +276,7 @@ public class CghzDAO extends JdbcBaseDAO {
 
 		
 		//采购退货单
-		String cgthd_sql = "select id as dj_id,'采购退货' as xwtype,provider_name as client_name,jsr,DATE_FORMAT(cz_date,'%Y-%m-%d') as creatdate,(0-tkzje) as je,'viewCgthd.html?id=' as url,cz_date from cgthd where state='已出库'";
+		String cgthd_sql = "select id as dj_id,'采购退货' as xwtype,provider_name as client_name,jsr,DATE_FORMAT(cz_date,'%Y-%m-%d') as creatdate,(0-tkzje) as je,0 as hjsje,(0-tkzje) as hjbhsje, 'viewCgthd.html?id=' as url,cz_date from cgthd where state='已出库'";
 		if(!dj_id.equals("")){
 			cgthd_sql += " and id='" + dj_id + "'";
 		}
@@ -306,9 +306,9 @@ public class CghzDAO extends JdbcBaseDAO {
 		String sql ="";
 		
 		if(xwtype.equals("采购")){
-			sql = "select product_id,product_name,product_xh,nums,(price*nums) as je from jhd_product where jhd_id='" + dj_id + "'";
+			sql = "select product_id,product_name,product_xh,price,nums,hsje,sje,bhsje,sd from jhd_product where jhd_id='" + dj_id + "'";
 		}else{
-			sql = "select product_id,product_name,product_xh,(0-nums) as nums,(0-xj) as je from cgthd_product where cgthd_id='" + dj_id + "'";
+			sql = "select product_id,product_name,product_xh,(0-nums) as nums,(0-xj) as hsje,th_price as price,0 as sd,0 as sje,(0-xj) as bhsje from cgthd_product where cgthd_id='" + dj_id + "'";
 		}
 		
 		return this.getResultList(sql);

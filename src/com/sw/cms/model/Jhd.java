@@ -37,6 +37,10 @@ public class Jhd {
 	private String kh_lxdh; //供应商联系电话
 	private String ysws; //已税/未税
 	
+	private double hjbhsje;   //合计不含税金额
+	private double hjsje;     //合计税额
+	
+	
 	public String getYsws() {
 		return ysws;
 	}
@@ -206,6 +210,18 @@ public class Jhd {
 	}
 	public void setCz_date(Date czDate) {
 		cz_date = czDate;
+	}
+	public double getHjbhsje() {
+		return hjbhsje;
+	}
+	public void setHjbhsje(double hjbhsje) {
+		this.hjbhsje = hjbhsje;
+	}
+	public double getHjsje() {
+		return hjsje;
+	}
+	public void setHjsje(double hjsje) {
+		this.hjsje = hjsje;
 	}
 
 }

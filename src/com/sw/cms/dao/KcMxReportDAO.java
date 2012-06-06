@@ -311,7 +311,7 @@ public class KcMxReportDAO extends JdbcBaseDAO {
 		String sql = "";
 		
 		//入库单
-		String sql_rk = "select b.jhd_id as dj_id,b.rkd_id as cd_id,a.product_id,a.product_name,a.product_xh,a.nums,a.price,DATE_FORMAT(b.cz_date,'%Y-%m-%d') as fsrq,'入库' as flag,b.cz_date,b.client_name from rkd_product a left join rkd b on b.rkd_id=a.rkd_id where b.state='已入库'";
+		String sql_rk = "select b.jhd_id as dj_id,b.rkd_id as cd_id,a.product_id,a.product_name,a.product_xh,a.nums,a.price,a.sd,a.bhsje,DATE_FORMAT(b.cz_date,'%Y-%m-%d') as fsrq,'入库' as flag,b.cz_date,b.client_name from rkd_product a left join rkd b on b.rkd_id=a.rkd_id where b.state='已入库'";
 		if(!product_id.equals("")){
 			sql_rk = sql_rk + " and a.product_id='" + product_id + "'";
 		}
@@ -323,7 +323,7 @@ public class KcMxReportDAO extends JdbcBaseDAO {
 		}
 		
 		//出库单
-		String sql_ck = "select b.xsd_id as dj_id,b.ckd_id as cd_id, a.product_id,a.product_name,a.product_xh,a.nums,a.price,DATE_FORMAT(b.cz_date,'%Y-%m-%d') as fsrq,'出库' as flag,b.cz_date,b.client_name from ckd_product a left join ckd b on b.ckd_id=a.ckd_id where b.state='已出库'";
+		String sql_ck = "select b.xsd_id as dj_id,b.ckd_id as cd_id, a.product_id,a.product_name,a.product_xh,a.nums,a.price,0 as sd,0 as bhsje,DATE_FORMAT(b.cz_date,'%Y-%m-%d') as fsrq,'出库' as flag,b.cz_date,b.client_name from ckd_product a left join ckd b on b.ckd_id=a.ckd_id where b.state='已出库'";
 		if(!product_id.equals("")){
 			sql_ck = sql_ck + " and a.product_id='" + product_id + "'";
 		}
@@ -335,7 +335,7 @@ public class KcMxReportDAO extends JdbcBaseDAO {
 		}
 		
 		//库存盘点
-		String sql_pd = "select a.pd_id as dj_id,'' as cd_id,a.product_id,a.product_name,a.product_xh,a.yk as nums,0 as price,b.pdrq as fsrq,'损溢' as flag,b.cz_date,'' as client_name from kcpd_desc a left join kcpd b on b.id=a.pd_id where b.state='已提交'";
+		String sql_pd = "select a.pd_id as dj_id,'' as cd_id,a.product_id,a.product_name,a.product_xh,a.yk as nums,0 as price,0 as sd,0 as bhsje,b.pdrq as fsrq,'损溢' as flag,b.cz_date,'' as client_name from kcpd_desc a left join kcpd b on b.id=a.pd_id where b.state='已提交'";
 		if(!product_id.equals("")){
 			sql_pd = sql_pd + " and a.product_id='" + product_id + "'";
 		}

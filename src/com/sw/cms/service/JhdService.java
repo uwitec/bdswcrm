@@ -2,6 +2,7 @@ package com.sw.cms.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.sw.cms.dao.JhdDAO;
 import com.sw.cms.dao.RkdDAO;
@@ -206,6 +207,11 @@ public class JhdService {
 						rkdProduct.setRemark(jhdProduct.getRemark());
 						rkdProduct.setQz_serial_num(jhdProduct.getQz_serial_num());
 						
+						rkdProduct.setSd(jhdProduct.getSd());
+						rkdProduct.setHsje(jhdProduct.getHsje());
+						rkdProduct.setSje(jhdProduct.getSje());
+						rkdProduct.setBhsje(jhdProduct.getBhsje());
+						
 						rkdProducts.add(rkdProduct);
 					}
 				}
@@ -214,6 +220,23 @@ public class JhdService {
 		//保存入库单
 		rkdDao.saveRkd(rkd, rkdProducts);
 		
+	}
+	
+	/**
+	 * 取采购税点
+	 * @return
+	 */
+	public double getCgsd(){
+		return jhdDao.getCgsd();
+	}
+	
+	
+	/**
+	 * 保存采购税点
+	 * @param sd
+	 */
+	public void saveCgsd(String cgsd){
+		jhdDao.saveCgsd(cgsd);
 	}
 
 	public JhdDAO getJhdDao() {

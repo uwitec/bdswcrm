@@ -265,6 +265,11 @@ public class ThdService {
 						rkdProduct.setRemark(thdProduct.getRemark());
 						rkdProduct.setQz_serial_num(thdProduct.getQz_serial_num());
 						
+						rkdProduct.setSd(0);   //税点为0
+						rkdProduct.setHsje(price * thdProduct.getNums());  //含税金额
+						rkdProduct.setSje(0);  //税额
+						rkdProduct.setBhsje(price * thdProduct.getNums()); //不含税金额
+						
 						rkdProducts.add(rkdProduct);
 					}
 				}
@@ -275,6 +280,7 @@ public class ThdService {
 		
 		//更新库存数及成本价
 		productKcDao.updateProductKc(rkd, rkdProducts);			
+		
 		//处理序列号
 		this.updateSerialNum(rkd, rkdProducts);		
 	}
