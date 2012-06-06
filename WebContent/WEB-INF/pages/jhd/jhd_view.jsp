@@ -65,12 +65,8 @@ Jhd jhd = (Jhd)VS.findValue("Jhd");
 		<td class="a1" width="15%">采购负责人</td>
 		<td class="a2" width="35%"><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(jhd.getFzr())) %>	</td>    
 	</tr>	
-	<tr>
-		<td class="a1">合计金额</td>
-		<td class="a2" colspan="3"><%=JMath.round(jhd.getTotal(),2) %></td>	
-	</tr>	
 </table>
-<br>
+<br/>
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
@@ -81,29 +77,47 @@ Jhd jhd = (Jhd)VS.findValue("Jhd");
 <table width="100%"  align="center" id="jhtable"  class="chart_list" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td width="35%">商品名称</td>
-		<td width="30%">规格</td>
-		<td width="10%">进货价格</td>
-		<td width="10%">数量</td>
-		<td width="15%">小计</td>	
+		<td width="27%">商品名称</td>
+		<td width="25%">规格</td>
+		<td width="8%">单价</td>
+		<td width="8%">数量</td>
+		<td width="8%">含税金额</td>	
+		<td width="8%">税点</td>
+		<td width="8%">税额</td>
+		<td width="8%">不含税金额</td>
 	</tr>
 	</thead>
 <%
+int hj_nums = 0;
 if(jhdProducts != null && jhdProducts.size()>0){
 	for(int i=0;i<jhdProducts.size();i++){
 		JhdProduct jhdProduct = (JhdProduct)jhdProducts.get(i);
+		hj_nums += jhdProduct.getNums();
 %>
 	<tr>
 		<td class="a2"><%=StringUtils.nullToStr(jhdProduct.getProduct_name()) %></td>
 		<td class="a2"><%=StringUtils.nullToStr(jhdProduct.getProduct_xh()) %></td>
 		<td class="a2" align="right"><%=JMath.round(jhdProduct.getPrice(),2) %></td>
 		<td class="a2"><%=StringUtils.nullToStr(jhdProduct.getNums()) %></td>
-		<td class="a2" align="right"><%=JMath.round(jhdProduct.getPrice() * jhdProduct.getNums(),2) %></td>
+		<td class="a2" align="right"><%=JMath.round(jhdProduct.getHsje(),2) %></td>
+		<td class="a2" align="right"><%=JMath.round(jhdProduct.getSd()) %></td>
+		<td class="a2" align="right"><%=JMath.round(jhdProduct.getSje(),2) %></td>
+		<td class="a2" align="right"><%=JMath.round(jhdProduct.getBhsje(),2) %></td>
 	</tr>
 <%
 	}
 }
 %>	
+	<tr>
+		<td class="a2">合计</td>
+		<td class="a2">&nbsp;</td>
+		<td class="a2" align="right">&nbsp;</td>
+		<td class="a2"><%=hj_nums %></td>
+		<td class="a2" align="right"><%=JMath.round(jhd.getTotal(),2) %></td>
+		<td class="a2" align="right">&nbsp;</td>
+		<td class="a2" align="right"><%=JMath.round(jhd.getHjsje(),2) %></td>
+		<td class="a2" align="right"><%=JMath.round(jhd.getHjbhsje(),2) %></td>
+	</tr>
 </table>
 <table width="100%"  align="center" class="chart_info" cellpadding="0" cellspacing="0">	
 	<tr>
@@ -112,7 +126,7 @@ if(jhdProducts != null && jhdProducts.size()>0){
 	</tr>		
 	<tr height="35">
 		<td class="a1" colspan="6">
-			<input type="button" name="button1" value="关 闭" class="css_button2" onclick="window.close();">
+			<input type="button" name="button1" value="关 闭" class="css_button2" onclick="window.close();"/>
 		</td>
 	</tr>
 </table>

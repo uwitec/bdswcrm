@@ -168,11 +168,11 @@ String orderType = (String)VS.findValue("orderType");
 		<%if(!StringUtils.nullToStr(jhd.getState()).equals("已保存")){ %>
 			<a href="#" onclick="openWin('<%=StringUtils.nullToStr(jhd.getId()) %>');"><img src="images/view.gif" align="absmiddle" title="查看订单" border="0" style="cursor:hand"></a>
 		<%}else{ %>
-			<a href="#" onclick="edit('<%=StringUtils.nullToStr(jhd.getId()) %>');"><img src="images/modify.gif" align="absmiddle" title="修改订单" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
-			<a href="#" onclick="openWin('<%=StringUtils.nullToStr(jhd.getId()) %>');"><img src="images/view.gif" align="absmiddle" title="查看订单" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
+			<a href="#" onclick="edit('<%=StringUtils.nullToStr(jhd.getId()) %>');"><img src="images/modify.gif" align="absmiddle" title="修改订单" border="0" style="cursor:hand"></a>&nbsp;&nbsp;
+			<a href="#" onclick="openWin('<%=StringUtils.nullToStr(jhd.getId()) %>');"><img src="images/view.gif" align="absmiddle" title="查看订单" border="0" style="cursor:hand"></a>&nbsp;&nbsp;
 			<a href="#" onclick="del('<%=StringUtils.nullToStr(jhd.getId()) %>');"><img src="images/del.gif" align="absmiddle" title="删除订单" border="0" style="cursor:hand"></a>
 		<%} %>
-		&nbsp;&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;
 		<a href="#" onclick="print('<%=StringUtils.nullToStr(jhd.getId()) %>');"><img src="images/print.png" align="absmiddle" title="打印订单" border="0" style="cursor:hand"></a>			
 		</td>
 	</tr>

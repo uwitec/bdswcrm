@@ -58,7 +58,9 @@ con = "日期：" + start_date + "至" + end_date;
 			<TD class=ReportHead>客户名称</TD>
 			<TD class=ReportHead>联系人</TD>
 			<TD class=ReportHead>联系电话</TD>
-			<TD class=ReportHead>金额</TD>		
+			<TD class=ReportHead>含税金额</TD>		
+			<TD class=ReportHead>税额</TD>
+			<TD class=ReportHead>不含税金额</TD>
 		</TR>
 	</THEAD>
 	<TBODY>
@@ -67,6 +69,8 @@ List list = cghzService.getClientCgList(start_date, end_date, dj_id, client_name
 if(list != null && list.size()>0){
 	
 	double hj_je = 0;
+	double hj_hjsje = 0;
+	double hj_hjbhsje = 0;
 	
 	for(int i=0;i<list.size();i++){
 		Map map = (Map)list.get(i);
@@ -75,8 +79,13 @@ if(list != null && list.size()>0){
 		String lxr = StringUtils.nullToStr(map.get("lxr"));
 		String lxdh = StringUtils.nullToStr(map.get("lxdh"));
 		double je = map.get("je")==null?0:((Double)map.get("je")).doubleValue();
+		
+		double hjbhsje = map.get("hjbhsje")==null?0:((Double)map.get("hjbhsje")).doubleValue();
+		double hjsje = map.get("hjsje")==null?0:((Double)map.get("hjsje")).doubleValue();
 
 		hj_je += je;
+		hj_hjsje += hjsje;
+		hj_hjbhsje += hjbhsje;
 %>
 		<TR>
 			<TD class=ReportItem><%=client_id %>&nbsp;</TD>
@@ -84,6 +93,8 @@ if(list != null && list.size()>0){
 			<TD class=ReportItem><%=lxr %>&nbsp;</TD>
 			<TD class=ReportItem><%=lxdh %>&nbsp;</TD>
 			<TD class=ReportItemMoney><%=JMath.round(je,2) %>&nbsp;</TD>
+			<TD class=ReportItemMoney><%=JMath.round(hjsje,2) %>&nbsp;</TD>
+			<TD class=ReportItemMoney><%=JMath.round(hjbhsje,2) %>&nbsp;</TD>
 		</TR>
 <%
 	}
@@ -94,6 +105,8 @@ if(list != null && list.size()>0){
 			<TD class=ReportItem>&nbsp;</TD>
 			<TD class=ReportItem style="font-weight:bold">&nbsp;</TD>
 			<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(hj_je,2) %>&nbsp;</TD>
+			<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(hj_hjsje,2) %>&nbsp;</TD>
+			<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(hj_hjbhsje,2) %>&nbsp;</TD>
 		</TR>
 <%
 }

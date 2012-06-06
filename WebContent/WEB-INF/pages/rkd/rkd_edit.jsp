@@ -288,6 +288,10 @@ if(rkdProducts != null && rkdProducts.size()>0){
 		Map rkdProduct = (Map)rkdProducts.get(i);
 		
 		double price = rkdProduct.get("price")==null?0:((Double)rkdProduct.get("price")).doubleValue();
+		double sd = rkdProduct.get("sd")==null?0:((Double)rkdProduct.get("sd")).doubleValue();
+		double hsje = rkdProduct.get("hsje")==null?0:((Double)rkdProduct.get("hsje")).doubleValue();
+		double sje = rkdProduct.get("sje")==null?0:((Double)rkdProduct.get("sje")).doubleValue();
+		double bhsje = rkdProduct.get("bhsje")==null?0:((Double)rkdProduct.get("bhsje")).doubleValue();
 		
 		String cssStyle = "";
 		if(StringUtils.nullToStr(rkdProduct.get("qz_flag")).equals("是")){
@@ -299,11 +303,16 @@ if(rkdProducts != null && rkdProducts.size()>0){
 			<input type="text" id="product_name_<%=i %>" name="rkdProducts[<%=i %>].product_name" style="width:90%;<%=cssStyle %>" readonly value="<%=StringUtils.nullToStr(rkdProduct.get("product_name")) %>">
 			<input type="hidden" id="product_id_<%=i %>" name="rkdProducts[<%=i %>].product_id" value="<%=StringUtils.nullToStr(rkdProduct.get("product_id")) %>">
 			<input type="hidden" id="price_<%=i %>"  name="rkdProducts[<%=i %>].price" value="<%=JMath.round(price) %>" readonly>
+			
+			<input type="hidden" id="sd_<%=i %>"  name="rkdProducts[<%=i %>].sd" value="<%=JMath.round(sd) %>" readonly>
+			<input type="hidden" id="hsje_<%=i %>"  name="rkdProducts[<%=i %>].hsje" value="<%=JMath.round(hsje) %>" readonly>
+			<input type="hidden" id="sje_<%=i %>"  name="rkdProducts[<%=i %>].sje" value="<%=JMath.round(sje) %>" readonly>
+			<input type="hidden" id="bhsje_<%=i %>"  name="rkdProducts[<%=i %>].bhsje" value="<%=JMath.round(bhsje) %>" readonly>
 		</td>
 		<td class="a2"><input type="text" size="10" id="product_xh_<%=i %>" style="width:90%;<%=cssStyle %>" name="rkdProducts[<%=i %>].product_xh" value="<%=StringUtils.nullToStr(rkdProduct.get("product_xh")) %>" readonly></td>
-		<td class="a2"><input type="text" size="5" id="nums_<%=i %>" style="width:90%;<%=cssStyle %>" name="rkdProducts[<%=i %>].nums"  value="<%=StringUtils.nullToStr(rkdProduct.get("nums")) %>" readonly><input type="hidden" id="xj_<%=i %>" name="rkdProducts[<%=i %>].xj" readonly></td>
+		<td class="a2"><input type="text" size="5" id="nums_<%=i %>" style= "text-align:center;width:90%;<%=cssStyle %>" name="rkdProducts[<%=i %>].nums"  value="<%=StringUtils.nullToStr(rkdProduct.get("nums")) %>" readonly><input type="hidden" id="xj_<%=i %>" name="rkdProducts[<%=i %>].xj" readonly></td>
 		<td class="a2">
-			<input type="text" id="qz_serial_num_<%=i %>" name="rkdProducts[<%=i %>].qz_serial_num" style="width:85%;<%=cssStyle %>"  value="<%=StringUtils.nullToStr(rkdProduct.get("qz_serial_num")) %>" readonly>
+			<input type="text" id="qz_serial_num_<%=i %>" name="rkdProducts[<%=i %>].qz_serial_num" style="width:85%;<%=cssStyle %>"  value="<%=StringUtils.nullToStr(rkdProduct.get("qz_serial_num")) %>" onclick="openSerialWin('<%=i %>');" readonly>
 			<input type="hidden" id="qz_flag_<%=i %>" name="rkdProducts[<%=i %>].qz_flag"  value="<%=StringUtils.nullToStr(rkdProduct.get("qz_flag")) %>"><a style="cursor:hand" title="左键点击输入输列号" onclick="openSerialWin('<%=i %>');"><b>...</b></a>&nbsp;
 		</td>		
 	</tr>

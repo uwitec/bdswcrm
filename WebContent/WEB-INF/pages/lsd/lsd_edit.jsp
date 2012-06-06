@@ -156,16 +156,16 @@ String flag = StringUtils.nullToStr(VS.findValue("flag"));
 
         var otd3 = document.createElement("td");
         otd3.className = "a2";
-        otd3.innerHTML = '<input type="text" id="price_'+curId+'" name="lsdProducts['+curId+'].price" value="0.00" size="7" style="width:90%" onblur="hj();"><input type="hidden" id="cbj_'+curId+'" name="lsdProducts['+curId+'].cbj" value="0.00"><input type="hidden" id="kh_cbj_'+curId+'" name="lsdProducts['+curId+'].kh_cbj" value="0.00"><input type="hidden" id="gf_'+curId+'" name="lsdProducts['+curId+'].gf" value="0">';      
+        otd3.innerHTML = '<input type="text" id="price_'+curId+'" name="lsdProducts['+curId+'].price" value="0.00" size="7" style="width:90%;text-align:right;" onblur="hj();"><input type="hidden" id="cbj_'+curId+'" name="lsdProducts['+curId+'].cbj" value="0.00"><input type="hidden" id="kh_cbj_'+curId+'" name="lsdProducts['+curId+'].kh_cbj" value="0.00"><input type="hidden" id="gf_'+curId+'" name="lsdProducts['+curId+'].gf" value="0">';      
         
         
         var otd5 = document.createElement("td");
         otd5.className = "a2";
-        otd5.innerHTML = '<input type="text" id="nums_'+curId+'" name="lsdProducts['+curId+'].nums" value="0" size="5" style="width:90%" onblur="hj();">';
+        otd5.innerHTML = '<input type="text" id="nums_'+curId+'" name="lsdProducts['+curId+'].nums" value="0" size="5" style="width:90%;text-align:center;" onblur="hj();">';
         
         var otd8 = document.createElement("td");
         otd8.className = "a2";
-        otd8.innerHTML = '<input type="text" id="xj_'+curId+'" name="lsdProducts['+curId+'].xj" value="0.00" size="7" style="width:90%" readonly>';        
+        otd8.innerHTML = '<input type="text" id="xj_'+curId+'" name="lsdProducts['+curId+'].xj" value="0.00" size="7" style="width:90%;text-align:right;" readonly>';        
         
         var otd9 = document.createElement("td");
         otd9.className = "a2";
@@ -634,13 +634,13 @@ if(lsdProducts != null && lsdProducts.size()>0){
 		</td>
 		<td class="a2"><input type="text" id="product_xh_<%=i %>" name="lsdProducts[<%=i %>].product_xh" size="15" value="<%=StringUtils.nullToStr(lsdProduct.getProduct_xh()) %>" style="width:90%" readonly></td>	
 		<td class="a2">
-			<input type="text" id="price_<%=i %>" name="lsdProducts[<%=i %>].price" value="<%=JMath.round(lsdProduct.getPrice()) %>" size="7" onblur="hj();" style="width:90%">
+			<input type="text" id="price_<%=i %>" name="lsdProducts[<%=i %>].price" value="<%=JMath.round(lsdProduct.getPrice()) %>" size="7" onblur="hj();" style="width:90%;text-align:right;">
 			<input type="hidden" id="cbj_<%=i %>" name="lsdProducts[<%=i %>].cbj" value="<%=JMath.round(lsdProduct.getCbj()) %>">
 			<input type="hidden" id="kh_cbj_<%=i %>" name="lsdProducts[<%=i %>].kh_cbj" value="<%=JMath.round(lsdProduct.getKh_cbj()) %>">
 			<input type="hidden" id="gf_<%=i %>" name="lsdProducts[<%=i %>].gf" value="<%=lsdProduct.getGf() %>">
 		</td>
-		<td class="a2"><input type="text" id="nums_<%=i %>" name="lsdProducts[<%=i %>].nums" value="<%=lsdProduct.getNums() %>" size="5" onblur="hj();" style="width:90%"></td>
-		<td class="a2"><input type="text" id="xj_<%=i %>" name="lsdProducts[<%=i %>].xj" value="<%=JMath.round(lsdProduct.getXj()) %>" size="7" style="width:90%" readonly></td>
+		<td class="a2"><input type="text" id="nums_<%=i %>" name="lsdProducts[<%=i %>].nums" value="<%=lsdProduct.getNums() %>" size="5" onblur="hj();" style="width:90%;text-align:center;"></td>
+		<td class="a2"><input type="text" id="xj_<%=i %>" name="lsdProducts[<%=i %>].xj" value="<%=JMath.round(lsdProduct.getXj()) %>" size="7" style="width:90%;text-align:right;" readonly></td>
 		<td class="a2">
 			<input type="text" id="qz_serial_num_<%=i %>" name="lsdProducts[<%=i %>].qz_serial_num" value="<%=StringUtils.nullToStr(lsdProduct.getQz_serial_num()) %>" size="15" readonly>
 			<input type="hidden" id="qz_flag_<%=i %>" name="lsdProducts[<%=i %>].qz_flag" value="<%=flag2 %>"><a style="cursor:hand" title="左键点击输入输列号" onclick="openSerialWin('<%=i %>');"><b>...</b></a>&nbsp;

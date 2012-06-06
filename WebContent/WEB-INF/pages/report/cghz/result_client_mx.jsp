@@ -42,7 +42,7 @@ List list = cghzService.getClientMxList(start_date, end_date,dj_id, client_name)
 <div class="rightContentDiv" id="divContent">
 <TABLE  align="center" cellSpacing=0 cellPadding=0 width="99%" border=0>
 	<TBODY>
-		<TR style="BACKGROUND-COLOR: #dcdcdc;height:30;">
+		<TR style="BACKGROUND-COLOR: #dcdcdc;height:30px;">
 		    <TD align="center" width="100%"><font style="FONT-SIZE: 16px"><B>客户采购汇总--单据列表</B></font></TD>
 		</TR>
 	</TBODY>
@@ -51,18 +51,22 @@ List list = cghzService.getClientMxList(start_date, end_date,dj_id, client_name)
 <TABLE align="center" cellSpacing=0 cellPadding=0 width="99%" border=0 style="BORDER-TOP: #000000 2px solid;BORDER-LEFT:#000000 1px solid">
 	<THEAD>
 		<TR>
-			<TD class=ReportHead>单据号</TD>
-			<TD class=ReportHead>业务类型</TD>
-			<TD class=ReportHead>客户名称</TD>
-			<TD class=ReportHead>时间</TD>
-			<TD class=ReportHead>经手人</TD>	
+			<TD class=ReportHead nowrap="nowrap">单据号</TD>
+			<TD class=ReportHead nowrap="nowrap">业务类型</TD>
+			<TD class=ReportHead nowrap="nowrap">客户名称</TD>
+			<TD class=ReportHead nowrap="nowrap">时间</TD>
+			<TD class=ReportHead nowrap="nowrap">经手人</TD>	
 			
-			<TD class=ReportHead>商品编号</TD>
-			<TD class=ReportHead>商品名称</TD>
-			<TD class=ReportHead>规格</TD>
-			<TD class=ReportHead>数量</TD>
+			<TD class=ReportHead nowrap="nowrap">商品编号</TD>
+			<TD class=ReportHead nowrap="nowrap">商品名称</TD>
+			<TD class=ReportHead nowrap="nowrap">规格</TD>
 			
-			<TD class=ReportHead>金额</TD>
+			<TD class=ReportHead nowrap="nowrap">单价</TD>
+			<TD class=ReportHead nowrap="nowrap">数量</TD>
+			<TD class=ReportHead nowrap="nowrap">含税金额</TD>
+			<TD class=ReportHead nowrap="nowrap">税点</TD>
+			<TD class=ReportHead nowrap="nowrap">税额</TD>
+			<TD class=ReportHead nowrap="nowrap">不含税金额</TD>
 		</TR>
 	</THEAD>
 	<TBODY>
@@ -82,20 +86,26 @@ if(list != null && list.size()>0){
 		String url = StringUtils.nullToStr(map.get("url"));
 		
 		double zje = map.get("je")==null?0:((Double)map.get("je")).doubleValue();
+		double hjsje = map.get("hjsje")==null?0:((Double)map.get("hjsje")).doubleValue();
+		double hjbhsje = map.get("hjbhsje")==null?0:((Double)map.get("hjbhsje")).doubleValue();
 		
 %>
 		<TR>
-			<TD class=ReportItem><a href="#" onclick="openWin('<%=url + id %>');"><%=id %></a></TD>
+			<TD class=ReportItem nowrap="nowrap"><a href="#" onclick="openWin('<%=url + id %>');"><%=id %></a></TD>
 			<TD class=ReportItem><%=xwtype %></TD>			
 			<TD class=ReportItem><%=StaticParamDo.getClientNameById(name) %></TD>
-			<TD class=ReportItem><%=creatdate %></TD>
-			<TD class=ReportItem><%=StaticParamDo.getRealNameById(jsr) %></TD>
+			<TD class=ReportItem nowrap="nowrap"><%=creatdate %></TD>
+			<TD class=ReportItem nowrap="nowrap"><%=StaticParamDo.getRealNameById(jsr) %></TD>
 			
 			<TD class=ReportItem>&nbsp;</TD>
 			<TD class=ReportItem>&nbsp;</TD>
 			<TD class=ReportItem>&nbsp;</TD>
 			<TD class=ReportItem>&nbsp;</TD>
-			<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(zje,2) %>&nbsp;</TD>
+			<TD class=ReportItem>&nbsp;</TD>
+			<TD class=ReportItemMoney style="font-weight:bold" nowrap="nowrap"><%=JMath.round(zje,2) %></TD>
+			<TD class=ReportItem>&nbsp;</TD>
+			<TD class=ReportItemMoney style="font-weight:bold" nowrap="nowrap"><%=JMath.round(hjsje,2) %></TD>
+			<TD class=ReportItemMoney style="font-weight:bold" nowrap="nowrap"><%=JMath.round(hjbhsje,2) %></TD>
 		</TR>
 	
 <%
@@ -104,8 +114,11 @@ if(list != null && list.size()>0){
 		if(mxList != null && mxList.size()>0){
 			for(int k=0;k<mxList.size();k++){
 				Map mxMap = (Map)mxList.get(k);
-				
-				double je = mxMap.get("je")==null?0:((Double)mxMap.get("je")).doubleValue();
+				double price = mxMap.get("price")==null?0:((Double)mxMap.get("price")).doubleValue();
+				double hsje = mxMap.get("hsje")==null?0:((Double)mxMap.get("hsje")).doubleValue();
+				double sje = mxMap.get("sje")==null?0:((Double)mxMap.get("sje")).doubleValue();
+				double bhsje = mxMap.get("bhsje")==null?0:((Double)mxMap.get("bhsje")).doubleValue();
+				double sd = mxMap.get("sd")==null?0:((Double)mxMap.get("sd")).doubleValue();
 %>
 				<TR>
 					<TD class=ReportItem>&nbsp;</TD>
@@ -114,12 +127,15 @@ if(list != null && list.size()>0){
 					<TD class=ReportItem>&nbsp;</TD>
 					<TD class=ReportItem>&nbsp;</TD>
 					
-					<TD class=ReportItem><%=StringUtils.nullToStr(mxMap.get("product_id")) %>&nbsp;</TD>
-					<TD class=ReportItem><%=StringUtils.nullToStr(mxMap.get("product_name")) %>&nbsp;</TD>
-					<TD class=ReportItem><%=StringUtils.nullToStr(mxMap.get("product_xh")) %>&nbsp;</TD>
-					<TD class=ReportItemMoney><%=StringUtils.nullToStr(mxMap.get("nums")) %>&nbsp;</TD>
-					<TD class=ReportItemMoney><%=JMath.round(je,2) %>&nbsp;</TD>			
-					
+					<TD class=ReportItem nowrap="nowrap"><%=StringUtils.nullToStr(mxMap.get("product_id")) %></TD>
+					<TD class=ReportItem><%=StringUtils.nullToStr(mxMap.get("product_name")) %></TD>
+					<TD class=ReportItem><%=StringUtils.nullToStr(mxMap.get("product_xh")) %></TD>
+					<TD class=ReportItemMoney nowrap="nowrap"><%=JMath.round(price,2) %></TD>
+					<TD class=ReportItemMoney nowrap="nowrap"><%=StringUtils.nullToStr(mxMap.get("nums")) %></TD>
+					<TD class=ReportItemMoney nowrap="nowrap"><%=JMath.round(hsje,2) %></TD>
+					<TD class=ReportItemMoney nowrap="nowrap"><%=JMath.round(sd) %></TD>
+					<TD class=ReportItemMoney nowrap="nowrap"><%=JMath.round(sje,2) %></TD>
+					<TD class=ReportItemMoney nowrap="nowrap"><%=JMath.round(bhsje,2) %></TD>
 				</TR>
 <%				
 			}
@@ -132,7 +148,7 @@ if(list != null && list.size()>0){
 <br>
 <table width="99%">
 		<tr>
-			<td width="70%" height="30">注：点击商品编号可查看原始单据列表。</td>
+			<td width="70%" height="30">注：点击单据标号可查看单据明细。</td>
 			<td colspan="2" align="right" height="30">生成报表时间：<%=DateComFunc.getToday() %>&nbsp;&nbsp;&nbsp;</td>
 		</tr>
 </table>

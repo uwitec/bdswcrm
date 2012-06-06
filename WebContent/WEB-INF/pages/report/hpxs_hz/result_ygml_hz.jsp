@@ -139,7 +139,7 @@ if(resultList != null && resultList.size()>0){
 			<TD class=ReportItemMoney><%=JMath.round(bhsje,2) %>&nbsp;</TD>
 			<TD class=ReportItemMoney><%=JMath.round(cb,2) %>&nbsp;</TD>
 			<TD class=ReportItemMoney><%=JMath.round(ml,2) %>&nbsp;</TD>
-			<TD class=ReportItemMoney><%=JMath.percent(ml,xssr) %>&nbsp;</TD>		
+			<TD class=ReportItemMoney><%=JMath.percent(ml,bhsje) %>&nbsp;</TD>		
 		</TR>
 <%
 	}

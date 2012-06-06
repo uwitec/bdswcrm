@@ -9,7 +9,7 @@ OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
 String id = (String)VS.findValue("id");
 List storeList = (List)VS.findValue("storeList");
 Jhd jhd = (Jhd)VS.findValue("jhd");
-
+String cgsd = (String)VS.findValue("cgsd");
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -215,7 +215,8 @@ Jhd jhd = (Jhd)VS.findValue("jhd");
 
       	
     function addTr(){
-        var otr = document.getElementById("jhtable").insertRow(-1);
+    	//alert(document.getElementById("jhtable").rows.length);
+        var otr = document.getElementById("jhtable").insertRow(document.getElementById("jhtable").rows.length-1);
 
         var curId = allCount + 1;   //curId一直加下去，防止重复
         allCount = allCount + 1;
@@ -234,23 +235,66 @@ Jhd jhd = (Jhd)VS.findValue("jhd");
         
         var otd2 = document.createElement("td");
         otd2.className = "a2";
-        otd2.innerHTML = '<input type="text" size="10"  id="price_'+curId+'" name="jhdProducts['+curId+'].price" value="0.00" style="width:90%" onblur="hj();">';
+        otd2.innerHTML = '<input type="text" size="10"  id="price_'+curId+'" name="jhdProducts['+curId+'].price" value="0.00" style="width:90%;text-align: right;" onblur="hj();">';
         
         var otd3 = document.createElement("td");
         otd3.className = "a2";
-        otd3.innerHTML = '<input type="text" size="5"  id="nums_'+curId+'" name="jhdProducts['+curId+'].nums" value="1" style="width:90%" onblur="hj();">';
+        otd3.innerHTML = '<input type="text" size="5"  id="nums_'+curId+'" name="jhdProducts['+curId+'].nums" value="0" style="width:90%;text-align: center;" onblur="hj();">';
 
         
         var otd4 = document.createElement("td");
         otd4.className = "a2";
-        otd4.innerHTML = '<input type="text" size="10"  id="xj_'+curId+'" name="jhdProducts['+curId+'].xj" value="0.00" style="width:90%" readonly>';  
+        otd4.innerHTML = '<input type="text" size="10"  id="hsje_'+curId+'" name="jhdProducts['+curId+'].hsje" value="0.00" style="width:90%;text-align: right;"  readonly="readonly">';  
+        
+        var hswfFlags = document.getElementsByName("jhd.ysws");
+        var hswfFlag = "";
+        for(var i=0;i<hswfFlags.length;i++){
+        	if(hswfFlags[i].checked){
+        		hswfFlag = hswfFlags[i].value;
+        	}
+        }
+        var otd5 = document.createElement("td");
+        otd5.className = "a2";
+        otd5.id = "tdHidden";
+        if(hswfFlag == "未税"){
+        	otd5.style.display = "none";
+        	otd5.innerHTML = '<input type="text" size="5"  id="sd_'+curId+'" name="jhdProducts['+curId+'].sd" value="0.0" style="width:90%;text-align: right;" onblur="hj();">';
+        }else{
+        	otd5.style.display = "";
+        	otd5.innerHTML = '<input type="text" size="5"  id="sd_'+curId+'" name="jhdProducts['+curId+'].sd" value="<%=cgsd %>" style="width:90%;text-align: right;" onblur="hj();">';
+        }
+          
+        
+        var otd6 = document.createElement("td");
+        otd6.className = "a2";
+        otd6.id = "tdHidden";
+        otd6.innerHTML = '<input type="text" size="5"  id="sje_'+curId+'" name="jhdProducts['+curId+'].sje" value="0.00" style="width:90%;text-align: right;" onblur="hj();" readonly="readonly">';
+        if(hswfFlag == "未税"){
+        	otd6.style.display = "none";
+        }else{
+        	otd6.style.display = "";
+        }
+          
+        
+        var otd7 = document.createElement("td");
+        otd7.className = "a2";
+        otd7.id = "tdHidden";
+        otd7.innerHTML = '<input type="text" size="5"  id="bhsje_'+curId+'" name="jhdProducts['+curId+'].bhsje" value="0.00" style="width:90%;text-align: right;" onblur="hj();" readonly="readonly">';
+        if(hswfFlag == "未税"){
+        	otd7.style.display = "none";
+        }else{
+        	otd7.style.display = "";
+        }
         
 		otr.appendChild(otd);
         otr.appendChild(otd0); 
         otr.appendChild(otd1); 
         otr.appendChild(otd2); 
         otr.appendChild(otd3); 
-        otr.appendChild(otd4); 
+        otr.appendChild(otd4);
+        otr.appendChild(otd5); 
+        otr.appendChild(otd6); 
+        otr.appendChild(otd7); 
     }	
      
      
@@ -276,10 +320,18 @@ Jhd jhd = (Jhd)VS.findValue("jhd");
 	}
 	
 	function hj(){
-		var length = (document.getElementById('jhtable').rows.length-2);
-		
 		var hjz = 0;
-		var cbjhj = 0;
+		var hj_sje = 0;
+		var hj_bhsje = 0;
+		var hj_counts = 0;
+		
+        var hswfFlags = document.getElementsByName("jhd.ysws");
+        var hswfFlag = "";
+        for(var i=0;i<hswfFlags.length;i++){
+        	if(hswfFlags[i].checked){
+        		hswfFlag = hswfFlags[i].value;
+        	}
+        }
 		
 		for(var i=0;i<=allCount;i++){			
 			var price = document.getElementById("price_" + i);
@@ -291,6 +343,14 @@ Jhd jhd = (Jhd)VS.findValue("jhd");
 				}
 			}
 			
+			var sd =  document.getElementById("sd_" + i);
+			if(hswfFlag == "含税"){
+				if(!InputValid(sd,0,"float",0,1,99999999,"税点")){
+					sd.focus();
+					return;
+				}
+			}
+			
 			var nums = document.getElementById("nums_" + i);
 			if(nums != null){
 				if(!InputValid(nums,0,"int",0,1,99999999,"数量")){
@@ -298,19 +358,50 @@ Jhd jhd = (Jhd)VS.findValue("jhd");
 					return;
 				}
 			}		
+			hj_counts =  parseFloat(hj_counts) + parseFloat(nums.value);
 			
-			var xj = document.getElementById("xj_" + i);			
+			//含税金额
+			var hsje = document.getElementById("hsje_" + i);	
+			if(hsje != null){
+				hsje.value = (parseFloat(price.value) * parseFloat(nums.value)).toFixed(2);
+				hjz = parseFloat(hjz) + parseFloat(hsje.value);
+			}
 			
-			if(xj != null){
-				xj.value = (parseFloat(price.value) * parseFloat(nums.value)).toFixed(2);				
-				hjz = parseFloat(hjz) + parseFloat(xj.value);
+			if(hswfFlag == "含税"){
+				//含税情况
+				var bhsje = document.getElementById("bhsje_" + i);	  //不含税金额
+				var sje = document.getElementById("sje_" + i);	  //税额
+				if(bhsje != null){
+					bhsje.value = ((parseFloat(price.value) * parseFloat(nums.value)) / (1 + parseFloat(document.getElementById("sd_" + i).value) / 100)).toFixed(2);
+					sje.value = (parseFloat(hsje.value) - parseFloat(bhsje.value)).toFixed(2);
+					
+					hj_sje = parseFloat(hj_sje) + parseFloat(sje.value);
+					hj_bhsje = parseFloat(hj_bhsje) + parseFloat(bhsje.value);
+				}
+			}else{
+				//不含税情况
+				document.getElementById("bhsje_" + i).value = hsje.value;
+				document.getElementById("sd_" + i).value = "0.00";
+				document.getElementById("sje_" + i).value = "0.00";
 			}
 		}		
 		
 		var total = document.getElementById("total");
+		var hjsje = document.getElementById("hjsje");
+		var hj_nums = document.getElementById("hj_nums");
+		var hjbhsje = document.getElementById("hjbhsje");
 		
-		total.value = hjz.toFixed(2);
-		
+		if(hswfFlag == "含税"){
+			total.value = hjz.toFixed(2);
+			hjsje.value = hj_sje.toFixed(2);
+			hjbhsje.value = hj_bhsje.toFixed(2);
+			hj_nums.value = hj_counts;
+		}else{
+			total.value = hjz.toFixed(2);
+			hjsje.value = "0.00";
+			hjbhsje.value =  hjz.toFixed(2);
+			hj_nums.value = hj_counts;
+		}
 	}	
 	
 	function delDesc(){
@@ -333,8 +424,10 @@ Jhd jhd = (Jhd)VS.findValue("jhd");
 		document.getElementById("product_xh_" + sel).value = "";
 		document.getElementById("price_" + sel).value = "0.00";
 		document.getElementById("nums_" + sel).value = "0";
-		document.getElementById("xj_" + sel).value = "0.00";
-		document.getElementById("remark_" + sel).value = "";
+		document.getElementById("sd_" + sel).value = "0.00";
+		document.getElementById("hsje_" + sel).value = "0.00";
+		document.getElementById("sje_" + sel).value = "0.00";
+		document.getElementById("bhsje_" + sel).value = "0.00";
 	}	
 
 	//选择供货单位
@@ -350,11 +443,54 @@ Jhd jhd = (Jhd)VS.findValue("jhd");
 		}
 	}
 	
+	//含税未税切换
+	function changeHsws(vl){
+		
+		var tdObjs = document.getElementsByTagName("td");
+		var inputObjs = document.getElementsByTagName("input");
+		
+		if(vl == "含税"){
+			document.getElementById("tdHsje").innerHTML = "含税金额";
+			
+			if(tdObjs != null && tdObjs.length > 0){
+				for(var i=0;i<tdObjs.length;i++){
+					if(tdObjs[i].id == "tdHidden"){
+						tdObjs[i].style.display = "";
+					}
+				}
+			}
+			
+			if(inputObjs != null && inputObjs.length > 0){
+				for(var i=0;i<inputObjs.length;i++){
+					if(inputObjs[i].id.indexOf("sd_") != -1 ){
+						inputObjs[i].value = "<%=cgsd %>";
+					}
+				}
+			}
+		} else {
+			document.getElementById("tdHsje").innerHTML = "金额";
+			if(tdObjs != null && tdObjs.length > 0){
+				for(var i=0;i<tdObjs.length;i++){
+					if(tdObjs[i].id == "tdHidden"){
+						tdObjs[i].style.display = "none";
+					}
+				}
+			}
+			if(inputObjs != null && inputObjs.length > 0){
+				for(var i=0;i<inputObjs.length;i++){
+					if(inputObjs[i].id.indexOf("sd_") != -1 ){
+						inputObjs[i].value = "0.0";
+					}
+				}
+			}
+		}
+		hj();
+	}
 </script>
 </head>
 <body onload="initFzrTip();initClientTip();onloadClientInfo();">
 <form name="jhdForm" action="saveJhd.html" method="post">
-<input type="hidden" name="jhd.state" id="state" value="">
+<input type="hidden" name="jhd.state" id="state" value=""/>
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
@@ -396,24 +532,24 @@ Jhd jhd = (Jhd)VS.findValue("jhd");
 			</select>
 		</td>	
 		<td class="a1">联系电话</td>
-		<td class="a2"><input type="text" name="jhd.kh_lxdh" id="kh_lxdh" size="45" maxlength="22"></td>
+		<td class="a2"><input type="text" name="jhd.kh_lxdh" id="kh_lxdh" size="45" maxlength="22"/></td>
 	</tr>
 	<tr>	
 		<td class="a1" width="15%">账期</td>
 		<td class="a2">
-			<input type="text" name="jhd.zq" id="zq" value="0" size="45" title="账期"  maxlength="5">天<font color="red">*</font>
-			<input type="hidden" name="jhd.fkfs" id="fkfs" value="账期">
+			<input type="text" name="jhd.zq" id="zq" value="0" size="45" title="账期"  maxlength="5"/>天<font color="red">*</font>
+			<input type="hidden" name="jhd.fkfs" id="fkfs" value="账期"/>
 		</td>
 		<td class="a1"  width="15%">发票类型</td>
 	    <td class="a2" colspan="3">
-	        <input type="radio"  name="jhd.ysws" value="未税" >未税
-	        <input type="radio"  name="jhd.ysws" value="含税" >含税 <font color="red">*</font>
+	        <input type="radio"  name="jhd.ysws" id="ysws" value="未税"  checked="checked"  onclick="changeHsws(this.value);"/>未税<input type="radio"  name="jhd.ysws" id="ysws" value="含税"  onclick="changeHsws(this.value);"/>含税
+	         <font color="red">*</font>
         </td>
 	</tr>
 	<tr>			
 		<td class="a1" width="15%">预计到货时间</td>
 		<td class="a2">
-		<input type="text" name="jhd.yjdhsj" id="yjdhsj" value="0" size="45" title="预计到货时间">天
+		<input type="text" name="jhd.yjdhsj" id="yjdhsj" value="0" size="45" title="预计到货时间"/>天
 		</td>		
 	    <td class="a1" width="15%">到货库房</td>
 		<td class="a2" width="35%">
@@ -453,12 +589,15 @@ Jhd jhd = (Jhd)VS.findValue("jhd");
 <table width="100%"  align="center" id="jhtable"  class="chart_list" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td width="5%">选择</td>
-		<td width="30%">商品名称</td>
-		<td width="30%">规格</td>
-		<td width="12%">采购价格</td>
-		<td width="10%">数量</td>
-		<td width="13%">小计</td>
+		<td width="4%">选择</td>
+		<td width="25%">商品名称</td>
+		<td width="20%">规格</td>
+		<td width="8%">单价</td>
+		<td width="8%">数量</td>
+		<td width="8%" id="tdHsje" name="tdHsje">金额</td>
+		<td id="tdHidden"  style="display: none" width="8%" >税点</td>
+		<td id="tdHidden"  style="display: none">税额</td>
+		<td id="tdHidden"  style="display: none">不含税金额</td>
 	</tr>
 	</thead>
 <%
@@ -471,13 +610,27 @@ for(int i=0;i<3;i++){
 			<input type="hidden" id="product_id_<%=i %>" name="jhdProducts[<%=i %>].product_id">
 		</td>
 		<td class="a2"><input type="text" size="10" id="product_xh_<%=i %>" name="jhdProducts[<%=i %>].product_xh" style="width:90%" readonly></td>
-		<td class="a2"><input type="text" size="10"  id="price_<%=i %>" name="jhdProducts[<%=i %>].price" value="0.00" style="width:90%" onblur="hj();"></td>
-		<td class="a2"><input type="text" size="5"  id="nums_<%=i %>" name="jhdProducts[<%=i %>].nums" value="1" style="width:90%" onblur="hj();"></td>		
-		<td class="a2"><input type="text" size="10"  id="xj_<%=i %>" name="jhdProducts[<%=i %>].xj" value="0.00" style="width:90%" readonly></td>
+		<td class="a2"><input type="text" size="10"  id="price_<%=i %>" name="jhdProducts[<%=i %>].price" value="0.00" style="width:90%;text-align: right;" onblur="hj();"></td>
+		<td class="a2"><input type="text" size="5"  id="nums_<%=i %>" name="jhdProducts[<%=i %>].nums" value="0" style="width:90%;text-align: center;" onblur="hj();"></td>
+		<td class="a2"><input type="text" size="5"  id="hsje_<%=i %>" name="jhdProducts[<%=i %>].hsje" value="0.00" style="width:90%;text-align: right;" readonly="readonly"></td>
+		<td class="a2" id="tdHidden"   style="display: none"><input type="text" size="5"  id="sd_<%=i %>" name="jhdProducts[<%=i %>].sd" value=""  onblur="hj();" style="width:90%;text-align: right;"></td>
+		<td class="a2" id="tdHidden"   style="display: none"><input type="text" size="5"  id="sje_<%=i %>" name="jhdProducts[<%=i %>].sje"  readonly="readonly" value="0.00" style="width:90%;text-align: right;"></td>
+		<td class="a2" id="tdHidden"   style="display: none"><input type="text" size="5"  id="bhsje_<%=i %>" name="jhdProducts[<%=i %>].bhsje"  readonly="readonly" value="0.00" style="width:90%;text-align: right;"></td>
 	</tr>
 <%
 }
 %>	
+	<tr>
+		<td class="a2">合计</td>
+		<td class="a2">&nbsp;</td>
+		<td class="a2">&nbsp;</td>
+		<td class="a2"></td>
+		<td class="a2"><input type="text" size="5"  id="hj_nums" name="hj_nums"  value="0" style="width:90%;text-align: center;" onblur="hj();" readonly="readonly"/></td>
+		<td class="a2"><input type="text" id="total"  name="jhd.total" value="0.00"  readonly="readonly" style="width:90%;text-align: right;"/></td>
+		<td class="a2" id="tdHidden"  style="display: none">&nbsp;</td>
+		<td class="a2" id="tdHidden"  style="display: none"><input type="text" id="hjsje"  name="jhd.hjsje"  style="width:90%;text-align: right;" value="0.00"  readonly="readonly"/></td>
+		<td class="a2" id="tdHidden"  style="display: none"><input type="text" id="hjbhsje"  name="jhd.hjbhsje"   style="width:90%;text-align: right;" value="0.00"  readonly="readonly"/></td>
+	</tr>
 </table>
 <table width="100%"  align="center" class="chart_info" cellpadding="0" cellspacing="0">
 	<tr height="35">
@@ -488,13 +641,6 @@ for(int i=0;i<3;i++){
 	</tr>
 </table>
 <table width="100%"  align="center" class="chart_info" cellpadding="0" cellspacing="0">	
-	<tr>
-		<td class="a1" width="15%">合计金额</td>
-		<td class="a2" width="85%">
-			<input type="text" id="total"  name="jhd.total" value="0.00" readonly>
-			<input type="hidden" id="yfje"  name="jhd.yfje" value="0.00">	
-		</td>	
-	</tr>
 	<tr>
 		<td class="a1" width="15%">备注</td>
 		<td class="a2" width="85%"><input type="text" name="jhd.ms" id="ms" style="width:80%">

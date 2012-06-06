@@ -126,7 +126,8 @@ if(!client_name.equals("")){
 		<TR>
 			<TD class=ReportHead>商品类别名称</TD>
 			<TD class=ReportHead>数量</TD>			
-			<TD class=ReportHead>销售收入</TD>
+			<TD class=ReportHead>销售金额</TD>
+			<TD class=ReportHead>不含税金额</TD>
 			<TD class=ReportHead>成本</TD>
 			<TD class=ReportHead>毛利</TD>
 			<TD class=ReportHead>毛利率</TD>	
@@ -139,6 +140,7 @@ int hj_nums = 0;    //合计数量
 double hj_je = 0;   //合计金额
 double hj_ml = 0;   //合计毛利
 double hj_cb = 0;   //合计成本
+double hj_bhsje = 0; //合计不含税金额
 if(resultList != null && resultList.size()>0){
 	for(int i=0;i<resultList.size();i++){
 		Map map = (Map)resultList.get(i);
@@ -153,9 +155,10 @@ if(resultList != null && resultList.size()>0){
 		
 		double je = map.get("hjje")==null?0:((Double)map.get("hjje")).doubleValue();
 		double cb = map.get("hjcb")==null?0:((Double)map.get("hjcb")).doubleValue(); //成本
+		double bhsje = map.get("bhsje")==null?0:((Double)map.get("bhsje")).doubleValue(); //成本
 				
 			
-		double ml = je - cb;
+		double ml = bhsje - cb;
 		
 		String strNums = StringUtils.nullToStr(map.get("nums"));		
 		int nums = 0;
@@ -168,6 +171,7 @@ if(resultList != null && resultList.size()>0){
 			hj_je += je;
 			hj_cb += cb;	
 			hj_ml += ml;
+			hj_bhsje += bhsje;
 		}
 		
 		String stl = "BACKGROUND-COLOR: #FFFFFF";
@@ -183,9 +187,10 @@ if(resultList != null && resultList.size()>0){
 			<TD class=ReportItem><%=strBlank %><a href="javascript:openMx('<%=id %>','<%=start_date %>','<%=end_date %>','<%=client_name %>','<%=xsry %>','<%=dept %>');"><%=name %></a>&nbsp;</TD>
 			<TD class=ReportItemMoney><%=nums %>&nbsp;</TD>
 			<TD class=ReportItemMoney><%=JMath.round(je,2) %>&nbsp;</TD>
+			<TD class=ReportItemMoney><%=JMath.round(bhsje,2) %>&nbsp;</TD>
 			<TD class=ReportItemMoney><%=JMath.round(cb,2) %>&nbsp;</TD>
 			<TD class=ReportItemMoney><input type="hidden" name="fz_vl" id="fz_<%=id %>" value="<%=ml %>"><%=JMath.round(ml,2) %>&nbsp;</TD>
-			<TD class=ReportItemMoney><%=JMath.percent(ml,je) %>&nbsp;</TD>	
+			<TD class=ReportItemMoney><%=JMath.percent(ml,bhsje) %>&nbsp;</TD>	
 			<TD class=ReportItemMoney><span id="zb_<%=id %>"></span>&nbsp;</TD>	
 		</TR>
 	
@@ -198,9 +203,10 @@ if(resultList != null && resultList.size()>0){
 			<TD class=ReportItemXh style="font-weight:bold">合计</TD>
 			<TD class=ReportItemMoney style="font-weight:bold"><%=hj_nums %>&nbsp;</TD>
 			<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(hj_je,2) %>&nbsp;</TD>
+			<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(hj_bhsje,2) %>&nbsp;</TD>
 			<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(hj_cb,2) %>&nbsp;</TD>
 			<TD class=ReportItemMoney style="font-weight:bold"><input type="hidden" name="fm" id="fm" value="<%=hj_ml %>"><%=JMath.round(hj_ml,2) %>&nbsp;</TD>
-			<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.percent(hj_ml,hj_je) %>&nbsp;</TD>
+			<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.percent(hj_ml,hj_bhsje) %>&nbsp;</TD>
 			<TD class=ReportItemMoney style="font-weight:bold">--&nbsp;</TD>
 		</TR>
 		
@@ -209,7 +215,7 @@ if(resultList != null && resultList.size()>0){
 <br>
 <table width="99%">
 		<tr>
-			<td width="70%" height="30">注：类别名称可查看明细信息。</td>
+			<td width="70%" height="30">注：毛利 = 不含税金额 - 成本；毛利率 = 毛利 / 不含税金额 * 100%；点击类别名称可查看明细信息。</td>
 			<td align="right" height="30">生成报表时间：<%=DateComFunc.getToday() %>&nbsp;&nbsp;&nbsp;</td>
 		</tr>
 </table>

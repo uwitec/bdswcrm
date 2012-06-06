@@ -1,122 +1,122 @@
 ﻿思维EIP系统V1.01
-　　1、发布日期：2010-09-19
+    1、发布日期：2010-09-19
 
-　　2、更新内容：
-　　　　一、销售退货，现金退回时判断了账户余额是否充足；
-　　　　二、用户添加了与库房的关联；
-　　　　三、库房调拨添加了确认，确认后再结算；库房调拨出库后会在调入库房所有用户的代办工作中添加一个待确认库房调拨单，可以确认入库，也可以退回，确认入库后再结算。
-　　　　四、往来单位添加了停用功能；
-　　　　五、库房资料添加了停用功能；
-　　　　六、查看零售单是去掉了工分；
-　　　　七、用户管理中添加了重置密码功能，用户忘记密码时可以由系统管理员重置密码，重置后密码默认为：111111
-　　　　八、添加了业务员预估毛利汇总（需要导入服务器上的 func.sql和column_func.sql两个sql脚本）；
-　　　　九、采购退回时库存不足提醒；
-　　　　关键是二、三，首先要将用户与库房做关联，在用户信息中修改，然后三才可以使用。
+    2、更新内容：
+        一、销售退货，现金退回时判断了账户余额是否充足；
+        二、用户添加了与库房的关联；
+        三、库房调拨添加了确认，确认后再结算；库房调拨出库后会在调入库房所有用户的代办工作中添加一个待确认库房调拨单，可以确认入库，也可以退回，确认入库后再结算。
+        四、往来单位添加了停用功能；
+        五、库房资料添加了停用功能；
+        六、查看零售单是去掉了工分；
+        七、用户管理中添加了重置密码功能，用户忘记密码时可以由系统管理员重置密码，重置后密码默认为：111111
+        八、添加了业务员预估毛利汇总（需要导入服务器上的 func.sql和column_func.sql两个sql脚本）；
+        九、采购退回时库存不足提醒；
+        关键是二、三，首先要将用户与库房做关联，在用户信息中修改，然后三才可以使用。
 
-　　3、数据库修改：
-				﻿--部分部署的版本缺少字段（检查后更新）
-				ALTER TABLE `sfd` MODIFY COLUMN `khlx` VARCHAR(10) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT 0,ADD COLUMN `linkmanls` VARCHAR(100) AFTER `khlx`;
-		
-				--往来单位添加删除标志
-				ALTER TABLE `clients` ADD COLUMN `flag` VARCHAR(2) DEFAULT 1 AFTER `cg_xe`;
-		
-				--仓库资料增加删除标志
-				ALTER TABLE `storehouse` ADD COLUMN `flag` VARCHAR(2) DEFAULT 1 AFTER `remark`;
-		
-				--修改库房调拨单状态,将已入库改为了结算状态
-				--部署后需要执行
-				 UPDATE kfdb SET state='已入库' where state='已出库'
-				 
-				 ALTER TABLE `accounts` ADD COLUMN `flag` VARCHAR(2) DEFAULT 1 AFTER `remark`;
-		 
-　　4、对应SVN版本号：778
+    3、数据库修改：
+        ﻿--部分部署的版本缺少字段（检查后更新）
+        ALTER TABLE `sfd` MODIFY COLUMN `khlx` VARCHAR(10) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT 0,ADD COLUMN `linkmanls` VARCHAR(100) AFTER `khlx`;
+    
+        --往来单位添加删除标志
+        ALTER TABLE `clients` ADD COLUMN `flag` VARCHAR(2) DEFAULT 1 AFTER `cg_xe`;
+    
+        --仓库资料增加删除标志
+        ALTER TABLE `storehouse` ADD COLUMN `flag` VARCHAR(2) DEFAULT 1 AFTER `remark`;
+    
+        --修改库房调拨单状态,将已入库改为了结算状态
+        --部署后需要执行
+         UPDATE kfdb SET state='已入库' where state='已出库'
+         
+         ALTER TABLE `accounts` ADD COLUMN `flag` VARCHAR(2) DEFAULT 1 AFTER `remark`;
+     
+    4、对应SVN版本号：778
 
-　　5、部署进度跟踪
-　　　  -------------------------------------------------------------------------------------------------
+    5、部署进度跟踪
+        -------------------------------------------------------------------------------------------------
            服务器帐套名称            |              帐套部署时间                       |    部署人员
         -------------------------------------------------------------------------------------------------
-　　　   保定思维                    |               2010-09-19                        |    李玉堂
-　　　   张家口升源                  |                待部署                           |                                                     
-　　　   易县未来                    |                待部署                           |                                   
-　　　   定州创逸                    |                待部署                           |                                                            
-　　　   高碑店骏腾                  |                待部署                           |                                                     
-　　　   保定博通                    |               2010-09-22                        |    李玉堂                             
-　　　   张家口金诺                  |               2011-01-09                        |         
-　　　   秦皇岛金恒生                |                待部署                           |                               
-　　　   承德扬天                    |                待部署                           |                                                         
-　　　   北京银联合力                |                待部署                           |            
+         保定思维                    |               2010-09-19                        |    李玉堂
+         张家口升源                  |                待部署                           |                                                     
+         易县未来                    |                待部署                           |                                   
+         定州创逸                    |                待部署                           |                                                            
+         高碑店骏腾                  |                待部署                           |                                                     
+         保定博通                    |               2010-09-22                        |    李玉堂                             
+         张家口金诺                  |               2011-01-09                        |         
+         秦皇岛金恒生                |                待部署                           |                               
+         承德扬天                    |                待部署                           |                                                         
+         北京银联合力                |                待部署                           |            
        ---------------------------------------------------------------------------------------------------  
 
 
 思维EIP系统V1.02
-　　1、发布日期：2010-09-29
+    1、发布日期：2010-09-29
 
-　　2、更新内容：
-　　　　一、修改改销售退货，预估成本为0问题；
-　　　　二、会员管理模块进行了改造，重新梳理；
-			  三、出入库汇总、库存成本汇本进行了修改，改善了执行时资源占用过多的问题；
-			  四、解决出入库汇总明细不正确的问题；
+    2、更新内容：
+        一、修改改销售退货，预估成本为0问题；
+        二、会员管理模块进行了改造，重新梳理；
+        三、出入库汇总、库存成本汇本进行了修改，改善了执行时资源占用过多的问题；
+        四、解决出入库汇总明细不正确的问题；
         五、修改系统用户的所在库房字段,增加为varchar(500),可以支持选择多个库房
-	  
+    
 
-　　3、数据库修改：
-				--修改积分规则表修改字段类型
-				ALTER TABLE `jfgz` MODIFY COLUMN `xfje` DOUBLE DEFAULT 0,
-				 MODIFY COLUMN `dyjf` DOUBLE DEFAULT 0;
-				 
-				--会员卡制作表修改,添加状态,去掉了是否充值,初始金额
-				ALTER TABLE `hykzz` DROP COLUMN `sfcz`;
-				ALTER TABLE `hykzz` ADD COLUMN `state` VARCHAR(45) AFTER `cz_date`;
-				ALTER TABLE `hykzz` DROP COLUMN `csje`;
-				
-				--会员卡档案表修改
-				ALTER TABLE `hykda` MODIFY COLUMN `hykh` VARCHAR(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-				 DROP COLUMN `sfty`,
-				 MODIFY COLUMN `hymc` VARCHAR(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-				 MODIFY COLUMN `lxrname` VARCHAR(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-				 MODIFY COLUMN `lxdh` VARCHAR(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-				 MODIFY COLUMN `mobile` VARCHAR(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-				 MODIFY COLUMN `address` VARCHAR(200) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-				 MODIFY COLUMN `mail` VARCHAR(200) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-				 DROP COLUMN `ffjg`,
-				 DROP COLUMN `zkrq`,
-				 DROP COLUMN `zkjsr`,
-				 DROP COLUMN `hybh`,
-				 MODIFY COLUMN `fkbz` VARCHAR(1000) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL;
-				 
-				 --修改系统用户的所在库房字段,增加为varchar(500),可以支持选择多个库房
-				 ALTER TABLE `sys_user` MODIFY COLUMN `szkf` VARCHAR(500) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL;		
-				 
-				--将数据字典中的报修原因修改为“其他原因”
-				
-				update sjzd_xmxx set xm_name='其他原因',xm_ms='其他原因' where xm_name='其他' and zd_id='SJZD_BXYY';
-				
-				2010-10-18更新
-				--返还客户单中增加客户类型、联系电话、手机、地址、E-Mail
-				ALTER TABLE `fhkhd` ADD COLUMN `khlx` VARCHAR(10) DEFAULT NULL AFTER `lxr`;
-				ALTER TABLE `fhkhd` ADD COLUMN `address` VARCHAR(500) DEFAULT NULL AFTER `khlx`;
-				ALTER TABLE `fhkhd` ADD COLUMN `lxdh` VARCHAR(20) DEFAULT NULL AFTER `address`;
-				ALTER TABLE `fhkhd` ADD COLUMN `mobile` VARCHAR(20) DEFAULT NULL AFTER `lxdh`;
-				ALTER TABLE `fhkhd` ADD COLUMN `mail` VARCHAR(100) DEFAULT NULL AFTER `mobile`;
-				
-				update fhkhd set khlx='往来单位';				 
-		 
-　　4、对应SVN版本号：785
+    3、数据库修改：
+        --修改积分规则表修改字段类型
+        ALTER TABLE `jfgz` MODIFY COLUMN `xfje` DOUBLE DEFAULT 0,
+         MODIFY COLUMN `dyjf` DOUBLE DEFAULT 0;
+         
+        --会员卡制作表修改,添加状态,去掉了是否充值,初始金额
+        ALTER TABLE `hykzz` DROP COLUMN `sfcz`;
+        ALTER TABLE `hykzz` ADD COLUMN `state` VARCHAR(45) AFTER `cz_date`;
+        ALTER TABLE `hykzz` DROP COLUMN `csje`;
+        
+        --会员卡档案表修改
+        ALTER TABLE `hykda` MODIFY COLUMN `hykh` VARCHAR(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+         DROP COLUMN `sfty`,
+         MODIFY COLUMN `hymc` VARCHAR(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+         MODIFY COLUMN `lxrname` VARCHAR(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+         MODIFY COLUMN `lxdh` VARCHAR(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+         MODIFY COLUMN `mobile` VARCHAR(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+         MODIFY COLUMN `address` VARCHAR(200) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+         MODIFY COLUMN `mail` VARCHAR(200) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+         DROP COLUMN `ffjg`,
+         DROP COLUMN `zkrq`,
+         DROP COLUMN `zkjsr`,
+         DROP COLUMN `hybh`,
+         MODIFY COLUMN `fkbz` VARCHAR(1000) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL;
+         
+         --修改系统用户的所在库房字段,增加为varchar(500),可以支持选择多个库房
+         ALTER TABLE `sys_user` MODIFY COLUMN `szkf` VARCHAR(500) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL;    
+         
+        --将数据字典中的报修原因修改为“其他原因”
+        
+        update sjzd_xmxx set xm_name='其他原因',xm_ms='其他原因' where xm_name='其他' and zd_id='SJZD_BXYY';
+        
+        2010-10-18更新
+        --返还客户单中增加客户类型、联系电话、手机、地址、E-Mail
+        ALTER TABLE `fhkhd` ADD COLUMN `khlx` VARCHAR(10) DEFAULT NULL AFTER `lxr`;
+        ALTER TABLE `fhkhd` ADD COLUMN `address` VARCHAR(500) DEFAULT NULL AFTER `khlx`;
+        ALTER TABLE `fhkhd` ADD COLUMN `lxdh` VARCHAR(20) DEFAULT NULL AFTER `address`;
+        ALTER TABLE `fhkhd` ADD COLUMN `mobile` VARCHAR(20) DEFAULT NULL AFTER `lxdh`;
+        ALTER TABLE `fhkhd` ADD COLUMN `mail` VARCHAR(100) DEFAULT NULL AFTER `mobile`;
+        
+        update fhkhd set khlx='往来单位';         
+     
+    4、对应SVN版本号：785
 
-　　5、部署进度跟踪
-　　　  -------------------------------------------------------------------------------------------------
+    5、部署进度跟踪
+        -------------------------------------------------------------------------------------------------
            服务器帐套名称            |              帐套部署时间                       |    部署人员
         -------------------------------------------------------------------------------------------------
-　　　   保定思维                    |               2010-09-29                        |    李玉堂
-　　　   张家口升源                  |               2011-01-09                        |    李玉堂                                                 
-　　　   易县未来                    |               2011-01-10                        |    李玉堂                               
-　　　   定州创逸                    |               2011-01-10                        |    李玉堂                                                        
-　　　   高碑店骏腾                  |               2011-01-10                        |    李玉堂                                                 
-　　　   保定博通                    |               2010-12-05                        |    李玉堂                             
-　　　   张家口金诺                  |               2011-01-09                        |    李玉堂     
-　　　   秦皇岛金恒生                |               2010-11-22                        |    李玉堂                             
-　　　   承德扬天                    |               2011-01-05                        |    李玉堂                                                     
-　　　   北京银联合力                |               2011-01-05                        |    李玉堂        
+         保定思维                    |               2010-09-29                        |    李玉堂
+         张家口升源                  |               2011-01-09                        |    李玉堂                                                 
+         易县未来                    |               2011-01-10                        |    李玉堂                               
+         定州创逸                    |               2011-01-10                        |    李玉堂                                                        
+         高碑店骏腾                  |               2011-01-10                        |    李玉堂                                                 
+         保定博通                    |               2010-12-05                        |    李玉堂                             
+         张家口金诺                  |               2011-01-09                        |    李玉堂     
+         秦皇岛金恒生                |               2010-11-22                        |    李玉堂                             
+         承德扬天                    |               2011-01-05                        |    李玉堂                                                     
+         北京银联合力                |               2011-01-05                        |    李玉堂        
          宝玉刀具                    |               2011-01-04                        |    李玉堂        
          保定戴尔                    |               2011-01-05                        |    李玉堂        
        ---------------------------------------------------------------------------------------------------  
@@ -124,40 +124,40 @@
        
 
 思维EIP系统V1.03
-　　1、发布日期：2011-06-01
+    1、发布日期：2011-06-01
 
-　　2、更新内容：
-	  
+    2、更新内容：
+    
 
-　　3、数据库修改：
-					2011-04-18更新
-					----增加货品销售毛利分类汇总
-					INSERT INTO `funcs` VALUES ('FC9915','货品毛利分类汇总','货品毛利分类汇总','showHpmlflHzCon.html','112.gif',11,'1','1');
-					
-					INSERT INTO `column_funcs` VALUES ('001003','FC9915');
-					
-					2011-05-23更新
-					--商品交易信息中添加销售人员所在部门列，并更新数据
-					ALTER TABLE `product_sale_flow` ADD COLUMN `xsry_dept` VARCHAR(45) AFTER `sfcytc`;
-					update product_sale_flow a set xsry_dept=(select dept from sys_user b where b.user_id=a.xsry)	 
-		 
-　　4、对应SVN版本号：934
+    3、数据库修改：
+          2011-04-18更新
+          ----增加货品销售毛利分类汇总
+          INSERT INTO `funcs` VALUES ('FC9915','货品毛利分类汇总','货品毛利分类汇总','showHpmlflHzCon.html','112.gif',11,'1','1');
+          
+          INSERT INTO `column_funcs` VALUES ('001003','FC9915');
+          
+          2011-05-23更新
+          --商品交易信息中添加销售人员所在部门列，并更新数据
+          ALTER TABLE `product_sale_flow` ADD COLUMN `xsry_dept` VARCHAR(45) AFTER `sfcytc`;
+          update product_sale_flow a set xsry_dept=(select dept from sys_user b where b.user_id=a.xsry)   
+     
+    4、对应SVN版本号：934
 
-　　5、部署进度跟踪
-　　　  -------------------------------------------------------------------------------------------------
+    5、部署进度跟踪
+        -------------------------------------------------------------------------------------------------
            服务器帐套名称            |              帐套部署时间                       |    部署人员
         -------------------------------------------------------------------------------------------------
-　　　   保定思维                    |               2011-06-01                        |    李玉堂
-　　　   张家口升源                  |                                                 |                                                      
-　　　   易县未来                    |                                                 |                                    
-　　　   定州创逸                    |                                                 |                                                             
-　　　   高碑店骏腾                  |                                                 |                                                      
-　　　   保定博通                    |               2011-06-15                        |    李玉堂                             
-　　　   张家口金诺                  |                                                 |          
-　　　   秦皇岛金恒生                |                                                 |     
-　　　   秦皇岛市金宇高德            |               2011-06-15                        |    李玉堂                             
-　　　   承德扬天                    |                                                 |                                                         
-　　　   北京银联合力                |                                                 |            
+         保定思维                    |               2011-06-01                        |    李玉堂
+         张家口升源                  |                                                 |                                                      
+         易县未来                    |                                                 |                                    
+         定州创逸                    |                                                 |                                                             
+         高碑店骏腾                  |                                                 |                                                      
+         保定博通                    |               2011-06-15                        |    李玉堂                             
+         张家口金诺                  |                                                 |          
+         秦皇岛金恒生                |                                                 |     
+         秦皇岛市金宇高德            |               2011-06-15                        |    李玉堂                             
+         承德扬天                    |                                                 |                                                         
+         北京银联合力                |                                                 |            
          宝玉刀具                    |                                                 |         
          保定戴尔                    |                                                 |          
        ---------------------------------------------------------------------------------------------------         
@@ -165,87 +165,87 @@
 
 
 思维EIP系统V1.04
-　　1、发布日期：2011-07-19
+    1、发布日期：2011-07-19
 
-　　2、更新内容：
-	  强制序列号设置；商品条形码扫描支持；
+    2、更新内容：
+    强制序列号设置；商品条形码扫描支持；
 
 
-　　3、数据库修改：
-					INSERT INTO `funcs` VALUES ('FC9916','强制序列号设置','强制序列号设置','openQzxlhRight.html','111.gif',10,'1','10');
-					
-					INSERT INTO `column_funcs` VALUES ('009003','FC9916');
-					
-					INSERT INTO `role_func` VALUES ('RL00000001','FC9916');
-					
-					---强制序列号设置
-					DROP TABLE IF EXISTS `qzxlh_right`;
-					CREATE TABLE `qzxlh_right` (
-					  `sp_flag` varchar(8) NOT NULL
-					) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-					
-					INSERT INTO `qzxlh_right` VALUES ('01');
-					
-					ALTER TABLE `kcpd_desc` ADD COLUMN `qz_serial_num` varchar(4000) default NULL  AFTER `remark`;
-					
-					update sys_user set zzzt='在职' where is_sys_user='0' and zzzt is null
-		 
-　　4、对应SVN版本号：962
+    3、数据库修改：
+          INSERT INTO `funcs` VALUES ('FC9916','强制序列号设置','强制序列号设置','openQzxlhRight.html','111.gif',10,'1','10');
+          
+          INSERT INTO `column_funcs` VALUES ('009003','FC9916');
+          
+          INSERT INTO `role_func` VALUES ('RL00000001','FC9916');
+          
+          ---强制序列号设置
+          DROP TABLE IF EXISTS `qzxlh_right`;
+          CREATE TABLE `qzxlh_right` (
+            `sp_flag` varchar(8) NOT NULL
+          ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+          
+          INSERT INTO `qzxlh_right` VALUES ('01');
+          
+          ALTER TABLE `kcpd_desc` ADD COLUMN `qz_serial_num` varchar(4000) default NULL  AFTER `remark`;
+          
+          update sys_user set zzzt='在职' where is_sys_user='0' and zzzt is null
+     
+    4、对应SVN版本号：962
 
-　　5、部署进度跟踪
-　　　  -------------------------------------------------------------------------------------------------
+    5、部署进度跟踪
+        -------------------------------------------------------------------------------------------------
            服务器帐套名称            |              帐套部署时间                       |    部署人员
         -------------------------------------------------------------------------------------------------
-　　　   保定思维                    |               2011-11-02                        |    李玉堂
-　　　   张家口升源                  |               2011-11-02                        |    李玉堂                                                  
-　　　   易县未来                    |               2011-11-03                        |    李玉堂                                
-　　　   定州创逸                    |               2011-11-25                        |    李玉堂                                                         　　　   保定博通                    |               2011-11-02                        |    李玉堂                             
-　　　   张家口金诺                  |               2011-11-02                        |    李玉堂     
-　　　   秦皇岛金恒生                |               2011-11-03                        |    李玉堂 
-　　　   秦皇岛市金宇高德            |               2011-10-02                        |    李玉堂                       
-　　　   承德扬天                    |               2011-10-02                        |    李玉堂                                                      
-　　　   北京银联合力                |               2011-11-25                        |    李玉堂      
+         保定思维                    |               2011-11-02                        |    李玉堂
+         张家口升源                  |               2011-11-02                        |    李玉堂                                                  
+         易县未来                    |               2011-11-03                        |    李玉堂                                
+         定州创逸                    |               2011-11-25                        |    李玉堂                                                                  保定博通                    |               2011-11-02                        |    李玉堂                             
+         张家口金诺                  |               2011-11-02                        |    李玉堂     
+         秦皇岛金恒生                |               2011-11-03                        |    李玉堂 
+         秦皇岛市金宇高德            |               2011-10-02                        |    李玉堂                       
+         承德扬天                    |               2011-10-02                        |    李玉堂                                                      
+         北京银联合力                |               2011-11-25                        |    李玉堂      
          保定戴尔                    |               2011-11-03                        |    李玉堂                           
          保定赫远                    |               2011-11-02                        |    李玉堂
          保定博通                    |               2011-11-02                        |    李玉堂                    
          华业阳光                    |               2011-11-20                        |    李玉堂             
          测试帐套                    |               2011-11-23                        |    李玉堂                                      
-　　　   高碑店骏腾                  |               不再使用                          |                                
+         高碑店骏腾                  |               不再使用                          |                                
          宝玉刀具                    |               不再使用                          |                                  
        ---------------------------------------------------------------------------------------------------                       
        
        
 思维EIP系统V1.05
-　　1、发布日期：2011-11-26
+    1、发布日期：2011-11-26
 
-　　2、更新内容：
-	  	商品维护修改：非叶子节点不允许添加商品；
-	  	采购订单多商品选择；调拨申请多商品选择；
-	  	添加了系统用户限制，部署帐套时可以设定最大允许的用户数量；
-	  	出纳付款增加了金额判断；
-	  	内部公告添加查询条件；
-	  	一般费用支出增加了金额判断；
-	  	摊销付款增加了金额判断；
+    2、更新内容：
+      商品维护修改：非叶子节点不允许添加商品；
+      采购订单多商品选择；调拨申请多商品选择；
+      添加了系统用户限制，部署帐套时可以设定最大允许的用户数量；
+      出纳付款增加了金额判断；
+      内部公告添加查询条件；
+      一般费用支出增加了金额判断；
+      摊销付款增加了金额判断；
 
-　　3、数据库修改：
-			update column_funcs set column_id='009002' where func_id='FC9916'
+    3、数据库修改：
+      update column_funcs set column_id='009002' where func_id='FC9916'
 
-		 
-　　4、对应SVN版本号：
+     
+    4、对应SVN版本号：
 
-　　5、部署进度跟踪
-　　　  -------------------------------------------------------------------------------------------------
+    5、部署进度跟踪
+        -------------------------------------------------------------------------------------------------
            服务器帐套名称            |              帐套部署时间                       |    部署人员
         -------------------------------------------------------------------------------------------------
-　　　   保定思维                    |              2011-12-05                         |      李玉堂                                     
-　　　   张家口升源                  |                                                 |                                          
-　　　   易县未来                    |                                                 |                                               
-　　　   定州创逸                    |                                                 |                                         
-　　　   张家口金诺                  |                                                 |                                                                 
-　　　   秦皇岛金恒生                |                                                 |                                                                     
-　　　   秦皇岛市金宇高德            |                                                 |                                                                
-　　　   承德扬天                    |                                                 |                                                                 
-　　　   北京银联合力                |                                                 |                                              
+         保定思维                    |              2011-12-05                         |      李玉堂                                     
+         张家口升源                  |                                                 |                                          
+         易县未来                    |                                                 |                                               
+         定州创逸                    |                                                 |                                         
+         张家口金诺                  |                                                 |                                                                 
+         秦皇岛金恒生                |                                                 |                                                                     
+         秦皇岛市金宇高德            |                                                 |                                                                
+         承德扬天                    |                                                 |                                                                 
+         北京银联合力                |                                                 |                                              
          保定戴尔                    |                                                 |                                                 
          保定赫远                    |              2011-12-14                         |      李玉堂                                  
          保定博通                    |              2011-12-14                         |      李玉堂                                
@@ -258,64 +258,64 @@
        
        
 思维EIP系统V1.06
-　　1、发布日期：2012-03-01
+    1、发布日期：2012-03-01
 
-　　2、更新内容：
-				1)增加仓库销售汇总；
-				2)增加序列号查询功能，原序列号查询改为序列号跟踪；
-				3)增加系列号盘点功能；
-				4)修改了前端未读消息轮询方式，降低了服务器的压力；
-				5)修改系统样式，针对IE9做了优化，目前系统可支持各类浏览器，推荐使用chrome和IE7以上版本；
+    2、更新内容：
+        1)增加仓库销售汇总；
+        2)增加序列号查询功能，原序列号查询改为序列号跟踪；
+        3)增加系列号盘点功能；
+        4)修改了前端未读消息轮询方式，降低了服务器的压力；
+        5)修改系统样式，针对IE9做了优化，目前系统可支持各类浏览器，推荐使用chrome和IE7以上版本；
 
-　　3、数据库修改：
-					2012-01-12修改
-					update funcs set func_name='序列号跟踪' where func_id='FC0056'
-					insert into funcs(func_id,func_name,func_ms,url,img,xh,ywflag,funcflag) values('FC9917','序列号查询','序列号查询','querySerialNum.html','102.gif','10','1','3')
-					INSERT INTO `column_funcs` VALUES ('003001','FC9917');
-					update sys_user set zzzt='在职' where is_sys_user='0' and zzzt is null
-					
-					2012-02-16更新
-					--商品交易信息中添加仓库列，并更新数据
-					ALTER TABLE `product_sale_flow` ADD COLUMN `store_id` VARCHAR(20) AFTER `xsry_dept`;
-					update product_sale_flow a inner join ckd b on a.id=b.xsd_id set a.store_id=b.store_id;
-					update product_sale_flow a inner join rkd b on  a.id=b.jhd_id set a.store_id=b.store_id;
-					----增加仓库销售汇总
-					INSERT INTO `funcs` VALUES ('FC9918','仓库销售汇总','仓库销售汇总','showStorexsHzCondition.html','199.gif',13,'1','3');
-					INSERT INTO `column_funcs` VALUES ('001002','FC9918');
-					
-					2012-03-01更新
-					--添加序列号盘点功能
-					INSERT INTO `funcs` VALUES ('FC9919','序列号盘点','序列号盘点','pdSerialNumCon.html','121.gif',14,'1','3');
-					INSERT INTO `column_funcs` VALUES ('003001','FC9919');
-					
-					--序列号盘点记录表
-					CREATE TABLE serial_num_pd (
-					  `id` INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
-					  `cdate` VARCHAR(45) NOT NULL,
-					  `jsr` VARCHAR(45) NOT NULL,
-					  `store_id` VARCHAR(45) NOT NULL,
-					  `cz_date` DATETIME NOT NULL,
-					  `pd_result` VARCHAR(400) NOT NULL,
-					  PRIMARY KEY(`id`)
-					)
-					ENGINE = InnoDB;
+    3、数据库修改：
+          2012-01-12修改
+          update funcs set func_name='序列号跟踪' where func_id='FC0056'
+          insert into funcs(func_id,func_name,func_ms,url,img,xh,ywflag,funcflag) values('FC9917','序列号查询','序列号查询','querySerialNum.html','102.gif','10','1','3')
+          INSERT INTO `column_funcs` VALUES ('003001','FC9917');
+          update sys_user set zzzt='在职' where is_sys_user='0' and zzzt is null
+          
+          2012-02-16更新
+          --商品交易信息中添加仓库列，并更新数据
+          ALTER TABLE `product_sale_flow` ADD COLUMN `store_id` VARCHAR(20) AFTER `xsry_dept`;
+          update product_sale_flow a inner join ckd b on a.id=b.xsd_id set a.store_id=b.store_id;
+          update product_sale_flow a inner join rkd b on  a.id=b.jhd_id set a.store_id=b.store_id;
+          ----增加仓库销售汇总
+          INSERT INTO `funcs` VALUES ('FC9918','仓库销售汇总','仓库销售汇总','showStorexsHzCondition.html','199.gif',13,'1','3');
+          INSERT INTO `column_funcs` VALUES ('001002','FC9918');
+          
+          2012-03-01更新
+          --添加序列号盘点功能
+          INSERT INTO `funcs` VALUES ('FC9919','序列号盘点','序列号盘点','pdSerialNumCon.html','121.gif',14,'1','3');
+          INSERT INTO `column_funcs` VALUES ('003001','FC9919');
+          
+          --序列号盘点记录表
+          CREATE TABLE serial_num_pd (
+            `id` INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+            `cdate` VARCHAR(45) NOT NULL,
+            `jsr` VARCHAR(45) NOT NULL,
+            `store_id` VARCHAR(45) NOT NULL,
+            `cz_date` DATETIME NOT NULL,
+            `pd_result` VARCHAR(400) NOT NULL,
+            PRIMARY KEY(`id`)
+          )
+          ENGINE = InnoDB;
 
-		 
-　　4、对应SVN版本号：1118
+     
+    4、对应SVN版本号：1118
 
-　　5、部署进度跟踪
-　　　  -------------------------------------------------------------------------------------------------
+    5、部署进度跟踪
+        -------------------------------------------------------------------------------------------------
            服务器帐套名称            |              帐套部署时间                       |    部署人员
         -------------------------------------------------------------------------------------------------
-　　　   保定思维                    |              2012-03-01                         |     李玉堂                                     
-　　　   张家口升源                  |                                                 |                                          
-　　　   易县未来                    |                                                 |                                               
-　　　   定州创逸                    |                                                 |                                         
-　　　   张家口金诺                  |                                                 |                                                                 
-　　　   秦皇岛金恒生                |                                                 |                                                                     
-　　　   秦皇岛市金宇高德            |              2012-03-31                         |     李玉堂                                                        
-　　　   承德扬天                    |                                                 |                                                                 
-　　　   北京银联合力                |                                                 |                                              
+         保定思维                    |              2012-03-01                         |     李玉堂                                     
+         张家口升源                  |                                                 |                                          
+         易县未来                    |                                                 |                                               
+         定州创逸                    |                                                 |                                         
+         张家口金诺                  |              2012-04-23                         |     李玉堂                                                            
+         秦皇岛金恒生                |                                                 |                                                                     
+         秦皇岛市金宇高德            |              2012-03-31                         |     李玉堂                                                        
+         承德扬天                    |                                                 |                                                                 
+         北京银联合力                |                                                 |                                              
          保定戴尔                    |                                                 |                                                 
          保定赫远                    |                                                 |                                         
          保定博通                    |                                                 |                                     
@@ -327,3 +327,77 @@
          思维售后                    |              2012-04-08                         |     李玉堂       
          石家庄三个帐套（单独服务器）|                                                 |                                               
        ---------------------------------------------------------------------------------------------------                                                                                                                            
+
+
+
+思维EIP系统V1.07
+    1、发布日期：2012-06-06
+
+    2、更新内容：
+        1)采购添加税点；
+        2)添加客户销售毛利汇总功能；
+        3)修改销决策分析售报表毛利计算错误；
+
+    3、数据库修改：
+
+      2012-05-29更新
+      --添加采购税点设置表
+      CREATE TABLE cgsd(
+        `cgsd` DOUBLE DEFAULT 0
+      )
+      ENGINE = InnoDB;
+      
+      --添加采购税点设置功能
+      INSERT INTO `funcs` VALUES ('FC9920','设置采购税点','设置采购税点','editCgsd.html','121.gif',5,'1','10');
+      INSERT INTO `column_funcs` VALUES ('009002','FC9920');
+      
+      ALTER TABLE jhd_product ADD COLUMN `sd` DOUBLE AFTER `sjcj_nums`,
+       ADD COLUMN `hsje` DOUBLE AFTER `sd`,
+       ADD COLUMN `bhsje` DOUBLE AFTER `hsje`,
+       ADD COLUMN `sje` DOUBLE AFTER `bhsje`;
+      
+      ALTER TABLE jhd ADD COLUMN `hjsje` DOUBLE AFTER `ysws`,
+       ADD COLUMN `hjbhsje` DOUBLE AFTER `hjsje`;
+       
+       update jhd set hjsje=0,hjbhsje=total;
+      UPDATE jhd_product SET sd=0,hsje=price*nums,bhsje=price*nums,sje=0;
+      
+      ALTER TABLE rkd_product ADD COLUMN `sd` DOUBLE AFTER `qz_serial_num`,
+       ADD COLUMN `hsje` DOUBLE AFTER `sd`,
+       ADD COLUMN `bhsje` DOUBLE AFTER `hsje`,
+       ADD COLUMN `sje` DOUBLE AFTER `bhsje`;
+      
+       update rkd_product set sd=0.0,hsje=price*nums,bhsje=price*nums,sje=0.0;
+       
+       2012-06-06更新
+       --添加客户销售毛利汇总
+      INSERT INTO `funcs` VALUES ('FC9921','客户销售毛利汇总','客户销售毛利汇总','showXstjClientMlCondition.html','121.gif',12,'1','1');
+      INSERT INTO `column_funcs` VALUES ('001003','FC9921');
+
+     
+    4、对应SVN版本号：
+
+    5、部署进度跟踪
+        -------------------------------------------------------------------------------------------------
+           服务器帐套名称            |              帐套部署时间                       |    部署人员
+        -------------------------------------------------------------------------------------------------
+         保定思维                    |              2012-06-05                         |     李玉堂                                     
+         张家口升源                  |                                                 |                                          
+         易县未来                    |                                                 |                                               
+         定州创逸                    |                                                 |                                         
+         张家口金诺                  |                                                 |                                                              
+         秦皇岛金恒生                |                                                 |                                                                     
+         秦皇岛市金宇高德            |                                                 |                                                                
+         承德扬天                    |                                                 |                                                                 
+         北京银联合力                |                                                 |                                              
+         保定戴尔                    |                                                 |                                                 
+         保定赫远                    |                                                 |                                         
+         保定博通                    |                                                 |                                     
+         华业阳光                    |                                                 |                                            
+         测试帐套                    |                                                 |                                   
+         曲阳大河                    |                                                 |                                              
+         蠡县一加一                  |                                                 |                        
+         承德惠普（CDHP）            |                                                 |                                         
+         思维售后                    |                                                 |                         
+         石家庄三个帐套（单独服务器）|                                                 |                                               
+       ---------------------------------------------------------------------------------------------------          

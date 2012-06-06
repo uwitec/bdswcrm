@@ -89,8 +89,10 @@ if(!product_kind.equals("")){
 			<TD class=ReportHead>商品规格</TD>
 			<TD class=ReportHead>数量</TD>
 			<TD class=ReportHead>金额</TD>
+			<TD class=ReportHead>不含税金额</TD>
 			<TD class=ReportHead>成本</TD>
 			<TD class=ReportHead>毛利</TD>		
+			<TD class=ReportHead>毛利率</TD>		
 		</TR>
 	</THEAD>
 	<TBODY>
@@ -99,6 +101,7 @@ int hj_nums = 0;
 double hj_je = 0;
 double hj_ml = 0;
 double hj_cb = 0;   //合计成本
+double hj_bhsje = 0;
 if(resultList != null && resultList.size()>0){
 	for(int i=0;i<resultList.size();i++){
 		Map map = (Map)resultList.get(i);
@@ -108,6 +111,7 @@ if(resultList != null && resultList.size()>0){
 		double je = map.get("hjje")==null?0:((Double)map.get("hjje")).doubleValue();
 		String strNums = StringUtils.nullToStr(map.get("nums"));
 		double cb = map.get("hjcb")==null?0:((Double)map.get("hjcb")).doubleValue(); //成本
+		double bhsje = map.get("bhsje")==null?0:((Double)map.get("bhsje")).doubleValue(); //成本
 		int nums = 0;
 		if(!strNums.equals("")){
 			nums = new Integer(strNums).intValue();
@@ -116,12 +120,12 @@ if(resultList != null && resultList.size()>0){
 		if(prop.equals("服务/劳务")){ //如果是服务/劳务类商品，成本价为0
 			cb = 0;
 		}
-		double ml = je - cb;
+		double ml = bhsje - cb;
 		hj_nums += nums;
 		hj_je += je;
 		hj_ml += ml;
 		hj_cb += cb;
-		
+		hj_bhsje += bhsje;
 %>
 		<TR>
 			<TD class=ReportItemXh><%=product_id %>&nbsp;</TD>
@@ -129,8 +133,10 @@ if(resultList != null && resultList.size()>0){
 			<TD class=ReportItem><%=StringUtils.nullToStr(map.get("product_xh")) %>&nbsp;</TD>
 			<TD class=ReportItemMoney><%=nums %>&nbsp;</TD>
 			<TD class=ReportItemMoney><%=JMath.round(je,2) %>&nbsp;</TD>
+			<TD class=ReportItemMoney><%=JMath.round(bhsje,2) %>&nbsp;</TD>
 			<TD class=ReportItemMoney><%=JMath.round(cb,2) %>&nbsp;</TD>
 			<TD class=ReportItemMoney><%=JMath.round(ml,2) %>&nbsp;</TD>
+			<TD class=ReportItemMoney ><%=JMath.percent(ml,bhsje) %>&nbsp;</TD>
 		</TR>
 	
 <%
@@ -143,8 +149,10 @@ if(resultList != null && resultList.size()>0){
 			<TD class=ReportItem>&nbsp;</TD>
 			<TD class=ReportItemMoney style="font-weight:bold"><%=hj_nums %>&nbsp;</TD>
 			<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(hj_je,2) %>&nbsp;</TD>
+			<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(hj_bhsje,2) %>&nbsp;</TD>
 			<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(hj_cb,2) %>&nbsp;</TD>
 			<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(hj_ml,2) %>&nbsp;</TD>
+			<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.percent(hj_ml,hj_bhsje) %>&nbsp;</TD>
 		</TR>
 		
 	</TBODY>
@@ -152,7 +160,7 @@ if(resultList != null && resultList.size()>0){
 <br>
 <table width="99%">
 		<tr>
-			<td width="70%" height="30">注：点击商品名称可查看原始单据列表。</td>
+			<td width="70%" height="30">注：毛利 = 不含税金额 - 成本；毛利率 = 毛利 / 不含税金额 * 100%；点击商品名称可查看原始单据列表。</td>
 			<td colspan="2" align="right" height="30">生成报表时间：<%=DateComFunc.getToday() %>&nbsp;&nbsp;&nbsp;</td>
 		</tr>
 </table>

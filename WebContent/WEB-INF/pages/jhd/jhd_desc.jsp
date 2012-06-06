@@ -35,19 +35,22 @@ List results = (List)VS.findValue("jhdProducts");
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td colspan="2">采购定单商品明细</td>
+		<td colspan="2">采购订单商品明细</td>
 	</tr>
 	</thead>
 </table>
 <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0" border="1" id="selTable">
 	<thead>
 	<tr>
-		<td width="15%">商品编号</td>
-		<td width="30%">商品名称</td>
-		<td width="25%">规格</td>
-		<td width="10%">采购价格</td>
-		<td width="10%">数量</td>
-		<td width="10%">小计</td>
+		<td width="12%">商品编号</td>
+		<td width="20%">商品名称</td>
+		<td width="20%">规格</td>
+		<td width="8%">单价</td>
+		<td width="8%">数量</td>
+		<td width="8%">含税金额</td>
+		<td width="8%">税点</td>
+		<td width="8%">税额</td>
+		<td width="8%">不含税金额</td>
 	</tr>
 	</thead>
 	<%
@@ -61,8 +64,11 @@ List results = (List)VS.findValue("jhdProducts");
 		<td align="left"><%=StringUtils.nullToStr(jhdProduct.getProduct_name()) %></td>
 		<td align="left"><%=StringUtils.nullToStr(jhdProduct.getProduct_xh()) %></td>
 		<td align="right"><%=JMath.round(jhdProduct.getPrice(),2) %></td>
-		<td><%=StringUtils.nullToStr(jhdProduct.getNums()) %></td>
-		<td align="right"><%=JMath.round(jhdProduct.getPrice()*jhdProduct.getNums(),2) %></td>
+		<td align="center"><%=StringUtils.nullToStr(jhdProduct.getNums()) %></td>
+		<td align="right"><%=JMath.round(jhdProduct.getHsje(),2) %></td>
+		<td align="right"><%=JMath.round(jhdProduct.getSd()) %></td>
+		<td align="right"><%=JMath.round(jhdProduct.getSje(),2) %></td>
+		<td align="right"><%=JMath.round(jhdProduct.getBhsje(),2) %></td>
 	</tr>
 	
 	<%

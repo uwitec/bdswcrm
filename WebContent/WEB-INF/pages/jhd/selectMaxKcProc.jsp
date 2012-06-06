@@ -97,18 +97,24 @@ List kindList = (List)VS.findValue("kindList");
 					var xh = window.opener.document.getElementById("product_xh_"+k);
 					var name = window.opener.document.getElementById("product_name_"+k);
 					var pc = window.opener.document.getElementById("price_"+k);
+					var nums = window.opener.document.getElementById("nums_"+k);
 				
 				
 					id.value = arryStr[0];
 					xh.value = arryStr[1];
 					name.value = arryStr[2];
 					pc.value = arryStr[3];
+					nums.value = "1";
 					
 					k++;	
 				}	
 			}
 
 		}
+		
+		try{
+			window.opener.hj();
+		}catch(E){}
 		
 		if(sel_flag == "2"){
 			window.close();

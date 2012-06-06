@@ -126,3 +126,36 @@ CREATE TABLE serial_num_pd (
   PRIMARY KEY(`id`)
 )
 ENGINE = InnoDB;
+
+
+2012-05-29更新
+--添加采购税点设置表
+CREATE TABLE cgsd(
+  `cgsd` DOUBLE DEFAULT 0
+)
+ENGINE = InnoDB;
+
+--添加采购税点设置功能
+INSERT INTO `funcs` VALUES ('FC9920','设置采购税点','设置采购税点','editCgsd.html','121.gif',5,'1','10');
+INSERT INTO `column_funcs` VALUES ('009002','FC9920');
+
+ALTER TABLE jhd_product ADD COLUMN `sd` DOUBLE AFTER `sjcj_nums`,
+ ADD COLUMN `hsje` DOUBLE AFTER `sd`,
+ ADD COLUMN `bhsje` DOUBLE AFTER `hsje`,
+ ADD COLUMN `sje` DOUBLE AFTER `bhsje`;
+
+ALTER TABLE jhd ADD COLUMN `hjsje` DOUBLE AFTER `ysws`,
+ ADD COLUMN `hjbhsje` DOUBLE AFTER `hjsje`;
+ 
+ update jhd set hjsje=0,hjbhsje=total;
+UPDATE jhd_product SET sd=0,hsje=price*nums,bhsje=price*nums,sje=0;
+
+ALTER TABLE rkd_product ADD COLUMN `sd` DOUBLE AFTER `qz_serial_num`,
+ ADD COLUMN `hsje` DOUBLE AFTER `sd`,
+ ADD COLUMN `bhsje` DOUBLE AFTER `hsje`,
+ ADD COLUMN `sje` DOUBLE AFTER `bhsje`;
+
+ update rkd_product set sd=0.0,hsje=price*nums,bhsje=price*nums,sje=0.0;
+ 
+ INSERT INTO `funcs` VALUES ('FC9921','客户销售毛利汇总','客户销售毛利汇总','showXstjClientMlCondition.html','121.gif',12,'1','1');
+INSERT INTO `column_funcs` VALUES ('001003','FC9921');

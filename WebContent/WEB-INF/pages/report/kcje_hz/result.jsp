@@ -61,14 +61,16 @@ if(!product_kind.equals("")){
 			<TD class=ReportHead rowspan="2">日期</TD>
 			<TD class=ReportHead rowspan="2">业务类型</TD>
 			<TD class=ReportHead rowspan="2">单据编号</TD>
-			<TD class=ReportHead colspan="3">入库</TD>
+			<TD class=ReportHead colspan="4">入库</TD>
 			<TD class=ReportHead colspan="3">出库</TD>
 			<TD class=ReportHead colspan="3">结存</TD>
 		</TR>
 		<TR>
 			<TD class=ReportHead>数量</TD>
 			<TD class=ReportHead>单价</TD>
-			<TD class=ReportHead>金额</TD>
+			<TD class=ReportHead>税点</TD>
+			<TD class=ReportHead>不含税金额</TD>
+			
 			<TD class=ReportHead>数量</TD>
 			<TD class=ReportHead>单价</TD>
 			<TD class=ReportHead>金额</TD>
@@ -133,6 +135,7 @@ if(productKcList != null && productKcList.size()>0){
 			<TD class=ReportItemMoney>&nbsp;</TD>
 			<TD class=ReportItemMoney>&nbsp;</TD>
 			<TD class=ReportItemMoney>&nbsp;</TD>
+			<TD class=ReportItemMoney>&nbsp;</TD>
 			
 			<TD class=ReportItemMoney>&nbsp;</TD>
 			<TD class=ReportItemMoney>&nbsp;</TD>
@@ -167,6 +170,10 @@ if(productKcList != null && productKcList.size()>0){
 				
 				int fs_nums = new Integer(StringUtils.nullToStr(fsMap.get("nums"))).intValue();
 				double fs_price = fsMap.get("price")==null?0:((Double)fsMap.get("price")).doubleValue();
+				
+				double sd = fsMap.get("sd")==null?0:((Double)fsMap.get("sd")).doubleValue();
+				double bhsje = fsMap.get("bhsje")==null?0:((Double)fsMap.get("bhsje")).doubleValue();
+				
 				double fs_cb = Amount.cheng(fs_price , fs_nums);
 				
 				String type= "";  //业务类型
@@ -219,10 +226,10 @@ if(productKcList != null && productKcList.size()>0){
 				if(fsFlag.equals("入库")){
 					rk_nums += fs_nums;
 					if(!type.equals("盘点报溢")){
-						rk_cbhj += fs_cb;
+						rk_cbhj += bhsje;
 						
 						jc_nums += fs_nums;
-						jc_cb += fs_cb;
+						jc_cb += bhsje;
 						
 						jc_dwcb = jc_cb/jc_nums;
 					}else{						
@@ -235,12 +242,16 @@ if(productKcList != null && productKcList.size()>0){
 						jc_cb += fs_cb;
 						
 						jc_dwcb = jc_cb/jc_nums;
+						
+						sd = 0;
+						bhsje = fs_cb;
 					}
 
 				%>	
 					<TD class=ReportItemMoney><%=fs_nums %>&nbsp;</TD>
 					<TD class=ReportItemMoney><%=JMath.round(fs_price,2) %>&nbsp;</TD>
-					<TD class=ReportItemMoney><%=JMath.round(fs_cb,2) %>&nbsp;</TD>
+					<TD class=ReportItemMoney><%=JMath.round(sd) %>&nbsp;</TD>
+					<TD class=ReportItemMoney><%=JMath.round(bhsje,2) %>&nbsp;</TD>
 					
 					<TD class=ReportItemMoney>&nbsp;</TD>
 					<TD class=ReportItemMoney>&nbsp;</TD>
@@ -257,6 +268,7 @@ if(productKcList != null && productKcList.size()>0){
 					jc_nums -= fs_nums;
 					jc_cb = jc_dwcb * jc_nums;
 				%>
+					<TD class=ReportItemMoney>&nbsp;</TD>
 					<TD class=ReportItemMoney>&nbsp;</TD>
 					<TD class=ReportItemMoney>&nbsp;</TD>
 					<TD class=ReportItemMoney>&nbsp;</TD>
@@ -287,6 +299,7 @@ if(productKcList != null && productKcList.size()>0){
 			
 			<TD class=ReportItemMoney style="font-weight:bold"><%=rk_nums %>&nbsp;</TD>
 			<TD class=ReportItemMoney style="font-weight:bold">&nbsp;</TD>
+			<TD class=ReportItemMoney style="font-weight:bold">&nbsp;</TD>
 			<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(rk_cbhj,2) %>&nbsp;</TD>
 			
 			<TD class=ReportItemMoney style="font-weight:bold"><%=ck_nums %>&nbsp;</TD>
@@ -300,27 +313,8 @@ if(productKcList != null && productKcList.size()>0){
 <%
 	}
 }
-%><!--
-		<TR>
-			<TD class=ReportItem>&nbsp;</TD>
-			<TD class=ReportItem>&nbsp;</TD>		
-			<TD class=ReportItem>&nbsp;</TD>
-			<TD class=ReportItem>&nbsp;</TD>			
-			<TD class=ReportItemXh style="font-weight:bold">合计&nbsp;</TD>
-			
-			<TD class=ReportItemMoney style="font-weight:bold">&nbsp;</TD>
-			<TD class=ReportItemMoney style="font-weight:bold">&nbsp;</TD>
-			<TD class=ReportItemMoney style="font-weight:bold">&nbsp;</TD>
-			
-			<TD class=ReportItemMoney style="font-weight:bold">&nbsp;</TD>
-			<TD class=ReportItemMoney style="font-weight:bold">&nbsp;</TD>
-			<TD class=ReportItemMoney style="font-weight:bold">&nbsp;</TD>
-			
-			<TD class=ReportItemMoney style="font-weight:bold">&nbsp;</TD>
-			<TD class=ReportItemMoney style="font-weight:bold">&nbsp;</TD>
-			<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(kczz,2) %>&nbsp;</TD>						
-		</TR>
-	--></TBODY>
+%>
+	</TBODY>
 </TABLE>
 <br>
 <table width="99%">
