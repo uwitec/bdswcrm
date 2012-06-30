@@ -49,7 +49,7 @@ public class SerialNumDAO extends JdbcBaseDAO {
 	 */
 	public boolean chkSerialNum(String serial_num){
 		boolean is = false;
-		String sql = "select * from serial_num_mng where serial_num='" + serial_num + "'";
+		String sql = "select * from serial_num_mng where serial_num='" + serial_num.trim() + "'";
 		List list = this.getResultList(sql);
 		if(list != null && list.size()>0){
 			is = true;
@@ -118,7 +118,7 @@ public class SerialNumDAO extends JdbcBaseDAO {
 	 * @param store_id
 	 */
 	public void updateSerialNumStore(String serial_num,String store_id){
-		String sql = "update serial_num_mng set store_id='" + store_id + "' where serial_num='" + serial_num + "'";
+		String sql = "update serial_num_mng set store_id='" + store_id + "' where serial_num='" + serial_num.trim() + "'";
 		this.getJdbcTemplate().update(sql);
 	}
 	
@@ -129,7 +129,7 @@ public class SerialNumDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public SerialNumMng editSerialNumMng(String serial_num){
-		String sql = "select * from serial_num_mng where serial_num='" + serial_num + "'";
+		String sql = "select * from serial_num_mng where serial_num='" + serial_num.trim() + "'";
 		return (SerialNumMng)this.queryForObject(sql, new SerialNumMngMapper());
 	}
 	
@@ -138,7 +138,7 @@ public class SerialNumDAO extends JdbcBaseDAO {
 	 * @param serial_num
 	 */
 	public void delSerialNum(String serial_num){
-		String sql = "delete from serial_num_mng where serial_num='" + serial_num + "'";
+		String sql = "delete from serial_num_mng where serial_num='" + serial_num.trim() + "'";
 		this.getJdbcTemplate().update(sql);
 	}
 	
@@ -174,7 +174,7 @@ public class SerialNumDAO extends JdbcBaseDAO {
 	 */
 	public Object getXsRecord(String num)
 	{
-		String sql="select seq_id,serial_num,ywtype,yw_dj_id from serial_num_flow where seq_id=(select max(seq_id) from serial_num_flow where serial_num='"+num+"' group by serial_num)";
+		String sql="select seq_id,serial_num,ywtype,yw_dj_id from serial_num_flow where seq_id=(select max(seq_id) from serial_num_flow where serial_num='"+num.trim()+"' group by serial_num)";
 		return this.getResultMap(sql);
 	}
 	
@@ -187,7 +187,7 @@ public class SerialNumDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public List getSerialFlow(String serial_num){
-		String sql = "select * from serial_num_flow where serial_num='" + serial_num + "' order by cz_date asc";
+		String sql = "select * from serial_num_flow where serial_num='" + serial_num.trim() + "' order by cz_date asc";
 		return this.getResultList(sql);
 	}
 	
@@ -199,7 +199,7 @@ public class SerialNumDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public Map getSerialState(String serial_num){
-		String sql = "select * from serial_num_mng where serial_num='" + serial_num + "'";
+		String sql = "select * from serial_num_mng where serial_num='" + serial_num.trim() + "'";
 		return this.getResultMap(sql);
 	}
 	
@@ -210,7 +210,7 @@ public class SerialNumDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public Map getProductBySerialNum(String serial_num){
-		String sql = "select b.* from serial_num_mng a left join product b on b.product_id=a.product_id where a.state='在库' and a.serial_num='" + serial_num + "'";
+		String sql = "select b.* from serial_num_mng a left join product b on b.product_id=a.product_id where a.state='在库' and a.serial_num='" + serial_num.trim() + "'";
 		return this.getResultMap(sql);
 	}
 	
@@ -222,7 +222,7 @@ public class SerialNumDAO extends JdbcBaseDAO {
 	public boolean getSerialNumState(String product_id,String store_id,String serialNum){		
 		boolean is = false;
 		
-		String sql = "select count(*) as counts from serial_num_mng where product_id='"+product_id+"' and store_id='"+store_id+"' and serial_num='"+serialNum+"' and state='在库'";
+		String sql = "select count(*) as counts from serial_num_mng where product_id='"+product_id+"' and store_id='"+store_id+"' and serial_num='"+serialNum.trim()+"' and state='在库'";
 		int counts = this.getJdbcTemplate().queryForInt(sql);
 		
 		if(counts > 0){
@@ -240,7 +240,7 @@ public class SerialNumDAO extends JdbcBaseDAO {
 	public boolean getSerialNumStateXs(String product_id,String store_id,String serialNum){
 		boolean is = false;
 		
-		String sql = "select count(*) as counts from serial_num_mng where product_id='"+product_id+"'  and serial_num='"+serialNum+"' and state='已售'";
+		String sql = "select count(*) as counts from serial_num_mng where product_id='"+product_id+"'  and serial_num='"+serialNum.trim()+"' and state='已售'";
 		int counts = this.getJdbcTemplate().queryForInt(sql);
 		
 		if(counts > 0){

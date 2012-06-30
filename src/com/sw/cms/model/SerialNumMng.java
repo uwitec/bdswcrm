@@ -37,7 +37,7 @@ public class SerialNumMng {
 		this.seq_id = seq_id;
 	}
 	public String getSerial_num() {
-		return serial_num;
+		return serial_num.trim();
 	}
 	public void setSerial_num(String serial_num) {
 		this.serial_num = serial_num;
