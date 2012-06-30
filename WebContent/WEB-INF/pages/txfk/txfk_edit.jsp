@@ -81,12 +81,12 @@
        
         var otd2 = document.createElement("td");
         otd2.className = "a2";
-        otd2.innerHTML = '<input type="text" name="txfkDescs[' + curId + '].je" id="je_' + curId + '" value="" theme="simple" style="width:90%"/>';
+        otd2.innerHTML = '<input type="text" name="txfkDescs[' + curId + '].je" id="je_' + curId + '" value="" theme="simple" style="width:90%;text-align:right"/>';
         
         
         var otd3 = document.createElement("td");
         otd3.className = "a2";
-        otd3.innerHTML = '<input type="text"  name="txfkDescs[' + curId + '].remark" id="remark_' + curId + '" value="" theme="simple" style="width:90%"/>';        
+        otd3.innerHTML = '<input type="text"  name="txfkDescs[' + curId + '].remark" id="remark_' + curId + '" value="" theme="simple" style="width:90%;text-align:right"/>';        
         
         otr.appendChild(otd0); 
         otr.appendChild(otd1); 
@@ -188,7 +188,7 @@
 	<tr>
 		<td class="a2"><ww:property value="#li.count"/></td>
 		<td class="a2"><ww:textfield name='txfkDescs[%{#li.count-1}].txrq' id='txrq_%{#li.count-1}' value="%{txrq}" theme="simple" cssStyle="width:90%"/></td>
-		<td class="a2"><ww:textfield name='txfkDescs[%{#li.count-1}].je' id='je_%{#li.count-1}' value="%{getText('global.format.double',{je})}" theme="simple"  cssStyle="width:90%"/></td>
+		<td class="a2"><ww:textfield name='txfkDescs[%{#li.count-1}].je' id='je_%{#li.count-1}' value="%{getText('global.format.double',{je})}" theme="simple"  cssStyle="width:90%;text-align:right"/></td>
 		<td class="a2"><ww:textfield name='txfkDescs[%{#li.count-1}].remark' id='remark_%{#li.count-1}' value="%{remark}" theme="simple"  cssStyle="width:90%"/></td>
 	</tr>	
 	</ww:iterator>
@@ -197,7 +197,7 @@
 	<tr>
 		<td class="a2">1</td>
 		<td class="a2"><ww:textfield name="txfkDescs[0].txrq" id="txrq_0" value="" theme="simple"  readonly="true" cssStyle="width:90%"/></td>
-		<td class="a2"><ww:textfield name="txfkDescs[0].je" id="je_0" value="" theme="simple" cssStyle="width:90%"/></td>
+		<td class="a2"><ww:textfield name="txfkDescs[0].je" id="je_0" value="" theme="simple" cssStyle="width:90%;text-align:right"/></td>
 		<td class="a2"><ww:textfield name="txfkDescs[0].remark" id="remark_0" value="" theme="simple" cssStyle="width:90%"/></td>
 	</tr>	
 	</ww:else>	

@@ -157,5 +157,12 @@ ALTER TABLE rkd_product ADD COLUMN `sd` DOUBLE AFTER `qz_serial_num`,
 
  update rkd_product set sd=0.0,hsje=price*nums,bhsje=price*nums,sje=0.0;
  
+ 2012-06-06修改
+ --添加客户销售毛利汇总功能
  INSERT INTO `funcs` VALUES ('FC9921','客户销售毛利汇总','客户销售毛利汇总','showXstjClientMlCondition.html','121.gif',12,'1','1');
-INSERT INTO `column_funcs` VALUES ('001003','FC9921');
+ INSERT INTO `column_funcs` VALUES ('001003','FC9921');
+ 
+ 2012-06-07修改
+ --序列号去掉首尾空格
+ update serial_num_mng set serial_num=trim(serial_num) where serial_num like '% %';
+ update serial_num_flow set serial_num=trim(serial_num) where serial_num like '% %';

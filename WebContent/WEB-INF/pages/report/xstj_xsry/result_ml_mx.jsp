@@ -66,20 +66,20 @@ if(!product_name.equals("")){
 <TABLE align="center" class="stripe" cellSpacing=0 cellPadding=0 width="99%" border=0 style="BORDER-TOP: #000000 2px solid;BORDER-LEFT:#000000 1px solid">
 	<THEAD>
 		<TR>
-			<TD class=ReportHead>日期</TD>
-			<TD class=ReportHead>单据号</TD>
+			<TD class=ReportHead nowrap="nowrap">日期</TD>
+			<TD class=ReportHead nowrap="nowrap">单据号</TD>
 			<TD class=ReportHead nowrap="nowrap">业务类型</TD>
-			<TD class=ReportHead>客户</TD>
-			<TD class=ReportHead>商品名称</TD>
-			<TD class=ReportHead>型号</TD>
+			<TD class=ReportHead nowrap="nowrap">客户</TD>
+			<TD class=ReportHead nowrap="nowrap">商品名称</TD>
+			<TD class=ReportHead nowrap="nowrap">型号</TD>
 			<TD class=ReportHead nowrap="nowrap">数量</TD>
-			<TD class=ReportHead>单价</TD>
-			<TD class=ReportHead>销售金额</TD>		
-			<TD class=ReportHead>不含税金额</TD>	
-			<TD class=ReportHead>单位成本</TD>
-			<TD class=ReportHead>成本</TD>			
-			<TD class=ReportHead>毛利</TD>	
-			<TD class=ReportHead>毛利率</TD>	
+			<TD class=ReportHead nowrap="nowrap">单价</TD>
+			<TD class=ReportHead nowrap="nowrap">金额</TD>		
+			<TD class=ReportHead nowrap="nowrap">不含税金额</TD>	
+			<TD class=ReportHead nowrap="nowrap">单位成本</TD>
+			<TD class=ReportHead nowrap="nowrap">成本</TD>			
+			<TD class=ReportHead nowrap="nowrap">毛利</TD>	
+			<TD class=ReportHead nowrap="nowrap">毛利率</TD>	
 		</TR>
 	</THEAD>
 	<TBODY>
@@ -121,7 +121,7 @@ if(results != null && results.size()>0){
 		double bhsje = map.get("bhsje")==null?0:((Double)map.get("bhsje")).doubleValue(); //不含税金额
 		double dwcb = map.get("dwcb")==null?0:((Double)map.get("dwcb")).doubleValue(); //单位考核成本
 		double cb = map.get("cb")==null?0:((Double)map.get("cb")).doubleValue(); //考核成本
-		double ml = xsje - cb;
+		double ml = bhsje - cb;
 		
 		hj_nums += nums;
 		hj_xsje += xsje;
@@ -143,7 +143,7 @@ if(results != null && results.size()>0){
 			<TD class=ReportItemMoney nowrap><%=JMath.round(dwcb,2) %>&nbsp;</TD>
 			<TD class=ReportItemMoney nowrap><%=JMath.round(cb,2) %>&nbsp;</TD>
 			<TD class=ReportItemMoney nowrap><%=JMath.round(ml,2) %>&nbsp;</TD>
-			<TD class=ReportItemMoney nowrap><%=JMath.percent(ml,xsje) %>&nbsp;</TD>
+			<TD class=ReportItemMoney nowrap><%=JMath.percent(ml,bhsje) %>&nbsp;</TD>
 		</TR>
 <%								
 	}
@@ -162,7 +162,7 @@ if(results != null && results.size()>0){
 			<TD class=ReportItemMoney>&nbsp;</TD>
 			<TD class=ReportItemMoney nowrap><%=JMath.round(hj_cb,2) %>&nbsp;</TD>
 			<TD class=ReportItemMoney nowrap><%=JMath.round(hj_ml,2) %>&nbsp;</TD>
-			<TD class=ReportItemMoney nowrap><%=JMath.percent(hj_ml,hj_xsje) %>&nbsp;</TD>
+			<TD class=ReportItemMoney nowrap><%=JMath.percent(hj_ml,hj_bhsje) %>&nbsp;</TD>
 		</TR>
 <%
 }
@@ -173,7 +173,7 @@ if(results != null && results.size()>0){
 <br>
 <table width="99%">
 		<tr>
-			<td width="70%" height="30">注：毛利 = 销售金额 - 成本；毛利率 = 毛利 / 销售金额 * 100%；点击单据编号可以查看原始单据。</td>
+			<td width="70%" height="30">注：毛利 = 不含税金额 - 成本；毛利率 = 毛利 / 不含税金额 * 100%。</td>
 			<td colspan="3" align="right" height="30">生成报表时间：<%=DateComFunc.getToday() %>&nbsp;&nbsp;&nbsp;</td>
 		</tr>
 </table>

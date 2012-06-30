@@ -163,7 +163,7 @@ if(results != null && results.size()>0){
 			<TD class=ReportItemMoney>&nbsp;</TD>
 			<TD class=ReportItemMoney nowrap><%=JMath.round(hj_khcb,2) %>&nbsp;</TD>
 			<TD class=ReportItemMoney nowrap><%=JMath.round(hj_ml,2) %>&nbsp;</TD>
-			<TD class=ReportItemMoney nowrap><%=JMath.percent(hj_ml,hj_khcb) %>&nbsp;</TD>
+			<TD class=ReportItemMoney nowrap><%=JMath.percent(hj_ml,hj_bhsje) %>&nbsp;</TD>
 		</TR>
 <%
 }
@@ -174,7 +174,7 @@ if(results != null && results.size()>0){
 <br>
 <table width="99%">
 		<tr>
-			<td width="70%" height="30">注：考核毛利 = 不含税金额 - 考核成本；考核毛利率 = 考核毛利 / 不含税金额 * 100%；点击单据编号可以查看原始单据。</td>
+			<td width="70%" height="30">注：考核毛利 = 不含税金额 - 考核成本；考核毛利率 = 考核毛利 / 不含税金额 * 100%。</td>
 			<td colspan="3" align="right" height="30">生成报表时间：<%=DateComFunc.getToday() %>&nbsp;&nbsp;&nbsp;</td>
 		</tr>
 </table>

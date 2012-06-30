@@ -156,11 +156,11 @@ if(cgthdProducts != null && cgthdProducts.size()>0){
         
         var otd2 = document.createElement("td");
         otd2.className = "a2";
-        otd2.innerHTML = '<input type="text" id="th_price_'+curId+'" style="width:90%" name="cgthdProducts['+curId+'].th_price" size="10" value="0.00" onblur="hj();;">';
+        otd2.innerHTML = '<input type="text" id="th_price_'+curId+'" style="width:90%;text-align: right" name="cgthdProducts['+curId+'].th_price" size="10" value="0.00" onblur="hj();;">';
         
         var otd3 = document.createElement("td");
         otd3.className = "a2";
-        otd3.innerHTML = '<input type="text" id="nums_'+curId+'" style="width:90%" name="cgthdProducts['+curId+'].nums" size="5" value="0" onblur="hj();">';
+        otd3.innerHTML = '<input type="text" id="nums_'+curId+'" style="width:90%;text-align:center" name="cgthdProducts['+curId+'].nums" size="5" value="0" onblur="hj();">';
         
 		var otd7 = document.createElement("td");
 		otd7.className = "a2";
@@ -169,7 +169,7 @@ if(cgthdProducts != null && cgthdProducts.size()>0){
        
         var otd4 = document.createElement("td");
         otd4.className = "a2";
-        otd4.innerHTML = '<input type="text" id="xj_'+curId+'" name="cgthdProducts['+curId+'].xj" style="width:90%" size="10" value="0.00" readonly>';  
+        otd4.innerHTML = '<input type="text" id="xj_'+curId+'" name="cgthdProducts['+curId+'].xj" style="width:90%;text-align: right" size="10" value="0.00" readonly>';  
         
 
         otr.appendChild(otd); 
@@ -414,13 +414,13 @@ if(cgthdProducts != null && cgthdProducts.size()>0){
 			<input type="hidden" id="product_id_<%=i %>" name="cgthdProducts[<%=i %>].product_id" value="<%=StringUtils.nullToStr(cgthdProduct.getProduct_id()) %>" >
 		</td>
 		<td class="a2"><input type="text" style="width:90%" id="product_xh_<%=i %>" name="cgthdProducts[<%=i %>].product_xh" size="10" value="<%=StringUtils.nullToStr(cgthdProduct.getProduct_xh()) %>" readonly></td>
-		<td class="a2"><input type="text" style="width:90%" id="th_price_<%=i %>" name="cgthdProducts[<%=i %>].th_price" size="10" value="<%=JMath.round(cgthdProduct.getTh_price()) %>" onblur="hj();"></td>
-		<td class="a2"><input type="text" style="width:90%" id="nums_<%=i %>" name="cgthdProducts[<%=i %>].nums" value="<%=cgthdProduct.getNums() %>" size="5" onblur="hj();"></td>
+		<td class="a2"><input type="text" style="width:90%;text-align: right" id="th_price_<%=i %>" name="cgthdProducts[<%=i %>].th_price" size="10" value="<%=JMath.round(cgthdProduct.getTh_price()) %>" onblur="hj();"></td>
+		<td class="a2"><input type="text" style="width:90%;text-align:center" id="nums_<%=i %>" name="cgthdProducts[<%=i %>].nums" value="<%=cgthdProduct.getNums() %>" size="5" onblur="hj();"></td>
 		<td class="a2">
 			<input type="text" id="qz_serial_num_<%=i %>" name="cgthdProducts[<%=i %>].qz_serial_num" value="<%=StringUtils.nullToStr(cgthdProduct.getQz_serial_num()) %>" size="15" readonly>
 			<input type="hidden" id="qz_flag_<%=i %>" name="cgthdProducts[<%=i %>].qz_flag" value="<%=StringUtils.nullToStr(cgthdProduct.getQz_flag()) %>"><a style="cursor:hand" title="左键点击输入输列号" onclick="openSerialWin('<%=i %>');"><b>...</b></a>&nbsp;
 		</td>		
-		<td class="a2"><input type="text" style="width:90%" id="xj_<%=i %>" name="cgthdProducts[<%=i %>].xj" value="<%=JMath.round(cgthdProduct.getXj()) %>" size="10" readonly></td>
+		<td class="a2"><input type="text" style="width:90%;text-align: right" id="xj_<%=i %>" name="cgthdProducts[<%=i %>].xj" value="<%=JMath.round(cgthdProduct.getXj()) %>" size="10" readonly></td>
 	</tr>
 <%		
 	}
@@ -434,13 +434,13 @@ if(cgthdProducts != null && cgthdProducts.size()>0){
 			<input type="hidden" id="product_id_<%=i %>" name="cgthdProducts[<%=i %>].product_id">
 		</td>
 		<td class="a2"><input style="width:90%" type="text" id="product_xh_<%=i %>" name="cgthdProducts[<%=i %>].product_xh" size="10" readonly></td>
-		<td class="a2"><input style="width:90%" type="text" id="th_price_<%=i %>" name="cgthdProducts[<%=i %>].th_price" size="10" value="0.00" onblur="hj();"></td>
-		<td class="a2"><input style="width:90%" type="text" id="nums_<%=i %>" name="cgthdProducts[<%=i %>].nums" value="0" size="5" onblur="hj();"></td>
+		<td class="a2"><input style="width:90%;text-align: right" type="text" id="th_price_<%=i %>" name="cgthdProducts[<%=i %>].th_price" size="10" value="0.00" onblur="hj();"></td>
+		<td class="a2"><input style="width:90%;text-align:center" type="text" id="nums_<%=i %>" name="cgthdProducts[<%=i %>].nums" value="0" size="5" onblur="hj();"></td>
 		<td class="a2">
 			<input type="text" id="qz_serial_num_<%=i %>" name="cgthdProducts[<%=i %>].qz_serial_num" size="15" readonly>
 			<input type="hidden" id="qz_flag_<%=i %>" name="cgthdProducts[<%=i %>].qz_flag"><a style="cursor:hand" title="左键点击输入输列号" onclick="openSerialWin('<%=i %>');"><b>...</b></a>&nbsp;
 		</td>		
-		<td class="a2"><input type="text" style="width:90%" id="xj_<%=i %>" name="cgthdProducts[<%=i %>].xj" value="0.00" size="10" readonly></td>
+		<td class="a2"><input type="text" style="width:90%;text-align: right" id="xj_<%=i %>" name="cgthdProducts[<%=i %>].xj" value="0.00" size="10" readonly></td>
 	</tr>
 <%
 	}

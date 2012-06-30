@@ -111,7 +111,7 @@ if(resultList != null && resultList.size()>0){
 		double je = map.get("hjje")==null?0:((Double)map.get("hjje")).doubleValue();
 		String strNums = StringUtils.nullToStr(map.get("nums"));
 		double cb = map.get("hjcb")==null?0:((Double)map.get("hjcb")).doubleValue(); //成本
-		double bhsje = map.get("bhsje")==null?0:((Double)map.get("bhsje")).doubleValue(); //成本
+		double bhsje = map.get("bhsje")==null?0:((Double)map.get("bhsje")).doubleValue(); //不含税金额
 		int nums = 0;
 		if(!strNums.equals("")){
 			nums = new Integer(strNums).intValue();

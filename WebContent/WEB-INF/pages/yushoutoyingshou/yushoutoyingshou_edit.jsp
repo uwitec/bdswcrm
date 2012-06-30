@@ -224,8 +224,8 @@ if(yushouToYingshouDescs != null && yushouToYingshouDescs.size()>0){
 %>
 	<tr>
 		<td class="a2"><input type="text" style="width:90%" id="xsd_id_<%=i %>" name="yushouToYingshouDescs[<%=i %>].xsd_id" value="<%=StringUtils.nullToStr(info.getXsd_id()) %>" readonly></td>
-		<td class="a2"><input type="text" style="width:90%" id="yingshouje_<%=i %>" name="yushouToYingshouDescs[<%=i %>].yingshouje" value="<%=JMath.round(info.getYingshouje()) %>" readonly></td>
-		<td class="a2"><input type="text" style="width:90%" id="bcjs_<%=i %>" name="yushouToYingshouDescs[<%=i %>].bcjs" value="<%=JMath.round(info.getBcjs()) %>" onblur="hj();"></td>
+		<td class="a2"><input type="text" style="width:90%;text-align:right" id="yingshouje_<%=i %>" name="yushouToYingshouDescs[<%=i %>].yingshouje" value="<%=JMath.round(info.getYingshouje()) %>" readonly></td>
+		<td class="a2"><input type="text" style="width:90%;text-align:right" id="bcjs_<%=i %>" name="yushouToYingshouDescs[<%=i %>].bcjs" value="<%=JMath.round(info.getBcjs()) %>" onblur="hj();"></td>
 		<td class="a2"><input type="text" style="width:90%" id="remark_<%=i %>" name="yushouToYingshouDescs[<%=i %>].remark" value="<%=StringUtils.nullToStr(info.getRemark()) %>"></td>	
 	</tr>
 <%
@@ -235,8 +235,8 @@ if(yushouToYingshouDescs != null && yushouToYingshouDescs.size()>0){
 %>
 	<tr>
 		<td class="a2"><input type="text" style="width:90%" id="xsd_id_<%=i %>" name="yushouToYingshouDescs[<%=i %>].xsd_id" value="" readonly></td>
-		<td class="a2"><input type="text" style="width:90%" id="yingshouje_<%=i %>" name="yushouToYingshouDescs[<%=i %>].yingshouje" value="0.00" readonly></td>
-		<td class="a2"><input type="text" style="width:90%" id="bcjs_<%=i %>" name="yushouToYingshouDescs[<%=i %>].bcjs" value="0.00" onblur="hj();"></td>
+		<td class="a2"><input type="text" style="width:90%;text-align:right" id="yingshouje_<%=i %>" name="yushouToYingshouDescs[<%=i %>].yingshouje" value="0.00" readonly></td>
+		<td class="a2"><input type="text" style="width:90%;text-align:right" id="bcjs_<%=i %>" name="yushouToYingshouDescs[<%=i %>].bcjs" value="0.00" onblur="hj();"></td>
 		<td class="a2"><input type="text" style="width:90%" id="remark_<%=i %>" name="yushouToYingshouDescs[<%=i %>].remark"  value="" readonly></td>
 	</tr>
 <%
@@ -245,8 +245,8 @@ if(yushouToYingshouDescs != null && yushouToYingshouDescs.size()>0){
 %>	
 	<tr>
 		<td class="a2">合  计</td>
-		<td class="a2"><input type="text" style="width:90%" id="hj_yingshouje" name="hj_yingshouje" value="<%=JMath.round(hj_yingshouje) %>" readonly></td>
-		<td class="a2"><input type="text" style="width:90%" id="total" name="yushouToYingshou.total" value="<%=JMath.round(hj_bcjs) %>" readonly></td>
+		<td class="a2"><input type="text" style="width:90%;text-align:right" id="hj_yingshouje" name="hj_yingshouje" value="<%=JMath.round(hj_yingshouje) %>" readonly></td>
+		<td class="a2"><input type="text" style="width:90%;text-align:right" id="total" name="yushouToYingshou.total" value="<%=JMath.round(hj_bcjs) %>" readonly></td>
 		<td class="a2"></td>	
 	</tr>	
 </table>

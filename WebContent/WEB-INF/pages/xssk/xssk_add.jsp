@@ -385,9 +385,9 @@ if(xsskDescs != null && xsskDescs.size()>0){
 	<tr>
 		<td class="a2"><input type="text" style="width:90%" id="xsd_id_<%=i %>" name="xsskDescs[<%=i %>].xsd_id" value="<%=StringUtils.nullToStr(map.get("xsd_id")) %>" readonly></td>
 		<td class="a2"><input type="text" style="width:90%" id="fsrq_<%=i %>" name="xsskDescs[<%=i %>].fsrq" value="<%=StringUtils.nullToStr(map.get("fsrq")) %>" readonly></td>
-		<td class="a2"><input type="text" style="width:90%" id="fsje_<%=i %>" name="xsskDescs[<%=i %>].fsje" value="<%=JMath.round(fsje) %>" readonly></td>
-		<td class="a2"><input type="text" style="width:90%" id="ysk_<%=i %>" name="xsskDescs[<%=i %>].ysk"  value="<%=JMath.round(ysk) %>" readonly></td>
-		<td class="a2"><input type="text" style="width:90%" id="bcsk_<%=i %>" name="xsskDescs[<%=i %>].bcsk" value="<%=JMath.round(bcsk) %>"  onblur="hj();"></td>
+		<td class="a2"><input type="text" style="width:90%;text-align: right;" id="fsje_<%=i %>" name="xsskDescs[<%=i %>].fsje" value="<%=JMath.round(fsje) %>" readonly></td>
+		<td class="a2"><input type="text" style="width:90%;text-align: right;" id="ysk_<%=i %>" name="xsskDescs[<%=i %>].ysk"  value="<%=JMath.round(ysk) %>" readonly></td>
+		<td class="a2"><input type="text" style="width:90%;text-align: right;" id="bcsk_<%=i %>" name="xsskDescs[<%=i %>].bcsk" value="<%=JMath.round(bcsk) %>"  onblur="hj();"></td>
 	</tr>
 <%
 	}
@@ -397,9 +397,9 @@ if(xsskDescs != null && xsskDescs.size()>0){
 	<tr>
 		<td class="a2"><input type="text" style="width:90%" id="xsd_id_<%=i %>" name="xsskDescs[<%=i %>].xsd_id" value="" readonly></td>
 		<td class="a2"><input type="text" style="width:90%" id="fsrq_<%=i %>" name="xsskDescs[<%=i %>].fsrq" value="" readonly></td>
-		<td class="a2"><input type="text" style="width:90%" id="fsje_<%=i %>" name="xsskDescs[<%=i %>].fsje" value="0.00" readonly></td>
-		<td class="a2"><input type="text" style="width:90%" id="ysk_<%=i %>" name="xsskDescs[<%=i %>].yfje"  value="0.00" readonly></td>
-		<td class="a2"><input type="text" style="width:90%" id="bcsk_<%=i %>" name="xsskDescs[<%=i %>].bcsk" value="0.00" readonly onblur="hj();"></td>
+		<td class="a2"><input type="text" style="width:90%;text-align: right;" id="fsje_<%=i %>" name="xsskDescs[<%=i %>].fsje" value="0.00" readonly></td>
+		<td class="a2"><input type="text" style="width:90%;text-align: right;" id="ysk_<%=i %>" name="xsskDescs[<%=i %>].yfje"  value="0.00" readonly></td>
+		<td class="a2"><input type="text" style="width:90%;text-align: right;" id="bcsk_<%=i %>" name="xsskDescs[<%=i %>].bcsk" value="0.00" readonly onblur="hj();"></td>
 	</tr>
 <%
 	}
@@ -408,9 +408,9 @@ if(xsskDescs != null && xsskDescs.size()>0){
 	<tr>
 		<td class="a2">合  计</td>
 		<td class="a2"></td>
-		<td class="a2"><input type="text" style="width:90%" id="hj_fsje" name="hj_fsje" value="<%=JMath.round(hj_fsje) %>" readonly></td>
-		<td class="a2"><input type="text" style="width:90%" id="hj_ysk" name="hj_ysk"  value="<%=JMath.round(hj_ysk) %>" readonly></td>
-		<td class="a2"><input type="text" style="width:90%" id="hj_bcsk" name="hj_bcsk" value="<%=JMath.round(hj_bcsk) %>" readonly></td>
+		<td class="a2"><input type="text" style="width:90%;text-align: right;" id="hj_fsje" name="hj_fsje" value="<%=JMath.round(hj_fsje) %>" readonly></td>
+		<td class="a2"><input type="text" style="width:90%;text-align: right;" id="hj_ysk" name="hj_ysk"  value="<%=JMath.round(hj_ysk) %>" readonly></td>
+		<td class="a2"><input type="text" style="width:90%;text-align: right;" id="hj_bcsk" name="hj_bcsk" value="<%=JMath.round(hj_bcsk) %>" readonly></td>
 	</tr>
 	 <%
 	 String cssStyle = "readonly";

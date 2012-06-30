@@ -82,7 +82,7 @@ Dbsq dbsq = (Dbsq)VS.findValue("dbsq");
         
         var otd3 = document.createElement("td");
         otd3.className = "a2";
-        otd3.innerHTML = '<input type="text" id="nums_'+curId+'" name="dbsqProducts['+curId+'].nums" style="width:90%" value="0">';
+        otd3.innerHTML = '<input type="text" id="nums_'+curId+'" name="dbsqProducts['+curId+'].nums" style="width:90%;text-align:center" value="0">';
         
         var otd5 = document.createElement("td");
         otd5.className = "a2";
@@ -126,7 +126,7 @@ Dbsq dbsq = (Dbsq)VS.findValue("dbsq");
 	}     
 
 	
-	function openWin(id){  //与退货单使用一个商品选择
+	function openWin(){  //与退货单使用一个商品选择
 		var destination = "selThdProcMx.html";
 		var fea ='width=850,height=500,left=' + (screen.availWidth-850)/2 + ',top=' + (screen.availHeight-500)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
@@ -222,7 +222,7 @@ for(int i=0;i<3;i++){
 			<input type="hidden" id="product_id_<%=i %>" name="dbsqProducts[<%=i %>].product_id">
 		</td>
 		<td class="a2"><input type="text" id="product_xh_<%=i %>" name="dbsqProducts[<%=i %>].product_xh" style="width:90%" readonly></td>
-		<td class="a2"><input type="text" id="nums_<%=i %>" name="dbsqProducts[<%=i %>].nums" value="0" style="width:90%"></td>
+		<td class="a2"><input type="text" id="nums_<%=i %>" name="dbsqProducts[<%=i %>].nums" value="0" style="width:90%;text-align:center"></td>
 		<td class="a2"><input type="text" id="remark_<%=i %>" name="dbsqProducts[<%=i %>].remark" maxlength="50" style="width:90%"></td>
 	</tr>
 <%

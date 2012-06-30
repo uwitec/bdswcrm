@@ -115,19 +115,19 @@
         
         var otd4 = document.createElement("td");
         otd4.className = "a2";
-        otd4.innerHTML = '<input type="text" name="cxdProducts[' + curId + '].price" value="0.00" onblur="hj();" id="price_' + curId + '" style="width:90%"/>';               
+        otd4.innerHTML = '<input type="text" name="cxdProducts[' + curId + '].price" value="0.00" onblur="hj();" id="price_' + curId + '" style="width:90%;text-align:right"/>';               
         
         var otd5 = document.createElement("td");
         otd5.className = "a2";
-        otd5.innerHTML = '<input type="text" name="cxdProducts[' + curId + '].nums" value="0" onblur="hj();" id="nums_' + curId + '" style="width:90%"/>';                       
+        otd5.innerHTML = '<input type="text" name="cxdProducts[' + curId + '].nums" value="0" onblur="hj();" id="nums_' + curId + '" style="width:90%;text-align:center"/>';                       
 
         var otd6 = document.createElement("td");
         otd6.className = "a2";
-        otd6.innerHTML = '<input type="text" name="cxdProducts[' + curId + '].hj" value="0.00" readonly="readonly" id="hj_' + curId + '" style="width:90%"/>';    
+        otd6.innerHTML = '<input type="text" name="cxdProducts[' + curId + '].hj" value="0.00" readonly="readonly" id="hj_' + curId + '" style="width:90%;text-align:right"/>';    
         
         var otd7 = document.createElement("td");
         otd7.className = "a2";
-        otd7.innerHTML = '<input type="text" name="cxdProducts[' + curId + '].qz_serial_num" value="" id="qz_serial_num_' + curId + '" style="width:80%"/><input type="hidden" id="qz_flag_' + curId + '" name="cxdProducts[' + curId + '].qz_flag" value=""><a style="cursor:hand" title="左键点击输入输列号" onclick="openSerialWin(' + curId + ');"><b>...</b></a>';            
+        otd7.innerHTML = '<input type="text" name="cxdProducts[' + curId + '].qz_serial_num" value="" id="qz_serial_num_' + curId + '" style="width:80%" onclick="openSerialWin(' + curId + ');" readonly/> <input type="hidden" id="qz_flag_' + curId + '" name="cxdProducts[' + curId + '].qz_flag" value=""><a style="cursor:hand" title="左键点击输入输列号" onclick="openSerialWin(' + curId + ');"><b>...</b></a>';            
 
         var otd8 = document.createElement("td");
         otd8.className = "a2";
@@ -404,11 +404,11 @@
 		</td>
 		<td class="a2"><ww:textfield name='cxdProducts[%{#li.count-1}].product_xh' id='product_xh_%{#li.count-1}' value="%{product_xh}" theme="simple" cssStyle="width:90%" readonly="true"/></td>
 		<td class="a2"><ww:textfield name='cxdProducts[%{#li.count-1}].product_dw' id='product_dw_%{#li.count-1}' value="%{product_dw}" theme="simple" cssStyle="width:90%" readonly="true"/></td>
-		<td class="a2"><ww:textfield name='cxdProducts[%{#li.count-1}].price' id='price_%{#li.count-1}' value="%{getText('global.format.double',{price})}" onblur="hj();" theme="simple" cssStyle="width:90%"/></td>
-		<td class="a2"><ww:textfield name='cxdProducts[%{#li.count-1}].nums' id='nums_%{#li.count-1}' value="%{nums}" onblur="hj();" theme="simple" cssStyle="width:90%"/></td>
-		<td class="a2"><ww:textfield name='cxdProducts[%{#li.count-1}].hj' id='hj_%{#li.count-1}' value="%{getText('global.format.double',{hj})}" theme="simple" cssStyle="width:90%" readonly="true"/></td>
+		<td class="a2"><ww:textfield name='cxdProducts[%{#li.count-1}].price' id='price_%{#li.count-1}' value="%{getText('global.format.double',{price})}" onblur="hj();" theme="simple" cssStyle="width:90%;text-align:right"/></td>
+		<td class="a2"><ww:textfield name='cxdProducts[%{#li.count-1}].nums' id='nums_%{#li.count-1}' value="%{nums}" onblur="hj();" theme="simple" cssStyle="width:90%;text-align:center"/></td>
+		<td class="a2"><ww:textfield name='cxdProducts[%{#li.count-1}].hj' id='hj_%{#li.count-1}' value="%{getText('global.format.double',{hj})}" theme="simple" cssStyle="width:90%;text-align:right" readonly="true"/></td>
 		<td class="a2">
-			<ww:textfield name='cxdProducts[%{#li.count-1}].qz_serial_num' id='qz_serial_num_%{#li.count-1}' value="%{qz_serial_num}" theme="simple" cssStyle="width:80%" readonly="true"/>
+			<ww:textfield name='cxdProducts[%{#li.count-1}].qz_serial_num' id='qz_serial_num_%{#li.count-1}' value="%{qz_serial_num}" theme="simple" cssStyle="width:80%" readonly="true"  onclick="openSerialWin('%{#li.count-1}');"/>
 			<ww:hidden id="qz_flag_%{#li.count-1}" name="cxdProducts[%{#li.count-1}].qz_flag" value="%{qz_flag}"/><a style="cursor:hand" title="左键点击输入输列号" onclick="openSerialWin('<ww:property value="%{#li.count-1}"/>');"><b>...</b></a>
 		</td>
 		<td class="a2"><ww:textfield name='cxdProducts[%{#li.count-1}].remark' id='remark_%{#li.count-1}' value="%{remark}" theme="simple" cssStyle="width:90%"/></td>
@@ -424,11 +424,11 @@
 		</td>
 		<td class="a2"><ww:textfield name='cxdProducts[0].product_xh' id='product_xh_0' value="" theme="simple" cssStyle="width:90%" readonly="true"/></td>
 		<td class="a2"><ww:textfield name='cxdProducts[0].product_dw' id='product_dw_0' value="" theme="simple" cssStyle="width:90%" readonly="true"/></td>
-		<td class="a2"><ww:textfield name='cxdProducts[0].price' id='price_0' value="0.00" onblur="hj();" theme="simple" cssStyle="width:90%"/></td>
-		<td class="a2"><ww:textfield name='cxdProducts[0].nums' id='nums_0' value="0" onblur="hj();" theme="simple" cssStyle="width:90%"/></td>
-		<td class="a2"><ww:textfield name='cxdProducts[0].hj' id='hj_0' value="0.00" theme="simple" cssStyle="width:90%" readonly="true"/></td>
+		<td class="a2"><ww:textfield name='cxdProducts[0].price' id='price_0' value="0.00" onblur="hj();" theme="simple" cssStyle="width:90%;text-align:right"/></td>
+		<td class="a2"><ww:textfield name='cxdProducts[0].nums' id='nums_0' value="0" onblur="hj();" theme="simple" cssStyle="width:90%;text-align:center"/></td>
+		<td class="a2"><ww:textfield name='cxdProducts[0].hj' id='hj_0' value="0.00" theme="simple" cssStyle="width:90%;text-align:right" readonly="true"/></td>
 		<td class="a2">
-			<ww:textfield name='cxdProducts[0].qz_serial_num' id='qz_serial_num_0' value="" theme="simple" cssStyle="width:80%"/>
+			<ww:textfield name='cxdProducts[0].qz_serial_num' id='qz_serial_num_0' value="" theme="simple" cssStyle="width:80%" readonly="true"  onclick="openSerialWin('0');"/>
 			<input type="hidden" id="qz_flag_0" name="cxdProducts[0].qz_flag" value=""><a style="cursor:hand" title="左键点击输入输列号" onclick="openSerialWin('0');"><b>...</b></a>
 		</td>
 		<td class="a2"><ww:textfield name='cxdProducts[0].remark' id='remark_0' value="" theme="simple" cssStyle="width:90%"/></td>
@@ -442,8 +442,8 @@
 		<td class="a2"  width="15%">&nbsp;</td>
 		<td class="a2"  width="8%">&nbsp;</td>
 		<td class="a2"  width="10%">&nbsp;</td>
-		<td class="a2"  width="8%"><input type="text" name="hj_nums" id="hj_nums" value="0" readonly style="width:90%"></td>
-		<td class="a2"  width="10%"><input type="text" name="hj_je" id="hj_je" value="0.00" readonly style="width:90%"></td>
+		<td class="a2"  width="8%"><input type="text" name="hj_nums" id="hj_nums" value="0" readonly style="width:90%;text-align:center"></td>
+		<td class="a2"  width="10%"><input type="text" name="hj_je" id="hj_je" value="0.00" readonly style="width:90%;text-align:right"></td>
 		<td class="a2"  width="15%">&nbsp;</td>
 		<td class="a2"  width="9%">&nbsp;</td>
 	</tr>

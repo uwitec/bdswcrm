@@ -331,12 +331,13 @@
 
 
 思维EIP系统V1.07
-    1、发布日期：2012-06-06
+    1、发布日期：2012-06-07
 
     2、更新内容：
         1)采购添加税点；
         2)添加客户销售毛利汇总功能；
         3)修改销决策分析售报表毛利计算错误；
+        4)修改序列号首尾添加空格后造成的问题；
 
     3、数据库修改：
 
@@ -374,6 +375,10 @@
       INSERT INTO `funcs` VALUES ('FC9921','客户销售毛利汇总','客户销售毛利汇总','showXstjClientMlCondition.html','121.gif',12,'1','1');
       INSERT INTO `column_funcs` VALUES ('001003','FC9921');
 
+      2012-06-07更新
+      --序列号去掉首尾空格
+      update serial_num_mng set serial_num=trim(serial_num) where serial_num like '% %';
+      update serial_num_flow set serial_num=trim(serial_num) where serial_num like '% %';
      
     4、对应SVN版本号：
 

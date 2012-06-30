@@ -165,19 +165,19 @@ if(thdProducts != null && thdProducts.size()>0){
         
         var otd2 = document.createElement("td");
         otd2.className = "a2";
-        otd2.innerHTML = '<input type="text" id="th_price_'+curId+'" name="thdProducts['+curId+'].th_price" style="width:90%" value="0.00" onblur="hj();"><input type="hidden" id="cbj_'+curId+'" name="thdProducts['+curId+'].cbj" value="0.00"><input type="hidden" id="kh_cbj_'+curId+'" name="thdProducts['+curId+'].kh_cbj" value="0.00"><input type="hidden" id="sd_'+curId+'" name="thdProducts['+curId+'].sd"  value="0.00"><input type="hidden" id="gf_'+curId+'" name="thdProducts['+curId+'].gf"  value="0.00"><input type="hidden" id="ds_'+curId+'" name="thdProducts['+curId+'].ds"  value="0.00"><input type="hidden" id="basic_ratio_'+curId+'" name="thdProducts['+curId+'].basic_ratio"  value="0.00"><input type="hidden" id="out_ratio_'+curId+'" name="thdProducts['+curId+'].out_ratio"  value="0.00"><input type="hidden" id="lsxj_'+curId+'" name="thdProducts['+curId+'].lsxj"  value="0.00"><input type="hidden" id="ygcbj_'+curId+'" name="thdProducts['+curId+'].ygcbj"  value="0.00"><input type="hidden" id="sfcytc_'+curId+'" name="thdProducts['+curId+'].sfcytc"  value="">';
+        otd2.innerHTML = '<input type="text" id="th_price_'+curId+'" name="thdProducts['+curId+'].th_price" style="width:90%;text-align:right" value="0.00" onblur="hj();"><input type="hidden" id="cbj_'+curId+'" name="thdProducts['+curId+'].cbj" value="0.00"><input type="hidden" id="kh_cbj_'+curId+'" name="thdProducts['+curId+'].kh_cbj" value="0.00"><input type="hidden" id="sd_'+curId+'" name="thdProducts['+curId+'].sd"  value="0.00"><input type="hidden" id="gf_'+curId+'" name="thdProducts['+curId+'].gf"  value="0.00"><input type="hidden" id="ds_'+curId+'" name="thdProducts['+curId+'].ds"  value="0.00"><input type="hidden" id="basic_ratio_'+curId+'" name="thdProducts['+curId+'].basic_ratio"  value="0.00"><input type="hidden" id="out_ratio_'+curId+'" name="thdProducts['+curId+'].out_ratio"  value="0.00"><input type="hidden" id="lsxj_'+curId+'" name="thdProducts['+curId+'].lsxj"  value="0.00"><input type="hidden" id="ygcbj_'+curId+'" name="thdProducts['+curId+'].ygcbj"  value="0.00"><input type="hidden" id="sfcytc_'+curId+'" name="thdProducts['+curId+'].sfcytc"  value="">';
         
         var otd3 = document.createElement("td");
         otd3.className = "a2";
-        otd3.innerHTML = '<input type="text" id="nums_'+curId+'" name="thdProducts['+curId+'].nums" style="width:90%" value="0" onblur="hj();">';
+        otd3.innerHTML = '<input type="text" id="nums_'+curId+'" name="thdProducts['+curId+'].nums" style="width:90%;text-align:center" value="0" onblur="hj();">';
         
 		var otd7 = document.createElement("td");
 		otd7.className = "a2";
-		otd7.innerHTML = '<input type="text" id="qz_serial_num_'+curId+'" name="thdProducts['+curId+'].qz_serial_num" style="width:120px" readonly><input type="hidden" id="qz_flag_'+curId+'" name="thdProducts['+curId+'].qz_flag"><a style="cursor:hand" title="点击输入序列号" onclick="openSerialWin('+ curId +');"><b>...</b></a>&nbsp;';               
+		otd7.innerHTML = '<input type="text" id="qz_serial_num_'+curId+'" name="thdProducts['+curId+'].qz_serial_num" style="width:120px" readonly  onclick="openSerialWin('+ curId +');"><input type="hidden" id="qz_flag_'+curId+'" name="thdProducts['+curId+'].qz_flag"><a style="cursor:hand" title="点击输入序列号" onclick="openSerialWin('+ curId +');"><b>...</b></a>&nbsp;';               
         
         var otd4 = document.createElement("td");
         otd4.className = "a2";
-        otd4.innerHTML = '<input type="text" id="xj_'+curId+'" name="thdProducts['+curId+'].xj" style="width:90%" value="0.00" readonly>';  
+        otd4.innerHTML = '<input type="text" id="xj_'+curId+'" name="thdProducts['+curId+'].xj" style="width:90%;text-align:right" value="0.00" readonly>';  
         
         otr.appendChild(otd); 
         otr.appendChild(otd0); 
@@ -543,7 +543,7 @@ if(thdProducts!=null && thdProducts.size()>0){
 		</td>
 		<td class="a2"><input type="text" id="product_xh_<%=i %>" name="thdProducts[<%=i %>].product_xh" style="width:90%" value="<%=StringUtils.nullToStr(thdProduct.getProduct_xh()) %>" readonly></td>
 		<td class="a2">
-			<input type="text" id="th_price_<%=i %>" name="thdProducts[<%=i %>].th_price" style="width:90%" value="<%=JMath.round(thdProduct.getTh_price()) %>" onblur="hj();">
+			<input type="text" id="th_price_<%=i %>" name="thdProducts[<%=i %>].th_price" style="width:90%;text-align:right" value="<%=JMath.round(thdProduct.getTh_price()) %>" onblur="hj();">
 			<input type="hidden" id="cbj_<%=i %>" name="thdProducts[<%=i %>].cbj" value="<%=JMath.round(thdProduct.getCbj()) %>">
 			<input type="hidden" id="kh_cbj_<%=i %>" name="thdProducts[<%=i %>].kh_cbj" value="<%=JMath.round(thdProduct.getKh_cbj()) %>">
 			
@@ -556,12 +556,12 @@ if(thdProducts!=null && thdProducts.size()>0){
 			<input type="hidden" id="ygcbj_<%=i %>" name="thdProducts[<%=i %>].ygcbj"  value="<%=JMath.round(thdProduct.getYgcbj()) %>">
 			<input type="hidden" id="sfcytc_<%=i %>" name="thdProducts[<%=i %>].sfcytc"  value="<%=StringUtils.nullToStr(thdProduct.getSfcytc()) %>">				
 		</td>
-		<td class="a2"><input type="text" id="nums_<%=i %>" name="thdProducts[<%=i %>].nums" style="width:90%" value="<%=StringUtils.nullToStr(thdProduct.getNums()) %>" onblur="hj();"></td>
+		<td class="a2"><input type="text" id="nums_<%=i %>" name="thdProducts[<%=i %>].nums" style="width:90%;text-align:center" value="<%=StringUtils.nullToStr(thdProduct.getNums()) %>" onblur="hj();"></td>
 		<td class="a2">
-			<input type="text" id="qz_serial_num_<%=i %>" name="thdProducts[<%=i %>].qz_serial_num" value="<%=StringUtils.nullToStr(thdProduct.getQz_serial_num()) %>" style="width:120px" readonly>
+			<input type="text" id="qz_serial_num_<%=i %>" name="thdProducts[<%=i %>].qz_serial_num" value="<%=StringUtils.nullToStr(thdProduct.getQz_serial_num()) %>" style="width:120px" readonly onclick="openSerialWin('<%=i %>');">
 			<input type="hidden" id="qz_flag_<%=i %>" name="thdProducts[<%=i %>].qz_flag" value="<%=StringUtils.nullToStr(thdProduct.getQz_flag()) %>"><a style="cursor:hand" title="左键点击输入输列号" onclick="openSerialWin('<%=i %>');"><b>...</b></a>&nbsp;
 		</td>		
-		<td class="a2"><input type="text" id="xj_<%=i %>" name="thdProducts[<%=i %>].xj" style="width:90%" value="<%=JMath.round(thdProduct.getXj()) %>" readonly></td>
+		<td class="a2"><input type="text" id="xj_<%=i %>" name="thdProducts[<%=i %>].xj" style="width:90%;text-align:right" value="<%=JMath.round(thdProduct.getXj()) %>" readonly></td>
 	</tr>
 <%
 	}
@@ -576,7 +576,7 @@ if(thdProducts!=null && thdProducts.size()>0){
 		</td>
 		<td class="a2"><input type="text" id="product_xh_<%=i %>" name="thdProducts[<%=i %>].product_xh" style="width:90%" size="10" readonly></td>
 		<td class="a2">
-			<input type="text" id="th_price_<%=i %>" name="thdProducts[<%=i %>].th_price" style="width:90%" value="0.00" onblur="hj();">
+			<input type="text" id="th_price_<%=i %>" name="thdProducts[<%=i %>].th_price" style="width:90%;text-align:right" value="0.00" onblur="hj();">
 			<input type="hidden" id="cbj_<%=i %>" name="thdProducts[<%=i %>].cbj"  value="0.00">
 			<input type="hidden" id="kh_cbj_<%=i %>" name="thdProducts[<%=i %>].kh_cbj"  value="0.00">
 			
@@ -589,12 +589,12 @@ if(thdProducts!=null && thdProducts.size()>0){
 			<input type="hidden" id="ygcbj_<%=i %>" name="thdProducts[<%=i %>].ygcbj"  value="0.00">
 			<input type="hidden" id="sfcytc_<%=i %>" name="thdProducts[<%=i %>].sfcytc"  value="">				
 		</td>
-		<td class="a2"><input type="text" id="nums_<%=i %>" name="thdProducts[<%=i %>].nums" value="0" style="width:90%" onblur="hj();"></td>
+		<td class="a2"><input type="text" id="nums_<%=i %>" name="thdProducts[<%=i %>].nums" value="0" style="width:90%;text-align:center" onblur="hj();"></td>
 		<td class="a2">
-			<input type="text" id="qz_serial_num_<%=i %>" name="thdProducts[<%=i %>].qz_serial_num" style="width:120px" readonly>
+			<input type="text" id="qz_serial_num_<%=i %>" name="thdProducts[<%=i %>].qz_serial_num" style="width:120px" readonly onclick="openSerialWin('<%=i %>');">
 			<input type="hidden" id="qz_flag_<%=i %>" name="thdProducts[<%=i %>].qz_flag"><a style="cursor:hand" title="左键点击输入输列号" onclick="openSerialWin('<%=i %>');"><b>...</b></a>&nbsp;
 		</td>			
-		<td class="a2"><input type="text" id="xj_<%=i %>" name="thdProducts[<%=i %>].xj" value="0.00" style="width:90%" readonly></td>
+		<td class="a2"><input type="text" id="xj_<%=i %>" name="thdProducts[<%=i %>].xj" value="0.00" style="width:90%;text-align:right" readonly></td>
 	</tr>
 <%
 	}

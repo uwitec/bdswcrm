@@ -78,30 +78,30 @@ String user_id = info.getUser_id();
         
 		var otd9=document.createElement("td");
         otd9.className = "a2";
-        otd9.innerHTML = '<td class="a2"><input type="checkbox" name="proc_id" id="proc_id" value="' + curId + '"></td>';        
+        otd9.innerHTML = '<td class="a2"><input type="checkbox" name="proc_id" id="proc_id" value="' + curId + '" style="width:90%"></td>';        
         
         var otd0=document.createElement("td");
         otd0.className = "a2";
-        otd0.innerHTML = '<input type="text" id="product_name_'+curId+'" name="chtjDesc['+curId+'].product_name" readonly><input type="hidden" id="product_id_'+curId+'" name="chtjDesc['+curId+'].product_id">';
+        otd0.innerHTML = '<input type="text" id="product_name_'+curId+'" name="chtjDesc['+curId+'].product_name" readonly style="width:90%"><input type="hidden" id="product_id_'+curId+'" name="chtjDesc['+curId+'].product_id">';
         
         var otd1 = document.createElement("td");
         otd1.className = "a2";
-        otd1.innerHTML = '<input type="text" id="product_xh_'+curId+'"  name="chtjDesc['+curId+'].product_xh" readonly>';
+        otd1.innerHTML = '<input type="text" id="product_xh_'+curId+'"  name="chtjDesc['+curId+'].product_xh" readonly style="width:90%">';
         
         
         var otd2 = document.createElement("td");
         otd2.className = "a2";
-        otd2.innerHTML = '<input type="text" id="ysjg_'+curId+'" name="chtjDesc['+curId+'].ysjg" value="0.00">';
+        otd2.innerHTML = '<input type="text" id="ysjg_'+curId+'" name="chtjDesc['+curId+'].ysjg" value="0.00" style="width:90%;text-align:right">';
         
         var otd3 = document.createElement("td");
         otd3.className = "a2";
-        otd3.innerHTML = '<input type="text" id="tzjg_'+curId+'" name="chtjDesc['+curId+'].tzjg" value="0.00">';        
+        otd3.innerHTML = '<input type="text" id="tzjg_'+curId+'" name="chtjDesc['+curId+'].tzjg" value="0.00" style="width:90%;text-align:right">';        
             
         
         
         var otd5 = document.createElement("td");
         otd5.className = "a2";
-        otd5.innerHTML = '<input type="text" id="remark_'+curId+'" name="chtjDesc['+curId+'].remark">';                       
+        otd5.innerHTML = '<input type="text" id="remark_'+curId+'" name="chtjDesc['+curId+'].remark" style="width:90%">';                       
 		
 		otr.appendChild(otd9); 
         otr.appendChild(otd0); 
@@ -172,16 +172,16 @@ String user_id = info.getUser_id();
 	</thead>
 	<tr>
 		<td class="a1" width="15%">编号</td>
-		<td class="a2" width="35%"><input type="text" name="chtj.id" id="id" value="<%=id %>" maxlength="25">
+		<td class="a2" width="35%"><input type="text" name="chtj.id" id="id" value="<%=id %>" maxlength="25" style="width:232px">
 		</td>	
-		<td class="a1">日期</td>
-		<td class="a2"><input type="text" name="chtj.tj_date" id="tj_date" value="<%=DateComFunc.getToday() %>"  class="Wdate" onFocus="WdatePicker()"><font color="red">*</font>
+		<td class="a1" width="15%">日期</td>
+		<td class="a2" width="35%"><input type="text" name="chtj.tj_date" id="tj_date" value="<%=DateComFunc.getToday() %>"  class="Wdate" style="width:232px" onFocus="WdatePicker()"><font color="red">*</font>
 		</td>			
 	</tr>	
 	<tr>	
 		<td class="a1" width="15%">经手人</td>
 		<td class="a2" colspan="3">
-		    <input  id="brand"    type="text"   length="20"  onblur="setValue()" /> 
+		    <input  id="brand"    type="text"   maxlength="20"  onblur="setValue()" style="width:232px"/> 
             <div   id="brandTip"  style="position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		    <input type="hidden" name="chtj.jsr" id="fzr"  /><font color="red">*</font>		
 		</td>	
@@ -198,12 +198,12 @@ String user_id = info.getUser_id();
 <table width="100%"  align="center" id="kcpdDescTable"  class="chart_list" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td>选择</td>
-		<td>商品名称</td>
-		<td>规格</td>
-		<td>原价格</td>
-		<td>调整后价格</td>
-		<td>备注</td>
+		<td width="5%">选择</td>
+		<td width="25%">商品名称</td>
+		<td width="25%">规格</td>
+		<td width="15%">原价格</td>
+		<td width="15%">调整后价格</td>
+		<td width="15%">备注</td>
 	</tr>
 	</thead>
 <%
@@ -212,13 +212,13 @@ for(int i=0;i<3;i++){
 	<tr>
 		<td class="a2"><input type="checkbox" name="proc_id" id="proc_id" value="<%=i %>"></td>
 		<td class="a2">
-			<input type="text" id="product_name_<%=i %>" name="chtjDesc[<%=i %>].product_name" readonly>
+			<input type="text" id="product_name_<%=i %>" name="chtjDesc[<%=i %>].product_name" readonly style="width:90%">
 			<input type="hidden" id="product_id_<%=i %>" name="chtjDesc[<%=i %>].product_id">
 		</td>
-		<td class="a2"><input type="text" id="product_xh_<%=i %>" name="chtjDesc[<%=i %>].product_xh" readonly></td>
-		<td class="a2"><input type="text" id="ysjg_<%=i %>" name="chtjDesc[<%=i %>].ysjg" value="0.00"></td>
-		<td class="a2"><input type="text" id="tzjg_<%=i %>" name="chtjDesc[<%=i %>].tzjg" value="0.00"></td>
-		<td class="a2"><input type="text" id="remark_<%=i %>" name="chtjDesc[<%=i %>].remark"></td>
+		<td class="a2"><input type="text" id="product_xh_<%=i %>" name="chtjDesc[<%=i %>].product_xh" readonly style="width:90%"></td>
+		<td class="a2"><input type="text" id="ysjg_<%=i %>" name="chtjDesc[<%=i %>].ysjg" value="0.00" style="width:90%;text-align:right"></td>
+		<td class="a2"><input type="text" id="tzjg_<%=i %>" name="chtjDesc[<%=i %>].tzjg" value="0.00" style="width:90%;text-align:right"></td>
+		<td class="a2"><input type="text" id="remark_<%=i %>" name="chtjDesc[<%=i %>].remark" style="width:90%"></td>
 	</tr>
 <%
 }

@@ -99,7 +99,7 @@ if(dbsqProducts != null && dbsqProducts.size()>0){
         
         var otd3 = document.createElement("td");
         otd3.className = "a2";
-        otd3.innerHTML = '<input type="text" id="nums_'+curId+'" name="dbsqProducts['+curId+'].nums" style="width:90%" value="0">';
+        otd3.innerHTML = '<input type="text" id="nums_'+curId+'" name="dbsqProducts['+curId+'].nums" style="width:90%;text-align:center" value="0">';
         
         var otd5 = document.createElement("td");
         otd5.className = "a2";
@@ -142,12 +142,12 @@ if(dbsqProducts != null && dbsqProducts.size()>0){
 			
 	}     
 	
-	function openWin(id){  //与退货单使用一个商品选择
-		var destination = "selThdProc.html?openerId="+id;
-		var fea ='width=800,height=500,left=' + (screen.availWidth-800)/2 + ',top=' + (screen.availHeight-500)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+	function openWin(){  //与退货单使用一个商品选择
+		var destination = "selThdProcMx.html";
+		var fea ='width=850,height=500,left=' + (screen.availWidth-850)/2 + ',top=' + (screen.availHeight-500)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
 		window.open(destination,'详细信息',fea);	
-	}	
+	}
 
      function openywyWin()
 	{
@@ -250,7 +250,7 @@ if(dbsqProducts!=null && dbsqProducts.size()>0){
 			<input type="hidden" id="product_id_<%=i %>" name="dbsqProducts[<%=i %>].product_id" value="<%=StringUtils.nullToStr(dbsqProduct.getProduct_id()) %>">
 		</td>
 		<td class="a2"><input type="text" id="product_xh_<%=i %>" name="dbsqProducts[<%=i %>].product_xh" style="width:90%" value="<%=StringUtils.nullToStr(dbsqProduct.getProduct_xh()) %>" readonly></td>
-		<td class="a2"><input type="text" id="nums_<%=i %>" name="dbsqProducts[<%=i %>].nums" style="width:90%"  value="<%=StringUtils.nullToStr(dbsqProduct.getNums()) %>"></td>
+		<td class="a2"><input type="text" id="nums_<%=i %>" name="dbsqProducts[<%=i %>].nums" style="width:90%;text-align:center"  value="<%=StringUtils.nullToStr(dbsqProduct.getNums()) %>"></td>
 		<td class="a2"><input type="text" id="remark_<%=i %>" name="dbsqProducts[<%=i %>].remark" style="width:90%" value="<%=StringUtils.nullToStr(dbsqProduct.getRemark()) %>" maxlength="50"></td>
 	</tr>
 <%
@@ -265,7 +265,7 @@ if(dbsqProducts!=null && dbsqProducts.size()>0){
 			<input type="hidden" id="product_id_<%=i %>" name="dbsqProducts[<%=i %>].product_id">
 		</td>
 		<td class="a2"><input type="text" id="product_xh_<%=i %>" name="dbsqProducts[<%=i %>].product_xh" style="width:90%" readonly></td>
-		<td class="a2"><input type="text" id="nums_<%=i %>" name="dbsqProducts[<%=i %>].nums" style="width:90%" value="0"></td>
+		<td class="a2"><input type="text" id="nums_<%=i %>" name="dbsqProducts[<%=i %>].nums" style="width:90%;text-align:center" value="0"></td>
 		<td class="a2"><input type="text" id="remark_<%=i %>" name="dbsqProducts[<%=i %>].remark" style="width:90%" maxlength="50"></td>
 	</tr>
 <%

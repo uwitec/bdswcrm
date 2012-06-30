@@ -225,8 +225,8 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 		setClientValue();
 		
 		if(document.getElementById("client_id").value == ""){
-		document.XsskForm.action = "refreshXsskEdit.html";
-		document.XsskForm.submit();
+			document.XsskForm.action = "refreshXsskEdit.html";
+			document.XsskForm.submit();
 			return;
 		}
 		
@@ -234,7 +234,7 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 			return;
 		}
 		
-		document.XsskForm.action = "addXssk.html";
+		document.XsskForm.action = "editXssk.html";
 		document.XsskForm.submit();
 	}
 
@@ -295,7 +295,7 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 		<td class="a2"><input type="checkbox" name="xssk.is_ysk" id="is_ysk" value="是" onclick="chkYsk();"  <%if(StringUtils.nullToStr(xssk.getIs_ysk()).equals("是")) out.print("checked"); %>>预收款</td>		
 		<td class="a1" width="15%">往来单位</td>
 		<td class="a2" width="35%">
-		<input type="text" name="clientName" id="client_name" value="<%=StaticParamDo.getClientNameById(StringUtils.nullToStr(xssk.getClient_name())) %>" style="width:190px" onblur="queryYszd();"> <font color="red">*</font>
+		<input type="text" name="clientName" id="client_name" value="<%=StaticParamDo.getClientNameById(StringUtils.nullToStr(xssk.getClient_name())) %>" style="width:190px"> <font color="red">*</font>
 		<input type="hidden" name="xssk.client_name" id="client_id" value="<%=StringUtils.nullToStr(xssk.getClient_name()) %>">
 		<div id="clientsTip" style="position:absolute;width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>	
 		</td>
@@ -387,9 +387,9 @@ if(xsskDescs != null && xsskDescs.size()>0){
 	<tr>
 		<td class="a2"><input type="text" style="width:90%" id="xsd_id_<%=i %>" name="xsskDescs[<%=i %>].xsd_id" value="<%=StringUtils.nullToStr(map.get("xsd_id")) %>" readonly></td>
 		<td class="a2"><input type="text" style="width:90%" id="fsrq_<%=i %>" name="xsskDescs[<%=i %>].fsrq" value="<%=StringUtils.nullToStr(map.get("fsrq")) %>" readonly></td>
-		<td class="a2"><input type="text" style="width:90%" id="fsje_<%=i %>" name="xsskDescs[<%=i %>].fsje" value="<%=JMath.round(fsje) %>" readonly></td>
-		<td class="a2"><input type="text" style="width:90%" id="ysk_<%=i %>" name="xsskDescs[<%=i %>].ysk"  value="<%=JMath.round(ysk) %>" readonly></td>
-		<td class="a2"><input type="text" style="width:90%" id="bcsk_<%=i %>" name="xsskDescs[<%=i %>].bcsk" value="<%=JMath.round(bcsk) %>"  onblur="hj();"></td>
+		<td class="a2"><input type="text" style="width:90%;text-align: right;" id="fsje_<%=i %>" name="xsskDescs[<%=i %>].fsje" value="<%=JMath.round(fsje) %>" readonly></td>
+		<td class="a2"><input type="text" style="width:90%;text-align: right;" id="ysk_<%=i %>" name="xsskDescs[<%=i %>].ysk"  value="<%=JMath.round(ysk) %>" readonly></td>
+		<td class="a2"><input type="text" style="width:90%;text-align: right;" id="bcsk_<%=i %>" name="xsskDescs[<%=i %>].bcsk" value="<%=JMath.round(bcsk) %>"  onblur="hj();"></td>
 	</tr>
 <%
 	}
@@ -399,9 +399,9 @@ if(xsskDescs != null && xsskDescs.size()>0){
 	<tr>
 		<td class="a2"><input type="text" style="width:90%" id="xsd_id_<%=i %>" name="xsskDescs[<%=i %>].xsd_id" value="" readonly></td>
 		<td class="a2"><input type="text" style="width:90%" id="fsrq_<%=i %>" name="xsskDescs[<%=i %>].fsrq" value="" readonly></td>
-		<td class="a2"><input type="text" style="width:90%" id="fsje_<%=i %>" name="xsskDescs[<%=i %>].fsje" value="0.00" readonly></td>
-		<td class="a2"><input type="text" style="width:90%" id="ysk_<%=i %>" name="xsskDescs[<%=i %>].yfje"  value="0.00" readonly></td>
-		<td class="a2"><input type="text" style="width:90%" id="bcsk_<%=i %>" name="xsskDescs[<%=i %>].bcsk" value="0.00" readonly onblur="hj();"></td>
+		<td class="a2"><input type="text" style="width:90%;text-align: right;" id="fsje_<%=i %>" name="xsskDescs[<%=i %>].fsje" value="0.00" readonly></td>
+		<td class="a2"><input type="text" style="width:90%;text-align: right;" id="ysk_<%=i %>" name="xsskDescs[<%=i %>].yfje"  value="0.00" readonly></td>
+		<td class="a2"><input type="text" style="width:90%;text-align: right;" id="bcsk_<%=i %>" name="xsskDescs[<%=i %>].bcsk" value="0.00" readonly onblur="hj();"></td>
 	</tr>
 <%
 	}
@@ -410,9 +410,9 @@ if(xsskDescs != null && xsskDescs.size()>0){
 	<tr>
 		<td class="a2">合  计</td>
 		<td class="a2"></td>
-		<td class="a2"><input type="text" style="width:90%" id="hj_fsje" name="hj_fsje" value="<%=JMath.round(hj_fsje) %>" readonly></td>
-		<td class="a2"><input type="text" style="width:90%" id="hj_ysk" name="hj_ysk"  value="<%=JMath.round(hj_ysk) %>" readonly></td>
-		<td class="a2"><input type="text" style="width:90%" id="hj_bcsk" name="hj_bcsk" value="<%=JMath.round(hj_bcsk) %>" readonly></td>
+		<td class="a2"><input type="text" style="width:90%;text-align: right;" id="hj_fsje" name="hj_fsje" value="<%=JMath.round(hj_fsje) %>" readonly></td>
+		<td class="a2"><input type="text" style="width:90%;text-align: right;" id="hj_ysk" name="hj_ysk"  value="<%=JMath.round(hj_ysk) %>" readonly></td>
+		<td class="a2"><input type="text" style="width:90%;text-align: right;" id="hj_bcsk" name="hj_bcsk" value="<%=JMath.round(hj_bcsk) %>" readonly></td>
 	</tr>
 	 <%
 	 String cssStyle = "readonly";

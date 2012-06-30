@@ -140,19 +140,19 @@ if(kcpdDescs!=null && kcpdDescs.size()>0){
         
         var otd2 = document.createElement("td");
         otd2.className = "a2";
-        otd2.innerHTML = '<input type="text" id="kc_nums_'+curId+'" name="kcpdDesc['+curId+'].kc_nums" value="0" style="width:90%" size="5" readonly onblur="pdAll();">';
+        otd2.innerHTML = '<input type="text" id="kc_nums_'+curId+'" name="kcpdDesc['+curId+'].kc_nums" value="0" style="width:90%;text-align:center" size="5" readonly onblur="pdAll();">';
         
         var otd3 = document.createElement("td");
         otd3.className = "a2";
-        otd3.innerHTML = '<input type="text" id="sj_nums_'+curId+'" name="kcpdDesc['+curId+'].sj_nums" value="0" style="width:90%" size="5" onblur="pdAll();">';        
+        otd3.innerHTML = '<input type="text" id="sj_nums_'+curId+'" name="kcpdDesc['+curId+'].sj_nums" value="0" style="width:90%;text-align:center" size="5" onblur="pdAll();">';        
         
         var otd4 = document.createElement("td");
         otd4.className = "a2";
-        otd4.innerHTML = '<input type="text" id="yk_'+curId+'" name="kcpdDesc['+curId+'].yk" value="0" style="width:90%" size="5" readonly>';         
+        otd4.innerHTML = '<input type="text" id="yk_'+curId+'" name="kcpdDesc['+curId+'].yk" value="0" style="width:90%;text-align:center" size="5" readonly>';         
 		
 		var otd5 = document.createElement("td");
 		otd5.className = "a2";
-		otd5.innerHTML = '<input type="text" id="qz_serial_num_'+curId+'" name="kcpdDesc['+curId+'].qz_serial_num" size="15" readonly><input type="hidden" id="qz_flag_'+curId+'" name="kcpdDesc['+curId+'].qz_flag"><a style="cursor:hand" title="点击输入序列号" onclick="openSerialWin('+ curId +');"><b>...</b></a>&nbsp;';           
+		otd5.innerHTML = '<input type="text" id="qz_serial_num_'+curId+'" name="kcpdDesc['+curId+'].qz_serial_num" size="15" readonly onclick="openSerialWin('+ curId +');"><input type="hidden" id="qz_flag_'+curId+'" name="kcpdDesc['+curId+'].qz_flag"><a style="cursor:hand" title="点击输入序列号" onclick="openSerialWin('+ curId +');"><b>...</b></a>&nbsp;';           
 		
 		
 		otr.appendChild(otd9); 
@@ -342,8 +342,8 @@ if(msg != null && msg.size() > 0){
 <table width="100%"  align="center" id="kcpdDescTable"  class="chart_list" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td width="10%">选择</td>
-		<td width="20%">商品名称</td>
+		<td width="5%">选择</td>
+		<td width="25%">商品名称</td>
 		<td width="20%">规格</td>
 		<td width="12%">账面数量</td>
 		<td width="12%">实际数量</td>
@@ -363,11 +363,11 @@ if(kcpdDescs!=null && kcpdDescs.size()>0){
 			<input type="hidden" id="product_id_<%=i %>" name="kcpdDesc[<%=i %>].product_id" value="<%=StringUtils.nullToStr(kcpdDesc.get("Product_id")) %>">
 		</td>
 		<td class="a2"><input type="text" id="product_xh_<%=i %>" name="kcpdDesc[<%=i %>].product_xh" style="width:90%" value="<%=StringUtils.nullToStr(kcpdDesc.get("Product_xh")) %>" readonly></td>
-		<td class="a2"><input type="text" id="kc_nums_<%=i %>" name="kcpdDesc[<%=i %>].kc_nums" readonly style="width:90%" size="5" value="<%=StringUtils.nullToStr(kcpdDesc.get("Kc_nums")) %>" onblur="pdAll();"></td>
-		<td class="a2"><input type="text" id="sj_nums_<%=i %>" name="kcpdDesc[<%=i %>].sj_nums" style="width:90%" size="5" value="<%=StringUtils.nullToStr(kcpdDesc.get("Sj_nums")) %>" onblur="pdAll();"></td>
-		<td class="a2"><input type="text" id="yk_<%=i %>" name="kcpdDesc[<%=i %>].yk" readonly size="5" style="width:90%" value="<%=StringUtils.nullToStr(kcpdDesc.get("Yk")) %>"></td>
+		<td class="a2"><input type="text" id="kc_nums_<%=i %>" name="kcpdDesc[<%=i %>].kc_nums" readonly style="width:90%;text-align:center" size="5" value="<%=StringUtils.nullToStr(kcpdDesc.get("Kc_nums")) %>" onblur="pdAll();"></td>
+		<td class="a2"><input type="text" id="sj_nums_<%=i %>" name="kcpdDesc[<%=i %>].sj_nums" style="width:90%;text-align:center" size="5" value="<%=StringUtils.nullToStr(kcpdDesc.get("Sj_nums")) %>" onblur="pdAll();"></td>
+		<td class="a2"><input type="text" id="yk_<%=i %>" name="kcpdDesc[<%=i %>].yk" readonly size="5" style="width:90%;text-align:center" value="<%=StringUtils.nullToStr(kcpdDesc.get("Yk")) %>"></td>
 	    <td class="a2">
-			<input type="text" id="qz_serial_num_<%=i %>" name="kcpdDesc[<%=i %>].qz_serial_num" value="<%=StringUtils.nullToStr(kcpdDesc.get("Qz_serial_num")) %>"   size="13" readonly>
+			<input type="text" id="qz_serial_num_<%=i %>" name="kcpdDesc[<%=i %>].qz_serial_num" value="<%=StringUtils.nullToStr(kcpdDesc.get("Qz_serial_num")) %>"   size="13" readonly onclick="openSerialWin('<%=i %>');">
 			<input type="hidden" id="qz_flag_<%=i %>" name="kcpdDesc[<%=i %>].qz_flag" value="<%=StringUtils.nullToStr(kcpdDesc.get("Qz_flag")) %>"><a style="cursor:hand" title="左键点击输入输列号" onclick="openSerialWin('<%=i %>');"><b>...</b></a>&nbsp;
 		</td>
 	</tr>
@@ -383,11 +383,11 @@ if(kcpdDescs!=null && kcpdDescs.size()>0){
 			<input type="hidden" id="product_id_<%=i %>" name="kcpdDesc[<%=i %>].product_id">
 		</td>
 		<td class="a2"><input type="text" id="product_xh_<%=i %>" name="kcpdDesc[<%=i %>].product_xh" style="width:90%" readonly></td>
-		<td class="a2"><input type="text" id="kc_nums_<%=i %>" name="kcpdDesc[<%=i %>].kc_nums" readonly style="width:90%" size="5" value="0" onblur="pdAll();"></td>
-		<td class="a2"><input type="text" id="sj_nums_<%=i %>" name="kcpdDesc[<%=i %>].sj_nums" style="width:90%" size="5" value="0" onblur="pdAll();"></td>
-		<td class="a2"><input type="text" id="yk_<%=i %>" name="kcpdDesc[<%=i %>].yk" readonly style="width:90%" size="5" value="0"></td>
+		<td class="a2"><input type="text" id="kc_nums_<%=i %>" name="kcpdDesc[<%=i %>].kc_nums" readonly style="width:90%;text-align:center" size="5" value="0" onblur="pdAll();"></td>
+		<td class="a2"><input type="text" id="sj_nums_<%=i %>" name="kcpdDesc[<%=i %>].sj_nums" style="width:90%;text-align:center" size="5" value="0" onblur="pdAll();"></td>
+		<td class="a2"><input type="text" id="yk_<%=i %>" name="kcpdDesc[<%=i %>].yk" readonly style="width:90%;text-align:center" size="5" value="0"></td>
 	   <td class="a2">
-			<input type="text" id="qz_serial_num_<%=i %>" name="kcpdDesc[<%=i %>].qz_serial_num" size="15" readonly>
+			<input type="text" id="qz_serial_num_<%=i %>" name="kcpdDesc[<%=i %>].qz_serial_num" size="15" readonly onclick="openSerialWin('<%=i %>');">
 			<input type="hidden" id="qz_flag_<%=i %>" name="kcpdDesc[<%=i %>].qz_flag"><a style="cursor:hand" title="左键点击输入输列号" onclick="openSerialWin('<%=i %>');"><b>...</b></a>&nbsp;
 		</td>
 	</tr>
