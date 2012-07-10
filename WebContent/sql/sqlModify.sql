@@ -166,3 +166,7 @@ ALTER TABLE rkd_product ADD COLUMN `sd` DOUBLE AFTER `qz_serial_num`,
  --序列号去掉首尾空格
  update serial_num_mng set serial_num=trim(serial_num) where serial_num like '% %';
  update serial_num_flow set serial_num=trim(serial_num) where serial_num like '% %';
+
+2012-07-12修改
+--增加售后库存的商品规格长度
+ALTER TABLE `shkc` MODIFY COLUMN `product_xh` VARCHAR(200) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL;
