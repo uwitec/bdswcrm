@@ -42,8 +42,8 @@ public class XstjClientService {
 	 * @param dj_id  µ¥¾Ý±àºÅ
 	 * @return
 	 */
-	public List getLsdList(String start_date,String end_date,String xsry_id,String dj_id){
-		return xstjClientDao.getLsdList(start_date, end_date, xsry_id,dj_id);
+	public List getLsdList(String start_date,String end_date,String xsry_id,String dj_id,String product_kind,String product_name){
+		return xstjClientDao.getLsdList(start_date, end_date, xsry_id,dj_id,product_kind,product_name);
 	}
 	
 	
@@ -105,8 +105,8 @@ public class XstjClientService {
 	 * @param dj_id
 	 * @return
 	 */
-	public double getLsdZje(String start_date,String end_date,String xsry_id,String dj_id){
-		return xstjClientDao.getLsdZje(start_date, end_date, xsry_id, dj_id);
+	public double getLsdZje(String start_date, String end_date, String xsry_id,String dj_id,String product_kind,String product_name){
+		return xstjClientDao.getLsdZje(start_date, end_date,  xsry_id,dj_id,product_kind,product_name);
 	}
 	
 	
