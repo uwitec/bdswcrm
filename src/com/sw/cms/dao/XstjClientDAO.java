@@ -55,20 +55,43 @@ public class XstjClientDAO extends JdbcBaseDAO {
 	 * @param client_id  客户名称
 	 * @return
 	 */
-	public List getLsdList(String start_date,String end_date,String xsry_id,String dj_id){
-		String sql = "select DATE_FORMAT(cz_date,'%Y-%m-%d') as creatdate,id,xsry,lsdje from lsd where state='已提交'";
+	public List getLsdList(String start_date,String end_date,String xsry_id,String dj_id,String product_kind,String product_name){
+		String sql = "select DATE_FORMAT(a.cz_date,'%Y-%m-%d') as creatdate,a.id,a.xsry,a.lsdje from lsd a join lsd_product b on b.lsd_id=a.id "
+			          +" join product d on b.product_id=d.product_id where a.state='已提交'";
 		if(!dj_id.equals("")){
-			sql = sql + " and id='" + dj_id + "'";
+			sql = sql + " and a.id='" + dj_id + "'";
 		}		
 		if(!start_date.equals("")){
-			sql = sql + " and DATE_FORMAT(cz_date,'%Y-%m-%d')>='" + start_date + "'";
+			sql = sql + " and creatdate>='" + start_date + "'";
 		}
 		if(!end_date.equals("")){
-			sql = sql + " and DATE_FORMAT(cz_date,'%Y-%m-%d')<='" + (end_date + " 23:59:59") + "'";
+			sql = sql + " and creatdate<='" + end_date + "'";
 		}
 		if(!xsry_id.equals("")){
-			sql = sql + " and xsry = '" + xsry_id + "'";
-		}	
+			sql = sql + " and a.xsry = '" + xsry_id + "'";
+		}
+		
+         //处理商品类别
+        if(!product_kind.equals("")){
+            String[] arryItems = product_kind.split(",");
+
+            if(arryItems != null && arryItems.length >0){
+	           sql += " and (";
+	           for(int i=0;i<arryItems.length;i++){
+		       if(i == 0){
+			       sql += " d.product_kind like '" + arryItems[i] + "%'";
+		       }else{
+			       sql += " or d.product_kind like '" + arryItems[i] + "%'";
+		       }
+	         }
+	         sql += ")";
+           }
+
+        }
+        if(!product_name.equals("")){
+            sql = sql + " and d.product_name like '%" + product_name + "%'";
+        }
+		
 		return this.getResultList(sql);
 	}
 	
@@ -201,21 +224,46 @@ public class XstjClientDAO extends JdbcBaseDAO {
 	 * @param dj_id
 	 * @return
 	 */
-	public double getLsdZje(String start_date,String end_date,String xsry_id,String dj_id){
+	public double getLsdZje(String start_date, String end_date, String xsry_id,String dj_id,String product_kind,String product_name){
 		double lsdje = 0;
-		String sql = "select sum(lsdje) as lsdje from lsd  where state='已提交'";
-		if(!dj_id.equals("")){
-			sql = sql + " and id='" + dj_id + "'";
-		}			
-		if(!start_date.equals("")){
-			sql = sql + " and DATE_FORMAT(cz_date,'%Y-%m-%d')>='" + start_date + "'";
-		}
-		if(!end_date.equals("")){
-			sql = sql + " and DATE_FORMAT(cz_date,'%Y-%m-%d')<='" + (end_date + " 23:59:59") + "'";
-		}
-		if(!xsry_id.equals("")){
-			sql = sql + " and xsry ='" + xsry_id + "'";
-		}
+		String sql = "select  sum(hjje) as lsdje from product_sale_flow a "+
+        " join product d on d.product_id=a.product_id where a.yw_type='零售单' ";
+
+        if(!start_date.equals("")){
+            sql += " and a.cz_date>='" + start_date + "'";
+        }
+        if(!end_date.equals("")){
+           sql += " and a.cz_date<='" + end_date + "'";
+        }
+       
+        if(!xsry_id.equals("")){
+           sql += " and a.xsry ='" + xsry_id + "'";
+        }
+        if(!dj_id.equals("")){
+           sql += " and a.id ='" + dj_id + "'";
+        }
+
+        
+        //处理商品类别
+        if(!product_kind.equals("")){
+            String[] arryItems = product_kind.split(",");
+
+            if(arryItems != null && arryItems.length >0){
+	           sql += " and (";
+	           for(int i=0;i<arryItems.length;i++){
+		       if(i == 0){
+			       sql += " d.product_kind like '" + arryItems[i] + "%'";
+		       }else{
+			       sql += " or d.product_kind like '" + arryItems[i] + "%'";
+		       }
+	         }
+	         sql += ")";
+           }
+
+        }
+        if(!product_name.equals("")){
+            sql = sql + " and d.product_name like '%" + product_name + "%'";
+        }
 		List list = this.getResultList(sql);
 		if(list != null && list.size()>0){
 			Map map = (Map)list .get(0);

@@ -177,7 +177,7 @@ public class FhkhdDAO extends JdbcBaseDAO {
 	}
 
 	public Object getFhkhd(String id) {
-		String sql = "select *from fhkhd where id='" + id + "'";
+		String sql = "select * from fhkhd where id='" + id + "'";
 		return this.getJdbcTemplate().queryForObject(sql, new FhkhdRowMapper());
 	}
 

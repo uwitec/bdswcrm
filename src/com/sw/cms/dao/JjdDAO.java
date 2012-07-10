@@ -166,7 +166,7 @@ public class JjdDAO extends JdbcBaseDAO {
 	 */
 	public void delJjdProduct(String id)
 	{
-		String sql="delete from jjd_Product where jjd_id='"+id+"'";
+		String sql="delete from jjd_product where jjd_id='"+id+"'";
 		this.getJdbcTemplate().update(sql);
 	}
 	/**
