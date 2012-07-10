@@ -337,7 +337,6 @@ public class FirstIndexAction extends BaseAction {
 		
 		//×ª»¯Îªjson
 		JSONObject json = JSONObject.fromObject(numsMap);
-		System.out.println(json.toString());
 		this.writeJsonToResponse(json);
 	}
 	

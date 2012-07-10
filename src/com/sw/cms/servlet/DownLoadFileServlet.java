@@ -48,8 +48,9 @@ import org.apache.commons.logging.LogFactory;
             
 			FileInputStream in = new FileInputStream(filePath);
             byte b[] = new byte[1024];
-            while(in.read(b) != -1)
-                os.write(b);            
+            int len = 0;
+            while((len = in.read(b)) > 0)
+                os.write(b, 0, len); 
             in.close();            
             os.flush();
             os.close();          
