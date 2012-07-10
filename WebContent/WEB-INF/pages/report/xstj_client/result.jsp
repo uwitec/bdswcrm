@@ -22,6 +22,7 @@ String khjl = StringUtils.nullToStr(request.getParameter("khjl"));         //客
 String client_type = StringUtils.nullToStr(request.getParameter("client_type")); //客户类型
 //汇总结果
 List statResult = (List)VS.findValue("statResult");
+
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -42,21 +43,34 @@ List statResult = (List)VS.findValue("statResult");
 		location.href = "getXstjClientResultMx.html?start_date=<%=start_date%>&end_date=<%=end_date%>&xsry_id=<%=xsry_id%>&dj_id=<%=dj_id%>&client_type=<%=client_type%>&khjl=<%=khjl%>&product_kind=<%=product_kind%>&product_name=<%=product_name%>&client_name=" + client_name;
 	}
 	
-	function openWinLs(){
-		location.href = "getXstjClientResultLsMx.html?start_date=<%=start_date%>&end_date=<%=end_date%>&xsry_id=<%=xsry_id%>&dj_id=<%=dj_id%>";	
+	function openWinLs(){	    
+		//location.href = "getXstjClientResultLsMx.html?start_date=<%=start_date%>&end_date=<%=end_date%>&xsry_id=<%=xsry_id%>&dj_id=<%=dj_id%>&product_kind=<%=product_kind%>&product_name=<%=product_name%>";	
+	    
+	    document.refreshForm.action = "getXstjClientResultLsMx.html" ;	
+        document.refreshForm.submit();
 	}
+	
 </script>
 </head>
 <body align="center" >
 <div class="rightContentDiv" id="divContent">
+<form name="refreshForm" action="getXstjClientResult.html" method="post">
+<input type="hidden" name="client_name" value="<%=client_name %>">
+<input type="hidden" name="start_date" value="<%=start_date %>">
+<input type="hidden" name="end_date" value="<%=end_date %>">
+<input type="hidden" name="dj_id" value="<%=dj_id %>">
+<input type="hidden" name="xsry_id" value="<%=xsry_id %>">
+<input type="hidden" name="product_kind" value="<%=product_kind %>">
+<input type="hidden" name="product_name" value="<%=product_name %>">
+</form>
 <TABLE  align="center" cellSpacing=0 cellPadding=0 width="99%" border=0>
 	<TBODY>
 		<TR style="BACKGROUND-COLOR: #dcdcdc;height:45;">
-		    <TD align="center" width="100%"><font style="FONT-SIZE: 16px"><B>客户销售汇总</B></font><br>日期：<%=start_date %> 至 <%=end_date %></TD>
+		    <TD align="center" width="100%"><font style="FONT-SIZE: 16px"><B>客户销售汇总</B></font><br>日期：<%=start_date %> 至 <%=end_date %> </TD>
 		</TR>
 	</TBODY>
 </TABLE>
-<BR>
+<br>
 <TABLE align="center" cellSpacing=0 cellPadding=0 width="99%" border=0 style="BORDER-TOP: #000000 2px solid;BORDER-LEFT:#000000 1px solid">
 	<THEAD>
 		<TR>
@@ -101,13 +115,13 @@ if(statResult != null && statResult.size()>0){
 
 if(client_name.equals("")&& client_type.equals("") && khjl.equals("")){
 
-	double lsdzje = xstjClientService.getLsdZje(start_date, end_date, xsry_id, dj_id);
+	double lsdzje = xstjClientService.getLsdZje(start_date, end_date,xsry_id,dj_id,product_kind,product_name);
 	hjje += lsdzje;
 %>
 
 	<TR>
-		<TD class=ReportItem>&nbsp;</TD>
-		<TD class=ReportItem><a href="javascript:openWinLs();">零售单总计</a>&nbsp;</TD>
+		<TD class=ReportItem>&nbsp;</TD>		
+		<TD class=ReportItem><a href="javascript:openWinLs();">零售单总计</a>&nbsp;</TD>		
 		<TD class=ReportItemMoney><%=JMath.round(lsdzje,2) %>&nbsp;</TD>
 	</TR>
 <%
@@ -121,6 +135,7 @@ if(client_name.equals("")&& client_type.equals("") && khjl.equals("")){
 	</TR>
 	</TBODY>
 </TABLE>
+
 <br>
 <table width="99%">
 		<tr>

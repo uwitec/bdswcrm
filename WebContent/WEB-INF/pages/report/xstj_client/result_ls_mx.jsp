@@ -1,4 +1,4 @@
-<%@ page language="java" errorPage="/error.jsp" pageEncoding="UTF-8" contentType="text/html;charset=UTF-8" %>
+<%@ page language="java" errorPage="/error.jsp" pageEncoding="GBK" contentType="text/html;charset=UTF-8" %>
 <%@ page import="com.opensymphony.xwork.util.OgnlValueStack" %>
 <%@ page import="com.sw.cms.util.*" %>
 <%@ page import="com.sw.cms.service.*" %>
@@ -8,24 +8,26 @@
 OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
 
 XstjClientService xstjClientService = (XstjClientService)VS.findValue("xstjClientService");
+List resultList = (List)VS.findValue("resultList");
 
-String start_date = StringUtils.nullToStr(request.getParameter("start_date"));   //å¼€å§‹æ—¶é—´
-String end_date = StringUtils.nullToStr(request.getParameter("end_date"));       //æˆªæ­¢æ—¶é—´
-String xsry_id = StringUtils.nullToStr(request.getParameter("xsry_id"));         //é”€å”®äººå‘˜ç¼–å·
-String dj_id = StringUtils.nullToStr(request.getParameter("dj_id"));             //å•æ®ç¼–å·
-String client_name = StringUtils.nullToStr(request.getParameter("client_name")); //å®¢æˆ·ç¼–å·
-
+String start_date = StringUtils.nullToStr(request.getParameter("start_date"));   //¿ªÊ¼Ê±¼ä
+String end_date = StringUtils.nullToStr(request.getParameter("end_date"));       //½ØÖ¹Ê±¼ä
+String xsry_id = StringUtils.nullToStr(request.getParameter("xsry_id"));         //ÏúÊÛÈËÔ±±àºÅ
+String dj_id = StringUtils.nullToStr(request.getParameter("dj_id"));             //µ¥¾İ±àºÅ
+String client_name = StringUtils.nullToStr(request.getParameter("client_name")); //¿Í»§±àºÅ
+String product_kind = StringUtils.nullToStr(request.getParameter("product_kind"));         //ÉÌÆ·Àà±ğ
+String product_name = StringUtils.nullToStr(request.getParameter("product_name"));             //ÉÌÆ·Ãû³Æ
 
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>é›¶å”®æ±‡æ€»</title>
+<title>ÁãÊÛ»ã×Ü</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/report.css" rel="stylesheet" type="text/css" />
 <style media=print>  
-.Noprint{display:none;}<!--ç”¨æœ¬æ ·å¼åœ¨æ‰“å°æ—¶éšè—éæ‰“å°é¡¹ç›®-->
+.Noprint{display:none;}<!--ÓÃ±¾ÑùÊ½ÔÚ´òÓ¡Ê±Òş²Ø·Ç´òÓ¡ÏîÄ¿-->
 </style> 
 <script language='JavaScript' src="js/date.js"></script>
 <script type="text/javascript" src="jquery/jquery.js"></script>
@@ -44,7 +46,7 @@ String client_name = StringUtils.nullToStr(request.getParameter("client_name"));
 <TABLE  align="center" cellSpacing=0 cellPadding=0 width="99%" border=0>
 	<TBODY>
 		<TR style="BACKGROUND-COLOR: #dcdcdc;height:45;">
-		    <TD align="center" width="100%"><font style="FONT-SIZE: 16px"><B>é›¶å”®æ±‡æ€»</B></font><br>æ—¥æœŸï¼š<%=start_date %> è‡³ <%=end_date %> </TD>
+		    <TD align="center" width="100%"><font style="FONT-SIZE: 16px"><B>ÁãÊÛ»ã×Ü</B></font><br>ÈÕÆÚ£º<%=start_date %> ÖÁ <%=end_date %>  </TD>
 		</TR>
 	</TBODY>
 </TABLE>
@@ -52,26 +54,25 @@ String client_name = StringUtils.nullToStr(request.getParameter("client_name"));
 <TABLE align="center" cellSpacing=0 cellPadding=0 width="99%" border=0 style="BORDER-TOP: #000000 2px solid;BORDER-LEFT:#000000 1px solid">
 	<THEAD>
 		<TR>
-			<TD class=ReportHead>å•æ®å·</TD>
-			<TD class=ReportHead>æ—¥æœŸ</TD>
-			<TD class=ReportHead>é”€å”®äººå‘˜</TD>
-			<TD class=ReportHead>å•†å“åç§°</TD>
-			<TD class=ReportHead>å‹å·</TD>
-			<TD class=ReportHead>å•ä»·</TD>
-			<TD class=ReportHead>æ•°é‡</TD>
-			<TD class=ReportHead>é‡‘é¢</TD>	
+			<TD class=ReportHead>µ¥¾İºÅ</TD>
+			<TD class=ReportHead>ÈÕÆÚ</TD>
+			<TD class=ReportHead>ÏúÊÛÈËÔ±</TD>
+			<TD class=ReportHead>ÉÌÆ·Ãû³Æ</TD>
+			<TD class=ReportHead>ĞÍºÅ</TD>
+			<TD class=ReportHead>µ¥¼Û</TD>
+			<TD class=ReportHead>ÊıÁ¿</TD>
+			<TD class=ReportHead>½ğ¶î</TD>	
 		</TR>
 	</THEAD>
 	<TBODY>
 <%		
-//å–é”€å”®å•åˆ—è¡¨æ•°æ®
-List lsdList = xstjClientService.getLsdList(start_date,end_date,xsry_id,dj_id);
+//È¡ÏúÊÛµ¥ÁĞ±íÊı¾İ
 
 
 double hjje = 0;
-if(lsdList != null && lsdList.size()>0){
-	for(int k=0;k<lsdList.size();k++){
-		Map map = (Map)lsdList.get(k);
+if(resultList != null && resultList.size()>0){
+	for(int k=0;k<resultList.size();k++){
+		Map map = (Map)resultList.get(k);
 		
 		
 		
@@ -85,7 +86,7 @@ if(lsdList != null && lsdList.size()>0){
 %>
 		<TR>
 			<TD class=ReportItem style="font-weight:bold">
-				<a style="cursor:hand" onclick="openWin('viewLsd.html?id=<%=lsd_id %>','é›¶å”®å•');" title="ç‚¹å‡»æŸ¥çœ‹åŸå§‹å•æ®"><%=lsd_id %></a>
+				<a style="cursor:hand" onclick="openWin('viewLsd.html?id=<%=lsd_id %>','ÁãÊÛµ¥');" title="µã»÷²é¿´Ô­Ê¼µ¥¾İ"><%=lsd_id %></a>
 			</TD>
 			<TD class=ReportItem style="font-weight:bold"><%=creatdate %></TD>
 			<TD class=ReportItem style="font-weight:bold"><%=xsry_name %></TD>
@@ -105,7 +106,7 @@ if(lsdList != null && lsdList.size()>0){
 			for(int l=0;l<mxList.size();l++){
 				Map mxMap = (Map)mxList.get(l);	
 				
-				String product_name = StringUtils.nullToStr(mxMap.get("product_name"));
+				String product_name_mx = StringUtils.nullToStr(mxMap.get("product_name"));
 				String product_xh = StringUtils.nullToStr(mxMap.get("product_xh"));
 				
 				double price = mxMap.get("price")==null?0:((Double)mxMap.get("price")).doubleValue();
@@ -118,7 +119,7 @@ if(lsdList != null && lsdList.size()>0){
 					<TD class=ReportItem>&nbsp;</TD>
 					<TD class=ReportItem>&nbsp;</TD>
 					<TD class=ReportItem>&nbsp;</TD>					
-					<TD class=ReportItem><%=product_name %>&nbsp;</TD>
+					<TD class=ReportItem><%=product_name_mx %>&nbsp;</TD>
 					<TD class=ReportItem><%=product_xh %>&nbsp;</TD>
 					<TD class=ReportItemMoney><%=JMath.round(price,2) %>&nbsp;</TD>
 					<TD class=ReportItemMoney><%=nums %>&nbsp;</TD>
@@ -132,7 +133,7 @@ if(lsdList != null && lsdList.size()>0){
 %>
 	
 		<TR>
-			<TD class=ReportItem style="font-weight:bold">åˆè®¡é‡‘é¢&nbsp;</TD>
+			<TD class=ReportItem style="font-weight:bold">ºÏ¼Æ½ğ¶î&nbsp;</TD>
 			<TD class=ReportItem>&nbsp;</TD>
 			<TD class=ReportItem>&nbsp;</TD>					
 			<TD class=ReportItem>&nbsp;</TD>
@@ -146,13 +147,13 @@ if(lsdList != null && lsdList.size()>0){
 <br>
 <table width="99%">
 		<tr>
-			<td width="70%" height="30">æ³¨ï¼šç‚¹å‡»å•†å“ç¼–å·å¯æŸ¥çœ‹åŸå§‹å•æ®åˆ—è¡¨ã€‚</td>
-			<td colspan="2" align="right" height="30">ç”ŸæˆæŠ¥è¡¨æ—¶é—´ï¼š<%=DateComFunc.getToday() %>&nbsp;&nbsp;&nbsp;</td>
+			<td width="70%" height="30">×¢£ºµã»÷ÉÌÆ·±àºÅ¿É²é¿´Ô­Ê¼µ¥¾İÁĞ±í¡£</td>
+			<td colspan="2" align="right" height="30">Éú³É±¨±íÊ±¼ä£º<%=DateComFunc.getToday() %>&nbsp;&nbsp;&nbsp;</td>
 		</tr>
 </table>
 <center class="Noprint">
-	<input type="button" name="button_print" value=" æ‰“å° " onclick="printDiv('divContent');"> &nbsp;&nbsp;
-    <input type="button" name="button_fh" value=" è¿”å› " onclick="history.go(-1);"> 
+	<input type="button" name="button_print" value=" ´òÓ¡ " onclick="printDiv('divContent');"> &nbsp;&nbsp;
+    <input type="button" name="button_fh" value=" ·µ»Ø " onclick="history.go(-1);"> 
 </center>
 </div>
 </body>
