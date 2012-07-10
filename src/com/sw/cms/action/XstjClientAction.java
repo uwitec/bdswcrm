@@ -18,6 +18,7 @@ public class XstjClientAction {
 	private List userList = new ArrayList();
 	private List clientList = new ArrayList();
 	private List statResult = new ArrayList();
+	private List resultList = new ArrayList();
 	private String[] wldwlx;
 	
 	private String client_name = "";
@@ -42,8 +43,8 @@ public class XstjClientAction {
 		return product_name;
 	}
 
-	public void setProduct_name(String productName) {
-		product_name = productName;
+	public void setProduct_name(String product_Name) {
+		product_name = product_Name;
 	}
 
 	public String showCondition(){
@@ -64,6 +65,7 @@ public class XstjClientAction {
 	}	
 	
 	public String getResultLsMx(){
+		resultList = xstjClientService.getLsdList(start_date,end_date,xsry_id,dj_id,product_kind,product_name);
 		return "success";
 	}
 
@@ -75,6 +77,14 @@ public class XstjClientAction {
 		this.userList = userList;
 	}
 
+	public List getResultList() {
+		return resultList;
+	}
+
+	public void setResultList(List resultList) {
+		this.resultList = resultList;
+	}	
+	
 	public UserService getUserService() {
 		return userService;
 	}
@@ -99,6 +109,8 @@ public class XstjClientAction {
 		this.clientsService = clientsService;
 	}
 
+
+	
 	public List getClientList() {
 		return clientList;
 	}
