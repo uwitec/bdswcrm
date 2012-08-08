@@ -170,3 +170,8 @@ ALTER TABLE rkd_product ADD COLUMN `sd` DOUBLE AFTER `qz_serial_num`,
 2012-07-12修改
 --增加售后库存的商品规格长度
 ALTER TABLE `shkc` MODIFY COLUMN `product_xh` VARCHAR(200) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL;
+
+2012-8-8修改
+-- 修改accounts表中的double型字段为3位小数位
+ALTER TABLE `accounts` MODIFY COLUMN `dqje` double(24,3)   default '0.000';
+ALTER TABLE `accounts` MODIFY COLUMN `qcje` double(24,3)   default '0.000';
