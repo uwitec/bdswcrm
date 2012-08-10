@@ -175,3 +175,8 @@ ALTER TABLE `shkc` MODIFY COLUMN `product_xh` VARCHAR(200) CHARACTER SET utf8 CO
 -- 修改accounts表中的double型字段为3位小数位
 ALTER TABLE `accounts` MODIFY COLUMN `dqje` double(24,3)   default '0.000';
 ALTER TABLE `accounts` MODIFY COLUMN `qcje` double(24,3)   default '0.000';
+
+
+2012-8-10修改
+---数据字典的基础表丢失一条记录
+INSERT INTO `sjzd_jbxx` VALUES ('SJZD_ZCLX','支付类型（摊销付款）','支付类型（摊销付款）',4);
