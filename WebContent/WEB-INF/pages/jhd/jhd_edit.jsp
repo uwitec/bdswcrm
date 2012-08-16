@@ -346,12 +346,18 @@ String cgsd = (String)VS.findValue("cgsd");
 		
 		for(var i=0;i<=allCount;i++){			
 			var price = document.getElementById("price_" + i);
-			
+			var pn = document.getElementById("product_name_" + i);
 			if(price != null){
 				if(!InputValid(price,0,"float",0,1,99999999,"采购价格")){
 					price.focus();
 					return;
 				}
+				if(parseFloat(price.value)<0) 
+		       {
+		         alert("商品" + pn.value + "的价格不能小于0，请重新输入价格！");
+		         price.focus();
+		         return;
+		       }
 			}
 			
 			var sd =  document.getElementById("sd_" + i);
@@ -368,6 +374,12 @@ String cgsd = (String)VS.findValue("cgsd");
 					nums.focus();
 					return;
 				}
+				if(parseFloat(nums.value)<0) 
+		       {
+		         alert("商品" + pn.value + "的数量不能小于0，请重新输入数量！");
+		         nums.focus();
+		         return;
+		       }
 			}		
 			hj_counts =  parseFloat(hj_counts) + parseFloat(nums.value);
 			
