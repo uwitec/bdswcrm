@@ -3153,5 +3153,14 @@
             <result name="success">/WEB-INF/pages/report/storexs_hz/result_product_mx.jsp</result>
         </action>
         <!-- 仓库销售汇总 -->
+      
+        <!-- 会员卡积分管理 -->
+        <action name="showJfcxCondition" class="hykJfFlowAction" method="showJfcxCondition">
+            <result name="success">/WEB-INF/pages/report/hyjf/jfcx_con.jsp</result>
+        </action> 
+        <action name="getJfcxResult" class="hykJfFlowAction" method="getJfcxResult">
+            <result name="success">/WEB-INF/pages/report/hyjf/jfcx_result.jsp</result>
+        </action>                 
+        <!-- 会员卡积分管理 -->
     </package>
 </xwork>

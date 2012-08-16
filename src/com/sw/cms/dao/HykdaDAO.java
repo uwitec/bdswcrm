@@ -127,6 +127,13 @@ public class HykdaDAO extends JdbcBaseDAO {
 		return (Hykda) obj;
 	}
 	
+	
+	public Hykda getHykdaByHykh(String hykh) {
+		String sql = "select * from hykda where hykh='" + hykh + "' and state='正常'";
+		Object obj = this.queryForObject(sql, new BeanRowMapper(Hykda.class));
+		return (Hykda) obj;
+	}
+	
 
 	/**
 	 * 删除会员卡档案信息

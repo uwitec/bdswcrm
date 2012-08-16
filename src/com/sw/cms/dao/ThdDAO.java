@@ -40,9 +40,9 @@ public class ThdDAO extends JdbcBaseDAO {
 	 */
 	public void saveThd(Thd thd,List thdProducts){
 		
-		String sql = "insert into thd(client_name,thdje,th_fzr,remark,th_date,state,tkzh,czr,cz_date,type,xsd_id,thd_id,store_id,fplx,kp_mc,kp_address,kp_dh,khhzh,sh,fpxx,yw_type) values(?,?,?,?,?,?,?,?,now(),?,?,?,?,?,?,?,?,?,?,?,?)";
+		String sql = "insert into thd(client_name,thdje,th_fzr,remark,th_date,state,tkzh,czr,cz_date,type,xsd_id,thd_id,store_id,fplx,kp_mc,kp_address,kp_dh,khhzh,sh,fpxx,yw_type,hyk_id) values(?,?,?,?,?,?,?,?,now(),?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		
-		Object[] param = new Object[20];
+		Object[] param = new Object[21];
 		
 		param[0] = thd.getClient_name();
 		param[1] = new Double(thd.getThdje());
@@ -64,6 +64,7 @@ public class ThdDAO extends JdbcBaseDAO {
 		param[17] = thd.getSh();
 		param[18] = thd.getFpxx();
 		param[19] = thd.getYw_type();	
+		param[20] = thd.getHyk_id();
 		
 		this.getJdbcTemplate().update(sql,param);
 		
@@ -79,9 +80,9 @@ public class ThdDAO extends JdbcBaseDAO {
 	 */
 	public void updateThd(Thd thd,List thdProducts){
 		
-		String sql = "update thd set client_name=?,thdje=?,th_fzr=?,remark=?,th_date=?,state=?,tkzh=?,czr=?,cz_date=now(),type=?,xsd_id=?,store_id=?,fplx=?,kp_mc=?,kp_address=?,kp_dh=?,khhzh=?,sh=?,fpxx=?,yw_type=? where thd_id=?";
+		String sql = "update thd set client_name=?,thdje=?,th_fzr=?,remark=?,th_date=?,state=?,tkzh=?,czr=?,cz_date=now(),type=?,xsd_id=?,store_id=?,fplx=?,kp_mc=?,kp_address=?,kp_dh=?,khhzh=?,sh=?,fpxx=?,yw_type=?,hyk_id=? where thd_id=?";
 		
-		Object[] param = new Object[20];
+		Object[] param = new Object[21];
 		
 		param[0] = thd.getClient_name();
 		param[1] = new Double(thd.getThdje());
@@ -102,7 +103,8 @@ public class ThdDAO extends JdbcBaseDAO {
 		param[16] = thd.getSh();
 		param[17] = thd.getFpxx();
 		param[18] = thd.getYw_type();
-		param[19] = thd.getThd_id();
+		param[19] = thd.getHyk_id();
+		param[20] = thd.getThd_id();
 		
 		this.getJdbcTemplate().update(sql,param);
 		
@@ -326,6 +328,7 @@ public class ThdDAO extends JdbcBaseDAO {
 			if(SqlUtil.columnIsExist(rs,"sh")) thd.setSh(rs.getString("sh"));
 			if(SqlUtil.columnIsExist(rs,"fpxx")) thd.setFpxx(rs.getString("fpxx"));
 			if(SqlUtil.columnIsExist(rs,"yw_type")) thd.setYw_type(rs.getString("yw_type"));
+			if(SqlUtil.columnIsExist(rs,"hyk_id")) thd.setHyk_id(rs.getString("hyk_id"));
 			return thd;
 		}
 	}

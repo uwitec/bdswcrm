@@ -12,19 +12,20 @@ import com.sw.cms.dao.BxdDAO;
 import com.sw.cms.dao.CkdDAO;
 import com.sw.cms.dao.ClientsDAO;
 import com.sw.cms.dao.ClientsLinkmanDAO;
+import com.sw.cms.dao.HykdaDAO;
 import com.sw.cms.dao.LsdDAO;
 import com.sw.cms.dao.PosTypeDAO;
 import com.sw.cms.dao.ProductDAO;
 import com.sw.cms.dao.ProductKcDAO;
 import com.sw.cms.dao.SerialNumDAO;
+import com.sw.cms.dao.ShkcDAO;
 import com.sw.cms.dao.StoreDAO;
 import com.sw.cms.dao.SysInitSetDAO;
 import com.sw.cms.dao.UserDAO;
 import com.sw.cms.dao.XsdDAO;
-import com.sw.cms.dao.HykdaDAO;
-import com.sw.cms.dao.ShkcDAO;
 import com.sw.cms.model.Accounts;
 import com.sw.cms.model.Clients;
+import com.sw.cms.model.Hykda;
 import com.sw.cms.model.PosType;
 import com.sw.cms.model.Product;
 import com.sw.cms.model.SysInitSet;
@@ -66,6 +67,7 @@ public class DwrService {
 	private HykdaDAO hykdaDao;
 	
 	private ShkcDAO shkcDao;
+	
 	
 	public LsdDAO getLsdDao() {
 		return lsdDao;
@@ -545,6 +547,15 @@ public class DwrService {
 	 */
 	public Product getBadProductObjBySerialNum(String serial_num) {
 		return productDao.getBadProductBySerialNum(serial_num);
+	}
+	
+	/**
+	 * 根据会员卡号取会员卡档案
+	 * @param hyk_id
+	 * @return
+	 */
+	public Hykda getHykdaById(String hyk_id) {
+		return hykdaDao.getHykdaByHykh(hyk_id);
 	}
 	
 	

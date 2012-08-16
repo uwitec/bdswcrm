@@ -50,7 +50,7 @@ public class HykfkAction extends BaseAction {
 			orderName = "hykh";
 		}
 		if (orderType.equals("")) {
-			orderType = "desc";
+			orderType = "asc";
 		}
 
 		con += " order by " + orderName + " " + orderType + "";

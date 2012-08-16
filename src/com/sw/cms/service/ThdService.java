@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.sw.cms.dao.AccountDzdDAO;
 import com.sw.cms.dao.AccountsDAO;
+import com.sw.cms.dao.HykJfFlowDAO;
 import com.sw.cms.dao.ProductDAO;
 import com.sw.cms.dao.ProductKcDAO;
 import com.sw.cms.dao.ProductSaleFlowDAO;
@@ -18,6 +19,9 @@ import com.sw.cms.dao.YushoukDAO;
 import com.sw.cms.model.AccountDzd;
 import com.sw.cms.model.Cgthd;
 import com.sw.cms.model.CgthdProduct;
+import com.sw.cms.model.HykJfFlow;
+import com.sw.cms.model.Jfgz;
+import com.sw.cms.model.Lsd;
 import com.sw.cms.model.Page;
 import com.sw.cms.model.Product;
 import com.sw.cms.model.ProductSaleFlow;
@@ -52,6 +56,7 @@ public class ThdService {
 	private YushoukDAO yushoukDao;
 	private ProductSaleFlowDAO productSaleFlowDao;
 	private ProductDAO productDao;
+	private HykJfFlowDAO hykJfFlowDao;
 	/**
 	 * 查询退货单列表，带分页
 	 * @param con
@@ -84,6 +89,11 @@ public class ThdService {
 			this.updateThdJe(thd);			//处理退货单金额相关内容
 			
 			this.addProductSaleFlow(thd, thdProducts);  //处理退货单商品交易情况
+			
+			if(thd.getHyk_id() != null && !thd.getHyk_id().equals("")){
+				this.saveHykJfFlow(thd);   //保存会员卡积分流水
+			}
+		
 		}
 	}
 	
@@ -157,6 +167,10 @@ public class ThdService {
 			this.updateThdJe(thd);          //处理退货单金额相关内容
 			
 			this.addProductSaleFlow(thd, thdProducts);  //处理退货单商品交易情况
+			
+			if(thd.getHyk_id() != null && !thd.getHyk_id().equals("")){
+				this.saveHykJfFlow(thd);   //保存会员卡积分流水
+			}
 		}
 		
 	}
@@ -494,7 +508,34 @@ public class ThdService {
 		}
 	}
 	
+	/**
+	 * 保存积分流水
+	 * @param lsd
+	 */
+	private void saveHykJfFlow(Thd thd){
+		HykJfFlow info = new HykJfFlow();
+		info.setHyk_id(thd.getHyk_id());
+		info.setCzr(thd.getCzr());
+		info.setXfje(0-thd.getThdje());
+		info.setYw_id(thd.getThd_id());
+		info.setJsr(thd.getTh_fzr());
+		
+		Jfgz jfgz = hykJfFlowDao.getJfgz(thd.getHyk_id());
+		info.setJf(0-(thd.getThdje()/jfgz.getXfje()*jfgz.getDyjf()));
+		
+		hykJfFlowDao.saveHykJfFlow(info);
+	}
 	
+	public HykJfFlowDAO getHykJfFlowDao() {
+		return hykJfFlowDao;
+	}
+
+
+	public void setHykJfFlowDao(HykJfFlowDAO hykJfFlowDao) {
+		this.hykJfFlowDao = hykJfFlowDao;
+	}
+
+
 	/**
 	 * 添加预收款
 	 * @param ysk

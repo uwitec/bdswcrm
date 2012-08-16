@@ -7,6 +7,7 @@ import java.util.Map;
 import com.sw.cms.dao.AccountDzdDAO;
 import com.sw.cms.dao.AccountsDAO;
 import com.sw.cms.dao.CkdDAO;
+import com.sw.cms.dao.HykJfFlowDAO;
 import com.sw.cms.dao.LsdDAO;
 import com.sw.cms.dao.LsyskDAO;
 import com.sw.cms.dao.PosTypeDAO;
@@ -22,6 +23,8 @@ import com.sw.cms.dao.XsskDAO;
 import com.sw.cms.model.AccountDzd;
 import com.sw.cms.model.Ckd;
 import com.sw.cms.model.CkdProduct;
+import com.sw.cms.model.HykJfFlow;
+import com.sw.cms.model.Jfgz;
 import com.sw.cms.model.Lsd;
 import com.sw.cms.model.LsdProduct;
 import com.sw.cms.model.Page;
@@ -61,7 +64,18 @@ public class LsdService {
 	private PosTypeDAO posTypeDao;
 	private QtzcDAO qtzcDao;
 	private ProductSaleFlowDAO productSaleFlowDao;
+	private HykJfFlowDAO hykJfFlowDao;
 	
+	public HykJfFlowDAO getHykJfFlowDao() {
+		return hykJfFlowDao;
+	}
+
+
+	public void setHykJfFlowDao(HykJfFlowDAO hykJfFlowDao) {
+		this.hykJfFlowDao = hykJfFlowDao;
+	}
+
+
 	/**
 	 * 获取零售单列表（带分页）
 	 * @param con
@@ -121,12 +135,35 @@ public class LsdService {
 			if(lsd.getFkfs().equals("刷卡") && !lsd.getPos_id().equals("")){
 				this.saveQtzc(lsd);
 			}
+			
+			//保存积分流水
+			if(lsd.getHyk_id() != null && !lsd.getHyk_id().equals("")){
+				this.saveHykJfFlow(lsd);
+			}
 		}
 		
 		//如果审批状态为待审批，发送系统消息
 		if(lsd.getSp_state() != null && lsd.getSp_state().equals("2")){
 			this.saveMsg(lsd.getId(), lsd.getCzr());
 		}
+	}
+	
+	/**
+	 * 保存积分流水
+	 * @param lsd
+	 */
+	private void saveHykJfFlow(Lsd lsd){
+		HykJfFlow info = new HykJfFlow();
+		info.setHyk_id(lsd.getHyk_id());
+		info.setCzr(lsd.getCzr());
+		info.setXfje(lsd.getLsdje());
+		info.setYw_id(lsd.getId());
+		info.setJsr(lsd.getXsry());
+		
+		Jfgz jfgz = hykJfFlowDao.getJfgz(lsd.getHyk_id());
+		info.setJf(lsd.getLsdje()/jfgz.getXfje()*jfgz.getDyjf());
+		
+		hykJfFlowDao.saveHykJfFlow(info);
 	}
 	
 	
@@ -166,6 +203,11 @@ public class LsdService {
 			//如果付款方式为刷卡，并且POS机编号不为空，自动保存费用信息
 			if(lsd.getFkfs().equals("刷卡") && !lsd.getPos_id().equals("")){
 				this.saveQtzc(lsd);
+			}
+			
+			//保存积分流水
+			if(lsd.getHyk_id() != null && !lsd.getHyk_id().equals("")){
+				this.saveHykJfFlow(lsd);
 			}
 		}	
 		

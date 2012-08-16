@@ -86,6 +86,11 @@ public class HykdaAction extends BaseAction {
 	}
 	
 	
+	public void getHykdaInfo(){
+		hykda = hykdaService.getHykdaById(id);
+	}
+	
+	
 	/**
 	 * ×¢Ïú»áÔ±¿¨
 	 * @return

@@ -48,6 +48,15 @@ public class Lsd {
 	private String spr;        //审批人
 	private String sp_date;    //审批时间
 	private String sp_opinion; //审批意见
+	private String hyk_id;    //会员卡编号
+
+	public String getHyk_id() {
+		return hyk_id;
+	}
+
+	public void setHyk_id(String hyk_id) {
+		this.hyk_id = hyk_id;
+	}
 
 	public String getAddress() {
 		return address;

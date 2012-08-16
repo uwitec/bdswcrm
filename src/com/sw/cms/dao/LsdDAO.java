@@ -57,9 +57,9 @@ public class LsdDAO extends JdbcBaseDAO {
 	 */
 	public void saveLsd(Lsd lsd,List lsdProducts){
 		
-		String sql = "insert into lsd(creatdate,xsry,fkfs,state,store_id,client_name,lxr,lxdh,mobile,mail,msn,address,p_code,fplx,khhzh,sh,fpxx,yhje,lsdje,skzh,skje,lsdcbj,ms,czr,cz_date,has_yushk,yushk_id,yushkje,id,kp_mc,kp_address,kp_dh,lsdkhcb,sp_state,pos_id) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,now(),?,?,?,?,?,?,?,?,?,?)";
+		String sql = "insert into lsd(creatdate,xsry,fkfs,state,store_id,client_name,lxr,lxdh,mobile,mail,msn,address,p_code,fplx,khhzh,sh,fpxx,yhje,lsdje,skzh,skje,lsdcbj,ms,czr,cz_date,has_yushk,yushk_id,yushkje,id,kp_mc,kp_address,kp_dh,lsdkhcb,sp_state,pos_id,hyk_id) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,now(),?,?,?,?,?,?,?,?,?,?,?)";
 		
-		Object[] param = new Object[34];
+		Object[] param = new Object[35];
 		
 		param[0] = lsd.getCreatdate();
 		param[1] = lsd.getXsry();
@@ -95,6 +95,7 @@ public class LsdDAO extends JdbcBaseDAO {
 		param[31] = lsd.getLsdkhcb();
 		param[32] = lsd.getSp_state();
 		param[33] = lsd.getPos_id();
+		param[34] = lsd.getHyk_id();
 		
 		this.getJdbcTemplate().update(sql,param);
 		
@@ -109,9 +110,9 @@ public class LsdDAO extends JdbcBaseDAO {
 	 * @param lsdProducts
 	 */
 	public void updateLsd(Lsd lsd,List lsdProducts){
-		String sql = "update lsd set creatdate=?,xsry=?,fkfs=?,state=?,store_id=?,client_name=?,lxr=?,lxdh=?,mobile=?,mail=?,msn=?,address=?,p_code=?,fplx=?,khhzh=?,sh=?,fpxx=?,yhje=?,lsdje=?,skzh=?,skje=?,lsdcbj=?,ms=?,czr=?,cz_date=now(),has_yushk=?,yushk_id=?,yushkje=?,kp_mc=?,kp_address=?,kp_dh=?,lsdkhcb=?,sp_state=?,pos_id=? where id=?";
+		String sql = "update lsd set creatdate=?,xsry=?,fkfs=?,state=?,store_id=?,client_name=?,lxr=?,lxdh=?,mobile=?,mail=?,msn=?,address=?,p_code=?,fplx=?,khhzh=?,sh=?,fpxx=?,yhje=?,lsdje=?,skzh=?,skje=?,lsdcbj=?,ms=?,czr=?,cz_date=now(),has_yushk=?,yushk_id=?,yushkje=?,kp_mc=?,kp_address=?,kp_dh=?,lsdkhcb=?,sp_state=?,pos_id=?,hyk_id=? where id=?";
 		
-		Object[] param = new Object[34];
+		Object[] param = new Object[35];
 		
 		param[0] = lsd.getCreatdate();
 		param[1] = lsd.getXsry();
@@ -146,7 +147,8 @@ public class LsdDAO extends JdbcBaseDAO {
 		param[30] = lsd.getLsdkhcb();
 		param[31] = lsd.getSp_state();
 		param[32] = lsd.getPos_id();
-		param[33] = lsd.getId();
+		param[33] = lsd.getHyk_id();
+		param[34] = lsd.getId();
 		
 		this.getJdbcTemplate().update(sql,param);
 		
@@ -481,6 +483,7 @@ public class LsdDAO extends JdbcBaseDAO {
 			}
 			if(SqlUtil.columnIsExist(rs,"sp_opinion")) lsd.setSp_opinion(rs.getString("sp_opinion"));
 			if(SqlUtil.columnIsExist(rs,"pos_id")) lsd.setPos_id(rs.getString("pos_id"));
+			if(SqlUtil.columnIsExist(rs,"hyk_id")) lsd.setHyk_id(rs.getString("hyk_id"));
 			
 			return lsd;
 		}

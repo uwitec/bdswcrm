@@ -27,6 +27,14 @@ public class Thd {
 	
 	private String yw_type;      //退货类型 1:销售订单;2:零售订单
 	
+	private String hyk_id;   //会员卡编号
+	
+	public String getHyk_id() {
+		return hyk_id;
+	}
+	public void setHyk_id(String hyk_id) {
+		this.hyk_id = hyk_id;
+	}
 	public String getClient_name() {
 		return client_name;
 	}
