@@ -91,11 +91,30 @@ String flag = StringUtils.nullToStr(VS.findValue("flag"));
 			}
 		}		
 		
+		
 		//判断是否存在强制输入序列号的商品没有输入序列号
-		for(var i=0;i<allCount;i++){
+		for(var i=0;i<=allCount;i++){
 			var qzflag = document.getElementById("qz_flag_" + i);            //标志是否强制输入
 			var qzserialnum = document.getElementById("qz_serial_num_" + i); //序列号
 			var pn = document.getElementById("product_name_" + i);           //商品名称
+			
+			var pricemx = document.getElementById("price_" + i);            //价格
+		    var nummx = document.getElementById("nums_" + i);            //数量
+		    
+		   
+		    if(parseFloat(pricemx.value)<0) 
+		    {
+		      alert("商品" + pn.value + "的价格不能小于0，请重新输入价格！");
+		      return;
+		    }
+		    
+		    if(parseFloat(nummx.value)<0) 
+		    {
+		      alert("商品" + pn.value + "的数量不能小于0，请重新输入数量！");
+		      return;
+		    }
+			
+			
 			
 			if(qzflag != null){
 				if(qzflag.value == "是"){
