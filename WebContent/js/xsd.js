@@ -190,13 +190,22 @@ function hj(){
 	
 	for(var i=0;i<=allCount;i++){			
 		var price = document.getElementById("price_" + i);
-		
+		var pn = document.getElementById("product_name_" + i);
 		if(price != null){
 			if(!InputValid(price,0,"float",0,1,99999999,"销售价格")){
 				price.focus();
 				return;
 			}
+			if(parseFloat(price.value)<0) 
+		    {
+		       alert("商品" + pn.value + "的价格不能小于0，请重新输入价格！");
+		       price.focus();
+		       return;
+		    }
+			
 		}
+		
+		
 		
 		var jgtz = document.getElementById("jgtz_" + i);
 		if(jgtz != null){
@@ -212,7 +221,15 @@ function hj(){
 				nums.focus();
 				return;
 			}
+			if(parseFloat(nums.value)<0) 
+		    {
+		      alert("商品" + pn.value + "的数量不能小于0，请重新输入数量！");
+		      nums.focus();
+		      return;
+		    }
 		}
+		
+		
 		
 		var cbjz = document.getElementById("cbj_" + i);
 		var khcbjz = document.getElementById("kh_cbj_" + i);			
