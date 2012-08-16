@@ -805,6 +805,13 @@
     		<bean class="com.sw.cms.service.StorexsHzService" autowire="byName"/>
     	</property>
     </bean>
+    
+   <!-- 会员积分管理 -->     
+    <bean id="hykJfFlowService"  parent="baseTransaction">
+        <property name="target">
+    		<bean class="com.sw.cms.service.HykJfFlowService" autowire="byName"/>
+    	</property>
+    </bean>    
 </beans>
 
 

@@ -120,8 +120,8 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 		<td class="a2"><%=StringUtils.nullToStr(lsd.getCreatdate()) %></td>		
 	</tr>
 	<tr>
-		<td class="a1" width="15%">经手人</td>
-		<td class="a2"><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(lsd.getXsry())) %></td>
+		<td class="a1" width="15%">会员卡</td>
+		<td class="a2"><%=StringUtils.nullToStr(lsd.getHyk_id()).equals("")?"无":StringUtils.nullToStr(lsd.getHyk_id()) %></td>
 		<td class="a1" width="15%">出货库房</td>
 		<td class="a2"><%=StaticParamDo.getStoreNameById(StringUtils.nullToStr(lsd.getStore_id())) %></td>					
 	</tr>
@@ -137,6 +137,10 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 		<td class="a1" widht="20%">收款账户</td>
 		<td class="a2"><%=StaticParamDo.getAccountNameById(StringUtils.nullToStr(lsd.getSkzh())) %></td>
 	</tr>	
+	<tr>
+		<td class="a1" width="15%">经手人</td>
+		<td class="a2" colspan="3"><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(lsd.getXsry())) %></td>	
+	</tr>
 </table>
 <br>
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	

@@ -622,6 +622,9 @@
     <bean id="storexsHzDao"  class="com.sw.cms.dao.StorexsHzDAO">
     	<property name="jdbcTemplate" ref="jdbcTemplate"/>
     </bean>
+    
+	<!-- 会员卡积分流水 -->
+    <bean id="hykJfFlowDao" class="com.sw.cms.dao.HykJfFlowDAO" autowire="byName"/>
 </beans>
 
 

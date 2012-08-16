@@ -25,10 +25,14 @@
 			<include method="getBadProductObjBySerialNum"/>
 			<include method="getGoodProductObjBySerialNum"/>
 			<include method="getAccountsById"/>
+			<include method="getHykdaById"/>
 		</create>
 		<convert converter="bean" match="com.sw.cms.model.Product">
 			<param name="include" value="productId,productName,productXh,price,lsbj,qz_serial_num,khcbj,gf,img" />
 		</convert>
+		<convert converter="bean" match="com.sw.cms.model.Hykda">
+			<param name="include" value="id,hymc,lxrname,lxdh,mobile,address,mail" />
+		</convert>		
 		<convert converter="bean" match="com.sw.cms.model.shkc">
 			<param name="include" value="productId,productName,productXh,qz_serial_num" />
 		</convert>

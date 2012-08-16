@@ -64,6 +64,19 @@ String flag = StringUtils.nullToStr(VS.findValue("flag"));
 			document.getElementById("state").value = "已提交";
 		}
 		
+		var rdHyks = document.getElementsByName("rd_hyk");
+		var vlHyk = "";
+		for(var i=0;i<rdHyks.length;i++){
+			if(rdHyks[i].checked == true){
+				vlHyk = rdHyks[i].value;
+				break;
+			}
+		}
+		if(vlHyk == "1" && document.getElementById("hyk_id").value == ""){
+			alert("会员卡号不能为空，请输入");
+			return;
+		}
+		
 		if(document.getElementById("fzr").value == ""){
 			alert("经手人不能为空，请选择！");
 			return;
@@ -560,6 +573,53 @@ String flag = StringUtils.nullToStr(VS.findValue("flag"));
 			return;
 		}
 	}	
+	
+	function chkHyk(vl) {
+		if(vl == "1"){
+			document.getElementById("spanHykId").style.display = "";
+			dwr.util.setValue("hyk_id","<%=StringUtils.nullToStr(lsd.getHyk_id()) %>");
+			getHydainfo();
+		}else{
+			document.getElementById("spanHykId").style.display = "none";
+			dwr.util.setValue("hyk_id","");
+			dwr.util.setValue("client_name","");
+			dwr.util.setValue("lxr","");
+			dwr.util.setValue("lxdh","");
+			dwr.util.setValue("mobile","");
+			dwr.util.setValue("address","");
+			dwr.util.setValue("mail","");
+		}
+	}
+	
+	
+	function getHydainfo(){
+		var hyk_id = dwr.util.getValue("hyk_id");
+		if(hyk_id == ""){
+			return;
+		}
+
+		dwrService.getHykdaById(hyk_id,setHydaInfo);		
+	}
+	
+	function setHydaInfo(hykda){
+		if(hykda != null && hykda.id != null){
+			dwr.util.setValue("client_name",hykda.hymc);
+			dwr.util.setValue("lxr",hykda.lxrname);
+			dwr.util.setValue("lxdh",hykda.lxdh);
+			dwr.util.setValue("mobile",hykda.mobile);
+			dwr.util.setValue("address",hykda.address);
+			dwr.util.setValue("mail",hykda.mail);
+		}else{
+			alert("会员卡不存在，请检查");
+			document.getElementById("hyk_id").focus();
+			dwr.util.setValue("client_name","");
+			dwr.util.setValue("lxr","");
+			dwr.util.setValue("lxdh","");
+			dwr.util.setValue("mobile","");
+			dwr.util.setValue("address","");
+			dwr.util.setValue("mail","");
+		}
+	}	
 </script>
 </head>
 <body  onload="chgKpTyle('<%=StringUtils.nullToStr(lsd.getFplx()) %>');initFzrTip();submitSp();showMsg();">
@@ -585,7 +645,19 @@ String flag = StringUtils.nullToStr(VS.findValue("flag"));
 		<td class="a2" width="35%"><input type="text" name="lsd.creatdate" id="creatdate" value="<%=rq %>" style="width:232px" readonly>
 		</td>		
 	</tr>
+	<%
+	String cssStyle2 = "";
+	if(StringUtils.nullToStr(lsd.getHyk_id()).equals("")){
+		cssStyle2 = "display:none;";
+	}
+	%>
 	<tr>		
+		<td class="a1" width="15%">会员卡</td>
+		<td class="a2">
+			<input type="radio"  name="rd_hyk" id="rd_hyk"  value="1"  onclick="chkHyk(this.value);" <%if(!StringUtils.nullToStr(lsd.getHyk_id()).equals("")) out.print("checked"); %>/>有&nbsp;&nbsp;
+			<input type="radio"  name="rd_hyk" id="rd_hyk"  value="0"  onclick="chkHyk(this.value);" <%if(StringUtils.nullToStr(lsd.getHyk_id()).equals("")) out.print("checked"); %>/>无&nbsp;&nbsp;
+			<span id="spanHykId" style="<%=cssStyle2 %>"><input type="text" name="lsd.hyk_id" id="hyk_id" value="<%=StringUtils.nullToStr(lsd.getHyk_id()) %>"  size="24"  title="输入会员卡号" onblur="getHydainfo();"/> <font color="red">*</font></span>
+		</td>	
 		<td class="a1" width="15%">出货库房</td>
 		<td class="a2">
 			<select name="lsd.store_id" id="store_id" style="width:232px">
@@ -603,8 +675,10 @@ String flag = StringUtils.nullToStr(VS.findValue("flag"));
 			%>
 			</select><font color="red">*</font>
 		</td>
+    </tr>		
+	<tr>
 		<td class="a1" width="15%">经手人</td>
-		<td class="a2">
+		<td class="a2" colspan="3">
 		 <input  id="brand"  type="text"  onblur="setValue()" value="<%=StaticParamDo.getRealNameById(lsd.getXsry()) %>" style="width:232px"/> 
 		 <div  id="brandTip" style="  position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;"></div>
 		    <input type="hidden" name="lsd.xsry" id="fzr" value="<%=StringUtils.nullToStr(lsd.getXsry()) %>"/> <font color="red">*</font>

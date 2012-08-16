@@ -97,8 +97,8 @@ List lsdProducts = (List)VS.findValue("lsdProducts");
 		<td class="a2"><%=StringUtils.nullToStr(lsd.getCreatdate()) %></td>		
 	</tr>
 	<tr>
-		<td class="a1" width="15%">经手人</td>
-		<td class="a2"><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(lsd.getXsry())) %></td>
+		<td class="a1" width="15%">会员卡</td>
+		<td class="a2"><%=StringUtils.nullToStr(lsd.getHyk_id()).equals("")?"无":StringUtils.nullToStr(lsd.getHyk_id()) %></td>
 		<td class="a1" width="15%">出货库房</td>
 		<td class="a2"><%=StaticParamDo.getStoreNameById(StringUtils.nullToStr(lsd.getStore_id())) %></td>					
 	</tr>
@@ -122,7 +122,9 @@ List lsdProducts = (List)VS.findValue("lsdProducts");
 	</tr>
 	<tr>
 		<td class="a1">零售单合计金额</td>
-		<td class="a2" colspan="3"><%=JMath.round(lsd.getLsdje(),2) %></td>
+		<td class="a2" ><%=JMath.round(lsd.getLsdje(),2) %></td>
+		<td class="a1" width="15%">经手人</td>
+		<td class="a2"><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(lsd.getXsry())) %></td>		
 	</tr>	
 </table>
 <br>

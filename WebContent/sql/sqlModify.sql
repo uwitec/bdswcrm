@@ -171,6 +171,34 @@ ALTER TABLE rkd_product ADD COLUMN `sd` DOUBLE AFTER `qz_serial_num`,
 --增加售后库存的商品规格长度
 ALTER TABLE `shkc` MODIFY COLUMN `product_xh` VARCHAR(200) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL;
 
+
+2012-08-04修改
+--零售单中添加会员卡编号字段
+ALTER TABLE `lsd` ADD COLUMN `hyk_id` VARCHAR(100) AFTER `pos_id`;
+
+--添加会员卡积分流水表
+CREATE TABLE `hyk_jf_flow` (
+  `seq_id` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `hyk_id` VARCHAR(100) NOT NULL,
+  `yw_id` VARCHAR(100) NOT NULL,
+  `xfje` DOUBLE NOT NULL,
+  `jf` DOUBLE NOT NULL,
+  `cz_date` DATETIME NOT NULL,
+  `czr` VARCHAR(45) NOT NULL,
+  PRIMARY KEY(`seq_id`)
+)
+ENGINE = InnoDB;
+
+2012-08-11修改
+--退货单添加会员卡编号字段
+ALTER TABLE `thd` ADD COLUMN `hyk_id` VARCHAR(100) AFTER `yw_type`;
+--会员积分流水表添加经手人字段
+ALTER TABLE `hyk_jf_flow` ADD COLUMN `jsr` VARCHAR(45) AFTER `czr`;
+--添加会员积分查询功能
+insert into column_mng VALUES ('011003','积分管理','011',30,'',1);
+insert into column_funcs values('011003','FC9922');
+insert into funcs values('FC9922','会员积分查询','会员积分查询','showJfcxCondition.html','121.gif','1','1','11');
+
 2012-8-8修改
 -- 修改accounts表中的double型字段为3位小数位
 ALTER TABLE `accounts` MODIFY COLUMN `dqje` double(24,3)   default '0.000';

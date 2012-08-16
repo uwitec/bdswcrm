@@ -331,7 +331,7 @@
 
 
 思维EIP系统V1.07
-    1、发布日期：2012-06-07
+    1、发布日期：2012-08-11
 
     2、更新内容：
         1)采购添加税点；
@@ -379,6 +379,39 @@
       --序列号去掉首尾空格
       update serial_num_mng set serial_num=trim(serial_num) where serial_num like '% %';
       update serial_num_flow set serial_num=trim(serial_num) where serial_num like '% %';
+      
+			2012-07-12修改
+			--增加售后库存的商品规格长度
+			ALTER TABLE `shkc` MODIFY COLUMN `product_xh` VARCHAR(200) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL;
+			
+			
+			2012-08-04修改
+			--零售单中添加会员卡编号字段
+			ALTER TABLE `lsd` ADD COLUMN `hyk_id` VARCHAR(100) AFTER `pos_id`;
+			
+			--添加会员卡积分流水表
+			CREATE TABLE `hyk_jf_flow` (
+			  `seq_id` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+			  `hyk_id` VARCHAR(100) NOT NULL,
+			  `yw_id` VARCHAR(100) NOT NULL,
+			  `xfje` DOUBLE NOT NULL,
+			  `jf` DOUBLE NOT NULL,
+			  `cz_date` DATETIME NOT NULL,
+			  `czr` VARCHAR(45) NOT NULL,
+			  PRIMARY KEY(`seq_id`)
+			)
+			ENGINE = InnoDB;
+
+			2012-08-11修改	
+			--退货单添加会员卡编号字段
+			ALTER TABLE `thd` ADD COLUMN `hyk_id` VARCHAR(100) AFTER `yw_type`;
+			--会员积分流水表添加经手人字段
+			ALTER TABLE `hyk_jf_flow` ADD COLUMN `jsr` VARCHAR(45) AFTER `czr`;
+			--添加会员积分查询功能
+			insert into column_mng VALUES ('011003','积分管理','011',30,'',1);
+			insert into column_funcs values('011003','FC9922');
+			insert into funcs values('FC9922','会员积分查询','会员积分查询','showJfcxCondition.html','121.gif','1','1','11');			
+      
      
     4、对应SVN版本号：
 
@@ -386,7 +419,7 @@
         -------------------------------------------------------------------------------------------------
            服务器帐套名称            |              帐套部署时间                       |    部署人员
         -------------------------------------------------------------------------------------------------
-         保定思维                    |              2012-06-05                         |     李玉堂                                     
+         保定思维                    |              2012-08-11                         |     李玉堂                                     
          张家口升源                  |                                                 |                                          
          易县未来                    |                                                 |                                               
          定州创逸                    |                                                 |                                         
@@ -402,7 +435,7 @@
          测试帐套                    |                                                 |                                   
          曲阳大河                    |                                                 |                                              
          蠡县一加一                  |                                                 |                        
-         承德惠普（CDHP）            |                                                 |                                         
+         承德惠普（CDHP）            |              2012-08-11                         |    李玉堂                                     
          思维售后                    |                                                 |                         
          石家庄三个帐套（单独服务器）|                                                 |                                               
        ---------------------------------------------------------------------------------------------------          

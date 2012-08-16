@@ -32,6 +32,9 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 <script language='JavaScript' src="js/selClient.js"></script>
 <script language='JavaScript' src="js/selJsr.js"></script>
 <script type="text/javascript" src="js/prototype-1.4.0.js"></script>
+<script type='text/javascript' src='dwr/interface/dwrService.js'></script>
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script>
 <style>
 	.selectTip{background-color:#009;color:#fff;}
 </style>
@@ -55,14 +58,30 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 			alert("退货日期不能为空！");
 			return;
 		}					
-		if(document.getElementById("client_id").value == ""){
-			alert("客户名称不能为空，请选择！");
-			return;
-		}
+
 		if(document.getElementById("fzr").value == ""){
 			alert("经手人不能为空，请选择！");
 			return;
 		}	
+		
+		var rdHyks = document.getElementsByName("rd_hyk");
+		var vlHyk = "";
+		for(var i=0;i<rdHyks.length;i++){
+			if(rdHyks[i].checked == true){
+				vlHyk = rdHyks[i].value;
+				break;
+			}
+		}
+		if(vlHyk == "1" && document.getElementById("hyk_id").value == ""){
+			alert("会员卡号不能为空，请输入");
+			return;
+		}
+		
+		if(document.getElementById("client_id").value == ""){
+			alert("客户名称不能为空，请选择！");
+			return;
+		}
+		
 		if(document.getElementById("store_id").value == ""){
 			alert("退货库房不能为空，请选择！");
 			return;
@@ -378,6 +397,8 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 			var optionObj = new Option("现金","现金");
 			if(typeValue == "现金") optionObj.selected = "selected";
 			typeObj.options.add(optionObj);
+			
+			document.getElementById("tr_hyk").style.display = '';
 		}else{
 			//销售订单
 			document.getElementById("client_name").style.display = '';
@@ -393,6 +414,21 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 			optionObj = new Option("冲抵往来","冲抵往来");
 			if(typeValue == "冲抵往来") optionObj.selected = "selected";
 			typeObj.options.add(optionObj); 
+			
+			document.getElementById("tr_hyk").style.display = 'none';
+			
+			document.getElementById("client_id").value = "";
+			document.getElementById("hyk_id").value = "";
+			
+			var rdHyks = document.getElementsByName("rd_hyk");
+			var vlHyk = "";
+			for(var i=0;i<rdHyks.length;i++){
+				if(rdHyks[i].value == "0"){
+					rdHyks[i].checked = true;
+					break;
+				}
+			}
+			document.getElementById("spanHykId").style.display = "none";
 		}
 	}	
 
@@ -407,6 +443,8 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 			
 			typeObj.options.length = 0;
 			typeObj.options.add(new Option("现金","现金"));
+			
+			document.getElementById("tr_hyk").style.display = '';
 		}else{
 			//销售订单
 			document.getElementById("client_name").style.display = '';
@@ -417,10 +455,54 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 			typeObj.options.length = 0;
 			typeObj.options.add(new Option("现金","现金"));
 			typeObj.options.add(new Option("冲抵往来","冲抵往来"));  
+			
+			document.getElementById("tr_hyk").style.display = 'none';
+			
+			document.getElementById("client_id").value = "";
+			document.getElementById("hyk_id").value = "";
+			
+			var rdHyks = document.getElementsByName("rd_hyk");
+			var vlHyk = "";
+			for(var i=0;i<rdHyks.length;i++){
+				if(rdHyks[i].value == "0"){
+					rdHyks[i].checked = true;
+					break;
+				}
+			}
+			document.getElementById("spanHykId").style.display = "none";
 		}
 		document.getElementById("client_name").value = "";
 		document.getElementById("client_id").value = "";
 	}
+	
+	function chkHyk(vl) {
+		if(vl == "1"){
+			document.getElementById("spanHykId").style.display = "";
+		}else{
+			document.getElementById("spanHykId").style.display = "none";
+			document.getElementById("hyk_id").value = "";
+			document.getElementById("client_id").value = "";
+		}
+	}	
+	
+	function getHydainfo(){
+		var hyk_id = dwr.util.getValue("hyk_id");
+		if(hyk_id == ""){
+			return;
+		}
+
+		dwrService.getHykdaById(hyk_id,setHydaInfo);		
+	}
+	
+	function setHydaInfo(hykda){
+		if(hykda != null && hykda.id != null){
+			dwr.util.setValue("client_id",hykda.hymc);
+		}else{
+			alert("会员卡不存在，请检查");
+			document.getElementById("hyk_id").focus();
+			dwr.util.setValue("client_id","");
+		}
+	}	
 
 	function selXsd(){
 		if(document.getElementById('client_id').value == ""){
@@ -473,19 +555,37 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 				<option value="1" <%if(StringUtils.nullToStr(thd.getYw_type()).equals("1")) out.print("selected"); %>>销售订单</option>
 				<option value="2" <%if(StringUtils.nullToStr(thd.getYw_type()).equals("2")) out.print("selected"); %>>零售单</option>
 			</select> <span style="color:red">*</span>
-		</td>		
-		<td class="a1" width="15%">客户名称</td>
-		<td class="a2">
-		<input type="text" name="thd.client_id" id="client_name" style="width:232px" value="<%=StaticParamDo.getClientNameById(StringUtils.nullToStr(thd.getClient_name())) %>" size="30" maxlength="50" onblur="setClientValue();"><input type="text" name="thd.client_name" id="client_id" style="width:232px;display: none" value="<%=StringUtils.nullToStr(thd.getClient_name()) %>"> <font color="red">*</font>
-		<div id="clientsTip" style="position:absolute;width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		</td>	
-	</tr>
-	<tr>
 		<td class="a1" width="15%">经手人</td>
 		<td class="a2" width="35%">
 		 <input  id="brand"  type="text" mxlength="20" style="width:232px"  onblur="setValue()" value="<%=StaticParamDo.getRealNameById(thd.getTh_fzr() )%>"/> <font color="red">*</font>
          <div id="brandTip" style="  position:absolute;width:132px;border:1px solid #CCCCCC;background-Color:#fff;display:none;"  ></div>
 		    <input type="hidden" name="thd.th_fzr" id="fzr" value="<%=StringUtils.nullToStr(thd.getTh_fzr()) %>"/>	
+		</td>				
+	</tr>
+	<%
+	String cssTrHyk = "display:none";
+	if("2".equals(thd.getYw_type())){
+		cssTrHyk = "";
+	}
+	String cssSpanHykId = "display:none";
+	if(!"".equals(StringUtils.nullToStr(thd.getHyk_id()))){
+		cssSpanHykId = "";
+	}
+	%>
+	<tr id="tr_hyk" style="<%=cssTrHyk %>">
+		<td class="a1" width="15%">会员卡</td>
+		<td class="a2"  colspan="3">
+			<input type="radio"  name="rd_hyk" id="rd_hyk"  value="1"  onclick="chkHyk(this.value);" <%if(!StringUtils.nullToStr(thd.getHyk_id()).equals("")) out.print("checked"); %>/>有&nbsp;&nbsp;
+			<input type="radio"  name="rd_hyk" id="rd_hyk"  value="0"  onclick="chkHyk(this.value);"  <%if(StringUtils.nullToStr(thd.getHyk_id()).equals("")) out.print("checked"); %>/>无&nbsp;&nbsp;
+			<span id="spanHykId" style="<%=cssSpanHykId %>;"><input type="text" name="thd.hyk_id" id="hyk_id" value="<%=StringUtils.nullToStr(thd.getHyk_id()) %>"  size="24"  title="输入会员卡号" onblur="getHydainfo();"/> <font color="red">*</font></span>
+		</td>	
+	</tr>	
+	<tr>
+		<td class="a1" width="15%">客户名称</td>
+		<td class="a2">
+		<input type="text" name="thd.client_id" id="client_name" style="width:232px" value="<%=StaticParamDo.getClientNameById(StringUtils.nullToStr(thd.getClient_name())) %>" size="30" maxlength="50" onblur="setClientValue();"><input type="text" name="thd.client_name" id="client_id" style="width:232px;display: none" value="<%=StringUtils.nullToStr(thd.getClient_name()) %>"> <font color="red">*</font>
+		<div id="clientsTip" style="position:absolute;width:300px;border:1px solid #CCCCCC;background-Color:#fff;display:none;" ></div>
 		</td>	
 		<td class="a1">退款方式</td>
 		<td class="a2">
