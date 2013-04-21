@@ -11,11 +11,14 @@ import org.apache.commons.logging.LogFactory;
 import com.sw.cms.dao.InitParamDAO;
 import com.sw.cms.dao.KcMxReportDAO;
 import com.sw.cms.dao.ProductDAO;
+import com.sw.cms.dao.ProductKcQcXmlDAO;
 import com.sw.cms.dao.StoreDAO;
 import com.sw.cms.dao.UserDAO;
 import com.sw.cms.model.StoreHouse;
 import com.sw.cms.util.DateComFunc;
 import com.sw.cms.util.StringUtils;
+import com.sw.cms.xml.productkc.ProductKcQc;
+import com.sw.cms.xml.productkc.ProductKcQcXmlDo;
 
 public class InitParamService {
 	
@@ -24,7 +27,18 @@ public class InitParamService {
 	private StoreDAO storeDao;
 	private ProductDAO productDao;
 	private UserDAO userDao;
+	private ProductKcQcXmlDAO productKcQcXmlDao;
 	
+
+
+	public ProductKcQcXmlDAO getProductKcQcXmlDao() {
+		return productKcQcXmlDao;
+	}
+
+	public void setProductKcQcXmlDao(ProductKcQcXmlDAO productKcQcXmlDao) {
+		this.productKcQcXmlDao = productKcQcXmlDao;
+	}
+
 	private Log log = LogFactory.getLog(getClass());
 	
 	/**
@@ -195,6 +209,88 @@ public class InitParamService {
 		}
 		
 		log.info("更新员工工龄成功");
+	}
+	
+	public void insertKcQcNew(){
+		initParamDao.genKcQcNew();
+	}
+	
+	
+	/**
+	 * 批量添加库存期初信息（XML）
+	 * 例如：要批量添加2009-09-01到2009-10-01的期初<BR>
+	 * 则参数start_date=2009-09-01<BR>
+	 * 参数end_date=2009-10-01<BR>
+	 * @param start_date 开始日期
+	 * @param end_date   结束日期
+	 */
+	public void insertBatchProductKcQcXml(String start_date,String end_date){
+		
+		System.out.println("开始生成" + start_date + "至" + end_date + "库存信息");
+		Date curDate = DateComFunc.strToDate(start_date,"yyyy-MM-dd");		
+		
+		List storeList = storeDao.getAllStoreList();
+		if(storeList == null || storeList.size() <=0){
+			return;
+		}
+		
+		while(DateComFunc.formatDate(curDate, "yyyy-MM-dd").compareToIgnoreCase(end_date) <= 0){
+			String cdat_1 =  DateComFunc.formatDate(curDate,"yyyy-MM-dd");
+			System.out.println("开始生成" + cdat_1 + "库存");
+			
+			//删除当前库存，重新生成
+			productKcQcXmlDao.deleteProductKcQcXml(cdat_1);
+			
+			//分仓库库存生成
+			for(int i=0;i<storeList.size();i++){
+				StoreHouse storeHouse = (StoreHouse)storeList.get(i);
+				
+				String store_id = storeHouse.getId();
+				System.out.println("-----------------------------------------------------------");
+				System.out.println("当前库房" + store_id + new Date());
+				
+				List kcList = productKcQcXmlDao.getProducts(store_id, cdat_1);
+				
+				ProductKcQc productKcQc = new ProductKcQc();
+				productKcQc.setCdate(cdat_1);
+				productKcQc.setStoreId(store_id);
+				productKcQc.setProducts(kcList);
+				
+				ProductKcQcXmlDo xmlDo = new ProductKcQcXmlDo();
+				String xmlString = "";
+				try{
+					xmlString = xmlDo.toXml(productKcQc);  //库存XML文件
+				}catch(Exception e){
+					e.printStackTrace();
+				}
+				
+				//保存库存期初信息
+				productKcQcXmlDao.insertProductKcQcXml(store_id, cdat_1, xmlString);
+				System.out.println("库房" + store_id + "生成结束" + new Date());
+			}
+			
+			System.out.println("-----------------------------------------------------------");
+			System.out.println("开始生成总库存" + new Date());
+			//生成总库存
+			List kcList = productKcQcXmlDao.getProducts(cdat_1);
+			ProductKcQc productKcQc = new ProductKcQc();
+			productKcQc.setCdate(cdat_1);
+			productKcQc.setStoreId("all");
+			productKcQc.setProducts(kcList);
+			
+			ProductKcQcXmlDo xmlDo = new ProductKcQcXmlDo();
+			String xmlString = "";
+			try{
+				xmlString = xmlDo.toXml(productKcQc);  //库存XML文件
+			}catch(Exception e){
+				e.printStackTrace();
+			}			
+			//保存库存期初信息
+			productKcQcXmlDao.insertProductKcQcXml("all", cdat_1, xmlString);
+			System.out.println("生成总库存结束" + new Date());
+
+			curDate = DateComFunc.addDay(curDate, 1);  //当前天数加1
+		}
 	}
 	
 

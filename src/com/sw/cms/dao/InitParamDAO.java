@@ -5,10 +5,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.sw.cms.dao.base.BeanRowMapper;
 import com.sw.cms.dao.base.JdbcBaseDAO;
 import com.sw.cms.util.Constant;
 import com.sw.cms.util.DateComFunc;
 import com.sw.cms.util.StringUtils;
+import com.sw.cms.xml.productkc.ProductKc;
+import com.sw.cms.xml.productkc.ProductKcQc;
+import com.sw.cms.xml.productkc.ProductKcQcXmlDo;
 
 /**
  * 系统初始化类
@@ -64,6 +68,66 @@ public class InitParamDAO extends JdbcBaseDAO {
 		this.getJdbcTemplate().update(sql);
 		
 		log.info("生成库存期初成功");
+	}
+	
+	/**
+	 * 生成库存期初
+	 * 按新的业务逻辑生成，每天的每个仓库的库存信息存成一个XML文件
+	 * 总库存生成一XML文件保存到数据库中，库房标示用“all”
+	 */
+	public void genKcQcNew(){
+		try{
+			//当前日期
+			String qc_date = DateComFunc.getToday();
+			
+			//删除当店库存期初值，重新生成
+			String dsql = "delete from product_kc_qc_xml where cdate='" + qc_date + "'";
+			this.update(dsql);
+			
+			//取有效的库房列表，生成各库房的期初库存
+			String sql = "select * from storehouse where id not like 'WX%' and flag='1'";
+			List storeList = this.getResultList(sql);
+			if(storeList != null && storeList.size() > 0){
+				for(int i=0; i < storeList.size(); i++){
+					Map map = (Map)storeList .get(i);
+					String store_id = (String)map.get("id");  //库房编号
+					
+					String tempSql = "select a.product_id as productId,a.nums,b.price  from product_kc a left join product b on b.product_id=a.product_id where a.store_id='" + store_id + "'";
+					List productList = this.getResultList(tempSql, new BeanRowMapper(ProductKc.class));
+					
+					ProductKcQc productKcQc = new ProductKcQc();
+					productKcQc.setCdate(qc_date);
+					productKcQc.setStoreId(store_id);
+					productKcQc.setProducts(productList);
+					
+					ProductKcQcXmlDo xmlDo = new ProductKcQcXmlDo();
+					String tempXml = xmlDo.toXml(productKcQc);  //库存XML文件
+					
+					//保存库存期初信息
+					String isql = "insert into product_kc_qc_xml(store_id,cdate,xmlString,createDate) values('" + store_id + "','" + qc_date + "','" + tempXml + "',now())";
+					this.update(isql);
+				}
+			}
+			
+			//生成总得库存期初值
+			String zsql = "select a.product_id as productId,sum(a.nums) as nums,b.price from product_kc a left join product b on b.product_id=a.product_id GROUP by a.product_id,b.price";
+			List productList = this.getResultList(zsql, new BeanRowMapper(ProductKc.class));
+			ProductKcQc productKcQc = new ProductKcQc();
+			productKcQc.setCdate(qc_date);
+			productKcQc.setStoreId("all");
+			productKcQc.setProducts(productList);
+			
+			ProductKcQcXmlDo xmlDo = new ProductKcQcXmlDo();
+			String tempXml = xmlDo.toXml(productKcQc);  //库存XML文件
+			
+			//保存总库存期初信息
+			String isql = "insert into product_kc_qc_xml(store_id,cdate,xmlString,createDate) values('all','" + qc_date + "','" + tempXml + "',now())";
+			this.update(isql);
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
 	}
 	
 	/**

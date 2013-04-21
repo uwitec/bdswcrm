@@ -19,6 +19,7 @@ import com.sw.cms.dao.SerialNumDAO;
 import com.sw.cms.dao.SysInitSetDAO;
 import com.sw.cms.dao.SysMsgDAO;
 import com.sw.cms.dao.UserDAO;
+import com.sw.cms.dao.XsfpglDAO;
 import com.sw.cms.dao.XsskDAO;
 import com.sw.cms.model.AccountDzd;
 import com.sw.cms.model.Ckd;
@@ -35,6 +36,7 @@ import com.sw.cms.model.SerialNumFlow;
 import com.sw.cms.model.SerialNumMng;
 import com.sw.cms.model.SysMsg;
 import com.sw.cms.model.SysUser;
+import com.sw.cms.model.Xsfpgl;
 import com.sw.cms.model.Xssk;
 import com.sw.cms.model.XsskDesc;
 import com.sw.cms.util.DateComFunc;
@@ -65,6 +67,7 @@ public class LsdService {
 	private QtzcDAO qtzcDao;
 	private ProductSaleFlowDAO productSaleFlowDao;
 	private HykJfFlowDAO hykJfFlowDao;
+	private XsfpglDAO xsfpglDao;
 	
 	public HykJfFlowDAO getHykJfFlowDao() {
 		return hykJfFlowDao;
@@ -140,6 +143,12 @@ public class LsdService {
 			if(lsd.getHyk_id() != null && !lsd.getHyk_id().equals("")){
 				this.saveHykJfFlow(lsd);
 			}
+			
+			//保存待开发票信息
+			if(!lsd.getFplx().equals("出库单")){
+				//非出库单是，保存待开发票信息
+				this.saveXsfp(lsd);
+			}
 		}
 		
 		//如果审批状态为待审批，发送系统消息
@@ -164,6 +173,32 @@ public class LsdService {
 		info.setJf(lsd.getLsdje()/jfgz.getXfje()*jfgz.getDyjf());
 		
 		hykJfFlowDao.saveHykJfFlow(info);
+	}
+	
+	/**
+	 * 保存销售发票（生成待开发票）
+	 * @param lsd
+	 */
+	private void saveXsfp(Lsd lsd){
+		
+		Xsfpgl xsfp = new Xsfpgl();
+		
+		xsfp.setFplx(lsd.getFplx());
+		xsfp.setKpmc(lsd.getKp_mc());
+		xsfp.setFpje(lsd.getLsdje());
+		xsfp.setKpdz(lsd.getKp_address());
+		xsfp.setKpdh(lsd.getKp_dh());
+		xsfp.setKhhzh(lsd.getKhhzh());
+		xsfp.setSh(lsd.getSh());
+		xsfp.setFpxxzy(lsd.getFpxx());
+		xsfp.setJy_date(lsd.getCreatdate());
+		xsfp.setJy_jsr(lsd.getXsry());
+		xsfp.setYw_type("零售");
+		xsfp.setYw_id(lsd.getId());
+		xsfp.setState("待开");
+		xsfp.setCzr(lsd.getCzr());
+		
+		xsfpglDao.saveXsfp(xsfp);
 	}
 	
 	
@@ -208,6 +243,12 @@ public class LsdService {
 			//保存积分流水
 			if(lsd.getHyk_id() != null && !lsd.getHyk_id().equals("")){
 				this.saveHykJfFlow(lsd);
+			}
+			
+			//保存待开发票信息
+			if(!lsd.getFplx().equals("出库单")){
+				//非出库单是，保存待开发票信息
+				this.saveXsfp(lsd);
 			}
 		}	
 		
@@ -950,6 +991,16 @@ public class LsdService {
 
 	public void setProductSaleFlowDao(ProductSaleFlowDAO productSaleFlowDao) {
 		this.productSaleFlowDao = productSaleFlowDao;
+	}
+
+
+	public XsfpglDAO getXsfpglDao() {
+		return xsfpglDao;
+	}
+
+
+	public void setXsfpglDao(XsfpglDAO xsfpglDao) {
+		this.xsfpglDao = xsfpglDao;
 	}
 
 }

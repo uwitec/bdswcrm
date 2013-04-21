@@ -1,5 +1,6 @@
 package com.sw.cms.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -7,6 +8,9 @@ import java.util.Map;
 
 import com.sw.cms.dao.base.JdbcBaseDAO;
 import com.sw.cms.util.StringUtils;
+import com.sw.cms.xml.productkc.ProductKc;
+import com.sw.cms.xml.productkc.ProductKcQc;
+import com.sw.cms.xml.productkc.ProductKcQcXmlDo;
 
 /**
  * 库存统计
@@ -15,6 +19,9 @@ import com.sw.cms.util.StringUtils;
  */
 
 public class KcMxReportDAO extends JdbcBaseDAO {
+
+	private String productSql;
+
 
 	/**
 	 * 按查询条件取库存商品列表
@@ -171,6 +178,53 @@ public class KcMxReportDAO extends JdbcBaseDAO {
 				map.put(tempMap.get("product_id"), tempMap.get("nums"));
 			}
 		}
+		return map;
+	}
+	
+	
+	/**
+	 * 批量取库存期初信息（期初修改为XML方式保存后使用）
+	 * @param product_kind
+	 * @param product_name
+	 * @param cdate
+	 * @param store_id
+	 * @return
+	 */
+	public Map getKcqcMap(String cdate,String store_id){
+		Map map = new HashMap();
+			
+		List qcProducts = new ArrayList();   //期初文件中包含的商品
+		
+		//取库存期初XML
+		String qcSql = "select * from product_kc_qc_xml where cdate='" + cdate + "'";
+		if(!store_id.equals("")){
+			qcSql += " and store_id='" + store_id + "'";
+		}else{
+			qcSql += " and store_id='all'";
+		}
+		Map qcMap = this.getResultMap(qcSql);
+		String xmlString = "";
+		if(qcMap != null){
+			xmlString = (String)qcMap.get("xmlString");  //期初XML文件
+		}
+		
+		if(xmlString != null && !xmlString.equals("")){
+			ProductKcQcXmlDo xmlDo = new ProductKcQcXmlDo();
+			try{
+				ProductKcQc productKcQc = xmlDo.fromXml(xmlString);
+				qcProducts = productKcQc.getProducts();   //期初文件中包括的所有商品
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}
+		
+		if(qcProducts != null && qcProducts.size() > 0){
+			for(int k=0;k<qcProducts.size();k++){
+				ProductKc productKc = (ProductKc)qcProducts.get(k);
+				map.put(productKc.getProductId(), productKc.getNums());
+			}
+		}
+		
 		return map;
 	}
 	

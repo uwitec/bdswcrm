@@ -41,7 +41,7 @@ public class ProductDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public Page getProductList(String con, int curPage, int rowsPerPage) {
-		String sql = "select a.product_id,a.product_xh,a.product_name,b.name as product_kind,a.gysmc,a.price,a.lsxj,a.fxxj,a.prop,a.state  from product a left join product_kind b on b.id=a.product_kind where 1=1";
+		String sql = "select a.product_id,a.sp_txm,a.product_xh,a.product_name,b.name as product_kind,a.gysmc,a.price,a.lsxj,a.fxxj,a.prop,a.state  from product a left join product_kind b on b.id=a.product_kind where 1=1";
 
 		if (!con.equals("")) {
 			sql = sql + con;

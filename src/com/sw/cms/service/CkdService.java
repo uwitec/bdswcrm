@@ -20,6 +20,7 @@ import com.sw.cms.dao.StoreDAO;
 import com.sw.cms.dao.SysInitSetDAO;
 import com.sw.cms.dao.UserDAO;
 import com.sw.cms.dao.XsdDAO;
+import com.sw.cms.dao.XsfpglDAO;
 import com.sw.cms.dao.XsskDAO;
 import com.sw.cms.dao.YufukDAO;
 import com.sw.cms.model.AccountDzd;
@@ -34,6 +35,7 @@ import com.sw.cms.model.SerialNumMng;
 import com.sw.cms.model.SysUser;
 import com.sw.cms.model.Xsd;
 import com.sw.cms.model.XsdProduct;
+import com.sw.cms.model.Xsfpgl;
 import com.sw.cms.model.Xssk;
 import com.sw.cms.model.XsskDesc;
 import com.sw.cms.util.DateComFunc;
@@ -65,6 +67,7 @@ public class CkdService {
 	private UserDAO userDao;
 	private PosTypeDAO posTypeDao;
 	private QtzcDAO qtzcDao;
+	private XsfpglDAO xsfpglDao;
 
 	
 	/**
@@ -229,9 +232,14 @@ public class CkdService {
 			
 			//生成商品销售明细
 			this.addProductSaleFlow(xsd, xsdProducts);
+			
+			//生成待开发票信息
+			if(!xsd.getFplx().equals("出库单")){
+				//非出库单是，保存待开发票信息
+				this.saveXsfp(xsd);
+			}
 		}
 	}
-
 	
 	
 	/**
@@ -697,6 +705,33 @@ public class CkdService {
 	}
 	
 	
+	/**
+	 * 保存销售发票（生成待开发票）
+	 * @param lsd
+	 */
+	private void saveXsfp(Xsd xsd){
+		
+		Xsfpgl xsfp = new Xsfpgl();
+		
+		xsfp.setFplx(xsd.getFplx());
+		xsfp.setKpmc(xsd.getKp_mc());
+		xsfp.setFpje(xsd.getXsdje());
+		xsfp.setKpdz(xsd.getKp_address());
+		xsfp.setKpdh(xsd.getKp_dh());
+		xsfp.setKhhzh(xsd.getKhhzh());
+		xsfp.setSh(xsd.getSh());
+		xsfp.setFpxxzy(xsd.getFpxx());
+		xsfp.setJy_date(xsd.getCreatdate());
+		xsfp.setJy_jsr(xsd.getFzr());
+		xsfp.setYw_type("销售");
+		xsfp.setYw_id(xsd.getId());
+		xsfp.setState("待开");
+		xsfp.setCzr(xsd.getCzr());
+		
+		xsfpglDao.saveXsfp(xsfp);
+	}
+	
+	
 	public void setCkdDao(CkdDAO ckdDao) {
 		this.ckdDao = ckdDao;
 	}
@@ -877,6 +912,18 @@ public class CkdService {
 
 	public void setQtzcDao(QtzcDAO qtzcDao) {
 		this.qtzcDao = qtzcDao;
+	}
+
+
+
+	public XsfpglDAO getXsfpglDao() {
+		return xsfpglDao;
+	}
+
+
+
+	public void setXsfpglDao(XsfpglDAO xsfpglDao) {
+		this.xsfpglDao = xsfpglDao;
 	}
 
 }

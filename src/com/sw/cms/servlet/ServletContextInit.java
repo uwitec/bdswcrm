@@ -38,8 +38,8 @@ public class ServletContextInit extends HttpServlet {
 			//Thread.sleep(100*1000);
 			
 			//调整期初等的操作放到线程中做2010-01-05
-			//Thread th = new Thread(new GenQcThread());
-			//th.start();
+//			Thread th = new Thread(new GenQcThread());
+//			th.start();
 			
 		}catch(Exception e){
 			log.error("初始化spring context失败，失败原因" + e.getMessage());

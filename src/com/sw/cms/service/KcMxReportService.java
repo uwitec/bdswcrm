@@ -84,6 +84,26 @@ public class KcMxReportService {
 	
 	
 	/**
+	 * 批量取库存期初信息（期初修改为XML方式保存后使用）
+	 * @param cdate
+	 * @param store_id
+	 * @return
+	 */
+	public Map getKcqcMap(String cdate,String store_id){
+		String xtqyrq = sysInitSetDao.getSysInitSet().getQyrq(); //系统启用日期
+		if(xtqyrq == null){
+			xtqyrq = "";
+		}
+		
+		//如果用户选择日期小于系统启用日期
+		if(cdate.compareTo(xtqyrq)<0){
+			cdate = xtqyrq;
+		}
+		return kcMxReportDao.getKcqcMap(cdate,store_id);
+	}
+	
+	
+	/**
 	 * 取库存变化明细
 	 * 包括出库单、入库单、库房调拨
 	 * @param product_id

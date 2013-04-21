@@ -32,8 +32,7 @@ public class LsdDAO extends JdbcBaseDAO {
 	 */
 	public Page getLsdList(String con,int curPage, int rowsPerPage){
 		String sql = "select a.id,a.client_name,a.lsdje,a.creatdate,a.state,b.real_name as xsry,a.czr,a.lxr,a.lxdh,a.sp_state from lsd a left join sys_user b on b.user_id=a.xsry where 1=1";
-		if(!con.equals(""))
-		{
+		if(!con.equals("")) {
 			sql = sql + con;
 		}	
 		return this.getResultByPage(sql, curPage, rowsPerPage);
