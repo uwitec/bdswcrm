@@ -77,11 +77,11 @@ if(!store_id.equals("")){
 	<TBODY>
 <%		
 	//根据商品编号、开始时间、库房编号取库存期初情况
-	Map qcMap = kcMxReportService.getKcqcMxMap(product_id,start_date,store_id);
+	Map qcMap = kcMxReportService.getKcqcMap(start_date,store_id);
 	
 	String strNums = "0";   //期初数
 	if(qcMap != null){
-		strNums = StringUtils.nullToStr(qcMap.get("nums"));
+		strNums = StringUtils.nullToStr(qcMap.get(product_id));
 		if(strNums.equals("")){
 			strNums = "0";
 		}

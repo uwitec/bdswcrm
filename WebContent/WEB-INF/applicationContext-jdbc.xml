@@ -625,6 +625,12 @@
     
 	<!-- 会员卡积分流水 -->
     <bean id="hykJfFlowDao" class="com.sw.cms.dao.HykJfFlowDAO" autowire="byName"/>
+    
+	<!-- 销售发票管理 -->
+    <bean id="xsfpglDao" class="com.sw.cms.dao.XsfpglDAO" autowire="byName"/>    
+    
+	<!-- 库存期初的XML管理方式 -->
+    <bean id="productKcQcXmlDao" class="com.sw.cms.dao.ProductKcQcXmlDAO" autowire="byName"/>        
 </beans>
 
 

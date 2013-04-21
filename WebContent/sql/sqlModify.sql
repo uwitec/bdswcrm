@@ -187,7 +187,8 @@ CREATE TABLE `hyk_jf_flow` (
   `czr` VARCHAR(45) NOT NULL,
   PRIMARY KEY(`seq_id`)
 )
-ENGINE = InnoDB;
+ENGINE = InnoDB
+CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 2012-08-11修改
 --退货单添加会员卡编号字段
@@ -208,3 +209,41 @@ ALTER TABLE `accounts` MODIFY COLUMN `qcje` double(24,3)   default '0.000';
 2012-8-10修改
 ---数据字典的基础表丢失一条记录
 INSERT INTO `sjzd_jbxx` VALUES ('SJZD_ZCLX','支付类型（摊销付款）','支付类型（摊销付款）',4);
+
+
+2012-08-25修改
+--添加销售发票管理
+CREATE TABLE `xsfpgl` (
+  `id` VARCHAR(50) NOT NULL,
+  `fplx` VARCHAR(45),
+  `kpmc` VARCHAR(100),
+  `fpje` DOUBLE,
+  `kpdz` VARCHAR(100),
+  `kpdh` VARCHAR(50),
+  `khhzh` VARCHAR(200),
+  `sh` VARCHAR(45),
+  `fpxxzy` VARCHAR(500),
+  `jy_jsr` VARCHAR(45),
+  `jy_date` VARCHAR(45),
+  `kp_jsr` VARCHAR(45),
+  `kp_date` VARCHAR(45),
+  `yw_type` VARCHAR(45),
+  `yw_id` VARCHAR(45),
+  `state` VARCHAR(45),
+  `cz_date` DATETIME,
+  `czr` VARCHAR(45),
+  PRIMARY KEY(`id`)
+)
+ENGINE = InnoDB;
+
+2013-04-21修改
+--新的库存期初表，采用xml方式存储，提升数据库的查询效率
+CREATE TABLE `product_kc_qc_xml` (
+  `store_id` VARCHAR(20) NOT NULL,
+  `cdate` VARCHAR(20) NOT NULL,
+  `xmlString` LONGTEXT,
+  `createDate` DATETIME NOT NULL,
+  PRIMARY KEY(`store_id`, `cdate`)
+)
+ENGINE = InnoDB;
+

@@ -74,7 +74,7 @@ if(!kind_name.equals("")){
 
 List productKcList = kcMxReportService.getKcProductList(product_kind,product_name,store_id);
 			
-Map qcMap = kcMxReportService.getKcqcMxMap(product_kind,product_name,start_date,store_id);   //期初结果集
+Map qcMap = kcMxReportService.getKcqcMap(start_date,store_id);   //期初结果集
 Map rkMap = kcMxReportService.getRkNums(product_kind,product_name,start_date,end_date,store_id);//入库数结果集
 Map ckMap = kcMxReportService.getCkNums(product_kind,product_name,start_date,end_date,store_id);//出库结果集
 

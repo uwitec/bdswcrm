@@ -123,8 +123,9 @@ String product_state = StringUtils.nullToStr(VS.findValue("product_state"));
 	<thead>
 	<tr>
 		<td nowrap="nowrap" width="10%">商品编号</td>
-		<td nowrap="nowrap" width="25%">商品名称</td>
-		<td nowrap="nowrap" width="27%">规格</td>
+		<td nowrap="nowrap" width="10%">条形码</td>
+		<td nowrap="nowrap" width="20%">商品名称</td>
+		<td nowrap="nowrap" width="22%">规格</td>
 		<td nowrap="nowrap" width="8%">成本价</td>
 		<td nowrap="nowrap" width="10%">商品属性</td>
 		<td nowrap="nowrap" width="8%">状态</td>
@@ -141,6 +142,7 @@ String product_state = StringUtils.nullToStr(VS.findValue("product_state"));
 	%>
 	<tr class="a1"  onmousedown="trSelectChangeCss()" onDblClick="openWin('<%=StringUtils.nullToStr(map.get("product_id")) %>');">		
 		<td nowrap="nowrap"><%=StringUtils.nullToStr(map.get("product_id")) %></td>
+		<td nowrap="nowrap"><%=StringUtils.nullToStr(map.get("sp_txm")) %></td>
 		<td align="left"><%=StringUtils.nullToStr(map.get("product_name")) %></td>
 		<td align="left"><%=StringUtils.nullToStr(map.get("product_xh")) %></td>
 		<td nowrap="nowrap" align="right"><%=JMath.round(price,2) %></td>
