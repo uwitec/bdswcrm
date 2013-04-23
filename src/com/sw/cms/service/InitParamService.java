@@ -227,6 +227,7 @@ public class InitParamService {
 	public void insertBatchProductKcQcXml(String start_date,String end_date){
 		
 		System.out.println("开始生成" + start_date + "至" + end_date + "库存信息");
+		System.out.println("-----------------------------------------------------------");
 		Date curDate = DateComFunc.strToDate(start_date,"yyyy-MM-dd");		
 		
 		List storeList = storeDao.getAllStoreList();
@@ -291,6 +292,8 @@ public class InitParamService {
 
 			curDate = DateComFunc.addDay(curDate, 1);  //当前天数加1
 		}
+		
+		System.out.println("库存期初生成成功");
 	}
 	
 

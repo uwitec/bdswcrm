@@ -25,7 +25,7 @@ public class GenQcThread implements Runnable {
 		
 		//生成库存期初值
 //		service.insertKcQcNew();
-		service.insertBatchProductKcQcXml("2013-04-20", "2013-04-21");
+		service.insertBatchProductKcQcXml("2013-04-12", "2013-04-19");
 	}
 
 }

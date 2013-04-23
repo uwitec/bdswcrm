@@ -192,7 +192,9 @@ public class KcMxReportDAO extends JdbcBaseDAO {
 	 */
 	public Map getKcqcMap(String cdate,String store_id){
 		Map map = new HashMap();
-			
+		
+		map.put("qc_date", cdate);  //期初日期
+		
 		List qcProducts = new ArrayList();   //期初文件中包含的商品
 		
 		//取库存期初XML
@@ -221,7 +223,8 @@ public class KcMxReportDAO extends JdbcBaseDAO {
 		if(qcProducts != null && qcProducts.size() > 0){
 			for(int k=0;k<qcProducts.size();k++){
 				ProductKc productKc = (ProductKc)qcProducts.get(k);
-				map.put(productKc.getProductId(), productKc.getNums());
+				map.put(productKc.getProductId(), productKc.getNums());   //期初数量
+				map.put(productKc.getProductId() + "price", productKc.getPrice());  //期初价格
 			}
 		}
 		
