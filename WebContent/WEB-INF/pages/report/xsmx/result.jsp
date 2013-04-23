@@ -99,7 +99,7 @@ if(!xsry_id.equals("")){
 </form>
 <TABLE  align="center" cellSpacing=0 cellPadding=0 width="99%" border=0>
 	<TBODY>
-		<TR style="BACKGROUND-COLOR: #dcdcdc;height:45;">
+		<TR style="BACKGROUND-COLOR: #dcdcdc;height:45px;">
 		    <TD align="center" width="100%"><font style="FONT-SIZE: 16px"><B>销售明细统计报表</B></font><br><%=strCon %></TD>
 		    <TD align="center"><input type="button" name="button_refresh" value=" 刷新 " onclick="pageRefresh();"></TD>
 		</TR>

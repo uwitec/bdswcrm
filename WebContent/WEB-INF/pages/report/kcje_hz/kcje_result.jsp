@@ -53,7 +53,7 @@ if(!store_id.equals("")){
 <div class="rightContentDiv" id="divContent">
 <TABLE  align="center" cellSpacing=0 cellPadding=0 width="99%" border=0>
 	<TBODY>
-		<TR style="BACKGROUND-COLOR: #dcdcdc;height:45;">
+		<TR style="BACKGROUND-COLOR: #dcdcdc;height:45px;">
 		    <TD align="center" width="100%"><font style="FONT-SIZE: 16px"><B>库存金额汇总</B></font><br><%=conStr %></TD>
 		</TR>
 	</TBODY>
@@ -90,8 +90,8 @@ if(productList != null && productList.size()>0){
 		hj_kccb += price*kcNums;
 %>
 		<TR>
-			<TD class=ReportItemXh><%=i+1 %>&nbsp;</TD>
-			<TD class=ReportItemXh><%=StringUtils.nullToStr(map.get("product_id")) %></TD>
+			<TD class=ReportItemXh nowrap="nowrap"><%=i+1 %></TD>
+			<TD class=ReportItemXh nowrap="nowrap"><%=StringUtils.nullToStr(map.get("product_id")) %></TD>
 			<TD class=ReportItem><%=StringUtils.nullToStr(map.get("product_name")) %>&nbsp;</TD>
 			<TD class=ReportItem><%=StringUtils.nullToStr(map.get("product_xh")) %>&nbsp;</TD>
 			<TD class=ReportItem><%=num %>&nbsp;</TD>

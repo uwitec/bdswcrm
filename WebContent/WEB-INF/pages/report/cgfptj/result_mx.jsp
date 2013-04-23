@@ -44,7 +44,7 @@ if(!client_name.equals("")){
 <div class="rightContentDiv" id="divContent">
 <TABLE  align="center" cellSpacing=0 cellPadding=0 width="99%" border=0>
 	<TBODY>
-		<TR style="BACKGROUND-COLOR: #dcdcdc;height:45;">
+		<TR style="BACKGROUND-COLOR: #dcdcdc;height:45px;">
 		    <TD align="center" width="100%"><font style="FONT-SIZE: 16px"><B>采购发票统计－－明细</B></font><br><%=con %></TD>
 		</TR>
 	</TBODY>

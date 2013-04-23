@@ -15,7 +15,7 @@
 <ww:form name="myform" action="getMothlyGainList" method="post" theme="simple">
 <TABLE  align="center" cellSpacing=0 cellPadding=0 width="99%" border=0>
 	<TBODY>
-		<TR style="BACKGROUND-COLOR: #dcdcdc;height:45;">
+		<TR style="BACKGROUND-COLOR: #dcdcdc;height:45px;">
 		    <TD align="center" width="100%"><font style="FONT-SIZE: 16px"><B>月度利润表</B></font><br>
 		    <ww:select name="year" id="year" value="%{year}" emptyOption="false" list="#{'2007':'2007','2008':'2008','2009':'2009','2010':'2010','2011':'2011','2012':'2012','2013':'2013','2014':'2014','2015':'2015'}" theme="simple"/>
 		    <ww:select name="month" id="month" value="%{month}" emptyOption="false" list="#{'01':'01','02':'02','03':'03','04':'04','05':'05','06':'06','07':'07','08':'08','09':'09','10':'10','11':'11','12':'12'}" theme="simple"/>

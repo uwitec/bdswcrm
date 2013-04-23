@@ -39,7 +39,7 @@ List serialFlowList = (List)VS.findValue("serialFlowList");
 <form name="reportForm" action="getShSerialFlow.html" method="post">
 <TABLE  align="center" cellSpacing=0 cellPadding=0 width="99%" border=0>
 	<TBODY>
-		<TR style="BACKGROUND-COLOR: #dcdcdc;height:45;">
+		<TR style="BACKGROUND-COLOR: #dcdcdc;height:45px;">
 		    <TD align="center" width="100%"><font style="FONT-SIZE: 16px">
 		    <B><br>序列号查询</B></font>
 		    

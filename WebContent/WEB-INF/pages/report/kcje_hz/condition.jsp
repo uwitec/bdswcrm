@@ -62,6 +62,7 @@
 		<td class="a1">商品名称</td>
 		<td class="a4" colspan="3">
 			<input type="text" name="product_name" id="product_name_" onclick="openProduct();" style="width:220px" value="" readonly>
+			<input type="hidden" name="product_id" id="product_id_"  value="" />
 			<img src="images/select.gif" align="absmiddle" title="点击选择类别" border="0" onclick="openProduct();" style="cursor:hand">
 		</td>
 	</tr>		

@@ -19,18 +19,8 @@ List productKindList = (List)VS.findValue("productKindList");
 <script type="text/javascript">
 
 	function subForm(){
-		var objs = document.getElementsByName("tj_type");
-		if(objs[0].checked){
-			document.reportForm.action = "getKcJeResult.html";
-			document.reportForm.submit();
-		}else{
-			if(document.getElementById("cdate").value == ""){
-				alert("库存日期不能为空,请选择!");
-				return;
-			}
-			document.reportForm.action = "getHisKcJeResult.html";
-			document.reportForm.submit();
-		}
+		document.reportForm.action = "getKcJeResult.html";
+		document.reportForm.submit();
 	}
 	
 	function openWin(){
@@ -39,20 +29,6 @@ List productKindList = (List)VS.findValue("productKindList");
 		
 		window.open(destination,'选择商品类别',fea);
 	}	
-
-	function chkHis(vl){
-		if(vl == "0"){
-			document.getElementById("td_cdate_lable").style.display = "none";
-			document.getElementById("td_cdate_value").style.display = "none";
-			document.getElementById("tr_flag_lable").style.display = "";
-			document.getElementById("cdate").value = "";
-		}else{
-			document.getElementById("td_cdate_lable").style.display = "";
-			document.getElementById("td_cdate_value").style.display = "";
-			document.getElementById("tr_flag_lable").style.display = "none";
-		}
-	}	
-	
 </script>
 </head>
 <body>
@@ -65,19 +41,6 @@ List productKindList = (List)VS.findValue("productKindList");
 	</thead>
 </table>
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0" border="0" id="selTable">
-	<tr>
-		<td class="a1" width="15%">汇总类型</td>
-		<td class="a4" colspan="3">
-			<input type="radio" name="tj_type" id="tj_type" value="0" checked onclick="chkHis(this.value);">当前库存
-			<input type="radio" name="tj_type" id="tj_type" value="1" onclick="chkHis(this.value);">历史库存
-		</td>	
-	</tr>
-	<tr>
-		<td class="a1" id="td_cdate_lable"  style="display:none">库存日期</td>
-		<td class="a4" colspan="3" id="td_cdate_value" style="display:none">
-			<input type="text" name="cdate" id="cdate" value="" style="width:232px" class="Wdate" onFocus="WdatePicker()">
-		</td>					
-	</tr>
 	<tr>
 		<td class="a1" width="15%">商品类别</td>
 		<td class="a4" width="35%">

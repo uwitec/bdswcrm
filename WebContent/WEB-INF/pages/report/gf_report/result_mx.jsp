@@ -51,7 +51,7 @@ if(!xsry_id.equals("")){
 </form>
 <TABLE  align="center" cellSpacing=0 cellPadding=0 width="99%" border=0>
 	<TBODY>
-		<TR style="BACKGROUND-COLOR: #dcdcdc;height:45;">
+		<TR style="BACKGROUND-COLOR: #dcdcdc;height:45px;">
 		    <TD align="center" width="100%"><font style="FONT-SIZE: 16px"><B>零售工分统计——明细</B></font><br><%=strCon %></TD>
 		</TR>
 	</TBODY>
