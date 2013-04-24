@@ -13,6 +13,9 @@ String curId = StringUtils.nullToStr(VS.findValue("curId"));
 String product_name = StringUtils.nullToStr(VS.findValue("product_name"));
 String product_xh = StringUtils.nullToStr(VS.findValue("product_xh"));
 String product_state = StringUtils.nullToStr(VS.findValue("product_state"));
+String product_id = StringUtils.nullToStr(VS.findValue("product_id"));
+String sp_txm1 = StringUtils.nullToStr(VS.findValue("sp_txm1"));
+
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -40,6 +43,8 @@ String product_state = StringUtils.nullToStr(VS.findValue("product_state"));
 		document.myform.product_name.value = "";
 		document.myform.product_xh.value = "";
 		document.myform.product_state.value = "";
+		document.myform.sp_txm1.value = "";
+		document.myform.product_id.value = "";
 		document.myform.curId.value = "";
 	}	
 	
@@ -89,9 +94,14 @@ String product_state = StringUtils.nullToStr(VS.findValue("product_state"));
 		document.myform.action = "product_list.html";
 		document.myform.submit();
 	}		
+	
+	function setFocus()
+	{
+	  document.myform.product_name.focus;
+	}
 </script>
 </head>
-<body>
+<body onload="setFocus()">
 <form name="myform" action="product_list.html" method="post">
 <input type="hidden" name="curId" id="curId" value="<%=curId %>">
 <table width="100%"  align="center"  class="chart_list" cellpadding="0" cellspacing="0">
@@ -102,8 +112,12 @@ String product_state = StringUtils.nullToStr(VS.findValue("product_state"));
 			<img src="images/import.gif" align="absmiddle" border="0">&nbsp;<a href="#" class="xxlb" onclick="refreshPage();"> 刷 新 </a>	</td>			
 	</tr>
 	<tr>
-		<td class="search" align="left" colspan="2">&nbsp;&nbsp;
+		<td class="search" align="left" colspan="2">&nbsp;&nbsp;		
+			编码：<input type="text" name="product_id" value="<%=product_id %>" size="15">
+			&nbsp;
 			名称：<input type="text" name="product_name" value="<%=product_name %>" size="15">
+			&nbsp;
+			条形码：<input type="text" name="sp_txm1" value="<%=sp_txm1 %>" size="15">
 			&nbsp;
 			规格：<input type="text" name="product_xh" value="<%=product_xh %>" size="15">
 			&nbsp;
