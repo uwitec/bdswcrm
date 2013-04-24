@@ -40,7 +40,8 @@ public class ProductAction extends BaseAction implements ModelDriven{
 	private String product_state = "正常";
 	private String iscs_flag = "";  //系统是否初始完成标志
 	private String product_id = "";
-
+	private String sp_txm1 = "";
+	
 	public Page getProductPage() {
 		return productPage;
 	}
@@ -74,6 +75,15 @@ public class ProductAction extends BaseAction implements ModelDriven{
 		if(!product_xh.equals("")){
 			con += " and product_xh like '%" + product_xh + "%'";
 		}
+		
+		if(!product_id.equals("")){
+			con += " and product_id like '%" + product_id + "%'";
+		}
+		
+		if(!sp_txm1.equals("")){
+			con += " and a.sp_txm like '%" + sp_txm1 + "%'";
+		}
+		
 		if(!product_state.equals("")){
 			con += " and state='" + product_state + "'";
 		}
@@ -328,7 +338,13 @@ public class ProductAction extends BaseAction implements ModelDriven{
 		this.product_xh = product_xh;
 	}
 
-
+	public String getSp_txm1() {
+		return sp_txm1;
+	}
+	public void setSp_txm1(String sp_txm1) {
+		this.sp_txm1 = sp_txm1;
+	}
+	
 	public String getProduct_state() {
 		return product_state;
 	}
