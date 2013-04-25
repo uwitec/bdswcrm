@@ -212,15 +212,15 @@ String msg = StringUtils.nullToStr(VS.findValue("msg"));
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td colspan="2">收款明细</td>
+		<td colspan="2">付款明细</td>
 	</tr>
 	</thead>
 </table>
 <table width="100%"  align="center" class="chart_list" cellpadding="0" cellspacing="0">	
 	<thead>
 	<tr>
-		<td width="25%">销售单编号</td>
-		<td width="25%">应收金额</td>
+		<td width="25%">进货单编号</td>
+		<td width="25%">应付金额</td>
 		<td width="25%">本次结算</td>
 		<td width="25%">备注</td>
 	</tr>
