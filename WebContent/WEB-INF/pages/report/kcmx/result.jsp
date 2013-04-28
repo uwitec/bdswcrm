@@ -18,6 +18,16 @@ String store_id = StringUtils.nullToStr(request.getParameter("store_id"));
 
 String isKc0 = StringUtils.nullToStr(request.getParameter("isKc0")); //是否显示0库存商品
 String isFse0 = StringUtils.nullToStr(request.getParameter("isFse0")); //是否显示0发生额商品
+String isDbd0 = StringUtils.nullToStr(request.getParameter("isDbd0")); //是否包括调拨单
+String isDbd1;
+if(isDbd0.equals("是"))
+{
+  isDbd1="1";
+}
+else
+{
+  isDbd1="0";
+}
 
 String conStr = "";
 
@@ -71,12 +81,11 @@ if(!kind_name.equals("")){
 	</THEAD>
 	<TBODY>
 <%
-
-List productKcList = kcMxReportService.getKcProductList(product_kind,product_name,store_id);
-			
+List productKcList = kcMxReportService.getKcProductList(product_kind,product_name,store_id);	
 Map qcMap = kcMxReportService.getKcqcMap(start_date,store_id);   //期初结果集
-Map rkMap = kcMxReportService.getRkNums(product_kind,product_name,start_date,end_date,store_id);//入库数结果集
-Map ckMap = kcMxReportService.getCkNums(product_kind,product_name,start_date,end_date,store_id);//出库结果集
+Map rkMap = kcMxReportService.getRkNums(product_kind,product_name,start_date,end_date,store_id,isDbd0);//入库数结果集
+Map ckMap = kcMxReportService.getCkNums(product_kind,product_name,start_date,end_date,store_id,isDbd0);//出库结果集
+
 
 int hj_qc_nums = 0; //期初数量合计
 int hj_ck_nums = 0; //出库数量合计
@@ -140,7 +149,7 @@ if(productKcList != null && productKcList.size()>0){
 			<TR>
 				<TD class=ReportItemXh><%=xh %></TD>
 				<TD class=ReportItem><%=product_id %>&nbsp;</TD>
-				<TD class=ReportItem><a href="getKcMxListResult.html?product_id=<%=product_id %>&start_date=<%=start_date %>&end_date=<%=end_date %>&store_id=<%=store_id %>"><%=product_name2 %></a>&nbsp;</TD>
+				<TD class=ReportItem><a href="getKcMxListResult.html?product_id=<%=product_id %>&start_date=<%=start_date %>&end_date=<%=end_date %>&store_id=<%=store_id %>&isDbd1=<%=isDbd1 %>"><%=product_name2 %></a>&nbsp;</TD>
 				<TD class=ReportItem><%=product_xh %>&nbsp;</TD>
 				<TD class=ReportItemXh><%=dw %>&nbsp;</TD>
 				<TD class=ReportItemMoney><%=qc_nums %>&nbsp;</TD>
@@ -187,6 +196,7 @@ if(productKcList != null && productKcList.size()>0){
 <input type="hidden" name="store_id" value="<%=store_id %>">
 <input type="hidden" name="isKc0" value="<%=isKc0 %>">
 <input type="hidden" name="isFse0" value="<%=isFse0 %>">
+<input type="hidden" name="isDbd1" value="<%=isDbd1 %>">
 </form>
 </div>
 </body>

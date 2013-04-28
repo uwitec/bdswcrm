@@ -87,13 +87,21 @@ List store_list = (List)VS.findValue("store_list");
 	</tr>	
 	<tr>
 		<td class="a1">是否显示0发生额商品</td>
-		<td class="a4" colspan="3">
+		<td class="a4" >
 			<select name="isFse0" style="width:232px">
 				<option value="否">否</option>
 				<option value="是" selected>是</option>
 			</select>
 		</td>			
-	</tr>		
+	
+		<td class="a1">是否包括调拨单</td>
+		<td class="a4">
+			<select name="isDbd0" style="width:232px">
+				<option value="否">否</option>
+				<option value="是" selected>是</option>
+			</select>
+		</td>			
+	</tr>	
 	<tr height="35">
 		<td class="a1" colspan="4" height="35">
 			<input type="button" name="button1" value="提 交" onclick="subForm();" class="css_button2">&nbsp;&nbsp;&nbsp;&nbsp;

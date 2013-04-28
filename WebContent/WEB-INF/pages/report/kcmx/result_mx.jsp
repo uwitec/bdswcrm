@@ -16,6 +16,7 @@ String start_date = StringUtils.nullToStr(request.getParameter("start_date"));
 String end_date = StringUtils.nullToStr(request.getParameter("end_date"));
 String product_id = StringUtils.nullToStr(request.getParameter("product_id"));
 String store_id = StringUtils.nullToStr(request.getParameter("store_id"));
+String isDbd1 = StringUtils.nullToStr(request.getParameter("isDbd1"));
 
 String conStr = "";
 conStr += "<b>商品编号：</b>" + product.getProductId();
@@ -99,10 +100,9 @@ if(!store_id.equals("")){
 	</TR>
 		
 		
-<%
-
-	List list =  kcMxReportService.getKcbhMxList(product_id,start_date,end_date,store_id);
-
+<% 
+  	List  list =  kcMxReportService.getKcbhMxList(product_id,start_date,end_date,store_id,isDbd1);
+        
 	int jc_nums = qc_nums;  //合计结存数
 	
 	if(list != null && list.size()>0){
