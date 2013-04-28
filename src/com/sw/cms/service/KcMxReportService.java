@@ -110,10 +110,11 @@ public class KcMxReportService {
 	 * @param start_date
 	 * @param end_date
 	 * @param store_id
+	 * @param isDbd0
 	 * @return
 	 */
-	public List getKcbhMxList(String product_id,String start_date,String end_date,String store_id){
-		return kcMxReportDao.getKcbhMxList(product_id, start_date, end_date, store_id);
+	public List getKcbhMxList(String product_id,String start_date,String end_date,String store_id,String isDbd0){
+		return kcMxReportDao.getKcbhMxList(product_id, start_date, end_date, store_id,isDbd0);
 	}
 	
 	
@@ -248,27 +249,33 @@ public class KcMxReportService {
 	
 	/**
 	 * 取入库数量批量
-	 * @param product_id
+	 * @param product_kind
+	 * @param product_name
 	 * @param start_date
 	 * @param end_date
 	 * @param store_id
+	 * @param isDbd0 是否包括调拨单
 	 * @return
 	 */
-	public Map getRkNums(String product_kind,String product_name,String start_date,String end_date,String store_id){
-		return kcMxReportDao.getRkNums(product_kind, product_name, start_date, end_date, store_id);
+	public Map getRkNums(String product_kind,String product_name,String start_date,String end_date,String store_id,String isDbd0){
+		return kcMxReportDao.getRkNums(product_kind, product_name, start_date, end_date, store_id,isDbd0);
 	}
 	
 	/**
 	 * 取出库数量批量
-	 * @param product_id
+	 * @param product_kind
+	 * @param product_name
 	 * @param start_date
 	 * @param end_date
 	 * @param store_id
+	 * @param isDbd0 是否包括调拨单
 	 * @return
 	 */
-	public Map getCkNums(String product_kind,String product_name,String start_date,String end_date,String store_id){
-		return kcMxReportDao.getCkNums(product_kind, product_name, start_date, end_date, store_id);
+	public Map getCkNums(String product_kind,String product_name,String start_date,String end_date,String store_id,String isDbd0){
+		return kcMxReportDao.getCkNums(product_kind, product_name, start_date, end_date, store_id,isDbd0);
 	}
+	
+	
 	
 	public KcMxReportDAO getKcMxReportDao() {
 		return kcMxReportDao;
