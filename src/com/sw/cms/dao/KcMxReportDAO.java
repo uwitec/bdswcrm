@@ -239,9 +239,10 @@ public class KcMxReportDAO extends JdbcBaseDAO {
 	 * @param start_date
 	 * @param end_date
 	 * @param store_id
+	 * 
 	 * @return
 	 */
-	public List getKcbhMxList(String product_id,String start_date,String end_date,String store_id){
+	public List getKcbhMxList(String product_id,String start_date,String end_date,String store_id,String isDbd0){
 		
 		String sql = "";
 		
@@ -348,8 +349,14 @@ public class KcMxReportDAO extends JdbcBaseDAO {
 			sql_ykck = sql_ykck + " and ck_date<='" + (end_date + " 23:59:59") + "'";
 		}
 		
-		sql = "select * from ((" + sql_rk + ") union all (" + sql_ck + ") union all (" + sql_db + ") union all (" + sql_pd + ") union all (" + sql_ykrk + ")  union all (" + sql_ykck + "))  x order by cz_date asc"; 
-		
+		if (isDbd0.equals("1"))
+		{
+		  sql = "select * from ((" + sql_rk + ") union all (" + sql_ck + ") union all (" + sql_db + ") union all (" + sql_pd + ") union all (" + sql_ykrk + ")  union all (" + sql_ykck + "))  x order by cz_date asc"; 
+		}
+		else
+		{
+		  sql = "select * from ((" + sql_rk + ") union all (" + sql_ck + ")  union all (" + sql_pd + ") )  x order by cz_date asc"; 
+		}
 		return this.getResultList(sql);
 		
 	}
@@ -492,8 +499,8 @@ public class KcMxReportDAO extends JdbcBaseDAO {
 	 * @param store_id
 	 * @return
 	 */
-	public Map getRkNums(String product_kind,String product_name,String start_date,String end_date,String store_id){
-		
+	public Map getRkNums(String product_kind,String product_name,String start_date,String end_date,String store_id,String isDbd0){
+	    String sql = "";
 		//入库单入库数量
 		String sql_rk = "select a.product_id,sum(a.nums) as nums from rkd_product a join rkd b on b.rkd_id=a.rkd_id join product c on c.product_id=a.product_id where b.state='已入库'";
 		if(!store_id.equals("")){
@@ -625,8 +632,14 @@ public class KcMxReportDAO extends JdbcBaseDAO {
 		}
 		sql_ykrk += " group by a.product_id";
 		
-		
-		String sql = "select x.product_id,sum(x.nums) as nums from ((" + sql_rk + ") union all (" + sql_db + ") union all (" + sql_kcpd + ") union all (" + sql_ykrk + ")) x group by x.product_id";
+		if (isDbd0.equals("是"))
+		{
+		  sql = "select x.product_id,sum(x.nums) as nums from ((" + sql_rk + ") union all (" + sql_db + ") union all (" + sql_kcpd + ") union all (" + sql_ykrk + ")) x group by x.product_id";
+		}
+		else
+		{
+			  sql = "select x.product_id,sum(x.nums) as nums from ((" + sql_rk + ")  union all (" + sql_kcpd + ") ) x group by x.product_id";
+		}
 		System.out.println(sql);
 		Map map = new HashMap();
 		List list = this.getResultList(sql);
@@ -649,7 +662,8 @@ public class KcMxReportDAO extends JdbcBaseDAO {
 	 * @param store_id
 	 * @return
 	 */
-	public Map getCkNums(String product_kind,String product_name,String start_date,String end_date,String store_id){
+	public Map getCkNums(String product_kind,String product_name,String start_date,String end_date,String store_id,String isDbd0){
+		String sql = "";
 		//出库单出库数量
 		String sql_ck = "select a.product_id,sum(a.nums) as nums from ckd_product a join ckd b on b.ckd_id=a.ckd_id join product c on c.product_id=a.product_id where b.state='已出库'";
 		if(!store_id.equals("")){
@@ -780,7 +794,14 @@ public class KcMxReportDAO extends JdbcBaseDAO {
 		}
 		sql_ykck += " group by a.product_id";
 		
-		String sql = "select x.product_id,sum(x.nums) as nums from ((" + sql_ck + ") union all (" + sql_db + ") union all (" + sql_kcpd + ") union all (" + sql_ykck + ")) x group by x.product_id";
+		if (isDbd0.equals("是"))
+		{
+		  sql = "select x.product_id,sum(x.nums) as nums from ((" + sql_ck + ") union all (" + sql_db + ") union all (" + sql_kcpd + ") union all (" + sql_ykck + ")) x group by x.product_id";
+		}
+		else
+		{
+		  sql = "select x.product_id,sum(x.nums) as nums from ((" + sql_ck + ")  union all (" + sql_kcpd + ") ) x group by x.product_id";
+		}
 		System.out.println(sql);
 		Map map = new HashMap();
 		List list = this.getResultList(sql);
@@ -1191,5 +1212,4 @@ public class KcMxReportDAO extends JdbcBaseDAO {
 		
 		return map;
 	}
-	
 }
