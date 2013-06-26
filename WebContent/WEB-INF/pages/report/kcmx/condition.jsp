@@ -81,7 +81,7 @@ List store_list = (List)VS.findValue("store_list");
 		<td class="a4">
 			<select name="isKc0" style="width:232px">
 				<option value="否">否</option>
-				<option value="是">是</option>
+				<option value="是" selected>是</option>
 			</select>
 		</td>			
 	</tr>	
@@ -89,16 +89,16 @@ List store_list = (List)VS.findValue("store_list");
 		<td class="a1">是否显示0发生额商品</td>
 		<td class="a4" >
 			<select name="isFse0" style="width:232px">
-				<option value="否">否</option>
-				<option value="是" selected>是</option>
+				<option value="否" selected>否</option>
+				<option value="是">是</option>
 			</select>
 		</td>			
 	
 		<td class="a1">是否包括调拨单</td>
 		<td class="a4">
 			<select name="isDbd0" style="width:232px">
-				<option value="否">否</option>
-				<option value="是" selected>是</option>
+				<option value="否" selected>否</option>
+				<option value="是">是</option>
 			</select>
 		</td>			
 	</tr>	
