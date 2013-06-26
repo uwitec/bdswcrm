@@ -67,6 +67,24 @@ public class ClientsDAO extends JdbcBaseDAO {
 	}
 	
 	/**
+	 * 应收应付客户列表
+	 * @param client_id
+	 * @return
+	 */
+	public List getClietsYsyfById(String client_id,String khjl){
+		String sql = "select a.id,a.name,a.khjl,xe,client_type from clients a left join sys_user b on b.user_id=a.khjl where 1=1";
+		
+		if(!client_id.equals("")){
+			sql = sql + " and a.id='" + client_id + "'";
+		}
+		if(!khjl.equals("")){
+			sql = sql + " and a.khjl='" + khjl + "'";
+		}
+		
+		return this.getResultList(sql);
+	}
+	
+	/**
 	 * 首页客户列表
 	 * @param client_id
 	 * @return
@@ -180,6 +198,92 @@ public class ClientsDAO extends JdbcBaseDAO {
 		return map;
 	}
 	
+	/**
+	 * 取单位期初，包括应收期初、应付期初
+	 * @param client_name
+	 * @param khjl
+	 * @param client_type
+	 * @return Map key:client_id+应收（应付） value:期初值
+	 * 
+	 */
+	public Map getClientYsyfQc(String client_name,String khjl,String client_type, String cdate){
+		Map<String,Object> qcMap = new HashMap<String,Object>();
+		
+		String sql = "select a.* from client_qc a inner join clients b on b.id=a.client_name where a.cdate='" + cdate + "'";
+		
+		if(!client_name.equals("")){
+			sql += " and a.client_name='" + client_name + "'";
+		}
+		if(!khjl.equals("")){
+			sql += " and b.khjl='" + khjl + "'";
+		}
+		if(!client_type.equals("")){
+			sql += " and b.client_type='" + client_type + "'";
+		}		
+		
+		List list = this.getResultList(sql);
+		
+		String client_id = "";
+		if(list != null && list.size() > 0){
+			for(int i=0;i<list.size();i++){
+				Map tempMap = (Map)list.get(i);
+				client_id = (String)tempMap.get("client_name");
+				
+				qcMap.put(client_id+"应收", tempMap.get("ysqc"));
+				qcMap.put(client_id+"应付", tempMap.get("yfqc"));
+			}
+		}
+		
+		return qcMap;
+	}
+	
+	
+	
+	/**
+	 * 取单位应收应付所有情况
+	 *@param client_name
+	 * @param khjl
+	 * @param client_type
+	 * @return map key:client_id+je_type  value:发生金额
+	 */
+	public Map getClientYsyfWlInfo(String client_name,String khjl,String client_type, String cdate){
+		Map<String,Object> map = new HashMap<String,Object>();
+		
+		String sql = "select a.client_id,a.je_type,sum(a.fsje) as fsje from view_client_wl_info a inner join clients b on b.id=a.client_id where 1=1";
+		
+		if(!cdate.equals("")){
+			sql += " and a.cdate='" + cdate + "'";
+		}
+		
+		if(!client_name.equals("")){
+			sql += " and a.client_id='" + client_name + "'";
+		}
+		if(!khjl.equals("")){
+			sql += " and b.khjl='" + khjl + "'";
+		}
+		
+		if(!client_type.equals("")){
+			sql += " and b.client_type='" + client_type + "'";
+		}
+		
+		sql += " group by a.client_id,a.je_type";
+		
+		List list = this.getResultList(sql);
+		
+		String je_type = "";
+		String client_id = "";
+		if(list != null && list.size() > 0){
+			for(int i=0;i<list.size();i++){
+				Map tempMap = (Map)list.get(i);
+				client_id = (String)tempMap.get("client_id");
+				je_type = (String)tempMap.get("je_type");
+				
+				map.put(client_id+je_type, tempMap.get("fsje"));
+			}
+		}
+		
+		return map;
+	}
 	
 	/**
 	 * 保存客户信息
