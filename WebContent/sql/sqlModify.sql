@@ -247,3 +247,8 @@ CREATE TABLE `product_kc_qc_xml` (
 )
 ENGINE = InnoDB;
 
+2013-06-26更新
+----增加单位应收应付查询报表
+INSERT INTO `funcs` VALUES ('FC9923','单位应收应付查询','单位应收应付查询','showDwysyfcxCon.html','112.gif',11,'1','4');
+
+INSERT INTO `column_funcs` VALUES ('004002','FC9923');
