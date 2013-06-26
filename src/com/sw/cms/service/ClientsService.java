@@ -61,7 +61,14 @@ public class ClientsService {
 		return clientsDao.getClietsById(client_id,khjl);
 	}
 	
-	
+	/**
+	 * 应收应付客户列表
+	 * @param client_id
+	 * @return
+	 */
+	public List getClietsYsyfById(String client_id,String khjl){
+		return clientsDao.getClietsYsyfById(client_id,khjl);
+	}
 	/**
 	 * 首页客户列表
 	 * @param client_id
@@ -97,6 +104,29 @@ public class ClientsService {
 	
 	
 	/**
+	 * 取单位应收应付所有情况
+	 *@param client_name
+	 * @param khjl
+	 * @return map key:client_id+je_type  value:发生金额
+	 */
+	public Map getClientYsyfWlInfo(String client_name,String khjl,String client_type, String cdate){
+		return clientsDao.getClientYsyfWlInfo(client_name,khjl,client_type, cdate);
+	}
+
+	/**
+	 * 取单位期初，包括应收期初、应付期初
+	 * @param client_name
+	 * @param khjl
+	 * @return Map key:client_id+应收（应付） value:期初值
+	 * 
+	 */
+	public Map getClientYsyfQc(String client_name,String khjl,String client_type, String cdate){
+		return clientsDao.getClientYsyfQc(client_name,khjl,client_type,  cdate);
+	}
+	
+	
+	
+	/**
 	 * 取用户往来所有情况
 	 * @param start_date
 	 * @param end_date
@@ -106,7 +136,7 @@ public class ClientsService {
 	public Map getClientWlInfo(String con,String cdate){
 		return clientsDao.getClientWlInfo(con, cdate);
 	}
-
+	
 	/**
 	 * 保存客户信息
 	 * 
