@@ -3162,5 +3162,18 @@
             <result name="success">/WEB-INF/pages/report/hyjf/jfcx_result.jsp</result>
         </action>                 
         <!-- 会员卡积分管理 -->
+        
+        
+         <!-- 单位应收应付查询 -->
+        <action name="showDwysyfcxCon" class="clientYsYfAction" method="showCondition">
+            <result name="success">/WEB-INF/pages/report/client_ysyf/condition.jsp</result>
+        </action>
+        <action name="getDwYsyfResult" class="clientYsYfAction" method="getResult">
+            <result name="success">/WEB-INF/pages/report/client_ysyf/result.jsp</result>
+        </action>
+        <!--<action name="getDwYsyfmxResult" class="clientYsYfAction" method="getMxResult">-->    
+          <!--     <result name="success">/WEB-INF/pages/report/client_ysyf/mx_result.jsp</result>-->    
+          <!-- </action>   -->           
+        <!-- 单位应收应付查询 -->
     </package>
 </xwork>
