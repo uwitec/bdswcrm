@@ -19,6 +19,7 @@ public class ClientYsYfAction extends BaseAction {
 	
 	private String client_name = "";
 	private String khjl = "";
+	private String client_type ="";
 	
 	
 	/**
@@ -36,7 +37,7 @@ public class ClientYsYfAction extends BaseAction {
 	 * @return
 	 */
 	public String getResult(){
-		clientList = clientsService.getClietsYsyfById(client_name,khjl);
+		clientList = clientsService.getClietsYsyfById(client_name,khjl,client_type);
 		return "success";
 	}
 	
@@ -104,5 +105,13 @@ public class ClientYsYfAction extends BaseAction {
 
 	public void setKhjl(String khjl) {
 		this.khjl = khjl;
+	}
+	
+	public String getClient_type() {
+		return client_type;
+	}
+
+	public void setClient_type(String client_type) {
+		this.client_type = client_type;
 	}
 }
