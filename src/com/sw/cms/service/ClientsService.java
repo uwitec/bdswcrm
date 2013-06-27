@@ -66,8 +66,8 @@ public class ClientsService {
 	 * @param client_id
 	 * @return
 	 */
-	public List getClietsYsyfById(String client_id,String khjl){
-		return clientsDao.getClietsYsyfById(client_id,khjl);
+	public List getClietsYsyfById(String client_id,String khjl,String client_type){
+		return clientsDao.getClietsYsyfById(client_id,khjl,client_type);
 	}
 	/**
 	 * 首页客户列表
