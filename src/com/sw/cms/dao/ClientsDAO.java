@@ -71,7 +71,7 @@ public class ClientsDAO extends JdbcBaseDAO {
 	 * @param client_id
 	 * @return
 	 */
-	public List getClietsYsyfById(String client_id,String khjl){
+	public List getClietsYsyfById(String client_id,String khjl,String client_type){
 		String sql = "select a.id,a.name,a.khjl,xe,client_type from clients a left join sys_user b on b.user_id=a.khjl where 1=1";
 		
 		if(!client_id.equals("")){
@@ -79,6 +79,10 @@ public class ClientsDAO extends JdbcBaseDAO {
 		}
 		if(!khjl.equals("")){
 			sql = sql + " and a.khjl='" + khjl + "'";
+		}
+		
+		if(!client_type.equals("")){
+			sql = sql + " and a.client_type like '%" + client_type + "%'";
 		}
 		
 		return this.getResultList(sql);
@@ -212,13 +216,13 @@ public class ClientsDAO extends JdbcBaseDAO {
 		String sql = "select a.* from client_qc a inner join clients b on b.id=a.client_name where a.cdate='" + cdate + "'";
 		
 		if(!client_name.equals("")){
-			sql += " and a.client_name='" + client_name + "'";
+			sql += " and a.client_name like '%" + client_name + "%'";
 		}
 		if(!khjl.equals("")){
 			sql += " and b.khjl='" + khjl + "'";
 		}
 		if(!client_type.equals("")){
-			sql += " and b.client_type='" + client_type + "'";
+			sql += " and b.client_type like '%" + client_type + "%'";
 		}		
 		
 		List list = this.getResultList(sql);
@@ -256,14 +260,14 @@ public class ClientsDAO extends JdbcBaseDAO {
 		}
 		
 		if(!client_name.equals("")){
-			sql += " and a.client_id='" + client_name + "'";
+			sql += " and a.client_id like '%" + client_name + "%'";
 		}
 		if(!khjl.equals("")){
 			sql += " and b.khjl='" + khjl + "'";
 		}
 		
 		if(!client_type.equals("")){
-			sql += " and b.client_type='" + client_type + "'";
+			sql += " and b.client_type like '%" + client_type + "%'";
 		}
 		
 		sql += " group by a.client_id,a.je_type";
