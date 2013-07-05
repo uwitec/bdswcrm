@@ -333,6 +333,15 @@ public class UserService {
 	
 	
 	/**
+	 * 获取报表样式相关信息
+	 * @return
+	 */
+	public Map getStyle(){
+		return userDao.getStyle();
+	}
+	
+	
+	/**
 	 * 获取强制序列号的标志
 	 * @return
 	 */
@@ -367,6 +376,17 @@ public class UserService {
 	public void saveQzxlhRight(String sp_flag){
 		
 		userDao.saveQzxlhRight(sp_flag);
+	}
+	
+	
+	/**
+	 * 保存报表样式相关信息
+	 * @param style_flag
+	 * 
+	 */
+	public void saveStyle(String style_flag){
+		
+		userDao.saveStyle(style_flag);
 	}
 	
 	/**
