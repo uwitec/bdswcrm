@@ -49,6 +49,8 @@ public class UserAction extends BaseAction {
 	private List employList = new ArrayList();
 	private Map spRightMap;
 	private Map qzxlhRightMap;
+	private Map styleMap;
+	
 	
 	private String user_name;
 	private String curPass;
@@ -64,6 +66,7 @@ public class UserAction extends BaseAction {
 	
 	private String sp_flag;
 	private String[] role_id;
+	private String style_flag;
 	
 	private String real_name = "";
 	private String dept = "";
@@ -672,6 +675,43 @@ public class UserAction extends BaseAction {
 		}
 	}
 	
+	
+	/**
+	 * 打开报表样式设置页面
+	 * @return
+	 */
+	public String openStyle(){
+		try{
+			styleMap = userService.getStyle();
+			
+			if(styleMap != null){
+				style_flag = StringUtils.nullToStr(styleMap.get("style_flag"));				
+			}
+			return SUCCESS;
+		}catch(Exception e){
+			log.error("打开报表样式设置页面错误码，错误原因：" + e.getMessage());
+			e.printStackTrace();
+			return ERROR;
+		}
+	}
+	
+	
+	/**
+	 * 保存报表样式设置相关信息
+	 * @return
+	 */
+	public String saveStyle(){
+		try{
+			userService.saveStyle(style_flag);
+			this.setMsg("保存报表样式设置成功！");
+			return SUCCESS;
+		}catch(Exception e){
+			log.error("保存报表样式设置相关信息错误，错误原因：" + e.getMessage());
+			e.printStackTrace();
+			return ERROR;
+		}
+	}
+	
 	/**
 	 * 查询ajax经手人提示信息
 	 * @return
@@ -1033,6 +1073,15 @@ public class UserAction extends BaseAction {
 		sp_flag = spFlag;
 	}
 
+	
+	public String getStyle_flag() {
+		return style_flag;
+	}
+
+
+	public void setStyle_flag(String styleflag) {
+		style_flag = styleflag;
+	}
 
 	public Map getSpRightMap() {
 		return spRightMap;
@@ -1043,6 +1092,14 @@ public class UserAction extends BaseAction {
 		this.spRightMap = spRightMap;
 	}
 	
+	public Map getStyleMap() {
+		return styleMap;
+	}
+
+
+	public void setStyleMap(Map styleMap) {
+		this.styleMap = styleMap;
+	}
 	
 	public Map getQzxlhRightMap() {
 		return qzxlhRightMap;
