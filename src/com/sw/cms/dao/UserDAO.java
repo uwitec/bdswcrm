@@ -665,6 +665,15 @@ public class UserDAO extends JdbcBaseDAO {
 	}
 	
 	/**
+	 * 获取报表样式相关信息
+	 * @return
+	 */
+	public Map getStyle(){
+		String sql = "select * from report_style ";
+		return this.getResultMap(sql);
+	}
+	
+	/**
 	 * 获取强制序列号的标志
 	 * 00:未强制序列号；01:强制序列号
 	 * @return
@@ -695,6 +704,19 @@ public class UserDAO extends JdbcBaseDAO {
 		this.getJdbcTemplate().execute(sql);
 	}
 	
+	
+	/**
+	 * 保存报表样式相关信息
+	 * @param style_flag
+	 * 
+	 */
+	public void saveStyle(String style_flag){
+		String sql = "delete from report_style";
+		this.getJdbcTemplate().execute(sql);
+		
+		sql = "insert into report_style(style_flag) values('" + style_flag + "')";
+		this.getJdbcTemplate().execute(sql);
+	}
 	
 	/**
 	 * 包装对象
