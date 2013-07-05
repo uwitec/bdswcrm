@@ -3175,5 +3175,16 @@
           <!--     <result name="success">/WEB-INF/pages/report/client_ysyf/mx_result.jsp</result>-->    
           <!-- </action>   -->           
         <!-- 单位应收应付查询 -->
+        
+        <!-- 报表样式设定 -->
+        <action name="openStyle" class="userAction" method="openStyle">
+            <result name="success">/WEB-INF/pages/style_set/printstyle_set.jsp</result>
+        </action>
+        <action name="saveStyle" class="userAction" method="saveStyle">
+            <result name="cancel" type="redirect">openStyle</result>
+            <result name="input" type="dispatcher">/WEB-INF/pages/style_set/printstyle_set.jsp</result>
+            <result name="success" type="chain">openStyle</result>
+        </action>        
+        <!-- 报表样式设定 --> 
     </package>
 </xwork>
