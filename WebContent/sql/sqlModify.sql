@@ -252,3 +252,19 @@ ENGINE = InnoDB;
 INSERT INTO `funcs` VALUES ('FC9923','单位应收应付查询','单位应收应付查询','showDwysyfcxCon.html','112.gif',11,'1','4');
 
 INSERT INTO `column_funcs` VALUES ('004002','FC9923');
+
+
+2013-07-05
+-----增加报表样式的设定
+INSERT INTO `funcs` VALUES ('FC9924','设置报表样式','设置报表样式','openStyle.html','112.gif',11,'1','10');
+
+INSERT INTO `column_funcs` VALUES ('009002','FC9924');
+
+--报表样式表
+CREATE TABLE `report_style` (
+  `style_flag` VARCHAR(20) NOT NULL,
+   PRIMARY KEY(`style_flag`)
+)
+ENGINE = InnoDB;
+
+INSERT INTO `report_style` VALUES ('00');
