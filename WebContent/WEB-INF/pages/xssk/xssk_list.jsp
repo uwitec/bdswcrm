@@ -12,7 +12,7 @@ Page results = (Page)VS.findValue("pageXssk");
 String sk_date1 = (String)VS.findValue("sk_date1");
 String sk_date2 = (String)VS.findValue("sk_date2");
 String client_name = (String)VS.findValue("client_name");
-
+String reportstyle = (String)VS.findValue("reportstyle");//报表样式
 
 String orderName = (String)VS.findValue("orderName");
 String orderType = (String)VS.findValue("orderType");
@@ -94,6 +94,13 @@ String orderType = (String)VS.findValue("orderType");
 		
 		window.open(destination,'打印收款单',fea);				
 	}	
+	
+	function print_three(id){
+		var destination = "printXssk_three.html?id=" + id;
+		var fea ='width=800,height=550,left=' + (screen.availWidth-800)/2 + ',top=' + (screen.availHeight-550)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		
+		window.open(destination,'打印收款单',fea);				
+	}	
 </script>
 </head>
 <body>
@@ -167,9 +174,13 @@ String orderType = (String)VS.findValue("orderType");
 		<%	
 		} 
 		%>
-		<%if(skje > 0){ %>
-			&nbsp;&nbsp;&nbsp;&nbsp;<a class="xxlb" title="打印" href="javascript:print('<%=StringUtils.nullToStr(map.get("id")) %>');"><img src="images/print.png" align="absmiddle" title="打印" border="0" style="cursor:hand"></a>	
-			<%} %>
+		<%if(skje > 0){		
+		    if(StringUtils.nullToStr(reportstyle).equals("00")){%>
+			   &nbsp;&nbsp;&nbsp;&nbsp;<a class="xxlb" title="打印" href="javascript:print('<%=StringUtils.nullToStr(map.get("id")) %>');"><img src="images/print.png" align="absmiddle" title="打印" border="0" style="cursor:hand"></a>	
+			 <%}else{ %>
+			   &nbsp;&nbsp;&nbsp;&nbsp;<a class="xxlb" title="打印" href="javascript:print_three('<%=StringUtils.nullToStr(map.get("id")) %>');"><img src="images/print.png" align="absmiddle" title="打印" border="0" style="cursor:hand"></a>	
+		<%}
+		} %>
 		</td>
 	</tr>
 	
