@@ -10,7 +10,7 @@ OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
 
 Page results = (Page)VS.findValue("rkdPage");
 List storeList = (List)VS.findValue("storeList");
-
+String reportstyle = (String)VS.findValue("reportstyle");//报表样式
 String rkd_id = (String)VS.findValue("rkd_id");
 String creatdate = (String)VS.findValue("creatdate");
 String creatdate2 = (String)VS.findValue("creatdate2");
@@ -102,6 +102,13 @@ String orderType = (String)VS.findValue("orderType");
 		
 		window.open(destination,'入库单打印',fea);				
 	}		
+	
+	function print_three(id){
+		var destination = "printRkd_three.html?rkd_id=" + id;
+		var fea ='width=850,height=600,left=' + (screen.availWidth-850)/2 + ',top=' + (screen.availHeight-600)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		
+		window.open(destination,'入库单打印',fea);				
+	}		
 </script>
 </head>
 <body>
@@ -186,7 +193,12 @@ String orderType = (String)VS.findValue("orderType");
 				<a href="#" onclick="edit('<%=StringUtils.nullToStr(rkd.get("rkd_id")) %>');"><img src="images/modify.gif" align="absmiddle" title="修改入库单信息" border="0" style="cursor:hand"></a>&nbsp;&nbsp;	
 				<a href="#" onclick="openWin('<%=StringUtils.nullToStr(rkd.get("rkd_id")) %>');"><img src="images/view.gif" align="absmiddle" title="查看入库单信息" border="0" style="cursor:hand"></a>
 			<%} %>
-			&nbsp;&nbsp;<a href="#" onclick="print('<%=StringUtils.nullToStr(rkd.get("rkd_id")) %>');"><img src="images/print.png" align="absmiddle" title="打印入库单" border="0" style="cursor:hand"></a>
+			&nbsp;&nbsp;
+			<% if(StringUtils.nullToStr(reportstyle).equals("00")){ %>			
+			  <a href="#" onclick="print('<%=StringUtils.nullToStr(rkd.get("rkd_id")) %>');"><img src="images/print.png" align="absmiddle" title="打印入库单" border="0" style="cursor:hand"></a>
+		    <%}else{ %>
+			  <a href="#" onclick="print_three('<%=StringUtils.nullToStr(rkd.get("rkd_id")) %>');"><img src="images/print.png" align="absmiddle" title="打印入库单" border="0" style="cursor:hand"></a>
+  	        <%} %>	
 		</td>
 	</tr>
 	
