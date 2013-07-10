@@ -64,6 +64,7 @@ public class JhdAction extends BaseAction {
 	private String cg_date2 = DateComFunc.getToday();
 	private String orderName ="";
 	private String orderType ="";
+	private String reportstyle ="";
 	
 	private int curPage = 1;
 	
@@ -102,6 +103,8 @@ public class JhdAction extends BaseAction {
 		// ²éÑ¯Ìõ¼þ
 		int rowsPerPage = Constant.PAGE_SIZE;
 
+		reportstyle = userService.getReportStyle();
+		
 		String con = "";
 		if (!gysbh.equals("")) {
 			con += " and gysmc like'%" + gysbh + "%'";
@@ -723,4 +726,13 @@ public class JhdAction extends BaseAction {
 	public void setCgsd(String cgsd) {
 		this.cgsd = cgsd;
 	}
+	
+	public String getReportstyle() {
+		return reportstyle;
+	}
+
+	public void setReportstyle(String report_style) {
+		this.reportstyle = report_style;
+	}
+	
 }

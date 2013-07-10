@@ -40,7 +40,7 @@ public class LsyskAction extends BaseAction {
 	
 	private String id = "";
 	private String q_id = "";
-	
+	private String reportstyle ="";
 	public String getQ_id() {
 		return q_id;
 	}
@@ -111,7 +111,8 @@ public class LsyskAction extends BaseAction {
 	 */
 	public String list(){
 		int rowsPerPage = Constant.PAGE_SIZE2;
-
+ 
+		reportstyle = userService.getReportStyle();
 		String con = "";
 
 		if(!client_name.equals("")){
@@ -480,4 +481,11 @@ public class LsyskAction extends BaseAction {
 		ys_type = ysType;
 	}
 
+	public String getReportstyle() {
+		return reportstyle;
+	}
+
+	public void setReportstyle(String report_style) {
+		this.reportstyle = report_style;
+	}
 }

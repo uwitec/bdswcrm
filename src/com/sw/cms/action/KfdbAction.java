@@ -63,6 +63,8 @@ public class KfdbAction extends BaseAction {
 	
 	private String msg = "";
 	
+	private String reportstyle= "";
+	
 	//打印内容
 	private String db_date = "";
 	private String ck_store = "";
@@ -82,6 +84,8 @@ public class KfdbAction extends BaseAction {
 	public String list(){
 		int rowsPerPage = Constant.PAGE_SIZE;
 
+		reportstyle = userService.getReportStyle();
+		
 		String con = "";
 		
 		//查询条件
@@ -666,5 +670,13 @@ public class KfdbAction extends BaseAction {
 
 	public void setIsqzxlh_flag(String isqzxlh_flag) {
 		this.isqzxlh_flag = isqzxlh_flag;
+	}
+	
+	public String getReportstyle() {
+		return reportstyle;
+	}
+
+	public void setReportstyle(String report_style) {
+		this.reportstyle = report_style;
 	}
 }

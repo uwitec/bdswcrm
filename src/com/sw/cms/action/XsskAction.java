@@ -40,7 +40,7 @@ public class XsskAction extends BaseAction {
 	private String sk_date1 = DateComFunc.getToday();;
 	private String sk_date2 = DateComFunc.getToday();;
 	private String client_name = "";
-	
+	private String reportstyle ="";
 	private String orderName ="";
 	private String orderType ="";	
 	private int curPage = 1;
@@ -68,7 +68,7 @@ public class XsskAction extends BaseAction {
 	 */
 	public String list(){
 		int rowsPerPage = Constant.PAGE_SIZE2;
-		
+		reportstyle = userService.getReportStyle();
 		String con = "";
 		
 		if(!sk_date1.equals("")){
@@ -483,6 +483,14 @@ public class XsskAction extends BaseAction {
 
 	public void setXsskList(List xsskList) {
 		this.xsskList = xsskList;
+	}
+	
+	public String getReportstyle() {
+		return reportstyle;
+	}
+
+	public void setReportstyle(String report_style) {
+		this.reportstyle = report_style;
 	}
 
 }

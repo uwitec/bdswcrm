@@ -48,7 +48,7 @@ public class RkdAction extends BaseAction {
 	private String state = "";
 	private String store_id = "";
 	private int curPage = 1;
-	
+	private String reportstyle ="";
 	private String orderName ="";
 	private String orderType ="";
 	
@@ -71,7 +71,7 @@ public class RkdAction extends BaseAction {
 	public String list(){
 
 		int rowsPerPage = Constant.PAGE_SIZE;
-		
+		reportstyle = userService.getReportStyle();
 		//²éÑ¯Ìõ¼þ
 		String con = "";
 		if(!rkd_id.equals("")){
@@ -555,4 +555,11 @@ public class RkdAction extends BaseAction {
 		this.sysInitSetService = sysInitSetService;
 	}
 
+	public String getReportstyle() {
+		return reportstyle;
+	}
+
+	public void setReportstyle(String report_style) {
+		this.reportstyle = report_style;
+	}
 }

@@ -86,6 +86,7 @@ public class XsdAction extends BaseAction {
 	private String wlzt = "";
 	private String iscs_flag = "";  //系统是否初始完成标志
 	private String sp_state = "";
+	private String reportstyle ="";
 	
 	private String orderName ="";
 	private String orderType ="";
@@ -115,7 +116,9 @@ public class XsdAction extends BaseAction {
 	 * @return
 	 */
 	public String list(){
-
+ 
+		reportstyle = userService.getReportStyle();
+		
 		String con = "";
 		if(!client_name.equals("")){
 			con += " and c.name like '%" + client_name + "%'";
@@ -1123,4 +1126,11 @@ public class XsdAction extends BaseAction {
 		this.jexj_dx = jexj_dx;
 	}
 	
+	public String getReportstyle() {
+		return reportstyle;
+	}
+
+	public void setReportstyle(String report_style) {
+		this.reportstyle = report_style;
+	}
 }

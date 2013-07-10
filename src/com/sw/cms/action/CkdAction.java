@@ -64,7 +64,7 @@ public class CkdAction extends BaseAction {
 	private String state = "";
 	private String orderName ="";
 	private String orderType ="";
-	
+	private String reportstyle="";
 	private String iscs_flag = "";  //系统是否初始完成标志
 	
 	private int curPage = 1;
@@ -94,6 +94,7 @@ public class CkdAction extends BaseAction {
 		
 		int rowsPerPage = Constant.PAGE_SIZE;
 
+		reportstyle = userService.getReportStyle();
 		String con = "";
 		
 		if(!ckd_id.equals("")){
@@ -789,6 +790,14 @@ public class CkdAction extends BaseAction {
 
 	public void setIsqzxlh_flag(String isqzxlh_flag) {
 		this.isqzxlh_flag = isqzxlh_flag;
+	}
+	
+	public String getReportstyle() {
+		return reportstyle;
+	}
+
+	public void setReportstyle(String report_style) {
+		this.reportstyle = report_style;
 	}
 
 }
