@@ -9,7 +9,7 @@
 OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
 
 Page results = (Page)VS.findValue("pageXsd");
-
+String reportstyle = (String)VS.findValue("reportstyle");//报表样式
 String client_name = StringUtils.nullToStr(VS.findValue("client_name"));
 String creatdate1 = StringUtils.nullToStr(VS.findValue("creatdate1"));
 String creatdate2 = StringUtils.nullToStr(VS.findValue("creatdate2"));
@@ -105,6 +105,13 @@ String orderType = (String)VS.findValue("orderType");
 	
 	function print(id){
 		var destination = "printXsd.html?id=" + id;
+		var fea ='width=850,height=600,left=' + (screen.availWidth-850)/2 + ',top=' + (screen.availHeight-600)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		
+		window.open(destination,'销售订单打印',fea);				
+	}	
+	
+	function print_three(id){
+		var destination = "printXsd_three.html?id=" + id;
 		var fea ='width=850,height=600,left=' + (screen.availWidth-850)/2 + ',top=' + (screen.availHeight-600)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
 		window.open(destination,'销售订单打印',fea);				
@@ -236,8 +243,12 @@ String orderType = (String)VS.findValue("orderType");
 		<%
 		}		
 		%>
-		&nbsp;&nbsp;	
+		&nbsp;&nbsp;
+		<% if(StringUtils.nullToStr(reportstyle).equals("00")){ %>	
 		<a href="#" onclick="print('<%=StringUtils.nullToStr(xsd.get("id")) %>');"><img src="images/print.png" align="absmiddle" title="打印销售订单" border="0" style="cursor:hand"></a>			
+		<%}else{ %>
+		<a href="#" onclick="print_three('<%=StringUtils.nullToStr(xsd.get("id")) %>');"><img src="images/print.png" align="absmiddle" title="打印销售订单" border="0" style="cursor:hand"></a>			
+		<%} %>
 		</td>
 	</tr>
 	
