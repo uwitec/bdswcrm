@@ -10,6 +10,8 @@ OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
 
 Page results = (Page)VS.findValue("jhdPage");
 
+String reportstyle = (String)VS.findValue("reportstyle");//报表样式
+
 String gysbh = (String)VS.findValue("gysbh");
 String state = (String)VS.findValue("state");
 String cg_date = (String)VS.findValue("cg_date");
@@ -99,7 +101,14 @@ String orderType = (String)VS.findValue("orderType");
 		var destination = "printJhd.html?id=" + id;
 		var fea ='width=850,height=600,left=' + (screen.availWidth-850)/2 + ',top=' + (screen.availHeight-600)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 		
-		window.open(destination,'销售订单打印',fea);				
+		window.open(destination,'采购订单打印',fea);				
+	}		
+	
+	function print_three(id){
+		var destination = "printJhd_three.html?id=" + id;
+		var fea ='width=850,height=600,left=' + (screen.availWidth-850)/2 + ',top=' + (screen.availHeight-600)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		
+		window.open(destination,'采购订单打印',fea);				
 	}		
 </script>
 </head>
@@ -173,7 +182,11 @@ String orderType = (String)VS.findValue("orderType");
 			<a href="#" onclick="del('<%=StringUtils.nullToStr(jhd.getId()) %>');"><img src="images/del.gif" align="absmiddle" title="删除订单" border="0" style="cursor:hand"></a>
 		<%} %>
 		&nbsp;&nbsp;
+		<% if(StringUtils.nullToStr(reportstyle).equals("00")){ %>
 		<a href="#" onclick="print('<%=StringUtils.nullToStr(jhd.getId()) %>');"><img src="images/print.png" align="absmiddle" title="打印订单" border="0" style="cursor:hand"></a>			
+		<%}else{ %>
+		<a href="#" onclick="print_three('<%=StringUtils.nullToStr(jhd.getId()) %>');"><img src="images/print.png" align="absmiddle" title="打印订单" border="0" style="cursor:hand"></a>	
+		<%} %>
 		</td>
 	</tr>
 	
