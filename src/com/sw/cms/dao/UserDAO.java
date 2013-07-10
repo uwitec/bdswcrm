@@ -692,6 +692,24 @@ public class UserDAO extends JdbcBaseDAO {
 	}
 	
 	/**
+	 * 获取报表样式的标志
+	 * 00:普通样式；01:三分样式
+	 * @return
+	 */
+	public String getReportStyle(){		
+		String flag = "00";
+		String sql = "select style_flag from report_style";
+		List list = this.getResultList(sql);
+		
+		if(list.size() > 0){
+			Map map = (Map)list.get(0);
+			flag = (String)map.get("style_flag");
+		}
+		
+		return flag;
+	}
+	
+	/**
 	 * 保存强制序列号相关信息
 	 * @param sp_flag
 	 * 
