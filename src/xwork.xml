@@ -2173,10 +2173,28 @@
 			</result>
         </action>
         
+        <!-- 销售订单打印  三分纸-->                                                                                                             
+        <action name="printXsd_three" class="xsdAction" method="printXsd">
+            <result name="success" type="jasper">
+				<param name="location">/WEB-INF/report/xsdTemplate_three.jasper</param>
+				<param name="dataSource">xsdProducts</param>
+				<param name="format">PDF</param>
+			</result>
+        </action>
+        
         <!-- 采购订单打印 -->                                                                                                             
         <action name="printJhd" class="jhdAction" method="printJhd">
             <result name="success" type="jasper">
 				<param name="location">/WEB-INF/report/jhdTemplate.jasper</param>
+				<param name="dataSource">jhdProducts</param>
+				<param name="format">PDF</param>
+			</result>
+        </action> 
+        
+         <!-- 采购订单打印 三分纸 -->
+        <action name="printJhd_three" class="jhdAction" method="printJhd">
+            <result name="success" type="jasper">
+				<param name="location">/WEB-INF/report/jhdTemplate_three.jasper</param>
 				<param name="dataSource">jhdProducts</param>
 				<param name="format">PDF</param>
 			</result>
@@ -2191,10 +2209,29 @@
 			</result>
         </action> 
         
+        
+        <!-- 调拨单打印 三分纸-->                                                                                                             
+        <action name="printKfdb_three" class="kfdbAction" method="printKfdb">
+            <result name="success" type="jasper">
+				<param name="location">/WEB-INF/report/kfdbTemplate_three.jasper</param>
+				<param name="dataSource">kfdbProducts</param>
+				<param name="format">PDF</param>
+			</result>
+        </action> 
+        
         <!-- 出库单打印 -->                                                                                                             
         <action name="printCkd" class="ckdAction" method="printCkd">
             <result name="success" type="jasper">
 				<param name="location">/WEB-INF/report/ckdTemplate.jasper</param>
+				<param name="dataSource">ckdProducts</param>
+				<param name="format">PDF</param>
+			</result>
+        </action>
+        
+        <!-- 出库单打印 三分纸-->                                                                                                             
+        <action name="printCkd_three" class="ckdAction" method="printCkd">
+            <result name="success" type="jasper">
+				<param name="location">/WEB-INF/report/ckdTemplate_three.jasper</param>
 				<param name="dataSource">ckdProducts</param>
 				<param name="format">PDF</param>
 			</result>
@@ -2209,10 +2246,28 @@
 			</result>
         </action>        
         
+         <!-- 入库单打印 三分纸-->                                                                                                             
+        <action name="printRkd_three" class="rkdAction" method="printRkd">
+            <result name="success" type="jasper">
+				<param name="location">/WEB-INF/report/rkdTemplate_three.jasper</param>
+				<param name="dataSource">rkdProducts</param>
+				<param name="format">PDF</param>
+			</result>
+        </action>
+        
         <!-- 零售预收单 -->                                                                                                             
         <action name="printLsysk" class="lsyskAction" method="printLsysk">
             <result name="success" type="jasper">
 				<param name="location">/WEB-INF/report/yssjTemplate.jasper</param>
+				<param name="dataSource">lsyskList</param>
+				<param name="format">PDF</param>
+			</result>
+        </action> 
+        
+        <!-- 零售预收单 三分纸-->                                                                                                             
+        <action name="printLsysk_three" class="lsyskAction" method="printLsysk">
+            <result name="success" type="jasper">
+				<param name="location">/WEB-INF/report/yssjTemplate_three.jasper</param>
 				<param name="dataSource">lsyskList</param>
 				<param name="format">PDF</param>
 			</result>
@@ -2225,7 +2280,16 @@
 				<param name="dataSource">xsskList</param>
 				<param name="format">PDF</param>
 			</result>
-        </action>                                   
+        </action> 
+        
+         <!-- 收款单 三分纸-->                                                                                                             
+        <action name="printXssk_three" class="xsskAction" method="printXssk">
+            <result name="success" type="jasper">
+				<param name="location">/WEB-INF/report/xsskTemplate_three.jasper</param>
+				<param name="dataSource">xsskList</param>
+				<param name="format">PDF</param>
+			</result>
+        </action>                                     
         
         <!-- 成本调整，查询结果 -->
         <action name="queryProduct" class="cbtzAction" method="getResults">
