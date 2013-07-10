@@ -18,6 +18,8 @@ String drkf = (String)VS.findValue("drkf");
 String state = (String)VS.findValue("state");
 String orderName = (String)VS.findValue("orderName");
 String orderType = (String)VS.findValue("orderType");
+
+String reportstyle = (String)VS.findValue("reportstyle");//报表样式
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -104,6 +106,13 @@ String orderType = (String)VS.findValue("orderType");
 		
 		window.open(destination,'调拨单打印',fea);				
 	}	
+	
+	function print_three(id){
+		var destination = "printKfdb_three.html?id=" + id;
+		var fea ='width=850,height=600,left=' + (screen.availWidth-850)/2 + ',top=' + (screen.availHeight-600)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		
+		window.open(destination,'调拨单打印',fea);				
+	}
 </script>
 </head>
 <body >
@@ -228,7 +237,11 @@ String orderType = (String)VS.findValue("orderType");
 		}		
 		%>
 			&nbsp;&nbsp;
+		<% if(StringUtils.nullToStr(reportstyle).equals("00")){ %>
 			<a href="#" onclick="print('<%=StringUtils.nullToStr(kfdb.getId()) %>');"><img src="images/print.png" align="absmiddle" title="打印" border="0" style="cursor:hand"></a>	
+		<%}else{ %>
+			<a href="#" onclick="print_three('<%=StringUtils.nullToStr(kfdb.getId()) %>');"><img src="images/print.png" align="absmiddle" title="打印" border="0" style="cursor:hand"></a>	
+		<%} %>
 		</td>
 	</tr>
 	
