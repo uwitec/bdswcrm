@@ -350,6 +350,14 @@ public class UserService {
 	}
 	
 	/**
+	 * 获取报表样式的标志
+	 * @return
+	 */
+	public String getReportStyle(){
+		return userDao.getReportStyle();
+	}
+	
+	/**
 	 * 保存审批相关信息
 	 * @param sp_flag
 	 * @param role_id
