@@ -10,7 +10,7 @@ OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
 Page results = (Page)VS.findValue("lsyskPage");
 String orderName = (String)VS.findValue("orderName");
 String orderType = (String)VS.findValue("orderType");
-
+String reportstyle = (String)VS.findValue("reportstyle");//报表样式
 String id = (String)VS.findValue("id");
 String q_id = (String)VS.findValue("q_id");
 String client_name = (String)VS.findValue("client_name");
@@ -82,7 +82,12 @@ String ys_type = (String)VS.findValue("ys_type");
 		
 		window.open(destination,'详细信息',fea);				
 	}
-	
+	function print_three(id){
+		var destination = "printLsysk_three.html?id=" + id;
+		var fea ='width=800,height=550,left=' + (screen.availWidth-800)/2 + ',top=' + (screen.availHeight-550)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		
+		window.open(destination,'详细信息',fea);				
+	}
 	
 	function trSelectChangeCss(){
 		if (event.srcElement.tagName=='TD'){
@@ -203,9 +208,13 @@ String ys_type = (String)VS.findValue("ys_type");
 			<a class="xxlb" class="xxfb" href="javascript:openWin('<%=StringUtils.nullToStr(lsysk.getId()) %>');">查看</a>&nbsp;
 			<a class="xxlb" href="javascript:edit('<%=StringUtils.nullToStr(lsysk.getId()) %>');">修改</a>&nbsp;
 			<a class="xxlb" href="javascript:del('<%=StringUtils.nullToStr(lsysk.getId()) %>');">删除</a>&nbsp;
-			<%if(lsysk.getYsje() > 0){ %>
-			<a class="xxlb" href="javascript:print('<%=StringUtils.nullToStr(lsysk.getId()) %>');">打印</a>	
-			<%} %>
+			<%if(lsysk.getYsje() > 0){ 
+			    if(StringUtils.nullToStr(reportstyle).equals("00")){ %>		
+			       <a class="xxlb" href="javascript:print('<%=StringUtils.nullToStr(lsysk.getId()) %>');">打印</a>	
+			    <%}else{ %>
+			       <a class="xxlb" href="javascript:print_three('<%=StringUtils.nullToStr(lsysk.getId()) %>');">打印</a>			     	
+			<%}			
+			} %>
 		<%
 		}
 		%>
