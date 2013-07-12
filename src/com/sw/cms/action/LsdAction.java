@@ -70,7 +70,7 @@ public class LsdAction extends BaseAction {
 	
 	private String id = "";
 	private String sp_state = "";
-	
+	private String reportstyle="";//报表样式
 	private String sd = "0";
 	
 	private Map tcblMap;
@@ -103,7 +103,7 @@ public class LsdAction extends BaseAction {
 	public String list(){
 		
 		int rowsPerPage = Constant.PAGE_SIZE;
-
+		reportstyle = userService.getReportStyle();
 		String con = "";
 		if(!creatdate.equals("")){
 			con += " and a.creatdate>='" + creatdate + "'";
@@ -895,5 +895,13 @@ public class LsdAction extends BaseAction {
 
 	public void setIsqzxlh_flag(String isqzxlh_flag) {
 		this.isqzxlh_flag = isqzxlh_flag;
+	}
+	
+	public String getReportstyle() {
+		return reportstyle;
+	}
+
+	public void setReportstyle(String report_style) {
+		this.reportstyle = report_style;
 	}
 }
