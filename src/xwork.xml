@@ -2164,6 +2164,15 @@
 			</result>
         </action>
         
+         <!-- 零售单打印 三分纸-->                                                                                                             
+        <action name="printLsd_three" class="lsdAction" method="printLsd">
+            <result name="success" type="jasper">
+				<param name="location">/WEB-INF/report/lsdTemplate_three.jasper</param>
+				<param name="dataSource">lsdProducts</param>
+				<param name="format">PDF</param>
+			</result>
+        </action>
+        
         <!-- 销售订单打印 -->                                                                                                             
         <action name="printXsd" class="xsdAction" method="printXsd">
             <result name="success" type="jasper">
