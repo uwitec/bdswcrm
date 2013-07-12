@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="xsdTemplate_three" language="groovy" pageWidth="683" pageHeight="264" columnWidth="643" leftMargin="20" rightMargin="20" topMargin="30" bottomMargin="20" isFloatColumnFooter="true">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="creatdate" class="java.lang.String"/>
 	<parameter name="id" class="java.lang.String"/>
 	<parameter name="client_name" class="java.lang.String"/>
@@ -241,7 +244,7 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="9" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
 				</textElement>
-				<textFieldExpression class="java.lang.Double"><![CDATA[$F{price}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{price}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="0" y="16" width="555" height="1"/>
@@ -273,7 +276,7 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="9" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
 				</textElement>
-				<textFieldExpression class="java.lang.Double"><![CDATA[$F{xj}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{xj}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="452" y="0" width="39" height="16"/>
@@ -299,8 +302,8 @@
 	</detail>
 	<pageFooter>
 		<band height="26" splitType="Stretch">
-			<textField>
-				<reportElement x="6" y="8" width="547" height="18"/>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="6" y="8" width="547" height="18"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif" size="8" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
 				</textElement>
@@ -454,7 +457,7 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="9" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
 				</textElement>
-				<textFieldExpression class="java.lang.Double"><![CDATA[$V{total_xj}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$V{total_xj}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="554" y="0" width="1" height="18"/>
@@ -472,6 +475,9 @@
 				</textElement>
 				<text><![CDATA[合  计]]></text>
 			</staticText>
+			<line>
+				<reportElement x="0" y="-1" width="555" height="1"/>
+			</line>
 		</band>
 	</summary>
 </jasperReport>
