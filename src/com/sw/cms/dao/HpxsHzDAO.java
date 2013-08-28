@@ -294,4 +294,39 @@ public class HpxsHzDAO extends JdbcBaseDAO {
 		return this.getResultList(sql);
 	}
 	
+	
+	/**
+	 * 取货品销售汇总明细列表
+	 * @param product_id
+	 * @param start_date
+	 * @param end_date
+	 * @param client_name
+	 * @param xsry_id
+	 * @return
+	 */
+	public List getHpxs_resultList(String product_id,String start_date,String end_date,String client_name,String xsry_id,String client_type){
+		String sql = "select distinct a.id,a.client_name,a.cz_date,a.xsry,a.yw_type,a.store_id,sum(nums) as nums,sum(hjje) as hjje,sum(bhsje) as bhsje from product_sale_flow a  left join clients c on c.id=a.client_name where 1=1";
+		if(!start_date.equals("")){
+			sql = sql + " and a.cz_date>='" + start_date + "'";
+		}
+		if(!end_date.equals("")){
+			sql = sql + " and a.cz_date<='" + (end_date + " 23:59:59") + "'";
+		}
+		if(!client_name.equals("")){
+			sql = sql + " and a.client_name='" + client_name + "'";
+		}
+		if(!xsry_id.equals("")){
+			sql = sql + " and a.xsry='" + xsry_id + "'";
+		}
+		if(!product_id.equals("")){
+			sql = sql + " and a.product_id='" + product_id + "'";
+		}
+		if(!client_type.equals("")){
+			sql = sql + " and c.client_type='" + client_type + "'";
+		}
+		
+		sql += " group by a.id,a.client_name,a.cz_date,a.xsry,a.yw_type,a.store_id order by a.yw_type  ";
+		
+		return this.getResultList(sql);
+	}
 }
