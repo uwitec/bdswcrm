@@ -1531,7 +1531,10 @@
         </action>
         <action name="getGysXshzResult" class="hpxsHzAction" method="getGysXshzResult">
             <result name="success">/WEB-INF/pages/report/hpxs_hz/gys_result.jsp</result>
-        </action>        
+        </action>       
+        <action name="getHpxsHzMxResult_1" class="hpxsHzAction" method="getResultMx_hpxs">
+            <result name="success">/WEB-INF/pages/report/hpxs_hz/result_hpxs_mx.jsp</result>
+        </action> 
         <!-- 货品销售汇总 -->
         
         <!-- 货品销售毛利汇总 -->
