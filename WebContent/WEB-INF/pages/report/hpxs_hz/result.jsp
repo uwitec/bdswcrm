@@ -68,7 +68,7 @@ if(!product_xh.equals("")){
 </head>
 <body align="center" >
 <div class="rightContentDiv" id="divContent">
-<form name="myform" action="getHpxsHzMxResult.html" method="post">
+<form name="myform" action="getHpxsHzMxResult_1.html" method="post">
 <input type="hidden" name="product_id" value="">
 <input type="hidden" name="start_date" value="<%=start_date %>">
 <input type="hidden" name="end_date" value="<%=end_date %>">
