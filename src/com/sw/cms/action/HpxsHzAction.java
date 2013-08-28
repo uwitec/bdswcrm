@@ -30,7 +30,8 @@ public class HpxsHzAction extends BaseAction {
 	private List thdList = new ArrayList();
 	private List lsdList = new ArrayList();
 	private List clientsList= new ArrayList();
-
+	private List hpxs_resultList = new ArrayList();
+	
 	private String product_kind = "";
 	private String product_name = "";
 	private String product_xh = "";
@@ -112,6 +113,16 @@ public class HpxsHzAction extends BaseAction {
 		return "success";
 	}
 
+	/**
+	 * 货品销售汇总-明细列表
+	 * 
+	 * @return
+	 */
+	public String getResultMx_hpxs() {
+		hpxs_resultList = hpxsHzService.getHpxs_resultList(product_id, start_date, end_date,clientName, xsry_id, client_type);
+		return "success";
+	}
+	
 	public List getUser_list() {
 		return user_list;
 	}
@@ -200,6 +211,15 @@ public class HpxsHzAction extends BaseAction {
 		this.resultList = resultList;
 	}
 
+	
+	public List getHpxs_resultList() {
+		return hpxs_resultList;
+	}
+
+	public void setHpxs_resultList(List hpxs_resultList) {
+		this.hpxs_resultList = hpxs_resultList;
+	}	
+	
 	public String getClientName() {
 		return clientName;
 	}
@@ -247,6 +267,7 @@ public class HpxsHzAction extends BaseAction {
 	public void setClientsList(List clientsList) {
 		this.clientsList = clientsList;
 	}
+	
 
 	public ClientsService getClientsService() {
 		return clientsService;
