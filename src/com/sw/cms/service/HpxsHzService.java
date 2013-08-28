@@ -102,6 +102,19 @@ public class HpxsHzService {
 	}
 
 
+	/**
+	 * 取货品销售汇总明细列表
+	 * @param product_id
+	 * @param start_date
+	 * @param end_date
+	 * @param client_name
+	 * @param xsry_id
+	 * @return
+	 */
+	public List getHpxs_resultList(String product_id,String start_date,String end_date,String client_name,String xsry_id,String client_type){
+		return hpxsHzDao.getHpxs_resultList(product_id, start_date, end_date, client_name, xsry_id,client_type);
+	}
+	
 	public HpxsHzDAO getHpxsHzDao() {
 		return hpxsHzDao;
 	}
