@@ -311,13 +311,13 @@ SysUser user = (SysUser)VS.findValue("user");
 	<tr>	
 		<td class="a1" width="15%">工作简历</td>	
 		<td class="a2" colspan="3">
-			<ww:textarea name="user.gzjl" id="gzjl"  theme="simple" value="<%=StringUtils.nullToStr(userMap.get("gzjl")) %>" cssStyle="width:80%;height:70px"/>
+			<textarea  name="user.gzjl" id="gzjl"   style="width:80%;height:70px"><%=StringUtils.nullToStr(userMap.get("gzjl")) %></textarea>
 		</td>			
 	</tr>	
 	<tr>	
 		<td class="a1" width="15%">领导考核</td>	
 		<td class="a2" colspan="3">
-			<ww:textarea name="user.ldkh" id="ldkh"  theme="simple" value="<%=StringUtils.nullToStr(userMap.get("ldkh")) %>" cssStyle="width:80%;height:70px"/>
+			<textarea name="user.ldkh" id="ldkh"  style="width:80%;height:70px"><%=StringUtils.nullToStr(userMap.get("ldkh")) %></textarea>
 		</td>			
 	</tr>
 	<tr>
