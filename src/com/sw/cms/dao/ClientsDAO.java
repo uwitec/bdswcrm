@@ -22,7 +22,7 @@ public class ClientsDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public Page getClients(String con,int curPage, int rowsPerPage){
-		String sql = "select a.* from clients a left join sys_user b on b.user_id=a.khjl where 1=1";
+		String sql = "select a.* from clients a left join sys_user b on b.user_id=a.khjl left join clients_linkman c on a.id=c.clients_id  where 1=1";
 		
 		if(!con.equals("")){
 			sql = sql + con;
