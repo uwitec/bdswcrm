@@ -77,7 +77,7 @@ public class ClientsAction extends BaseAction {
 			con += " and a.name like'%" + name + "%'";
 		}
 		if (!lxr.equals("")) {
-			con += " and a.lxr like'%" + lxr + "%'";
+			con += " and c.name like'%" + lxr + "%'";
 		}
 		if (!khjl.equals("")) {
 			con += " and b.real_name like '%" + khjl + "%'";
