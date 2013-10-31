@@ -7,7 +7,7 @@
 
 <%
 OgnlValueStack VS = (OgnlValueStack)request.getAttribute("webwork.valueStack");
-
+String[] wldwlx = (String[])VS.findValue("wldwlx");
  
 List clientsList=(List)VS.findValue("clientList");
 %>
@@ -64,10 +64,21 @@ function openClientWin(){
 		</td>				
 	</tr>
 	<tr>
-		<td class="a1" width="15%">客户类型</td>
-		<td class="a2" width="35%">
-			<input type="text" name="client_type" id="client_type" value="" style="width:232px" size="25">
-		</td>
+		<td class="a1">客户类型</td>
+		<td class="a4">
+		<select name="client_type" id="client_type" style="width:232px">
+				<option value=""></option>
+				<%
+				if(wldwlx != null && wldwlx.length > 0){ 
+					for(int i=0;i<wldwlx.length;i++){
+				%>
+				<option value="<%=wldwlx[i] %>"><%=wldwlx[i] %></option>
+				<%
+					}
+				}
+				%>
+			</select>
+		</td>	
 		<td class="a1">应付为0不显示</td>
 		<td class="a4">	
 			<input type="radio" name="flag" id="flag" value="是"checked/>是&nbsp;&nbsp;
