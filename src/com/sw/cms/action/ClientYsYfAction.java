@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.sw.cms.action.base.BaseAction;
 import com.sw.cms.service.ClientsService;
+import com.sw.cms.service.SjzdService;
 import com.sw.cms.service.UserService;
 import com.sw.cms.service.YfHzMxService;
 
@@ -13,14 +14,14 @@ public class ClientYsYfAction extends BaseAction {
 	private YfHzMxService yfHzMxService;
 	private UserService userService;
 	private ClientsService clientsService;
-	
+	private SjzdService sjzdService;
 	private List user_list = new ArrayList();
 	private List clientList = new ArrayList();
 	
 	private String client_name = "";
 	private String khjl = "";
 	private String client_type ="";
-	
+	private String[] wldwlx;
 	
 	/**
 	 * 打开条件列表页面
@@ -29,6 +30,7 @@ public class ClientYsYfAction extends BaseAction {
 	public String showCondition(){
 		user_list = userService.getAllEmployeeList();
 		clientList=clientsService.getClientList("");
+		wldwlx = sjzdService.getSjzdXmxxByZdId("SJZD_WLDWLX");
 		return "success";
 	}
 	
@@ -113,5 +115,20 @@ public class ClientYsYfAction extends BaseAction {
 
 	public void setClient_type(String client_type) {
 		this.client_type = client_type;
+	}
+	
+	public String[] getWldwlx() {
+		return wldwlx;
+	}
+
+	public void setWldwlx(String[] wldwlx) {
+		this.wldwlx = wldwlx;
+	}
+	public SjzdService getSjzdService() {
+		return sjzdService;
+	}
+
+	public void setSjzdService(SjzdService sjzdService) {
+		this.sjzdService = sjzdService;
 	}
 }
