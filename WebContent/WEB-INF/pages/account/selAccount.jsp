@@ -35,7 +35,7 @@ function sel(fkzh,zhmc){
 		<td>编号</td>
 		<td>名称</td>
 		<td>类型</td>
-		<td>当前余额</td>
+		<!-- <td>当前余额</td> -->
 	</tr>
 	</thead>
 	<%
@@ -44,13 +44,13 @@ function sel(fkzh,zhmc){
 	while(it.hasNext()){
 		Map map = (Map)it.next();
 		
-		double dqje = map.get("dqje")==null?0:((Double)map.get("dqje")).doubleValue();
+		//double dqje = map.get("dqje")==null?0:((Double)map.get("dqje")).doubleValue();
 	%>
 	<tr class="a1" onmouseover="this.className='a2';" onmouseout="this.className='a1';" title="左键点击选择" onclick="sel('<%=StringUtils.nullToStr(map.get("id")) %>','<%=StringUtils.nullToStr(map.get("name")) %>');">
 		<td><%=StringUtils.nullToStr(map.get("id")) %></td>
 		<td><%=StringUtils.nullToStr(map.get("name")) %></td>
 		<td><%=StringUtils.nullToStr(map.get("type")) %></td>
-		<td><%=JMath.round(dqje,2) %></td>
+		
 	</tr>
 	
 	<%
