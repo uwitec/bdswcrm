@@ -662,6 +662,9 @@
         <action name="queryClients" class="clientsAction" method="queryClients">
             <result name="success">/WEB-INF/pages/client/query_client.jsp</result>
         </action>
+        <action name="queryClients_wsdj" class="clientsAction" method="queryClients_wsdj">
+            <result name="success">/WEB-INF/pages/client/query_client_wsdj.jsp</result>
+        </action>
         <action name="queryClientsTipInfo" class="clientsAction" method="getLikeClientInfo">
             <result name="success">/WEB-INF/pages/client/client_tip.jsp</result>
         </action> 
