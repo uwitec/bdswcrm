@@ -102,7 +102,7 @@ if(results != null && results.size()>0){
 			<TD class=ReportItem width="70"><%=StringUtils.nullToStr(map.get("creatdate")) %>&nbsp;</TD>
 			<TD class=ReportItem width="70"><%=StringUtils.nullToStr(map.get("ysrq")) %>&nbsp;</TD>
 			<TD class=ReportItem width="100"><a href="javascript:openWin('viewXsd.html?id=<%=xsd_id %>');"><%=xsd_id %></a>&nbsp;</TD>
-			<TD class=ReportItem><%=StaticParamDo.getClientNameById(StringUtils.nullToStr(map.get("client_name"))) %>&nbsp;</TD>
+			<TD class=ReportItem><a href="javascript:openWin('queryClients_wsdj.html?client_name=<%=StringUtils.nullToStr(map.get("client_name")) %>');"><%=StaticParamDo.getClientNameById(StringUtils.nullToStr(map.get("client_name"))) %>&nbsp;</TD>
 			<TD class=ReportItem><%=StringUtils.nullToStr(map.get("kh_lxr")) %>&nbsp;</TD>
 			<TD class=ReportItem><%=StringUtils.nullToStr(map.get("kh_lxdh")) %>&nbsp;</TD>
 			<TD class=ReportItem><%=StaticParamDo.getRealNameById(StringUtils.nullToStr(map.get("fzr"))) %>&nbsp;</TD>
