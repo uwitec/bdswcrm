@@ -61,7 +61,7 @@ public class ClientsAction extends BaseAction {
 	private Map clientQcMap;
 	private Map clientWlMap;
 
-
+	private String client_name;
 	/**
 	 * 返回列表（带分页）
 	 * 
@@ -239,6 +239,30 @@ public class ClientsAction extends BaseAction {
 	}
 	
 
+	/**
+	 * 客户查询,销售未收单据
+	 * @return
+	 * @throws Exception
+	 */
+	public String queryClients_wsdj() throws Exception{
+		try{
+			int rowsPerPage = Constant.PAGE_SIZE2;
+			String con = "";
+			String con2 = "";
+			if(!client_name.equals("")){
+				con = " and (id = '" + client_name + "')";
+				con2 = " and (b.id like '" + client_name + "' )";
+			}
+			clientsPage = clientsService.getClientIncludYsk(con, curPage,rowsPerPage);
+			clientQcMap = clientsService.getClientQc(con2, DateComFunc.getToday());
+			clientWlMap = clientsService.getClientWlInfo(con2, DateComFunc.getToday());
+			return "success";
+		}catch(Exception e){
+			log.error("客户查询出错,错误原因:" + e.getMessage());
+			return ERROR;
+		}
+	}
+	
 	/**
 	 * desc 联系人
 	 * 
@@ -806,5 +830,13 @@ public class ClientsAction extends BaseAction {
 
 	public void setLxrnld(String[] lxrnld) {
 		this.lxrnld = lxrnld;
+	}
+	
+	public String getClient_name() {
+		return client_name;
+	}
+
+	public void setClient_name(String client_name) {
+		this.client_name = client_name;
 	}
 }
