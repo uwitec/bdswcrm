@@ -81,15 +81,15 @@ function openClientWin(){
 		</td>	
 		<td class="a1">应付为0不显示</td>
 		<td class="a4">	
-			<input type="radio" name="flag" id="flag" value="是"checked/>是&nbsp;&nbsp;
-			<input type="radio" name="flag" id="flag" value="否" />否			
+			<input type="radio" name="flag" id="flag" value="是"/>是&nbsp;&nbsp;
+			<input type="radio" name="flag" id="flag" value="否" checked/>否			
 		</td>											
 	</tr>
 	<tr>
 		<td class="a1">应收为0不显示</td>
 		<td class="a4" colspan="3">
-			<input type="radio" name="flag2" id="flag2" value="是" checked/>是&nbsp;&nbsp;
-			<input type="radio" name="flag2" id="flag2" value="否"/>否				
+			<input type="radio" name="flag2" id="flag2" value="是" />是&nbsp;&nbsp;
+			<input type="radio" name="flag2" id="flag2" value="否" checked/>否				
 		</td>	
 	</tr>
 	<tr height="35">
