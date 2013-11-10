@@ -436,7 +436,7 @@
          张家口升源                  |                                                 |                                          
          易县未来                    |                                                 |                                               
          定州创逸                    |              2012-09-21                         |     李玉堂                                    
-         张家口金诺                  |                                                 |                                                              
+         张家口金诺                  |              2013-09-02                         |     李玉堂                                                         
          秦皇岛金恒生                |                                                 |                                                                     
          秦皇岛市金宇高德            |                                                 |                                                                
          承德扬天                    |                                                 |                                                                 
@@ -449,7 +449,82 @@
          曲阳大河                    |                                                 |                                              
          蠡县一加一                  |              2012-09-03                         |    李玉堂                    
          承德惠普（CDHP）            |              2012-08-11                         |    李玉堂 
-         秦皇岛同业(qhdty            |              2012-11-22                         |    李玉堂                                    
-         思维售后                    |                                                 |                         
-         石家庄三个帐套（单独服务器）|              2012-11-12                         |     李玉堂  部署了 tomcat_crm，其他两个没有部署                                          
+         秦皇岛同业(qhdty)           |              2012-11-22                         |    李玉堂                                    
+         思维售后                    |                                                 |                 
+         承德博福商贸                |              2013-09-01                         |    李玉堂  
+         泰德致远                    |              2013-09-01                         |    李玉堂  
+         张家口市泰宇商贸有限公司    |              2013-09-01                         |    李玉堂            
+         定州鼎盛                    |              2013-09-01                         |    李玉堂            
+         石家庄三个帐套（单独服务器）|              2012-11-12                         |    李玉堂  部署了 tomcat_crm，其他两个没有部署                                          
        ---------------------------------------------------------------------------------------------------          
+       
+       
+思维EIP系统V1.08       
+    1、发布日期：2013-08-01
+
+    2、更新内容：
+        1）库存期初的存储方式进行了修改，提升了出入库汇总等统计的效率；
+        2）报表打印样式可以选择；
+        3）单位应收应付查询报表
+        
+    3、数据库修改：        
+				
+				2012-08-25修改
+				--添加销售发票管理
+				CREATE TABLE `xsfpgl` (
+				  `id` VARCHAR(50) NOT NULL,
+				  `fplx` VARCHAR(45),
+				  `kpmc` VARCHAR(100),
+				  `fpje` DOUBLE,
+				  `kpdz` VARCHAR(100),
+				  `kpdh` VARCHAR(50),
+				  `khhzh` VARCHAR(200),
+				  `sh` VARCHAR(45),
+				  `fpxxzy` VARCHAR(500),
+				  `jy_jsr` VARCHAR(45),
+				  `jy_date` VARCHAR(45),
+				  `kp_jsr` VARCHAR(45),
+				  `kp_date` VARCHAR(45),
+				  `yw_type` VARCHAR(45),
+				  `yw_id` VARCHAR(45),
+				  `state` VARCHAR(45),
+				  `cz_date` DATETIME,
+				  `czr` VARCHAR(45),
+				  PRIMARY KEY(`id`)
+				)
+				ENGINE = InnoDB;
+				
+				2013-04-21修改
+				--新的库存期初表，采用xml方式存储，提升数据库的查询效率
+				CREATE TABLE `product_kc_qc_xml` (
+				  `store_id` VARCHAR(20) NOT NULL,
+				  `cdate` VARCHAR(20) NOT NULL,
+				  `xmlString` LONGTEXT,
+				  `createDate` DATETIME NOT NULL,
+				  PRIMARY KEY(`store_id`, `cdate`)
+				)
+				ENGINE = InnoDB;
+				
+				2013-06-26更新
+				----增加单位应收应付查询报表
+				INSERT INTO `funcs` VALUES ('FC9923','单位应收应付查询','单位应收应付查询','showDwysyfcxCon.html','112.gif',11,'1','4');
+				
+				INSERT INTO `column_funcs` VALUES ('004002','FC9923');
+				
+				
+				2013-07-05
+				-----增加报表样式的设定
+				INSERT INTO `funcs` VALUES ('FC9924','设置报表样式','设置报表样式','openStyle.html','112.gif',11,'1','10');
+				
+				INSERT INTO `column_funcs` VALUES ('009002','FC9924');
+				
+				--报表样式表
+				CREATE TABLE `report_style` (
+				  `style_flag` VARCHAR(20) NOT NULL,
+				   PRIMARY KEY(`style_flag`)
+				)
+				ENGINE = InnoDB;
+				
+				INSERT INTO `report_style` VALUES ('00');
+        
+        
