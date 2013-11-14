@@ -427,6 +427,17 @@ public class LsdDAO extends JdbcBaseDAO {
 	
 	
 	/**
+	 * 取序列号列表
+	 * @return
+	 */
+	public List getSerialList(String id){
+		String sql = "SELECT a.serial_num,b.product_name FROM serial_num_flow a inner join serial_num_mng b on a.serial_num=b.serial_num  ";
+		
+		sql += " where a.yw_dj_id='" + id + "' order by b.product_name,a.serial_num";
+		return this.getJdbcTemplate().queryForList(sql);
+	}
+	
+	/**
 	 * 包装对象(零售单)
 	 * 
 	 * @author liyt
