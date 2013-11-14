@@ -26,6 +26,7 @@ import com.sw.cms.source.SysSource;
 import com.sw.cms.util.Constant;
 import com.sw.cms.util.DateComFunc;
 import com.sw.cms.util.MoneyUtil;
+import com.sw.cms.util.ParameterUtility;
 import com.sw.cms.util.StaticParamDo;
 import com.sw.cms.util.StringUtils;
 
@@ -67,6 +68,7 @@ public class XsdAction extends BaseAction {
 	private List kindList = new ArrayList();
 	private List posTypeList = new ArrayList();
 	private List clientsList= new ArrayList();//---
+	private List serialList = new ArrayList();
 	
 	private List userList;
 	private String[] ysfs;
@@ -508,6 +510,16 @@ public class XsdAction extends BaseAction {
 			log.error("打印销售订单出错，原因：" + e.getMessage());
 			return "error";
 		}		
+	}
+	
+	/**
+	 * 序列号查看页面
+	 * @return
+	 */
+	public String serialView(){
+		String id = ParameterUtility.getStringParameter(getRequest(),"id", "");
+		serialList = xsdService.getSerialList(id);
+		return "success";
 	}
 	
 	
@@ -1132,5 +1144,12 @@ public class XsdAction extends BaseAction {
 
 	public void setReportstyle(String report_style) {
 		this.reportstyle = report_style;
+	}
+	
+	public List getSerialList() {
+		return serialList;
+	}
+	public void setSerialList(List serialList) {
+		this.serialList = serialList;
 	}
 }

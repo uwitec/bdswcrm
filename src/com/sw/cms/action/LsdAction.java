@@ -45,7 +45,8 @@ public class LsdAction extends BaseAction {
 	private List userList = new ArrayList();
 	private List storeList = new ArrayList();
 	private List posTypeList = new ArrayList();
- 
+	private List serialList = new ArrayList();
+	
 	private Page productPage;
  
 	private String[] ysfs;
@@ -611,6 +612,17 @@ public class LsdAction extends BaseAction {
 		return "success";
 	}
 	
+	/**
+	 * 序列号查看页面
+	 * @return
+	 */
+	public String serialView(){
+		String id = ParameterUtility.getStringParameter(getRequest(),"id", "");
+		serialList = lsdService.getSerialList(id);
+		return "success";
+	}
+	
+	
 	
 	public Lsd getLsd() {
 		return lsd;
@@ -904,4 +916,12 @@ public class LsdAction extends BaseAction {
 	public void setReportstyle(String report_style) {
 		this.reportstyle = report_style;
 	}
+	
+	public List getSerialList() {
+		return serialList;
+	}
+	public void setSerialList(List serialList) {
+		this.serialList = serialList;
+	}
+	
 }

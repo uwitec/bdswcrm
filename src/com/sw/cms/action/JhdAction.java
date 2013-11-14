@@ -55,6 +55,8 @@ public class JhdAction extends BaseAction {
 	private List storeList = new ArrayList();
 	private List clientsList= new ArrayList();
 	private List kindList = new ArrayList();
+	private List serialList = new ArrayList();
+	
 	private Page productPage;
 	
 	
@@ -351,6 +353,17 @@ public class JhdAction extends BaseAction {
 		return "success";
 	}
 
+	
+	/**
+	 * 序列号查看页面
+	 * @return
+	 */
+	public String serialView(){
+		String id = ParameterUtility.getStringParameter(getRequest(),"id", "");
+		serialList = jhdService.getSerialList(id);
+		return "success";
+	}
+	
 	public Jhd getJhd() {
 		return jhd;
 	}
@@ -734,5 +747,10 @@ public class JhdAction extends BaseAction {
 	public void setReportstyle(String report_style) {
 		this.reportstyle = report_style;
 	}
-	
+	public List getSerialList() {
+		return serialList;
+	}
+	public void setSerialList(List serialList) {
+		this.serialList = serialList;
+	}
 }
