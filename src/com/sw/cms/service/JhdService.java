@@ -238,6 +238,14 @@ public class JhdService {
 	public void saveCgsd(String cgsd){
 		jhdDao.saveCgsd(cgsd);
 	}
+	
+	/**
+	 * 取序列号列表
+	 * @return
+	 */
+	public List getSerialList(String id){
+		return jhdDao.getSerialList(id);
+	}
 
 	public JhdDAO getJhdDao() {
 		return jhdDao;

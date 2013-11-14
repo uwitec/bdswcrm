@@ -875,6 +875,16 @@ public class LsdService {
 		this.productKcDao = productKcDao;
 	}
 
+	
+	/**
+	 * 取序列号列表
+	 * @return
+	 */
+	public List getSerialList(String id){
+		return lsdDao.getSerialList(id);
+	}
+	
+	
 	public XsskDAO getXsskDao() {
 		return xsskDao;
 	}

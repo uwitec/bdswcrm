@@ -845,6 +845,13 @@ public class XsdService {
 		
 	}
 
+	/**
+	 * 取序列号列表
+	 * @return
+	 */
+	public List getSerialList(String id){
+		return xsdDao.getSerialList(id);
+	}
 
 	public AccountDzdDAO getAccountDzdDao() {
 		return accountDzdDao;
