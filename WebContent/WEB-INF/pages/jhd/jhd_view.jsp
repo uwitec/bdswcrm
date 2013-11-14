@@ -20,6 +20,14 @@ Jhd jhd = (Jhd)VS.findValue("Jhd");
 <title>采购订单</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="css/css.css" rel="stylesheet" type="text/css" />
+<script>
+	function openSerial(id){
+		var destination = "jhdSerialView.html?id="+id;
+		var fea ='width=400,height=300,left=' + (screen.availWidth-400)/2 + ',top=' + (screen.availHeight-300)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		
+		window.open(destination,'序列号信息',fea);		
+	}	
+</script>
 </head>
 <body >
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0">
@@ -126,6 +134,7 @@ if(jhdProducts != null && jhdProducts.size()>0){
 	</tr>		
 	<tr height="35">
 		<td class="a1" colspan="6">
+		    <input type="button" name="btnSsrial" value="序列号" class="css_button2" onclick="openSerial('<%=StringUtils.nullToStr(jhd.getId())%>');">&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="button" name="button1" value="关 闭" class="css_button2" onclick="window.close();"/>
 		</td>
 	</tr>
