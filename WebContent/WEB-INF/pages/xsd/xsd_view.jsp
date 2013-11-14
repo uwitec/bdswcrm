@@ -84,6 +84,13 @@ Xsd xsd = (Xsd)VS.findValue("xsd");
 			obj_sh2.style.display = "";			
 		}		
 	}	
+	
+	function openSerial(id){
+		var destination = "xsdSerialView.html?id="+id;
+		var fea ='width=400,height=300,left=' + (screen.availWidth-400)/2 + ',top=' + (screen.availHeight-300)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+		
+		window.open(destination,'序列号信息',fea);		
+	}
 </script>
 </head>
 <body onload="chgKpTyle('<%=StringUtils.nullToStr(xsd.getFplx()) %>');">
@@ -240,6 +247,7 @@ if(xsdProducts!=null && xsdProducts.size()>0){
 	</tr>		
 	<tr height="35">
 		<td class="a1" colspan="4">
+		    <input type="button" name="btnSsrial" value="序列号" class="css_button2" onclick="openSerial('<%=StringUtils.nullToStr(xsd.getId())%>');">&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="reset" name="button2" value="关 闭" class="css_button2" onclick="window.close();;">
 		</td>
 	</tr>
