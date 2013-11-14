@@ -286,7 +286,11 @@
         </action>
         <action name="saveCgsd" class="jhdAction" method="saveCgsd">
             <result name="success" type="chain">editCgsd</result>
-        </action>                     
+        </action>    
+        <action name="jhdSerialView" class="jhdAction" method="serialView">
+            <result name="success">/WEB-INF/pages/jhd/serial_view.jsp</result>
+        </action>
+                         
         <!-- 进货单 -->
         
 		<!-- 用户管理 -->
@@ -724,6 +728,9 @@
         <action name="importHyk" class="xsdAction" method="importHyk">
             <result name="success">/WEB-INF/pages/xsd/importHyk.jsp</result>
         </action>
+        <action name="xsdSerialView" class="xsdAction" method="serialView">
+            <result name="success">/WEB-INF/pages/xsd/serial_view.jsp</result>
+        </action>
         <!-- 销售订单 -->
         
         <!-- 分销订单 -->
@@ -811,7 +818,11 @@
         </action>             
         <action name="importHykls" class="lsdAction" method="importHyk">
             <result name="success">/WEB-INF/pages/lsd/importHyk.jsp</result>
-        </action>                 
+        </action>         
+        <action name="lsdSerialView" class="lsdAction" method="serialView">
+            <result name="success">/WEB-INF/pages/lsd/serial_view.jsp</result>
+        </action>
+                
         <!-- 零售单管理 -->
         
         <!-- 角色管理 -->      
