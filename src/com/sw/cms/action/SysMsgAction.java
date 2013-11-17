@@ -3,6 +3,7 @@ package com.sw.cms.action;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import com.sw.cms.action.base.BaseAction;
 import com.sw.cms.model.LoginInfo;
@@ -44,7 +45,13 @@ public class SysMsgAction extends BaseAction {
 		
 		msgList = sysMsgService.getNotReadMsg(user_id);
 		
+		//将用户未读消息置为已读消息
 		sysMsgService.updateNotReadMsg(user_id);
+		
+		//更新用户未读消息缓存
+		Map map = sysMsgService.getUserNoReadMsg();
+		getApplication().setAttribute("userNoReadMsgMap", map);
+		
 		return "success";
 	}
 	

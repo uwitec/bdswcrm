@@ -14,7 +14,7 @@ import jxl.write.WritableCellFormat;
 import jxl.write.WritableFont;
 import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
-import jxl.format.Colour;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
