@@ -28,7 +28,7 @@ public class CghzDAO extends JdbcBaseDAO {
 	public List getHpcgList(String product_kind,String start_date,String end_date,String client_name,String product_name,String product_xh,String cgry_id,String product_prop){
 		
 		//进货单
-		String jhd_sql = "select a.product_id,c.product_name,c.product_xh,sum(nums) as nums,sum(hsje) as je,sum(sje) as sje,sum(bhsje) as bhsje from jhd_product a join jhd b on b.id=a.jhd_id left join product c on c.product_id=a.product_id where b.state='已入库' ";
+		String jhd_sql = "select a.product_id,c.sp_txm,c.product_name,c.product_xh,sum(nums) as nums,sum(hsje) as je,sum(sje) as sje,sum(bhsje) as bhsje from jhd_product a join jhd b on b.id=a.jhd_id left join product c on c.product_id=a.product_id where b.state='已入库' ";
 		if(product_prop.equals("1"))
 		{
 			jhd_sql += " and c.prop='库存商品'";
@@ -78,7 +78,7 @@ public class CghzDAO extends JdbcBaseDAO {
 		jhd_sql += " group by a.product_id,c.product_name,c.product_xh";
 		
 		//采购退货单
-		String cgthd_sql = "select a.product_id,c.product_name,c.product_xh,(0-sum(nums)) as nums,(0-sum(th_price*nums)) as je,0 as sje,(0-sum(th_price*nums)) as bhsje from cgthd_product a join cgthd b on b.id=a.cgthd_id left join product c on c.product_id=a.product_id where b.state='已出库' ";
+		String cgthd_sql = "select a.product_id,c.sp_txm,c.product_name,c.product_xh,(0-sum(nums)) as nums,(0-sum(th_price*nums)) as je,0 as sje,(0-sum(th_price*nums)) as bhsje from cgthd_product a join cgthd b on b.id=a.cgthd_id left join product c on c.product_id=a.product_id where b.state='已出库' ";
 		if(product_prop.equals("1"))
 		{
 			cgthd_sql += " and c.prop='库存商品'";
@@ -126,7 +126,7 @@ public class CghzDAO extends JdbcBaseDAO {
 		
 		cgthd_sql += " group by a.product_id,c.product_name,c.product_xh";
 		
-		String sql = "select product_id,product_name,product_xh,sum(nums) as nums,sum(je) as je,sum(sje) as sje,sum(bhsje) as bhsje from ((" + jhd_sql + ") union all (" + cgthd_sql + ")) x group by product_id,product_name,product_xh";
+		String sql = "select product_id,sp_txm,product_name,product_xh,sum(nums) as nums,sum(je) as je,sum(sje) as sje,sum(bhsje) as bhsje from ((" + jhd_sql + ") union all (" + cgthd_sql + ")) x group by product_id,sp_txm,product_name,product_xh";
 		
 		return this.getResultList(sql);
 	}
