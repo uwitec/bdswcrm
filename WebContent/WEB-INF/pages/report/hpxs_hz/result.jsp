@@ -101,6 +101,7 @@ if(!product_xh.equals("")){
 	<THEAD>
 		<TR>
 			<TD class=ReportHead>商品编码</TD>
+			<TD class=ReportHead>条形码</TD>
 			<TD class=ReportHead>商品名称</TD>
 			<TD class=ReportHead>商品规格</TD>
 			<TD class=ReportHead>数量</TD>
@@ -116,7 +117,7 @@ if(resultList != null && resultList.size()>0){
 		Map map = (Map)resultList.get(i);
 		
 		String product_id = StringUtils.nullToStr(map.get("product_id"));
-		
+		String sp_txm = StringUtils.nullToStr(map.get("sp_txm"));
 		double je = map.get("hjje")==null?0:((Double)map.get("hjje")).doubleValue();
 		String strNums = StringUtils.nullToStr(map.get("nums"));
 		
@@ -131,6 +132,7 @@ if(resultList != null && resultList.size()>0){
 %>
 		<TR>
 			<TD class=ReportItemXh><%=product_id %>&nbsp;</TD>
+			<TD class=ReportItemXh><%=sp_txm %>&nbsp;</TD>
 			<TD class=ReportItem><a href="javascript:openWin('<%=product_id %>');"><%=StringUtils.nullToStr(map.get("product_name")) %></a>&nbsp;</TD>
 			<TD class=ReportItem><%=StringUtils.nullToStr(map.get("product_xh")) %>&nbsp;</TD>
 			<TD class=ReportItemMoney><%=nums %>&nbsp;</TD>
@@ -143,6 +145,7 @@ if(resultList != null && resultList.size()>0){
 %>
 		<TR>
 			<TD class=ReportItemXh style="font-weight:bold">合计：</TD>
+			<TD class=ReportItem>&nbsp;</TD>
 			<TD class=ReportItem>&nbsp;</TD>		
 			<TD class=ReportItem>&nbsp;</TD>
 			<TD class=ReportItemMoney style="font-weight:bold"><%=hj_nums %>&nbsp;</TD>
