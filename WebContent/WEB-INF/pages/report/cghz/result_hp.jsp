@@ -91,6 +91,7 @@ if(!cgry_id.equals("")){
 	<THEAD>
 		<TR>
 			<TD class=ReportHead>商品编码</TD>
+			<TD class=ReportHead>条形码</TD>
 			<TD class=ReportHead>商品名称</TD>
 			<TD class=ReportHead>商品规格</TD>
 			<TD class=ReportHead>数量</TD>
@@ -112,6 +113,7 @@ if(list != null && list.size()>0){
 	for(int i=0;i<list.size();i++){
 		Map map = (Map)list.get(i);
 		String product_id = StringUtils.nullToStr(map.get("product_id"));
+		String sp_txm = StringUtils.nullToStr(map.get("sp_txm"));
 		double je = map.get("je")==null?0:((Double)map.get("je")).doubleValue();
 		double sje = map.get("sje")==null?0:((Double)map.get("sje")).doubleValue();
 		double bhsje = map.get("bhsje")==null?0:((Double)map.get("bhsje")).doubleValue();
@@ -129,6 +131,7 @@ if(list != null && list.size()>0){
 %>
 		<TR>
 			<TD class=ReportItem><%=product_id %>&nbsp;</TD>
+			<TD class=ReportItem><%=sp_txm %>&nbsp;</TD>
 			<TD class=ReportItem><a href="#" onclick="openWin('<%=product_id %>','<%=start_date %>','<%=end_date %>','<%=client_name %>','<%=cgry_id %>','<%=product_prop %>');"><%=StringUtils.nullToStr(map.get("product_name")) %></a>&nbsp;</TD>			
 			<TD class=ReportItem><%=StringUtils.nullToStr(map.get("product_xh")) %>&nbsp;</TD>
 			<TD class=ReportItemMoney><%=nums %>&nbsp;</TD>
@@ -141,7 +144,8 @@ if(list != null && list.size()>0){
 %>
 		<TR>
 			<TD class=ReportItem style="font-weight:bold">合计：</TD>
-			<TD class=ReportItem>&nbsp;</TD>			
+			<TD class=ReportItem>&nbsp;</TD>
+			<TD class=ReportItem>&nbsp;</TD>		
 			<TD class=ReportItem>&nbsp;</TD>
 			<TD class=ReportItemMoney style="font-weight:bold"><%=hj_nums %>&nbsp;</TD>
 			<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(hj_je,2) %>&nbsp;</TD>
