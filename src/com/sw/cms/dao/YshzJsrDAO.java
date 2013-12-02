@@ -1,10 +1,12 @@
 package com.sw.cms.dao;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.sw.cms.dao.base.JdbcBaseDAO;
+import com.sw.cms.util.DateComFunc;
 
 /**
  * 业务员应收汇总
@@ -175,6 +177,24 @@ public class YshzJsrDAO extends JdbcBaseDAO {
 		
 		return map;
 		
+	}
+	
+	/**
+	 * 取业务员未收单据列表
+	 * @param user_id 业务员编号
+	 * @return
+	 */
+	public List getWsdjList(String user_id){
+		String sql = "select a.creatdate,a.ysrq,a.id,a.client_name,a.fzr,a.xsdje,(a.xsdje-a.skje) as je,"+
+		             "c.khjl from xsd a join clients c on a.client_name=c.id  join sys_user b on a.fzr=b.user_id  "+
+		             "where a.state='已出库' and a.skxs<>'已收'";
+		
+		if(!user_id.equals("")){
+			sql += " and b.user_id='"+ user_id +"'";
+		}		
+		
+		
+		return this.getResultList(sql);
 	}
 
 }
