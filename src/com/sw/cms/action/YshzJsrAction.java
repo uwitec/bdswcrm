@@ -18,7 +18,7 @@ public class YshzJsrAction extends BaseAction {
 	private Map qcMap = new HashMap();
 	private Map fsMap = new HashMap();
 	private List xsdList = new ArrayList();
-	
+	private List wsdjList = new ArrayList();
 	private Map ysjeMap = new HashMap();
 	private Map cqjeMap = new HashMap();
 	private Map cqtsMap = new HashMap();
@@ -27,7 +27,7 @@ public class YshzJsrAction extends BaseAction {
 	private String end_date = "";
 	private String client_name = "";
 	private String jsr = "";
-	
+	private String user_id = "";
 	/**
 	 * 打开查询条件页面
 	 * @return
@@ -89,7 +89,7 @@ public class YshzJsrAction extends BaseAction {
 	
 	
 	/**
-	 * 业务员应收汇总表
+	 * 业务员未收单据汇总表
 	 * @return
 	 */
 	public String getHzResult(){
@@ -102,7 +102,25 @@ public class YshzJsrAction extends BaseAction {
 			
 			return SUCCESS;
 		}catch(Exception e){
-			log.error("业务员应收汇总出错," + e.getMessage());
+			log.error("业务员未收单据汇总出错," + e.getMessage());
+			e.printStackTrace();
+			return ERROR;
+		}
+	}
+	
+	/**
+	 * 业务员未收单据汇总表
+	 * @return
+	 */
+	public String getYwy_wsdj(){
+		try{
+			
+			wsdjList = yshzJsrService.getWsdjList(user_id);
+			
+			
+			return SUCCESS;
+		}catch(Exception e){
+			log.error("业务员未收单据汇总出错," + e.getMessage());
 			e.printStackTrace();
 			return ERROR;
 		}
@@ -126,6 +144,14 @@ public class YshzJsrAction extends BaseAction {
 		this.userList = userList;
 	}
 
+	public List getWsdjList() {
+		return wsdjList;
+	}
+
+
+	public void setWsdjList(List wsdjList) {
+		this.wsdjList = wsdjList;
+	}
 
 	public Map getQcMap() {
 		return qcMap;
@@ -187,6 +213,15 @@ public class YshzJsrAction extends BaseAction {
 	}
 
 
+	public String getUser_id() {
+		return user_id;
+	}
+
+
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
+	}
+	
 	public UserService getUserService() {
 		return userService;
 	}
