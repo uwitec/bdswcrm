@@ -268,3 +268,9 @@ CREATE TABLE `report_style` (
 ENGINE = InnoDB;
 
 INSERT INTO `report_style` VALUES ('00');
+
+
+2013-12-01
+--将"业务员应收汇总"修改为“业务员未收单据汇总”
+
+update funcs set func_name='业务员未收单据汇总',func_ms='业务员未收单据汇总' where func_id='FC9914' and func_name='业务员应收汇总';
