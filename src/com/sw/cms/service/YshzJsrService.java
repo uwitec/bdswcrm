@@ -84,6 +84,18 @@ public class YshzJsrService {
 		return yshzJsrDao.getYwyCqts();
 	}
 
+	
+	/**
+	 * 取业务员未收单据列表
+	 
+	 * @param user_id 业务员编号
+	 * @return
+	 */
+	public List getWsdjList(String user_id)
+	{
+		return yshzJsrDao.getWsdjList(user_id);
+	}
+	
 	public YshzJsrDAO getYshzJsrDao() {
 		return yshzJsrDao;
 	}
