@@ -3180,7 +3180,7 @@
         </action>        
         <!-- 兑奖货品设置结束 -->
 
-        <!-- 业务员应收汇总 -->
+        <!-- 业务员应收变化、应收汇总 -->
         <action name="showYshzJsrCondition" class="yshzJsrAction" method="showCondition">
             <result name="success">/WEB-INF/pages/report/yshz_jsr/condition.jsp</result>
         </action>
@@ -3193,7 +3193,11 @@
         <action name="getYwyYshzResult" class="yshzJsrAction" method="getHzResult">
             <result name="success">/WEB-INF/pages/report/yshz_jsr/result_hz.jsp</result>
         </action>
-        <!-- 业务员应收汇总 -->
+        <action name="queryywy_wsdj" class="yshzJsrAction" method="getYwy_wsdj">
+            <result name="success">/WEB-INF/pages/report/yshz_jsr/result_ywywsdj.jsp</result>
+        </action>
+        
+        <!-- 业务员应收变化、应收汇总 -->
         
         <!-- 客户经理应收汇总 -->
         <action name="showYshzKhjlCondition" class="yshzKhjlAction" method="showCondition">
