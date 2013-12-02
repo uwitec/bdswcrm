@@ -18,7 +18,7 @@ Map cqtsMap = (Map)VS.findValue("cqtsMap");
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>业务员应收汇总</title>
+<title>业务员未收单据汇总</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/report.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="jquery/jquery-1.4.2.min.js"></script>
@@ -33,7 +33,7 @@ Map cqtsMap = (Map)VS.findValue("cqtsMap");
 <TABLE  align="center" cellSpacing=0 cellPadding=0 width="99%" border=0>
 	<TBODY>
 		<TR style="BACKGROUND-COLOR: #dcdcdc;height:45px;">
-		    <TD align="center" width="100%"><font style="FONT-SIZE: 16px"><B>业务员应收汇总</B></font></TD>
+		    <TD align="center" width="100%"><font style="FONT-SIZE: 16px"><B>业务员未收单据汇总</B></font></TD>
 		</TR>
 	</TBODY>
 </TABLE>
@@ -74,7 +74,7 @@ if(userList != null && userList.size() > 0){
 		if(ysje != 0){
 %>	
 		<TR>
-			<TD class=ReportItemXh><%=user_name %></TD>
+			<TD class=ReportItemXh><a href="queryywy_wsdj.html?user_id=<%=StringUtils.nullToStr(user_id) %>"><%=user_name %></TD>
 			<TD class=ReportItemMoney nowrap="nowrap"><%=JMath.round(ysje,2) %>&nbsp;</TD>
 			<TD class=ReportItemMoney nowrap="nowrap"><%=JMath.round(cqje,2) %>&nbsp;</TD>
 			<TD class=ReportItemMoney nowrap="nowrap"><%=JMath.round(avgzc_num,2) %>&nbsp;</TD>
