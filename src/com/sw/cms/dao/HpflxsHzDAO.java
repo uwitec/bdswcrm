@@ -56,7 +56,7 @@ public class HpflxsHzDAO extends JdbcBaseDAO {
 		sql = "select y.id,y.name," +
 				"(select sum(nums) from (" + sql + ") x where x.product_kind like concat(y.id,'%')) as nums," +
 				"(select sum(hjje) from (" + sql + ") x where x.product_kind like concat(y.id,'%')) as hjje " +
-				"from product_kind y where LENGTH(y.id)<=" + (dj*2);
+				"from product_kind y where LENGTH(y.id)<=" + (dj*2) + " order by id";
 		
 		List list = this.getResultList(sql);
 		

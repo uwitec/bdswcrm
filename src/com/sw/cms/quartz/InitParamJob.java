@@ -14,7 +14,10 @@ public class InitParamJob extends QuartzJobBean {
 		
 		initParamService.updateParam();  //初始化参数
 		initParamService.insertAccountQc(); //生成账户期初
-		initParamService.insertKcQc();      //生成库存期初
+		
+		//采用新的方式生成库存期初值，旧的方式暂时废除
+		//initParamService.insertKcQc();      //生成库存期初
+		
 		initParamService.insertKcQcNew();     //生成新的库存期初值（采用XML方式保存）
 		initParamService.insertClientQc();      //生成往来期初
 		initParamService.delExpireMsg(); //删除过期消息

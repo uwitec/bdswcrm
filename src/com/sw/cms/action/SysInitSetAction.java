@@ -3,7 +3,6 @@ package com.sw.cms.action;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.util.Calendar;
 import java.util.Map;
 
 import com.opensymphony.webwork.ServletActionContext;
@@ -11,6 +10,7 @@ import com.sw.cms.action.base.BaseAction;
 import com.sw.cms.model.LoginInfo;
 import com.sw.cms.model.SysInitSet;
 import com.sw.cms.service.SysInitSetService;
+import com.sw.cms.thread.GenProductQcXmlThread;
 import com.sw.cms.util.DateComFunc;
 import com.sw.cms.util.StringUtils;
 
@@ -88,6 +88,10 @@ public class SysInitSetAction extends BaseAction {
 		sysInitSet.setCswcrq(DateComFunc.getToday());   //设置启用日期为当前日期
 		sysInitSet.setFlag("1");
 		sysInitSet.setCzr(user_id);                   //设置当前操作人
+		
+		//启动线程写库存期初的XML文件表
+		Thread th = new Thread(new GenProductQcXmlThread());
+		th.start();
 		
 		sysInitSetService.setCswc(sysInitSet);
 		

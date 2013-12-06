@@ -221,20 +221,20 @@ public class UserAction extends BaseAction {
 			//其它用户登陆内网首页
 			String agent = getRequest().getHeader("User-agent");
 			log.info("用户浏览器信息：" + agent);
-			String sendUrl = "success";
-			try{
-				if(agent != null){
-					if(agent.indexOf("MSIE") != -1 && agent.indexOf("MSIE 9.0") == -1 && agent.indexOf("MSIE 6.0") == -1){
-						//是IE浏览器，但不是6.0,9.0的版本
-						sendUrl = "success";
-					}else{
-						sendUrl = "otherBrowserSuccess";
-					}
-				}
-			}catch(Exception e){
-				e.printStackTrace();
-			}
-			return sendUrl;
+//			String sendUrl = "success";
+//			try{
+//				if(agent != null){
+//					if(agent.indexOf("MSIE") != -1 && agent.indexOf("MSIE 9.0") == -1 && agent.indexOf("MSIE 6.0") == -1){
+//						//是IE浏览器，但不是6.0,9.0的版本
+//						sendUrl = "success";
+//					}else{
+//						sendUrl = "otherBrowserSuccess";
+//					}
+//				}
+//			}catch(Exception e){
+//				e.printStackTrace();
+//			}
+			return "otherBrowserSuccess";
 			
 		}
 	}

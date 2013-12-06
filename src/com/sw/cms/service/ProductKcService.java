@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.sw.cms.dao.ProductKcDAO;
+import com.sw.cms.dao.ProductKcQcXmlDAO;
 import com.sw.cms.dao.StoreDAO;
 import com.sw.cms.dao.SysInitSetDAO;
 import com.sw.cms.model.Page;
@@ -17,6 +18,7 @@ public class ProductKcService {
 	private ProductKcDAO productKcDao;
 	private StoreDAO storeDao;
 	private SysInitSetDAO sysInitSetDao;
+	private ProductKcQcXmlDAO productKcQcXmlDao;
 	
 	
 	/**
@@ -114,6 +116,28 @@ public class ProductKcService {
 	
 	
 	/**
+	 * 完成系统初始化是执行生成系统期初功能，将期初信息打包生成XML文件存储到product_kc_qc_xml表中
+	 */
+	public void saveProductKcQc(){
+		SysInitSet sysInitSet = sysInitSetDao.getSysInitSet();
+		
+		String strQyrq = sysInitSet.getQyrq();
+		
+		if(strQyrq == null || strQyrq.equals("")){
+			return;
+		}
+		
+		Date qyrq = DateComFunc.strToDate(strQyrq,"yyyy-MM-dd"); //系统启用日期
+		
+		Date curDate = new Date();     //当前时间
+		while(DateComFunc.formatDate(curDate, "yyyy-MM-dd").compareTo(DateComFunc.formatDate(qyrq, "yyyy-MM-dd")) >=0){
+			productKcQcXmlDao.genKcQcNew(curDate);
+			curDate = DateComFunc.addDay(curDate, -1);  //当前天减1
+		}
+	}
+	
+	
+	/**
 	 * 取仓库列表
 	 * @return
 	 */
@@ -173,6 +197,14 @@ public class ProductKcService {
 
 	public StoreDAO getStoreDao() {
 		return storeDao;
+	}
+
+	public ProductKcQcXmlDAO getProductKcQcXmlDao() {
+		return productKcQcXmlDao;
+	}
+
+	public void setProductKcQcXmlDao(ProductKcQcXmlDAO productKcQcXmlDao) {
+		this.productKcQcXmlDao = productKcQcXmlDao;
 	}
 	
 
