@@ -59,7 +59,7 @@ function menu(id){
 			onmouseup	= "";
 		}
 
-		menuname	= "<a oncontextmenu='document.getElementById(\"parent_id\").value=\"" + currdata[i][0] + "\";mlay.style.display=\"\";mlay.style.pixelTop=getScrollTop() + event.clientY+document.body.scrollTop; mlay.style.pixelLeft=event.clientX; return false;'>" + currdata[i][2] + "</a>";
+		menuname	= "<a oncontextmenu='document.getElementById(\"parent_id\").value=\"" + currdata[i][0] + "\";mlay.style.display=\"\";setDivPos(event); return false;'>" + currdata[i][2] + "</a>";
 
 		ico			= "<img src='"+path+currdata[i][4]+"' id='ico"+currdata[i][0]+"' align=middle border=0>";
 		printstr	+= "<tr><td id='pr"+currdata[i][0]+"' valign=middle class="+menutype+" onclick="+onmouseup+">"+ico+"<span onMouseOver='over_str(this)' valign='bottom' onMouseOut='out_str(this)' class='item'> "+menuname+" </span> </td></tr>\n";
@@ -71,19 +71,18 @@ function menu(id){
 	return printstr;
 }
 
-function getScrollTop(){
-	var y;
-	if(document.documentElement && document.documentElement.scrollTop) {    
-		// IE 6 Strict    
-		y = document.documentElement.scrollTop;    
-	} else if(document.body) { 
-		// all other IE    
-		y = document.body.scrollTop;    
-	} else {
-		y = 0;
-	}
-	return y;
+function setDivPos(e){
+	$("#mlay").css('left',getPointerX(e));
+	$("#mlay").css('top',getPointerY(e));
 }
+
+function getPointerX(event) {
+    return event.pageX || (event.clientX +(document.documentElement.scrollLeft || document.body.scrollLeft));
+ }
+ function getPointerY(event) {
+    return event.pageY || (event.clientY +(document.documentElement.scrollTop || document.body.scrollTop));
+ }
+
 
 function itemExists(id){
 	for(var i=0;i<treedata.length;i++){
@@ -237,7 +236,7 @@ function fresh() {
 
 </head>
 
-<body onLoad="window_onload();" onClick="showoff();">
+<body onLoad="window_onload();" onClick="showoff();" oncontextmenu='return false'>
 <div class="rightContentDiv" id="divContent">
 <div id="mlay" style="position:absolute;display:none;cursor:default;" onClick="return false;"></div>
 <table width="100%" border="0" align="center" class="chart_list"

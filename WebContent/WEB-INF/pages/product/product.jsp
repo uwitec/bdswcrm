@@ -52,25 +52,13 @@ $(window).resize(function(){
 </head>
 <body align="center">
 <div class="rightContent" id="divContent">
-<table width="99%" border="0" align="center" cellpadding="0" cellspacing="0">
+<table width="100%"  border="0" align="center" cellpadding="0" cellspacing="0"  style="border-spacing: 0px;">
 	<tr>
 		<td width="25%">
-			<table width="100%" border="0"cellpadding="0" cellspacing="0" class="chart_list">
-			  <tr>
-			    <td width="100%" class="a2">
-					<iframe width="100%" name="kindFrame" id="kindFrame" src="kind_list.html" border="0" frameborder="0" SCROLLING="auto"></iframe>
-				</td>
-			  </tr>
-			</table>
+					<iframe width="100%" name="kindFrame" id="kindFrame" src="kind_list.html" border="0" frameborder="0" SCROLLING="auto" style="margin-top:0px;margin-left: 0px;"></iframe>
 		</td>
 		<td width="75%">
-			<table width="100%" border="0" cellpadding="0" cellspacing="0">
-			  <tr>
-			    <td width="100%">
-					<iframe width="100%" name="productRight" id="productRight" src="product_list.html" border="0" frameborder="0" SCROLLING="auto"></iframe>
-				</td>
-			  </tr>
-			</table>			
+					<iframe width="100%" name="productRight" id="productRight" src="product_list.html" border="0" frameborder="0" SCROLLING="auto" style="margin-top:0px;"></iframe>
 		</td>
 	</tr>
 </table>

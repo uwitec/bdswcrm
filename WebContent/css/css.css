@@ -5,8 +5,10 @@ body
 	margin-right:0px;
 	margin-bottom: 0px;
 	margin-left: 0px;
-	text-indent: 2pt;
 	background-color: #FFFFFF;
+}
+iframe {
+	margin-top:10px;
 }
 input
 {

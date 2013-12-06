@@ -69,7 +69,7 @@
 </script>
 </head>
 <BODY bottomMargin=0 leftMargin=0 topMargin=0 align="center" onload="init();">
-<div name="back_div" id="back_div" class="msg_back">
+<div name="back_div" id="back_div" class="msg_back" style="display:none ">
 	<input type="hidden" name="reciever_id"  id="reciever_id" value="">
 	<table width="100%" style="font-size: 12px;" border="0"  cellspacing="5" height="100%">
 		<tr><td align="right" colspan="2"><img src="index_images/tabClose.gif" border="0" style="cursor:hand" onclick="hiddenDiv();" title="关闭"></td></tr>

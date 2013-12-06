@@ -113,10 +113,10 @@ if(productKcInit != null){
 	</tr>
 	<tr valign="top" height="450">
 		<td width="200" class="a2">
-			<iframe width="100%" height="450" name="kindFrame" allowTransparency="true" src="initLeftKind.html?store_id=<%=store_id %>" border="0" frameborder="0" SCROLLING="auto"></iframe>
+			<iframe width="100%" height="450" name="kindFrame" allowTransparency="true" src="initLeftKind.html?store_id=<%=store_id %>" border="0" frameborder="0" SCROLLING="auto" style="margin-top:0px;margin-left: 0px;"></iframe>
 		</td>	
 		<td width="600">
-			<iframe width="100%" height="450" name="rightFrame" allowTransparency="true" src="listInitProductKc.html?store_id=<%=store_id %>"  border="0" frameborder="0" SCROLLING="auto"></iframe>			
+			<iframe width="100%" height="450" name="rightFrame" allowTransparency="true" src="listInitProductKc.html?store_id=<%=store_id %>"  border="0" frameborder="0" SCROLLING="auto" style="margin-top:0px;margin-left: 0px;"></iframe>			
 		</td>
 	</tr>
 </table>

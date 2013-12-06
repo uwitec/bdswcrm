@@ -117,7 +117,7 @@ function menu(id)						//画菜单
 		if(currdata[i][3]!="" && currdata[i][3]!=null)
 		{
 			//oncontextmenu事件中所有代码为后添加 
-			menuname	= "<a oncontextmenu='document.getElementById(\"parent_id\").value=\"" + currdata[i][0] + "\";mlay.style.display=\"\";mlay.style.pixelTop=getScrollTop()+event.clientY; mlay.style.pixelLeft=event.clientX; return false;' href='"+currdata[i][3] + "?curId=" + currdata[i][0] +"' target='productRight'>"+currdata[i][2]+"</a>";
+			menuname	= "<a oncontextmenu='document.getElementById(\"parent_id\").value=\"" + currdata[i][0] + "\";mlay.style.display=\"\";setDivPos(event); return false;' href='"+currdata[i][3] + "?curId=" + currdata[i][0] +"' target='productRight'>"+currdata[i][2]+"</a>";
 		}
 		else
 		{
@@ -134,19 +134,17 @@ function menu(id)						//画菜单
 	return printstr;
 }//end function menu
 
-function getScrollTop(){
-	var y;
-	if(document.documentElement && document.documentElement.scrollTop) {    
-		// IE 6 Strict    
-		y = document.documentElement.scrollTop;    
-	} else if(document.body) { 
-		// all other IE    
-		y = document.body.scrollTop;    
-	} else {
-		y = 0;
-	}
-	return y;
+function setDivPos(e){
+	$("#mlay").css('left',getPointerX(e));
+	$("#mlay").css('top',getPointerY(e));
 }
+
+function getPointerX(event) {
+    return event.pageX || (event.clientX +(document.documentElement.scrollLeft || document.body.scrollLeft));
+ }
+ function getPointerY(event) {
+    return event.pageY || (event.clientY +(document.documentElement.scrollTop || document.body.scrollTop));
+ }
 
 function itemExists(id)
 {
@@ -462,7 +460,7 @@ function addRoot(){
 
 </head>
 
-<body onLoad="window_onload();" onClick="showoff();" align="left">
+<body onLoad="window_onload();" onClick="showoff();" align="left" oncontextmenu='return false'>
 <div id="mlay" style="position:absolute;display:none;cursor:default;" onClick="return false;"></div>
 <table width="100%" border="0" align="center" class="chart_list" cellpadding="0" cellspacing="0">
 	<tr>

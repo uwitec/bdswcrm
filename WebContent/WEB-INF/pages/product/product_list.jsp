@@ -112,15 +112,11 @@ String sp_txm1 = StringUtils.nullToStr(VS.findValue("sp_txm1"));
 			<img src="images/import.gif" align="absmiddle" border="0">&nbsp;<a href="#" class="xxlb" onclick="refreshPage();"> 刷 新 </a>	</td>			
 	</tr>
 	<tr>
-		<td class="search" align="left" colspan="2">&nbsp;&nbsp;		
-			编码：<input type="text" name="product_id" value="<%=product_id %>" size="15">
-			&nbsp;
-			名称：<input type="text" name="product_name" value="<%=product_name %>" size="15">
-			&nbsp;
-			条形码：<input type="text" name="sp_txm1" value="<%=sp_txm1 %>" size="15">
-			&nbsp;
-			规格：<input type="text" name="product_xh" value="<%=product_xh %>" size="15">
-			&nbsp;
+		<td class="search" align="left" colspan="2">&nbsp;	
+			编码：<input type="text" name="product_id" value="<%=product_id %>" size="13">
+			名称：<input type="text" name="product_name" value="<%=product_name %>" size="13">
+			条形码：<input type="text" name="sp_txm1" value="<%=sp_txm1 %>" size="13">
+			规格：<input type="text" name="product_xh" value="<%=product_xh %>" size="13">
 			状态：
 			<select name="product_state">
 				<option value=""></option>
@@ -163,8 +159,8 @@ String sp_txm1 = StringUtils.nullToStr(VS.findValue("sp_txm1"));
 		<td nowrap="nowrap"><%=StringUtils.nullToStr(map.get("prop")) %></td>
 		<td nowrap="nowrap"><%=StringUtils.nullToStr(map.get("state")) %></td>
 		<td nowrap="nowrap">
-			<a onclick="editProduct('<%=StringUtils.nullToStr(map.get("product_id")) %>');"><img src="images/modify.gif" align="absmiddle" title="修改商品信息" border="0" style="cursor:hand"></a>&nbsp;&nbsp;
-			<a onclick="openWin('<%=StringUtils.nullToStr(map.get("product_id")) %>');"><img src="images/view.gif" align="absmiddle" title="查看商品信息" border="0" style="cursor:hand"></a>&nbsp;&nbsp;
+			<a onclick="editProduct('<%=StringUtils.nullToStr(map.get("product_id")) %>');"><img src="images/modify.gif" align="absmiddle" title="修改商品信息" border="0" style="cursor:hand"></a>&nbsp;
+			<a onclick="openWin('<%=StringUtils.nullToStr(map.get("product_id")) %>');"><img src="images/view.gif" align="absmiddle" title="查看商品信息" border="0" style="cursor:hand"></a>&nbsp;
 			<a onclick="delProduct('<%=StringUtils.nullToStr(map.get("product_id")) %>');"><img src="images/del.gif" align="absmiddle" title="删除该商品信息" border="0" style="cursor:hand"></a>
 		</td>
 	</tr>

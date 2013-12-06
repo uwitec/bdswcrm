@@ -134,8 +134,8 @@ String orderType = (String)VS.findValue("orderType");
 		<td><%=StringUtils.nullToStr(map.get("lxdh")) %></td>
 		<td><%=StringUtils.nullToStr(map.get("flag")).equals("1")?"正常":"停用" %></td>
 		<td>
-			<a href="javascript:edit('<%=StringUtils.nullToStr(map.get("id")) %>')"><img src="images/modify.gif" align="absmiddle" title="修改仓库信息" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
-			<a href="javascript:openWin('<%=StringUtils.nullToStr(map.get("id")) %>');"><img src="images/view.gif" align="absmiddle" title="查看仓库信息" border="0" style="cursor:hand"></a>&nbsp;&nbsp;&nbsp;&nbsp;
+			<a href="javascript:edit('<%=StringUtils.nullToStr(map.get("id")) %>')"><img src="images/modify.gif" align="absmiddle" title="修改仓库信息" border="0" style="cursor:hand"></a>&nbsp;
+			<a href="javascript:openWin('<%=StringUtils.nullToStr(map.get("id")) %>');"><img src="images/view.gif" align="absmiddle" title="查看仓库信息" border="0" style="cursor:hand"></a>&nbsp;
 			<a href="javascript:del('<%=StringUtils.nullToStr(map.get("id")) %>');"><img src="images/del.gif" align="absmiddle" title="删除仓库信息" border="0" style="cursor:hand"></a>
 		</td>
 	</tr>

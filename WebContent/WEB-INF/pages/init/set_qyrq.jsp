@@ -99,39 +99,63 @@
 				<a href='#' onclick="clearYwData();">清空系统业务数据</a>
 			</td>			
 		</tr>
-		--><tr>
-			<td class="a2"><b>第一步</b>、维护商品基础数据，包括商品分类及商品资料，要维护商品基础数请点击“商品维护”。&nbsp;<input type="button" name="buttonQd" value="商品维护" onclick="parent.addtabFmMenu('商品维护','product.html','');" class="css_button3"></td>			
+		-->
+		<tr>
+			<td class="a2" style="text-indent:0pt"><div style="float: left;width: 350px"><b>第一步</b>、设置系统运行参数，点击各按钮设置相关系统参数。&nbsp;</div>
+			<div style="float: left;">
+				<input type="button" name="buttonQd" value="系统LOGO设置" onclick="parent.addtabFmMenu('系统LOGO设置','editLogo.html','');" class="css_button4">
+				<input type="button" name="buttonQd" value="单据打印设置" onclick="parent.addtabFmMenu('单据打印设置','editReportSet.html','');" class="css_button4">
+				<input type="button" name="buttonQd" value="系统字典维护" onclick="parent.addtabFmMenu('系统字典维护','listJbxx.html','');" class="css_button4">
+				<input type="button" name="buttonQd" value="刷卡POS机设定" onclick="parent.addtabFmMenu('刷卡POS机设定','listPos.html','');" class="css_button4">
+				<input type="button" name="buttonQd" value="设置零售税点" onclick="parent.addtabFmMenu('设置零售税点','editLssd.html','');" class="css_button4">
+				<input type="button" name="buttonQd" value="设置采购税点" onclick="parent.addtabFmMenu('设置采购税点','editCgsd.html','');" class="css_button4">
+				<input type="button" name="buttonQd" value="提成比例设置" onclick="parent.addtabFmMenu('提成比例设置','editTcbl.html','');" class="css_button4">
+				<input type="button" name="buttonQd" value="强制序列号设置" onclick="parent.addtabFmMenu('强制序列号设置','openQzxlhRight.html','');" class="css_button4">
+				<input type="button" name="buttonQd" value="报表样式设置" onclick="parent.addtabFmMenu('报表样式设置','openStyle.html','');" class="css_button4">
+				<input type="button" name="buttonQd" value="费用申请审批设置" onclick="parent.addtabFmMenu('费用申请审批设置','openFysqSpRight.html','');" class="css_button4">
+				
+				<input type="button" name="buttonQd" value="费用申请审批设置" onclick="parent.addtabFmMenu('费用申请审批设置','openFysqSpRight.html','');" class="css_button4">
+				<input type="button" name="buttonQd" value="采购付款审批设置" onclick="parent.addtabFmMenu('采购付款审批设置','openCgfkSpRight.html','');" class="css_button4">
+				<input type="button" name="buttonQd" value="销售单超额审批设置" onclick="parent.addtabFmMenu('销售单超额审批设置','openXsdSpRightRoles.html','');" class="css_button4">
+				
+				<input type="button" name="buttonQd" value="价格审批设置" onclick="parent.addtabFmMenu('价格审批设置','openJgSpRightRoles.html','');" class="css_button4">
+				<input type="button" name="buttonQd" value="超期审批设置" onclick="parent.addtabFmMenu('超期审批设置','openCqSpRightRoles.html','');" class="css_button4">
+</div>				
+			</td>			
+		</tr>		
+		<tr>
+			<td class="a2"><b>第二步</b>、维护商品基础数据，包括商品分类及商品资料，要维护商品基础数请点击“商品维护”。&nbsp;<input type="button" name="buttonQd" value="商品维护" onclick="parent.addtabFmMenu('商品维护','product.html','');" class="css_button3"></td>			
 		</tr>
 		<tr>
-			<td class="a2"><b>第二步</b>、录入员工信息，要录入员工信息请点击“员工管理”。&nbsp;
+			<td class="a2"><b>第三步</b>、录入员工信息，要录入员工信息请点击“员工管理”。&nbsp;
 			<input type="button" name="buttonQd" value="员工管理" onclick="parent.addtabFmMenu('员工管理','showEmployeeFrame.html','');" class="css_button3">
 			</input></td>
 		</tr>
 
 		<tr>
-			<td class="a2"><b>第三步</b>、录入仓房资料，要录入仓房资料信息请点击“仓房资料”。&nbsp;
+			<td class="a2"><b>第四步</b>、录入仓房资料，要录入仓房资料信息请点击“仓房资料”。&nbsp;
 			<input type="button" name="buttonQd" value="仓房资料" onclick="parent.addtabFmMenu('仓房资料','listStore.html','');" class="css_button3">
 			</input></td>
 		</tr>
 		<tr>
-			<td class="a2"><b>第四步</b>、录入账户资料，要录入账户资料请点击“账户资料”。&nbsp;
+			<td class="a2"><b>第五步</b>、录入账户资料，要录入账户资料请点击“账户资料”。&nbsp;
 			<input type="button" name="buttonQd" value="账户资料" onclick="parent.addtabFmMenu('账户资料','listAccount.html','');" class="css_button3">
 			</input></td>
 		</tr>
 
 		<tr>
-			<td class="a2"><b>第五步</b>、维护往来单位及相应联系人信息，要维护往来单位信息请点击“往来单位”。&nbsp;
+			<td class="a2"><b>第六步</b>、维护往来单位及相应联系人信息，要维护往来单位信息请点击“往来单位”。&nbsp;
 			<input type="button" name="buttonQd" value="往来单位" onclick="parent.addtabFmMenu('往来单位','listClient.html','');" class="css_button3">
 			</input></td>
 		</tr>
 		<tr>
-			<td class="a2"><b>第六步</b>、初始账户金额，初始账号金额请点击“账户初始”。&nbsp;
+			<td class="a2"><b>第七步</b>、初始账户金额，初始账号金额请点击“账户初始”。&nbsp;
 			<input type="button" name="buttonQd" value="账号初始" onclick="parent.addtabFmMenu('账号初始','initAccount.html','');" class="css_button3">
 			</input></td>			
 		</tr>		
 		<tr>
 			<td class="a2">
-				<b>第七步</b>、设置系统启用日期，选择启用日期后点击“确定”按钮设置启用日期。启用日期设置后不能再修改。设置启用日期后系统即可正式启用，可以录入业务单据，在此之前录入的业务单据无效。&nbsp;&nbsp;
+				<b>第八步</b>、设置系统启用日期，选择启用日期后点击“确定”按钮设置启用日期。启用日期设置后不能再修改。设置启用日期后系统即可正式启用，可以录入业务单据，在此之前录入的业务单据无效（部分报表需到完成所有初始化工作后方可使用）。&nbsp;&nbsp;
 				<input type="text" name="sysInitSet.qyrq" id="qyrq" value="<ww:property value="%{sysInitSet.qyrq}"/>" class="Wdate" onFocus="WdatePicker()"/>
 				&nbsp;&nbsp;&nbsp;
 				<ww:if test="sysInitSet.qyrq == null">
@@ -140,17 +164,17 @@
 			</td>
 		</tr>		
 		<tr>
-			<td class="a2"><b>第八步</b>、往来初始，要维护往来初始信息请点击“往来初始”链接。&nbsp;
+			<td class="a2"><b>第九步</b>、往来初始，要维护往来初始信息请点击“往来初始”链接。&nbsp;
 			<input type="button" name="buttonQd" value="往来初始" onclick="parent.addtabFmMenu('往来初始','listClientWlInit.html','');" class="css_button3">
 			</input></td>				
 		</tr>
 		<tr>
-			<td class="a2"><b>第九步</b>、初始化商品库存，要初始化商品库存信息请点击“库存初始”，库存初始可以在系统启用后同步进行。&nbsp;
+			<td class="a2"><b>第十步</b>、初始化商品库存，要初始化商品库存信息请点击“库存初始”，库存初始可以在系统启用后同步进行。&nbsp;
 			<input type="button" name="buttonQd" value="库存初始" onclick="parent.addtabFmMenu('库存初始','listInit.html','');" class="css_button3">
 			</input></td>				
 		</tr>
 		<tr>
-			<td class="a2"><b>第十步</b>、完成所有初始化工作，要完成系统初始工作请点击“完成初始化”。&nbsp;
+			<td class="a2"><b>第十一步</b>、完成所有初始化工作，要完成系统初始工作请点击“完成初始化”。&nbsp;
 			<ww:if test="flag == 0">
 			<input type="button" name="buttonQd" value="完成初始化" onclick="setCswc();" class="css_button3"></input>
 			</ww:if>
@@ -161,7 +185,7 @@
 		</tr>
 </table>
 </form>
-<font color="red">注：系统的初始工作必须按照初始导航所描述的步骤进行，在完成第七步“设置系统启用日期”后，系统即可正始使用，录入业务单据。往来初始、库存初始可以和使用同时进行，所有的初始工作完成后，请点击第十步的“完成初始化”，完成系统的初始化工作。</font>
+<font color="red">注：系统的初始工作必须按照初始导航所描述的步骤进行，在完成第八步“设置系统启用日期”后，系统即可正始使用，录入业务单据。往来初始、库存初始可以和使用同时进行，所有的初始工作完成后，请点击第十一步的“完成初始化”，完成系统的初始化工作，系统初始化工作完成后所有报表统计均可正常使用。</font>
 <iframe name="hiddenFrm" width="0" height="0"/>
 </div>
 </body>

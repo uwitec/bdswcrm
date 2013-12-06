@@ -83,7 +83,7 @@ if(flag == null){
 	function openWin(flag){
 		if(flag == "1"){
 			var destination = "top.htm";
-			var fea ='width=900,height=600,left=' + (screen.availWidth-900)/2 + ',top=' + (screen.availHeight-600)/2 + ',directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
+			var fea ='width=' + (screen.availWidth-100) + ',height='+ (screen.availHeight-150) +',left=50,top=50,directories=no,localtion=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizeable=no';
 			
 			var newWin =window.open(destination,'库存查询',fea);
 			newWin.focus();
@@ -275,7 +275,7 @@ if(flag == null){
 					<TD class=NormalWhite vlign=middle width=10 bgColor=#bcc2d4>|</TD>
 					<TD class=NormalWhite noWrap align=middle width=85 bgColor=#bcc2d4><IMG height=15 src="index_images/out_system.gif" width=15 align=absMiddle> <A class=TitleMenu href="#" onclick="logout();">安全退出</A></TD>
 				</TR>
-				<TR height="20"><TD colspan="11" align="right">&nbsp;&nbsp;&nbsp;&nbsp;<font style="font-size: 12px;">欢迎<%=real_name %>光临系统&nbsp;</font>&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:switchUi('<%=flag %>');">切换界面</a>&nbsp;&nbsp;&nbsp;&nbsp;</TD></TR>
+				<TR height="20"><TD colspan="11" align="right">&nbsp;&nbsp;&nbsp;&nbsp;<font style="font-size: 12px;">欢迎<%=real_name %>光临系统&nbsp;</font>&nbsp;&nbsp;&nbsp;&nbsp;<!-- <a href="javascript:switchUi('<%=flag %>');">切换界面</a>&nbsp;&nbsp;&nbsp;&nbsp; --></TD></TR>
 				</TBODY>
 			</TABLE>
 		</td>
