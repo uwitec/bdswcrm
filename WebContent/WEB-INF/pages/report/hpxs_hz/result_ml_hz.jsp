@@ -90,6 +90,7 @@ if(!product_xh.equals("")){
 	<THEAD>
 		<TR>
 			<TD class=ReportHead>货品编码</TD>
+			<TD class=ReportHead>条形码</TD>
 			<TD class=ReportHead>货品名称</TD>
 			<TD class=ReportHead>货品规格</TD>
 			<TD class=ReportHead>数量</TD>
@@ -113,7 +114,7 @@ if(resultList != null && resultList.size()>0){
 
 		String product_id = StringUtils.nullToStr(map.get("product_id"));
 		String prop = StringUtils.nullToStr(map.get("prop"));   //商品属性(库存商口、劳务/服务)
-
+        String sp_txm = StringUtils.nullToStr(map.get("sp_txm"));
 		int nums = new Integer(StringUtils.nullToStr(map.get("nums"))).intValue(); //数量
 		double xssr = map.get("hjje")==null?0:((Double)map.get("hjje")).doubleValue(); //销售收入
 		double cb = map.get("hjcb")==null?0:((Double)map.get("hjcb")).doubleValue(); //成本
@@ -133,6 +134,7 @@ if(resultList != null && resultList.size()>0){
 %>
 		<TR>
 			<TD class=ReportItemXh><%=product_id %>&nbsp;</TD>
+			<TD class=ReportItem><%=sp_txm %>&nbsp;</TD>
 			<TD class=ReportItem><a href="javascript:openWin('<%=product_id %>');"><%=StringUtils.nullToStr(map.get("product_name")) %></a>&nbsp;</TD>
 			<TD class=ReportItem><%=StringUtils.nullToStr(map.get("product_xh")) %>&nbsp;</TD>
 			<TD class=ReportItemMoney><%=nums %>&nbsp;</TD>
@@ -148,6 +150,7 @@ if(resultList != null && resultList.size()>0){
 %>
 		<TR>
 			<TD class=ReportItemXh style="font-weight:bold">合计&nbsp;</TD>
+			<TD class=ReportItem style="font-weight:bold">&nbsp;</TD>
 			<TD class=ReportItem style="font-weight:bold">&nbsp;</TD>
 			<TD class=ReportItem style="font-weight:bold">&nbsp;</TD>
 			<TD class=ReportItemMoney style="font-weight:bold"><%=hj_nums %>&nbsp;</TD>
