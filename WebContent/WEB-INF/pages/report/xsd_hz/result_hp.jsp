@@ -52,6 +52,7 @@ if(!product_xh.equals("")){
 	<THEAD>
 		<TR>
 		    <TD class=ReportHead rowspan="2">商品编码</TD>
+		    <TD class=ReportHead rowspan="2">条形码</TD>
 			<TD class=ReportHead rowspan="2">商品名称</TD>
 			<TD class=ReportHead rowspan="2">商品规格</TD>
 			<TD class=ReportHead colspan="2">未出库</TD>
@@ -78,6 +79,7 @@ if(list != null && list.size()>0){
 	for(int i=0;i<list.size();i++){
 		Map map = (Map)list.get(i);
 		String product_id = StringUtils.nullToStr(map.get("product_id"));
+		String sp_txm = StringUtils.nullToStr(map.get("sp_txm"));
 		double je = map.get("je")==null?0:((Double)map.get("je")).doubleValue();
 		String strNums = StringUtils.nullToStr(map.get("nums"));
 		String state = StringUtils.nullToStr(map.get("state"));
@@ -95,6 +97,7 @@ if(list != null && list.size()>0){
 %>
 		<TR>
 			<TD class=ReportItemXh><%=product_id %>&nbsp;</TD>
+			<TD class=ReportItemXh><%=sp_txm %>&nbsp;</TD>
 			<TD class=ReportItem><a href="getHpxsMxCondition.html?product_id=<%=product_id %>&start_date=<%=start_date %>&end_date=<%=end_date %>"><%=StringUtils.nullToStr(map.get("product_name")) %></a>&nbsp;</TD>			
 			<TD class=ReportItem><%=StringUtils.nullToStr(map.get("product_xh")) %>&nbsp;</TD>
 		<% 
@@ -142,6 +145,7 @@ if(list != null && list.size()>0){
 		<TR>
 			<TD class=ReportItem style="font-weight:bold">合计：</TD>
 			<TD class=ReportItem>&nbsp;</TD>			
+			<TD class=ReportItem>&nbsp;</TD>
 			<TD class=ReportItem>&nbsp;</TD>
 			<TD class=ReportItemMoney style="font-weight:bold"><%=hjw_nums %>&nbsp;</TD>
 			<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(hjw_je,2) %>&nbsp;</TD>
