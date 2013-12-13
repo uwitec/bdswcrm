@@ -148,7 +148,7 @@ public class XsdHzDAO extends JdbcBaseDAO {
 	public List getHpxsList(String product_kind,String start_date,String end_date,String product_name,String product_xh){
 		
          //销售单未出库
-		String xsdw_sql = "select '未出库' as state,a.product_id,c.product_name,c.product_xh,sum(a.nums) as nums,sum(a.price*a.nums) as je "+
+		String xsdw_sql = "select '未出库' as state,a.product_id,c.sp_txm,c.product_name,c.product_xh,sum(a.nums) as nums,sum(a.price*a.nums) as je "+
 				"from xsd_product a join xsd b on b.id=a.xsd_id left join product c on c.product_id=a.product_id "+
 				"where b.state!='已出库' and  c.prop='库存商品' and b.th_flag='0' ";
 		//处理商品类别
@@ -185,7 +185,7 @@ public class XsdHzDAO extends JdbcBaseDAO {
 		
 		
         //销售单已出库
-		String xsd_sql = "select '已出库' as state,a.product_id,c.product_name,c.product_xh,sum(a.nums) as nums,sum(a.price*a.nums) as je "+
+		String xsd_sql = "select '已出库' as state,a.product_id,c.sp_txm,c.product_name,c.product_xh,sum(a.nums) as nums,sum(a.price*a.nums) as je "+
 				"from xsd_product a join xsd b on b.id=a.xsd_id left join product c on c.product_id=a.product_id "+
 				"where b.state='已出库' and  c.prop='库存商品' and b.th_flag='0' ";
 		//处理商品类别

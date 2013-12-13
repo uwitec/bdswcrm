@@ -25,7 +25,7 @@ public class CgddhzDAO extends JdbcBaseDAO {
 	public List getHpcgList(String product_kind,String start_date,String end_date,String product_name,String product_xh){
 		
          //进货单未入库
-		String jhdw_sql = "select '未入库' as state,a.product_id,c.product_name,c.product_xh,sum(a.nums) as nums,sum(a.price*a.nums) as je "+
+		String jhdw_sql = "select '未入库' as state,a.product_id,c.sp_txm,c.product_name,c.product_xh,sum(a.nums) as nums,sum(a.price*a.nums) as je "+
 				"from jhd_product a join jhd b on b.id=a.jhd_id left join product c on c.product_id=a.product_id "+
 				"where b.state!='已入库' and  c.prop='库存商品' and b.th_flag='0' ";
 		//处理商品类别
@@ -62,7 +62,7 @@ public class CgddhzDAO extends JdbcBaseDAO {
 		
 		
         //进货单已入库
-		String jhd_sql = "select '已入库' as state,a.product_id,c.product_name,c.product_xh,sum(a.nums) as nums,sum(a.price*a.nums) as je "+
+		String jhd_sql = "select '已入库' as state,a.product_id,c.sp_txm,c.product_name,c.product_xh,sum(a.nums) as nums,sum(a.price*a.nums) as je "+
 				"from jhd_product a join jhd b on b.id=a.jhd_id left join product c on c.product_id=a.product_id "+
 				"where b.state='已入库' and  c.prop='库存商品' and b.th_flag='0' ";
 		//处理商品类别
