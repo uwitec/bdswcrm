@@ -220,11 +220,12 @@ public class CgfkDAO extends JdbcBaseDAO {
 	 * @param cgfk
 	 */
 	public void updateCgfkStat(Cgfk cgfk){
-		String sql = "update cgfk set state=?,cz_date=now() where id=?";
+		String sql = "update cgfk set state=?,cz_date=now(),fkzh=? where id=?";
 		
-		Object[] param = new Object[2];
+		Object[] param = new Object[3];
 		param[0] = cgfk.getState();
-		param[1] = cgfk.getId();
+		param[1] = cgfk.getFkzh();
+		param[2] = cgfk.getId();
 		
 		this.getJdbcTemplate().update(sql, param);
 	}

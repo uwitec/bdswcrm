@@ -34,7 +34,7 @@ public class FytjReportDAO extends JdbcBaseDAO {
 		
 		String sql = "select a.id,a.name," +
 		"(select sum(zcje) from qtzc b where b.type like concat(a.id,'%') " + con + ") as hjje" +
-		" from fy_type a where LENGTH(id)<=" + (dj*2);
+		" from fy_type a where LENGTH(id)<=" + (dj*2) + " order by id";
 		
 		return this.getResultList(sql);
 	}
@@ -63,7 +63,7 @@ public class FytjReportDAO extends JdbcBaseDAO {
 		
 		String sql = "select a.dept_id,a.dept_name," +
 		"(select sum(zcje) from qtzc b where b.ywy_dept like concat(a.dept_id,'%') " + con + ") as hjje" +
-		" from dept a where LENGTH(a.dept_id)<=" + (dj*2);
+		" from dept a where LENGTH(a.dept_id)<=" + (dj*2) + " order by dept_id";
 		
 		return this.getResultList(sql);
 	}

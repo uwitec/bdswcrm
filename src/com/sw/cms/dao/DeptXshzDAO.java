@@ -57,7 +57,7 @@ public class DeptXshzDAO extends JdbcBaseDAO {
 		sql = "select y.dept_id,y.dept_name," +
 				"(select sum(x.nums) from (" + sql + ") x where x.dept like concat(y.dept_id,'%')) as nums," +
 				"(select sum(x.hjje) from (" + sql + ") x where x.dept like concat(y.dept_id,'%')) as hjje " +
-				"from dept y where LENGTH(y.dept_id)<=" + (dj*2);
+				"from dept y where LENGTH(y.dept_id)<=" + (dj*2) + " order by dept_id";
 		
 		return this.getResultList(sql);
 	}
