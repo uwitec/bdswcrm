@@ -274,3 +274,8 @@ INSERT INTO `report_style` VALUES ('00');
 --将"业务员应收汇总"修改为“业务员未收单据汇总”
 
 update funcs set func_name='业务员未收单据汇总',func_ms='业务员未收单据汇总' where func_id='FC9914' and func_name='业务员应收汇总';
+
+2013-12-11
+--出纳付款后会写采购付款账户信息
+UPDATE cgfk a LEFT JOIN cnfkd b ON b.cgfk_id=a.id SET a.fkzh=b.fkzh  WHERE a.fkzh=''
+

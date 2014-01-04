@@ -35,8 +35,8 @@ if(!product_xh.equals("")){
 .Noprint{display:none;}<!--用本样式在打印时隐藏非打印项目-->
 </style> 
 <script language='JavaScript' src="js/date.js"></script>
-<script type="text/javascript" src="jquery/jquery.js"></script>
-<script type="text/javascript" src="js/initPageSize.js"></script>
+<script type="text/javascript" src="jquery/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="js/switchCss.js"></script>
 <script type="text/javascript" src="js/common.js"></script>
 </head>
 <body align="center" >
@@ -49,109 +49,113 @@ if(!product_xh.equals("")){
 	</TBODY>
 </TABLE>
 <br>
-<TABLE align="center" cellSpacing=0 cellPadding=0 width="99%" border=0 style="BORDER-TOP: #000000 2px solid;BORDER-LEFT:#000000 1px solid">
+<TABLE align="center"  class="stripe"  cellSpacing=0 cellPadding=0 width="99%" border=0 style="BORDER-TOP: #000000 2px solid;BORDER-LEFT:#000000 1px solid">
 	<THEAD>
 		<TR>
 		    <TD class=ReportHead rowspan="2">商品编码</TD>
-		    <TD class=ReportHead rowspan="2">条形码</TD>
 			<TD class=ReportHead rowspan="2">商品名称</TD>
 			<TD class=ReportHead rowspan="2">商品规格</TD>
 			<TD class=ReportHead colspan="2">未入库</TD>
 			<TD class=ReportHead colspan="2">已入库</TD>	
 		</TR>
 		<TR>
-			<TD class=ReportHead>数量</TD>
-			<TD class=ReportHead>金额</TD>
-			<TD class=ReportHead>数量</TD>
-			<TD class=ReportHead>金额</TD>
+			<TD class=ReportHead width="95">数量</TD>
+			<TD class=ReportHead width="95">金额</TD>
+			<TD class=ReportHead width="95">数量</TD>
+			<TD class=ReportHead width="95">金额</TD>
 		</TR>
 	</THEAD>
 	<TBODY>
-<%
-int hj_nums = 0;
-double hj_je = 0;
-int hjw_nums = 0;
-double hjw_je = 0;
-String productNext_id="" ;
-double jeNext=0;
-String strNumsNext="";
-List list = cgddhzService.getHpcgList(productKind, start_date, end_date, product_name, product_xh);
-if(list != null && list.size()>0){
-	for(int i=0;i<list.size();i++){
-		Map map = (Map)list.get(i);
-		String product_id = StringUtils.nullToStr(map.get("product_id"));
-		String sp_txm = StringUtils.nullToStr(map.get("sp_txm"));
-		double je = map.get("je")==null?0:((Double)map.get("je")).doubleValue();
-		String strNums = StringUtils.nullToStr(map.get("nums"));
-		String state = StringUtils.nullToStr(map.get("state"));
-		if((i+1)!=list.size())
-		{
-		  Map mapNext = (Map)list.get(i+1);
-		  productNext_id = StringUtils.nullToStr(mapNext.get("product_id"));
-		  jeNext = mapNext.get("je")==null?0:((Double)mapNext.get("je")).doubleValue();
-		  strNumsNext = StringUtils.nullToStr(mapNext.get("nums"));
-		}
-		int nums = 0;
-		if(!strNums.equals("")){
-			nums = new Integer(strNums).intValue();
-		}		
-%>
-		<TR>
-			<TD class=ReportItemXh><%=product_id %>&nbsp;</TD>
-			<TD class=ReportItemXh><%=sp_txm %>&nbsp;</TD>
-			<TD class=ReportItem><a href="getHpcgddMxCondition.html?product_id=<%=product_id %>&start_date=<%=start_date %>&end_date=<%=end_date %>"><%=StringUtils.nullToStr(map.get("product_name")) %></a>&nbsp;</TD>			
-			<TD class=ReportItem><%=StringUtils.nullToStr(map.get("product_xh")) %>&nbsp;</TD>
-		<% 
-		    if((state.equals("未入库"))){
-		%>	
-		    <TD class=ReportItemMoney><%=nums %>&nbsp;</TD>
-			<TD class=ReportItemMoney><%=JMath.round(je,2) %>&nbsp;</TD>			
-		<% 
-		hjw_je+=je;		
-		hjw_nums+=nums;
-		}
-		else if((state.equals("已入库"))){
-		%>
-		    <TD class=ReportItemMoney>&nbsp;</TD>
-			<TD class=ReportItemMoney>&nbsp;</TD>	
-			<TD class=ReportItemMoney><%=nums %>&nbsp;</TD>
-			<TD class=ReportItemMoney><%=JMath.round(je,2) %>&nbsp;</TD>
-		<% 
-		hj_je+=je;		
-		hj_nums+=nums;
+
+	<%
+		List list = cgddhzService.getHpcgList(productKind, start_date, end_date, product_name, product_xh);
+			
+		int hj_wrk_sl = 0;
+		double hj_wrk_je = 0;
+		
+		int hj_yrk_sl = 0;
+		double hj_yrk_je = 0;
+		
+		Map<String,Map> productMaps = new HashMap<String,Map>();
+		if(list != null && list.size() > 0){
+			for(int i=0;i<list.size();i++){
+				Map map = (Map)list.get(i);
+				String id = StringUtils.nullToStr(map.get("product_id"));   //商品编号
+				String name = StringUtils.nullToStr(map.get("product_name")); //商品名称
+				String xh =  StringUtils.nullToStr(map.get("product_xh")); //商品规格
+				double je = map.get("je")==null?0:((Double)map.get("je")).doubleValue();  //金额
+				String strNums = StringUtils.nullToStr(map.get("nums"));
+				String state = StringUtils.nullToStr(map.get("state"));   //状态 未入库  已入库
+				int nums = 0;
+				if(!strNums.equals("")){
+					nums = new Integer(strNums).intValue();    //数量
+				}
+				
+				Map hzMap = (Map)productMaps.get(id);
+				if(hzMap != null){
+					if(state.equals("未入库")){
+						hzMap.put("wrk_sl", nums);
+						hzMap.put("wrk_je", je);
+					}else{
+						hzMap.put("yrk_sl", nums);
+						hzMap.put("yrk_je", je);
+					}
+				}else{
+					hzMap = new HashMap();
+					hzMap.put("product_id", id);
+					hzMap.put("product_name", name);
+					hzMap.put("product_xh", xh);
+					if(state.equals("未入库")){
+						hzMap.put("wrk_sl", nums);
+						hzMap.put("wrk_je", je);
+					}else{
+						hzMap.put("yrk_sl", nums);
+						hzMap.put("yrk_je", je);
+					}
+					productMaps.put(id, hzMap);
+				}				
+			}
 		}
 		
-		if((state.equals("未入库") ))	{
-		if(product_id.equals(productNext_id)){
-		%>
-		    <TD class=ReportItemMoney><%=new Integer(strNumsNext).intValue() %>&nbsp;</TD>
-			<TD class=ReportItemMoney><%=JMath.round(jeNext,2) %>&nbsp;</TD>
-		<% 
-		  hj_je+=jeNext;		
-		  hj_nums+=new Integer(strNumsNext).intValue();
-		  i=i+1;		 
-		}else {
-		%>
-		  <TD class=ReportItemMoney>&nbsp;</TD>
-		  <TD class=ReportItemMoney>&nbsp;</TD>
-		<%
-		}
-		}
-%>
-       </TR>   
-<%
-      }
-      }
- %>
+		for (Map.Entry<String, Map> entry : productMaps.entrySet()) {
+			   Map map =  entry.getValue();
+				String id = StringUtils.nullToStr(map.get("product_id"));   //商品编号
+				String name = StringUtils.nullToStr(map.get("product_name")); //商品名称
+				String xh =  StringUtils.nullToStr(map.get("product_xh")); //商品规格
+				
+				int yrk_sl = map.get("yrk_sl")==null?0:new Integer(StringUtils.nullToStr(map.get("yrk_sl"))).intValue();  //已入库数量
+				double yrk_je = map.get("yrk_je")==null?0:((Double)map.get("yrk_je")).doubleValue();  //已入库金额
+				
+				hj_yrk_sl += yrk_sl;
+				hj_yrk_je += yrk_je;
+				
+				int wrk_sl = map.get("wrk_sl")==null?0:new Integer(StringUtils.nullToStr(map.get("wrk_sl"))).intValue();//未入库数量
+				double wrk_je = map.get("wrk_je")==null?0:((Double)map.get("wrk_je")).doubleValue();  //未入库金额
+				
+				hj_wrk_sl += wrk_sl;
+				hj_wrk_je += wrk_je;
+	%>
+		<TR>
+			<TD class=ReportItemXh nowrap="nowrap"><%=id %>&nbsp;</TD>
+			<TD class=ReportItem><a href="getHpcgddMxCondition.html?product_id=<%=id %>&start_date=<%=start_date %>&end_date=<%=end_date %>"><%=name %></a>&nbsp;</TD>			
+			<TD class=ReportItem><%=xh %>&nbsp;</TD>
+		    <TD class=ReportItemMoney nowrap="nowrap"><%=wrk_sl==0?"":wrk_sl %>&nbsp;</TD>
+			<TD class=ReportItemMoney nowrap="nowrap"><%=wrk_je==0?(wrk_sl==0?"":"0.0"): JMath.round(wrk_je,2) %>&nbsp;</TD>	
+		    <TD class=ReportItemMoney nowrap="nowrap"><%=yrk_sl==0?"":yrk_sl %>&nbsp;</TD>
+			<TD class=ReportItemMoney nowrap="nowrap"><%=yrk_je==0?(yrk_sl==0?"":"0.0"): JMath.round(yrk_je,2) %>&nbsp;</TD>	
+		</TR>	
+	<%
+			  }
+	%>
+	
 		<TR>
 			<TD class=ReportItem style="font-weight:bold">合计：</TD>
-			<TD class=ReportItem>&nbsp;</TD>
 			<TD class=ReportItem>&nbsp;</TD>			
 			<TD class=ReportItem>&nbsp;</TD>
-			<TD class=ReportItemMoney style="font-weight:bold"><%=hjw_nums %>&nbsp;</TD>
-			<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(hjw_je,2) %>&nbsp;</TD>
-			<TD class=ReportItemMoney style="font-weight:bold"><%=hj_nums %>&nbsp;</TD>
-			<TD class=ReportItemMoney style="font-weight:bold"><%=JMath.round(hj_je,2) %>&nbsp;</TD>
+			<TD class=ReportItemMoney style="font-weight:bold" nowrap="nowrap"><%=hj_wrk_sl %>&nbsp;</TD>
+			<TD class=ReportItemMoney style="font-weight:bold" nowrap="nowrap"><%=JMath.round(hj_wrk_je,2) %>&nbsp;</TD>
+			<TD class=ReportItemMoney style="font-weight:bold" nowrap="nowrap"><%=hj_yrk_sl %>&nbsp;</TD>
+			<TD class=ReportItemMoney style="font-weight:bold" nowrap="nowrap"><%=JMath.round(hj_yrk_je,2) %>&nbsp;</TD>
 		</TR>
  	</TBODY>
 </TABLE>
