@@ -69,8 +69,9 @@ public class CnfkdService {
 			List cgfkDescs = cgfkDao.getCgfkDescObj(cnfkd.getCgfk_id());
 			cgfkDao.updateJhdFkje(cgfk,cgfkDescs);
 			
-			//更新采购付款申请单状态
+			//更新采购付款申请单信息
 			cgfk.setState("已支付");
+			cgfk.setFkzh(cnfkd.getFkzh());
 			cgfkDao.updateCgfkStat(cgfk);
 			
 			//如果是预付款则添加预付款信息
