@@ -279,3 +279,10 @@ update funcs set func_name='业务员未收单据汇总',func_ms='业务员未�
 --出纳付款后会写采购付款账户信息
 UPDATE cgfk a LEFT JOIN cnfkd b ON b.cgfk_id=a.id SET a.fkzh=b.fkzh  WHERE a.fkzh=''
 
+
+2014-1-10
+-----增加商品序列号采购汇总
+INSERT INTO `funcs` VALUES ('FC9925','商品序列号采购汇总','商品序列号采购汇总','showSerialCghzCondition.html','153.gif',20,'1','2');
+
+INSERT INTO `column_funcs` VALUES ('002002','FC9925');
+
