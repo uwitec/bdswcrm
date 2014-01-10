@@ -14,6 +14,8 @@ String dept_id = StringUtils.nullToStr(request.getParameter("dept_id"));        
 String product_kind = StringUtils.nullToStr(request.getParameter("product_kind")); //商品类别
 String client_name = StringUtils.nullToStr(request.getParameter("clientName"));
 String clientId = StringUtils.nullToStr(request.getParameter("clientId"));
+String product_name = StringUtils.nullToStr(request.getParameter("product_name"));
+String xsry_name = StringUtils.nullToStr(request.getParameter("xsry_name"));
 
 String strCon = "";
 
@@ -107,8 +109,20 @@ if(results != null && results.size()>0){
 <BR>
 <center class="Noprint">
 	<input type="button" name="button_print" value=" 打 印 " onclick="printDiv('divContent');"> &nbsp;&nbsp;
+	<input type="button" name="button_print" value=" 导 出 " onclick="document.reportForm_jg.submit();"> &nbsp;&nbsp;
     <input type="button" name="button_fh" value=" 返 回 " onclick="history.go(-1);"> 
 </center>
+<form name="reportForm_jg" action="DownLoadXlsServlet" method="post">
+<input type="hidden" name="action" value="exportProductSerialXsHzResult">
+<input type="hidden" name="dept_id" value="<%=dept_id %>">
+<input type="hidden" name="product_kind" value="<%=product_kind %>">
+<input type="hidden" name="client_name" value="<%=client_name %>">
+<input type="hidden" name="product_name" value="<%=product_name %>">
+<input type="hidden" name="xsry_name" value="<%=xsry_name %>">
+<input type="hidden" name="start_date" value="<%=start_date %>">
+<input type="hidden" name="end_date" value="<%=end_date %>">
+<input type="hidden" name="clientId" value="<%=clientId %>">
+</form>
 </div>
 </body>
 </html>
