@@ -3280,5 +3280,14 @@
             <result name="success" type="chain">openStyle</result>
         </action>        
         <!-- 报表样式设定 --> 
+        
+         <!-- 商品采购序列号列表 -->
+        <action name="showSerialCghzCondition" class="productSerialNumCgHzAction" method="showCondition">
+            <result name="success">/WEB-INF/pages/report/serialnum_cghz/condition.jsp</result>
+        </action>
+        <action name="getSerialCghzResult" class="productSerialNumCgHzAction" method="listResults">
+            <result name="success">/WEB-INF/pages/report/serialnum_cghz/result.jsp</result>
+        </action>      
+        <!-- 商品采购序列号列表 -->
     </package>
 </xwork>
