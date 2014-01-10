@@ -220,5 +220,7 @@
      <bean id="hykJfFlowAction" class="com.sw.cms.action.HykJfFlowAction" scope="prototype" autowire="byName"/>
      
      <bean id="clientYsYfAction" class="com.sw.cms.action.ClientYsYfAction" scope="prototype" autowire="byName"/>
+     
+     <bean id="productSerialNumCgHzAction" class="com.sw.cms.action.ProductSerialNumCgHzAction" scope="prototype" autowire="byName"/>
 	
 </beans>

@@ -107,6 +107,10 @@
     <!-- 货品销售毛利汇总 -->
     <bean id="exportHpxsMlHzResult" class="com.sw.cms.xls.ExportHpxsMlHzResult" autowire="byName"/> 
     <!-- 分仓库存汇总 -->
-    <bean id="exportFckcResult" class="com.sw.cms.xls.ExportFckcResult" autowire="byName"/>         
+    <bean id="exportFckcResult" class="com.sw.cms.xls.ExportFckcResult" autowire="byName"/>   
+    <!-- 商品序列号采购汇总 -->
+    <bean id="exportProductSerialCgHzResult" class="com.sw.cms.xls.ExportProductSerialCghzResult" autowire="byName"/>  
+    <!-- 商品序列号销售汇总 -->
+    <bean id="exportProductSerialXsHzResult" class="com.sw.cms.xls.ExportProductSerialXshzResult" autowire="byName"/>    
 
 </beans>

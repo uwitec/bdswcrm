@@ -630,7 +630,10 @@
     <bean id="xsfpglDao" class="com.sw.cms.dao.XsfpglDAO" autowire="byName"/>    
     
 	<!-- 库存期初的XML管理方式 -->
-    <bean id="productKcQcXmlDao" class="com.sw.cms.dao.ProductKcQcXmlDAO" autowire="byName"/>        
+    <bean id="productKcQcXmlDao" class="com.sw.cms.dao.ProductKcQcXmlDAO" autowire="byName"/>   
+    
+    <!-- 商品序列号采购汇总 -->
+    <bean id="productSerialNumCgHzDAO" class="com.sw.cms.dao.ProductSerialNumCgHzDAO" autowire="byName"/>      
 </beans>
 
 

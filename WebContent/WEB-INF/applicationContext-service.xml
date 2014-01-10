@@ -812,6 +812,14 @@
     		<bean class="com.sw.cms.service.HykJfFlowService" autowire="byName"/>
     	</property>
     </bean>    
+    
+    
+    <!-- 商品序列号采购汇总 -->     
+    <bean id="productSerialNumCgHzService"  parent="baseTransaction">
+        <property name="target">
+    		<bean class="com.sw.cms.service.ProductSerialNumCgHzService" autowire="byName"/>
+    	</property>
+    </bean>  
 </beans>
 
 
