@@ -53,6 +53,7 @@ if(!product_xh.equals("")){
 	<THEAD>
 		<TR>
 		    <TD class=ReportHead rowspan="2">商品编码</TD>
+		    <TD class=ReportHead rowspan="2">条形码</TD>
 			<TD class=ReportHead rowspan="2">商品名称</TD>
 			<TD class=ReportHead rowspan="2">商品规格</TD>
 			<TD class=ReportHead colspan="2">未入库</TD>
@@ -81,8 +82,10 @@ if(!product_xh.equals("")){
 			for(int i=0;i<list.size();i++){
 				Map map = (Map)list.get(i);
 				String id = StringUtils.nullToStr(map.get("product_id"));   //商品编号
+				String txm =  StringUtils.nullToStr(map.get("sp_txm")); //商品规格
 				String name = StringUtils.nullToStr(map.get("product_name")); //商品名称
 				String xh =  StringUtils.nullToStr(map.get("product_xh")); //商品规格
+				
 				double je = map.get("je")==null?0:((Double)map.get("je")).doubleValue();  //金额
 				String strNums = StringUtils.nullToStr(map.get("nums"));
 				String state = StringUtils.nullToStr(map.get("state"));   //状态 未入库  已入库
@@ -103,6 +106,7 @@ if(!product_xh.equals("")){
 				}else{
 					hzMap = new HashMap();
 					hzMap.put("product_id", id);
+					hzMap.put("sp_txm", txm);
 					hzMap.put("product_name", name);
 					hzMap.put("product_xh", xh);
 					if(state.equals("未入库")){
@@ -120,6 +124,7 @@ if(!product_xh.equals("")){
 		for (Map.Entry<String, Map> entry : productMaps.entrySet()) {
 			   Map map =  entry.getValue();
 				String id = StringUtils.nullToStr(map.get("product_id"));   //商品编号
+				String txm =  StringUtils.nullToStr(map.get("sp_txm")); //商品规格
 				String name = StringUtils.nullToStr(map.get("product_name")); //商品名称
 				String xh =  StringUtils.nullToStr(map.get("product_xh")); //商品规格
 				
@@ -137,6 +142,7 @@ if(!product_xh.equals("")){
 	%>
 		<TR>
 			<TD class=ReportItemXh nowrap="nowrap"><%=id %>&nbsp;</TD>
+			<TD class=ReportItemXh nowrap="nowrap"><%=txm %>&nbsp;</TD>
 			<TD class=ReportItem><a href="getHpcgddMxCondition.html?product_id=<%=id %>&start_date=<%=start_date %>&end_date=<%=end_date %>"><%=name %></a>&nbsp;</TD>			
 			<TD class=ReportItem><%=xh %>&nbsp;</TD>
 		    <TD class=ReportItemMoney nowrap="nowrap"><%=wrk_sl==0?"":wrk_sl %>&nbsp;</TD>
@@ -150,7 +156,8 @@ if(!product_xh.equals("")){
 	
 		<TR>
 			<TD class=ReportItem style="font-weight:bold">合计：</TD>
-			<TD class=ReportItem>&nbsp;</TD>			
+			<TD class=ReportItem>&nbsp;</TD>		
+			<TD class=ReportItem>&nbsp;</TD>				
 			<TD class=ReportItem>&nbsp;</TD>
 			<TD class=ReportItemMoney style="font-weight:bold" nowrap="nowrap"><%=hj_wrk_sl %>&nbsp;</TD>
 			<TD class=ReportItemMoney style="font-weight:bold" nowrap="nowrap"><%=JMath.round(hj_wrk_je,2) %>&nbsp;</TD>
