@@ -38,7 +38,7 @@ Fysq fysq = (Fysq)VS.findValue("fysq");
 			alert("费用类型不能为空，请选择");
 			return;
 		}
-		if(!InputValid(document.getElementById("je"),1,"float",1,1,999999999,"金额")){	 return; }	
+		if(!InputValid(document.getElementById("je"),1,"float",1,0,999999999,"金额")){	 return; }	
 		if(!InputValid(document.getElementById("remark"),1,"string",1,1,100,"详细说明")){	 return; }	
 		
 		if(vl == "1"){
