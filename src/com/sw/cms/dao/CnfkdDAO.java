@@ -22,12 +22,13 @@ public class CnfkdDAO extends JdbcBaseDAO {
 	 * @return
 	 */
 	public Page getCnfkds(String con,int curPage, int rowsPerPage){
-		String sql = "select a.* from cnfkd a left join clients b on b.id=a.client_name where 1=1";
+		String sql = "select a.*,c.jsr as fksqr  from cnfkd a left join clients b on b.id=a.client_name  left join cgfk c on a.cgfk_id=c.id where 1=1";
 		if(!con.equals("")){
 			sql += con;
 		}
 		
-		return this.getResultByPage(sql, curPage, rowsPerPage, new BeanRowMapper(Cnfkd.class));
+		
+		return this.getResultByPage(sql, curPage, rowsPerPage);
 	}
 
 	
