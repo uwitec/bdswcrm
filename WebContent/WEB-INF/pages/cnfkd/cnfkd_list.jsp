@@ -82,12 +82,13 @@
 		<td width="10%">编号</td>
 		<td width="15%">单位名称</td>
 		<td width="8%">付款类型</td>	
-		<td width="10%">付款金额</td>
+		<td width="9%">付款金额</td>
 		<td width="13%">付款账户</td>
+		<td width="8%">申请人</td>
 		<td width="8%">出纳</td>
 		<td width="8%">付款日期</td>
 		<td width="8%">状态</td>
-		<td width="15%">操作</td>
+		<td width="12%">操作</td>
 	</tr>
 	</thead>
 	<ww:iterator value="%{cnfkdPage.results}">
@@ -97,7 +98,8 @@
 			<td><ww:property value="%{fklx}" /></td>
 			<td align="right"><ww:property value="%{getText('global.format.money',{fkje})}" />&nbsp;</td>
 			<td><ww:property value="%{getAccountName(fkzh)}" /></td>
-			<td><ww:property value="%{getUserRealName(jsr)}" /></td>
+			<td><ww:property value="%{getUserRealName(fksqr)}" /></td>
+			<td><ww:property value="%{getUserRealName(jsr)}" /></td>			
 			<td><ww:property value="%{fk_date}" /></td>
 			<td><ww:property value="%{state}" /></td>	
 			<td nowrap="nowrap">
