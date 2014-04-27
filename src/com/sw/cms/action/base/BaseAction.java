@@ -44,6 +44,19 @@ public class BaseAction extends ActionSupport {
 		return dataDisParseDao.getRealNameById(user_id);
 	}
 	
+	
+	/**
+	 * 根据用户ID返回用户姓名
+	 * @param user_id
+	 * @return
+	 */
+	public String gerDeptNameByUserId(String user_id){
+		if(user_id == null || user_id.equals("")){
+			return "";
+		}
+		return dataDisParseDao.gerDeptNameByUserId(user_id);
+	}
+	
 	/**
 	 * 根据客户ID取客户名称
 	 * @param client_id

@@ -326,6 +326,22 @@ public class UserDAO extends JdbcBaseDAO {
 	
 	
 	/**
+	 * 根据用户ID返回用户部门名称
+	 * @param user_id
+	 * @return
+	 */
+	public String gerDeptNameByUserId(String user_id) {
+		String name = "";
+		String sql = "select dept_name from sys_user a left join dept b on b.dept_id = a.dept where a.user_id = '" + user_id + "'";
+		Map map = this.getResultMap(sql);
+		if(map != null){
+			name = (String)map.get("dept_name");
+		}
+		return name;
+	}
+	
+	
+	/**
 	 * 更新用户末次登录信息
 	 * @param user_id
 	 */

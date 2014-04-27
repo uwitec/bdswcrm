@@ -3,36 +3,72 @@ package com.sw.cms.model;
 import java.sql.Timestamp;
 
 /**
- * 销售开票管理
+ * 销售发票管理-代开发票清单（包括销售订单及零售单）
+* 销售订单出库后生成代开票信息
  * @author liyt
  *
  */
-public class Xsfpgl {
+public class XsfpDkfp {
 	
-	private String id;          //编号
+	private String id;          //编号（流水号）
+	private String yw_type;  //对应业务(零售、销售)
+	private String yw_id;    //对应业务编号
+	private String khmc;    //客户名称
+	private double ddje;   //订单金额
+	private double ykpje; //已开票金额
+	
 	private String fplx;      //发票类型
 	private String kpmc;   //开票名称
-	private double fpje;  //发票金额
 	private String kpdz;   //开票地址
 	private String kpdh;   //开票电话
 	private String khhzh;  //开户行账号
 	private String sh;    //税号
 	private String fpxxzy;   //发票信息摘要
+	
 	private String jy_jsr;     //交易经手人
 	private String jy_date;  //交易日期
-	private String kp_jsr;    //开票人
-	private String kp_date;   //开票日期
-	private String yw_type;  //对应业务(零售、销售、其他)
-	private String yw_id;    //对应业务编号
-	private String state;    //状态（待开、已开）
+
+	private String state;    //状态（待开、部分已开、已开）
+	
 	private Timestamp cz_date;   //操作时间
 	private String czr;    //操作人
+	
 	
 	public String getId() {
 		return id;
 	}
 	public void setId(String id) {
 		this.id = id;
+	}
+	public String getYw_type() {
+		return yw_type;
+	}
+	public void setYw_type(String yw_type) {
+		this.yw_type = yw_type;
+	}
+	public String getYw_id() {
+		return yw_id;
+	}
+	public void setYw_id(String yw_id) {
+		this.yw_id = yw_id;
+	}
+	public String getKhmc() {
+		return khmc;
+	}
+	public void setKhmc(String khmc) {
+		this.khmc = khmc;
+	}
+	public double getDdje() {
+		return ddje;
+	}
+	public void setDdje(double ddje) {
+		this.ddje = ddje;
+	}
+	public double getYkpje() {
+		return ykpje;
+	}
+	public void setYkpje(double ykpje) {
+		this.ykpje = ykpje;
 	}
 	public String getFplx() {
 		return fplx;
@@ -45,12 +81,6 @@ public class Xsfpgl {
 	}
 	public void setKpmc(String kpmc) {
 		this.kpmc = kpmc;
-	}
-	public double getFpje() {
-		return fpje;
-	}
-	public void setFpje(double fpje) {
-		this.fpje = fpje;
 	}
 	public String getKpdz() {
 		return kpdz;
@@ -93,30 +123,6 @@ public class Xsfpgl {
 	}
 	public void setJy_date(String jy_date) {
 		this.jy_date = jy_date;
-	}
-	public String getKp_jsr() {
-		return kp_jsr;
-	}
-	public void setKp_jsr(String kp_jsr) {
-		this.kp_jsr = kp_jsr;
-	}
-	public String getKp_date() {
-		return kp_date;
-	}
-	public void setKp_date(String kp_date) {
-		this.kp_date = kp_date;
-	}
-	public String getYw_type() {
-		return yw_type;
-	}
-	public void setYw_type(String yw_type) {
-		this.yw_type = yw_type;
-	}
-	public String getYw_id() {
-		return yw_id;
-	}
-	public void setYw_id(String yw_id) {
-		this.yw_id = yw_id;
 	}
 	public String getState() {
 		return state;
