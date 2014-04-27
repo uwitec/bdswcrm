@@ -286,3 +286,80 @@ INSERT INTO `funcs` VALUES ('FC9925','商品序列号采购汇总','商品序列
 
 INSERT INTO `column_funcs` VALUES ('002002','FC9925');
 
+
+
+2014-04-19
+--增加发票管理
+drop table xsfpgl;
+
+--添加销售发票管理-待开发票
+CREATE TABLE `xsfp_dkfp` (
+  `id` VARCHAR(50) NOT NULL,
+  `yw_type` VARCHAR(20),
+  `yw_id` VARCHAR(45),
+  `khmc` VARCHAR(200),
+  `ddje` DOUBLE,
+  `ykpje` DOUBLE,
+  `fplx` VARCHAR(50),  
+  `kpmc` VARCHAR(200),  
+  `kpdz` VARCHAR(100),
+  `kpdh` VARCHAR(50),
+  `khhzh` VARCHAR(200),
+  `sh` VARCHAR(45),
+  `fpxxzy` VARCHAR(500),
+  `jy_jsr` VARCHAR(45),
+  `jy_date` VARCHAR(45),
+  `state` VARCHAR(45),
+  `cz_date` DATETIME,
+  `czr` VARCHAR(45),
+  PRIMARY KEY(`id`)
+)
+ENGINE = InnoDB;
+
+drop table xsfp_fpxx;
+--添加销售发票管理-发票信息
+CREATE TABLE `xsfp_fpxx` (
+  `id` VARCHAR(50) NOT NULL,
+  `khmc` VARCHAR(200),
+  `fplx` VARCHAR(50),  
+  `fph` VARCHAR(50),  
+  `fpje` DOUBLE,  
+  `kpr` VARCHAR(50),
+  `remark` VARCHAR(500),
+  `state` VARCHAR(20),
+  `kprq` VARCHAR(20),
+  `cz_date` DATETIME,
+  `czr` VARCHAR(45),
+  PRIMARY KEY(`id`)
+)
+ENGINE = InnoDB;
+
+--添加销售发票管理-发票明细
+CREATE TABLE `xsfp_fpmx` (
+  `id` INT(10) NOT NULL AUTO_INCREMENT,
+   `fpxx_id` VARCHAR(50),  
+    `khmc` VARCHAR(200),    
+   `yw_id` VARCHAR(50),  
+   `cdate` VARCHAR(50),     
+  `kpje_ying` DOUBLE,     
+  `kpje_yi` DOUBLE,   
+  `kpje_bc` DOUBLE,     
+  `remark` VARCHAR(500),  
+  PRIMARY KEY (`id`)
+  )
+ENGINE = InnoDB;
+
+--添加发票流水号
+ALTER TABLE `cms_all_seq` ADD COLUMN `xsfpid` INT(10) UNSIGNED DEFAULT 1 AFTER `hykdjid`;
+
+ALTER TABLE `xsfp_fpxx` ADD COLUMN `fpje_bdd` DOUBLE AFTER `cz_date`;
+ALTER TABLE `xsfp_fpxx` ADD COLUMN `remark_bdd` VARCHAR(200) AFTER `cz_date`;
+
+INSERT INTO `funcs` VALUES ('FC9801','销售发票管理','销售发票管理','listXsfpFpxx.html','112.gif',11,'1','5');
+INSERT INTO `column_funcs` VALUES ('005002','FC9801');
+
+INSERT INTO `funcs` VALUES ('FC9802','销售待开发票','销售待开发票','listDkfp.html','112.gif',12,'1','5');
+INSERT INTO `column_funcs` VALUES ('005002','FC9802');
+
+INSERT INTO `funcs` VALUES ('FC9803','销售发票统计','销售发票统计','xsfptjCondition.html','112.gif',13,'1','5');
+INSERT INTO `column_funcs` VALUES ('005002','FC9803');

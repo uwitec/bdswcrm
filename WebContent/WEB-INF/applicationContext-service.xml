@@ -820,6 +820,14 @@
     		<bean class="com.sw.cms.service.ProductSerialNumCgHzService" autowire="byName"/>
     	</property>
     </bean>  
+    
+        <!-- 销售发票管理 -->     
+    <bean id="xsfpService"  parent="baseTransaction">
+        <property name="target">
+    		<bean class="com.sw.cms.service.XsfpService" autowire="byName"/>
+    	</property>
+    </bean>  
+    
 </beans>
 
 

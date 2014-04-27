@@ -38,6 +38,7 @@ if(!product_xh.equals("")){
 <script type="text/javascript" src="jquery/jquery-1.4.2.min.js"></script>
 <script type="text/javascript" src="js/switchCss.js"></script>
 <script type="text/javascript" src="js/common.js"></script>
+<script type="text/javascript" src="print/LodopFuncs.js"></script>
 </head>
 <body align="center" >
 <div class="rightContentDiv" id="divContent">
@@ -175,6 +176,7 @@ if(!product_xh.equals("")){
 </table>
 <center class="Noprint">
 	<input type="button" name="button_print" value=" 打 印 " onclick="printDiv('divContent');"> &nbsp;&nbsp;
+	<input type="button" name="button_print" value=" 打 印 " onclick="prn3_preview()"> &nbsp;&nbsp;
     <input type="button" name="button_fh" value=" 返 回 " onclick="history.go(-1);"> 
 </center>
 </div>

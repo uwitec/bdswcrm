@@ -42,9 +42,11 @@ if(!client_name.equals("")){
 <script type="text/javascript" src="jquery/jquery-1.4.2.min.js"></script>
 <script type="text/javascript" src="js/switchCss.js"></script>
 <script type="text/javascript" src="js/common.js"></script>
-<style media=print>  
-.Noprint{display:none;}<!--用本样式在打印时隐藏非打印项目-->
-</style> 
+<script language="javascript" src="print/LodopFuncs.js"></script>
+<script language="javascript" src="print/print.js"></script>
+<object  id="LODOP_OB" classid="clsid:2105C259-1E0C-4534-8141-A753534CB4CA" width=0 height=0> 
+       <embed id="LODOP_EM" type="application/x-print-lodop" width=0 height=0></embed>
+</object>
 <script language='JavaScript' src="js/date.js"></script>
 <script type="text/javascript">
 	function pageRefresh(){
@@ -108,15 +110,12 @@ if(!client_name.equals("")){
 <input type="hidden" name="end_date" value="<%=end_date %>">
 <input type="hidden" name="xsry" value="<%=xsry %>">
 <input type="hidden" name="dj" value="<%=dj %>">
-
 </form>
+<div id="printDIV">
 <TABLE  align="center" cellSpacing=0 cellPadding=0 width="99%" border=0>
 	<TBODY>
 		<TR style="BACKGROUND-COLOR: #dcdcdc;height:45px;">
 		    <TD align="center" width="100%"><font style="FONT-SIZE: 16px"><B>货品毛利分类汇总</B></font><br><%=con %></TD>
-		    <TD align="center">
-		    	<input type="button" name="btnRes" value="刷新" onclick="pageRefresh();">
-		    </TD>		    
 		</TR>
 	</TBODY>
 </TABLE>
@@ -219,8 +218,11 @@ if(resultList != null && resultList.size()>0){
 			<td align="right" height="30">生成报表时间：<%=DateComFunc.getToday() %>&nbsp;&nbsp;&nbsp;</td>
 		</tr>
 </table>
+</div>
 <center class="Noprint">
-	<input type="button" name="button_print" value=" 打 印 " onclick="printDiv('divContent');"> &nbsp;&nbsp;
+	<input type="button" name="btnRes" value=" 刷新"  onclick="pageRefresh();"> &nbsp;&nbsp;
+    <input type="button" name="button_printsetup" value=" 打印预览 "  onclick="printPre('2','A4','printDIV');"> &nbsp;&nbsp;
+	<input type="button" name="button_print" value=" 打 印 " onclick="printReport('货品毛利分类汇总表','2','A4','printDIV');"> &nbsp;&nbsp;
     <input type="button" name="button_fh" value=" 返 回 " onclick="location.href='showHpmlflHzCon.html';"> 
 </center>
 </div>

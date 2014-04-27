@@ -44,13 +44,18 @@ if(!store_id.equals("")){
 <script type="text/javascript" src="jquery/jquery-1.4.2.min.js"></script>
 <script type="text/javascript" src="js/switchCss.js"></script>
 <script type="text/javascript" src="js/common.js"></script>
-<style media=print>  
-.Noprint{display:none;}<!--用本样式在打印时隐藏非打印项目-->
-</style> 
 <script language='JavaScript' src="js/date.js"></script>
+
+<script language="javascript" src="print/LodopFuncs.js"></script>
+<script language="javascript" src="print/print.js"></script>
+<object  id="LODOP_OB" classid="clsid:2105C259-1E0C-4534-8141-A753534CB4CA" width=0 height=0> 
+       <embed id="LODOP_EM" type="application/x-print-lodop" width=0 height=0></embed>
+</object>
+
 </head>
 <body align="center" >
 <div class="rightContentDiv" id="divContent">
+<div id="printDIV">
 <TABLE  align="center" cellSpacing=0 cellPadding=0 width="99%" border=0>
 	<TBODY>
 		<TR style="BACKGROUND-COLOR: #dcdcdc;height:45px;">
@@ -117,8 +122,10 @@ if(productList != null && productList.size()>0){
 			<td colspan="2" align="right" height="30" width="100%">生成报表时间：<%=DateComFunc.getCurTime() %>&nbsp;&nbsp;&nbsp;</td>
 		</tr>
 </table>
-<center class="Noprint">
-	<input type="button" name="button_print" value=" 打 印 " onclick="printDiv('divContent');"> &nbsp;&nbsp;
+</div>
+<center>
+	<input type="button" name="button_print" value=" 打印预览" onclick="printPre('2','A4','printDIV');"> &nbsp;&nbsp;
+	<input type="button" name="button_print" value=" 打 印 " onclick="printReport('库存金额汇总统计表','2','A4','printDIV');"> &nbsp;&nbsp;
 	<input type="button" name="button_print" value=" 导 出 " onclick="document.reportForm.submit();"> &nbsp;&nbsp;
     <input type="button" name="button_fh" value=" 返 回 " onclick="location.href='showKcJeCondition.html';"> 
 </center>
