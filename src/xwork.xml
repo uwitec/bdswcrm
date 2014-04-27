@@ -3289,5 +3289,40 @@
             <result name="success">/WEB-INF/pages/report/serialnum_cghz/result.jsp</result>
         </action>      
         <!-- 商品采购序列号列表 -->
+        
+        <!-- 销售发票管理 -->
+        <action name="listXsfpFpxx" class="xsfpAction" method="listXsfpFpxx">
+            <result name="success">/WEB-INF/pages/xsfp/xsfp_list.jsp</result>
+        </action>        
+        <action name="descFpmx" class="xsfpAction" method="descFpmx">
+            <result name="success">/WEB-INF/pages/xsfp/fpmx_list.jsp</result>
+        </action>     
+        <action name="editXsfpFpxx" class="xsfpAction" method="editXsfpFpxx">
+            <result name="success">/WEB-INF/pages/xsfp/xsfp_edit.jsp</result>
+        </action> 
+        <action name="updateXsfpFpxx" class="xsfpAction" method="updateXsfp">
+            <result name="cancel" type="redirect">editXsfpFpxx.html</result>
+            <result name="input">/WEB-INF/pages/xsfp/xsfp_edit.jsp</result>
+            <result name="success">/WEB-INF/pages/msg.jsp</result>
+        </action> 
+        <action name="delXsfpFpxx" class="xsfpAction" method="delXsfpFpxx">
+            <result name="success" type="chain">listXsfpFpxx</result>
+        </action>        
+        <action name="viewXsfpFpxx" class="xsfpAction" method="editXsfpFpxx">
+            <result name="success">/WEB-INF/pages/xsfp/xsfp_view.jsp</result>
+        </action>                 
+        <action name="listXsfpDkfp" class="xsfpAction" method="listXsfpDkfp">
+            <result name="success">/WEB-INF/pages/xsfp/dkfp_list.jsp</result>
+        </action>
+        <action name="listDkfp" class="xsfpAction" method="listXsfpDkfp">
+            <result name="success">/WEB-INF/pages/xsfp/xsfp_dkfp_list.jsp</result>
+        </action> 
+		<action name="xsfptjCondition" class="xsfpAction" method="xsfptjCondition">
+            <result name="success">/WEB-INF/pages/xsfp/xsfptj_condition.jsp</result>
+        </action>   
+		<action name="xsfptjResult" class="xsfpAction" method="xsfptjResult">
+            <result name="success">/WEB-INF/pages/xsfp/xsfptj_result.jsp</result>
+        </action>            
+        <!-- 销售发票管理 -->
     </package>
 </xwork>
