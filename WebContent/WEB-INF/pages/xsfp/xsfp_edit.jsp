@@ -59,7 +59,7 @@
         var otr = document.getElementById("fpmxTable").insertRow(-1);
         var curId = document.getElementById('fpmxTable').rows.length-3;
 
-
+        allCount = allCount +1;
         var otd0=document.createElement("td");
         otd0.className = "a2";
         otd0.innerHTML = curId +2;
