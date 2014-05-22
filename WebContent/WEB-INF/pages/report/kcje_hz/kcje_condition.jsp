@@ -42,11 +42,20 @@ List productKindList = (List)VS.findValue("productKindList");
 </table>
 <table width="100%"  align="center"  class="chart_info" cellpadding="0" cellspacing="0" border="0" id="selTable">
 	<tr>
-		<td class="a1" width="15%">商品类别</td>
-		<td class="a4" width="35%">
+		<!-- <td class="a1" width="15%">商品类别</td> -->
+		<!-- <td class="a4" width="35%">
 			<input type="text" name="kind_name" id="kind_name" value="" style="width:232px" onclick="openWin();" readonly>
 			<input type="hidden" name="product_kind" id="product_kind" value="">
 			<img src="images/select.gif" align="absmiddle" title="点击选择类别" border="0" onclick="openWin();" style="cursor:hand">
+		</td>	 -->
+		<td class="a1">货品类别等级</td>
+		<td class="a4">
+			<select name="dj" style="width:232px">
+				<option value="1">第一级</option>
+				<option value="2">第二级</option>
+				<option value="3">第三级</option>
+				<option value="4">第四级</option>
+			</select>
 		</td>	
 		<td class="a1" width="15%">商品名称</td>
 		<td class="a4" width="35%">
@@ -57,15 +66,15 @@ List productKindList = (List)VS.findValue("productKindList");
 		<td class="a1">是否显示0库存商品</td>
 		<td class="a4">
 			<select name="flag" style="width:232px">
-				<option value="否">否</option>
-				<option value="是">是</option>
+				<option value="0">否</option>
+				<option value="1">是</option>
 			</select>
 		</td>
 		<td class="a1">是否显示停售商品</td>
 		<td class="a4" colspan="3">
 			<select name="state" style="width:232px">
-				<option value="否">否</option>
-				<option value="是">是</option>
+				<option value="0">否</option>
+				<option value="1">是</option>
 			</select>
 		</td>					
 	</tr>
@@ -94,7 +103,7 @@ List productKindList = (List)VS.findValue("productKindList");
 		</td>
 	</tr>
 </table>
-注:历史库存汇总统计值为当天的期初值。
+<!-- 注:历史库存汇总统计值为当天的期初值。 -->
 </form>
 </body>
 </html>
