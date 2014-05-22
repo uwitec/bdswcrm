@@ -1442,12 +1442,16 @@
         <action name="showKcJeCondition" class="kcMxReportAction" method="showCondition">
             <result name="success">/WEB-INF/pages/report/kcje_hz/kcje_condition.jsp</result>
         </action>
-        <action name="getKcJeResult" class="kcMxReportAction" method="getKcNumsResult">
+        <action name="getKcJeResult" class="kcMxReportAction" method="getKcJesResult">
             <result name="success">/WEB-INF/pages/report/kcje_hz/kcje_result.jsp</result>
         </action>
         <action name="getHisKcJeResult" class="kcMxReportAction" method="getHisKcResult">
             <result name="success">/WEB-INF/pages/report/kcje_hz/his_kcje_result.jsp</result>
         </action>        
+        <action name="getKcJeMxResults" class="kcMxReportAction" method="getKcJeMxResults">
+            <result name="success">/WEB-INF/pages/report/kcje_hz/kcje_result_mx.jsp</result>
+        </action>
+        
         <!-- 库存金额汇总 -->               
         
         <!-- 应收汇总、应收对账单 -->
