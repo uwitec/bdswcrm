@@ -36,6 +36,8 @@ public class KcMxReportAction extends BaseAction {
 	private String px="";
 	private String cdate = "";
 	
+	private int dj = 1;
+	
 	public String getPx() {
 		return px;
 	}
@@ -80,6 +82,31 @@ public class KcMxReportAction extends BaseAction {
 		return "success";
 	}
 	
+	
+	/**
+	 * 库存金额 汇总结果
+	 * @return
+	 */
+	public String getKcJesResult(){
+		productList = kcMxReportService.getKcJesResults(dj, product_name, store_id,state, flag,px);
+		return "success";
+	}
+	
+	
+	/**
+	 * 明细信息
+	 * @return
+	 * @throws Exception
+	 */
+	public String getKcJeMxResults() throws Exception{
+		try{
+			productList = kcMxReportService.getKcJeMxResults(product_kind, product_name, store_id, state,flag);
+			return SUCCESS;
+		}catch(Exception e){
+			log.error("库存金额汇总明细信息出错，错误原因：" + e.getMessage());
+			return ERROR;
+		}
+	}
 	
 	/**
 	 * 历史库存汇总情况表
@@ -249,5 +276,12 @@ public class KcMxReportAction extends BaseAction {
 	public void setCdate(String cdate) {
 		this.cdate = cdate;
 	}
-	
+	public int getDj() {
+		return dj;
+	}
+
+
+	public void setDj(int dj) {
+		this.dj = dj;
+	}
 }
