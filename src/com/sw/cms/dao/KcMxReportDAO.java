@@ -949,7 +949,99 @@ public class KcMxReportDAO extends JdbcBaseDAO {
 		return this.getResultList(sql);
 	}
 	
+	/**
+	 * 库存金额汇总
+	 * @param dj   商品类别
+	 * @param product_name   商口名称
+	 * @param store_id       库房编号
+	 * @param state          是否显示停售商品
+	 * @param flag           是否显示0库存商品
+	 * @return
+	 */
+	public List getKcJesResults(int dj,String product_name,String store_id,String state,String flag,String px){
+		String sql = "select  a.product_kind,sum(b.nums) as hj_nums,sum(b.nums * a.price) as hj_je" +
+				" from product a inner join product_kc b where b.product_id=a.product_id " 
+				;
+		
+		if(!store_id.equals("")){
+			sql += " and b.store_id='" + store_id + "'";
+		}
+		
+		sql += " and  a.prop='库存商品'";		
+		
+		
+		if(!product_name.equals("")){
+			sql += " and a.product_name like '%" + product_name + "%'";
+		}
+		if(state.equals("0")){
+			sql += " and state='正常'";
+		}
+		
+		
+		if(px.equals("商品名称"))
+		{
+			sql+=" order by a.product_name";
+		}
+		if(px.equals("分销限价"))
+		{
+			sql+=" order by a.fxxj";
+		}
+		sql += " group by a.product_kind";
+		
+		if(flag.equals("0")){
+			sql += " having hj_nums>0";
+		}
+		
+		sql = "select y.id,y.name," +
+		"(select sum(hj_nums) from (" + sql + ") x where x.product_kind like concat(y.id,'%')) as nums," +
+		"(select sum(hj_je) from (" + sql + ") x where x.product_kind like concat(y.id,'%')) as hjje  " +
+		"from product_kind y where LENGTH(y.id)<=" + (dj*2) + " order by id";
+
+		
+        List list = this.getResultList(sql);
+		
+		return list;
+	}
 	
+	
+	/**
+	 * 库存金额汇总--明细
+	 * @param product_kind   商品类别
+	 * @param product_name   商口名称
+	 * @param store_id       库房编号
+	 * @param state          是否显示停售商品
+	 * @param flag           是否显示0库存商品
+	 * @return
+	 */
+	public List getKcJeMxResults(String product_kind,String product_name,String store_id,String state,String flag){
+		String sql = "select a.ms, a.product_id,a.product_name,a.product_xh,a.price,a.khcbj,a.lsbj,a.lsxj,a.fxbj,a.fxxj,a.gf,a.dss," +
+				"(select sum(b.nums) as hj_nums from product_kc b where b.product_id=a.product_id";
+		
+		if(!store_id.equals("")){
+			sql += " and b.store_id='" + store_id + "'";
+		}
+		
+		sql += ") as kc_nums from product a where prop='库存商品'";
+		
+        //		处理商品类别
+		if(!product_kind.equals("")){
+			sql += " and a.product_kind like '" + product_kind + "%'";
+		}
+		
+		
+		if(!product_name.equals("")){
+			sql += " and a.product_name like '%" + product_name + "%'";
+		}
+		if(state.equals("0")){
+			sql += " and state='正常'";
+		}
+		
+		if(flag.equals("0")){
+			sql += " having kc_nums>0";
+		}
+		
+		return this.getResultList(sql);
+	}
 	
 	/**
 	 * 库存金额汇总(历史)
