@@ -170,6 +170,26 @@ public class KcMxReportService {
 		return  kcMxReportDao.getKcNumsResults(product_kind, product_name, store_id,state, flag,px);
 	}
 	
+	
+	
+	/**
+	 * 按货品类别等级统计库存金额
+	 * @param dj   货品类别等级
+	 * @param product_name   商口名称
+	 * @param store_id       库房编号
+	 * @param state          是否显示停售商品
+	 * @param flag           是否显示0库存商品
+	 * @return
+	 */
+	public List getKcJesResults(int dj,String product_name,String store_id,String state,String flag,String px){
+		return kcMxReportDao.getKcJesResults(dj, product_name, store_id,state, flag,px);
+	}
+	
+	public List getKcJeMxResults(String product_kind,String product_name,String store_id,String state,String flag){
+		return kcMxReportDao.getKcJeMxResults(product_kind, product_name, store_id, state,flag);
+	}
+	
+	
 	/**
 	 * 库存金额汇总(历史)
 	 * @param product_kind   商品类别
